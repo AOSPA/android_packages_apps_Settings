@@ -80,10 +80,6 @@ abstract class SimpleSettingSwitchPreferenceController(context: Context, prefKey
     }
 
     private fun setChecked(preference: TwoStatePreference, checked: Boolean) {
-        val isEnabled = isChecked()
-        if (checked == isEnabled) {
-            return
-        }
         AccessibilityStatsLogUtils.logAccessibilityServiceEnabled(getComponentName(), checked)
         Settings.Secure.putInt(
             mContext.contentResolver,

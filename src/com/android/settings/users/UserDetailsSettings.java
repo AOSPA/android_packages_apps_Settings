@@ -140,11 +140,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        if (android.multiuser.Flags.newMultiuserSettingsUx()) {
-            mSwitchUserPref.setEnabled(canSwitchUserNow() && mUserCaps.mUserSwitcherEnabled);
-        } else {
-            mSwitchUserPref.setEnabled(canSwitchUserNow());
-        }
+        mSwitchUserPref.setEnabled(canSwitchUserNow() && mUserCaps.mUserSwitcherEnabled);
         if (mUserInfo.isGuest() && mGuestUserAutoCreated) {
             mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
         }
@@ -378,12 +374,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mSwitchUserPref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
         } else {
             mSwitchUserPref.setDisabledByAdmin(null);
-            if (android.multiuser.Flags.newMultiuserSettingsUx()) {
-                mSwitchUserPref.setEnabled(mUserCaps.mUserSwitcherEnabled);
-                mSwitchUserPref.setSelectable(mUserCaps.mUserSwitcherEnabled);
-            } else {
-                mSwitchUserPref.setSelectable(true);
-            }
+            mSwitchUserPref.setEnabled(mUserCaps.mUserSwitcherEnabled);
+            mSwitchUserPref.setSelectable(mUserCaps.mUserSwitcherEnabled);
             mSwitchUserPref.setOnPreferenceClickListener(this);
         }
         if (android.multiuser.Flags.unicornModeRefactoringForHsumReadOnly()) {

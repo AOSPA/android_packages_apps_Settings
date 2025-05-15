@@ -16,25 +16,27 @@
 
 package com.android.settings.inputmethod;
 
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.hardware.input.InputSettings;
 import android.provider.Settings;
-import android.widget.ImageView;
-import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.server.accessibility.Flags;
-import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settings.core.SliderPreferenceController;
+import com.android.settingslib.widget.SliderPreference;
 
 /** Controller class that controls mouse keys max speed seekbar settings. */
-public class MouseKeysMaxSpeedController extends BasePreferenceController {
+public class MouseKeysMaxSpeedController extends SliderPreferenceController implements
+        Preference.OnPreferenceChangeListener {
 
     private static final int SEEK_BAR_STEP = 1;
+    private static final int MAX_SLIDER_POSITION = 10;
+    private static final int MIN_SLIDER_POSITION = 1;
 
     private final @NonNull ContentResolver mContentResolver;
 
@@ -46,58 +48,32 @@ public class MouseKeysMaxSpeedController extends BasePreferenceController {
     @Override
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference preference = screen.findPreference(getPreferenceKey());
-
-        final int maxSpeedFromSettings = getMaxSpeedFromSettings();
-        // Initialize seek bar preference. Sets seek bar size to the number of possible delay
-        // values.
-        @NonNull SeekBar seekBar = preference.findViewById(R.id.max_speed_seekbar);
-        seekBar.setProgress(maxSpeedFromSettings);
-        seekBar.setOnSeekBarChangeListener(
-            new SeekBar.OnSeekBarChangeListener() {
-
-                @Override
-                public void onProgressChanged(@NonNull SeekBar seekBar, int progress,
-                        boolean fromUser) {
-                    updateMaxSpeedValue(seekBar, progress);
-                }
-
-                @Override
-                public void onStartTrackingTouch(@NonNull SeekBar seekBar) {
-                    // Nothing to do.
-                }
-
-                @Override
-                public void onStopTrackingTouch(@NonNull SeekBar seekBar) {
-                    // Nothing to do.
-                }
-            });
-
-        @NonNull ImageView mShorter = preference.findViewById(R.id.shorter);
-        mShorter.setOnClickListener(v -> minusDelayByImageView(seekBar));
-
-        @NonNull ImageView mLonger = preference.findViewById(R.id.longer);
-        mLonger.setOnClickListener(v -> plusDelayByImageView(seekBar));
+        final SliderPreference preference = screen.findPreference(getPreferenceKey());
+        if (preference == null) {
+            return;
+        }
+        preference.setTickVisible(true);
+        updateState(preference);
     }
 
-    private void updateMaxSpeedValue(@NonNull SeekBar seekBar, int position) {
+    @Override
+    public boolean setSliderPosition(int position) {
+        if (position < getMin() || position > getMax()) {
+            return false;
+        }
+
+        updateMaxSpeedValue(position);
+        return true;
+    }
+
+    @Override
+    public int getSliderPosition() {
+        return getMaxSpeedFromSettings();
+    }
+
+    private void updateMaxSpeedValue(int position) {
         Settings.Secure.putInt(mContentResolver,
                 Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED, position);
-        seekBar.setProgress(position);
-    }
-
-    private void minusDelayByImageView(@NonNull SeekBar seekBar) {
-        final int maxSpeed = getMaxSpeedFromSettings();
-        if (maxSpeed > seekBar.getMin()) {
-            updateMaxSpeedValue(seekBar, maxSpeed - SEEK_BAR_STEP);
-        }
-    }
-
-    private void plusDelayByImageView(@NonNull SeekBar seekBar) {
-        final int maxSpeed = getMaxSpeedFromSettings();
-        if (maxSpeed < seekBar.getMax()) {
-            updateMaxSpeedValue(seekBar, maxSpeed + SEEK_BAR_STEP);
-        }
     }
 
     private int getMaxSpeedFromSettings() {
@@ -109,5 +85,15 @@ public class MouseKeysMaxSpeedController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return Flags.enableMouseKeyEnhancement() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+    }
+
+    @Override
+    public int getMin() {
+        return MIN_SLIDER_POSITION;
+    }
+
+    @Override
+    public int getMax() {
+        return MAX_SLIDER_POSITION;
     }
 }

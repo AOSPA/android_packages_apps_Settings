@@ -39,7 +39,6 @@ import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.flags.Flags;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -223,9 +222,7 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
                         .setUserHandle(UserHandle.of(mAppRow.userId))
                         .setTitleRes(com.android.settings.R.string.notification_channel_title)
                         .setSourceMetricsCategory(
-                                android.app.Flags.modesUi()
-                                    ? SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APP_CHANNELS
-                                        : SettingsEnums.DND_APPS_BYPASSING)
+                                    SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APP_CHANNELS)
                         .launch();
                 return true;
             });

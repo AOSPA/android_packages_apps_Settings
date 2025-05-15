@@ -260,7 +260,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
     public void onResume_UserSwitcherDisabled_shouldDisableSwitchPref() {
         setupSelectedUser();
         mUserCapabilities.mUserSwitcherEnabled = false;

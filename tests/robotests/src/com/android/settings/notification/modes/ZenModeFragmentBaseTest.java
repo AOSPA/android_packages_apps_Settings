@@ -33,12 +33,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
-import android.app.Flags;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
@@ -70,7 +68,6 @@ import org.robolectric.shadows.ShadowLooper;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@EnableFlags(Flags.FLAG_MODES_UI)
 public class ZenModeFragmentBaseTest {
 
     private static final Uri SETTINGS_URI = Settings.Global.getUriFor(

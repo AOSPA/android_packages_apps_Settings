@@ -134,13 +134,17 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
                         .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
                 final boolean forBiometrics = intent
                         .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
+                final boolean isExpressiveStyle = intent
+                        .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE,
+                                false);
                 final SetupSkipDialog dialog = SetupSkipDialog.newInstance(
                         mIsAlphaMode ? CREDENTIAL_TYPE_PASSWORD : CREDENTIAL_TYPE_PIN,
                         frpSupported,
                         forFingerprint,
                         forFace,
                         forBiometrics,
-                        WizardManagerHelper.isAnySetupWizard(intent));
+                        WizardManagerHelper.isAnySetupWizard(intent),
+                        isExpressiveStyle);
 
                 ConfirmDeviceCredentialUtils.hideImeImmediately(
                         getActivity().getWindow().getDecorView());

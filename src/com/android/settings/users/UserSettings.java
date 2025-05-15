@@ -146,6 +146,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_GUEST_USER_CATEGORY = "guest_user_category";
     private static final String KEY_ALLOW_MULTIPLE_USERS = "allow_multiple_users";
     private static final String KEY_USER_SETTINGS_SCREEN = "user_settings_screen";
+    private static final String KEY_USER_SWITCH_TOGGLE = "multiple_users_main_switch";
 
     private static final String SETTING_GUEST_HAS_LOGGED_IN = "systemui.guest_has_logged_in";
 
@@ -230,6 +231,10 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private MultiUserSwitchBarController mSwitchBarController;
 
+    //TODO: Add @NonNull during Flags.changeSwitchBarIntoMainPreference() cleanup
+    @SuppressWarnings("NullAway")
+    private MultiUserMainSwitchPreferenceController mMainSwitchController;
+
     private GrantAdminDialogController mGrantAdminDialogController =
             new GrantAdminDialogController();
     private EditUserInfoController mEditUserInfoController =
@@ -298,21 +303,28 @@ public class UserSettings extends SettingsPreferenceFragment
         super.onActivityCreated(savedInstanceState);
         // Assume we are in a SettingsActivity. This is only safe because we currently use
         // SettingsActivity as base for all preference fragments.
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
-        switchBar.setTitle(getContext().getString(R.string.multiple_users_main_switch_title));
-        if (!mUserCaps.mIsGuest && mUserCaps.mUserSwitchingUiEnabled) {
-            switchBar.show();
-        } else {
-            switchBar.hide();
-        }
-        mSwitchBarController = new MultiUserSwitchBarController(activity,
-                new MainSwitchBarController(switchBar), this /* listener */);
-        getSettingsLifecycle().addObserver(mSwitchBarController);
         boolean openUserEditDialog = getIntent().getBooleanExtra(
                 EXTRA_OPEN_DIALOG_USER_PROFILE_EDITOR, false);
-        if (switchBar.isChecked() && openUserEditDialog) {
-            showDialog(DIALOG_USER_PROFILE_EDITOR);
+
+        if (Flags.changeSwitchBarIntoMainPreference()) {
+            if (openUserEditDialog) {
+                showDialog(DIALOG_USER_PROFILE_EDITOR);
+            }
+        } else {
+            final SettingsActivity activity = (SettingsActivity) getActivity();
+            final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
+            switchBar.setTitle(getContext().getString(R.string.multiple_users_main_switch_title));
+            if (!mUserCaps.mIsGuest && mUserCaps.mUserSwitchingUiEnabled) {
+                switchBar.show();
+            } else {
+                switchBar.hide();
+            }
+            mSwitchBarController = new MultiUserSwitchBarController(activity,
+                    new MainSwitchBarController(switchBar), this /* listener */);
+            getSettingsLifecycle().addObserver(mSwitchBarController);
+            if (switchBar.isChecked() && openUserEditDialog) {
+                showDialog(DIALOG_USER_PROFILE_EDITOR);
+            }
         }
     }
 
@@ -344,12 +356,22 @@ public class UserSettings extends SettingsPreferenceFragment
         mTimeoutToDockUserPreferenceController = new TimeoutToDockUserPreferenceController(
                 activity, KEY_TIMEOUT_TO_DOCK_USER);
 
+        if (Flags.changeSwitchBarIntoMainPreference()) {
+            mMainSwitchController = new MultiUserMainSwitchPreferenceController(
+                    activity, KEY_USER_SWITCH_TOGGLE);
+        }
+
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
         mGuestTelephonyPreferenceController.displayPreference(screen);
         mRemoveGuestOnExitPreferenceController.displayPreference(screen);
         mMultiUserTopIntroPreferenceController.displayPreference(screen);
         mTimeoutToDockUserPreferenceController.displayPreference(screen);
+        if (Flags.changeSwitchBarIntoMainPreference()) {
+            mMainSwitchController.displayPreference(screen);
+        } else {
+            screen.findPreference(KEY_USER_SWITCH_TOGGLE).setVisible(false);
+        }
 
         screen.findPreference(mAddUserWhenLockedPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
@@ -433,7 +455,11 @@ public class UserSettings extends SettingsPreferenceFragment
                 mTimeoutToDockUserPreferenceController.getPreferenceKey()));
         mRemoveGuestOnExitPreferenceController.updateState(screen.findPreference(
                 mRemoveGuestOnExitPreferenceController.getPreferenceKey()));
-        mSwitchBarController.updateState();
+        if (Flags.changeSwitchBarIntoMainPreference()) {
+            mMainSwitchController.updateState();
+        } else {
+            mSwitchBarController.updateState();
+        }
         if (mShouldUpdateUserList) {
             updateUI();
         }
@@ -478,8 +504,7 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
-        if (!mUserCaps.mIsMain && (canSwitchUserNow() || Flags.newMultiuserSettingsUx())
-                && !isCurrentUserGuest() && !mUserManager.isProfile()) {
+        if (!mUserCaps.mIsMain && !isCurrentUserGuest() && !mUserManager.isProfile()) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
@@ -584,7 +609,7 @@ public class UserSettings extends SettingsPreferenceFragment
             if (resultCode != Activity.RESULT_CANCELED && hasLockscreenSecurity()) {
                 addUserNow(USER_TYPE_RESTRICTED_PROFILE);
             }
-        } else if (Flags.placeAddUserDialogWithinActivity() && requestCode == REQUEST_ADD_USER) {
+        } else if (requestCode == REQUEST_ADD_USER) {
             if (resultCode == Activity.RESULT_OK) {
                 mPendingUserName = data.getStringExtra(CreateUserActivity.EXTRA_USER_NAME);
                 mPendingUserIsAdmin = data.getBooleanExtra(CreateUserActivity.EXTRA_IS_ADMIN,
@@ -1124,7 +1149,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
 
                 Future<?> unusedSettingIconFuture = ThreadUtils.postOnBackgroundThread(() -> {
-                    if (Flags.placeAddUserDialogWithinActivity() && mPendingUserIconPath != null) {
+                    if (mPendingUserIconPath != null) {
                         Bitmap bitmap = BitmapFactory.decodeFile(mPendingUserIconPath);
                         mUserManager.setUserIcon(user.id, bitmap);
                         new File(mPendingUserIconPath).delete();
@@ -1273,24 +1298,11 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         List<UserInfo> users;
-        if (Flags.newMultiuserSettingsUx()) {
-            // Only users that can be switched to should show up here.
-            // e.g. Managed profiles appear under Accounts Settings instead
-            users = mUserManager.getAliveUsers().stream()
-                    .filter(UserInfo::supportsSwitchToByUser)
-                    .collect(Collectors.toList());
-        } else {
-            if (mUserCaps.mUserSwitcherEnabled) {
-                // Only users that can be switched to should show up here.
-                // e.g. Managed profiles appear under Accounts Settings instead
-                users = mUserManager.getAliveUsers().stream()
-                        .filter(UserInfo::supportsSwitchToByUser)
-                        .collect(Collectors.toList());
-            } else {
-                // Only current user will be displayed in case of multi-user switch is disabled
-                users = List.of(mUserManager.getUserInfo(context.getUserId()));
-            }
-        }
+        // Only users that can be switched to should show up here.
+        // e.g. Managed profiles appear under Accounts Settings instead
+        users = mUserManager.getAliveUsers().stream()
+                .filter(UserInfo::supportsSwitchToByUser)
+                .collect(Collectors.toList());
 
         final ArrayList<Integer> missingIcons = new ArrayList<>();
         final ArrayList<UserPreference> userPreferences = new ArrayList<>();
@@ -1349,12 +1361,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     pref.setSummary(R.string.user_summary_restricted_not_set_up);
                 } else {
                     pref.setSummary(R.string.user_summary_not_set_up);
-                    // Disallow setting up user which results in user switching when the
-                    // restriction is set.
-                    // If newMultiuserSettingsUx flag is enabled, allow opening user details page
-                    // since switch to user will be disabled
-                    pref.setEnabled((!mUserCaps.mDisallowSwitchUser && canSwitchUserNow())
-                            || Flags.newMultiuserSettingsUx());
+                    pref.setEnabled(true);
                 }
             } else if (user.isRestricted()) {
                 pref.setSummary(R.string.user_summary_restricted_profile);
@@ -1514,23 +1521,11 @@ public class UserSettings extends SettingsPreferenceFragment
                             getContext().getResources(), icon)));
             pref.setKey(KEY_USER_GUEST);
             pref.setOrder(Preference.DEFAULT_ORDER);
-            if (mUserCaps.mDisallowSwitchUser && !Flags.newMultiuserSettingsUx()) {
-                pref.setDisabledByAdmin(
-                        RestrictedLockUtilsInternal.getDeviceOwner(context));
-            } else {
-                pref.setDisabledByAdmin(null);
-            }
-            if (Flags.newMultiuserSettingsUx()) {
-                mGuestUserCategory.addPreference(pref);
-                // guest user preference is shown hence also make guest category visible
-                mGuestUserCategory.setVisible(true);
-            } else {
-                if (mUserCaps.mUserSwitcherEnabled) {
-                    mGuestUserCategory.addPreference(pref);
-                    // guest user preference is shown hence also make guest category visible
-                    mGuestUserCategory.setVisible(true);
-                }
-            }
+
+            pref.setDisabledByAdmin(null);
+            mGuestUserCategory.addPreference(pref);
+            // guest user preference is shown hence also make guest category visible
+            mGuestUserCategory.setVisible(true);
             isGuestAlreadyCreated = true;
         }
         boolean isVisible = updateAddGuestPreference(context, isGuestAlreadyCreated);
@@ -1553,11 +1548,9 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private boolean updateAddGuestPreference(Context context, boolean isGuestAlreadyCreated) {
         boolean isVisible = false;
-        if (!isGuestAlreadyCreated && (mUserCaps.mCanAddGuest
-                || (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUser))
+        if (!isGuestAlreadyCreated && (mUserCaps.mCanAddGuest || mUserCaps.mDisallowAddUser)
                 && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
-                && WizardManagerHelper.isDeviceProvisioned(context)
-                && (mUserCaps.mUserSwitcherEnabled || Flags.newMultiuserSettingsUx())) {
+                && WizardManagerHelper.isDeviceProvisioned(context)) {
             Drawable icon = context.getDrawable(
                     com.android.settingslib.R.drawable.ic_account_circle);
             mAddGuest.setIcon(centerAndTint(icon));
@@ -1570,10 +1563,9 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddGuest.setEnabled(false);
             } else {
                 mAddGuest.setTitle(com.android.settingslib.R.string.guest_new_guest);
-                if (Flags.newMultiuserSettingsUx()
-                        && mUserCaps.mDisallowAddUserSetByAdmin) {
+                if (mUserCaps.mDisallowAddUserSetByAdmin) {
                     mAddGuest.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
-                } else if (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUser) {
+                } else if (mUserCaps.mDisallowAddUser) {
                     final List<UserManager.EnforcingUser> enforcingUsers =
                             mUserManager.getUserRestrictionSources(UserManager.DISALLOW_ADD_USER,
                                     UserHandle.of(UserHandle.myUserId()));
@@ -1587,7 +1579,7 @@ public class UserSettings extends SettingsPreferenceFragment
                         }
                     }
                 } else {
-                    mAddGuest.setEnabled(canSwitchUserNow() || Flags.newMultiuserSettingsUx());
+                    mAddGuest.setEnabled(true);
                 }
             }
         } else {
@@ -1616,18 +1608,15 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUserCommon(Context context, RestrictedPreference addUser,
             boolean canAddRestrictedProfile) {
-        if ((mUserCaps.mCanAddUser
-                && !(mUserCaps.mDisallowAddUserSetByAdmin && Flags.newMultiuserSettingsUx()))
-                && WizardManagerHelper.isDeviceProvisioned(context)
-                && (mUserCaps.mUserSwitcherEnabled || Flags.newMultiuserSettingsUx())) {
+        if (mUserCaps.mCanAddUser && !mUserCaps.mDisallowAddUserSetByAdmin
+                && WizardManagerHelper.isDeviceProvisioned(context)) {
             addUser.setVisible(true);
             addUser.setSelectable(true);
             final boolean canAddMoreUsers =
                     mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_SECONDARY)
                             || (canAddRestrictedProfile
                             && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_RESTRICTED));
-            addUser.setEnabled(canAddMoreUsers && !mAddingUser
-                    && (canSwitchUserNow() || Flags.newMultiuserSettingsUx()));
+            addUser.setEnabled(canAddMoreUsers && !mAddingUser);
 
             if (!canAddMoreUsers) {
                 addUser.setSummary(getString(R.string.user_add_max_count));
@@ -1638,10 +1627,10 @@ public class UserSettings extends SettingsPreferenceFragment
                 addUser.setDisabledByAdmin(
                         mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
             }
-        } else if (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUserSetByAdmin) {
+        } else if (mUserCaps.mDisallowAddUserSetByAdmin) {
             addUser.setVisible(true);
             addUser.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
-        } else if (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUser) {
+        } else if (mUserCaps.mDisallowAddUser) {
             final List<UserManager.EnforcingUser> enforcingUsers =
                     mUserManager.getUserRestrictionSources(UserManager.DISALLOW_ADD_USER,
                             UserHandle.of(UserHandle.myUserId()));
@@ -1758,13 +1747,9 @@ public class UserSettings extends SettingsPreferenceFragment
             if (mUserCaps.mCanAddRestrictedProfile) {
                 showDialog(DIALOG_CHOOSE_USER_TYPE);
             } else {
-                if (Flags.placeAddUserDialogWithinActivity()) {
-                    startActivityForResult(CreateUserActivity.createIntentForStart(getActivity(),
-                                    canCreateAdminUser(), Utils.FILE_PROVIDER_AUTHORITY),
-                            REQUEST_ADD_USER);
-                } else {
-                    onAddUserClicked(USER_TYPE_USER);
-                }
+                startActivityForResult(CreateUserActivity.createIntentForStart(getActivity(),
+                                canCreateAdminUser(), Utils.FILE_PROVIDER_AUTHORITY),
+                        REQUEST_ADD_USER);
             }
             return true;
         } else if (pref == mAddSupervisedUser) {

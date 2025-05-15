@@ -73,6 +73,9 @@ public class BundleListPreferenceController extends NotificationPreferenceContro
         if (!Flags.notificationClassification()) {
             return false;
         }
+        if (android.app.Flags.notificationClassificationUi()) {
+            return false;
+        }
         if (!mBackend.isNotificationBundlingSupported()) {
             return false;
         }

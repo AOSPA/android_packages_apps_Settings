@@ -49,4 +49,16 @@ public class FingerprintFeatureProviderImpl implements FingerprintFeatureProvide
         }
         return mSfpsRestToUnlockFeature;
     }
+
+    @NonNull
+    @Override
+    public Class<? extends FingerprintEnrollParentalConsent> getParentalConsentPage() {
+        return FingerprintEnrollParentalConsent.class;
+    }
+
+    @NonNull
+    @Override
+    public int[] getParentalConsentStringRes() {
+        return FingerprintEnrollParentalConsent.CONSENT_STRING_RESOURCES;
+    }
 }

@@ -19,7 +19,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
+import android.widget.TextView
 import androidx.preference.Preference
+import androidx.preference.PreferenceViewHolder
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -30,6 +32,8 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.android.settingslib.widget.mainswitch.R as MainSwitchPreferenceR
+import com.android.settingslib.widget.preference.card.R as CardPreferenceR
 
 /** A bottom banner promoting other supervision features offered by the supervision app. */
 class SupervisionPromoFooterPreference(
@@ -45,7 +49,7 @@ class SupervisionPromoFooterPreference(
     override val key: String
         get() = KEY
 
-    override fun createWidget(context: Context) = CardPreference(context)
+    override fun createWidget(context: Context): Preference = FooterPreference(context)
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
@@ -111,5 +115,21 @@ class SupervisionPromoFooterPreference(
 
     companion object {
         const val KEY = "promo_footer"
+    }
+}
+
+private class FooterPreference(context: Context) : CardPreference(context) {
+    override fun onBindViewHolder(holder: PreferenceViewHolder) {
+        super.onBindViewHolder(holder)
+        // Make colors consistent with main switch preference
+        holder.findViewById(CardPreferenceR.id.card_container)?.background =
+            context.getDrawable(MainSwitchPreferenceR.drawable.settingslib_expressive_switch_bar_bg)
+        val textColor =
+            context.resources.getColor(
+                MainSwitchPreferenceR.color.settingslib_main_switch_text_color,
+                context.theme,
+            )
+        (holder.findViewById(android.R.id.title) as? TextView)?.setTextColor(textColor)
+        (holder.findViewById(android.R.id.summary) as? TextView)?.setTextColor(textColor)
     }
 }

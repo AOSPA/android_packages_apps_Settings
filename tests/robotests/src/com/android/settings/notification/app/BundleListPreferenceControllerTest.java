@@ -29,6 +29,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.NotificationChannel;
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.Flags;
@@ -57,6 +58,7 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @SmallTest
 @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION)
+@DisableFlags(android.app.Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
 public class BundleListPreferenceControllerTest {
     private Context mContext;
     @Mock

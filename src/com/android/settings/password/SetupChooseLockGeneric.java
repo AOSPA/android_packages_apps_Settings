@@ -21,6 +21,7 @@ import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
 
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE;
 
 import android.app.RemoteServiceException.MissingRequestPasswordComplexityPermissionException;
 import android.content.Context;
@@ -197,7 +198,8 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                         /* forFingerprint= */ false,
                         /* forFace= */ false,
                         /* forBiometrics= */ false,
-                        WizardManagerHelper.isAnySetupWizard(intent)
+                        WizardManagerHelper.isAnySetupWizard(intent),
+                        intent.getBooleanExtra(EXTRA_KEY_USE_EXPRESSIVE_STYLE, false)
                 );
                 dialog.show(getFragmentManager());
                 return true;

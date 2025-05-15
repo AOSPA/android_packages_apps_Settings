@@ -436,6 +436,27 @@ public class EditShortcutsPreferenceFragmentTest {
     }
 
     @Test
+    public void fragmentCreated_tripleTapEnabled_automaticallyExpanded() {
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
+                AccessibilityUtil.State.ON);
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+
+        mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
+        mFragmentScenario.moveToState(Lifecycle.State.RESUMED);
+        mFragmentScenario.onFragment(fragment -> {
+            Preference advanced = fragment.findPreference(
+                    mContext.getString(R.string.accessibility_shortcuts_advanced_collapsed));
+            assertThat(advanced.isVisible()).isFalse();
+
+            Preference tripleTap = fragment.findPreference(
+                    mContext.getString(R.string.accessibility_shortcut_triple_tap_pref));
+            assertThat(tripleTap.isVisible()).isTrue();
+        });
+    }
+
+    @Test
     public void fragmentRecreated_expanded_advancedRemainInvisible() {
         onAdvancedPreferenceClicked_advancedShouldBecomeInvisible();
 

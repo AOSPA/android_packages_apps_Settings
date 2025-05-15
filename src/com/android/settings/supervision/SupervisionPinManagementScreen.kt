@@ -38,10 +38,15 @@ class SupervisionPinManagementScreen :
     override val key: String
         get() = KEY
 
-    override fun isAvailable(context: Context) = context.isSupervisingCredentialSet
-
     override val title: Int
         get() = R.string.supervision_pin_management_preference_title
+
+    // There is an implicit dependency on SupervisionSetupRecoveryPreference due to `getSummary`,
+    // which can be removed if `SupervisionManager.supervisionRecoveryInfo` supports
+    // observer/listener mechanism on change.
+    override fun dependencies(context: Context) = arrayOf(SupervisionSetupRecoveryPreference.KEY)
+
+    override fun isAvailable(context: Context) = context.isSupervisingCredentialSet
 
     override fun getSummary(context: Context): CharSequence? {
         if (!Flags.enableSupervisionPinRecoveryScreen()) {

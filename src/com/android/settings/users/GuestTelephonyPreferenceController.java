@@ -48,21 +48,10 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
-                || UserManager.isHeadlessSystemUserMode()) {
+                || UserManager.isHeadlessSystemUserMode() || !mUserCaps.isAdmin()) {
             return DISABLED_FOR_USER;
         }
-        if (android.multiuser.Flags.newMultiuserSettingsUx()) {
-            if (!mUserCaps.isAdmin()) {
-                return DISABLED_FOR_USER;
-            }
-            return AVAILABLE;
-        } else {
-            if (!mUserCaps.isAdmin() || !mUserCaps.mCanAddGuest) {
-                return DISABLED_FOR_USER;
-            } else {
-                return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
-            }
-        }
+        return AVAILABLE;
     }
 
     @Override
@@ -95,24 +84,17 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
         if (!isAvailable()) {
             restrictedSwitchPreference.setVisible(false);
         } else {
-            if (android.multiuser.Flags.newMultiuserSettingsUx()) {
-                restrictedSwitchPreference.setVisible(true);
-                final RestrictedLockUtils.EnforcedAdmin disallowRemoveUserAdmin =
-                        RestrictedLockUtilsInternal.checkIfRestrictionEnforced(mContext,
-                                UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
-                if (disallowRemoveUserAdmin != null) {
-                    restrictedSwitchPreference.setDisabledByAdmin(disallowRemoveUserAdmin);
-                } else if (mUserCaps.mDisallowAddUserSetByAdmin) {
-                    restrictedSwitchPreference.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
-                } else if (mUserCaps.mDisallowAddUser) {
-                    // Adding user is restricted by system
-                    restrictedSwitchPreference.setVisible(false);
-                }
-            } else {
-                restrictedSwitchPreference.setDisabledByAdmin(
-                        mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);
-                restrictedSwitchPreference.setVisible(mUserCaps.mUserSwitcherEnabled
-                        && isAvailable());
+            restrictedSwitchPreference.setVisible(true);
+            final RestrictedLockUtils.EnforcedAdmin disallowRemoveUserAdmin =
+                    RestrictedLockUtilsInternal.checkIfRestrictionEnforced(mContext,
+                            UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
+            if (disallowRemoveUserAdmin != null) {
+                restrictedSwitchPreference.setDisabledByAdmin(disallowRemoveUserAdmin);
+            } else if (mUserCaps.mDisallowAddUserSetByAdmin) {
+                restrictedSwitchPreference.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
+            } else if (mUserCaps.mDisallowAddUser) {
+                // Adding user is restricted by system
+                restrictedSwitchPreference.setVisible(false);
             }
         }
     }

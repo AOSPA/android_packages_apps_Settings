@@ -54,4 +54,12 @@ public interface FaceFeatureProvider {
 
     /** Returns the max enrollable count. */
     int getMaxEnrollableCount(@NonNull Context context);
+
+    /** Returns the parental consent page. */
+    @NonNull
+    Class<? extends FaceEnrollParentalConsent> getParentalConsentPage();
+
+    /** Returns the string resources of the parental consent page. */
+    @NonNull
+    int[] getParentalConsentStringRes();
 }

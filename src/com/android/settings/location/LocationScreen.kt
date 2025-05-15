@@ -74,7 +74,7 @@ class LocationScreen : PreferenceScreenCreator, PreferenceSummaryProvider, Prefe
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
         +LocationMainSwitch()
-        // TODO(b/406567024): recent location access
+        +RecentLocationAccessScreen.KEY
     }
 
     companion object {

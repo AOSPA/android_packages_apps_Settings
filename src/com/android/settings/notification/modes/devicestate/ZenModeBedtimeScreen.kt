@@ -50,11 +50,11 @@ class ZenModeBedtimeScreen :
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
-    override fun isFlagEnabled(context: Context) = Flags.deviceState() && AppFlags.modesUi()
+    override fun isFlagEnabled(context: Context) = Flags.deviceState()
 
     override fun fragmentClass() = PreferenceFragment::class.java
 
-    override fun isAvailable(context: Context) = AppFlags.modesUi() && context.hasBedtimeMode()
+    override fun isAvailable(context: Context) = context.hasBedtimeMode()
 
     override fun getTitle(context: Context): CharSequence? = context.getBedtimeMode()?.name
 
@@ -62,10 +62,8 @@ class ZenModeBedtimeScreen :
         context.getZenModeScreenSummary(context.getBedtimeMode())
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
-        if (AppFlags.modesUi())
             Intent(context, ModeSettingsActivity::class.java)
                 .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, context.getBedtimeMode()?.id)
-        else null
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
         +ZenModeButtonPreference(context.getBedtimeMode()!!)

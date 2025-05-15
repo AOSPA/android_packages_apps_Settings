@@ -16,9 +16,8 @@
 
 package com.android.settings.connecteddevice.display
 
-import android.app.WallpaperManager
 import android.content.Context
-import android.graphics.Bitmap
+import android.graphics.PixelFormat
 import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED
 import android.hardware.display.DisplayManager.EVENT_TYPE_DISPLAY_ADDED
@@ -37,11 +36,24 @@ import android.view.Display
 import android.view.Display.INVALID_DISPLAY
 import android.view.DisplayInfo
 import android.view.IWindowManager
+import android.view.SurfaceControl
+import android.view.SurfaceView
+import android.view.View
+import android.view.ViewManager
+import android.view.WindowManager
 import android.view.WindowManagerGlobal
 import com.android.server.display.feature.flags.Flags.enableModeLimitForExternalDisplay
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY
 import com.android.settings.flags.FeatureFlagsImpl
 import java.util.function.Consumer
+
+/**
+ * Wallpaper is forced-revealed using a View added to the window manager with
+ * LayoutParams.FLAG_SHOW_WALLPAPER set. In order to clean these views up and avoid adding more than
+ * one, we keep RevealedWallpaper instances as markers, both to avoid re-adding and to remove when
+ * needed.
+ */
+data class RevealedWallpaper(val displayId: Int, val revealer: View, val viewManager: ViewManager)
 
 open class ConnectedDisplayInjector(open val context: Context?) {
 
@@ -62,6 +74,33 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     /** The window manager instance, or null if it cannot be retrieved. */
     val windowManager: IWindowManager? by lazy { WindowManagerGlobal.getWindowManagerService() }
 
+    /**
+     * Reveals the wallpaper on the given display using a View with FLAG_SHOW_WALLPAPER flag set
+     * in LayoutParams. This can be cleaned up later using the returned RevealedWallpaper object.
+     *
+     * @return a RevealedWallpaper which contains the display's window manager and the view that
+     *         was added to it, or null if the view could not be added or the WindowManager was not
+     *         available
+     */
+    open fun revealWallpaper(displayId: Int): RevealedWallpaper? {
+        val display = displayManager?.getDisplay(displayId) ?: return null
+        val windowCtx = context?.createWindowContext(
+                display, WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                /* options= */ null)
+        val windowManager = windowCtx?.getSystemService(WindowManager::class.java) ?: return null
+
+        val view = View(windowCtx)
+        windowManager.addView(view, WindowManager.LayoutParams().also {
+            it.width = 1
+            it.height = 1
+            it.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+            it.flags = (WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    or WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
+            it.format = PixelFormat.TRANSLUCENT
+        })
+        return RevealedWallpaper(display.displayId, view, windowManager)
+    }
+
     private fun wrapDmDisplay(display: Display, isEnabled: DisplayIsEnabled): DisplayDevice =
         DisplayDevice(display.displayId, display.name, display.mode,
                 display.getSupportedModes().asList(), isEnabled)
@@ -74,6 +113,22 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         val sysProp = getSystemProperty(VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY)
         return !sysProp.isEmpty() && display.type == Display.TYPE_VIRTUAL
                 && sysProp == display.ownerPackageName
+    }
+
+    /**
+     * Reparents surface to the SurfaceControl of wallpaperView, so that view will render `surface`.
+     * Any surfaces which may be parented to wallpaperView already should be passed in oldSurfaces
+     * and they will be removed from the wallpaperView's hierarchy and released.
+     */
+    open fun updateSurfaceView(oldSurfaces: List<SurfaceControl>, surface: SurfaceControl,
+            wallpaperView: SurfaceView, surfaceScale: Float) {
+        val t = SurfaceControl.Transaction()
+        t.reparent(surface, wallpaperView.surfaceControl)
+        t.setScale(surface, surfaceScale, surfaceScale)
+        oldSurfaces.forEach { t.remove(it) }
+        t.apply(true)
+
+        oldSurfaces.forEach { it.release() }
     }
 
     /**
@@ -195,8 +250,29 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         get() = displayManager?.displayTopology
         set(value) { displayManager?.let { it.displayTopology = value } }
 
-    open val wallpaper: Bitmap?
-        get() = WallpaperManager.getInstance(context).bitmap
+    /**
+     * Mirrors the wallpaper of the given display.
+     *
+     * @return a SurfaceControl for the top of the new hierarchy, or null if an exception occurred.
+     */
+    open fun wallpaper(displayId: Int): SurfaceControl? {
+        try {
+            val surface = WindowManagerGlobal.getInstance().mirrorWallpaperSurface(displayId)
+            if (surface == null) {
+                Log.e(TAG, "mirrorWallpaperSurface returned null SurfaceControl")
+            }
+            return surface
+        } catch (e: RemoteException) {
+            Log.e(TAG, "Error while mirroring wallpaper of display $displayId", e)
+            return null
+        } catch (e: NullPointerException) {
+            // This can happen if the display has been detached (b/416291830). The caller should
+            // check if the display is still attached, but let's keep this here to prevent the app
+            // from crashing.
+            Log.e(TAG, "NPE while mirroring wallpaper of display $displayId - already detached?", e)
+            return null
+        }
+    }
 
     /**
      * This density is the density of the current display (showing the Settings app UI). It is

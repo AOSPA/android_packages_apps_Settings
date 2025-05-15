@@ -21,28 +21,18 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
-
 import android.content.Context;
+import android.hardware.input.InputSettings;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-import android.provider.Settings;
-import android.widget.ImageView;
-import android.widget.SeekBar;
 
-import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
-
-import com.android.settings.R;
-import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
@@ -51,33 +41,17 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class MouseKeysMaxSpeedControllerTest {
 
-    private static final String KEY_CUSTOM_SEEKBAR = "mouse_keys_max_speed_seekbar";
+    private static final String KEY_CUSTOM_SLIDER = "mouse_keys_max_speed_slider";
 
-    @Rule
-    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-    @Mock
-    private PreferenceScreen mScreen;
-    @Mock
-    private LayoutPreference mLayoutPreference;
-    @Spy
-    private Context mContext = ApplicationProvider.getApplicationContext();
-    private ImageView mShorter;
-    private ImageView mLonger;
-    private SeekBar mSeekBar;
+    @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private MouseKeysMaxSpeedController mController;
+    Context mContext = ApplicationProvider.getApplicationContext();
 
     @Before
     public void setUp() {
-        mShorter = new ImageView(mContext);
-        mLonger = new ImageView(mContext);
-        mSeekBar = new SeekBar(mContext);
-        mController = new MouseKeysMaxSpeedController(mContext, KEY_CUSTOM_SEEKBAR);
-        doReturn(mLayoutPreference).when(mScreen).findPreference(KEY_CUSTOM_SEEKBAR);
-        doReturn(mSeekBar).when(mLayoutPreference).findViewById(R.id.max_speed_seekbar);
-        doReturn(mShorter).when(mLayoutPreference).findViewById(R.id.shorter);
-        doReturn(mLonger).when(mLayoutPreference).findViewById(R.id.longer);
+        mController = new MouseKeysMaxSpeedController(mContext, KEY_CUSTOM_SLIDER);
     }
 
     @Test
@@ -93,76 +67,35 @@ public class MouseKeysMaxSpeedControllerTest {
     }
 
     @Test
-    public void displayPreference_initSeekBar() {
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED, 5);
-        mController.displayPreference(mScreen);
+    public void setSliderPosition_maxspeedValue_shouldReturnTrue() {
+        int position = 3;
 
-        assertThat(mSeekBar.getProgress()).isEqualTo(5);
+        boolean result = mController.setSliderPosition(position);
+
+        assertThat(result).isTrue();
+        assertThat(mController.getSliderPosition())
+                .isEqualTo(position);
     }
 
     @Test
-    public void onSettingsChanged_updateMaxSpeedValue() {
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED, 5);
+    public void setSliderPosition_maxspeedValueOverMaxValue_shouldReturnFalse() {
+        int position = mController.getMax() + 1;
 
-        mController.displayPreference(mScreen);
-        final int actualDelayValue =
-                Settings.Secure.getInt(mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED, /* def= */ 0);
+        boolean result = mController.setSliderPosition(position);
 
-        assertThat(mSeekBar.getProgress()).isEqualTo(5);
-        assertThat(actualDelayValue).isEqualTo(5);
+        assertThat(result).isFalse();
+        assertThat(mController.getSliderPosition())
+                .isEqualTo(InputSettings.DEFAULT_MOUSE_KEYS_MAX_SPEED);
     }
 
     @Test
-    public void onSeekBarProgressChanged_updateMaxSpeedValue() {
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED, 5);
-        mController.displayPreference(mScreen);
-        // mController.mSeekBarChangeListener.onProgressChanged(mock(SeekBar.class),
-        //         /* value= */ 8,
-        //         true);
-        mSeekBar.setProgress(8);
-        final int actualDelayValue =
-                Settings.Secure.getInt(mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED, /* def= */ 0);
+    public void setSliderPosition_maxspeedValueBelowMinValue_shouldReturnFalse() {
+        int position = mController.getMin() - 1;
 
-        assertThat(mSeekBar.getProgress()).isEqualTo(8);
-        assertThat(actualDelayValue).isEqualTo(8);
-    }
+        boolean result = mController.setSliderPosition(position);
 
-    @Test
-    public void onShorterClicked_updateMaxSpeedValue() {
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED, 5);
-        mController.displayPreference(mScreen);
-        mShorter.callOnClick();
-        final int actualDelayValue =
-                Settings.Secure.getInt(mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED, /* def= */ 0);
-
-        assertThat(mSeekBar.getProgress()).isEqualTo(4);
-        assertThat(actualDelayValue).isEqualTo(4);
-    }
-
-    @Test
-    public void onLongerClicked_updateMaxSpeedValue() {
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED, 5);
-
-        mController.displayPreference(mScreen);
-        mLonger.callOnClick();
-        final int actualDelayValue =
-                Settings.Secure.getInt(mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED, /* def= */ 0);
-
-        assertThat(mSeekBar.getProgress()).isEqualTo(6);
-        assertThat(actualDelayValue).isEqualTo(6);
+        assertThat(result).isFalse();
+        assertThat(mController.getSliderPosition())
+                .isEqualTo(InputSettings.DEFAULT_MOUSE_KEYS_MAX_SPEED);
     }
 }

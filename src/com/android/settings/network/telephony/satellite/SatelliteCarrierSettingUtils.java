@@ -78,7 +78,7 @@ public class SatelliteCarrierSettingUtils {
             try {
                 Set<Integer> restrictionReason =
                         mSatelliteManager.getAttachRestrictionReasonsForCarrier(subId);
-                Log.d(TAG, "Error to getAttachRestrictionReasonsForCarrier : " + restrictionReason);
+                Log.d(TAG, "getAttachRestrictionReasonsForCarrier : " + restrictionReason);
                 return restrictionReason;
             } catch (SecurityException | IllegalStateException | IllegalArgumentException e) {
                 Log.d(TAG, "Error to getAttachRestrictionReasonsForCarrier : " + e);

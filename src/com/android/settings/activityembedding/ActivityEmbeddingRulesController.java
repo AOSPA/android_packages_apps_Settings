@@ -278,10 +278,8 @@ public class ActivityEmbeddingRulesController {
         }
         String action = mContext.getString(R.string.config_avatar_picker_action);
         addActivityFilter(activityFilters, new Intent(action));
+        addActivityFilter(activityFilters, CreateUserActivity.class);
 
-        if (android.multiuser.Flags.placeAddUserDialogWithinActivity()) {
-            addActivityFilter(activityFilters, CreateUserActivity.class);
-        }
 
         ActivityRule activityRule = new ActivityRule.Builder(activityFilters).setAlwaysExpand(true)
                 .build();

@@ -46,6 +46,8 @@ class PreferenceDataApiTest {
                         action = "android.settings.SUPERVISION_UPGRADE",
                         trailingIcon = 2,
                         targetPackage = "com.google.android.gms.kids",
+                        isVisible = false,
+                        learnMoreLink = "https://support.google.com/families/answer/1234567",
                     ),
             )
         val encoded = preferenceDataApi.responseCodec.encode(response)

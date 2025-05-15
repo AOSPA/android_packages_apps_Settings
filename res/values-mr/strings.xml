@@ -420,7 +420,7 @@
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"फोन अनलॉक करण्यासाठी, तुमचे डोळे उघडे असणे आवश्यक आहे"</string>
     <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
     <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"नेहमी खात्री करणे आवश्यक आहे"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"नेहमी कन्फर्मेशन आवश्यक आहे"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"ॲप्समध्ये फेस अनलॉक वापरताना, त्याची कन्फर्मेशन पायरी पार करणे आवश्यक आहे"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"फेस मॉडेल हटवा"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"फेस अनलॉक सेट करा"</string>
@@ -1170,6 +1170,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"अनुमती द्या"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"नकार द्या"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*आवश्यक"</string>
+    <!-- no translation found for wifi_shared_network_login_screen_warning (7611029233083731552) -->
+    <skip />
     <string name="share_wifi_network" msgid="4064997404339571584">"डिव्हाइसच्या इतर वापरकर्त्यांसोबत हे नेटवर्क शेअर करा"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"या डिव्हाइसवरील सर्व वापरकर्ते शेअर केलेले नेटवर्क पाहू आणि कनेक्ट करू शकतात. अ‍ॅडमिनिस्ट्रेटर शेअर केलेले नेटवर्क हटवू शकतात. अधिक जाणून घ्या"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"इतरांना नेटवर्क कॉन्फिगरेशन संपादित करण्याची अनुमती द्या"</string>
@@ -1452,8 +1454,26 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"सुरू आहे / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"बंद"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"कधी दाखवायचे"</string>
+    <!-- no translation found for screensaver_settings_low_light_mode (271972828076673743) -->
+    <skip />
     <string name="lift_to_wake_title" msgid="8994218158737714046">"सक्रिय करण्‍यासाठी लिफ्‍ट"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"वायरलेस चार्जिंगपुरते प्रतिबंधित करा"</string>
+    <!-- no translation found for low_light_display_behavior_main_switch_title (7138165032358139627) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_subtitle (1833984014035605413) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_screen_off (4203092158668290404) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_low_light_clock_dream (2235561363691252383) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_summary_on (4218678742261840224) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_summary_off (4565368094992120316) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_screen_off_full_summary (6671607843870561892) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_low_light_clock_dream_full_summary (1145914465090731721) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"अँबियंट डिस्प्ले"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"कधी दाखवायचे"</string>
     <string name="doze_title" msgid="1523090408230862316">"नोटिफिकेशनसाठी स्क्रीन सुरू करा"</string>
@@ -2114,13 +2134,12 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"माउस की वापरा"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"माउस की शॉर्टकट"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"पॉइंटर नियंत्रित करण्यासाठी तुमचा कीबोर्ड वापरा"</string>
-    <!-- no translation found for mouse_keys_max_speed_title (1788751803245422659) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_decrease_button_description (9077624857206032509) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_increase_button_description (2721662400858172203) -->
-    <skip />
+    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"कमाल वेग"</string>
+    <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"कमी करा"</string>
+    <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"वाढवा"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"स्क्रोलिंग उलट करा"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_title (525897583406210252) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"पेज खाली हलवण्यासाठी वरती स्क्रोल करा"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"स्क्रोल करणे"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"स्क्रोल करणे नियंत्रित केले आहे"</string>
@@ -2134,7 +2153,7 @@
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"<xliff:g id="KEYBOARD_NAME">%s</xliff:g> साठी माउस की"</string>
     <string name="mouse_keys_directional_summary" msgid="2215425656757420699">"माउस पॉइंटर हलवण्यासाठी \"<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>\" की वापरा"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"प्राथमिक माउस बटणावर क्लिक करण्यासाठी \"<xliff:g id="CLICK_LABEL">%s</xliff:g>\" की वापरा"</string>
-    <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"प्रेस करण्यासाठी \"<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>\" की वापरा आणि प्राथमिक माउस बटण धरून ठेवा"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"प्राथमिक माउस बटण प्रेस करून धरून ठेवण्यासाठी \"<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>\" की वापरा"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"प्राथमिक माउस बटण रिलीझ करण्यासाठी \"<xliff:g id="RELEASE_LABEL">%s</xliff:g>\" की वापरा"</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"स्क्रोल मोड टॉगल करण्यासाठी \"<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>\" की वापरा. हे \"<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>\" की ला वरती, खाली, डावीकडील किंवा उजवीकडील दृश्यावर स्क्रोल करू देईल"</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"दुय्यम माउस बटणावर क्लिक करण्यासाठी \"<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>\" की वापरा"</string>
@@ -2200,6 +2219,20 @@
     <string name="gesture_button_next" msgid="695288092704187356">"पुढील"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"रीस्टार्ट करा"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"पूर्ण झाले"</string>
+    <!-- no translation found for action_corners_title (8971354126563421646) -->
+    <skip />
+    <!-- no translation found for action_corners_summary (4245089615854251124) -->
+    <skip />
+    <!-- no translation found for action_corners_intro (4384209411870086502) -->
+    <skip />
+    <!-- no translation found for action_corners_bottom_left_title (8677233546610832717) -->
+    <skip />
+    <!-- no translation found for action_corners_bottom_right_title (2155948558861306738) -->
+    <skip />
+    <!-- no translation found for action_corners_top_left_title (6604149810499060560) -->
+    <skip />
+    <!-- no translation found for action_corners_top_right_title (583996793984142329) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"मॉडिफायर की"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"कीचे वर्तन बदला"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"सर्व रीसेट करा"</string>
@@ -2347,7 +2380,7 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"माउसने स्क्रीनच्या कडांना स्पर्श केल्यावर स्क्रीन हलवा"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"टाइप करणे मॅग्निफाय करा"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"तुम्ही टाइप करताना मॅग्निफायर हे मजकूर फॉलो करते"</string>
-    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"मॅग्निफायर कीबोर्ड फोकस"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"कीबोर्ड फोकस मॅग्निफाय करा"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"मॅग्निफायर कीबोर्ड फोकसला फॉलो करते"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"कीबोर्ड मॅग्निफाय करा"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"आशयासह कीबोर्ड मॅग्निफाय होतो"</string>
@@ -2402,7 +2435,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"झूम करण्यासाठी 3 वेळा टॅप करा"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"झूम करण्यासाठी बटणावर टॅप करा"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"आशय आणखी मोठा करून पाहण्यासाठी स्क्रीनवर झटपट झूम इन करा"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;झूम इन करण्यासाठी:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. मॅग्निफिकेशन सुरू करण्यासाठी शॉर्टकट वापरा&lt;br/&gt; {1,number,integer}. स्क्रीनवर टॅप करा&lt;br/&gt; {2,number,integer}. स्क्रीनवर हलवण्यासाठी दोन बोटांनी ड्रॅग करा&lt;br/&gt; {3,number,integer}. झूम अ‍ॅडजस्ट करण्यासाठी दोन बोटांनी पिंच करा&lt;br/&gt; {4,number,integer}. मॅग्निफिकेशन थांबवण्यासाठी शॉर्टकट वापरा&lt;br/&gt;&lt;br/&gt; &lt;b&gt;तात्पुरते झूम इन करण्यासाठी:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. तुमचा मॅग्निफिकेशनचा प्रकार फुल स्क्रीनवर सेट केला असल्याची खात्री करा&lt;br/&gt; {1,number,integer}. मॅग्निफिकेशन सुरू करण्यासाठी शॉर्टकट वापरा&lt;br/&gt; {2,number,integer}. स्क्रीनवर कुठेही स्पर्श कऱून धरून ठेवा&lt;br/&gt; {3,number,integer}. स्क्रीनवर हलवण्यासाठी बोटाने ड्रॅग करा&lt;br/&gt; {4,number,integer}. मॅग्निफिकेशन थांबवण्यासाठी बोट उचला"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;झूम इन करण्यासाठी:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. मॅग्निफिकेशन सुरू करण्यासाठी शॉर्टकट वापरा&lt;br/&gt; {1,number,integer}. स्क्रीनवर टॅप करा&lt;br/&gt; {2,number,integer}. स्क्रीनवर हलवण्यासाठी २ बोटांनी ड्रॅग करा&lt;br/&gt; {3,number,integer}. झूम अ‍ॅडजस्ट करण्यासाठी २ बोटांनी पिंच करा&lt;br/&gt; {4,number,integer}. मॅग्निफिकेशन थांबवण्यासाठी शॉर्टकट वापरा&lt;br/&gt;&lt;br/&gt; &lt;b&gt;तात्पुरते झूम इन करण्यासाठी:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. तुमचा मॅग्निफिकेशनचा प्रकार फुल स्क्रीनवर सेट केला असल्याची खात्री करा&lt;br/&gt; {1,number,integer}. मॅग्निफिकेशन सुरू करण्यासाठी शॉर्टकट वापरा&lt;br/&gt; {2,number,integer}. स्क्रीनवर कुठेही स्पर्श करून धरून ठेवा&lt;br/&gt; {3,number,integer}. स्क्रीनवर हलवण्यासाठी बोटाने ड्रॅग करा&lt;br/&gt; {4,number,integer}. मॅग्निफिकेशन थांबवण्यासाठी बोट उचला"</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;कीबोर्ड वापरून झूम करण्यासाठी:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. मॅग्निफिकेशन सुरू करण्यासाठी शॉर्टकट वापरा&lt;br/&gt; {1,number,integer}. &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; आणि &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; धरून ठेवा व झूम इन किंवा आउट करण्यासाठी + अथवा - प्रेस करा&lt;br/&gt; {2,number,integer}. &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; आणि &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; धरून ठेवा व स्क्रीनवर सभोवती फिरण्यासाठी ॲरो की प्रेस करा&lt;br/&gt; {3,number,integer}. मॅग्निफिकेशन थांबवण्यासाठी शॉर्टकट वापरा"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;झूम इन करण्यासाठी:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. मॅग्निफिकेशन सुरू करण्यासाठी शॉर्टकट वापरा&lt;br/&gt; {1,number,integer}. स्क्रीनवर टॅप करा&lt;br/&gt; {2,number,integer}. स्क्रीनवर हलवण्यासाठी २ बोटे ड्रॅग करा&lt;br/&gt; {3,number,integer}. झूम अ‍ॅडजस्ट करण्यासाठी २ बोटांनी पिंच करा&lt;br/&gt; {4,number,integer}. मॅग्निफिकेशन थांबवण्यासाठी शॉर्टकट वापरा&lt;br/&gt;&lt;br/&gt; तुम्ही तात्पुरते झूम इन करू शकता आणि आणखी बरेच काही करू शकता."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;झूम इन करण्यासाठी:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. मॅग्निफिकेशन सुरू करण्यासाठी शॉर्टकट वापरा&lt;br/&gt; {1,number,integer}. स्क्रीनवर टॅप करा&lt;br/&gt; {2,number,integer}. स्क्रीनवर हलवण्यासाठी १ किंवा २ बोटे ड्रॅग करा&lt;br/&gt; {3,number,integer}. झूम अ‍ॅडजस्ट करण्यासाठी २ बोटांनी पिंच करा&lt;br/&gt; {4,number,integer}. मॅग्निफिकेशन थांबवण्यासाठी शॉर्टकट वापरा&lt;br/&gt;&lt;br/&gt; तुम्ही तात्पुरते झूम इन करू शकता आणि आणखी बरेच काही करू शकता."</string>
@@ -2529,6 +2562,36 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"अल्प"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"दीर्घ"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"ऑटो क्लिकची वेळ"</string>
+    <!-- no translation found for accessibility_autoclick_main_switch_title (1968409462935503999) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_shortcut_title (5337438503429302081) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_title (4625722241966706931) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_summary (3685183305849901339) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_title (8988239939645854279) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_summary (6993249143332791469) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_large (3802014133363801617) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_large (1115930762484519488) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_default (4934363711068310028) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_small (3987901922883658043) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_small (6056674574040448864) -->
+    <skip />
+    <!-- no translation found for autoclick_ignore_minor_cursor_movement_title (5038721995720529808) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_title (9213418243482609005) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_title (2580632445700896655) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_message (8007946937334710898) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"व्हायब्रेशन आणि हॅप्टिक"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"वेगवेगळ्या वापरांसाठी व्हायब्रेशनची तीव्रता नियंत्रित करा"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"सुरू आहे"</string>
@@ -3298,8 +3361,7 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"कार्य प्रोफाइल काढायची?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"सर्व अ‍ॅप्स आणि डेटा हटवला जाईल."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"तुम्ही सुरू ठेवल्यास या प्रोफाइलमधील सर्व अ‍ॅप्स आणि डेटा हटवला जाईल."</string>
-    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
-    <skip />
+    <string name="work_profile_confirm_remove_message_with_esim" msgid="1169605178915445183">"तुम्ही पुढे सुरू ठेवल्यास, या प्रोफाइलमधील सर्व अ‍ॅप्स आणि डेटा कामाच्या eSIM च्या समावेशासह हटवला जाईल."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"सर्व अ‍ॅप्स आणि डेटा हटवला जाईल."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"नवीन वापरकर्त्यास जोडत आहे…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"वापरकर्ता हटवा"</string>
@@ -3866,7 +3928,10 @@
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"संवेदनशील कार्य आशय लपवा"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"तुमचे डिव्हाइस लॉक केले असताना, प्रोफाईल सूचना कशा दर्शविल्या जाव्यात असे तुम्ही इच्छिता?"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"लॉक स्‍क्रीनवर काय दाखवायचे आहे"</string>
-    <string name="lock_screen_notification_show_seen_title" msgid="1407033848315515970">"पाहिलेली नोटिफिकेशन दाखवा"</string>
+    <!-- no translation found for lock_screen_notification_show_viewed_notifs (4104703346314965171) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_show_viewed_notif_icons (1197681203638927375) -->
+    <skip />
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"सायलंट नोटिफिकेशन दाखवा"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"संवेदनशील आशय दाखवा"</string>
     <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"कार्य प्रोफाइलशी संबंधित संवेदनशील आशय दाखवा"</string>
@@ -4698,7 +4763,8 @@
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet उघडा"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"लॉक स्‍क्रीनवरील शॉर्टकट बदलायचा आहे का?"</string>
-    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> हा देखील तुमचा लॉक स्‍क्रीनवरील शॉर्टकट आहे. तुम्हाला तो बदलायचा आहे का?"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (7572626485518591928) -->
+    <skip />
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"तुमचे सद्य डीफॉल्ट वॉलेट ॲप जेश्चरला सपोर्ट करत नाही"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"डीफॉल्ट वॉलेट बदला"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"सेल्फीसाठी कॅमेरा फ्लिप करा"</string>
@@ -5773,10 +5839,8 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"TalkBack तात्पुरते बंद करा"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"ऑडिओ स्ट्रीम ऐकत असताना TalkBack वापरले जाऊ शकत नाही. ऐकणे सुरू करण्यासाठी TalkBack बंद करा."</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"बंद करा"</string>
-    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_title (1017164439467110153) -->
-    <skip />
-    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_subtitle (5856842223436525336) -->
-    <skip />
+    <string name="audio_streams_dialog_turn_off_audio_sharing_title" msgid="1017164439467110153">"शेअर करताना ऑडिओ स्ट्रीम ऐकू येत नाहीत"</string>
+    <string name="audio_streams_dialog_turn_off_audio_sharing_subtitle" msgid="5856842223436525336">"हे स्ट्रीम ऐकण्यासाठी, ऑडिओ शेअरिंग बंद करा."</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"डिव्हाइस कनेक्ट करा"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"ऑडिओ स्ट्रीमशी संबंधित तपशील"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"ऑडिओ स्ट्रीमचा QR कोड"</string>
@@ -5821,21 +5885,16 @@
     <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
     <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"पर्यवेक्षण, पालक पर्यवेक्षण, पालक नियंत्रणे"</string>
-    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
-    <skip />
+    <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"तुमचा पिन व्यवस्थापित करा"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"रिकव्हरी ईमेल जोडा"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"रिकव्हरी ईमेलची पडताळणी करा"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"पिन बदला"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"पिन विसरलात"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"रिकव्हरी ईमेल अपडेट करा"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"पिन हटवा"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"यामुळे तुमच्या सर्व पर्यवेक्षण सेटिंग्ज रीसेट होतील"</string>
-    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
-    <skip />
-    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
-    <skip />
+    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"रिकव्हरी ईमेल जोडा"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"तुमच्या ईमेलची पडताळणी करा"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"वेब आशय फिल्टर"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"वेबसाइट"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"भडक वेब आशय ब्लॉक करा"</string>
@@ -5846,11 +5905,8 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"या डिव्हाइसवरील शोध इंजीनसाठी"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"फिल्टर बंद आहे"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"पर्यवेक्षण पिन एंटर करा"</string>
-    <!-- no translation found for supervision_choose_your_pin_header (3872062168986738629) -->
-    <skip />
-    <!-- no translation found for supervision_confirm_your_pin_header (8236956712482718354) -->
-    <skip />
-    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
-    <skip />
+    <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"पालक नियंत्रणे पिन सेट करा"</string>
+    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"पिन कन्फर्म करा"</string>
+    <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"पिन अपडेट केला"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> अ‍ॅनिमेशन"</string>
 </resources>

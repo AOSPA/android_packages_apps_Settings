@@ -1170,6 +1170,7 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"ອະ​ນຸ​ຍາດ​"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"ປະ​ຕິ​ເສດ"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*ຕ້ອງລະບຸ"</string>
+    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"ນີ້ແມ່ນເຄືອຂ່າຍທີ່ແບ່ງປັນ. ທ່ານສາມາດປ່ຽນແປງການຕັ້ງຄ່ານີ້ໄດ້ເມື່ອເຂົ້າສູ່ລະບົບແລ້ວ."</string>
     <string name="share_wifi_network" msgid="4064997404339571584">"ແບ່ງປັນເຄືອຂ່າຍນີ້ກັບຜູ້ໃຊ້ອຸປະກອນອື່ນ"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"ຜູ້ໃຊ້ທັງໝົດຢູ່ອຸປະກອນນີ້ສາມາດເບິ່ງ ແລະ ເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍທີ່ໄດ້ແບ່ງປັນ. ຜູ້ເບິ່ງແຍງລະບົບສາມາດລຶບເຄືອຂ່າຍທີ່ໄດ້ແບ່ງປັນ. ສຶກສາເພີ່ມເຕີມ"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"ອະນຸຍາດໃຫ້ຜູ້ໃຊ້ອື່ນແກ້ໄຂການຕັ້ງຄ່າເຄືອຂ່າຍ"</string>
@@ -1452,8 +1453,17 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"ເປີດ / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"ປິດ"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"ເວລາທີ່ສະແດງ"</string>
+    <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"ໂໝດແສງໜ້ອຍ"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"ຍົກ​ເພື່ອ​ເປີດ​ໜ້າ​ຈໍ"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"ຈຳກັດການສາກໄຟໄຮ້ສາຍ"</string>
+    <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"ໃຊ້ໂໝດແສງໜ້ອຍ"</string>
+    <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"ເລືອກວ່າຈະສະແດງຫຍັງໃນໂໝດແສງໜ້ອຍ"</string>
+    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"ໜ້າຈໍປິດຢູ່"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"ໂມງແສງໜ້ອຍ"</string>
+    <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"ເປີດ / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
+    <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"ປິດ"</string>
+    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"ໜ້າຈໍຈະປິດເມື່ອສະພາບແວດລ້ອມຂອງທ່ານມືດ"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"ໂມງແສງໜ້ອຍຈະສະແດງຂຶ້ນເມື່ອສະພາບແວດລ້ອມຂອງທ່ານມືດ"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"ການສະແດງຜົນສະພາບແວດລ້ອມ"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"ສະແດງຕອນໃດ"</string>
     <string name="doze_title" msgid="1523090408230862316">"ປຸກໜ້າຈໍສຳລັບການແຈ້ງເຕືອນ"</string>
@@ -2118,6 +2128,7 @@
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"ຊ້າລົງ"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"ເພີ່ມຂຶ້ນ"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"ການເລື່ອນຍ້ອນກັບ"</string>
+    <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"ໃຊ້ປຸ່ມຫຼັກ"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"ເລື່ອນຂຶ້ນເພື່ອຍ້າຍໜ້າລົງ"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"ການເລື່ອນ"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"ການເລື່ອນທີ່ມີການຄວບຄຸມ"</string>
@@ -2197,6 +2208,13 @@
     <string name="gesture_button_next" msgid="695288092704187356">"ຕໍ່ໄປ"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"ຣີສະຕາດ"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"ແລ້ວໆ"</string>
+    <string name="action_corners_title" msgid="8971354126563421646">"ປັບແຕ່ງມຸມຄຳສັ່ງ"</string>
+    <string name="action_corners_summary" msgid="4245089615854251124">"ໃຊ້ເຄີເຊີເພື່ອນຳທາງລະບົບ"</string>
+    <string name="action_corners_intro" msgid="4384209411870086502">"ເລືອກພື້ນທີ່ຕໍ່ໄປນີ້ເພື່ອປັບແຕ່ງມຸມຄຳສັ່ງ"</string>
+    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"ມຸມຊ້າຍລຸ່ມ"</string>
+    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"ມຸມຂວາລຸ່ມ"</string>
+    <string name="action_corners_top_left_title" msgid="6604149810499060560">"ມຸມຊ້າຍເທິງ"</string>
+    <string name="action_corners_top_right_title" msgid="583996793984142329">"ມຸມຂວາເທິງ"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"ປຸ່ມຕົວດັດແປງ"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"ປ່ຽນລັກສະນະການເຮັດວຽກຂອງປຸ່ມ"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"ຣີເຊັດທັງໝົດ"</string>
@@ -2526,6 +2544,36 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"ສັ້ນລົງ"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"ດົນຂຶ້ນ"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"ເວລາຄລິກອັດຕະໂນມັດ"</string>
+    <!-- no translation found for accessibility_autoclick_main_switch_title (1968409462935503999) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_shortcut_title (5337438503429302081) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_title (4625722241966706931) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_summary (3685183305849901339) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_title (8988239939645854279) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_summary (6993249143332791469) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_large (3802014133363801617) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_large (1115930762484519488) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_default (4934363711068310028) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_small (3987901922883658043) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_small (6056674574040448864) -->
+    <skip />
+    <!-- no translation found for autoclick_ignore_minor_cursor_movement_title (5038721995720529808) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_title (9213418243482609005) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_title (2580632445700896655) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_message (8007946937334710898) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"ການສັ່ນເຕືອນ ແລະ ການສຳຜັດ"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"ຄວບຄຸມຄວາມແຮງຂອງການສັ່ນເຕືອນສຳລັບການໃຊ້ທີ່ແຕກຕ່າງກັນ"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"ເປີດ"</string>
@@ -3295,8 +3343,7 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"ລຶບ​ໂປຣ​ໄຟລ໌​ບ່ອນ​ເຮັດ​ວຽກບໍ?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"ແອັບ ແລະ ​ຂໍ້​ມູນ​ທັງ​ໝົດ​ຈະ​ຖືກ​ລຶບ​ອອກ."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"ແອັບ ແລະ ຂໍ້ມູນທັງໝົດໃນໂປຣໄຟລ໌ນີ້ຈະຖືກລຶບຖ້າທ່ານສືບຕໍ່."</string>
-    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
-    <skip />
+    <string name="work_profile_confirm_remove_message_with_esim" msgid="1169605178915445183">"ແອັບ ແລະ ຂໍ້ມູນທັງໝົດໃນໂປຣໄຟລ໌ນີ້, ຮວມທັງ eSIM ບ່ອນເຮັດວຽກ, ຈະຖືກລຶບຫາກທ່ານດຳເນີນການຕໍ່."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"​ແອັບ ​ແລະ ​ຂໍ້​ມູນ​ທັງ​ໝົດ​ຈະ​ຖືກ​ລຶບ​ອອກ."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"ກຳລັງເພີ່ມຜູ່ໃຊ້ໃໝ່..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"ລຶບຜູ່ໃຊ້"</string>
@@ -3863,7 +3910,10 @@
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"ເຊື່ອງເນື້ອຫາວຽກທີ່ລະອຽດອ່ອນ"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"​ທ່ານ​ຕ້ອງ​ການ​ໃຫ້​ສະ​ແດງ​​ການ​ແຈ້ງ​ເຕືອນ​ໂປຣໄຟລ໌ແນວ​ໃດ​ໃນ​ເວ​ລາ​ທີ່​ອຸ​ປະ​ກອນ​ຖືກ​ລັອກ?"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"ສິ່ງທີ່ຈະສະແດງຢູ່ໜ້າຈໍລັອກ"</string>
-    <string name="lock_screen_notification_show_seen_title" msgid="1407033848315515970">"ສະແດງການແຈ້ງເຕືອນທີ່ອ່ານແລ້ວ"</string>
+    <!-- no translation found for lock_screen_notification_show_viewed_notifs (4104703346314965171) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_show_viewed_notif_icons (1197681203638927375) -->
+    <skip />
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"ສະແດງການແຈ້ງເຕືອນແບບປິດສຽງ"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"ສະແດງເນື້ອຫາທີ່ລະອຽດອ່ອນ"</string>
     <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"ສະແດງເນື້ອຫາທີ່ລະອຽດອ່ອນຂອງໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ"</string>
@@ -4695,7 +4745,8 @@
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"ເປີດ Wallet"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"ປ່ຽນທາງລັດໜ້າຈໍລັອກບໍ?"</string>
-    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> ຍັງເປັນທາງລັດໜ້າຈໍລັອກຂອງທ່ານນຳ. ຕ້ອງການປ່ຽນບໍ?"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (7572626485518591928) -->
+    <skip />
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"ແອັບ Wallet ເລີ່ມຕົ້ນໃນປັດຈຸບັນຂອງທ່ານບໍ່ຮອງຮັບທ່າທາງນີ້"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"ປ່ຽນກະເປົາເລີ່ມຕົ້ນ"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"ສະຫຼັບກ້ອງເພື່ອຖ່າຍເຊວຟີ"</string>
@@ -5811,26 +5862,19 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"ການຄວບຄຸມຂອງພໍ່ແມ່"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"ການຈຳກັດເນື້ອຫາ ແລະ ຂໍ້ຈຳກັດອື່ນໆ"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"ໃຊ້ການເບິ່ງແຍງກວດກາອຸປະກອນ"</string>
-    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
-    <skip />
-    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
-    <skip />
+    <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"ຕັ້ງລະຫັດ PIN"</string>
+    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"ຢຸດຊົ່ວຄາວແລ້ວ"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"ການເບິ່ງແຍງກວດກາ, ການເບິ່ງແຍງຂອງພໍ່ແມ່, ການຄວບຄຸມຂອງພໍ່ແມ່"</string>
-    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
-    <skip />
+    <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"ຈັດການ PIN ຂອງທ່ານ"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"ເພີ່ມອີເມວກູ້ຂໍ້ມູນ"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"ຢັ້ງຢືນອີເມວກູ້ຂໍ້ມູນ"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"ປ່ຽນ PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"ລືມ PIN"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"ອັບເດດອີເມວກູ້ຂໍ້ມູນ"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"ລຶບ PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"ສິ່ງນີ້ຈະຣີເຊັດການຕັ້ງຄ່າການເບິ່ງແຍງກວດກາທັງໝົດຂອງທ່ານ"</string>
-    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
-    <skip />
-    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
-    <skip />
+    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"ເພີ່ມອີເມວກູ້ຂໍ້ມູນ"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"ຢັ້ງຢືນອີເມວຂອງທ່ານ"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ຕົວກັ່ນຕອງເນື້ອຫາເວັບ"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"ເວັບໄຊ"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"ບລັອກເນື້ອຫາເວັບທີ່ຈະແຈ້ງ"</string>
@@ -5843,7 +5887,6 @@
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"ປ້ອນ PIN ການເບິ່ງແຍງກວດກາ"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"ຕັ້ງ PIN ການຄວບຄຸມຂອງພໍ່ແມ່"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"ຢືນຢັນ PIN"</string>
-    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
-    <skip />
+    <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"ອັບເດດ PIN ແລ້ວ"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"ອະນິເມຊັນ <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

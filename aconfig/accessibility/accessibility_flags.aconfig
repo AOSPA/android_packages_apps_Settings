@@ -38,13 +38,6 @@ flag {
 }
 
 flag {
-  name: "enable_hearing_aid_volume_offset_control"
-  namespace: "accessibility"
-  description: "Allows users to control hearing aid volume offset in the Bluetooth device details page."
-  bug: "301198830"
-}
-
-flag {
   name: "enable_magnification_cursor_following_dialog"
   namespace: "accessibility"
   description: "Decides whether to show the magnification cursor following dialog in Settings app."

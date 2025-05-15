@@ -19,7 +19,6 @@ package com.android.settings.connecteddevice.display
 import com.android.settings.R
 import com.android.settingslib.widget.GroupSectionDividerMixin
 
-import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.PointF
@@ -110,6 +109,12 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
 
     override fun onDetached() {
         super.onDetached()
+
+        // No longer need to reveal wallpapers since the blocks are not visible; these will be
+        // revealed again upon invocation of refreshPane.
+        mRevealedWallpapers.forEach { it.viewManager.removeView(it.revealer) }
+        mRevealedWallpapers = listOf()
+
         injector.unregisterTopologyListener(mTopologyListener)
     }
 
@@ -127,6 +132,8 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
     private data class TopologyInfo(
             val topology: DisplayTopology, val scaling: TopologyScale,
             val positions: List<Pair<Int, RectF>>)
+
+    private var mRevealedWallpapers: List<RevealedWallpaper> = emptyList()
 
     /**
      * Holds information about the current drag operation. The initial rawX, rawY values of the
@@ -219,22 +226,17 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
             }
         }
 
-        var wallpaperBitmap : Bitmap? = null
-
+        val idToNode = topology.allNodesIdMap()
         newBounds.forEach { (id, pos) ->
-            val block = recycleableBlocks.removeFirstOrNull() ?: DisplayBlock(context).apply {
-                if (wallpaperBitmap == null) {
-                    wallpaperBitmap = injector.wallpaper
-                }
-                // We need a separate wallpaper Drawable for each display block, since each needs to
-                // be drawn at a separate size.
-                setWallpaper(wallpaperBitmap)
-
+            val block = recycleableBlocks.removeFirstOrNull() ?: DisplayBlock(injector).apply {
                 mPaneContent.addView(this)
             }
-            block.setHighlighted(false)
 
-            block.placeAndSize(pos, scaling)
+            idToNode.get(id)?.let {
+                val topLeft = scaling.displayToPaneCoor(pos.left, pos.top)
+                val bottomRight = scaling.displayToPaneCoor(pos.right, pos.bottom)
+                block.reset(id, topLeft, bottomRight, (bottomRight.x - topLeft.x) / it.logicalWidth)
+            }
             block.setOnTouchListener { view, ev ->
                 when (ev.actionMasked) {
                     MotionEvent.ACTION_DOWN -> onBlockTouchDown(id, pos, block, ev)
@@ -248,6 +250,22 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
         mTimesRefreshedBlocks++
 
         mTopologyInfo = TopologyInfo(topology, scaling, newBounds)
+
+        // Construct a map containing revealers that we want to keep (keepRevealing). Then create a
+        // list comprised of the values of that map as well as new revealers (mRevealedWallpapers).
+        val keepRevealing = buildMap<Int, RevealedWallpaper> {
+            mRevealedWallpapers.forEach { r ->
+                if (idToNode.containsKey(r.displayId)) {
+                    put(r.displayId, r)
+                } else {
+                    r.viewManager.removeView(r.revealer)
+                }
+            }
+        }
+        mRevealedWallpapers = idToNode.keys
+            .map { keepRevealing.get(it) ?: injector.revealWallpaper(it) }
+            .filterNotNull()
+            .toList()
 
         // Cancel the drag if one is in progress.
         mDrag = null

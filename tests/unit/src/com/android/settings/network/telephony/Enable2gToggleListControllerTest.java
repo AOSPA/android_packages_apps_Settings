@@ -27,6 +27,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Looper;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.SubscriptionInfo;
@@ -57,6 +58,7 @@ import java.util.List;
 public final class Enable2gToggleListControllerTest {
     private static final int SUB_ID = 2;
     private static final String PREFERENCE_KEY = "TEST_2G_PREFERENCE";
+    private static final String ENABLE_2G = "2G network protection";
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock
     private SubscriptionManager mSubscriptionManager;
@@ -75,6 +77,11 @@ public final class Enable2gToggleListControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
+
+        Resources resources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(resources);
+        when(resources.getString(R.string.enable_2g_title)).thenReturn(ENABLE_2G);
+        when(mContext.getString(R.string.enable_2g_title)).thenReturn(ENABLE_2G);
 
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
 
@@ -108,7 +115,6 @@ public final class Enable2gToggleListControllerTest {
     @Test
     public void displayPreference_withOneActiveSim() {
         String simName = "SIM1";
-        String title = mContext.getString(R.string.enable_2g_title);
         List<SubscriptionInfo> subInfos = new ArrayList();
         subInfos.add(getSubscriptionInfo(SUB_ID, simName));
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(subInfos);
@@ -122,9 +128,8 @@ public final class Enable2gToggleListControllerTest {
         }).when(mPreferenceCategory).addPreference(any(RestrictedSwitchPreference.class));
 
         mController.displayPreference(mPreferenceScreen);
-
-        assertThat(capturedObject[0].getKey()).isEqualTo(title + SUB_ID);
-        assertTrue(capturedObject[0].getTitle().toString().contentEquals(title));
+        assertThat(capturedObject[0].getKey()).isEqualTo(ENABLE_2G + SUB_ID);
+        assertTrue(capturedObject[0].getTitle().toString().contentEquals(ENABLE_2G));
         verify(mPreferenceCategory).addPreference(any());
     }
 
@@ -133,7 +138,6 @@ public final class Enable2gToggleListControllerTest {
         String simOneName = "SIM1";
         String simSecondName = "SIM2";
         int simSecondSubId = 2;
-        String title = mContext.getString(R.string.enable_2g_title);
         List<SubscriptionInfo> subInfos = new ArrayList();
         subInfos.add(getSubscriptionInfo(SUB_ID, simOneName));
         subInfos.add(getSubscriptionInfo(simSecondSubId, simSecondName));
@@ -149,10 +153,10 @@ public final class Enable2gToggleListControllerTest {
 
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(capturedObject.get(0).getKey()).isEqualTo(title + SUB_ID);
-        assertTrue(capturedObject.get(0).getTitle().toString().contentEquals(title));
-        assertThat(capturedObject.get(1).getKey()).isEqualTo(title + simSecondSubId);
-        assertTrue(capturedObject.get(1).getTitle().toString().contentEquals(title));
+        assertThat(capturedObject.get(0).getKey()).isEqualTo(ENABLE_2G + SUB_ID);
+        assertTrue(capturedObject.get(0).getTitle().toString().contentEquals(ENABLE_2G));
+        assertThat(capturedObject.get(1).getKey()).isEqualTo(ENABLE_2G + simSecondSubId);
+        assertTrue(capturedObject.get(1).getTitle().toString().contentEquals(ENABLE_2G));
         verify(mPreferenceCategory, times(2)).addPreference(any());
     }
 

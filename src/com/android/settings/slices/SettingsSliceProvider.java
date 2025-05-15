@@ -52,7 +52,6 @@ import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.notification.VolumeSeekBarPreferenceController;
 import com.android.settings.notification.modes.DndModeSliceBuilder;
-import com.android.settings.notification.zen.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SliceBroadcastRelay;
 import com.android.settingslib.utils.ThreadUtils;
@@ -122,7 +121,7 @@ public class SettingsSliceProvider extends SliceProvider {
      * permission can use them.
      */
     private static final List<Uri> PUBLICLY_SUPPORTED_CUSTOM_SLICE_URIS =
-            android.app.Flags.modesUi() && !android.app.Flags.modesUiDndSlice()
+            !android.app.Flags.modesUiDndSlice()
                     ?
                     Arrays.asList(
                             CustomSliceRegistry.BLUETOOTH_URI,
@@ -196,10 +195,8 @@ public class SettingsSliceProvider extends SliceProvider {
         }
 
         if (CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
-            if (android.app.Flags.modesUi() && android.app.Flags.modesUiDndSlice()) {
+            if (android.app.Flags.modesUiDndSlice()) {
                 registerIntentToUri(DndModeSliceBuilder.INTENT_FILTER, sliceUri);
-            } else if (!android.app.Flags.modesUi()) {
-                registerIntentToUri(ZenModeSliceBuilder.INTENT_FILTER, sliceUri);
             }
             return;
         } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
@@ -272,12 +269,9 @@ public class SettingsSliceProvider extends SliceProvider {
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(getContext())
                         .createWifiCallingSlice(sliceUri);
-            } else if (android.app.Flags.modesUi() && android.app.Flags.modesUiDndSlice()
+            } else if (android.app.Flags.modesUiDndSlice()
                     && CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
                 return DndModeSliceBuilder.getSlice(getContext());
-            } else if (!android.app.Flags.modesUi()
-                    && CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
-                return ZenModeSliceBuilder.getSlice(getContext());
             } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
                 return BluetoothSliceBuilder.getSlice(getContext());
             } else if (CustomSliceRegistry.ENHANCED_4G_SLICE_URI.equals(sliceUri)) {

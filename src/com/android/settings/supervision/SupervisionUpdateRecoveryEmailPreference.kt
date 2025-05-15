@@ -49,6 +49,8 @@ class SupervisionUpdateRecoveryEmailPreference :
     override val title: Int
         get() = R.string.supervision_update_recovery_email_preference_title
 
+    override fun dependencies(context: Context) = arrayOf(SupervisionSetupRecoveryPreference.KEY)
+
     override fun getSummary(context: Context): CharSequence? {
         return context
             .getSystemService(SupervisionManager::class.java)

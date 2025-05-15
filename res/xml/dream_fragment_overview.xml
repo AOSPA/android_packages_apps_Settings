@@ -50,12 +50,11 @@
         android:summary="@string/dream_complications_toggle_summary"
         settings:controller="com.android.settings.dream.DreamComplicationPreferenceController"/>
 
-    <com.android.settingslib.PrimarySwitchPreference
+    <com.android.settings.dream.LowLightModePreference
         android:key="low_light_mode"
         android:order="350"
         android:title="@string/screensaver_settings_low_light_mode"
-        android:fragment="com.android.settings.dream.LowLightModePicker"
-        settings:controller="com.android.settings.dream.LowLightModePreferenceController" />
+        android:fragment="com.android.settings.dream.LowLightModePicker" />
 
     <SwitchPreferenceCompat
         android:key="dream_home_controls_toggle"

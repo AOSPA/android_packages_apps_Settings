@@ -434,7 +434,7 @@
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Vingerafdruk"</string>
     <string name="security_settings_fingerprint_title" msgid="7564944192711394896">"Vingerafdrukken"</string>
     <string name="security_settings_fingerprint_description" msgid="629796299137157167"></string>
-    <string name="security_settings_category_use_fingerprint" msgid="4273932435979772330">"Vingerafdruk gebruiken om"</string>
+    <string name="security_settings_category_use_fingerprint" msgid="4273932435979772330">"Vingerafdruk gebruiken om het volgende te doen"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Vingerafdruk"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Bij gebruik van Ontgrendelen met vingerafdruk"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Vingerafdruk voor werk"</string>
@@ -443,7 +443,7 @@
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Vingerafdruk toevoegen"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Vingerafdruk toegevoegd}other{# vingerafdrukken toegevoegd}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Instellen nodig"</string>
-    <string name="security_settings_fingerprint_preference_summary_none_new" msgid="510376523784190149">"Vingerafdruk toevoegen"</string>
+    <string name="security_settings_fingerprint_preference_summary_none_new" msgid="510376523784190149">"Voeg vingerafdruk toe"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Je vingerafdruk instellen"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Ontgrendelen met vingerafdruk toestaan"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Je vingerafdruk gebruiken"</string>
@@ -540,8 +540,8 @@
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Als je Ontgrendelen via gezichtsherkenning en Ontgrendelen met vingerafdruk instelt, vraagt je telefoon naar je vingerafdruk wanneer je een mondkapje draagt of in een donkere omgeving bent"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Manieren om te ontgrendelen"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Gezicht of vingerafdruk gebruiken voor"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Je telefoon te ontgrendelen"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Te laten verifiëren dat jij het bent in apps"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Je telefoon ontgrendelen"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Laten verifiëren dat jij het bent in apps"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Gezicht gebruiken"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Met je vingerafdruk"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Met je gezicht of vingerafdruk"</string>
@@ -1170,8 +1170,10 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Toestaan"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Weigeren"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*verplicht"</string>
+    <!-- no translation found for wifi_shared_network_login_screen_warning (7611029233083731552) -->
+    <skip />
     <string name="share_wifi_network" msgid="4064997404339571584">"Dit netwerk delen met andere apparaatgebruikers"</string>
-    <string name="share_wifi_network_summary" msgid="4316236421149769333">"Alle gebruikers op dit apparaat kunnen een gedeeld netwerk bekijken en verbinding maken met een gedeeld netwerk. Beheerders kunnen een gedeeld netwerk verwijderen. Meer informatie"</string>
+    <string name="share_wifi_network_summary" msgid="4316236421149769333">"Alle gebruikers op dit apparaat kunnen een gedeeld netwerk bekijken en hiermee verbinding maken. Beheerders kunnen een gedeeld netwerk verwijderen. Meer informatie"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Andere gebruikers toestaan de netwerkconfiguratie te bewerken"</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Dit netwerk heeft geen internettoegang. Verbonden blijven?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Sommige apps en services werken mogelijk niet vanwege de beperkte connectiviteit. Toch gebruiken?"</string>
@@ -1452,8 +1454,26 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Aan / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Uit"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"Wanneer tonen"</string>
+    <!-- no translation found for screensaver_settings_low_light_mode (271972828076673743) -->
+    <skip />
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Optillen om te activeren"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Beperken tot draadloos opladen"</string>
+    <!-- no translation found for low_light_display_behavior_main_switch_title (7138165032358139627) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_subtitle (1833984014035605413) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_screen_off (4203092158668290404) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_low_light_clock_dream (2235561363691252383) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_summary_on (4218678742261840224) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_summary_off (4565368094992120316) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_screen_off_full_summary (6671607843870561892) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_low_light_clock_dream_full_summary (1145914465090731721) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Inactief scherm"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Wanneer tonen"</string>
     <string name="doze_title" msgid="1523090408230862316">"Scherm activeren voor meldingen"</string>
@@ -2114,13 +2134,12 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Muistoetsen gebruiken"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Sneltoets voor muistoetsen"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Gebruik je toetsenbord om de cursor te bedienen"</string>
-    <!-- no translation found for mouse_keys_max_speed_title (1788751803245422659) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_decrease_button_description (9077624857206032509) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_increase_button_description (2721662400858172203) -->
-    <skip />
+    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Maximale snelheid"</string>
+    <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Verlagen"</string>
+    <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Verhogen"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Omgekeerd scrollen"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_title (525897583406210252) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll omhoog om de pagina omlaag te verplaatsen"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Scrollen"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Gecontroleerd scrollen"</string>
@@ -2149,7 +2168,7 @@
     <string name="mouse_settings_summary" msgid="8732973589097368936">"Cursorsnelheid, knoppen wisselen, knopaanpassing"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Snelheid van aanwijzer, gebaren"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tikken om te klikken"</string>
-    <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Tik en sleep om items te verplaatsen"</string>
+    <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Tikken en slepen om items te verplaatsen"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Dubbeltik en sleep met je vinger over de touchpad om objecten te verplaatsen"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Touchpadgebaren"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Pas afzonderlijke navigatiegebaren voor de touchpad aan"</string>
@@ -2200,6 +2219,20 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Volgende"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Opnieuw opstarten"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Klaar"</string>
+    <!-- no translation found for action_corners_title (8971354126563421646) -->
+    <skip />
+    <!-- no translation found for action_corners_summary (4245089615854251124) -->
+    <skip />
+    <!-- no translation found for action_corners_intro (4384209411870086502) -->
+    <skip />
+    <!-- no translation found for action_corners_bottom_left_title (8677233546610832717) -->
+    <skip />
+    <!-- no translation found for action_corners_bottom_right_title (2155948558861306738) -->
+    <skip />
+    <!-- no translation found for action_corners_top_left_title (6604149810499060560) -->
+    <skip />
+    <!-- no translation found for action_corners_top_right_title (583996793984142329) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Functietoetsen"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Wijzig het gedrag van toetsen"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Alles resetten"</string>
@@ -2402,7 +2435,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tik drie keer om te zoomen"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Zoomen door te tikken op een knop"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zoom snel in op het scherm om content groter te maken"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Zo zoom je in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {1,number,integer}. Tik op het scherm.&lt;br/&gt; {2,number,integer}. Sleep met 2 vingers om te navigeren op het scherm.&lt;br/&gt; {3,number,integer}. Knijp met 2 vingers om het zoomniveau aan te passen.&lt;br/&gt; {4,number,integer}. Gebruik de snelkoppeling om de vergroting te stoppen.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Zo zoom je tijdelijk in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Zorg dat je vergrotingstype is ingesteld op volledig scherm.&lt;br/&gt; {1,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {2,number,integer}. Houd je vinger op het scherm.&lt;br/&gt; {3,number,integer}. Sleep met een vinger om te navigeren op het scherm.&lt;br/&gt; {4,number,integer}. Haal je vinger van het scherm om de vergroting te stoppen."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Zo zoom je in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {1,number,integer}. Tik op het scherm.&lt;br/&gt; {2,number,integer}. Sleep met 2 vingers om te navigeren op het scherm.&lt;br/&gt; {3,number,integer}. Knijp met 2 vingers om het zoomniveau aan te passen.&lt;br/&gt; {4,number,integer}. Gebruik de snelkoppeling om de vergroting te stoppen.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Zo zoom je tijdelijk in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Zorg dat je vergrotingstype is ingesteld op volledig scherm.&lt;br/&gt; {1,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {2,number,integer}. Houd je vinger op het scherm.&lt;br/&gt; {3,number,integer}. Sleep met je vinger om te navigeren op het scherm.&lt;br/&gt; {4,number,integer}. Haal je vinger van het scherm om de vergroting te stoppen."</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;Zo zoom je met het toetsenbord:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {1,number,integer}. Houd &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; en &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; ingedrukt en druk op + of - om in of uit te zoomen.&lt;br/&gt; {2,number,integer}. Houd &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; en &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; ingedrukt en druk op de pijltoetsen om te navigeren op het scherm.&lt;br/&gt; {3,number,integer}. Gebruik de snelkoppeling om de vergroting te stoppen."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Zo zoom je in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {1,number,integer}. Tik op het scherm.&lt;br/&gt; {2,number,integer}. Sleep met 2 vingers om te navigeren op het scherm.&lt;br/&gt; {3,number,integer}. Knijp met 2 vingers om het zoomniveau aan te passen.&lt;br/&gt; {4,number,integer}. Gebruik de snelkoppeling om de vergroting te stoppen.&lt;br/&gt;&lt;br/&gt; Je kunt ook tijdelijk inzoomen en meer."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Zo zoom je in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {1,number,integer}. Tik op het scherm.&lt;br/&gt; {2,number,integer}. Sleep 1 of 2 vingers om over het scherm te bewegen.&lt;br/&gt; {3,number,integer}. Knijp met 2 vingers om het zoomniveau aan te passen.&lt;br/&gt; {4,number,integer}. Gebruik de snelkoppeling om de vergroting te stoppen.&lt;br/&gt;&lt;br/&gt; Je kunt ook tijdelijk inzoomen en meer."</string>
@@ -2423,7 +2456,7 @@
     <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Swipe omlaag vanaf de bovenkant van het scherm om deze functie te gebruiken. Zoek daarna de tegel {featureName}.}other{Swipe met # vingers omlaag vanaf de bovenkant van het scherm om deze functie te gebruiken. Zoek daarna de tegel {featureName}.}}"</string>
     <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Dit snelle gebaar is beschikbaar nadat je het apparaat hebt ingesteld."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Als je deze functie wilt gebruiken, swipe je met 2 vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met 2 vingers omhoog en houd je vingers op het scherm om tussen functies te wisselen."</string>
-    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Als je deze functie wilt gebruiken, swipe je omhoog vanaf de onderkant van het scherm}other{Als je deze functie wilt gebruiken, swipe je met # vingers omhoog vanaf de onderkant van het scherm}}"</string>
+    <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Swipe omhoog vanaf de onderkant van het scherm om deze functie te gebruiken}other{Swipe met # vingers omhoog vanaf de onderkant van het scherm om deze functie te gebruiken}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Als je deze functie wilt gebruiken, swipe je met 3 vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met 3 vingers omhoog en houd vast om tussen functies te schakelen."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="13364319079385020">"Knop aanpassen"</string>
@@ -2529,6 +2562,36 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Korter"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Langer"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tijd voor automatisch klikken"</string>
+    <!-- no translation found for accessibility_autoclick_main_switch_title (1968409462935503999) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_shortcut_title (5337438503429302081) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_title (4625722241966706931) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_summary (3685183305849901339) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_title (8988239939645854279) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_summary (6993249143332791469) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_large (3802014133363801617) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_large (1115930762484519488) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_default (4934363711068310028) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_small (3987901922883658043) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_small (6056674574040448864) -->
+    <skip />
+    <!-- no translation found for autoclick_ignore_minor_cursor_movement_title (5038721995720529808) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_title (9213418243482609005) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_title (2580632445700896655) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_message (8007946937334710898) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Trillen en haptische technologie"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"De trillingssterkte beheren voor verschillende typen gebruik"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Aan"</string>
@@ -3298,8 +3361,7 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Werkprofiel verwijderen?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Alle apps en gegevens worden verwijderd."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Alle apps en gegevens in dit profiel worden verwijderd als je doorgaat."</string>
-    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
-    <skip />
+    <string name="work_profile_confirm_remove_message_with_esim" msgid="1169605178915445183">"Alle apps en gegevens in dit profiel, waaronder zakelijke e-simkaarten, worden verwijderd als je doorgaat."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Alle apps en gegevens worden verwijderd."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"Nieuwe gebruiker toevoegen…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Gebruiker verwijderen"</string>
@@ -3866,7 +3928,10 @@
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Verberg gevoelige werkcontent"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Hoe moeten profielmeldingen worden getoond als je apparaat is vergrendeld?"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Wat je wilt tonen op het vergrendelscherm"</string>
-    <string name="lock_screen_notification_show_seen_title" msgid="1407033848315515970">"Geziene meldingen tonen"</string>
+    <!-- no translation found for lock_screen_notification_show_viewed_notifs (4104703346314965171) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_show_viewed_notif_icons (1197681203638927375) -->
+    <skip />
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"Stille meldingen tonen"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"Gevoelige content tonen"</string>
     <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"Gevoelige werkprofielcontent tonen"</string>
@@ -4698,7 +4763,8 @@
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet openen"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Snelkoppeling voor vergrendelscherm wijzigen?"</string>
-    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> is ook je snelkoppeling op het vergrendelscherm. Wil je deze wijzigen?"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (7572626485518591928) -->
+    <skip />
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Je huidige standaardportemonnee-app ondersteunt dit gebaar niet"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Standaardportemonnee wijzigen"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Camera omdraaien voor selfie"</string>
@@ -5681,7 +5747,7 @@
     <string name="audio_sharing_description" msgid="1660255584523640628">"Laat anderen samen met jou naar je media luisteren. Ze hebben dan een eigen koptelefoon met LE Audio nodig."</string>
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Actieve media-apparaten"</string>
     <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Audio van gesprek"</string>
-    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Alleen afspelen op <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Speel alleen af op <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Een testgeluid afspelen"</string>
     <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Iedereen die luistert, zou het moeten horen"</string>
     <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Instellingen voor audiostream"</string>
@@ -5689,7 +5755,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Wachtwoord"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Compatibiliteit verbeteren"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Dit helpt sommige apparaten, zoals hoortoestellen, verbinding te maken door de audiokwaliteit te verminderen"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Hiermee wordt het delen van audio uitgezet om de compatibiliteit in te stellen"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Het delen van audio wordt uitgezet om de compatibiliteit in te stellen"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Luisteren naar audio in de buurt"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Audio delen ondersteunt Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Naam van audiostream"</string>
@@ -5773,10 +5839,8 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"TalkBack tijdelijk uitzetten"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"TalkBack kan niet worden gebruikt als je naar audiostreams luistert. Zet TalkBack uit om te beginnen met luisteren."</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Uitzetten"</string>
-    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_title (1017164439467110153) -->
-    <skip />
-    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_subtitle (5856842223436525336) -->
-    <skip />
+    <string name="audio_streams_dialog_turn_off_audio_sharing_title" msgid="1017164439467110153">"Kan geen audiostreams beluisteren tijdens delen"</string>
+    <string name="audio_streams_dialog_turn_off_audio_sharing_subtitle" msgid="5856842223436525336">"Zet audio delen uit om naar deze stream te luisteren."</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Een apparaat verbinden"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Details van audiostream"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR-code van audiostream"</string>
@@ -5821,21 +5885,16 @@
     <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
     <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"toezicht, ouderlijk toezicht, opties voor ouderlijk toezicht"</string>
-    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
-    <skip />
+    <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Je pincode beheren"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Herstelmailadres toevoegen"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Herstelmailadres laten verifiëren"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Pincode wijzigen"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Pincode vergeten"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Je herstelmailadres updaten"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Pincode verwijderen"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Hiermee worden al je instellingen voor toezicht gereset"</string>
-    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
-    <skip />
-    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
-    <skip />
+    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Herstelmailadres toevoegen"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Je e-mailadres laten verifiëren"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Webcontentfilters"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Websites"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"Expliciete webcontent blokkeren"</string>
@@ -5846,11 +5905,8 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"Voor zoekmachines op dit apparaat"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"Filter uit"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Pincode voor toezicht invoeren"</string>
-    <!-- no translation found for supervision_choose_your_pin_header (3872062168986738629) -->
-    <skip />
-    <!-- no translation found for supervision_confirm_your_pin_header (8236956712482718354) -->
-    <skip />
-    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
-    <skip />
+    <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Een pincode voor ouderlijk toezicht instellen"</string>
+    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Pincode bevestigen"</string>
+    <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Pincode geüpdatet"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animatie voor <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

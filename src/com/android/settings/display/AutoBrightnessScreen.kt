@@ -22,10 +22,12 @@ import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
 import com.android.settings.R
+import com.android.settings.Settings
 import com.android.settings.contract.KEY_ADAPTIVE_BRIGHTNESS
 import com.android.settings.flags.Flags
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.restriction.PreferenceRestrictionMixin
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor
@@ -35,6 +37,7 @@ import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -87,6 +90,9 @@ class AutoBrightnessScreen :
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, Settings.AdaptiveBrightnessActivity::class.java, metadata?.key)
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(

@@ -265,7 +265,7 @@ public class BluetoothDetailsHearingAidsPresetsController extends
     }
 
     private ListPreference createPresetPreference(Context context) {
-        ListPreference preference = new ListPreference(context);
+        ListPreference preference = new PresetListPreference(context);
         preference.setKey(KEY_HEARING_AIDS_PRESETS);
         preference.setOrder(ORDER_HEARING_AIDS_PRESETS);
         preference.setTitle(context.getString(R.string.bluetooth_hearing_aids_presets));

@@ -20,8 +20,6 @@ import static android.provider.Settings.ACTION_PRIVACY_SETTINGS;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 import static android.service.notification.ZenModeConfig.MANUAL_RULE_ID;
 
-import android.annotation.FlaggedApi;
-import android.app.Flags;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -404,15 +402,8 @@ public class Settings extends SettingsActivity {
     public static class PaymentSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrintSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrintJobSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class ZenModeSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class ZenModeAutomationSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class ZenModeScheduleRuleSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class ZenModeEventRuleSettingsActivity extends SettingsActivity { /* empty */ }
-    @FlaggedApi(Flags.FLAG_MODES_UI)
     public static class ModeSettingsActivity extends SettingsActivity { /* empty */ }
-    @FlaggedApi(Flags.FLAG_MODES_UI)
     public static class ModesSettingsActivity extends SettingsActivity { /* empty */ }
-    @FlaggedApi(Flags.FLAG_MODES_UI)
     public static class DndModeDisplaySettingsActivity extends SettingsActivity {
         @Override
         protected void onCreate(Bundle savedState) {

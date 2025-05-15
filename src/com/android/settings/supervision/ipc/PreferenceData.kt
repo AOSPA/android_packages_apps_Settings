@@ -32,6 +32,9 @@ import android.os.Bundle
  * @property trailingIcon Optional trailing icon resource ID.
  * @property targetPackage Optional target package name for limiting the applications that can
  *   perform the action.
+ * @property isVisible Optional boolean indicating whether the preference should be visible,
+ *   defaults to true.
+ * @property learnMoreLink Optional link to a help center article for more information.
  */
 data class PreferenceData(
     val icon: Int? = null,
@@ -40,6 +43,8 @@ data class PreferenceData(
     var action: String? = null,
     var trailingIcon: Int? = null,
     var targetPackage: String? = null,
+    var isVisible: Boolean = true,
+    var learnMoreLink: String? = null,
 ) {
     constructor(
         bundle: Bundle
@@ -50,6 +55,8 @@ data class PreferenceData(
         action = bundle.getString(ACTION),
         trailingIcon = bundle.getInt(ACTION_ICON, -1).takeIf { it != -1 },
         targetPackage = bundle.getString(TARGET_PACKAGE),
+        isVisible = bundle.getBoolean(IS_VISIBLE, true),
+        learnMoreLink = bundle.getString(LEARN_MORE_LINK),
     )
 
     fun toBundle(): Bundle {
@@ -60,6 +67,8 @@ data class PreferenceData(
             action?.let { putString(ACTION, it) }
             trailingIcon?.let { putInt(ACTION_ICON, it) }
             targetPackage?.let { putString(TARGET_PACKAGE, it) }
+            putBoolean(IS_VISIBLE, isVisible)
+            learnMoreLink?.let { putString(LEARN_MORE_LINK, it) }
         }
     }
 
@@ -70,5 +79,7 @@ data class PreferenceData(
         private const val ACTION = "action"
         private const val ACTION_ICON = "trailing_icon"
         private const val TARGET_PACKAGE = "target_package"
+        private const val IS_VISIBLE = "is_visible"
+        private const val LEARN_MORE_LINK = "learn_more_link"
     }
 }

@@ -30,6 +30,8 @@ class SupervisionPinRecoveryPreference : PreferenceMetadata, PreferenceAvailabil
     override val title: Int
         get() = R.string.supervision_add_forgot_pin_preference_title
 
+    override fun dependencies(context: Context) = arrayOf(SupervisionSetupRecoveryPreference.KEY)
+
     override fun isAvailable(context: Context): Boolean {
         if (!Flags.enableSupervisionPinRecoveryScreen()) {
             return false

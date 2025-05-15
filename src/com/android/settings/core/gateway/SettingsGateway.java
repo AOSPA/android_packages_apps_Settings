@@ -175,11 +175,6 @@ import com.android.settings.notification.modes.ZenModeDisplayFragment;
 import com.android.settings.notification.modes.ZenModeFragment;
 import com.android.settings.notification.modes.ZenModesListFragment;
 import com.android.settings.notification.zen.ZenAccessSettings;
-import com.android.settings.notification.zen.ZenModeAutomationSettings;
-import com.android.settings.notification.zen.ZenModeBlockedEffectsSettings;
-import com.android.settings.notification.zen.ZenModeEventRuleSettings;
-import com.android.settings.notification.zen.ZenModeScheduleRuleSettings;
-import com.android.settings.notification.zen.ZenModeSettings;
 import com.android.settings.password.ChooseLockPassword;
 import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.print.PrintJobSettingsFragment;
@@ -319,13 +314,11 @@ public class SettingsGateway {
             AppBubbleNotificationSettings.class.getName(),
             ZenAccessSettings.class.getName(),
             ZenAccessDetails.class.getName(),
-            ZenModeAutomationSettings.class.getName(),
             PrintSettingsFragment.class.getName(),
             PrintJobSettingsFragment.class.getName(),
             TrustedCredentialsSettings.class.getName(),
             PaymentSettings.class.getName(),
             PhysicalKeyboardFragment.class.getName(),
-            ZenModeSettings.class.getName(),
             SoundSettings.class.getName(),
             ConversationListSettings.class.getName(),
             ConfigureNotificationSettings.class.getName(),
@@ -341,9 +334,6 @@ public class SettingsGateway {
             ApnSettings.class.getName(),
             ApnEditor.class.getName(),
             WifiCallingSettings.class.getName(),
-            ZenModeScheduleRuleSettings.class.getName(),
-            ZenModeEventRuleSettings.class.getName(),
-            ZenModeBlockedEffectsSettings.class.getName(),
             ProcessStatsUi.class.getName(),
             AdvancedPowerUsageDetail.class.getName(),
             ProcessStatsSummary.class.getName(),

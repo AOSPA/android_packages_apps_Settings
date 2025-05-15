@@ -43,8 +43,4 @@ interface FooterPreferenceBinding : PreferenceBinding {
         preference.title = metadata.getPreferenceTitle(preference.context)
         preference.isSelectable = false
     }
-
-    companion object {
-        @JvmStatic val INSTANCE = object : FooterPreferenceBinding {}
-    }
 }

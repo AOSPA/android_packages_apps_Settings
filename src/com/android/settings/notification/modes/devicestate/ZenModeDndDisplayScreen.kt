@@ -54,11 +54,11 @@ class ZenModeDndDisplayScreen :
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
-    override fun isFlagEnabled(context: Context) = Flags.deviceState() && AppFlags.modesUi()
+    override fun isFlagEnabled(context: Context) = Flags.deviceState()
 
     override fun fragmentClass() = PreferenceFragment::class.java
 
-    override fun isAvailable(context: Context) = AppFlags.modesUi() && context.hasDndMode()
+    override fun isAvailable(context: Context) = context.hasDndMode()
 
     override fun getSummary(context: Context): CharSequence? {
         val summaryHelper = ZenModeSummaryHelper(context, ZenHelperBackend.getInstance(context))
@@ -66,10 +66,8 @@ class ZenModeDndDisplayScreen :
     }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
-        if (AppFlags.modesUi()) {
             Intent(context, DndModeDisplaySettingsActivity::class.java)
                 .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, context.getDndMode()?.id)
-        } else null
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 

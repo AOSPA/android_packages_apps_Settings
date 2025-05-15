@@ -52,6 +52,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 /**
  * Interstitial page for modes that are disabled, but not disabled by the user. This page
@@ -78,7 +79,9 @@ public class SetupInterstitialActivity extends FragmentActivity {
         Utils.setupEdgeToEdge(this);
         super.onCreate(savedInstanceState);
         mBackend = ZenModesBackend.getInstance(this);
-        setContentView(R.layout.mode_interstitial_layout);
+        setContentView(SettingsThemeHelper.isExpressiveTheme(this)
+                ? R.layout.mode_interstitial_layout_expressive
+                : R.layout.mode_interstitial_layout);
 
         // Set up toolbar to only have a back button & no title
         Toolbar toolbar = findViewById(R.id.action_bar);

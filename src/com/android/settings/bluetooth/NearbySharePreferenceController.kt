@@ -51,6 +51,7 @@ class NearbySharePreferenceController(private val context: Context, key: String)
         }
         nearbyComponentName = ComponentName.unflattenFromString(componentString)?.also {
             intent.setComponent(it)
+            intent.putExtra(EXTRA_REDIRECT_FROM_SETTINGS, true)
             nearbyLabel = getNearbyLabel(it)
         }
     }
@@ -93,4 +94,8 @@ class NearbySharePreferenceController(private val context: Context, key: String)
         } catch(_: NameNotFoundException) {
             null
         }
+
+    companion object {
+        private const val EXTRA_REDIRECT_FROM_SETTINGS = "android.intent.extra.REDIRECTED_FROM_BLUETOOTH_SHARE"
+    }
 }

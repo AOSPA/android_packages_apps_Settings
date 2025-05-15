@@ -38,6 +38,7 @@ import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummaryScreen
 import com.android.settings.language.LanguageSettingScreen
 import com.android.settings.location.LocationScreen
+import com.android.settings.location.RecentLocationAccessScreen
 import com.android.settings.network.AdaptiveConnectivityScreen
 import com.android.settings.network.MobileNetworkListScreen
 import com.android.settings.network.NetworkDashboardScreen
@@ -142,6 +143,10 @@ fun getScreenConfigs() =
             enabled = true,
             screenKey = LocationScreen.KEY,
             category = setOf(DeviceStateCategory.UNCATEGORIZED),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = RecentLocationAccessScreen.KEY,
         ),
         PerScreenConfig(
             enabled = true,

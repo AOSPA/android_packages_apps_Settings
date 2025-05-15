@@ -691,6 +691,8 @@
     <string name="add">Add</string>
     <!-- Button label for remove action [CHAR LIMIT=20] -->
     <string name="remove">Remove</string>
+    <!-- Button label for generic process action [CHAR LIMIT=20] -->
+    <string name="process">Process</string>
 
     <!-- Title of the Settings activity shown within the application itself. -->
     <string name="settings_label">Settings</string>
@@ -2088,6 +2090,12 @@
     <!-- Phonebook sharing toggle detailed message in pairing dialogs.  [CHAR LIMIT=NONE] -->
     <string name="bluetooth_pairing_phonebook_toggle_details">Info will be used for call announcements and more</string>
 
+    <!-- Title for the dialog to confirm PIN. [CHAR LIMIT=40] -->
+    <string name="bluetooth_pairing_confirmation_title">Check pairing codes</string>
+
+    <!-- Message for the dialog to confirm PIN. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_pairing_confirmation_msg">Check if this code matches the one on <xliff:g id="device_name">%1$s</xliff:g>.\n\nFor your security, do not enter this code anywhere.</string>
+
     <!-- Title for BT error dialogs. -->
     <string name="bluetooth_error_title"></string>
 
@@ -3392,7 +3400,7 @@
     <string name="screensaver_settings_summary_off">Off</string>
     <!-- Dream settings screen, action label, when to dream [CHAR LIMIT=20] -->
     <string name="screensaver_settings_when_to_dream">When to show</string>
-    <!-- Dream settings screen, action label, what to show in low light [CHAR LIMIT=30] -->
+    <!-- Dream settings screen, action label, what to show in low light [CHAR LIMIT=NONE] -->
     <string name="screensaver_settings_low_light_mode">Low light mode</string>
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
     <string name="lift_to_wake_title">Lift to wake</string>
@@ -5538,9 +5546,9 @@
     <!-- Option title of cursor following edge mode in the mode selection dialog. [CHAR LIMIT=none] -->
     <string name="accessibility_magnification_cursor_following_edge">Move screen when mouse touches edges of screen</string>
     <!-- Title for accessibility follow typing preference for magnification. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_follow_typing_title">Magnify typing</string>
+    <string name="accessibility_screen_magnification_follow_typing_title">Follow typing</string>
     <!-- Summary for accessibility follow typing preference for magnification. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_follow_typing_summary">Magnifier follows text as you type</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary">The magnifier follows text as you type</string>
     <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_follow_keyboard_title">Magnify keyboard focus</string>
     <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
@@ -5548,13 +5556,13 @@
     <!-- Title for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_nav_ime_title">Magnify keyboard</string>
     <!-- Summary for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_nav_ime_summary">Keyboard is magnified with your content</string>
+    <string name="accessibility_screen_magnification_nav_ime_summary">Zoom into the keyboard to see emojis and letters when using full-screen magnification</string>
     <!-- Summary for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary">Unavailable while only magnifying part of the screen</string>
     <!-- Title for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_always_on_title">Keep on while switching apps</string>
     <!-- Summary for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_always_on_summary">Magnifier stays on and zooms out when you switch apps</string>
+    <string name="accessibility_screen_magnification_always_on_summary">The magnifier stays on and zooms out when you switch apps</string>
     <!-- Summary for accessibility magnifier preference where the always on toggle is unavailable while partial-only capability. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_always_on_unavailable_summary">Unavailable while only magnifying part of the screen</string>
     <!-- Title for accessibility on-screen joystick controller preference that controls magnification position. [CHAR LIMIT=35] -->
@@ -8619,8 +8627,6 @@ Data usage charges may apply.</string>
 
     <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="sound_dashboard_summary">Volume and vibration</string>
-    <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="sound_dashboard_summary_with_dnd">Volume, vibration, Do Not Disturb</string>
 
     <!-- Sound: Title for the option managing media volume. [CHAR LIMIT=30] -->
     <string name="media_volume_option_title">Media volume</string>
@@ -8908,27 +8914,6 @@ Data usage charges may apply.</string>
     <!-- Duration in hours and minutes for the length of a Do Not Disturb schedule. For example "1 hr, 22 min" -->
     <string name="zen_mode_schedule_duration"><xliff:g example="10" id="hours">%1$d</xliff:g> hr, <xliff:g example="20" id="minutes">%2$d</xliff:g> min</string>
 
-    <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
-    <string name="zen_mode_schedule_category_title">Schedule</string>
-
-    <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=46] -->
-    <string name="zen_mode_automation_suggestion_title">Silence phone at certain times</string>
-
-    <!--  Do not disturb: Summary for the zen mode automation option Suggestion. [CHAR LIMIT=55] -->
-    <string name="zen_mode_automation_suggestion_summary">Set Do Not Disturb rules</string>
-
-    <!--  Do not disturb: Header for the Do Not Disturb automatic rules. [CHAR LIMIT=55] -->
-    <string name="zen_mode_schedule_title">Schedule</string>
-
-    <!--  Do not disturb: Switch toggle to toggle whether to use an automatic dnd rule or not [CHAR LIMIT=40] -->
-    <string name="zen_mode_use_automatic_rule">Use schedule</string>
-
-    <!--  Do not disturb: Zen mode combined summary + condition line [CHAR LIMIT=60] -->
-    <string name="zen_mode_summary_combination"><xliff:g id="mode" example="Priority only">%1$s</xliff:g>: <xliff:g id="exit condition" example="Until you turn this off">%2$s</xliff:g></string>
-
-    <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
-    <string name="zen_mode_settings_category">Allow interruptions that make sound</string>
-
     <!--  Do not disturb: Title for the Visual interruptions option and associated settings page. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_interruptions_settings_title">Block visual disturbances</string>
 
@@ -8995,26 +8980,6 @@ Data usage charges may apply.</string>
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Display options for filtered
         notifications</string>
-    <!-- Do not disturb: Hide notifications screen category title [CHAR LIMIT=100] -->
-    <string name="zen_mode_restrict_notifications_category">When Do Not Disturb is on</string>
-    <!-- Do not disturb: Mute notifications option [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_mute">No sound from notifications</string>
-    <!-- Do not disturb:Mute notifications summary [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_restrict_notifications_mute_summary">You will see notifications on your screen</string>
-    <!-- Do not disturb:Mute notifications footer [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_restrict_notifications_mute_footer">When notifications arrive, your phone won\u2019t make a sound or vibrate.</string>
-    <!-- Do not disturb: Hide notifications option [CHAR LIMIT=76] -->
-    <string name="zen_mode_restrict_notifications_hide">No visuals or sound from notifications</string>
-    <!-- Do not disturb: Hide notifications summary [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_restrict_notifications_hide_summary">You won\u2019t see or hear notifications</string>
-    <!-- Do not disturb: Hide notifications footer [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_restrict_notifications_hide_footer">Your phone won\u2019t show, vibrate or make sound for new or existing notifications. Keep in mind, critical notifications for device activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen.</string>
-    <!-- Do not disturb: Custom settings option [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_custom">Custom</string>
-    <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_enable_custom">Enable custom setting</string>
-    <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_disable_custom">Remove custom setting</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_summary_muted">Notifications shown</string>
     <!-- Do not disturb: restrict notifications page, menu option [CHAR LIMIT=60] -->
@@ -9046,67 +9011,11 @@ Data usage charges may apply.</string>
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
     <string name="zen_mode_block_effect_list">Hide from pull-down shade</string>
 
-    <!-- Do not disturb: what to block summary, none -->
-    <string name="zen_mode_block_effect_summary_none">Never</string>
-    <!-- Do not disturb: what to block summary, screen off -->
-    <string name="zen_mode_block_effect_summary_screen_off">When screen is off</string>
-    <!-- Do not disturb: what to block summary, screen on -->
-    <string name="zen_mode_block_effect_summary_screen_on">When screen is on</string>
-    <!-- Do not disturb: what to block summary, only sound and vibration -->
-    <string name="zen_mode_block_effect_summary_sound">Sound and vibration</string>
-    <!-- Do not disturb: what to block summary, sound vibration and some visual signals-->
-    <string name="zen_mode_block_effect_summary_some">Sound, vibration, and some visual signs of notifications</string>
-    <!-- Do not disturb: what to block summary, all effects -->
-    <string name="zen_mode_block_effect_summary_all">Sound, vibration, and visual signs of notifications</string>
-
-    <string name="zen_mode_blocked_effects_footer">Notifications needed for basic device activity and status will never be hidden.</string>
-
-    <!--  Do not disturb: Zen mode no sounds are exceptions to bypass do not disturb-->
-    <string name="zen_mode_no_exceptions">None</string>
-    <!--  Do not disturb: Zen mode catch all "other" sounds can bypass do not disturb -->
-    <string name="zen_mode_other_options">other options</string>
-
-    <!--  Do not disturb: Button to add new automatic rule to DND. [CHAR LIMIT=30] -->
-    <string name="zen_mode_add">Add</string>
-
     <!--  Do not disturb: Label for button in enable zen dialog that will turn on zen mode. [CHAR LIMIT=30] -->
     <string name="zen_mode_enable_dialog_turn_on">Turn on</string>
 
-    <!--  Do not disturb: Label for button that will turn on zen mode. [CHAR LIMIT=30] -->
-    <string name="zen_mode_button_turn_on">Turn on now</string>
-
-    <!--  Do not disturb: Label for button that will turn off zen mode. [CHAR LIMIT=30] -->
-    <string name="zen_mode_button_turn_off">Turn off now</string>
-
-    <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing end time of DND -->
-    <string name="zen_mode_settings_dnd_manual_end_time">Do Not Disturb is on until <xliff:g id="formatted_time" example="7:00 AM">%s</xliff:g></string>
-
-    <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing length of DND -->
-    <string name="zen_mode_settings_dnd_manual_indefinite">Do Not Disturb will stay on until you turn it off</string>
-
-    <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing how DND was triggered by an automatic DND schedule -->
-    <string name="zen_mode_settings_dnd_automatic_rule">Do Not Disturb was automatically turned on by a schedule (<xliff:g id="rule_name" example="Weeknights">%s</xliff:g>)</string>
-
-    <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer how DND was triggered by an app -->
-    <string name="zen_mode_settings_dnd_automatic_rule_app">Do Not Disturb was automatically turned on by an app (<xliff:g id="app_name" example="Android Services">%s</xliff:g>)</string>
-
     <!-- [CHAR LIMIT=120] Zen mode settings footer: Footer informing user DND has custom settings. -->
     <string name="zen_mode_settings_dnd_custom_settings_footer">Do Not Disturb is on for <xliff:g id="rule_names" example="Sleeping and Work">%s</xliff:g> with custom settings.</string>
-
-    <!-- [CHAR LIMIT=120] Zen mode settings footer: Link following zen_mode_settings_dnd_custom_settings_footer to see the currently applied custom dnd settings. -->
-    <string name="zen_mode_settings_dnd_custom_settings_footer_link"> <annotation id="link">View custom settings</annotation></string>
-
-    <!--[CHAR LIMIT=40] Zen Interruption level: Priority.  -->
-    <string name="zen_interruption_level_priority">Priority only</string>
-
-    <!-- [CHAR LIMIT=20] Accessibility string for current zen mode and selected exit condition. A template that simply concatenates existing mode string and the current condition description.  -->
-    <string name="zen_mode_and_condition"><xliff:g id="zen_mode" example="Priority interruptions only">%1$s</xliff:g>. <xliff:g id="exit_condition" example="For one hour">%2$s</xliff:g></string>
-
-    <!-- Sound settings screen, summary format of do not disturb when on with extra info. [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_sound_summary_on_with_info">On / <xliff:g name="dnd_summary" example="No sound except alarms and media">%1$s</xliff:g></string>
-
-    <!-- Sound settings screen, summary format of do not disturb when on with no extra information. [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_sound_summary_on">On</string>
 
     <!--  Do not disturb: Summary for zen mode duration setting indicating user will be prompted to set dnd duration whenever dnd is manually toggled on [CHAR LIMIT=NONE]-->
     <string name="zen_mode_duration_summary_always_prompt">Ask every time</string>
@@ -9130,45 +9039,15 @@ Data usage charges may apply.</string>
         }
     </string>
 
-    <!-- Summary for the Sound Do not Disturb option when DND isn't currently on. [CHAR LIMIT=NONE]-->
-    <string name="zen_mode_sound_summary_off">
-        {count, plural,
-        =0    {Off}
-        =1    {Off / 1 schedule can turn on automatically}
-        other {Off / # schedules can turn on automatically}
-        }
-    </string>
-
-    <!-- Do not disturb settings, main screen, category header [CHAR LIMIT=120]-->
-    <string name="zen_category_behavior">What can interrupt Do Not Disturb</string>
     <!-- Do not disturb settings, main screen, field, dnd breakthrough [CHAR LIMIT=100]-->
     <string name="zen_category_people">People</string>
     <!-- Do not disturb settings, main screen, field, dnd breakthrough  [CHAR LIMIT=100]-->
     <string name="zen_category_apps">Apps</string>
     <!-- Do not disturb settings, main screen, field, dnd breakthrough  [CHAR LIMIT=100]-->
     <string name="zen_category_exceptions">Alarms &amp; other interruptions</string>
-    <!-- Do not disturb settings, main screen, field, schedules [CHAR LIMIT=100]-->
-    <string name="zen_category_schedule">Schedules</string>
     <!-- Do not disturb settings, main screen, field, duration setting where user can specify how
     long dnd will last when toggling dnd on from qs) [CHAR LIMIT=100] -->
     <string name="zen_category_duration">Duration for Quick Settings</string>
-    <!-- Do not disturb settings, main screen, category header describing settings that do not
-    fit in another group [CHAR LIMIT=100] -->
-    <string name="zen_settings_general">General</string>
-
-    <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
-    <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
-
-    <!-- Do not disturb custom settings dialog title [CHAR LIMIT=40]-->
-    <string name="zen_custom_settings_dialog_title">Custom settings</string>
-    <!-- Do not disturb custom settings dialog button label [CHAR LIMIT=40]-->
-    <string name="zen_custom_settings_dialog_review_schedule">Review schedule</string>
-    <!-- Do not disturb custom settings dialog button label [CHAR LIMIT=40]-->
-    <string name="zen_custom_settings_dialog_ok">Got it</string>
-    <!-- Do not disturb custom settings notifications header [CHAR LIMIT=40]-->
-    <string name="zen_custom_settings_notifications_header">Notifications</string>
-    <!-- Do not disturb custom settings duration header [CHAR LIMIT=40]-->
-    <string name="zen_custom_settings_duration_header">Duration</string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
@@ -9292,6 +9171,10 @@ Data usage charges may apply.</string>
 
     <!-- App Info > Notifications: Title for section where notifications bundles can be configured [CHAR LIMIT=80]-->
     <string name="notification_bundles">Notification organizer</string>
+
+
+    <!-- App Info > Notifications: Title for section where notifications AI features can be configured [CHAR LIMIT=80]-->
+    <string name="notification_ai_features_title">AI-powered notifications</string>
 
     <!-- App Info > Notifications: Title for section where notifications summaries can be configured [CHAR LIMIT=80]-->
     <string name="notification_summarization_title">Notification summaries</string>
@@ -9684,11 +9567,7 @@ Data usage charges may apply.</string>
     <string name="nls_feature_reply_title">Reply to messages</string>
     <string name="nls_feature_reply_summary">It can reply to messages and take action on buttons in notifications, including snoozing or dismissing notifications and answering calls.</string>
     <string name="nls_feature_settings_title">Change settings</string>
-    <string name="nls_feature_settings_summary">It can turn Do Not Disturb on or off and change related settings.</string>
     <string name="nls_feature_modes_settings_summary">It can manage and activate Modes, and change related settings.</string>
-    <string name="notification_listener_disable_warning_summary">
-        If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Do Not Disturb control may also be turned off.
-    </string>
     <string name="notification_listener_disable_modes_warning_summary">
         If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Modes access may also be turned off.
     </string>
@@ -9733,6 +9612,9 @@ Data usage charges may apply.</string>
     <string name="notification_app_level_bundle_subtext">Notifications with similar themes will be silenced and grouped together for a quieter experience</string>
     <string name="notification_bundle_excluded_description">Notifications from these apps won\’t be bundled</string>
     <string name="notification_bundle_manage_excluded_apps_title">Allow notification bundling for apps</string>
+
+    <!-- Label for switch enabling notification adjustments (notification organizer, summaries) for work profile -->
+    <string name="notification_adjustment_work_switch_title">Apply to work profile apps</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
@@ -9868,15 +9750,6 @@ Data usage charges may apply.</string>
     work/personal profile in order to connect it to the corresponding personal app.
     The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
     <string name="interact_across_profiles_install_app_summary">Tap to get the app</string>
-
-    <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb control option. [CHAR LIMIT=40] -->
-    <string name="manage_zen_access_title">Do Not Disturb control</string>
-
-    <!-- Button title that grants 'Do Not Disturb' permission to an app [CHAR_LIMIT=60]-->
-    <string name="zen_access_detail_switch">Allow Do Not Disturb</string>
-
-    <!-- Sound & notification > Do Not Disturb control > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
-    <string name="zen_access_empty_text">No installed apps have requested Do Not Disturb control</string>
 
     <!-- Special App Access: Title for managing Modes access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_modes_access_title">Modes access</string>
@@ -10151,8 +10024,6 @@ Data usage charges may apply.</string>
     <string name="zen_mode_messages_header">Messages that can interrupt</string>
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
     <string name="zen_mode_messages_footer">To make sure allowed messages make sound, check that device is set to ring</string>
-    <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Messages screen footer -->
-    <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
     <!-- Zen mode settings: All messages can bypass DND summary [CHAR LIMIT=NONE -->
     <string name="zen_mode_all_messages_summary">All messages can reach you</string>
@@ -11022,19 +10893,7 @@ Data usage charges may apply.</string>
     <!-- Summary of data item when no data usage [CHAR LIMIT=40] -->
     <string name="no_data_usage">No data used</string>
 
-    <!-- Zen mode access settings - title for warning dialog when enabling access [CHAR LIMIT=NONE] -->
-    <string name="zen_access_warning_dialog_title">Allow access to Do Not Disturb for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
-
-    <!-- Zen mode access settings - summary for warning dialog when enabling access [CHAR LIMIT=NONE] -->
-    <string name="zen_access_warning_dialog_summary">The app will be able to turn on/off Do Not Disturb and make changes to related settings.</string>
-
     <string name="zen_access_disabled_package_warning">Must stay turned on because notification access is on</string>
-
-    <!-- Zen mode access settings - title for warning dialog when revoking access [CHAR LIMIT=NONE] -->
-    <string name="zen_access_revoke_warning_dialog_title">Revoke access to Do Not Disturb for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
-
-    <!-- Zen mode access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
-    <string name="zen_access_revoke_warning_dialog_summary">All Do Not Disturb rules created by this app will be removed.</string>
 
     <!-- Modes access settings - title for warning dialog when enabling access [CHAR LIMIT=NONE] -->
     <string name="zen_modes_access_warning_dialog_title">Allow access to Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
@@ -11344,6 +11203,11 @@ Data usage charges may apply.</string>
 
     <!-- Content description for condition footer button. In talkback mode, double tapping will cause condition list to collapse [CHAR LIMIT=NONE]-->
     <string name="homepage_condition_footer_content_description">Collapse</string>
+
+    <!-- Content description for alert indicator on the homepage. [CHAR LIMIT=NONE] -->
+    <string name="homepage_unnumbered_alert_description">This item has an alert</string>
+    <!-- Content description for alert indicator on the homepage when there is more than one alert. [CHAR LIMIT=NONE] -->
+    <string name="homepage_numbered_alert_description">This item has <xliff:g id="alert_count" example="2">%1$s</xliff:g> alerts</string>
 
     <!-- Name of the setting to change the display's color temperature -->
     <string name="color_temperature">Cool color temperature</string>

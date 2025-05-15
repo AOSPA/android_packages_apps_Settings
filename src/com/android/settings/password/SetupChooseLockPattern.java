@@ -120,13 +120,17 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                         .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
                 final boolean forBiometrics = intent
                         .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
+                final boolean isExpressiveStyle = intent
+                        .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE,
+                                false);
                 final SetupSkipDialog dialog = SetupSkipDialog.newInstance(
                         CREDENTIAL_TYPE_PATTERN,
                         frpSupported,
                         forFingerprint,
                         forFace,
                         forBiometrics,
-                        WizardManagerHelper.isAnySetupWizard(intent));
+                        WizardManagerHelper.isAnySetupWizard(intent),
+                        isExpressiveStyle);
                 dialog.show(getFragmentManager());
                 return;
             }

@@ -668,8 +668,8 @@
     <string name="private_space_face_enroll_introduction_info_looking" msgid="5694757845303924042">"Es posible que el espacio privado se desbloquee si miras el teléfono, aunque no sea tu intención. También pueden desbloquear el espacio privado personas que se parezcan mucho a ti, como un gemelo, o alguien que ponga el dispositivo frente a tu cara."</string>
     <string name="private_space_face_enroll_introduction_info_less_secure" msgid="8460719783943533172">"Usar la cara para desbloquear el espacio privado puede ser menos seguro que un patrón, un PIN o una contraseña difíciles de averiguar"</string>
     <string name="private_space_face_settings_require_attention_details" msgid="2799569069549999689">"Para desbloquear el espacio privado, debes tener los ojos abiertos. Si llevas gafas de sol, quítatelas para que el desbloqueo facial funcione mejor."</string>
-    <string name="private_space_face_settings_footer" msgid="7722256209563543711">"Usa la cara para desbloquear tu espacio privado.\n\nTen en cuenta lo siguiente:\nSolo puedes tener registrada una cara. Si quieres añadir otra, debes eliminar la que ya está registrada.\n\nEs posible que el teléfono se desbloquee si lo miras, aunque no sea tu intención.\n\nOtra persona puede desbloquear el espacio privado si pone el dispositivo frente a tu cara.\n\nEs posible que una persona que se parezca mucho a ti (como un gemelo) pueda desbloquear tu espacio privado."</string>
-    <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"Al usar Desbloqueo facial, solicita siempre una confirmación"</string>
+    <string name="private_space_face_settings_footer" msgid="7722256209563543711">"Usa la cara para desbloquear tu espacio privado.\n\nTen en cuenta que:\nSolo puedes tener registrada una cara. Si quieres añadir otra, debes eliminar la que ya está registrada.\n\nEs posible que el teléfono se desbloquee si lo miras, aunque no sea tu intención.\n\nOtra persona puede desbloquear el espacio privado si pone el dispositivo frente a tu cara.\n\nEs posible que una persona que se parezca mucho a ti (como un gemelo) pueda desbloquear tu espacio privado."</string>
+    <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"Al usar Desbloqueo facial, solicita siempre una confirmación."</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Formas de desbloqueo"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Igual que el bloqueo de pantalla del dispositivo"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"¿Elegir un nuevo bloqueo para el espacio privado?"</string>
@@ -1170,6 +1170,8 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Permitir"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Denegar"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obligatorio"</string>
+    <!-- no translation found for wifi_shared_network_login_screen_warning (7611029233083731552) -->
+    <skip />
     <string name="share_wifi_network" msgid="4064997404339571584">"Compartir esta red con otros usuarios de dispositivos"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Todos los usuarios de este dispositivo pueden ver y conectarse a una red compartida. Los administradores pueden eliminar una red compartida. Más información"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Permitir que otros usuarios editen la configuración de la red"</string>
@@ -1452,8 +1454,26 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Activado/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Desactivado"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"Cuándo debe mostrarse"</string>
+    <!-- no translation found for screensaver_settings_low_light_mode (271972828076673743) -->
+    <skip />
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Levantar el dispositivo para activarlo"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Solo durante la carga inalámbrica"</string>
+    <!-- no translation found for low_light_display_behavior_main_switch_title (7138165032358139627) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_subtitle (1833984014035605413) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_screen_off (4203092158668290404) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_low_light_clock_dream (2235561363691252383) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_summary_on (4218678742261840224) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_summary_off (4565368094992120316) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_screen_off_full_summary (6671607843870561892) -->
+    <skip />
+    <!-- no translation found for low_light_display_behavior_low_light_clock_dream_full_summary (1145914465090731721) -->
+    <skip />
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Pantalla ambiente"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Cuándo debe mostrarse"</string>
     <string name="doze_title" msgid="1523090408230862316">"Activar pantalla si hay notificaciones"</string>
@@ -2111,16 +2131,15 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Teclas persistentes"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Para las combinaciones de teclas, pulsa las teclas de una en una en lugar de mantenerlas pulsadas todas a la vez"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Teclas de ratón"</string>
-    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Usar teclas de ratón"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Usar Teclas de ratón"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Combinación de teclas del ratón"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Usa el teclado para controlar el puntero"</string>
-    <!-- no translation found for mouse_keys_max_speed_title (1788751803245422659) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_decrease_button_description (9077624857206032509) -->
-    <skip />
-    <!-- no translation found for mouse_keys_seek_bar_increase_button_description (2721662400858172203) -->
-    <skip />
+    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Velocidad máxima"</string>
+    <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Bajar"</string>
+    <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Subir"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Desplazamiento invertido"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_title (525897583406210252) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Desplázate hacia arriba para mover la página hacia abajo"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Desplazamiento"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Desplazamiento controlado"</string>
@@ -2200,6 +2219,20 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Siguiente"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Reiniciar"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Hecho"</string>
+    <!-- no translation found for action_corners_title (8971354126563421646) -->
+    <skip />
+    <!-- no translation found for action_corners_summary (4245089615854251124) -->
+    <skip />
+    <!-- no translation found for action_corners_intro (4384209411870086502) -->
+    <skip />
+    <!-- no translation found for action_corners_bottom_left_title (8677233546610832717) -->
+    <skip />
+    <!-- no translation found for action_corners_bottom_right_title (2155948558861306738) -->
+    <skip />
+    <!-- no translation found for action_corners_top_left_title (6604149810499060560) -->
+    <skip />
+    <!-- no translation found for action_corners_top_right_title (583996793984142329) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Teclas modificadoras"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Cambia el comportamiento de las teclas"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Restablecer todo"</string>
@@ -2352,8 +2385,8 @@
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Ampliar teclado"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"El teclado se amplía con tu contenido"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"No disponible cuando se amplía solo parte de la pantalla"</string>
-    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Mantener activada al cambiar de aplicaciones"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"La lupa permanece activada, pero no se aplica al cambiar de aplicación"</string>
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Mantener activada al cambiar de aplicación"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"La lupa permanece activada y se aleja al cambiar de aplicación"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"No disponible cuando se amplía solo parte de la pantalla"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Activa y mueve la lupa con un joystick en pantalla. Mantén pulsada la lupa y arrástrala con el joystick para controlarla. Toca y arrastra para mover el propio joystick."</string>
@@ -2529,6 +2562,36 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Más corto"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Más largo"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tiempo de clic automático"</string>
+    <!-- no translation found for accessibility_autoclick_main_switch_title (1968409462935503999) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_shortcut_title (5337438503429302081) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_title (4625722241966706931) -->
+    <skip />
+    <!-- no translation found for autoclick_delay_before_click_summary (3685183305849901339) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_title (8988239939645854279) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_summary (6993249143332791469) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_large (3802014133363801617) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_large (1115930762484519488) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_default (4934363711068310028) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_small (3987901922883658043) -->
+    <skip />
+    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_small (6056674574040448864) -->
+    <skip />
+    <!-- no translation found for autoclick_ignore_minor_cursor_movement_title (5038721995720529808) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_title (9213418243482609005) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_title (2580632445700896655) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_message (8007946937334710898) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibración y vibración al pulsar"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Controla la intensidad de la vibración en distintos usos"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Activado"</string>
@@ -3298,8 +3361,7 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"¿Eliminar perfil de trabajo?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Se eliminarán todas las aplicaciones y datos."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Si continúas, se eliminarán todas las aplicaciones y datos."</string>
-    <!-- no translation found for work_profile_confirm_remove_message_with_esim (1169605178915445183) -->
-    <skip />
+    <string name="work_profile_confirm_remove_message_with_esim" msgid="1169605178915445183">"Si continúas, se eliminarán todas las aplicaciones y datos de este perfil, incluidas las eSIMs de trabajo."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Se eliminarán todas las aplicaciones y datos."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"Añadiendo nuevo usuario…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Eliminar usuario"</string>
@@ -3866,7 +3928,10 @@
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ocultar contenido de trabajo sensible"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"¿Cómo quieres que se muestren las notificaciones del perfil cuando el dispositivo esté bloqueado?"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Qué mostrar en la pantalla de bloqueo"</string>
-    <string name="lock_screen_notification_show_seen_title" msgid="1407033848315515970">"Mostrar notificaciones vistas"</string>
+    <!-- no translation found for lock_screen_notification_show_viewed_notifs (4104703346314965171) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_show_viewed_notif_icons (1197681203638927375) -->
+    <skip />
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"Mostrar notificaciones silenciosas"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"Mostrar contenido sensible"</string>
     <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"Mostrar contenido sensible del perfil de trabajo"</string>
@@ -4591,7 +4656,7 @@
     <string name="battery_saver_on_summary" msgid="4605146593966255848">"Activado"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Se activará cuando la batería esté al <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Desactivado"</string>
-    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso de batería de la aplicación"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso de batería de las aplicaciones"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Configura el uso de batería de las aplicaciones"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Ver Ajustes"</string>
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Más información"</string>
@@ -4700,7 +4765,8 @@
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Abrir Wallet"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"¿Cambiar acceso directo de la pantalla de bloqueo?"</string>
-    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="1894710205138218048">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> también es tu acceso directo de la pantalla de bloqueo. ¿Quieres cambiarlo?"</string>
+    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (7572626485518591928) -->
+    <skip />
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"La aplicación de cartera predeterminada no admite este gesto."</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Cambiar cartera predeterminada"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambiar de cámara para hacer selfie"</string>
@@ -5775,10 +5841,8 @@
     <string name="audio_streams_dialog_turn_off_talkback_title" msgid="6824585115302786690">"Desactivar TalkBack temporalmente"</string>
     <string name="audio_streams_dialog_turn_off_talkback_subtitle" msgid="2394295776096273919">"No se puede usar TalkBack mientras escuchas streams de audio. Desactiva TalkBack para empezar a escucharlos."</string>
     <string name="audio_streams_dialog_turn_off_talkback_button" msgid="8049097689955037626">"Desactivar"</string>
-    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_title (1017164439467110153) -->
-    <skip />
-    <!-- no translation found for audio_streams_dialog_turn_off_audio_sharing_subtitle (5856842223436525336) -->
-    <skip />
+    <string name="audio_streams_dialog_turn_off_audio_sharing_title" msgid="1017164439467110153">"No se pueden escuchar streams de audio mientras se comparte audio"</string>
+    <string name="audio_streams_dialog_turn_off_audio_sharing_subtitle" msgid="5856842223436525336">"Para escuchar este stream, desactiva Compartir audio."</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Conectar dispositivo"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Información de la emisión de audio"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Código QR de la emisión de audio"</string>
@@ -5823,21 +5887,16 @@
     <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
     <skip />
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervisión, supervisión parental, controles parentales"</string>
-    <!-- no translation found for supervision_pin_management_preference_title (7721501202320841845) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_add (2247921267270577374) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_verify_recovery (5072554239108915119) -->
-    <skip />
+    <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Gestionar el PIN"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Añade un correo de recuperación"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Verifica el correo de recuperación"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Cambiar PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"He olvidado el PIN"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Actualizar correo de recuperación"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Eliminar PIN"</string>
     <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Se restablecerán todos tus ajustes de supervisión"</string>
-    <!-- no translation found for supervision_add_pin_recovery_title (3487098027604685794) -->
-    <skip />
-    <!-- no translation found for supervision_verify_pin_recovery_title (3166602415814821497) -->
-    <skip />
+    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Añadir correo de recuperación"</string>
+    <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verificar tu correo"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtros de contenido web"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Sitios web"</string>
     <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"Bloquear contenido web explícito"</string>
@@ -5848,11 +5907,8 @@
     <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"Para los buscadores de este dispositivo"</string>
     <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"Filtro desactivado"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Introduce el PIN de supervisión"</string>
-    <!-- no translation found for supervision_choose_your_pin_header (3872062168986738629) -->
-    <skip />
-    <!-- no translation found for supervision_confirm_your_pin_header (8236956712482718354) -->
-    <skip />
-    <!-- no translation found for supervision_pin_reset_success_toast (9163550161698311831) -->
-    <skip />
+    <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Configurar un PIN de controles parentales"</string>
+    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Confirmar PIN"</string>
+    <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN actualizado"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animación de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
 </resources>

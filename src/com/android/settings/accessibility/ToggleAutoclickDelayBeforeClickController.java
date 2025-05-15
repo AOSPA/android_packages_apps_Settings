@@ -65,6 +65,10 @@ public class ToggleAutoclickDelayBeforeClickController
     public ToggleAutoclickDelayBeforeClickController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
+
+        if (Flags.enableAutoclickIndicator()) {
+            resetAutoclickDelayValueIfNecessary();
+        }
     }
 
     @Override
@@ -116,4 +120,19 @@ public class ToggleAutoclickDelayBeforeClickController
                         autoclickDelay);
     }
 
+    private void resetAutoclickDelayValueIfNecessary() {
+        int autoclickDelay = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
+                AccessibilityManager.AUTOCLICK_DELAY_WITH_INDICATOR_DEFAULT);
+
+        // If the flag is just enabled, the delay settings may be 0.
+        // Reset the delay value to default in this case.
+        if (autoclickDelay < AutoclickUtils.MIN_AUTOCLICK_DELAY_MS) {
+            autoclickDelay = AccessibilityManager.AUTOCLICK_DELAY_WITH_INDICATOR_DEFAULT;
+            Settings.Secure.putInt(
+                    mContext.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
+                    autoclickDelay);
+        }
+    }
 }
