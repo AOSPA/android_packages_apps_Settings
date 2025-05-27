@@ -137,8 +137,8 @@ public class WifiHotspotRepository {
      */
     public void queryLastPasswordIfNeeded() {
         SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
-        if (config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OPEN ||
-            config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_WPA3_OWE ||
+        if (config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OPEN &&
+            config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_WPA3_OWE &&
             config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION) {
             return;
         }

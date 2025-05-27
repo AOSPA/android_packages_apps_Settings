@@ -35,6 +35,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.telephony.UiccSlotInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -52,10 +53,14 @@ public final class TelephonyUtils {
 
     private static final String TAG = "TelephonyUtils";
 
+    private static int sDsdsToSsConfigStatus = -1;
+    private static UiccSlotInfo[] sSlotsInfo;
+
     // Flag to control debug logging for primary card and subsidy lock features
     public static boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String PROPERTY_ADVANCED_SCAN  = "persist.vendor.radio.enableadvancedscan";
+    private static final String PROPERTY_DSDS_TO_SS = "persist.vendor.radio.dsds_to_ss";
     private static final String PROPERTY_SUBSIDY_DEVICE  = "persist.vendor.radio.subsidydevice";
     private static final String ALLOW_USER_SELECT_DDS = "allow_user_select_dds";
 
@@ -74,6 +79,45 @@ public final class TelephonyUtils {
     private static Optional<Boolean> mIsSubsidyFeatureEnabled = Optional.empty();
 
     private TelephonyUtils() {
+    }
+
+    private static UiccSlotInfo[] getUiccSlotsInfo(Context context) {
+        UiccSlotInfo[] slotsInfo = null;
+        TelephonyManager telephonyManager =
+                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+
+        if (telephonyManager != null) {
+            slotsInfo = telephonyManager.getUiccSlotsInfo();
+        }
+        return slotsInfo;
+    }
+
+    public static int getUiccSlotsCount(Context context){
+        if (sSlotsInfo == null) {
+            sSlotsInfo = getUiccSlotsInfo(context);
+        }
+        return sSlotsInfo.length;
+    }
+
+    public static boolean isDsdsToSsConfigValid(){
+        if (sSlotsInfo == null) {
+            return false;
+        }
+        return sDsdsToSsConfigStatus == 1 && sSlotsInfo.length > 1 && sSlotsInfo[1] != null;
+    }
+
+    /**
+     * Querying the DSDS to SSSS configuration status.
+     *
+     * If sDsdsToSsConfigStatus is 1, it means the dsds_to_ss property is enabled.
+     * If sDsdsToSsConfigStatus is 0, it means the dsds_to_ss property is not enabled.
+     */
+    private static void queryDsdsToSsConfig() {
+        if (sDsdsToSsConfigStatus == -1) {
+            sDsdsToSsConfigStatus = mExtTelephonyManager.
+                    getPropertyValueInt(PROPERTY_DSDS_TO_SS, 0);
+        }
+        Log.d(TAG, "queryDsdsToSsConfig value = " + sDsdsToSsConfigStatus);
     }
 
     public static boolean isAdvancedPlmnScanSupported(Context context) {
@@ -204,6 +248,7 @@ public final class TelephonyUtils {
     }
 
     public static void connectExtTelephonyService(Context context) {
+        sSlotsInfo = getUiccSlotsInfo(context);
         if (!mIsServiceBound) {
             Log.d(TAG, "Connect to ExtTelephonyService...");
             mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
@@ -221,6 +266,7 @@ public final class TelephonyUtils {
             Log.d(TAG, "ExtTelephony Service connected");
             mIsServiceBound = true;
             try {
+                queryDsdsToSsConfig();
                 mIsSmartDdsSwitchFeatureAvailable =
                         mExtTelephonyManager.isSmartDdsSwitchFeatureAvailable();
                 Log.d(TAG, "isSmartDdsSwitchFeatureAvailable: " +

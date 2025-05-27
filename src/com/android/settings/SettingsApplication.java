@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings;
 
 import android.app.Application;
@@ -38,6 +44,7 @@ import com.android.settings.development.DeveloperOptionsActivityLifecycle;
 import com.android.settings.fuelgauge.BatterySettingsStorage;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.localepicker.LocaleNotificationDataManager;
+import com.android.settings.network.telephony.TelephonyUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.FeatureFactoryImpl;
 import com.android.settings.spa.SettingsSpaEnvironment;
@@ -83,6 +90,8 @@ public class SettingsApplication extends Application {
         if (getApplicationContext() != null) {
             ElapsedTimeUtils.assignSuwFinishedTimeStamp(getApplicationContext());
         }
+
+        TelephonyUtils.connectExtTelephonyService(getApplicationContext());
 
         // Set Spa environment.
         setSpaEnvironment();
