@@ -39,7 +39,7 @@
             android:key="global_pref"
             android:title="@string/notification_bundle_main_control_title" />
 
-        <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory
+        <com.android.settingslib.widget.UntitledPreferenceCategory
             android:key="enabled_classification_types">
 
             <CheckBoxPreference
@@ -61,13 +61,13 @@
                 android:key="recs"
                 android:title="@*android:string/recs_notification_channel_label"
                 android:summary="@string/notification_bundle_recs_summary"/>
-        </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+        </com.android.settingslib.widget.UntitledPreferenceCategory>
 
-        <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+        <com.android.settingslib.widget.UntitledPreferenceCategory>
             <SwitchPreferenceCompat
                 android:key="work_profile_pref"
                 android:title="@string/notification_adjustment_work_switch_title" />
-        </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
+        </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     </PreferenceCategory>
 

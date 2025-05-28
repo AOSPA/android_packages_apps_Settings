@@ -62,9 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:paddingVertical="12dp"
-                    android:textSize="36sp"
-                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Title" />
+                    android:paddingVertical="16dp"
+                    android:textAppearance="@style/TextAppearance.SettingsLib.DisplaySmall" />
 
                 <TextView
                     android:id="@+id/mode_name_subtitle"
@@ -73,8 +72,7 @@
                     android:clickable="false"
                     android:paddingBottom="12dp"
                     android:text="@string/zen_mode_setup_page_summary"
-                    android:textSize="18sp"
-                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead" />
+                    android:textAppearance="@style/TextAppearance.SettingsLib.BodyLarge" />
 
             </LinearLayout>
 

@@ -102,7 +102,7 @@ public class AudioStreamStateHandlerTest {
 
         verify(mPreference, never()).setAudioStreamState(any());
         verify(mHandler, never()).onEnter(any(), any(), any(), any());
-        verify(mHandler, never()).onExit(any());
+        verify(mHandler, never()).onExit(any(), any());
         verify(mPreference, never()).setIsConnected(anyBoolean());
         verify(mPreference, never()).setSummary(any());
         verify(mPreference, never()).setOnPreferenceClickListener(any());
@@ -123,7 +123,7 @@ public class AudioStreamStateHandlerTest {
                 .setAudioStreamState(
                         AudioStreamsProgressCategoryController.AudioStreamState.SOURCE_ADDED);
         verify(mHandler).onEnter(any(), any(), any(), any());
-        verify(mHandler).onExit(any());
+        verify(mHandler).onExit(any(), any());
         verify(mPreference).setIsConnected(eq(true));
         verify(mPreference).setSummary(eq(""));
         verify(mPreference).setOnPreferenceClickListener(eq(null));
@@ -147,7 +147,7 @@ public class AudioStreamStateHandlerTest {
                 .setAudioStreamState(
                         AudioStreamsProgressCategoryController.AudioStreamState.SOURCE_PRESENT);
         verify(mHandler).onEnter(any(), any(), any(), any());
-        verify(mHandler).onExit(any());
+        verify(mHandler).onExit(any(), any());
         verify(mPreference).setIsConnected(eq(true));
         verify(mPreference).setSummary(eq(""));
         verify(mPreference).setOnPreferenceClickListener(eq(null));
@@ -176,7 +176,7 @@ public class AudioStreamStateHandlerTest {
                         AudioStreamsProgressCategoryController.AudioStreamState
                                 .ADD_SOURCE_BAD_CODE);
         verify(mHandler).onEnter(any(), any(), any(), any());
-        verify(mHandler).onExit(any());
+        verify(mHandler).onExit(any(), any());
         verify(mPreference).setIsConnected(eq(false));
         ArgumentCaptor<SpannableString> argumentCaptor =
                 ArgumentCaptor.forClass(SpannableString.class);

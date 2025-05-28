@@ -117,7 +117,7 @@ class DisplayTopologyPreferenceTest {
     @Test
     fun disabledTopology() {
         preference.onAttached()
-        preference.onGlobalLayout()
+        preference.refreshPane()
 
         assertThat(preference.mPaneContent.childCount).isEqualTo(0)
         // TODO(b/352648432): update test when we show the main display even when
@@ -180,7 +180,7 @@ class DisplayTopologyPreferenceTest {
         preference.mPaneContent.right = 640
 
         preference.onAttached()
-        preference.onGlobalLayout()
+        preference.refreshPane()
     }
 
     /**

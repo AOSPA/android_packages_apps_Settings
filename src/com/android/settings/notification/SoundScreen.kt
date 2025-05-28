@@ -68,6 +68,7 @@ open class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
             if (Flags.catalystSoundScreen25q4()) {
                 +ScreenLockSoundPreference() order -45
                 +ChargingSoundPreference() order -40
+                +DockingSoundPreference() order -35
             }
         }
 

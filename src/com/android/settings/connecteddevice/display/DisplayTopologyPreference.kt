@@ -25,8 +25,9 @@ import android.graphics.PointF
 import android.graphics.RectF
 import android.hardware.display.DisplayTopology
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.MotionEvent
-import android.view.ViewTreeObserver
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 
@@ -43,8 +44,7 @@ import kotlin.math.abs
  * when there is one or more extended display attached.
  */
 class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
-        : Preference(injector.context!!), ViewTreeObserver.OnGlobalLayoutListener,
-          GroupSectionDividerMixin {
+        : Preference(injector.context!!), GroupSectionDividerMixin {
     @VisibleForTesting lateinit var mPaneContent : FrameLayout
     @VisibleForTesting lateinit var mPaneHolder : FrameLayout
     @VisibleForTesting lateinit var mTopologyHint : TextView
@@ -63,13 +63,24 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
      */
     @VisibleForTesting val accidentalDragTimeLimitMs = 800L
 
-    /**
-     * This is needed to prevent a repopulation of the pane causing another
-     * relayout and vice-versa ad infinitum.
-     */
-    private var mPaneNeedsRefresh = false
-
     private val mTopologyListener = Consumer<DisplayTopology> { applyTopology(it) }
+
+    private val mPaneContentLayoutListener = object : View.OnLayoutChangeListener {
+        override fun onLayoutChange(v: View,
+                newLeft: Int, newTop: Int, newRight: Int, newBottom: Int,
+                oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
+            val oldWidth = oldRight - oldLeft
+            val newWidth = newRight - newLeft
+            // The width will change e.g. when first displaying the topology UI (oldWidth is 0) or
+            // when the window is resized. We ignore when the height is changed because we don't
+            // specify the height in terms of layout, but specify it algorithmically via
+            // TopologyScale, which uses the width and the topology to calculate a height.
+            if (oldWidth != newWidth) {
+                Log.i(TAG, "Width changed from $oldWidth to $newWidth - refresh pane")
+                refreshPane()
+            }
+        }
+    }
 
     init {
         layoutResource = R.layout.display_topology_preference
@@ -90,20 +101,16 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
             if (newPane == mPaneContent) {
                 return
             }
-            mPaneContent.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            mPaneContent.removeOnLayoutChangeListener(mPaneContentLayoutListener)
         }
         mPaneContent = newPane
         mPaneHolder = holder.itemView as FrameLayout
         mTopologyHint = holder.findViewById(R.id.topology_hint) as TextView
-        mPaneContent.viewTreeObserver.addOnGlobalLayoutListener(this)
+        mPaneContent.addOnLayoutChangeListener(mPaneContentLayoutListener)
     }
 
     override fun onAttached() {
         super.onAttached()
-        // We don't know if topology changes happened when we were detached, as it is impossible to
-        // listen at that time (we must remove listeners when detaching). Setting this flag makes
-        // the following onGlobalLayout call refresh the pane.
-        mPaneNeedsRefresh = true
         injector.registerTopologyListener(mTopologyListener)
     }
 
@@ -116,13 +123,6 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
         mRevealedWallpapers = listOf()
 
         injector.unregisterTopologyListener(mTopologyListener)
-    }
-
-    override fun onGlobalLayout() {
-        if (mPaneNeedsRefresh) {
-            mPaneNeedsRefresh = false
-            refreshPane()
-        }
     }
 
     /**
@@ -349,5 +349,9 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
         injector.displayTopology = newTopology
 
         return true
+    }
+
+    companion object {
+        val TAG = "DisplayTopologyPreference"
     }
 }

@@ -126,6 +126,9 @@ const val KEY_SCREEN_LOCKING_SOUND = "screen_locking_sound"
 /** Contract key for the "Charging sounds and vibration" setting. */
 const val KEY_CHARGING_SOUNDS = "charging_sounds"
 
+/** Contract key for the "Docking sounds" setting. */
+const val KEY_DOCKING_SOUNDS = "docking_sounds"
+
 /** Contract key for the "Remove animation" setting. */
 const val KEY_REMOVE_ANIMATION = "remove_animation"
 

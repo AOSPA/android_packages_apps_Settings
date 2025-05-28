@@ -220,7 +220,8 @@ public class ForgetDeviceDialogFragmentTest {
                 /* lastTimeConnected */ Long.MAX_VALUE,
                 /* systemDataSyncFlags */ -1,
                 /* deviceIcon */ null,
-                /* deviceId */ null);
+                /* deviceId */ null,
+                /* packageToNotify */ null);
 
         mAssociations.add(association);
     }

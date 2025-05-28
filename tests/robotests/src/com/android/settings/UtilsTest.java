@@ -727,6 +727,29 @@ public class UtilsTest {
                 ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
     }
 
+    @Test
+    public void testIsPrivateProfile_nullUserInfo() {
+        Context mockContext = mock(Context.class);
+        UserInfo mockUserInfo = mock(UserInfo.class);
+        int mockUserId = 12;
+        when(mockContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getUserInfo(mockUserId)).thenReturn(null);
+
+        assertThat(Utils.isPrivateProfile(mockUserId, mockContext)).isFalse();
+    }
+
+    @Test
+    public void testIsPrivateProfile_validUserInfo() {
+        Context mockContext = mock(Context.class);
+        UserInfo mockUserInfo = mock(UserInfo.class);
+        int mockUserId = 12;
+        when(mockContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
+        when(mockUserInfo.isPrivateProfile()).thenReturn(true);
+        when(mMockUserManager.getUserInfo(mockUserId)).thenReturn(mockUserInfo);
+
+        assertThat(Utils.isPrivateProfile(mockUserId, mockContext)).isTrue();
+    }
+
     private void setUpForConfirmCredentialString(boolean isEffectiveUserManagedProfile) {
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mMockUserManager);
         when(mMockUserManager.getCredentialOwnerProfile(USER_ID)).thenReturn(USER_ID);

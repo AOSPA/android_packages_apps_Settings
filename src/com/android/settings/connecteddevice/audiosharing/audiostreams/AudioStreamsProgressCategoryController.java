@@ -132,6 +132,8 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         SYNCED,
         // When addSource is called for this source and waiting for response.
         ADD_SOURCE_WAIT_FOR_RESPONSE,
+        // When addSource is called for this source and waiting for response from a QR code scan.
+        ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR,
         // When addSource result in a bad code response.
         ADD_SOURCE_BAD_CODE,
         // When addSource result in other bad state.
@@ -238,7 +240,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     // Find preference by scanned source and decide next state.
     // Expect one of the following:
     // 1) No preference existed, create new preference with state SYNCED
-    // 2) WAIT_FOR_SYNC, move to ADD_SOURCE_WAIT_FOR_RESPONSE
+    // 2) WAIT_FOR_SYNC, move to ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR
     // 3) SOURCE_ADDED, leave as-is
     @Override
     public void handleSourceFound(@NonNull BluetoothLeBroadcastMetadata source) {
@@ -284,7 +286,8 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                         .setBroadcastCode(mSourceFromQrCode.getBroadcastCode())
                                         .build());
                         moveToState(
-                                existingPreference, AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE);
+                                existingPreference,
+                                AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR);
                     } else {
                         // A preference with source founded existed either because it's already
                         // connected (SOURCE_ADDED) or present (SOURCE_PRESENT). Any other reason
@@ -760,6 +763,8 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
             case SYNCED -> SyncedState.getInstance();
             case WAIT_FOR_SYNC -> WaitForSyncState.getInstance();
             case ADD_SOURCE_WAIT_FOR_RESPONSE -> AddSourceWaitForResponseState.getInstance();
+            case ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR ->
+                    AddSourceWaitForResponseFromQrState.getInstance();
             case ADD_SOURCE_BAD_CODE -> AddSourceBadCodeState.getInstance();
             case ADD_SOURCE_FAILED -> AddSourceFailedState.getInstance();
             case SOURCE_PRESENT -> SourcePresentState.getInstance();

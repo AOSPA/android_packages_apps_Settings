@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import static android.app.settings.SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_WAIT_FOR_SYNC_TIMEOUT;
 
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsScanQrCodeController.REQUEST_SCAN_BT_BROADCAST_QR_CODE;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.WaitForSyncState.AUDIO_STREAM_WAIT_FOR_SYNC_STATE_SUMMARY;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.WaitForSyncState.WAIT_FOR_SYNC_TIMEOUT_MILLIS;
@@ -168,9 +169,18 @@ public class WaitForSyncStateTest {
     }
 
     @Test
+    public void testOnExit_addingSource_doNothing() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_STREAM_SCAN_WITH_FILTER);
+        mInstance.onExit(mScanHelper, ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR);
+
+        verify(mScanHelper, never()).restartScanningWithoutFilter();
+    }
+
+    @Test
     public void testOnExit_restartScanWithoutFilter() {
         mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_STREAM_SCAN_WITH_FILTER);
-        mInstance.onExit(mScanHelper);
+        mInstance.onExit(mScanHelper,
+                AudioStreamsProgressCategoryController.AudioStreamState.SYNCED);
 
         verify(mScanHelper).restartScanningWithoutFilter();
     }
