@@ -28,8 +28,10 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasContentDescription
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -120,8 +122,7 @@ class AppButtonsTest {
         setFlagsRule.disableFlags(SettingsFlags.FLAG_APP_ARCHIVING)
         setContent()
 
-        composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app))
-            .assertIsDisplayed()
+        composeTestRule.onButton(context.getString(R.string.launch_instant_app)).assertIsDisplayed()
     }
 
     @Test
@@ -130,7 +131,8 @@ class AppButtonsTest {
         featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
         setContent()
 
-        composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app))
+        composeTestRule
+            .onButton(context.getString(R.string.launch_instant_app))
             .assertIsNotDisplayed()
     }
 
@@ -147,7 +149,7 @@ class AppButtonsTest {
         }
         setContent(packageInfo)
 
-        composeTestRule.onNodeWithText(context.getString(R.string.uninstall_text)).assertIsEnabled()
+        composeTestRule.onButton(context.getString(R.string.uninstall_text)).assertIsEnabled()
     }
 
     @Test
@@ -162,8 +164,8 @@ class AppButtonsTest {
         }
         setContent(packageInfo)
 
-        composeTestRule.onNodeWithText(context.getString(R.string.archive)).assertIsDisplayed()
-        composeTestRule.onNodeWithText(context.getString(R.string.restore)).assertIsNotDisplayed()
+        composeTestRule.onButton(context.getString(R.string.archive)).assertIsDisplayed()
+        composeTestRule.onButton(context.getString(R.string.restore)).assertIsNotDisplayed()
     }
 
     @Test
@@ -178,8 +180,8 @@ class AppButtonsTest {
         }
         setContent(packageInfo)
 
-        composeTestRule.onNodeWithText(context.getString(R.string.restore)).assertIsDisplayed()
-        composeTestRule.onNodeWithText(context.getString(R.string.archive)).assertIsNotDisplayed()
+        composeTestRule.onButton(context.getString(R.string.restore)).assertIsDisplayed()
+        composeTestRule.onButton(context.getString(R.string.archive)).assertIsNotDisplayed()
     }
 
     private fun setContent(packageInfo: PackageInfo = PACKAGE_INFO) {
@@ -198,7 +200,9 @@ class AppButtonsTest {
             applicationInfo = ApplicationInfo().apply {
                 packageName = PACKAGE_NAME
             }
-            packageName = PACKAGE_NAME
         }
+
+        fun ComposeContentTestRule.onButton(contentDescription: String) =
+            onNode(hasClickAction() and hasContentDescription(contentDescription))
     }
 }

@@ -28,6 +28,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK_ACTION;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE;
 
+import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
 import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment.RESULT_FINISHED;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION;
@@ -457,6 +458,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             } else {
                 textView.setText("");
+                if (BiometricUtils.useExpressiveStyle(getContext(), getIntent())) {
+                    textView.setVisibility(View.GONE);
+                }
             }
         }
 
@@ -525,7 +529,13 @@ public class ChooseLockGeneric extends SettingsActivity {
                         Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
                                 false /* biometricsAuthenticationRequested */,
                                 mUserId);
-                if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                if (android.hardware.biometrics.Flags.bpFallbackOptions()) {
+                    if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                        Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                                BIOMETRIC_AUTH_REQUEST,
+                                mUserId, true /* hideBackground */);
+                    }
+                } else if (biometricAuthStatus == Utils.BiometricStatus.OK) {
                     Utils.launchBiometricPromptForMandatoryBiometrics(this,
                             BIOMETRIC_AUTH_REQUEST,
                             mUserId, true /* hideBackground */);

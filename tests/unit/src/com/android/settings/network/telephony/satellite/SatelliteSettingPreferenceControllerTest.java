@@ -36,7 +36,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.Looper;
 import android.os.PersistableBundle;
-import android.platform.test.annotations.EnableFlags;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.telephony.satellite.SatelliteManager;
@@ -166,7 +165,6 @@ public class SatelliteSettingPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     public void onResume_registerTelephonyCallback_success() {
         mController.initialize(TEST_SUB_ID);
         mController.onResume(null);
@@ -175,7 +173,6 @@ public class SatelliteSettingPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     public void getAvailabilityStatus_unregisterTelephonyCallback_success() {
         mController.initialize(TEST_SUB_ID);
         mController.onPause(null);
@@ -184,7 +181,6 @@ public class SatelliteSettingPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     public void summary_noEntitlementAndTypeIsAuto_showSummaryWithoutEntitlement() {
         mCarrierConfig.putInt(
                 CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
@@ -206,7 +202,6 @@ public class SatelliteSettingPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     public void summary_smsAvailableForManualType_showSummaryWithAccount() {
         mCarrierConfig.putInt(
                 CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
@@ -227,7 +222,6 @@ public class SatelliteSettingPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     public void getAvailabilityStatus_smsAvailableForAutoType_showSummaryWithoutAccount() {
         mCarrierConfig.putBoolean(
                 KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL,

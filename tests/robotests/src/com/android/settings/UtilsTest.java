@@ -26,7 +26,6 @@ import static com.android.internal.hidden_from_bootclasspath.android.hardware.de
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_AUTHENTICATORS;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_HIDE_BACKGROUND;
-import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -715,7 +714,6 @@ public class UtilsTest {
 
         assertThat(intent.getExtra(BIOMETRIC_PROMPT_AUTHENTICATORS)).isEqualTo(
                 BiometricManager.Authenticators.IDENTITY_CHECK);
-        assertThat(intent.getExtra(BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT)).isNotNull();
         assertThat(intent.getExtra(KeyguardManager.EXTRA_DESCRIPTION)).isNotNull();
         assertThat(intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, false))
                 .isTrue();

@@ -48,7 +48,6 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceBinding
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(MobileNetworkListScreen.KEY)
 open class MobileNetworkListScreen :

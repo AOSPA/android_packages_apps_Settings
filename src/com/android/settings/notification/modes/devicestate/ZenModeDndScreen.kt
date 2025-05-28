@@ -16,12 +16,15 @@
 
 package com.android.settings.notification.modes.devicestate
 
-import android.app.Flags as AppFlags
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID
+import com.android.settings.CatalystFragment
+import com.android.settings.R
 import com.android.settings.Settings.ModeSettingsActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -29,8 +32,6 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceFragment
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 /**
  * This DND mode screen is dedicated for device state. It functions via a virtual key and is
@@ -38,19 +39,25 @@ import com.android.settingslib.preference.PreferenceScreenCreator
  * not fully migrated page.
  */
 @ProvidePreferenceScreen(ZenModeDndScreen.KEY)
-class ZenModeDndScreen :
-    PreferenceScreenCreator,
+open class ZenModeDndScreen :
+    PreferenceScreenMixin,
     PreferenceAvailabilityProvider,
     PreferenceTitleProvider,
     PreferenceSummaryProvider {
     override val key: String
         get() = KEY
 
+    override fun getMetricsCategory() =
+        SettingsEnums.PAGE_UNKNOWN // TODO: correct page id in future for non-virtual migration.
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_priority_modes
+
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
     override fun isFlagEnabled(context: Context) = Flags.deviceState()
 
-    override fun fragmentClass() = PreferenceFragment::class.java
+    override fun fragmentClass() = CatalystFragment::class.java
 
     override fun isAvailable(context: Context) = context.hasDndMode()
 

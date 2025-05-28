@@ -32,6 +32,7 @@ import android.os.RemoteException
 import android.os.SystemProperties
 import android.util.DisplayMetrics
 import android.util.Log
+import android.util.Size
 import android.view.Display
 import android.view.Display.INVALID_DISPLAY
 import android.view.DisplayInfo
@@ -288,6 +289,13 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         } else {
             DisplayMetrics.DENSITY_DEFAULT
         }
+    }
+
+    open fun getLogicalSize(displayId: Int): Size? {
+        val display =  displayManager?.getDisplay(displayId)?: return null
+        val displayInfo = DisplayInfo()
+        display.getDisplayInfo(displayInfo)
+        return Size(displayInfo.logicalWidth, displayInfo.logicalHeight)
     }
 
     open fun registerTopologyListener(listener: Consumer<DisplayTopology>) {

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (C) 2025 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,18 +13,23 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  ~
   -->
 
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- Edit button -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edit_button_layout"
+    android:layout_width="52dp"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_gravity="end">
 
-    <item>
-        <shape android:shape="rectangle">
-            <stroke
-                android:color="@color/display_topology_background_color"
-                android:width="@dimen/display_block_padding" />
-            <corners android:radius="@dimen/display_block_corner_radius" />
-        </shape>
-    </item>
-
-</layer-list>
+    <ImageView
+    android:id="@+id/edit_button"
+    android:layout_width="24dp"
+    android:layout_height="24dp"
+    android:gravity="center_vertical"
+    android:layout_gravity="center"
+    android:src="@drawable/ic_edit_24dp"
+    android:contentDescription="@string/edit" />
+</LinearLayout>

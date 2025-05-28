@@ -285,9 +285,6 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
         getController(
                 AdvancedBluetoothDetailsHeaderController.class,
                 controller -> controller.displayPreference(getPreferenceScreen()));
-        getController(
-                BluetoothDetailsHeaderController.class,
-                controller -> controller.displayPreference(getPreferenceScreen()));
     }
 
     protected <T extends AbstractPreferenceController> void getController(Class<T> clazz,
@@ -401,7 +398,6 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
         visibleKeys
                 .add(use(BluetoothDetailsBannerController.class).getPreferenceKey())
                 .add(use(AdvancedBluetoothDetailsHeaderController.class).getPreferenceKey())
-                .add(use(BluetoothDetailsHeaderController.class).getPreferenceKey())
                 .add(use(LeAudioBluetoothDetailsHeaderController.class).getPreferenceKey())
                 .add(use(BluetoothDetailsButtonsController.class).getPreferenceKey());
         if (!BluetoothUtils.isHeadset(cachedDevice.getDevice())) {
@@ -415,7 +411,6 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
         visibleKeys
                 .add(use(BluetoothDetailsBannerController.class).getPreferenceKey())
                 .add(use(AdvancedBluetoothDetailsHeaderController.class).getPreferenceKey())
-                .add(use(BluetoothDetailsHeaderController.class).getPreferenceKey())
                 .add(use(LeAudioBluetoothDetailsHeaderController.class).getPreferenceKey())
                 .add(use(BluetoothDetailsButtonsController.class).getPreferenceKey())
                 .add(LOADING_PREF);
@@ -441,8 +436,6 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
             controllers.add(
                     new BluetoothDetailsBannerController(
                             context, this, cachedDevice, lifecycle));
-            controllers.add(new BluetoothDetailsHeaderController(context, this, cachedDevice,
-                    lifecycle));
             controllers.add(
                     new GeneralBluetoothDetailsHeaderController(
                             context, this, cachedDevice, lifecycle));

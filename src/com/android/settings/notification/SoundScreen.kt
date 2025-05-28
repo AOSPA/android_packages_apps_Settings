@@ -15,10 +15,12 @@
  */
 package com.android.settings.notification
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.SoundSettingsActivity
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.sound.MediaControlsScreen
 import com.android.settings.utils.makeLaunchIntent
@@ -26,11 +28,10 @@ import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 
 @ProvidePreferenceScreen(SoundScreen.KEY)
-open class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
+open class SoundScreen : PreferenceScreenMixin, PreferenceIconProvider {
     override val key: String
         get() = KEY
 
@@ -46,6 +47,11 @@ open class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
             Flags.homepageRevamp() -> R.drawable.ic_volume_up_filled
             else -> R.drawable.ic_volume_up_24dp
         }
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_sound
+
+    override fun getMetricsCategory() = SettingsEnums.SOUND
 
     override fun isFlagEnabled(context: Context): Boolean = Flags.catalystSoundScreen()
 

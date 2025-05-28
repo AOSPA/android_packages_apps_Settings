@@ -38,9 +38,11 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.Flags;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.AndroidRuntimeException;
 import android.view.LayoutInflater;
@@ -181,6 +183,28 @@ public class CombinedBiometricProfileSettingsTest {
         when(mBiometricManager.canAuthenticate(anyInt(),
                 eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
+
+        mFragment.onAttach(mContext);
+        mFragment.onCreate(null);
+        mFragment.onActivityResult(CONFIRM_REQUEST, RESULT_FINISHED,
+                new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L));
+
+        verify(mFragment).startActivityForResult(intentArgumentCaptor.capture(),
+                eq(BiometricsSettingsBase.BIOMETRIC_AUTH_REQUEST));
+
+        Intent intent = intentArgumentCaptor.getValue();
+        assertThat(intent.getComponent().getClassName()).isEqualTo(
+                ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_BP_FALLBACK_OPTIONS)
+    public void testLaunchBiometricPrompt_hardwareUnavailable_onCreateFragment() {
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mFragment).startActivityForResult(any(), anyInt());
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
 
         mFragment.onAttach(mContext);
         mFragment.onCreate(null);

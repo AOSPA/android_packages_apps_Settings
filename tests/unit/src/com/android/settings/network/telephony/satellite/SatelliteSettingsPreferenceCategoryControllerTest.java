@@ -37,13 +37,11 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.Looper;
 import android.os.PersistableBundle;
-import android.platform.test.annotations.EnableFlags;
 import android.telephony.satellite.SatelliteManager;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.internal.telephony.flags.Flags;
 import com.android.settings.network.CarrierConfigCache;
 
 import org.junit.Before;
@@ -87,7 +85,6 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CARRIER_ENABLED_SATELLITE_FLAG)
     public void getAvailabilityStatus_noSatelliteManager_returnUnsupported() {
         when(mContext.getSystemService(SatelliteManager.class)).thenReturn(null);
         mController.init(TEST_SUB_ID);
@@ -98,7 +95,6 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CARRIER_ENABLED_SATELLITE_FLAG)
     public void getAvailabilityStatus_deviceUnsupported_returnUnsupported() {
         mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
                 CARRIER_ROAMING_NTN_CONNECT_MANUAL);
@@ -111,7 +107,6 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CARRIER_ENABLED_SATELLITE_FLAG)
     public void getAvailabilityStatus_carrierNotSupport_returnUnsupported() {
         mPersistableBundle.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false);
         mController.init(TEST_SUB_ID);
@@ -122,10 +117,6 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
     }
 
     @Test
-    @EnableFlags({
-            Flags.FLAG_CARRIER_ENABLED_SATELLITE_FLAG,
-            com.android.settings.flags.Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION
-    })
     public void getAvailabilityStatus_sosSupported_returnAvailable() {
         mPersistableBundle.putBoolean(KEY_SATELLITE_ESOS_SUPPORTED_BOOL, true);
         mPersistableBundle.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true);
@@ -137,10 +128,6 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
     }
 
     @Test
-    @EnableFlags({
-            Flags.FLAG_CARRIER_ENABLED_SATELLITE_FLAG,
-            com.android.settings.flags.Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION
-    })
     public void getAvailabilityStatus_connectTypeAuto_returnAvailable() {
         mPersistableBundle.putBoolean(KEY_SATELLITE_ESOS_SUPPORTED_BOOL, false);
         mPersistableBundle.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true);
@@ -154,10 +141,6 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
     }
 
     @Test
-    @EnableFlags({
-            Flags.FLAG_CARRIER_ENABLED_SATELLITE_FLAG,
-            com.android.settings.flags.Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION
-    })
     public void getAvailabilityStatus_connectTypeManualAndAvailable_returnAvailable() {
         mPersistableBundle.putBoolean(KEY_SATELLITE_ESOS_SUPPORTED_BOOL, false);
         mPersistableBundle.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true);
@@ -173,10 +156,6 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
     }
 
     @Test
-    @EnableFlags({
-            Flags.FLAG_CARRIER_ENABLED_SATELLITE_FLAG,
-            com.android.settings.flags.Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION
-    })
     public void getAvailabilityStatus_connectTypeManualAndUnavailable_returnUnavailable() {
         mPersistableBundle.putBoolean(KEY_SATELLITE_ESOS_SUPPORTED_BOOL, false);
         mPersistableBundle.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true);

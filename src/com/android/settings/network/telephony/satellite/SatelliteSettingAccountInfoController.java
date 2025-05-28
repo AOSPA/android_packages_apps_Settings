@@ -127,15 +127,14 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
         /* In case satellite is allowed by carrier's entitlement server, the page will show
                the check icon with guidance that satellite is included in user's mobile plan */
         messagingPreference.setTitle(R.string.title_have_satellite_plan);
-        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
-            if (mIsDataAvailable) {
-                Preference connectivityPreference = mScreen.findPreference(
-                        PREF_KEY_YOUR_SATELLITE_DATA_PLAN);
-                connectivityPreference.setTitle(R.string.title_have_satellite_data_plan);
-                connectivityPreference.setIcon(icon);
-                connectivityPreference.setVisible(true);
-            }
+        if (mIsDataAvailable) {
+            Preference connectivityPreference = mScreen.findPreference(
+                    PREF_KEY_YOUR_SATELLITE_DATA_PLAN);
+            connectivityPreference.setTitle(R.string.title_have_satellite_data_plan);
+            connectivityPreference.setIcon(icon);
+            connectivityPreference.setVisible(true);
         }
+
         icon.setTintList(Utils.getColorAttr(mContext, android.R.attr.textColorPrimary));
         messagingPreference.setIcon(icon);
     }

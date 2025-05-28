@@ -16,26 +16,25 @@
 
 package com.android.settings.connecteddevice.display
 
-import com.android.settings.R
-
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Color
+import android.graphics.Outline
 import android.graphics.PointF
 import android.util.Log
 import android.view.SurfaceControl
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
+import android.view.ViewOutlineProvider
 import android.widget.FrameLayout
-
 import androidx.annotation.VisibleForTesting
+import com.android.settings.R
 
 /** Represents a draggable block in the topology pane. */
 class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injector.context!!) {
     @VisibleForTesting
     val mHighlightPx = context.resources.getDimensionPixelSize(
             R.dimen.display_block_highlight_width)
+    val cornerRadiusPx = context.resources.getDimensionPixelSize(
+        R.dimen.display_block_corner_radius)
 
     private var mDisplayId: Int? = null
 
@@ -182,6 +181,13 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             }
             mWallpaperView.layoutParams = it
         }
+
+        mWallpaperView.outlineProvider = object : ViewOutlineProvider() {
+            override fun getOutline(view: View, outline: Outline) {
+                outline.setRoundRect(0, 0, view.width, view.height, cornerRadiusPx.toFloat())
+            }
+        }
+        mWallpaperView.clipToOutline = true
 
         // The other two child views are MATCH_PARENT by default so will resize to fill up the
         // FrameLayout.

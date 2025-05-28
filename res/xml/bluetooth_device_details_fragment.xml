@@ -27,13 +27,6 @@
         settings:searchable="false"/>
 
     <com.android.settingslib.widget.LayoutPreference
-        android:key="bluetooth_device_header"
-        android:layout="@layout/settings_entity_header"
-        android:selectable="false"
-        settings:allowDividerBelow="true"
-        settings:searchable="false"/>
-
-    <com.android.settingslib.widget.LayoutPreference
         android:key="general_bluetooth_device_header"
         android:layout="@layout/general_bt_entity_header"
         android:selectable="false"

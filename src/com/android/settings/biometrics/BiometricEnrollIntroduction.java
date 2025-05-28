@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.hardware.biometrics.BiometricAuthenticator;
+import android.hardware.biometrics.Flags;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -466,7 +467,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 final Utils.BiometricStatus biometricStatus =
                         Utils.requestBiometricAuthenticationForMandatoryBiometrics(this,
                                 false /* biometricsAuthenticationRequested */, mUserId);
-                if (biometricStatus == Utils.BiometricStatus.OK) {
+                if (Flags.bpFallbackOptions()) {
+                    if (biometricStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                        Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                                BIOMETRIC_AUTH_REQUEST, mUserId, true /* hideBackground */);
+                    }
+                } else if (biometricStatus == Utils.BiometricStatus.OK) {
                     Utils.launchBiometricPromptForMandatoryBiometrics(this,
                             BIOMETRIC_AUTH_REQUEST, mUserId, true /* hideBackground */);
                 } else if (biometricStatus != Utils.BiometricStatus.NOT_ACTIVE) {

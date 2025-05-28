@@ -99,16 +99,13 @@ private class LocationAccessAppPreference(
         RelativeDateTimeFormatter.Style.LONG
     )
 
-    override fun intent(context: Context): Intent? {
-        // TODO(b/418243848): Support UserHandle serialization to enable this Intent
-        return null
-        // return Intent(Intent.ACTION_MANAGE_APP_PERMISSION).apply {
-        //     `package` = context.packageManager.permissionControllerPackageName
-        //     putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, Manifest.permission_group.LOCATION)
-        //     putExtra(Intent.EXTRA_PACKAGE_NAME, access.packageName)
-        //     putExtra(Intent.EXTRA_USER, context.user)
-        // }
-    }
+    override fun intent(context: Context) =
+        Intent(Intent.ACTION_MANAGE_APP_PERMISSION).apply {
+            `package` = context.packageManager.permissionControllerPackageName
+            putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, Manifest.permission_group.LOCATION)
+            putExtra(Intent.EXTRA_PACKAGE_NAME, access.packageName)
+            putExtra(Intent.EXTRA_USER, context.user)
+        }
 
     override fun extras(context: Context): Bundle? {
         return Bundle(1).apply {

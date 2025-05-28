@@ -16,10 +16,12 @@
 
 package com.android.settings.datausage
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID
 import com.android.settings.R
 import com.android.settings.Settings.DataSaverSummaryActivity
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.datausage.DataSaverMainSwitchPreference.Companion.KEY as DATA_SAVER_KEY
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
@@ -32,11 +34,10 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(DataSaverScreen.KEY)
-class DataSaverScreen(context: Context) :
-    PreferenceScreenCreator,
+open class DataSaverScreen(context: Context) :
+    PreferenceScreenMixin,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
@@ -66,6 +67,11 @@ class DataSaverScreen(context: Context) :
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_data_saver)
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_network
+
+    override fun getMetricsCategory() = SettingsEnums.DATA_SAVER_SUMMARY
 
     override fun isFlagEnabled(context: Context) = Flags.catalystRestrictBackgroundParentEntry()
 

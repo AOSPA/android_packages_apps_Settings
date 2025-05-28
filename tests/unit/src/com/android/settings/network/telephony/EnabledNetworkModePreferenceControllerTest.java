@@ -40,7 +40,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PersistableBundle;
-import android.platform.test.annotations.EnableFlags;
 import android.telephony.CarrierConfigManager;
 import android.telephony.RadioAccessFamily;
 import android.telephony.ServiceState;
@@ -57,7 +56,6 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.flags.Flags;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -303,7 +301,6 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
-    @EnableFlags(Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     public void updateState_satelliteIsStartedAndSelectedSubForSatellite_disablePreference() {
         mController.mSatelliteModemStateCallback
                 .onSatelliteModemStateChanged(SATELLITE_MODEM_STATE_CONNECTED);
@@ -317,7 +314,6 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
-    @EnableFlags(Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     public void updateState_satelliteIsIdle_enablePreference() {
         mController.mSatelliteModemStateCallback
                 .onSatelliteModemStateChanged(SATELLITE_MODEM_STATE_OFF);
@@ -331,7 +327,6 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
-    @EnableFlags(Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     public void updateState_notSelectedSubForSatellite_enablePreference() {
         mController.mSatelliteModemStateCallback
                 .onSatelliteModemStateChanged(SATELLITE_MODEM_STATE_CONNECTED);

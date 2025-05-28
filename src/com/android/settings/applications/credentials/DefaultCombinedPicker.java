@@ -54,10 +54,14 @@ import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.RestrictedSelectorWithWidgetPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.widget.CandidateInfo;
+import com.android.settingslib.widget.SectionButtonPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.TopIntroPreference;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import kotlin.Unit;
 
 public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
@@ -207,6 +211,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     private void update() {
         updateCandidates();
         addAddServicePreference();
+        addTopIntroPreference();
     }
 
     @Override
@@ -232,13 +237,12 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
         final Intent addNewServiceIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(searchUri));
         final Context context = getPrefContext();
-        final Preference preference = new Preference(context);
-        preference.setOnPreferenceClickListener(
-                p -> {
-                    context.startActivityAsUser(addNewServiceIntent, UserHandle.of(getUser()));
-                    return true;
-                });
-        preference.setTitle(R.string.print_menu_item_add_service);
+        final SectionButtonPreference preference = new SectionButtonPreference(context);
+        preference.setOnClickListener(v -> {
+            context.startActivityAsUser(addNewServiceIntent, UserHandle.of(getUser()));
+            return Unit.INSTANCE;
+        });
+        preference.setTitle(R.string.add);
         preference.setIcon(R.drawable.ic_add_24dp);
         preference.setOrder(Integer.MAX_VALUE - 1);
         preference.setPersistent(false);
@@ -254,6 +258,14 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         if (addNewServicePreference != null) {
             getPreferenceScreen().addPreference(addNewServicePreference);
         }
+    }
+
+    /** Add a preference that holds the intro summary */
+    private void addTopIntroPreference() {
+        final Preference topIntroPreference = new TopIntroPreference(getContext());
+        topIntroPreference.setTitle(R.string.credman_picker_page_summary);
+        topIntroPreference.setOrder(0);
+        getPreferenceScreen().addPreference(topIntroPreference);
     }
 
     /**

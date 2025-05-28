@@ -2856,7 +2856,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </activity>
 
         <activity
-            android:name=".Settings$SupervisionDashboardActivity"
+            android:name=".supervision.SupervisionDashboardActivity"
             android:label="@string/supervision_settings_title"
             android:exported="true"
             android:featureFlag="android.app.supervision.flags.enable_supervision_settings_screen">

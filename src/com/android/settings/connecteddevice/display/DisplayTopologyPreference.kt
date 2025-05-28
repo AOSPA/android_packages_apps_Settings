@@ -16,27 +16,21 @@
 
 package com.android.settings.connecteddevice.display
 
-import com.android.settings.R
-import com.android.settingslib.widget.GroupSectionDividerMixin
-
-import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.PointF
 import android.graphics.RectF
 import android.hardware.display.DisplayTopology
-import android.util.DisplayMetrics
 import android.util.Log
+import android.util.Size
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
-
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
-
+import com.android.settings.R
+import com.android.settingslib.widget.GroupSectionDividerMixin
 import java.util.function.Consumer
-
 import kotlin.math.abs
 
 /**
@@ -213,42 +207,17 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
             recycleableBlocks.add(mPaneContent.getChildAt(i) as DisplayBlock)
         }
 
-        val scaling = TopologyScale(
-                mPaneContent.width,
-                minEdgeLength = DisplayTopology.dpToPx(60f, injector.densityDpi),
-                maxEdgeLength = DisplayTopology.dpToPx(256f, injector.densityDpi),
-                newBounds.map { it.second }.toList())
-        mPaneHolder.layoutParams.let {
-            val newHeight = scaling.paneHeight.toInt()
-            if (it.height != newHeight) {
-                it.height = newHeight
-                mPaneHolder.layoutParams = it
-            }
-        }
-
         val idToNode = topology.allNodesIdMap()
-        newBounds.forEach { (id, pos) ->
-            val block = recycleableBlocks.removeFirstOrNull() ?: DisplayBlock(injector).apply {
-                mPaneContent.addView(this)
-            }
-
-            idToNode.get(id)?.let {
-                val topLeft = scaling.displayToPaneCoor(pos.left, pos.top)
-                val bottomRight = scaling.displayToPaneCoor(pos.right, pos.bottom)
-                block.reset(id, topLeft, bottomRight, (bottomRight.x - topLeft.x) / it.logicalWidth)
-            }
-            block.setOnTouchListener { view, ev ->
-                when (ev.actionMasked) {
-                    MotionEvent.ACTION_DOWN -> onBlockTouchDown(id, pos, block, ev)
-                    MotionEvent.ACTION_MOVE -> onBlockTouchMove(ev)
-                    MotionEvent.ACTION_UP -> onBlockTouchUp(ev)
-                    else -> false
-                }
-            }
-        }
-        mPaneContent.removeViews(newBounds.size, recycleableBlocks.size)
-        mTimesRefreshedBlocks++
-
+        val topologyLogicalDisplaySize =
+            idToNode.filter { it.key != null && it.value != null }
+                .map { it.key!! to Size(it.value.logicalWidth, it.value.logicalHeight) }
+                .toMap()
+        val scaling = TopologyScale(
+            mPaneContent.width,
+            minEdgeLength = DisplayTopology.dpToPx(MIN_EDGE_LENGTH_DP, injector.densityDpi),
+            maxEdgeLength = DisplayTopology.dpToPx(MAX_EDGE_LENGTH_DP, injector.densityDpi),
+            newBounds.map { it.second })
+        setupDisplayPaneAndBlocks(scaling, newBounds, topologyLogicalDisplaySize)
         mTopologyInfo = TopologyInfo(topology, scaling, newBounds)
 
         // Construct a map containing revealers that we want to keep (keepRevealing). Then create a
@@ -266,7 +235,53 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
             .map { keepRevealing.get(it) ?: injector.revealWallpaper(it) }
             .filterNotNull()
             .toList()
+    }
 
+    private fun setupDisplayPaneAndBlocks(
+        scaling: TopologyScale,
+        newBounds: List<Pair<Int, RectF>>,
+        topologyLogicalDisplaySize: Map<Int, Size>
+    ) {
+        // Resize pane holder
+        mPaneHolder.layoutParams.let {
+            val newHeight = scaling.paneHeight.toInt()
+            if (it.height != newHeight) {
+                it.height = newHeight
+                mPaneHolder.layoutParams = it
+            }
+        }
+
+        // Setup display blocks
+        val recycleableBlocks = ArrayDeque<DisplayBlock>()
+        for (i in 0..mPaneContent.childCount - 1) {
+            recycleableBlocks.add(mPaneContent.getChildAt(i) as DisplayBlock)
+        }
+        newBounds.forEach { (id, pos) ->
+            val block = recycleableBlocks.removeFirstOrNull() ?: DisplayBlock(injector).apply {
+                mPaneContent.addView(this)
+            }
+            // First check from DisplayTopology for quick lookup on logical display size. If display
+            // is not in topology, then query from DisplayInfo.
+            val logicalDisplaySize =
+                topologyLogicalDisplaySize.get(id) ?: injector.getLogicalSize(id)
+            logicalDisplaySize?.let {
+                val topLeft = scaling.displayToPaneCoor(pos.left, pos.top)
+                val bottomRight = scaling.displayToPaneCoor(pos.right, pos.bottom)
+                block.reset(
+                    id, topLeft, bottomRight, (bottomRight.x - topLeft.x) / it.width
+                )
+            }
+            block.setOnTouchListener { view, ev ->
+                when (ev.actionMasked) {
+                    MotionEvent.ACTION_DOWN -> onBlockTouchDown(id, pos, block, ev)
+                    MotionEvent.ACTION_MOVE -> onBlockTouchMove(ev)
+                    MotionEvent.ACTION_UP -> onBlockTouchUp(ev)
+                    else -> false
+                }
+            }
+        }
+        mPaneContent.removeViews(newBounds.size, recycleableBlocks.size)
+        mTimesRefreshedBlocks++
         // Cancel the drag if one is in progress.
         mDrag = null
     }
@@ -351,7 +366,9 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
         return true
     }
 
-    companion object {
-        val TAG = "DisplayTopologyPreference"
+    private companion object {
+        private val MIN_EDGE_LENGTH_DP = 60f
+        private val MAX_EDGE_LENGTH_DP = 256f
+        private val TAG = "DisplayTopologyPreference"
     }
 }

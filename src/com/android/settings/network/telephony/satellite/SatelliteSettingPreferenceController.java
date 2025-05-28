@@ -128,20 +128,16 @@ public class SatelliteSettingPreferenceController extends
 
     @Override
     public void onResume(@NonNull LifecycleOwner owner) {
-        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
-            if (mTelephonyManager != null) {
-                mTelephonyManager.registerTelephonyCallback(mContext.getMainExecutor(),
-                        mCarrierRoamingNtnModeCallback);
-            }
+        if (mTelephonyManager != null) {
+            mTelephonyManager.registerTelephonyCallback(mContext.getMainExecutor(),
+                    mCarrierRoamingNtnModeCallback);
         }
     }
 
     @Override
     public void onPause(@NonNull LifecycleOwner owner) {
-        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
-            if (mTelephonyManager != null) {
-                mTelephonyManager.unregisterTelephonyCallback(mCarrierRoamingNtnModeCallback);
-            }
+        if (mTelephonyManager != null) {
+            mTelephonyManager.unregisterTelephonyCallback(mCarrierRoamingNtnModeCallback);
         }
     }
 

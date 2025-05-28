@@ -443,11 +443,18 @@ class BluetoothDetailsConfigurableFragmentTest {
         }
     }
 
-    private fun getDisplayedPreferences(): List<Preference> {
+    private fun getDisplayedPreferences(
+        container: PreferenceGroup = fragment.preferenceScreen
+    ): List<Preference> {
         val prefs: MutableList<Preference> = mutableListOf()
-        for (i in 0..<fragment.preferenceScreen.preferenceCount) {
-            if (fragment.preferenceScreen.getPreference(i).isVisible) {
-                prefs.add(fragment.preferenceScreen.getPreference(i))
+        for (i in 0..<container.preferenceCount) {
+            if (container.getPreference(i).isVisible) {
+                val pref = container.getPreference(i)
+                if (pref.key.startsWith("CATEGORY_STARTS_WITH_")) {
+                    prefs.addAll(getDisplayedPreferences(pref as PreferenceGroup))
+                } else {
+                    prefs.add(pref)
+                }
             }
         }
         return prefs

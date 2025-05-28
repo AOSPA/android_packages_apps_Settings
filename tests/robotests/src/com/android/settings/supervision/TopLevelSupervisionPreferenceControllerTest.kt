@@ -34,7 +34,6 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argThat
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
@@ -79,7 +78,7 @@ class TopLevelSupervisionPreferenceControllerTest {
         mockPackageManager.stub {
             on {
                     queryIntentServices(
-                        intentMatcher(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION),
+                        actionIntentMatcher(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION),
                         any<Int>(),
                     )
                 }
@@ -96,7 +95,8 @@ class TopLevelSupervisionPreferenceControllerTest {
         preferenceController.updateState(preference)
 
         assertThat(preference.isEnabled).isFalse()
-        verify(context, never()).startActivity(any())
+        verify(context)
+            .startActivity(componentIntentMatcher(SupervisionDashboardActivity::class.java))
     }
 
     @Test
@@ -109,7 +109,7 @@ class TopLevelSupervisionPreferenceControllerTest {
         mockPackageManager.stub {
             on {
                     queryIntentServices(
-                        intentMatcher(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION),
+                        actionIntentMatcher(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION),
                         any<Int>(),
                     )
                 }
@@ -118,7 +118,7 @@ class TopLevelSupervisionPreferenceControllerTest {
         mockPackageManager.stub {
             on {
                     queryIntentActivitiesAsUser(
-                        intentMatcher(SETTINGS_REDIRECT_ACTION),
+                        actionIntentMatcher(SETTINGS_REDIRECT_ACTION),
                         any<Int>(),
                         any<Int>(),
                     )
@@ -131,7 +131,7 @@ class TopLevelSupervisionPreferenceControllerTest {
         assertThat(preferenceController.availabilityStatus).isEqualTo(AVAILABLE)
         preferenceController.handlePreferenceTreeClick(preference)
 
-        verify(context).startActivity(intentMatcher(SETTINGS_REDIRECT_ACTION))
+        verify(context).startActivity(actionIntentMatcher(SETTINGS_REDIRECT_ACTION))
     }
 
     @Test
@@ -144,7 +144,7 @@ class TopLevelSupervisionPreferenceControllerTest {
         mockPackageManager.stub {
             on {
                     queryIntentServices(
-                        intentMatcher(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION),
+                        actionIntentMatcher(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION),
                         any<Int>(),
                     )
                 }
@@ -153,7 +153,7 @@ class TopLevelSupervisionPreferenceControllerTest {
         mockPackageManager.stub {
             on {
                     queryIntentActivitiesAsUser(
-                        intentMatcher(SETTINGS_REDIRECT_ACTION),
+                        actionIntentMatcher(SETTINGS_REDIRECT_ACTION),
                         any<Int>(),
                         any<Int>(),
                     )
@@ -166,10 +166,14 @@ class TopLevelSupervisionPreferenceControllerTest {
         assertThat(preferenceController.availabilityStatus).isEqualTo(AVAILABLE)
 
         preferenceController.handlePreferenceTreeClick(preference)
-        verify(context, never()).startActivity(any())
+        verify(context)
+            .startActivity(componentIntentMatcher(SupervisionDashboardActivity::class.java))
     }
 
-    private fun intentMatcher(action: String) = argThat<Intent> { this.action == action }
+    private fun actionIntentMatcher(action: String) = argThat<Intent> { this.action == action }
+
+    private fun componentIntentMatcher(cls: Class<*>) =
+        argThat<Intent> { this.component?.className == cls.name }
 
     private companion object {
         const val SUPERVISION_PACKAGE_NAME = "com.android.supervision"
