@@ -757,7 +757,6 @@ public class FingerprintSettings extends SubSettings {
             // user instead of the user with |mUserId|.
             if (isSfps() || (screenOffUnlockUdfps() && isScreenOffUnlcokSupported())
                     || getExtPreferenceProvider().getSize() > 0) {
-                scrollToPreference(fpPrefKey);
                 addFingerprintUnlockCategory();
             }
             final int descriptionRes = FeatureFactory.getFeatureFactory()

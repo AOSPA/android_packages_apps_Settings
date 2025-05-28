@@ -28,15 +28,30 @@ import com.android.settings.network.telephony.TelephonyBasePreferenceController
 /** A controller to control How is work paragraph.  */
 class SatelliteSettingIndicatorController(context: Context?, preferenceKey: String?) :
     TelephonyBasePreferenceController(context, preferenceKey) {
-    private var mCarrierConfigs: PersistableBundle? = null
+    private var mCarrierConfigs: PersistableBundle = PersistableBundle()
+    private var mIsSmsAvailable = false
+    private var mIsDataAvailable = false
+    private var mIsSatelliteEligible = false
+    private var screen: PreferenceScreen? = null
 
     fun init(subId: Int, carrierConfigs: PersistableBundle) {
         mSubId = subId
         mCarrierConfigs = carrierConfigs
     }
 
+    fun setCarrierRoamingNtnAvailability(isSmsAvailable: Boolean, isDataAvailable: Boolean) {
+        mIsSmsAvailable = isSmsAvailable
+        mIsDataAvailable = isDataAvailable
+        mIsSatelliteEligible = isSatelliteEligible()
+    }
+
     override fun displayPreference(screen: PreferenceScreen) {
+        this.screen = screen
         super.displayPreference(screen)
+    }
+
+    override fun updateState(preference: Preference?) {
+        super.updateState(preference)
         updateHowItWorksContent(
             screen,
             SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)
@@ -48,7 +63,10 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
     }
 
     @VisibleForTesting
-    fun updateHowItWorksContent(screen: PreferenceScreen, isSatelliteEligible: Boolean) {
+    fun updateHowItWorksContent(screen: PreferenceScreen?, isSatelliteEligible: Boolean) {
+        if (screen == null) {
+            return
+        }
         /* Composes "How it works" section, which guides how users can use satellite messaging, when
            satellite messaging is included in user's mobile plan, or it'll will be grey out. */
         if (!isSatelliteEligible) {
@@ -58,24 +76,38 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
             category.isEnabled = false
             category.shouldDisableView = true
         }
-        if (!this.isCarrierRoamingNtnConnectedTypeManual) {
+
+        val supportedService: Preference = screen.findPreference(KEY_SUPPORTED_SERVICE)!!
+        if (mIsDataAvailable) {
+            supportedService.setSummary(R.string.summary_supported_service)
+        }
+
+        if (!isCarrierRoamingNtnConnectedTypeManual) {
             return
         }
         val connectionGuide: Preference = screen.findPreference(KEY_SATELLITE_CONNECTION_GUIDE)!!
         connectionGuide.setTitle(R.string.title_satellite_connection_guide_for_manual_type)
         connectionGuide.setSummary(R.string.summary_satellite_connection_guide_for_manual_type)
 
-        val supportedService: Preference = screen.findPreference(KEY_SUPPORTED_SERVICE)!!
         supportedService.setTitle(R.string.title_supported_service_for_manual_type)
         supportedService.setSummary(R.string.summary_supported_service_for_manual_type)
-
     }
 
     private val isCarrierRoamingNtnConnectedTypeManual: Boolean
-        get() = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL == mCarrierConfigs!!.getInt(
+        get() = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL == mCarrierConfigs.getInt(
             CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
             CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
         )
+
+
+    private fun isSatelliteEligible(): Boolean {
+        if (mCarrierConfigs.getInt(CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)
+            == CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
+        ) {
+            return mIsSmsAvailable
+        }
+        return SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)
+    }
 
     companion object {
         @VisibleForTesting

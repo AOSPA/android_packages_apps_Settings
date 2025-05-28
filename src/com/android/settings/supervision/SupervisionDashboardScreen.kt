@@ -76,9 +76,13 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
             +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
                 +SupervisionWebContentFiltersScreen.KEY order 100
             }
-            +SupervisionPinManagementScreen.KEY order 100
-            +SupervisionPromoFooterPreference(supervisionClient) order 300
-            +SupervisionAocFooterPreference(supervisionClient) order 400
+            +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
+                +SupervisionPinManagementScreen.KEY order 10
+            }
+            +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {
+                +SupervisionPromoFooterPreference(supervisionClient) order 30
+                +SupervisionAocFooterPreference(supervisionClient) order 40
+            }
         }
 
     private fun getSupervisionClient(context: Context) =

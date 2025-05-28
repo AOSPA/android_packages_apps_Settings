@@ -27,13 +27,11 @@ import com.android.settingslib.datastore.SettingsStore
 /** Datastore of the safe sites preference. */
 @Suppress("UNCHECKED_CAST")
 class SupervisionSafeSitesDataStore(
-    private val context: Context,
+    context: Context,
     private val settingsStore: SettingsStore = SettingsSecureStore.get(context),
 ) : AbstractKeyedDataObservable<String>(), KeyedObserver<String>, KeyValueStore {
 
-    override fun contains(key: String) =
-        key == SupervisionBlockExplicitSitesPreference.KEY ||
-            key == SupervisionAllowAllSitesPreference.KEY
+    override fun contains(key: String) = settingsStore.contains(BROWSER_CONTENT_FILTERS_ENABLED)
 
     override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
         val settingValue = settingsStore.getInt(BROWSER_CONTENT_FILTERS_ENABLED)

@@ -58,7 +58,6 @@ public class TouchpadThreeFingerTapAppLaunchPreferenceControllerTest {
 
     private void addTouchpad() {
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
                 InputDevice.SOURCE_TOUCHPAD);
         ShadowInputDevice.addDevice(deviceId, device);

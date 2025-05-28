@@ -21,6 +21,8 @@ import static android.telephony.CarrierConfigManager.KEY_EMERGENCY_MESSAGING_SUP
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
+import static android.telephony.NetworkRegistrationInfo.SERVICE_TYPE_DATA;
+import static android.telephony.NetworkRegistrationInfo.SERVICE_TYPE_SMS;
 
 import static com.android.settings.network.telephony.satellite.SatelliteCarrierSettingUtils.isSatelliteDataRestricted;
 
@@ -31,25 +33,35 @@ import android.os.PersistableBundle;
 import android.os.UserManager;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
+import android.telephony.TelephonyManager;
+import android.telephony.satellite.NtnSignalStrength;
 import android.telephony.satellite.SatelliteManager;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+
+import java.util.Arrays;
+import java.util.List;
 
 /** Handle Satellite Setting Preference Layout. */
 public class SatelliteSetting extends RestrictedDashboardFragment {
     private static final String TAG = "SatelliteSetting";
 
+    @VisibleForTesting
+    final CarrierRoamingNtnModeCallback mCarrierRoamingNtnModeCallback =
+            new CarrierRoamingNtnModeCallback();
+
     static final String SUB_ID = "sub_id";
-    static final String EXTRA_IS_SERVICE_DATA_TYPE = "is_service_data_type";
-    static final String EXTRA_IS_SMS_AVAILABLE_FOR_MANUAL_TYPE = "is_sms_available";
 
     private Activity mActivity;
     private SatelliteManager mSatelliteManager;
+    private TelephonyManager mTelephonyManager;
     private PersistableBundle mConfigBundle;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-    private boolean mIsSmsAvailableForManualType = false;
 
     public SatelliteSetting() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -73,21 +85,51 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         mSubId = mActivity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mConfigBundle = fetchCarrierConfigData(mSubId);
-        if (!isSatelliteAttachSupported()) {
+
+        if (!mConfigBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)) {
             Log.d(TAG, "SatelliteSettings: KEY_SATELLITE_ATTACH_SUPPORTED_BOOL is false, "
                     + "do nothing.");
             finish();
         }
-        mIsSmsAvailableForManualType = getIntent().getBooleanExtra(
-                EXTRA_IS_SMS_AVAILABLE_FOR_MANUAL_TYPE, false);
-        boolean isDataAvailableAndNotRestricted = isDataAvailableAndNotRestricted();
-        use(SatelliteAppListCategoryController.class).init(mSubId, mConfigBundle,
-                mIsSmsAvailableForManualType, isDataAvailableAndNotRestricted);
+        mTelephonyManager = getContext().getSystemService(TelephonyManager.class);
+        if (mTelephonyManager != null) {
+            mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
+        }
+
+        use(SatelliteAppListCategoryController.class).init(mSubId, mConfigBundle);
         use(SatelliteSettingAboutContentController.class).init(mSubId);
-        use(SatelliteSettingAccountInfoController.class).init(mSubId, mConfigBundle,
-                mIsSmsAvailableForManualType, isDataAvailableAndNotRestricted);
+        use(SatelliteSettingAccountInfoController.class).init(mSubId, mConfigBundle);
         use(SatelliteSettingFooterController.class).init(mSubId, mConfigBundle);
         use(SatelliteSettingIndicatorController.class).init(mSubId, mConfigBundle);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mTelephonyManager != null) {
+            mTelephonyManager.registerTelephonyCallback(getContext().getMainExecutor(),
+                    mCarrierRoamingNtnModeCallback);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mTelephonyManager != null) {
+            mTelephonyManager.unregisterTelephonyCallback(mCarrierRoamingNtnModeCallback);
+        }
+    }
+
+    void updateRoamingNtnAvailabilityToController(boolean isSmsAvailable, boolean isDataAvailable) {
+        boolean isDataAvailableAndNotRestricted = isDataAvailable && !isSatelliteDataRestricted(
+                getContext(), mSubId);
+        use(SatelliteAppListCategoryController.class).setCarrierRoamingNtnAvailability(
+                isSmsAvailable, isDataAvailableAndNotRestricted);
+        use(SatelliteSettingAccountInfoController.class).setCarrierRoamingNtnAvailability(
+                isSmsAvailable, isDataAvailableAndNotRestricted);
+        use(SatelliteSettingIndicatorController.class).setCarrierRoamingNtnAvailability(
+                isSmsAvailable, isDataAvailableAndNotRestricted);
+        forceUpdatePreferences();
     }
 
     @Override
@@ -121,12 +163,34 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         return bundle;
     }
 
-    private boolean isSatelliteAttachSupported() {
-        return mConfigBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false);
-    }
+    private class CarrierRoamingNtnModeCallback extends TelephonyCallback implements
+            TelephonyCallback.CarrierRoamingNtnListener {
 
-    private boolean isDataAvailableAndNotRestricted() {
-        return getIntent().getBooleanExtra(EXTRA_IS_SERVICE_DATA_TYPE, false)
-                && !isSatelliteDataRestricted(getContext(), mSubId);
+        @Override
+        public void onCarrierRoamingNtnAvailableServicesChanged(int[] availableServices) {
+            CarrierRoamingNtnListener.super.onCarrierRoamingNtnAvailableServicesChanged(
+                    availableServices);
+            List<Integer> availableServicesList = Arrays.stream(availableServices).boxed().toList();
+            boolean isSmsAvailable = availableServicesList.contains(SERVICE_TYPE_SMS);
+            boolean isDataAvailable = availableServicesList.contains(SERVICE_TYPE_DATA);
+            Log.d(TAG, "isSmsAvailable : " + isSmsAvailable
+                    + " / isDataAvailable " + isDataAvailable);
+            updateRoamingNtnAvailabilityToController(isSmsAvailable, isDataAvailable);
+        }
+
+        @Override
+        public void onCarrierRoamingNtnEligibleStateChanged(boolean eligible) {
+            // Do nothing
+        }
+
+        @Override
+        public void onCarrierRoamingNtnModeChanged(boolean active) {
+            // Do nothing
+        }
+
+        @Override
+        public void onCarrierRoamingNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) {
+            // Do nothing
+        }
     }
 }

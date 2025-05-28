@@ -42,7 +42,7 @@ class SatelliteSettingIndicatorControllerTest {
 
     @Before
     fun setUp() {
-        mContext = Mockito.spy<Context>(ApplicationProvider.getApplicationContext<Context?>())
+        mContext = ApplicationProvider.getApplicationContext()
         mController = SatelliteSettingIndicatorController(mContext, KEY)
     }
 
@@ -59,7 +59,11 @@ class SatelliteSettingIndicatorControllerTest {
         category.setKey(SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS)
         category.title = "test title"
         category.isEnabled = true
+        val preference = Mockito.spy<Preference>(Preference(mContext!!))
+        preference.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
+        preference.title = "preference"
         preferenceScreen.addPreference(category)
+        preferenceScreen.addPreference(preference)
 
         mController?.updateHowItWorksContent(preferenceScreen, false)
 
@@ -80,12 +84,41 @@ class SatelliteSettingIndicatorControllerTest {
         category.setKey(SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS)
         category.title = "test title"
         category.isEnabled = true
+        val preference = Mockito.spy<Preference>(Preference(mContext!!))
+        preference.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
+        preference.title = "preference"
         preferenceScreen.addPreference(category)
+        preferenceScreen.addPreference(preference)
 
         mController!!.updateHowItWorksContent(preferenceScreen, true)
 
         Mockito.verify(category, Mockito.times(0)).isEnabled = false
         Mockito.verify(category, Mockito.times(0)).shouldDisableView = true
+    }
+
+    @Test
+    fun updateHowItWorksContent_dataAvailable_summaryChanged() {
+        mCarrierConfig.putInt(
+            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
+        )
+        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.setCarrierRoamingNtnAvailability(true, true)
+        val preferenceManager = PreferenceManager(mContext!!)
+        val preferenceScreen = preferenceManager.createPreferenceScreen(mContext!!)
+        val category = Mockito.spy<PreferenceCategory>(PreferenceCategory(mContext!!))
+        category.setKey(SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS)
+        category.title = "test title"
+        category.isEnabled = true
+        val preference = Mockito.spy<Preference>(Preference(mContext!!))
+        preference.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
+        preference.title = "preference"
+        preferenceScreen.addPreference(category)
+        preferenceScreen.addPreference(preference)
+
+        mController!!.updateHowItWorksContent(preferenceScreen, true)
+
+        Mockito.verify(preference).setSummary(ArgumentMatchers.any<CharSequence?>())
     }
 
     @Test

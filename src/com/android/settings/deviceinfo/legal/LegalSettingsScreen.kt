@@ -15,21 +15,27 @@
  */
 package com.android.settings.deviceinfo.legal
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.LegalSettings
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(LegalSettingsScreen.KEY)
-open class LegalSettingsScreen : PreferenceScreenCreator {
+open class LegalSettingsScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
     override val title: Int
         get() = R.string.legal_information
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_about_device
+
+    override fun getMetricsCategory() = SettingsEnums.ABOUT_LEGAL_SETTINGS
 
     override fun isFlagEnabled(context: Context) = Flags.catalystLegalInformation()
 

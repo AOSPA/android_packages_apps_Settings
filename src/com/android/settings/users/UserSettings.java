@@ -91,7 +91,6 @@ import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.users.CreateUserActivity;
 import com.android.settingslib.users.CreateUserDialogController;
 import com.android.settingslib.users.EditUserInfoController;
-import com.android.settingslib.users.GrantAdminDialogController;
 import com.android.settingslib.users.UserCreatingDialog;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -235,8 +234,6 @@ public class UserSettings extends SettingsPreferenceFragment
     @SuppressWarnings("NullAway")
     private MultiUserMainSwitchPreferenceController mMainSwitchController;
 
-    private GrantAdminDialogController mGrantAdminDialogController =
-            new GrantAdminDialogController();
     private EditUserInfoController mEditUserInfoController =
             new EditUserInfoController(Utils.FILE_PROVIDER_AUTHORITY);
     private CreateUserDialogController mCreateUserDialogController =

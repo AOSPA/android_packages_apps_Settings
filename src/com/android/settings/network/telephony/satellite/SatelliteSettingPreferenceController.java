@@ -95,6 +95,7 @@ public class SatelliteSettingPreferenceController extends
         }
         mCarrierConfigs = mCarrierConfigCache.getSpecificConfigsForSubId(
                 subId, KEY_SATELLITE_ATTACH_SUPPORTED_BOOL,
+                KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL,
                 KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT);
     }
 
@@ -176,10 +177,6 @@ public class SatelliteSettingPreferenceController extends
             // This will setup the Home and Search affordance
             intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, true);
             intent.putExtra(SatelliteSetting.SUB_ID, mSubId);
-            intent.putExtra(SatelliteSetting.EXTRA_IS_SERVICE_DATA_TYPE,
-                    mCarrierRoamingNtnModeCallback.isSatelliteServiceDataType());
-            intent.putExtra(SatelliteSetting.EXTRA_IS_SMS_AVAILABLE_FOR_MANUAL_TYPE,
-                    mCarrierRoamingNtnModeCallback.isSatelliteSmsAvailable());
             mContext.startActivity(intent);
             return true;
         }
@@ -244,16 +241,11 @@ public class SatelliteSettingPreferenceController extends
     static class CarrierRoamingNtnModeCallback extends TelephonyCallback implements
             TelephonyCallback.CarrierRoamingNtnListener {
         SatelliteSettingPreferenceController mSatelliteSettingPreferenceController;
-        private boolean mIsSatelliteServiceDataType = false;
         private boolean mIsSatelliteSmsAvailable = false;
 
         CarrierRoamingNtnModeCallback(
                 SatelliteSettingPreferenceController satelliteSettingPreferenceController) {
             mSatelliteSettingPreferenceController = satelliteSettingPreferenceController;
-        }
-
-        boolean isSatelliteServiceDataType() {
-            return mIsSatelliteServiceDataType;
         }
 
         boolean isSatelliteSmsAvailable() {
@@ -269,7 +261,6 @@ public class SatelliteSettingPreferenceController extends
             boolean isDataAvailable = availableServicesList.contains(SERVICE_TYPE_DATA);
             logd("isSmsAvailable : " + isSmsAvailable
                     + " / isDataAvailable " + isDataAvailable);
-            mIsSatelliteServiceDataType = isDataAvailable;
             mIsSatelliteSmsAvailable = isSmsAvailable;
             mSatelliteSettingPreferenceController.displayPreference();
         }

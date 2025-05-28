@@ -5568,11 +5568,11 @@
     <string name="accessibility_screen_magnification_follow_keyboard_title">Magnify keyboard focus</string>
     <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_follow_keyboard_summary">Magnifier follows keyboard focus</string>
-    <!-- Title for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
+    <!-- Title for accessibility magnifier preference allowing the magnification of the keyboard. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_nav_ime_title">Magnify keyboard</string>
-    <!-- Summary for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
+    <!-- Summary for accessibility magnifier preference allowing the magnification of the keyboard. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_nav_ime_summary">Zoom into the keyboard to see emojis and letters when using full-screen magnification</string>
-    <!-- Summary for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
+    <!-- Summary for accessibility magnifier preference allowing the magnification of the keyboard. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary">Unavailable while only magnifying part of the screen</string>
     <!-- Title for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_always_on_title">Keep on while switching apps</string>
@@ -12967,8 +12967,10 @@ Data usage charges may apply.</string>
     <string name="title_supported_service">After your phone connects to a satellite</string>
     <!-- Title for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="title_supported_service_for_manual_type">Follow steps to connect to the satellite</string>
-    <!-- Summary for satellite supported service [CHAR_LIMIT=NONE] -->
-    <string name="summary_supported_service">You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available.</string>
+    <!-- Summary for satellite supported service [CHAR_LIMIT=NONE] [SCREENSHOT=screen/AmfBYoNmdgkK9ER] -->
+    <string name="summary_supported_service">You can text anyone, including emergency services, and use limited data on some apps. Your phone will reconnect to a mobile network when available.</string>
+    <!-- Summary for satellite supported service without data supported [CHAR_LIMIT=NONE] [SCREENSHOT=screen/7sidqhHfwNNoacB] -->
+    <string name="summary_supported_service_without_data_supported">You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available.</string>
     <!-- Summary for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="summary_supported_service_for_manual_type">After your phone is connected, you can text anyone, including emergency services.</string>
     <!-- learn more text - title of disclaimer of satellite connectivity  [CHAR_LIMIT=NONE] -->
@@ -13710,6 +13712,10 @@ Data usage charges may apply.</string>
     <string name="media_controls_hide_player">Hide player</string>
     <!-- Subtext for media settings when the player will be shown [CHAR LIMIT=50] -->
     <string name="media_controls_show_player">Show player</string>
+    <!-- Title of setting for device suggestions in the media player [CHAR LIMIT=50]-->
+    <string name="media_controls_suggestions_title">Media suggestions</string>
+    <!-- Description of setting for device suggestions in the media player [CHAR LIMIT=NONE]-->
+    <string name="media_controls_suggestions_description">Provide media suggestions from media apps based on your activity and location.</string>
     <!-- Keywords for the media controls setting [CHAR LIMIT=NONE]-->
     <string name="keywords_media_controls">media</string>
 

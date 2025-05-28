@@ -17,11 +17,15 @@
 package com.android.settings.core
 
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
+import com.android.settings.CatalystFragment
 import com.android.settingslib.core.instrumentation.Instrumentable
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 /** Mixin for settings preference screen. */
 interface PreferenceScreenMixin : PreferenceScreenCreator, Instrumentable {
+
+    override fun fragmentClass(): Class<out Fragment>? = CatalystFragment::class.java
 
     /**
      * A string resource indicates the menu item that should be highlighted on settings home menu.

@@ -58,13 +58,15 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
     }
 
     /** Initialize the necessary applications' data */
-    public void init(int subId, @NonNull PersistableBundle configBundle, boolean isSmsAvailable,
-            boolean isDataAvailable) {
+    public void init(int subId, @NonNull PersistableBundle configBundle) {
         mSubId = subId;
         mConfigBundle = configBundle;
+        mPackageNameList = getSatelliteDataOptimizedApps();
+    }
+
+    void setCarrierRoamingNtnAvailability(boolean isSmsAvailable, boolean isDataAvailable) {
         mIsSmsAvailable = isSmsAvailable;
         mIsDataAvailable = isDataAvailable;
-        mPackageNameList = getSatelliteDataOptimizedApps();
         mIsSatelliteEligible = isSatelliteEligible();
     }
 

@@ -93,11 +93,12 @@ class SupervisionPinManagementScreen :
             +SupervisionSetupRecoveryPreference()
             +UntitledPreferenceCategoryMetadata(GROUP_KEY) += {
                 +SupervisionPinRecoveryPreference()
-                // TODO(b/391992481) implement the screen.
                 +SupervisionChangePinPreference()
                 +SupervisionUpdateRecoveryEmailPreference()
             }
-            +SupervisionDeletePinPreference()
+            +UntitledPreferenceCategoryMetadata("delete_pin_group") += {
+                +SupervisionDeletePinPreference()
+            }
         }
 
     companion object {

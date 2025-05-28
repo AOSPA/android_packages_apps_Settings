@@ -68,6 +68,9 @@ class MediaControlsScreen(context: Context) :
         preferenceHierarchy(context, this) {
             +MediaControlsSwitchPreference(mediaControlsStore)
             +MediaControlsLockscreenSwitchPreference()
+            if (Flags.deviceSuggestionsPreference()) {
+                +SuggestionsPreference()
+            }
         }
 
     override fun getSummary(context: Context): CharSequence? =

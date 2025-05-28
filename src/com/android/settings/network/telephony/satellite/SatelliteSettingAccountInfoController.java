@@ -67,12 +67,14 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
     }
 
     /** Initialize the UI settings. */
-    public void init(int subId, @NonNull PersistableBundle configBundle, boolean isSmsAvailable,
-            boolean isDataAvailable) {
+    public void init(int subId, @NonNull PersistableBundle configBundle) {
         mSubId = subId;
         mConfigBundle = configBundle;
         mSimOperatorName = mContext.getSystemService(TelephonyManager.class).getSimOperatorName(
                 mSubId);
+    }
+
+    void setCarrierRoamingNtnAvailability(boolean isSmsAvailable, boolean isDataAvailable) {
         mIsSmsAvailable = isSmsAvailable;
         mIsDataAvailable = isDataAvailable;
         mIsSatelliteEligible = isSatelliteEligible();
@@ -82,17 +84,13 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
     public void displayPreference(@NonNull PreferenceScreen screen) {
         mScreen = screen;
         super.displayPreference(screen);
-        PreferenceCategory prefCategory = screen.findPreference(
-                PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN);
-        // Your mobile plan
-        prefCategory.setTitle(mContext.getString(R.string.category_title_your_satellite_plan,
-                mSimOperatorName));
+        updatePreferences();
+    }
 
-        if (mIsSatelliteEligible) {
-            handleEligibleUI();
-            return;
-        }
-        handleIneligibleUI();
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        updatePreferences();
     }
 
     @Override
@@ -104,6 +102,23 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
         return mConfigBundle.getBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
+    }
+
+    private void updatePreferences() {
+        if (mScreen == null) {
+            return;
+        }
+        PreferenceCategory prefCategory = mScreen.findPreference(
+                PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN);
+        // Your mobile plan
+        prefCategory.setTitle(mContext.getString(R.string.category_title_your_satellite_plan,
+                mSimOperatorName));
+
+        if (mIsSatelliteEligible) {
+            handleEligibleUI();
+            return;
+        }
+        handleIneligibleUI();
     }
 
     private void handleEligibleUI() {

@@ -76,7 +76,6 @@ import com.android.settingslib.search.SearchIndexableRaw;
 
 import com.google.common.truth.Correspondence;
 
-import org.bouncycastle.util.Arrays;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -1096,26 +1095,13 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 enabled ? ON : OFF);
     }
 
-    private static void addShadowInputDeviceId(int deviceId) {
-        if (ShadowInputDevice.sDeviceIds == null) {
-            ShadowInputDevice.sDeviceIds = new int[]{deviceId};
-        } else {
-            int curLength = ShadowInputDevice.sDeviceIds.length;
-            ShadowInputDevice.sDeviceIds = Arrays.copyOf(ShadowInputDevice.sDeviceIds,
-                    curLength + 1);
-            ShadowInputDevice.sDeviceIds[curLength] = deviceId;
-        }
-    }
-
     private static void addMouseDevice() {
-        addShadowInputDeviceId(SHADOW_MOUSE_DEVICE_ID);
         InputDevice device = ShadowInputDevice
                 .makeInputDevicebyIdWithSources(SHADOW_MOUSE_DEVICE_ID, InputDevice.SOURCE_MOUSE);
         ShadowInputDevice.addDevice(SHADOW_MOUSE_DEVICE_ID, device);
     }
 
     private static void addKeyboardDevice() {
-        addShadowInputDeviceId(SHADOW_KEYBOARD_DEVICE_ID);
         InputDevice device = ShadowInputDevice
                 .makeFullKeyboardInputDevicebyId(SHADOW_KEYBOARD_DEVICE_ID);
         ShadowInputDevice.addDevice(SHADOW_KEYBOARD_DEVICE_ID, device);

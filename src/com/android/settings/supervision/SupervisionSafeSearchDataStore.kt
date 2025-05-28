@@ -27,12 +27,11 @@ import com.android.settingslib.datastore.SettingsStore
 /** Datastore of the safe search preference. */
 @Suppress("UNCHECKED_CAST")
 class SupervisionSafeSearchDataStore(
-    private val context: Context,
+    context: Context,
     private val settingsStore: SettingsStore = SettingsSecureStore.get(context),
 ) : AbstractKeyedDataObservable<String>(), KeyedObserver<String>, KeyValueStore {
-    override fun contains(key: String) =
-        key == SupervisionSearchFilterOnPreference.KEY ||
-            key == SupervisionSearchFilterOffPreference.KEY
+
+    override fun contains(key: String) = settingsStore.contains(SEARCH_CONTENT_FILTERS_ENABLED)
 
     override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
         val settingValue = settingsStore.getInt(SEARCH_CONTENT_FILTERS_ENABLED)
