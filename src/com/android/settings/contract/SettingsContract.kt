@@ -120,6 +120,12 @@ const val KEY_ALARM_VOLUME = "alarm_volume"
  */
 const val KEY_DIAL_PAD_TONE = "dtmf_tone"
 
+/** Contract key for the "Screen locking sound" setting. */
+const val KEY_SCREEN_LOCKING_SOUND = "screen_locking_sound"
+
+/** Contract key for the "Charging sounds and vibration" setting. */
+const val KEY_CHARGING_SOUNDS = "charging_sounds"
+
 /** Contract key for the "Remove animation" setting. */
 const val KEY_REMOVE_ANIMATION = "remove_animation"
 

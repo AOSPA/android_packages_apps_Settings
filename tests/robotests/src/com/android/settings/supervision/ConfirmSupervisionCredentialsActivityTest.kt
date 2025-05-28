@@ -18,10 +18,11 @@ package com.android.settings.supervision
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.KeyguardManager
-import android.app.role.RoleManager
+import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
+import android.content.Context
 import android.content.pm.UserInfo
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.PromptContentViewWithMoreOptionsButton
@@ -31,6 +32,8 @@ import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.os.UserManager.USER_TYPE_PROFILE_TEST
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -40,54 +43,68 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.never
-import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.robolectric.Robolectric
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
+import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowBinder
+import org.robolectric.shadows.ShadowContextImpl
+import org.robolectric.shadows.ShadowKeyguardManager
+import org.robolectric.shadows.ShadowRoleManager
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class ConfirmSupervisionCredentialsActivityTest {
-    private val mockRoleManager = mock<RoleManager>()
     private val mockUserManager = mock<UserManager>()
     private val mockActivityManager = mock<ActivityManager>()
-    private val mockKeyguardManager = mock<KeyguardManager>()
     private val mockSupervisionManager = mock<SupervisionManager>()
+    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val currentUser = context.user
+
     private lateinit var mActivity: ConfirmSupervisionCredentialsActivity
+    private lateinit var mActivityController:
+        ActivityController<ConfirmSupervisionCredentialsActivity>
+
+    private lateinit var shadowActivity: ShadowActivity
+    private lateinit var shadowKeyguardManager: ShadowKeyguardManager
 
     private val callingPackage = "com.example.caller"
 
     @Before
     fun setUp() {
-        mActivity =
-            spy(
-                Robolectric.buildActivity(ConfirmSupervisionCredentialsActivity::class.java).get()
-            ) {
-                on { getSystemService(RoleManager::class.java) } doReturn mockRoleManager
-                on { getSystemService(UserManager::class.java) } doReturn mockUserManager
-                on { getSystemService(ActivityManager::class.java) } doReturn mockActivityManager
-                on { getSystemService(KeyguardManager::class.java) } doReturn mockKeyguardManager
-                on { getSystemService(SupervisionManager::class.java) } doReturn
-                    mockSupervisionManager
-                on { callingPackage } doReturn callingPackage
-            }
+        ShadowRoleManager.reset()
+
+        // Note, we have to use ActivityController (instead of ActivityScenario) in order to access
+        // the activity before it is created, so we can set up various mocked responses before they
+        // are referenced in onCreate.
+        mActivityController =
+            Robolectric.buildActivity(ConfirmSupervisionCredentialsActivity::class.java)
+        mActivity = mActivityController.get()
+
+        shadowActivity = shadowOf(mActivity)
+        shadowActivity.setCallingPackage(callingPackage)
+        shadowKeyguardManager = shadowOf(mActivity.getSystemService(KeyguardManager::class.java))
+        Shadow.extract<ShadowContextImpl>(mActivity.baseContext).apply {
+            setSystemService(Context.ACTIVITY_SERVICE, mockActivityManager)
+            setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
+            setSystemService(Context.USER_SERVICE, mockUserManager)
+        }
     }
 
     @Test
     fun onCreate_callerHasSupervisionRole_doesNotFinish() {
-        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn listOf(callingPackage) }
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
-        mockKeyguardManager.stub { on { isDeviceSecure(SUPERVISING_USER_ID) } doReturn true }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
 
-        mActivity.onCreate(null)
+        mActivityController.setup()
 
-        verify(mActivity, never()).finish()
+        assertThat(mActivity.isFinishing).isFalse()
 
         // Ensure that the supervising profile is started
         val userCaptor = argumentCaptor<UserHandle>()
@@ -97,29 +114,29 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     fun onCreate_failsToStartSupervisingProfile_finish() {
-        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn listOf(callingPackage) }
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn false }
-        mockKeyguardManager.stub { on { isDeviceSecure(SUPERVISING_USER_ID) } doReturn true }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
 
-        mActivity.onCreate(null)
+        mActivityController.setup()
 
-        verify(mActivity).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity).finish()
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
     }
 
     @Test
     fun onCreate_callerNotHasSupervisionRole_finish() {
         val otherPackage = "com.example.other"
-        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn listOf(otherPackage) }
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, otherPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
-        mockKeyguardManager.stub { on { isDeviceSecure(SUPERVISING_USER_ID) } doReturn true }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
 
-        mActivity.onCreate(null)
+        mActivityController.setup()
 
-        verify(mActivity).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity).finish()
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
     }
 
     @Test
@@ -130,11 +147,11 @@ class ConfirmSupervisionCredentialsActivityTest {
         )
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
-        mockKeyguardManager.stub { on { isDeviceSecure(SUPERVISING_USER_ID) } doReturn true }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
 
-        mActivity.onCreate(null)
+        mActivityController.setup()
 
-        verify(mActivity, never()).finish()
+        assertThat(mActivity.isFinishing).isFalse()
     }
 
     @Test
@@ -143,26 +160,26 @@ class ConfirmSupervisionCredentialsActivityTest {
         ShadowBinder.setCallingUid(Process.NOBODY_UID)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
-        mockKeyguardManager.stub { on { isDeviceSecure(SUPERVISING_USER_ID) } doReturn true }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
 
-        mActivity.onCreate(null)
+        mActivityController.setup()
 
-        verify(mActivity).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity).finish()
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
     }
 
     @Test
     fun onCreate_noSupervisingCredential_startSetupActivity() {
-        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn listOf(callingPackage) }
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
-        mockKeyguardManager.stub { on { isDeviceSecure(SUPERVISING_USER_ID) } doReturn false }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
-        mActivity.onCreate(null)
-        val shadowActivity = shadowOf(mActivity)
-        val startedIntent = shadowActivity.nextStartedActivity
+        mActivityController.setup()
 
-        assert(startedIntent.component?.className == SetupSupervisionActivity::class.java.name)
+        assertThat(mActivity.isFinishing).isFalse()
+        assertThat(shadowActivity.nextStartedActivity.component?.className)
+            .isEqualTo(SetupSupervisionActivity::class.java.name)
     }
 
     @Test

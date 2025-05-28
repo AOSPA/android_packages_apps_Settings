@@ -65,6 +65,8 @@ public class SatelliteSettingsPreferenceCategoryController extends
     public SatelliteSettingsPreferenceCategoryController(Context context, String key) {
         super(context, key);
         mCarrierConfigCache = CarrierConfigCache.getInstance(mContext);
+        mSatelliteManager = mContext.getSystemService(SatelliteManager.class);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
     }
 
     /**
@@ -75,8 +77,9 @@ public class SatelliteSettingsPreferenceCategoryController extends
     public void init(int subId) {
         Log.d(TAG, "init(), subId=" + subId);
         mSubId = subId;
-        mSatelliteManager = mContext.getSystemService(SatelliteManager.class);
-        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        if (mTelephonyManager != null) {
+            mTelephonyManager = mTelephonyManager.createForSubscriptionId(subId);
+        }
         requestIsSatelliteSupported();
     }
 
@@ -99,7 +102,14 @@ public class SatelliteSettingsPreferenceCategoryController extends
         if (!com.android.internal.telephony.flags.Flags.carrierEnabledSatelliteFlag()) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
+        PersistableBundle carrierConfig =
+                mCarrierConfigCache.getSpecificConfigsForSubId(
+                        subId, KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                        KEY_SATELLITE_ESOS_SUPPORTED_BOOL, KEY_SATELLITE_ATTACH_SUPPORTED_BOOL);
+
+        if (carrierConfig == null) {
+            carrierConfig = new PersistableBundle();
+        }
 
         boolean isSatelliteConnectedTypeIsAuto =
                 CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC == carrierConfig.getInt(
@@ -114,10 +124,11 @@ public class SatelliteSettingsPreferenceCategoryController extends
 
         boolean isSatelliteSosSupported = false;
         if (Flags.satelliteOemSettingsUxMigration()) {
-            isSatelliteSosSupported = carrierConfig.getBoolean(KEY_SATELLITE_ESOS_SUPPORTED_BOOL);
+            isSatelliteSosSupported = carrierConfig.getBoolean(KEY_SATELLITE_ESOS_SUPPORTED_BOOL,
+                    false);
         }
 
-        if (!carrierConfig.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL)) {
+        if (!carrierConfig.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)) {
             return UNSUPPORTED_ON_DEVICE;
         }
 

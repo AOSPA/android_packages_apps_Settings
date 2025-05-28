@@ -15,6 +15,8 @@
  */
 package com.android.settings.supervision
 
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ADD_RECOVERY
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_VERIFY_RECOVERY
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
@@ -32,6 +34,7 @@ import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.testutils.MetricsRule
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
@@ -56,6 +59,7 @@ class SupervisionSetupRecoveryPreferenceTest {
 
     private val mockActivityResultLauncher = mock<ActivityResultLauncher<Intent>>()
 
+    @get:Rule val metricsRule = MetricsRule()
     @get:Rule val setFlagsRule = SetFlagsRule()
     private var preference = SupervisionSetupRecoveryPreference()
     private val context =
@@ -182,6 +186,7 @@ class SupervisionSetupRecoveryPreferenceTest {
         widget.performClick()
 
         verifyPinRecoveryActivityStarted(SupervisionPinRecoveryActivity.ACTION_SETUP_VERIFIED)
+        verify(metricsRule.metricsFeatureProvider).action(context, ACTION_SUPERVISION_ADD_RECOVERY)
     }
 
     @Test
@@ -205,6 +210,8 @@ class SupervisionSetupRecoveryPreferenceTest {
         widget.performClick()
 
         verifyPinRecoveryActivityStarted(SupervisionPinRecoveryActivity.ACTION_POST_SETUP_VERIFY)
+        verify(metricsRule.metricsFeatureProvider)
+            .action(context, ACTION_SUPERVISION_VERIFY_RECOVERY)
     }
 
     private fun verifyPinRecoveryActivityStarted(expectedAction: String) {

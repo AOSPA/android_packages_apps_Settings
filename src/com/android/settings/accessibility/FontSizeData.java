@@ -25,7 +25,6 @@ import android.content.res.Resources;
 import android.provider.Settings;
 
 import com.android.settingslib.R;
-import com.android.window.flags.Flags;
 
 import java.util.Arrays;
 import java.util.List;
@@ -80,8 +79,7 @@ final class FontSizeData extends PreviewSizeData<Float> {
     }
 
     private float getFontScaleDefValue(ContentResolver resolver) {
-        return Flags.configurableFontScaleDefault() ? Settings.System.getFloat(resolver,
-                Settings.System.DEFAULT_DEVICE_FONT_SCALE, FONT_SCALE_DEF_VALUE)
-                : FONT_SCALE_DEF_VALUE;
+        return Settings.System.getFloat(resolver, Settings.System.DEFAULT_DEVICE_FONT_SCALE,
+                FONT_SCALE_DEF_VALUE);
     }
 }

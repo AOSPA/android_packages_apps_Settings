@@ -13,55 +13,54 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.android.settings.notification
 
-package com.android.settings.sound
-
-import android.app.settings.SettingsEnums.ACTION_SHOW_MEDIA_ON_LOCK_SCREEN
+import android.app.settings.SettingsEnums.ACTION_SCREEN_LOCKING_SOUND
 import android.content.Context
-import android.provider.Settings.Secure.MEDIA_CONTROLS_LOCK_SCREEN
+import android.provider.Settings.System.LOCKSCREEN_SOUNDS_ENABLED
 import com.android.settings.R
-import com.android.settings.contract.KEY_SHOW_MEDIA_ON_LOCK_SCREEN
+import com.android.settings.contract.KEY_SCREEN_LOCKING_SOUND
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.datastore.SettingsSystemStore
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
-class MediaControlsLockscreenSwitchPreference :
-    SwitchPreference(
-        KEY,
-        R.string.media_controls_lockscreen_title,
-        R.string.media_controls_lockscreen_description,
-    ),
-    PreferenceActionMetricsProvider {
-
+class ScreenLockSoundPreference :
+    SwitchPreference(KEY, R.string.screen_locking_sounds_title),
+    PreferenceActionMetricsProvider,
+    PreferenceAvailabilityProvider {
     override val preferenceActionMetrics: Int
-        get() = ACTION_SHOW_MEDIA_ON_LOCK_SCREEN
+        get() = ACTION_SCREEN_LOCKING_SOUND
 
-    override fun tags(context: Context) = arrayOf(KEY_SHOW_MEDIA_ON_LOCK_SCREEN)
+    override fun tags(context: Context) = arrayOf(KEY_SCREEN_LOCKING_SOUND)
 
-    override val sensitivityLevel
-        get() = SensitivityLevel.NO_SENSITIVITY
+    override fun storage(context: Context) = context.dataStore
 
-    override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
+    override fun isAvailable(context: Context) =
+        context.resources.getBoolean(R.bool.config_show_screen_locking_sounds)
 
-    override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
+    override fun getReadPermissions(context: Context) = SettingsSystemStore.getReadPermissions()
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override fun getWritePermissions(context: Context) = SettingsSystemStore.getWritePermissions()
+
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun storage(context: Context) = context.dataStore
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
-        const val KEY = MEDIA_CONTROLS_LOCK_SCREEN
+        const val KEY = LOCKSCREEN_SOUNDS_ENABLED
 
         private val Context.dataStore: KeyValueStore
-            get() = SettingsSecureStore.get(this).apply { setDefaultValue(KEY, true) }
+            get() = SettingsSystemStore.get(this).apply { setDefaultValue(KEY, true) }
     }
 }
-// LINT.ThenChange(MediaControlsLockScreenPreferenceController.java)
+// LINT.ThenChange(ScreenLockSoundPreferenceController.java)

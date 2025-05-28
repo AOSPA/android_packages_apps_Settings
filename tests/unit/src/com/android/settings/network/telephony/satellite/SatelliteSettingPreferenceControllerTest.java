@@ -28,6 +28,7 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -87,7 +88,8 @@ public class SatelliteSettingPreferenceControllerTest {
         when(mContext.getSystemService(SatelliteManager.class)).thenReturn(satelliteManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(TEST_SUB_ID)).thenReturn(mTelephonyManager);
-        when(mCarrierConfigCache.getConfigForSubId(TEST_SUB_ID)).thenReturn(mCarrierConfig);
+        when(mCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any())).thenReturn(
+                mCarrierConfig);
         mController = new SatelliteSettingPreferenceController(mContext, KEY);
     }
 
@@ -221,7 +223,7 @@ public class SatelliteSettingPreferenceControllerTest {
                 new int[]{SERVICE_TYPE_SMS});
 
         assertThat(preference.getSummary()).isEqualTo(ResourcesUtils.getResourcesString(mContext,
-                        "satellite_setting_enabled_summary"));
+                "satellite_setting_enabled_summary"));
     }
 
     @Test

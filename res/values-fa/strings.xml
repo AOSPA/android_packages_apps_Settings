@@ -293,6 +293,8 @@
     <string name="share" msgid="8502235338607613795">"هم‌رسانی"</string>
     <string name="add" msgid="8335206931421683426">"افزودن"</string>
     <string name="remove" msgid="1028414219245072102">"حذف"</string>
+    <!-- no translation found for process (2614220641928709668) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"تنظیمات"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"تنظیمات"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"میان‌بر تنظیمات"</string>
@@ -930,6 +932,10 @@
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"اجازه دسترسی به مخاطبین و سابقه تماس"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"دسترسی به مخاطبین و سابقه تماس نیز مجاز شود"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"از اطلاعات برای اعلام تماس‌ها و موارد دیگر استفاده خواهد شد"</string>
+    <!-- no translation found for bluetooth_pairing_confirmation_title (3359642089708714808) -->
+    <skip />
+    <!-- no translation found for bluetooth_pairing_confirmation_msg (8204761740738350792) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"اتصال به <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ممکن نیست."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"دستگاه‌های در دسترس"</string>
@@ -994,7 +1000,7 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"گزینه‌های بیشتر"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"برای تغییر دادن ترتیب نمایشگرها، نگه دارید و بکشید"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"قرینه‌سازی نمایشگر داخلی"</string>
-    <string name="wifi_display_settings_title" msgid="6451625615274960175">"پخش محتوا"</string>
+    <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"قرینه‌سازی"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"فعال کردن نمایش بی‌سیم"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"هیچ دستگاهی در اطراف پیدا نشد."</string>
@@ -1170,8 +1176,7 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"اجازه دادن"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"مجاز نبودن"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*ضروری"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (7611029233083731552) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"این شبکه هم‌رسانی‌شده است. بعداز ورود به سیستم می‌توانید این تنظیم را تغییر دهید."</string>
     <string name="share_wifi_network" msgid="4064997404339571584">"هم‌رسانی کردن این شبکه با دیگر کاربران دستگاه"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"همه کاربران این دستگاه می‌توانند شبکه هم‌رسانی‌شده را مشاهده کنند و به آن متصل شوند. سرپرستان می‌توانند شبکه هم‌رسانی‌شده را حذف کنند. بیشتر بدانید"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"مجاز کردن سایر کاربران برای ویرایش پیکربندی شبکه"</string>
@@ -1186,7 +1191,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"متصل کردن"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"به <xliff:g id="NETWORK_NAME">%1$s</xliff:g> متصل شد"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"درحال اتصال…"</string>
-    <string name="wifi_failed_connect_message" msgid="8538000546604347894">"اتصال به شبکه برقرار نشد"</string>
+    <string name="wifi_failed_connect_message" msgid="8538000546604347894">"به شبکه متصل نشد"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"شبکه در محدوده نیست"</string>
     <string name="wifi_forget" msgid="3485573280364015620">"فراموش کردن"</string>
     <string name="wifi_modify" msgid="5127926476383659412">"اصلاح"</string>
@@ -1454,26 +1459,17 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"روشن / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"خاموش"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"زمان نمایش"</string>
-    <!-- no translation found for screensaver_settings_low_light_mode (271972828076673743) -->
-    <skip />
+    <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"حالت کم‌نور"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"بیدار شدن با بالا بردن"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"محدود به شارژ بی‌سیم"</string>
-    <!-- no translation found for low_light_display_behavior_main_switch_title (7138165032358139627) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_subtitle (1833984014035605413) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_screen_off (4203092158668290404) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_low_light_clock_dream (2235561363691252383) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_summary_on (4218678742261840224) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_summary_off (4565368094992120316) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_screen_off_full_summary (6671607843870561892) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_low_light_clock_dream_full_summary (1145914465090731721) -->
-    <skip />
+    <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"استفاده از حالت «کم‌نور»"</string>
+    <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"انتخاب کنید در حالت «کم‌نور» چه چیزهایی نمایش داده شود"</string>
+    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"صفحه‌نمایش خاموش شود"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"ساعت کم‌نور"</string>
+    <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"روشن / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
+    <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"خاموش"</string>
+    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"وقتی محیط تاریک باشد صفحه‌نمایش خاموش خواهد شد"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"«ساعت کم‌نور» وقتی نمایش داده خواهد شد که محیط تاریک باشد"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"نمایشگر محیط"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"کی نشان داده شود"</string>
     <string name="doze_title" msgid="1523090408230862316">"صفحه برای اعلان بیدار شود"</string>
@@ -2138,8 +2134,7 @@
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"کاهش دادن"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"افزایش دادن"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"پیمایش معکوس"</string>
-    <!-- no translation found for mouse_keys_use_primary_keys_title (525897583406210252) -->
-    <skip />
+    <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"استفاده از کلیدهای اصلی"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"برای رفتن به‌پایین صفحه، به‌بالا پیمایش کنید"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"پیمایش"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"پیمایش کنترل‌شده"</string>
@@ -2219,20 +2214,13 @@
     <string name="gesture_button_next" msgid="695288092704187356">"بعدی"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"بازراه‌اندازی"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"تمام"</string>
-    <!-- no translation found for action_corners_title (8971354126563421646) -->
-    <skip />
-    <!-- no translation found for action_corners_summary (4245089615854251124) -->
-    <skip />
-    <!-- no translation found for action_corners_intro (4384209411870086502) -->
-    <skip />
-    <!-- no translation found for action_corners_bottom_left_title (8677233546610832717) -->
-    <skip />
-    <!-- no translation found for action_corners_bottom_right_title (2155948558861306738) -->
-    <skip />
-    <!-- no translation found for action_corners_top_left_title (6604149810499060560) -->
-    <skip />
-    <!-- no translation found for action_corners_top_right_title (583996793984142329) -->
-    <skip />
+    <string name="action_corners_title" msgid="8971354126563421646">"سفارشی‌سازی گوشه‌های کنش"</string>
+    <string name="action_corners_summary" msgid="4245089615854251124">"از مکان‌نما برای پیمایش در سیستم استفاده کنید"</string>
+    <string name="action_corners_intro" msgid="4384209411870086502">"نواحی زیر را انتخاب کنید تا گوشه‌های کنش سفارشی‌سازی شود"</string>
+    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"گوشه پایین چپ"</string>
+    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"گوشه پایین راست"</string>
+    <string name="action_corners_top_left_title" msgid="6604149810499060560">"گوشه بالا چپ"</string>
+    <string name="action_corners_top_right_title" msgid="583996793984142329">"گوشه بالا راست"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"کلیدهای توصیف‌گر"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"تغییر رفتار کلیدها"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"بازنشانی همه"</string>
@@ -2378,15 +2366,18 @@
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"حرکت مداوم صفحه هم‌زمان با حرکت موشواره"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"حرکت صفحه درحالی‌که موشواره در مرکز صفحه ثابت می‌ماند"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"حرکت صفحه زمانی که موشواره به لبه‌های صفحه می‌رسد"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"درشت‌نمایی تایپ"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"ذره‌بین هم‌زمان با تایپ کردن شما با نوشتار حرکت می‌کند"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"دنبال کردن تایپ"</string>
+    <!-- no translation found for accessibility_screen_magnification_follow_typing_summary (2678347754211619662) -->
+    <skip />
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"درشت‌نمایی ناحیه تمرکز صفحه‌کلید"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"ذره‌بین ناحیه تمرکز صفحه‌کلید را دنبال می‌کند"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"درشت‌نمایی صفحه‌کلید"</string>
-    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"صفحه‌کلید با محتوا درشت‌نمایی می‌شود"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (2102651227079047801) -->
+    <skip />
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"وقتی فقط بخشی از صفحه درشت‌نمایی می‌شود دردسترس نیست"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"حین تعویض برنامه، روشن بماند"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"حین تعویض برنامه، ذره‌بین روشن می‌ماند و زوم‌پس می‌شود"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_summary (642275893256862796) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"وقتی فقط بخشی از صفحه درشت‌نمایی می‌شود دردسترس نیست"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"دسته کنترل"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"ذره‌بین را فعال کنید و آن را با دسته کنترل روی صفحه جابه‌جا کنید. تک‌ضرب بزنید و نگه دارید، سپس دسته کنترل را برای کنترل کردن ذره‌بین بکشید. برای جابه‌جا کردن خود دسته کنترل، تک‌ضرب بزنید و بکشید."</string>
@@ -2562,36 +2553,21 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"کوتاه‌تر"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"طولانی‌تر"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"زمان کلیک خودکار"</string>
-    <!-- no translation found for accessibility_autoclick_main_switch_title (1968409462935503999) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_shortcut_title (5337438503429302081) -->
-    <skip />
-    <!-- no translation found for autoclick_delay_before_click_title (4625722241966706931) -->
-    <skip />
-    <!-- no translation found for autoclick_delay_before_click_summary (3685183305849901339) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_title (8988239939645854279) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_summary (6993249143332791469) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_large (3802014133363801617) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_dialog_option_large (1115930762484519488) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_dialog_option_default (4934363711068310028) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_dialog_option_small (3987901922883658043) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_small (6056674574040448864) -->
-    <skip />
-    <!-- no translation found for autoclick_ignore_minor_cursor_movement_title (5038721995720529808) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_title (9213418243482609005) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_title (2580632445700896655) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_message (8007946937334710898) -->
-    <skip />
+    <string name="accessibility_autoclick_main_switch_title" msgid="1968409462935503999">"استفاده از کلیک خودکار (زمان‌بندی توقف)"</string>
+    <string name="accessibility_autoclick_shortcut_title" msgid="5337438503429302081">"میان‌بر کلیک خودکار"</string>
+    <string name="autoclick_delay_before_click_title" msgid="4625722241966706931">"تأخیر قبل‌از کلیک"</string>
+    <string name="autoclick_delay_before_click_summary" msgid="3685183305849901339">"تنظیم کنید کلیک خودکار چه مدت زمانی پس‌از توقف حرکت مکان‌نما انجام شود"</string>
+    <string name="autoclick_cursor_area_size_title" msgid="8988239939645854279">"ناحیه کلیک"</string>
+    <string name="autoclick_cursor_area_size_summary" msgid="6993249143332791469">"اگر مکان‌نما از ناحیه کلیک خارج شود، کلیک خودکار لغو می‌شود"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_extra_large" msgid="3802014133363801617">"بسیار بزرگ"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_large" msgid="1115930762484519488">"بزرگ"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_default" msgid="4934363711068310028">"پیش‌فرض"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"کوچک"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"بسیار کوچک"</string>
+    <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"نادیده گرفتن حرکات جزئی مکان‌نما"</string>
+    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"برگشتن به کلیک چپ پس‌از انجام کنش"</string>
+    <string name="accessibility_autoclick_navigation_title" msgid="2580632445700896655">"کلیک خودکار بهترین عملکرد را با پیمایش ۳دکمه‌ای دارد"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="8007946937334710898">"پیمایش ۳دکمه‌ای را در تنظیمات فعال کنید تا بتوانید از کلیک خودکار برای رفتن به صفحه اصلی، برگشتن، و باز کردن برنامه‌های اخیر استفاده کنید."</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"لرزش و لمسی"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"قدرت لرزش را برای استفاده‌های مختلف کنترل می‌کند"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"روشن"</string>
@@ -3640,9 +3616,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"‏nfc، برچسب، خوانش‌گر"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"صفحه‌کلید، فناوری لمسی، لرزش،"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"میزان صدا و لرزش"</string>
-    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"میزان صدا، لرزش، «مزاحم نشوید»"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"میزان صدای رسانه"</string>
-    <string name="remote_media_volume_option_title" msgid="8760846743943305764">"میزان صدای محتوای ارسالی"</string>
+    <string name="remote_media_volume_option_title" msgid="7907330631195715350">"‏میزان صدای Google Cast"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"میزان صدای تماس"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"صدای زنگ هشدار"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"میزان صدای زنگ و اعلان"</string>
@@ -3728,13 +3703,6 @@
     <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"برنامه زمانی"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"زمان‌بندی"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ساعت، <xliff:g id="MINUTES">%2$d</xliff:g> دقیقه"</string>
-    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"زمان‌بندی"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"بی‌صدا کردن تلفن در زمان‌های خاصی"</string>
-    <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"تنظیم قانون‌های «مزاحم نشوید»"</string>
-    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"زمان‌بندی"</string>
-    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"استفاده از زمان‌بندی"</string>
-    <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: ‏<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_settings_category" msgid="3794956668816783447">"مجاز کردن وقفه‌هایی که صدا ایجاد می‌کنند"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"مسدود کردن مزاحمت‌های بصری"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"مجاز کردن همه سیگنال‌های تصویری"</string>
     <string name="mode_interruption_filter_title" msgid="6293843948349239256">"فیلترهای اعلان"</string>
@@ -3758,16 +3726,6 @@
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"مجاز کردن همه اعلان‌ها"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"ممکن است افراد، برنامه‌ها، و صداها تداخل ایجاد کنند"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"گزینه‌های نمایشگر برای اعلان‌های فیلترشده"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"وقتی «مزاحم نشوید» روشن است"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"بدون صدای اعلان‌ها"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"اعلان‌ها را روی صفحه‌تان خواهید دید"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"هنگام دریافت اعلان‌، تلفنتان صدا نمی‌دهد یا نمی‌لرزد."</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"بدون تصویر یا صدای اعلان‌ها"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"اعلان‌ها را نخواهید دید یا صدایشان را نخواهید شنید."</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"تلفنتان برای اعلان‌های جدید یا موجود، صدایی ایجاد نمی‌کند، نمی‌لرزد یا آن‌ها را نشان نمی‌دهد. به‌خاطر داشته باشید، اعلان‌های مهم مربوط به فعالیت و وضعیت دستگاه هنوز نمایش داده می‌شود.\n\nوقتی «مزاحم نشوید» را خاموش می‌کنید، می‌توانید با تند کشیدن از بالای صفحه به پایین، اعلان‌های بررسی‌نشده را پیدا کنید."</string>
-    <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"سفارشی"</string>
-    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"فعال کردن تنظیم سفارشی"</string>
-    <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"حذف تنظیم سفارشی"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"نمایش اعلان‌ها"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"پنهان کردن بخشی از اعلان‌ها"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"پنهان کردن اعلان‌ها"</string>
@@ -3782,47 +3740,16 @@
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"نقطه‌های اعلان در نمادهای برنامه پنهان شود"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"با دریافت اعلان بیدار نشود"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"از کشو کرکره‌ای پنهان شود"</string>
-    <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"هرگز"</string>
-    <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"وقتی صفحه‌نمایش روشن است"</string>
-    <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"وقتی صفحه‌نمایش روشن است"</string>
-    <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"صدا و لرزش"</string>
-    <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"صدا، لرزش و بعضی از نشانه‌های بصری اعلان‌ها"</string>
-    <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"صدا، لرزش و نشانه‌های بصری اعلان‌ها"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"اعلان‌های لازم مربوط به وضعیت و فعالیت اصلی دستگاه هرگز مخفی نخواهد شد."</string>
-    <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"خالی"</string>
-    <string name="zen_mode_other_options" msgid="3399967231522580421">"گزینه‌های دیگر"</string>
-    <string name="zen_mode_add" msgid="8789024026733232566">"افزودن"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"روشن کردن"</string>
-    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"اکنون روشن شود"</string>
-    <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"اکنون خاموش شود"</string>
-    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"«مزاحم نشوید» تا <xliff:g id="FORMATTED_TIME">%s</xliff:g> روشن است"</string>
-    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"تا وقتی «مزاحم نشوید» را خاموش نکنید، روشن می‌ماند."</string>
-    <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"«مزاحم نشوید» براساس زمان‌بندی (<xliff:g id="RULE_NAME">%s</xliff:g>) به‌طور خودکار روشن شد"</string>
-    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"برنامه‌ای (<xliff:g id="APP_NAME">%s</xliff:g>) «مزاحم نشوید» را به‌طور خودکار روشن کرده است"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"«مزاحم نشوید» با تنظیمات سفارشی برای <xliff:g id="RULE_NAMES">%s</xliff:g> روشن است."</string>
-    <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">"مشاهده تنظیمات سفارشی"</annotation></string>
-    <string name="zen_interruption_level_priority" msgid="4854123502362861192">"فقط اولویت‌دار"</string>
-    <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"روشن / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"روشن"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"هربار پرسیده شود"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"تا زمانی‌که آن را خاموش کنید"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{۱ ساعت}one{# ساعت}other{# ساعت}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{۱ دقیقه}one{# دقیقه}other{# دقیقه}}"</string>
-    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{خاموش}=1{خاموش / ۱ زمان‌بندی می‌تواند به‌طور خودکار روشن شود}one{خاموش / # زمان‌بندی می‌تواند به‌طور خودکار روشن شود}other{خاموش / # زمان‌بندی می‌تواند به‌طور خودکار روشن شود}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"چه چیزی می‌تواند در حالت «مزاحم نشوید» وقفه ایجاد کنند"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"افراد"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"برنامه‌ها"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"هشدارها و دیگر وقفه‌ها"</string>
-    <string name="zen_category_schedule" msgid="2003707171924226212">"زمان‌بندی‌ها"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"مدت برای «تنظیمات فوری»"</string>
-    <string name="zen_settings_general" msgid="2704932194620124153">"کلی"</string>
-    <string name="zen_sound_footer" msgid="4090291351903631977">"وقتی «مزاحم نشوید» روشن باشد، به‌غیراز مواردی که در بالا مجاز می‌کنید، صدا و لرزش صامت می‌شوند."</string>
-    <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"تنظیمات سفارشی"</string>
-    <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"مرور زمان‌بندی"</string>
-    <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"متوجه شدم"</string>
-    <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"اعلان‌ها"</string>
-    <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"مدت"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"صداهای نمایه کاری"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"استفاده از صداهای نمایه شخصی"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"از همان صداهای نمایه شخصی‌تان استفاده شود"</string>
@@ -3864,6 +3791,8 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"مجاز کردن تعویق اعلان"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"نقطه اعلان روی نماد برنامه‌ها"</string>
     <string name="notification_bundles" msgid="496852738958148317">"سازمان‌دهنده اعلان"</string>
+    <!-- no translation found for notification_ai_features_title (6497959797331796296) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"خلاصه‌های اعلان"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"دریافت خلاصه اجمالی از پیام‌های طولانی‌تر"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"استفاده از خلاصه‌های اعلان"</string>
@@ -3928,10 +3857,8 @@
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"پنهان کردن محتوای کاری حساس"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"وقتی دستگاه قفل است، می‌خواهید اعلان‌های نمایه چگونه نشان داده شوند؟"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"چه چیزی در صفحه قفل نشان داده شود"</string>
-    <!-- no translation found for lock_screen_notification_show_viewed_notifs (4104703346314965171) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_show_viewed_notif_icons (1197681203638927375) -->
-    <skip />
+    <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"نمایش اعلان‌های مشاهده‌شده"</string>
+    <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"نماد نمایش اعلان‌های مشاهده‌شده"</string>
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"نشان دادن اعلان‌های بی‌صدا"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"نشان دادن محتوای حساس"</string>
     <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"نشان دادن محتوای حساس نمایه کاری"</string>
@@ -4002,9 +3929,7 @@
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"پاسخ دادن به پیام‌ها"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"می‌تواند به پیام‌ها پاسخ دهد و روی دکمه‌های موجود در اعلان‌ها اقدام کند، ازجمله به‌تعویق انداختن یا رد کردن اعلان‌ها و پاسخ به تماس."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"تغییر دادن تنظیمات"</string>
-    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"می‌تواند «مزاحم نشوید» را روشن یا خاموش کند و تنظیمات مربوطه را تغییر دهد."</string>
     <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"می‌تواند «حالت‌ها» را مدیریت و فعال کند و تنظیمات مربوطه را تغییر دهد."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="205200471571837170">"اگر دسترسی اعلان را برای <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> خاموش کنید، کنترل «مزاحم نشوید» نیز ممکن است خاموش شود."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"اگر دسترسی اعلان را برای «<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>» خاموش کنید، دسترسی به «حالت‌ها» نیز ممکن است خاموش شود."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"خاموش کردن"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"لغو"</string>
@@ -4030,13 +3955,15 @@
     <string name="notification_polite_work" msgid="8823596456640216391">"اعمال کردن بر نمایه‌های کاری"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"برای برنامه‌های نمایه کاری اعمال می‌شود"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"سازمان‌دهنده اعلان"</string>
-    <string name="notification_bundle_summary" msgid="8924550009829960969">"دسته‌بندی و بی‌صدا کردن اعلان‌های با اولویت پایین"</string>
+    <string name="notification_bundle_summary" msgid="8924550009829960969">"دسته‌ای و بی‌صدا کردن اعلان‌های با اولویت پایین"</string>
     <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"استفاده از «سازمان‌دهنده اعلان»"</string>
     <string name="notification_bundle_description" msgid="8439963475488583612">"انواع اعلان‌هایی را که می‌خواهید بی‌صدا و برای کاهش وقفه‌ها با هم بسته‌بندی کنید، انتخاب کنید. دسته‌بندی با بهره‌گیری از هوش مصنوعی انجام می‌شود و ممکن است حاوی خطا باشد."</string>
     <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"اعلان‌های بسته‌ای"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"اعلان‌های دارای زمینه مشابه بی‌صدا و گروه‌بندی می‌شوند تا تجربه بی‌صداتری داشته باشید"</string>
     <string name="notification_bundle_excluded_description" msgid="2667461772332132250">"اعلان‌های این برنامه‌ها دسته‌بندی نخواهند شد"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"مجاز کردن دسته‌بندی اعلان‌ها برای برنامه‌ها"</string>
+    <!-- no translation found for notification_adjustment_work_switch_title (5858034709870660002) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"‏خدمات یاور VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"‏هیچ برنامه نصب‌شده‌ای درخواست نکرده به‌عنوان خدمات یاور VR اجرا شود."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"‏به <xliff:g id="SERVICE">%1$s</xliff:g> امکان داده شود به خدمات VR دسترسی یابد؟"</string>
@@ -4071,9 +3998,6 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"برای اتصال این برنامه‌ها، <xliff:g id="NAME">%1$s</xliff:g> را در نمایه کاری نصب کنید"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"برای اتصال این برنامه‌ها، <xliff:g id="NAME">%1$s</xliff:g> را در نمایه شخصی نصب کنید"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"برای دریافت برنامه، تک‌ضرب بزنید"</string>
-    <string name="manage_zen_access_title" msgid="4123905441114743974">"کنترل «مزاحم نشوید»"</string>
-    <string name="zen_access_detail_switch" msgid="4183681772666138993">"مجاز کردن «مزاحم نشوید»"</string>
-    <string name="zen_access_empty_text" msgid="2662270585004373785">"هیچ برنامه نصب‌شده‌ای کنترل کردن «مزاحم نشوید» را درخواست نکرده است"</string>
     <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"دسترسی به «حالت‌ها»"</string>
     <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"مجاز کردن دسترسی به «حالت‌ها»"</string>
     <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"هیچ برنامه نصب‌شده‌ای دسترسی به «حالت‌ها» را درخواست نکرده است"</string>
@@ -4163,7 +4087,6 @@
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"پیام‌ها"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"پیام‌هایی که می‌توانند وقفه ایجاد کنند"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"برای اطمینان از اینکه پیام‌های مجاز صدا داشته باشند، بررسی کنید دستگاه روی زنگ زدن تنظیم شده باشد"</string>
-    <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"پیام‌های ورودی برای «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>» مسدود شده‌اند. برای اینکه به دوستان و خانواده و سایر مخاطبین امکان دهید به شما دسترسی داشته باشند، می‌توانید تنظیمات را تغییر دهید."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"همه پیام‌ها را می‌توانید دریافت کنید."</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"همه تماس‌ها را می‌توانید دریافت کنید."</string>
     <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{هیچ‌کدام}=1{۱ مخاطب}one{# مخاطب}other{# مخاطب}}"</string>
@@ -4471,11 +4394,7 @@
     <string name="running_frequency" msgid="7260225121706316639">"تعداد دفعات اجرا"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"حداکثر مصرف"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"از داده استفاده نشده"</string>
-    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"به دسترسی به حالت «مزاحم نشوید» برای <xliff:g id="APP">%1$s</xliff:g> اجازه می‌دهید؟"</string>
-    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"برنامه می‌تواند حالت «مزاحم نشوید» را روشن/خاموش کند و تغییراتی در تنظیمات مرتبط ایجاد کند."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"چون دسترسی اعلان روشن است باید روشن بماند"</string>
-    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"دسترسی به «مزاحم نشوید» برای <xliff:g id="APP">%1$s</xliff:g> لغو شد؟"</string>
-    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"همه قوانین «مزاحم نشوید» ایجادشده توسط این برنامه حذف می‌شوند."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"دسترسی به «حالت‌ها» برای «<xliff:g id="APP">%1$s</xliff:g>» مجاز شود؟"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"این برنامه می‌تواند حالت «مزاحم نشوید» را روشن/ خاموش کند، «حالت‌ها» را مدیریت و فعال کند، و تغییراتی در تنظیمات مربوطه ایجاد کند."</string>
     <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"دسترسی <xliff:g id="APP">%1$s</xliff:g> به «حالت‌ها» لغو شود؟"</string>
@@ -4592,6 +4511,10 @@
     <string name="condition_grayscale_title" msgid="9029271080007984542">"سیاه‌وسفید"</string>
     <string name="condition_grayscale_summary" msgid="1306034149271251292">"نمایش فقط به‌رنگ خاکستری"</string>
     <string name="homepage_condition_footer_content_description" msgid="1568313430995646108">"کوچک کردن"</string>
+    <!-- no translation found for homepage_unnumbered_alert_description (8393737409248958672) -->
+    <skip />
+    <!-- no translation found for homepage_numbered_alert_description (4965963469296900322) -->
+    <skip />
     <string name="color_temperature" msgid="8256912135746305176">"دمای رنگ سرد"</string>
     <string name="color_temperature_desc" msgid="6713259535885669622">"استفاده از رنگ‌های سردتر نمایشگر"</string>
     <string name="color_temperature_toast" msgid="7611532183532407342">"برای اعمال تغییر رنگ، صفحه را خاموش کنید"</string>
@@ -4763,8 +4686,7 @@
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"کیف پول"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"باز کردن «کیف پول»"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"میان‌بر صفحه قفل تغییر کند؟"</string>
-    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (7572626485518591928) -->
-    <skip />
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> نیز میان‌بر صفحه قفل شما است. برای تغییر دادن آن، تک‌ضرب بزنید."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"برنامه کیف پول پیش‌فرض فعلی‌تان از این اشاره پشتیبانی نمی‌کند"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"تغییر کیف پول پیش‌فرض"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"سلفی با چرخاندن دوربین"</string>
@@ -5880,10 +5802,8 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"کنترل‌های والدین"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"محدودیت‌های محتوا و سایر محدودیت‌ها"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"استفاده از نظارت بر دستگاه"</string>
-    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
-    <skip />
-    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
-    <skip />
+    <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"راه‌اندازی پین"</string>
+    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"موقتاً متوقف شد"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"نظارت، نظارت والدین، کنترل‌های والدین"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"مدیریت کردن پین"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"ایمیل بازیابی اضافه کنید"</string>

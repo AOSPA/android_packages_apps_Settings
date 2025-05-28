@@ -17,13 +17,22 @@
 package com.android.settings.dream
 
 import android.content.Context
+import android.provider.Settings.Secure.SCREENSAVER_COMPONENTS
+import android.provider.Settings.Secure.SCREENSAVER_ENABLED
 import androidx.annotation.VisibleForTesting
+import com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig
+import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController
 import com.android.settings.flags.Flags
-import com.android.settings.R
+import com.android.settingslib.datastore.AbstractKeyedDataObservable
+import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.dream.DreamBackend
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -31,10 +40,17 @@ import com.android.settingslib.preference.PreferenceScreenCreator
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ScreensaverScreen.KEY)
-class ScreensaverScreen(fooContext: Context) :
-    PreferenceScreenCreator, PreferenceAvailabilityProvider, PreferenceSummaryProvider {
+class ScreensaverScreen(private val context: Context) :
+    PreferenceScreenCreator,
+    AbstractKeyedDataObservable<String>(),
+    PreferenceAvailabilityProvider,
+    PreferenceSummaryProvider {
 
-    private var dreamBackend: DreamBackend = DreamBackend.getInstance(fooContext)
+    private var dreamBackend: DreamBackend = DreamBackend.getInstance(context)
+    private var settingsStore: KeyValueStore = SettingsSecureStore.get(context)
+
+    private val observer =
+        KeyedObserver<String> { _, _ -> notifyChange(KEY, PreferenceChangeReason.STATE) }
 
     private var ambientModeSuppressionProvider: AmbientModeSuppressionProvider =
         object : AmbientModeSuppressionProvider {
@@ -42,19 +58,23 @@ class ScreensaverScreen(fooContext: Context) :
                 AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime(context)
         }
 
-    private var summaryStringsProvider: SummaryStringsProvider = object: SummaryStringsProvider {
-        override fun dreamOff(context: Context) =
-            context.resources.getString(R.string.screensaver_settings_summary_off)
+    private var summaryStringsProvider: SummaryStringsProvider =
+        object : SummaryStringsProvider {
+            override fun dreamOff(context: Context) =
+                context.resources.getString(R.string.screensaver_settings_summary_off)
 
-        override fun dreamOn(context: Context, activeDreamName: CharSequence) =
-            context.resources.getString(
-                R.string.screensaver_settings_summary_on,
-                activeDreamName
-            )
+            override fun dreamOn(context: Context, activeDreamName: CharSequence) =
+                context.resources.getString(
+                    R.string.screensaver_settings_summary_on,
+                    activeDreamName,
+                )
 
-        override fun dreamOffBedtime(context: Context) =
-            context.resources.getString(R.string.screensaver_settings_when_to_dream_bedtime)
-    }
+            override fun dreamOffBedtime(context: Context) =
+                context.resources.getString(R.string.screensaver_settings_when_to_dream_bedtime)
+        }
+
+    private val screenSaverSettingKeys
+        get() = listOf(SCREENSAVER_ENABLED, SCREENSAVER_COMPONENTS)
 
     override val key: String
         get() = KEY
@@ -70,11 +90,26 @@ class ScreensaverScreen(fooContext: Context) :
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 
+    override fun onFirstObserverAdded() {
+        // update summary when any of the screen saver settings has changed
+        for (key in screenSaverSettingKeys) {
+            settingsStore.addObserver(key, observer, HandlerExecutor.main)
+        }
+    }
+
+    override fun onLastObserverRemoved() {
+        for (key in screenSaverSettingKeys) {
+            settingsStore.removeObserver(key, observer)
+        }
+    }
+
     override fun getSummary(context: Context): CharSequence {
-        val dreamsDisabledByAmbientModeSuppression = context.resources.getBoolean(
-            com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig)
-        return if (dreamsDisabledByAmbientModeSuppression
-            && ambientModeSuppressionProvider.isSuppressedByBedtime(context)) {
+        val dreamsDisabledByAmbientModeSuppression =
+            context.resources.getBoolean(config_dreamsDisabledByAmbientModeSuppressionConfig)
+        return if (
+            dreamsDisabledByAmbientModeSuppression &&
+                ambientModeSuppressionProvider.isSuppressedByBedtime(context)
+        ) {
             summaryStringsProvider.dreamOffBedtime(context)
         } else {
             getSummaryTextWithDreamName(context)
@@ -89,6 +124,11 @@ class ScreensaverScreen(fooContext: Context) :
     @VisibleForTesting
     fun setDreamBackend(backend: DreamBackend) {
         this.dreamBackend = backend
+    }
+
+    @VisibleForTesting
+    fun setScreensaverStore(settingsStore: KeyValueStore) {
+        this.settingsStore = settingsStore
     }
 
     @VisibleForTesting
@@ -113,13 +153,15 @@ class ScreensaverScreen(fooContext: Context) :
     }
 
     interface AmbientModeSuppressionProvider {
-        fun isSuppressedByBedtime(context: Context) : Boolean
+        fun isSuppressedByBedtime(context: Context): Boolean
     }
 
     interface SummaryStringsProvider {
-        fun dreamOff(context: Context) : CharSequence
-        fun dreamOn(context: Context, activeDreamName: CharSequence) : CharSequence
-        fun dreamOffBedtime(context: Context) : CharSequence
+        fun dreamOff(context: Context): CharSequence
+
+        fun dreamOn(context: Context, activeDreamName: CharSequence): CharSequence
+
+        fun dreamOffBedtime(context: Context): CharSequence
     }
 
     companion object {

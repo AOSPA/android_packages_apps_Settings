@@ -293,6 +293,8 @@
     <string name="share" msgid="8502235338607613795">"Del"</string>
     <string name="add" msgid="8335206931421683426">"Tilføj"</string>
     <string name="remove" msgid="1028414219245072102">"Fjern"</string>
+    <!-- no translation found for process (2614220641928709668) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Indstillinger"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Indstillinger"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Genvej til Indstillinger"</string>
@@ -930,6 +932,10 @@
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Giv adgang til dine kontakter og din opkaldshistorik"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Tillad også adgang til kontakter og opkaldshistorik"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Oplysningerne bruges til opkaldsmeddelelser m.m."</string>
+    <!-- no translation found for bluetooth_pairing_confirmation_title (3359642089708714808) -->
+    <skip />
+    <!-- no translation found for bluetooth_pairing_confirmation_msg (8204761740738350792) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Der kunne ikke oprettes forbindelse til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Tilgængelige enheder"</string>
@@ -994,7 +1000,8 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Flere valgmuligheder"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Hold og træk for at omarrangere skærmene."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Spejl indbygget skærm"</string>
-    <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
+    <!-- no translation found for wifi_display_settings_title (2622548133505158832) -->
+    <skip />
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spejl"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktivér trådløs skærm"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Der blev ikke fundet enheder i nærheden."</string>
@@ -1170,8 +1177,7 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Tillad"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Afvis"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*skal angives"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (7611029233083731552) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"Dette er et delt netværk. Du kan ændre denne indstilling, når du er logget ind."</string>
     <string name="share_wifi_network" msgid="4064997404339571584">"Del dette netværk med andre enhedsbrugere"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Alle brugere på denne enhed kan se og oprette forbindelse til et delt netværk. Administratorer kan slette et delt netværk. Få flere oplysninger"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Tillad, at andre brugere kan redigere netværkskonfigurationen"</string>
@@ -1454,26 +1460,17 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Til – <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Fra"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"Visningstidspunkt"</string>
-    <!-- no translation found for screensaver_settings_low_light_mode (271972828076673743) -->
-    <skip />
+    <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Tilstanden Svag belysning"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Løft enheden for at vække den"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Begræns til trådløs opladning"</string>
-    <!-- no translation found for low_light_display_behavior_main_switch_title (7138165032358139627) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_subtitle (1833984014035605413) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_screen_off (4203092158668290404) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_low_light_clock_dream (2235561363691252383) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_summary_on (4218678742261840224) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_summary_off (4565368094992120316) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_screen_off_full_summary (6671607843870561892) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_low_light_clock_dream_full_summary (1145914465090731721) -->
-    <skip />
+    <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Brug tilstanden Svag belysning"</string>
+    <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Vælg, hvad der skal vises i tilstanden Svag belysning"</string>
+    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Slukket skærm"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Ur, svag belysning"</string>
+    <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"Til – <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
+    <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Fra"</string>
+    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"Skærmen slukker, når det er mørkt"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"Uret i tilstanden Svag belysning vises, når der er mørkt"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Aktiv låseskærm"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Hvornår skal det vises"</string>
     <string name="doze_title" msgid="1523090408230862316">"Væk skærmen ved notifikationer"</string>
@@ -2138,8 +2135,7 @@
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Formindsk"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Forstør"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Omvendt rulning"</string>
-    <!-- no translation found for mouse_keys_use_primary_keys_title (525897583406210252) -->
-    <skip />
+    <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Brug primære taster"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Rul opad for at gå ned på siden"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Rulning"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Kontrolleret rulning"</string>
@@ -2219,20 +2215,13 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Næste"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Genstart"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Udfør"</string>
-    <!-- no translation found for action_corners_title (8971354126563421646) -->
-    <skip />
-    <!-- no translation found for action_corners_summary (4245089615854251124) -->
-    <skip />
-    <!-- no translation found for action_corners_intro (4384209411870086502) -->
-    <skip />
-    <!-- no translation found for action_corners_bottom_left_title (8677233546610832717) -->
-    <skip />
-    <!-- no translation found for action_corners_bottom_right_title (2155948558861306738) -->
-    <skip />
-    <!-- no translation found for action_corners_top_left_title (6604149810499060560) -->
-    <skip />
-    <!-- no translation found for action_corners_top_right_title (583996793984142329) -->
-    <skip />
+    <string name="action_corners_title" msgid="8971354126563421646">"Tilpas handlingshjørner"</string>
+    <string name="action_corners_summary" msgid="4245089615854251124">"Brug markører til at navigere i systemet"</string>
+    <string name="action_corners_intro" msgid="4384209411870086502">"Vælg følgende områder for at tilpasse handlingshjørner"</string>
+    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"Nederste venstre hjørne"</string>
+    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"Nederste højre hjørne"</string>
+    <string name="action_corners_top_left_title" msgid="6604149810499060560">"Øverste venstre hjørne"</string>
+    <string name="action_corners_top_right_title" msgid="583996793984142329">"Øverste højre hjørne"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Ændringstaster"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Rediger tasternes funktion"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Nulstil alle"</string>
@@ -2378,15 +2367,18 @@
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Flyt skærmen kontinuerligt, i takt med at markøren flyttes"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Flyt skærmen, mens markøren forbliver midt på skærmen"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Flyt skærmen, når markøren rammer kanten af skærmen"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Forstør skrift"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Luppen følger teksten, når du skriver"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Følg indtastning"</string>
+    <!-- no translation found for accessibility_screen_magnification_follow_typing_summary (2678347754211619662) -->
+    <skip />
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"Forstør tastaturfokus"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"Luppen følger tastaturets fokus"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Forstør tastatur"</string>
-    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"Tastaturet forstørres med dit indhold"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (2102651227079047801) -->
+    <skip />
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Utilgængelig, når kun en del af skærmen forstørres"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Hold aktiveret ved skift af app"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Forstørrelse forbliver aktiveret og zoomer ud, når du skifter app"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_summary (642275893256862796) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Utilgængelig, når kun en del af skærmen forstørres"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Aktivér luppen, og flyt den ved hjælp af et joystick på skærmen. Tryk på luppen, hold fingeren nede, og træk i joysticket for at flytte luppen. Tryk på selve joysticket for at trække i det."</string>
@@ -2562,36 +2554,21 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Kortere"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Længere"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Varighed af automatisk klik"</string>
-    <!-- no translation found for accessibility_autoclick_main_switch_title (1968409462935503999) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_shortcut_title (5337438503429302081) -->
-    <skip />
-    <!-- no translation found for autoclick_delay_before_click_title (4625722241966706931) -->
-    <skip />
-    <!-- no translation found for autoclick_delay_before_click_summary (3685183305849901339) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_title (8988239939645854279) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_summary (6993249143332791469) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_large (3802014133363801617) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_dialog_option_large (1115930762484519488) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_dialog_option_default (4934363711068310028) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_dialog_option_small (3987901922883658043) -->
-    <skip />
-    <!-- no translation found for autoclick_cursor_area_size_dialog_option_extra_small (6056674574040448864) -->
-    <skip />
-    <!-- no translation found for autoclick_ignore_minor_cursor_movement_title (5038721995720529808) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_title (9213418243482609005) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_title (2580632445700896655) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_message (8007946937334710898) -->
-    <skip />
+    <string name="accessibility_autoclick_main_switch_title" msgid="1968409462935503999">"Brug autoklik (dvæletid)"</string>
+    <string name="accessibility_autoclick_shortcut_title" msgid="5337438503429302081">"Genvej til autoklik"</string>
+    <string name="autoclick_delay_before_click_title" msgid="4625722241966706931">"Forsinkelse forud for klik"</string>
+    <string name="autoclick_delay_before_click_summary" msgid="3685183305849901339">"Angiv, hvor lang tid der skal gå, før der klikkes, efter markøren er stoppet med at bevæge sig"</string>
+    <string name="autoclick_cursor_area_size_title" msgid="8988239939645854279">"Klikområde"</string>
+    <string name="autoclick_cursor_area_size_summary" msgid="6993249143332791469">"Hvis markøren flyttes uden for klikområdet, annulleres autoklik"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_extra_large" msgid="3802014133363801617">"Ekstra stor"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_large" msgid="1115930762484519488">"Stor"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_default" msgid="4934363711068310028">"Standard"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Lille"</string>
+    <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Ekstra lille"</string>
+    <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Ignorer små markørbevægelser"</string>
+    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"Vend tilbage til venstreklik efter handling"</string>
+    <string name="accessibility_autoclick_navigation_title" msgid="2580632445700896655">"Autoklik fungerer bedst med navigation med tre knapper"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="8007946937334710898">"Aktivér navigation med tre knapper i indstillingerne, så du kan bruge autoklik til at gå til startskærmen, gå tilbage og åbne de seneste apps."</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibration og haptik"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Tilpas vibrationsstyrken til forskellige brugsformer"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Til"</string>
@@ -3640,9 +3617,9 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, læser"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"tastatur, haptisk teknologi, vibration"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Lydstyrke og vibration"</string>
-    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"Lydstyrke, vibration, Forstyr ikke"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Lydstyrke for medier"</string>
-    <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Lydstyrke for castet indhold"</string>
+    <!-- no translation found for remote_media_volume_option_title (7907330631195715350) -->
+    <skip />
     <string name="call_volume_option_title" msgid="1461105986437268924">"Lydstyrke for opkald"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Lydstyrke for alarmer"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Lydstyrke for ringetone og notifikationer"</string>
@@ -3728,13 +3705,6 @@
     <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Tidsplan"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Tidsplan"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> t. <xliff:g id="MINUTES">%2$d</xliff:g> min."</string>
-    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Planlæg"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Gør telefonen lydløs på bestemte tidspunkter"</string>
-    <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Angiv regler for Forstyr ikke"</string>
-    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Planlæg"</string>
-    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Anvend tidsplan"</string>
-    <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Tillad afbrydelser, der laver lyd"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloker visuelle forstyrrelser"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Tillad visuelle signaler"</string>
     <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Notifikationsfiltre"</string>
@@ -3758,16 +3728,6 @@
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Tillad alle notifikationer"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Personer, apps og lyde kan forstyrre"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Visningsmuligheder for filtrerede notifikationer"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Når Forstyr ikke er aktiveret"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Ingen lyd fra notifikationer"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Notifikationer vises på skærmen"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Din telefon vil ikke afspille lyd eller vibrere, når du får notifikationer."</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Ingen lyd eller visuelle signaler fra notifikationer"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Notifikationer kan ikke ses eller høres"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Din telefon viser ikke nye eller eksisterende notifikationer, og den vibrerer eller ringer heller ikke i forbindelse med disse. Husk, at vigtige notifikationer om enhedsaktivitet og -status stadig vises.\n\nNår du deaktiverer Forstyr ikke, kan du finde ulæste notifikationer ved at stryge nedad fra toppen af skærmen."</string>
-    <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Tilpasset"</string>
-    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Aktivér tilpasset indstilling"</string>
-    <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Fjern tilpasset indstilling"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"Notifikationer vises"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"Notifikationer er delvist skjulte"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"Notifikationer er skjulte"</string>
@@ -3782,47 +3742,16 @@
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Skjul notifikationsprikker på appikoner"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Væk ikke ved notifikationer"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Skjul i panelet, der trækkes ned"</string>
-    <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Aldrig"</string>
-    <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"Når skærmen er slukket"</string>
-    <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"Når skærmen er tændt"</string>
-    <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Lyd og vibration"</string>
-    <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Lyd, vibration og visse visuelle tegn på notifikationer"</string>
-    <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Lyd, vibration og visuelle tegn på notifikationer"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Notifikationer om grundlæggende enhedsaktivitet og -status skjules aldrig."</string>
-    <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Ingen"</string>
-    <string name="zen_mode_other_options" msgid="3399967231522580421">"andre valgmuligheder"</string>
-    <string name="zen_mode_add" msgid="8789024026733232566">"Tilføj"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"Aktivér"</string>
-    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"Aktivér nu"</string>
-    <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"Deaktiver nu"</string>
-    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"Forstyr ikke er aktiveret indtil <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"Forstyr ikke forbliver aktiveret, indtil du deaktiverer tilstanden"</string>
-    <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"Forstyr ikke blev automatisk aktiveret af en tidsplan (<xliff:g id="RULE_NAME">%s</xliff:g>)"</string>
-    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"Forstyr ikke blev automatisk aktiveret af en app <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"Forstyr ikke er aktiveret for <xliff:g id="RULE_NAMES">%s</xliff:g> med tilpassede indstillinger."</string>
-    <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">"Se tilpassede indstillinger"</annotation></string>
-    <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Kun prioritet"</string>
-    <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Til – <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Til"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Spørg hver gang"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Indtil du deaktiverer"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 time}one{# time}other{# timer}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minut}one{# minut}other{# minutter}}"</string>
-    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Fra}=1{Fra – 1 tidsplan kan starte automatisk}one{Fra – # tidsplan kan starte automatisk}other{Fra – # tidsplaner kan starte automatisk}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"Hvad kan afbryde Forstyr ikke"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personer"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmer og andre afbrydelser"</string>
-    <string name="zen_category_schedule" msgid="2003707171924226212">"Tidsplaner"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Varighed af Kvikmenu"</string>
-    <string name="zen_settings_general" msgid="2704932194620124153">"Generelt"</string>
-    <string name="zen_sound_footer" msgid="4090291351903631977">"Når Forstyr ikke er aktiveret, er der kun lyd eller vibration ved de elementer, du tillader ovenfor."</string>
-    <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Tilpassede indstillinger"</string>
-    <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Gennemgå tidsplan"</string>
-    <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"OK"</string>
-    <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Notifikationer"</string>
-    <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Varighed"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Lyde for arbejdsprofil"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Brug lyde fra din personlige profil"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Brug de samme lyde som på din personlige profil"</string>
@@ -3864,6 +3793,8 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Tillad udsættelse af notifikationer"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Notifikationsprik på appikon"</string>
     <string name="notification_bundles" msgid="496852738958148317">"Notifikationsorganisering"</string>
+    <!-- no translation found for notification_ai_features_title (6497959797331796296) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"Notifikationsoversigter"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Få hurtige opsummeringer af længere beskeder"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Brug notifikationsoversigter"</string>
@@ -3928,10 +3859,8 @@
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Skjul følsomt arbejdsindhold"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Hvordan skal profilunderretninger vises, når din enhed er låst?"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Hvad skal der vises på låseskærmen?"</string>
-    <!-- no translation found for lock_screen_notification_show_viewed_notifs (4104703346314965171) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_show_viewed_notif_icons (1197681203638927375) -->
-    <skip />
+    <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Vis notifikationer, der er blevet set"</string>
+    <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Vis ikoner for notifikationer, der er blevet set"</string>
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"Vis lydløse notifikationer"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"Vis følsomt indhold"</string>
     <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"Vis følsomt indhold fra arbejdsprofilen"</string>
@@ -4002,9 +3931,7 @@
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Svare på beskeder"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Den kan besvare beskeder og interagere med knapper i notifikationer, herunder udsættelse eller afvisning af notifikationer og besvarelse af opkald."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Skifte indstillinger"</string>
-    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Den kan aktivere eller deaktivere Forstyr ikke og ændre relaterede indstillinger."</string>
     <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Den kan administrere og aktivere Tilstande og ændre relaterede indstillinger."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="205200471571837170">"Hvis du deaktiverer adgangen til notifikationer for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, deaktiveres adgangen til Forstyr ikke muligvis også."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Hvis du deaktiverer notifikationsadgang for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, deaktiveres adgangen til Tilstande muligvis også."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Slå fra"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Annuller"</string>
@@ -4037,6 +3964,8 @@
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Notifikationer med lignende emner ignoreres og grupperes for at give en roligere brugeroplevelse"</string>
     <string name="notification_bundle_excluded_description" msgid="2667461772332132250">"Notifikationer fra disse apps grupperes ikke"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Tillad gruppering af notifikationer for apps"</string>
+    <!-- no translation found for notification_adjustment_work_switch_title (5858034709870660002) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-hjælpetjenester"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ingen installerede apps har anmodet om at blive kørt som VR-hjælpetjenester."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Vil du tillade, at <xliff:g id="SERVICE">%1$s</xliff:g> får adgang til VR-tjenesten?"</string>
@@ -4071,9 +4000,6 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Hvis du vil forbinde disse apps, skal du installere <xliff:g id="NAME">%1$s</xliff:g> på din arbejdsprofil"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Hvis du vil forbinde disse apps, skal du installere <xliff:g id="NAME">%1$s</xliff:g> på din personlige profil"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Tryk for at hente appen"</string>
-    <string name="manage_zen_access_title" msgid="4123905441114743974">"Indstilling for Forstyr ikke"</string>
-    <string name="zen_access_detail_switch" msgid="4183681772666138993">"Tillad Forstyr ikke"</string>
-    <string name="zen_access_empty_text" msgid="2662270585004373785">"Ingen installerede apps har anmodet om adgang, når indstillingen \"Forstyr ikke\" er aktiveret"</string>
     <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Adgang til tilstande"</string>
     <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Giv adgang til Tilstande"</string>
     <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Ingen installerede apps har anmodet om adgang til Tilstande."</string>
@@ -4163,7 +4089,6 @@
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Beskeder"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Beskeder, der kan afbryde"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Hvis du vil være sikker på, at tilladte beskeder benytter lyd, skal du tjekke, at enheden er indstillet til at ringe"</string>
-    <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Indgående beskeder er blokeret for \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Du kan ændre indstillingerne, så dine venner, din familie eller andre kontakter kan få fat i dig."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Du modtager alle beskeder"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Du modtager alle opkald"</string>
     <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{Ingen}=1{1 kontakt}one{# kontakt}other{# kontakter}}"</string>
@@ -4471,11 +4396,7 @@
     <string name="running_frequency" msgid="7260225121706316639">"Hyppighed"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maksimal forbrug"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Der blev ikke brugt nogen data"</string>
-    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Vil du give <xliff:g id="APP">%1$s</xliff:g> adgang til Forstyr ikke?"</string>
-    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Appen vil kunne aktivere/deaktivere Forstyr ikke og foretage ændringer i relaterede indstillinger."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Skal være slået til, fordi adgangen til notifikationer er slået til"</string>
-    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Vil du tilbagekalde adgangen til Forstyr ikke for <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Alle Forstyr ikke-regler, der er oprettet af denne app, fjernes."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Vil du give <xliff:g id="APP">%1$s</xliff:g> adgang til Tilstande?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Appen vil kunne aktivere/deaktivere Forstyr ikke, administrere og aktivere Tilstande og foretage ændringer af relaterede indstillinger."</string>
     <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Vil du tilbagekalde adgangen til Tilstande for <xliff:g id="APP">%1$s</xliff:g>?"</string>
@@ -4592,6 +4513,10 @@
     <string name="condition_grayscale_title" msgid="9029271080007984542">"Gråtoner"</string>
     <string name="condition_grayscale_summary" msgid="1306034149271251292">"Vis kun i gråtoner"</string>
     <string name="homepage_condition_footer_content_description" msgid="1568313430995646108">"Skjul"</string>
+    <!-- no translation found for homepage_unnumbered_alert_description (8393737409248958672) -->
+    <skip />
+    <!-- no translation found for homepage_numbered_alert_description (4965963469296900322) -->
+    <skip />
     <string name="color_temperature" msgid="8256912135746305176">"Kølig farvetemperatur"</string>
     <string name="color_temperature_desc" msgid="6713259535885669622">"Brug køligere skærmfarver"</string>
     <string name="color_temperature_toast" msgid="7611532183532407342">"Du skal slå skærmen fra, før du kan anvende farveændringer"</string>
@@ -4763,8 +4688,7 @@
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Åbn Wallet"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Vil du ændre låseskærmsgenvejen?"</string>
-    <!-- no translation found for double_tap_power_lockscreen_shortcut_tip_description (7572626485518591928) -->
-    <skip />
+    <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> er også din låseskærmsgenvej. Tryk for at ændre den."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Din nuværende standardapp til pung understøtter ikke bevægelsen"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Skift standardpung"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Vend kameraet for at tage en selfie"</string>
@@ -5880,10 +5804,8 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Børnesikring"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Indholdsbegrænsninger og andre begrænsninger"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Brug forældrestyring af enhed"</string>
-    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
-    <skip />
-    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
-    <skip />
+    <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Opret pinkode"</string>
+    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"Sat på pause"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"forældrestyring, indstillinger for børnesikring, børnesikring"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Administrer din pinkode"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Tilføj mailadresse til gendannelse"</string>

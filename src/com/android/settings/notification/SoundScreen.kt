@@ -65,6 +65,10 @@ open class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
             }
             +MediaControlsScreen.KEY order -100
             +DialPadTonePreference() order -50
+            if (Flags.catalystSoundScreen25q4()) {
+                +ScreenLockSoundPreference() order -45
+                +ChargingSoundPreference() order -40
+            }
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =

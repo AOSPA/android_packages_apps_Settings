@@ -19,30 +19,40 @@ package com.android.settings.screensaver
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Resources
+import android.provider.Settings.Secure.SCREENSAVER_COMPONENTS
+import android.provider.Settings.Secure.SCREENSAVER_ENABLED
+import com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig
 import com.android.settings.dream.ScreensaverScreen
 import com.android.settings.flags.Flags
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.dream.DreamBackend
 import com.android.settingslib.preference.CatalystScreenTestCase
-import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mock
+import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
-class ScreensaverScreenTest: CatalystScreenTestCase() {
+class ScreensaverScreenTest : CatalystScreenTestCase() {
     private val mockResources = mock<Resources>()
-    private val context = object : ContextWrapper(appContext) {
-        override fun getResources(): Resources = mockResources
-    }
+    private val settingsStore = mock<KeyValueStore>()
+    private val context =
+        object : ContextWrapper(appContext) {
+            override fun getResources(): Resources = mockResources
+        }
 
     private val dreamBackend: DreamBackend = mock(DreamBackend::class.java)
+    private var dreamEnabled = false
+    private var activeDreamName = DREAM_NAME
 
-    override val preferenceScreenCreator = ScreensaverScreen(context).also {
-        it.setDreamBackend(dreamBackend)
-    }
+    override val preferenceScreenCreator =
+        ScreensaverScreen(context).also {
+            it.setDreamBackend(dreamBackend)
+            it.setScreensaverStore(settingsStore)
+        }
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_SCREENSAVER
@@ -52,20 +62,23 @@ class ScreensaverScreenTest: CatalystScreenTestCase() {
         preferenceScreenCreator.setAmbientModeSuppressionProvider(
             object : ScreensaverScreen.AmbientModeSuppressionProvider {
                 override fun isSuppressedByBedtime(context: Context) = false
-            })
+            }
+        )
 
         preferenceScreenCreator.setSummaryStringsProvider(
             object : ScreensaverScreen.SummaryStringsProvider {
                 override fun dreamOff(context: Context) = SCREENSAVER_SUMMARY_OFF
 
-                override fun dreamOn(
-                    context: Context,
-                    activeDreamName: CharSequence
-                ) = SCREENSAVER_SUMMARY_ON
+                override fun dreamOn(context: Context, activeDreamName: CharSequence) =
+                    getSummaryOnWithDreamName(activeDreamName)
 
                 override fun dreamOffBedtime(context: Context) = SCREENSAVER_SUMMARY_OFF_BEDTIME
             }
         )
+        settingsStore.stub {
+            on { getString(SCREENSAVER_COMPONENTS) } doAnswer { activeDreamName }
+            on { getBoolean(SCREENSAVER_ENABLED) } doAnswer { dreamEnabled }
+        }
     }
 
     @Test
@@ -76,16 +89,10 @@ class ScreensaverScreenTest: CatalystScreenTestCase() {
     @Test
     fun getSummary_dreamsNotDisabledByAmbientModeSuppression_dreamsDisabled() {
         mockResources.stub {
-            on {
-                getBoolean(
-                    com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig
-                )
-            } doReturn false
+            on { getBoolean(config_dreamsDisabledByAmbientModeSuppressionConfig) } doReturn false
         }
 
-        dreamBackend.stub {
-            on { isEnabled } doReturn false
-        }
+        dreamBackend.stub { on { isEnabled } doReturn false }
 
         assertThat(preferenceScreenCreator.getSummary(context)).isEqualTo(SCREENSAVER_SUMMARY_OFF)
     }
@@ -93,39 +100,75 @@ class ScreensaverScreenTest: CatalystScreenTestCase() {
     @Test
     fun getSummary_dreamsNotDisabledByAmbientModeSuppression_dreamsEnabled() {
         mockResources.stub {
-            on {
-                getBoolean(
-                    com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig
-                )
-            } doReturn false
+            on { getBoolean(config_dreamsDisabledByAmbientModeSuppressionConfig) } doReturn false
         }
 
         dreamBackend.stub {
             on { isEnabled } doReturn true
-            on { activeDreamName } doReturn ACTIVE_DREAM_NAME
+            on { activeDreamName } doReturn DREAM_NAME
         }
 
-        assertThat(preferenceScreenCreator.getSummary(context)).isEqualTo(SCREENSAVER_SUMMARY_ON)
+        assertThat(preferenceScreenCreator.getSummary(context))
+            .isEqualTo(getSummaryOnWithDreamName(DREAM_NAME))
     }
 
     @Test
     fun getSummary_dreamsDisabledByAmbientModeSuppression() {
         mockResources.stub {
-            on {
-                getBoolean(
-                    com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig
-                )
-            } doReturn true
+            on { getBoolean(config_dreamsDisabledByAmbientModeSuppressionConfig) } doReturn true
         }
 
         preferenceScreenCreator.setAmbientModeSuppressionProvider(
             object : ScreensaverScreen.AmbientModeSuppressionProvider {
                 override fun isSuppressedByBedtime(context: Context) = true
-            })
+            }
+        )
 
         assertThat(preferenceScreenCreator.getSummary(context))
             .isEqualTo(SCREENSAVER_SUMMARY_OFF_BEDTIME)
     }
+
+    @Test
+    fun getSummary_onScreenSaverEnabledChanged() {
+        mockResources.stub {
+            on { getBoolean(config_dreamsDisabledByAmbientModeSuppressionConfig) } doReturn false
+        }
+
+        dreamBackend.stub {
+            on { isEnabled } doAnswer { settingsStore.getBoolean(SCREENSAVER_ENABLED) }
+            on { activeDreamName } doReturn DREAM_NAME
+        }
+
+        dreamEnabled = true
+        assertThat(preferenceScreenCreator.getSummary(context))
+            .isEqualTo(getSummaryOnWithDreamName(DREAM_NAME))
+
+        dreamEnabled = false
+        assertThat(preferenceScreenCreator.getSummary(context)).isEqualTo(SCREENSAVER_SUMMARY_OFF)
+    }
+
+    @Test
+    fun getSummary_onActiveDreamChanged() {
+        mockResources.stub {
+            on { getBoolean(config_dreamsDisabledByAmbientModeSuppressionConfig) } doReturn false
+        }
+
+        dreamBackend.stub {
+            on { isEnabled } doReturn true
+            on { activeDreamName } doAnswer { settingsStore.getString(SCREENSAVER_COMPONENTS) }
+        }
+
+        activeDreamName = DREAM_NAME
+        assertThat(preferenceScreenCreator.getSummary(context))
+            .isEqualTo(getSummaryOnWithDreamName(DREAM_NAME))
+
+        activeDreamName = DREAM_NAME_2
+        assertThat(preferenceScreenCreator.getSummary(context))
+            .isEqualTo(getSummaryOnWithDreamName(DREAM_NAME_2))
+    }
+
+    private fun getSummaryOnWithDreamName(dreamName: CharSequence) =
+        SCREENSAVER_SUMMARY_ON + dreamName
 
     override fun migration() {}
 
@@ -133,6 +176,7 @@ class ScreensaverScreenTest: CatalystScreenTestCase() {
         const val SCREENSAVER_SUMMARY_OFF = "screensaver_summary_dream_off"
         const val SCREENSAVER_SUMMARY_ON = "screensaver_summary_on"
         const val SCREENSAVER_SUMMARY_OFF_BEDTIME = "screensaver_summary_off_bedtime"
-        const val ACTIVE_DREAM_NAME = "dream"
+        const val DREAM_NAME = "dream"
+        const val DREAM_NAME_2 = "second dream"
     }
 }

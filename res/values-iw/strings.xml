@@ -132,8 +132,8 @@
     <string name="bluetooth_off_footer" msgid="76578735660216295">"‏צריך להפעיל Bluetooth כדי להתחבר למכשירים אחרים."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"המכשירים שלך"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"התאמה של מכשיר חדש"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"‏השבתה של הורדת העומס מחומרת Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"‏השבתה של הורדת העומס מהחומרה של LE audio hardware"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"‏ביטול הורדת העומס של Bluetooth A2DP מהמעבד"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"‏ביטול הורדת העומס של Bluetooth LE Audio מהמעבד"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"להפעיל את המכשיר מחדש?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"עליך להפעיל מחדש את המכשיר כדי לשנות הגדרה זו."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"הפעלה מחדש"</string>
@@ -145,7 +145,7 @@
     <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"‏הפעלת התצוגה המקדימה של ממשק המשתמש לשיתוף באמצעות LE Audio, כולל שיתוף אודיו אישי ושידור פרטי"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"‏הצגת המתג של LE audio בפרטי המכשיר"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"‏מעקף רשימת ההיתרים של Bluetooth LE Audio"</string>
-    <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"‏שימוש ב-LE Audio כברירת מחדל גם אם הציוד ההיקפי של ה-LE Audio לא אומת כעומד בקריטריונים של רשימת ההיתרים."</string>
+    <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"‏ציוד היקפי יתחבר כברירת מחדל באמצעות LE Audio, גם אם הוא לא בהכרח עומד בקריטריונים של רשימת ההיתרים."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"מכשירי מדיה"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"מכשירי התקשרות"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"מכשירים אחרים"</string>
@@ -214,7 +214,7 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"השפה עשויה להיות שונה מהשפות הזמינות באפליקציה. יכול להיות שחלק מהאפליקציות לא תומכות בהגדרה הזו."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"אפשר לבחור את השפה של כל אפליקציה."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"אפשר לבחור את השפה של כל אפליקציה. יכול להיות שהשפה שונה מהשפות שזמינות באפליקציה. לא בטוח שכל האפליקציות תומכות בהגדרה הזו."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"השפה במכשיר שלך, באפליקציות ובאתרים מוגדרת לשפה הנתמכת הראשונה ברשימת השפות שציינת כמועדפות.\n\nאפליקציות רבות גם יקבעו את אופן הצגת התאריכים, המספרים והיחידות לפי האזור של השפה המועדפת שציינת. כדי לשנות את האזור, צריך להוסיף שפה ואז לבחור את האזור המועדף."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"השפה במכשיר, באפליקציות ובאתרים מוגדרת לשפה הנתמכת הראשונה ברשימת השפות שציינת כמועדפות.\n\nבהרבה אפליקציות, האזור של השפה הזו יקבע גם איך יוצגו תאריכים, מספרים ויחידות מידה. כדי לשנות את האזור, צריך להוסיף שפה ואז לבחור את האזור המועדף."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"כדי להגדיר ידנית את השפה של אפליקציות מסוימות, אפשר לעבור לדף \"שפות של אפליקציות\"."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"מידע נוסף על שפות של אפליקציות"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"‏לשנות את האזור ל%s?"</string>
@@ -293,6 +293,8 @@
     <string name="share" msgid="8502235338607613795">"שיתוף"</string>
     <string name="add" msgid="8335206931421683426">"הוספה"</string>
     <string name="remove" msgid="1028414219245072102">"הסרה"</string>
+    <!-- no translation found for process (2614220641928709668) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"הגדרות"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"הגדרות"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"קיצור דרך של הגדרות"</string>
@@ -537,7 +539,7 @@
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"צריך להגדיר ביטול נעילה בעזרת מידע ביומטרי"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"נוספו טביעות אצבע וזיהוי פנים"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"נוספו טביעת אצבע וזיהוי פנים"</string>
-    <string name="biometric_settings_intro" msgid="4263069383955676756">"לאחר הגדרה של פתיחה ע\"י זיהוי הפנים ושל ביטול הנעילה בטביעת אצבע, תופיע בקשה בטלפון לבטל את הנעילה באמצעות טביעת אצבע אם עוטים מסיכה או נמצאים במקום חשוך"</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"אחרי שמגדירים פתיחה בזיהוי הפנים ופתיחה בטביעת אצבע, תופיע בקשה בטלפון לפתוח את המסך בטביעת אצבע אם עוטים מסיכה או נמצאים במקום חשוך"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"דרכים לפתיחת הנעילה"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"שימוש בזיהוי פנים או בטביעת אצבע לצורך"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"לפתוח את הטלפון"</string>
@@ -930,6 +932,10 @@
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"אישור גישה אל אנשי הקשר והיסטוריית השיחות"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"אישור גישה אל אנשי הקשר והיסטוריית השיחות"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"המידע הזה ישמש למשל כדי להשמיע התראות על שיחות נכנסות"</string>
+    <!-- no translation found for bluetooth_pairing_confirmation_title (3359642089708714808) -->
+    <skip />
+    <!-- no translation found for bluetooth_pairing_confirmation_msg (8204761740738350792) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"לא הייתה אפשרות להתחבר אל <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"מכשירים זמינים"</string>
@@ -994,7 +1000,8 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"אפשרויות נוספות"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"כדי לשנות את סדר התצוגות, לוחצים לחיצה ארוכה על תצוגה וגוררים אותה."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"שיקוף המסך המובנה"</string>
-    <string name="wifi_display_settings_title" msgid="6451625615274960175">"‏הפעלת Cast"</string>
+    <!-- no translation found for wifi_display_settings_title (2622548133505158832) -->
+    <skip />
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"‏העברה (csat)"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"‏הפעלת תצוגת WiFi"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"לא נמצאו מכשירים בקרבת מקום."</string>
@@ -1170,8 +1177,7 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"כן, זה בסדר"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"דחייה"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*חובה"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (7611029233083731552) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"הרשת הזו משותפת. אפשר לשנות את ההגדרה הזו אחרי שמתחברים לחשבון."</string>
     <string name="share_wifi_network" msgid="4064997404339571584">"שיתוף הרשת הזו עם משתמשים אחרים במכשיר"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"כל המשתמשים במכשיר הזה יכולים לראות רשתות משותפות ולהתחבר אליהן. אדמינים יכולים למחוק רשתות משותפות. מידע נוסף"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"משתמשים אחרים יכולים לשנות את הגדרת הרשת"</string>
@@ -1454,26 +1460,17 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"פועל / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"כבוי"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"מתי להציג"</string>
-    <!-- no translation found for screensaver_settings_low_light_mode (271972828076673743) -->
-    <skip />
+    <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"מצב תאורה חלשה"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"אפשר להרים כדי להוציא ממצב שינה"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"רק בזמן טעינה אלחוטית"</string>
-    <!-- no translation found for low_light_display_behavior_main_switch_title (7138165032358139627) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_subtitle (1833984014035605413) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_screen_off (4203092158668290404) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_low_light_clock_dream (2235561363691252383) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_summary_on (4218678742261840224) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_summary_off (4565368094992120316) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_screen_off_full_summary (6671607843870561892) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_low_light_clock_dream_full_summary (1145914465090731721) -->
-    <skip />
+    <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"שימוש במצב תאורה חלשה"</string>
+    <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"מה להציג במצב תאורה חלשה?"</string>
+    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"כיבוי המסך"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"שעון בתאורה חלשה"</string>
+    <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"פועל / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
+    <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"מושבת"</string>
+    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"המסך יכבה כשהסביבה חשוכה"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"כשהסביבה חשוכה, יוצג שעון בתאורה חלשה"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"תצוגה רגישה לסביבה"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"מתי להציג"</string>
     <string name="doze_title" msgid="1523090408230862316">"המסך יוצא ממצב שינה אם יש התראה"</string>
@@ -1794,7 +1791,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"‏אפליקציות ושירותים יוכלו לחפש מכשירים בקרבת מקום בכל שלב, גם כאשר ה-Bluetooth כבוי. ניתן להשתמש בכך, למשל, כדי לשפר את הביצועים של תכונות ושירותים מבוססי מיקום."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"שירותי מיקום"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"שירותי מיקום"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"שימוש במיקום לקביעת אזור הזמן"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"קביעת אזור הזמן לפי המיקום"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"לא ניתן לעדכן את אזור הזמן באופן אוטומטי"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"המיקום או שירותי המיקום מושבתים"</string>
@@ -1809,7 +1806,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"זיהוי אזור הזמן של המיקום מושבת"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"אין תמיכה בזיהוי אזור הזמן של המיקום"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"אין לבצע שינויים בזיהוי אזור הזמן של המיקום"</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"אם מיקום המכשיר זמין, הוא יכול לשמש להגדרת אזור הזמן"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"אזור הזמן יתעדכן לפי המיקום שהמכשיר יזהה"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"התראות"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"שינוי אזור הזמן"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"קבלת התראה כשאזור הזמן מתעדכן אוטומטית"</string>
@@ -2138,8 +2135,7 @@
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"הפחתה"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"הגברה"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"גלילה הפוכה"</string>
-    <!-- no translation found for mouse_keys_use_primary_keys_title (525897583406210252) -->
-    <skip />
+    <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"שימוש במקשים הראשיים"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"גלילה למעלה להזזת הדף למטה"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"גלילה"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"גלילה מבוקרת"</string>
@@ -2219,20 +2215,13 @@
     <string name="gesture_button_next" msgid="695288092704187356">"הבא"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"הפעלה מחדש"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"סיום"</string>
-    <!-- no translation found for action_corners_title (8971354126563421646) -->
-    <skip />
-    <!-- no translation found for action_corners_summary (4245089615854251124) -->
-    <skip />
-    <!-- no translation found for action_corners_intro (4384209411870086502) -->
-    <skip />
-    <!-- no translation found for action_corners_bottom_left_title (8677233546610832717) -->
-    <skip />
-    <!-- no translation found for action_corners_bottom_right_title (2155948558861306738) -->
-    <skip />
-    <!-- no translation found for action_corners_top_left_title (6604149810499060560) -->
-    <skip />
-    <!-- no translation found for action_corners_top_right_title (583996793984142329) -->
-    <skip />
+    <string name="action_corners_title" msgid="8971354126563421646">"התאמה אישית של פינות לפעולות"</string>
+    <string name="action_corners_summary" msgid="4245089615854251124">"אפשר לנווט במערכת בעזרת הסמנים"</string>
+    <string name="action_corners_intro" msgid="4384209411870086502">"יש לבחור את האזורים הבאים כדי להתאים אישית את הפינות לפעולות"</string>
+    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"הפינה השמאלית התחתונה"</string>
+    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"הפינה הימנית התחתונה"</string>
+    <string name="action_corners_top_left_title" msgid="6604149810499060560">"הפינה השמאלית העליונה"</string>
+    <string name="action_corners_top_right_title" msgid="583996793984142329">"הפינה הימנית העליונה"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"מקשי צירוף"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"שינוי ההתנהגות של המקשים"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"איפוס של הכול"</string>
@@ -2378,15 +2367,18 @@
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"הזזת המסך ברצף כשהסמן זז"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"הזזת המסך ושמירה על הסמן במרכז המסך"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"הזזת המסך כשהסמן נוגע בקצות המסך"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"הגדלת ההקלדה"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"תוך כדי שמקלידים, הגדלת התצוגה עוקבת אחר הטקסט"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"מעקב אחר הקלדה"</string>
+    <!-- no translation found for accessibility_screen_magnification_follow_typing_summary (2678347754211619662) -->
+    <skip />
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"הגדלת המיקוד של המקלדת"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"ההגדלה זזה לאן שהמקלדת זזה במסך"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"הגדלת המקלדת"</string>
-    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"המקלדת מוגדלת עם התוכן שלך"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (2102651227079047801) -->
+    <skip />
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"האפשרות לא זמינה כשמגדילים רק חלק מהמסך"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"ההגדלה פועלת גם כשעוברים בין אפליקציות"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"הזכוכית המגדלת ממשיכה לפעול והתצוגה מוקטנת כשעוברים בין אפליקציות"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_summary (642275893256862796) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"לא זמין בזמן הגדלה של רק חלק מהמסך"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"ג\'ויסטיק"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"אפשר להפעיל את זכוכית המגדלת ולהזיז אותה באמצעות ג\'ויסטיק במסך. לוחצים לחיצה ארוכה וגוררים באמצעות הג\'ויסטיק כדי לשלוט בזכוכית המגדלת. לוחצים וגוררים את האצבע כדי להזיז את הג\'ויסטיק עצמו."</string>
@@ -2607,7 +2599,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"רטט הצלצול"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"רטט של התראה"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"משוב מגע"</string>
-    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"שימוש ב-<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"שימוש בשירות <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"פתיחה של \'<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>\'"</string>
     <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"התכונה <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> נוספה להגדרות המהירות. כדי להפעיל או להשבית אותה מתי שרוצים, מחליקים למטה."</string>
     <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"אפשר להוסיף את <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> להגדרות המהירות גם מהחלק העליון של המסך"</string>
@@ -2839,7 +2831,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"פרטי היסטוריה"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"שימוש בסוללה"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"נתוני השימוש ב-24 השעות האחרונות"</string>
-    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"צפייה בשימוש מאז הטעינה המלאה האחרונה"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"נתוני הצריכה מאז הטעינה המלאה האחרונה"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"שימוש בסוללה לאפליקציה"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"פרטי שימוש"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"התאמת צריכת סוללה"</string>
@@ -3640,9 +3632,9 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"‏תג NFC‏, nfc, תג, קורא"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"מקלדת, משוב פיזי, רטט,"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"עוצמת הקול והרטט"</string>
-    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"עוצמת הקול, רטט, מצב \'נא לא להפריע\'"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"עוצמת קול של מדיה"</string>
-    <string name="remote_media_volume_option_title" msgid="8760846743943305764">"‏עוצמת הקול בהפעלת Cast"</string>
+    <!-- no translation found for remote_media_volume_option_title (7907330631195715350) -->
+    <skip />
     <string name="call_volume_option_title" msgid="1461105986437268924">"עוצמת קול של שיחות"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"עוצמת קול של שעון מעורר"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"עוצמת קול של צלצול והתראות"</string>
@@ -3728,13 +3720,6 @@
     <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"תזמון"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"לוח זמנים"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"‫<xliff:g id="HOURS">%1$d</xliff:g> שע\', <xliff:g id="MINUTES">%2$d</xliff:g> דק\'"</string>
-    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"לוח זמנים"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"השתקת הטלפון בזמנים מסוימים"</string>
-    <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"הגדרת כללים ל\'נא לא להפריע\'"</string>
-    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"לוח זמנים"</string>
-    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"שימוש בלוח זמנים"</string>
-    <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_settings_category" msgid="3794956668816783447">"אישור להפרעות עם צלילים"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"חסימת הפרעות חזותיות"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"הפעלת אותות חזותיים"</string>
     <string name="mode_interruption_filter_title" msgid="6293843948349239256">"מסנני התראות"</string>
@@ -3758,16 +3743,6 @@
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"כל ההתראות"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"אנשים, אפליקציות וצלילים יכולים להפריע"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"אפשרויות תצוגה להתראות מסוננות"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"כשמצב \'נא לא להפריע\' פועל"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"התראות ללא צליל"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"יוצגו התראות על המסך"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"כשיגיעו התראות, הטלפון לא ישמיע צליל ולא ירטוט."</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"התראות לא יופיעו ולא יושמעו"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"התראות לא יוצגו במסך ולא יושמעו"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"הטלפון שלך לא יציג התראות חדשות או קיימות, ולא ירטוט או יצלצל כשהן יתקבלו. חשוב לזכור שהתראות קריטיות לגבי הפעילות והסטטוס של המכשיר עדיין יופיעו.\n\nלאחר כיבוי התכונה \'נא לא להפריע\', ניתן למצוא התראות שפספסת על ידי החלקה למטה מהחלק העליון של המסך."</string>
-    <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"התאמה אישית"</string>
-    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"הפעלת הגדרה מותאמת אישית"</string>
-    <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"הסרת הגדרה מותאמת אישית"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"ההתראות מוצגות"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"ההתראות מוסתרות חלקית"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"ההתראות מוסתרות"</string>
@@ -3782,47 +3757,16 @@
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"לא להציג את סימני ההתראות בסמלי האפליקציות"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"לא להציג התראות"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"לא להציג בחלונית ההתראות הנפתחת"</string>
-    <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"אף פעם"</string>
-    <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"כאשר המסך כבוי"</string>
-    <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"כאשר המסך פועל"</string>
-    <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"צלילים ורטט"</string>
-    <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"צלילים, רטט וחלק מהסימנים החזותיים של התראות"</string>
-    <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"צלילים, רטט וסימנים חזותיים של התראות"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"לעולם לא יוסתרו התראות הדרושות לפעולת המכשיר הבסיסית ולסטטוס שלו."</string>
-    <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"ללא"</string>
-    <string name="zen_mode_other_options" msgid="3399967231522580421">"אפשרויות אחרות"</string>
-    <string name="zen_mode_add" msgid="8789024026733232566">"הוספה"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"הפעלה"</string>
-    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"הפעלה"</string>
-    <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"כיבוי עכשיו"</string>
-    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"המצב \'נא לא להפריע\' מופעל עד <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"המצב \'נא לא להפריע\' ימשיך לפעול עד שמכבים אותו"</string>
-    <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"ההגדרה \'נא לא להפריע\' הופעלה באופן אוטומטי על ידי לוח זמנים (<xliff:g id="RULE_NAME">%s</xliff:g>)"</string>
-    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"המצב \'נא לא להפריע\' הופעל אוטומטית על ידי האפליקציה <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"המצב \'נא לא להפריע\' מופעל על פי הכלל <xliff:g id="RULE_NAMES">%s</xliff:g> ולפי הגדרות מותאמות אישית."</string>
-    <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">"לצפייה בהגדרות בהתאמה אישית"</annotation></string>
-    <string name="zen_interruption_level_priority" msgid="4854123502362861192">"עדיפות בלבד"</string>
-    <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"פועל / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"פועל"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"אני רוצה לבחור בכל פעם"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"עד הכיבוי"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{שעה}one{# שעות}two{שעתיים}other{# שעות}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{דקה אחת}one{# דקות}two{# דקות}other{# דקות}}"</string>
-    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{מצב כבוי}=1{מצב כבוי. לוח זמנים אחד יכול להפעיל את התכונה באופן אוטומטי}one{מצב כבוי. # לוחות זמנים יכולים להפעיל את התכונה באופן אוטומטי}two{מצב כבוי. # לוחות זמנים יכולים להפעיל את התכונה באופן אוטומטי}other{מצב כבוי. # לוחות זמנים יכולים להפעיל את התכונה באופן אוטומטי}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"מה יכול להפריע כשהמכשיר במצב \'נא לא להפריע\'"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"אנשים"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"אפליקציות"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"שעונים מעוררים והפרעות אחרות"</string>
-    <string name="zen_category_schedule" msgid="2003707171924226212">"לוחות זמנים"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"כמה זמן פועלות ההגדרות המהירות"</string>
-    <string name="zen_settings_general" msgid="2704932194620124153">"כללי"</string>
-    <string name="zen_sound_footer" msgid="4090291351903631977">"כשמצב \'נא לא להפריע\' פועל, צלילים ורטט מושתקים, חוץ מהפריטים שאפשרת למעלה."</string>
-    <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"הגדרות מותאמות אישית"</string>
-    <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"בדיקת לוח זמנים"</string>
-    <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"הבנתי"</string>
-    <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"התראות"</string>
-    <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"כמה זמן"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"צלילי פרופיל עבודה"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"שימוש בצלילי הפרופיל האישי"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"שימוש באותם הצלילים מהפרופיל האישי"</string>
@@ -3864,6 +3808,8 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"הפעלת האפשרות להעביר התראות למצב \'נודניק\'"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"סימן ההתראות בסמל האפליקציה"</string>
     <string name="notification_bundles" msgid="496852738958148317">"Notification Organizer"</string>
+    <!-- no translation found for notification_ai_features_title (6497959797331796296) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"סיכומי התראות"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"קבלת תקצירים מהירים של הודעות ארוכות"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"שימוש בסיכומי התראות"</string>
@@ -4002,9 +3948,7 @@
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"לשלוח תשובות להודעות"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"התכונה יכולה לענות להודעות ולהפעיל כפתורים שמופיעים בהתראות, כולל העברה למצב נודניק או ביטול של התראות ומענה לשיחות."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"לשנות הגדרות"</string>
-    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"התכונה יכולה להפעיל או להשבית את מצב \'נא לא להפריע\' ולשנות הגדרות קשורות."</string>
     <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"התכונה יכולה לנהל ולהפעיל מצבים וגם לשנות הגדרות קשורות."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="205200471571837170">"אם משביתים את הגישה של <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> להתראות, יכול להיות שגם השליטה בתכונה \"נא לא להפריע\" תושבת."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"אם משביתים את הרשאת הגישה להתראות של <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, יכול להיות שגם הגישה למצבים תושבת."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"השבתה"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ביטול"</string>
@@ -4037,6 +3981,8 @@
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"התראות בנושאים דומים יושתקו ויקובצו יחד כדי לספק חוויית שימוש שקטה יותר"</string>
     <string name="notification_bundle_excluded_description" msgid="2667461772332132250">"התראות מהאפליקציות האלה לא יקובצו"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"מתן אישור לקבץ התראות מאפליקציות"</string>
+    <!-- no translation found for notification_adjustment_work_switch_title (5858034709870660002) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"‏שירותי סיוע של VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"‏לא התקבלו בקשות מאפליקציות מותקנות לפעול כשירותי סיוע של VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"‏האם לאפשר לשירות VR גישה אל <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4071,9 +4017,6 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"כדי לקשר את האפליקציות האלו, צריך להתקין את <xliff:g id="NAME">%1$s</xliff:g> בפרופיל העבודה"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"כדי לקשר את האפליקציות האלו, צריך להתקין את <xliff:g id="NAME">%1$s</xliff:g> בפרופיל האישי"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"יש ללחוץ כדי להוריד את האפליקציה"</string>
-    <string name="manage_zen_access_title" msgid="4123905441114743974">"שליטה בתכונה \"נא לא להפריע\""</string>
-    <string name="zen_access_detail_switch" msgid="4183681772666138993">"אישור גישה אל \'נא לא להפריע\'"</string>
-    <string name="zen_access_empty_text" msgid="2662270585004373785">"אין אפליקציות מותקנות שביקשו שליטה בתכונת \"נא לא להפריע\""</string>
     <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"גישה למצבים"</string>
     <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"מתן גישה למצבים"</string>
     <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"אף אחת מהאפליקציות שמותקנות במכשיר לא ביקשה גישה למצבים"</string>
@@ -4163,7 +4106,6 @@
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"הודעות"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"הודעות שיכולות להפריע"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"כדי שהמכשיר ישמיע צליל התראה כשמגיעות הודעות מורשות, צריך להעביר אותו למצב \'צלצול\'"</string>
-    <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"במצב \'<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\', הודעות נכנסות ייחסמו. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"כל ההודעות יכולות להגיע אליך"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"כל השיחות יכולות להגיע אליך"</string>
     <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{אין}=1{איש קשר אחד}one{# אנשי קשר}two{# אנשי קשר}other{# אנשי קשר}}"</string>
@@ -4471,11 +4413,7 @@
     <string name="running_frequency" msgid="7260225121706316639">"תדר"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"שימוש מקסימלי"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"לא נעשה שימוש בנתונים"</string>
-    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"האם להתיר ל<xliff:g id="APP">%1$s</xliff:g> לגשת אל \'נא לא להפריע\'?"</string>
-    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"האפליקציה תוכל להפעיל או לכבות את \'נא לא להפריע\' ולבצע שינויים בהגדרות קשורות."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"צריך להיות מופעל מפני שהגישה להתראות מופעלת"</string>
-    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"לבטל את הגישה של <xliff:g id="APP">%1$s</xliff:g> ל\'נא לא להפריע\'?"</string>
-    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"כל כללי \'נא לא להפריע\' שנוצרו על ידי האפליקציה הזו יוסרו."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"לתת לאפליקציה <xliff:g id="APP">%1$s</xliff:g> הרשאת גישה למצבים?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"האפליקציה תוכל להפעיל או להשבית את מצב \'נא לא להפריע\', לנהל ולהפעיל מצבים ולבצע שינויים בהגדרות קשורות."</string>
     <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"לבטל את הרשאת הגישה של <xliff:g id="APP">%1$s</xliff:g> למצבים?"</string>
@@ -4592,6 +4530,10 @@
     <string name="condition_grayscale_title" msgid="9029271080007984542">"גווני אפור"</string>
     <string name="condition_grayscale_summary" msgid="1306034149271251292">"הצגה רק באפור"</string>
     <string name="homepage_condition_footer_content_description" msgid="1568313430995646108">"כיווץ"</string>
+    <!-- no translation found for homepage_unnumbered_alert_description (8393737409248958672) -->
+    <skip />
+    <!-- no translation found for homepage_numbered_alert_description (4965963469296900322) -->
+    <skip />
     <string name="color_temperature" msgid="8256912135746305176">"טמפרטורת צבעים קרים"</string>
     <string name="color_temperature_desc" msgid="6713259535885669622">"השתמש בצבעי תצוגה קרירים יותר"</string>
     <string name="color_temperature_toast" msgid="7611532183532407342">"יש לכבות את המסך כדי להחיל שינוי צבע"</string>
@@ -4737,9 +4679,9 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"המתג מופעל באופן זמני כי מצב \'חיסכון בסוללה\' הופעל"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"כדאי לנסות עיצוב כהה"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"עוזר להארכת חיי הסוללה"</string>
-    <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"כרטיסי מידע למפתחים בהגדרות המהירות"</string>
+    <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"כפתורים למפתחים בהגדרות המהירות"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"‏השבתה של זמן קצוב לתפוגה של הרשאת adb"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"‏השבתה של ביטול אוטומטי של הרשאות adb, למערכות שלא התחברו מחדש במסגרת משך הזמן המוגדר כברירת מחדל (שבעה ימים) או מוגדר על ידי משתמשים (יום אחד לפחות)."</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"‏מערכות ישמרו על הרשאות ה-adb שנתת להם אפילו אם הן לא התחברו מחדש תוך הזמן שקבעת – לפחות יום אחד, 7 ימים כברירת מחדל."</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"כיבוי חיישנים"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"הגדרות של פרופיל העבודה"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"חיפוש אנשי קשר מספריית העבודה באפליקציות לשימוש אישי"</string>
@@ -4789,15 +4731,15 @@
     <string name="nav_tutorial_button_description" msgid="7195363082216233970">"פתיחת המדריך לניווט באמצעות תנועות."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"ניווט במערכת, ניווט ב-2 כפתורים, ניווט ב-3 כפתורים, ניווט באמצעות תנועות, החלקה"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"העוזר האישי"</string>
-    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"החלקה להפעלת העוזר הדיגיטלי"</string>
-    <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"כדי להפעיל את אפליקציית העוזר הדיגיטלי, צריך להחליק למעלה מאחת הפינות התחתונות"</string>
+    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"החלקה להפעלת העוזר האישי"</string>
+    <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"החלקה מאחת הפינות התחתונות תפעיל את אפליקציית העוזר האישי"</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"לחיצה ארוכה על הלחצן הראשי להפעלת העוזר הדיגיטלי"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"צריך ללחוץ לחיצה ארוכה על הכפתור הראשי כדי להפעיל את אפליקציית העוזר הדיגיטלי."</string>
     <string name="low_label" msgid="6525629096999711220">"נמוכה"</string>
     <string name="high_label" msgid="357503396626018487">"גבוהה"</string>
     <string name="left_edge" msgid="1513576842959071849">"קצה שמאלי"</string>
     <string name="right_edge" msgid="1505309103265829121">"קצה ימני"</string>
-    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"רגישות גבוהה עלולה לגרום לזיהוי שגוי של תנועות באפליקציות שונות בקצוות של המסך."</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"כשהרגישות גבוהה מדי, הפעולות האלה מתבצעות בטעות במקום פעולות אחרות בסמוך לקצוות המסך."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"רגישות לתנועה \"חזרה\""</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"ניווט באמצעות תנועות"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"צפייה בהדגמה"</string>
@@ -5324,8 +5266,8 @@
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"הפעלת מצב חופשי (חלונות צפים) במסך המשני"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"הפעלת אפליקציות שלא ניתן לשנות את גודלן בריבוי חלונות"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"ההגדרה מאפשרת להפעיל בריבוי חלונות אפליקציות שלא ניתן לשנות את גודלן"</string>
-    <string name="hwui_force_dark_title" msgid="4256904905631994219">"‏שינוי התכונה SmartDark"</string>
-    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"‏התכונה SmartDark תפעל כל הזמן"</string>
+    <string name="hwui_force_dark_title" msgid="4256904905631994219">"הפעלת מצב כהה באופן אוטומטי"</string>
+    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"כל האפליקציות יפעלו במצב כהה כברירת מחדל"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"פרטיות"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"הרשאות, פעילות בחשבון, מידע אישי"</string>
     <string name="privacy_controls_title" msgid="1383047169455206604">"פקדים"</string>
@@ -5415,7 +5357,7 @@
     <string name="power_menu_setting_name" msgid="2394440932633137229">"לחיצה ארוכה על כפתור ההפעלה"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"לחיצה ארוכה על כפתור ההפעלה תפעיל את"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"תפריט ההפעלה"</string>
-    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"העוזר הדיגיטלי"</string>
+    <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"העוזר האישי"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"גישה לעוזר האישי"</string>
     <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"גישה לתפריט ההפעלה"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"כדי להשתמש בתכונה הזו, קודם צריך להגדיר נעילת מסך"</string>
@@ -5716,7 +5658,7 @@
     <string name="color_inversion_state_off" msgid="6925638668080451724">"מושבתת"</string>
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"התכונה משנה את הצבעים של מסכים בהירים לצבעים כהים ולהפך"</string>
     <string name="magnification_feature_summary" msgid="2053971569640663564">"הגדלת התצוגה במסך"</string>
-    <string name="autoclick_disabled" msgid="3213396804955002120">"מושבתת"</string>
+    <string name="autoclick_disabled" msgid="3213396804955002120">"מושבת"</string>
     <string name="show_captions_disabled" msgid="690650956523818755">"מושבתת"</string>
     <string name="show_captions_enabled" msgid="7089043007924626">"מופעלת"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"מושבתות"</string>
@@ -5881,10 +5823,8 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"אמצעי בקרת הורים"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"הגבלות תוכן ומגבלות אחרות"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"שימוש בפיקוח על מכשירים"</string>
-    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
-    <skip />
-    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
-    <skip />
+    <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"הגדרת קוד אימות"</string>
+    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"בהשהיה"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"פיקוח, פיקוח הורים, אמצעי בקרת הורים"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"עריכת קוד האימות"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"הוספה של כתובת אימייל לשחזור החשבון"</string>

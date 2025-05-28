@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_UPDATE_RECOVERY
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
 import android.app.supervision.flags.Flags
@@ -23,6 +24,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -40,11 +42,15 @@ class SupervisionUpdateRecoveryEmailPreference :
     PreferenceLifecycleProvider,
     PreferenceBinding,
     PreferenceSummaryProvider,
+    PreferenceActionMetricsProvider,
     Preference.OnPreferenceClickListener {
 
     private lateinit var lifeCycleContext: PreferenceLifecycleContext
     override val key: String
         get() = KEY
+
+    override val preferenceActionMetrics: Int
+        get() = ACTION_SUPERVISION_UPDATE_RECOVERY
 
     override val title: Int
         get() = R.string.supervision_update_recovery_email_preference_title

@@ -35,7 +35,6 @@ import android.os.Process
 import android.os.UserHandle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.OpenForTesting
 import androidx.annotation.RequiresPermission
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
@@ -60,8 +59,7 @@ import com.android.settingslib.supervision.SupervisionLog.TAG
  * Permissions:
  * - Requires `android.permission.USE_BIOMETRIC`.
  */
-@OpenForTesting
-open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
+class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
 
     private val mAuthenticationCallback =
         object : AuthenticationCallback() {
@@ -97,7 +95,7 @@ open class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     @RequiresPermission(
         allOf = [USE_BIOMETRIC_INTERNAL, SET_BIOMETRIC_DIALOG_ADVANCED, INTERACT_ACROSS_USERS_FULL]
     )
-    public override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!callerHasSupervisionRole() && !callerIsSystemUid()) {
             errorHandler(

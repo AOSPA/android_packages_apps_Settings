@@ -18,12 +18,13 @@ package com.android.settings.supervision
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.ComponentCaller
-import android.content.Intent
+import android.content.Context
 import android.content.pm.UserInfo
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.os.UserManager.USER_TYPE_PROFILE_TEST
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settings.supervision.SupervisionCredentialProxyActivity.Companion.REQUEST_CODE_SUPERVISION_CREDENTIALS_PROXY
 import com.google.common.truth.Truth.assertThat
@@ -33,29 +34,40 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.never
-import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.Robolectric
-import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.android.controller.ActivityController
+import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowActivity
+import org.robolectric.shadows.ShadowContextImpl
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class SupervisionCredentialProxyActivityTest {
     private val mockActivityManager = mock<ActivityManager>()
     private val mockUserManager = mock<UserManager>()
 
     private lateinit var mActivity: SupervisionCredentialProxyActivity
+    private lateinit var mActivityController: ActivityController<SupervisionCredentialProxyActivity>
+
+    private lateinit var shadowActivity: ShadowActivity
 
     @Before
     fun setUp() {
-        mActivity =
-            spy(Robolectric.buildActivity(SupervisionCredentialProxyActivity::class.java).get()) {
-                on { getSystemService(UserManager::class.java) } doReturn mockUserManager
-                on { getSystemService(ActivityManager::class.java) } doReturn mockActivityManager
-            }
+        // Note, we have to use ActivityController (instead of ActivityScenario) in order to access
+        // the activity before it is created, so we can set up various mocked responses before they
+        // are referenced in onCreate.
+        mActivityController =
+            Robolectric.buildActivity(SupervisionCredentialProxyActivity::class.java)
+        mActivity = mActivityController.get()
+
+        shadowActivity = shadowOf(mActivity)
+        Shadow.extract<ShadowContextImpl>(mActivity.baseContext).apply {
+            setSystemService(Context.ACTIVITY_SERVICE, mockActivityManager)
+            setSystemService(Context.USER_SERVICE, mockUserManager)
+        }
     }
 
     @Test
@@ -63,25 +75,16 @@ class SupervisionCredentialProxyActivityTest {
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
 
-        mActivity.onCreate(null)
+        mActivityController.setup()
 
-        verify(mActivity, never()).finish()
+        assertThat(mActivity.isFinishing).isFalse()
+        assertThat(shadowActivity.nextStartedActivity.component?.className)
+            .isEqualTo(ChooseLockGeneric::class.java.name)
 
         // Ensure that the supervising profile is started
         val userCaptor = argumentCaptor<UserHandle>()
         verify(mockActivityManager).startProfile(userCaptor.capture())
         assert(userCaptor.lastValue.identifier == SUPERVISING_USER_ID)
-
-        val intentCaptor = argumentCaptor<Intent>()
-        verify(mActivity)
-            .startActivityForResultAsUser(
-                intentCaptor.capture(),
-                eq(REQUEST_CODE_SUPERVISION_CREDENTIALS_PROXY),
-                eq(SUPERVISING_USER_INFO.userHandle),
-            )
-        assertThat(intentCaptor.allValues.size).isEqualTo(1)
-        assertThat(intentCaptor.firstValue.component?.className)
-            .isEqualTo(ChooseLockGeneric::class.java.name)
     }
 
     @Test
@@ -89,10 +92,10 @@ class SupervisionCredentialProxyActivityTest {
         mockUserManager.stub { on { users } doReturn listOf(TESTING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
 
-        mActivity.onCreate(null)
+        mActivityController.setup()
 
-        verify(mActivity).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity).finish()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+        assertThat(mActivity.isFinishing).isTrue()
     }
 
     @Test
@@ -100,10 +103,10 @@ class SupervisionCredentialProxyActivityTest {
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn false }
 
-        mActivity.onCreate(null)
+        mActivityController.setup()
 
-        verify(mActivity).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity).finish()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+        assertThat(mActivity.isFinishing).isTrue()
     }
 
     @Test
@@ -122,8 +125,8 @@ class SupervisionCredentialProxyActivityTest {
         val userCaptor = argumentCaptor<UserHandle>()
         verify(mockActivityManager).stopProfile(userCaptor.capture())
         assert(userCaptor.lastValue.identifier == SUPERVISING_USER_ID)
-        verify(mActivity).setResult(Activity.RESULT_OK, null)
-        verify(mActivity).finish()
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
     }
 
     @Test
@@ -138,8 +141,8 @@ class SupervisionCredentialProxyActivityTest {
             ComponentCaller(null, null),
         )
 
-        verify(mActivity).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity).finish()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+        assertThat(mActivity.isFinishing).isTrue()
     }
 
     @Test
@@ -154,8 +157,8 @@ class SupervisionCredentialProxyActivityTest {
             ComponentCaller(null, null),
         )
 
-        verify(mActivity).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity).finish()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+        assertThat(mActivity.isFinishing).isTrue()
     }
 
     @Test
@@ -174,8 +177,8 @@ class SupervisionCredentialProxyActivityTest {
         val userCaptor = argumentCaptor<UserHandle>()
         verify(mockActivityManager).stopProfile(userCaptor.capture())
         assert(userCaptor.lastValue.identifier == SUPERVISING_USER_ID)
-        verify(mActivity).setResult(Activity.RESULT_CANCELED)
-        verify(mActivity).finish()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+        assertThat(mActivity.isFinishing).isTrue()
     }
 
     private companion object {

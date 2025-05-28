@@ -29,6 +29,8 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -76,7 +78,8 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
         SatelliteManager satelliteManager = new SatelliteManager(mContext);
         CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
         mController = new SatelliteSettingsPreferenceCategoryController(mContext, KEY);
-        when(mCarrierConfigCache.getConfigForSubId(TEST_SUB_ID)).thenReturn(mPersistableBundle);
+        when(mCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any())).thenReturn(
+                mPersistableBundle);
         mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
                 CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC);
         when(mContext.getSystemService(SatelliteManager.class)).thenReturn(satelliteManager);

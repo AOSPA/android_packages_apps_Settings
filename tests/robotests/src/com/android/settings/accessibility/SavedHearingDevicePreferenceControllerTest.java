@@ -84,10 +84,11 @@ public class SavedHearingDevicePreferenceControllerTest {
     }
 
     @Test
-    public void updateDynamicRawDataToIndex_isNotHearingAidDevice_deviceIsNotSearchable() {
+
+    public void updateDynamicRawDataToIndex_isNotHearingDevice_deviceIsNotSearchable() {
         when(mDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
         when(mDevice.isConnected()).thenReturn(false);
-        when(mCachedDevice.isHearingAidDevice()).thenReturn(false);
+        when(mCachedDevice.isHearingDevice()).thenReturn(false);
         List<SearchIndexableRaw> searchData = new ArrayList<>();
 
         mSavedHearingDevicePreferenceController.updateDynamicRawDataToIndex(searchData);
@@ -96,10 +97,10 @@ public class SavedHearingDevicePreferenceControllerTest {
     }
 
     @Test
-    public void updateDynamicRawDataToIndex_isHearingAidDevice_deviceIsSearchable() {
+    public void updateDynamicRawDataToIndex_isHearingDevice_deviceIsSearchable() {
         when(mDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
         when(mDevice.isConnected()).thenReturn(false);
-        when(mCachedDevice.isHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.isHearingDevice()).thenReturn(true);
         List<SearchIndexableRaw> searchData = new ArrayList<>();
 
         mSavedHearingDevicePreferenceController.updateDynamicRawDataToIndex(searchData);
