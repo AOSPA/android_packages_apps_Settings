@@ -21,6 +21,7 @@ import android.content.Intent
 import com.android.settings.activityembedding.ActivityEmbeddingUtils
 import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.tryStartMultiPaneDeepLink
 import com.android.settingslib.spa.framework.util.SESSION_EXTERNAL
+import com.android.settingslib.spa.framework.util.SESSION_SEARCH
 import com.android.settingslib.spa.framework.util.appendSpaParams
 
 data class SpaDestination(
@@ -31,15 +32,24 @@ data class SpaDestination(
     val highlightMenuKey: String? = null,
 ) {
     fun startFromExportedActivity(context: Context) {
+        start(context, isSearch = false)
+    }
+
+    fun startFromSearch(context: Context) {
+        start(context, isSearch = true)
+    }
+
+    private fun start(context: Context, isSearch: Boolean) {
         val intent =
             Intent(context, SpaActivity::class.java)
                 .appendSpaParams(
                     destination = destination,
                     highlightItemKey = highlightItemKey,
-                    sessionName = SESSION_EXTERNAL,
+                    sessionName = if (isSearch) SESSION_SEARCH else SESSION_EXTERNAL,
                 )
-        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context) ||
-            !context.tryStartMultiPaneDeepLink(intent, highlightMenuKey)
+        if (
+            !ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context) ||
+                !tryStartMultiPaneDeepLink(context, intent, highlightMenuKey, isSearch)
         ) {
             context.startActivity(intent)
         }

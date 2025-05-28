@@ -39,7 +39,7 @@ class SpaDestinationTest {
         }
 
     @Test
-    fun startFromExportedActivity() {
+    fun startFromExportedActivity_hasCorrectDestination() {
         val spaDestination = SpaDestination(destination = DESTINATION)
 
         spaDestination.startFromExportedActivity(context)
@@ -48,11 +48,31 @@ class SpaDestinationTest {
     }
 
     @Test
-    fun startFromExportedActivity_with() {
+    fun startFromExportedActivity_withHighlightItemKey() {
         val spaDestination =
             SpaDestination(destination = DESTINATION, highlightItemKey = HIGHLIGHT_ITEM_KEY)
 
         spaDestination.startFromExportedActivity(context)
+
+        verify(context)
+            .startActivity(argThat { getStringExtra(KEY_HIGHLIGHT_ITEM_KEY) == HIGHLIGHT_ITEM_KEY })
+    }
+
+    @Test
+    fun startFromSearch_hasCorrectDestination() {
+        val spaDestination = SpaDestination(destination = DESTINATION)
+
+        spaDestination.startFromSearch(context)
+
+        verify(context).startActivity(argThat { getStringExtra(KEY_DESTINATION) == DESTINATION })
+    }
+
+    @Test
+    fun startFromSearch_withHighlightItemKey() {
+        val spaDestination =
+            SpaDestination(destination = DESTINATION, highlightItemKey = HIGHLIGHT_ITEM_KEY)
+
+        spaDestination.startFromSearch(context)
 
         verify(context)
             .startActivity(argThat { getStringExtra(KEY_HIGHLIGHT_ITEM_KEY) == HIGHLIGHT_ITEM_KEY })

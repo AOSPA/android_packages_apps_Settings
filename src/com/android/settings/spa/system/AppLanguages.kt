@@ -32,6 +32,7 @@ import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.ui.SettingsBody
+import com.android.settingslib.spa.widget.ui.SettingsIntro
 import com.android.settingslib.spaprivileged.template.app.AppListPage
 
 object AppLanguagesPageProvider : SettingsPageProvider {
@@ -56,7 +57,7 @@ object AppLanguagesPageProvider : SettingsPageProvider {
                         } else {
                             R.string.desc_app_locale_selection_supported_with_disclaimer
                         }
-                    SettingsBody(stringResource(titleId))
+                    SettingsIntro(stringResource(titleId))
                 }
             },
         )

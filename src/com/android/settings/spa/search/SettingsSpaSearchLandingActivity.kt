@@ -39,7 +39,7 @@ class SettingsSpaSearchLandingActivity : SpaSearchLandingActivity() {
 
     override fun startSpaPage(destination: String, highlightItemKey: String) {
         SpaDestination(destination = destination, highlightItemKey = highlightItemKey)
-            .startFromExportedActivity(this)
+            .startFromSearch(this)
     }
 
     override fun startFragment(fragmentName: String, arguments: Bundle) {
