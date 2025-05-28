@@ -16,23 +16,23 @@
 
 package com.android.settings.accessibility
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.hardware.display.ColorDisplayManager
 import com.android.settings.R
 import com.android.settings.Settings.ColorAndMotionActivity
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceCategory
-import com.android.settingslib.metadata.PreferenceGroup
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(ColorAndMotionScreen.KEY)
-class ColorAndMotionScreen : PreferenceScreenCreator {
+open class ColorAndMotionScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
@@ -41,6 +41,11 @@ class ColorAndMotionScreen : PreferenceScreenCreator {
 
     override val icon: Int
         get() = R.drawable.ic_color_and_motion
+
+    override fun getMetricsCategory() = SettingsEnums.ACCESSIBILITY_COLOR_AND_MOTION
+
+    override val highlightMenuKey
+        get() = R.string.menu_key_accessibility
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAccessibilityColorAndMotion()
 

@@ -16,8 +16,15 @@
 
 package com.android.settings.core
 
+import androidx.annotation.StringRes
 import com.android.settingslib.core.instrumentation.Instrumentable
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 /** Mixin for settings preference screen. */
-interface PreferenceScreenMixin : PreferenceScreenCreator, Instrumentable
+interface PreferenceScreenMixin : PreferenceScreenCreator, Instrumentable {
+
+    /**
+     * A string resource indicates the menu item that should be highlighted on settings home menu.
+     */
+    @get:StringRes val highlightMenuKey: Int
+}

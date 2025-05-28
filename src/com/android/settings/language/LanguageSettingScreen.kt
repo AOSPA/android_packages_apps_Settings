@@ -15,15 +15,16 @@
  */
 package com.android.settings.language
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(LanguageSettingScreen.KEY)
-class LanguageSettingScreen : PreferenceScreenCreator {
+open class LanguageSettingScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
@@ -35,6 +36,11 @@ class LanguageSettingScreen : PreferenceScreenCreator {
 
     override val icon: Int
         get() = R.drawable.ic_settings_languages
+
+    override fun getMetricsCategory() = SettingsEnums.SETTINGS_LANGUAGES_CATEGORY
+
+    override val highlightMenuKey
+        get() = R.string.menu_key_system
 
     override fun isFlagEnabled(context: Context) = Flags.catalystLanguageSetting()
 

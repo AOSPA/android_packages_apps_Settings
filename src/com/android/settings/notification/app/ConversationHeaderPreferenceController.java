@@ -19,6 +19,7 @@ package com.android.settings.notification.app;
 import static com.android.settings.widget.EntityHeaderController.PREF_KEY_APP_HEADER;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
 import android.content.Context;
 import android.text.BidiFormatter;
 import android.text.SpannableStringBuilder;
@@ -101,23 +102,25 @@ public class ConversationHeaderPreferenceController extends NotificationPreferen
     @Override
     public CharSequence getSummary() {
         if (mChannel != null && !isDefaultChannel()) {
-            CharSequence parentChannelLabel = mBackend.getChannel(mAppRow.pkg, mAppRow.uid,
-                    mChannel.getParentChannelId()).getName();
-            if (mChannelGroup != null
-                    && !TextUtils.isEmpty(mChannelGroup.getName())) {
-                final SpannableStringBuilder summary = new SpannableStringBuilder();
-                BidiFormatter bidi = BidiFormatter.getInstance();
-                summary.append(bidi.unicodeWrap(parentChannelLabel));
-                summary.append(bidi.unicodeWrap(mContext.getText(
-                        R.string.notification_header_divider_symbol_with_spaces)));
-                summary.append(bidi.unicodeWrap(mChannelGroup.getName().toString()));
-                return summary.toString();
-            } else {
-                return parentChannelLabel;
+            NotificationChannel parent = mBackend.getChannel(mAppRow.pkg, mAppRow.uid,
+                    mChannel.getParentChannelId());
+            if (parent != null) {
+                CharSequence parentChannelLabel = parent.getName();
+                if (mChannelGroup != null
+                        && !TextUtils.isEmpty(mChannelGroup.getName())) {
+                    final SpannableStringBuilder summary = new SpannableStringBuilder();
+                    BidiFormatter bidi = BidiFormatter.getInstance();
+                    summary.append(bidi.unicodeWrap(parentChannelLabel));
+                    summary.append(bidi.unicodeWrap(mContext.getText(
+                            R.string.notification_header_divider_symbol_with_spaces)));
+                    summary.append(bidi.unicodeWrap(mChannelGroup.getName().toString()));
+                    return summary.toString();
+                } else {
+                    return parentChannelLabel;
+                }
             }
-        } else {
-            return "";
         }
+        return "";
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

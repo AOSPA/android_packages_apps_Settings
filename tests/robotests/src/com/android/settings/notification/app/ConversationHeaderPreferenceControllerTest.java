@@ -163,5 +163,9 @@ public class ConversationHeaderPreferenceControllerTest {
                 NotificationChannel.DEFAULT_CHANNEL_ID, "", IMPORTANCE_NONE);
         mController.onResume(appRow, defaultChannel, null, null, null, null, null);
         assertEquals("", mController.getSummary());
+
+        when(mBackend.getChannel(appRow.pkg, appRow.uid, "parent")).thenReturn(null);
+        mController.onResume(appRow, channel, group, null, null, null, null);
+        assertEquals("", mController.getSummary());
     }
 }

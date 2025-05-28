@@ -16,21 +16,22 @@
 
 package com.android.settings.deviceinfo.firmwareversion
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Build
 import com.android.settings.R
 import com.android.settings.Settings.FirmwareVersionActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(FirmwareVersionScreen.KEY)
-class FirmwareVersionScreen : PreferenceScreenCreator, PreferenceSummaryProvider {
+open class FirmwareVersionScreen : PreferenceScreenMixin, PreferenceSummaryProvider {
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
@@ -50,6 +51,11 @@ class FirmwareVersionScreen : PreferenceScreenCreator, PreferenceSummaryProvider
 
     // Once fully launch, change to PreferenceFragment and clean up FirmwareVersionScreenTest
     override fun fragmentClass() = FirmwareVersionSettings::class.java
+
+    override fun getMetricsCategory() = SettingsEnums.DIALOG_FIRMWARE_VERSION
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_about_device
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, FirmwareVersionActivity::class.java, metadata?.key)

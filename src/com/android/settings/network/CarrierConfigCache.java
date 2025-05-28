@@ -168,18 +168,12 @@ public class CarrierConfigCache {
             @NonNull String... keys) {
         if (sCarrierConfigManager == null) return null;
 
-        synchronized (sCarrierConfigs) {
-            if (sCarrierConfigs.containsKey(subId)) {
-                return sCarrierConfigs.get(subId);
-            }
-            final PersistableBundle config = sCarrierConfigManager.getConfigForSubId(subId, keys);
-            if (config == null) {
-                Log.e(TAG, "Could not get carrier config, subId:" + subId);
-                return null;
-            }
-            sCarrierConfigs.put(subId, config);
-            return config;
+        final PersistableBundle config = sCarrierConfigManager.getConfigForSubId(subId, keys);
+        if (config == null) {
+            Log.e(TAG, "Could not get carrier config, subId:" + subId);
+            return null;
         }
+        return config;
     }
 
     /**

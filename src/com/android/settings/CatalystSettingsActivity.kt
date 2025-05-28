@@ -50,7 +50,7 @@ constructor(
  * Use [DashboardFragment] as base class instead of [PreferenceFragment] to support injection and
  * highlighting specific preference.
  */
-class CatalystFragment : DashboardFragment() {
+open class CatalystFragment : DashboardFragment() {
 
     override fun getPreferenceScreenResId() = 0
 
@@ -62,5 +62,6 @@ class CatalystFragment : DashboardFragment() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceScreen = createPreferenceScreen()
+        refreshDashboardTiles(logTag)
     }
 }
