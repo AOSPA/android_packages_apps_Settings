@@ -110,7 +110,10 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
         mSummary = summary;
     }
 
-    private void updateFooterPreferences(AccessibilityFooterPreference footerPreference) {
+    /**
+     * Updates the footer preference with the given data set to this PreferenceController
+     */
+    public void updateFooterPreferences(@NonNull AccessibilityFooterPreference footerPreference) {
         final StringBuffer sb = new StringBuffer();
         sb.append(getIntroductionTitle()).append("\n\n").append(footerPreference.getTitle());
         footerPreference.setContentDescription(sb);
