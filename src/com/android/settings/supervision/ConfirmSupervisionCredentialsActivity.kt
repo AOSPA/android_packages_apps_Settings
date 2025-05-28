@@ -63,24 +63,18 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
 
     private val mAuthenticationCallback =
         object : AuthenticationCallback() {
-            @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                tryStopProfile()
                 Log.w(TAG, "onAuthenticationError(errorCode=$errorCode, errString=$errString)")
                 setResult(RESULT_CANCELED)
                 finish()
             }
 
-            @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
-                tryStopProfile()
                 setResult(RESULT_OK)
                 finish()
             }
 
-            @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
             override fun onAuthenticationFailed() {
-                tryStopProfile()
                 setResult(RESULT_CANCELED)
                 finish()
             }
@@ -91,6 +85,12 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             setResult(result.resultCode)
             finish()
         }
+
+    @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
+    override fun onStop() {
+        super.onStop()
+        tryStopProfile()
+    }
 
     @RequiresPermission(
         allOf = [USE_BIOMETRIC_INTERNAL, SET_BIOMETRIC_DIALOG_ADVANCED, INTERACT_ACROSS_USERS_FULL]

@@ -211,7 +211,7 @@ open class NetworkCellularGroupProvider : SettingsPageProvider, SearchablePage {
         if (!isPageSearchable(context)) return emptyList()
         return buildList {
             if (context.requireSubscriptionManager().activeSubscriptionInfoCount > 0) {
-                add(SearchItem(context.getString(R.string.mobile_data_settings_title)))
+                add(getMobileDataSearchItem(context))
             }
         }
     }

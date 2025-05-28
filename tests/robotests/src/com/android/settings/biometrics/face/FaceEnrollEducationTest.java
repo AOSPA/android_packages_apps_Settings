@@ -36,7 +36,10 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.face.FaceManager;
 import android.view.View;
+import android.widget.Button;
 
+import androidx.lifecycle.Lifecycle.State;
+import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
@@ -49,6 +52,7 @@ import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -223,5 +227,34 @@ public class FaceEnrollEducationTest {
         mActivity.onConfigurationChanged(newConfig);
 
         assertThat(mActivity.getDevicePostureState()).isEqualTo(DEVICE_POSTURE_CLOSED);
+    }
+
+    @Test
+    public void testFaceEnrollEducation_LaunchActivityNormal() {
+        try (ActivityScenario<FaceEnrollEducation> faceEnrollEducationScenario =
+                     ActivityScenario.launch(FaceEnrollEducation.class)) {
+
+            faceEnrollEducationScenario.onActivity(originalActivity -> {
+                assertThat(faceEnrollEducationScenario.getState()).isEqualTo(State.RESUMED);
+
+                final View faceEnrollEducationView = originalActivity.findViewById(
+                        R.id.setup_wizard_layout);
+                assertThat(faceEnrollEducationView).isNotNull();
+
+                final FaceEnrollEducation activity = spy(originalActivity);
+
+                int a11yButtonId = activity.isUsingExpressiveStyle()
+                        ? R.id.accessibility_button_expressive
+                        : R.id.accessibility_button;
+                final Button a11yButton = activity.findViewById(a11yButtonId);
+                assertThat(a11yButton).isNotNull();
+            });
+        } catch (Exception e) {
+            System.err.println("FaceEnrollEducationTest failed due to an unexpected exception:");
+            e.printStackTrace();
+
+            Assert.fail("FaceEnrollEducationTest failed due to the inability to "
+                    + "launch Activity normally.");
+        }
     }
 }

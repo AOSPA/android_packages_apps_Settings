@@ -16,6 +16,7 @@
 
 package com.android.settings.dream
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.provider.Settings.Secure.SCREENSAVER_COMPONENTS
 import android.provider.Settings.Secure.SCREENSAVER_ENABLED
@@ -23,6 +24,7 @@ import androidx.annotation.VisibleForTesting
 import com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController
 import com.android.settings.flags.Flags
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
@@ -36,12 +38,11 @@ import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ScreensaverScreen.KEY)
-class ScreensaverScreen(private val context: Context) :
-    PreferenceScreenCreator,
+open class ScreensaverScreen(private val context: Context) :
+    PreferenceScreenMixin,
     AbstractKeyedDataObservable<String>(),
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider {
@@ -81,6 +82,11 @@ class ScreensaverScreen(private val context: Context) :
 
     override val title: Int
         get() = R.string.screensaver_settings_title
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_display
+
+    override fun getMetricsCategory() = SettingsEnums.DREAM
 
     override fun isFlagEnabled(context: Context) = Flags.catalystScreensaver()
 

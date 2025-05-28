@@ -55,11 +55,11 @@
         android:order="36"/>
 
     <Preference
-        android:fragment="com.android.settings.inputmethod.ActionCornersFragment"
+        android:fragment="com.android.settings.inputmethod.ActionCornerFragment"
         android:key="action_corners"
         android:title="@string/action_corners_title"
         android:summary="@string/action_corners_summary"
-        android:featureFlag="com.android.settings.flags.action_corner_customization"
+        settings:controller="com.android.settings.inputmethod.ActionCornerPreferenceController"
         android:order="37"/>
 
     <SwitchPreferenceCompat

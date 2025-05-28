@@ -15,14 +15,34 @@
  */
 package com.android.settings.supervision
 
+import android.app.settings.SettingsEnums
+import android.app.supervision.SupervisionManager
+import android.content.Context
+import android.os.UserManager
+import android.util.Log
+import androidx.annotation.VisibleForTesting
+import androidx.appcompat.app.AlertDialog
+import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.core.SubSettingLauncher
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.preference.PreferenceBinding
+import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /**
  * Setting on PIN Management screen (Settings > Supervision > Manage Pin) that invokes the flow to
  * delete the device PIN.
  */
-class SupervisionDeletePinPreference : PreferenceMetadata {
+class SupervisionDeletePinPreference() :
+    PreferenceMetadata,
+    PreferenceBinding,
+    PreferenceLifecycleProvider,
+    Preference.OnPreferenceClickListener {
+
+    private lateinit var lifeCycleContext: PreferenceLifecycleContext
+
     override val key: String
         get() = KEY
 
@@ -32,7 +52,92 @@ class SupervisionDeletePinPreference : PreferenceMetadata {
     override val summary: Int
         get() = R.string.supervision_delete_pin_preference_summary
 
-    // TODO(b/406082832): Implements the delete PIN flow in settings.
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        lifeCycleContext = context
+    }
+
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+        preference.onPreferenceClickListener = this
+    }
+
+    override fun onPreferenceClick(preference: Preference): Boolean {
+        showDeletionDialog(preference.context)
+        return true
+    }
+
+    @VisibleForTesting
+    fun showDeletionDialog(context: Context) {
+        val builder = AlertDialog.Builder(context)
+
+        val supervisionManager = context.getSystemService(SupervisionManager::class.java)
+        val userManager = context.getSystemService(UserManager::class.java)
+
+        if (supervisionManager == null || userManager == null) {
+            // TODO(b/415995161): Improve error handling
+            builder.setTitle(R.string.supervision_delete_pin_error_header)
+                .setMessage(R.string.supervision_delete_pin_error_message)
+                .setPositiveButton(R.string.okay, null)
+        } else if (areAnyUsersExceptCurrentSupervised(supervisionManager, userManager)) {
+            builder.setTitle(R.string.supervision_delete_pin_supervision_enabled_header)
+                .setMessage(R.string.supervision_delete_pin_supervision_enabled_message)
+                .setPositiveButton(R.string.okay, null)
+        } else {
+            builder.setTitle(R.string.supervision_delete_pin_confirm_header)
+                .setMessage(R.string.supervision_delete_pin_confirm_message)
+                .setPositiveButton(R.string.delete) { _, _ -> onConfirmDeleteClick() }
+                .setNegativeButton(R.string.cancel, null)
+        }
+        val dialog = builder.create()
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+    }
+
+    private fun showErrorDialog(context: Context) {
+        // TODO(b/415995161): Improve error handling
+        AlertDialog.Builder(context)
+            .setTitle(R.string.supervision_delete_pin_error_header)
+            .setMessage(R.string.supervision_delete_pin_error_message)
+            .setPositiveButton(R.string.okay, null)
+            .create().show()
+    }
+
+    /** Returns whether any users except the current user are supervised on this device. */
+    @VisibleForTesting
+    fun areAnyUsersExceptCurrentSupervised(
+        supervisionManager: SupervisionManager,
+        userManager: UserManager): Boolean {
+        return userManager.users.any {
+            lifeCycleContext.userId != it.id && supervisionManager.isSupervisionEnabledForUser(it.id)
+        }
+    }
+
+    @VisibleForTesting
+    fun onConfirmDeleteClick() {
+        val userManager = lifeCycleContext.getSystemService(UserManager::class.java)
+        val supervisionManager = lifeCycleContext.getSystemService(SupervisionManager::class.java)
+        if (userManager == null || supervisionManager == null) {
+            Log.e(TAG, "Can't delete supervision data; system services cannot be found.")
+            return
+        }
+        val supervisingUser = lifeCycleContext.supervisingUserHandle
+        if (supervisingUser == null) {
+            Log.e(TAG, "Can't delete supervision data; supervising user does not exist.")
+            return
+        }
+        if (userManager.removeUser(supervisingUser)) {
+            supervisionManager.isSupervisionEnabled = false
+            supervisionManager.supervisionRecoveryInfo = null
+            lifeCycleContext.notifyPreferenceChange(KEY)
+            SubSettingLauncher(lifeCycleContext)
+                .setDestination(SupervisionDashboardFragment::class.java.name)
+                .setSourceMetricsCategory(SettingsEnums.SUPERVISION_DASHBOARD)
+                .launch()
+        } else {
+            Log.e(TAG, "Can't delete supervision data; unable to delete supervising profile.")
+            showErrorDialog(lifeCycleContext)
+        }
+    }
 
     companion object {
         const val KEY = "supervision_delete_pin"

@@ -25,14 +25,19 @@ import com.android.settingslib.spa.framework.util.appendSpaParams
 
 data class SpaDestination(
     val destination: String,
-    val highlightMenuKey: String?,
+    /** The key to highlight the item. */
+    val highlightItemKey: String? = null,
+    /** The key to highlight the top level menu, when multi pane is enabled. */
+    val highlightMenuKey: String? = null,
 ) {
     fun startFromExportedActivity(context: Context) {
-        val intent = Intent(context, SpaActivity::class.java)
-            .appendSpaParams(
-                destination = destination,
-                sessionName = SESSION_EXTERNAL,
-            )
+        val intent =
+            Intent(context, SpaActivity::class.java)
+                .appendSpaParams(
+                    destination = destination,
+                    highlightItemKey = highlightItemKey,
+                    sessionName = SESSION_EXTERNAL,
+                )
         if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context) ||
             !context.tryStartMultiPaneDeepLink(intent, highlightMenuKey)
         ) {

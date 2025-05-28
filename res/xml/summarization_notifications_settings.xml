@@ -20,17 +20,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/notification_summarization_title">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="feature_description"
+        settings:searchable="false"
+        android:title="@string/notification_summarization_description"/>
+
     <com.android.settingslib.widget.IllustrationPreference
         android:key="illustration"
         settings:searchable="false"
         android:selectable="false"
         app:lottie_cacheComposition="false"
         settings:dynamicColor="true"/>
-
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="feature_description"
-        settings:searchable="false"
-        android:title="@string/notification_summarization_description"/>
 
     <PreferenceCategory
         android:key="enabled_settings">
@@ -49,9 +49,6 @@
         android:key="notification_summarization_excluded_apps_list"
         android:title="@string/notification_excluded_apps"
         settings:controller="com.android.settings.notification.AdjustmentExcludedAppsPreferenceController">
-        <com.android.settingslib.widget.TopIntroPreference
-            android:key="excluded_description"
-            android:title="@string/notification_summarization_excluded_description"/>
 
         <!-- apps are added here -->
 

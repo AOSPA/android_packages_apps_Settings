@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.network
 
+import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,20 +29,32 @@ import com.android.settings.R
 import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.network.telephony.SubscriptionActivationRepository
 import com.android.settings.network.telephony.subscriptionManager
+import com.android.settingslib.spa.framework.compose.HighlightBox
 import com.android.settingslib.spa.framework.compose.rememberContext
+import com.android.settingslib.spa.search.SearchablePage.SearchItem
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+private const val MOBILE_DATA_HIGHLIGHT_KEY = "mobile_data"
+
+fun getMobileDataSearchItem(context: Context) =
+    SearchItem(
+        highlightItemKey = MOBILE_DATA_HIGHLIGHT_KEY,
+        itemTitle = context.getString(R.string.mobile_data_settings_title),
+    )
+
 @Composable
 fun MobileDataSwitchPreference(subId: Int) {
-    MobileDataSwitchPreference(
-        subId = subId,
-        mobileDataRepository = rememberContext(::MobileDataRepository),
-        subscriptionActivationRepository = rememberContext(::SubscriptionActivationRepository),
-        setMobileData = setMobileDataImpl(subId),
-    )
+    HighlightBox(highlightItemKey = MOBILE_DATA_HIGHLIGHT_KEY) {
+        MobileDataSwitchPreference(
+            subId = subId,
+            mobileDataRepository = rememberContext(::MobileDataRepository),
+            subscriptionActivationRepository = rememberContext(::SubscriptionActivationRepository),
+            setMobileData = setMobileDataImpl(subId),
+        )
+    }
 }
 
 @VisibleForTesting

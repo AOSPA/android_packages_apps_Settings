@@ -2876,6 +2876,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity android:name=".supervision.ConfirmSupervisionCredentialsActivity"
             android:exported="true"
             android:excludeFromRecents="true"
+            android:theme="@style/Theme.Settings.NoActionBar"
             android:featureFlag="android.app.supervision.flags.supervision_manager_apis">
             <intent-filter>
                 <action android:name="android.app.supervision.action.CONFIRM_SUPERVISION_CREDENTIALS" />

@@ -17,12 +17,14 @@
 package com.android.settings.display.darkmode
 
 import android.Manifest
+import android.app.settings.SettingsEnums
 import android.app.settings.SettingsEnums.ACTION_DARK_THEME
 import android.content.Context
 import android.os.PowerManager
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.contract.KEY_DARK_THEME
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.PrimarySwitchPreferenceBinding
@@ -35,12 +37,11 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 // LINT.IfChange
 @ProvidePreferenceScreen(DarkModeScreen.KEY)
-class DarkModeScreen(context: Context) :
-    PreferenceScreenCreator,
+open class DarkModeScreen(context: Context) :
+    PreferenceScreenMixin,
     PrimarySwitchPreferenceBinding,
     PreferenceActionMetricsProvider,
     BooleanValuePreference,
@@ -56,6 +57,11 @@ class DarkModeScreen(context: Context) :
 
     override val keywords: Int
         get() = R.string.keywords_dark_ui_mode
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_display
+
+    override fun getMetricsCategory() = SettingsEnums.DARK_UI_SETTINGS
 
     override val preferenceActionMetrics: Int
         get() = ACTION_DARK_THEME

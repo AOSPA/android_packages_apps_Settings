@@ -16,33 +16,50 @@
 
 package com.android.settings.spa
 
-import android.app.Activity
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.spa.framework.util.KEY_DESTINATION
+import com.android.settingslib.spa.framework.util.KEY_HIGHLIGHT_ITEM_KEY
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
 import org.mockito.kotlin.argThat
-import org.mockito.kotlin.mock
+import org.mockito.kotlin.doNothing
+import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class SpaDestinationTest {
 
-    private val activity = mock<Activity>()
+    private var context: Context =
+        spy(ApplicationProvider.getApplicationContext()) {
+            doNothing().whenever(mock).startActivity(any())
+        }
 
     @Test
     fun startFromExportedActivity() {
-        val spaDestination = SpaDestination(destination = DESTINATION, highlightMenuKey = null)
+        val spaDestination = SpaDestination(destination = DESTINATION)
 
-        spaDestination.startFromExportedActivity(activity)
+        spaDestination.startFromExportedActivity(context)
 
-        verify(activity).startActivity(argThat {
-            component!!.className == SpaActivity::class.qualifiedName
-            getStringExtra(KEY_DESTINATION) == DESTINATION
-        })
+        verify(context).startActivity(argThat { getStringExtra(KEY_DESTINATION) == DESTINATION })
+    }
+
+    @Test
+    fun startFromExportedActivity_with() {
+        val spaDestination =
+            SpaDestination(destination = DESTINATION, highlightItemKey = HIGHLIGHT_ITEM_KEY)
+
+        spaDestination.startFromExportedActivity(context)
+
+        verify(context)
+            .startActivity(argThat { getStringExtra(KEY_HIGHLIGHT_ITEM_KEY) == HIGHLIGHT_ITEM_KEY })
     }
 
     private companion object {
         const val DESTINATION = "Destination"
+        const val HIGHLIGHT_ITEM_KEY = "highlight_item_key"
     }
 }

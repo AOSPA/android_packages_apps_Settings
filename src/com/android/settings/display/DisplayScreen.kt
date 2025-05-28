@@ -15,28 +15,29 @@
  */
 package com.android.settings.display
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.DisplaySettings
 import com.android.settings.R
 import com.android.settings.Settings.DisplaySettingsActivity
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.dream.ScreensaverScreen
 import com.android.settings.flags.Flags
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceCategory as Category
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import com.android.systemui.shared.Flags.ambientAod
-import com.android.settingslib.metadata.PreferenceCategory as Category
 
 @ProvidePreferenceScreen(DisplayScreen.KEY)
 open class DisplayScreen :
-    PreferenceScreenCreator, PreferenceAvailabilityProvider, PreferenceIconProvider {
+    PreferenceScreenMixin, PreferenceAvailabilityProvider, PreferenceIconProvider {
     override val key: String
         get() = KEY
 
@@ -49,6 +50,11 @@ open class DisplayScreen :
             Flags.homepageRevamp() -> R.drawable.ic_settings_display_filled
             else -> R.drawable.ic_settings_display_white
         }
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_display
+
+    override fun getMetricsCategory() = SettingsEnums.DISPLAY
 
     override fun isFlagEnabled(context: Context) = Flags.catalystDisplaySettingsScreen()
 

@@ -30,6 +30,7 @@ import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.fuelgauge.BatteryUtils
 import com.android.settingslib.metadata.IntRangeValuePreference
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -42,6 +43,7 @@ import com.android.settingslib.widget.UsageProgressBarPreference
 class BatteryHeaderPreference :
     IntRangeValuePreference,
     PreferenceBinding,
+    PreferenceAvailabilityProvider,
     PreferenceActionMetricsProvider,
     PreferenceLifecycleProvider {
 
@@ -69,6 +71,9 @@ class BatteryHeaderPreference :
     }
 
     override fun isIndexable(context: Context) = false
+
+    override fun isAvailable(context: Context) =
+        com.android.settings.Utils.isBatteryPresent(context)
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)

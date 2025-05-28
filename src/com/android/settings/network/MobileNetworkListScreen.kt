@@ -15,6 +15,7 @@
  */
 package com.android.settings.network
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.UserManager
 import android.telephony.SubscriptionInfo
@@ -23,6 +24,7 @@ import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceClickListener
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.network.AirplaneModePreference.Companion.isAirplaneModeOn
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
@@ -49,8 +51,8 @@ import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(MobileNetworkListScreen.KEY)
-class MobileNetworkListScreen :
-    PreferenceScreenCreator,
+open class MobileNetworkListScreen :
+    PreferenceScreenMixin,
     PreferenceBinding,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
@@ -75,6 +77,8 @@ class MobileNetworkListScreen :
         get() = R.string.keywords_more_mobile_networks
 
     override fun intent(context: Context) = getAddSimIntent()
+
+    override fun getMetricsCategory() = SettingsEnums.MOBILE_NETWORK_LIST
 
     override fun getSummary(context: Context): CharSequence? {
         val list = getSelectableSubscriptionInfoList(context)
@@ -110,6 +114,9 @@ class MobileNetworkListScreen :
 
     override val useAdminDisabledSummary
         get() = true
+
+    override val highlightMenuKey
+        get() = R.string.menu_key_network
 
     override fun createWidget(context: Context) = RestrictedPreference(context)
 

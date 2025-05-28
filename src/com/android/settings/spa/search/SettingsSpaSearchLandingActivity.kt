@@ -37,8 +37,8 @@ class SettingsSpaSearchLandingActivity : SpaSearchLandingActivity() {
             featureFactory.searchFeatureProvider.getSettingsIntelligencePkgName(this)
     }
 
-    override fun startSpaPage(destination: String) {
-        SpaDestination(destination = destination, highlightMenuKey = null)
+    override fun startSpaPage(destination: String, highlightItemKey: String) {
+        SpaDestination(destination = destination, highlightItemKey = highlightItemKey)
             .startFromExportedActivity(this)
     }
 

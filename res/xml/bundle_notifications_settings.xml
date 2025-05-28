@@ -20,17 +20,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/notification_bundle_title">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="feature_description"
+        settings:searchable="false"
+        android:title="@string/notification_bundle_description"/>
+
     <com.android.settingslib.widget.IllustrationPreference
         android:key="illustration"
         settings:searchable="false"
         android:selectable="false"
         app:lottie_cacheComposition="false"
         settings:dynamicColor="true"/>
-
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="feature_description"
-        settings:searchable="false"
-        android:title="@string/notification_bundle_description"/>
 
     <PreferenceCategory
         android:key="enabled_settings">
@@ -44,19 +44,23 @@
 
             <CheckBoxPreference
                   android:key="promotions"
-                  android:title="@*android:string/promotional_notification_channel_label"/>
+                  android:title="@*android:string/promotional_notification_channel_label"
+                  android:summary="@string/notification_bundle_promotions_summary"/>
 
             <CheckBoxPreference
                 android:key="news"
-                android:title="@*android:string/news_notification_channel_label"/>
+                android:title="@*android:string/news_notification_channel_label"
+                android:summary="@string/notification_bundle_news_summary"/>
 
             <CheckBoxPreference
                 android:key="social"
-                android:title="@*android:string/social_notification_channel_label"/>
+                android:title="@*android:string/social_notification_channel_label"
+                android:summary="@string/notification_bundle_social_summary"/>
 
             <CheckBoxPreference
                 android:key="recs"
-                android:title="@*android:string/recs_notification_channel_label" />
+                android:title="@*android:string/recs_notification_channel_label"
+                android:summary="@string/notification_bundle_recs_summary"/>
         </com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
 
         <com.android.settingslib.widget.SettingsTitlelessPreferenceCategory>
@@ -71,9 +75,6 @@
         android:key="notification_bundle_excluded_apps_list"
         android:title="@string/notification_excluded_apps"
         settings:controller="com.android.settings.notification.AdjustmentExcludedAppsPreferenceController">
-        <com.android.settingslib.widget.TopIntroPreference
-            android:key="excluded_description"
-            android:title="@string/notification_bundle_excluded_description"/>
 
         <!-- apps are added here -->
 

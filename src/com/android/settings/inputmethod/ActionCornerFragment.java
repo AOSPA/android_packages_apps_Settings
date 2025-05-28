@@ -28,9 +28,9 @@ import com.android.settingslib.search.SearchIndexable;
 
 /** Input settings for action corners. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ActionCornersFragment extends InputDeviceDashboardFragment {
+public class ActionCornerFragment extends InputDeviceDashboardFragment {
 
-    private static final String TAG = "ActionCornersFragment";
+    private static final String TAG = "ActionCornerFragment";
 
     //TODO (b/413277948): Metrics
     @Override

@@ -44,7 +44,7 @@ object AppLanguagesPageProvider : SettingsPageProvider {
             listModel = rememberContext(::AppLanguagesListModel),
             noMoreOptions = true,
             header = {
-                Box {
+                Box(Modifier.padding(vertical = SettingsDimension.itemPaddingVertical)) {
                     // if the feature is in opt-out mode, show the disclaimer.
                     val titleId =
                         if (FeatureFlagUtils.isEnabled(

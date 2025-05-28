@@ -15,6 +15,7 @@
  */
 package com.android.settings.display
 
+import android.app.settings.SettingsEnums
 import android.app.settings.SettingsEnums.ACTION_ADAPTIVE_BRIGHTNESS
 import android.content.Context
 import android.os.UserManager
@@ -24,6 +25,7 @@ import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.contract.KEY_ADAPTIVE_BRIGHTNESS
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.restriction.PreferenceRestrictionMixin
@@ -42,11 +44,10 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(AutoBrightnessScreen.KEY)
-class AutoBrightnessScreen :
-    PreferenceScreenCreator,
+open class AutoBrightnessScreen :
+    PreferenceScreenMixin,
     PrimarySwitchPreferenceBinding,
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
@@ -57,6 +58,11 @@ class AutoBrightnessScreen :
 
     override val title: Int
         get() = R.string.auto_brightness_title
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_display
+
+    override fun getMetricsCategory() = SettingsEnums.SETTINGS_AUTO_BRIGHTNESS
 
     override val preferenceActionMetrics: Int
         get() = ACTION_ADAPTIVE_BRIGHTNESS

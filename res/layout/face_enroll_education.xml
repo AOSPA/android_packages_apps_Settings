@@ -97,6 +97,18 @@
                     android:layout_marginBottom="@dimen/limited_vision_button_margin_bottom"
                     android:text="@string/security_settings_face_enroll_introduction_accessibility"/>
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/accessibility_button_expressive"
+                    android:theme="@style/Theme.MaterialComponents.DayNight"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/limited_vision_button_margin_top"
+                    android:layout_marginBottom="@dimen/limited_vision_button_margin_bottom"
+                    android:visibility="gone"
+                    android:text="@string/security_settings_face_enroll_introduction_accessibility"/>
+
                 <com.android.settings.biometrics.face.FaceEnrollAccessibilityToggle
                     android:id="@+id/toggle_diversity"
                     android:layout_width="match_parent"
