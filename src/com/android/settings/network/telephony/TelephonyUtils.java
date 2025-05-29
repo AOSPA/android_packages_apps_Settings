@@ -102,7 +102,7 @@ public final class TelephonyUtils {
         if (sSlotsInfo == null) {
             sSlotsInfo = getUiccSlotsInfo(context);
         }
-        return sSlotsInfo.length;
+        return sSlotsInfo == null ? 0 : sSlotsInfo.length;
     }
 
     public static boolean isDsdsToSsConfigValid(){
