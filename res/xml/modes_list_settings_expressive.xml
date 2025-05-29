@@ -29,14 +29,12 @@
         <!-- Preferences leading to individual mode pages are added in this PreferenceCategory. -->
     </PreferenceCategory>
 
-    <com.android.settingslib.widget.UntitledPreferenceCategory>
-      <com.android.settingslib.widget.ButtonPreference
-          android:key="add_mode"
-          android:title="@string/zen_modes_add_mode"
-          android:icon="@drawable/ic_add_24dp"
-          settings:buttonPreferenceSize="large"
-          settings:buttonPreferenceType="filled"
-          settings:allowDividerAbove="false"/>
-    </com.android.settingslib.widget.UntitledPreferenceCategory>
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="add_mode"
+        android:title="@string/zen_modes_add_mode"
+        android:icon="@drawable/ic_add_24dp"
+        settings:buttonPreferenceSize="large"
+        settings:buttonPreferenceType="tonal"
+        settings:allowDividerAbove="false"/>
 
 </PreferenceScreen>

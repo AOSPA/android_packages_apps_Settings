@@ -140,7 +140,11 @@ public class SetupInterstitialActivity extends FragmentActivity {
 
         ImageView img = findViewById(R.id.image);
         if (img != null) {
-            setImage(img, mode);
+            if (SettingsThemeHelper.isExpressiveTheme(this)) {
+                setImageExpressive(img, mode);
+            } else {
+                setImage(img, mode);
+            }
         }
 
         Button button = findViewById(R.id.enable_mode_button);
@@ -181,6 +185,21 @@ public class SetupInterstitialActivity extends FragmentActivity {
                     R.drawable.modes_interstitial_other;
             case TYPE_UNKNOWN -> R.drawable.modes_interstitial_unknown;
             default -> R.drawable.modes_interstitial_unknown;
+        };
+
+        img.setImageResource(drawableRes);
+    }
+
+    private void setImageExpressive(@NonNull ImageView img, @NonNull ZenMode mode) {
+        int drawableRes = switch (mode.getType()) {
+            case TYPE_BEDTIME -> R.drawable.modes_interstitial_bedtime_expressive;
+            case TYPE_DRIVING -> R.drawable.modes_interstitial_driving_expressive;
+            case TYPE_THEATER -> R.drawable.modes_interstitial_theater_expressive;
+            // Immersive and Managed should have specific images, but they aren't (yet?) available.
+            case TYPE_OTHER, TYPE_SCHEDULE_CALENDAR, TYPE_SCHEDULE_TIME,
+                 TYPE_IMMERSIVE, TYPE_MANAGED -> R.drawable.modes_interstitial_other_expressive;
+            case TYPE_UNKNOWN -> R.drawable.modes_interstitial_unknown_expressive;
+            default -> R.drawable.modes_interstitial_unknown_expressive;
         };
 
         img.setImageResource(drawableRes);

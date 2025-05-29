@@ -67,7 +67,6 @@ public class TouchpadSettingsControllerTest {
     @DisableFlags(Flags.FLAG_KEYBOARD_AND_TOUCHPAD_A11Y_NEW_PAGE_ENABLED)
     public void getAvailabilityStatus_flagIsDisable_returnsUnavailable() {
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         ShadowInputDevice.addDevice(deviceId, ShadowInputDevice.makeInputDevicebyId(deviceId));
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
@@ -77,7 +76,6 @@ public class TouchpadSettingsControllerTest {
     @EnableFlags(Flags.FLAG_KEYBOARD_AND_TOUCHPAD_A11Y_NEW_PAGE_ENABLED)
     public void getAvailabilityStatus_isTouchpad_returnsAvailable() {
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
                 InputDevice.SOURCE_TOUCHPAD);
         ShadowInputDevice.addDevice(deviceId, device);

@@ -757,7 +757,6 @@ public class FingerprintSettings extends SubSettings {
             // user instead of the user with |mUserId|.
             if (isSfps() || (screenOffUnlockUdfps() && isScreenOffUnlcokSupported())
                     || getExtPreferenceProvider().getSize() > 0) {
-                scrollToPreference(fpPrefKey);
                 addFingerprintUnlockCategory();
             }
             final int descriptionRes = FeatureFactory.getFeatureFactory()
@@ -1301,7 +1300,15 @@ public class FingerprintSettings extends SubSettings {
                                         getActivity(),
                                         mBiometricsAuthenticationRequested,
                                         mUserId);
-                        if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                        if (android.hardware.biometrics.Flags.bpFallbackOptions()) {
+                            if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                                Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                                        BIOMETRIC_AUTH_REQUEST,
+                                        mUserId, true /* hideBackground */, data);
+                            } else {
+                                handleAuthenticationSuccessful(data);
+                            }
+                        } else if (biometricAuthStatus == Utils.BiometricStatus.OK) {
                             Utils.launchBiometricPromptForMandatoryBiometrics(this,
                                     BIOMETRIC_AUTH_REQUEST,
                                     mUserId, true /* hideBackground */, data);

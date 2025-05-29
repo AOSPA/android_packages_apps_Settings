@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.settings.SettingsEnums
 import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
@@ -37,7 +38,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.settings.R
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.testutils.SettingsStoreRule
 import com.android.settingslib.ipc.MessengerServiceRule
+import com.android.settingslib.preference.launchFragmentScenario
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 import com.google.common.truth.Truth.assertThat
@@ -47,6 +50,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadows.ShadowLooper
 import org.robolectric.shadows.ShadowPackageManager
 
 @RunWith(AndroidJUnit4::class)
@@ -56,9 +60,9 @@ class SupervisionWebContentFiltersScreenTest {
     private val supervisionWebContentFiltersScreen = SupervisionWebContentFiltersScreen()
     private lateinit var shadowPackageManager: ShadowPackageManager
 
-    @get:Rule val setFlagsRule = SetFlagsRule()
-
-    @get:Rule
+    @get:Rule(order = 0) val setFlagsRule = SetFlagsRule()
+    @get:Rule(order = 1) val settingsStoreRule = SettingsStoreRule()
+    @get:Rule(order = 2)
     val serviceRule =
         MessengerServiceRule<SupervisionMessengerClient>(
             TestSupervisionMessengerService::class.java
@@ -104,178 +108,184 @@ class SupervisionWebContentFiltersScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
+    fun getMetricsCategory() {
+        assertThat(supervisionWebContentFiltersScreen.getMetricsCategory())
+            .isEqualTo(SettingsEnums.SUPERVISION_WEB_CONTENT_FILTERS)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun switchSafeSitesPreferences_succeedWithParentPin() {
-        FragmentScenario.launchInContainer(supervisionWebContentFiltersScreen.fragmentClass())
-            .onFragment { fragment ->
-                val allowAllSitesPreference =
-                    fragment.findPreference<SelectorWithWidgetPreference>(
-                        SupervisionAllowAllSitesPreference.KEY
-                    )!!
-                val blockExplicitSitesPreference =
-                    fragment.findPreference<SelectorWithWidgetPreference>(
-                        SupervisionBlockExplicitSitesPreference.KEY
-                    )!!
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val allowAllSitesPreference =
+                fragment.findPreference<SelectorWithWidgetPreference>(
+                    SupervisionAllowAllSitesPreference.KEY
+                )!!
+            val blockExplicitSitesPreference =
+                fragment.findPreference<SelectorWithWidgetPreference>(
+                    SupervisionBlockExplicitSitesPreference.KEY
+                )!!
 
-                assertThat(allowAllSitesPreference.isChecked).isTrue()
-                assertThat(blockExplicitSitesPreference.isChecked).isFalse()
+            assertThat(allowAllSitesPreference.isChecked).isTrue()
+            assertThat(blockExplicitSitesPreference.isChecked).isFalse()
 
-                blockExplicitSitesPreference.performClick()
+            blockExplicitSitesPreference.performClick()
 
-                // Pretend the PIN verification succeeded.
-                val activity = shadowOf(fragment.activity)
-                activity.receiveResult(
-                    activity.nextStartedActivityForResult.intent,
-                    Activity.RESULT_OK,
-                    null,
-                )
+            // Pretend the PIN verification succeeded.
+            val activity = shadowOf(fragment.activity)
+            activity.receiveResult(
+                activity.nextStartedActivityForResult.intent,
+                Activity.RESULT_OK,
+                null,
+            )
+            ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
-                assertThat(blockExplicitSitesPreference.isChecked).isTrue()
-                assertThat(allowAllSitesPreference.isChecked).isFalse()
-            }
+            assertThat(blockExplicitSitesPreference.isChecked).isTrue()
+            assertThat(allowAllSitesPreference.isChecked).isFalse()
+        }
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun switchSafeSitesPreferences_failWithoutParentPin() {
-        FragmentScenario.launchInContainer(supervisionWebContentFiltersScreen.fragmentClass())
-            .onFragment { fragment ->
-                val allowAllSitesPreference =
-                    fragment.findPreference<SelectorWithWidgetPreference>(
-                        SupervisionAllowAllSitesPreference.KEY
-                    )!!
-                val blockExplicitSitesPreference =
-                    fragment.findPreference<SelectorWithWidgetPreference>(
-                        SupervisionBlockExplicitSitesPreference.KEY
-                    )!!
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val allowAllSitesPreference =
+                fragment.findPreference<SelectorWithWidgetPreference>(
+                    SupervisionAllowAllSitesPreference.KEY
+                )!!
+            val blockExplicitSitesPreference =
+                fragment.findPreference<SelectorWithWidgetPreference>(
+                    SupervisionBlockExplicitSitesPreference.KEY
+                )!!
 
-                assertThat(allowAllSitesPreference.isChecked).isTrue()
-                assertThat(blockExplicitSitesPreference.isChecked).isFalse()
+            assertThat(allowAllSitesPreference.isChecked).isTrue()
+            assertThat(blockExplicitSitesPreference.isChecked).isFalse()
 
-                blockExplicitSitesPreference.performClick()
+            blockExplicitSitesPreference.performClick()
 
-                // Pretend the PIN verification succeeded.
-                val activity = shadowOf(fragment.activity)
-                activity.receiveResult(
-                    activity.nextStartedActivityForResult.intent,
-                    Activity.RESULT_CANCELED,
-                    null,
-                )
+            // Pretend the PIN verification succeeded.
+            val activity = shadowOf(fragment.activity)
+            activity.receiveResult(
+                activity.nextStartedActivityForResult.intent,
+                Activity.RESULT_CANCELED,
+                null,
+            )
+            ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
-                assertThat(blockExplicitSitesPreference.isChecked).isFalse()
-                assertThat(allowAllSitesPreference.isChecked).isTrue()
-            }
+            assertThat(blockExplicitSitesPreference.isChecked).isFalse()
+            assertThat(allowAllSitesPreference.isChecked).isTrue()
+        }
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun switchSafeSearchPreferences_succeedWithParentPin() {
-        FragmentScenario.launchInContainer(supervisionWebContentFiltersScreen.fragmentClass())
-            .onFragment { fragment ->
-                val searchFilterOffWidget =
-                    fragment.findPreference<SelectorWithWidgetPreference>(
-                        SupervisionSearchFilterOffPreference.KEY
-                    )!!
-                val searchFilterOnWidget =
-                    fragment.findPreference<SelectorWithWidgetPreference>(
-                        SupervisionSearchFilterOnPreference.KEY
-                    )!!
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val searchFilterOffWidget =
+                fragment.findPreference<SelectorWithWidgetPreference>(
+                    SupervisionSearchFilterOffPreference.KEY
+                )!!
+            val searchFilterOnWidget =
+                fragment.findPreference<SelectorWithWidgetPreference>(
+                    SupervisionSearchFilterOnPreference.KEY
+                )!!
 
-                assertThat(searchFilterOffWidget.isChecked).isTrue()
-                assertThat(searchFilterOnWidget.isChecked).isFalse()
+            assertThat(searchFilterOffWidget.isChecked).isTrue()
+            assertThat(searchFilterOnWidget.isChecked).isFalse()
 
-                searchFilterOnWidget.performClick()
+            searchFilterOnWidget.performClick()
 
-                // Pretend the PIN verification succeeded.
-                val activity = shadowOf(fragment.activity)
-                activity.receiveResult(
-                    activity.nextStartedActivityForResult.intent,
-                    Activity.RESULT_OK,
-                    null,
-                )
+            // Pretend the PIN verification succeeded.
+            val activity = shadowOf(fragment.activity)
+            activity.receiveResult(
+                activity.nextStartedActivityForResult.intent,
+                Activity.RESULT_OK,
+                null,
+            )
+            ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
-                assertThat(searchFilterOnWidget.isChecked).isTrue()
-                assertThat(searchFilterOffWidget.isChecked).isFalse()
-            }
+            assertThat(searchFilterOnWidget.isChecked).isTrue()
+            assertThat(searchFilterOffWidget.isChecked).isFalse()
+        }
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun switchSafeSearchPreferences_failedWithParentPin() {
-        FragmentScenario.launchInContainer(supervisionWebContentFiltersScreen.fragmentClass())
-            .onFragment { fragment ->
-                val searchFilterOffPreference =
-                    fragment.findPreference<SelectorWithWidgetPreference>(
-                        SupervisionSearchFilterOffPreference.KEY
-                    )!!
-                val searchFilterOnPreference =
-                    fragment.findPreference<SelectorWithWidgetPreference>(
-                        SupervisionSearchFilterOnPreference.KEY
-                    )!!
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val searchFilterOffPreference =
+                fragment.findPreference<SelectorWithWidgetPreference>(
+                    SupervisionSearchFilterOffPreference.KEY
+                )!!
+            val searchFilterOnPreference =
+                fragment.findPreference<SelectorWithWidgetPreference>(
+                    SupervisionSearchFilterOnPreference.KEY
+                )!!
 
-                assertThat(searchFilterOffPreference.isChecked).isTrue()
-                assertThat(searchFilterOnPreference.isChecked).isFalse()
+            assertThat(searchFilterOffPreference.isChecked).isTrue()
+            assertThat(searchFilterOnPreference.isChecked).isFalse()
 
-                searchFilterOnPreference.performClick()
+            searchFilterOnPreference.performClick()
 
-                // Pretend the PIN verification failed.
-                val activity = shadowOf(fragment.activity)
-                activity.receiveResult(
-                    activity.nextStartedActivityForResult.intent,
-                    Activity.RESULT_CANCELED,
-                    null,
-                )
+            // Pretend the PIN verification failed.
+            val activity = shadowOf(fragment.activity)
+            activity.receiveResult(
+                activity.nextStartedActivityForResult.intent,
+                Activity.RESULT_CANCELED,
+                null,
+            )
+            ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
-                assertThat(searchFilterOnPreference.isChecked).isFalse()
-                assertThat(searchFilterOffPreference.isChecked).isTrue()
-            }
+            assertThat(searchFilterOnPreference.isChecked).isFalse()
+            assertThat(searchFilterOffPreference.isChecked).isTrue()
+        }
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun footerPreference() {
-        FragmentScenario.launchInContainer(supervisionWebContentFiltersScreen.fragmentClass())
-            .onFragment { fragment ->
-                val footerPreference: FooterPreference =
-                    fragment.findPreference(SupervisionWebContentFiltersFooterPreference.KEY)!!
-                val context = footerPreference.context
-                val learnMoreLink =
-                    context.getString(R.string.supervision_web_content_filters_learn_more_link)
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val footerPreference: FooterPreference =
+                fragment.findPreference(SupervisionWebContentFiltersFooterPreference.KEY)!!
+            val context = footerPreference.context
+            val learnMoreLink =
+                context.getString(R.string.supervision_web_content_filters_learn_more_link)
 
-                // setup for HelpUtils.getHelpIntent
-                Global.putInt(context.contentResolver, Global.DEVICE_PROVISIONED, 1)
-                shadowOf(context.packageManager).apply {
-                    val componentName = ComponentName(context, "browser")
-                    val intentFilter =
-                        IntentFilter(Intent.ACTION_VIEW).apply {
-                            addCategory(Intent.CATEGORY_DEFAULT)
-                            addDataScheme(Uri.parse(learnMoreLink).scheme)
-                        }
-                    addActivityIfNotPresent(componentName)
-                    addIntentFilterForActivity(componentName, intentFilter)
-                }
-
-                // ensure the footer preference is visible
-                val recyclerView = fragment.listView
-                val adapter = recyclerView.adapter as PreferenceGroupAdapter
-                val position = adapter.getPreferenceAdapterPosition(footerPreference)
-                recyclerView.scrollToPosition(position)
-                InstrumentationRegistry.getInstrumentation().waitForIdleSync()
-                val viewHolder = recyclerView.findViewHolderForAdapterPosition(position)!!
-                val learnMoreView =
-                    viewHolder.itemView.findViewById<TextView>(
-                        com.android.settingslib.widget.preference.footer.R.id.settingslib_learn_more
-                    )
-                assertThat(learnMoreView.visibility).isEqualTo(View.VISIBLE)
-
-                val text = learnMoreView.text
-                (text as Spanned).getSpans(0, text.length, ClickableSpan::class.java).apply {
-                    assertThat(this).hasLength(1)
-                    get(0).onClick(learnMoreView)
-                }
-
-                val intent = shadowOf(fragment.activity).nextStartedActivity
-                assertThat(intent.dataString).isEqualTo(learnMoreLink)
-                assertThat(intent.action).isEqualTo(Intent.ACTION_VIEW)
+            // setup for HelpUtils.getHelpIntent
+            Global.putInt(context.contentResolver, Global.DEVICE_PROVISIONED, 1)
+            shadowOf(context.packageManager).apply {
+                val componentName = ComponentName(context, "browser")
+                val intentFilter =
+                    IntentFilter(Intent.ACTION_VIEW).apply {
+                        addCategory(Intent.CATEGORY_DEFAULT)
+                        addDataScheme(Uri.parse(learnMoreLink).scheme)
+                    }
+                addActivityIfNotPresent(componentName)
+                addIntentFilterForActivity(componentName, intentFilter)
             }
+
+            // ensure the footer preference is visible
+            val recyclerView = fragment.listView
+            val adapter = recyclerView.adapter as PreferenceGroupAdapter
+            val position = adapter.getPreferenceAdapterPosition(footerPreference)
+            recyclerView.scrollToPosition(position)
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+            val viewHolder = recyclerView.findViewHolderForAdapterPosition(position)!!
+            val learnMoreView =
+                viewHolder.itemView.findViewById<TextView>(
+                    com.android.settingslib.widget.preference.footer.R.id.settingslib_learn_more
+                )
+            assertThat(learnMoreView.visibility).isEqualTo(View.VISIBLE)
+
+            val text = learnMoreView.text
+            (text as Spanned).getSpans(0, text.length, ClickableSpan::class.java).apply {
+                assertThat(this).hasLength(1)
+                get(0).onClick(learnMoreView)
+            }
+
+            val intent = shadowOf(fragment.activity).nextStartedActivity
+            assertThat(intent.dataString).isEqualTo(learnMoreLink)
+            assertThat(intent.action).isEqualTo(Intent.ACTION_VIEW)
+        }
     }
 }

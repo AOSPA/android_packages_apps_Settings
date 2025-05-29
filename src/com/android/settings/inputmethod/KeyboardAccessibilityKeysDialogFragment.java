@@ -40,7 +40,6 @@ import com.google.android.material.slider.Slider;
 
 import org.jspecify.annotations.Nullable;
 
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFragment {
@@ -182,9 +181,7 @@ public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFrag
     }
 
     private String progressToThresholdInSecond(float progress) {
-        return String.format(Locale.getDefault(), "%.1f %s", progress,
-                TimeUnit.SECONDS.name().toLowerCase(
-                        Locale.getDefault()));
+        return getString(R.string.input_setting_keys_dialog_option_custom, progress);
     }
 
     private void initStateBasedOnThreshold(RadioGroup cannedValueRadioGroup,

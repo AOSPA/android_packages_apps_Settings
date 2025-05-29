@@ -20,9 +20,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import android.provider.Settings
 import android.provider.Settings.Secure.SEARCH_CONTENT_FILTERS_ENABLED
-import android.provider.Settings.SettingNotFoundException
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -30,46 +28,53 @@ import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.testutils.MetricsRule
+import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 import com.google.common.truth.Truth.assertThat
-import org.junit.Assert.assertThrows
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when`
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.verifyNoInteractions
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionSafeSearchPreferenceTest {
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    @get:Rule val metricsRule = MetricsRule()
 
-    private lateinit var mockLifeCycleContext: PreferenceLifecycleContext
-    private lateinit var mockActivityResultLauncher: ActivityResultLauncher<Intent>
-    private lateinit var mockPackageManager: PackageManager
-    private lateinit var dataStore: SupervisionSafeSearchDataStore
-    private lateinit var searchFilterOffPreference: SupervisionSearchFilterOffPreference
-    private lateinit var searchFilterOnPreference: SupervisionSearchFilterOnPreference
+    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val dataStore = SupervisionSafeSearchDataStore(context)
+    private val searchFilterOffPreference = SupervisionSearchFilterOffPreference(dataStore)
+    private val searchFilterOnPreference = SupervisionSearchFilterOnPreference(dataStore)
+
+    private val mockActivityResultLauncher: ActivityResultLauncher<Intent> = mock()
+    private val mockPackageManager: PackageManager = mock {
+        on { queryIntentActivitiesAsUser(any<Intent>(), anyInt(), anyInt()) } doReturn
+            listOf(ResolveInfo())
+    }
+    private val mockLifeCycleContext: PreferenceLifecycleContext = mock {
+        on { packageManager } doReturn mockPackageManager
+        on { registerForActivityResult(any<StartActivityForResult>(), any()) } doReturn
+            mockActivityResultLauncher
+    }
+
+    private var dataStoreValue: Int?
+        get() = SettingsSecureStore.get(context).getInt(SEARCH_CONTENT_FILTERS_ENABLED)
+        set(value) = SettingsSecureStore.get(context).setInt(SEARCH_CONTENT_FILTERS_ENABLED, value)
 
     @Before
     fun setUp() {
-        dataStore = SupervisionSafeSearchDataStore(context)
-        mockLifeCycleContext = mock(PreferenceLifecycleContext::class.java)
-        mockActivityResultLauncher =
-            mock(ActivityResultLauncher::class.java) as ActivityResultLauncher<Intent>
-        mockPackageManager = mock(PackageManager::class.java)
-        mockConfirmSupervisionCredentialsActivity()
-        searchFilterOffPreference = SupervisionSearchFilterOffPreference(dataStore)
         searchFilterOffPreference.onCreate(mockLifeCycleContext)
-        searchFilterOnPreference = SupervisionSearchFilterOnPreference(dataStore)
         searchFilterOnPreference.onCreate(mockLifeCycleContext)
     }
 
@@ -93,24 +98,22 @@ class SupervisionSafeSearchPreferenceTest {
 
     @Test
     fun filterOffIsChecked_whenNoValueIsSet() {
-        assertThrows(SettingNotFoundException::class.java) {
-            Settings.Secure.getInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED)
-        }
-        assertThat(getFilterOnWidget().isChecked).isFalse()
-        assertThat(getFilterOffWidget().isChecked).isTrue()
+        dataStoreValue = null
+        assertThat(searchFilterOnPreference.createWidget().isChecked).isFalse()
+        assertThat(searchFilterOffPreference.createWidget().isChecked).isTrue()
     }
 
     @Test
     fun filterOnIsChecked_whenPreviouslyEnabled() {
-        Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, 1)
-        assertThat(getFilterOffWidget().isChecked).isFalse()
-        assertThat(getFilterOnWidget().isChecked).isTrue()
+        dataStoreValue = 1
+        assertThat(searchFilterOnPreference.createWidget().isChecked).isTrue()
+        assertThat(searchFilterOffPreference.createWidget().isChecked).isFalse()
     }
 
     @Test
     fun clickFilterOn_failedToEnablesFilter_activityFailed() {
-        Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, 0)
-        val filterOnWidget = getFilterOnWidget()
+        dataStoreValue = 0
+        val filterOnWidget = searchFilterOnPreference.createWidget()
         assertThat(filterOnWidget.isChecked).isFalse()
 
         filterOnWidget.performClick()
@@ -119,97 +122,63 @@ class SupervisionSafeSearchPreferenceTest {
             ActivityResult(Activity.RESULT_CANCELED, null)
         )
 
-        assertThat(
-                Settings.Secure.getInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED)
-            )
-            .isEqualTo(0)
+        verifyNoInteractions(metricsRule.metricsFeatureProvider)
+        assertThat(dataStoreValue).isEqualTo(0)
         assertThat(filterOnWidget.isChecked).isFalse()
     }
 
     @Test
     fun clickFilterOn_unresolvedIntent_activityNotLaunched() {
-        `when`(mockPackageManager.queryIntentActivitiesAsUser(any<Intent>(), anyInt(), anyInt()))
-            .thenReturn(emptyList<ResolveInfo>())
+        mockPackageManager.stub {
+            on { queryIntentActivitiesAsUser(any<Intent>(), anyInt(), anyInt()) } doReturn listOf()
+        }
 
-        Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, 0)
-        val filterOnWidget = getFilterOnWidget()
+        dataStoreValue = 0
+        val filterOnWidget = searchFilterOnPreference.createWidget()
         assertThat(filterOnWidget.isChecked).isFalse()
 
         filterOnWidget.performClick()
 
         verify(mockActivityResultLauncher, never()).launch(any())
-        assertThat(
-                Settings.Secure.getInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED)
-            )
-            .isEqualTo(0)
+        verifyNoInteractions(metricsRule.metricsFeatureProvider)
+        assertThat(dataStoreValue).isEqualTo(0)
         assertThat(filterOnWidget.isChecked).isFalse()
     }
 
     @Test
     fun clickFilterOn_enablesFilter() {
-        Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, -1)
-        val filterOnWidget = getFilterOnWidget()
+        dataStoreValue = -1
+        val filterOnWidget = searchFilterOnPreference.createWidget()
         assertThat(filterOnWidget.isChecked).isFalse()
 
         filterOnWidget.performClick()
         verifyConfirmSupervisionCredentialsActivity()
         searchFilterOnPreference.onConfirmCredentials(ActivityResult(Activity.RESULT_OK, null))
 
-        assertThat(
-                Settings.Secure.getInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED)
-            )
-            .isEqualTo(1)
+        assertThat(dataStoreValue).isEqualTo(1)
         assertThat(filterOnWidget.isChecked).isTrue()
+        verify(metricsRule.metricsFeatureProvider).changed(0, searchFilterOnPreference.key, 1)
     }
 
     @Test
     fun clickFilterOff_disablesFilter() {
-        Settings.Secure.putInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED, 1)
-        val filterOffWidget = getFilterOffWidget()
+        dataStoreValue = 1
+        val filterOffWidget = searchFilterOffPreference.createWidget()
         assertThat(filterOffWidget.isChecked).isFalse()
 
         filterOffWidget.performClick()
         verifyConfirmSupervisionCredentialsActivity()
         searchFilterOffPreference.onConfirmCredentials(ActivityResult(Activity.RESULT_OK, null))
 
-        assertThat(
-                Settings.Secure.getInt(context.getContentResolver(), SEARCH_CONTENT_FILTERS_ENABLED)
-            )
-            .isEqualTo(0)
+        assertThat(dataStoreValue).isEqualTo(0)
         assertThat(filterOffWidget.isChecked).isTrue()
+        verify(metricsRule.metricsFeatureProvider).changed(0, searchFilterOffPreference.key, 1)
     }
 
-    private fun getFilterOnWidget(): SelectorWithWidgetPreference {
-        val widget: SelectorWithWidgetPreference =
-            searchFilterOnPreference.createAndBindWidget(context)
-        mockLifeCycleContext.stub {
-            on { findPreference<Preference>(SupervisionSearchFilterOnPreference.KEY) } doReturn
-                widget
-            on { requirePreference<Preference>(SupervisionSearchFilterOnPreference.KEY) } doReturn
-                widget
+    private fun SupervisionSafeSearchPreference.createWidget() =
+        createAndBindWidget<SelectorWithWidgetPreference>(context).also { widget ->
+            mockLifeCycleContext.stub { on { requirePreference<Preference>(key) } doReturn widget }
         }
-        return widget
-    }
-
-    private fun getFilterOffWidget(): SelectorWithWidgetPreference {
-        val widget: SelectorWithWidgetPreference =
-            searchFilterOffPreference.createAndBindWidget(context)
-        mockLifeCycleContext.stub {
-            on { findPreference<Preference>(SupervisionSearchFilterOffPreference.KEY) } doReturn
-                widget
-            on { requirePreference<Preference>(SupervisionSearchFilterOffPreference.KEY) } doReturn
-                widget
-        }
-        return widget
-    }
-
-    private fun mockConfirmSupervisionCredentialsActivity() {
-        `when`(mockPackageManager.queryIntentActivitiesAsUser(any<Intent>(), anyInt(), anyInt()))
-            .thenReturn(listOf(ResolveInfo()))
-        `when`(mockLifeCycleContext.packageManager).thenReturn(mockPackageManager)
-        `when`(mockLifeCycleContext.registerForActivityResult(any<StartActivityForResult>(), any()))
-            .thenReturn(mockActivityResultLauncher)
-    }
 
     private fun verifyConfirmSupervisionCredentialsActivity() {
         val intentCaptor = argumentCaptor<Intent>()

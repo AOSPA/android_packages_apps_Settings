@@ -293,6 +293,8 @@
     <string name="share" msgid="8502235338607613795">"مشاركة"</string>
     <string name="add" msgid="8335206931421683426">"إضافة"</string>
     <string name="remove" msgid="1028414219245072102">"إزالة"</string>
+    <!-- no translation found for process (2614220641928709668) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"الإعدادات"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"الإعدادات"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"اختصار الإعدادات"</string>
@@ -930,6 +932,10 @@
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"السماح بالوصول إلى جهات الاتصال وسجلّ المكالمات"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"السماح أيضًا بالوصول إلى جهات الاتصال وسجلّ المكالمات"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"سيتم استخدام المعلومات في إشعارات المكالمات وغير ذلك"</string>
+    <!-- no translation found for bluetooth_pairing_confirmation_title (3359642089708714808) -->
+    <skip />
+    <!-- no translation found for bluetooth_pairing_confirmation_msg (8204761740738350792) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"تعذر الاتصال بـ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"الأجهزة المتاحة"</string>
@@ -994,7 +1000,7 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"خيارات إضافية"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"اضغط مع الاستمرار واسحب لإعادة ترتيب الشاشات."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"مزامنة محتوى الشاشة المُضمَّنة مع الشاشة الخارجية"</string>
-    <string name="wifi_display_settings_title" msgid="6451625615274960175">"البث"</string>
+    <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"انعكاس"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"تفعيل عرض شاشة لاسلكي"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"لم يتم العثور على أجهزة قريبة"</string>
@@ -1170,8 +1176,7 @@
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"سماح"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"رفض"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*مطلوب"</string>
-    <!-- no translation found for wifi_shared_network_login_screen_warning (7611029233083731552) -->
-    <skip />
+    <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"هذه شبكة مشترَكة. ويمكنك تغيير هذا الإعداد بعد تسجيل الدخول."</string>
     <string name="share_wifi_network" msgid="4064997404339571584">"مشاركة هذه الشبكة مع مستخدمي الجهاز الآخرين"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"يمكن لجميع المستخدمين على هذا الجهاز الاطّلاع على الشبكات المشترَكة والاتصال بها. يمكن للمشرفين حذف الشبكات المشترَكة. مزيد من المعلومات"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"السماح للمستخدمين الآخرين بتعديل إعدادات الشبكة"</string>
@@ -1454,26 +1459,17 @@
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"مفعّلة / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"إيقاف"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"وقت العرض"</string>
-    <!-- no translation found for screensaver_settings_low_light_mode (271972828076673743) -->
-    <skip />
+    <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"وضع الإضاءة المنخفضة"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"الرفع لتنبيه الجهاز"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"البدء فقط عند الشحن لاسلكيًا"</string>
-    <!-- no translation found for low_light_display_behavior_main_switch_title (7138165032358139627) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_subtitle (1833984014035605413) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_screen_off (4203092158668290404) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_low_light_clock_dream (2235561363691252383) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_summary_on (4218678742261840224) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_summary_off (4565368094992120316) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_screen_off_full_summary (6671607843870561892) -->
-    <skip />
-    <!-- no translation found for low_light_display_behavior_low_light_clock_dream_full_summary (1145914465090731721) -->
-    <skip />
+    <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"استخدام \"وضع الإضاءة المنخفضة\""</string>
+    <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"اختيار ما يتم عرضه في \"وضع الإضاءة المنخفضة\""</string>
+    <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"الشاشة مقفلة"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"ساعة بإضاءة منخفضة"</string>
+    <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"مفعّل / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
+    <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"غير مفعّل"</string>
+    <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"سيتم إطفاء الشاشة في حال كان ما حولك مظلم"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"ستظهر \"ساعة بإضاءة منخفضة\" عندما يكون ما حولك مظلمًا"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"العرض على الشاشة"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"وقت العرض"</string>
     <string name="doze_title" msgid="1523090408230862316">"تنشيط الشاشة لعرض الإشعارات"</string>
@@ -2138,8 +2134,7 @@
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"خفض"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"زيادة"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"عكس اتجاه التنقّل"</string>
-    <!-- no translation found for mouse_keys_use_primary_keys_title (525897583406210252) -->
-    <skip />
+    <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"استخدام المفاتيح الأساسية"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"يمكنك الانتقال للأعلى لتحريك محتوى الصفحة للأسفل"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"الانتقال"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"الانتقال المتناسب مع سرعة دوران العجلة"</string>
@@ -2219,20 +2214,13 @@
     <string name="gesture_button_next" msgid="695288092704187356">"التالي"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"إعادة تشغيل"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"تم"</string>
-    <!-- no translation found for action_corners_title (8971354126563421646) -->
-    <skip />
-    <!-- no translation found for action_corners_summary (4245089615854251124) -->
-    <skip />
-    <!-- no translation found for action_corners_intro (4384209411870086502) -->
-    <skip />
-    <!-- no translation found for action_corners_bottom_left_title (8677233546610832717) -->
-    <skip />
-    <!-- no translation found for action_corners_bottom_right_title (2155948558861306738) -->
-    <skip />
-    <!-- no translation found for action_corners_top_left_title (6604149810499060560) -->
-    <skip />
-    <!-- no translation found for action_corners_top_right_title (583996793984142329) -->
-    <skip />
+    <string name="action_corners_title" msgid="8971354126563421646">"تخصيص زوايا الإجراءات"</string>
+    <string name="action_corners_summary" msgid="4245089615854251124">"استخدام المؤشرات للتنقّل في النظام"</string>
+    <string name="action_corners_intro" msgid="4384209411870086502">"اختيار المناطق التالية لتخصيص زوايا الإجراءات"</string>
+    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"الزاوية السفلية اليمنى"</string>
+    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"الزاوية السفلية اليسرى"</string>
+    <string name="action_corners_top_left_title" msgid="6604149810499060560">"الزاوية العلوية اليمنى"</string>
+    <string name="action_corners_top_right_title" msgid="583996793984142329">"الزاوية العلوية اليسرى"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"مفاتيح التعديل"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"تغيير سلوك المفاتيح"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"إعادة ضبط الكل"</string>
@@ -2378,15 +2366,18 @@
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"تحريك الشاشة باستمرار حسب حركة مؤشر الماوس"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"تحريك الشاشة مع الإبقاء على مؤشر الماوس في منتصف الشاشة"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"تحريك الشاشة عند وصول مؤشر الماوس إلى حواف الشاشة"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"تكبير الكتابة"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"تتبُّع المكبّر النص أثناء الكتابة"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"اتباع الإعداد المفضّل للكتابة"</string>
+    <!-- no translation found for accessibility_screen_magnification_follow_typing_summary (2678347754211619662) -->
+    <skip />
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"تكبير تركيز لوحة المفاتيح"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"يتّبع المكبِّر تركيز لوحة المفاتيح"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"تكبير لوحة المفاتيح"</string>
-    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"يتم تكبير لوحة المفاتيح مع المحتوى"</string>
+    <!-- no translation found for accessibility_screen_magnification_nav_ime_summary (2102651227079047801) -->
+    <skip />
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"لا تتوفّر هذه الميزة عند تكبير جزء من الشاشة فقط"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"الإبقاء مفعّلاً عند تبديل التطبيقات"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"إبقاء المكبّر مفعّلاً وتصغيره عند التبديل بين التطبيقات"</string>
+    <!-- no translation found for accessibility_screen_magnification_always_on_summary (642275893256862796) -->
+    <skip />
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"لا يتوفّر هذا الخيار عند تكبير جزء من الشاشة فقط"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"ذراع التحكّم"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"يتم تفعيل ونقل المكبّر باستخدام ذراع تحكّم على الشاشة. انقر مع الاستمرار ثم اسحب على ذراع التحكّم للتحكّم في المكبّر. انقر على ذراع التحكّم واسحبه لنقله."</string>
@@ -3640,9 +3631,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"‏قارئ، علامة، nfc"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"لوحة المفاتيح، تقنية اللمس، الاهتزاز،"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"مستوى الصوت والاهتزاز"</string>
-    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"مستوى الصوت والاهتزاز وميزة \"عدم الإزعاج\""</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"مستوى صوت الوسائط"</string>
-    <string name="remote_media_volume_option_title" msgid="8760846743943305764">"مستوى صوت الإرسال"</string>
+    <string name="remote_media_volume_option_title" msgid="7907330631195715350">"‏مستوى صوت Google Cast"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"مستوى صوت المكالمة"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"مستوى صوت المنبّه"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"مستوى صوت الرنين والإشعار"</string>
@@ -3728,13 +3718,6 @@
     <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"الجدول الزمني"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"الجدول الزمني"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"‫<xliff:g id="HOURS">%1$d</xliff:g> س و<xliff:g id="MINUTES">%2$d</xliff:g> د"</string>
-    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"الجدول الزمني"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"كتم صوت الهاتف في أوقات معيّنة"</string>
-    <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"تعيين قواعد عدم الإزعاج"</string>
-    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"الجدول الزمني"</string>
-    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"استخدام جدول زمني"</string>
-    <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_settings_category" msgid="3794956668816783447">"السماح بالمقاطعات التي تصدر صوتًا"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"حظر الإشعارات المرئية"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"السماح بالإشارات المرئية"</string>
     <string name="mode_interruption_filter_title" msgid="6293843948349239256">"فلاتر الإشعارات"</string>
@@ -3758,16 +3741,6 @@
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"السماح بجميع الإشعارات"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"السماح للأشخاص والتطبيقات والأصوات بمقاطعة عمل الوضع"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"خيارات عرض الإشعارات المفلتَرة"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"عندما تكون ميزة \"عدم الإزعاج\" مفعّلة"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"بدون تنبيهات صوتية من الإشعارات"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"سترى الإشعارات على شاشتك"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"عند ظهور إشعارات، لن يُصدر هاتفك صوتًا أو يهتزّ."</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"بدون تنبيهات مرئيّة أو صوتية من الإشعارات"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"لن ترى أو تسمع الإشعارات"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"لن يعرض هاتفك إشعارات جديدة أو حالية ولن يهتز أو يُصدِر تنبيهات صوتية لها. يُرجى ملاحظة أنه سيستمر ظهور الإشعارات المهمة حول أنشطة الجهاز وحالته.\n\nعندما توقِف وضع \"عدم الإزعاج\"، يمكنك العثور على الإشعارات الفائتة من خلال التمرير سريعًا للأسفل من أعلى الشاشة."</string>
-    <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"الإعدادات المخصّصة"</string>
-    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"تفعيل الإعداد المخصّص"</string>
-    <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"إزالة الإعداد المخصّص"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"إظهار الإشعارات"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"إخفاء الإشعارات جزئيًا"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"إخفاء الإشعارات"</string>
@@ -3782,47 +3755,16 @@
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"إخفاء نقاط الإشعارات على رموز التطبيقات"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"عدم تشغيل الشاشة عند تلقّي إشعارات"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"إخفاء من مركز الإشعارات المنسدل"</string>
-    <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"أبدًا"</string>
-    <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"عندما تكون الشاشة مطفأة"</string>
-    <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"عندما تكون الشاشة مُشغَّلة"</string>
-    <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"الصوت والاهتزاز"</string>
-    <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"الصوت والاهتزاز وبعض الإشارات المرئية للإشعارات"</string>
-    <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"الصوت والاهتزاز والإشارات المرئية للإشعارات"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"لن يتم إخفاء الإشعارات المهمة حول أنشطة الجهاز الأساسية وحالته."</string>
-    <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"بدون"</string>
-    <string name="zen_mode_other_options" msgid="3399967231522580421">"خيارات أخرى"</string>
-    <string name="zen_mode_add" msgid="8789024026733232566">"إضافة"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"تفعيل"</string>
-    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"التفعيل الآن"</string>
-    <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"الإيقاف الآن"</string>
-    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"ميزة \"عدم الإزعاج\" مفعَّلة حتى <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"سيظل وضع \"عدم الإزعاج\" مفعَّلاً إلى أن توقفه"</string>
-    <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"تمّ تفعيل وضع \"عدم الإزعاج\" تلقائيًا حسب جدول زمني (<xliff:g id="RULE_NAME">%s</xliff:g>)."</string>
-    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"لقد فعَّل تطبيق (<xliff:g id="APP_NAME">%s</xliff:g>) تلقائيًا ميزة \"عدم الإزعاج\"."</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"تم تفعيل ميزة \"عدم الإزعاج\" لـ <xliff:g id="RULE_NAMES">%s</xliff:g> باستخدام إعدادات مخصّصة."</string>
-    <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">" عرض الإعدادات المخصَّصة"</annotation></string>
-    <string name="zen_interruption_level_priority" msgid="4854123502362861192">"الأولوية فقط"</string>
-    <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"قيد التفعيل / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"قيد التفعيل"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"الطلب في كل مرة"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"إلى أن يتم إيقاف الوضع"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{ساعة واحدة}zero{# ساعة}two{ساعتان}few{# ساعات}many{# ساعة}other{# ساعة}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{دقيقة واحدة}zero{# دقيقة}two{دقيقتان}few{# دقائق}many{# دقيقة}other{# دقيقة}}"</string>
-    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{الميزة غير مفعّلة}=1{الميزة غير مفعّلة / يمكن تفعيل جدول زمني واحد تلقائيًا.}two{الميزة غير مفعّلة / يمكن تفعيل جدولين زمنيين تلقائيًا.}few{الميزة غير مفعّلة / يمكن تفعيل # جداول زمنية تلقائيًا.}many{الميزة غير مفعّلة / يمكن تفعيل # جدولاً زمنيًا تلقائيًا.}other{الميزة غير مفعّلة / يمكن تفعيل # جدول زمني تلقائيًا.}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"المصادر والجهات التي يمكنها تجاوز وضع \"عدم الإزعاج\""</string>
     <string name="zen_category_people" msgid="8252926021894933047">"الأشخاص"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"التطبيقات"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"المنبهات ومصادر الإزعاج الأخرى"</string>
-    <string name="zen_category_schedule" msgid="2003707171924226212">"الجداول الزمنية"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"مدة الإعدادات السريعة"</string>
-    <string name="zen_settings_general" msgid="2704932194620124153">"الإعدادات العامة"</string>
-    <string name="zen_sound_footer" msgid="4090291351903631977">"عند تفعيل الوضع \"عدم الإزعاج\"، سيتم كتم الصوت ومنع الاهتزاز عند تلقّي أي عناصر باستثناء تلك التي تسمح بها أعلاه."</string>
-    <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"الإعدادات المُخصصة"</string>
-    <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"مراجعة الجدول الزمني"</string>
-    <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"حسنًا"</string>
-    <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"الإشعارات"</string>
-    <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"المدة"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"أصوات ملف العمل"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"استخدام أصوات الملف الشخصي"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"استخدام الأصوات نفسها التي يستخدمها ملفك الشخصي"</string>
@@ -3864,6 +3806,8 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"السماح بتأجيل الإشعارات"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"نقطة الإشعار على رموز التطبيقات"</string>
     <string name="notification_bundles" msgid="496852738958148317">"منظّم الإشعارات"</string>
+    <!-- no translation found for notification_ai_features_title (6497959797331796296) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"ملخّصات الإشعارات"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"الحصول على ملخّص سريع للرسائل الطويلة"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"استخدام ملخّصات الإشعارات"</string>
@@ -4002,9 +3946,7 @@
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"الردّ على الرسائل"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"يمكنه الردّ على الرسائل واتخاذ إجراءات من خلال الأزرار في الإشعارات، بما في ذلك تأجيل الإشعارات أو إغلاقها والردّ على المكالمات."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"تغيير الإعدادات"</string>
-    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"يمكنه تفعيل ميزة \"عدم الإزعاج\" أو إيقافها وتغيير الإعدادات ذات الصلة."</string>
     <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"يمكنه إدارة \"الأوضاع\" وتفعيلها وتغيير الإعدادات ذات الصلة بها."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="205200471571837170">"عند إيقاف وصول \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\" إلى الإشعارات، قد يتم إيقاف التحكّم في ميزة \"عدم الإزعاج\" أيضًا."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"في حال إيقاف الوصول إلى إشعارات \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\"، قد يتم إيقاف الوصول إلى \"الأوضاع\" أيضًا."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"إيقاف"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"إلغاء"</string>
@@ -4037,6 +3979,8 @@
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"سيتم كتم صوت الإشعارات ذات المواضيع المتشابهة وتجميعها معًا لتوفير تجربة أكثر هدوءًا"</string>
     <string name="notification_bundle_excluded_description" msgid="2667461772332132250">"لن يتم تجميع الإشعارات من هذه التطبيقات"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"السماح بتجميع إشعارات التطبيقات"</string>
+    <!-- no translation found for notification_adjustment_work_switch_title (5858034709870660002) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"خدمات تحسّن تجربة الواقع الافتراضي"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"لم تطلب أي تطبيقات مثبَّتة أن يتم تشغيلها كخدمات تحسّن تجربة الواقع الافتراضي."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"هل تريد السماح لخدمة \"<xliff:g id="SERVICE">%1$s</xliff:g>\" بالوصول إلى خدمة الواقع الافتراضي؟"</string>
@@ -4071,9 +4015,6 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"لربط هذه التطبيقات، عليك تثبيت تطبيق <xliff:g id="NAME">%1$s</xliff:g> في ملف العمل الخاص بك."</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"لربط هذه التطبيقات، عليك تثبيت تطبيق <xliff:g id="NAME">%1$s</xliff:g> في ملفك الشخصي."</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"انقر لتنزيل التطبيق."</string>
-    <string name="manage_zen_access_title" msgid="4123905441114743974">"التحكّم في ميزة \"عدم الإزعاج\""</string>
-    <string name="zen_access_detail_switch" msgid="4183681772666138993">"السماح بميزة \"عدم الإزعاج\""</string>
-    <string name="zen_access_empty_text" msgid="2662270585004373785">"لم تطلب أي تطبيقات مثبّتة الإذن بالتحكّم في ميزة \"عدم الإزعاج\""</string>
     <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"الوصول إلى \"الأوضاع\""</string>
     <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"السماح بالوصول إلى \"الأوضاع\""</string>
     <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"لم تطلب أي تطبيقات مثبَّتة الوصول إلى \"الأوضاع\""</string>
@@ -4163,7 +4104,6 @@
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"الرسائل"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"الرسائل التي يمكنها تجاوز وضع \"عدم الإزعاج\""</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"لكي تصدر الرسائل المسموح بها تنبيهًا صوتيًا عند وصولها، تأكّد من ضبط الجهاز على الرنين"</string>
-    <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"وفقًا للجدول الزمني \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\"، يتم حظر الرسائل الواردة. ويمكنك ضبط الإعدادات للسماح لأصدقائك أو أفراد عائلتك أو جهات الاتصال الأخرى بالتواصل معك."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"يمكن أن تصلك كل الرسائل"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"يمكن أن تصلك كل المكالمات"</string>
     <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{ما من جهات اتصال}=1{جهة اتصال واحدة}two{جهتا اتصال}few{# جهات اتصال}many{# جهة اتصال}other{# جهة اتصال}}"</string>
@@ -4471,11 +4411,7 @@
     <string name="running_frequency" msgid="7260225121706316639">"معدل الاستخدام"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"الاستخدام الأقصى"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"لم يتم استخدام أي بيانات"</string>
-    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"هل تسمح بوصول \"<xliff:g id="APP">%1$s</xliff:g>\" إلى إعداد \"عدم الإزعاج\"؟"</string>
-    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"سيكون التطبيق قادرًا على تفعيل/إيقاف ميزة \"عدم الإزعاج\" وإجراء تغييرات على الإعدادات ذات الصلة."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"يجب أن يظل قيد التفعيل نظرًا لأن الوصول إلى الإشعارات قيد التفعيل"</string>
-    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"هل تريد إبطال إمكانية وصول تطبيق \"<xliff:g id="APP">%1$s</xliff:g>\" إلى إعداد \"عدم الإزعاج\"؟"</string>
-    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"ستتم إزالة كل قواعد \"عدم الإزعاج\" التي أنشأها هذا التطبيق."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"هل تريد منح \"<xliff:g id="APP">%1$s</xliff:g>\" إذنًا للوصول إلى \"الأوضاع\"؟"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"سيتمكّن التطبيق من تفعيل ميزة \"عدم الإزعاج\" وإيقافها، وإدارة \"الأوضاع\" وتفعيلها، وإجراء تغييرات على الإعدادات ذات الصلة."</string>
     <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"هل تريد إلغاء إذن وصول تطبيق \"<xliff:g id="APP">%1$s</xliff:g>\" إلى \"الأوضاع\"؟"</string>
@@ -4592,6 +4528,10 @@
     <string name="condition_grayscale_title" msgid="9029271080007984542">"تدرّج الرمادي"</string>
     <string name="condition_grayscale_summary" msgid="1306034149271251292">"عرض بلون رمادي فقط"</string>
     <string name="homepage_condition_footer_content_description" msgid="1568313430995646108">"تصغير"</string>
+    <!-- no translation found for homepage_unnumbered_alert_description (8393737409248958672) -->
+    <skip />
+    <!-- no translation found for homepage_numbered_alert_description (4965963469296900322) -->
+    <skip />
     <string name="color_temperature" msgid="8256912135746305176">"ألوان هادئة"</string>
     <string name="color_temperature_desc" msgid="6713259535885669622">"استخدم ألوان عرض هادئة"</string>
     <string name="color_temperature_toast" msgid="7611532183532407342">"لتطبيق التغيير في اللون، أوقف الشاشة."</string>
@@ -4818,7 +4758,7 @@
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"ستظهر الإشعارات والإعدادات."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"للاطّلاع على الوقت والإشعارات والمعلومات الأخرى، انقر مرّتين على شاشتك."</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"عرض إيماءة التنبيه"</string>
-    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"النقر على شاشة هاتفك للاطّلاع على الوقت والإشعارات والمعلومات الأخرى"</string>
+    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"ما عليك سوى النقر على شاشة هاتفك للاطّلاع على الوقت والإشعارات ومعلومات أخرى"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"اتصالات الطوارئ"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"استخدام ميزة \"اتصالات الطوارئ\""</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"اضغط على زر التشغيل بسرعة 5 مرات أو أكثر لبدء تنفيذ الإجراءات أدناه."</string>
@@ -5318,9 +5258,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"البطارية"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"لوحة الإعدادات"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"تفعيل النوافذ الحرة"</string>
-    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"تفعيل ميزات تجربة الكمبيوتر المكتبي"</string>
-    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="8586716390362684564">"تفعيل وضع عرض النوافذ على سطح المكتب على الجهاز وعلى شاشات العرض الثانوية"</string>
-    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="7567963048658976895">"تفعيل وضع عرض النوافذ على سطح المكتب على شاشات العرض الثانوية"</string>
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"تفعيل ميزات محاكاة شاشة الكمبيوتر"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="8586716390362684564">"تفعيل العرض في نوافذ على شاشات سطح مكتب ثانوية وعلى الجهاز"</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="7567963048658976895">"تفعيل العرض في نوافذ على شاشات سطح مكتب ثانوية"</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"تفعيل النوافذ الحرة على شاشة ثانوية"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"عرض التطبيقات التي لا يتغيّر حجمها على شاشة متعدّدة النوافذ"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"السماح بعرض التطبيقات التي لا يتغيّر حجمها على شاشة متعدّدة النوافذ"</string>
@@ -5884,10 +5824,8 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"أدوات رقابة الأهل"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"قيود المحتوى وقيود أخرى"</string>
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"تفعيل ميزة \"الإشراف على الجهاز\""</string>
-    <!-- no translation found for device_supervision_switch_no_pin_summary (4869563544571033220) -->
-    <skip />
-    <!-- no translation found for device_supervision_switch_paused_summary (1014381188739295656) -->
-    <skip />
+    <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"إعداد رقم التعريف الشخصي"</string>
+    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"متوقف مؤقتًا"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"إشراف، إشراف الأهل، أدوات رقابة الأهل"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"إدارة رقم التعريف الشخصي"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"إضافة عنوان البريد الإلكتروني المخصّص لاسترداد الحساب"</string>

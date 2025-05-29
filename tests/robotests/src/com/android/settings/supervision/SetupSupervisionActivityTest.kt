@@ -71,7 +71,7 @@ class SetupSupervisionActivityTest {
 
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
-        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
     }
 
     @Test
@@ -80,6 +80,7 @@ class SetupSupervisionActivityTest {
             on { users } doReturn emptyList()
             on { createUser(any(), any(), any()) } doReturn SUPERVISING_USER_INFO
         }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
 
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
@@ -136,11 +137,41 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
+    fun onCreate_existingSupervisingLock_finishes() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
+        }
+    }
+
+    @Test
+    fun onResume_existingSupervisingLock_finishes() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.moveToState(Lifecycle.State.STARTED)
+
+            shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+            scenario.moveToState(Lifecycle.State.RESUMED)
+
+            scenario.onActivity { activity -> assertThat(activity.isFinishing).isTrue() }
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_OK)
+        }
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
     fun onSetLockResult_startsRecoveryActivity() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
                 val shadowActivity = shadowOf(activity)
+                shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
                 shadowActivity.receiveResult(
                     shadowActivity.nextStartedActivityForResult.intent,
                     RESULT_OK,
@@ -178,8 +209,6 @@ class SetupSupervisionActivityTest {
 
     @Test
     fun onSetLockResult_supervisingUserNotSecure_canceled() {
-        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
-
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
             scenario ->
             scenario.onActivity { activity ->
@@ -200,16 +229,20 @@ class SetupSupervisionActivityTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
     fun onPinRecoveryResult_finishesOk() {
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
             scenario ->
             scenario.onActivity { activity ->
                 val shadowActivity = shadowOf(activity)
+                shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
                 // Set PIN result.
                 shadowActivity.receiveResult(
                     shadowActivity.nextStartedActivityForResult.intent,
                     RESULT_OK,
                     null,
                 )
+
                 // PIN recovery result.
                 shadowActivity.receiveResult(
                     shadowActivity.nextStartedActivityForResult.intent,

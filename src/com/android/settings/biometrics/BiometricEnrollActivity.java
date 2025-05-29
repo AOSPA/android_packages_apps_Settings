@@ -36,6 +36,7 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricManager.Authenticators;
 import android.hardware.biometrics.BiometricManager.BiometricError;
+import android.hardware.biometrics.Flags;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
@@ -474,7 +475,12 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                         final Utils.BiometricStatus biometricStatus =
                                 Utils.requestBiometricAuthenticationForMandatoryBiometrics(this,
                                         false /* biometricsAuthenticationRequested */, mUserId);
-                        if (biometricStatus == Utils.BiometricStatus.OK) {
+                        if (Flags.bpFallbackOptions()) {
+                            if (biometricStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                                Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                                        BIOMETRIC_AUTH_REQUEST, mUserId, true /* hideBackground */);
+                            }
+                        } else if (biometricStatus == Utils.BiometricStatus.OK) {
                             Utils.launchBiometricPromptForMandatoryBiometrics(this,
                                     BIOMETRIC_AUTH_REQUEST, mUserId, true /* hideBackground */);
                         } else if (biometricStatus != Utils.BiometricStatus.NOT_ACTIVE) {

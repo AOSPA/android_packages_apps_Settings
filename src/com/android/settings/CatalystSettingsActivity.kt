@@ -18,6 +18,8 @@ package com.android.settings
 
 import android.content.Intent
 import android.os.Bundle
+import com.android.settings.dashboard.DashboardFragment
+import com.android.settingslib.core.instrumentation.Instrumentable
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_KEY
 import com.android.settingslib.preference.PreferenceFragment
 
@@ -45,13 +47,21 @@ constructor(
 /**
  * Fragment to load catalyst preference screen.
  *
- * `PreferenceFragment` class is not used as it does not support highlighting specific preference.
+ * Use [DashboardFragment] as base class instead of [PreferenceFragment] to support injection and
+ * highlighting specific preference.
  */
-class CatalystFragment : SettingsPreferenceFragment() {
+open class CatalystFragment : DashboardFragment() {
 
-    override fun getMetricsCategory() = 0
+    override fun getPreferenceScreenResId() = 0
+
+    override fun getLogTag(): String = javaClass.simpleName
+
+    override fun getMetricsCategory() =
+        context?.let { getPreferenceScreenCreator(it) as? Instrumentable }?.metricsCategory
+            ?: METRICS_CATEGORY_UNKNOWN
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceScreen = createPreferenceScreen()
+        refreshDashboardTiles(logTag)
     }
 }

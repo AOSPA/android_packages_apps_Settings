@@ -67,12 +67,14 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
     }
 
     /** Initialize the UI settings. */
-    public void init(int subId, @NonNull PersistableBundle configBundle, boolean isSmsAvailable,
-            boolean isDataAvailable) {
+    public void init(int subId, @NonNull PersistableBundle configBundle) {
         mSubId = subId;
         mConfigBundle = configBundle;
         mSimOperatorName = mContext.getSystemService(TelephonyManager.class).getSimOperatorName(
                 mSubId);
+    }
+
+    void setCarrierRoamingNtnAvailability(boolean isSmsAvailable, boolean isDataAvailable) {
         mIsSmsAvailable = isSmsAvailable;
         mIsDataAvailable = isDataAvailable;
         mIsSatelliteEligible = isSatelliteEligible();
@@ -82,17 +84,13 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
     public void displayPreference(@NonNull PreferenceScreen screen) {
         mScreen = screen;
         super.displayPreference(screen);
-        PreferenceCategory prefCategory = screen.findPreference(
-                PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN);
-        // Your mobile plan
-        prefCategory.setTitle(mContext.getString(R.string.category_title_your_satellite_plan,
-                mSimOperatorName));
+        updatePreferences();
+    }
 
-        if (mIsSatelliteEligible) {
-            handleEligibleUI();
-            return;
-        }
-        handleIneligibleUI();
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        updatePreferences();
     }
 
     @Override
@@ -106,21 +104,37 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
                 : CONDITIONALLY_UNAVAILABLE;
     }
 
+    private void updatePreferences() {
+        if (mScreen == null) {
+            return;
+        }
+        PreferenceCategory prefCategory = mScreen.findPreference(
+                PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN);
+        // Your mobile plan
+        prefCategory.setTitle(mContext.getString(R.string.category_title_your_satellite_plan,
+                mSimOperatorName));
+
+        if (mIsSatelliteEligible) {
+            handleEligibleUI();
+            return;
+        }
+        handleIneligibleUI();
+    }
+
     private void handleEligibleUI() {
         Preference messagingPreference = mScreen.findPreference(PREF_KEY_YOUR_SATELLITE_PLAN);
         Drawable icon = mContext.getDrawable(R.drawable.ic_check_circle_24px);
         /* In case satellite is allowed by carrier's entitlement server, the page will show
                the check icon with guidance that satellite is included in user's mobile plan */
         messagingPreference.setTitle(R.string.title_have_satellite_plan);
-        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
-            if (mIsDataAvailable) {
-                Preference connectivityPreference = mScreen.findPreference(
-                        PREF_KEY_YOUR_SATELLITE_DATA_PLAN);
-                connectivityPreference.setTitle(R.string.title_have_satellite_data_plan);
-                connectivityPreference.setIcon(icon);
-                connectivityPreference.setVisible(true);
-            }
+        if (mIsDataAvailable) {
+            Preference connectivityPreference = mScreen.findPreference(
+                    PREF_KEY_YOUR_SATELLITE_DATA_PLAN);
+            connectivityPreference.setTitle(R.string.title_have_satellite_data_plan);
+            connectivityPreference.setIcon(icon);
+            connectivityPreference.setVisible(true);
         }
+
         icon.setTintList(Utils.getColorAttr(mContext, android.R.attr.textColorPrimary));
         messagingPreference.setIcon(icon);
     }

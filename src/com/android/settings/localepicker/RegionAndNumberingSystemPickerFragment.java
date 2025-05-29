@@ -33,7 +33,6 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -351,6 +350,8 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
                     mIsNumberingMode);
             mSystemLocaleAllListPreferenceController = new SystemLocaleAllListPreferenceController(
                     context, KEY_PREFERENCE_SYSTEM_LOCALE_LIST, mLocaleInfo, mIsNumberingMode);
+            mSuggestedListPreferenceController.setFragmentManager(getFragmentManager());
+            mSystemLocaleAllListPreferenceController.setFragmentManager(getFragmentManager());
             controllers.add(mSuggestedListPreferenceController);
             controllers.add(mSystemLocaleAllListPreferenceController);
         } else {

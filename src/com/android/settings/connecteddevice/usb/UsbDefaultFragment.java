@@ -225,7 +225,7 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment implements
             if (pref != null) {
                 final boolean isSupported = mUsbBackend.areFunctionsSupported(option);
                 pref.setEnabled(isSupported);
-                String userRestriction = mUsbBackend.maybeGetUserRestriction(option);
+                String userRestriction = UsbBackend.maybeGetUserRestriction(option);
                 if (userRestriction != null) {
                     pref.checkRestrictionAndSetDisabled(userRestriction);
                 }

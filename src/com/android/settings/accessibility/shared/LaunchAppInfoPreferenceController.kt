@@ -21,9 +21,10 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Settings
 import androidx.core.net.toUri
+import com.android.settings.accessibility.extensions.isInSetupWizard
 
 class LaunchAppInfoPreferenceController(context: Context, prefKey: String) :
-    LaunchIntentPreferenceController(context, prefKey), SetupWizardDependent {
+    LaunchIntentPreferenceController(context, prefKey) {
 
     fun initialize(componentName: ComponentName) {
         if (!mContext.packageManager.isPackageAvailable(componentName.packageName)) {
@@ -40,7 +41,7 @@ class LaunchAppInfoPreferenceController(context: Context, prefKey: String) :
     }
 
     override fun getAvailabilityStatus(): Int {
-        return if (isInSetupWizard(mContext)) {
+        return if (mContext.isInSetupWizard()) {
             CONDITIONALLY_UNAVAILABLE
         } else {
             super.getAvailabilityStatus()

@@ -293,6 +293,7 @@
     <string name="share" msgid="8502235338607613795">"Share"</string>
     <string name="add" msgid="8335206931421683426">"Add"</string>
     <string name="remove" msgid="1028414219245072102">"Remove"</string>
+    <string name="process" msgid="2614220641928709668">"Process"</string>
     <string name="settings_label" msgid="943294133671632976">"Settings"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Settings"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Settings shortcut"</string>
@@ -930,6 +931,8 @@
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Allow access to your contacts and call history"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Also allow access to contacts and call history"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Info will be used for call announcements and more"</string>
+    <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Check pairing codes"</string>
+    <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Check if this code matches the one on <xliff:g id="DEVICE_NAME">%1$s</xliff:g>.\n\nFor your security, do not enter this code anywhere."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Couldn’t connect to <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Available devices"</string>
@@ -994,7 +997,7 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"More options"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Hold and drag to rearrange displays."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Mirror built-in display"</string>
-    <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
+    <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirror"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Enable wireless display"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"No nearby devices were found."</string>
@@ -2360,15 +2363,15 @@
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Move screen continuously as mouse moves"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Move screen keeping mouse at center of screen"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Move screen when mouse touches edges of screen"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Magnify typing"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Magnifier follows text as you type"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Follow typing"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"The magnifier follows text as you type"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"Magnify keyboard focus"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"Magnifier follows keyboard focus"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Magnify keyboard"</string>
-    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="3054371947104552843">"Keyboard is magnified with your content"</string>
+    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Zoom into the keyboard to see emojis and letters when using full-screen magnification"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Unavailable while only magnifying part of the screen"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Keep on while switching apps"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Magnifier stays on and zooms out when you switch apps"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="642275893256862796">"The magnifier stays on and zooms out when you switch apps"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Unavailable while only magnifying part of the screen"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Activate and move the magnifier with an on-screen joystick. Tap and hold, then drag on the joystick to control the magnifier. Tap and drag to move the joystick itself."</string>
@@ -3607,9 +3610,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, reader"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"keyboard, haptics, vibrate,"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volume and vibration"</string>
-    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"Volume, vibration, Do Not Disturb"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Media volume"</string>
-    <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Cast volume"</string>
+    <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast volume"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Call volume"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Alarm volume"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Ring and notification volume"</string>
@@ -3695,13 +3697,6 @@
     <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Time schedule"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Schedule"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> hr, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Schedule"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silence phone at certain times"</string>
-    <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Set Do Not Disturb rules"</string>
-    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Schedule"</string>
-    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Use schedule"</string>
-    <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Allow interruptions that make sound"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Block visual disturbances"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Allow visual signals"</string>
     <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Notification filters"</string>
@@ -3725,16 +3720,6 @@
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Allow all notifications"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"People, apps, and sounds can interrupt"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Display options for filtered notifications"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"When Do Not Disturb is on"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"No sound from notifications"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"You will see notifications on your screen"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"When notifications arrive, your phone won’t make a sound or vibrate."</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"No visuals or sound from notifications"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"You won’t see or hear notifications"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Your phone won’t show, vibrate or make sound for new or existing notifications. Keep in mind, critical notifications for device activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen."</string>
-    <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Custom"</string>
-    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Enable custom setting"</string>
-    <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Remove custom setting"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"Notifications shown"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"Notifications partially hidden"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"Notifications hidden"</string>
@@ -3749,47 +3734,16 @@
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Hide notification dots on app icons"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Don\'t wake for notifications"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Hide from pull-down shade"</string>
-    <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Never"</string>
-    <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"When screen is off"</string>
-    <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"When screen is on"</string>
-    <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Sound and vibration"</string>
-    <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Sound, vibration, and some visual signs of notifications"</string>
-    <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Sound, vibration, and visual signs of notifications"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Notifications needed for basic device activity and status will never be hidden."</string>
-    <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"None"</string>
-    <string name="zen_mode_other_options" msgid="3399967231522580421">"other options"</string>
-    <string name="zen_mode_add" msgid="8789024026733232566">"Add"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"Turn on"</string>
-    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"Turn on now"</string>
-    <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"Turn off now"</string>
-    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"Do Not Disturb is on until <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"Do Not Disturb will stay on until you turn it off"</string>
-    <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"Do Not Disturb was automatically turned on by a schedule (<xliff:g id="RULE_NAME">%s</xliff:g>)"</string>
-    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"Do Not Disturb was automatically turned on by an app (<xliff:g id="APP_NAME">%s</xliff:g>)"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"Do Not Disturb is on for <xliff:g id="RULE_NAMES">%s</xliff:g> with custom settings."</string>
-    <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">"View custom settings"</annotation></string>
-    <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Priority only"</string>
-    <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"On / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"On"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Ask every time"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Until you turn off"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 hour}other{# hours}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minute}other{# minutes}}"</string>
-    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Off}=1{Off / 1 schedule can turn on automatically}other{Off / # schedules can turn on automatically}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"What can interrupt Do Not Disturb"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"People"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarms &amp; other interruptions"</string>
-    <string name="zen_category_schedule" msgid="2003707171924226212">"Schedules"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Duration for Quick Settings"</string>
-    <string name="zen_settings_general" msgid="2704932194620124153">"General"</string>
-    <string name="zen_sound_footer" msgid="4090291351903631977">"When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above."</string>
-    <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Custom settings"</string>
-    <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Review schedule"</string>
-    <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"Got it"</string>
-    <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Notifications"</string>
-    <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Duration"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Work profile sounds"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Use personal profile sounds"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Use the same sounds as your personal profile"</string>
@@ -3831,6 +3785,7 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Allow notification snoozing"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Notification dot on app icon"</string>
     <string name="notification_bundles" msgid="496852738958148317">"Notification organizer"</string>
+    <string name="notification_ai_features_title" msgid="6497959797331796296">"AI-powered notifications"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Notification summaries"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Get quick recaps of longer messages"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Use notification summaries"</string>
@@ -3967,9 +3922,7 @@
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Reply to messages"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"It can reply to messages and take action on buttons in notifications, including snoozing or dismissing notifications and answering calls."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Change settings"</string>
-    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"It can turn Do Not Disturb on or off and change related settings."</string>
     <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"It can manage and activate Modes, and change related settings."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="205200471571837170">"If you turn off notification access for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, Do Not Disturb control may also be turned off."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"If you turn off notification access for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, Modes access may also be turned off."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Turn off"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancel"</string>
@@ -4002,6 +3955,7 @@
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Notifications with similar themes will be silenced and grouped together for a quieter experience"</string>
     <string name="notification_bundle_excluded_description" msgid="2667461772332132250">"Notifications from these apps wont be bundled"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Allow notification bundling for apps"</string>
+    <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Apply to work profile apps"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR helper services"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"No installed apps have requested to be run as VR helper services."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Allow VR service access for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4036,9 +3990,6 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"To connect these apps, install <xliff:g id="NAME">%1$s</xliff:g> in your work profile"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"To connect these apps, install <xliff:g id="NAME">%1$s</xliff:g> in your personal profile"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Tap to get the app"</string>
-    <string name="manage_zen_access_title" msgid="4123905441114743974">"Do Not Disturb control"</string>
-    <string name="zen_access_detail_switch" msgid="4183681772666138993">"Allow Do Not Disturb"</string>
-    <string name="zen_access_empty_text" msgid="2662270585004373785">"No installed apps have requested Do Not Disturb control"</string>
     <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Modes access"</string>
     <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Allow Modes access"</string>
     <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"No installed apps have requested Modes access"</string>
@@ -4128,7 +4079,6 @@
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Messages"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Messages that can interrupt"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"To make sure allowed messages make sound, check that device is set to ring"</string>
-    <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"For ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ incoming messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"All messages can reach you"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"All calls can reach you"</string>
     <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{None}=1{1 contact}other{# contacts}}"</string>
@@ -4436,11 +4386,7 @@
     <string name="running_frequency" msgid="7260225121706316639">"Frequency"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maximum usage"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"No data used"</string>
-    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Allow access to Do Not Disturb for <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"The app will be able to turn on/off Do Not Disturb and make changes to related settings."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Must stay turned on because notification access is on"</string>
-    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Revoke access to Do Not Disturb for <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"All Do Not Disturb rules created by this app will be removed."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Allow access to Modes for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"The app will be able to turn on/off Do Not Disturb, manage and activate Modes, and make changes to related settings."</string>
     <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Revoke access to Modes for <xliff:g id="APP">%1$s</xliff:g>?"</string>
@@ -4557,6 +4503,8 @@
     <string name="condition_grayscale_title" msgid="9029271080007984542">"Greyscale"</string>
     <string name="condition_grayscale_summary" msgid="1306034149271251292">"Display only in gray color"</string>
     <string name="homepage_condition_footer_content_description" msgid="1568313430995646108">"Collapse"</string>
+    <string name="homepage_unnumbered_alert_description" msgid="8393737409248958672">"This item has an alert"</string>
+    <string name="homepage_numbered_alert_description" msgid="4965963469296900322">"This item has <xliff:g id="ALERT_COUNT">%1$s</xliff:g> alerts"</string>
     <string name="color_temperature" msgid="8256912135746305176">"Cool color temperature"</string>
     <string name="color_temperature_desc" msgid="6713259535885669622">"Use cooler display colors"</string>
     <string name="color_temperature_toast" msgid="7611532183532407342">"To apply color change, turn off screen"</string>

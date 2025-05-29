@@ -28,14 +28,21 @@
             "com.android.settings.location.RecentLocationAccessPreferenceController"/>
 
     <com.android.settingslib.widget.UntitledPreferenceCategory>
-      <Preference
-          android:key="recent_location_access_see_all_button"
-          android:title="@string/location_recent_location_access_see_all"
-          android:icon="@drawable/ic_chevron_right_24dp"
-          android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
-          settings:controller="com.android.settings.location.RecentLocationAccessSeeAllButtonPreferenceController"
-          settings:searchable="false"/>
+        <Preference
+            android:key="recent_location_access_see_all_button"
+            android:title="@string/location_recent_location_access_see_all"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
+            settings:controller="com.android.settings.location.RecentLocationAccessSeeAllButtonPreferenceController"
+            settings:searchable="false"/>
     </com.android.settingslib.widget.UntitledPreferenceCategory>
+
+    <com.android.settingslib.widget.SectionButtonPreference
+        android:key="recent_location_access_see_all_button_expressive"
+        android:title="@string/location_recent_location_access_see_all"
+        android:icon="@drawable/ic_bluetooth_more_vert"
+        android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
+        settings:controller="com.android.settings.location.RecentLocationAccessSeeAllExpressiveButtonPreferenceController" />
 
 <CheckBoxPreference
         android:key="assisted_gps"
@@ -43,7 +50,6 @@
         android:summaryOn="@string/assisted_gps_enabled"
         android:summaryOff="@string/assisted_gps_disabled"
         settings:controller="com.android.settings.location.AgpsPreferenceController"/>
-
     <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="location_advanced_settings">
 

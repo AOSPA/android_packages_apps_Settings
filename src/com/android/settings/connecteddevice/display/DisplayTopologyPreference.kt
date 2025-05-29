@@ -16,26 +16,21 @@
 
 package com.android.settings.connecteddevice.display
 
-import com.android.settings.R
-import com.android.settingslib.widget.GroupSectionDividerMixin
-
-import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.PointF
 import android.graphics.RectF
 import android.hardware.display.DisplayTopology
-import android.util.DisplayMetrics
+import android.util.Log
+import android.util.Size
 import android.view.MotionEvent
-import android.view.ViewTreeObserver
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
-
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
-
+import com.android.settings.R
+import com.android.settingslib.widget.GroupSectionDividerMixin
 import java.util.function.Consumer
-
 import kotlin.math.abs
 
 /**
@@ -43,8 +38,7 @@ import kotlin.math.abs
  * when there is one or more extended display attached.
  */
 class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
-        : Preference(injector.context!!), ViewTreeObserver.OnGlobalLayoutListener,
-          GroupSectionDividerMixin {
+        : Preference(injector.context!!), GroupSectionDividerMixin {
     @VisibleForTesting lateinit var mPaneContent : FrameLayout
     @VisibleForTesting lateinit var mPaneHolder : FrameLayout
     @VisibleForTesting lateinit var mTopologyHint : TextView
@@ -63,13 +57,24 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
      */
     @VisibleForTesting val accidentalDragTimeLimitMs = 800L
 
-    /**
-     * This is needed to prevent a repopulation of the pane causing another
-     * relayout and vice-versa ad infinitum.
-     */
-    private var mPaneNeedsRefresh = false
-
     private val mTopologyListener = Consumer<DisplayTopology> { applyTopology(it) }
+
+    private val mPaneContentLayoutListener = object : View.OnLayoutChangeListener {
+        override fun onLayoutChange(v: View,
+                newLeft: Int, newTop: Int, newRight: Int, newBottom: Int,
+                oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
+            val oldWidth = oldRight - oldLeft
+            val newWidth = newRight - newLeft
+            // The width will change e.g. when first displaying the topology UI (oldWidth is 0) or
+            // when the window is resized. We ignore when the height is changed because we don't
+            // specify the height in terms of layout, but specify it algorithmically via
+            // TopologyScale, which uses the width and the topology to calculate a height.
+            if (oldWidth != newWidth) {
+                Log.i(TAG, "Width changed from $oldWidth to $newWidth - refresh pane")
+                refreshPane()
+            }
+        }
+    }
 
     init {
         layoutResource = R.layout.display_topology_preference
@@ -90,20 +95,16 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
             if (newPane == mPaneContent) {
                 return
             }
-            mPaneContent.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            mPaneContent.removeOnLayoutChangeListener(mPaneContentLayoutListener)
         }
         mPaneContent = newPane
         mPaneHolder = holder.itemView as FrameLayout
         mTopologyHint = holder.findViewById(R.id.topology_hint) as TextView
-        mPaneContent.viewTreeObserver.addOnGlobalLayoutListener(this)
+        mPaneContent.addOnLayoutChangeListener(mPaneContentLayoutListener)
     }
 
     override fun onAttached() {
         super.onAttached()
-        // We don't know if topology changes happened when we were detached, as it is impossible to
-        // listen at that time (we must remove listeners when detaching). Setting this flag makes
-        // the following onGlobalLayout call refresh the pane.
-        mPaneNeedsRefresh = true
         injector.registerTopologyListener(mTopologyListener)
     }
 
@@ -116,13 +117,6 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
         mRevealedWallpapers = listOf()
 
         injector.unregisterTopologyListener(mTopologyListener)
-    }
-
-    override fun onGlobalLayout() {
-        if (mPaneNeedsRefresh) {
-            mPaneNeedsRefresh = false
-            refreshPane()
-        }
     }
 
     /**
@@ -213,42 +207,17 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
             recycleableBlocks.add(mPaneContent.getChildAt(i) as DisplayBlock)
         }
 
-        val scaling = TopologyScale(
-                mPaneContent.width,
-                minEdgeLength = DisplayTopology.dpToPx(60f, injector.densityDpi),
-                maxEdgeLength = DisplayTopology.dpToPx(256f, injector.densityDpi),
-                newBounds.map { it.second }.toList())
-        mPaneHolder.layoutParams.let {
-            val newHeight = scaling.paneHeight.toInt()
-            if (it.height != newHeight) {
-                it.height = newHeight
-                mPaneHolder.layoutParams = it
-            }
-        }
-
         val idToNode = topology.allNodesIdMap()
-        newBounds.forEach { (id, pos) ->
-            val block = recycleableBlocks.removeFirstOrNull() ?: DisplayBlock(injector).apply {
-                mPaneContent.addView(this)
-            }
-
-            idToNode.get(id)?.let {
-                val topLeft = scaling.displayToPaneCoor(pos.left, pos.top)
-                val bottomRight = scaling.displayToPaneCoor(pos.right, pos.bottom)
-                block.reset(id, topLeft, bottomRight, (bottomRight.x - topLeft.x) / it.logicalWidth)
-            }
-            block.setOnTouchListener { view, ev ->
-                when (ev.actionMasked) {
-                    MotionEvent.ACTION_DOWN -> onBlockTouchDown(id, pos, block, ev)
-                    MotionEvent.ACTION_MOVE -> onBlockTouchMove(ev)
-                    MotionEvent.ACTION_UP -> onBlockTouchUp(ev)
-                    else -> false
-                }
-            }
-        }
-        mPaneContent.removeViews(newBounds.size, recycleableBlocks.size)
-        mTimesRefreshedBlocks++
-
+        val topologyLogicalDisplaySize =
+            idToNode.filter { it.key != null && it.value != null }
+                .map { it.key!! to Size(it.value.logicalWidth, it.value.logicalHeight) }
+                .toMap()
+        val scaling = TopologyScale(
+            mPaneContent.width,
+            minEdgeLength = DisplayTopology.dpToPx(MIN_EDGE_LENGTH_DP, injector.densityDpi),
+            maxEdgeLength = DisplayTopology.dpToPx(MAX_EDGE_LENGTH_DP, injector.densityDpi),
+            newBounds.map { it.second })
+        setupDisplayPaneAndBlocks(scaling, newBounds, topologyLogicalDisplaySize)
         mTopologyInfo = TopologyInfo(topology, scaling, newBounds)
 
         // Construct a map containing revealers that we want to keep (keepRevealing). Then create a
@@ -266,7 +235,53 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
             .map { keepRevealing.get(it) ?: injector.revealWallpaper(it) }
             .filterNotNull()
             .toList()
+    }
 
+    private fun setupDisplayPaneAndBlocks(
+        scaling: TopologyScale,
+        newBounds: List<Pair<Int, RectF>>,
+        topologyLogicalDisplaySize: Map<Int, Size>
+    ) {
+        // Resize pane holder
+        mPaneHolder.layoutParams.let {
+            val newHeight = scaling.paneHeight.toInt()
+            if (it.height != newHeight) {
+                it.height = newHeight
+                mPaneHolder.layoutParams = it
+            }
+        }
+
+        // Setup display blocks
+        val recycleableBlocks = ArrayDeque<DisplayBlock>()
+        for (i in 0..mPaneContent.childCount - 1) {
+            recycleableBlocks.add(mPaneContent.getChildAt(i) as DisplayBlock)
+        }
+        newBounds.forEach { (id, pos) ->
+            val block = recycleableBlocks.removeFirstOrNull() ?: DisplayBlock(injector).apply {
+                mPaneContent.addView(this)
+            }
+            // First check from DisplayTopology for quick lookup on logical display size. If display
+            // is not in topology, then query from DisplayInfo.
+            val logicalDisplaySize =
+                topologyLogicalDisplaySize.get(id) ?: injector.getLogicalSize(id)
+            logicalDisplaySize?.let {
+                val topLeft = scaling.displayToPaneCoor(pos.left, pos.top)
+                val bottomRight = scaling.displayToPaneCoor(pos.right, pos.bottom)
+                block.reset(
+                    id, topLeft, bottomRight, (bottomRight.x - topLeft.x) / it.width
+                )
+            }
+            block.setOnTouchListener { view, ev ->
+                when (ev.actionMasked) {
+                    MotionEvent.ACTION_DOWN -> onBlockTouchDown(id, pos, block, ev)
+                    MotionEvent.ACTION_MOVE -> onBlockTouchMove(ev)
+                    MotionEvent.ACTION_UP -> onBlockTouchUp(ev)
+                    else -> false
+                }
+            }
+        }
+        mPaneContent.removeViews(newBounds.size, recycleableBlocks.size)
+        mTimesRefreshedBlocks++
         // Cancel the drag if one is in progress.
         mDrag = null
     }
@@ -349,5 +364,11 @@ class DisplayTopologyPreference(val injector: ConnectedDisplayInjector)
         injector.displayTopology = newTopology
 
         return true
+    }
+
+    private companion object {
+        private val MIN_EDGE_LENGTH_DP = 60f
+        private val MAX_EDGE_LENGTH_DP = 256f
+        private val TAG = "DisplayTopologyPreference"
     }
 }

@@ -52,8 +52,8 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
-import com.google.android.setupdesign.util.ThemeHelper;
 
+ // TODO: b/417603276 - Decouple this class from SettingsActivity.
 public class RedactionInterstitial extends SettingsActivity {
 
     @Override
@@ -70,7 +70,6 @@ public class RedactionInterstitial extends SettingsActivity {
 
     @Override
     protected void onCreate(Bundle savedInstance) {
-        ThemeHelper.trySetSuwTheme(this);
         super.onCreate(savedInstance);
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }

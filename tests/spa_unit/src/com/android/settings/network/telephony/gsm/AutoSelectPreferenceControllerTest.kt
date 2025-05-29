@@ -18,7 +18,6 @@ package com.android.settings.network.telephony.gsm
 
 import android.content.Context
 import android.content.Intent
-import android.platform.test.annotations.EnableFlags
 import android.provider.Settings
 import android.telephony.CarrierConfigManager
 import android.telephony.ServiceState
@@ -38,7 +37,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings.NetworkSelectActivity
-import com.android.settings.flags.Flags
 import com.android.settings.spa.preference.ComposePreference
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.delay
@@ -170,7 +168,6 @@ class AutoSelectPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     fun isEnabled_isSatelliteSessionStartedAndSelectedSubForSatellite_disabled() {
         controller.selectedNbIotSatelliteSubscriptionCallback
             .onSelectedNbIotSatelliteSubscriptionChanged(SUB_ID)
@@ -186,7 +183,6 @@ class AutoSelectPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     fun isEnabled_isSatelliteSessionNotStartedButIsSelectedSubForSatellite_enabled() {
         controller.selectedNbIotSatelliteSubscriptionCallback
             .onSelectedNbIotSatelliteSubscriptionChanged(SUB_ID)
@@ -202,7 +198,6 @@ class AutoSelectPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     fun isEnabled_isSatelliteSessionStartedButNotSelectedSubForSatellite_enabled() {
         controller.selectedNbIotSatelliteSubscriptionCallback
             .onSelectedNbIotSatelliteSubscriptionChanged(0)
@@ -218,7 +213,6 @@ class AutoSelectPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     fun initialization_noSatellite_noCrash() {
         `when`(context.getSystemService(SatelliteManager::class.java)).thenReturn(null)
 

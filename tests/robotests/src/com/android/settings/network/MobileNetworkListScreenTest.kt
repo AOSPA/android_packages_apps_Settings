@@ -16,6 +16,7 @@
 package com.android.settings.network
 
 import android.content.Context
+import android.content.pm.PackageManager.FEATURE_TELEPHONY
 import android.platform.test.annotations.DisableFlags
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
@@ -48,6 +49,8 @@ class MobileNetworkListScreenTest : CatalystScreenTestCase() {
             shadowOf(context.getSystemService(SubscriptionManager::class.java))
         val subscriptionInfo: SubscriptionInfo = mock()
         subscriptionManager.setAvailableSubscriptionInfos(subscriptionInfo)
+        // make screen available
+        shadowOf(context.packageManager).setSystemFeature(FEATURE_TELEPHONY, true)
         super.migration()
     }
 }

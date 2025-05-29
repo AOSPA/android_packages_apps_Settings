@@ -15,17 +15,18 @@
  */
 package com.android.settings.accessibility
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.VibrationIntensitySettingsActivity
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 /** Accessibility settings for vibration intensities. */
 // TODO(b/368360218): investigate if we still need this screen once we finish the migration.
@@ -33,7 +34,7 @@ import com.android.settingslib.preference.PreferenceScreenCreator
 //  between toggle or slider preferences based on device config, depending on how overlays are done.
 // LINT.IfChange
 @ProvidePreferenceScreen(VibrationIntensityScreen.KEY)
-open class VibrationIntensityScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
+open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabilityProvider {
     override val key: String
         get() = KEY
 
@@ -43,8 +44,13 @@ open class VibrationIntensityScreen : PreferenceScreenCreator, PreferenceAvailab
     override val keywords: Int
         get() = R.string.keywords_vibration
 
+    override fun getMetricsCategory() = SettingsEnums.ACCESSIBILITY_VIBRATION
+
     override fun isAvailable(context: Context) =
         context.hasVibrator && context.getSupportedVibrationIntensityLevels() > 1
+
+    override val highlightMenuKey
+        get() = R.string.menu_key_accessibility
 
     override fun isFlagEnabled(context: Context): Boolean = Flags.catalystVibrationIntensityScreen()
 

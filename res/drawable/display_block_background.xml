@@ -17,16 +17,6 @@
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- A non-rounded rectangle is needed to prevent the enclosed image from
-         leaking out behind the rounded corners. -->
-    <item>
-        <shape android:shape="rectangle">
-            <stroke
-                android:color="@color/display_topology_background_color"
-                android:width="@dimen/display_block_padding" />
-        </shape>
-    </item>
-
     <item>
         <shape android:shape="rectangle">
             <stroke

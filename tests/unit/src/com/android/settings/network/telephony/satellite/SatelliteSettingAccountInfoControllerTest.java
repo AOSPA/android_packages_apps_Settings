@@ -87,7 +87,8 @@ public class SatelliteSettingAccountInfoControllerTest {
         mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
                 CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC);
         when(mContext.getSystemService(SatelliteManager.class)).thenReturn(null);
-        mController.init(TEST_SUB_ID, mPersistableBundle, false, false);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(false, false);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
 
@@ -99,7 +100,8 @@ public class SatelliteSettingAccountInfoControllerTest {
         mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
                 CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC);
         mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
-        mController.init(TEST_SUB_ID, mPersistableBundle, false, false);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(false, false);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
 
@@ -110,7 +112,8 @@ public class SatelliteSettingAccountInfoControllerTest {
     public void getAvailabilityStatus_connectionTypeISManual_returnAvailable() {
         mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
                 CARRIER_ROAMING_NTN_CONNECT_MANUAL);
-        mController.init(TEST_SUB_ID, mPersistableBundle, false, false);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(false, false);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
 
@@ -121,7 +124,8 @@ public class SatelliteSettingAccountInfoControllerTest {
     public void displayPreference_showCategoryTitle_correctOperatorName() {
         mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
         when(mContext.getSystemService(SatelliteManager.class)).thenReturn(null);
-        mController.init(TEST_SUB_ID, mPersistableBundle, false, false);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(false, false);
 
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
@@ -149,7 +153,8 @@ public class SatelliteSettingAccountInfoControllerTest {
                 return true;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle, true, false);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, false);
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
         preferenceCategory.setKey(PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN);
@@ -180,7 +185,8 @@ public class SatelliteSettingAccountInfoControllerTest {
                 return true;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle, true, true);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, true);
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
         preferenceCategory.setKey(PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN);
@@ -211,7 +217,8 @@ public class SatelliteSettingAccountInfoControllerTest {
                 return false;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle, false, false);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(false, false);
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
         preferenceCategory.setKey(PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN);

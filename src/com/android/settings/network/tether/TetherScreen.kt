@@ -15,11 +15,13 @@
  */
 package com.android.settings.network.tether
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.net.TetheringManager
 import android.os.UserManager
 import com.android.settings.R
 import com.android.settings.Settings.TetherSettingsActivity
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.datausage.DataSaverMainSwitchPreference
 import com.android.settings.flags.Flags
 import com.android.settings.network.TetherPreferenceController
@@ -33,11 +35,10 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(TetherScreen.KEY)
-class TetherScreen :
-    PreferenceScreenCreator,
+open class TetherScreen :
+    PreferenceScreenMixin,
     PreferenceTitleProvider,
     PreferenceAvailabilityProvider,
     PreferenceRestrictionMixin {
@@ -63,8 +64,13 @@ class TetherScreen :
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
+    override fun getMetricsCategory() = SettingsEnums.TETHER
+
     override val restrictionKeys
         get() = arrayOf(UserManager.DISALLOW_CONFIG_TETHERING)
+
+    override val highlightMenuKey
+        get() = R.string.menu_key_network
 
     override fun isFlagEnabled(context: Context) = Flags.catalystTetherSettings()
 

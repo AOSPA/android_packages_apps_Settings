@@ -35,7 +35,6 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.HearingAidStatsLogUtils;
-
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -101,17 +100,22 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         use(DiscoverableFooterPreferenceController.class)
                 .setAlwaysDiscoverable(isAlwaysDiscoverable(callingAppPackageName, action));
 
+        logPageEntrypoint(context, callingAppPackageName, intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         // Show hearing devices survey if user is categorized as one of interested category
-        final String category = HearingAidStatsLogUtils.getUserCategory(context);
+        final String category = HearingAidStatsLogUtils.getUserCategory(getContext());
         if (category != null && !category.isEmpty()) {
             SurveyFeatureProvider provider =
-                    FeatureFactory.getFeatureFactory().getSurveyFeatureProvider(context);
+                    FeatureFactory.getFeatureFactory().getSurveyFeatureProvider(getContext());
             if (provider != null) {
                 provider.sendActivityIfAvailable(category);
             }
         }
-
-        logPageEntrypoint(context, callingAppPackageName, intent);
     }
 
     @VisibleForTesting

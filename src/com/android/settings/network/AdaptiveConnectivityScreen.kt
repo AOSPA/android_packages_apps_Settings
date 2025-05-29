@@ -16,32 +16,39 @@
 
 package com.android.settings.network
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(AdaptiveConnectivityScreen.KEY)
-class AdaptiveConnectivityScreen : PreferenceScreenCreator {
+open class AdaptiveConnectivityScreen : PreferenceScreenMixin {
     override val key
         get() = KEY
 
     override val title
         get() = R.string.adaptive_connectivity_title
 
+    override fun getMetricsCategory() = SettingsEnums.ADAPTIVE_CONNECTIVITY_CATEGORY
+
+    override val highlightMenuKey
+        get() = R.string.menu_key_network
+
     override fun isFlagEnabled(context: Context) = Flags.catalystAdaptiveConnectivity()
 
     override fun fragmentClass() = AdaptiveConnectivitySettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
-        +AdaptiveConnectivityTogglePreference()
-        if (Flags.enableNestedToggleSwitches()) {
-            +WifiScorerTogglePreference()
-            +AdaptiveMobileNetworkTogglePreference()
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(context, this) {
+            +AdaptiveConnectivityTogglePreference()
+            if (Flags.enableNestedToggleSwitches()) {
+                +WifiScorerTogglePreference()
+                +AdaptiveMobileNetworkTogglePreference()
+            }
         }
-    }
 
     override fun hasCompleteHierarchy() = false
 

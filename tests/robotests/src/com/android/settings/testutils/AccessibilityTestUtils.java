@@ -34,6 +34,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Build;
@@ -50,6 +51,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.AccessibilityShortcutsTutorial;
 import com.android.settings.accessibility.ShortcutPreference;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.robolectric.shadows.ShadowLooper;
 import org.xmlpull.v1.XmlPullParserException;
@@ -61,6 +63,17 @@ import java.util.List;
  * Utility class for common methods used in the accessibility feature related tests
  */
 public class AccessibilityTestUtils {
+
+    /**
+     * Sets whether window magnification is supported.
+     * Note: Calling needs to use [SettingsShadowResources] for this to work
+     */
+    public static void setWindowMagnificationSupported(Context context, boolean supported) {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_magnification_area, supported);
+        shadowOf(context.getPackageManager())
+                .setSystemFeature(PackageManager.FEATURE_WINDOW_MAGNIFICATION, supported);
+    }
 
     public static void setSoftwareShortcutMode(
             Context context, boolean gestureNavEnabled, boolean floatingButtonEnabled) {

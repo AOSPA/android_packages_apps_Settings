@@ -15,18 +15,19 @@
  */
 package com.android.settings.supervision
 
+import android.app.settings.SettingsEnums
 import android.app.supervision.flags.Flags
 import android.content.Context
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.preference.forEachRecursively
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +35,7 @@ import kotlinx.coroutines.withContext
 
 /** Web content filters landing page (Settings > Supervision > Web content filters). */
 @ProvidePreferenceScreen(SupervisionWebContentFiltersScreen.KEY)
-class SupervisionWebContentFiltersScreen : PreferenceScreenCreator, PreferenceLifecycleProvider {
+open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, PreferenceLifecycleProvider {
     private var supervisionClient: SupervisionMessengerClient? = null
 
     override fun isFlagEnabled(context: Context) = Flags.enableWebContentFiltersScreen()
@@ -48,7 +49,10 @@ class SupervisionWebContentFiltersScreen : PreferenceScreenCreator, PreferenceLi
     override val icon: Int
         get() = R.drawable.ic_globe
 
-    override fun fragmentClass() = SupervisionWebContentFiltersFragment::class.java
+    override fun getMetricsCategory() = SettingsEnums.SUPERVISION_WEB_CONTENT_FILTERS
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_supervision
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         supervisionClient = getSupervisionClient(context)

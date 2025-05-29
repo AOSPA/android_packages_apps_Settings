@@ -41,7 +41,9 @@ import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.regionalpreferences.RegionDialogFragment;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -60,6 +62,28 @@ public abstract class LocalePickerBaseListPreferenceController extends
     private static final String PARENT_FRAGMENT_NAME = "localeListEditor";
     private static final String KEY_SUGGESTED = "suggested";
     private static final String KEY_SUPPORTED = "supported";
+    private static final int DIALOG_CHANGE_SYSTEM_LOCALE_REGION = 1;
+    private static final int DIALOG_CHANGE_PREFERRED_LOCALE_REGION = 2;
+    private static final String ARG_REPLACED_TARGET_LOCALE = "arg_replaced_target_locale";
+    private static final int DISPOSE = -1;
+    /**
+     * Display a dialog for modifying the system language region, which was previously present in
+     * the system locale list.
+     */
+    private static final int SHOW_DIALOG_FOR_SYSTEM_LANGUAGE = 0;
+    /**
+     * Display a dialog for modifying the preferred language region, which was previously present in
+     * the system locale list.
+     */
+    private static final int SHOW_DIALOG_FOR_PREFERRED_LANGUAGE = 1;
+    private static final String ARG_DIALOG_TYPE = "arg_dialog_type";
+    private static final String ARG_TARGET_LOCALE = "arg_target_locale";
+    @VisibleForTesting
+    protected static final String TAG_DIALOG_CHANGE_REGION_FOR_SYSTEM_LANGUAGE =
+            "change_region_for_system_language";
+    @VisibleForTesting
+    protected static final String TAG_DIALOG_CHANGE_REGION_PREFERRED_LANGUAGE =
+            "change_region_for_preferred_language";
 
     private PreferenceCategory mPreferenceCategory;
     private Set<LocaleStore.LocaleInfo> mLocaleList;
@@ -188,9 +212,7 @@ public abstract class LocalePickerBaseListPreferenceController extends
             pref.setTitle(localeName);
             pref.setKey(locale.toString());
             pref.setOnPreferenceClickListener(clickedPref -> {
-                // TODO: b/390347399 - Should pop up a dialog when changes the region.
                 switchFragment(locale);
-                ((Activity) mContext).finish();
                 return true;
             });
             mPreferences.put(locale.getId(), pref);
@@ -259,25 +281,30 @@ public abstract class LocalePickerBaseListPreferenceController extends
     void switchFragment(LocaleStore.LocaleInfo localeInfo) {
         boolean shouldShowLocaleEditor = shouldShowLocaleEditor(localeInfo);
         if (shouldShowLocaleEditor) {
-            List<LocaleStore.LocaleInfo> feedItemList = getUserLocaleList();
-            feedItemList.add(localeInfo);
-            LocaleList localeList = new LocaleList(feedItemList.stream()
-                    .map(LocaleStore.LocaleInfo::getLocale)
-                    .toArray(Locale[]::new));
-            LocaleList.setDefault(localeList);
-            LocalePicker.updateLocales(localeList);
-            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ADD_LANGUAGE);
-            returnToParentFrame();
+            if (Flags.regionalPreferencesApiEnabled()) {
+                int index = indexOfSameLanguageAndScript(localeInfo.getLocale());
+                switch(getDialogEvent(index)) {
+                    case SHOW_DIALOG_FOR_SYSTEM_LANGUAGE:
+                        showDialogForRegionChanged(
+                                localeInfo,
+                                null,
+                                DIALOG_CHANGE_SYSTEM_LOCALE_REGION);
+                        break;
+                    case SHOW_DIALOG_FOR_PREFERRED_LANGUAGE:
+                        Locale replacedLocale = LocaleList.getDefault().get(index);
+                        showDialogForRegionChanged(
+                                localeInfo,
+                                replacedLocale,
+                                DIALOG_CHANGE_PREFERRED_LOCALE_REGION);
+                        break;
+                    default:
+                        dispose(localeInfo);
+                }
+            } else {
+                dispose(localeInfo);
+            }
         } else {
-            final Bundle extra = new Bundle();
-            extra.putSerializable(RegionAndNumberingSystemPickerFragment.EXTRA_TARGET_LOCALE,
-                    localeInfo);
-            extra.putBoolean(EXTRA_IS_NUMBERING_SYSTEM, localeInfo.hasNumberingSystems());
-            new SubSettingLauncher(mContext)
-                    .setDestination(RegionAndNumberingSystemPickerFragment.class.getCanonicalName())
-                    .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
-                    .setArguments(extra)
-                    .launch();
+            showRegionAndNumberingSystemPickerFragment(localeInfo);
         }
     }
 
@@ -317,5 +344,85 @@ public abstract class LocalePickerBaseListPreferenceController extends
             result.add(LocaleStore.getLocaleInfo(localeList.get(i)));
         }
         return result;
+    }
+
+    private void showRegionAndNumberingSystemPickerFragment(LocaleStore.LocaleInfo localeInfo) {
+        final Bundle extra = new Bundle();
+        extra.putSerializable(
+                RegionAndNumberingSystemPickerFragment.EXTRA_TARGET_LOCALE, localeInfo);
+        extra.putBoolean(EXTRA_IS_NUMBERING_SYSTEM, localeInfo.hasNumberingSystems());
+        new SubSettingLauncher(mContext)
+                .setDestination(RegionAndNumberingSystemPickerFragment.class.getCanonicalName())
+                .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setArguments(extra)
+                .launch();
+        ((Activity) mContext).finish();
+    }
+
+    private void dispose(LocaleStore.LocaleInfo localeInfo) {
+        List<LocaleStore.LocaleInfo> feedItemList = getUserLocaleList();
+        feedItemList.add(localeInfo);
+        LocaleList localeList = new LocaleList(feedItemList.stream()
+                .map(LocaleStore.LocaleInfo::getLocale)
+                .toArray(Locale[]::new));
+        LocaleList.setDefault(localeList);
+        LocalePicker.updateLocales(localeList);
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ADD_LANGUAGE);
+        returnToParentFrame();
+        ((Activity) mContext).finish();
+    }
+
+    private void showDialogForRegionChanged(@NonNull LocaleStore.LocaleInfo locale,
+            @Nullable Locale replacedLocale, int dialogType) {
+        Bundle args = new Bundle();
+        args.putInt(ARG_DIALOG_TYPE, dialogType);
+        args.putSerializable(ARG_TARGET_LOCALE, locale);
+        if (replacedLocale != null) {
+            args.putSerializable(ARG_REPLACED_TARGET_LOCALE, replacedLocale);
+        }
+        RegionDialogFragment regionDialogFragment = RegionDialogFragment.newInstance();
+        regionDialogFragment.setArguments(args);
+        regionDialogFragment.show(
+                mFragmentManager,
+                replacedLocale == null
+                    ? TAG_DIALOG_CHANGE_REGION_FOR_SYSTEM_LANGUAGE
+                    : TAG_DIALOG_CHANGE_REGION_PREFERRED_LANGUAGE);
+    }
+
+    private static int getDialogEvent(int index) {
+        if (index == -1) {
+            return DISPOSE;
+        }
+
+        return index == 0
+            ? SHOW_DIALOG_FOR_SYSTEM_LANGUAGE
+            : SHOW_DIALOG_FOR_PREFERRED_LANGUAGE;
+    }
+
+    private static int indexOfSameLanguageAndScript(Locale source) {
+        int index = -1;
+        LocaleList localeList = LocaleList.getDefault();
+        for (int i = 0; i < localeList.size(); i++) {
+            Locale target = localeList.get(i);
+            if (sameLanguageAndScript(source, target)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    private static boolean sameLanguageAndScript(Locale source, Locale target) {
+        String sourceLanguage = source.getLanguage();
+        String targetLanguage = target.getLanguage();
+        String sourceLocaleScript = source.getScript();
+        String targetLocaleScript = target.getScript();
+        if (sourceLanguage.equals(targetLanguage)) {
+            if (!sourceLocaleScript.isEmpty() && !targetLocaleScript.isEmpty()) {
+                return sourceLocaleScript.equals(targetLocaleScript);
+            }
+            return true;
+        }
+        return false;
     }
 }

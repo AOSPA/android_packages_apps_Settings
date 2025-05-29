@@ -41,6 +41,5 @@ interface FooterPreferenceBinding : PreferenceBinding {
         // In FooterPreference, setSummary is redirected to setTitle, and title is
         // reset unexpectedly. So rebind the title again.
         preference.title = metadata.getPreferenceTitle(preference.context)
-        preference.isSelectable = false
     }
 }

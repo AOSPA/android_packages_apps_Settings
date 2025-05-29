@@ -16,10 +16,12 @@
 
 package com.android.settings.deviceinfo.aboutphone
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Build
 import android.provider.Settings
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settings.deviceinfo.simstatus.SimEidPreference
 import com.android.settings.flags.Flags
@@ -29,12 +31,11 @@ import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 
 @ProvidePreferenceScreen(MyDeviceInfoScreen.KEY)
-class MyDeviceInfoScreen :
-    PreferenceScreenCreator, PreferenceSummaryProvider, PreferenceIconProvider {
+open class MyDeviceInfoScreen :
+    PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceIconProvider {
     override val key: String
         get() = KEY
 
@@ -53,22 +54,29 @@ class MyDeviceInfoScreen :
             else -> R.drawable.ic_settings_about_device
         }
 
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_about_device
+
+    override fun getMetricsCategory() = SettingsEnums.DEVICEINFO
+
     override fun isFlagEnabled(context: Context) = Flags.catalystMyDeviceInfoPrefScreen()
 
     override fun fragmentClass() = MyDeviceInfoFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
-        +PreferenceCategory(
-            "device_detail_category",
-            R.string.my_device_info_device_details_category_title,
-        ) += {
-            +SimEidPreference(context) order 31
-            val activeModemCount = context.activeModemCount
-            for (i in 0 until activeModemCount) {
-                +ImeiPreference(context, i, activeModemCount) order (i + 33)
-            }
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(context, this) {
+            +PreferenceCategory(
+                "device_detail_category",
+                R.string.my_device_info_device_details_category_title,
+            ) +=
+                {
+                    +SimEidPreference(context) order 31
+                    val activeModemCount = context.activeModemCount
+                    for (i in 0 until activeModemCount) {
+                        +ImeiPreference(context, i, activeModemCount) order (i + 33)
+                    }
+                }
         }
-    }
 
     override fun hasCompleteHierarchy() = false
 

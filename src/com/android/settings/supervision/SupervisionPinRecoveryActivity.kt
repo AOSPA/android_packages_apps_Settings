@@ -95,8 +95,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                 SupervisionIntentProvider.PinRecoveryAction.VERIFY,
             )
         if (recoveryIntent != null) {
-            val supervisionManager =
-                applicationContext.getSystemService(SupervisionManager::class.java)
+            val supervisionManager = getSystemService(SupervisionManager::class.java)
             val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
 
             recoveryIntent.apply {
@@ -146,8 +145,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                             SupervisionIntentProvider.PinRecoveryAction.POST_SETUP_VERIFY,
                         )
                     if (postSetupVerifyIntent != null) {
-                        val supervisionManager =
-                            applicationContext.getSystemService(SupervisionManager::class.java)
+                        val supervisionManager = getSystemService(SupervisionManager::class.java)
                         val recoveryInfo = supervisionManager?.getSupervisionRecoveryInfo()
                         postSetupVerifyIntent.apply {
                             // TODO(b/409805806): will use the parcelable once the system API is
@@ -176,8 +174,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                 ACTION_SETUP_VERIFIED,
                 ACTION_POST_SETUP_VERIFY -> {
                     if (data != null) {
-                        val supervisionManager =
-                            applicationContext.getSystemService(SupervisionManager::class.java)
+                        val supervisionManager = getSystemService(SupervisionManager::class.java)
                         // TODO(b/409805806): will directly get the parcelable from intent once the
                         // system API is available.
                         val recoveryInfo =
@@ -192,7 +189,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                                     },
                                 )
                             }
-                        supervisionManager?.setSupervisionRecoveryInfo(recoveryInfo)
+                        supervisionManager?.supervisionRecoveryInfo = recoveryInfo
                         handleSuccess()
                     } else {
                         handleError("Cannot save recovery info, no recovery info from result.")
@@ -263,9 +260,19 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     )
     private fun resetSupervisionUser(): Boolean {
         val userManager = getSystemService(UserManager::class.java)
+        val supervisionManager = getSystemService(SupervisionManager::class.java)
+        val isSupervisionEnabled = supervisionManager.isSupervisionEnabled
+        if (isSupervisionEnabled) {
+            // Disables supervision temporally to allow user reset.
+            supervisionManager.setSupervisionEnabled(false)
+        }
         supervisingUserHandle?.let { userManager.removeUser(it) }
         val userInfo =
             userManager.createUser("Supervising", USER_TYPE_PROFILE_SUPERVISING, /* flags= */ 0)
+        if (isSupervisionEnabled) {
+            // Re-enables supervision after user reset.
+            supervisionManager.setSupervisionEnabled(true)
+        }
         if (userInfo != null) {
             return true
         } else {

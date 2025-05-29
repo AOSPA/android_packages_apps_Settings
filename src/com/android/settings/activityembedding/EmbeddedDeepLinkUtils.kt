@@ -16,7 +16,6 @@
 
 package com.android.settings.activityembedding
 
-import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -36,29 +35,36 @@ object EmbeddedDeepLinkUtils {
     private const val TAG = "EmbeddedDeepLinkUtils"
 
     @JvmStatic
-    fun Context.tryStartMultiPaneDeepLink(
+    @JvmOverloads
+    fun tryStartMultiPaneDeepLink(
+        context: Context,
         intent: Intent,
         highlightMenuKey: String? = null,
+        isSearch: Boolean = false,
     ): Boolean {
         intent.putExtra(
             SettingsActivity.EXTRA_INITIAL_CALLING_PACKAGE,
-            PasswordUtils.getCallingAppPackageName(activityToken),
+            PasswordUtils.getCallingAppPackageName(context.activityToken),
         )
-        val trampolineIntent: Intent
-        if (intent.getBooleanExtra(SettingsActivity.EXTRA_IS_FROM_SLICE, false)) {
-            // Get menu key for slice deep link case.
-            var sliceHighlightMenuKey: String? = intent.getStringExtra(
-                Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY
-            )
-            if (sliceHighlightMenuKey.isNullOrEmpty()) {
-                sliceHighlightMenuKey = highlightMenuKey
+        val trampolineIntent =
+            if (isSearch) {
+                getTrampolineIntentForSearchResult(context, intent, highlightMenuKey)
+            } else if (intent.getBooleanExtra(SettingsActivity.EXTRA_IS_FROM_SLICE, false)) {
+                // Get menu key for slice deep link case.
+                var sliceHighlightMenuKey: String? =
+                    intent.getStringExtra(
+                        Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY
+                    )
+                if (sliceHighlightMenuKey.isNullOrEmpty()) {
+                    sliceHighlightMenuKey = highlightMenuKey
+                }
+                getTrampolineIntent(intent, sliceHighlightMenuKey).apply {
+                    setClass(context, DeepLinkHomepageActivityInternal::class.java)
+                }
+            } else {
+                getTrampolineIntent(intent, highlightMenuKey)
             }
-            trampolineIntent = getTrampolineIntent(intent, sliceHighlightMenuKey)
-            trampolineIntent.setClass(this, DeepLinkHomepageActivityInternal::class.java)
-        } else {
-            trampolineIntent = getTrampolineIntent(intent, highlightMenuKey)
-        }
-        return startTrampolineIntent(trampolineIntent)
+        return context.startTrampolineIntent(trampolineIntent)
     }
 
     /**

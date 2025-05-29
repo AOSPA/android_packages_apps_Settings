@@ -15,15 +15,16 @@
  */
 package com.android.settings.supervision
 
+import android.app.settings.SettingsEnums
 import android.app.supervision.flags.Flags
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 
 /**
@@ -37,7 +38,7 @@ import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
  * 3. Entry point to supervision PIN management settings page.
  */
 @ProvidePreferenceScreen(SupervisionDashboardScreen.KEY)
-class SupervisionDashboardScreen : PreferenceScreenCreator, PreferenceLifecycleProvider {
+open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecycleProvider {
     private var supervisionClient: SupervisionMessengerClient? = null
 
     override fun isFlagEnabled(context: Context) = Flags.enableSupervisionSettingsScreen()
@@ -59,6 +60,11 @@ class SupervisionDashboardScreen : PreferenceScreenCreator, PreferenceLifecycleP
 
     override fun fragmentClass() = SupervisionDashboardFragment::class.java
 
+    override fun getMetricsCategory() = SettingsEnums.SUPERVISION_DASHBOARD
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_supervision
+
     override fun onDestroy(context: PreferenceLifecycleContext) {
         supervisionClient?.close()
     }
@@ -70,9 +76,13 @@ class SupervisionDashboardScreen : PreferenceScreenCreator, PreferenceLifecycleP
             +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
                 +SupervisionWebContentFiltersScreen.KEY order 100
             }
-            +SupervisionPinManagementScreen.KEY order 100
-            +SupervisionPromoFooterPreference(supervisionClient) order 300
-            +SupervisionAocFooterPreference(supervisionClient) order 400
+            +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
+                +SupervisionPinManagementScreen.KEY order 10
+            }
+            +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {
+                +SupervisionPromoFooterPreference(supervisionClient) order 30
+                +SupervisionAocFooterPreference(supervisionClient) order 40
+            }
         }
 
     private fun getSupervisionClient(context: Context) =

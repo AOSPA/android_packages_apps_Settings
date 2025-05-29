@@ -16,25 +16,31 @@
 
 package com.android.settings.display
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
 import com.android.settings.Settings.ScreenTimeoutActivity
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 // TODO(b/368359967): The entry point logic is not yet migrated
 @ProvidePreferenceScreen(ScreenTimeoutScreen.KEY)
-open class ScreenTimeoutScreen : PreferenceScreenCreator {
+open class ScreenTimeoutScreen : PreferenceScreenMixin {
 
     override val key: String
         get() = KEY
 
     override val title: Int
         get() = R.string.screen_timeout
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_display
+
+    override fun getMetricsCategory() = SettingsEnums.SCREEN_TIMEOUT
 
     override fun isFlagEnabled(context: Context) = Flags.catalystScreenTimeout()
 

@@ -15,14 +15,17 @@
  */
 package com.android.settings.display
 
+import android.app.settings.SettingsEnums
 import android.app.settings.SettingsEnums.ACTION_AMBIENT_DISPLAY_ALWAYS_ON
 import android.content.Context
 import android.hardware.display.AmbientDisplayConfiguration
 import android.os.SystemProperties
 import android.os.UserHandle
 import android.os.UserManager
+import com.android.settings.CatalystFragment
 import com.android.settings.R
 import com.android.settings.contract.KEY_AMBIENT_DISPLAY_ALWAYS_ON
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime
 import com.android.settings.display.ambient.AmbientDisplayMainSwitchPreference
 import com.android.settings.display.ambient.AmbientDisplayStorage
@@ -43,8 +46,6 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceFragment
-import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.systemui.shared.Flags.ambientAod
 
 // LINT.IfChange
@@ -53,10 +54,10 @@ import com.android.systemui.shared.Flags.ambientAod
  * subpage for additional related settings.
  */
 @ProvidePreferenceScreen(AmbientDisplayAlwaysOnPreferenceScreen.KEY)
-class AmbientDisplayAlwaysOnPreferenceScreen :
+open class AmbientDisplayAlwaysOnPreferenceScreen :
     BooleanValuePreference,
     PreferenceActionMetricsProvider,
-    PreferenceScreenCreator,
+    PreferenceScreenMixin,
     PrimarySwitchPreferenceBinding,
     PreferenceAvailabilityProvider,
     PreferenceRestrictionMixin,
@@ -73,6 +74,11 @@ class AmbientDisplayAlwaysOnPreferenceScreen :
 
     override val keywords: Int
         get() = R.string.keywords_always_show_time_info
+
+    override fun getMetricsCategory() = SettingsEnums.AMBIENT_DISPLAY_ALWAYS_ON
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_display
 
     override val preferenceActionMetrics: Int
         get() = ACTION_AMBIENT_DISPLAY_ALWAYS_ON
@@ -143,7 +149,7 @@ class AmbientDisplayAlwaysOnPreferenceScreen :
 
 // LINT.ThenChange(AmbientDisplayAlwaysOnPreferenceController.java)
 
-class AmbientPreferenceFragment : PreferenceFragment() {
+class AmbientPreferenceFragment : CatalystFragment() {
     override fun getPreferenceScreenBindingKey(context: Context): String {
         return AmbientDisplayAlwaysOnPreferenceScreen.KEY
     }

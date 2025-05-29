@@ -388,7 +388,13 @@ public class FaceSettings extends DashboardFragment {
                         Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
                                 mBiometricsAuthenticationRequested,
                                 mUserId);
-                if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                if (android.hardware.biometrics.Flags.bpFallbackOptions()) {
+                    if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                        Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                                BIOMETRIC_AUTH_REQUEST,
+                                mUserId, true /* hideBackground */);
+                    }
+                } else if (biometricAuthStatus == Utils.BiometricStatus.OK) {
                     Utils.launchBiometricPromptForMandatoryBiometrics(this,
                             BIOMETRIC_AUTH_REQUEST,
                             mUserId, true /* hideBackground */);

@@ -58,8 +58,21 @@ class SetupSupervisionActivity : FragmentActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (isSupervisingCredentialSet) {
+            setResult(RESULT_CANCELED)
+            finish()
+        }
         if (savedInstanceState == null) {
             enableSupervision()
+        }
+    }
+
+    public override fun onResume() {
+        super.onResume()
+
+        if (isSupervisingCredentialSet) {
+            setResult(RESULT_OK)
+            finish()
         }
     }
 
@@ -165,7 +178,7 @@ class SetupSupervisionActivity : FragmentActivity() {
     }
 
     companion object {
-        private const val REQUEST_CODE_SET_SUPERVISION_LOCK = 0
-        private const val REQUEST_CODE_SET_PIN_RECOVERY = 1
+        private const val REQUEST_CODE_SET_SUPERVISION_LOCK = 1000
+        private const val REQUEST_CODE_SET_PIN_RECOVERY = 1001
     }
 }

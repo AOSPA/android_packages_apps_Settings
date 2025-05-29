@@ -560,7 +560,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     /**
      * Refresh preference items backed by DashboardCategory.
      */
-    private void refreshDashboardTiles(final String tag) {
+    protected void refreshDashboardTiles(final String tag) {
         final PreferenceScreen screen = getPreferenceScreen();
 
         final DashboardCategory category =

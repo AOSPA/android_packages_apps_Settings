@@ -15,19 +15,25 @@
  */
 package com.android.settings.accessibility
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 // @ProvidePreferenceScreen(TextReadingScreen.KEY)
-class TextReadingScreen : PreferenceScreenCreator {
+open class TextReadingScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
     override val title: Int
         get() = R.string.accessibility_text_reading_options_title
+
+    override fun getMetricsCategory() = SettingsEnums.ACCESSIBILITY_TEXT_READING_OPTIONS
+
+    override val highlightMenuKey
+        get() = R.string.menu_key_accessibility
 
     override fun isFlagEnabled(context: Context) = Flags.catalystTextReadingScreen()
 

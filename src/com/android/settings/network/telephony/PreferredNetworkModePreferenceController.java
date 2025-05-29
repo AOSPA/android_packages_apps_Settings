@@ -303,17 +303,15 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
 
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
-        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
-            if (mSatelliteManager != null) {
-                try {
-                    mSatelliteManager.registerForModemStateChanged(
-                            mContext.getMainExecutor(), mSatelliteModemStateCallback);
-                    mSatelliteManager.registerForSelectedNbIotSatelliteSubscriptionChanged(
-                            mContext.getMainExecutor(),
-                            mSelectedNbIotSatelliteSubscriptionCallback);
-                } catch (IllegalStateException e) {
-                    Log.w(TAG, "IllegalStateException : " + e);
-                }
+        if (mSatelliteManager != null) {
+            try {
+                mSatelliteManager.registerForModemStateChanged(
+                        mContext.getMainExecutor(), mSatelliteModemStateCallback);
+                mSatelliteManager.registerForSelectedNbIotSatelliteSubscriptionChanged(
+                        mContext.getMainExecutor(),
+                        mSelectedNbIotSatelliteSubscriptionCallback);
+            } catch (IllegalStateException e) {
+                Log.w(TAG, "IllegalStateException : " + e);
             }
         }
         if (mPhoneStateListener != null) {
@@ -326,15 +324,13 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
 
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
-        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
-            if (mSatelliteManager != null) {
-                try {
-                    mSatelliteManager.unregisterForModemStateChanged(mSatelliteModemStateCallback);
-                    mSatelliteManager.unregisterForSelectedNbIotSatelliteSubscriptionChanged(
-                            mSelectedNbIotSatelliteSubscriptionCallback);
-                } catch (IllegalStateException e) {
-                    Log.w(TAG, "IllegalStateException : " + e);
-                }
+        if (mSatelliteManager != null) {
+            try {
+                mSatelliteManager.unregisterForModemStateChanged(mSatelliteModemStateCallback);
+                mSatelliteManager.unregisterForSelectedNbIotSatelliteSubscriptionChanged(
+                        mSelectedNbIotSatelliteSubscriptionCallback);
+            } catch (IllegalStateException e) {
+                Log.w(TAG, "IllegalStateException : " + e);
             }
         }
         if (mPhoneStateListener != null) {

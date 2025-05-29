@@ -19,6 +19,7 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.ADD_SOURCE_BAD_CODE;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.ADD_SOURCE_FAILED;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE;
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.SOURCE_ADDED;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.SOURCE_LOST;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.SOURCE_PRESENT;
@@ -616,7 +617,7 @@ public class AudioStreamsProgressCategoryControllerTest {
                 .isEqualTo(BROADCAST_NAME_2);
         assertThat(newlyFoundSource.getAudioStreamMetadata().getBroadcastCode())
                 .isEqualTo(BROADCAST_CODE);
-        assertThat(states.get(1)).isEqualTo(ADD_SOURCE_WAIT_FOR_RESPONSE);
+        assertThat(states.get(1)).isEqualTo(ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR);
     }
 
     @Test

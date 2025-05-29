@@ -70,7 +70,7 @@ class AudioStreamStateHandler {
                             + newState);
         }
         if (prevStateHandler != null) {
-            prevStateHandler.onExit(scanHelper);
+            prevStateHandler.onExit(scanHelper, newState);
         }
 
         preference.setAudioStreamState(newState);
@@ -129,7 +129,9 @@ class AudioStreamStateHandler {
     /**
      * Perform action when exiting one state.
      */
-    void onExit(AudioStreamScanHelper scanHelper) {}
+    void onExit(AudioStreamScanHelper scanHelper,
+            AudioStreamsProgressCategoryController.AudioStreamState newState) {
+    }
 
     /**
      * The preference summary for the audio stream state (e.g, Scanning...) This method is intended

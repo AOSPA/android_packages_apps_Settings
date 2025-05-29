@@ -29,22 +29,22 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.widget.GearPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 
 /**
  * This preference is shown at the top of the "passwords & accounts" screen and allows the user to
  * pick their primary credential manager provider.
  */
-public class PrimaryProviderPreference extends GearPreference {
+public class PrimaryProviderPreference extends PrimarySwitchPreference {
 
     public static boolean shouldUseNewSettingsUi() {
-        return Flags.newSettingsUi();
+        return Flags.isCredmanSettingsExpressiveDesign();
     }
 
     private @Nullable Button mChangeButton = null;
     private @Nullable Button mOpenButton = null;
     private @Nullable View mButtonFrameView = null;
-    private @Nullable View mGearView = null;
+    private @Nullable View mEditView = null;
     private @Nullable Delegate mDelegate = null;
     private boolean mButtonsCompactMode = false;
     private boolean mOpenButtonVisible = false;
@@ -62,23 +62,21 @@ public class PrimaryProviderPreference extends GearPreference {
             int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        initializeNewSettingsUi();
+        initializeSettingsUi();
     }
 
     public PrimaryProviderPreference(
            @NonNull Context context,
            @NonNull AttributeSet attrs) {
         super(context, attrs);
-        initializeNewSettingsUi();
+        initializeSettingsUi();
     }
 
-    private void initializeNewSettingsUi() {
-        if (!shouldUseNewSettingsUi()) {
-            return;
-        }
-
+    private void initializeSettingsUi() {
         // Change the layout to the new settings ui.
-        setLayoutResource(R.layout.preference_credential_manager_with_buttons);
+        if (!shouldUseNewSettingsUi()) {
+            setLayoutResource(R.layout.preference_credential_manager_with_buttons);
+        }
     }
 
     @Override
@@ -92,7 +90,7 @@ public class PrimaryProviderPreference extends GearPreference {
         }
     }
 
-    private void onBindViewHolderOldSettingsUi(PreferenceViewHolder holder) {
+    private void onBindViewHolderNewSettingsUi(PreferenceViewHolder holder) {
         setOnPreferenceClickListener(
                 new Preference.OnPreferenceClickListener() {
                     public boolean onPreferenceClick(@NonNull Preference preference) {
@@ -105,10 +103,11 @@ public class PrimaryProviderPreference extends GearPreference {
                     }
                 });
 
-        // Setup the gear icon to handle opening the change provider scenario.
-        mGearView = holder.findViewById(R.id.settings_button);
-        mGearView.setVisibility(View.VISIBLE);
-        mGearView.setOnClickListener(
+        // Set up the edit icon to handle opening the change provider scenario.
+        mEditView = holder.findViewById(R.id.edit_button);
+        View mWidgetFrame = holder.findViewById(android.R.id.widget_frame);
+        mEditView.setVisibility(View.VISIBLE);
+        mWidgetFrame.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(@NonNull View v) {
                         if (mDelegate != null) {
@@ -118,7 +117,7 @@ public class PrimaryProviderPreference extends GearPreference {
                 });
     }
 
-    private void onBindViewHolderNewSettingsUi(PreferenceViewHolder holder) {
+    private void onBindViewHolderOldSettingsUi(PreferenceViewHolder holder) {
         mOpenButton = (Button) holder.findViewById(R.id.open_button);
         mOpenButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -182,8 +181,13 @@ public class PrimaryProviderPreference extends GearPreference {
     }
 
     @Override
+    protected int getSecondTargetResId() {
+        return R.layout.preference_widget_edit;
+    }
+
+    @Override
     protected boolean shouldHideSecondTarget() {
-        return shouldUseNewSettingsUi();
+        return !shouldUseNewSettingsUi();
     }
 
     @VisibleForTesting
@@ -199,11 +203,6 @@ public class PrimaryProviderPreference extends GearPreference {
     @VisibleForTesting
     public @Nullable View getButtonFrameView() {
         return mButtonFrameView;
-    }
-
-    @VisibleForTesting
-    public @Nullable View getGearView() {
-        return mGearView;
     }
 
     private static void setVisibility(View view, boolean isVisible) {

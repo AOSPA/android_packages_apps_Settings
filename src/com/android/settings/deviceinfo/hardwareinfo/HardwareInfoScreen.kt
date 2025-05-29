@@ -16,9 +16,11 @@
 
 package com.android.settings.deviceinfo.hardwareinfo
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.deviceinfo.HardwareInfoPreferenceController.getDeviceModel
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -26,12 +28,11 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceBinding
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 // LINT.IfChange
 @ProvidePreferenceScreen(HardwareInfoScreen.KEY)
-class HardwareInfoScreen :
-    PreferenceScreenCreator,
+open class HardwareInfoScreen :
+    PreferenceScreenMixin,
     PreferenceBinding,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider {
@@ -43,6 +44,11 @@ class HardwareInfoScreen :
 
     override val keywords: Int
         get() = R.string.keywords_model_and_hardware
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_about_device
+
+    override fun getMetricsCategory() = SettingsEnums.DIALOG_SETTINGS_HARDWARE_INFO
 
     override fun isFlagEnabled(context: Context) = Flags.deviceState()
 
@@ -59,10 +65,11 @@ class HardwareInfoScreen :
         return super.createWidget(context).apply { isCopyingEnabled = true }
     }
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
-        +DeviceModelPreference()
-        +HardwareVersionPreference()
-    }
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(context, this) {
+            +DeviceModelPreference()
+            +HardwareVersionPreference()
+        }
 
     companion object {
         const val KEY = "device_model"

@@ -64,6 +64,7 @@ import com.android.settingslib.spa.widget.ui.LinearLoadingBar
 import com.android.settingslib.widget.CardPreference
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.SegmentedButtonPreference
+import com.android.settingslib.widget.UntitledPreferenceCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -180,16 +181,34 @@ abstract class BluetoothDetailsConfigurableFragment :
         }
         uiJobs.clear()
         val configDisplayOrder = mutableListOf<String>()
+        var currentContainer: PreferenceGroup = preferenceScreen
         for (row in items.indices) {
             val settingItem = items[row]
             val settingId = settingItem.settingId
 
             val existingPrefKey = settingIdToPreferences[settingId]?.key
-            configDisplayOrder.add(existingPrefKey ?: getPreferenceKey(settingId))
+            if (settingId == DeviceSettingId.DEVICE_SETTING_ID_ANC) {
+                configDisplayOrder.add(getPreferenceCategoryKey(settingId))
+                currentContainer = preferenceScreen
+            } else if (existingPrefKey != null) {
+                configDisplayOrder.add(existingPrefKey)
+                currentContainer = preferenceScreen
+            } else if (currentContainer === preferenceScreen) {
+                // The padding is problematic when we mix standalone preference and preference
+                // category in preference screen, so we wrap the preferences with a
+                // UntitledPreferenceCategory here.
+                val categoryKey = getPreferenceCategoryKey(settingId)
+                configDisplayOrder.add(categoryKey)
+                currentContainer = UntitledPreferenceCategory(requireContext()).apply {
+                    key = categoryKey
+                }
+                preferenceScreen.addPreference(currentContainer)
+            }
             if (existingPrefKey != null) {
                 continue
             }
 
+            val container = currentContainer
             val prefKey = getPreferenceKey(settingId)
             val deviceSetting =
                 viewModel.getDeviceSetting(cachedDevice, settingId).dropWhile { it == null }
@@ -212,7 +231,7 @@ abstract class BluetoothDetailsConfigurableFragment :
                                 buildComposePreference(cachedDevice, settingId, prefKey)
                             }
                         }
-                preferenceScreen.addPreference(pref)
+                container.addPreference(pref)
             } else {
                 deviceSetting
                     .withIndex()
@@ -229,16 +248,18 @@ abstract class BluetoothDetailsConfigurableFragment :
                     }
                     .map { it.value }
                     .onEach {
-                        val existedPref = preferenceScreen.findPreference<Preference>(prefKey)
+                        val existedPref = container.findPreference<Preference>(prefKey)
                         val item =
                             it
                                 ?: run {
                                     existedPref?.let {
-                                        preferenceScreen.removePreference(existedPref)
+                                        container.removePreference(existedPref)
                                     }
                                     return@onEach
                                 }
-                        addPreference(existedPref, row, item, prefKey, settingItem.highlighted)
+                        addPreference(
+                            container,
+                            existedPref, row, item, prefKey, settingItem.highlighted)
                     }
                     .launchIn(lifecycleScope)
                     .also { uiJobs.add(it) }
@@ -267,6 +288,7 @@ abstract class BluetoothDetailsConfigurableFragment :
     }
 
     private fun addPreference(
+        container: PreferenceGroup,
         existedPref: Preference?,
         prefOrder: Int,
         model: DeviceSettingPreferenceModel,
@@ -301,7 +323,7 @@ abstract class BluetoothDetailsConfigurableFragment :
                             true
                         }
                 }
-                preferenceScreen.addPreference(pref)
+                container.addPreference(pref)
             }
 
             is DeviceSettingPreferenceModel.SwitchPreference ->
@@ -335,7 +357,7 @@ abstract class BluetoothDetailsConfigurableFragment :
                                 }
                             }
                     }
-                    preferenceScreen.addPreference(pref)
+                    container.addPreference(pref)
                 } else {
                     val pref =
                         existedPref as? PrimarySwitchPreference
@@ -371,7 +393,7 @@ abstract class BluetoothDetailsConfigurableFragment :
                                 }
                             }
                     }
-                    preferenceScreen.addPreference(pref)
+                    container.addPreference(pref)
                 }
 
             is DeviceSettingPreferenceModel.MultiTogglePreference -> {
@@ -382,7 +404,7 @@ abstract class BluetoothDetailsConfigurableFragment :
                     key = prefKey
                     order = prefOrder
                 }
-                preferenceScreen.addPreference(prefCategory)
+                container.addPreference(prefCategory)
                 val pref =
                     if (prefCategory.preferenceCount == 0) {
                         SegmentedButtonPreference(requireContext()).also {
@@ -448,7 +470,7 @@ abstract class BluetoothDetailsConfigurableFragment :
                     order = prefOrder
                     title = model.footerText
                 }
-                preferenceScreen.addPreference(pref)
+                container.addPreference(pref)
             }
 
             is DeviceSettingPreferenceModel.MoreSettingsPreference -> {
@@ -485,13 +507,11 @@ abstract class BluetoothDetailsConfigurableFragment :
                             true
                         }
                 }
-                preferenceScreen.addPreference(pref)
+                container.addPreference(pref)
             }
 
             is DeviceSettingPreferenceModel.HelpPreference -> {}
         }
-
-    private fun getPreferenceKey(settingId: Int) = "DEVICE_SETTING_${settingId}"
 
     private fun getDrawable(deviceSettingIcon: DeviceSettingIcon?): Drawable? =
         when (deviceSettingIcon) {
@@ -674,5 +694,8 @@ abstract class BluetoothDetailsConfigurableFragment :
         private const val EVENT_CLICK_PRIMARY = 2
         private const val EVENT_INVISIBLE = 0
         private const val EVENT_VISIBLE = 1
+
+        private fun getPreferenceKey(settingId: Int) = "DEVICE_SETTING_${settingId}"
+        private fun getPreferenceCategoryKey(settingId: Int) = "CATEGORY_STARTS_WITH_${settingId}"
     }
 }

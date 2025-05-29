@@ -67,7 +67,6 @@ public class PhysicalKeyboardA11yPreferenceControllerTest {
     @EnableFlags(Flags.FLAG_KEYBOARD_AND_TOUCHPAD_A11Y_NEW_PAGE_ENABLED)
     public void getAvailabilityStatus_expected() {
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         when(mInputDevice.isVirtual()).thenReturn(false);
         when(mInputDevice.isFullKeyboard()).thenReturn(true);
 
@@ -83,7 +82,6 @@ public class PhysicalKeyboardA11yPreferenceControllerTest {
     @EnableFlags(Flags.FLAG_KEYBOARD_AND_TOUCHPAD_A11Y_NEW_PAGE_ENABLED)
     public void getAvailabilityStatus_deviceIsNotAsExpected_unavailable() {
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         when(mInputDevice.isVirtual()).thenReturn(true);
         when(mInputDevice.isFullKeyboard()).thenReturn(false);
 

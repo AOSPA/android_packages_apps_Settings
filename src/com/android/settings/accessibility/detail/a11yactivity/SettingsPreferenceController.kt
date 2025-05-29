@@ -20,11 +20,11 @@ import android.accessibilityservice.AccessibilityShortcutInfo
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.shared.LaunchIntentPreferenceController
-import com.android.settings.accessibility.shared.SetupWizardDependent
 
 class SettingsPreferenceController(context: Context, prefKey: String) :
-    LaunchIntentPreferenceController(context, prefKey), SetupWizardDependent{
+    LaunchIntentPreferenceController(context, prefKey) {
     fun initialize(shortcutInfo: AccessibilityShortcutInfo) {
         val settingsIntent =
             shortcutInfo.settingsActivityName?.let {
@@ -43,7 +43,7 @@ class SettingsPreferenceController(context: Context, prefKey: String) :
     }
 
     override fun getAvailabilityStatus(): Int {
-        return if (isInSetupWizard(mContext)) {
+        return if (mContext.isInSetupWizard()) {
             CONDITIONALLY_UNAVAILABLE
         } else {
             super.getAvailabilityStatus()

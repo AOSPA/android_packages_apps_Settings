@@ -30,8 +30,10 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.Flags;
 import android.os.Looper;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
@@ -223,6 +225,25 @@ public class BuildNumberPreferenceControllerTest {
 
         assertThat(activityResultHandled).isTrue();
         verify(mFragment, never()).startActivityForResult(any(),
+                eq(BuildNumberPreferenceController.REQUEST_IDENTITY_CHECK_FOR_DEV_PREF));
+    }
+
+    @Test
+    @UiThreadTest
+    @RequiresFlagsEnabled(Flags.FLAG_BP_FALLBACK_OPTIONS)
+    public void onActivityResult_confirmPasswordRequestCompleted_biometricHardwareError() {
+        when(mUserManager.isAdminUser()).thenReturn(true);
+        when(mBiometricManager.canAuthenticate(mContext.getUserId(),
+                BiometricManager.Authenticators.IDENTITY_CHECK))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
+
+        final boolean activityResultHandled = mController.onActivityResult(
+                BuildNumberPreferenceController.REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF,
+                Activity.RESULT_OK,
+                null);
+
+        assertThat(activityResultHandled).isTrue();
+        verify(mFragment).startActivityForResult(any(),
                 eq(BuildNumberPreferenceController.REQUEST_IDENTITY_CHECK_FOR_DEV_PREF));
     }
 

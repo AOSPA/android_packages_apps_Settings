@@ -25,28 +25,28 @@ import com.android.settings.core.BasePreferenceController
 import com.android.settings.supervision.ipc.SupervisionMessengerClient.Companion.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
 
 /** Controller for the top level Supervision settings Preference item. */
-class TopLevelSupervisionPreferenceController(
-    private val context: Context,
-    private val key: String,
-) : BasePreferenceController(context, key) {
+class TopLevelSupervisionPreferenceController(context: Context, key: String) :
+    BasePreferenceController(context, key) {
     private val supervisionPackage = context.supervisionPackageName
 
     private var missingAppStoreLink = false
 
     private var redirectIntent: Intent? = null
 
-    override fun handlePreferenceTreeClick(preference: Preference?): Boolean {
-        if (preference?.key.equals(key) && redirectIntent != null) {
-            context.startActivity(redirectIntent)
+    override fun handlePreferenceTreeClick(preference: Preference): Boolean {
+        if (preference.key == preferenceKey) {
+            val intent =
+                redirectIntent ?: Intent(mContext, SupervisionDashboardActivity::class.java)
+            mContext.startActivity(intent)
             return true
         }
         return super.handlePreferenceTreeClick(preference)
     }
 
-    override fun updateState(preference: Preference?) {
+    override fun updateState(preference: Preference) {
         super.updateState(preference)
         if (!hasNecessarySupervisionComponent() && missingAppStoreLink) {
-            preference?.isEnabled = false
+            preference.isEnabled = false
         }
     }
 
@@ -56,10 +56,10 @@ class TopLevelSupervisionPreferenceController(
 
         // Try to navigate to app store if supervision app with necessary component is not installed
         if (!hasNecessarySupervisionComponent()) {
-            val installerPackageName = getInstallerPackageName(context, supervisionPackage)
+            val installerPackageName = getInstallerPackageName(mContext, supervisionPackage)
             val appStoreLinkIntent =
                 installerPackageName?.let {
-                    getAppStoreLink(context, installerPackageName, supervisionPackage)
+                    getAppStoreLink(mContext, installerPackageName, supervisionPackage)
                 }
             if (appStoreLinkIntent == null) {
                 missingAppStoreLink = true
@@ -81,14 +81,14 @@ class TopLevelSupervisionPreferenceController(
             Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION).setPackage(supervisionPackage)
 
         return supervisionPackage != null &&
-            context.packageManager.queryIntentServices(intent, 0).isNotEmpty()
+            mContext.packageManager.queryIntentServices(intent, 0).isNotEmpty()
     }
 
     private fun hasRedirect(): Boolean {
         val intent = Intent(SETTINGS_REDIRECT_ACTION).setPackage(supervisionPackage)
         return supervisionPackage != null &&
-            context.packageManager
-                .queryIntentActivitiesAsUser(intent, 0, context.userId)
+            mContext.packageManager
+                .queryIntentActivitiesAsUser(intent, 0, mContext.userId)
                 .isNotEmpty()
     }
 

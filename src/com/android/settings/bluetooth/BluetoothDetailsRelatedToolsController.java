@@ -60,12 +60,12 @@ public class BluetoothDetailsRelatedToolsController extends BluetoothDetailsCont
 
     @Override
     public boolean isAvailable() {
-        return mCachedDevice.isHearingAidDevice();
+        return mCachedDevice.isHearingDevice();
     }
 
     @Override
     protected void init(PreferenceScreen screen) {
-        if (!mCachedDevice.isHearingAidDevice()) {
+        if (!isAvailable()) {
             return;
         }
 

@@ -15,21 +15,26 @@
  */
 package com.android.settings.network
 
+import android.app.settings.SettingsEnums
 import android.content.Context
+import android.content.Intent
 import android.os.UserManager
 import com.android.settings.R
+import com.android.settings.Settings.NetworkProviderSettingsActivity
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.restriction.PreferenceRestrictionMixin
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.wifi.WifiSwitchPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceCategory
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(NetworkProviderScreen.KEY)
-class NetworkProviderScreen :
-    PreferenceScreenCreator, PreferenceAvailabilityProvider, PreferenceRestrictionMixin {
+open class NetworkProviderScreen :
+    PreferenceScreenMixin, PreferenceAvailabilityProvider, PreferenceRestrictionMixin {
     override val key: String
         get() = KEY
 
@@ -47,8 +52,13 @@ class NetworkProviderScreen :
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
+    override fun getMetricsCategory() = SettingsEnums.WIFI
+
     override val restrictionKeys
         get() = arrayOf(UserManager.DISALLOW_CONFIG_WIFI)
+
+    override val highlightMenuKey
+        get() = R.string.menu_key_network
 
     override fun isFlagEnabled(context: Context) = Flags.catalystInternetSettings()
 
@@ -62,6 +72,9 @@ class NetworkProviderScreen :
                 +WifiSwitchPreference()
             }
         }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
+        makeLaunchIntent(context, NetworkProviderSettingsActivity::class.java, metadata?.key)
 
     companion object {
         const val KEY = "internet_settings"

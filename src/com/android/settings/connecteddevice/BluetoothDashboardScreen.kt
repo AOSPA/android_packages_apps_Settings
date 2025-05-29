@@ -15,18 +15,19 @@
  */
 package com.android.settings.connecteddevice
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
 import com.android.settings.Settings.BluetoothDashboardActivity
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(BluetoothDashboardScreen.KEY)
-class BluetoothDashboardScreen : PreferenceScreenCreator {
+open class BluetoothDashboardScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
@@ -35,6 +36,11 @@ class BluetoothDashboardScreen : PreferenceScreenCreator {
 
     override val icon: Int
         get() = R.drawable.ic_settings_bluetooth
+
+    override fun getMetricsCategory() = SettingsEnums.BLUETOOTH_FRAGMENT
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_connected_devices
 
     override fun isFlagEnabled(context: Context) = Flags.catalystBluetoothSwitchbarScreen()
 

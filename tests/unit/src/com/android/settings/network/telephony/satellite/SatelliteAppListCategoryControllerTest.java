@@ -98,7 +98,8 @@ public class SatelliteAppListCategoryControllerTest {
                 return PACKAGE_NAMES;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle, true, true);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, true);
         PreferenceManager preferenceManager = new PreferenceManager(mContext);
         PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
         PreferenceCategory category = new PreferenceCategory(mContext);
@@ -125,7 +126,8 @@ public class SatelliteAppListCategoryControllerTest {
                 return PACKAGE_NAMES;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle, true, true);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, true);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
 
@@ -146,7 +148,8 @@ public class SatelliteAppListCategoryControllerTest {
                 return List.of();
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle, true, true);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, true);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
 
@@ -167,7 +170,8 @@ public class SatelliteAppListCategoryControllerTest {
                 return PACKAGE_NAMES;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle, true, false);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, false);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
 
@@ -189,7 +193,8 @@ public class SatelliteAppListCategoryControllerTest {
                 return PACKAGE_NAMES;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle, true, true);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, true);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
 
@@ -211,7 +216,8 @@ public class SatelliteAppListCategoryControllerTest {
                 return PACKAGE_NAMES;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle, true, true);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, true);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
 

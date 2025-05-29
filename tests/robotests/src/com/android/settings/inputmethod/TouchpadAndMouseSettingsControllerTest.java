@@ -72,7 +72,6 @@ public class TouchpadAndMouseSettingsControllerTest {
     @Test
     public void updateState_setTitleBasedOnDeviceSource() {
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
                 InputDevice.SOURCE_TOUCHPAD);
         ShadowInputDevice.addDevice(deviceId, device);
@@ -88,7 +87,6 @@ public class TouchpadAndMouseSettingsControllerTest {
     @DisableFlags(Flags.FLAG_KEYBOARD_AND_TOUCHPAD_A11Y_NEW_PAGE_ENABLED)
     public void getAvailabilityStatus_isTouchpadAvailable() {
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
                 InputDevice.SOURCE_TOUCHPAD);
         ShadowInputDevice.addDevice(deviceId, device);
@@ -103,7 +101,6 @@ public class TouchpadAndMouseSettingsControllerTest {
         assumeTrue(enableVectorCursorA11ySettings());
 
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
                 InputDevice.SOURCE_MOUSE);
         ShadowInputDevice.addDevice(deviceId, device);
@@ -115,7 +112,6 @@ public class TouchpadAndMouseSettingsControllerTest {
     @Test
     public void getAvailabilityStatus_noMouseOrTouchpadUnavailable() {
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
                 InputDevice.SOURCE_UNKNOWN);
         ShadowInputDevice.addDevice(deviceId, device);

@@ -47,10 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Title"
+            android:textAppearance="@style/TextAppearance.SettingsLib.DisplaySmall"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="36sp"
-            android:paddingVertical="12dp" />
+            android:paddingVertical="16dp" />
 
         <TextView
             android:id="@+id/mode_name_subtitle"
@@ -58,11 +57,9 @@
             android:layout_height="wrap_content"
             android:clickable="false"
             android:text="@string/zen_mode_setup_page_summary"
-            android:textSize="18sp"
             android:paddingBottom="48dp"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
+            android:textAppearance="@style/TextAppearance.SettingsLib.BodyLarge"
             app:layout_constraintTop_toBottomOf="@+id/mode_name_title" />
-
 
         <!-- image goes here -->
         <FrameLayout

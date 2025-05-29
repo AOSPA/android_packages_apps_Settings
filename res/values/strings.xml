@@ -28,6 +28,8 @@
     <string name="allow">Allow</string>
     <!-- Strings for Dialog deny button -->
     <string name="deny">Deny</string>
+    <!-- Strings for edit button -->
+    <string name="edit">Edit</string>
     <!-- Used in confirmation dialogs as the action that the user will tap to turn on the feature. [CHAR LIMIT=40]-->
     <string name="confirmation_turn_on">Turn on</string>
 
@@ -3197,6 +3199,18 @@
     <string name="auto_brightness_summary_on">On</string>
     <!-- Setting option summary when adaptive brightness is off [CHAR LIMIT=NONE] -->
     <string name="auto_brightness_summary_off">Off</string>
+
+    <!-- HDR brightness screen, setting option name to control HDR brightness [CHAR LIMIT=60] -->
+    <string name="hdr_brightness_title">Enhanced HDR brightness</string>
+    <!-- HDR brightness screen, setting the brightness level. [CHAR LIMIT=30] -->
+    <string name="hdr_brightness_level_title">Intensity</string>
+    <!-- HDR brightness screen, image label. [CHAR LIMIT=30] -->
+    <string name="hdr_brightness_standard_image_label">Standard image</string>
+    <!-- HDR brightness screen, image label. [CHAR LIMIT=30] -->
+    <string name="hdr_brightness_hdr_image_label">HDR image</string>
+    <!-- HDR brightness screen warning. -->
+    <string name="hdr_brightness_warning">This setting only affects images and videos that support High Dynamic Range (HDR).</string>
+
     <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
     <string name="display_white_balance_title">Display white balance</string>
     <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
@@ -3347,6 +3361,9 @@
     </string>
     <!-- Dark UI screen footer action text linking to Modes settings. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_modes_footer_action">Modes settings</string>
+    <!-- HDR brightness screen, summary of the feature. [CHAR LIMIT=NONE] -->
+    <string name="hdr_brigtness_text">Brighten and expand the color range and clarity in High Dynamic Range (HDR) images and videos. HDR content will appear brighter.</string>
+
 
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Screen timeout</string>
@@ -4984,6 +5001,8 @@
     <string name="input_setting_keys_dialog_option_400">0.4 seconds</string>
     <!-- Option title for the input setting keys threshold dialog for 600 millisecond. [CHAR LIMIT=35] -->
     <string name="input_setting_keys_dialog_option_600">0.6 seconds</string>
+    <!-- Option title for the input setting keys threshold dialog for custom option. [CHAR LIMIT=35] -->
+    <string name="input_setting_keys_dialog_option_custom"><xliff:g id="threshold" example="0.7">%.1f</xliff:g> seconds</string>
     <!-- Option title for the input setting keys threshold dialog for custom value. [CHAR LIMIT=35] -->
     <string name="input_setting_keys_custom_title">Custom</string>
     <!-- Option subtitle for the input setting keys threshold dialog for custom value. [CHAR LIMIT=35] -->
@@ -5553,11 +5572,11 @@
     <string name="accessibility_screen_magnification_follow_keyboard_title">Magnify keyboard focus</string>
     <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_follow_keyboard_summary">Magnifier follows keyboard focus</string>
-    <!-- Title for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
+    <!-- Title for accessibility magnifier preference allowing the magnification of the keyboard. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_nav_ime_title">Magnify keyboard</string>
-    <!-- Summary for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
+    <!-- Summary for accessibility magnifier preference allowing the magnification of the keyboard. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_nav_ime_summary">Zoom into the keyboard to see emojis and letters when using full-screen magnification</string>
-    <!-- Summary for accessibility magnifier preference allowing the magnification of navigation bar and IME. [CHAR LIMIT=35] -->
+    <!-- Summary for accessibility magnifier preference allowing the magnification of the keyboard. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary">Unavailable while only magnifying part of the screen</string>
     <!-- Title for accessibility magnifier preference where the magnifier never turns off while switching apps. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_always_on_title">Keep on while switching apps</string>
@@ -6019,12 +6038,10 @@
     <!-- Title for the switch setting to toggle on/off the revert to left click after action. [CHAR LIMIT=NONE] -->
     <string name="autoclick_revert_to_left_click_title">Revert to left click after action</string>
     <!-- Title for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
-    <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
     <!-- Title for autoclick navigation recommendation dialog [CHAR LIMIT=NONE] -->
-    <string name="accessibility_autoclick_navigation_title">Autoclick works best with 3-button navigation</string>
-    <!-- TODO(b/394683600): Update string to translatable once approved by UXW. -->
+    <string name="accessibility_autoclick_navigation_title">Change your navigation mode to use autoclick</string>
     <!-- Message for autoclick navigation recommendation dialog [CHAR LIMIT=NONE] -->
-    <string name="accessibility_autoclick_navigation_message">Enable 3-button navigation in settings so that you can use autoclick to go home, go back, and open recent apps.</string>
+    <string name="accessibility_autoclick_navigation_message">To go back, Home, and switch apps when using autoclick, use 3-button navigation instead of gesture navigation</string>
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptics</string>
     <!-- Summary for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_vibration_settings_summary">Control the vibration strength for different usages</string>
@@ -8462,6 +8479,7 @@ Data usage charges may apply.</string>
     <string name="keywords_display_font_size">text size</string>
     <!-- Search keyword for "Cast" settings [CHAR_LIMIT=NONE]-->
     <string name="keywords_display_cast_screen">project, cast, Screen mirroring, Screen sharing, mirroring, share screen, screen casting</string>
+    <string name="keywords_display_hdr_brightness">hdr, brightness, high dynamic range, brighten, brighter</string>
     <string name="keywords_storage">space, disk, hard drive, device usage</string>
     <string name="keywords_battery">power usage, charge</string>
     <string name="keywords_battery_usage">view battery usage, battery usage, power usage</string>
@@ -9171,6 +9189,14 @@ Data usage charges may apply.</string>
 
     <!-- App Info > Notifications: Title for section where notifications bundles can be configured [CHAR LIMIT=80]-->
     <string name="notification_bundles">Notification organizer</string>
+    <!-- [CHAR LIMIT=100] Notification bundle type summary: promotions -->
+    <string name="notification_bundle_promotions_summary">Sales, new features, and more</string>
+    <!-- [CHAR LIMIT=100] Notification bundle type summary: news -->
+    <string name="notification_bundle_news_summary">Top stories, editorials, and more</string>
+    <!-- [CHAR LIMIT=100] Notification bundle type summary: social -->
+    <string name="notification_bundle_social_summary">Likes, posts, and more</string>
+    <!-- [CHAR LIMIT=100] Notification bundle type summary: content recommendations -->
+    <string name="notification_bundle_recs_summary">Newsletters, recommended media, and more</string>
 
 
     <!-- App Info > Notifications: Title for section where notifications AI features can be configured [CHAR LIMIT=80]-->
@@ -9184,16 +9210,16 @@ Data usage charges may apply.</string>
     <string name="notification_summarization_excluded_description">Notifications from these apps will not be summarized</string>
     <string name="notification_summarization_manage_excluded_apps">Manage apps</string>
     <string name="notification_summarization_manage_excluded_apps_title">Allow notification summaries for apps</string>
-    <string name="notification_excluded_apps">App exceptions</string>
+    <string name="notification_excluded_apps">Don\'t include these apps</string>
     <string name="notification_app_level_summarize_title">Summarize notifications</string>
     <string name="notification_app_level_summarize_subtext">Summarize conversation notifications from this app</string>
 
     <!-- App Info > Notifications: Title for section controlling whether this app may show notifications in a promoted format [CHAR LIMIT=80] -->
     <string name="live_notifications">Live notifications</string>
     <!-- App Info > Notifications: Text on the switch to enable or disable an app from showing notifications in a live/promoted format [CHAR LIMIT=50] -->
-    <string name="live_notifications_switch">Show live info</string>
+    <string name="live_notifications_switch">Live updates</string>
     <!-- App Info > Notifications: Text accompanying the "Show live info" switch explaining the purpose of the setting -->
-    <string name="live_notifications_desc">Pinned notifications display live info from apps, and always appear on the status bar and lock screen</string>
+    <string name="live_notifications_desc">Display ongoing, time-sensitive notifications on the status bar and lock screen</string>
 
     <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
     <string name="notification_bubbles_title">Bubbles</string>
@@ -9610,7 +9636,6 @@ Data usage charges may apply.</string>
 
     <string name="notification_app_level_bundle_title">Bundle notifications</string>
     <string name="notification_app_level_bundle_subtext">Notifications with similar themes will be silenced and grouped together for a quieter experience</string>
-    <string name="notification_bundle_excluded_description">Notifications from these apps won\’t be bundled</string>
     <string name="notification_bundle_manage_excluded_apps_title">Allow notification bundling for apps</string>
 
     <!-- Label for switch enabling notification adjustments (notification organizer, summaries) for work profile -->
@@ -12245,6 +12270,12 @@ Data usage charges may apply.</string>
     <!-- Title of the screen where the user picks a provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_picker_title">Preferred service for passwords, passkeys &amp; autofill</string>
 
+    <!-- New title of the screen where the user picks a provider. [CHAR_LIMIT=NONE] -->
+    <string name="credman_picker_title_new">Preferred service</string>
+
+    <!-- New title of the screen where the user picks a provider. [CHAR_LIMIT=NONE] -->
+    <string name="credman_picker_page_summary">Choose your preferred service to save data for sign-in and autofill suggestions</string>
+
     <!-- Title of the warning dialog for disabling the credential provider. [CHAR_LIMIT=NONE] -->
     <string name="credman_confirmation_message_title">Turn off %1$s\?</string>
 
@@ -12946,8 +12977,10 @@ Data usage charges may apply.</string>
     <string name="title_supported_service">After your phone connects to a satellite</string>
     <!-- Title for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="title_supported_service_for_manual_type">Follow steps to connect to the satellite</string>
-    <!-- Summary for satellite supported service [CHAR_LIMIT=NONE] -->
+    <!-- Summary for satellite supported service [CHAR_LIMIT=NONE] [SCREENSHOT=screen/AmfBYoNmdgkK9ER] -->
     <string name="summary_supported_service">You can text anyone, including emergency services, and use limited data on some apps. Your phone will reconnect to a mobile network when available.</string>
+    <!-- Summary for satellite supported service without data supported [CHAR_LIMIT=NONE] [SCREENSHOT=screen/7sidqhHfwNNoacB] -->
+    <string name="summary_supported_service_without_data_supported">You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available.</string>
     <!-- Summary for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="summary_supported_service_for_manual_type">After your phone is connected, you can text anyone, including emergency services.</string>
     <!-- learn more text - title of disclaimer of satellite connectivity  [CHAR_LIMIT=NONE] -->
@@ -13689,6 +13722,10 @@ Data usage charges may apply.</string>
     <string name="media_controls_hide_player">Hide player</string>
     <!-- Subtext for media settings when the player will be shown [CHAR LIMIT=50] -->
     <string name="media_controls_show_player">Show player</string>
+    <!-- Title of setting for device suggestions in the media player [CHAR LIMIT=50]-->
+    <string name="media_controls_suggestions_title">Media suggestions</string>
+    <!-- Description of setting for device suggestions in the media player [CHAR LIMIT=NONE]-->
+    <string name="media_controls_suggestions_description">Provide media suggestions from media apps based on your activity and location.</string>
     <!-- Keywords for the media controls setting [CHAR LIMIT=NONE]-->
     <string name="keywords_media_controls">media</string>
 
@@ -13832,6 +13869,8 @@ Data usage charges may apply.</string>
     <string name="dark_theme_main_switch_title">Use Dark theme</string>
     <!-- Title for bluetooth main switch. [CHAR LIMIT=50] -->
     <string name="bluetooth_main_switch_title">Use Bluetooth</string>
+    <!-- Title for HDR brightness main switch. [CHAR LIMIT=50] -->
+    <string name="hdr_brightness_main_switch_title">Use enhanced HDR brightness</string>
 
     <!-- Title for prevent ringing main switch. [CHAR LIMIT=50] -->
     <string name="prevent_ringing_main_switch_title">Use prevent ringing</string>
@@ -14513,6 +14552,10 @@ Data usage charges may apply.</string>
     <string name="audio_streams_add_source_failed_state_summary">Can\u0027t connect. Try again.</string>
     <!-- The preference summary when connecting [CHAR LIMIT=NONE] -->
     <string name="audio_streams_connecting_summary">Connecting\u2026</string>
+    <!-- Le audio streams audio failed dialog title [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_failed_to_join">Failed to join audio stream</string>
+    <!-- Le audio streams audio failed dialog detail [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_failed_to_join_detail"><xliff:g example="LE headset" id="device_name">%1$s</xliff:g> could not connect to audio stream</string>
     <!-- Le audio streams audio lost dialog title [CHAR LIMIT=NONE] -->
     <string name="audio_streams_dialog_stream_is_not_available">Audio stream isn\u0027t available</string>
     <!-- Le audio streams audio lost dialog subtitle [CHAR LIMIT=NONE] -->
@@ -14697,19 +14740,30 @@ Data usage charges may apply.</string>
     <string name="supervision_full_screen_pin_verification_title">Enter supervision PIN</string>
     <!-- Title on activity to choose PIN for supervision setup [CHAR LIMIT=NONE] -->
     <string name="supervision_choose_your_pin_header">Set a parental controls PIN</string>
+    <!-- Title on activity to confirm PIN for supervision setup [CHAR LIMIT=NONE] -->
     <string name="supervision_confirm_your_pin_header">Confirm PIN</string>
     <string name="supervision_pin_reset_success_toast">PIN updated</string>
+    <!-- Title on dialog that confirms whether user wants to delete their supervision PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_confirm_header">Delete PIN?</string>
+    <!-- Message in dialog that confirms whether user wants to delete their supervision PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_confirm_message">This will delete your current PIN for all users on this device and disable controls you have set up. This action can\u2019t be undone.</string>
+    <!-- Title on dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_supervision_enabled_header">Pause controls on other profiles first</string>
+    <!-- Message in dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_supervision_enabled_message">To proceed with deleting this PIN and resetting supervision settings, please pause controls on all other profiles.</string>
+    <!-- Title on dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_error_header">PIN can not be deleted</string>
+    <!-- Message in dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_error_message">An error occurred while trying to delete the PIN.</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
 
-    <!-- Light theme customization for lottie illustration. Not translatable. -->
-    <string-array name="va_animation_customization" translatable="false">
+    <!-- Light theme customization for Face Education lottie illustration. Not translatable. -->
+    <string-array name="fac_education_illustration" translatable="false">
         <item>.surfaceContainer:@sud_system_surface_container_light</item>
         <item>.primary:@sud_system_primary_light</item>
         <item>.primaryContainer:@sud_system_primary_container_light</item>
-        <item>.onPrimary:@sud_system_on_primary_light</item>
-        <item>.sContainerLowest:@sud_system_surface_container_lowest_light</item>
-        <item>.secondaryContainer:@sud_system_secondary_container_light</item>
-        <item>.onSecondary:@sud_system_on_secondary_light</item>
+        <item>.outline:@sud_system_outline_light</item>
+        <item>.onSecondaryContainer:@sud_system_secondary_container_light</item>
         <item>.tertiary:@sud_system_tertiary_light</item>
         <item>.inversePrimary:@sud_system_primary_inverse_light</item>
     </string-array>

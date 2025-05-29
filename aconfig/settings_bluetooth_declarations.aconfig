@@ -83,3 +83,13 @@ flag {
   }
   is_fixed_read_only: true
 }
+
+flag {
+  name: "enable_change_le_profile_broadcast_receiver"
+  namespace: "cross_device_experiences"
+  description: "Enable broadcast receiver to enable/disable LE audio profile"
+  bug: "381353150"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}

@@ -83,7 +83,6 @@ public class TouchpadThreeFingerTapPreferenceControllerTest {
     @EnableFlags(com.android.hardware.input.Flags.FLAG_TOUCHPAD_THREE_FINGER_TAP_SHORTCUT)
     public void getAvailabilityStatus_flagEnabledHasTouchPad() {
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
                 InputDevice.SOURCE_TOUCHPAD);
         ShadowInputDevice.addDevice(deviceId, device);
@@ -95,7 +94,6 @@ public class TouchpadThreeFingerTapPreferenceControllerTest {
     @EnableFlags(com.android.hardware.input.Flags.FLAG_TOUCHPAD_THREE_FINGER_TAP_SHORTCUT)
     public void getAvailabilityStatus_flagEnabledNoTouchPad() {
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
                 InputDevice.SOURCE_BLUETOOTH_STYLUS);
         ShadowInputDevice.addDevice(deviceId, device);
@@ -107,7 +105,6 @@ public class TouchpadThreeFingerTapPreferenceControllerTest {
     @DisableFlags(com.android.hardware.input.Flags.FLAG_TOUCHPAD_THREE_FINGER_TAP_SHORTCUT)
     public void getAvailabilityStatus_flagDisabled() {
         int deviceId = 1;
-        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
                 InputDevice.SOURCE_TOUCHPAD);
         ShadowInputDevice.addDevice(deviceId, device);

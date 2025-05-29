@@ -20,6 +20,7 @@ import static android.telephony.CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANG
 import static android.telephony.SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX;
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
+import android.annotation.Nullable;
 import android.annotation.TestApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -96,7 +97,7 @@ public class CarrierConfigCache {
      * A convenience method to set pre-prepared instance or mock(CarrierConfigCache.class) for
      * testing.
      *
-     * @param context The Context this is associated with.
+     * @param context  The Context this is associated with.
      * @param instance of {@link CarrierConfigCache} object.
      * @hide
      */
@@ -152,6 +153,27 @@ public class CarrierConfigCache {
             sCarrierConfigs.put(subId, config);
             return config;
         }
+    }
+
+    /**
+     * Gets the specific Carrier-Configurations for a particular subscription, which is associated
+     * with a specific SIM card. If an invalid subId is used, the returned config will contain
+     * default values.
+     *
+     * @param subId the subscription ID, normally obtained from {@link SubscriptionManager}.
+     * @return A {@link PersistableBundle} containing the config for the given subId, or default
+     * values for an invalid subId.
+     */
+    public @Nullable PersistableBundle getSpecificConfigsForSubId(int subId,
+            @NonNull String... keys) {
+        if (sCarrierConfigManager == null) return null;
+
+        final PersistableBundle config = sCarrierConfigManager.getConfigForSubId(subId, keys);
+        if (config == null) {
+            Log.e(TAG, "Could not get carrier config, subId:" + subId);
+            return null;
+        }
+        return config;
     }
 
     /**

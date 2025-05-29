@@ -16,17 +16,18 @@
 
 package com.android.settings.network
 
-import android.app.settings.SettingsEnums.ACTION_AIRPLANE_TOGGLE
+import android.app.settings.SettingsEnums.SETTINGS_NETWORK_CATEGORY
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.FEATURE_LEANBACK
 import android.content.res.Resources
-import android.provider.Settings
+import android.provider.Settings.Global.AIRPLANE_MODE_ON
 import android.telephony.TelephonyManager
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.testutils.MetricsRule
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.preference.createAndBindWidget
@@ -46,7 +47,11 @@ class AirplaneModePreferenceTest {
 
     private val mockResources = mock<Resources>()
     private val mockPackageManager = mock<PackageManager>()
-    private var mockTelephonyManager = mock<TelephonyManager>()
+    private val mockTelephonyManager = mock<TelephonyManager>()
+    private val mockScreenMetadata =
+        mock<PreferenceScreenMixin> {
+            on { getMetricsCategory() } doReturn SETTINGS_NETWORK_CATEGORY
+        }
 
     private val context = ApplicationProvider.getApplicationContext<Context>()
     private val contextWrapper =
@@ -90,7 +95,7 @@ class AirplaneModePreferenceTest {
 
     @Test
     fun getValue_defaultOn_returnOn() {
-        SettingsGlobalStore.get(context).setInt(Settings.Global.AIRPLANE_MODE_ON, 1)
+        SettingsGlobalStore.get(context).setInt(AIRPLANE_MODE_ON, 1)
 
         val getValue =
             airplaneModePreference.storage(context).getBoolean(AirplaneModePreference.KEY)
@@ -100,7 +105,7 @@ class AirplaneModePreferenceTest {
 
     @Test
     fun getValue_defaultOff_returnOff() {
-        SettingsGlobalStore.get(context).setInt(Settings.Global.AIRPLANE_MODE_ON, 0)
+        SettingsGlobalStore.get(context).setInt(AIRPLANE_MODE_ON, 0)
 
         val getValue =
             airplaneModePreference.storage(context).getBoolean(AirplaneModePreference.KEY)
@@ -110,24 +115,26 @@ class AirplaneModePreferenceTest {
 
     @Test
     fun performClick_defaultOn_checkedIsFalse() {
-        SettingsGlobalStore.get(context).setInt(Settings.Global.AIRPLANE_MODE_ON, 1)
+        SettingsGlobalStore.get(context).setInt(AIRPLANE_MODE_ON, 1)
 
         val preference = getSwitchPreference().apply { performClick() }
 
         assertThat(preference.isChecked).isFalse()
-        verify(metricsRule.metricsFeatureProvider).action(context, ACTION_AIRPLANE_TOGGLE, false)
+        verify(metricsRule.metricsFeatureProvider)
+            .changed(SETTINGS_NETWORK_CATEGORY, AIRPLANE_MODE_ON, 0)
     }
 
     @Test
     fun performClick_defaultOff_checkedIsTrue() {
-        SettingsGlobalStore.get(context).setInt(Settings.Global.AIRPLANE_MODE_ON, 0)
+        SettingsGlobalStore.get(context).setInt(AIRPLANE_MODE_ON, 0)
 
         val preference = getSwitchPreference().apply { performClick() }
 
         assertThat(preference.isChecked).isTrue()
-        verify(metricsRule.metricsFeatureProvider).action(context, ACTION_AIRPLANE_TOGGLE, true)
+        verify(metricsRule.metricsFeatureProvider)
+            .changed(SETTINGS_NETWORK_CATEGORY, AIRPLANE_MODE_ON, 1)
     }
 
     private fun getSwitchPreference(): SwitchPreferenceCompat =
-        airplaneModePreference.createAndBindWidget(context)
+        airplaneModePreference.createAndBindWidget(context, null, mockScreenMetadata)
 }
