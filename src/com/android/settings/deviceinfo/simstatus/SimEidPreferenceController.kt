@@ -107,17 +107,6 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
 
     /** Constructs title string. */
     private fun getTitle(): String {
-        val slotSize = slotSimStatus?.size() ?: 0
-        if (slotSize <= 1) {
-            return mContext.getString(R.string.status_eid)
-        }
-        // Only append slot index to title when more than 1 is available
-        for (idxSlot in 0 until slotSize) {
-            val subInfo = slotSimStatus?.getSubscriptionInfo(idxSlot)
-            if (subInfo != null && subInfo.isEmbedded) {
-                return mContext.getString(R.string.eid_multi_sim, idxSlot + 1)
-            }
-        }
         return mContext.getString(R.string.status_eid)
     }
 
