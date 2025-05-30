@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.app.catalyst
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.content.pm.CrossProfileApps
@@ -25,15 +26,14 @@ import android.provider.Settings.ACTION_MANAGE_CROSS_PROFILE_ACCESS
 import com.android.settings.R
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceFragment
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(AppInteractAcrossProfilesAppListScreen.KEY)
-class AppInteractAcrossProfilesAppListScreen : PreferenceScreenCreator {
+open class AppInteractAcrossProfilesAppListScreen : PreferenceScreenMixin {
 
     override val key: String
         get() = KEY
@@ -41,13 +41,16 @@ class AppInteractAcrossProfilesAppListScreen : PreferenceScreenCreator {
     override val title: Int
         get() = R.string.interact_across_profiles_title
 
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_apps
+
+    override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
+
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
     override fun isFlagEnabled(context: Context) = Flags.deviceState()
 
     override fun hasCompleteHierarchy() = false
-
-    override fun fragmentClass() = PreferenceFragment::class.java
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
         // TODO: highlight the app from the metadata when highlighting parameterized screens is

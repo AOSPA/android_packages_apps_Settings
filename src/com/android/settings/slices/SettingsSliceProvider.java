@@ -50,7 +50,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.notification.VolumeSeekBarPreferenceController;
+import com.android.settings.notification.VolumeSliderPreferenceController;
 import com.android.settings.notification.modes.DndModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SliceBroadcastRelay;
@@ -435,10 +435,10 @@ public class SettingsSliceProvider extends SliceProvider {
 
         final IntentFilter filter = controller.getIntentFilter();
         if (filter != null) {
-            if (controller instanceof VolumeSeekBarPreferenceController) {
+            if (controller instanceof VolumeSliderPreferenceController) {
                 // Register volume slices to a broadcast relay to reduce unnecessary UI updates
                 VolumeSliceHelper.registerIntentToUri(getContext(), filter, uri,
-                        ((VolumeSeekBarPreferenceController) controller).getAudioStream());
+                        ((VolumeSliderPreferenceController) controller).getAudioStream());
             } else {
                 registerIntentToUri(filter, uri);
             }

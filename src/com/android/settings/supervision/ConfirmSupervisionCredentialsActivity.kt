@@ -61,7 +61,8 @@ import com.android.settingslib.supervision.SupervisionLog.TAG
  */
 class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
 
-    private val mAuthenticationCallback =
+    @VisibleForTesting
+    val mAuthenticationCallback =
         object : AuthenticationCallback() {
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                 Log.w(TAG, "onAuthenticationError(errorCode=$errorCode, errString=$errString)")
@@ -70,6 +71,11 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
+                val authController =
+                    SupervisionAuthController.getInstance(
+                        this@ConfirmSupervisionCredentialsActivity
+                    )
+                authController.startSession(taskId)
                 setResult(RESULT_OK)
                 finish()
             }
@@ -116,14 +122,22 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             getResultLauncher.launch(setupIntent)
             return
         }
-
-        val activityManager = getSystemService(ActivityManager::class.java)
-        if (!activityManager.startProfile(supervisingUser)) {
-            errorHandler("Unable to start supervising user, cannot verify credentials.")
-            return
+        val forceConfirmation = intent.getBooleanExtra(EXTRA_FORCE_CONFIRMATION, false)
+        if (
+            forceConfirmation ||
+                !SupervisionAuthController.getInstance(this).isSessionActive(taskId)
+        ) {
+            val activityManager = getSystemService(ActivityManager::class.java)
+            if (!activityManager.startProfile(supervisingUser)) {
+                errorHandler("Unable to start supervising user, cannot verify credentials.")
+                return
+            }
+            showBiometricPrompt(supervisingUser.identifier)
+        } else {
+            Log.i(TAG, "Bypassing authentication due to active session")
+            setResult(RESULT_OK)
+            finish()
         }
-
-        showBiometricPrompt(supervisingUser.identifier)
     }
 
     @RequiresPermission(allOf = [USE_BIOMETRIC_INTERNAL, SET_BIOMETRIC_DIALOG_ADVANCED])
@@ -200,5 +214,10 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         errStr?.let { Log.e(TAG, it) }
         setResult(RESULT_CANCELED)
         finish()
+    }
+
+    companion object {
+        // If true, force confirmation of supervision credentials, regardless of active auth session
+        @VisibleForTesting const val EXTRA_FORCE_CONFIRMATION = "force_confirmation"
     }
 }

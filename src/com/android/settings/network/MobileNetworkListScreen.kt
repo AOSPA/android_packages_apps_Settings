@@ -21,6 +21,7 @@ import android.os.UserManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener
+import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceClickListener
 import com.android.settings.R
@@ -169,7 +170,7 @@ open class MobileNetworkListScreen :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass() = MobileNetworkListFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? = MobileNetworkListFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) { +MobileDataPreference() }

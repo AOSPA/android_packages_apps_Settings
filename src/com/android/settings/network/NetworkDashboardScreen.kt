@@ -17,6 +17,7 @@ package com.android.settings.network
 
 import android.app.settings.SettingsEnums.SETTINGS_NETWORK_CATEGORY
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.NetworkDashboardActivity
 import com.android.settings.core.PreferenceScreenMixin
@@ -48,7 +49,7 @@ open class NetworkDashboardScreen : PreferenceScreenMixin, PreferenceIconProvide
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass() = NetworkDashboardFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? = NetworkDashboardFragment::class.java
 
     override fun getMetricsCategory() = SETTINGS_NETWORK_CATEGORY
 

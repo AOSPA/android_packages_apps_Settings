@@ -496,6 +496,16 @@
         <item name="*android:dotColor">?android:attr/textColorSecondary</item>
     </style>
 
+    <style name="LockPatternStyleExpressive">
+        <item name="*android:regularColor">@color/settingslib_materialColorPrimary</item>
+        <item name="*android:successColor">@color/settingslib_materialColorOnPrimaryContainer</item>
+        <item name="*android:errorColor">@color/settingslib_materialColorError</item>
+        <item name="*android:dotColor">@color/settingslib_materialColorOnSurface</item>
+        <item name="*android:dotActivatedColor">@color/settingslib_materialColorOnSurfaceInverse</item>
+        <item name="*android:keepDotActivated">false</item>
+        <item name="*android:enlargeVertexEntryArea">true</item>
+    </style>
+
     <style name="LockPatternButtonStyle" parent="@style/SudGlifButton.Tertiary">
         <item name="android:layout_marginStart">@dimen/sud_glif_button_margin_start</item>
         <item name="android:layout_marginEnd">@dimen/sud_glif_button_margin_end</item>
@@ -739,7 +749,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:divider">@*android:drawable/list_divider_material</item>
         <item name="android:showDividers">middle</item>
     </style>
 
@@ -811,16 +820,18 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:divider">@*android:drawable/list_divider_material</item>
         <item name="android:showDividers">middle</item>
+        <item name="android:paddingBottom">24dp</item>
     </style>
 
     <style name="AccessibilityDialogButton"
            parent="@*android:style/Widget.DeviceDefault.Button.ButtonBar.AlertDialog">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:paddingEnd">8dp</item>
         <item name="android:paddingStart">8dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.SettingsLib.LabelLarge</item>
+        <item name="android:layout_marginHorizontal">24dp</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
@@ -1167,16 +1178,12 @@
         <item name="cardElevation">0dp</item>
     </style>
 
-    <style name="TextAppearance.SuggestionCardTitle">
+    <style name="TextAppearance.SuggestionCardTitle" parent="TextAppearance.SettingsLib.TitleMedium.Emphasized">
         <item name="android:textColor">@color/settingslib_materialColorOnPrimary</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
     </style>
 
-    <style name="TextAppearance.SuggestionCardSummary">
+    <style name="TextAppearance.SuggestionCardSummary" parent="TextAppearance.SettingsLib.LabelMedium">
         <item name="android:textColor">@color/settingslib_materialColorOnSecondary</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
     </style>
 
     <style name="DeviceIconRoundedCornerStyle">

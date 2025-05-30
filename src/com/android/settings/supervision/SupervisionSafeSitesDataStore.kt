@@ -34,27 +34,13 @@ class SupervisionSafeSitesDataStore(
     override fun contains(key: String) = settingsStore.contains(BROWSER_CONTENT_FILTERS_ENABLED)
 
     override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
-        val settingValue = settingsStore.getInt(BROWSER_CONTENT_FILTERS_ENABLED)
-        val isFilterOff: Boolean = settingValue == null || settingValue <= 0
-        return when (key) {
-            SupervisionAllowAllSitesPreference.KEY -> isFilterOff
-
-            SupervisionBlockExplicitSitesPreference.KEY -> !isFilterOff
-
-            else -> null
-        }
-            as T?
+        val settingValue: Int? = settingsStore.getInt(BROWSER_CONTENT_FILTERS_ENABLED)
+        return (settingValue != null && (settingValue > 0)) as T?
     }
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
         if (value !is Boolean) return
-        when (key) {
-            SupervisionAllowAllSitesPreference.KEY ->
-                settingsStore.setBoolean(BROWSER_CONTENT_FILTERS_ENABLED, !value)
-
-            SupervisionBlockExplicitSitesPreference.KEY ->
-                settingsStore.setBoolean(BROWSER_CONTENT_FILTERS_ENABLED, value)
-        }
+        settingsStore.setBoolean(BROWSER_CONTENT_FILTERS_ENABLED, value)
     }
 
     override fun onFirstObserverAdded() {
@@ -64,8 +50,7 @@ class SupervisionSafeSitesDataStore(
 
     override fun onKeyChanged(key: String, reason: Int) {
         // forward data change to preference hierarchy key
-        notifyChange(SupervisionBlockExplicitSitesPreference.KEY, reason)
-        notifyChange(SupervisionAllowAllSitesPreference.KEY, reason)
+        notifyChange(SupervisionSafeSitesSwitchPreference.KEY, reason)
     }
 
     override fun onLastObserverRemoved() {

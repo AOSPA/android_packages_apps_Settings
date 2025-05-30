@@ -56,20 +56,21 @@ public class DeviceStateAutoRotateSettingController extends TogglePreferenceCont
     @VisibleForTesting
     DeviceStateAutoRotateSettingController(Context context, int deviceState,
             String deviceStateDescription, int order,
-            MetricsFeatureProvider metricsFeatureProvider) {
+            MetricsFeatureProvider metricsFeatureProvider,
+            DeviceStateAutoRotateSettingManager deviceStateAutoRotateSettingManager) {
         super(context, getPreferenceKeyForDeviceState(deviceState));
         mMetricsFeatureProvider = metricsFeatureProvider;
         mDeviceState = deviceState;
         mDeviceStateDescription = deviceStateDescription;
-        mAutoRotateSettingsManager =
-                DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(context);
+        mAutoRotateSettingsManager = deviceStateAutoRotateSettingManager;
         mOrder = order;
     }
 
     public DeviceStateAutoRotateSettingController(Context context, int deviceState,
             String deviceStateDescription, int order) {
         this(context, deviceState, deviceStateDescription, order,
-                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider());
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider(),
+                DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(context));
     }
 
     void init(Lifecycle lifecycle) {

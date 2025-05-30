@@ -16,6 +16,7 @@
 
 package com.android.settings.core
 
+import android.content.Context
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.android.settings.CatalystFragment
@@ -24,6 +25,8 @@ import com.android.settingslib.preference.PreferenceScreenCreator
 
 /** Mixin for settings preference screen. */
 interface PreferenceScreenMixin : PreferenceScreenCreator, Instrumentable {
+
+    override fun isIndexable(context: Context) = false
 
     override fun fragmentClass(): Class<out Fragment>? = CatalystFragment::class.java
 

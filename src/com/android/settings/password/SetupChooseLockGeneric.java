@@ -38,11 +38,13 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.accessibility.PreferenceAdapterInSuw;
 import com.android.settings.utils.SettingsDividerItemDecoration;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -75,9 +77,15 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
     @Override
     protected void onCreate(Bundle savedInstance) {
-        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-        setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
-        ThemeHelper.trySetDynamicColor(this);
+        if (ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext())) {
+            if (!ThemeHelper.trySetSuwTheme(this)) {
+                setTheme(ThemeHelper.getSuwDefaultTheme(getApplicationContext()));
+                ThemeHelper.trySetDynamicColor(this);
+            }
+        } else {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            ThemeHelper.trySetDynamicColor(this);
+        }
         super.onCreate(savedInstance);
 
         if(getIntent().hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)) {
@@ -111,11 +119,17 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
+            final boolean isExpressiveStyle = ThemeHelper.shouldApplyGlifExpressiveStyle(
+                    requireContext());
+
             GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
             layout.setDescriptionText(loadDescriptionText());
-            layout.setDividerItemDecoration(new SettingsDividerItemDecoration(getContext()));
-            layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
-                    com.google.android.setupdesign.R.dimen.sud_items_glif_text_divider_inset));
+
+            if (!isExpressiveStyle) {
+                layout.setDividerItemDecoration(new SettingsDividerItemDecoration(getContext()));
+                layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
+                        com.google.android.setupdesign.R.dimen.sud_items_glif_text_divider_inset));
+            }
 
             layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
 
@@ -157,6 +171,14 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                 Bundle savedInstanceState) {
             GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
             return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        }
+
+        @Override
+        protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+            if (ThemeHelper.shouldApplyGlifExpressiveStyle(requireContext())) {
+                return new PreferenceAdapterInSuw(preferenceScreen);
+            }
+            return super.onCreateAdapter(preferenceScreen);
         }
 
         @Override
@@ -244,9 +266,15 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
     public static class InternalActivity extends ChooseLockGeneric.InternalActivity {
         @Override
         protected void onCreate(Bundle savedState) {
-            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
-            ThemeHelper.trySetDynamicColor(this);
+            if (ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext())) {
+                if (!ThemeHelper.trySetSuwTheme(this)) {
+                    setTheme(ThemeHelper.getSuwDefaultTheme(getApplicationContext()));
+                    ThemeHelper.trySetDynamicColor(this);
+                }
+            } else {
+                setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+                ThemeHelper.trySetDynamicColor(this);
+            }
             super.onCreate(savedState);
         }
 

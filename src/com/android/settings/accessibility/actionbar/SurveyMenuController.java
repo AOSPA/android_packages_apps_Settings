@@ -43,11 +43,6 @@ import com.android.settingslib.core.lifecycle.events.OnOptionsItemSelected;
 public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsMenu,
         OnOptionsItemSelected {
 
-    /**
-     * The menu item ID for the send survey menu option.
-     */
-    public static final int MENU_SEND_SURVEY = Menu.FIRST + 20;
-
     @NonNull
     private final InstrumentedPreferenceFragment mHost;
     @Nullable
@@ -96,7 +91,7 @@ public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsM
         if (mSurveyFeatureProvider != null) {
             mSurveyFeatureProvider.checkSurveyAvailable(mHost, mFeedbackKey, available -> {
                 if (available) {
-                    menu.add(Menu.NONE, MENU_SEND_SURVEY, Menu.NONE,
+                    menu.add(Menu.NONE, MenusUtils.MenuId.SEND_SURVEY.getValue(), Menu.NONE,
                             R.string.accessibility_send_survey_title);
                 }
             });
@@ -105,7 +100,7 @@ public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsM
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
-        if (menuItem.getItemId() == MENU_SEND_SURVEY) {
+        if (menuItem.getItemId() == MenusUtils.MenuId.SEND_SURVEY.getValue()) {
             startSurvey();
             // Prevent repeated feedback triggers.
             menuItem.setVisible(false);

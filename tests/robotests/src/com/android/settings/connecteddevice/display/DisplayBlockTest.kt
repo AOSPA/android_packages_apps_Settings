@@ -19,22 +19,11 @@ package com.android.settings.connecteddevice.display
 import android.content.Context
 import android.graphics.PointF
 import android.os.Handler
-import android.view.Display
 import android.view.SurfaceControl
 import android.view.SurfaceView
 import android.widget.FrameLayout
-import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.core.view.MotionEventBuilder
-
-import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
-
-import java.util.function.Consumer
-import java.util.function.Supplier
-
-import kotlin.math.abs
-
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner

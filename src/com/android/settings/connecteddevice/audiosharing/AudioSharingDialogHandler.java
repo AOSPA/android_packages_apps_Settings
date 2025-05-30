@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_IS_PRIMARY;
 import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_IS_TEMP_BOND;
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_VALUE;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_START_LE_AUDIO_SHARING;
 
 import android.app.settings.SettingsEnums;
@@ -164,9 +165,10 @@ public class AudioSharingDialogHandler {
                         : null;
         mAudioManager = context.getSystemService(AudioManager.class);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
-        mHostMetricsCategory = mHostFragment instanceof DashboardFragment
-                ? ((DashboardFragment) mHostFragment).getMetricsCategory()
-                : SettingsEnums.PAGE_UNKNOWN;
+        mHostMetricsCategory =
+                mHostFragment instanceof DashboardFragment
+                        ? ((DashboardFragment) mHostFragment).getMetricsCategory()
+                        : SettingsEnums.PAGE_UNKNOWN;
     }
 
     /** Register callbacks for dialog handler */
@@ -185,6 +187,7 @@ public class AudioSharingDialogHandler {
 
     /**
      * Handle dialog pop-up logic when device is connected.
+     *
      * @param cachedDevice The target {@link CachedBluetoothDevice} to handle for
      * @param userTriggered If the device is connected by user
      * @return If a dialog is popped up
@@ -236,10 +239,12 @@ public class AudioSharingDialogHandler {
                             mLocalBtManager, groupedDevices, /* filterByInSharing= */ true);
             AudioSharingStopDialogFragment.DialogEventListener listener =
                     () -> {
-                        if (mLocalBtManager != null && (Flags.adoptPrimaryGroupManagementApi() || (
-                                mContext != null && Flags.audioSharingDeveloperOption()
-                                        && BluetoothUtils.getAudioSharingPreviewValue(
-                                        mContext.getContentResolver())))) {
+                        if (mLocalBtManager != null
+                                && (Flags.adoptPrimaryGroupManagementApi()
+                                        || (mContext != null
+                                                && Flags.audioSharingDeveloperOption()
+                                                && BluetoothUtils.getAudioSharingPreviewValue(
+                                                        mContext.getContentResolver())))) {
                             LeAudioProfile profile =
                                     mLocalBtManager.getProfileManager().getLeAudioProfile();
                             if (profile != null) {
@@ -251,7 +256,7 @@ public class AudioSharingDialogHandler {
                         mIsStoppingBroadcast = true;
                         AudioSharingUtils.stopBroadcasting(mLocalBtManager);
                     };
-            Pair<Integer, Object>[] eventData =
+            ImmutableList<Pair<Integer, Object>> eventData =
                     AudioSharingUtils.buildAudioSharingDialogEventData(
                             mHostMetricsCategory,
                             SettingsEnums.DIALOG_STOP_AUDIO_SHARING,
@@ -260,11 +265,7 @@ public class AudioSharingDialogHandler {
                             /* candidateDeviceCount= */ 0);
             closeOpeningDialogsOtherThan(AudioSharingStopDialogFragment.tag());
             return AudioSharingStopDialogFragment.show(
-                    mHostFragment,
-                    deviceItemsInSharingSession,
-                    cachedDevice,
-                    listener,
-                    eventData);
+                    mHostFragment, deviceItemsInSharingSession, cachedDevice, listener, eventData);
         } else {
             if (userTriggered) {
                 cachedDevice.setActive();
@@ -298,10 +299,14 @@ public class AudioSharingDialogHandler {
                                                     device, mLocalBtManager))) {
                 Log.d(TAG, "Auto add sink with the same group to the sharing: " + deviceAddress);
                 if (mAssistant != null && mBroadcast != null) {
-                    mMetricsFeatureProvider.action(mContext,
+                    mMetricsFeatureProvider.action(
+                            mHostMetricsCategory,
                             SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                            mHostMetricsCategory,
                             AudioSharingUtils.buildAddSourceEventData(
-                                    mHostMetricsCategory, /* userTriggered= */false));
+                                            mHostMetricsCategory, /* userTriggered= */ false)
+                                    .toString(),
+                            /* changedPreferenceIntValue= */ 0);
                     mAssistant.addSource(
                             btDevice,
                             mBroadcast.getLatestBluetoothLeBroadcastMetadata(),
@@ -323,20 +328,21 @@ public class AudioSharingDialogHandler {
                             // Remove all sources from the device user clicked
                             removeSourceForGroup(item.getGroupId(), groupedDevices);
                             // Add current broadcast to the latest connected device
-                            addSourceForGroup(groupId, groupedDevices,
+                            addSourceForGroup(
+                                    groupId,
+                                    groupedDevices,
                                     AudioSharingUtils.buildAddSourceEventData(
                                             SettingsEnums.DIALOG_AUDIO_SHARING_SWITCH_DEVICE,
                                             userTriggered));
                         };
-                Pair<Integer, Object>[] eventData =
+                ImmutableList<Pair<Integer, Object>> eventData =
                         AudioSharingUtils.buildAudioSharingDialogEventData(
                                 mHostMetricsCategory,
                                 SettingsEnums.DIALOG_AUDIO_SHARING_SWITCH_DEVICE,
                                 userTriggered,
                                 deviceItemsInSharingSession.size(),
                                 /* candidateDeviceCount= */ 1);
-                closeOpeningDialogsOtherThan(
-                        AudioSharingDisconnectDialogFragment.tag());
+                closeOpeningDialogsOtherThan(AudioSharingDisconnectDialogFragment.tag());
                 Log.d(TAG, "Show disconnect dialog, device = " + deviceAddress);
                 return AudioSharingDisconnectDialogFragment.show(
                         mHostFragment,
@@ -351,7 +357,9 @@ public class AudioSharingDialogHandler {
                         new AudioSharingJoinDialogFragment.DialogEventListener() {
                             @Override
                             public void onShareClick() {
-                                addSourceForGroup(groupId, groupedDevices,
+                                addSourceForGroup(
+                                        groupId,
+                                        groupedDevices,
                                         AudioSharingUtils.buildAddSourceEventData(
                                                 SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE,
                                                 userTriggered));
@@ -360,7 +368,7 @@ public class AudioSharingDialogHandler {
                             @Override
                             public void onCancelClick() {}
                         };
-                Pair<Integer, Object>[] eventData =
+                ImmutableList<Pair<Integer, Object>> eventData =
                         AudioSharingUtils.buildAudioSharingDialogEventData(
                                 mHostMetricsCategory,
                                 SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE,
@@ -416,7 +424,7 @@ public class AudioSharingDialogHandler {
                             }
                         };
 
-                Pair<Integer, Object>[] eventData =
+                ImmutableList<Pair<Integer, Object>> eventData =
                         AudioSharingUtils.buildAudioSharingDialogEventData(
                                 mHostMetricsCategory,
                                 SettingsEnums.DIALOG_START_AUDIO_SHARING,
@@ -448,8 +456,12 @@ public class AudioSharingDialogHandler {
                     try {
                         fragments = mHostFragment.getChildFragmentManager().getFragments();
                     } catch (IllegalStateException e) {
-                        Log.d(TAG, "Fail to closeOpeningDialogsOtherThan " + tag + ": "
-                                + e.getMessage());
+                        Log.d(
+                                TAG,
+                                "Fail to closeOpeningDialogsOtherThan "
+                                        + tag
+                                        + ": "
+                                        + e.getMessage());
                         return;
                     }
                     for (Fragment fragment : fragments) {
@@ -507,8 +519,9 @@ public class AudioSharingDialogHandler {
                     }
                     for (Fragment fragment : fragments) {
                         CachedBluetoothDevice device = getCachedBluetoothDeviceFromDialog(fragment);
-                        if (device != null && address != null && address.equals(
-                                device.getAddress())) {
+                        if (device != null
+                                && address != null
+                                && address.equals(device.getAddress())) {
                             Log.d(
                                     TAG,
                                     "Remove staled opening dialog for device "
@@ -544,27 +557,35 @@ public class AudioSharingDialogHandler {
             return;
         }
         List<BluetoothDevice> devices = groupedDevices.get(groupId);
-        devices.stream().forEach(
-                device -> {
-                    for (BluetoothLeBroadcastReceiveState source :
-                            mAssistant.getAllSources(device)) {
-                        mAssistant.removeSource(device, source.getSourceId());
-                    }
-                });
-        boolean isPrimary = groupId == BluetoothUtils.getPrimaryGroupIdForBroadcast(
-                mContext.getContentResolver(), mLocalBtManager);
+        devices.stream()
+                .forEach(
+                        device -> {
+                            for (BluetoothLeBroadcastReceiveState source :
+                                    mAssistant.getAllSources(device)) {
+                                mAssistant.removeSource(device, source.getSourceId());
+                            }
+                        });
+        boolean isPrimary =
+                groupId
+                        == BluetoothUtils.getPrimaryGroupIdForBroadcast(
+                                mContext.getContentResolver(), mLocalBtManager);
         boolean isTempBond = devices.stream().anyMatch(BluetoothUtils::isTemporaryBondDevice);
-        Pair<Integer, Object>[] eventData = new Pair[]{
-                Pair.create(METRIC_KEY_DEVICE_IS_PRIMARY.getId(), isPrimary ? 1 : 0),
-                Pair.create(METRIC_KEY_DEVICE_IS_TEMP_BOND.getId(), isTempBond ? 1 : 0)
-        };
-        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_REMOVE_SOURCE,
-                eventData);
+        ImmutableList<Pair<Integer, Object>> eventData =
+                ImmutableList.of(
+                        Pair.create(METRIC_KEY_DEVICE_IS_PRIMARY.getId(), isPrimary),
+                        Pair.create(METRIC_KEY_DEVICE_IS_TEMP_BOND.getId(), isTempBond));
+        mMetricsFeatureProvider.action(
+                mHostMetricsCategory,
+                SettingsEnums.ACTION_AUDIO_SHARING_REMOVE_SOURCE,
+                mHostMetricsCategory,
+                eventData.toString(),
+                /* changedPreferenceIntValue= */ 0);
     }
 
     private void addSourceForGroup(
-            int groupId, Map<Integer, List<BluetoothDevice>> groupedDevices,
-            Pair<Integer, Object>[] eventData) {
+            int groupId,
+            Map<Integer, List<BluetoothDevice>> groupedDevices,
+            ImmutableList<Pair<Integer, Object>> eventData) {
         if (mBroadcast == null || mAssistant == null) {
             Log.d(TAG, "Fail to add source due to null profiles, group = " + groupId);
             return;
@@ -580,8 +601,12 @@ public class AudioSharingDialogHandler {
                                         device,
                                         mBroadcast.getLatestBluetoothLeBroadcastMetadata(),
                                         /* isGroupOp= */ false));
-        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
-                eventData);
+        mMetricsFeatureProvider.action(
+                mHostMetricsCategory,
+                SettingsEnums.ACTION_AUDIO_SHARING_ADD_SOURCE,
+                mHostMetricsCategory,
+                eventData.toString(),
+                /* changedPreferenceIntValue= */ 0);
     }
 
     private boolean isBroadcasting() {
@@ -607,9 +632,11 @@ public class AudioSharingDialogHandler {
                                                 .getMetricsCategory();
                             }
                             mMetricsFeatureProvider.action(
-                                    mContext,
+                                    mHostMetricsCategory,
                                     SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS,
-                                    pageId);
+                                    mHostMetricsCategory,
+                                    /* changedPreferenceKey= */ METRIC_KEY_VALUE.toString(),
+                                    /* changedPreferenceIntValue= */ pageId);
                         });
     }
 }

@@ -15,25 +15,26 @@
  */
 package com.android.settings.supervision
 
+import android.app.settings.SettingsEnums
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_MANAGE_PIN
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
 import android.app.supervision.flags.Flags
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 
 /** Pin Management landing page (Settings > Supervision > Manage Pin). */
 @ProvidePreferenceScreen(SupervisionPinManagementScreen.KEY)
 class SupervisionPinManagementScreen :
-    PreferenceScreenCreator,
+    PreferenceScreenMixin,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
     PreferenceActionMetricsProvider,
@@ -47,6 +48,11 @@ class SupervisionPinManagementScreen :
     override val title: Int
         get() = R.string.supervision_pin_management_preference_title
 
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_supervision
+
+    override fun getMetricsCategory() = SettingsEnums.SUPERVISION_MANAGE_PIN_SCREEN
+
     // There is an implicit dependency on SupervisionSetupRecoveryPreference due to `getSummary`,
     // which can be removed if `SupervisionManager.supervisionRecoveryInfo` supports
     // observer/listener mechanism on change.
@@ -59,7 +65,7 @@ class SupervisionPinManagementScreen :
             return null
         }
         val recoveryInfo =
-            context.getSystemService(SupervisionManager::class.java)?.supervisionRecoveryInfo
+            context.getSystemService(SupervisionManager::class.java)?.getSupervisionRecoveryInfo()
         return when {
             recoveryInfo == null -> {
                 context.getString(R.string.supervision_pin_management_preference_summary_add)
@@ -77,7 +83,9 @@ class SupervisionPinManagementScreen :
     override fun getIcon(context: Context): Int {
         if (Flags.enableSupervisionPinRecoveryScreen()) {
             val recoveryInfo =
-                context.getSystemService(SupervisionManager::class.java)?.supervisionRecoveryInfo
+                context
+                    .getSystemService(SupervisionManager::class.java)
+                    ?.getSupervisionRecoveryInfo()
             if (recoveryInfo == null || recoveryInfo.state == STATE_PENDING) {
                 // if recovery is not fully setup.
                 return R.drawable.exclamation_icon
@@ -85,8 +93,6 @@ class SupervisionPinManagementScreen :
         }
         return R.drawable.ic_pin_outline
     }
-
-    override fun fragmentClass() = SupervisionPinManagementFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {

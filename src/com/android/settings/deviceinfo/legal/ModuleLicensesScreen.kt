@@ -17,6 +17,7 @@ package com.android.settings.deviceinfo.legal
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -43,7 +44,7 @@ open class ModuleLicensesScreen : PreferenceScreenMixin, PreferenceAvailabilityP
     // UI. The hierarchy will be added while migrating this page.
     override fun isFlagEnabled(context: Context) = false
 
-    override fun fragmentClass() = ModuleLicensesDashboard::class.java
+    override fun fragmentClass(): Class<out Fragment>? = ModuleLicensesDashboard::class.java
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 

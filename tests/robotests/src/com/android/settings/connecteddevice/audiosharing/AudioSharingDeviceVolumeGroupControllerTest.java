@@ -133,6 +133,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     @Mock private AudioSharingDeviceVolumePreference mPreference1;
     @Mock private AudioSharingDeviceVolumePreference mPreference2;
     @Mock private AudioSharingDeviceVolumeSliderPreference mSliderPreference1;
+    @Mock private AudioSharingDeviceVolumeSliderPreference mSliderPreference2;
     @Mock private AudioManager mAudioManager;
     @Mock private PreferenceManager mPreferenceManager;
     @Mock private ContentResolver mContentResolver;
@@ -188,6 +189,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         doReturn(mDevice2).when(mCachedDevice2).getDevice();
         doReturn(ImmutableSet.of()).when(mCachedDevice2).getMemberDevice();
         when(mPreference2.getCachedDevice()).thenReturn(mCachedDevice2);
+        when(mSliderPreference2.getCachedDevice()).thenReturn(mCachedDevice2);
         doNothing().when(mDevicePreferenceCallback).onDeviceAdded(any(Preference.class));
         doNothing().when(mDevicePreferenceCallback).onDeviceRemoved(any(Preference.class));
         when(mScreen.getContext()).thenReturn(mContext);
@@ -478,6 +480,29 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mPreferenceGroup.addPreference(mPreference1);
         mController.setPreferenceGroup(mPreferenceGroup);
         mController.onDeviceRemoved(mPreference1);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mPreferenceGroup).setVisible(false);
+        assertThat(mPreferenceGroup.isVisible()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
+    public void onDeviceRemoved_enableExpressiveDesign_notLastDevice_isVisible() {
+        mPreferenceGroup.addPreference(mSliderPreference2);
+        mPreferenceGroup.addPreference(mSliderPreference1);
+        mController.setPreferenceGroup(mPreferenceGroup);
+        mController.onDeviceRemoved(mSliderPreference1);
+        verify(mPreferenceGroup, never()).setVisible(false);
+        assertThat(mPreferenceGroup.isVisible()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_BLUETOOTH_SETTINGS_EXPRESSIVE_DESIGN)
+    public void onDeviceRemoved_enableExpressiveDesign_lastDevice_updateVisibility() {
+        mPreferenceGroup.addPreference(mSliderPreference1);
+        mController.setPreferenceGroup(mPreferenceGroup);
+        mController.onDeviceRemoved(mSliderPreference1);
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mPreferenceGroup).setVisible(false);

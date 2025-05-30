@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_IS_PRIMARY;
+
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
@@ -75,8 +77,7 @@ public class AudioSharingDeviceVolumeSliderPreference extends SliderPreference {
                 (pref, value) -> {
                     handleProgressChange((int) value);
                     return true;
-                }
-        );
+                });
         refreshPreference();
     }
 
@@ -85,8 +86,7 @@ public class AudioSharingDeviceVolumeSliderPreference extends SliderPreference {
         if ((o == null) || !(o instanceof AudioSharingDeviceVolumeSliderPreference)) {
             return false;
         }
-        return mCachedDevice.equals(
-                ((AudioSharingDeviceVolumeSliderPreference) o).mCachedDevice);
+        return mCachedDevice.equals(((AudioSharingDeviceVolumeSliderPreference) o).mCachedDevice);
     }
 
     @Override
@@ -145,14 +145,18 @@ public class AudioSharingDeviceVolumeSliderPreference extends SliderPreference {
             Log.d(TAG, "Skip set device volume, device is null");
             return;
         }
-        VolumeControlProfile vc = mBtManager == null ? null
-                : mBtManager.getProfileManager().getVolumeControlProfile();
+        VolumeControlProfile vc =
+                mBtManager == null
+                        ? null
+                        : mBtManager.getProfileManager().getVolumeControlProfile();
         if (vc != null) {
             vc.setDeviceVolume(device, progress, /* isGroupOp= */ true);
             mMetricsFeatureProvider.action(
-                    mContext,
+                    SettingsEnums.PAGE_UNKNOWN,
                     SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
-                    /* isPrimary= */ false);
+                    SettingsEnums.PAGE_UNKNOWN,
+                    String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId()),
+                    /* isPrimary= */ 0);
             Log.d(
                     TAG,
                     "set device volume, device = "
@@ -174,9 +178,11 @@ public class AudioSharingDeviceVolumeSliderPreference extends SliderPreference {
             int volume = Math.round((float) progress * streamVolumeRange / seekbarRange);
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
             mMetricsFeatureProvider.action(
-                    mContext,
+                    SettingsEnums.PAGE_UNKNOWN,
                     SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
-                    /* isPrimary= */ true);
+                    SettingsEnums.PAGE_UNKNOWN,
+                    String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId()),
+                    /* isPrimary= */ 1);
             Log.d(TAG, "set music stream volume, volume = " + progress);
         } catch (RuntimeException e) {
             Log.e(TAG, "Fail to setAudioManagerStreamVolumeForFallbackDevice, error = " + e);

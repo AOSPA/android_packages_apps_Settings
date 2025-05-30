@@ -49,6 +49,9 @@ class SupervisionPromoFooterPreference(
     override val key: String
         get() = KEY
 
+    // Non indexable as the metadata (title, summary, etc.) is provided by another app with IPC
+    override fun isIndexable(context: Context) = false
+
     override fun createWidget(context: Context): Preference = FooterPreference(context)
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

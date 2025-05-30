@@ -121,7 +121,7 @@ class SupervisionSetupRecoveryPreference :
     private fun accountNameToVerify(context: Context): String? {
         return context
             .getSystemService(SupervisionManager::class.java)
-            ?.supervisionRecoveryInfo
+            ?.getSupervisionRecoveryInfo()
             ?.accountName
     }
 

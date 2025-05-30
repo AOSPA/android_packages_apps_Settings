@@ -32,6 +32,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.communal.CommunalPreferenceController;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen;
@@ -41,6 +42,7 @@ import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
+import com.android.settings.spa.app.catalyst.AppInfoStorageScreen;
 import com.android.settings.system.ShadePanelsPreferenceController;
 import com.android.settings.wifi.WifiUtils;
 
@@ -177,7 +179,11 @@ public class Settings extends SettingsActivity {
     public static class ModuleLicensesActivity extends SettingsActivity { /* empty */ }
     public static class ApplicationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageApplicationsActivity extends SettingsActivity { /* empty */ }
-    public static class AppStorageSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class AppStorageSettingsActivity extends CatalystSettingsActivity {
+        public AppStorageSettingsActivity() {
+            super(AppInfoStorageScreen.KEY, AppStorageSettings.class);
+        }
+    }
     public static class ManageAssistActivity extends SettingsActivity { /* empty */ }
     public static class HighPowerApplicationsActivity extends SettingsActivity { /* empty */ }
     public static class BackgroundCheckSummaryActivity extends SettingsActivity { /* empty */ }

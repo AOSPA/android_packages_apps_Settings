@@ -34,24 +34,13 @@ class SupervisionSafeSearchDataStore(
     override fun contains(key: String) = settingsStore.contains(SEARCH_CONTENT_FILTERS_ENABLED)
 
     override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
-        val settingValue = settingsStore.getInt(SEARCH_CONTENT_FILTERS_ENABLED)
-        val isFilterOff: Boolean = settingValue == null || settingValue <= 0
-        return when (key) {
-            SupervisionSearchFilterOffPreference.KEY -> isFilterOff
-            SupervisionSearchFilterOnPreference.KEY -> !isFilterOff
-            else -> null
-        }
-            as T?
+        val settingValue: Int? = settingsStore.getInt(SEARCH_CONTENT_FILTERS_ENABLED)
+        return (settingValue != null && (settingValue > 0)) as T?
     }
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
         if (value !is Boolean) return
-        when (key) {
-            SupervisionSearchFilterOffPreference.KEY ->
-                settingsStore.setBoolean(SEARCH_CONTENT_FILTERS_ENABLED, !value)
-            SupervisionSearchFilterOnPreference.KEY ->
-                settingsStore.setBoolean(SEARCH_CONTENT_FILTERS_ENABLED, value)
-        }
+        settingsStore.setBoolean(SEARCH_CONTENT_FILTERS_ENABLED, value)
     }
 
     override fun onFirstObserverAdded() {
@@ -61,8 +50,7 @@ class SupervisionSafeSearchDataStore(
 
     override fun onKeyChanged(key: String, reason: Int) {
         // forward data change to preference hierarchy key
-        notifyChange(SupervisionSearchFilterOffPreference.KEY, reason)
-        notifyChange(SupervisionSearchFilterOnPreference.KEY, reason)
+        notifyChange(SupervisionSafeSearchSwitchPreference.KEY, reason)
     }
 
     override fun onLastObserverRemoved() {

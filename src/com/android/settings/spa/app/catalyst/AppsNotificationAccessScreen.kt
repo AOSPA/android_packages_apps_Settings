@@ -18,6 +18,7 @@ package com.android.settings.spa.app.catalyst
 
 import android.Manifest
 import android.app.ActivityManager
+import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -30,16 +31,15 @@ import android.service.notification.NotificationListenerService
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceFragment
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 /** "Apps" -> "Special app access" -> "Notification read, reply & control" */
 @ProvidePreferenceScreen(AppsNotificationAccessScreen.KEY)
-class AppsNotificationAccessScreen : PreferenceScreenCreator {
+open class AppsNotificationAccessScreen : PreferenceScreenMixin {
 
     override val key: String
         get() = KEY
@@ -47,13 +47,16 @@ class AppsNotificationAccessScreen : PreferenceScreenCreator {
     override val title: Int
         get() = R.string.manage_notification_access_title
 
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_apps
+
+    override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
+
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAppList() || Flags.deviceState()
 
     override fun hasCompleteHierarchy() = false
-
-    override fun fragmentClass() = PreferenceFragment::class.java
 
     // TODO: kurtismelby - app highlighting should be supported when there is a
     //   a PreferenceMetadata for a specific app.

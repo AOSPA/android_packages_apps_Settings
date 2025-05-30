@@ -21,6 +21,8 @@
     <string name="create" msgid="986997212165228751">"Gawin"</string>
     <string name="allow" msgid="3763244945363657722">"Payagan"</string>
     <string name="deny" msgid="7326117222944479942">"Tanggihan"</string>
+    <!-- no translation found for edit (8128799559456697510) -->
+    <skip />
     <string name="confirmation_turn_on" msgid="2979094011928347665">"I-on"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Hindi Kilala"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"I-tap para ipakita ang impormasyon"</string>
@@ -931,10 +933,8 @@
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Payagan ang access sa iyong mga contact at history ng tawag"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Payagan din ang access sa mga contact at history ng tawag"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Gagamitin ang impormasyon para sa mga anunsyo sa tawag at higit pa"</string>
-    <!-- no translation found for bluetooth_pairing_confirmation_title (3359642089708714808) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_confirmation_msg (8204761740738350792) -->
-    <skip />
+    <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Tingnan ang mga code ng pagpapares"</string>
+    <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Tingnan kung tumutugma ang code na ito sa code na nasa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>.\n\nPara sa iyong seguridad, huwag ilagay ang code na ito kahit saan."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Hindi makakonekta sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Mga available na device"</string>
@@ -999,8 +999,7 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Higit pang opsyon"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"I-hold at i-drag para baguhin ang ayos ng mga display."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"I-mirror ang built-in na display"</string>
-    <!-- no translation found for wifi_display_settings_title (2622548133505158832) -->
-    <skip />
+    <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirror"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"I-enable ang wireless display"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Walang nakitang kalapit na device."</string>
@@ -1365,6 +1364,11 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Awtomatikong maa-adjust ang brightness ng iyong screen sa kapaligiran at mga aktibidad mo. Maaari mong manual na galawin ang slider para matulungan ang adaptive brightness na matutunan ang iyong mga preference."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Naka-on"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Naka-off"</string>
+    <string name="hdr_brightness_title" msgid="6997980740096282616">"Pinahusay na brightness ng HDR"</string>
+    <string name="hdr_brightness_level_title" msgid="770342878327164738">"Intensity"</string>
+    <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Standard na larawan"</string>
+    <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR na larawan"</string>
+    <string name="hdr_brightness_warning" msgid="2755151579539607928">"Naaapektuhan lang ng setting na ito ang mga larawan at video na sumusuporta sa High Dynamic Range (HDR)."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"White balance ng display"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Magpatuloy sa paggamit ng mga app kapag naka-fold"</string>
@@ -1434,6 +1438,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Mga setting ng Bedtime mode"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Maa-activate din ng mga mode ang madilim na tema}=1{Maa-activate din ng {mode_1} ang madilim na tema}=2{Maa-activate din ng {mode_1} at {mode_2} ang madilim na tema}=3{Maa-activate din ng {mode_1}, {mode_2}, at {mode_3} ang madilim na tema}one{Maa-activate din ng {mode_1}, {mode_2}, at # pa ang madilim na tema}other{Maa-activate din ng {mode_1}, {mode_2}, at # pa ang madilim na tema}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Mga setting ng mga mode"</string>
+    <string name="hdr_brigtness_text" msgid="1912629316654528876">"Paliwanagin at palawakin ang hanay ng kulay at linaw sa mga High Dynamic Range (HDR) na larawan at video. Magmumukhang mas maliwanag ang HDR na content."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Timeout ng screen"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Pagkatapos ng <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ng kawalan ng aktibidad"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Hindi nakatakda"</string>
@@ -2118,6 +2123,8 @@
     <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0.2 segundo"</string>
     <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0.4 segundo"</string>
     <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0.6 segundo"</string>
+    <!-- no translation found for input_setting_keys_dialog_option_custom (2353045390598308685) -->
+    <skip />
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Custom"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"custom na bilang"</string>
     <string name="input_setting_bounce_keys_seekbar_desc" msgid="4575595566548124309">"Threshold ng tagal ng bounce key"</string>
@@ -2135,6 +2142,14 @@
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Dagdagan"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Reverse na pag-scroll"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Gumamit ng mga primary key"</string>
+    <!-- no translation found for mouse_keys_reset_button_label (513004295662247230) -->
+    <skip />
+    <!-- no translation found for mouse_keys_primary_keys_image_list_title (7470827693078490251) -->
+    <skip />
+    <!-- no translation found for mouse_keys_numpad_keys_image_list_title (6682341389811538017) -->
+    <skip />
+    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2728318055237217919) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Mag-scroll pataas para ibaba ang page"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Pag-scroll"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Kontroladong pag-scroll"</string>
@@ -2563,8 +2578,8 @@
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Sobrang liit"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Balewalain ang maliit na paggalaw ng cursor"</string>
     <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"I-revert sa pag-left click pagkatapos ng aksyon"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="2580632445700896655">"Pinakamahusay na gumagana ang autoclick sa 3-button na navigation"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="8007946937334710898">"I-enable ang 3-button na navigation sa mga setting para magamit mo ang autoclick para pumunta sa home, bumalik, at magbukas ng mga kamakailang app."</string>
+    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"Baguhin ang navigation mode para magamit ang autoclick"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"Para bumalik, Home, at lumipat ng app kapag gumagamit ng autoclick, gumamit ng 3-button na navigation sa halip na navigation gamit ang galaw"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Pag-vibrate at haptics"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Kontrolin ang lakas ng pag-vibrate para sa iba\'t ibang paggamit"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Naka-on"</string>
@@ -3524,6 +3539,7 @@
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"background, i-personalize, i-customize ang display"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"laki ng text"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"i-project, i-cast, Pag-mirror ng screen, Pagbabahagi ng screen, pag-mirror, ibahagi ang screen, pag-cast ng screen"</string>
+    <string name="keywords_display_hdr_brightness" msgid="2553194332263860092">"hdr, brightness, high dynamic range, paliwanagin, mas maliwanag"</string>
     <string name="keywords_storage" msgid="3004667910133021783">"espasyo, disk, hard drive, paggamit ng device"</string>
     <string name="keywords_battery" msgid="7040323668283600530">"paggamit ng baterya, pag-charge"</string>
     <string name="keywords_battery_usage" msgid="1763573071014260220">"tingnan ang paggamit ng baterya, paggamit ng baterya, paggamit ng power"</string>
@@ -3614,8 +3630,7 @@
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"keyboard, haptics, pag-vibrate,"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volume at pag-vibrate"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume ng media"</string>
-    <!-- no translation found for remote_media_volume_option_title (7907330631195715350) -->
-    <skip />
+    <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Volume ng Google Cast"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volume ng tawag"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Volume ng alarm"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volume ng pag-ring at notification"</string>
@@ -3646,6 +3661,14 @@
     <string name="emergency_tone_alert" msgid="1977698889522966589">"Mga Tone"</string>
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"Mga Pag-vibrate"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"I-on ang mga tunog"</string>
+    <!-- no translation found for sound_patterns_category_title (4290495769747444271) -->
+    <skip />
+    <!-- no translation found for sound_audio_category_title (3445871661303518618) -->
+    <skip />
+    <!-- no translation found for system_sounds_and_vibrations_category_title (4162079598490981456) -->
+    <skip />
+    <!-- no translation found for work_profile_sound_category_title (1708926655170323454) -->
+    <skip />
     <string name="live_caption_title" msgid="8617086825712756983">"Instant Caption"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"I-autocaption ang media"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Wired na headphones"</string>
@@ -3789,8 +3812,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Payagan ang pag-snooze ng notification"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Notification dot sa icon ng app"</string>
     <string name="notification_bundles" msgid="496852738958148317">"Organizer ng notification"</string>
-    <!-- no translation found for notification_ai_features_title (6497959797331796296) -->
-    <skip />
+    <string name="notification_bundle_promotions_summary" msgid="3196830882575438887">"Mga sale, bagong feature, at higit pa"</string>
+    <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Mga nangungunang kuwento, editorial, at higit pa"</string>
+    <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Mga like, post, at higit pa"</string>
+    <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Mga newsletter, inirerekomendang media, at higit pa"</string>
+    <string name="notification_ai_features_title" msgid="6497959797331796296">"Mga AI-powered na notification"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Mga buod ng notification"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Kumuha ng maiikling recap ng mahahabang mensahe"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Gumamit ng mga buod ng notification"</string>
@@ -3798,12 +3824,12 @@
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Hindi ibubuod ang mga notification mula sa mga app na ito"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Pamahalaan ang mga app"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Payagan ang mga buod ng notification para sa mga app"</string>
-    <string name="notification_excluded_apps" msgid="6648267716069216826">"Mga exception na app"</string>
+    <string name="notification_excluded_apps" msgid="317898848790046528">"Huwag isama ang mga app na ito"</string>
     <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"Ibuod ang mga notification"</string>
     <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"Ibuod ang mga notification ng pag-uusap mula sa app na ito"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Mga live na notification"</string>
-    <string name="live_notifications_switch" msgid="50547709843410137">"Magpakita ng live na impormasyon"</string>
-    <string name="live_notifications_desc" msgid="7383414458419053003">"Nagpapakita ang mga naka-pin na notification ng live na impormasyon mula sa mga app, at palaging lumalabas ito sa status bar at lock screen"</string>
+    <string name="live_notifications_switch" msgid="7745275403210881110">"Mga live na update"</string>
+    <string name="live_notifications_desc" msgid="6857161077319125625">"Ipakita ang mga nagpapatuloy at time-sensitive na notification sa status bar at lock screen"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Mga Bubble"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Mga Bubble"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"I-bubble ang pag-uusap na ito"</string>
@@ -3958,10 +3984,8 @@
     <string name="notification_bundle_description" msgid="8439963475488583612">"Pumili ng mga uri ng notification na gusto mong i-mute at i-bundle para mabawasan ang mga abala. Ang pag-bundle ay AI-powered at posibleng may mga error."</string>
     <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"I-bundle ang mga notification"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Imu-mute at pagsasama-samahin ang mga notification na may magkakatulad na tema para sa mas tahimik na experience"</string>
-    <string name="notification_bundle_excluded_description" msgid="2667461772332132250">"Hindi maba-bundle ang mga notification sa mga app na ito"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Payagan ang pag-bundle ng notification para sa mga app"</string>
-    <!-- no translation found for notification_adjustment_work_switch_title (5858034709870660002) -->
-    <skip />
+    <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Ilapat sa mga app ng profile sa trabaho"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Mga serbisyong pantulong sa VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Walang mga naka-install na app ang humiling na mapagana bilang mga serbisyong pantulong sa VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Payagan ang access sa serbisyo ng VR para sa <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4884,6 +4908,10 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Tiyaking pinagkakatiwalaan mo ang app na ito&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Ginagamit ng &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; ang nasa iyong screen para matukoy kung ano ang pwedeng i-autofill."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Gamitin ang &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Mase-save ang mga bagong password, passkey, at iba pang impormasyon dito mula ngayon. Puwdeng gamitin ng &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kung ano ang nasa screen mo para matukoy kung ano ang puwedeng i-autofill."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"Gustong serbisyo para sa mga password, mga passkey, at autofill"</string>
+    <!-- no translation found for credman_picker_title_new (4292105803864397398) -->
+    <skip />
+    <!-- no translation found for credman_picker_page_summary (4633938046738617332) -->
+    <skip />
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"I-off ang %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;I-off ang serbisyong ito?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Hindi pupunan ang mga naka-save na impormasyon tulad ng mga password, passkey, paraan ng pagbabayad, at iba pang impormasyon kapag nag-sign in ka. Para magamit ang iyong naka-save na impormasyon, pumili ng serbisyo ng password, passkey, o data."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Mga password, passkey, at account"</string>
@@ -5106,6 +5134,7 @@
     <string name="title_supported_service" msgid="4275535165812691571">"Kapag nakakonekta na ang iyong telepono sa satellite"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Sundin ang mga hakbang para kumonekta sa satellite"</string>
     <string name="summary_supported_service" msgid="6380533552383355977">"Puwede kang mag-text kahit kanino, kasama ang mga serbisyong pang-emergency, at gumamit ng limitadong data sa ilang app. Kokonekta ulit ang iyong telepono sa mobile network kapag available."</string>
+    <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Puwede kang mag-text sa kahit sino, kasama ang mga serbisyong pang-emergency. Kokonekta ulit ang iyong telepono sa mobile network kapag available."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Kapag nakakonekta na ang iyong telepono, puwede kang mag-text sa kahit sino, kasama ang mga serbisyong pang-emergency."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Tandaan"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Posibleng mas tumagal ang koneksyon sa satellite at available lang ito sa ilang lugar."</string>
@@ -5380,6 +5409,8 @@
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Para mabilis na maipagpatuloy ang pag-playback, mananatiling bukas ang media player sa lock screen"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Itago ang player"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Ipakita ang player"</string>
+    <string name="media_controls_suggestions_title" msgid="4089438765632340413">"Mga suhestyon sa media"</string>
+    <string name="media_controls_suggestions_description" msgid="5001121785028325037">"Magbigay ng mga suhestyon sa media mula sa mga media app batay sa iyong aktibidad at lokasyon."</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Payagan ang mga extension ng software ng camera"</string>
     <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Ine-enable ang default na pagpapatupad ng software ng mga advanced na feature ng camera, tulad ng HDR, Night, o iba pang extension ng camera."</string>
@@ -5444,6 +5475,7 @@
     <string name="category_name_general" msgid="7737273712848115886">"Pangkalahatan"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Gumamit ng Madilim na tema"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Gumamit ng Bluetooth"</string>
+    <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"Gumamit ng pinahusay na brightness ng HDR"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Gamitin ang pigilan ang pag-ring"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Gamitin ang Wi‑Fi hotspot"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Gamitin ang pag-pin ng app"</string>
@@ -5737,6 +5769,8 @@
     <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Suriin ang password at subukan ulit"</string>
     <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Hindi makakonekta. Subukan ulit."</string>
     <string name="audio_streams_connecting_summary" msgid="7237827765572331702">"Kumokonekta…"</string>
+    <string name="audio_streams_dialog_failed_to_join" msgid="4942840673393552978">"Hindi nakasali sa audio stream"</string>
+    <string name="audio_streams_dialog_failed_to_join_detail" msgid="1498719800517594252">"Hindi makakonekta ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g> sa audio stream"</string>
     <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Hindi available ang audio stream"</string>
     <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Walang pine-play ang audio stream na ito sa ngayon"</string>
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Isara"</string>
@@ -5813,16 +5847,20 @@
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"I-verify ang iyong email"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Mga filter ng content sa web"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Mga Website"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title" msgid="1786398287521485576">"I-block ang explicit na content sa web"</string>
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary" msgid="1427357961145247788">"Para sa mga browser sa device na ito"</string>
-    <string name="supervision_web_content_filters_browser_allow_all_sites_title" msgid="3909739592466381845">"Payagan ang lahat ng site"</string>
+    <!-- no translation found for supervision_web_content_filters_browser_filter_title (7957976669412075070) -->
+    <skip />
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Mga resulta ng paghahanap"</string>
-    <string name="supervision_web_content_filters_search_filter_on_title" msgid="1136440775294190806">"I-block ang explicit na resulta ng paghahanap"</string>
-    <string name="supervision_web_content_filters_search_filter_on_summary" msgid="6797184284369033101">"Para sa mga search engine sa device na ito"</string>
-    <string name="supervision_web_content_filters_search_filter_off_title" msgid="7171966260908166395">"Naka-off ang filter"</string>
+    <!-- no translation found for supervision_web_content_filters_search_filter_title (4212134055017429017) -->
+    <skip />
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Ilagay ang PIN sa pamamahala"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Magtakda ng PIN ng parental controls"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Kumpirmahin ang PIN"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Na-update na ang PIN"</string>
+    <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"I-delete ang PIN?"</string>
+    <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"Ide-delete nito ang iyong kasalukuyang PIN para sa lahat ng user sa device na ito at idi-disable nito ang mga kontrol na na-set up mo. Hindi maa-undo ang aksyong ito."</string>
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"I-pause muna ang mga kontrol sa ibang profile"</string>
+    <string name="supervision_delete_pin_supervision_enabled_message" msgid="5643922966568203196">"Para magpatuloy sa pag-delete ng PIN na ito at pag-reset sa mga setting ng pamamahala, i-pause ang mga kontrol sa lahat ng iba pang profile."</string>
+    <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Hindi puwedeng i-delete ang PIN"</string>
+    <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Nagka-error habang sinusubukang i-delete ang PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>
 </resources>

@@ -31,6 +31,7 @@ import android.service.notification.NotificationListenerService;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.sound.VolumeSliderPreference;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.Before;
@@ -62,7 +63,7 @@ public class RingVolumePreferenceControllerTest {
     @Mock
     private Resources mResources;
     @Mock
-    private VolumeSeekBarPreference mPreference;
+    private VolumeSliderPreference mPreference;
 
     private Context mContext;
 

@@ -43,6 +43,18 @@ class SourcePresentState extends AudioStreamStateHandler {
     }
 
     @Override
+    void onEnter(
+            AudioStreamPreference preference,
+            AudioStreamsProgressCategoryController controller,
+            AudioStreamsHelper helper,
+            AudioStreamScanHelper scanHelper) {
+        mMetricsFeatureProvider.action(
+                preference.getContext(),
+                SettingsEnums.ACTION_AUDIO_STREAM_JOIN_PRESENT_SUCCEED,
+                preference.getSourceOriginForLogging().ordinal());
+    }
+
+    @Override
     int getSummary() {
         return AUDIO_STREAM_SOURCE_PRESENT_STATE_SUMMARY;
     }

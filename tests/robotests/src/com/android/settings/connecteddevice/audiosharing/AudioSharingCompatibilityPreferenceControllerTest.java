@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_VALUE;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
@@ -39,6 +40,8 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.os.Looper;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -136,8 +139,8 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStart_flagOn_registerCallback() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStart(mLifecycleOwner);
         verify(mBroadcast)
                 .registerServiceCallBack(
@@ -146,8 +149,8 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStart_flagOnProfileNotReady_registerProfileCallback() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         when(mBroadcast.isProfileReady()).thenReturn(false);
         mController.onStart(mLifecycleOwner);
         verify(mBroadcast, never())
@@ -157,8 +160,8 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStart_flagOff_doNothing() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStart(mLifecycleOwner);
         verify(mBroadcast, never())
                 .registerServiceCallBack(
@@ -166,8 +169,8 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStop_flagOn_unregisterCallback() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.setCallbacksRegistered(true);
         mController.onStop(mLifecycleOwner);
         verify(mBroadcast).unregisterServiceCallBack(any(BluetoothLeBroadcast.Callback.class));
@@ -175,8 +178,8 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStop_flagOff_doNothing() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.setCallbacksRegistered(true);
         mController.onStop(mLifecycleOwner);
         verify(mBroadcast, never())
@@ -185,8 +188,8 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onServiceConnected_updateSwitch() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         when(mBroadcast.isEnabled(null)).thenReturn(false);
         when(mBroadcast.isProfileReady()).thenReturn(false);
         mController.displayPreference(mScreen);
@@ -206,14 +209,14 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void getAvailabilityStatus_flagOn() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void getAvailabilityStatus_flagOff() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
@@ -271,7 +274,12 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
         boolean setChecked = mController.setChecked(false);
         verify(mBroadcast).setImproveCompatibility(false);
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_IMPROVE_COMPATIBILITY, false);
+                .action(
+                        SettingsEnums.PAGE_UNKNOWN,
+                        SettingsEnums.ACTION_AUDIO_SHARING_IMPROVE_COMPATIBILITY,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        /* changedPreferenceKey */ METRIC_KEY_VALUE.toString(),
+                        /* changedPreferenceIntValue */ 0);
         assertThat(setChecked).isTrue();
     }
 

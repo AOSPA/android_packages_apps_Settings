@@ -49,6 +49,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel;
 import com.android.settings.connecteddevice.stylus.StylusDevicesController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -68,6 +69,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import com.google.common.collect.ImmutableList;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -191,6 +195,9 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        String callingAppPackageName =
+                ((SettingsActivity) getActivity()).getInitialCallingPackage();
+        logPageEntrypoint(context, callingAppPackageName, getIntent());
         localBluetoothManager = getLocalBluetoothManager(context);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mUserManager = getUserManager();
@@ -549,6 +556,24 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
             // that will show on non-stylus bluetooth devices.
             // That title is set via the manifest and also from BluetoothDeviceUpdater.
             getActivity().setTitle(getContext().getString(R.string.stylus_device_details_title));
+        }
+    }
+
+    private void logPageEntrypoint(
+            @NonNull Context context,
+            @Nullable String callingAppPackageName,
+            @Nullable Intent intent) {
+        String action = intent != null ? intent.getAction() : "";
+        JSONObject formattedLogging = new JSONObject();
+        try {
+            formattedLogging.put("calling_package", callingAppPackageName);
+            formattedLogging.put("intent_action", action);
+            mMetricsFeatureProvider.action(
+                    context,
+                    SettingsEnums.ACTION_OPEN_SETTINGS_DEVICE_DETAILS,
+                    formattedLogging.toString());
+        } catch (JSONException e) {
+            Log.w(TAG, "Error happened when logging entrypoint");
         }
     }
 }

@@ -46,7 +46,8 @@ open class SearchFeatureProviderImpl : SearchFeatureProvider {
             return
         }
         throw SecurityException(
-            "Search result intents must be called with from an allowlisted package.")
+            "Search result intents must be called with from an allowlisted package: $callerPackage"
+        )
     }
 
     override fun getSearchIndexableResources(): SearchIndexableResources =

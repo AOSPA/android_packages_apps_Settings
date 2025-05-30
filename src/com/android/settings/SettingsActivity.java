@@ -247,10 +247,7 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private int lookupMetricsCategory() {
         int category = SettingsEnums.PAGE_UNKNOWN;
-        Bundle args = null;
-        if (getIntent() != null) {
-            args = getInitialFragmentArguments(getIntent());
-        }
+        Bundle args = getInitialFragmentArguments(getIntent());
 
         Fragment fragment = Utils.getTargetFragment(this, getMetricsTag(), args);
 
@@ -263,10 +260,7 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     private String getMetricsTag() {
-        String tag = null;
-        if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_FRAGMENT)) {
-            tag = getInitialFragmentName(getIntent());
-        }
+        String tag = getInitialFragmentName(getIntent());
 
         if (TextUtils.isEmpty(tag)) {
             Log.w(LOG_TAG, "MetricsTag is invalid " + tag);

@@ -28,6 +28,7 @@ import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.network.SatelliteRepository
 import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.network.telephony.SubscriptionActivationRepository
 import com.google.common.truth.Truth.assertThat
@@ -52,10 +53,10 @@ class MobileDataSwitchPreferenceTest {
     private val mockMobileDataRepository =
         mock<MobileDataRepository> { on { isMobileDataEnabledFlow(any()) } doReturn emptyFlow() }
 
-    private val mockSubscriptionActivationRepository =
-        mock<SubscriptionActivationRepository> {
-            on { isActivationChangeableFlow() } doReturn flowOf(
-                true
+    private val mockSatelliteRepository=
+        mock<SatelliteRepository> {
+            on { getIsSessionStartedFlow() } doReturn flowOf(
+                false
             )
         }
 
@@ -66,7 +67,7 @@ class MobileDataSwitchPreferenceTest {
                 MobileDataSwitchPreference(
                     SUB_ID,
                     mockMobileDataRepository,
-                    mockSubscriptionActivationRepository
+                    mockSatelliteRepository
                 ) {}
             }
         }
@@ -83,7 +84,7 @@ class MobileDataSwitchPreferenceTest {
                 MobileDataSwitchPreference(
                     SUB_ID,
                     mockMobileDataRepository,
-                    mockSubscriptionActivationRepository
+                    mockSatelliteRepository
                 ) {}
             }
         }
@@ -104,7 +105,7 @@ class MobileDataSwitchPreferenceTest {
                 MobileDataSwitchPreference(
                     SUB_ID,
                     mockMobileDataRepository,
-                    mockSubscriptionActivationRepository
+                    mockSatelliteRepository
                 ) {
                     newCheckedCalled = it
                 }
@@ -119,13 +120,13 @@ class MobileDataSwitchPreferenceTest {
     }
 
     @Test
-    fun changeable_activationIsNotChangeable_notEnabled() {
+    fun changeable_satelliteIsStarted_notEnabled() {
         mockMobileDataRepository.stub {
             on { isMobileDataEnabledFlow(SUB_ID) } doReturn flowOf(true)
         }
 
-        mockSubscriptionActivationRepository.stub {
-            on { isActivationChangeableFlow() } doReturn flowOf(false)
+        mockSatelliteRepository.stub {
+            on { getIsSessionStartedFlow() } doReturn flowOf(true)
         }
 
         composeTestRule.setContent {
@@ -133,7 +134,7 @@ class MobileDataSwitchPreferenceTest {
                 MobileDataSwitchPreference(
                     SUB_ID,
                     mockMobileDataRepository,
-                    mockSubscriptionActivationRepository
+                    mockSatelliteRepository
                 ) {
                 }
             }
@@ -145,13 +146,9 @@ class MobileDataSwitchPreferenceTest {
     }
 
     @Test
-    fun changeable_activationIsChangeable_enabled() {
+    fun changeable_satelliteIsNotStarted_Changeable_enabled() {
         mockMobileDataRepository.stub {
             on { isMobileDataEnabledFlow(SUB_ID) } doReturn flowOf(true)
-        }
-
-        mockSubscriptionActivationRepository.stub {
-            on { isActivationChangeableFlow() } doReturn flowOf(true)
         }
 
         composeTestRule.setContent {
@@ -159,7 +156,7 @@ class MobileDataSwitchPreferenceTest {
                 MobileDataSwitchPreference(
                     SUB_ID,
                     mockMobileDataRepository,
-                    mockSubscriptionActivationRepository
+                    mockSatelliteRepository
                 ) {
                 }
             }

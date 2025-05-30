@@ -41,6 +41,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -791,7 +792,6 @@ public class ChooseLockPattern extends SettingsActivity {
             // the rest of the stuff varies enough that it is easier just to handle
             // on a case by case basis.
             mLockPatternView.setDisplayMode(DisplayMode.Correct);
-            boolean announceAlways = false;
 
             switch (mUiStage) {
                 case Introduction:
@@ -804,7 +804,6 @@ public class ChooseLockPattern extends SettingsActivity {
                 case ConfirmWrong:
                     mLockPatternView.setDisplayMode(DisplayMode.Wrong);
                     postClearPatternRunnable();
-                    announceAlways = true;
                     break;
                 case FirstChoiceValid:
                     break;
@@ -815,14 +814,8 @@ public class ChooseLockPattern extends SettingsActivity {
                     break;
             }
 
-            // If the stage changed, announce the header for accessibility. This
-            // is a no-op when accessibility is disabled.
-            if (previousStage != stage || announceAlways) {
-                if (stage == Stage.NeedToConfirm) {
-                    // If the Stage is NeedToConfirm, move the a11y focus to the header.
-                    mHeaderText.requestAccessibilityFocus();
-                }
-            }
+            mHeaderText.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+
         }
 
         protected void updateFooterLeftButton(Stage stage) {

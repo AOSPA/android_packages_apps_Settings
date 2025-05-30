@@ -52,7 +52,8 @@ public class AudioStreamsDialogFragmentTest {
     public void setUp() {
         mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         mDialogBuilder = spy(new AudioStreamsDialogFragment.DialogBuilder(mContext));
-        mFragment = new AudioStreamsDialogFragment(mDialogBuilder, SettingsEnums.PAGE_UNKNOWN);
+        mFragment = new AudioStreamsDialogFragment();
+        mFragment.init(mDialogBuilder, SettingsEnums.PAGE_UNKNOWN);
     }
 
     @After

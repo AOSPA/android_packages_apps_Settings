@@ -300,4 +300,62 @@ class SatelliteRepositoryTest {
 
         assertThat(result.isEmpty()).isTrue()
     }
+
+
+    @Test
+    fun requestIsSupportedFlow_error_returnFalse() = runBlocking {
+        whenever(
+            mockSatelliteManager.requestIsSupported(
+                eq(mockExecutor), any<OutcomeReceiver<Boolean, SatelliteException>>()
+            )
+        )
+            .thenAnswer { invocation ->
+                val receiver =
+                    invocation.getArgument<OutcomeReceiver<Boolean, SatelliteException>>(1)
+                receiver.onError(SatelliteException(SatelliteManager.SATELLITE_RESULT_ERROR))
+                null
+            }
+
+        val result = repository.requestIsSupportedFlow()
+
+        assertThat(result.first()).isFalse()
+    }
+
+    @Test
+    fun requestIsSupportedFlow_notSupported_returnFalse() = runBlocking {
+        whenever(
+            mockSatelliteManager.requestIsSupported(
+                eq(mockExecutor), any<OutcomeReceiver<Boolean, SatelliteException>>()
+            )
+        )
+            .thenAnswer { invocation ->
+                val receiver =
+                    invocation.getArgument<OutcomeReceiver<Boolean, SatelliteException>>(1)
+                receiver.onResult(false)
+                null
+            }
+
+        val result = repository.requestIsSupportedFlow()
+
+        assertThat(result.first()).isFalse()
+    }
+
+    @Test
+    fun requestIsSupportedFlow_supported_returnTrue() = runBlocking {
+        whenever(
+            mockSatelliteManager.requestIsSupported(
+                eq(mockExecutor), any<OutcomeReceiver<Boolean, SatelliteException>>()
+            )
+        )
+            .thenAnswer { invocation ->
+                val receiver =
+                    invocation.getArgument<OutcomeReceiver<Boolean, SatelliteException>>(1)
+                receiver.onResult(true)
+                null
+            }
+
+        val result = repository.requestIsSupportedFlow()
+
+        assertThat(result.first()).isFalse()
+    }
 }

@@ -18,6 +18,7 @@ package com.android.settings.display
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ScreenTimeoutActivity
 import com.android.settings.core.PreferenceScreenMixin
@@ -44,7 +45,7 @@ open class ScreenTimeoutScreen : PreferenceScreenMixin {
 
     override fun isFlagEnabled(context: Context) = Flags.catalystScreenTimeout()
 
-    override fun fragmentClass() = ScreenTimeoutSettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? = ScreenTimeoutSettings::class.java
 
     override fun hasCompleteHierarchy() = false
 

@@ -5039,6 +5039,14 @@
     <string name="mouse_reverse_vertical_scrolling">Reverse scrolling</string>
     <!-- Title for a toggle switch for 'Use primary keys' under mouse key main page, an accessibility setting that allows the user to use primary keyboard keys to control the cursor instead of using numpad keys. [CHAR LIMIT=35] -->
     <string name="mouse_keys_use_primary_keys_title">Use primary keys</string>
+    <!-- Label for the reset settings button in mouse key main page, [CHAR LIMIT=35] -->
+    <string name="mouse_keys_reset_button_label">Reset settings</string>
+    <!-- Title for the primary keys keyboard diagrams in mouse key main page, [CHAR LIMIT=35] -->
+    <string name="mouse_keys_primary_keys_image_list_title">How to use primary keys</string>
+    <!-- Title for the numpad keys keyboard diagrams in mouse key main page. [CHAR LIMIT=35] -->
+    <string name="mouse_keys_numpad_keys_image_list_title">How to use a numeric keypad</string>
+    <!-- Summary text for the numpad keys keyboard diagrams in mouse key main page. [CHAR LIMIT=35] -->
+    <string name="mouse_keys_numpad_keys_image_list_summary">Numeric keypad will always be used when Num Lock is on</string>
     <!-- Summary text for the 'Mouse reverse scrolling' preference switch indicating to users that when the setting is enabled that scrolling up with their mouse wheel will move the page content down. [CHAR LIMIT=NONE] -->
     <string name="mouse_reverse_vertical_scrolling_summary">Scroll up to move the page down</string>
     <!-- Title for the scrolling section of the mouse settings page. [CHAR LIMIT=60] -->
@@ -5098,7 +5106,7 @@
     <!-- Title for the button to trigger the 'mouse settings' page if connect with a mouse. [CHAR LIMIT=35] -->
     <string name="mouse_settings">Mouse</string>
     <!-- Summary text for mouse setting page. [CHAR LIMIT=35] -->
-    <string name="mouse_settings_summary">Pointer speed, swap buttons, button customization</string>
+    <string name="mouse_settings_summary">Pointer speed, button customization</string>
     <!-- Summary text for the 'trackpad settings' page. [CHAR LIMIT=100] -->
     <string name="trackpad_settings_summary">Pointer speed, gestures</string>
 
@@ -5421,6 +5429,9 @@
     <!-- label for usage time -->
     <string name="usage_time_label">Usage time</string>
 
+    <!-- In the Testing screen. The item title of the activity that shows the new phone information v2.  -->
+    <string name="phone_information_v2_title">Phone Information V2</string>
+
     <!-- Accessibility settings -->
     <skip />
 
@@ -5506,6 +5517,8 @@
     <string name="accessibility_send_feedback_title">Send feedback</string>
     <!-- The menu item to start the survey process for the accessibility [CHAR LIMIT=30] -->
     <string name="accessibility_send_survey_title">Rate us</string>
+    <!-- The menu item to start the disability support for the accessibility [CHAR LIMIT=30] -->
+    <string name="accessibility_disability_support_title">Contact Google Disability Support</string>
     <!-- Channel name for the accessibility survey notification. [CHAR LIMIT=50] -->
     <string name="accessibility_send_survey_notification_channel">Accessibility Survey</string>
     <!-- Title of a survey notification about dark theme. [CHAR LIMIT=50] -->
@@ -5612,14 +5625,6 @@
     <string name="accessibility_magnification_mode_dialog_option_switch">Switch between full and partial screen</string>
     <!-- Message of the magnification mode option to choose the magnification mode. [CHAR LIMIT=none] -->
     <string name="accessibility_magnification_area_settings_mode_switch_summary">Tap the switch button to move between both options</string>
-    <!-- Title for the accessibility magnification switch shortcut dialog. [CHAR LIMIT=48] -->
-    <string name="accessibility_magnification_switch_shortcut_title">Switch to accessibility button?</string>
-    <!-- Message for the accessibility magnification switch shortcut dialog. [CHAR LIMIT=none] -->
-    <string name="accessibility_magnification_switch_shortcut_message">Using triple-tap to magnify part of your screen causes typing and other delays.\n\nThe accessibility button floats on your screen over other apps. Tap it to magnify.</string>
-    <!-- Title for the switch shortcut button in accessibility switch shortcut dialog to change the config shortcut value. [CHAR LIMIT=45] -->
-    <string name="accessibility_magnification_switch_shortcut_positive_button">Switch to accessibility button</string>
-    <!-- Title for the cancel button in accessibility switch shortcut dialog to keep the config shortcut value. [CHAR LIMIT=54] -->
-    <string name="accessibility_magnification_switch_shortcut_negative_button">Use triple-tap</string>
     <!-- Title for the accessibility magnification triple tap warning dialog. [CHAR LIMIT=48] -->
     <string name="accessibility_magnification_triple_tap_warning_title">This may slow down your keyboard</string>
     <!-- Message for the accessibility magnification triple tap warning dialog. [CHAR LIMIT=none] -->
@@ -8744,6 +8749,18 @@ Data usage charges may apply.</string>
 
     <!-- Sound: Other sounds: Title for the option enabling boot sounds. [CHAR LIMIT=30] -->
     <string name="boot_sounds_title">Power on sounds</string>
+
+    <!-- Sound: Title for the sound patterns category. [CHAR LIMIT=60] -->
+    <string name="sound_patterns_category_title">Sound patterns</string>
+
+    <!-- Sound: Title for the audio category. [CHAR LIMIT=60] -->
+    <string name="sound_audio_category_title">Audio</string>
+
+    <!-- Sound: Title for the system sounds & vibrations category. [CHAR LIMIT=60] -->
+    <string name="system_sounds_and_vibrations_category_title">System sounds &amp; vibrations</string>
+
+    <!-- Sound: Title for the work profile sound category. [CHAR LIMIT=60] -->
+    <string name="work_profile_sound_category_title">Work profile sound</string>
 
     <!-- Setting title for controlling how caption text display in real time [CHAR LIMIT=40]-->
     <string name="live_caption_title">Live Caption</string>
@@ -14687,8 +14704,6 @@ Data usage charges may apply.</string>
     <string name="supervision_settings_title">Parental controls</string>
     <!-- Description for Supervision settings menu entry [CHAR LIMIT=NONE] -->
     <string name="supervision_settings_summary">Content restrictions &amp; other limits</string>
-    <!-- Title of toggle to enable or disable device supervision [CHAR LIMIT=60] -->
-    <string name="device_supervision_switch_title">Use device supervision</string>
     <!-- Description of device supervision toggle when PIN has never been set up [CHAR LIMIT=NONE] -->
     <string name="device_supervision_switch_no_pin_summary">Set up PIN</string>
     <!-- Description of device supervision toggle when PIN is set up but supervision is not enabled [CHAR LIMIT=NONE] -->
@@ -14717,24 +14732,18 @@ Data usage charges may apply.</string>
     <string name="supervision_verify_pin_recovery_title">Verify your email</string>
     <!-- Title for web content filters entry [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_title">Web content filters</string>
+    <!-- Top intro for web content filters [CHAR LIMIT=NONE] -->
+    <string name="supervision_web_content_filters_top_intro">Block mature content on websites and search results on supported apps on this device. Unsupported apps may still show explicit content.</string>
     <!-- Title for web content filters browser category [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_browser_title">Websites</string>
-    <!-- Title for web content filters browser category block explicit sites option [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_title">Block explicit web content</string>
-    <!-- Summary for web content filters browser category block explicit sites option [CHAR LIMIT=NONE] -->
-    <string name="supervision_web_content_filters_browser_block_explicit_sites_summary">For browsers on this device</string>
-    <!-- Title for web content filters browser category allow all sites option [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_browser_allow_all_sites_title">Allow all sites</string>
+    <!-- Title for web content filters browser filters [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_browser_filter_title">Block explicit sites</string>
     <!-- Title for web content filters search category [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_search_title">Search results</string>
-    <!-- Title for web content filters search category filter on option [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_search_filter_on_title">Block explicit search result</string>
-    <!-- Summary for web content filters search category filter on option [CHAR LIMIT=NONE] -->
-    <string name="supervision_web_content_filters_search_filter_on_summary">For search engines on this device</string>
+    <!-- Title for web content filters search filters switch [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_search_filter_title">Filter out explicit search results</string>
     <!-- Learn more link for web content filters footer. [CHAR LIMIT=NONE]-->
     <string name="supervision_web_content_filters_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_web_filters</string>
-    <!-- Title for web content filters search category filter off option [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_search_filter_off_title">Filter off</string>
     <!-- Generic content description that is attached to the preview illustration at the top of an Accessibility feature toggle page. [CHAR LIMIT=NONE] -->
     <!-- Title for supervision PIN verification screen [CHAR LIMIT=60] -->
     <string name="supervision_full_screen_pin_verification_title">Enter supervision PIN</string>

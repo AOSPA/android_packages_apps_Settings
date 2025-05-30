@@ -16,10 +16,11 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_IS_PRIMARY;
+
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -131,9 +132,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
         assertThat(mPreference.getMax()).isEqualTo(AudioSharingDeviceVolumePreference.MAX_VOLUME);
         assertThat(mPreference.getMin()).isEqualTo(AudioSharingDeviceVolumePreference.MIN_VOLUME);
         assertThat(mPreference.getTitle().toString()).isEqualTo(TEST_DEVICE_NAME);
-        verify(mPreference).setSeekBarContentDescription(
-                mContext.getString(R.string.audio_sharing_device_volume_description,
-                        TEST_DEVICE_NAME));
+        verify(mPreference)
+                .setSeekBarContentDescription(
+                        mContext.getString(
+                                R.string.audio_sharing_device_volume_description,
+                                TEST_DEVICE_NAME));
     }
 
     @Test
@@ -144,9 +147,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
         verifyNoInteractions(mAudioManager);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
-                        /* isPrimary= */ false);
+                        SettingsEnums.PAGE_UNKNOWN,
+                        String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId()),
+                        /* isPrimary */ 0);
     }
 
     @Test
@@ -157,9 +162,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
         verifyNoInteractions(mAudioManager);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
-                        /* isPrimary= */ false);
+                        SettingsEnums.PAGE_UNKNOWN,
+                        String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId()),
+                        /* isPrimary */ 0);
     }
 
     @Test
@@ -171,9 +178,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
         verifyNoInteractions(mAudioManager);
         verify(mFeatureFactory.metricsFeatureProvider, never())
                 .action(
-                        any(Context.class),
+                        eq(SettingsEnums.PAGE_UNKNOWN),
                         eq(SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME),
-                        anyBoolean());
+                        eq(SettingsEnums.PAGE_UNKNOWN),
+                        eq(String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId())),
+                        anyInt());
     }
 
     @Test
@@ -184,9 +193,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
         verifyNoInteractions(mAudioManager);
         verify(mFeatureFactory.metricsFeatureProvider, never())
                 .action(
-                        any(Context.class),
+                        eq(SettingsEnums.PAGE_UNKNOWN),
                         eq(SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME),
-                        anyBoolean());
+                        eq(SettingsEnums.PAGE_UNKNOWN),
+                        eq(String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId())),
+                        anyInt());
     }
 
     @Test
@@ -200,9 +211,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
                 .setStreamVolume(AudioManager.STREAM_MUSIC, TEST_MAX_STREAM_VALUE, /* flags= */ 0);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
-                        /* isPrimary= */ true);
+                        SettingsEnums.PAGE_UNKNOWN,
+                        String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId()),
+                        /* isPrimary */ 1);
     }
 
     @Test
@@ -216,9 +229,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
                 .setStreamVolume(AudioManager.STREAM_MUSIC, TEST_MAX_STREAM_VALUE, /* flags= */ 0);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
-                        /* isPrimary= */ true);
+                        SettingsEnums.PAGE_UNKNOWN,
+                        String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId()),
+                        /* isPrimary */ 1);
     }
 
     @Test
@@ -232,9 +247,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
         verifyNoInteractions(mAudioManager);
         verify(mFeatureFactory.metricsFeatureProvider, never())
                 .action(
-                        any(Context.class),
+                        eq(SettingsEnums.PAGE_UNKNOWN),
                         eq(SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME),
-                        anyBoolean());
+                        eq(SettingsEnums.PAGE_UNKNOWN),
+                        eq(String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId())),
+                        anyInt());
     }
 
     @Test
@@ -247,9 +264,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
         verifyNoInteractions(mAudioManager);
         verify(mFeatureFactory.metricsFeatureProvider, never())
                 .action(
-                        any(Context.class),
+                        eq(SettingsEnums.PAGE_UNKNOWN),
                         eq(SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME),
-                        anyBoolean());
+                        eq(SettingsEnums.PAGE_UNKNOWN),
+                        eq(String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId())),
+                        anyInt());
     }
 
     @Test
@@ -266,9 +285,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
                 .setStreamVolume(AudioManager.STREAM_MUSIC, TEST_MAX_STREAM_VALUE, /* flags= */ 0);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
-                        /* isPrimary= */ true);
+                        SettingsEnums.PAGE_UNKNOWN,
+                        String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId()),
+                        /* isPrimary */ 1);
     }
 
     @Test
@@ -285,9 +306,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
                 .setStreamVolume(AudioManager.STREAM_MUSIC, TEST_MAX_STREAM_VALUE, /* flags= */ 0);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
-                        /* isPrimary= */ true);
+                        SettingsEnums.PAGE_UNKNOWN,
+                        String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId()),
+                        /* isPrimary */ 1);
     }
 
     @Test
@@ -304,9 +327,11 @@ public class AudioSharingDeviceVolumePreferenceTest {
         verifyNoInteractions(mAudioManager);
         verify(mFeatureFactory.metricsFeatureProvider, never())
                 .action(
-                        any(Context.class),
+                        eq(SettingsEnums.PAGE_UNKNOWN),
                         eq(SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME),
-                        anyBoolean());
+                        eq(SettingsEnums.PAGE_UNKNOWN),
+                        eq(String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId())),
+                        anyInt());
     }
 
     @Test
@@ -322,23 +347,25 @@ public class AudioSharingDeviceVolumePreferenceTest {
         verifyNoInteractions(mAudioManager);
         verify(mFeatureFactory.metricsFeatureProvider, never())
                 .action(
-                        any(Context.class),
+                        eq(SettingsEnums.PAGE_UNKNOWN),
                         eq(SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME),
-                        anyBoolean());
+                        eq(SettingsEnums.PAGE_UNKNOWN),
+                        eq(String.valueOf(METRIC_KEY_DEVICE_IS_PRIMARY.getId())),
+                        anyInt());
     }
 
     @Test
     public void equals_returnsTrue() {
-        AudioSharingDeviceVolumePreference preference = new AudioSharingDeviceVolumePreference(
-                mContext, mCachedDevice);
+        AudioSharingDeviceVolumePreference preference =
+                new AudioSharingDeviceVolumePreference(mContext, mCachedDevice);
         assertThat(mPreference.equals(preference)).isTrue();
     }
 
     @Test
     public void equals_returnsFalse() {
         CachedBluetoothDevice cachedDevice = mock(CachedBluetoothDevice.class);
-        AudioSharingDeviceVolumePreference preference = new AudioSharingDeviceVolumePreference(
-                mContext, cachedDevice);
+        AudioSharingDeviceVolumePreference preference =
+                new AudioSharingDeviceVolumePreference(mContext, cachedDevice);
         assertThat(mPreference.equals(preference)).isFalse();
     }
 
@@ -361,7 +388,9 @@ public class AudioSharingDeviceVolumePreferenceTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(mPreference.getTitle().toString()).isEqualTo("new");
-        verify(mPreference).setSeekBarContentDescription(
-                mContext.getString(R.string.audio_sharing_device_volume_description, "new"));
+        verify(mPreference)
+                .setSeekBarContentDescription(
+                        mContext.getString(
+                                R.string.audio_sharing_device_volume_description, "new"));
     }
 }

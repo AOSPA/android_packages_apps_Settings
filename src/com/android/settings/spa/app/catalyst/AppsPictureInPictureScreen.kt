@@ -16,12 +16,14 @@
 
 package com.android.settings.spa.app.catalyst
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings.ACTION_PICTURE_IN_PICTURE_SETTINGS
 import com.android.settings.R
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.spa.app.catalyst.AppInfoPictureInPictureScreen.Companion.supportsPictureInPicture
 import com.android.settingslib.metadata.PreferenceHierarchy
@@ -30,13 +32,11 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.asyncPreferenceHierarchy
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceFragment
-import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 
 @ProvidePreferenceScreen(AppPictureInPictureAppListScreen.KEY)
-class AppPictureInPictureAppListScreen :
-    PreferenceScreenCreator, PreferenceHierarchyGenerator<Boolean> {
+open class AppPictureInPictureAppListScreen :
+    PreferenceScreenMixin, PreferenceHierarchyGenerator<Boolean> {
 
     override val key: String
         get() = KEY
@@ -44,13 +44,16 @@ class AppPictureInPictureAppListScreen :
     override val title: Int
         get() = R.string.picture_in_picture_title
 
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_apps
+
+    override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
+
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
     override fun isFlagEnabled(context: Context) = Flags.deviceState()
 
     override fun hasCompleteHierarchy() = false
-
-    override fun fragmentClass() = PreferenceFragment::class.java
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
         // TODO: highlight the app from the metadata when highlighting parameterized screens is

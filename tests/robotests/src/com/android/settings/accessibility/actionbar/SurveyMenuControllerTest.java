@@ -17,7 +17,6 @@
 package com.android.settings.accessibility.actionbar;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-import static com.android.settings.accessibility.actionbar.SurveyMenuController.MENU_SEND_SURVEY;
 import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SURVEY_NOTIFICATION_DISMISSED;
 import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID;
 
@@ -126,7 +125,8 @@ public class SurveyMenuControllerTest {
 
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, /* inflater= */ null);
 
-        verify(mMenu).add(anyInt(), eq(MENU_SEND_SURVEY), anyInt(), anyInt());
+        verify(mMenu).add(anyInt(), eq(MenusUtils.MenuId.SEND_SURVEY.getValue()), anyInt(),
+                anyInt());
     }
 
     @Test
@@ -145,7 +145,7 @@ public class SurveyMenuControllerTest {
         FragmentActivity mockActivity = mock(FragmentActivity.class);
         when(mockActivity.getPackageName()).thenReturn(SETTINGS_PACKAGE_NAME);
         when(mHost.getActivity()).thenReturn(mockActivity);
-        when(mMenuItem.getItemId()).thenReturn(MENU_SEND_SURVEY);
+        when(mMenuItem.getItemId()).thenReturn(MenusUtils.MenuId.SEND_SURVEY.getValue());
         SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
                 TEST_PAGE_ID);
 

@@ -20,11 +20,13 @@ import android.Manifest.permission.MANAGE_USERS
 import android.annotation.RequiresPermission
 import android.app.ActivityManager
 import android.app.ComponentCaller
+import android.app.admin.DevicePolicyManager
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.FragmentActivity
+import com.android.internal.widget.LockPatternUtils
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settingslib.supervision.SupervisionLog.TAG
 
@@ -54,7 +56,14 @@ class SupervisionCredentialProxyActivity : FragmentActivity() {
             return
         }
 
-        val intent = Intent(this, ChooseLockGeneric::class.java)
+        val intent =
+            Intent(this, ChooseLockGeneric::class.java).apply {
+                // To go directly to setting up a PIN
+                putExtra(
+                    LockPatternUtils.PASSWORD_TYPE_KEY,
+                    DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
+                )
+            }
         startActivityForResultAsUser(
             intent,
             REQUEST_CODE_SUPERVISION_CREDENTIALS_PROXY,
@@ -94,7 +103,6 @@ class SupervisionCredentialProxyActivity : FragmentActivity() {
     }
 
     companion object {
-        @VisibleForTesting
-        const val REQUEST_CODE_SUPERVISION_CREDENTIALS_PROXY = 10
+        @VisibleForTesting const val REQUEST_CODE_SUPERVISION_CREDENTIALS_PROXY = 10
     }
 }

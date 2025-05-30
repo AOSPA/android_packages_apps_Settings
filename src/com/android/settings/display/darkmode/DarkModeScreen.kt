@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums
 import android.app.settings.SettingsEnums.ACTION_DARK_THEME
 import android.content.Context
 import android.os.PowerManager
+import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.contract.KEY_DARK_THEME
@@ -88,7 +89,7 @@ open class DarkModeScreen(context: Context) :
 
     override fun isFlagEnabled(context: Context) = Flags.catalystDarkUiMode()
 
-    override fun fragmentClass() = DarkModeSettingsFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? = DarkModeSettingsFragment::class.java
 
     override fun hasCompleteHierarchy() = false
 

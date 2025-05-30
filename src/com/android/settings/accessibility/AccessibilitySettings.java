@@ -85,7 +85,7 @@ public class AccessibilitySettings extends BaseSupportFragment implements
     static final String EXTRA_SUMMARY = "summary";
     static final String EXTRA_INTRO = "intro";
     static final String EXTRA_SETTINGS_TITLE = "settings_title";
-    static final String EXTRA_COMPONENT_NAME = "component_name";
+    public static final String EXTRA_COMPONENT_NAME = "component_name";
     static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
     static final String EXTRA_TILE_SERVICE_COMPONENT_NAME = "tile_service_component_name";
     static final String EXTRA_LAUNCHED_FROM_SUW = "from_suw";
@@ -185,6 +185,13 @@ public class AccessibilitySettings extends BaseSupportFragment implements
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY;
+    }
+
+    @Override
+    protected String getDisabilitySupportUrl() {
+        return FeatureFactory.getFeatureFactory()
+                .getAccessibilityDisabilitySupportFeatureProvider()
+                .getUrl();
     }
 
     @Override

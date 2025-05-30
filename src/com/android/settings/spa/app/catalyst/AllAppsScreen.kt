@@ -16,21 +16,18 @@
 
 package com.android.settings.spa.app.catalyst
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceFragment
-import com.android.settingslib.preference.PreferenceScreenCreator
-import com.android.settingslib.metadata.PreferenceMetadata
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 
 @ProvidePreferenceScreen(AllAppsScreen.KEY)
-class AllAppsScreen : PreferenceScreenCreator {
+open class AllAppsScreen : PreferenceScreenMixin {
 
     override val key: String
         get() = KEY
@@ -38,11 +35,14 @@ class AllAppsScreen : PreferenceScreenCreator {
     override val title: Int
         get() = R.string.all_apps
 
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_apps
+
+    override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
+
     override fun isFlagEnabled(context: Context) = Flags.catalystAppList() || Flags.deviceState()
 
     override fun hasCompleteHierarchy() = false
-
-    override fun fragmentClass() = PreferenceFragment::class.java
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
         return Intent("android.settings.MANAGE_ALL_APPLICATIONS_SETTINGS")

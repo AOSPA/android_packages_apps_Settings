@@ -100,8 +100,7 @@ public class WhenToDreamPreferenceControllerTest {
         final Preference mockPref = mock(Preference.class);
         when(mockPref.getContext()).thenReturn(mContext);
         when(mBackend.getWhenToDreamSetting()).thenReturn(DreamBackend.WHILE_CHARGING);
-        when(mPowerManager.isAmbientDisplaySuppressedForTokenByApp(anyString(), anyInt()))
-                .thenReturn(true);
+        when(mPowerManager.isAmbientDisplaySuppressed()).thenReturn(true);
 
         assertTrue(AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime(mContext));
 

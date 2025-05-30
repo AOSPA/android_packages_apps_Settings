@@ -19,6 +19,7 @@ package com.android.settings.accessibility
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.hardware.display.ColorDisplayManager
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ColorAndMotionActivity
 import com.android.settings.core.PreferenceScreenMixin
@@ -51,7 +52,7 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
 
     override fun hasCompleteHierarchy(): Boolean = true
 
-    override fun fragmentClass() = ColorAndMotionFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? = ColorAndMotionFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context): PreferenceHierarchy {
         // LINT.IfChange(ui_hierarchy)

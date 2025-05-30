@@ -32,6 +32,7 @@ import static android.provider.Settings.Global.CONNECTED_APPS_ALLOWED_PACKAGES;
 import static android.provider.Settings.Global.CONNECTED_APPS_DISALLOWED_PACKAGES;
 
 import android.Manifest;
+import android.annotation.Nullable;
 import android.annotation.UserIdInt;
 import android.app.ActionBar;
 import android.app.AppOpsManager;
@@ -107,6 +108,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     private String mAppLabel;
     private Intent mInstallAppIntent;
     private boolean mIsPageLaunchedByApp;
+    @Nullable
+    private AlertDialog mDialog = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -137,7 +140,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View view =  super.onCreateView(inflater, container, savedInstanceState);
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
 
         replaceEnterprisePreferenceScreenTitle(CONNECTED_WORK_AND_PERSONAL_APPS_TITLE,
                 R.string.interact_across_profiles_title);
@@ -307,6 +310,9 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     }
 
     private void showConsentDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
         final View dialogView = getLayoutInflater().inflate(
                 R.layout.interact_across_profiles_consent_dialog, null);
 
@@ -314,7 +320,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                 R.id.interact_across_profiles_consent_dialog_title);
         dialogTitle.setText(mDpm.getResources().getString(CONNECT_APPS_DIALOG_TITLE, () ->
                 getString(R.string.interact_across_profiles_consent_dialog_title, mAppLabel),
-                mAppLabel));
+                    mAppLabel));
 
         final TextView appDataSummary = dialogView.findViewById(R.id.app_data_summary);
         appDataSummary.setText(
@@ -343,13 +349,14 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(dialogView)
+        mDialog = builder.setView(dialogView)
                 .setPositiveButton(R.string.allow, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_USER_CONSENTED);
                         enableInteractAcrossProfiles(true);
                         refreshUi();
                         if (mIsPageLaunchedByApp) {
+                            dialog.dismiss();
                             setIntentAndFinish(/* appChanged= */ true);
                         }
                     }
@@ -361,7 +368,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                         refreshUi();
                     }
                 })
-                .create().show();
+                .create();
+        mDialog.show();
     }
 
     private boolean isInteractAcrossProfilesEnabled() {
@@ -536,7 +544,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mSwitchPref.setChecked(true);
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_enabled);
         final ImageView horizontalArrowIcon =
-                mHeader.findViewById(com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
+                mHeader.findViewById(
+                        com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
         if (horizontalArrowIcon != null) {
             horizontalArrowIcon.setImageDrawable(
                     mContext.getDrawable(
@@ -548,12 +557,22 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mSwitchPref.setChecked(false);
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_disabled);
         final ImageView horizontalArrowIcon =
-                mHeader.findViewById(com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
+                mHeader.findViewById(
+                        com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
         if (horizontalArrowIcon != null) {
             horizontalArrowIcon.setImageDrawable(
                     mContext.getDrawable(
                             com.android.settingslib.widget.preference.layout.R.drawable.ic_swap_horiz_grey));
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mDialog != null) {
+            mDialog.dismiss();
+        }
+        mDialog = null;
+        super.onDestroy();
     }
 
     @Override

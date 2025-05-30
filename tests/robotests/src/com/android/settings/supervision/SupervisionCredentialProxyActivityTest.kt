@@ -18,6 +18,7 @@ package com.android.settings.supervision
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.ComponentCaller
+import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.pm.UserInfo
 import android.os.UserHandle
@@ -25,6 +26,7 @@ import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.os.UserManager.USER_TYPE_PROFILE_TEST
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.internal.widget.LockPatternUtils
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settings.supervision.SupervisionCredentialProxyActivity.Companion.REQUEST_CODE_SUPERVISION_CREDENTIALS_PROXY
 import com.google.common.truth.Truth.assertThat
@@ -78,8 +80,17 @@ class SupervisionCredentialProxyActivityTest {
         mActivityController.setup()
 
         assertThat(mActivity.isFinishing).isFalse()
-        assertThat(shadowActivity.nextStartedActivity.component?.className)
-            .isEqualTo(ChooseLockGeneric::class.java.name)
+
+        val startedIntent = shadowActivity.nextStartedActivity
+        assertThat(startedIntent.component?.className).isEqualTo(ChooseLockGeneric::class.java.name)
+        assertThat(startedIntent.hasExtra(LockPatternUtils.PASSWORD_TYPE_KEY)).isTrue()
+        assertThat(
+                startedIntent.getIntExtra(
+                    LockPatternUtils.PASSWORD_TYPE_KEY,
+                    -1, /* Default value not expected */
+                )
+            )
+            .isEqualTo(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC)
 
         // Ensure that the supervising profile is started
         val userCaptor = argumentCaptor<UserHandle>()

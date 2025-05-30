@@ -208,6 +208,11 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         mLayouts.append(DreamItemViewTypes.DREAM_ITEM, layoutRes);
     }
 
+    void setItemList(List<IDreamItem> itemList) {
+        mItemList.clear();
+        mItemList.addAll(itemList);
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,

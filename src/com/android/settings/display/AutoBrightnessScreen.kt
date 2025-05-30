@@ -22,6 +22,7 @@ import android.os.UserManager
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.contract.KEY_ADAPTIVE_BRIGHTNESS
@@ -71,7 +72,7 @@ open class AutoBrightnessScreen :
 
     override fun isFlagEnabled(context: Context) = Flags.catalystScreenBrightnessMode()
 
-    override fun fragmentClass() = AutoBrightnessSettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? = AutoBrightnessSettings::class.java
 
     override fun hasCompleteHierarchy() = false
 

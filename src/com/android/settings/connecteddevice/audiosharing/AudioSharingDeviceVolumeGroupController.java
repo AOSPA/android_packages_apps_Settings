@@ -306,20 +306,20 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
 
     @Override
     public void onDeviceRemoved(Preference preference) {
-        if (!(preference instanceof AudioSharingDeviceVolumePreference)) {
+        if (!(preference instanceof AudioSharingDeviceVolumePreference
+                || preference instanceof AudioSharingDeviceVolumeSliderPreference)) {
             Log.d(TAG, "Skip onDeviceRemoved, invalid preference type");
             return;
         }
-        var volumePref = (AudioSharingDeviceVolumePreference) preference;
-        if (mVolumePreferences.contains(volumePref)) {
-            mVolumePreferences.remove(volumePref);
+        if (mVolumePreferences.contains(preference)) {
+            mVolumePreferences.remove(preference);
         }
-        String address = volumePref.getCachedDevice().getDevice() == null ? "null"
-                : volumePref.getCachedDevice().getDevice().getAnonymizedAddress();
+        String address = getCachedDevice(preference).getDevice() == null ? "null"
+                : getCachedDevice(preference).getDevice().getAnonymizedAddress();
         Log.d(TAG, "onDeviceRemoved: " + address);
         AudioSharingUtils.postOnMainThread(mContext, () -> {
             if (mPreferenceGroup != null) {
-                mPreferenceGroup.removePreference(volumePref);
+                mPreferenceGroup.removePreference(preference);
                 if (mPreferenceGroup.getPreferenceCount() == 0) {
                     mPreferenceGroup.setVisible(false);
                 }

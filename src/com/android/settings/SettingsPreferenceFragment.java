@@ -57,6 +57,7 @@ import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.CustomEditTextPreferenceCompat;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.metadata.PreferenceSearchIndexablesProvider;
 import com.android.settingslib.preference.PreferenceScreenBindingHelper;
 import com.android.settingslib.preference.PreferenceScreenCreator;
 import com.android.settingslib.search.Indexable;
@@ -409,6 +410,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             Intent intent = activity != null ? activity.getIntent() : null;
             key = intent != null ? intent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY) : null;
         }
+        key = PreferenceSearchIndexablesProvider.Companion.getHighlightKey(key);
         mAdapter = new HighlightablePreferenceGroupAdapter(preferenceScreen, key,
                 mPreferenceHighlighted);
         return mAdapter;

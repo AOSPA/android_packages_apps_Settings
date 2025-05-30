@@ -19,6 +19,7 @@ package com.android.settings.datausage
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.DataSaverSummaryActivity
 import com.android.settings.core.PreferenceScreenMixin
@@ -75,7 +76,7 @@ open class DataSaverScreen(context: Context) :
 
     override fun isFlagEnabled(context: Context) = Flags.catalystRestrictBackgroundParentEntry()
 
-    override fun fragmentClass() = DataSaverSummary::class.java
+    override fun fragmentClass(): Class<out Fragment>? = DataSaverSummary::class.java
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, DataSaverSummaryActivity::class.java, metadata?.key)

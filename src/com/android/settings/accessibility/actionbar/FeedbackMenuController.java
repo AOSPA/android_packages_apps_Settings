@@ -38,11 +38,6 @@ public class FeedbackMenuController implements LifecycleObserver, OnCreateOption
     /**
      * The menu item ID for the feedback menu option.
      */
-    public static final int MENU_FEEDBACK = Menu.FIRST + 10;
-
-    /**
-     * The menu item ID for the feedback menu option.
-     */
     private final FeedbackManager mFeedbackManager;
 
     /**
@@ -76,12 +71,13 @@ public class FeedbackMenuController implements LifecycleObserver, OnCreateOption
         if (!mFeedbackManager.isAvailable()) {
             return;
         }
-        menu.add(Menu.NONE, MENU_FEEDBACK, Menu.NONE, R.string.accessibility_send_feedback_title);
+        menu.add(Menu.NONE, MenusUtils.MenuId.FEEDBACK.getValue(), Menu.NONE,
+                R.string.accessibility_send_feedback_title);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
-        if (menuItem.getItemId() == MENU_FEEDBACK) {
+        if (menuItem.getItemId() == MenusUtils.MenuId.FEEDBACK.getValue()) {
             mFeedbackManager.sendFeedback();
             return true;
         }

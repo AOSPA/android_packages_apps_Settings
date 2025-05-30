@@ -17,6 +17,7 @@ package com.android.settings.accessibility
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
@@ -37,7 +38,7 @@ open class TextReadingScreen : PreferenceScreenMixin {
 
     override fun isFlagEnabled(context: Context) = Flags.catalystTextReadingScreen()
 
-    override fun fragmentClass() = TextReadingPreferenceFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? = TextReadingPreferenceFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {

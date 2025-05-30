@@ -396,10 +396,12 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         // Hide mAddWifiNetworkPreference by default. updateWifiEntryPreferences() will add it back
         // later when appropriate.
         mWifiEntryPreferenceCategory.removePreference(mAddWifiNetworkPreference);
-        mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
-        mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
-        mDataUsagePreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI)
-                        .build(), SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        if (!isCatalystEnabled()) {
+            mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
+            mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
+            mDataUsagePreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI)
+                    .build(), SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        }
         mResetInternetPreference = findPreference(PREF_KEY_RESET_INTERNET);
         mEthernetSwitchPreference = findPreference(PREF_KEY_ETHERNET_TOGGLE);
         mEthernetPreferenceCategory = findPreference(PREF_KEY_ETHERNET_INTERFACES);

@@ -16,14 +16,17 @@
 package com.android.settings.location
 
 import android.Manifest
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.icu.text.RelativeDateTimeFormatter
 import android.os.Bundle
 import android.os.UserManager
 import android.provider.Settings
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment
 import com.android.settings.flags.Flags
 import com.android.settingslib.applications.RecentAppOpsAccess
@@ -33,17 +36,21 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.utils.StringUtil
 
 @ProvidePreferenceScreen(RecentLocationAccessScreen.KEY)
-class RecentLocationAccessScreen: PreferenceScreenCreator, PreferenceAvailabilityProvider {
+open class RecentLocationAccessScreen: PreferenceScreenMixin, PreferenceAvailabilityProvider {
 
     override val key: String
         get() = KEY
 
     override val title: Int
         get() = R.string.location_category_recent_location_access
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_location
+
+    override fun getMetricsCategory() = SettingsEnums.LOCATION_RECENT_ACCESS_ALL
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
@@ -58,7 +65,8 @@ class RecentLocationAccessScreen: PreferenceScreenCreator, PreferenceAvailabilit
         )
     )
 
-    override fun fragmentClass() = RecentLocationAccessSeeAllFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? =
+        RecentLocationAccessSeeAllFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
         // not showing system app access for now
