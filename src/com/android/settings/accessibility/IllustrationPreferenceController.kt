@@ -19,12 +19,15 @@ package com.android.settings.accessibility
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import android.view.ViewGroup
 import androidx.preference.PreferenceScreen
 import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
+import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.core.BasePreferenceController
 import com.android.settingslib.utils.ThreadUtils
 import com.android.settingslib.widget.IllustrationPreference
+import com.android.settingslib.widget.SettingsThemeHelper
 
 /** BasePreferenceController for [IllustrationPreference] */
 open class IllustrationPreferenceController(context: Context, prefKey: String) :
@@ -54,6 +57,19 @@ open class IllustrationPreferenceController(context: Context, prefKey: String) :
             isSelectable = false
             setMaxHeight(displayHalfHeight)
             setOnBindListener { view: LottieAnimationView? ->
+                // IllustrationPreference changes the illustrationFrame's width to the shortest
+                // device side.
+                // This potentially breaks the image when shown in SetupWizard. Sets the width to
+                // MATCH_PARENT solves the image cutoff issue on SUW
+                if (SettingsThemeHelper.isExpressiveTheme(mContext) && mContext.isInSetupWizard()) {
+                    if (view?.parent is ViewGroup) {
+                        val illustrationFrame = view.parent as ViewGroup
+                        val lp: ViewGroup.LayoutParams = illustrationFrame.layoutParams
+                        lp.width = ViewGroup.LayoutParams.MATCH_PARENT
+                        illustrationFrame.layoutParams = lp
+                    }
+                }
+
                 // isAnimatable is decided in
                 // [IllustrationPreference#onBindViewHolder(PreferenceViewHolder)]. Therefore, we
                 // wait until the view is bond to set the content description for it.

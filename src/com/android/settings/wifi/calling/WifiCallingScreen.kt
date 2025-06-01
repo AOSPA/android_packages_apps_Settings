@@ -20,6 +20,7 @@ import android.content.Context
 import android.os.Bundle
 import android.telephony.SubscriptionManager.getDefaultSubscriptionId
 import android.telephony.SubscriptionManager.isValidSubscriptionId
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
@@ -61,7 +62,7 @@ open class WifiCallingScreen(override val arguments: Bundle) :
 
     override fun isFlagEnabled(context: Context) = Flags.catalystWifiCalling()
 
-    override fun fragmentClass() = WifiCallingSettingsForSub::class.java
+    override fun fragmentClass(): Class<out Fragment>? = WifiCallingSettingsForSub::class.java
 
     override fun hasCompleteHierarchy() = false
 

@@ -19,6 +19,8 @@ import android.app.Activity
 import android.app.Application
 import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
 import android.app.supervision.SupervisionManager
+import android.app.supervision.SupervisionRecoveryInfo
+import android.app.supervision.SupervisionRecoveryInfo.EXTRA_SUPERVISION_RECOVERY_INFO
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
 import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
 import android.content.ComponentName
@@ -27,14 +29,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.UserInfo
 import android.os.Build
+import android.os.PersistableBundle
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
-import com.android.settings.supervision.SupervisionPinRecoveryActivity.Companion.EXTRA_RECOVERY_EMAIL
-import com.android.settings.supervision.SupervisionPinRecoveryActivity.Companion.EXTRA_RECOVERY_ID
 import com.google.common.truth.Truth.assertThat
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -63,19 +64,16 @@ class SupervisionPinRecoveryActivityTest {
     private lateinit var shadowPackageManager: ShadowPackageManager
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
-    private val callingPackage = "com.android.settings"
-    private val recoveryEmail = "test@example.com"
-    private val recoveryId = "testId"
 
     @Before
     fun setUp() {
-        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, context.user)
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, CALLING_PACKAGE, context.user)
         shadowPackageManager = shadowOf(context.packageManager)
 
         // Intent filter for ConfirmSupervisionCredentialsActivity.
         val confirmPinIntentFilter = IntentFilter(ACTION_CONFIRM_PIN)
         val confirmPinComponentName =
-            ComponentName(callingPackage, ConfirmSupervisionCredentialsActivity::class.java.name)
+            ComponentName(CALLING_PACKAGE, ConfirmSupervisionCredentialsActivity::class.java.name)
         shadowPackageManager.addActivityIfNotPresent(confirmPinComponentName)
         shadowPackageManager.addIntentFilterForActivity(
             confirmPinComponentName,
@@ -83,7 +81,7 @@ class SupervisionPinRecoveryActivityTest {
         )
 
         // Intent filters for PinRecoveryActivity actions.
-        val recoveryComponentName = ComponentName(callingPackage, "SupervisionRecoveryActivity")
+        val recoveryComponentName = ComponentName(CALLING_PACKAGE, "SupervisionRecoveryActivity")
         val recoveryIntentFilter =
             IntentFilter(ACTION_SETUP_PIN_RECOVERY).apply {
                 addAction(ACTION_UPDATE_PIN_RECOVERY)
@@ -251,8 +249,10 @@ class SupervisionPinRecoveryActivityTest {
                 // Now, simulates successful verification after setting verified
                 val resultIntent =
                     Intent().apply {
-                        putExtra(EXTRA_RECOVERY_EMAIL, recoveryEmail)
-                        putExtra(EXTRA_RECOVERY_ID, recoveryId)
+                        putExtra(
+                            EXTRA_SUPERVISION_RECOVERY_INFO,
+                            EXPECTED_SUPERVISION_RECOVERY_INFO,
+                        )
                     }
                 val testActivityResult = Activity.RESULT_OK
 
@@ -260,13 +260,7 @@ class SupervisionPinRecoveryActivityTest {
                 shadowActivity.receiveResult(setVerifiedIntent, testActivityResult, resultIntent)
 
                 // Verifies that supervisionRecoveryInfo is set correctly.
-                verify(mockSupervisionManager).supervisionRecoveryInfo = argThat { info ->
-                    info != null &&
-                        info.accountName == recoveryEmail &&
-                        info.accountType == "default" &&
-                        info.state == STATE_VERIFIED &&
-                        info.accountData.getString("id") == recoveryId
-                }
+                verifySupervisionRecoveryInfo(EXPECTED_SUPERVISION_RECOVERY_INFO)
                 assertEquals(testActivityResult, shadowActivity.resultCode)
                 assertThat(activity.isFinishing).isTrue()
             }
@@ -360,8 +354,10 @@ class SupervisionPinRecoveryActivityTest {
                 // Then, simulates successful verification after update
                 val resultIntent =
                     Intent().apply {
-                        putExtra(EXTRA_RECOVERY_EMAIL, recoveryEmail)
-                        putExtra(EXTRA_RECOVERY_ID, recoveryId)
+                        putExtra(
+                            EXTRA_SUPERVISION_RECOVERY_INFO,
+                            EXPECTED_SUPERVISION_RECOVERY_INFO,
+                        )
                     }
                 val testActivityResult = Activity.RESULT_OK
 
@@ -369,13 +365,7 @@ class SupervisionPinRecoveryActivityTest {
                 shadowActivity.receiveResult(updatePinIntent, testActivityResult, resultIntent)
 
                 // Verifies that supervisionRecoveryInfo is set correctly.
-                verify(mockSupervisionManager).supervisionRecoveryInfo = argThat { info ->
-                    info != null &&
-                        info.accountName == recoveryEmail &&
-                        info.accountType == "default" &&
-                        info.state == STATE_VERIFIED &&
-                        info.accountData.getString("id") == recoveryId
-                }
+                verifySupervisionRecoveryInfo(EXPECTED_SUPERVISION_RECOVERY_INFO)
 
                 assertEquals(testActivityResult, shadowActivity.resultCode)
                 assertThat(activity.isFinishing).isTrue()
@@ -469,8 +459,10 @@ class SupervisionPinRecoveryActivityTest {
                 // Then, simulates successful verification after post setup verify
                 val resultIntent =
                     Intent().apply {
-                        putExtra(EXTRA_RECOVERY_EMAIL, recoveryEmail)
-                        putExtra(EXTRA_RECOVERY_ID, recoveryId)
+                        putExtra(
+                            EXTRA_SUPERVISION_RECOVERY_INFO,
+                            EXPECTED_SUPERVISION_RECOVERY_INFO,
+                        )
                     }
 
                 val postSetupVerifyIntent = shadowActivity.nextStartedActivity
@@ -481,13 +473,7 @@ class SupervisionPinRecoveryActivityTest {
                 )
 
                 // Verifies that supervisionRecoveryInfo is set correctly.
-                verify(mockSupervisionManager).supervisionRecoveryInfo = argThat { info ->
-                    info != null &&
-                        info.accountName == recoveryEmail &&
-                        info.accountType == "default" &&
-                        info.state == STATE_VERIFIED &&
-                        info.accountData.getString("id") == recoveryId
-                }
+                verifySupervisionRecoveryInfo(EXPECTED_SUPERVISION_RECOVERY_INFO)
                 assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
                 assertThat(activity.isFinishing).isTrue()
             }
@@ -514,8 +500,8 @@ class SupervisionPinRecoveryActivityTest {
                 // Verifies the supervision state is disabled and re-enabled.
                 val inOrder = inOrder(mockSupervisionManager)
                 // Verifies the calls in the specific order
-                inOrder.verify(mockSupervisionManager).isSupervisionEnabled = false
-                inOrder.verify(mockSupervisionManager).isSupervisionEnabled = true
+                inOrder.verify(mockSupervisionManager).setSupervisionEnabled(false)
+                inOrder.verify(mockSupervisionManager).setSupervisionEnabled(true)
                 val startedIntent = shadowActivity.nextStartedActivity
                 assertThat(startedIntent.component?.className)
                     .isEqualTo(SupervisionCredentialProxyActivity::class.java.name)
@@ -631,20 +617,20 @@ class SupervisionPinRecoveryActivityTest {
         ActivityScenario.launch<SupervisionPinRecoveryActivity>(intent).use { scenario ->
             scenario.onActivity { activity ->
                 val shadowActivity = shadowOf(activity)
-                val resultIntent = Intent().apply { putExtra(EXTRA_RECOVERY_EMAIL, recoveryEmail) }
+                val resultIntent =
+                    Intent().apply {
+                        putExtra(
+                            EXTRA_SUPERVISION_RECOVERY_INFO,
+                            EXPECTED_PENDING_SUPERVISION_RECOVERY_INFO,
+                        )
+                    }
                 val testActivityResult = Activity.RESULT_OK
 
                 val setupPinIntent = shadowActivity.nextStartedActivity
                 shadowActivity.receiveResult(setupPinIntent, testActivityResult, resultIntent)
 
                 // Verifies that supervisionRecoveryInfo is set correctly with PENDING state.
-                verify(mockSupervisionManager).supervisionRecoveryInfo = argThat { info ->
-                    info != null &&
-                        info.accountName == recoveryEmail &&
-                        info.accountType == "default" &&
-                        info.state == STATE_PENDING &&
-                        info.accountData.getString("id") == null
-                }
+                verifySupervisionRecoveryInfo(EXPECTED_PENDING_SUPERVISION_RECOVERY_INFO)
                 assertEquals(testActivityResult, shadowActivity.resultCode)
                 assertThat(activity.isFinishing).isTrue()
             }
@@ -672,6 +658,44 @@ class SupervisionPinRecoveryActivityTest {
         }
     }
 
+    @Test
+    fun onVerification_setupAction_invalidResult_finishesWithCanceled() {
+        // Test scenario where SETUP setup action is finished with invalid data during verification.
+        val intent =
+            Intent(context, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_SETUP
+            }
+        ActivityScenario.launch<SupervisionPinRecoveryActivity>(intent).use { scenario ->
+            scenario.onActivity { activity ->
+                val shadowActivity = shadowOf(activity)
+                val resultIntent =
+                    Intent().apply { putExtra(EXTRA_SUPERVISION_RECOVERY_INFO, "dummy") }
+                val setupPinIntent = shadowActivity.nextStartedActivity
+                shadowActivity.receiveResult(setupPinIntent, Activity.RESULT_OK, resultIntent)
+
+                // Verifies that the activity finishes with result CANCELED.
+                verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
+                assertEquals(Activity.RESULT_CANCELED, shadowActivity.resultCode)
+                assertThat(activity.isFinishing).isTrue()
+            }
+        }
+    }
+
+    /**
+     * Helper function to verify that the SupervisionRecoveryInfo is set correctly.
+     *
+     * @param expectedInfo The expected SupervisionRecoveryInfo.
+     */
+    private fun verifySupervisionRecoveryInfo(expectedInfo: SupervisionRecoveryInfo) {
+        verify(mockSupervisionManager).supervisionRecoveryInfo = argThat { info ->
+            info != null &&
+                info.accountName == expectedInfo.accountName &&
+                info.accountType == expectedInfo.accountType &&
+                info.state == expectedInfo.state &&
+                info.accountData.getString("id") == expectedInfo.accountData.getString("id")
+        }
+    }
+
     companion object {
         // Intent actions used by SupervisionPinRecoveryActivity and related activities.
         const val ACTION_CONFIRM_PIN =
@@ -688,6 +712,7 @@ class SupervisionPinRecoveryActivityTest {
 
         // Constants for a supervising user.
         const val SUPERVISING_USER_ID = 5
+        const val CALLING_PACKAGE = "com.android.settings"
         val SUPERVISING_USER_INFO =
             UserInfo(
                 SUPERVISING_USER_ID,
@@ -695,6 +720,31 @@ class SupervisionPinRecoveryActivityTest {
                 /* iconPath */ "",
                 /* flags */ 0,
                 USER_TYPE_PROFILE_SUPERVISING,
+            )
+
+        // Common expected SupervisionRecoveryInfo for verification
+        val EXPECTED_SUPERVISION_RECOVERY_INFO =
+            SupervisionRecoveryInfo(
+                /* accountName */
+                "test@example.com",
+                /* accountType */
+                "default",
+                /* state */
+                STATE_VERIFIED,
+                /* accountData */
+                PersistableBundle().apply { putString("id", "testId") },
+            )
+
+        val EXPECTED_PENDING_SUPERVISION_RECOVERY_INFO =
+            SupervisionRecoveryInfo(
+                /* accountName */
+                "test@example.com",
+                /* accountType */
+                "default",
+                /* state */
+                STATE_PENDING,
+                /* accountData */
+                null,
             )
     }
 }

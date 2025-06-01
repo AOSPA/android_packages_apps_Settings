@@ -18,11 +18,15 @@ package com.android.settings.supervision
 import android.app.settings.SettingsEnums
 import android.app.supervision.flags.Flags
 import android.content.Context
+import android.content.Intent
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.utils.highlightPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
@@ -58,7 +62,7 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     override val keywords: Int
         get() = R.string.keywords_supervision_settings
 
-    override fun fragmentClass() = SupervisionDashboardFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? = SupervisionDashboardFragment::class.java
 
     override fun getMetricsCategory() = SettingsEnums.SUPERVISION_DASHBOARD
 
@@ -68,6 +72,10 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     override fun onDestroy(context: PreferenceLifecycleContext) {
         supervisionClient?.close()
     }
+
+    override fun isIndexable(context: Context) = true
+
+    override fun hasCompleteHierarchy() = true
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
@@ -84,6 +92,9 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 +SupervisionAocFooterPreference(supervisionClient) order 40
             }
         }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        Intent("android.settings.SUPERVISION_SETTINGS").apply { highlightPreference(metadata?.key) }
 
     private fun getSupervisionClient(context: Context) =
         supervisionClient ?: SupervisionMessengerClient(context).also { supervisionClient = it }

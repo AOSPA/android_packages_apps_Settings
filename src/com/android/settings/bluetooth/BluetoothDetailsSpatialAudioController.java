@@ -272,10 +272,6 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
                 AudioDeviceAttributes.ROLE_OUTPUT,
                 AudioDeviceInfo.TYPE_BLE_BROADCAST,
                 mCachedDevice.getAddress());
-        AudioDeviceAttributes hearingAidDevice = new AudioDeviceAttributes(
-                AudioDeviceAttributes.ROLE_OUTPUT,
-                AudioDeviceInfo.TYPE_HEARING_AID,
-                mCachedDevice.getAddress());
 
         if (mSpatializer.isAvailableForDevice(bleHeadsetDevice)) {
             mAudioDevice = bleHeadsetDevice;
@@ -285,8 +281,6 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
             mAudioDevice = bleBroadcastDevice;
         } else if (mSpatializer.isAvailableForDevice(a2dpDevice)) {
             mAudioDevice = a2dpDevice;
-        } else if (mSpatializer.isAvailableForDevice(hearingAidDevice)) {
-            mAudioDevice = hearingAidDevice;
         } else {
             mAudioDevice = null;
         }

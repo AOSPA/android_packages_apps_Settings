@@ -21,6 +21,7 @@ import android.content.Context
 import android.provider.Settings.Secure.SCREENSAVER_COMPONENTS
 import android.provider.Settings.Secure.SCREENSAVER_ENABLED
 import androidx.annotation.VisibleForTesting
+import androidx.fragment.app.Fragment
 import com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig
 import com.android.settings.R
 import com.android.settings.Utils
@@ -92,7 +93,7 @@ open class ScreensaverScreen(private val context: Context) :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass() = DreamSettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? = DreamSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 

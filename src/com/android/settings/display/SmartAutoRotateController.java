@@ -35,6 +35,7 @@ import android.provider.Settings;
 import android.service.rotationresolver.RotationResolverService;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
@@ -80,12 +81,20 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
     private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
 
     public SmartAutoRotateController(Context context, String preferenceKey) {
+        this(context, preferenceKey,
+                DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(context));
+    }
+
+    @VisibleForTesting
+    public SmartAutoRotateController(
+            @NonNull Context context,
+            @NonNull String preferenceKey,
+            @NonNull DeviceStateAutoRotateSettingManager deviceStateAutoRotateSettingManager) {
         super(context, preferenceKey);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPowerManager = context.getSystemService(PowerManager.class);
-        mDeviceStateAutoRotateSettingsManager =
-                DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(context);
+        mDeviceStateAutoRotateSettingsManager = deviceStateAutoRotateSettingManager;
     }
 
     @Override

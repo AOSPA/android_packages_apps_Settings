@@ -41,6 +41,8 @@ import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.media.LocalMediaManager;
+import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputConstants;
 import com.android.settingslib.media.PhoneMediaDevice;
 
@@ -54,11 +56,13 @@ import java.util.List;
  * - Media stream captured by remote device
  * - During a call.
  */
-public class MediaOutputPreferenceController extends AudioSwitchPreferenceController {
+public class MediaOutputPreferenceController extends AudioSwitchPreferenceController implements
+        LocalMediaManager.DeviceCallback {
 
     private static final String TAG = "MediaOutputPreferenceController";
     @Nullable private MediaController mMediaController;
     private MediaSessionManager mMediaSessionManager;
+    @Nullable LocalMediaManager mLocalMediaManager;
 
     @Nullable private LocalBluetoothLeBroadcast mLocalBluetoothLeBroadcast;
 
@@ -105,6 +109,7 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         super(context, key);
         mMediaSessionManager = context.getSystemService(MediaSessionManager.class);
         mMediaController = MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager);
+        mLocalMediaManager = new LocalMediaManager(mContext, /* packageName= */ null);
         LocalBluetoothManager localBluetoothManager =
                 com.android.settings.bluetooth.Utils.getLocalBtManager(mContext);
         if (localBluetoothManager != null) {
@@ -120,6 +125,9 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             mLocalBluetoothLeBroadcast.registerServiceCallBack(
                     mContext.getMainExecutor(), mBroadcastCallback);
         }
+        if (mLocalMediaManager != null) {
+            mLocalMediaManager.registerCallback(this);
+        }
     }
 
     @Override
@@ -127,6 +135,9 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         super.onStop();
         if (mLocalBluetoothLeBroadcast != null) {
             mLocalBluetoothLeBroadcast.unregisterServiceCallBack(mBroadcastCallback);
+        }
+        if (mLocalMediaManager != null) {
+            mLocalMediaManager.unregisterCallback(this);
         }
     }
 
@@ -142,6 +153,11 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
 
         mPreference.setVisible(!Utils.isAudioModeOngoingCall(mContext)
                 && (enableOutputSwitcherForSystemRouting() ? true : mMediaController != null));
+    }
+
+    @Override
+    public void onSelectedDeviceStateChanged(MediaDevice device, int state) {
+        updateState(mPreference);
     }
 
     @Override
@@ -197,10 +213,15 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
                 mPreference.setEnabled(false);
             }
         } else {
-            mPreference.setSummary(
-                    (activeDevice == null)
-                            ? mContext.getText(R.string.media_output_default_summary)
-                            : activeDevice.getAlias());
+            if (mLocalMediaManager != null
+                    && mLocalMediaManager.getCurrentConnectedDevice() != null) {
+                mPreference.setSummary(mLocalMediaManager.getCurrentConnectedDevice().getName());
+            } else {
+                mPreference.setSummary(
+                        (activeDevice == null)
+                                ? mContext.getText(R.string.media_output_default_summary)
+                                : activeDevice.getAlias());
+            }
         }
     }
 

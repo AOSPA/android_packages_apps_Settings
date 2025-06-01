@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.app.catalyst
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -29,6 +30,7 @@ import com.android.settings.applications.specialaccess.interactacrossprofiles.In
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
@@ -38,16 +40,14 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceFragment
-import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 // Note: This page is for DeviceState usages.
 @ProvidePreferenceScreen(AppInfoInteractAcrossProfilesScreen.KEY, parameterized = true)
-class AppInfoInteractAcrossProfilesScreen(context: Context, override val arguments: Bundle) :
-    PreferenceScreenCreator, PreferenceSummaryProvider, PreferenceTitleProvider {
+open class AppInfoInteractAcrossProfilesScreen(context: Context, override val arguments: Bundle) :
+    PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider {
 
     private val packageName = arguments.getString("app")!!
 
@@ -61,6 +61,11 @@ class AppInfoInteractAcrossProfilesScreen(context: Context, override val argumen
 
     override val screenTitle: Int
         get() = R.string.interact_across_profiles_title
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_apps
+
+    override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
 
     override fun tags(context: Context) =
         arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
@@ -88,8 +93,6 @@ class AppInfoInteractAcrossProfilesScreen(context: Context, override val argumen
         Bundle(1).apply { putString(KEY_EXTRA_PACKAGE_NAME, arguments.getString("app")) }
 
     override fun hasCompleteHierarchy() = false
-
-    override fun fragmentClass() = PreferenceFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) { +InteractAcrossProfilesMainSwitch(storage) }

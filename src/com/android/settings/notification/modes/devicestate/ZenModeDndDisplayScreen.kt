@@ -20,7 +20,6 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID
-import com.android.settings.CatalystFragment
 import com.android.settings.R
 import com.android.settings.Settings.DndModeDisplaySettingsActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
@@ -61,8 +60,6 @@ open class ZenModeDndDisplayScreen :
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
     override fun isFlagEnabled(context: Context) = Flags.deviceState()
-
-    override fun fragmentClass() = CatalystFragment::class.java
 
     override fun isAvailable(context: Context) = context.hasDndMode()
 

@@ -20,6 +20,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settingslib.core.instrumentation.Instrumentable
+import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_KEY
 import com.android.settingslib.preference.PreferenceFragment
 
@@ -41,7 +42,10 @@ constructor(
     override fun getInitialFragmentName(intent: Intent?): String = fragmentClass.name
 
     override fun getInitialFragmentArguments(intent: Intent?): Bundle? =
-        Bundle().apply { putString(EXTRA_BINDING_SCREEN_KEY, bindingScreenKey) }
+        (super.getInitialFragmentArguments(intent) ?: Bundle()).apply {
+            putString(EXTRA_BINDING_SCREEN_KEY, bindingScreenKey)
+            putBundle(EXTRA_BINDING_SCREEN_ARGS, intent?.getBundleExtra(EXTRA_BINDING_SCREEN_ARGS))
+        }
 }
 
 /**

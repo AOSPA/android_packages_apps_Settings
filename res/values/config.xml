@@ -885,4 +885,11 @@
 
     <!-- Whether to allow other device users to edit network configuration of a shared network by default. -->
     <bool name="config_allow_edit_network_configuration_by_default">true</bool>
+
+    <!-- Array of carrier id that use to check current region be in satellite GEO fence or not. -->
+    <integer-array name="config_carrier_id_list_for_satellite_geo_fence_check" translatable="false">
+        <!--
+        <item>1234</item>
+        -->
+    </integer-array>
 </resources>

@@ -19,18 +19,21 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.os.UserManager
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.NetworkProviderSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settings.wifi.WifiDataUsagePreference
 import com.android.settings.wifi.WifiSwitchPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 
 @ProvidePreferenceScreen(NetworkProviderScreen.KEY)
 open class NetworkProviderScreen :
@@ -64,12 +67,15 @@ open class NetworkProviderScreen :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass() = NetworkProviderSettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? = NetworkProviderSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
             +PreferenceCategory("wifi_category", R.string.wifi_settings) += {
                 +WifiSwitchPreference()
+            }
+            +UntitledPreferenceCategoryMetadata("wifi_ext_category") += {
+                +WifiDataUsagePreference(context)
             }
         }
 

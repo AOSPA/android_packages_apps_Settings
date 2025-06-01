@@ -130,7 +130,9 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         String action = intent != null ? intent.getAction() : "";
         if (TextUtils.equals(Utils.SYSTEMUI_PACKAGE_NAME, callingAppPackageName)) {
             mMetricsFeatureProvider.action(
-                    context, SettingsEnums.SETTINGS_CONNECTED_DEVICES_ENTRYPOINT, ENTRYPOINT_SYSUI);
+                    context,
+                    SettingsEnums.ACTION_OPEN_SETTINGS_CONNECTED_DEVICES,
+                    ENTRYPOINT_SYSUI);
         } else if (TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, callingAppPackageName)
                 && TextUtils.equals(Intent.ACTION_MAIN, action)) {
             String sourceCategory =
@@ -144,18 +146,20 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                             : "";
             mMetricsFeatureProvider.action(
                     context,
-                    SettingsEnums.SETTINGS_CONNECTED_DEVICES_ENTRYPOINT,
+                    SettingsEnums.ACTION_OPEN_SETTINGS_CONNECTED_DEVICES,
                     ENTRYPOINT_SETTINGS + "_" + sourceCategory);
         } else if (TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, callingAppPackageName)
                 && TextUtils.equals(SETTINGS_SEARCH_ACTION, action)) {
             mMetricsFeatureProvider.action(
                     context,
-                    SettingsEnums.SETTINGS_CONNECTED_DEVICES_ENTRYPOINT,
+                    SettingsEnums.ACTION_OPEN_SETTINGS_CONNECTED_DEVICES,
                     ENTRYPOINT_SETTINGS_SEARCH);
 
         } else {
             mMetricsFeatureProvider.action(
-                    context, SettingsEnums.SETTINGS_CONNECTED_DEVICES_ENTRYPOINT, ENTRYPOINT_OTHER);
+                    context,
+                    SettingsEnums.ACTION_OPEN_SETTINGS_CONNECTED_DEVICES,
+                    ENTRYPOINT_OTHER);
         }
     }
 

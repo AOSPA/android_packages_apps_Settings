@@ -424,7 +424,9 @@ abstract class BluetoothDetailsConfigurableFragment :
                         getDrawable(model.toggles[idx].icon)?.let {
                             pref.setUpButton(idx, model.toggles[idx].label, it)
                         }
-                        pref.setCheckedIndex(model.selectedIndex)
+                        pref.setCheckedIndex(
+                            if (model.isAllowedChangingState) model.selectedIndex else -1
+                        )
                         pref.setOnButtonClickListener { _, checkedId, isChecked ->
                             val checkedIndex =
                                 when (checkedId) {
@@ -517,6 +519,7 @@ abstract class BluetoothDetailsConfigurableFragment :
         when (deviceSettingIcon) {
             is DeviceSettingIcon.BitmapIcon ->
                 deviceSettingIcon.bitmap.toDrawable(requireContext().resources)
+
             is DeviceSettingIcon.ResourceIcon -> context?.getDrawable(deviceSettingIcon.resId)
             null -> null
         }?.apply {

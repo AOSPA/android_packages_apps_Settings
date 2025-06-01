@@ -47,7 +47,6 @@ import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
 import com.android.settingslib.widget.ExpressiveDesignEnabledProvider;
 import com.android.settingslib.widget.SettingsThemeHelper;
-import com.android.window.flags.Flags;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -121,7 +120,7 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             finish();
         }
         final long startTime = System.currentTimeMillis();
-        if (Flags.enforceEdgeToEdge() && !isAnySetupWizard) {
+        if (!isAnySetupWizard) {
             Utils.setupEdgeToEdge(this);
             hideInternalActionBar();
         }

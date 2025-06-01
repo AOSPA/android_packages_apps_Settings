@@ -15,6 +15,9 @@
  */
 package com.android.settings.network;
 
+import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
+
+import static com.android.settings.flags.Flags.FLAG_CATALYST_INTERNET_SETTINGS;
 import static com.android.settings.network.NetworkProviderSettings.MENU_FIX_CONNECTIVITY;
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_DISCONNECT;
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_FORGET;
@@ -54,6 +57,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.view.ContextMenu;
@@ -115,6 +119,9 @@ import java.util.List;
 })
 public class NetworkProviderSettingsTest {
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
+
     private static final int XML_RES = R.xml.wifi_tether_settings;
     private static final int NUM_NETWORKS = 4;
     private static final String FAKE_URI_STRING = "fakeuri";
@@ -170,6 +177,7 @@ public class NetworkProviderSettingsTest {
 
     @Before
     public void setUp() {
+        mSetFlagsRule.disableFlags(FLAG_CATALYST_INTERNET_SETTINGS);
         when(mFragmentActivity.getApplicationContext()).thenReturn(mContext);
         when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
 

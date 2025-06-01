@@ -129,6 +129,9 @@ const val KEY_CHARGING_SOUNDS = "charging_sounds"
 /** Contract key for the "Docking sounds" setting. */
 const val KEY_DOCKING_SOUNDS = "docking_sounds"
 
+/** Contract key for the "Tap & click sounds" setting. */
+const val KEY_TOUCH_SOUNDS = "touch_sounds"
+
 /** Contract key for the "Remove animation" setting. */
 const val KEY_REMOVE_ANIMATION = "remove_animation"
 

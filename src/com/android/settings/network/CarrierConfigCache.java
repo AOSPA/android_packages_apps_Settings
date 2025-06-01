@@ -20,7 +20,6 @@ import static android.telephony.CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANG
 import static android.telephony.SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX;
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
-import android.annotation.Nullable;
 import android.annotation.TestApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -164,14 +163,14 @@ public class CarrierConfigCache {
      * @return A {@link PersistableBundle} containing the config for the given subId, or default
      * values for an invalid subId.
      */
-    public @Nullable PersistableBundle getSpecificConfigsForSubId(int subId,
+    public @NonNull PersistableBundle getSpecificConfigsForSubId(int subId,
             @NonNull String... keys) {
-        if (sCarrierConfigManager == null) return null;
+        if (sCarrierConfigManager == null) return PersistableBundle.EMPTY;
 
         final PersistableBundle config = sCarrierConfigManager.getConfigForSubId(subId, keys);
         if (config == null) {
             Log.e(TAG, "Could not get carrier config, subId:" + subId);
-            return null;
+            return PersistableBundle.EMPTY;
         }
         return config;
     }

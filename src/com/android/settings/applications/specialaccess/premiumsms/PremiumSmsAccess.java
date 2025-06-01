@@ -149,7 +149,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
                     ZeroStatePreference preference = new ZeroStatePreference(
                             getPreferenceScreen().getContext());
                     preference.setIcon(R.drawable.premium_sms_no_app_icon_24dp);
-                    preference.setSummary(R.string.premium_sms_none);
+                    preference.setTitle(R.string.premium_sms_none);
                     getPreferenceScreen().addPreference(preference);
                 }
             }

@@ -20,18 +20,25 @@ import android.app.supervision.flags.Flags
 import android.content.Context
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
+import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.forEachRecursively
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
+/** Activity to display [SupervisionWebContentFiltersScreen]. */
+class SupervisionWebContentFiltersActivity :
+    CatalystSettingsActivity(SupervisionWebContentFiltersScreen.KEY)
 
 /** Web content filters landing page (Settings > Supervision > Web content filters). */
 @ProvidePreferenceScreen(SupervisionWebContentFiltersScreen.KEY)
@@ -63,16 +70,20 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
         supervisionClient?.close()
     }
 
+    override fun isIndexable(context: Context) = true
+
+    override fun hasCompleteHierarchy() = true
+
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
+            +SupervisionWebContentFiltersTopIntroPreference()
             +PreferenceCategory(
                 BROWSER_RADIO_BUTTON_GROUP,
                 R.string.supervision_web_content_filters_browser_title,
             ) +=
                 {
                     val dataStore = SupervisionSafeSitesDataStore(context)
-                    +SupervisionBlockExplicitSitesPreference(dataStore)
-                    +SupervisionAllowAllSitesPreference(dataStore)
+                    +SupervisionSafeSitesSwitchPreference(dataStore)
                 }
             +PreferenceCategory(
                 SEARCH_RADIO_BUTTON_GROUP,
@@ -80,8 +91,7 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
             ) +=
                 {
                     val dataStore = SupervisionSafeSearchDataStore(context)
-                    +SupervisionSearchFilterOnPreference(dataStore)
-                    +SupervisionSearchFilterOffPreference(dataStore)
+                    +SupervisionSafeSearchSwitchPreference(dataStore)
                 }
             +SupervisionWebContentFiltersFooterPreference()
         }
@@ -110,6 +120,9 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
             }
         }
     }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, SupervisionWebContentFiltersActivity::class.java, metadata?.key)
 
     private fun getSupervisionClient(context: Context) =
         supervisionClient ?: SupervisionMessengerClient(context).also { supervisionClient = it }

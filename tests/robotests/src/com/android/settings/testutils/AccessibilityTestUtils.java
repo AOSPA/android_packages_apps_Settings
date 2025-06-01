@@ -22,6 +22,7 @@ import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_NAVIGAT
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
+import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
@@ -29,6 +30,7 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -38,20 +40,27 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.testing.FragmentScenario;
+import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.AccessibilityShortcutsTutorial;
 import com.android.settings.accessibility.ShortcutPreference;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import org.robolectric.shadows.ShadowLooper;
 import org.xmlpull.v1.XmlPullParserException;
@@ -166,5 +175,23 @@ public class AccessibilityTestUtils {
         assertThat(intent).isNotNull();
         assertThat(intent.getExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
                 EditShortcutsPreferenceFragment.class.getName());
+    }
+
+    /**
+     * Launch a fragment with Setup wizard theme applied
+     */
+    public static <F extends Fragment> FragmentScenario<F> launchFragmentInSetupWizardFlow(
+            Class<F> fragmentClass, @Nullable Bundle fragmentArgs) {
+        FragmentScenario<F> fragmentScenario = FragmentScenario.launch(
+                fragmentClass, fragmentArgs,
+                androidx.appcompat.R.style.Theme_AppCompat, Lifecycle.State.INITIALIZED);
+        fragmentScenario.onFragment(fragment -> {
+            Activity activity = fragment.getActivity();
+            activity.getIntent().putExtra(EXTRA_IS_SETUP_FLOW, true);
+            activity.setTheme(R.style.SettingsPreferenceTheme_SetupWizard_Expressive);
+            ThemeHelper.trySetSuwTheme(activity);
+        });
+
+        return fragmentScenario;
     }
 }

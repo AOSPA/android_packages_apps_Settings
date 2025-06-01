@@ -18,6 +18,7 @@ package com.android.settings.network
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
@@ -39,7 +40,7 @@ open class AdaptiveConnectivityScreen : PreferenceScreenMixin {
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAdaptiveConnectivity()
 
-    override fun fragmentClass() = AdaptiveConnectivitySettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? = AdaptiveConnectivitySettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {

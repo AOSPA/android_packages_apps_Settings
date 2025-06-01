@@ -28,6 +28,7 @@ import com.android.settings.R
 import com.android.settings.contract.KEY_MEDIA_VOLUME
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.restriction.PreferenceRestrictionMixin
+import com.android.settings.sound.VolumeSliderPreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.datastore.Permissions
@@ -41,7 +42,7 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
-open class MediaVolumePreference(private val audioHelper: AudioHelper) :
+class MediaVolumePreference(private val audioHelper: AudioHelper) :
     IntRangeValuePreference,
     PreferenceBinding,
     PreferenceActionMetricsProvider,
@@ -112,20 +113,20 @@ open class MediaVolumePreference(private val audioHelper: AudioHelper) :
 
     override fun getMaxValue(context: Context) = audioHelper.getMaxVolume(STREAM_MUSIC)
 
-    override fun createWidget(context: Context) = VolumeSeekBarPreference(context)
+    override fun createWidget(context: Context) = VolumeSliderPreference(context)
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
-        (preference as VolumeSeekBarPreference).apply {
+        (preference as VolumeSliderPreference).apply {
             setStream(STREAM_MUSIC)
             setMuteIcon(R.drawable.ic_media_stream_off)
             setListener { updateContentDescription(this) }
         }
     }
 
-    private fun updateContentDescription(preference: VolumeSeekBarPreference) {
+    private fun updateContentDescription(preference: VolumeSliderPreference) {
         when {
-            preference.isMuted ->
+            preference.isMuted() ->
                 preference.updateContentDescription(
                     preference.context.getString(
                         R.string.volume_content_description_silent_mode,

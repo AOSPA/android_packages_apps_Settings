@@ -16,6 +16,7 @@
 package com.android.settings.overlay
 
 import android.content.Context
+import com.android.settings.accessibility.AccessibilityDisabilitySupportFeatureProvider
 import com.android.settings.accessibility.AccessibilityFeedbackFeatureProvider
 import com.android.settings.accessibility.AccessibilityPageIdFeatureProvider
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider
@@ -140,6 +141,12 @@ abstract class FeatureFactory {
      * Retrieves implementation for Accessibility feedback category feature.
      */
     abstract val accessibilityFeedbackFeatureProvider: AccessibilityFeedbackFeatureProvider
+
+    /**
+     * Retrieves implementation for Accessibility disability support feature.
+     */
+    abstract val accessibilityDisabilitySupportFeatureProvider:
+            AccessibilityDisabilitySupportFeatureProvider
 
     /**
      * Retrieves implementation for Accessibility search index feature.

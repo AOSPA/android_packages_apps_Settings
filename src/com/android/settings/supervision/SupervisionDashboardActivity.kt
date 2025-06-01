@@ -16,22 +16,23 @@
 
 package com.android.settings.supervision
 
-import android.content.Intent
 import android.os.Bundle
-import com.android.settings.SettingsActivity
+import com.android.settings.CatalystSettingsActivity
 
 /**
  * Activity to display the Supervision settings landing page (Settings > Supervision).
  *
  * See [SupervisionDashboardScreen] for details on the page contents.
  */
-class SupervisionDashboardActivity : SettingsActivity() {
+class SupervisionDashboardActivity :
+    CatalystSettingsActivity(
+        SupervisionDashboardScreen.KEY,
+        SupervisionDashboardFragment::class.java,
+    ) {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // TODO(b/418837620) Show a loading screen if supervision app with required component is not
         // present.
     }
-
-    override fun getInitialFragmentName(intent: Intent): String =
-        SupervisionDashboardFragment::class.java.name
 }

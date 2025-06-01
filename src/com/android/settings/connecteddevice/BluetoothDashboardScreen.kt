@@ -17,6 +17,7 @@ package com.android.settings.connecteddevice
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.BluetoothDashboardActivity
 import com.android.settings.core.PreferenceScreenMixin
@@ -46,7 +47,7 @@ open class BluetoothDashboardScreen : PreferenceScreenMixin {
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass() = BluetoothDashboardFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? = BluetoothDashboardFragment::class.java
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, BluetoothDashboardActivity::class.java, metadata?.key)

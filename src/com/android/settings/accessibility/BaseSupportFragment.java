@@ -28,7 +28,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.server.accessibility.Flags;
+import com.android.settings.accessibility.actionbar.DisabilitySupportMenuController;
 import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.accessibility.actionbar.SurveyMenuController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -39,7 +39,8 @@ import com.android.settings.overlay.SurveyFeatureProvider;
  * Base fragment for dashboard style UI containing support-related items.
  *
  * <p>Child classes <strong>must</strong> configure the mapping between {@link SettingsEnums} page
- * IDs and feedback bucket IDs from {@link AccessibilityFeedbackFeatureProvider}.
+ * IDs, feedback bucket IDs from {@link AccessibilityFeedbackFeatureProvider}, and disability
+ * support.
  */
 public abstract class BaseSupportFragment extends DashboardFragment {
 
@@ -48,8 +49,12 @@ public abstract class BaseSupportFragment extends DashboardFragment {
         super.onCreate(savedInstanceState);
         handleFeedbackFlow();
 
-        if (Flags.enableLowVisionHats()) {
+        if (com.android.server.accessibility.Flags.enableLowVisionHats()) {
             handleSurveyFlow();
+        }
+
+        if (com.android.settings.accessibility.Flags.enableDisabilitySupport()) {
+            handleDisabilitySupportFlow();
         }
     }
 
@@ -83,6 +88,11 @@ public abstract class BaseSupportFragment extends DashboardFragment {
 
     @NonNull
     protected String getSurveyKey() {
+        return "";
+    }
+
+    @NonNull
+    protected String getDisabilitySupportUrl() {
         return "";
     }
 
@@ -120,5 +130,14 @@ public abstract class BaseSupportFragment extends DashboardFragment {
         }
 
         FeedbackMenuController.init(this, feedbackCategory);
+    }
+
+    private void handleDisabilitySupportFlow() {
+        final String disabilitySupportUrl = getDisabilitySupportUrl();
+        if (TextUtils.isEmpty(disabilitySupportUrl)) {
+            return;
+        }
+
+        DisabilitySupportMenuController.init(this, disabilitySupportUrl);
     }
 }

@@ -16,8 +16,11 @@
 
 package com.android.settings.sound
 
+import com.android.media.flags.Flags.enableDeviceSuggestionsPreference
+
 import android.app.settings.SettingsEnums
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
@@ -68,13 +71,13 @@ open class MediaControlsScreen(context: Context) :
 
     override fun isFlagEnabled(context: Context) = Flags.catalystMediaControls()
 
-    override fun fragmentClass() = MediaControlsSettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? = MediaControlsSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
             +MediaControlsSwitchPreference(mediaControlsStore)
             +MediaControlsLockscreenSwitchPreference()
-            if (Flags.deviceSuggestionsPreference()) {
+            if (enableDeviceSuggestionsPreference()) {
                 +SuggestionsPreference()
             }
         }

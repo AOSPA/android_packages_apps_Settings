@@ -17,6 +17,7 @@ package com.android.settings.fuelgauge.batterysaver
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.BatterySaverSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
@@ -44,7 +45,7 @@ open class BatterySaverScreen : PreferenceScreenMixin {
 
     override fun isFlagEnabled(context: Context) = Flags.catalystBatterySaverScreen()
 
-    override fun fragmentClass() = BatterySaverSettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? = BatterySaverSettings::class.java
 
     override fun hasCompleteHierarchy() = false
 

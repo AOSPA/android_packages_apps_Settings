@@ -27,17 +27,21 @@ import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragm
 import com.google.android.setupcompat.util.WizardManagerHelper
 
 /**
- * Base class for Fragment that holds a [ShortcutPreference]. By default, the fragment
- * is not restricted. If the fragment should be restricted, pass the restriction key when calling
- * super's constructor. See [com.android.settings.dashboard.RestrictedDashboardFragment]
+ * Base class for Fragment that holds a [ShortcutPreference]. By default, the fragment is not
+ * restricted. If the fragment should be restricted, pass the restriction key when calling super's
+ * constructor. See [com.android.settings.dashboard.RestrictedDashboardFragment]
  */
 abstract class ShortcutFragment(restrictionKey: String? = null) :
     BaseRestrictedSupportFragment(restrictionKey) {
 
     abstract fun getFeatureName(): CharSequence
+
     abstract fun getFeatureComponentName(): ComponentName
+
     open fun getShortcutPreferenceController(): ToggleShortcutPreferenceController {
-        return use<ToggleShortcutPreferenceController>(ToggleShortcutPreferenceController::class.java)
+        return use<ToggleShortcutPreferenceController>(
+            ToggleShortcutPreferenceController::class.java
+        )
     }
 
     override fun onDisplayPreferenceDialog(preference: Preference) {
@@ -45,11 +49,8 @@ abstract class ShortcutFragment(restrictionKey: String? = null) :
             val isChecked = preference.isChecked
             val prefController = getShortcutPreferenceController()
             if (isChecked) {
-                AccessibilityShortcutsTutorial.DialogFragment.showDialog(
-                    getChildFragmentManager(),
-                    prefController.getUserPreferredShortcutTypes(getFeatureComponentName()),
-                    getFeatureName(),
-                    WizardManagerHelper.isAnySetupWizard(getIntent())
+                showShortcutsTutorial(
+                    prefController.getUserPreferredShortcutTypes(getFeatureComponentName())
                 )
             }
             return
@@ -60,10 +61,9 @@ abstract class ShortcutFragment(restrictionKey: String? = null) :
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         if (preference is ShortcutPreference) {
-            EditShortcutsPreferenceFragment.showEditShortcutScreen(
-                requireContext(), getMetricsCategory(), preference.title,
-                getFeatureComponentName(), getIntent()
-            )
+            showEditShortcutsScreen(preference.title ?: "")
+            // log here since calling super.onPreferenceTreeClick will be skipped
+            writePreferenceClickMetric(preference)
             return true
         }
         return super.onPreferenceTreeClick(preference)
@@ -77,10 +77,28 @@ abstract class ShortcutFragment(restrictionKey: String? = null) :
     override fun onCreateRecyclerView(
         inflater: LayoutInflater,
         parent: ViewGroup,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): RecyclerView {
-        val recyclerView =
-            super.onCreateRecyclerView(inflater, parent, savedInstanceState)
+        val recyclerView = super.onCreateRecyclerView(inflater, parent, savedInstanceState)
         return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(recyclerView)
+    }
+
+    protected fun showShortcutsTutorial(shortcutTypes: Int) {
+        AccessibilityShortcutsTutorial.DialogFragment.showDialog(
+            getChildFragmentManager(),
+            shortcutTypes,
+            getFeatureName(),
+            WizardManagerHelper.isAnySetupWizard(getIntent()),
+        )
+    }
+
+    protected fun showEditShortcutsScreen(screenTitle: CharSequence) {
+        EditShortcutsPreferenceFragment.showEditShortcutScreen(
+            requireContext(),
+            getMetricsCategory(),
+            screenTitle,
+            getFeatureComponentName(),
+            getIntent(),
+        )
     }
 }

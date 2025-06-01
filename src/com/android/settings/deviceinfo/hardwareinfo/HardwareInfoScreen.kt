@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo.hardwareinfo
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
@@ -54,7 +55,7 @@ open class HardwareInfoScreen :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass() = HardwareInfoFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? = HardwareInfoFragment::class.java
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_device_model)

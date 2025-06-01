@@ -18,6 +18,7 @@ package com.android.settings.spa.app.catalyst
 
 import android.Manifest.permission.MANAGE_EXTERNAL_STORAGE
 import android.app.Application
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -29,6 +30,7 @@ import com.android.settings.R
 import com.android.settings.applications.AppStateManageExternalStorageBridge
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
+import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.applications.ApplicationsState
 import com.android.settingslib.datastore.KeyValueStore
@@ -39,8 +41,6 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceFragment
-import com.android.settingslib.preference.PreferenceScreenCreator
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import kotlinx.coroutines.flow.Flow
@@ -48,8 +48,8 @@ import kotlinx.coroutines.flow.flow
 
 // Note: This page is for DeviceState usages.
 @ProvidePreferenceScreen(AppInfoAllFilesAccessScreen.KEY, parameterized = true)
-class AppInfoAllFilesAccessScreen(context: Context, override val arguments: Bundle) :
-    PreferenceScreenCreator, PreferenceSummaryProvider, PreferenceTitleProvider {
+open class AppInfoAllFilesAccessScreen(context: Context, override val arguments: Bundle) :
+    PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider {
 
     private val packageName = arguments.getString("app")!!
 
@@ -62,6 +62,11 @@ class AppInfoAllFilesAccessScreen(context: Context, override val arguments: Bund
 
     override val screenTitle: Int
         get() = R.string.manage_external_storage_title
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_apps
+
+    override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
 
     override fun tags(context: Context) =
         arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
@@ -85,8 +90,6 @@ class AppInfoAllFilesAccessScreen(context: Context, override val arguments: Bund
     override fun isFlagEnabled(context: Context) = Flags.deviceState()
 
     override fun hasCompleteHierarchy() = false
-
-    override fun fragmentClass() = PreferenceFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) { +AllFilesAccessMainSwitch(storage) }

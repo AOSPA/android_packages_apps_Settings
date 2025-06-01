@@ -152,6 +152,8 @@ public class BluetoothDetailsAudioDeviceTypeController extends BluetoothDetailsC
         mAudioDeviceTypePreference.setKey(KEY_BT_AUDIO_DEVICE_TYPE);
         mAudioDeviceTypePreference.setTitle(
                 mContext.getString(R.string.bluetooth_details_audio_device_types_title));
+        mAudioDeviceTypePreference.setDialogTitle(
+                mContext.getString(R.string.bluetooth_details_audio_device_types_title));
         mAudioDeviceTypePreference.setEntries(new CharSequence[]{
                 mContext.getString(R.string.bluetooth_details_audio_device_type_unknown),
                 mContext.getString(R.string.bluetooth_details_audio_device_type_speaker),

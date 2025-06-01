@@ -38,3 +38,10 @@ flag {
   description: "Allow changing display size of the connected display."
   bug: "392853666"
 }
+
+flag {
+  name: "show_stacked_mirroring_display_connected_display_setting"
+  namespace: "lse_desktop_experience"
+  description: "Stack mirroring displays on the display topology pane."
+  bug: "401059862"
+}

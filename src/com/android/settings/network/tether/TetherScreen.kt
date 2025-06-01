@@ -19,6 +19,7 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.net.TetheringManager
 import android.os.UserManager
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.TetherSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
@@ -76,7 +77,7 @@ open class TetherScreen :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass() = TetherSettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? = TetherSettings::class.java
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, TetherSettingsActivity::class.java, metadata?.key)

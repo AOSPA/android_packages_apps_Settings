@@ -1,0 +1,328 @@
+/*
+ * Copyright (C) 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.accessibility.detail.a11yservice
+
+import android.accessibilityservice.AccessibilityServiceInfo
+import android.content.BroadcastReceiver
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.Bundle
+import android.provider.Settings
+import androidx.annotation.VisibleForTesting
+import androidx.fragment.app.FragmentResultListener
+import androidx.preference.Preference
+import androidx.preference.TwoStatePreference
+import com.android.settings.R
+import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_SHORTCUT
+import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE
+import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_TOGGLE
+import com.android.settings.accessibility.AccessibilitySettings
+import com.android.settings.accessibility.ShortcutFragment
+import com.android.settings.accessibility.ShortcutPreference
+import com.android.settings.accessibility.ToggleShortcutPreferenceController
+import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
+import com.android.settings.accessibility.extensions.getFeatureName
+import com.android.settings.accessibility.extensions.isServiceWarningRequired
+import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceController
+import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment
+import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment.Companion.RESULT_STATUS_ALLOW
+import com.android.settings.accessibility.shared.dialogs.DisableAccessibilityServiceDialogFragment
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+
+/** Fragment that shows the detail screen of an AccessibilityService */
+open class A11yServicePreferenceFragment : ShortcutFragment() {
+    private val tag = A11yServicePreferenceFragment::class.simpleName
+    private var serviceInfo: AccessibilityServiceInfo? = null
+    private val fragmentResultListener =
+        object : FragmentResultListener {
+            override fun onFragmentResult(requestKey: String, result: Bundle) {
+                if (requestKey == SERVICE_WARNING_DIALOG_REQUEST_CODE) {
+                    val allow: Boolean =
+                        AccessibilityServiceWarningDialogFragment.getResultStatus(result) ==
+                            RESULT_STATUS_ALLOW
+                    val dialogEnum =
+                        AccessibilityServiceWarningDialogFragment.getResultDialogContext(result)
+                    handleServiceWarningResponse(allow, dialogEnum)
+                }
+            }
+        }
+
+    private val packageRemovedReceiver =
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent) {
+                val packageName = intent.getData()?.getSchemeSpecificPart()
+                if (serviceInfo?.componentName?.packageName == packageName) {
+                    finish()
+                }
+            }
+        }
+
+    override fun onDisplayPreferenceDialog(preference: Preference) {
+        if (preference is ShortcutPreference) {
+            val isChecked = preference.isChecked
+            if (!isChecked) {
+                turnOffShortcuts()
+            } else {
+                val serviceWarningRequired =
+                    serviceInfo?.isServiceWarningRequired(requireContext()) != false
+                if (serviceWarningRequired) {
+                    showServiceWarning(ENABLE_WARNING_FROM_SHORTCUT_TOGGLE)
+                } else {
+                    handleServiceWarningResponse(
+                        allow = true,
+                        dialogEnum = ENABLE_WARNING_FROM_SHORTCUT_TOGGLE,
+                    )
+                }
+            }
+            return
+        }
+
+        super.onDisplayPreferenceDialog(preference)
+    }
+
+    override fun onPreferenceTreeClick(preference: Preference): Boolean {
+        val localServiceInfo = serviceInfo
+        if (localServiceInfo == null) {
+            return super.onPreferenceTreeClick(preference)
+        }
+
+        val useServicePrefKey = use(UseServiceTogglePreferenceController::class.java)?.preferenceKey
+        val shortcutPrefKey = getShortcutPreferenceController().preferenceKey
+        if (preference.key == shortcutPrefKey) {
+            if (localServiceInfo.isServiceWarningRequired(requireContext())) {
+                showServiceWarning(ENABLE_WARNING_FROM_SHORTCUT)
+            } else {
+                handleServiceWarningResponse(
+                    allow = true,
+                    dialogEnum = ENABLE_WARNING_FROM_SHORTCUT,
+                )
+            }
+
+            // log here since calling super.onPreferenceTreeClick will be skipped
+            writePreferenceClickMetric(preference)
+            return true
+        } else if (preference is TwoStatePreference && preference.key == useServicePrefKey) {
+            if (preference.isChecked) {
+                DisableAccessibilityServiceDialogFragment.showDialog(
+                    fragmentManager = childFragmentManager,
+                    localServiceInfo.componentName,
+                )
+            } else {
+                if (localServiceInfo.isServiceWarningRequired(requireContext())) {
+                    showServiceWarning(ENABLE_WARNING_FROM_TOGGLE)
+                } else {
+                    handleServiceWarningResponse(
+                        allow = true,
+                        dialogEnum = ENABLE_WARNING_FROM_TOGGLE,
+                    )
+                }
+            }
+
+            // log here since calling super.onPreferenceTreeClick will be skipped
+            writePreferenceClickMetric(preference)
+            return true
+        }
+        return super.onPreferenceTreeClick(preference)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val componentName = getFeatureComponentName()
+        serviceInfo =
+            AccessibilityRepositoryProvider.get(context).getAccessibilityServiceInfo(componentName)
+        if (serviceInfo == null) {
+            finish()
+        } else {
+            serviceInfo?.let {
+                writeConfigDefaultAccessibilityServiceShortcutTargetIfNeeded(it.componentName)
+                initializePreferenceControllers(it)
+            }
+        }
+    }
+
+    private fun initializePreferenceControllers(a11yServiceInfo: AccessibilityServiceInfo) {
+        use(TopIntroPreferenceController::class.java).initialize(a11yServiceInfo)
+        use(AccessibilityServiceIllustrationPreferenceController::class.java)
+            .initialize(a11yServiceInfo)
+        use(UseServiceTogglePreferenceController::class.java).initialize(a11yServiceInfo)
+        use(ShortcutPreferenceController::class.java).initialize(a11yServiceInfo)
+        use(SettingsPreferenceController::class.java).initialize(a11yServiceInfo)
+        use(LaunchAppInfoPreferenceController::class.java).initialize(a11yServiceInfo.componentName)
+        use(AccessibilityServiceHtmlFooterPreferenceController::class.java)
+            .initialize(a11yServiceInfo)
+        use(AccessibilityServiceFooterPreferenceController::class.java).initialize(a11yServiceInfo)
+    }
+
+    private fun writeConfigDefaultAccessibilityServiceShortcutTargetIfNeeded(name: ComponentName) {
+        // It might be shortened form (with a leading '.'). Need to unflatten back to ComponentName
+        // first, or it will encounter errors when getting service from
+        // `ACCESSIBILITY_SHORTCUT_TARGET_SERVICE`.
+        val defaultService =
+            ComponentName.unflattenFromString(
+                getString(com.android.internal.R.string.config_defaultAccessibilityService)
+            )
+
+        if (defaultService == null || name != defaultService) {
+            return
+        }
+
+        val targetKey = Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE
+        val targetString = Settings.Secure.getString(requireContext().contentResolver, targetKey)
+
+        // By intentional, we only need to write the config string when the Settings key has never
+        // been set (== null). Empty string also means someone already wrote it before, so we need
+        // to respect the value.
+        if (targetString == null) {
+            Settings.Secure.putString(
+                requireContext().contentResolver,
+                targetKey,
+                defaultService.flattenToString(),
+            )
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().setTitle(getFeatureName())
+        registerPackageRemoveReceiver()
+        childFragmentManager.setFragmentResultListener(
+            SERVICE_WARNING_DIALOG_REQUEST_CODE,
+            this,
+            fragmentResultListener,
+        )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterPackageRemoveReceiver()
+    }
+
+    override fun getFeatureName(): CharSequence {
+        return serviceInfo?.getFeatureName(requireContext()) ?: ""
+    }
+
+    override fun getFeatureComponentName(): ComponentName {
+        return requireNotNull(
+            requireArguments()
+                .getParcelable<ComponentName>(
+                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                    ComponentName::class.java,
+                )
+        )
+    }
+
+    override fun getPreferenceScreenResId(): Int {
+        return R.xml.accessibility_service_detail_screen
+    }
+
+    override fun getLogTag(): String? {
+        return tag
+    }
+
+    override fun getMetricsCategory(): Int {
+        return featureFactory.accessibilityPageIdFeatureProvider.getCategory(
+            getFeatureComponentName()
+        )
+    }
+
+    override fun getShortcutPreferenceController(): ToggleShortcutPreferenceController {
+        return use(ShortcutPreferenceController::class.java)
+    }
+
+    private fun handleServiceWarningResponse(allow: Boolean, dialogEnum: Int) {
+        if (allow) {
+            when (dialogEnum) {
+                ENABLE_WARNING_FROM_TOGGLE -> turnOnService()
+                ENABLE_WARNING_FROM_SHORTCUT -> {
+                    findShortcutPreference()?.run {
+                        showEditShortcutsScreen(requireNotNull(this.title))
+                    }
+                }
+
+                ENABLE_WARNING_FROM_SHORTCUT_TOGGLE -> turnOnShortcuts()
+            }
+        } else {
+            when (dialogEnum) {
+                ENABLE_WARNING_FROM_TOGGLE -> turnOffService()
+                ENABLE_WARNING_FROM_SHORTCUT_TOGGLE -> turnOffShortcuts()
+            }
+        }
+    }
+
+    private fun turnOnShortcuts() {
+        val prefController = getShortcutPreferenceController()
+        findShortcutPreference()?.run {
+            getShortcutPreferenceController().setChecked(this, checked = true)
+            showShortcutsTutorial(
+                prefController.getUserPreferredShortcutTypes(getFeatureComponentName())
+            )
+        }
+    }
+
+    private fun turnOffShortcuts() {
+        findShortcutPreference()?.run {
+            getShortcutPreferenceController().setChecked(this, checked = false)
+        }
+    }
+
+    private fun turnOnService() {
+        findUseServicePreference()?.run {
+            use(UseServiceTogglePreferenceController::class.java)?.setChecked(this, checked = true)
+        }
+    }
+
+    private fun turnOffService() {
+        findUseServicePreference()?.run {
+            use(UseServiceTogglePreferenceController::class.java)?.setChecked(this, checked = false)
+        }
+    }
+
+    private fun findShortcutPreference(): ShortcutPreference? {
+        return findPreference(getShortcutPreferenceController().preferenceKey)
+    }
+
+    private fun findUseServicePreference(): TwoStatePreference? {
+        return use(UseServiceTogglePreferenceController::class.java)?.let {
+            findPreference(it.preferenceKey)
+        }
+    }
+
+    private fun showServiceWarning(dialogEnum: Int) {
+        AccessibilityServiceWarningDialogFragment.showDialog(
+            childFragmentManager,
+            requireNotNull(serviceInfo).componentName,
+            dialogEnum,
+            SERVICE_WARNING_DIALOG_REQUEST_CODE,
+        )
+    }
+
+    private fun registerPackageRemoveReceiver() {
+        val filter = IntentFilter(Intent.ACTION_PACKAGE_REMOVED)
+        filter.addDataScheme("package")
+        context?.registerReceiver(packageRemovedReceiver, filter)
+    }
+
+    private fun unregisterPackageRemoveReceiver() {
+        context?.unregisterReceiver(packageRemovedReceiver)
+    }
+
+    companion object {
+        @VisibleForTesting const val SERVICE_WARNING_DIALOG_REQUEST_CODE = "serviceWarningRequest"
+    }
+}

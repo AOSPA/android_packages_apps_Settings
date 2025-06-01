@@ -39,7 +39,7 @@ import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
-import com.android.server.accessibility.Flags;
+import com.android.settings.accessibility.actionbar.DisabilitySupportMenuController;
 import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.accessibility.actionbar.SurveyMenuController;
 import com.android.settings.overlay.SurveyFeatureProvider;
@@ -72,6 +72,7 @@ public class BaseSupportFragmentTest {
             new ActivityScenarioRule<>(EmptyFragmentActivity.class);
 
     private static final String PLACEHOLDER_SURVEY_KEY = "survey_key";
+    private static final String PLACEHOLDER_DISABILITY_SUPPORT_URL = "http://example.com/support";
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
 
@@ -147,9 +148,38 @@ public class BaseSupportFragmentTest {
         verify(mLifecycle).addObserver(any(FeedbackMenuController.class));
     }
 
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
+    public void handleDisabilitySupportFlow_disabilitySupportUrlNotEmpty_shouldAttachToLifecycle() {
+        when(mHost.getDisabilitySupportUrl()).thenReturn(PLACEHOLDER_DISABILITY_SUPPORT_URL);
+
+        mHost.onCreate(/* savedInstanceState= */ null);
+
+        verify(mLifecycle).addObserver(any(DisabilitySupportMenuController.class));
+    }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
+    public void handleDisabilitySupportFlow_disabilitySupportUrlEmpty_shouldNotAttachToLifecycle() {
+        when(mHost.getDisabilitySupportUrl()).thenReturn("");
+
+        mHost.onCreate(/* savedInstanceState= */ null);
+
+        verify(mLifecycle, never()).addObserver(any(DisabilitySupportMenuController.class));
+    }
+
+    @Test
+    @DisableFlags(com.android.settings.accessibility.Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
+    public void handleDisabilitySupportFlow_disableDisabilitySupport_shouldNotAttachToLifecycle() {
+        when(mHost.getDisabilitySupportUrl()).thenReturn(PLACEHOLDER_DISABILITY_SUPPORT_URL);
+
+        mHost.onCreate(/* savedInstanceState= */ null);
+
+        verify(mLifecycle, never()).addObserver(any(DisabilitySupportMenuController.class));
+    }
+
+    @Test
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void handleSurveyFlow_surveyKeyEmpty_shouldNotAttachToLifecycle() {
         when(mHost.getSurveyKey()).thenReturn(/* value= */ "");
 
@@ -159,7 +189,7 @@ public class BaseSupportFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void handleSurveyFlow_surveyKeyNotEmpty_shouldAttachToLifecycle() {
         when(mHost.getSurveyKey()).thenReturn(PLACEHOLDER_SURVEY_KEY);
 
@@ -169,7 +199,7 @@ public class BaseSupportFragmentTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
+    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void handleSurveyFlow_disableHaTS_surveyKeyNotEmpty_shouldNotAttachToLifecycle() {
         when(mHost.getSurveyKey()).thenReturn(PLACEHOLDER_SURVEY_KEY);
 
@@ -179,7 +209,7 @@ public class BaseSupportFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void handleSurveyFlow_isStartSurveyIntentTrue_shouldStartSurvey() {
         final SurveyFeatureProvider surveyFeatureProvider =
                 FakeFeatureFactory.setupForTest().getSurveyFeatureProvider(mContext);
@@ -194,7 +224,7 @@ public class BaseSupportFragmentTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
+    @DisableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void handleSurveyFlow_disableHaTS_isStartSurveyIntentTrue_shouldNotStartSurvey() {
         final SurveyFeatureProvider surveyFeatureProvider =
                 FakeFeatureFactory.setupForTest().getSurveyFeatureProvider(mContext);
@@ -209,7 +239,7 @@ public class BaseSupportFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_LOW_VISION_HATS)
     public void handleSurveyFlow_isStartSurveyIntentFalse_shouldNotStartSurvey() {
         final SurveyFeatureProvider surveyFeatureProvider =
                 FakeFeatureFactory.setupForTest().getSurveyFeatureProvider(mContext);

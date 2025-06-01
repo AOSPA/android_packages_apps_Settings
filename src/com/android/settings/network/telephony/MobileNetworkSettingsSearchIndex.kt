@@ -34,6 +34,7 @@ import com.android.settings.network.telephony.NrAdvancedCallingPreferenceControl
 import com.android.settings.network.telephony.RoamingPreferenceController.Companion.RoamingSearchItem
 import com.android.settings.network.telephony.VideoCallingPreferenceController.Companion.VideoCallingSearchItem
 import com.android.settings.network.telephony.WifiCallingPreferenceController.Companion.WifiCallingSearchItem
+import com.android.settings.network.telephony.satellite.SatelliteSettingPreferenceController.Companion.SatelliteConnectivitySearchItem
 import com.android.settingslib.spa.search.SpaSearchIndexableItem
 import com.android.settingslib.spa.search.SpaSearchIndexablePage
 import com.android.settingslib.spa.search.SpaSearchLanding.BundleValue
@@ -123,6 +124,7 @@ class MobileNetworkSettingsSearchIndex(
                 RoamingSearchItem(context),
                 VideoCallingSearchItem(context),
                 WifiCallingSearchItem(context),
+                SatelliteConnectivitySearchItem(context),
             )
     }
 }

@@ -23,7 +23,7 @@ import android.text.TextUtils;
 import com.android.settings.R;
 
 // LINT.IfChange
-public class AlarmVolumePreferenceController extends VolumeSeekBarPreferenceController {
+public class AlarmVolumePreferenceController extends VolumeSliderPreferenceController {
 
     private static final String KEY_ALARM_VOLUME = "alarm_volume";
 

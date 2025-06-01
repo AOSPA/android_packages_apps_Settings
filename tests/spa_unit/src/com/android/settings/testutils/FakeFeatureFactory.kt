@@ -17,6 +17,7 @@
 package com.android.settings.testutils
 
 import android.content.Context
+import com.android.settings.accessibility.AccessibilityDisabilitySupportFeatureProvider
 import com.android.settings.accessibility.AccessibilityFeedbackFeatureProvider
 import com.android.settings.accessibility.AccessibilityPageIdFeatureProvider
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider
@@ -127,6 +128,9 @@ class FakeFeatureFactory : FeatureFactory() {
     override val wifiTrackerLibProvider: WifiTrackerLibProvider
         get() = TODO("Not yet implemented")
     override val securitySettingsFeatureProvider: SecuritySettingsFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val accessibilityDisabilitySupportFeatureProvider:
+            AccessibilityDisabilitySupportFeatureProvider
         get() = TODO("Not yet implemented")
     override val accessibilityFeedbackFeatureProvider: AccessibilityFeedbackFeatureProvider
         get() = TODO("Not yet implemented")

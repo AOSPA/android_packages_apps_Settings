@@ -34,6 +34,7 @@
         android:title="@string/condition_airplane_title"
         android:selectable="false"
         android:layout="@layout/airplane_mode_message_preference"
+        settings:searchable="false"
         settings:allowDividerBelow="true"/>
 
     <com.android.settingslib.widget.UntitledPreferenceCategory
@@ -83,7 +84,8 @@
     </PreferenceCategory>
 
 
-    <com.android.settingslib.widget.UntitledPreferenceCategory>
+    <com.android.settingslib.widget.UntitledPreferenceCategory
+        android:key="wifi_ext_category">
       <Preference
           android:key="configure_network_settings"
           android:title="@string/network_and_internet_preferences_title"
@@ -103,5 +105,5 @@
     <com.android.settingslib.widget.FooterPreference
         android:key="wifi_status_message_footer"
         settings:allowDividerAbove="false"
-      settings:searchable="false"/>
+        settings:searchable="false"/>
 </PreferenceScreen>

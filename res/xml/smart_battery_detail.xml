@@ -24,14 +24,14 @@
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="auto_awesome_battery"
-        settings:lottie_rawRes="@raw/auto_awesome_battery_lottie" />
+        settings:lottie_rawRes="@raw/auto_awesome_battery_lottie"
+        settings:controller="com.android.settings.fuelgauge.AdaptiveBatteryIllustrationPreferenceController"/>
 
     <SwitchPreferenceCompat
         android:key="smart_battery"
         android:title="@string/smart_battery_title"
         android:summary="@string/smart_battery_summary"
-        settings:controller="com.android.settings.fuelgauge.SmartBatteryPreferenceController"
-        settings:allowDividerAbove="true"/>
+        settings:controller="com.android.settings.fuelgauge.SmartBatteryPreferenceController"/>
 
     <SwitchPreferenceCompat
         android:key="auto_restriction"

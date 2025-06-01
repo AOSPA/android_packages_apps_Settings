@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo.firmwareversion
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Build
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.FirmwareVersionActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
@@ -50,12 +51,16 @@ open class FirmwareVersionScreen : PreferenceScreenMixin, PreferenceSummaryProvi
         get() = R.string.keywords_android_version
 
     // Once fully launch, change to PreferenceFragment and clean up FirmwareVersionScreenTest
-    override fun fragmentClass() = FirmwareVersionSettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? = FirmwareVersionSettings::class.java
 
     override fun getMetricsCategory() = SettingsEnums.DIALOG_FIRMWARE_VERSION
 
     override val highlightMenuKey: Int
         get() = R.string.menu_key_about_device
+
+    override fun isIndexable(context: Context) = true
+
+    override fun hasCompleteHierarchy() = true
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, FirmwareVersionActivity::class.java, metadata?.key)

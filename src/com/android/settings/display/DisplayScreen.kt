@@ -17,6 +17,7 @@ package com.android.settings.display
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.android.settings.DisplaySettings
 import com.android.settings.R
 import com.android.settings.Settings.DisplaySettingsActivity
@@ -60,7 +61,7 @@ open class DisplayScreen :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass() = DisplaySettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? = DisplaySettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {

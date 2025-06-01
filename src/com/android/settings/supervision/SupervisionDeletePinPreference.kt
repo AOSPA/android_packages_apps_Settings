@@ -75,15 +75,18 @@ class SupervisionDeletePinPreference() :
 
         if (supervisionManager == null || userManager == null) {
             // TODO(b/415995161): Improve error handling
-            builder.setTitle(R.string.supervision_delete_pin_error_header)
+            builder
+                .setTitle(R.string.supervision_delete_pin_error_header)
                 .setMessage(R.string.supervision_delete_pin_error_message)
                 .setPositiveButton(R.string.okay, null)
         } else if (areAnyUsersExceptCurrentSupervised(supervisionManager, userManager)) {
-            builder.setTitle(R.string.supervision_delete_pin_supervision_enabled_header)
+            builder
+                .setTitle(R.string.supervision_delete_pin_supervision_enabled_header)
                 .setMessage(R.string.supervision_delete_pin_supervision_enabled_message)
                 .setPositiveButton(R.string.okay, null)
         } else {
-            builder.setTitle(R.string.supervision_delete_pin_confirm_header)
+            builder
+                .setTitle(R.string.supervision_delete_pin_confirm_header)
                 .setMessage(R.string.supervision_delete_pin_confirm_message)
                 .setPositiveButton(R.string.delete) { _, _ -> onConfirmDeleteClick() }
                 .setNegativeButton(R.string.cancel, null)
@@ -99,16 +102,19 @@ class SupervisionDeletePinPreference() :
             .setTitle(R.string.supervision_delete_pin_error_header)
             .setMessage(R.string.supervision_delete_pin_error_message)
             .setPositiveButton(R.string.okay, null)
-            .create().show()
+            .create()
+            .show()
     }
 
     /** Returns whether any users except the current user are supervised on this device. */
     @VisibleForTesting
     fun areAnyUsersExceptCurrentSupervised(
         supervisionManager: SupervisionManager,
-        userManager: UserManager): Boolean {
+        userManager: UserManager,
+    ): Boolean {
         return userManager.users.any {
-            lifeCycleContext.userId != it.id && supervisionManager.isSupervisionEnabledForUser(it.id)
+            lifeCycleContext.userId != it.id &&
+                supervisionManager.isSupervisionEnabledForUser(it.id)
         }
     }
 
@@ -125,10 +131,11 @@ class SupervisionDeletePinPreference() :
             Log.e(TAG, "Can't delete supervision data; supervising user does not exist.")
             return
         }
+        // Supervision must be disabled before the supervising profile can be removed
+        supervisionManager.setSupervisionEnabled(false)
+        lifeCycleContext.notifyPreferenceChange(KEY)
         if (userManager.removeUser(supervisingUser)) {
-            supervisionManager.isSupervisionEnabled = false
-            supervisionManager.supervisionRecoveryInfo = null
-            lifeCycleContext.notifyPreferenceChange(KEY)
+            supervisionManager.setSupervisionRecoveryInfo(null)
             SubSettingLauncher(lifeCycleContext)
                 .setDestination(SupervisionDashboardFragment::class.java.name)
                 .setSourceMetricsCategory(SettingsEnums.SUPERVISION_DASHBOARD)

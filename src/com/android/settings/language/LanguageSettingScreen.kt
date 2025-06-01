@@ -17,6 +17,7 @@ package com.android.settings.language
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
@@ -46,7 +47,7 @@ open class LanguageSettingScreen : PreferenceScreenMixin {
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass() = LanguageSettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? = LanguageSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 

@@ -62,6 +62,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.media.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
+import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowLocalMediaManager;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.A2dpProfile;
@@ -73,6 +74,7 @@ import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.After;
@@ -98,7 +100,8 @@ import java.util.List;
 @Config(shadows = {
         ShadowAudioManager.class,
         ShadowBluetoothUtils.class,
-        ShadowBluetoothDevice.class}
+        ShadowBluetoothDevice.class,
+        ShadowLocalMediaManager.class }
 )
 public class MediaOutputPreferenceControllerTest {
     private static final String TEST_KEY = "Test_Key";
@@ -122,6 +125,8 @@ public class MediaOutputPreferenceControllerTest {
     private PackageManager mPackageManager;
     @Mock
     private LocalBluetoothManager mLocalManager;
+    @Mock
+    private LocalMediaManager mLocalMediaManager;
     @Mock
     private BluetoothEventManager mBluetoothEventManager;
     @Mock
@@ -236,6 +241,9 @@ public class MediaOutputPreferenceControllerTest {
         when(mRightBluetoothHapDevice.isConnected()).thenReturn(true);
 
         mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+        ShadowLocalMediaManager.setUseMock(mLocalMediaManager);
+        mController.mLocalMediaManager = mLocalMediaManager;
+        when(mLocalMediaManager.getCurrentConnectedDevice()).thenReturn(null);
         mScreen = spy(new PreferenceScreen(mContext, null));
         mPreference = new Preference(mContext);
         mProfileConnectedDevices = new ArrayList<>();
@@ -253,6 +261,7 @@ public class MediaOutputPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowBluetoothUtils.reset();
+        ShadowLocalMediaManager.reset();
     }
 
     /** Start broadcasting so Preference summary should become "Audio Sharing" and disabled */

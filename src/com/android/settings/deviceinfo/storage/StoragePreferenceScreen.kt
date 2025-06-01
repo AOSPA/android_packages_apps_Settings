@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo.storage
 
+import android.app.settings.SettingsEnums
 import android.app.usage.StorageStatsManager
 import android.content.Context
 import android.content.Intent
@@ -25,7 +26,10 @@ import android.os.storage.StorageManager
 import android.util.DataUnit
 import android.util.SparseArray
 import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.deviceinfo.StorageDashboardFragment
 import com.android.settings.flags.Flags
 import com.android.settingslib.applications.StorageStatsSource
 import com.android.settingslib.deviceinfo.PrivateStorageInfo
@@ -33,22 +37,24 @@ import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.asyncPreferenceHierarchy
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.PreferenceFragment
-import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen(StoragePreferenceScreen.KEY)
-class StoragePreferenceScreen(
-    private val context: Context
-) : PreferenceScreenCreator, PreferenceHierarchyGenerator<Int> {
+open class StoragePreferenceScreen(private val context: Context) :
+    PreferenceScreenMixin, PreferenceHierarchyGenerator<Int> {
+
     override val key: String
         get() = KEY
 
     override val title: Int
         get() = R.string.storage_settings
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_storage
+
+    override fun getMetricsCategory() = SettingsEnums.SETTINGS_STORAGE_CATEGORY
 
     override fun getLaunchIntent(
         context: Context,
@@ -256,7 +262,7 @@ class StoragePreferenceScreen(
     override val defaultType: Int
         get() = context.userId
 
-    override fun fragmentClass() = PreferenceFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? = StorageDashboardFragment::class.java
 
     private fun getStorageCache(context: Context, userId: Int): StorageCacheHelper.StorageCache {
         val cacheHelper = StorageCacheHelper(context, userId)

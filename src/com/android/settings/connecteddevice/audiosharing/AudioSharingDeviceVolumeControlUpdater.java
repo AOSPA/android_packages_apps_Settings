@@ -38,8 +38,7 @@ public class AudioSharingDeviceVolumeControlUpdater extends BluetoothDeviceUpdat
 
     private static final String TAG = "AudioSharingVolUpdater";
 
-    @VisibleForTesting
-    static final String PREF_KEY_PREFIX = "audio_sharing_volume_control_";
+    @VisibleForTesting static final String PREF_KEY_PREFIX = "audio_sharing_volume_control_";
 
     @Nullable private final LocalBluetoothManager mBtManager;
 
@@ -58,7 +57,7 @@ public class AudioSharingDeviceVolumeControlUpdater extends BluetoothDeviceUpdat
             // If device is LE audio device and in a sharing session on current sharing device,
             // it would show in volume control group.
             if ((cachedDevice.isConnectedLeAudioDevice()
-                    || cachedDevice.hasConnectedLeAudioMemberDevice())
+                            || cachedDevice.hasConnectedLeAudioMemberDevice())
                     && BluetoothUtils.isBroadcasting(mBtManager)
                     && BluetoothUtils.hasConnectedBroadcastSource(cachedDevice, mBtManager)) {
                 isFilterMatched = true;

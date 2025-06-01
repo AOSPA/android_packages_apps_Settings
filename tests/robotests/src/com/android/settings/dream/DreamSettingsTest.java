@@ -18,18 +18,27 @@ package com.android.settings.dream;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.clearInvocations;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.service.dreams.DreamService;
 import android.widget.CompoundButton;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -48,6 +57,7 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
@@ -381,6 +391,90 @@ public class DreamSettingsTest {
         final CompoundButton mockButton = mock(CompoundButton.class);
         dreamSettings.onCheckedChanged(mockButton, true);
         verify(mLowLightModeTogglePref).setEnabled(true);
+    }
+
+    @Test
+    public void onResume_dreamsAreRefreshed() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = spy(prepareDreamSettings(context));
+
+        final FragmentActivity activity = spy(ActivityController.of(new FragmentActivity()).get());
+        doReturn(activity).when(dreamSettings).getActivity();
+
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.dreamCategory = DreamService.DREAM_CATEGORY_DEFAULT;
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+        dreamSettings.onResume();
+
+        verify(mDreamPickerController).refreshDreamsList();
+    }
+
+    @Test
+    public void packageObserverRegisteredAndUnregistered() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = spy(prepareDreamSettings(context));
+
+        final FragmentActivity activity = spy(ActivityController.of(new FragmentActivity()).get());
+        doReturn(activity).when(dreamSettings).getActivity();
+
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.dreamCategory = DreamService.DREAM_CATEGORY_DEFAULT;
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+        dreamSettings.onResume();
+
+        final ArgumentCaptor<BroadcastReceiver> captor =
+                ArgumentCaptor.forClass(BroadcastReceiver.class);
+        verify(activity).registerReceiver(captor.capture(), any());
+
+        dreamSettings.onPause();
+
+        verify(activity).unregisterReceiver(captor.getValue());
+    }
+
+    @Test
+    public void packageChangedBroadcastRefreshesDreamsList() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = spy(prepareDreamSettings(context));
+
+        final FragmentActivity activity = spy(ActivityController.of(new FragmentActivity()).get());
+        doReturn(activity).when(dreamSettings).getActivity();
+
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.dreamCategory = DreamService.DREAM_CATEGORY_DEFAULT;
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        final Handler handler = mock(Handler.class);
+        when(dreamSettings.getHandler()).thenReturn(handler);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+        dreamSettings.onResume();
+
+        clearInvocations(mDreamPickerController);
+
+        final ArgumentCaptor<BroadcastReceiver> receiverCaptor =
+                ArgumentCaptor.forClass(BroadcastReceiver.class);
+        verify(activity).registerReceiver(receiverCaptor.capture(), any());
+
+        receiverCaptor.getValue().onReceive(context, new Intent());
+
+        final ArgumentCaptor<Runnable> runnableCaptor = ArgumentCaptor.forClass(Runnable.class);
+        verify(handler).postDelayed(runnableCaptor.capture(), anyLong());
+
+        runnableCaptor.getValue().run();
+        verify(mDreamPickerController).refreshDreamsList();
     }
 
     private DreamSettings prepareDreamSettings(Context context) {

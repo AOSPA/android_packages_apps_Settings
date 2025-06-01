@@ -17,6 +17,7 @@ package com.android.settings.fuelgauge.batteryusage
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.BatteryPercentageSwitchPreference
@@ -50,7 +51,7 @@ open class PowerUsageSummaryScreen :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass() = PowerUsageSummary::class.java
+    override fun fragmentClass(): Class<out Fragment>? = PowerUsageSummary::class.java
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_top_level_battery)

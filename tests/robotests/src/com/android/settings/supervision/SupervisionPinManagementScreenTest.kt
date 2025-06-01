@@ -98,7 +98,7 @@ class SupervisionPinManagementScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
     fun getDescription_recoveryInfoMissing_addPinRecovery() {
-        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
 
         assertThat(supervisionPinManagementScreen.getSummary(context))
             .isEqualTo(
@@ -118,7 +118,7 @@ class SupervisionPinManagementScreenTest {
                 /* state */ STATE_PENDING,
                 /* accountData */ null,
             )
-        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(recoveryInfo)
 
         assertThat(supervisionPinManagementScreen.getSummary(context))
             .isEqualTo(
@@ -133,7 +133,7 @@ class SupervisionPinManagementScreenTest {
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN)
     fun getDescription_recoveryFlagDisabled_noSummary() {
-        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
 
         assertThat(supervisionPinManagementScreen.getSummary(context)).isNull()
         assertThat(supervisionPinManagementScreen.getIcon(context))
@@ -150,7 +150,7 @@ class SupervisionPinManagementScreenTest {
                 /* state */ STATE_VERIFIED,
                 /* accountData */ null,
             )
-        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(recoveryInfo)
 
         assertThat(supervisionPinManagementScreen.getSummary(context)).isNull()
         assertThat(supervisionPinManagementScreen.getIcon(context))

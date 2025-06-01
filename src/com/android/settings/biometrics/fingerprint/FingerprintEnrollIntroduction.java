@@ -28,6 +28,7 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -105,6 +106,10 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         iconInfo.getDrawable().setColorFilter(getIconColorFilter());
         iconShield.getDrawable().setColorFilter(getIconColorFilter());
         iconLink.getDrawable().setColorFilter(getIconColorFilter());
+        if (!WizardManagerHelper.isDeviceProvisioned(getApplicationContext()) ||
+            TextUtils.isEmpty(getString(getFooterLearnMore()))) {
+            iconLink.setVisibility(View.GONE);
+        }
 
         final TextView footerMessage2 = findViewById(R.id.footer_message_2);
         final TextView footerMessage3 = findViewById(R.id.footer_message_3);

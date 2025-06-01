@@ -174,9 +174,6 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     }
 
     private boolean isAuthRequired(long function) {
-        if (!Flags.excludeWebcamAuthChallenge()) {
-            return true;
-        }
         // Since webcam and MIDI don't transfer any persistent data over USB
         // don't require authentication.
         return !(function == UsbManager.FUNCTION_UVC || function == UsbManager.FUNCTION_MIDI);

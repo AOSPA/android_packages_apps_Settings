@@ -19,6 +19,7 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.provider.Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS
 import android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS
+import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.LockScreenSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
@@ -79,7 +80,7 @@ open class LockScreenPreferenceScreen(private val context: Context) :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass() = LockscreenDashboardFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? = LockscreenDashboardFragment::class.java
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, LockScreenSettingsActivity::class.java, metadata?.key)
