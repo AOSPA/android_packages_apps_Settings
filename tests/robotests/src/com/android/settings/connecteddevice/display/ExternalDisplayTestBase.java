@@ -80,7 +80,7 @@ public class ExternalDisplayTestBase {
         mDisplays = List.of(
                 createExternalDisplay(DisplayIsEnabled.YES),
                 createOverlayDisplay(DisplayIsEnabled.YES));
-        doReturn(mDisplays).when(mMockedInjector).getConnectedDisplays();
+        doReturn(mDisplays).when(mMockedInjector).getDisplays();
         for (var display : mDisplays) {
             doReturn(display).when(mMockedInjector).getDisplay(display.getId());
         }
@@ -100,24 +100,21 @@ public class ExternalDisplayTestBase {
 
     DisplayDevice createExternalDisplay(DisplayIsEnabled isEnabled) {
         int displayId = EXTERNAL_DISPLAY_ID;
-        var supportedModes = List.of(
-                new Mode(0, 1920, 1080, 60, 60, new float[0], new int[0]),
+        var supportedModes = List.of(new Mode(0, 1920, 1080, 60, 60, new float[0], new int[0]),
                 new Mode(1, 800, 600, 60, 60, new float[0], new int[0]),
                 new Mode(2, 320, 240, 70, 70, new float[0], new int[0]),
                 new Mode(3, 640, 480, 60, 60, new float[0], new int[0]),
                 new Mode(4, 640, 480, 50, 60, new float[0], new int[0]),
                 new Mode(5, 2048, 1024, 60, 60, new float[0], new int[0]),
                 new Mode(6, 720, 480, 60, 60, new float[0], new int[0]));
-        return new DisplayDevice(
-                displayId, "HDMI", supportedModes.get(0), supportedModes, isEnabled);
+        return new DisplayDevice(displayId, "HDMI", supportedModes.get(0), supportedModes,
+                isEnabled, /* isConnectedDisplay= */ true);
     }
 
     DisplayDevice createOverlayDisplay(DisplayIsEnabled isEnabled) {
         int displayId = OVERLAY_DISPLAY_ID;
-        var supportedModes = List.of(
-                new Mode(0, 1240, 780, 60, 60, new float[0],
-                    new int[0]));
-        return new DisplayDevice(
-                displayId, "Overlay #1", supportedModes.get(0), supportedModes, isEnabled);
+        var supportedModes = List.of(new Mode(0, 1240, 780, 60, 60, new float[0], new int[0]));
+        return new DisplayDevice(displayId, "Overlay #1", supportedModes.get(0), supportedModes,
+                isEnabled, /* isConnectedDisplay= */ true);
     }
 }

@@ -23,6 +23,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -45,20 +47,29 @@ public class DeviceStateAutoRotateSettingController extends TogglePreferenceCont
 
     private TwoStatePreference mPreference;
 
+    @NonNull
     private final DeviceStateAutoRotateSettingManager mAutoRotateSettingsManager;
     private final int mOrder;
     private final DeviceStateAutoRotateSettingManager.DeviceStateAutoRotateSettingListener
             mDeviceStateAutoRotateSettingListener = () -> updateState(mPreference);
     private final int mDeviceState;
+    @NonNull
     private final String mDeviceStateDescription;
+    @NonNull
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     @VisibleForTesting
-    DeviceStateAutoRotateSettingController(Context context, int deviceState,
-            String deviceStateDescription, int order,
-            MetricsFeatureProvider metricsFeatureProvider,
-            DeviceStateAutoRotateSettingManager deviceStateAutoRotateSettingManager) {
+    DeviceStateAutoRotateSettingController(@NonNull Context context, int deviceState,
+            @NonNull String deviceStateDescription, int order,
+            @NonNull MetricsFeatureProvider metricsFeatureProvider,
+            @Nullable DeviceStateAutoRotateSettingManager deviceStateAutoRotateSettingManager) {
         super(context, getPreferenceKeyForDeviceState(deviceState));
+
+        if (deviceStateAutoRotateSettingManager == null) {
+            throw new IllegalStateException("DeviceStateAutoRotateSettingController should not be "
+                    + "created when DeviceStateAutoRotateSettingManager is not present");
+        }
+
         mMetricsFeatureProvider = metricsFeatureProvider;
         mDeviceState = deviceState;
         mDeviceStateDescription = deviceStateDescription;
@@ -66,8 +77,8 @@ public class DeviceStateAutoRotateSettingController extends TogglePreferenceCont
         mOrder = order;
     }
 
-    public DeviceStateAutoRotateSettingController(Context context, int deviceState,
-            String deviceStateDescription, int order) {
+    public DeviceStateAutoRotateSettingController(@NonNull Context context, int deviceState,
+            @NonNull String deviceStateDescription, int order) {
         this(context, deviceState, deviceStateDescription, order,
                 FeatureFactory.getFeatureFactory().getMetricsFeatureProvider(),
                 DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(context));

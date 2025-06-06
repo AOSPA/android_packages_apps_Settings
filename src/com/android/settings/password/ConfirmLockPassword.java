@@ -21,6 +21,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_W
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PASSWORD_ATTEMPT_BEFORE_WIPE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PIN_ATTEMPT_BEFORE_WIPE;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
+import static android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING;
 
 import static com.android.settings.biometrics.GatekeeperPasswordProvider.containsGatekeeperPasswordHandle;
 import static com.android.settings.biometrics.GatekeeperPasswordProvider.getGatekeeperPasswordHandle;
@@ -251,10 +252,21 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                             ? getDefaultCheckboxLabel()
                             : mCheckBoxLabel);
                 }
-                if (mCancelButton != null && TextUtils.isEmpty(mAlternateButtonText)) {
-                    mCancelButton.setText(mIsAlpha
-                            ? R.string.lockpassword_forgot_password
-                            : R.string.lockpassword_forgot_pin);
+                if (TextUtils.isEmpty(mAlternateButtonText)) {
+                    int forgotLockPasswordResId =
+                            mIsAlpha
+                                    ? R.string.lockpassword_forgot_password
+                                    : R.string.lockpassword_forgot_pin;
+                    if (mExpressiveTheme
+                            && mFooterBarMixin != null
+                            && mFooterBarMixin.getSecondaryButton() != null) {
+                        mFooterBarMixin
+                                .getSecondaryButton()
+                                .setText(getActivity(), forgotLockPasswordResId);
+
+                    } else if (mCancelButton != null) {
+                        mCancelButton.setText(forgotLockPasswordResId);
+                    }
                 }
                 updateRemoteLockscreenValidationViews();
             }
@@ -295,6 +307,11 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             if (mRemoteValidation) {
                 return getString(R.string.lockpassword_remote_validation_header);
             }
+            if (android.multiuser.Flags.allowSupervisingProfile() && !mIsAlpha) {
+                if (UserManager.get(getActivity()).isUserOfType(USER_TYPE_PROFILE_SUPERVISING)) {
+                    return getString(R.string.supervision_full_screen_pin_verification_title);
+                }
+            }
             if (mIsManagedProfile) {
                 if (mIsAlpha) {
                     return mDevicePolicyManager.getResources().getString(
@@ -332,6 +349,11 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return getContext().getString(mIsAlpha
                         ? R.string.lockpassword_remote_validation_password_details
                         : R.string.lockpassword_remote_validation_pin_details);
+            }
+            if (android.multiuser.Flags.allowSupervisingProfile() && !mIsAlpha) {
+                if (UserManager.get(getActivity()).isUserOfType(USER_TYPE_PROFILE_SUPERVISING)) {
+                    return "";
+                }
             }
             boolean isStrongAuthRequired = isStrongAuthRequired();
             // Map boolean flags to an index by isStrongAuth << 1 + isAlpha.

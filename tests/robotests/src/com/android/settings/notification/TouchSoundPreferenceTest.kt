@@ -25,6 +25,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
@@ -51,7 +52,7 @@ class TouchSoundPreferenceTest {
             override fun getResources(): Resources = mockResources
         }
 
-    private val touchSoundPreference = TouchSoundPreference()
+    private val touchSoundPreference = TouchSoundPreference(context)
 
     @Test
     fun isAvailable_configTrue_shouldReturnTrue() {
@@ -107,22 +108,27 @@ class TouchSoundPreferenceTest {
     }
 
     @Test
-    fun toggleOff_shouldUnloadSoundEffects() {
+    fun toggleOff_shouldUnloadSoundEffects() = runTest {
         enableTouchSound(true)
 
         getSwitchPreference().performClick()
+        waitForJob()
 
         verify(audioManager).unloadSoundEffects()
     }
 
     @Test
-    fun toggleOn_shouldLoadSoundEffects() {
+    fun toggleOn_shouldLoadSoundEffects() = runTest {
         enableTouchSound(false)
 
         getSwitchPreference().performClick()
+        waitForJob()
 
         verify(audioManager).loadSoundEffects()
     }
+
+    private suspend fun waitForJob() =
+        (touchSoundPreference.storage(context) as TouchSoundStorage).job?.join()
 
     private fun getSwitchPreference(): SwitchPreferenceCompat =
         touchSoundPreference.createAndBindWidget(context)

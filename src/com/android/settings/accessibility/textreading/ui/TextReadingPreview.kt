@@ -14,37 +14,21 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility
+package com.android.settings.accessibility.textreading.ui
 
 import android.content.Context
-import android.provider.Settings.System.FONT_SCALE
-import com.android.settings.R
+import com.android.settings.accessibility.TextReadingPreviewPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 
-internal class TextReadingFontSizePreference : PreferenceMetadata, PreferenceBinding {
-
+internal class TextReadingPreview : PreferenceMetadata, PreferenceBinding {
     override val key: String
         get() = KEY
 
-    override val title: Int
-        get() = R.string.title_font_size
-
-    override val summary: Int
-        get() = R.string.short_summary_font_size
-
-    override val keywords: Int
-        get() = R.string.keywords_font_size
-
     override fun createWidget(context: Context) =
-        TooltipSliderPreference(context, /* attrs= */ null).apply {
-            setIconStart(R.drawable.ic_remove_24dp)
-            setIconStartContentDescription(R.string.font_size_make_smaller_desc)
-            setIconEnd(R.drawable.ic_add_24dp)
-            setIconEndContentDescription(R.string.font_size_make_larger_desc)
-        }
+        TextReadingPreviewPreference(context, /* attrs= */ null).apply { isSelectable = false }
 
     companion object {
-        const val KEY = FONT_SCALE
+        const val KEY = "preview"
     }
 }

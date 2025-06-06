@@ -131,7 +131,8 @@ public class ExternalDisplayUpdater {
             return null;
         }
 
-        var allDisplays = mInjector.getConnectedDisplays();
+        var allDisplays = mInjector.getDisplays().stream().filter(
+                DisplayDevice::isConnectedDisplay).toList();
         for (var display : allDisplays) {
             if (display.isEnabled() == DisplayIsEnabled.YES) {
                 return context.getString(R.string.external_display_on);

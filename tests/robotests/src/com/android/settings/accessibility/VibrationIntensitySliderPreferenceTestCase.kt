@@ -423,9 +423,9 @@ abstract class VibrationIntensitySliderPreferenceTestCase {
     private fun setMainSwitchValue(value: Boolean?) =
         SettingsSystemStore.get(context).setBoolean(mainSwitchPreference.key, value)
 
-    private fun setValue(value: Int?) = preference.storage(context).setInt(preference.key, value)
+    protected fun setValue(value: Int?) = preference.storage(context).setInt(preference.key, value)
 
-    private fun createWidget(): SliderPreference = preference.createAndBindWidget(context)
+    protected fun createWidget(): SliderPreference = preference.createAndBindWidget(context)
 
     private fun createMainSwitchWidget(): MainSwitchPreference =
         mainSwitchPreference.createAndBindWidget(context)

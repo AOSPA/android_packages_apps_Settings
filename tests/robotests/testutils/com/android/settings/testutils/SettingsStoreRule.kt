@@ -16,6 +16,7 @@
 
 package com.android.settings.testutils
 
+import android.provider.Settings
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.datastore.SettingsSystemStore
@@ -30,8 +31,11 @@ import org.junit.runner.Description
  */
 class SettingsStoreRule : TestWatcher() {
     override fun starting(description: Description) {
-        SettingsGlobalStore.reset()
-        SettingsSecureStore.reset()
-        SettingsSystemStore.reset()
+        SettingsGlobalStore.resetInstance()
+        SettingsSecureStore.resetInstance()
+        SettingsSystemStore.resetInstance()
+        Settings.Global.clearProviderForTest()
+        Settings.Secure.clearProviderForTest()
+        Settings.System.clearProviderForTest()
     }
 }

@@ -15,9 +15,45 @@
  */
 package com.android.settings.accessibility
 
+import android.os.Vibrator
+import android.provider.Settings
+import com.android.settingslib.datastore.SettingsSystemStore
+import com.google.common.truth.Truth.assertThat
+import org.junit.Test
+
 // LINT.IfChange
 class RingVibrationIntensitySliderPreferenceTest : VibrationIntensitySliderPreferenceTestCase() {
     override val hasRingerModeDependency = true
     override val preference = RingVibrationIntensitySliderPreference(context)
+
+    @Test
+    fun setValue_updatesVibrateWhenRinging() {
+        setSupportedLevels(3)
+        setDefaultIntensity(Vibrator.VIBRATION_INTENSITY_MEDIUM)
+        setValue(Vibrator.VIBRATION_INTENSITY_HIGH)
+        setVibrateWhenRinging(null)
+        val widget = createWidget()
+
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH)
+        assertThat(getStoredVibrateWhenRinging()).isNull()
+
+        widget.value = Vibrator.VIBRATION_INTENSITY_OFF
+
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+        assertThat(getStoredVibrateWhenRinging()).isFalse()
+
+        widget.value = Vibrator.VIBRATION_INTENSITY_LOW
+
+        assertThat(widget.value).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW)
+        assertThat(getStoredVibrateWhenRinging()).isTrue()
+    }
+
+    @Suppress("DEPRECATION")
+    private fun getStoredVibrateWhenRinging() =
+        SettingsSystemStore.get(context).getBoolean(Settings.System.VIBRATE_WHEN_RINGING)
+
+    @Suppress("DEPRECATION")
+    private fun setVibrateWhenRinging(value: Boolean?) =
+        SettingsSystemStore.get(context).setBoolean(Settings.System.VIBRATE_WHEN_RINGING, value)
 }
 // LINT.ThenChange(RingVibrationIntensityPreferenceControllerTest.java)

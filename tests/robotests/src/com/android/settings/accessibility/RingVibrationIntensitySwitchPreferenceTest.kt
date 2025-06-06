@@ -15,9 +15,42 @@
  */
 package com.android.settings.accessibility
 
+import android.provider.Settings
+import com.android.settingslib.datastore.SettingsSystemStore
+import com.google.common.truth.Truth.assertThat
+import org.junit.Test
+
 // LINT.IfChange
 class RingVibrationIntensitySwitchPreferenceTest : VibrationIntensitySwitchPreferenceTestCase() {
     override val hasRingerModeDependency = true
     override val preference = RingVibrationIntensitySwitchPreference(context)
+
+    @Test
+    fun click_updatesVibrateWhenRinging() {
+        setValue(null)
+        setVibrateWhenRinging(null)
+        val widget = createWidget()
+
+        assertThat(widget.isChecked).isTrue()
+        assertThat(getStoredVibrateWhenRinging()).isNull()
+
+        widget.performClick()
+
+        assertThat(widget.isChecked).isFalse()
+        assertThat(getStoredVibrateWhenRinging()).isFalse()
+
+        widget.performClick()
+
+        assertThat(widget.isChecked).isTrue()
+        assertThat(getStoredVibrateWhenRinging()).isTrue()
+    }
+
+    @Suppress("DEPRECATION")
+    private fun getStoredVibrateWhenRinging() =
+        SettingsSystemStore.get(context).getBoolean(Settings.System.VIBRATE_WHEN_RINGING)
+
+    @Suppress("DEPRECATION")
+    private fun setVibrateWhenRinging(value: Boolean?) =
+        SettingsSystemStore.get(context).setBoolean(Settings.System.VIBRATE_WHEN_RINGING, value)
 }
 // LINT.ThenChange(RingVibrationTogglePreferenceControllerTest.java)

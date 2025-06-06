@@ -16,6 +16,7 @@
 
 package com.android.settings.supervision
 
+import android.content.Intent
 import android.os.Bundle
 import com.android.settings.CatalystSettingsActivity
 
@@ -29,10 +30,13 @@ class SupervisionDashboardActivity :
         SupervisionDashboardScreen.KEY,
         SupervisionDashboardFragment::class.java,
     ) {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO(b/418837620) Show a loading screen if supervision app with required component is not
-        // present.
+
+        if (!hasNecessarySupervisionComponent()) {
+            val loadingActivity = Intent(this, SupervisionDashboardLoadingActivity::class.java)
+            startActivity(loadingActivity)
+            finish()
+        }
     }
 }

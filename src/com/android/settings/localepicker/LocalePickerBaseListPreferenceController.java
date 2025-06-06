@@ -131,6 +131,11 @@ public abstract class LocalePickerBaseListPreferenceController extends
                 ? getSuggestedLocaleList()
                 : getSupportedLocaleList());
 
+        // In language selection, list should not contain locale with U extension.
+        if (mParentLocale == null && mIsSuggestedCategory) {
+            result.removeAll(getLocalesWithExtension(result));
+        }
+
         final Map<String, Preference> existingPreferences = mPreferences;
         mPreferences = new ArrayMap<>();
         setupPreference(result, existingPreferences);
@@ -246,7 +251,6 @@ public abstract class LocalePickerBaseListPreferenceController extends
         } else {
             Log.d(TAG, "Can not get suggested locales because the locale list is null or empty.");
         }
-
         return mLocaleOptions;
     }
 
@@ -335,6 +339,18 @@ public abstract class LocalePickerBaseListPreferenceController extends
         return mLocaleList.size() == 1 || isSystemLocale || localeInfo.isSuggested()
                 || (isRegionLocale && !mayHaveDifferentNumberingSystem)
                 || isNumberingMode();
+    }
+
+    @VisibleForTesting
+    protected List<LocaleStore.LocaleInfo> getLocalesWithExtension(
+            List<LocaleStore.LocaleInfo> inputList) {
+        List<LocaleStore.LocaleInfo> checklist = new ArrayList<>();
+        for (LocaleStore.LocaleInfo localeInfo : inputList) {
+            if (localeInfo.getLocale().hasExtensions()) {
+                checklist.add(localeInfo);
+            }
+        }
+        return checklist;
     }
 
     private List<LocaleStore.LocaleInfo> getUserLocaleList() {

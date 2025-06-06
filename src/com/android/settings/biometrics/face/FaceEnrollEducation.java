@@ -63,6 +63,7 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.LottieAnimationHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 import com.google.android.setupdesign.view.IllustrationVideoView;
 
 import java.util.Arrays;
@@ -141,8 +142,6 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mIsUsingExpressiveStyle = BiometricUtils.useExpressiveStyle(getApplicationContext(),
-                getIntent());
 
         setContentView(R.layout.face_enroll_education);
 
@@ -154,6 +153,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         mIllustrationDefault = findViewById(R.id.illustration_default);
         mIllustrationLottie = findViewById(R.id.illustration_lottie);
         mIllustrationAccessibility = findViewById(R.id.illustration_accessibility);
+        mIsUsingExpressiveStyle = ThemeHelper.shouldApplyGlifExpressiveStyle(
+                getApplicationContext());
         if (mIsUsingExpressiveStyle && mIllustrationAccessibility instanceof ImageView) {
             ((ImageView) mIllustrationAccessibility).setImageResource(
                     R.drawable.face_enroll_icon_large_expressive);

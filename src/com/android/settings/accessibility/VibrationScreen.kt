@@ -70,6 +70,7 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
                 +InteractiveHapticsPreferenceCategory() += {
                     +TouchVibrationIntensitySwitchPreference(context)
                     +MediaVibrationIntensitySwitchPreference(context)
+                    +KeyboardVibrationSwitchPreference()
                 }
             }
         }

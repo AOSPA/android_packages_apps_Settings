@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility
+package com.android.settings.accessibility.textreading.ui
 
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.accessibility.TooltipSliderPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 

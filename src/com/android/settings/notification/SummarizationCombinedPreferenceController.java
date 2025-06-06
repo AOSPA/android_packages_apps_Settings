@@ -86,6 +86,7 @@ public class SummarizationCombinedPreferenceController extends BasePreferenceCon
 
         mWorkPref = category.findPreference(WORK_PREF_KEY);
         if (mWorkPref != null) {
+            mWorkPref.setVisible(hasManagedProfile());
             mWorkPref.setOnPreferenceChangeListener(mWorkPrefListener);
         }
 

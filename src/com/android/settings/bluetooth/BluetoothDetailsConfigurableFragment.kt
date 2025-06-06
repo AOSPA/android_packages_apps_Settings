@@ -117,6 +117,7 @@ abstract class BluetoothDetailsConfigurableFragment :
             arguments?.getString(KEY_DEVICE_ADDRESS)
                 ?: run {
                     Log.w(TAG, "onAttach() address is null!")
+                    super.onAttach(context)
                     finish()
                     return
                 }
@@ -124,6 +125,7 @@ abstract class BluetoothDetailsConfigurableFragment :
             getCachedDevice(deviceAddress)
                 ?: run {
                     Log.w(TAG, "onAttach() CachedDevice is null!")
+                    super.onAttach(context)
                     finish()
                     return
                 }
@@ -673,6 +675,8 @@ abstract class BluetoothDetailsConfigurableFragment :
         Log.i(TAG, "Add device to cached device manager: " + remoteDevice.anonymizedAddress)
         return localBluetoothManager.cachedDeviceManager.addDevice(remoteDevice)
     }
+
+    protected fun isCachedDeviceInitialized() = ::cachedDevice.isInitialized
 
     private class SpotlightPreference(context: Context) : Preference(context) {
         init {

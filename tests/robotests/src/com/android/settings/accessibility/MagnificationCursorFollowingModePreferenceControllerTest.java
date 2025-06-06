@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
+
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
@@ -175,5 +177,29 @@ public class MagnificationCursorFollowingModePreferenceControllerTest {
                 Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CURSOR_FOLLOWING_MODE_EDGE);
         assertThat(TextUtils.equals(mController.getSummary(), mContext.getString(
                 R.string.accessibility_magnification_cursor_following_edge))).isTrue();
+    }
+
+    @Test
+    public void updateState_windowModeOnly_preferenceBecomesUnavailable() {
+        MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.WINDOW);
+
+        mController.updateState(mModePreference);
+        assertThat(mModePreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void updateState_fullscreenModeOnly_preferenceIsAvailable() {
+        MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.FULLSCREEN);
+
+        mController.updateState(mModePreference);
+        assertThat(mModePreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_switchMode_preferenceIsAvailable() {
+        MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.ALL);
+
+        mController.updateState(mModePreference);
+        assertThat(mModePreference.isEnabled()).isTrue();
     }
 }

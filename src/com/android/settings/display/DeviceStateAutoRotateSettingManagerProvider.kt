@@ -17,6 +17,7 @@
 package com.android.settings.display
 
 import android.content.Context
+import android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_HARDWARE_CONFIGURATION_FOLD_IN_CLOSED
 import android.hardware.devicestate.DeviceStateManager
 import android.os.Handler
 import android.os.Looper
@@ -26,39 +27,66 @@ import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManager
 import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManagerProvider.createInstance
 import com.android.settingslib.devicestate.PostureDeviceStateConverter
 import com.android.settingslib.utils.ThreadUtils
-import com.android.window.flags.Flags
+import java.util.Optional
 
 /**
  * Provides appropriate instance of [DeviceStateAutoRotateSettingManager], based on the value of
  * [Flags.FLAG_ENABLE_DEVICE_STATE_AUTO_ROTATE_SETTING_REFACTOR].
  */
 object DeviceStateAutoRotateSettingManagerProvider {
-    private var nullableSingletonSettingManager: DeviceStateAutoRotateSettingManager? = null
+    /**
+     * Will be:
+     * - null if the singleton is not initialized yet
+     * - empty optional if the current device is not supported by the manager
+     * - non-empty optional if the current device is supported by the manager
+     */
+    private var singletonSettingManager: Optional<DeviceStateAutoRotateSettingManager>? =
+        null
 
     /**
      * Provides a singleton instance of [DeviceStateAutoRotateSettingManager], based on the
      * value of[Flags.FLAG_ENABLE_DEVICE_STATE_AUTO_ROTATE_SETTING_REFACTOR]. It is supposed to
      * be used by apps that don't support dagger to provide and manager instance.
+     * Returns null if the current device is not supported by the manager.
      */
     @JvmStatic
-    fun getSingletonInstance(context: Context) =
-        nullableSingletonSettingManager ?: createInstance(
-            context,
-            ThreadUtils.getBackgroundExecutor(),
-            AndroidSecureSettings(context.contentResolver),
-            Handler(Looper.getMainLooper()),
-            PostureDeviceStateConverter(
+    fun getSingletonInstance(context: Context): DeviceStateAutoRotateSettingManager? {
+        val managerOptional = singletonSettingManager ?: createManager(context)
+            .also {
+                singletonSettingManager = it
+            }
+
+        return managerOptional.orElse(null)
+    }
+
+    private fun createManager(context: Context): Optional<DeviceStateAutoRotateSettingManager> {
+        val deviceStateManager =
+            context.getSystemService(DeviceStateManager::class.java) ?: return Optional.empty()
+        if (!deviceStateManager.hasFoldedState()) return Optional.empty()
+
+        return Optional.of(
+            createInstance(
                 context,
-                context.getSystemService(DeviceStateManager::class.java)
+                ThreadUtils.getBackgroundExecutor(),
+                AndroidSecureSettings(context.contentResolver),
+                Handler(Looper.getMainLooper()),
+                PostureDeviceStateConverter(
+                    context,
+                    deviceStateManager
+                )
             )
-        ).also {
-            nullableSingletonSettingManager = it
+        )
+    }
+
+    private fun DeviceStateManager.hasFoldedState(): Boolean =
+        supportedDeviceStates.any {
+            it.hasProperty(PROPERTY_FOLDABLE_HARDWARE_CONFIGURATION_FOLD_IN_CLOSED)
         }
 
     /** Resets the singleton instance of [DeviceStateAutoRotateSettingManager]. */
     @JvmStatic
     @VisibleForTesting
     fun resetInstance() {
-        nullableSingletonSettingManager = null
+        singletonSettingManager = null
     }
 }

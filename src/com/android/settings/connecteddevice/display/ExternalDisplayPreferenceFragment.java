@@ -360,7 +360,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     private void updateScreen(final PrefRefresh screen) {
-        final var displaysToShow = mInjector.getConnectedDisplays();
+        final var displaysToShow = mInjector.getDisplays().stream().filter(
+                DisplayDevice::isConnectedDisplay).toList();
 
         if (displaysToShow.isEmpty()) {
             showTextWhenNoDisplaysToShow(screen, /* position= */ 0);

@@ -168,7 +168,8 @@ public class BiometricFragment extends InstrumentedFragment {
             promptBuilder.setUseDefaultSubtitle();
         }
 
-        if ((promptInfo.getAuthenticators()
+        if (!android.hardware.biometrics.Flags.bpFallbackOptions()
+                && (promptInfo.getAuthenticators()
                 & BiometricManager.Authenticators.DEVICE_CREDENTIAL) == 0) {
             promptBuilder.setNegativeButton(promptInfo.getNegativeButtonText(),
                     getContext().getMainExecutor(),

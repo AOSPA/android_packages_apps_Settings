@@ -74,6 +74,7 @@ public class Enable16kPagesWarningDialog extends InstrumentedDialogFragment
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         final Bundle bundle = getArguments();
         boolean is16kDialog = bundle.getBoolean(DIALOG_BUNDLE_KEY);
+        boolean isDataExt4 = Enable16kUtils.isDataExt4();
         return new AlertDialog.Builder(getActivity())
                 .setTitle(
                         is16kDialog
@@ -81,9 +82,17 @@ public class Enable16kPagesWarningDialog extends InstrumentedDialogFragment
                                 : R.string.confirm_enable_4k_pages_title)
                 .setMessage(
                         is16kDialog
-                                ? R.string.confirm_enable_16k_pages_text
+                                ? (isDataExt4
+                                        ? R.string.confirm_enable_16k_pages_text
+                                        : R.string.confirm_enable_16k_pages_update_wipe)
                                 : R.string.confirm_enable_4k_pages_text)
-                .setPositiveButton(android.R.string.ok, this /* onClickListener */)
+                .setPositiveButton(
+                        is16kDialog
+                                ? (isDataExt4
+                                        ? android.R.string.ok
+                                        : R.string.confirm_ext4_button_text)
+                                : android.R.string.ok,
+                        this /* onClickListener */)
                 .setNegativeButton(android.R.string.cancel, this /* onClickListener */)
                 .create();
     }

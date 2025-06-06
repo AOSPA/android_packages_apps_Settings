@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accessibility
+package com.android.settings.accessibility.textreading.ui
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags

@@ -22,18 +22,19 @@ import android.graphics.drawable.Icon
 import android.widget.TextView
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
+import com.android.settings.R
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.CardPreference
+import com.android.settingslib.widget.mainswitch.R as MainSwitchPreferenceR
+import com.android.settingslib.widget.preference.card.R as CardPreferenceR
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.android.settingslib.widget.mainswitch.R as MainSwitchPreferenceR
-import com.android.settingslib.widget.preference.card.R as CardPreferenceR
 
 /** A bottom banner promoting other supervision features offered by the supervision app. */
 class SupervisionPromoFooterPreference(
@@ -86,8 +87,8 @@ class SupervisionPromoFooterPreference(
                 }
             (preference as CardPreference).setAdditionalAction(
                 trailingIcon,
-                // TODO(b/411279121): add content description once we have the finalized string.
-                contentDescription = "",
+                contentDescription =
+                    context.getString(R.string.supervision_promo_footer_action_button_description),
             ) {
                 @SuppressLint("RestrictedApi") it.performClick()
             }

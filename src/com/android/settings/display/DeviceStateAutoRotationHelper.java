@@ -27,6 +27,7 @@ import com.android.internal.view.RotationPolicy;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManager;
 import com.android.settingslib.devicestate.SettableDeviceState;
 import com.android.settingslib.search.SearchIndexableRaw;
 
@@ -52,8 +53,13 @@ public class DeviceStateAutoRotationHelper {
 
     static ImmutableList<AbstractPreferenceController> createPreferenceControllers(
             Context context) {
-        List<SettableDeviceState> settableDeviceStates = DeviceStateAutoRotateSettingManagerProvider
-                .getSingletonInstance(context).getSettableDeviceStates();
+        final DeviceStateAutoRotateSettingManager manager =
+                DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(context);
+        if (manager == null) {
+            return ImmutableList.of();
+        }
+
+        List<SettableDeviceState> settableDeviceStates = manager.getSettableDeviceStates();
         int numDeviceStates = settableDeviceStates.size();
         if (numDeviceStates == 0) {
             return ImmutableList.of();
@@ -100,7 +106,9 @@ public class DeviceStateAutoRotationHelper {
     /** Returns whether the device state based auto-rotation settings are enabled. */
     public static boolean isDeviceStateRotationEnabled(Context context) {
         return RotationPolicy.isRotationLockToggleVisible(context)
-                && isDeviceStateRotationLockEnabled(context);
+                && isDeviceStateRotationLockEnabled(context)
+                && DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(context)
+                != null;
     }
 
     /**
@@ -109,6 +117,8 @@ public class DeviceStateAutoRotationHelper {
      */
     public static boolean isDeviceStateRotationEnabledForA11y(Context context) {
         return RotationPolicy.isRotationSupported(context)
-                && isDeviceStateRotationLockEnabled(context);
+                && isDeviceStateRotationLockEnabled(context)
+                && DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(context)
+                != null;
     }
 }

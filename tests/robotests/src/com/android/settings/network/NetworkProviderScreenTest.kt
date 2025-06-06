@@ -16,9 +16,13 @@
 package com.android.settings.network
 
 import android.content.ContextWrapper
+import android.content.Intent
 import android.content.res.Resources
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
+import com.android.settings.Settings.NetworkProviderSettingsActivity
 import com.android.settings.flags.Flags
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
@@ -61,5 +65,26 @@ class NetworkProviderScreenTest : CatalystScreenTestCase() {
         assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
     }
 
+    @Test
+    fun getLaunchIntent_noMetadata_emptyIntent() {
+        val underTest = preferenceScreenCreator.getLaunchIntent(context, null)!!
+
+        assertThat(underTest.getComponent()?.getClassName()).isEqualTo(
+            NetworkProviderSettingsActivity::class.java.getName()
+        )
+        assertThat(underTest.hasExtra(EXTRA_FRAGMENT_ARG_KEY)).isFalse()
+    }
+
+    @Test
+    fun getLaunchIntent_metadata_hasExtraWithKey() {
+        val underTest =
+            preferenceScreenCreator.getLaunchIntent(context, TestMetadata("preference_key"))!!
+
+        assertThat(underTest.hasExtra(EXTRA_FRAGMENT_ARG_KEY)).isTrue()
+        assertThat(underTest.getStringExtra(EXTRA_FRAGMENT_ARG_KEY)).isEqualTo("preference_key")
+    }
+
     override fun migration() {}
 }
+
+private data class TestMetadata(override val key: String) : PreferenceMetadata {}

@@ -13,21 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.android.settings.supervision.ipc
 
-package com.android.settings.accessibility
+import android.os.Bundle
+import java.util.ArrayList
 
-import android.content.Context
-import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.preference.PreferenceBinding
+/**
+ * Supported apps request.
+ *
+ * @param keys a list of filter keys to get supported apps for.
+ */
+data class SupportedAppsRequest(val keys: List<CharSequence>) {
+    constructor(bundle: Bundle) : this(keys = bundle.getStringArrayList(KEY) ?: emptyList())
 
-internal class TextReadingPreview : PreferenceMetadata, PreferenceBinding {
-    override val key: String
-        get() = KEY
-
-    override fun createWidget(context: Context) =
-        TextReadingPreviewPreference(context).apply { isSelectable = false }
+    fun toBundle(): Bundle {
+        return Bundle().apply { putCharSequenceArrayList(KEY, ArrayList(keys)) }
+    }
 
     companion object {
-        const val KEY = "preview"
+        private const val KEY = "supported_apps_request"
     }
 }

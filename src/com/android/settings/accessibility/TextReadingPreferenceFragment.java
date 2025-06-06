@@ -30,8 +30,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.IntDef;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.graphics.hwui.flags.Flags;
@@ -316,9 +314,4 @@ public class TextReadingPreferenceFragment extends BaseSupportFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_text_reading_options);
-
-    @Override
-    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
-        return TextReadingScreen.KEY;
-    }
 }

@@ -18,10 +18,12 @@ package com.android.settings.supervision
 import android.app.KeyguardManager
 import android.app.role.RoleManager
 import android.content.Context
+import android.content.Intent
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.util.Log
+import com.android.settings.supervision.ipc.SupervisionMessengerClient.Companion.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
 import com.android.settingslib.supervision.SupervisionLog.TAG
 
 val Context.isSupervisingCredentialSet: Boolean
@@ -53,3 +55,12 @@ val Context.supervisionPackageName: String?
         // supervision role is exclusive, only one app may hold this role in a user
         return roleHolders.firstOrNull()
     }
+
+fun Context.hasNecessarySupervisionComponent() =
+    hasNecessarySupervisionComponent(supervisionPackageName)
+
+fun Context.hasNecessarySupervisionComponent(packageName: String?): Boolean {
+    if (packageName == null) return false
+    val intent = Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION).setPackage(packageName)
+    return packageManager?.queryIntentServices(intent, 0)?.isNotEmpty() == true
+}

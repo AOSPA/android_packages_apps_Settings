@@ -594,6 +594,11 @@
             android:title="@string/transparent_navigation_bar"
             android:summary="@string/transparent_navigation_bar_summary" />
 
+        <com.android.settings.accessibility.TextCursorBlinkRateSliderPreference
+            android:key="accessibility_text_cursor_blink_interval_ms"
+            android:title="@string/accessibility_text_cursor_blink_rate_title"
+            android:summary="@string/accessibility_text_cursor_blink_rate_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -365,10 +365,19 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
     private fun setMainSwitchValue(value: Boolean?) =
         SettingsSystemStore.get(context).setBoolean(mainSwitchPreference.key, value)
 
-    private fun setValue(value: Boolean?) =
-        preference.storage(context).setBoolean(preference.key, value)
+    protected fun setValue(value: Boolean?) =
+        SettingsSystemStore.get(context).setInt(
+            preference.key,
+            value?.let {
+                if (value) {
+                    vibratorSpy.getDefaultVibrationIntensity(any())
+                } else {
+                    Vibrator.VIBRATION_INTENSITY_OFF
+                }
+           },
+        )
 
-    private fun createWidget(): SwitchPreferenceCompat =
+    protected fun createWidget(): SwitchPreferenceCompat =
         preference.createAndBindWidget(context)
 
     private fun createMainSwitchWidget(): MainSwitchPreference =

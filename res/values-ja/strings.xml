@@ -21,8 +21,7 @@
     <string name="create" msgid="986997212165228751">"作成"</string>
     <string name="allow" msgid="3763244945363657722">"許可"</string>
     <string name="deny" msgid="7326117222944479942">"許可しない"</string>
-    <!-- no translation found for edit (8128799559456697510) -->
-    <skip />
+    <string name="edit" msgid="8128799559456697510">"編集"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"ON にする"</string>
     <string name="device_info_default" msgid="1406619232867343310">"不明"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"情報を表示するにはタップ"</string>
@@ -48,8 +47,10 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"メール"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"前のプレビュー"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"次のプレビュー"</string>
-    <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
-    <string name="font_size_make_larger_desc" msgid="5583046033381722247">"拡大"</string>
+    <!-- no translation found for font_size_make_smaller_desc (319927200356692406) -->
+    <skip />
+    <!-- no translation found for font_size_make_larger_desc (6739310980713118605) -->
+    <skip />
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"常時"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"デバイスを折りたたむとフロント ディスプレイが ON になります"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"上にスワイプして継続"</string>
@@ -560,7 +561,7 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"スキップ"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"キャンセル"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"センサーを指でタッチ"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"軽く電源ボタンに触れてください"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"軽く電源ボタンに触⁠れ⁠てください"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"指紋の登録方法"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"スマートフォンの背面にある指紋センサーを人差し指でタッチしてください。"</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"指紋認証センサーは画面上にあります。次の画面で指紋を登録します。"</string>
@@ -595,7 +596,7 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋の登録完了"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"いつでもタップしてロック解除"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"画面が OFF のときでも、センサーをタップしてロック解除できます。ただし、意図しないロック解除も起こりやすくなります。"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"画面がオフのときでも、センサーをタップしてロック解除できます。ただし、意図しないロック解除も起こりやすくなります。"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"画面、ロック解除"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"後で行う"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"指を離して、もう一度タッチ"</string>
@@ -780,8 +781,8 @@
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"画面ロックの方法"</string>
     <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"ロック解除を自動で確認する"</string>
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"6 桁以上の正しい PIN が入力されると自動的にロック解除します。[入力] をタップして確認するよりも、安全面でやや劣ります。"</string>
-    <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"正しい PIN を自動で確認する"</string>
-    <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"[入力] をタップして PIN を確認するほうが、自動確認を使うよりも安全です"</string>
+    <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"正しい PIN の場合は自動でロックを解除する"</string>
+    <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"PIN を入力後に [→] ボタンをタップするほうが安全です"</string>
     <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"自動確認を有効にするには、デバイスの PIN を入力してください"</string>
     <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"自動確認を無効にするには、デバイスの PIN を入力してください"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"画面ロック"</string>
@@ -941,6 +942,10 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"接続"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"接続を解除"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"ペアに設定して接続"</string>
+    <!-- no translation found for bluetooth_connecting (5315496594905010438) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnecting (1643422701532873735) -->
+    <skip />
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Bluetooth を ON にすると、近くにある他の Bluetooth デバイスと通信できます"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Bluetooth を ON にすると、近くにある他の Bluetooth デバイスと通信できます。Quick Share や「デバイスを探す」などの機能は Bluetooth を使用します。"</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Bluetooth を ON にすると、付近の他の Bluetooth デバイスと通信できます。\n\nBluetooth が OFF の場合でもアプリやサービスは付近のデバイスをいつでもスキャンできます。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。この設定は Bluetooth スキャンの設定で変更できます。"</string>
@@ -1365,7 +1370,7 @@
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"ON"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"OFF"</string>
     <string name="hdr_brightness_title" msgid="6997980740096282616">"HDR 輝度補正"</string>
-    <string name="hdr_brightness_level_title" msgid="770342878327164738">"強さ"</string>
+    <string name="hdr_brightness_level_title" msgid="770342878327164738">"強度"</string>
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"標準画像"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR 画像"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"この設定は、ハイ ダイナミック レンジ（HDR）に対応している画像と動画にのみ適用されます。"</string>
@@ -1482,9 +1487,9 @@
     <string name="doze_always_on_title" msgid="7326245192352868477">"時間と情報を常に表示"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"常に表示状態のディスプレイ"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"バッテリー使用量が増えます"</string>
-    <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"画面が OFF のときに、ロック画面の壁紙を表示します"</string>
+    <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"画面がオフのときに、ロック画面の壁紙を表示します"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"画面が OFF のときに、ロック画面の壁紙を非表示にします"</string>
-    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"画面が OFF のときに、常に表示状態のディスプレイに時刻や日付などを表示します"</string>
+    <string name="doze_always_on_summary_long" msgid="9198713049143867176">"画面がオフのときに、常に表示状態のディスプレイに時刻や日付などを表示します"</string>
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"壁紙のオプション"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"ロック画面の壁紙の表示"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"常に表示状態のディスプレイにロック画面の壁紙が表示されます"</string>
@@ -2141,14 +2146,10 @@
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"大きくする"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"逆スクロール"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"メインキーを使用する"</string>
-    <!-- no translation found for mouse_keys_reset_button_label (513004295662247230) -->
-    <skip />
-    <!-- no translation found for mouse_keys_primary_keys_image_list_title (7470827693078490251) -->
-    <skip />
-    <!-- no translation found for mouse_keys_numpad_keys_image_list_title (6682341389811538017) -->
-    <skip />
-    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2728318055237217919) -->
-    <skip />
+    <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"設定をリセット"</string>
+    <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"メインキーの使い方"</string>
+    <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"テンキーの使い方"</string>
+    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2728318055237217919">"NumLock が ON の場合、テンキーが常に使用されます"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"上にスクロールすると、ページ下部に移動します"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"スクロール"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"制御付きスクロール"</string>
@@ -2174,7 +2175,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"タッチパッド"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"タッチパッドとマウス"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"マウス"</string>
-    <string name="mouse_settings_summary" msgid="8732973589097368936">"ポインタの速度、ボタンの入れ替えとカスタマイズ"</string>
+    <!-- no translation found for mouse_settings_summary (1308610072914620926) -->
+    <skip />
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"ポインタの速度、操作"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"タップしてクリック"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"タップしてドラッグでアイテムを移動"</string>
@@ -2313,6 +2315,8 @@
     <string name="last_time_used_label" msgid="7589377271406011659">"最終使用日時"</string>
     <string name="last_time_used_never" msgid="2936073559267990034">"なし"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"使用時間"</string>
+    <!-- no translation found for phone_information_v2_title (3373745314543222111) -->
+    <skip />
     <string name="accessibility_settings" msgid="4713215774904704682">"ユーザー補助"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"ユーザー補助の設定"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"ディスプレイ、操作、音声"</string>
@@ -2351,6 +2355,8 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"システム操作"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"フィードバックを送信"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"評価のお願い"</string>
+    <!-- no translation found for accessibility_disability_support_title (7934160403456751664) -->
+    <skip />
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"ユーザー補助に関するアンケート"</string>
     <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"いろいろなアプリでダークモードを使用したいですか？"</string>
     <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"フィードバックをお寄せください"</string>
@@ -2404,10 +2410,6 @@
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"常に画面の一部を拡大する"</string>
     <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"画面全体と画面の一部を切り替える"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"切り替えボタンをタップして、画面全体と画面の一部を切り替えます"</string>
-    <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"ユーザー補助機能ボタンに切り替えますか？"</string>
-    <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"トリプルタップで画面の一部を拡大すると、入力などの操作が遅くなります。\n\nユーザー補助機能ボタンは画面上で他のアプリの上に表示されます。タップすると拡大します。"</string>
-    <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"ユーザー補助機能ボタンに切り替え"</string>
-    <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"トリプルタップを使用"</string>
     <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"キーボードの反応が遅くなる場合があります"</string>
     <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"トリプルタップで画面の一部を拡大するように設定した場合、キーボードに関する問題が起きることがあります\n\nこの問題を防ぐには、拡大のショートカットをトリプルタップ以外のオプションに切り替えてください。\n"<annotation id="link">"設定を変更"</annotation></string>
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"無視して続行"</string>
@@ -3660,14 +3662,10 @@
     <string name="emergency_tone_alert" msgid="1977698889522966589">"通知音"</string>
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"バイブレーション"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"電源オンの音"</string>
-    <!-- no translation found for sound_patterns_category_title (4290495769747444271) -->
-    <skip />
-    <!-- no translation found for sound_audio_category_title (3445871661303518618) -->
-    <skip />
-    <!-- no translation found for system_sounds_and_vibrations_category_title (4162079598490981456) -->
-    <skip />
-    <!-- no translation found for work_profile_sound_category_title (1708926655170323454) -->
-    <skip />
+    <string name="sound_patterns_category_title" msgid="4290495769747444271">"音のパターン"</string>
+    <string name="sound_audio_category_title" msgid="3445871661303518618">"音声"</string>
+    <string name="system_sounds_and_vibrations_category_title" msgid="4162079598490981456">"システムの音とバイブレーション"</string>
+    <string name="work_profile_sound_category_title" msgid="1708926655170323454">"仕事用プロファイルの音"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"自動字幕起こし"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"メディアの字幕を自動で作成します"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"有線ヘッドフォン"</string>
@@ -4044,7 +4042,7 @@
     <string name="notification_badge_title" msgid="6854537463548411313">"通知ドットを許可"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"通知ドットを表示"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"サイレント モードの例外"</string>
-    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"サイレント モードが ON の場合も、指定の通知を引き続き表示します"</string>
+    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"サイレント モードが ON の場合でも、この通知を引き続き受け取ります"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"ロック画面"</string>
     <string name="app_notifications_dialog_done" msgid="573716608705273004">"完了"</string>
     <string name="notification_show_lights_title" msgid="5564315979007438583">"点滅"</string>
@@ -4309,6 +4307,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"権限マネージャー"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"位置情報を共有する方法の更新"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ユーザーの位置情報を共有する方法が変更されたアプリを確認"</string>
+    <!-- no translation found for app_function_access_settings_title (1474765429611652468) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (6465715820745848068) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"タップして復帰"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"画面をダブルタップするとデバイスが復帰します"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"リンクを開く"</string>
@@ -4468,8 +4470,10 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"全てのサイズを変更します"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"表示間隔、画面のズーム、スケール、拡大縮小"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"プレビュー"</string>
-    <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"縮小"</string>
-    <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"拡大"</string>
+    <!-- no translation found for screen_zoom_make_smaller_desc (1450649885198381123) -->
+    <skip />
+    <!-- no translation found for screen_zoom_make_larger_desc (7125594310562596457) -->
+    <skip />
     <string name="disconnected" msgid="3469373726996129247">"接続されていません"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"未接続"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> 個のアプリがインストールされています"</string>
@@ -4907,10 +4911,8 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;このアプリが信頼できることを確認してください&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; は画面上の内容に基づいて、自動入力可能な情報を判別します。"</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; を使用しますか？&lt;/b&gt;&lt;br/&gt; &lt;br/&gt; 今後は、新しいパスワード、パスキー、その他の情報がここに保存されます。&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; は画面上の内容に基づいて、自動入力可能な情報を判別します。"</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"パスワード、パスキーと自動入力で優先的に使用するサービス"</string>
-    <!-- no translation found for credman_picker_title_new (4292105803864397398) -->
-    <skip />
-    <!-- no translation found for credman_picker_page_summary (4633938046738617332) -->
-    <skip />
+    <string name="credman_picker_title_new" msgid="4292105803864397398">"優先するサービス"</string>
+    <string name="credman_picker_page_summary" msgid="4633938046738617332">"ログインや自動入力候補のデータを保存する優先サービスを選択してください"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s を OFF にしますか？"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;このサービスを無効にしますか？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;パスワード、パスキー、お支払い方法などの情報を保存しました。その他の情報はログイン時に入力されません。保存された情報を使用するには、パスワード、パスキー、またはデータのサービスを選択してください。"</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"パスワードとアカウント"</string>
@@ -5769,7 +5771,7 @@
     <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"接続できません。もう一度お試しください。"</string>
     <string name="audio_streams_connecting_summary" msgid="7237827765572331702">"接続しています…"</string>
     <string name="audio_streams_dialog_failed_to_join" msgid="4942840673393552978">"音声ストリームに参加できませんでした"</string>
-    <string name="audio_streams_dialog_failed_to_join_detail" msgid="1498719800517594252">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> は音声ストリームに接続できませんでした"</string>
+    <string name="audio_streams_dialog_failed_to_join_detail" msgid="1498719800517594252">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> を音声ストリームに接続できませんでした"</string>
     <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"音声ストリームを利用できません"</string>
     <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"この音声ストリームは現在何も再生していません"</string>
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"閉じる"</string>
@@ -5830,7 +5832,6 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>。デバイスの詳細を設定してください。"</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"保護者による使用制限"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"コンテンツの制限とその他の制限"</string>
-    <string name="device_supervision_switch_title" msgid="3203958797412413373">"デバイスの管理機能を使用する"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN を設定"</string>
     <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"一時停止中"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"管理機能, 保護者向け管理ツール, 保護者による使用制限"</string>
@@ -5845,20 +5846,21 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"再設定用のメールアドレスの追加"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"メールアドレスの確認"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"ウェブ コンテンツ フィルタ"</string>
+    <string name="supervision_web_content_filters_top_intro" msgid="5264773769840566499">"このデバイス上の対応アプリにおいて、アクセスしたウェブサイトと検索結果で成人向けコンテンツをブロックします。対応していないアプリでは、露骨な表現を含むコンテンツが引き続き表示される場合があります。"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"ウェブサイト"</string>
-    <!-- no translation found for supervision_web_content_filters_browser_filter_title (7957976669412075070) -->
-    <skip />
+    <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"露骨な表現を含むサイトをブロックする"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"検索結果"</string>
-    <!-- no translation found for supervision_web_content_filters_search_filter_title (4212134055017429017) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"露骨な表現を含む検索結果を除外する"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"管理機能用の PIN を入力"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"保護者による使用制限の PIN を設定する"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"PIN の確認"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN を更新しました"</string>
+    <!-- no translation found for supervision_promo_footer_action_button_description (7617359721703338141) -->
+    <skip />
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"PIN を削除しますか？"</string>
     <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"このデバイスのすべてのユーザーに現在設定されている PIN が削除され、あなたが設定した管理機能も無効になります。この操作は元に戻せません。"</string>
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"他のプロフィールの管理機能を先に一時停止してください"</string>
-    <string name="supervision_delete_pin_supervision_enabled_message" msgid="5643922966568203196">"この PIN の削除と管理機能の再設定を続行するには、他のプロフィールすべての管理機能を一時停止してください。"</string>
+    <string name="supervision_delete_pin_supervision_enabled_message" msgid="5643922966568203196">"この PIN の削除と管理機能のリセットを続行するには、他のプロフィールすべての管理機能を一時停止してください。"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN を削除できません"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PIN の削除中にエラーが発生しました。"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> のアニメーション"</string>

@@ -42,22 +42,26 @@ class DeviceDetailsMoreSettingsFragment : BluetoothDetailsConfigurableFragment()
     }
 
     override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
-        return listOf(
-            BluetoothDetailsProfilesController(
-                context,
-                this,
-                localBluetoothManager,
-                cachedDevice,
-                settingsLifecycle,
-            ),
-            BluetoothDetailsAudioDeviceTypeController(
-                context,
-                this,
-                localBluetoothManager,
-                cachedDevice,
-                settingsLifecycle,
-            ),
-        )
+        return if (isCachedDeviceInitialized()) {
+            listOf(
+                BluetoothDetailsProfilesController(
+                    context,
+                    this,
+                    localBluetoothManager,
+                    cachedDevice,
+                    settingsLifecycle,
+                ),
+                BluetoothDetailsAudioDeviceTypeController(
+                    context,
+                    this,
+                    localBluetoothManager,
+                    cachedDevice,
+                    settingsLifecycle,
+                ),
+            )
+        } else {
+            emptyList()
+        }
     }
 
     override fun getLogTag(): String = TAG

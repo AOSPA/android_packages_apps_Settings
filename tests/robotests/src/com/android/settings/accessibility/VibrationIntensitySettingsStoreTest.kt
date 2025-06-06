@@ -23,6 +23,7 @@ import android.provider.Settings
 import androidx.core.content.getSystemService
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.accessibility.AccessibilityUtil.State
 import com.android.settings.testutils.shadow.ShadowAudioManager
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.google.common.truth.Truth.assertThat
@@ -237,6 +238,33 @@ class VibrationIntensitySettingsStoreTest {
     }
 
     @Test
+    fun getValue_hapticFeedbackEnabled_returnsIntensityValue() {
+        store.setInt(Settings.System.HAPTIC_FEEDBACK_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW)
+        setHapticFeedbackEnabled(true)
+
+        assertThat(store.getBoolean(Settings.System.HAPTIC_FEEDBACK_INTENSITY)).isTrue()
+        assertThat(store.getInt(Settings.System.HAPTIC_FEEDBACK_INTENSITY))
+            .isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW)
+
+        store.setBoolean(Settings.System.HAPTIC_FEEDBACK_INTENSITY, false)
+        setHapticFeedbackEnabled(true)
+
+        assertThat(store.getBoolean(Settings.System.HAPTIC_FEEDBACK_INTENSITY)).isFalse()
+        assertThat(store.getInt(Settings.System.HAPTIC_FEEDBACK_INTENSITY))
+            .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+    }
+
+    @Test
+    fun getValue_hapticFeedbackDisabledIntensityOn_returnsIntensityOff() {
+        store.setInt(Settings.System.HAPTIC_FEEDBACK_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH)
+        setHapticFeedbackEnabled(false)
+
+        assertThat(store.getBoolean(Settings.System.HAPTIC_FEEDBACK_INTENSITY)).isFalse()
+        assertThat(store.getInt(Settings.System.HAPTIC_FEEDBACK_INTENSITY))
+            .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF)
+    }
+
+    @Test
     fun setValue_updatesCorrectly() {
         setBooleanValue(null)
 
@@ -328,15 +356,78 @@ class VibrationIntensitySettingsStoreTest {
         assertThat(testStore.getInt(KEY)).isEqualTo(2)
     }
 
-    private fun setRingerMode(ringerMode: Int) {
-        val audioManager = context.getSystemService<AudioManager>()
-        audioManager?.ringerModeInternal = ringerMode
-        assertThat(audioManager?.ringerModeInternal).isEqualTo(ringerMode)
+    @Test
+    fun setValue_ringIntensity_updatesVibrateWhenRinging() {
+        setVibrateWhenRinging(null)
+
+        store.setInt(Settings.System.RING_VIBRATION_INTENSITY, null)
+        assertThat(getStoredVibrateWhenRinging()).isNull()
+
+        store.setBoolean(Settings.System.RING_VIBRATION_INTENSITY, false)
+        assertThat(getStoredVibrateWhenRinging()).isFalse()
+
+        store.setInt(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW)
+        assertThat(getStoredVibrateWhenRinging()).isTrue()
     }
+
+    @Test
+    fun setValue_hapticFeedbackIntensity_updateHapticFeedbackEnabledAndHardwareFeedbackIntensity() {
+        setHapticFeedbackEnabled(null)
+        setHardwareFeedbackIntensity(null)
+
+        store.setInt(Settings.System.HAPTIC_FEEDBACK_INTENSITY, null)
+        assertThat(getStoredHapticFeedbackEnabled()).isNull()
+        assertThat(getStoredHardwareFeedbackIntensity()).isNull()
+
+        store.setBoolean(Settings.System.HAPTIC_FEEDBACK_INTENSITY, false)
+        assertThat(getStoredHapticFeedbackEnabled()).isFalse()
+        assertThat(getStoredHardwareFeedbackIntensity()).isEqualTo(DEFAULT_INTENSITY)
+
+        store.setInt(Settings.System.HAPTIC_FEEDBACK_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW)
+        assertThat(getStoredHapticFeedbackEnabled()).isTrue()
+        assertThat(getStoredHardwareFeedbackIntensity()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW)
+    }
+
+    @Suppress("DEPRECATION")
+    private fun getStoredVibrateWhenRinging() =
+        SettingsSystemStore.get(context).getBoolean(Settings.System.VIBRATE_WHEN_RINGING)
+
+    @Suppress("DEPRECATION")
+    private fun setVibrateWhenRinging(value: Boolean?) =
+        SettingsSystemStore.get(context).setBoolean(Settings.System.VIBRATE_WHEN_RINGING, value)
+
+    @Suppress("DEPRECATION")
+    private fun getStoredHapticFeedbackEnabled() =
+        SettingsSystemStore.get(context).getInt(Settings.System.HAPTIC_FEEDBACK_ENABLED)?.let {
+            it == State.ON
+        }
+
+    @Suppress("DEPRECATION")
+    private fun setHapticFeedbackEnabled(value: Boolean?) =
+        SettingsSystemStore.get(context).setInt(
+            Settings.System.HAPTIC_FEEDBACK_ENABLED,
+            value?.let { if (it) State.ON else State.OFF },
+        )
+
+    private fun getStoredHardwareFeedbackIntensity() =
+        SettingsSystemStore.get(context).getInt(Settings.System.HARDWARE_HAPTIC_FEEDBACK_INTENSITY)
+
+    private fun setHardwareFeedbackIntensity(value: Int?) =
+        SettingsSystemStore.get(context).setInt(
+            Settings.System.HARDWARE_HAPTIC_FEEDBACK_INTENSITY,
+            value,
+        )
 
     private fun setIntValue(value: Int?) =
         store.setInt(KEY, value)
 
     private fun setBooleanValue(value: Boolean?) =
         store.setBoolean(KEY, value)
+
+    private fun setRingerMode(ringerMode: Int) {
+        val audioManager = context.getSystemService<AudioManager>()
+        audioManager?.ringerModeInternal = ringerMode
+        assertThat(audioManager?.ringerModeInternal).isEqualTo(ringerMode)
+    }
+
 }

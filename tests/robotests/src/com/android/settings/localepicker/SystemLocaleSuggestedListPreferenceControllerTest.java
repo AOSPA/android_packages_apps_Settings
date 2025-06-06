@@ -84,6 +84,7 @@ public class SystemLocaleSuggestedListPreferenceControllerTest {
     private static final String KEY_CATEGORY_SYSTEM_SUGGESTED_LIST =
             "system_language_suggested_category";
     private static final String KEY_SUGGESTED = "system_locale_suggested_list";
+    private static final String LOCALE_URDU_INDIA = "اردو (بھارت)";
 
     private Context mContext;
     private FragmentActivity mActivity;
@@ -148,6 +149,35 @@ public class SystemLocaleSuggestedListPreferenceControllerTest {
         when(mSuggestedLocaleInfo_2.getLocale()).thenReturn(
                 LocaleList.forLanguageTags("es-US").get(0));
         mLocaleList.add(mSuggestedLocaleInfo_2);
+    }
+
+    private void setupLocaleWithExtensionConditions() {
+        mLocaleList = new ArrayList<>();
+        when(mSuggestedLocaleInfo_1.getFullNameNative()).thenReturn(LOCALE_URDU_INDIA);
+        when(mSuggestedLocaleInfo_1.getLocale()).thenReturn(
+                LocaleList.forLanguageTags("ur-IN").get(0));
+        mLocaleList.add(mSuggestedLocaleInfo_1);
+        when(mSuggestedLocaleInfo_2.getFullNameNative()).thenReturn(LOCALE_URDU_INDIA);
+        when(mSuggestedLocaleInfo_2.getLocale()).thenReturn(
+                LocaleList.forLanguageTags("ur-IN-u-nu-latn").get(0));
+        mLocaleList.add(mSuggestedLocaleInfo_2);
+    }
+
+    @Test
+    public void removeLocalesWithExtension_localesHasExtension_filterNoExtensionLocales() {
+        setupLocaleWithExtensionConditions();
+        List<LocaleStore.LocaleInfo> localesWithExtension =
+                mController.getLocalesWithExtension(mLocaleList);
+        mController.displayPreference(mPreferenceScreen);
+
+        mLocaleList.removeAll(localesWithExtension);
+        mController.setupPreference(mLocaleList, mPreferences);
+
+        assertThat(mLocaleList.size()).isEqualTo(1);
+        assertThat(mLocaleList.get(0).getFullNameNative()).isEqualTo(LOCALE_URDU_INDIA);
+        assertThat(mLocaleList.get(0).getLocale().hasExtensions()).isFalse();
+        assertTrue(mPreferenceCategory.isVisible());
+        assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(1);
     }
 
     @Test

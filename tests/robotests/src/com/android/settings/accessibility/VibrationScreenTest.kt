@@ -24,6 +24,7 @@ import android.os.VibrationAttributes
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.platform.test.annotations.EnableFlags
+import android.provider.Settings
 import androidx.core.content.getSystemService
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
@@ -202,6 +203,40 @@ class VibrationScreenTest : CatalystScreenTestCase() {
         }
     }
 
+    @EnableFlags(Flags.FLAG_CATALYST_VIBRATION_INTENSITY_SCREEN_25Q4)
+    @Test
+    fun mainVibrationChange_disablesKeyboardSwitchAndPreservesStorage() {
+        setStoredBoolean(VibrationMainSwitchPreference.KEY, true)
+        setStoredBoolean(KeyboardVibrationSwitchPreference.KEY, true)
+
+        testOnFragment { fragment ->
+            val mainSwitch: MainSwitchPreference =
+                fragment.findPreference(VibrationMainSwitchPreference.KEY)!!
+            val keyboardSwitch: SwitchPreferenceCompat =
+                fragment.findPreference(KeyboardVibrationSwitchPreference.KEY)!!
+
+            // Check keyboard switch enabled and checked.
+            assertThat(mainSwitch.isChecked).isTrue()
+            assertSwitchCheckedAndEnabled(keyboardSwitch)
+
+            // Turn main vibration switch off.
+            mainSwitch.performClick()
+            ShadowLooper.idleMainLooper();
+
+            // Check keyboard switch disabled and unchecked.
+            assertThat(mainSwitch.isChecked).isFalse()
+            assertSwitchUncheckedAndDisabled(keyboardSwitch, expectedStoredValue = true)
+
+            // Turn main vibration switch back on.
+            mainSwitch.performClick()
+            ShadowLooper.idleMainLooper();
+
+            // Check keyboard switch restored.
+            assertThat(mainSwitch.isChecked).isTrue()
+            assertSwitchCheckedAndEnabled(keyboardSwitch)
+        }
+    }
+
     private fun assertSwitchUncheckedAndDisabled(
         switch: SwitchPreferenceCompat,
         expectedIntensity: Int,
@@ -211,6 +246,15 @@ class VibrationScreenTest : CatalystScreenTestCase() {
         assertWithSwitch(switch).that(getStoredIntensity(switch.key)).isEqualTo(expectedIntensity)
     }
 
+    private fun assertSwitchUncheckedAndDisabled(
+        switch: SwitchPreferenceCompat,
+        expectedStoredValue: Boolean,
+    ) {
+        assertWithSwitch(switch).that(switch.isEnabled).isFalse()
+        assertWithSwitch(switch).that(switch.isChecked).isFalse()
+        assertWithSwitch(switch).that(getStoredBoolean(switch.key)).isEqualTo(expectedStoredValue)
+    }
+
     private fun assertSwitchCheckedAndEnabled(switch: SwitchPreferenceCompat) {
         assertWithSwitch(switch).that(switch.isEnabled).isTrue()
         assertWithSwitch(switch).that(switch.isChecked).isTrue()
@@ -218,6 +262,12 @@ class VibrationScreenTest : CatalystScreenTestCase() {
 
     private fun assertWithSwitch(switch: SwitchPreferenceCompat) =
         assertWithMessage("On switch with key %s", switch.key)
+
+    private fun setStoredBoolean(settingsKey: String, value: Boolean?) =
+        SettingsSystemStore.get(context).setBoolean(settingsKey, value)
+
+    private fun getStoredBoolean(settingsKey: String) =
+        SettingsSystemStore.get(context).getBoolean(settingsKey)
 
     private fun setStoredIntensity(settingsKey: String, value: Int?) =
         SettingsSystemStore.get(context).setInt(settingsKey, value)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Android Open Source Project
+ * Copyright (C) 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.android.settings.development;
+package com.android.settings.applications.specialaccess
 
-/** Interface for EnableExt4DialogHost callbacks. */
-public interface EnableExt4DialogHost {
-    /** Callback when the user presses ok the warning dialog. */
-    void onExt4DialogConfirmed();
+import android.content.Context
+import android.content.pm.ApplicationInfo
+import com.android.settings.applications.AppListScreen
 
-    /** Callback when the user cancels or dismisses the warning dialog. */
-    void onExt4DialogDismissed();
+/** Interface for Catalyst screens that display a list of apps with specific permission. */
+interface SpecialAccessAppListScreen : AppListScreen {
+
+    /** Returns whether the given application has requested certain permission. */
+    fun hasRequestedPermission(context: Context, appInfo: ApplicationInfo): Boolean
 }

@@ -18,6 +18,7 @@ package com.android.settings.supervision
 import android.app.Activity
 import android.app.Application
 import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
+import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.EXTRA_SUPERVISION_RECOVERY_INFO
@@ -36,9 +37,11 @@ import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.testutils.MetricsRule
 import com.google.common.truth.Truth.assertThat
 import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -64,6 +67,7 @@ class SupervisionPinRecoveryActivityTest {
     private lateinit var shadowPackageManager: ShadowPackageManager
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
+    @get:Rule val metricsRule = MetricsRule()
 
     @Before
     fun setUp() {
@@ -550,6 +554,8 @@ class SupervisionPinRecoveryActivityTest {
                 val verifyPinIntent = shadowActivity.nextStartedActivity
                 shadowActivity.receiveResult(verifyPinIntent, testActivityResult, null)
 
+                verify(metricsRule.metricsFeatureProvider)
+                    .action(activity, SettingsEnums.ACTION_SUPERVISION_PIN_RESET_SUCCEED, false)
                 assertEquals(testActivityResult, shadowActivity.resultCode)
                 assertThat(activity.isFinishing).isTrue()
             }
@@ -575,6 +581,8 @@ class SupervisionPinRecoveryActivityTest {
                 val setPinIntent = shadowActivity.nextStartedActivity
                 shadowActivity.receiveResult(setPinIntent, testActivityResult, null)
 
+                verify(metricsRule.metricsFeatureProvider)
+                    .action(activity, SettingsEnums.ACTION_SUPERVISION_PIN_RESET_SUCCEED, true)
                 assertEquals(testActivityResult, shadowActivity.resultCode)
                 assertThat(activity.isFinishing).isTrue()
             }
@@ -600,6 +608,8 @@ class SupervisionPinRecoveryActivityTest {
                 val setPinIntent = shadowActivity.nextStartedActivity
                 shadowActivity.receiveResult(setPinIntent, testActivityResult, null)
 
+                verify(metricsRule.metricsFeatureProvider)
+                    .action(activity, SettingsEnums.ACTION_SUPERVISION_PIN_RESET_SUCCEED, false)
                 assertEquals(testActivityResult, shadowActivity.resultCode)
                 assertThat(activity.isFinishing).isTrue()
             }

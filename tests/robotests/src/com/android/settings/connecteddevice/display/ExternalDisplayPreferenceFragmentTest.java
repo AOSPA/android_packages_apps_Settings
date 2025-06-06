@@ -107,10 +107,10 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
         assertDisplayListCount(0);
 
-        verify(mMockedInjector, never()).getConnectedDisplays();
+        verify(mMockedInjector, never()).getDisplays();
         mHandler.flush();
         assertThat(mHandler.getPendingMessages().size()).isEqualTo(0);
-        verify(mMockedInjector).getConnectedDisplays();
+        verify(mMockedInjector).getDisplays();
         assertDisplayListCount(2);
 
         Preference pref = mPreferenceScreen.findPreference(PrefBasics.DISPLAY_TOPOLOGY.key);
@@ -126,7 +126,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
 
         initFragment();
-        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getConnectedDisplays();
+        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getDisplays();
         mHandler.flush();
 
         var pref = mPreferenceScreen.findPreference(PrefBasics.DISPLAY_TOPOLOGY.key);
@@ -151,7 +151,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
 
         initFragment();
-        doReturn(List.of()).when(mMockedInjector).getConnectedDisplays();
+        doReturn(List.of()).when(mMockedInjector).getDisplays();
         mHandler.flush();
 
         // When no external display is attached, interactive preferences are omitted.
@@ -172,7 +172,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         doReturn(List.of(
                         createExternalDisplay(DisplayIsEnabled.NO),
                         createOverlayDisplay(DisplayIsEnabled.YES)))
-                .when(mMockedInjector).getConnectedDisplays();
+                .when(mMockedInjector).getDisplays();
         initFragment();
         mHandler.flush();
 
@@ -221,7 +221,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     public void testShowDisplayListForOnlyOneDisplay_PreviouslyShownList() {
         var fragment = initFragment();
         // Only one display available
-        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getConnectedDisplays();
+        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getDisplays();
         mHandler.flush();
         int attachedId = mDisplays.get(0).getId();
         assertDisplayListCount(1);
@@ -233,7 +233,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     public void testShowEnabledDisplay_OnlyOneDisplayAvailable_displaySizeDisabled() {
         mFlags.setFlag(FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING, false);
         // Only one display available
-        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getConnectedDisplays();
+        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getDisplays();
         // Init
         initFragment();
         mHandler.flush();
@@ -259,7 +259,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         Settings.Secure.putInt(
                 mContext.getContentResolver(), MIRROR_BUILT_IN_DISPLAY, 1);
         // Only one display available
-        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getConnectedDisplays();
+        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getDisplays();
         // Init
         initFragment();
         mHandler.flush();
@@ -281,7 +281,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     @UiThreadTest
     public void testShowEnabledDisplay_OnlyOneDisplayAvailable() {
         // Only one display available
-        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getConnectedDisplays();
+        doReturn(List.of(mDisplays.get(0))).when(mMockedInjector).getDisplays();
         // Init
         initFragment();
         mHandler.flush();
@@ -300,10 +300,10 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     @UiThreadTest
     public void testShowOneEnabledDisplay_FewAvailable() {
         initFragment();
-        verify(mMockedInjector, never()).getConnectedDisplays();
+        verify(mMockedInjector, never()).getDisplays();
         mHandler.flush();
         verify(mMockedInjector, never()).getDisplay(anyInt());
-        verify(mMockedInjector).getConnectedDisplays();
+        verify(mMockedInjector).getDisplays();
         var pref = mPreferenceScreen.findPreference(
                 PrefBasics.EXTERNAL_DISPLAY_RESOLUTION.keyForNth(0));
         assertThat(pref).isNotNull();
@@ -324,10 +324,10 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         var disabledDisplays = List.of(
                 createExternalDisplay(DisplayIsEnabled.NO),
                 createOverlayDisplay(DisplayIsEnabled.NO));
-        doReturn(disabledDisplays).when(mMockedInjector).getConnectedDisplays();
+        doReturn(disabledDisplays).when(mMockedInjector).getDisplays();
         mHandler.flush();
         verify(mMockedInjector, never()).getDisplay(anyInt());
-        verify(mMockedInjector).getConnectedDisplays();
+        verify(mMockedInjector).getDisplays();
         var category = getExternalDisplayCategory(0);
         var mainPref = (MainSwitchPreference) category.findPreference(
                 PrefBasics.EXTERNAL_DISPLAY_USE.keyForNth(0));
@@ -350,7 +350,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     @Test
     @UiThreadTest
     public void testNoDisplays() {
-        doReturn(List.of()).when(mMockedInjector).getConnectedDisplays();
+        doReturn(List.of()).when(mMockedInjector).getDisplays();
         initFragment();
         mHandler.flush();
         var mainPref = (MainSwitchPreference) mPreferenceScreen.findPreference(

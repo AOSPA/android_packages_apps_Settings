@@ -35,7 +35,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
-import android.hardware.devicestate.DeviceState;
 import android.hardware.devicestate.DeviceStateManager;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -57,8 +56,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowSensorPrivacyManager.class, ShadowSystemSettings.class})
@@ -94,8 +91,7 @@ public class SmartAutoRotateControllerTest {
         // Necessary for the DeviceStateRotationLockSettingsManager setup
         doReturn(context).when(context).getApplicationContext();
         doReturn(mDeviceStateManager).when(context).getSystemService(DeviceStateManager.class);
-        doReturn(getDeviceStateList()).when(mDeviceStateManager).getSupportedDeviceStates();
-        setDeviceStateRotationLockEnabled(false, mResources);
+        setDeviceStateRotationLockEnabled(/* enable= */ false, mResources, mDeviceStateManager);
         mController = Mockito.spy(new SmartAutoRotateController(
                 context, "test_key", mDeviceStateAutoRotateSettingManager));
 
@@ -180,15 +176,6 @@ public class SmartAutoRotateControllerTest {
 
     private void enableDeviceStateRotation() {
         ShadowRotationPolicy.setRotationSupported(true);
-        setDeviceStateRotationLockEnabled(true, mResources);
-    }
-
-    /**
-     * Returns a list that includes a singular default {@link DeviceState}. To be returned when
-     * {@link DeviceStateManager#getSupportedDeviceStates()} is called.
-     */
-    private List<DeviceState> getDeviceStateList() {
-        return List.of(new DeviceState(
-                new DeviceState.Configuration.Builder(0 /* identifier */, "DEFAULT").build()));
+        setDeviceStateRotationLockEnabled(/* enable= */ true, mResources, mDeviceStateManager);
     }
 }

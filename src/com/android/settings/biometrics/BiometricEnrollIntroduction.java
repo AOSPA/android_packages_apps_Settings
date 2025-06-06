@@ -51,6 +51,7 @@ import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.span.LinkSpan;
 import com.google.android.setupdesign.template.RequireScrollMixin;
 import com.google.android.setupdesign.util.DynamicColorPalette;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.List;
 
@@ -159,15 +160,14 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final boolean isExpressiveStyle = BiometricUtils.isExpressiveStyle(
-                getBaseContext(), false);
+        final boolean isSuw = WizardManagerHelper.isAnySetupWizard(getIntent());
 
         if (shouldShowSplitScreenDialog()) {
             final BiometricsSplitScreenDialog splitDialog = BiometricsSplitScreenDialog
-                    .newInstance(getModality(), !WizardManagerHelper.isAnySetupWizard(getIntent()));
+                    .newInstance(getModality(), !isSuw);
             splitDialog.setPositiveButtonListener((dialog, which) -> {
                 dialog.dismiss();
-                if (!WizardManagerHelper.isAnySetupWizard(getIntent())) {
+                if (!isSuw) {
                     updateOnboardingScreenInfoActions(
                             BiometricsOnboardingProto.OnboardingAction.ACTION_SKIP_VALUE);
                     Intent resultData = newResultIntent();
@@ -230,15 +230,16 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mFooterBarMixin = layout.getMixin(FooterBarMixin.class);
         mFooterBarMixin.setPrimaryButton(getPrimaryFooterButton());
         mFooterBarMixin.setSecondaryButton(getSecondaryFooterButton(), true /* usePrimaryStyle */);
-        if (!isExpressiveStyle) {
-            mFooterBarMixin.getSecondaryButton().setVisibility(
-                    mHasScrolledToBottom ? View.VISIBLE : View.INVISIBLE);
-        }
 
         final RequireScrollMixin requireScrollMixin = layout.getMixin(RequireScrollMixin.class);
-        requireScrollMixin.requireScrollWithButton(this, getPrimaryFooterButton(),
-                getMoreButtonTextRes(), this::onNextButtonClick);
-        if (!isExpressiveStyle) {
+        requireScrollMixin.requireScrollWithButton(this,
+                getPrimaryFooterButton(),
+                getSecondaryFooterButton(),
+                getMoreButtonTextRes(),
+                this::onNextButtonClick);
+        if (!ThemeHelper.shouldApplyGlifExpressiveStyle(layout.getContext())) {
+            mFooterBarMixin.getSecondaryButton().setVisibility(
+                    mHasScrolledToBottom ? View.VISIBLE : View.INVISIBLE);
             requireScrollMixin.setOnRequireScrollStateChangedListener(
                     scrollNeeded -> {
                         boolean enrollmentCompleted = checkMaxEnrolled() != 0;
@@ -256,12 +257,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                                         : View.INVISIBLE);
                         mHasScrolledToBottom = !scrollNeeded;
                     });
-        }
 
-        final boolean isScrollNeeded = requireScrollMixin.isScrollingRequired();
-        final boolean enrollmentCompleted = checkMaxEnrolled() != 0;
-        getSecondaryFooterButton().setVisibility(
-                !isScrollNeeded && !enrollmentCompleted ? View.VISIBLE : View.INVISIBLE);
+            final boolean isScrollNeeded = requireScrollMixin.isScrollingRequired();
+            final boolean enrollmentCompleted = checkMaxEnrolled() != 0;
+            getSecondaryFooterButton().setVisibility(
+                    !isScrollNeeded && !enrollmentCompleted ? View.VISIBLE : View.INVISIBLE);
+        }
     }
 
     @Override

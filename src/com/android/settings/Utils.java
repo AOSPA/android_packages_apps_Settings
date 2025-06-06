@@ -28,6 +28,7 @@ import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_AUTHENTICATORS;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_HIDE_BACKGROUND;
+import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.EXTRA_DATA;
 
 import android.app.ActionBar;
@@ -1768,6 +1769,8 @@ public final class Utils extends com.android.settingslib.Utils {
         final Intent intent = new Intent();
         intent.putExtra(BIOMETRIC_PROMPT_AUTHENTICATORS,
                 BiometricManager.Authenticators.IDENTITY_CHECK);
+        intent.putExtra(BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT,
+                resources.getString(R.string.cancel));
         intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION,
                 resources.getString(R.string.mandatory_biometrics_prompt_description));
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, true);
