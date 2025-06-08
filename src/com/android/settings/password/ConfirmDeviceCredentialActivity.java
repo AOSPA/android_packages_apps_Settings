@@ -80,6 +80,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     public static final String CUSTOM_BIOMETRIC_PROMPT_LOGO_DESCRIPTION_KEY =
             "custom_logo_description";
     public static final String BIOMETRIC_PROMPT_AUTHENTICATORS = "biometric_prompt_authenticators";
+    public static final String BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT =
+            "biometric_prompt_negative_button_text";
     public static final String BIOMETRIC_PROMPT_HIDE_BACKGROUND =
             "biometric_prompt_hide_background";
     public static final String EXTRA_DATA = "extra_data";
@@ -208,6 +210,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 BiometricManager.Authenticators.DEVICE_CREDENTIAL
                         | BiometricManager.Authenticators.BIOMETRIC_WEAK);
         mIntentData = intent.getParcelableExtra(EXTRA_DATA, Intent.class);
+        final String negativeButtonText = intent.getStringExtra(
+                BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT);
         final boolean frp =
                 KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
         final boolean repairMode =
@@ -245,6 +249,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         promptInfo.setDescription(mDetails);
         promptInfo.setDisallowBiometricsIfPolicyExists(mCheckDevicePolicyManager);
         promptInfo.setAuthenticators(mBiometricsAuthenticators);
+        promptInfo.setNegativeButtonText(negativeButtonText);
 
         final String callerPackageName = intent.getStringExtra(EXTRA_PACKAGE_NAME);
         if (isInternalActivity() && callerPackageName != null) {

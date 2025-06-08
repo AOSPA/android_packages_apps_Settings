@@ -30,7 +30,6 @@
     <include layout="@layout/settingslib_expressive_preference_icon_frame"/>
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="@dimen/settingslib_expressive_space_none"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -80,7 +79,7 @@
         android:id="@android:id/widget_frame"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:minWidth="@dimen/two_target_min_width"
+        android:minWidth="@dimen/settingslib_expressive_space_medium4"
         android:gravity="center"
         android:orientation="vertical" />
 

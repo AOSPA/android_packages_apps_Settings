@@ -88,6 +88,10 @@ android_robolectric_test {
         "ims-common",
     ],
 
+    associates: [
+        "Settings-core",
+    ],
+
     java_resource_dirs: [
         "config",
         "resources",

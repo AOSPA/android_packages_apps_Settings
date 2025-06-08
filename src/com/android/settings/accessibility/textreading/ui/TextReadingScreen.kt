@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accessibility
+package com.android.settings.accessibility.textreading.ui
 
 import android.app.settings.SettingsEnums
 import android.content.Context
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.preferenceHierarchy

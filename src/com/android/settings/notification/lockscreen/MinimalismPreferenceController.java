@@ -18,6 +18,8 @@ package com.android.settings.notification.lockscreen;
 
 import static android.provider.Settings.Secure.LOCK_SCREEN_NOTIFICATION_MINIMALISM;
 import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS;
+import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
+import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_YES;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -60,7 +62,8 @@ public class MinimalismPreferenceController
     private static final Uri URI_LOCK_SCREEN_SHOW_NOTIFICATIONS =
             Settings.Secure.getUriFor(LOCK_SCREEN_SHOW_NOTIFICATIONS);
 
-    @Nullable private LayoutPreference mPreference;
+    @Nullable
+    private LayoutPreference mPreference;
     private Map<Integer, LinearLayout> mButtons = new HashMap<>();
     private Map<Integer, IllustrationPreference> mIllustrations = new HashMap<>();
 
@@ -150,7 +153,17 @@ public class MinimalismPreferenceController
     }
 
     private void highlightButton(int currentValue) {
-        mButtons.forEach((value, button) -> button.setSelected(currentValue == value));
+        mButtons.forEach(
+                (value, button) -> {
+                    button.setSelected(currentValue == value);
+                    if (currentValue == value) {
+                        button.setImportantForAccessibility(
+                                IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+                    } else {
+                        button.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+                    }
+                }
+        );
     }
 
     private void highlightIllustration(int currentValue) {

@@ -102,11 +102,20 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         return RevealedWallpaper(display.displayId, view, windowManager)
     }
 
-    private fun wrapDmDisplay(display: Display, isEnabled: DisplayIsEnabled): DisplayDevice =
-        DisplayDevice(display.displayId, display.name, display.mode,
-                display.getSupportedModes().asList(), isEnabled)
+    private fun wrapDmDisplay(
+        display: Display,
+        isEnabled: DisplayIsEnabled,
+        isConnectedDisplay: Boolean
+    ): DisplayDevice = DisplayDevice(
+        display.displayId,
+        display.name,
+        display.mode,
+        display.supportedModes.asList(),
+        isEnabled,
+        isConnectedDisplay
+    )
 
-    private fun isDisplayAllowed(display: Display): Boolean =
+    private fun isConnectedDisplay(display: Display): Boolean =
         display.type == Display.TYPE_EXTERNAL || display.type == Display.TYPE_OVERLAY
                 || isVirtualDisplayAllowed(display);
 
@@ -133,35 +142,18 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     }
 
     /**
-     * TODO(b/419742776): Unify this with #getAllDisplayIds
      * @return all displays including disabled.
      */
-    open fun getConnectedDisplays(): List<DisplayDevice> {
+    open fun getDisplays(): List<DisplayDevice> {
         val dm = displayManager ?: return emptyList()
 
-        val enabledIds = dm.getDisplays().map { it.getDisplayId() }.toSet()
+        val enabledIds = dm.displays.map { it.displayId }.toSet()
 
-        return dm.getDisplays(DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED)
-            .filter { isDisplayAllowed(it) }
-            .map {
-                val isEnabled = if (enabledIds.contains(it.displayId))
-                    DisplayIsEnabled.YES
-                else
-                    DisplayIsEnabled.NO
-                wrapDmDisplay(it, isEnabled)
-            }
-            .toList()
-    }
-
-    /**
-     * This method return all enabled display ids without further filtering
-     * TODO(b/419742776): Unify this with #getConnectedDisplays
-     *
-     * @see getConnectedDisplays to specifically fetch all connected displays
-     */
-    open fun getAllDisplayIds(): List<Int> {
-        val dm = displayManager ?: return emptyList()
-        return dm.getDisplays().map { it.displayId }.toList()
+        return dm.getDisplays(DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED).map {
+            val isEnabled = if (enabledIds.contains(it.displayId)) DisplayIsEnabled.YES
+            else DisplayIsEnabled.NO
+            wrapDmDisplay(it, isEnabled, isConnectedDisplay(it))
+        }.toList()
     }
 
     /**
@@ -174,8 +166,8 @@ open class ConnectedDisplayInjector(open val context: Context?) {
             return null
         }
         val display = displayManager?.getDisplay(displayId) ?: return null
-        return if (isDisplayAllowed(display)) {
-            wrapDmDisplay(display, DisplayIsEnabled.UNKNOWN)
+        return if (isConnectedDisplay(display)) {
+            wrapDmDisplay(display, DisplayIsEnabled.UNKNOWN, true)
         } else {
             null
         }

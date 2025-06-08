@@ -109,6 +109,11 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest {
         assertThat(mFragment.getHelpResource()).isEqualTo(0);
     }
 
+    @Test
+    public void getSurveyKey_returnEmptyString() {
+        assertThat(mFragment.getSurveyKey()).isEqualTo("");
+    }
+
     private static class TestToggleScreenMagnificationPreferenceFragmentForSetupWizard
             extends ToggleScreenMagnificationPreferenceFragmentForSetupWizard {
 

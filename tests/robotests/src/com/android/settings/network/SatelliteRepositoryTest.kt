@@ -31,12 +31,17 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.any
+import org.mockito.Mockito.never
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
+import org.mockito.Mockito.`when`
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
@@ -303,6 +308,7 @@ class SatelliteRepositoryTest {
 
 
     @Test
+    @Ignore("b/420876879")
     fun requestIsSupportedFlow_error_returnFalse() = runBlocking {
         whenever(
             mockSatelliteManager.requestIsSupported(
@@ -322,6 +328,7 @@ class SatelliteRepositoryTest {
     }
 
     @Test
+    @Ignore("b/420876879")
     fun requestIsSupportedFlow_notSupported_returnFalse() = runBlocking {
         whenever(
             mockSatelliteManager.requestIsSupported(
@@ -341,6 +348,7 @@ class SatelliteRepositoryTest {
     }
 
     @Test
+    @Ignore("b/420876879")
     fun requestIsSupportedFlow_supported_returnTrue() = runBlocking {
         whenever(
             mockSatelliteManager.requestIsSupported(

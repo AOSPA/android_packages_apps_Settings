@@ -24,15 +24,15 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import com.android.internal.R
+import com.android.settings.testutils.DeviceStateAutoRotateSettingTestUtils.setDeviceStateRotationLockEnabled
 import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManagerImpl
 import com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager
 import com.android.window.flags.Flags
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
-import org.junit.Before
 import org.junit.Assert.assertNotSame
 import org.junit.Assert.assertSame
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -65,8 +65,8 @@ class DeviceStateAutoRotateSettingManagerProviderTest {
             mockDeviceStateManager
         )
         whenever(mockContext.resources).thenReturn(mockResources)
-        whenever(mockResources.getStringArray(R.array.config_perDeviceStateRotationLockDefaults))
-            .thenReturn(arrayOf())
+        setDeviceStateRotationLockEnabled(/* enable= */ true, mockResources,
+            mockDeviceStateManager)
     }
 
     @After
@@ -80,6 +80,16 @@ class DeviceStateAutoRotateSettingManagerProviderTest {
         val manager = DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(mockContext)
 
         assertThat(manager).isInstanceOf(DeviceStateAutoRotateSettingManagerImpl::class.java)
+    }
+
+    @Test
+    fun getSingletonInstance_noFoldedDeviceStates_returnsNull() {
+        setDeviceStateRotationLockEnabled(/* enable= */ false, mockResources,
+            mockDeviceStateManager)
+
+        val manager = DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(mockContext)
+
+        assertThat(manager).isNull()
     }
 
     @Test

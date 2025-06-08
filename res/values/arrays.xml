@@ -1751,4 +1751,22 @@
     <!-- Packages that will not show Display over other apps permission -->
     <string-array name="display_over_apps_permission_change_exempt">
     </string-array>
+
+    <!-- Titles for Action Corner customization option. [CHAR LIMIT=35] -->
+    <string-array name="action_corner_action_titles">
+        <item>None</item>
+        <item>Home</item>
+        <item>Recent apps</item>
+        <item>Notifications</item>
+        <item>Quick settings</item>
+    </string-array>
+
+    <!-- Values for Action Corner customization option. -->
+    <string-array name="action_corner_action_values" translatable="false" >
+        <item>none</item>
+        <item>home</item>
+        <item>recent_apps</item>
+        <item>notifications</item>
+        <item>quick_settings</item>
+    </string-array>
 </resources>

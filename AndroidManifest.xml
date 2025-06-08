@@ -2862,6 +2862,12 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </activity>
 
         <activity
+            android:enableOnBackInvokedCallback="true"
+            android:name=".supervision.SupervisionDashboardLoadingActivity"
+            android:label="@string/supervision_settings_title"
+            android:exported="false"/>
+
+        <activity
             android:name=".supervision.SupervisionDashboardActivity"
             android:label="@string/supervision_settings_title"
             android:exported="true"
@@ -5598,6 +5604,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
 
         <activity android:name=".privatespace.delete.PrivateSpaceDeleteActivity"
                   android:label="@string/private_space_delete_header"
+                  android:theme="@style/GlifV3Theme.Light"
                   android:exported="false">
         </activity>
 

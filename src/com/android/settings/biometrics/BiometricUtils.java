@@ -541,7 +541,10 @@ public class BiometricUtils {
      * @param context that for applying Expressive Style
      * @param isSettingsPreference Apply Expressive style on Settings Preference or not.
      * @return true if device using Expressive Style theme, otherwise false.
+     *
+     * @deprecated Use useExpressiveStyle(context, intent) instead
      */
+    @Deprecated
     public static boolean isExpressiveStyle(@NonNull Context context,
             boolean isSettingsPreference) {
         return isSettingsPreference ? SettingsThemeHelper.isExpressiveTheme(context) :
@@ -554,7 +557,11 @@ public class BiometricUtils {
      * @param intent intent The original intent that was used to start the step, usually
      *               via {@link Activity#getIntent()}, Null will assume calling from Settings Flow.
      * @return true if device using Expressive Style theme, otherwise false.
+     *
+     * @deprecated Using either ThemeHelper.shouldApplyGlifExpressiveStyle()
+     *             or SettingsThemeHelper.isExpressiveTheme() is more practical.
      */
+    @Deprecated
     public static boolean useExpressiveStyle(@NonNull Context context, @Nullable Intent intent) {
         if (WizardManagerHelper.isAnySetupWizard(intent)) {
             return ThemeHelper.shouldApplyGlifExpressiveStyle(context);

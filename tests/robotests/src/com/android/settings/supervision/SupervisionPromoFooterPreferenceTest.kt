@@ -22,6 +22,7 @@ import android.content.pm.ResolveInfo
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
 import com.android.settings.supervision.SupervisionPromoFooterPreference.Companion.KEY
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -34,9 +35,11 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
+import org.mockito.kotlin.atLeastOnce
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
+import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 
@@ -48,7 +51,7 @@ class SupervisionPromoFooterPreferenceTest {
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
             override fun getPackageManager() = mockPackageManager
         }
-    private val preference = CardPreference(context)
+    private val preference = spy(CardPreference(context))
 
     private var preferenceData: PreferenceData? = null
 
@@ -207,6 +210,12 @@ class SupervisionPromoFooterPreferenceTest {
 
             verify(preferenceLifecycleContext).notifyPreferenceChange(KEY) // will trigger binding
             promoPreference.bind(preference, mock())
+            verify(preference, atLeastOnce()).setAdditionalAction(
+                null,
+                context.getString(R.string.supervision_promo_footer_action_button_description),
+            ) {
+                it.performClick()
+            }
 
             assertThat(preference.isVisible).isTrue()
             val intent = preference.intent!!

@@ -126,12 +126,11 @@
             </LinearLayout>
 
             <LinearLayout android:id="@+id/buttonPanel"
-                style="?android:attr/buttonBarStyle"
+                style="@style/Widget.SettingsLib.ButtonBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:divider="?android:attr/dividerHorizontal"
-                android:showDividers="beginning|middle|end">
+                android:paddingHorizontal="@dimen/settingslib_expressive_space_small1"
+                android:orientation="vertical">
                 <LinearLayout
                     android:id="@+id/restricted_action"
                     android:layout_width="match_parent"
@@ -142,9 +141,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
-                        android:gravity="start|center_vertical"
+                        android:gravity="center"
                         android:maxLines="2"
-                        style="?android:attr/buttonBarButtonStyle"
+                        style="@style/Widget.SettingsLib.DialogButton.Filled"
                         android:clickable="false"
                         android:focusable="false"
                         android:textAllCaps="false"
@@ -154,19 +153,19 @@
                 <Button android:id="@+id/cancel_button"
                     android:layout_width="match_parent"
                     android:layout_gravity="end"
-                    android:gravity="start|center_vertical"
+                    android:gravity="center"
                     android:maxLines="2"
                     android:text="@string/cancel"
-                    style="?android:attr/buttonBarButtonStyle"
+                    style="@style/Widget.SettingsLib.DialogButton.Outline"
                     android:textAllCaps="false"
                     android:layout_height="wrap_content" />
                 <Button android:id="@+id/uninstall_button"
                     android:layout_width="match_parent"
                     android:layout_gravity="end"
-                    android:gravity="start|center_vertical"
+                    android:gravity="center"
                     android:maxLines="2"
                     android:text="@string/uninstall_device_admin"
-                    style="?android:attr/buttonBarButtonStyle"
+                    style="@style/Widget.SettingsLib.DialogButton.Outline"
                     android:textAllCaps="false"
                     android:layout_height="wrap_content"
                     android:visibility="gone" />

@@ -70,10 +70,7 @@ class SupervisionAocFooterPreferenceTest {
     @Test
     fun onResume_allGood_titleIsSet_preferenceIsVisible() =
         testScope.runTest {
-            val title = "test title"
-            val learnMoreLink = "https://google.com/learnMore"
-            preferenceData =
-                PreferenceData(title = title, learnMoreLink = learnMoreLink, isVisible = true)
+            preferenceData = PreferenceData(title = PREFERENCE_TITLE, isVisible = true)
 
             val aosFooterPreference =
                 SupervisionAocFooterPreference(preferenceDataProvider, testDispatcher)
@@ -83,16 +80,13 @@ class SupervisionAocFooterPreferenceTest {
             aosFooterPreference.bind(preference, mock())
 
             assertThat(preference.isVisible).isTrue()
-            assertThat(preference.title).isEqualTo(title)
+            assertThat(preference.title.toString()).isEqualTo(PREFERENCE_TITLE)
         }
 
     @Test
     fun onResume_notVisible_preferenceIsHidden() =
         testScope.runTest {
-            val title = "test title"
-            val learnMoreLink = "https://google.com/learnMore"
-            preferenceData =
-                PreferenceData(title = title, learnMoreLink = learnMoreLink, isVisible = false)
+            preferenceData = PreferenceData(title = PREFERENCE_TITLE, isVisible = false)
 
             val aosFooterPreference =
                 SupervisionAocFooterPreference(preferenceDataProvider, testDispatcher)
@@ -102,31 +96,13 @@ class SupervisionAocFooterPreferenceTest {
             aosFooterPreference.bind(preference, mock())
 
             assertThat(preference.isVisible).isFalse()
-            assertThat(preference.title).isEqualTo(title)
-        }
-
-    @Test
-    fun onResume_noLearnMoreLink_preferenceIsHidden() =
-        testScope.runTest {
-            val title = "test title"
-            preferenceData = PreferenceData(title = title, isVisible = false)
-
-            val aosFooterPreference =
-                SupervisionAocFooterPreference(preferenceDataProvider, testDispatcher)
-
-            aosFooterPreference.onResume(preferenceLifecycleContext)
-            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY)
-            aosFooterPreference.bind(preference, mock())
-
-            assertThat(preference.isVisible).isFalse()
-            assertThat(preference.title).isEqualTo(title)
+            assertThat(preference.title.toString()).isEqualTo(PREFERENCE_TITLE)
         }
 
     @Test
     fun onResume_noTitle_preferenceIsHidden() =
         testScope.runTest {
-            val learnMoreLink = "https://google.com/learnMore"
-            preferenceData = PreferenceData(learnMoreLink = learnMoreLink, isVisible = false)
+            preferenceData = PreferenceData(isVisible = false)
 
             val aosFooterPreference =
                 SupervisionAocFooterPreference(preferenceDataProvider, testDispatcher)
@@ -137,4 +113,8 @@ class SupervisionAocFooterPreferenceTest {
 
             assertThat(preference.isVisible).isFalse()
         }
+
+    private companion object {
+        const val PREFERENCE_TITLE = "test title"
+    }
 }

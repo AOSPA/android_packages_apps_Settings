@@ -19,82 +19,26 @@ import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
 import androidx.preference.Preference
-import com.android.settings.applications.AppStoreUtil.getAppStoreLink
-import com.android.settings.applications.AppStoreUtil.getInstallerPackageName
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.supervision.ipc.SupervisionMessengerClient.Companion.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
 
 /** Controller for the top level Supervision settings Preference item. */
 class TopLevelSupervisionPreferenceController(context: Context, key: String) :
     BasePreferenceController(context, key) {
-    private val supervisionPackage = context.supervisionPackageName
-
-    private var missingAppStoreLink = false
-
-    private var redirectIntent: Intent? = null
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key == preferenceKey) {
-            val intent =
-                redirectIntent ?: Intent(mContext, SupervisionDashboardActivity::class.java)
+            val intent = Intent(mContext, SupervisionDashboardActivity::class.java)
             mContext.startActivity(intent)
             return true
         }
         return super.handlePreferenceTreeClick(preference)
     }
 
-    override fun updateState(preference: Preference) {
-        super.updateState(preference)
-        if (!hasNecessarySupervisionComponent() && missingAppStoreLink) {
-            preference.isEnabled = false
-        }
-    }
-
     override fun getAvailabilityStatus(): Int {
-        if (!Flags.enableSupervisionSettingsScreen() || supervisionPackage == null)
+        if (!Flags.enableSupervisionSettingsScreen()) {
             return UNSUPPORTED_ON_DEVICE
-
-        // Try to navigate to app store if supervision app with necessary component is not installed
-        if (!hasNecessarySupervisionComponent()) {
-            val installerPackageName = getInstallerPackageName(mContext, supervisionPackage)
-            val appStoreLinkIntent =
-                installerPackageName?.let {
-                    getAppStoreLink(mContext, installerPackageName, supervisionPackage)
-                }
-            if (appStoreLinkIntent == null) {
-                missingAppStoreLink = true
-                return AVAILABLE
-            }
-            missingAppStoreLink = false
-            redirectIntent = appStoreLinkIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-
-        if (hasRedirect()) {
-            redirectIntent = Intent(SETTINGS_REDIRECT_ACTION).setPackage(supervisionPackage)
         }
 
         return AVAILABLE
-    }
-
-    private fun hasNecessarySupervisionComponent(): Boolean {
-        val intent =
-            Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION).setPackage(supervisionPackage)
-
-        return supervisionPackage != null &&
-            mContext.packageManager.queryIntentServices(intent, 0).isNotEmpty()
-    }
-
-    private fun hasRedirect(): Boolean {
-        val intent = Intent(SETTINGS_REDIRECT_ACTION).setPackage(supervisionPackage)
-        return supervisionPackage != null &&
-            mContext.packageManager
-                .queryIntentActivitiesAsUser(intent, 0, mContext.userId)
-                .isNotEmpty()
-    }
-
-    companion object {
-        // Supervision app should declare an intent-filter with this action to redirect the settings
-        // navigation target.
-        const val SETTINGS_REDIRECT_ACTION = "android.app.supervision.action.VIEW_SETTINGS"
     }
 }

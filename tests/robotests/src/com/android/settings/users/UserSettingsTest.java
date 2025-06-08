@@ -101,6 +101,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowIntent;
+import org.robolectric.shadows.ShadowProcess;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -111,6 +112,7 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowUserManager.class,
+        ShadowProcess.class,
         ShadowDevicePolicyManager.class,
         SettingsShadowResources.class,
         ShadowLockPatternUtils.class,
@@ -122,8 +124,8 @@ public class UserSettingsTest {
     private static final String KEY_ALLOW_MULTIPLE_USERS = "allow_multiple_users";
     private static final String KEY_USER_SETTINGS_SCREEN = "user_settings_screen";
     private static final String KEY_ADD_USER = "user_add";
-    private static final int ACTIVE_USER_ID = 0;
-    private static final int INACTIVE_ADMIN_USER_ID = 1;
+    private static final int ACTIVE_USER_ID = 1;
+    private static final int INACTIVE_ADMIN_USER_ID = 2;
     private static final int INACTIVE_SECONDARY_USER_ID = 14;
     private static final int INACTIVE_RESTRICTED_USER_ID = 21;
     private static final int INACTIVE_GUEST_USER_ID = 23;
@@ -196,6 +198,7 @@ public class UserSettingsTest {
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mMockPreferenceManager).when(mFragment).getPreferenceManager();
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
         doReturn(mPackageManager).when(mContext).getPackageManager();
 
         mProvisionedBackupValue = Settings.Global.getInt(mContext.getContentResolver(),
@@ -209,6 +212,8 @@ public class UserSettingsTest {
         doReturn(mContext).when(mMockPreferenceManager).getContext();
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
         doReturn(ACTIVE_USER_ID).when(mContext).getUserId();
+        doReturn(ACTIVE_USER_ID).when(mMePreference).getUserId();
+        ShadowProcess.setUid(ACTIVE_USER_ID * UserHandle.PER_USER_RANGE);
 
         mFragment.mMePreference = mMePreference;
         mFragment.mAddUser = mAddUserPreference;
@@ -240,6 +245,7 @@ public class UserSettingsTest {
         String[] expectedKeys = {KEY_ALLOW_MULTIPLE_USERS, KEY_USER_SETTINGS_SCREEN, KEY_ADD_USER};
         List<String> keysResultList = new ArrayList<>();
         ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
+        givenUsers(getAdminUser(true));
         List<SearchIndexableRaw> rawData =
                 UserSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
 
@@ -253,13 +259,14 @@ public class UserSettingsTest {
     @Test
     public void testGetRawDataToIndex_addRestrictedProfileAllowed_addUserTitleIsCorrect() {
         ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
+        givenUsers(getAdminUser(true));
         SettingsShadowResources.overrideResource(
                 com.android.settings.R.bool.config_offer_restricted_profiles,
                 Boolean.TRUE);
         when(mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_ADD_USER, mContext.getUser()))
                 .thenReturn(false);
-        ShadowUserManager.getShadow().setUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED,
-                true);
+        when(mUserManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED))
+                .thenReturn(true);
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
         when(mDevicePolicyManager.isDeviceManaged()).thenReturn(false);
@@ -281,6 +288,7 @@ public class UserSettingsTest {
     @Test
     public void testGetRawDataToIndex_addRestrictedProfileDisallowed_addUserTitleIsCorrect() {
         ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
+        givenUsers(getAdminUser(true));
         SettingsShadowResources.overrideResource(
                 com.android.settings.R.bool.config_offer_restricted_profiles,
                 Boolean.FALSE);
@@ -346,10 +354,8 @@ public class UserSettingsTest {
                 new UserManager.EnforcingUser(userId,
                         UserManager.RESTRICTION_SOURCE_DEVICE_OWNER)
         );
-        ShadowUserManager.getShadow().setUserRestrictionSources(
-                UserManager.DISALLOW_REMOVE_USER,
-                UserHandle.of(userId),
-                enforcingUsers);
+        doReturn(enforcingUsers).when(mUserManager).getUserRestrictionSources(
+                UserManager.DISALLOW_REMOVE_USER, UserHandle.of(userId));
 
         ShadowDevicePolicyManager.getShadow().setDeviceOwnerComponentOnAnyUser(
                 new ComponentName("test", "test"));
@@ -1173,6 +1179,5 @@ public class UserSettingsTest {
                 UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_GUEST,
                 UserManager.USER_TYPE_FULL_GUEST);
     }
-
 
 }

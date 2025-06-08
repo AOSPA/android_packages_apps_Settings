@@ -97,9 +97,9 @@
     <string name="preview_pager_next_button">Next preview</string>
 
     <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
-    <string name="font_size_make_smaller_desc">Make smaller</string>
+    <string name="font_size_make_smaller_desc">Make font size smaller</string>
     <!-- Description for the button that makes interface elements larger. [CHAR_LIMIT=NONE] -->
-    <string name="font_size_make_larger_desc">Make larger</string>
+    <string name="font_size_make_larger_desc">Make font size bigger</string>
 
     <!-- Title for stay awake on fold radio button. [CHAR_LIMIT=NONE] -->
     <string name="stay_awake_on_fold_title">Always</string>
@@ -2112,6 +2112,10 @@
     <string name="bluetooth_device_context_disconnect">Disconnect</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will first pair, and then connect to all profiles on the device. -->
     <string name="bluetooth_device_context_pair_connect">Pair &amp; connect</string>
+    <!-- Bluetooth settings.  Message when connecting to a device -->
+    <string name="bluetooth_connecting">Connecting</string>
+    <!-- Bluetooth settings.  Message when disconnecting from a device -->
+    <string name="bluetooth_disconnecting">Disconnecting</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty [CHAR LIMIT=NONE]-->
     <string name="bluetooth_empty_list_bluetooth_off">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty when auto-on feature is enabled [CHAR LIMIT=NONE]-->
@@ -4469,7 +4473,7 @@
     <!-- Header shown when the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
     <string name="lockpassword_confirm_your_password_header_frp">Verify password</string>
 
-    <!-- Header shown when prompted for remote device credential validation. [CHAR LIMIT=17] -->
+    <!-- Header shown when prompted for remote device credential validation. [CHAR LIMIT=NONE] -->
     <string name="lockpassword_remote_validation_header">Verify it\u0027s you</string>
 
     <!-- Details shown when pattern is prompted for remote device credential validation. [CHAR LIMIT=160] -->
@@ -5222,19 +5226,39 @@
     <string name="gesture_button_done">Done</string>
 
     <!-- Title text for 'Customize action corners' preference. This preference allows the user to select actions to be triggered when moving the cursor to a corner. [CHAR LIMIT=60] -->
-    <string name="action_corners_title">Customize action corners</string>
+    <string name="action_corner_title">Customize action corners</string>
     <!-- Summary text for 'Customize action corners' preference. [CHAR LIMIT=NONE] -->
-    <string name="action_corners_summary">Use cursors to navigate the system</string>
+    <string name="action_corner_summary">Use cursors to navigate the system</string>
     <!-- Intro text for 'Customize action corners'. [CHAR LIMIT=NONE] -->
-    <string name="action_corners_intro">Choose the following areas to customize action corners</string>
+    <string name="action_corner_intro">Choose the following areas to customize action corners</string>
+    <!-- Preference title for 'Bottom-left corner'. [CHAR LIMIT=60] -->
+    <string name="action_corner_bottom_left_title">Bottom-left corner</string>
+    <!-- Preference title for 'Bottom-right corner'. [CHAR LIMIT=60] -->
+    <string name="action_corner_bottom_right_title">Bottom-right corner</string>
+    <!-- Preference title for 'Top-left corner'. [CHAR LIMIT=60] -->
+    <string name="action_corner_top_left_title">Top-left corner</string>
+    <!-- Preference title for 'Top-right corner'. [CHAR LIMIT=60] -->
+    <string name="action_corner_top_right_title">Top-right corner</string>
+    <!-- Text for 'None' action radio button. [CHAR LIMIT=60] -->
+    <string name="action_corner_action_none">None</string>
+    <!-- Text for 'Home' action radio button. [CHAR LIMIT=60] -->
+    <string name="action_corner_action_home">Home</string>
+    <!-- Text for 'Recent apps' action radio button. [CHAR LIMIT=60] -->
+    <string name="action_corner_action_recent_apps">Recent apps</string>
+    <!-- Text for 'Notifications' action radio button. [CHAR LIMIT=60] -->
+    <string name="action_corner_action_notifications">Notifications</string>
+    <!-- Text for 'Quick settings' action radio button. [CHAR LIMIT=60] -->
+    <string name="action_corner_action_quick_settings">Quick settings</string>
+    <!-- Title text for action selection dialog. [CHAR LIMIT=NONE] -->
+    <string name="action_corner_action_dialog_title">Choose a shortcut for the <xliff:g id="corner">%1$s</xliff:g></string>
     <!-- Text for 'Bottom-left corner'. [CHAR LIMIT=60] -->
-    <string name="action_corners_bottom_left_title">Bottom-left corner</string>
+    <string name="action_corner_bottom_left_name">bottom-left corner</string>
     <!-- Text for 'Bottom-right corner'. [CHAR LIMIT=60] -->
-    <string name="action_corners_bottom_right_title">Bottom-right corner</string>
+    <string name="action_corner_bottom_right_name">bottom-right corner</string>
     <!-- Text for 'Top-left corner'. [CHAR LIMIT=60] -->
-    <string name="action_corners_top_left_title">Top-left corner</string>
+    <string name="action_corner_top_left_name">top-left corner</string>
     <!-- Text for 'Top-right corner'. [CHAR LIMIT=60] -->
-    <string name="action_corners_top_right_title">Top-right corner</string>
+    <string name="action_corner_top_right_name">top-right corner</string>
 
     <!-- Title for the button to trigger the 'modifier keys settings' page. [CHAR LIMIT=35] -->
     <string name="modifier_keys_settings">Modifier keys</string>
@@ -5571,6 +5595,8 @@
     <string name="accessibility_magnification_cursor_following_title">Cursor following</string>
     <!-- Header message of cursor following mode dialog for magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_magnification_cursor_following_header">Choose how Magnification follows your cursor.</string>
+    <!-- Summary for cursor following preference where cursor following setting is unavailable while partial-only capability. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_cursor_following_unavailable_summary">Unavailable while only magnifying part of the screen</string>
     <!-- Option title of cursor following continuous mode in the mode selection dialog. [CHAR LIMIT=none] -->
     <string name="accessibility_magnification_cursor_following_continuous">Move screen continuously as mouse moves</string>
     <!-- Option title of cursor following center mode in the mode selection dialog. [CHAR LIMIT=none] -->
@@ -5928,6 +5954,16 @@
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
     <string name="accessibility_disable_animations_summary">Reduce movement on the screen</string>
+    <!-- Title for the accessibility preference for the text cursor blink rate. [CHAR LIMIT=35] -->
+    <string name="accessibility_text_cursor_blink_rate_title">Text cursor blinking</string>
+    <!-- Summary for the accessibility preference for the text cursor blink rate. [CHAR LIMIT=60] -->
+    <string name="accessibility_text_cursor_blink_rate_summary">Adjust the text cursor\'s blinking speed or turn off blinking. May not be supported on all apps or websites.</string>
+    <!-- Description for the button that decreases the text cursor blink rate. [CHAR_LIMIT=NONE] -->
+    <string name="accessibility_text_cursor_blink_rate_slower_desc">Decrease blink speed</string>
+    <!-- Description for the button that increases the text cursor blink rate. [CHAR_LIMIT=NONE] -->
+    <string name="accessibility_text_cursor_blink_rate_faster_desc">Increase blink speed</string>
+    <!-- Label for the button that resets the text cursor blink rate. [CHAR_LIMIT=20] -->
+    <string name="accessibility_text_cursor_blink_rate_reset_button_label">Reset</string>
     <!-- Title for the accessibility preference for primary mono. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_primary_mono_title">Mono audio</string>
     <!-- Summary for the accessibility preference for primary mono. [CHAR LIMIT=60] -->
@@ -8817,7 +8853,7 @@ Data usage charges may apply.</string>
     <string name="zen_modes_list_title">Modes</string>
 
     <!-- Zen Modes: Intro text describing the feature. [CHAR LIMIT=NONE]-->
-    <string name="zen_modes_list_intro">Minimize distractions and take control of your attention with modes for sleep, work, driving, and everything in between.</string>
+    <string name="zen_modes_list_intro">Minimize distractions and take control of your attention with modes for sleep, work, driving, and everything in between</string>
 
     <!-- Zen Modes: Caption of the "add a mode" item in the modes list -->
     <string name="zen_modes_add_mode">Create your own mode</string>
@@ -10614,6 +10650,12 @@ Data usage charges may apply.</string>
     <!-- Summary for the entrypoint that navigates to the App Data Sharing Updates page. [CHAR LIMIT=130]-->
     <string name="app_data_sharing_updates_summary">Review apps that changed the way they may share your location data</string>
 
+    <!-- Title for the entrypoint that navigates to the App Function Access Settings page. [CHAR LIMIT=70]-->
+    <string name="app_function_access_settings_title">Agent control of other apps</string>
+
+    <!-- Summary for the entrypoint that navigates to the App Function Access Settings page. [CHAR LIMIT=130]-->
+    <string name="app_function_access_settings_summary">Perform actions on your device and in other apps</string>
+
     <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
     <string name="tap_to_wake">Tap to wake</string>
 
@@ -11071,9 +11113,9 @@ Data usage charges may apply.</string>
     <!-- Title of the screen zoom preview activity. -->
     <string name="screen_zoom_preview_title">Preview</string>
     <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
-    <string name="screen_zoom_make_smaller_desc">Make smaller</string>
+    <string name="screen_zoom_make_smaller_desc">Make display size smaller</string>
     <!-- Description for the button that makes interface elements larger. [CHAR_LIMIT=NONE] -->
-    <string name="screen_zoom_make_larger_desc">Make larger</string>
+    <string name="screen_zoom_make_larger_desc">Make display size bigger</string>
 
     <!-- Wi-Fi state - Disconnected [CHAR LIMIT=NONE] -->
     <string name="disconnected">Not connected</string>
@@ -13498,6 +13540,14 @@ Data usage charges may apply.</string>
     <!-- Confirmation dialog title to ensure user wishes to enable 16 KB page size -->
     <string name="confirm_enable_16k_pages_title">Switch from 4 KB mode to 16 KB mode</string>
     <!-- Warning dialog message to confirm user wishes to enable 16 KB page size -->
+    <string name="confirm_enable_16k_pages_update_wipe"> This device’s data partition needs to be converted to ext4 before using the 16 KB developer option.
+        The device will be wiped and the filesystem will be changed to ext4 after confirmation. You are in production mode running a 4 KB kernel,
+        and you are switching to the 16 KB mode. Once you are in this mode, you can switch back and forth between 4 KB and 16 KB mode with a single reboot.
+        Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
+        Some features will be disabled in these modes, so some applications may not work. To return the device to production mode,
+        you would need to then switch back to the 4 KB mode and lock the bootloader, which factory resets the device.
+        After the device successfully boots into Android, disable OEM unlocking in Developer options.
+        To proceed, click on \'Erase all data and update\'. This will reboot the device.</string>
     <string name="confirm_enable_16k_pages_text">You are in the page-agnostic mode running a 4 KB kernel, and you are switching to the 16 KB mode.
         Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
         This will reboot the device. Some features will be disabled in these modes, so some applications may not work.
@@ -13513,17 +13563,8 @@ Data usage charges may apply.</string>
     <!-- Toast message when 16k OTA update fails -->
     <string name="toast_16k_update_failed_text">Failed to update kernel to 16 KB pages compatible kernel.</string>
     <string name="progress_16k_ota_title">Applying change</string>
-    <!-- Confirmation dialog title and text to reformat data to ext4 -->
-    <string name="confirm_format_ext4_title">Reformat device to ext4? (required for 16 KB mode)</string>
-    <string name="confirm_format_ext4_text">This device’s data partition needs to be converted to ext4 before using the 16 KB developer option.
-        Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
-        Activating the 16 KB option will require one more reboot after this. Once you are in this mode, you can switch back and forth between 4 KB and 16 KB mode with a single reboot.
-        Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4 KB mode and
-        then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options.
-        The device will be wiped and the filesystem will be changed to ext4 after confirmation. After this completes, please come back to enable 16 KB again.
-    </string>
     <!-- Text for confirmation buttion for ext4 -->
-    <string name="confirm_ext4_button_text">Erase all data</string>
+    <string name="confirm_ext4_button_text">Erase all data and update</string>
     <!-- Toast on failure to reformat data to ext4 -->
     <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partition to ext4.</string>
     <!-- Dialog to OEM unlock the device before using 16K developer option -->
@@ -14752,6 +14793,10 @@ Data usage charges may apply.</string>
     <!-- Title on activity to confirm PIN for supervision setup [CHAR LIMIT=NONE] -->
     <string name="supervision_confirm_your_pin_header">Confirm PIN</string>
     <string name="supervision_pin_reset_success_toast">PIN updated</string>
+    <!-- Content description for the action button in the supervision promo footer.
+         This button typically opens a related application or a web page for more information.
+         [CHAR LIMIT=NONE] -->
+    <string name="supervision_promo_footer_action_button_description">Open app</string>
     <!-- Title on dialog that confirms whether user wants to delete their supervision PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_confirm_header">Delete PIN?</string>
     <!-- Message in dialog that confirms whether user wants to delete their supervision PIN [CHAR LIMIT=NONE] -->

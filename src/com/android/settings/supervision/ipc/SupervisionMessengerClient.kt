@@ -19,6 +19,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.android.settings.supervision.PreferenceDataProvider
+import com.android.settings.supervision.SupportedAppsProvider
 import com.android.settings.supervision.supervisionPackageName
 import com.android.settingslib.ipc.MessengerServiceClient
 import com.android.settingslib.supervision.SupervisionLog
@@ -33,7 +34,7 @@ import com.android.settingslib.supervision.SupervisionLog
  * @param context The Android Context used for binding to the service.
  */
 class SupervisionMessengerClient(context: Context) :
-    MessengerServiceClient(context), PreferenceDataProvider {
+    MessengerServiceClient(context), PreferenceDataProvider, SupportedAppsProvider {
 
     override val serviceIntentFactory = { Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION) }
 
@@ -58,6 +59,27 @@ class SupervisionMessengerClient(context: Context) :
                 .await()
         } catch (e: Exception) {
             Log.e(SupervisionLog.TAG, "Error fetching Preference data from supervision app", e)
+            mapOf()
+        }
+
+    /**
+     * Retrieves supported apps for the specified filter keys.
+     *
+     * This suspend function sends a request to the supervision app for the specified content filter
+     * keys and returns a map of supported apps. If an error occurs during the communication, an
+     * empty map is returned and the error is logged.
+     *
+     * @param keys A list of strings representing the keys for content filters.
+     * @return A map where the keys are the requested keys, and the values are the corresponding
+     *   list of supported apps.
+     */
+    override suspend fun getSupportedApps(keys: List<String>): Map<String, List<SupportedApp>> =
+        try {
+            val targetPackageName = packageName ?: return mapOf()
+
+            invoke(targetPackageName, SupportedAppsApi(), SupportedAppsRequest(keys = keys)).await()
+        } catch (e: Exception) {
+            Log.e(SupervisionLog.TAG, "Error fetching supported apps from supervision app", e)
             mapOf()
         }
 

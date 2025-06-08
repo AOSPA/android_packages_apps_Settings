@@ -24,6 +24,7 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment.KEY_MAGNIFICATION_SHORTCUT_PREFERENCE;
+import static com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment.MAGNIFICATION_SURVEY_KEY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -746,6 +747,15 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                         R.id.main_content, /* bundle= */ null).start().resume().get();
 
         assertThat(fragment.getHelpResource()).isEqualTo(R.string.help_url_magnification);
+    }
+
+    @Test
+    public void getSurveyKey_returnCorrectKey() {
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(
+                        R.id.main_content, /* bundle= */ null).start().resume().get();
+
+        assertThat(fragment.getSurveyKey()).isEqualTo(MAGNIFICATION_SURVEY_KEY);
     }
 
     @Test

@@ -17,15 +17,28 @@
 package com.android.settings.connecteddevice.display
 
 import android.view.Display.Mode
-
 import androidx.annotation.Keep
 
-enum class DisplayIsEnabled { YES, NO, UNKNOWN }
+/**
+ * Unknown is a convenience enum to denote the query for isEnabled was skipped, since it took more
+ * time to query this info.
+ */
+enum class DisplayIsEnabled {
+    YES,
+    NO,
+    UNKNOWN,
+}
 
 /**
  * Contains essential information from {@link android.view.Display} needed by the user to configure
  * a display.
  */
 @Keep
-data class DisplayDevice(val id: Int, val name: String, val mode: Mode?,
-        val supportedModes: List<Mode>, val isEnabled: DisplayIsEnabled) {}
+data class DisplayDevice(
+    val id: Int,
+    val name: String,
+    val mode: Mode?,
+    val supportedModes: List<Mode>,
+    val isEnabled: DisplayIsEnabled,
+    val isConnectedDisplay: Boolean,
+)

@@ -40,7 +40,7 @@ public class ActionCornerFragment extends InputDeviceDashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.action_corners_customization;
+        return R.xml.action_corner_customization;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ActionCornerFragment extends InputDeviceDashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.action_corners_customization) {
+            new BaseSearchIndexProvider(R.xml.action_corner_customization) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return isTouchpad() || isMouse();

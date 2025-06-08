@@ -64,6 +64,7 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
             +VibrationMainSwitchPreference()
             // The preferences below are migrated behind a different flag from the screen migration.
             // They should only be declared in this screen hierarchy if their migration is enabled.
+            // TODO(b/420767832): Remove the Flags.deviceState() condition
             if (Flags.catalystVibrationIntensityScreen25q4() || Flags.deviceState()) {
                 +CallVibrationPreferenceCategory() += {
                     +RingVibrationIntensitySliderPreference(context)
@@ -75,6 +76,7 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
                 +InteractiveHapticsPreferenceCategory() += {
                     +TouchVibrationIntensitySliderPreference(context)
                     +MediaVibrationIntensitySliderPreference(context)
+                    +KeyboardVibrationSwitchPreference()
                 }
             }
         }

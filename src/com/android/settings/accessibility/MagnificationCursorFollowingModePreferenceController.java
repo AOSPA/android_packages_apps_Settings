@@ -19,6 +19,10 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.provider.Settings.Secure.AccessibilityMagnificationCursorFollowingMode;
 import android.text.TextUtils;
@@ -39,6 +43,10 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
+import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +55,8 @@ import java.util.List;
  * Controller that shows the magnification cursor following mode and the preference click behavior.
  */
 public class MagnificationCursorFollowingModePreferenceController
-        extends MagnificationBasePreferenceController implements DialogCreatable {
+        extends MagnificationBasePreferenceController
+        implements DialogCreatable, LifecycleObserver, OnResume, OnPause {
     static final String PREF_KEY =
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CURSOR_FOLLOWING_MODE;
 
@@ -62,6 +71,14 @@ public class MagnificationCursorFollowingModePreferenceController
     ListView mModeListView;
     @Nullable
     private Preference mModePreference;
+
+    final ContentObserver mContentObserver = new ContentObserver(
+            new Handler(Looper.getMainLooper())) {
+        @Override
+        public void onChange(boolean selfChange, @Nullable Uri uri) {
+            updateState(mModePreference);
+        }
+    };
 
     public MagnificationCursorFollowingModePreferenceController(@NonNull Context context,
             @NonNull String preferenceKey) {
@@ -86,6 +103,16 @@ public class MagnificationCursorFollowingModePreferenceController
     }
 
     @Override
+    public void onResume() {
+        MagnificationCapabilities.registerObserver(mContext, mContentObserver);
+    }
+
+    @Override
+    public void onPause() {
+        MagnificationCapabilities.unregisterObserver(mContext, mContentObserver);
+    }
+
+    @Override
     public int getAvailabilityStatus() {
         return isInSetupWizard() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
@@ -93,6 +120,10 @@ public class MagnificationCursorFollowingModePreferenceController
     @NonNull
     @Override
     public CharSequence getSummary() {
+        if (mModePreference == null || !mModePreference.isEnabled()) {
+            return mContext.getString(
+                    R.string.accessibility_magnification_cursor_following_unavailable_summary);
+        }
         return getCursorFollowingModeSummary(getCurrentMagnificationCursorFollowingMode());
     }
 
@@ -100,6 +131,7 @@ public class MagnificationCursorFollowingModePreferenceController
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
         mModePreference = screen.findPreference(getPreferenceKey());
+        updateState(mModePreference);
     }
 
     @Override
@@ -205,6 +237,20 @@ public class MagnificationCursorFollowingModePreferenceController
             getCurrentMagnificationCursorFollowingMode() {
         return Settings.Secure.getInt(mContext.getContentResolver(), PREF_KEY,
                 Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CURSOR_FOLLOWING_MODE_CONTINUOUS);
+    }
+
+    @Override
+    public void updateState(@Nullable Preference preference) {
+        super.updateState(preference);
+
+        if (preference == null) {
+            return;
+        }
+        @MagnificationMode int mode =
+                MagnificationCapabilities.getCapabilities(mContext);
+        preference.setEnabled(
+                mode == MagnificationMode.FULLSCREEN || mode == MagnificationMode.ALL);
+        refreshSummary(preference);
     }
 
     static class ModeInfo extends ItemInfoArrayAdapter.ItemInfo {

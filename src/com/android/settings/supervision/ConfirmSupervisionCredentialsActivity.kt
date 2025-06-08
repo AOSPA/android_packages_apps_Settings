@@ -21,6 +21,7 @@ import android.Manifest.permission.SET_BIOMETRIC_DIALOG_ADVANCED
 import android.Manifest.permission.USE_BIOMETRIC_INTERNAL
 import android.app.ActivityManager
 import android.app.role.RoleManager
+import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
 import android.content.DialogInterface
 import android.content.Intent
@@ -40,6 +41,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /**
@@ -171,8 +173,13 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             Intent(this, SupervisionPinRecoveryActivity::class.java).apply {
                 action = SupervisionPinRecoveryActivity.ACTION_RECOVERY
             }
+        val metricsFeatureProvider = FeatureFactory.featureFactory.metricsFeatureProvider
         val listener =
             DialogInterface.OnClickListener { _: DialogInterface?, _: Int ->
+                metricsFeatureProvider.action(
+                    this,
+                    SettingsEnums.ACTION_SUPERVISION_FORGOT_PIN_DURING_PIN_INVOCATION,
+                )
                 getResultLauncher.launch(intent)
             }
         val moreOptionsButtonBuilder =

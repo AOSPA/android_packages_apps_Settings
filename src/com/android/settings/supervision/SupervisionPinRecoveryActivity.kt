@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.Manifest
+import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.EXTRA_SUPERVISION_RECOVERY_INFO
@@ -30,6 +31,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresPermission
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.supervision.SupervisionIntentProvider
 import com.android.settingslib.supervision.SupervisionLog
 
@@ -172,7 +174,8 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                                 SupervisionRecoveryInfo::class.java,
                             )
                         if (recoveryInfo != null) {
-                            val supervisionManager = getSystemService(SupervisionManager::class.java)
+                            val supervisionManager =
+                                getSystemService(SupervisionManager::class.java)
                             supervisionManager?.setSupervisionRecoveryInfo(recoveryInfo)
                             handleSuccess()
                         } else {
@@ -187,6 +190,9 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                 else -> handleError("Unknown action after verification: $action")
             }
         } else {
+            if (intent.action == ACTION_RECOVERY) {
+                logRecoveryResult(false)
+            }
             handleError(
                 "Verification process failed with result: $resultCode, action: ${intent.action}"
             )
@@ -202,8 +208,10 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
                     Toast.LENGTH_SHORT,
                 )
                 .show()
+            logRecoveryResult(true)
             handleSuccess()
         } else {
+            logRecoveryResult(false)
             handleError("Setting new PIN failed with result: $resultCode")
         }
     }
@@ -215,6 +223,7 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     private fun startResetPinActivity() {
         if (!resetSupervisionUser()) {
             handleError("Failed to reset supervision user.")
+            logRecoveryResult(false)
             return
         }
         val intent = Intent(this, SupervisionCredentialProxyActivity::class.java)
@@ -232,6 +241,16 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     private fun handleSuccess() {
         setResult(RESULT_OK)
         finish()
+    }
+
+    /** Logs the result of the PIN recovery process. */
+    private fun logRecoveryResult(success: Boolean) {
+        val metricsFeatureProvider = FeatureFactory.featureFactory.metricsFeatureProvider
+        metricsFeatureProvider.action(
+            this,
+            SettingsEnums.ACTION_SUPERVISION_PIN_RESET_SUCCEED,
+            success,
+        )
     }
 
     /**

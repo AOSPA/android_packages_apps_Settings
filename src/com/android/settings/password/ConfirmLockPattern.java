@@ -236,8 +236,17 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                             ? getDefaultCheckboxLabel()
                             : mCheckBoxLabel);
                 }
-                if (mCancelButton != null && TextUtils.isEmpty(mAlternateButtonText)) {
-                    mCancelButton.setText(R.string.lockpassword_forgot_pattern);
+                if (TextUtils.isEmpty(mAlternateButtonText)) {
+                    int forgotLockPasswordResId = R.string.lockpassword_forgot_pattern;
+                    if (mExpressiveTheme
+                            && mFooterBarMixin != null
+                            && mFooterBarMixin.getSecondaryButton() != null) {
+                        mFooterBarMixin
+                                .getSecondaryButton()
+                                .setText(getActivity(), forgotLockPasswordResId);
+                    } else if (mCancelButton != null) {
+                        mCancelButton.setText(forgotLockPasswordResId);
+                    }
                 }
                 updateRemoteLockscreenValidationViews();
             }

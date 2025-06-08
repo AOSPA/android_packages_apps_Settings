@@ -54,11 +54,6 @@ public class PromotedNotificationsPreferenceController extends
     }
 
     private boolean isPermissionRequested() {
-
-        if (!Flags.apiRichOngoingPermission()) {
-            return true;
-        }
-
         try {
             PackageInfo packageInfo = mPm.getPackageInfo(
                     mAppRow.pkg, PackageManager.GET_PERMISSIONS);

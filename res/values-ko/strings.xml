@@ -21,8 +21,7 @@
     <string name="create" msgid="986997212165228751">"만들기"</string>
     <string name="allow" msgid="3763244945363657722">"허용"</string>
     <string name="deny" msgid="7326117222944479942">"거부"</string>
-    <!-- no translation found for edit (8128799559456697510) -->
-    <skip />
+    <string name="edit" msgid="8128799559456697510">"수정"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"사용 설정"</string>
     <string name="device_info_default" msgid="1406619232867343310">"알 수 없음"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"탭하여 정보 표시"</string>
@@ -48,8 +47,10 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"이메일"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"이전 미리보기"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"다음 미리보기"</string>
-    <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"축소"</string>
-    <string name="font_size_make_larger_desc" msgid="5583046033381722247">"확대"</string>
+    <!-- no translation found for font_size_make_smaller_desc (319927200356692406) -->
+    <skip />
+    <!-- no translation found for font_size_make_larger_desc (6739310980713118605) -->
+    <skip />
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"항상"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"기기를 접으면 전면 디스플레이가 켜집니다"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"위로 스와이프하여 계속하기"</string>
@@ -575,7 +576,7 @@
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"센서에 손가락을 올리고 진동이 느껴지면 떼세요."</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"지문이 센서에 완전히 닿도록 손가락을 대고 진동이 느껴질 때까지 기다리세요."</string>
     <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"버튼을 누르지 말고 진동이 느껴질 때까지 손가락을 센서 위에 올려두세요.\n\n진동이 느껴질 때마다 손가락을 조금씩만 움직이세요. 이렇게 하면 지문을 더 많이 캡처할 수 있습니다."</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"지문 센서를 길게 터치하세요"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"지문 센서 길게 터치하기"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"손가락을 뗀 후 다시 터치하세요"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"한 번 더 하세요"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"지문 인식 아이콘을 따라가세요"</string>
@@ -680,7 +681,7 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"비공개 스페이스 자동 잠금"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"일정 시간 동안 기기를 사용하지 않은 경우 비공개 스페이스를 자동으로 잠글 수 있습니다."</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"기기를 잠글 때마다"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"화면 자동 잠금 시간 5분 경과 후"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"화면 자동 잠금 시간 후 5분 경과"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"기기를 다시 시작한 후에만"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"비공개 스페이스 숨기기"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"잠겨 있을 때 비공개 스페이스 숨기기"</string>
@@ -941,6 +942,10 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"연결"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"연결 끊기"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"페어링 및 연결"</string>
+    <!-- no translation found for bluetooth_connecting (5315496594905010438) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnecting (1643422701532873735) -->
+    <skip />
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"블루투스가 켜져 있으면 기기가 주변의 다른 블루투스 기기와 통신할 수 있습니다."</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"블루투스가 켜져 있으면 기기를 통해 근처의 다른 블루투스 기기와 통신할 수 있습니다. Quick Share 및 내 기기 찾기와 같은 기능은 블루투스를 사용합니다."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"블루투스가 켜져 있으면 기기가 근처의 다른 블루투스 기기와 통신할 수 있습니다.\n\n기기 사용 환경을 개선하기 위해 블루투스가 꺼져 있을 때도 앱 및 서비스에서 언제든지 근처에 기기가 있는지 검색할 수 있습니다. 예를 들면 위치 기반 기능 및 서비스를 개선하는 데 이 기능이 사용되기도 합니다. 설정을 변경하려면 블루투스 검색 설정으로 이동하세요."</string>
@@ -1404,7 +1409,7 @@
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"자동으로 켜지지 않음"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"<xliff:g id="ID_1">%1$s</xliff:g>에 자동으로 켜짐"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"일몰에 자동으로 켜짐"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"자동으로 끄지 않음"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"자동으로 꺼지지 않음"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"<xliff:g id="ID_1">%1$s</xliff:g>에 자동으로 꺼짐"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"일출에 자동으로 꺼짐"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"현재 야간 조명 사용 안함"</string>
@@ -1427,7 +1432,7 @@
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"<xliff:g id="ID_1">%1$s</xliff:g>에 자동으로 켜짐"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"취침 시간에 자동으로 켜짐"</string>
     <string name="dark_ui_summary_off_auto_mode_modes" msgid="2672694802103388896">"<xliff:g id="ID_1">%1$s</xliff:g> 시작 시 사용 설정됩니다."</string>
-    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"자동으로 끄지 않음"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"자동으로 꺼지지 않음"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"일출에 자동으로 끄기"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"<xliff:g id="ID_1">%1$s</xliff:g>에 자동으로 꺼짐"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"취침 시간에 자동으로 꺼짐"</string>
@@ -1922,7 +1927,7 @@
     <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"PIN 입력 시 애니메이션 사용 중지"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"프로필 패턴 표시"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"탭하면 진동"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"전원 버튼 즉시 잠금"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"전원 버튼으로 즉시 잠금"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>에 의해 잠금 해제된 경우 제외"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"잠금해제 패턴 설정"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"잠금해제 패턴 변경"</string>
@@ -2123,8 +2128,7 @@
     <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0.2초"</string>
     <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0.4초"</string>
     <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0.6초"</string>
-    <!-- no translation found for input_setting_keys_dialog_option_custom (2353045390598308685) -->
-    <skip />
+    <string name="input_setting_keys_dialog_option_custom" msgid="2353045390598308685">"<xliff:g id="THRESHOLD">%.1f</xliff:g>초"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"맞춤"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"맞춤 값"</string>
     <string name="input_setting_bounce_keys_seekbar_desc" msgid="4575595566548124309">"바운스 키 기준 시간"</string>
@@ -2142,14 +2146,10 @@
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"늘리기"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"역방향 스크롤"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"기본 키 사용"</string>
-    <!-- no translation found for mouse_keys_reset_button_label (513004295662247230) -->
-    <skip />
-    <!-- no translation found for mouse_keys_primary_keys_image_list_title (7470827693078490251) -->
-    <skip />
-    <!-- no translation found for mouse_keys_numpad_keys_image_list_title (6682341389811538017) -->
-    <skip />
-    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2728318055237217919) -->
-    <skip />
+    <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"설정 초기화"</string>
+    <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"기본 키 사용 방법"</string>
+    <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"숫자 키패드 사용 방법"</string>
+    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2728318055237217919">"Num Lock이 켜져 있으면 항상 숫자 키패드가 사용됩니다."</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"위로 스크롤하여 페이지 아래로 이동합니다."</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"스크롤"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"스크롤 제어"</string>
@@ -2175,7 +2175,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"터치패드"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"터치패드 및 마우스"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"마우스"</string>
-    <string name="mouse_settings_summary" msgid="8732973589097368936">"포인터 속도, 버튼 바꾸기, 버튼 맞춤설정"</string>
+    <!-- no translation found for mouse_settings_summary (1308610072914620926) -->
+    <skip />
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"포인터 속도, 동작"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"탭하여 클릭"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"탭하고 드래그하여 항목 이동"</string>
@@ -2314,6 +2315,8 @@
     <string name="last_time_used_label" msgid="7589377271406011659">"마지막 사용"</string>
     <string name="last_time_used_never" msgid="2936073559267990034">"사용한 적 없음"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"사용 시간"</string>
+    <!-- no translation found for phone_information_v2_title (3373745314543222111) -->
+    <skip />
     <string name="accessibility_settings" msgid="4713215774904704682">"접근성"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"접근성 설정"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"디스플레이, 상호작용, 오디오"</string>
@@ -2352,6 +2355,8 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"시스템 제어"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"의견 보내기"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"평가"</string>
+    <!-- no translation found for accessibility_disability_support_title (7934160403456751664) -->
+    <skip />
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"접근성 설문조사"</string>
     <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"더 많은 앱에서 어두운 테마를 사용하고 계신가요?"</string>
     <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"의견 공유"</string>
@@ -2405,10 +2410,6 @@
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"화면 일부 확대"</string>
     <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"전체 화면과 부분 화면 간에 전환합니다."</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"스위치 버튼을 탭하여 두 옵션 간 이동"</string>
-    <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"접근성 버튼으로 전환할까요?"</string>
-    <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"화면 일부를 확대하기 위해 세 번 탭하면 입력 및 기타 작업이 지연됩니다.\n\n접근성 버튼은 화면에서 다른 앱 위에 플로팅됩니다. 확대하려면 탭하세요."</string>
-    <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"접근성 버튼으로 전환"</string>
-    <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"세 번 탭하기 사용"</string>
     <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"이 단축키를 사용하면 키보드가 느려질 수 있음"</string>
     <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"세 번 탭하여 화면을 확대하면 키보드에 문제가 생길 수 있습니다.\n\n이를 방지하려면 확대 단축키를 세 번 탭 대신 다른 조합으로 변경하세요.\n"<annotation id="link">"설정 변경"</annotation></string>
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"무시하고 계속하기"</string>
@@ -3661,14 +3662,10 @@
     <string name="emergency_tone_alert" msgid="1977698889522966589">"신호음"</string>
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"진동"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"부팅 소리"</string>
-    <!-- no translation found for sound_patterns_category_title (4290495769747444271) -->
-    <skip />
-    <!-- no translation found for sound_audio_category_title (3445871661303518618) -->
-    <skip />
-    <!-- no translation found for system_sounds_and_vibrations_category_title (4162079598490981456) -->
-    <skip />
-    <!-- no translation found for work_profile_sound_category_title (1708926655170323454) -->
-    <skip />
+    <string name="sound_patterns_category_title" msgid="4290495769747444271">"소리 패턴"</string>
+    <string name="sound_audio_category_title" msgid="3445871661303518618">"오디오"</string>
+    <string name="system_sounds_and_vibrations_category_title" msgid="4162079598490981456">"시스템 소리 및 진동"</string>
+    <string name="work_profile_sound_category_title" msgid="1708926655170323454">"직장 프로필 소리"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"실시간 자막"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"미디어 자막 자동 생성"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"유선 헤드폰"</string>
@@ -4310,6 +4307,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"권한 관리자"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"위치 데이터 공유 방법 업데이트"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"위치 데이터 공유 방법을 변경했을 수 있는 앱을 검토합니다."</string>
+    <!-- no translation found for app_function_access_settings_title (1474765429611652468) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (6465715820745848068) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"탭하여 대기 모드 해제"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"화면 아무 곳이나 두 번 탭하여 기기 대기 모드 해제"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"링크 열기"</string>
@@ -4469,8 +4470,10 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"모든 것을 확대 또는 축소"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"디스플레이 밀도, 화면 확대/축소, 크기, 크기 조정"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"미리보기"</string>
-    <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"축소"</string>
-    <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"확대"</string>
+    <!-- no translation found for screen_zoom_make_smaller_desc (1450649885198381123) -->
+    <skip />
+    <!-- no translation found for screen_zoom_make_larger_desc (7125594310562596457) -->
+    <skip />
     <string name="disconnected" msgid="3469373726996129247">"연결되지 않음"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"연결되지 않음"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g>개의 앱이 설치됨"</string>
@@ -4908,10 +4911,8 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;신뢰할 수 있는 앱인지 확인하세요&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;에서는 자동 완성할 수 있는 항목을 결정하기 위해 화면의 내용을 사용합니다."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;을(를) 사용하시겠습니까?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; 지금부터 새로운 비밀번호, 패스키, 기타 정보가 여기에 저장됩니다. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;에서 자동 완성할 수 있는 항목을 파악하기 위해 화면에 표시된 내용을 사용할 수도 있습니다."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"비밀번호, 패스키 및 자동 완성 기본 서비스"</string>
-    <!-- no translation found for credman_picker_title_new (4292105803864397398) -->
-    <skip />
-    <!-- no translation found for credman_picker_page_summary (4633938046738617332) -->
-    <skip />
+    <string name="credman_picker_title_new" msgid="4292105803864397398">"기본 서비스"</string>
+    <string name="credman_picker_page_summary" msgid="4633938046738617332">"기본 서비스를 선택하고 데이터를 저장하여 로그인 및 자동 완성 추천 기능을 이용하세요"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s을(를) 사용 중지하시겠습니까?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;이 서비스를 사용 중지하시겠습니까?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; 로그인할 때 비밀번호, 패스키, 결제 수단 등의 저장된 정보가 채워지지 않습니다. 저장된 정보를 사용하려면 비밀번호, 패스키 또는 데이터 서비스를 선택하세요."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"비밀번호, 패스키, 계정"</string>
@@ -5831,7 +5832,6 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. 기기 세부정보를 구성합니다."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"자녀 보호 기능"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"콘텐츠 제한 및 기타 제한"</string>
-    <string name="device_supervision_switch_title" msgid="3203958797412413373">"기기 감독 기능 사용"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN 설정"</string>
     <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"일시중지됨"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"감독, 부모 감독 기능, 자녀 보호 기능"</string>
@@ -5846,16 +5846,17 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"복구 이메일 추가"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"이메일을 확인하세요"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"웹 콘텐츠 필터"</string>
+    <string name="supervision_web_content_filters_top_intro" msgid="5264773769840566499">"이 기기에서 지원되는 앱의 웹사이트 및 검색 결과에 표시되는 미성년자 부적합 콘텐츠를 차단합니다. 지원되지 않는 앱에서는 계속해서 선정적인 콘텐츠가 표시될 수도 있습니다."</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"웹사이트"</string>
-    <!-- no translation found for supervision_web_content_filters_browser_filter_title (7957976669412075070) -->
-    <skip />
+    <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"선정적인 사이트 차단"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"검색 결과"</string>
-    <!-- no translation found for supervision_web_content_filters_search_filter_title (4212134055017429017) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"선정적인 검색 결과 필터링"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"감독 PIN 입력"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"자녀 보호 기능 PIN 설정"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"PIN 확인"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN 업데이트됨"</string>
+    <!-- no translation found for supervision_promo_footer_action_button_description (7617359721703338141) -->
+    <skip />
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"PIN을 삭제하시겠습니까?"</string>
     <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"이렇게 하면 이 기기의 모든 사용자에 대한 현재 PIN이 삭제되고 설정한 감독 기능이 사용 중지됩니다. 이 작업은 되돌릴 수 없습니다."</string>
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"먼저 다른 프로필에서 설정한 감독 기능을 일시중지하세요"</string>

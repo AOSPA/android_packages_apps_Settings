@@ -102,6 +102,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
 
@@ -458,7 +459,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             } else {
                 textView.setText("");
-                if (BiometricUtils.useExpressiveStyle(getContext(), getIntent())) {
+                if (ThemeHelper.shouldApplyGlifExpressiveStyle(getContext())) {
                     textView.setVisibility(View.GONE);
                 }
             }

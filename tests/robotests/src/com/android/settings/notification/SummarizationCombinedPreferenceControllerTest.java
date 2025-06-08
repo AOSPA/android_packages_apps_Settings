@@ -113,6 +113,19 @@ public class SummarizationCombinedPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_workSwitch_notVisibleWhenNoManagedProfile() {
+        when(mBackend.isNotificationSummarizationEnabled(anyInt())).thenReturn(true);
+        mController.setManagedProfile(null);
+        mController.updateState(mPrefCategory);
+
+        // The controller + main switch should be functional, but the work switch should not be
+        // visible
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mGlobalSwitch.isChecked()).isTrue();
+        assertThat(mWorkSwitch.isVisible()).isFalse();
+    }
+
+    @Test
     public void updateState_hasManagedProfile_reflectsSettings() {
         // setup: has a work profile with summarization enabled
         mController.setManagedProfile(new UserHandle(12345));

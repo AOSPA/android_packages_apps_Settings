@@ -21,8 +21,7 @@
     <string name="create" msgid="986997212165228751">"Создать"</string>
     <string name="allow" msgid="3763244945363657722">"Разрешить"</string>
     <string name="deny" msgid="7326117222944479942">"Отклонить"</string>
-    <!-- no translation found for edit (8128799559456697510) -->
-    <skip />
+    <string name="edit" msgid="8128799559456697510">"Изменить"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Да"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Неизвестно"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Нажмите для просмотра деталей"</string>
@@ -48,8 +47,10 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"Электронная почта"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Назад"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Далее"</string>
-    <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Уменьшить"</string>
-    <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Увеличить"</string>
+    <!-- no translation found for font_size_make_smaller_desc (319927200356692406) -->
+    <skip />
+    <!-- no translation found for font_size_make_larger_desc (6739310980713118605) -->
+    <skip />
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Всегда"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Передний экран включается при складывании устройства"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Если провести по экрану вверх"</string>
@@ -350,7 +351,7 @@
     <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Доступ к информации о местоположении отключен для приложений и сервисов. Однако если вы свяжетесь с экстренной службой, геоданные вашего устройства могут быть переданы спасателям."</string>
     <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"Доступ к информации о местоположении отключен для приложений и сервисов."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Подробнее о настройках геолокации…"</string>
-    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Чтобы внести изменения, выберите \"Настройки ChromeOS &gt; Конфиденциальность и безопасность &gt; Настройки конфиденциальности &gt; Доступ к геоданным\""</string>
+    <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Чтобы внести изменения, выберите \"Настройки ChromeOS &gt; Защита и безопасность &gt; Настройки конфиденциальности &gt; Доступ к геоданным\""</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Аккаунты"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Безопасность"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифрование и учетные данные"</string>
@@ -776,7 +777,7 @@
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Задать отдельный способ блокировки для рабочего профиля"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Если вы забудете, как снять блокировку, ее сможет сбросить администратор."</string>
     <string name="lock_settings_screen_lock_settings_title" msgid="738577630596146754">"Настройки блокировки экрана"</string>
-    <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Варианты блокировки экрана"</string>
+    <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Способы разблокировки экрана"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Варианты блокировки экрана"</string>
     <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"Разблокировать с автоподтверждением"</string>
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Устройство разблокируется автоматически после ввода верного PIN-кода длиной не менее 6 цифр. Этот способ менее безопасный, чем подтверждение вручную."</string>
@@ -941,6 +942,10 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Подключить"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Отключить"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Установить соединение и подключить"</string>
+    <!-- no translation found for bluetooth_connecting (5315496594905010438) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnecting (1643422701532873735) -->
+    <skip />
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Если Bluetooth включен, устройство может обмениваться данными с устройствами Bluetooth поблизости."</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Когда работает Bluetooth, вы можете подключаться к другим устройствам Bluetooth поблизости. Эта технология используется в таких функциях и сервисах, как \"Быстрая отправка\" и \"Найти устройство\"."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Функция Bluetooth позволяет устанавливать подключение к устройствам Bluetooth поблизости.\n\nОбратите внимание, что для улучшения работы устройства, например повышения точности геолокации, приложения и сервисы могут искать устройства поблизости, даже если вы отключили Bluetooth. Чтобы запретить им это, отключите поиск устройств Bluetooth."</string>
@@ -2141,14 +2146,10 @@
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Увеличить"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Прокрутка в обратную сторону"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Использовать основные клавиши"</string>
-    <!-- no translation found for mouse_keys_reset_button_label (513004295662247230) -->
-    <skip />
-    <!-- no translation found for mouse_keys_primary_keys_image_list_title (7470827693078490251) -->
-    <skip />
-    <!-- no translation found for mouse_keys_numpad_keys_image_list_title (6682341389811538017) -->
-    <skip />
-    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2728318055237217919) -->
-    <skip />
+    <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"Сбросить настройки"</string>
+    <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"Как работать с основными клавишами"</string>
+    <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"Как работать с цифровой клавиатурой"</string>
+    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2728318055237217919">"Num Lock активирует ввод цифр."</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Если прокрутить вверх, страница прокрутится вниз"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Прокрутка"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Управляемая прокрутка"</string>
@@ -2174,7 +2175,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Сенсорная панель"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сенсорная панель и мышь"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Мышь"</string>
-    <string name="mouse_settings_summary" msgid="8732973589097368936">"Настройка указателя и кнопок"</string>
+    <!-- no translation found for mouse_settings_summary (1308610072914620926) -->
+    <skip />
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Скорость указателя, жесты"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Нажатие от прикосновения"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Перемещать объекты перетаскиванием"</string>
@@ -2313,6 +2315,8 @@
     <string name="last_time_used_label" msgid="7589377271406011659">"Последнее использование"</string>
     <string name="last_time_used_never" msgid="2936073559267990034">"никогда"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Время использования"</string>
+    <!-- no translation found for phone_information_v2_title (3373745314543222111) -->
+    <skip />
     <string name="accessibility_settings" msgid="4713215774904704682">"Специальные возможности"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Настройки специальных возможностей"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Экран, элементы управления, аудио"</string>
@@ -2351,6 +2355,8 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Управление системой"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Отправить отзыв"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Пройти опрос"</string>
+    <!-- no translation found for accessibility_disability_support_title (7934160403456751664) -->
+    <skip />
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Опрос о доступности"</string>
     <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Используете тёмную тему в других приложениях?"</string>
     <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Поделитесь своим мнением."</string>
@@ -2404,10 +2410,6 @@
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"Увеличение части экрана"</string>
     <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Переключение между режимами"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"Чтобы переключиться из одного режима в другой, нажмите кнопку"</string>
-    <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"Использовать кнопку специальных возможностей?"</string>
-    <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Увеличение части экрана тройным нажатием приведет к задержкам при вводе текста и выполнении других действий.\n\nПлавающая кнопка специальных возможностей располагается над всеми приложениями. Нажмите на нее, чтобы увеличить экран."</string>
-    <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Использовать кнопку специальных возможностей"</string>
-    <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Использовать тройное нажатие"</string>
     <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Это может замедлить работу клавиатуры"</string>
     <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Если вы увеличиваете часть экрана тройным нажатием, это может привести к проблемам с клавиатурой.\n\nЧтобы избежать этого, вы можете выбрать другое сочетание клавиш для увеличения.\n"<annotation id="link">"Изменить настройки"</annotation></string>
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Продолжить"</string>
@@ -3660,14 +3662,10 @@
     <string name="emergency_tone_alert" msgid="1977698889522966589">"Тональный сигнал"</string>
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"Вибрация"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"Звуки при включении устройства"</string>
-    <!-- no translation found for sound_patterns_category_title (4290495769747444271) -->
-    <skip />
-    <!-- no translation found for sound_audio_category_title (3445871661303518618) -->
-    <skip />
-    <!-- no translation found for system_sounds_and_vibrations_category_title (4162079598490981456) -->
-    <skip />
-    <!-- no translation found for work_profile_sound_category_title (1708926655170323454) -->
-    <skip />
+    <string name="sound_patterns_category_title" msgid="4290495769747444271">"Звуковые модели"</string>
+    <string name="sound_audio_category_title" msgid="3445871661303518618">"Аудио"</string>
+    <string name="system_sounds_and_vibrations_category_title" msgid="4162079598490981456">"Системные звуки и вибрация"</string>
+    <string name="work_profile_sound_category_title" msgid="1708926655170323454">"Звуки в рабочем профиле"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Автоматические субтитры"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Добавлять субтитры автоматически"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Проводные наушники"</string>
@@ -4309,6 +4307,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"Разрешения"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Изменения в передаче геоданных"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Проверить приложения, в которых изменились разрешения на передачу геоданных"</string>
+    <!-- no translation found for app_function_access_settings_title (1474765429611652468) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (6465715820745848068) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"Включение нажатием"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Дважды нажмите в любом месте экрана, чтобы включить устройство"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Открытие ссылок"</string>
@@ -4468,8 +4470,10 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Изменение размера всех элементов"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"разрешение экрана, масштаб, увеличение, уменьшение"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Предварительный просмотр"</string>
-    <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Уменьшить"</string>
-    <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Увеличить"</string>
+    <!-- no translation found for screen_zoom_make_smaller_desc (1450649885198381123) -->
+    <skip />
+    <!-- no translation found for screen_zoom_make_larger_desc (7125594310562596457) -->
+    <skip />
     <string name="disconnected" msgid="3469373726996129247">"Не подключено"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Не подключена"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Установлено приложений: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
@@ -4907,10 +4911,8 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Подтвердите, что вы доверяете этому приложению&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; анализирует содержимое экрана и находит поля, которые можно заполнить автоматически."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Использовать приложение \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\"?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; С этого момента в нем будут сохраняться новые пароли, ключи доступа и другие данные. Приложение \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\" может анализировать содержимое экрана и находить поля, для которых доступно автозаполнение."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"Приоритетный сервис для паролей, ключей доступа и автозаполнения"</string>
-    <!-- no translation found for credman_picker_title_new (4292105803864397398) -->
-    <skip />
-    <!-- no translation found for credman_picker_page_summary (4633938046738617332) -->
-    <skip />
+    <string name="credman_picker_title_new" msgid="4292105803864397398">"Выберите сервис"</string>
+    <string name="credman_picker_page_summary" msgid="4633938046738617332">"Укажите, какой сервис должен сохранять учетные данные и предлагать подсказки для автозаполнения."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Отключить %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Отключить этот сервис?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;Пароли, ключи доступа, способы оплаты и другая сохраненная информация не будут подставляться при входе. Чтобы использовать эти данные, выберите пароль, ключ доступа или сервис."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Пароли, ключи доступа и аккаунты"</string>
@@ -5832,7 +5834,6 @@
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Настройка сведений об устройстве."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Родительский контроль"</string>
     <string name="supervision_settings_summary" msgid="5020634300370322741">"Ограничения на контент и не только"</string>
-    <string name="device_supervision_switch_title" msgid="3203958797412413373">"Включить родительский контроль за устройством"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Задать PIN-код"</string>
     <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"Приостановлено"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"родительский контроль"</string>
@@ -5847,16 +5848,17 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Добавить резервный адрес электронной почты"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Подтвердить адрес электронной почты"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Фильтры веб-контента"</string>
+    <string name="supervision_web_content_filters_top_intro" msgid="5264773769840566499">"В поддерживаемых приложениях на этом устройстве можно блокировать материалы для взрослых на сайтах и в результатах поиска. Неподдерживаемые приложения по-прежнему могут показывать такой контент."</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Сайты"</string>
-    <!-- no translation found for supervision_web_content_filters_browser_filter_title (7957976669412075070) -->
-    <skip />
+    <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"Блокировать сайты для взрослых"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Результаты поиска"</string>
-    <!-- no translation found for supervision_web_content_filters_search_filter_title (4212134055017429017) -->
-    <skip />
+    <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Отфильтровывать результаты для взрослых"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Ввести PIN-код родительского контроля"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Установите PIN-код для родительского контроля"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Подтвердите PIN-код"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN-код обновлен."</string>
+    <!-- no translation found for supervision_promo_footer_action_button_description (7617359721703338141) -->
+    <skip />
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Удалить PIN-код?"</string>
     <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"Вы удалите PIN-код для всех пользователей устройства и отключите родительский контроль. Это действие нельзя будет отменить."</string>
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"Приостановите родительский контроль для всех остальных профилей"</string>

@@ -19,6 +19,7 @@ import android.app.Activity
 import android.app.ActivityManager
 import android.app.KeyguardManager
 import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
+import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
@@ -36,8 +37,10 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity.Companion.EXTRA_FORCE_CONFIRMATION
+import com.android.settings.testutils.MetricsRule
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -60,6 +63,7 @@ import org.robolectric.shadows.ShadowRoleManager
 
 @RunWith(AndroidJUnit4::class)
 class ConfirmSupervisionCredentialsActivityTest {
+    @get:Rule val metricsRule = MetricsRule()
     private val mockUserManager = mock<UserManager>()
     private val mockActivityManager = mock<ActivityManager>()
     private val mockSupervisionManager = mock<SupervisionManager>()
@@ -216,6 +220,11 @@ class ConfirmSupervisionCredentialsActivityTest {
             .isEqualTo(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
         assertThat(biometricPrompt.contentView)
             .isInstanceOf(PromptContentViewWithMoreOptionsButton::class.java)
+
+        val contentView = biometricPrompt.contentView as PromptContentViewWithMoreOptionsButton
+        contentView.moreOptionsButtonListener.onClick(null, 0)
+        verify(metricsRule.metricsFeatureProvider)
+            .action(mActivity, SettingsEnums.ACTION_SUPERVISION_FORGOT_PIN_DURING_PIN_INVOCATION)
     }
 
     @Test
