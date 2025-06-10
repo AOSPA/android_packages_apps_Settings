@@ -18,6 +18,7 @@ package com.android.settings.network;
 
 import android.app.FragmentManager;
 import android.app.PendingIntent;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.UiccCardInfo;
@@ -40,6 +41,7 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
     private static final String TAG = "SwitchToEuiccSidecar";
     private static final String ACTION_SWITCH_TO_SUBSCRIPTION =
             "com.android.settings.network.SWITCH_TO_SUBSCRIPTION";
+    private static final String SETTING_USER_PREF_DATA_SUB = "user_preferred_data_sub";
 
     private PendingIntent mCallbackIntent;
     private int mSubId;
@@ -109,6 +111,10 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         Log.d(TAG,
                 String.format("Set esim into the SubId%d Physical Slot%d:Port%d",
                         mSubId, targetSlot, mPort));
+        // Erase user data SUB preference before enabling eSIM profile to suppress the prior
+        // DDS switch because profile is available earlier than primary SIM settings.
+        Settings.Global.putInt(getContext().getContentResolver(), SETTING_USER_PREF_DATA_SUB,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             // If the subId is INVALID_SUBSCRIPTION_ID, disable the esim (the default esim slot
             // which is selected by the framework).
