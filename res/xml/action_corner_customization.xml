@@ -36,25 +36,21 @@
             android:key="action_corner_bottom_left"
             android:title="@string/action_corner_bottom_left_title"
             android:entries="@array/action_corner_action_titles"
-            android:entryValues="@array/action_corner_action_values"
             settings:controller="com.android.settings.inputmethod.ActionCornerCustomizationController"/>
         <ListPreference
             android:key="action_corner_bottom_right"
             android:title="@string/action_corner_bottom_right_title"
             android:entries="@array/action_corner_action_titles"
-            android:entryValues="@array/action_corner_action_values"
             settings:controller="com.android.settings.inputmethod.ActionCornerCustomizationController"/>
         <ListPreference
             android:key="action_corner_top_left"
             android:title="@string/action_corner_top_left_title"
             android:entries="@array/action_corner_action_titles"
-            android:entryValues="@array/action_corner_action_values"
             settings:controller="com.android.settings.inputmethod.ActionCornerCustomizationController"/>
         <ListPreference
             android:key="action_corner_top_right"
             android:title="@string/action_corner_top_right_title"
             android:entries="@array/action_corner_action_titles"
-            android:entryValues="@array/action_corner_action_values"
             settings:controller="com.android.settings.inputmethod.ActionCornerCustomizationController"/>
     </PreferenceCategory>
 

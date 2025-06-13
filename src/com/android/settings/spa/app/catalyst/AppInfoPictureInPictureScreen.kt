@@ -106,7 +106,7 @@ open class AppInfoPictureInPictureScreen(context: Context, override val argument
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
             val repo = AppListRepositoryImpl(context)
-            repo.loadAndFilterApps(context.userId, true).forEach { app ->
+            repo.loadApps(context.userId).forEach { app ->
                 if (app.supportsPictureInPicture(context)) {
                     emit(Bundle(1).apply { putString("app", app.packageName) })
                 }

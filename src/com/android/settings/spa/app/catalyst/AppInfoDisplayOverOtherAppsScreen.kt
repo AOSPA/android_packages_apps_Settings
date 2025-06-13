@@ -101,7 +101,7 @@ open class AppInfoDisplayOverOtherAppsScreen(context: Context, override val argu
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
             val repo = AppListRepositoryImpl(context)
-            repo.loadAndFilterApps(context.userId, true).forEach { app ->
+            repo.loadApps(context.userId).forEach { app ->
                 if (app.hasOverlayPermission(context)) {
                     emit(Bundle(1).apply { putString("app", app.packageName) })
                 }

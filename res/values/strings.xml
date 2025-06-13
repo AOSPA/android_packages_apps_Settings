@@ -535,7 +535,11 @@
     <string name="desc_system_locale_addition">This lets apps and websites know you also prefer this language.</string>
 
     <!-- The text of the confirmation dialog showing the system locale will be changed. [CHAR LIMIT=NONE]-->
-    <string name="desc_notice_device_locale_settings_change">Your device settings and regional preferences will change.</string>
+    <string name="desc_notice_device_locale_and_region_settings_change">Your device will use <xliff:g id="language" example="English">%1$s</xliff:g> and your region will be changed to <xliff:g id="region" example="United States">%2$s</xliff:g>.</string>
+    <!-- The text of the confirmation dialog showing the system locale which have no region will be changed. [CHAR LIMIT=NONE]-->
+    <string name="desc_notice_device_locale_settings_change">Your device will use <xliff:g id="language" example="English">%s</xliff:g>.</string>
+    <!-- The text of the removing dialog showing the default locale will be removed from the list. [CHAR LIMIT=NONE]-->
+    <string name="dlg_desc_delete_preferred_default_locale"><xliff:g id="removed_language" example="Français (France)">%s</xliff:g> will be removed from your preferred languages</string>
 
     <!-- A dialog button for confirmation of system locale change. [CHAR LIMIT=25]-->
     <string name="button_label_confirmation_of_system_locale_change">Change</string>
@@ -5238,12 +5242,12 @@
     <!-- Text for 'Done' button in gesture education [CHAR LIMIT=10] -->
     <string name="gesture_button_done">Done</string>
 
-    <!-- Title text for 'Customize action corners' preference. This preference allows the user to select actions to be triggered when moving the cursor to a corner. [CHAR LIMIT=60] -->
-    <string name="action_corner_title">Customize action corners</string>
-    <!-- Summary text for 'Customize action corners' preference. [CHAR LIMIT=NONE] -->
+    <!-- Title text for 'Customize corner shortcuts' preference. This preference allows the user to select actions to be triggered when moving the cursor to a corner. [CHAR LIMIT=60] -->
+    <string name="action_corner_title">Customize corner shortcuts</string>
+    <!-- Summary text for 'Customize corner shortcuts' preference. [CHAR LIMIT=NONE] -->
     <string name="action_corner_summary">Use cursors to navigate the system</string>
-    <!-- Intro text for 'Customize action corners'. [CHAR LIMIT=NONE] -->
-    <string name="action_corner_intro">Choose the following areas to customize action corners</string>
+    <!-- Intro text for 'Customize corner shortcuts'. [CHAR LIMIT=NONE] -->
+    <string name="action_corner_intro">Choose the following areas to customize corner shortcuts</string>
     <!-- Preference title for 'Bottom-left corner'. [CHAR LIMIT=60] -->
     <string name="action_corner_bottom_left_title">Bottom-left corner</string>
     <!-- Preference title for 'Bottom-right corner'. [CHAR LIMIT=60] -->
@@ -11186,6 +11190,10 @@ Data usage charges may apply.</string>
     <string name="disabled_by_policy_title_biometric_parental_consent">Parent needed</string>
     <!-- Dialog content shown when parental consent is required for the child to set up biometric authentication. [CHAR LIMIT=NONE] -->
     <string name="disabled_by_policy_content_biometric_parental_consent">Hand the phone to your parent to start setting this up</string>
+    <!-- Dialog title shown when the user interacts with a restricted setting on a supervised device. [CHAR LIMIT=NONE] -->
+    <string name="disabled_by_policy_title_parental_controls">Restricted by parental controls</string>
+    <!-- Dialog content shown when the user interacts with a restricted setting on a supervised device. [CHAR LIMIT=NONE] -->
+    <string name="disabled_by_policy_content_parental_controls">Only the person who manages your parental controls can change this setting</string>
     <!-- Dialog content shown when parental consent is required for the child to change blocked settings. [CHAR LIMIT=NONE] -->
     <string name="disabled_by_policy_parental_consent">Hand the phone to your parent to allow this setting to be changed.</string>
     <!-- Shown when the user tries to change phone settings that are blocked by their IT admin [CHAR LIMIT=200] -->
@@ -14767,11 +14775,9 @@ Data usage charges may apply.</string>
     <!-- Title for Supervision settings menu entry [CHAR LIMIT=60] -->
     <string name="supervision_settings_title">Parental controls</string>
     <!-- Description for Supervision settings menu entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_settings_summary">Content restrictions &amp; other limits</string>
+    <string name="supervision_settings_summary">Digital ground rules &amp; screen time limits</string>
     <!-- Description of device supervision toggle when PIN has never been set up [CHAR LIMIT=NONE] -->
     <string name="device_supervision_switch_no_pin_summary">Set up PIN</string>
-    <!-- Description of device supervision toggle when PIN is set up but supervision is not enabled [CHAR LIMIT=NONE] -->
-    <string name="device_supervision_switch_paused_summary">Paused</string>
     <!-- Search keywords for supervision settings [CHAR LIMIT=NONE] -->
     <string name="keywords_supervision_settings">supervision, parental supervision, parental controls</string>
     <!-- Title for supervision PIN management settings entry [CHAR LIMIT=60] -->
@@ -14788,8 +14794,6 @@ Data usage charges may apply.</string>
     <string name="supervision_update_recovery_email_preference_title">Update recovery email</string>
     <!-- Title for supervision delete pin setting entry [CHAR LIMIT=60] -->
     <string name="supervision_delete_pin_preference_title">Delete PIN</string>
-    <!-- Summary for supervision delete pin setting entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_preference_summary">This will reset all your supervision settings</string>
     <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
     <string name="supervision_add_pin_recovery_title">Add recovery email</string>
     <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->

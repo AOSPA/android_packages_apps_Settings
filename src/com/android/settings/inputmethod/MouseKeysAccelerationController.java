@@ -18,11 +18,18 @@ package com.android.settings.inputmethod;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.hardware.input.InputSettings;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -32,14 +39,17 @@ import com.android.settingslib.widget.SliderPreference;
 
 /** Controller class that controls mouse keys acceleration slider settings. */
 public class MouseKeysAccelerationController extends SliderPreferenceController implements
-        Preference.OnPreferenceChangeListener {
+        DefaultLifecycleObserver {
 
     private static final int MAX_ACCELERATION_POSITION = 10;
     private static final int MIN_ACCELERATION_POSITION = 0;
 
     static final float ACCELERATION_STEP = 0.1f;
+    static final Uri ACCESSIBILITY_MOUSE_KEYS_ACCELERATION_URI =
+            Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ACCELERATION);
 
     private final ContentResolver mContentResolver;
+    private @Nullable SliderPreference mPreference;
 
     public MouseKeysAccelerationController(@NonNull Context context,
             @NonNull String preferenceKey) {
@@ -47,16 +57,40 @@ public class MouseKeysAccelerationController extends SliderPreferenceController 
         mContentResolver = context.getContentResolver();
     }
 
+    final ContentObserver mSettingsObserver =
+            new ContentObserver(new Handler(Looper.getMainLooper())) {
+                @Override
+                public void onChange(boolean selfChange, @Nullable Uri uri) {
+                    if (mPreference == null || uri == null) {
+                        return;
+                    }
+                    updateState(mPreference);
+                }
+            };
+
     @Override
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
-        final SliderPreference preference = screen.findPreference(getPreferenceKey());
-        if (preference == null) {
+        mPreference = screen.findPreference(getPreferenceKey());
+        if (mPreference == null) {
             return;
         }
 
-        preference.setTickVisible(true);
-        updateState(preference);
+        mPreference.setTickVisible(true);
+        updateState(mPreference);
+    }
+
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        mContentResolver.registerContentObserver(
+                ACCESSIBILITY_MOUSE_KEYS_ACCELERATION_URI,
+                /* notifyForDescendants= */ false,
+                mSettingsObserver);
+    }
+
+    @Override
+    public void onStop(@NonNull LifecycleOwner owner) {
+        mContentResolver.unregisterContentObserver(mSettingsObserver);
     }
 
     @Override

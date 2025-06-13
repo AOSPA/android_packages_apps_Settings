@@ -110,7 +110,7 @@ open class AppInfoStorageScreen(context: Context, override val arguments: Bundle
 
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
-            AppListRepositoryImpl(context).loadAndFilterApps(context.userId, true).forEach { app ->
+            AppListRepositoryImpl(context).loadApps(context.userId).forEach { app ->
                 if (StorageType.Apps.filter(app)) {
                     emit(Bundle(1).apply { putString("app", app.packageName) })
                 }

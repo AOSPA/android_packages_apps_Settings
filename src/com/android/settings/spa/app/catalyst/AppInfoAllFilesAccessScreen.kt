@@ -100,7 +100,7 @@ open class AppInfoAllFilesAccessScreen(context: Context, override val arguments:
 
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
-            AppListRepositoryImpl(context).loadAndFilterApps(context.userId, true).forEach {
+            AppListRepositoryImpl(context).loadApps(context.userId).forEach {
                 if (it.hasExternalStoragePermission(context)) {
                     emit(Bundle(1).apply { putString("app", it.packageName) })
                 }

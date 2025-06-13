@@ -72,12 +72,14 @@ open class AppPictureInPictureAppListScreen :
         type: Boolean, // whether to include system apps
     ): PreferenceHierarchy =
         asyncPreferenceHierarchy(context, this) {
-            AppListRepositoryImpl(context).loadAndFilterApps(context.userId, type).forEach { app ->
-                if (app.supportsPictureInPicture(context)) {
-                    val arguments = Bundle(1).apply { putString("app", app.packageName) }
-                    +(AppInfoPictureInPictureScreen.KEY args arguments)
+            AppListRepositoryImpl(context)
+                .loadAndMaybeExcludeSystemApps(context.userId, type)
+                .forEach { app ->
+                    if (app.supportsPictureInPicture(context)) {
+                        val arguments = Bundle(1).apply { putString("app", app.packageName) }
+                        +(AppInfoPictureInPictureScreen.KEY args arguments)
+                    }
                 }
-            }
         }
 
     companion object {

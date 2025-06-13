@@ -166,16 +166,15 @@ public class AudioStreamConfirmDialogTest {
                 .isEqualTo(
                         mContext.getString(
                                 R.string.audio_streams_dialog_unsupported_device_subtitle));
-        View leftButton = dialog.findViewById(R.id.left_button);
-        assertThat(leftButton).isNotNull();
-        assertThat(leftButton.getVisibility()).isEqualTo(View.GONE);
-        assertThat(leftButton.hasOnClickListeners()).isFalse();
-        View rightButton = dialog.findViewById(R.id.right_button);
-        assertThat(rightButton).isNotNull();
-        assertThat(rightButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(rightButton.hasOnClickListeners()).isTrue();
+        View negativeButton = dialog.findViewById(android.R.id.button2);
+        assertThat(negativeButton).isNotNull();
+        assertThat(negativeButton.getVisibility()).isEqualTo(View.GONE);
+        View positiveButton = dialog.findViewById(android.R.id.button1);
+        assertThat(positiveButton).isNotNull();
+        assertThat(positiveButton.getVisibility()).isEqualTo(View.VISIBLE);
 
-        rightButton.callOnClick();
+        positiveButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
         verify(mDialogFragment.mActivity).finish();
     }
@@ -209,21 +208,21 @@ public class AudioStreamConfirmDialogTest {
         assertThat(subtitle2).isNotNull();
         assertThat(subtitle2.getText())
                 .isEqualTo(mContext.getString(R.string.audio_streams_dialog_no_le_device_subtitle));
-        View leftButton = dialog.findViewById(R.id.left_button);
-        assertThat(leftButton).isNotNull();
-        assertThat(leftButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(leftButton.hasOnClickListeners()).isTrue();
+        View negativeButton = dialog.findViewById(android.R.id.button2);
+        assertThat(negativeButton).isNotNull();
+        assertThat(negativeButton.getVisibility()).isEqualTo(View.VISIBLE);
 
-        leftButton.callOnClick();
+        negativeButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
 
-        Button rightButton = dialog.findViewById(R.id.right_button);
-        assertThat(rightButton).isNotNull();
-        assertThat(rightButton.getText())
+        Button positiveButton = dialog.findViewById(android.R.id.button1);
+        assertThat(positiveButton).isNotNull();
+        assertThat(positiveButton.getText())
                 .isEqualTo(mContext.getString(R.string.audio_streams_dialog_no_le_device_button));
-        assertThat(rightButton.hasOnClickListeners()).isTrue();
 
-        rightButton.callOnClick();
+        positiveButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
         verify(mDialogFragment.mActivity, times(2)).finish();
     }
@@ -261,16 +260,15 @@ public class AudioStreamConfirmDialogTest {
         assertThat(subtitle2.getText())
                 .isEqualTo(
                         mContext.getString(R.string.audio_streams_dialog_cannot_play, DEVICE_NAME));
-        View leftButton = dialog.findViewById(R.id.left_button);
-        assertThat(leftButton).isNotNull();
-        assertThat(leftButton.getVisibility()).isEqualTo(View.GONE);
-        assertThat(leftButton.hasOnClickListeners()).isFalse();
-        View rightButton = dialog.findViewById(R.id.right_button);
-        assertThat(rightButton).isNotNull();
-        assertThat(rightButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(rightButton.hasOnClickListeners()).isTrue();
+        View negativeButton = dialog.findViewById(android.R.id.button2);
+        assertThat(negativeButton).isNotNull();
+        assertThat(negativeButton.getVisibility()).isEqualTo(View.GONE);
+        View positiveButton = dialog.findViewById(android.R.id.button1);
+        assertThat(positiveButton).isNotNull();
+        assertThat(positiveButton.getVisibility()).isEqualTo(View.VISIBLE);
 
-        rightButton.callOnClick();
+        positiveButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
         verify(mDialogFragment.mActivity).finish();
     }
@@ -311,16 +309,15 @@ public class AudioStreamConfirmDialogTest {
         assertThat(subtitle2.getText())
                 .isEqualTo(
                         mContext.getString(R.string.audio_streams_dialog_cannot_play, DEVICE_NAME));
-        View leftButton = dialog.findViewById(R.id.left_button);
-        assertThat(leftButton).isNotNull();
-        assertThat(leftButton.getVisibility()).isEqualTo(View.GONE);
-        assertThat(leftButton.hasOnClickListeners()).isFalse();
-        View rightButton = dialog.findViewById(R.id.right_button);
-        assertThat(rightButton).isNotNull();
-        assertThat(rightButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(rightButton.hasOnClickListeners()).isTrue();
+        View negativeButton = dialog.findViewById(android.R.id.button2);
+        assertThat(negativeButton).isNotNull();
+        assertThat(negativeButton.getVisibility()).isEqualTo(View.GONE);
+        View positiveButton = dialog.findViewById(android.R.id.button1);
+        assertThat(positiveButton).isNotNull();
+        assertThat(positiveButton.getVisibility()).isEqualTo(View.VISIBLE);
 
-        rightButton.callOnClick();
+        positiveButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
         verify(mDialogFragment.mActivity).finish();
     }
@@ -364,21 +361,21 @@ public class AudioStreamConfirmDialogTest {
                 .isEqualTo(
                         mContext.getString(
                                 R.string.audio_streams_dialog_control_volume, defaultName));
-        View leftButton = dialog.findViewById(R.id.left_button);
-        assertThat(leftButton).isNotNull();
-        assertThat(leftButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(leftButton.hasOnClickListeners()).isTrue();
+        View negativeButton = dialog.findViewById(android.R.id.button2);
+        assertThat(negativeButton).isNotNull();
+        assertThat(negativeButton.getVisibility()).isEqualTo(View.VISIBLE);
 
-        leftButton.callOnClick();
+        negativeButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
 
-        Button rightButton = dialog.findViewById(R.id.right_button);
-        assertThat(rightButton).isNotNull();
-        assertThat(rightButton.getText())
+        Button positiveButton = dialog.findViewById(android.R.id.button1);
+        assertThat(positiveButton).isNotNull();
+        assertThat(positiveButton.getText())
                 .isEqualTo(mContext.getString(R.string.audio_streams_dialog_listen));
-        assertThat(rightButton.hasOnClickListeners()).isTrue();
 
-        rightButton.callOnClick();
+        positiveButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
         verify(mDialogFragment.mActivity, times(2)).finish();
     }
@@ -422,22 +419,22 @@ public class AudioStreamConfirmDialogTest {
         assertThat(subtitle2.getText())
                 .isEqualTo(mContext.getString(
                         R.string.audio_streams_dialog_turn_off_talkback_subtitle));
-        View leftButton = dialog.findViewById(R.id.left_button);
-        assertThat(leftButton).isNotNull();
-        assertThat(leftButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(leftButton.hasOnClickListeners()).isTrue();
+        View negativeButton = dialog.findViewById(android.R.id.button2);
+        assertThat(negativeButton).isNotNull();
+        assertThat(negativeButton.getVisibility()).isEqualTo(View.VISIBLE);
 
-        leftButton.callOnClick();
+        negativeButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
 
-        Button rightButton = dialog.findViewById(R.id.right_button);
-        assertThat(rightButton).isNotNull();
-        assertThat(rightButton.getText())
+        Button positiveButton = dialog.findViewById(android.R.id.button1);
+        assertThat(positiveButton).isNotNull();
+        assertThat(positiveButton.getText())
                 .isEqualTo(
                         mContext.getString(R.string.audio_streams_dialog_turn_off_talkback_button));
-        assertThat(rightButton.hasOnClickListeners()).isTrue();
 
-        rightButton.callOnClick();
+        positiveButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
         verify(mDialogFragment.mActivity, times(2)).finish();
     }
@@ -481,16 +478,15 @@ public class AudioStreamConfirmDialogTest {
         assertThat(subtitle2.getText())
                 .isEqualTo(mContext.getString(
                         R.string.audio_streams_dialog_turn_off_audio_sharing_subtitle));
-        View leftButton = dialog.findViewById(R.id.left_button);
-        assertThat(leftButton).isNotNull();
-        assertThat(leftButton.getVisibility()).isEqualTo(View.GONE);
-        assertThat(leftButton.hasOnClickListeners()).isFalse();
-        View rightButton = dialog.findViewById(R.id.right_button);
-        assertThat(rightButton).isNotNull();
-        assertThat(rightButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(rightButton.hasOnClickListeners()).isTrue();
+        View negativeButton = dialog.findViewById(android.R.id.button2);
+        assertThat(negativeButton).isNotNull();
+        assertThat(negativeButton.getVisibility()).isEqualTo(View.GONE);
+        View positiveButton = dialog.findViewById(android.R.id.button1);
+        assertThat(positiveButton).isNotNull();
+        assertThat(positiveButton.getVisibility()).isEqualTo(View.VISIBLE);
 
-        rightButton.callOnClick();
+        positiveButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
         verify(mDialogFragment.mActivity).finish();
     }
@@ -534,21 +530,21 @@ public class AudioStreamConfirmDialogTest {
                 .isEqualTo(
                         mContext.getString(
                                 R.string.audio_streams_dialog_control_volume, defaultName));
-        View leftButton = dialog.findViewById(R.id.left_button);
-        assertThat(leftButton).isNotNull();
-        assertThat(leftButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(leftButton.hasOnClickListeners()).isTrue();
+        View negativeButton = dialog.findViewById(android.R.id.button2);
+        assertThat(negativeButton).isNotNull();
+        assertThat(negativeButton.getVisibility()).isEqualTo(View.VISIBLE);
 
-        leftButton.callOnClick();
+        negativeButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
 
-        Button rightButton = dialog.findViewById(R.id.right_button);
-        assertThat(rightButton).isNotNull();
-        assertThat(rightButton.getText())
+        Button positiveButton = dialog.findViewById(android.R.id.button1);
+        assertThat(positiveButton).isNotNull();
+        assertThat(positiveButton.getText())
                 .isEqualTo(mContext.getString(R.string.audio_streams_dialog_listen));
-        assertThat(rightButton.hasOnClickListeners()).isTrue();
 
-        rightButton.callOnClick();
+        positiveButton.callOnClick();
+        shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
         verify(mDialogFragment.mActivity, times(2)).finish();
     }

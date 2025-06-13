@@ -137,11 +137,6 @@ class SupervisionDeletePinPreferenceTest {
     }
 
     @Test
-    fun getSummary() {
-        assertThat(preference.summary).isEqualTo(R.string.supervision_delete_pin_preference_summary)
-    }
-
-    @Test
     fun showDeletionDialog_currentUserSupervised_showsConfirmation() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)

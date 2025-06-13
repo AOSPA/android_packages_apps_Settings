@@ -72,12 +72,14 @@ open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyG
         type: Boolean, // whether to include system apps
     ): PreferenceHierarchy =
         asyncPreferenceHierarchy(context, this) {
-            AppListRepositoryImpl(context).loadAndFilterApps(context.userId, type).forEach { app ->
-                if (StorageType.Apps.filter(app)) {
-                    val arguments = Bundle(1).apply { putString("app", app.packageName) }
-                    +(AppInfoStorageScreen.KEY args arguments)
+            AppListRepositoryImpl(context)
+                .loadAndMaybeExcludeSystemApps(context.userId, type)
+                .forEach { app ->
+                    if (StorageType.Apps.filter(app)) {
+                        val arguments = Bundle(1).apply { putString("app", app.packageName) }
+                        +(AppInfoStorageScreen.KEY args arguments)
+                    }
                 }
-            }
         }
 
     companion object {

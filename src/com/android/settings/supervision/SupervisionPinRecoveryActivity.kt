@@ -22,6 +22,7 @@ import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.EXTRA_SUPERVISION_RECOVERY_INFO
 import android.content.Intent
 import android.os.Bundle
+import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.util.Log
@@ -260,27 +261,21 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
      * removed. Then, a new supervising user is created.
      *
      * @return True if the reset was successful, false otherwise.
-     *
-     * TODO(b/407064075): use better approach to reset the supervision user.
      */
     @RequiresPermission(
         anyOf = [Manifest.permission.CREATE_USERS, Manifest.permission.MANAGE_USERS]
     )
     private fun resetSupervisionUser(): Boolean {
         val userManager = getSystemService(UserManager::class.java)
-        val supervisionManager = getSystemService(SupervisionManager::class.java)
-        val isSupervisionEnabled = supervisionManager.isSupervisionEnabled()
-        if (isSupervisionEnabled) {
-            // Disables supervision temporally to allow user reset.
-            supervisionManager.setSupervisionEnabled(false)
-        }
-        supervisingUserHandle?.let { userManager.removeUser(it) }
+        supervisingUserHandle?.let { userManager.removeUserEvenWhenDisallowed(it.identifier) }
         val userInfo =
-            userManager.createUser("Supervising", USER_TYPE_PROFILE_SUPERVISING, /* flags= */ 0)
-        if (isSupervisionEnabled) {
-            // Re-enables supervision after user reset.
-            supervisionManager.setSupervisionEnabled(true)
-        }
+            userManager.createProfileForUserEvenWhenDisallowed(
+                /* name= */ "Supervising",
+                /* userType= */ USER_TYPE_PROFILE_SUPERVISING,
+                /* flags= */ 0,
+                /* userId= */ UserHandle.USER_NULL,
+                /* disallowedPackages = */ null,
+            )
         if (userInfo != null) {
             return true
         } else {

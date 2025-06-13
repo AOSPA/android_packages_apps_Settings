@@ -70,12 +70,14 @@ open class AppsDisplayOverOtherAppsAppListScreen :
         type: Boolean, // whether to include system apps
     ): PreferenceHierarchy =
         asyncPreferenceHierarchy(context, this) {
-            AppListRepositoryImpl(context).loadAndFilterApps(context.userId, type).forEach {
-                if (it.hasOverlayPermission(context)) {
-                    val arguments = Bundle(1).apply { putString("app", it.packageName) }
-                    +(AppInfoDisplayOverOtherAppsScreen.KEY args arguments)
+            AppListRepositoryImpl(context)
+                .loadAndMaybeExcludeSystemApps(context.userId, type)
+                .forEach {
+                    if (it.hasOverlayPermission(context)) {
+                        val arguments = Bundle(1).apply { putString("app", it.packageName) }
+                        +(AppInfoDisplayOverOtherAppsScreen.KEY args arguments)
+                    }
                 }
-            }
         }
 
     companion object {

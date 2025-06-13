@@ -166,14 +166,10 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        ThemeHelper.trySetDynamicColor(this);
         if (ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext())) {
-            if (!ThemeHelper.trySetSuwTheme(this)) {
-                setTheme(ThemeHelper.getSuwDefaultTheme(getApplicationContext()));
-                ThemeHelper.trySetDynamicColor(this);
-            }
-        } else {
-            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-            ThemeHelper.trySetDynamicColor(this);
+            ThemeHelper.trySetSuwTheme(this);
         }
         mChallenge = getIntent().getLongExtra(EXTRA_KEY_CHALLENGE, -1L);
         mSensorId = getIntent().getIntExtra(EXTRA_KEY_SENSOR_ID, -1);

@@ -71,6 +71,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     public static final String TITLE_TEXT = SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.title";
     public static final String HEADER_TEXT = SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.header";
     public static final String DETAILS_TEXT = SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.details";
+    @Deprecated
     public static final String DARK_THEME = SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.darkTheme";
     public static final String SHOW_CANCEL_BUTTON =
             SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.showCancelButton";
@@ -199,7 +200,9 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         mDevicePolicyManager = (DevicePolicyManager) getActivity().getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
         mBiometricManager = getActivity().getSystemService(BiometricManager.class);
-        mExpressiveTheme = SettingsThemeHelper.isExpressiveTheme(getActivity());
+        mExpressiveTheme = intent.getBooleanExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE,
+                SettingsThemeHelper.isExpressiveTheme(getActivity()));
     }
 
     @Override

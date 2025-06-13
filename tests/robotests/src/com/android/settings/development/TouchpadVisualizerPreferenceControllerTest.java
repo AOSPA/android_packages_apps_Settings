@@ -29,7 +29,6 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 
-import com.android.hardware.input.Flags;
 import com.android.settings.testutils.shadow.ShadowSystemSettings;
 
 import org.junit.Before;
@@ -70,7 +69,6 @@ public class TouchpadVisualizerPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_TOUCHPAD_VISUALIZER})
     public void updateState_touchpadVisualizerEnabled_shouldCheckedPreference() {
         InputSettings.setTouchpadVisualizer(mContext, true);
         mController.updateState(mPreference);
@@ -79,7 +77,6 @@ public class TouchpadVisualizerPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_TOUCHPAD_VISUALIZER})
     public void updateState_touchpadVisualizerDisabled_shouldUncheckedPreference() {
         InputSettings.setTouchpadVisualizer(mContext, false);
         mController.updateState(mPreference);
@@ -88,7 +85,6 @@ public class TouchpadVisualizerPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_TOUCHPAD_VISUALIZER})
     public void onPreferenceChange_preferenceChecked_shouldEnableTouchpadVisualizer() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
@@ -98,7 +94,6 @@ public class TouchpadVisualizerPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_TOUCHPAD_VISUALIZER})
     public void onPreferenceChange_preferenceUnchecked_shouldDisableTouchpadVisualizer() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
@@ -108,7 +103,6 @@ public class TouchpadVisualizerPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_TOUCHPAD_VISUALIZER})
     public void onDeveloperOptionsSwitchDisabled_preferenceShouldBeEnabled() {
         mController.onDeveloperOptionsSwitchDisabled();
 
