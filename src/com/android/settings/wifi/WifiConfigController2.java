@@ -232,6 +232,8 @@ public class WifiConfigController2 implements TextWatcher,
     private final boolean mHideMeteredAndPrivacy;
     private final WifiManager mWifiManager;
     private final AndroidKeystoreAliasLoader mAndroidKeystoreAliasLoader;
+    private final boolean mIsMultiUser;
+    private boolean mIsNetworkEditable = true;
 
     private TextInputValidator mValidator = new TextInputValidator();
     private TextInputGroup mSsidInputGroup;
@@ -272,6 +274,10 @@ public class WifiConfigController2 implements TextWatcher,
         mContext = mConfigUi.getContext();
         mWifiManager = wifiManager;
         mAndroidKeystoreAliasLoader = androidKeystoreAliasLoader;
+        mIsMultiUser = mContext.getSystemService(UserManager.class).getUserCount() > 1;
+        if (mWifiEntry != null) {
+            mIsNetworkEditable = WifiUtils.isNetworkEditable(mWifiEntry, mContext);
+        }
         initWifiConfigController2(wifiEntry);
     }
 
@@ -280,8 +286,6 @@ public class WifiConfigController2 implements TextWatcher,
         mWifiEntrySecurity = (wifiEntry == null) ? WifiEntry.SECURITY_NONE :
                 wifiEntry.getSecurity();
         mIsTrustOnFirstUseSupported = mWifiManager.isTrustOnFirstUseSupported();
-
-        UserManager mUserManager = mContext.getSystemService(UserManager.class);
 
         final Resources res = mContext.getResources();
 
@@ -354,12 +358,10 @@ public class WifiConfigController2 implements TextWatcher,
             (LinearLayout) mView.findViewById(R.id.shared_network_login_screen_warning);
 
         if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
-            int userCount = mUserManager.getUserCount();
             mView.findViewById(R.id.sharing_toggle_fields)
-                    .setVisibility(userCount > 1 ? View.VISIBLE : View.GONE);
-            mEditConfigurationSwitch.setEnabled(false);
+                    .setVisibility(mIsMultiUser ? View.VISIBLE : View.GONE);
             mView.findViewById(R.id.edit_wifi_network_configuration_fields)
-                    .setVisibility(userCount > 1 ? View.VISIBLE : View.GONE);
+                    .setVisibility(mIsMultiUser ? View.VISIBLE : View.GONE);
 
             boolean sharedDefault =
                     mContext.getResources().getBoolean(R.bool.config_share_network_by_default);
@@ -368,7 +370,8 @@ public class WifiConfigController2 implements TextWatcher,
                         .getBoolean(R.bool.config_allow_edit_network_configuration_by_default);
 
             mSharedSwitch.setChecked(sharedDefault);
-            mEditConfigurationSwitch.setEnabled(sharedDefault);
+            mSharedSwitch.setEnabled(mIsNetworkEditable);
+            mEditConfigurationSwitch.setEnabled(sharedDefault && mIsNetworkEditable);
             mEditConfigurationSwitch.setChecked(editConfigDefault);
 
             mSharedSwitch.setOnCheckedChangeListener(this);
@@ -418,11 +421,9 @@ public class WifiConfigController2 implements TextWatcher,
                 } else {
                     mIpSettingsSpinner.setSelection(DHCP);
                 }
+                mIpSettingsSpinner.setEnabled(mIsNetworkEditable);
 
                 mSharedCheckBox.setEnabled(config.shared);
-                if (!config.shared) {
-                    showAdvancedFields = true;
-                }
 
                 ProxySettings proxySettings = config.getIpConfiguration().getProxySettings();
                 if (proxySettings == ProxySettings.STATIC) {
@@ -434,6 +435,7 @@ public class WifiConfigController2 implements TextWatcher,
                 } else {
                     mProxySettingsSpinner.setSelection(PROXY_NONE);
                 }
+                mProxySettingsSpinner.setEnabled(mIsNetworkEditable);
                 if (config != null && config.isPasspoint()) {
                     addRow(group, R.string.passpoint_label,
                             String.format(mContext.getString(R.string.passpoint_content),
@@ -1452,7 +1454,6 @@ public class WifiConfigController2 implements TextWatcher,
         WifiConfiguration config = null;
 
         mView.findViewById(R.id.ip_fields).setVisibility(View.VISIBLE);
-
         if (mWifiEntry != null && mWifiEntry.isSaved()) {
             config = mWifiEntry.getWifiConfiguration();
         }
@@ -1462,16 +1463,21 @@ public class WifiConfigController2 implements TextWatcher,
             if (mIpAddressView == null) {
                 mIpAddressView = (TextView) mView.findViewById(R.id.ipaddress);
                 mIpAddressView.addTextChangedListener(this);
+                mIpAddressView.setEnabled(mIsNetworkEditable);
                 mGatewayView = (TextView) mView.findViewById(R.id.gateway);
                 mGatewayView.addTextChangedListener(getIpConfigFieldsTextWatcher(mGatewayView));
+                mGatewayView.setEnabled(mIsNetworkEditable);
                 mNetworkPrefixLengthView = (TextView) mView.findViewById(
                         R.id.network_prefix_length);
                 mNetworkPrefixLengthView.addTextChangedListener(
                         getIpConfigFieldsTextWatcher(mNetworkPrefixLengthView));
+                mNetworkPrefixLengthView.setEnabled(mIsNetworkEditable);
                 mDns1View = (TextView) mView.findViewById(R.id.dns1);
                 mDns1View.addTextChangedListener(getIpConfigFieldsTextWatcher(mDns1View));
+                mDns1View.setEnabled(mIsNetworkEditable);
                 mDns2View = (TextView) mView.findViewById(R.id.dns2);
                 mDns2View.addTextChangedListener(this);
+                mDns2View.setEnabled(mIsNetworkEditable);
             }
             if (config != null) {
                 StaticIpConfiguration staticConfig = config.getIpConfiguration()
@@ -1506,7 +1512,6 @@ public class WifiConfigController2 implements TextWatcher,
         WifiConfiguration config = null;
 
         mView.findViewById(R.id.proxy_settings_fields).setVisibility(View.VISIBLE);
-
         if (mWifiEntry != null && mWifiEntry.isSaved()) {
             config = mWifiEntry.getWifiConfiguration();
         }
@@ -1518,10 +1523,13 @@ public class WifiConfigController2 implements TextWatcher,
             if (mProxyHostView == null) {
                 mProxyHostView = (TextView) mView.findViewById(R.id.proxy_hostname);
                 mProxyHostView.addTextChangedListener(this);
+                mProxyHostView.setEnabled(mIsNetworkEditable);
                 mProxyPortView = (TextView) mView.findViewById(R.id.proxy_port);
                 mProxyPortView.addTextChangedListener(this);
+                mProxyPortView.setEnabled(mIsNetworkEditable);
                 mProxyExclusionListView = (TextView) mView.findViewById(R.id.proxy_exclusionlist);
                 mProxyExclusionListView.addTextChangedListener(this);
+                mProxyExclusionListView.setEnabled(mIsNetworkEditable);
             }
             if (config != null) {
                 ProxyInfo proxyProperties = config.getHttpProxy();
@@ -1540,6 +1548,7 @@ public class WifiConfigController2 implements TextWatcher,
             if (mProxyPacView == null) {
                 mProxyPacView = (TextView) mView.findViewById(R.id.proxy_pac);
                 mProxyPacView.addTextChangedListener(this);
+                mProxyPacView.setEnabled(mIsNetworkEditable);
             }
             if (config != null) {
                 ProxyInfo proxyInfo = config.getHttpProxy();

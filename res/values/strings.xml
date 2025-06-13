@@ -2650,6 +2650,7 @@
     <!-- Label for the share wifi network summary. [CHAR LIMIT=NONE] -->
     <string name="share_wifi_network_summary">All users on this device can view and connect to a shared network. Administrators can delete a shared network. Learn more</string>
     <string name="edit_wifi_network_configuration">Allow other users to edit network configuration</string>
+    <string name="edit_wifi_network_non_owner_message">Contact the admin of this device to make changes to this network.</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
@@ -5946,10 +5947,20 @@
         screen magnification on app transitions</string>
     <!-- Title for the accessibility preference to power button to end a call. [CHAR LIMIT=35] -->
     <string name="accessibility_power_button_ends_call_prerefence_title">Power button ends call</string>
+    <!-- Title for the dark theme group category -->
+    <string name="dark_theme_version_category">Mode</string>
+    <!-- Title for the accessibility preference for applying the original dark theme. [CHAR LIMIT=35] -->
+    <string name="accessibility_standard_dark_theme_title">Standard</string>
+    <!-- Title in the search result for standard dark theme mode. -->
+    <string name="accessibility_standard_dark_theme_title_in_search">Standard Dark Theme</string>
+    <!-- Summary for the accessibility preference for applying the original dark theme. [CHAR LIMIT=100] -->
+    <string name="accessibility_standard_dark_theme_summary">Applies Dark theme across your device and supported apps</string>
     <!-- Title for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=35] -->
-    <string name="accessibility_force_invert_title">Make more apps dark</string>
+    <string name="accessibility_expanded_dark_theme_title">Expanded</string>
+    <!-- Title in the search result for expanded dark theme mode. -->
+    <string name="accessibility_expanded_dark_theme_title_in_search">Expanded Dark Theme</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=100] -->
-    <string name="accessibility_force_invert_summary">Expands dark theme to more apps. May not work with all apps.</string>
+    <string name="accessibility_expanded_dark_theme_summary">Automatically applies Dark theme to more apps for improved accessibility</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->

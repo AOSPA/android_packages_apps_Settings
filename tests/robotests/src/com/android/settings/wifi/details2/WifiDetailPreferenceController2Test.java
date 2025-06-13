@@ -1256,21 +1256,22 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void canModifyNetwork_savedNetwork_returnTrue() {
+    public void isNetworkAdminLocked_savedNetwork_returnFalse() {
         setUpForConnectedNetwork();
         setUpSpyController();
         when(mMockWifiEntry.isSaved()).thenReturn(true);
 
-        assertThat(mController.canModifyNetwork()).isTrue();
+        assertThat(mController.isNetworkAdminLocked()).isFalse();
     }
 
     @Test
-    public void canModifyNetwork_lockedDown() {
+    public void isNetworkAdminLocked_lockedDown() {
         setUpForConnectedNetwork();
         setUpSpyController();
         lockDownNetwork();
+        when(mMockWifiEntry.isSaved()).thenReturn(true);
 
-        assertThat(mController.canModifyNetwork()).isFalse();
+        assertThat(mController.isNetworkAdminLocked()).isTrue();
     }
 
     /**
@@ -1294,6 +1295,53 @@ public class WifiDetailPreferenceController2Test {
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.WIFI_DEVICE_OWNER_CONFIGS_LOCKDOWN, 1);
+    }
+
+    @Test
+    public void canModifyNetwork_featureDisabled_returnTrue() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+
+        assertThat(mController.canModifyNetwork()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void canModifyNetwork_networkOwned_returnTrue() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = 1;
+
+        assertThat(mController.canModifyNetwork()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void canModifyNetwork_networkNotOwned_returnFalse() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getUserCount()).thenReturn(3);
+
+        assertThat(mController.canModifyNetwork()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void canModifyNetwork_networkNotOwned_singleUser_returnTrue() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mMockUserManager.getUserCount()).thenReturn(1);
+
+        assertThat(mController.canModifyNetwork()).isTrue();
     }
 
     @Test

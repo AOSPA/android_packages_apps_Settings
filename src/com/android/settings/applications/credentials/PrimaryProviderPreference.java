@@ -30,12 +30,13 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settingslib.PrimarySwitchPreference;
+import com.android.settingslib.RestrictedPreference;
 
 /**
  * This preference is shown at the top of the "passwords & accounts" screen and allows the user to
  * pick their primary credential manager provider.
  */
-public class PrimaryProviderPreference extends PrimarySwitchPreference {
+public class PrimaryProviderPreference extends RestrictedPreference {
 
     public static boolean shouldUseNewSettingsUi() {
         return Flags.isCredmanSettingsExpressiveDesign();
@@ -44,7 +45,6 @@ public class PrimaryProviderPreference extends PrimarySwitchPreference {
     private @Nullable Button mChangeButton = null;
     private @Nullable Button mOpenButton = null;
     private @Nullable View mButtonFrameView = null;
-    private @Nullable View mEditView = null;
     private @Nullable Delegate mDelegate = null;
     private boolean mButtonsCompactMode = false;
     private boolean mOpenButtonVisible = false;
@@ -103,10 +103,7 @@ public class PrimaryProviderPreference extends PrimarySwitchPreference {
                     }
                 });
 
-        // Set up the edit icon to handle opening the change provider scenario.
-        mEditView = holder.findViewById(R.id.edit_button);
         View mWidgetFrame = holder.findViewById(android.R.id.widget_frame);
-        mEditView.setVisibility(View.VISIBLE);
         mWidgetFrame.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(@NonNull View v) {

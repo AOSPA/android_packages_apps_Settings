@@ -890,9 +890,17 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     /**
      * Returns whether the network represented by this preference can be modified.
      */
-    public boolean canModifyNetwork() {
+    public boolean isNetworkAdminLocked() {
         return mWifiEntry.isSaved()
-                && !WifiUtils.isNetworkLockedDown(mContext, mWifiEntry.getWifiConfiguration());
+                && WifiUtils.isNetworkLockedDown(mContext, mWifiEntry.getWifiConfiguration());
+    }
+
+    /**
+     * Returns true if the current user owns the network or if there is only a single user
+     * on the device.
+     */
+    public boolean canModifyNetwork() {
+        return WifiUtils.isNetworkEditable(mWifiEntry, mContext);
     }
 
     /**

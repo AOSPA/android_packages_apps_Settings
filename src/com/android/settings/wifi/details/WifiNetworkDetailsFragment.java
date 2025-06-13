@@ -215,6 +215,11 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
             MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.wifi_modify);
             item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            if (com.android.settings.connectivity.Flags.wifiMultiuser()
+                    && !mWifiDetailPreferenceController2.canModifyNetwork()) {
+                item.setTooltipText(
+                        getContext().getString(R.string.edit_wifi_network_non_owner_message));
+            }
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -223,7 +228,7 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case Menu.FIRST:
-                if (!mWifiDetailPreferenceController2.canModifyNetwork()) {
+                if (mWifiDetailPreferenceController2.isNetworkAdminLocked()) {
                     EnforcedAdmin admin = RestrictedLockUtilsInternal.getDeviceOwner(getContext());
                     if (admin == null) {
                         final DevicePolicyManager dpm = (DevicePolicyManager)
@@ -238,7 +243,7 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
                         }
                     }
                     RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), admin);
-                } else {
+                } else if (mWifiDetailPreferenceController2.canModifyNetwork()) {
                     showDialog(WIFI_DIALOG_ID);
                 }
                 return true;
