@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.asyncPreferenceHierarchy
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(AppsAllFilesAccessAppListScreen.KEY)
 open class AppsAllFilesAccessAppListScreen :
@@ -58,7 +59,8 @@ open class AppsAllFilesAccessAppListScreen :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent =
         Intent(context, ManageExternalStorageActivity::class.java)
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {}
 
     override val defaultType: Boolean
         get() = true // include system apps

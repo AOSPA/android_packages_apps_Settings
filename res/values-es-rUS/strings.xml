@@ -804,7 +804,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN • Rostro"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Contraseña • Rostro"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Continuar sin Desbloqueo facial"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Continuar sin desbloqueo facial ni con huella dactilar"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Continuar sin huella dactilar ni rostro"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Ninguno"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Agrega un PIN, patrón o contraseña, o desliza"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Deslizar"</string>
@@ -1184,6 +1184,8 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Compartir esta red con otros usuarios del dispositivo"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Todos los usuarios de este dispositivo pueden ver y conectarse a una red compartida. Los administradores pueden borrar una red compartida. Más información"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Permitir que otros usuarios editen la configuración de red"</string>
+    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Esta red no tiene acceso a Internet. ¿Deseas mantener la conexión?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Puede que algunas apps y servicios no funcionen debido a la conectividad limitada. ¿Usar igualmente?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"No volver a preguntar para esta red"</string>
@@ -2175,8 +2177,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Panel táctil"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Panel táctil y mouse"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Mouse"</string>
-    <!-- no translation found for mouse_settings_summary (1308610072914620926) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="1308610072914620926">"Velocidad del puntero y personalización de botones"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Velocidad del puntero, gestos"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Presionar para hacer clic"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Presionar y arrastrar para mover elementos"</string>
@@ -2230,13 +2231,40 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Siguiente"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Reiniciar"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Listo"</string>
-    <string name="action_corners_title" msgid="8971354126563421646">"Personalizar esquinas de acción"</string>
-    <string name="action_corners_summary" msgid="4245089615854251124">"Usa los cursores para navegar por el sistema"</string>
-    <string name="action_corners_intro" msgid="4384209411870086502">"Elige las siguientes áreas para personalizar las esquinas de acción"</string>
-    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"Esquina inferior izquierda"</string>
-    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"Esquina inferior derecha"</string>
-    <string name="action_corners_top_left_title" msgid="6604149810499060560">"Esquina superior izquierda"</string>
-    <string name="action_corners_top_right_title" msgid="583996793984142329">"Esquina superior derecha"</string>
+    <!-- no translation found for action_corner_title (1489042651433221319) -->
+    <skip />
+    <!-- no translation found for action_corner_summary (695618538930535335) -->
+    <skip />
+    <!-- no translation found for action_corner_intro (8782001241997579665) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
+    <skip />
+    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
+    <skip />
+    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
+    <skip />
+    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
+    <skip />
+    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
+    <skip />
+    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
+    <skip />
+    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Teclas modificadoras"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Cambiar el comportamiento de las teclas"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Restablecer todas"</string>
@@ -2315,8 +2343,7 @@
     <string name="last_time_used_label" msgid="7589377271406011659">"Última fecha de uso"</string>
     <string name="last_time_used_never" msgid="2936073559267990034">"nunca"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Hora de uso"</string>
-    <!-- no translation found for phone_information_v2_title (3373745314543222111) -->
-    <skip />
+    <string name="phone_information_v2_title" msgid="3373745314543222111">"Información del teléfono V2"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Accesibilidad"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Configuración de accesibilidad"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Pantalla, interacción, audio"</string>
@@ -2355,8 +2382,7 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controles del sistema"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Enviar comentarios"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Califícanos"</string>
-    <!-- no translation found for accessibility_disability_support_title (7934160403456751664) -->
-    <skip />
+    <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Comunícate con la Asistencia de Google para Personas con Discapacidad"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Encuesta sobre accesibilidad"</string>
     <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"¿Disfrutas del tema oscuro en más apps?"</string>
     <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Comparte tus comentarios"</string>
@@ -2383,6 +2409,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Atajo para ampliación"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Seguimiento del cursor"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Elige cómo la ampliación sigue el cursor."</string>
+    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
+    <skip />
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Mover la pantalla continuamente mientras se mueve el mouse"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Mover la pantalla mientras el mouse se mantiene en el centro"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Mover la pantalla cuando el mouse toca los bordes"</string>
@@ -2523,10 +2551,32 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualizar automáticamente la ampliación de pantalla"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Actualizar la ampliación de pantalla al cambiar de aplicaciones"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Cortar con el botón de encendido"</string>
-    <string name="accessibility_force_invert_title" msgid="5248504501753732051">"Cambiar más apps al tema oscuro"</string>
-    <string name="accessibility_force_invert_summary" msgid="257503086198180749">"Expande el tema oscuro a más apps. Es posible que no funcione con todas las apps."</string>
+    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Quitar animaciones"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce el movimiento de la pantalla"</string>
+    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combinar canales cuando se reproduce audio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Balance de audio"</string>
@@ -2670,8 +2720,8 @@
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Audiodescripción"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Escucha una descripción de lo que ocurre en pantalla en películas y programas compatibles"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"audiodescripción, audio, descripción, persona con visión reducida"</string>
-    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Combinación activada"</string>
-    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desactivada"</string>
+    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Atajo activado"</string>
+    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desactivado"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Activado"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Desactivado"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"No funciona. Presiona para obtener información."</string>
@@ -3682,7 +3732,8 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ninguno}=1{1 programa establecido}other{# programas establecidos}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No interrumpir"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modos"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimiza las distracciones y gestiona tu atención con modos de sueño, trabajo, conducción y otras situaciones."</string>
+    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
+    <skip />
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Crear tu propio modo"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Solo recibe notificaciones de las personas y apps que más te interesan"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Establecer un programa"</string>
@@ -5328,14 +5379,15 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Iniciar en tamaño de página 16 KB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Iniciar con kernel compatible con páginas de 16 KB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Cambiar del modo de 4 KB al de 16 KB"</string>
+    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
+    <skip />
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Estás en un modo independiente de la página, ejecutando un kernel de 4 KB, y cambiarás al modo de 16 KB. No se puede garantizar la integridad del software en este modo, y los datos almacenados en el teléfono podrían estar en riesgo durante el desbloqueo del bootloader. Esta acción reiniciará el dispositivo. Algunas funciones quedan inhabilitadas en estos modos, así que algunas aplicaciones podrían no ejecutarse. Para revertir el dispositivo al modo de producción, debes volver al modo de 4 KB y bloquear el bootloader, lo que restablecerá la configuración de fábrica del dispositivo. Una vez que el dispositivo se inicie correctamente ejecutando Android, inhabilita el desbloqueo para OEM en Opciones para desarrolladores."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Cambiar del modo de 4 KB al de 16 KB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Estás en un modo independiente de la página, ejecutando un kernel de 4 KB, y cambiarás al modo de 16 KB. No se puede garantizar la integridad del software en este modo, y los datos almacenados en el teléfono podrían estar en riesgo durante el desbloqueo del bootloader. Esta acción reiniciará el dispositivo. Algunas funciones quedan inhabilitadas en estos modos, así que algunas aplicaciones podrían no ejecutarse. Para revertir el dispositivo al modo de producción, debes bloquear el bootloader, lo que restablecerá la configuración de fábrica del dispositivo. Una vez que el dispositivo se inicie correctamente ejecutando Android, inhabilita el desbloqueo para OEM en Opciones para desarrolladores."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"No se pudo actualizar el kernel a uno compatible con páginas de 16 KB"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Aplicando cambio"</string>
-    <string name="confirm_format_ext4_title" msgid="4754057414728537125">"¿Quieres volver a formatear el dispositivo a ext4? (paso obligatorio para el modo de 16 KB)"</string>
-    <string name="confirm_format_ext4_text" msgid="432847493298532536">"La partición de datos del dispositivo debe convertirse a ext4 antes de usar la opción para desarrolladores de 16 KB. No se puede garantizar la integridad del software en este modo, y los datos almacenados en el teléfono podrían estar en riesgo durante el desbloqueo del bootloader. Si activas la opción de 16 KB, deberás volver a reiniciar. Una vez que se habilite este modo, podrás cambiar entre los modos de 4 KB y 16 KB con un único reinicio. Algunas funciones quedan inhabilitadas en estos modos, así que algunas aplicaciones podrían no ejecutarse. Para revertir el dispositivo al modo de producción, debes volver al modo de 4 KB y bloquear el bootloader, lo que restablecerá la configuración del dispositivo. Una vez que el dispositivo se inicie correctamente ejecutando Android, inhabilita el desbloqueo para OEM en Opciones para desarrolladores. Después de la confirmación, se limpiará el dispositivo, y el sistema de archivos cambiará a ext4. Una vez que se complete el proceso, vuelve a habilitar nuevamente el modo de 16 KB."</string>
-    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Borrar todos los datos"</string>
+    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
+    <skip />
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"No se pudo volver a formatear el dispositivo y falló la limpieza de la partición de datos a ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Se requiere desbloquear el bootloader"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"Este dispositivo debe tener el bootloader desbloqueado para poder usar la opción para desarrolladores de 16 KB. No se puede garantizar la integridad del software en este modo, y los datos almacenados en el teléfono podrían estar en riesgo durante el desbloqueo del bootloader. Se limpiarán la configuración y los datos del usuario cuando se active el modo de 16 KB. Una vez que se desbloquee el bootloader, deberás reiniciar dos veces para activar la opción de 16 KB. Una vez que se habilite este modo, podrás cambiar entre los modos de 4 KB y 16 KB con un único reinicio. Algunas funciones quedan inhabilitadas en estos modos, así que algunas aplicaciones podrían no ejecutarse. Para revertir el dispositivo al modo de producción, debes volver al modo de 4 KB y bloquear el dispositivo con OEM/bootloader (lo que restablecerá la configuración de fábrica). Desbloquea el bootloader y vuelve a intentarlo. Puedes ver las instrucciones de este proceso en &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5658,7 +5710,7 @@
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Esta app solo puede estar abierta en 1 ventana"</string>
     <string name="generic_accessibility_service_on" msgid="4466229372357726824">"Función activada"</string>
     <string name="generic_accessibility_service_off" msgid="4759859497651675724">"Función desactivada"</string>
-    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Combinación desactivada"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Atajo desactivado"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"Desactivado"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"Activada"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"Desactivada"</string>

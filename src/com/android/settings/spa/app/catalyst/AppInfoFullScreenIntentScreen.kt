@@ -41,6 +41,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -89,8 +90,8 @@ open class AppInfoFullScreenIntentScreen(context: Context, override val argument
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) { +FullScreenIntentMainSwitch(storage) }
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) { +FullScreenIntentMainSwitch(storage) }
 
     companion object {
         const val KEY = "device_state_app_info_full_screen_intent"

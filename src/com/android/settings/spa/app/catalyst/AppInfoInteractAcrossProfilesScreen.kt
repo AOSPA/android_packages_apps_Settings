@@ -41,6 +41,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -94,8 +95,8 @@ open class AppInfoInteractAcrossProfilesScreen(context: Context, override val ar
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) { +InteractAcrossProfilesMainSwitch(storage) }
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) { +InteractAcrossProfilesMainSwitch(storage) }
 
     companion object {
         const val KEY = "device_state_app_info_interact_across_profiles"

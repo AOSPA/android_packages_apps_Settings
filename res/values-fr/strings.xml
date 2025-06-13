@@ -47,10 +47,8 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"E-mail"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Aperçu précédent"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Aperçu suivant"</string>
-    <!-- no translation found for font_size_make_smaller_desc (319927200356692406) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (6739310980713118605) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="319927200356692406">"Diminuer la taille de la police"</string>
+    <string name="font_size_make_larger_desc" msgid="6739310980713118605">"Augmenter la taille de la police"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Toujours"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"L\'écran frontal s\'allume lorsque vous pliez votre appareil"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Balayer vers le haut pour continuer"</string>
@@ -771,7 +769,7 @@
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Choisir un nouveau type de verrouillage"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Choisir un mode de verrouillage pour les applis pro"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Choisir un autre déverrouillage du profil pro"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Pour plus de sécurité, définissez un mode de déverrouillage secondaire de l\'écran"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Pour plus de sécurité, définissez une méthode de secours pour le verrouillage et le déverrouillage de l\'écran"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Choisissez une méthode secondaire de déverrouillage de l\'écran"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Si vous oubliez le verrouillage de l\'écran, votre administrateur ne peut pas le réinitialiser."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Définir un autre verrouillage pour le profil pro"</string>
@@ -942,10 +940,8 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Connecter"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Déconnecter"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Associer et connecter"</string>
-    <!-- no translation found for bluetooth_connecting (5315496594905010438) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnecting (1643422701532873735) -->
-    <skip />
+    <string name="bluetooth_connecting" msgid="5315496594905010438">"Connexion…"</string>
+    <string name="bluetooth_disconnecting" msgid="1643422701532873735">"Déconnexion…"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Lorsque le Bluetooth est activé, votre appareil peut communiquer avec d\'autres appareils Bluetooth à proximité."</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"L\'activation du Bluetooth permet à votre appareil de communiquer avec les appareils Bluetooth à proximité. Certaines fonctionnalités, telles que Quick Share et Localiser mon appareil, utilisent le Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Quand le Bluetooth est activé, votre appareil peut communiquer avec d\'autres appareils Bluetooth à proximité.\n\nQuand il ne l\'est pas, les applis et services peuvent quand même rechercher les appareils à proximité à tout moment, afin d\'améliorer l\'expérience, par exemple, les fonctionnalités et services basés sur la localisation. Vous pouvez modifier ce réglage dans les paramètres de recherche Bluetooth."</string>
@@ -1184,6 +1180,8 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Partager ce réseau avec d\'autres utilisateurs de l\'appareil"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Tous les utilisateurs de cet appareil peuvent consulter un réseau partagé et s\'y connecter. Les administrateurs peuvent supprimer un réseau partagé. En savoir plus"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Autoriser les autres utilisateurs à modifier la configuration réseau"</string>
+    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Ce réseau ne dispose d\'aucun accès à Internet. Rester connecté ?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Connectivité limitée. Des services et applications peuvent ne pas fonctionner. Utiliser quand même ?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Ne plus demander pour ce réseau"</string>
@@ -2175,8 +2173,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Pavé tactile"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Pavé tactile et souris"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Souris"</string>
-    <!-- no translation found for mouse_settings_summary (1308610072914620926) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="1308610072914620926">"Vitesse du pointeur, personnalisation des boutons"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Vitesse du pointeur, gestes"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Taper pour cliquer"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Appuyer/faire glisser pour déplacer"</string>
@@ -2230,13 +2227,40 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Suivant"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Redémarrer"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"OK"</string>
-    <string name="action_corners_title" msgid="8971354126563421646">"Personnaliser les coins d\'action"</string>
-    <string name="action_corners_summary" msgid="4245089615854251124">"Utiliser les curseurs pour naviguer dans le système"</string>
-    <string name="action_corners_intro" msgid="4384209411870086502">"Choisissez les zones suivantes pour personnaliser les coins d\'action"</string>
-    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"Angle inférieur gauche"</string>
-    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"Angle inférieur droit"</string>
-    <string name="action_corners_top_left_title" msgid="6604149810499060560">"Angle supérieur gauche"</string>
-    <string name="action_corners_top_right_title" msgid="583996793984142329">"Angle supérieur droit"</string>
+    <!-- no translation found for action_corner_title (1489042651433221319) -->
+    <skip />
+    <!-- no translation found for action_corner_summary (695618538930535335) -->
+    <skip />
+    <!-- no translation found for action_corner_intro (8782001241997579665) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
+    <skip />
+    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
+    <skip />
+    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
+    <skip />
+    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
+    <skip />
+    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
+    <skip />
+    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
+    <skip />
+    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Touches de modification"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Changer le comportement des touches"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Tout réinitialiser"</string>
@@ -2315,8 +2339,7 @@
     <string name="last_time_used_label" msgid="7589377271406011659">"Dernière utilisation"</string>
     <string name="last_time_used_never" msgid="2936073559267990034">"jamais"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Durée d\'utilisation"</string>
-    <!-- no translation found for phone_information_v2_title (3373745314543222111) -->
-    <skip />
+    <string name="phone_information_v2_title" msgid="3373745314543222111">"Informations sur le téléphone V2"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Accessibilité"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Paramètres d\'accessibilité"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Affichage, interaction, audio"</string>
@@ -2355,8 +2378,7 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Commandes système"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Envoyer des commentaires"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Donnez-nous une note"</string>
-    <!-- no translation found for accessibility_disability_support_title (7934160403456751664) -->
-    <skip />
+    <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Contacter l\'assistance Google dédiée au handicap"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Enquête sur l\'accessibilité"</string>
     <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Aimeriez-vous profiter du thème sombre dans plus d\'applis ?"</string>
     <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Faites-nous part de vos commentaires"</string>
@@ -2383,6 +2405,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Raccourci vers Agrandissement"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Suivi du curseur"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Choisir comment la loupe suit le curseur"</string>
+    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
+    <skip />
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Déplacer l\'écran en continu selon les mouvements du pointeur"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Déplacer l\'écran en gardant le pointeur au milieu"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Déplacer l\'écran quand le pointeur touche les bords"</string>
@@ -2474,7 +2498,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Appuyez sur le bouton flottant"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Geste d\'accessibilité"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Appuyez sur le bouton Accessibilité (<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>) en bas de votre écran. Pour changer de fonctionnalité, appuyez de manière prolongée sur le bouton Accessibilité."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Balayez votre écran de bas en haut. Pour changer de fonctionnalité, balayez l\'écran vers le haut et appuyez de manière prolongée.}one{Balayez votre écran de bas en haut avec # doigt. Pour changer de fonctionnalité, balayez l\'écran vers le haut avec # doigt et appuyez de manière prolongée.}other{Balayez votre écran de bas en haut avec # doigts. Pour changer de fonctionnalité, balayez l\'écran vers le haut avec # doigts et appuyez de manière prolongée.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Balayez votre écran depuis le bord inférieur vers le haut. Pour changer de fonctionnalité, balayez l\'écran vers le haut et appuyez de manière prolongée.}one{Balayez votre écran depuis le bord inférieur vers le haut avec # doigt. Pour changer de fonctionnalité, balayez l\'écran vers le haut avec # doigt et appuyez de manière prolongée.}other{Balayez votre écran depuis le bord inférieur vers le haut avec # doigts. Pour changer de fonctionnalité, balayez l\'écran vers le haut avec # doigts et appuyez de manière prolongée.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Plus d\'options"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"En savoir plus sur <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Réglages rapides"</string>
@@ -2523,10 +2547,32 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Mise à jour auto de la loupe"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Mettre à jour la loupe si transition entre applis"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Bouton Marche/Arrêt pour raccrocher"</string>
-    <string name="accessibility_force_invert_title" msgid="5248504501753732051">"Passer plus d\'applis en mode sombre"</string>
-    <string name="accessibility_force_invert_summary" msgid="257503086198180749">"Applique le thème sombre à plus d\'applis. Peut ne pas fonctionner avec toutes les applis."</string>
+    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Supprimer les animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Réduire les mouvements à l\'écran"</string>
+    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combiner les canaux quand de l\'audio est lu"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Balance audio"</string>
@@ -3682,7 +3728,8 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Aucun}=1{1 programme défini}one{# programme défini}other{# programmes définis}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne pas déranger"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modes"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Réduisez les distractions et canalisez votre attention à l\'aide de modes pour le sommeil, le travail, la conduite ou toute autre occasion."</string>
+    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
+    <skip />
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Créer votre propre mode"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recevez uniquement les notifications des personnes et applications importantes"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Définir une programmation"</string>
@@ -4307,10 +4354,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"Gestionnaire d\'autorisations"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Mises à jour du partage de données pour la localisation"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Consulter les applis qui ont modifié la manière dont elles peuvent partager vos données de localisation"</string>
-    <!-- no translation found for app_function_access_settings_title (1474765429611652468) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (6465715820745848068) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Contrôle de l\'agent d\'autres applications"</string>
+    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Effectuez des actions sur votre appareil et dans d\'autres applis"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Appuyer pour réactiver"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Appuyez deux fois n\'importe où sur l\'écran pour réactiver l\'appareil."</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Ouverture des liens"</string>
@@ -4470,10 +4515,8 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Tout agrandir ou réduire"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"densité d\'affichage, zoom sur l\'écran, échelle, mise à l\'échelle"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Aperçu"</string>
-    <!-- no translation found for screen_zoom_make_smaller_desc (1450649885198381123) -->
-    <skip />
-    <!-- no translation found for screen_zoom_make_larger_desc (7125594310562596457) -->
-    <skip />
+    <string name="screen_zoom_make_smaller_desc" msgid="1450649885198381123">"Réduire la taille d\'affichage"</string>
+    <string name="screen_zoom_make_larger_desc" msgid="7125594310562596457">"Agrandir la taille d\'affichage"</string>
     <string name="disconnected" msgid="3469373726996129247">"Non connecté"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Non connecté"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> applications installées"</string>
@@ -5328,14 +5371,15 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Démarrer avec une page de 16 ko"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Démarrer l\'appareil avec kernel compatible avec les pages de 16 ko"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Passer du mode 4 ko au mode 16 ko"</string>
+    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
+    <skip />
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Vous utilisez le mode agnostique de page mémoire avec un kernel de 4 ko, et vous passez au mode 16 ko. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toute donnée stockée sur le téléphone alors que le bootloader est déverrouillé peut être exposée à un risque. L\'appareil sera redémarré. Certaines fonctionnalités seront désactivées dans ces modes, et certaines applications sont susceptibles de ne pas fonctionner. Pour remettre l\'appareil en mode Production, il vous faut ensuite repasser l\'appareil en mode 4 ko et verrouiller le bootloader, ce qui rétablit la configuration d\'usine de l\'appareil. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage OEM dans les Options pour les développeurs."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Passer du mode 16 ko au mode 4 ko"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Vous utilisez le mode agnostique de page mémoire avec un kernel de 16 ko, et vous passez au mode 4 ko. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toute donnée stockée sur le téléphone alors que le bootloader est déverrouillé peut être exposée à un risque. L\'appareil sera redémarré. Certaines fonctionnalités seront désactivées dans ces modes, et certaines applications sont susceptibles de ne pas fonctionner. Pour remettre l\'appareil en mode Production, il vous faut ensuite verrouiller le bootloader, ce qui rétablit la configuration d\'usine de l\'appareil. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage OEM dans les Options pour les développeurs."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Échec de la mise à jour du kernel vers un kernel compatible avec les pages de 16 ko."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Application des modifications"</string>
-    <string name="confirm_format_ext4_title" msgid="4754057414728537125">"Reformater l\'appareil en ext4 ? (obligatoire pour le mode 16 ko)"</string>
-    <string name="confirm_format_ext4_text" msgid="432847493298532536">"La partition des données de cet appareil doit être convertie en ext4 avant d\'utiliser l\'option 16 ko pour les développeurs. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toute donnée stockée sur le téléphone alors que le bootloader est déverrouillé peut être exposée à un risque. L\'activation du mode 16 ko nécessitera un ou plusieurs redémarrages après cette opération. Une fois que vous êtes dans ce mode, vous pouvez passer du mode 4 ko au mode 16 ko et inversement par le biais d\'un seul redémarrage. Certaines fonctionnalités seront désactivées dans ces modes, et certaines applications sont susceptibles de ne pas fonctionner. Pour remettre l\'appareil en mode Production, il vous faut repasser en mode 4 ko, puis verrouiller le bootloader, ce qui rétablit la configuration d\'usine de l\'appareil. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage OEM dans les Options pour les développeurs. Après confirmation, l\'appareil sera nettoyé et le système de fichiers sera remplacé par ext4. Une fois cette opération terminée, revenez pour repasser en mode 16 ko."</string>
-    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Effacer les données"</string>
+    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
+    <skip />
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Échec du reformatage et de l\'effacement de la partition de données vers ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Nécessite le déverrouillage du bootloader"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"Le bootloader de cet appareil doit être déverrouillé pour pouvoir utiliser l\'option 16 ko pour les développeurs. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toute donnée stockée sur le téléphone alors que le bootloader est déverrouillé peut être exposée à un risque. L\'ensemble des données et paramètres de l\'utilisateur seront effacés après l\'activation du mode 16 ko. Une fois le bootloader déverrouillé, l\'activation du mode 16 ko nécessitera deux redémarrages. Une fois que vous êtes dans ce mode, vous pouvez passer du mode 4 ko au mode 16 ko et inversement par le biais d\'un seul redémarrage. Certaines fonctionnalités seront désactivées dans ces modes, et certaines applications sont susceptibles de ne pas fonctionner. Pour remettre l\'appareil en mode Production, il vous faut repasser en mode 4 ko, puis verrouiller l\'OEM/le bootloader (cela rétablit la configuration d\'usine de l\'appareil). Verrouillez le bootloader, puis réessayez. Vous trouverez des instructions pour vous aider à réaliser cette opération à l\'adresse &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5855,8 +5899,7 @@
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Définir un code de contrôle parental"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Confirmer le code"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Le code PIN a bien été mis à jour."</string>
-    <!-- no translation found for supervision_promo_footer_action_button_description (7617359721703338141) -->
-    <skip />
+    <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Ouvrir l\'appli"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Supprimer le code ?"</string>
     <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"Cela supprimera votre code actuel pour tous les utilisateurs de cet appareil et désactivera les contrôles que vous avez configurés. Cette action est irréversible."</string>
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"Mettez d\'abord en pause les commandes sur les autres profils"</string>

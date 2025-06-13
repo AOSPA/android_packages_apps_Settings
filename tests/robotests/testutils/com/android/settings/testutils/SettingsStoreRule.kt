@@ -31,6 +31,14 @@ import org.junit.runner.Description
  */
 class SettingsStoreRule : TestWatcher() {
     override fun starting(description: Description) {
+        reset()
+    }
+
+    override fun finished(description: Description) {
+        reset()
+    }
+
+    private fun reset() {
         SettingsGlobalStore.resetInstance()
         SettingsSecureStore.resetInstance()
         SettingsSystemStore.resetInstance()

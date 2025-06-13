@@ -36,6 +36,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 /** "Apps" -> "Special app access" -> "Notification read, reply & control" */
 @ProvidePreferenceScreen(AppsNotificationAccessScreen.KEY)
@@ -63,8 +64,8 @@ open class AppsNotificationAccessScreen : PreferenceScreenMixin {
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
         Intent(ACTION_NOTIFICATION_LISTENER_SETTINGS)
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             val services = loadNotificationListenerServices(context)
             for (service in services) {
                 val arguments =

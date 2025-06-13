@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceBinding
+import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
 @ProvidePreferenceScreen(HardwareInfoScreen.KEY)
@@ -66,8 +67,8 @@ open class HardwareInfoScreen :
         return super.createWidget(context).apply { isCopyingEnabled = true }
     }
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +DeviceModelPreference()
             +HardwareVersionPreference()
         }

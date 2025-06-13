@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.Activity
 import android.app.supervision.SupervisionManager
 import android.content.Context
 import android.content.ContextWrapper
@@ -26,6 +27,7 @@ import android.os.UserManager
 import android.os.UserManager.USER_TYPE_FULL_SECONDARY
 import android.os.UserManager.USER_TYPE_FULL_SYSTEM
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
@@ -42,6 +44,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
@@ -57,8 +60,10 @@ class SupervisionDeletePinPreferenceTest {
     private val appContext: Context = ApplicationProvider.getApplicationContext()
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
+    private val mockActivityResultLauncher = mock<ActivityResultLauncher<Intent>>()
     private var startedIntent: Intent? = null
     private var notifiedKey: String? = null
+    private var capturedActivityResultCallback: ActivityResultCallback<ActivityResult>? = null
     private val context =
         object : ContextWrapper(appContext) {
             override fun getSystemService(name: String): Any =
@@ -113,7 +118,8 @@ class SupervisionDeletePinPreferenceTest {
                 contract: ActivityResultContract<I, O>,
                 callback: ActivityResultCallback<O>,
             ): ActivityResultLauncher<I> {
-                return mock {} // unused
+                capturedActivityResultCallback = callback as? ActivityResultCallback<ActivityResult>
+                return mockActivityResultLauncher as ActivityResultLauncher<I>
             }
         }
 
@@ -218,6 +224,10 @@ class SupervisionDeletePinPreferenceTest {
         }
 
         preference.onConfirmDeleteClick()
+        verifyConfirmPinActivityStarted()
+
+        val result = ActivityResult(Activity.RESULT_OK, null)
+        capturedActivityResultCallback?.onActivityResult(result)
         verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
         verify(mockSupervisionManager).setSupervisionEnabled(false)
         verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
@@ -238,6 +248,10 @@ class SupervisionDeletePinPreferenceTest {
         }
 
         preference.onConfirmDeleteClick()
+        verifyConfirmPinActivityStarted()
+
+        val result = ActivityResult(Activity.RESULT_OK, null)
+        capturedActivityResultCallback?.onActivityResult(result)
         // We should disable supervision before the supervising profile is removed
         verify(mockSupervisionManager).setSupervisionEnabled(false)
         verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
@@ -245,10 +259,36 @@ class SupervisionDeletePinPreferenceTest {
         assertAlertDialogHasMessage(R.string.supervision_delete_pin_error_message)
     }
 
+    @Test
+    fun onPinConfirmed_resultCanceled_doesNothing() {
+        val result = ActivityResult(Activity.RESULT_CANCELED, null)
+        capturedActivityResultCallback?.onActivityResult(result)
+
+        verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
+        verify(mockUserManager, never()).removeUser(UserHandle(SUPERVISING_USER_ID))
+        assertThat(startedIntent).isNull()
+        assertThat(notifiedKey).isNull()
+    }
+
     private fun assertAlertDialogHasMessage(resId: Int) {
         val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()
         val shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog)
         assertThat(shadowDialog.message).isEqualTo(appContext.getString(resId))
+    }
+
+    private fun verifyConfirmPinActivityStarted() {
+        val intentCaptor = argumentCaptor<Intent>()
+        verify(mockActivityResultLauncher).launch(intentCaptor.capture())
+        assertThat(intentCaptor.allValues.size).isEqualTo(1)
+        val intent = intentCaptor.firstValue
+        assertThat(intent.component?.className)
+            .isEqualTo(ConfirmSupervisionCredentialsActivity::class.java.name)
+        val extras = intent.extras
+        assertThat(extras).isNotNull()
+        assertThat(
+                extras!!.getBoolean(ConfirmSupervisionCredentialsActivity.EXTRA_FORCE_CONFIRMATION)
+            )
+            .isTrue()
     }
 
     companion object {

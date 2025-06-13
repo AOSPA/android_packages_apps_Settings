@@ -38,6 +38,7 @@ import com.android.settingslib.preference.CatalystScreenTestCase
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
 import com.google.common.truth.Truth.assertWithMessage
+import kotlinx.coroutines.test.TestScope
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -54,6 +55,7 @@ import org.robolectric.shadows.ShadowLooper
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowAudioManager::class])
 class VibrationScreenTest : CatalystScreenTestCase() {
+    private val testScope = TestScope()
     private lateinit var vibratorMock: Vibrator
 
     private val resourcesSpy: Resources =
@@ -283,11 +285,12 @@ class VibrationScreenTest : CatalystScreenTestCase() {
 
     private fun findVibrationIntensitySwitchPreferences(): List<String> {
         val switches = ArrayList<String>()
-        preferenceScreenCreator.getPreferenceHierarchy(context).forEachRecursively { child ->
-            if (child.metadata is VibrationIntensitySwitchPreference) {
-                switches.add(child.metadata.key)
+        preferenceScreenCreator.getPreferenceHierarchy(context, testScope)
+            .forEachRecursively { child ->
+                if (child.metadata is VibrationIntensitySwitchPreference) {
+                    switches.add(child.metadata.key)
+                }
             }
-        }
         return switches
     }
 

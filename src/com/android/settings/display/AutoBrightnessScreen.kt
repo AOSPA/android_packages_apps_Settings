@@ -45,6 +45,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(AutoBrightnessScreen.KEY)
 open class AutoBrightnessScreen :
@@ -76,7 +77,8 @@ open class AutoBrightnessScreen :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {}
 
     override fun storage(context: Context): KeyValueStore =
         AutoBrightnessDataStore(SettingsSystemStore.get(context))

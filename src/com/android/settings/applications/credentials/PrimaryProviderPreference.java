@@ -29,7 +29,6 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.RestrictedPreference;
 
 /**
@@ -179,7 +178,7 @@ public class PrimaryProviderPreference extends RestrictedPreference {
 
     @Override
     protected int getSecondTargetResId() {
-        return R.layout.preference_widget_edit;
+        return R.layout.preference_widget_credman_edit;
     }
 
     @Override

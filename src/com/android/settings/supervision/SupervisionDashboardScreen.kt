@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
+import kotlinx.coroutines.CoroutineScope
 
 /**
  * Supervision settings landing page (Settings > Supervision).
@@ -77,8 +78,8 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
 
     override fun hasCompleteHierarchy() = true
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             val supervisionClient = getSupervisionClient(context)
             +SupervisionMainSwitchPreference(context, supervisionClient) order -200
             +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {

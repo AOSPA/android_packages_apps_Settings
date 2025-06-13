@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.asyncPreferenceHierarchy
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(AppStorageAppListScreen.KEY)
 open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyGenerator<Boolean> {
@@ -60,7 +61,8 @@ open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyG
             else -> null // not yet support highlight on specific app
         }
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {}
 
     override val defaultType: Boolean
         get() = false // do not include system apps

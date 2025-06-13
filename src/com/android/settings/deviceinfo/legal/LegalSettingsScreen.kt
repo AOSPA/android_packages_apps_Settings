@@ -24,6 +24,7 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(LegalSettingsScreen.KEY)
 open class LegalSettingsScreen : PreferenceScreenMixin {
@@ -42,8 +43,8 @@ open class LegalSettingsScreen : PreferenceScreenMixin {
 
     override fun fragmentClass(): Class<out Fragment>? = LegalSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +LegalPreference("copyright", R.string.copyright_title, "android.settings.COPYRIGHT")
             +LegalPreference("license", R.string.license_title, "android.settings.LICENSE")
             +LegalPreference("terms", R.string.terms_title, "android.settings.TERMS")

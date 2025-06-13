@@ -39,6 +39,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.spaprivileged.model.app.AppStorageRepositoryImpl
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -84,8 +85,8 @@ open class AppInfoStorageScreen(context: Context, override val arguments: Bundle
             highlightPreference(arguments, metadata?.key)
         }
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             val stats = context.getStatsForPackage() ?: return@preferenceHierarchy
             +AppSizePreference(stats, repo)
             +AppUserDataSizePreference(stats, repo)

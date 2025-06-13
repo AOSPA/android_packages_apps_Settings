@@ -15,11 +15,15 @@
  */
 package com.android.settings.supervision
 
+import android.app.Activity
 import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
 import android.content.Context
+import android.content.Intent
 import android.os.UserManager
 import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.Preference
@@ -42,6 +46,7 @@ class SupervisionDeletePinPreference() :
     Preference.OnPreferenceClickListener {
 
     private lateinit var lifeCycleContext: PreferenceLifecycleContext
+    private lateinit var confirmPinLauncher: ActivityResultLauncher<Intent>
 
     override val key: String
         get() = KEY
@@ -54,6 +59,12 @@ class SupervisionDeletePinPreference() :
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         lifeCycleContext = context
+
+        confirmPinLauncher =
+            context.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                result ->
+                onPinConfirmed(result.resultCode)
+            }
     }
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
@@ -120,29 +131,41 @@ class SupervisionDeletePinPreference() :
 
     @VisibleForTesting
     fun onConfirmDeleteClick() {
-        val userManager = lifeCycleContext.getSystemService(UserManager::class.java)
-        val supervisionManager = lifeCycleContext.getSystemService(SupervisionManager::class.java)
-        if (userManager == null || supervisionManager == null) {
-            Log.e(TAG, "Can't delete supervision data; system services cannot be found.")
-            return
-        }
-        val supervisingUser = lifeCycleContext.supervisingUserHandle
-        if (supervisingUser == null) {
-            Log.e(TAG, "Can't delete supervision data; supervising user does not exist.")
-            return
-        }
-        // Supervision must be disabled before the supervising profile can be removed
-        supervisionManager.setSupervisionEnabled(false)
-        lifeCycleContext.notifyPreferenceChange(KEY)
-        if (userManager.removeUser(supervisingUser)) {
-            supervisionManager.setSupervisionRecoveryInfo(null)
-            SubSettingLauncher(lifeCycleContext)
-                .setDestination(SupervisionDashboardFragment::class.java.name)
-                .setSourceMetricsCategory(SettingsEnums.SUPERVISION_DASHBOARD)
-                .launch()
-        } else {
-            Log.e(TAG, "Can't delete supervision data; unable to delete supervising profile.")
-            showErrorDialog(lifeCycleContext)
+        val intent =
+            Intent(lifeCycleContext, ConfirmSupervisionCredentialsActivity::class.java).apply {
+                putExtra(ConfirmSupervisionCredentialsActivity.EXTRA_FORCE_CONFIRMATION, true)
+            }
+        confirmPinLauncher.launch(intent)
+    }
+
+    private fun onPinConfirmed(resultCode: Int) {
+        if (resultCode == Activity.RESULT_OK) {
+            val userManager = lifeCycleContext.getSystemService(UserManager::class.java)
+            val supervisionManager =
+                lifeCycleContext.getSystemService(SupervisionManager::class.java)
+            if (userManager == null || supervisionManager == null) {
+                Log.e(TAG, "Can't delete supervision data; system services cannot be found.")
+                return
+            }
+            val supervisingUser = lifeCycleContext.supervisingUserHandle
+            if (supervisingUser == null) {
+                Log.e(TAG, "Can't delete supervision data; supervising user does not exist.")
+                return
+            }
+
+            // Supervision must be disabled before the supervising profile can be removed
+            supervisionManager.setSupervisionEnabled(false)
+            lifeCycleContext.notifyPreferenceChange(KEY)
+            if (userManager.removeUser(supervisingUser)) {
+                supervisionManager.setSupervisionRecoveryInfo(null)
+                SubSettingLauncher(lifeCycleContext)
+                    .setDestination(SupervisionDashboardFragment::class.java.name)
+                    .setSourceMetricsCategory(SettingsEnums.SUPERVISION_DASHBOARD)
+                    .launch()
+            } else {
+                Log.e(TAG, "Can't delete supervision data; unable to delete supervising profile.")
+                showErrorDialog(lifeCycleContext)
+            }
         }
     }
 

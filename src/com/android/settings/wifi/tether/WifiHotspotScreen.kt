@@ -20,7 +20,6 @@ import android.Manifest
 import android.app.settings.SettingsEnums.ACTION_WIFI_HOTSPOT
 import android.app.settings.SettingsEnums.WIFI_TETHER_SETTINGS
 import android.content.Context
-import android.content.Intent
 import android.net.TetheringManager
 import android.net.TetheringManager.TETHERING_WIFI
 import android.net.wifi.WifiClient
@@ -28,13 +27,18 @@ import android.net.wifi.WifiManager
 import android.os.UserManager
 import android.text.BidiFormatter
 import android.util.Log
+import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.Settings.WifiTetherSettingsActivity
 import com.android.settings.Utils
 import com.android.settings.contract.KEY_WIFI_HOTSPOT
-import com.android.settings.core.SubSettingLauncher
+import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.datausage.DataSaverMainSwitchPreference
 import com.android.settings.datausage.DataSaverMainSwitchPreference.Companion.KEY as DATA_SAVER_KEY
+import com.android.settings.flags.Flags
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.restriction.PreferenceRestrictionMixin
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.wifi.WifiUtils.canShowWifiHotspot
 import com.android.settings.wifi.utils.tetheringManager
 import com.android.settings.wifi.utils.wifiApState
@@ -47,29 +51,60 @@ import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.Permissions
+import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceChangeReason
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
-import com.android.settingslib.metadata.SwitchPreference
+import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.wifi.WifiUtils.Companion.getWifiTetherSummaryForConnectedDevices
+import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
-class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStore) :
-    SwitchPreference(KEY, R.string.wifi_hotspot_checkbox_text),
+@ProvidePreferenceScreen(WifiHotspotScreen.KEY)
+open class WifiHotspotScreen(context: Context) :
+    PreferenceScreenMixin,
+    BooleanValuePreference,
     PrimarySwitchPreferenceBinding,
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
     PreferenceRestrictionMixin {
 
+    private val wifiHotspotStore =
+        WifiHotspotStore(context, DataSaverMainSwitchPreference.createDataStore(context))
+
+    override val key: String
+        get() = KEY
+
+    override val title: Int
+        get() = R.string.wifi_hotspot_checkbox_text
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_network
+
+    override fun getMetricsCategory() = WIFI_TETHER_SETTINGS
+
+    // This screen comes from the preference and uses the same flag with its parent.
+    override fun isFlagEnabled(context: Context) = Flags.catalystTetherSettings()
+
+    override fun hasCompleteHierarchy() = false
+
+    override fun fragmentClass(): Class<out Fragment>? = WifiTetherSettings::class.java
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, WifiTetherSettingsActivity::class.java, metadata?.key)
+
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {}
+
     override val preferenceActionMetrics: Int
         get() = ACTION_WIFI_HOTSPOT
 
     override fun tags(context: Context) = arrayOf(KEY_WIFI_HOTSPOT)
-
-    private val wifiHotspotStore = WifiHotspotStore(context, dataSaverStore)
 
     override fun isAvailable(context: Context) =
         canShowWifiHotspot(context) &&
@@ -101,15 +136,6 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
                 }
         }
 
-    override fun intent(context: Context): Intent? =
-        SubSettingLauncher(context)
-            .apply {
-                setDestination(WifiTetherSettings::class.java.name)
-                setTitleRes(R.string.wifi_hotspot_checkbox_text)
-                setSourceMetricsCategory(WIFI_TETHER_SETTINGS)
-            }
-            .toIntent()
-
     override fun isEnabled(context: Context) =
         wifiHotspotStore.dataSaverStore.getBoolean(DATA_SAVER_KEY) != true &&
             super<PreferenceRestrictionMixin>.isEnabled(context)
@@ -126,12 +152,8 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(
-        context: Context,
-        value: Boolean?,
-        callingPid: Int,
-        callingUid: Int,
-    ) = ReadWritePermit.ALLOW
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
 
     override val sensitivityLevel
         get() = SensitivityLevel.HIGH_SENSITIVITY
@@ -213,4 +235,7 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
         const val KEY = "wifi_tether"
     }
 }
-// LINT.ThenChange(WifiTetherPreferenceController.java)
+// LINT.ThenChange(
+//     WifiTetherPreferenceController.java,
+//     WifiTetherSettings.java,
+// )

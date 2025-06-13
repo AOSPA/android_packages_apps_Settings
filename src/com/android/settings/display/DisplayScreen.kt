@@ -35,6 +35,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import com.android.systemui.shared.Flags.ambientAod
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(DisplayScreen.KEY)
 open class DisplayScreen :
@@ -63,8 +64,8 @@ open class DisplayScreen :
 
     override fun fragmentClass(): Class<out Fragment>? = DisplaySettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +Category("category_brightness", R.string.category_name_brightness) order -200 += {
                 +BrightnessLevelPreference()
                 +AutoBrightnessScreen.KEY

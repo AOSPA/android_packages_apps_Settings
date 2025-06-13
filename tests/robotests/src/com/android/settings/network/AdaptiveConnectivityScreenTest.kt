@@ -30,6 +30,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.test.TestScope
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -41,6 +42,8 @@ class AdaptiveConnectivityScreenTest() : CatalystScreenTestCase() {
         get() = Flags.FLAG_CATALYST_ADAPTIVE_CONNECTIVITY
     private lateinit var fragment: AdaptiveConnectivitySettings
     private val mContext: Context = ApplicationProvider.getApplicationContext()
+    private val testScope = TestScope()
+
     override fun migration() {}
 
     @Test
@@ -51,8 +54,7 @@ class AdaptiveConnectivityScreenTest() : CatalystScreenTestCase() {
     @Test
     fun getPreferenceHierarchy_returnsHierarchy() {
         val hierarchy: PreferenceHierarchy =
-            preferenceScreenCreator.getPreferenceHierarchy(mContext)
-        (appContext)
+            preferenceScreenCreator.getPreferenceHierarchy(mContext, testScope)
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_ENABLED)).isNotNull()
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED)).isNull()
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED)).isNull()
@@ -62,8 +64,7 @@ class AdaptiveConnectivityScreenTest() : CatalystScreenTestCase() {
     @EnableFlags(Flags.FLAG_ENABLE_NESTED_TOGGLE_SWITCHES)
     fun getPreferenceHierarchy_flagEnabled_returnsHierarchyWithNestedToggle() {
         val hierarchy: PreferenceHierarchy =
-            preferenceScreenCreator.getPreferenceHierarchy(mContext)
-        (appContext)
+            preferenceScreenCreator.getPreferenceHierarchy(mContext, testScope)
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_ENABLED)).isNotNull()
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED)).isNotNull()
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED)).isNotNull()

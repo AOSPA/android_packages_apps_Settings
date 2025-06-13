@@ -47,6 +47,7 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateI
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateResponse
 import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
+import kotlinx.coroutines.CoroutineScope
 import java.util.Locale
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -134,7 +135,7 @@ class DeviceStateAppFunctionService : AppFunctionService() {
         )
     }
 
-    private suspend fun buildPerScreenDeviceStates(
+    private suspend fun CoroutineScope.buildPerScreenDeviceStates(
         screenKey: String,
         requestCategory: DeviceStateCategory,
     ): PerScreenDeviceStates? {
@@ -153,7 +154,7 @@ class DeviceStateAppFunctionService : AppFunctionService() {
         }
         val deviceStateItemList: MutableList<DeviceStateItem> = ArrayList()
         // TODO if child node is PreferenceScreen, recursively process it
-        screenMetaData.getPreferenceHierarchy().forEachRecursively {
+        screenMetaData.getPreferenceHierarchy(this).forEachRecursively {
             val metadata = it.metadata
             val config = settingConfigMap[metadata.key]
             // skip over explicitly disabled preferences
@@ -189,11 +190,13 @@ class DeviceStateAppFunctionService : AppFunctionService() {
         )
     }
 
-    private suspend fun PreferenceScreenMetadata.getPreferenceHierarchy(): PreferenceHierarchy =
+    private suspend fun PreferenceScreenMetadata.getPreferenceHierarchy(
+        coroutineScope: CoroutineScope
+    ) =
         when (this) {
             is PreferenceHierarchyGenerator<*> ->
                 generatePreferenceHierarchy(applicationContext, defaultType)
-            else -> getPreferenceHierarchy(applicationContext)
+            else -> getPreferenceHierarchy(applicationContext, coroutineScope)
         }
 
     private fun createEnglishContext(): Context {

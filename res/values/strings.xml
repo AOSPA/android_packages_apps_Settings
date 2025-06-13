@@ -455,7 +455,7 @@
     <string name="app_locale_preference_title">Language</string>
 
     <!-- Title for the locale picker category. [CHAR LIMIT=50]-->
-    <string name="locale_picker_category_title">Preferred Language</string>
+    <string name="locale_picker_category_title">Preferred Languages</string>
 
     <!-- Title for the Apps' locale menu entry [CHAR LIMIT=50]-->
     <string name="app_locales_picker_menu_title">App languages</string>
@@ -541,10 +541,10 @@
     <string name="button_label_confirmation_of_system_locale_change">Change</string>
 
     <!-- Title for saying this selected locale is unavailable to use. [CHAR LIMIT=50]-->
-    <string name="title_unavailable_locale">%s not available</string>
+    <string name="title_unavailable_locale">Can’t set <xliff:g id="selected_language" example="Aghem">%s</xliff:g> as system language</string>
 
     <!-- The text of the confirmation dialog for saying this selected locale is unavailable to use. [CHAR LIMIT=NONE]-->
-    <string name="desc_unavailable_locale">This language can’t be used as a system language, but you’ve let apps and websites know you prefer this language.</string>
+    <string name="desc_unavailable_locale">Your device does not support this language, but apps will know that you prefer this language</string>
 
     <!-- Menu item in the locale menu  [CHAR LIMIT=30] -->
     <string name="locale_search_menu">Search</string>
@@ -572,6 +572,12 @@
     <string name="body_change_system_locale_region">Your device will keep <xliff:g id="system_language" example="English">%1$s</xliff:g> as a system language</string>
     <!-- Description for the numbering system language. [CHAR LIMIT=NONE]-->
     <string name="top_intro_numbering_system_title">Choose how your device, websites, and apps display numbers</string>
+    <!-- Move up item in the preferred locale menu [CHAR LIMIT=NONE]-->
+    <string name="preferred_locale_menu_up">Move up</string>
+    <!-- Move down item in the preferred locale menu [CHAR LIMIT=NONE]-->
+    <string name="preferred_locale_menu_down">Move down</string>
+    <!-- Delete item in the preferred locale menu [CHAR LIMIT=NONE]-->
+    <string name="preferred_locale_menu_remove">Remove</string>
 
     <!-- Regional Preferences begin -->
     <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
@@ -660,6 +666,10 @@
 
     <!-- This text shows in the language picker when the system is not translated into that languages [CHAR LIMIT=80] -->
     <string name="locale_not_translated">Not available as system language</string>
+    <!-- Title for removing locale from preferred list. [CHAR LIMIT=50]-->
+    <string name="dlg_title_delete_preferred_locale">Remove <xliff:g id="removed_language" example="Français (France)">%s</xliff:g>?</string>
+    <!-- The text of the removing dialog showing the locale will be removed from the list. [CHAR LIMIT=NONE]-->
+    <string name="dlg_desc_delete_preferred_locale"><xliff:g id="removed_language" example="Français (France)">%s</xliff:g> will be removed from your preferred languages. You can add it again later.</string>
 
     <!-- Label for an accessibility action that moves a language up in the ordered language list [CHAR LIMIT=20] -->
     <string name="action_drag_label_move_up">Move up</string>
@@ -1064,6 +1074,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_agree">I agree</string>
     <!-- The content description for rename a fingerprint. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_rename_description">Double tap to rename</string>
+    <!-- The content description for recognition of a fingerprint. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_recognition_description"><xliff:g id="fp_name" example="Finger 1">%1$s</xliff:g> recognized</string>
     <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
     <string name="setup_fingerprint_enroll_skip_title">Skip fingerprint?</string>
     <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->

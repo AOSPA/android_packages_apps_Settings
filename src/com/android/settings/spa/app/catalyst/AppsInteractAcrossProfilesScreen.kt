@@ -31,6 +31,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(AppInteractAcrossProfilesAppListScreen.KEY)
 open class AppInteractAcrossProfilesAppListScreen : PreferenceScreenMixin {
@@ -57,8 +58,8 @@ open class AppInteractAcrossProfilesAppListScreen : PreferenceScreenMixin {
         // supported.
         Intent(ACTION_MANAGE_CROSS_PROFILE_ACCESS)
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             val packageManager = context.packageManager
             val userManager = context.getSystemService(UserManager::class.java)
             val crossProfileApps = context.getSystemService(CrossProfileApps::class.java)

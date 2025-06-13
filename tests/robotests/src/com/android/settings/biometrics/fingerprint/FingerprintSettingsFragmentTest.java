@@ -36,6 +36,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -63,6 +64,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -70,6 +72,7 @@ import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.biometrics.fingerprint.feature.FingerprintExtPreferencesProvider;
+import com.android.settings.biometrics.fingerprint.feature.PrimarySwitchIntentPreference;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -453,6 +456,74 @@ public class FingerprintSettingsFragmentTest {
 
         Preference preference1 = mFragment.findPreference(key1);
         assertThat(preference1).isEqualTo(mRestrictedPreference1);
+    }
+
+    @Test
+    public void testPrimarySwitchIntentPreferenceNullResultKey() {
+        PrimarySwitchIntentPreference spiedPrimarySwitchIntentPref = spy(
+                new PrimarySwitchIntentPreference(mContext) {
+                    @Override
+                    public String getKey() {
+                        return "TEST_KEY";
+                    }
+                    @Override
+                    public String getConfirmDialogFragmentResultKey() {
+                        return null;
+                    }
+                    @NonNull
+                    @Override
+                    public Intent getLaunchedIntent(@NonNull byte[] token) {
+                        return new Intent();
+                    }
+                });
+        when(mExtPreferencesProvider.getSize()).thenReturn(1);
+        when(mExtPreferencesProvider.newPreference(eq(0),
+                any(FingerprintExtPreferencesProvider.PreferenceInflater.class)))
+                .thenReturn(spiedPrimarySwitchIntentPref);
+
+        Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_UDFPS_OPTICAL, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        // Verify click, and no changeListener for later switching toggle case
+        verify(spiedPrimarySwitchIntentPref).setOnPreferenceClickListener(any());
+        verify(spiedPrimarySwitchIntentPref, never()).setOnPreferenceChangeListener(any());
+    }
+
+    @Test
+    public void testPrimarySwitchIntentPreferenceEmptyResultKey() {
+        PrimarySwitchIntentPreference spiedPrimarySwitchIntentPref = spy(
+                new PrimarySwitchIntentPreference(mContext) {
+                    @Override
+                    public String getKey() {
+                        return "TEST_KEY";
+                    }
+                    @Override
+                    public String getConfirmDialogFragmentResultKey() {
+                        return "";
+                    }
+                    @NonNull
+                    @Override
+                    public Intent getLaunchedIntent(@NonNull byte[] token) {
+                        return new Intent();
+                    }
+                });
+        when(mExtPreferencesProvider.getSize()).thenReturn(1);
+        when(mExtPreferencesProvider.newPreference(eq(0),
+                any(FingerprintExtPreferencesProvider.PreferenceInflater.class)))
+                .thenReturn(spiedPrimarySwitchIntentPref);
+
+        Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_UDFPS_OPTICAL, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        // Verify click, and no changeListener for later switching toggle case
+        verify(spiedPrimarySwitchIntentPref).setOnPreferenceClickListener(any());
+        verify(spiedPrimarySwitchIntentPref, never()).setOnPreferenceChangeListener(any());
     }
 
     private void setSensor(@FingerprintSensorProperties.SensorType int sensorType,

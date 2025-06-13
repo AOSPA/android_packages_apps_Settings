@@ -18,6 +18,8 @@ package com.android.settings.connecteddevice.usb;
 
 import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
 
+import static java.util.Objects.requireNonNull;
+
 import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.net.TetheringManager;
@@ -25,22 +27,20 @@ import android.os.Handler;
 import android.os.HandlerExecutor;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.RestrictedSelectorWithWidgetPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * This class controls the radio buttons for choosing between different USB functions.
- */
+/** This class controls the radio buttons for choosing between different USB functions. */
 public class UsbDetailsFunctionsController extends UsbDetailsController
         implements SelectorWithWidgetPreference.OnClickListener {
 
@@ -58,16 +58,14 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
         FUNCTIONS_MAP.put(UsbManager.FUNCTION_NONE, R.string.usb_use_charging_only);
     }
 
-    private PreferenceCategory mProfilesContainer;
+    @Nullable private PreferenceCategory mProfilesContainer;
     private TetheringManager mTetheringManager;
     private Handler mHandler;
-    @VisibleForTesting
-    OnStartTetheringCallback mOnStartTetheringCallback;
-    @VisibleForTesting
-    long mPreviousFunction;
+    @VisibleForTesting OnStartTetheringCallback mOnStartTetheringCallback;
+    @VisibleForTesting long mPreviousFunction;
 
-    public UsbDetailsFunctionsController(Context context, UsbDetailsFragment fragment,
-            UsbBackend backend) {
+    public UsbDetailsFunctionsController(
+            Context context, UsbDetailsFragment fragment, UsbBackend backend) {
         super(context, fragment, backend);
         mTetheringManager = context.getSystemService(TetheringManager.class);
         mOnStartTetheringCallback = new OnStartTetheringCallback();
@@ -79,20 +77,26 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mProfilesContainer = screen.findPreference(getPreferenceKey());
-        refresh(/* connected */ false, /* functions */ mUsbBackend.getDefaultUsbFunctions(),
-                /* powerRole */ 0, /* dataRole */ 0);
+        refresh(
+                /* connected */ false, /* functions */
+                mUsbBackend.getDefaultUsbFunctions(),
+                /* powerRole */ 0, /* dataRole */
+                0);
     }
 
     /** Gets a switch preference for the particular option, creating it if needed. */
     private RestrictedSelectorWithWidgetPreference getProfilePreference(String key, int titleId) {
-        RestrictedSelectorWithWidgetPreference pref = mProfilesContainer.findPreference(key);
+        RestrictedSelectorWithWidgetPreference pref =
+                requireNonNull(mProfilesContainer).findPreference(key);
         if (pref == null) {
-            pref = new RestrictedSelectorWithWidgetPreference(mProfilesContainer.getContext());
+            pref =
+                    new RestrictedSelectorWithWidgetPreference(
+                            requireNonNull(mProfilesContainer).getContext());
             pref.setKey(key);
             pref.setTitle(titleId);
             pref.setSingleLineTitle(false);
             pref.setOnClickListener(this);
-            mProfilesContainer.addPreference(pref);
+            requireNonNull(mProfilesContainer).addPreference(pref);
         }
         return pref;
     }
@@ -100,14 +104,22 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     @Override
     protected void refresh(boolean connected, long functions, int powerRole, int dataRole) {
         if (DEBUG) {
-            Log.d(TAG, "refresh() connected : " + connected + ", functions : " + functions
-                    + ", powerRole : " + powerRole + ", dataRole : " + dataRole);
+            Log.d(
+                    TAG,
+                    "refresh() connected : "
+                            + connected
+                            + ", functions : "
+                            + functions
+                            + ", powerRole : "
+                            + powerRole
+                            + ", dataRole : "
+                            + dataRole);
         }
         if (!connected || dataRole != DATA_ROLE_DEVICE) {
-            mProfilesContainer.setEnabled(false);
+            requireNonNull(mProfilesContainer).setEnabled(false);
         } else {
             // Functions are only available in device mode
-            mProfilesContainer.setEnabled(true);
+            requireNonNull(mProfilesContainer).setEnabled(true);
         }
         RestrictedSelectorWithWidgetPreference pref;
         for (long option : FUNCTIONS_MAP.keySet()) {
@@ -124,7 +136,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
                     pref.setChecked(functions == option);
                 }
             } else {
-                mProfilesContainer.removePreference(pref);
+                requireNonNull(mProfilesContainer).removePreference(pref);
             }
         }
     }
@@ -132,44 +144,55 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     @Override
     public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
         final long function = UsbBackend.usbFunctionsFromString(preference.getKey());
-        if (isAuthRequired(function)) {
-            requireAuthAndExecute(()->handleRadioButtonClicked(preference, function));
-        } else {
-            handleRadioButtonClicked(preference, function);
+        final long previousFunction = mUsbBackend.getCurrentFunctions();
+        if (DEBUG) {
+            Log.d(
+                    TAG,
+                    "onRadioButtonClicked() function : "
+                            + function
+                            + ", toString() : "
+                            + UsbManager.usbFunctionsToString(function)
+                            + ", previousFunction : "
+                            + previousFunction
+                            + ", toString() : "
+                            + UsbManager.usbFunctionsToString(previousFunction));
+        }
+
+        if (function != previousFunction
+                && !Utils.isMonkeyRunning()
+                && !isClickEventIgnored(function, previousFunction)) {
+            if (isAuthRequired(function)) {
+                requireAuthAndExecute(
+                        () -> handleRadioButtonClicked(preference, function, previousFunction));
+            } else {
+                handleRadioButtonClicked(preference, function, previousFunction);
+            }
         }
     }
 
-    private void handleRadioButtonClicked(SelectorWithWidgetPreference preference, long function) {
-        final long previousFunction = mUsbBackend.getCurrentFunctions();
-        if (DEBUG) {
-            Log.d(TAG, "onRadioButtonClicked() function : " + function + ", toString() : "
-                    + UsbManager.usbFunctionsToString(function) + ", previousFunction : "
-                    + previousFunction + ", toString() : "
-                    + UsbManager.usbFunctionsToString(previousFunction));
+    private void handleRadioButtonClicked(
+            SelectorWithWidgetPreference preference, long function, long previousFunction) {
+        mPreviousFunction = previousFunction;
+
+        // Update the UI in advance to make it looks smooth
+        final RestrictedSelectorWithWidgetPreference prevPref =
+                (RestrictedSelectorWithWidgetPreference)
+                        requireNonNull(mProfilesContainer)
+                                .findPreference(UsbBackend.usbFunctionsToString(mPreviousFunction));
+        if (prevPref != null) {
+            prevPref.setChecked(false);
+            preference.setChecked(true);
         }
-        if (function != previousFunction && !Utils.isMonkeyRunning()
-                && !isClickEventIgnored(function, previousFunction)) {
-            mPreviousFunction = previousFunction;
 
-            // Update the UI in advance to make it looks smooth
-            final RestrictedSelectorWithWidgetPreference prevPref =
-                    (RestrictedSelectorWithWidgetPreference)
-                            mProfilesContainer.findPreference(
-                                    UsbBackend.usbFunctionsToString(mPreviousFunction));
-            if (prevPref != null) {
-                prevPref.setChecked(false);
-                preference.setChecked(true);
-            }
-
-            if (function == UsbManager.FUNCTION_RNDIS || function == UsbManager.FUNCTION_NCM) {
-                // We need to have entitlement check for usb tethering, so use API in
-                // TetheringManager.
-                mTetheringManager.startTethering(
-                        TetheringManager.TETHERING_USB, new HandlerExecutor(mHandler),
-                        mOnStartTetheringCallback);
-            } else {
-                mUsbBackend.setCurrentFunctions(function);
-            }
+        if (function == UsbManager.FUNCTION_RNDIS || function == UsbManager.FUNCTION_NCM) {
+            // We need to have entitlement check for usb tethering, so use API in
+            // TetheringManager.
+            mTetheringManager.startTethering(
+                    TetheringManager.TETHERING_USB,
+                    new HandlerExecutor(mHandler),
+                    mOnStartTetheringCallback);
+        } else {
+            mUsbBackend.setCurrentFunctions(function);
         }
     }
 

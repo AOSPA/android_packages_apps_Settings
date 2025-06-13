@@ -40,7 +40,7 @@ val UserManager?.supervisingUserHandle: UserHandle?
     get() = this?.users?.firstOrNull { it.userType == USER_TYPE_PROFILE_SUPERVISING }?.userHandle
 
 /** Returns the package name of the system supervision app, or null if not found. */
-val Context.supervisionPackageName: String?
+val Context.systemSupervisionPackageName: String?
     get() {
         val roleManager = getSystemService(RoleManager::class.java)
         if (roleManager == null) {
@@ -57,10 +57,25 @@ val Context.supervisionPackageName: String?
     }
 
 fun Context.hasNecessarySupervisionComponent() =
-    hasNecessarySupervisionComponent(supervisionPackageName)
+    hasNecessarySupervisionComponent(systemSupervisionPackageName)
 
 fun Context.hasNecessarySupervisionComponent(packageName: String?): Boolean {
     if (packageName == null) return false
     val intent = Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION).setPackage(packageName)
     return packageManager?.queryIntentServices(intent, 0)?.isNotEmpty() == true
 }
+
+/**
+ * Returns the package names of the supervision apps.
+ *
+ * <p> Note that this is different from the system supervision app.
+ */
+val Context.supervisionRoleHolders: List<String>
+    get() {
+        val roleManager = getSystemService(RoleManager::class.java)
+        if (roleManager == null) {
+            Log.w(TAG, "RoleManager service not available.")
+            return emptyList()
+        }
+        return roleManager.getRoleHolders(RoleManager.ROLE_SUPERVISION) ?: emptyList()
+    }

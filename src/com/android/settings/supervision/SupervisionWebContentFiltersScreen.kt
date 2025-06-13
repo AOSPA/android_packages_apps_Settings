@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.forEachRecursively
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -76,8 +77,8 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
 
     override fun hasCompleteHierarchy() = true
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +SupervisionWebContentFiltersTopIntroPreference()
             +PreferenceCategory(
                 BROWSER_FILTERS_GROUP,
