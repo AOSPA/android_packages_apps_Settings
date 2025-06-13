@@ -44,6 +44,11 @@ public class TouchpadVisualizerPreferenceController extends
     }
 
     @Override
+    public boolean isAvailable(){
+        return InputSettings.isTouchpadVisualizerFeatureFlagEnabled();
+    }
+
+    @Override
     public boolean onPreferenceChange(@NonNull Preference preference, @Nullable Object newValue) {
         final boolean isEnabled = newValue != null ? (Boolean) newValue : false;
         InputSettings.setTouchpadVisualizer(mContext, isEnabled);

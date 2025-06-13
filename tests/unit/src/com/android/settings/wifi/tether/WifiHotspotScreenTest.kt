@@ -24,7 +24,7 @@ import android.net.wifi.WifiManager.WIFI_AP_STATE_DISABLED
 import android.net.wifi.WifiManager.WIFI_AP_STATE_ENABLED
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.flags.Flags
-import com.android.settingslib.preference.CatalystScreenTestCase
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.mockito.ArgumentMatchers.eq
@@ -34,7 +34,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
-class WifiHotspotScreenTest : CatalystScreenTestCase() {
+class WifiHotspotScreenTest : SettingsCatalystTestCase() {
     private val mockWifiManager = mock<WifiManager>()
     private val mockTetheringManager = mock<TetheringManager>()
 

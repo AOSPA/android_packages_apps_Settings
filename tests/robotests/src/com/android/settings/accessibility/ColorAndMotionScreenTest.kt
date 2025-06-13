@@ -16,25 +16,15 @@
 
 package com.android.settings.accessibility
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
-import com.android.settingslib.preference.CatalystScreenTestCase
-import com.google.common.truth.Truth.assertThat
-import org.junit.Test
-import org.junit.runner.RunWith
+import com.android.settings.testutils2.SettingsCatalystTestCase
 
-@RunWith(AndroidJUnit4::class)
-class ColorAndMotionScreenTest : CatalystScreenTestCase() {
+class ColorAndMotionScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator: PreferenceScreenMixin = ColorAndMotionScreen()
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_ACCESSIBILITY_COLOR_AND_MOTION
 
     override fun migration() {}
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(ColorAndMotionScreen.KEY)
-    }
 }

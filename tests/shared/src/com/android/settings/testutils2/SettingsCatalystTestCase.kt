@@ -13,18 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accounts
 
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
-import com.android.settings.testutils.shadow.ShadowAccountManager
-import com.android.settings.testutils.shadow.ShadowContentResolver
-import org.robolectric.annotation.Config
+package com.android.settings.testutils2
 
-@Config(shadows = [ShadowAccountManager::class, ShadowContentResolver::class])
-class AccountScreenTest : SettingsCatalystTestCase() {
-    override val preferenceScreenCreator = AccountScreen()
+import android.platform.test.flag.junit.SetFlagsRule
+import com.android.settingslib.preference.CatalystScreenTestCase
+import org.junit.Rule
 
-    override val flagName: String
-        get() = Flags.FLAG_CATALYST_ACCOUNTS_SCREEN
+@Suppress("DEPRECATION")
+abstract class SettingsCatalystTestCase : CatalystScreenTestCase() {
+    @get:Rule val setFlagsRule = SetFlagsRule()
+
+    /** Flag to control catalyst screen. */
+    protected abstract val flagName: String
+
+    override fun enableCatalystScreen() {
+        setFlagsRule.enableFlags(flagName)
+    }
+
+    override fun disableCatalystScreen() {
+        setFlagsRule.disableFlags(flagName)
+    }
 }

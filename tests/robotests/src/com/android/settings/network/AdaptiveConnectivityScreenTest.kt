@@ -25,18 +25,15 @@ import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.metadata.PreferenceHierarchy
-import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.TestScope
 import org.junit.Test
-import org.junit.runner.RunWith
 
 @Suppress("DEPRECATION")
-@RunWith(AndroidJUnit4::class)
-class AdaptiveConnectivityScreenTest() : CatalystScreenTestCase() {
+class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = AdaptiveConnectivityScreen()
     override val flagName
         get() = Flags.FLAG_CATALYST_ADAPTIVE_CONNECTIVITY
@@ -45,11 +42,6 @@ class AdaptiveConnectivityScreenTest() : CatalystScreenTestCase() {
     private val testScope = TestScope()
 
     override fun migration() {}
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(AdaptiveConnectivityScreen.KEY)
-    }
 
     @Test
     fun getPreferenceHierarchy_returnsHierarchy() {

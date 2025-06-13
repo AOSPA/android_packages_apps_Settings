@@ -42,6 +42,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
+import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -94,6 +95,8 @@ public class SurveyMenuControllerTest {
             }
         });
         when(mHost.getActivity()).thenReturn(mActivity);
+        when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
+        when(mMenuItem.getItemId()).thenReturn(MenusUtils.MenuId.SEND_SURVEY.getValue());
         mSurveyFeatureProvider =
                 FakeFeatureFactory.getFeatureFactory().getSurveyFeatureProvider(mActivity);
     }
@@ -127,6 +130,7 @@ public class SurveyMenuControllerTest {
 
         verify(mMenu).add(anyInt(), eq(MenusUtils.MenuId.SEND_SURVEY.getValue()), anyInt(),
                 anyInt());
+        verify(mMenuItem).setIcon(R.drawable.ic_rate_review);
     }
 
     @Test
@@ -141,7 +145,7 @@ public class SurveyMenuControllerTest {
     }
 
     @Test
-    public void onOptionsItemSelected_surveyMenuAdded_shouldStartAndHideSurveyEntry() {
+    public void onOptionsItemSelected_surveyMenuSelected_shouldStartAndHideSurveyEntry() {
         FragmentActivity mockActivity = mock(FragmentActivity.class);
         when(mockActivity.getPackageName()).thenReturn(SETTINGS_PACKAGE_NAME);
         when(mHost.getActivity()).thenReturn(mockActivity);
@@ -153,8 +157,6 @@ public class SurveyMenuControllerTest {
 
         // Verify it start to send survey
         verify(mSurveyFeatureProvider).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY);
-        // Verify that menu is hidden
-        verify(mMenuItem).setVisible(false);
         // Verify notification dismissal broadcast was sent
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mockActivity).sendBroadcastAsUser(intentCaptor.capture(),
@@ -163,12 +165,17 @@ public class SurveyMenuControllerTest {
                 ACTION_SURVEY_NOTIFICATION_DISMISSED);
         assertThat(intentCaptor.getValue().getPackage()).isEqualTo(SETTINGS_PACKAGE_NAME);
         assertThat(intentCaptor.getValue().getIntExtra(EXTRA_PAGE_ID, -1)).isEqualTo(TEST_PAGE_ID);
+        // Verify that menu is updated and the item is not added
+        verify(mockActivity).invalidateOptionsMenu();
+        mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, /* inflater= */ null);
+        verify(mMenu, never()).add(anyInt(), anyInt(), anyInt(), anyInt());
     }
 
     @Test
-    public void onOptionsItemSelected_surveyMenuNotAdded_shouldNotStartSurvey() {
+    public void onOptionsItemSelected_otherMenuItemSelected_shouldNotStartSurvey() {
         SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
                 TEST_PAGE_ID);
+        when(mMenuItem.getItemId()).thenReturn(Menu.FIRST);
 
         mHost.getSettingsLifecycle().onOptionsItemSelected(mMenuItem);
 

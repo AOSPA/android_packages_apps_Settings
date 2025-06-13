@@ -20,41 +20,33 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.content.res.Resources
 import android.media.AudioManager
-import android.os.VibrationAttributes
-import android.os.VibrationEffect
 import android.os.Vibrator
 import android.platform.test.annotations.EnableFlags
-import android.provider.Settings
 import androidx.core.content.getSystemService
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settings.testutils.shadow.ShadowAudioManager
 import com.android.settingslib.datastore.SettingsSystemStore
-import com.android.settingslib.preference.CatalystScreenTestCase
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
 import com.google.common.truth.Truth.assertWithMessage
 import kotlinx.coroutines.test.TestScope
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
-import org.mockito.kotlin.verify
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowLooper
 
 // LINT.IfChange
-@RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowAudioManager::class])
-class VibrationScreenTest : CatalystScreenTestCase() {
+class VibrationScreenTest : SettingsCatalystTestCase() {
     private val testScope = TestScope()
     private lateinit var vibratorMock: Vibrator
 
@@ -80,11 +72,6 @@ class VibrationScreenTest : CatalystScreenTestCase() {
     @Before
     fun setUp() {
         setRingerMode(AudioManager.RINGER_MODE_NORMAL)
-    }
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(VibrationScreen.KEY)
     }
 
     @Test

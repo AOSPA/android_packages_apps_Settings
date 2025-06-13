@@ -157,8 +157,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         if (isCatalystEnabled()) {
             PreferenceScreenBindingHelper helper = getPreferenceScreenBindingHelper();
             if (helper != null) {
-                mUserRestrictionBindingHelper = new UserRestrictionBindingHelper(requireContext(),
-                        helper);
+                mUserRestrictionBindingHelper = new UserRestrictionBindingHelper(this, helper);
             }
         }
     }

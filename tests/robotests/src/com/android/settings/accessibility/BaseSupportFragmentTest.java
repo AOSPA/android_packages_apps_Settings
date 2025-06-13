@@ -20,6 +20,7 @@ import static com.android.internal.accessibility.common.NotificationConstants.EX
 import static com.android.internal.accessibility.common.NotificationConstants.SOURCE_START_SURVEY;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -33,6 +34,8 @@ import android.os.Bundle;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.testing.EmptyFragmentActivity;
@@ -84,6 +87,12 @@ public class BaseSupportFragmentTest {
     private Resources mResources;
     @Mock
     private Lifecycle mLifecycle;
+    @Mock
+    private Menu mMenu;
+    @Mock
+    private MenuItem mMenuItem1;
+    @Mock
+    private MenuItem mMenuItem2;
 
     @Before
     public void setUp() {
@@ -250,5 +259,51 @@ public class BaseSupportFragmentTest {
         mHost.onCreate(/* savedInstanceState= */ null);
 
         verify(surveyFeatureProvider, never()).sendActivityIfAvailable(PLACEHOLDER_SURVEY_KEY);
+    }
+
+    @Test
+    public void onPrepareOptionsMenu_menuIsEmpty_noInteractionsOnItems() {
+        when(mMenu.size()).thenReturn(0);
+
+        mHost.onPrepareOptionsMenu(mMenu);
+
+        verify(mMenuItem1, never()).setShowAsAction(anyInt());
+        verify(mMenuItem2, never()).setShowAsAction(anyInt());
+    }
+
+    @Test
+    public void onPrepareOptionsMenu_menuHasOneItem_setShowAsActionIfRoomCalled() {
+        when(mMenu.size()).thenReturn(1);
+        when(mMenu.getItem(0)).thenReturn(mMenuItem1);
+
+        mHost.onPrepareOptionsMenu(mMenu);
+
+        verify(mMenuItem1).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        verify(mMenuItem1, never()).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+    }
+
+    @Test
+    public void onPrepareOptionsMenu_menuHasOneNullItem_noShowAsActionCalled() {
+        when(mMenu.size()).thenReturn(1);
+        when(mMenu.getItem(0)).thenReturn(null);
+
+        mHost.onPrepareOptionsMenu(mMenu);
+
+        verify(mMenuItem1, never()).setShowAsAction(anyInt());
+        verify(mMenuItem2, never()).setShowAsAction(anyInt());
+    }
+
+    @Test
+    public void onPrepareOptionsMenu_menuHasMultipleItems_setShowAsActionNeverCalledOnAll() {
+        when(mMenu.size()).thenReturn(2);
+        when(mMenu.getItem(0)).thenReturn(mMenuItem1);
+        when(mMenu.getItem(1)).thenReturn(mMenuItem2);
+
+        mHost.onPrepareOptionsMenu(mMenu);
+
+        verify(mMenuItem1).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        verify(mMenuItem1, never()).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        verify(mMenuItem2).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        verify(mMenuItem2, never()).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
     }
 }

@@ -22,6 +22,12 @@ import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ImageSpan
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.metrics.PreferenceActionMetricsProvider
@@ -58,11 +64,38 @@ class SupervisionUpdateRecoveryEmailPreference :
     override fun dependencies(context: Context) = arrayOf(SupervisionSetupRecoveryPreference.KEY)
 
     override fun getSummary(context: Context): CharSequence? {
-        return context
-            .getSystemService(SupervisionManager::class.java)
-            ?.getSupervisionRecoveryInfo()
-            ?.accountName
-            ?.asMaskedEmail()
+        val email =
+            context
+                .getSystemService(SupervisionManager::class.java)
+                ?.getSupervisionRecoveryInfo()
+                ?.accountName
+                ?.asMaskedEmail()
+        if (email == null) {
+            return null
+        }
+        val spannableEmail = SpannableString.valueOf("$email %s")
+        val indexIconStart = spannableEmail.indexOf("%s")
+        val indexIconEnd = indexIconStart + 2
+        val iconView = ImageView(context)
+        iconView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_check_24dp))
+        val icon: Drawable = iconView.drawable!!.mutate()
+        val tintColorList =
+            ContextCompat.getColorStateList(
+                context,
+                com.android.settingslib.widget.theme.R.color
+                    .settingslib_materialColorOnSurfaceVariant,
+            )
+        icon.setTintList(tintColorList)
+        val imageSpan = ImageSpan(icon)
+        imageSpan.contentDescription = ""
+        icon.setBounds(0, 0, icon.intrinsicWidth, icon.intrinsicHeight)
+        spannableEmail.setSpan(
+            imageSpan,
+            indexIconStart,
+            indexIconEnd,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
+        )
+        return spannableEmail
     }
 
     override fun isAvailable(context: Context): Boolean {

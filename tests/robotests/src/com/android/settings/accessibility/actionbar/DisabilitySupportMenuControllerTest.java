@@ -105,6 +105,7 @@ public class DisabilitySupportMenuControllerTest {
 
         verify(mMenu).add(Menu.NONE, MenusUtils.MenuId.DISABILITY_SUPPORT.getValue(), Menu.NONE,
                 R.string.accessibility_disability_support_title);
+        verify(mMenuItem).setIcon(com.android.settingslib.widget.help.R.drawable.ic_help_actionbar);
     }
 
     @Test

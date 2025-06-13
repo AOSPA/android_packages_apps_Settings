@@ -16,25 +16,22 @@
 package com.android.settings.network.tether
 
 import android.net.TetheringManager
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settings.testutils.shadow.ShadowConnectivityManager
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal
 import com.android.settingslib.Utils
-import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.Implementation
 import org.robolectric.annotation.Implements
 
-@RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowConnectivityManager::class, ShadowRestrictedLockUtilsInternal::class,
     ShadowTetheringManager::class])
-class TetherScreenTest : CatalystScreenTestCase() {
+class TetherScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = TetherScreen()
 
     override val flagName: String
@@ -46,11 +43,6 @@ class TetherScreenTest : CatalystScreenTestCase() {
     @Before
     fun setUp() {
         ShadowConnectivityManager.getShadow().setTetheringSupported(true)
-    }
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(TetherScreen.KEY)
     }
 
     @Test

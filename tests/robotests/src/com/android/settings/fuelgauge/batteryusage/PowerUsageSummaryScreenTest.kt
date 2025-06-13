@@ -23,8 +23,8 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.preference.PreferenceFragmentCompat
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settings.testutils.shadow.ShadowUtils
-import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Test
@@ -35,7 +35,7 @@ import org.mockito.kotlin.stub
 import org.robolectric.annotation.Config
 
 @Config(shadows = [ShadowUtils::class])
-class PowerUsageSummaryScreenTest : CatalystScreenTestCase() {
+class PowerUsageSummaryScreenTest : SettingsCatalystTestCase() {
 
     override val preferenceScreenCreator = PowerUsageSummaryScreen()
 
@@ -52,11 +52,6 @@ class PowerUsageSummaryScreenTest : CatalystScreenTestCase() {
     @After
     fun tearDown() {
         ShadowUtils.reset()
-    }
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(PowerUsageSummaryScreen.KEY)
     }
 
     @Test

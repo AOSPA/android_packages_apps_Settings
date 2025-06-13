@@ -131,11 +131,6 @@ public abstract class LocalePickerBaseListPreferenceController extends
                 ? getSuggestedLocaleList()
                 : getSupportedLocaleList());
 
-        // In language selection, list should not contain locale with U extension.
-        if (mParentLocale == null && mIsSuggestedCategory) {
-            result.removeAll(getLocalesWithExtension(result));
-        }
-
         final Map<String, Preference> existingPreferences = mPreferences;
         mPreferences = new ArrayMap<>();
         setupPreference(result, existingPreferences);
@@ -196,7 +191,7 @@ public abstract class LocalePickerBaseListPreferenceController extends
     @VisibleForTesting
     void setupPreference(List<LocaleStore.LocaleInfo> localeInfoList,
             Map<String, Preference> existingPreferences) {
-        Log.d(TAG, "setupPreference: isNumberingMode = " + isNumberingMode());
+        Log.d(getTag(), "setupPreference: isNumberingMode = " + isNumberingMode());
         if (isNumberingMode() && getPreferenceCategoryKey().contains(KEY_SUPPORTED)) {
             mPreferenceCategory.setTitle(
                     mContext.getString(R.string.all_supported_numbering_system_title));
@@ -204,6 +199,10 @@ public abstract class LocalePickerBaseListPreferenceController extends
 
         // Remove the locale which is added into system language's list already.
         List<LocaleStore.LocaleInfo> localeList = getUserLocaleList();
+        // In language selection, list should not contain locale with U extension.
+        if (mParentLocale == null && mIsSuggestedCategory) {
+            localeInfoList.removeIf(localeInfo -> localeInfo.getLocale().hasExtensions());
+        }
         localeInfoList.removeIf(localeInfo -> localeList.contains(localeInfo));
         localeInfoList.stream().forEach(locale ->
         {
@@ -230,6 +229,8 @@ public abstract class LocalePickerBaseListPreferenceController extends
         return AVAILABLE;
     }
 
+    protected abstract String getTag();
+
     protected abstract String getPreferenceCategoryKey();
 
     protected abstract LocaleCollectorBase getLocaleCollectorController(Context context);
@@ -249,7 +250,8 @@ public abstract class LocalePickerBaseListPreferenceController extends
                     .filter(localeInfo -> localeInfo.isSuggested())
                     .collect(Collectors.toList()));
         } else {
-            Log.d(TAG, "Can not get suggested locales because the locale list is null or empty.");
+            Log.d(getTag(),
+                    "Can not get suggested locales because the locale list is null or empty.");
         }
         return mLocaleOptions;
     }
@@ -261,7 +263,8 @@ public abstract class LocalePickerBaseListPreferenceController extends
                     .filter(localeInfo -> !localeInfo.isSuggested())
                     .collect(Collectors.toList()));
         } else {
-            Log.d(TAG, "Can not get supported locales because the locale list is null or empty.");
+            Log.d(getTag(),
+                    "Can not get supported locales because the locale list is null or empty.");
         }
         return mLocaleOptions;
     }
@@ -330,7 +333,7 @@ public abstract class LocalePickerBaseListPreferenceController extends
         boolean mayHaveDifferentNumberingSystem = localeInfo.hasNumberingSystems();
         mLocaleList = getLocaleCollectorController(mContext).getSupportedLocaleList(localeInfo,
                 false, localeInfo != null);
-        Log.d(TAG,
+        Log.d(getTag(),
                 "shouldShowLocaleEditor: isSystemLocale = " + isSystemLocale + ", isRegionLocale = "
                         + isRegionLocale + ", mayHaveDifferentNumberingSystem = "
                         + mayHaveDifferentNumberingSystem + ", isSuggested = "
@@ -339,18 +342,6 @@ public abstract class LocalePickerBaseListPreferenceController extends
         return mLocaleList.size() == 1 || isSystemLocale || localeInfo.isSuggested()
                 || (isRegionLocale && !mayHaveDifferentNumberingSystem)
                 || isNumberingMode();
-    }
-
-    @VisibleForTesting
-    protected List<LocaleStore.LocaleInfo> getLocalesWithExtension(
-            List<LocaleStore.LocaleInfo> inputList) {
-        List<LocaleStore.LocaleInfo> checklist = new ArrayList<>();
-        for (LocaleStore.LocaleInfo localeInfo : inputList) {
-            if (localeInfo.getLocale().hasExtensions()) {
-                checklist.add(localeInfo);
-            }
-        }
-        return checklist;
     }
 
     private List<LocaleStore.LocaleInfo> getUserLocaleList() {

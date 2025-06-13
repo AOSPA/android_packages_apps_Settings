@@ -15,15 +15,10 @@
  */
 package com.android.settings.accessibility.textreading.ui
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
-import com.android.settingslib.preference.CatalystScreenTestCase
-import com.google.common.truth.Truth.assertThat
-import org.junit.Test
-import org.junit.runner.RunWith
+import com.android.settings.testutils2.SettingsCatalystTestCase
 
-@RunWith(AndroidJUnit4::class)
-class TextReadingScreenTest : CatalystScreenTestCase() {
+class TextReadingScreenTest : SettingsCatalystTestCase() {
 
     override val preferenceScreenCreator = TextReadingScreen()
 
@@ -31,9 +26,4 @@ class TextReadingScreenTest : CatalystScreenTestCase() {
         get() = Flags.FLAG_CATALYST_TEXT_READING_SCREEN
 
     override fun migration() {}
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(TextReadingScreen.KEY)
-    }
 }

@@ -35,7 +35,6 @@ import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
 import com.android.settings.utils.getLocale
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 import com.android.settingslib.metadata.PreferenceScreenMetadata
@@ -154,11 +153,11 @@ class DeviceStateAppFunctionService : AppFunctionService() {
         }
         val deviceStateItemList: MutableList<DeviceStateItem> = ArrayList()
         // TODO if child node is PreferenceScreen, recursively process it
-        screenMetaData.getPreferenceHierarchy(this).forEachRecursively {
+        screenMetaData.getPreferenceHierarchy(this).forEachRecursivelyAsync {
             val metadata = it.metadata
             val config = settingConfigMap[metadata.key]
             // skip over explicitly disabled preferences
-            if (config?.enabled == false) return@forEachRecursively
+            if (config?.enabled == false) return@forEachRecursivelyAsync
             val jsonValue =
                 when (metadata) {
                     is PersistentPreference<*> ->
@@ -195,7 +194,7 @@ class DeviceStateAppFunctionService : AppFunctionService() {
     ) =
         when (this) {
             is PreferenceHierarchyGenerator<*> ->
-                generatePreferenceHierarchy(applicationContext, defaultType)
+                generatePreferenceHierarchy(applicationContext, coroutineScope, defaultType)
             else -> getPreferenceHierarchy(applicationContext, coroutineScope)
         }
 
