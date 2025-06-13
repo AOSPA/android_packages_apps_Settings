@@ -127,14 +127,15 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
         super.onAttach(context);
         String wifiEntryKey = getArguments().getString(KEY_CHOSEN_WIFIENTRY_KEY);
         setupNetworksDetailTracker();
+        final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
         use(WifiPrivacyPreferenceController.class)
-                .setWifiEntryKey(wifiEntryKey);
+                .setWifiEntry(wifiEntry);
         use(CertificateDetailsPreferenceController.class)
-                .setWifiEntry(mNetworkDetailsTracker.getWifiEntry());
+                .setWifiEntry(wifiEntry);
         use(ServerNamePreferenceController.class)
-                .setWifiEntry(mNetworkDetailsTracker.getWifiEntry());
+                .setWifiEntry(wifiEntry);
         use(WepLessSecureWarningController.class)
-                .setWifiEntry(mNetworkDetailsTracker.getWifiEntry());
+                .setWifiEntry(wifiEntry);
     }
 
     @Override
