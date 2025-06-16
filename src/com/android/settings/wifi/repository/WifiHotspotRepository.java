@@ -28,6 +28,7 @@ import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSI
 import static android.net.wifi.WifiAvailableChannel.OP_MODE_SAP;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_DISABLED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_ENABLED;
+import static android.net.wifi.WifiManager.WIFI_STATE_ENABLED;
 
 import android.content.Context;
 import android.net.TetheringManager;
@@ -35,6 +36,7 @@ import android.net.wifi.SoftApCapability;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiAvailableChannel;
 import android.net.wifi.WifiManager;
+import android.net.wifi.WifiManager.WifiStateChangedListener;
 import android.net.wifi.WifiScanner;
 import android.text.TextUtils;
 import android.util.Log;
@@ -107,6 +109,7 @@ public class WifiHotspotRepository {
     protected SapBand mBand6g = new SapBand(WifiScanner.WIFI_BAND_6_GHZ);
     protected MutableLiveData<Boolean> m6gAvailable;
     protected ActiveCountryCodeChangedCallback mActiveCountryCodeChangedCallback;
+    private final WifiStateChangedListener mWifiStateChangedListener;
 
     @VisibleForTesting
     Boolean mIsConfigShowSpeed;
@@ -130,6 +133,20 @@ public class WifiHotspotRepository {
         mWifiManager = wifiManager;
         mTetheringManager = tetheringManager;
         mWifiManager.registerSoftApCallback(mAppContext.getMainExecutor(), mSoftApCallback);
+        mWifiStateChangedListener = () -> notifyOnWifiStateChanged(mWifiManager.getWifiState());
+        mWifiManager.addWifiStateChangedListener(mAppContext.getMainExecutor(),
+                mWifiStateChangedListener);
+    }
+
+    /**
+     * WifiStateChangedListener to query Bridged AP concurrency support.
+     */
+    private void notifyOnWifiStateChanged(int state) {
+        if (state == WIFI_STATE_ENABLED) {
+            mIsDualBand = mWifiManager.isBridgedApConcurrencySupported();
+            /* Feature support is retrieved, remove listener */
+            mWifiManager.removeWifiStateChangedListener(mWifiStateChangedListener);
+        }
     }
 
     /**
