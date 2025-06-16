@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -68,7 +69,8 @@ open class AppInfoScreen(context: Context, override val arguments: Bundle) :
 
     override fun fragmentClass(): Class<out Fragment>? = AppInfoDashboardFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {}
 
     companion object {
         const val KEY = "installed_app_detail_settings_screen"

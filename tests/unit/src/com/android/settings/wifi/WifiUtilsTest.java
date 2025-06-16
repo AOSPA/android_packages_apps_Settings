@@ -27,6 +27,7 @@ import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -58,6 +59,8 @@ public class WifiUtilsTest {
     @Mock
     WifiManager mWifiManager;
     @Mock
+    UserManager mUserManager;
+    @Mock
     TetheringManager mTetheringManager;
 
     @Before
@@ -65,6 +68,7 @@ public class WifiUtilsTest {
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(R.bool.config_show_wifi_hotspot_settings)).thenReturn(true);
         when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mContext.getSystemService(TetheringManager.class)).thenReturn(mTetheringManager);
         when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(WIFI_REGEXS);
     }
@@ -192,5 +196,26 @@ public class WifiUtilsTest {
         WifiUtils.setCanShowWifiHotspotCached(false);
 
         assertThat(WifiUtils.canShowWifiHotspot(null)).isFalse();
+    }
+
+    @Test
+    public void isNetworkEditable_ownedNetwork() {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
+        wifiConfiguration.creatorUid = 0;
+        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
+
+        assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
+    }
+
+    @Test
+    public void isNetworkEditable_notOwnedNetwork_singleUser() {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
+        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
+        when(mUserManager.getUserCount()).thenReturn(1);
+
+        assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
     }
 }

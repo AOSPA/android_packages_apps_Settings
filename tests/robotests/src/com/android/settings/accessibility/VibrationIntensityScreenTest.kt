@@ -23,9 +23,9 @@ import android.os.Vibrator
 import androidx.core.content.getSystemService
 import com.android.settings.R.integer.config_vibration_supported_intensity_levels
 import com.android.settings.flags.Flags
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settings.testutils.shadow.ShadowAudioManager
-import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -38,7 +38,7 @@ import org.robolectric.annotation.Config
 
 // LINT.IfChange
 @Config(shadows = [ShadowAudioManager::class, SettingsShadowResources::class])
-class VibrationIntensityScreenTest : CatalystScreenTestCase() {
+class VibrationIntensityScreenTest : SettingsCatalystTestCase() {
     private lateinit var vibratorMock: Vibrator
 
     private val resourcesSpy: Resources = spy(appContext.resources)
@@ -62,11 +62,6 @@ class VibrationIntensityScreenTest : CatalystScreenTestCase() {
     @Before
     fun setUp() {
         setRingerMode(AudioManager.RINGER_MODE_NORMAL)
-    }
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(VibrationIntensityScreen.KEY)
     }
 
     @Test

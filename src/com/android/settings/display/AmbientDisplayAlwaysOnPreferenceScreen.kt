@@ -54,6 +54,7 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.systemui.shared.Flags.ambientAod
+import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
 /**
@@ -141,8 +142,8 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, AmbientDisplayAlwaysOnActivity::class.java, metadata?.key)
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +AmbientDisplayTopIntroPreference()
             +AmbientDisplayMainSwitchPreference()
             if (context.isAmbientWallpaperOptionsAvailable) {

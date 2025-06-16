@@ -35,9 +35,6 @@ import com.android.settingslib.core.lifecycle.events.OnOptionsItemSelected;
 public class FeedbackMenuController implements LifecycleObserver, OnCreateOptionsMenu,
         OnOptionsItemSelected {
 
-    /**
-     * The menu item ID for the feedback menu option.
-     */
     private final FeedbackManager mFeedbackManager;
 
     /**
@@ -71,8 +68,10 @@ public class FeedbackMenuController implements LifecycleObserver, OnCreateOption
         if (!mFeedbackManager.isAvailable()) {
             return;
         }
-        menu.add(Menu.NONE, MenusUtils.MenuId.FEEDBACK.getValue(), Menu.NONE,
+
+        final MenuItem item = menu.add(Menu.NONE, MenusUtils.MenuId.FEEDBACK.getValue(), Menu.NONE,
                 R.string.accessibility_send_feedback_title);
+        item.setIcon(R.drawable.ic_feedback);
     }
 
     @Override

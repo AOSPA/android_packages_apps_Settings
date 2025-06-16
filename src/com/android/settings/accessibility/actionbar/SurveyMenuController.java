@@ -37,6 +37,8 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 import com.android.settingslib.core.lifecycle.events.OnOptionsItemSelected;
 
+import java.util.Optional;
+
 /**
  * A controller that adds a survey menu to any Settings page.
  */
@@ -50,6 +52,8 @@ public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsM
     @NonNull
     private final String mFeedbackKey;
     private final int mPageId;
+    @NonNull
+    private Optional<Boolean> mIsSurveyConfirmedAvailable = Optional.empty();
 
     /**
      * Initializes the controller to add the survey menu to the given Settings fragment.
@@ -88,22 +92,21 @@ public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsM
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        if (mSurveyFeatureProvider != null) {
-            mSurveyFeatureProvider.checkSurveyAvailable(mHost, mFeedbackKey, available -> {
-                if (available) {
-                    menu.add(Menu.NONE, MenusUtils.MenuId.SEND_SURVEY.getValue(), Menu.NONE,
-                            R.string.accessibility_send_survey_title);
-                }
-            });
+        boolean available = mIsSurveyConfirmedAvailable.orElse(false);
+        if (!available) {
+            return;
         }
+
+        final MenuItem item = menu.add(Menu.NONE, MenusUtils.MenuId.SEND_SURVEY.getValue(),
+                Menu.NONE, R.string.accessibility_send_survey_title);
+        item.setIcon(R.drawable.ic_rate_review);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == MenusUtils.MenuId.SEND_SURVEY.getValue()) {
             startSurvey();
-            // Prevent repeated feedback triggers.
-            menuItem.setVisible(false);
+            updateSurveyAvailability(false);
 
             // Remove Survey Notification
             FragmentActivity activity = mHost.getActivity();
@@ -131,12 +134,29 @@ public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsM
         }
     }
 
+    private void updateSurveyAvailability(boolean available) {
+        final Optional<Boolean> newAvailabilityState = Optional.of(available);
+        if (mIsSurveyConfirmedAvailable.equals(newAvailabilityState)) {
+            return;
+        }
+        mIsSurveyConfirmedAvailable = newAvailabilityState;
+
+        final FragmentActivity activity = mHost.getActivity();
+        if (activity != null) {
+            activity.invalidateOptionsMenu();
+        }
+    }
+
     private SurveyMenuController(@NonNull InstrumentedPreferenceFragment host,
             @Nullable SurveyFeatureProvider surveyFeatureProvider,
             @NonNull String feedbackKey, int pageId) {
         mHost = host;
         mFeedbackKey = feedbackKey;
-        mSurveyFeatureProvider = surveyFeatureProvider;
         mPageId = pageId;
+        mSurveyFeatureProvider = surveyFeatureProvider;
+        if (mSurveyFeatureProvider != null) {
+            mSurveyFeatureProvider.checkSurveyAvailable(mHost, mFeedbackKey,
+                    this::updateSurveyAvailability);
+        }
     }
 }

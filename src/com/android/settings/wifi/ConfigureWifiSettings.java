@@ -69,7 +69,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        getActivity().setTitle(R.string.network_and_internet_preferences_title);
 
         if (isGuestUser(getContext())) return;
 

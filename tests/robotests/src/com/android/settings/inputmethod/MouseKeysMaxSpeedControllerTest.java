@@ -16,6 +16,9 @@
 
 package com.android.settings.inputmethod;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
@@ -26,8 +29,12 @@ import android.hardware.input.InputSettings;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Settings;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -36,6 +43,8 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowContentResolver;
 
 /** Tests for {@link MouseKeysMaxSpeedController}. */
 @RunWith(RobolectricTestRunner.class)
@@ -48,10 +57,17 @@ public class MouseKeysMaxSpeedControllerTest {
 
     private MouseKeysMaxSpeedController mController;
     Context mContext = ApplicationProvider.getApplicationContext();
+    private ShadowContentResolver mShadowContentResolver;
+    private LifecycleOwner mLifecycleOwner;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
+        mShadowContentResolver = Shadow.extract(mContext.getContentResolver());
         mController = new MouseKeysMaxSpeedController(mContext, KEY_CUSTOM_SLIDER);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
+        mLifecycle.addObserver(mController);
     }
 
     @Test
@@ -97,5 +113,24 @@ public class MouseKeysMaxSpeedControllerTest {
         assertThat(result).isFalse();
         assertThat(mController.getSliderPosition())
                 .isEqualTo(InputSettings.DEFAULT_MOUSE_KEYS_MAX_SPEED);
+    }
+
+    @Test
+    public void onStart_shouldRegisterContentObserver() {
+        mLifecycle.handleLifecycleEvent(ON_START);
+
+        assertThat(mShadowContentResolver.getContentObservers(
+                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED)))
+                .hasSize(1);
+    }
+
+    @Test
+    public void onStop_shouldUnregisterContentObserver() {
+        mLifecycle.handleLifecycleEvent(ON_START);
+        mLifecycle.handleLifecycleEvent(ON_STOP);
+
+        assertThat(mShadowContentResolver.getContentObservers(
+                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED)))
+                .isEmpty();
     }
 }

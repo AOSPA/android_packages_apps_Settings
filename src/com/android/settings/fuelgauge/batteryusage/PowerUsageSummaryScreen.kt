@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(PowerUsageSummaryScreen.KEY)
 open class PowerUsageSummaryScreen :
@@ -63,8 +64,8 @@ open class PowerUsageSummaryScreen :
             else -> R.drawable.ic_settings_battery_white
         }
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +BatteryHeaderPreference()
             +UntitledPreferenceCategoryMetadata("percentage_category") += {
                 +BatteryPercentageSwitchPreference()

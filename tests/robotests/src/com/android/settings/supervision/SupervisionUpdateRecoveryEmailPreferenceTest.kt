@@ -85,7 +85,7 @@ class SupervisionUpdateRecoveryEmailPreferenceTest {
             )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
-        assertThat(preference.getSummary(context)).isEqualTo("t••t@example.com")
+        assertThat(preference.getSummary(context).toString()).isEqualTo("t••t@example.com %s")
     }
 
     @Test
@@ -113,7 +113,7 @@ class SupervisionUpdateRecoveryEmailPreferenceTest {
             )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
-        assertThat(preference.getSummary(context)).isEqualTo("t@example.com")
+        assertThat(preference.getSummary(context).toString()).isEqualTo("t@example.com %s")
     }
 
     @Test
@@ -127,7 +127,7 @@ class SupervisionUpdateRecoveryEmailPreferenceTest {
             )
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
-        assertThat(preference.getSummary(context)).isEqualTo("t•@example.com")
+        assertThat(preference.getSummary(context).toString()).isEqualTo("t•@example.com %s")
     }
 
     @Test

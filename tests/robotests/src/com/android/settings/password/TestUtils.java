@@ -84,6 +84,13 @@ public final class TestUtils {
                 .putExtra(Intent.EXTRA_COMPONENT_NAME, COMPONENT_NAME);
     }
 
+    public static Intent createRemoteLockscreenValidationIntentWithGlifExpressiveStyle(
+            int lockscreenType, int remainingAttempts) throws Exception {
+        return createRemoteLockscreenValidationIntent(lockscreenType, remainingAttempts)
+                .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE,
+                        /*ThemeHelper.shouldApplyGlifExpressiveStyle()=*/true);
+    }
+
     public static RemoteLockscreenValidationSession createRemoteLockscreenValidationSession(
             int lockscreenType, int remainingAttempts) throws NoSuchAlgorithmException {
         return new RemoteLockscreenValidationSession.Builder()

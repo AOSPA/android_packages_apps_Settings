@@ -65,10 +65,8 @@ class SupervisionMainSwitchPreference(
     override fun getSummary(context: Context): CharSequence? =
         if (!context.isSupervisingCredentialSet) {
             context.getString(R.string.device_supervision_switch_no_pin_summary)
-        } else if (supervisionMainSwitchStorage.getBoolean(KEY)!!) {
-            context.getString(R.string.switch_on_text)
         } else {
-            context.getString(R.string.device_supervision_switch_paused_summary)
+            null
         }
 
     override fun storage(context: Context): KeyValueStore = supervisionMainSwitchStorage

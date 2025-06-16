@@ -18,6 +18,7 @@ package com.android.settings.display.ambient
 import android.content.Context
 import android.provider.Settings.Secure.DOZE_ALWAYS_ON
 import com.android.settings.display.AmbientDisplayAlwaysOnPreference
+import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceScreen
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
@@ -49,6 +50,7 @@ class AmbientDisplayStorage(
 
     override fun onKeyChanged(key: String, reason: Int) {
         // forward data change to preference hierarchy key
+        notifyChange(AmbientDisplayAlwaysOnPreferenceScreen.KEY, reason)
         notifyChange(AmbientDisplayAlwaysOnPreference.KEY, reason)
         notifyChange(AmbientDisplayMainSwitchPreference.KEY, reason)
     }

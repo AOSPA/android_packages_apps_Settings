@@ -27,6 +27,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 /** Accessibility settings for vibration intensities. */
 // TODO(b/368360218): investigate if we still need this screen once we finish the migration.
@@ -59,8 +60,8 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
     override fun fragmentClass(): Class<out Fragment>? =
         VibrationIntensitySettingsFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +VibrationMainSwitchPreference()
             // The preferences below are migrated behind a different flag from the screen migration.
             // They should only be declared in this screen hierarchy if their migration is enabled.

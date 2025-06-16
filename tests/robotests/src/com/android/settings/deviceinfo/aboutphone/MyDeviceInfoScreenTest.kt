@@ -19,31 +19,21 @@ package com.android.settings.deviceinfo.aboutphone
 import android.content.Context
 import android.os.Build
 import android.provider.Settings.Global
+import androidx.test.core.app.ApplicationProvider
 import com.android.settings.flags.Flags
-import com.android.settingslib.preference.CatalystScreenTestCase
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
-import org.junit.Before
 import org.junit.Test
-import org.robolectric.RuntimeEnvironment
 
-class MyDeviceInfoScreenTest : CatalystScreenTestCase() {
-    private lateinit var context: Context
+class MyDeviceInfoScreenTest : SettingsCatalystTestCase() {
+    private val context: Context = ApplicationProvider.getApplicationContext()
 
     override val preferenceScreenCreator = MyDeviceInfoScreen()
+
     override val flagName: String
         get() = Flags.FLAG_CATALYST_MY_DEVICE_INFO_PREF_SCREEN
 
     override fun migration() {}
-
-    @Before
-    fun setup() {
-        context = RuntimeEnvironment.getApplication()
-    }
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(MyDeviceInfoScreen.KEY)
-    }
 
     @Test
     fun getSummary_deviceNameNotSet_shouldReturnDeviceModel() {

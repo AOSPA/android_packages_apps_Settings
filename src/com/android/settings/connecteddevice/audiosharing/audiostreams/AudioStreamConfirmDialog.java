@@ -256,9 +256,9 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
     private void launchAudioStreamsActivity() {
         Bundle bundle = new Bundle();
         bundle.putParcelable(KEY_BROADCAST_METADATA, mBroadcastMetadata);
-        if (mActivity != null) {
-            new SubSettingLauncher(getActivity())
-                    .setTitleText(getString(R.string.audio_streams_activity_title))
+        if (mContext != null) {
+            new SubSettingLauncher(mContext)
+                    .setTitleText(mContext.getString(R.string.audio_streams_activity_title))
                     .setDestination(AudioStreamsDashboardFragment.class.getName())
                     .setArguments(bundle)
                     .setSourceMetricsCategory(getMetricsCategory())

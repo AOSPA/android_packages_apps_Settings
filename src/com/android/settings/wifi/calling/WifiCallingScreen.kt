@@ -30,6 +30,7 @@ import com.android.settings.wifi.calling.WifiCallingSettingsForSub.EXTRA_SUB_ID
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.filter
@@ -66,8 +67,8 @@ open class WifiCallingScreen(override val arguments: Bundle) :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) { +WifiCallingMainSwitchPreference(subId) }
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) { +WifiCallingMainSwitchPreference(subId) }
 
     companion object {
         const val KEY = "wifi_calling"

@@ -22,6 +22,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
 import static android.hardware.biometrics.Flags.screenOffUnlockUdfps;
 import static android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
+import static android.view.accessibility.AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.Utils.isPrivateProfile;
@@ -64,6 +65,8 @@ import android.view.Window;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.ImeAwareEditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -478,8 +481,27 @@ public class FingerprintSettings extends SubSettings {
                 if (preference == null || findPreference(preference.getKey()) != null) {
                     continue;
                 }
-                if (preference instanceof PrimarySwitchIntentPreference) {
-                    preference.setOnPreferenceClickListener(this::onExtIntentPreferenceClick);
+                if (preference instanceof PrimarySwitchIntentPreference intentPref) {
+                    intentPref.setOnPreferenceClickListener(this::onExtIntentPreferenceClick);
+
+                    String resultKey = intentPref.getConfirmDialogFragmentResultKey();
+                    if (!TextUtils.isEmpty(resultKey)) {
+                        getChildFragmentManager().setFragmentResultListener(resultKey, this,
+                                (requestKey, result) ->
+                                        intentPref.processConfirmationDialogResult(result));
+                        intentPref.setOnPreferenceChangeListener((pref, newValue) -> {
+                            PrimarySwitchIntentPreference.ConfirmationDialogDetails details =
+                                    intentPref.getConfirmationDialogBeforeStateChange(newValue);
+                            if (details != null) {
+                                details.getFragment().show(getChildFragmentManager(),
+                                        details.getTag());
+                                return false;
+                            } else {
+                                // Change it directly
+                                return true;
+                            }
+                        });
+                    }
                 }
                 mExtPrefKeys.add(preference.getKey());
                 mFingerprintUnlockCategory.addPreference(preference);
@@ -1515,6 +1537,7 @@ public class FingerprintSettings extends SubSettings {
                 view.setBackground(highlight);
                 view.setPressed(true);
                 view.setPressed(false);
+                setupSfpsFingerprintRecognition(view, preference.getFingerprint());
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -1522,6 +1545,30 @@ public class FingerprintSettings extends SubSettings {
                     }
                 }, RESET_HIGHLIGHT_DELAY_MS);
             }
+        }
+
+        private void setupSfpsFingerprintRecognition(View view, Fingerprint fp) {
+            final AccessibilityManager a11y =
+                    view.getContext().getSystemService(AccessibilityManager.class);
+            if (a11y == null || !a11y.isEnabled()) return;
+            // Set content description that indicates which finger is recognized.
+            view.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
+            view.setContentDescription(view.getContext().getString(
+                    R.string.security_settings_fingerprint_recognition_description,
+                    fp.getName()));
+            view.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+                @Override
+                public void onInitializeAccessibilityEvent(@NonNull View host,
+                        @NonNull AccessibilityEvent event) {
+                    if (event.getEventType() == TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
+                        // Clear the content description for fp recognition that a11y would speak
+                        // the content description of title.
+                        host.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_NONE);
+                        host.setContentDescription(null);
+                    }
+                    super.onInitializeAccessibilityEvent(host, event);
+                }
+            });
         }
 
         private void clearAllFingerprintPreferenceHighlight() {
@@ -2128,7 +2175,7 @@ public class FingerprintSettings extends SubSettings {
                                     R.string.security_settings_fingerprint_rename_description));
                 }
                 mDeleteView.setContentDescription(
-                        mDeleteView.getContentDescription()
+                        getContext().getString(R.string.delete)
                                 + " " + mFingerprint.getName().toString());
             }
             mDeleteView.setOnClickListener(v -> {

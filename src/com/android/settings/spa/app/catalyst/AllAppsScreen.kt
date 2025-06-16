@@ -25,6 +25,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(AllAppsScreen.KEY)
 open class AllAppsScreen : PreferenceScreenMixin {
@@ -49,7 +50,8 @@ open class AllAppsScreen : PreferenceScreenMixin {
             .setPackage(context.packageName)
     }
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {}
 
     companion object {
         const val KEY = "see_all_apps" // key from apps.xml for "See all X apps" preference

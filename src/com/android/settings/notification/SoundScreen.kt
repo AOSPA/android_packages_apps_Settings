@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(SoundScreen.KEY)
 open class SoundScreen : PreferenceScreenMixin, PreferenceIconProvider {
@@ -61,8 +62,8 @@ open class SoundScreen : PreferenceScreenMixin, PreferenceIconProvider {
 
     override fun fragmentClass(): Class<out Fragment>? = SoundSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             val audioHelper = AudioHelper(context)
             +UntitledPreferenceCategoryMetadata(VOLUME_CONTROLS_CATEGORY) order -160 += {
                 +MediaVolumePreference(audioHelper) order -180

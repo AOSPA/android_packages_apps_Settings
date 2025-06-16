@@ -656,7 +656,7 @@ public class WifiHotspotRepository {
     }
 
     private void stopTethering() {
-        log("startTethering()");
+        log("stopTethering()");
         mTetheringManager.stopTethering(TETHERING_WIFI);
     }
 

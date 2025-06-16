@@ -38,6 +38,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
 @ProvidePreferenceScreen(DarkModeScreen.KEY)
@@ -93,7 +94,8 @@ open class DarkModeScreen(context: Context) :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {}
 
     override fun storage(context: Context): KeyValueStore = darkModeStorage
 

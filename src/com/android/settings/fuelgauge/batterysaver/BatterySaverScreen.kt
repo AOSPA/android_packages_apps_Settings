@@ -26,6 +26,7 @@ import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(BatterySaverScreen.KEY)
 open class BatterySaverScreen : PreferenceScreenMixin {
@@ -49,8 +50,8 @@ open class BatterySaverScreen : PreferenceScreenMixin {
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) { +BatterySaverPreference() order -100 }
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) { +BatterySaverPreference() order -100 }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, BatterySaverSettingsActivity::class.java, metadata?.key)

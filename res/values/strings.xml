@@ -455,7 +455,7 @@
     <string name="app_locale_preference_title">Language</string>
 
     <!-- Title for the locale picker category. [CHAR LIMIT=50]-->
-    <string name="locale_picker_category_title">Preferred Language</string>
+    <string name="locale_picker_category_title">Preferred Languages</string>
 
     <!-- Title for the Apps' locale menu entry [CHAR LIMIT=50]-->
     <string name="app_locales_picker_menu_title">App languages</string>
@@ -535,16 +535,20 @@
     <string name="desc_system_locale_addition">This lets apps and websites know you also prefer this language.</string>
 
     <!-- The text of the confirmation dialog showing the system locale will be changed. [CHAR LIMIT=NONE]-->
-    <string name="desc_notice_device_locale_settings_change">Your device settings and regional preferences will change.</string>
+    <string name="desc_notice_device_locale_and_region_settings_change">Your device will use <xliff:g id="language" example="English">%1$s</xliff:g> and your region will be changed to <xliff:g id="region" example="United States">%2$s</xliff:g>.</string>
+    <!-- The text of the confirmation dialog showing the system locale which have no region will be changed. [CHAR LIMIT=NONE]-->
+    <string name="desc_notice_device_locale_settings_change">Your device will use <xliff:g id="language" example="English">%s</xliff:g>.</string>
+    <!-- The text of the removing dialog showing the default locale will be removed from the list. [CHAR LIMIT=NONE]-->
+    <string name="dlg_desc_delete_preferred_default_locale"><xliff:g id="removed_language" example="Français (France)">%s</xliff:g> will be removed from your preferred languages</string>
 
     <!-- A dialog button for confirmation of system locale change. [CHAR LIMIT=25]-->
     <string name="button_label_confirmation_of_system_locale_change">Change</string>
 
     <!-- Title for saying this selected locale is unavailable to use. [CHAR LIMIT=50]-->
-    <string name="title_unavailable_locale">%s not available</string>
+    <string name="title_unavailable_locale">Can’t set <xliff:g id="selected_language" example="Aghem">%s</xliff:g> as system language</string>
 
     <!-- The text of the confirmation dialog for saying this selected locale is unavailable to use. [CHAR LIMIT=NONE]-->
-    <string name="desc_unavailable_locale">This language can’t be used as a system language, but you’ve let apps and websites know you prefer this language.</string>
+    <string name="desc_unavailable_locale">Your device does not support this language, but apps will know that you prefer this language</string>
 
     <!-- Menu item in the locale menu  [CHAR LIMIT=30] -->
     <string name="locale_search_menu">Search</string>
@@ -572,6 +576,12 @@
     <string name="body_change_system_locale_region">Your device will keep <xliff:g id="system_language" example="English">%1$s</xliff:g> as a system language</string>
     <!-- Description for the numbering system language. [CHAR LIMIT=NONE]-->
     <string name="top_intro_numbering_system_title">Choose how your device, websites, and apps display numbers</string>
+    <!-- Move up item in the preferred locale menu [CHAR LIMIT=NONE]-->
+    <string name="preferred_locale_menu_up">Move up</string>
+    <!-- Move down item in the preferred locale menu [CHAR LIMIT=NONE]-->
+    <string name="preferred_locale_menu_down">Move down</string>
+    <!-- Delete item in the preferred locale menu [CHAR LIMIT=NONE]-->
+    <string name="preferred_locale_menu_remove">Remove</string>
 
     <!-- Regional Preferences begin -->
     <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
@@ -660,6 +670,10 @@
 
     <!-- This text shows in the language picker when the system is not translated into that languages [CHAR LIMIT=80] -->
     <string name="locale_not_translated">Not available as system language</string>
+    <!-- Title for removing locale from preferred list. [CHAR LIMIT=50]-->
+    <string name="dlg_title_delete_preferred_locale">Remove <xliff:g id="removed_language" example="Français (France)">%s</xliff:g>?</string>
+    <!-- The text of the removing dialog showing the locale will be removed from the list. [CHAR LIMIT=NONE]-->
+    <string name="dlg_desc_delete_preferred_locale"><xliff:g id="removed_language" example="Français (France)">%s</xliff:g> will be removed from your preferred languages. You can add it again later.</string>
 
     <!-- Label for an accessibility action that moves a language up in the ordered language list [CHAR LIMIT=20] -->
     <string name="action_drag_label_move_up">Move up</string>
@@ -1064,6 +1078,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_agree">I agree</string>
     <!-- The content description for rename a fingerprint. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_rename_description">Double tap to rename</string>
+    <!-- The content description for recognition of a fingerprint. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_recognition_description"><xliff:g id="fp_name" example="Finger 1">%1$s</xliff:g> recognized</string>
     <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
     <string name="setup_fingerprint_enroll_skip_title">Skip fingerprint?</string>
     <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->
@@ -2650,6 +2666,7 @@
     <!-- Label for the share wifi network summary. [CHAR LIMIT=NONE] -->
     <string name="share_wifi_network_summary">All users on this device can view and connect to a shared network. Administrators can delete a shared network. Learn more</string>
     <string name="edit_wifi_network_configuration">Allow other users to edit network configuration</string>
+    <string name="edit_wifi_network_non_owner_message">Contact the admin of this device to make changes to this network.</string>
 
     <!-- Dialog text to tell the user that the selected network does not have Internet access. -->
     <string name="no_internet_access_text">This network has no internet access. Stay connected?</string>
@@ -5225,12 +5242,12 @@
     <!-- Text for 'Done' button in gesture education [CHAR LIMIT=10] -->
     <string name="gesture_button_done">Done</string>
 
-    <!-- Title text for 'Customize action corners' preference. This preference allows the user to select actions to be triggered when moving the cursor to a corner. [CHAR LIMIT=60] -->
-    <string name="action_corner_title">Customize action corners</string>
-    <!-- Summary text for 'Customize action corners' preference. [CHAR LIMIT=NONE] -->
+    <!-- Title text for 'Customize corner shortcuts' preference. This preference allows the user to select actions to be triggered when moving the cursor to a corner. [CHAR LIMIT=60] -->
+    <string name="action_corner_title">Customize corner shortcuts</string>
+    <!-- Summary text for 'Customize corner shortcuts' preference. [CHAR LIMIT=NONE] -->
     <string name="action_corner_summary">Use cursors to navigate the system</string>
-    <!-- Intro text for 'Customize action corners'. [CHAR LIMIT=NONE] -->
-    <string name="action_corner_intro">Choose the following areas to customize action corners</string>
+    <!-- Intro text for 'Customize corner shortcuts'. [CHAR LIMIT=NONE] -->
+    <string name="action_corner_intro">Choose the following areas to customize corner shortcuts</string>
     <!-- Preference title for 'Bottom-left corner'. [CHAR LIMIT=60] -->
     <string name="action_corner_bottom_left_title">Bottom-left corner</string>
     <!-- Preference title for 'Bottom-right corner'. [CHAR LIMIT=60] -->
@@ -5946,10 +5963,20 @@
         screen magnification on app transitions</string>
     <!-- Title for the accessibility preference to power button to end a call. [CHAR LIMIT=35] -->
     <string name="accessibility_power_button_ends_call_prerefence_title">Power button ends call</string>
+    <!-- Title for the dark theme group category -->
+    <string name="dark_theme_version_category">Mode</string>
+    <!-- Title for the accessibility preference for applying the original dark theme. [CHAR LIMIT=35] -->
+    <string name="accessibility_standard_dark_theme_title">Standard</string>
+    <!-- Title in the search result for standard dark theme mode. -->
+    <string name="accessibility_standard_dark_theme_title_in_search">Standard Dark Theme</string>
+    <!-- Summary for the accessibility preference for applying the original dark theme. [CHAR LIMIT=100] -->
+    <string name="accessibility_standard_dark_theme_summary">Applies Dark theme across your device and supported apps</string>
     <!-- Title for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=35] -->
-    <string name="accessibility_force_invert_title">Make more apps dark</string>
+    <string name="accessibility_expanded_dark_theme_title">Expanded</string>
+    <!-- Title in the search result for expanded dark theme mode. -->
+    <string name="accessibility_expanded_dark_theme_title_in_search">Expanded Dark Theme</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=100] -->
-    <string name="accessibility_force_invert_summary">Expands dark theme to more apps. May not work with all apps.</string>
+    <string name="accessibility_expanded_dark_theme_summary">Automatically applies Dark theme to more apps for improved accessibility</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
@@ -11163,6 +11190,10 @@ Data usage charges may apply.</string>
     <string name="disabled_by_policy_title_biometric_parental_consent">Parent needed</string>
     <!-- Dialog content shown when parental consent is required for the child to set up biometric authentication. [CHAR LIMIT=NONE] -->
     <string name="disabled_by_policy_content_biometric_parental_consent">Hand the phone to your parent to start setting this up</string>
+    <!-- Dialog title shown when the user interacts with a restricted setting on a supervised device. [CHAR LIMIT=NONE] -->
+    <string name="disabled_by_policy_title_parental_controls">Restricted by parental controls</string>
+    <!-- Dialog content shown when the user interacts with a restricted setting on a supervised device. [CHAR LIMIT=NONE] -->
+    <string name="disabled_by_policy_content_parental_controls">Only the person who manages your parental controls can change this setting</string>
     <!-- Dialog content shown when parental consent is required for the child to change blocked settings. [CHAR LIMIT=NONE] -->
     <string name="disabled_by_policy_parental_consent">Hand the phone to your parent to allow this setting to be changed.</string>
     <!-- Shown when the user tries to change phone settings that are blocked by their IT admin [CHAR LIMIT=200] -->
@@ -14744,11 +14775,9 @@ Data usage charges may apply.</string>
     <!-- Title for Supervision settings menu entry [CHAR LIMIT=60] -->
     <string name="supervision_settings_title">Parental controls</string>
     <!-- Description for Supervision settings menu entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_settings_summary">Content restrictions &amp; other limits</string>
+    <string name="supervision_settings_summary">Digital ground rules &amp; screen time limits</string>
     <!-- Description of device supervision toggle when PIN has never been set up [CHAR LIMIT=NONE] -->
     <string name="device_supervision_switch_no_pin_summary">Set up PIN</string>
-    <!-- Description of device supervision toggle when PIN is set up but supervision is not enabled [CHAR LIMIT=NONE] -->
-    <string name="device_supervision_switch_paused_summary">Paused</string>
     <!-- Search keywords for supervision settings [CHAR LIMIT=NONE] -->
     <string name="keywords_supervision_settings">supervision, parental supervision, parental controls</string>
     <!-- Title for supervision PIN management settings entry [CHAR LIMIT=60] -->
@@ -14765,8 +14794,6 @@ Data usage charges may apply.</string>
     <string name="supervision_update_recovery_email_preference_title">Update recovery email</string>
     <!-- Title for supervision delete pin setting entry [CHAR LIMIT=60] -->
     <string name="supervision_delete_pin_preference_title">Delete PIN</string>
-    <!-- Summary for supervision delete pin setting entry [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_preference_summary">This will reset all your supervision settings</string>
     <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
     <string name="supervision_add_pin_recovery_title">Add recovery email</string>
     <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->

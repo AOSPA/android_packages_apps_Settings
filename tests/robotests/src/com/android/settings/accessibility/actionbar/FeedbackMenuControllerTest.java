@@ -38,6 +38,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
+import com.android.settings.R;
 import com.android.settings.accessibility.FeedbackManager;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -120,6 +121,7 @@ public class FeedbackMenuControllerTest {
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, /* inflater= */ null);
 
         verify(mMenu).add(anyInt(), anyInt(), anyInt(), anyInt());
+        verify(mMenuItem).setIcon(R.drawable.ic_feedback);
     }
 
     @Test

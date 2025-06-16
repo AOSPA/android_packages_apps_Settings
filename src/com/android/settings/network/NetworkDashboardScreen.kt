@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(NetworkDashboardScreen.KEY)
 open class NetworkDashboardScreen : PreferenceScreenMixin, PreferenceIconProvider {
@@ -59,8 +60,8 @@ open class NetworkDashboardScreen : PreferenceScreenMixin, PreferenceIconProvide
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, NetworkDashboardActivity::class.java, metadata?.key)
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +MobileNetworkListScreen.KEY order -15
             +AirplaneModePreference() order -5
             +DataSaverScreen.KEY order 10

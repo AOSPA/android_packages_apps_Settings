@@ -19,11 +19,17 @@ package com.android.settings.inputmethod;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.hardware.input.InputSettings;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
-import androidx.preference.Preference;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.server.accessibility.Flags;
@@ -32,13 +38,27 @@ import com.android.settingslib.widget.SliderPreference;
 
 /** Controller class that controls mouse keys max speed seekbar settings. */
 public class MouseKeysMaxSpeedController extends SliderPreferenceController implements
-        Preference.OnPreferenceChangeListener {
+        DefaultLifecycleObserver {
 
     private static final int SEEK_BAR_STEP = 1;
     private static final int MAX_SLIDER_POSITION = 10;
     private static final int MIN_SLIDER_POSITION = 1;
+    static final Uri ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED_URI =
+            Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED);
 
     private final @NonNull ContentResolver mContentResolver;
+    private @Nullable SliderPreference mPreference;
+
+    final ContentObserver mSettingsObserver =
+            new ContentObserver(new Handler(Looper.getMainLooper())) {
+                @Override
+                public void onChange(boolean selfChange, @Nullable Uri uri) {
+                    if (mPreference == null || uri == null) {
+                        return;
+                    }
+                    updateState(mPreference);
+                }
+            };
 
     public MouseKeysMaxSpeedController(@NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
@@ -48,12 +68,25 @@ public class MouseKeysMaxSpeedController extends SliderPreferenceController impl
     @Override
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
-        final SliderPreference preference = screen.findPreference(getPreferenceKey());
-        if (preference == null) {
+        mPreference = screen.findPreference(getPreferenceKey());
+        if (mPreference == null) {
             return;
         }
-        preference.setTickVisible(true);
-        updateState(preference);
+        mPreference.setTickVisible(true);
+        updateState(mPreference);
+    }
+
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        mContentResolver.registerContentObserver(
+                ACCESSIBILITY_MOUSE_KEYS_MAX_SPEED_URI,
+                /* notifyForDescendants= */ false,
+                mSettingsObserver);
+    }
+
+    @Override
+    public void onStop(@NonNull LifecycleOwner owner) {
+        mContentResolver.unregisterContentObserver(mSettingsObserver);
     }
 
     @Override

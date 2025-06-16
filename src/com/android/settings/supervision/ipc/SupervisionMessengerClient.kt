@@ -20,7 +20,7 @@ import android.content.Intent
 import android.util.Log
 import com.android.settings.supervision.PreferenceDataProvider
 import com.android.settings.supervision.SupportedAppsProvider
-import com.android.settings.supervision.supervisionPackageName
+import com.android.settings.supervision.systemSupervisionPackageName
 import com.android.settingslib.ipc.MessengerServiceClient
 import com.android.settingslib.supervision.SupervisionLog
 
@@ -38,7 +38,7 @@ class SupervisionMessengerClient(context: Context) :
 
     override val serviceIntentFactory = { Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION) }
 
-    override val packageName = context.supervisionPackageName
+    override val packageName = context.systemSupervisionPackageName
 
     /**
      * Retrieves preference data from the system supervision app.

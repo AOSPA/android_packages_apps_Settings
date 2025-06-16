@@ -26,6 +26,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 /** Accessibility settings for vibration. */
 // LINT.IfChange
@@ -54,8 +55,8 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
 
     override fun fragmentClass(): Class<out Fragment>? = VibrationSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +VibrationMainSwitchPreference()
             // The preferences below are migrated behind a different flag from the screen migration.
             // They should only be declared in this screen hierarchy if their migration is enabled.

@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 /**
  * This DND mode Display settings screen is dedicated for device state. It functions via a virtual
@@ -72,7 +73,8 @@ open class ZenModeDndDisplayScreen :
         Intent(context, DndModeDisplaySettingsActivity::class.java)
             .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, context.getDndMode()?.id)
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {}
 
     companion object {
         const val KEY = "device_state_dnd_mode_display_settings" // only for device state.

@@ -44,6 +44,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.SwitchPreferenceBinding
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -98,8 +99,8 @@ open class AppInfoNotificationAccessScreen(context: Context, override val argume
             putExtra(EXTRA_NOTIFICATION_LISTENER_COMPONENT_NAME, packageName)
         }
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             // Main switch preference
             +NotificationAccessApprovalPreference(storage)
             // Filter type preferences

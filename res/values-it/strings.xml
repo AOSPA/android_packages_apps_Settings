@@ -771,7 +771,7 @@
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Scegli un nuovo blocco schermo"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Scegli un blocco per le app di lavoro"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Scegli nuovo blocco per profilo lavoro"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Per maggiore sicurezza, imposta un blocco schermo alternativo"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Per maggiore sicurezza, imposta un blocco schermo alternativo."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Scegli il metodo di blocco schermo alternativo"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Se dimentichi il blocco schermo, l\'amministratore IT non può reimpostarlo."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Imposta un blocco separato per il profilo di lavoro"</string>
@@ -1184,6 +1184,8 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Condividi questa rete con altri utenti del dispositivo"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Tutti gli utenti di questo dispositivo possono visualizzare e connettersi a una rete condivisa. Gli amministratori possono eliminare una rete condivisa. Scopri di più"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Consenti ad altri utenti di modificare la configurazione di rete"</string>
+    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Questa rete non ha accesso a internet. Vuoi restare connesso?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Alcuni servizi e app potrebbero non funzionare a causa della connettività limitata. Usarli comunque?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Non chiedermelo più per questa rete"</string>
@@ -1888,7 +1890,7 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verifica sequenza"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verifica PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verifica password"</string>
-    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Verifica identità"</string>
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Verifica la tua identità"</string>
     <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Per trasferire gli Account Google, le impostazioni e altro ancora, inserisci la sequenza dell\'altro dispositivo. La tua sequenza è criptata."</string>
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Per trasferire gli Account Google, le impostazioni e altro ancora, inserisci il PIN dell\'altro dispositivo. Il tuo PIN è criptato."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Per trasferire gli Account Google, le impostazioni e altro ancora, inserisci la password dell\'altro dispositivo. La tua password è criptata."</string>
@@ -2230,13 +2232,40 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Avanti"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Ricomincia"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Fine"</string>
-    <string name="action_corners_title" msgid="8971354126563421646">"Personalizza gli angoli delle azioni"</string>
-    <string name="action_corners_summary" msgid="4245089615854251124">"Usa i cursori per spostarti nel sistema"</string>
-    <string name="action_corners_intro" msgid="4384209411870086502">"Scegli le seguenti aree per personalizzare gli angoli di azione"</string>
-    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"Angolo inferiore sinistro"</string>
-    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"Angolo inferiore destro"</string>
-    <string name="action_corners_top_left_title" msgid="6604149810499060560">"Angolo superiore sinistro"</string>
-    <string name="action_corners_top_right_title" msgid="583996793984142329">"Angolo superiore destro"</string>
+    <!-- no translation found for action_corner_title (1489042651433221319) -->
+    <skip />
+    <!-- no translation found for action_corner_summary (695618538930535335) -->
+    <skip />
+    <!-- no translation found for action_corner_intro (8782001241997579665) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
+    <skip />
+    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
+    <skip />
+    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
+    <skip />
+    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
+    <skip />
+    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
+    <skip />
+    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
+    <skip />
+    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Tasti di modifica"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Cambia il comportamento dei tasti"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Reimposta tutto"</string>
@@ -2383,6 +2412,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Scorciatoia per l\'ingrandimento"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"In base alla posizione del cursore"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Scegli come l\'ingrandimento segue il cursore."</string>
+    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
+    <skip />
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Sposta continuamente lo schermo quando il puntatore del mouse si muove"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Sposta lo schermo tenendo il puntatore del mouse al centro"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Sposta lo schermo quando il puntatore del mouse ne tocca i bordi"</string>
@@ -2523,10 +2554,32 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Aggiorn. autom. ingrandim. schermo"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Aggiorna ingrandimento schermo per transizioni app"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Chiudi chiamata con tasto accensione"</string>
-    <string name="accessibility_force_invert_title" msgid="5248504501753732051">"Applica il tema scuro a più app"</string>
-    <string name="accessibility_force_invert_summary" msgid="257503086198180749">"Espande il tema scuro a più app. Potrebbe non funzionare con tutte le app."</string>
+    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Rimuovi le animazioni"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Riduci il movimento sullo schermo"</string>
+    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio in formato mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Unisci i canali durante la riproduzione dell\'audio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Bilanciamento audio"</string>
@@ -3682,7 +3735,8 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nessuna}=1{1 pianificazione impostata}other{# pianificazioni impostate}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Non disturbare"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modalità"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Riduci al minimo le distrazioni e tieni sotto controllo il livello della tua attenzione con le modalità per dormire, lavorare, guidare e qualsiasi altra cosa."</string>
+    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
+    <skip />
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Crea la tua modalità"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ricevi soltanto le notifiche di app e persone importanti"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Imposta una programmazione"</string>
@@ -5328,14 +5382,15 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Avvia con dimensione pagina 16 kB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Avvia con un kernel per dimensione pagina di 16 kB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Passa dalla modalità a 4 kB alla modalità a 16 kB"</string>
+    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
+    <skip />
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Sei nella modalità page-agnostic che esegue un kernel a 4 kB e stai passando alla modalità a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. L\'operazione riavvierà il dispositivo. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Passa dalla modalità a 16 kB alla modalità a 4 kB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Sei nella modalità page-agnostic che esegue un kernel a 16 kB e stai passando alla modalità a 4 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. L\'operazione riavvierà il dispositivo. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Impossibile aggiornare il kernel alla versione compatibile con pagine da 16 kB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Applicazione della modifica in corso…"</string>
-    <string name="confirm_format_ext4_title" msgid="4754057414728537125">"Riformattare il dispositivo in ext4? (Operazione necessaria per la modalità a 16 kB)"</string>
-    <string name="confirm_format_ext4_text" msgid="432847493298532536">"La partizione dei dati del dispositivo deve essere convertita in ext4 prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Se attivi l\'opzione a 16 kB, sarà necessario un ulteriore riavvio. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Tutti i dati verranno cancellati dal dispositivo e il file system verrà convertito in ext4 dopo la conferma. Quando termina l\'operazione, riabilita nuovamente la modalità a 16 kB."</string>
-    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Cancella tutti i dati"</string>
+    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
+    <skip />
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Impossibile riformattare e cancellare la partizione di dati in ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Sblocco bootloader richiesto"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"È necessario sbloccare il bootloader del dispositivo prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Tutti i dati utente e le impostazioni verranno cancellati quando attivi la modalità a 16 kB. Dopo aver sbloccato il bootloader, l\'attivazione dell\'opzione a 16 kB richiederà due riavvii. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo, il che ripristina i dati di fabbrica del dispositivo. Sblocca il bootloader e riprova. Puoi consultare le istruzioni su come fare all\'indirizzo &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>

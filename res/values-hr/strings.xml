@@ -47,10 +47,8 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"E-poruka"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Prethodni pregled"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Sljedeći pregled"</string>
-    <!-- no translation found for font_size_make_smaller_desc (319927200356692406) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (6739310980713118605) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="319927200356692406">"Smanji font"</string>
+    <string name="font_size_make_larger_desc" msgid="6739310980713118605">"Povećaj font"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Uvijek"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Prednji se zaslon uključuje kad sklopite uređaj"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Prelazak prstom prema gore za nastavak"</string>
@@ -942,10 +940,8 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Poveži"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Isključi"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Upari i poveži"</string>
-    <!-- no translation found for bluetooth_connecting (5315496594905010438) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnecting (1643422701532873735) -->
-    <skip />
+    <string name="bluetooth_connecting" msgid="5315496594905010438">"Povezivanje"</string>
+    <string name="bluetooth_disconnecting" msgid="1643422701532873735">"Prekidanje veze"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Kad je Bluetooth uključen, vaš uređaj može komunicirati s drugim Bluetooth uređajima u blizini"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Kada je Bluetooth uključen, uređaj može komunicirati s drugim Bluetooth uređajima u blizini. Značajke kao što su brzo dijeljenje i Pronađi moj uređaj koriste Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Kada je Bluetooth uključen, uređaj može komunicirati s ostalim Bluetooth uređajima u blizini.\n\nRadi boljeg doživljaja na uređaju, aplikacije i usluge i dalje mogu tražiti uređaje u blizini u bilo kojem trenutku, čak i kada je Bluetooth isključen. Time se primjerice mogu poboljšati značajke i usluge koje se temelje na lokaciji. To možete promijeniti u postavkama traženja Bluetootha."</string>
@@ -1184,6 +1180,8 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Podijeli ovu mrežu s drugim korisnicima uređaja"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Svi korisnici na ovom uređaju mogu pregledavati dijeljenu mrežu i povezivati se s njom. Administratori mogu izbrisati dijeljenu mrežu. Saznajte više"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Dopusti drugim korisnicima da uređuju mrežnu konfiguraciju"</string>
+    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Ta mreža nema pristup internetu. Želite li ostati povezani?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Neke aplikacije i usluge možda neće raditi zbog ograničene povezivosti. Želite ostati na toj mreži?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Više ne pitaj za tu mrežu"</string>
@@ -2175,8 +2173,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Dodirna podloga"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Dodirna podloga i miš"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Miš"</string>
-    <!-- no translation found for mouse_settings_summary (1308610072914620926) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="1308610072914620926">"Brzina pokazivača, prilagodba tipki"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Brzina pokazivača, pokreti"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Dodirni za klik"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Dodirnite i povucite za premještanje stavki"</string>
@@ -2230,13 +2227,40 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Dalje"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Pokreni ponovo"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Gotovo"</string>
-    <string name="action_corners_title" msgid="8971354126563421646">"Prilagodi kutove radnji"</string>
-    <string name="action_corners_summary" msgid="4245089615854251124">"Upotreba pokazivača za kretanje sustavom"</string>
-    <string name="action_corners_intro" msgid="4384209411870086502">"Odaberite sljedeća područja da biste prilagodili kutove radnji"</string>
-    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"Donji lijevi kut"</string>
-    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"Donji desni kut"</string>
-    <string name="action_corners_top_left_title" msgid="6604149810499060560">"Gornji lijevi kut"</string>
-    <string name="action_corners_top_right_title" msgid="583996793984142329">"Gornji desni kut"</string>
+    <!-- no translation found for action_corner_title (1489042651433221319) -->
+    <skip />
+    <!-- no translation found for action_corner_summary (695618538930535335) -->
+    <skip />
+    <!-- no translation found for action_corner_intro (8782001241997579665) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
+    <skip />
+    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
+    <skip />
+    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
+    <skip />
+    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
+    <skip />
+    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
+    <skip />
+    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
+    <skip />
+    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Modifikatorske tipke"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Promijenite ponašanje tipki"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Vrati sve na zadano"</string>
@@ -2315,8 +2339,7 @@
     <string name="last_time_used_label" msgid="7589377271406011659">"Posljednja upotreba"</string>
     <string name="last_time_used_never" msgid="2936073559267990034">"nikad"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Vrijeme upotrebe"</string>
-    <!-- no translation found for phone_information_v2_title (3373745314543222111) -->
-    <skip />
+    <string name="phone_information_v2_title" msgid="3373745314543222111">"Podaci o telefonu V2"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Pristupačnost"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Postavke dostupnosti"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Zaslon, interakcija, zvuk"</string>
@@ -2355,8 +2378,7 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Kontrole sustava"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Pošaljite povratne informacije"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Ocijenite nas"</string>
-    <!-- no translation found for accessibility_disability_support_title (7934160403456751664) -->
-    <skip />
+    <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Obratite se Googleovoj podršci za asistivne tehnologije"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Anketa o pristupačnosti"</string>
     <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Imate li tamnu temu u više aplikacija?"</string>
     <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Podijelite povratne informacije"</string>
@@ -2383,6 +2405,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Prečac za povećavanje"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Praćenje pokazivača"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Odaberite kako će područje povećavanja pratiti pokazivač."</string>
+    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
+    <skip />
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Pomiči zaslon kontinuirano dok se miš kreće"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Pomiči zaslon zadržavajući miš na sredini zaslona"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Pomiči zaslon kad miš dodiruje rubove zaslona"</string>
@@ -2523,10 +2547,32 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Autom. ažuriranje uvećanja zaslona"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Ažuriranje uvećanja zaslona pri izmjeni aplikacija"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Tipka za uklj. prekida poziv"</string>
-    <string name="accessibility_force_invert_title" msgid="5248504501753732051">"Promijeni temu aplikacija u tamnu"</string>
-    <string name="accessibility_force_invert_summary" msgid="257503086198180749">"Tamna tema proširuje se na više aplikacija. To možda neće funkcionirati sa svim aplikacijama."</string>
+    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Ukloni animacije"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Smanjuje pokrete na zaslonu"</string>
+    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Monozvuk"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Kombiniraj kanale prilikom reprodukcije zvuka"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Ravnoteža zvuka"</string>
@@ -3682,7 +3728,8 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nijedan}=1{Postavljen je jedan raspored}one{Postavljen je # raspored}few{Postavljena su # rasporeda}other{Postavljeno je # rasporeda}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne uznemiravaj"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Načini"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Ne dajte se omesti i ostanite usredotočeni pomoću načina za spavanje, rad, vožnju i slično."</string>
+    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
+    <skip />
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Izradite vlastiti način"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Primajte obavijesti samo od važnih osoba i aplikacija"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Postavite raspored"</string>
@@ -4307,10 +4354,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"Upravitelj dopuštenja"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Ažuriranja o dijeljenju podataka za lokaciju"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Pregledajte aplikacije koje su promijenile način na koji mogu dijeliti vaše podatke o lokaciji"</string>
-    <!-- no translation found for app_function_access_settings_title (1474765429611652468) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (6465715820745848068) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Upravljanje postavkama pristupa drugim aplikacijama"</string>
+    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Izvršite radnje na uređaju i u drugim aplikacijama"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Dodirnite za aktivaciju"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Dvaput dodirnite bilo gdje na zaslonu da biste aktivirali uređaj"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Otvaranje veza"</string>
@@ -4470,10 +4515,8 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Povećajte ili smanjite sve"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"prikaz, gustoća, zumiranje zaslona, skalirati, skaliranje"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Pregled"</string>
-    <!-- no translation found for screen_zoom_make_smaller_desc (1450649885198381123) -->
-    <skip />
-    <!-- no translation found for screen_zoom_make_larger_desc (7125594310562596457) -->
-    <skip />
+    <string name="screen_zoom_make_smaller_desc" msgid="1450649885198381123">"Smanji veličinu prikaza"</string>
+    <string name="screen_zoom_make_larger_desc" msgid="7125594310562596457">"Povećaj veličinu prikaza"</string>
     <string name="disconnected" msgid="3469373726996129247">"Nije povezano"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Nije povezana"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Broj instaliranih aplikacija: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
@@ -5328,14 +5371,15 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Pokreni uz veličinu od 16 KB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Pokreće uređaj uz jezgru koja podržava veličinu stranice od 16 KB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Prebacivanje iz načina od 4 KB u način od 16 KB"</string>
+    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
+    <skip />
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Aktivan je način rada koji ne ovisi o veličini stranice koji pokreće 4 KB jezgra, a prebacujete se na način od 16 KB. U ovom se načinu ne može zajamčiti integritet softvera, a svi podaci pohranjeni na telefonu mogu biti ugroženi dok je pokretač operativnog sustava otključan. Time će se uređaj ponovno pokrenuti. Neke će značajke biti onemogućene u tim načinima, pa neke aplikacije možda neće funkcionirati. Da biste uređaj vratili na produkcijski način rada, trebat ćete se vratiti na način od 4 KB i zaključati pokretač operativnog sustava, čime će se uređaj vratiti na tvorničke postavke. Nakon što uređaj uspješno pokrene Android, onemogućite otključavanje OEM-a u opcijama za razvojne programere."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Prebacivanje iz načina od 4 KB u način od 16 KB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Aktivan je način rada koji ne ovisi o veličini stranice koji pokreće 16 KB jezgra, a prebacujete se na način od 4 KB. U ovom se načinu ne može zajamčiti integritet softvera, a svi podaci pohranjeni na telefonu mogu biti ugroženi dok je pokretač operativnog sustava otključan. Time će se uređaj ponovno pokrenuti. Neke će značajke biti onemogućene u tim načinima, pa neke aplikacije možda neće funkcionirati. Da biste uređaj vratili na produkcijski način rada, trebat ćete zaključati pokretač operativnog sustava, čime će se uređaj vratiti na tvorničke postavke. Nakon što uređaj uspješno pokrene Android, onemogućite otključavanje OEM-a u opcijama za razvojne programere."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Ažuriranje jezgre na jezgru kompatibilnu sa stranicama od 16 KB nije uspjelo."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Primjena promjene"</string>
-    <string name="confirm_format_ext4_title" msgid="4754057414728537125">"Želite li formatirati uređaj u ext4? (obavezno za način od 16 KB)"</string>
-    <string name="confirm_format_ext4_text" msgid="432847493298532536">"Podatkovna particija ovog uređaja treba se konvertirati u ext4 prije upotrebe opcije za razvojne programere od 16 KB. U ovom se načinu ne može zajamčiti integritet softvera, a svi podaci pohranjeni na telefonu mogu biti ugroženi dok je pokretač operativnog sustava otključan. Za aktiviranje opcije od 16 KB bit će potrebno još jedno ponovno pokretanje nakon konvertiranja podatkovne particije uređaja. Nakon što prijeđete na ovaj način, možete se prebacivati između načina od 4 KB i 16 KB uz jedno ponovno pokretanje. Neke će značajke biti onemogućene u tim načinima, pa neke aplikacije možda neće funkcionirati. Da biste uređaj vratili na produkcijski način rada, trebat ćete se vratiti na način od 4 KB, a zatim zaključati pokretač operativnog sustava, čime će se uređaj vratiti na tvorničke postavke. Nakon što uređaj uspješno pokrene Android, onemogućite otključavanje OEM-a u opcijama za razvojne programere. Podaci s uređaja će se izbrisati, a nakon potvrde datotečni sustav promijenit će se u ext4. Nakon što se to dovrši, vratite se da biste ponovno omogućili način od 16 KB."</string>
-    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Izbriši sve podatke"</string>
+    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
+    <skip />
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Formatiranje i čišćenje podatkovne particije u ext4 nije uspjelo."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Potrebno je otključavanje pokretača operativnog sustava"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"Ovaj uređaj mora imati otključan pokretač operativnog sustava prije upotrebe opcije za razvojne programere od 16 KB. U ovom se načinu ne može zajamčiti integritet softvera, a svi podaci pohranjeni na telefonu mogu biti ugroženi dok je pokretač operativnog sustava otključan. Svi korisnički podaci i postavke izbrisat će se nakon aktiviranja načina od 16 KB. Nakon što se pokretač operativnog sustava otključa, za aktiviranje opcije od 16 KB potrebno je dvaput ponovno pokrenuti sustav. Nakon što prijeđete na ovaj način, možete se prebacivati između načina od 4 KB i 16 KB uz jedno ponovno pokretanje. Neke će značajke biti onemogućene u tim načinima, pa neke aplikacije možda neće funkcionirati. Da biste uređaj vratili na produkcijski način rada, trebat ćete se vratiti na način od 4 KB, a zatim zaključati OEM/pokretač operativnog sustava (čime će se uređaj vratiti na tvorničke postavke). Otključajte pokretač operativnog sustava i pokušajte ponovno. Upute kako to učiniti možete pronaći na web-lokaciji &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5856,8 +5900,7 @@
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Postavite PIN za roditeljski nadzor"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Potvrdite PIN"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN je ažuriran"</string>
-    <!-- no translation found for supervision_promo_footer_action_button_description (7617359721703338141) -->
-    <skip />
+    <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Otvori aplikaciju"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Želite li izbrisati PIN?"</string>
     <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"Time ćete izbrisati trenutačni PIN za sve korisnike na ovom uređaju i onemogućiti kontrole koje ste postavili. Ta se radnja ne može poništiti."</string>
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"Najprije pauzirajte kontrole na ostalim profilima"</string>

@@ -26,13 +26,13 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.spa.app.catalyst.AppInfoDisplayOverOtherAppsScreen.Companion.hasOverlayPermission
-import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
-import com.android.settingslib.metadata.asyncPreferenceHierarchy
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 @ProvidePreferenceScreen(AppsDisplayOverOtherAppsAppListScreen.KEY)
 open class AppsDisplayOverOtherAppsAppListScreen :
@@ -58,23 +58,27 @@ open class AppsDisplayOverOtherAppsAppListScreen :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent =
         Intent(context, OverlaySettingsActivity::class.java)
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {}
 
     override val defaultType: Boolean
         get() = true // include system apps
 
     override suspend fun generatePreferenceHierarchy(
         context: Context,
+        coroutineScope: CoroutineScope,
         type: Boolean, // whether to include system apps
-    ): PreferenceHierarchy =
-        asyncPreferenceHierarchy(context, this) {
-            AppListRepositoryImpl(context).loadAndFilterApps(context.userId, type).forEach {
-                if (it.hasOverlayPermission(context)) {
-                    val arguments = Bundle(1).apply { putString("app", it.packageName) }
-                    +(AppInfoDisplayOverOtherAppsScreen.KEY args arguments)
+    ) = preferenceHierarchy(context) {
+        addAsync(coroutineScope, Dispatchers.Default) {
+            AppListRepositoryImpl(context).loadAndMaybeExcludeSystemApps(context.userId, type)
+                .forEach {
+                    if (it.hasOverlayPermission(context)) {
+                        val arguments = Bundle(1).apply { putString("app", it.packageName) }
+                        +(AppInfoDisplayOverOtherAppsScreen.KEY args arguments)
+                    }
                 }
-            }
         }
+    }
 
     companion object {
         const val KEY = "device_state_apps_display_over_other_apps"

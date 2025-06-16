@@ -1184,6 +1184,8 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Chia sẻ mạng này với những người dùng khác trên thiết bị"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Mọi người dùng trên thiết bị này có thể xem và kết nối với mạng dùng chung. Quản trị viên có thể xoá mạng dùng chung. Tìm hiểu thêm"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Cho phép người dùng khác chỉnh sửa cấu hình mạng"</string>
+    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Mạng này không có quyền truy cập Internet. Giữ kết nối?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Một số ứng dụng và dịch vụ có thể không hoạt động do khả năng kết nối giới hạn. Vẫn sử dụng?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Không hỏi lại cho mạng này"</string>
@@ -1467,7 +1469,7 @@
     <string name="screensaver_settings_summary_postured" msgid="6346392320858994892">"Khi đứng thẳng"</string>
     <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"Khi đứng thẳng và đang sạc"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Đang bật/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
-    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Tắt"</string>
+    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Đang tắt"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"Thời điểm hiển thị"</string>
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Chế độ ánh sáng yếu"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Nhấc lên để đánh thức"</string>
@@ -2175,8 +2177,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Bàn di chuột"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Chuột và bàn di chuột"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Chuột"</string>
-    <!-- no translation found for mouse_settings_summary (1308610072914620926) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="1308610072914620926">"Tốc độ con trỏ, tuỳ chỉnh nút"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Tốc độ con trỏ, cử chỉ"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Gõ để nhấp"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Nhấn và kéo để di chuyển các mục"</string>
@@ -2230,13 +2231,40 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Tiếp theo"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Khởi động lại"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Xong"</string>
-    <string name="action_corners_title" msgid="8971354126563421646">"Tuỳ chỉnh góc thao tác"</string>
-    <string name="action_corners_summary" msgid="4245089615854251124">"Dùng con trỏ để thao tác trong hệ thống"</string>
-    <string name="action_corners_intro" msgid="4384209411870086502">"Chọn các khu vực sau để tuỳ chỉnh góc thao tác"</string>
-    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"Góc dưới cùng bên trái"</string>
-    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"Góc dưới cùng bên phải"</string>
-    <string name="action_corners_top_left_title" msgid="6604149810499060560">"Góc trên cùng bên trái"</string>
-    <string name="action_corners_top_right_title" msgid="583996793984142329">"Góc trên cùng bên phải"</string>
+    <!-- no translation found for action_corner_title (1489042651433221319) -->
+    <skip />
+    <!-- no translation found for action_corner_summary (695618538930535335) -->
+    <skip />
+    <!-- no translation found for action_corner_intro (8782001241997579665) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
+    <skip />
+    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
+    <skip />
+    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
+    <skip />
+    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
+    <skip />
+    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
+    <skip />
+    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
+    <skip />
+    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Phím bổ trợ"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Thay đổi hành vi của phím"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Đặt lại tất cả"</string>
@@ -2315,8 +2343,7 @@
     <string name="last_time_used_label" msgid="7589377271406011659">"Lần sử dụng gần đây nhất"</string>
     <string name="last_time_used_never" msgid="2936073559267990034">"không bao giờ"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Thời gian sử dụng"</string>
-    <!-- no translation found for phone_information_v2_title (3373745314543222111) -->
-    <skip />
+    <string name="phone_information_v2_title" msgid="3373745314543222111">"Thông tin điện thoại (V2)"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Hỗ trợ tiếp cận"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Cài đặt hỗ trợ tiếp cận"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Màn hình, tương tác, âm thanh"</string>
@@ -2355,8 +2382,7 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Điều khiển hệ thống"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Gửi phản hồi"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Đánh giá chúng tôi"</string>
-    <!-- no translation found for accessibility_disability_support_title (7934160403456751664) -->
-    <skip />
+    <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Liên hệ với Nhóm hỗ trợ người khuyết tật của Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Khảo sát về khả năng hỗ trợ tiếp cận"</string>
     <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Bạn thích dùng Giao diện tối trong nhiều ứng dụng?"</string>
     <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Chia sẻ ý kiến phản hồi của bạn"</string>
@@ -2383,6 +2409,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Lối tắt cho tính năng phóng to"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Theo dõi con trỏ"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Chọn cách tính năng Phóng to theo dõi con trỏ."</string>
+    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
+    <skip />
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Di chuyển màn hình liên tục khi chuột di chuyển"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Di chuyển màn hình trong khi giữ chuột ở giữa màn hình"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Di chuyển màn hình khi chuột chạm vào các cạnh màn hình"</string>
@@ -2502,7 +2530,7 @@
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Giới thiệu về nút hỗ trợ tiếp cận"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Giới thiệu về cử chỉ và nút hỗ trợ tiếp cận"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Tìm hiểu thêm về cử chỉ và nút hỗ trợ tiếp cận"</string>
-    <string name="accessibility_button_intro" msgid="2601976470525277903">"Sử dụng nút hỗ trợ tiếp cận. Bạn không thể sử dụng cử chỉ này với thao tác bằng 3 nút."</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Sử dụng nút hỗ trợ tiếp cận. Bạn không thể sử dụng cử chỉ này với chế độ điều hướng bằng 3 nút."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Truy cập nhanh vào bộ tính năng hỗ trợ tiếp cận"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Cách bắt đầu&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Mở chế độ cài đặt hỗ trợ tiếp cận&lt;br/&gt; {1,number,integer}. Chọn một tính năng rồi nhấn vào lối tắt&lt;br/&gt; {2,number,integer}. Chọn nút để sử dụng tính năng đó&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Vị trí"</string>
@@ -2523,10 +2551,32 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Tự động cập nhật phóng đại màn hình"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Cập nhật phóng đại màn hình khi chuyển ứng dụng"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Kết thúc cuộc gọi bằng nút nguồn"</string>
-    <string name="accessibility_force_invert_title" msgid="5248504501753732051">"Dùng giao diện tối cho các ứng dụng"</string>
-    <string name="accessibility_force_invert_summary" msgid="257503086198180749">"Áp dụng giao diện tối cho nhiều ứng dụng hơn. Có thể không dùng được với một số ứng dụng."</string>
+    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Xóa hiệu ứng động"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Giảm chuyển động trên màn hình"</string>
+    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Âm thanh đơn âm"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Kết hợp các kênh khi phát âm thanh"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Cân bằng âm thanh"</string>
@@ -3682,7 +3732,8 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Không có}=1{Đã đặt 1 lịch biểu}other{Đã đặt # lịch biểu}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Không làm phiền"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Chế độ"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Bớt phân tâm và tập trung hơn nhờ các chế độ khi ngủ, làm việc, lái xe và nhiều hoạt động khác."</string>
+    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
+    <skip />
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Tạo chế độ của riêng bạn"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Chỉ nhận thông báo của những người và ứng dụng quan trọng"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Đặt một lịch biểu"</string>
@@ -4715,7 +4766,7 @@
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Lật máy ảnh để selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Chế độ thao tác"</string>
-    <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Di chuyển bằng 2 nút"</string>
+    <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Điều hướng bằng 2 nút"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Để chuyển ứng dụng, hãy vuốt lên trên nút Màn hình chính. Để xem tất cả các ứng dụng, hãy vuốt lên một lần nữa. Để quay lại, hãy nhấn vào nút quay lại."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Thông báo và trình đơn Cài đặt nhanh"</string>
     <string name="keywords_shade_panels" msgid="6181844937287087945">"ngăn, bảng điều khiển, thông báo, cài đặt nhanh, riêng biệt, kết hợp, kép, đơn"</string>
@@ -4729,10 +4780,10 @@
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS khẩn cấp, thông tin y tế, cảnh báo"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Thao tác bằng cử chỉ"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Để trở về màn hình chính, hãy vuốt từ cuối màn hình lên. Để chuyển đổi giữa các ứng dụng, hãy vuốt từ cuối màn hình lên, giữ rồi thả ra. Để quay lại, hãy vuốt từ mép trái hoặc mép phải."</string>
-    <string name="legacy_navigation_title" msgid="7877402855994423727">"Thao tác bằng 3 nút"</string>
+    <string name="legacy_navigation_title" msgid="7877402855994423727">"Điều hướng bằng 3 nút"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Quay lại, trở về Màn hình chính và chuyển đổi ứng dụng bằng các nút ở cuối màn hình."</string>
     <string name="nav_tutorial_button_description" msgid="7195363082216233970">"Bắt đầu hướng dẫn thao tác bằng cử chỉ."</string>
-    <string name="keywords_system_navigation" msgid="3131782378486554934">"thao tác trên hệ thống, thao tác bằng 2 nút, thao tác bằng 3 nút, thao tác bằng cử chỉ, vuốt"</string>
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"điều hướng trên hệ thống, điều hướng bằng 2 nút, điều hướng bằng 3 nút, điều hướng bằng cử chỉ, vuốt"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Trợ lý kỹ thuật số"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Vuốt để gọi trợ lý"</string>
     <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"Vuốt lên từ góc dưới cùng để gọi ứng dụng trợ lý kỹ thuật số"</string>
@@ -5328,14 +5379,15 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Khởi động với kích thước trang 16KB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Khởi động thiết bị với nhân hỗ trợ kích thước 16KB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Chuyển từ chế độ 4 KB sang chế độ 16 KB"</string>
+    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
+    <skip />
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Bạn đang ở chế độ không phụ thuộc vào kích thước trang chạy nhân hệ điều hành 4 KB và bạn sắp chuyển sang chế độ 16 KB. Ở chế độ này, tính toàn vẹn của phần mềm không được đảm bảo, đồng thời mọi dữ liệu lưu trữ trên điện thoại này có thể gặp rủi ro trong khi trình tải khởi động được mở khoá. Sau khi bạn xác nhận, thiết bị sẽ khởi động lại. Một số tính năng bị tắt ở những chế độ này nên có thể một vài ứng dụng sẽ không hoạt động được. Để đặt lại thiết bị về chế độ cài đặt gốc, bạn cần chuyển lại về chế độ 4 KB và khoá trình tải khởi động (thao tác này sẽ đặt lại thiết bị về trạng thái ban đầu). Sau khi thiết bị khởi động thành công vào Android, hãy tắt chế độ mở khoá OEM trong Tuỳ chọn cho nhà phát triển."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Chuyển từ chế độ 16 KB sang chế độ 4 KB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Bạn đang ở chế độ không phụ thuộc vào kích thước trang chạy nhân hệ điều hành 16 KB và bạn sắp chuyển sang chế độ 4 KB. Ở chế độ này, tính toàn vẹn của phần mềm không được đảm bảo, đồng thời mọi dữ liệu lưu trữ trên điện thoại này có thể gặp rủi ro trong khi trình tải khởi động được mở khoá. Sau khi bạn xác nhận, thiết bị sẽ khởi động lại. Một số tính năng bị tắt ở những chế độ này nên có thể một vài ứng dụng sẽ không hoạt động được. Để đặt lại thiết bị về chế độ cài đặt gốc, bạn cần khoá trình tải khởi động (thao tác này sẽ đặt lại thiết bị về trạng thái ban đầu). Sau khi thiết bị khởi động thành công vào Android, hãy tắt chế độ mở khoá OEM trong Tuỳ chọn cho nhà phát triển."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Không cập nhật được nhân hệ điều hành thành nhân hệ điều hành tương thích với trang 16 KB"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Đang áp dụng thay đổi"</string>
-    <string name="confirm_format_ext4_title" msgid="4754057414728537125">"Định dạng lại thiết bị thành ext4? (bắt buộc đối với chế độ 16 KB)"</string>
-    <string name="confirm_format_ext4_text" msgid="432847493298532536">"Bạn phải chuyển đổi phân vùng dữ liệu của thiết bị này sang ext4 thì mới có thể dùng tuỳ chọn 16 KB cho nhà phát triển. Ở chế độ này, tính toàn vẹn của phần mềm không được đảm bảo, đồng thời mọi dữ liệu lưu trữ trên điện thoại này có thể gặp rủi ro trong khi trình tải khởi động được mở khoá. Nếu kích hoạt chế độ 16 KB, bạn sẽ phải khởi động lại một lần nữa sau lần này. Khi đã ở chế độ này, bạn chỉ cần khởi động lại một lần là có thể chuyển qua lại giữa chế độ 4 KB và 16 KB. Một số tính năng bị tắt ở những chế độ này nên có thể một vài ứng dụng sẽ không hoạt động được. Để đặt lại thiết bị về chế độ cài đặt gốc, bạn cần quay lại chế độ 4 KB rồi khoá trình tải khởi động (thao tác này sẽ đặt lại thiết bị về trạng thái ban đầu). Sau khi thiết bị khởi động thành công vào Android, hãy tắt chế độ mở khoá OEM trong Tuỳ chọn cho nhà phát triển. Sau khi bạn xác nhận, dữ liệu trên thiết bị sẽ được xoá sạch và hệ thống tệp sẽ được thay đổi thành ext4. Sau khi quá trình này hoàn thành, vui lòng quay lại để bật lại chế độ 16 KB."</string>
-    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Xoá hết dữ liệu"</string>
+    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
+    <skip />
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Không định dạng lại được phân vùng dữ liệu về ext4 và không xoá sạch được phân vùng dữ liệu."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Cần mở khoá trình tải khởi động"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"Bạn cần phải mở khoá trình tải khởi động cho thiết bị này thì mới dùng được tuỳ chọn 16 KB cho nhà phát triển. Ở chế độ này, tính toàn vẹn của phần mềm không được đảm bảo, đồng thời mọi dữ liệu lưu trữ trên điện thoại này có thể gặp rủi ro trong khi trình tải khởi động được mở khoá. Tất cả dữ liệu người dùng và các chế độ cài đặt sẽ bị xoá sạch khi bạn kích hoạt chế độ 16 KB. Sau khi trình tải khởi động được mở khoá, bạn cần khởi động lại 2 lần thì mới kích hoạt được chế độ 16 KB. Khi đã ở chế độ này, bạn chỉ cần khởi động lại một lần là có thể chuyển qua lại giữa chế độ 4 KB và 16 KB. Một số tính năng bị tắt ở những chế độ này nên có thể một vài ứng dụng sẽ không hoạt động được. Để đặt lại thiết bị về chế độ cài đặt gốc, bạn cần quay lại chế độ 4 KB, sau đó khoá OEM/trình tải khởi động (thao tác này sẽ đặt lại thiết bị về trạng thái ban đầu). Hãy mở khoá trình tải khởi động rồi thử lại. Bạn có thể xem hướng dẫn về cách thực hiện việc này tại &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>

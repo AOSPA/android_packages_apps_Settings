@@ -27,6 +27,7 @@ import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 // TODO(b/368359967): The entry point logic is not yet migrated
 @ProvidePreferenceScreen(ScreenTimeoutScreen.KEY)
@@ -49,8 +50,8 @@ open class ScreenTimeoutScreen : PreferenceScreenMixin {
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) { +AdaptiveSleepPreference() }
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) { +AdaptiveSleepPreference() }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, ScreenTimeoutActivity::class.java, metadata?.key)

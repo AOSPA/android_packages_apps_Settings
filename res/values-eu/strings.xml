@@ -1184,6 +1184,8 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Partekatu sare hau gailuaren beste erabiltzaile batzuekin"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Gailu honen erabiltzaile guztiek ikus ditzakete sare partekatuak, eta haietara konektatu. Administratzaileek sare partekatuak ezaba ditzakete. Lortu informazio gehiago"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Eman sarearen konfigurazioa editatzeko baimena beste erabiltzaileei"</string>
+    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Sare hau ezin da konektatu Internetera. Konektatuta jarraitu nahi duzu?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Baliteke aplikazio eta zerbitzu batzuk ez funtzionatzea konexio mugatua dela eta. Hala ere erabili?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Ez galdetu berriro sarea hau bada"</string>
@@ -1369,7 +1371,7 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Pantailaren distira automatikoki egokituko da inguruneko argiaren eta egiten ari zarenaren arabera. Eskuz aldatu nahi baduzu distira, mugitu graduatzailea distira egokituak zure hobespenak ikas ditzan."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Aktibatuta"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Desaktibatuta"</string>
-    <string name="hdr_brightness_title" msgid="6997980740096282616">"HDRko argitasun hobetua"</string>
+    <string name="hdr_brightness_title" msgid="6997980740096282616">"HDRko distira hobetua"</string>
     <string name="hdr_brightness_level_title" msgid="770342878327164738">"Intentsitatea"</string>
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Irudi arrunta"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDRko irudia"</string>
@@ -1443,7 +1445,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Lotara joateko moduaren ezarpenak"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Moduek ere gai iluna aktiba dezakete}=1{{mode_1} moduak ere gai iluna aktibatzen du}=2{{mode_1} eta {mode_2} moduek ere gai iluna aktibatzen dute}=3{{mode_1}, {mode_2} eta {mode_3} moduek ere gai iluna aktibatzen dute}other{{mode_1}, {mode_2} eta beste # moduk ere gai iluna aktibatzen dute}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Moduen ezarpenak"</string>
-    <string name="hdr_brigtness_text" msgid="1912629316654528876">"Areagotu argitasuna eta zabaldu kolore-gama HDRko irudi eta bideoetan. HDRko edukiak itxura argiagoa izango du."</string>
+    <string name="hdr_brigtness_text" msgid="1912629316654528876">"Areagotu distira eta zabaldu kolore-gama HDRko irudi eta bideoetan. HDRko edukiak itxura distiratsuagoa izango du."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Pantailaren denbora-muga"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inaktibo egon ondoren"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Ezarri gabe"</string>
@@ -2230,13 +2232,40 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Hurrengoa"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Berrabiarazi"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Eginda"</string>
-    <string name="action_corners_title" msgid="8971354126563421646">"Pertsonalizatu ekintzen izkinak"</string>
-    <string name="action_corners_summary" msgid="4245089615854251124">"Erabili kurtsoreak sisteman barna nabigatzeko"</string>
-    <string name="action_corners_intro" msgid="4384209411870086502">"Aukeratu eremu hauek ekintzen izkinak pertsonalizatzeko"</string>
-    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"Beheko ezkerreko izkina"</string>
-    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"Beheko eskuineko izkina"</string>
-    <string name="action_corners_top_left_title" msgid="6604149810499060560">"Goiko ezkerreko izkina"</string>
-    <string name="action_corners_top_right_title" msgid="583996793984142329">"Goiko eskuineko izkina"</string>
+    <!-- no translation found for action_corner_title (1489042651433221319) -->
+    <skip />
+    <!-- no translation found for action_corner_summary (695618538930535335) -->
+    <skip />
+    <!-- no translation found for action_corner_intro (8782001241997579665) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
+    <skip />
+    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
+    <skip />
+    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
+    <skip />
+    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
+    <skip />
+    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
+    <skip />
+    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
+    <skip />
+    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Tekla aldatzaileak"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Aldatu teklen portaera"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Berrezarri guztiak"</string>
@@ -2383,6 +2412,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Luparen lasterbidea"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Kurtsore-jarraipena"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Aukeratu nola jarraitzen dion lupak kurtsoreari."</string>
+    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
+    <skip />
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Mugitu pantaila etengabe sagua mugitu ahala"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Mugitu pantaila sagua pantailaren erdian mantenduz"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Mugitu pantaila saguak pantailaren ertzak ukitzean"</string>
@@ -2523,10 +2554,32 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Eguneratu auto. pantaila-handiagotzea"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Eguneratu handiagotzea aplik. batetik bestera pasatzean."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Amaitu deiak etengailuarekin"</string>
-    <string name="accessibility_force_invert_title" msgid="5248504501753732051">"Ilundu aplikazio gehiago"</string>
-    <string name="accessibility_force_invert_summary" msgid="257503086198180749">"Gai iluna aplikazio gehiagori aplikatzen die. Baliteke aplikazio guztiekin ez funtzionatzea."</string>
+    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Kendu animazioak"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Murriztu pantailako mugimendua"</string>
+    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio monofonikoa"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Konbinatu kanalak audioa erreproduzitzean"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Audioaren oreka"</string>
@@ -3540,7 +3593,7 @@
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"atzeko planoa, pertsonalizatu, doitu pantaila"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"testuaren tamaina"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"proiektatu, igorri, pantaila-islatzea, pantaila-partekatzea, islatzea, partekatu pantaila, pantaila igortzea"</string>
-    <string name="keywords_display_hdr_brightness" msgid="2553194332263860092">"hdr, argitasuna, argitu, argiago"</string>
+    <string name="keywords_display_hdr_brightness" msgid="2553194332263860092">"hdr, distira, argitasuna, argitu, argiago"</string>
     <string name="keywords_storage" msgid="3004667910133021783">"toki, disko, disko gogor, gailua, erabilera, biltegi, memoria"</string>
     <string name="keywords_battery" msgid="7040323668283600530">"energia, kontsumoa, karga"</string>
     <string name="keywords_battery_usage" msgid="1763573071014260220">"ikusi bateria-erabilera, bateria-erabilera, energia-erabilera"</string>
@@ -3682,7 +3735,8 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Bat ere ez}=1{1 programazio ezarri da}other{# programazio ezarri dira}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ez molestatzeko modua"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Moduak"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Murriztu distrakzioak eta kontrolatu zure arreta lotara joateko, lanerako, gidatzeko eta abarretarako moduekin."</string>
+    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
+    <skip />
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Sortu zeure modua"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Jaso jende eta aplikazio garrantzitsuen jakinarazpenak soilik"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Ezarri programazio bat"</string>
@@ -5328,14 +5382,15 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Abiarazi 16 kB-ko orri-tamainarekin"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Abiarazi gailua 16 kB-ko orri kernel bateragarriaz"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Aldatu 4 kB-ko modutik 16 kB-ko modura"</string>
+    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
+    <skip />
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Orri-tamaina guztiekin bateragarria den moduan zaude 4 kB-ko kernel bat exekutatzen, eta 16 kB-ko modura aldatzera zoaz. Modu horretan ezin da softwarearen osotasuna bermatu, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. Gailua berrabiaraziko da. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Gailua jatorrizko modura itzultzeko, aldatu berriro 4 kB-ko modura eta blokeatu sistema eragilearen abiarazlea. Gailuaren jatorrizko datuak berrezarriko dira. Gailuak Android behar bezala abiarazten duenean, desgaitu OEMa desblokeatzeko aukera Garatzaileentzako aukerak atalean."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Aldatu 16 kB-ko modutik 4 kB-ko modura"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Orri-tamaina guztiekin bateragarria den moduan zaude, 16 kB-ko kernel bat exekutatzen, eta 4 kB-ko modura aldatzera zoaz. Modu horretan ezin da softwarearen osotasuna bermatu, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. Gailua berrabiaraziko da. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Gailua jatorrizko modura itzultzeko, blokeatu sistema eragilearen abiarazlea. Gailuaren jatorrizko datuak berrezarriko dira. Gailuak Android behar bezala abiarazten duenean, desgaitu OEMa desblokeatzeko aukera Garatzaileentzako aukerak atalean."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Ezin izan da kernel-a eguneratu 16 kB-ko orriekin bateragarria izan dadin."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Aldaketa aplikatzen"</string>
-    <string name="confirm_format_ext4_title" msgid="4754057414728537125">"Gailua ext4-ra formateatu nahi duzu? Hori beharrezkoa da 16 kB-ko modurako."</string>
-    <string name="confirm_format_ext4_text" msgid="432847493298532536">"Gailu honen datuen partizioa ext4-ra bihurtu behar da 16 kB-ko garatzaileentzako aukera erabili baino lehen. Modu horretan ezin da softwarearen osotasuna bermatu, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. 16 kB-ko aukera aktibatzeko, berriro berrabiarazi beharko da berrabiarazte honen ondoren. Modu horretan zaudenean, 4 kB-ko eta 16 kB-ko moduen artean aldatu ahal izango duzu behin soilik berrabiarazita. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Gailua jatorrizko modura itzultzeko, aldatu berriro 4 kB-ko modura eta blokeatu sistema eragilearen abiarazlea. Gailuaren jatorrizko datuak berrezarriko dira. Gailuak Android behar bezala abiarazten duenean, desgaitu OEMa desblokeatzeko aukera Garatzaileentzako aukerak atalean. Berretsi ondoren, gailua xahutuko da eta fitxategi-sistema ext4-ra aldatuko da. Prozesu hori osatu ondoren, itzuli hona 16 kB-ko modua berriro gaitzeko."</string>
-    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Ezabatu datu guztiak"</string>
+    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
+    <skip />
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Ezin izan da formateatu eta xahutu datu-partizioa ext4-ra."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Sistema eragilearen abiarazlea desblokeatu behar da"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"16 kB-ko garatzaileentzako aukera erabili baino lehen, gailuaren sistema eragilearen abiarazlea desblokeatu behar da. Modu horretan ezin da softwarearen osotasuna bermatu, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. 16 kB-ko modua aktibatzean, erabiltzaile-datu eta -ezarpen guztiak xahutuko dira. Sistema eragilearen abiarazlea desblokeatu ondoren, gailua birritan berrabiarazi beharko da 16 kB-ko moduaren aukera aktibatzeko. Modu horretan zaudenean, 4 kB-ko eta 16 kB-ko moduen artean aldatu ahal izango duzu behin soilik berrabiarazita. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Gailua jatorrizko modura itzultzeko, aldatu berriro 4 kB-ko modura eta blokeatu gailuaren sistema eragilearen abiarazlea edo OEMa. Gailuaren jatorrizko datuak berrezarriko dira. Desblokeatu sistema eragilearen abiarazlea eta saiatu berriro. Hori egiteko argibideak jasotzeko, joan &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; helbidera."</string>
@@ -5476,7 +5531,7 @@
     <string name="category_name_general" msgid="7737273712848115886">"Orokorrak"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Erabili gai iluna"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Erabili Bluetootha"</string>
-    <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"Erabili HDRko argitasun hobetua"</string>
+    <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"Erabili HDRko distira hobetua"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Erabili tonua ez jotzeko aukera"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Erabili wifi-gunea"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Erabili aplikazioak ainguratzeko eginbidea"</string>
