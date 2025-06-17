@@ -62,8 +62,9 @@ public class DisabilitySupportMenuController implements LifecycleObserver, OnCre
             return;
         }
 
-        menu.add(Menu.NONE, MenusUtils.MenuId.DISABILITY_SUPPORT.getValue(), Menu.NONE,
-                R.string.accessibility_disability_support_title);
+        final MenuItem item = menu.add(Menu.NONE, MenusUtils.MenuId.DISABILITY_SUPPORT.getValue(),
+                Menu.NONE, R.string.accessibility_disability_support_title);
+        item.setIcon(com.android.settingslib.widget.help.R.drawable.ic_help_actionbar);
     }
 
     @Override

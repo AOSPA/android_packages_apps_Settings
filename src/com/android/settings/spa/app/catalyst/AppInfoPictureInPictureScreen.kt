@@ -42,6 +42,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -94,8 +95,8 @@ open class AppInfoPictureInPictureScreen(context: Context, override val argument
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) { +PictureInPictureMainSwitch(storage) }
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) { +PictureInPictureMainSwitch(storage) }
 
     companion object {
         const val KEY = "device_state_app_info_picture_in_picture"
@@ -105,7 +106,7 @@ open class AppInfoPictureInPictureScreen(context: Context, override val argument
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
             val repo = AppListRepositoryImpl(context)
-            repo.loadAndFilterApps(context.userId, true).forEach { app ->
+            repo.loadApps(context.userId).forEach { app ->
                 if (app.supportsPictureInPicture(context)) {
                     emit(Bundle(1).apply { putString("app", app.packageName) })
                 }

@@ -22,24 +22,17 @@ import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.flags.Flags
-import com.android.settingslib.preference.CatalystScreenTestCase
-import com.google.common.truth.Truth.assertThat
-import org.junit.Test
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import org.mockito.kotlin.mock
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowSubscriptionManager
 
-class MobileNetworkListScreenTest : CatalystScreenTestCase() {
+class MobileNetworkListScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = MobileNetworkListScreen()
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_MOBILE_NETWORK_LIST
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(MobileNetworkListScreen.KEY)
-    }
 
     @DisableFlags(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
     @Config(shadows = [ShadowSubscriptionManager::class])

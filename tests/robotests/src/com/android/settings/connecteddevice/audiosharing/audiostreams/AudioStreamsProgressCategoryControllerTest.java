@@ -251,10 +251,10 @@ public class AudioStreamsProgressCategoryControllerTest {
         assertThat(subtitle2).isNotNull();
         assertThat(subtitle2.getText())
                 .isEqualTo(mContext.getString(R.string.audio_streams_dialog_no_le_device_subtitle));
-        View leftButton = dialog.findViewById(R.id.left_button);
+        View leftButton = dialog.findViewById(android.R.id.button2);
         assertThat(leftButton).isNotNull();
         assertThat(leftButton.getVisibility()).isEqualTo(View.VISIBLE);
-        Button rightButton = dialog.findViewById(R.id.right_button);
+        Button rightButton = dialog.findViewById(android.R.id.button1);
         assertThat(rightButton).isNotNull();
         assertThat(rightButton.getText())
                 .isEqualTo(mContext.getString(R.string.audio_streams_dialog_no_le_device_button));
@@ -299,10 +299,10 @@ public class AudioStreamsProgressCategoryControllerTest {
         assertThat(subtitle2.getText())
                 .isEqualTo(mContext.getString(
                         R.string.audio_streams_dialog_turn_off_talkback_subtitle));
-        View leftButton = dialog.findViewById(R.id.left_button);
+        View leftButton = dialog.findViewById(android.R.id.button2);
         assertThat(leftButton).isNotNull();
         assertThat(leftButton.getVisibility()).isEqualTo(View.VISIBLE);
-        Button rightButton = dialog.findViewById(R.id.right_button);
+        Button rightButton = dialog.findViewById(android.R.id.button1);
         assertThat(rightButton).isNotNull();
         assertThat(rightButton.getText())
                 .isEqualTo(

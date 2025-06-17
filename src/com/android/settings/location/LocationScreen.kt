@@ -35,6 +35,7 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(LocationScreen.KEY)
 open class LocationScreen :
@@ -81,10 +82,11 @@ open class LocationScreen :
 
     override fun fragmentClass(): Class<out Fragment>? = LocationSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
-        +LocationMainSwitch()
-        +RecentLocationAccessScreen.KEY
-    }
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
+            +LocationMainSwitch()
+            +RecentLocationAccessScreen.KEY
+        }
 
     companion object {
         const val KEY = "location_settings"

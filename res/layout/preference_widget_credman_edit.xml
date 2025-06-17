@@ -16,20 +16,13 @@
   -->
 
 <!-- Edit button -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/edit_button_layout"
-    android:layout_width="52dp"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:layout_gravity="end">
-
     <ImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/edit_button"
     android:layout_width="24dp"
     android:layout_height="24dp"
     android:gravity="center_vertical"
+    android:background="?android:attr/selectableItemBackground"
     android:layout_gravity="center"
     android:src="@drawable/ic_edit_24dp"
     android:contentDescription="@string/edit" />
-</LinearLayout>

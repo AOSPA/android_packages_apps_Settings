@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.systemui.shared.Flags.ambientAod
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(LockScreenPreferenceScreen.KEY)
 open class LockScreenPreferenceScreen(private val context: Context) :
@@ -85,8 +86,8 @@ open class LockScreenPreferenceScreen(private val context: Context) :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, LockScreenSettingsActivity::class.java, metadata?.key)
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             if (!ambientAod()) {
                 +AmbientDisplayAlwaysOnPreference()
             }

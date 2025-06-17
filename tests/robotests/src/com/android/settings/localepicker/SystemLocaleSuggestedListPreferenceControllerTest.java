@@ -164,18 +164,11 @@ public class SystemLocaleSuggestedListPreferenceControllerTest {
     }
 
     @Test
-    public void removeLocalesWithExtension_localesHasExtension_filterNoExtensionLocales() {
+    public void displayPreference_hasSuggestedPreference_removeLocalesWithExtension() {
         setupLocaleWithExtensionConditions();
-        List<LocaleStore.LocaleInfo> localesWithExtension =
-                mController.getLocalesWithExtension(mLocaleList);
         mController.displayPreference(mPreferenceScreen);
-
-        mLocaleList.removeAll(localesWithExtension);
         mController.setupPreference(mLocaleList, mPreferences);
 
-        assertThat(mLocaleList.size()).isEqualTo(1);
-        assertThat(mLocaleList.get(0).getFullNameNative()).isEqualTo(LOCALE_URDU_INDIA);
-        assertThat(mLocaleList.get(0).getLocale().hasExtensions()).isFalse();
         assertTrue(mPreferenceCategory.isVisible());
         assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(1);
     }

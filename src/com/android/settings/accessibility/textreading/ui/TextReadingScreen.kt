@@ -23,6 +23,7 @@ import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 // @ProvidePreferenceScreen(TextReadingScreen.KEY)
 open class TextReadingScreen : PreferenceScreenMixin {
@@ -41,8 +42,8 @@ open class TextReadingScreen : PreferenceScreenMixin {
 
     override fun fragmentClass(): Class<out Fragment>? = TextReadingPreferenceFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +TextReadingPreview()
             +TextReadingFontSizePreference()
             +TextReadingDisplaySizePreference()

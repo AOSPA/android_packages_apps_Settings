@@ -17,6 +17,7 @@
 package com.android.settings.gestures;
 
 import static com.android.settings.gestures.DoubleTapPowerLockscreenTipPreferenceController.AFFORDANCE_NAME_COLUMN;
+import static com.android.settings.gestures.DoubleTapPowerLockscreenTipPreferenceController.SLOT_ID_COLUMN;
 import static com.android.settings.gestures.DoubleTapPowerLockscreenTipPreferenceController.CAMERA_KEYGUARD_QUICK_AFFORDANCE_NAME;
 import static com.android.settings.gestures.DoubleTapPowerLockscreenTipPreferenceController.KEYGUARD_QUICK_AFFORDANCE_SELECTIONS_URI;
 import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_DISABLED_MODE;
@@ -127,17 +128,17 @@ public class DoubleTapPowerLockscreenTipPreferenceControllerTest {
     public void updateState_targetActionInLockscreenShortcut_preferenceVisible() {
         DoubleTapPowerSettingsUtils.setDoubleTapPowerButtonGestureEnabled(mContext, true);
         DoubleTapPowerSettingsUtils.setDoubleTapPowerButtonForCameraLaunch(mContext);
-        setSelectedLockScreenShortcuts(CAMERA_KEYGUARD_QUICK_AFFORDANCE_NAME);
+        setSelectedLockScreenShortcutWithSlotId(CAMERA_KEYGUARD_QUICK_AFFORDANCE_NAME, "left");
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
         assertThat(
                 TextUtils.equals(mPreference.getSummary(),
-                mContext.getString(
-                        R.string.double_tap_power_lockscreen_shortcut_tip_description,
-                        CAMERA_KEYGUARD_QUICK_AFFORDANCE_NAME
-                )
+                        mContext.getString(
+                                R.string.double_tap_power_lockscreen_shortcut_tip_description,
+                                CAMERA_KEYGUARD_QUICK_AFFORDANCE_NAME
+                        )
                 )).isTrue();
     }
 
@@ -171,6 +172,17 @@ public class DoubleTapPowerLockscreenTipPreferenceControllerTest {
         when(
                 mContentResolver
                         .query(eq(KEYGUARD_QUICK_AFFORDANCE_SELECTIONS_URI), any(), any(), any()))
+                .thenReturn(cursor);
+    }
+
+    private void setSelectedLockScreenShortcutWithSlotId(String affordanceName, String slotId) {
+        final MatrixCursor cursor = new MatrixCursor(
+                new String[]{AFFORDANCE_NAME_COLUMN, SLOT_ID_COLUMN});
+        cursor.addRow(new Object[]{affordanceName, slotId});
+        when(
+                mContentResolver
+                        .query(eq(KEYGUARD_QUICK_AFFORDANCE_SELECTIONS_URI), any(), any(),
+                                any()))
                 .thenReturn(cursor);
     }
 }

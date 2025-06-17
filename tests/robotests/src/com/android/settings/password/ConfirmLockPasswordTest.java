@@ -29,6 +29,7 @@ import static com.android.settings.password.TestUtils.TIMEOUT_MS;
 import static com.android.settings.password.TestUtils.VALID_REMAINING_ATTEMPTS;
 import static com.android.settings.password.TestUtils.buildConfirmDeviceCredentialBaseActivity;
 import static com.android.settings.password.TestUtils.createRemoteLockscreenValidationIntent;
+import static com.android.settings.password.TestUtils.createRemoteLockscreenValidationIntentWithGlifExpressiveStyle;
 import static com.android.settings.password.TestUtils.getConfirmDeviceCredentialBaseFragment;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -155,6 +156,43 @@ public class ConfirmLockPasswordTest {
                 buildConfirmDeviceCredentialBaseActivity(
                         ConfirmLockPassword.class,
                         createRemoteLockscreenValidationIntent(
+                                KeyguardManager.PIN, VALID_REMAINING_ATTEMPTS));
+        ConfirmLockPasswordFragment fragment =
+                (ConfirmLockPasswordFragment) getConfirmDeviceCredentialBaseFragment(activity);
+
+        assertThat(activity.isFinishing()).isFalse();
+        assertThat(fragment.mRemoteValidation).isTrue();
+        ImeAwareEditText editText = (ImeAwareEditText) activity.findViewById(R.id.password_entry);
+        assertThat(editText.getInputType()).isEqualTo(
+                InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+    }
+
+
+    @Test
+    public void onCreate_glifExpressiveStyle_remoteValidation_password_successfullyStart()
+            throws Exception {
+        ConfirmDeviceCredentialBaseActivity activity =
+                buildConfirmDeviceCredentialBaseActivity(
+                        ConfirmLockPassword.class,
+                        createRemoteLockscreenValidationIntentWithGlifExpressiveStyle(
+                                KeyguardManager.PASSWORD, VALID_REMAINING_ATTEMPTS));
+        ConfirmLockPasswordFragment fragment =
+                (ConfirmLockPasswordFragment) getConfirmDeviceCredentialBaseFragment(activity);
+
+        assertThat(activity.isFinishing()).isFalse();
+        assertThat(fragment.mRemoteValidation).isTrue();
+        ImeAwareEditText editText = (ImeAwareEditText) activity.findViewById(R.id.password_entry);
+        assertThat(editText.getInputType()).isEqualTo(
+                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+    }
+
+    @Test
+    public void onCreate_glifExpressiveStyle_remoteValidation_pin_successfullyStart()
+            throws Exception {
+        ConfirmDeviceCredentialBaseActivity activity =
+                buildConfirmDeviceCredentialBaseActivity(
+                        ConfirmLockPassword.class,
+                        createRemoteLockscreenValidationIntentWithGlifExpressiveStyle(
                                 KeyguardManager.PIN, VALID_REMAINING_ATTEMPTS));
         ConfirmLockPasswordFragment fragment =
                 (ConfirmLockPasswordFragment) getConfirmDeviceCredentialBaseFragment(activity);

@@ -163,9 +163,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         }
         var display = mInjector.getDisplay(getDisplayIdArg());
         if (display == null) {
-            screen.removeAll();
-            mTopOptionsPreference = null;
-            mMoreOptionsPreference = null;
+            finishFragment();
             return;
         }
         mResolutionPreferences.clear();

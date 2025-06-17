@@ -27,12 +27,15 @@ import android.content.pm.ActivityInfo;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Outline;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -68,7 +71,16 @@ public class HdrBrightnessSettings extends DashboardFragment {
         };
         requireActivity().getWindow().setColorMode(ActivityInfo.COLOR_MODE_HDR10);
 
+        ViewOutlineProvider vop = new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setRoundRect(/* left= */ 0, /* top= */ 0, view.getWidth(), view.getHeight(),
+                        getResources().getDimensionPixelSize(
+                                R.dimen.hdr_brightness_preview_corner_radius));
+            }
+        };
         LayoutPreference preview = findPreference(PREVIEW_KEY);
+
         ImageView standardImage = preview.findViewById(R.id.standard_image);
         Bitmap standardBitmap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.mountain_lake);
@@ -76,12 +88,16 @@ public class HdrBrightnessSettings extends DashboardFragment {
                 standardBitmap.getHeight() * 3 / 4, standardBitmap.getHeight());
         standardBitmap.setGainmap(null);
         standardImage.setImageBitmap(standardBitmap);
+        standardImage.setOutlineProvider(vop);
+        standardImage.setClipToOutline(true);
 
         ImageView hdrImage = preview.findViewById(R.id.hdr_image);
         Bitmap hdrBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mountain_lake);
         hdrBitmap = Bitmap.createBitmap(hdrBitmap, 0, 0, standardBitmap.getHeight() * 3 / 4,
                 standardBitmap.getHeight());
         hdrImage.setImageBitmap(hdrBitmap);
+        hdrImage.setOutlineProvider(vop);
+        hdrImage.setClipToOutline(true);
     }
 
     @Override

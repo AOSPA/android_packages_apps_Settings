@@ -49,6 +49,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceBinding
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(MobileNetworkListScreen.KEY)
 open class MobileNetworkListScreen :
@@ -172,8 +173,8 @@ open class MobileNetworkListScreen :
 
     override fun fragmentClass(): Class<out Fragment>? = MobileNetworkListFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) { +MobileDataPreference() }
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) { +MobileDataPreference() }
 
     companion object {
         const val KEY = "mobile_network_list"

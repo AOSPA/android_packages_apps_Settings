@@ -34,6 +34,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(NetworkProviderScreen.KEY)
 open class NetworkProviderScreen :
@@ -69,8 +70,8 @@ open class NetworkProviderScreen :
 
     override fun fragmentClass(): Class<out Fragment>? = NetworkProviderSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +PreferenceCategory("wifi_category", R.string.wifi_settings) += {
                 +WifiSwitchPreference()
             }

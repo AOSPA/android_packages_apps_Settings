@@ -59,7 +59,6 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
-import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.collect.Lists;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -98,7 +97,7 @@ public class ChooseLockPattern extends SettingsActivity {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
         modIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE,
-                SettingsThemeHelper.isExpressiveDesignEnabled());
+                ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext()));
         return modIntent;
     }
 
@@ -109,7 +108,7 @@ public class ChooseLockPattern extends SettingsActivity {
             mIntent = new Intent(context, ChooseLockPattern.class);
             mIntent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
             mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE,
-                    SettingsThemeHelper.isExpressiveDesignEnabled());
+                    ThemeHelper.shouldApplyGlifExpressiveStyle(context));
         }
 
         public IntentBuilder setUserId(int userId) {
@@ -174,14 +173,10 @@ public class ChooseLockPattern extends SettingsActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        ThemeHelper.trySetDynamicColor(this);
         if (ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext())) {
-            if (!ThemeHelper.trySetSuwTheme(this)) {
-                setTheme(ThemeHelper.getSuwDefaultTheme(getApplicationContext()));
-                ThemeHelper.trySetDynamicColor(this);
-            }
-        } else {
-            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-            ThemeHelper.trySetDynamicColor(this);
+            ThemeHelper.trySetSuwTheme(this);
         }
         super.onCreate(savedInstanceState);
         findViewById(R.id.content_parent).setFitsSystemWindows(false);

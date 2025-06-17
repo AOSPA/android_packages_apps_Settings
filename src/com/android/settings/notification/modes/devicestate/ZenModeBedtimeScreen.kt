@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 /**
  * This Bedtime mode screen is dedicated for device state. It functions via a virtual key and is
@@ -69,8 +70,8 @@ open class ZenModeBedtimeScreen :
         Intent(context, ModeSettingsActivity::class.java)
             .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, context.getBedtimeMode()?.id)
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) { +ZenModeButtonPreference(context.getBedtimeMode()!!) }
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) { +ZenModeButtonPreference(context.getBedtimeMode()!!) }
 
     companion object {
         const val KEY = "device_state_bedtime_mode_screen" // only for device state.

@@ -843,6 +843,18 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="com.android.settings.privatespace.onelock.PrivateSpaceBiometricSettings" />
         </activity>
 
+        <activity android:name="com.android.settings.password.SetScreenLockDialogActivity"
+            android:theme="@style/Transparent"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:taskAffinity="com.android.settings.set_screen_lock_dialog_task"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="com.android.internal.app.ScreenLockDialogContract.SET_SCREEN_LOCK_PROMPT_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".bluetooth.DevicePickerActivity"
                 android:label="@string/device_picker"
                 android:configChanges="orientation|keyboardHidden|screenSize"
@@ -2946,8 +2958,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.LOCK_SCREEN_REDACTION" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.require_user_type"
-                       android:value="primary" />
             <meta-data android:name="com.android.settings.title"
                        android:resource="@string/notification_suggestion_title" />
             <meta-data android:name="com.android.settings.summary"

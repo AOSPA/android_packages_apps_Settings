@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.utils.StringUtil
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(RecentLocationAccessScreen.KEY)
 open class RecentLocationAccessScreen: PreferenceScreenMixin, PreferenceAvailabilityProvider {
@@ -68,22 +69,23 @@ open class RecentLocationAccessScreen: PreferenceScreenMixin, PreferenceAvailabi
     override fun fragmentClass(): Class<out Fragment>? =
         RecentLocationAccessSeeAllFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
-        // not showing system app access for now
-        val userManager = UserManager.get(context)
-        val accessList = RecentAppOpsAccess.createForLocation(context)
-            .getAppListSorted(false)
-            .filter { access ->
-                RecentLocationAccessPreferenceController.isRequestMatchesProfileType(
-                    userManager,
-                    access,
-                    ProfileSelectFragment.ProfileType.ALL
-                )
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
+            // not showing system app access for now
+            val userManager = UserManager.get(context)
+            val accessList = RecentAppOpsAccess.createForLocation(context)
+                .getAppListSorted(false)
+                .filter { access ->
+                    RecentLocationAccessPreferenceController.isRequestMatchesProfileType(
+                        userManager,
+                        access,
+                        ProfileSelectFragment.ProfileType.ALL
+                    )
+                }
+            for (i in 0 until accessList.size) {
+                +LocationAccessAppPreference(accessList[i], i)
             }
-        for (i in 0 until accessList.size) {
-            +LocationAccessAppPreference(accessList[i], i)
         }
-    }
 
     companion object {
         const val KEY = "device_state_all_recent_location_access"

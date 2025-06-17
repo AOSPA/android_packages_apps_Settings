@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(MyDeviceInfoScreen.KEY)
 open class MyDeviceInfoScreen :
@@ -71,8 +72,8 @@ open class MyDeviceInfoScreen :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
         makeLaunchIntent(context, MyDeviceInfoActivity::class.java, metadata?.key)
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +PreferenceCategory(
                 "device_detail_category",
                 R.string.my_device_info_device_details_category_title,

@@ -24,6 +24,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,6 +57,24 @@ public abstract class BaseSupportFragment extends DashboardFragment {
 
         if (com.android.settings.accessibility.Flags.enableDisabilitySupport()) {
             handleDisabilitySupportFlow();
+        }
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if (menu.size() == 1) {
+            final MenuItem singleItem = menu.getItem(0);
+            if (singleItem != null) {
+                singleItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            }
+        } else if (menu.size() > 1) {
+            for (int i = 0; i < menu.size(); i++) {
+                final MenuItem item = menu.getItem(i);
+                if (item != null) {
+                    item.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                }
+            }
         }
     }
 

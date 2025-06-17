@@ -39,6 +39,7 @@ import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ScreensaverScreen.KEY)
@@ -95,7 +96,8 @@ open class ScreensaverScreen(private val context: Context) :
 
     override fun fragmentClass(): Class<out Fragment>? = DreamSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {}
 
     override fun onFirstObserverAdded() {
         // update summary when any of the screen saver settings has changed

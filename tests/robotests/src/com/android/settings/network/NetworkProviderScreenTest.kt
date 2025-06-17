@@ -16,24 +16,20 @@
 package com.android.settings.network
 
 import android.content.ContextWrapper
-import android.content.Intent
 import android.content.res.Resources
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.Settings.NetworkProviderSettingsActivity
+import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.flags.Flags
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
-@RunWith(AndroidJUnit4::class)
-class NetworkProviderScreenTest : CatalystScreenTestCase() {
+class NetworkProviderScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = NetworkProviderScreen()
 
     override val flagName: String
@@ -45,11 +41,6 @@ class NetworkProviderScreenTest : CatalystScreenTestCase() {
         object : ContextWrapper(appContext) {
             override fun getResources(): Resources = mockResources
         }
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(NetworkProviderScreen.KEY)
-    }
 
     @Test
     fun isAvailable_showInternetSettings_shouldReturnTrue() {

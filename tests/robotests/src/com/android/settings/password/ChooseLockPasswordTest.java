@@ -64,7 +64,6 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.widget.ImeAwareTextInputEditText;
 import com.android.settings.widget.ScrollToParentEditText;
 import com.android.settingslib.widget.theme.flags.Flags;
 
@@ -105,7 +104,7 @@ public class ChooseLockPasswordTest {
 
     @Test
     @EnableFlags(Flags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
-    public void intentBuilder_setPassword_shouldAddExtras_withExpressiveDesign() {
+    public void intentBuilder_setPassword_shouldAddExtras_referGlifExpressiveFlag() {
         Intent intent = new IntentBuilder(application)
                 .setPassword(LockscreenCredential.createPassword("password"))
                 .setPasswordType(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC)
@@ -114,7 +113,7 @@ public class ChooseLockPasswordTest {
 
         assertWithMessage("EXTRA_KEY_USE_EXPRESSIVE_STYLE").that(
                 intent.getBooleanExtra(EXTRA_KEY_USE_EXPRESSIVE_STYLE, false))
-                .isTrue();
+                .isFalse();
     }
 
     @Test
@@ -563,11 +562,11 @@ public class ChooseLockPasswordTest {
 
     @Test
     @EnableFlags(Flags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
-    public void defaultMessage_shouldBeInTextColorPrimary_withExpressiveDesign() {
+    public void defaultMessage_shouldBeInTextColorPrimary_referGlifExpressiveFlag() {
         final ChooseLockPassword passwordActivity = setupActivityWithPinTypeAndDefaultPolicy();
 
         final ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
-        final ImeAwareTextInputEditText passwordEntry = passwordActivity.findViewById(
+        final ScrollToParentEditText passwordEntry = passwordActivity.findViewById(
                 R.id.password_entry);
         final RecyclerView view = (RecyclerView) fragment.getPasswordRequirementsView();
         @ColorInt final int textColorPrimary = Utils.getColorAttrDefaultColor(passwordActivity,

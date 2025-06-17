@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
+import kotlinx.coroutines.CoroutineScope
 
 /** Pin Management landing page (Settings > Supervision > Manage Pin). */
 @ProvidePreferenceScreen(SupervisionPinManagementScreen.KEY)
@@ -94,8 +95,8 @@ class SupervisionPinManagementScreen :
         return R.drawable.ic_pin_outline
     }
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(context, this) {
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {
             +SupervisionSetupRecoveryPreference()
             +UntitledPreferenceCategoryMetadata(GROUP_KEY) += {
                 +SupervisionPinRecoveryPreference()

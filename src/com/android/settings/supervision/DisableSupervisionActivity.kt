@@ -54,6 +54,6 @@ class DisableSupervisionActivity : FragmentActivity() {
     }
 
     private fun isCallerSystemSupervisionRoleHolder(): Boolean {
-        return callingPackage == supervisionPackageName
+        return callingPackage == systemSupervisionPackageName
     }
 }

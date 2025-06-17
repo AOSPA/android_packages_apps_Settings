@@ -63,6 +63,9 @@ import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+import android.os.UserManager;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
@@ -79,6 +82,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.connectivity.Flags;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -95,6 +99,7 @@ import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -102,7 +107,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InOrder;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -139,6 +145,11 @@ public class WifiDetailPreferenceController2Test {
     private static final String FQDN = "fqdn";
     private static final Uri TEST_URI = Uri.parse("content://test/test");
 
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mMockScreen;
 
@@ -160,6 +171,8 @@ public class WifiDetailPreferenceController2Test {
     private WifiNetworkDetailsFragment mMockFragment;
     @Mock
     private WifiManager mMockWifiManager;
+    @Mock
+    private UserManager mMockUserManager;
     @Mock
     private NetworkDetailsTracker mMockNetworkDetailsTracker;
     @Mock
@@ -277,13 +290,12 @@ public class WifiDetailPreferenceController2Test {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         mContext = spy(RuntimeEnvironment.application);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
 
         when(mContext.getPackageManager()).thenReturn(mMockPackageManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
         when(mMockWifiEntry.getLevel()).thenReturn(LEVEL);
         when(mMockWifiEntry.getSecurityString(false /* concise */)).thenReturn(SECURITY);
         when(mMockWifiEntry.getTitle()).thenReturn(SSID);
@@ -1159,12 +1171,45 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void onUpdated_networkOwned_showForgetButton() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.canForget()).thenReturn(true);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = 1;
+        displayAndResume();
+
+        mController.onUpdated();
+
+        verify(mMockButtonsPref, times(2)).setButton1Visible(true);
+    }
+
+    @Test
     public void onUpdated_canNotForget_hideForgetButton() {
         setUpForConnectedNetwork();
         setUpSpyController();
         when(mMockWifiEntry.canForget()).thenReturn(false);
 
         displayAndResume();
+        mController.onUpdated();
+
+        verify(mMockButtonsPref, times(2)).setButton1Visible(false);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void onUpdated_networkNotOwned_hideForgetButton() {
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.canForget()).thenReturn(true);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mMockUserManager.getUserCount()).thenReturn(3);
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        displayAndResume();
+
         mController.onUpdated();
 
         verify(mMockButtonsPref, times(2)).setButton1Visible(false);
@@ -1182,21 +1227,51 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void canModifyNetwork_savedNetwork_returnTrue() {
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void onResume_canShareNetwork_networkOwned() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.canShare()).thenReturn(true);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = 1;
+        displayAndResume();
+
+        verify(mMockButtonsPref).setButton4Visible(true);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void onResume_canNotShareNetwork_networkNotOwned() {
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.canShare()).thenReturn(true);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mMockUserManager.getUserCount()).thenReturn(3);
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        displayAndResume();
+
+        verify(mMockButtonsPref).setButton4Visible(false);
+    }
+
+    @Test
+    public void isNetworkAdminLocked_savedNetwork_returnFalse() {
         setUpForConnectedNetwork();
         setUpSpyController();
         when(mMockWifiEntry.isSaved()).thenReturn(true);
 
-        assertThat(mController.canModifyNetwork()).isTrue();
+        assertThat(mController.isNetworkAdminLocked()).isFalse();
     }
 
     @Test
-    public void canModifyNetwork_lockedDown() {
+    public void isNetworkAdminLocked_lockedDown() {
         setUpForConnectedNetwork();
         setUpSpyController();
         lockDownNetwork();
+        when(mMockWifiEntry.isSaved()).thenReturn(true);
 
-        assertThat(mController.canModifyNetwork()).isFalse();
+        assertThat(mController.isNetworkAdminLocked()).isTrue();
     }
 
     /**
@@ -1220,6 +1295,53 @@ public class WifiDetailPreferenceController2Test {
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.WIFI_DEVICE_OWNER_CONFIGS_LOCKDOWN, 1);
+    }
+
+    @Test
+    public void canModifyNetwork_featureDisabled_returnTrue() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+
+        assertThat(mController.canModifyNetwork()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void canModifyNetwork_networkOwned_returnTrue() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = 1;
+
+        assertThat(mController.canModifyNetwork()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void canModifyNetwork_networkNotOwned_returnFalse() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getUserCount()).thenReturn(3);
+
+        assertThat(mController.canModifyNetwork()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void canModifyNetwork_networkNotOwned_singleUser_returnTrue() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(mMockUserManager.getUserCount()).thenReturn(1);
+
+        assertThat(mController.canModifyNetwork()).isTrue();
     }
 
     @Test
@@ -1396,6 +1518,46 @@ public class WifiDetailPreferenceController2Test {
 
         lp.setCaptivePortalData(null);
         updateLinkProperties(lp);
+        inOrder.verify(mMockButtonsPref).setButton2Visible(false);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void onCapabilitiesChanged_captivePortal_networkOwned_shouldShowSignInButton() {
+        setUpForConnectedNetwork();
+        setUpController();
+        InOrder inOrder = inOrder(mMockButtonsPref);
+        displayAndResume();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        when(mMockWifiEntry.canSignIn()).thenReturn(true);
+        mockWifiConfiguration.creatorUid = 1;
+        NetworkCapabilities nc = makeNetworkCapabilities();
+        nc = new NetworkCapabilities.Builder(nc)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL).build();
+
+        updateNetworkCapabilities(nc);
+
+        inOrder.verify(mMockButtonsPref).setButton2Visible(true);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void onCapabilitiesChanged_captivePortal_networkNotOwned_showNotShowSignInButton() {
+        setUpForConnectedNetwork();
+        setUpController();
+        InOrder inOrder = inOrder(mMockButtonsPref);
+        displayAndResume();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        when(mMockWifiEntry.canSignIn()).thenReturn(true);
+        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        NetworkCapabilities nc = makeNetworkCapabilities();
+        nc = new NetworkCapabilities.Builder(nc)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL).build();
+
+        updateNetworkCapabilities(nc);
+
         inOrder.verify(mMockButtonsPref).setButton2Visible(false);
     }
 

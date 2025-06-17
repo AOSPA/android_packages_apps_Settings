@@ -15,32 +15,14 @@
  */
 package com.android.settings.language
 
-import android.content.ComponentName
-import android.content.Context
-import android.content.ContextWrapper
-import android.content.pm.PackageManager
-import android.content.res.Resources
-import com.android.settings.Settings.LanguageSettingsActivity
 import com.android.settings.flags.Flags
-import com.android.settingslib.preference.CatalystScreenTestCase
-import com.google.common.truth.Truth.assertThat
-import org.junit.Assert
-import org.junit.Test
-import org.mockito.ArgumentMatchers.anyInt
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.stub
+import com.android.settings.testutils2.SettingsCatalystTestCase
 
-class LanguageSettingScreenTest: CatalystScreenTestCase() {
+class LanguageSettingScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = LanguageSettingScreen()
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_LANGUAGE_SETTING
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(LanguageSettingScreen.KEY)
-    }
 
     override fun migration() {}
 }

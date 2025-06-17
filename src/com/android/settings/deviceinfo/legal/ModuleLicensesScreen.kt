@@ -23,6 +23,7 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ModuleLicensesScreen.KEY)
@@ -46,7 +47,8 @@ open class ModuleLicensesScreen : PreferenceScreenMixin, PreferenceAvailabilityP
 
     override fun fragmentClass(): Class<out Fragment>? = ModuleLicensesDashboard::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        preferenceHierarchy(context) {}
 
     override fun isAvailable(context: Context): Boolean {
         val modules = context.packageManager.getInstalledModules(/* flags= */ 0)

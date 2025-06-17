@@ -890,9 +890,17 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     /**
      * Returns whether the network represented by this preference can be modified.
      */
-    public boolean canModifyNetwork() {
+    public boolean isNetworkAdminLocked() {
         return mWifiEntry.isSaved()
-                && !WifiUtils.isNetworkLockedDown(mContext, mWifiEntry.getWifiConfiguration());
+                && WifiUtils.isNetworkLockedDown(mContext, mWifiEntry.getWifiConfiguration());
+    }
+
+    /**
+     * Returns true if the current user owns the network or if there is only a single user
+     * on the device.
+     */
+    public boolean canModifyNetwork() {
+        return WifiUtils.isNetworkEditable(mWifiEntry, mContext);
     }
 
     /**
@@ -900,21 +908,22 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
      */
     public boolean canForgetNetwork() {
         return mWifiEntry.canForget()
-                && !WifiUtils.isNetworkLockedDown(mContext, mWifiEntry.getWifiConfiguration());
+                && !WifiUtils.isNetworkLockedDown(mContext, mWifiEntry.getWifiConfiguration())
+                    && WifiUtils.isNetworkEditable(mWifiEntry, mContext);
     }
 
     /**
      * Returns whether the user can sign into the network represented by this preference.
      */
     private boolean canSignIntoNetwork() {
-        return mWifiEntry.canSignIn();
+        return mWifiEntry.canSignIn() && WifiUtils.isNetworkEditable(mWifiEntry, mContext);
     }
 
     /**
      * Returns whether the user can share the network represented by this preference with QR code.
      */
     private boolean canShareNetwork() {
-        return mWifiEntry.canShare();
+        return mWifiEntry.canShare() && WifiUtils.isNetworkEditable(mWifiEntry, mContext);
     }
 
     /**

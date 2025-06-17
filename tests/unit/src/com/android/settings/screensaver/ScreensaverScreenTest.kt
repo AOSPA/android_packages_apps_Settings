@@ -24,9 +24,9 @@ import android.provider.Settings.Secure.SCREENSAVER_ENABLED
 import com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig
 import com.android.settings.dream.ScreensaverScreen
 import com.android.settings.flags.Flags
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.dream.DreamBackend
-import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -36,7 +36,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
-class ScreensaverScreenTest : CatalystScreenTestCase() {
+class ScreensaverScreenTest : SettingsCatalystTestCase() {
     private val mockResources = mock<Resources>()
     private val settingsStore = mock<KeyValueStore>()
     private val context =
@@ -79,11 +79,6 @@ class ScreensaverScreenTest : CatalystScreenTestCase() {
             on { getString(SCREENSAVER_COMPONENTS) } doAnswer { activeDreamName }
             on { getBoolean(SCREENSAVER_ENABLED) } doAnswer { dreamEnabled }
         }
-    }
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(ScreensaverScreen.KEY)
     }
 
     @Test

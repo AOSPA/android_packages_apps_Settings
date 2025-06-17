@@ -17,21 +17,14 @@ package com.android.settings.wifi.calling
 
 import android.os.Bundle
 import com.android.settings.flags.Flags
-import com.android.settingslib.preference.CatalystScreenTestCase
-import com.google.common.truth.Truth.assertThat
-import org.junit.Test
+import com.android.settings.testutils2.SettingsCatalystTestCase
 
-class WifiCallingScreenTest : CatalystScreenTestCase() {
+class WifiCallingScreenTest : SettingsCatalystTestCase() {
 
     override val preferenceScreenCreator = WifiCallingScreen(Bundle.EMPTY)
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_WIFI_CALLING
-
-    @Test
-    fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(WifiCallingScreen.KEY)
-    }
 
     override fun migration() {}
 }

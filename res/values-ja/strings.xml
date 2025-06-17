@@ -47,10 +47,8 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"メール"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"前のプレビュー"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"次のプレビュー"</string>
-    <!-- no translation found for font_size_make_smaller_desc (319927200356692406) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (6739310980713118605) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="319927200356692406">"フォントサイズを小さくする"</string>
+    <string name="font_size_make_larger_desc" msgid="6739310980713118605">"フォントサイズを大きくする"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"常時"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"デバイスを折りたたむとフロント ディスプレイが ON になります"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"上にスワイプして継続"</string>
@@ -942,10 +940,8 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"接続"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"接続を解除"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"ペアに設定して接続"</string>
-    <!-- no translation found for bluetooth_connecting (5315496594905010438) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnecting (1643422701532873735) -->
-    <skip />
+    <string name="bluetooth_connecting" msgid="5315496594905010438">"接続中"</string>
+    <string name="bluetooth_disconnecting" msgid="1643422701532873735">"切断中"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Bluetooth を ON にすると、近くにある他の Bluetooth デバイスと通信できます"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Bluetooth を ON にすると、近くにある他の Bluetooth デバイスと通信できます。Quick Share や「デバイスを探す」などの機能は Bluetooth を使用します。"</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Bluetooth を ON にすると、付近の他の Bluetooth デバイスと通信できます。\n\nBluetooth が OFF の場合でもアプリやサービスは付近のデバイスをいつでもスキャンできます。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。この設定は Bluetooth スキャンの設定で変更できます。"</string>
@@ -1184,6 +1180,8 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"このネットワークを他のデバイス ユーザーと共有する"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"このデバイスのすべてのユーザーが共有ネットワークの確認と接続を行えます。管理者は共有ネットワークを削除できます。詳細"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"他のユーザーにネットワーク構成の編集を許可する"</string>
+    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"このネットワークはインターネットに接続していません。接続を維持しますか？"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"接続制限のため、一部のアプリやサービスが使用できなくなることがあります。このまま使用しますか？"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"このネットワークについて次回から表示しない"</string>
@@ -2175,8 +2173,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"タッチパッド"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"タッチパッドとマウス"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"マウス"</string>
-    <!-- no translation found for mouse_settings_summary (1308610072914620926) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="1308610072914620926">"ポインタの速度、ボタンのカスタマイズ"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"ポインタの速度、操作"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"タップしてクリック"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"タップしてドラッグでアイテムを移動"</string>
@@ -2230,13 +2227,23 @@
     <string name="gesture_button_next" msgid="695288092704187356">"次へ"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"再開"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"完了"</string>
-    <string name="action_corners_title" msgid="8971354126563421646">"アクション コーナーのカスタマイズ"</string>
-    <string name="action_corners_summary" msgid="4245089615854251124">"カーソルを使用してシステムを操作します"</string>
-    <string name="action_corners_intro" msgid="4384209411870086502">"アクション コーナーをカスタマイズするには、次の領域を選択します"</string>
-    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"左下の角"</string>
-    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"右下の角"</string>
-    <string name="action_corners_top_left_title" msgid="6604149810499060560">"左上の角"</string>
-    <string name="action_corners_top_right_title" msgid="583996793984142329">"右上の角"</string>
+    <string name="action_corner_title" msgid="1489042651433221319">"コーナー アクションのカスタマイズ"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"カーソルを使用してシステムを操作します"</string>
+    <string name="action_corner_intro" msgid="8782001241997579665">"コーナー アクションをカスタマイズするには、次の領域を選択します"</string>
+    <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"左下の角"</string>
+    <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"右下の角"</string>
+    <string name="action_corner_top_left_title" msgid="4633975226092344210">"左上の角"</string>
+    <string name="action_corner_top_right_title" msgid="4995999693840776032">"右上の角"</string>
+    <string name="action_corner_action_none" msgid="5203163099950649999">"なし"</string>
+    <string name="action_corner_action_home" msgid="6779642573582379579">"ホーム"</string>
+    <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"最近使ったアプリ"</string>
+    <string name="action_corner_action_notifications" msgid="3779353356349774469">"通知"</string>
+    <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"クイック設定"</string>
+    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g>のショートカットを選択してください"</string>
+    <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"左下の角"</string>
+    <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"右下の角"</string>
+    <string name="action_corner_top_left_name" msgid="8077670910600032291">"左上の角"</string>
+    <string name="action_corner_top_right_name" msgid="6307321595919080297">"右上の角"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"修飾キー"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"キーの動作を変更します"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"すべてリセット"</string>
@@ -2315,8 +2322,7 @@
     <string name="last_time_used_label" msgid="7589377271406011659">"最終使用日時"</string>
     <string name="last_time_used_never" msgid="2936073559267990034">"なし"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"使用時間"</string>
-    <!-- no translation found for phone_information_v2_title (3373745314543222111) -->
-    <skip />
+    <string name="phone_information_v2_title" msgid="3373745314543222111">"デバイス情報 V2"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"ユーザー補助"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"ユーザー補助の設定"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"ディスプレイ、操作、音声"</string>
@@ -2355,8 +2361,7 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"システム操作"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"フィードバックを送信"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"評価のお願い"</string>
-    <!-- no translation found for accessibility_disability_support_title (7934160403456751664) -->
-    <skip />
+    <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Google Disability Support への問い合わせ"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"ユーザー補助に関するアンケート"</string>
     <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"いろいろなアプリでダークモードを使用したいですか？"</string>
     <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"フィードバックをお寄せください"</string>
@@ -2383,6 +2388,7 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"拡大のショートカット"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"カーソル フォロー"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"拡大機能でカーソルの動きに合わせる方法を選択してください。"</string>
+    <string name="accessibility_magnification_cursor_following_unavailable_summary" msgid="1683880243856242269">"画面の一部のみを拡大している間は利用できません"</string>
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"マウスの動きに合わせて画面を移動する"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"マウスを画面の中央に固定して画面を移動する"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"マウスが画面の端に触れたときに画面を移動する"</string>
@@ -2523,10 +2529,32 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"画面の拡大を自動更新"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"アプリの遷移時に画面の拡大を更新"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"電源ボタンで通話を終了"</string>
-    <string name="accessibility_force_invert_title" msgid="5248504501753732051">"他のアプリもダークモードに設定"</string>
-    <string name="accessibility_force_invert_summary" msgid="257503086198180749">"ダークモードをより多くのアプリに適用します。一部のアプリでは機能しない場合があります。"</string>
+    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"アニメーションを無効化"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"画面上の動きを軽減できます"</string>
+    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"モノラル音声"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"音声再生時のチャンネルを統合する"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"オーディオ バランス"</string>
@@ -3682,7 +3710,8 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{なし}=1{1 件のスケジュールが有効}other{# 件のスケジュールが有効}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"サイレント モード"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"モード"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"就寝中、仕事中、運転中などの特定の状況において、割り込みを最小限に抑えて集中できるようにします。"</string>
+    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
+    <skip />
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"独自のモードを作成する"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"大切な人やアプリからの通知のみ受け取ります"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"スケジュールの設定"</string>
@@ -4307,10 +4336,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"権限マネージャー"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"位置情報を共有する方法の更新"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ユーザーの位置情報を共有する方法が変更されたアプリを確認"</string>
-    <!-- no translation found for app_function_access_settings_title (1474765429611652468) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (6465715820745848068) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1474765429611652468">"他のアプリのエージェントのコントロール"</string>
+    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"デバイスと他のアプリで操作を実行します"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"タップして復帰"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"画面をダブルタップするとデバイスが復帰します"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"リンクを開く"</string>
@@ -4470,10 +4497,8 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"全てのサイズを変更します"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"表示間隔、画面のズーム、スケール、拡大縮小"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"プレビュー"</string>
-    <!-- no translation found for screen_zoom_make_smaller_desc (1450649885198381123) -->
-    <skip />
-    <!-- no translation found for screen_zoom_make_larger_desc (7125594310562596457) -->
-    <skip />
+    <string name="screen_zoom_make_smaller_desc" msgid="1450649885198381123">"表示サイズを小さくする"</string>
+    <string name="screen_zoom_make_larger_desc" msgid="7125594310562596457">"表示サイズを大きくする"</string>
     <string name="disconnected" msgid="3469373726996129247">"接続されていません"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"未接続"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> 個のアプリがインストールされています"</string>
@@ -5328,14 +5353,15 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"16 KB ページサイズで起動する"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"16 KB ページサイズの対応カーネルでデバイスを起動します"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"4 KB モードから 16 KB モードへの切り替え"</string>
+    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
+    <skip />
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"ページ非依存モードで 4 KB カーネルを実行していますが、16 KB モードに切り替えようとしています。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。この切り替えにより、デバイスが再起動します。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。デバイスを本番環境モードに戻すには、4 KB モードに戻してから、ブートローダーをロックする必要があります。この操作で、デバイスは出荷時の設定にリセットされます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。"</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"16 KB モードから 4 KB モードへの切り替え"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"ページ非依存モードで 16 KB カーネルを実行していますが、4 KB モードに切り替えようとしています。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。この切り替えにより、デバイスが再起動します。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。デバイスを本番環境モードに戻すには、ブートローダーをロックする必要があります。この操作で、デバイスは出荷時の設定にリセットされます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。"</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"16 KB ページの互換性のあるカーネルにアップデートできませんでした。"</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"変更を適用しています"</string>
-    <string name="confirm_format_ext4_title" msgid="4754057414728537125">"デバイスを ext4 に再フォーマットしますか？（16 KB モードの場合に必要です）"</string>
-    <string name="confirm_format_ext4_text" msgid="432847493298532536">"16 KB デベロッパー オプションを使用するには、このデバイスのデータ パーティションを ext4 に変換する必要があります。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。16 KB オプションを有効にするには、この操作の後でもう 1 回再起動が必要です。このモードになったら、4 KB モードと 16 KB モードの間で切り替えることができます（切り替えのたびに 1 回再起動します）。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。デバイスを本番環境モードに戻すには、4 KB モードに戻してから、ブートローダーをロックする必要があります。この操作で、デバイスは出荷時の設定にリセットされます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。デバイスがワイプされて、確認後にファイルシステムが ext4 に変更されます。完了したら、戻って 16 KB を再度有効にしてください。"</string>
-    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"すべてのデータを消去"</string>
+    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
+    <skip />
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"データ パーティションを ext4 に再フォーマットしてワイプすることができませんでした。"</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"ブートローダーのロック解除が必要です"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"このデバイスで 16 KB デベロッパー オプションを使用するには、ブートローダーのロックを解除しておく必要があります。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。16 KB モードの有効化中にユーザーデータと設定はすべてワイプされます。ブートローダーのロックが解除されたら、16 KB オプションを有効にするために再起動が 2 回必要です。このモードになったら、4 KB モードと 16 KB モードの間で切り替えることができます（切り替えのたびに 1 回再起動します）。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。デバイスを本番環境モードに戻すには、4 KB モードに戻してから、OEM / ブートローダーをロックする必要があります。この操作で、デバイスは出荷時の設定にリセットされます。ブートローダーのロックを解除してから、もう一度お試しください。この手順については、&lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; をご覧ください。"</string>
@@ -5855,8 +5881,7 @@
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"保護者による使用制限の PIN を設定する"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"PIN の確認"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN を更新しました"</string>
-    <!-- no translation found for supervision_promo_footer_action_button_description (7617359721703338141) -->
-    <skip />
+    <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"アプリを開く"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"PIN を削除しますか？"</string>
     <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"このデバイスのすべてのユーザーに現在設定されている PIN が削除され、あなたが設定した管理機能も無効になります。この操作は元に戻せません。"</string>
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"他のプロフィールの管理機能を先に一時停止してください"</string>

@@ -54,6 +54,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImeAwareEditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -68,9 +69,11 @@ import com.android.internal.widget.TextViewInputDisabler;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.Utils;
+import com.android.settings.widget.ImeAwareTextInputEditText;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
@@ -88,22 +91,12 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
     public static class InternalActivity extends ConfirmLockPassword {
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext())) {
-            if (!ThemeHelper.trySetSuwTheme(this)) {
-                setTheme(ThemeHelper.getSuwDefaultTheme(getApplicationContext()));
-                ThemeHelper.trySetDynamicColor(this);
-            }
-        }
-    }
-
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ConfirmLockPasswordFragment.class.getName());
+        modIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE,
+                ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext()));
         return modIntent;
     }
 
@@ -127,7 +120,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             CredentialCheckResultTracker.Listener, SaveAndFinishWorker.Listener,
             RemoteLockscreenValidationFragment.Listener {
         private static final String FRAGMENT_TAG_CHECK_LOCK_RESULT = "check_lock_result";
-        private ImeAwareEditText mPasswordEntry;
+        private EditText mPasswordEntry;
+        private TextInputLayout mPasswordEntryLayout;
         private TextViewInputDisabler mPasswordEntryInputDisabler;
         private AsyncTask<?, ?, ?> mPendingLockCheck;
         private CredentialCheckResultTracker mCredentialCheckResultTracker;
@@ -150,20 +144,24 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 Bundle savedInstanceState) {
             final int storedQuality = mLockPatternUtils.getKeyguardStoredPasswordQuality(
                     mEffectiveUserId);
-
-            ConfirmLockPassword activity = (ConfirmLockPassword) getActivity();
-            View view = inflater.inflate(
-                    activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.NORMAL
-                            ? R.layout.confirm_lock_password_normal
-                            : R.layout.confirm_lock_password,
-                    container,
-                    false);
+            final ConfirmLockPassword activity = (ConfirmLockPassword) getActivity();
+            final boolean isExpressiveStyle = getActivity().getIntent().getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE, false) || (
+                    activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.EXPRESSIVE);
+            int layoutId = R.layout.confirm_lock_password /* default layout */;
+            if (activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.NORMAL) {
+                layoutId = R.layout.confirm_lock_password_normal;
+            } else if (isExpressiveStyle) {
+                layoutId = R.layout.confirm_lock_password_expressive;
+            }
+            View view = inflater.inflate(layoutId, container, false);
             mGlifLayout = view.findViewById(R.id.setup_wizard_layout);
-            mPasswordEntry = (ImeAwareEditText) view.findViewById(R.id.password_entry);
+            mPasswordEntry = (EditText) view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
             // EditText inside ScrollView doesn't automatically get focus.
             mPasswordEntry.requestFocus();
             mPasswordEntryInputDisabler = new TextViewInputDisabler(mPasswordEntry);
+            mPasswordEntryLayout = view.findViewById(R.id.password_entry_layout);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
 
             if (mRemoteValidation) {
@@ -178,6 +176,14 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == storedQuality
                         || DevicePolicyManager.PASSWORD_QUALITY_MANAGED == storedQuality;
             }
+            if (isExpressiveStyle && mPasswordEntryLayout != null) {
+                final int textEntryLayoutHintId = mIsAlpha
+                        ? R.string.unlock_set_unlock_mode_password
+                        : R.string.unlock_set_unlock_mode_pin;
+                mPasswordEntryLayout.setHint(textEntryLayoutHintId);
+                mPasswordEntryLayout.setHintEnabled(true);
+            }
+
             mImm = (InputMethodManager) getActivity().getSystemService(
                     Context.INPUT_METHOD_SERVICE);
 
@@ -496,7 +502,15 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mPasswordEntry.setEnabled(shouldEnableInput);
             mPasswordEntryInputDisabler.setInputEnabled(shouldEnableInput);
             if (shouldEnableInput) {
-                mPasswordEntry.scheduleShowSoftInput();
+                if (mPasswordEntry instanceof ImeAwareEditText) {
+                    ((ImeAwareEditText) mPasswordEntry).scheduleShowSoftInput();
+                } else if (mPasswordEntry instanceof ImeAwareTextInputEditText) {
+                    ((ImeAwareTextInputEditText) mPasswordEntry).scheduleShowSoftInput();
+                } else {
+                    Log.w(TAG,
+                            "mPasswordEntry neither ImeAwareEditText nor "
+                                    + "ImeAwareTextInputEditText");
+                }
                 mPasswordEntry.requestFocus();
             } else {
                 mImm.hideSoftInputFromWindow(mPasswordEntry.getWindowToken(), /* flags= */0);

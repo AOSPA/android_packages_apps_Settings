@@ -44,6 +44,7 @@ import android.net.wifi.WifiManager;
 import android.os.Looper;
 import android.os.UserManager;
 import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -68,11 +69,13 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
@@ -88,6 +91,11 @@ import java.util.stream.IntStream;
 public class WifiConfigController2Test {
 
     static final String WIFI_EAP_TLS_V1_3 = "TLS v1.3";
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private WifiConfigUiBase2 mConfigUiBase;
@@ -130,6 +138,7 @@ public class WifiConfigController2Test {
     private static final String NUMBER_AND_CHARACTER_KEY = "123456abcd";
     private static final String PARTIAL_NUMBER_AND_CHARACTER_KEY = "123456abc?";
     private static final int DHCP = 0;
+    private static final int STATIC_IP = 1;
     // Saved certificates
     private static final String SAVED_CA_CERT = "saved CA cert";
     private static final String SAVED_USER_CERT = "saved user cert";
@@ -142,7 +151,6 @@ public class WifiConfigController2Test {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(eq(WifiManager.class))).thenReturn(mWifiManager);
         when(mContext.getSystemService(eq(UserManager.class))).thenReturn(mUserManager);
@@ -267,6 +275,96 @@ public class WifiConfigController2Test {
 
         assertThat(sharingFields.getVisibility()).isEqualTo(View.GONE);
         assertThat(editConfigFields.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void checkIpSpinnerState_networkNotOwned_multipleUsers() {
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        final View ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
+        assertThat(ipSettingsSpinner.isEnabled()).isEqualTo(false);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void checkIpSpinnerState_networkNotOwned_singleUser() {
+        when(mUserManager.getUserCount()).thenReturn(1);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        final View ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
+        assertThat(ipSettingsSpinner.isEnabled()).isEqualTo(true);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void checkIpSpinnerState_networkOwned_multipleUsers() {
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        mockWifiConfig.creatorUid = 1;
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        final View ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
+        assertThat(ipSettingsSpinner.isEnabled()).isEqualTo(true);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void checkProxySpinnerState_networkNotOwned_multipleUsers() {
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        final View proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
+        assertThat(proxySettingsSpinner.isEnabled()).isEqualTo(false);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void checkProxySpinnerState_networkNotOwned_singleUser() {
+        when(mUserManager.getUserCount()).thenReturn(1);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        final View proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
+        assertThat(proxySettingsSpinner.isEnabled()).isEqualTo(true);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void checkProxySpinnerState_networkOwned_multipleUsers() {
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        mockWifiConfig.creatorUid = 1;
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        final View proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
+        assertThat(proxySettingsSpinner.isEnabled()).isEqualTo(true);
     }
 
     @Test

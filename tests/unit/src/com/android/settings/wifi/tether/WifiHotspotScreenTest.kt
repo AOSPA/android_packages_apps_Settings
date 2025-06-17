@@ -23,11 +23,10 @@ import android.net.wifi.WifiManager
 import android.net.wifi.WifiManager.WIFI_AP_STATE_DISABLED
 import android.net.wifi.WifiManager.WIFI_AP_STATE_ENABLED
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settingslib.datastore.KeyValueStore
+import com.android.settings.flags.Flags
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mockito.verify
 import org.mockito.kotlin.any
@@ -35,11 +34,17 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
-@RunWith(AndroidJUnit4::class)
-class WifiHotspotSwitchPreferenceTest {
+class WifiHotspotScreenTest : SettingsCatalystTestCase() {
     private val mockWifiManager = mock<WifiManager>()
     private val mockTetheringManager = mock<TetheringManager>()
-    private val mockDataSaverStore = mock<KeyValueStore>()
+
+    override val preferenceScreenCreator
+        get() = WifiHotspotScreen(context)
+
+    override val flagName: String
+        get() = Flags.FLAG_CATALYST_TETHER_SETTINGS
+
+    override fun migration() {}
 
     private val context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
@@ -53,13 +58,11 @@ class WifiHotspotSwitchPreferenceTest {
                 }
         }
 
-    private val preference = WifiHotspotSwitchPreference(context, mockDataSaverStore)
-
     @Test
     fun getValue_defaultOn_returnOn() {
         mockWifiManager.stub { on { wifiApState } doReturn WIFI_AP_STATE_ENABLED }
 
-        val getValue = preference.storage(context).getBoolean(WifiHotspotSwitchPreference.KEY)
+        val getValue = preferenceScreenCreator.storage(context).getBoolean(WifiHotspotScreen.KEY)
 
         assertThat(getValue).isTrue()
     }
@@ -68,21 +71,21 @@ class WifiHotspotSwitchPreferenceTest {
     fun getValue_defaultOff_returnOff() {
         mockWifiManager.stub { on { wifiApState } doReturn WIFI_AP_STATE_DISABLED }
 
-        val getValue = preference.storage(context).getBoolean(WifiHotspotSwitchPreference.KEY)
+        val getValue = preferenceScreenCreator.storage(context).getBoolean(WifiHotspotScreen.KEY)
 
         assertThat(getValue).isFalse()
     }
 
     @Test
     fun setValue_valueOn_startTethering() {
-        preference.storage(context).setBoolean(WifiHotspotSwitchPreference.KEY, true)
+        preferenceScreenCreator.storage(context).setBoolean(WifiHotspotScreen.KEY, true)
 
         verify(mockTetheringManager).startTethering(eq(TETHERING_WIFI), any(), any())
     }
 
     @Test
     fun setValue_valueOff_stopTethering() {
-        preference.storage(context).setBoolean(WifiHotspotSwitchPreference.KEY, false)
+        preferenceScreenCreator.storage(context).setBoolean(WifiHotspotScreen.KEY, false)
 
         verify(mockTetheringManager).stopTethering(eq(TETHERING_WIFI))
     }

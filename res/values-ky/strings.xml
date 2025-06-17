@@ -47,10 +47,8 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"Электрондук почта"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Мурунку алдын ала көрүү"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Кийинки алдын ала көрүү"</string>
-    <!-- no translation found for font_size_make_smaller_desc (319927200356692406) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (6739310980713118605) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="319927200356692406">"Ариптин өлчөмүн кичирейтүү"</string>
+    <string name="font_size_make_larger_desc" msgid="6739310980713118605">"Ариптин өлчөмүн чоңойтуу"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Ар дайым"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Түзмөгүңүздү бүктөгөнүңүздө алдыңкы экран күйөт"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Улантуу үчүн сүрүп коюңуз"</string>
@@ -942,10 +940,8 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Туташуу"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Ажыратуу"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Байланыштыруу жана туташтыруу"</string>
-    <!-- no translation found for bluetooth_connecting (5315496594905010438) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnecting (1643422701532873735) -->
-    <skip />
+    <string name="bluetooth_connecting" msgid="5315496594905010438">"Туташууда"</string>
+    <string name="bluetooth_disconnecting" msgid="1643422701532873735">"Ажыратылууда"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Bluetooth күйгүзүлгөндө, түзмөгүңүз жакын жердеги башка Bluetooth түзмөктөрү менен байланыша алат"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Bluetooth күйгүзүлгөндө, жакын арадагы башка Bluetooth түзмөктөрүнө байланыша аласыз. Бул технология Тез бөлүшүү жана Түзмөгүм кайда? сыяктуу функцияларда колдонулат."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Башка түзмөктөргө туташуу үчүн Bluetooth\'ду күйгүзүңүз.\n\nЖерлерди тагыраак аныктап, түзмөктүн иштешин жакшыртуу үчүн Bluetooth өчүп турганда да колдонмолор менен кызматтар жакын жердеги түзмөктөрдү издей беришет. Издебесин десеңиз, Bluetooth түзмөктөрүн издөө параметрин өчүрүп коюңуз."</string>
@@ -1184,6 +1180,8 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Бул тармакты түзмөктүн башка колдонуучулары менен бөлүшүү"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Бул түзмөктүн бардык колдонуучулары бөлүшүлгөн тармакты көрүп, ага туташа алышат. Администраторлор бөлүшүлгөн тармакты өчүрө алышат. Кеңири маалымат"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Башка колдонуучуларга тармактын конфигурациясын түзөтүүгө уруксат берүү"</string>
+    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
+    <skip />
     <string name="no_internet_access_text" msgid="3611993143350310936">"Бул тармак Интернетке туташпай турат. Аны колдоно бересизби?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Байланыш чектелген, андыктан айрым колдонмолор жана кызматтар иштебей калышы мүмкүн. Колдоносузбу?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Бул тармак үчүн экинчи сураба"</string>
@@ -2175,8 +2173,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Сенсордук такта"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сенсордук такта жана чычкан"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Чычкан"</string>
-    <!-- no translation found for mouse_settings_summary (1308610072914620926) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="1308610072914620926">"Көрсөткүчтүн ылдамдыгы, баскычты ыңгайлаштыруу"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Көрсөткүчтүн ылдамдыгы, жаңсоолор"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Таптап чыкылдатуу"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Сүйрөп жылдыруу"</string>
@@ -2230,13 +2227,40 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Кийинки"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Өчүрүп күйгүзүү"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Бүттү"</string>
-    <string name="action_corners_title" msgid="8971354126563421646">"Аракет бурчтарын ыңгайлаштыруу"</string>
-    <string name="action_corners_summary" msgid="4245089615854251124">"Системада багыт алуу үчүн курсорлорду колдонуңуз"</string>
-    <string name="action_corners_intro" msgid="4384209411870086502">"Аракет бурчтарын ыңгайлаштыруу үчүн төмөнкү аймактарды тандаңыз"</string>
-    <string name="action_corners_bottom_left_title" msgid="8677233546610832717">"Төмөнкү сол бурчу"</string>
-    <string name="action_corners_bottom_right_title" msgid="2155948558861306738">"Төмөнкү оң бурчу"</string>
-    <string name="action_corners_top_left_title" msgid="6604149810499060560">"Жогорку сол бурчу"</string>
-    <string name="action_corners_top_right_title" msgid="583996793984142329">"Жогорку оң бурчу"</string>
+    <!-- no translation found for action_corner_title (1489042651433221319) -->
+    <skip />
+    <!-- no translation found for action_corner_summary (695618538930535335) -->
+    <skip />
+    <!-- no translation found for action_corner_intro (8782001241997579665) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
+    <skip />
+    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
+    <skip />
+    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
+    <skip />
+    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
+    <skip />
+    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
+    <skip />
+    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
+    <skip />
+    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
+    <skip />
+    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
+    <skip />
+    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
+    <skip />
+    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
+    <skip />
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Өзгөртүү баскычтары"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Баскычтардын аракеттери өзгөрөт"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Баарын баштапкы абалга келтирүү"</string>
@@ -2315,8 +2339,7 @@
     <string name="last_time_used_label" msgid="7589377271406011659">"Акыркы жолу колдонулган"</string>
     <string name="last_time_used_never" msgid="2936073559267990034">"эч качан"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Колдонулган убакыт"</string>
-    <!-- no translation found for phone_information_v2_title (3373745314543222111) -->
-    <skip />
+    <string name="phone_information_v2_title" msgid="3373745314543222111">"Телефондогу маалымат V2"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Атайын мүмкүнчүлүктөр"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Атайын мүмкүнчүлүктөрдүн параметрлери"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Экран, башкаруу элементтери, аудио"</string>
@@ -2355,8 +2378,7 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Системанын башкаруу параметрлери"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Пикир билдирүү"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Бизге баа бериңиз"</string>
-    <!-- no translation found for accessibility_disability_support_title (7934160403456751664) -->
-    <skip />
+    <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Google Disability кызматынын колдоосуна кайрылыңыз"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Атайын мүмкүнчүлүктөр сурамжылоосу"</string>
     <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Караңгы теманы көбүрөөк колдонуп жатасызбы?"</string>
     <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Пикир билдириңиз"</string>
@@ -2383,6 +2405,8 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Чоңойтуу ыкчам баскычы"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Курсор жылып жатат"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Чоңойтуу курсор менен кантип жыларын тандаңыз"</string>
+    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
+    <skip />
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Экран чычкан менен чогуу жылсын"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Экран жылганда чычкан анын ортосунда болсун"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Чычкан экрандын четине тийгенде экран жылсын"</string>
@@ -2523,10 +2547,32 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Экрандын чоңойтуусун авто жаңыртуу"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Колдонмо кубулган сайын, экрандын чоңойтуусун жаңыртуу"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Чалууну кубат баскычы бүтүрөт"</string>
-    <string name="accessibility_force_invert_title" msgid="5248504501753732051">"Колдонмолордо караңгы теманы тандоо"</string>
-    <string name="accessibility_force_invert_summary" msgid="257503086198180749">"Караңгы теманы башка колдонмолордо да иштетиңиз. Айрым колдонмолордо иштебеши мүмкүн."</string>
+    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
+    <skip />
+    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
+    <skip />
+    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Анимацияларды алып салуу"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Экрандагы кыймыл азаят"</string>
+    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
+    <skip />
+    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
+    <skip />
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Моно аудио"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Аудио ойнотулуп жатканда каналдар биригет"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Аудионун балансы"</string>
@@ -3682,7 +3728,8 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Жок}=1{1 график коюлду}other{# график коюлду}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Тынчымды алба"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Режимдер"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Алаксытуучу нерселерди азайтып, уйку, жумуш, айдоо жана башка режимдердин жардамы менен көңүлүңүздү керектүү нерселерге буруңуз."</string>
+    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
+    <skip />
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Өзүңүздүн режимиңизди түзүңүз"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Маанилүү байланыштар менен колдонмолордон гана билдирмелерди алып турасыз"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"График түзүү"</string>
@@ -4307,10 +4354,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"Уруксаттарды башкаргыч"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Жүргөн жер тууралуу маалыматты бөлүшүү ыкмасын жаңыртуу"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Жүргөн жериңизди көрсөткөн ыкманы өзгөрткөн колдонмолорду карап чыксаңыз болот"</string>
-    <!-- no translation found for app_function_access_settings_title (1474765429611652468) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (6465715820745848068) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Башка колдонмолордун агенттерин көзөмөлдөө"</string>
+    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Түзмөгүңүздө жана башка колдонмолордо аракеттерди аткарыңыз"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Ойготуу үчүн тийип коюңуз"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Түзмөктү ойготуу үчүн экрандын каалаган жерине эки жолу тийип коюңуз"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Шилтемелерди ачуу"</string>
@@ -4470,10 +4515,8 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Баарын чоңойтуп же кичирейтесиз"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"дисплей тыгыздыгы, экранды чоңойтуу, шкла, шкалалоо"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Алдын ала көрүү"</string>
-    <!-- no translation found for screen_zoom_make_smaller_desc (1450649885198381123) -->
-    <skip />
-    <!-- no translation found for screen_zoom_make_larger_desc (7125594310562596457) -->
-    <skip />
+    <string name="screen_zoom_make_smaller_desc" msgid="1450649885198381123">"Көрсөтүү өлчөмүн кичирейтүү"</string>
+    <string name="screen_zoom_make_larger_desc" msgid="7125594310562596457">"Көрсөтүү өлчөмүн чоңойтуу"</string>
     <string name="disconnected" msgid="3469373726996129247">"Байланышкан жок"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Байланышкан жок"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> колдонмо орнотулган"</string>
@@ -5328,14 +5371,15 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"16 Кб өлчөмүндөгү бет м-н күйгүзүү"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"16 Кб өлчөмүндөгү бетти колдоого алган ядролуу иштетүү түзмөгү"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"4 Кб режиминен 16 Кб режимине которулуу"</string>
+    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
+    <skip />
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"4 Кб өлчөмүндөгү ядрону иштеткен беттин көлөмүнө көз каранды эмес режимдесиз жана 16 Кб режимине өтүп жатасыз. Бул режимде программанын бүтүндүгүнө кепилдик берилбейт. Операциялык тутумду жүктөгүчтүн кулпусу ачылып турганда телефондо сакталган бардык маалыматтар коркунучта болушу мүмкүн. Бул түзмөктү өчүрүп күйгүзөт. Бул режимдерде айрым функциялар өчүрүлөт, андыктан кээ бир колдонмолор иштебей калышы мүмкүн. Түзмөктү өндүрүш режимине кайтаруу үчүн кайра 4 Кб режимине которулуп, түзмөктү баштапкы абалга келтирген операциялык тутумду жүктөгүчтү кулпулашыңыз керек болот. Түзмөк Android\'ге ийгиликтүү жүктөлгөндөн кийин, иштеп чыгуучунун параметрлеринен OEM ачууну өчүрүңүз."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"16 Кб режиминен 4 Кб режимине которулуу"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"4 Кб өлчөмүндөгү ядрону иштеткен беттин көлөмүнө көз каранды эмес режимдесиз жана 16 Кб режимине өтүп жатасыз. Бул режимде программанын бүтүндүгүнө кепилдик берилбейт. Операциялык тутумду жүктөгүчтүн кулпусу ачылып турганда телефондо сакталган бардык маалыматтар коркунучта болушу мүмкүн. Бул түзмөктү өчүрүп күйгүзөт. Бул режимдерде айрым функциялар өчүрүлөт, андыктан кээ бир колдонмолор иштебей калышы мүмкүн. Түзмөктү өндүрүш режимине кайтаруу үчүн түзмөктү баштапкы абалга келтирген операциялык тутумду жүктөгүчтү кулпулашыңыз керек болот. Түзмөк Android\'ге ийгиликтүү жүктөлгөндөн кийин, иштеп чыгуучунун параметрлеринен OEM ачууну өчүрүңүз."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Ядро 16 Кб баракка шайкеш келген ядрого жаңыртылган жок."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Өзгөртүү киргизилүүдө"</string>
-    <string name="confirm_format_ext4_title" msgid="4754057414728537125">"Түзмөк ext4 катары кайра форматталсынбы? (16 Кб режими үчүн талап кылынат)"</string>
-    <string name="confirm_format_ext4_text" msgid="432847493298532536">"Бул түзмөктүн маалымат камтылган катуу диск бөлүгү 16 Kб өлчөмүндөгү иштеп чыгуучунун параметрин колдонуудан мурун ext4 форматына өзгөртүлүшү керек. Бул режимде программанын бүтүндүгүнө кепилдик берилбейт. Операциялык тутумду жүктөгүчтүн кулпусу ачылып турганда телефондо сакталган бардык маалыматтар коркунучта болушу мүмкүн. 16 Kб параметрин иштетүү үчүн дагы бир жолу өчүрүп-күйгүзүү талап кылынат. Бул режимге өткөндөн кийин, бир жолу өчүрүп-күйгүзүү менен 4 Kб жана 16 Kб режимдеринин арасында которула аласыз. Бул режимдерде айрым функциялар өчүрүлөт, андыктан кээ бир колдонмолор иштебей калышы мүмкүн. Түзмөктү өндүрүш режимине кайтаруу үчүн кайра 4 Кб режимине которулуп, түзмөктү баштапкы абалга келтирген операциялык тутумду жүктөгүчтү кулпулашыңыз керек болот. Түзмөк Android\'ге ийгиликтүү жүктөлгөндөн кийин, иштеп чыгуучунун параметрлеринен OEM ачууну өчүрүңүз. Ырастоодон кийин түзмөк тазаланат жана файл системасы ext4 форматына өзгөртүлөт. Бул процесс аяктагандан кийин, 16 Кб режимин кайра иштетүү үчүн кайтыңыз."</string>
-    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Бардык нерселерди өчүрүү"</string>
+    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
+    <skip />
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Кайра форматталбай жана катуу диск бөлүгүндөгү маалымат ext4 үчүн тазаланбай калды."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Операциялык тутумду жүктөгүчтүн кулпусун ачуу талап кылынат"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"Бул түзмөктө 16 Кб өлчөмүндөгү иштеп чыгуучу параметри колдонулуудан мурун операциялык тутумду жүктөгүчтүн кулпусу ачылышы керек. Бул режимде программанын бүтүндүгүнө кепилдик берилбейт. Операциялык тутумду жүктөгүчтүн кулпусу ачылып турганда телефондо сакталган бардык маалыматтар коркунучта болушу мүмкүн. 16 Kб режимин иштеткенде колдонуучунун бардык маалыматтары жана параметрлери өчүрүлөт. Операциялык тутумду жүктөгүч кулпусу ачылгандан кийин 16 Кб параметрин иштетүү үчүн эки жолу өчүрүп-күйгүзүү талап кылынат. Бул режимге өткөндөн кийин, бир жолу өчүрүп-күйгүзүү менен 4 Kб жана 16 Kб режимдеринин арасында которула аласыз. Бул режимдерде айрым функциялар өчүрүлөт, андыктан кээ бир колдонмолор иштебей калышы мүмкүн. Түзмөктү өндүрүш режимине кайтаруу үчүн кайра 4 Кб режимине которулуп, (түзмөктү баштапкы абалга келтирген) OEM/операциялык тутумду жүктөгүчтү кулпулашыңыз керек болот. Операциялык тутумду жүктөгүчтүн кулпусун ачып, кайталап көрүңүз. Муну кантип аткаруу керектиги боюнча нускамаларды төмөндөгү даректен көрүүгө болот: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5855,8 +5899,7 @@
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Ата-эненин көзөмөлүнүн PIN кодун коюңуз"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"PIN кодду ырастаңыз"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN код жаңырды"</string>
-    <!-- no translation found for supervision_promo_footer_action_button_description (7617359721703338141) -->
-    <skip />
+    <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Колдонмону ачуу"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"PIN код өчүрүлсүнбү?"</string>
     <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"Ушуну менен бул түзмөктү колдонгондордун баары үчүн учурдагы PIN код жана туураланган башкаруу элементтери өчүрүлөт. Бул аракет артка кайтарылбайт."</string>
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"Адегенде башка профилдердеги башкаруу элементтерин тындырыңыз"</string>

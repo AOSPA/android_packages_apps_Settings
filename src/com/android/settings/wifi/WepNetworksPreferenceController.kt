@@ -21,7 +21,6 @@ import android.net.wifi.WifiManager
 import android.security.advancedprotection.AdvancedProtectionManager
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,7 +30,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.spa.preference.ComposePreferenceController
@@ -123,11 +121,7 @@ class WepNetworksPreferenceController(context: Context, preferenceKey: String) :
                     AlertDialogButton(stringResource(R.string.wifi_cancel)) { openDialog = false },
                 title = stringResource(R.string.wifi_settings_wep_networks_disconnect_title),
                 text = {
-                    Text(
-                        stringResource(R.string.wifi_settings_wep_networks_disconnect_summary),
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                    )
+                    Text(stringResource(R.string.wifi_settings_wep_networks_disconnect_summary))
                 })
         }
     }

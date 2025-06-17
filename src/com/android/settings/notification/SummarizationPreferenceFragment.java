@@ -90,7 +90,9 @@ public class SummarizationPreferenceFragment extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return Flags.notificationClassificationUi();
+                    NotificationBackend backend = new NotificationBackend();
+                    return (Flags.nmSummarization() || Flags.nmSummarizationUi())
+                            && backend.isNotificationSummarizationSupported();
                 }
             };
 }

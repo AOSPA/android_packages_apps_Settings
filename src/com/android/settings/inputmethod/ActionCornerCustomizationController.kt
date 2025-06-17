@@ -19,7 +19,11 @@ package com.android.settings.inputmethod
 import android.app.ActivityManager
 import android.content.Context
 import android.provider.Settings
+import android.provider.Settings.Secure.ACTION_CORNER_ACTION_HOME
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_NONE
+import android.provider.Settings.Secure.ACTION_CORNER_ACTION_NOTIFICATIONS
+import android.provider.Settings.Secure.ACTION_CORNER_ACTION_OVERVIEW
+import android.provider.Settings.Secure.ACTION_CORNER_ACTION_QUICK_SETTINGS
 import android.provider.Settings.Secure.ACTION_CORNER_BOTTOM_LEFT_ACTION
 import android.provider.Settings.Secure.ACTION_CORNER_BOTTOM_RIGHT_ACTION
 import android.provider.Settings.Secure.ACTION_CORNER_TOP_LEFT_ACTION
@@ -43,8 +47,6 @@ class ActionCornerCustomizationController(context: Context, preferenceKey: Strin
 
     private val corner: Corner = prefKeyToCorner[preferenceKey]!!
 
-    private val actions = context.resources.getStringArray(R.array.action_corner_action_values).asList()
-
     override fun getAvailabilityStatus(): Int {
         return if (actionCornerCustomization() && (isTouchpad() || isMouse())) AVAILABLE
         else CONDITIONALLY_UNAVAILABLE
@@ -56,6 +58,7 @@ class ActionCornerCustomizationController(context: Context, preferenceKey: Strin
         val cornerName = mContext.getString(corner.nameId)
         listPreference.dialogTitle =
             mContext.getString(R.string.action_corner_action_dialog_title, cornerName)
+        listPreference.entryValues = entryValues
     }
 
     override fun updateState(preference: Preference?) {
@@ -71,13 +74,13 @@ class ActionCornerCustomizationController(context: Context, preferenceKey: Strin
         val current = Settings.System.getIntForUser(mContext.contentResolver,
             corner.target,
             ACTION_CORNER_ACTION_NONE, ActivityManager.getCurrentUser())
-        return actions[current]
+        return current.toString()
     }
 
     override fun getSummary(): CharSequence? = listPreference.entry
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
-        val action = actions.indexOf(newValue.toString())
+        val action = newValue.toString().toInt()
         Settings.System.putIntForUser(
             mContext.contentResolver, corner.target, action, ActivityManager.getCurrentUser())
         updateListPreference()
@@ -90,6 +93,13 @@ class ActionCornerCustomizationController(context: Context, preferenceKey: Strin
             "action_corner_bottom_right" to Corner.BOTTOM_RIGHT,
             "action_corner_top_left" to Corner.TOP_LEFT,
             "action_corner_top_right" to Corner.TOP_RIGHT,)
+
+        val entryValues = arrayOf<CharSequence>(
+            ACTION_CORNER_ACTION_NONE.toString(),
+            ACTION_CORNER_ACTION_HOME.toString(),
+            ACTION_CORNER_ACTION_OVERVIEW.toString(),
+            ACTION_CORNER_ACTION_NOTIFICATIONS.toString(),
+            ACTION_CORNER_ACTION_QUICK_SETTINGS.toString(),)
     }
 
     enum class Corner(val nameId: Int, val target: String) {
