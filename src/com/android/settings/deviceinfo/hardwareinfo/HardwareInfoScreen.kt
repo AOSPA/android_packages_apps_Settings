@@ -52,7 +52,7 @@ open class HardwareInfoScreen :
 
     override fun getMetricsCategory() = SettingsEnums.DIALOG_SETTINGS_HARDWARE_INFO
 
-    override fun isFlagEnabled(context: Context) = Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = Flags.catalystDeviceModel()
 
     override fun hasCompleteHierarchy() = false
 

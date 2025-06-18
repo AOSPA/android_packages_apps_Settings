@@ -50,7 +50,7 @@ open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyG
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
-    override fun isFlagEnabled(context: Context) = Flags.catalystAppList() || Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
 
     override fun hasCompleteHierarchy() = false
 
@@ -61,12 +61,9 @@ open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyG
         }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        generatePreferenceHierarchy(context, coroutineScope, false)
 
-    override val defaultType: Boolean
-        get() = false // do not include system apps
-
-    override suspend fun generatePreferenceHierarchy(
+    override fun generatePreferenceHierarchy(
         context: Context,
         coroutineScope: CoroutineScope,
         type: Boolean, // whether to include system apps

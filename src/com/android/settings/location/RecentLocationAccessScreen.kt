@@ -55,8 +55,7 @@ open class RecentLocationAccessScreen: PreferenceScreenMixin, PreferenceAvailabi
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
-    override fun isFlagEnabled(context: Context) =
-        Flags.catalystLocationSettings() || Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = Flags.catalystLocationSettings()
 
     override fun isAvailable(context: Context) = LocationEnabler(context, null, null).isEnabled(
         Settings.Secure.getInt(

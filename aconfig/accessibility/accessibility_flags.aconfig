@@ -21,6 +21,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_flash_notifications"
+  namespace: "accessibility"
+  description: "Migrate flash notification screen to the Catalyst infrastructure"
+  bug: "337243568"
+}
+
+flag {
   name: "check_prebundled_is_preinstalled"
   namespace: "accessibility"
   description: "Checks that all 'prebundled' components, used for grouping, are also preinstalled"
@@ -73,14 +80,4 @@ flag {
   namespace: "accessibility"
   description: "Don't show quick settings tooltip in SUW, since the user can't use quick settings there."
   bug: "294560581"
-}
-
-flag {
-  name: "toggle_feature_fragment_collection_info"
-  namespace: "accessibility"
-  description: "Provides custom CollectionInfo for ToggleFeaturePreferenceFragment"
-  bug: "318607873"
-  metadata {
-    purpose: PURPOSE_BUGFIX
-  }
 }

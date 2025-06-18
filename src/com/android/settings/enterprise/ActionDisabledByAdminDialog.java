@@ -29,6 +29,8 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.security.advancedprotection.AdvancedProtectionManager;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.widget.SettingsThemeHelper;
@@ -50,9 +52,14 @@ public class ActionDisabledByAdminDialog extends Activity
                 getAdminDetailsFromIntent(getIntent());
         final String restriction = getRestrictionFromIntent(getIntent());
         mDialogHelper = new ActionDisabledByAdminDialogHelper(this, restriction);
-        mDialogHelper.prepareDialogBuilder(restriction, enforcedAdmin)
-                .setOnDismissListener(this)
-                .show();
+
+        final AlertDialog.Builder dialogBuilder =
+                (android.app.supervision.flags.Flags.deprecateDpmSupervisionApis()
+                                && enforcedAdmin.component == null)
+                        ? mDialogHelper.prepareDialogBuilder(
+                                restriction, getEnforcingAdmin(getIntent(), restriction))
+                        : mDialogHelper.prepareDialogBuilder(restriction, enforcedAdmin);
+        dialogBuilder.setOnDismissListener(this).show();
     }
 
     @Override
@@ -60,7 +67,13 @@ public class ActionDisabledByAdminDialog extends Activity
         super.onNewIntent(intent);
         final EnforcedAdmin admin = getAdminDetailsFromIntent(intent);
         final String restriction = getRestrictionFromIntent(intent);
-        mDialogHelper.updateDialog(restriction, admin);
+
+        if (android.app.supervision.flags.Flags.deprecateDpmSupervisionApis()
+                && admin.component == null) {
+            mDialogHelper.updateDialog(restriction, getEnforcingAdmin(intent, restriction));
+        } else {
+            mDialogHelper.updateDialog(restriction, admin);
+        }
     }
 
     @androidx.annotation.VisibleForTesting
@@ -123,6 +136,13 @@ public class ActionDisabledByAdminDialog extends Activity
         } else {
             enforcedAdmin.component = enforcingAdmin.getComponentName();
         }
+    }
+
+    private EnforcingAdmin getEnforcingAdmin(Intent intent, String restriction) {
+        final DevicePolicyManager dpm = getSystemService(DevicePolicyManager.class);
+        final int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+
+        return dpm.getEnforcingAdmin(userId, restriction);
     }
 
     @androidx.annotation.VisibleForTesting

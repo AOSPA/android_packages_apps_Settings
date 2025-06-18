@@ -71,7 +71,7 @@ class ActionCornerCustomizationController(context: Context, preferenceKey: Strin
     }
 
     private fun getCurrentAction(): String {
-        val current = Settings.System.getIntForUser(mContext.contentResolver,
+        val current = Settings.Secure.getIntForUser(mContext.contentResolver,
             corner.target,
             ACTION_CORNER_ACTION_NONE, ActivityManager.getCurrentUser())
         return current.toString()
@@ -81,7 +81,7 @@ class ActionCornerCustomizationController(context: Context, preferenceKey: Strin
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
         val action = newValue.toString().toInt()
-        Settings.System.putIntForUser(
+        Settings.Secure.putIntForUser(
             mContext.contentResolver, corner.target, action, ActivityManager.getCurrentUser())
         updateListPreference()
         return true

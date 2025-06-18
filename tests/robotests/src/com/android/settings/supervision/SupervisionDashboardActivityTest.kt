@@ -22,10 +22,14 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+import android.content.pm.PackageManager.DONT_KILL_APP
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.supervision.SupervisionDashboardActivity.Companion.FULL_SUPERVISION_REDIRECT_ACTION
+import com.android.settings.supervision.SupervisionDashboardActivity.Companion.INSTALL_SUPERVISION_APP_ACTION
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settingslib.ipc.MessengerServiceRule
 import com.google.common.truth.Truth.assertThat
@@ -34,6 +38,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
@@ -42,17 +47,13 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowContextImpl
-import org.robolectric.shadows.ShadowPackageManager
 
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.INSTRUMENTATION_TEST)
 class SupervisionDashboardActivityTest {
-
-    private lateinit var applicationContext: Context
-    private lateinit var shadowPackageManager: ShadowPackageManager
     private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val shadowPackageManager = shadowOf(context.packageManager)
     private val mockSupervisionManager = mock<RoleManager>()
-    private val testSupervisionPackage = "com.android.settings.test"
 
     @get:Rule
     val serviceRule =
@@ -62,27 +63,19 @@ class SupervisionDashboardActivityTest {
 
     @Before
     fun setup() {
-        applicationContext = ApplicationProvider.getApplicationContext<Context>()
-        shadowPackageManager = shadowOf(applicationContext.packageManager)
-
         Shadow.extract<ShadowContextImpl>((context as Application).baseContext).apply {
             setSystemService(Context.ROLE_SERVICE, mockSupervisionManager)
         }
     }
 
     @Test
-    fun hasNecessaryComponent_loadInitialFragment() = runTest {
+    fun hasNecessaryComponent_enabled_loadInitialFragment() = runTest {
         // Setup necessary supervision component to be present
         mockSupervisionManager.stub {
             on { getRoleHolders(eq(RoleManager.ROLE_SYSTEM_SUPERVISION)) } doReturn
-                listOf(testSupervisionPackage)
+                listOf(TEST_SUPERVISION_PACKAGE)
         }
-        val serviceComponentName =
-            ComponentName(testSupervisionPackage, "FakeSupervisionMessengerService")
-        val intentFilter =
-            IntentFilter(SupervisionMessengerClient.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION)
-        shadowPackageManager.addServiceIfNotPresent(serviceComponentName)
-        shadowPackageManager.addIntentFilterForService(serviceComponentName, intentFilter)
+        setUpMessengerServiceComponent(disabled = false)
 
         val activityScenario = ActivityScenario.launch(SupervisionDashboardActivity::class.java)
 
@@ -93,14 +86,17 @@ class SupervisionDashboardActivityTest {
     }
 
     @Test
-    fun noNecessaryComponent_startLoadingActivityAndFinishSelf() = runTest {
+    fun hasNecessaryComponent_disabled_startLoadingActivityAndFinishSelf() = runTest {
         // No supervision component to be present
         mockSupervisionManager.stub {
-            on { getRoleHolders(eq(RoleManager.ROLE_SYSTEM_SUPERVISION)) } doReturn listOf()
+            on { getRoleHolders(eq(RoleManager.ROLE_SYSTEM_SUPERVISION)) } doReturn
+                listOf(TEST_SUPERVISION_PACKAGE)
         }
 
+        setUpMessengerServiceComponent(disabled = true)
+
         val activityScenario = ActivityScenario.launch(SupervisionDashboardActivity::class.java)
-        val nextActivityIntent = shadowOf(applicationContext as Application).nextStartedActivity
+        val nextActivityIntent = shadowOf(context as Application).nextStartedActivity
 
         // Check that the loading activity is started
         assertThat(nextActivityIntent.component?.className)
@@ -108,5 +104,129 @@ class SupervisionDashboardActivityTest {
 
         // Check that the activity is finished
         assertThat(activityScenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+    }
+
+    @Test
+    fun hasNecessaryComponentEnabled_enabled_fullySupervised_intentResolved_redirect() = runTest {
+        // Setup necessary supervision component to be present
+        mockSupervisionManager.stub {
+            on { getRoleHolders(any()) } doReturn listOf(TEST_SUPERVISION_PACKAGE)
+        }
+        setUpMessengerServiceComponent(disabled = false)
+        setUpRedirectActivityComponent(FULL_SUPERVISION_REDIRECT_ACTION)
+
+        val activityScenario = ActivityScenario.launch(SupervisionDashboardActivity::class.java)
+        val nextActivityIntent = shadowOf(context as Application).nextStartedActivity
+
+        // Check that the redirect activity is started
+        assertThat(nextActivityIntent.action).isEqualTo(FULL_SUPERVISION_REDIRECT_ACTION)
+
+        // Check that the dashboard activity is finished
+        assertThat(activityScenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+    }
+
+    @Test
+    fun hasNecessaryComponent_enabled_notFullySupervised_doNotRedirect() = runTest {
+        // Setup necessary supervision component to be present
+        mockSupervisionManager.stub {
+            on { getRoleHolders(eq(RoleManager.ROLE_SYSTEM_SUPERVISION)) } doReturn
+                listOf(TEST_SUPERVISION_PACKAGE)
+        }
+        setUpMessengerServiceComponent(disabled = false)
+        setUpRedirectActivityComponent(FULL_SUPERVISION_REDIRECT_ACTION)
+
+        val activityScenario = ActivityScenario.launch(SupervisionDashboardActivity::class.java)
+        val nextActivityIntent = shadowOf(context as Application).nextStartedActivity
+
+        // Check that the loading activity is not started
+        assertThat(nextActivityIntent).isNull()
+
+        // Check that the dashboard activity is not finished
+        assertThat(activityScenario.state).isEqualTo(Lifecycle.State.RESUMED)
+    }
+
+    @Test
+    fun hasNecessaryComponent_enabled_redirectIntentNotResolved_doNotRedirect() = runTest {
+        // Setup necessary supervision component to be present
+        mockSupervisionManager.stub {
+            on { getRoleHolders(any()) } doReturn listOf(TEST_SUPERVISION_PACKAGE)
+        }
+        setUpMessengerServiceComponent(disabled = false)
+
+        val activityScenario = ActivityScenario.launch(SupervisionDashboardActivity::class.java)
+        val nextActivityIntent = shadowOf(context as Application).nextStartedActivity
+
+        // Check that the loading activity is not started
+        assertThat(nextActivityIntent).isNull()
+
+        // Check that the dashboard activity is not finished
+        assertThat(activityScenario.state).isEqualTo(Lifecycle.State.RESUMED)
+    }
+
+    @Test
+    fun noNecessaryComponent_appInstallIntentNotResolved_doNotRedirect() = runTest {
+        // Setup necessary supervision component to be present
+        mockSupervisionManager.stub {
+            on { getRoleHolders(any()) } doReturn listOf(TEST_SUPERVISION_PACKAGE)
+        }
+        val activityScenario = ActivityScenario.launch(SupervisionDashboardActivity::class.java)
+        val nextActivityIntent = shadowOf(context as Application).nextStartedActivity
+
+        // Check that the app install activity is not started
+        assertThat(nextActivityIntent).isNull()
+
+        // Check that the dashboard activity is finished
+        assertThat(activityScenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+    }
+
+    @Test
+    fun noNecessaryComponent_appInstallIntentResolved_redirectAppInstall() = runTest {
+        // Setup necessary supervision component to be present
+        mockSupervisionManager.stub {
+            on { getRoleHolders(any()) } doReturn listOf(TEST_SUPERVISION_PACKAGE)
+        }
+        setUpRedirectActivityComponent(INSTALL_SUPERVISION_APP_ACTION)
+
+        val activityScenario = ActivityScenario.launch(SupervisionDashboardActivity::class.java)
+        val nextActivityIntent = shadowOf(context as Application).nextStartedActivity
+
+        // Check that the app install activity is started
+        assertThat(nextActivityIntent.action).isEqualTo(INSTALL_SUPERVISION_APP_ACTION)
+
+        // Check that the dashboard activity is finished
+        assertThat(activityScenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+    }
+
+    private fun setUpMessengerServiceComponent(disabled: Boolean) {
+        val serviceComponentName =
+            ComponentName(TEST_SUPERVISION_PACKAGE, TEST_SUPERVISION_MESSENGER_SERVICE)
+        val intentFilter =
+            IntentFilter(SupervisionMessengerClient.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION)
+
+        if (disabled) {
+            context.packageManager.setComponentEnabledSetting(
+                serviceComponentName,
+                COMPONENT_ENABLED_STATE_DISABLED,
+                DONT_KILL_APP,
+            )
+        }
+
+        shadowPackageManager.addServiceIfNotPresent(serviceComponentName)
+        shadowPackageManager.addIntentFilterForService(serviceComponentName, intentFilter)
+    }
+
+    private fun setUpRedirectActivityComponent(action: String) {
+        val redirectComponentName =
+            ComponentName(TEST_SUPERVISION_PACKAGE, TEST_REDIRECT_ACTIVITY)
+        val intentFilter = IntentFilter(action)
+
+        shadowPackageManager.addActivityIfNotPresent(redirectComponentName)
+        shadowPackageManager.addIntentFilterForActivity(redirectComponentName, intentFilter)
+    }
+
+    companion object {
+        const val TEST_SUPERVISION_PACKAGE = "com.android.settings.test"
+        const val TEST_REDIRECT_ACTIVITY = "com.example.FakeRedirectActivity"
+        const val TEST_SUPERVISION_MESSENGER_SERVICE = "FakeSupervisionMessengerService"
     }
 }

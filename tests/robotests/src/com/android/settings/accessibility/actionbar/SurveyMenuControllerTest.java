@@ -17,7 +17,7 @@
 package com.android.settings.accessibility.actionbar;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SURVEY_NOTIFICATION_DISMISSED;
+import static com.android.internal.accessibility.common.NotificationConstants.ACTION_CANCEL_SURVEY_NOTIFICATION;
 import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -157,12 +157,12 @@ public class SurveyMenuControllerTest {
 
         // Verify it start to send survey
         verify(mSurveyFeatureProvider).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY);
-        // Verify notification dismissal broadcast was sent
+        // Verify the cancel survey notification broadcast was sent
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mockActivity).sendBroadcastAsUser(intentCaptor.capture(),
                 any(), eq(android.Manifest.permission.MANAGE_ACCESSIBILITY));
         assertThat(intentCaptor.getValue().getAction()).isEqualTo(
-                ACTION_SURVEY_NOTIFICATION_DISMISSED);
+                ACTION_CANCEL_SURVEY_NOTIFICATION);
         assertThat(intentCaptor.getValue().getPackage()).isEqualTo(SETTINGS_PACKAGE_NAME);
         assertThat(intentCaptor.getValue().getIntExtra(EXTRA_PAGE_ID, -1)).isEqualTo(TEST_PAGE_ID);
         // Verify that menu is updated and the item is not added

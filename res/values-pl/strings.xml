@@ -47,9 +47,9 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"E-mail"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Poprzedni podgląd"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Następny podgląd"</string>
-    <!-- no translation found for font_size_make_smaller_desc (319927200356692406) -->
+    <!-- no translation found for font_size_make_smaller_desc (9149663537989624487) -->
     <skip />
-    <!-- no translation found for font_size_make_larger_desc (6739310980713118605) -->
+    <!-- no translation found for font_size_make_larger_desc (5774611876657293550) -->
     <skip />
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Zawsze"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Gdy składasz urządzenie, włącza się przedni ekran"</string>
@@ -200,7 +200,7 @@
     <string name="locale_remove_menu" msgid="3521546263421387474">"Usuń"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Dodaj język"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Język"</string>
-    <string name="locale_picker_category_title" msgid="6212064706962721255">"Preferowany język"</string>
+    <string name="locale_picker_category_title" msgid="296835514014453679">"Preferowane języki"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Języki aplikacji"</string>
     <string name="app_locale_picker_summary" msgid="616928580653613998">"Wybierz języki poszczególnych aplikacji"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Język aplikacji"</string>
@@ -226,10 +226,11 @@
     <string name="title_change_system_locale" msgid="4102991236063984803">"Zmienić język systemu na %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Dodać %s do preferowanych języków?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Informuje to aplikacje i strony, że preferujesz również ten język."</string>
-    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Zmienią się ustawienia urządzenia i preferencje regionalne."</string>
+    <string name="desc_notice_device_locale_and_region_settings_change" msgid="909261686577914396">"Urządzenie wybierz język <xliff:g id="LANGUAGE">%1$s</xliff:g> i region zostanie zmieniony na <xliff:g id="REGION">%2$s</xliff:g>."</string>
+    <string name="dlg_desc_delete_preferred_default_locale" msgid="690828405078078513">"Język <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> zostanie usunięty z listy preferowanych języków"</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Zmień"</string>
-    <string name="title_unavailable_locale" msgid="2628898110416542386">"Język %s nie jest dostępny"</string>
-    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Ten język nie może być używany jako język systemu. Jednak aplikacje i witryny wiedzą, że preferujesz ten język."</string>
+    <string name="title_unavailable_locale" msgid="5382411204559213983">"Językiem systemowym nie może być język <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="desc_unavailable_locale" msgid="7223655766703116782">"Urządzenie nie obsługuje tego języka, ale aplikacje będą wiedzieć, że preferujesz ten język"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Szukaj"</string>
     <string name="language_and_region_title" msgid="8374151891112162767">"Język i region"</string>
     <string name="language_selection_title" msgid="968179636453982415">"Dodaj język"</string>
@@ -243,6 +244,9 @@
     <string name="title_change_system_locale_region" msgid="4401478579429442695">"Zmienić region na <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"<xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> nadal będzie językiem systemowym urządzenia"</string>
     <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"Wybierz sposób wyświetlania liczb na urządzeniu oraz w witrynach i aplikacjach"</string>
+    <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Przenieś w górę"</string>
+    <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Przenieś w dół"</string>
+    <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Usuń"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencje regionalne"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Ustaw preferencje dotyczące jednostek i liczb"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Powiadom aplikacje o swoich preferencjach regionalnych, aby mogły dokonać personalizacji."</string>
@@ -281,6 +285,8 @@
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Nie można usunąć wszystkich języków"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Zachowaj co najmniej jeden preferowany język"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Niedostępny jako język systemu"</string>
+    <string name="dlg_title_delete_preferred_locale" msgid="4167214348946940002">"Usunąć język <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g>?"</string>
+    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"Język <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> zostanie usunięty z listy preferowanych języków. Możesz dodać go ponownie później."</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Przesuń w górę"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Przesuń w dół"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Przenieś na górę"</string>
@@ -460,6 +466,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Nie teraz"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Zgadzam się"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Kliknij dwukrotnie, aby zmienić nazwę"</string>
+    <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"Rozpoznano <xliff:g id="FP_NAME">%1$s</xliff:g>"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Pominąć zapisanie odcisku palca?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Zapisanie odcisku palca zajmuje tylko chwilę. Zawsze możesz go dodać później w ustawieniach."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Gdy zobaczysz tę ikonę, możesz użyć odcisku palca do uwierzytelnienia (np. podczas logowania się w aplikacji lub potwierdzania zakupu)"</string>
@@ -942,10 +949,8 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Połącz"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Rozłącz"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Sparuj i połącz"</string>
-    <!-- no translation found for bluetooth_connecting (5315496594905010438) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnecting (1643422701532873735) -->
-    <skip />
+    <string name="bluetooth_connecting" msgid="5315496594905010438">"Łączę"</string>
+    <string name="bluetooth_disconnecting" msgid="1643422701532873735">"Rozłączam"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Po włączeniu Bluetootha urządzenie może komunikować się z innymi urządzeniami Bluetooth w pobliżu"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Po włączeniu Bluetootha urządzenie może komunikować się z innymi urządzeniami Bluetooth w pobliżu. Z Bluetootha korzystają funkcje takie jak szybkie udostępnianie czy Znajdź moje urządzenie."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Po włączeniu Bluetootha urządzenie może komunikować się z innymi urządzeniami Bluetooth w pobliżu.\n\nAby zwiększyć komfort korzystania z urządzenia, aplikacje i usługi mogą wyszukiwać urządzenia w pobliżu nawet wtedy, gdy Bluetooth jest wyłączony. Może to np. pomóc usprawnić działanie funkcji i usług opartych na lokalizacji. Możesz zmienić tę opcję w ustawieniach skanowania Bluetooth."</string>
@@ -1166,7 +1171,25 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Nieprawidłowy format kodu QR"</string>
     <string name="retry" msgid="7542103800274026915">"Ponów"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Udostępnij innym użytkownikom urządzenia"</string>
+    <!-- no translation found for shared_message (2104244057926025072) -->
+    <skip />
+    <!-- no translation found for private_message (5897966950396765392) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_confirm (4577313983128123779) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_cancel (5200571850377525343) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_title (6346200020322308703) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_summary (4356010425167713046) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_title (1127530499054245755) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_message (3192435395074097168) -->
+    <skip />
     <string name="wifi_unchanged" msgid="8026045290856150191">"(nie zmieniono)"</string>
+    <!-- no translation found for wifi_allow_edit_configuration_title (3928254385019370063) -->
+    <skip />
     <string name="wifi_unspecified" msgid="4561964943472312208">"Wybierz"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Dodano wiele certyfikatów)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Używaj certyfikatów systemowych"</string>
@@ -1184,8 +1207,7 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Udostępnij tę sieć innym użytkownikom urządzenia"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Wszyscy użytkownicy tego urządzenia widzą udostępnioną sieć i mogą się z nią połączyć. Administratorzy mogą usunąć udostępnioną sieć. Więcej informacji"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Zezwalaj innym użytkownikom na edytowanie konfiguracji sieci"</string>
-    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
-    <skip />
+    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"Aby wprowadzić zmiany w tej sieci, skontaktuj się z administratorem tego urządzenia."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Ta sieć nie ma dostępu do internetu. Nadal chcesz się z nią łączyć?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Niektóre aplikacje i usługi mogą nie działać z powodu ograniczonej łączności. Użyć mimo to?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Nie pytaj ponownie o tę sieć"</string>
@@ -2135,23 +2157,28 @@
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"wartość niestandardowa"</string>
     <string name="input_setting_bounce_keys_seekbar_desc" msgid="4575595566548124309">"Próg klawisza z filtrem powtórzeń"</string>
     <string name="input_setting_slow_keys_seekbar_desc" msgid="2171726970136563995">"Próg klawisza z opóźnioną reakcją"</string>
-    <string name="slow_keys" msgid="2891452895499690837">"Klawisze powolne"</string>
+    <string name="slow_keys" msgid="2891452895499690837">"Klawisze z opóźnioną reakcją"</string>
     <string name="slow_keys_summary" msgid="3852534180402969185">"Zmień czas, przez jaki trzeba przytrzymać klawisz, aby został zarejestrowany"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Klawisze trwałe"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Naciśnij 1 klawisz, aby zyskać dostęp do skrótów, zamiast przytrzymywać kilka jednocześnie"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Klawisze sterowania myszą"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Używaj klawiszy sterowania myszą"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Skrót klawiszy myszy"</string>
-    <string name="mouse_keys_summary" msgid="7030731235143286467">"Używaj klawiatury do sterowania wskaźnikiem"</string>
-    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Maksymalna szybkość"</string>
+    <!-- no translation found for mouse_keys_summary (6512910710030108693) -->
+    <skip />
+    <!-- no translation found for mouse_keys_max_speed_title (2651688711606971145) -->
+    <skip />
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Zmniejsz"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Zwiększ"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Odwrotne przewijanie"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Używaj klawiszy podstawowych"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_summary (5057949666957911577) -->
+    <skip />
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"Resetuj ustawienia"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"Jak używać klawiszy podstawowych"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"Jak używać klawiatury numerycznej"</string>
-    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2728318055237217919">"Num Lock włącza klawiaturę numeryczną"</string>
+    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2186017679302722178) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Przewiń w górę, aby przesunąć stronę w dół"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Przewijanie"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Kontrolowane przewijanie"</string>
@@ -2169,6 +2196,12 @@
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Aby zwolnić główny przycisk myszy, użyj klawisza „<xliff:g id="RELEASE_LABEL">%s</xliff:g>”"</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"Aby przełączyć tryb przewijania, użyj klawisza „<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>”. Klawisze „<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>” będą umożliwiały przewijanie widoku w górę, w dół, w lewo lub w prawo"</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Aby kliknąć dodatkowy przycisk myszy, użyj klawisza „<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>”"</string>
+    <!-- no translation found for mouse_keys_acceleration_seekbar_title (2329098889930361504) -->
+    <skip />
+    <!-- no translation found for mouse_keys_acceleration_fast_icon_desc (4426188473271579794) -->
+    <skip />
+    <!-- no translation found for mouse_keys_acceleration_slow_icon_desc (8370777074987200135) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"Wyświetl skróty klawiszowe"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Lista skrótów"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klawiatura i narzędzia w profilu służbowym"</string>
@@ -2231,40 +2264,23 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Dalej"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Uruchom ponownie"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Gotowe"</string>
-    <!-- no translation found for action_corner_title (1489042651433221319) -->
-    <skip />
-    <!-- no translation found for action_corner_summary (695618538930535335) -->
-    <skip />
-    <!-- no translation found for action_corner_intro (8782001241997579665) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
-    <skip />
-    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
-    <skip />
-    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
-    <skip />
-    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
-    <skip />
-    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
-    <skip />
-    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
-    <skip />
-    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
-    <skip />
+    <string name="action_corner_title" msgid="7411160165577367757">"Dostosuj skróty w rogach"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"Używaj kursorów do poruszania się po systemie"</string>
+    <string name="action_corner_intro" msgid="2170609118659718140">"Wybierz te obszary, aby dostosować skróty w rogach"</string>
+    <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Lewy dolny róg"</string>
+    <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"Prawy dolny róg"</string>
+    <string name="action_corner_top_left_title" msgid="4633975226092344210">"Lewy górny róg"</string>
+    <string name="action_corner_top_right_title" msgid="4995999693840776032">"Prawy górny róg"</string>
+    <string name="action_corner_action_none" msgid="5203163099950649999">"Brak"</string>
+    <string name="action_corner_action_home" msgid="6779642573582379579">"Ekran główny"</string>
+    <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Ostatnio używane aplikacje"</string>
+    <string name="action_corner_action_notifications" msgid="3779353356349774469">"Powiadomienia"</string>
+    <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Szybkie ustawienia"</string>
+    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Wybierz skrót do umieszczenia w rogu (<xliff:g id="CORNER">%1$s</xliff:g>)"</string>
+    <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"lewy dolny róg"</string>
+    <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"prawy dolny róg"</string>
+    <string name="action_corner_top_left_name" msgid="8077670910600032291">"lewy górny róg"</string>
+    <string name="action_corner_top_right_name" msgid="6307321595919080297">"prawy górny róg"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Klawisze modyfikujące"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Zmień działanie klawiszy"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Zresetuj wszystko"</string>
@@ -2407,10 +2423,9 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Więcej informacji o ustawieniach napisów"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Powiększenie"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Skrót do powiększenia"</string>
-    <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Podążanie za kursorem"</string>
+    <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Podążaj za kursorem"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Wybierz, jak powiększenie ma podążać za kursorem."</string>
-    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
-    <skip />
+    <string name="accessibility_magnification_cursor_following_unavailable_summary" msgid="1683880243856242269">"Niedostępne przy powiększeniu części ekranu"</string>
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Przesuwaj ekran razem z ruchem kursora myszy"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Przesuwaj ekran, utrzymując kursor myszy na środku"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Przesuwaj ekran, gdy kursor myszy dotyka krawędzi ekranu"</string>
@@ -2551,32 +2566,20 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Automatyczna aktualizacja powiększenia ekranu"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Aktualizuj powiększenie ekranu przy zmianie aplikacji"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Przycisk zasilania kończy rozmowę"</string>
-    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="8563711427335567656">"Tryb"</string>
+    <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standardowy"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Standardowy ciemny motyw"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Stosuje ciemny motyw na urządzeniu i w obsługiwanych aplikacjach"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Rozszerzony"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Rozszerzony ciemny motyw"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Automatycznie stosuj ciemny motyw w większej liczbie aplikacji, aby ulepszyć ułatwienia dostępu"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Usuwaj animacje"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Ogranicz ruch na ekranie"</string>
-    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
-    <skip />
+    <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Miganie kursora tekstowego"</string>
+    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"Dostosuj szybkość migania kursora lub je wyłącz. Nie wszystkie aplikacje i witryny mogą to obsługiwać."</string>
+    <string name="accessibility_text_cursor_blink_rate_slower_desc" msgid="5255697869959801747">"Zmniejsz szybkość migania"</string>
+    <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"Zwiększ szybkość migania"</string>
+    <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"Resetuj"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Dźwięk mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Połącz kanały podczas odtwarzania dźwięku"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Balans dźwięku"</string>
@@ -2666,6 +2669,10 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Więcej informacji o korekcji kolorów"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"O odwróceniu kolorów"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Więcej informacji o odwróceniu kolorów"</string>
+    <!-- no translation found for accessibility_dark_theme_footer_learn_more_helper_link (7084955775821075280) -->
+    <skip />
+    <!-- no translation found for accessibility_dark_theme_preference_footer_content (4431044600779983609) -->
+    <skip />
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Pokazuj napisy"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Tylko w obsługiwanych aplikacjach"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Rozmiar i styl napisów"</string>
@@ -3732,8 +3739,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Brak}=1{Ustawiono 1 harmonogram}few{Ustawiono # harmonogramy}many{Ustawiono # harmonogramów}other{Ustawiono # harmonogramu}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Nie przeszkadzać"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Tryby"</string>
-    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
-    <skip />
+    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Tryby używane m.in. w czasie snu, pracy czy prowadzenia samochodu pozwalają ograniczać czynniki rozpraszające uwagę"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Utwórz własny tryb"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Otrzymuj powiadomienia tylko od ważnych osób i z kluczowych aplikacji"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Ustaw harmonogram"</string>
@@ -4358,10 +4364,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"Menedżer uprawnień"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Zmiany w udostępnianiu danych o lokalizacji"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Przejrzyj aplikacje, które zmieniły sposób udostępniania Twoich danych o lokalizacji"</string>
-    <!-- no translation found for app_function_access_settings_title (1474765429611652468) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (6465715820745848068) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Agent ma kontrolę nad innymi aplikacjami"</string>
+    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Wykonaj działania na urządzeniu i w innych aplikacjach"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Kliknij, by wybudzić"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Kliknij dwukrotnie w dowolnym miejscu na ekranie, by wybudzić urządzenie"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Otwieranie linków"</string>
@@ -4521,9 +4525,9 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Powiększ lub zmniejsz wszystko"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"układ interfejsu, powiększenie ekranu, skala, skalowanie"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Podgląd"</string>
-    <!-- no translation found for screen_zoom_make_smaller_desc (1450649885198381123) -->
+    <!-- no translation found for screen_zoom_make_smaller_desc (6268455784510593120) -->
     <skip />
-    <!-- no translation found for screen_zoom_make_larger_desc (7125594310562596457) -->
+    <!-- no translation found for screen_zoom_make_larger_desc (3458295276713085365) -->
     <skip />
     <string name="disconnected" msgid="3469373726996129247">"Brak połączenia"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Nie podłączono"</string>
@@ -4544,6 +4548,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Funkcja zablokowana przez operatora kredytu"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Potrzebny jest rodzic"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Przekaż telefon rodzicowi, by rozpoczął konfigurację"</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"Dostęp ograniczony przez kontrolę rodzicielską"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"To ustawienie może zmienić tylko osoba zarządzająca kontrolą rodzicielską"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Przekaż telefon rodzicowi, by mógł zmienić to ustawienie."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Aby uzyskać więcej informacji, skontaktuj się z administratorem IT"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Więcej szczegółów"</string>
@@ -4659,7 +4665,8 @@
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Sprawdź"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Czy informacje w tym komunikacie były pomocne?"</string>
-    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Ikona ostrzegawcza wskazówek dotyczących baterii"</string>
+    <!-- no translation found for battery_hints_warning_icon_a11y (709629805028175434) -->
+    <skip />
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Włącz automatyczną jasność, aby wydłużyć czas pracy na baterii"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Zmniejsz opóźnienie automatycznego wygaszania, aby wydłużyć czas pracy na baterii"</string>
     <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"Aplikacja <xliff:g id="APP_LABEL">%1$s</xliff:g> zwiększyła wykorzystanie baterii"</string>
@@ -4987,8 +4994,6 @@
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Przywróć wartości domyślne"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Zresetowano opcje programisty dotyczące autouzupełniania"</string>
     <string name="location_category" msgid="3496759112306219062">"Lokalizacja"</string>
-    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Wskaźnik lokalizacji na pasku stanu"</string>
-    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Pokazuj w przypadku wszystkich lokalizacji, w tym określonych na podstawie sieci i połączeń"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Wymuszaj pełną procedurę pomiarów GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Śledź wszystkie konstelacje GNSS i częstotliwości bez uwzględniania współczynnika impulsu"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Metoda wprowadzania"</string>
@@ -5203,7 +5208,8 @@
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Łączność satelitarna"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"łączność satelitarna"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"Przesyłanie wiadomości przez satelitę"</string>
-    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Twoje konto obejmuje wykorzystanie danych"</string>
+    <!-- no translation found for title_have_satellite_data_plan (1101741256080690699) -->
+    <skip />
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Obsługiwane aplikacje na telefonie"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Zobacz aplikacje obsługiwane przez usługę satelitarną"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Obsługiwane aplikacje na telefonie"</string>
@@ -5379,15 +5385,13 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Uruchom z rozmiarem strony 16 KB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Uruchom z jądrem systemu obsługującym stronę 16 KB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Zmiana z trybu 4 KB na 16 KB"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="4760548401414644138">"Aby można było użyć opcji trybu 16 KB dla programistów, musisz przekonwertować partycję danych tego urządzenia na system ext4. Po potwierdzeniu dane urządzenia zostaną wyczyszczone, a system plików zmieni się na ext4. Korzystasz z trybu produkcji z jądrem systemu 4 KB i zamierzasz przełączyć się na tryb 16 KB. Po włączeniu tego trybu przełączanie się między trybami 4 KB i 16 KB będzie wymagało tylko jednokrotnego ponownego uruchomienia. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby przywrócić na urządzeniu tryb produkcji, musisz przełączyć je z powrotem na tryb 4 KB i zablokować program rozruchowy, co spowoduje zresetowanie urządzenia. Gdy na urządzeniu uruchomi się Android, wyłącz zdjęcie blokady OEM w Opcjach programisty. Aby kontynuować, kliknij „Usuń wszystkie dane i zaktualizuj”. Spowoduje to ponowne uruchomienie urządzenia."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Korzystasz z trybu niezależnego od rozmiaru strony pamięci z jądrem systemu 4 KB i zamierzasz przełączyć się na tryb 16 KB. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. Zmiana spowoduje ponowne uruchomienie urządzenia. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby przywrócić na urządzeniu tryb produkcji, musisz przełączyć je z powrotem na tryb 4 KB i zablokować program rozruchowy, co spowoduje zresetowanie urządzenia. Gdy na urządzeniu uruchomi się Android, wyłącz zdjęcie blokady OEM w Opcjach programisty."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Zmiana z trybu 16 KB na 4 KB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Korzystasz z trybu niezależnego od rozmiaru strony pamięci z jądrem 16 KB i zamierzasz przełączyć się na tryb 4 KB. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. Zmiana spowoduje ponowne uruchomienie urządzenia. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby przywrócić na urządzeniu tryb produkcji, musisz zablokować program rozruchowy, co spowoduje zresetowanie urządzenia. Gdy na urządzeniu uruchomi się Android, wyłącz zdjęcie blokady OEM w Opcjach programisty."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Nie udało się zaktualizować jądra systemu, aby obsługiwał strony o rozmiarze 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Wprowadzam zmianę"</string>
-    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
-    <skip />
+    <string name="confirm_ext4_button_text" msgid="697563319110759422">"Usuń wszystkie dane i zaktualizuj"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Nie udało się wyczyścić partycji danych i sformatować jej jako ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Wymagane odblokowanie programu rozruchowego"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"Aby można było użyć opcji trybu 16 KB dla programistów, musisz odblokować program rozruchowy. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. Po włączeniu trybu 16 KB zostaną wyczyszczone wszystkie dane i ustawienia użytkownika. Gdy program rozruchowy zostanie odblokowany, będzie trzeba dwukrotnie ponownie uruchomić urządzenie, aby włączyć tryb 16 KB. Po włączeniu tego trybu przełączanie się między trybami 4 KB i 16 KB będzie wymagało tylko jednokrotnego ponownego uruchomienia. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby przywrócić na urządzeniu tryb produkcji, musisz przełączyć je z powrotem na tryb 4 KB i włączyć blokadę OEM lub zablokować program rozruchowy, co spowoduje zresetowanie urządzenia. Odblokuj program rozruchowy i spróbuj ponownie. Instrukcje znajdziesz na stronie &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5839,6 +5843,8 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Brak hasła"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Więcej informacji"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Nie można odtworzyć tego strumienia audio na urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
+    <skip />
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Posłuchaj teraz"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Strumień został wstrzymany"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Przestań słuchać"</string>
@@ -5885,36 +5891,46 @@
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Aby wyszukać to, co jest widoczne na ekranie, naciśnij i przytrzymaj przycisk ekranu głównego lub uchwyt nawigacyjny."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Skonfiguruj szczegóły urządzenia."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Kontrola rodzicielska"</string>
-    <string name="supervision_settings_summary" msgid="5020634300370322741">"Ograniczenia treści i inne"</string>
+    <string name="supervision_settings_summary" msgid="6304257872307136073">"Zasady korzystania z urządzeń cyfrowych i limity czasu korzystania"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Skonfiguruj kod PIN"</string>
-    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"Wstrzymano"</string>
-    <string name="keywords_supervision_settings" msgid="2580555201483955376">"nadzór, nadzór rodzicielski, kontrola rodzicielska"</string>
+    <!-- no translation found for keywords_supervision_settings (43064288661561602) -->
+    <skip />
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Zarządzaj PIN-em"</string>
+    <!-- no translation found for supervision_pin_management_preference_keywords (5034450635706621750) -->
+    <skip />
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Dodaj pomocniczy adres e-mail"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Zweryfikuj pomocniczy adres e-mail"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Zmień kod PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Nie pamiętam kodu PIN"</string>
+    <!-- no translation found for supervision_auth_prompt_forgot_pin_button_label (1019337828884793557) -->
+    <skip />
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Zaktualizuj pomocniczy adres e-mail"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Usuń PIN"</string>
-    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Wszystkie ustawienia nadzoru zostaną zresetowane"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Dodaj pomocniczy adres e-mail"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Zweryfikuj adres e-mail"</string>
-    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtry treści z internetu"</string>
-    <string name="supervision_web_content_filters_top_intro" msgid="5264773769840566499">"Blokuj treści dla dorosłych w witrynach i wynikach wyszukiwania w obsługiwanych aplikacjach na tym urządzeniu. W nieobsługiwanych aplikacjach treści te mogą się nadal pojawiać."</string>
+    <!-- no translation found for supervision_web_content_filters_title (2412562442507104921) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_keywords (8469519676189544447) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_top_intro (8056274290725144441) -->
+    <skip />
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Witryny"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"Blokuj witryny dla pełnoletnich"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Wyniki wyszukiwania"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Odfiltrowuj wyniki wyszukiwania dla pełnoletnich"</string>
-    <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Wpisz kod PIN nadzoru"</string>
+    <!-- no translation found for supervision_web_content_filters_switch_summary (2095166099345288321) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_footer_title (1741897040916039165) -->
+    <skip />
+    <!-- no translation found for supervision_full_screen_pin_verification_title (7685279446792771815) -->
+    <skip />
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Ustaw PIN kontroli rodzicielskiej"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Potwierdź PIN"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN został zaktualizowany"</string>
-    <!-- no translation found for supervision_promo_footer_action_button_description (7617359721703338141) -->
-    <skip />
+    <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Otwórz aplikację"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Usunąć kod PIN?"</string>
-    <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"Spowoduje to usunięcie bieżącego kodu PIN na kontach wszystkich użytkowników tego urządzenia i wyłączenie skonfigurowanych ustawień. Tej czynności nie będzie można cofnąć."</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"Najpierw wyłącz ustawienia na pozostałych profilach"</string>
-    <string name="supervision_delete_pin_supervision_enabled_message" msgid="5643922966568203196">"Aby usunąć ten kod PIN i zresetować ustawienia nadzoru, wyłącz je na wszystkich pozostałych profilach."</string>
+    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
+    <skip />
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Nie można usunąć kodu PIN"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Podczas próby usunięcia kodu PIN wystąpił błąd."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animacja <xliff:g id="FEATURE">%1$s</xliff:g>"</string>

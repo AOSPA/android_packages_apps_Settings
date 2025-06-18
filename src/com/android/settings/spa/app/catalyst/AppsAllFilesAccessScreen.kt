@@ -24,17 +24,15 @@ import com.android.settings.R
 import com.android.settings.Settings.ManageExternalStorageActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.spa.app.catalyst.AppInfoAllFilesAccessScreen.Companion.hasExternalStoragePermission
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
-@ProvidePreferenceScreen(AppsAllFilesAccessAppListScreen.KEY)
+//@ProvidePreferenceScreen(AppsAllFilesAccessAppListScreen.KEY)
 open class AppsAllFilesAccessAppListScreen :
     PreferenceScreenMixin, PreferenceHierarchyGenerator<Boolean> {
 
@@ -51,7 +49,7 @@ open class AppsAllFilesAccessAppListScreen :
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
-    override fun isFlagEnabled(context: Context) = Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = false
 
     override fun hasCompleteHierarchy() = false
 
@@ -59,12 +57,9 @@ open class AppsAllFilesAccessAppListScreen :
         Intent(context, ManageExternalStorageActivity::class.java)
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        generatePreferenceHierarchy(context, coroutineScope, true)
 
-    override val defaultType: Boolean
-        get() = true // include system apps
-
-    override suspend fun generatePreferenceHierarchy(
+    override fun generatePreferenceHierarchy(
         context: Context,
         coroutineScope: CoroutineScope,
         type: Boolean, // whether to include system apps

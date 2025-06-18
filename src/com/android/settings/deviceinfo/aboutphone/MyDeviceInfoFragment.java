@@ -32,6 +32,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -65,6 +66,7 @@ import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -117,6 +119,23 @@ public class MyDeviceInfoFragment extends DashboardFragment
     }
 
     @Override
+    protected @NonNull Set<String> getPreferenceKeysInHierarchy() {
+        Set<String> keys = super.getPreferenceKeysInHierarchy();
+        // add async preference key manually
+        keys.add(KEY_EID_INFO);
+        return keys;
+    }
+
+    @Override
+    protected void onPreferenceScreenCreatedFromResource(
+            @NonNull PreferenceScreen preferenceScreen) {
+        if (isCatalystEnabled()) {
+            // remove the preference created from resource to avoid duplicated key
+            preferenceScreen.removePreferenceRecursively(KEY_EID_INFO);
+        }
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         initHeader();
@@ -162,6 +181,8 @@ public class MyDeviceInfoFragment extends DashboardFragment
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, MyDeviceInfoFragment fragment, Lifecycle lifecycle) {
+        // disable catalyst for settings search (i.e. fragment is null)
+        boolean isCatalystEnabled = Flags.catalystMyDeviceInfoPrefScreen() && fragment != null;
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
         final Executor executor = (fragment == null) ? getMainExecutor(context) :
@@ -222,11 +243,13 @@ public class MyDeviceInfoFragment extends DashboardFragment
                 imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY + (phoneCount + 3));
             }
         }
-        EidStatus eidStatus = new EidStatus(slotSimStatus, context, executor);
-        SimEidPreferenceController simEid = new SimEidPreferenceController(context,
-                KEY_EID_INFO);
-        simEid.init(slotSimStatus, eidStatus);
-        controllers.add(simEid);
+        if (!isCatalystEnabled) {
+            EidStatus eidStatus = new EidStatus(slotSimStatus, context, executor);
+            SimEidPreferenceController simEid = new SimEidPreferenceController(context,
+                    KEY_EID_INFO);
+            simEid.init(slotSimStatus, eidStatus);
+            controllers.add(simEid);
+        }
 
         if (executor instanceof ExecutorService) {
             ((ExecutorService) executor).shutdown();
@@ -261,7 +284,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
                         EntityHeaderController.ActionType.ACTION_NONE);
 
         // TODO: There may be an avatar setting action we can use here.
-        final int iconId = bundle.getInt("icon_id", 0);
+        final int iconId = bundle != null ? bundle.getInt("icon_id", 0) : 0;
         if (iconId == 0) {
             final UserManager userManager = (UserManager) getActivity().getSystemService(
                     Context.USER_SERVICE);

@@ -47,8 +47,8 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"Email"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Previous preview"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Next preview"</string>
-    <string name="font_size_make_smaller_desc" msgid="319927200356692406">"Make font size smaller"</string>
-    <string name="font_size_make_larger_desc" msgid="6739310980713118605">"Make font size bigger"</string>
+    <string name="font_size_make_smaller_desc" msgid="9149663537989624487">"Decrease font size"</string>
+    <string name="font_size_make_larger_desc" msgid="5774611876657293550">"Increase font size"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Always"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Front display turns on when you fold your device"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Swipe up to continue"</string>
@@ -198,7 +198,7 @@
     <string name="locale_remove_menu" msgid="3521546263421387474">"Remove"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Add a language"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Language"</string>
-    <string name="locale_picker_category_title" msgid="6212064706962721255">"Preferred Language"</string>
+    <string name="locale_picker_category_title" msgid="296835514014453679">"Preferred Languages"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"App languages"</string>
     <string name="app_locale_picker_summary" msgid="616928580653613998">"Choose the language for each app"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"App language"</string>
@@ -224,10 +224,11 @@
     <string name="title_change_system_locale" msgid="4102991236063984803">"Change system language to %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Add %s to preferred languages?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"This lets apps and websites know you also prefer this language."</string>
-    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Your device settings and regional preferences will change."</string>
+    <string name="desc_notice_device_locale_and_region_settings_change" msgid="909261686577914396">"Your device will use <xliff:g id="LANGUAGE">%1$s</xliff:g> and your region will be changed to <xliff:g id="REGION">%2$s</xliff:g>."</string>
+    <string name="dlg_desc_delete_preferred_default_locale" msgid="690828405078078513">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> will be removed from your preferred languages"</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Change"</string>
-    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s not available"</string>
-    <string name="desc_unavailable_locale" msgid="2201756477400935896">"This language can’t be used as a system language, but you’ve let apps and websites know you prefer this language."</string>
+    <string name="title_unavailable_locale" msgid="5382411204559213983">"Can’t set <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> as system language"</string>
+    <string name="desc_unavailable_locale" msgid="7223655766703116782">"Your device does not support this language, but apps will know that you prefer this language"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Search"</string>
     <string name="language_and_region_title" msgid="8374151891112162767">"Language &amp; region"</string>
     <string name="language_selection_title" msgid="968179636453982415">"Add a language"</string>
@@ -241,6 +242,9 @@
     <string name="title_change_system_locale_region" msgid="4401478579429442695">"Change region to <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"Your device will keep <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> as a system language"</string>
     <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"Choose how your device, websites, and apps display numbers"</string>
+    <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Move up"</string>
+    <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Move down"</string>
+    <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Remove"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regional preferences"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Set units and number preferences"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Let apps know your regional preferences so they can personalize your experience."</string>
@@ -279,6 +283,8 @@
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Can’t remove all languages"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Keep at least one preferred language"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Not available as system language"</string>
+    <string name="dlg_title_delete_preferred_locale" msgid="4167214348946940002">"Remove <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g>?"</string>
+    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> will be removed from your preferred languages. You can add it again later."</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Move up"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Move down"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Move to top"</string>
@@ -458,6 +464,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Not now"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"I agree"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Double tap to rename"</string>
+    <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"<xliff:g id="FP_NAME">%1$s</xliff:g> recognized"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Skip fingerprint?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in Settings."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"When you see this icon, use your fingerprint for authentication, like when you sign in to apps or approve a purchase"</string>
@@ -1162,7 +1169,16 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR code isn\'t a valid format"</string>
     <string name="retry" msgid="7542103800274026915">"Retry"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Share with other device users"</string>
+    <string name="shared_message" msgid="2104244057926025072">"shared"</string>
+    <string name="private_message" msgid="5897966950396765392">"private"</string>
+    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Confirm"</string>
+    <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Cancel"</string>
+    <string name="wifi_share_preference_title" msgid="6346200020322308703">"This is a shared network"</string>
+    <string name="wifi_share_preference_summary" msgid="4356010425167713046">"All users with the exception of guest users, will be able to view, edit and delete this network"</string>
+    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Switch to <xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" network?"</string>
+    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"You\'re currently connected to a <xliff:g id="SHARED_0">%1$s</xliff:g> network with the same name. When you switch, you\'ll disconnect from the <xliff:g id="SHARED_1">%2$s</xliff:g> network and then reconnect to the <xliff:g id="PRIVATE">%3$s</xliff:g> network. You may temporarily have no internet."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(unchanged)"</string>
+    <string name="wifi_allow_edit_configuration_title" msgid="3928254385019370063">"Allow other users to edit network configuration"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Please select"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Multiple certificates added)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Use system certificates"</string>
@@ -1180,8 +1196,7 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Share this network with other device users"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"All users on this device can view and connect to a shared network. Administrators can delete a shared network. Learn more"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Allow other users to edit network configuration"</string>
-    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
-    <skip />
+    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"Contact the admin of this device to make changes to this network."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"This network has no internet access. Stay connected?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Some apps and services may not work due to limited connectivity. Use anyway?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Don’t ask again for this network"</string>
@@ -2138,16 +2153,17 @@
     <string name="mouse_keys" msgid="6237254627808525540">"Mouse keys"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Use mouse keys"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Mouse keys shortcut"</string>
-    <string name="mouse_keys_summary" msgid="7030731235143286467">"Use your keyboard to control the pointer"</string>
-    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Maximum speed"</string>
+    <string name="mouse_keys_summary" msgid="6512910710030108693">"Use your keyboard to control the cursor"</string>
+    <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"Speed"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Decrease"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Increase"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Reverse scrolling"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Use primary keys"</string>
+    <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"Control the keyboard with letters and numbers instead of the numeric keypad"</string>
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"Reset settings"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"How to use primary keys"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"How to use a numeric keypad"</string>
-    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2728318055237217919">"Numeric keypad will always be used when Num Lock is on"</string>
+    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2186017679302722178">"The numeric keypad will always be used when Number Lock (Num Lock) is on"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll up to move the page down"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Scrolling"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Controlled scrolling"</string>
@@ -2165,6 +2181,9 @@
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Use the \"<xliff:g id="RELEASE_LABEL">%s</xliff:g>\" key to release the primary mouse button"</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"Use the \"<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>\" key to toggle scroll mode. This will make the \"<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>\" keys scroll the view top, down, left or right"</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Use the \"<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>\" key to click the secondary mouse button"</string>
+    <string name="mouse_keys_acceleration_seekbar_title" msgid="2329098889930361504">"Acceleration"</string>
+    <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"Fast"</string>
+    <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"Slow"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"View keyboard shortcuts"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Show list of shortcuts"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Work profile keyboards &amp; tools"</string>
@@ -2227,9 +2246,9 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Next"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Restart"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Done"</string>
-    <string name="action_corner_title" msgid="1489042651433221319">"Customize action corners"</string>
+    <string name="action_corner_title" msgid="7411160165577367757">"Customize corner shortcuts"</string>
     <string name="action_corner_summary" msgid="695618538930535335">"Use cursors to navigate the system"</string>
-    <string name="action_corner_intro" msgid="8782001241997579665">"Choose the following areas to customize action corners"</string>
+    <string name="action_corner_intro" msgid="2170609118659718140">"Choose the following areas to customize corner shortcuts"</string>
     <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Bottom-left corner"</string>
     <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"Bottom-right corner"</string>
     <string name="action_corner_top_left_title" msgid="4633975226092344210">"Top-left corner"</string>
@@ -2529,32 +2548,20 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Auto update screen magnification"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Update screen magnification on app transitions"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Power button ends call"</string>
-    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="8563711427335567656">"Mode"</string>
+    <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Standard Dark Theme"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Applies Dark theme across your device and supported apps"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expanded"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Expanded Dark Theme"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Automatically applies Dark theme to more apps for improved accessibility"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remove animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce movement on the screen"</string>
-    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
-    <skip />
+    <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Text cursor blinking"</string>
+    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"Adjust the text cursor\'s blinking speed or turn off blinking. May not be supported on all apps or websites."</string>
+    <string name="accessibility_text_cursor_blink_rate_slower_desc" msgid="5255697869959801747">"Decrease blink speed"</string>
+    <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"Increase blink speed"</string>
+    <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"Reset"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Mono audio"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combine channels when playing audio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Audio balance"</string>
@@ -2644,6 +2651,8 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Learn more about color correction"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"About color inversion"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Learn more about color inversion"</string>
+    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Learn more about Dark theme"</string>
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Some apps may not support Dark theme in the expanded setting. If you experience appearance issues, use the standard setting."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Show captions"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"For supported app only"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Caption size and style"</string>
@@ -3710,8 +3719,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{None}=1{1 schedule set}other{# schedules set}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Do Not Disturb"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modes"</string>
-    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
-    <skip />
+    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Minimize distractions and take control of your attention with modes for sleep, work, driving, and everything in between"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Create your own mode"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Only get notified by important people and apps"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Set a schedule"</string>
@@ -4497,8 +4505,8 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Make everything bigger or smaller"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"display density, screen zoom, scale, scaling"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Preview"</string>
-    <string name="screen_zoom_make_smaller_desc" msgid="1450649885198381123">"Make display size smaller"</string>
-    <string name="screen_zoom_make_larger_desc" msgid="7125594310562596457">"Make display size bigger"</string>
+    <string name="screen_zoom_make_smaller_desc" msgid="6268455784510593120">"Decrease display size"</string>
+    <string name="screen_zoom_make_larger_desc" msgid="3458295276713085365">"Increase display size"</string>
     <string name="disconnected" msgid="3469373726996129247">"Not connected"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Not connected"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apps installed"</string>
@@ -4518,6 +4526,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Blocked by your credit provider"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Parent needed"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Hand the phone to your parent to start setting this up"</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"Restricted by parental controls"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"Only the person who manages your parental controls can change this setting"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Hand the phone to your parent to allow this setting to be changed."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"For more info, contact your IT admin"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"More details"</string>
@@ -4633,7 +4643,7 @@
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Check"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Got it"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Is this message helpful?"</string>
-    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Battery tips warning icon"</string>
+    <string name="battery_hints_warning_icon_a11y" msgid="709629805028175434">"Battery warning tips"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Turn on adaptive brightness to extend battery life"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Reduce screen timeout to extend battery life"</string>
     <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> used more battery"</string>
@@ -4961,8 +4971,6 @@
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Reset to default values"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Autofill developer options have been reset"</string>
     <string name="location_category" msgid="3496759112306219062">"Location"</string>
-    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Status bar location indicator"</string>
-    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Show for all locations, including network and connectivity"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Force full GNSS measurements"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Track all GNSS constellations and frequencies with no duty cycling"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Input Method"</string>
@@ -5177,7 +5185,7 @@
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellite connectivity"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellite connectivity"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellite messaging"</string>
-    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Use of data is included with your account"</string>
+    <string name="title_have_satellite_data_plan" msgid="1101741256080690699">"Use of supported apps is included with your account"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Supported apps on your phone"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"See all apps supported by satellite"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Supported apps on your phone"</string>
@@ -5809,6 +5817,7 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"No password"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Learn more"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Can\'t play this audio stream on <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="audio_streams_dialog_cannot_play_with_link" msgid="3433981166714801237">"Can\'t play this audio stream on <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. "<annotation id="link">"Learn more"</annotation></string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Listening now"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Stream paused"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Stop listening"</string>
@@ -5855,35 +5864,36 @@
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Touch and hold the Home button or the navigation handle to search using the content on your screen."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Configure device detail."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Parental controls"</string>
-    <string name="supervision_settings_summary" msgid="5020634300370322741">"Content restrictions &amp; other limits"</string>
+    <string name="supervision_settings_summary" msgid="6304257872307136073">"Digital ground rules &amp; screen time limits"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Set up PIN"</string>
-    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"Paused"</string>
-    <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervision, parental supervision, parental controls"</string>
+    <string name="keywords_supervision_settings" msgid="43064288661561602">"supervision, parental controls, parents, supervision pin, pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Manage your PIN"</string>
+    <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Parent PIN, Parental controls PIN"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Add recovery email"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Verify recovery email"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Change PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Forgot PIN"</string>
+    <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Forgot PIN?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Update recovery email"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Delete PIN"</string>
-    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"This will reset all your supervision settings"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Add recovery email"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verify your email"</string>
-    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Web content filters"</string>
-    <string name="supervision_web_content_filters_top_intro" msgid="5264773769840566499">"Block mature content on websites and search results on supported apps on this device. Unsupported apps may still show explicit content."</string>
+    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Website content filters"</string>
+    <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions"</string>
+    <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Help filter explicit content on some apps and browsers on this phone. Explicit content may still show on other apps, devices, or browsers."</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Websites"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"Block explicit sites"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Search results"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filter out explicit search results"</string>
-    <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Enter supervision PIN"</string>
+    <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{On # app}other{On # apps}}"</string>
+    <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"When these settings are off, other account settings may still apply."</string>
+    <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Enter parental controls PIN"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Set a parental controls PIN"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Confirm PIN"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN updated"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Open app"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Delete PIN?"</string>
-    <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"This will delete your current PIN for all users on this device and disable controls you have set up. This action can’t be undone."</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"Pause controls on other profiles first"</string>
-    <string name="supervision_delete_pin_supervision_enabled_message" msgid="5643922966568203196">"To proceed with deleting this PIN and resetting supervision settings, please pause controls on all other profiles."</string>
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8999197100719062891">"Turn off parental controls for other users"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN can not be deleted"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"An error occurred while trying to delete the PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>

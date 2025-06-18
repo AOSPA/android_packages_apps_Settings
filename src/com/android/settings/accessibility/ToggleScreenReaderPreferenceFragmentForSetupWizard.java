@@ -26,18 +26,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment;
+import com.android.settings.accessibility.detail.a11yservice.UseServiceTogglePreferenceController;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
 public class ToggleScreenReaderPreferenceFragmentForSetupWizard
-        extends ToggleAccessibilityServicePreferenceFragment {
-
+        extends A11yServicePreferenceFragment {
     private boolean mToggleSwitchWasInitiallyChecked;
+    private String mMainActionPrefKey;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -59,10 +62,9 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
                     });
         }
 
-        mToggleSwitchWasInitiallyChecked = mToggleServiceSwitchPreference.isChecked();
-        if (mTopIntroPreference != null) {
-            mTopIntroPreference.setVisible(false);
-        }
+        mMainActionPrefKey = use(UseServiceTogglePreferenceController.class).getPreferenceKey();
+        TwoStatePreference preference = findPreference(mMainActionPrefKey);
+        mToggleSwitchWasInitiallyChecked = preference.isChecked();
     }
 
     @Override
@@ -98,10 +100,11 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
     @Override
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
-        if (mToggleServiceSwitchPreference.isChecked() != mToggleSwitchWasInitiallyChecked) {
+        TwoStatePreference preference = findPreference(mMainActionPrefKey);
+        if (preference.isChecked() != mToggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(getContext(),
                     SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER,
-                    mToggleServiceSwitchPreference.isChecked());
+                    preference.isChecked());
         }
         super.onStop();
     }

@@ -47,9 +47,9 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"Mail"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Forrige forhåndsvisning"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Næste forhåndsvisning"</string>
-    <!-- no translation found for font_size_make_smaller_desc (319927200356692406) -->
+    <!-- no translation found for font_size_make_smaller_desc (9149663537989624487) -->
     <skip />
-    <!-- no translation found for font_size_make_larger_desc (6739310980713118605) -->
+    <!-- no translation found for font_size_make_larger_desc (5774611876657293550) -->
     <skip />
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Altid"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Skærm på forsiden tændes, når du folder din enhed"</string>
@@ -200,7 +200,7 @@
     <string name="locale_remove_menu" msgid="3521546263421387474">"Fjern"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Tilføj et sprog"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Sprog"</string>
-    <string name="locale_picker_category_title" msgid="6212064706962721255">"Foretrukket sprog"</string>
+    <string name="locale_picker_category_title" msgid="296835514014453679">"Foretrukne sprog"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Appsprog"</string>
     <string name="app_locale_picker_summary" msgid="616928580653613998">"Vælg sproget for hver app"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Appsprog"</string>
@@ -226,10 +226,11 @@
     <string name="title_change_system_locale" msgid="4102991236063984803">"Vil du ændre systemsproget til %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Vil du føje %s til dine foretrukne sprog?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Dette fortæller apps og websites, at du også foretrækker dette sprog."</string>
-    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Dine enhedsindstillinger og regionsindstillinger ændres."</string>
+    <string name="desc_notice_device_locale_and_region_settings_change" msgid="909261686577914396">"Din enhed vil bruge <xliff:g id="LANGUAGE">%1$s</xliff:g>, og din region vil blive ændret til <xliff:g id="REGION">%2$s</xliff:g>."</string>
+    <string name="dlg_desc_delete_preferred_default_locale" msgid="690828405078078513">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> fjernes fra dine foretrukne sprog"</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Rediger"</string>
-    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s er ikke tilgængeligt"</string>
-    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Dette sprog kan ikke bruges som et systemsprog, men du har oplyst apps og websites om, at du foretrækker dette sprog."</string>
+    <string name="title_unavailable_locale" msgid="5382411204559213983">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> kan ikke angives som systemsprog"</string>
+    <string name="desc_unavailable_locale" msgid="7223655766703116782">"Din enhed understøtter ikke dette sprog, men apps ved, at du foretrækker dette sprog"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Søg"</string>
     <string name="language_and_region_title" msgid="8374151891112162767">"Sprog og region"</string>
     <string name="language_selection_title" msgid="968179636453982415">"Tilføj et sprog"</string>
@@ -243,6 +244,9 @@
     <string name="title_change_system_locale_region" msgid="4401478579429442695">"Vil du skifte region til <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"Din enhed beholder <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> som systemsprog"</string>
     <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"Vælg, hvordan din enhed, websites og apps skal vise tal"</string>
+    <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Flyt op"</string>
+    <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Flyt ned"</string>
+    <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Fjern"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionsindstillinger"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Angiv præferencer for måleenheder og numre"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Giv apps besked om dine regionsindstillinger, så de kan foretage personlig tilpasning af din brugeroplevelse."</string>
@@ -281,6 +285,8 @@
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Du kan ikke fjerne alle sprog."</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Behold mindst ét foretrukket sprog"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Ikke tilgængeligt som systemsprog"</string>
+    <string name="dlg_title_delete_preferred_locale" msgid="4167214348946940002">"Vil du fjerne <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g>?"</string>
+    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> fjernes fra dine foretrukne sprog. Du kan tilføje den igen senere."</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Flyt op"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Flyt ned"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Flyt til toppen"</string>
@@ -460,6 +466,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Ikke nu"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Acceptér"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Tryk to gange for at omdøbe"</string>
+    <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"<xliff:g id="FP_NAME">%1$s</xliff:g> er genkendt"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Spring fingeraftryk over?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Konfigurationen af fingeraftryk tager ikke mere end et minut eller to. Hvis du springer dette trin over, kan du tilføje dit fingeraftryk på et senere tidspunkt i indstillingerne."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Når du ser dette ikon, kan du bruge dit fingeraftryk til godkendelse, f.eks. ved login i apps eller godkendelse af et køb"</string>
@@ -942,10 +949,8 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Forbind"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Afbryd"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Par og forbind med denne enhed"</string>
-    <!-- no translation found for bluetooth_connecting (5315496594905010438) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnecting (1643422701532873735) -->
-    <skip />
+    <string name="bluetooth_connecting" msgid="5315496594905010438">"Opretter forbindelse"</string>
+    <string name="bluetooth_disconnecting" msgid="1643422701532873735">"Afbryder forbindelse"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Når Bluetooth er aktiveret, kan enheden kommunikere med andre Bluetooth-enheder i nærheden"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Når Bluetooth er aktiveret, kan enheden kommunikere med andre Bluetooth-enheder i nærheden. Funktioner som f.eks. Quick Share og Find min enhed anvender Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Når Bluetooth er aktiveret, kan din enhed kommunikere med andre Bluetooth-enheder i nærheden.\n\nFor at forbedre enhedsoplevelsen kan apps og tjenester stadig til enhver tid søge efter enheder i nærheden, også selvom Bluetooth er deaktiveret. Dette kan f.eks. bruges til at forbedre lokationsbaserede funktioner og tjenester. Du kan ændre dette i indstillingerne for Bluetooth-scanning."</string>
@@ -1166,7 +1171,25 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-koden har ikke et gyldigt format"</string>
     <string name="retry" msgid="7542103800274026915">"Prøv igen"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Del med andre enhedsbrugere"</string>
+    <!-- no translation found for shared_message (2104244057926025072) -->
+    <skip />
+    <!-- no translation found for private_message (5897966950396765392) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_confirm (4577313983128123779) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_cancel (5200571850377525343) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_title (6346200020322308703) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_summary (4356010425167713046) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_title (1127530499054245755) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_message (3192435395074097168) -->
+    <skip />
     <string name="wifi_unchanged" msgid="8026045290856150191">"(uændret)"</string>
+    <!-- no translation found for wifi_allow_edit_configuration_title (3928254385019370063) -->
+    <skip />
     <string name="wifi_unspecified" msgid="4561964943472312208">"Vælg"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Flere certifikater er tilføjet)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Brug systemets certifikater"</string>
@@ -1184,8 +1207,7 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Del dette netværk med andre enhedsbrugere"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Alle brugere på denne enhed kan se og oprette forbindelse til et delt netværk. Administratorer kan slette et delt netværk. Få flere oplysninger"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Tillad, at andre brugere kan redigere netværkskonfigurationen"</string>
-    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
-    <skip />
+    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"Kontakt administratoren af denne enhed, hvis du vil ændre dette netværk."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Dette netværk har ingen internetadgang. Vil du bruge netværket alligevel?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Nogle apps og tjenester fungerer muligvis ikke pga. begrænset forbindelse. Skal de bruges alligevel?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Spørg ikke igen for dette netværk"</string>
@@ -2142,16 +2164,21 @@
     <string name="mouse_keys" msgid="6237254627808525540">"Musetaster"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Brug musetaster"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Genvej til musetaster"</string>
-    <string name="mouse_keys_summary" msgid="7030731235143286467">"Brug dit tastatur til at styre markøren"</string>
-    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Maks. hastighed"</string>
+    <!-- no translation found for mouse_keys_summary (6512910710030108693) -->
+    <skip />
+    <!-- no translation found for mouse_keys_max_speed_title (2651688711606971145) -->
+    <skip />
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Formindsk"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Forstør"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Omvendt rulning"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Brug primære taster"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_summary (5057949666957911577) -->
+    <skip />
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"Nulstil indstillinger"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"Sådan bruger du primære nøgler"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"Sådan bruger du numerisk tastatur"</string>
-    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2728318055237217919">"Det numeriske tastatur bruges altid, når Num Lock er aktiveret"</string>
+    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2186017679302722178) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Rul opad for at gå ned på siden"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Rulning"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Kontrolleret rulning"</string>
@@ -2169,6 +2196,12 @@
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Brug tasten \"<xliff:g id="RELEASE_LABEL">%s</xliff:g>\" til at slippe den primære museknap"</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"Brug tasten \"<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>\" til at skifte tilstand for rulning. Dette får tasterne \"<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>\" til at rulle visningerne op, ned, til venstre eller til højre"</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Brug tasten \"<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>\" til at klikke med den sekundære museknap"</string>
+    <!-- no translation found for mouse_keys_acceleration_seekbar_title (2329098889930361504) -->
+    <skip />
+    <!-- no translation found for mouse_keys_acceleration_fast_icon_desc (4426188473271579794) -->
+    <skip />
+    <!-- no translation found for mouse_keys_acceleration_slow_icon_desc (8370777074987200135) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"Se tastaturgenveje"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Vis liste over genveje"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatur og værktøjer for arbejdsprofil"</string>
@@ -2231,40 +2264,23 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Næste"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Genstart"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Udfør"</string>
-    <!-- no translation found for action_corner_title (1489042651433221319) -->
-    <skip />
-    <!-- no translation found for action_corner_summary (695618538930535335) -->
-    <skip />
-    <!-- no translation found for action_corner_intro (8782001241997579665) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
-    <skip />
-    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
-    <skip />
-    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
-    <skip />
-    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
-    <skip />
-    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
-    <skip />
-    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
-    <skip />
-    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
-    <skip />
+    <string name="action_corner_title" msgid="7411160165577367757">"Tilpas genveje i hjørner"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"Brug markører til at navigere i systemet"</string>
+    <string name="action_corner_intro" msgid="2170609118659718140">"Vælg følgende områder for at tilpasse genveje i hjørner"</string>
+    <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Nederste venstre hjørne"</string>
+    <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"Nederste højre hjørne"</string>
+    <string name="action_corner_top_left_title" msgid="4633975226092344210">"Øverste venstre hjørne"</string>
+    <string name="action_corner_top_right_title" msgid="4995999693840776032">"Øverste højre hjørne"</string>
+    <string name="action_corner_action_none" msgid="5203163099950649999">"Ingen"</string>
+    <string name="action_corner_action_home" msgid="6779642573582379579">"Hjem"</string>
+    <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Seneste apps"</string>
+    <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notifikationer"</string>
+    <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Kvikmenu"</string>
+    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Vælg en genvej til <xliff:g id="CORNER">%1$s</xliff:g>"</string>
+    <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"nederste venstre hjørne"</string>
+    <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"nederste højre hjørne"</string>
+    <string name="action_corner_top_left_name" msgid="8077670910600032291">"øverste venstre hjørne"</string>
+    <string name="action_corner_top_right_name" msgid="6307321595919080297">"øverste højre hjørne"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Ændringstaster"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Rediger tasternes funktion"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Nulstil alle"</string>
@@ -2407,10 +2423,9 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Få flere oplysninger om præferencer for undertekster"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Forstørrelse"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Genvej til forstørrelse"</string>
-    <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Tilstand for at følge markøren"</string>
+    <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Følg markøren"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Vælg, hvordan forstørrelsen følger din markør."</string>
-    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
-    <skip />
+    <string name="accessibility_magnification_cursor_following_unavailable_summary" msgid="1683880243856242269">"Utilgængelig, når kun en del af skærmen forstørres"</string>
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Flyt skærmen kontinuerligt, i takt med at markøren flyttes"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Flyt skærmen, mens markøren forbliver midt på skærmen"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Flyt skærmen, når markøren rammer kanten af skærmen"</string>
@@ -2551,32 +2566,20 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Opdater skærmforstørrelse automatisk"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Opdater skærmforstørrelsen på appovergange"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Afbryderknap afslutter opkald"</string>
-    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="8563711427335567656">"Tilstand"</string>
+    <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Standard Mørkt tema"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Mørkt tema anvendes overalt på din enhed og i understøttede apps"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Udvidet"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Udvidet Mørkt tema"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Mørkt tema anvendes automatisk i flere apps for at forbedre tilgængeligheden"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Fjern animationer"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Begrænser bevægelse på skærmen"</string>
-    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
-    <skip />
+    <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Blinkende tekstmarkør"</string>
+    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"Juster tekstmarkørens blinkhastighed, eller deaktiver blink. Understøttes muligvis ikke i alle apps eller på alle websites."</string>
+    <string name="accessibility_text_cursor_blink_rate_slower_desc" msgid="5255697869959801747">"Reducer blinkhastighed"</string>
+    <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"Øg blinkhastighed"</string>
+    <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"Nulstil"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Monolyd"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Kombiner kanaler ved afspilning af lyd"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Lydbalance"</string>
@@ -2666,6 +2669,8 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Få flere oplysninger om farvekorrigering"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Om ombytning af farver"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Få flere oplysninger om ombytning af farver"</string>
+    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Få flere oplysninger om Mørkt tema"</string>
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Nogle apps understøtter muligvis ikke den udvidede indstilling for Mørkt tema. Brug standardindstillingen, hvis du oplever problemer med visningen."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Vis undertekster"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Kun til understøttet app"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Undertekststørrelse og -type"</string>
@@ -3732,8 +3737,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ingen}=1{1 tidsplan er angivet}one{# tidsplan er angivet}other{# tidsplaner er angivet}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Forstyr ikke"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Tilstande"</string>
-    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
-    <skip />
+    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Begræns distraktioner, og hold opmærksomheden på det vigtigste med tilstande for søvn, arbejde, kørsel osv."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Opret din egen tilstand"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Få kun notifikationer fra vigtige personer og apps"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Angiv en tidsplan"</string>
@@ -3859,7 +3863,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"åbn notifikationen"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Tillad udsættelse af notifikationer"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Notifikationsprik på appikon"</string>
-    <string name="notification_bundles" msgid="496852738958148317">"Notifikationsorganisering"</string>
+    <string name="notification_bundles" msgid="496852738958148317">"Notifikations­organisering"</string>
     <string name="notification_bundle_promotions_summary" msgid="3196830882575438887">"Udsalg, nye funktioner m.m."</string>
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Tophistorier, redaktionelt indhold m.m."</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Likes, opslag m.m."</string>
@@ -4026,9 +4030,9 @@
     <string name="notification_polite_description" msgid="6137533404978878957">"Hvis du får mange notifikationer inden for kort tid, skruer enheden ned for lydstyrken og minimerer underretninger på skærmen i op til 1 minut. Opkald, alarmer og prioriterede samtaler påvirkes ikke. \n\nDu kan se de notifikationer, du modtager i denne periode, ved at trække nedad fra toppen af skærmen."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Anvend på arbejdsprofiler"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Anvend på apps på arbejdsprofilen"</string>
-    <string name="notification_bundle_title" msgid="6679586974995981433">"Notifikationsorganisering"</string>
+    <string name="notification_bundle_title" msgid="6679586974995981433">"Notifikations­organisering"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Gruppér og ignorer notifikationer med lavere prioritet"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Brug notifikationsorganisering"</string>
+    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Brug notifikations­organisering"</string>
     <string name="notification_bundle_description" msgid="8439963475488583612">"Vælg de notifikationstyper, du vil ignorere, og gruppér dem for at minimere afbrydelser. Gruppering er AI-baseret og kan indeholde fejl."</string>
     <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Gruppér notifikationer"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Notifikationer med lignende emner ignoreres og grupperes for at give en roligere brugeroplevelse"</string>
@@ -4358,10 +4362,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"Tilladelsesadministrator"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Opdateringer af datadeling for lokation"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Gennemse apps, der har ændret måden, de kan dele dine lokationsdata på"</string>
-    <!-- no translation found for app_function_access_settings_title (1474765429611652468) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (6465715820745848068) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Agentstyring af andre apps"</string>
+    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Udfør handlinger på din enhed og i andre apps"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Tryk for at vække"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Tryk to gange et vilkårligt sted på skærmen for at vække enheden"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Åbning af links"</string>
@@ -4521,9 +4523,9 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Gør alt større eller mindre"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"visningstæthed, zoom på skærmen, skala, skalering"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Forhåndsvisning"</string>
-    <!-- no translation found for screen_zoom_make_smaller_desc (1450649885198381123) -->
+    <!-- no translation found for screen_zoom_make_smaller_desc (6268455784510593120) -->
     <skip />
-    <!-- no translation found for screen_zoom_make_larger_desc (7125594310562596457) -->
+    <!-- no translation found for screen_zoom_make_larger_desc (3458295276713085365) -->
     <skip />
     <string name="disconnected" msgid="3469373726996129247">"Ikke forbundet"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Ikke tilsluttet"</string>
@@ -4544,6 +4546,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Blokeret af dit kreditinstitut"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Dette kræver en forælder"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Giv telefonen til din forælder for at starte konfigurationen af dette"</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"Begrænset af børnesikring"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"Det er kun den person, som administrerer dine indstillinger for børnesikring, der kan ændre denne indstilling"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Giv telefonen til din forælder, så din forælder kan tillade, at denne indstilling ændres."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Få flere oplysninger ved at kontakte din it-administrator."</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Flere oplysninger"</string>
@@ -4659,7 +4663,7 @@
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Tjek"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Er denne meddelelse nyttig?"</string>
-    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Advarselsikon med batteritips"</string>
+    <string name="battery_hints_warning_icon_a11y" msgid="709629805028175434">"Tips ved batteriadvarsler"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Aktivér adaptiv lysstyrke for at forlænge batteritiden"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Reducer timeout for skærm for at forlænge batteritiden"</string>
     <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> brugte mere batteri"</string>
@@ -4987,8 +4991,6 @@
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Nulstil til standardværdierne"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Udviklerindstillingerne for autofyld blev nulstillet"</string>
     <string name="location_category" msgid="3496759112306219062">"Lokation"</string>
-    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Lokationsindikator i statusbjælke"</string>
-    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Vis i forbindelse med alle lokationer, herunder netværk og forbindelse"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Gennemtving fuld GNSS-måling"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Registrer alle GNSS-konstellationer og -frekvenser uden opgavegennemløb"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Indtastningsmetode"</string>
@@ -5203,7 +5205,8 @@
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellitforbindelse"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellitforbindelse"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellitbeskeder"</string>
-    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Brug af data er inkluderet på din konto"</string>
+    <!-- no translation found for title_have_satellite_data_plan (1101741256080690699) -->
+    <skip />
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Understøttede apps på din telefon"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Se alle apps, der understøtter satellitforbindelse"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Understøttede apps på din telefon"</string>
@@ -5379,15 +5382,13 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Genstart med sidestørrelsen 16 KB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Start enheden med en kerne, der understøtter en sidestørrelse på 16 KB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Skift fra tilstanden med 4 KB til tilstanden med 16 KB"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="4760548401414644138">"Denne enheds datapartition skal konverteres til ext4, før du kan bruge udviklerindstillingen med 16 kB. Enheden ryddes, og filsystemet ændres til ext4 efter bekræftelse. Du er i produktionstilstand, der kører en kerne på 4 kB, og du skifter til tilstanden med 16 kB. Når du er i denne tilstand, kan du skifte mellem tilstanden med 4 kB og tilstanden med 16 kB ved blot at genstarte en enkelt gang. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil skifte tilbage til produktionstilstand på enheden, skal du skifte tilbage til tilstanden med 4 kB og låse bootloaderen, hvilket vil gendanne enhedens fabriksindstillinger. Når enheden er startet i Android, skal du deaktivere OEM-oplåsning via Indstillinger for udviklere. Klik på \"Ryd alle data, og opdater\" for at fortsætte. Denne handling genstarter enheden."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Du er i den sideagnostiske tilstand, der kører en kerne på 4 KB, og du skifter til tilstanden med 16 KB. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Denne handling genstarter enheden. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil skifte tilbage til produktionstilstand på enheden, skal du skifte tilbage til tilstanden med 4 KB og låse bootloaderen, hvilket vil gendanne enhedens fabriksindstillinger. Når enheden er startet i Android, skal du deaktivere OEM-oplåsning via Indstillinger for udviklere."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Skift fra tilstanden med 16 KB til tilstanden med 4 KB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Du er i den sideagnostiske tilstand, der kører en kerne på 16 KB, og du skifter til tilstanden med 4 KB. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Denne handling genstarter enheden. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil skifte tilbage til produktionstilstand på enheden, skal du låse bootloaderen, hvilket vil gendanne enhedens fabriksindstillinger. Når enheden er startet i Android, skal du deaktivere OEM-oplåsning via Indstillinger for udviklere."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Sidestørrelsen kunne ikke opdateres til 16 KB, der er kompatibel med kernen."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Anvender ændringer"</string>
-    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
-    <skip />
+    <string name="confirm_ext4_button_text" msgid="697563319110759422">"Ryd alle data, og opdater"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Datapartitionen kunne ikke omformateres og ryddes til ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Oplåsning af bootloader er påkrævet"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"Bootloader skal være låst op på denne enhed, før du kan bruge udviklerindstillingen med 16 KB. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Alle brugerdata og -indstillinger ryddes, når du aktiverer tilstanden med 16 KB. Når bootloaderen er låst op, forudsætter brug af indstillingen med 16 KB to genstarter. Når du er i denne tilstand, kan du skifte mellem tilstanden med 4 KB og tilstanden med 16 KB ved blot at genstarte en enkelt gang. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil skifte tilbage til produktionstilstand på enheden, skal du skifte tilbage til tilstanden med 4 KB og derefter låse OEM/bootloaderen, hvilket vil gendanne enhedens fabriksindstillinger. Lås bootloaderen op, og prøv igen. Du kan se, hvordan du gør dette, på &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5837,6 +5838,8 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Ingen adgangskode"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Få flere oplysninger"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Kan ikke afspille denne lydstream på <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
+    <skip />
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Lytter nu"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Streamen er sat på pause"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Stop med at lytte"</string>
@@ -5883,36 +5886,41 @@
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Hold fingeren på knappen Hjem eller navigationshåndtaget for at søge ved hjælp af indholdet på skærmen."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Konfigurer enhedsoplysninger."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Børnesikring"</string>
-    <string name="supervision_settings_summary" msgid="5020634300370322741">"Indholdsbegrænsninger og andre begrænsninger"</string>
+    <string name="supervision_settings_summary" msgid="6304257872307136073">"Digitale spilleregler og grænser for skærmtid"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Opret pinkode"</string>
-    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"Sat på pause"</string>
-    <string name="keywords_supervision_settings" msgid="2580555201483955376">"forældrestyring, indstillinger for børnesikring, børnesikring"</string>
+    <string name="keywords_supervision_settings" msgid="43064288661561602">"forældrestyring, børnesikring, forældre, pinkode til forældrestyring, pinkode"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Administrer din pinkode"</string>
+    <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Forælderpinkode, pinkode til børnesikring"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Tilføj mailadresse til gendannelse"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Verificer mailadresse til gendannelse"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Skift pinkode"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Har du glemt pinkoden?"</string>
+    <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Har du glemt pinkoden?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Opdater mailadresse til gendannelse"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Slet pinkode"</string>
-    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Dette nulstiller alle dine indstillinger for forældrestyring"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Tilføj mailadresse til gendannelse"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verificer din mailadresse"</string>
-    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Indholdsfiltre til webindhold"</string>
-    <string name="supervision_web_content_filters_top_intro" msgid="5264773769840566499">"Bloker indhold, der er uegnet for børn, på websites og i søgeresultater i understøttede apps på denne enhed. Ikke-understøttede apps kan stadig vise eksplicit indhold."</string>
+    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Indholdsfiltre for websites"</string>
+    <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Websitefiltre, blokere websites, browserfiltre, blokere eksplicitte websites, filtrere websites, blokere søgeresultater, filtrere eksplicitte søgeresultater, indholdsbegrænsninger"</string>
+    <!-- no translation found for supervision_web_content_filters_top_intro (8056274290725144441) -->
+    <skip />
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Websites"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"Bloker eksplicitte websites"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Søgeresultater"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Bortfiltrér eksplicitte søgeresultater"</string>
-    <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Angiv pinkode til forældrestyring"</string>
+    <!-- no translation found for supervision_web_content_filters_switch_summary (2095166099345288321) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_footer_title (1741897040916039165) -->
+    <skip />
+    <!-- no translation found for supervision_full_screen_pin_verification_title (7685279446792771815) -->
+    <skip />
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Angiv en pinkode til børnesikring"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Bekræft pinkode"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Pinkoden er opdateret"</string>
-    <!-- no translation found for supervision_promo_footer_action_button_description (7617359721703338141) -->
-    <skip />
+    <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Åbn app"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Vil du slette pinkoden?"</string>
-    <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"Dette sletter din aktuelle pinkode for alle brugere på denne enhed og deaktiverer de indstillinger, du har konfigureret. Denne handling kan ikke fortrydes."</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"Sæt først indstillingerne på andre profiler på pause"</string>
-    <string name="supervision_delete_pin_supervision_enabled_message" msgid="5643922966568203196">"Hvis du vil slette denne pinkode og nulstille indstillingerne for forældrestyring, skal du sætte indstillingerne på alle andre profiler på pause."</string>
+    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
+    <skip />
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Pinkoden kan ikke slettes"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Der opstod en fejl under forsøget på at slette pinkoden."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation af <xliff:g id="FEATURE">%1$s</xliff:g>"</string>

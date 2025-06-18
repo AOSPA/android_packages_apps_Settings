@@ -18,6 +18,7 @@ package com.android.settings.system
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.view.View.LAYOUT_DIRECTION_RTL
 import androidx.annotation.VisibleForTesting
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
@@ -122,12 +123,16 @@ class ShadePanelsFragment : RadioButtonPickerFragment(), HelpResourceProvider {
     }
 
     private fun setIllustrationForSelection(selectedKey: String) {
+        val configuration = requireContext().getResources().getConfiguration()
+        val isRtl = configuration.getLayoutDirection() == LAYOUT_DIRECTION_RTL
         setIllustration(
-            // TODO(b/409228328): Set the actual illustration for dual shade, and make sure it is
-            //  auto-flipped for RTL locales.
             when (selectedKey) {
-                KEY_DUAL_SHADE_PREFERENCE -> R.raw.lottie_system_nav_2_button
-                KEY_SINGLE_SHADE_PREFERENCE -> R.raw.lottie_system_nav_fully_gestural
+                KEY_DUAL_SHADE_PREFERENCE ->
+                    if (isRtl) R.raw.lottie_shade_panels_separate_rtl
+                    else R.raw.lottie_shade_panels_separate_ltr
+                KEY_SINGLE_SHADE_PREFERENCE ->
+                    if (isRtl) R.raw.lottie_shade_panels_combined_rtl
+                    else R.raw.lottie_shade_panels_combined_ltr
                 else -> 0 // Indicate no specific animation for unknown keys
             },
             IllustrationType.LOTTIE_ANIMATION

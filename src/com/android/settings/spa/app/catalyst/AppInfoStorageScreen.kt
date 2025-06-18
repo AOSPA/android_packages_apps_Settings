@@ -70,7 +70,7 @@ open class AppInfoStorageScreen(context: Context, override val arguments: Bundle
 
     override fun getSummary(context: Context): CharSequence? = repo.formatSize(appInfo)
 
-    override fun isFlagEnabled(context: Context) = Flags.catalystAppList() || Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
 
     override fun extras(context: Context): Bundle? =
         Bundle(1).apply { putString(KEY_EXTRA_PACKAGE_NAME, arguments.getString("app")) }

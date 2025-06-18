@@ -184,11 +184,6 @@ public final class Utils extends com.android.settingslib.Utils {
             "device_identifier_access_restrictions_disabled";
 
     /**
-     * Whether to show location indicators.
-     */
-    public static final String PROPERTY_LOCATION_INDICATORS_ENABLED = "location_indicators_enabled";
-
-    /**
      * Whether to show location indicator settings in developer options.
      */
     public static final String PROPERTY_LOCATION_INDICATOR_SETTINGS_ENABLED =
@@ -471,10 +466,6 @@ public final class Utils extends com.android.settingslib.Utils {
         final List<UserHandle> userProfiles = userManager.getUserProfiles();
         String umUserType = getUmUserType(userType);
         for (UserHandle profile : userProfiles) {
-            if (!com.android.settings.flags.Flags.utilsReturnUserHandleForCurrentUserId()
-                    && profile.getIdentifier() == UserHandle.myUserId()) {
-                continue;
-            }
             final UserInfo userInfo = userManager.getUserInfo(profile.getIdentifier());
             if (Objects.equals(umUserType, userInfo.userType)) {
                 return profile;

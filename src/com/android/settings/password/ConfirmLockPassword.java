@@ -34,6 +34,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -148,12 +149,11 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             final boolean isExpressiveStyle = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE, false) || (
                     activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.EXPRESSIVE);
-            int layoutId = R.layout.confirm_lock_password /* default layout */;
-            if (activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.NORMAL) {
-                layoutId = R.layout.confirm_lock_password_normal;
-            } else if (isExpressiveStyle) {
-                layoutId = R.layout.confirm_lock_password_expressive;
-            }
+            int layoutId = switch (activity.getConfirmCredentialTheme()) {
+                case ConfirmCredentialTheme.NORMAL -> R.layout.confirm_lock_password_normal;
+                case ConfirmCredentialTheme.EXPRESSIVE -> R.layout.confirm_lock_password_expressive;
+                default -> R.layout.confirm_lock_password;
+            };
             View view = inflater.inflate(layoutId, container, false);
             mGlifLayout = view.findViewById(R.id.setup_wizard_layout);
             mPasswordEntry = (EditText) view.findViewById(R.id.password_entry);
@@ -188,6 +188,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     Context.INPUT_METHOD_SERVICE);
 
             mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
+            boolean isSupervisingProfile =
+                    android.multiuser.Flags.allowSupervisingProfile() && UserManager.get(
+                            getActivity()).isUserOfType(USER_TYPE_PROFILE_SUPERVISING);
 
             Intent intent = getActivity().getIntent();
             if (intent != null) {
@@ -206,12 +209,20 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 }
                 mGlifLayout.setHeaderText(headerMessage);
 
-                if (mIsManagedProfile) {
+                if (mIsManagedProfile || isSupervisingProfile) {
                     mGlifLayout.getDescriptionTextView().setVisibility(View.GONE);
                 } else {
                     mGlifLayout.setDescriptionText(detailsMessage);
                 }
                 mCheckBoxLabel = intent.getCharSequenceExtra(KeyguardManager.EXTRA_CHECKBOX_LABEL);
+
+                if (isSupervisingProfile) {
+                    Drawable iconDrawable = getActivity().getDrawable(
+                            R.drawable.ic_account_child_invert_48);
+                    iconDrawable.mutate();
+                    iconDrawable.setTintList(mGlifLayout.getPrimaryColor());
+                    mGlifLayout.setIcon(iconDrawable);
+                }
             }
             int currentType = mPasswordEntry.getInputType();
             if (mIsAlpha) {
@@ -355,11 +366,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return getContext().getString(mIsAlpha
                         ? R.string.lockpassword_remote_validation_password_details
                         : R.string.lockpassword_remote_validation_pin_details);
-            }
-            if (android.multiuser.Flags.allowSupervisingProfile() && !mIsAlpha) {
-                if (UserManager.get(getActivity()).isUserOfType(USER_TYPE_PROFILE_SUPERVISING)) {
-                    return "";
-                }
             }
             boolean isStrongAuthRequired = isStrongAuthRequired();
             // Map boolean flags to an index by isStrongAuth << 1 + isAlpha.

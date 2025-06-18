@@ -54,16 +54,19 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WepLessSecureWarningController;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiDialog2;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details2.AddDevicePreferenceController2;
 import com.android.settings.wifi.details2.CertificateDetailsPreferenceController;
 import com.android.settings.wifi.details2.ServerNamePreferenceController;
 import com.android.settings.wifi.details2.WifiAutoConnectPreferenceController2;
 import com.android.settings.wifi.details2.WifiDetailPreferenceController2;
+import com.android.settings.wifi.details2.WifiEditConfigPreferenceController;
 import com.android.settings.wifi.details2.WifiMeteredPreferenceController2;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.details2.WifiSecondSummaryController2;
+import com.android.settings.wifi.details2.WifiSharedPreferenceController;
 import com.android.settings.wifi.details2.WifiSubscriptionDetailPreferenceController2;
 import com.android.settings.wifi.repository.SharedConnectivityRepository;
 import com.android.settingslib.RestrictedLockUtils;
@@ -97,6 +100,8 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
             "hotspot_device_details_internet_source";
     public static final String KEY_HOTSPOT_DEVICE_BATTERY = "hotspot_device_details_battery";
     public static final String KEY_HOTSPOT_CONNECTION_CATEGORY = "hotspot_connection_category";
+    public static final String KEY_EDIT_CONFIG_TOGGLE = "edit_configuration";
+    public static final String KEY_SHARED_TOGGLE = "shared";
 
     // Max age of tracked WifiEntries
     private static final long MAX_SCAN_AGE_MILLIS = 15_000;
@@ -113,6 +118,8 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
     private List<WifiDialog2.WifiDialog2Listener> mWifiDialogListeners = new ArrayList<>();
     @VisibleForTesting
     List<AbstractPreferenceController> mControllers;
+    @VisibleForTesting
+    WifiPickerTrackerHelper mWifiPickerTrackerHelper;
     private boolean mIsInstantHotspotFeatureEnabled =
             SharedConnectivityRepository.isDeviceConfigEnabled();
     @VisibleForTesting
@@ -283,6 +290,18 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
                 new WifiAutoConnectPreferenceController2(context);
         wifiAutoConnectPreferenceController2.setWifiEntry(wifiEntry);
         mControllers.add(wifiAutoConnectPreferenceController2);
+
+        final WifiEditConfigPreferenceController wifiEditConfigPreferenceController =
+                new WifiEditConfigPreferenceController(
+                        context, KEY_EDIT_CONFIG_TOGGLE, wifiEntry);
+        mControllers.add(wifiEditConfigPreferenceController);
+
+        mWifiPickerTrackerHelper =
+                new WifiPickerTrackerHelper(getSettingsLifecycle(), getContext(), null);
+        final WifiSharedPreferenceController wifiSharedPreferenceController =
+                new WifiSharedPreferenceController(
+                        context, KEY_SHARED_TOGGLE, mWifiPickerTrackerHelper, wifiEntry);
+        mControllers.add(wifiSharedPreferenceController);
 
         final AddDevicePreferenceController2 addDevicePreferenceController2 =
                 new AddDevicePreferenceController2(context);

@@ -50,6 +50,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothStatusCodes;
+import android.bluetooth.BluetoothVolumeControl;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -912,6 +913,75 @@ public class AudioStreamMediaServiceTest {
         IBinder binder = mAudioStreamMediaService.onBind(new Intent());
 
         assertThat(binder).isNull();
+    }
+
+    @Test
+    public void volumeControlCallback_modifySourceFlagOn_doNothing() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_STREAM_PLAY_PAUSE_BY_MODIFY_SOURCE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_STREAM_MEDIA_SERVICE_BY_RECEIVE_STATE);
+        mAudioStreamMediaService.onCreate();
+        Intent intent1 = setupReceiveDataIntent(1, mDevice, STREAMING, new HashSet<>(List.of(1)));
+        mAudioStreamMediaService.onStartCommand(intent1, /* flags= */ 0, /* startId= */ 0);
+        assertThat(mAudioStreamMediaService.mStateByDevice).isNotNull();
+
+        BluetoothVolumeControl.Callback callback = mAudioStreamMediaService.mVolumeControlCallback;
+        assertThat(callback).isNotNull();
+
+        callback.onDeviceVolumeChanged(mDevice, 0);
+        assertThat(mAudioStreamMediaService.mIsMuted).isFalse();
+    }
+
+    @Test
+    public void volumeControlCallback_modifySourceFlagOff_deviceNotMatch_doNothing() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_STREAM_PLAY_PAUSE_BY_MODIFY_SOURCE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_STREAM_MEDIA_SERVICE_BY_RECEIVE_STATE);
+        mAudioStreamMediaService.onCreate();
+        Intent intent1 = setupReceiveDataIntent(1, mDevice, STREAMING, new HashSet<>(List.of(1)));
+        mAudioStreamMediaService.onStartCommand(intent1, /* flags= */ 0, /* startId= */ 0);
+        assertThat(mAudioStreamMediaService.mStateByDevice).isNotNull();
+
+        BluetoothVolumeControl.Callback callback = mAudioStreamMediaService.mVolumeControlCallback;
+        assertThat(callback).isNotNull();
+
+        callback.onDeviceVolumeChanged(mDevice2, 0);
+        assertThat(mAudioStreamMediaService.mIsMuted).isFalse();
+    }
+
+    @Test
+    public void volumeControlCallback_modifySourceFlagOff_setMuted() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mSetFlagsRule.disableFlags(Flags.FLAG_AUDIO_STREAM_PLAY_PAUSE_BY_MODIFY_SOURCE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_STREAM_MEDIA_SERVICE_BY_RECEIVE_STATE);
+        mAudioStreamMediaService.onCreate();
+        Intent intent1 = setupReceiveDataIntent(1, mDevice, STREAMING, new HashSet<>(List.of(1)));
+        mAudioStreamMediaService.onStartCommand(intent1, /* flags= */ 0, /* startId= */ 0);
+        assertThat(mAudioStreamMediaService.mStateByDevice).isNotNull();
+
+        BluetoothVolumeControl.Callback callback = mAudioStreamMediaService.mVolumeControlCallback;
+        assertThat(callback).isNotNull();
+
+        callback.onDeviceVolumeChanged(mDevice, 0);
+        assertThat(mAudioStreamMediaService.mIsMuted).isTrue();
+    }
+
+    @Test
+    public void volumeControlCallback_modifySourceFlagOff_setVolume() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mSetFlagsRule.disableFlags(Flags.FLAG_AUDIO_STREAM_PLAY_PAUSE_BY_MODIFY_SOURCE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_STREAM_MEDIA_SERVICE_BY_RECEIVE_STATE);
+        mAudioStreamMediaService.onCreate();
+        Intent intent1 = setupReceiveDataIntent(1, mDevice, STREAMING, new HashSet<>(List.of(1)));
+        mAudioStreamMediaService.onStartCommand(intent1, /* flags= */ 0, /* startId= */ 0);
+        assertThat(mAudioStreamMediaService.mStateByDevice).isNotNull();
+
+        BluetoothVolumeControl.Callback callback = mAudioStreamMediaService.mVolumeControlCallback;
+        assertThat(callback).isNotNull();
+
+        callback.onDeviceVolumeChanged(mDevice, 100);
+        assertThat(mAudioStreamMediaService.mIsMuted).isFalse();
+        assertThat(mAudioStreamMediaService.mLatestPositiveVolume).isEqualTo(100);
     }
 
     private Intent setupIntent() {

@@ -150,6 +150,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
                             getPreferenceScreen().getContext());
                     preference.setIcon(R.drawable.premium_sms_no_app_icon_24dp);
                     preference.setTitle(R.string.premium_sms_none);
+                    preference.setScreenCentering(true);
                     getPreferenceScreen().addPreference(preference);
                 }
             }

@@ -19,7 +19,6 @@ import android.app.role.RoleManager
 import android.app.role.RoleManager.ROLE_SUPERVISION
 import android.app.supervision.SupervisionManager
 import android.os.Bundle
-import android.os.UserHandle
 import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
@@ -31,24 +30,23 @@ import kotlinx.coroutines.launch
 /**
  * Activity for enabling device supervision.
  *
- * This activity is only available to the system supervision role and allowlisted packages.
- * It enables device supervision and finishes the activity with `Activity.RESULT_OK`.
+ * This activity is only available to the system supervision role and allowlisted packages. It
+ * enables device supervision and finishes the activity with `Activity.RESULT_OK`.
  */
 class EnableSupervisionActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val packageName = callingPackage
-        val userHandle = supervisingUserHandle
-        if (packageName == null || userHandle == null) {
-            Log.w(TAG, "Calling package or user handle are null. Finishing activity.")
+        if (packageName == null) {
+            Log.w(TAG, "Calling package is null. Finishing activity.")
             setResult(RESULT_CANCELED)
             finish()
             return
         }
 
         lifecycleScope.launch {
-            if (grantSupervisionRole(packageName, userHandle)) {
+            if (grantSupervisionRole(packageName)) {
                 val supervisionManager = getSystemService(SupervisionManager::class.java)
                 if (supervisionManager == null) {
                     Log.w(TAG, "SupervisionManager is null. Finishing activity.")
@@ -64,20 +62,20 @@ class EnableSupervisionActivity : FragmentActivity() {
         }
     }
 
-    suspend fun grantSupervisionRole(packageName: String, userHandle: UserHandle): Boolean {
+    suspend fun grantSupervisionRole(packageName: String): Boolean {
         val executor = ContextCompat.getMainExecutor(this)
         val roleManager = getSystemService(RoleManager::class.java)
         if (roleManager == null) {
-          Log.w(TAG, "RoleManager is null. Finishing activity.")
-          return false
+            Log.w(TAG, "RoleManager is null. Finishing activity.")
+            return false
         }
-        return suspendCoroutine  { continuation ->
+        return suspendCoroutine { continuation ->
             roleManager.addRoleHolderAsUser(
                 ROLE_SUPERVISION,
                 packageName,
                 RoleManager.MANAGE_HOLDERS_FLAG_DONT_KILL_APP,
-                userHandle,
-                executor
+                user,
+                executor,
             ) { isSuccessful ->
                 continuation.resumeWith(Result.success(isSuccessful))
             }

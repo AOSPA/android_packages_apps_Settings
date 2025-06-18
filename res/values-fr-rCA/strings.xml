@@ -47,8 +47,10 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"Courriel"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Aperçu précédent"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Aperçu suivant"</string>
-    <string name="font_size_make_smaller_desc" msgid="319927200356692406">"Réduire la taille de la police"</string>
-    <string name="font_size_make_larger_desc" msgid="6739310980713118605">"Agrandir la taille de la police"</string>
+    <!-- no translation found for font_size_make_smaller_desc (9149663537989624487) -->
+    <skip />
+    <!-- no translation found for font_size_make_larger_desc (5774611876657293550) -->
+    <skip />
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Toujours"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"L\'écran frontal s\'allume lorsque vous pliez votre appareil"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Balayer vers le haut pour continuer"</string>
@@ -198,7 +200,7 @@
     <string name="locale_remove_menu" msgid="3521546263421387474">"Supprimer"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Ajouter une langue"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Langue"</string>
-    <string name="locale_picker_category_title" msgid="6212064706962721255">"Langue favorite"</string>
+    <string name="locale_picker_category_title" msgid="296835514014453679">"Langues préférées"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Langues des applis"</string>
     <string name="app_locale_picker_summary" msgid="616928580653613998">"Choisissez la langue pour chaque appli"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Langue de l\'appli"</string>
@@ -224,10 +226,11 @@
     <string name="title_change_system_locale" msgid="4102991236063984803">"Modifier la langue du système à %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Ajouter %s aux langues préférées?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Cela permet aux applis et aux sites Web de savoir que vous préférez aussi cette langue."</string>
-    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Vos préférences régionales et les paramètres de votre appareil seront modifiés."</string>
+    <string name="desc_notice_device_locale_and_region_settings_change" msgid="909261686577914396">"Votre appareil utilisera <xliff:g id="LANGUAGE">%1$s</xliff:g>, et votre région sera modifiée pour passer à <xliff:g id="REGION">%2$s</xliff:g>."</string>
+    <string name="dlg_desc_delete_preferred_default_locale" msgid="690828405078078513">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> sera retiré de vos langues préférées"</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Modifier"</string>
-    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s non accessible"</string>
-    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Cette langue ne peut pas être utilisée comme langue du système, mais vous avez indiqué aux applis et aux sites Web qu\'il s\'agissait de votre préférence."</string>
+    <string name="title_unavailable_locale" msgid="5382411204559213983">"Impossible de définir <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> comme langue du système"</string>
+    <string name="desc_unavailable_locale" msgid="7223655766703116782">"Votre appareil ne prend pas en charge cette langue, mais les applis sauront que vous préférez cette langue"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Rechercher"</string>
     <string name="language_and_region_title" msgid="8374151891112162767">"Langue et région"</string>
     <string name="language_selection_title" msgid="968179636453982415">"Ajouter une langue"</string>
@@ -241,6 +244,9 @@
     <string name="title_change_system_locale_region" msgid="4401478579429442695">"Remplacer la région par <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"Votre appareil aura la langue du système suivante : <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g>"</string>
     <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"Choisissez comment votre appareil, vos sites Web et vos applis affichent les chiffres"</string>
+    <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Déplacer vers le haut"</string>
+    <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Déplacer vers le bas"</string>
+    <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Retirer"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Préférences régionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Définissez les préférences relatives aux unités et aux chiffres"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Indiquez aux applis vos préférences régionales afin qu\'elles puissent personnaliser votre expérience."</string>
@@ -279,6 +285,8 @@
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Impossible de supprimer toutes les langues"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Conservez au moins une langue"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Non offerte comme langue du système"</string>
+    <string name="dlg_title_delete_preferred_locale" msgid="4167214348946940002">"Retirer <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g>?"</string>
+    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> sera retiré de vos langues préférées. Vous pourrez l\'ajouter à nouveau plus tard."</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Déplacer vers le haut"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Déplacer vers le bas"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Déplacer dans le haut"</string>
@@ -458,6 +466,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Plus tard"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"J\'accepte"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Touchez deux fois pour renommer l\'empreinte"</string>
+    <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"<xliff:g id="FP_NAME">%1$s</xliff:g> reconnue"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Ignorer la configuration?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"La configuration de l\'empreinte digitale ne prend qu\'une minute ou deux. Si vous ignorez cette étape, vous pourrez ajouter votre empreinte digitale plus tard dans les paramètres."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Si vous voyez cette icône, utilisez votre empreinte pour vous authentifier (comme pour vous connecter à des applis ou approuver un achat)"</string>
@@ -1162,7 +1171,25 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Le format du code QR est incorrect"</string>
     <string name="retry" msgid="7542103800274026915">"Réessayer"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Partager avec d\'autres utilisateurs de l\'appareil"</string>
+    <!-- no translation found for shared_message (2104244057926025072) -->
+    <skip />
+    <!-- no translation found for private_message (5897966950396765392) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_confirm (4577313983128123779) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_cancel (5200571850377525343) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_title (6346200020322308703) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_summary (4356010425167713046) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_title (1127530499054245755) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_message (3192435395074097168) -->
+    <skip />
     <string name="wifi_unchanged" msgid="8026045290856150191">"(aucune modification)"</string>
+    <!-- no translation found for wifi_allow_edit_configuration_title (3928254385019370063) -->
+    <skip />
     <string name="wifi_unspecified" msgid="4561964943472312208">"Veuillez choisir"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Certificats multiples ajoutés)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Utiliser les certificats système"</string>
@@ -1180,8 +1207,7 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Partager ce réseau avec d\'autres utilisateurs d\'appareils"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Tous les utilisateurs de cet appareil peuvent afficher un réseau partagé et s\'y connecter. Les administrateurs peuvent supprimer un réseau partagé. En savoir plus"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Autoriser les autres utilisateurs à modifier la configuration du réseau"</string>
-    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
-    <skip />
+    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"Communiquez avec l\'administrateur de cet appareil pour apporter des modifications à ce réseau."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Ce réseau ne dispose d\'aucun accès Internet. Voulez-vous quand même l\'utiliser?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Connectivité limitée : certains services et applis pourraient ne pas fonctionner. Utiliser quand même?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Ne plus me demander pour ce réseau"</string>
@@ -1911,7 +1937,7 @@
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Relevez le doigt lorsque vous avez terminé"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Reliez au moins <xliff:g id="NUMBER">%d</xliff:g> points. Veuillez réessayer."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Schéma enregistré"</string>
-    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Retracez le schéma pour confirmer"</string>
+    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Retracez le schéma pour confirmer."</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Votre nouveau schéma de déverrouillage est le suivant :"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Confirmer"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"Redessiner"</string>
@@ -2138,16 +2164,21 @@
     <string name="mouse_keys" msgid="6237254627808525540">"Touches de souris"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Utiliser les touches de souris"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Raccourcis-clavier des touches de souris"</string>
-    <string name="mouse_keys_summary" msgid="7030731235143286467">"Utilisez votre clavier pour contrôler le pointeur"</string>
-    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Vitesse maximale"</string>
+    <!-- no translation found for mouse_keys_summary (6512910710030108693) -->
+    <skip />
+    <!-- no translation found for mouse_keys_max_speed_title (2651688711606971145) -->
+    <skip />
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Diminuer"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Augmenter"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Défilement inversé"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Utiliser les clés primaires"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_summary (5057949666957911577) -->
+    <skip />
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"Réinitialiser les paramètres"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"Comment utiliser des clés primaires"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"Comment utiliser un clav. numérique"</string>
-    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2728318055237217919">"Clav. num. quand Verr. num. activé"</string>
+    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2186017679302722178) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Faites défiler l\'écran vers le haut pour déplacer la page vers le bas"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Faire défiler"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Défilement contrôlé"</string>
@@ -2165,6 +2196,12 @@
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Utilisez la touche « <xliff:g id="RELEASE_LABEL">%s</xliff:g> » pour relâcher le bouton principal de la souris"</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"Utilisez la touche « <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> » pour activer ou désactiver le mode de défilement. Les touches « <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> » feront alors défiler l\'affichage vers le haut, le bas, la gauche ou la droite"</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Utilisez la touche « <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> » pour cliquer sur le bouton secondaire de la souris"</string>
+    <!-- no translation found for mouse_keys_acceleration_seekbar_title (2329098889930361504) -->
+    <skip />
+    <!-- no translation found for mouse_keys_acceleration_fast_icon_desc (4426188473271579794) -->
+    <skip />
+    <!-- no translation found for mouse_keys_acceleration_slow_icon_desc (8370777074987200135) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"Afficher les raccourcis-clavier"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Affichez la liste de raccourcis"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Claviers et outils pour le profil professionnel"</string>
@@ -2227,40 +2264,23 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Suivant"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Redémarrer"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"OK"</string>
-    <!-- no translation found for action_corner_title (1489042651433221319) -->
-    <skip />
-    <!-- no translation found for action_corner_summary (695618538930535335) -->
-    <skip />
-    <!-- no translation found for action_corner_intro (8782001241997579665) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
-    <skip />
-    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
-    <skip />
-    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
-    <skip />
-    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
-    <skip />
-    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
-    <skip />
-    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
-    <skip />
-    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
-    <skip />
+    <string name="action_corner_title" msgid="7411160165577367757">"Personnaliser les raccourcis de coins"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"Utilisez les curseurs pour naviguer dans le système"</string>
+    <string name="action_corner_intro" msgid="2170609118659718140">"Choisissez les zones suivantes pour personnaliser les raccourcis de coins"</string>
+    <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Coin inférieur gauche"</string>
+    <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"Coin inférieur droit"</string>
+    <string name="action_corner_top_left_title" msgid="4633975226092344210">"Coin supérieur gauche"</string>
+    <string name="action_corner_top_right_title" msgid="4995999693840776032">"Coin supérieur droit"</string>
+    <string name="action_corner_action_none" msgid="5203163099950649999">"Aucun"</string>
+    <string name="action_corner_action_home" msgid="6779642573582379579">"Accueil"</string>
+    <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Applis récentes"</string>
+    <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notifications"</string>
+    <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Paramètres rapides"</string>
+    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Choisir un raccourci pour le <xliff:g id="CORNER">%1$s</xliff:g>"</string>
+    <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"coin inférieur gauche"</string>
+    <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"coin inférieur droit"</string>
+    <string name="action_corner_top_left_name" msgid="8077670910600032291">"coin supérieur gauche"</string>
+    <string name="action_corner_top_right_name" msgid="6307321595919080297">"coin supérieur droit"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Touches de modification"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Modifiez le comportement des touches"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Tout réinitialiser"</string>
@@ -2405,11 +2425,10 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Raccourci d\'agrandissement"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Suivi du curseur"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Choisissez comment l\'agrandissement suit votre curseur."</string>
-    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
-    <skip />
-    <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Déplacer l\'écran en continu pour suivre le mouvement du curseur de la souris"</string>
-    <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Déplacer l\'écran pour laisser le curseur de la souris au centre de l\'écran"</string>
-    <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Déplacer l\'écran lorsque le curseur de la souris touche les rebords de l\'écran"</string>
+    <string name="accessibility_magnification_cursor_following_unavailable_summary" msgid="1683880243856242269">"Non disponible lorsque vous agrandissez seulement une partie de l\'écran"</string>
+    <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"L\'écran se déplace en continu pour suivre le mouvement du curseur de la souris"</string>
+    <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"L\'écran se déplace pour laisser le curseur de la souris au centre de l\'écran"</string>
+    <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"L\'écran se déplace lorsque le curseur de la souris touche les rebords de l\'écran"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Suivi de la saisie"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"La loupe suit le texte lorsque vous tapez"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"Agrandir la cible du clavier"</string>
@@ -2547,32 +2566,20 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Mise à jour auto de la loupe"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Mettre à jour la loupe si transition entre applis"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Interrupteur pour raccrocher"</string>
-    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="8563711427335567656">"Mode"</string>
+    <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Thème sombre standard"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Applique le thème sombre à votre appareil et aux applis prises en charge"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Étendu"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Thème sombre étendu"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Applique automatiquement le thème sombre à plus d\'applis pour améliorer l\'accessibilité"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Retirer les animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Réduisez les mouvements sur l\'écran"</string>
-    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
-    <skip />
+    <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Clignotement du curseur de texte"</string>
+    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"Ajustez la vitesse de clignotement du curseur de texte ou désactivez le clignotement. Cette fonctionnalité n\'est peut-être pas prise en charge sur toutes les applis ou sur tous les sites Web."</string>
+    <string name="accessibility_text_cursor_blink_rate_slower_desc" msgid="5255697869959801747">"Diminuer la vitesse de clignotement"</string>
+    <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"Augmenter la vitesse de clignotement"</string>
+    <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"Réinitialiser"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combiner les canaux lors de la lecture audio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Équilibre sonore"</string>
@@ -2662,6 +2669,8 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"En savoir plus sur la correction des couleurs"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"À propos de l\'inversion des couleurs"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"En savoir plus sur l\'inversion des couleurs"</string>
+    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"En savoir plus sur le thème sombre"</string>
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Certaines applis peuvent ne pas prendre en charge le thème sombre dans le paramètre étendu. Si vous rencontrez des problèmes d\'apparence, utilisez le paramètre standard."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Afficher les sous-titres"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Pour l\'appli prise en charge seulement"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Taille et style des sous-titres"</string>
@@ -3728,8 +3737,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Aucun}=1{1 horaire programmé}one{# horaire programmé}other{# horaires programmés}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne pas déranger"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modes"</string>
-    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
-    <skip />
+    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Réduisez les distractions et prenez le contrôle de votre attention à l\'aide des modes pour le sommeil, le travail, la conduite et tout le reste"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Créer votre propre mode"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recevez uniquement les notifications des personnes et des applis importantes"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Définir un horaire"</string>
@@ -3868,7 +3876,7 @@
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Les notifications de ces applis ne seront pas résumées"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Gérer les applis"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Autoriser les résumés de notifications pour des applis"</string>
-    <string name="notification_excluded_apps" msgid="317898848790046528">"N\'incluez pas ces applis"</string>
+    <string name="notification_excluded_apps" msgid="317898848790046528">"Ne pas inclure ces applis"</string>
     <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"Résumer les notifications"</string>
     <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"Résumer les notifications de conversation de cette appli"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notifications en direct"</string>
@@ -4515,8 +4523,10 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Rendez tout plus grand ou plus petit"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"densité d\'affichage, zoom de l\'écran, échelle, mise à l\'échelle"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Aperçu"</string>
-    <string name="screen_zoom_make_smaller_desc" msgid="1450649885198381123">"Réduire la taille de l\'affichage"</string>
-    <string name="screen_zoom_make_larger_desc" msgid="7125594310562596457">"Agrandir la taille de l\'affichage"</string>
+    <!-- no translation found for screen_zoom_make_smaller_desc (6268455784510593120) -->
+    <skip />
+    <!-- no translation found for screen_zoom_make_larger_desc (3458295276713085365) -->
+    <skip />
     <string name="disconnected" msgid="3469373726996129247">"Non connecté"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Non connecté"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> applis installées"</string>
@@ -4536,6 +4546,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Bloqué par votre fournisseur de crédit"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Consentement parental requis"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Remettez le téléphone à votre parent pour commencer la configuration de ce paramètre"</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"Contenu bloqué par les contrôles parentaux"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"Seule la personne qui gère vos contrôles parentaux peut modifier ce paramètre"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Remettez le téléphone à votre parent pour qu\'il autorise la modification de ce paramètre."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Pour en savoir plus, communiquez avec votre administrateur informatique"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Détails supplémentaires"</string>
@@ -4651,7 +4663,7 @@
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Vérifier"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Ce message est-il utile?"</string>
-    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Icône d\'avertissement pour des conseils sur la pile"</string>
+    <string name="battery_hints_warning_icon_a11y" msgid="709629805028175434">"Conseils sur l\'avertissement concernant la pile"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Activer la Luminosité adaptative pour prolonger l\'autonomie de la pile"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Réduire le délai de mise en veille de l\'écran pour prolonger l\'autonomie de la pile"</string>
     <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> a utilisé plus d\'énergie de la pile"</string>
@@ -4979,8 +4991,6 @@
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Réinitialiser aux valeurs par défaut"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Les options de remplissage automatique du développeur ont été réinitialisées"</string>
     <string name="location_category" msgid="3496759112306219062">"Localisation"</string>
-    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Indicateur de localisation dans la barre d\'état"</string>
-    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Afficher pour tous les lieux, y compris le réseau et la connectivité"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Forcer les mesures GNSS complètes"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Faites le suivi de toutes les constellations et les fréquences GNSS sans cycle de tâches"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Méthode d\'entrée"</string>
@@ -5195,7 +5205,8 @@
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Connectivité par satellite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"Connectivité par satellite"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"Messagerie par satellite"</string>
-    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"L\'utilisation des données est incluse avec votre compte"</string>
+    <!-- no translation found for title_have_satellite_data_plan (1101741256080690699) -->
+    <skip />
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Applis prises en charge sur votre téléphone"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Voir toutes les applis prises en charge par satellite"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Applis prises en charge sur votre téléphone"</string>
@@ -5371,15 +5382,13 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Démarrer avec des pages de 16 ko"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Démarrage par noyau compatible avec pages de 16 ko"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Passer du mode 4 ko au mode 16 ko"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="4760548401414644138">"La partition de données de cet appareil doit être convertie en système de fichiers ext4 avant d\'utiliser l\'option de 16 ko pour les développeurs. L\'appareil sera nettoyé et le système de fichiers sera remplacé par le système de fichiers ext4 après la confirmation. Vous utilisez le mode production qui exécute un noyau de 4 ko et vous passez au mode 16 ko. Une fois que vous êtes dans ce mode, vous pouvez basculer entre le mode 4 ko et le mode 16 ko avec un seul redémarrage. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toutes les données stockées sur le téléphone pendant que le programme d\'amorçage est déverrouillé pourraient être compromises. Certaines fonctionnalités seront désactivées dans ces modes, de sorte que certaines applications peuvent ne pas fonctionner. Pour remettre l\'appareil en mode production, vous devrez ensuite retourner en mode 4 ko et verrouiller le programme d\'amorçage, ce qui réinitialise l\'appareil à ses paramètres par défaut. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage par le fabricant d\'équipement d\'origine dans les Options pour les développeurs. Pour continuer, cliquez sur « Effacer toutes les données et mettre à jour ». Cette opération redémarrera l\'appareil."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Vous utilisez le mode indépendant de la page qui exécute un noyau de 4 ko et vous passez au mode 16 ko. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toutes les données stockées sur le téléphone pendant que le programme d\'amorçage est déverrouillé pourraient être compromises. Cette opération redémarrera l\'appareil. Certaines fonctionnalités seront désactivées dans ces modes, de sorte que certaines applications peuvent ne pas fonctionner. Pour remettre l\'appareil en mode de production, vous devrez retourner en mode 4 ko et verrouiller le programme d\'amorçage, ce qui réinitialisera l\'appareil à ses paramètres par défaut. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage par le fabricant d\'équipement d\'origine dans les Options pour les développeurs."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Passer du mode 16 ko au mode 4 ko"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Vous utilisez le mode indépendant de la page qui exécute un noyau de 16 ko et vous passez au mode 4 ko. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toutes les données stockées sur le téléphone pendant que le programme d\'amorçage est déverrouillé pourraient être compromises. Cette opération redémarrera l\'appareil. Certaines fonctionnalités seront désactivées dans ces modes, de sorte que certaines applications peuvent ne pas fonctionner. Pour remettre l\'appareil en mode de production, vous devrez verrouiller le programme d\'amorçage, ce qui réinitialisera l\'appareil à ses paramètres par défaut. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage par le fabricant d\'équipement d\'origine dans les Options pour les développeurs."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Échec de la mise à jour vers un noyau compatible avec les pages de 16 ko."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Appliquer les modifications"</string>
-    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
-    <skip />
+    <string name="confirm_ext4_button_text" msgid="697563319110759422">"Effacer toutes les données et mettre à jour"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Échec du reformatage de la partition vers le système de fichiers ext4 et du nettoyage de ses données."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Déverrouillage du programme d\'amorçage requis"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"Cet appareil doit avoir le programme d\'amorçage déverrouillé avant d\'utiliser l\'option 16 ko pour les développeurs. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toutes les données stockées sur le téléphone pendant que le programme d\'amorçage est déverrouillé pourraient être compromises. Toutes les données et tous les paramètres de l\'utilisateur seront nettoyés lors de l\'activation du mode 16 ko. Une fois le programme d\'amorçage déverrouillé, l\'activation de l\'option de 16 ko nécessitera deux redémarrages. Une fois que vous êtes dans ce mode, vous pouvez basculer entre le mode 4 ko et le mode 16 ko avec un seul redémarrage. Certaines fonctionnalités seront désactivées dans ces modes, de sorte que certaines applications peuvent ne pas fonctionner. Pour remettre l\'appareil en mode production, vous devrez revenir en mode 4 ko et ensuite désactivez le verrouillage par le fabricant d\'équipement d\'origine/verrouillez le programme d\'amorçage de l\'appareil (ce qui le réinitialisera à ses paramètres par défaut). Veuillez déverrouiller le programme d\'amorçage et réessayer. Vous trouverez des instructions à ce sujet à la page &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5829,6 +5838,8 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Aucun mot de passe"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"En savoir plus"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Impossible de faire jouer le flux audio sur <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
+    <skip />
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"En cours de lecture"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Diffusion interrompue"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Arrêter l\'écoute"</string>
@@ -5875,35 +5886,41 @@
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Maintenez le doigt sur la touche d\'accueil ou sur la barre de navigation pour effectuer une recherche à l\'aide du contenu de votre écran."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Configurer les détails de l\'appareil."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Contrôles parentaux"</string>
-    <string name="supervision_settings_summary" msgid="5020634300370322741">"Restrictions liées au contenu et autres limites"</string>
+    <string name="supervision_settings_summary" msgid="6304257872307136073">"Règles de base numériques et limites de temps d\'utilisation des écrans"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Configurez un NIP"</string>
-    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"Interrompu"</string>
-    <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervision, supervision parentale, contrôles parentaux"</string>
+    <string name="keywords_supervision_settings" msgid="43064288661561602">"supervision, contrôles parentaux, parents, nip de supervision, nip"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Gérer votre NIP"</string>
+    <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"nip parental, nip des contrôles parentaux"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Ajoutez une adresse courriel de récupération"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Validez l\'adresse courriel de récupération"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Modifier le NIP"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"NIP oublié"</string>
+    <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Vous avez oublié votre NIP?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Mettre à jour l\'adresse courriel de récupération"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Supprimer le NIP"</string>
-    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Cela réinitialisera tous vos paramètres de supervision"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Ajouter une adresse courriel de récupération"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Valider votre adresse courriel"</string>
-    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtres de contenu Web"</string>
-    <string name="supervision_web_content_filters_top_intro" msgid="5264773769840566499">"Bloquez le contenu pour adultes sur les sites Web et les résultats de recherche pour les applis prises en charge sur cet appareil. Les applis non prises en charge peuvent toujours afficher du contenu explicite."</string>
+    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtres de contenu de site Web"</string>
+    <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtres de sites Web, bloquer les sites, filtres de navigateur, bloquer les sites explicites, filtrer les sites, bloquer les résultats de recherche, filtrer les résultats de recherche explicites, restrictions liées au contenu"</string>
+    <!-- no translation found for supervision_web_content_filters_top_intro (8056274290725144441) -->
+    <skip />
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Sites Web"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"Bloquer les sites explicites"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Résultats de recherche"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtrer les résultats de recherche explicites"</string>
-    <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Entrez le NIP de supervision"</string>
+    <!-- no translation found for supervision_web_content_filters_switch_summary (2095166099345288321) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_footer_title (1741897040916039165) -->
+    <skip />
+    <!-- no translation found for supervision_full_screen_pin_verification_title (7685279446792771815) -->
+    <skip />
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Définir un NIP de contrôles parentaux"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Confirmer le NIP"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Le NIP a été mis à jour"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Ouvrir l\'appli"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Supprimer le NIP?"</string>
-    <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"Cela supprimera votre NIP actuel pour tous les utilisateurs de cet appareil et désactivera les commandes que vous avez configurées. Cette action est irréversible."</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"Mettre d\'abord en pause les commandes sur les autres profils"</string>
-    <string name="supervision_delete_pin_supervision_enabled_message" msgid="5643922966568203196">"Pour procéder à la suppression de ce NIP et à la réinitialisation des paramètres de supervision, veuillez mettre en pause les commandes sur tous les autres profils."</string>
+    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
+    <skip />
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Le NIP ne peut pas être supprimé"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Une erreur s\'est produite lors de la tentative de suppression du NIP."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation <xliff:g id="FEATURE">%1$s</xliff:g>"</string>

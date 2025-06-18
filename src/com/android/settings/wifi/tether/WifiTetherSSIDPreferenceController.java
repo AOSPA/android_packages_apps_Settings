@@ -39,6 +39,7 @@ import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+// LINT.IfChange
 public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreferenceController
         implements ValidatedEditTextPreference.Validator,
         EditTextPreference.OnBindEditTextListener {
@@ -154,3 +155,4 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
         editText.setHint(R.string.wifi_hotspot_name_title);
     }
 }
+// LINT.ThenChange(WifiHotspotNamePreference.kt)

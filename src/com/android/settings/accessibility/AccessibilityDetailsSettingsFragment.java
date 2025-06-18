@@ -40,6 +40,7 @@ import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
@@ -143,7 +144,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                             + "prohibited by Device Admin or App Op.");
             return false;
         }
-        openSubSettings(ToggleAccessibilityServicePreferenceFragment.class.getName(),
+        openSubSettings(A11yServicePreferenceFragment.class.getName(),
                 buildArguments(info));
         finish();
         return true;

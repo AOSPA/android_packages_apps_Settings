@@ -22,8 +22,7 @@ import com.android.settingslib.CustomDialogPreferenceCompat
 
 class SimEidInfoPreference : CustomDialogPreferenceCompat {
     constructor(
-        context: Context, attrs: AttributeSet?, defStyleAttr: Int,
-        defStyleRes: Int
+        context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
@@ -35,6 +34,10 @@ class SimEidInfoPreference : CustomDialogPreferenceCompat {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
     constructor(context: Context) : super(context)
+
+    init {
+        isPersistent = false
+    }
 
     protected override fun onClick() {
         if (!Flags.catalystMyDeviceInfoPrefScreen()) {

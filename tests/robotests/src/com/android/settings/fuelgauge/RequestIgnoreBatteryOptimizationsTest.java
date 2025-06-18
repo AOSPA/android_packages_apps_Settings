@@ -38,6 +38,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -107,6 +108,7 @@ public class RequestIgnoreBatteryOptimizationsTest {
         when(mActivity.getApplicationContext()).thenReturn(mContext);
         doReturn(mMockPowerManager).when(mActivity).getSystemService(PowerManager.class);
         doReturn(mMockPackageManager).when(mActivity).getPackageManager();
+        doReturn(new PackageInfo()).when(mMockPackageManager).getPackageInfo(anyString(), anyInt());
         doReturn(mMockApplicationInfo)
                 .when(mMockPackageManager)
                 .getApplicationInfo(PACKAGE_NAME, 0);

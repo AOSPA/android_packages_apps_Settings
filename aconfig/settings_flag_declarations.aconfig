@@ -65,16 +65,6 @@ flag {
 }
 
 flag {
-  name: "utils_return_user_handle_for_current_user_id"
-  namespace: "profile_experiences"
-  description: "Don't ignore the current user id when checking for existing profiles."
-  bug: "378471943"
-  metadata {
-    purpose: PURPOSE_BUGFIX
-  }
-}
-
-flag {
   name: "extended_screenshots_exclude_nested_scrollables"
   namespace: "systemui"
   description: "Sets a flag on the main scrollable container to exclude any nested scrollable views as potential targets for extended screenshots."

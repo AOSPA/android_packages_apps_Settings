@@ -70,7 +70,6 @@ public class PrimaryProviderPreference extends RestrictedPreference {
         super(context, attrs);
         initializeSettingsUi();
     }
-
     private void initializeSettingsUi() {
         // Change the layout to the new settings ui.
         if (!shouldUseNewSettingsUi()) {

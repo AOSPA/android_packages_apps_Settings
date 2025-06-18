@@ -23,6 +23,7 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import static com.android.settings.display.UtilsKt.isAdaptiveSleepSupported;
 
+import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
@@ -32,6 +33,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.hardware.SensorPrivacyManager;
+import android.os.CancellationSignal;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -96,6 +98,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
     private DevicePolicyManager mDevicePolicyManager;
     private SensorPrivacyManager.OnSensorPrivacyChangedListener mPrivacyChangedListener;
     private boolean mIsUserAuthenticated = false;
+    private final CancellationSignal mCancellationSignal = new CancellationSignal();
 
     @VisibleForTesting Context mContext;
 
@@ -103,8 +106,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
 
     @VisibleForTesting FooterPreference mDisableOptionsPreference;
 
-    @VisibleForTesting
-    FooterPreference mPowerConsumptionPreference;
+    @VisibleForTesting FooterPreference mPowerConsumptionPreference;
 
     @VisibleForTesting
     AdaptiveSleepPermissionPreferenceController mAdaptiveSleepPermissionController;
@@ -117,8 +119,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
     @VisibleForTesting
     AdaptiveSleepBatterySaverPreferenceController mAdaptiveSleepBatterySaverPreferenceController;
 
-    @Nullable
-    TogglePreferenceController mAdditionalTogglePreferenceController;
+    @Nullable TogglePreferenceController mAdditionalTogglePreferenceController;
 
     public ScreenTimeoutSettings() {
         super();
@@ -149,8 +150,10 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
                     (sensor, enabled) -> mAdaptiveSleepController.updatePreference();
         }
         if (!isCatalystScreenTimeoutQ3Enabled()) {
-            mAdditionalTogglePreferenceController = FeatureFactory.getFeatureFactory()
-                    .getDisplayFeatureProvider().createAdditionalPreference(context);
+            mAdditionalTogglePreferenceController =
+                    FeatureFactory.getFeatureFactory()
+                            .getDisplayFeatureProvider()
+                            .createAdditionalPreference(context);
         }
     }
 
@@ -190,8 +193,9 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         }
         mIsUserAuthenticated = false;
         if (!isCatalystScreenTimeoutQ3Enabled()) {
-            FeatureFactory.getFeatureFactory().getDisplayFeatureProvider().updatePreference(
-                    mAdditionalTogglePreferenceController);
+            FeatureFactory.getFeatureFactory()
+                    .getDisplayFeatureProvider()
+                    .updatePreference(mAdditionalTogglePreferenceController);
         }
     }
 
@@ -201,6 +205,10 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         mContext.unregisterReceiver(mReceiver);
         if (!isCatalystEnabled()) {
             mPrivacyManager.removeSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
+        }
+        Activity activity = getActivity();
+        if (activity != null) {
+            mCancellationSignal.cancel();
         }
     }
 
@@ -221,8 +229,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
 
         for (CandidateInfo info : candidateList) {
             ProtectedSelectorWithWidgetPreference pref =
-                    new ProtectedSelectorWithWidgetPreference(
-                            getContext(), info.getKey(), this);
+                    new ProtectedSelectorWithWidgetPreference(getContext(), info.getKey(), this);
             bindPreference(pref, info.getKey(), info, defaultKey);
             screen.addPreference(pref);
         }
@@ -236,8 +243,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
             // Select the largest value from the candidates list by default.
             int lastIndex = candidateList.size() - 1;
             final ProtectedSelectorWithWidgetPreference preferenceWithLargestTimeout =
-                    (ProtectedSelectorWithWidgetPreference)
-                            screen.getPreference(lastIndex);
+                    (ProtectedSelectorWithWidgetPreference) screen.getPreference(lastIndex);
             preferenceWithLargestTimeout.setChecked(true);
             // Update the system screen timeout setting to match the UI
             setCurrentSystemScreenTimeout(getContext(), candidateList.get(lastIndex).getKey());
@@ -250,11 +256,12 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         mPrivacyPreference.setLayoutResource(
                 com.android.settingslib.widget.preference.footer.R.layout.preference_footer);
 
-        if (isCatalystScreenTimeoutQ3Enabled() && adaptiveTimeoutPreference  != null) {
+        if (isCatalystScreenTimeoutQ3Enabled() && adaptiveTimeoutPreference != null) {
             adaptiveTimeoutPreference.setOrder(Preference.DEFAULT_ORDER);
             screen.addPreference(adaptiveTimeoutPreference);
         } else {
-            FeatureFactory.getFeatureFactory().getDisplayFeatureProvider()
+            FeatureFactory.getFeatureFactory()
+                    .getDisplayFeatureProvider()
                     .addToScreen(mAdditionalTogglePreferenceController, screen);
         }
 
@@ -380,8 +387,9 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         }
         try {
             // Get the configurable max screen timeout
-            configMaxTimeout = Long.valueOf(
-                    context.getResources().getInteger(R.integer.config_max_screen_timeout));
+            configMaxTimeout =
+                    Long.valueOf(
+                            context.getResources().getInteger(R.integer.config_max_screen_timeout));
         } catch (Resources.NotFoundException e) {
             // Do nothing
         }
@@ -449,8 +457,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
     }
 
     @VisibleForTesting
-    static class ProtectedSelectorWithWidgetPreference
-            extends SelectorWithWidgetPreference {
+    static class ProtectedSelectorWithWidgetPreference extends SelectorWithWidgetPreference {
 
         private final long mTimeoutMs;
         private final ScreenTimeoutSettings mScreenTimeoutSettings;
@@ -472,7 +479,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
                         () -> {
                             mScreenTimeoutSettings.setUserAuthenticated(true);
                             super.onClick();
-                        });
+                        },
+                        mScreenTimeoutSettings.mCancellationSignal);
             } else {
                 super.onClick();
             }

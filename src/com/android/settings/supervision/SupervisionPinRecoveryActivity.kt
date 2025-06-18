@@ -79,7 +79,10 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
 
     private fun startConfirmPin() {
         val confirmPinIntent =
-            SupervisionIntentProvider.getConfirmSupervisionCredentialsIntent(this)
+            SupervisionIntentProvider.getConfirmSupervisionCredentialsIntent(
+                context = this,
+                forceConfirm = true,
+            )
         if (confirmPinIntent != null) {
             confirmPinLauncher.launch(confirmPinIntent)
         } else {

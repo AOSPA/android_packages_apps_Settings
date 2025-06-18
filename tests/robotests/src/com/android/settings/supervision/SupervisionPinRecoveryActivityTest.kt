@@ -37,6 +37,7 @@ import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity.Companion.EXTRA_FORCE_CONFIRMATION
 import com.android.settings.testutils.MetricsRule
 import com.google.common.truth.Truth.assertThat
 import org.junit.Assert.assertEquals
@@ -135,6 +136,7 @@ class SupervisionPinRecoveryActivityTest {
             scenario.onActivity { activity ->
                 val startedIntent = shadowOf(activity).nextStartedActivity
                 assertThat(startedIntent.action).isEqualTo(ACTION_CONFIRM_PIN)
+                assertThat(startedIntent.getBooleanExtra(EXTRA_FORCE_CONFIRMATION, false)).isTrue()
             }
         }
     }
@@ -150,6 +152,8 @@ class SupervisionPinRecoveryActivityTest {
             scenario.onActivity { activity ->
                 val startedIntent = shadowOf(activity).nextStartedActivity
                 assertThat(startedIntent.action).isEqualTo(ACTION_CONFIRM_PIN)
+                assertThat(startedIntent.getBooleanExtra(EXTRA_FORCE_CONFIRMATION, false))
+                    .isEqualTo(true)
             }
         }
     }
@@ -165,6 +169,8 @@ class SupervisionPinRecoveryActivityTest {
             scenario.onActivity { activity ->
                 val startedIntent = shadowOf(activity).nextStartedActivity
                 assertThat(startedIntent.action).isEqualTo(ACTION_CONFIRM_PIN)
+                assertThat(startedIntent.getBooleanExtra(EXTRA_FORCE_CONFIRMATION, false))
+                    .isEqualTo(true)
             }
         }
     }

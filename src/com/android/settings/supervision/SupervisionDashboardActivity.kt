@@ -33,10 +33,54 @@ class SupervisionDashboardActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // If the supervision package doesn't have the necessary components, the dashboard can't be
+        // directly loaded.
+        if (!hasNecessarySupervisionComponent(matchAll = true)) {
+            // Check if the app provides any mitigating actions and trigger them if so.
+            if (systemSupervisionPackageName != null) {
+                val installIntent =
+                    Intent(INSTALL_SUPERVISION_APP_ACTION).setPackage(systemSupervisionPackageName)
+                if (packageManager.queryIntentActivitiesAsUser(installIntent, 0, userId)
+                        .isNotEmpty()
+                ) {
+                    startActivity(installIntent)
+                }
+            }
+            finish()
+            return
+        }
+
+        // If the supervision package has the necessary component but not in the enabled state,
+        // launch a loading screen while trying to enable it.
         if (!hasNecessarySupervisionComponent()) {
             val loadingActivity = Intent(this, SupervisionDashboardLoadingActivity::class.java)
             startActivity(loadingActivity)
             finish()
+            return
         }
+
+        if (shouldRedirectToFullSupervision()) {
+            val intent =
+                Intent(FULL_SUPERVISION_REDIRECT_ACTION).setPackage(systemSupervisionPackageName)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    private fun shouldRedirectToFullSupervision(): Boolean {
+        // The user is deemed to be fully supervised if the supervision role holder is not empty
+        if (supervisionRoleHolders.isEmpty() || systemSupervisionPackageName == null) {
+            return false
+        }
+
+        val intent =
+            Intent(FULL_SUPERVISION_REDIRECT_ACTION).setPackage(systemSupervisionPackageName)
+        return packageManager.queryIntentActivitiesAsUser(intent, 0, userId).isNotEmpty()
+    }
+
+    companion object {
+        const val FULL_SUPERVISION_REDIRECT_ACTION = "android.app.supervision.action.VIEW_SETTINGS"
+        const val INSTALL_SUPERVISION_APP_ACTION =
+            "android.app.supervision.action.INSTALL_SUPERVISION_APP"
     }
 }

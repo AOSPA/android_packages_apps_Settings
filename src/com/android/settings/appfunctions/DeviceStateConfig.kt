@@ -34,6 +34,7 @@ import com.android.settings.display.AutoBrightnessScreen
 import com.android.settings.display.DisplayScreen
 import com.android.settings.display.ScreenTimeoutScreen
 import com.android.settings.display.darkmode.DarkModeScreen
+import com.android.settings.dream.ScreensaverScreen
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummaryScreen
 import com.android.settings.language.LanguageSettingScreen
@@ -56,10 +57,8 @@ import com.android.settings.spa.app.catalyst.AppInfoDisplayOverOtherAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoFullScreenIntentScreen
 import com.android.settings.spa.app.catalyst.AppInfoInteractAcrossProfilesScreen
 import com.android.settings.spa.app.catalyst.AppInfoNotificationAccessScreen
-import com.android.settings.spa.app.catalyst.AppInfoPictureInPictureScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppInteractAcrossProfilesAppListScreen
-import com.android.settings.spa.app.catalyst.AppPictureInPictureAppListScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
 import com.android.settings.spa.app.catalyst.AppsAllFilesAccessAppListScreen
 import com.android.settings.spa.app.catalyst.AppsDisplayOverOtherAppsAppListScreen
@@ -144,10 +143,7 @@ fun getScreenConfigs() =
             screenKey = LocationScreen.KEY,
             category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
-        PerScreenConfig(
-            enabled = true,
-            screenKey = RecentLocationAccessScreen.KEY,
-        ),
+        PerScreenConfig(enabled = true, screenKey = RecentLocationAccessScreen.KEY),
         PerScreenConfig(
             enabled = true,
             screenKey = AppsAllFilesAccessAppListScreen.KEY,
@@ -224,17 +220,17 @@ fun getScreenConfigs() =
         ),
         PerScreenConfig(
             enabled = true,
-            screenKey = AppPictureInPictureAppListScreen.KEY,
-            category = setOf(DeviceStateCategory.UNCATEGORIZED),
-        ),
-        PerScreenConfig(
-            enabled = true,
             screenKey = AppInteractAcrossProfilesAppListScreen.KEY,
             category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
         PerScreenConfig(
             enabled = true,
             screenKey = AppsNotificationAccessScreen.KEY,
+            category = setOf(DeviceStateCategory.UNCATEGORIZED),
+        ),
+        PerScreenConfig(
+            enabled = true,
+            screenKey = ScreensaverScreen.KEY,
             category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
     )
@@ -677,16 +673,6 @@ fun getDeviceStateItemList() =
             settingKey = StoragePreferenceScreen.KEY_PREF_TEMP,
             settingScreenKey = StoragePreferenceScreen.KEY,
             hintText = { _, _ -> "Total device storage used by temporary system files" },
-        ),
-        DeviceStateItemConfig(
-            enabled = true,
-            settingKey = AppInfoPictureInPictureScreen.KEY,
-            settingScreenKey = AppPictureInPictureAppListScreen.KEY,
-            hintText = { context, metadata ->
-                metadata
-                    .extras(context)
-                    ?.getString(AppInfoPictureInPictureScreen.KEY_EXTRA_PACKAGE_NAME)
-            },
         ),
         DeviceStateItemConfig(
             enabled = true,

@@ -23,8 +23,14 @@ import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.hardware.input.InputManager;
+import android.hardware.input.InputSettings;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.Settings;
 import android.view.InputDevice;
 import android.view.View;
 
@@ -59,6 +65,20 @@ public class MouseKeysMainPageFragment extends ShortcutFragment
     @Nullable
     private InputDevice mCurrentInputDevice;
 
+    static final Uri ACCESSIBILITY_MOUSE_KEYS_USE_PRIMARY_KEYS_URI =
+            Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_USE_PRIMARY_KEYS);
+
+    final ContentObserver mSettingsObserver =
+            new ContentObserver(new Handler(Looper.getMainLooper())) {
+                @Override
+                public void onChange(boolean selfChange, @Nullable Uri uri) {
+                    if (mMouseKeyImagesPreference == null || uri == null) {
+                        return;
+                    }
+                    onUsePrimaryKeysUpdated();
+                }
+            };
+
     @Override
     public void onCreate(@NonNull Bundle bundle) {
         super.onCreate(bundle);
@@ -79,6 +99,25 @@ public class MouseKeysMainPageFragment extends ShortcutFragment
     @Override
     public ToggleShortcutPreferenceController getShortcutPreferenceController() {
         return use(KeyboardAccessibilityMouseKeysShortcutController.class);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (com.android.server.accessibility.Flags.enableMouseKeyEnhancement()) {
+            getContentResolver().registerContentObserver(
+                    ACCESSIBILITY_MOUSE_KEYS_USE_PRIMARY_KEYS_URI,
+                    /* notifyForDescendants= */ false,
+                    mSettingsObserver);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (com.android.server.accessibility.Flags.enableMouseKeyEnhancement()) {
+            getContentResolver().unregisterContentObserver(mSettingsObserver);
+        }
     }
 
     @Override
@@ -147,6 +186,21 @@ public class MouseKeysMainPageFragment extends ShortcutFragment
         });
     }
 
+    private void onUsePrimaryKeysUpdated() {
+        updatePrimaryKeysImagesVisibility();
+        use(MouseKeysPrimaryKeysController.class).setChecked(
+                InputSettings.isPrimaryKeysForMouseKeysEnabled(getContext()));
+    }
+
+    private void updatePrimaryKeysImagesVisibility() {
+        boolean usePrimaryKeys = InputSettings.isPrimaryKeysForMouseKeysEnabled(getContext());
+        mMouseKeyImagesPreference.findViewById(R.id.mouse_keys_image_recycler_list)
+                    .setVisibility(usePrimaryKeys ? View.VISIBLE : View.GONE);
+        mMouseKeyImagesPreference
+                    .findViewById(R.id.title_mouse_keys_image_recycler_list)
+                    .setVisibility(usePrimaryKeys ? View.VISIBLE : View.GONE);
+    }
+
     private void configureImagesPreference() {
         final RecyclerView recyclerView = mMouseKeyImagesPreference.findViewById(
                 R.id.mouse_keys_image_recycler_list);
@@ -177,6 +231,7 @@ public class MouseKeysMainPageFragment extends ShortcutFragment
             mMouseKeyImagesPreference
                     .findViewById(R.id.summary_mouse_keys_numpad_image_recycler_list)
                     .setVisibility(View.VISIBLE);
+            updatePrimaryKeysImagesVisibility();
         }
     }
 

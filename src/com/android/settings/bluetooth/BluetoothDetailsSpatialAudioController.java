@@ -151,7 +151,7 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
             mProfilesContainer.setLayoutResource(
                     com.android.settingslib.widget.category.R.layout
                             .settingslib_expressive_untitled_preference_category);
-        } else if (com.android.settings.flags.Flags.enableBluetoothDeviceDetailsPolish()) {
+        } else {
             mProfilesContainer.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
         }
         refresh();

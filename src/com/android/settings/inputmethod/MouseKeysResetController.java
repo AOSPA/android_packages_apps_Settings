@@ -54,6 +54,7 @@ public class MouseKeysResetController extends BasePreferenceController {
                         mContext, InputSettings.DEFAULT_MOUSE_KEYS_MAX_SPEED);
                 InputSettings.setAccessibilityMouseKeysAcceleration(
                         mContext, InputSettings.DEFAULT_MOUSE_KEYS_ACCELERATION);
+                InputSettings.setPrimaryKeysForMouseKeysEnabled(mContext, true);
             });
         }
     }

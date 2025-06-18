@@ -918,8 +918,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(
-            com.android.settings.accessibility.Flags.FLAG_TOGGLE_FEATURE_FRAGMENT_COLLECTION_INFO)
     public void fragmentRecyclerView_getCollectionInfo_hasCorrectCounts() {
         ToggleScreenMagnificationPreferenceFragment fragment =
                 mFragController.create(R.id.main_content, /* bundle= */

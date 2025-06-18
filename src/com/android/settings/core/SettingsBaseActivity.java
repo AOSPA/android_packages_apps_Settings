@@ -320,10 +320,22 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         getToolbarDelegate().setToolbarItems(items);
     }
 
+    /**
+     * Sets the selected toolbar item by its zero-based index.
+     */
+    public void setToolbarSelectedItem(int position) {
+        getToolbarDelegate().setSelectedItem(position);
+    }
+
     @Override
     public void setOnItemSelectedListener(
             @NonNull ScrollableToolbarItemLayout.OnItemSelectedListener listener) {
         getToolbarDelegate().setOnItemSelectedListener(listener);
+    }
+
+    @Override
+    public void removeOnItemSelectedListener() {
+        getToolbarDelegate().removeOnItemSelectedListener();
     }
 
     private CollapsingToolbarDelegate getToolbarDelegate() {

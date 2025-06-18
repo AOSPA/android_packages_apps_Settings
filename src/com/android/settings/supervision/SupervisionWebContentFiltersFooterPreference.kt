@@ -29,6 +29,9 @@ class SupervisionWebContentFiltersFooterPreference :
     override val key: String
         get() = KEY
 
+    override val title: Int
+        get() = R.string.supervision_web_content_filters_footer_title
+
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         val footerPreference = preference as FooterPreference

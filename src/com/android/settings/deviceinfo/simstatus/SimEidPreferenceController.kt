@@ -44,6 +44,7 @@ import kotlinx.coroutines.withContext
  *
  * @param preferenceKey is the key for Preference
  */
+// LINT.IfChange
 class SimEidPreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
     private var slotSimStatus: SlotSimStatus? = null
@@ -157,3 +158,4 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
         }
     }
 }
+// LINT.ThenChange(SimEidPreference.kt)

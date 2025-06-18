@@ -59,6 +59,7 @@
     <SwitchPreferenceCompat
         android:key="mouse_key_use_primary_key_preference"
         android:title="@string/mouse_keys_use_primary_keys_title"
+        android:summary="@string/mouse_keys_use_primary_keys_summary"
         android:defaultValue="true"
         settings:controller="com.android.settings.inputmethod.MouseKeysPrimaryKeysController"/>
 

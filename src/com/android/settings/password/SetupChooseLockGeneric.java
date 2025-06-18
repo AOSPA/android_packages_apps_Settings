@@ -119,30 +119,33 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            final boolean isExpressiveStyle = ThemeHelper.shouldApplyGlifExpressiveStyle(
-                    requireContext());
+            if (view instanceof GlifPreferenceLayout) {
+                final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+                layout.setDescriptionText(loadDescriptionText());
 
-            GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-            layout.setDescriptionText(loadDescriptionText());
+                final boolean isExpressiveStyle = ThemeHelper.shouldApplyGlifExpressiveStyle(
+                        requireContext());
+                if (!isExpressiveStyle) {
+                    layout.setDividerItemDecoration(
+                            new SettingsDividerItemDecoration(getContext()));
+                    layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
+                            com.google.android.setupdesign.R.dimen
+                                    .sud_items_glif_text_divider_inset));
+                }
 
-            if (!isExpressiveStyle) {
-                layout.setDividerItemDecoration(new SettingsDividerItemDecoration(getContext()));
-                layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
-                        com.google.android.setupdesign.R.dimen.sud_items_glif_text_divider_inset));
+                layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
+
+                int titleResource = isForBiometric() ? R.string.lock_settings_picker_title
+                        : R.string.setup_lock_settings_picker_title;
+                if (getActivity() != null) {
+                    getActivity().setTitle(titleResource);
+                }
+
+                layout.setHeaderText(titleResource);
+                // Use the dividers in SetupWizardRecyclerLayout. Suppress the dividers in
+                // PreferenceFragment.
+                setDivider(null);
             }
-
-            layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
-
-            int titleResource = isForBiometric() ?
-                    R.string.lock_settings_picker_title : R.string.setup_lock_settings_picker_title;
-            if (getActivity() != null) {
-                getActivity().setTitle(titleResource);
-            }
-
-            layout.setHeaderText(titleResource);
-            // Use the dividers in SetupWizardRecyclerLayout. Suppress the dividers in
-            // PreferenceFragment.
-            setDivider(null);
         }
 
         @Override
@@ -169,8 +172,12 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         @Override
         public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
                 Bundle savedInstanceState) {
-            GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+            if (parent instanceof GlifPreferenceLayout layout) {
+                // Usually for setup wizard
+                return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+            } else {
+                return super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+            }
         }
 
         @Override
@@ -298,8 +305,6 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             @Override
             public void onViewCreated(@NotNull View view, Bundle savedInstanceState) {
                 super.onViewCreated(view, savedInstanceState);
-                GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-
                 setDivider(new ColorDrawable(Color.TRANSPARENT));
                 setDividerHeight(0);
                 getHeaderView().setVisible(false);
@@ -331,8 +336,12 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             @Override
             public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
                     Bundle savedInstanceState) {
-                GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-                return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+                if (parent instanceof GlifPreferenceLayout layout) {
+                    // Usually for setup wizard
+                    return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+                } else {
+                    return super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+                }
             }
         }
     }

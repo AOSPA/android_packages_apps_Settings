@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.keyboard.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -65,9 +66,16 @@ public class TouchpadAndMouseSettings extends DashboardFragment {
             new BaseSearchIndexProvider(R.xml.touchpad_and_mouse_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return FeatureFlagUtils
-                            .isEnabled(context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD)
-                            && InputPeripheralsSettingsUtils.isTouchpad();
+                    boolean isNewPageFlagDisabled = !Flags.keyboardAndTouchpadA11yNewPageEnabled();
+                    boolean isFeatureOn = FeatureFlagUtils
+                            .isEnabled(context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD);
+                    boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
+                    boolean isPointerCustomizationEnabled =
+                            android.view.flags.Flags.enableVectorCursorA11ySettings();
+                    boolean isMouse = InputPeripheralsSettingsUtils.isMouse();
+                    return ((isFeatureOn && isTouchpad)
+                            || (isPointerCustomizationEnabled && isMouse))
+                            && isNewPageFlagDisabled;
                 }
             };
 }

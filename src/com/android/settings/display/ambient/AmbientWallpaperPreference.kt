@@ -16,6 +16,7 @@
 package com.android.settings.display.ambient
 
 import android.content.Context
+import android.provider.Settings.Secure.DOZE_ALWAYS_ON
 import android.provider.Settings.Secure.DOZE_ALWAYS_ON_WALLPAPER_ENABLED
 import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
@@ -30,6 +31,10 @@ class AmbientWallpaperPreference(context: Context) :
     ) {
 
     private val dataStore = context.dataStore
+
+    override fun dependencies(context: Context) = arrayOf(AmbientDisplayMainSwitchPreference.KEY)
+
+    override fun isEnabled(context: Context) = dataStore.getBoolean(DOZE_ALWAYS_ON) != false
 
     override fun storage(context: Context) = dataStore
 

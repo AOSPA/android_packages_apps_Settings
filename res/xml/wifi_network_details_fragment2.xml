@@ -100,6 +100,18 @@
             android:entries="@array/wifi_privacy_entries"
             android:entryValues="@array/wifi_privacy_values"/>
 
+      <SwitchPreferenceCompat
+          android:key="shared"
+          android:icon="@drawable/ic_edit_24dp"
+          android:title="@string/wifi_share_preference_title"
+          android:summary="@string/wifi_share_preference_summary"/>
+
+      <SwitchPreferenceCompat
+          android:key="edit_configuration"
+          android:icon="@drawable/ic_edit_24dp"
+          android:title="@string/wifi_allow_edit_configuration_title"
+          settings:isPreferenceVisible="true"/>
+
         <com.android.settings.spa.preference.ComposePreference
             android:key="privacy_settings"
             android:title="@string/wifi_privacy_settings"
