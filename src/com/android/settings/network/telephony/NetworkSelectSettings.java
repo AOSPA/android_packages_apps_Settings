@@ -16,7 +16,7 @@
 
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
- * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022-2025 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -378,6 +378,12 @@ public class NetworkSelectSettings extends DashboardFragment implements
                         mSelectedPreference.setSummary(isSucceed
                                 ? R.string.network_connected
                                 : R.string.network_could_not_connect);
+
+                        if (isSucceed && mSubscriptionManager.isActiveSubscriptionId(mSubId)) {
+                            final OperatorInfo operator = mSelectedPreference.getOperatorInfo();
+                            MobileNetworkUtils.setCarrierName(getContext(),
+                                    operator.getOperatorAlphaLong(), mSubId);
+                        }
                     } else {
                         Log.e(TAG, "No preference to update!");
                     }
