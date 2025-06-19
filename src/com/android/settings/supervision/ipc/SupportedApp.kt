@@ -29,22 +29,31 @@ import android.os.Bundle
 data class SupportedApp(
     /** Optional title text for the supported app. */
     var title: CharSequence? = null,
+    /** Optional summary text for the supported app. */
+    var summary: CharSequence? = null,
     /** Optional package name for the supported app. */
     var packageName: String? = null,
 ) {
     constructor(
         bundle: Bundle
-    ) : this(title = bundle.getCharSequence(TITLE), packageName = bundle.getString(PACKAGE_NAME))
+    ) : this(
+        title = bundle.getCharSequence(TITLE),
+        summary = bundle.getCharSequence(SUMMARY),
+        packageName = bundle.getString(PACKAGE_NAME),
+    )
 
     fun toBundle(): Bundle {
         return Bundle().apply {
             title?.let { putCharSequence(TITLE, it) }
+            summary?.let { putCharSequence(SUMMARY, it) }
+
             packageName?.let { putString(PACKAGE_NAME, it) }
         }
     }
 
     private companion object {
         const val TITLE = "title"
+        const val SUMMARY = "summary"
         const val PACKAGE_NAME = "package_name"
     }
 }

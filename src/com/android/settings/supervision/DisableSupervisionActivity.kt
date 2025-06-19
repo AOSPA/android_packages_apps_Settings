@@ -15,11 +15,17 @@
  */
 package com.android.settings.supervision
 
+import android.app.role.RoleManager
+import android.app.role.RoleManager.ROLE_SUPERVISION
 import android.app.supervision.SupervisionManager
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.lifecycleScope
 import com.android.settingslib.supervision.SupervisionLog.TAG
+import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.launch
 
 /**
  * Activity for disabling device supervision.
@@ -33,27 +39,78 @@ class DisableSupervisionActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         Log.e(TAG, "onCreate for DisableSupervisionActivity")
 
-        if (!isCallerSystemSupervisionRoleHolder()) {
-            Log.w(TAG, "Caller is not the system supervision role holder. Finishing activity.")
-            setResult(RESULT_CANCELED)
-            finish()
+        val supervisionApps = supervisionRoleHolders
+        if (
+            callingPackage != systemSupervisionPackageName &&
+                !supervisionApps.contains(callingPackage)
+        ) {
+            Log.w(TAG, "Caller does not have valid role. Finishing activity.")
+            setResultAndFinish(RESULT_CANCELED)
             return
         }
 
         val supervisionManager = getSystemService(SupervisionManager::class.java)
         if (supervisionManager == null) {
             Log.e(TAG, "SupervisionManager is null. Finishing activity.")
-            setResult(RESULT_CANCELED)
-            finish()
+            setResultAndFinish(RESULT_CANCELED)
             return
         }
 
-        supervisionManager.setSupervisionEnabled(false)
-        setResult(RESULT_OK)
-        finish()
+        val otherSupervisionApps = supervisionApps.filter { it != callingPackage }
+        // If there are no other supervision apps, we can disable supervision.
+        if (otherSupervisionApps.isEmpty()) {
+            // Delete supervision data if possible (i.e single supervised user).
+            if (!deleteSupervisionData()) {
+                // Only disable supervision, in case we can't delete data.
+                supervisionManager.setSupervisionEnabled(false)
+            }
+        }
+
+        // Finally, revoke the supervision role for the caller.
+        if (supervisionApps.contains(callingPackage)) {
+            lifecycleScope.launch {
+                if (revokeSupervisionRole()) {
+                    setResultAndFinish(RESULT_OK)
+                } else {
+                    Log.w(TAG, "Caller cannot revoke supervision role. Finishing activity.")
+                    setResultAndFinish(RESULT_CANCELED)
+                }
+            }
+        } else {
+            // If the caller does not have the supervision role, simply finish the activity.
+            setResultAndFinish(RESULT_OK)
+        }
     }
 
-    private fun isCallerSystemSupervisionRoleHolder(): Boolean {
-        return callingPackage == systemSupervisionPackageName
+    private suspend fun revokeSupervisionRole(): Boolean {
+        val packageName = callingPackage
+        val userHandle = user
+        val roleManager = getSystemService(RoleManager::class.java)
+
+        if (packageName == null || userHandle == null || roleManager == null) {
+            Log.w(
+                TAG,
+                "Calling package, user handle, or role manager are null. Finishing activity.",
+            )
+            return false
+        }
+
+        val executor = ContextCompat.getMainExecutor(this)
+        return suspendCoroutine { continuation ->
+            roleManager.removeRoleHolderAsUser(
+                ROLE_SUPERVISION,
+                packageName,
+                RoleManager.MANAGE_HOLDERS_FLAG_DONT_KILL_APP,
+                userHandle,
+                executor,
+            ) { isSuccessful ->
+                continuation.resumeWith(Result.success(isSuccessful))
+            }
+        }
+    }
+
+    private fun setResultAndFinish(resultCode: Int) {
+        setResult(resultCode)
+        finish()
     }
 }

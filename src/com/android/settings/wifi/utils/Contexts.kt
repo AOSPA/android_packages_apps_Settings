@@ -23,6 +23,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.TetheringManager
+import android.net.wifi.SoftApConfiguration
 import android.net.wifi.WifiManager
 import android.os.UserManager
 import android.telephony.TelephonyManager
@@ -47,9 +48,24 @@ val Context.isAdminUser
 val Context.wifiManager: WifiManager?
     get() = applicationContext.getSystemService(WifiManager::class.java)
 
-/** Return the UTF-8 String set to be the SSID for the Soft AP. */
-val Context.wifiSoftApSsid
-    get() = wifiManager?.softApConfiguration?.ssid
+/** Return the {@link android.net.wifi.WifiManager.SoftApConfiguration}. */
+var Context.wifiSoftApConfig
+    get() = wifiManager?.softApConfiguration
+    set(value) {
+        value?.also { wifiManager?.softApConfiguration = it }
+    }
+
+/** Gets/Sets the SSID for the Soft AP. */
+var Context.wifiSoftApSsid
+    get() = wifiSoftApConfig?.ssid
+    set(value) {
+        wifiSoftApConfig?.apply {
+            SoftApConfiguration.Builder(this)
+                .setSsid(value)
+                .build()
+                .let { wifiSoftApConfig = it }
+        }
+    }
 
 /** Gets the tethered Wi-Fi hotspot enabled state. */
 val Context.wifiApState

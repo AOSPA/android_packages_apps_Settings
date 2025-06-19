@@ -16,12 +16,15 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_MAIN_TOGGLE_OFF
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_MAIN_TOGGLE_ON
 import android.app.supervision.SupervisionManager
 import android.content.Context
 import android.content.Intent
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
@@ -137,6 +140,12 @@ class SupervisionMainSwitchPreference(
             updateDependentPreferencesEnabledState(mainSwitchPreference, newValue)
             updateDependentPreferenceSummary(mainSwitchPreference)
             lifeCycleContext.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+
+            FeatureFactory.featureFactory.metricsFeatureProvider.action(
+                lifeCycleContext,
+                if (newValue) ACTION_SUPERVISION_MAIN_TOGGLE_ON
+                else ACTION_SUPERVISION_MAIN_TOGGLE_OFF,
+            )
         }
 
         return true
@@ -159,7 +168,10 @@ class SupervisionMainSwitchPreference(
         }
 
         // If supervision is already set up, confirm credentials before any change.
-        val intent = Intent(lifeCycleContext, ConfirmSupervisionCredentialsActivity::class.java)
+        val intent =
+            Intent(lifeCycleContext, ConfirmSupervisionCredentialsActivity::class.java).apply {
+                putExtra(ConfirmSupervisionCredentialsActivity.EXTRA_FORCE_CONFIRMATION, true)
+            }
         lifeCycleContext.startActivityForResult(
             intent,
             REQUEST_CODE_CONFIRM_SUPERVISION_CREDENTIALS,

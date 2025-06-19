@@ -19,27 +19,64 @@ import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
+import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.preference.PreferenceViewHolder
+import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settingslib.widget.SliderPreference
 
-
-/**
- * Custom version of {@link SliderPreference} with tool tip window.
- */
-class TooltipSliderPreference @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : SliderPreference(context, attrs, defStyleAttr) {
+/** Custom version of {@link SliderPreference} with tool tip window. */
+class TooltipSliderPreference
+@JvmOverloads
+constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    SliderPreference(context, attrs, defStyleAttr) {
 
     var needsQSTooltipReshow = false
     private var tooltipWindow: AccessibilityQuickSettingsTooltipWindow? = null
 
+    override fun onBindViewHolder(holder: PreferenceViewHolder) {
+        super.onBindViewHolder(holder)
+
+        // A temp fix for b/421323125, we could potentially move this fix to SettingsLib.
+        // Once move this fix to SettingsLib, revert the change here.
+        if (context.isInSetupWizard()) {
+            val iconStartFrame =
+                holder.findViewById(
+                    com.android.settingslib.widget.preference.slider.R.id.icon_start
+                )?.parent as? ViewGroup
+            val iconEndFrame =
+                holder.findViewById(com.android.settingslib.widget.preference.slider.R.id.icon_end)
+                    ?.parent as? ViewGroup
+            if (iconStartFrame?.isVisible == true) {
+                iconStartFrame.setOnClickListener { _ ->
+                    if (value > 0) {
+                        val newValue = value - sliderIncrement
+                        // Set the Slider value here in order to trigger Slider.OnChangeListener
+                        slider?.value = newValue.toFloat()
+                        value = newValue
+                    }
+                }
+            }
+
+            if (iconEndFrame?.isVisible == true) {
+                iconEndFrame.setOnClickListener { _ ->
+                    if (value < max) {
+                        val newValue = value + sliderIncrement
+                        // Set the Slider value here in order to trigger Slider.OnChangeListener
+                        slider?.value = newValue.toFloat()
+                        value = newValue
+                    }
+                }
+            }
+        }
+    }
+
     override fun onSaveInstanceState(): Parcelable? {
-        val myState = SavedState(super.onSaveInstanceState());
+        val myState = SavedState(super.onSaveInstanceState())
         if (needsQSTooltipReshow || tooltipWindow?.isShowing == true) {
             myState.needsQSTooltipReshow = true
         }
-        return myState;
+        return myState
     }
 
     override fun onRestoreInstanceState(state: Parcelable?) {

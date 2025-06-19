@@ -97,7 +97,6 @@ open class SoundScreen : PreferenceScreenMixin, PreferenceIconProvider {
 
     companion object {
         const val KEY = "sound_screen"
-        const val SOUND_PATTERNS_CATEGORY = "sound_patterns_category"
         internal const val VOLUME_CONTROLS_CATEGORY = "volume_controls_category"
         internal const val AUDIO_CATEGORY = "audio_category"
         internal const val SOUNDS_AND_VIBRATIONS_CATEGORY = "system_sounds_and_vibrations_category"

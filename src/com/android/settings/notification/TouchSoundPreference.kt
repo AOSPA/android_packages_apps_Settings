@@ -74,7 +74,7 @@ class TouchSoundPreference(context: Context) :
 }
 
 internal class TouchSoundStorage(private val context: Context) : KeyValueStoreDelegate {
-    // use limitedParallelism to prevent race condition and achieve sequential semantic
+    // use limitedParallelism to prevent race condition and achieve sequential semantics
     private val coroutineScope = CoroutineScope(Dispatchers.IO.limitedParallelism(1))
     @VisibleForTesting internal var job: Job? = null
 

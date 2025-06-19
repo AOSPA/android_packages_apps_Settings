@@ -37,6 +37,7 @@ import android.view.accessibility.AccessibilityManager;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 
@@ -98,7 +99,7 @@ public class AccessibilityDetailsSettingsFragmentTest {
         AccessibilityDetailsSettingsFragment fragment = startFragment(intent);
 
         assertStartActivityWithExpectedFragment(fragment.getActivity(),
-                ToggleAccessibilityServicePreferenceFragment.class.getName());
+                A11yServicePreferenceFragment.class.getName());
     }
 
     @Test

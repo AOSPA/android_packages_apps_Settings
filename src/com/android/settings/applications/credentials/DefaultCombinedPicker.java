@@ -30,7 +30,6 @@ import android.content.pm.ServiceInfo;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
-import android.credentials.flags.Flags;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -58,10 +57,10 @@ import com.android.settingslib.widget.SectionButtonPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 import com.android.settingslib.widget.TopIntroPreference;
 
+import kotlin.Unit;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import kotlin.Unit;
 
 public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
@@ -405,19 +404,13 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         if (appInfo == null) {
             final String message =
                     getContext()
-                            .getString(
-                                    Flags.newSettingsUi()
-                                            ? R.string.credman_confirmation_message_new_ui
-                                            : R.string.credman_confirmation_message);
+                            .getString(R.string.credman_confirmation_message_new_ui);
             return Html.fromHtml(message);
         }
         final CharSequence appName = appInfo.loadLabel();
         final String message =
                 getContext()
-                        .getString(
-                                Flags.newSettingsUi()
-                                        ? R.string.credman_autofill_confirmation_message_new_ui
-                                        : R.string.credman_autofill_confirmation_message,
+                        .getString(R.string.credman_autofill_confirmation_message_new_ui,
                                 Html.escapeHtml(appName));
         return Html.fromHtml(message);
     }

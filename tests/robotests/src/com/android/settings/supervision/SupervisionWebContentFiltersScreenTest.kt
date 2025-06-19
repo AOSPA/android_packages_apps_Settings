@@ -96,6 +96,17 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
+    fun getKeywords() {
+        assertThat(supervisionWebContentFiltersScreen.keywords)
+            .isEqualTo(R.string.supervision_web_content_filters_keywords)
+    }
+
+    @Test
+    fun isIndexable() {
+        assertThat(supervisionWebContentFiltersScreen.isIndexable(context)).isTrue()
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun flagEnabled() {
         assertThat(supervisionWebContentFiltersScreen.isFlagEnabled(context)).isTrue()

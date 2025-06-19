@@ -634,8 +634,10 @@ public class WifiHotspotRepository {
         }
     }
 
-    @VisibleForTesting
-    void restartTetheringIfNeeded() {
+    /**
+     * Restarts the Tethering Service if it's enabled.
+     */
+    public void restartTetheringIfNeeded() {
         if (mWifiApState != WIFI_AP_STATE_ENABLED) {
             return;
         }

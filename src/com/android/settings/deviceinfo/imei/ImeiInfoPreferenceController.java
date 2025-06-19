@@ -127,6 +127,10 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         category.removePreference(preference);
         final int slotCount = mIsDsdsToSsConfigValid? mSlotCount : mSlotSimStatus.size();
 
+        if (Flags.catalystMyDeviceInfoPrefScreen()) {
+            return;
+        }
+
         // Add additional preferences for each imei slot in the device
         // Loop through all active SIMs or all slots if mIsDsdsToSsConfigValid is enabled
         for (int simSlotNumber = 0; simSlotNumber < slotCount; simSlotNumber++) {
@@ -195,9 +199,6 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        if (Flags.catalystMyDeviceInfoPrefScreen()) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
         if (!Utils.isMobileDataCapable(mContext) && !Utils.isVoiceCapable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         }

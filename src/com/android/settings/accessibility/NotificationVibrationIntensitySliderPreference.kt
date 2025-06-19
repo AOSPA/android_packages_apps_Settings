@@ -28,7 +28,6 @@ class NotificationVibrationIntensitySliderPreference(context: Context) :
         key = KEY,
         vibrationUsage = VibrationAttributes.USAGE_NOTIFICATION,
         title = R.string.accessibility_notification_vibration_title,
-        hasRingerModeDependency = true,
     ) {
     override val keywords: Int
         get() = R.string.keywords_notification_vibration

@@ -207,7 +207,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun getBiometricPrompt_recoveryEmailExist_showMoreOptionsButton() {
+    fun getBiometricPrompt_recoveryEmailExist_showForgotPinButton() {
         val recoveryInfo = SupervisionRecoveryInfo("email", "default", STATE_PENDING, null)
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
 
@@ -218,17 +218,24 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(biometricPrompt.isConfirmationRequired).isTrue()
         assertThat(biometricPrompt.allowedAuthenticators)
             .isEqualTo(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
-        assertThat(biometricPrompt.contentView)
-            .isInstanceOf(PromptContentViewWithMoreOptionsButton::class.java)
 
-        val contentView = biometricPrompt.contentView as PromptContentViewWithMoreOptionsButton
-        contentView.moreOptionsButtonListener.onClick(null, 0)
+        val fallbackOptions = biometricPrompt.getFallbackOptions()
+        assertThat(fallbackOptions).isNotNull()
+        assertThat(fallbackOptions).hasSize(1)
+
+        val forgotPinOption = fallbackOptions.find {
+            it.getText().toString() == mActivity.getString(R.string.supervision_auth_prompt_forgot_pin_button_label)
+        }
+        assertThat(forgotPinOption).isNotNull()
+        assertThat(forgotPinOption!!.getIconType()).isEqualTo(BiometricManager.IconType.ACCOUNT)
+
+        mActivity.onForgotPinFallbackClicked()
         verify(metricsRule.metricsFeatureProvider)
             .action(mActivity, SettingsEnums.ACTION_SUPERVISION_FORGOT_PIN_DURING_PIN_INVOCATION)
     }
 
     @Test
-    fun getBiometricPrompt_recoveryInfoEmpty_noMoreOptionsButton() {
+    fun getBiometricPrompt_recoveryInfoEmpty_noForgotPinButton() {
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
 
         val biometricPrompt = mActivity.getBiometricPrompt()
@@ -238,7 +245,7 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(biometricPrompt.isConfirmationRequired).isTrue()
         assertThat(biometricPrompt.allowedAuthenticators)
             .isEqualTo(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
-        assertThat(biometricPrompt.contentView).isNull()
+        assertThat(biometricPrompt.getFallbackOptions()).isEmpty()
     }
 
     @Test

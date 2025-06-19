@@ -41,7 +41,7 @@ open class AllAppsScreen : PreferenceScreenMixin {
 
     override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
 
-    override fun isFlagEnabled(context: Context) = Flags.catalystAppList() || Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
 
     override fun hasCompleteHierarchy() = false
 

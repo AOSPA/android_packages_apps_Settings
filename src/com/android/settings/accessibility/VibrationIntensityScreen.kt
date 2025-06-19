@@ -65,10 +65,10 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
             +VibrationMainSwitchPreference()
             // The preferences below are migrated behind a different flag from the screen migration.
             // They should only be declared in this screen hierarchy if their migration is enabled.
-            // TODO(b/420767832): Remove the Flags.deviceState() condition
-            if (Flags.catalystVibrationIntensityScreen25q4() || Flags.deviceState()) {
+            if (Flags.catalystVibrationIntensityScreen25q4()) {
                 +CallVibrationPreferenceCategory() += {
                     +RingVibrationIntensitySliderPreference(context)
+                    +RampingRingerVibrationSwitchPreference(context)
                 }
                 +NotificationAlarmVibrationPreferenceCategory() += {
                     +NotificationVibrationIntensitySliderPreference(context)
@@ -83,11 +83,7 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        if (Flags.deviceState()) {
-            makeLaunchIntent(context, VibrationIntensitySettingsActivity::class.java, metadata?.key)
-        } else {
-            super.getLaunchIntent(context, metadata)
-        }
+        makeLaunchIntent(context, VibrationIntensitySettingsActivity::class.java, metadata?.key)
 
     companion object {
         const val KEY = "vibration_intensity_screen"

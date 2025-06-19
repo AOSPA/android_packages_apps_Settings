@@ -16,8 +16,8 @@
 
 package com.android.settings.accessibility.notification;
 
-import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SURVEY_NOTIFICATION_DISMISSED;
-import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SURVEY_NOTIFICATION_SHOWN;
+import static com.android.internal.accessibility.common.NotificationConstants.ACTION_CANCEL_SURVEY_NOTIFICATION;
+import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SCHEDULE_SURVEY_NOTIFICATION;
 import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID;
 
 import android.app.settings.SettingsEnums;
@@ -26,13 +26,50 @@ import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.server.accessibility.Flags;
+import com.android.settings.accessibility.AccessibilitySurveyNotificationJobService;
+
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Service to display survey notifications.
  */
 public class SurveyNotificationReceiver extends BroadcastReceiver {
+
+    private static final long SCHEDULE_TIME = TimeUnit.DAYS.toMillis(7);
+
+    @NonNull
+    private final AccessibilitySurveyNotificationJobService mJobService;
+
+    @Nullable
+    private final NotificationHelper mNotificationHelper;
+
+    /**
+     * Default constructor for {@link SurveyNotificationReceiver}.
+     */
+    public SurveyNotificationReceiver() {
+        this(new AccessibilitySurveyNotificationJobService(), /* notificationHelper= */ null);
+    }
+
+    /**
+     * Constructor for {@link SurveyNotificationReceiver} for testing purposes.
+     *
+     * @param jobService The {@link AccessibilitySurveyNotificationJobService} instance to use.
+     * @param notificationHelper The {@link NotificationHelper} instance to use, or {@code null} if
+     * it should be initialized lazily.
+     */
+    @VisibleForTesting
+    public SurveyNotificationReceiver(
+            @NonNull AccessibilitySurveyNotificationJobService jobService,
+            @Nullable NotificationHelper notificationHelper) {
+        mJobService = jobService;
+        mNotificationHelper = notificationHelper;
+    }
+
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
         if (!Flags.enableLowVisionHats()) {
@@ -44,11 +81,12 @@ public class SurveyNotificationReceiver extends BroadcastReceiver {
             return;
         }
 
-        final NotificationHelper notificationHelper = new NotificationHelper(context);
-        if (ACTION_SURVEY_NOTIFICATION_SHOWN.equals(intent.getAction())) {
-            notificationHelper.handleSurveyNotification(pageId);
-        } else if (ACTION_SURVEY_NOTIFICATION_DISMISSED.equals(intent.getAction())) {
-            notificationHelper.cancelNotification(pageId);
+        if (ACTION_SCHEDULE_SURVEY_NOTIFICATION.equals(intent.getAction())) {
+            mJobService.scheduleJob(context, pageId, SCHEDULE_TIME);
+        } else if (ACTION_CANCEL_SURVEY_NOTIFICATION.equals(intent.getAction())) {
+            mJobService.cancelJob(context, pageId);
+            Objects.requireNonNullElseGet(mNotificationHelper,
+                    () -> new NotificationHelper(context)).cancelNotification(pageId);
         }
     }
 }

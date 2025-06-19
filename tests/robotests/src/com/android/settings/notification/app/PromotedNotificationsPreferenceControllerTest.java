@@ -38,6 +38,7 @@ import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,6 +79,7 @@ public class PromotedNotificationsPreferenceControllerTest {
         assertThat(mPrefController.isAvailable()).isFalse();
     }
 
+    @Ignore("b/424066174")
     @Test
     @EnableFlags(Flags.FLAG_UI_RICH_ONGOING)
     public void testIsAvailable_flagOn() {

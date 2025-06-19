@@ -26,6 +26,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.safetycenter.SafetyEvent;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricNavigationUtils;
@@ -64,6 +65,14 @@ public final class FingerprintSafetySource {
 
         UserHandle userHandle = Process.myUserHandle();
         int userId = userHandle.getIdentifier();
+        LockPatternUtils lockPatternUtils =
+                FeatureFactory.getFeatureFactory()
+                        .getSecurityFeatureProvider()
+                        .getLockPatternUtils(context);
+        if (lockPatternUtils.isProfileWithUnifiedChallenge(userId)) {
+            sendNullData(context, safetyEvent);
+            return;
+        }
         FingerprintManager fingerprintManager = Utils.getFingerprintManagerOrNull(context);
         FingerprintStatusUtils fingerprintStatusUtils =
                 new FingerprintStatusUtils(context, fingerprintManager, userId);
@@ -77,7 +86,8 @@ public final class FingerprintSafetySource {
         if (Utils.hasFingerprintHardware(context)) {
             boolean isMultipleBiometricsEnrollmentNeeded =
                     BiometricSourcesUtils.isMultipleBiometricsEnrollmentNeeded(context, userId);
-            String settingClassName = isMultipleBiometricsEnrollmentNeeded
+            String settingClassName =
+                    isMultipleBiometricsEnrollmentNeeded
                             ? BiometricEnrollActivity.InternalActivity.class.getName()
                             : fingerprintStatusUtils.getSettingsClassName();
             RestrictedLockUtils.EnforcedAdmin disablingAdmin =
@@ -91,16 +101,14 @@ public final class FingerprintSafetySource {
                             profileParentContext,
                             biometricNavigationUtils
                                     .getBiometricSettingsIntent(
-                                            context,
-                                            settingClassName,
-                                            disablingAdmin,
-                                            Bundle.EMPTY)
+                                            context, settingClassName, disablingAdmin, Bundle.EMPTY)
                                     .setIdentifier(Integer.toString(userId)),
                             REQUEST_CODE_FINGERPRINT_SETTING),
                     disablingAdmin == null /* enabled */,
                     fingerprintStatusUtils.hasEnrolled(),
                     safetyEvent,
-                    FeatureFactory.getFeatureFactory().getBiometricsFeatureProvider()
+                    FeatureFactory.getFeatureFactory()
+                            .getBiometricsFeatureProvider()
                             .getSafetySourceIssue(SAFETY_SOURCE_ID));
             return;
         }

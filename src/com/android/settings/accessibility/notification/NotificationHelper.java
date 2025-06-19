@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 
@@ -128,6 +129,7 @@ public class NotificationHelper {
      * @param pageId The unique identifier of the page for which to generate a notification ID.
      * @return A unique integer representing the notification ID for the given page.
      */
+    @VisibleForTesting
     public int getNotificationId(int pageId) {
         return NOTIFICATION_ID_BASE + pageId;
     }
@@ -137,7 +139,7 @@ public class NotificationHelper {
      *
      * @param pageId The ID of the settings page for which to show the survey.
      */
-    public void handleSurveyNotification(int pageId) {
+    public void showSurveyNotification(int pageId) {
         if (pageId == SettingsEnums.DARK_UI_SETTINGS) {
             final Intent settingsIntent = new Intent(Settings.ACTION_DARK_THEME_SETTINGS)
                     .setPackage(mContext.getPackageName());

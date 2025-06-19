@@ -247,10 +247,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                     Locale locale = mLocaleInfo.getLocale();
                     String localeLanguage = locale.getDisplayLanguage();
                     String localeCountry = locale.getDisplayCountry();
-                    String dialogMessage = TextUtils.isEmpty(localeCountry)
-                            ? mContext.getString(R.string.desc_notice_device_locale_settings_change,
-                                    localeLanguage)
-                            : mContext.getString(
+                    String dialogMessage = mContext.getString(
                                     R.string.desc_notice_device_locale_and_region_settings_change,
                                     localeLanguage, localeCountry);
                     dialogContent.mMessage = mSelectedLocaleInfo == defaultLocaleInfo

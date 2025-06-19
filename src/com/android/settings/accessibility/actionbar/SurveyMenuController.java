@@ -16,7 +16,7 @@
 
 package com.android.settings.accessibility.actionbar;
 
-import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SURVEY_NOTIFICATION_DISMISSED;
+import static com.android.internal.accessibility.common.NotificationConstants.ACTION_CANCEL_SURVEY_NOTIFICATION;
 import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID;
 
 import android.content.Context;
@@ -111,7 +111,7 @@ public class SurveyMenuController implements LifecycleObserver, OnCreateOptionsM
             // Remove Survey Notification
             FragmentActivity activity = mHost.getActivity();
             if (activity != null) {
-                final Intent intent = new Intent(ACTION_SURVEY_NOTIFICATION_DISMISSED)
+                final Intent intent = new Intent(ACTION_CANCEL_SURVEY_NOTIFICATION)
                         .setPackage(activity.getPackageName())
                         .putExtra(EXTRA_PAGE_ID, mPageId);
                 activity.sendBroadcastAsUser(intent, activity.getUser(),

@@ -18,6 +18,7 @@ package com.android.settings.supervision
 import android.app.ActivityManager
 import android.app.ActivityTaskManager
 import android.app.TaskStackListener
+import android.content.ComponentName
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import javax.annotation.concurrent.GuardedBy
@@ -33,7 +34,7 @@ import javax.annotation.concurrent.GuardedBy
  * successfully authenticated, and the session will be automatically invalidated when the task that
  * started the session stops running or goes into the background.
  */
-class SupervisionAuthController private constructor(appContext: Context) {
+class SupervisionAuthController private constructor(private val appContext: Context) {
     private val activityManager = appContext.getSystemService(ActivityManager::class.java)
     @GuardedBy("this") private var currentTaskId: Int? = null
 
@@ -42,7 +43,7 @@ class SupervisionAuthController private constructor(appContext: Context) {
         object : TaskStackListener() {
             override fun onTaskStackChanged() {
                 synchronized(this) {
-                    if (currentTaskId != null && !isCurrentTaskFocused()) {
+                    if (currentTaskId != null && !isSupervisionActivityFocused()) {
                         invalidateSession()
                     }
                 }
@@ -76,14 +77,25 @@ class SupervisionAuthController private constructor(appContext: Context) {
         currentTaskId = null
     }
 
-    /** Whether the task with a currently active auth session is running and focused. */
+    /**
+     * Whether the task with a currently active auth session is focused and running a supervision
+     * activity.
+     */
     @GuardedBy("this")
-    private fun isCurrentTaskFocused(): Boolean {
+    private fun isSupervisionActivityFocused(): Boolean {
         if (currentTaskId == null) return false
         val appTasks = activityManager.appTasks ?: emptyList()
         val task = appTasks.find { it.taskInfo.taskId == currentTaskId }
         if (task == null) return false
-        return task.taskInfo.isRunning && task.taskInfo.isFocused
+        return task.taskInfo.isRunning &&
+            task.taskInfo.isFocused &&
+            isSupervisionActivity(task.taskInfo.topActivity)
+    }
+
+    private fun isSupervisionActivity(component: ComponentName?): Boolean {
+        if (component == null) return false
+        return component.packageName == appContext.systemSupervisionPackageName ||
+            component.className == SupervisionDashboardActivity::class.java.name
     }
 
     companion object {

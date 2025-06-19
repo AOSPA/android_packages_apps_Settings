@@ -17,14 +17,19 @@
 package com.android.settings.deviceinfo.aboutphone
 
 import android.content.Context
+import android.content.pm.UserInfo
 import android.os.Build
 import android.provider.Settings.Global
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.flags.Flags
+import com.android.settings.testutils.shadow.ShadowUserManager
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.robolectric.annotation.Config
 
+@Config(shadows = [ShadowUserManager::class])
 class MyDeviceInfoScreenTest : SettingsCatalystTestCase() {
     private val context: Context = ApplicationProvider.getApplicationContext()
 
@@ -33,7 +38,11 @@ class MyDeviceInfoScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_MY_DEVICE_INFO_PREF_SCREEN
 
-    override fun migration() {}
+    override fun migration() {
+        ShadowUserManager.getShadow().addAliveUser(mock<UserInfo>())
+        // TODO: fix this migration test with the async preference loading
+        //super.migration()
+    }
 
     @Test
     fun getSummary_deviceNameNotSet_shouldReturnDeviceModel() {

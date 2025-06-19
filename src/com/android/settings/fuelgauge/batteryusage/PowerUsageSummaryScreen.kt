@@ -19,12 +19,15 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.Settings.PowerUsageSummaryActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.BatteryPercentageSwitchPreference
 import com.android.settings.flags.Flags
 import com.android.settings.fuelgauge.BatteryHeaderPreference
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
@@ -53,6 +56,9 @@ open class PowerUsageSummaryScreen :
     override fun hasCompleteHierarchy() = false
 
     override fun fragmentClass(): Class<out Fragment>? = PowerUsageSummary::class.java
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, PowerUsageSummaryActivity::class.java, metadata?.key)
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_top_level_battery)

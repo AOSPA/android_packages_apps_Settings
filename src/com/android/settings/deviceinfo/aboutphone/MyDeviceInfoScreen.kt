@@ -25,6 +25,8 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.MyDeviceInfoActivity
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen
+import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoScreen
 import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settings.deviceinfo.simstatus.SimEidPreference
 import com.android.settings.flags.Flags
@@ -38,6 +40,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 @ProvidePreferenceScreen(MyDeviceInfoScreen.KEY)
 open class MyDeviceInfoScreen :
@@ -79,11 +82,15 @@ open class MyDeviceInfoScreen :
                 R.string.my_device_info_device_details_category_title,
             ) +=
                 {
-                    +SimEidPreference(context) order 31
+                    +HardwareInfoScreen.KEY order 30
+                    addAsync(coroutineScope, Dispatchers.Default) {
+                        +SimEidPreference(context) order 31
+                    }
                     val activeModemCount = context.activeModemCount
                     for (i in 0 until activeModemCount) {
                         +ImeiPreference(context, i, activeModemCount) order (i + 33)
                     }
+                    +FirmwareVersionScreen.KEY order 42
                 }
         }
 

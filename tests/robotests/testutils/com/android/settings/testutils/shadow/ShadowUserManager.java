@@ -59,6 +59,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private final List<String> mBaseRestrictions = new ArrayList<>();
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
+    private final List<UserInfo> mAliveUserInfos = new ArrayList<>();
     private final Set<Integer> mManagedProfiles = new HashSet<>();
     private final Map<Integer, Integer> mProfileToParent = new HashMap<>();
     private final Map<Integer, UserInfo> mUserInfoMap = new HashMap<>();
@@ -312,6 +313,15 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     @Implementation
     protected UserHandle getMainUser() {
         return UserHandle.of(PRIMARY_USER_ID);
+    }
+
+    public void addAliveUser(UserInfo userInfo) {
+        mAliveUserInfos.add(userInfo);
+    }
+
+    @Implementation
+    protected List<UserInfo> getAliveUsers() {
+        return mAliveUserInfos;
     }
 
     protected boolean setUserEphemeral(@UserIdInt int userId, boolean enableEphemeral) {

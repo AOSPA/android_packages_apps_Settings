@@ -18,13 +18,13 @@ package com.android.settings.supervision
 import android.app.settings.SettingsEnums
 import android.app.supervision.flags.Flags
 import android.content.Context
-import androidx.preference.Preference
 import androidx.preference.PreferenceGroup
-import androidx.preference.PreferenceScreen
+import androidx.preference.SwitchPreferenceCompat
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.supervision.ipc.SupportedApp
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -32,7 +32,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.preference.forEachRecursively
+import com.android.settingslib.utils.StringUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,6 +55,9 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
     override val title: Int
         get() = R.string.supervision_web_content_filters_title
 
+    override val keywords: Int
+        get() = R.string.supervision_web_content_filters_keywords
+
     override val icon: Int
         get() = R.drawable.ic_globe
 
@@ -65,7 +68,6 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         supervisionClient = getSupervisionClient(context)
-        updatePreferenceData(context)
         addSupportedApps(context)
     }
 
@@ -102,31 +104,6 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, SupervisionWebContentFiltersActivity::class.java, metadata?.key)
 
-    private fun updatePreferenceData(context: PreferenceLifecycleContext) {
-        val preferenceScreen = context.findPreference<Preference>(key)
-        if (preferenceScreen is PreferenceScreen) {
-            val preferenceKeys =
-                buildList<String> { preferenceScreen.forEachRecursively { add(it.key) } }
-            context.lifecycleScope.launch {
-                val preferenceDataMap =
-                    withContext(Dispatchers.IO) {
-                        supervisionClient?.getPreferenceData(preferenceKeys)
-                    }
-                preferenceScreen.forEachRecursively {
-                    val preferenceData = preferenceDataMap?.get(it.key)
-                    val newTitle = preferenceData?.title
-                    if (newTitle != null) {
-                        it.title = newTitle
-                    }
-                    val newSummary = preferenceData?.summary
-                    if (newSummary != null) {
-                        it.summary = newSummary
-                    }
-                }
-            }
-        }
-    }
-
     private fun addSupportedApps(context: PreferenceLifecycleContext) {
         context.lifecycleScope.launch {
             val supportedAppsMap =
@@ -136,35 +113,58 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
                     )
                 }
 
-            val browserFilterSupportedApps =
-                supportedAppsMap?.get(BROWSER_FILTERS_SUPPORTED_APPS) ?: emptyList()
-            context.findPreference<PreferenceGroup>(BROWSER_FILTERS_GROUP)?.apply {
-                for (supportedApp in browserFilterSupportedApps) {
-                    val packageName = supportedApp.packageName
-                    if (packageName != null) {
-                        SupervisionBrowserFiltersSupportedAppPreference(
-                                supportedApp.title,
-                                packageName,
-                            )
-                            .createWidget(context)
-                            .let { addPreference(it) }
-                    }
-                }
-            }
+            createSupportedAppPreference(
+                context,
+                BROWSER_FILTERS_GROUP,
+                SupervisionSafeSitesSwitchPreference.KEY,
+                BROWSER_FILTERS_SUPPORTED_APPS,
+                supportedAppsMap,
+            )
+            createSupportedAppPreference(
+                context,
+                SEARCH_FILTERS_GROUP,
+                SupervisionSafeSearchSwitchPreference.KEY,
+                SEARCH_FILTERS_SUPPORTED_APPS,
+                supportedAppsMap,
+            )
+        }
+    }
 
-            val searchFilterSupportedApps =
-                supportedAppsMap?.get(SEARCH_FILTERS_SUPPORTED_APPS) ?: emptyList()
-            context.findPreference<PreferenceGroup>(SEARCH_FILTERS_GROUP)?.apply {
-                for (supportedApp in searchFilterSupportedApps) {
-                    val packageName = supportedApp.packageName
-                    if (packageName != null) {
-                        SupervisionSearchFiltersSupportedAppPreference(
-                                supportedApp.title,
-                                packageName,
-                            )
-                            .createWidget(context)
-                            .let { addPreference(it) }
-                    }
+    private fun createSupportedAppPreference(
+        context: PreferenceLifecycleContext,
+        filterGroup: String,
+        filterSwitchPreferenceKey: String,
+        filterType: String,
+        supportedAppsMap: Map<String, List<SupportedApp>>?,
+    ) {
+        val supportedApps = supportedAppsMap?.get(filterType) ?: emptyList()
+        context.findPreference<SwitchPreferenceCompat>(filterSwitchPreferenceKey)?.apply {
+            setSummaryOn(
+                StringUtil.getIcuPluralsString(
+                    context,
+                    supportedApps.size,
+                    R.string.supervision_web_content_filters_switch_summary,
+                )
+            )
+            setSummaryOff(
+                StringUtil.getIcuPluralsString(
+                    context,
+                    supportedApps.size,
+                    R.string.supervision_web_content_filters_switch_summary,
+                )
+            )
+        }
+        context.findPreference<PreferenceGroup>(filterGroup)?.apply {
+            for (supportedApp in supportedApps) {
+                val packageName = supportedApp.packageName
+                if (packageName != null) {
+                    SupervisionSupportedAppPreference(
+                            supportedApp.title,
+                            supportedApp.summary,
+                            packageName,
+                        )
+                        .createWidget(context)
+                        .let { addPreference(it) }
                 }
             }
         }

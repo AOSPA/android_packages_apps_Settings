@@ -35,9 +35,6 @@ import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.InputDevice;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -53,7 +50,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel;
 import com.android.settings.connecteddevice.stylus.StylusDevicesController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.inputmethod.KeyboardSettingsPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SlicePreferenceController;
@@ -87,9 +83,6 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
     private static final int BA_MASK = 0x02;
     private static boolean mBAEnabled = false;
     private static boolean mBAPropertyChecked = false;
-
-    @VisibleForTesting
-    static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
 
     /**
      * An interface to let tests override the normal mechanism for looking up the
@@ -377,27 +370,6 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.bluetooth_device_details_fragment;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (!Flags.enableBluetoothDeviceDetailsPolish() && !mUserManager.isGuestUser()) {
-            MenuItem item = menu.add(0, EDIT_DEVICE_NAME_ITEM_ID, 0,
-                    R.string.bluetooth_rename_button);
-            item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
-            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        }
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == EDIT_DEVICE_NAME_ITEM_ID) {
-            RemoteDeviceNameDialogFragment.newInstance(cachedDevice).show(
-                    getFragmentManager(), RemoteDeviceNameDialogFragment.TAG);
-            return true;
-        }
-        return super.onOptionsItemSelected(menuItem);
     }
 
     private List<String> generatePreferenceKeysForBondingLoss() {

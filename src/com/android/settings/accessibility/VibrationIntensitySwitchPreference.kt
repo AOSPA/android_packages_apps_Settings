@@ -45,21 +45,13 @@ open class VibrationIntensitySwitchPreference(
     @Usage val vibrationUsage: Int,
     @StringRes title: Int = 0,
     @StringRes summary: Int = 0,
-    val hasRingerModeDependency: Boolean = false,
 ) :
     SwitchPreference(key, title, summary),
     SwitchPreferenceBinding,
     PreferenceSummaryProvider,
     Preference.OnPreferenceChangeListener {
 
-    private val storage by lazy {
-        VibrationIntensitySettingsStore(
-            context,
-            vibrationUsage,
-            hasRingerModeDependency,
-            key
-        )
-    }
+    private val storage by lazy { VibrationIntensitySettingsStore(context, vibrationUsage) }
 
     override fun storage(context: Context) = storage
 

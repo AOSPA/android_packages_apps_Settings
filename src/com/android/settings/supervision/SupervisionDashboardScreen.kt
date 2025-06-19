@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.app.settings.SettingsEnums
+import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
@@ -45,6 +46,30 @@ import kotlinx.coroutines.CoroutineScope
 @ProvidePreferenceScreen(SupervisionDashboardScreen.KEY)
 open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecycleProvider {
     private var supervisionClient: SupervisionMessengerClient? = null
+    private var supervisionManager: SupervisionManager? = null
+    private var lifeCycleContext: PreferenceLifecycleContext? = null
+
+    private val supervisionListener = object : SupervisionManager.SupervisionListener() {
+        override fun onSupervisionEnabled(userId: Int) {
+            refreshPreferences()
+        }
+
+        override fun onSupervisionDisabled(userId: Int) {
+            refreshPreferences()
+        }
+
+        private fun refreshPreferences() {
+            lifeCycleContext?.notifyPreferenceChange(KEY)
+            lifeCycleContext?.notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
+            lifeCycleContext?.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+        }
+    }
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        this.lifeCycleContext = context
+        supervisionManager = context.getSystemService(SupervisionManager::class.java)
+        supervisionManager?.registerSupervisionListener(supervisionListener)
+    }
 
     override fun isFlagEnabled(context: Context) = Flags.enableSupervisionSettingsScreen()
 
@@ -72,6 +97,9 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
         supervisionClient?.close()
+        supervisionManager?.unregisterSupervisionListener(supervisionListener)
+        this.lifeCycleContext = null
+        this.supervisionManager = null
     }
 
     override fun isIndexable(context: Context) = true

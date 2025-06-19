@@ -17,32 +17,34 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.supervision.SupervisionManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.UserInfo
-import android.os.Bundle
+import android.net.Uri
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_FULL_SECONDARY
 import android.os.UserManager.USER_TYPE_FULL_SYSTEM
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import android.provider.Settings.Global
+import androidx.activity.ComponentActivity
+import androidx.activity.addCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
-import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
@@ -51,6 +53,9 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.withSettings
+import org.robolectric.Robolectric
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
@@ -62,8 +67,6 @@ class SupervisionDeletePinPreferenceTest {
     private val mockUserManager = mock<UserManager>()
     private val mockActivityResultLauncher = mock<ActivityResultLauncher<Intent>>()
     private var startedIntent: Intent? = null
-    private var notifiedKey: String? = null
-    private var capturedActivityResultCallback: ActivityResultCallback<ActivityResult>? = null
     private val context =
         object : ContextWrapper(appContext) {
             override fun getSystemService(name: String): Any =
@@ -79,56 +82,31 @@ class SupervisionDeletePinPreferenceTest {
         }
     private val preference = SupervisionDeletePinPreference()
     private val widget = preference.createWidget(context)
-    // This object is created explicitly instead of mocked in order to preserve access to the
-    // original context in test.
     private val lifeCycleContext =
-        object : PreferenceLifecycleContext(context) {
-            override val lifecycleScope: LifecycleCoroutineScope
-                get() = mock {} // unused
-
-            override val fragmentManager: FragmentManager
-                get() = mock {} // unused
-
-            override val childFragmentManager: FragmentManager
-                get() = mock {} // unused
-
-            override fun <T> findPreference(key: String): T? {
-                if (key == SupervisionDeletePinPreference.KEY) {
-                    return widget as T?
-                }
-                return null
-            }
-
-            override fun <T : Any> requirePreference(key: String) = findPreference<T>(key)!!
-
-            override fun getKeyValueStore(key: String): KeyValueStore? = null
-
-            override fun notifyPreferenceChange(key: String) {
-                notifiedKey = key
-            }
-
-            @Suppress("DEPRECATION")
-            override fun startActivityForResult(
-                intent: Intent,
-                requestCode: Int,
-                options: Bundle?,
-            ) {}
-
-            override fun <I, O> registerForActivityResult(
-                contract: ActivityResultContract<I, O>,
-                callback: ActivityResultCallback<O>,
-            ): ActivityResultLauncher<I> {
-                capturedActivityResultCallback = callback as? ActivityResultCallback<ActivityResult>
-                return mockActivityResultLauncher as ActivityResultLauncher<I>
-            }
-        }
+        Mockito.mock(
+            PreferenceLifecycleContext::class.java,
+            withSettings().useConstructor(context).defaultAnswer(Mockito.CALLS_REAL_METHODS),
+        )
+    private lateinit var activity: ComponentActivity
+    private var backPressedCalled = false
 
     @Before
     fun setUp() {
+        backPressedCalled = false
+        val activityController = Robolectric.buildActivity(ComponentActivity::class.java)
+        activity = activityController.create().start().resume().get()
+        activity.setTheme(R.style.Theme_AppCompat)
+        activity.onBackPressedDispatcher.addCallback(activity) { backPressedCalled = true }
+
+        lifeCycleContext.stub {
+            on { findPreference<Any>(SupervisionDeletePinPreference.KEY) } doReturn widget
+            on { registerForActivityResult<Intent, ActivityResult>(any(), any()) } doReturn
+                mockActivityResultLauncher
+            on { baseContext } doReturn activity
+        }
         preference.onCreate(lifeCycleContext)
         context.setTheme(R.style.Theme_AppCompat) // Needed for AlertDialog creation
         startedIntent = null
-        notifiedKey = null
     }
 
     @Test
@@ -167,27 +145,7 @@ class SupervisionDeletePinPreferenceTest {
     }
 
     @Test
-    fun areAnyUsersSupervisedExceptCurrent_currentUserSupervised_returnsFalse() {
-        mockUserManager.stub {
-            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-        }
-        mockSupervisionManager.stub {
-            on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
-            on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn false
-            on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
-        }
-
-        assertThat(
-                preference.areAnyUsersExceptCurrentSupervised(
-                    mockSupervisionManager,
-                    mockUserManager,
-                )
-            )
-            .isFalse()
-    }
-
-    @Test
-    fun areAnyUsersSupervisedExceptCurrent_secondaryUserSupervised_returnsTrue() {
+    fun showDeletionDialog_secondaryUserSupervised_showsSupervisionEnabledWarning_clicksLearnMore() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
         }
@@ -196,14 +154,24 @@ class SupervisionDeletePinPreferenceTest {
             on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn true
             on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
         }
+        val learnMoreLink = context.getString(R.string.supervision_pin_learn_more_link)
+        Global.putInt(context.contentResolver, Global.DEVICE_PROVISIONED, 1)
+        shadowOf(context.packageManager).apply {
+            val componentName = ComponentName(context, "browser")
+            val intentFilter =
+                IntentFilter(Intent.ACTION_VIEW).apply {
+                    addCategory(Intent.CATEGORY_DEFAULT)
+                    addDataScheme(Uri.parse(learnMoreLink).scheme)
+                }
+            addActivityIfNotPresent(componentName)
+            addIntentFilterForActivity(componentName, intentFilter)
+        }
 
-        assertThat(
-                preference.areAnyUsersExceptCurrentSupervised(
-                    mockSupervisionManager,
-                    mockUserManager,
-                )
-            )
-            .isTrue()
+        preference.showDeletionDialog(context)
+        preference.onLearnMore()
+
+        assertThat(startedIntent?.dataString).isEqualTo(learnMoreLink)
+        assertThat(startedIntent?.action).isEqualTo(Intent.ACTION_VIEW)
     }
 
     @Test
@@ -220,14 +188,14 @@ class SupervisionDeletePinPreferenceTest {
 
         preference.onConfirmDeleteClick()
         verifyConfirmPinActivityStarted()
+        onActivityResult(ActivityResult(Activity.RESULT_OK, null))
 
-        val result = ActivityResult(Activity.RESULT_OK, null)
-        capturedActivityResultCallback?.onActivityResult(result)
-        verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
-        verify(mockSupervisionManager).setSupervisionEnabled(false)
+        verify(mockSupervisionManager).supervisionRecoveryInfo = null
+        verify(mockSupervisionManager).isSupervisionEnabled = false
         verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
-        assertThat(startedIntent).isNotNull()
-        assertThat(notifiedKey).isEqualTo(SupervisionDeletePinPreference.KEY)
+
+        assertThat(backPressedCalled).isTrue()
+        assertThat(startedIntent).isNull()
     }
 
     @Test
@@ -245,24 +213,29 @@ class SupervisionDeletePinPreferenceTest {
         preference.onConfirmDeleteClick()
         verifyConfirmPinActivityStarted()
 
-        val result = ActivityResult(Activity.RESULT_OK, null)
-        capturedActivityResultCallback?.onActivityResult(result)
-        // We should disable supervision before the supervising profile is removed
-        verify(mockSupervisionManager).setSupervisionEnabled(false)
-        verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
+        onActivityResult(ActivityResult(Activity.RESULT_OK, null))
+        // Don't disable supervision if we can't delete data, even though we could.
+        verify(mockSupervisionManager, never()).isSupervisionEnabled = any()
+        verify(mockSupervisionManager, never()).supervisionRecoveryInfo = any()
         assertThat(startedIntent).isNull()
         assertAlertDialogHasMessage(R.string.supervision_delete_pin_error_message)
     }
 
     @Test
     fun onPinConfirmed_resultCanceled_doesNothing() {
-        val result = ActivityResult(Activity.RESULT_CANCELED, null)
-        capturedActivityResultCallback?.onActivityResult(result)
+        onActivityResult(ActivityResult(Activity.RESULT_CANCELED, null))
 
-        verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
+        verify(mockSupervisionManager, never()).isSupervisionEnabled = any()
         verify(mockUserManager, never()).removeUser(UserHandle(SUPERVISING_USER_ID))
+        verify(lifeCycleContext, never()).notifyPreferenceChange(any())
         assertThat(startedIntent).isNull()
-        assertThat(notifiedKey).isNull()
+    }
+
+    private fun onActivityResult(result: ActivityResult) {
+        val captor = argumentCaptor<ActivityResultCallback<ActivityResult>>()
+        verify(lifeCycleContext)
+            .registerForActivityResult<Intent, ActivityResult>(any(), captor.capture())
+        captor.allValues.single().onActivityResult(result)
     }
 
     private fun assertAlertDialogHasMessage(resId: Int) {

@@ -19,9 +19,12 @@ package com.android.settings.inputmethod;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.hardware.input.InputSettings;
+import android.os.UserHandle;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -47,6 +50,11 @@ public class MouseKeysPrimaryKeysControllerTest {
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
+        Settings.System.putIntForUser(
+                mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_USE_PRIMARY_KEYS,
+                0,
+                UserHandle.USER_CURRENT);
         mController = new MouseKeysPrimaryKeysController(
                 mContext, PREFERENCE_KEY);
     }
@@ -63,5 +71,28 @@ public class MouseKeysPrimaryKeysControllerTest {
     public void getAvailabilityStatus_flagIsDisabled_notSupport() {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_MOUSE_KEY_ENHANCEMENT)
+    public void setChecked_shouldUpdateSettings() {
+        mController.setChecked(false);
+
+        boolean isPrimaryKeySelected = InputSettings.isPrimaryKeysForMouseKeysEnabled(mContext);
+        assertThat(isPrimaryKeySelected).isFalse();
+
+        mController.setChecked(true);
+        isPrimaryKeySelected = InputSettings.isPrimaryKeysForMouseKeysEnabled(mContext);
+        assertThat(isPrimaryKeySelected).isTrue();
+    }
+
+    @Test
+    @EnableFlags(com.android.server.accessibility.Flags.FLAG_ENABLE_MOUSE_KEY_ENHANCEMENT)
+    public void isChecked_providerPutInt1_returnTrue() {
+        InputSettings.setPrimaryKeysForMouseKeysEnabled(mContext, true);
+
+        boolean result = mController.isChecked();
+
+        assertThat(result).isTrue();
     }
 }

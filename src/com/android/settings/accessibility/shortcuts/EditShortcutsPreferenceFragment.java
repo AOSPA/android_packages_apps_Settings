@@ -64,7 +64,6 @@ import com.android.internal.accessibility.dialog.AccessibilityTargetHelper;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.accessibility.AccessibilitySetupWizardUtils;
-import com.android.settings.accessibility.Flags;
 import com.android.settings.accessibility.PreferenceAdapterInSuw;
 import com.android.settings.accessibility.PreferredShortcuts;
 import com.android.settings.core.SubSettingLauncher;
@@ -222,9 +221,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
 
         if (!activity.getIntent().getAction().equals(
                 Settings.ACTION_ACCESSIBILITY_SHORTCUT_SETTINGS)) {
-            if (Flags.toggleFeatureFragmentCollectionInfo()) {
-                descriptionPref.setVisible(false);
-            }
+            descriptionPref.setVisible(false);
             return;
         }
 
@@ -240,7 +237,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
         );
 
         activity.setTitle(titles.first);
-        if (titles.second != null || !Flags.toggleFeatureFragmentCollectionInfo()) {
+        if (titles.second != null) {
             descriptionPref.setTitle(titles.second);
         } else {
             descriptionPref.setVisible(false);

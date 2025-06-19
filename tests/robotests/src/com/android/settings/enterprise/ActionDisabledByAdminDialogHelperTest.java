@@ -28,7 +28,9 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
+import android.app.admin.DeviceAdminAuthority;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.app.supervision.SupervisionManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -210,6 +212,28 @@ public class ActionDisabledByAdminDialogHelperTest {
         assertNull(admin.component);
         assertEquals(mActivity.getString(R.string.default_admin_support_msg),
                 Shadows.shadowOf(textView).innerText());
+    }
+
+    @Test
+    public void testSetAdminSupportDetails_enforcingAdmin() {
+        final ShadowDevicePolicyManager dpmShadow = ShadowDevicePolicyManager.getShadow();
+        final ViewGroup view = new FrameLayout(mActivity);
+        final String packageName = "some.package.name";
+        final ComponentName component =
+                new ComponentName(packageName, "some.package.name.SomeClass");
+        final EnforcingAdmin admin =
+                new EnforcingAdmin(
+                        packageName,
+                        DeviceAdminAuthority.DEVICE_ADMIN_AUTHORITY,
+                        UserHandle.of(123),
+                        component);
+        final TextView textView = createAdminSupportTextView(view, mActivity);
+        dpmShadow.setShortSupportMessageForUser(component, 123, "some message");
+        ShadowProcess.setUid(Process.SYSTEM_UID);
+
+        mHelper.setAdminSupportDetails(mActivity, view, admin);
+
+        assertEquals("some message", Shadows.shadowOf(textView).innerText());
     }
 
     @Ignore

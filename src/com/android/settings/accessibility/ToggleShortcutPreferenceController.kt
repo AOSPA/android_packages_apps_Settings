@@ -18,7 +18,6 @@ package com.android.settings.accessibility
 
 import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
 import android.database.ContentObserver
 import android.os.Handler
 import android.os.Looper
@@ -53,11 +52,15 @@ open class ToggleShortcutPreferenceController(context: Context, key: String) :
     protected open val shortcutSettingsKey = ShortcutConstants.GENERAL_SHORTCUT_SETTINGS.toList()
 
     /**
-     * Initialize the [ComponentName] this shortcut toggle is attached to,
-     * and the [Intent] from the Fragment where the controller is attached to
+     * Initialize the [ComponentName] this shortcut toggle is attached to.
      */
     open fun initialize(componentName: ComponentName) {
         this.componentName = componentName
+    }
+
+    // TODO(b/147990389): Delete this function after we migrated to MAGNIFICATION_COMPONENT_NAME.
+    open fun getComponentNameAsString(): String {
+        return componentName!!.flattenToString()
     }
 
     override fun onCreate(owner: LifecycleOwner) {
@@ -91,7 +94,7 @@ open class ToggleShortcutPreferenceController(context: Context, key: String) :
             preference.isChecked =
                 ShortcutUtils.getEnabledShortcutTypes(
                     mContext,
-                    componentName!!.flattenToString()
+                    getComponentNameAsString()
                 ) != UserShortcutType.DEFAULT
         }
         refreshSummary(preference)
@@ -115,7 +118,7 @@ open class ToggleShortcutPreferenceController(context: Context, key: String) :
         val shortcutTypes = getUserPreferredShortcutTypes(componentName!!)
         mContext.getSystemService(AccessibilityManager::class.java)!!.enableShortcutsForTargets(
             checked, shortcutTypes,
-            setOf(componentName!!.flattenToString()), mContext.userId
+            setOf(getComponentNameAsString()), mContext.userId
         )
         preference.isChecked = checked;
     }
@@ -142,7 +145,7 @@ open class ToggleShortcutPreferenceController(context: Context, key: String) :
     fun getUserPreferredShortcutTypes(componentName: ComponentName): Int {
         return PreferredShortcuts.retrieveUserShortcutType(
             mContext,
-            componentName.flattenToString(),
+            getComponentNameAsString(),
             getDefaultShortcutTypes(),
         )
     }
@@ -160,7 +163,7 @@ open class ToggleShortcutPreferenceController(context: Context, key: String) :
         )
         if (shortcutTypes != UserShortcutType.DEFAULT) {
             val shortcut = PreferredShortcut(
-                componentName!!.flattenToString(), shortcutTypes
+                getComponentNameAsString(), shortcutTypes
             )
             PreferredShortcuts.saveUserShortcutType(mContext, shortcut)
         }

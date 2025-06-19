@@ -54,6 +54,10 @@ public class DarkModePendingLocationPreferenceController extends BasePreferenceC
         super.displayPreference(screen);
         FooterPreference footerPreference = checkNotNull(screen.findPreference(getPreferenceKey()));
         footerPreference.setIcon(R.drawable.ic_settings_location_filled);
+        if (android.view.accessibility.Flags.forceInvertColor()) {
+            footerPreference.setOrder(
+                    DarkModePreferenceOrderUtil.Order.LOCATION_CONNECTION_FOOTER.getValue());
+        }
     }
 
     @Override

@@ -45,30 +45,35 @@ class SupervisionCredentialProxyActivity : FragmentActivity() {
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val supervisingUser = supervisingUserHandle
-        if (supervisingUser == null) {
-            errorHandler("SupervisingUserHandle is null")
-            return
-        }
-        val activityManager = getSystemService(ActivityManager::class.java)
-        if (!activityManager.startProfile(supervisingUser)) {
-            errorHandler("Unable to start supervising user, cannot set credentials.")
-            return
-        }
 
-        val intent =
-            Intent(this, ChooseLockGeneric::class.java).apply {
-                // To go directly to setting up a PIN
-                putExtra(
-                    LockPatternUtils.PASSWORD_TYPE_KEY,
-                    DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
-                )
+        // Post the heavy logic to run after the current drawing pass.
+        // This allows the activity transition animation to run smoothly first.
+        window.decorView.post {
+            val supervisingUser = supervisingUserHandle
+            if (supervisingUser == null) {
+                errorHandler("SupervisingUserHandle is null")
+                return@post
             }
-        startActivityForResultAsUser(
-            intent,
-            REQUEST_CODE_SUPERVISION_CREDENTIALS_PROXY,
-            supervisingUser,
-        )
+            val activityManager = getSystemService(ActivityManager::class.java)
+            if (!activityManager.startProfile(supervisingUser)) {
+                errorHandler("Unable to start supervising user, cannot set credentials.")
+                return@post
+            }
+
+            val intent =
+                Intent(this, ChooseLockGeneric::class.java).apply {
+                    // To go directly to setting up a PIN
+                    putExtra(
+                        LockPatternUtils.PASSWORD_TYPE_KEY,
+                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
+                    )
+                }
+            startActivityForResultAsUser(
+                intent,
+                REQUEST_CODE_SUPERVISION_CREDENTIALS_PROXY,
+                supervisingUser,
+            )
+        }
     }
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])

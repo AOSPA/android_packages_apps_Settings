@@ -78,4 +78,12 @@
         settings:seekBarIncrement="1"
         settings:controller="com.android.settings.inputmethod.MouseScrollingSpeedPreferenceController"/>
 
+    <Preference
+        android:fragment="com.android.settings.inputmethod.ActionCornerFragment"
+        android:key="action_corners"
+        android:title="@string/action_corner_title"
+        android:summary="@string/action_corner_summary"
+        settings:controller="com.android.settings.inputmethod.ActionCornerPreferenceController"
+        android:order="66"/>
+
 </PreferenceScreen>

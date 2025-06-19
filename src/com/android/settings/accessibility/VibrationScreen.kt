@@ -20,10 +20,13 @@ import android.content.Context
 import android.os.Vibrator
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.Settings.VibrationSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceCategory
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
@@ -63,6 +66,7 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
             if (Flags.catalystVibrationIntensityScreen25q4()) {
                 +CallVibrationPreferenceCategory() += {
                     +RingVibrationIntensitySwitchPreference(context)
+                    +RampingRingerVibrationSwitchPreference(context)
                 }
                 +NotificationAlarmVibrationPreferenceCategory() += {
                     +NotificationVibrationIntensitySwitchPreference(context)
@@ -75,6 +79,9 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
                 }
             }
         }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, VibrationSettingsActivity::class.java, metadata?.key)
 
     companion object {
         const val KEY = "vibration_screen"

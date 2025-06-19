@@ -70,7 +70,6 @@ class SupervisionSetupRecoveryPreference :
         return accountNameToVerify(context)?.asMaskedEmail()
     }
 
-    // TODO(b/409837094): get icon with dynamic color.
     override val icon: Int
         @DrawableRes get() = R.drawable.exclamation_icon
 

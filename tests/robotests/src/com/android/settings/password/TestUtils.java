@@ -28,6 +28,8 @@ import android.content.pm.ServiceInfo;
 import com.android.security.SecureBox;
 import com.android.settings.R;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 import org.robolectric.Robolectric;
 
 import java.security.NoSuchAlgorithmException;
@@ -81,7 +83,8 @@ public final class TestUtils {
                 .putExtra(ConfirmDeviceCredentialBaseFragment.IS_REMOTE_LOCKSCREEN_VALIDATION, true)
                 .putExtra(KeyguardManager.EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION,
                         createRemoteLockscreenValidationSession(lockscreenType, remainingAttempts))
-                .putExtra(Intent.EXTRA_COMPONENT_NAME, COMPONENT_NAME);
+                .putExtra(Intent.EXTRA_COMPONENT_NAME, COMPONENT_NAME)
+                .putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
     }
 
     public static Intent createRemoteLockscreenValidationIntentWithGlifExpressiveStyle(

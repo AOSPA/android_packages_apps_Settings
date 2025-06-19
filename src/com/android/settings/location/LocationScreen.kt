@@ -75,8 +75,7 @@ open class LocationScreen :
             else -> R.drawable.ic_settings_location
         }
 
-    override fun isFlagEnabled(context: Context) =
-        Flags.catalystLocationSettings() || Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = Flags.catalystLocationSettings()
 
     override fun hasCompleteHierarchy() = false
 

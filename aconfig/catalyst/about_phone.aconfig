@@ -9,6 +9,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_device_model"
+  namespace: "android_settings"
+  description: "Flag for Model"
+  bug: "405344827"
+}
+
+flag {
   name: "catalyst_firmware_version"
   namespace: "android_settings"
   description: "Flag for Android version"

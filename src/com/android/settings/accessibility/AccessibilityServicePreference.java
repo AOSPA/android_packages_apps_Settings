@@ -31,6 +31,7 @@ import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.utils.ThreadUtils;
@@ -65,8 +66,7 @@ public class AccessibilityServicePreference extends RestrictedPreference {
         setTitle(mA11yServiceInfo.getResolveInfo().loadLabel(mPm));
         setSummary(AccessibilitySettings.getServiceSummary(
                 getContext(), mA11yServiceInfo, mServiceEnabled));
-        setFragment(RestrictedPreferenceHelper.getAccessibilityServiceFragmentTypeName(
-                mA11yServiceInfo));
+        setFragment(A11yServicePreferenceFragment.class.getName());
         setIconSize(ICON_SIZE_MEDIUM);
         setIconSpaceReserved(true);
         setPersistent(false); // Disable SharedPreferences.
