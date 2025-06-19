@@ -467,6 +467,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                     moveToState(existingPreference, AudioStreamState.SOURCE_ADDED);
                     return existingPreference;
                 });
+        mMediaControlHelper.start();
     }
 
     // Find preference by receiveState and decide next state.
@@ -550,6 +551,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                     moveToState(existingPreference, AudioStreamState.SOURCE_PRESENT);
                     return existingPreference;
                 });
+        mMediaControlHelper.stop();
     }
 
     // Find preference by metadata and decide next state.
