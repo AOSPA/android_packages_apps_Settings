@@ -17,6 +17,7 @@ package com.android.settings.accessibility.textreading.ui
 
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import org.junit.Test
 
 class TextReadingScreenTest : SettingsCatalystTestCase() {
 
@@ -25,5 +26,6 @@ class TextReadingScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_TEXT_READING_SCREEN
 
+    @Test
     override fun migration() {}
 }

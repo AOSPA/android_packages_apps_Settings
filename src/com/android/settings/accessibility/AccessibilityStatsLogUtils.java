@@ -63,7 +63,7 @@ public final class AccessibilityStatsLogUtils {
      * @param durationMills    duration in milliseconds between starting the page and disabling the
      *                    service
      */
-    static void logDisableNonA11yCategoryService(String packageName, long durationMills) {
+    public static void logDisableNonA11yCategoryService(String packageName, long durationMills) {
         com.android.internal.accessibility.util.AccessibilityStatsLogUtils
                 .logNonA11yToolServiceWarningReported(
                         packageName,

@@ -19,6 +19,7 @@ package com.android.settings.datausage
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import org.junit.Test
 
 class DataSaverScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator =
@@ -27,5 +28,6 @@ class DataSaverScreenTest : SettingsCatalystTestCase() {
     override val flagName
         get() = Flags.FLAG_CATALYST_RESTRICT_BACKGROUND_PARENT_ENTRY
 
+    @Test
     override fun migration() {}
 }

@@ -17,7 +17,14 @@
 package com.android.settings.accessibility.screenmagnification
 
 import android.content.Context
+import android.database.ContentObserver
+import android.net.Uri
+import android.os.Handler
+import android.os.Looper
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
+import androidx.preference.PreferenceScreen
 import com.android.settings.accessibility.MagnificationCapabilities
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.extensions.isWindowMagnificationSupported
@@ -25,7 +32,15 @@ import com.android.settings.core.BasePreferenceController
 
 /** Handles the magnification mode preference content and its click behavior */
 class ModePreferenceController(context: Context, prefKey: String) :
-    BasePreferenceController(context, prefKey) {
+    BasePreferenceController(context, prefKey), DefaultLifecycleObserver {
+
+    private var preference: Preference? = null
+    private val contentObserver: ContentObserver =
+        object : ContentObserver(Handler(Looper.getMainLooper())) {
+            override fun onChange(selfChange: Boolean, uri: Uri?) {
+                preference?.run { updateState(this) }
+            }
+        }
 
     override fun getAvailabilityStatus(): Int {
         return if (mContext.isInSetupWizard() || !mContext.isWindowMagnificationSupported()) {
@@ -33,6 +48,20 @@ class ModePreferenceController(context: Context, prefKey: String) :
         } else {
             AVAILABLE
         }
+    }
+
+    override fun onStart(owner: LifecycleOwner) {
+        MagnificationCapabilities.registerObserver(mContext, contentObserver)
+    }
+
+    override fun onStop(owner: LifecycleOwner) {
+        MagnificationCapabilities.unregisterObserver(mContext, contentObserver)
+    }
+
+    override fun displayPreference(screen: PreferenceScreen?) {
+        super.displayPreference(screen)
+        preference = screen?.findPreference(preferenceKey)
+        updateState(preference)
     }
 
     override fun getSummary(): CharSequence? {

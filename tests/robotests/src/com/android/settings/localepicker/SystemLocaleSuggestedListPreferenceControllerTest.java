@@ -36,6 +36,7 @@ import android.app.IActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.LocaleList;
 import android.os.Looper;
 import android.platform.test.annotations.DisableFlags;
@@ -69,11 +70,15 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowLocaleList;
 import org.robolectric.shadows.ShadowTelephonyManager;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -85,6 +90,7 @@ public class SystemLocaleSuggestedListPreferenceControllerTest {
             "system_language_suggested_category";
     private static final String KEY_SUGGESTED = "system_locale_suggested_list";
     private static final String LOCALE_URDU_INDIA = "اردو (بھارت)";
+    private static final int CURRENT = LocaleStore.LocaleInfo.SUGGESTION_TYPE_CURRENT;
 
     private Context mContext;
     private FragmentActivity mActivity;
@@ -92,6 +98,7 @@ public class SystemLocaleSuggestedListPreferenceControllerTest {
     private PreferenceScreen mPreferenceScreen;
     private SystemLocaleSuggestedListPreferenceController mController;
     private List<LocaleStore.LocaleInfo> mLocaleList;
+    private List<LocaleStore.LocaleInfo> mSuggestedLocaleList;
     private Map<String, Preference> mPreferences = new ArrayMap<>();
     @Mock
     private PreferenceManager mPreferenceManager;
@@ -276,5 +283,53 @@ public class SystemLocaleSuggestedListPreferenceControllerTest {
 
         verify(mFragmentTransaction).add(any(RegionDialogFragment.class),
                 eq(TAG_DIALOG_CHANGE_REGION_PREFERRED_LANGUAGE));
+    }
+
+    @Test
+    public void setupPreference_checkLocaleByXml() throws Exception {
+        mSuggestedLocaleList = new ArrayList<>();
+        // Get each locale from resource: locale_config.xml
+        final String[] localeNames = Resources.getSystem().getStringArray(
+                Resources.getSystem().getIdentifier("supported_locales", "array", "android"));
+        final Configuration config = new Configuration();
+        Locale[] locales = new Locale[localeNames.length];
+        for (int i = 0; i < localeNames.length; i++) {
+            locales[i] = Locale.forLanguageTag(localeNames[i]);
+            // Suggested list: "en-US"
+            LocaleStore.LocaleInfo localeInfo = LocaleStore.fromLocale(locales[i]);
+            if (localeInfo.getLocale().toLanguageTag().equals("en-US")) {
+                localeInfo.mSuggestionFlags = CURRENT;
+                mSuggestedLocaleList.add(localeInfo);
+            }
+        }
+        // Set the list which get from resource(locale_config.xml) into configuration
+        LocaleList localelist = new LocaleList(locales);
+        config.setLocales(localelist);
+        when(mActivityService.getConfiguration()).thenReturn(config);
+        // Remove the "-" and duplicated items from array: supported list
+        Set<String> localeItems = new HashSet<>();
+        for (String localeName : localeNames) {
+            localeItems.add(localeName.substring(0, localeName.indexOf('-')));
+        }
+        // Set the suggested list to the suggested preference controller
+        ReflectionHelpers.setField(mController, "mLocaleOptions", mSuggestedLocaleList);
+        ReflectionHelpers.setField(mController, "mPreferenceCategory", mPreferenceCategory);
+        mController.setupPreference(mSuggestedLocaleList, mPreferences);
+
+        assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(1);
+        assertThat(mPreferenceCategory.getPreference(0).getTitle()).isEqualTo(
+                "English (United States)");
+
+        // Check the language of the suggested locale should be "en"
+        String suggestedLocaleName = mSuggestedLocaleList.get(0).toString();
+        suggestedLocaleName = suggestedLocaleName.substring(0, suggestedLocaleName.indexOf('-'));
+
+        assertThat(suggestedLocaleName).isEqualTo("en");
+
+        // Check the size of list after removing the suggested locale
+        int originalSize = localeItems.size();
+        localeItems.removeIf(localeInfo -> localeInfo.equals("en"));
+
+        assertThat(localeItems.size() == originalSize - 1).isTrue();
     }
 }

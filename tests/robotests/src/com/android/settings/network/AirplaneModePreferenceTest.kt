@@ -22,14 +22,13 @@ import android.content.ContextWrapper
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.FEATURE_LEANBACK
 import android.content.res.Resources
-import android.provider.Settings.Global.AIRPLANE_MODE_ON
 import android.telephony.TelephonyManager
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.testutils.MetricsRule
-import com.android.settingslib.datastore.SettingsGlobalStore
+import com.android.settings.testutils.SettingsStoreRule
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
@@ -43,7 +42,8 @@ import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class AirplaneModePreferenceTest {
-    @Rule(order = 0) @JvmField val metricsRule = MetricsRule()
+    @get:Rule(order = 0) val metricsRule = MetricsRule()
+    @get:Rule(order = 1) val settingsStoreRule = SettingsStoreRule()
 
     private val mockResources = mock<Resources>()
     private val mockPackageManager = mock<PackageManager>()
@@ -68,6 +68,7 @@ class AirplaneModePreferenceTest {
         }
 
     private val airplaneModePreference = AirplaneModePreference()
+    private val airplaneModeDataStore = AirplaneModePreference.createDataStore(context)
 
     @Test
     fun isAvailable_hasConfigAndNoFeatureLeanback_shouldReturnTrue() {
@@ -94,45 +95,32 @@ class AirplaneModePreferenceTest {
     }
 
     @Test
-    fun getValue_defaultOn_returnOn() {
-        SettingsGlobalStore.get(context).setInt(AIRPLANE_MODE_ON, 1)
-
-        val getValue =
-            airplaneModePreference.storage(context).getBoolean(AirplaneModePreference.KEY)
-
-        assertThat(getValue).isTrue()
+    fun noValueInDataStore() {
+        assertThat(airplaneModeDataStore.contains(AirplaneModePreference.KEY)).isFalse()
+        assertThat(airplaneModeDataStore.getBoolean(AirplaneModePreference.KEY))
+            .isEqualTo(AirplaneModePreference.DEFAULT_VALUE)
     }
 
     @Test
-    fun getValue_defaultOff_returnOff() {
-        SettingsGlobalStore.get(context).setInt(AIRPLANE_MODE_ON, 0)
-
-        val getValue =
-            airplaneModePreference.storage(context).getBoolean(AirplaneModePreference.KEY)
-
-        assertThat(getValue).isFalse()
-    }
-
-    @Test
-    fun performClick_defaultOn_checkedIsFalse() {
-        SettingsGlobalStore.get(context).setInt(AIRPLANE_MODE_ON, 1)
+    fun toggleOn_performClick_isCheckedReturnFalse() {
+        airplaneModeDataStore.setBoolean(AirplaneModePreference.KEY, true)
 
         val preference = getSwitchPreference().apply { performClick() }
 
         assertThat(preference.isChecked).isFalse()
         verify(metricsRule.metricsFeatureProvider)
-            .changed(SETTINGS_NETWORK_CATEGORY, AIRPLANE_MODE_ON, 0)
+            .changed(SETTINGS_NETWORK_CATEGORY, AirplaneModePreference.KEY, 0)
     }
 
     @Test
-    fun performClick_defaultOff_checkedIsTrue() {
-        SettingsGlobalStore.get(context).setInt(AIRPLANE_MODE_ON, 0)
+    fun toggleOff_performClick_isCheckedReturnTrue() {
+        airplaneModeDataStore.setBoolean(AirplaneModePreference.KEY, false)
 
         val preference = getSwitchPreference().apply { performClick() }
 
         assertThat(preference.isChecked).isTrue()
         verify(metricsRule.metricsFeatureProvider)
-            .changed(SETTINGS_NETWORK_CATEGORY, AIRPLANE_MODE_ON, 1)
+            .changed(SETTINGS_NETWORK_CATEGORY, AirplaneModePreference.KEY, 1)
     }
 
     private fun getSwitchPreference(): SwitchPreferenceCompat =

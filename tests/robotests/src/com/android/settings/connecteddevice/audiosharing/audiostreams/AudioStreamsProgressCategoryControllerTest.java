@@ -26,6 +26,7 @@ import static com.android.settings.connecteddevice.audiosharing.audiostreams.Aud
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.SYNCED;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.WAIT_FOR_SYNC;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.UNSET_BROADCAST_ID;
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.getStateHandler;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.STREAMING;
 import static com.android.settingslib.flags.Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX;
@@ -69,6 +70,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamScanHelper;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamsHelper;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -105,16 +107,18 @@ import java.util.Map;
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
-            ShadowBluetoothUtils.class,
-            ShadowAudioStreamsHelper.class,
-            ShadowAudioStreamScanHelper.class,
-            ShadowThreadUtils.class,
-            ShadowAlertDialogCompat.class,
-            ShadowBluetoothAdapter.class,
+                ShadowBluetoothUtils.class,
+                ShadowAudioStreamsHelper.class,
+                ShadowAudioStreamScanHelper.class,
+                ShadowThreadUtils.class,
+                ShadowAlertDialogCompat.class,
+                ShadowBluetoothAdapter.class,
         })
 public class AudioStreamsProgressCategoryControllerTest {
-    @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String VALID_METADATA =
             "BLUETOOTH:UUID:184F;BN:VGVzdA==;AT:1;AD:00A1A1A1A1A1;BI:1E240;BC:VGVzdENvZGU=;"
@@ -125,20 +129,30 @@ public class AudioStreamsProgressCategoryControllerTest {
     private static final int NEWLY_FOUND_BROADCAST_ID = 3;
     private static final String BROADCAST_NAME_1 = "name_1";
     private static final String BROADCAST_NAME_2 = "name_2";
-    private static final byte[] BROADCAST_CODE = new byte[] {1};
+    private static final byte[] BROADCAST_CODE = new byte[]{1};
     private final Context mContext = spy(ApplicationProvider.getApplicationContext());
-    @Mock private LocalBluetoothManager mLocalBtManager;
-    @Mock private BluetoothEventManager mBluetoothEventManager;
+    @Mock
+    private LocalBluetoothManager mLocalBtManager;
+    @Mock
+    private BluetoothEventManager mBluetoothEventManager;
     @Mock
     private AccessibilityManager mAccessibilityManager;
-    @Mock private PreferenceScreen mScreen;
-    @Mock private AudioStreamsHelper mAudioStreamsHelper;
-    @Mock private AudioStreamScanHelper mAudioStreamScanHelper;
-    @Mock private LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
-    @Mock private BluetoothLeBroadcastMetadata mMetadata;
-    @Mock private CachedBluetoothDevice mDevice;
-    @Mock private AudioStreamsProgressCategoryPreference mPreference;
-    @Mock private BluetoothDevice mSourceDevice;
+    @Mock
+    private PreferenceScreen mScreen;
+    @Mock
+    private AudioStreamsHelper mAudioStreamsHelper;
+    @Mock
+    private AudioStreamScanHelper mAudioStreamScanHelper;
+    @Mock
+    private LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
+    @Mock
+    private BluetoothLeBroadcastMetadata mMetadata;
+    @Mock
+    private CachedBluetoothDevice mDevice;
+    @Mock
+    private AudioStreamsProgressCategoryPreference mPreference;
+    @Mock
+    private BluetoothDevice mSourceDevice;
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
     private Fragment mFragment;
@@ -980,6 +994,71 @@ public class AudioStreamsProgressCategoryControllerTest {
         assertThat(preferences.get(1).getAudioStreamBroadcastId())
                 .isEqualTo(NEWLY_FOUND_BROADCAST_ID);
         assertThat(states.get(1)).isEqualTo(ADD_SOURCE_BAD_CODE);
+    }
+
+    @Test
+    public void testGetStateHandler_SyncedState() {
+        AudioStreamStateHandler handler = getStateHandler(AudioStreamState.SYNCED);
+        assertThat(handler).isNotNull();
+        assertThat(handler).isInstanceOf(SyncedState.class);
+    }
+
+    @Test
+    public void testGetStateHandler_WaitForSyncState() {
+        AudioStreamStateHandler handler = getStateHandler(AudioStreamState.WAIT_FOR_SYNC);
+        assertThat(handler).isNotNull();
+        assertThat(handler).isInstanceOf(WaitForSyncState.class);
+    }
+
+    @Test
+    public void testGetStateHandler_AddSourceWaitForResponseState() {
+        AudioStreamStateHandler handler = getStateHandler(
+                AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE);
+        assertThat(handler).isNotNull();
+        assertThat(handler).isInstanceOf(AddSourceWaitForResponseState.class);
+    }
+
+    @Test
+    public void testGetStateHandler_AddSourceWaitForResponseFromQrState() {
+        AudioStreamStateHandler handler = getStateHandler(
+                AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR);
+        assertThat(handler).isNotNull();
+        assertThat(handler).isInstanceOf(AddSourceWaitForResponseFromQrState.class);
+    }
+
+    @Test
+    public void testGetStateHandler_AddSourceBadCodeState() {
+        AudioStreamStateHandler handler = getStateHandler(AudioStreamState.ADD_SOURCE_BAD_CODE);
+        assertThat(handler).isNotNull();
+        assertThat(handler).isInstanceOf(AddSourceBadCodeState.class);
+    }
+
+    @Test
+    public void testGetStateHandler_AddSourceFailedState() {
+        AudioStreamStateHandler handler = getStateHandler(AudioStreamState.ADD_SOURCE_FAILED);
+        assertThat(handler).isNotNull();
+        assertThat(handler).isInstanceOf(AddSourceFailedState.class);
+    }
+
+    @Test
+    public void testGetStateHandler_SourcePresentState() {
+        AudioStreamStateHandler handler = getStateHandler(AudioStreamState.SOURCE_PRESENT);
+        assertThat(handler).isNotNull();
+        assertThat(handler).isInstanceOf(SourcePresentState.class);
+    }
+
+    @Test
+    public void testGetStateHandler_SourceAddedState() {
+        AudioStreamStateHandler handler = getStateHandler(AudioStreamState.SOURCE_ADDED);
+        assertThat(handler).isNotNull();
+        assertThat(handler).isInstanceOf(SourceAddedState.class);
+    }
+
+    @Test
+    public void testGetStateHandler_SourceLostState() {
+        AudioStreamStateHandler handler = getStateHandler(AudioStreamState.SOURCE_LOST);
+        assertThat(handler).isNotNull();
+        assertThat(handler).isInstanceOf(SourceLostState.class);
     }
 
     private static BluetoothLeBroadcastReceiveState createConnectedMock(int id) {

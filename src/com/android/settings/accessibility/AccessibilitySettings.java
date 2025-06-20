@@ -84,16 +84,11 @@ public class AccessibilitySettings extends BaseSupportFragment implements
     static final String EXTRA_RESOLVE_INFO = "resolve_info";
     static final String EXTRA_SUMMARY = "summary";
     static final String EXTRA_INTRO = "intro";
-    static final String EXTRA_SETTINGS_TITLE = "settings_title";
     public static final String EXTRA_COMPONENT_NAME = "component_name";
-    static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
-    static final String EXTRA_TILE_SERVICE_COMPONENT_NAME = "tile_service_component_name";
     static final String EXTRA_LAUNCHED_FROM_SUW = "from_suw";
     static final String EXTRA_ANIMATED_IMAGE_RES = "animated_image_res";
     static final String EXTRA_HTML_DESCRIPTION = "html_description";
-    static final String EXTRA_TIME_FOR_LOGGING = "start_time_to_log_a11y_tool";
-    static final String EXTRA_METRICS_CATEGORY = "metrics_category";
-    static final String EXTRA_FEEDBACK_CATEGORY = "feedback_category";
+    public static final String EXTRA_TIME_FOR_LOGGING = "start_time_to_log_a11y_tool";
 
     // Timeout before we update the services if packages are added/removed
     // since the AccessibilityManagerService has to do that processing first

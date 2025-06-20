@@ -20,6 +20,7 @@ import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
 import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
+import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
@@ -231,5 +232,49 @@ public class SatelliteSettingAccountInfoControllerTest {
 
         assertThat(preference.getTitle().toString()).isEqualTo(
                 ResourcesUtils.getResourcesString(mContext, "title_no_satellite_plan"));
+    }
+
+    @Test
+    public void displayPreference_showEligibleUiAndNoSummary_showSmsAccountStateOnly() {
+        mPersistableBundle.putString(KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING, "A link");
+        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
+        mController = new SatelliteSettingAccountInfoController(mContext,
+                PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN) {
+            @Override
+            protected boolean isSatelliteEligible() {
+                return false;
+            }
+        };
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, false);
+        PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
+        PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
+        preferenceCategory.setKey(PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN);
+        Preference preference = new Preference(mContext);
+        preference.setKey(PREF_KEY_YOUR_SATELLITE_PLAN);
+        screen.addPreference(preferenceCategory);
+        screen.addPreference(preference);
+
+        mController.displayPreference(screen);
+
+        assertThat(preference.getTitle().toString()).isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "title_no_satellite_plan"));
+        assertThat(preference.getSummary()).isNotEqualTo(null);
+
+        // Test non eligible UI when UI is updated by async call.
+        mController = new SatelliteSettingAccountInfoController(mContext,
+                PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN) {
+            @Override
+            protected boolean isSatelliteEligible() {
+                return true;
+            }
+        };
+        mController.setCarrierRoamingNtnAvailability(true, false);
+
+        mController.displayPreference(screen);
+
+        assertThat(preference.getTitle().toString()).isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "title_have_satellite_plan"));
+        assertThat(preference.getSummary()).isEqualTo(null);
     }
 }

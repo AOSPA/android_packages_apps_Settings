@@ -341,27 +341,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    public void getServiceDescription_serviceCrash_showsStopped() {
-        mServiceInfo.crashed = true;
-
-        String description = AccessibilitySettings.getServiceDescription(mContext,
-                mServiceInfo, SERVICE_ENABLED).toString();
-
-        assertThat(description).isEqualTo(
-                mContext.getString(R.string.accessibility_description_state_stopped));
-    }
-
-    @Test
-    public void getServiceDescription_haveDescription_showsDescription() {
-        doReturn(DEFAULT_DESCRIPTION).when(mServiceInfo).loadDescription(any());
-
-        String description = AccessibilitySettings.getServiceDescription(mContext,
-                mServiceInfo, SERVICE_ENABLED).toString();
-
-        assertThat(description).isEqualTo(DEFAULT_DESCRIPTION);
-    }
-
-    @Test
     public void onCreate_haveRegisterToSpecificUrisAndActions() {
         setupFragment();
 

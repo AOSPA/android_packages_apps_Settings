@@ -75,6 +75,7 @@ class NetworkProviderScreenTest : SettingsCatalystTestCase() {
         assertThat(underTest.getStringExtra(EXTRA_FRAGMENT_ARG_KEY)).isEqualTo("preference_key")
     }
 
+    @Test
     override fun migration() {}
 }
 

@@ -17,6 +17,7 @@ package com.android.settings.language
 
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import org.junit.Test
 
 class LanguageSettingScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = LanguageSettingScreen()
@@ -24,5 +25,6 @@ class LanguageSettingScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_LANGUAGE_SETTING
 
+    @Test
     override fun migration() {}
 }

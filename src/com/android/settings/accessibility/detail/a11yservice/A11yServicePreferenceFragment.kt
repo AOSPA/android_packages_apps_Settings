@@ -22,7 +22,11 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.database.ContentObserver
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.SystemClock
 import android.provider.Settings
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.FragmentResultListener
@@ -33,11 +37,13 @@ import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.E
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_TOGGLE
 import com.android.settings.accessibility.AccessibilitySettings
+import com.android.settings.accessibility.AccessibilityStatsLogUtils
 import com.android.settings.accessibility.ShortcutFragment
 import com.android.settings.accessibility.ShortcutPreference
 import com.android.settings.accessibility.ToggleShortcutPreferenceController
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.extensions.getFeatureName
+import com.android.settings.accessibility.extensions.isServiceEnabled
 import com.android.settings.accessibility.extensions.isServiceWarningRequired
 import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceController
 import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment
@@ -48,6 +54,8 @@ import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 /** Fragment that shows the detail screen of an AccessibilityService */
 open class A11yServicePreferenceFragment : ShortcutFragment() {
     private val tag = A11yServicePreferenceFragment::class.simpleName
+    private var disabledStateLogged = false
+    private var startTimeMillisForLogging = 0L
     private var serviceInfo: AccessibilityServiceInfo? = null
     private val fragmentResultListener =
         object : FragmentResultListener {
@@ -69,6 +77,17 @@ open class A11yServicePreferenceFragment : ShortcutFragment() {
                 val packageName = intent.getData()?.getSchemeSpecificPart()
                 if (serviceInfo?.componentName?.packageName == packageName) {
                     finish()
+                }
+            }
+        }
+
+    private var contentObserver: ContentObserver =
+        object : ContentObserver(Looper.myLooper()?.run { Handler(/* async= */ false) }) {
+            override fun onChange(selfChange: Boolean) {
+                context?.run {
+                    if (serviceInfo?.isServiceEnabled(this) == false) {
+                        logDisabledState(serviceInfo?.componentName?.packageName)
+                    }
                 }
             }
         }
@@ -199,6 +218,11 @@ open class A11yServicePreferenceFragment : ShortcutFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        startTimeMillisForLogging =
+            arguments?.getLong(AccessibilitySettings.EXTRA_TIME_FOR_LOGGING) ?: 0L
+        if (savedInstanceState?.containsKey(KEY_HAS_LOGGED) == true) {
+            disabledStateLogged = savedInstanceState.getBoolean(KEY_HAS_LOGGED)
+        }
         requireActivity().setTitle(getFeatureName())
         registerPackageRemoveReceiver()
         childFragmentManager.setFragmentResultListener(
@@ -206,11 +230,27 @@ open class A11yServicePreferenceFragment : ShortcutFragment() {
             this,
             fragmentResultListener,
         )
+
+        requireContext()
+            .contentResolver
+            .registerContentObserver(
+                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_ENABLED),
+                false,
+                contentObserver,
+            )
     }
 
     override fun onDestroy() {
         super.onDestroy()
         unregisterPackageRemoveReceiver()
+        requireContext().contentResolver.unregisterContentObserver(contentObserver)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (startTimeMillisForLogging > 0) {
+            outState.putBoolean(KEY_HAS_LOGGED, disabledStateLogged)
+        }
     }
 
     override fun getFeatureName(): CharSequence {
@@ -322,7 +362,18 @@ open class A11yServicePreferenceFragment : ShortcutFragment() {
         context?.unregisterReceiver(packageRemovedReceiver)
     }
 
+    private fun logDisabledState(packageName: String?) {
+        if (startTimeMillisForLogging > 0 && !disabledStateLogged) {
+            AccessibilityStatsLogUtils.logDisableNonA11yCategoryService(
+                packageName,
+                SystemClock.elapsedRealtime() - startTimeMillisForLogging,
+            )
+            disabledStateLogged = true
+        }
+    }
+
     companion object {
         @VisibleForTesting const val SERVICE_WARNING_DIALOG_REQUEST_CODE = "serviceWarningRequest"
+        @VisibleForTesting const val KEY_HAS_LOGGED = "has_logged"
     }
 }

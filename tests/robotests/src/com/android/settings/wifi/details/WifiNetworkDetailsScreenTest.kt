@@ -42,5 +42,6 @@ class WifiNetworkDetailsScreenTest : SettingsCatalystTestCase() {
         assertThat(preferenceScreenCreator.key).isEqualTo(WifiNetworkDetailsScreen.KEY)
     }
 
+    @Test
     override fun migration() {}
 }

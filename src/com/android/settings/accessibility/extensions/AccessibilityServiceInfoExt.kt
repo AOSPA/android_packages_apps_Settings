@@ -49,3 +49,7 @@ fun AccessibilityServiceInfo.useService(context: Context, enabled: Boolean) {
     AccessibilityStatsLogUtils.logAccessibilityServiceEnabled(componentName, enabled)
     AccessibilityUtils.setAccessibilityServiceState(context, componentName, enabled)
 }
+
+fun AccessibilityServiceInfo.isServiceEnabled(context: Context): Boolean {
+    return AccessibilityUtils.getEnabledServicesFromSettings(context).contains(componentName)
+}

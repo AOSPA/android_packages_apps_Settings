@@ -69,6 +69,8 @@ class NearbySharePreferenceController(private val context: Context, key: String)
 
         preference.findViewById<TextView>(R.id.nearby_sharing_suggestion_title).text =
             context.getString(R.string.bluetooth_try_nearby_share_title, nearbyLabel)
+        preference.findViewById<TextView>(R.id.nearby_sharing_suggestion_summary).text =
+            context.getString(R.string.bluetooth_try_nearby_share_summary, nearbyLabel)
         FeatureFactory.featureFactory.metricsFeatureProvider.action(
             SettingsEnums.PAGE_UNKNOWN,
             SettingsEnums.ACTION_NEARBY_SHARE_ENTRYPOINT_SHOWN,

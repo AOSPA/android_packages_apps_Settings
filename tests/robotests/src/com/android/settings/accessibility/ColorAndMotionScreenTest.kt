@@ -19,6 +19,7 @@ package com.android.settings.accessibility
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import org.junit.Test
 
 class ColorAndMotionScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator: PreferenceScreenMixin = ColorAndMotionScreen()
@@ -26,5 +27,6 @@ class ColorAndMotionScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_ACCESSIBILITY_COLOR_AND_MOTION
 
+    @Test
     override fun migration() {}
 }

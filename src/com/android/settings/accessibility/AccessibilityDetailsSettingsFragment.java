@@ -31,7 +31,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
@@ -39,17 +38,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.R;
 import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
 
@@ -192,56 +187,12 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
 
     private Bundle buildArguments(AccessibilityServiceInfo info) {
         final ResolveInfo resolveInfo = info.getResolveInfo();
-        final String title = resolveInfo.loadLabel(getActivity().getPackageManager()).toString();
         final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
         final String packageName = serviceInfo.packageName;
         final ComponentName componentName = new ComponentName(packageName, serviceInfo.name);
 
-        final Set<ComponentName> enabledServices =
-                AccessibilityUtils.getEnabledServicesFromSettings(getActivity());
-        final boolean serviceEnabled = enabledServices.contains(componentName);
-        String description = info.loadDescription(getActivity().getPackageManager());
-
-        if (serviceEnabled && info.crashed) {
-            // Update the summaries for services that have crashed.
-            description = getString(R.string.accessibility_description_state_stopped);
-        }
-
         final Bundle extras = new Bundle();
-        extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
-                componentName.flattenToString());
-        extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED, serviceEnabled);
-        extras.putString(AccessibilitySettings.EXTRA_TITLE, title);
-        extras.putParcelable(AccessibilitySettings.EXTRA_RESOLVE_INFO, resolveInfo);
-        extras.putString(AccessibilitySettings.EXTRA_SUMMARY, description);
-
-        final String settingsClassName = info.getSettingsActivityName();
-        if (!TextUtils.isEmpty(settingsClassName)) {
-            extras.putString(AccessibilitySettings.EXTRA_SETTINGS_TITLE,
-                    getString(R.string.accessibility_menu_item_settings));
-            extras.putString(AccessibilitySettings.EXTRA_SETTINGS_COMPONENT_NAME,
-                    new ComponentName(packageName, settingsClassName).flattenToString());
-        }
-
-        final String tileServiceClassName = info.getTileServiceName();
-        if (!TextUtils.isEmpty(tileServiceClassName)) {
-            extras.putString(AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME,
-                    new ComponentName(packageName, tileServiceClassName).flattenToString());
-        }
-
-        final int pageIdCategory = FeatureFactory.getFeatureFactory()
-                .getAccessibilityPageIdFeatureProvider().getCategory(componentName);
-        extras.putInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY, pageIdCategory);
-        extras.putInt(AccessibilitySettings.EXTRA_FEEDBACK_CATEGORY, pageIdCategory);
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
-        extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
-
-        final String htmlDescription = info.loadHtmlDescription(getActivity().getPackageManager());
-        extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
-
-        final CharSequence intro = info.loadIntro(getActivity().getPackageManager());
-        extras.putCharSequence(AccessibilitySettings.EXTRA_INTRO, intro);
-
         // We will log nonA11yTool status from PolicyWarningUIController; others none.
         extras.putLong(AccessibilitySettings.EXTRA_TIME_FOR_LOGGING,
                 getActivity().getIntent().getLongExtra(

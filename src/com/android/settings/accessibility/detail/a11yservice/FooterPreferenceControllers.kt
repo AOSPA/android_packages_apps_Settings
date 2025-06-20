@@ -18,38 +18,55 @@ package com.android.settings.accessibility.detail.a11yservice
 
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
+import android.text.TextUtils
 import com.android.settings.R
 import com.android.settings.accessibility.HtmlFooterPreferenceController
 import com.android.settings.accessibility.extensions.getFeatureName
+import com.android.settings.accessibility.extensions.isServiceEnabled
 
-open class AccessibilityServiceHtmlFooterPreferenceController(context: Context, prefKey: String) :
+class AccessibilityServiceHtmlFooterPreferenceController(context: Context, prefKey: String) :
     HtmlFooterPreferenceController(context, prefKey) {
 
-    open fun initialize(serviceInfo: AccessibilityServiceInfo) {
+    fun initialize(serviceInfo: AccessibilityServiceInfo) {
         super.initialize(serviceInfo.componentName)
         val packageManager = mContext.packageManager!!
         serviceInfo.loadHtmlDescription(packageManager)?.let {
             setSummary(it, isHtml = true)
 
-            introductionTitle = mContext.getString(
-                R.string.accessibility_introduction_title,
-                serviceInfo.getFeatureName(mContext))
+            introductionTitle =
+                mContext.getString(
+                    R.string.accessibility_introduction_title,
+                    serviceInfo.getFeatureName(mContext),
+                )
         }
     }
 }
 
 class AccessibilityServiceFooterPreferenceController(context: Context, prefKey: String) :
-    AccessibilityServiceHtmlFooterPreferenceController(context, prefKey) {
+    HtmlFooterPreferenceController(context, prefKey) {
 
-    override fun initialize(serviceInfo: AccessibilityServiceInfo) {
+    fun initialize(serviceInfo: AccessibilityServiceInfo) {
         super.initialize(serviceInfo.componentName)
-        val packageManager = mContext.packageManager!!
-        serviceInfo.loadDescription(packageManager)?.let {
-            setSummary(it, isHtml = false)
 
-            introductionTitle = mContext.getString(
-                R.string.accessibility_introduction_title,
-                serviceInfo.getFeatureName(mContext))
+        val packageManager = mContext.packageManager!!
+        val description =
+            if (shouldShowCrashDescription(serviceInfo)) {
+                mContext.getText(R.string.accessibility_description_state_stopped)
+            } else {
+                serviceInfo.loadDescription(packageManager)
+            }
+
+        if (!TextUtils.isEmpty(description)) {
+            setSummary(description, isHtml = false)
+            introductionTitle =
+                mContext.getString(
+                    R.string.accessibility_introduction_title,
+                    serviceInfo.getFeatureName(mContext),
+                )
         }
+    }
+
+    private fun shouldShowCrashDescription(serviceInfo: AccessibilityServiceInfo): Boolean {
+        return serviceInfo.isServiceEnabled(mContext) && serviceInfo.crashed
     }
 }

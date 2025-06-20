@@ -88,4 +88,22 @@ public class AudioStreamsDialogFragmentTest {
         AudioStreamsDialogFragment.dismissAll(mFragment);
         assertThat(dialog.isShowing()).isFalse();
     }
+
+    @Test
+    public void testShowDialog_hostIsNull_doNothing() {
+        AudioStreamsDialogFragment.show(null, mDialogBuilder, SettingsEnums.PAGE_UNKNOWN);
+        ShadowLooper.idleMainLooper();
+
+        var dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
+    public void testShowDialog_hostNotAdded_doNothing() {
+        AudioStreamsDialogFragment.show(mFragment, mDialogBuilder, SettingsEnums.PAGE_UNKNOWN);
+        ShadowLooper.idleMainLooper();
+
+        var dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
 }

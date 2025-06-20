@@ -26,6 +26,7 @@ class FlashNotificationsScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = FlashNotificationsScreen()
     override val flagName: String = Flags.FLAG_CATALYST_FLASH_NOTIFICATIONS
 
+    @Test
     override fun migration() {}
 
     @Test

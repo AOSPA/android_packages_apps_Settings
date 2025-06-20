@@ -38,6 +38,8 @@
         android:key="hdr_brightness_level"
         android:title="@string/hdr_brightness_level_title"
         settings:keywords="@string/keywords_display_hdr_brightness"
+        settings:textStart="@string/brightness_intensity_start_label"
+        settings:textEnd="@string/brightness_intensity_end_label"
         settings:controller="com.android.settings.display.HdrBrightnessLevelPreferenceController"/>
 
     <com.android.settingslib.widget.FooterPreference

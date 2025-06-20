@@ -58,9 +58,7 @@ public class DaltonizerSaturationSliderPreferenceController
             new Handler(Looper.getMainLooper())) {
         @Override
         public void onChange(boolean selfChange) {
-            if (mPreference != null) {
-                updateState(mPreference);
-            }
+            updateState(mPreference);
         }
     };
 
@@ -95,7 +93,6 @@ public class DaltonizerSaturationSliderPreferenceController
     public void onStop(@NonNull LifecycleOwner owner) {
         if (!isAvailable()) return;
         mContentResolver.unregisterContentObserver(mContentObserver);
-        mPreference = null;
     }
 
     @Override

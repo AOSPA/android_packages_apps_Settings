@@ -52,6 +52,20 @@ class TextCursorBlinkRatePreferenceController (val context: Context) :
         .plus(noBlinkDurationMs)
         .reversed()
 
+    private val noBlinkLabel = resources.getString(
+        com.android.internal.R.string.no_blink_accessibility_text_cursor_blink_label
+    )
+
+    // The blink intervals are displayed from no-blink to slow to fast on the slider, so the
+    // corresponding labels should be reversed from how they are stored (smallest to largest).
+    // The resulting array should look like this:
+    // [Don't blink, 50%, 60%, 70%, 80%, 90%, 100% (default), 110%, 120%, 130%, 140%, 150%]
+    private val durationLabels = resources.getStringArray(
+        com.android.internal.R.array.accessibility_text_cursor_blink_labels
+    )
+        .plus(noBlinkLabel)
+        .reversed()
+
     override fun getPreferenceKey(): String = "accessibility_text_cursor_blink_interval_ms"
 
     override fun displayPreference(screen: PreferenceScreen) {
@@ -90,6 +104,7 @@ class TextCursorBlinkRatePreferenceController (val context: Context) :
             Settings.Secure.ACCESSIBILITY_TEXT_CURSOR_BLINK_INTERVAL_MS,
             convertIndexToDuration(newValue)
             )
+        setSliderStateDescription(pref, newValue)
         return true
     }
 
@@ -105,8 +120,10 @@ class TextCursorBlinkRatePreferenceController (val context: Context) :
             mContext.getContentResolver(),
             Settings.Secure.ACCESSIBILITY_TEXT_CURSOR_BLINK_INTERVAL_MS,
             defaultDurationMs)
+        val index = convertDurationToIndex(durationMs)
 
-        preference.setValue(convertDurationToIndex(durationMs))
+        preference.setValue(index)
+        setSliderStateDescription(preference, index)
     }
 
     override public fun onDeveloperOptionsSwitchDisabled() {
@@ -120,6 +137,15 @@ class TextCursorBlinkRatePreferenceController (val context: Context) :
 
     override fun isAvailable(): Boolean {
         return android.view.accessibility.Flags.textCursorBlinkInterval()
+    }
+
+    private fun setSliderStateDescription(preference: Preference, index: Int) {
+        if (preference !is TextCursorBlinkRateSliderPreference) {
+            // This should never happen.
+            Log.e(TAG, "Given non TextCursorBlinkRateSliderPreference: " + preference)
+            return
+        }
+        preference.setSliderStateDescription(durationLabels[index])
     }
 
     private fun convertDurationToIndex(duration: Int): Int {

@@ -38,6 +38,7 @@ class TetherScreenTest : SettingsCatalystTestCase() {
         get() = Flags.FLAG_CATALYST_TETHER_SETTINGS
 
     // TODO: Remove override (See b/368359963#comment7)
+    @Test
     override fun migration() {}
 
     @Before

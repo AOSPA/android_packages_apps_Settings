@@ -115,9 +115,9 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
         val textStart: TextView? = prefViewHolder.findViewById(android.R.id.text1) as TextView?
         val textEnd: TextView? = prefViewHolder.findViewById(android.R.id.text2) as TextView?
         assertThat(textStart!!.text.toString())
-            .isEqualTo(context.getString(R.string.reduce_bright_colors_intensity_start_label))
+            .isEqualTo(context.getString(R.string.brightness_intensity_start_label))
         assertThat(textEnd!!.text.toString())
-            .isEqualTo(context.getString(R.string.reduce_bright_colors_intensity_end_label))
+            .isEqualTo(context.getString(R.string.brightness_intensity_end_label))
     }
 
     @Test
