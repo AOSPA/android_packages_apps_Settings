@@ -47,9 +47,9 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"Correu electrònic"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Previsualització anterior"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Previsualització següent"</string>
-    <!-- no translation found for font_size_make_smaller_desc (319927200356692406) -->
+    <!-- no translation found for font_size_make_smaller_desc (9149663537989624487) -->
     <skip />
-    <!-- no translation found for font_size_make_larger_desc (6739310980713118605) -->
+    <!-- no translation found for font_size_make_larger_desc (5774611876657293550) -->
     <skip />
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Sempre"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"La pantalla frontal s\'encén quan plegues el dispositiu"</string>
@@ -200,7 +200,7 @@
     <string name="locale_remove_menu" msgid="3521546263421387474">"Suprimeix"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Afegeix un idioma"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Idioma"</string>
-    <string name="locale_picker_category_title" msgid="6212064706962721255">"Idioma preferit"</string>
+    <string name="locale_picker_category_title" msgid="296835514014453679">"Idiomes preferits"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Idiomes de les aplicacions"</string>
     <string name="app_locale_picker_summary" msgid="616928580653613998">"Tria l\'idioma per a cada aplicació"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Idioma de l\'aplicació"</string>
@@ -226,10 +226,11 @@
     <string name="title_change_system_locale" msgid="4102991236063984803">"Vols canviar l\'idioma del sistema a %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Vols afegir %s als idiomes preferits?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Això permet que les apps i llocs web sàpiguen que també prefereixes aquest idioma."</string>
-    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"La configuració del dispositiu i les preferències regionals canviaran."</string>
+    <string name="desc_notice_device_locale_and_region_settings_change" msgid="909261686577914396">"El dispositiu utilitzarà <xliff:g id="LANGUAGE">%1$s</xliff:g> i la teva regió canviarà a <xliff:g id="REGION">%2$s</xliff:g>."</string>
+    <string name="dlg_desc_delete_preferred_default_locale" msgid="690828405078078513">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> se suprimirà dels idiomes preferits"</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Canvia"</string>
-    <string name="title_unavailable_locale" msgid="2628898110416542386">"Aquest idioma (%s) no està disponible"</string>
-    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Aquest idioma no es pot utilitzar com a idioma del sistema, però has permès que les aplicacions i els llocs web sàpiguen quin prefereixes."</string>
+    <string name="title_unavailable_locale" msgid="5382411204559213983">"No es pot definir <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> com a idioma del sistema"</string>
+    <string name="desc_unavailable_locale" msgid="7223655766703116782">"El teu dispositiu no admet aquest idioma, però les aplicacions sabran que el prefereixes"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Cerca"</string>
     <string name="language_and_region_title" msgid="8374151891112162767">"Idioma i regió"</string>
     <string name="language_selection_title" msgid="968179636453982415">"Afegeix un idioma"</string>
@@ -243,6 +244,9 @@
     <string name="title_change_system_locale_region" msgid="4401478579429442695">"Vols canviar la regió a <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"El dispositiu mantindrà <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> com a idioma del sistema"</string>
     <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"Tria com es mostren els números al dispositiu, als llocs web i a les aplicacions"</string>
+    <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Mou cap amunt"</string>
+    <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Mou cap avall"</string>
+    <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Suprimeix"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferències regionals"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Estableix preferències d\'unitats i de números"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permet a les aplicacions conèixer les preferències regionals perquè puguin personalitzar la teva experiència."</string>
@@ -281,6 +285,8 @@
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"No es poden suprimir tots els idiomes"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Conserva almenys un idioma preferit"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"No disponible com a idioma del sistema"</string>
+    <string name="dlg_title_delete_preferred_locale" msgid="4167214348946940002">"Vols suprimir <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g>?"</string>
+    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> se suprimirà dels idiomes preferits. El podràs tornar a afegir més endavant."</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Mou amunt"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Mou avall"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Mou a la part superior"</string>
@@ -460,6 +466,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Ara no"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Accepto"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Fes doble toc per canviar el nom"</string>
+    <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"S\'ha reconegut <xliff:g id="FP_NAME">%1$s</xliff:g>"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Vols ometre l\'empremta digital?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Només tardaràs un parell de minuts a configurar l\'empremta digital. Si omets aquest pas, pots afegir-la més endavant a Configuració."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Quan vegis aquesta icona, utilitza l\'empremta digital per a l\'autenticació, com ara en iniciar la sessió en aplicacions o en aprovar una compra"</string>
@@ -942,10 +949,8 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Connecta"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Desconnecta"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Vincula i connecta"</string>
-    <!-- no translation found for bluetooth_connecting (5315496594905010438) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnecting (1643422701532873735) -->
-    <skip />
+    <string name="bluetooth_connecting" msgid="5315496594905010438">"S\'està connectant"</string>
+    <string name="bluetooth_disconnecting" msgid="1643422701532873735">"S\'està desconnectant"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Amb el Bluetooth activat, el dispositiu pot comunicar-se amb dispositius Bluetooth a prop"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Quan el Bluetooth està activat, el dispositiu pot comunicar-se amb altres dispositius Bluetooth propers. Les funcions com Quick Share i Troba el meu dispositiu utilitzen el Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Si el Bluetooth està activat, el dispositiu pot comunicar-se amb altres dispositius Bluetooth propers.\n\nPer millorar l\'experiència amb el dispositiu, les aplicacions i els serveis poden continuar cercant dispositius propers en qualsevol moment, fins i tot amb el Bluetooth desactivat. Això pot servir, per exemple, per millorar les funcions i els serveis basats en la ubicació. Pots canviar-ho a la configuració de cerca de dispositius Bluetooth."</string>
@@ -1166,7 +1171,25 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"El codi QR no té un format vàlid"</string>
     <string name="retry" msgid="7542103800274026915">"Torna-ho a provar"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Comparteix amb altres usuaris del dispositiu"</string>
+    <!-- no translation found for shared_message (2104244057926025072) -->
+    <skip />
+    <!-- no translation found for private_message (5897966950396765392) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_confirm (4577313983128123779) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_cancel (5200571850377525343) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_title (6346200020322308703) -->
+    <skip />
+    <!-- no translation found for wifi_share_preference_summary (4356010425167713046) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_title (1127530499054245755) -->
+    <skip />
+    <!-- no translation found for wifi_conflict_dialog_message (3192435395074097168) -->
+    <skip />
     <string name="wifi_unchanged" msgid="8026045290856150191">"(sense canvis)"</string>
+    <!-- no translation found for wifi_allow_edit_configuration_title (3928254385019370063) -->
+    <skip />
     <string name="wifi_unspecified" msgid="4561964943472312208">"Selecciona"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(S\'han afegit diversos certificats)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Utilitza certificats del sistema"</string>
@@ -1184,8 +1207,7 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Comparteix aquesta xarxa amb altres usuaris del dispositiu"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Tots els usuaris d\'aquest dispositiu poden veure una xarxa compartida i connectar-s\'hi. Els administradors poden suprimir una xarxa compartida. Més informació"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Permet que altres usuaris editin la configuració de la xarxa"</string>
-    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
-    <skip />
+    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"Contacta amb l\'administrador d\'aquest dispositiu per fer canvis en aquesta xarxa."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Aquesta xarxa no té accés a Internet. Vols mantenir-hi la connexió?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Alguns serveis i aplicacions poden no funcionar amb una connectivitat limitada. Utilitzar igualment?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"No ho tornis a preguntar en aquesta xarxa"</string>
@@ -2142,16 +2164,21 @@
     <string name="mouse_keys" msgid="6237254627808525540">"Tecles del ratolí"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Utilitza les tecles del ratolí"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Drecera de les tecles del ratolí"</string>
-    <string name="mouse_keys_summary" msgid="7030731235143286467">"Utilitza el teclat per controlar el punter"</string>
-    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Velocitat màxima"</string>
+    <!-- no translation found for mouse_keys_summary (6512910710030108693) -->
+    <skip />
+    <!-- no translation found for mouse_keys_max_speed_title (2651688711606971145) -->
+    <skip />
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Disminueix"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Augmenta"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Desplaçament invers"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Utilitza les tecles primàries"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_summary (5057949666957911577) -->
+    <skip />
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"Restableix la configuració"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"Com utilitzar les tecles primàries"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"Com utilitzar un teclat numèric"</string>
-    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2728318055237217919">"El teclat numèric s\'utilitzarà quan el bloqueig estigui activat"</string>
+    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2186017679302722178) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Desplaça\'t cap amunt per moure la pàgina cap avall"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Desplaçament"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Desplaçament controlat"</string>
@@ -2169,6 +2196,12 @@
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Utilitza la tecla <xliff:g id="RELEASE_LABEL">%s</xliff:g> per deixar anar el botó principal del ratolí"</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"Utilitza la tecla <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> per canviar el mode de desplaçament. Això farà que les tecles <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> desplacin la visualització cap amunt, cap avall, cap a l\'esquerra o cap a la dreta."</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Utilitza la tecla <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> per fer clic al botó secundari del ratolí"</string>
+    <!-- no translation found for mouse_keys_acceleration_seekbar_title (2329098889930361504) -->
+    <skip />
+    <!-- no translation found for mouse_keys_acceleration_fast_icon_desc (4426188473271579794) -->
+    <skip />
+    <!-- no translation found for mouse_keys_acceleration_slow_icon_desc (8370777074987200135) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"Mostra les tecles de drecera"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostra la llista de dreceres"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclats i eines del perfil de treball"</string>
@@ -2231,40 +2264,23 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Següent"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Reinicia"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Fet"</string>
-    <!-- no translation found for action_corner_title (1489042651433221319) -->
-    <skip />
-    <!-- no translation found for action_corner_summary (695618538930535335) -->
-    <skip />
-    <!-- no translation found for action_corner_intro (8782001241997579665) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
-    <skip />
-    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
-    <skip />
-    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
-    <skip />
-    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
-    <skip />
-    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
-    <skip />
-    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
-    <skip />
-    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
-    <skip />
+    <string name="action_corner_title" msgid="7411160165577367757">"Personalitza les dreceres dels extrems"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"Utilitza els cursors per navegar pel sistema"</string>
+    <string name="action_corner_intro" msgid="2170609118659718140">"Tria les àrees següents per personalitzar les dreceres dels extrems"</string>
+    <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Extrem inferior esquerre"</string>
+    <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"Extrem inferior dret"</string>
+    <string name="action_corner_top_left_title" msgid="4633975226092344210">"Extrem superior esquerre"</string>
+    <string name="action_corner_top_right_title" msgid="4995999693840776032">"Extrem superior dret"</string>
+    <string name="action_corner_action_none" msgid="5203163099950649999">"Cap"</string>
+    <string name="action_corner_action_home" msgid="6779642573582379579">"Inici"</string>
+    <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Aplicacions recents"</string>
+    <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notificacions"</string>
+    <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Configuració ràpida"</string>
+    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Tria una drecera per a l’<xliff:g id="CORNER">%1$s</xliff:g>"</string>
+    <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"extrem inferior esquerre"</string>
+    <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"extrem inferior dret"</string>
+    <string name="action_corner_top_left_name" msgid="8077670910600032291">"extrem superior esquerre"</string>
+    <string name="action_corner_top_right_name" msgid="6307321595919080297">"extrem superior dret"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Tecles modificadores"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Canvia el comportament de les tecles"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Restableix-ho tot"</string>
@@ -2409,8 +2425,7 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Drecera d\'ampliació"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Seguiment del cursor"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Tria com vols que la lupa segueixi el cursor."</string>
-    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
-    <skip />
+    <string name="accessibility_magnification_cursor_following_unavailable_summary" msgid="1683880243856242269">"No està disponible mentre només s\'amplia una part de la pantalla"</string>
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Mou la pantalla contínuament mentre es mou el ratolí"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Mou la pantalla i mantén el ratolí al centre"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Mou la pantalla quan el ratolí toqui les vores de la pantalla"</string>
@@ -2551,32 +2566,20 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualitza ampliació automàticament"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Actualitza augment pantalla a transicions aplic."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"El botó d\'engegada penja"</string>
-    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="8563711427335567656">"Mode"</string>
+    <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Estàndard"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Tema fosc estàndard"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Aplica el tema fosc al dispositiu i a les aplicacions compatibles"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Ampliat"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Tema fosc ampliat"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Aplica automàticament el tema fosc a més aplicacions per millorar l\'accessibilitat"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Suprimeix les animacions"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Redueix el moviment a la pantalla"</string>
-    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
-    <skip />
+    <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Parpelleig del cursor de text"</string>
+    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"Ajusta la velocitat de parpelleig del cursor de text o desactiva el parpelleig. És possible que no sigui compatible amb totes les aplicacions o els llocs web."</string>
+    <string name="accessibility_text_cursor_blink_rate_slower_desc" msgid="5255697869959801747">"Disminueix la velocitat de parpelleig"</string>
+    <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"Augmenta la velocitat de parpelleig"</string>
+    <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"Restableix"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Àudio mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combina els canals en reproduir àudio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Balanç d\'àudio"</string>
@@ -2666,6 +2669,8 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Més informació sobre la correcció de color"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Sobre la inversió de colors"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Més informació sobre la inversió de colors"</string>
+    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Més informació sobre el tema fosc"</string>
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"És possible que algunes aplicacions no admetin el tema fosc en la configuració ampliada. Si tens problemes amb l\'aparença, utilitza l\'opció de configuració estàndard."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Mostra els subtítols"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Només per a aplicacions compatibles"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Mida i estil dels subtítols"</string>
@@ -3734,8 +3739,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Cap}=1{S\'ha definit 1 programació}other{S\'han definit # programacions}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No molestis"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modes"</string>
-    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
-    <skip />
+    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Minimitza les distraccions i controla la teva atenció amb modes per dormir, treballar, conduir i més"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Crea el teu propi mode"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Rep notificacions només de persones i aplicacions importants"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Defineix una programació"</string>
@@ -4360,10 +4364,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"Gestor de permisos"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Canvis en la compartició de dades per a la ubicació"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Revisa les aplicacions que han canviat la manera en què poden compartir les teves dades d\'ubicació"</string>
-    <!-- no translation found for app_function_access_settings_title (1474765429611652468) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (6465715820745848068) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Control de l\'agent d\'altres aplicacions"</string>
+    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Realitzar accions al dispositiu i en altres aplicacions"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Toca per activar"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Toca dos cops un punt de la pantalla per activar el dispositiu"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Obertura d\'enllaços"</string>
@@ -4523,9 +4525,9 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Amplia-ho o redueix-ho tot"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"densitat de pantalla, zoom de pantalla, escala, mida"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Previsualització"</string>
-    <!-- no translation found for screen_zoom_make_smaller_desc (1450649885198381123) -->
+    <!-- no translation found for screen_zoom_make_smaller_desc (6268455784510593120) -->
     <skip />
-    <!-- no translation found for screen_zoom_make_larger_desc (7125594310562596457) -->
+    <!-- no translation found for screen_zoom_make_larger_desc (3458295276713085365) -->
     <skip />
     <string name="disconnected" msgid="3469373726996129247">"No connectat"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"No connectat"</string>
@@ -4546,6 +4548,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Bloquejat per la teva entitat de crèdit"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Es necessita el pare o la mare"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Dona el telèfon als pares perquè comencin a configurar-lo"</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"Restringit pels controls parentals"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"Només la persona que gestiona els controls parentals pot canviar aquesta opció de configuració"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Dona el telèfon als pares per poder canviar aquesta opció de configuració."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Per a més informació, contacta amb el teu administrador de TI"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Més informació"</string>
@@ -4661,7 +4665,7 @@
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Comprova"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Entesos"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Aquest missatge és útil?"</string>
-    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Icona d\'advertiment de consells sobre la bateria"</string>
+    <string name="battery_hints_warning_icon_a11y" msgid="709629805028175434">"Consells sobre els advertiments de la bateria"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Activa la brillantor adaptativa per allargar la durada de la bateria"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Redueix el temps d\'espera de la pantalla per allargar la durada de la bateria"</string>
     <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"L\'aplicació <xliff:g id="APP_LABEL">%1$s</xliff:g> ha consumit més bateria"</string>
@@ -4989,8 +4993,6 @@
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Restableix els valors predeterminats"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"S\'han restablert les opcions d\'emplenament automàtic per a desenvolupadors"</string>
     <string name="location_category" msgid="3496759112306219062">"Ubicació"</string>
-    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Indicador d\'ubicació de la barra d\'estat"</string>
-    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Mostra per a totes les ubicacions, incloses la xarxa i la connectivitat"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Força mesuraments de GNSS complets"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Fes un seguiment de totes les freqüències i constel·lacions de GNSS sense cicle de treball"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Mètode d\'introducció de text"</string>
@@ -5205,7 +5207,8 @@
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Connectivitat per satèl·lit"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"connectivitat per satèl·lit"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"missatges per satèl·lit"</string>
-    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"L\'ús de dades s\'inclou amb el teu compte"</string>
+    <!-- no translation found for title_have_satellite_data_plan (1101741256080690699) -->
+    <skip />
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Aplicacions admeses al telèfon"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Mostra totes les aplicacions que admet el satèl·lit"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Aplicacions admeses al telèfon"</string>
@@ -5381,15 +5384,13 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Inicia amb pàgines de 16 kB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Inicia amb un nucli compatible amb pàgines de 16 kB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Canvia del mode de 4 kB al mode de 16 kB"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="4760548401414644138">"La partició de dades d\'aquest dispositiu s\'ha de convertir al format ext4 abans d\'utilitzar l\'opció per a desenvolupadors de 16 kB. Es netejaran les dades del dispositiu i el sistema de fitxers es canviarà al format ext4 després de la confirmació. Estàs en mode de producció executant un nucli de 4 kB i canviaràs al mode de 16 kB. Quan estiguis en aquest mode, podràs alternar entre el mode de 4 kB i el mode de 16 kB amb un sol reinici. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per fer que el dispositiu torni al mode de producció, hauràs de tornar al mode de 4 kB i, a continuació, bloquejar el bootloader, que restablirà les dades de fàbrica del dispositiu. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors. Per continuar, fes clic a Esborra totes les dades i actualitza. Aquesta acció reiniciarà el dispositiu."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Estàs en mode independent de la pàgina executant un nucli de 4 kB i canviaràs al mode de 16 kB. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Aquesta acció reiniciarà el dispositiu. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per fer que el dispositiu torni al mode de producció, hauràs de tornar al mode de 4 kB i, a continuació, bloquejar el bootloader, que restablirà les dades de fàbrica del dispositiu. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Canvia del mode de 16 kB al mode de 4 kB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Estàs en mode independent de la pàgina executant un nucli de 16 kB i canviaràs al mode de 4 kB. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Aquesta acció reiniciarà el dispositiu. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per fer que el dispositiu torni al mode de producció, hauràs de tornar a bloquejar el bootloader, que restablirà les dades de fàbrica del dispositiu. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"No s\'ha pogut actualitzar el nucli a un compatible amb pàgines de 16 kB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"S\'està aplicant el canvi"</string>
-    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
-    <skip />
+    <string name="confirm_ext4_button_text" msgid="697563319110759422">"Esborra totes les dades i actualitza"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"No s\'ha pogut canviar el format a ext4 ni netejar-ne la partició de dades."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Es requereix el desbloqueig del bootloader"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"Aquest dispositiu ha de tenir el bootloader desbloquejat abans d\'utilitzar l\'opció per a desenvolupadors de 16 kB. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. En activar el mode de 16 kB, es netejaran totes les dades d\'usuari i opcions de configuració. Quan s\'hagi desbloquejat el bootloader, caldrà que el dispositiu es reiniciï dues vegades per activar l\'opció de 16 kB. Quan estiguis en aquest mode, podràs alternar entre el mode de 4 kB i el mode de 16 kB amb un sol reinici. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per fer que el dispositiu torni al mode de producció, hauràs de tornar al mode de 4 kB i, a continuació, bloquejar l\'OEM o el bootloader, que restablirà les dades de fàbrica del dispositiu. Desbloqueja el bootloader i torna-ho a provar. Pots consultar les instruccions per fer-ho a &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5839,6 +5840,8 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Sense contrasenya"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Més informació"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"No es pot reproduir aquest flux d\'àudio a <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
+    <skip />
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"S\'està escoltant ara"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Reproducció en pausa"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Atura l\'escolta"</string>
@@ -5885,36 +5888,41 @@
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Mantén premut el botó d\'inici o l\'ansa de navegació per cercar utilitzant el contingut de la pantalla."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Configura els detalls del dispositiu."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Controls parentals"</string>
-    <string name="supervision_settings_summary" msgid="5020634300370322741">"Restriccions de contingut i altres límits"</string>
+    <string name="supervision_settings_summary" msgid="6304257872307136073">"Regles digitals bàsiques i límits de temps de connexió"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Configura un PIN"</string>
-    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"En pausa"</string>
-    <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervisió, supervisió parental, controls parentals"</string>
+    <string name="keywords_supervision_settings" msgid="43064288661561602">"supervisió, controls parentals, pares, PIN de supervisió, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Gestiona el PIN"</string>
+    <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN parental, PIN dels controls parentals"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Afegeix una adreça electrònica de recuperació"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Verifica l\'adreça electrònica de recuperació"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Canvia el PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"He oblidat el PIN"</string>
+    <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Has oblidat el PIN?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Actualitza l\'adreça electrònica de recuperació"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Suprimeix el PIN"</string>
-    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Es restabliran totes les opcions de configuració de supervisió"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Afegeix una adreça electrònica de recuperació"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verifica l\'adreça electrònica"</string>
-    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtres de contingut web"</string>
-    <string name="supervision_web_content_filters_top_intro" msgid="5264773769840566499">"Bloqueja el contingut no apte per a menors als llocs web i als resultats de cerca de les aplicacions admeses en aquest dispositiu. És possible que les aplicacions no admeses continuïn mostrant contingut explícit."</string>
+    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtres de contingut de llocs web"</string>
+    <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtres de llocs web, bloqueig de llocs web, filtres del navegador, bloqueig de llocs web explícits, filtració de llocs web, bloqueig de resultats de cerca, filtració de resultats de cerca explícits, restriccions de contingut"</string>
+    <!-- no translation found for supervision_web_content_filters_top_intro (8056274290725144441) -->
+    <skip />
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Llocs web"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"Bloqueja els llocs web explícits"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Resultats de la cerca"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Filtra els resultats de cerca explícits"</string>
-    <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Introdueix el PIN de supervisió"</string>
+    <!-- no translation found for supervision_web_content_filters_switch_summary (2095166099345288321) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_footer_title (1741897040916039165) -->
+    <skip />
+    <!-- no translation found for supervision_full_screen_pin_verification_title (7685279446792771815) -->
+    <skip />
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Defineix un PIN per als controls parentals"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Confirma el PIN"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"El PIN s\'ha actualitzat"</string>
-    <!-- no translation found for supervision_promo_footer_action_button_description (7617359721703338141) -->
-    <skip />
+    <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Obre l\'aplicació"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Vols suprimir el PIN?"</string>
-    <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"D\'aquesta manera, se suprimirà el PIN actual per a tots els usuaris d\'aquest dispositiu i es desactivaran els controls que hagis configurat. Aquesta acció no es pot desfer."</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"Posa en pausa els controls en altres perfils primer"</string>
-    <string name="supervision_delete_pin_supervision_enabled_message" msgid="5643922966568203196">"Per continuar i suprimir aquest PIN i restablir la configuració de supervisió, posa en pausa els controls de tots els altres perfils."</string>
+    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
+    <skip />
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"El PIN no es pot suprimir"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Hi ha hagut un error en intentar suprimir el PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animació de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>

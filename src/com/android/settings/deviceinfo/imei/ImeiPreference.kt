@@ -48,7 +48,7 @@ class ImeiPreference(
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider {
 
-    private val imei: String = context.getImei()
+    private val imei: String? = context.getImei()
     private val formattedTitle: String = context.getFormattedTitle()
 
     override val key: String
@@ -75,9 +75,9 @@ class ImeiPreference(
             }
     }
 
-    private fun Context.getImei(): String = telephonyManager?.getImei(slotIndex) ?: run {
+    private fun Context.getImei(): String? = telephonyManager?.getImei(slotIndex) ?: run {
         Log.e(TAG, "Failed to get IMEI for slot $slotIndex")
-        ""
+        null
     }
 
     private fun Context.getFormattedTitle(): String =

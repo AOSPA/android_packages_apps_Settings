@@ -47,8 +47,10 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"E-mail"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Vorig voorbeeld"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Volgend voorbeeld"</string>
-    <string name="font_size_make_smaller_desc" msgid="319927200356692406">"Lettergrootte kleiner maken"</string>
-    <string name="font_size_make_larger_desc" msgid="6739310980713118605">"Lettertype groter maken"</string>
+    <!-- no translation found for font_size_make_smaller_desc (9149663537989624487) -->
+    <skip />
+    <!-- no translation found for font_size_make_larger_desc (5774611876657293550) -->
+    <skip />
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Altijd"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Het scherm aan de voorkant gaat aan als je het apparaat vouwt"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Swipe omhoog om door te gaan"</string>
@@ -198,7 +200,7 @@
     <string name="locale_remove_menu" msgid="3521546263421387474">"Verwijderen"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Taal toevoegen"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Taal"</string>
-    <string name="locale_picker_category_title" msgid="6212064706962721255">"Voorkeurstaal"</string>
+    <string name="locale_picker_category_title" msgid="296835514014453679">"Voorkeurstalen"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"App-talen"</string>
     <string name="app_locale_picker_summary" msgid="616928580653613998">"Kies de taal voor elke app"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"App-taal"</string>
@@ -224,10 +226,11 @@
     <string name="title_change_system_locale" msgid="4102991236063984803">"Systeemtaal wijzigen in %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"%s toevoegen aan voorkeurstalen?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Zo laat je apps en websites ook weten dat je de voorkeur geeft aan deze taal."</string>
-    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Je apparaatinstellingen en regionale voorkeuren worden gewijzigd."</string>
+    <string name="desc_notice_device_locale_and_region_settings_change" msgid="909261686577914396">"Je apparaat gebruikt <xliff:g id="LANGUAGE">%1$s</xliff:g> en je regio wordt gewijzigd in <xliff:g id="REGION">%2$s</xliff:g>."</string>
+    <string name="dlg_desc_delete_preferred_default_locale" msgid="690828405078078513">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> wordt verwijderd uit je voorkeurstalen"</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Wijzigen"</string>
-    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s niet beschikbaar"</string>
-    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Deze taal kan niet worden gebruikt als systeemtaal, maar je hebt apps en websites laten weten dat je de voorkeur geeft aan deze taal."</string>
+    <string name="title_unavailable_locale" msgid="5382411204559213983">"Kan <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> niet instellen als systeemtaal"</string>
+    <string name="desc_unavailable_locale" msgid="7223655766703116782">"Je apparaat ondersteunt deze taal niet, maar apps weten dat je de voorkeur geeft aan deze taal"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Zoeken"</string>
     <string name="language_and_region_title" msgid="8374151891112162767">"Taal en regio"</string>
     <string name="language_selection_title" msgid="968179636453982415">"Een taal toevoegen"</string>
@@ -241,6 +244,9 @@
     <string name="title_change_system_locale_region" msgid="4401478579429442695">"Regio wijzigen in <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g>?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"Je apparaat houdt <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> als systeemtaal"</string>
     <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"Kies hoe je apparaat, websites en apps nummers weergeven"</string>
+    <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Omhoog verplaatsen"</string>
+    <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Omlaag verplaatsen"</string>
+    <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Verwijderen"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionale voorkeuren"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Stel voorkeuren voor eenheden en cijfers in"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Stel je regionale voorkeuren in voor apps, zodat ze de functionaliteit kunnen personaliseren."</string>
@@ -279,6 +285,8 @@
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Kan niet alle talen verwijderen"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Behoud minimaal één voorkeurstaal"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Niet beschikbaar als systeemtaal"</string>
+    <string name="dlg_title_delete_preferred_locale" msgid="4167214348946940002">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> verwijderen?"</string>
+    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> wordt verwijderd uit je voorkeurstalen. Je kunt de taal later opnieuw toevoegen."</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Omhoog"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Omlaag"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Bovenaan zetten"</string>
@@ -458,6 +466,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Niet nu"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Ik ga akkoord"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Dubbeltik om de naam te wijzigen"</string>
+    <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"<xliff:g id="FP_NAME">%1$s</xliff:g> herkend"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Vingerafdruk overslaan?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Het instellen van een vingerafdruk kost maar een minuut of 2. Als je dit nu overslaat, kun je je vingerafdruk later toevoegen via Instellingen."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Als je dit icoon ziet, gebruik je je vingerafdruk voor verificatie, net zoals wanneer je inlogt bij apps of aankopen goedkeurt"</string>
@@ -1162,7 +1171,16 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-code heeft geen geldige indeling"</string>
     <string name="retry" msgid="7542103800274026915">"Opnieuw proberen"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Delen met andere apparaatgebruikers"</string>
+    <string name="shared_message" msgid="2104244057926025072">"gedeeld"</string>
+    <string name="private_message" msgid="5897966950396765392">"privé"</string>
+    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Bevestigen"</string>
+    <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Annuleren"</string>
+    <string name="wifi_share_preference_title" msgid="6346200020322308703">"Dit is een gedeeld netwerk."</string>
+    <string name="wifi_share_preference_summary" msgid="4356010425167713046">"Alle gebruikers, behalve gastgebruikers, kunnen dit netwerk bekijken, bewerken en verwijderen"</string>
+    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Wisselen naar <xliff:g id="SHARED">%1$s</xliff:g>-netwerk <xliff:g id="NETWORK_NAME">%2$s</xliff:g>?"</string>
+    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Je hebt op dit moment verbinding met een <xliff:g id="SHARED_0">%1$s</xliff:g>-netwerk met dezelfde naam. Als je wisselt, wordt de verbinding met het <xliff:g id="SHARED_1">%2$s</xliff:g>-netwerk verbroken en wordt er opnieuw verbinding gemaakt met het <xliff:g id="PRIVATE">%3$s</xliff:g>-netwerk. Je hebt misschien tijdelijk geen internet."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(ongewijzigd)"</string>
+    <string name="wifi_allow_edit_configuration_title" msgid="3928254385019370063">"Andere gebruikers toestaan de netwerkconfiguratie te bewerken"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Maak een keuze"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Meerdere certificaten toegevoegd)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Gebruik systeemcertificaten"</string>
@@ -1180,8 +1198,7 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Dit netwerk delen met andere apparaatgebruikers"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Alle gebruikers op dit apparaat kunnen een gedeeld netwerk bekijken en hiermee verbinding maken. Beheerders kunnen een gedeeld netwerk verwijderen. Meer informatie"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Andere gebruikers toestaan de netwerkconfiguratie te bewerken"</string>
-    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
-    <skip />
+    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"Neem contact op met de beheerder van dit apparaat om wijzigingen aan te brengen in dit netwerk."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Dit netwerk heeft geen internettoegang. Verbonden blijven?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Sommige apps en services werken mogelijk niet vanwege de beperkte connectiviteit. Toch gebruiken?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Niet meer vragen voor dit netwerk"</string>
@@ -2138,16 +2155,19 @@
     <string name="mouse_keys" msgid="6237254627808525540">"Muistoetsen"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Muistoetsen gebruiken"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Sneltoets voor muistoetsen"</string>
-    <string name="mouse_keys_summary" msgid="7030731235143286467">"Gebruik je toetsenbord om de cursor te bedienen"</string>
-    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Maximale snelheid"</string>
+    <string name="mouse_keys_summary" msgid="6512910710030108693">"Gebruik je toetsenbord om de cursor te bedienen"</string>
+    <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"Snelheid"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Verlagen"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Verhogen"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Omgekeerd scrollen"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Primaire toetsen gebruiken"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_summary (5057949666957911577) -->
+    <skip />
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"Instellingen resetten"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"Primaire toetsen gebruiken"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"Een numeriek toetsenblok gebruiken"</string>
-    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2728318055237217919">"Het numerieke toetsenblok wordt altijd gebruikt als Num Lock aanstaat"</string>
+    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2186017679302722178) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll omhoog om de pagina omlaag te verplaatsen"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Scrollen"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Gecontroleerd scrollen"</string>
@@ -2165,6 +2185,9 @@
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Gebruik de toets <xliff:g id="RELEASE_LABEL">%s</xliff:g> om de primaire muisknop los te laten"</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"Gebruik de toets <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> om de scrollmodus aan of uit te zetten. Hiermee kun je met de toetsen <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> omhoog, omlaag, naar links of naar rechts scrollen."</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Gebruik de toets <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> om op de secundaire muisknop te klikken"</string>
+    <string name="mouse_keys_acceleration_seekbar_title" msgid="2329098889930361504">"Versnelling"</string>
+    <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"Snel"</string>
+    <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"Langzaam"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"Sneltoetsen bekijken"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Toon lijst met sneltoetsen"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Toetsenborden en tools van werkprofiel"</string>
@@ -2227,40 +2250,23 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Volgende"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Opnieuw opstarten"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Klaar"</string>
-    <!-- no translation found for action_corner_title (1489042651433221319) -->
-    <skip />
-    <!-- no translation found for action_corner_summary (695618538930535335) -->
-    <skip />
-    <!-- no translation found for action_corner_intro (8782001241997579665) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
-    <skip />
-    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
-    <skip />
-    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
-    <skip />
-    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
-    <skip />
-    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
-    <skip />
-    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
-    <skip />
-    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
-    <skip />
+    <string name="action_corner_title" msgid="7411160165577367757">"Hoeksnelkoppelingen aanpassen"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"Gebruik cursors om door het systeem te navigeren"</string>
+    <string name="action_corner_intro" msgid="2170609118659718140">"Kies de volgende gebieden om hoeksnelkoppelingen aan te passen"</string>
+    <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Linkerbenedenhoek"</string>
+    <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"Rechterbenedenhoek"</string>
+    <string name="action_corner_top_left_title" msgid="4633975226092344210">"Linkerbovenhoek"</string>
+    <string name="action_corner_top_right_title" msgid="4995999693840776032">"Rechterbovenhoek"</string>
+    <string name="action_corner_action_none" msgid="5203163099950649999">"Geen"</string>
+    <string name="action_corner_action_home" msgid="6779642573582379579">"Home"</string>
+    <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Recente apps"</string>
+    <string name="action_corner_action_notifications" msgid="3779353356349774469">"Meldingen"</string>
+    <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Snelle instellingen"</string>
+    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Kies een snelkoppeling voor <xliff:g id="CORNER">%1$s</xliff:g>"</string>
+    <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"linkerbenedenhoek"</string>
+    <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"rechterbenedenhoek"</string>
+    <string name="action_corner_top_left_name" msgid="8077670910600032291">"linkerbovenhoek"</string>
+    <string name="action_corner_top_right_name" msgid="6307321595919080297">"rechterbovenhoek"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Functietoetsen"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Wijzig het gedrag van toetsen"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Alles resetten"</string>
@@ -2405,11 +2411,10 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Snelkoppeling voor vergroting"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Cursor volgen"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Kies hoe Vergroting je cursor volgt."</string>
-    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
-    <skip />
-    <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Scherm meebewegen met de muis"</string>
+    <string name="accessibility_magnification_cursor_following_unavailable_summary" msgid="1683880243856242269">"Niet beschikbaar als alleen een deel van het scherm wordt vergroot"</string>
+    <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Scherm beweegt met de muis mee"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Scherm meebewegen met de muis midden op het scherm"</string>
-    <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Scherm bewegen zodra de muis aan de rand van het scherm komt"</string>
+    <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Scherm meebewegen zodra de muis aan de rand van het scherm komt"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Typen volgen"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"Het vergrootglas volgt de tekst terwijl je typt"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"Toetsenbordfocus vergroten"</string>
@@ -2463,7 +2468,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tik drie keer om te zoomen"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Zoomen door te tikken op een knop"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zoom snel in op het scherm om content groter te maken"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Zo zoom je in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {1,number,integer}. Tik op het scherm.&lt;br/&gt; {2,number,integer}. Sleep met 2 vingers om te navigeren op het scherm.&lt;br/&gt; {3,number,integer}. Knijp met 2 vingers om het zoomniveau aan te passen.&lt;br/&gt; {4,number,integer}. Gebruik de snelkoppeling om de vergroting te stoppen.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Zo zoom je tijdelijk in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Zorg dat je vergrotingstype is ingesteld op volledig scherm.&lt;br/&gt; {1,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {2,number,integer}. Houd je vinger op het scherm.&lt;br/&gt; {3,number,integer}. Sleep met je vinger om te navigeren op het scherm.&lt;br/&gt; {4,number,integer}. Haal je vinger van het scherm om de vergroting te stoppen."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Zo zoom je in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gebruik de snelkoppeling om de vergroting te starten&lt;br/&gt; {1,number,integer}. Tik op het scherm&lt;br/&gt; {2,number,integer}. Sleep met 2 vingers om te navigeren op het scherm&lt;br/&gt; {3,number,integer}. Knijp met 2 vingers om het zoomniveau aan te passen&lt;br/&gt; {4,number,integer}. Gebruik de snelkoppeling om de vergroting te stoppen&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Zo zoom je tijdelijk in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Zorg dat je vergrotingstype is ingesteld op volledig scherm&lt;br/&gt; {1,number,integer}. Gebruik de snelkoppeling om de vergroting te starten&lt;br/&gt; {2,number,integer}. Houd je vinger op het scherm&lt;br/&gt; {3,number,integer}. Sleep met je vinger om te navigeren op het scherm&lt;br/&gt; {4,number,integer}. Haal je vinger van het scherm om de vergroting te stoppen"</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;Zo zoom je met het toetsenbord:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {1,number,integer}. Houd &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; en &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; ingedrukt en druk op + of - om in of uit te zoomen.&lt;br/&gt; {2,number,integer}. Houd &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; en &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; ingedrukt en druk op de pijltoetsen om te navigeren op het scherm.&lt;br/&gt; {3,number,integer}. Gebruik de snelkoppeling om de vergroting te stoppen."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Zo zoom je in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {1,number,integer}. Tik op het scherm.&lt;br/&gt; {2,number,integer}. Sleep met 2 vingers om te navigeren op het scherm.&lt;br/&gt; {3,number,integer}. Knijp met 2 vingers om het zoomniveau aan te passen.&lt;br/&gt; {4,number,integer}. Gebruik de snelkoppeling om de vergroting te stoppen.&lt;br/&gt;&lt;br/&gt; Je kunt ook tijdelijk inzoomen en meer."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Zo zoom je in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gebruik de snelkoppeling om de vergroting te starten.&lt;br/&gt; {1,number,integer}. Tik op het scherm.&lt;br/&gt; {2,number,integer}. Sleep 1 of 2 vingers om over het scherm te bewegen.&lt;br/&gt; {3,number,integer}. Knijp met 2 vingers om het zoomniveau aan te passen.&lt;br/&gt; {4,number,integer}. Gebruik de snelkoppeling om de vergroting te stoppen.&lt;br/&gt;&lt;br/&gt; Je kunt ook tijdelijk inzoomen en meer."</string>
@@ -2498,7 +2503,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Tik op de zwevende knop"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Toegankelijkheidsgebaar"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Tik onderaan het scherm op de knop Toegankelijkheid <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>. Houd je vinger op de knop om tussen functies te wisselen."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Swipe omhoog vanaf de onderkant van het scherm. Swipe omhoog en houd vast om tussen functies te wisselen.}other{Swipe met # vingers omhoog vanaf de onderkant van het scherm. Swipe met # vingers omhoog en houd vast om tussen functies te wisselen.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Swipe omhoog vanaf de onderkant van het scherm. Swipe omhoog en houd je vinger op het scherm om tussen functies te wisselen.}other{Swipe met # vingers omhoog vanaf de onderkant van het scherm. Swipe met # vingers omhoog en houd je vingers op het scherm om tussen functies te wisselen.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Meer opties"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Meer informatie over <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Snelle instellingen"</string>
@@ -2547,32 +2552,20 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Schermvergroting automatisch updaten"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Schermvergroting updaten bij app-overgangen"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Aan/uit-knop beëindigt gesprek"</string>
-    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="8563711427335567656">"Modus"</string>
+    <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standaard"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Standaard donker thema"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Hiermee wordt het donkere thema toegepast op je apparaat en ondersteunde apps"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Afgedwongen"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Afgedwongen donker thema"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Het donkere thema wordt automatisch toegepast op meer apps voor betere toegankelijkheid"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animaties verwijderen"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Minder beweging op het scherm"</string>
-    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
-    <skip />
+    <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Knipperende tekstcursor"</string>
+    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"De knippersnelheid van de tekstcursor aanpassen of knipperen uitzetten. Wordt misschien niet ondersteund in alle apps of op alle websites."</string>
+    <string name="accessibility_text_cursor_blink_rate_slower_desc" msgid="5255697869959801747">"Knippersnelheid verlagen"</string>
+    <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"Knippersnelheid verhogen"</string>
+    <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"Resetten"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Monogeluid"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combineer kanalen bij het afspelen van geluid"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Audiobalans"</string>
@@ -2662,6 +2655,8 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Meer informatie over kleurcorrectie"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Over kleurinversie"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Meer informatie over kleurinversie"</string>
+    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Meer informatie over het donkere thema"</string>
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Sommige apps ondersteunen het donkere thema misschien niet in de uitgebreide instelling. Als je problemen met de weergave hebt, gebruik je de standaardinstelling."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Ondertiteling tonen"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Alleen voor ondersteunde apps"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Grootte en stijl van ondertiteling"</string>
@@ -3728,8 +3723,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Geen}=1{1 planning ingesteld}other{# planningen ingesteld}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Niet storen"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modi"</string>
-    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
-    <skip />
+    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Minimaliseer afleidingen en houd de controle over je aandacht met modi voor slapen, werken, autorijden en alles daartussenin"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Je eigen modus maken"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Krijg alleen meldingen van belangrijke mensen en apps"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Schema instellen"</string>
@@ -4515,8 +4509,10 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Maak alles groter of kleiner"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"weergavedichtheid, scherm zoomen, schaal, schalen"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Voorbeeld"</string>
-    <string name="screen_zoom_make_smaller_desc" msgid="1450649885198381123">"Weergavegrootte kleiner maken"</string>
-    <string name="screen_zoom_make_larger_desc" msgid="7125594310562596457">"Weergavegrootte groter maken"</string>
+    <!-- no translation found for screen_zoom_make_smaller_desc (6268455784510593120) -->
+    <skip />
+    <!-- no translation found for screen_zoom_make_larger_desc (3458295276713085365) -->
+    <skip />
     <string name="disconnected" msgid="3469373726996129247">"Niet verbonden"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Niet verbonden"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apps geïnstalleerd"</string>
@@ -4536,6 +4532,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Geblokkeerd door je kredietverstrekker"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Ouder nodig"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Geef de telefoon aan je ouder om dit in te stellen"</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"Beperkt door ouderlijk toezicht"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"Alleen de persoon die je ouderlijk toezicht beheert, kan deze instelling wijzigen"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Geef de telefoon aan je ouder zodat die deze instelling kan wijzigen."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Neem voor meer informatie contact op met je IT-beheerder"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Meer informatie"</string>
@@ -4651,7 +4649,7 @@
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Checken"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Is dit bericht nuttig?"</string>
-    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Waarschuwingsicoon voor batterijtips"</string>
+    <string name="battery_hints_warning_icon_a11y" msgid="709629805028175434">"Tips voor batterijwaarschuwingen"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Aanpasbare helderheid aanzetten om de batterijduur te verlengen"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Time-out voor scherm beperken om de batterijduur te verlengen"</string>
     <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> heeft meer batterij gebruikt"</string>
@@ -4979,8 +4977,6 @@
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Resetten naar standaardwaarden"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Ontwikkelaarsopties voor automatisch invullen zijn gereset"</string>
     <string name="location_category" msgid="3496759112306219062">"Locatie"</string>
-    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Locatie-indicator in statusbalk"</string>
-    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Tonen voor alle locaties, inclusief netwerk en connectiviteit"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Volledige GNSS-metingen afdwingen"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Houd alle GNSS-constellaties en -frequenties bij zonder duty cycling"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Invoermethode"</string>
@@ -5195,7 +5191,8 @@
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellietverbinding"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellietverbinding"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellietberichten"</string>
-    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Gebruik van gegevens is inbegrepen bij je account"</string>
+    <!-- no translation found for title_have_satellite_data_plan (1101741256080690699) -->
+    <skip />
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Ondersteunde apps op je telefoon"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Alle apps bekijken die worden ondersteund door satelliet"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Ondersteunde apps op je telefoon"</string>
@@ -5371,15 +5368,13 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Opstarten met paginagrootte 16 kB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Start op met kernel voor paginagrootte van 16 kB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Wisselen van 4 KB-modus naar 16 KB-modus"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="4760548401414644138">"De gegevenspartitie van dit apparaat moet worden geconverteerd naar ext4 voordat je de 16 KB-ontwikkelaarsoptie kunt gebruiken. Het apparaat wordt gewist en het bestandssysteem wordt na bevestiging gewijzigd in ext4. Je gebruikt de productiemodus met een kernel van 4 KB en je wisselt naar de 16 KB-modus. Zodra je in deze modus zit, kun met één keer opnieuw opstarten wisselen tussen de 4 KB- en 16 KB-modus. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je het apparaat wilt terugzetten naar de productiemodus, moet je teruggaan naar de 4 KB-modus en de bootloader vergrendelen. Hierdoor worden de fabrieksinstellingen teruggezet op het apparaat. Nadat het apparaat succesvol is opgestart in Android, zet je OEM-ontgrendeling uit in de Ontwikkelaarsopties. Klik op Alle gegevens wissen en updaten om door te gaan. Je apparaat wordt opnieuw opgestart."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Je gebruikt de niet-paginagebonden modus met een kernel van 4 KB en je gaat naar de 16 KB-modus. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Je apparaat wordt opnieuw opgestart. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je het apparaat wilt terugzetten naar de productiemodus, moet je teruggaan naar de 4 KB-modus en de bootloader vergrendelen. Hierdoor worden de fabrieksinstellingen teruggezet op het apparaat. Nadat het apparaat is opgestart in Android, zet je OEM-ontgrendeling uit in de Ontwikkelaarsopties."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Wisselen van 16 KB-modus naar 4 KB-modus"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Je gebruikt de niet-paginagebonden modus met een kernel van 16 KB en je gaat naar de 4 KB-modus. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Je apparaat wordt opnieuw opgestart. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je het apparaat wilt terugzetten naar de productiemodus, moet je de bootloader vergrendelen. Hierdoor worden de fabrieksinstellingen teruggezet op het apparaat. Nadat het apparaat is opgestart in Android, zet je OEM-ontgrendeling uit in de Ontwikkelaarsopties."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Kan kernel niet updaten naar kernel voor pagina\'s van 16 KB."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Wijziging toepassen"</string>
-    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
-    <skip />
+    <string name="confirm_ext4_button_text" msgid="697563319110759422">"Alle gegevens wissen en updaten"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Kan niet omzetten en de gegevenspartitie niet wissen naar ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Ontgrendeling van bootloader vereist"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"De bootloader moet op dit apparaat ontgrendeld zijn voordat je de 16 KB-ontwikkelaarsoptie kunt gebruiken. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen, terwijl de bootloader is ontgrendeld, gevaar lopen. Alle gebruikersgegevens en instellingen worden gewist als de 16 KB-modus wordt geactiveerd. Na het ontgrendelen van de bootloader moet je voor het activeren van de 16 KB-optie het apparaat 2 keer opnieuw opstarten. Zodra je in deze modus zit, kun met één keer opnieuw opstarten wisselen tussen de 4 KB- en 16 KB-modus. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je het apparaat wilt terugzetten naar de productiemodus, moet je teruggaan naar de 4 KB-modus en daarna OEM en de bootloader vergrendelen. Hierdoor worden de fabrieksinstellingen teruggezet op het apparaat. Ontgrendel de bootloader en probeer het opnieuw. Instructies hiervoor vind je op &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5829,6 +5824,8 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Geen wachtwoord"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Meer informatie"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Kan deze audiostream niet afspelen op <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
+    <skip />
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Nu luisteren"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Streamen onderbroken"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Stoppen met luisteren"</string>
@@ -5875,35 +5872,40 @@
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Houd je vinger op de startknop of de navigatiehandgreep om te zoeken op basis van de content op je scherm."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Apparaatgegevens instellen."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Ouderlijk toezicht"</string>
-    <string name="supervision_settings_summary" msgid="5020634300370322741">"Contentbeperkingen en andere limieten"</string>
+    <string name="supervision_settings_summary" msgid="6304257872307136073">"Digitale regels en schermtijdlimieten"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Pincode instellen"</string>
-    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"Onderbroken"</string>
-    <string name="keywords_supervision_settings" msgid="2580555201483955376">"toezicht, ouderlijk toezicht, opties voor ouderlijk toezicht"</string>
+    <string name="keywords_supervision_settings" msgid="43064288661561602">"toezicht, ouderlijk toezicht, ouders, toezichtscode, code"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Je pincode beheren"</string>
+    <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Pincode van ouder, pincode voor ouderlijk toezicht"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Herstelmailadres toevoegen"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Herstelmailadres laten verifiëren"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Pincode wijzigen"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Pincode vergeten"</string>
+    <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Pincode vergeten?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Je herstelmailadres updaten"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Pincode verwijderen"</string>
-    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Hiermee worden al je instellingen voor toezicht gereset"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Herstelmailadres toevoegen"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Je e-mailadres laten verifiëren"</string>
-    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Webcontentfilters"</string>
-    <string name="supervision_web_content_filters_top_intro" msgid="5264773769840566499">"Niet-gezinsvriendelijke content blokkeren op websites en in zoekresultaten in ondersteunde apps op dit apparaat. Niet-ondersteunde apps kunnen nog steeds expliciete content tonen."</string>
+    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Contentfilters voor websites"</string>
+    <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Websitefilters, Sites blokkeren, Browserfilters, Expliciete sites blokkeren, Sites filteren, Zoekresultaten blokkeren, Expliciete zoekresultaten filteren, Contentbeperkingen"</string>
+    <!-- no translation found for supervision_web_content_filters_top_intro (8056274290725144441) -->
+    <skip />
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Websites"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"Expliciete sites blokkeren"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Zoekresultaten"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Expliciete zoekresultaten filteren"</string>
-    <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Pincode voor toezicht invoeren"</string>
+    <!-- no translation found for supervision_web_content_filters_switch_summary (2095166099345288321) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_footer_title (1741897040916039165) -->
+    <skip />
+    <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Pincode voor ouderlijk toezicht invoeren"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Een pincode voor ouderlijk toezicht instellen"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Pincode bevestigen"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Pincode geüpdatet"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"App openen"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Pincode verwijderen?"</string>
-    <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"Hiermee wordt je huidige pincode verwijderd voor alle gebruikers op dit apparaat en worden de bedieningsopties die je hebt ingesteld, uitgezet. Deze actie kan niet ongedaan worden gemaakt."</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"Bedieningsopties eerst onderbreken voor andere profielen"</string>
-    <string name="supervision_delete_pin_supervision_enabled_message" msgid="5643922966568203196">"Als je wilt doorgaan met het verwijderen van deze pincode en het resetten van de toezichtinstellingen, moet je de bedieningsopties van alle andere profielen onderbreken."</string>
+    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
+    <skip />
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Pincode kan niet worden verwijderd"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Er is een fout opgetreden bij het verwijderen van de pincode."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animatie voor <xliff:g id="FEATURE">%1$s</xliff:g>"</string>

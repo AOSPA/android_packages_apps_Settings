@@ -27,13 +27,11 @@ import com.android.settings.R
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
-@ProvidePreferenceScreen(AppInteractAcrossProfilesAppListScreen.KEY)
+//@ProvidePreferenceScreen(AppInteractAcrossProfilesAppListScreen.KEY)
 open class AppInteractAcrossProfilesAppListScreen : PreferenceScreenMixin {
 
     override val key: String
@@ -49,7 +47,7 @@ open class AppInteractAcrossProfilesAppListScreen : PreferenceScreenMixin {
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
-    override fun isFlagEnabled(context: Context) = Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = false
 
     override fun hasCompleteHierarchy() = false
 

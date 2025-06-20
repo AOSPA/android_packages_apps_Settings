@@ -2226,6 +2226,18 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="com.android.settings.notification.BundlePreferenceFragment" />
         </activity>
 
+
+        <activity
+            android:name="Settings$NotificationSummarizationActivity"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NOTIFICATION_SUMMARIZATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.SummarizationPreferenceFragment" />
+        </activity>
+
         <activity android:name=".notification.zen.ZenModeVoiceActivity"
                 android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
                 android:exported="true"
@@ -2560,13 +2572,16 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="@string/menu_key_security"/>
         </activity>
 
+        <service android:name=".accessibility.AccessibilitySurveyNotificationJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <receiver
             android:name=".accessibility.notification.SurveyNotificationReceiver"
             android:permission="android.permission.MANAGE_ACCESSIBILITY"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.settings.ACCESSIBILITY_SURVEY_NOTIFICATION_SHOWN"/>
-                <action android:name="android.settings.ACCESSIBILITY_SURVEY_NOTIFICATION_DISMISSED"/>
+                <action android:name="android.settings.ACCESSIBILITY_CANCEL_SURVEY_NOTIFICATION"/>
+                <action android:name="android.settings.ACCESSIBILITY_SCHEDULE_SURVEY_NOTIFICATION"/>
             </intent-filter>
         </receiver>
 
@@ -2896,6 +2911,15 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity
             android:name=".supervision.SupervisionWebContentFiltersActivity"
             android:label="@string/supervision_web_content_filters_title"
+            android:exported="true">
+            <meta-data
+                android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_supervision" />
+        </activity>
+
+        <activity
+            android:name=".supervision.SupervisionPinManagementActivity"
+            android:label="@string/supervision_pin_management_preference_title"
             android:exported="true">
             <meta-data
                 android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -4243,17 +4267,31 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </activity>
 
         <activity
-            android:name="Settings$VibrationIntensitySettingsActivity"
+            android:name="Settings$VibrationSettingsActivity"
             android:label="@string/accessibility_vibration_settings_title"
-            android:featureFlag="com.android.settings.flags.device_state"
+            android:featureFlag="com.android.settings.flags.deeplink_sound_and_vibration_25q4"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data
-                android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.accessibility.VibrationIntensitySettingsFragment" />
+                android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_sound"/>
+            <meta-data
+                android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$VibrationIntensitySettingsActivity"
+            android:label="@string/accessibility_vibration_settings_title"
+            android:featureFlag="com.android.settings.flags.deeplink_sound_and_vibration_25q4"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <meta-data
                 android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_sound"/>
@@ -4990,6 +5028,9 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             </intent-filter>
             <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
+            <meta-data android:name="android.service.quicksettings.TILE_CATEGORY"
+                       android:value="android.service.quicksettings.CATEGORY_DISPLAY" />
+
         </service>
         <service
             android:name=".development.qstile.DevelopmentTiles$GPUProfiling"
@@ -5003,6 +5044,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             </intent-filter>
             <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
+            <meta-data android:name="android.service.quicksettings.TILE_CATEGORY"
+                       android:value="android.service.quicksettings.CATEGORY_UTILITIES" />
         </service>
         <service
             android:name=".development.qstile.DevelopmentTiles$ForceRTL"
@@ -5016,6 +5059,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             </intent-filter>
             <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
+            <meta-data android:name="android.service.quicksettings.TILE_CATEGORY"
+                       android:value="android.service.quicksettings.CATEGORY_DISPLAY" />
         </service>
         <service
             android:name=".development.qstile.DevelopmentTiles$AnimationSpeed"
@@ -5029,6 +5074,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             </intent-filter>
             <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
+            <meta-data android:name="android.service.quicksettings.TILE_CATEGORY"
+                       android:value="android.service.quicksettings.CATEGORY_UTILITIES" />
         </service>
 
         <service
@@ -5043,6 +5090,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             </intent-filter>
             <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
+            <meta-data android:name="android.service.quicksettings.TILE_CATEGORY"
+                       android:value="android.service.quicksettings.CATEGORY_UTILITIES" />
         </service>
 
         <service
@@ -5057,6 +5106,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             </intent-filter>
             <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
+            <meta-data android:name="android.service.quicksettings.TILE_CATEGORY"
+                       android:value="android.service.quicksettings.CATEGORY_CONNECTIVITY" />
         </service>
 
         <service
@@ -5071,6 +5122,8 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             </intent-filter>
             <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
+            <meta-data android:name="android.service.quicksettings.TILE_CATEGORY"
+                       android:value="android.service.quicksettings.CATEGORY_DISPLAY" />
         </service>
 
         <activity

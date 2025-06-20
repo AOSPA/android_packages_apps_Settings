@@ -139,6 +139,10 @@ public class AppLocaleSuggestedListPreferenceController extends
     @VisibleForTesting
     void setupSuggestedPreference(List<LocaleStore.LocaleInfo> localeInfoList,
             Map<String, Preference> existingSuggestedPreferences) {
+        // In language selection, list should not contain locale with U extension.
+        if (mParentLocale == null) {
+            localeInfoList.removeIf(localeInfo -> localeInfo.getLocale().hasExtensions());
+        }
         for (LocaleStore.LocaleInfo locale : localeInfoList) {
             if (mIsNumberingSystemMode || mIsCountryMode) {
                 Preference pref = existingSuggestedPreferences.remove(locale.getId());

@@ -45,7 +45,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-// Note: This page is for DeviceState usages.
 @ProvidePreferenceScreen(AppInfoInteractAcrossProfilesScreen.KEY, parameterized = true)
 open class AppInfoInteractAcrossProfilesScreen(context: Context, override val arguments: Bundle) :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider {
@@ -88,7 +87,7 @@ open class AppInfoInteractAcrossProfilesScreen(context: Context, override val ar
             // Only one switch so no need to highlight it with [IntentUtils.highlightPreference].
         }
 
-    override fun isFlagEnabled(context: Context) = Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
     override fun extras(context: Context): Bundle? =
         Bundle(1).apply { putString(KEY_EXTRA_PACKAGE_NAME, arguments.getString("app")) }

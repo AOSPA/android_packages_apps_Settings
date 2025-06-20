@@ -37,6 +37,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.CardPreference;
@@ -44,7 +45,7 @@ import com.android.settingslib.widget.CardPreference;
 import kotlin.Unit;
 
 public class DoubleTapPowerLockscreenTipPreferenceController extends BasePreferenceController
-        implements LifecycleObserver, OnStart, OnStop {
+        implements LifecycleObserver, OnStart, OnStop, OnResume {
 
     private static final String TAG = "DoubleTapPowerLockscreenTip";
 
@@ -108,6 +109,13 @@ public class DoubleTapPowerLockscreenTipPreferenceController extends BasePrefere
         DoubleTapPowerSettingsUtils.unregisterObserver(mContext, mSettingsObserver);
     }
 
+    @Override
+    public void onResume() {
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
+    }
+
 
     @Override
     public int getAvailabilityStatus() {
@@ -121,6 +129,49 @@ public class DoubleTapPowerLockscreenTipPreferenceController extends BasePrefere
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        updatePreference();
+    }
+
+    @Override
+    public void updateState(@NonNull Preference preference) {
+        super.updateState(preference);
+
+        if (!DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureEnabled(mContext)
+                || mHasBeenDismissed) {
+            preference.setVisible(false);
+            return;
+        }
+
+        Pair<String, String> targetActionInLockscreenShortcutPair =
+                getTargetActionIfLockScreenShortcut(mContext);
+        if (targetActionInLockscreenShortcutPair == null) {
+            preference.setVisible(false);
+            return;
+        }
+        String targetActionInLockscreenShortcut = targetActionInLockscreenShortcutPair.first;
+        if (preference instanceof CardPreference) {
+            Log.i(TAG, "Target action is also lockscreen shorcut. Showing suggestion card.");
+            preference.setSummary(mContext.getString(
+                            R.string.double_tap_power_lockscreen_shortcut_tip_description,
+                            targetActionInLockscreenShortcut
+                    ));
+            preference.setVisible(true);
+        }
+        updatePreference();
+    }
+
+    /**
+     * Dismisses the Preference
+     *
+     * @param preference Preference
+     */
+    @VisibleForTesting
+    public void onDismiss(@NonNull Preference preference) {
+        preference.setVisible(false);
+        mHasBeenDismissed = true;
+    }
+
+    private void updatePreference() {
         if (mPreference != null) {
             Pair<String, String> targetActionInLockscreenShortcutPair =
                     getTargetActionIfLockScreenShortcut(mContext);
@@ -158,44 +209,6 @@ public class DoubleTapPowerLockscreenTipPreferenceController extends BasePrefere
                 return true;
             });
         }
-    }
-
-    @Override
-    public void updateState(@NonNull Preference preference) {
-        super.updateState(preference);
-
-        if (!DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureEnabled(mContext)
-                || mHasBeenDismissed) {
-            preference.setVisible(false);
-            return;
-        }
-
-        Pair<String, String> targetActionInLockscreenShortcutPair =
-                getTargetActionIfLockScreenShortcut(mContext);
-        if (targetActionInLockscreenShortcutPair == null) {
-            preference.setVisible(false);
-            return;
-        }
-        String targetActionInLockscreenShortcut = targetActionInLockscreenShortcutPair.first;
-        if (preference instanceof CardPreference) {
-            Log.i(TAG, "Target action is also lockscreen shorcut. Showing suggestion card.");
-            preference.setSummary(mContext.getString(
-                            R.string.double_tap_power_lockscreen_shortcut_tip_description,
-                            targetActionInLockscreenShortcut
-                    ));
-            preference.setVisible(true);
-        }
-    }
-
-    /**
-     * Dismisses the Preference
-     *
-     * @param preference Preference
-     */
-    @VisibleForTesting
-    public void onDismiss(@NonNull Preference preference) {
-        preference.setVisible(false);
-        mHasBeenDismissed = true;
     }
 
     @Nullable

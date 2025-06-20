@@ -45,6 +45,7 @@ import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputConstants;
 import com.android.settingslib.media.PhoneMediaDevice;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 
@@ -157,7 +158,12 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
 
     @Override
     public void onSelectedDeviceStateChanged(MediaDevice device, int state) {
-        updateState(mPreference);
+        ThreadUtils.getUiThreadHandler().post(() -> updateState(mPreference));
+    }
+
+    @Override
+    public void onDeviceListUpdate(List<MediaDevice> devices) {
+        ThreadUtils.getUiThreadHandler().post(() -> updateState(mPreference));
     }
 
     @Override

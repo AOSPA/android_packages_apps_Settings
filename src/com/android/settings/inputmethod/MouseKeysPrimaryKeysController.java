@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import android.annotation.Nullable;
 import android.content.Context;
+import android.hardware.input.InputSettings;
 import android.net.Uri;
 import android.provider.Settings;
 
@@ -35,7 +36,6 @@ public class MouseKeysPrimaryKeysController extends
         InputSettingPreferenceController {
 
     @Nullable
-    @SuppressWarnings("unused")
     private TwoStatePreference mTwoStatePreference;
 
     public MouseKeysPrimaryKeysController(@NonNull Context context,
@@ -51,31 +51,27 @@ public class MouseKeysPrimaryKeysController extends
 
     @Override
     public boolean isChecked() {
-        // TODO(b/393569995): Read primary keys from settings once it's added into
-        // Settings.Secure.
-        return true;
+        return InputSettings.isPrimaryKeysForMouseKeysEnabled(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        // TODO(b/393569995): Update primary keys settings value once it's added into
-        // Settings.Secure.
+        InputSettings.setPrimaryKeysForMouseKeysEnabled(mContext, isChecked);
         return true;
     }
 
     @Override
     protected void onInputSettingUpdated() {
-        // TODO(b/393569995): Update preference status based on primary keys settings value
-        // once it's added into Settings.Secure.
+        if (mTwoStatePreference != null) {
+            mTwoStatePreference.setChecked(
+                    InputSettings.isPrimaryKeysForMouseKeysEnabled(mContext));
+        }
     }
 
     @Override
     protected Uri getSettingUri() {
-        // TODO(b/393569995): InputSettingPreferenceController requires getSettingUri()
-        // implementation so using ACCESSIBILITY_MOUSE_KEYS_ENABLED as a placeholder.
-        // Update the uri once primary keys settings are landed.
         return Settings.Secure.getUriFor(
-                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_ENABLED);
+                Settings.Secure.ACCESSIBILITY_MOUSE_KEYS_USE_PRIMARY_KEYS);
     }
 
     @Override

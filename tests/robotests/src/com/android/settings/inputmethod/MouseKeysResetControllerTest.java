@@ -95,5 +95,6 @@ public class MouseKeysResetControllerTest {
                 .isEqualTo(InputSettings.DEFAULT_MOUSE_KEYS_MAX_SPEED);
         assertThat(InputSettings.getAccessibilityMouseKeysAcceleration(mContext))
                 .isEqualTo(InputSettings.DEFAULT_MOUSE_KEYS_ACCELERATION);
+        assertThat(InputSettings.isPrimaryKeysForMouseKeysEnabled(mContext)).isTrue();
     }
 }

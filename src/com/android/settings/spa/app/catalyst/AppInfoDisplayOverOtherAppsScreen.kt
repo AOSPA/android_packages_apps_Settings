@@ -47,7 +47,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-// Note: This page is for DeviceState usages.
 @ProvidePreferenceScreen(AppInfoDisplayOverOtherAppsScreen.KEY, parameterized = true)
 open class AppInfoDisplayOverOtherAppsScreen(context: Context, override val arguments: Bundle) :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider {
@@ -88,7 +87,7 @@ open class AppInfoDisplayOverOtherAppsScreen(context: Context, override val argu
             data = "package:${appInfo.packageName}".toUri()
         }
 
-    override fun isFlagEnabled(context: Context) = Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
     override fun hasCompleteHierarchy() = false
 

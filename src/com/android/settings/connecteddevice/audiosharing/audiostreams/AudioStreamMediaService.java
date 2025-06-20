@@ -137,11 +137,11 @@ public class AudioStreamMediaService extends Service {
             FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     private final HandlerThread mHandlerThread = new HandlerThread(TAG,
             Process.THREAD_PRIORITY_BACKGROUND);
-    private boolean mIsMuted = false;
+    @VisibleForTesting boolean mIsMuted = false;
     // Set 25 as default as the volume range from `VolumeControlProfile` is from 0 to 255.
     // If the initial volume from `onDeviceVolumeChanged` is larger than zero (not muted), we will
     // override this value. Otherwise, we raise the volume to 25 when the play button is clicked.
-    private int mLatestPositiveVolume = 25;
+    @VisibleForTesting int mLatestPositiveVolume = 25;
     private boolean mHysteresisModeFixAvailable;
     private int mBroadcastId;
     private int mSourceId;

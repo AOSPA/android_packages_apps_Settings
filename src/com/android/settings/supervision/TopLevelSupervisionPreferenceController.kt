@@ -20,6 +20,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.preference.Preference
 import com.android.settings.core.BasePreferenceController
+import com.android.settings.supervision.SupervisionDashboardActivity.Companion.INSTALL_SUPERVISION_APP_ACTION
 
 /** Controller for the top level Supervision settings Preference item. */
 class TopLevelSupervisionPreferenceController(context: Context, key: String) :
@@ -35,10 +36,29 @@ class TopLevelSupervisionPreferenceController(context: Context, key: String) :
     }
 
     override fun getAvailabilityStatus(): Int {
-        if (!Flags.enableSupervisionSettingsScreen()) {
+        // Hide the supervision entry in settings if the necessary supervision component is not
+        // available and can't be fixed by user.
+        val hasNecessarySupervisionComponent =
+            mContext.hasNecessarySupervisionComponent(matchAll = true)
+        if (
+            !Flags.enableSupervisionSettingsScreen() ||
+                !hasNecessarySupervisionComponent && !supervisionAppSupportsInstallAction()
+        ) {
             return UNSUPPORTED_ON_DEVICE
         }
 
         return AVAILABLE
+    }
+
+    private fun supervisionAppSupportsInstallAction(): Boolean {
+        if (mContext.systemSupervisionPackageName == null) {
+            return false
+        }
+
+        val intent =
+            Intent(INSTALL_SUPERVISION_APP_ACTION).setPackage(mContext.systemSupervisionPackageName)
+        return mContext.packageManager
+            .queryIntentActivitiesAsUser(intent, 0, mContext.userId)
+            .isNotEmpty()
     }
 }

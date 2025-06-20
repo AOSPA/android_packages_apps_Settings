@@ -28,7 +28,6 @@ import android.content.Intent
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.BiometricPrompt
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
-import android.hardware.biometrics.PromptContentViewWithMoreOptionsButton
 import android.os.Binder
 import android.os.Bundle
 import android.os.CancellationSignal
@@ -169,23 +168,32 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             return builder.build()
         }
 
-        val intent =
-            Intent(this, SupervisionPinRecoveryActivity::class.java).apply {
-                action = SupervisionPinRecoveryActivity.ACTION_RECOVERY
-            }
-        val metricsFeatureProvider = FeatureFactory.featureFactory.metricsFeatureProvider
         val listener =
             DialogInterface.OnClickListener { _: DialogInterface?, _: Int ->
-                metricsFeatureProvider.action(
-                    this,
-                    SettingsEnums.ACTION_SUPERVISION_FORGOT_PIN_DURING_PIN_INVOCATION,
-                )
-                getResultLauncher.launch(intent)
+                onForgotPinFallbackClicked()
             }
-        val moreOptionsButtonBuilder =
-            PromptContentViewWithMoreOptionsButton.Builder()
-                .setMoreOptionsButtonListener(ContextCompat.getMainExecutor(this), listener)
-        return builder.setContentView(moreOptionsButtonBuilder.build()).build()
+
+        return builder
+            .addFallbackOption(
+                getString(R.string.supervision_auth_prompt_forgot_pin_button_label),
+                BiometricManager.IconType.ACCOUNT,
+                ContextCompat.getMainExecutor(this),
+                listener,
+            )
+            .build()
+    }
+
+    @VisibleForTesting
+    fun onForgotPinFallbackClicked() {
+        val metricsFeatureProvider = FeatureFactory.featureFactory.metricsFeatureProvider
+        metricsFeatureProvider.action(
+            this,
+            SettingsEnums.ACTION_SUPERVISION_FORGOT_PIN_DURING_PIN_INVOCATION,
+        )
+        val intent = Intent(this, SupervisionPinRecoveryActivity::class.java).apply {
+            action = SupervisionPinRecoveryActivity.ACTION_RECOVERY
+        }
+        getResultLauncher.launch(intent)
     }
 
     private fun callerHasSupervisionRole(): Boolean {

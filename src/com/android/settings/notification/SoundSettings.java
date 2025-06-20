@@ -26,7 +26,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.UserHandle;
-import android.preference.SeekBarVolumizer;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -43,6 +42,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.sound.HandsFreeProfileOutputPreferenceController;
 import com.android.settings.sound.SliderVolumizer;
 import com.android.settings.sound.VolumeSliderPreference;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settings.widget.UpdatableListPreferenceDialogFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -53,6 +53,7 @@ import com.android.settingslib.search.SearchIndexable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -210,6 +211,8 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
                 onPreferenceDataChanged(listPreference));
         mHfpOutputControllerKey =
                 use(HandsFreeProfileOutputPreferenceController.class).getPreferenceKey();
+        use(PreferenceCategoryController.class).setChildren(
+                Arrays.asList(use(WorkSoundsPreferenceController.class)));
     }
 
     // === Volumes ===

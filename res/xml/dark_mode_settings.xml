@@ -80,6 +80,12 @@
         settings:controller="com.android.settings.display.darkmode.DarkModePendingLocationPreferenceController" />
 
     <com.android.settingslib.widget.FooterPreference
+        android:key="dark_theme_expanded_footer"
+        android:title="@string/accessibility_dark_theme_preference_footer_content"
+        settings:searchable="false"
+        settings:controller="com.android.settings.display.darkmode.DarkModeExpandedFooterPreferenceController" />
+
+    <com.android.settingslib.widget.FooterPreference
         android:key="dark_theme_custom_bedtime_footer"
         android:title="@string/dark_ui_bedtime_footer_summary"
         settings:searchable="false"

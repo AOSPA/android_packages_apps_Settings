@@ -20,6 +20,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.media.AudioManager
+import android.os.VibrationAttributes.USAGE_NOTIFICATION
+import android.os.VibrationAttributes.USAGE_RINGTONE
 import android.os.VibrationAttributes.Usage
 import android.os.Vibrator
 import android.os.Vibrator.VIBRATION_INTENSITY_OFF
@@ -38,21 +40,23 @@ import kotlin.math.min
 class VibrationIntensitySettingsStore(
     private val context: Context,
     @Usage vibrationUsage: Int,
-    private val hasRingerModeDependency: Boolean,
-    private val key: String,
     private val keyValueStoreDelegate: KeyValueStore = SettingsSystemStore.get(context),
     private val defaultIntensity: Int = context.getDefaultVibrationIntensity(vibrationUsage),
     private val supportedIntensityLevels: Int = context.getSupportedVibrationIntensityLevels(),
-) : AbstractKeyedDataObservable<String>(), KeyedObserver<String>, KeyValueStore {
+) : AbstractKeyedDataObservable<String>(), KeyedObserver<String?>, KeyValueStore {
 
-    private lateinit var ringerModeBroadcastReceiver: BroadcastReceiver
+    private val hasRingerModeDependency: Boolean =
+        when (vibrationUsage) {
+            USAGE_RINGTONE, USAGE_NOTIFICATION -> true
+            else -> false
+        }
 
-    /** Returns true if the settings key should be enabled, false otherwise. */
+    private var ringerModeBroadcastReceiver: BroadcastReceiver? = null
+
     fun isPreferenceEnabled(): Boolean {
         if (keyValueStoreDelegate.getBoolean(VibrationMainSwitchPreference.KEY) == false) {
             return false
         }
-
         return !isDisabledByRingerMode()
     }
 
@@ -60,6 +64,17 @@ class VibrationIntensitySettingsStore(
         return (keyValueStoreDelegate.getBoolean(VibrationMainSwitchPreference.KEY) != false) &&
                 (hasRingerModeDependency && context.isRingerModeSilent())
     }
+
+    fun dependencies() = arrayOf(VibrationMainSwitchPreference.KEY)
+
+    fun getSummary(): CharSequence? =
+        // Only display summary if ringer mode silent is the one disabling this preference.
+        if (isDisabledByRingerMode()) {
+            context.getString(
+                R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary)
+        } else {
+            null
+        }
 
     override fun contains(key: String) = keyValueStoreDelegate.contains(key)
 
@@ -85,6 +100,10 @@ class VibrationIntensitySettingsStore(
     }
 
     override fun onFirstObserverAdded() {
+        keyValueStoreDelegate.addObserver(this, HandlerExecutor.main)
+        if (!hasRingerModeDependency) {
+            return
+        }
         ringerModeBroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(broadcastContext: Context?, intent: Intent?) {
                 notifyChange(PreferenceChangeReason.STATE)
@@ -96,27 +115,15 @@ class VibrationIntensitySettingsStore(
             intentFilter,
             Context.RECEIVER_NOT_EXPORTED
         )
-
-        keyValueStoreDelegate.addObserver(key, this, HandlerExecutor.main)
     }
-
-    override fun onKeyChanged(key: String, reason: Int) = notifyChange(key, reason)
 
     override fun onLastObserverRemoved() {
-        context.unregisterReceiver(ringerModeBroadcastReceiver)
-        keyValueStoreDelegate.removeObserver(key, this)
+        keyValueStoreDelegate.removeObserver(this)
+        ringerModeBroadcastReceiver?.let { context.unregisterReceiver(it) }
     }
 
-    fun dependencies() = arrayOf(VibrationMainSwitchPreference.KEY)
-
-    fun getSummary(): CharSequence? =
-        // Only display summary if ringer mode silent is the one disabling this preference.
-        if (isDisabledByRingerMode()) {
-            context.getString(
-                R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary)
-        } else {
-            null
-        }
+    override fun onKeyChanged(key: String?, reason: Int) =
+        key?.let { notifyChange(it, reason) } ?: notifyChange(reason)
 
     @Suppress("UNCHECKED_CAST")
     private fun <T : Any> intensityToValue(valueType: Class<T>, intensity: Int): T? =

@@ -47,8 +47,10 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"Email"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Nakaraang preview"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Susunod na preview"</string>
-    <string name="font_size_make_smaller_desc" msgid="319927200356692406">"Paliitin ang laki ng font"</string>
-    <string name="font_size_make_larger_desc" msgid="6739310980713118605">"Palakihin ang laki ng font"</string>
+    <!-- no translation found for font_size_make_smaller_desc (9149663537989624487) -->
+    <skip />
+    <!-- no translation found for font_size_make_larger_desc (5774611876657293550) -->
+    <skip />
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Palagi"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Mag-o-on ang display sa harap kapag na-fold mo ang iyong device"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Mag-swipe pataas para magpatuloy"</string>
@@ -198,7 +200,7 @@
     <string name="locale_remove_menu" msgid="3521546263421387474">"Alisin"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Magdagdag ng wika"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Wika"</string>
-    <string name="locale_picker_category_title" msgid="6212064706962721255">"Gustong Wika"</string>
+    <string name="locale_picker_category_title" msgid="296835514014453679">"Mga Gustong Wika"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Mga wika ng app"</string>
     <string name="app_locale_picker_summary" msgid="616928580653613998">"Piliin ang wika para sa bawat app"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Wika ng app"</string>
@@ -224,10 +226,11 @@
     <string name="title_change_system_locale" msgid="4102991236063984803">"Gawing %s ang wika ng system?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Idagdag ang %s sa mga gustong wika?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Ipinapaalam nito sa mga app at website na gusto mo rin ang wikang ito."</string>
-    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Magbabago ang mga setting ng device at panrehiyong preference mo."</string>
+    <string name="desc_notice_device_locale_and_region_settings_change" msgid="909261686577914396">"<xliff:g id="LANGUAGE">%1$s</xliff:g> ang gagamitin ng iyong device at gagawing <xliff:g id="REGION">%2$s</xliff:g> ang rehiyon mo."</string>
+    <string name="dlg_desc_delete_preferred_default_locale" msgid="690828405078078513">"Aalisin ang <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> sa iyong mga gustong wika"</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Palitan"</string>
-    <string name="title_unavailable_locale" msgid="2628898110416542386">"Hindi available ang %s"</string>
-    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Hindi puwedeng gamitin ang wikang ito bilang wika ng system, pero ipinaalam mo sa mga app at website na gusto mo ang wikang ito."</string>
+    <string name="title_unavailable_locale" msgid="5382411204559213983">"Hindi maitakda ang <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> bilang wika ng system"</string>
+    <string name="desc_unavailable_locale" msgid="7223655766703116782">"Hindi sinusuportahan ng iyong device ang wikang ito, pero malalaman ng mga app na mas gusto mo ang wikang ito"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Maghanap"</string>
     <string name="language_and_region_title" msgid="8374151891112162767">"Wika at rehiyon"</string>
     <string name="language_selection_title" msgid="968179636453982415">"Magdagdag ng wika"</string>
@@ -241,6 +244,9 @@
     <string name="title_change_system_locale_region" msgid="4401478579429442695">"Gawing <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g> ang rehiyon?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"Papanatilihin ng device ang <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> na wika ng system"</string>
     <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"Piliin kung paano nagpapakita ng mga numero ang iyong device, website, at app"</string>
+    <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Ilipat pataas"</string>
+    <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Ilipat pababa"</string>
+    <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Alisin"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Mga panrehiyong preference"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Magtakda ng mga kagustuhan sa mga yunit at numero"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ipaalam sa mga app kung ano ang mga panrehiyong preference mo para ma-personalize ng mga ito ang iyong experience."</string>
@@ -279,6 +285,8 @@
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Hindi maaalis ang lahat ng wika"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Magtira ng kahit isang gustong wika"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Hindi available bilang wika ng system"</string>
+    <string name="dlg_title_delete_preferred_locale" msgid="4167214348946940002">"Alisin si <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g>?"</string>
+    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"Aalisin ang <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> sa iyong mga gustong wika. Maidaragdag mo ito ulit sa ibang pagkakataon."</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Ilipat pataas"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Ilipat pababa"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Ilipat sa itaas"</string>
@@ -458,6 +466,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Huwag muna"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Sumasang-ayon ako"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"I-double tap para i-rename"</string>
+    <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"Nakilala ang <xliff:g id="FP_NAME">%1$s</xliff:g>"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Laktawan ang fingerprint?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Aabutin lang nang isa o dalawang minuto ang pag-set up ng fingerprint. Kung lalaktawan mo ito, puwede mong idagdag ang iyong fingerprint sa mga setting sa ibang pagkakataon."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Kapag nakita mo ang icon na ito, gamitin ang iyong fingerprint para sa pag-authenticate, halimbawa, kapag nag-sign in ka sa mga app o nag-apruba ka ng pagbili"</string>
@@ -1162,7 +1171,16 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Hindi valid na format ang QR code"</string>
     <string name="retry" msgid="7542103800274026915">"Subukan Ulit"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Ibahagi sa iba pang mga user ng device"</string>
+    <string name="shared_message" msgid="2104244057926025072">"naka-share"</string>
+    <string name="private_message" msgid="5897966950396765392">"pribado"</string>
+    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Kumpirmahin"</string>
+    <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Kanselahin"</string>
+    <string name="wifi_share_preference_title" msgid="6346200020322308703">"Isa itong naka-share na network"</string>
+    <string name="wifi_share_preference_summary" msgid="4356010425167713046">"Matitingnan, mae-edit, at made-delete ng lahat ng user ang network na ito, maliban sa mga bisitang user"</string>
+    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Lumipat sa <xliff:g id="SHARED">%1$s</xliff:g> na network na \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\"?"</string>
+    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Kasalukuyan kang nakakonekta sa <xliff:g id="SHARED_0">%1$s</xliff:g> (na) network na may parehong pangalan. Kapag lumipat ka, madidiskonekta ka sa <xliff:g id="SHARED_1">%2$s</xliff:g> na network at pagkatapos ay kokonekta ka ulit sa <xliff:g id="PRIVATE">%3$s</xliff:g> network. Posibleng pansamantalang mawalan ka ng internet."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(di-nabago)"</string>
+    <string name="wifi_allow_edit_configuration_title" msgid="3928254385019370063">"Payagan ang ibang user na i-edit ang configuration ng network"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Mangyaring pumili"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Nagdagdag ng maraming certificate)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Gamitin ang mga certificate ng system"</string>
@@ -1180,8 +1198,7 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"I-share ang network na ito sa ibang user ng device"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Magagawa ng lahat ng user sa device na ito na tingnan at kumunekta sa naka-share na network. Puwedeng mag-delete ang mga administrator ng naka-share na network. Matuto pa"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Payagan ang ibang user na i-edit ang configuration ng network"</string>
-    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
-    <skip />
+    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"Makipag-ugnayan sa admin ng device na ito para gumawa ng mga pagbabago sa network na ito."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Walang access sa internet ang network na ito. Manatiling nakakonekta?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Baka hindi gumana ang ilang app at serbisyo dahil sa limitadong koneksyon. Gamitin pa rin?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Huwag nang tanungin muli sa network na ito"</string>
@@ -2138,16 +2155,19 @@
     <string name="mouse_keys" msgid="6237254627808525540">"Mga mouse key"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Gamitin ang mga mouse key"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Shortcut ng mga mouse key"</string>
-    <string name="mouse_keys_summary" msgid="7030731235143286467">"Gamitin ang iyong keyboard para kontrolin ang pointer"</string>
-    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Maximum na bilis"</string>
+    <string name="mouse_keys_summary" msgid="6512910710030108693">"Gamitin ang iyong keyboard para kontrolin ang cursor"</string>
+    <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"Bilis"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Bawasan"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Dagdagan"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Reverse na pag-scroll"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Gumamit ng mga primary key"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_summary (5057949666957911577) -->
+    <skip />
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"I-reset ang mga setting"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"Paano gumamit ng mga primary key"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"Paano gumamit ng numeric keypad"</string>
-    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2728318055237217919">"Numeric keypad ang gamit kapag naka-on ang Num Lock"</string>
+    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2186017679302722178) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Mag-scroll pataas para ibaba ang page"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Pag-scroll"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Kontroladong pag-scroll"</string>
@@ -2165,6 +2185,9 @@
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Gamitin ang \"<xliff:g id="RELEASE_LABEL">%s</xliff:g>\" key para bitawan ang pangunahing button ng mouse"</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"Gamitin ang \"<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>\" key para i-toggle ang scroll mode. Ipapa-scroll nito sa mga \"<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>\" key ang view nang pataas, pababa, pakaliwa, o pakanan"</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Gamitin ang \"<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>\" key para i-click ang pangalawang button ng mouse"</string>
+    <string name="mouse_keys_acceleration_seekbar_title" msgid="2329098889930361504">"Acceleration"</string>
+    <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"Mabilis"</string>
+    <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"Mabagal"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"Tingnan ang mga keyboard shortcut"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Ipakita ang listahan ng mga shortcut"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Mga keyboard at tool ng profile sa trabaho"</string>
@@ -2227,40 +2250,23 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Susunod"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"I-restart"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Tapos na"</string>
-    <!-- no translation found for action_corner_title (1489042651433221319) -->
-    <skip />
-    <!-- no translation found for action_corner_summary (695618538930535335) -->
-    <skip />
-    <!-- no translation found for action_corner_intro (8782001241997579665) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
-    <skip />
-    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
-    <skip />
-    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
-    <skip />
-    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
-    <skip />
-    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
-    <skip />
-    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
-    <skip />
-    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
-    <skip />
+    <string name="action_corner_title" msgid="7411160165577367757">"I-customize ang mga shortcut ng sulok"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"Gumamit ng mga cursor para mag-navigate sa system"</string>
+    <string name="action_corner_intro" msgid="2170609118659718140">"Piliin ang mga sumusunod na bahagi para i-customize ang mga shortcut ng sulok"</string>
+    <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Kaliwang sulok sa ibaba"</string>
+    <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"Kanang sulok sa ibaba"</string>
+    <string name="action_corner_top_left_title" msgid="4633975226092344210">"Kaliwang sulok sa itaas"</string>
+    <string name="action_corner_top_right_title" msgid="4995999693840776032">"Kanang sulok sa itaas"</string>
+    <string name="action_corner_action_none" msgid="5203163099950649999">"Wala"</string>
+    <string name="action_corner_action_home" msgid="6779642573582379579">"Home"</string>
+    <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Mga kamakailang app"</string>
+    <string name="action_corner_action_notifications" msgid="3779353356349774469">"Mga Notification"</string>
+    <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Mga mabilisang setting"</string>
+    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Pumili ng shortcut para sa <xliff:g id="CORNER">%1$s</xliff:g>"</string>
+    <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"kaliwang sulok sa ibaba"</string>
+    <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"kanang sulok sa ibaba"</string>
+    <string name="action_corner_top_left_name" msgid="8077670910600032291">"kaliwang sulok sa itaas"</string>
+    <string name="action_corner_top_right_name" msgid="6307321595919080297">"kanang sulok sa itaas"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Mga modifier key"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Baguhin ang gawi ng mga key"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"I-reset lahat"</string>
@@ -2405,8 +2411,7 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Shortcut ng pag-magnify"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Sinusundan ang cursor"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Piliin kung paano sinusundan ng Pag-magnify ang iyong cursor."</string>
-    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
-    <skip />
+    <string name="accessibility_magnification_cursor_following_unavailable_summary" msgid="1683880243856242269">"Hindi available habang naka-magnify ang isang bahagi lang ng screen"</string>
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Tuloy-tuloy na igalaw ang screen habang gumagalaw ang mouse"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Igalaw ang screen habang pinapanatili ang mouse sa gitna ng screen"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Igalaw ang screen kapag napunta ang mouse sa mga gilid ng screen"</string>
@@ -2547,32 +2552,20 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"I-auto update pag-magnify ng screen"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"I-update pag-magnify ng screen sa app transition"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Tatapusin ng power button ang tawag"</string>
-    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="8563711427335567656">"Mode"</string>
+    <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Standard na Dark Theme"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Inilalapat ang Dark theme sa iyong device at mga sinusuportahang app"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Na-expand"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Na-expand na Dark Theme"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Awtomatikong inilalapat ang Dark theme sa marami pang app para sa pinahusay na accessibility"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Alisin ang mga animation"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Bawasan ang paggalaw sa screen"</string>
-    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
-    <skip />
+    <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Pag-blink ng cursor ng text"</string>
+    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"I-adjust ang bilis o i-off ang pag-blink ng cursor ng text. Posibleng hindi sinusuportahan sa lahat ng app o website."</string>
+    <string name="accessibility_text_cursor_blink_rate_slower_desc" msgid="5255697869959801747">"Bawasan ang bilis ng pag-blink"</string>
+    <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"Dagdagan ang bilis ng pag-blink"</string>
+    <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"I-reset"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Mono audio"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Pagsamahin ang mga channel kapag nagpapatugtog"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Balanse ng audio"</string>
@@ -2662,6 +2655,8 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Matuto pa tungkol sa pagtatama ng kulay"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Tungkol sa pag-invert ng kulay"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Matuto pa tungkol sa pag-invert ng kulay"</string>
+    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Matuto pa tungkol sa Dark theme"</string>
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Posibleng hindi sinusuportahan ng ilang app ang Dark theme sa pinalawak na setting. Kung nakakaranas ka ng mga isyu sa hitsura, gamitin ang karaniwang setting."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Ipakita ang mga caption"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Para sa sinusuportahang app lang"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Laki at istilo ng caption"</string>
@@ -3728,8 +3723,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Wala}=1{Naitakda ang 1 iskedyul}one{Naitakda ang # iskedyul}other{Naitakda ang # na iskedyul}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Huwag Istorbohin"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Mga Mode"</string>
-    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
-    <skip />
+    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Bawasan ang mga abala at kontrolin ang iyong atensyon sa pamamagitan ng mga mode para sa pagtulog, pagtatrabaho, pagmamaneho, at kahit ano pa"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Gumawa ng sarili mong mode"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Makakuha lang ng notification mula sa mahahalagang tao at app"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Magtakda ng iskedyul"</string>
@@ -4515,8 +4509,10 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Gawing mas malaki o mas maliit ang lahat"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"density ng display, pag-zoom sa screen, scale, pag-scale"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Preview"</string>
-    <string name="screen_zoom_make_smaller_desc" msgid="1450649885198381123">"Paliitin ang laki ng display"</string>
-    <string name="screen_zoom_make_larger_desc" msgid="7125594310562596457">"Palakihin ang laki ng display"</string>
+    <!-- no translation found for screen_zoom_make_smaller_desc (6268455784510593120) -->
+    <skip />
+    <!-- no translation found for screen_zoom_make_larger_desc (3458295276713085365) -->
+    <skip />
     <string name="disconnected" msgid="3469373726996129247">"Hindi nakakonekta"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Hindi nakakonekta"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> (na) app ang naka-install"</string>
@@ -4536,6 +4532,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Na-block ng iyong credit provider"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Kinakailangan ang magulang"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Ibigay ang telepono sa iyong magulang para simulan ang pag-set up dito"</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"Pinaghihigpitan ng parental controls"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"Tanging ang taong namamahala sa iyong parental controls ang makakapagbago ng setting na ito"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Ibigay ang telepono sa iyong magulang para mabago ang setting na ito."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Para sa higit pang impormasyon, makipag-ugnayan sa inyong IT admin"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Higit pang mga detalye"</string>
@@ -4651,7 +4649,7 @@
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Suriin"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Nakatulong ba ang mensaheng ito?"</string>
-    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Icon ng babala sa mga tip sa baterya"</string>
+    <string name="battery_hints_warning_icon_a11y" msgid="709629805028175434">"Mga tip sa babala sa baterya"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"I-on ang adaptive brightness para pahabain ang tagal ng baterya"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Bawasan ang timeout ng screen para pahabain ang tagal ng baterya"</string>
     <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"Gumamit ang <xliff:g id="APP_LABEL">%1$s</xliff:g> ng mas maraming baterya"</string>
@@ -4979,8 +4977,6 @@
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"I-reset sa mga default na value"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Na-reset ang mga autofill na opsyon ng developer"</string>
     <string name="location_category" msgid="3496759112306219062">"Lokasyon"</string>
-    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Indicator ng lokasyon sa status bar"</string>
-    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Ipakita para sa lahat ng lokasyon, kasama na ang network at pagkakonekta"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Ipatupad ang kumpletong sukat ng GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Sinusubaybayan ang lahat ng constellation at dalas ng GNSS nang walang duty cycling"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Paraan ng Pag-input"</string>
@@ -5195,7 +5191,8 @@
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Koneksyon sa satellite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"koneksyon sa satellite"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellite messaging"</string>
-    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Kasama sa iyong account ang paggamit ng data"</string>
+    <!-- no translation found for title_have_satellite_data_plan (1101741256080690699) -->
+    <skip />
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Mga sinusuportahang app sa iyong telepono"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Tingnan ang lahat ng app na sinusuportahan ng satellite"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Mga sinusuportahang app sa iyong telepono"</string>
@@ -5371,15 +5368,13 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Mag-boot sa 16 KB na laki ng page"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Mag-boot sa 16 KB page size supported na kernel"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Lumipat sa 16 KB mode mula sa 4 KB mode"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="4760548401414644138">"Kailangang i-convert sa ext4 ang partition ng data ng device na ito bago magamit ang 16 KB na opsyon ng developer. Mawa-wipe ang device at gagawing ext4 ang filesystem pagkatapos magkumpirma. Nasa production mode ka na nagpapagana ng 4 KB na kernel, at lilipat ka sa 16 KB mode. Kapag nasa mode na ito ka na, puwede kang magpalipat-lipat sa 4 KB at 16 KB mode pagkatapos ng isang pag-reboot lang. Hindi magagarantiya ang integridad ng software sa mode na ito, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para ibalik sa production mode ang device, kakailanganin mong bumalik sa 4 KB mode at i-lock ang bootloader pagkatapos nito, na magfa-factory reset sa device. Pagkatapos mag-boot ng device sa Android, i-disable ang OEM na pag-unlock sa Mga opsyon ng developer. Para magpatuloy, i-click ang \'Burahin ang lahat ng data at i-update\'. Ire-reboot nito ang device."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Nasa page-agnostic mode ka na nagpapagana ng 4 KB na kernel, at lilipat ka sa 16 KB mode. Hindi magagarantiya ang integridad ng software sa mode na ito, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Ire-reboot nito ang device. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para ibalik sa production mode ang device, kakailanganin mong bumalik sa 4 KB mode at i-lock ang bootloader pagkatapos nito, na magfa-factory reset sa device. Pagkatapos mag-boot ng device sa Android, i-disable ang OEM na pag-unlock sa Mga opsyon ng developer."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Lumipat sa 4 KB mode mula sa 16 KB mode"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Nasa page-agnostic mode ka na nagpapagana ng 4 KB na kernel, at lilipat ka sa 16KB mode. Hindi magagarantiya ang integridad ng software sa mode na ito, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Ire-reboot nito ang device. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para ibalik sa production mode ang device, kakailanganin mong i-lock ang bootloader pagkatapos nito, na magfa-factory reset sa device. Pagkatapos mag-boot ng device sa Android, i-disable ang OEM na pag-unlock sa Mga opsyon ng developer."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Hindi na-update ang kernel sa 16 KB page na compatible kernel."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Inilalapat ang pagbabago"</string>
-    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
-    <skip />
+    <string name="confirm_ext4_button_text" msgid="697563319110759422">"Burahin ang lahat ng data at i-update"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Hindi na-reformat at na-wipe ang partition ng data sa ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Required ang Pag-unlock ng Bootloader"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"Kailangang naka-unlock ang bootloader sa device na ito bago magamit ang 16 KB na opsyon ng developer. Hindi magagarantiya ang integridad ng software sa mode na ito, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Mawa-wipe ang lahat ng data at setting ng user kapag ina-activate ang 16 KB mode. Kapag na-unlock na ang bootloader, kailangan ng dalawang pag-reboot para sa pag-activate ng 16 KB na opsyon. Kapag nasa mode na ito ka na, puwede kang magpalipat-lipat sa 4 KB at 16 KB mode pagkatapos ng isang pag-reboot lang. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para ibalik sa production mode ang device, kakailanganin mong bumalik sa 4 KB mode at pagkatapos ay i-lock ang OEM/bootloader sa device (na magfa-factory reset nito). I-unlock ang bootloader at subukan ulit. Mahahanap mo ang mga tagubilin kung paano ito gawin sa &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5829,6 +5824,8 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Walang password"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Matuto pa"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Hindi ma-play ang audio stream na ito sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
+    <skip />
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Nakikinig ngayon"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Naka-pause ang stream"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Ihinto ang pakikinig"</string>
@@ -5875,35 +5872,40 @@
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Pindutin nang matagal ang button ng Home o handle ng navigation para maghanap gamit ang content sa iyong screen."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. I-configure ang detalye ng device."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Parental controls"</string>
-    <string name="supervision_settings_summary" msgid="5020634300370322741">"Mga paghihigpit sa content at iba pang limitasyon"</string>
+    <string name="supervision_settings_summary" msgid="6304257872307136073">"Mga digital na panuntunan at limitasyon sa tagal ng paggamit"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Mag-set up ng PIN"</string>
-    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"Naka-pause"</string>
-    <string name="keywords_supervision_settings" msgid="2580555201483955376">"pamamahala, pamamahala ng magulang, parental controls"</string>
+    <string name="keywords_supervision_settings" msgid="43064288661561602">"pamamahala, parental controls, mga magulang, pin ng pamamahala, pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Pamahalaan ang iyong PIN"</string>
+    <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN ng Magulang, PIN ng Parental controls"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Magdagdag ng email sa pag-recover"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"I-verify ang email sa pag-recover"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Palitan ang PIN"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Nakalimutan ang PIN"</string>
+    <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Nakalimutan ang PIN?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"I-update ang email sa pag-recover"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"I-delete ang PIN"</string>
-    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Ire-reset nito ang lahat ng setting ng pamamahala mo"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Magdagdag ng email sa pag-recover"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"I-verify ang iyong email"</string>
-    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Mga filter ng content sa web"</string>
-    <string name="supervision_web_content_filters_top_intro" msgid="5264773769840566499">"Bina-block ang pang-mature na content sa mga website at resulta ng paghahanap sa mga sinusuportahang app sa device na ito. Posible pa ring magpakita ng explicit na content ang mga hindi sinusuportahang app."</string>
+    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Mga filter ng content ng website"</string>
+    <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Mga filter ng website, I-block ang mga site, Mga filter ng browser, I-block ang mga explicit na site, I-filter ang mga site, I-block ang mga resulta ng paghahanap, I-filter ang mga explicit na resulta ng paghahanap, mga paghihigpit sa content"</string>
+    <!-- no translation found for supervision_web_content_filters_top_intro (8056274290725144441) -->
+    <skip />
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Mga Website"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"I-block ang mga explicit na site"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Mga resulta ng paghahanap"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"I-filter ang mga explicit na resulta ng paghahanap"</string>
-    <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Ilagay ang PIN sa pamamahala"</string>
+    <!-- no translation found for supervision_web_content_filters_switch_summary (2095166099345288321) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_footer_title (1741897040916039165) -->
+    <skip />
+    <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Ilagay ang PIN ng parental controls"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Magtakda ng PIN ng parental controls"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Kumpirmahin ang PIN"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Na-update na ang PIN"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Buksan ang app"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"I-delete ang PIN?"</string>
-    <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"Ide-delete nito ang iyong kasalukuyang PIN para sa lahat ng user sa device na ito at idi-disable nito ang mga kontrol na na-set up mo. Hindi maa-undo ang aksyong ito."</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"I-pause muna ang mga kontrol sa ibang profile"</string>
-    <string name="supervision_delete_pin_supervision_enabled_message" msgid="5643922966568203196">"Para magpatuloy sa pag-delete ng PIN na ito at pag-reset sa mga setting ng pamamahala, i-pause ang mga kontrol sa lahat ng iba pang profile."</string>
+    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
+    <skip />
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Hindi puwedeng i-delete ang PIN"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Nagka-error habang sinusubukang i-delete ang PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>

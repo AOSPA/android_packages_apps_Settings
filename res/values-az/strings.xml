@@ -47,9 +47,9 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"E-poçt"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Əvvəlki önizləmə"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Növbəti önizləmə"</string>
-    <!-- no translation found for font_size_make_smaller_desc (319927200356692406) -->
+    <!-- no translation found for font_size_make_smaller_desc (9149663537989624487) -->
     <skip />
-    <!-- no translation found for font_size_make_larger_desc (6739310980713118605) -->
+    <!-- no translation found for font_size_make_larger_desc (5774611876657293550) -->
     <skip />
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Həmişə"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Cihazı qatladıqda ön ekran yandırılır"</string>
@@ -200,7 +200,7 @@
     <string name="locale_remove_menu" msgid="3521546263421387474">"Silin"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Dil əlavə edin"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Dil"</string>
-    <string name="locale_picker_category_title" msgid="6212064706962721255">"Tərcih etdiyiniz dil"</string>
+    <string name="locale_picker_category_title" msgid="296835514014453679">"Tərcih edilən dillər"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Tətbiq dilləri"</string>
     <string name="app_locale_picker_summary" msgid="616928580653613998">"Hər tətbiq üçün dil seçin"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Tətbiq dili"</string>
@@ -226,10 +226,11 @@
     <string name="title_change_system_locale" msgid="4102991236063984803">"Sistem dili %s olaraq dəyişilsin?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"%s tərcih edilən dillərə əlavə edilsin?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Bununla tətbiq və veb-saytlar bu dili tərcih etdiyinizi bilir."</string>
-    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Cihaz ayarları və regional tərcihlər dəyişəcək."</string>
+    <string name="desc_notice_device_locale_and_region_settings_change" msgid="909261686577914396">"Cihazınız <xliff:g id="LANGUAGE">%1$s</xliff:g> dilindən istifadə edəcək və region <xliff:g id="REGION">%2$s</xliff:g> olaraq dəyişdiriləcək."</string>
+    <string name="dlg_desc_delete_preferred_default_locale" msgid="690828405078078513">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> tərcih edilən dillərinizdən silinəcək"</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Dəyişin"</string>
-    <string name="title_unavailable_locale" msgid="2628898110416542386">"%s əlçatan deyil"</string>
-    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Bu dil sistem dili kimi istifadə edilə bilməz, lakin tətbiq və veb-saytlara bu dili tərcih etdiyinizi bildirmisiniz."</string>
+    <string name="title_unavailable_locale" msgid="5382411204559213983">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> sistem dili olaraq ayarlanmır"</string>
+    <string name="desc_unavailable_locale" msgid="7223655766703116782">"Cihazınız bu dili dəstəkləmir, lakin tətbiqlər bu dili tərcih etdiyinizi biləcək"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Axtarın"</string>
     <string name="language_and_region_title" msgid="8374151891112162767">"Dil və bölgə"</string>
     <string name="language_selection_title" msgid="968179636453982415">"Dil əlavə edin"</string>
@@ -243,6 +244,9 @@
     <string name="title_change_system_locale_region" msgid="4401478579429442695">"Region <xliff:g id="SYSTEM_LANGUAGE_REGION">%1$s</xliff:g> olaraq dəyişilsin?"</string>
     <string name="body_change_system_locale_region" msgid="9064318449821043189">"Cihazınız <xliff:g id="SYSTEM_LANGUAGE">%1$s</xliff:g> dilini sistem dili kimi saxlayacaq"</string>
     <string name="top_intro_numbering_system_title" msgid="3962000662073238392">"Cihaz, veb-sayt və tətbiqlərin rəqəmləri necə göstərdiyini seçin"</string>
+    <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Yuxarı köçürün"</string>
+    <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Aşağı köçürün"</string>
+    <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Silin"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regional tərcihlər"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Vahidlər və nömrə tərcihlərini ayarlayın"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Tətbiqlərə regional tərcihlərinizi bildirin ki, təcrübənizi fərdiləşdirə bilsinlər."</string>
@@ -281,6 +285,8 @@
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Bütün dilləri silmək mümkün deyil."</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Ən azı bir tərcih olunmuş dil saxlayın"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Sistem dili kimi əlçatan deyil"</string>
+    <string name="dlg_title_delete_preferred_locale" msgid="4167214348946940002">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> silinsin?"</string>
+    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> tərcih edilən dillərinizdən silinəcək. Onu daha sonra əlavə edə bilərsiniz."</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Yuxarı keçin"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Aşağı keçin"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Ən yuxarı"</string>
@@ -460,6 +466,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"İndi yox"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Razıyam"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Yenidən adlandırmaq üçün iki dəfə toxunun"</string>
+    <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"<xliff:g id="FP_NAME">%1$s</xliff:g> tanındı"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Barmaq izi ötürülsün?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Barmaq izinin ayarlanması bir-iki dəqiqə çəkəcək. Bu mərhələni ötürsəniz, barmaq izini sonradan ayarlarda əlavə edə bilərsiniz."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Tətbiqlərə daxil olmaq və ya alışı təsdiqləmək kimi hallarda bu ikonanı gördükdə kimlik doğrulaması üçün barmaq izinizi istifadə edin"</string>
@@ -942,10 +949,8 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Qoşulsun"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Ayrılın"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"cütləndirin və əlaqə yaradın"</string>
-    <!-- no translation found for bluetooth_connecting (5315496594905010438) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnecting (1643422701532873735) -->
-    <skip />
+    <string name="bluetooth_connecting" msgid="5315496594905010438">"Əlaqələndirilir"</string>
+    <string name="bluetooth_disconnecting" msgid="1643422701532873735">"Əlaqə kəsilir"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Bluetooth aktiv olduqda cihaz yaxınlıqdakı Bluetooth cihazları ilə bağlantı qura bilər"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Bluetooth aktiv olduqda cihaz yaxınlıqdakı Bluetooth cihazları ilə bağlantı qura bilər. Cəld Paylaşım və Cihazın Tapılması kimi funksiyalar Bluetooth istifadə edir."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Bluetooth aktiv olduqda cihaz yaxınlıqdakı digər Bluetooth cihazları ilə bağlantı qura bilər.\n\nCihaz təcrübəsini yaxşılaşdırmaq üçün tətbiq və xidmətlər hətta Bluetooth deaktiv olduqda belə istənilən vaxt yaxınlıqdakı cihazları skan edə bilər. Bu, məsələn, məkan əsaslı funksiya və xidmətləri yaxşılaşdırmaq üçün istifadə oluna bilər. Bunu Bluetooth skanlama ayarlarında dəyişə bilərsiniz."</string>
@@ -1166,7 +1171,16 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR kodu doğru formatda deyil"</string>
     <string name="retry" msgid="7542103800274026915">"Yenidən cəhd edin"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Digər cihaz istifadəçiləri ilə paylaşın"</string>
+    <string name="shared_message" msgid="2104244057926025072">"ortaq"</string>
+    <string name="private_message" msgid="5897966950396765392">"şəxsi"</string>
+    <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Təsdiq edin"</string>
+    <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Ləğv edin"</string>
+    <string name="wifi_share_preference_title" msgid="6346200020322308703">"Bu, ortaq şəbəkədir"</string>
+    <string name="wifi_share_preference_summary" msgid="4356010425167713046">"Qonaq istifadəçilər istisna olmaqla bütün istifadəçilər bu şəbəkəyə baxa, redaktə edə və silə biləcəklər"</string>
+    <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"<xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" şəbəkəsinə dəyişdirilsin?"</string>
+    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Hazırda eyni adlı <xliff:g id="SHARED_0">%1$s</xliff:g> şəbəkəyə qoşulmusunuz. Dəyişdiyiniz zaman <xliff:g id="SHARED_1">%2$s</xliff:g> şəbəkəsindən ayrılacaqsınız və sonra <xliff:g id="PRIVATE">%3$s</xliff:g> şəbəkəsinə qoşulacaqsınız. Müvəqqəti olaraq internetiniz olmaya bilər."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(dəyişilməyən)"</string>
+    <string name="wifi_allow_edit_configuration_title" msgid="3928254385019370063">"Digər istifadəçilərə şəbəkə konfiqurasiyasına düzəliş etməyə icazə verin"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Zəhmət olmasa, seçin"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Çoxsaylı sertifikat əlavə olundu)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Sistem sertifikatlarını istifadə edin"</string>
@@ -1184,8 +1198,7 @@
     <string name="share_wifi_network" msgid="4064997404339571584">"Bu şəbəkəni digər cihaz istifadəçiləri ilə paylaşın"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Bu cihazdakı bütün istifadəçilər paylaşılan şəbəkəyə baxa və qoşula bilərlər. Administratorlar paylaşılan şəbəkəni silə bilərlər. Ətraflı məlumat"</string>
     <string name="edit_wifi_network_configuration" msgid="5712989655083072417">"Digər istifadəçilərə şəbəkə konfiqurasiyasına düzəliş etməyə icazə verin"</string>
-    <!-- no translation found for edit_wifi_network_non_owner_message (4291718452228643581) -->
-    <skip />
+    <string name="edit_wifi_network_non_owner_message" msgid="4291718452228643581">"Bu şəbəkədə dəyişiklik etmək üçün cihazın administratoru ilə əlaqə saxlayın."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Bu şəbəkənin internetə girişi yoxdur. Qoşulu qalsın?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Məhdud bağlantı səbəbindən bəzi tətbiq və xidmətlər işləməyə bilər. İstənilən halda istifadə edilsin?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Bu şəbəkə üçün daha soruşma"</string>
@@ -2142,16 +2155,19 @@
     <string name="mouse_keys" msgid="6237254627808525540">"Maus düymələri"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Maus düymələrindən istifadə edin"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Maus klavişi qısayolları"</string>
-    <string name="mouse_keys_summary" msgid="7030731235143286467">"Poynteri idarə etmək üçün klaviaturadan istifadə edin"</string>
-    <string name="mouse_keys_max_speed_title" msgid="1788751803245422659">"Maksimum sürət"</string>
+    <string name="mouse_keys_summary" msgid="6512910710030108693">"Kursoru idarə etmək üçün klaviaturadan istifadə edin"</string>
+    <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"Sürət"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Azaldın"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Artırın"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Tərs sürüşdürmə"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Əsas düymələrdən istifadə edin"</string>
+    <!-- no translation found for mouse_keys_use_primary_keys_summary (5057949666957911577) -->
+    <skip />
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"Ayarları sıfırlayın"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"Əsas düymələrdən istifadə"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"Rəqəm klaviaturasından istifadə"</string>
-    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2728318055237217919">"Num Lock aktiv olduqda rəqəm klaviaturası həmişə istifadə olunacaq"</string>
+    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2186017679302722178) -->
+    <skip />
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Səhifəni aşağı hərəkət etdirmək üçün yuxarı sürüşdürün"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Sürüşdürmə"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"İdarə edilən sürüşdürmə"</string>
@@ -2169,6 +2185,9 @@
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Əsas maus düyməsini buraxmaq üçün \"<xliff:g id="RELEASE_LABEL">%s</xliff:g>\" düyməsindən istifadə edin"</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"Sürüşdürmə rejimini aktiv/deaktiv etmək üçün \"<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>\" düyməsindən istifadə edin. Bununla \"<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>\" düymələri görünüşü yuxarı, aşağı, sola və ya sağa sürüşdürəcək"</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Köməkçi maus düyməsini klikləmək üçün \"<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>\" düyməsindən istifadə edin"</string>
+    <string name="mouse_keys_acceleration_seekbar_title" msgid="2329098889930361504">"Sürətlənmə"</string>
+    <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"Sürətli"</string>
+    <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"Asta"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"Klaviatura qısayollarına baxın"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Qısayolların siyahısını göstərin"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"İş profili klaviaturaları və alətlər"</string>
@@ -2231,40 +2250,23 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Növbəti"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Yenidən başladın"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Hazırdır"</string>
-    <!-- no translation found for action_corner_title (1489042651433221319) -->
-    <skip />
-    <!-- no translation found for action_corner_summary (695618538930535335) -->
-    <skip />
-    <!-- no translation found for action_corner_intro (8782001241997579665) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_title (2857258272736432174) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_title (7222233500548465684) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_title (4633975226092344210) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_title (4995999693840776032) -->
-    <skip />
-    <!-- no translation found for action_corner_action_none (5203163099950649999) -->
-    <skip />
-    <!-- no translation found for action_corner_action_home (6779642573582379579) -->
-    <skip />
-    <!-- no translation found for action_corner_action_recent_apps (7450480676812648813) -->
-    <skip />
-    <!-- no translation found for action_corner_action_notifications (3779353356349774469) -->
-    <skip />
-    <!-- no translation found for action_corner_action_quick_settings (4660901117283653069) -->
-    <skip />
-    <!-- no translation found for action_corner_action_dialog_title (8253240813317885237) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_left_name (9193788067022476544) -->
-    <skip />
-    <!-- no translation found for action_corner_bottom_right_name (1031603363418505375) -->
-    <skip />
-    <!-- no translation found for action_corner_top_left_name (8077670910600032291) -->
-    <skip />
-    <!-- no translation found for action_corner_top_right_name (6307321595919080297) -->
-    <skip />
+    <string name="action_corner_title" msgid="7411160165577367757">"Künc qısayollarını fərdiləşdirin"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"Sistemdə hərəkət etmək üçün kursorlardan istifadə edin"</string>
+    <string name="action_corner_intro" msgid="2170609118659718140">"Künc qısayollarını fərdiləşdirmək üçün aşağıdakı sahələri seçin"</string>
+    <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Aşağı sol künc"</string>
+    <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"Aşağı sağ künc"</string>
+    <string name="action_corner_top_left_title" msgid="4633975226092344210">"Yuxarı sol künc"</string>
+    <string name="action_corner_top_right_title" msgid="4995999693840776032">"Yuxarı sağ künc"</string>
+    <string name="action_corner_action_none" msgid="5203163099950649999">"Heç biri"</string>
+    <string name="action_corner_action_home" msgid="6779642573582379579">"Əsas səhifə"</string>
+    <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"Son tətbiqlər"</string>
+    <string name="action_corner_action_notifications" msgid="3779353356349774469">"Bildirişlər"</string>
+    <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Sürətli ayarlar"</string>
+    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g> üçün qısayol seçin"</string>
+    <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"aşağı sol künc"</string>
+    <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"aşağı sağ künc"</string>
+    <string name="action_corner_top_left_name" msgid="8077670910600032291">"yuxarı sol künc"</string>
+    <string name="action_corner_top_right_name" msgid="6307321595919080297">"yuxarı sağ künc"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Dəyişdirici açarlar"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Açarların davranışını dəyişdirin"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Hamısını sıfırlayın"</string>
@@ -2409,8 +2411,7 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Böyütmə qısayolu"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"Kursor izləyir"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"Böyütmənin kursoru necə izləyəcəyini seçin."</string>
-    <!-- no translation found for accessibility_magnification_cursor_following_unavailable_summary (1683880243856242269) -->
-    <skip />
+    <string name="accessibility_magnification_cursor_following_unavailable_summary" msgid="1683880243856242269">"Yalnız ekranın bir hissəsini böyüdərkən əlçatan deyil"</string>
     <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"Maus hərəkət etdikcə ekranı davamlı olaraq hərəkət etdirin"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Mausu ekranın mərkəzində saxlamaqla ekranı hərəkət etdirin"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Maus ekranın kənarlarına toxunduqda ekranı hərəkət etdirin"</string>
@@ -2551,32 +2552,20 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Ekran böyüdücünü avtomatik güncəlləyin"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Tətbiq keçidlərində ekran böyüdücünü güncəlləyin"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Qidalanma düyməsi zəngi sonlandırır"</string>
-    <!-- no translation found for dark_theme_version_category (8563711427335567656) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title (7755139172613415921) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (6182199392044601252) -->
-    <skip />
-    <!-- no translation found for accessibility_standard_dark_theme_summary (5462837198570089294) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title (9221540446783335817) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (6003085770489582863) -->
-    <skip />
-    <!-- no translation found for accessibility_expanded_dark_theme_summary (7600947929245673753) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="8563711427335567656">"Rejim"</string>
+    <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standart"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Standart Tünd tema"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Cihazınızda və dəstəklənən tətbiqlərdə Tünd temanı tətbiq edir"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Genişləndirildi"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Genişləndirilmiş Tünd tema"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Əlçatanlığı yaxşılaşdırmaq üçün Tünd tema daha çox tətbiqə avtomatik tətbiq olunur."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animasiyalar silinsin"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Ekranda hərəkəti azaldın"</string>
-    <!-- no translation found for accessibility_text_cursor_blink_rate_title (2560387611012958520) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_summary (6629885087638846245) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_slower_desc (5255697869959801747) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_faster_desc (5236406089575390876) -->
-    <skip />
-    <!-- no translation found for accessibility_text_cursor_blink_rate_reset_button_label (393679766407314372) -->
-    <skip />
+    <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Mətn kursoru sayrışması"</string>
+    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"Mətn kursorunun sayrışma sürətini tənzimləyin və ya sayrışmanı söndürün. Bütün tətbiqlərdə və ya veb-saytlarda dəstəklənməyə bilər."</string>
+    <string name="accessibility_text_cursor_blink_rate_slower_desc" msgid="5255697869959801747">"Sayrışma sürətini azaldın"</string>
+    <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"Sayrışma sürətini artırın"</string>
+    <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"Sıfırlayın"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Mono audio"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Audio oxunuşu zamanı kanallar birləşdirilsin"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Audio balansı"</string>
@@ -2666,6 +2655,8 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Rəng korreksiyası haqqında ətraflı öyrənin"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Rəng inversiyası haqqında"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Rəng inversiyası haqqında ətraflı öyrənin"</string>
+    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Tünd tema haqqında ətraflı məlumat"</string>
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Bəzi tətbiqlər genişləndirilmiş ayarlarda Tünd temanı dəstəkləməyə bilər. Görünüş problemləri ilə qarşılaşsanız, standart ayarlardan istifadə edin."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Altyazılar göstərilsin"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Yalnız dəstəklənən tətbiq üçün"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Altyazı ölçü və üslubu"</string>
@@ -3732,8 +3723,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Heç biri}=1{1 cədvəl ayarlanıb}other{# cədvəl ayarlanıb}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Narahat etməyin"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Rejimlər"</string>
-    <!-- no translation found for zen_modes_list_intro (1879511587535247228) -->
-    <skip />
+    <string name="zen_modes_list_intro" msgid="1879511587535247228">"Yuxu, iş, sürücülük və s. üçün rejimlər ilə diqqətinizi yayındıran amilləri minimuma endirin və fikrinizi cəmləyin"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Öz rejiminizi yaradın"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Yalnız vacib şəxs və tətbiqlərdən bildiriş alın."</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Cədvəl ayarlayın"</string>
@@ -4358,10 +4348,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"İcazə meneceri"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Məkan üzrə data paylaşma yenilikləri"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Məkan datasını paylaşma üsulunu dəyişən tətbiqləri nəzərdən keçirin"</string>
-    <!-- no translation found for app_function_access_settings_title (1474765429611652468) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (6465715820745848068) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Digər tətbiqlərə nümayəndə nəzarəti"</string>
+    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Cihazınızda və digər tətbiqlərdə əməliyyatlar həyata keçirin"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Oyatmaq üçün tıklayın"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Cihazı oyatmaq üçün ekranın istənilən yerində iki dəfə basın"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Linklərin açılması"</string>
@@ -4521,9 +4509,9 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Hər şeyi böyüdün və ya kiçildin"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"ekran yaxınlığı, ekran sıxlığı, miqyas, ölçmə"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Önizləmə"</string>
-    <!-- no translation found for screen_zoom_make_smaller_desc (1450649885198381123) -->
+    <!-- no translation found for screen_zoom_make_smaller_desc (6268455784510593120) -->
     <skip />
-    <!-- no translation found for screen_zoom_make_larger_desc (7125594310562596457) -->
+    <!-- no translation found for screen_zoom_make_larger_desc (3458295276713085365) -->
     <skip />
     <string name="disconnected" msgid="3469373726996129247">"Qoşulu deyil"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Qoşulu deyil"</string>
@@ -4544,6 +4532,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Kredit təminatçınız tərəfindən bloklanıb"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Valideyn tələb olunur"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Bunu ayarlamağa başlamaq üçün telefonu valideyninizə verin"</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"Valideyn nəzarətləri ilə məhdudlaşdırılıb"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"Bu ayarı yalnız valideyn nəzarətini idarə edən şəxs dəyişə bilər"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Bu ayarın dəyişdirilməsinə icazə vermək üçün telefonu valideyninizə verin."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Ətraflı məlumat üçün İT admini ilə əlaqə saxlayın"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Daha ətraflı"</string>
@@ -4659,7 +4649,7 @@
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Yoxlayın"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Anladım"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Bu mesaj faydalıdır?"</string>
-    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Batareya xəbərdarlığı ikonası"</string>
+    <string name="battery_hints_warning_icon_a11y" msgid="709629805028175434">"Batareya ilə bağlı xəbərdarlıq məsləhətləri"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Adaptiv parlaqlığı aktiv edərək batareya ömrünü uzadın"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Ekranın avtomatik sönmə vaxtını azaldaraq batareya ömrünü uzadın"</string>
     <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> çox batareya enerjisi istifadə edib"</string>
@@ -4987,8 +4977,6 @@
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Sıfırlansın"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Avto doldurma developer seçimləri sıfırlanıb"</string>
     <string name="location_category" msgid="3496759112306219062">"Məkan"</string>
-    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Status bölməsi məkan göstəricisi"</string>
-    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Şəbəkə və bağlantı daxil olmaqla bütün məkanlar üçün göstərin"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Tam GNSS ölçülərini icra edin"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"İş sistemi olmadan bütün GNSS qruplaşmaları və tezliklərini izləyin"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Daxiletmə metodu"</string>
@@ -5203,7 +5191,8 @@
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Peyk bağlantısı"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"peyk bağlantısı"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"peyk mesajlaşması"</string>
-    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Data istifadəsi hesabınıza daxildir"</string>
+    <!-- no translation found for title_have_satellite_data_plan (1101741256080690699) -->
+    <skip />
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Telefonunuzdakı dəstəklənən tətbiqlər"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Peyk tərəfindən dəstəklənən bütün tətbiqlərə baxın"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Telefonunuzdakı dəstəklənən tətbiqlər"</string>
@@ -5379,15 +5368,13 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"16 KB səhifə ölçüsü ilə yükləyin"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Cihazı 16K b səhifə ölçüsünə uyğun özək ilə yükləyin"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"4 KB rejimindən 16 KB rejiminə dəyişin"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (4760548401414644138) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="4760548401414644138">"16 KB developer seçimindən istifadə etməzdən əvvəl bu cihazın data bölməsi ext4-ə çevrilməlidir. Təsdiqdən sonra cihaz datası silinəcək və fayl sistemi ext4-ə dəyişdiriləcək. 4 KB özək ilə işləyən istehsal rejimindəsiniz və 16 KB rejiminə keçirsiniz. Bu rejimdə bir dəfə yenidən başlatma ilə 4 KB və 16 KB rejimi arasında dəyişə bilərsiniz. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi tətbiqlər işləməyə bilər. Cihazı istehsal rejiminə qaytarmaq üçün 4 KB rejiminə qayıtmalı və yükləyicini kilidləməlisiniz ki, bu da cihazı zavod ayarlarına sıfırlayır. Cihaz Android-ə yükləndikdən sonra Developer seçimlərində OEM kiliddən çıxarılmasını deaktiv edin. Davam etmək üçün \"Bütün datanı sil və yenilə\" düyməsinə klikləyin. Bununla cihaz yenidən başladılacaq."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"4 KB özək ilə işləyən səhifədən asılı olmayan rejimdəsiniz və 16 KB rejiminə keçirsiniz. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. Bununla cihaz yenidən başladılacaq. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi tətbiqlər işləməyə bilər. Cihazı istehsal rejiminə qaytarmaq üçün 4 KB rejiminə qayıtmalı və yükləyicini kilidləməlisiniz ki, bu da cihazı zavod ayarlarına sıfırlayır. Cihaz Android-ə yükləndikdən sonra Developer seçimlərində OEM kiliddən çıxarılmasını deaktiv edin."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"16 KB rejimindən 4 KB rejiminə dəyişin"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"16 KB özək ilə işləyən səhifədən asılı olmayan rejimdəsiniz və 4 KB rejiminə keçirsiniz. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. Bununla cihaz yenidən başladılacaq. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi tətbiqlər işləməyə bilər. Cihazı istehsal rejiminə qaytarmaq üçün yükləyicini kilidləməlisiniz ki, bu da cihazı zavod ayarlarına sıfırlayır. Cihaz Android-ə yükləndikdən sonra Developer seçimlərində OEM kiliddən çıxarılmasını deaktiv edin."</string>
     <string name="toast_16k_update_failed_text" msgid="7848383020572918850">"Özək 16 KB səhifələrə uyğun özəyə güncəllənmədi."</string>
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Dəyişiklik tətbiq edilir"</string>
-    <!-- no translation found for confirm_ext4_button_text (697563319110759422) -->
-    <skip />
+    <string name="confirm_ext4_button_text" msgid="697563319110759422">"Bütün datanı sil və yenilə"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Data bölməsini yenidən formatlamaq və ext4-ə ayarlamaq alınmadı."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Yükləyici kilidaçması tələb edilir"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="8089310116854544106">"Bu cihaz 16 KB developer seçimindən istifadə etməzdən əvvəl yükləyicinin kilidini açmalıdır. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. 16 KB rejimi aktivləşdirildikdə bütün istifadəçi datası və ayarları silinəcək. Yükləyici kilidi açıldıqdan sonra 16 KB seçimini aktivləşdirmək üçün iki dəfə yenidən başlatma tələb olunacaq. Bu rejimdə bir dəfə yenidən başlatma ilə 4 KB və 16 KB rejimi arasında dəyişə bilərsiniz. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi tətbiqlər işləməyə bilər. Cihazı istehsal rejiminə qaytarmaq üçün yenidən 4 KB rejiminə keçməli və sonra cihazda OEM/yükləyici kilidləməsi (zavod ayarlarına sıfırlayır) icra etməlisiniz. Yükləyicini kiliddən çıxarın və yenidən cəhd edin. Təlimatlara burada baxa bilərsiniz: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5837,6 +5824,8 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Parol yoxdur"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Ətraflı məlumat"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazında bu audio yayımını oxutmaq olmur."</string>
+    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
+    <skip />
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"İndi dinlənilir"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Yayım durduruldu"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Dinləməni dayandırın"</string>
@@ -5883,36 +5872,40 @@
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Ekrandakı kontentdən istifadə edərək axtarış etmək üçün Əsas ekran düyməsinə və ya naviqasiya tutacağına basıb saxlayın."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Cihaz detallarını konfiqurasiya edin."</string>
     <string name="supervision_settings_title" msgid="8507163323870367711">"Valideyn nəzarəti"</string>
-    <string name="supervision_settings_summary" msgid="5020634300370322741">"Kontent məhdudiyyətləri və digər limitlər"</string>
+    <string name="supervision_settings_summary" msgid="6304257872307136073">"Rəqəmsal əsas qaydalar və ekran vaxtı məhdudiyyətləri"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN-i ayarlayın"</string>
-    <string name="device_supervision_switch_paused_summary" msgid="1014381188739295656">"Durdurulub"</string>
-    <string name="keywords_supervision_settings" msgid="2580555201483955376">"nəzarət, valideyn nəzarəti, valideyn nəzarətləri"</string>
+    <string name="keywords_supervision_settings" msgid="43064288661561602">"nəzarət, valideyn nəzarəti, valideynlər, nəzarət pini, pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN-i idarə edin"</string>
+    <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Valideyn PIN-i, Valideyn nəzarəti PIN-i"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Bərpa e-poçtu əlavə edin"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Bərpa e-poçtunu doğrulayın"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"PIN-i dəyişin"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN-i unutdum"</string>
+    <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"PIN-i unutmusunuz?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Bərpa e-poçtunu yeniləyin"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN-i silin"</string>
-    <string name="supervision_delete_pin_preference_summary" msgid="4865713157106413979">"Bu, bütün nəzarət ayarlarını sıfırlayacaq"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Bərpa e-poçtu əlavə edin"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"E-poçtunuzu doğrulayın"</string>
-    <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Veb kontenti filtrləri"</string>
-    <string name="supervision_web_content_filters_top_intro" msgid="5264773769840566499">"Veb-saytlarda və bu cihazda dəstəklənən tətbiqlərdəki axtarış nəticələrində yetkin kontentini bloklayın. Dəstəklənməyən tətbiqlərdə hələ də açıq-saçıq kontent görünə bilər."</string>
+    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Veb-sayt kontenti məhdudiyyətləri"</string>
+    <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Veb-sayt filtrləri, Saytları bloklayın, Brauzer filtrləri, Açıq-saçıq saytları bloklayın, Saytları filtrləyin, Axtarış nəticələrini bloklayın, Açıq-saçıq axtarış nəticələrini filtrləyin, kontent məhdudiyyətləri"</string>
+    <!-- no translation found for supervision_web_content_filters_top_intro (8056274290725144441) -->
+    <skip />
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Veb-saytlar"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"Açıq-saçıq saytları bloklayın"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Axtarış nəticələri"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"Açıq-saçıq axtarış nəticələrini filtrləyin"</string>
-    <string name="supervision_full_screen_pin_verification_title" msgid="78513043528333399">"Nəzarət PIN-i daxil edin"</string>
+    <!-- no translation found for supervision_web_content_filters_switch_summary (2095166099345288321) -->
+    <skip />
+    <!-- no translation found for supervision_web_content_filters_footer_title (1741897040916039165) -->
+    <skip />
+    <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Valideyn nəzarəti PIN-ni daxil edin"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Valideyn nəzarəti PIN-i təyin edin"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"PIN-i təsdiq edin"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN yenilənib"</string>
-    <!-- no translation found for supervision_promo_footer_action_button_description (7617359721703338141) -->
-    <skip />
+    <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Tətbiqi açın"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"PIN silinsin?"</string>
-    <string name="supervision_delete_pin_confirm_message" msgid="5482080400973042178">"Bununla bu cihazdakı bütün istifadəçilər üçün cari PIN silinəcək və qurduğunuz nizamlayıcılar deaktiv ediləcək. Bu əməliyyat geri qaytarıla bilməz."</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="2072311894107038402">"Əvvəlcə digər profillərdə nizamlayıcılara fasilə verin"</string>
-    <string name="supervision_delete_pin_supervision_enabled_message" msgid="5643922966568203196">"Bu PIN-i silməyə və nəzarət ayarlarını sıfırlamağa davam etmək üçün digər profillərdə nizamlayıcılara fasilə verin."</string>
+    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
+    <skip />
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN silinə bilməz"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PIN-i silərkən xəta oldu."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animasiyası"</string>

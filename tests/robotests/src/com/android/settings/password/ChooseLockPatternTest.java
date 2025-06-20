@@ -43,6 +43,7 @@ import com.android.settingslib.widget.theme.flags.Flags;
 
 import com.google.android.setupdesign.GlifLayout;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,6 +81,7 @@ public class ChooseLockPatternTest {
                 .isEqualTo(123);
     }
 
+    @Ignore("b/424067449")
     @Test
     @EnableFlags(Flags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     public void intentBuilder_setPattern_shouldAddExtras_withExpressiveDesign() {

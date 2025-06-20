@@ -27,6 +27,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.BaseSupportFragment;
+import com.android.settings.accessibility.ForceInvertPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -67,6 +68,13 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
             mCustomEndController.displayPreference(preferenceScreen);
             updatePreferenceStates();
         });
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        use(ForceInvertPreferenceController.class).initializeForSurvey(this, getSurveyKey(),
+                getMetricsCategory());
     }
 
     @Override

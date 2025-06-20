@@ -1012,6 +1012,27 @@
     <!-- Title of toggle to enable or disable device supervision on a desktop device [CHAR LIMIT=60] -->
     <string name="device_supervision_switch_title" product="desktop">Controls for this device</string>
 
+    <!-- Message in dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_supervision_enabled_message" product="default">Your parental controls PIN is shared across users. To delete your PIN, parental controls must be off for all users on this phone.</string>
+    <!-- Message in dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_supervision_enabled_message" product="tablet">Your parental controls PIN is shared across users. To delete your PIN, parental controls must be off for all users on this tablet.</string>
+    <!-- Message in dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_supervision_enabled_message" product="desktop">Your parental controls PIN is shared across users. To delete your PIN, parental controls must be off for all users on this device.</string>
+
+    <!-- Message in dialog that confirms whether user wants to delete their supervision PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_confirm_message" product="default">Your parental controls PIN will be deleted permanently. Any parental controls you set up for users on this phone will be turned off.</string>
+    <!-- Message in dialog that confirms whether user wants to delete their supervision PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_confirm_message" product="tablet">Your parental controls PIN will be deleted permanently. Any parental controls you set up for users on this tablet will be turned off.</string>
+    <!-- Message in dialog that confirms whether user wants to delete their supervision PIN [CHAR LIMIT=NONE] -->
+    <string name="supervision_delete_pin_confirm_message" product="desktop">Your parental controls PIN will be deleted permanently. Any parental controls you set up for users on this device will be turned off.</string>
+
+    <!-- Footer message on device supervision pin management screen on a phone [CHAR LIMIT=NONE] -->
+    <string name="device_supervision_pin_management_footer" product="default">Your parental controls PIN is the same for all users on this phone</string>
+    <!-- Footer message on device supervision pin management screen on a tablet [CHAR LIMIT=NONE] -->
+    <string name="device_supervision_pin_management_footer" product="tablet">Your parental controls PIN is the same for all users on this tablet</string>
+    <!-- Footer message on device supervision pin management screen on a desktop device [CHAR LIMIT=NONE] -->
+    <string name="device_supervision_pin_management_footer" product="desktop">Your parental controls PIN is the same for all users on this device</string>
+
     <!-- Accessibility summary text for auto rotate [CHAR LIMIT=NONE] -->
     <string name="auto_rotate_summary_a11y" product="default">When you move your phone between portrait and landscape</string>
     <!-- Accessibility summary text for auto rotate [CHAR LIMIT=NONE] -->

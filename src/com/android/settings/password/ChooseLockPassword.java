@@ -55,6 +55,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Insets;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -571,7 +572,8 @@ public class ChooseLockPassword extends SettingsActivity {
             mNextButton = mixin.getPrimaryButton();
 
             mMessage = view.findViewById(R.id.sud_layout_description);
-            mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
+
+            mLayout.setIcon(getIcon());
 
             mIsAlphaMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mPasswordType
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mPasswordType
@@ -1098,6 +1100,18 @@ public class ChooseLockPassword extends SettingsActivity {
                 return;
             }
             mLayout.setHeaderText(text);
+        }
+
+        private Drawable getIcon() {
+            if (isSupervisingProfile()) {
+                Drawable iconDrawable = getActivity().getDrawable(
+                        R.drawable.ic_account_child_invert_48);
+                iconDrawable.mutate();
+                iconDrawable.setTintList(mLayout.getPrimaryColor());
+                return iconDrawable;
+            } else {
+                return getActivity().getDrawable(R.drawable.ic_lock);
+            }
         }
 
         public void afterTextChanged(Editable s) {

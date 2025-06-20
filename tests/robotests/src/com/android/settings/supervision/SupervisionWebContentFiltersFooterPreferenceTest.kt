@@ -22,9 +22,9 @@ import android.widget.TextView
 import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.FooterPreference
-import com.android.settingslib.widget.preference.footer.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,7 +36,8 @@ class SupervisionWebContentFiltersFooterPreferenceTest {
 
     @Test
     fun getTitle() {
-        assertThat(footerPreference.title).isEqualTo(0)
+        assertThat(footerPreference.title)
+            .isEqualTo(R.string.supervision_web_content_filters_footer_title)
     }
 
     @Test

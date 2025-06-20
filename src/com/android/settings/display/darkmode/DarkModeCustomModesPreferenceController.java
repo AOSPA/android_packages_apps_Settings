@@ -23,6 +23,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.icu.text.MessageFormat;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
@@ -78,5 +79,13 @@ public class DarkModeCustomModesPreferenceController extends BasePreferenceContr
                         .launch());
         footerPreference.setLearnMoreText(
                 mContext.getString(R.string.dark_ui_modes_footer_action));
+        if (android.view.accessibility.Flags.forceInvertColor()) {
+            FooterPreference expanedDarkModeFooter = screen.findPreference(
+                    DarkModeExpandedFooterPreferenceController.DARK_MODE_EXPANDED_FOOTER_KEY);
+            if (expanedDarkModeFooter.isVisible()) {
+                footerPreference.setIconVisibility(View.GONE);
+            }
+            footerPreference.setOrder(DarkModePreferenceOrderUtil.Order.MODES_FOOTER.getValue());
+        }
     }
 }

@@ -27,11 +27,14 @@ import android.content.pm.UserInfo
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.platform.test.annotations.EnableFlags
+import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
 import com.android.settings.password.ChooseLockPassword
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -45,7 +48,6 @@ import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
-import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowContextImpl
 import org.robolectric.shadows.ShadowKeyguardManager
 
@@ -57,7 +59,6 @@ class SetupSupervisionActivityTest {
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
 
-    private lateinit var shadowActivity: ShadowActivity
     private lateinit var shadowKeyguardManager: ShadowKeyguardManager
 
     @Before
@@ -72,6 +73,21 @@ class SetupSupervisionActivityTest {
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+    }
+
+    @Test
+    fun onCreate_noSupervisingUser_loadProgressBar() {
+        mockUserManager.stub { on { users } doReturn emptyList() }
+
+        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                val progressBar =
+                    activity.findViewById<LinearProgressIndicator>(R.id.linearProgressIndicator)
+
+                assertThat(progressBar).isNotNull()
+                assertThat(progressBar.visibility).isEqualTo(View.VISIBLE)
+            }
+        }
     }
 
     @Test
@@ -120,7 +136,7 @@ class SetupSupervisionActivityTest {
 
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
             scenario ->
-            assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+            assertThat(scenario.state).isEqualTo(Lifecycle.State.RESUMED)
             assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
         }
     }
@@ -131,7 +147,7 @@ class SetupSupervisionActivityTest {
 
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
             scenario ->
-            assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+            assertThat(scenario.state).isEqualTo(Lifecycle.State.RESUMED)
             assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
         }
     }

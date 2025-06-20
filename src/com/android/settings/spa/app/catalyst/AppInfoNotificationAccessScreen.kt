@@ -32,7 +32,6 @@ import com.android.settings.R
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.notification.NotificationBackend
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
@@ -40,7 +39,6 @@ import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
-import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.SwitchPreferenceBinding
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
@@ -49,7 +47,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 /** "Apps" -> "Special app access" -> "Notification read, reply & control" -> {app name} */
-@ProvidePreferenceScreen(AppInfoNotificationAccessScreen.KEY, parameterized = true)
+//@ProvidePreferenceScreen(AppInfoNotificationAccessScreen.KEY, parameterized = true)
 open class AppInfoNotificationAccessScreen(context: Context, override val arguments: Bundle) :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider {
 
@@ -87,7 +85,7 @@ open class AppInfoNotificationAccessScreen(context: Context, override val argume
             }
         )
 
-    override fun isFlagEnabled(context: Context) = Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = false
 
     override fun extras(context: Context): Bundle? =
         Bundle(1).apply { putString(KEY_EXTRA_PACKAGE_NAME, packageName) }

@@ -88,7 +88,7 @@ class ActionCornerCustomizationControllerTest {
 
     @Test
     fun updateState_actionIsHome_showHome() {
-        Settings.System.putIntForUser(
+        Settings.Secure.putIntForUser(
             context.contentResolver,
             TARGET,
             ACTION_CORNER_ACTION_HOME,
@@ -104,7 +104,7 @@ class ActionCornerCustomizationControllerTest {
     fun onPreferenceChange_setToHome() {
         controller.onPreferenceChange(preference, ACTION_CORNER_ACTION_HOME)
 
-        val action = Settings.System.getIntForUser(
+        val action = Settings.Secure.getIntForUser(
             context.contentResolver,
             TARGET,
             ACTION_CORNER_ACTION_NONE,

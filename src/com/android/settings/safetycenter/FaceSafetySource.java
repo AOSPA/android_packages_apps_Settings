@@ -27,6 +27,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.safetycenter.SafetyEvent;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricNavigationUtils;
@@ -65,6 +66,15 @@ public final class FaceSafetySource {
 
         UserHandle userHandle = Process.myUserHandle();
         int userId = userHandle.getIdentifier();
+        LockPatternUtils lockPatternUtils =
+                FeatureFactory.getFeatureFactory()
+                        .getSecurityFeatureProvider()
+                        .getLockPatternUtils(context);
+        if (lockPatternUtils.isProfileWithUnifiedChallenge(userId)) {
+            sendNullData(context, safetyEvent);
+            return;
+        }
+
         FaceManager faceManager = Utils.getFaceManagerOrNull(context);
         FaceStatusUtils faceStatusUtils = new FaceStatusUtils(context, faceManager, userId);
         BiometricNavigationUtils biometricNavigationUtils = new BiometricNavigationUtils(userId);
@@ -77,9 +87,10 @@ public final class FaceSafetySource {
         if (Utils.hasFaceHardware(context)) {
             boolean isMultipleBiometricsEnrollmentNeeded =
                     BiometricSourcesUtils.isMultipleBiometricsEnrollmentNeeded(context, userId);
-            String settingClassName = isMultipleBiometricsEnrollmentNeeded
-                    ? BiometricEnrollActivity.InternalActivity.class.getName()
-                    : faceStatusUtils.getSettingsClassName();
+            String settingClassName =
+                    isMultipleBiometricsEnrollmentNeeded
+                            ? BiometricEnrollActivity.InternalActivity.class.getName()
+                            : faceStatusUtils.getSettingsClassName();
             Bundle bundle = new Bundle();
             if (isMultipleBiometricsEnrollmentNeeded) {
                 // Launch face enrollment first then fingerprint enrollment.
@@ -95,16 +106,14 @@ public final class FaceSafetySource {
                             profileParentContext,
                             biometricNavigationUtils
                                     .getBiometricSettingsIntent(
-                                            context,
-                                            settingClassName,
-                                            disablingAdmin,
-                                            bundle)
+                                            context, settingClassName, disablingAdmin, bundle)
                                     .setIdentifier(Integer.toString(userId)),
                             REQUEST_CODE_FACE_SETTING),
                     disablingAdmin == null /* enabled */,
                     faceStatusUtils.hasEnrolled(),
                     safetyEvent,
-                    FeatureFactory.getFeatureFactory().getBiometricsFeatureProvider()
+                    FeatureFactory.getFeatureFactory()
+                            .getBiometricsFeatureProvider()
                             .getSafetySourceIssue(SAFETY_SOURCE_ID));
 
             return;

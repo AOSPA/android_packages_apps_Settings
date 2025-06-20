@@ -16,16 +16,17 @@
 
 package com.android.settings.accessibility.notification;
 
-import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SURVEY_NOTIFICATION_DISMISSED;
-import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SURVEY_NOTIFICATION_SHOWN;
+import static com.android.internal.accessibility.common.NotificationConstants.ACTION_CANCEL_SURVEY_NOTIFICATION;
+import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SCHEDULE_SURVEY_NOTIFICATION;
 import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID;
 
-import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
-import static org.mockito.Mockito.spy;
-import static org.robolectric.Shadows.shadowOf;
-
-import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -34,14 +35,17 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.server.accessibility.Flags;
+import com.android.settings.accessibility.AccessibilitySurveyNotificationJobService;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowNotificationManager;
 
 /** Tests for {@link SurveyNotificationReceiver}. */
 @RunWith(RobolectricTestRunner.class)
@@ -49,80 +53,84 @@ public class SurveyNotificationReceiverTest {
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    @Rule
+    public MockitoRule mMockitoRule = MockitoJUnit.rule();
 
-    private final Context mContext = spy(RuntimeEnvironment.getApplication());
+    @Mock
+    private AccessibilitySurveyNotificationJobService mJobService;
+    @Mock
+    private NotificationHelper mNotificationHelper;
+
+    private final Context mContext = RuntimeEnvironment.getApplication();;
     private SurveyNotificationReceiver mReceiver;
-    private ShadowNotificationManager mShadowNotificationManager;
 
     @Before
     public void setUp() {
-        mReceiver = new SurveyNotificationReceiver();
-        NotificationManager notificationManager =
-                mContext.getSystemService(NotificationManager.class);
-        mShadowNotificationManager = shadowOf(notificationManager);
+        mReceiver = new SurveyNotificationReceiver(mJobService, mNotificationHelper);
     }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    public void onReceiveNotificationShown_disableHaTS_notCreatesNotificationChannel() {
-        final Intent intent = new Intent(ACTION_SURVEY_NOTIFICATION_SHOWN)
+    public void onReceiveNotificationShown_disableHaTS_notScheduleJob() {
+        final Intent intent = new Intent(ACTION_SCHEDULE_SURVEY_NOTIFICATION)
                 .setPackage(mContext.getPackageName());
 
         mReceiver.onReceive(mContext, intent);
 
-        assertThat(mShadowNotificationManager.getNotificationChannels()).isEmpty();
+        verify(mJobService, never()).scheduleJob(any(Context.class), anyInt(), anyLong());
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    public void onReceiveNotificationShown_withDarkUiSettingsPageId_createAndPostNotification() {
-        final Intent intent = new Intent(ACTION_SURVEY_NOTIFICATION_SHOWN)
+    public void onReceiveNotificationShown_withDarkUiSettingsPageId_scheduleJob() {
+        int pageId = SettingsEnums.DARK_UI_SETTINGS;
+        final Intent intent = new Intent(ACTION_SCHEDULE_SURVEY_NOTIFICATION)
                 .setPackage(mContext.getPackageName())
                 .putExtra(EXTRA_PAGE_ID, SettingsEnums.DARK_UI_SETTINGS);
 
         mReceiver.onReceive(mContext, intent);
 
-        assertThat(mShadowNotificationManager.getNotificationChannels()).isNotEmpty();
-        assertThat(mShadowNotificationManager.getNotificationChannels().getFirst().getId())
-                .isEqualTo(NotificationHelper.NOTIFICATION_CHANNEL_ID);
+        verify(mJobService).scheduleJob(any(Context.class), eq(pageId), anyLong());
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    public void onReceiveNotificationShown_withoutPageId_notCreateAndPostNotification() {
-        final Intent intent = new Intent(ACTION_SURVEY_NOTIFICATION_SHOWN)
+    public void onReceiveNotificationShown_withoutPageId_notScheduleJob() {
+        final Intent intent = new Intent(ACTION_SCHEDULE_SURVEY_NOTIFICATION)
                 .setPackage(mContext.getPackageName());
 
         mReceiver.onReceive(mContext, intent);
 
-        assertThat(mShadowNotificationManager.getAllNotifications()).isEmpty();
+        verify(mJobService, never()).scheduleJob(any(Context.class), anyInt(), anyLong());
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    public void onReceiveNotificationShown_withUnknownPageId_notCreateAndPostNotification() {
-        final Intent intent = new Intent(ACTION_SURVEY_NOTIFICATION_SHOWN)
+    public void onReceiveNotificationShown_withUnknownPageId_notScheduleJob() {
+        final Intent intent = new Intent(ACTION_SCHEDULE_SURVEY_NOTIFICATION)
                 .setPackage(mContext.getPackageName())
                 .putExtra(EXTRA_PAGE_ID, SettingsEnums.PAGE_UNKNOWN);
 
         mReceiver.onReceive(mContext, intent);
 
-        assertThat(mShadowNotificationManager.getAllNotifications()).isEmpty();
+        verify(mJobService, never()).scheduleJob(any(Context.class), anyInt(), anyLong());
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_HATS)
-    public void onReceiveNotificationDismiss_withDarkUiSettingsPageId_cancelExpectedNotification() {
-        final Intent showIntent = new Intent(ACTION_SURVEY_NOTIFICATION_SHOWN)
+    public void onReceiveNotificationDismiss_withDarkUiSettingsPageId_cancelJobAndNotification() {
+        int pageId = SettingsEnums.DARK_UI_SETTINGS;
+        final Intent scheduleIntent = new Intent(ACTION_SCHEDULE_SURVEY_NOTIFICATION)
                 .setPackage(mContext.getPackageName())
-                .putExtra(EXTRA_PAGE_ID, SettingsEnums.DARK_UI_SETTINGS);
-        mReceiver.onReceive(mContext, showIntent);
+                .putExtra(EXTRA_PAGE_ID, pageId);
+        mReceiver.onReceive(mContext, scheduleIntent);
 
-        final Intent dismissIntent = new Intent(ACTION_SURVEY_NOTIFICATION_DISMISSED)
+        final Intent cancelIntent = new Intent(ACTION_CANCEL_SURVEY_NOTIFICATION)
                 .setPackage(mContext.getPackageName())
-                .putExtra(EXTRA_PAGE_ID, SettingsEnums.DARK_UI_SETTINGS);
-        mReceiver.onReceive(mContext, dismissIntent);
+                .putExtra(EXTRA_PAGE_ID, pageId);
+        mReceiver.onReceive(mContext, cancelIntent);
 
-        assertThat(mShadowNotificationManager.getAllNotifications()).isEmpty();
+        verify(mJobService).cancelJob(any(Context.class), eq(pageId));
+        verify(mNotificationHelper).cancelNotification(eq(pageId));
     }
 }

@@ -234,6 +234,8 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
                     Utils.launchBiometricPromptForMandatoryBiometrics(mFragment,
                             REQUEST_IDENTITY_CHECK_FOR_DEV_PREF,
                             userId, false /* hideBackground */);
+                } else {
+                    enableDevelopmentSettings();
                 }
             } else if (biometricAuthStatus == Utils.BiometricStatus.OK) {
                 Utils.launchBiometricPromptForMandatoryBiometrics(mFragment,

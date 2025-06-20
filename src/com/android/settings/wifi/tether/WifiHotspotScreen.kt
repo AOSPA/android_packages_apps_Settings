@@ -99,7 +99,9 @@ open class WifiHotspotScreen(context: Context) :
         makeLaunchIntent(context, WifiTetherSettingsActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            +WifiHotspotNamePreference(context, coroutineScope, wifiHotspotStore)
+        }
 
     override val preferenceActionMetrics: Int
         get() = ACTION_WIFI_HOTSPOT
@@ -108,8 +110,8 @@ open class WifiHotspotScreen(context: Context) :
 
     override fun isAvailable(context: Context) =
         canShowWifiHotspot(context) &&
-            TetherUtil.isTetherAvailable(context) &&
-            !Utils.isMonkeyRunning()
+                TetherUtil.isTetherAvailable(context) &&
+                !Utils.isMonkeyRunning()
 
     override fun getSummary(context: Context): CharSequence? =
         when (context.wifiApState) {
@@ -138,7 +140,7 @@ open class WifiHotspotScreen(context: Context) :
 
     override fun isEnabled(context: Context) =
         wifiHotspotStore.dataSaverStore.getBoolean(DATA_SAVER_KEY) != true &&
-            super<PreferenceRestrictionMixin>.isEnabled(context)
+                super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override val restrictionKeys
         get() = arrayOf(UserManager.DISALLOW_WIFI_TETHERING)
@@ -182,7 +184,7 @@ open class WifiHotspotScreen(context: Context) :
             val wifiApState = context.wifiApState
             val value =
                 wifiApState == WifiManager.WIFI_AP_STATE_ENABLING ||
-                    wifiApState == WifiManager.WIFI_AP_STATE_ENABLED
+                        wifiApState == WifiManager.WIFI_AP_STATE_ENABLED
             return value as T?
         }
 
@@ -231,11 +233,8 @@ open class WifiHotspotScreen(context: Context) :
     }
 
     companion object {
-        const val TAG = "WifiHotspotSwitchPreference"
+        const val TAG = "WifiHotspotScreen"
         const val KEY = "wifi_tether"
     }
 }
-// LINT.ThenChange(
-//     WifiTetherPreferenceController.java,
-//     WifiTetherSettings.java,
-// )
+// LINT.ThenChange(WifiTetherSettings.java)

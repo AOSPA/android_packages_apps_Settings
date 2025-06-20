@@ -24,23 +24,16 @@ import com.android.settings.R
 import com.android.settings.Settings.DndModeDisplaySettingsActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.notification.modes.ZenHelperBackend
 import com.android.settings.notification.modes.ZenModeSummaryHelper
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
-import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
-/**
- * This DND mode Display settings screen is dedicated for device state. It functions via a virtual
- * key and is separate from the current Settings user interface, which it does not affect.
- * Obviously, this is not fully migrated page.
- */
 // LINT.IfChange
-@ProvidePreferenceScreen(ZenModeDndDisplayScreen.KEY)
+//@ProvidePreferenceScreen(ZenModeDndDisplayScreen.KEY)
 open class ZenModeDndDisplayScreen :
     PreferenceScreenMixin, PreferenceAvailabilityProvider, PreferenceSummaryProvider {
     override val key: String
@@ -60,7 +53,7 @@ open class ZenModeDndDisplayScreen :
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
-    override fun isFlagEnabled(context: Context) = Flags.deviceState()
+    override fun isFlagEnabled(context: Context) = false
 
     override fun isAvailable(context: Context) = context.hasDndMode()
 

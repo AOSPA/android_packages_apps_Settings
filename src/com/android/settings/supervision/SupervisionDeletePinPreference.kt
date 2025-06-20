@@ -16,7 +16,6 @@
 package com.android.settings.supervision
 
 import android.app.Activity
-import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
 import android.content.Context
 import android.content.Intent
@@ -28,7 +27,8 @@ import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.Preference
 import com.android.settings.R
-import com.android.settings.core.SubSettingLauncher
+import com.android.settings.spa.network.getActivity
+import com.android.settingslib.HelpUtils
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -87,11 +87,12 @@ class SupervisionDeletePinPreference() :
                 .setTitle(R.string.supervision_delete_pin_error_header)
                 .setMessage(R.string.supervision_delete_pin_error_message)
                 .setPositiveButton(R.string.okay, null)
-        } else if (areAnyUsersExceptCurrentSupervised(supervisionManager, userManager)) {
+        } else if (context.areAnyUsersExceptCurrentSupervised(supervisionManager, userManager)) {
             builder
                 .setTitle(R.string.supervision_delete_pin_supervision_enabled_header)
                 .setMessage(R.string.supervision_delete_pin_supervision_enabled_message)
                 .setPositiveButton(R.string.okay, null)
+                .setNegativeButton(R.string.learn_more, { _, _ -> onLearnMore() })
         } else {
             builder
                 .setTitle(R.string.supervision_delete_pin_confirm_header)
@@ -104,6 +105,21 @@ class SupervisionDeletePinPreference() :
         dialog.show()
     }
 
+    @VisibleForTesting
+    fun onLearnMore() {
+        val intent =
+            HelpUtils.getHelpIntent(
+                lifeCycleContext,
+                lifeCycleContext.getString(R.string.supervision_pin_learn_more_link),
+                lifeCycleContext::class.java.name,
+            )
+        if (intent != null) {
+            lifeCycleContext.startActivity(intent)
+        } else {
+            Log.w(TAG, "HelpIntent is null")
+        }
+    }
+
     private fun showErrorDialog(context: Context) {
         // TODO(b/415995161): Improve error handling
         AlertDialog.Builder(context)
@@ -112,18 +128,6 @@ class SupervisionDeletePinPreference() :
             .setPositiveButton(R.string.okay, null)
             .create()
             .show()
-    }
-
-    /** Returns whether any users except the current user are supervised on this device. */
-    @VisibleForTesting
-    fun areAnyUsersExceptCurrentSupervised(
-        supervisionManager: SupervisionManager,
-        userManager: UserManager,
-    ): Boolean {
-        return userManager.users.any {
-            lifeCycleContext.userId != it.id &&
-                supervisionManager.isSupervisionEnabledForUser(it.id)
-        }
     }
 
     @VisibleForTesting
@@ -137,28 +141,14 @@ class SupervisionDeletePinPreference() :
 
     private fun onPinConfirmed(resultCode: Int) {
         if (resultCode == Activity.RESULT_OK) {
-            val userManager = lifeCycleContext.getSystemService(UserManager::class.java)
-            val supervisionManager =
-                lifeCycleContext.getSystemService(SupervisionManager::class.java)
-            if (userManager == null || supervisionManager == null) {
-                Log.e(TAG, "Can't delete supervision data; system services cannot be found.")
-                return
-            }
-            val supervisingUser = lifeCycleContext.supervisingUserHandle
-            if (supervisingUser == null) {
-                Log.e(TAG, "Can't delete supervision data; supervising user does not exist.")
-                return
-            }
-
-            // Supervision must be disabled before the supervising profile can be removed
-            supervisionManager.setSupervisionEnabled(false)
-            lifeCycleContext.notifyPreferenceChange(KEY)
-            if (userManager.removeUser(supervisingUser)) {
-                supervisionManager.setSupervisionRecoveryInfo(null)
-                SubSettingLauncher(lifeCycleContext)
-                    .setDestination(SupervisionDashboardFragment::class.java.name)
-                    .setSourceMetricsCategory(SettingsEnums.SUPERVISION_DASHBOARD)
-                    .launch()
+            if (lifeCycleContext.deleteSupervisionData()) {
+                lifeCycleContext.notifyPreferenceChange(KEY)
+                // Programmatically trigger back press to properly return to the supervision
+                // dashboard with a correct back stack.
+                val activity =
+                    (lifeCycleContext.baseContext.getActivity()
+                        as? androidx.activity.ComponentActivity)
+                activity?.onBackPressedDispatcher?.onBackPressed()
             } else {
                 Log.e(TAG, "Can't delete supervision data; unable to delete supervising profile.")
                 showErrorDialog(lifeCycleContext)

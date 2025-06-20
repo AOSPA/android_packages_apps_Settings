@@ -49,21 +49,13 @@ open class VibrationIntensitySliderPreference(
     @Usage val vibrationUsage: Int,
     @StringRes override val title: Int = 0,
     @StringRes override val summary: Int = 0,
-    val hasRingerModeDependency: Boolean = false,
 ) :
     IntRangeValuePreference,
     PreferenceSummaryProvider,
     SliderPreferenceBinding,
     OnPreferenceChangeListener {
 
-    private val storage by lazy {
-        VibrationIntensitySettingsStore(
-            context,
-            vibrationUsage,
-            hasRingerModeDependency,
-            key
-        )
-    }
+    private val storage by lazy { VibrationIntensitySettingsStore(context, vibrationUsage) }
 
     override fun getMinValue(context: Context) = Vibrator.VIBRATION_INTENSITY_OFF
 

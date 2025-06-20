@@ -72,8 +72,8 @@ public class NotificationHelperTest {
     }
 
     @Test
-    public void handleSurveyNotification_withDarkUiSettingsPageId_createAndPostsNotification() {
-        mNotificationHelper.handleSurveyNotification(SettingsEnums.DARK_UI_SETTINGS);
+    public void showSurveyNotification_withDarkUiSettingsPageId_createAndPostsNotification() {
+        mNotificationHelper.showSurveyNotification(SettingsEnums.DARK_UI_SETTINGS);
 
         int notificationId = mNotificationHelper.getNotificationId(SettingsEnums.DARK_UI_SETTINGS);
         Notification notification = mShadowNotificationManager.getNotification(notificationId);
@@ -113,7 +113,7 @@ public class NotificationHelperTest {
 
     @Test
     public void cancelNotification_withDarkUiSettingsPageId_cancelExpectedNotification() {
-        mNotificationHelper.handleSurveyNotification(SettingsEnums.DARK_UI_SETTINGS);
+        mNotificationHelper.showSurveyNotification(SettingsEnums.DARK_UI_SETTINGS);
         int notificationId = mNotificationHelper.getNotificationId(SettingsEnums.DARK_UI_SETTINGS);
 
         mNotificationHelper.cancelNotification(SettingsEnums.DARK_UI_SETTINGS);

@@ -417,7 +417,7 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             }
         });
 
-        mActionButton = (Button) findViewById(R.id.action_button);
+        mActionButton = (Button) findViewById(R.id.admin_action_button);
 
         final View restrictedAction = findViewById(R.id.restricted_action);
         restrictedAction.setFilterTouchesWhenObscured(true);

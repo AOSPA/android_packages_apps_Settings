@@ -172,6 +172,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 showMore = new Preference(mContext);
                 showMore.setKey(KEY_SHOW_MORE);
                 showMore.setTitle(R.string.no_recent_channels);
+                showMore.setOrder(1000000);
                 showMore.setOnPreferenceClickListener(preference1 -> {
                     mAppRow.showAllChannels = true;
                     mDependentFieldListener.onFieldValueChanged();

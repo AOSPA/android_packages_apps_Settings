@@ -41,6 +41,7 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
@@ -289,7 +290,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         mContext = spy(RuntimeEnvironment.application);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
@@ -319,6 +320,9 @@ public class WifiDetailPreferenceController2Test {
         when(mMockConnectivityManager.getLinkProperties(mMockNetwork)).thenReturn(mLinkProperties);
 
         when(mMockFragment.getActivity()).thenReturn(mMockActivity);
+
+        when(mMockPackageManager.getPackageInfo(anyString(), anyInt()))
+                .thenReturn(new PackageInfo());
 
         ShadowEntityHeaderController.setUseMock(mMockHeaderController);
         // builder pattern

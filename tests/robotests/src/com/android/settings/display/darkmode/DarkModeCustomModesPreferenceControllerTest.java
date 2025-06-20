@@ -17,7 +17,8 @@
 package com.android.settings.display.darkmode;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,8 +26,11 @@ import static org.mockito.Mockito.when;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Resources;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenDeviceEffects;
+import android.view.View;
+import android.view.accessibility.Flags;
 
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -63,11 +67,13 @@ public class DarkModeCustomModesPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private FooterPreference mFooterPreference;
+    private FooterPreference mCustomModesFooterPreference;
+    @Mock
+    private FooterPreference mExpandedDarkThemeFooterPreference;
     @Mock
     private ZenModesBackend mZenModesBackend;
 
-    private DarkModeCustomModesPreferenceController mController;
+    private DarkModeCustomModesPreferenceController mModeCustomModesPreferenceController;
     private Context mContext;
     private BedtimeSettingsUtils mBedtimeSettingsUtils;
 
@@ -85,9 +91,16 @@ public class DarkModeCustomModesPreferenceControllerTest {
                 .thenReturn("wellbeing");
         when(mContext.getResources()).thenReturn(res);
 
-        when(mScreen.findPreference(anyString())).thenReturn(mFooterPreference);
+        mModeCustomModesPreferenceController =
+                new DarkModeCustomModesPreferenceController(
+                        mContext, "dark_theme_custom_bedtime_footer");
 
-        mController = new DarkModeCustomModesPreferenceController(mContext, "key");
+        when(mScreen.findPreference(mModeCustomModesPreferenceController.getPreferenceKey()))
+                .thenReturn(mCustomModesFooterPreference);
+        when(mScreen.findPreference(
+                DarkModeExpandedFooterPreferenceController.DARK_MODE_EXPANDED_FOOTER_KEY))
+                .thenReturn(mExpandedDarkThemeFooterPreference);
+        when(mExpandedDarkThemeFooterPreference.isVisible()).thenReturn(false);
 
         ZenModesBackend.setInstance(mZenModesBackend);
         when(mZenModesBackend.getModes()).thenReturn(List.of());
@@ -98,11 +111,11 @@ public class DarkModeCustomModesPreferenceControllerTest {
         when(mZenModesBackend.getModes()).thenReturn(List.of(
                 new TestModeBuilder(MODE_WITH_DARK_THEME).setName("A").build()));
 
-        mController.displayPreference(mScreen);
+        mModeCustomModesPreferenceController.displayPreference(mScreen);
 
-        verify(mFooterPreference).setTitle("A also activates dark theme");
-        verify(mFooterPreference).setLearnMoreAction(any());
-        verify(mFooterPreference).setLearnMoreText("Modes settings");
+        verify(mCustomModesFooterPreference).setTitle("A also activates dark theme");
+        verify(mCustomModesFooterPreference).setLearnMoreAction(any());
+        verify(mCustomModesFooterPreference).setLearnMoreText("Modes settings");
     }
 
     @Test
@@ -111,11 +124,11 @@ public class DarkModeCustomModesPreferenceControllerTest {
                 new TestModeBuilder(MODE_WITH_DARK_THEME).setName("A").build(),
                 new TestModeBuilder(MODE_WITH_DARK_THEME).setName("B").build()));
 
-        mController.displayPreference(mScreen);
+        mModeCustomModesPreferenceController.displayPreference(mScreen);
 
-        verify(mFooterPreference).setTitle("A and B also activate dark theme");
-        verify(mFooterPreference).setLearnMoreAction(any());
-        verify(mFooterPreference).setLearnMoreText("Modes settings");
+        verify(mCustomModesFooterPreference).setTitle("A and B also activate dark theme");
+        verify(mCustomModesFooterPreference).setLearnMoreAction(any());
+        verify(mCustomModesFooterPreference).setLearnMoreText("Modes settings");
     }
 
     @Test
@@ -128,21 +141,43 @@ public class DarkModeCustomModesPreferenceControllerTest {
                 new TestModeBuilder(MODE_WITH_DARK_THEME).setName("E").build()
         ));
 
-        mController.displayPreference(mScreen);
+        mModeCustomModesPreferenceController.displayPreference(mScreen);
 
-        verify(mFooterPreference).setTitle("A, B, and 3 more also activate dark theme");
-        verify(mFooterPreference).setLearnMoreAction(any());
-        verify(mFooterPreference).setLearnMoreText("Modes settings");
+        verify(mCustomModesFooterPreference).setTitle("A, B, and 3 more also activate dark theme");
+        verify(mCustomModesFooterPreference).setLearnMoreAction(any());
+        verify(mCustomModesFooterPreference).setLearnMoreText("Modes settings");
     }
 
     @Test
     public void displayPreference_withZeroModesTogglingDarkTheme() {
         when(mZenModesBackend.getModes()).thenReturn(List.of());
 
-        mController.displayPreference(mScreen);
+        mModeCustomModesPreferenceController.displayPreference(mScreen);
 
-        verify(mFooterPreference).setTitle("Modes can also activate dark theme");
-        verify(mFooterPreference).setLearnMoreAction(any());
-        verify(mFooterPreference).setLearnMoreText("Modes settings");
+        verify(mCustomModesFooterPreference).setTitle("Modes can also activate dark theme");
+        verify(mCustomModesFooterPreference).setLearnMoreAction(any());
+        verify(mCustomModesFooterPreference).setLearnMoreText("Modes settings");
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_FORCE_INVERT_COLOR)
+    public void displayPreference_expandedDarkThemeFooterVisible_expectedOrderAndIconGone() {
+        when(mExpandedDarkThemeFooterPreference.isVisible()).thenReturn(true);
+
+        mModeCustomModesPreferenceController.displayPreference(mScreen);
+
+        verify(mCustomModesFooterPreference).setIconVisibility(View.GONE);
+        verify(mCustomModesFooterPreference).setOrder(
+                eq(DarkModePreferenceOrderUtil.Order.MODES_FOOTER.getValue()));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_FORCE_INVERT_COLOR)
+    public void displayPreference_expandedDarkThemeFooterInvisible_neverSetIconGone() {
+        when(mExpandedDarkThemeFooterPreference.isVisible()).thenReturn(false);
+
+        mModeCustomModesPreferenceController.displayPreference(mScreen);
+
+        verify(mCustomModesFooterPreference, never()).setIconVisibility(View.GONE);
     }
 }

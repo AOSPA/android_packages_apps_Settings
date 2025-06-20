@@ -61,4 +61,13 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) : Featu
 
     override fun showStackedMirroringDisplayConnectedDisplaySetting(): Boolean =
         showStackedMirroringDisplayConnectedDisplaySettingFlag.isTrue
+
+    private val showTabbedConnectedDisplaySettingFlag = DesktopExperienceFlag(
+        featureFlagsImpl::showTabbedConnectedDisplaySetting,
+        /* shouldOverrideByDevOption= */ false,
+        Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING,
+    )
+
+    override fun showTabbedConnectedDisplaySetting(): Boolean =
+        showTabbedConnectedDisplaySettingFlag.isTrue
 }

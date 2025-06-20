@@ -24,10 +24,12 @@ import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig
 import com.android.settings.R
+import com.android.settings.Settings.DreamSettingsActivity
 import com.android.settings.Utils
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
@@ -36,6 +38,7 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.dream.DreamBackend
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceChangeReason
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -95,6 +98,9 @@ open class ScreensaverScreen(private val context: Context) :
     override fun hasCompleteHierarchy() = false
 
     override fun fragmentClass(): Class<out Fragment>? = DreamSettings::class.java
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, DreamSettingsActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {}

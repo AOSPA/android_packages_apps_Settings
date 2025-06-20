@@ -17,12 +17,42 @@
 package com.android.settings.applications.specialaccess
 
 import android.content.Context
-import android.content.pm.ApplicationInfo
+import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.android.settings.applications.AppListScreen
+import com.android.settings.applications.CatalystAppListFragment
+import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
+import com.android.settingslib.metadata.preferenceHierarchy
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEmpty
 
 /** Interface for Catalyst screens that display a list of apps with specific permission. */
-interface SpecialAccessAppListScreen : AppListScreen {
+abstract class SpecialAccessAppListScreen : AppListScreen() {
 
-    /** Returns whether the given application has requested certain permission. */
-    fun hasRequestedPermission(context: Context, appInfo: ApplicationInfo): Boolean
+    abstract val appDetailScreenKey: String
+
+    abstract fun appDetailParameters(context: Context, hierarchyType: Boolean): Flow<Bundle>
+
+    override fun fragmentClass(): Class<out Fragment>? = CatalystAppListFragment::class.java
+
+    override fun hasCompleteHierarchy() = true
+
+    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
+        generatePreferenceHierarchy(context, coroutineScope, DEFAULT_SHOW_SYSTEM)
+
+    override fun generatePreferenceHierarchy(
+        context: Context,
+        coroutineScope: CoroutineScope,
+        hierarchyType: Boolean,
+    ) =
+        preferenceHierarchy(context) {
+            addAsync(coroutineScope, Dispatchers.Default) {
+                val screenKey = appDetailScreenKey
+                appDetailParameters(context, hierarchyType)
+                    .onEmpty { +NoAppPreference() }
+                    .collect { +(screenKey args it) }
+            }
+        }
 }

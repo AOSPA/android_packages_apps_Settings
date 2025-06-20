@@ -81,8 +81,7 @@ public class FingerprintSafetySourceTest {
     private static final SafetyEvent EVENT_SOURCE_STATE_CHANGED =
             new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build();
 
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mApplicationContext;
 
@@ -112,6 +111,7 @@ public class FingerprintSafetySourceTest {
         when(featureFactory.securityFeatureProvider.getLockPatternUtils(mApplicationContext))
                 .thenReturn(mLockPatternUtils);
         doReturn(true).when(mLockPatternUtils).isSecure(anyInt());
+        when(mLockPatternUtils.isProfileWithUnifiedChallenge(anyInt())).thenReturn(false);
         SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
     }
 
@@ -150,6 +150,23 @@ public class FingerprintSafetySourceTest {
     public void setSafetySourceData_whenSafetyCenterIsEnabled_withoutFingerprint_setsNullData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+
+        FingerprintSafetySource.setSafetySourceData(
+                mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
+
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(), eq(FingerprintSafetySource.SAFETY_SOURCE_ID), eq(null), any());
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void setSafetySourceData_whenProfileWithUnifiedLock_setsNullData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
+        when(mLockPatternUtils.isProfileWithUnifiedChallenge(anyInt())).thenReturn(true);
 
         FingerprintSafetySource.setSafetySourceData(
                 mApplicationContext, EVENT_SOURCE_STATE_CHANGED);

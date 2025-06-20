@@ -61,6 +61,8 @@ import com.android.settingslib.animation.AppearAnimationCreator;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
+import com.google.android.setupdesign.util.ThemeHelper;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -86,6 +88,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ConfirmLockPatternFragment.class.getName());
+        modIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_USE_EXPRESSIVE_STYLE,
+                ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext()));
         return modIntent;
     }
 
@@ -129,12 +133,12 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             ConfirmLockPattern activity = (ConfirmLockPattern) getActivity();
-            View view = inflater.inflate(
-                    activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.NORMAL
-                            ? R.layout.confirm_lock_pattern_normal
-                            : R.layout.confirm_lock_pattern,
-                    container,
-                    false);
+            int layoutId = switch (activity.getConfirmCredentialTheme()) {
+                case ConfirmCredentialTheme.NORMAL, ConfirmCredentialTheme.EXPRESSIVE ->
+                        R.layout.confirm_lock_pattern_normal;
+                default -> R.layout.confirm_lock_pattern;
+            };
+            View view = inflater.inflate(layoutId, container, false);
             mGlifLayout = view.findViewById(R.id.setup_wizard_layout);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);

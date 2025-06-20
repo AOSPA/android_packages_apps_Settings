@@ -18,9 +18,11 @@ package com.android.settings.enterprise;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.DISABLED_BY_IT_ADMIN_TITLE;
 
+import android.annotation.Nullable;
 import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -52,8 +54,12 @@ import java.util.Objects;
 public final class ActionDisabledByAdminDialogHelper {
 
     private static final String TAG = ActionDisabledByAdminDialogHelper.class.getName();
-    @VisibleForTesting EnforcedAdmin mEnforcedAdmin;
+    @VisibleForTesting
+    EnforcedAdmin mEnforcedAdmin;
+    @VisibleForTesting
+    EnforcingAdmin mEnforcingAdmin;
     private ViewGroup mDialogView;
+    @Nullable
     private String mRestriction;
     private final ActionDisabledByAdminController mActionDisabledByAdminController;
     private final Activity mActivity;
@@ -79,6 +85,12 @@ public final class ActionDisabledByAdminDialogHelper {
 
     }
 
+    private @UserIdInt int getEnforcingAdminUserId(@NonNull EnforcingAdmin admin) {
+        return admin.getUserHandle() == null
+                ? UserHandle.USER_NULL
+                : admin.getUserHandle().getIdentifier();
+    }
+
     private @UserIdInt int getEnforcementAdminUserId(@NonNull EnforcedAdmin admin) {
         return admin.user == null ? UserHandle.USER_NULL : admin.user.getIdentifier();
     }
@@ -87,6 +99,8 @@ public final class ActionDisabledByAdminDialogHelper {
         return getEnforcementAdminUserId(mEnforcedAdmin);
     }
 
+    /** @deprecated Please use the same method that takes {@link EnforcingAdmin}. */
+    @Deprecated
     public AlertDialog.Builder prepareDialogBuilder(String restriction,
             EnforcedAdmin enforcedAdmin) {
         DialogInterface.OnClickListener listener = mActionDisabledByAdminController
@@ -96,6 +110,25 @@ public final class ActionDisabledByAdminDialogHelper {
                         ? R.string.suggestion_button_close : R.string.okay, listener)
                 .setView(mDialogView);
         prepareDialogBuilder(builder, restriction, enforcedAdmin);
+        return builder;
+    }
+
+    /**
+     * Prepares an alert dialog that shows information about a restriction set by the given admin.
+     */
+    @NonNull
+    public AlertDialog.Builder prepareDialogBuilder(
+            @Nullable String restriction, @NonNull EnforcingAdmin enforcingAdmin) {
+        DialogInterface.OnClickListener listener =
+                mActionDisabledByAdminController.getPositiveButtonListener(
+                        mActivity, enforcingAdmin);
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(mActivity)
+                        .setPositiveButton(
+                                listener == null ? R.string.suggestion_button_close : R.string.okay,
+                                listener)
+                        .setView(mDialogView);
+        prepareDialogBuilder(builder, restriction, enforcingAdmin);
         return builder;
     }
 
@@ -112,6 +145,21 @@ public final class ActionDisabledByAdminDialogHelper {
         mActionDisabledByAdminController.setupLearnMoreButton(mActivity);
     }
 
+    @VisibleForTesting
+    void prepareDialogBuilder(
+            AlertDialog.Builder builder, @Nullable String restriction,
+            EnforcingAdmin enforcingAdmin) {
+        mActionDisabledByAdminController.initialize(
+                new ActionDisabledLearnMoreButtonLauncherImpl(mActivity, builder));
+
+        mEnforcingAdmin = enforcingAdmin;
+        mRestriction = restriction;
+        initializeDialogViews(mDialogView, mEnforcingAdmin, mRestriction);
+        mActionDisabledByAdminController.setupLearnMoreButton(mActivity);
+    }
+
+    /** @deprecated Please use the same method that takes {@link EnforcingAdmin}. */
+    @Deprecated
     public void updateDialog(String restriction, EnforcedAdmin admin) {
         if (mEnforcedAdmin.equals(admin) && Objects.equals(mRestriction, restriction)) {
             return;
@@ -122,6 +170,16 @@ public final class ActionDisabledByAdminDialogHelper {
                 mRestriction);
     }
 
+    /** Updates the dialog view to show information about a restriction set by the given admin. */
+    public void updateDialog(@Nullable String restriction, @NonNull EnforcingAdmin admin) {
+        if (mEnforcingAdmin.equals(admin) && Objects.equals(mRestriction, restriction)) {
+            return;
+        }
+        mEnforcingAdmin = admin;
+        mRestriction = restriction;
+        initializeDialogViews(mDialogView, mEnforcingAdmin, mRestriction);
+    }
+
     private void initializeDialogViews(View root, EnforcedAdmin enforcedAdmin, int userId,
             String restriction) {
         ComponentName admin = enforcedAdmin.component;
@@ -130,7 +188,7 @@ public final class ActionDisabledByAdminDialogHelper {
         }
 
         mActionDisabledByAdminController.updateEnforcedAdmin(enforcedAdmin, userId);
-        setAdminSupportIcon(root, admin, userId);
+        setAdminSupportIcon(root);
 
         if (isNotCurrentUserOrProfile(admin, userId)) {
             admin = null;
@@ -148,13 +206,23 @@ public final class ActionDisabledByAdminDialogHelper {
         setAdminSupportDetails(mActivity, root, new EnforcedAdmin(admin, user));
     }
 
+    private void initializeDialogViews(
+            View root, EnforcingAdmin enforcingAdmin, @Nullable String restriction) {
+        if (enforcingAdmin == null) {
+            return;
+        }
+        mActionDisabledByAdminController.updateEnforcingAdmin(enforcingAdmin);
+        setAdminSupportIcon(root);
+        setAdminSupportTitle(root, restriction);
+        setAdminSupportDetails(mActivity, root, enforcingAdmin);
+    }
+
     private boolean isNotCurrentUserOrProfile(ComponentName admin, int userId) {
         return !RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(mActivity, admin)
                 || !RestrictedLockUtils.isCurrentUserOrProfile(mActivity, userId);
     }
 
-    @VisibleForTesting
-    void setAdminSupportIcon(View root, ComponentName admin, int userId) {
+    void setAdminSupportIcon(View root) {
         ImageView supportIconView = root.requireViewById(R.id.admin_support_icon);
         supportIconView.setImageDrawable(
                 mActivity.getDrawable(R.drawable.ic_lock_closed));
@@ -163,7 +231,7 @@ public final class ActionDisabledByAdminDialogHelper {
     }
 
     @VisibleForTesting
-    void setAdminSupportTitle(View root, String restriction) {
+    void setAdminSupportTitle(View root, @Nullable String restriction) {
         final TextView titleView = root.findViewById(R.id.admin_support_dialog_title);
         if (titleView == null) {
             return;
@@ -193,6 +261,31 @@ public final class ActionDisabledByAdminDialogHelper {
                 supportMessage = dpm.getShortSupportMessageForUser(enforcedAdmin.component,
                         getEnforcementAdminUserId(enforcedAdmin));
             }
+        }
+        final CharSequence supportContentString =
+                mActionDisabledByAdminController.getAdminSupportContentString(
+                        mActivity, supportMessage);
+        final TextView textView = root.findViewById(R.id.admin_support_msg);
+        if (supportContentString != null) {
+            textView.setText(supportContentString);
+        }
+    }
+
+    @VisibleForTesting
+    void setAdminSupportDetails(
+            final Activity activity, final View root, final EnforcingAdmin enforcingAdmin) {
+        if (enforcingAdmin == null) {
+            return;
+        }
+        final DevicePolicyManager dpm = activity.getSystemService(DevicePolicyManager.class);
+        CharSequence supportMessage = null;
+
+        if (enforcingAdmin.getComponentName() != null
+                && UserHandle.isSameApp(Process.myUid(), Process.SYSTEM_UID)) {
+            supportMessage =
+                    dpm.getShortSupportMessageForUser(
+                            enforcingAdmin.getComponentName(),
+                            getEnforcingAdminUserId(enforcingAdmin));
         }
         final CharSequence supportContentString =
                 mActionDisabledByAdminController.getAdminSupportContentString(

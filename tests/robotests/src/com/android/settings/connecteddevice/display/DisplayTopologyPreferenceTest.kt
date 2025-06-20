@@ -172,8 +172,8 @@ class DisplayTopologyPreferenceTest {
     }
 
     private fun getPaneChildren(): List<DisplayBlock> =
-        (0..<preference.paneContent.childCount)
-            .map { preference.paneContent.getChildAt(it) as DisplayBlock }
+        (0..<preference.controller.paneContent.childCount)
+            .map { preference.controller.paneContent.getChildAt(it) as DisplayBlock }
             .toList()
 
     private fun setupSingleDisplay() {
@@ -220,16 +220,16 @@ class DisplayTopologyPreferenceTest {
     /** Uses the topology in the injector to populate and prepare the pane for interaction. */
     private fun preparePane() {
         // This layoutParams needs to be non-null for the global layout handler.
-        preference.paneHolder.layoutParams =
+        preference.controller.paneHolder.layoutParams =
             FrameLayout.LayoutParams(/* width= */ 640, /* height= */ 480)
 
         // Force pane width to have a reasonable value (hundreds of dp) so the TopologyScale is
         // calculated reasonably.
-        preference.paneContent.left = 0
-        preference.paneContent.right = 640
+        preference.controller.paneContent.left = 0
+        preference.controller.paneContent.right = 640
 
         preference.onAttached()
-        preference.refreshPane()
+        preference.controller.refreshPane()
     }
 
     /**
@@ -297,12 +297,12 @@ class DisplayTopologyPreferenceTest {
     @Test
     fun disabledTopology() {
         preference.onAttached()
-        preference.refreshPane()
+        preference.controller.refreshPane()
 
-        assertThat(preference.paneContent.childCount).isEqualTo(0)
+        assertThat(preference.controller.paneContent.childCount).isEqualTo(0)
         // TODO(b/352648432): update test when we show the main display even when
         // a topology is not active.
-        assertThat(preference.topologyHint.text).isEqualTo("")
+        assertThat(preference.controller.topologyHint.text).isEqualTo("")
     }
 
     @Test
@@ -319,7 +319,7 @@ class DisplayTopologyPreferenceTest {
         assertSelected(rootBlock, false)
         assertThat(rootBounds.left).isEqualTo(childBounds.right)
 
-        assertThat(preference.topologyHint.text)
+        assertThat(preference.controller.topologyHint.text)
             .isEqualTo(context.getString(R.string.external_display_topology_hint))
     }
 
@@ -335,7 +335,7 @@ class DisplayTopologyPreferenceTest {
             DISPLAY_DENSITY,
         )
         injector.displaysSize[DISPLAY_ID_3] = newDisplaySize
-        preference.refreshPane()
+        preference.controller.refreshPane()
 
         val paneChildren = getPaneChildren()
         assertThat(paneChildren).hasSize(3)
@@ -350,14 +350,14 @@ class DisplayTopologyPreferenceTest {
             assertSelected(paneChildren[i], false)
         }
 
-        assertThat(preference.topologyHint.text).isEqualTo("")
+        assertThat(preference.controller.topologyHint.text).isEqualTo("")
     }
 
     @Test
     fun dragDisplayDownward() {
         val (leftBlock, _) = setupPaneWithTwoDisplays()
 
-        preference.timesRefreshedBlocks = 0
+        preference.controller.timesRefreshedBlocks = 0
 
         val downEvent =
             MotionEventBuilder.newBuilder()
@@ -385,7 +385,7 @@ class DisplayTopologyPreferenceTest {
         assertThat(child.position).isEqualTo(POSITION_LEFT)
         assertThat(child.offset).isWithin(1f).of(82f)
 
-        assertThat(preference.timesRefreshedBlocks).isEqualTo(1)
+        assertThat(preference.controller.timesRefreshedBlocks).isEqualTo(1)
     }
 
     @Test
@@ -401,7 +401,7 @@ class DisplayTopologyPreferenceTest {
 
         injector.revealLog.clear()
 
-        preference.timesRefreshedBlocks = 0
+        preference.controller.timesRefreshedBlocks = 0
 
         val downEvent =
             MotionEventBuilder.newBuilder()
@@ -441,14 +441,14 @@ class DisplayTopologyPreferenceTest {
         // Left edge of both blocks should be aligned after dragging.
         assertThat(paneChildren[0].x).isWithin(1f).of(paneChildren[1].x)
 
-        assertThat(preference.timesRefreshedBlocks).isEqualTo(1)
+        assertThat(preference.controller.timesRefreshedBlocks).isEqualTo(1)
     }
 
     @Test
     fun noRefreshForUnmovingDrag() {
         val (leftBlock, rightBlock) = setupPaneWithTwoDisplays()
 
-        preference.timesRefreshedBlocks = 0
+        preference.controller.timesRefreshedBlocks = 0
 
         val downEvent =
             MotionEventBuilder.newBuilder()
@@ -466,7 +466,7 @@ class DisplayTopologyPreferenceTest {
         assertThat(paneChildren.indexOf(leftBlock)).isNotEqualTo(-1)
         assertThat(paneChildren.indexOf(rightBlock)).isNotEqualTo(-1)
 
-        assertThat(preference.timesRefreshedBlocks).isEqualTo(0)
+        assertThat(preference.controller.timesRefreshedBlocks).isEqualTo(0)
     }
 
     @Test
@@ -487,7 +487,7 @@ class DisplayTopologyPreferenceTest {
             DISPLAY_DENSITY,
         )
         injector.displaysSize[DISPLAY_ID_3] = newDisplaySize
-        preference.refreshPane()
+        preference.controller.refreshPane()
         assertThat(injector.revealLog)
             .containsExactly("revealWallpaper invoked for display $DISPLAY_ID_3")
         injector.revealLog.clear()
@@ -499,7 +499,7 @@ class DisplayTopologyPreferenceTest {
 
         assertThat(injector.topology!!.removeDisplay(DISPLAY_ID_2)).isTrue()
         assertThat(injector.topology!!.removeDisplay(DISPLAY_ID_3)).isTrue()
-        preference.refreshPane()
+        preference.controller.refreshPane()
         assertThat(injector.revealLog)
             .containsExactly(
                 "removed wallpaper revealer for display $DISPLAY_ID_2",
@@ -518,7 +518,7 @@ class DisplayTopologyPreferenceTest {
         injector.revealLog.clear()
 
         setMirroringMode(true)
-        preference.refreshPane()
+        preference.controller.refreshPane()
         assertThat(injector.revealLog)
             .containsExactly("removed wallpaper revealer for display $DISPLAY_ID_2")
         injector.revealLog.clear()
@@ -528,13 +528,13 @@ class DisplayTopologyPreferenceTest {
     fun stopMirroringModeRevealWallpapers() {
         setMirroringMode(true)
         setupPaneWithTwoDisplays()
-        preference.refreshPane()
+        preference.controller.refreshPane()
         assertThat(injector.revealLog)
             .containsExactly("revealWallpaper invoked for display $DISPLAY_ID_1")
         injector.revealLog.clear()
 
         setMirroringMode(false)
-        preference.refreshPane()
+        preference.controller.refreshPane()
         assertThat(injector.revealLog)
             .containsExactly("revealWallpaper invoked for display $DISPLAY_ID_2")
         injector.revealLog.clear()
@@ -544,7 +544,7 @@ class DisplayTopologyPreferenceTest {
     fun applyNewTopologyViaListenerUpdate() {
         setupPaneWithTwoDisplays()
 
-        preference.timesRefreshedBlocks = 0
+        preference.controller.timesRefreshedBlocks = 0
         val newDisplaySize = Size(300, 320)
         val newTopology = injector.topology!!.copy()
         newTopology.addDisplay(
@@ -558,7 +558,7 @@ class DisplayTopologyPreferenceTest {
         injector.topology = newTopology
         injector.topologyListener!!.accept(newTopology)
 
-        assertThat(preference.timesRefreshedBlocks).isEqualTo(1)
+        assertThat(preference.controller.timesRefreshedBlocks).isEqualTo(1)
         val paneChildren = getPaneChildren()
         assertThat(paneChildren).hasSize(3)
 
@@ -578,11 +578,11 @@ class DisplayTopologyPreferenceTest {
         setupTwoDisplays(POSITION_TOP, /* offset= */ 12.0f)
         preparePane()
 
-        preference.timesRefreshedBlocks = 0
+        preference.controller.timesRefreshedBlocks = 0
         setupTwoDisplays(POSITION_TOP, /* offset= */ 12.1f)
         injector.topologyListener!!.accept(injector.topology!!)
 
-        assertThat(preference.timesRefreshedBlocks).isEqualTo(0)
+        assertThat(preference.controller.timesRefreshedBlocks).isEqualTo(0)
     }
 
     @Test
@@ -725,26 +725,26 @@ class DisplayTopologyPreferenceTest {
         val startX = leftBlock.x
         val startY = leftBlock.y
 
-        preference.timesRefreshedBlocks = 0
+        preference.controller.timesRefreshedBlocks = 0
         dragBlockWithOneMoveEvent(
             leftBlock,
             startTime,
-            endTimeMs = startTime + preference.accidentalDragTimeLimitMs - 10,
-            xDiff = preference.accidentalDragDistancePx - 1f,
+            endTimeMs = startTime + preference.controller.accidentalDragTimeLimitMs - 10,
+            xDiff = preference.controller.accidentalDragDistancePx - 1f,
             yDiff = 0f,
         )
         assertThat(leftBlock.x).isEqualTo(startX)
-        assertThat(preference.timesRefreshedBlocks).isEqualTo(0)
+        assertThat(preference.controller.timesRefreshedBlocks).isEqualTo(0)
 
         dragBlockWithOneMoveEvent(
             leftBlock,
             startTime,
-            endTimeMs = startTime + preference.accidentalDragTimeLimitMs - 10,
+            endTimeMs = startTime + preference.controller.accidentalDragTimeLimitMs - 10,
             xDiff = 0f,
-            yDiff = preference.accidentalDragDistancePx - 1f,
+            yDiff = preference.controller.accidentalDragDistancePx - 1f,
         )
         assertThat(leftBlock.y).isEqualTo(startY)
-        assertThat(preference.timesRefreshedBlocks).isEqualTo(0)
+        assertThat(preference.controller.timesRefreshedBlocks).isEqualTo(0)
     }
 
     @Test
@@ -753,15 +753,15 @@ class DisplayTopologyPreferenceTest {
         val startTime = 88888L
         val startX = topBlock.x
 
-        preference.timesRefreshedBlocks = 0
+        preference.controller.timesRefreshedBlocks = 0
         dragBlockWithOneMoveEvent(
             topBlock,
             startTime,
-            endTimeMs = startTime + preference.accidentalDragTimeLimitMs - 10,
-            xDiff = preference.accidentalDragDistancePx + 1f,
+            endTimeMs = startTime + preference.controller.accidentalDragTimeLimitMs - 10,
+            xDiff = preference.controller.accidentalDragDistancePx + 1f,
             yDiff = 0f,
         )
-        assertThat(preference.timesRefreshedBlocks).isEqualTo(1)
+        assertThat(preference.controller.timesRefreshedBlocks).isEqualTo(1)
         assertThat(topBlock.x).isNotEqualTo(startX)
     }
 
@@ -771,16 +771,16 @@ class DisplayTopologyPreferenceTest {
         val startTime = 88888L
         val startY = leftBlock.y
 
-        preference.timesRefreshedBlocks = 0
+        preference.controller.timesRefreshedBlocks = 0
         dragBlockWithOneMoveEvent(
             leftBlock,
             startTime,
-            endTimeMs = startTime + preference.accidentalDragTimeLimitMs - 10,
+            endTimeMs = startTime + preference.controller.accidentalDragTimeLimitMs - 10,
             xDiff = 0f,
-            yDiff = preference.accidentalDragDistancePx + 1f,
+            yDiff = preference.controller.accidentalDragDistancePx + 1f,
         )
         assertThat(leftBlock.y).isNotEqualTo(startY)
-        assertThat(preference.timesRefreshedBlocks).isEqualTo(1)
+        assertThat(preference.controller.timesRefreshedBlocks).isEqualTo(1)
     }
 
     @Test
@@ -789,16 +789,16 @@ class DisplayTopologyPreferenceTest {
         val startTime = 88888L
         val startX = topBlock.x
 
-        preference.timesRefreshedBlocks = 0
+        preference.controller.timesRefreshedBlocks = 0
         dragBlockWithOneMoveEvent(
             topBlock,
             startTime,
-            endTimeMs = startTime + preference.accidentalDragTimeLimitMs + 10,
-            xDiff = preference.accidentalDragDistancePx - 1f,
+            endTimeMs = startTime + preference.controller.accidentalDragTimeLimitMs + 10,
+            xDiff = preference.controller.accidentalDragDistancePx - 1f,
             yDiff = 0f,
         )
         assertThat(topBlock.x).isNotEqualTo(startX)
-        assertThat(preference.timesRefreshedBlocks).isEqualTo(1)
+        assertThat(preference.controller.timesRefreshedBlocks).isEqualTo(1)
     }
 
     @Test

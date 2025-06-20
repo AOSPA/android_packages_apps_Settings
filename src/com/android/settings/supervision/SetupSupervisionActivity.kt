@@ -29,10 +29,18 @@ import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.util.Log
+import android.view.MenuItem
 import androidx.annotation.RequiresPermission
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.lifecycleScope
+import com.android.settings.R
 import com.android.settings.password.ChooseLockPassword
+import com.android.settingslib.collapsingtoolbar.R.drawable.settingslib_expressive_icon_back as EXPRESSIVE_BACK_ICON
 import com.android.settingslib.supervision.SupervisionLog
+import com.android.settingslib.widget.SettingsThemeHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * This activity starts the flow for setting up device supervision.
@@ -63,6 +71,8 @@ class SetupSupervisionActivity : FragmentActivity() {
             finish()
         }
         if (savedInstanceState == null) {
+            // Set up loading screen before enabling supervision
+            setContentView(R.layout.supervision_dashboard_loading_screen)
             enableSupervision()
         }
     }
@@ -70,39 +80,75 @@ class SetupSupervisionActivity : FragmentActivity() {
     public override fun onResume() {
         super.onResume()
 
+        getActionBar()?.let {
+            it.elevation = 0f
+            it.setDisplayHomeAsUpEnabled(true)
+            if (SettingsThemeHelper.isExpressiveTheme(this)) {
+                it.setHomeAsUpIndicator(EXPRESSIVE_BACK_ICON)
+            }
+        }
+
         if (isSupervisingCredentialSet) {
             setResult(RESULT_OK)
             finish()
         }
     }
 
-    @RequiresPermission(anyOf = [CREATE_USERS, MANAGE_USERS])
-    private fun enableSupervision() {
-        val userManager = getSystemService(UserManager::class.java)
-        var supervisingUser = userManager.supervisingUserHandle
-        // If a supervising profile does not already exist on the device, create one
-        if (supervisingUser == null) {
-            val userInfo =
-                userManager.createUser("Supervising", USER_TYPE_PROFILE_SUPERVISING, /* flags= */ 0)
-            if (userInfo != null) {
-                supervisingUser = userInfo.userHandle
-            } else {
-                // TODO(399705794): Surface this error to user
-                Log.w(SupervisionLog.TAG, "Unable to create supervising profile.")
-                setResult(RESULT_CANCELED)
-                finish()
-                return
-            }
-        }
-        val activityManager = getSystemService(ActivityManager::class.java)
-        if (!activityManager.startProfile(supervisingUser)) {
-            // TODO(399705794): Surface this error to user
-            Log.w(SupervisionLog.TAG, "Could not start supervising profile.")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
             setResult(RESULT_CANCELED)
             finish()
-            return
+            return true
         }
-        startChooseLockActivity(supervisingUser)
+        return super.onOptionsItemSelected(item)
+    }
+
+    @RequiresPermission(anyOf = [CREATE_USERS, MANAGE_USERS])
+    private fun enableSupervision() {
+        // Create user profile in the background to avoid blocking the loading indicator UI
+        lifecycleScope.launch(Dispatchers.IO) {
+            val supervisingUser: UserHandle? = setupSupervisingUser()
+
+            // Update UI on the main thread
+            lifecycleScope.launch(Dispatchers.Main) {
+                if (supervisingUser != null) {
+                    startChooseLockActivity(supervisingUser)
+                } else {
+                    // Failure: Show error, set result, and finish the activity
+                    // TODO(399705794): Surface this error to the user
+                    setResult(RESULT_CANCELED)
+                    finish()
+                }
+            }
+        }
+    }
+
+    @RequiresPermission(anyOf = [CREATE_USERS, MANAGE_USERS])
+    private fun setupSupervisingUser(): UserHandle? {
+        val userManager = getSystemService(UserManager::class.java)
+        var userHandle = userManager.supervisingUserHandle
+        // If a supervising profile does not already exist on the device, create one
+        if (userHandle == null) {
+            val userInfo =
+                userManager?.createUser(
+                    "Supervising",
+                    USER_TYPE_PROFILE_SUPERVISING,
+                    /* flags= */ 0,
+                )
+            if (userInfo == null) {
+                return null
+            }
+
+            userHandle = userInfo.userHandle
+        }
+        val activityManager = getSystemService(ActivityManager::class.java)
+        if (activityManager == null || !activityManager.startProfile(userHandle)) {
+            // TODO(399705794): Surface this error to user
+            Log.w(SupervisionLog.TAG, "Could not start supervising profile.")
+            return null
+        }
+
+        return userHandle
     }
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, INTERACT_ACROSS_USERS])

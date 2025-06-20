@@ -97,9 +97,9 @@
     <string name="preview_pager_next_button">Next preview</string>
 
     <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
-    <string name="font_size_make_smaller_desc">Make font size smaller</string>
+    <string name="font_size_make_smaller_desc">Decrease font size</string>
     <!-- Description for the button that makes interface elements larger. [CHAR_LIMIT=NONE] -->
-    <string name="font_size_make_larger_desc">Make font size bigger</string>
+    <string name="font_size_make_larger_desc">Increase font size</string>
 
     <!-- Title for stay awake on fold radio button. [CHAR_LIMIT=NONE] -->
     <string name="stay_awake_on_fold_title">Always</string>
@@ -536,8 +536,6 @@
 
     <!-- The text of the confirmation dialog showing the system locale will be changed. [CHAR LIMIT=NONE]-->
     <string name="desc_notice_device_locale_and_region_settings_change">Your device will use <xliff:g id="language" example="English">%1$s</xliff:g> and your region will be changed to <xliff:g id="region" example="United States">%2$s</xliff:g>.</string>
-    <!-- The text of the confirmation dialog showing the system locale which have no region will be changed. [CHAR LIMIT=NONE]-->
-    <string name="desc_notice_device_locale_settings_change">Your device will use <xliff:g id="language" example="English">%s</xliff:g>.</string>
     <!-- The text of the removing dialog showing the default locale will be removed from the list. [CHAR LIMIT=NONE]-->
     <string name="dlg_desc_delete_preferred_default_locale"><xliff:g id="removed_language" example="Français (France)">%s</xliff:g> will be removed from your preferred languages</string>
 
@@ -2630,8 +2628,26 @@
     <string name="retry">Retry</string>
     <!-- Label for the check box to share a network with other users on the same device -->
     <string name="wifi_shared">Share with other device users</string>
+    <!-- Label for the shared wifi message -->
+    <string name="shared_message">shared</string>
+    <!-- Label for the private wifi message -->
+    <string name="private_message">private</string>
+    <!-- Label for the conflict wifi dialog confirm button -->
+    <string name="wifi_conflict_dialog_confirm">Confirm</string>
+    <!-- Label for the conflict wifi dialog cancel button -->
+    <string name="wifi_conflict_dialog_cancel">Cancel</string>
+    <!-- Title for the preference to share a network with other users on the same device -->
+    <string name="wifi_share_preference_title">This is a shared network</string>
+    <!-- Summary for the preference to share a network with other users on the same device -->
+    <string name="wifi_share_preference_summary">All users with the exception of guest users, will be able to view, edit and delete this network</string>
+    <!-- Alert dialog title, informing the user to switch to the conflicting network.  [CHAR LIMIT=250] -->
+    <string name="wifi_conflict_dialog_title">Switch to <xliff:g id="shared">%1$s</xliff:g> \"<xliff:g id="network_name">%2$s</xliff:g>\" network?</string>
+    <!-- Alert dialog summary, informing the user to switch to the conflicting network.  [CHAR LIMIT=250] -->
+    <string name="wifi_conflict_dialog_message">You\'re currently connected to a <xliff:g id="shared">%1$s</xliff:g> network with the same name. When you switch, you\'ll disconnect from the <xliff:g id="shared">%2$s</xliff:g> network and then reconnect to the <xliff:g id="private">%3$s</xliff:g> network. You may temporarily have no internet.</string>
     <!-- Hint for unchanged fields -->
     <string name="wifi_unchanged">(unchanged)</string>
+    <!-- Label for the check box to allow other device users to edit network details -->
+    <string name="wifi_allow_edit_configuration_title">Allow other users to edit network configuration</string>
     <!-- Hint for unspecified fields -->
     <string name="wifi_unspecified">Please select</string>
     <!-- Hint for multiple certificates being added to the configuration -->
@@ -5049,9 +5065,9 @@
     <!-- Title for the toggle button that turns on/off the mouse keys shortcut. [CHAR_LIMIT=NONE] -->
     <string name="accessibility_mouse_keys_shortcut_title">Mouse keys shortcut</string>
     <!-- Summary text for the accessibility setting 'Mouse keys' preference sub-screen. [CHAR LIMIT=100] -->
-    <string name="mouse_keys_summary">Use your keyboard to control the pointer</string>
+    <string name="mouse_keys_summary">Use your keyboard to control the cursor</string>
     <!-- Title for the mouse keys max speed slider preference under mouse key main page, an accessibility mouse keys setting that controls how fast the mouse key can move. [CHAR LIMIT=35] -->
-    <string name="mouse_keys_max_speed_title">Maximum speed</string>
+    <string name="mouse_keys_max_speed_title">Speed</string>
     <!-- Description for the button that decreases the seekbar in mouse keys settings page. [CHAR_LIMIT=NONE] -->
     <string name="mouse_keys_seek_bar_decrease_button_description">Decrease</string>
     <!-- Description for the button that increases the seekbar in mouse keys settings page. [CHAR_LIMIT=NONE] -->
@@ -5060,14 +5076,16 @@
     <string name="mouse_reverse_vertical_scrolling">Reverse scrolling</string>
     <!-- Title for a toggle switch for 'Use primary keys' under mouse key main page, an accessibility setting that allows the user to use primary keyboard keys to control the cursor instead of using numpad keys. [CHAR LIMIT=35] -->
     <string name="mouse_keys_use_primary_keys_title">Use primary keys</string>
+    <!-- Summary text for the 'Use primary keys' preference switch explaining what primary keys are. [CHAR LIMIT=NONE]-->
+    <string name="mouse_keys_use_primary_keys_summary">Control the keyboard with letters and numbers instead of the numeric keypad</string>
     <!-- Label for the reset settings button in mouse key main page, [CHAR LIMIT=35] -->
     <string name="mouse_keys_reset_button_label">Reset settings</string>
     <!-- Title for the primary keys keyboard diagrams in mouse key main page, [CHAR LIMIT=35] -->
     <string name="mouse_keys_primary_keys_image_list_title">How to use primary keys</string>
     <!-- Title for the numpad keys keyboard diagrams in mouse key main page. [CHAR LIMIT=35] -->
     <string name="mouse_keys_numpad_keys_image_list_title">How to use a numeric keypad</string>
-    <!-- Summary text for the numpad keys keyboard diagrams in mouse key main page. [CHAR LIMIT=35] -->
-    <string name="mouse_keys_numpad_keys_image_list_summary">Numeric keypad will always be used when Num Lock is on</string>
+    <!-- Summary text for the numpad keys keyboard diagrams in mouse key main page. [CHAR LIMIT=NONE] -->
+    <string name="mouse_keys_numpad_keys_image_list_summary">The numeric keypad will always be used when Number Lock (Num Lock) is on</string>
     <!-- Summary text for the 'Mouse reverse scrolling' preference switch indicating to users that when the setting is enabled that scrolling up with their mouse wheel will move the page content down. [CHAR LIMIT=NONE] -->
     <string name="mouse_reverse_vertical_scrolling_summary">Scroll up to move the page down</string>
     <!-- Title for the scrolling section of the mouse settings page. [CHAR LIMIT=60] -->
@@ -5103,11 +5121,10 @@
     <!-- Summary text for Mouse keys click secondary button image. [CHAR LIMIT=NONE] -->
     <string name="mouse_keys_release2_summary">Use the \"<xliff:g id="release_2_label" example="/">%s</xliff:g>\" key to click the secondary mouse button</string>
 
-    <!-- TODO(b/411206889): finalize this string and mark it translatable. -->
     <!-- Title for the mouse keys acceleration seekbar -->
-    <string name="mouse_keys_acceleration_seekbar_title" translatable="false">Acceleration</string>
-    <string name="mouse_keys_acceleration_fast_icon_desc" translatable="false">Fast</string>
-    <string name="mouse_keys_acceleration_slow_icon_desc" translatable="false">Slow</string>
+    <string name="mouse_keys_acceleration_seekbar_title">Acceleration</string>
+    <string name="mouse_keys_acceleration_fast_icon_desc">Fast</string>
+    <string name="mouse_keys_acceleration_slow_icon_desc">Slow</string>
 
     <!-- Title for the button to trigger the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=35] -->
     <string name="keyboard_shortcuts_helper">View keyboard shortcuts</string>
@@ -6179,6 +6196,12 @@
     <string name="accessibility_color_inversion_about_title">About color inversion</string>
     <!-- Color correction footer link content description [CHAR LIMIT=NONE] -->
     <string name="accessibility_color_inversion_footer_learn_more_content_description">Learn more about color inversion</string>
+    <!-- Dark theme footer link text [CHAR LIMIT=NONE] -->
+    <string name="accessibility_dark_theme_footer_learn_more_helper_link">Learn more about Dark theme</string>
+    <!-- Footer Content for the expanded dark theme. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_dark_theme_preference_footer_content">
+        Some apps may not support Dark theme in the expanded setting. If you experience appearance issues, use the standard setting.
+    </string>
     <!-- Title for captioning settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="accessibility_captioning_primary_switch_title">Show captions</string>
     <!-- Summary for captioning settings screen to control turning on/off the feature entirely [CHAR LIMIT=NONE] -->
@@ -8217,6 +8240,8 @@ Data usage charges may apply.</string>
     <string name="help_url_apps_and_notifications" translatable="false"></string>
     <string name="help_url_night_display" translatable="false"></string>
     <string name="help_url_dark_theme" translatable="false"></string>
+    <!-- Help URL, Expanded Dark Theme [DO NOT TRANSLATE] -->
+    <string name="help_url_dark_theme_link" translatable="false"></string>
     <string name="help_url_screen_saver" translatable="false"></string>
     <string name="help_url_pickup_gesture" translatable="false"></string>
     <string name="help_url_storage_dashboard" translatable="false"></string>
@@ -11140,9 +11165,9 @@ Data usage charges may apply.</string>
     <!-- Title of the screen zoom preview activity. -->
     <string name="screen_zoom_preview_title">Preview</string>
     <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
-    <string name="screen_zoom_make_smaller_desc">Make display size smaller</string>
+    <string name="screen_zoom_make_smaller_desc">Decrease display size</string>
     <!-- Description for the button that makes interface elements larger. [CHAR_LIMIT=NONE] -->
-    <string name="screen_zoom_make_larger_desc">Make display size bigger</string>
+    <string name="screen_zoom_make_larger_desc">Increase display size</string>
 
     <!-- Wi-Fi state - Disconnected [CHAR LIMIT=NONE] -->
     <string name="disconnected">Not connected</string>
@@ -11542,7 +11567,7 @@ Data usage charges may apply.</string>
     <string name="battery_tips_card_feedback_info">Is this message helpful?</string>
 
     <!-- Content description for battery hints warning icon of app anomaly [CHAR LIMIT=NONE] -->
-    <string name="battery_hints_warning_icon_a11y">Battery tips warning icon</string>
+    <string name="battery_hints_warning_icon_a11y">Battery warning tips</string>
 
     <!-- Summary of settings anomaly for adaptive brightness [CHAR LIMIT=NONE] -->
     <string name="battery_tips_settings_summary_brightness">Turn on adaptive brightness to extend battery life</string>
@@ -12460,11 +12485,6 @@ Data usage charges may apply.</string>
     <!-- Developer options location category strings -->
     <!-- Title for privacy category [CHAR LIMIT=30]-->
     <string name="location_category">Location</string>
-    <!-- [CHAR LIMIT=130] Title for location indicator settings -->
-    <string name="location_indicator_settings_title">Status bar location indicator</string>
-    <!-- [CHAR LIMIT=130] Description for location indicator settings -->
-    <string name="location_indicator_settings_description">Show for all locations, including network and connectivity</string>
-
     <!-- Location setting: preference title - enforce full raw GNSS satellite measurements [CHAR LIMIT=60] -->
     <string name="enable_gnss_raw_meas_full_tracking">Force full GNSS measurements</string>
     <!-- Location setting: preference summary - describes the behavior of forcing full raw GNSS satellite measurements [CHAR LIMIT=NONE] -->
@@ -13104,7 +13124,7 @@ Data usage charges may apply.</string>
     <!-- Description of satellite function [CHAR LIMIT=60] -->
     <string name="description_satellite_setting_messaging">satellite messaging</string>
     <!-- Title for notifying user's account be able to use data transmission of Satellite" [CHAR_LIMIT=NONE] -->
-    <string name="title_have_satellite_data_plan">Use of data is included with your account</string>
+    <string name="title_have_satellite_data_plan">Use of supported apps is included with your account</string>
     <!-- Category title for Satellite supported apps info  [CHAR LIMIT=60] -->
     <string name="category_title_satellite_supported_apps">Supported apps on your phone</string>
     <!-- Title for a entry to start apps list page with Satellite service supported.  [CHAR LIMIT=60] -->
@@ -14671,6 +14691,8 @@ Data usage charges may apply.</string>
     <string name="audio_streams_dialog_learn_more">Learn more</string>
     <!-- Le audio streams failure dialog subtitle [CHAR LIMIT=NONE] -->
     <string name="audio_streams_dialog_cannot_play">Can\u0027t play this audio stream on <xliff:g example="LE headset" id="device_name">%1$s</xliff:g>.</string>
+    <!-- Le audio streams failure dialog subtitle with link [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_cannot_play_with_link">Can\u0027t play this audio stream on <xliff:g example="LE headset" id="device_name">%1$s</xliff:g>. <annotation id="link">Learn more</annotation></string>
     <!-- The preference summary when add source succeed [CHAR LIMIT=NONE] -->
     <string name="audio_streams_listening_now">Listening now</string>
     <!-- The preference summary when source is present on sinks [CHAR LIMIT=NONE] -->
@@ -14779,9 +14801,11 @@ Data usage charges may apply.</string>
     <!-- Description of device supervision toggle when PIN has never been set up [CHAR LIMIT=NONE] -->
     <string name="device_supervision_switch_no_pin_summary">Set up PIN</string>
     <!-- Search keywords for supervision settings [CHAR LIMIT=NONE] -->
-    <string name="keywords_supervision_settings">supervision, parental supervision, parental controls</string>
+    <string name="keywords_supervision_settings">supervision, parental controls, parents, supervision pin, pin</string>
     <!-- Title for supervision PIN management settings entry [CHAR LIMIT=60] -->
     <string name="supervision_pin_management_preference_title">Manage your PIN</string>
+    <!-- Search keywords for supervision PIN management settings entry [CHAR LIMIT=NONE] -->
+    <string name="supervision_pin_management_preference_keywords">Parent PIN, Parental controls PIN</string>
     <!-- Description for supervision PIN management settings entry, in the case of adding a PIN recovery method[CHAR LIMIT=NONE] -->
     <string name="supervision_pin_management_preference_summary_add">Add recovery email</string>
     <!-- Description for supervision PIN management settings entry, in the case of verifying the PIN recovery method[CHAR LIMIT=NONE] -->
@@ -14790,6 +14814,8 @@ Data usage charges may apply.</string>
     <string name="supervision_change_pin_preference_title">Change PIN</string>
     <!-- Title for supervision forgot PIN setting entry [CHAR LIMIT=60] -->
     <string name="supervision_add_forgot_pin_preference_title">Forgot PIN</string>
+    <!-- Label for the fallback option button "Forgot PIN?" on the authentication prompt [CHAR LIMIT=60] -->
+    <string name="supervision_auth_prompt_forgot_pin_button_label">Forgot PIN?</string>
     <!-- Title for supervision update PIN recovery email setting entry [CHAR LIMIT=60] -->
     <string name="supervision_update_recovery_email_preference_title">Update recovery email</string>
     <!-- Title for supervision delete pin setting entry [CHAR LIMIT=60] -->
@@ -14799,9 +14825,11 @@ Data usage charges may apply.</string>
     <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
     <string name="supervision_verify_pin_recovery_title">Verify your email</string>
     <!-- Title for web content filters entry [CHAR LIMIT=60] -->
-    <string name="supervision_web_content_filters_title">Web content filters</string>
+    <string name="supervision_web_content_filters_title">Website content filters</string>
+    <!-- Search keywords for web content filters entry [CHAR LIMIT=NONE] -->
+    <string name="supervision_web_content_filters_keywords">Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions</string>
     <!-- Top intro for web content filters [CHAR LIMIT=NONE] -->
-    <string name="supervision_web_content_filters_top_intro">Block mature content on websites and search results on supported apps on this device. Unsupported apps may still show explicit content.</string>
+    <string name="supervision_web_content_filters_top_intro">Help filter explicit content on some apps and browsers on this phone. Explicit content may still show on other apps, devices, or browsers.</string>
     <!-- Title for web content filters browser category [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_browser_title">Websites</string>
     <!-- Title for web content filters browser filters [CHAR LIMIT=60] -->
@@ -14810,11 +14838,18 @@ Data usage charges may apply.</string>
     <string name="supervision_web_content_filters_search_title">Search results</string>
     <!-- Title for web content filters search filters switch [CHAR LIMIT=60] -->
     <string name="supervision_web_content_filters_search_filter_title">Filter out explicit search results</string>
+    <!-- Summary for web content filters switch, which displays the number of supported apps for the given filter. [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_switch_summary">{count, plural,
+        =1      {On # app}
+        other   {On # apps}
+        }</string>
+    <!-- Title for web content filters footer. [CHAR LIMIT=NONE]-->
+    <string name="supervision_web_content_filters_footer_title">When these settings are off, other account settings may still apply.</string>
     <!-- Learn more link for web content filters footer. [CHAR LIMIT=NONE]-->
     <string name="supervision_web_content_filters_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_web_filters</string>
     <!-- Generic content description that is attached to the preview illustration at the top of an Accessibility feature toggle page. [CHAR LIMIT=NONE] -->
     <!-- Title for supervision PIN verification screen [CHAR LIMIT=60] -->
-    <string name="supervision_full_screen_pin_verification_title">Enter supervision PIN</string>
+    <string name="supervision_full_screen_pin_verification_title">Enter parental controls PIN</string>
     <!-- Title on activity to choose PIN for supervision setup [CHAR LIMIT=NONE] -->
     <string name="supervision_choose_your_pin_header">Set a parental controls PIN</string>
     <!-- Title on activity to confirm PIN for supervision setup [CHAR LIMIT=NONE] -->
@@ -14826,16 +14861,14 @@ Data usage charges may apply.</string>
     <string name="supervision_promo_footer_action_button_description">Open app</string>
     <!-- Title on dialog that confirms whether user wants to delete their supervision PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_confirm_header">Delete PIN?</string>
-    <!-- Message in dialog that confirms whether user wants to delete their supervision PIN [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_confirm_message">This will delete your current PIN for all users on this device and disable controls you have set up. This action can\u2019t be undone.</string>
     <!-- Title on dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_supervision_enabled_header">Pause controls on other profiles first</string>
-    <!-- Message in dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_supervision_enabled_message">To proceed with deleting this PIN and resetting supervision settings, please pause controls on all other profiles.</string>
+    <string name="supervision_delete_pin_supervision_enabled_header">Turn off parental controls for other users</string>
     <!-- Title on dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_error_header">PIN can not be deleted</string>
     <!-- Message in dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_error_message">An error occurred while trying to delete the PIN.</string>
+    <!-- Learn more link for device supervision PIN. [CHAR LIMIT=NONE]-->
+    <string name="supervision_pin_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_pin</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
 
     <!-- Light theme customization for Face Education lottie illustration. Not translatable. -->

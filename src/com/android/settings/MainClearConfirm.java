@@ -175,14 +175,6 @@ public class MainClearConfirm extends InstrumentedFragment {
             return false;
         }
 
-        // If OEM unlock is allowed, the persistent data block will be wiped during the FR
-        // process on devices without FRP Hardening. If disabled, it will be wiped here instead.
-        // On devices with FRP Hardening, the persistent data block should always be wiped,
-        // regardless of the OEM Unlocking state.
-        if (!android.security.Flags.frpEnforcement() && isOemUnlockedAllowed()) {
-            return false;
-        }
-
         final DevicePolicyManager dpm = (DevicePolicyManager) getActivity()
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);
         // Do not erase the factory reset protection data (from Settings) if factory reset

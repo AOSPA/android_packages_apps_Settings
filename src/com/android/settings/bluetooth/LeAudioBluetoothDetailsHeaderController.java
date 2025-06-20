@@ -37,7 +37,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -170,7 +169,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         }
         boolean isTempBond = com.android.settingslib.flags.Flags.enableTemporaryBondDevicesUi()
                 && BluetoothUtils.isTemporaryBondDevice(mCachedDevice.getDevice());
-        if (Flags.enableBluetoothDeviceDetailsPolish() && !isTempBond) {
+        if (!isTempBond) {
             ImageButton renameButton = mLayoutPreference.findViewById(R.id.rename_button);
             renameButton.setVisibility(View.VISIBLE);
             renameButton.setOnClickListener(view -> {
