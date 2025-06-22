@@ -18,6 +18,7 @@ package com.android.settings.wifi.calling
 import android.os.Bundle
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import org.junit.Test
 
 class WifiCallingScreenTest : SettingsCatalystTestCase() {
 
@@ -26,5 +27,6 @@ class WifiCallingScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_WIFI_CALLING
 
+    @Test
     override fun migration() {}
 }

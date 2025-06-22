@@ -165,6 +165,7 @@ class ScreensaverScreenTest : SettingsCatalystTestCase() {
     private fun getSummaryOnWithDreamName(dreamName: CharSequence) =
         SCREENSAVER_SUMMARY_ON + dreamName
 
+    @Test
     override fun migration() {}
 
     private companion object {

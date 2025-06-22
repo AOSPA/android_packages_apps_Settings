@@ -77,7 +77,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         EXTERNAL_DISPLAY_LIST(-1, "external_display_list", null),
 
         // If shown, footer should appear below everything.
-        FOOTER(90, "footer_preference", null);
+        FOOTER(90, "footer_preference", null),
+
+        // A static preference just to show "no external display is connected" info
+        NO_EXTERNAL_DISPLAY_CONNECTED(100, "no_external_display_connected_preference", null);
 
 
         PrefBasics(int order, String key, @Nullable Integer titleResource) {
@@ -249,6 +252,18 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         refresh.addPreference(pref);
     }
 
+    private void addNoExternalDisplayConnectedPreference(PrefRefresh refresh) {
+        var pref = refresh.findUnusedPreference(PrefBasics.NO_EXTERNAL_DISPLAY_CONNECTED.key);
+        if (pref == null) {
+            pref = new Preference(requireContext());
+            pref.setLayoutResource(R.layout.no_external_display_connected_screen);
+            pref.setSelectable(false);
+            pref.setPersistent(false);
+            PrefBasics.NO_EXTERNAL_DISPLAY_CONNECTED.apply(pref, /* nth= */ null);
+        }
+        refresh.addPreference(pref);
+    }
+
     @NonNull
     private ListPreference reuseRotationPreference(PrefRefresh refresh, int position) {
         ListPreference pref = refresh.findUnusedPreference(
@@ -383,8 +398,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private void showTextWhenNoDisplaysToShow(@NonNull final PrefRefresh screen, int position) {
         if (isUseDisplaySettingEnabled()) {
             addUseDisplayPreferenceNoDisplaysFound(screen, position);
+            addFooterPreference(screen, EXTERNAL_DISPLAY_NOT_FOUND_FOOTER_RESOURCE);
+        } else {
+            addNoExternalDisplayConnectedPreference(screen);
         }
-        addFooterPreference(screen, EXTERNAL_DISPLAY_NOT_FOUND_FOOTER_RESOURCE);
     }
 
     private PreferenceCategory reuseDisplayCategory(PrefRefresh screen, int position) {

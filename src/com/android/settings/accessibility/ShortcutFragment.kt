@@ -27,12 +27,10 @@ import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragm
 import com.google.android.setupcompat.util.WizardManagerHelper
 
 /**
- * Base class for Fragment that holds a [ShortcutPreference]. By default, the fragment is not
- * restricted. If the fragment should be restricted, pass the restriction key when calling super's
- * constructor. See [com.android.settings.dashboard.RestrictedDashboardFragment]
+ * Base class for Fragment that holds a [ShortcutPreference]. If your fragment is restricted and
+ * also wants to holds a [ShortcutPreference], use [RestrictedShortcutFragment] instead.
  */
-abstract class ShortcutFragment(restrictionKey: String? = null) :
-    BaseRestrictedSupportFragment(restrictionKey) {
+abstract class ShortcutFragment : BaseSupportFragment() {
 
     abstract fun getFeatureName(): CharSequence
 

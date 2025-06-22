@@ -101,3 +101,13 @@ flag {
   description: "Enables alert indicator on homepage tiles"
   bug: "403326850"
 }
+
+flag {
+  name: "fix_touchpad_and_mouse_settings_search_index"
+  namespace: "android_settings"
+  description: "Fix TouchpadAndMouseSettings indexing logic"
+  bug: "421850832"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+    }
+}

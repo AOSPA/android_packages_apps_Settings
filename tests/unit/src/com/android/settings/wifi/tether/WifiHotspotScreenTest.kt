@@ -44,6 +44,7 @@ class WifiHotspotScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_TETHER_SETTINGS
 
+    @Test
     override fun migration() {}
 
     private val context =

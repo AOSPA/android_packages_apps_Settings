@@ -16,6 +16,10 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamConfirmDialogActivity.isBroadcastScheme;
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsDashboardFragment.KEY_BROADCAST_METADATA;
+import static com.android.settingslib.bluetooth.BluetoothBroadcastUtils.SCHEME_BT_BROADCAST_METADATA;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -25,6 +29,7 @@ import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothStatusCodes;
+import android.content.Intent;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
@@ -63,6 +68,7 @@ public class AudioStreamConfirmDialogActivityTest {
     @Mock private LocalBluetoothLeBroadcast mBroadcast;
     @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
     @Mock private VolumeControlProfile mVolumeControl;
+    private final Intent mValidIntent = getValidIntent();
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private AudioStreamConfirmDialogActivity mActivity;
 
@@ -93,26 +99,38 @@ public class AudioStreamConfirmDialogActivityTest {
 
     @Test
     public void isValidFragment_returnsTrue() {
-        mActivity = Robolectric.setupActivity(AudioStreamConfirmDialogActivity.class);
+        mActivity =
+                Robolectric.buildActivity(AudioStreamConfirmDialogActivity.class, mValidIntent)
+                        .setup()
+                        .get();
         assertThat(mActivity.isValidFragment(AudioStreamConfirmDialog.class.getName())).isTrue();
     }
 
     @Test
     public void isValidFragment_returnsFalse() {
-        mActivity = Robolectric.setupActivity(AudioStreamConfirmDialogActivity.class);
+        mActivity =
+                Robolectric.buildActivity(AudioStreamConfirmDialogActivity.class, mValidIntent)
+                        .setup()
+                        .get();
         assertThat(mActivity.isValidFragment("")).isFalse();
     }
 
     @Test
     public void isToolbarEnabled_returnsFalse() {
-        mActivity = Robolectric.setupActivity(AudioStreamConfirmDialogActivity.class);
+        mActivity =
+                Robolectric.buildActivity(AudioStreamConfirmDialogActivity.class, mValidIntent)
+                        .setup()
+                        .get();
         assertThat(mActivity.isToolbarEnabled()).isFalse();
     }
 
     @Test
     public void setupActivity_serviceNotReady_registerCallback() {
         when(mBroadcast.isProfileReady()).thenReturn(false);
-        mActivity = Robolectric.setupActivity(AudioStreamConfirmDialogActivity.class);
+        mActivity =
+                Robolectric.buildActivity(AudioStreamConfirmDialogActivity.class, mValidIntent)
+                        .setup()
+                        .get();
 
         verify(mLocalBluetoothProfileManager).addServiceListener(any());
     }
@@ -120,7 +138,10 @@ public class AudioStreamConfirmDialogActivityTest {
     @Test
     public void setupActivity_serviceNotReady_registerCallback_onServiceCallback() {
         when(mBroadcast.isProfileReady()).thenReturn(false);
-        mActivity = Robolectric.setupActivity(AudioStreamConfirmDialogActivity.class);
+        mActivity =
+                Robolectric.buildActivity(AudioStreamConfirmDialogActivity.class, mValidIntent)
+                        .setup()
+                        .get();
 
         verify(mLocalBluetoothProfileManager).addServiceListener(any());
 
@@ -134,7 +155,10 @@ public class AudioStreamConfirmDialogActivityTest {
 
     @Test
     public void setupActivity_serviceReady_doNothing() {
-        mActivity = Robolectric.setupActivity(AudioStreamConfirmDialogActivity.class);
+        mActivity =
+                Robolectric.buildActivity(AudioStreamConfirmDialogActivity.class, mValidIntent)
+                        .setup()
+                        .get();
 
         verify(mLocalBluetoothProfileManager, never()).addServiceListener(any());
     }
@@ -143,16 +167,80 @@ public class AudioStreamConfirmDialogActivityTest {
     public void setupActivity_serviceNotReady_bluetoothOff_doNothing() {
         when(mAssistant.isProfileReady()).thenReturn(false);
         mShadowBluetoothAdapter.setEnabled(false);
-        mActivity = Robolectric.setupActivity(AudioStreamConfirmDialogActivity.class);
+        mActivity =
+                Robolectric.buildActivity(AudioStreamConfirmDialogActivity.class, mValidIntent)
+                        .setup()
+                        .get();
 
         verify(mLocalBluetoothProfileManager, never()).addServiceListener(any());
     }
 
     @Test
     public void onStop_unregisterCallback() {
-        mActivity = Robolectric.setupActivity(AudioStreamConfirmDialogActivity.class);
+        mActivity =
+                Robolectric.buildActivity(AudioStreamConfirmDialogActivity.class, mValidIntent)
+                        .setup()
+                        .get();
         mActivity.onStop();
 
         verify(mLocalBluetoothProfileManager).removeServiceListener(any());
+    }
+
+    @Test
+    public void isBroadcastScheme_nullIntent_returnsFalse() {
+        assertThat(isBroadcastScheme(null)).isFalse();
+    }
+
+    @Test
+    public void isBroadcastScheme_intentWithNullMetadataAndNullData_returnsFalse() {
+        assertThat(isBroadcastScheme(new Intent())).isFalse();
+    }
+
+    @Test
+    public void isBroadcastScheme_intentWithEmptyMetadataAndNullData_returnsFalse() {
+        Intent intent = new Intent();
+        intent.putExtra(KEY_BROADCAST_METADATA, "");
+        assertThat(isBroadcastScheme(intent)).isFalse();
+    }
+
+    @Test
+    public void isBroadcastScheme_intentWithNonMatchingMetadata_returnsFalse() {
+        Intent intent = new Intent();
+        intent.putExtra(KEY_BROADCAST_METADATA, "NON_MATCHING_METADATA");
+        assertThat(isBroadcastScheme(intent)).isFalse();
+    }
+
+    @Test
+    public void isBroadcastScheme_intentWithMatchingMetadata_returnsTrue() {
+        Intent intent = new Intent();
+        intent.putExtra(KEY_BROADCAST_METADATA, SCHEME_BT_BROADCAST_METADATA + "_some_suffix");
+        assertThat(isBroadcastScheme(intent)).isTrue();
+    }
+
+    @Test
+    public void isBroadcastScheme_intentWithEmptyDataAndNoMetadata_returnsFalse() {
+        Intent intent = new Intent();
+        intent.setData(android.net.Uri.parse(""));
+        assertThat(isBroadcastScheme(intent)).isFalse();
+    }
+
+    @Test
+    public void isBroadcastScheme_intentWithNonMatchingData_returnsFalse() {
+        Intent intent = new Intent();
+        intent.setData(android.net.Uri.parse("NON_MATCHING_DATA_SCHEME"));
+        assertThat(isBroadcastScheme(intent)).isFalse();
+    }
+
+    @Test
+    public void isBroadcastScheme_intentWithMatchingData_returnsTrue() {
+        Intent intent = new Intent();
+        intent.setData(android.net.Uri.parse(SCHEME_BT_BROADCAST_METADATA));
+        assertThat(isBroadcastScheme(intent)).isTrue();
+    }
+
+    private Intent getValidIntent() {
+        Intent intent = new Intent();
+        intent.putExtra(KEY_BROADCAST_METADATA, SCHEME_BT_BROADCAST_METADATA + "_some_suffix");
+        return intent;
     }
 }

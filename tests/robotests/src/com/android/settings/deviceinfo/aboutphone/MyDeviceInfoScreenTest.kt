@@ -38,6 +38,7 @@ class MyDeviceInfoScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_MY_DEVICE_INFO_PREF_SCREEN
 
+    @Test
     override fun migration() {
         ShadowUserManager.getShadow().addAliveUser(mock<UserInfo>())
         // TODO: fix this migration test with the async preference loading

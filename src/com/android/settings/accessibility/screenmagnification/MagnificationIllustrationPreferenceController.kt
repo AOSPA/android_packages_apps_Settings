@@ -19,8 +19,10 @@ package com.android.settings.accessibility.screenmagnification
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.accessibility.IllustrationPreferenceController
+import com.android.settingslib.widget.IllustrationPreference
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import java.lang.String
 
@@ -49,5 +51,11 @@ class MagnificationIllustrationPreferenceController(context: Context, prefKey: k
                 context.getText(R.string.accessibility_screen_magnification_title),
             )
         initialize(imageUri, contentDescription)
+    }
+
+    override fun displayPreference(screen: PreferenceScreen?) {
+        super.displayPreference(screen)
+        val illustrationPref: IllustrationPreference? = screen?.findPreference(preferenceKey)
+        illustrationPref?.applyDynamicColor()
     }
 }

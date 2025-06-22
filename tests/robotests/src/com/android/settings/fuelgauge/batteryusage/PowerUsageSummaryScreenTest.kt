@@ -90,6 +90,7 @@ class PowerUsageSummaryScreenTest : SettingsCatalystTestCase() {
             .isEqualTo(R.drawable.ic_settings_battery_white)
     }
 
+    @Test
     override fun migration() {
         ShadowUtils.setIsBatteryPresent(false)
 

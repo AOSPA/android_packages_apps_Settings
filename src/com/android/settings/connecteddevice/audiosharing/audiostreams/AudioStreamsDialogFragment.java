@@ -42,8 +42,7 @@ import java.util.function.Consumer;
 /** A dialog fragment for constructing and showing audio stream dialogs. */
 public class AudioStreamsDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "AudioStreamsDialogFragment";
-    @Nullable
-    private DialogBuilder mDialogBuilder;
+    @Nullable private DialogBuilder mDialogBuilder;
     private int mDialogId = SettingsEnums.PAGE_UNKNOWN;
 
     void init(DialogBuilder dialogBuilder, int dialogId) {
@@ -236,20 +235,20 @@ public class AudioStreamsDialogFragment extends InstrumentedDialogFragment {
                 subTitle2.setVisibility(View.VISIBLE);
             }
             if (!Strings.isNullOrEmpty(mLeftButtonText)) {
-                dialogBuilder.setNegativeButton(mLeftButtonText,
+                dialogBuilder.setNegativeButton(
+                        mLeftButtonText,
                         (dialog, which) -> {
                             if (mLeftButtonOnClickListener != null) {
-                                mLeftButtonOnClickListener.accept(
-                                        (AlertDialog) dialog);
+                                mLeftButtonOnClickListener.accept((AlertDialog) dialog);
                             }
                         });
             }
             if (!Strings.isNullOrEmpty(mRightButtonText)) {
-                dialogBuilder.setPositiveButton(mRightButtonText,
+                dialogBuilder.setPositiveButton(
+                        mRightButtonText,
                         (dialog, which) -> {
                             if (mRightButtonOnClickListener != null) {
-                                mRightButtonOnClickListener.accept(
-                                        (AlertDialog) dialog);
+                                mRightButtonOnClickListener.accept((AlertDialog) dialog);
                             }
                         });
             }

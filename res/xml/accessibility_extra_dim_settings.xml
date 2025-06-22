@@ -42,8 +42,8 @@
             android:key="rbc_intensity"
             android:persistent="false"
             android:title="@string/reduce_bright_colors_intensity_preference_title"
-            settings:textEnd="@string/reduce_bright_colors_intensity_end_label"
-            settings:textStart="@string/reduce_bright_colors_intensity_start_label"
+            settings:textEnd="@string/brightness_intensity_end_label"
+            settings:textStart="@string/brightness_intensity_start_label"
             settings:controller="com.android.settings.accessibility.detail.extradim.IntensityPreferenceController"/>
 
         <!-- The term `restarts` is usually used for indicating restarting devices.

@@ -23,6 +23,7 @@ import com.android.settings.Settings.BluetoothDashboardActivity
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
+import org.junit.Test
 
 class BluetoothDashboardScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = BluetoothDashboardScreen()
@@ -30,6 +31,7 @@ class BluetoothDashboardScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_BLUETOOTH_SWITCHBAR_SCREEN
 
+    @Test
     override fun migration() {}
 
     override fun launchFragment(

@@ -48,6 +48,7 @@ import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.testing.FragmentScenario;
 import androidx.lifecycle.Lifecycle;
@@ -162,6 +163,21 @@ public class AccessibilityTestUtils {
         assertThat(fragments).hasSize(1);
         assertThat(fragments.getFirst()).isInstanceOf(
                 AccessibilityShortcutsTutorial.DialogFragment.class);
+    }
+
+    /**
+     * Verify the dialog fragment is shown
+     *
+     * @param parentFragment the Fragment where the dialog is launched from
+     * @param dialogFragmentClass the class of the dialog fragment to verify
+     */
+    public static <T extends DialogFragment> void assertDialogShown(
+            Fragment parentFragment, Class<T> dialogFragmentClass) {
+        ShadowLooper.idleMainLooper();
+        List<Fragment> fragments = parentFragment.getChildFragmentManager().getFragments();
+        assertThat(fragments).isNotEmpty();
+        assertThat(fragments).hasSize(1);
+        assertThat(fragments.getFirst()).isInstanceOf(dialogFragmentClass);
     }
 
     /**

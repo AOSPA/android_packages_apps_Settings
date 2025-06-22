@@ -25,6 +25,7 @@ import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.Settings.AdaptiveConnectivitySettingsActivity
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.metadata.PreferenceHierarchy
@@ -41,6 +42,7 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     private val mContext: Context = ApplicationProvider.getApplicationContext()
     private val testScope = TestScope()
 
+    @Test
     override fun migration() {}
 
     @Test
@@ -135,6 +137,14 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
             assertThat(switchPreference?.isChecked).isTrue()
             assertThat(updateSetting(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED)).isTrue()
         }
+    }
+
+    @Test
+    fun getLaunchIntent_correctActivity() {
+        val underTest = preferenceScreenCreator.getLaunchIntent(mContext, null)!!
+
+        assertThat(underTest.getComponent()?.getClassName())
+            .isEqualTo(AdaptiveConnectivitySettingsActivity::class.java.getName())
     }
 
     /**

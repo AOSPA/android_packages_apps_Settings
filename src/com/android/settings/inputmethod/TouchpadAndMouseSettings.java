@@ -16,6 +16,8 @@
 
 package com.android.settings.inputmethod;
 
+import static com.android.settings.flags.Flags.fixTouchpadAndMouseSettingsSearchIndex;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
@@ -66,10 +68,13 @@ public class TouchpadAndMouseSettings extends DashboardFragment {
             new BaseSearchIndexProvider(R.xml.touchpad_and_mouse_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    boolean isNewPageFlagDisabled = !Flags.keyboardAndTouchpadA11yNewPageEnabled();
                     boolean isFeatureOn = FeatureFlagUtils
                             .isEnabled(context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD);
                     boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
+                    if (!fixTouchpadAndMouseSettingsSearchIndex()) {
+                        return isFeatureOn && isTouchpad;
+                    }
+                    boolean isNewPageFlagDisabled = !Flags.keyboardAndTouchpadA11yNewPageEnabled();
                     boolean isPointerCustomizationEnabled =
                             android.view.flags.Flags.enableVectorCursorA11ySettings();
                     boolean isMouse = InputPeripheralsSettingsUtils.isMouse();

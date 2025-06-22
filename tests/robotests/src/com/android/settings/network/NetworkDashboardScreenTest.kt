@@ -18,6 +18,7 @@ package com.android.settings.network
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settings.testutils.shadow.ShadowConnectivityManager
+import org.junit.Test
 import org.robolectric.annotation.Config
 
 @Config(shadows = [ShadowConnectivityManager::class])
@@ -27,6 +28,7 @@ class NetworkDashboardScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_NETWORK_PROVIDER_AND_INTERNET_SCREEN
 
+    @Test
     override fun migration() {
         // Avoid thread hanging when invoke TetheringManager.isTetheringSupported
         ShadowConnectivityManager.getShadow().setTetheringSupported(true)

@@ -20,8 +20,10 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import com.android.settings.R
+import com.android.settings.Settings.ManageApplicationsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -45,10 +47,8 @@ open class AllAppsScreen : PreferenceScreenMixin {
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
-        return Intent("android.settings.MANAGE_ALL_APPLICATIONS_SETTINGS")
-            .setPackage(context.packageName)
-    }
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, ManageApplicationsActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {}

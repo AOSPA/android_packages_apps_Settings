@@ -16,8 +16,6 @@
 
 package com.android.settings.sound
 
-import com.android.media.flags.Flags.enableDeviceSuggestionsPreference
-
 import android.app.settings.SettingsEnums
 import android.content.Context
 import androidx.fragment.app.Fragment
@@ -81,9 +79,6 @@ open class MediaControlsScreen(context: Context) :
         preferenceHierarchy(context) {
             +MediaControlsSwitchPreference(mediaControlsStore)
             +MediaControlsLockscreenSwitchPreference()
-            if (enableDeviceSuggestionsPreference()) {
-                +SuggestionsPreference()
-            }
         }
 
     override fun getSummary(context: Context): CharSequence? =

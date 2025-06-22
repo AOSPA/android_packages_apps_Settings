@@ -43,7 +43,7 @@ abstract class BaseShortcutFragmentTestCases<T : PreferenceFragmentCompat> {
         a11yManager.enableShortcutsForTargets(
             /* enable= */ false,
             UserShortcutType.ALL,
-            setOf(getFeatureComponent().flattenToString()),
+            setOf(getFeatureComponentString()),
             context.userId,
         )
         val fragment = launchFragment()
@@ -68,7 +68,7 @@ abstract class BaseShortcutFragmentTestCases<T : PreferenceFragmentCompat> {
         a11yManager.enableShortcutsForTargets(
             /* enable= */ true,
             UserShortcutType.HARDWARE,
-            setOf(getFeatureComponent().flattenToString()),
+            setOf(getFeatureComponentString()),
             context.userId,
         )
         val fragment = launchFragment()
@@ -108,4 +108,8 @@ abstract class BaseShortcutFragmentTestCases<T : PreferenceFragmentCompat> {
     abstract fun launchFragment(): T
 
     abstract fun getFeatureComponent(): ComponentName
+
+    open fun getFeatureComponentString(): String {
+        return getFeatureComponent().flattenToString()
+    }
 }

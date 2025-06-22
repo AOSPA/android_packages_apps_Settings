@@ -16,6 +16,9 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsDashboardFragment.KEY_BROADCAST_METADATA;
+import static com.android.settingslib.bluetooth.BluetoothBroadcastUtils.SCHEME_BT_BROADCAST_METADATA;
+
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -23,6 +26,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -46,10 +50,30 @@ public class AudioStreamConfirmDialogActivity extends SettingsActivity
 
     @Override
     protected void onCreate(Bundle savedState) {
+        if (!isBroadcastScheme(getIntent())) {
+            Log.d(TAG, "onCreate() not broadcast scheme, ignore");
+            finish();
+        }
         var localBluetoothManager = Utils.getLocalBluetoothManager(this);
         mProfileManager =
                 localBluetoothManager == null ? null : localBluetoothManager.getProfileManager();
         super.onCreate(savedState);
+    }
+
+    @VisibleForTesting
+    static boolean isBroadcastScheme(@Nullable Intent intent) {
+        if (intent == null) {
+            return false;
+        }
+        String metadata = intent.getStringExtra(KEY_BROADCAST_METADATA);
+        if (metadata != null && !metadata.isEmpty()) {
+            return metadata.startsWith(SCHEME_BT_BROADCAST_METADATA);
+        }
+        String genericData = intent.getDataString();
+        if (genericData != null && !genericData.isEmpty()) {
+            return genericData.toUpperCase().startsWith(SCHEME_BT_BROADCAST_METADATA);
+        }
+        return false;
     }
 
     @Override
@@ -57,7 +81,9 @@ public class AudioStreamConfirmDialogActivity extends SettingsActivity
         var theme = super.getTheme();
         theme.applyStyle(
                 SettingsThemeHelper.isExpressiveTheme(this)
-                        ? R.style.Transparent_Expressive : R.style.Transparent, true);
+                        ? R.style.Transparent_Expressive
+                        : R.style.Transparent,
+                true);
         return theme;
     }
 

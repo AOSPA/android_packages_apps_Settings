@@ -1905,7 +1905,7 @@
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Wachtwoord verifiëren"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Laat verifiëren dat jij het bent"</string>
     <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Geef het patroon van je andere apparaat op om onder andere Google-accounts en instellingen over te zetten. Je patroon is versleuteld."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Geef de pincode van je andere apparaat in om onder andere Google-accounts en instellingen over te zetten. Je pincode is versleuteld."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Voer de pincode van je andere apparaat in om onder andere Google-accounts en instellingen over te zetten. Je pincode is versleuteld."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Geef het wachtwoord van je andere apparaat op om onder andere Google-accounts en instellingen over te zetten. Je wachtwoord is versleuteld."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Ook patroon gebruiken om dit apparaat te ontgrendelen"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Ook pincode gebruiken om dit apparaat te ontgrendelen"</string>
@@ -2734,8 +2734,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Over extra dimmen"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Dim het scherm nog wat meer om prettiger te kunnen lezen"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensiteit"</string>
-    <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Minder helder"</string>
-    <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Helderder"</string>
+    <string name="brightness_intensity_start_label" msgid="930387498396426039">"Minder helder"</string>
+    <string name="brightness_intensity_end_label" msgid="1422600205484299860">"Helderder"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Aanhouden nadat het apparaat opnieuw is opgestart"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Kort ({time} seconde)}other{Kort ({time} seconden)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Gemiddeld ({time} seconde)}other{Gemiddeld ({time} seconden)}}"</string>
@@ -4706,7 +4706,7 @@
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"lange taken, gegevensoverdracht, achtergrondtaken"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Rate limiting van ShortcutManager resetten"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"De rate limiting van ShortcutManager is gereset."</string>
-    <string name="notification_suggestion_title" msgid="6309263655965785411">"Informatie op vergrendelscherm beheren"</string>
+    <string name="notification_suggestion_title" msgid="6309263655965785411">"Informatie op ver­gren­del­scherm beheren"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Content van meldingen tonen of verbergen"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Tips en support"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Kleinste breedte"</string>
@@ -5824,8 +5824,7 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Geen wachtwoord"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Meer informatie"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Kan deze audiostream niet afspelen op <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
-    <skip />
+    <string name="audio_streams_dialog_cannot_play_with_link" msgid="3433981166714801237">"Kan deze audiostream niet afspelen op <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. "<annotation id="link">"Meer informatie"</annotation></string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Nu luisteren"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Streamen onderbroken"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Stoppen met luisteren"</string>
@@ -5904,8 +5903,7 @@
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Pincode geüpdatet"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"App openen"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Pincode verwijderen?"</string>
-    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
-    <skip />
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8999197100719062891">"Ouderlijk toezicht uitzetten voor andere gebruikers"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Pincode kan niet worden verwijderd"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Er is een fout opgetreden bij het verwijderen van de pincode."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animatie voor <xliff:g id="FEATURE">%1$s</xliff:g>"</string>

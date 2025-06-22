@@ -60,6 +60,7 @@ class LocationScreenTest : SettingsCatalystTestCase() {
                 context.getString(R.string.location_settings_summary_location_off))
     }
 
+    @Test
     override fun migration() {
     }
 }

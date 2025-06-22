@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import static com.android.settingslib.flags.Flags.FLAG_FIX_BATTERY_LEVEL_IN_CONNECTION_SUMMARY;
 import static com.android.settingslib.flags.Flags.FLAG_REFACTOR_BATTERY_LEVEL_DISPLAY;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -46,7 +47,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -751,6 +751,91 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
                         .findViewById(R.id.bt_battery_icon)
                         .getVisibility())
                 .isNotEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    @DisableFlags(FLAG_FIX_BATTERY_LEVEL_IN_CONNECTION_SUMMARY)
+    public void refresh_fixBatteryFlagOffAndDisconnected_showsConnectionSummary() {
+        // Setup: Untethered headset is disconnected
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(true).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(false);
+        when(mCachedDevice.getConnectionSummary(true)).thenReturn(DEVICE_SUMMARY);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY))
+                .thenReturn(String.valueOf(BATTERY_LEVEL_LEFT).getBytes());
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY))
+                .thenReturn(String.valueOf(BATTERY_LEVEL_RIGHT).getBytes());
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY))
+                .thenReturn(String.valueOf(BATTERY_LEVEL_MAIN).getBytes());
+        when(mBluetoothDevice.getMetadata(METADATA_FAST_PAIR_CUSTOMIZED_FIELDS))
+                .thenReturn("<BATT>true</BATT>".getBytes());
+        when(mCachedDevice.getBatteryLevelsInfo()).thenReturn(
+                new BatteryLevelsInfo(BATTERY_LEVEL_LEFT, BATTERY_LEVEL_RIGHT, BATTERY_LEVEL_MAIN,
+                        BATTERY_LEVEL_LEFT));
+        // Action
+        mController.refresh();
+
+        // Assertion: Summary text should show the normal (disconnected) connection summary
+        final TextView summary = mLayoutPreference.findViewById(R.id.entity_header_summary);
+        assertThat(summary.getText().toString()).isEqualTo(DEVICE_SUMMARY);
+    }
+
+    @Test
+    @EnableFlags(FLAG_FIX_BATTERY_LEVEL_IN_CONNECTION_SUMMARY)
+    public void refresh_fixBatteryFlagOnAndDisconnected_summaryIsEmpty() {
+        // Setup: Untethered headset is disconnected
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(true).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(false);
+        when(mCachedDevice.getConnectionSummary(true)).thenReturn(DEVICE_SUMMARY);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY))
+                .thenReturn(String.valueOf(BATTERY_LEVEL_LEFT).getBytes());
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY))
+                .thenReturn(String.valueOf(BATTERY_LEVEL_RIGHT).getBytes());
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY))
+                .thenReturn(String.valueOf(BATTERY_LEVEL_MAIN).getBytes());
+        when(mBluetoothDevice.getMetadata(METADATA_FAST_PAIR_CUSTOMIZED_FIELDS))
+                .thenReturn("<BATT>true</BATT>".getBytes());
+        when(mCachedDevice.getBatteryLevelsInfo()).thenReturn(
+                new BatteryLevelsInfo(BATTERY_LEVEL_LEFT, BATTERY_LEVEL_RIGHT, BATTERY_LEVEL_MAIN,
+                        BATTERY_LEVEL_LEFT));
+        // Action
+        mController.refresh();
+
+        // Assertion: Summary text should be empty
+        final TextView summary = mLayoutPreference.findViewById(R.id.entity_header_summary);
+        assertThat(summary.getText().toString()).isEqualTo("");
+    }
+
+    @Test
+    @EnableFlags(FLAG_FIX_BATTERY_LEVEL_IN_CONNECTION_SUMMARY)
+    public void refresh_fixBatteryFlagOnAndConnected_showsConnectionSummary() {
+        // Setup: Untethered headset is connected
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(true).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(true);
+        when(mCachedDevice.getConnectionSummary(true)).thenReturn(DEVICE_SUMMARY);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY))
+                .thenReturn(String.valueOf(BATTERY_LEVEL_LEFT).getBytes());
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY))
+                .thenReturn(String.valueOf(BATTERY_LEVEL_RIGHT).getBytes());
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY))
+                .thenReturn(String.valueOf(BATTERY_LEVEL_MAIN).getBytes());
+        when(mBluetoothDevice.getMetadata(METADATA_FAST_PAIR_CUSTOMIZED_FIELDS))
+                .thenReturn("<BATT>true</BATT>".getBytes());
+        when(mCachedDevice.getBatteryLevelsInfo()).thenReturn(
+                new BatteryLevelsInfo(BATTERY_LEVEL_LEFT, BATTERY_LEVEL_RIGHT, BATTERY_LEVEL_MAIN,
+                        BATTERY_LEVEL_LEFT));
+
+        // Action
+        mController.refresh();
+
+        // Assertion: Summary text should show the normal connection summary
+        final TextView summary = mLayoutPreference.findViewById(R.id.entity_header_summary);
+        assertThat(summary.getText().toString()).isEqualTo(DEVICE_SUMMARY);
     }
 
     private void assertBatteryPredictionVisible(LinearLayout linearLayout, int visible) {

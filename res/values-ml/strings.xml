@@ -2734,8 +2734,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"കൂടുതൽ ഡിം ചെയ്യലിനെ കുറിച്ച്"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"വായനാസുഖത്തിന് നിങ്ങളുടെ സ്ക്രീൻ കൂടുതൽ മങ്ങിയതാക്കുക"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"തീവ്രത"</string>
-    <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"കൂടുതൽ മങ്ങിയത്"</string>
-    <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"കൂടുതൽ തെളിച്ചമുള്ളത്"</string>
+    <string name="brightness_intensity_start_label" msgid="930387498396426039">"കൂടുതൽ മങ്ങിയത്"</string>
+    <string name="brightness_intensity_end_label" msgid="1422600205484299860">"കൂടുതൽ തെളിച്ചമുള്ളത്"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"ഉപകരണം റീസ്റ്റാർട്ട് ചെയ്തശേഷം ക്രമീകരണം നിലനിർത്തുക"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{വളരെ കുറച്ച് സമയം ({time} സെക്കൻഡ്)}other{വളരെ കുറച്ച് സമയം ({time} സെക്കൻഡ്)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{കുറച്ച് സമയം ({time} സെക്കൻഡ്)}other{കുറച്ച് സമയം ({time} സെക്കൻഡ്)}}"</string>
@@ -5824,8 +5824,7 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"പാസ്‌വേഡ് ഒന്നുമില്ല"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"കൂടുതലറിയുക"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> എന്നതിൽ ഈ ഓഡിയോ സ്ട്രീം പ്ലേ ചെയ്യാനാകുന്നില്ല."</string>
-    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
-    <skip />
+    <string name="audio_streams_dialog_cannot_play_with_link" msgid="3433981166714801237">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> എന്നതിൽ ഈ ഓഡിയോ സ്ട്രീം പ്ലേ ചെയ്യാനാകുന്നില്ല. "<annotation id="link">"കൂടുതലറിയുക"</annotation></string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"ഇപ്പോൾ കേൾക്കുന്നു"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"സ്ട്രീം താൽക്കാലികമായി നിർത്തി"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"കേൾക്കുന്നത് നിർത്തുക"</string>
@@ -5888,24 +5887,20 @@
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"നിങ്ങളുടെ ഇമെയിൽ പരിശോധിച്ചുറപ്പിക്കുക"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"വെബ്സൈറ്റ് ഉള്ളടക്ക ഫിൽട്ടറുകൾ"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"വെബ്സൈറ്റ് ഫിൽട്ടറുകൾ, സൈറ്റുകൾ ബ്ലോക്ക് ചെയ്യൽ, ബ്രൗസർ ഫിൽട്ടറുകൾ, പ്രായപൂർത്തിയായവർക്കുള്ള സെെറ്റുകൾ ബ്ലോക്ക് ചെയ്യൽ, സൈറ്റുകൾ ഫിൽട്ടർ ചെയ്യൽ, തിരയൽ ഫിൽട്ടറുകൾ ബ്ലോക്ക് ചെയ്യൽ, പ്രായപൂർത്തിയായവർക്കുള്ള തിരയൽ ഫലങ്ങൾ ഫിൽട്ടർ ചെയ്യൽ, ഉള്ളടക്ക നിയന്ത്രണങ്ങൾ"</string>
-    <!-- no translation found for supervision_web_content_filters_top_intro (8056274290725144441) -->
-    <skip />
+    <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"ഈ ഫോണിലെ ചില ആപ്പുകളിലും ബ്രൗസറുകളിലും പ്രായപൂർത്തിയായവർക്കുള്ള ഉള്ളടക്കം ഫിൽട്ടർ ചെയ്യാൻ സഹായിക്കുക. മറ്റ് ആപ്പുകളിലും ഉപകരണങ്ങളിലും ബ്രൗസറുകളിലും പ്രായപൂർത്തിയായവർക്കുള്ള ഉള്ളടക്കം തുടർന്നും കാണിച്ചേക്കാം."</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"വെബ്സൈറ്റുകൾ"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"പ്രായപൂർത്തിയായവർക്കുള്ള സൈറ്റുകൾ ബ്ലോക്ക് ചെയ്യുക"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"തിരയൽ ഫലങ്ങൾ"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"പ്രായപൂർത്തിയായവർക്കുള്ള തിരയൽ ഫലങ്ങൾ ഫിൽട്ടർ ചെയ്യുക"</string>
-    <!-- no translation found for supervision_web_content_filters_switch_summary (2095166099345288321) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_footer_title (1741897040916039165) -->
-    <skip />
+    <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{# ആപ്പിൽ}other{# ആപ്പുകളിൽ}}"</string>
+    <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"ഈ ക്രമീകരണം ഓഫായിരിക്കുമ്പോഴും, മറ്റ് അക്കൗണ്ട് ക്രമീകരണം തുടർന്നും ബാധകമായേക്കാം."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"രക്ഷാകർതൃ നിയന്ത്രണങ്ങളുടെ പിൻ നൽകുക"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"ഒരു രക്ഷാകർതൃ നിയന്ത്രണ പിൻ സജ്ജീകരിക്കുക"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"പിൻ സ്ഥിരീകരിക്കുക"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"പിൻ അപ്ഡേറ്റ് ചെയ്‌തു"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"ആപ്പ് തുറക്കുക"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"പിൻ ഇല്ലാതാക്കണോ?"</string>
-    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
-    <skip />
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8999197100719062891">"മറ്റ് ഉപയോക്താക്കൾക്കും രക്ഷാകർതൃ നിയന്ത്രണങ്ങൾ ഓഫാക്കുക"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"പിൻ ഇല്ലാതാക്കാനാകില്ല"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"പിൻ ഇല്ലാതാക്കാൻ ശ്രമിക്കുമ്പോൾ ഒരു പിശകുണ്ടായി."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> ആനിമേഷൻ"</string>

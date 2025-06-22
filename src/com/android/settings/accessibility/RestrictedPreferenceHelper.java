@@ -24,11 +24,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
-import android.os.Bundle;
 import android.os.UserHandle;
-import android.text.TextUtils;
 
-import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
@@ -42,8 +39,6 @@ import java.util.Set;
  * This class helps setup RestrictedPreference for accessibility.
  */
 public class RestrictedPreferenceHelper {
-    // Index of the first preference in a preference category.
-    private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
 
     private final Context mContext;
     private final DevicePolicyManager mDpm;
@@ -122,21 +117,6 @@ public class RestrictedPreferenceHelper {
         return preferenceList;
     }
 
-    static String getAccessibilityServiceFragmentTypeName(AccessibilityServiceInfo info) {
-        final int type = AccessibilityUtil.getAccessibilityServiceFragmentType(info);
-        switch (type) {
-            case AccessibilityUtil.AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE:
-                return VolumeShortcutToggleAccessibilityServicePreferenceFragment.class.getName();
-            case AccessibilityUtil.AccessibilityServiceFragmentType.INVISIBLE_TOGGLE:
-                return InvisibleToggleAccessibilityServicePreferenceFragment.class.getName();
-            case AccessibilityUtil.AccessibilityServiceFragmentType.TOGGLE:
-                return ToggleAccessibilityServicePreferenceFragment.class.getName();
-            default:
-                throw new IllegalArgumentException(
-                        "Unsupported accessibility fragment type " + type);
-        }
-    }
-
     private void setRestrictedPreferenceEnabled(RestrictedPreference preference,
             final List<String> permittedServices, boolean serviceEnabled) {
         // permittedServices null means all accessibility services are allowed.
@@ -201,84 +181,6 @@ public class RestrictedPreferenceHelper {
                     preference.setEnabled(false);
                 }
             }
-        }
-    }
-
-    /** Puts the basic extras into {@link RestrictedPreference}'s getExtras(). */
-    static void putBasicExtras(RestrictedPreference preference, String prefKey,
-            CharSequence title, CharSequence intro, CharSequence summary, int imageRes,
-            String htmlDescription, ComponentName componentName, int metricsCategory) {
-        final Bundle extras = preference.getExtras();
-        extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY, prefKey);
-        extras.putCharSequence(AccessibilitySettings.EXTRA_TITLE, title);
-        extras.putCharSequence(AccessibilitySettings.EXTRA_INTRO, intro);
-        extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY, summary);
-        extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
-        extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, imageRes);
-        extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
-        extras.putInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY, metricsCategory);
-        extras.putInt(AccessibilitySettings.EXTRA_FEEDBACK_CATEGORY, metricsCategory);
-    }
-
-    /**
-     * Puts the service extras into {@link RestrictedPreference}'s getExtras().
-     *
-     * <p><b>Note:</b> Called by {@link AccessibilityServiceInfo}.</p>
-     *
-     * @param preference The preference we are configuring.
-     * @param resolveInfo The service resolve info.
-     * @param serviceEnabled Whether the accessibility service is enabled.
-     */
-    static void putServiceExtras(RestrictedPreference preference, ResolveInfo resolveInfo,
-            Boolean serviceEnabled) {
-        final Bundle extras = preference.getExtras();
-
-        extras.putParcelable(AccessibilitySettings.EXTRA_RESOLVE_INFO, resolveInfo);
-        extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED, serviceEnabled);
-    }
-
-    /**
-     * Puts the settings extras into {@link RestrictedPreference}'s getExtras().
-     *
-     * <p><b>Note:</b> Called when settings UI is needed.</p>
-     *
-     * @param preference The preference we are configuring.
-     * @param packageName Package of accessibility feature.
-     * @param settingsClassName The component name of an activity that allows the user to modify
-     *                          the settings for this accessibility feature.
-     */
-    static void putSettingsExtras(RestrictedPreference preference, String packageName,
-            String settingsClassName) {
-        final Bundle extras = preference.getExtras();
-
-        if (!TextUtils.isEmpty(settingsClassName)) {
-            extras.putString(AccessibilitySettings.EXTRA_SETTINGS_TITLE,
-                    preference.getContext().getText(
-                            R.string.accessibility_menu_item_settings).toString());
-            extras.putString(AccessibilitySettings.EXTRA_SETTINGS_COMPONENT_NAME,
-                    new ComponentName(packageName, settingsClassName).flattenToString());
-        }
-    }
-
-    /**
-     * Puts the information about a particular application
-     * {@link android.service.quicksettings.TileService} into {@link RestrictedPreference}'s
-     * getExtras().
-     *
-     * <p><b>Note:</b> Called when a tooltip of
-     * {@link android.service.quicksettings.TileService} is needed.</p>
-     *
-     * @param preference The preference we are configuring.
-     * @param packageName Package of accessibility feature.
-     * @param tileServiceClassName The component name of tileService is associated with this
-     *                             accessibility feature.
-     */
-    static void putTileServiceExtras(RestrictedPreference preference, String packageName,
-            String tileServiceClassName) {
-        final Bundle extras = preference.getExtras();
-        if (!TextUtils.isEmpty(tileServiceClassName)) {
-            extras.putString(AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME,
-                    new ComponentName(packageName, tileServiceClassName).flattenToString());
         }
     }
 }

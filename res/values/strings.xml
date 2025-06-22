@@ -216,9 +216,9 @@
     <!-- Title for related tools section. This section will list related tools below. [CHAR LIMIT=15] -->
     <string name="bluetooth_screen_related">Related</string>
     <!-- Title for trying Nearby Sharing in Bluetooth Sharing screen. -->
-    <string name="bluetooth_try_nearby_share_title">Try sharing with <xliff:g id="Nearby Sharing app label" example="Nearby Sharing">%s</xliff:g></string>
+    <string name="bluetooth_try_nearby_share_title">Send faster with <xliff:g id="Nearby Sharing app label" example="Nearby Sharing">%s</xliff:g></string>
     <!-- Summary for trying Nearby Sharing in Bluetooth Sharing screen. -->
-    <string name="bluetooth_try_nearby_share_summary">The fastest way to send files to nearby Android devices</string>
+    <string name="bluetooth_try_nearby_share_summary">For the fastest way to share with nearby Android and PCs, try <xliff:g id="Nearby Sharing app label" example="Nearby Sharing">%s</xliff:g> for Windows</string>
 
     <!-- Bluetooth audio output settings. Title of the option managing ringtone and alarms audio path. [CHAR LIMIT=30] -->
     <string name="bluetooth_ringtone_title">Ringtone and alarms</string>
@@ -2225,7 +2225,7 @@
     <!-- External Display settings. When external display is disabled. [CHAR LIMIT=40] -->
     <string name="external_display_off">Off</string>
     <!-- External Display settings. The title of the screen. [CHAR LIMIT=40] -->
-    <string name="external_display_settings_title">External Display</string>
+    <string name="external_display_settings_title">External display</string>
     <!-- Built-in display settings category. Appears in External displays and Connected Displays fragments. -->
     <string name="builtin_display_settings_category">Built-in display</string>
     <!-- External Display use. The title of the use preference. [CHAR LIMIT=40] -->
@@ -2247,7 +2247,11 @@
     <!-- External Display settings. Footer title -->
     <string name="external_display_change_resolution_footer_title">Changing rotation or resolution may stop any apps that are currently running</string>
     <!-- External Display settings. No Displays footer title -->
-    <string name="external_display_not_found_footer_title">Your device must be connected to an external display to mirror your screen</string>
+    <string name="external_display_not_found_footer_title">No display connected\n\nConnect an external display to get started, or try using a different cable</string>
+    <!-- External Display no display connected screen title -->
+    <string name="external_display_no_display_connected_screen_title">No display connected</string>
+    <!-- External Display no display connected screen summary -->
+    <string name="external_display_no_display_connected_screen_summary">Connect an external display to get started, or try using a different cable</string>
     <!-- External Display settings. More resolution options -->
     <string name="external_display_more_options_title">More options</string>
     <!-- External Display settings. -->
@@ -6363,9 +6367,9 @@
     <!-- Title for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_intensity_preference_title">Intensity</string>
     <!-- Start label for slider that reduces the brightness intensity of the display using Extra Dim. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_intensity_start_label">Dimmer</string>
+    <string name="brightness_intensity_start_label">Dimmer</string>
     <!-- End label for slider that reduces the brightness intensity of the display using Extra Dim. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_intensity_end_label">Brighter</string>
+    <string name="brightness_intensity_end_label">Brighter</string>
     <!-- Title for setting whether the Reduce Brightness activation state persists across reboots. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_persist_preference_title">Keep on after device restarts</string>
 
@@ -13591,14 +13595,15 @@ Data usage charges may apply.</string>
     <!-- Confirmation dialog title to ensure user wishes to enable 16 KB page size -->
     <string name="confirm_enable_16k_pages_title">Switch from 4 KB mode to 16 KB mode</string>
     <!-- Warning dialog message to confirm user wishes to enable 16 KB page size -->
-    <string name="confirm_enable_16k_pages_update_wipe"> This device’s data partition needs to be converted to ext4 before using the 16 KB developer option.
-        The device will be wiped and the filesystem will be changed to ext4 after confirmation. You are in production mode running a 4 KB kernel,
-        and you are switching to the 16 KB mode. Once you are in this mode, you can switch back and forth between 4 KB and 16 KB mode with a single reboot.
-        Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
-        Some features will be disabled in these modes, so some applications may not work. To return the device to production mode,
-        you would need to then switch back to the 4 KB mode and lock the bootloader, which factory resets the device.
-        After the device successfully boots into Android, disable OEM unlocking in Developer options.
-        To proceed, click on \'Erase all data and update\'. This will reboot the device.</string>
+    <string name="confirm_enable_16k_pages_update_wipe"> To use the 16 KB developer option, this device\'s data partition needs to be converted to ext4.
+        This will wipe your device and change the filesystem to ext4.&lt;br&gt;&lt;br&gt;
+        Once you are in 16 KB mode, you can switch between 4 KB and 16 KB mode with a single reboot.&lt;br&gt;&lt;br&gt;
+        Things to remember in 16 KB mode:&lt;br&gt;&lt;br&gt;
+        &amp;#8226; Software integrity cannot be guaranteed&lt;br&gt;
+        &amp;#8226; Data stored on the phone while the bootloader is unlocked may be at risk&lt;br&gt;
+        &amp;#8226; Some features will be disabled, which may affect certain apps&lt;br&gt;&lt;br&gt;
+        To return to production mode, you\'ll need to switch back to 4 KB mode and lock the bootloader. This will factory reset your device. After the device successfully boots into Android, disable OEM unlocking in Developer options.&lt;br&gt;&lt;br&gt;
+        To proceed in switching to 16 KB mode, tap \"Erase all data and Update\". This will reboot the device.</string>
     <string name="confirm_enable_16k_pages_text">You are in the page-agnostic mode running a 4 KB kernel, and you are switching to the 16 KB mode.
         Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
         This will reboot the device. Some features will be disabled in these modes, so some applications may not work.
@@ -13831,10 +13836,6 @@ Data usage charges may apply.</string>
     <string name="media_controls_hide_player">Hide player</string>
     <!-- Subtext for media settings when the player will be shown [CHAR LIMIT=50] -->
     <string name="media_controls_show_player">Show player</string>
-    <!-- Title of setting for device suggestions in the media player [CHAR LIMIT=50]-->
-    <string name="media_controls_suggestions_title">Media suggestions</string>
-    <!-- Description of setting for device suggestions in the media player [CHAR LIMIT=NONE]-->
-    <string name="media_controls_suggestions_description">Provide media suggestions from media apps based on your activity and location.</string>
     <!-- Keywords for the media controls setting [CHAR LIMIT=NONE]-->
     <string name="keywords_media_controls">media</string>
 

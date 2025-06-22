@@ -69,8 +69,9 @@ import java.util.concurrent.Executors;
 
 import javax.annotation.Nullable;
 
-public class AudioStreamsProgressCategoryController extends BasePreferenceController implements
-        DefaultLifecycleObserver, AudioStreamsProgressCategoryCallback.SourceStateListener {
+public class AudioStreamsProgressCategoryController extends BasePreferenceController
+        implements DefaultLifecycleObserver,
+                AudioStreamsProgressCategoryCallback.SourceStateListener {
     private static final String TAG = "AudioStreamsProgressCategoryController";
     private static final boolean DEBUG = BluetoothUtils.D;
     static final int UNSET_BROADCAST_ID = -1;
@@ -113,36 +114,24 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     private final Comparator<AudioStreamPreference> mComparator =
             Comparator.<AudioStreamPreference, Boolean>comparing(
                             p ->
-                                    (p.getAudioStreamState()
-                                                    == AudioStreamsProgressCategoryController
-                                                            .AudioStreamState.SOURCE_ADDED
+                                    (p.getAudioStreamState() == AudioStreamState.SOURCE_ADDED
                                             || (isAudioSharingHysteresisModeFixAvailable(mContext)
                                                     && p.getAudioStreamState()
-                                                            == AudioStreamsProgressCategoryController
-                                                                    .AudioStreamState
-                                                                    .SOURCE_PRESENT)))
+                                                            == AudioStreamState.SOURCE_PRESENT)))
                     .thenComparingInt(AudioStreamPreference::getAudioStreamRssi)
                     .reversed();
 
     public enum AudioStreamState {
-        UNKNOWN,
-        // When mSourceFromQrCode is present and this source has not been synced.
-        WAIT_FOR_SYNC,
-        // When source has been synced but not added to any sink.
-        SYNCED,
-        // When addSource is called for this source and waiting for response.
-        ADD_SOURCE_WAIT_FOR_RESPONSE,
-        // When addSource is called for this source and waiting for response from a QR code scan.
-        ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR,
-        // When addSource result in a bad code response.
-        ADD_SOURCE_BAD_CODE,
-        // When addSource result in other bad state.
-        ADD_SOURCE_FAILED,
-        // Source is present on sink.
-        SOURCE_PRESENT,
-        // Source is added to active sink.
-        SOURCE_ADDED,
-        // Source is no longer synced or wait for sync timed out
+        UNKNOWN, // When mSourceFromQrCode is present and this source has not been synced.
+        WAIT_FOR_SYNC, // When source has been synced but not added to any sink.
+        SYNCED, // When addSource is called for this source and waiting for response.
+        ADD_SOURCE_WAIT_FOR_RESPONSE, // When addSource is called for this source and waiting for
+        // response from a QR code scan.
+        ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR, // When addSource result in a bad code response.
+        ADD_SOURCE_BAD_CODE, // When addSource result in other bad state.
+        ADD_SOURCE_FAILED, // Source is present on sink.
+        SOURCE_PRESENT, // Source is added to active sink.
+        SOURCE_ADDED, // Source is no longer synced or wait for sync timed out
         SOURCE_LOST,
     }
 
@@ -169,11 +158,12 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         mAudioStreamsHelper = new AudioStreamsHelper(mBluetoothManager);
         mMediaControlHelper = new MediaControlHelper(mContext, mBluetoothManager);
         mLeBroadcastAssistant = mAudioStreamsHelper.getLeBroadcastAssistant();
-        mScanHelper = new AudioStreamScanHelper(mExecutor, mLeBroadcastAssistant,
-                this::setScanningIconSpinning);
+        mScanHelper =
+                new AudioStreamScanHelper(
+                        mExecutor, mLeBroadcastAssistant, this::setScanningIconSpinning);
         mBroadcastAssistantCallback = new AudioStreamsProgressCategoryCallback();
-        mHysteresisModeFixAvailable = BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(
-                mContext);
+        mHysteresisModeFixAvailable =
+                BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(mContext);
         mAccessibilityManager = context.getSystemService(AccessibilityManager.class);
     }
 
@@ -296,7 +286,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                         existingPreference.setAudioStreamMetadata(source);
                         if (fromState != AudioStreamState.SOURCE_ADDED
                                 && (!mHysteresisModeFixAvailable
-                                || fromState != AudioStreamState.SOURCE_PRESENT)) {
+                                        || fromState != AudioStreamState.SOURCE_PRESENT)) {
                             Log.w(
                                     TAG,
                                     "handleSourceFound(): unexpected state : "
@@ -372,8 +362,9 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         if (DEBUG) {
             Log.d(TAG, "handleSourceLost()");
         }
-        if (mAudioStreamsHelper.getConnectedBroadcastIdAndState(
-                mHysteresisModeFixAvailable).containsKey(broadcastId)) {
+        if (mAudioStreamsHelper
+                .getConnectedBroadcastIdAndState(mHysteresisModeFixAvailable)
+                .containsKey(broadcastId)) {
             Log.d(
                     TAG,
                     "handleSourceLost() : keep this preference as the source is still connected.");
@@ -402,12 +393,12 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
             // not, means the source is removed from the sink, we move back the preference to SYNCED
             // state.
             if ((preference.getAudioStreamState() == AudioStreamState.SOURCE_ADDED
-                    || (mHysteresisModeFixAvailable
+                            || (mHysteresisModeFixAvailable
                                     && preference.getAudioStreamState()
                                             == AudioStreamState.SOURCE_PRESENT))
-                    && !mAudioStreamsHelper.getConnectedBroadcastIdAndState(
-                    mHysteresisModeFixAvailable).containsKey(
-                    preference.getAudioStreamBroadcastId())) {
+                    && !mAudioStreamsHelper
+                            .getConnectedBroadcastIdAndState(mHysteresisModeFixAvailable)
+                            .containsKey(preference.getAudioStreamBroadcastId())) {
 
                 ThreadUtils.postOnMainThread(
                         () -> {
@@ -430,7 +421,8 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     // 1) No preference existed, create new preference with state SOURCE_ADDED
     // 2) Any other state, move to SOURCE_ADDED
     @Override
-    public void handleSourceStreaming(@NonNull BluetoothDevice device,
+    public void handleSourceStreaming(
+            @NonNull BluetoothDevice device,
             @NonNull BluetoothLeBroadcastReceiveState receiveState) {
         if (DEBUG) {
             Log.d(TAG, "handleSourceStreaming()");
@@ -473,8 +465,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     // Find preference by receiveState and decide next state.
     // Expect one preference existed, move to ADD_SOURCE_BAD_CODE
     @Override
-    public void handleSourceConnectBadCode(
-            @NonNull BluetoothLeBroadcastReceiveState receiveState) {
+    public void handleSourceConnectBadCode(@NonNull BluetoothLeBroadcastReceiveState receiveState) {
         if (DEBUG) {
             Log.d(TAG, "handleSourceConnectBadCode()");
         }
@@ -606,24 +597,26 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                 });
         if (hasConnected && screenReaderServices.isEmpty()) {
             startScanning();
-            AudioSharingUtils.postOnMainThread(mContext,
-                    () -> AudioStreamsDialogFragment.dismissAll(mFragment));
+            AudioSharingUtils.postOnMainThread(
+                    mContext, () -> AudioStreamsDialogFragment.dismissAll(mFragment));
         } else {
             stopScanning();
             if (!hasConnected) {
                 AudioSharingUtils.postOnMainThread(
-                        mContext, () -> AudioStreamsDialogFragment.show(
-                                mFragment,
-                                getNoLeDeviceDialog(),
-                                SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_NO_LE_DEVICE)
-                );
+                        mContext,
+                        () ->
+                                AudioStreamsDialogFragment.show(
+                                        mFragment,
+                                        getNoLeDeviceDialog(),
+                                        SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_NO_LE_DEVICE));
             } else if (!screenReaderServices.isEmpty()) {
                 AudioSharingUtils.postOnMainThread(
-                        mContext, () -> AudioStreamsDialogFragment.show(
-                                mFragment,
-                                getTurnOffTalkbackDialog(screenReaderServices),
-                                SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_TURN_OFF_TALKBACK)
-                );
+                        mContext,
+                        () ->
+                                AudioStreamsDialogFragment.show(
+                                        mFragment,
+                                        getTurnOffTalkbackDialog(screenReaderServices),
+                                        SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_TURN_OFF_TALKBACK));
             }
         }
     }
@@ -640,17 +633,17 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                 mAudioStreamsHelper.getAllSourcesByDevice();
         // Handle currently paused sources on connected devices
         if (mHysteresisModeFixAvailable) {
-            getPausedSourcesByDevice(sources).forEach(
-                    (device, stateList) ->
-                            stateList.forEach(
-                                    state -> handleSourcePaused(device, state)));
+            getPausedSourcesByDevice(sources)
+                    .forEach(
+                            (device, stateList) ->
+                                    stateList.forEach(state -> handleSourcePaused(device, state)));
         }
         // Handle currently streaming sources on connected devices, if a source is streaming in one
         // device and paused in another, we handle the source as it's streaming
-        getStreamSourcesByDevice(sources).forEach(
-                (device, stateList) ->
-                        stateList.forEach(
-                                state -> handleSourceStreaming(device, state)));
+        getStreamSourcesByDevice(sources)
+                .forEach(
+                        (device, stateList) ->
+                                stateList.forEach(state -> handleSourceStreaming(device, state)));
         // In handleSourceFromQrCodeIfExists(), we might start scanning with scan filter targeting
         // the specific source from the QR code. That's why we keep this function after the handling
         // of existed paused and streaming sources, so that we can skip the targeted scanning if the
@@ -667,8 +660,8 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         return sources.entrySet().stream()
                 .filter(
                         entry ->
-                                entry.getValue().stream().anyMatch(
-                                        state -> getLocalSourceState(state) == STREAMING))
+                                entry.getValue().stream()
+                                        .anyMatch(state -> getLocalSourceState(state) == STREAMING))
                 .collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
@@ -742,12 +735,12 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     @VisibleForTesting
     void moveToState(AudioStreamPreference preference, AudioStreamState state) {
         AudioStreamStateHandler stateHandler = getStateHandler(state);
-        AudioStreamStateHandler prevStateHandler = getStateHandler(
-                preference.getAudioStreamState());
+        AudioStreamStateHandler prevStateHandler =
+                getStateHandler(preference.getAudioStreamState());
 
         if (stateHandler != null) {
-            stateHandler.handleStateChange(prevStateHandler, preference, this, mAudioStreamsHelper,
-                mScanHelper);
+            stateHandler.handleStateChange(
+                    prevStateHandler, preference, this, mAudioStreamsHelper, mScanHelper);
         }
 
         // Update UI with the updated preference
@@ -760,20 +753,23 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                 });
     }
 
-    private static @Nullable AudioStreamStateHandler getStateHandler(AudioStreamState stateEnum) {
-        var state = switch (stateEnum) {
-            case SYNCED -> SyncedState.getInstance();
-            case WAIT_FOR_SYNC -> WaitForSyncState.getInstance();
-            case ADD_SOURCE_WAIT_FOR_RESPONSE -> AddSourceWaitForResponseState.getInstance();
-            case ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR ->
-                    AddSourceWaitForResponseFromQrState.getInstance();
-            case ADD_SOURCE_BAD_CODE -> AddSourceBadCodeState.getInstance();
-            case ADD_SOURCE_FAILED -> AddSourceFailedState.getInstance();
-            case SOURCE_PRESENT -> SourcePresentState.getInstance();
-            case SOURCE_ADDED -> SourceAddedState.getInstance();
-            case SOURCE_LOST -> SourceLostState.getInstance();
-            default -> null;
-        };
+    @VisibleForTesting
+    static @Nullable AudioStreamStateHandler getStateHandler(AudioStreamState stateEnum) {
+        var state =
+                switch (stateEnum) {
+                    case SYNCED -> SyncedState.getInstance();
+                    case WAIT_FOR_SYNC -> WaitForSyncState.getInstance();
+                    case ADD_SOURCE_WAIT_FOR_RESPONSE ->
+                            AddSourceWaitForResponseState.getInstance();
+                    case ADD_SOURCE_WAIT_FOR_RESPONSE_FROM_QR ->
+                            AddSourceWaitForResponseFromQrState.getInstance();
+                    case ADD_SOURCE_BAD_CODE -> AddSourceBadCodeState.getInstance();
+                    case ADD_SOURCE_FAILED -> AddSourceFailedState.getInstance();
+                    case SOURCE_PRESENT -> SourcePresentState.getInstance();
+                    case SOURCE_ADDED -> SourceAddedState.getInstance();
+                    case SOURCE_LOST -> SourceLostState.getInstance();
+                    default -> null;
+                };
         if (state == null) {
             Log.d(TAG, "Unsupported state:" + stateEnum);
         }
@@ -805,25 +801,29 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
             Set<ComponentName> enabledScreenReader) {
         return new AudioStreamsDialogFragment.DialogBuilder(mContext)
                 .setTitle(mContext.getString(R.string.audio_streams_dialog_turn_off_talkback_title))
-                .setSubTitle2(mContext.getString(
-                        R.string.audio_streams_dialog_turn_off_talkback_subtitle))
+                .setSubTitle2(
+                        mContext.getString(
+                                R.string.audio_streams_dialog_turn_off_talkback_subtitle))
                 .setLeftButtonText(mContext.getString(R.string.cancel))
-                .setLeftButtonOnClickListener(dialog -> {
-                    dialog.dismiss();
-                    if (mFragment != null && mFragment.getActivity() != null) {
-                        // Navigate back
-                        mFragment.getActivity().finish();
-                    }
-                })
+                .setLeftButtonOnClickListener(
+                        dialog -> {
+                            dialog.dismiss();
+                            if (mFragment != null && mFragment.getActivity() != null) {
+                                // Navigate back
+                                mFragment.getActivity().finish();
+                            }
+                        })
                 .setRightButtonText(
                         mContext.getString(R.string.audio_streams_dialog_turn_off_talkback_button))
                 .setRightButtonOnClickListener(
                         dialog -> {
-                            ThreadUtils.postOnBackgroundThread(() -> {
-                                if (!enabledScreenReader.isEmpty()) {
-                                    setAccessibilityServiceOff(mContext, enabledScreenReader);
-                                }
-                            });
+                            ThreadUtils.postOnBackgroundThread(
+                                    () -> {
+                                        if (!enabledScreenReader.isEmpty()) {
+                                            setAccessibilityServiceOff(
+                                                    mContext, enabledScreenReader);
+                                        }
+                                    });
                             dialog.dismiss();
                         });
     }

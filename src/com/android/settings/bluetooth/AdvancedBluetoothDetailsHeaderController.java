@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static com.android.settings.bluetooth.Utils.preloadAndRun;
 import static com.android.settingslib.flags.Flags.refactorBatteryLevelDisplay;
+import static com.android.settingslib.flags.Flags.fixBatteryLevelInConnectionSummary;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -50,7 +51,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settingslib.bluetooth.BatteryLevelsInfo;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -339,7 +339,12 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                             return;
                         }
                         if (isUntetheredHeadset.get()) {
-                            summary.setText(summaryText.get());
+                            if (fixBatteryLevelInConnectionSummary() && disconnected.get()) {
+                                summary.setText("");
+                            } else {
+                                summary.setText(summaryText.get());
+                            }
+
                             updateSubLayout(
                                     mLayoutPreference.findViewById(R.id.layout_left),
                                     BluetoothDevice.METADATA_UNTETHERED_LEFT_ICON,

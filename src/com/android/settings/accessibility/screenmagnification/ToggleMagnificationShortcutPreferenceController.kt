@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility
+package com.android.settings.accessibility.screenmagnification
 
 import android.content.Context
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.internal.accessibility.common.ShortcutConstants
+import com.android.settings.accessibility.ToggleShortcutPreferenceController
 
 /**
  * The preference controller for the ShortcutPreference on the Magnification screen. The only

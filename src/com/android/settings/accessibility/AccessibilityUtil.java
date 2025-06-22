@@ -21,6 +21,8 @@ import static android.view.WindowInsets.Type.displayCutout;
 import static android.view.WindowInsets.Type.systemBars;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.GESTURE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
@@ -201,10 +203,18 @@ public final class AccessibilityUtil {
      */
     static int getUserShortcutTypesFromSettings(Context context,
             @NonNull ComponentName componentName) {
+        // TODO(b/147990389): Delete the branching logic for getting componentNameString after we
+        //  migrated to MAGNIFICATION_COMPONENT_NAME.
+        String componentNameString;
+        if (componentName.equals(MAGNIFICATION_COMPONENT_NAME)) {
+            componentNameString = MAGNIFICATION_CONTROLLER_NAME;
+        } else {
+            componentNameString = componentName.flattenToString();
+        }
         int shortcutTypes = UserShortcutType.DEFAULT;
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             if (ShortcutUtils.isShortcutContained(
-                    context, shortcutType, componentName.flattenToString())) {
+                    context, shortcutType, componentNameString)) {
                 shortcutTypes |= shortcutType;
             }
         }

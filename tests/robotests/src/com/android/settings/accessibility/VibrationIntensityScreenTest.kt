@@ -91,6 +91,7 @@ class VibrationIntensityScreenTest : SettingsCatalystTestCase() {
         assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
     }
 
+    @Test
     override fun migration() {
         // make screen available
         shadowOf(appContext.getSystemService(Vibrator::class.java)).setHasVibrator(true)

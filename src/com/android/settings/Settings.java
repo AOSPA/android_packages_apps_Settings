@@ -42,6 +42,8 @@ import com.android.settings.communal.CommunalPreferenceController;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
+import com.android.settings.network.AdaptiveConnectivityScreen;
+import com.android.settings.network.AdaptiveConnectivitySettings;
 import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
@@ -624,4 +626,11 @@ public class Settings extends SettingsActivity {
     public static class FlashNotificationsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationBundlesActivity extends SettingsActivity { /* empty */ }
     public static class NotificationSummarizationActivity extends SettingsActivity { /* empty */ }
+
+    /** Activity for Adaptive Connectivity Settings. */
+    public static class AdaptiveConnectivitySettingsActivity extends CatalystSettingsActivity {
+        public AdaptiveConnectivitySettingsActivity() {
+            super(AdaptiveConnectivityScreen.KEY, AdaptiveConnectivitySettings.class);
+        }
+    }
 }

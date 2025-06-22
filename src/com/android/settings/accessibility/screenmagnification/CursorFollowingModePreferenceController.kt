@@ -51,10 +51,17 @@ class CursorFollowingModePreferenceController(context: Context, prefKey: String)
 
     override fun onResume(owner: LifecycleOwner) {
         MagnificationCapabilities.registerObserver(mContext, contentObserver)
+        mContext.contentResolver.registerContentObserver(
+            Settings.Secure.getUriFor(
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CURSOR_FOLLOWING_MODE
+            ),
+            /* notifyForDescendants= */ false,
+            contentObserver,
+        )
     }
 
     override fun onPause(owner: LifecycleOwner) {
-        MagnificationCapabilities.unregisterObserver(mContext, contentObserver)
+        mContext.contentResolver.unregisterContentObserver(contentObserver)
     }
 
     override fun displayPreference(screen: PreferenceScreen?) {
