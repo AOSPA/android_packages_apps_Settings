@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"About audio output"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Route sounds to your hearing device or phone speaker"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Related"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="4996427014054610877">"Try sharing with <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="329823028635487822">"The fastest way to send files to nearby Android devices"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"Send faster with <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"For the fastest way to share with nearby Android and PCs, try <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> for Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Ringtone and alarms"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio during calls"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Media and system sounds"</string>
@@ -992,7 +992,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Restart"</string>
     <string name="external_display_on" msgid="2560104443500154333">"On"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Off"</string>
-    <string name="external_display_settings_title" msgid="6256884595821605779">"External Display"</string>
+    <string name="external_display_settings_title" msgid="4690843697498496237">"External display"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Built-in display"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Use external display"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Display resolution"</string>
@@ -1003,7 +1003,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Changing rotation or resolution may stop any apps that are currently running"</string>
-    <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Your device must be connected to an external display to mirror your screen"</string>
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"No display connected\n\nConnect an external display to get started, or try using a different cable"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"No display connected"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Connect an external display to get started, or try using a different cable"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"More options"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Hold and drag to rearrange displays."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Mirror built-in display"</string>
@@ -2413,8 +2415,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Move screen when mouse touches edges of screen"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Follow typing"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"The magnifier follows text as you type"</string>
-    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"Magnify keyboard focus"</string>
-    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"Magnifier follows keyboard focus"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Follow keyboard focus"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"The magnifier follows the focused item as you navigate with your keyboard"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Magnify keyboard"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Zoom into the keyboard to see emojis and letters when using full-screen magnification"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Unavailable while only magnifying part of the screen"</string>
@@ -2730,8 +2732,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"About extra dim"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Make your screen dimmer so it’s more comfortable to read"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensity"</string>
-    <string name="brightness_intensity_start_label" msgid="930387498396426039">"Dimmer"</string>
-    <string name="brightness_intensity_end_label" msgid="1422600205484299860">"Brighter"</string>
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"Dimmer"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"Brighter"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Keep on after device restarts"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Short ({time} second)}other{Short ({time} seconds)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Medium ({time} second)}other{Medium ({time} seconds)}}"</string>
@@ -5167,7 +5169,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"If you don’t have a mobile network, you’ll see an option to use satellite."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"After your phone connects to a satellite"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Follow steps to connect to the satellite"</string>
-    <string name="summary_supported_service" msgid="6380533552383355977">"You can text anyone, including emergency services, and use limited data on some apps. Your phone will reconnect to a mobile network when available."</string>
+    <string name="summary_supported_service" msgid="5855066701346160193">"You can text anyone, including emergency services, and use supported apps. Your phone will reconnect to a mobile network when available."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"After your phone is connected, you can text anyone, including emergency services."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Keep in mind"</string>
@@ -5296,6 +5298,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Left"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Right"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Case"</string>
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Left: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Right: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Case: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Left, battery: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Right, battery: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Case, battery: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Battery: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Battery"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Settings Panel"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Enable freeform windows"</string>
@@ -5361,7 +5370,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Boot with 16 KB page size"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Boot device using 16 KB page size supported kernel"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Switch from 4 KB mode to 16 KB mode"</string>
-    <string name="confirm_enable_16k_pages_update_wipe" msgid="4760548401414644138">"This device’s data partition needs to be converted to ext4 before using the 16 KB developer option. The device will be wiped and the filesystem will be changed to ext4 after confirmation. You are in production mode running a 4 KB kernel, and you are switching to the 16 KB mode. Once you are in this mode, you can switch back and forth between 4 KB and 16 KB mode with a single reboot. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to then switch back to the 4 KB mode and lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options. To proceed, click on \'Erase all data and update\'. This will reboot the device."</string>
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"To use the 16 KB developer option, this device\'s data partition needs to be converted to ext4. This will wipe your device and change the filesystem to ext4.&lt;br&gt;&lt;br&gt; Once you are in 16 KB mode, you can switch between 4 KB and 16 KB mode with a single reboot.&lt;br&gt;&lt;br&gt; Things to remember in 16 KB mode:&lt;br&gt;&lt;br&gt; &amp;#8226; Software integrity cannot be guaranteed&lt;br&gt; &amp;#8226; Data stored on the phone while the bootloader is unlocked may be at risk&lt;br&gt; &amp;#8226; Some features will be disabled, which may affect certain apps&lt;br&gt;&lt;br&gt; To return to production mode, you\'ll need to switch back to 4 KB mode and lock the bootloader. This will factory reset your device. After the device successfully boots into Android, disable OEM unlocking in Developer options.&lt;br&gt;&lt;br&gt; To proceed in switching to 16 KB mode, tap \"Erase all data and Update\". This will reboot the device."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"You are in the page-agnostic mode running a 4 KB kernel, and you are switching to the 16 KB mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. This will reboot the device. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to then, switch back to the 4 KB mode and lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Switch from 16 KB mode to 4 KB mode"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"You are in the page-agnostic mode running a 16 KB kernel, and you are switching to the 4 KB mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. This will reboot the device. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options."</string>
@@ -5442,8 +5451,6 @@
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"To quickly resume playback, media player stays open on lock screen"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Hide player"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Show player"</string>
-    <string name="media_controls_suggestions_title" msgid="4089438765632340413">"Media suggestions"</string>
-    <string name="media_controls_suggestions_description" msgid="5001121785028325037">"Provide media suggestions from media apps based on your activity and location."</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Allow camera software extensions"</string>
     <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Enables the default software implementation of advanced camera features, such as HDR, Night or other camera extensions."</string>
@@ -5897,4 +5904,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN can not be deleted"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"An error occurred while trying to delete the PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Can’t turn on controls"</string>
 </resources>

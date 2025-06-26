@@ -19,6 +19,8 @@ package com.android.settings.inputmethod;
 import static android.content.ComponentName.unflattenFromString;
 import static android.hardware.input.AppLaunchData.createLaunchDataForComponent;
 
+import static com.android.settings.inputmethod.TouchpadThreeFingerTapActionPreferenceController.SET_GESTURE;
+
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -273,6 +275,9 @@ public class TouchpadThreeFingerTapAppListController extends BasePreferenceContr
     }
 
     private void setLaunchingApp(@NonNull AppLaunchData appLaunchData) {
+        if (mPreferenceScreen == null || !mPreferenceScreen.getExtras().getBoolean(SET_GESTURE)) {
+            return;
+        }
         InputGestureData gestureData =
                 new InputGestureData.Builder()
                 .setTrigger(TouchpadThreeFingerTapUtils.TRIGGER)

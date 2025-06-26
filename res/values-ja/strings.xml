@@ -47,10 +47,8 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"メール"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"前のプレビュー"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"次のプレビュー"</string>
-    <!-- no translation found for font_size_make_smaller_desc (9149663537989624487) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (5774611876657293550) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="9149663537989624487">"フォントサイズを小さくします"</string>
+    <string name="font_size_make_larger_desc" msgid="5774611876657293550">"フォントサイズを大きくします"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"常時"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"デバイスを折りたたむとフロント ディスプレイが ON になります"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"上にスワイプして継続"</string>
@@ -105,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"音声出力について"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"補聴器またはスマートフォンのスピーカーに音を転送します"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"関連ツール"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="4996427014054610877">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> を使って共有しましょう"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="329823028635487822">"近くの Android デバイスに高速でファイルを送信できます"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>ですばやく送信"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"近くの Android デバイスや PC とすばやく共有するには、Windows の<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>をお試しください"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"着信音とアラーム"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"通話中の音声"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"メディア、システム音"</string>
@@ -994,7 +992,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"再起動"</string>
     <string name="external_display_on" msgid="2560104443500154333">"ON"</string>
     <string name="external_display_off" msgid="5634413756025351374">"OFF"</string>
-    <string name="external_display_settings_title" msgid="6256884595821605779">"外部ディスプレイ"</string>
+    <string name="external_display_settings_title" msgid="4690843697498496237">"外部ディスプレイ"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"内蔵ディスプレイ"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"外部ディスプレイを使用する"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ディスプレイ解像度"</string>
@@ -1005,7 +1003,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"回転や解像度を変更すると、現在実行中のアプリが停止する可能性があります"</string>
-    <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"画面をミラーリングするには、デバイスを外部ディスプレイに接続する必要があります"</string>
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"ディスプレイが接続されていません\n\n外部ディスプレイを接続して使い始めるか、別のケーブルをお試しください"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"ディスプレイが接続されていません"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"外部ディスプレイを接続して使い始めるか、別のケーブルをお試しください"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"その他のオプション"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"ディスプレイを並べ替えるには長押ししてドラッグします。"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"内蔵ディスプレイをミラーリングする"</string>
@@ -2161,13 +2161,11 @@
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"大きくする"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"逆スクロール"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"メインキーを使用する"</string>
-    <!-- no translation found for mouse_keys_use_primary_keys_summary (5057949666957911577) -->
-    <skip />
+    <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"キーボードの操作をテンキーではなく、文字と数字で行います"</string>
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"設定をリセット"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"メインキーの使い方"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"テンキーの使い方"</string>
-    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2186017679302722178) -->
-    <skip />
+    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2186017679302722178">"ナムロック（NumLock）キーが ON の場合、テンキーでは常に数字が入力されます"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"上にスクロールすると、ページ下部に移動します"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"スクロール"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"制御付きスクロール"</string>
@@ -2417,8 +2415,10 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"マウスが画面の端に触れたときに画面を移動する"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"テキストの入力に従う"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"文字の入力にあわせて拡大鏡が移動します"</string>
-    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"キーボード フォーカスの拡大"</string>
-    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"キーボード フォーカスに合わせて拡大"</string>
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
+    <skip />
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"キーボードを拡大する"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"全画面拡大の使用時にキーボードを拡大して絵文字や文字を表示します"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"画面の一部のみを拡大している間は利用できません"</string>
@@ -2734,8 +2734,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"さらに輝度を下げる機能について"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"画面を暗くして表示を見やすくします"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"輝度"</string>
-    <string name="brightness_intensity_start_label" msgid="930387498396426039">"暗い"</string>
-    <string name="brightness_intensity_end_label" msgid="1422600205484299860">"明るい"</string>
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"暗い"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"明るい"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"デバイスの再起動後も維持する"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{短め（{time} 秒）}other{短め（{time} 秒）}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{普通（{time} 秒）}other{普通（{time} 秒）}}"</string>
@@ -3911,7 +3911,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"機密性の高い仕事用プロファイルの通知"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"ロック中に機密性の高い仕事用プロファイルのコンテンツを表示します"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"すべての通知の内容を表示する"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"機密性の高いコンテンツはロック解除時にのみ表示"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"機密性の高いコンテンツはロック解除時にのみ表示する"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"通知を一切表示しない"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6326229471276829730">"ロック画面に何を表示しますか？"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"ロック画面"</string>
@@ -4019,7 +4019,7 @@
     <string name="notification_bundle_title" msgid="6679586974995981433">"通知オーガナイザー"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"優先度の低い通知をまとめてミュートします"</string>
     <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"通知オーガナイザーを使用する"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"作業の妨げにならないよう、ミュートする通知の種類を選択してまとめます。まとめの処理は AI が行うため、エラーが含まれている可能性があります。"</string>
+    <string name="notification_bundle_description" msgid="8439963475488583612">"作業の妨げにならないよう、まとめてミュートする通知の種類を選択します。処理は AI が行うため、誤ってまとめられる可能性があります。"</string>
     <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"バンドル通知"</string>
     <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"静かな場所でも利用できるよう、似たテーマの通知はサイレントになり、まとめて表示されるようになります"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"アプリの通知のバンドルを許可する"</string>
@@ -4509,10 +4509,8 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"全てのサイズを変更します"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"表示間隔、画面のズーム、スケール、拡大縮小"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"プレビュー"</string>
-    <!-- no translation found for screen_zoom_make_smaller_desc (6268455784510593120) -->
-    <skip />
-    <!-- no translation found for screen_zoom_make_larger_desc (3458295276713085365) -->
-    <skip />
+    <string name="screen_zoom_make_smaller_desc" msgid="6268455784510593120">"表示サイズを小さくします"</string>
+    <string name="screen_zoom_make_larger_desc" msgid="3458295276713085365">"表示サイズを大きくします"</string>
     <string name="disconnected" msgid="3469373726996129247">"接続されていません"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"未接続"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> 個のアプリがインストールされています"</string>
@@ -5173,7 +5171,8 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"モバイル ネットワークを利用できない場合、衛星を使用するためのオプションが表示されます。"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"スマートフォンが衛星通信に接続された後"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"手順に沿って衛星に接続します"</string>
-    <string name="summary_supported_service" msgid="6380533552383355977">"テキスト メッセージは、緊急サービスを含め誰にでも送信できます。一部のアプリでは、データの使用（上限あり）も可能です。モバイル ネットワークが利用できる状態になると再接続されます。"</string>
+    <!-- no translation found for summary_supported_service (5855066701346160193) -->
+    <skip />
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"テキスト メッセージは、緊急サービスを含め誰にでも送信できます。モバイル ネットワークが利用できる状態になると再接続されます。"</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"スマートフォンが接続されたら、緊急サービスを含め誰にでもテキスト メッセージを送信できます。"</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"留意点"</string>
@@ -5191,8 +5190,7 @@
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"衛星接続"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"衛星接続"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"衛星通信メッセージ"</string>
-    <!-- no translation found for title_have_satellite_data_plan (1101741256080690699) -->
-    <skip />
+    <string name="title_have_satellite_data_plan" msgid="1101741256080690699">"お客様のアカウントでサポート対象アプリを使用できます"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"スマートフォンでサポートされているアプリ"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"衛星通信を利用できるアプリをすべて表示する"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"スマートフォンでサポートされているアプリ"</string>
@@ -5303,6 +5301,20 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"左"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"右"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"ケース"</string>
+    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
+    <skip />
+    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
+    <skip />
+    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
+    <skip />
+    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
+    <skip />
+    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
+    <skip />
+    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
+    <skip />
+    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
+    <skip />
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"バッテリー"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"設定パネル"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"フリーフォーム ウィンドウを有効にする"</string>
@@ -5368,7 +5380,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"16 KB ページサイズで起動する"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"16 KB ページサイズの対応カーネルでデバイスを起動します"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"4 KB モードから 16 KB モードへの切り替え"</string>
-    <string name="confirm_enable_16k_pages_update_wipe" msgid="4760548401414644138">"16 KB 開発者向けオプションを使用するには、このデバイスのデータ パーティションを ext4 に変換する必要があります。確認後に、デバイスがワイプされて、ファイルシステムが ext4 に変更されます。現在は、本番環境モードで 4 KB カーネルを実行しており、それを 16 KB モードに切り替えようとしています。このモードになったら、4 KB モードと 16 KB モードの間で切り替えることができます（切り替えのたびに 1 回再起動します）。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。これらのモードで無効になる機能があるため、一部のアプリが動作しなくなることがあります。デバイスを本番環境モードに戻すには、4 KB モードに戻してから、ブートローダーをロックする必要があります。その操作で、デバイスは出荷時の設定にリセットされます。デバイスが Android で起動したら、開発者向けオプションで OEM のロック解除を無効にしてください。続行するには、[すべてのデータを消去して更新] をクリックします。これにより、デバイスが再起動します。"</string>
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"16 KB のデベロッパー オプションを使用するには、このデバイスのデータ パーティションを ext4 に変換する必要があります。この変換を行うと、デバイスがワイプされてファイルシステムが ext4 に変更されます。&lt;br&gt;&lt;br&gt; 16 KB モードになったら、4 KB モードと 16 KB モードの間で切り替えることができます（切り替えのたびに 1 回再起動します）。&lt;br&gt;&lt;br&gt; 16 KB モードで留意すべき点:&lt;br&gt;&lt;br&gt; &amp;#8226; ソフトウェアの完全性は保証されません&lt;br&gt; &amp;#8226; ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります&lt;br&gt; &amp;#8226; 一部の機能が無効になり、特定のアプリに影響する可能性があります&lt;br&gt;&lt;br&gt; 本番環境モードに戻るには、4 KB モードに切り替えてブートローダーをロックする必要があります。この操作でデバイスは出荷時の設定にリセットされます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。&lt;br&gt;&lt;br&gt; 16 KB モードに切り替えるには、[すべてのデータを消去して更新] をタップします。この切り替えにより、デバイスが再起動します。"</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"ページ非依存モードで 4 KB カーネルを実行していますが、16 KB モードに切り替えようとしています。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。この切り替えにより、デバイスが再起動します。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。デバイスを本番環境モードに戻すには、4 KB モードに戻してから、ブートローダーをロックする必要があります。この操作で、デバイスは出荷時の設定にリセットされます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。"</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"16 KB モードから 4 KB モードへの切り替え"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"ページ非依存モードで 16 KB カーネルを実行していますが、4 KB モードに切り替えようとしています。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。この切り替えにより、デバイスが再起動します。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。デバイスを本番環境モードに戻すには、ブートローダーをロックする必要があります。この操作で、デバイスは出荷時の設定にリセットされます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。"</string>
@@ -5449,8 +5461,6 @@
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"再生をすばやく再開できるよう、ロック画面にメディア プレーヤーを開いたままにする"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"プレーヤーを非表示"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"クイック設定に表示させるプレーヤーを選択"</string>
-    <string name="media_controls_suggestions_title" msgid="4089438765632340413">"メディアの候補"</string>
-    <string name="media_controls_suggestions_description" msgid="5001121785028325037">"アクティビティと位置情報に基づいて、メディアアプリの中からおすすめのメディアを表示します。"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"メディア"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"カメラ ソフトウェアの拡張機能を許可する"</string>
     <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"HDR、夜間モード、その他のカメラ拡張機能などの高度なカメラ機能について、デフォルトのソフトウェアの実装を有効にする"</string>
@@ -5824,8 +5834,7 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"パスワードなし"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"詳細"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ではこの音声ストリームを再生できません。"</string>
-    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
-    <skip />
+    <string name="audio_streams_dialog_cannot_play_with_link" msgid="3433981166714801237">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ではこの音声ストリームを再生できません。"<annotation id="link">"詳細"</annotation></string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"現在再生しています"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"ストリームを一時停止"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"受信を停止"</string>
@@ -5901,9 +5910,10 @@
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN を更新しました"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"アプリを開く"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"PIN を削除しますか？"</string>
-    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
-    <skip />
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8999197100719062891">"他のユーザーに対する保護者による使用制限をオフにする"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN を削除できません"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PIN の削除中にエラーが発生しました。"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> のアニメーション"</string>
+    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
+    <skip />
 </resources>
