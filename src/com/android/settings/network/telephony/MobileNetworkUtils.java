@@ -16,7 +16,7 @@
 
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
- * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022-2025 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -31,6 +31,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -104,6 +105,8 @@ public class MobileNetworkUtils {
     private static final String NETWORK_ACCESS_MODE = "access_mode";
     private static int mCagSnpnFeatureStatus = -1;
     private static final int ACCESS_MODE_PLMN = 1;
+
+    private static final String SHARED_PREFERENCE_NAME ="selected_plmn_name";
 
     /**
      * Return true if current user limited by UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS.
@@ -634,6 +637,11 @@ public class MobileNetworkUtils {
      * 2. Similar design which aligned with operator name displayed in status bar
      */
     public static CharSequence getCurrentCarrierNameForDisplay(Context context, int subId) {
+        String carrierName = getCarrierName(context, subId);
+        if (!TextUtils.isEmpty(carrierName)) {
+            return carrierName;
+        }
+
         final SubscriptionInfo subInfo = getSubscriptionInfo(context, subId);
         if (subInfo != null) {
             return subInfo.getCarrierName();
@@ -912,5 +920,19 @@ public class MobileNetworkUtils {
         } else {
             onSuccess.run();
         }
+    }
+
+    public static void setCarrierName(Context context, String operator, int subId) {
+        if (!TextUtils.isEmpty(operator)) {
+            SharedPreferences sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME,
+                    Context.MODE_PRIVATE);
+            sp.edit().putString(String.valueOf(subId), operator).apply();
+        }
+    }
+
+    public static String getCarrierName(Context context, int subId) {
+        SharedPreferences sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+        return sp.getString(String.valueOf(subId), "");
     }
 }
