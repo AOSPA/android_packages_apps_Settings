@@ -476,7 +476,9 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
      * users won't misunderstand its meaning.
      */
     public final void finishFragment() {
-        getActivity().onBackPressed();
+        if (getActivity() != null) {
+            getActivity().onBackPressed();
+        }
     }
 
     // Some helpers for functions used by the settings fragments when they were activities

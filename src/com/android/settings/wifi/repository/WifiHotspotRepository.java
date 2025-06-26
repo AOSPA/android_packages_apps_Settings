@@ -616,6 +616,15 @@ public class WifiHotspotRepository {
     }
 
     /**
+     * Return whether Wi-Fi Hotspot is restarting or not.
+     *
+     * @return {@code true} if Wi-Fi Hotspot is restarting
+     */
+    public boolean isRestarting() {
+        return mIsRestarting;
+    }
+
+    /**
      * Gets Restarting LiveData
      */
     public LiveData<Boolean> getRestarting() {

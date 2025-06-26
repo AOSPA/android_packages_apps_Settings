@@ -18,9 +18,11 @@ package com.android.settings.wifi.tether;
 
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
+import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
+import static com.android.settings.flags.Flags.FLAG_CATALYST_TETHER_SETTINGS;
 import static com.android.settings.wifi.WifiUtils.setCanShowWifiHotspotCached;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.BAND_2GHZ_5GHZ_6GHZ;
 import static com.android.settings.wifi.tether.WifiTetherSettings.KEY_INSTANT_HOTSPOT;
@@ -50,6 +52,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.util.FeatureFlagUtils;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
@@ -86,6 +89,9 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class WifiTetherSettingsTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
 
     private static final int XML_RES = R.xml.wifi_tether_settings;
     private static final String[] WIFI_REGEXS = {"wifi_regexs"};
@@ -145,6 +151,7 @@ public class WifiTetherSettingsTest {
     @Before
     public void setUp() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
+        mSetFlagsRule.disableFlags(FLAG_CATALYST_TETHER_SETTINGS);
         setCanShowWifiHotspotCached(true);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mConnectivityManager)

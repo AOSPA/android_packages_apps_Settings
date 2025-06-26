@@ -5646,9 +5646,9 @@
     <!-- Summary for accessibility follow typing preference for magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_follow_typing_summary">The magnifier follows text as you type</string>
     <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_follow_keyboard_title">Magnify keyboard focus</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_title">Follow keyboard focus</string>
     <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_follow_keyboard_summary">Magnifier follows keyboard focus</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary">The magnifier follows the focused item as you navigate with your keyboard</string>
     <!-- Title for accessibility magnifier preference allowing the magnification of the keyboard. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_nav_ime_title">Magnify keyboard</string>
     <!-- Summary for accessibility magnifier preference allowing the magnification of the keyboard. [CHAR LIMIT=none] -->
@@ -13389,6 +13389,20 @@ Data usage charges may apply.</string>
     <string name="bluetooth_right_name">Right</string>
     <!-- Title for middle bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_middle_name">Case</string>
+    <!-- Title for left bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_left_name_expressive">Left: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Title for right bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_right_name_expressive">Right: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Title for middle bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_middle_name_expressive">Case: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Content description for left bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_left_content_description_expressive">Left, battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Content description for right bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_right_content_description_expressive">Right, battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Content description for middle bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_middle_content_description_expressive">Case, battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Content description for main bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_main_content_description_expressive">Battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
     <!-- Content description for battery icon in bluetooth header. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_header_battery_content_description">Battery</string>
 
@@ -14871,6 +14885,10 @@ Data usage charges may apply.</string>
     <!-- Learn more link for device supervision PIN. [CHAR LIMIT=NONE]-->
     <string name="supervision_pin_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_pin</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
+    <!-- Title on dialog that informs the user that controls cannot be enabled due to a multi-profile conflict. [CHAR LIMIT=NONE] -->
+    <string name="supervision_multi_profile_error_title">Can\u2019t turn on controls</string>
+    <!-- Learn more link for when device supervision is unavailable. [CHAR LIMIT=NONE]-->
+    <string name="supervision_unavailable_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_unavailable</string>
 
     <!-- Light theme customization for Face Education lottie illustration. Not translatable. -->
     <string-array name="fac_education_illustration" translatable="false">

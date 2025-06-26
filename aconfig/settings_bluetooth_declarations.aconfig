@@ -76,3 +76,10 @@ flag {
       purpose: PURPOSE_BUGFIX
   }
 }
+
+flag {
+  name: "enable_expressive_bluetooth_battery_header"
+  namespace: "cross_device_experiences"
+  description: "Enable expressive bluetooth battery header."
+  bug: "399532172"
+}

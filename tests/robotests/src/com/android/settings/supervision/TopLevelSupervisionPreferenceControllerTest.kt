@@ -16,11 +16,10 @@
 package com.android.settings.supervision
 
 import android.app.Activity
-import android.app.role.RoleManager
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.content.res.Resources
 import androidx.preference.Preference
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
@@ -41,12 +40,12 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class TopLevelSupervisionPreferenceControllerTest {
-    private val mockRoleManager = mock<RoleManager>()
     private val mockPackageManager = mock<PackageManager>()
+    private val mockResources = mock<Resources>()
     private val context =
         spy(Robolectric.buildActivity(Activity::class.java).get()) {
-            on { getSystemService(Context.ROLE_SERVICE) }.thenReturn(mockRoleManager)
             on { packageManager }.thenReturn(mockPackageManager)
+            on { resources }.thenReturn(mockResources)
         }
 
     private val preference = Preference(context)
@@ -54,14 +53,14 @@ class TopLevelSupervisionPreferenceControllerTest {
     @Before
     fun setUp() {
         preference.key = PREFERENCE_KEY
+        mockResources.stub {
+            on { getString(com.android.internal.R.string.config_systemSupervision) }
+                .thenReturn(SUPERVISION_PACKAGE_NAME)
+        }
     }
 
     @Test
     fun navigateToDashboard() {
-        mockRoleManager.stub {
-            on { getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) }
-                .thenReturn(listOf(SUPERVISION_PACKAGE_NAME))
-        }
         setupMessengerServiceActionResolution(true)
         setUpSupervisionInstallActionResolution(true)
 
@@ -75,23 +74,7 @@ class TopLevelSupervisionPreferenceControllerTest {
     }
 
     @Test
-    fun supervisionPackageNameIsNull_returnUnsupported() {
-        mockRoleManager.stub {
-            on { getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) }.thenReturn(listOf<String>())
-        }
-        setupMessengerServiceActionResolution(true)
-        setUpSupervisionInstallActionResolution(true)
-
-        val preferenceController = TopLevelSupervisionPreferenceController(context, PREFERENCE_KEY)
-        assertThat(preferenceController.availabilityStatus).isEqualTo(UNSUPPORTED_ON_DEVICE)
-    }
-
-    @Test
     fun noSupervisionMessengerService_canNotInstall_returnUnsupported() {
-        mockRoleManager.stub {
-            on { getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) }
-                .thenReturn(listOf(SUPERVISION_PACKAGE_NAME))
-        }
         setupMessengerServiceActionResolution(false)
         setUpSupervisionInstallActionResolution(false)
 
@@ -101,10 +84,6 @@ class TopLevelSupervisionPreferenceControllerTest {
 
     @Test
     fun hasSupervisionMessengerService_canNotInstall_returnAvailable() {
-        mockRoleManager.stub {
-            on { getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) }
-                .thenReturn(listOf(SUPERVISION_PACKAGE_NAME))
-        }
         setupMessengerServiceActionResolution(true)
         setUpSupervisionInstallActionResolution(false)
 
@@ -114,10 +93,6 @@ class TopLevelSupervisionPreferenceControllerTest {
 
     @Test
     fun noSupervisionMessengerService_canInstall_returnAvailable() {
-        mockRoleManager.stub {
-            on { getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) }
-                .thenReturn(listOf(SUPERVISION_PACKAGE_NAME))
-        }
         setupMessengerServiceActionResolution(false)
         setUpSupervisionInstallActionResolution(true)
 

@@ -100,6 +100,7 @@ open class WifiHotspotScreen(context: Context) :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +WifiHotspotMainSwitchPreference(wifiHotspotStore)
             +WifiHotspotNamePreference(context, coroutineScope, wifiHotspotStore)
         }
 

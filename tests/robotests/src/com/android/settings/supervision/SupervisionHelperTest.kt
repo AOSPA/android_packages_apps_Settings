@@ -25,6 +25,7 @@ import android.content.pm.PackageManager
 import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 import android.content.pm.PackageManager.DONT_KILL_APP
 import android.content.pm.UserInfo
+import android.content.res.Resources
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_FULL_SECONDARY
@@ -54,7 +55,8 @@ class SupervisionHelperTest {
     private val mockRoleManager = mock<RoleManager>()
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
-    private val context = contextOf(mockRoleManager, mockUserManager)
+    private val mockResources = mock<Resources>()
+    private val context = contextOf(mockRoleManager)
 
     private lateinit var packageManager: PackageManager
     private lateinit var shadowPackageManager: ShadowPackageManager
@@ -90,7 +92,7 @@ class SupervisionHelperTest {
 
     @Test
     fun systemSupervisionPackageName_roleManagerUnavailable_returnsNull() {
-        val context = contextOf(/* roleManager= */ null, /* userManager= */ null)
+        val context = contextOf(/* roleManager= */ null)
 
         assertThat(context.systemSupervisionPackageName).isNull()
     }
@@ -110,7 +112,7 @@ class SupervisionHelperTest {
 
     @Test
     fun supervisionRoleHolders_roleManagerUnavailable_returnsEmptyList() {
-        val context = contextOf(/* roleManager= */ null, /* userManager= */ null)
+        val context = contextOf(/* roleManager= */ null)
 
         assertThat(context.supervisionRoleHolders).isEmpty()
     }
@@ -196,42 +198,39 @@ class SupervisionHelperTest {
     fun hasNecessarySupervisionComponent_defaultPackageName_enabledComponent() {
         val testPackageName = "com.android.supervision"
 
-        mockRoleManager.stub {
-            on { getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) } doReturn
-                listOf(testPackageName)
+        mockResources.stub {
+            on { getString(com.android.internal.R.string.config_systemSupervision) }
+                .thenReturn(testPackageName)
         }
         setUpMessengerServiceComponent(packageName = testPackageName, disabled = false)
 
         assertThat(context.hasNecessarySupervisionComponent()).isTrue()
-        verify(mockRoleManager).getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
     }
 
     @Test
     fun hasNecessarySupervisionComponent_defaultPackageName_disabledComponent() {
         val testPackageName = "com.android.supervision"
 
-        mockRoleManager.stub {
-            on { getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) } doReturn
-                listOf(testPackageName)
+        mockResources.stub {
+            on { getString(com.android.internal.R.string.config_systemSupervision) }
+                .thenReturn(testPackageName)
         }
         setUpMessengerServiceComponent(packageName = testPackageName, disabled = true)
 
         assertThat(context.hasNecessarySupervisionComponent()).isFalse()
-        verify(mockRoleManager).getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
     }
 
     @Test
     fun hasNecessarySupervisionComponent_defaultPackageName_disabledComponent_matchAll() {
         val testPackageName = "com.android.supervision"
 
-        mockRoleManager.stub {
-            on { getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION) } doReturn
-                listOf(testPackageName)
+        mockResources.stub {
+            on { getString(com.android.internal.R.string.config_systemSupervision) }
+                .thenReturn(testPackageName)
         }
         setUpMessengerServiceComponent(packageName = testPackageName, disabled = true)
 
         assertThat(context.hasNecessarySupervisionComponent(matchAll = true)).isTrue()
-        verify(mockRoleManager).getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
     }
 
     @Test
@@ -278,7 +277,7 @@ class SupervisionHelperTest {
         shadowPackageManager.addIntentFilterForService(serviceComponentName, intentFilter)
     }
 
-    private fun contextOf(roleManager: RoleManager?, userManager: UserManager?): Context =
+    private fun contextOf(roleManager: RoleManager?): Context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
             override fun getSystemService(name: String): Any? =
                 when (name) {
@@ -287,6 +286,8 @@ class SupervisionHelperTest {
                     USER_SERVICE -> mockUserManager
                     else -> super.getSystemService(name)
                 }
+
+            override fun getResources(): Resources? = mockResources
         }
 
     companion object {

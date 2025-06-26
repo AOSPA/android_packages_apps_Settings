@@ -65,7 +65,7 @@ public class WhenToDreamPreferenceControllerTest {
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
-        mController = new WhenToDreamPreferenceController(mContext, PREF_KEY, true, true);
+        mController = new WhenToDreamPreferenceController(mContext, PREF_KEY, true, true, true);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
         when(mContext.getSystemService(PowerManager.class)).thenReturn(mPowerManager);
         when(mPowerManager.isAmbientDisplaySuppressedForTokenByApp(anyString(), anyInt()))

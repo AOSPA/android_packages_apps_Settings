@@ -30,8 +30,10 @@ import com.android.settings.accessibility.screenmagnification.ToggleMagnificatio
 import com.android.settings.accessibility.screenmagnification.dialogs.CursorFollowingModeChooser
 import com.android.settings.accessibility.screenmagnification.dialogs.MagnificationModeChooser
 import com.android.settings.search.BaseSearchIndexProvider
+import com.android.settingslib.search.SearchIndexable
 
 /** Displays the detail screen of the screen magnification feature */
+@SearchIndexable(forTarget = SearchIndexable.ALL and SearchIndexable.ARC.inv())
 open class MagnificationPreferenceFragment : ShortcutFragment() {
 
     override fun onDisplayPreferenceDialog(preference: Preference) {

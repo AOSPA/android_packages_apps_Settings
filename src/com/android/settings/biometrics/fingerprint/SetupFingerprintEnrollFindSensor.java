@@ -33,7 +33,6 @@ import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSensor {
@@ -49,11 +48,6 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
         }
         BiometricUtils.copyMultiBiometricExtras(getIntent(), intent);
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
-        if (Flags.udfpsEnrollCalibration()) {
-            if (mCalibrator != null) {
-                intent.putExtras(mCalibrator.getExtrasForNextIntent());
-            }
-        }
         return intent;
     }
 

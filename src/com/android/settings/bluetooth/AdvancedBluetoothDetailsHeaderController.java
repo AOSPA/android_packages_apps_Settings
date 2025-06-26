@@ -29,6 +29,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
@@ -36,7 +37,7 @@ import android.os.Looper;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Pair;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -51,6 +52,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settingslib.bluetooth.BatteryLevelsInfo;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -72,7 +74,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 /**
  * This class adds a header with device name and status (connected/disconnected, etc.).
@@ -94,8 +96,6 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     private static final String DATABASE_ID = "id";
     private static final String DATABASE_BLUETOOTH = "Bluetooth";
     private static final String TAG_BATT = "BATT";
-    private static final long TIME_OF_HOUR = TimeUnit.SECONDS.toMillis(3600);
-    private static final long TIME_OF_MINUTE = TimeUnit.SECONDS.toMillis(60);
     private static final int LEFT_DEVICE_ID = 1;
     private static final int RIGHT_DEVICE_ID = 2;
     private static final int CASE_DEVICE_ID = 3;
@@ -257,6 +257,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @VisibleForTesting
     void refresh() {
         if (mLayoutPreference != null && mCachedDevice != null) {
+            inflateBluetoothIconsWithBattery();
             Supplier<String> deviceName = Suppliers.memoize(() -> mCachedDevice.getName());
             Supplier<Boolean> disconnected =
                     Suppliers.memoize(() -> !mCachedDevice.isConnected() || mCachedDevice.isBusy());
@@ -335,7 +336,11 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
                         if (disconnected.get() && !isBatteryLevelAvailable) {
                             summary.setText(summaryText.get());
-                            updateDisconnectLayout();
+                            if (Flags.enableExpressiveBluetoothBatteryHeader()) {
+                                updateDisconnectLayoutExpressive();
+                            } else {
+                                updateDisconnectLayout();
+                            }
                             return;
                         }
                         if (isUntetheredHeadset.get()) {
@@ -445,9 +450,6 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             int chargeMetaKey,
             int titleResId,
             int deviceId) {
-        if (linearLayout == null) {
-            return;
-        }
         BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
         Supplier<String> iconUri =
                 Suppliers.memoize(
@@ -491,7 +493,14 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                         lowBatteryLevel,
                         isUntethered,
                         nativeBatteryLevel),
-                () ->
+                () -> {
+                    if (Flags.enableExpressiveBluetoothBatteryHeader()) {
+                        updateSubLayoutUiExpressive(deviceId, batteryValue,
+                                iconUri,
+                                batteryLevel,
+                                charging,
+                                isUntethered);
+                    } else {
                         updateSubLayoutUi(
                                 linearLayout,
                                 iconMetaKey,
@@ -506,7 +515,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                 charging,
                                 lowBatteryLevel,
                                 isUntethered,
-                                nativeBatteryLevel));
+                                nativeBatteryLevel);
+                    }
+                });
     }
 
     private void updateSubLayoutUi(
@@ -528,14 +539,14 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
         final String iconUri = preloadedIconUri.get();
         final ImageView imageView = linearLayout.findViewById(R.id.header_icon);
-        if (iconUri != null) {
-            updateIcon(imageView, iconUri);
-        } else {
-            final Pair<Drawable, String> pair =
-                    BluetoothUtils.getBtRainbowDrawableWithDescription(mContext, mCachedDevice);
-            imageView.setImageDrawable(pair.first);
-            imageView.setContentDescription(pair.second);
-        }
+        final boolean isUntethered = preloadedIsUntethered.get();
+
+        imageView.setAlpha(HALF_ALPHA);
+        loadIcon(deviceId, iconUri, icon -> {
+            imageView.setImageDrawable(icon);
+            imageView.setAlpha(1.0f);
+        });
+
         final int batteryLevel;
         if (refactorBatteryLevelDisplay()) {
             batteryLevel = batteryValue;
@@ -556,7 +567,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             showBatteryPredictionIfNecessary(linearLayout, deviceId, batteryLevel);
         }
         final TextView batterySummaryView = linearLayout.findViewById(R.id.bt_battery_summary);
-        if (preloadedIsUntethered.get()) {
+        if (isUntethered) {
             if (batteryLevel != BluetoothUtils.META_INT_ERROR) {
                 linearLayout.setVisibility(View.VISIBLE);
                 batterySummaryView.setText(
@@ -611,6 +622,63 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             textView.setText(titleResId);
             textView.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void updateSubLayoutUiExpressive(
+            int deviceId,
+            int batteryValue,
+            Supplier<String> preloadedIconUri,
+            Supplier<Integer> preloadedBatteryLevel,
+            Supplier<Boolean> preloadedCharging,
+            Supplier<Boolean> preloadedIsUntethered) {
+        BluetoothHeaderSubDevice subDevice;
+        final int battery;
+        if (refactorBatteryLevelDisplay()) {
+            battery = batteryValue;
+        } else {
+            battery = preloadedBatteryLevel.get();
+        }
+        boolean charging = preloadedCharging.get();
+        String iconUri = preloadedIconUri.get();
+        BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
+        boolean isUntetheredHeadset = preloadedIsUntethered.get();
+        Log.d(TAG, "bluetoothDevice: " + bluetoothDevice.getAnonymizedAddress()
+                + ", updateSubLayout(): " + deviceId + ", batteryLevel: " + battery
+                + ", charging: " + charging + ", iconUri: " + iconUri
+                + ", refactored: " + refactorBatteryLevelDisplay());
+        switch (deviceId) {
+            case LEFT_DEVICE_ID:
+                subDevice = mLayoutPreference.findViewById(R.id.layout_left);
+                subDevice.setSubDeviceType(BluetoothHeaderSubDevice.SubDeviceType.Left.INSTANCE);
+                break;
+            case RIGHT_DEVICE_ID:
+                subDevice = mLayoutPreference.findViewById(R.id.layout_right);
+                subDevice.setSubDeviceType(BluetoothHeaderSubDevice.SubDeviceType.Right.INSTANCE);
+                break;
+            case CASE_DEVICE_ID:
+                subDevice = mLayoutPreference.findViewById(R.id.layout_middle);
+                subDevice.setSubDeviceType(BluetoothHeaderSubDevice.SubDeviceType.Case.INSTANCE);
+                break;
+            case MAIN_DEVICE_ID:
+                subDevice = mLayoutPreference.findViewById(R.id.layout_middle);
+                subDevice.setSubDeviceType(BluetoothHeaderSubDevice.SubDeviceType.Main.INSTANCE);
+                break;
+            default:
+                return;
+        }
+        if (isUntetheredHeadset && battery == BluetoothUtils.META_INT_ERROR) {
+            subDevice.setVisibility(View.GONE);
+            return;
+        }
+        subDevice.setVisibility(View.VISIBLE);
+        subDevice.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+        subDevice.setBatteryLevel(battery);
+        subDevice.setCharging(charging);
+        subDevice.setAlpha(HALF_ALPHA);
+        loadIcon(deviceId, iconUri, icon -> {
+            subDevice.setImage(icon);
+            subDevice.setAlpha(1f);
+        });
     }
 
     private boolean isUntetheredHeadset(BluetoothDevice bluetoothDevice) {
@@ -762,50 +830,125 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         if (DEBUG) {
             Log.d(TAG, "updateDisconnectLayout() iconUri : " + iconUri);
         }
-        if (iconUri != null) {
-            final ImageView imageView = linearLayout.findViewById(R.id.header_icon);
-            updateIcon(imageView, iconUri);
-        }
+        final ImageView imageView = linearLayout.findViewById(R.id.header_icon);
+        imageView.setAlpha(HALF_ALPHA);
+        loadIcon(MAIN_DEVICE_ID, iconUri, icon -> {
+            imageView.setImageDrawable(icon);
+            imageView.setAlpha(1f);
+        });
+    }
+
+    private void updateDisconnectLayoutExpressive() {
+        mLayoutPreference.findViewById(R.id.layout_left).setVisibility(View.GONE);
+        mLayoutPreference.findViewById(R.id.layout_right).setVisibility(View.GONE);
+        BluetoothHeaderSubDevice middleDevice = mLayoutPreference.findViewById(R.id.layout_middle);
+        middleDevice.setVisibility(View.VISIBLE);
+        middleDevice.setImportantForAccessibility(
+                View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+        middleDevice.setSubDeviceType(BluetoothHeaderSubDevice.SubDeviceType.Main.INSTANCE);
+        middleDevice.setBatteryLevel(BluetoothUtils.META_INT_ERROR);
+        final String iconUri = BluetoothUtils.getStringMetaData(mCachedDevice.getDevice(),
+                BluetoothDevice.METADATA_MAIN_ICON);
+        middleDevice.setAlpha(HALF_ALPHA);
+        loadIcon(MAIN_DEVICE_ID, iconUri, icon -> {
+            middleDevice.setImage(icon);
+            middleDevice.setAlpha(1.0f);
+        });
     }
 
     /**
-     * Update icon by {@code iconUri}. If icon exists in cache, use it; otherwise extract it
-     * from uri in background thread and update it in main thread.
+     * Loads icon by {@code iconUri}. If icon exists in cache, use it; otherwise extract it from uri
+     * in background thread and update it in main thread.
      */
     @VisibleForTesting
-    void updateIcon(ImageView imageView, String iconUri) {
+    void loadIcon(int deviceId, String iconUri, Consumer<Drawable> onIconLoaded) {
+        if (iconUri == null) {
+            int iconTint =
+                    mContext.getColor(
+                            com.android.settingslib.widget.theme.R.color
+                                    .settingslib_materialColorOnSurface);
+            switch (deviceId) {
+                case LEFT_DEVICE_ID -> {
+                    Drawable leftBudIcon = mContext.getDrawable(R.drawable.ic_tws_left_bud);
+                    leftBudIcon.setTint(iconTint);
+                    onIconLoaded.accept(leftBudIcon);
+                    return;
+                }
+                case CASE_DEVICE_ID -> {
+                    Drawable caseIcon = mContext.getDrawable(R.drawable.ic_tws_case);
+                    caseIcon.setTint(iconTint);
+                    onIconLoaded.accept(caseIcon);
+                    return;
+                }
+                case RIGHT_DEVICE_ID -> {
+                    Drawable rightBudIcon = mContext.getDrawable(R.drawable.ic_tws_right_bud);
+                    rightBudIcon.setTint(iconTint);
+                    onIconLoaded.accept(rightBudIcon);
+                    return;
+                }
+                default -> {
+                    final Drawable mainIcon =
+                            BluetoothUtils.getBtRainbowDrawableWithDescription(
+                                            mContext, mCachedDevice)
+                                    .first;
+                    mainIcon.setTint(iconTint);
+                    onIconLoaded.accept(mainIcon);
+                    return;
+                }
+            }
+        }
         if (mIconCache.containsKey(iconUri)) {
-            imageView.setAlpha(1f);
-            imageView.setImageBitmap(mIconCache.get(iconUri));
+            onIconLoaded.accept(
+                    new BitmapDrawable(mContext.getResources(), mIconCache.get(iconUri)));
             return;
         }
 
-        imageView.setAlpha(HALF_ALPHA);
-        ThreadUtils.postOnBackgroundThread(() -> {
-            final Uri uri = Uri.parse(iconUri);
-            try {
-                mContext.getContentResolver().takePersistableUriPermission(uri,
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        ThreadUtils.postOnBackgroundThread(
+                () -> {
+                    final Uri uri = Uri.parse(iconUri);
+                    try {
+                        mContext.getContentResolver()
+                                .takePersistableUriPermission(
+                                        uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-                final Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-                        mContext.getContentResolver(), uri);
-                ThreadUtils.postOnMainThread(() -> {
-                    mIconCache.put(iconUri, bitmap);
-                    imageView.setAlpha(1f);
-                    imageView.setImageBitmap(bitmap);
+                        final Bitmap bitmap =
+                                MediaStore.Images.Media.getBitmap(
+                                        mContext.getContentResolver(), uri);
+                        ThreadUtils.postOnMainThread(
+                                () -> {
+                                    mIconCache.put(iconUri, bitmap);
+                                    onIconLoaded.accept(
+                                            new BitmapDrawable(
+                                                    mContext.getResources(),
+                                                    mIconCache.get(iconUri)));
+                                });
+                    } catch (IOException e) {
+                        Log.e(TAG, "Failed to get bitmap for: " + iconUri, e);
+                    } catch (SecurityException e) {
+                        Log.e(TAG, "Failed to take persistable permission for: " + uri, e);
+                    }
                 });
-            } catch (IOException e) {
-                Log.e(TAG, "Failed to get bitmap for: " + iconUri, e);
-            } catch (SecurityException e) {
-                Log.e(TAG, "Failed to take persistable permission for: " + uri, e);
-            }
-        });
     }
 
     @Override
     public void onDeviceAttributesChanged() {
         if (mCachedDevice != null) {
             refresh();
+        }
+    }
+
+    private void inflateBluetoothIconsWithBattery() {
+        ViewGroup entitiesContainer =
+                mLayoutPreference.findViewById(R.id.bluetooth_entities_container);
+        if (entitiesContainer.getChildCount() > 0) {
+            return;
+        }
+        if (Flags.enableExpressiveBluetoothBatteryHeader()) {
+            LayoutInflater.from(mContext)
+                    .inflate(R.layout.advanced_bt_entities_expressive, entitiesContainer, true);
+        } else {
+            LayoutInflater.from(mContext)
+                    .inflate(R.layout.advanced_bt_entities_legacy, entitiesContainer, true);
         }
     }
 }

@@ -84,6 +84,13 @@ class DisplayTopologyPreferenceController(
     private var topologyInfo: TopologyInfo? = null
     private var blockDrag: BlockDrag? = null
     private var revealedWallpapers: List<RevealedWallpaper> = emptyList()
+    private var selectedDisplayId: Int = -1
+
+    var onDisplayBlockSelectedListener: OnDisplayBlockSelectedListener? = null
+
+    interface OnDisplayBlockSelectedListener {
+        fun onSelected(displayId: Int)
+    }
 
     /**
      * Holds information about the current system topology.
@@ -154,6 +161,16 @@ class DisplayTopologyPreferenceController(
         revealedWallpapers = listOf()
         injector.unregisterTopologyListener(topologyListener)
         injector.unregisterDisplayListener(displayListener)
+    }
+
+    fun selectDisplay(displayId: Int) {
+        selectedDisplayId = displayId
+        val displayTopology = injector.displayTopology
+        if (displayTopology == null || !displayTopology.allNodesIdMap().containsKey(displayId)) {
+            displayBlocks().forEach { it.setHighlighted(false) }
+            return
+        }
+        displayBlocks().forEach { it.setHighlighted(it.logicalDisplayId == displayId) }
     }
 
     @VisibleForTesting
@@ -325,25 +342,27 @@ class DisplayTopologyPreferenceController(
             }
         }
 
-        // Setup display blocks
-        val recycleableBlocks = ArrayDeque<DisplayBlock>()
-        for (i in 0..paneContent.childCount - 1) {
-            recycleableBlocks.add(paneContent.getChildAt(i) as DisplayBlock)
-        }
+        // Setup display blocks. This recreates objects, but using a recycled View
+        val displayBlocks = displayBlocks()
         newBounds.forEach { (id, pos) ->
             val block =
-                recycleableBlocks.removeFirstOrNull()
+                displayBlocks.removeFirstOrNull()
                     ?: DisplayBlock(injector).apply { paneContent.addView(this) }
             logicalDisplaySizeFetcher.get(id)?.let {
                 val topLeft = scaling.displayToPaneCoor(pos.left, pos.top)
                 val bottomRight = scaling.displayToPaneCoor(pos.right, pos.bottom)
                 block.reset(
+                    id,
                     // Mirroring is only supported for DEFAULT_DISPLAY for now
                     if (isMirroring) DEFAULT_DISPLAY else id,
                     topLeft,
                     bottomRight,
                     (bottomRight.x - topLeft.x) / it.width,
                 )
+                // This is needed to ensure block is highlighted from the start if it's selected.
+                // Example scenario would be when Display#2 is selected from the tab, and there's
+                // another display added, Display#2 should still be highlighted.
+                block.setHighlighted(id == selectedDisplayId)
             }
             if (isMirroring) {
                 block.setOnTouchListener(null)
@@ -358,7 +377,7 @@ class DisplayTopologyPreferenceController(
                 }
             }
         }
-        paneContent.removeViews(newBounds.size, recycleableBlocks.size)
+        paneContent.removeViews(newBounds.size, displayBlocks.size)
         timesRefreshedBlocks++
         // Cancel the drag if one is in progress.
         blockDrag = null
@@ -379,8 +398,7 @@ class DisplayTopologyPreferenceController(
 
         val stationaryDisps = positions.filter { it.first != displayId }
 
-        blockDrag?.display?.setHighlighted(false)
-        block.setHighlighted(true)
+        selectDisplay(displayId)
 
         // We have to use rawX and rawY for the coordinates since the view receiving the event is
         // also the view that is moving. We need coordinates relative to something that isn't
@@ -433,7 +451,12 @@ class DisplayTopologyPreferenceController(
         val drag = blockDrag ?: return false
         val topology = topologyInfo ?: return false
         paneContent.requestDisallowInterceptTouchEvent(false)
-        drag.display.setHighlighted(false)
+        if (!injector.flags.showTabbedConnectedDisplaySetting()) {
+            // Highlight must be removed after drag finished in non-tabbed setting
+            selectDisplay(-1)
+        }
+        // DisplayBlock has been highlighted on touch down, touch up should only notify the listener
+        onDisplayBlockSelectedListener?.onSelected(drag.displayId)
 
         val dropTopLeft = drag.display.positionInPane
         val netPxDragged =
@@ -471,6 +494,20 @@ class DisplayTopologyPreferenceController(
     private fun showStackedMirroringDisplay() =
         isDisplayInMiroringMode(context) &&
             injector.flags.showStackedMirroringDisplayConnectedDisplaySetting()
+
+    private fun displayBlocks(): ArrayDeque<DisplayBlock> {
+        val blocks = ArrayDeque<DisplayBlock>()
+        if (this::paneContent.isInitialized) {
+            for (i in 0..paneContent.childCount - 1) {
+                // Recycle existing views
+                val view = paneContent.getChildAt(i)
+                if (view is DisplayBlock) {
+                    blocks.add(view)
+                }
+            }
+        }
+        return blocks
+    }
 
     private fun sameDisplayPosition(a: RectF, b: RectF): Boolean {
         // Comparing in display coordinates, so a 1 pixel difference will be less than one dp in
