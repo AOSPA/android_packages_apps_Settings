@@ -27,6 +27,7 @@ import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import java.lang.String
 
 /** Controls the accessibility screen magnification illustration preference. */
+// LINT.IfChange
 class MagnificationIllustrationPreferenceController(context: Context, prefKey: kotlin.String) :
     IllustrationPreferenceController(context, prefKey) {
 
@@ -59,3 +60,4 @@ class MagnificationIllustrationPreferenceController(context: Context, prefKey: k
         illustrationPref?.applyDynamicColor()
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/MagnificationIllustrationPreference.kt)

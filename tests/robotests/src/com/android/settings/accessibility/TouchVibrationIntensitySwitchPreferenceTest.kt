@@ -27,7 +27,7 @@ import org.mockito.kotlin.stub
 // LINT.IfChange
 class TouchVibrationIntensitySwitchPreferenceTest : VibrationIntensitySwitchPreferenceTestCase() {
     override val hasRingerModeDependency = false
-    override val preference = TouchVibrationIntensitySwitchPreference(context)
+    override val preference = TouchVibrationIntensitySwitchPreference(context, "key", "main_key")
 
     @Test
     fun state_valueTrueAndHapticFeedbackEnabledFalse_enabledAndUnchecked() {

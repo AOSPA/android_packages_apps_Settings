@@ -96,6 +96,30 @@ public class ActionDisabledByAdminDialogTest {
     }
 
     @Test
+    public void testGetEnforcingAdmin() {
+        final int userId = 123;
+        final String restriction = "someRestriction";
+        final EnforcingAdmin expectedAdmin =
+                new EnforcingAdmin("test.pkg", new UnknownAuthority(), UserHandle.of(userId));
+        when(mDevicePolicyManager.getEnforcingAdmin(userId, restriction)).thenReturn(expectedAdmin);
+
+        final Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
+
+        assertEquals(expectedAdmin, mDialog.getEnforcingAdmin(intent, restriction));
+    }
+
+    @Test
+    public void testGetEnforcingAdmin_fromNullRestriction_isNull() {
+        assertEquals(null, mDialog.getEnforcingAdmin(new Intent(), /* restriction= */ null));
+    }
+
+    @Test
+    public void testGetEnforcingAdmin_fromNullIntent_isNull() {
+        assertEquals(null, mDialog.getEnforcingAdmin(/* intent= */ null, /* restriction= */ ""));
+    }
+
+    @Test
     public void testGetRestrictionFromIntent() {
         final String restriction = "someRestriction";
         final Intent intent = new Intent();

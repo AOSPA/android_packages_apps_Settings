@@ -60,22 +60,51 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +VibrationMainSwitchPreference()
+            +VibrationMainSwitchPreference(MAIN_SWITCH_KEY)
             // The preferences below are migrated behind a different flag from the screen migration.
             // They should only be declared in this screen hierarchy if their migration is enabled.
             if (Flags.catalystVibrationIntensityScreen25q4()) {
-                +CallVibrationPreferenceCategory() += {
-                    +RingVibrationIntensitySwitchPreference(context)
-                    +RampingRingerVibrationSwitchPreference(context)
+                +CallVibrationPreferenceCategory("toggle_vibration_category_call") += {
+                    +RingVibrationIntensitySwitchPreference(
+                        context,
+                        "toggle_ring_vibration_intensity",
+                        MAIN_SWITCH_KEY,
+                    )
+                    +RampingRingerVibrationSwitchPreference(
+                        context,
+                        key = "toggle_apply_ramping_ringer",
+                        ringPreferenceKey = "toggle_ring_vibration_intensity",
+                    )
                 }
-                +NotificationAlarmVibrationPreferenceCategory() += {
-                    +NotificationVibrationIntensitySwitchPreference(context)
-                    +AlarmVibrationIntensitySwitchPreference(context)
-                }
-                +InteractiveHapticsPreferenceCategory() += {
-                    +TouchVibrationIntensitySwitchPreference(context)
-                    +MediaVibrationIntensitySwitchPreference(context)
-                    +KeyboardVibrationSwitchPreference()
+                +NotificationAlarmVibrationPreferenceCategory(
+                    "toggle_vibration_category_notification_alarm") += {
+                        +NotificationVibrationIntensitySwitchPreference(
+                            context,
+                            "toggle_notification_vibration_intensity",
+                            MAIN_SWITCH_KEY,
+                        )
+                        +AlarmVibrationIntensitySwitchPreference(
+                            context,
+                            "toggle_alarm_vibration_intensity",
+                            MAIN_SWITCH_KEY,
+                        )
+                    }
+                +InteractiveHapticsPreferenceCategory("toggle_vibration_category_haptics") += {
+                    +TouchVibrationIntensitySwitchPreference(
+                        context,
+                        "toggle_haptic_feedback_intensity",
+                        MAIN_SWITCH_KEY,
+                    )
+                    +MediaVibrationIntensitySwitchPreference(
+                        context,
+                        "toggle_media_vibration_intensity",
+                        MAIN_SWITCH_KEY,
+                    )
+                    +KeyboardVibrationSwitchPreference(
+                        context,
+                        "toggle_keyboard_vibration_enabled",
+                        MAIN_SWITCH_KEY,
+                    )
                 }
             }
         }
@@ -85,29 +114,27 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
 
     companion object {
         const val KEY = "vibration_screen"
+        const val MAIN_SWITCH_KEY = "toggle_vibrate_on"
     }
 }
 
 /** Call vibration preferences (e.g. ringtone, ramping ringer, etc). */
-class CallVibrationPreferenceCategory :
-    PreferenceCategory(
-        "vibration_category_call",
-        R.string.accessibility_call_vibration_category_title,
-    )
+class CallVibrationPreferenceCategory(
+    key: String = "vibration_category_call",
+    title: Int = R.string.accessibility_call_vibration_category_title,
+) : PreferenceCategory(key, title)
 
 /** Notification and alarm vibration preferences. */
-class NotificationAlarmVibrationPreferenceCategory :
-    PreferenceCategory(
-        "vibration_category_notification_alarm",
-        R.string.accessibility_notification_alarm_vibration_category_title,
-    )
+class NotificationAlarmVibrationPreferenceCategory(
+    key: String = "vibration_category_notification_alarm",
+    title: Int = R.string.accessibility_notification_alarm_vibration_category_title,
+) : PreferenceCategory(key, title)
 
 /** Interactive haptics preferences (e.g. touch feedback, media, keyboard, etc). */
-class InteractiveHapticsPreferenceCategory :
-    PreferenceCategory(
-        "vibration_category_haptics",
-        R.string.accessibility_interactive_haptics_category_title,
-    )
+class InteractiveHapticsPreferenceCategory(
+    key: String = "vibration_category_haptics",
+    title: Int = R.string.accessibility_interactive_haptics_category_title,
+) : PreferenceCategory(key, title)
 
 /** Returns true if the device has a system vibrator, false otherwise. */
 val Context.hasVibrator: Boolean

@@ -61,7 +61,10 @@ open class MagnificationScreen : PreferenceScreenMixin {
         makeLaunchIntent(context, MagnificationActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            +MagnificationTopIntroPreference()
+            +MagnificationIllustrationPreference()
+        }
 
     companion object {
         const val KEY = "magnification_preference_screen"

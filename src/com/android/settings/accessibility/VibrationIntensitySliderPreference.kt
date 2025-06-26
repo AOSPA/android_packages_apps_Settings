@@ -18,6 +18,7 @@ package com.android.settings.accessibility
 import android.content.Context
 import android.os.VibrationAttributes.Usage
 import android.os.Vibrator
+import android.provider.Settings.System.VIBRATE_ON
 import androidx.annotation.CallSuper
 import androidx.annotation.StringRes
 import androidx.preference.Preference
@@ -55,7 +56,14 @@ open class VibrationIntensitySliderPreference(
     SliderPreferenceBinding,
     OnPreferenceChangeListener {
 
-    private val storage by lazy { VibrationIntensitySettingsStore(context, vibrationUsage) }
+    private val storage by lazy {
+        VibrationIntensitySettingsStore(
+            context,
+            preferenceKey = key,
+            settingsProviderKey = key,
+            vibrationUsage,
+        )
+    }
 
     override fun getMinValue(context: Context) = Vibrator.VIBRATION_INTENSITY_OFF
 
@@ -66,7 +74,7 @@ open class VibrationIntensitySliderPreference(
 
     override fun storage(context: Context): KeyValueStore = storage
 
-    override fun dependencies(context: Context) = storage.dependencies()
+    override fun dependencies(context: Context) = arrayOf(VIBRATE_ON)
 
     override fun getSummary(context: Context) = storage.getSummary()
 

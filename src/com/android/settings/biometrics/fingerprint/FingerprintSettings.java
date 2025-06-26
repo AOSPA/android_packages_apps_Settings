@@ -246,6 +246,12 @@ public class FingerprintSettings extends SubSettings {
                                 context,
                                 KEY_SCREEN_OFF_FINGERPRINT_UNLOCK
                         ));
+            } else if (getExtPreferenceProvider(context).getSize() > 0) {
+                controllers.add(
+                        new FingerprintUnlockCategoryController(
+                                context,
+                                KEY_FINGERPRINT_UNLOCK_CATEGORY
+                        ));
             }
             controllers.add(new FingerprintsEnrolledCategoryPreferenceController(context,
                     KEY_FINGERPRINTS_ENROLLED_CATEGORY));
@@ -475,7 +481,8 @@ public class FingerprintSettings extends SubSettings {
          * Add new preferences from FingerprintExtPreferencesProvider
          */
         public void setupExtFingerprintPreferences() {
-            FingerprintExtPreferencesProvider preferencesProvider = getExtPreferenceProvider();
+            FingerprintExtPreferencesProvider preferencesProvider = getExtPreferenceProvider(
+                    requireContext());
             for (int index = 0; index < preferencesProvider.getSize(); ++index) {
                 final RestrictedPreference preference = preferencesProvider.newPreference(
                         index, this::inflateFromResource);
@@ -510,9 +517,10 @@ public class FingerprintSettings extends SubSettings {
         }
 
         @NonNull
-        private FingerprintExtPreferencesProvider getExtPreferenceProvider() {
+        public static FingerprintExtPreferencesProvider getExtPreferenceProvider(
+                @NonNull Context context) {
             return FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
-                    .getExtPreferenceProvider(requireContext());
+                    .getExtPreferenceProvider(context);
         }
 
         /**
@@ -789,7 +797,7 @@ public class FingerprintSettings extends SubSettings {
             // |mRequireScreenOnToAuthPreferenceController.isChecked| is always checking the primary
             // user instead of the user with |mUserId|.
             if (isSfps() || (screenOffUnlockUdfps() && isScreenOffUnlcokSupported())
-                    || getExtPreferenceProvider().getSize() > 0) {
+                    || getExtPreferenceProvider(requireContext()).getSize() > 0) {
                 addFingerprintUnlockCategory();
             }
             final int descriptionRes = FeatureFactory.getFeatureFactory()
@@ -884,8 +892,10 @@ public class FingerprintSettings extends SubSettings {
 
         private void addFingerprintUnlockCategory() {
             mFingerprintUnlockCategory = findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
-            mFingerprintUnlockCategoryPreferenceController.setCategoryHasChildrenSupplier(
-                    this::fingerprintUnlockCategoryHasChild);
+            if (mFingerprintUnlockCategoryPreferenceController != null) {
+                mFingerprintUnlockCategoryPreferenceController.setCategoryHasChildrenSupplier(
+                        this::fingerprintUnlockCategoryHasChild);
+            }
             if (isSfps()) {
                 // For both SFPS "screen on to auth" and "rest to unlock"
                 final Preference restToUnlockPreference = FeatureFactory.getFeatureFactory()
@@ -1309,7 +1319,8 @@ public class FingerprintSettings extends SubSettings {
             }
 
             if (mFingerprintUnlockCategoryPreferenceController == null
-                    && getExtPreferenceProvider().getSize() > 0 && controllers != null) {
+                    && getExtPreferenceProvider(requireContext()).getSize() > 0
+                    && controllers != null) {
                 for (AbstractPreferenceController controller : controllers) {
                     if (KEY_FINGERPRINT_UNLOCK_CATEGORY.equals(controller.getPreferenceKey())) {
                         mFingerprintUnlockCategoryPreferenceController =

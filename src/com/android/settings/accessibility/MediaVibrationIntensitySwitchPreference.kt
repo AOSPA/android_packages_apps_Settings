@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2025 The Android Open Source Project
  *
@@ -18,27 +17,30 @@ package com.android.settings.accessibility
 
 import android.content.Context
 import android.os.VibrationAttributes
-import android.provider.Settings
+import android.provider.Settings.System.MEDIA_VIBRATION_INTENSITY
 import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 
 /** Accessibility settings for media vibration, as a switch toggle. */
 // LINT.IfChange
-class MediaVibrationIntensitySwitchPreference(context: Context) :
+class MediaVibrationIntensitySwitchPreference(
+    context: Context,
+    key: String,
+    mainSwitchPreferenceKey: String,
+) :
     VibrationIntensitySwitchPreference(
         context = context,
-        key = KEY,
+        key = key,
+        settingsProviderKey = MEDIA_VIBRATION_INTENSITY,
+        mainSwitchPreferenceKey = mainSwitchPreferenceKey,
         vibrationUsage = VibrationAttributes.USAGE_MEDIA,
         title = R.string.accessibility_media_vibration_title,
-    ), PreferenceAvailabilityProvider {
+    ),
+    PreferenceAvailabilityProvider {
     override val keywords: Int
         get() = R.string.keywords_media_vibration
 
     override fun isAvailable(context: Context) = context.isMediaVibrationPreferenceSupported()
-
-    companion object {
-        const val KEY = Settings.System.MEDIA_VIBRATION_INTENSITY
-    }
 }
 
 /** Returns true is media vibration preference is supported by this device. */

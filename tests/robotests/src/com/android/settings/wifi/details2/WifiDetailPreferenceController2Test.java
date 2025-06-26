@@ -65,6 +65,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
@@ -1385,7 +1386,75 @@ public class WifiDetailPreferenceController2Test {
         verify(mMockWifiEntry, never()).forget(mController);
         verify(mMockMetricsFeatureProvider, never())
                 .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
-        verify(mController).showConfirmForgetDialog();
+        verify(mController).showConfirmForgetDialog(
+                R.string.wifi_forget_dialog_title, R.string.forget_passpoint_dialog_message);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void forgetNetwork_isShared_shouldShowDialog() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        when(mMockWifiEntry.isSharedWithOtherUsers()).thenReturn(true);
+        when(mMockUserManager.getUserCount()).thenReturn(3);
+        displayAndResume();
+
+        mForgetClickListener.getValue().onClick(null);
+
+        verify(mMockWifiEntry, never()).forget(mController);
+        verify(mMockMetricsFeatureProvider, never())
+                .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
+        verify(mController).showConfirmForgetDialog(
+                R.string.shared_wifi_forget_dialog_title,
+                R.string.shared_wifi_forget_dialog_message);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void forgetNetwork_singleUser_shouldNotShowDialog() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        when(mMockWifiEntry.isSharedWithOtherUsers()).thenReturn(true);
+        when(mMockUserManager.getUserCount()).thenReturn(1);
+        displayAndResume();
+
+        mForgetClickListener.getValue().onClick(null);
+
+        verify(mMockWifiEntry).forget(mController);
+        verify(mMockMetricsFeatureProvider)
+                .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void forgetNetwork_isNotShared_shouldNotShowDialog() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        when(mMockWifiEntry.isSharedWithOtherUsers()).thenReturn(false);
+        when(mMockUserManager.getUserCount()).thenReturn(3);
+        displayAndResume();
+
+        mForgetClickListener.getValue().onClick(null);
+
+        verify(mMockWifiEntry).forget(mController);
+        verify(mMockMetricsFeatureProvider)
+                .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void forgetNetwork_featureDisabled_shouldNotShowDialog() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        when(mMockWifiEntry.isSharedWithOtherUsers()).thenReturn(true);
+        when(mMockUserManager.getUserCount()).thenReturn(3);
+        displayAndResume();
+
+        mForgetClickListener.getValue().onClick(null);
+
+        verify(mMockWifiEntry).forget(mController);
+        verify(mMockMetricsFeatureProvider)
+                .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
     }
 
     @Test

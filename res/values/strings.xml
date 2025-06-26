@@ -2724,6 +2724,10 @@
     <string name="wifi_cancel">Cancel</string>
     <!-- Dialog title for forget confirmation dialog -->
     <string name="wifi_forget_dialog_title">Forget network?</string>
+    <!-- Dialog title for forget confirmation dialog on shared wifi network -->
+    <string name="shared_wifi_forget_dialog_title">Forget all device users?</string>
+    <!-- Dialog summary for forget confirmation dialog on shared wifi network -->
+    <string name="shared_wifi_forget_dialog_message"><xliff:g id="network_name">%1$s</xliff:g> is used by other users on this device, and all users of this network will need to set it up again. Still want to forget?</string>
 
     <!-- Wi-Fi Advanced Settings --> <skip />
     <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of networks, not including passpoint network, a user has saved. [CHAR LIMIT=30] -->

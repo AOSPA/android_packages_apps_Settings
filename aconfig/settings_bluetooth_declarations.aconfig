@@ -83,3 +83,10 @@ flag {
   description: "Enable expressive bluetooth battery header."
   bug: "399532172"
 }
+
+flag {
+  name: "hide_phonebook_access_toggle_for_wearable_devices_when_pairing"
+  namespace: "cross_device_experiences"
+  description: "Hide phonebook access permission toggle for wearables when pairing."
+  bug: "425848384"
+}
