@@ -95,7 +95,7 @@ public class MouseKeysMainPageFragment extends ShortcutFragment
         configureImagesPreference();
     }
 
-    @NonNull
+    @Nullable
     @Override
     public ToggleShortcutPreferenceController getShortcutPreferenceController() {
         return use(KeyboardAccessibilityMouseKeysShortcutController.class);

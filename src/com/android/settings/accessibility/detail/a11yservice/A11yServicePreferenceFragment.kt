@@ -122,7 +122,7 @@ open class A11yServicePreferenceFragment : ShortcutFragment() {
         }
 
         val useServicePrefKey = use(UseServiceTogglePreferenceController::class.java)?.preferenceKey
-        val shortcutPrefKey = getShortcutPreferenceController().preferenceKey
+        val shortcutPrefKey = getShortcutPreferenceController()?.preferenceKey
         if (preference.key == shortcutPrefKey) {
             if (localServiceInfo.isServiceWarningRequired(requireContext())) {
                 showServiceWarning(ENABLE_WARNING_FROM_SHORTCUT)
@@ -281,7 +281,7 @@ open class A11yServicePreferenceFragment : ShortcutFragment() {
         )
     }
 
-    override fun getShortcutPreferenceController(): ToggleShortcutPreferenceController {
+    override fun getShortcutPreferenceController(): ToggleShortcutPreferenceController? {
         return use(ShortcutPreferenceController::class.java)
     }
 
@@ -306,9 +306,9 @@ open class A11yServicePreferenceFragment : ShortcutFragment() {
     }
 
     private fun turnOnShortcuts() {
-        val prefController = getShortcutPreferenceController()
+        val prefController = getShortcutPreferenceController() ?: return
         findShortcutPreference()?.run {
-            getShortcutPreferenceController().setChecked(this, checked = true)
+            prefController.setChecked(this, checked = true)
             showShortcutsTutorial(
                 prefController.getUserPreferredShortcutTypes(getFeatureComponentName())
             )
@@ -316,8 +316,9 @@ open class A11yServicePreferenceFragment : ShortcutFragment() {
     }
 
     private fun turnOffShortcuts() {
+        val prefController = getShortcutPreferenceController() ?: return
         findShortcutPreference()?.run {
-            getShortcutPreferenceController().setChecked(this, checked = false)
+            prefController.setChecked(this, checked = false)
         }
     }
 
@@ -334,7 +335,9 @@ open class A11yServicePreferenceFragment : ShortcutFragment() {
     }
 
     private fun findShortcutPreference(): ShortcutPreference? {
-        return findPreference(getShortcutPreferenceController().preferenceKey)
+        return getShortcutPreferenceController()?.let { it ->
+            findPreference(it.preferenceKey)
+        }
     }
 
     private fun findUseServicePreference(): TwoStatePreference? {

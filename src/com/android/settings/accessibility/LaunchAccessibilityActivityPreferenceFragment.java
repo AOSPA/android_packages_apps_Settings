@@ -77,7 +77,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragm
                 accessibilityShortcutInfo);
     }
 
-    @NonNull
+    @Nullable
     @Override
     public ToggleShortcutPreferenceController getShortcutPreferenceController() {
         return use(ShortcutPreferenceController.class);
