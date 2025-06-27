@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+ * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony
 
 import android.content.Context
@@ -245,7 +251,7 @@ fun Context.subscriptionsChangedFlow(): Flow<Unit> =
     SubscriptionRepository(this).subscriptionsChangedFlow()
 
 /** Subscription with invalid sim slot index has lowest sort order. */
-private val SubscriptionInfo.sortableSimSlotIndex: Int
+val SubscriptionInfo.sortableSimSlotIndex: Int
     get() = if (simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
         simSlotIndex
     } else {
