@@ -17,6 +17,10 @@ package com.android.settings.accessibility
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.provider.Settings.System.APPLY_RAMPING_RINGER
+import android.provider.Settings.System.KEYBOARD_VIBRATION_ENABLED
+import android.provider.Settings.System.RING_VIBRATION_INTENSITY
+import android.provider.Settings.System.VIBRATE_ON
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.VibrationIntensitySettingsActivity
@@ -62,13 +66,17 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +VibrationMainSwitchPreference()
+            +VibrationMainSwitchPreference(VIBRATE_ON)
             // The preferences below are migrated behind a different flag from the screen migration.
             // They should only be declared in this screen hierarchy if their migration is enabled.
             if (Flags.catalystVibrationIntensityScreen25q4()) {
                 +CallVibrationPreferenceCategory() += {
                     +RingVibrationIntensitySliderPreference(context)
-                    +RampingRingerVibrationSwitchPreference(context)
+                    +RampingRingerVibrationSwitchPreference(
+                        context,
+                        key = APPLY_RAMPING_RINGER,
+                        ringPreferenceKey = RING_VIBRATION_INTENSITY,
+                    )
                 }
                 +NotificationAlarmVibrationPreferenceCategory() += {
                     +NotificationVibrationIntensitySliderPreference(context)
@@ -77,7 +85,7 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
                 +InteractiveHapticsPreferenceCategory() += {
                     +TouchVibrationIntensitySliderPreference(context)
                     +MediaVibrationIntensitySliderPreference(context)
-                    +KeyboardVibrationSwitchPreference()
+                    +KeyboardVibrationSwitchPreference(context, KEYBOARD_VIBRATION_ENABLED)
                 }
             }
         }

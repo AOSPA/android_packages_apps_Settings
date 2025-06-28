@@ -58,6 +58,7 @@ import android.os.CancellationSignal;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.os.Vibrator;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
@@ -432,7 +433,18 @@ public class FingerprintSettingsFragmentTest {
     }
 
     @Test
-    public void testHasExtPreferences() {
+    @EnableFlags(android.hardware.biometrics.Flags.FLAG_SCREEN_OFF_UNLOCK_UDFPS)
+    public void testHasExtPreferencesEnableScreenOffUnlockUdfpsFlag() {
+        testHasExtPreferences();
+    }
+
+    @Test
+    @DisableFlags(android.hardware.biometrics.Flags.FLAG_SCREEN_OFF_UNLOCK_UDFPS)
+    public void testHasExtPreferencesDisableScreenOffUnlockUdfpsFlag() {
+        testHasExtPreferences();
+    }
+
+    private void testHasExtPreferences() {
         String key0 = "ExtKey0";
         String key1 = "ExtKey1";
         when(mRestrictedPreference0.getKey()).thenReturn(key0);
@@ -459,7 +471,18 @@ public class FingerprintSettingsFragmentTest {
     }
 
     @Test
-    public void testPrimarySwitchIntentPreferenceNullResultKey() {
+    @EnableFlags(android.hardware.biometrics.Flags.FLAG_SCREEN_OFF_UNLOCK_UDFPS)
+    public void testPrimarySwitchIntentPreferenceNullResultKey_enableScreenOffUnlockUdfpsFlag() {
+        testPrimarySwitchIntentPreferenceNullResultKey();
+    }
+
+    @Test
+    @DisableFlags(android.hardware.biometrics.Flags.FLAG_SCREEN_OFF_UNLOCK_UDFPS)
+    public void testPrimarySwitchIntentPreferenceNullResultKey_disableScreenOffUnlockUdfpsFlag() {
+        testPrimarySwitchIntentPreferenceNullResultKey();
+    }
+
+    private void testPrimarySwitchIntentPreferenceNullResultKey() {
         PrimarySwitchIntentPreference spiedPrimarySwitchIntentPref = spy(
                 new PrimarySwitchIntentPreference(mContext) {
                     @Override
@@ -493,7 +516,18 @@ public class FingerprintSettingsFragmentTest {
     }
 
     @Test
-    public void testPrimarySwitchIntentPreferenceEmptyResultKey() {
+    @EnableFlags(android.hardware.biometrics.Flags.FLAG_SCREEN_OFF_UNLOCK_UDFPS)
+    public void testPrimarySwitchIntentPreferenceEmptyResultKey_enableScreenOffUnlockUdfpsFlag() {
+        testPrimarySwitchIntentPreferenceEmptyResultKey();
+    }
+
+    @Test
+    @DisableFlags(android.hardware.biometrics.Flags.FLAG_SCREEN_OFF_UNLOCK_UDFPS)
+    public void testPrimarySwitchIntentPreferenceEmptyResultKey_disableScreenOffUnlockUdfpsFlag() {
+        testPrimarySwitchIntentPreferenceEmptyResultKey();
+    }
+
+    private void testPrimarySwitchIntentPreferenceEmptyResultKey() {
         PrimarySwitchIntentPreference spiedPrimarySwitchIntentPref = spy(
                 new PrimarySwitchIntentPreference(mContext) {
                     @Override

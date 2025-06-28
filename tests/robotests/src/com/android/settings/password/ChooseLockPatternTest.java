@@ -29,7 +29,6 @@ import static org.robolectric.RuntimeEnvironment.application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.View;
 
@@ -39,11 +38,10 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settingslib.widget.theme.flags.Flags;
 
+import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupdesign.GlifLayout;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -81,10 +79,12 @@ public class ChooseLockPatternTest {
                 .isEqualTo(123);
     }
 
-    @Ignore("b/424067449")
     @Test
-    @EnableFlags(Flags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
     public void intentBuilder_setPattern_shouldAddExtras_withExpressiveDesign() {
+        Bundle fakeBundle = new Bundle();
+        fakeBundle.putBoolean(PartnerConfigHelper.IS_GLIF_EXPRESSIVE_ENABLED, true);
+        PartnerConfigHelper.applyGlifExpressiveBundle = fakeBundle;
+
         Intent intent = new IntentBuilder(application)
                 .setPattern(createPattern("1234"))
                 .setUserId(123)

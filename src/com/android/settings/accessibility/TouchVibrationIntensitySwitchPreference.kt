@@ -17,23 +17,25 @@ package com.android.settings.accessibility
 
 import android.content.Context
 import android.os.VibrationAttributes
-import android.provider.Settings
+import android.provider.Settings.System.HAPTIC_FEEDBACK_INTENSITY
 import com.android.settings.R
 
 /** Accessibility settings for touch haptic feedback, as a switch toggle */
 // LINT.IfChange
-class TouchVibrationIntensitySwitchPreference(context: Context) :
+class TouchVibrationIntensitySwitchPreference(
+    context: Context,
+    key: String,
+    mainSwitchPreferenceKey: String,
+) :
     VibrationIntensitySwitchPreference(
         context = context,
-        key = KEY,
+        key = key,
+        settingsProviderKey = HAPTIC_FEEDBACK_INTENSITY,
+        mainSwitchPreferenceKey = mainSwitchPreferenceKey,
         vibrationUsage = VibrationAttributes.USAGE_TOUCH,
         title = R.string.accessibility_touch_vibration_title,
     ) {
     override val keywords: Int
         get() = R.string.keywords_touch_vibration
-
-    companion object {
-        const val KEY = Settings.System.HAPTIC_FEEDBACK_INTENSITY
-    }
 }
 // LINT.ThenChange(HapticFeedbackTogglePreferenceController.java)

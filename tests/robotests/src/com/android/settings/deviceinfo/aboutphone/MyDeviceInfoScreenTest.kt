@@ -16,11 +16,11 @@
 
 package com.android.settings.deviceinfo.aboutphone
 
-import android.content.Context
 import android.content.pm.UserInfo
 import android.os.Build
 import android.provider.Settings.Global
-import androidx.test.core.app.ApplicationProvider
+import androidx.preference.Preference
+import com.android.settings.deviceinfo.simstatus.SimEidInfoPreference
 import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.ShadowUserManager
 import com.android.settings.testutils2.SettingsCatalystTestCase
@@ -31,28 +31,31 @@ import org.robolectric.annotation.Config
 
 @Config(shadows = [ShadowUserManager::class])
 class MyDeviceInfoScreenTest : SettingsCatalystTestCase() {
-    private val context: Context = ApplicationProvider.getApplicationContext()
-
     override val preferenceScreenCreator = MyDeviceInfoScreen()
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_MY_DEVICE_INFO_PREF_SCREEN
 
+    override fun getPreferenceClass(preference: Preference) =
+        when (preference) {
+            is SimEidInfoPreference -> Preference::class.java // Preference is used after migration
+            else -> super.getPreferenceClass(preference)
+        }
+
     @Test
     override fun migration() {
         ShadowUserManager.getShadow().addAliveUser(mock<UserInfo>())
-        // TODO: fix this migration test with the async preference loading
-        //super.migration()
+        super.migration()
     }
 
     @Test
     fun getSummary_deviceNameNotSet_shouldReturnDeviceModel() {
-        assertThat(preferenceScreenCreator.getSummary(context)?.toString()).isEqualTo(Build.MODEL)
+        assertThat(preferenceScreenCreator.getSummary(appContext)).isEqualTo(Build.MODEL)
     }
 
     @Test
     fun getSummary_deviceNameSet_shouldReturnDeviceName() {
-        Global.putString(context.contentResolver, Global.DEVICE_NAME, "Test")
-        assertThat(preferenceScreenCreator.getSummary(context)?.toString()).isEqualTo("Test")
+        Global.putString(appContext.contentResolver, Global.DEVICE_NAME, "Test")
+        assertThat(preferenceScreenCreator.getSummary(appContext)).isEqualTo("Test")
     }
 }

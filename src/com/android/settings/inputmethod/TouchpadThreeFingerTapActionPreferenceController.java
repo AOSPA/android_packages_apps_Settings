@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import static com.android.settings.flags.Flags.touchpadSettingsDesignUpdate;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -29,6 +30,7 @@ import android.hardware.input.InputManager;
 import android.hardware.input.InputSettings;
 import android.hardware.input.KeyGestureEvent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
@@ -45,6 +47,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 /**
@@ -56,8 +59,11 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 public class TouchpadThreeFingerTapActionPreferenceController extends BasePreferenceController
         implements LifecycleEventObserver, SelectorWithWidgetPreference.OnClickListener {
 
+    public static final String SET_GESTURE = "set_gesture_to_launch_app";
+
     private static final String TAG = "ThreeFingerTapAction";
     private static final String ASSISTANT_KEY = "launch_gemini";
+    private static final String APP_KEY = "launch_app";
 
     private final InputManager mInputManager;
     private final ContentResolver mContentResolver;
@@ -100,6 +106,10 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
     @Override
     public int getAvailabilityStatus() {
         boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
+        if (mPreferenceKey.equals(APP_KEY)
+                && !InputSettings.isTouchpadThreeFingerTapShortcutFeatureFlagEnabled()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         return (InputSettings.isTouchpadThreeFingerTapShortcutFeatureFlagEnabled() && isTouchpad)
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
@@ -110,11 +120,29 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
         mPreference = screen.findPreference(mPreferenceKey);
 
         if (mPreference != null) {
-            mPreference.setOnClickListener(this);
+            if (mPreferenceKey.equals(APP_KEY)) {
+                mPreference.setOnClickListener(
+                        v -> appSelectionLauncher(/* isSetGesture = */ true).launch());
+            } else {
+                mPreference.setOnClickListener(this);
+            }
             if (touchpadSettingsDesignUpdate() && mPreferenceKey.equals(ASSISTANT_KEY)) {
                 updateDefaultAssistant(mPreference);
             }
         }
+    }
+
+    private SubSettingLauncher appSelectionLauncher(boolean isSetGesture) {
+        SubSettingLauncher subSettingLauncher =
+                new SubSettingLauncher(mContext)
+                        .setDestination(TouchpadThreeFingerTapAppSelectionFragment.class.getName())
+                        .setSourceMetricsCategory(SettingsEnums.TOUCHPAD_THREE_FINGER_TAP);
+        if (isSetGesture) {
+            Bundle args = new Bundle();
+            args.putBoolean(SET_GESTURE, true);
+            subSettingLauncher.setArguments(args);
+        }
+        return subSettingLauncher;
     }
 
     private void updateDefaultAssistant(@NonNull Preference preference) {
@@ -176,6 +204,9 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
     private void setGesture(int customGestureType) {
         mInputManager.removeAllCustomInputGestures(InputGestureData.Filter.TOUCHPAD);
         if (customGestureType != KeyGestureEvent.KEY_GESTURE_TYPE_UNSPECIFIED) {
+            if (customGestureType == KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_APPLICATION) {
+                return;
+            }
             InputGestureData gestureData = new InputGestureData.Builder()
                     .setTrigger(TouchpadThreeFingerTapUtils.TRIGGER)
                     .setKeyGestureType(customGestureType)

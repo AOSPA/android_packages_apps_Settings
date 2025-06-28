@@ -19,6 +19,8 @@ package com.android.settings.inputmethod;
 import static android.hardware.input.AppLaunchData.createLaunchDataForComponent;
 import static android.hardware.input.InputManager.CUSTOM_INPUT_GESTURE_RESULT_SUCCESS;
 
+import static com.android.settings.inputmethod.TouchpadThreeFingerTapActionPreferenceController.SET_GESTURE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertTrue;
@@ -43,6 +45,7 @@ import android.hardware.input.AppLaunchData.ComponentData;
 import android.hardware.input.InputGestureData;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyGestureEvent;
+import android.os.Bundle;
 import android.os.UserHandle;
 
 import androidx.preference.PreferenceScreen;
@@ -208,6 +211,7 @@ public class TouchpadThreeFingerTapAppListControllerTest {
     @Test
     public void onRadioButtonClick_gestureAndTargetAppUpdated() {
         ArgumentCaptor<SelectorWithWidgetPreference> captor = capturePrefs();
+        setDisplayPreferenceExtra(/* shouldSetGesture = */ true);
 
         int clickingIndex = 0;
         mController.onRadioButtonClicked(captor.getAllValues().get(clickingIndex));
@@ -227,6 +231,12 @@ public class TouchpadThreeFingerTapAppListControllerTest {
         List<SelectorWithWidgetPreference> prefs = captor.getAllValues();
         assertThat(prefs.get(0).isChecked()).isTrue();
         assertThat(prefs.get(1).isChecked()).isFalse();
+    }
+
+    private void setDisplayPreferenceExtra(boolean shouldSetGesture) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(SET_GESTURE, shouldSetGesture);
+        when(mMockPreferenceScreen.getExtras()).thenReturn(bundle);
     }
 
     @Test

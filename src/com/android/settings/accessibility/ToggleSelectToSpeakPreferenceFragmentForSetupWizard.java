@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,7 +40,7 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
         extends A11yServicePreferenceFragment {
 
     private boolean mToggleSwitchWasInitiallyChecked;
-    private String mMainActionPrefKey;
+    @Nullable private String mMainActionPrefKey;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -61,9 +62,15 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
                     });
         }
 
-        mMainActionPrefKey = getShortcutPreferenceController().getPreferenceKey();
-        ShortcutPreference preference = findPreference(mMainActionPrefKey);
-        mToggleSwitchWasInitiallyChecked = preference.isChecked();
+        ToggleShortcutPreferenceController prefController = getShortcutPreferenceController();
+        if (prefController != null) {
+            mMainActionPrefKey = prefController.getPreferenceKey();
+            ShortcutPreference preference = findPreference(mMainActionPrefKey);
+            mToggleSwitchWasInitiallyChecked = preference.isChecked();
+        } else {
+            mMainActionPrefKey = null;
+            mToggleSwitchWasInitiallyChecked = false;
+        }
     }
 
     @Override
@@ -99,6 +106,11 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
     @Override
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
+        if (mMainActionPrefKey == null) {
+            super.onStop();
+            return;
+        }
+
         ShortcutPreference preference = findPreference(mMainActionPrefKey);
         if (preference.isChecked() != mToggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(getContext(),

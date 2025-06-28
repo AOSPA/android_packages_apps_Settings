@@ -29,7 +29,7 @@ import org.mockito.kotlin.stub
 // LINT.IfChange
 class MediaVibrationIntensitySwitchPreferenceTest : VibrationIntensitySwitchPreferenceTestCase() {
     override val hasRingerModeDependency = false
-    override val preference = MediaVibrationIntensitySwitchPreference(context)
+    override val preference = MediaVibrationIntensitySwitchPreference(context, "key", "main_key")
 
     private val resourcesSpy: Resources =
         spy(ApplicationProvider.getApplicationContext<Context>().resources)

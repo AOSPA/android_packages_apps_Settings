@@ -21,7 +21,7 @@
     android:title="@string/widgets_on_lockscreen_title">
 
     <Preference
-        android:key="when_to_start"
+        android:key="when_to_start_hubmode"
         android:title="@string/when_to_auto_show_hubmode_title"
         android:fragment="com.android.settings.communal.WhenToStartHubPicker"
         settings:controller="com.android.settings.communal.WhenToStartHubPreferenceController" />

@@ -47,10 +47,8 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"Email"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"Nakaraang preview"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"Susunod na preview"</string>
-    <!-- no translation found for font_size_make_smaller_desc (9149663537989624487) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (5774611876657293550) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="9149663537989624487">"Liitan ang font"</string>
+    <string name="font_size_make_larger_desc" msgid="5774611876657293550">"Lakihan ang font"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Palagi"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Mag-o-on ang display sa harap kapag na-fold mo ang iyong device"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Mag-swipe pataas para magpatuloy"</string>
@@ -105,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Tungkol sa audio output"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Iruta ang mga tunog sa iyong hearing device o speaker ng telepono"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Kaugnay"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="4996427014054610877">"Subukang i-share sa <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="329823028635487822">"Ang pinakamabilis na paraan para magpadala ng mga file sa mga kalapit na Android device"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"Magpadala nang mas mabilis gamit ang <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"Para sa pinakamabilis na paraan ng pag-share sa mga kalapit na Android at PC, subukan ang <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> para Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Ringtone at mga alarm"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio sa mga tawag"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Mga tunog ng media at system"</string>
@@ -994,7 +992,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"I-restart"</string>
     <string name="external_display_on" msgid="2560104443500154333">"Naka-on"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Naka-off"</string>
-    <string name="external_display_settings_title" msgid="6256884595821605779">"External na Display"</string>
+    <string name="external_display_settings_title" msgid="4690843697498496237">"External na display"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Built-in na display"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Gumamit ng external na display"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolution ng display"</string>
@@ -1005,7 +1003,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Posibleng huminto ang anumang app na kasalukuyang gumagana kapag binago ang pag-rotate o resolution"</string>
-    <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Dapat nakakonekta sa external na display ang iyong device para ma-mirror ang screen mo"</string>
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"Walang nakakonektang display\n\nMagkonekta ng external na display para makapagsimula, o subukang gumamit ng ibang cable"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Walang nakakonektang display"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Magkonekta ng external na display para makapagsimula, o subukang gumamit ng ibang cable"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Higit pang opsyon"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"I-hold at i-drag para baguhin ang ayos ng mga display."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"I-mirror ang built-in na display"</string>
@@ -2161,13 +2161,11 @@
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Dagdagan"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Reverse na pag-scroll"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Gumamit ng mga primary key"</string>
-    <!-- no translation found for mouse_keys_use_primary_keys_summary (5057949666957911577) -->
-    <skip />
+    <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"Kontrolin ang keyboard gamit ang mga titik at numero sa halip na numeric na keypad"</string>
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"I-reset ang mga setting"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"Paano gumamit ng mga primary key"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"Paano gumamit ng numeric keypad"</string>
-    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2186017679302722178) -->
-    <skip />
+    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2186017679302722178">"Palaging magagamit ang numeric na keypad kapag naka-on ang Number Lock (Num Lock)"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Mag-scroll pataas para ibaba ang page"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Pag-scroll"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Kontroladong pag-scroll"</string>
@@ -2417,8 +2415,10 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Igalaw ang screen kapag napunta ang mouse sa mga gilid ng screen"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Sundan ang pagta-type"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"Sinusundan ng magnifier ang text habang nagta-type ka"</string>
-    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"I-magnify ang focus ng keyboard"</string>
-    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"Sumusunod ang magnifier sa pag-focus ng keyboard"</string>
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
+    <skip />
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"I-magnify ang keyboard"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Mag-zoom in para sa emoji at titik"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Unavailable kapag bahagi lang ang na-magnify"</string>
@@ -2734,8 +2734,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Tungkol sa extra dim"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Gawing mas madilim ang iyong screen para gawing mas kumportableng magbasa"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensity"</string>
-    <string name="brightness_intensity_start_label" msgid="930387498396426039">"Mas Madilim"</string>
-    <string name="brightness_intensity_end_label" msgid="1422600205484299860">"Mas Maliwanag"</string>
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"Mas Madilim"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"Mas Maliwanag"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Panatilihing naka-on pagkatapos mag-restart ng device"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Maikli ({time} segundo)}one{Maikli ({time} segundo)}other{Maikli ({time} na segundo)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Katamtaman ({time} segundo)}one{Katamtaman ({time} segundo)}other{Katamtaman ({time} na segundo)}}"</string>
@@ -4509,10 +4509,8 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Gawing mas malaki o mas maliit ang lahat"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"density ng display, pag-zoom sa screen, scale, pag-scale"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Preview"</string>
-    <!-- no translation found for screen_zoom_make_smaller_desc (6268455784510593120) -->
-    <skip />
-    <!-- no translation found for screen_zoom_make_larger_desc (3458295276713085365) -->
-    <skip />
+    <string name="screen_zoom_make_smaller_desc" msgid="6268455784510593120">"Bawasan ang laki ng display"</string>
+    <string name="screen_zoom_make_larger_desc" msgid="3458295276713085365">"Dagdagan ang laki ng display"</string>
     <string name="disconnected" msgid="3469373726996129247">"Hindi nakakonekta"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Hindi nakakonekta"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> (na) app ang naka-install"</string>
@@ -5173,7 +5171,8 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Kung wala kang mobile network, may makikita kang opsyong gumamit ng satellite."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Kapag nakakonekta na ang iyong telepono sa satellite"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Sundin ang mga hakbang para kumonekta sa satellite"</string>
-    <string name="summary_supported_service" msgid="6380533552383355977">"Puwede kang mag-text kahit kanino, kasama ang mga serbisyong pang-emergency, at gumamit ng limitadong data sa ilang app. Kokonekta ulit ang iyong telepono sa mobile network kapag available."</string>
+    <!-- no translation found for summary_supported_service (5855066701346160193) -->
+    <skip />
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Puwede kang mag-text sa kahit sino, kasama ang mga serbisyong pang-emergency. Kokonekta ulit ang iyong telepono sa mobile network kapag available."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Kapag nakakonekta na ang iyong telepono, puwede kang mag-text sa kahit sino, kasama ang mga serbisyong pang-emergency."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Tandaan"</string>
@@ -5191,8 +5190,7 @@
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Koneksyon sa satellite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"koneksyon sa satellite"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellite messaging"</string>
-    <!-- no translation found for title_have_satellite_data_plan (1101741256080690699) -->
-    <skip />
+    <string name="title_have_satellite_data_plan" msgid="1101741256080690699">"Kasama ang paggamit ng mga sinusuportahang app sa iyong account"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Mga sinusuportahang app sa iyong telepono"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Tingnan ang lahat ng app na sinusuportahan ng satellite"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Mga sinusuportahang app sa iyong telepono"</string>
@@ -5303,6 +5301,20 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Kaliwa"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Kanan"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Case"</string>
+    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
+    <skip />
+    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
+    <skip />
+    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
+    <skip />
+    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
+    <skip />
+    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
+    <skip />
+    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
+    <skip />
+    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
+    <skip />
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Baterya"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel ng Mga Setting"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"I-enable ang mga freeform window"</string>
@@ -5368,7 +5380,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Mag-boot sa 16 KB na laki ng page"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Mag-boot sa 16 KB page size supported na kernel"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Lumipat sa 16 KB mode mula sa 4 KB mode"</string>
-    <string name="confirm_enable_16k_pages_update_wipe" msgid="4760548401414644138">"Kailangang i-convert sa ext4 ang partition ng data ng device na ito bago magamit ang 16 KB na opsyon ng developer. Mawa-wipe ang device at gagawing ext4 ang filesystem pagkatapos magkumpirma. Nasa production mode ka na nagpapagana ng 4 KB na kernel, at lilipat ka sa 16 KB mode. Kapag nasa mode na ito ka na, puwede kang magpalipat-lipat sa 4 KB at 16 KB mode pagkatapos ng isang pag-reboot lang. Hindi magagarantiya ang integridad ng software sa mode na ito, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para ibalik sa production mode ang device, kakailanganin mong bumalik sa 4 KB mode at i-lock ang bootloader pagkatapos nito, na magfa-factory reset sa device. Pagkatapos mag-boot ng device sa Android, i-disable ang OEM na pag-unlock sa Mga opsyon ng developer. Para magpatuloy, i-click ang \'Burahin ang lahat ng data at i-update\'. Ire-reboot nito ang device."</string>
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"Para magamit ang opsyon ng developer na 16 KB, kailangang ma-convert sa ext4 ang data partition ng device na ito. Iwa-wipe nito ang iyong device at gagawin nitong ext4 ang filesystem.&lt;br&gt;&lt;br&gt; Kapag nasa 16 KB mode ka na, puwede kang lumipat sa pagitan ng 4 KB at 16 KB mode sa pamamagitan ng pag-reboot.&lt;br&gt;&lt;br&gt; Mga bagay na dapat tandaan sa 16 KB mode:&lt;br&gt;&lt;br&gt; &amp;#8226; Hindi matitiyak ang integridad ng software&lt;br&gt; &amp;#8226; Posibleng malagay sa panganib ang data na naka-store sa telepono habang naka-unlock ang bootloader&lt;br&gt; &amp;#8226; Idi-disable ang ilang feature, na posibleng makaapekto sa ilang partikular na app&lt;br&gt;&lt;br&gt; Para bumalik sa production mode, kakailanganin mong bumalik sa 4 KB mode at i-lock ang bootloader. Ifa-factory reset nito ang iyong device. Pagkatapos mag-boot ng device sa Android, i-disable ang OEM na pag-unlock sa Mga opsyon ng developer.&lt;br&gt;&lt;br&gt; Para magpatuloy sa paglipat sa 16 KB mode, i-tap ang \"Burahin ang lahat ng data at Mag-update.\" Ire-reboot nito ang device."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Nasa page-agnostic mode ka na nagpapagana ng 4 KB na kernel, at lilipat ka sa 16 KB mode. Hindi magagarantiya ang integridad ng software sa mode na ito, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Ire-reboot nito ang device. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para ibalik sa production mode ang device, kakailanganin mong bumalik sa 4 KB mode at i-lock ang bootloader pagkatapos nito, na magfa-factory reset sa device. Pagkatapos mag-boot ng device sa Android, i-disable ang OEM na pag-unlock sa Mga opsyon ng developer."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Lumipat sa 4 KB mode mula sa 16 KB mode"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Nasa page-agnostic mode ka na nagpapagana ng 4 KB na kernel, at lilipat ka sa 16KB mode. Hindi magagarantiya ang integridad ng software sa mode na ito, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Ire-reboot nito ang device. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para ibalik sa production mode ang device, kakailanganin mong i-lock ang bootloader pagkatapos nito, na magfa-factory reset sa device. Pagkatapos mag-boot ng device sa Android, i-disable ang OEM na pag-unlock sa Mga opsyon ng developer."</string>
@@ -5449,8 +5461,6 @@
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Para mabilis na maipagpatuloy ang pag-playback, mananatiling bukas ang media player sa lock screen"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Itago ang player"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Ipakita ang player"</string>
-    <string name="media_controls_suggestions_title" msgid="4089438765632340413">"Mga suhestyon sa media"</string>
-    <string name="media_controls_suggestions_description" msgid="5001121785028325037">"Magbigay ng mga suhestyon sa media mula sa mga media app batay sa iyong aktibidad at lokasyon."</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Payagan ang mga extension ng software ng camera"</string>
     <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Ine-enable ang default na pagpapatupad ng software ng mga advanced na feature ng camera, tulad ng HDR, Night, o iba pang extension ng camera."</string>
@@ -5824,8 +5834,7 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Walang password"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Matuto pa"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Hindi ma-play ang audio stream na ito sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
-    <skip />
+    <string name="audio_streams_dialog_cannot_play_with_link" msgid="3433981166714801237">"Hindi ma-play ang audio stream na ito sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. "<annotation id="link">"Matuto pa"</annotation></string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Nakikinig ngayon"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"Naka-pause ang stream"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Ihinto ang pakikinig"</string>
@@ -5901,9 +5910,10 @@
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Na-update na ang PIN"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Buksan ang app"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"I-delete ang PIN?"</string>
-    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
-    <skip />
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8999197100719062891">"I-off ang parental controls para sa iba pang user"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Hindi puwedeng i-delete ang PIN"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Nagka-error habang sinusubukang i-delete ang PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>
+    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
+    <skip />
 </resources>

@@ -49,7 +49,7 @@ class VibrationMainSwitchPreferenceTest {
                 }
         }
 
-    private val preference = VibrationMainSwitchPreference()
+    private val preference = VibrationMainSwitchPreference("some_key")
 
     @Test
     fun checked_valueUnset_returnDefaultTrue() {

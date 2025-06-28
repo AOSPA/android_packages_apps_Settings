@@ -40,10 +40,21 @@ class DisplayTopologyPreferenceView(val injector: ConnectedDisplayInjector) :
             findViewById(R.id.topology_hint),
         )
         controller.attach()
+        injector.displayTopology?.primaryDisplayId?.let { controller.selectDisplay(it) }
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         controller.detach()
+    }
+
+    fun setOnDisplayBlockSelectedListener(
+        listener: DisplayTopologyPreferenceController.OnDisplayBlockSelectedListener
+    ) {
+        controller.onDisplayBlockSelectedListener = listener
+    }
+
+    fun selectDisplay(displayId: Int) {
+        controller.selectDisplay(displayId)
     }
 }

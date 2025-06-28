@@ -15,6 +15,8 @@
  */
 package com.android.settings.connecteddevice.display;
 
+import static android.view.Display.DEFAULT_DISPLAY;
+
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
@@ -43,6 +45,7 @@ import org.junit.Before;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExternalDisplayTestBase {
@@ -96,6 +99,18 @@ public class ExternalDisplayTestBase {
         }).when(mMockedInjector).registerDisplayListener(any());
         doReturn(0).when(mMockedInjector).getDisplayUserRotation(anyInt());
         doReturn(mContext).when(mMockedInjector).getContext();
+    }
+
+    DisplayDevice includeBuiltinDisplay() {
+        List<DisplayDevice> displays = new ArrayList<>(mDisplays);
+        Mode mode = new Mode(720, 1280, 60f);
+        DisplayDevice builtinDisplay = new DisplayDevice(DEFAULT_DISPLAY, "Built-in display", mode,
+                List.of(mode), DisplayIsEnabled.YES, /* isConnectedDisplay= */ false);
+        displays.add(builtinDisplay);
+        mDisplays = displays;
+        doReturn(builtinDisplay).when(mMockedInjector).getDisplay(DEFAULT_DISPLAY);
+        doReturn(mDisplays).when(mMockedInjector).getDisplays();
+        return builtinDisplay;
     }
 
     DisplayDevice createExternalDisplay(DisplayIsEnabled isEnabled) {

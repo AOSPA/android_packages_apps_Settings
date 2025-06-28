@@ -21,6 +21,7 @@ import android.media.AudioManager
 import android.os.VibrationAttributes
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.provider.Settings.System.VIBRATE_ON
 import androidx.core.content.getSystemService
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
@@ -52,7 +53,7 @@ import org.robolectric.annotation.Config
 abstract class VibrationIntensitySwitchPreferenceTestCase {
     protected abstract val hasRingerModeDependency: Boolean
     protected abstract val preference: VibrationIntensitySwitchPreference
-    protected val mainSwitchPreference = VibrationMainSwitchPreference()
+    protected val mainSwitchPreference = VibrationMainSwitchPreference("some_key")
 
     protected val vibratorSpy: Vibrator =
         spy(ApplicationProvider.getApplicationContext<Context>().getSystemService<Vibrator>()!!)
@@ -360,16 +361,16 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
     }
 
     private fun getRawStoredValue() =
-        SettingsSystemStore.get(context).getInt(preference.key)
+        SettingsSystemStore.get(context).getInt(preference.settingsProviderKey)
 
     private fun setMainSwitchValue(value: Boolean?) =
-        SettingsSystemStore.get(context).setBoolean(mainSwitchPreference.key, value)
+        SettingsSystemStore.get(context).setBoolean(VIBRATE_ON, value)
 
     protected fun setValue(value: Boolean?) =
         SettingsSystemStore.get(context).setInt(
-            preference.key,
+            preference.settingsProviderKey,
             value?.let {
-                if (value) {
+                if (it) {
                     vibratorSpy.getDefaultVibrationIntensity(any())
                 } else {
                     Vibrator.VIBRATION_INTENSITY_OFF

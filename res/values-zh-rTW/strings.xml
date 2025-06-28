@@ -47,10 +47,8 @@
     <string name="preview_pager_email_title" msgid="8767864657910457562">"電子郵件"</string>
     <string name="preview_pager_previous_button" msgid="607771113300838313">"上一個預覽畫面"</string>
     <string name="preview_pager_next_button" msgid="8700907912508927271">"下一個預覽畫面"</string>
-    <!-- no translation found for font_size_make_smaller_desc (9149663537989624487) -->
-    <skip />
-    <!-- no translation found for font_size_make_larger_desc (5774611876657293550) -->
-    <skip />
+    <string name="font_size_make_smaller_desc" msgid="9149663537989624487">"縮小字體"</string>
+    <string name="font_size_make_larger_desc" msgid="5774611876657293550">"放大字體"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"一律允許"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"裝置摺疊時開啟封面螢幕"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"向上滑動繼續使用"</string>
@@ -105,8 +103,10 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"關於音訊輸出"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"將聲音轉送至助聽器或手機喇叭"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"相關工具"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="4996427014054610877">"試試使用<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>功能分享"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="329823028635487822">"以最快速度將檔案傳送到鄰近的 Android 裝置"</string>
+    <!-- no translation found for bluetooth_try_nearby_share_title (2307943703595855441) -->
+    <skip />
+    <!-- no translation found for bluetooth_try_nearby_share_summary (2808932450696996548) -->
+    <skip />
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"鈴聲和鬧鐘"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"通話期間的音訊"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"媒體和系統音效"</string>
@@ -449,7 +449,7 @@
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"使用指紋解鎖時"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"使用指紋解鎖工作資料夾"</string>
     <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"使用指紋解鎖工作資料夾"</string>
-    <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"檢查已註冊的指紋"</string>
+    <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"檢查已記錄的指紋"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"新增指紋"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{已新增 1 個指紋}other{已新增 # 個指紋}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"需要設定"</string>
@@ -994,7 +994,8 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"重新啟動"</string>
     <string name="external_display_on" msgid="2560104443500154333">"開啟"</string>
     <string name="external_display_off" msgid="5634413756025351374">"關閉"</string>
-    <string name="external_display_settings_title" msgid="6256884595821605779">"外接螢幕"</string>
+    <!-- no translation found for external_display_settings_title (4690843697498496237) -->
+    <skip />
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"內建螢幕"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"使用外接螢幕"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"螢幕解析度"</string>
@@ -1005,7 +1006,12 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"變更旋轉角度或解析度，可能會導致執行中的應用程式停止運作"</string>
-    <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"裝置必須連接外接螢幕，才能鏡像投放畫面"</string>
+    <!-- no translation found for external_display_not_found_footer_title (3974573337788760338) -->
+    <skip />
+    <!-- no translation found for external_display_no_display_connected_screen_title (4854597444155430591) -->
+    <skip />
+    <!-- no translation found for external_display_no_display_connected_screen_summary (3114991534614756600) -->
+    <skip />
     <string name="external_display_more_options_title" msgid="1222751990705118774">"更多選項"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"按住並拖曳即可重新排列螢幕。"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"鏡像顯示內建螢幕"</string>
@@ -2161,13 +2167,11 @@
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"調高"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"反向捲動"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"使用主鍵"</string>
-    <!-- no translation found for mouse_keys_use_primary_keys_summary (5057949666957911577) -->
-    <skip />
+    <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"使用英文字母和數字控制鍵盤，而非數字鍵盤"</string>
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"重設設定"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"如何使用主鍵"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"如何使用數字鍵盤"</string>
-    <!-- no translation found for mouse_keys_numpad_keys_image_list_summary (2186017679302722178) -->
-    <skip />
+    <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2186017679302722178">"數字鍵鎖定 (Num Lock) 開啟時，一律使用數字鍵盤"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"向上捲動即可將頁面向下移動"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"捲動"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"捲動控制"</string>
@@ -2417,8 +2421,10 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"滑鼠游標碰觸畫面邊緣時移動畫面"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"跟隨輸入位置"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"輸入時放大文字"</string>
-    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="7342198645736402048">"放大鍵盤焦點"</string>
-    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="9091733229413835358">"放大鏡追蹤鍵盤焦點"</string>
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
+    <skip />
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"放大鍵盤"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"使用全螢幕放大功能時，放大鍵盤即可查看表情符號和字母"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"只放大部分畫面時無法使用"</string>
@@ -2656,7 +2662,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"關於色彩反轉"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"進一步瞭解色彩反轉"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"進一步瞭解深色主題"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"部分應用程式可能不支援展開的設定中的深色主題。如果你遇到顯示問題，請使用標準設定。"</string>
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"部分應用程式可能不支援擴充設定中的深色主題。如果你遇到顯示問題，請使用標準設定。"</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"顯示字幕"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"僅限支援的應用程式"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"字幕大小和樣式"</string>
@@ -2734,8 +2740,10 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"關於超暗功能"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"調暗螢幕，閱讀時更舒適"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"亮度"</string>
-    <string name="brightness_intensity_start_label" msgid="930387498396426039">"較暗"</string>
-    <string name="brightness_intensity_end_label" msgid="1422600205484299860">"較亮"</string>
+    <!-- no translation found for brightness_intensity_start_label (5156578219206443637) -->
+    <skip />
+    <!-- no translation found for brightness_intensity_end_label (2697495729534414164) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"裝置重新啟動後保持啟用狀態"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{短 ({time} 秒)}other{短 ({time} 秒)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{中 ({time} 秒)}other{中 ({time} 秒)}}"</string>
@@ -4509,10 +4517,8 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"放大或縮小所有內容"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"顯示密度、畫面縮放、縮放、縮放比例"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"預覽"</string>
-    <!-- no translation found for screen_zoom_make_smaller_desc (6268455784510593120) -->
-    <skip />
-    <!-- no translation found for screen_zoom_make_larger_desc (3458295276713085365) -->
-    <skip />
+    <string name="screen_zoom_make_smaller_desc" msgid="6268455784510593120">"調低顯示大小"</string>
+    <string name="screen_zoom_make_larger_desc" msgid="3458295276713085365">"調高顯示大小"</string>
     <string name="disconnected" msgid="3469373726996129247">"未連線"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"未連接"</string>
     <string name="apps_summary" msgid="4007416751775414252">"已安裝 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式"</string>
@@ -5173,7 +5179,8 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"如果沒有行動網路，就會看到使用衛星的選項。"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"手機連上衛星後"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"按照步驟連上衛星"</string>
-    <string name="summary_supported_service" msgid="6380533552383355977">"你可以傳送訊息給任何人 (包括緊急救援服務)，也可以在部分應用程式使用有限的數據。如果有可用的行動網路，手機就會重新連線。"</string>
+    <!-- no translation found for summary_supported_service (5855066701346160193) -->
+    <skip />
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"你可以傳送訊息給任何人，包括緊急救援服務。如果有可用的行動網路，手機就會重新連線。"</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"手機連線後，你可以傳送訊息給任何人，包括緊急救援服務。"</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"注意事項"</string>
@@ -5191,8 +5198,7 @@
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"衛星連線"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"衛星連線"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"衛星訊息"</string>
-    <!-- no translation found for title_have_satellite_data_plan (1101741256080690699) -->
-    <skip />
+    <string name="title_have_satellite_data_plan" msgid="1101741256080690699">"你的帳戶可使用支援的應用程式"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"手機支援的應用程式"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"查看衛星支援的所有應用程式"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"手機支援的應用程式"</string>
@@ -5303,6 +5309,20 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"左耳機"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"右耳機"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"充電盒"</string>
+    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
+    <skip />
+    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
+    <skip />
+    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
+    <skip />
+    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
+    <skip />
+    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
+    <skip />
+    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
+    <skip />
+    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
+    <skip />
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"電池"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"設定面板"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"啟用自由形式視窗"</string>
@@ -5368,7 +5388,8 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"以 16 KB 頁面大小啟動"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"使用支援 16 KB 頁面大小的核心啟動裝置"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"從 4 KB 切換為 16 KB 模式"</string>
-    <string name="confirm_enable_16k_pages_update_wipe" msgid="4760548401414644138">"這部裝置的資料分區必須轉換成 ext4，才能使用 16 KB 開發人員選項。裝置將抹除資料，檔案系統會在確認後變更為 ext4。目前處於 4 KB 核心的實際工作環境模式，即將切換到 16 KB 模式。在此模式下，只要重新啟動一次，就能在 4 KB 和 16 KB 模式之間切換。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能會有風險。在這類模式下，部分功能會停用，因此有些應用程式可能無法運作。如要讓裝置返回實際工作環境模式，必須切回 4 KB 模式，並鎖定系統啟動載入程式，將裝置恢復原廠設定。裝置成功啟動 Android 系統後，請前往開發人員選項停用 OEM 解鎖設定。如要繼續操作，按一下「清除所有資料並更新」，即可重新啟動裝置。"</string>
+    <!-- no translation found for confirm_enable_16k_pages_update_wipe (5343202230812855846) -->
+    <skip />
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"你正處於執行 4 KB 核心的可變頁面模式，即將切換為 16 KB 模式。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能會有風險。切換以後，裝置會重新啟動。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要讓裝置返回實際工作環境模式，必須切換回 4 KB 模式並鎖定系統啟動載入程式，這時裝置會恢復原廠設定。裝置成功啟動 Android 系統後，請前往「開發人員選項」停用「OEM 解鎖」設定。"</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"從 16 KB 切換為 4 KB 模式"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"你正處於執行 16 KB 核心的可變頁面模式，即將切換為 4 KB 模式。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能會有風險。切換以後，裝置會重新啟動。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要讓裝置返回實際工作環境模式，必須鎖定系統啟動載入程式，這時裝置會恢復原廠設定。裝置成功啟動 Android 系統後，請前往「開發人員選項」停用「OEM 解鎖」設定。"</string>
@@ -5449,8 +5470,6 @@
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"媒體播放器會在螢幕鎖定畫面上保持開啟狀態，以便快速恢復播放"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隱藏播放器"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"顯示播放器"</string>
-    <string name="media_controls_suggestions_title" msgid="4089438765632340413">"媒體推薦內容"</string>
-    <string name="media_controls_suggestions_description" msgid="5001121785028325037">"根據你的活動和位置，提供來自媒體應用程式的媒體推薦內容。"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"媒體"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"允許相機軟體擴充功能"</string>
     <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"允許導入預設軟體的進階相機功能，例如 HDR、夜視或其他相機擴充功能"</string>
@@ -5824,8 +5843,7 @@
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"不需密碼"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"瞭解詳情"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"無法在「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」上播放這個音訊串流。"</string>
-    <!-- no translation found for audio_streams_dialog_cannot_play_with_link (3433981166714801237) -->
-    <skip />
+    <string name="audio_streams_dialog_cannot_play_with_link" msgid="3433981166714801237">"無法在「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」上播放這個音訊串流。"<annotation id="link">"瞭解詳情"</annotation></string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"正在聆聽"</string>
     <string name="audio_streams_present_now" msgid="7519818719382756366">"串流已暫停"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"停止聆聽"</string>
@@ -5888,25 +5906,23 @@
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"驗證電子郵件地址"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"網站內容篩選器"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"網站篩選器, 封鎖網站, 瀏覽器篩選器, 封鎖情色露骨內容網站, 篩選網站, 封鎖搜尋結果, 篩選情色露骨搜尋結果, 內容限制"</string>
-    <!-- no translation found for supervision_web_content_filters_top_intro (8056274290725144441) -->
-    <skip />
+    <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"在這支手機上，協助篩除部分應用程式和瀏覽器中的情色露骨內容。其他應用程式、裝置或瀏覽器仍可能顯示這類內容。"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"網站"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"封鎖涉及情色露骨內容的網站"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"搜尋結果"</string>
     <string name="supervision_web_content_filters_search_filter_title" msgid="4212134055017429017">"篩除涉及情色露骨內容的搜尋結果"</string>
-    <!-- no translation found for supervision_web_content_filters_switch_summary (2095166099345288321) -->
-    <skip />
-    <!-- no translation found for supervision_web_content_filters_footer_title (1741897040916039165) -->
-    <skip />
+    <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{已在 # 個應用程式上開啟}other{已在 # 個應用程式上開啟}}"</string>
+    <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"即使關閉這些設定，仍可能會套用其他帳戶設定。"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"輸入家長監護 PIN 碼"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"設定家長監護 PIN 碼"</string>
     <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"確認 PIN 碼"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN 碼已更新"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"開啟應用程式"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"要刪除 PIN 碼嗎？"</string>
-    <!-- no translation found for supervision_delete_pin_supervision_enabled_header (8999197100719062891) -->
-    <skip />
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8999197100719062891">"關閉其他使用者的家長監護功能"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"無法刪除 PIN 碼"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"嘗試刪除 PIN 碼時發生錯誤。"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>動畫"</string>
+    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
+    <skip />
 </resources>

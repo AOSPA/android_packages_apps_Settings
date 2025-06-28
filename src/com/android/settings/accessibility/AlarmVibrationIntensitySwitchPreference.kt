@@ -17,23 +17,25 @@ package com.android.settings.accessibility
 
 import android.content.Context
 import android.os.VibrationAttributes
-import android.provider.Settings
+import android.provider.Settings.System.ALARM_VIBRATION_INTENSITY
 import com.android.settings.R
 
 /** Accessibility settings for alarm vibration, as a switch toggle. */
 // LINT.IfChange
-class AlarmVibrationIntensitySwitchPreference(context: Context) :
+class AlarmVibrationIntensitySwitchPreference(
+    context: Context,
+    key: String,
+    mainSwitchPreferenceKey: String,
+) :
     VibrationIntensitySwitchPreference(
         context = context,
-        key = KEY,
+        key = key,
+        settingsProviderKey = ALARM_VIBRATION_INTENSITY,
+        mainSwitchPreferenceKey = mainSwitchPreferenceKey,
         vibrationUsage = VibrationAttributes.USAGE_ALARM,
         title = R.string.accessibility_alarm_vibration_title,
     ) {
     override val keywords: Int
         get() = R.string.keywords_alarm_vibration
-
-    companion object {
-        const val KEY = Settings.System.ALARM_VIBRATION_INTENSITY
-    }
 }
 // LINT.ThenChange(AlarmVibrationTogglePreferenceController.java)

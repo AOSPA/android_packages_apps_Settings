@@ -88,12 +88,12 @@
     <style name="Widget.Network.TextInputLayout.WifiConfig">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Medium</item>
+        <item name="android:textAppearance">@style/TextAppearance.SettingsLib.BodySmall.Emphasized</item>
         <item name="android:textAlignment">viewStart</item>
     </style>
 
     <style name="Widget.Network.TextInputLayout.WifiConfig.EditText">
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
+        <item name="android:textAppearance">@style/TextAppearance.SettingsLib.BodyLarge.Emphasized</item>
         <item name="android:maxLength">500</item>
     </style>
 
@@ -111,7 +111,7 @@
         <item name="android:paddingStart">8dip</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body1</item>
+        <item name="android:textAppearance">@style/TextAppearance.SettingsLib.BodySmall.Emphasized</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 

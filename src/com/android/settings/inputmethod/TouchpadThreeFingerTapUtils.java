@@ -50,6 +50,7 @@ public final class TouchpadThreeFingerTapUtils {
             Map.entry("go_home", KeyGestureEvent.KEY_GESTURE_TYPE_HOME),
             Map.entry("go_back", KeyGestureEvent.KEY_GESTURE_TYPE_BACK),
             Map.entry("recent_apps", KeyGestureEvent.KEY_GESTURE_TYPE_RECENT_APPS),
+            Map.entry("launch_app", KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_APPLICATION),
             Map.entry("middle_click", KeyGestureEvent.KEY_GESTURE_TYPE_UNSPECIFIED));
 
     /**

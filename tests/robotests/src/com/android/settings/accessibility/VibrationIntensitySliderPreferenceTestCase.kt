@@ -20,6 +20,7 @@ import android.content.ContextWrapper
 import android.content.res.Resources
 import android.media.AudioManager
 import android.os.Vibrator
+import android.provider.Settings.System.VIBRATE_ON
 import androidx.core.content.getSystemService
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -48,7 +49,7 @@ import org.robolectric.annotation.Config
 abstract class VibrationIntensitySliderPreferenceTestCase {
     protected abstract val hasRingerModeDependency: Boolean
     protected abstract val preference: VibrationIntensitySliderPreference
-    protected val mainSwitchPreference = VibrationMainSwitchPreference()
+    protected val mainSwitchPreference = VibrationMainSwitchPreference("some_key")
 
     protected val resourcesSpy: Resources =
         spy(ApplicationProvider.getApplicationContext<Context>().resources)
@@ -421,7 +422,7 @@ abstract class VibrationIntensitySliderPreferenceTestCase {
     private fun getRawStoredValue() = SettingsSystemStore.get(context).getInt(preference.key)
 
     private fun setMainSwitchValue(value: Boolean?) =
-        SettingsSystemStore.get(context).setBoolean(mainSwitchPreference.key, value)
+        SettingsSystemStore.get(context).setBoolean(VIBRATE_ON, value)
 
     protected fun setValue(value: Int?) = preference.storage(context).setInt(preference.key, value)
 

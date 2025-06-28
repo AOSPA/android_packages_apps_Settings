@@ -17,9 +17,13 @@
 package com.android.settings.inputmethod;
 
 import static com.android.settings.inputmethod.InputPeripheralsSettingsUtils.isTouchpad;
+import static com.android.settings.inputmethod.TouchpadThreeFingerTapActionPreferenceController.SET_GESTURE;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -30,6 +34,16 @@ import com.android.settingslib.search.SearchIndexable;
 public class TouchpadThreeFingerTapAppSelectionFragment extends InputDeviceDashboardFragment {
 
     private static final String TAG = "TouchpadThreeFingerTapAppSelectionFragment";
+
+    @Override
+    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+        Bundle args = getArguments();
+        if (args != null) {
+            Bundle bundle = getPreferenceScreen().getExtras();
+            bundle.putBoolean(SET_GESTURE, args.getBoolean(SET_GESTURE, false));
+        }
+    }
 
     @Override
     public int getMetricsCategory() {

@@ -50,14 +50,18 @@ class WifiSharedPreferenceController(
 
     override fun setChecked(isChecked: Boolean): Boolean {
         val matchingWifiEntry: WifiEntry? = getMatchingWifiEntry(isChecked)
-        var wifiConfiguration: WifiConfiguration? = matchingWifiEntry?.getWifiConfiguration()
-        if (matchingWifiEntry != null && wifiConfiguration != null) {
+        val matchingWifiConfiguration: WifiConfiguration? =
+            matchingWifiEntry?.getWifiConfiguration()
+        if (matchingWifiEntry != null && matchingWifiConfiguration != null) {
             showAlertDialog(
                 matchingWifiEntry.ssid ?: "",
-                wifiConfiguration.shared,
+                matchingWifiConfiguration.shared,
                 matchingWifiEntry.getKey(),
             )
+            return true
         }
+
+        wifiEntry.setSharedWithOtherUsers(isChecked)
         return true
     }
 
@@ -89,15 +93,7 @@ class WifiSharedPreferenceController(
             .setPositiveButton(mContext.getString(R.string.wifi_conflict_dialog_confirm)) {
                 dialog: DialogInterface,
                 which: Int ->
-                val bundle: Bundle = Bundle()
-                bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY, key)
-
-                SubSettingLauncher(mContext)
-                    .setTitleText(mContext.getText(R.string.pref_title_network_details))
-                    .setDestination(WifiNetworkDetailsFragment::class.java.name)
-                    .setArguments(bundle)
-                    .setSourceMetricsCategory(metricsCategory)
-                    .launch()
+                launchNetworkDetailsPage(mContext, key, metricsCategory)
             }
             .setNegativeButton(mContext.getString(R.string.wifi_conflict_dialog_cancel)) {
                 dialog: DialogInterface,
@@ -105,6 +101,18 @@ class WifiSharedPreferenceController(
                 dialog.dismiss()
             }
             .show()
+    }
+
+    private fun launchNetworkDetailsPage(context: Context, key: String, metricsCategory: Int) {
+        val bundle: Bundle = Bundle()
+        bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY, key)
+
+        SubSettingLauncher(context)
+            .setTitleText(context.getText(R.string.pref_title_network_details))
+            .setDestination(WifiNetworkDetailsFragment::class.java.name)
+            .setArguments(bundle)
+            .setSourceMetricsCategory(metricsCategory)
+            .launch()
     }
 
     private fun getMatchingWifiEntry(shared: Boolean): WifiEntry? {

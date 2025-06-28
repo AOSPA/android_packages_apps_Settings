@@ -23,6 +23,7 @@ import android.content.ComponentName;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -37,7 +38,7 @@ public class ToggleAutoclickPreferenceFragment extends ShortcutFragment {
 
     private static final String TAG = "AutoclickPrefFragment";
 
-    @NonNull
+    @Nullable
     @Override
     public ToggleShortcutPreferenceController getShortcutPreferenceController() {
         return use(ToggleAutoclickShortcutPreferenceController.class);

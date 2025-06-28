@@ -37,7 +37,7 @@ abstract class RestrictedShortcutFragment(restrictionKey: String?) :
 
     abstract fun getFeatureComponentName(): ComponentName
 
-    open fun getShortcutPreferenceController(): ToggleShortcutPreferenceController {
+    open fun getShortcutPreferenceController(): ToggleShortcutPreferenceController? {
         return use<ToggleShortcutPreferenceController>(
             ToggleShortcutPreferenceController::class.java
         )
@@ -46,7 +46,7 @@ abstract class RestrictedShortcutFragment(restrictionKey: String?) :
     override fun onDisplayPreferenceDialog(preference: Preference) {
         if (preference is ShortcutPreference) {
             val isChecked = preference.isChecked
-            val prefController = getShortcutPreferenceController()
+            val prefController = getShortcutPreferenceController() ?: return
             if (isChecked) {
                 showShortcutsTutorial(
                     prefController.getUserPreferredShortcutTypes(getFeatureComponentName())
@@ -70,7 +70,7 @@ abstract class RestrictedShortcutFragment(restrictionKey: String?) :
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        getShortcutPreferenceController().initialize(getFeatureComponentName())
+        getShortcutPreferenceController()?.initialize(getFeatureComponentName())
     }
 
     override fun onCreateRecyclerView(

@@ -58,7 +58,8 @@ abstract class BaseShortcutFragmentInSuwTestCases<T : ShortcutFragment> :
         assertThat(view).isInstanceOf(GlifPreferenceLayout::class.java)
         val glifPreferenceLayout = view as GlifPreferenceLayout?
 
-        assertThat(glifPreferenceLayout!!.getHeaderText().toString()).isEqualTo(TEST_TITLE)
+        assertThat(glifPreferenceLayout!!.getHeaderText().toString())
+            .isEqualTo(getSetupWizardTitle())
         assertThat(glifPreferenceLayout.getDescriptionText().toString())
             .isEqualTo(getSetupWizardDescription())
         assertThat(glifPreferenceLayout.getDividerInsetStart()).isEqualTo(Int.Companion.MAX_VALUE)
@@ -72,7 +73,7 @@ abstract class BaseShortcutFragmentInSuwTestCases<T : ShortcutFragment> :
 
     override fun launchFragment(): T {
         val bundle = getFragmentArgs() ?: Bundle()
-        bundle.putString(AccessibilitySettings.EXTRA_TITLE, TEST_TITLE)
+        bundle.putString(AccessibilitySettings.EXTRA_TITLE, getSetupWizardTitle())
 
         fragmentScenario =
             AccessibilityTestUtils.launchFragmentInSetupWizardFlow<T>(getFragmentClazz(), bundle)
@@ -87,6 +88,10 @@ abstract class BaseShortcutFragmentInSuwTestCases<T : ShortcutFragment> :
         }
 
         return fragment!!
+    }
+
+    open fun getSetupWizardTitle(): String {
+        return TEST_TITLE
     }
 
     companion object {

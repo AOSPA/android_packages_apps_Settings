@@ -27,6 +27,10 @@ import com.android.settings.flags.Flags
 import com.android.settings.network.AirplaneModePreference
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.wifi.utils.wifiManager
+import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -36,9 +40,10 @@ import kotlinx.coroutines.CoroutineScope
 // LINT.IfChange
 @ProvidePreferenceScreen(ConfigureWifiScreen.KEY)
 open class ConfigureWifiScreen(context: Context) :
-    PreferenceScreenMixin, PreferenceSummaryProvider {
+    PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceLifecycleProvider {
 
     private val airplaneModeDataStore = AirplaneModePreference.createDataStore(context)
+    private lateinit var keyedObserver: KeyedObserver<String>
 
     override val key: String
         get() = KEY
@@ -58,8 +63,7 @@ open class ConfigureWifiScreen(context: Context) :
 
     override fun hasCompleteHierarchy() = false
 
-    // TODO: need to monitor the WiFi state change and use the exported AirplaneModePreference
-    //       storage for updating summary.
+    // TODO: need to monitor the WiFi state change for updating summary.
     override fun getSummary(context: Context): CharSequence? =
         if (context.isWifiWakeupEnabled()) {
             context.getString(R.string.wifi_configure_settings_preference_summary_wakeup_on)
@@ -69,6 +73,19 @@ open class ConfigureWifiScreen(context: Context) :
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, ConfigureWifiSettingsActivity::class.java, metadata?.key)
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
+        airplaneModeDataStore.addObserver(
+            AirplaneModePreference.KEY,
+            keyedObserver,
+            HandlerExecutor.main,
+        )
+    }
+
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        airplaneModeDataStore.removeObserver(AirplaneModePreference.KEY, keyedObserver)
+    }
 
     override fun fragmentClass(): Class<out Fragment>? = ConfigureWifiSettings::class.java
 

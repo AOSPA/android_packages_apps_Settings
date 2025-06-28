@@ -18,15 +18,14 @@ package com.android.settings.accessibility
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.VibrationAttributes
-import android.provider.Settings
+import android.provider.Settings.System.KEYBOARD_VIBRATION_ENABLED
+import android.provider.Settings.System.VIBRATE_ON
 import androidx.preference.Preference
-import androidx.preference.TwoStatePreference
 import androidx.preference.Preference.OnPreferenceChangeListener
-import com.android.settings.metrics.PreferenceActionMetricsProvider
+import androidx.preference.TwoStatePreference
 import com.android.settings.R
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.KeyValueStoreDelegate
-import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.SwitchPreference
@@ -34,17 +33,25 @@ import com.android.settingslib.preference.SwitchPreferenceBinding
 
 /** Accessibility settings for keyboard vibration, using a switch toggle. */
 // LINT.IfChange
-class KeyboardVibrationSwitchPreference :
-    SwitchPreference(
-        key = KEY,
-        title = R.string.accessibility_keyboard_vibration_title,
-    ),
+class KeyboardVibrationSwitchPreference(
+    context: Context,
+    key: String,
+    private val mainSwitchPreferenceKey: String = VIBRATE_ON,
+) :
+    SwitchPreference(key = key, title = R.string.accessibility_keyboard_vibration_title),
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     OnPreferenceChangeListener,
     SwitchPreferenceBinding {
 
-    private var storage: KeyboardVibrationSwitchStore? = null
+    private val storage by lazy {
+        VibrationToggleSettingsStore(
+            context,
+            preferenceKey = key,
+            settingsProviderKey = KEYBOARD_VIBRATION_ENABLED,
+            defaultValue = DEFAULT_VALUE,
+        )
+    }
 
     override val preferenceActionMetrics: Int
         get() = SettingsEnums.ACTION_KEYBOARD_VIBRATION_CHANGED
@@ -56,16 +63,11 @@ class KeyboardVibrationSwitchPreference :
         context.resources.getBoolean(
             com.android.internal.R.bool.config_keyboardVibrationSettingsSupported)
 
-    override fun isEnabled(context: Context) = storage?.isPreferenceEnabled() ?: true
+    override fun isEnabled(context: Context) = storage.isPreferenceEnabled()
 
-    override fun storage(context: Context) : KeyValueStore {
-        if (storage == null) {
-            storage = KeyboardVibrationSwitchStore(SettingsSystemStore.get(context))
-        }
-        return storage!!
-    }
+    override fun storage(context: Context): KeyValueStore = storage
 
-    override fun dependencies(context: Context) = arrayOf(VibrationMainSwitchPreference.KEY)
+    override fun dependencies(context: Context) = arrayOf(mainSwitchPreferenceKey)
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
@@ -84,34 +86,8 @@ class KeyboardVibrationSwitchPreference :
         return false
     }
 
-    @Suppress("UNCHECKED_CAST")
-    private class KeyboardVibrationSwitchStore(private val settingsStore: KeyValueStore)
-        : KeyValueStoreDelegate {
-
-        override val keyValueStoreDelegate: KeyValueStore
-            get() = settingsStore
-
-        override fun contains(key: String) = settingsStore.contains(key)
-
-        override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) =
-            DEFAULT_VALUE as T
-
-        override fun <T : Any> getValue(key: String, valueType: Class<T>) =
-            if (isPreferenceEnabled()) {
-                (settingsStore.getBoolean(key) ?: DEFAULT_VALUE) as T
-            } else {
-                // Preference must show off when disabled, but value stored must be preserved.
-                false as T?
-            }
-
-        fun isPreferenceEnabled(): Boolean {
-            return settingsStore.getBoolean(VibrationMainSwitchPreference.KEY) != false
-        }
-    }
-
     companion object {
-        const val KEY = Settings.System.KEYBOARD_VIBRATION_ENABLED
-        const val DEFAULT_VALUE = true
+        private const val DEFAULT_VALUE = true
     }
 }
 // LINT.ThenChange(KeyboardVibrationTogglePreferenceController.java)

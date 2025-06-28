@@ -28,6 +28,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_magnification"
+  namespace: "accessibility"
+  description: "Migrate magnification screen to the Catalyst infrastructure"
+  bug: "413453974"
+}
+
+flag {
   name: "check_prebundled_is_preinstalled"
   namespace: "accessibility"
   description: "Checks that all 'prebundled' components, used for grouping, are also preinstalled"

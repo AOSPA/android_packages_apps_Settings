@@ -38,8 +38,8 @@ import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupW
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment;
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
 import com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment;
-import com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment;
 import com.android.settings.accessibility.VibrationIntensitySettingsFragment;
+import com.android.settings.accessibility.screenmagnification.ui.MagnificationPreferenceFragment;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountSyncSettings;
@@ -421,7 +421,7 @@ public class SettingsGateway {
             ZenModeDisplayFragment.class.getName(),
             ContactsStorageSettings.class.getName(),
             ContentProtectionPreferenceFragment.class.getName(),
-            ToggleScreenMagnificationPreferenceFragment.class.getName(),
+            MagnificationPreferenceFragment.class.getName(),
             FlashNotificationsPreferenceFragment.class.getName(),
             BundlePreferenceFragment.class.getName(),
             SystemLocalePickerFragment.class.getName(),

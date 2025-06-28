@@ -56,8 +56,7 @@ public final class ActionDisabledByAdminDialogHelper {
     private static final String TAG = ActionDisabledByAdminDialogHelper.class.getName();
     @VisibleForTesting
     EnforcedAdmin mEnforcedAdmin;
-    @VisibleForTesting
-    EnforcingAdmin mEnforcingAdmin;
+    @Nullable EnforcingAdmin mEnforcingAdmin;
     private ViewGroup mDialogView;
     @Nullable
     private String mRestriction;
@@ -118,7 +117,7 @@ public final class ActionDisabledByAdminDialogHelper {
      */
     @NonNull
     public AlertDialog.Builder prepareDialogBuilder(
-            @Nullable String restriction, @NonNull EnforcingAdmin enforcingAdmin) {
+            @Nullable String restriction, @Nullable EnforcingAdmin enforcingAdmin) {
         DialogInterface.OnClickListener listener =
                 mActionDisabledByAdminController.getPositiveButtonListener(
                         mActivity, enforcingAdmin);
@@ -145,10 +144,10 @@ public final class ActionDisabledByAdminDialogHelper {
         mActionDisabledByAdminController.setupLearnMoreButton(mActivity);
     }
 
-    @VisibleForTesting
-    void prepareDialogBuilder(
-            AlertDialog.Builder builder, @Nullable String restriction,
-            EnforcingAdmin enforcingAdmin) {
+    private void prepareDialogBuilder(
+            AlertDialog.Builder builder,
+            @Nullable String restriction,
+            @Nullable EnforcingAdmin enforcingAdmin) {
         mActionDisabledByAdminController.initialize(
                 new ActionDisabledLearnMoreButtonLauncherImpl(mActivity, builder));
 
@@ -171,7 +170,7 @@ public final class ActionDisabledByAdminDialogHelper {
     }
 
     /** Updates the dialog view to show information about a restriction set by the given admin. */
-    public void updateDialog(@Nullable String restriction, @NonNull EnforcingAdmin admin) {
+    public void updateDialog(@Nullable String restriction, @Nullable EnforcingAdmin admin) {
         if (mEnforcingAdmin.equals(admin) && Objects.equals(mRestriction, restriction)) {
             return;
         }
@@ -207,11 +206,11 @@ public final class ActionDisabledByAdminDialogHelper {
     }
 
     private void initializeDialogViews(
-            View root, EnforcingAdmin enforcingAdmin, @Nullable String restriction) {
+            View root, @Nullable EnforcingAdmin enforcingAdmin, @Nullable String restriction) {
+        mActionDisabledByAdminController.updateEnforcingAdmin(enforcingAdmin);
         if (enforcingAdmin == null) {
             return;
         }
-        mActionDisabledByAdminController.updateEnforcingAdmin(enforcingAdmin);
         setAdminSupportIcon(root);
         setAdminSupportTitle(root, restriction);
         setAdminSupportDetails(mActivity, root, enforcingAdmin);
@@ -273,7 +272,9 @@ public final class ActionDisabledByAdminDialogHelper {
 
     @VisibleForTesting
     void setAdminSupportDetails(
-            final Activity activity, final View root, final EnforcingAdmin enforcingAdmin) {
+            final Activity activity,
+            final View root,
+            @Nullable final EnforcingAdmin enforcingAdmin) {
         if (enforcingAdmin == null) {
             return;
         }

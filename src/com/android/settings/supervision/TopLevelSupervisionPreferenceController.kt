@@ -25,7 +25,6 @@ import com.android.settings.supervision.SupervisionDashboardActivity.Companion.I
 /** Controller for the top level Supervision settings Preference item. */
 class TopLevelSupervisionPreferenceController(context: Context, key: String) :
     BasePreferenceController(context, key) {
-
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key == preferenceKey) {
             val intent = Intent(mContext, SupervisionDashboardActivity::class.java)
@@ -51,12 +50,9 @@ class TopLevelSupervisionPreferenceController(context: Context, key: String) :
     }
 
     private fun supervisionAppSupportsInstallAction(): Boolean {
-        if (mContext.systemSupervisionPackageName == null) {
-            return false
-        }
-
-        val intent =
-            Intent(INSTALL_SUPERVISION_APP_ACTION).setPackage(mContext.systemSupervisionPackageName)
+        val supervisionPackage: String =
+            mContext.resources.getString(com.android.internal.R.string.config_systemSupervision)
+        val intent = Intent(INSTALL_SUPERVISION_APP_ACTION).setPackage(supervisionPackage)
         return mContext.packageManager
             .queryIntentActivitiesAsUser(intent, 0, mContext.userId)
             .isNotEmpty()
