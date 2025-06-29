@@ -65,7 +65,7 @@ class DisplayBlockTest {
         injector.wallpapers.put(displayId, wallpaper42)
 
         parentView.addView(block)
-        block.reset(displayId, PointF(10f, 10f), PointF(20f, 20f), 0.5f)
+        block.reset(displayId, displayId, PointF(10f, 10f), PointF(20f, 20f), 0.5f)
 
         block.updateSurfaceView()
 
@@ -82,12 +82,12 @@ class DisplayBlockTest {
         injector.wallpapers.put(displayId, wallpaperA)
 
         parentView.addView(block)
-        block.reset(displayId, PointF(10f, 10f), PointF(20f, 20f), 0.25f)
+        block.reset(displayId, displayId, PointF(10f, 10f), PointF(20f, 20f), 0.25f)
 
         // Should not have fetched wallpaper info yet. Replace wallpaper setting with wallpaperB.
         assertThat(injector.wallpapers.put(displayId, wallpaperB)).isEqualTo(wallpaperA)
 
-        block.reset(displayId, PointF(10f, 10f), PointF(30f, 30f), 0.4f)
+        block.reset(displayId, displayId, PointF(10f, 10f), PointF(30f, 30f), 0.4f)
 
         // Should not have fetched wallpaper or display info yet.
         assertThat(injector.wallpapers.get(displayId)).isEqualTo(wallpaperB)
@@ -112,7 +112,7 @@ class DisplayBlockTest {
         injector.wallpapers.put(displayId, wallpaperX)
 
         parentView.addView(block)
-        block.reset(displayId, PointF(10f, 10f), PointF(20f, 20f), 0.5f)
+        block.reset(displayId, displayId, PointF(10f, 10f), PointF(20f, 20f), 0.5f)
         block.updateSurfaceView()
 
         assertThat(injector.updateLog.toString()).isEqualTo(
@@ -122,7 +122,7 @@ class DisplayBlockTest {
 
         // Same size and scale as before, but a new wallpaper and different position in parent view.
         injector.wallpapers.put(displayId, wallpaperY)
-        block.reset(displayId, PointF(60f, 10f), PointF(70f, 20f), 0.5f)
+        block.reset(displayId, displayId, PointF(60f, 10f), PointF(70f, 20f), 0.5f)
         assertThat(injector.updateLog.toString()).isEqualTo(
                 "oldSurfaces: [$wallpaperX], surface: $wallpaperY, surfaceScale: 0.50\n")
         applyRequestedSize()
@@ -130,7 +130,7 @@ class DisplayBlockTest {
 
         // Repeat the pattern, but with a new scale and reverting back to wallpaperX.
         injector.wallpapers.put(displayId, wallpaperX)
-        block.reset(displayId, PointF(60f, 30f), PointF(70f, 40f), 0.2f)
+        block.reset(displayId, displayId, PointF(60f, 30f), PointF(70f, 40f), 0.2f)
         assertThat(injector.updateLog.toString()).isEqualTo(
                 "oldSurfaces: [$wallpaperY], surface: $wallpaperX, surfaceScale: 0.20\n")
     }
@@ -141,7 +141,7 @@ class DisplayBlockTest {
         val wallpaperW = SurfaceControl.Builder().setName("wallpaperW").build()
 
         parentView.addView(block)
-        block.reset(displayId, PointF(10f, 10f), PointF(20f, 20f), 0.5f)
+        block.reset(displayId, displayId, PointF(10f, 10f), PointF(20f, 20f), 0.5f)
         block.updateSurfaceView()
 
         assertThat(injector.updateLog.toString()).isEqualTo("")

@@ -18,10 +18,12 @@ package com.android.settings.accessibility.screenmagnification.ui
 
 import android.app.settings.SettingsEnums
 import android.content.ComponentName
+import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.settings.R
+import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ShortcutFragment
 import com.android.settings.accessibility.ToggleShortcutPreferenceController
 import com.android.settings.accessibility.screenmagnification.CursorFollowingModePreferenceController
@@ -30,8 +32,10 @@ import com.android.settings.accessibility.screenmagnification.ToggleMagnificatio
 import com.android.settings.accessibility.screenmagnification.dialogs.CursorFollowingModeChooser
 import com.android.settings.accessibility.screenmagnification.dialogs.MagnificationModeChooser
 import com.android.settings.search.BaseSearchIndexProvider
+import com.android.settingslib.search.SearchIndexable
 
 /** Displays the detail screen of the screen magnification feature */
+@SearchIndexable(forTarget = SearchIndexable.ALL and SearchIndexable.ARC.inv())
 open class MagnificationPreferenceFragment : ShortcutFragment() {
 
     override fun onDisplayPreferenceDialog(preference: Preference) {
@@ -53,8 +57,12 @@ open class MagnificationPreferenceFragment : ShortcutFragment() {
         super.onDisplayPreferenceDialog(preference)
     }
 
-    override fun getShortcutPreferenceController(): ToggleShortcutPreferenceController {
-        return use(ToggleMagnificationShortcutPreferenceController::class.java)
+    override fun getShortcutPreferenceController(): ToggleShortcutPreferenceController? {
+        return if (Flags.catalystMagnification()) {
+            null
+        } else {
+            use(ToggleMagnificationShortcutPreferenceController::class.java)
+        }
     }
 
     override fun getFeatureName(): CharSequence {
@@ -84,6 +92,8 @@ open class MagnificationPreferenceFragment : ShortcutFragment() {
         return R.string.help_url_magnification
     }
 
+    override fun getPreferenceScreenBindingKey(context: Context): String? = MagnificationScreen.KEY
+
     companion object {
         private val TAG = MagnificationPreferenceFragment::class.simpleName
         private const val MODE_CHOOSER_REQUEST_KEY = "magnificationModeChooser"
@@ -91,6 +101,8 @@ open class MagnificationPreferenceFragment : ShortcutFragment() {
         const val MAGNIFICATION_SURVEY_KEY: String = "A11yMagnificationUser"
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =
-            BaseSearchIndexProvider(R.xml.accessibility_magnification_screen)
+            BaseSearchIndexProvider(
+                if (Flags.catalystMagnification()) 0 else R.xml.accessibility_magnification_screen
+            )
     }
 }

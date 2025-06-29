@@ -236,4 +236,46 @@ public class AdaptiveNetworkPreferenceControllerTest {
 
         assertTrue(result);
     }
+
+    @Test
+    public void areNotificationsEnabled_NullCipherNotificationsUnsupportedException() {
+        when(mTelephonyManager.isNullCipherNotificationsEnabled()).thenThrow(
+                new UnsupportedOperationException("Test Exception"));
+
+        boolean result = mController.areNotificationsEnabled();
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void areNotificationsEnabled_NullCipherNotificationsIllegalStateException() {
+        when(mTelephonyManager.isNullCipherNotificationsEnabled()).thenThrow(
+                new IllegalStateException("Test Exception"));
+
+        boolean result = mController.areNotificationsEnabled();
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void areNotificationsEnabled_CellularDisclosureUnsupportedException() {
+        when(mTelephonyManager.isNullCipherNotificationsEnabled()).thenReturn(true);
+        when(mTelephonyManager.isCellularIdentifierDisclosureNotificationsEnabled()).thenThrow(
+                new UnsupportedOperationException("Test Exception"));
+
+        boolean result = mController.areNotificationsEnabled();
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void areNotificationsEnabled_CellularDisclosureIllegalStateException() {
+        when(mTelephonyManager.isNullCipherNotificationsEnabled()).thenReturn(true);
+        when(mTelephonyManager.isCellularIdentifierDisclosureNotificationsEnabled()).thenThrow(
+                new IllegalStateException("Test Exception"));
+
+        boolean result = mController.areNotificationsEnabled();
+
+        assertFalse(result);
+    }
 }

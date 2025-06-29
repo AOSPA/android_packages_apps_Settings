@@ -37,6 +37,7 @@ public class WhenToDreamPreferenceController extends BasePreferenceController im
     private final DreamBackend mBackend;
     private final boolean mDreamsDisabledByAmbientModeSuppression;
     private final boolean mDreamsEnabledOnBattery;
+    private final boolean mDreamsShowWhenToDreamSetting;
 
     public WhenToDreamPreferenceController(Context context) {
         this(context, DEFAULT_PREF_KEY);
@@ -46,7 +47,9 @@ public class WhenToDreamPreferenceController extends BasePreferenceController im
         this(context, preferenceKey, context.getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsDisabledByAmbientModeSuppressionConfig),
                 context.getResources().getBoolean(
-                        com.android.internal.R.bool.config_dreamsEnabledOnBattery));
+                        com.android.internal.R.bool.config_dreamsEnabledOnBattery),
+                context.getResources().getBoolean(
+                    com.android.internal.R.bool.config_dreamsShowWhenToDreamSetting));
     }
 
     @VisibleForTesting
@@ -54,12 +57,14 @@ public class WhenToDreamPreferenceController extends BasePreferenceController im
             Context context,
             String preferenceKey,
             boolean dreamsDisabledByAmbientModeSuppression,
-            boolean dreamsEnabledOnBattery) {
+            boolean dreamsEnabledOnBattery,
+            boolean dreamsShowWhenToDreamSetting) {
         super(context, preferenceKey);
 
         mBackend = DreamBackend.getInstance(context);
         mDreamsDisabledByAmbientModeSuppression = dreamsDisabledByAmbientModeSuppression;
         mDreamsEnabledOnBattery = dreamsEnabledOnBattery;
+        mDreamsShowWhenToDreamSetting = dreamsShowWhenToDreamSetting;
     }
 
     @Override
@@ -75,7 +80,7 @@ public class WhenToDreamPreferenceController extends BasePreferenceController im
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mDreamsShowWhenToDreamSetting ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

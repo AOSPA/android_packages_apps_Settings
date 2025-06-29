@@ -71,7 +71,7 @@ class FooterPreferenceControllersTest {
         footerPreferenceController.displayPreference(preference.preferenceManager.preferenceScreen)
 
         assertThat(preference.contentDescription.toString())
-            .isEqualTo("About ${DEFAULT_LABEL}\n\nnull")
+            .isEqualTo("About ${DEFAULT_LABEL}\n\ndefault html description\n")
         assertThat(preference.summary.toString())
             .isEqualTo(
                 Html.fromHtml(
@@ -106,7 +106,7 @@ class FooterPreferenceControllersTest {
         footerPreferenceController.displayPreference(preference.preferenceManager.preferenceScreen)
 
         assertThat(preference.contentDescription.toString())
-            .isEqualTo("About ${DEFAULT_LABEL}\n\nnull")
+            .isEqualTo("About ${DEFAULT_LABEL}\n\ndefault plain description")
         assertThat(preference.summary.toString()).isEqualTo(plainTextDescription)
     }
 
@@ -124,7 +124,7 @@ class FooterPreferenceControllersTest {
         footerPreferenceController.displayPreference(preference.preferenceManager.preferenceScreen)
 
         assertThat(preference.contentDescription.toString())
-            .isEqualTo("About ${DEFAULT_LABEL}\n\nnull")
+            .isEqualTo("About ${DEFAULT_LABEL}\n\nThis service is malfunctioning.")
         assertThat(preference.summary.toString())
             .isEqualTo(context.getString(R.string.accessibility_description_state_stopped))
     }

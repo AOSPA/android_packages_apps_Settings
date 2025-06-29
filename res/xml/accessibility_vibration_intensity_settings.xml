@@ -36,7 +36,7 @@
             app:controller="com.android.settings.accessibility.RingVibrationIntensityPreferenceController" />
 
         <SwitchPreferenceCompat
-            android:key="vibration_intensity_preference_ramping_ringer"
+            android:key="apply_ramping_ringer"
             android:title="@string/vibrate_when_ringing_option_ramping_ringer"
             app:keywords="@string/keywords_ramping_ringer_vibration"
             app:controller="com.android.settings.accessibility.VibrationRampingRingerTogglePreferenceController"/>

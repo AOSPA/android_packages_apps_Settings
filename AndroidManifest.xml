@@ -1848,7 +1848,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment" />
+                android:value="com.android.settings.accessibility.screenmagnification.ui.MagnificationPreferenceFragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_accessibility"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"

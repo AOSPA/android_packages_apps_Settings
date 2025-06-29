@@ -35,6 +35,10 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     val cornerRadiusPx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_corner_radius)
 
+    // Id of the logical display this DisplayBlock represents
+    var logicalDisplayId: Int = -1
+        private set
+
     // This doesn't necessarily refer to the actual display this block represents. In case of
     // mirroring, it will be the id of the mirrored display
     private var displayIdToShowWallpaper: Int? = null
@@ -138,6 +142,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     /**
      * Sets position and size of the block given coordinates in pane space.
      *
+     * @param logicalDisplayId ID of the logical display this DisplayBlock represents
      * @param displayIdToShowWallpaper ID of the display whose wallpaper would be projected on this
      *  display block.
      * @param topLeft coordinates of top left corner of the block, not including highlight border
@@ -147,6 +152,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
      *   wallpaper on the screen - should be less than one to indicate scaling to smaller size
      */
     fun reset(
+        logicalDisplayId: Int,
         displayIdToShowWallpaper: Int,
         topLeft: PointF,
         bottomRight: PointF,
@@ -155,9 +161,9 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         wallpaperSurface?.let { oldSurfaces.add(it) }
         injector.handler.removeCallbacks(updateSurfaceView)
         wallpaperSurface = null
-        setHighlighted(false)
         positionInPane = topLeft
 
+        this.logicalDisplayId = logicalDisplayId
         this.displayIdToShowWallpaper = displayIdToShowWallpaper
         this.surfaceScale = surfaceScale
 

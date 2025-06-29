@@ -63,7 +63,7 @@
             settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
 
         <Preference
-            android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
+            android:fragment="com.android.settings.accessibility.screenmagnification.ui.MagnificationPreferenceFragment"
             android:key="magnification_preference_screen"
             android:icon="@drawable/ic_accessibility_magnification"
             android:persistent="false"

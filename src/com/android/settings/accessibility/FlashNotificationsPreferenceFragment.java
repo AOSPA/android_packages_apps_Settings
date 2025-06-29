@@ -67,5 +67,7 @@ public class FlashNotificationsPreferenceFragment extends BaseSupportFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.flash_notifications_settings);
+            new BaseSearchIndexProvider(Flags.catalystFlashNotifications()
+                    && com.android.settings.flags.Flags.catalystSettingsSearch() ? 0
+                    : R.xml.flash_notifications_settings);
 }

@@ -2724,6 +2724,10 @@
     <string name="wifi_cancel">Cancel</string>
     <!-- Dialog title for forget confirmation dialog -->
     <string name="wifi_forget_dialog_title">Forget network?</string>
+    <!-- Dialog title for forget confirmation dialog on shared wifi network -->
+    <string name="shared_wifi_forget_dialog_title">Forget all device users?</string>
+    <!-- Dialog summary for forget confirmation dialog on shared wifi network -->
+    <string name="shared_wifi_forget_dialog_message"><xliff:g id="network_name">%1$s</xliff:g> is used by other users on this device, and all users of this network will need to set it up again. Still want to forget?</string>
 
     <!-- Wi-Fi Advanced Settings --> <skip />
     <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of networks, not including passpoint network, a user has saved. [CHAR LIMIT=30] -->
@@ -5646,9 +5650,9 @@
     <!-- Summary for accessibility follow typing preference for magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_follow_typing_summary">The magnifier follows text as you type</string>
     <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_follow_keyboard_title">Magnify keyboard focus</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_title">Follow keyboard focus</string>
     <!-- Title for focus following keyboard focus preference for magnification. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_follow_keyboard_summary">Magnifier follows keyboard focus</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary">The magnifier follows the focused item as you navigate with your keyboard</string>
     <!-- Title for accessibility magnifier preference allowing the magnification of the keyboard. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_nav_ime_title">Magnify keyboard</string>
     <!-- Summary for accessibility magnifier preference allowing the magnification of the keyboard. [CHAR LIMIT=none] -->
@@ -13091,8 +13095,8 @@ Data usage charges may apply.</string>
     <string name="title_supported_service">After your phone connects to a satellite</string>
     <!-- Title for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="title_supported_service_for_manual_type">Follow steps to connect to the satellite</string>
-    <!-- Summary for satellite supported service [CHAR_LIMIT=NONE] [SCREENSHOT=screen/AmfBYoNmdgkK9ER] -->
-    <string name="summary_supported_service">You can text anyone, including emergency services, and use limited data on some apps. Your phone will reconnect to a mobile network when available.</string>
+    <!-- Summary for satellite supported service [CHAR_LIMIT=NONE] [SCREENSHOT=screen/6wvz2FKMGAaJBGJ] -->
+    <string name="summary_supported_service">You can text anyone, including emergency services, and use supported apps. Your phone will reconnect to a mobile network when available.</string>
     <!-- Summary for satellite supported service without data supported [CHAR_LIMIT=NONE] [SCREENSHOT=screen/7sidqhHfwNNoacB] -->
     <string name="summary_supported_service_without_data_supported">You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available.</string>
     <!-- Summary for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
@@ -13389,6 +13393,20 @@ Data usage charges may apply.</string>
     <string name="bluetooth_right_name">Right</string>
     <!-- Title for middle bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_middle_name">Case</string>
+    <!-- Title for left bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_left_name_expressive">Left: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Title for right bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_right_name_expressive">Right: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Title for middle bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_middle_name_expressive">Case: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Content description for left bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_left_content_description_expressive">Left, battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Content description for right bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_right_content_description_expressive">Right, battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Content description for middle bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_middle_content_description_expressive">Case, battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <!-- Content description for main bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_main_content_description_expressive">Battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
     <!-- Content description for battery icon in bluetooth header. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_header_battery_content_description">Battery</string>
 
@@ -14871,6 +14889,10 @@ Data usage charges may apply.</string>
     <!-- Learn more link for device supervision PIN. [CHAR LIMIT=NONE]-->
     <string name="supervision_pin_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_pin</string>
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
+    <!-- Title on dialog that informs the user that controls cannot be enabled due to a multi-profile conflict. [CHAR LIMIT=NONE] -->
+    <string name="supervision_multi_profile_error_title">Can\u2019t turn on controls</string>
+    <!-- Learn more link for when device supervision is unavailable. [CHAR LIMIT=NONE]-->
+    <string name="supervision_unavailable_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_unavailable</string>
 
     <!-- Light theme customization for Face Education lottie illustration. Not translatable. -->
     <string-array name="fac_education_illustration" translatable="false">

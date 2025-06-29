@@ -60,7 +60,6 @@ import com.android.settings.inputmethod.InputPeripheralsSettingsUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.Indexable;
-import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.SettingsThemeHelper;
@@ -77,7 +76,6 @@ import java.util.stream.Stream;
  * Fragment that shows the actual UI for providing basic magnification accessibility service setup
  * and does not have toggle bar to turn on service to use.
  */
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ToggleScreenMagnificationPreferenceFragment extends
         ToggleFeaturePreferenceFragment implements DialogHelper {
 

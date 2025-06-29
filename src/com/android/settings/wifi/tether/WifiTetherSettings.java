@@ -212,10 +212,11 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         if (!isCatalystEnabled()) {
             mSSIDPreferenceController = use(WifiTetherSSIDPreferenceController.class);
+            mWifiTetherAutoOffPreferenceController =
+                    use(WifiTetherAutoOffPreferenceController.class);
         }
         mSecurityPreferenceController = use(WifiTetherSecurityPreferenceController.class);
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
-        mWifiTetherAutoOffPreferenceController = use(WifiTetherAutoOffPreferenceController.class);
         mApBandPreferenceController = use(WifiTetherApBandPreferenceController.class);
     }
 
@@ -225,14 +226,17 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         if (mUnavailable) {
             return;
         }
-        // Assume we are in a SettingsActivity. This is only safe because we currently use
-        // SettingsActivity as base for all preference fragments.
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-        mMainSwitchBar = activity.getSwitchBar();
-        mMainSwitchBar.setTitle(getString(R.string.use_wifi_hotsopt_main_switch_title));
-        mSwitchBarController = new WifiTetherSwitchBarController(activity, mMainSwitchBar);
-        getSettingsLifecycle().addObserver(mSwitchBarController);
-        mMainSwitchBar.show();
+
+        if (!isCatalystEnabled()) {
+            // Assume we are in a SettingsActivity. This is only safe because we currently use
+            // SettingsActivity as base for all preference fragments.
+            final SettingsActivity activity = (SettingsActivity) getActivity();
+            mMainSwitchBar = activity.getSwitchBar();
+            mMainSwitchBar.setTitle(getString(R.string.use_wifi_hotsopt_main_switch_title));
+            mSwitchBarController = new WifiTetherSwitchBarController(activity, mMainSwitchBar);
+            getSettingsLifecycle().addObserver(mSwitchBarController);
+            mMainSwitchBar.show();
+        }
     }
 
     @Override
@@ -343,7 +347,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     @VisibleForTesting
     void onRestartingChanged(Boolean restarting) {
-        mMainSwitchBar.setVisibility((restarting) ? INVISIBLE : VISIBLE);
+        if (!isCatalystEnabled()) {
+            mMainSwitchBar.setVisibility((restarting) ? INVISIBLE : VISIBLE);
+        }
         setLoading(restarting, false);
     }
 
@@ -363,6 +369,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder(currentConfig);
         if (!isCatalystEnabled()) {
             configBuilder.setSsid(mSSIDPreferenceController.getSSID());
+            configBuilder.setAutoShutdownEnabled(
+                    mWifiTetherAutoOffPreferenceController.isEnabled());
         }
         int securityType =
                 mWifiTetherViewModel.isSpeedFeatureAvailable()
@@ -383,8 +391,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                     mPasswordPreferenceController.getPasswordValidated(securityType),
                     securityType);
         }
-        configBuilder.setAutoShutdownEnabled(
-                mWifiTetherAutoOffPreferenceController.isEnabled());
         if (mApBandPreferenceController.getBandIndex() == BAND_BOTH_2G_5G) {
             // Fallback to 2G band if user selected OWE+Dual band
             if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION

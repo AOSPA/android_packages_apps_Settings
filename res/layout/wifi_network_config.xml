@@ -62,9 +62,11 @@
                     style="@style/Widget.Network.TextInputLayout.WifiConfig"
                     android:layout_weight="1"
                     android:hint="@string/wifi_ssid"
+                    app:hintTextAppearance="@style/TextAppearance.SettingsLib.BodySmall.Emphasized"
                     android:textDirection="locale"
                     app:helperTextEnabled="true"
                     app:helperText="@string/wifi_field_required"
+                    app:helperTextTextAppearance="@style/TextAppearance.SettingsLib.BodySmall.Emphasized"
                     app:endIconMode="clear_text">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ssid"
@@ -337,8 +339,10 @@
                 android:id="@+id/password_input_layout"
                 style="@style/Widget.Network.TextInputLayout.WifiConfig"
                 android:hint="@string/wifi_password"
+                app:hintTextAppearance="@style/TextAppearance.SettingsLib.BodySmall.Emphasized"
                 app:helperTextEnabled="true"
                 app:helperText="@string/wifi_field_required"
+                app:helperTextTextAppearance="@style/TextAppearance.SettingsLib.BodySmall.Emphasized"
                 app:endIconMode="password_toggle">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
@@ -385,11 +389,12 @@
 
         <TextView
             android:text="@string/wifi_show_advanced"
-            style="@style/TextAppearance.Material3.BodyLarge"
+            style="@style/TextAppearance.Material3.TitleMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:selectable="false"/>
+            android:selectable="false"
+            android:textAppearance="@style/TextAppearance.SettingsLib.TitleMedium.Emphasized"/>
 
         <ImageView
             android:id="@+id/advanced_options_icon"

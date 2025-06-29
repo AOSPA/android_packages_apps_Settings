@@ -31,10 +31,11 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(FlashNotificationsScreen.KEY)
-class FlashNotificationsScreen : PreferenceScreenMixin, PreferenceAvailabilityProvider {
+open class FlashNotificationsScreen : PreferenceScreenMixin, PreferenceAvailabilityProvider {
     override val key: String
         get() = KEY
 
@@ -43,6 +44,12 @@ class FlashNotificationsScreen : PreferenceScreenMixin, PreferenceAvailabilityPr
 
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
+
+    override val keywords: Int
+        get() = R.string.flash_notifications_keywords
+
+    override val icon: Int
+        get() = R.drawable.ic_flash_notification
 
     override fun getMetricsCategory(): Int = SettingsEnums.FLASH_NOTIFICATION_SETTINGS
 
@@ -55,12 +62,24 @@ class FlashNotificationsScreen : PreferenceScreenMixin, PreferenceAvailabilityPr
         makeLaunchIntent(context, FlashNotificationsActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            +FlashNotificationsTopIntroPreference()
+            +FlashNotificationsIllustrationPreference()
+            +UntitledPreferenceCategoryMetadata(CATEGORY_KEY) += {
+                +CameraFlashSwitchPreference()
+                +ScreenFlashSwitchPreference()
+            }
+            +FlashNotificationsPreviewPreference()
+            +FlashNotificationsFooterPreference()
+        }
 
     override fun isAvailable(context: Context): Boolean =
         FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_FLASH_NOTIFICATIONS)
 
+    override fun isIndexable(context: Context): Boolean = true
+
     companion object {
         const val KEY = "flash_notifications"
+        const val CATEGORY_KEY = "flash_notifications_category"
     }
 }

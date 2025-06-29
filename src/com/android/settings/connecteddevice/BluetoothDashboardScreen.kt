@@ -20,6 +20,7 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.BluetoothDashboardActivity
+import com.android.settings.bluetooth.BluetoothDeviceRenamePreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
@@ -57,6 +58,9 @@ open class BluetoothDashboardScreen : PreferenceScreenMixin {
         preferenceHierarchy(context) {
             val bluetoothDataStore = BluetoothPreference.createDataStore(context)
             +BluetoothPreference(bluetoothDataStore)
+            if (Flags.catalystBluetoothDashboardScreen25q4()) {
+                +BluetoothDeviceRenamePreference(bluetoothDataStore)
+            }
             +BluetoothFooterPreference(bluetoothDataStore)
         }
 

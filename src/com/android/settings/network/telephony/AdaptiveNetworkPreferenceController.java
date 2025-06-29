@@ -105,8 +105,17 @@ public class AdaptiveNetworkPreferenceController {
             Log.w(TAG, "Telephony manager not yet initialized");
             return false;
         }
-        return mTelephonyManager.isNullCipherNotificationsEnabled()
-                && mTelephonyManager.isCellularIdentifierDisclosureNotificationsEnabled();
+        try {
+            return mTelephonyManager.isNullCipherNotificationsEnabled()
+                    && mTelephonyManager.isCellularIdentifierDisclosureNotificationsEnabled();
+        } catch (UnsupportedOperationException e) {
+            Log.e(TAG, "Failed UnsupportedOperationException for isNullCipherNotificationsEnabled "
+                    + "or isCellularIdentifierDisclosureNotificationsEnabled." + e);
+        } catch (IllegalStateException e) {
+            Log.e(TAG, "Failed UnsupportedOperationException for isNullCipherNotificationsEnabled "
+                    + "or isCellularIdentifierDisclosureNotificationsEnabled." + e);
+        }
+        return false;
     }
 
     @VisibleForTesting

@@ -40,7 +40,9 @@ class SupervisionDashboardActivity :
             if (systemSupervisionPackageName != null) {
                 val installIntent =
                     Intent(INSTALL_SUPERVISION_APP_ACTION).setPackage(systemSupervisionPackageName)
-                if (packageManager.queryIntentActivitiesAsUser(installIntent, 0, userId)
+                if (
+                    packageManager
+                        .queryIntentActivitiesAsUser(installIntent, 0, userId)
                         .isNotEmpty()
                 ) {
                     startActivity(installIntent)

@@ -30,10 +30,12 @@ import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
 import com.android.settings.supervision.SupervisionMainSwitchPreference.Companion.REQUEST_CODE_CONFIRM_SUPERVISION_CREDENTIALS
 import com.android.settings.supervision.SupervisionMainSwitchPreference.Companion.REQUEST_CODE_SET_UP_SUPERVISION
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settings.testutils.MetricsRule
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.MainSwitchPreference
@@ -50,8 +52,10 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
+import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [ShadowAlertDialogCompat::class])
 class SupervisionMainSwitchPreferenceTest {
     private val mockLifeCycleContext = mock<PreferenceLifecycleContext>()
     private val mockKeyguardManager = mock<KeyguardManager>()
@@ -79,6 +83,7 @@ class SupervisionMainSwitchPreferenceTest {
     @Before
     fun setUp() {
         preference.onCreate(mockLifeCycleContext)
+        context.setTheme(R.style.Theme_AppCompat) // Needed for AlertDialog creation
     }
 
     @Test
@@ -270,6 +275,27 @@ class SupervisionMainSwitchPreferenceTest {
         verify(mockSupervisionManager, never()).setSupervisionEnabled(true)
     }
 
+    @Test
+    fun toggleOn_multipleProfilesExist_showsErrorDialog() {
+        setSupervisionEnabled(false)
+        mockUserManager.stub {
+            on { userProfiles } doReturn
+                listOf(
+                    MAIN_USER.userHandle,
+                    WORK_PROFILE.userHandle,
+                    SUPERVISING_PROFILE.userHandle,
+                )
+        }
+
+        getMainSwitchPreference().performClick()
+
+        val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()
+        val shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog)
+        assertThat(shadowDialog.title)
+            .isEqualTo(context.getString(R.string.supervision_multi_profile_error_title))
+        verify(mockLifeCycleContext, never()).startActivityForResult(any(), any(), any())
+    }
+
     private fun setSupervisionEnabled(enabled: Boolean) =
         mockSupervisionManager.stub { on { isSupervisionEnabled } doReturn enabled }
 
@@ -329,5 +355,7 @@ class SupervisionMainSwitchPreferenceTest {
         private val MAIN_USER = UserInfo(0, "Main", null, 0, USER_TYPE_FULL_SYSTEM)
         private val SUPERVISING_PROFILE =
             UserInfo(10, "Supervising", null, 0, USER_TYPE_PROFILE_SUPERVISING)
+        private val WORK_PROFILE =
+            UserInfo(11, "Work", null, 0, UserManager.USER_TYPE_PROFILE_MANAGED)
     }
 }

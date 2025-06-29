@@ -21,11 +21,16 @@ import android.app.settings.SettingsEnums.ACTION_SUPERVISION_MAIN_TOGGLE_ON
 import android.app.supervision.SupervisionManager
 import android.content.Context
 import android.content.Intent
+import android.os.UserHandle
+import android.os.UserManager
+import android.util.Log
 import androidx.annotation.VisibleForTesting
+import androidx.appcompat.app.AlertDialog
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.supervision.ipc.PreferenceData
+import com.android.settingslib.HelpUtils
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.BooleanValuePreference
@@ -36,6 +41,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.forEachRecursively
+import com.android.settingslib.supervision.SupervisionLog.TAG
 import com.android.settingslib.widget.MainSwitchPreference
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import kotlinx.coroutines.CoroutineDispatcher
@@ -159,9 +165,31 @@ class SupervisionMainSwitchPreference(
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
         if (newValue !is Boolean) return true
 
-        // If supervision is being enabled but either the supervising profile hasn't been created
-        // or the credentials aren't set, launch SetupSupervisionActivity.
-        if (newValue && !preference.context.isSupervisingCredentialSet) {
+        // Only perform these checks when the user is turning supervision ON.
+        if (newValue) {
+            val userManager = preference.context.getSystemService(UserManager::class.java)
+            if (userManager != null) {
+                val supervisingProfileHandle: UserHandle? = preference.context.supervisingUserHandle
+                val nonSupervisingProfiles =
+                    userManager.userProfiles.filter { it != supervisingProfileHandle }
+
+                // If more than one profile remains (the main user + another), block enabling
+                // supervision.
+                if (nonSupervisingProfiles.size > 1) {
+                    AlertDialog.Builder(preference.context)
+                        .setTitle(R.string.supervision_multi_profile_error_title)
+                        .setMessage(R.string.supervision_multi_profile_error_message)
+                        .setPositiveButton(android.R.string.ok, null)
+                        .setNeutralButton(R.string.learn_more, { _, _ -> onLearnMore() })
+                        .show()
+                    return false
+                }
+            }
+        }
+
+        // If supervision is being toggled but either the supervising profile hasn't been
+        // created or the credentials aren't set, launch SetupSupervisionActivity.
+        if (!preference.context.isSupervisingCredentialSet) {
             val intent = Intent(lifeCycleContext, SetupSupervisionActivity::class.java)
             lifeCycleContext.startActivityForResult(intent, REQUEST_CODE_SET_UP_SUPERVISION, null)
             return false
@@ -199,6 +227,20 @@ class SupervisionMainSwitchPreference(
                     it.summary = newSummary
                 }
             }
+        }
+    }
+
+    private fun onLearnMore() {
+        val intent =
+            HelpUtils.getHelpIntent(
+                lifeCycleContext,
+                lifeCycleContext.getString(R.string.supervision_unavailable_learn_more_link),
+                lifeCycleContext::class.java.name,
+            )
+        if (intent != null) {
+            lifeCycleContext.startActivity(intent)
+        } else {
+            Log.w(TAG, "HelpIntent is null")
         }
     }
 

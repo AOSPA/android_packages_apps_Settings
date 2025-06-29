@@ -39,6 +39,7 @@ import androidx.test.core.view.MotionEventBuilder
 import com.android.settings.R
 import com.android.settings.flags.FakeFeatureFlagsImpl
 import com.android.settings.flags.Flags.FLAG_SHOW_STACKED_MIRRORING_DISPLAY_CONNECTED_DISPLAY_SETTING
+import com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING
 import com.google.common.truth.Truth.assertThat
 import java.util.function.Consumer
 import kotlin.math.abs
@@ -59,6 +60,7 @@ class DisplayTopologyPreferenceTest {
         preference.onBindViewHolder(holder)
 
         featureFlags.setFlag(FLAG_SHOW_STACKED_MIRRORING_DISPLAY_CONNECTED_DISPLAY_SETTING, true)
+        featureFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, false)
     }
 
     class TestInjector(context: Context, featureFlags: FakeFeatureFlagsImpl) :
@@ -716,6 +718,25 @@ class DisplayTopologyPreferenceTest {
             MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
         )
         assertSelected(leftBlock, false)
+    }
+
+    @Test
+    fun showTabbedConnectedDisplaySettingFlagOn_keepHighlightAfterDrag() {
+        featureFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, true)
+        val (leftBlock, _) = setupPaneWithTwoDisplays(POSITION_LEFT, /* childOffset= */ 42f)
+
+        assertSelected(leftBlock, false)
+        leftBlock.dispatchTouchEvent(
+            MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_DOWN)
+                .setPointer(0f, 0f)
+                .build()
+        )
+        assertSelected(leftBlock, true)
+        leftBlock.dispatchTouchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
+        )
+        assertSelected(leftBlock, true)
     }
 
     @Test

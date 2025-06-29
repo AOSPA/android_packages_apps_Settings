@@ -59,7 +59,8 @@ val Context.systemSupervisionPackageName: String?
     }
 
 fun Context.hasNecessarySupervisionComponent(
-    packageName: String? = systemSupervisionPackageName,
+    packageName: String? =
+        resources.getString(com.android.internal.R.string.config_systemSupervision),
     matchAll: Boolean = false,
 ): Boolean {
     if (packageName == null) return false

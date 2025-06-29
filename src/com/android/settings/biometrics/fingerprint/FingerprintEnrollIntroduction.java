@@ -27,8 +27,8 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,8 +46,6 @@ import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
-import com.android.settings.flags.Flags;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -69,8 +67,6 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     private DevicePolicyManager mDevicePolicyManager;
     private boolean mCanAssumeUdfps;
-    @Nullable
-    protected UdfpsEnrollCalibrator mCalibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +84,6 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
 
         mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
-
-        if (Flags.udfpsEnrollCalibration()) {
-            mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
-                    .getUdfpsEnrollCalibrator(getApplicationContext(), savedInstanceState, null);
-        }
 
         final ImageView iconFingerprint = findViewById(R.id.icon_fingerprint);
         final ImageView iconDeviceLocked = findViewById(R.id.icon_device_locked);
@@ -165,16 +156,6 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                 provider.removeGatekeeperPasswordHandle(intent, true);
                 getNextButton().setEnabled(true);
             }));
-        }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (Flags.udfpsEnrollCalibration()) {
-            if (mCalibrator != null) {
-                mCalibrator.onSaveInstanceState(outState);
-            }
         }
     }
 
@@ -397,11 +378,6 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         if (BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
                     BiometricUtils.getGatekeeperPasswordHandle(getIntent()));
-        }
-        if (Flags.udfpsEnrollCalibration()) {
-            if (mCalibrator != null) {
-                intent.putExtras(mCalibrator.getExtrasForNextIntent());
-            }
         }
         intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
                 getIntent().getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1));

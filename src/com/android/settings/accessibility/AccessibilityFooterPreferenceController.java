@@ -114,10 +114,6 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
      * Updates the footer preference with the given data set to this PreferenceController
      */
     public void updateFooterPreferences(@NonNull AccessibilityFooterPreference footerPreference) {
-        final StringBuffer sb = new StringBuffer();
-        sb.append(getIntroductionTitle()).append("\n\n").append(footerPreference.getTitle());
-        footerPreference.setContentDescription(sb);
-
         final Intent helpIntent;
         if (getHelpResource() != 0) {
             // Returns may be null if content is wrong or empty.
@@ -137,8 +133,13 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
             footerPreference.setLinkEnabled(false);
         }
 
+        // Set footer summary and content description, prioritizing mSummary if available,
+        // otherwise using the default title from XML for content description.
         if (!TextUtils.isEmpty(mSummary)) {
             footerPreference.setSummary(mSummary);
+            updateContentDescription(footerPreference, mSummary);
+        } else {
+            updateContentDescription(footerPreference, footerPreference.getTitle());
         }
 
         // Grouping subcomponents to make more accessible.
@@ -150,5 +151,16 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
         } else {
             footerPreference.setVisible(true);
         }
+    }
+
+    private void updateContentDescription(
+            @NonNull AccessibilityFooterPreference footerPreference, CharSequence textToDescribe) {
+        if (TextUtils.isEmpty(textToDescribe)) {
+            return;
+        }
+
+        final StringBuffer sb = new StringBuffer();
+        sb.append(getIntroductionTitle()).append("\n\n").append(textToDescribe);
+        footerPreference.setContentDescription(sb);
     }
 }

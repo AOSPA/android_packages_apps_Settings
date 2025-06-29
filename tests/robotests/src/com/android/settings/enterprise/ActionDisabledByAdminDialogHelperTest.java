@@ -236,6 +236,17 @@ public class ActionDisabledByAdminDialogHelperTest {
         assertEquals("some message", Shadows.shadowOf(textView).innerText());
     }
 
+    @Test
+    public void testSetAdminSupportDetails_nullEnforcingAdmin_emptyString() {
+        final ShadowDevicePolicyManager dpmShadow = ShadowDevicePolicyManager.getShadow();
+        final ViewGroup view = new FrameLayout(mActivity);
+        final TextView textView = createAdminSupportTextView(view, mActivity);
+
+        mHelper.setAdminSupportDetails(mActivity, view, (EnforcingAdmin) null);
+
+        assertEquals("", Shadows.shadowOf(textView).innerText());
+    }
+
     @Ignore
     @Test
     public void testMaybeSetLearnMoreButton() {

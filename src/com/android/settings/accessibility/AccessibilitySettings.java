@@ -33,6 +33,7 @@ import android.util.ArrayMap;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -55,6 +56,7 @@ import java.util.List;
 import java.util.Map;
 
 /** Activity with the accessibility settings. */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class AccessibilitySettings extends BaseSupportFragment implements
         InputManager.InputDeviceListener {
@@ -544,6 +546,11 @@ public class AccessibilitySettings extends BaseSupportFragment implements
                 findPreference(controller.getPreferenceKey())));
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return AccessibilityScreen.KEY;
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_settings) {
                 @Override
@@ -610,3 +617,4 @@ public class AccessibilitySettings extends BaseSupportFragment implements
         mHandler.postDelayed(mUpdateRunnable, DELAY_UPDATE_SERVICES_MILLIS);
     }
 }
+// LINT.ThenChange(AccessibilityScreen.kt)

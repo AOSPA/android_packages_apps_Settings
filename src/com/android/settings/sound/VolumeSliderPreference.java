@@ -134,6 +134,7 @@ public class VolumeSliderPreference extends RestrictedSliderPreference {
         mSuppressionTextView = (TextView) view.findViewById(R.id.suppression_text);
         mTitle = (TextView) view.findViewById(com.android.internal.R.id.title);
         getSlider().setTickInactiveTintList(getSlider().getTickActiveTintList());
+        setSliderStateDescription(formatStateDescription(getValue()));
         onBindViewHolder();
     }
 
@@ -171,6 +172,7 @@ public class VolumeSliderPreference extends RestrictedSliderPreference {
                 if (mCallback != null) {
                     mCallback.onStreamValueChanged(mStream, progress);
                 }
+                setSliderStateDescription(formatStateDescription(progress));
             }
 
             @Override

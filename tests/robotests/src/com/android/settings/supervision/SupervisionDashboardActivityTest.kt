@@ -31,6 +31,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.supervision.SupervisionDashboardActivity.Companion.FULL_SUPERVISION_REDIRECT_ACTION
 import com.android.settings.supervision.SupervisionDashboardActivity.Companion.INSTALL_SUPERVISION_APP_ACTION
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
+import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.ipc.MessengerServiceRule
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
@@ -44,10 +45,12 @@ import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowContextImpl
 
+@Config(shadows = [SettingsShadowResources::class])
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.INSTRUMENTATION_TEST)
 class SupervisionDashboardActivityTest {
@@ -66,6 +69,10 @@ class SupervisionDashboardActivityTest {
         Shadow.extract<ShadowContextImpl>((context as Application).baseContext).apply {
             setSystemService(Context.ROLE_SERVICE, mockSupervisionManager)
         }
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.string.config_systemSupervision,
+            TEST_SUPERVISION_PACKAGE,
+        )
     }
 
     @Test
@@ -216,8 +223,7 @@ class SupervisionDashboardActivityTest {
     }
 
     private fun setUpRedirectActivityComponent(action: String) {
-        val redirectComponentName =
-            ComponentName(TEST_SUPERVISION_PACKAGE, TEST_REDIRECT_ACTIVITY)
+        val redirectComponentName = ComponentName(TEST_SUPERVISION_PACKAGE, TEST_REDIRECT_ACTIVITY)
         val intentFilter = IntentFilter(action)
 
         shadowPackageManager.addActivityIfNotPresent(redirectComponentName)

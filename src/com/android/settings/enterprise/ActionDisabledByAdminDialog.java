@@ -29,6 +29,8 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.security.advancedprotection.AdvancedProtectionManager;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settingslib.RestrictedLockUtils;
@@ -76,7 +78,7 @@ public class ActionDisabledByAdminDialog extends Activity
         }
     }
 
-    @androidx.annotation.VisibleForTesting
+    @VisibleForTesting
     EnforcedAdmin getAdminDetailsFromIntent(Intent intent) {
         final EnforcedAdmin enforcedAdmin = new EnforcedAdmin(null, UserHandle.of(
                 UserHandle.myUserId()));
@@ -138,14 +140,19 @@ public class ActionDisabledByAdminDialog extends Activity
         }
     }
 
-    private EnforcingAdmin getEnforcingAdmin(Intent intent, String restriction) {
+    @VisibleForTesting
+    @Nullable
+    EnforcingAdmin getEnforcingAdmin(Intent intent, String restriction) {
+        if (intent == null || restriction == null) {
+            return null;
+        }
         final DevicePolicyManager dpm = getSystemService(DevicePolicyManager.class);
         final int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
 
         return dpm.getEnforcingAdmin(userId, restriction);
     }
 
-    @androidx.annotation.VisibleForTesting
+    @VisibleForTesting
     String getRestrictionFromIntent(Intent intent) {
         if (intent == null) return null;
         return intent.getStringExtra(DevicePolicyManager.EXTRA_RESTRICTION);
