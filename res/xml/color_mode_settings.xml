@@ -21,8 +21,8 @@
     android:title="@string/color_mode_title">
 
     <PreferenceCategory
-        android:key="color_balance_category"
-        android:title="@string/color_mode_balance_category"
+        android:key="advanced_category"
+        android:title="@string/color_mode_advanced_category"
         android:order="100">
 
         <SeekBarPreference
@@ -45,6 +45,36 @@
             style="@style/SettingsSeekbarPreference.SettingsLib"
             settings:keywords="@string/keywords_color_balance"
             settings:controller="co.aospa.settings.display.ColorBalancePreferenceController" />
+
+        <co.aospa.framework.preference.CustomSeekBarPreference
+            android:key="color_saturation"
+            android:title="@string/color_saturation_title"
+            android:persistent="false"
+            android:defaultValue="100"
+            android:max="200"
+            settings:min="0"
+            settings:units="%"
+            settings:showSign="true"
+            settings:continuousUpdates="true"
+            settings:showButtons="false"
+            settings:controller="co.aospa.settings.display.ColorSaturationPreferenceController" />
+
+        <co.aospa.framework.preference.CustomSeekBarPreference
+            android:key="color_temperature"
+            android:title="@string/color_temperature_title"
+            android:persistent="false"
+            android:defaultValue="6500"
+            android:max="9000"
+            settings:min="3000"
+            settings:interval="100"
+            settings:units="K"
+            settings:showSign="true"
+            settings:continuousUpdates="true"
+            settings:showButtons="false"
+            settings:textStart="@string/color_temperature_start_label"
+            settings:textEnd="@string/color_temperature_end_label"
+            settings:keywords="@string/keywords_color_temperature"
+            settings:controller="co.aospa.settings.display.ColorTemperaturePreferenceController" />
 
     </PreferenceCategory>
 
