@@ -21,6 +21,7 @@ import android.app.supervision.SupervisionManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager.MATCH_ALL
+import android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
@@ -66,7 +67,7 @@ fun Context.hasNecessarySupervisionComponent(
     if (packageName == null) return false
 
     val intent = Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION).setPackage(packageName)
-    val resolveInfoFlag = if (matchAll) MATCH_ALL else 0
+    val resolveInfoFlag = if (matchAll) (MATCH_ALL or MATCH_DISABLED_COMPONENTS) else 0
     return packageManager?.queryIntentServices(intent, resolveInfoFlag)?.isNotEmpty() == true
 }
 

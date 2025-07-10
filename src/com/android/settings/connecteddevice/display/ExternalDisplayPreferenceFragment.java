@@ -19,6 +19,7 @@ package com.android.settings.connecteddevice.display;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
+import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isExternalDisplaySettingsPageEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplayUtilsKt.isDisplayInMirroringMode;
 
 import android.app.Activity;
@@ -42,16 +43,22 @@ import com.android.settings.SettingsPreferenceFragmentBase;
 import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.flags.FeatureFlagsImpl;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * The Settings screen for External Displays configuration and connection management.
  */
+@SearchIndexable
 public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmentBase {
     @VisibleForTesting enum PrefBasics {
         DISPLAY_TOPOLOGY(10, "display_topology_preference", null),
@@ -662,4 +669,25 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             }
         }
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(EXTERNAL_DISPLAY_SETTINGS_RESOURCE) {
+                @Override
+                public @NonNull List<SearchIndexableRaw> getRawDataToIndex(@NonNull Context context,
+                        boolean enabled) {
+                    List<SearchIndexableRaw> rawData = new ArrayList<>();
+                    if (!isExternalDisplaySettingsPageEnabled(new FeatureFlagsImpl())) {
+                        return rawData;
+                    }
+                    SearchIndexableRaw indexInfo = new SearchIndexableRaw(context);
+                    indexInfo.key = "external_display_screen_title";
+                    indexInfo.title = context.getString(EXTERNAL_DISPLAY_TITLE_RESOURCE);
+                    indexInfo.keywords = context.getString(
+                            R.string.keywords_external_display_settings);
+                    indexInfo.screenTitle = context.getString(
+                            R.string.connected_devices_dashboard_title);
+                    rawData.add(indexInfo);
+                    return rawData;
+                }
+            };
 }

@@ -20,9 +20,9 @@ import android.content.Context
 import android.graphics.RectF
 import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayTopology
-import android.hardware.display.DisplayTopology.TreeNode.POSITION_BOTTOM
-import android.hardware.display.DisplayTopology.TreeNode.POSITION_LEFT
-import android.hardware.display.DisplayTopology.TreeNode.POSITION_TOP
+import android.hardware.display.DisplayTopology.POSITION_BOTTOM
+import android.hardware.display.DisplayTopology.POSITION_LEFT
+import android.hardware.display.DisplayTopology.POSITION_TOP
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Size
