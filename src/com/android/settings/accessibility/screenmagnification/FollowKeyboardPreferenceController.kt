@@ -27,6 +27,7 @@ import com.android.settings.core.TogglePreferenceController
 import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 
 /** Controller that accesses and switches the preference status of following typing feature */
+// LINT.IfChange
 class FollowKeyboardPreferenceController(context: Context, prefKey: String) :
     TogglePreferenceController(context, prefKey), DefaultLifecycleObserver {
 
@@ -71,3 +72,4 @@ class FollowKeyboardPreferenceController(context: Context, prefKey: String) :
             Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/FollowKeyboardSwitchPreference.kt)

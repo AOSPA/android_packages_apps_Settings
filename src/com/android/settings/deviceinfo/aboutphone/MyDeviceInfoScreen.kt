@@ -82,7 +82,7 @@ open class MyDeviceInfoScreen :
                 R.string.my_device_info_device_details_category_title,
             ) +=
                 {
-                    +HardwareInfoScreen.KEY order 30
+                    if (Flags.catalystDeviceModel()) +HardwareInfoScreen.KEY order 30
                     addAsync(coroutineScope, Dispatchers.Default) {
                         +SimEidPreference(context) order 31
                     }
@@ -90,7 +90,7 @@ open class MyDeviceInfoScreen :
                     for (i in 0 until activeModemCount) {
                         +ImeiPreference(context, i, activeModemCount) order (i + 33)
                     }
-                    +FirmwareVersionScreen.KEY order 42
+                    if (Flags.catalystFirmwareVersion()) +FirmwareVersionScreen.KEY order 42
                 }
         }
 

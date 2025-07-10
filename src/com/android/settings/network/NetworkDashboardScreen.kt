@@ -62,9 +62,9 @@ open class NetworkDashboardScreen : PreferenceScreenMixin, PreferenceIconProvide
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +MobileNetworkListScreen.KEY order -15
+            if (Flags.catalystMobileNetworkList()) +MobileNetworkListScreen.KEY order -15
             +AirplaneModePreference() order -5
-            +DataSaverScreen.KEY order 10
+            if (Flags.catalystRestrictBackgroundParentEntry()) +DataSaverScreen.KEY order 10
         }
 
     companion object {

@@ -35,6 +35,7 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.app.LocaleStore;
+import com.android.settings.language.LanguageAndRegionSettings;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 
@@ -52,7 +53,7 @@ public class LocaleDialogFragmentTest {
     public final MockitoRule mockito = MockitoJUnit.rule();
 
     private Context mContext;
-    private LocaleListEditor mLocaleListEditor;
+    private LanguageAndRegionSettings mLanguageAndRegionSettings;
     private LocaleDialogFragment mDialogFragment;
     private FakeFeatureFactory mFeatureFactory;
 
@@ -60,7 +61,7 @@ public class LocaleDialogFragmentTest {
     public void setUp() throws Exception {
         mContext = ApplicationProvider.getApplicationContext();
         mDialogFragment = new LocaleDialogFragment();
-        mLocaleListEditor = spy(new LocaleListEditor());
+        mLanguageAndRegionSettings = spy(new LanguageAndRegionSettings());
         mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
@@ -77,7 +78,7 @@ public class LocaleDialogFragmentTest {
         setArgument(DIALOG_CONFIRM_SYSTEM_DEFAULT);
         LocaleDialogFragment.LocaleDialogController controller =
                 mDialogFragment.getLocaleDialogController(mContext, mDialogFragment,
-                        mLocaleListEditor);
+                        mLanguageAndRegionSettings);
 
         LocaleDialogFragment.LocaleDialogController.DialogContent dialogContent =
                 controller.getDialogContent();
@@ -94,7 +95,7 @@ public class LocaleDialogFragmentTest {
         setArgument(LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE);
         LocaleDialogFragment.LocaleDialogController controller =
                 mDialogFragment.getLocaleDialogController(mContext, mDialogFragment,
-                        mLocaleListEditor);
+                        mLanguageAndRegionSettings);
 
         LocaleDialogFragment.LocaleDialogController.DialogContent dialogContent =
                 controller.getDialogContent();

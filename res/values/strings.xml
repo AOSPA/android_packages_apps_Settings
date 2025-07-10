@@ -505,7 +505,7 @@
     <string name="desc_app_locale_selection_supported_with_disclaimer">Choose the language for each app. Language may differ from languages available in the app. Some apps may not support this setting.</string>
 
     <!-- Description for the introduction to language picker activity. [CHAR LIMIT=NONE]-->
-    <string name="desc_introduction_of_language_picker">Your device, apps, and websites use the first supported language from your preferred language list.\n\nMany apps will also use the region from your preferred language to format dates, numbers, and units. To change your region, add a language, then choose your preferred region.</string>
+    <string name="desc_introduction_of_language_picker">Your device, apps, and websites use the first supported language from your preferred language list.</string>
 
     <!-- Description for the notice of language picker. [CHAR LIMIT=NONE]-->
     <string name="desc_notice_of_language_picker">To select a language for each app, go to app language settings.</string>
@@ -9313,19 +9313,19 @@ Data usage charges may apply.</string>
 
 
     <!-- App Info > Notifications: Title for section where notifications AI features can be configured [CHAR LIMIT=80]-->
-    <string name="notification_ai_features_title">AI-powered notifications</string>
+    <string name="notification_ai_features_title">Manage with AI</string>
 
     <!-- App Info > Notifications: Title for section where notifications summaries can be configured [CHAR LIMIT=80]-->
     <string name="notification_summarization_title">Notification summaries</string>
     <string name="notification_summarization_summary">Get quick recaps of longer messages</string>
     <string name="notification_summarization_main_control_title">Use notification summaries</string>
-    <string name="notification_summarization_description">Summarize long messages and group conversations to get quick recaps. Summaries are AI-powered and may contain errors.</string>
+    <string name="notification_summarization_description">Summarize long messages and group conversations to get quick recaps.\n\nSummaries use AI on your device, which may sometimes make mistakes. Your messages are never sent to Google.</string>
     <string name="notification_summarization_excluded_description">Notifications from these apps will not be summarized</string>
     <string name="notification_summarization_manage_excluded_apps">Manage apps</string>
-    <string name="notification_summarization_manage_excluded_apps_title">Allow notification summaries for apps</string>
+    <string name="notification_summarization_manage_excluded_apps_title">Manage apps for notification summaries</string>
     <string name="notification_excluded_apps">Don\'t include these apps</string>
-    <string name="notification_app_level_summarize_title">Summarize notifications</string>
-    <string name="notification_app_level_summarize_subtext">Summarize conversation notifications from this app</string>
+    <string name="notification_app_level_summarize_title">Notification summaries</string>
+    <string name="notification_app_level_summarize_subtext">Get quick recaps of longer messages</string>
 
     <!-- App Info > Notifications: Title for section controlling whether this app may show notifications in a promoted format [CHAR LIMIT=80] -->
     <string name="live_notifications">Live notifications</string>
@@ -9744,12 +9744,12 @@ Data usage charges may apply.</string>
     <!-- Title for Bundled Notifications setting  [CHAR LIMIT=45]-->
     <string name="notification_bundle_title">Notification organizer</string>
     <string name="notification_bundle_summary">Bundle and silence lower priority notifications</string>
-    <string name="notification_bundle_main_control_title">Use Notification organizer</string>
-    <string name="notification_bundle_description">Choose notification types you want to silence and bundle together to minimize interruptions. Bundling is AI-powered and may contain errors.</string>
+    <string name="notification_bundle_main_control_title">Use notification organizer</string>
+    <string name="notification_bundle_description">Choose notification types you want to silence and bundle together to minimize interruptions.\n\nThe organizer uses AI on your device, which may sometimes make mistakes. Your notifications are never sent to Google.</string>
 
-    <string name="notification_app_level_bundle_title">Bundle notifications</string>
-    <string name="notification_app_level_bundle_subtext">Notifications with similar themes will be silenced and grouped together for a quieter experience</string>
-    <string name="notification_bundle_manage_excluded_apps_title">Allow notification bundling for apps</string>
+    <string name="notification_app_level_bundle_title">Notification organizer</string>
+    <string name="notification_app_level_bundle_subtext">Bundle and silence lower priority notifications</string>
+    <string name="notification_bundle_manage_excluded_apps_title">Manage apps for notification organizer</string>
 
     <!-- Label for switch enabling notification adjustments (notification organizer, summaries) for work profile -->
     <string name="notification_adjustment_work_switch_title">Apply to work profile apps</string>

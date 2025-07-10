@@ -21,7 +21,7 @@ import android.provider.Settings
 import android.window.DesktopExperienceFlags
 
 
-fun isDisplayInMiroringMode(context: Context) =
+fun isDisplayInMirroringMode(context: Context) =
     if (DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue) {
         0 != Settings.Secure.getInt(context.contentResolver,
             Settings.Secure.MIRROR_BUILT_IN_DISPLAY, 0)

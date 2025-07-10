@@ -23,6 +23,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.pm.ShortcutInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -40,12 +41,16 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.flags.Flags;
 import com.android.settings.notification.FutureUtil;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.PrimarySwitchPreference;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.ButtonPreference;
 import com.android.settingslib.widget.ExpandablePreference;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -116,6 +121,22 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
     }
 
     @Override
+    protected void onResume(NotificationBackend.AppRow appRow,
+            @Nullable NotificationChannel channel, @Nullable NotificationChannelGroup group,
+            Drawable conversationDrawable, ShortcutInfo conversationInfo,
+            RestrictedLockUtils.EnforcedAdmin admin, List<String> preferenceFilter) {
+        if (Flags.notificationsRememberChannelListState()) {
+            // If we previously toggled "Show All", don't lose that on the next onResume()
+            if (mAppRow != null && mAppRow.showAllChannels) {
+                appRow.showAllChannels = true;
+            }
+        }
+
+        super.onResume(appRow, channel, group, conversationDrawable, conversationInfo, admin,
+                preferenceFilter);
+    }
+
+    @Override
     public void updateState(Preference preference) {
         mPreference = (PreferenceCategory) preference;
         FutureUtil.whenDone(mBackgroundExecutor.submit(this::loadChannels),
@@ -169,15 +190,30 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         Preference showMore = mPreference.findPreference(KEY_SHOW_MORE);
         if (!mAppRow.showAllChannels && mVisibleChannelCount != mChannelCount) {
             if (showMore == null) {
-                showMore = new Preference(mContext);
+                if (Flags.notificationsRememberChannelListState()
+                        && SettingsThemeHelper.isExpressiveTheme(mContext)) {
+                    ButtonPreference showMoreButton = new ButtonPreference(mContext);
+                    showMoreButton.setButtonStyle(ButtonPreference.TYPE_TONAL,
+                            ButtonPreference.SIZE_LARGE);
+                    showMoreButton.setIcon(
+                            com.android.settingslib.widget.preference.menu.R.drawable
+                                    .settingslib_expressive_icon_more_vert);
+                    showMoreButton.setOnClickListener(unused -> {
+                        mAppRow.showAllChannels = true;
+                        mDependentFieldListener.onFieldValueChanged();
+                    });
+                    showMore = showMoreButton;
+                } else {
+                    showMore = new Preference(mContext);
+                    showMore.setOnPreferenceClickListener(preference1 -> {
+                        mAppRow.showAllChannels = true;
+                        mDependentFieldListener.onFieldValueChanged();
+                        return true;
+                    });
+                }
                 showMore.setKey(KEY_SHOW_MORE);
                 showMore.setTitle(R.string.no_recent_channels);
                 showMore.setOrder(1000000);
-                showMore.setOnPreferenceClickListener(preference1 -> {
-                    mAppRow.showAllChannels = true;
-                    mDependentFieldListener.onFieldValueChanged();
-                    return true;
-                });
                 mPreference.addPreference(showMore);
             }
         } else if (showMore != null) {

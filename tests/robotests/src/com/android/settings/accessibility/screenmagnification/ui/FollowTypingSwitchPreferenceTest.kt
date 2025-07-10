@@ -1,0 +1,151 @@
+/*
+ * Copyright (C) 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.accessibility.screenmagnification.ui
+
+import android.content.Context
+import android.content.Intent
+import android.provider.Settings
+import androidx.activity.ComponentActivity
+import androidx.preference.SwitchPreferenceCompat
+import androidx.test.core.app.ApplicationProvider
+
+import com.android.settings.R
+import com.android.settings.testutils.AccessibilityTestUtils.setWindowMagnificationSupported
+import com.android.settings.testutils.SettingsStoreRule
+import com.android.settings.testutils.inflateViewHolder
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.preference.createAndBindWidget
+import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
+import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
+
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.android.controller.ActivityController
+
+@RunWith(RobolectricTestRunner::class)
+class FollowTypingSwitchPreferenceTest {
+    @get:Rule(order = 0) val settingsStoreRule = SettingsStoreRule()
+
+    private val context : Context = ApplicationProvider.getApplicationContext()
+    private val preference = FollowTypingSwitchPreference()
+
+    @Test
+    fun key() {
+        assertThat(preference.key)
+            .isEqualTo(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED)
+    }
+
+    @Test
+    fun getTitle() {
+        assertThat(preference.title)
+            .isEqualTo(R.string.accessibility_screen_magnification_follow_typing_title)
+    }
+
+    @Test
+    fun getSummary() {
+        assertThat(preference.summary)
+            .isEqualTo(R.string.accessibility_screen_magnification_follow_typing_summary)
+    }
+
+    @Test
+    fun performClick_switchOn_assertSwitchOff() {
+        getStorage().setBoolean(
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED, true)
+        val preferenceWidget = createFollowTypingWidget()
+        assertThat(preferenceWidget.isChecked).isTrue()
+
+        preferenceWidget.performClick()
+
+        assertThat(preferenceWidget.isChecked).isFalse()
+        assertThat(getStorage().getBoolean(
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED)).isFalse()
+    }
+
+    @Test
+    fun performClick_switchOff_assertSwitchOn() {
+        getStorage().setBoolean(
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED, false)
+        val preferenceWidget = createFollowTypingWidget()
+        assertThat(preferenceWidget.isChecked).isFalse()
+
+        preferenceWidget.performClick()
+
+        assertThat(preferenceWidget.isChecked).isTrue()
+        assertThat(getStorage().getBoolean(
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED)).isTrue()
+    }
+
+    @Test
+    fun isAvailable_inSetupWizard_isUnavailable() {
+        assertIsAvailable(
+            inSetupWizard = true,
+            windowMagnificationSupported = true,
+            expectedAvailability = false,
+        )
+    }
+
+    @Test
+    fun isAvailable_windowMagnificationNotSupported_isUnavailable() {
+        assertIsAvailable(
+            inSetupWizard = false,
+            windowMagnificationSupported = false,
+            expectedAvailability = false,
+        )
+    }
+
+    @Test
+    fun isAvailable_windowMagnificationSupported_isAvailable() {
+        assertIsAvailable(
+            inSetupWizard = false,
+            windowMagnificationSupported = true,
+            expectedAvailability = true,
+        )
+    }
+
+    private fun assertIsAvailable(
+        inSetupWizard: Boolean,
+        windowMagnificationSupported: Boolean,
+        expectedAvailability: Boolean,
+    ) {
+        var activityController: ActivityController<ComponentActivity>? = null
+        try {
+            activityController =
+                ActivityController.of(
+                    ComponentActivity(),
+                    Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
+                )
+                    .create()
+                    .start()
+                    .postCreate(null)
+                    .resume()
+            setWindowMagnificationSupported(context, windowMagnificationSupported)
+            assertThat(preference.isAvailable(activityController.get()))
+                .isEqualTo(expectedAvailability)
+        } finally {
+            activityController?.destroy()
+        }
+    }
+
+    private fun createFollowTypingWidget(): SwitchPreferenceCompat =
+        preference.createAndBindWidget<SwitchPreferenceCompat>(context).apply {
+            inflateViewHolder()
+        }
+
+    private fun getStorage(): KeyValueStore = preference.storage(context)
+}

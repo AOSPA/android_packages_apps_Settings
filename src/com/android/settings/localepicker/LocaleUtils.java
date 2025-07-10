@@ -32,13 +32,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.LocaleList;
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.core.app.NotificationCompat;
 
 import com.android.internal.app.LocaleHelper;
+import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
@@ -279,5 +282,30 @@ public class LocaleUtils {
             }
         }
         return getSortedLocaleList(searchItem, isCountryMode);
+    }
+
+    public static List<LocaleStore.LocaleInfo> getUserLocaleList() {
+        final List<LocaleStore.LocaleInfo> result = new ArrayList<>();
+        final LocaleList localeList = LocalePicker.getLocales();
+        for (int i = 0; i < localeList.size(); i++) {
+            result.add(LocaleStore.getLocaleInfo(localeList.get(i)));
+        }
+        return result;
+    }
+
+    public static LocaleStore.LocaleInfo mayAppendUnicodeTags(
+            LocaleStore.LocaleInfo localeInfo, String recordTags) {
+        if (TextUtils.isEmpty(recordTags) || TextUtils.equals("und", recordTags)) {
+            // No recorded tag, return inputted LocaleInfo.
+            return localeInfo;
+        }
+        Locale recordLocale = Locale.forLanguageTag(recordTags);
+        Locale.Builder builder = new Locale.Builder()
+                .setLocale(localeInfo.getLocale());
+        recordLocale.getUnicodeLocaleKeys().forEach(key ->
+                builder.setUnicodeLocaleKeyword(key, recordLocale.getUnicodeLocaleType(key)));
+        LocaleStore.LocaleInfo newLocaleInfo = LocaleStore.fromLocale(builder.build());
+        newLocaleInfo.setTranslated(localeInfo.isTranslated());
+        return newLocaleInfo;
     }
 }

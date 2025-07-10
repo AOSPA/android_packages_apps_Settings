@@ -75,7 +75,7 @@ open class SoundScreen : PreferenceScreenMixin, PreferenceIconProvider {
                 }
             }
             +PreferenceCategory(AUDIO_CATEGORY, R.string.sound_audio_category_title) order -120 += {
-                +MediaControlsScreen.KEY order -100
+                if (Flags.catalystMediaControls()) +MediaControlsScreen.KEY order -100
             }
             +PreferenceCategory(
                 SOUNDS_AND_VIBRATIONS_CATEGORY,

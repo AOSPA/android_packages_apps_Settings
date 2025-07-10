@@ -492,7 +492,7 @@ class DisplayTopologyPreferenceController(
     }
 
     private fun showStackedMirroringDisplay() =
-        isDisplayInMiroringMode(context) &&
+        isDisplayInMirroringMode(context) &&
             injector.flags.showStackedMirroringDisplayConnectedDisplaySetting()
 
     private fun displayBlocks(): ArrayDeque<DisplayBlock> {

@@ -20,6 +20,8 @@ import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertNull;
@@ -30,43 +32,47 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-import android.app.Instrumentation;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ParceledListSlice;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
-import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.SmallTest;
-import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.NotificationsSentState;
 import com.android.settingslib.PrimarySwitchPreference;
 
+import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.MoreExecutors;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
 @SmallTest
 public class ChannelListPreferenceControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private Context mContext;
     @Mock
     private NotificationBackend mBackend;
@@ -82,26 +88,72 @@ public class ChannelListPreferenceControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
-        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        instrumentation.runOnMainSync(() -> {
-            when(mBackend.loadAppRow(any(), any(), any(ApplicationInfo.class)))
-                    .thenCallRealMethod();
-            mAppRow = mBackend.loadAppRow(mContext,
-                    mContext.getPackageManager(), mContext.getApplicationInfo());
-            mController = new ChannelListPreferenceController(
-                    mContext, mDependentFieldListener, mBackend);
-            mController.setExecutors(MoreExecutors.newDirectExecutorService(),
-                    MoreExecutors.directExecutor());
-            mController.onResume(mAppRow, null, null, null, null, null, null);
-            mPreferenceManager = new PreferenceManager(mContext);
-            mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
-            mGroupList = new PreferenceCategory(mContext);
-            mPreferenceScreen.addPreference(mGroupList);
-        });
+        when(mBackend.loadAppRow(any(), any(), any(ApplicationInfo.class)))
+                .thenCallRealMethod();
+        mAppRow = mBackend.loadAppRow(mContext,
+                mContext.getPackageManager(), mContext.getApplicationInfo());
+        mController = new ChannelListPreferenceController(
+                mContext, mDependentFieldListener, mBackend);
+        mController.setExecutors(MoreExecutors.newDirectExecutorService(),
+                MoreExecutors.directExecutor());
+        mController.onResume(mAppRow, null, null, null, null, null, null);
+        mPreferenceManager = new PreferenceManager(mContext);
+        mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
+        mGroupList = new PreferenceCategory(mContext);
+        mPreferenceScreen.addPreference(mGroupList);
     }
 
     @Test
-    @UiThreadTest
+    @EnableFlags(Flags.FLAG_NOTIFICATIONS_REMEMBER_CHANNEL_LIST_STATE)
+    public void onResume_preservesShowAll() {
+        // 3 channels in 2 categories, 1 of them recent
+        when(mBackend.getChannelCount(any(), anyInt())).thenReturn(3);
+
+        NotificationChannelGroup group1 = new NotificationChannelGroup("group1", "Group 1");
+        NotificationChannel recentChannel = new NotificationChannel("ch1b", "Channel 1B",
+                IMPORTANCE_DEFAULT);
+        group1.addChannel(new NotificationChannel("ch1a", "Channel 1A", IMPORTANCE_DEFAULT));
+        group1.addChannel(recentChannel);
+        NotificationChannelGroup group2 = new NotificationChannelGroup("group2", "Group 2");
+        group2.addChannel(new NotificationChannel("ch2a", "Channel 1A", IMPORTANCE_DEFAULT));
+        when(mBackend.getGroups(any(), anyInt())).thenReturn(
+                new ParceledListSlice<>(Lists.newArrayList(List.of(group1, group2))));
+
+        NotificationChannelGroup recentGroup = new NotificationChannelGroup("group1", "Group 1");
+        recentGroup.addChannel(recentChannel.copy());
+        when(mBackend.getGroupsWithRecentBlockedFilter(any(), anyInt())).thenReturn(
+                new ParceledListSlice<>(Lists.newArrayList(List.of(recentGroup))));
+
+        // Load with recent groups only
+        NotificationBackend.AppRow startAppRow = mBackend.loadAppRow(mContext,
+                mContext.getPackageManager(), mContext.getApplicationInfo());
+        mController.onResume(startAppRow, null, null, null, null, null, null);
+        mController.updateState(mGroupList);
+
+        assertThat(mGroupList.getPreferenceCount()).isEqualTo(2);
+        assertThat(mGroupList.getPreference(0).getKey()).isEqualTo("group1");
+        assertThat(mGroupList.getPreference(1).getKey()).isEqualTo("show_more");
+
+        // "Click" on show all
+        startAppRow.showAllChannels = true;
+        mController.updateState(mGroupList);
+        assertThat(mGroupList.getPreferenceCount()).isEqualTo(2);
+        assertThat(mGroupList.getPreference(0).getKey()).isEqualTo("group1");
+        assertThat(mGroupList.getPreference(1).getKey()).isEqualTo("group2");
+
+        // Now pause and resume.
+        NotificationBackend.AppRow secondAppRow = mBackend.loadAppRow(mContext,
+                mContext.getPackageManager(), mContext.getApplicationInfo());
+        mController.onResume(secondAppRow, null, null, null, null, null, null);
+        mController.updateState(mGroupList);
+
+        // Still showing all categories.
+        assertThat(mGroupList.getPreferenceCount()).isEqualTo(2);
+        assertThat(mGroupList.getPreference(0).getKey()).isEqualTo("group1");
+        assertThat(mGroupList.getPreference(1).getKey()).isEqualTo("group2");
+    }
+
+    @Test
     public void testUpdateState_incrementalUpdates() {
         // Start by testing the case with no groups or channels
         List<NotificationChannelGroup> inGroups = new ArrayList<>();
@@ -311,9 +363,7 @@ public class ChannelListPreferenceControllerTest {
         }
     }
 
-
     @Test
-    @UiThreadTest
     public void testupdateState_groupBlockedChange() {
         List<NotificationChannelGroup> inGroups = new ArrayList<>();
         NotificationChannelGroup inGroup = new NotificationChannelGroup("group", "My Group");
@@ -384,7 +434,6 @@ public class ChannelListPreferenceControllerTest {
     }
 
     @Test
-    @UiThreadTest
     public void testupdateState_channelUpdates() {
         List<NotificationChannelGroup> inGroups = new ArrayList<>();
         NotificationChannelGroup inGroup = new NotificationChannelGroup("group", "Group");

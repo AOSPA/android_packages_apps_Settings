@@ -84,7 +84,7 @@ open class LocationScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +LocationMainSwitch()
-            +RecentLocationAccessScreen.KEY
+            if (Flags.catalystLocationSettings()) +RecentLocationAccessScreen.KEY
         }
 
     companion object {

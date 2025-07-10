@@ -19,7 +19,7 @@ package com.android.settings.connecteddevice.display;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
-import static com.android.settings.connecteddevice.display.ExternalDisplayUtilsKt.isDisplayInMiroringMode;
+import static com.android.settings.connecteddevice.display.ExternalDisplayUtilsKt.isDisplayInMirroringMode;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -450,7 +450,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             }
         }
         if (mInjector.getFlags().displaySizeConnectedDisplaySetting()
-                && !isDisplayInMiroringMode(requireContext())) {
+                && !isDisplayInMirroringMode(requireContext())) {
             addSizePreference(refresh, display, position);
         }
     }
