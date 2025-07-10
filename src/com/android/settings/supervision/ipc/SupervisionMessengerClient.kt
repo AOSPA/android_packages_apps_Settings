@@ -18,11 +18,14 @@ package com.android.settings.supervision.ipc
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.core.content.edit
 import com.android.settings.supervision.PreferenceDataProvider
 import com.android.settings.supervision.SupportedAppsProvider
 import com.android.settings.supervision.systemSupervisionPackageName
 import com.android.settingslib.ipc.MessengerServiceClient
 import com.android.settingslib.supervision.SupervisionLog
+import org.json.JSONException
+import org.json.JSONObject
 
 /**
  * A specialized [MessengerServiceClient] for interacting with the system supervision service.
@@ -40,6 +43,10 @@ class SupervisionMessengerClient(context: Context) :
 
     override val packageName = context.systemSupervisionPackageName
 
+    private val prefs by lazy {
+        context.getSharedPreferences(PREFERENCE_FILE_NAME, Context.MODE_PRIVATE)
+    }
+
     /**
      * Retrieves preference data from the system supervision app.
      *
@@ -51,16 +58,46 @@ class SupervisionMessengerClient(context: Context) :
      * @return A map of preference data, where the keys are the preference keys and the values are
      *   [PreferenceData] objects, or an empty map if an error occurs.
      */
-    override suspend fun getPreferenceData(keys: List<String>): Map<String, PreferenceData> =
+    override suspend fun getPreferenceData(keys: List<String>): Map<String, PreferenceData> {
+        if (keys.isEmpty()) {
+            return mapOf()
+        }
+        val cacheKey = generateCacheKeyForPreferences(keys)
+
         try {
             val targetPackageName = packageName ?: return mapOf()
 
-            invoke(targetPackageName, PreferenceDataApi(), PreferenceDataRequest(keys = keys))
-                .await()
+            val cachedPreferenceDataMap = getCachedPreferenceData(keys)
+            val freshPreferenceDataMap =
+                invoke(targetPackageName, PreferenceDataApi(), PreferenceDataRequest(keys = keys))
+                    .await()
+            if (cachedPreferenceDataMap != freshPreferenceDataMap) {
+                prefs.edit {
+                    putString(cacheKey, serializePreferenceDataMap(freshPreferenceDataMap))
+                }
+            }
+            return freshPreferenceDataMap
         } catch (e: Exception) {
             Log.e(SupervisionLog.TAG, "Error fetching Preference data from supervision app", e)
-            mapOf()
+            return mapOf()
         }
+    }
+
+    /**
+     * Retrieves cached preference data for the specified keys.
+     *
+     * Fetches cached preference data from local file system, the data is deserialized from JSON
+     * formatted string. If no cached data is found or deserialization fails, an empty map is
+     * returned.
+     *
+     * @param keys A list of strings representing the keys for which preference data is requested.
+     * @return A map where the keys are the requested keys, and the values are the corresponding
+     *   [PreferenceData] objects.
+     */
+    override fun getCachedPreferenceData(keys: List<String>): Map<String, PreferenceData> {
+        val cacheKey = generateCacheKeyForPreferences(keys)
+        return prefs.getString(cacheKey, null)?.let { deserializePreferenceDataMap(it) } ?: mapOf()
+    }
 
     /**
      * Retrieves supported apps for the specified filter keys.
@@ -83,8 +120,50 @@ class SupervisionMessengerClient(context: Context) :
             mapOf()
         }
 
+    /**
+     * Generates a deterministic cache key from a list of preference keys. The keys are sorted to
+     * ensure that the order of keys in the input list does not affect the resulting cache key.
+     */
+    private fun generateCacheKeyForPreferences(keys: List<String>): String {
+        // Sort keys to ensure the cache key is consistent regardless of input order.
+        val sortedKeys = keys.sorted()
+        // Create a unique key by joining sorted keys. Add a prefix for clarity and to avoid
+        // potential collisions with other keys in SharedPreferences.
+        return "${PREFERENCE_DATA_CACHE_KEY_PREFIX}_${sortedKeys.joinToString("_")}"
+    }
+
+    private fun serializePreferenceDataMap(dataMap: Map<String, PreferenceData>): String? {
+        return try {
+            val jsonObject = JSONObject()
+            for ((key, prefData) in dataMap) {
+                jsonObject.put(key, prefData.toJsonObject())
+            }
+            jsonObject.toString()
+        } catch (e: JSONException) {
+            Log.e(SupervisionLog.TAG, "Error serializing preference data map: $e")
+            null
+        }
+    }
+
+    private fun deserializePreferenceDataMap(jsonString: String): Map<String, PreferenceData>? {
+        return try {
+            val jsonObject = JSONObject(jsonString)
+            buildMap {
+                for (key in jsonObject.keys()) {
+                    val prefJson = jsonObject.getJSONObject(key)
+                    put(key, PreferenceData(prefJson))
+                }
+            }
+        } catch (e: JSONException) {
+            Log.e(SupervisionLog.TAG, "Error deserializing preference data map: $e")
+            null
+        }
+    }
+
     companion object {
         const val SUPERVISION_MESSENGER_SERVICE_BIND_ACTION =
             "android.app.supervision.action.SUPERVISION_MESSENGER_SERVICE"
+        const val PREFERENCE_FILE_NAME = "supervision_messenger_cache"
+        const val PREFERENCE_DATA_CACHE_KEY_PREFIX = "supervision_pref_data"
     }
 }

@@ -17,14 +17,13 @@ package com.android.settings.fuelgauge.batteryusage
 
 import android.content.ContextWrapper
 import android.content.res.Resources
-import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.preference.PreferenceFragmentCompat
 import com.android.settings.R
 import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settings.testutils.shadow.ShadowUtils
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Test
@@ -73,21 +72,6 @@ class PowerUsageSummaryScreenTest : SettingsCatalystTestCase() {
     fun getIcon_isExpressiveTheme() {
         assertThat(preferenceScreenCreator.getIcon(context))
             .isEqualTo(R.drawable.ic_homepage_battery)
-    }
-
-    @Test
-    @DisableFlags(com.android.settingslib.widget.theme.flags.Flags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED)
-    @EnableFlags(Flags.FLAG_HOMEPAGE_REVAMP)
-    fun getIcon_whenHomePageRevampFlagOn() {
-        assertThat(preferenceScreenCreator.getIcon(context))
-            .isEqualTo(R.drawable.ic_settings_battery_filled)
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_HOMEPAGE_REVAMP)
-    fun getIcon_whenHomePageRevampFlagOff() {
-        assertThat(preferenceScreenCreator.getIcon(context))
-            .isEqualTo(R.drawable.ic_settings_battery_white)
     }
 
     @Test

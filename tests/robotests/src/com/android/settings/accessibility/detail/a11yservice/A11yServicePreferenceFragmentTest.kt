@@ -181,10 +181,11 @@ class A11yServicePreferenceFragmentTest :
 
     @Test
     @TestParameters(
-        value = [
-            "{serviceOn: true, useServiceToggleChecked: true}",
-            "{serviceOn: false, useServiceToggleChecked: false}",
-        ]
+        value =
+            [
+                "{serviceOn: true, useServiceToggleChecked: true}",
+                "{serviceOn: false, useServiceToggleChecked: false}",
+            ]
     )
     fun showFragment(serviceOn: Boolean, useServiceToggleChecked: Boolean) {
         val a11yServiceInfo = createA11yServiceInfo()
@@ -204,10 +205,7 @@ class A11yServicePreferenceFragmentTest :
 
     @Test
     @TestParameters(
-        value = [
-            "{allow: true, expectServiceOn: true}",
-            "{allow: false, expectServiceOn: false}"
-        ]
+        value = ["{allow: true, expectServiceOn: true}", "{allow: false, expectServiceOn: false}"]
     )
     fun turnOnService_serviceWarningRequired_click(allow: Boolean, expectServiceOn: Boolean) {
         val a11yServiceInfo = createA11yServiceInfo()
@@ -251,10 +249,11 @@ class A11yServicePreferenceFragmentTest :
 
     @Test
     @TestParameters(
-        value = [
-            "{turnOff: true, expectedServiceOff: true}",
-            "{turnOff: false, expectedServiceOff: false}",
-        ]
+        value =
+            [
+                "{turnOff: true, expectedServiceOff: true}",
+                "{turnOff: false, expectedServiceOff: false}",
+            ]
     )
     fun turnOffService_showDisableServiceDialog_click(
         turnOff: Boolean,
@@ -290,10 +289,7 @@ class A11yServicePreferenceFragmentTest :
 
     @Test
     @TestParameters(
-        value = [
-            "{allow: true, expectShortcutOn: true}",
-            "{allow: false, expectShortcutOn: false}"
-        ]
+        value = ["{allow: true, expectShortcutOn: true}", "{allow: false, expectShortcutOn: false}"]
     )
     fun turnOnShortcut_serviceWarningRequired_click(allow: Boolean, expectShortcutOn: Boolean) {
         val a11yServiceInfo = createA11yServiceInfo()
@@ -379,10 +375,11 @@ class A11yServicePreferenceFragmentTest :
 
     @Test
     @TestParameters(
-        value = [
-            "{allow: true, expectEditShortcutsScreenShown: true}",
-            "{allow: false, expectEditShortcutsScreenShown: false}",
-        ]
+        value =
+            [
+                "{allow: true, expectEditShortcutsScreenShown: true}",
+                "{allow: false, expectEditShortcutsScreenShown: false}",
+            ]
     )
     fun clickShortcutSetting_serviceWarningRequired_dialogShown_click(
         allow: Boolean,
@@ -442,8 +439,6 @@ class A11yServicePreferenceFragmentTest :
 
         assertThat(preference).isNotNull()
         assertThat(preference!!.isVisible).isTrue()
-        assertThat(preference.contentDescription.toString())
-            .isEqualTo("About ${DEFAULT_LABEL}\n\nnull")
         assertThat(preference.summary.toString())
             .isEqualTo(
                 Html.fromHtml(
@@ -454,6 +449,8 @@ class A11yServicePreferenceFragmentTest :
                     )
                     .toString()
             )
+        assertThat(preference.contentDescription.toString())
+            .isEqualTo("About ${DEFAULT_LABEL}\n\n${preference.summary}")
     }
 
     @Test
@@ -467,19 +464,20 @@ class A11yServicePreferenceFragmentTest :
 
         assertThat(preference).isNotNull()
         assertThat(preference!!.isVisible).isTrue()
-        assertThat(preference.contentDescription.toString())
-            .isEqualTo("About ${DEFAULT_LABEL}\n\nnull")
         assertThat(preference.summary.toString()).isEqualTo(DEFAULT_DESCRIPTION)
+        assertThat(preference.contentDescription.toString())
+            .isEqualTo("About ${DEFAULT_LABEL}\n\n${preference.summary}")
     }
 
     @Test
     @Config(shadows = [SettingsShadowResources::class])
     @TestParameters(
-        value = [
-            "{isDefaultA11yService: true, volumeShortcutTargets: null, expectedVolumeShortcutTargets: $PLACEHOLDER_A11Y_SERVICE_COMPONENT_STRING}",
-            "{isDefaultA11yService: true, volumeShortcutTargets: '', expectedVolumeShortcutTargets: ''}",
-            "{isDefaultA11yService: false, volumeShortcutTargets: null, expectedVolumeShortcutTargets: null}",
-        ]
+        value =
+            [
+                "{isDefaultA11yService: true, volumeShortcutTargets: null, expectedVolumeShortcutTargets: $PLACEHOLDER_A11Y_SERVICE_COMPONENT_STRING}",
+                "{isDefaultA11yService: true, volumeShortcutTargets: '', expectedVolumeShortcutTargets: ''}",
+                "{isDefaultA11yService: false, volumeShortcutTargets: null, expectedVolumeShortcutTargets: null}",
+            ]
     )
     fun showFragment_writeDefaultServiceIfNeeded(
         isDefaultA11yService: Boolean,

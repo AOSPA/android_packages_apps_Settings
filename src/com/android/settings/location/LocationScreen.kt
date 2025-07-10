@@ -71,8 +71,7 @@ open class LocationScreen :
     override fun getIcon(context: Context) =
         when {
             isExpressiveTheme(context) -> R.drawable.ic_homepage_location
-            Flags.homepageRevamp() -> R.drawable.ic_settings_location_filled
-            else -> R.drawable.ic_settings_location
+            else -> R.drawable.ic_settings_location_filled
         }
 
     override fun isFlagEnabled(context: Context) = Flags.catalystLocationSettings()

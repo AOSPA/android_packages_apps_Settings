@@ -532,17 +532,15 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         // Handle homepage icons
         if (TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
-            if (Flags.homepageRevamp()) {
-                if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
-                    preference.setIcon(getExpressiveHomepageIcon(tile, iconDrawable, iconPackage));
-                    return;
-                }
-                // Skip tinting and Adaptive Icon transformation for homepage account type raw icons
-                if (TextUtils.equals(tile.getGroupKey(), TOP_LEVEL_ACCOUNT_CATEGORY)
-                        && iconPackage == null) {
-                    preference.setIcon(iconDrawable);
-                    return;
-                }
+            if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
+                preference.setIcon(getExpressiveHomepageIcon(tile, iconDrawable, iconPackage));
+                return;
+            }
+            // Skip tinting and Adaptive Icon transformation for homepage account type raw icons
+            if (TextUtils.equals(tile.getGroupKey(), TOP_LEVEL_ACCOUNT_CATEGORY)
+                    && iconPackage == null) {
+                preference.setIcon(iconDrawable);
+                return;
             }
             iconDrawable.setTint(Utils.getHomepageIconColor(preference.getContext()));
         }

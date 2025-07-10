@@ -34,6 +34,7 @@ import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -65,6 +66,7 @@ public class AudioStreamConfirmDialogActivityTest {
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock private LocalBluetoothManager mLocalBluetoothManager;
     @Mock private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
+    @Mock private LeAudioProfile mLeAudio;
     @Mock private LocalBluetoothLeBroadcast mBroadcast;
     @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
     @Mock private VolumeControlProfile mVolumeControl;
@@ -83,10 +85,12 @@ public class AudioStreamConfirmDialogActivityTest {
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
+        when(mLocalBluetoothProfileManager.getLeAudioProfile()).thenReturn(mLeAudio);
         when(mLocalBluetoothProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
         when(mLocalBluetoothProfileManager.getLeAudioBroadcastAssistantProfile())
                 .thenReturn(mAssistant);
         when(mLocalBluetoothProfileManager.getVolumeControlProfile()).thenReturn(mVolumeControl);
+        when(mLeAudio.isProfileReady()).thenReturn(true);
         when(mBroadcast.isProfileReady()).thenReturn(true);
         when(mAssistant.isProfileReady()).thenReturn(true);
         when(mVolumeControl.isProfileReady()).thenReturn(true);

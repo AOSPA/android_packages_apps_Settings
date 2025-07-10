@@ -17,11 +17,13 @@
 package com.android.settings.connecteddevice.display
 
 import android.app.Application
+import android.hardware.display.DisplayTopology
 import android.view.Display.DEFAULT_DISPLAY
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import java.util.function.Consumer
 
 /** Centralized data source to provide display updates for display preference fragments */
 class DisplayPreferenceViewModel
@@ -37,11 +39,32 @@ constructor(
         val selectedDisplayId: Int,
     )
 
+    private val appContext = application.applicationContext
     private val selectedDisplayId = MutableLiveData<Int>()
     private val enabledDisplays = MutableLiveData<Map<Int, DisplayDevice>>()
 
     private val uiStateMediator = MediatorLiveData<DisplayUiState>()
     val uiState: LiveData<DisplayUiState> = uiStateMediator
+
+    private val displayListener =
+        object : ExternalDisplaySettingsConfiguration.DisplayListener() {
+            override fun update(displayId: Int) {
+                // This listens to updates while in mirroring mode because topology update doesn't
+                // happen. In non-mirroring mode, both display update and topology update might
+                // happen, to prevent double update causing flickering, only listen to one at a
+                // time, depending on the mirroring mode
+                if (isDisplayInMirroringMode(appContext)) {
+                    updateEnabledDisplays()
+                }
+            }
+        }
+
+    private val topologyListener =
+        Consumer<DisplayTopology> {
+            if (!isDisplayInMirroringMode(appContext)) {
+                updateEnabledDisplays()
+            }
+        }
 
     init {
         val updateMediator = {
@@ -52,8 +75,17 @@ constructor(
         uiStateMediator.addSource(enabledDisplays) { updateMediator() }
         uiStateMediator.addSource(selectedDisplayId) { updateMediator() }
 
+        injector.registerDisplayListener(displayListener)
+        injector.registerTopologyListener(topologyListener)
+
         updateSelectedDisplay(getDefaultDisplayId())
         updateEnabledDisplays()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        injector.unregisterTopologyListener(topologyListener)
+        injector.unregisterDisplayListener(displayListener)
     }
 
     fun updateSelectedDisplay(newDisplayId: Int) {

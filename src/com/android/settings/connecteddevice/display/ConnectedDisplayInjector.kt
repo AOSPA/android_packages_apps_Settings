@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.display
 
 import android.content.Context
 import android.graphics.PixelFormat
+import android.graphics.Rect
 import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED
 import android.hardware.display.DisplayManager.EVENT_TYPE_DISPLAY_ADDED
@@ -129,15 +130,48 @@ open class ConnectedDisplayInjector(open val context: Context?) {
      * Reparents surface to the SurfaceControl of wallpaperView, so that view will render `surface`.
      * Any surfaces which may be parented to wallpaperView already should be passed in oldSurfaces
      * and they will be removed from the wallpaperView's hierarchy and released.
+     *
+     * TODO(b/426102638): In mirroring mode, area outside the letterbox will be translucent, causing
+     *  display behind to be shown. This can possibly be fixed by adding another surface with just
+     *  empty opaque background
+     *
      */
-    open fun updateSurfaceView(oldSurfaces: List<SurfaceControl>, surface: SurfaceControl,
-            wallpaperView: SurfaceView, surfaceScale: Float) {
+    open fun updateSurfaceView(
+        oldSurfaces: List<SurfaceControl>,
+        surface: SurfaceControl,
+        wallpaperView: SurfaceView,
+        surfaceScale: Float,
+        surfaceSize: Size,
+        cornerRadiusPx: Float,
+        isMirroringOtherDisplay: Boolean
+    ) {
+        // TODO(426163319): Move this calculation to DisplayBlock to properly test the calculations
         val t = SurfaceControl.Transaction()
         t.reparent(surface, wallpaperView.surfaceControl)
+
+        // Calculate the final (scaled) dimensions of the wallpaper content
+        val scaledSurfaceWidth = surfaceSize.width * surfaceScale
+        val scaledSurfaceHeight = surfaceSize.height * surfaceScale
+        // Calculate the top-left position needed to center the surface within the wallpaperView
+        val positionX = (wallpaperView.width - scaledSurfaceWidth) / 2f
+        val positionY = (wallpaperView.height - scaledSurfaceHeight) / 2f
+        val destinationCrop = Rect(
+            0, 0, surfaceSize.width, surfaceSize.height
+        )
+
         t.setScale(surface, surfaceScale, surfaceScale)
+        t.setPosition(surface, positionX, positionY)
+        t.setCrop(surface, destinationCrop)
+        // Corner radius should not be applied when display is letterboxed
+        if (!isMirroringOtherDisplay) {
+            // Corner radius has to be set on the original surface size, so apply a inverse scale
+            // here.
+            t.setCornerRadius(surface, cornerRadiusPx / surfaceScale)
+        }
+
+
         oldSurfaces.forEach { t.remove(it) }
         t.apply(true)
-
         oldSurfaces.forEach { it.release() }
     }
 

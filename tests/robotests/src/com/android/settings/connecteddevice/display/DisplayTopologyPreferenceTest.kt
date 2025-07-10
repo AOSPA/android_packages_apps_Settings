@@ -43,6 +43,7 @@ import com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTI
 import com.google.common.truth.Truth.assertThat
 import java.util.function.Consumer
 import kotlin.math.abs
+import kotlin.math.min
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -353,6 +354,28 @@ class DisplayTopologyPreferenceTest {
         }
 
         assertThat(preference.controller.topologyHint.text).isEqualTo("")
+    }
+
+    @Test
+    fun mirroringMode_usesLetterboxScalingCorrectly() {
+        setMirroringMode(true)
+        setupPaneWithTwoDisplays()
+        val paneChildren = getPaneChildren()
+
+        val externalMonitorBlock = paneChildren.find { it.logicalDisplayId == DISPLAY_ID_2 }
+        assertThat(externalMonitorBlock).isNotNull()
+        assertThat(externalMonitorBlock!!.surfaceSize).isEqualTo(DISPLAY_SIZE_1)
+
+        val blockBounds = virtualBounds(externalMonitorBlock)
+        val expectedScaleX = blockBounds.width() / DISPLAY_SIZE_1.width.toFloat()
+        val expectedScaleY = blockBounds.height() / DISPLAY_SIZE_1.height.toFloat()
+        val expectedLetterboxScale = min(expectedScaleX, expectedScaleY)
+        assertThat(externalMonitorBlock.surfaceScale).isWithin(0.01f).of(expectedLetterboxScale)
+        // Assert scaled surface size fits within the block size
+        assertThat(expectedLetterboxScale * DISPLAY_SIZE_1.width.toFloat() <= blockBounds.width())
+            .isTrue()
+        assertThat(expectedLetterboxScale * DISPLAY_SIZE_1.height.toFloat() <= blockBounds.height())
+            .isTrue()
     }
 
     @Test

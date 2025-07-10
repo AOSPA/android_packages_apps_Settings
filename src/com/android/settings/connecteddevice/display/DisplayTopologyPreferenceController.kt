@@ -32,6 +32,7 @@ import androidx.annotation.VisibleForTesting
 import com.android.settings.R
 import java.util.function.Consumer
 import kotlin.math.abs
+import kotlin.math.min
 
 /**
  * Controller class containing the shared logic for displaying and managing a display topology UI.
@@ -348,22 +349,38 @@ class DisplayTopologyPreferenceController(
             val block =
                 displayBlocks.removeFirstOrNull()
                     ?: DisplayBlock(injector).apply { paneContent.addView(this) }
-            logicalDisplaySizeFetcher.get(id)?.let {
-                val topLeft = scaling.displayToPaneCoor(pos.left, pos.top)
-                val bottomRight = scaling.displayToPaneCoor(pos.right, pos.bottom)
-                block.reset(
-                    id,
-                    // Mirroring is only supported for DEFAULT_DISPLAY for now
-                    if (isMirroring) DEFAULT_DISPLAY else id,
-                    topLeft,
-                    bottomRight,
-                    (bottomRight.x - topLeft.x) / it.width,
-                )
-                // This is needed to ensure block is highlighted from the start if it's selected.
-                // Example scenario would be when Display#2 is selected from the tab, and there's
-                // another display added, Display#2 should still be highlighted.
-                block.setHighlighted(id == selectedDisplayId)
+
+            // Mirroring is only supported for DEFAULT_DISPLAY for now
+            val displayIdToShowWallpaper = if (isMirroring) DEFAULT_DISPLAY else id
+            val displaySize = logicalDisplaySizeFetcher.get(displayIdToShowWallpaper)
+            if (displaySize == null) {
+                // Should not happen, just a safety-null check
+                block.visibility = View.GONE
+                return@forEach
             }
+            val topLeft = scaling.displayToPaneCoor(pos.left, pos.top)
+            val bottomRight = scaling.displayToPaneCoor(pos.right, pos.bottom)
+            // In non-mirroring, both X and Y scale will be the same, in mirroring mode however,
+            // it could be different and needs to apply letterboxing strategy
+            val scaleX = (bottomRight.x - topLeft.x) / displaySize.width
+            val scaleY = (bottomRight.y - topLeft.y) / displaySize.height
+            // Letterboxing strategy: Use the smaller scale to ensure the whole display fits the
+            // displayBlock view
+            val displaySurfaceToBlockScale = min(scaleX, scaleY)
+            block.reset(
+                id,
+                displayIdToShowWallpaper,
+                topLeft,
+                bottomRight,
+                displaySurfaceToBlockScale,
+                displaySize,
+            )
+
+            // This is needed to ensure block is highlighted from the start if it's selected.
+            // Example scenario would be when Display#2 is selected from the tab, and there's
+            // another display added, Display#2 should still be highlighted.
+            block.setHighlighted(id == selectedDisplayId)
+
             if (isMirroring) {
                 block.setOnTouchListener(null)
             } else {

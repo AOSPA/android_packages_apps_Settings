@@ -23,6 +23,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,12 +34,14 @@ import android.os.UserHandle;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.service.notification.Adjustment;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.notification.NotificationBackend;
-import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -60,7 +63,7 @@ public class AdjustmentKeyPreferenceControllerTest {
     private NotificationBackend.AppRow mAppRow;
     @Mock
     private NotificationBackend mBackend;
-    private RestrictedSwitchPreference mSwitch;
+    private PrimarySwitchPreference mSwitch;
 
     private AdjustmentKeyPreferenceController mPrefController;
 
@@ -68,7 +71,7 @@ public class AdjustmentKeyPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
-        mSwitch = new RestrictedSwitchPreference(mContext);
+        mSwitch = new PrimarySwitchPreference(mContext);
         new PreferenceManager(mContext).createPreferenceScreen(mContext).addPreference(mSwitch);
         when(mBackend.hasSentValidMsg(anyString(), anyInt())).thenReturn(true);
         when(mBackend.getAllowedAssistantAdjustments()).thenReturn(List.of(KEY_TYPE));
@@ -126,7 +129,7 @@ public class AdjustmentKeyPreferenceControllerTest {
         mPrefController.onResume(mAppRow, null, null, null, null, null, null);
 
         mPrefController.updateState(mSwitch);
-        assertThat(mSwitch.isChecked()).isTrue();
+        assertThat(mSwitch.getCheckedState()).isTrue();
     }
 
     @Test
@@ -138,7 +141,7 @@ public class AdjustmentKeyPreferenceControllerTest {
         mPrefController.onResume(mAppRow, null, null, null, null, null, null);
 
         mPrefController.updateState(mSwitch);
-        assertThat(mSwitch.isChecked()).isFalse();
+        assertThat(mSwitch.getCheckedState()).isFalse();
     }
 
     @Test
@@ -159,5 +162,21 @@ public class AdjustmentKeyPreferenceControllerTest {
         mPrefController.onPreferenceChange(mSwitch, true);
         verify(mBackend, times(1)).setAdjustmentSupportedForPackage(eq(mAppRow.userId),
                 eq(KEY_TYPE), eq(mAppRow.pkg), eq(true));
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_NM_SUMMARIZATION, Flags.FLAG_NM_SUMMARIZATION_UI,
+            Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI})
+    public void testHandlePreferenceTreeClick_wrongPrefKey() {
+        Preference pref = mock(Preference.class);
+        when(pref.getKey()).thenReturn("some_key_that_is_not_relevant");
+        assertThat(mPrefController.handlePreferenceTreeClick(pref)).isFalse();
+
+        when(pref.getKey()).thenReturn(Adjustment.KEY_SUMMARIZATION);
+        assertThat(mPrefController.handlePreferenceTreeClick(pref)).isFalse();
+
+        // If the pref key actually matches, then this will attempt to launch an intent via
+        // SubSettingLauncher, which may not work well from inside the test environment, so this
+        // test only tests that we do nothing on the non-matching cases.
     }
 }

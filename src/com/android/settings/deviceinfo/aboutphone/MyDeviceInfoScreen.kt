@@ -59,8 +59,7 @@ open class MyDeviceInfoScreen :
     override fun getIcon(context: Context) =
         when {
             isExpressiveTheme(context) -> R.drawable.ic_homepage_about
-            Flags.homepageRevamp() -> R.drawable.ic_settings_about_device_filled
-            else -> R.drawable.ic_settings_about_device
+            else -> R.drawable.ic_settings_about_device_filled
         }
 
     override val highlightMenuKey: Int

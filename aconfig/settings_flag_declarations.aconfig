@@ -16,13 +16,6 @@ flag {
 }
 
 flag {
-    name: "homepage_revamp"
-    namespace: "android_settings"
-    description: "Feature flag to enable new settings homepage UX."
-    bug: "321612737"
-}
-
-flag {
     name: "slices_retirement"
     namespace: "android_settings"
     description: "Feature flag to remove relevant slices dependencies."

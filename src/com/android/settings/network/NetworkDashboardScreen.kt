@@ -42,8 +42,7 @@ open class NetworkDashboardScreen : PreferenceScreenMixin, PreferenceIconProvide
     override fun getIcon(context: Context) =
         when {
             isExpressiveTheme(context) -> R.drawable.ic_homepage_network
-            Flags.homepageRevamp() -> R.drawable.ic_settings_wireless_filled
-            else -> R.drawable.ic_settings_wireless
+            else -> R.drawable.ic_settings_wireless_filled
         }
 
     override fun isFlagEnabled(context: Context) = Flags.catalystNetworkProviderAndInternetScreen()

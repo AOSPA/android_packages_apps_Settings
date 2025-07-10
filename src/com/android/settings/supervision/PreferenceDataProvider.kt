@@ -39,4 +39,15 @@ interface PreferenceDataProvider {
      *   [PreferenceData] objects.
      */
     suspend fun getPreferenceData(keys: List<String>): Map<String, PreferenceData>
+
+    /**
+     * Retrieves cached preference data for the specified keys.
+     *
+     * This function fetches cached preference data from local file system.
+     *
+     * @param keys A list of strings representing the keys for which preference data is requested.
+     * @return A map where the keys are the requested keys, and the values are the corresponding
+     *   [PreferenceData] objects.
+     */
+    fun getCachedPreferenceData(keys: List<String>): Map<String, PreferenceData>
 }
