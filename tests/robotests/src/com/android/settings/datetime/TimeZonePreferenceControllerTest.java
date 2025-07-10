@@ -99,7 +99,7 @@ public class TimeZonePreferenceControllerTest {
         assertThat(mPreference.isEnabled()).isTrue();
     }
 
-    private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
+    static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
             boolean suggestManualAllowed) {
         TimeZoneDetectorStatus status = new TimeZoneDetectorStatus(DETECTOR_STATUS_RUNNING,
                 new TelephonyTimeZoneAlgorithmStatus(DETECTION_ALGORITHM_STATUS_RUNNING),

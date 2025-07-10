@@ -103,10 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"關於音訊輸出"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"將聲音轉送至助聽器或手機喇叭"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"相關工具"</string>
-    <!-- no translation found for bluetooth_try_nearby_share_title (2307943703595855441) -->
-    <skip />
-    <!-- no translation found for bluetooth_try_nearby_share_summary (2808932450696996548) -->
-    <skip />
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"使用「<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>」更快傳送內容"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"試用 Windows 版「<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>」，以最快方法向附近的 Android 裝置和電腦分享內容"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"鈴聲和鬧鐘"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"通話期間的音訊"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"媒體和系統音效"</string>
@@ -217,7 +215,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"可用的語言可能與應用程式支援的語言不同，部分應用程式可能不支援此設定。"</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"為每個應用程式選擇語言。"</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"為每個應用程式選擇語言。可用的語言可能與應用程式支援的語言不同，部分應用程式可能不支援此設定。"</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"你的裝置、應用程式和網站會使用你的偏好語言清單中第一個支援的語言。\n\n大量應用程式亦會根據你偏好語言的地區提供日期、數字和單位的格式。如要變更地區，請新增語言，然後選擇你偏好的地區。"</string>
+    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
+    <skip />
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"如要為各應用程式選取語言，請前往應用程式語言設定。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"進一步瞭解應用程式語言"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"要將地區變更為%s嗎？"</string>
@@ -994,8 +993,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"重新啟動"</string>
     <string name="external_display_on" msgid="2560104443500154333">"開啟"</string>
     <string name="external_display_off" msgid="5634413756025351374">"關閉"</string>
-    <!-- no translation found for external_display_settings_title (4690843697498496237) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="4690843697498496237">"外部顯示屏"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"內置顯示屏"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"使用外部顯示屏"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"顯示屏解像度"</string>
@@ -1006,12 +1004,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"變更旋轉角度或解像度，可能會導致任何執行中的應用程式停止運作"</string>
-    <!-- no translation found for external_display_not_found_footer_title (3974573337788760338) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_title (4854597444155430591) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_summary (3114991534614756600) -->
-    <skip />
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"未連接任何顯示屏\n\n連接外部顯示屏以開始使用，你亦可嘗試使用其他連接線"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"未連接任何顯示屏"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"連接外部顯示屏以開始使用，你亦可嘗試使用其他連接線"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"更多選項"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"按住並拖曳即可重新整理顯示屏位置。"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"鏡像內置顯示屏"</string>
@@ -1224,6 +1219,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"無法儲存網絡"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"取消"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"要移除此網絡嗎？"</string>
+    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"要忘記所有裝置使用者嗎？"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"此裝置的其他使用者有使用「<xliff:g id="NETWORK_NAME">%1$s</xliff:g>」，此網絡的所有使用者將需要再次設定網絡。仍要忘記嗎？"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 個網絡}other{# 個網絡}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 個訂閱}other{# 個訂閱}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 個網絡和訂閱}other{# 個網絡和訂閱}}"</string>
@@ -2421,10 +2418,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"在滑鼠輕觸畫面邊緣時移動畫面"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"跟隨輸入的文字"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"放大輸入中的文字"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"追蹤鍵盤焦點"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"放大鏡會在你使用鍵盤導覽時追蹤焦點項目"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"放大鍵盤"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"使用全螢幕放大功能時放大鍵盤以查看 Emoji 和字母"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"無法用於只放大部分畫面"</string>
@@ -2740,10 +2735,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"關於超暗功能"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"將螢幕調暗可讓你閱讀時更舒適。"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"亮度"</string>
-    <!-- no translation found for brightness_intensity_start_label (5156578219206443637) -->
-    <skip />
-    <!-- no translation found for brightness_intensity_end_label (2697495729534414164) -->
-    <skip />
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"調暗"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"調亮"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"裝置重新啟動後保持開啟"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{短 ({time} 秒)}other{短 ({time} 秒)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{中 ({time} 秒)}other{中 ({time} 秒)}}"</string>
@@ -3862,17 +3855,22 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"焦點新聞、社論和其他"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"讚好、貼文和其他"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"通訊、推薦媒體和其他"</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"AI 通知"</string>
+    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"通知摘要"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"快速掌握長訊息的重點"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"使用通知摘要功能"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"撮要長訊息和群組對話，方便快速掌握重點。摘要功能採用 AI 技術，可能包含錯誤。"</string>
+    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"系統不會撮要這些應用程式的通知"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"管理應用程式"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"允許應用程式的通知摘要"</string>
+    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
+    <skip />
     <string name="notification_excluded_apps" msgid="317898848790046528">"不要包括這些應用程式"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"摘要通知"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"摘要此應用程式的對話通知"</string>
+    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
+    <skip />
+    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
+    <skip />
     <string name="live_notifications" msgid="4650406646292963831">"即時通知"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"即時消息"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"在狀態列和上鎖畫面顯示具時效性的持續通知"</string>
@@ -4026,11 +4024,16 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"套用至工作設定檔應用程式"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"通知整理工具"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"將優先順序較低的通知分類並設定為靜音"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"使用「通知整理工具」"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"選擇要靜音處理的通知類型，系統會將這些通知分類，盡可能減少干擾。分類功能採用 AI 技術，可能含有錯誤。"</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"組合通知"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"主題相近的通知會設定為靜音並分類，提供不受干擾的使用體驗"</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"允許組合應用程式通知"</string>
+    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
+    <skip />
+    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"套用至工作設定檔應用程式"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服務"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"沒有已安裝的應用程式要求提供 VR 助手服務。"</string>
@@ -5179,8 +5182,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"如果沒有流動網絡，你會看到使用衛星的選項。"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"手機連接衛星後"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"按照以下步驟連線至衛星"</string>
-    <!-- no translation found for summary_supported_service (5855066701346160193) -->
-    <skip />
+    <string name="summary_supported_service" msgid="5855066701346160193">"你可以向任何人 (包括緊急服務) 發短訊，以及使用支援的應用程式。如果有可用的流動網絡，手機就會重新連線。"</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"你可發短訊給任何人，包括緊急服務。如果有可用的流動網絡，手機就會重新連線。"</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"手機連線後，你便可發短訊給任何人，包括緊急服務。"</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"注意事項"</string>
@@ -5309,20 +5311,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"左"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"右"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"耳機盒"</string>
-    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
-    <skip />
-    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
-    <skip />
-    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
-    <skip />
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"左側：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"右側：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"充電盒：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"左側，電池：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"右側，電池：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"充電盒，電池：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"電池：<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"電池"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"設定面板"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"啟用自由形態視窗"</string>
@@ -5344,7 +5339,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"傳送意見"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"你願意就這個建議為我們提供意見嗎？"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"「<xliff:g id="COPY_CONTENT">%1$s</xliff:g>」已複製到剪貼簿。"</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"無障礙功能使用情況"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 個應用程式可完整存取你的裝置}other{# 個應用程式可完整存取你的裝置}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"重要資料"</string>
@@ -5388,8 +5382,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"使用 16KB 頁面大小啟動"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"使用支援 16KB 頁面大小的核心啟動裝置"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"由 4KB 模式切換至 16KB 模式"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (5343202230812855846) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"如要使用 16KB 開發人員選項，此裝置的資料分區必須轉換成 ext4。這麼做將抹除裝置資料，並將檔案系統變更為 ext4。&lt;br&gt;&lt;br&gt; 如果使用 16KB 模式，只要重新啟動一次，就能在 4KB 和 16KB 模式間切換。&lt;br&gt;&lt;br&gt; 16KB 模式注意事項：&lt;br&gt;&lt;br&gt; &amp;#8226; 無法保證軟件完整性&lt;br&gt; &amp;#8226; 系統啟動載入程式解鎖時，手機上的資料可能會有風險&lt;br&gt; &amp;#8226; 部分功能會停用，因此特定應用程式可能會受影響&lt;br&gt;&lt;br&gt; 如要返回實際工作環境模式，你需要切換回 4KB 模式並鎖定啟動程式，這時裝置就會回復原廠設定。裝置成功啟動 Android 系統後，請前往開發人員選項停用 OEM 解鎖設定。&lt;br&gt;&lt;br&gt; 如要繼續切換至 16KB 模式，請輕按 [清除所有資料並更新]，這樣做會重新啟動裝置。"</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"你正處於執行 4KB 核心的頁面通用模式，即將切換至 16KB 模式。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。這樣做會重新啟動裝置。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要讓裝置返回實際工作環境模式，你需要切換回 4KB 模式並鎖定啟動程式，然後裝置就會回復原廠設定。裝置成功啟動 Android 後，請在開發人員選項中停用 OEM 解鎖設定。"</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"由 16KB 模式切換至 4KB 模式"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"你正處於執行 16KB 核心的頁面通用模式，即將切換至 4KB 模式。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。這樣做會重新啟動裝置。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要讓裝置返回實際工作環境模式，你需要鎖定啟動程式，然後裝置就會回復原廠設定。裝置成功啟動 Android 後，請在開發人員選項中停用 OEM 解鎖設定。"</string>
@@ -5923,6 +5916,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN 不可刪除"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"嘗試刪除 PIN 時發生錯誤。"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>動畫"</string>
-    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
-    <skip />
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"無法開啟控制項"</string>
 </resources>

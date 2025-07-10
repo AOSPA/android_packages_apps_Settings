@@ -16,10 +16,11 @@
 package com.android.settings.supervision
 
 import android.app.Activity
-import android.app.settings.SettingsEnums.ACTION_SUPERVISION_SEARCH_FILTER_ON
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_SEARCH_FILTER_OFF
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_SEARCH_FILTER_ON
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -36,6 +37,7 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.SwitchPreferenceBinding
 import com.android.settingslib.supervision.SupervisionIntentProvider
+import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /** Web content filters search filter preference. */
 class SupervisionSafeSearchSwitchPreference(private val dataStore: SupervisionSafeSearchDataStore) :
@@ -92,6 +94,7 @@ class SupervisionSafeSearchSwitchPreference(private val dataStore: SupervisionSa
             val isChecked = preference.isChecked
             preference.isChecked = !isChecked
             logMetrics(preference)
+            Log.i(TAG, "Search filter has changed.")
         }
     }
 

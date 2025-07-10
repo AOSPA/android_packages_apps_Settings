@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ALLOW_ALL_SITES
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_BLOCK_EXPLICIT_SITES
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -36,6 +37,7 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.SwitchPreferenceBinding
 import com.android.settingslib.supervision.SupervisionIntentProvider
+import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /** Web content filters browser filter preference. */
 class SupervisionSafeSitesSwitchPreference(protected val dataStore: SupervisionSafeSitesDataStore) :
@@ -91,6 +93,7 @@ class SupervisionSafeSitesSwitchPreference(protected val dataStore: SupervisionS
             val isChecked = preference.isChecked
             preference.isChecked = !isChecked
             logMetrics(preference)
+            Log.i(TAG, "Browser filter has changed.")
         }
     }
 

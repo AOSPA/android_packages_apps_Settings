@@ -103,10 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Informazioni su uscita audio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Indirizza il suono verso la protesi uditiva o l\'altoparlante dello smartphone"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Correlati"</string>
-    <!-- no translation found for bluetooth_try_nearby_share_title (2307943703595855441) -->
-    <skip />
-    <!-- no translation found for bluetooth_try_nearby_share_summary (2808932450696996548) -->
-    <skip />
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"Invia contenuti più rapidamente con <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"Per condividere velocemente contenuti con i dispositivi Android e PC nelle vicinanze, prova <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> per Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Suoneria e sveglie"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio durante le chiamate"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Suoni cont. multim. e sistema"</string>
@@ -217,7 +215,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"La lingua potrebbe essere diversa dalle lingue disponibili nell\'app. Alcune app potrebbero non supportare questa impostazione."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Scegli la lingua per ogni app."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Scegli la lingua per ogni app. La lingua potrebbe essere diversa dalle lingue disponibili nell\'app. Alcune app potrebbero non supportare questa impostazione."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Per il dispositivo, le app e i siti web viene usata la prima lingua supportata dell\'elenco delle tue lingue preferite.\n\nPer molte app verrà usata anche la regione della tua lingua preferita per inserire il formato corretto di date, numeri e unità. Per modificare la regione, aggiungi una lingua e scegli la regione che preferisci."</string>
+    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
+    <skip />
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Per selezionare una lingua per ogni app, vai alle impostazioni della lingua delle app."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Scopri di più sulle lingue delle app"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Cambiare la regione con %s?"</string>
@@ -994,8 +993,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Riavvia"</string>
     <string name="external_display_on" msgid="2560104443500154333">"On"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Off"</string>
-    <!-- no translation found for external_display_settings_title (4690843697498496237) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="4690843697498496237">"Display esterno"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Display incorporato"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Usa display esterno"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Risoluzione del display"</string>
@@ -1006,12 +1004,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Se modifichi la rotazione o la risoluzione, le eventuali app in esecuzione potrebbero interrompersi"</string>
-    <!-- no translation found for external_display_not_found_footer_title (3974573337788760338) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_title (4854597444155430591) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_summary (3114991534614756600) -->
-    <skip />
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"Nessun display connesso\n\nPer iniziare, collega un display esterno oppure prova a utilizzare un altro cavo"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nessun display connesso"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Per iniziare, collega un display esterno o prova a usare un altro cavo"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Altre opzioni"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Tieni premuto e trascina per riordinare i display."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Esegui il mirroring del display integrato"</string>
@@ -1184,7 +1179,7 @@
     <string name="wifi_share_preference_title" msgid="6346200020322308703">"Questa è una rete condivisa"</string>
     <string name="wifi_share_preference_summary" msgid="4356010425167713046">"Tutti gli utenti, ad eccezione degli ospiti, potranno visualizzare, modificare ed eliminare questa rete"</string>
     <string name="wifi_conflict_dialog_title" msgid="1127530499054245755">"Vuoi passare alla rete <xliff:g id="SHARED">%1$s</xliff:g> \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\"?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Al momento hai eseguito la connessione a una rete <xliff:g id="SHARED_0">%1$s</xliff:g> con lo stesso nome. Quando cambi, verranno eseguite la disconnessione dalla rete <xliff:g id="SHARED_1">%2$s</xliff:g> e la riconnessione a quella <xliff:g id="PRIVATE">%3$s</xliff:g>. La connessione a internet potrebbe non essere temporaneamente disponibile."</string>
+    <string name="wifi_conflict_dialog_message" msgid="3192435395074097168">"Al momento hai eseguito la connessione a una rete <xliff:g id="SHARED_0">%1$s</xliff:g> con lo stesso nome. Quando fai il cambio, ti disconnetterai da <xliff:g id="SHARED_1">%2$s</xliff:g> per poi riconnetterti alla rete <xliff:g id="PRIVATE">%3$s</xliff:g>. Potresti rimanere temporaneamente senza connessione a internet."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(invariata)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="3928254385019370063">"Consenti ad altri utenti di modificare la configurazione di rete"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Seleziona un\'opzione"</string>
@@ -1224,6 +1219,10 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Impossibile salvare la rete"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Annulla"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Vuoi eliminare la rete?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
+    <skip />
+    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 rete}other{# reti}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 abbonamento}other{# abbonamenti}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 rete e 1 abbonamento}other{# reti e # abbonamenti}}"</string>
@@ -2266,7 +2265,7 @@
     <string name="action_corner_action_recent_apps" msgid="7450480676812648813">"App recenti"</string>
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notifiche"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Impostazioni rapide"</string>
-    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Scegli una scorciatoia per <xliff:g id="CORNER">%1$s</xliff:g>"</string>
+    <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Scegli una scorciatoia per l\'<xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"angolo inferiore sinistro"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"angolo inferiore destro"</string>
     <string name="action_corner_top_left_name" msgid="8077670910600032291">"angolo superiore sinistro"</string>
@@ -2421,10 +2420,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Sposta lo schermo quando il cursore del mouse ne tocca i bordi"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Segui la digitazione"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"La lente d\'ingrandimento segue il testo mentre digiti"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Segui stato attivo della tastiera"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"La Lente d\'ingrandimento segue l\'elemento selezionato mentre navighi con la tastiera"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Ingrandisci tastiera"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Aumenta lo zoom della tastiera per vedere emoji e lettere quando usi l\'ingrandimento a schermo intero"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Non disponibile quando viene ingrandita solo una parte dello schermo"</string>
@@ -2740,10 +2737,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Info sull\'attenuazione extra"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Riduci la luminosità dello schermo per facilitare la lettura"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensità"</string>
-    <!-- no translation found for brightness_intensity_start_label (5156578219206443637) -->
-    <skip />
-    <!-- no translation found for brightness_intensity_end_label (2697495729534414164) -->
-    <skip />
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"Meno luminosità"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"Più luminosità"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Mantieni l\'opzione attiva dopo il riavvio del dispositivo"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Breve ({time} secondo)}other{Breve ({time} secondi)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Medio ({time} secondo)}other{Medio ({time} secondi)}}"</string>
@@ -3862,17 +3857,22 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Notizie principali, contenuti editoriali e altro"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Mi piace, post e altro"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Newsletter, media consigliati e altro"</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"Notifiche basate sull\'AI"</string>
+    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"Riepiloghi delle notifiche"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Ricevi riepiloghi rapidi dei messaggi più lunghi"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Usa i riepiloghi delle notifiche"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"Riassumi messaggi lunghi e conversazioni di gruppo per ottenere riepiloghi rapidi. I riepiloghi sono basati sull\'AI e potrebbero contenere errori."</string>
+    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Le notifiche di queste app non verranno riepilogate"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Gestisci app"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Consenti i riepiloghi delle notifiche per le app"</string>
+    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
+    <skip />
     <string name="notification_excluded_apps" msgid="317898848790046528">"Non includere queste app"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"Riepiloga le notifiche"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"Riepiloga le notifiche delle conversazioni di questa app"</string>
+    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
+    <skip />
+    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
+    <skip />
     <string name="live_notifications" msgid="4650406646292963831">"Notifiche in tempo reale"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Aggiornamenti in tempo reale"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Visualizza notifiche in corso e urgenti sulla barra di stato e sulla schermata di blocco"</string>
@@ -4026,11 +4026,16 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Applica alle app del profilo di lavoro"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Organizzatore notifiche"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Raggruppa e silenzia le notifiche con priorità inferiore"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Usa Organizzatore notifiche"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"Scegli i tipi di notifica che vuoi silenziare e raggruppare per ridurre al minimo le interruzioni. Il raggruppamento è basato sull\'AI e potrebbe contenere errori."</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Notifiche raggruppate"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Le notifiche con temi simili verranno silenziate e raggruppate per un\'esperienza più discreta"</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Consenti il raggruppamento delle notifiche per le app"</string>
+    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
+    <skip />
+    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Applica alle app del profilo di lavoro"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servizi di supporto VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nessuna app installata ha richiesto di essere eseguita come servizio di supporto VR."</string>
@@ -5179,8 +5184,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Se non disponi di una rete mobile, vedrai un\'opzione per usare il satellite."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Dopo che lo smartphone si è connesso a un satellite"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Segui i passaggi per connetterti al satellite"</string>
-    <!-- no translation found for summary_supported_service (5855066701346160193) -->
-    <skip />
+    <string name="summary_supported_service" msgid="5855066701346160193">"Puoi inviare un messaggio a chiunque, anche ai servizi di emergenza, e utilizzare le app supportate. Quando sarà disponibile, lo smartphone si riconnetterà a una rete mobile."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Puoi inviare un messaggio a chiunque, anche ai servizi di emergenza. Quando sarà disponibile, lo smartphone si riconnetterà a una rete mobile."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Una volta che lo smartphone è connesso, puoi inviare un messaggio a chiunque, inclusi i servizi di emergenza."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Aspetti da considerare"</string>
@@ -5309,20 +5313,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Sinistro"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Destro"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Custodia"</string>
-    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
-    <skip />
-    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
-    <skip />
-    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
-    <skip />
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Sinistro: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Destro: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Custodia: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Sinistro: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> di batteria"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Destro: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> di batteria"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Custodia: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> di batteria"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Batteria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Riquadro delle impostazioni"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Attiva finestre a forma libera"</string>
@@ -5344,7 +5341,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Invia feedback"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Vuoi inviarci un feedback su questo suggerimento?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"Copia di <xliff:g id="COPY_CONTENT">%1$s</xliff:g> salvata negli appunti."</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Utilizzo dell\'accessibilità"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 app ha accesso completo al tuo dispositivo}other{# app hanno accesso completo al tuo dispositivo}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Informazioni importanti"</string>
@@ -5388,8 +5384,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Avvia con dimensione pagina 16 kB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Avvia con un kernel per dimensione pagina di 16 kB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Passa dalla modalità a 4 kB alla modalità a 16 kB"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (5343202230812855846) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"Per usare l\'opzione sviluppatore a 16 kB, la partizione dei dati del dispositivo deve essere convertita in ext4. In questo modo, i dati sul tuo dispositivo verranno cancellati e il file system verrà convertito in ext4.&lt;br&gt;&lt;br&gt; Una volta attivata la modalità a 16 kB, potrai passare dalla modalità a 4 kB a quella a 16 kB e viceversa con un solo riavvio.&lt;br&gt;&lt;br&gt; Fattori da tenere in considerazione quando utilizzi la modalità a 16 kB:&lt;br&gt;&lt;br&gt; &amp;#8226; L\'integrità del software non può essere garantita&lt;br&gt; &amp;#8226; I dati archiviati sul telefono mentre il bootloader è sbloccato potrebbero essere a rischio&lt;br&gt; &amp;#8226; Alcune funzionalità verranno disabilitate, il che potrebbe influire su alcune app&lt;br&gt;&lt;br&gt; Per tornare alla modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader. Verranno ripristinati i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM in Opzioni sviluppatore.&lt;br&gt;&lt;br&gt; Per procedere con il passaggio alla modalità a 16 kB, tocca \"Cancella tutti i dati e aggiorna\". L\'operazione riavvierà il dispositivo."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Sei nella modalità page-agnostic che esegue un kernel a 4 kB e stai passando alla modalità a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. L\'operazione riavvierà il dispositivo. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Passa dalla modalità a 16 kB alla modalità a 4 kB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Sei nella modalità page-agnostic che esegue un kernel a 16 kB e stai passando alla modalità a 4 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. L\'operazione riavvierà il dispositivo. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore."</string>
@@ -5923,6 +5918,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Il PIN non può essere eliminato"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Si è verificato un errore durante il tentativo di eliminazione del PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animazione di <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
-    <skip />
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Impossibile attivare i controlli"</string>
 </resources>

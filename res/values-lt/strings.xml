@@ -103,10 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Apie garso išvestį"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Nukreipkite garsus į klausos įrenginį ar telefono garsiakalbį"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Susiję"</string>
-    <!-- no translation found for bluetooth_try_nearby_share_title (2307943703595855441) -->
-    <skip />
-    <!-- no translation found for bluetooth_try_nearby_share_summary (2808932450696996548) -->
-    <skip />
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"Siųskite greičiau su „<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>“"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"Jei norite greičiausiai bendrinti su netoliese esančiais „Android“ įrenginiais ir asmeniniais kompiuteriais, išbandykite „<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>“ sistemoje „Windows“"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Skambėjimo tonas ir signalai"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Garsas vykstant skambučiams"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Medijos ir sistemos garsai"</string>
@@ -217,7 +215,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Kalba gali skirtis nuo programoje pasiekiamų kalbų. Kai kuriose programose šis nustatymas gali būti nepalaikomas."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Pasirinkite kiekvienos programos kalbą."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Pasirinkite kiekvienos programos kalbą. Ji gali skirtis nuo programoje pasiekiamų kalbų. Kai kuriose programose šis nustatymas gali būti nepalaikomas."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Jūsų įrenginys, programos ir svetainės naudoja pirmąją palaikomą kalbą iš pageidaujamų kalbų sąrašo.\n\nDaug programų taip pat naudos regioną pagal pageidaujamą kalbą, kad nustatytų datų, skaičių ir matavimo vienetų formatą. Jei norite pakeisti regioną, pridėkite kalbą, tada pasirinkite pageidaujamą regioną."</string>
+    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
+    <skip />
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Norėdami pasirinkti kalbą kiekvienai programai, eikite į programų kalbų nustatymus."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Sužinokite daugiau apie programos kalbas"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Pakeisti regioną į: %s?"</string>
@@ -994,8 +993,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Paleisti iš naujo"</string>
     <string name="external_display_on" msgid="2560104443500154333">"Įjungta"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Išjungta"</string>
-    <!-- no translation found for external_display_settings_title (4690843697498496237) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="4690843697498496237">"Išorinis ekranas"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Įtaisytasis ekranas"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Išorinio vaizdo įrenginio naudojimas"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Ekrano skyra"</string>
@@ -1006,12 +1004,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Pakeitus pasukimą arba skyrą, gali būti sustabdytos šiuo metu veikiančios programos"</string>
-    <!-- no translation found for external_display_not_found_footer_title (3974573337788760338) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_title (4854597444155430591) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_summary (3114991534614756600) -->
-    <skip />
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"Nėra prijungto ekrano\n\nPrijunkite išorinį ekraną, kad pradėtumėte, arba bandykite naudoti kitą laidą"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nėra prijungto ekrano"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Prijunkite išorinį ekraną, kad pradėtumėte, arba bandykite naudoti kitą laidą"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Daugiau parinkčių"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Laikykite ir vilkite, kad pertvarkytumėte ekranus."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Įtaisytojo ekrano vaizdo bendrinimas"</string>
@@ -1224,6 +1219,10 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Išsaugant tinklą įvyko klaida."</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Atšaukti"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Pamiršti tinklą?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
+    <skip />
+    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{Vienas tinklas}one{# tinklas}few{# tinklai}many{# tinklo}other{# tinklų}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{Viena prenumerata}one{# prenumerata}few{# prenumeratos}many{# prenumeratos}other{# prenumeratų}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{Vienas tinklas ir prenumerata}one{# tinklas ir prenumerata}few{# tinklai ir prenumeratos}many{# tinklo ir prenumeratos}other{# tinklų ir prenumeratų}}"</string>
@@ -2421,10 +2420,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Perkelti ekraną pelei pasiekus ekrano kraštus"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Vedamo teksto atitikimas"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"Didintuvas automatiškai atitinka vedamą tekstą"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Rodyti klaviatūra suaktyvintą elementą"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"Didintuvas seka suaktyvintą elementą, kai naršote naudodami klaviatūrą"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Didinti klaviatūrą"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Priartinkite klaviatūrą, kad matytumėte jaustukus ir raides, kai naudojate viso ekrano didinimą"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Nepas., kol didinama tik dalis ekr."</string>
@@ -2740,10 +2737,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Apie funkciją „Itin blanku“"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Padarykite ekraną blankesnį, kad būtų patogiau skaityti"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensyvumas"</string>
-    <!-- no translation found for brightness_intensity_start_label (5156578219206443637) -->
-    <skip />
-    <!-- no translation found for brightness_intensity_end_label (2697495729534414164) -->
-    <skip />
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"Tamsiau"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"Šviesiau"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Palikti įjungtą paleidus įrenginį iš naujo"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Trumpa ({time} sekundė)}one{Trumpa ({time} sekundė)}few{Trumpa ({time} sekundės)}many{Trumpa ({time} sekundės)}other{Trumpa ({time} sekundžių)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Vidutinė ({time} sekundė)}one{Vidutinė ({time} sekundė)}few{Vidutinė ({time} sekundės)}many{Vidutinė ({time} sekundės)}other{Vidutinė ({time} sekundžių)}}"</string>
@@ -3862,17 +3857,22 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Svarbiausios istorijos, redakciniai straipsniai ir kt."</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Mygtuko „Patinka“ paspaudimai, įrašai ir kt."</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Naujienlaiškiai, rekomenduojama medija ir kt."</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"DI pagrįsti pranešimai"</string>
+    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"Pranešimų suvestinės"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Gauti trumpas ilgesnių pranešimų santraukas"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Naudoti pranešimų suvestines"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"Apibendrinti ilgus pranešimus ir grupės pokalbius, gauti trumpas jų santraukas. Apibendrinimai pagrįsti DI ir juose gali būti klaidų."</string>
+    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Pranešimai iš šių programų nebus apibendrinti"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Tvarkyti programas"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Leisti programų pranešimų suvestines"</string>
+    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
+    <skip />
     <string name="notification_excluded_apps" msgid="317898848790046528">"Neįtraukti šių programų"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"Apibendrinti pranešimus"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"Apibendrinti pokalbių pranešimus iš šios programos"</string>
+    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
+    <skip />
+    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
+    <skip />
     <string name="live_notifications" msgid="4650406646292963831">"Tiesioginiai pranešimai"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Tiesioginiai naujiniai"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Rodyti nuolatinius, laiko atžvilgiu svarbius pranešimus būsenos juostoje ir užrakinimo ekrane"</string>
@@ -4026,11 +4026,16 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Taikyti darbo profilio programoms"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Pranešimų tvarkyklė"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Sugrupuoti ir nutildyti žemesnio prioriteto pranešimus"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Naudoti pranešimų tvarkyklę"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"Pasirinkite pranešimų, kuriuos norite nutildyti, tipus ir sugrupuokite juos, kad būtų kuo mažiau trikdžių. Grupavimas pagrįstas DI ir gali būti klaidų."</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Pranešimų grupė"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Panašių temų pranešimai bus išjungti ir sugrupuoti, kad būtų tyliau"</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Leisti programoms grupuoti pranešimus"</string>
+    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
+    <skip />
+    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Taikyti darbo profilio programoms"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Pagalbinės virtualiosios realybės paslaugos"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nėra įdiegtų programų, kurios pateikė užklausą būti vykdomos kaip pagalbinės virtualiosios realybės paslaugos."</string>
@@ -5179,8 +5184,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Jei neturite mobiliojo ryšio tinklo, bus pateikta parinktis naudoti palydovinį ryšį."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Kai telefonas prisijungia prie palydovo"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Atlikite veiksmus, kad prisijungtumėte prie palydovo"</string>
-    <!-- no translation found for summary_supported_service (5855066701346160193) -->
-    <skip />
+    <string name="summary_supported_service" msgid="5855066701346160193">"Galite siųsti teksto pranešimą bet kam, įskaitant pagalbos tarnybas, ir naudoti palaikomas programas. Telefonas bus iš naujo prijungtas prie mobiliojo ryšio tinklo, kai jis bus pasiekiamas."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Galite siųsti teksto pranešimą bet kam, įskaitant pagalbos tarnybas. Telefonas bus iš naujo prijungtas prie mobiliojo ryšio tinklo, kai jis bus pasiekiamas."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Kai telefonas prisijungs, galėsite siųsti teksto pranešimą bet kam, įskaitant pagalbos tarnybas."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Atminkite"</string>
@@ -5309,20 +5313,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Kairė"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Dešinė"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Dėklas"</string>
-    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
-    <skip />
-    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
-    <skip />
-    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
-    <skip />
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Kairė: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Dešinė: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Dėklas: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Akumuliatoriaus lygis (kairė): <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Akumuliatoriaus lygis (dešinė): <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Dėklas, akumuliatoriaus lygis: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Akumuliatorius: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Akumuliatorius"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Nustatymų skydelis"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Įgalinti laisvos formos langus"</string>
@@ -5344,7 +5341,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Siųsti atsiliepimą"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Ar norite pateikti atsiliepimų dėl šio pasiūlymo?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"Turinys (<xliff:g id="COPY_CONTENT">%1$s</xliff:g>) nukopijuotas į iškarpinę."</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Pritaikymo neįgaliesiems naudojimas"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{Vienai programai suteikta visateisė prieiga prie jūsų įrenginio}one{# programai suteikta visateisė prieiga prie jūsų įrenginio}few{# programoms suteikta visateisė prieiga prie jūsų įrenginio}many{# programos suteikta visateisė prieiga prie jūsų įrenginio}other{# programų suteikta visateisė prieiga prie jūsų įrenginio}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Svarbi informacija"</string>
@@ -5388,8 +5384,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Paleidimas su 16 KB dydžio puslapiu"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Paleisti įr. su 16 KB dydžio psl. pal. branduoliu"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Perjungimas iš 4 KB režimo į 16 KB režimą"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (5343202230812855846) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"Kad būtų galima naudoti 16 KB kūrėjo parinktį, šio įrenginio duomenų skaidinį reikia konvertuoti į „ext4“. Bus ištrinta įrenginio informacija ir pakeista failų sistema į „ext4“.&lt;br&gt;&lt;br&gt; Kai naudosite 16 KB režimą, galėsite perjungti 4 KB ir 16 KB režimus paleidę iš naujo vieną kartą.&lt;br&gt;&lt;br&gt; Ką reikia atsiminti 16 KB režimu&lt;br&gt;&lt;br&gt; &amp;#8226; Negalima garantuoti programinės įrangos vientisumo&lt;br&gt; &amp;#8226; Telefone saugomi duomenys, kai paleidyklė atrakinta, gali būti pažeisti&lt;br&gt; &amp;#8226; Kai kurios funkcijos bus išjungtos, o tai gali paveikti tam tikras programas&lt;br&gt;&lt;br&gt; Jei norite grįžti į generavimo režimą, turėsite perjungti į 4 KB režimą ir užrakinti paleidyklę. Bus atkurti gamykliniai įrenginio nustatymai. Kai įrenginys bus sėkmingai paleistas sistemoje „Android“, išjunkite OĮG panaikintą operatoriaus pasirinkimo ribojimą skiltyje „Kūrėjo parinktys“.&lt;br&gt;&lt;br&gt; Jei norite pereiti prie 16 KB režimo, palieskite „Ištrinti visus duomenis ir atnaujinti“. Dėl to įrenginys bus paleistas iš naujo."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Dirbate puslapio agnostikos režimu, kuriuo veikia 4 KB branduolys, ir perjungiate į 16 KB režimą. Šiuo režimu negalima garantuoti programinės įrangos vientisumo ir visiems telefone saugomiems duomenims, kai panaikintas paleidyklės operatoriaus pasirinkimo ribojimas, gali kilti pavojus. Dėl to įrenginys bus paleistas iš naujo. Kai kurios funkcijos gali būti išjungtos šiais režimais, todėl kai kurios programos gali neveikti. Jei norite vėl įjungti įrenginio generavimo režimą, turite vėl perjungti į 4 KB režimą ir užrakinti paleidyklę, tada bus atkurti įrenginio gamykliniai nustatymai. Kai įrenginys bus sėkmingai paleistas sistemoje „Android“, išjunkite OĮG operatoriaus pasirinkimo ribojimo panaikinimą skiltyje „Kūrėjo parinktys“."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Perjungimas iš 16 KB režimo į 4 KB režimą"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Dirbate puslapio agnostikos režimu, kuriuo veikia 4 KB branduolys, ir perjungiate į 16 KB režimą. Šiuo režimu negalima garantuoti programinės įrangos vientisumo ir visiems telefone saugomiems duomenims, kai panaikintas paleidyklės operatoriaus pasirinkimo ribojimas, gali kilti pavojus. Dėl to įrenginys bus paleistas iš naujo. Kai kurios funkcijos gali būti išjungtos šiais režimais, todėl kai kurios programos gali neveikti. Jei norite vėl įjungti įrenginio generavimo režimą, turite užrakinti paleidyklę, tada bus atkurti įrenginio gamykliniai nustatymai. Kai įrenginys bus sėkmingai paleistas sistemoje „Android“, išjunkite OĮG operatoriaus pasirinkimo ribojimo panaikinimą skiltyje „Kūrėjo parinktys“."</string>
@@ -5925,6 +5920,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN kodo ištrinti negalima"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Bandant ištrinti PIN kodą įvyko klaida."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"„<xliff:g id="FEATURE">%1$s</xliff:g>“ animacija"</string>
-    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
-    <skip />
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Nepavyko įjungti valdiklių"</string>
 </resources>

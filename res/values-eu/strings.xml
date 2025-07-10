@@ -103,10 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Audio-irteerari buruz"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Bideratu soinuak entzumen-gailura edo telefonoaren bozgorailura"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Antzekoak"</string>
-    <!-- no translation found for bluetooth_try_nearby_share_title (2307943703595855441) -->
-    <skip />
-    <!-- no translation found for bluetooth_try_nearby_share_summary (2808932450696996548) -->
-    <skip />
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"Bidali bizkorrago <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> erabilita"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"Inguruko Android-eko gailuekin eta PCekin edukia partekatzeko modu bizkorrena Windows-erako <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> erabiltzea da"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Tonua eta alarmak"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Deietako audioa"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Multimedia-eduki eta sistemaren soinuak"</string>
@@ -217,7 +215,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Baliteke hizkuntza ez egotea aplikazioan erabilgarri, eta aplikazio batzuk ezarpenarekin bateragarriak ez izatea."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Aukeratu aplikazio bakoitzaren hizkuntza."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Aukeratu aplikazio bakoitzaren hizkuntza. Baliteke hizkuntza bat ez etortzea aplikazioan erabilgarri dauden hizkuntzekin. Baliteke aplikazio batzuek ezarpena ez onartzea."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Gailuak, aplikazioek eta webguneek hizkuntza hobetsien zerrendako lehen hizkuntza erabiltzen dute.\n\nAplikazio askok hizkuntza hobetsiaren lurraldea ere erabiliko dute daten, zenbakien eta unitateen formatua erakusteko. Lurraldea aldatzeko, gehitu hizkuntza bat eta aukeratu lurralde hobetsia."</string>
+    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
+    <skip />
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Aplikazio bakoitzerako hizkuntza bat hautatzeko, joan aplikazioen hizkuntzen ezarpenetara."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Lortu aplikazioen hizkuntzei buruzko informazio gehiago"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Lurralde gisa %s ezarri nahi duzu?"</string>
@@ -994,8 +993,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Berrabiarazi"</string>
     <string name="external_display_on" msgid="2560104443500154333">"Aktibatuta"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Desaktibatuta"</string>
-    <!-- no translation found for external_display_settings_title (4690843697498496237) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="4690843697498496237">"Kanpoko pantaila"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Pantaila integratua"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Erabili kanpoko pantaila"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Pantailaren bereizmena"</string>
@@ -1006,12 +1004,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Biratzea edo bereizmena aldatuz gero, baliteke abian den aplikazioren bat gelditzea"</string>
-    <!-- no translation found for external_display_not_found_footer_title (3974573337788760338) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_title (4854597444155430591) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_summary (3114991534614756600) -->
-    <skip />
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"Ez dago pantailarik konektatuta.\n\nHasteko, konektatu kanpoko pantaila bat edo erabili beste kable bat"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Ez dago pantailarik konektatuta"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Hasteko, konektatu kanpoko pantaila bat edo erabili beste kable bat"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Aukera gehiago"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Pantailak berrantolatzeko, eduki itzazu sakatuta eta arrasta itzazu."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Islatu pantaila integratua"</string>
@@ -1224,6 +1219,10 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Ezin izan da sarea gorde"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Utzi"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Sarea ahaztu nahi al duzu?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
+    <skip />
+    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 sare}other{# sare}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 harpidetza}other{# harpidetza}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 sare eta harpidetza}other{# sare eta harpidetza}}"</string>
@@ -2421,10 +2420,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Mugitu pantaila saguak pantailaren ertzak ukitzean"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Jarraitu idazketari"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"Lupak testuari jarraitzen dio, idatzi ahala"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Jarraitu teklatuaren bidez fokuratutakoari"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"Lupak fokuratutako elementuari jarraitzen dio teklatuaren bidez nabigatzen duzun bitartean"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Handitu teklatuan"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Handitu teklatua emojiak eta hizkiak ikusteko pantaila osoko lupa erabiltzean"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Ez dago erabilgarri pantailaren zati bat soilik handitzean"</string>
@@ -2740,10 +2737,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Are ilunago eginbideari buruz"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Ilundu pantaila, irakurtzeko erosoagoa izan dadin"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intentsitatea"</string>
-    <!-- no translation found for brightness_intensity_start_label (5156578219206443637) -->
-    <skip />
-    <!-- no translation found for brightness_intensity_end_label (2697495729534414164) -->
-    <skip />
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"Ilunago"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"Argiago"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Utzi aktibatuta gailua berrabiarazi ondoren"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Laburra ({time} segundo)}other{Laburra ({time} segundo)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Tartekoa ({time} segundo)}other{Tartekoa ({time} segundo)}}"</string>
@@ -3862,17 +3857,22 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Albiste nagusiak, editorialak eta abar"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Gustatu izanaren adierazpenak, argitalpenak eta abar"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Buletinak, gomendatutako multimedia-elementuak eta abar"</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"AA bidezko jakinarazpenak"</string>
+    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"Jakinarazpenen laburpenak"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Jaso mezu luzeen laburpen bizkorrak"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Erabili jakinarazpenen laburpenak"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"Laburbildu mezu luzeak eta taldeko elkarrizketak laburpen bizkorrak jasotzeko. Laburpenak AA bidez egiten dira eta baliteke akatsak izatea."</string>
+    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Aplikazio hauen jakinarazpenak ez dira laburbilduko"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Kudeatu aplikazioak"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Eman aplikazioen jakinarazpenak laburbiltzeko baimena"</string>
+    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
+    <skip />
     <string name="notification_excluded_apps" msgid="317898848790046528">"Ez sartu aplikazio hauek"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"Laburbildu jakinarazpenak"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"Laburbildu aplikazio honetako elkarrizketen jakinarazpenak"</string>
+    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
+    <skip />
+    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
+    <skip />
     <string name="live_notifications" msgid="4650406646292963831">"Istanteko jakinarazpenak"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Zuzeneko informazioa"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Bistaratu aktibo dauden eta denbora-muga duten jakinarazpenak egoera-barran eta pantaila blokeatuan"</string>
@@ -4026,11 +4026,16 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Aplikatu laneko profileko aplikazioetan"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Jakinarazpenen antolatzailea"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Multzokatu lehentasun txikiagoko jakinarazpenak eta desaktibatu haien audioa"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Erabili jakinarazpenen antolatzailea"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"Aukeratu audioa desaktibatu nahi diezun jakinarazpen motak eta multzoka itzazu etenaldiak murrizteko. Multzokatzea AA bidez egiten da eta baliteke akatsak izatea."</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Multzokatu jakinarazpenak"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Antzeko gaiak dituzten jakinarazpenen audioa desaktibatuko da, eta multzokatu egingo dira, zerbitzua isilagoa izan dadin"</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Eman aplikazioen jakinarazpenak multzokatzeko baimena"</string>
+    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
+    <skip />
+    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Aplikatu laneko profileko aplikazioetan"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"EBko laguntza-zerbitzuak"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ez dago EBko laguntza-zerbitzu gisa abiaraztea eskatu duen aplikaziorik instalatuta."</string>
@@ -4891,7 +4896,7 @@
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Gailu finantzatuaren informazioa"</string>
     <string name="financed_privacy_intro" msgid="7836497475568741579">"Konfigurazio-prozesuan zehar, kreditu bidezko gailu-hornitzaileak gailuaren ezarpenak alda ditzake, baita bertan softwarea instalatu ere.\n\nOrdainketaren bat egiten ez baduzu, kreditu bidezko gailu-hornitzaileak gailua blokea dezake, eta gailuaren ezarpenak aldatu.\n\nInformazio gehiago lortzeko, jarri harremanetan kreditu bidezko gailu-hornitzailearekin."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Gailua finantzatu baduzu, ezingo dituzu egin hauek:"</string>
-    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play Store-tik kanpoko aplikazioak instalatu."</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Google Play Store-tik kanpoko aplikazioak instalatu."</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Gailua modu seguruan berrabiarazi."</string>
     <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Gailuan hainbat erabiltzaile gehitu."</string>
     <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Data, ordua eta ordu-zonak aldatu."</string>
@@ -5179,8 +5184,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Sare mugikorrik ez baduzu, satelitea erabiltzeko aukera ikusiko duzu."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Telefonoa satelite batera konektatu ondoren"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Jarraitu satelitera konektatzeko urratsak"</string>
-    <!-- no translation found for summary_supported_service (5855066701346160193) -->
-    <skip />
+    <string name="summary_supported_service" msgid="5855066701346160193">"Edonori bidal diezazkiokezu testu-mezuak, baita larrialdi-zerbitzuei ere, eta aplikazio bateragarriak erabili. Telefonoa sare mugikor batera konektatuko da berriro, halakorik erabilgarri dagoenean."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Edonori bidal diezazkiokezu testu-mezuak, baita larrialdi-zerbitzuei ere. Telefonoa sare mugikor batera konektatuko da berriro, halakorik erabilgarri dagoenean."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Telefonoa konektatu ondoren, edonori bidal diezazkiokezu testu-mezuak, baita larrialdi-zerbitzuei ere."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Gogoan izan"</string>
@@ -5309,20 +5313,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Ezkerrekoa"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Eskuinekoa"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Kutxa"</string>
-    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
-    <skip />
-    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
-    <skip />
-    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
-    <skip />
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Ezkerrekoa: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Eskuinekoa: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Kutxa: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Ezkerrekoaren bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Eskuinekoaren bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Kutxaren bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Bateria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Ezarpenen panela"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Gaitu estilo libreko leihoak"</string>
@@ -5344,7 +5341,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Bidali oharrak"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Zer iruditzen zaizu iradokizun hau?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"Arbelean kopiatu da <xliff:g id="COPY_CONTENT">%1$s</xliff:g>."</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Erabilerraztasun-hobespenak"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 aplikaziok gailurako sarbide osoa du}other{# aplikaziok gailurako sarbide osoa dute}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Informazio garrantzitsua"</string>
@@ -5388,8 +5384,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Abiarazi 16 kB-ko orri-tamainarekin"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Abiarazi gailua 16 kB-ko orri kernel bateragarriaz"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Aldatu 4 kB-ko modutik 16 kB-ko modura"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (5343202230812855846) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"Garatzaileentzako 16 kB-ko aukera erabiltzeko, ext4-ra bihurtu behar da gailu honen datuen partizioa. Ondorioz, gailua xahutu egingo da, eta fitxategi-sistema ext4-ra aldatuko.&lt;br&gt;&lt;br&gt; 16 kB-ko moduan zaudenean, 4 kB-ko eta 16 kB-ko moduen artean aldatu ahal izango duzu behin soilik berrabiarazita.&lt;br&gt;&lt;br&gt; 16 kB-ko moduan gogoan izan beharrekoak:&lt;br&gt;&lt;br&gt; &amp;#8226; Ezin da bermatu softwarearen osotasuna.&lt;br&gt; &amp;#8226; Baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean.&lt;br&gt; &amp;#8226; Eginbide batzuk desgaitu egingo dira, eta baliteke horrek aplikazio batzuei eragitea.&lt;br&gt;&lt;br&gt; Jatorrizko modura itzultzeko, aldatu berriro 4 kB-ko modura eta blokeatu sistema eragilearen abiarazlea. Horrela, gailuaren jatorrizko datuak berrezarriko dira. Gailuak Android behar bezala abiarazten duenean, desgaitu OEMa desblokeatzeko aukera Garatzaileentzako aukerak atalean.&lt;br&gt;&lt;br&gt; 16 kB-ko modura aldatzeko prozesuan aurrera egiteko, sakatu \"Ezabatu datu guztiak eta eguneratu\". Gailua berrabiaraziko da."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Orri-tamaina guztiekin bateragarria den moduan zaude 4 kB-ko kernel bat exekutatzen, eta 16 kB-ko modura aldatzera zoaz. Modu horretan ezin da softwarearen osotasuna bermatu, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. Gailua berrabiaraziko da. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Gailua jatorrizko modura itzultzeko, aldatu berriro 4 kB-ko modura eta blokeatu sistema eragilearen abiarazlea. Gailuaren jatorrizko datuak berrezarriko dira. Gailuak Android behar bezala abiarazten duenean, desgaitu OEMa desblokeatzeko aukera Garatzaileentzako aukerak atalean."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Aldatu 16 kB-ko modutik 4 kB-ko modura"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Orri-tamaina guztiekin bateragarria den moduan zaude, 16 kB-ko kernel bat exekutatzen, eta 4 kB-ko modura aldatzera zoaz. Modu horretan ezin da softwarearen osotasuna bermatu, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. Gailua berrabiaraziko da. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Gailua jatorrizko modura itzultzeko, blokeatu sistema eragilearen abiarazlea. Gailuaren jatorrizko datuak berrezarriko dira. Gailuak Android behar bezala abiarazten duenean, desgaitu OEMa desblokeatzeko aukera Garatzaileentzako aukerak atalean."</string>
@@ -5923,6 +5918,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Ezin da ezabatu PINa"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Errore bat gertatu da PINa ezabatzen saiatzean."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animazioa"</string>
-    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
-    <skip />
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Ezin dira aktibatu murriztapenak"</string>
 </resources>

@@ -103,10 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"অডিও আউটপুট সম্পর্কে"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"আপনার হিয়ারিং ডিভাইস বা ফোনের স্পিকারে সাউন্ড রাউট করুন"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"সম্পর্কিত"</string>
-    <!-- no translation found for bluetooth_try_nearby_share_title (2307943703595855441) -->
-    <skip />
-    <!-- no translation found for bluetooth_try_nearby_share_summary (2808932450696996548) -->
-    <skip />
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>-এর সাহায্যে আরও দ্রুত পাঠান"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"আশেপাশের Android ডিভাইসে এবং পিসি (PC)-এর সাথে দ্রুততম উপায়ে ফাইল শেয়ার করতে, Windows-এর জন্য <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> ব্যবহার করে দেখুন"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"রিংটোন ও অ্যালার্ম"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"কল করার সময় ব্যবহৃত অডিও ডিভাইস"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"মিডিয়া এবং সিস্টেম সাউন্ড"</string>
@@ -217,7 +215,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"অ্যাপে উপলভ্য থাকা ভাষা আলাদা হতে পারে। কিছু অ্যাপে এই সেটিং কাজ নাও করতে পারে।"</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"প্রত্যেকটি অ্যাপের জন্য ভাষা বেছে নিন।"</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"প্রত্যেক অ্যাপের জন্য ভাষা বেছে নিন। অ্যাপে উপলভ্য ভাষাগুলির থেকে ভাষা আলাদা হতে পারে। কিছু অ্যাপে এই সেটিং কাজ করতে নাও পারে।"</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"আপনার ডিভাইস, অ্যাপ ও ওয়েবসাইট সেই ভাষা ব্যবহার করবে যা আপনি বেছে নেওয়া পছন্দের ভাষায় প্রথম ভাষা হিসেবে রেখেছেন।\n\nএছাড়া, একাধিক অ্যাপ তারিখ, নম্বর ও ইউনিট সেই জায়গা অনুযায়ী ফর্ম্যাট করবে যেখানে আপনার পছন্দের ভাষা বলা হয়। আপনার অঞ্চল পরিবর্তন করতে, ভাষা যোগ করুন, তারপর আপনার পছন্দের জায়গা বেছে নিন।"</string>
+    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
+    <skip />
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"প্রতিটি অ্যাপের জন্য ভাষা বেছে নিতে, অ্যাপের ভাষা সংক্রান্ত সেটিংসে যান।"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"অ্যাপের ভাষা সম্পর্কে আরও জানুন"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"অঞ্চল পরিবর্তন করে %s-এ সেট করতে চান?"</string>
@@ -994,8 +993,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"রিস্টার্ট করুন"</string>
     <string name="external_display_on" msgid="2560104443500154333">"চালু আছে"</string>
     <string name="external_display_off" msgid="5634413756025351374">"বন্ধ আছে"</string>
-    <!-- no translation found for external_display_settings_title (4690843697498496237) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="4690843697498496237">"এক্সটার্নাল ডিসপ্লে"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"বিল্ট-ইন ডিসপ্লে"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"এক্সটার্নাল ডিসপ্লে ব্যবহার করুন"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ডিসপ্লে রেজোলিউশন"</string>
@@ -1006,12 +1004,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"১৮০°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"২৭০°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"রোটেশন বা রেজোলিউশন পরিবর্তন করা হলে, বর্তমানে চালু থাকা যেকোনও অ্যাপ বন্ধ হয়ে যেতে পারে"</string>
-    <!-- no translation found for external_display_not_found_footer_title (3974573337788760338) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_title (4854597444155430591) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_summary (3114991534614756600) -->
-    <skip />
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"কোনও ডিসপ্লে কানেক্ট করা নেই\n\nশুরু করতে একটি এক্সটার্নাল ডিসপ্লে কানেক্ট করুন, অথবা অন্য একটি কেবেল ব্যবহার করে দেখুন"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"কোনও ডিসপ্লে কানেক্ট করা নেই"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"শুরু করতে একটি এক্সটার্নাল ডিসপ্লে কানেক্ট করুন, অথবা অন্য একটি কেবেল ব্যবহার করে দেখুন"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"আরও বিকল্প"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"ডিসপ্লে আবার সাজাতে হোল্ড করে টেনে আনুন।"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"বিল্ট-ইন ডিসপ্লে মিরর করুন"</string>
@@ -1224,6 +1219,10 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"নেটওয়ার্ক সংরক্ষণ করতে ব্যর্থ হয়েছে"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"বাতিল করুন"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"নেটওয়ার্ক ভুলে গেছেন?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
+    <skip />
+    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{১টি নেটওয়ার্ক}one{#টি নেটওয়ার্ক}other{#টি নেটওয়ার্ক}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{১টি সাবস্ক্রিপশন}one{#টি সাবস্ক্রিপশন}other{#টি সাবস্ক্রিপশন}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{১টি নেটওয়ার্ক ও সাবস্ক্রিপশন}one{#টি নেটওয়ার্ক ও সাবস্ক্রিপশন}other{#টি নেটওয়ার্ক ও সাবস্ক্রিপশন}}"</string>
@@ -2421,10 +2420,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"মাউস স্ক্রিনের ধারে পৌঁছে গেলে স্ক্রিন সরান"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"টাইপ করার সাথে সাথে"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"আপনি টাইপ করার সময় ম্যাগনিফায়ার তা বড় করে দেখায়"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"কীবোর্ড ফোকাস ফলো করুন"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"আপনি কীবোর্ডের মাধ্যমে নেভিগেট করার সময় ম্যাগনিফায়ার ফোকাস করা আইটেমকে ফলো করে"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"কীবোর্ড বড় করে দেখুন"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"ফুল-স্ক্রিন বড় করে দেখা ফিচার ব্যবহার করার সময় ইমোজি এবং অক্ষর দেখতে কীবোর্ড জুম করুন"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"শুধু স্ক্রিনের বড় করে দেখানো অংশে উপলভ্য থাকে না"</string>
@@ -2740,10 +2737,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"অতিরিক্ত কম ব্রাইটনেস বিষয়ক"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"স্ক্রিনের আলো কম করুন যাতে এতে থাকা কন্টেন্ট সহজেই পড়া যায়"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"তীব্রতা"</string>
-    <!-- no translation found for brightness_intensity_start_label (5156578219206443637) -->
-    <skip />
-    <!-- no translation found for brightness_intensity_end_label (2697495729534414164) -->
-    <skip />
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"কম উজ্জ্বল"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"আরও উজ্জ্বল"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"এই সেটিং ডিভাইস রিস্টার্ট করার পরও চালু রাখুন"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{অল্প সময় ({time} সেকেন্ড)}one{অল্প সময় ({time} সেকেন্ড)}other{অল্প সময় ({time} সেকেন্ড)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{মাঝারি সময় ({time} সেকেন্ড)}one{মাঝারি সময় ({time} সেকেন্ড)}other{মাঝারি সময় ({time} সেকেন্ড)}}"</string>
@@ -3862,17 +3857,22 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"সেরা খবর, এডিটোরিয়াল ও আরও অনেক কিছু"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"লাইক, পোস্ট ও আরও অনেক কিছু"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"নিউজলেটার, সাজেস্ট করা মিডিয়া ও আরও অনেক কিছু"</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"AI-এর মাধ্যমে পরিচালিত বিজ্ঞপ্তি"</string>
+    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"বিজ্ঞপ্তি সম্পর্কিত সারসংক্ষেপ"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"অপেক্ষাকৃত দীর্ঘ মেসেজের দ্রুত রিক্যাপ পান"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"বিজ্ঞপ্তি সম্পর্কিত সারসংক্ষেপ ব্যবহার করুন"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"দ্রুত রিক্যাপ পেতে, দীর্ঘ মেসেজ এবং গ্রুপ কথোপকথনের সারসংক্ষেপ করুন। AI সারসংক্ষেপ করে এবং এর মধ্যে ভুল থাকতে পারে।"</string>
+    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"এইসব অ্যাপ থেকে আসা বিজ্ঞপ্তির সারসংক্ষেপ করা হবে না"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"অ্যাপ ম্যানেজ করুন"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"অ্যাপের জন্য বিজ্ঞপ্তির সারাংশ তৈরি করার অনুমতি দিন"</string>
+    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
+    <skip />
     <string name="notification_excluded_apps" msgid="317898848790046528">"এইসব অ্যাপ অন্তর্ভুক্ত করবেন না"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"বিজ্ঞপ্তির সারাংশ তৈরি করুন"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"এই অ্যাপ থেকে কথোপকথন সংক্রান্ত বিজ্ঞপ্তির সারাংশ তৈরি করুন"</string>
+    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
+    <skip />
+    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
+    <skip />
     <string name="live_notifications" msgid="4650406646292963831">"লাইভ বিজ্ঞপ্তি"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"লাইভ আপডেট"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"স্ট্যাটাস বার ও লক স্ক্রিনে চালু থাকা, সীমিত সময়ের জন্য বিজ্ঞপ্তি দেখুন"</string>
@@ -4026,11 +4026,16 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"অফিস প্রোফাইল অ্যাপে প্রয়োগ করুন"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"বিজ্ঞপ্তি অর্গানাইজার"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"কম অগ্রাধিকারযুক্ত বিজ্ঞপ্তি বান্ডেল এবং সাইলেন্ট করুন"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"বিজ্ঞপ্তি অর্গানাইজার ব্যবহার করুন"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"বাধা কম করতে আপনি যেসব বিজ্ঞপ্তির ধরন সাইলেন্ট এবং একসাথে বান্ডেল করতে চান সেগুলি বেছে নিন। বান্ডেল করার কাজটি AI করে এবং এর মধ্যে ভুল থাকতে পারে।"</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"বিজ্ঞপ্তি বান্ডেল করুন"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"একই থিম রয়েছে এমন বিজ্ঞপ্তি সাইলেন্ট করে দেওয়া হবে এবং সাইলেন্ট অভিজ্ঞতার জন্য গ্রুপ করে রাখা হবে"</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"অ্যাপের জন্য বিজ্ঞপ্তি বান্ডেল করার অনুমতি দিন"</string>
+    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
+    <skip />
+    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"অফিস প্রোফাইল অ্যাপে প্রয়োগ করুন"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ভিআর(VR) সহায়তাকারী পরিষেবা"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"VR সহায়তাকারী পরিষেবা হিসেবে চলার জন্য কোনও অ্যাপ ইনস্টল করা নেই৷"</string>
@@ -5179,8 +5184,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"মোবাইল নেটওয়ার্ক না থাকলে, আপনি স্যাটেলাইট ব্যবহার করার বিকল্প দেখতে পাবেন।"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"আপনার ফোন স্যাটেলাইটে কানেক্ট করার পরে"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"স্যাটেলাইটে কানেক্ট করতে ধাপগুলি অনুসরণ করুন"</string>
-    <!-- no translation found for summary_supported_service (5855066701346160193) -->
-    <skip />
+    <string name="summary_supported_service" msgid="5855066701346160193">"আপনি জরুরি পরিষেবা সহ যেকোনও ব্যক্তিকে টেক্সট করতে পারেন এবং ব্যবহার করা যায় এমন অ্যাপ ব্যবহার করতে পারেন। মোবাইল নেটওয়ার্ক উপলভ্য হলে আপনার ফোনে সেটি আবার কানেক্ট হয়ে যাবে।"</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"যেকোনও ব্যক্তিকে আপনি মেসেজ পাঠাতে পারবেন, এর মধ্যে জরুরি পরিষেবাও অন্তর্ভুক্ত। মোবাইল নেটওয়ার্ক উপলভ্য হলে আপনার ফোনে সেটি আবার কানেক্ট হয়ে যাবে।"</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"আপনার ফোন কানেক্ট হওয়ার পরে, জরুরি পরিষেবা ছাড়াও আপনি যেকোনও ব্যক্তিকে টেক্সট করতে পারবেন।"</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"মনে রাখবেন"</string>
@@ -5309,20 +5313,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"বাঁদিক"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"ডান"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"কেস"</string>
-    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
-    <skip />
-    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
-    <skip />
-    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
-    <skip />
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"বাঁদিক: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"ডানদিক: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"কেস: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"বাঁদিক, ব্যাটারি: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"ডানদিক, ব্যাটারি: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"কেস, ব্যাটারি: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"ব্যাটারি: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ব্যাটারি"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"সেটিংস প্যানেল"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"ফ্রিফর্ম উইন্ডো চালু করুন"</string>
@@ -5344,7 +5341,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"মতামত জানান"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"এই সাজেশনের বিষয়ে আপনি আমাদের জানাতে চান?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> ক্লিপবোর্ডে কপি করা হয়েছে"</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"অ্যাক্সেসিবিলিটি সংক্রান্ত ব্যবহার"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{আপনার ডিভাইসে ১টি অ্যাপের সম্পূর্ণ অ্যাক্সেস রয়েছে}one{আপনার ডিভাইসে #টি অ্যাপের সম্পূর্ণ অ্যাক্সেস রয়েছে}other{আপনার ডিভাইসে #টি অ্যাপের সম্পূর্ণ অ্যাক্সেস রয়েছে}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"গুরুত্বপূর্ণ তথ্য"</string>
@@ -5388,8 +5384,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"১৬ কেবি সাইজের পৃষ্ঠা সহ বুট করুন"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"বুট ডিভাইস, ১৬ কেবি পৃষ্ঠায় কাজ করে এমন কার্নেল ব্যবহার করছে"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"৪ কেবি মোড থেকে ১৬ কেবি মোডে পরিবর্তন করুন"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (5343202230812855846) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"১৬ কেবি ডেভেলপার বিকল্প ব্যবহার করতে, এই ডিভাইসের ডেটা পার্টিশন ext4-এ কনভার্ট করতে হবে। এটি আপনার ডিভাইস মুছে ফেলবে এবং ফাইল সিস্টেম ext4 ফর্ম্যাটে পরিবর্তিত হয়ে যাবে।&lt;br&gt;&lt;br&gt; ১৬ কেবি মোড চালু থাকলে, আপনার ডিভাইস একবার রিবুট করে ৪ কেবি এবং ১৬ কেবি মোডের মধ্যে পরিবর্তন করতে পারবেন।&lt;br&gt;&lt;br&gt; ১৬ কেবি মোডে যে বিষয়গুলি মনে রাখতে হবে:&lt;br&gt;&lt;br&gt; &amp;#8226; সফ্টওয়্যার ইন্টিগ্রিটির গ্যারান্টি দেওয়া যায় না&lt;br&gt; &amp;#8226; বুটলোডার আনলক করা অবস্থায় ফোনে সেভ করে রাখা ডেটা নিয়ে ঝুঁকি থাকতে পারে&lt;br&gt; &amp;#8226; কিছু ফিচার বন্ধ করা থাকে, যা নির্দিষ্ট কয়েকটি অ্যাপের উপর প্রভাব ফেলতে পারে&lt;br&gt;&lt;br&gt; প্রোডাকশন মোডে ফিরিয়ে আনতে, আপনাকে আবার ৪ কেবি মোডে পরিবর্তন করতে হবে এবং বুটলোডার লক করতে হবে। এটি আপনার ডিভাইসকে ফ্যাক্টরি রিসেট করবে। ডিভাইস সফলভাবে Android-এ বুট হয়ে গেলে, ডেভেলপার বিকল্প থেকে OEM আনলক বন্ধ করুন।&lt;br&gt;&lt;br&gt; ১৬ কেবি মোডে পরিবর্তন করতে, \"সব ডেটা ও আপডেট মুছুন\" বিকল্পে ট্যাপ করুন। এর ফলে ডিভাইস রিবুট হবে।"</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"আপনি ৪ কেবি কার্নেল রান করে এমন পেজ-অ্যাগনোস্টিক মোডে আছেন এবং ১৬ কেবি মোডে পরিবর্তন করছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারান্টি দেওয়া যায় না এবং বুটলোডার আনলক করা অবস্থায়, ফোনে সেভ করে রাখা ডেটা নিয়ে ঝুঁকি থাকতে পারে। এর ফলে ডিভাইস রিবুট হবে। এই মোডে কিছু ফিচার বন্ধ করা হবে, তাই কোনও কোনও অ্যাপ্লিকেশন কাজ নাও করতে পারে। ডিভাইস প্রোডাকশন মোডে ফিরিয়ে নিয়ে যেতে, আপনাকে ৪ কেবি মোডে পরিবর্তন করতে এবং বুটলোডার লক করতে হবে। এর ফলে ডিভাইস ফ্যাক্টরি রিসেট হবে। ডিভাইস সফলভাবে Android-এ বুট হয়ে গেলে, ডেভেলপার বিকল্প থেকে OEM আনলক বন্ধ করুন।"</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"১৬ কেবি মোড থেকে ৪ কেবি মোডে পরিবর্তন করুন"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"আপনি ১৬ কেবি কার্নেল রান করে এমন পেজ-অ্যাগনোস্টিক মোডে আছেন এবং ৪ কেবি মোডে পরিবর্তন করছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারান্টি দেওয়া যায় না এবং বুটলোডার আনলক করা অবস্থায়, ফোনে সেভ করে রাখা ডেটা নিয়ে ঝুঁকি থাকতে পারে। এর ফলে ডিভাইস রিবুট হবে। এই মোডে কিছু ফিচার বন্ধ করা হবে, তাই কোনও কোনও অ্যাপ্লিকেশন কাজ নাও করতে পারে। ডিভাইসটি প্রোডাকশন মোডে রাখতে, বুটলোডার লক করতে হবে যেটি ডিভাইসকে ফ্যাক্টরি রিসেট করবে। ডিভাইস সফলভাবে Android-এ বুট হয়ে গেলে, ডেভেলপার বিকল্প থেকে OEM আনলক বন্ধ করুন।"</string>
@@ -5923,6 +5918,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"পিন মোছা যাবে না"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"পিন মোছার চেষ্টা করার সময় কোনও সমস্যা হয়েছে।"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> অ্যানিমেশন"</string>
-    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
-    <skip />
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"কন্ট্রোল চালু করা যাচ্ছে না"</string>
 </resources>
