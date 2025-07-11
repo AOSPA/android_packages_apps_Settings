@@ -34,8 +34,7 @@ import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
 @ProvidePreferenceScreen(AccountScreen.KEY)
-open class AccountScreen :
-    PreferenceScreenMixin, PreferenceTitleProvider, PreferenceIconProvider {
+open class AccountScreen : PreferenceScreenMixin, PreferenceTitleProvider, PreferenceIconProvider {
     override val key: String
         get() = KEY
 
@@ -55,8 +54,7 @@ open class AccountScreen :
     override fun getIcon(context: Context) =
         when {
             isExpressiveTheme(context) -> R.drawable.ic_homepage_accounts
-            Flags.homepageRevamp() -> R.drawable.ic_settings_passwords_filled
-            else -> R.drawable.ic_settings_accounts
+            else -> R.drawable.ic_settings_passwords_filled
         }
 
     override val highlightMenuKey: Int

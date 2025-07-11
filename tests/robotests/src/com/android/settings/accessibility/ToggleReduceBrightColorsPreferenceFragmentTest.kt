@@ -151,9 +151,6 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
         val footerPref = fragment!!.findPreference<AccessibilityFooterPreference?>(FOOTER_PREF)
         assertThat(footerPref).isNotNull()
         assertThat(footerPref!!.isVisible).isTrue()
-
-        assertThat(footerPref.contentDescription.toString())
-            .isEqualTo("${context.getString(R.string.reduce_bright_colors_about_title)}\n\nnull")
         assertThat(footerPref.summary.toString())
             .isEqualTo(
                 Html.fromHtml(
@@ -163,6 +160,10 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
                         /* tagHandler= */ null,
                     )
                     .toString()
+            )
+        assertThat(footerPref.contentDescription.toString())
+            .isEqualTo(
+                "${context.getString(R.string.reduce_bright_colors_about_title)}\n\n${footerPref.summary}"
             )
     }
 

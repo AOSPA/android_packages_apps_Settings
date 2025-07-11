@@ -48,8 +48,7 @@ open class AccessibilityScreen :
     override fun getIcon(context: Context) =
         when {
             isExpressiveTheme(context) -> R.drawable.ic_homepage_accessibility
-            Flags.homepageRevamp() -> R.drawable.ic_settings_accessibility_filled
-            else -> R.drawable.ic_settings_accessibility
+            else -> R.drawable.ic_settings_accessibility_filled
         }
 
     override val keywords: Int

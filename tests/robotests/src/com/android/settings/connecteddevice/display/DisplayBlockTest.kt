@@ -19,6 +19,7 @@ package com.android.settings.connecteddevice.display
 import android.content.Context
 import android.graphics.PointF
 import android.os.Handler
+import android.util.Size
 import android.view.SurfaceControl
 import android.view.SurfaceView
 import android.widget.FrameLayout
@@ -48,54 +49,66 @@ class DisplayBlockTest {
         override val handler: Handler
             get() = testHandler
 
-        override fun updateSurfaceView(oldSurfaces: List<SurfaceControl>, surface: SurfaceControl,
-                wallpaperView: SurfaceView, surfaceScale: Float) {
-            updateLog.append("oldSurfaces: $oldSurfaces, surface: $surface, surfaceScale: ")
-                    .append("%.2f\n".format(surfaceScale))
+        override fun updateSurfaceView(
+            oldSurfaces: List<SurfaceControl>,
+            surface: SurfaceControl,
+            wallpaperView: SurfaceView,
+            surfaceScale: Float,
+            surfaceSize: Size,
+            cornerRadiusPx: Float,
+            isMirroringOtherDisplay: Boolean,
+        ) {
+            // TODO(b/425848523): Validate individual properties instead of a combined toString
+            updateLog
+                .append("oldSurfaces: $oldSurfaces, surface: $surface, surfaceScale: ")
+                .append("%.2f, surfaceSize: $surfaceSize\n".format(surfaceScale))
         }
 
-        override fun wallpaper(displayId: Int): SurfaceControl? = wallpapers.remove(displayId)
+        override fun wallpaper(DISPLAY_ID: Int): SurfaceControl? = wallpapers.remove(DISPLAY_ID)
     }
 
     @Test
     fun normalUpdateFlow() {
-        val displayId = 42
         val wallpaper42 = SurfaceControl.Builder().setName("wallpaper42").build()
 
-        injector.wallpapers.put(displayId, wallpaper42)
+        injector.wallpapers.put(DISPLAY_ID, wallpaper42)
 
         parentView.addView(block)
-        block.reset(displayId, displayId, PointF(10f, 10f), PointF(20f, 20f), 0.5f)
+        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
 
         block.updateSurfaceView()
 
-        assertThat(injector.updateLog.toString()).isEqualTo(
-                "oldSurfaces: [], surface: $wallpaper42, surfaceScale: 0.50\n")
+        assertThat(injector.updateLog.toString())
+            .isEqualTo(
+                "oldSurfaces: [], surface: $wallpaper42, surfaceScale: 0.50, " +
+                    "surfaceSize: $DISPLAY_SIZE\n"
+            )
     }
 
     @Test
     fun resetTwiceBeforeSurfaceUpdate() {
-        val displayId = 42
         val wallpaperA = SurfaceControl.Builder().setName("wallpaperA").build()
         val wallpaperB = SurfaceControl.Builder().setName("wallpaperB").build()
 
-        injector.wallpapers.put(displayId, wallpaperA)
+        injector.wallpapers.put(DISPLAY_ID, wallpaperA)
 
         parentView.addView(block)
-        block.reset(displayId, displayId, PointF(10f, 10f), PointF(20f, 20f), 0.25f)
+        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.25f, DISPLAY_SIZE)
 
         // Should not have fetched wallpaper info yet. Replace wallpaper setting with wallpaperB.
-        assertThat(injector.wallpapers.put(displayId, wallpaperB)).isEqualTo(wallpaperA)
+        assertThat(injector.wallpapers.put(DISPLAY_ID, wallpaperB)).isEqualTo(wallpaperA)
 
-        block.reset(displayId, displayId, PointF(10f, 10f), PointF(30f, 30f), 0.4f)
+        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(30f, 30f), 0.4f, DISPLAY_SIZE)
 
         // Should not have fetched wallpaper or display info yet.
-        assertThat(injector.wallpapers.get(displayId)).isEqualTo(wallpaperB)
+        assertThat(injector.wallpapers.get(DISPLAY_ID)).isEqualTo(wallpaperB)
         block.updateSurfaceView()
-        assertThat(injector.wallpapers.get(displayId)).isNull()
+        assertThat(injector.wallpapers.get(DISPLAY_ID)).isNull()
 
-        assertThat(injector.updateLog.toString()).isEqualTo(
-                "oldSurfaces: [], surface: $wallpaperB, surfaceScale: 0.40\n")
+        assertThat(injector.updateLog.toString())
+            .isEqualTo(
+                "oldSurfaces: [], surface: $wallpaperB, surfaceScale: 0.40, surfaceSize: $DISPLAY_SIZE\n"
+            )
     }
 
     private fun applyRequestedSize() {
@@ -105,50 +118,65 @@ class DisplayBlockTest {
 
     @Test
     fun resetWithUnchangedSizeCausesImmediateUpdate() {
-        val displayId = 42
         val wallpaperX = SurfaceControl.Builder().setName("wallpaperX").build()
         val wallpaperY = SurfaceControl.Builder().setName("wallpaperY").build()
 
-        injector.wallpapers.put(displayId, wallpaperX)
+        injector.wallpapers.put(DISPLAY_ID, wallpaperX)
 
         parentView.addView(block)
-        block.reset(displayId, displayId, PointF(10f, 10f), PointF(20f, 20f), 0.5f)
+        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
         block.updateSurfaceView()
 
-        assertThat(injector.updateLog.toString()).isEqualTo(
-                "oldSurfaces: [], surface: $wallpaperX, surfaceScale: 0.50\n")
+        assertThat(injector.updateLog.toString())
+            .isEqualTo(
+                "oldSurfaces: [], surface: $wallpaperX, surfaceScale: 0.50, " +
+                    "surfaceSize: $DISPLAY_SIZE\n"
+            )
         applyRequestedSize()
         injector.updateLog.setLength(0)
 
         // Same size and scale as before, but a new wallpaper and different position in parent view.
-        injector.wallpapers.put(displayId, wallpaperY)
-        block.reset(displayId, displayId, PointF(60f, 10f), PointF(70f, 20f), 0.5f)
-        assertThat(injector.updateLog.toString()).isEqualTo(
-                "oldSurfaces: [$wallpaperX], surface: $wallpaperY, surfaceScale: 0.50\n")
+        injector.wallpapers.put(DISPLAY_ID, wallpaperY)
+        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 10f), PointF(70f, 20f), 0.5f, DISPLAY_SIZE)
+        assertThat(injector.updateLog.toString())
+            .isEqualTo(
+                "oldSurfaces: [$wallpaperX], surface: $wallpaperY, surfaceScale: 0.50, " +
+                    "surfaceSize: $DISPLAY_SIZE\n"
+            )
         applyRequestedSize()
         injector.updateLog.setLength(0)
 
         // Repeat the pattern, but with a new scale and reverting back to wallpaperX.
-        injector.wallpapers.put(displayId, wallpaperX)
-        block.reset(displayId, displayId, PointF(60f, 30f), PointF(70f, 40f), 0.2f)
-        assertThat(injector.updateLog.toString()).isEqualTo(
-                "oldSurfaces: [$wallpaperY], surface: $wallpaperX, surfaceScale: 0.20\n")
+        injector.wallpapers.put(DISPLAY_ID, wallpaperX)
+        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 30f), PointF(70f, 40f), 0.2f, DISPLAY_SIZE)
+        assertThat(injector.updateLog.toString())
+            .isEqualTo(
+                "oldSurfaces: [$wallpaperY], surface: $wallpaperX, surfaceScale: 0.20, " +
+                    "surfaceSize: $DISPLAY_SIZE\n"
+            )
     }
 
     @Test
     fun retryIfWallpaperNotReady() {
-        val displayId = 42
         val wallpaperW = SurfaceControl.Builder().setName("wallpaperW").build()
 
         parentView.addView(block)
-        block.reset(displayId, displayId, PointF(10f, 10f), PointF(20f, 20f), 0.5f)
+        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
         block.updateSurfaceView()
 
         assertThat(injector.updateLog.toString()).isEqualTo("")
-        injector.wallpapers.put(displayId, wallpaperW)
+        injector.wallpapers.put(DISPLAY_ID, wallpaperW)
 
         injector.testHandler.flush()
-        assertThat(injector.updateLog.toString()).isEqualTo(
-                "oldSurfaces: [], surface: $wallpaperW, surfaceScale: 0.50\n")
+        assertThat(injector.updateLog.toString())
+            .isEqualTo(
+                "oldSurfaces: [], surface: $wallpaperW, surfaceScale: 0.50, " +
+                    "surfaceSize: $DISPLAY_SIZE\n"
+            )
+    }
+
+    private companion object {
+        private val DISPLAY_ID = 42
+        private var DISPLAY_SIZE = Size(1280, 720)
     }
 }

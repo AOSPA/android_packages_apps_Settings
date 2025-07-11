@@ -16,6 +16,7 @@
 package com.android.settings.supervision.ipc
 
 import android.os.Bundle
+import org.json.JSONObject
 
 /**
  * Data class representing preference information, used for displaying preference items.
@@ -58,6 +59,32 @@ data class PreferenceData(
         isVisible = bundle.getBoolean(IS_VISIBLE, true),
         learnMoreLink = bundle.getString(LEARN_MORE_LINK),
     )
+
+    constructor(
+        jsonObject: JSONObject
+    ) : this(
+        icon = jsonObject.optInt(ICON, -1).takeIf { it != -1 },
+        title = jsonObject.optString(TITLE, null),
+        summary = jsonObject.optString(SUMMARY, null),
+        action = jsonObject.optString(ACTION, null),
+        trailingIcon = jsonObject.optInt(ACTION_ICON, -1).takeIf { it != -1 },
+        targetPackage = jsonObject.optString(TARGET_PACKAGE, null),
+        isVisible = jsonObject.optBoolean(IS_VISIBLE, true),
+        learnMoreLink = jsonObject.optString(LEARN_MORE_LINK, null),
+    )
+
+    fun toJsonObject(): JSONObject {
+        return JSONObject().apply {
+            icon?.let { put(ICON, it) }
+            title?.let { put(TITLE, it.toString()) }
+            summary?.let { put(SUMMARY, it.toString()) }
+            action?.let { put(ACTION, it) }
+            trailingIcon?.let { put(ACTION_ICON, it) }
+            targetPackage?.let { put(TARGET_PACKAGE, it) }
+            put(IS_VISIBLE, isVisible)
+            learnMoreLink?.let { put(LEARN_MORE_LINK, it) }
+        }
+    }
 
     fun toBundle(): Bundle {
         return Bundle().apply {

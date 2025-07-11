@@ -215,7 +215,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"És possible que l\'idioma no coincideixi amb els que hi ha disponibles a l\'aplicació. Algunes aplicacions no admeten aquesta opció de configuració."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Tria l\'idioma per a cada aplicació."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Tria l\'idioma per a cada aplicació. És possible que l\'idioma no coincideixi amb els que hi ha disponibles a l\'aplicació. Algunes aplicacions no admeten aquesta opció de configuració."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"El dispositiu, les aplicacions i els llocs web utilitzen el primer idioma admès de la teva llista d\'idiomes preferits.\n\nMoltes aplicacions també utilitzen la regió del teu idioma preferit per triar el format de les dates, els números i les unitats. Per canviar la regió, afegeix un idioma i, a continuació, tria la regió que prefereixis."</string>
+    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
+    <skip />
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Per seleccionar un idioma per a cada aplicació, ves a la configuració d\'idioma de l\'aplicació."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Més informació sobre els idiomes de les aplicacions"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Vols canviar la regió a %s?"</string>
@@ -1218,6 +1219,10 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"No s\'ha pogut desar la xarxa"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Cancel·la"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Vols que s\'oblidi la xarxa?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
+    <skip />
+    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 xarxa}other{# xarxes}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 subscripció}other{# subscripcions}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 xarxa i subscripció}other{# xarxes i subscripcions}}"</string>
@@ -1927,7 +1932,7 @@
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Premeu Menú per obtenir ajuda."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Deixa anar el dit quan acabis"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Connecta <xliff:g id="NUMBER">%d</xliff:g> punts com a mínim. Torna-ho a provar."</string>
-    <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Patró enregistrat"</string>
+    <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Patró gravat"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Torna a dibuixar el patró per confirmar-lo"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"El teu nou patró de desbloqueig"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Confirma"</string>
@@ -2363,7 +2368,7 @@
     <string name="accessibility_pointer_title" msgid="7427650233669997010">"Cursor"</string>
     <string name="accessibility_touchpad_title" msgid="5798458334122685642">"Ratolí tàctil"</string>
     <string name="accessibility_touchpad_system_gestures_enable_title" msgid="1867179109603472062">"Utilitza gestos amb 3 o 4 dits"</string>
-    <string name="accessibility_touchpad_system_gestures_enable_summary" msgid="7076378989016181266">"Quan estiguin desactivats, el ratolí tàctil ignorarà els gestos amb 3 o 4 dits"</string>
+    <string name="accessibility_touchpad_system_gestures_enable_summary" msgid="7076378989016181266">"Si aquesta opció està desactivada, el ratolí tàctil ignorarà els gestos amb 3 o 4 dits"</string>
     <string name="keywords_accessibility_touchpad_system_gestures_enable" msgid="4406441971607855466">"ratolí tàctil, lliscar"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contrast de color"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Un contrast més alt fa que el text, els botons i les icones destaquin més. Tria el contrast que més t\'agradi."</string>
@@ -2415,10 +2420,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Mou la pantalla quan el ratolí toqui les vores de la pantalla"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Segueix l\'escriptura"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"La lupa segueix el text a mesura que escrius"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Segueix el focus del teclat"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"La lupa segueix l\'element on s\'ha posat el focus mentre navegues amb el teclat"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Amplia el teclat"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Apropa el teclat per veure els emojis i lletres amb l\'ampliació de pantalla completa"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"No disponible si només s\'amplia part de la pantalla"</string>
@@ -3856,17 +3859,22 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Notícies destacades, editorials i més"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"M\'agrades, publicacions i més"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Butlletins d\'informació, mitjans recomanats i més"</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"Notificacions basades en la IA"</string>
+    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"Resums de les notificacions"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Obtén resums ràpids de missatges més llargs"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Utilitza resums de notificacions"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"Resumeix missatges llargs i converses de grup ràpidament. Els resums es basen en la IA i poden contenir errors."</string>
+    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Les notificacions d\'aquestes aplicacions no es resumiran"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Gestiona les aplicacions"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Permet els resums de notificacions per a les aplicacions"</string>
+    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
+    <skip />
     <string name="notification_excluded_apps" msgid="317898848790046528">"No incloguis aquestes aplicacions"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"Resumeix les notificacions"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"Resumeix les notificacions de converses d\'aquesta aplicació"</string>
+    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
+    <skip />
+    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
+    <skip />
     <string name="live_notifications" msgid="4650406646292963831">"Notificacions en temps real"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Actualitzacions en temps real"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Mostra les notificacions en curs i les notificacions importants a la barra d\'estat i a la pantalla de bloqueig"</string>
@@ -4020,11 +4028,16 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Aplica a les aplicacions del perfil de treball"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Organitzador de notificacions"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Agrupa i silencia les notificacions de prioritat baixa"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Utilitza l\'organitzador de notificacions"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"Tria els tipus de notificacions que vols silenciar i agrupar per minimitzar les interrupcions. L\'agrupació es basa en la IA i pot contenir errors."</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Agrupa les notificacions"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Les notificacions amb temes similars se silenciaran i s\'agruparan per oferir una experiència més tranquil·la"</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Permet les agrupacions de notificacions per a les aplicacions"</string>
+    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
+    <skip />
+    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Aplica a les aplicacions del perfil de treball"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Serveis d\'ajuda per a RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Cap aplicació instal·lada no ha sol·licitat que s\'executi com un servei d\'ajuda per a RV."</string>
@@ -5173,8 +5186,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Si no tens una xarxa mòbil, veuràs una opció per utilitzar el satèl·lit."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Quan el telèfon es connecti a un satèl·lit"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Segueix els passos per connectar-te al satèl·lit"</string>
-    <!-- no translation found for summary_supported_service (5855066701346160193) -->
-    <skip />
+    <string name="summary_supported_service" msgid="5855066701346160193">"Pots enviar missatges de text a qualsevol persona, inclosos els serveis d\'emergències, i utilitzar les aplicacions compatibles. El telèfon es tornarà a connectar a una xarxa mòbil quan estigui disponible."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Pots enviar missatges de text a qualsevol persona, inclosos els serveis d\'emergències. El telèfon es tornarà a connectar a una xarxa mòbil quan estigui disponible."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Un cop el telèfon s\'hagi connectat, podràs enviar missatges de text a qualsevol persona, inclosos els serveis d\'emergències."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Nota important"</string>
@@ -5303,20 +5315,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Esquerre"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Dret"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Funda"</string>
-    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
-    <skip />
-    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
-    <skip />
-    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
-    <skip />
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Esquerre: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Dret: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Funda: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Esquerre, bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Dret, bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Funda, bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Bateria: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Bateria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Tauler de configuració"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Activa les finestres amb format lliure"</string>
@@ -5338,7 +5343,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Envia suggeriments"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Vols enviar-nos algun comentari sobre aquest suggeriment?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"S\'ha copiat <xliff:g id="COPY_CONTENT">%1$s</xliff:g> al porta-retalls."</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Ús de les funcions d\'accessibilitat"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 aplicació té accés complet al dispositiu}other{# aplicacions tenen accés complet al dispositiu}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Informació important"</string>
@@ -5916,6 +5920,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"El PIN no es pot suprimir"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Hi ha hagut un error en intentar suprimir el PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animació de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
-    <skip />
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"No es poden activar els controls"</string>
 </resources>

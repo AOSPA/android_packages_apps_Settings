@@ -330,7 +330,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         if (requestCode == REQUEST_POSTURE_GUIDANCE) {
             mLaunchedPostureGuidance = false;
             if (resultCode == RESULT_CANCELED || resultCode == RESULT_SKIP) {
-                setResult(RESULT_SKIP, data);
+                setResult(resultCode, data);
                 finish();
             }
             return;

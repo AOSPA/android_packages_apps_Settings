@@ -103,10 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"오디오 출력 정보"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"보청기 또는 휴대전화 스피커로 사운드 라우팅"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"관련 도구"</string>
-    <!-- no translation found for bluetooth_try_nearby_share_title (2307943703595855441) -->
-    <skip />
-    <!-- no translation found for bluetooth_try_nearby_share_summary (2808932450696996548) -->
-    <skip />
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>을 사용해 더 빠르게 전송하세요"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"주변에 있는 Android 기기 및 PC와 공유하는 가장 빠른 방법인 Windows용 <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>을 사용해 보세요."</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"벨소리 및 알람"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"통화 중 오디오"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"미디어 및 시스템 소리"</string>
@@ -217,7 +215,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"언어가 앱에서 사용 가능한 언어와 다를 수 있습니다. 일부 앱에서는 이 설정을 지원하지 않을 수도 있습니다."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"각 앱의 언어를 선택하세요."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"각 앱의 언어를 선택하세요. 언어가 앱에서 사용 가능한 언어와 다를 수 있습니다. 일부 앱에서는 이 설정을 지원하지 않을 수도 있습니다."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"사용자의 기기, 앱, 웹사이트에서는 기본 언어 목록 중 첫 번째 지원 언어를 사용합니다.\n\n또한 많은 앱에서는 사용자의 기본 언어를 사용하는 지역에 따라 날짜, 숫자, 단위의 형식을 지정합니다. 지역을 변경하려면 언어를 추가한 후 원하는 지역을 선택하세요."</string>
+    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
+    <skip />
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"앱별로 언어를 선택하려면 앱 언어 설정으로 이동하세요."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"앱 언어 자세히 알아보기"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"지역을 %s(으)로 변경하시겠습니까?"</string>
@@ -994,8 +993,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"다시 시작"</string>
     <string name="external_display_on" msgid="2560104443500154333">"사용"</string>
     <string name="external_display_off" msgid="5634413756025351374">"사용 안함"</string>
-    <!-- no translation found for external_display_settings_title (4690843697498496237) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="4690843697498496237">"외부 디스플레이"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"내장 디스플레이"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"외부 디스플레이 사용"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"디스플레이 해상도"</string>
@@ -1006,12 +1004,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"회전 또는 해상도를 변경하면 현재 실행 중인 앱이 중지될 수 있습니다"</string>
-    <!-- no translation found for external_display_not_found_footer_title (3974573337788760338) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_title (4854597444155430591) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_summary (3114991534614756600) -->
-    <skip />
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"연결된 디스플레이가 없습니다.\n\n시작하려면 외부 디스플레이를 연결하거나 다른 케이블을 사용해 보세요"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"연결된 디스플레이가 없음"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"시작하려면 외부 디스플레이를 연결하거나 다른 케이블을 사용해 보세요."</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"옵션 더보기"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"길게 터치하고 드래그하여 디스플레이를 재정렬하세요."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"내장 디스플레이 미러링"</string>
@@ -1224,6 +1219,10 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"네트워크 저장 실패"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"취소"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"네트워크를 삭제하시겠습니까?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
+    <skip />
+    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{네트워크 1개}other{네트워크 #개}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{구독 1개}other{구독 #개}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{네트워크 및 구독 1개}other{네트워크 및 구독 #개}}"</string>
@@ -2255,7 +2254,7 @@
     <string name="gesture_button_restart" msgid="1895850891992530133">"다시 시작"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"완료"</string>
     <string name="action_corner_title" msgid="7411160165577367757">"모서리 바로가기 맞춤설정"</string>
-    <string name="action_corner_summary" msgid="695618538930535335">"커서를 사용하여 시스템을 탐색합니다."</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"커서를 사용하여 시스템 탐색"</string>
     <string name="action_corner_intro" msgid="2170609118659718140">"다음 영역을 선택하여 모서리 바로가기를 맞춤설정하세요."</string>
     <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"왼쪽 하단"</string>
     <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"오른쪽 하단"</string>
@@ -2421,10 +2420,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"마우스로 화면 가장자리를 터치할 경우 화면 움직이기"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"입력 따라가기"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"텍스트를 입력하는 동안 돋보기가 같이 이동합니다."</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"키보드 포커스 따르기"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"키보드로 탐색할 때 포커스가 맞춰진 항목을 따라 돋보기가 이동합니다"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"키보드 확대"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"전체 화면 사용 시 이모티콘과 문자를 보려면 키보드를 확대하세요."</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"화면의 일부만 확대하는 동안에는 사용할 수 없음"</string>
@@ -2740,10 +2737,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"더 어둡게 정보"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"읽기 편하도록 화면을 더 어둡게 만듭니다."</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"강도"</string>
-    <!-- no translation found for brightness_intensity_start_label (5156578219206443637) -->
-    <skip />
-    <!-- no translation found for brightness_intensity_end_label (2697495729534414164) -->
-    <skip />
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"어둡게"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"밝게"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"기기 재시작 후 유지"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{짧은 지연({time}초)}other{짧은 지연({time}초)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{중간 지연({time}초)}other{중간 지연({time}초)}}"</string>
@@ -3862,17 +3857,22 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"주요 뉴스, 사설 등"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"좋아요, 게시물 등"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"뉴스레터, 추천 미디어 등"</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"AI 기반 알림"</string>
+    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"알림 요약"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"긴 메시지의 요약을 빠르게 확인할 수 있습니다."</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"알림 요약 사용"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"긴 메시지와 그룹 대화를 요약하여 빠르게 내용을 확인하세요. 요약 기능은 AI 기반으로, 오류가 있을 수 있습니다."</string>
+    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"이 앱의 알림은 요약되지 않습니다."</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"앱 관리"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"앱의 알림 요약 허용"</string>
+    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
+    <skip />
     <string name="notification_excluded_apps" msgid="317898848790046528">"이 앱을 포함하지 않음"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"알림 요약"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"이 앱의 대화 알림 요약"</string>
+    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
+    <skip />
+    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
+    <skip />
     <string name="live_notifications" msgid="4650406646292963831">"실시간 알림"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"실시간 업데이트"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"상태 표시줄 및 잠금 화면에 시간에 민감한 진행 중 알림 표시"</string>
@@ -4026,11 +4026,16 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"직장 프로필 앱에 적용"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"알림 정리 도구"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"우선순위가 낮은 알림을 번들로 묶고 무음 처리"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"알림 정리 도구 사용"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"무음 처리하고 번들로 묶을 알림 유형을 선택하여 방해를 최소화하세요. 번들로 묶는 기능은 AI 기반으로, 오류가 있을 수 있습니다."</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"번들 알림"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"비슷한 테마의 알림은 음소거되고 함께 그룹화되어 더 조용한 환경을 제공합니다."</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"앱의 알림 번들로 묶기 허용"</string>
+    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
+    <skip />
+    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"직장 프로필 앱에 적용"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 도우미 서비스"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"설치된 앱 중에서 VR 도우미 서비스로 실행되도록 요청한 앱이 없습니다."</string>
@@ -5179,8 +5184,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"모바일 네트워크에 연결되어 있지 않으면 위성을 사용할 수 있는 옵션이 표시됩니다."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"휴대전화가 위성에 연결된 후"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"단계에 따라 위성에 연결하세요"</string>
-    <!-- no translation found for summary_supported_service (5855066701346160193) -->
-    <skip />
+    <string name="summary_supported_service" msgid="5855066701346160193">"응급 서비스를 포함해 누구에게나 문자 메시지를 보낼 수 있으며 지원되는 앱을 사용할 수 있습니다. 모바일 네트워크가 사용 가능해지면 휴대전화가 네트워크에 다시 연결됩니다."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"응급 서비스를 포함해 누구에게나 문자 메시지를 보낼 수 있습니다. 모바일 네트워크가 사용 가능해지면 휴대전화가 네트워크에 다시 연결됩니다."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"휴대전화가 연결되면 응급 서비스를 포함해 누구에게나 문자 메시지를 보낼 수 있습니다."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"주의사항"</string>
@@ -5309,20 +5313,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"왼쪽"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"오른쪽"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"케이스"</string>
-    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
-    <skip />
-    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
-    <skip />
-    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
-    <skip />
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"왼쪽: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"오른쪽: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"케이스: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"왼쪽, 배터리: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"오른쪽, 배터리: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"케이스, 배터리: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"배터리: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"배터리"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"설정 패널"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"자유 형식 창 사용"</string>
@@ -5344,7 +5341,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"의견 보내기"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"이 추천 항목에 관한 의견을 보내주세요."</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g>이(가) 클립보드에 복사되었습니다."</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"접근성 사용"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{앱 1개에 기기 전체에 대한 액세스 권한을 가지고 있습니다}other{앱 #개에 기기 전체에 대한 액세스 권한을 가지고 있습니다}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"중요한 정보"</string>
@@ -5388,8 +5384,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"16KB 페이지 크기로 부팅"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"16KB 페이지 크기 지원 커널을 사용하여 기기 부팅"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"4KB 모드에서 16KB 모드로 전환"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (5343202230812855846) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"16KB 개발자 옵션을 사용하려면 이 기기의 데이터 파티션을 ext4로 변환해야 합니다. 이렇게 하면 기기 데이터가 완전 삭제되고 파일 시스템이 ext4로 변경됩니다.&lt;br&gt;&lt;br&gt; 16KB 모드로 전환하면 한 번의 재부팅으로 4KB와 16KB 모드 간에 전환할 수 있습니다.&lt;br&gt;&lt;br&gt; 16KB 모드에서 유의할 사항:&lt;br&gt;&lt;br&gt; &amp;#8226; 소프트웨어 무결성이 보장되지 않을 수 있습니다.&lt;br&gt; &amp;#8226; 부트로더가 잠금 해제된 상태에서 휴대전화에 저장된 데이터가 위험에 노출될 수 있습니다.&lt;br&gt; &amp;#8226; 일부 기능이 사용 중지되며, 이로 인해 특정 앱에 영향을 미칠 수 있습니다.&lt;br&gt;&lt;br&gt; 프로덕션 모드로 돌아가려면 4KB 모드로 다시 전환하고 부트로더를 잠가야 합니다. 그러면 기기가 초기화됩니다. 기기를 Android로 부팅 완료한 후에는 개발자 옵션에서 OEM 잠금 해제를 사용 중지합니다.&lt;br&gt;&lt;br&gt; 16KB 모드로 전환하려면 \'모든 데이터 삭제 및 업데이트\'를 탭하세요. 그러면 기기가 재부팅됩니다."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"페이지 크기에 구속받지 않는 모드에서 4KB 커널을 실행하고 있으며, 16KB 모드로 전환합니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이로 인해 기기가 재부팅됩니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 기기를 프로덕션 모드로 되돌리려면 4KB 모드로 다시 전환한 후 부트로더를 잠가야 하며, 이렇게 하면 기기가 초기화됩니다. 기기를 Android로 부팅 완료한 후에는 개발자 옵션에서 OEM 잠금 해제를 사용 중지하세요."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"16KB 모드에서 4KB 모드로 전환"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"페이지 크기에 구속받지 않는 모드에서 16KB 커널을 실행하고 있으며, 4KB 모드로 전환합니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이로 인해 기기가 재부팅됩니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 기기를 프로덕션 모드로 되돌리려면 부트로더를 잠가야 하며, 이렇게 하면 기기가 초기화됩니다. 기기를 Android로 부팅 완료한 후에는 개발자 옵션에서 OEM 잠금 해제를 사용 중지하세요."</string>
@@ -5923,6 +5918,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN을 삭제할 수 없습니다"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PIN을 삭제하는 중에 오류가 발생했습니다."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> 애니메이션"</string>
-    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
-    <skip />
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"컨트롤을 사용 설정할 수 없음"</string>
 </resources>

@@ -4998,6 +4998,15 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="@string/menu_key_system"/>
         </activity>
 
+        <activity
+            android:name=".Settings$ResetDashboardActivity"
+            android:label="@string/reset_dashboard_title"
+            android:featureFlag="com.android.settings.flags.deeplink_system_25q4"
+            android:exported="true">
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_system"/>
+        </activity>
+
         <activity android:name=".support.SupportDashboardActivity"
                   android:label="@string/page_tab_title_support"
                   android:icon="@drawable/ic_homepage_support"

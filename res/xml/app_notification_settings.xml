@@ -35,12 +35,12 @@
         android:title="@string/notification_ai_features_title"
         settings:isPreferenceVisible="false">
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settingslib.PrimarySwitchPreference
             android:key="key_summarization"
             android:title="@string/notification_app_level_summarize_title"
             android:summary="@string/notification_app_level_summarize_subtext" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settingslib.PrimarySwitchPreference
             android:key="key_type"
             android:title="@string/notification_app_level_bundle_title"
             android:summary="@string/notification_app_level_bundle_subtext" />

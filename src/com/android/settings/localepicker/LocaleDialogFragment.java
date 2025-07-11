@@ -41,6 +41,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.language.LanguageAndRegionSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -117,7 +118,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         }
 
         mShouldKeepDialog = true;
-        LocaleListEditor parentFragment = (LocaleListEditor) getParentFragment();
+        LanguageAndRegionSettings parentFragment = (LanguageAndRegionSettings) getParentFragment();
         LocaleDialogController controller = getLocaleDialogController(getContext(), this,
                 parentFragment);
         LocaleDialogController.DialogContent dialogContent = controller.getDialogContent();
@@ -182,7 +183,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
 
     @VisibleForTesting
     LocaleDialogController getLocaleDialogController(Context context,
-            LocaleDialogFragment dialogFragment, LocaleListEditor parentFragment) {
+            LocaleDialogFragment dialogFragment, LanguageAndRegionSettings parentFragment) {
         return new LocaleDialogController(context, dialogFragment, parentFragment);
     }
 
@@ -195,11 +196,11 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         private final MetricsFeatureProvider mMetricsFeatureProvider;
         private final boolean mShowDialogForNotTranslated;
 
-        private LocaleListEditor mParent;
+        private LanguageAndRegionSettings mParent;
 
         LocaleDialogController(
                 @NonNull Context context, @NonNull LocaleDialogFragment dialogFragment,
-                LocaleListEditor parentFragment) {
+                LanguageAndRegionSettings parentFragment) {
             mContext = context;
             Bundle arguments = dialogFragment.getArguments();
             mDialogType = arguments.getInt(ARG_DIALOG_TYPE);

@@ -42,8 +42,7 @@ open class NetworkDashboardScreen : PreferenceScreenMixin, PreferenceIconProvide
     override fun getIcon(context: Context) =
         when {
             isExpressiveTheme(context) -> R.drawable.ic_homepage_network
-            Flags.homepageRevamp() -> R.drawable.ic_settings_wireless_filled
-            else -> R.drawable.ic_settings_wireless
+            else -> R.drawable.ic_settings_wireless_filled
         }
 
     override fun isFlagEnabled(context: Context) = Flags.catalystNetworkProviderAndInternetScreen()
@@ -62,9 +61,9 @@ open class NetworkDashboardScreen : PreferenceScreenMixin, PreferenceIconProvide
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +MobileNetworkListScreen.KEY order -15
+            if (Flags.catalystMobileNetworkList()) +MobileNetworkListScreen.KEY order -15
             +AirplaneModePreference() order -5
-            +DataSaverScreen.KEY order 10
+            if (Flags.catalystRestrictBackgroundParentEntry()) +DataSaverScreen.KEY order 10
         }
 
     companion object {

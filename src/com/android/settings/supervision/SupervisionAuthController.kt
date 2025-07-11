@@ -18,25 +18,45 @@ package com.android.settings.supervision
 import android.app.ActivityManager
 import android.app.ActivityTaskManager
 import android.app.TaskStackListener
+import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.SystemClock
 import androidx.annotation.VisibleForTesting
 import javax.annotation.concurrent.GuardedBy
 
 /**
  * Manages a supervision authentication session.
  *
- * After the supervising profile is authenticated, the user should not need to authenticate again
- * unless they leave the Settings app. This session should persist across interactions with native
- * settings and those injected from the separate supervision APK.
+ * After the supervising profile is authenticated, the user should not need to authenticate again,
+ * unless they leave the Settings app or lock their device or the session times out. This session
+ * should persist across interactions with native settings and those injected from the separate
+ * supervision APK.
  *
  * Activities responsible for authentication should start a session only after the user has been
  * successfully authenticated, and the session will be automatically invalidated when the task that
- * started the session stops running or goes into the background.
+ * started the session stops running or goes into the background, or the device is being locked.
+ *
+ * The session also has a fixed timeout of 10 minutes, after which re-authentication is required.
  */
 class SupervisionAuthController private constructor(private val appContext: Context) {
     private val activityManager = appContext.getSystemService(ActivityManager::class.java)
     @GuardedBy("this") private var currentTaskId: Int? = null
+    @GuardedBy("this") private var sessionStartTime: Long? = null
+
+    // Receiver to invalidate session when the screen is turned off.
+    val mScreenOffReceiver: BroadcastReceiver =
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                synchronized(this@SupervisionAuthController) {
+                    if (currentTaskId != null) {
+                        invalidateSession()
+                    }
+                }
+            }
+        }
 
     @VisibleForTesting
     val mTaskStackListener: TaskStackListener =
@@ -58,12 +78,27 @@ class SupervisionAuthController private constructor(private val appContext: Cont
      * Starts an auth session, indicating that a parent has been authenticated on the current task.
      */
     fun startSession(taskId: Int) {
-        synchronized(this) { currentTaskId = taskId }
+        synchronized(this) {
+            currentTaskId = taskId
+            sessionStartTime = SystemClock.elapsedRealtime()
+            val offFilter = IntentFilter(Intent.ACTION_SCREEN_OFF)
+            offFilter.addAction(Intent.ACTION_USER_PRESENT)
+            appContext.registerReceiver(mScreenOffReceiver, offFilter)
+        }
     }
 
     /** Returns whether an auth session is currently active on this task. */
     fun isSessionActive(taskId: Int): Boolean {
         synchronized(this) {
+            // Checks for timeout
+            val currentTime = SystemClock.elapsedRealtime()
+            val isTimedOut =
+                sessionStartTime != null &&
+                    (currentTime - sessionStartTime!!) > SESSION_TIMEOUT_MILLIS
+            if (isTimedOut) {
+                invalidateSession()
+                return false
+            }
             return currentTaskId == taskId
         }
     }
@@ -75,6 +110,12 @@ class SupervisionAuthController private constructor(private val appContext: Cont
     @GuardedBy("this")
     private fun invalidateSession() {
         currentTaskId = null
+        sessionStartTime = null
+        try {
+            appContext.unregisterReceiver(mScreenOffReceiver)
+        } catch (e: IllegalArgumentException) {
+            // Ignore exception if receiver is not registered.
+        }
     }
 
     /**
@@ -100,6 +141,8 @@ class SupervisionAuthController private constructor(private val appContext: Cont
 
     companion object {
         @Volatile @VisibleForTesting var sInstance: SupervisionAuthController? = null
+
+        @VisibleForTesting const val SESSION_TIMEOUT_MILLIS = 10 * 60 * 1000L // 10 minutes
 
         fun getInstance(context: Context): SupervisionAuthController {
             return sInstance

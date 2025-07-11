@@ -18,6 +18,8 @@ package com.android.settings.language;
 
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_REMOVE_LOCALE;
+import static com.android.settings.localepicker.LocaleUtils.getUserLocaleList;
+import static com.android.settings.localepicker.LocaleUtils.mayAppendUnicodeTags;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -277,29 +279,14 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
     }
 
     public void doTheUpdate() {
-        int count = mUpdatedLocaleInfoList.size();
-        final Locale[] newList = new Locale[count];
-
-        for (int i = 0; i < count; i++) {
-            final LocaleStore.LocaleInfo li = mUpdatedLocaleInfoList.get(i);
-            newList[i] = li.getLocale();
-        }
-
-        final LocaleList localeList = new LocaleList(newList);
+        LocaleList localeList = new LocaleList(mUpdatedLocaleInfoList.stream()
+                .map(LocaleStore.LocaleInfo::getLocale)
+                .toArray(Locale[]::new));
         // Update the Settings application to make things feel more responsive.
         LocaleList.setDefault(localeList);
         // Update the system.
         LocalePicker.updateLocales(localeList);
         updatePreferences();
-    }
-
-    private List<LocaleStore.LocaleInfo> getUserLocaleList() {
-        final List<LocaleStore.LocaleInfo> result = new ArrayList<>();
-        final LocaleList localeList = LocalePicker.getLocales();
-        for (int i = 0; i < localeList.size(); i++) {
-            result.add(LocaleStore.getLocaleInfo(localeList.get(i)));
-        }
-        return result;
     }
 
     protected List<LocaleStore.LocaleInfo> setUpdatedLocaleList(
@@ -317,23 +304,6 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
             mUpdatedLocaleInfoList.remove(position);
         }
         return mUpdatedLocaleInfoList;
-    }
-
-    @VisibleForTesting
-    static LocaleStore.LocaleInfo mayAppendUnicodeTags(
-            LocaleStore.LocaleInfo localeInfo, String recordTags) {
-        if (TextUtils.isEmpty(recordTags) || TextUtils.equals("und", recordTags)) {
-            // No recorded tag, return inputted LocaleInfo.
-            return localeInfo;
-        }
-        Locale recordLocale = Locale.forLanguageTag(recordTags);
-        Locale.Builder builder = new Locale.Builder()
-                .setLocale(localeInfo.getLocale());
-        recordLocale.getUnicodeLocaleKeys().forEach(key ->
-                builder.setUnicodeLocaleKeyword(key, recordLocale.getUnicodeLocaleType(key)));
-        LocaleStore.LocaleInfo newLocaleInfo = LocaleStore.fromLocale(builder.build());
-        newLocaleInfo.setTranslated(localeInfo.isTranslated());
-        return newLocaleInfo;
     }
 
     protected void setFragmentManager(@NonNull FragmentManager fragmentManager) {

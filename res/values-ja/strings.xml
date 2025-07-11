@@ -215,7 +215,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"アプリで利用できない言語の可能性があります。一部のアプリはこの設定に対応していない可能性があります。"</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"アプリごとに言語を選択できます。"</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"アプリごとに言語を選択できます。アプリで利用可能な言語とは異なる場合があります。アプリによっては、この設定にまだ対応していない場合があります。"</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"デバイス、アプリ、ウェブサイトでは、優先言語の一覧の中からサポートされている最初の言語が使用されます。\n\nその他の多くのアプリでも、優先言語の地域に基づいて、日付、数値、単位の形式が設定されます。地域を変更するには、言語を追加してから、優先する地域を選択してください。"</string>
+    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
+    <skip />
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"アプリごとに言語を選択するには、アプリの言語設定に移動してください。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"アプリの言語の詳細"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"地域を%sに変更しますか？"</string>
@@ -1218,6 +1219,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"ネットワークを保存できませんでした"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"キャンセル"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"ネットワークを削除"</string>
+    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"すべてのデバイス ユーザーを削除しますか？"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> はこのデバイスの他のユーザーが使用しているため、このネットワークのすべてのユーザーは設定しなおす必要があります。削除してもよろしいですか？"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 件のネットワーク}other{# 件のネットワーク}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 件の登録}other{# 件の登録}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 件のネットワークと登録}other{# 件のネットワークと登録}}"</string>
@@ -2415,10 +2418,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"マウスが画面の端に触れたときに画面を移動する"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"テキストの入力に従う"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"文字の入力にあわせて拡大鏡が移動します"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"キーボード フォーカスに合わせる"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"キーボードで操作すると、フォーカスされた項目に合わせて拡大鏡が移動します"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"キーボードを拡大する"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"全画面拡大の使用時にキーボードを拡大して絵文字や文字を表示します"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"画面の一部のみを拡大している間は利用できません"</string>
@@ -2859,7 +2860,7 @@
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"バックグラウンド時にバッテリーの使用が制限されません。バッテリーの使用量が増える可能性があります。"</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"使用状況に基づいて最適化されます。ほとんどのアプリにおすすめです。"</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"バックグラウンド時にバッテリーの使用が制限されます。アプリが正しく動作しない可能性や、通知が遅れる可能性があります。"</string>
-    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"アプリによるバッテリーの利用方法を変更すると、パフォーマンスに影響することがあります。"</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"アプリによるバッテリーの使用方法を変更すると、パフォーマンスに影響することがあります。"</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"このアプリでは、バッテリーの使用を「<xliff:g id="STATE">%1$s</xliff:g>」以外に設定できません。"</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"制限なし"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"最適化済み"</string>
@@ -3854,17 +3855,22 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"トップニュース、論説など"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"高評価、投稿など"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"ニュースレター、おすすめのメディアなど"</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"AI による通知"</string>
+    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"通知の要約"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"長いメッセージをすばやく要約できます"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"通知の要約を使用する"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"長いメッセージやグループ会話を要約して、内容をすばやく確認できます。要約は AI が生成するため、エラーが含まれている可能性があります。"</string>
+    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"これらのアプリの会話の通知は要約されません"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"アプリの管理"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"アプリの通知の要約を許可する"</string>
+    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
+    <skip />
     <string name="notification_excluded_apps" msgid="317898848790046528">"これらのアプリを含めない"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"通知を要約する"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"このアプリの会話の通知を要約します"</string>
+    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
+    <skip />
+    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
+    <skip />
     <string name="live_notifications" msgid="4650406646292963831">"ライブ通知"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"ライブ情報"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"時間的制約のある進行中の通知をステータスバーとロック画面に表示します"</string>
@@ -4018,11 +4024,16 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"仕事用プロファイルのアプリに適用する"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"通知オーガナイザー"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"優先度の低い通知をまとめてミュートします"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"通知オーガナイザーを使用する"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"作業の妨げにならないよう、まとめてミュートする通知の種類を選択します。処理は AI が行うため、誤ってまとめられる可能性があります。"</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"バンドル通知"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"静かな場所でも利用できるよう、似たテーマの通知はサイレントになり、まとめて表示されるようになります"</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"アプリの通知のバンドルを許可する"</string>
+    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
+    <skip />
+    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"仕事用プロファイルのアプリに適用する"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR ヘルパー サービス"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"VR ヘルパー サービスとしての実行権限をリクエストしたインストール済みアプリはありません。"</string>
@@ -5171,8 +5182,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"モバイル ネットワークを利用できない場合、衛星を使用するためのオプションが表示されます。"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"スマートフォンが衛星通信に接続された後"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"手順に沿って衛星に接続します"</string>
-    <!-- no translation found for summary_supported_service (5855066701346160193) -->
-    <skip />
+    <string name="summary_supported_service" msgid="5855066701346160193">"緊急サービスを含め誰にでもテキスト メッセージを送信できます。対応するアプリも使用できます。モバイル ネットワークが利用できる状態になると再接続されます。"</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"テキスト メッセージは、緊急サービスを含め誰にでも送信できます。モバイル ネットワークが利用できる状態になると再接続されます。"</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"スマートフォンが接続されたら、緊急サービスを含め誰にでもテキスト メッセージを送信できます。"</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"留意点"</string>
@@ -5301,20 +5311,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"左"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"右"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"ケース"</string>
-    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
-    <skip />
-    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
-    <skip />
-    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
-    <skip />
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"左: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"右: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"ケース: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"バッテリー残量 - 左: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"バッテリー残量 - 右:<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"バッテリー残量 - ケース: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"バッテリー残量: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"バッテリー"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"設定パネル"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"フリーフォーム ウィンドウを有効にする"</string>
@@ -5336,7 +5339,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"フィードバックを送信"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"この提案についてフィードバックを送信しますか？"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"クリップボードにコピーしました（<xliff:g id="COPY_CONTENT">%1$s</xliff:g>）"</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"ユーザー補助の使用"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 個のアプリにデバイスへのフルアクセスを許可しています}other{# 個のアプリにデバイスへのフルアクセスを許可しています}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"重要な情報"</string>
@@ -5914,6 +5916,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN を削除できません"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PIN の削除中にエラーが発生しました。"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> のアニメーション"</string>
-    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
-    <skip />
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"コントロールを有効にできません"</string>
 </resources>

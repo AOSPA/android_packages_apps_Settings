@@ -25,6 +25,7 @@ import com.android.settings.accessibility.extensions.isWindowMagnificationSuppor
 import com.android.settings.core.TogglePreferenceController
 
 /** Controller that accesses and switches the preference status of following typing feature */
+// LINT.IfChange
 class FollowTypingPreferenceController(context: Context, prefKey: String) :
     TogglePreferenceController(context, prefKey) {
 
@@ -60,3 +61,4 @@ class FollowTypingPreferenceController(context: Context, prefKey: String) :
         }
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/FollowTypingSwitchPreference.kt)

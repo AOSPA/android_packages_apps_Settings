@@ -103,10 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Om lydudgang"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Få din lyd til at gå gennem dit høreapparat eller din telefonhøjttaler"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Relaterede"</string>
-    <!-- no translation found for bluetooth_try_nearby_share_title (2307943703595855441) -->
-    <skip />
-    <!-- no translation found for bluetooth_try_nearby_share_summary (2808932450696996548) -->
-    <skip />
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"Send hurtigere med <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"Prøv <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> til Windows for at få adgang til den hurtigste måde at dele med Android-enheder og computere i nærheden på"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Ringetone og alarmer"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Lyd under opkald"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Medie- og systemlyde"</string>
@@ -217,7 +215,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Sproget kan adskille sig fra sprogene i appen. Nogle apps understøtter muligvis ikke denne indstilling."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Vælg sproget for hver app."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Vælg sprog for hver app. Sproget kan adskille sig fra sprogene i appen. Nogle apps understøtter muligvis ikke denne indstilling."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Din enhed, dine apps og dine websites anvender det første understøttede sprog på listen over dine foretrukne sprog.\n\nMange apps bruger også regionen fra dit foretrukne sprog til at vælge format for datoer, tal og måleenheder. Hvis du vil skifte region, skal du tilføje et sprog og derefter vælge din foretrukne region."</string>
+    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
+    <skip />
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Hvis du vil vælge et sprog for hver app, skal du gå til den pågældende apps sprogindstillinger."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Få flere oplysninger om appsprog"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Vil du skifte region til %s?"</string>
@@ -994,8 +993,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Genstart"</string>
     <string name="external_display_on" msgid="2560104443500154333">"Til"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Fra"</string>
-    <!-- no translation found for external_display_settings_title (4690843697498496237) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="4690843697498496237">"Ekstern skærm"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Indbygget skærm"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Brug ekstern skærm"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Skærmopløsning"</string>
@@ -1006,12 +1004,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Hvis skærmretningen eller opløsningen ændres, kan du risikere, at aktive apps stopper"</string>
-    <!-- no translation found for external_display_not_found_footer_title (3974573337788760338) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_title (4854597444155430591) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_summary (3114991534614756600) -->
-    <skip />
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"Der er ikke tilsluttet en skærm\n\nTilslut en ekstern skærm for at komme i gang, eller prøv at bruge et andet kabel"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Der er ikke tilsluttet en skærm"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Tilslut en ekstern skærm for at komme i gang, eller prøv at bruge et andet kabel"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Flere valgmuligheder"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Hold og træk for at omarrangere skærmene."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Spejl indbygget skærm"</string>
@@ -1224,6 +1219,10 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Netværk kunne ikke gemmes"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Annuller"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Vil du glemme netværket?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
+    <skip />
+    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 netværk}one{# netværk}other{# netværk}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 abonnement}one{# abonnement}other{# abonnementer}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 netværk og abonnement}one{# netværk og abonnement}other{# netværk og abonnementer}}"</string>
@@ -2421,10 +2420,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Flyt skærmen, når markøren rammer kanten af skærmen"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Følg indtastning"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"Luppen følger teksten, når du skriver"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Følg tastaturfokus"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"Luppen følger det element, der er i fokus, når du navigerer med dit tastatur"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Forstør tastatur"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Zoom ind på tastaturet for at se emojis og bogstaver, når du bruger forstørrelse på fuld skærm"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Utilgængelig, når kun en del af skærmen forstørres"</string>
@@ -2740,10 +2737,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Om ekstra dæmpet belysning"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Nedton din skærm, så din læseoplevelse bliver mere behagelig"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensitet"</string>
-    <!-- no translation found for brightness_intensity_start_label (5156578219206443637) -->
-    <skip />
-    <!-- no translation found for brightness_intensity_end_label (2697495729534414164) -->
-    <skip />
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"Mørkere"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"Lysere"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Slå ikke fra efter genstart af enheden"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Kort ({time} sekund)}one{Kort ({time} sekund)}other{Kort ({time} sekunder)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Mellem ({time} sekund)}one{Mellem ({time} sekund)}other{Mellem ({time} sekunder)}}"</string>
@@ -3862,17 +3857,22 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Tophistorier, redaktionelt indhold m.m."</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Likes, opslag m.m."</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Nyhedsbreve, anbefalede medier m.m."</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"AI-baserede notifikationer"</string>
+    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"Notifikationsoversigter"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Få hurtige opsummeringer af længere beskeder"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Brug notifikationsoversigter"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"Opsummer lange beskeder og gruppesamtaler for at få en hurtig oversigt. Opsummeringer er AI-baseret og kan indeholde fejl."</string>
+    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Notifikationer fra disse apps opsummeres ikke"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Administrer apps"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Tillad opsummering af notifikationer for apps"</string>
+    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
+    <skip />
     <string name="notification_excluded_apps" msgid="317898848790046528">"Undlad at inkludere disse apps"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"Opsummer notifikationer"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"Opsummer samtalenotifikationer fra denne app"</string>
+    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
+    <skip />
+    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
+    <skip />
     <string name="live_notifications" msgid="4650406646292963831">"Livenotifikationer"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Liveopdateringer"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Vis igangværende, tidsfølsomme notifikationer på statusbjælken og låseskærmen"</string>
@@ -4026,11 +4026,16 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Anvend på apps på arbejdsprofilen"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Notifikations­organisering"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Gruppér og ignorer notifikationer med lavere prioritet"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Brug notifikations­organisering"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"Vælg de notifikationstyper, du vil ignorere, og gruppér dem for at minimere afbrydelser. Gruppering er AI-baseret og kan indeholde fejl."</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Gruppér notifikationer"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Notifikationer med lignende emner ignoreres og grupperes for at give en roligere brugeroplevelse"</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Tillad gruppering af notifikationer for apps"</string>
+    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
+    <skip />
+    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Anvend på apps på arbejdsprofilen"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-hjælpetjenester"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ingen installerede apps har anmodet om at blive kørt som VR-hjælpetjenester."</string>
@@ -5179,8 +5184,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Hvis du ikke har forbindelse til et mobilnetværk, vil du se en mulighed for at bruge satellitforbindelse."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Når din telefon har oprettet forbindelse til en satellit"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Følg anvisningerne for at oprette forbindelse til satellitten"</string>
-    <!-- no translation found for summary_supported_service (5855066701346160193) -->
-    <skip />
+    <string name="summary_supported_service" msgid="5855066701346160193">"Du kan sende beskeder til alle, også nødtjenester, og bruge understøttede apps. Din telefon opretter forbindelse til et mobilnetværk igen, når det er tilgængeligt."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Du kan sende en besked til alle, herunder nødtjenester. Din telefon opretter forbindelse til et mobilnetværk igen, når det er tilgængeligt."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Når din telefon er forbundet, kan du sende en besked til alle, herunder nødtjenester."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Husk!"</string>
@@ -5309,20 +5313,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Venstre"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Højre"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Etui"</string>
-    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
-    <skip />
-    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
-    <skip />
-    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
-    <skip />
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Venstre: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Højre: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Etui: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Venstre, batteriniveau: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Højre, batteriniveau: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Etui, batteriniveau: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Batteriniveau: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteri"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Indstillingspanel"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Aktivér vinduer i frit format"</string>
@@ -5344,7 +5341,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Send feedback"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Vil du give os feedback om dette forslag?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> blev kopieret til udklipsholderen."</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Brug af hjælpefunktioner"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 app har fuld adgang til din enhed}one{# app har fuld adgang til din enhed}other{# apps har fuld adgang til din enhed}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Vigtige oplysninger"</string>
@@ -5388,8 +5384,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Genstart med sidestørrelsen 16 KB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Start enheden med en kerne, der understøtter en sidestørrelse på 16 KB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Skift fra tilstanden med 4 KB til tilstanden med 16 KB"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (5343202230812855846) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"Hvis du vil bruge udviklerindstillingen med 16 kB, skal denne enheds datapartition konverteres til ext4. Dette rydder din enhed og ændrer filsystemet til ext4.&lt;br&gt;&lt;br&gt; Når du er i tilstanden med 16 kB, kan du skifte mellem tilstanden med 4 kB og tilstanden med 16 kB ved blot at genstarte en enkelt gang.&lt;br&gt;&lt;br&gt; Du skal være opmærksom på følgende i tilstanden med 16 kB:&lt;br&gt;&lt;br&gt; &amp;#8226; Softwareintegriteten kan ikke garanteres&lt;br&gt; &amp;#8226; Data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare&lt;br&gt; &amp;#8226; Visse funktioner deaktiveres, hvilket kan påvirke bestemte apps&lt;br&gt;&lt;br&gt; Hvis du vil vende tilbage til produktionstilstand, skal du skifte tilbage til tilstanden med 4 kB og låse bootloaderen. Denne handling gendanner enhedens fabriksindstillinger. Når enheden er startet i Android, skal du deaktivere OEM-oplåsning via Indstillinger for udviklere.&lt;br&gt;&lt;br&gt; Tryk på \"Ryd alle data, og opdater\" for at fortsætte med at skifte til tilstanden med 16 kB. Denne handling genstarter enheden."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Du er i den sideagnostiske tilstand, der kører en kerne på 4 KB, og du skifter til tilstanden med 16 KB. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Denne handling genstarter enheden. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil skifte tilbage til produktionstilstand på enheden, skal du skifte tilbage til tilstanden med 4 KB og låse bootloaderen, hvilket vil gendanne enhedens fabriksindstillinger. Når enheden er startet i Android, skal du deaktivere OEM-oplåsning via Indstillinger for udviklere."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Skift fra tilstanden med 16 KB til tilstanden med 4 KB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Du er i den sideagnostiske tilstand, der kører en kerne på 16 KB, og du skifter til tilstanden med 4 KB. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Denne handling genstarter enheden. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil skifte tilbage til produktionstilstand på enheden, skal du låse bootloaderen, hvilket vil gendanne enhedens fabriksindstillinger. Når enheden er startet i Android, skal du deaktivere OEM-oplåsning via Indstillinger for udviklere."</string>
@@ -5923,6 +5918,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Pinkoden kan ikke slettes"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Der opstod en fejl under forsøget på at slette pinkoden."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation af <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
-    <skip />
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Indstillingerne kan ikke aktiveres"</string>
 </resources>

@@ -34,7 +34,7 @@ class MirrorPreference(context: Context, val contentModeEnabled: Boolean):
         super.onAttached()
 
         isEnabled = contentModeEnabled
-        isChecked = isDisplayInMiroringMode(context)
+        isChecked = isDisplayInMirroringMode(context)
     }
 
     override fun onClick() {

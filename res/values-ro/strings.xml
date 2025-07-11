@@ -103,10 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Despre ieșirea audio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Transmite sunetele spre dispozitivul auditiv sau spre difuzorul telefonului"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Similare"</string>
-    <!-- no translation found for bluetooth_try_nearby_share_title (2307943703595855441) -->
-    <skip />
-    <!-- no translation found for bluetooth_try_nearby_share_summary (2808932450696996548) -->
-    <skip />
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"Trimite mai rapid cu <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"Pentru cea mai rapidă metodă de a trimite fișiere dispozitivelor Android și PC-urilor din apropiere, încearcă <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> pentru Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Tonul de sonerie și alarmele"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Sonorul în timpul apelurilor"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Sunete media și de sistem"</string>
@@ -217,7 +215,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Limba poate fi alta decât limbile disponibile în aplicație. Este posibil ca unele aplicații să nu accepte această setare."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Alege limba pentru fiecare aplicație."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Alege limba pentru fiecare aplicație. Limba poate fi alta decât limbile disponibile în aplicație. Este posibil ca unele aplicații să nu accepte această setare."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Dispozitivul, aplicațiile și site-urile folosesc prima limbă acceptată din lista de limbi preferate.\n\nMulte aplicații vor folosi și regiunea aferentă limbii preferate pentru a formata date, numere și unități. Ca să schimbi regiunea, adaugă o limbă, apoi alege regiunea preferată."</string>
+    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
+    <skip />
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Ca să selectezi o limbă pentru fiecare aplicație, accesează setările de limbă ale aplicației"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Află mai multe despre limbile aplicațiilor"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Schimbi regiunea la %s?"</string>
@@ -994,8 +993,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Repornește"</string>
     <string name="external_display_on" msgid="2560104443500154333">"Activat"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Dezactivat"</string>
-    <!-- no translation found for external_display_settings_title (4690843697498496237) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="4690843697498496237">"Ecran extern"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Ecran încorporat"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Folosește ecranul extern"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Rezoluția ecranului"</string>
@@ -1006,12 +1004,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Modificarea rotirii sau a rezoluției poate opri aplicațiile care rulează"</string>
-    <!-- no translation found for external_display_not_found_footer_title (3974573337788760338) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_title (4854597444155430591) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_summary (3114991534614756600) -->
-    <skip />
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"Niciun ecran conectat\n\nConectează un ecran extern pentru a începe sau încearcă să folosești alt cablu"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Niciun ecran conectat"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Conectează un ecran extern pentru a începe sau încearcă să folosești alt cablu"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Mai multe opțiuni"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Ține apăsat și trage pentru a rearanja afișările."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Oglindește ecranul încorporat"</string>
@@ -1224,6 +1219,10 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Nu s-a putut salva rețeaua"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Anulează"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Elimini rețeaua?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
+    <skip />
+    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{O rețea}few{# rețele}other{# de rețele}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{Un abonament}few{# abonamente}other{# de abonamente}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{O rețea și un abonament}few{# rețele și abonamente}other{# de rețele și abonamente}}"</string>
@@ -2255,7 +2254,7 @@
     <string name="gesture_button_restart" msgid="1895850891992530133">"Repornește"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Gata"</string>
     <string name="action_corner_title" msgid="7411160165577367757">"Personalizează comenzile rapide pentru colțuri"</string>
-    <string name="action_corner_summary" msgid="695618538930535335">"Folosește cursorul pentru a naviga în sistem"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"Folosește cursoarele pentru a naviga în sistem"</string>
     <string name="action_corner_intro" msgid="2170609118659718140">"Alege următoarele zone ca să personalizezi comenzile rapide pentru colțuri"</string>
     <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Colțul din stânga jos"</string>
     <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"Colțul din dreapta jos"</string>
@@ -2421,10 +2420,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Mută ecranul când mouse-ul atinge marginile ecranului"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Urmărește introducerea textului"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"Lupa urmărește textul pe măsură ce-l introduci"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Urmărește focalizarea de la tastatură"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"Lupa urmărește elementul focalizat pe măsură ce navighezi cu tastatura"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Mărește tastatura"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Mărește tastatura pentru a vedea emojiuri și litere când folosești mărirea pe ecran complet"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Opțiune indisponibilă dacă se mărește o parte a ecranului"</string>
@@ -2740,10 +2737,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Despre luminozitatea redusă suplimentar"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Întunecă ecranul pentru a citi mai confortabil"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensitate"</string>
-    <!-- no translation found for brightness_intensity_start_label (5156578219206443637) -->
-    <skip />
-    <!-- no translation found for brightness_intensity_end_label (2697495729534414164) -->
-    <skip />
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"Mai întunecat"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"Mai luminos"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Menține setarea după repornirea dispozitivului"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Scurt ({time} secundă)}few{Scurt ({time} secunde)}other{Scurt ({time} de secunde)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Mediu ({time} secundă)}few{Mediu ({time} secunde)}other{Mediu ({time} de secunde)}}"</string>
@@ -3862,17 +3857,22 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Cele mai populare subiecte, editoriale și altele"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Aprecieri, postări și altele"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Buletine informative, conținut media recomandat și altele"</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"Notificări bazate pe inteligență artificială"</string>
+    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"Rezumate de notificare"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Obține rezumate scurte ale mesajelor mai lungi"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Folosește rezumatele notificărilor"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"Rezumă mesajele lungi și conversațiile de grup pentru a obține rezumate scurte. Rezumatele sunt bazate pe inteligență artificială și pot conține erori."</string>
+    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Notificările de la aceste aplicații nu vor fi rezumate"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Gestionează aplicațiile"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Permite rezumatele notificărilor pentru aplicații"</string>
+    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
+    <skip />
     <string name="notification_excluded_apps" msgid="317898848790046528">"Nu include aceste aplicații"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"Rezumă notificările"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"Rezumă notificările de conversație din această aplicație"</string>
+    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
+    <skip />
+    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
+    <skip />
     <string name="live_notifications" msgid="4650406646292963831">"Notificări live"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Actualizări live"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Afișează notificările urgente în curs în bara de stare și pe ecranul de blocare"</string>
@@ -4026,11 +4026,16 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Aplică pentru aplicațiile din profilul de serviciu"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Organizator de notificări"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Grupează notificările cu prioritate redusă și dezactivează sunetul lor"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Folosește Organizatorul de notificări"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"Alege tipurile de notificări pentru care vrei să dezactivezi sunetul și pe care vrei să le grupezi pentru a minimiza întreruperile. Gruparea este bazată pe inteligență artificială și poate conține erori."</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Notificări în grup"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Notificări cu teme similare vor fi dezactivate și grupate pentru o experiență mai liniștită"</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Permite gruparea notificărilor pentru aplicații"</string>
+    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
+    <skip />
+    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Aplică pentru aplicațiile din profilul de serviciu"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicii de ajutor pentru RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nicio aplicație instalată nu a solicitat să fie rulată ca un serviciu de ajutor pentru RV."</string>
@@ -5179,8 +5184,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Dacă nu ai o rețea mobilă, vei vedea opțiunea de a folosi mesajele prin satelit."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"După conectarea telefonului la un satelit"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Urmează pașii ca să te conectezi la satelit"</string>
-    <!-- no translation found for summary_supported_service (5855066701346160193) -->
-    <skip />
+    <string name="summary_supported_service" msgid="5855066701346160193">"Poți să trimiți mesaje oricui, inclusiv serviciilor de urgență, și să folosești aplicații acceptate. Telefonul se va reconecta la o rețea mobilă când va fi disponibilă."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Poți să trimiți mesaje oricui, inclusiv serviciilor de urgență. Telefonul se va reconecta la o rețea mobilă când va fi disponibilă."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"După ce telefonul este conectat, poți să trimiți mesaje oricui, inclusiv serviciilor de urgență."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Reține"</string>
@@ -5309,20 +5313,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Stânga"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Dreapta"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Carcasă"</string>
-    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
-    <skip />
-    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
-    <skip />
-    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
-    <skip />
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Stânga: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Dreapta: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Carcasă: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Stânga, baterie: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Dreapta, baterie: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Carcasă, baterie: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Baterie: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Bateria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panou de setări"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Activează ferestrele cu formă liberă"</string>
@@ -5344,7 +5341,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Trimite feedback"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Ai vrea să ne dai feedback pentru această sugestie?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> s-a copiat în clipboard."</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Utilizarea accesibilității"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{O aplicație are acces complet la dispozitivul tău}few{# aplicații au acces complet la dispozitivul tău}other{# de aplicații au acces complet la dispozitivul tău}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Informații importante"</string>
@@ -5388,8 +5384,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Pornește cu pagini de 16 KB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Pornește cu nucleu compatibil cu pagini de 16 KB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Treci de la modul pe 4 KB la modul pe 16 KB"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (5343202230812855846) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"Pentru a folosi opțiunea pentru dezvoltatori pe 16 KB, partiția de date a acestui dispozitiv trebuie schimbată la ext4. Astfel, datele de pe dispozitiv vor fi șterse și sistemul de fișiere va fi schimbat în ext4.&lt;br&gt;&lt;br&gt; Când ești în modul de 16 KB, poți alterna între modul de 4 KB și cel de 16 KB prin repornire.&lt;br&gt;&lt;br&gt; Lucruri de reținut în modul de 16 KB:&lt;br&gt;&lt;br&gt; &amp;#8226; integritatea software-ului nu poate fi garantată;&lt;br&gt; &amp;#8226; datele stocate pe telefon când bootloaderul este deblocat pot fi în pericol;&lt;br&gt; &amp;#8226; unele funcții vor fi dezactivate, ceea ce poate afecta anumite aplicații.&lt;br&gt; &lt;br&gt; Pentru a reveni la modul de producție, va trebui să revii la modul de 4 KB și să blochezi bootloaderul. Astfel, dispozitivul va reveni la setările din fabrică. După ce dispozitivul pornește în sistemul Android, dezactivează deblocarea OEM în Opțiuni pentru dezvoltatori.&lt;br&gt;&lt;br&gt; Pentru a trece la modul de 16 KB, atinge Șterge toate datele și actualizează. Această acțiune va reporni dispozitivul."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Ești în modul independent de dimensiunea paginii, care rulează un nucleu de 4 KB, și treci la modul pe 16 KB. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Această acțiune va reporni dispozitivul. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a readuce dispozitivul în modul de producție, trebuie să revii la modul pe 4 KB și să blochezi bootloaderul, acțiune care aduce dispozitivul la setările din fabrică. După ce dispozitivul pornește în sistemul Android, dezactivează deblocarea OEM în Opțiuni pentru dezvoltatori."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Treci de la modul pe 16 KB la modul pe 4 KB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Ești în modul independent de dimensiunea paginii, care rulează un nucleu de 16 KB, și treci la modul pe 4 KB. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Această acțiune va reporni dispozitivul. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a readuce dispozitivul în modul de producție, trebuie să blochezi bootloaderul, acțiune care aduce dispozitivul la setările din fabrică. După ce dispozitivul pornește în sistemul Android, dezactivează deblocarea OEM în Opțiuni pentru dezvoltatori."</string>
@@ -5924,6 +5919,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN-ul nu poate fi șters"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"A apărut o eroare la încercarea de ștergere a codului PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animație pentru <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
-    <skip />
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Nu se pot activa comenzile"</string>
 </resources>

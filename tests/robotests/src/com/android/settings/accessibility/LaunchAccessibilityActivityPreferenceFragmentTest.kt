@@ -166,8 +166,6 @@ class LaunchAccessibilityActivityPreferenceFragmentTest :
 
         assertThat(preference).isNotNull()
         assertThat(preference!!.isVisible).isTrue()
-        assertThat(preference.contentDescription.toString())
-            .isEqualTo("About $DEFAULT_LABEL\n\nnull")
         assertThat(preference.summary.toString())
             .isEqualTo(
                 Html.fromHtml(
@@ -178,6 +176,8 @@ class LaunchAccessibilityActivityPreferenceFragmentTest :
                     )
                     .toString()
             )
+        assertThat(preference.contentDescription.toString())
+            .isEqualTo("About $DEFAULT_LABEL\n\n${preference.summary}")
     }
 
     @Test
@@ -188,9 +188,9 @@ class LaunchAccessibilityActivityPreferenceFragmentTest :
 
         assertThat(preference).isNotNull()
         assertThat(preference!!.isVisible).isTrue()
-        assertThat(preference.contentDescription.toString())
-            .isEqualTo("About $DEFAULT_LABEL\n\nnull")
         assertThat(preference.summary.toString()).isEqualTo(DEFAULT_DESCRIPTION)
+        assertThat(preference.contentDescription.toString())
+            .isEqualTo("About $DEFAULT_LABEL\n\n${preference.summary}")
     }
 
     @Test

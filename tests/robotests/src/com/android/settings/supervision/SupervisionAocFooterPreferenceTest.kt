@@ -35,6 +35,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 
 @ExperimentalCoroutinesApi
@@ -76,7 +77,7 @@ class SupervisionAocFooterPreferenceTest {
                 SupervisionAocFooterPreference(preferenceDataProvider, testDispatcher)
 
             aosFooterPreference.onResume(preferenceLifecycleContext)
-            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY)
+            verify(preferenceLifecycleContext, times(2)).notifyPreferenceChange(KEY)
             aosFooterPreference.bind(preference, mock())
 
             assertThat(preference.isVisible).isTrue()
@@ -92,7 +93,7 @@ class SupervisionAocFooterPreferenceTest {
                 SupervisionAocFooterPreference(preferenceDataProvider, testDispatcher)
 
             aosFooterPreference.onResume(preferenceLifecycleContext)
-            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY)
+            verify(preferenceLifecycleContext, times(2)).notifyPreferenceChange(KEY)
             aosFooterPreference.bind(preference, mock())
 
             assertThat(preference.isVisible).isFalse()
@@ -108,7 +109,7 @@ class SupervisionAocFooterPreferenceTest {
                 SupervisionAocFooterPreference(preferenceDataProvider, testDispatcher)
 
             aosFooterPreference.onResume(preferenceLifecycleContext)
-            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY)
+            verify(preferenceLifecycleContext, times(2)).notifyPreferenceChange(KEY)
             aosFooterPreference.bind(preference, mock())
 
             assertThat(preference.isVisible).isFalse()

@@ -103,10 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Всичко за аудиоизхода"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Насочване на звуците към слуховия ви апарат или високоговорителя на телефона"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Сродни"</string>
-    <!-- no translation found for bluetooth_try_nearby_share_title (2307943703595855441) -->
-    <skip />
-    <!-- no translation found for bluetooth_try_nearby_share_summary (2808932450696996548) -->
-    <skip />
+    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"По-бързо изпращане със „<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>“"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"За най-бързия начин за споделяне с устройства с Android и компютри в близост изпробвайте „<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>“ за Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Мелодия и будилници"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Звук по време на обаждания"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Мултимедия и системни звуци"</string>
@@ -217,7 +215,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Езикът може да се различава от езиците, налични в приложението. Възможно е някои приложения да не поддържат тази настройка."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Изберете език за всяко приложение."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Изберете език за всяко приложение. Той може да се различава от езиците, налични в приложението. Възможно е някои приложения да не поддържат тази настройка."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Устройството ви, приложенията и уебсайтовете използват първия поддържан език от списъка ви с предпочитани езици.\n\nМного приложения ще използват и региона от предпочитания ви език, за да форматират датата, цифрите и единиците. За да промените региона си, добавете език, след което изберете предпочитания от вас регион."</string>
+    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
+    <skip />
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"За да изберете език за всяко отделно приложение, отворете настройките за език на приложенията."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Научете повече за езиците на приложенията"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Искате ли да промените региона на %s?"</string>
@@ -994,8 +993,7 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Рестартиране"</string>
     <string name="external_display_on" msgid="2560104443500154333">"Вкл."</string>
     <string name="external_display_off" msgid="5634413756025351374">"Изкл."</string>
-    <!-- no translation found for external_display_settings_title (4690843697498496237) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="4690843697498496237">"Външен екран"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Вграден екран"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Използване на външен екран"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Разделителна способност на екрана"</string>
@@ -1006,12 +1004,9 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Промяната на настройката за завъртане или разделителна способност може да спре някои от приложенията, които се изпълняват в момента"</string>
-    <!-- no translation found for external_display_not_found_footer_title (3974573337788760338) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_title (4854597444155430591) -->
-    <skip />
-    <!-- no translation found for external_display_no_display_connected_screen_summary (3114991534614756600) -->
-    <skip />
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"Няма свързан екран\n\nСвържете външен екран, за да започнете, или опитайте с друг кабел"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Няма свързан екран"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Свържете външен екран, за да започнете, или опитайте с друг кабел"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Още опции"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Задръжте и плъзнете, за да пренаредите екраните."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Дублиране на вградения дисплей"</string>
@@ -1224,6 +1219,10 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Запазването на мрежата не бе успешно"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Отказ"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Да се забрави ли мрежата?"</string>
+    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
+    <skip />
+    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
+    <skip />
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 мрежа}other{# мрежи}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 абонамент}other{# абонамента}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 мрежа и абонамент}other{# мрежи и абонамента}}"</string>
@@ -2421,10 +2420,8 @@
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Преместване на екрана, когато мишката докосне краищата му"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Следване на въвеждането"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"Лупата следва текста, докато въвеждате"</string>
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_title (3412060515554192262) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_follow_keyboard_summary (2379353603675828805) -->
-    <skip />
+    <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Следване на фокуса на клавиатурата"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"Докато навигирате с клавиатурата си, лупата следва елемента, върху който е поставен фокусът"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Увеличаване на клавиатурата"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Увеличаване на клавиатурата, за да виждате емоджитата и буквите, когато използвате увеличение на целия екран"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Не е налице, когато се увеличава само част от екрана"</string>
@@ -2740,10 +2737,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Инф. за допълнителното затъмняване"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Затъмнете екрана си, за да ви е по-удобно да четете"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Интензивност"</string>
-    <!-- no translation found for brightness_intensity_start_label (5156578219206443637) -->
-    <skip />
-    <!-- no translation found for brightness_intensity_end_label (2697495729534414164) -->
-    <skip />
+    <string name="brightness_intensity_start_label" msgid="5156578219206443637">"По-тъмно"</string>
+    <string name="brightness_intensity_end_label" msgid="2697495729534414164">"По-ярко"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Да остане включено след рестартиране на устройството"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Кратко ({time} секунда)}other{Кратко ({time} секунди)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Средно ({time} секунда)}other{Средно ({time} секунди)}}"</string>
@@ -3862,17 +3857,22 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Водещи материали, редакторски статии и др."</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Харесвания, публикации и др."</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Бюлетини, препоръчани медии и др."</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"Известия, базирани на AI"</string>
+    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
+    <skip />
     <string name="notification_summarization_title" msgid="1516039882005781529">"Обобщения на известията"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Получавайте кратка обзорна информация за по-дългите съобщения"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Използване на обобщения на известията"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"Обобщавайте дълги съобщения и групови разговори, за да получавате кратка обзорна информация. Обобщенията са базирани на AI и може да съдържат грешки."</string>
+    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
+    <skip />
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Известията от тези приложения няма да бъдат обобщавани"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Управление на приложенията"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Разрешаване на обобщаването на известията за приложенията"</string>
+    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
+    <skip />
     <string name="notification_excluded_apps" msgid="317898848790046528">"Без включване на тези приложения"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"Обобщаване на известията"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"Обобщаване на известията за разговори от това приложение"</string>
+    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
+    <skip />
+    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
+    <skip />
     <string name="live_notifications" msgid="4650406646292963831">"Известия в реално време"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Актуализации на живо"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Показване на текущите и ограничени във времето известия в лентата на състоянието и на заключения екран"</string>
@@ -4026,11 +4026,16 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Прилагане за приложенията в служебния потребителски профил"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Инструмент за организиране на известията"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Групиране и заглушаване на известията с по-нисък приоритет"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Използване на инструмента за организиране на известията"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"Изберете типовете известия, които искате да заглушите и групирате, за да намалите прекъсванията. Групирането е базирано на AI и може да съдържа грешки."</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Групиране на известията"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Известията с подобна тема ще бъдат заглушавани и групирани, за да не ви безпокоят"</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Разрешаване на групирането на известия за приложенията"</string>
+    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
+    <skip />
+    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
+    <skip />
+    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Прилагане за приложенията в служебния потребителски профил"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Помощни услуги за VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Никое инсталирано приложение не е заявило да се изпълнява като помощна услуга за VR."</string>
@@ -5181,8 +5186,7 @@
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Ако нямате мобилна мрежа, ще видите опция да използвате сателит."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"След като телефонът ви се свърже със сателит"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Изпълнете стъпките за свързване със сателита"</string>
-    <!-- no translation found for summary_supported_service (5855066701346160193) -->
-    <skip />
+    <string name="summary_supported_service" msgid="5855066701346160193">"Можете да изпращате текстови съобщения на когото пожелаете, включително на службите за спешни случаи, и да използвате поддържани приложения. Телефонът ви ще се свърже отново с мобилна мрежа, когато е възможно."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Можете да изпращате текстови съобщения на когото пожелаете, включително на службите за спешни случаи. Телефонът ви ще се свърже отново с мобилна мрежа, когато е възможно."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"След като телефонът ви се свърже, можете да изпращате текстови съобщения на когото пожелаете, включително на службите за спешни случаи."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Имайте предвид следното"</string>
@@ -5311,20 +5315,13 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Лява"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Дясна"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Калъф"</string>
-    <!-- no translation found for bluetooth_left_name_expressive (7849821379224902789) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_name_expressive (4275494318479565567) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_name_expressive (1370173488986566538) -->
-    <skip />
-    <!-- no translation found for bluetooth_left_content_description_expressive (6614501337897763068) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (5612624028099845252) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (5331036693430634851) -->
-    <skip />
-    <!-- no translation found for bluetooth_main_content_description_expressive (6536529189879542730) -->
-    <skip />
+    <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Ляво: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Дясно: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Кутийка: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"Ниво на батерията на лявото устройство: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"Ниво на батерията на дясното устройство: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"Ниво на батерията на кутийката: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Батерия: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Батерия"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Панел за настройки"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Активиране на прозорците в свободна форма"</string>
@@ -5346,7 +5343,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Изпращане на отзиви"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Искате ли да ни изпратите отзиви за това приложение?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"Копирахте <xliff:g id="COPY_CONTENT">%1$s</xliff:g> в буферната памет."</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Използване на услуги за достъпност"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 приложение има пълен достъп до устройството ви}other{# приложения имат пълен достъп до устройството ви}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Важна информация"</string>
@@ -5390,8 +5386,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"Стартиране със страници 16 KB"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"Старт на устройството с ядро за страници 16 KB"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"Превключване от режим 4 KB към режим 16 KB"</string>
-    <!-- no translation found for confirm_enable_16k_pages_update_wipe (5343202230812855846) -->
-    <skip />
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"За да се използва опцията за програмисти за 16 KB размер на страницата, делът с данни на това устройство трябва да се преобразува към ext4. Всички данни на устройството ви ще бъдат изчистени и файловата система ще се промени на ext4.&lt;br&gt;&lt;br&gt; Когато сте в режим 16 KB, можете да превключвате между режимите 4 KB и 16 KB с едно рестартиране.&lt;br&gt;&lt;br&gt; Неща, които трябва да имате предвид в режим 16 KB:&lt;br&gt;&lt;br&gt; &amp;#8226; Целостта на софтуера не може да се гарантира.&lt;br&gt; &amp;#8226; Данните, съхранявани на телефона, може да са изложени на риск, докато програмата за първоначално зареждане е отключена.&lt;br&gt; &amp;#8226; Някои функции ще бъдат деактивирани, което може да засегне определени приложения.&lt;br&gt;&lt;br&gt; За да се върнете към производствения режим, трябва да превключите обратно към режим 4 KB и да заключите програмата за първоначално зареждане. Това действие ще възстанови фабричните настройки на устройството ви. След като то стартира Android, деактивирайте настройката за отключване чрез OEM от опциите за програмисти.&lt;br&gt;&lt;br&gt; За да продължите с превключването към режим 16 KB, докоснете „Изтриване на всички данни и актуализиране“. Устройството ще се рестартира."</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"Вие сте в режим за съвместимост със страниците, използвате ядро в режим 4 KB и превключвате към режим 16 KB. Целостта на софтуера не може да се гарантира в този режим. Също така данните, съхранявани на телефона, може да са изложени на риск, докато програмата за първоначално зареждане е отключена. Това действие ще рестартира устройството. Определени функции ще бъдат деактивирани в тези режими, така че някои приложения може да не работят. За да върнете устройството в производствен режим, ще трябва да превключите обратно към режима 4 KB и да заключите програмата за първоначално зареждане, което ще възстанови фабричните настройки на устройството. След като то стартира Android, деактивирайте настройката за отключване чрез OEM от опциите за програмисти."</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"Превключване към режим 4 KB от режим 16 KB"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"Вие сте в режим за съвместимост със страниците, използвате ядро в режим 16 KB и превключвате към режим 4 KB. Целостта на софтуера не може да се гарантира в този режим. Също така данните, съхранявани на телефона, може да са изложени на риск, докато програмата за първоначално зареждане е отключена. Това действие ще рестартира устройството. Определени функции ще бъдат деактивирани в тези режими, така че някои приложения може да не работят. За да върнете устройството в производствен режим, ще трябва да заключите програмата за първоначално зареждане, което ще възстанови фабричните настройки на устройството. След като то стартира Android, деактивирайте настройката за отключване чрез OEM от опциите за програмисти."</string>
@@ -5925,6 +5920,5 @@
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"ПИН кодът не може да бъде изтрит"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"При опита за изтриване на ПИН кода възникна грешка."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Анимация за <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
-    <!-- no translation found for supervision_multi_profile_error_title (5570178018386518727) -->
-    <skip />
+    <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Контролите не могат да бъдат включени"</string>
 </resources>

@@ -49,8 +49,7 @@ open class DisplayScreen :
     override fun getIcon(context: Context) =
         when {
             isExpressiveTheme(context) -> R.drawable.ic_homepage_display
-            Flags.homepageRevamp() -> R.drawable.ic_settings_display_filled
-            else -> R.drawable.ic_settings_display_white
+            else -> R.drawable.ic_settings_display_filled
         }
 
     override val highlightMenuKey: Int
@@ -68,22 +67,18 @@ open class DisplayScreen :
         preferenceHierarchy(context) {
             +Category("category_brightness", R.string.category_name_brightness) order -200 += {
                 +BrightnessLevelPreference()
-                +AutoBrightnessScreen.KEY
+                if (Flags.catalystScreenBrightnessMode()) +AutoBrightnessScreen.KEY
             }
             +Category("category_lock_display", R.string.category_name_lock_display) order -190 += {
-                +LockScreenPreferenceScreen.KEY
-                if (ambientAod()) {
-                    +AmbientDisplayAlwaysOnPreferenceScreen.KEY
-                }
+                if (Flags.catalystLockscreenFromDisplaySettings()) +LockScreenPreferenceScreen.KEY
+                if (ambientAod()) +AmbientDisplayAlwaysOnPreferenceScreen.KEY
             }
             +Category("category_key_appearance", R.string.category_name_appearance) order -180 += {
-                +DarkModeScreen.KEY
+                if (Flags.catalystDarkUiMode()) +DarkModeScreen.KEY
             }
             +Category("category_other", R.string.category_name_display_controls) order -150 += {
                 +PeakRefreshRateSwitchPreference()
-                if (Flags.catalystScreensaver()) {
-                    +ScreensaverScreen.KEY
-                }
+                if (Flags.catalystScreensaver()) +ScreensaverScreen.KEY
             }
         }
 

@@ -19,6 +19,7 @@ package com.android.settings.connecteddevice.display
 import android.graphics.Outline
 import android.graphics.PointF
 import android.util.Log
+import android.util.Size
 import android.view.SurfaceControl
 import android.view.SurfaceHolder
 import android.view.SurfaceView
@@ -44,7 +45,14 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     private var displayIdToShowWallpaper: Int? = null
 
     /** Scale of the mirrored wallpaper to the actual wallpaper size. */
-    private var surfaceScale: Float? = null
+    @VisibleForTesting
+    internal var surfaceScale: Float? = null
+        private set
+
+    // Size of the surface of the display that would be projected on this block
+    @VisibleForTesting
+    internal var surfaceSize: Size? = null
+        private set
 
     // These are surfaces which must be removed from the display block hierarchy and released once
     // the new surface is put in place. This list can have more than one item because we may get
@@ -74,7 +82,17 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         }
 
         val surfaceScale = surfaceScale ?: return
-        injector.updateSurfaceView(oldSurfaces, surface, wallpaperView, surfaceScale)
+        val surfaceSize = surfaceSize ?: return
+        val isMirroringOtherDisplay = logicalDisplayId != displayIdToShowWallpaper
+        injector.updateSurfaceView(
+            oldSurfaces,
+            surface,
+            wallpaperView,
+            surfaceScale,
+            surfaceSize,
+            cornerRadiusPx.toFloat(),
+            isMirroringOtherDisplay,
+        )
         oldSurfaces.clear()
     }
 
@@ -144,12 +162,14 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
      *
      * @param logicalDisplayId ID of the logical display this DisplayBlock represents
      * @param displayIdToShowWallpaper ID of the display whose wallpaper would be projected on this
-     *  display block.
+     *   display block.
      * @param topLeft coordinates of top left corner of the block, not including highlight border
      * @param bottomRight coordinates of bottom right corner of the block, not including highlight
      *   border
      * @param surfaceScale scale in pixels of the size of the wallpaper mirror to the actual
      *   wallpaper on the screen - should be less than one to indicate scaling to smaller size
+     * @param surfaceSize the size of the surface of the display that would be projected on the
+     *   block
      */
     fun reset(
         logicalDisplayId: Int,
@@ -157,6 +177,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         topLeft: PointF,
         bottomRight: PointF,
         surfaceScale: Float,
+        surfaceSize: Size,
     ) {
         wallpaperSurface?.let { oldSurfaces.add(it) }
         injector.handler.removeCallbacks(updateSurfaceView)
@@ -166,6 +187,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         this.logicalDisplayId = logicalDisplayId
         this.displayIdToShowWallpaper = displayIdToShowWallpaper
         this.surfaceScale = surfaceScale
+        this.surfaceSize = surfaceSize
 
         val newWidth = (bottomRight.x - topLeft.x).toInt()
         val newHeight = (bottomRight.y - topLeft.y).toInt()

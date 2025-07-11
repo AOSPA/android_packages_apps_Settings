@@ -87,6 +87,7 @@ import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -152,6 +153,7 @@ public class AudioSharingSwitchBarControllerTest {
     @Mock private CachedBluetoothDeviceManager mDeviceManager;
     @Mock private BluetoothEventManager mEventManager;
     @Mock private LocalBluetoothProfileManager mBtProfileManager;
+    @Mock private LeAudioProfile mLeAudio;
     @Mock private LocalBluetoothLeBroadcast mBroadcast;
     @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
     @Mock private VolumeControlProfile mVolumeControl;
@@ -200,9 +202,11 @@ public class AudioSharingSwitchBarControllerTest {
         when(mCachedDevice2.getGroupId()).thenReturn(TEST_DEVICE_GROUP_ID2);
         when(mCachedDevice2.getName()).thenReturn(TEST_DEVICE_NAME2);
         when(mCachedDevice2.isActiveDevice(BluetoothProfile.LE_AUDIO)).thenReturn(true);
+        when(mBtProfileManager.getLeAudioProfile()).thenReturn(mLeAudio);
         when(mBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
         when(mBtProfileManager.getLeAudioBroadcastAssistantProfile()).thenReturn(mAssistant);
         when(mBtProfileManager.getVolumeControlProfile()).thenReturn(mVolumeControl);
+        when(mLeAudio.isProfileReady()).thenReturn(true);
         when(mVolumeControl.isProfileReady()).thenReturn(true);
         when(mBroadcast.isProfileReady()).thenReturn(true);
         doNothing()

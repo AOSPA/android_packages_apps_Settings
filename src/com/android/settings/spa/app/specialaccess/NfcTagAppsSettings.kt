@@ -22,7 +22,7 @@ import android.nfc.NfcAdapter
 import android.util.Log
 import androidx.compose.runtime.Composable
 import com.android.settings.R
-import com.android.settingslib.spa.livedata.observeAsCallback
+import com.android.settings.spa.livedata.observeAsCallback
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.userId
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListModel

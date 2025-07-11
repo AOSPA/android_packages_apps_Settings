@@ -49,6 +49,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen;
+import com.android.settings.system.ResetDashboardFragment;
+import com.android.settings.system.ResetDashboardScreen;
 import com.android.settings.system.ShadePanelsPreferenceController;
 import com.android.settings.wifi.WifiUtils;
 
@@ -588,6 +590,11 @@ public class Settings extends SettingsActivity {
     public static class SystemDashboardActivity extends SettingsActivity {}
     public static class SupportDashboardActivity extends SettingsActivity {}
     public static class SMQQtiFeedbackActivity extends SettingsActivity { /* empty */ }
+    public static class ResetDashboardActivity extends CatalystSettingsActivity {
+        public ResetDashboardActivity() {
+            super(ResetDashboardScreen.KEY, ResetDashboardFragment.class);
+        }
+    }
 
     /**
      * Activity for MediaControlsSettings

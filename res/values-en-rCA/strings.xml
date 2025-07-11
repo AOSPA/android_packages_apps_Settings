@@ -215,7 +215,7 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Language may differ from languages available in the app. Some apps may not support this setting."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Choose the language for each app."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Choose the language for each app. Language may differ from languages available in the app. Some apps may not support this setting."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Your device, apps, and websites use the first supported language from your preferred language list.\n\nMany apps will also use the region from your preferred language to format dates, numbers, and units. To change your region, add a language, then choose your preferred region."</string>
+    <string name="desc_introduction_of_language_picker" msgid="2164004945569753730">"Your device, apps, and websites use the first supported language from your preferred language list."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"To select a language for each app, go to app language settings."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Learn more about app languages"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Change region to %s?"</string>
@@ -1218,6 +1218,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Failed to save network"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Cancel"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Forget network?"</string>
+    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Forget all device users?"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> is used by other users on this device, and all users of this network will need to set it up again. Still want to forget?"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 network}other{# networks}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 subscription}other{# subscriptions}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 network &amp; subscription}other{# networks &amp; subscriptions}}"</string>
@@ -3852,17 +3854,17 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Top stories, editorials, and more"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Likes, posts, and more"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Newsletters, recommended media, and more"</string>
-    <string name="notification_ai_features_title" msgid="6497959797331796296">"AI-powered notifications"</string>
+    <string name="notification_ai_features_title" msgid="2241618579100257538">"Manage with AI"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Notification summaries"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Get quick recaps of longer messages"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Use notification summaries"</string>
-    <string name="notification_summarization_description" msgid="341128754705513791">"Summarize long messages and group conversations to get quick recaps. Summaries are AI-powered and may contain errors."</string>
+    <string name="notification_summarization_description" msgid="3185465631219791854">"Summarize long messages and group conversations to get quick recaps.\n\nSummaries use AI on your device, which may sometimes make mistakes. Your messages are never sent to Google."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Notifications from these apps will not be summarized"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Manage apps"</string>
-    <string name="notification_summarization_manage_excluded_apps_title" msgid="1299744594788208296">"Allow notification summaries for apps"</string>
+    <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Manage apps for notification summaries"</string>
     <string name="notification_excluded_apps" msgid="317898848790046528">"Don\'t include these apps"</string>
-    <string name="notification_app_level_summarize_title" msgid="3829343457958246733">"Summarize notifications"</string>
-    <string name="notification_app_level_summarize_subtext" msgid="7949649262631157728">"Summarize conversation notifications from this app"</string>
+    <string name="notification_app_level_summarize_title" msgid="488390574186154905">"Notification summaries"</string>
+    <string name="notification_app_level_summarize_subtext" msgid="2064371198044287108">"Get quick recaps of longer messages"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Live notifications"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Live updates"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Display ongoing, time-sensitive notifications on the status bar and lock screen"</string>
@@ -4016,11 +4018,11 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Apply to work profile apps"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Notification organizer"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Bundle and silence lower priority notifications"</string>
-    <string name="notification_bundle_main_control_title" msgid="2632661768990540295">"Use Notification organizer"</string>
-    <string name="notification_bundle_description" msgid="8439963475488583612">"Choose notification types you want to silence and bundle together to minimize interruptions. Bundling is AI-powered and may contain errors."</string>
-    <string name="notification_app_level_bundle_title" msgid="8917807675495480483">"Bundle notifications"</string>
-    <string name="notification_app_level_bundle_subtext" msgid="7330731485247761388">"Notifications with similar themes will be silenced and grouped together for a quieter experience"</string>
-    <string name="notification_bundle_manage_excluded_apps_title" msgid="7019831234073590293">"Allow notification bundling for apps"</string>
+    <string name="notification_bundle_main_control_title" msgid="6413211155343788835">"Use notification organizer"</string>
+    <string name="notification_bundle_description" msgid="4202633316211056848">"Choose notification types you want to silence and bundle together to minimize interruptions.\n\nThe organizer uses AI on your device, which may sometimes make mistakes. Your notifications are never sent to Google."</string>
+    <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Notification organizer"</string>
+    <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Bundle and silence lower priority notifications"</string>
+    <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Manage apps for notification organizer"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Apply to work profile apps"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR helper services"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"No installed apps have requested to be run as VR helper services."</string>
@@ -5326,7 +5328,6 @@
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Send feedback"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Would you like to give us feedback on this suggestion?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> copied to clipboard."</string>
-    <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="accessibility_usage_title" msgid="9190967143518779145">"Accessibility usage"</string>
     <string name="accessibility_usage_summary" msgid="4348285359995227813">"{count,plural, =1{1 app has full access to your device}other{# apps have full access to your device}}"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Important information"</string>

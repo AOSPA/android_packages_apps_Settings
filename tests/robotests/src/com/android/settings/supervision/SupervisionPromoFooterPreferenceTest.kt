@@ -41,6 +41,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 
 @ExperimentalCoroutinesApi
@@ -83,7 +84,7 @@ class SupervisionPromoFooterPreferenceTest {
                 SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
 
             promoPreference.onResume(preferenceLifecycleContext)
-            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY)
+            verify(preferenceLifecycleContext, times(2)).notifyPreferenceChange(KEY)
             promoPreference.bind(preference, mock())
 
             assertThat(preference.title).isEqualTo(title)
@@ -99,7 +100,7 @@ class SupervisionPromoFooterPreferenceTest {
                 SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
 
             promoPreference.onResume(preferenceLifecycleContext)
-            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY)
+            verify(preferenceLifecycleContext, times(2)).notifyPreferenceChange(KEY)
             promoPreference.bind(preference, mock())
 
             assertThat(preference.summary).isEqualTo(summary)
@@ -114,7 +115,7 @@ class SupervisionPromoFooterPreferenceTest {
                 SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
 
             promoPreference.onResume(preferenceLifecycleContext)
-            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY)
+            verify(preferenceLifecycleContext, times(2)).notifyPreferenceChange(KEY)
             promoPreference.bind(preference, mock())
         }
 
@@ -127,7 +128,8 @@ class SupervisionPromoFooterPreferenceTest {
 
             promoPreference.onResume(preferenceLifecycleContext)
 
-            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY) // will trigger binding
+            verify(preferenceLifecycleContext, times(2))
+                .notifyPreferenceChange(KEY) // will trigger binding
             promoPreference.bind(preference, mock())
 
             assertThat(preference.isVisible).isFalse()
@@ -144,7 +146,8 @@ class SupervisionPromoFooterPreferenceTest {
 
             promoPreference.onResume(preferenceLifecycleContext)
 
-            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY) // will trigger binding
+            verify(preferenceLifecycleContext, times(2))
+                .notifyPreferenceChange(KEY) // will trigger binding
             promoPreference.bind(preference, mock())
 
             assertThat(preference.isVisible).isFalse()
@@ -183,7 +186,8 @@ class SupervisionPromoFooterPreferenceTest {
 
             promoPreference.onResume(preferenceLifecycleContext)
 
-            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY) // will trigger binding
+            verify(preferenceLifecycleContext, times(2))
+                .notifyPreferenceChange(KEY) // will trigger binding
             promoPreference.bind(preference, mock())
 
             assertThat(preference.isVisible).isFalse()
@@ -208,7 +212,8 @@ class SupervisionPromoFooterPreferenceTest {
 
             promoPreference.onResume(preferenceLifecycleContext)
 
-            verify(preferenceLifecycleContext).notifyPreferenceChange(KEY) // will trigger binding
+            verify(preferenceLifecycleContext, times(2))
+                .notifyPreferenceChange(KEY) // will trigger binding
             promoPreference.bind(preference, mock())
             verify(preference, atLeastOnce()).setAdditionalAction(
                 null,

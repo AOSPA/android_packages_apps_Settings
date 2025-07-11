@@ -15,14 +15,15 @@
  */
 package com.android.settings.connecteddevice.display;
 
-import static android.view.Display.INVALID_DISPLAY;
 import static android.provider.Settings.Secure.MIRROR_BUILT_IN_DISPLAY;
+import static android.view.Display.INVALID_DISPLAY;
 
 import static com.android.server.display.feature.flags.Flags.FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_NOT_FOUND_FOOTER_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SETTINGS_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SIZE_SUMMARY_RESOURCE;
+import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_TITLE_RESOURCE;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
 
@@ -40,6 +41,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.platform.test.annotations.EnableFlags;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.TextView;
@@ -53,7 +55,10 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.R;
 import com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.PrefBasics;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.MainSwitchPreference;
 
 import org.junit.Test;
@@ -457,6 +462,35 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         verify(mMockedInjector).enableConnectedDisplay(displayId);
         assertThat(pref.isChecked()).isTrue();
         verify(mMockedMetricsLogger, times(2)).writePreferenceClickMetric(pref);
+    }
+
+    @Test
+    public void testSearchIndexProvider_getXmlResourcesToIndex() {
+        final Indexable.SearchIndexProvider provider =
+                ExternalDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER;
+
+        final List<SearchIndexableResource> resources = provider.getXmlResourcesToIndex(mContext,
+                true);
+
+        assertThat(resources).hasSize(1);
+        assertThat(resources.get(0).xmlResId).isEqualTo(
+                ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SETTINGS_RESOURCE);
+    }
+
+    @Test
+    public void testSearchIndexProvider_getRawIndexData() {
+        final Indexable.SearchIndexProvider provider =
+                ExternalDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER;
+
+        final List<SearchIndexableRaw> indexData = provider.getRawDataToIndex(
+                mContext, /* enabled= */ true);
+        assertThat(indexData).hasSize(1);
+        assertThat(indexData.getFirst().screenTitle).contains(
+                mContext.getString(R.string.connected_devices_dashboard_title));
+        assertThat(indexData.getFirst().keywords).isEqualTo(
+                mContext.getString(R.string.keywords_external_display_settings));
+        assertThat(indexData.getFirst().title).isEqualTo(
+                mContext.getString(EXTERNAL_DISPLAY_TITLE_RESOURCE));
     }
 
     @NonNull

@@ -41,8 +41,6 @@ public class AppNotificationSettings extends NotificationSettings {
     private static final String TAG = "AppNotificationSettings";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    boolean mShowAll = false;
-
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.NOTIFICATION_APP_NOTIFICATION;

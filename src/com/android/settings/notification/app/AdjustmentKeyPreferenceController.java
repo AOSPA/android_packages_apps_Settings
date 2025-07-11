@@ -15,17 +15,19 @@
  */
 package com.android.settings.notification.app;
 
-import static android.service.notification.Adjustment.KEY_TYPE;
-
 import android.app.Flags;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.service.notification.Adjustment;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.notification.BundlePreferenceFragment;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settings.notification.SummarizationPreferenceFragment;
+import com.android.settingslib.PrimarySwitchPreference;
 
 /**
  * Used for the app-level preference screen to opt the app in or out of a provided Adjustment key.
@@ -82,7 +84,7 @@ public class AdjustmentKeyPreferenceController extends
     }
 
     public void updateState(@NonNull Preference preference) {
-        RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
+        PrimarySwitchPreference pref = (PrimarySwitchPreference) preference;
         if (pref.getParent() != null) {
             pref.getParent().setVisible(true);
         }
@@ -100,6 +102,32 @@ public class AdjustmentKeyPreferenceController extends
     public boolean onPreferenceChange(@NonNull Preference preference, @NonNull Object newValue) {
         final boolean allowedForPkg = (Boolean) newValue;
         mBackend.setAdjustmentSupportedForPackage(mAppRow.userId, mKey, mAppRow.pkg, allowedForPkg);
+        return true;
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(@NonNull Preference preference) {
+        // only handle preference tree clicks for this controller's preference, as the dashboard
+        // fragment will try all controllers to determine which one should handle the click
+        if (!mKey.equals(preference.getKey())) {
+            return false;
+        }
+
+        Class destination;
+        if (Adjustment.KEY_TYPE.equals(mKey)) {
+            destination = BundlePreferenceFragment.class;
+        } else if (Adjustment.KEY_SUMMARIZATION.equals(mKey)) {
+            destination = SummarizationPreferenceFragment.class;
+        } else {
+            // other keys not supported
+            return false;
+        }
+
+        // Go to the settings page for this adjustment key type, noting that we came from the
+        // notification app settings page
+        new SubSettingLauncher(mContext)
+                .setDestination(destination.getName())
+                .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_APP_NOTIFICATION).launch();
         return true;
     }
 }

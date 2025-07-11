@@ -26,10 +26,10 @@ import androidx.compose.runtime.produceState
 import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.notification.app.AppNotificationSettings
+import com.android.settings.spa.livedata.observeAsCallback
 import com.android.settings.spa.notification.SpinnerItem.Companion.toSpinnerItem
 import com.android.settingslib.spa.framework.util.asyncFilter
 import com.android.settingslib.spa.framework.util.asyncForEach
-import com.android.settingslib.spa.livedata.observeAsCallback
 import com.android.settingslib.spa.widget.ui.SpinnerOption
 import com.android.settingslib.spaprivileged.model.app.AppEntry
 import com.android.settingslib.spaprivileged.model.app.AppListModel
