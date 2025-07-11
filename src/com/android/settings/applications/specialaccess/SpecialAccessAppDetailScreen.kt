@@ -32,9 +32,11 @@ import com.android.settings.applications.applicationInfoComparator
 import com.android.settings.applications.appops.AppOpsModeDataStore
 import com.android.settings.applications.getPackageInfo
 import com.android.settings.applications.packageName
+import com.android.settings.applications.source
 import com.android.settings.applications.toArguments
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settings.spa.app.catalyst.AppInfoScreen
 import com.android.settings.widget.FooterPreferenceBinding
 import com.android.settings.widget.FooterPreferenceMetadata
 import com.android.settingslib.datastore.HandlerExecutor
@@ -102,7 +104,11 @@ abstract class SpecialAccessAppDetailScreen(context: Context, override val argum
         enabled || enabledSetting == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER
 
     override fun getTitle(context: Context) =
-        packageInfo?.applicationInfo?.loadLabel(context.packageManager)
+        if (isFromAppInfo(arguments)) {
+            context.getString(screenTitle)
+        } else {
+            packageInfo?.applicationInfo?.loadLabel(context.packageManager)
+        }
 
     override fun getSummary(context: Context): CharSequence? =
         context.getString(
@@ -117,7 +123,7 @@ abstract class SpecialAccessAppDetailScreen(context: Context, override val argum
         val appInfo = packageInfo?.applicationInfo
         if (preference !is PreferenceScreen) {
             preference.icon =
-                if (appInfo != null) {
+                if (appInfo != null && !isFromAppInfo(arguments)) {
                     IconDrawableFactory.newInstance(preference.context).getBadgedIcon(appInfo)
                 } else {
                     null
@@ -201,6 +207,13 @@ abstract class SpecialAccessAppDetailScreen(context: Context, override val argum
             for (appInfo in appInfos) emit(appInfo.packageName.toArguments())
         }
     }
+
+    /**
+     * Returns whether this detail page is opened from AppInfo or not.
+     *
+     * If it's from the AppInfo page, we will remove the icon and also update the entry title.
+     */
+    private fun isFromAppInfo(arguments: Bundle): Boolean = arguments.source == AppInfoScreen.SOURCE
 }
 
 private class FooterPreference(override val title: Int) :

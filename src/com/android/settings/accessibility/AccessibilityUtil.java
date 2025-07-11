@@ -40,6 +40,7 @@ import android.icu.text.CaseMap;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.WindowManager;
 import android.view.WindowMetrics;
@@ -62,6 +63,8 @@ import java.util.Locale;
 
 /** Provides utility methods to accessibility settings only. */
 public final class AccessibilityUtil {
+    private static final String TAG = AccessibilityUtil.class.getSimpleName();
+
     // LINT.IfChange(shortcut_type_ui_order)
     static final int[] SHORTCUTS_ORDER_IN_UI = {
             QUICK_SETTINGS,
@@ -201,7 +204,7 @@ public final class AccessibilityUtil {
      * @return The user shortcut type if component name existed in {@code UserShortcutType} string
      * Settings.
      */
-    static int getUserShortcutTypesFromSettings(Context context,
+    static int getUserShortcutTypesFromSettings(@NonNull Context context,
             @NonNull ComponentName componentName) {
         // TODO(b/147990389): Delete the branching logic for getting componentNameString after we
         //  migrated to MAGNIFICATION_COMPONENT_NAME.
@@ -292,7 +295,8 @@ public final class AccessibilityUtil {
     /**
      * Assembles a localized string describing the provided shortcut types.
      */
-    public static CharSequence getShortcutSummaryList(Context context, int shortcutTypes) {
+    @NonNull
+    public static CharSequence getShortcutSummaryList(@NonNull Context context, int shortcutTypes) {
         final List<CharSequence> list = new ArrayList<>();
 
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
@@ -319,6 +323,12 @@ public final class AccessibilityUtil {
                     default -> "";
                 });
             }
+        }
+
+        if (list.isEmpty()) {
+            Log.e(TAG, "With empty shortcut list, the preference should not be checked, "
+                    + "and this method should not be called");
+            return "";
         }
 
         list.sort(CharSequence::compare);

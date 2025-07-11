@@ -42,11 +42,7 @@ class FollowTypingSwitchPreference :
     override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
 
     override fun isAvailable(context: Context): Boolean {
-        return if (context.isInSetupWizard() || !context.isWindowMagnificationSupported()) {
-            false
-        } else {
-            true
-        }
+        return !context.isInSetupWizard() && context.isWindowMagnificationSupported()
     }
 
     companion object {

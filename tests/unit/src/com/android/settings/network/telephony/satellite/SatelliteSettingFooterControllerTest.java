@@ -16,7 +16,9 @@
 
 package com.android.settings.network.telephony.satellite;
 
-import static android.telephony.CarrierConfigManager.KEY_EMERGENCY_MESSAGING_SUPPORTED_BOOL;
+import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC;
+import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
+import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
 
@@ -103,15 +105,15 @@ public class SatelliteSettingFooterControllerTest {
         assertThat(
                 summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
                         "satellite_footer_content_section_4"))).isTrue();
-        assertThat(
-                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
-                        "satellite_footer_content_section_5"))).isTrue();
     }
 
 
     @Test
-    public void displayPreferenceScreen_noEmergencyMsgSupport_hasEmergencyContent() {
-        mPersistableBundle.putBoolean(KEY_EMERGENCY_MESSAGING_SUPPORTED_BOOL, false);
+    public void displayPreferenceScreen_manualTypeAndNoEntitlement() {
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_MANUAL);
+        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false);
+
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
         screen.addPreference(mFooterPreference);
@@ -121,29 +123,51 @@ public class SatelliteSettingFooterControllerTest {
 
         ArgumentCaptor<CharSequence> summary = ArgumentCaptor.forClass(CharSequence.class);
         verify(mFooterPreference).setSummary(summary.capture());
+
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_7", TEST_OPERATOR_NAME))).isTrue();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_5"))).isFalse();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_6"))).isFalse();
+    }
+
+    @Test
+    public void displayPreferenceScreen_autoTypeAndNoEntitlement() {
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC);
+        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false);
+
+        PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
+        when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
+        screen.addPreference(mFooterPreference);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+
+        mController.displayPreference(screen);
+
+        ArgumentCaptor<CharSequence> summary = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mFooterPreference).setSummary(summary.capture());
+
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_7", TEST_OPERATOR_NAME))).isFalse();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_5"))).isTrue();
         assertThat(
                 summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
                         "satellite_footer_content_section_6"))).isTrue();
     }
 
     @Test
-    public void displayPreferenceScreen_emergencyMsgSupport_noEmergencyContent() {
-        mPersistableBundle.putBoolean(KEY_EMERGENCY_MESSAGING_SUPPORTED_BOOL, true);
-        PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
-        when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
-        screen.addPreference(mFooterPreference);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
-
-        mController.displayPreference(screen);
-        ArgumentCaptor<CharSequence> summary = ArgumentCaptor.forClass(CharSequence.class);
-        verify(mFooterPreference).setSummary(summary.capture());
-        assertThat(summary.toString().contains(ResourcesUtils.getResourcesString(mContext,
-                "satellite_footer_content_section_6"))).isFalse();
-    }
-
-    @Test
-    public void displayPreferenceScreen_entitlementSupport_hasEntitlementContent() {
+    public void displayPreferenceScreen_autoTypeAndHasEntitlement() {
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC);
         mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
+
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
         screen.addPreference(mFooterPreference);
@@ -153,21 +177,15 @@ public class SatelliteSettingFooterControllerTest {
 
         ArgumentCaptor<CharSequence> summary = ArgumentCaptor.forClass(CharSequence.class);
         verify(mFooterPreference).setSummary(summary.capture());
-        assertThat(summary.getValue().toString().contains(TEST_OPERATOR_NAME)).isTrue();
-    }
 
-    @Test
-    public void displayPreferenceScreen_entitlementNotSupport_noEntitlementContent() {
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false);
-        PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
-        when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
-        screen.addPreference(mFooterPreference);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
-
-        mController.displayPreference(screen);
-
-        ArgumentCaptor<CharSequence> summary = ArgumentCaptor.forClass(CharSequence.class);
-        verify(mFooterPreference).setSummary(summary.capture());
-        assertThat(summary.getValue().toString().contains(TEST_OPERATOR_NAME)).isFalse();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_5"))).isTrue();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_6"))).isFalse();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_7", TEST_OPERATOR_NAME))).isTrue();
     }
 }

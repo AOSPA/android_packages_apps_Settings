@@ -28,6 +28,7 @@ import com.android.settings.core.TogglePreferenceController
 /**
  * Controller that accesses and switches the preference status of the magnification joystick feature
  */
+// LINT.IfChange
 class JoystickPreferenceController(context: Context, prefKey: String) :
     TogglePreferenceController(context, prefKey) {
 
@@ -75,3 +76,4 @@ class JoystickPreferenceController(context: Context, prefKey: String) :
         private val SETTING_KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/JoystickPreferenceController.kt)

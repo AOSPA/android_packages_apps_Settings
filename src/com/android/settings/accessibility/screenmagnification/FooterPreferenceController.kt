@@ -88,9 +88,7 @@ class FooterPreferenceController(context: Context, prefKey: String) :
                     hasSystemFeature(PackageManager.FEATURE_FAKETOUCH)
             }
 
-        val showKeyboardSummary =
-            Flags.enableMagnificationKeyboardControl() &&
-                InputPeripheralsSettingsUtils.isHardKeyboard()
+        val showKeyboardSummary = InputPeripheralsSettingsUtils.isHardKeyboard()
         val showDefaultSummary = hasTouchScreen || !showKeyboardSummary
 
         val stringBuilder = StringBuilder()

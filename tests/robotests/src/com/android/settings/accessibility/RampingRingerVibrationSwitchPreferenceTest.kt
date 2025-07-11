@@ -46,9 +46,8 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowAudioManager::class])
 class RampingRingerVibrationSwitchPreferenceTest {
-    private val vibratorSpy: Vibrator = spy(
-        ApplicationProvider.getApplicationContext<Context>().getSystemService<Vibrator>()!!
-    )
+    private val vibratorSpy: Vibrator =
+        spy(ApplicationProvider.getApplicationContext<Context>().getSystemService<Vibrator>()!!)
 
     private val context: Context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
@@ -59,8 +58,7 @@ class RampingRingerVibrationSwitchPreferenceTest {
                 }
         }
 
-    private val preference =
-        RampingRingerVibrationSwitchPreference(context, TEST_KEY, RING_KEY)
+    private val preference = RampingRingerVibrationSwitchPreference(context, TEST_KEY, RING_KEY)
 
     @Before
     fun setUp() {
@@ -69,45 +67,54 @@ class RampingRingerVibrationSwitchPreferenceTest {
 
     @Test
     fun isAvailable_enabledInTelephony_unavailable() {
-        val newPreference = RampingRingerVibrationSwitchPreference(
-            context,
-            key = TEST_KEY,
-            ringPreferenceKey = RING_KEY,
-            deviceConfig = object : TelephonyConfigProvider {
-                override fun isTelephonyRampingRingerEnabled() = true
-                override fun isVoiceCapable(context: Context) = true
-            }
-        )
+        val newPreference =
+            RampingRingerVibrationSwitchPreference(
+                context,
+                key = TEST_KEY,
+                ringPreferenceKey = RING_KEY,
+                deviceConfig =
+                    object : TelephonyConfigProvider {
+                        override fun isTelephonyRampingRingerEnabled() = true
+
+                        override fun isVoiceCapable(context: Context) = true
+                    },
+            )
 
         assertThat(newPreference.isAvailable(context)).isFalse()
     }
 
     @Test
     fun isAvailable_notVoiceCapable_unavailable() {
-        val newPreference = RampingRingerVibrationSwitchPreference(
-            context,
-            key = TEST_KEY,
-            ringPreferenceKey = RING_KEY,
-            deviceConfig = object : TelephonyConfigProvider {
-                override fun isTelephonyRampingRingerEnabled() = false
-                override fun isVoiceCapable(context: Context) = false
-            }
-        )
+        val newPreference =
+            RampingRingerVibrationSwitchPreference(
+                context,
+                key = TEST_KEY,
+                ringPreferenceKey = RING_KEY,
+                deviceConfig =
+                    object : TelephonyConfigProvider {
+                        override fun isTelephonyRampingRingerEnabled() = false
+
+                        override fun isVoiceCapable(context: Context) = false
+                    },
+            )
 
         assertThat(newPreference.isAvailable(context)).isFalse()
     }
 
     @Test
     fun isAvailable_voiceCapableAndDisabledInTelephony_available() {
-        val newPreference = RampingRingerVibrationSwitchPreference(
-            context,
-            key = TEST_KEY,
-            ringPreferenceKey = RING_KEY,
-            deviceConfig = object : TelephonyConfigProvider {
-                override fun isTelephonyRampingRingerEnabled() = false
-                override fun isVoiceCapable(context: Context) = true
-            }
-        )
+        val newPreference =
+            RampingRingerVibrationSwitchPreference(
+                context,
+                key = TEST_KEY,
+                ringPreferenceKey = RING_KEY,
+                deviceConfig =
+                    object : TelephonyConfigProvider {
+                        override fun isTelephonyRampingRingerEnabled() = false
+
+                        override fun isVoiceCapable(context: Context) = true
+                    },
+            )
 
         assertThat(newPreference.isAvailable(context)).isTrue()
     }
@@ -297,14 +304,12 @@ class RampingRingerVibrationSwitchPreferenceTest {
     private fun setRingIntensityValue(value: Boolean?) =
         SettingsSystemStore.get(context).setBoolean(RING_VIBRATION_INTENSITY, value)
 
-    private fun createWidget(): SwitchPreferenceCompat =
-        preference.createAndBindWidget(context)
+    private fun createWidget(): SwitchPreferenceCompat = preference.createAndBindWidget(context)
 
     private fun bindWidget(widget: SwitchPreferenceCompat) {
-        PreferenceBindingFactory.defaultFactory.getPreferenceBinding(preference)!!.bind(
-            widget,
-            preference
-        )
+        PreferenceBindingFactory.defaultFactory
+            .getPreferenceBinding(preference)!!
+            .bind(widget, preference)
     }
 
     private fun setRingerMode(ringerMode: Int) {

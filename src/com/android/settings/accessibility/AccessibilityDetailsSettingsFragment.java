@@ -21,6 +21,7 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.Activity;
 import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyManager;
@@ -32,12 +33,12 @@ import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
-import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.accessibility.data.AccessibilityRepositoryProvider;
 import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment;
 import com.android.settings.accessibility.screenmagnification.ui.MagnificationPreferenceFragment;
 import com.android.settings.core.InstrumentedFragment;
@@ -77,7 +78,11 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             return;
         }
 
-        if (openAccessibilityDetailsSettingsAndFinish(componentName)) {
+        if (openA11yActivityDetailsAndFinish(componentName)) {
+            return;
+        }
+
+        if (openA11yServiceDetailsAndFinish(componentName)) {
             return;
         }
         // Fall back to open accessibility services list.
@@ -123,12 +128,30 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
         finish();
     }
 
-    private boolean openAccessibilityDetailsSettingsAndFinish(
+    private boolean openA11yActivityDetailsAndFinish(@Nullable ComponentName componentName) {
+        // In case the AccessibilityShortcutInfo doesn't exist, go to ally settings screen.
+        final AccessibilityShortcutInfo shortcutInfo =
+                componentName != null ? AccessibilityRepositoryProvider.get(
+                        requireContext()).getAccessibilityShortcutInfo(componentName) : null;
+        if (shortcutInfo == null) {
+            Log.w(TAG, "openA11yActivityDetailsAndFinish : invalid component name.");
+            return false;
+        }
+        final Bundle bundle = new Bundle();
+        bundle.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
+        openSubSettings(LaunchAccessibilityActivityPreferenceFragment.class.getName(), bundle);
+        finish();
+        return true;
+    }
+
+    private boolean openA11yServiceDetailsAndFinish(
             @Nullable ComponentName componentName) {
         // In case the A11yServiceInfo doesn't exist, go to ally services list.
-        final AccessibilityServiceInfo info = getAccessibilityServiceInfo(componentName);
+        final AccessibilityServiceInfo info =
+                componentName != null ? AccessibilityRepositoryProvider.get(
+                        requireContext()).getAccessibilityServiceInfo(componentName) : null;
         if (info == null) {
-            Log.w(TAG, "openAccessibilityDetailsSettingsAndFinish : invalid component name.");
+            Log.w(TAG, "openA11yServiceDetailsAndFinish : invalid component name.");
             return false;
         }
 
@@ -136,7 +159,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
         if (!isServiceAllowed(info.getResolveInfo().serviceInfo.applicationInfo.uid,
                 componentName.getPackageName())) {
             Log.w(TAG,
-                    "openAccessibilityDetailsSettingsAndFinish: target accessibility service is"
+                    "openA11yServiceDetailsAndFinish: target accessibility service is"
                             + "prohibited by Device Admin or App Op.");
             return false;
         }
@@ -167,25 +190,6 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                 packageName, AppOpsManager.OPSTR_BIND_ACCESSIBILITY_SERVICE);
     }
 
-    private AccessibilityServiceInfo getAccessibilityServiceInfo(ComponentName componentName) {
-        if (componentName == null) {
-            return null;
-        }
-
-        final List<AccessibilityServiceInfo> serviceInfos = AccessibilityManager.getInstance(
-                getActivity()).getInstalledAccessibilityServiceList();
-        final int serviceInfoCount = serviceInfos.size();
-        for (int i = 0; i < serviceInfoCount; i++) {
-            AccessibilityServiceInfo serviceInfo = serviceInfos.get(i);
-            ResolveInfo resolveInfo = serviceInfo.getResolveInfo();
-            if (componentName.getPackageName().equals(resolveInfo.serviceInfo.packageName)
-                    && componentName.getClassName().equals(resolveInfo.serviceInfo.name)) {
-                return serviceInfo;
-            }
-        }
-        return null;
-    }
-
     private Bundle buildArguments(AccessibilityServiceInfo info) {
         final ResolveInfo resolveInfo = info.getResolveInfo();
         final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
@@ -212,6 +216,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
     private static class LaunchFragmentArguments {
         final String mDestination;
         final Bundle mArguments;
+
         LaunchFragmentArguments(@NonNull String destination, @Nullable Bundle arguments) {
             mDestination = Objects.requireNonNull(destination);
             mArguments = arguments;

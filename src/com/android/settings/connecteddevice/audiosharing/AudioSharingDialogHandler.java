@@ -52,7 +52,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -239,12 +238,7 @@ public class AudioSharingDialogHandler {
                             mLocalBtManager, groupedDevices, /* filterByInSharing= */ true);
             AudioSharingStopDialogFragment.DialogEventListener listener =
                     () -> {
-                        if (mLocalBtManager != null
-                                && (Flags.adoptPrimaryGroupManagementApi()
-                                        || (mContext != null
-                                                && Flags.audioSharingDeveloperOption()
-                                                && BluetoothUtils.getAudioSharingPreviewValue(
-                                                        mContext.getContentResolver())))) {
+                        if (mLocalBtManager != null) {
                             LeAudioProfile profile =
                                     mLocalBtManager.getProfileManager().getLeAudioProfile();
                             if (profile != null) {

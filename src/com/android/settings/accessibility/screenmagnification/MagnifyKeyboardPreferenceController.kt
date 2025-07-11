@@ -39,6 +39,7 @@ import com.android.settings.core.TogglePreferenceController
  * Controller that accesses and switches the preference status of magnifying the software keyboard
  * feature.
  */
+// LINT.IfChange
 class MagnifyKeyboardPreferenceController(context: Context, prefKey: String) :
     TogglePreferenceController(context, prefKey), DefaultLifecycleObserver {
     private var preference: Preference? = null
@@ -120,3 +121,4 @@ class MagnifyKeyboardPreferenceController(context: Context, prefKey: String) :
         }
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/MagnifyKeyboardSwitchPreference.kt)

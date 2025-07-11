@@ -44,7 +44,7 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
     override val keywords: Int
         get() = R.string.keywords_vibration
 
-    override fun getMetricsCategory()= SettingsEnums.ACCESSIBILITY_VIBRATION
+    override fun getMetricsCategory() = SettingsEnums.ACCESSIBILITY_VIBRATION
 
     override fun isAvailable(context: Context) =
         context.hasVibrator && context.getSupportedVibrationIntensityLevels() == 1
@@ -77,7 +77,9 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
                     )
                 }
                 +NotificationAlarmVibrationPreferenceCategory(
-                    "toggle_vibration_category_notification_alarm") += {
+                    "toggle_vibration_category_notification_alarm"
+                ) +=
+                    {
                         +NotificationVibrationIntensitySwitchPreference(
                             context,
                             "toggle_notification_vibration_intensity",
@@ -110,7 +112,11 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, VibrationSettingsActivity::class.java, metadata?.key)
+        if (Flags.deeplinkSoundAndVibration25q4()) {
+            makeLaunchIntent(context, VibrationSettingsActivity::class.java, metadata?.key)
+        } else {
+            super.getLaunchIntent(context, metadata)
+        }
 
     companion object {
         const val KEY = "vibration_screen"

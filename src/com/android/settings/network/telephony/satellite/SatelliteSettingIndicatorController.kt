@@ -18,6 +18,8 @@ package com.android.settings.network.telephony.satellite
 import android.content.Context
 import android.os.PersistableBundle
 import android.telephony.CarrierConfigManager
+import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED
+import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
@@ -25,13 +27,14 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.network.telephony.TelephonyBasePreferenceController
 
-/** A controller to control How is work paragraph.  */
+/** A controller to control How is work paragraph. */
 class SatelliteSettingIndicatorController(context: Context?, preferenceKey: String?) :
     TelephonyBasePreferenceController(context, preferenceKey) {
     private var mCarrierConfigs: PersistableBundle = PersistableBundle()
     private var mIsSmsAvailable = false
     private var mIsDataAvailable = false
     private var mIsSatelliteEligible = false
+    private var mDataMode = SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED
     private var screen: PreferenceScreen? = null
 
     fun init(subId: Int, carrierConfigs: PersistableBundle) {
@@ -39,9 +42,14 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
         mCarrierConfigs = carrierConfigs
     }
 
-    fun setCarrierRoamingNtnAvailability(isSmsAvailable: Boolean, isDataAvailable: Boolean) {
+    fun setCarrierRoamingNtnAvailability(
+        isSmsAvailable: Boolean,
+        isDataAvailable: Boolean,
+        dataMode: Int,
+    ) {
         mIsSmsAvailable = isSmsAvailable
         mIsDataAvailable = isDataAvailable
+        mDataMode = dataMode
         mIsSatelliteEligible = isSatelliteEligible()
     }
 
@@ -54,12 +62,12 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
         super.updateState(preference)
         updateHowItWorksContent(
             screen,
-            SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)
+            SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId),
         )
     }
 
     override fun getAvailabilityStatus(subId: Int): Int {
-        return AVAILABLE
+        return AVAILABLE_UNSEARCHABLE
     }
 
     @VisibleForTesting
@@ -68,7 +76,7 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
             return
         }
         /* Composes "How it works" section, which guides how users can use satellite messaging, when
-           satellite messaging is included in user's mobile plan, or it'll will be grey out. */
+        satellite messaging is included in user's mobile plan, or it'll will be grey out. */
         if (!isSatelliteEligible) {
             val category =
                 screen.findPreference<PreferenceCategory?>(PREF_KEY_CATEGORY_HOW_IT_WORKS)
@@ -78,8 +86,12 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
         }
 
         val supportedService: Preference = screen.findPreference(KEY_SUPPORTED_SERVICE)!!
-        if (mIsDataAvailable) {
-            supportedService.setSummary(R.string.summary_supported_service)
+        if (mIsDataAvailable && mDataMode > SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED) {
+            supportedService.setSummary(
+                if (mDataMode == SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED)
+                    R.string.summary_supported_service_with_constrained_data
+                else R.string.summary_supported_service_with_unconstrained_data
+            )
         }
 
         if (!isCarrierRoamingNtnConnectedTypeManual) {
@@ -94,15 +106,17 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
     }
 
     private val isCarrierRoamingNtnConnectedTypeManual: Boolean
-        get() = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL == mCarrierConfigs.getInt(
-            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
-        )
-
+        get() =
+            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL ==
+                mCarrierConfigs.getInt(
+                    CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                    CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+                )
 
     private fun isSatelliteEligible(): Boolean {
-        if (mCarrierConfigs.getInt(CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)
-            == CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
+        if (
+            mCarrierConfigs.getInt(CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT) ==
+                CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
         ) {
             return mIsSmsAvailable
         }
@@ -116,7 +130,6 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
         @VisibleForTesting
         const val KEY_SATELLITE_CONNECTION_GUIDE: String = "key_satellite_connection_guide"
 
-        @VisibleForTesting
-        const val KEY_SUPPORTED_SERVICE: String = "key_supported_service"
+        @VisibleForTesting const val KEY_SUPPORTED_SERVICE: String = "key_supported_service"
     }
 }

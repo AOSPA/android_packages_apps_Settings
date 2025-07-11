@@ -21,6 +21,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_dark_ui_mode"
+  namespace: "accessibility"
+  description: "Migrate dark mode screen to the Catalyst infrastructure"
+  bug: "337243099"
+}
+
+flag {
   name: "catalyst_flash_notifications"
   namespace: "accessibility"
   description: "Migrate flash notification screen to the Catalyst infrastructure"

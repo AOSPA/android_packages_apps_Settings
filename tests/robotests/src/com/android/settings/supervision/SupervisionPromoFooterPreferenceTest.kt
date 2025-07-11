@@ -19,6 +19,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import androidx.core.net.toUri
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -120,42 +121,6 @@ class SupervisionPromoFooterPreferenceTest {
         }
 
     @Test
-    fun onResume_actionIsNull_preferenceIsHidden() =
-        testScope.runTest {
-            val promoPreference =
-                SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
-            preferenceData = PreferenceData(targetPackage = "test.package")
-
-            promoPreference.onResume(preferenceLifecycleContext)
-
-            verify(preferenceLifecycleContext, times(2))
-                .notifyPreferenceChange(KEY) // will trigger binding
-            promoPreference.bind(preference, mock())
-
-            assertThat(preference.isVisible).isFalse()
-            verify(mockPackageManager, never())
-                .queryIntentActivitiesAsUser(any(), any<Int>(), any<Int>())
-        }
-
-    @Test
-    fun onResume_packageIsNull_preferenceIsHidden() =
-        testScope.runTest {
-            val promoPreference =
-                SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
-            preferenceData = PreferenceData(action = "Test Action")
-
-            promoPreference.onResume(preferenceLifecycleContext)
-
-            verify(preferenceLifecycleContext, times(2))
-                .notifyPreferenceChange(KEY) // will trigger binding
-            promoPreference.bind(preference, mock())
-
-            assertThat(preference.isVisible).isFalse()
-            verify(mockPackageManager, never())
-                .queryIntentActivitiesAsUser(any(), any<Int>(), any<Int>())
-        }
-
-    @Test
     fun onResume_emptyPreferenceData_preferenceIsHidden() =
         testScope.runTest {
             val promoPreference =
@@ -177,7 +142,11 @@ class SupervisionPromoFooterPreferenceTest {
         testScope.runTest {
             val promoPreference =
                 SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
-            preferenceData = PreferenceData(action = "Test Action", targetPackage = "test.package")
+            preferenceData =
+                PreferenceData(
+                    action = "Test Action",
+                    intentData = "url",
+                )
 
             mockPackageManager.stub {
                 on { queryIntentActivitiesAsUser(any(), any<Int>(), any<Int>()) }
@@ -198,11 +167,12 @@ class SupervisionPromoFooterPreferenceTest {
         testScope.runTest {
             val promoPreference =
                 SupervisionPromoFooterPreference(preferenceDataProvider, testDispatcher)
+            val intentData = "https://www.familylink.com"
             preferenceData =
                 PreferenceData(
                     title = "Test Title",
                     action = "Test Action",
-                    targetPackage = "test.package",
+                    intentData = intentData,
                 )
 
             mockPackageManager.stub {
@@ -225,6 +195,6 @@ class SupervisionPromoFooterPreferenceTest {
             assertThat(preference.isVisible).isTrue()
             val intent = preference.intent!!
             assertThat(intent.action).isEqualTo("Test Action")
-            assertThat(intent.`package`).isEqualTo("test.package")
+            assertThat(intent.data).isEqualTo(intentData.toUri())
         }
 }

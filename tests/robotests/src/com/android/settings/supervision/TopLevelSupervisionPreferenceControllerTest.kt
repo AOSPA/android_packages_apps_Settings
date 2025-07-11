@@ -17,13 +17,14 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.content.res.Resources
 import androidx.preference.Preference
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
-import com.android.settings.supervision.SupervisionDashboardActivity.Companion.INSTALL_SUPERVISION_APP_ACTION
+import com.android.settings.supervision.SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION
 import com.android.settings.supervision.ipc.SupervisionMessengerClient.Companion.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -114,12 +115,13 @@ class TopLevelSupervisionPreferenceControllerTest {
     }
 
     private fun setUpSupervisionInstallActionResolution(canResolve: Boolean) {
-        val resolveInfoList = if (canResolve) listOf(ResolveInfo()) else listOf()
+        val resolveInfoList =
+            if (canResolve) listOf(ResolveInfo().apply { activityInfo = ActivityInfo() })
+            else listOf()
         mockPackageManager.stub {
             on {
-                    queryIntentActivitiesAsUser(
+                    queryIntentActivities(
                         actionIntentMatcher(INSTALL_SUPERVISION_APP_ACTION),
-                        any<Int>(),
                         any<Int>(),
                     )
                 }

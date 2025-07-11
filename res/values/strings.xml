@@ -912,7 +912,7 @@
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_face_enroll_introduction_no_thanks">Not now</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks">No thanks</string>
     <!-- Button text to start enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_face_enroll_introduction_agree">I agree</string>
     <!-- Button text to scroll to the end of a scrollview. [CHAR LIMIT=30] -->
@@ -1071,7 +1071,7 @@
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks">Not now</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks">No thanks</string>
     <!-- Button text to agree the consent and continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_agree">I agree</string>
     <!-- The content description for rename a fingerprint. [CHAR LIMIT=100] -->
@@ -2225,7 +2225,7 @@
     <!-- External Display settings. When external display is disabled. [CHAR LIMIT=40] -->
     <string name="external_display_off">Off</string>
     <!-- External Display settings. The title of the screen. [CHAR LIMIT=40] -->
-    <string name="external_display_settings_title">External display</string>
+    <string name="external_display_settings_title">External displays</string>
     <!-- Built-in display settings category. Appears in External displays and Connected Displays fragments. -->
     <string name="builtin_display_settings_category">Built-in display</string>
     <!-- External Display use. The title of the use preference. [CHAR LIMIT=40] -->
@@ -11227,9 +11227,9 @@ Data usage charges may apply.</string>
     <!-- Dialog content shown when parental consent is required for the child to set up biometric authentication. [CHAR LIMIT=NONE] -->
     <string name="disabled_by_policy_content_biometric_parental_consent">Hand the phone to your parent to start setting this up</string>
     <!-- Dialog title shown when the user interacts with a restricted setting on a supervised device. [CHAR LIMIT=NONE] -->
-    <string name="disabled_by_policy_title_parental_controls">Restricted by parental controls</string>
+    <string name="disabled_by_policy_title_parental_controls">Ask for help</string>
     <!-- Dialog content shown when the user interacts with a restricted setting on a supervised device. [CHAR LIMIT=NONE] -->
-    <string name="disabled_by_policy_content_parental_controls">Only the person who manages your parental controls can change this setting</string>
+    <string name="disabled_by_policy_content_parental_controls">To change this setting, the person who set up controls for your device or account will need to change it for you.</string>
     <!-- Dialog content shown when parental consent is required for the child to change blocked settings. [CHAR LIMIT=NONE] -->
     <string name="disabled_by_policy_parental_consent">Hand the phone to your parent to allow this setting to be changed.</string>
     <!-- Shown when the user tries to change phone settings that are blocked by their IT admin [CHAR LIMIT=200] -->
@@ -13086,20 +13086,22 @@ Data usage charges may apply.</string>
     <string name="summary_add_satellite_setting">Learn More</string>
     <!-- Category name "How it works" [CHAR_LIMIT=NONE] -->
     <string name="category_name_how_it_works">How it works</string>
-    <!-- Title for satellite connection guide [CHAR_LIMIT=NONE] -->
-    <string name="title_satellite_connection_guide">When you don\u2019t have a mobile or Wi-Fi network</string>
+    <!-- Title for satellite connection guide [CHAR_LIMIT=NONE] [SCREENSHOT=screen/SZtkv3Mx2F3aPPp]-->
+    <string name="title_satellite_connection_guide">When you don\u2019t have a mobile or Wi\u2011Fi network</string>
     <!-- Title for satellite connection guide for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="title_satellite_connection_guide_for_manual_type">Text a phone number</string>
-    <!-- Summary for satellite connection guide [CHAR_LIMIT=NONE] -->
-    <string name="summary_satellite_connection_guide">Your phone will auto-connect to a satellite. For the best connection, keep a clear view of the sky.</string>
+    <!-- Summary for satellite connection guide [CHAR_LIMIT=NONE] [SCREENSHOT=screen/7hKJowp6BKrUYU9]-->
+    <string name="summary_satellite_connection_guide">Your phone will auto\u2011connect to a satellite. For the best connection, keep a clear view of the sky.</string>
     <!-- Summary for satellite connection guide for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="summary_satellite_connection_guide_for_manual_type">If you don\u2019t have a mobile network, you\u2019ll see an option to use satellite.</string>
     <!-- Title for satellite supported service [CHAR_LIMIT=NONE] -->
     <string name="title_supported_service">After your phone connects to a satellite</string>
     <!-- Title for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
     <string name="title_supported_service_for_manual_type">Follow steps to connect to the satellite</string>
-    <!-- Summary for satellite supported service [CHAR_LIMIT=NONE] [SCREENSHOT=screen/6wvz2FKMGAaJBGJ] -->
-    <string name="summary_supported_service">You can text anyone, including emergency services, and use supported apps. Your phone will reconnect to a mobile network when available.</string>
+    <!-- Summary for satellite supported service with constrained data [CHAR_LIMIT=NONE] [SCREENSHOT=screen/4f3njzUdBXbZEAD] -->
+    <string name="summary_supported_service_with_constrained_data">You can text anyone, including emergency services, and use supported apps. Your phone will reconnect to a mobile network when available.</string>
+    <!-- Summary for satellite supported service with unconstrained data [CHAR_LIMIT=NONE] [SCREENSHOT=screen/5CbaRmndawLqiJS] -->
+    <string name="summary_supported_service_with_unconstrained_data">You can text anyone, including emergency services, and use data for apps. Your phone will reconnect to a mobile network when available.</string>
     <!-- Summary for satellite supported service without data supported [CHAR_LIMIT=NONE] [SCREENSHOT=screen/7sidqhHfwNNoacB] -->
     <string name="summary_supported_service_without_data_supported">You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available.</string>
     <!-- Summary for satellite supported service for NTN manual connection type. [CHAR_LIMIT=NONE] -->
@@ -13108,8 +13110,8 @@ Data usage charges may apply.</string>
     <string name="satellite_footer_content_section_0">Keep in mind</string>
     <!-- learn more text - part 1 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
     <string name="satellite_footer_content_section_1">Satellite connectivity may take longer and is available only in some areas.</string>
-    <!-- learn more text - part 2 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
-    <string name="satellite_footer_content_section_2">Weather and certain structures may affect your satellite connection.</string>
+    <!-- learn more text - part 2 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] [SCREENSHOT=screen/5tcJMguULJETqDt] -->
+    <string name="satellite_footer_content_section_2">Weather and certain structures may affect the satellite connection.</string>
     <!-- learn more text - part 3 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
     <string name="satellite_footer_content_section_3">Calling over satellite isn\u2019t available.</string>
     <!-- learn more text - part 4 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
@@ -13132,10 +13134,10 @@ Data usage charges may apply.</string>
     <string name="title_satellite_setting_connectivity">Satellite connectivity</string>
     <!-- Description of satellite function with data transmission [CHAR LIMIT=60] -->
     <string name="description_satellite_setting_connectivity">satellite connectivity</string>
-    <!-- Description of satellite function [CHAR LIMIT=60] -->
-    <string name="description_satellite_setting_messaging">satellite messaging</string>
-    <!-- Title for notifying user's account be able to use data transmission of Satellite" [CHAR_LIMIT=NONE] -->
-    <string name="title_have_satellite_data_plan">Use of supported apps is included with your account</string>
+    <!-- Title for notifying user's account be able to use constrained data transmission of Satellite" [CHAR_LIMIT=NONE] [SCREENSHOT=screen/9FiNr7RKa4j9T8Y]-->
+    <string name="title_have_satellite_constrained_data_plan">Use of supported apps is included with your account</string>
+    <!-- Title for notifying user's account be able to use unconstrained data transmission of Satellite" [CHAR_LIMIT=NONE] [SCREENSHOT=screen/BVG79MF3V43JHHs]-->
+    <string name="title_have_satellite_unconstrained_data_plan">Data for all apps is included with your account</string>
     <!-- Category title for Satellite supported apps info  [CHAR LIMIT=60] -->
     <string name="category_title_satellite_supported_apps">Supported apps on your phone</string>
     <!-- Title for a entry to start apps list page with Satellite service supported.  [CHAR LIMIT=60] -->
@@ -14881,7 +14883,7 @@ Data usage charges may apply.</string>
     <!-- Title on dialog that confirms whether user wants to delete their supervision PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_confirm_header">Delete PIN?</string>
     <!-- Title on dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->
-    <string name="supervision_delete_pin_supervision_enabled_header">Turn off parental controls for other users</string>
+    <string name="supervision_delete_pin_supervision_enabled_header">Can\u2019t delete PIN</string>
     <!-- Title on dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_error_header">PIN can not be deleted</string>
     <!-- Message in dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
@@ -14905,4 +14907,14 @@ Data usage charges may apply.</string>
         <item>.inversePrimary:@sud_system_primary_inverse_light</item>
     </string-array>
 
+    <!-- Title on issue card for Identity Check in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="identity_check_issue_card_title">Identity Check is available on more apps</string>
+    <!-- Summary on issue card for Identity Check in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="identity_check_issue_card_summary">You can secure your identity protection on any app that offers Fingerprint or Face Unlock to identify you</string>
+    <!-- Button text for Identity Check issue card in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="identity_check_issue_card_button_text">View details</string>
+    <!-- Title for Identity Check promo card in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="identity_check_promo_card_title">Use Identity Check to secure more apps</string>
+    <!-- Summary for Identity Check promo card in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="identity_check_promo_card_summary">When you use Identity Check for all apps that support Fingerprint and Face Unlock, you ensure stronger protection and a more consistent experience – without extra setup</string>
 </resources>

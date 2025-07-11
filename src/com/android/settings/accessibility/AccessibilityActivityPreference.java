@@ -30,13 +30,13 @@ import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 /**
  * Preference item for showing an accessibility activity in a preference list
  */
-public class AccessibilityActivityPreference extends RestrictedPreference {
+public class AccessibilityActivityPreference extends TwoTargetPreference {
     // Index of the first preference in a preference category.
     private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
     private static final String TARGET_FRAGMENT =
@@ -46,9 +46,9 @@ public class AccessibilityActivityPreference extends RestrictedPreference {
     private final ComponentName mComponentName;
     private final CharSequence mLabel;
 
-    public AccessibilityActivityPreference(Context context, String packageName, int uid,
-            AccessibilityShortcutInfo a11yShortcutInfo) {
-        super(context, packageName, uid);
+    public AccessibilityActivityPreference(
+            Context context, AccessibilityShortcutInfo a11yShortcutInfo) {
+        super(context);
         mPm = context.getPackageManager();
         mA11yShortcutInfo = a11yShortcutInfo;
         mComponentName = a11yShortcutInfo.getComponentName();

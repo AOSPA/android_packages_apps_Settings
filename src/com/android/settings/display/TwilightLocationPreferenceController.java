@@ -58,7 +58,7 @@ public class TwilightLocationPreferenceController extends BasePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        return mLocationManager.isLocationEnabled() ? DISABLED_DEPENDENT_SETTING
+        return mLocationManager.isLocationEnabled() ? CONDITIONALLY_UNAVAILABLE
                 : AVAILABLE_UNSEARCHABLE;
     }
 

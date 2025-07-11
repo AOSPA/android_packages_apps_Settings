@@ -84,7 +84,6 @@ class SupervisionDashboardLoadingActivityTest {
         testScope.runTest {
             val serviceIntentAction =
                 SupervisionMessengerClient.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
-            val shadowPackageManager = shadowOf(applicationContext.packageManager)
             val fakeServiceClassName = "FakeSupervisionMessengerService"
             val serviceComponentName = ComponentName(testSupervisionPackage, fakeServiceClassName)
             val intentFilter = IntentFilter(serviceIntentAction)
@@ -119,5 +118,26 @@ class SupervisionDashboardLoadingActivityTest {
             }
 
             assertThat(activityScenario.result.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+        }
+
+    @Test
+    fun enableSupervisionApp_noSupervisionComponent_startInstallActivity() =
+        testScope.runTest {
+            val activityComponentName = ComponentName(testSupervisionPackage, "FakeClassName")
+            val intentFilter = IntentFilter(SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION)
+
+            shadowPackageManager.addActivityIfNotPresent(activityComponentName)
+            shadowPackageManager.addIntentFilterForActivity(activityComponentName, intentFilter)
+
+            activityScenario =
+                ActivityScenario.launch(SupervisionDashboardLoadingActivity::class.java)
+            advanceUntilIdle()
+
+            activityScenario.onActivity { activity ->
+                val nextActivity = shadowOf(activity).nextStartedActivity
+                assertThat(nextActivity.action)
+                    .isEqualTo(SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION)
+                assertThat(activity.isFinishing).isTrue()
+            }
         }
 }

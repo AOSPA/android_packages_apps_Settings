@@ -37,7 +37,6 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.flags.Flags;
 
 import com.google.common.collect.ImmutableList;
 
@@ -219,8 +218,7 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
     public void onDestroy() {
         super.onDestroy();
         FragmentActivity activity = getActivity();
-        if (Flags.promoteAudioSharingForSecondAutoConnectedLeaDevice()
-                && activity instanceof AudioSharingJoinHandlerActivity
+        if (activity instanceof AudioSharingJoinHandlerActivity
                 && !activity.isChangingConfigurations()
                 && !activity.isFinishing()) {
             Log.d(TAG, "onDestroy, finish activity = " + activity.getClass().getName());

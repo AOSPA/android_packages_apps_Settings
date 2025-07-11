@@ -147,9 +147,7 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
         assumeTrue(hasRingerModeDependency)
         setRingerMode(AudioManager.RINGER_MODE_SILENT)
         val defaultIntensity = Vibrator.VIBRATION_INTENSITY_HIGH
-        vibratorSpy.stub {
-            on { getDefaultVibrationIntensity(any()) } doReturn defaultIntensity
-        }
+        vibratorSpy.stub { on { getDefaultVibrationIntensity(any()) } doReturn defaultIntensity }
         setValue(true)
         val widget = createWidget()
 
@@ -184,9 +182,10 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
     fun summary_preferenceDisabledByRingerModeSilent_isSilentModeMessage() {
         assumeTrue(hasRingerModeDependency)
         setRingerMode(AudioManager.RINGER_MODE_SILENT)
-        val expectedSummary = context.getString(
-            R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary
-        )
+        val expectedSummary =
+            context.getString(
+                R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary
+            )
         setMainSwitchValue(true)
         setValue(true)
         val widget = createWidget()
@@ -327,9 +326,7 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
     @Test
     fun mainSwitchClick_withDefaultIntensity_doesNotUpdateStoredValue() {
         val defaultIntensity = Vibrator.VIBRATION_INTENSITY_HIGH
-        vibratorSpy.stub {
-            on { getDefaultVibrationIntensity(any()) } doReturn defaultIntensity
-        }
+        vibratorSpy.stub { on { getDefaultVibrationIntensity(any()) } doReturn defaultIntensity }
         setMainSwitchValue(true)
         setValue(true)
         val widget = createWidget()
@@ -367,25 +364,26 @@ abstract class VibrationIntensitySwitchPreferenceTestCase {
         SettingsSystemStore.get(context).setBoolean(VIBRATE_ON, value)
 
     protected fun setValue(value: Boolean?) =
-        SettingsSystemStore.get(context).setInt(
-            preference.settingsProviderKey,
-            value?.let {
-                if (it) {
-                    vibratorSpy.getDefaultVibrationIntensity(any())
-                } else {
-                    Vibrator.VIBRATION_INTENSITY_OFF
-                }
-           },
-        )
+        SettingsSystemStore.get(context)
+            .setInt(
+                preference.settingsProviderKey,
+                value?.let {
+                    if (it) {
+                        vibratorSpy.getDefaultVibrationIntensity(any())
+                    } else {
+                        Vibrator.VIBRATION_INTENSITY_OFF
+                    }
+                },
+            )
 
-    protected fun createWidget(): SwitchPreferenceCompat =
-        preference.createAndBindWidget(context)
+    protected fun createWidget(): SwitchPreferenceCompat = preference.createAndBindWidget(context)
 
     private fun createMainSwitchWidget(): MainSwitchPreference =
         mainSwitchPreference.createAndBindWidget(context)
 
     private fun updatePreferenceBinding(widget: SwitchPreferenceCompat) =
-        PreferenceBindingFactory.defaultFactory.getPreferenceBinding(preference)!!
+        PreferenceBindingFactory.defaultFactory
+            .getPreferenceBinding(preference)!!
             .bind(widget, preference)
 }
 // LINT.ThenChange(VibrationTogglePreferenceControllerTest.java)

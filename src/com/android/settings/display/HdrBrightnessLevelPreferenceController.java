@@ -31,7 +31,14 @@ import com.android.settings.core.SliderPreferenceController;
 import com.android.settingslib.display.BrightnessUtils;
 import com.android.settingslib.widget.SliderPreference;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class HdrBrightnessLevelPreferenceController extends SliderPreferenceController {
+
+    private Locale mLocale;
+    private NumberFormat mNumberFormat;
+    private SliderPreference mPreference;
 
     public HdrBrightnessLevelPreferenceController(@NonNull Context context, @NonNull String key) {
         super(context, key);
@@ -50,11 +57,12 @@ public class HdrBrightnessLevelPreferenceController extends SliderPreferenceCont
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        SliderPreference preference = screen.findPreference(getPreferenceKey());
-        preference.setUpdatesContinuously(true);
-        preference.setMax(getMax());
-        preference.setMin(getMin());
-        preference.setHapticFeedbackMode(SliderPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
+        mPreference = screen.findPreference(getPreferenceKey());
+        mPreference.setUpdatesContinuously(true);
+        mPreference.setMax(getMax());
+        mPreference.setMin(getMin());
+        mPreference.setHapticFeedbackMode(SliderPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
+        mPreference.setSliderStateDescription(formatStateDescription(getSliderPosition()));
     }
 
     @Override
@@ -73,6 +81,7 @@ public class HdrBrightnessLevelPreferenceController extends SliderPreferenceCont
 
     @Override
     public boolean setSliderPosition(int position) {
+        mPreference.setSliderStateDescription(formatStateDescription(position));
         return Settings.Secure.putFloat(mContext.getContentResolver(), HDR_BRIGHTNESS_BOOST_LEVEL,
                 ((float) position) / getMax());
     }
@@ -85,5 +94,25 @@ public class HdrBrightnessLevelPreferenceController extends SliderPreferenceCont
     @Override
     public int getMin() {
         return 0;
+    }
+
+    private CharSequence formatStateDescription(int progress) {
+        Locale curLocale = mContext.getResources().getConfiguration().getLocales().get(0);
+        if (mLocale == null || !mLocale.equals(curLocale)) {
+            mLocale = curLocale;
+            mNumberFormat = NumberFormat.getPercentInstance(mLocale);
+        }
+        return mNumberFormat.format(getPercent(progress));
+    }
+
+    private double getPercent(float progress) {
+        final float maxProgress = getMax();
+        final float minProgress = getMin();
+        final float diffProgress = maxProgress - minProgress;
+        if (diffProgress <= 0.0f) {
+            return 0.0f;
+        }
+        final float percent = (progress - minProgress) / diffProgress;
+        return Math.floor(Math.max(0.0f, Math.min(1.0f, percent)) * 100) / 100;
     }
 }

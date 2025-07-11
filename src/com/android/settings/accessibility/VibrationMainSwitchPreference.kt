@@ -91,8 +91,8 @@ class VibrationMainSwitchPreference(override val key: String) :
 }
 
 /** Provides SettingsStore for vibration main switch with custom default value. */
-class VibrationMainSwitchStore(context: Context, key: String = VIBRATE_ON)
-    : VibrationToggleSettingsStore(
+class VibrationMainSwitchStore(context: Context, key: String = VIBRATE_ON) :
+    VibrationToggleSettingsStore(
         context,
         preferenceKey = key,
         settingsProviderKey = VIBRATE_ON,

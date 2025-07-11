@@ -24,9 +24,9 @@ import android.os.PowerManager
 import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.accessibility.Flags
 import com.android.settings.contract.KEY_DARK_THEME
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.KeyValueStore

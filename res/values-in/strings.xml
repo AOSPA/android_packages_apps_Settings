@@ -215,8 +215,7 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Bahasa mungkin berbeda dari bahasa yang tersedia di aplikasi. Beberapa aplikasi mungkin tidak mendukung setelan ini."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Pilih bahasa untuk setiap aplikasi."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Pilih bahasa untuk setiap aplikasi. Bahasa mungkin berbeda dari bahasa yang tersedia di aplikasi. Beberapa aplikasi mungkin tidak mendukung setelan ini."</string>
-    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
-    <skip />
+    <string name="desc_introduction_of_language_picker" msgid="2164004945569753730">"Perangkat, aplikasi, dan situs menggunakan bahasa pertama yang didukung dari daftar bahasa pilihan Anda."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Untuk memilih bahasa bagi setiap aplikasi, buka setelan bahasa aplikasi."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Pelajari lebih lanjut bahasa aplikasi"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Ubah wilayah menjadi %s?"</string>
@@ -993,7 +992,8 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Mulai ulang"</string>
     <string name="external_display_on" msgid="2560104443500154333">"Aktif"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Nonaktif"</string>
-    <string name="external_display_settings_title" msgid="4690843697498496237">"Layar eksternal"</string>
+    <!-- no translation found for external_display_settings_title (3865786552022665355) -->
+    <skip />
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Layar bawaan"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Gunakan layar eksternal"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolusi layar"</string>
@@ -1219,10 +1219,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Gagal menyimpan jaringan"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Batal"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Lupakan jaringan?"</string>
-    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
-    <skip />
-    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
-    <skip />
+    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Lupakan semua pengguna perangkat?"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> digunakan oleh pengguna lain di perangkat ini, dan semua pengguna jaringan ini harus menyetelnya ulang. Tetap ingin melupakannya?"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 jaringan}other{# jaringan}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 langganan}other{# langganan}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 jaringan &amp; langganan}other{# jaringan &amp; langganan}}"</string>
@@ -2142,7 +2140,7 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Keyboard fisik"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Pemilih tata letak keyboard fisik"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Tombol pantul"</string>
-    <string name="bounce_keys_summary" msgid="8890925059943636911">"Mengabaikan penekanan tombol yang sama secara berulang dan cepat"</string>
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"Abaikan penekanan tombol yang sama secara berulang dan cepat"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Penundaan tombol pantul"</string>
     <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"Pilih berapa lama keyboard mengabaikan penekanan tombol berulang"</string>
     <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0,2 detik"</string>
@@ -3673,6 +3671,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"tampilan standby selalu aktif, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, pembaca"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"keyboard, haptic, getar,"</string>
+    <!-- no translation found for keywords_external_display_settings (4717990369488386495) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volume dan getaran"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume media"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Volume Google Cast"</string>
@@ -3857,22 +3857,17 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Berita utama, editorial, dan lainnya"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Suka, postingan, dan lainnya"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Newsletter, saran media, dan lainnya"</string>
-    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
-    <skip />
+    <string name="notification_ai_features_title" msgid="2241618579100257538">"Kelola dengan AI"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Ringkasan notifikasi"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Dapatkan ringkasan cepat dari pesan yang panjang"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Gunakan ringkasan notifikasi"</string>
-    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
-    <skip />
+    <string name="notification_summarization_description" msgid="3185465631219791854">"Ringkas pesan panjang dan percakapan grup untuk mendapatkan rangkuman singkat.\n\nRingkasan menggunakan AI di perangkat Anda, yang terkadang dapat membuat kesalahan. Pesan Anda tidak pernah dikirim ke Google."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Notifikasi dari aplikasi ini tidak akan diringkas"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Kelola aplikasi"</string>
-    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
-    <skip />
+    <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Kelola aplikasi untuk ringkasan notifikasi"</string>
     <string name="notification_excluded_apps" msgid="317898848790046528">"Jangan sertakan aplikasi ini"</string>
-    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
-    <skip />
-    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
-    <skip />
+    <string name="notification_app_level_summarize_title" msgid="488390574186154905">"Ringkasan notifikasi"</string>
+    <string name="notification_app_level_summarize_subtext" msgid="2064371198044287108">"Dapatkan ringkasan cepat dari pesan yang panjang"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notifikasi terbaru"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Info terbaru langsung"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Menampilkan notifikasi yang sesuai waktu dan berkelanjutan di status bar dan layar kunci"</string>
@@ -4026,16 +4021,11 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Terapkan ke aplikasi profil kerja"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Pengatur notifikasi"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Gabungkan dan senyapkan notifikasi dengan prioritas yang lebih rendah"</string>
-    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
-    <skip />
-    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
-    <skip />
-    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
-    <skip />
-    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
-    <skip />
+    <string name="notification_bundle_main_control_title" msgid="6413211155343788835">"Gunakan pengatur notifikasi"</string>
+    <string name="notification_bundle_description" msgid="4202633316211056848">"Pilih jenis notifikasi yang ingin Anda senyapkan dan gabungkan untuk meminimalkan gangguan.\n\nPengatur menggunakan AI di perangkat Anda, yang terkadang dapat membuat kesalahan. Notifikasi Anda tidak pernah dikirim ke Google."</string>
+    <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Pengatur notifikasi"</string>
+    <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Gabungkan dan senyapkan notifikasi dengan prioritas yang lebih rendah"</string>
+    <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Kelola aplikasi untuk pengatur notifikasi"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Terapkan ke aplikasi profil kerja"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Layanan bantuan VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Tidak ada aplikasi terinstal yang meminta dijalankan sebagai layanan bantuan VR"</string>
@@ -5919,4 +5909,14 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Terjadi error saat mencoba menghapus PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animasi <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Tidak dapat mengaktifkan kontrol"</string>
+    <!-- no translation found for identity_check_issue_card_title (864543931965445926) -->
+    <skip />
+    <!-- no translation found for identity_check_issue_card_summary (5216214598056911479) -->
+    <skip />
+    <!-- no translation found for identity_check_issue_card_button_text (9194407367671256494) -->
+    <skip />
+    <!-- no translation found for identity_check_promo_card_title (1495226082133610343) -->
+    <skip />
+    <!-- no translation found for identity_check_promo_card_summary (5745161401829550512) -->
+    <skip />
 </resources>

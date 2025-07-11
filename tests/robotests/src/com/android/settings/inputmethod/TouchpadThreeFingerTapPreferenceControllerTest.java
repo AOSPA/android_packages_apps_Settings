@@ -16,8 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
-
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
@@ -29,9 +27,6 @@ import static org.mockito.Mockito.verify;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.InputDevice;
 
@@ -62,8 +57,6 @@ import org.robolectric.annotation.Config;
 public class TouchpadThreeFingerTapPreferenceControllerTest {
     @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
     @Mock
     LifecycleOwner mLifecycleOwner;
 
@@ -80,7 +73,6 @@ public class TouchpadThreeFingerTapPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.hardware.input.Flags.FLAG_TOUCHPAD_THREE_FINGER_TAP_SHORTCUT)
     public void getAvailabilityStatus_flagEnabledHasTouchPad() {
         int deviceId = 1;
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
@@ -91,22 +83,10 @@ public class TouchpadThreeFingerTapPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.hardware.input.Flags.FLAG_TOUCHPAD_THREE_FINGER_TAP_SHORTCUT)
     public void getAvailabilityStatus_flagEnabledNoTouchPad() {
         int deviceId = 1;
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
                 InputDevice.SOURCE_BLUETOOTH_STYLUS);
-        ShadowInputDevice.addDevice(deviceId, device);
-
-        assertEquals(mController.getAvailabilityStatus(), CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
-    @DisableFlags(com.android.hardware.input.Flags.FLAG_TOUCHPAD_THREE_FINGER_TAP_SHORTCUT)
-    public void getAvailabilityStatus_flagDisabled() {
-        int deviceId = 1;
-        InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
-                InputDevice.SOURCE_TOUCHPAD);
         ShadowInputDevice.addDevice(deviceId, device);
 
         assertEquals(mController.getAvailabilityStatus(), CONDITIONALLY_UNAVAILABLE);

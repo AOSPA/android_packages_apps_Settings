@@ -248,4 +248,10 @@
     <style name="SettingsSudThemeGlif.Light" parent="@style/SudThemeGlif.Light">
         <item name="android:background">@color/settingslib_materialColorSurfaceContainerLowest</item>
     </style>
+
+    <style name="IdentityCheckPromoCardActivityTheme" parent="@style/Theme.MaterialComponents.DayNight">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
 </resources>

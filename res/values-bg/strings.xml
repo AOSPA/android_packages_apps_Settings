@@ -215,8 +215,7 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Езикът може да се различава от езиците, налични в приложението. Възможно е някои приложения да не поддържат тази настройка."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Изберете език за всяко приложение."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Изберете език за всяко приложение. Той може да се различава от езиците, налични в приложението. Възможно е някои приложения да не поддържат тази настройка."</string>
-    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
-    <skip />
+    <string name="desc_introduction_of_language_picker" msgid="2164004945569753730">"Устройството ви, приложенията и уебсайтовете използват първия поддържан език от списъка ви с предпочитани езици."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"За да изберете език за всяко отделно приложение, отворете настройките за език на приложенията."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Научете повече за езиците на приложенията"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Искате ли да промените региона на %s?"</string>
@@ -993,7 +992,8 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Рестартиране"</string>
     <string name="external_display_on" msgid="2560104443500154333">"Вкл."</string>
     <string name="external_display_off" msgid="5634413756025351374">"Изкл."</string>
-    <string name="external_display_settings_title" msgid="4690843697498496237">"Външен екран"</string>
+    <!-- no translation found for external_display_settings_title (3865786552022665355) -->
+    <skip />
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Вграден екран"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Използване на външен екран"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Разделителна способност на екрана"</string>
@@ -1219,10 +1219,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Запазването на мрежата не бе успешно"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Отказ"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Да се забрави ли мрежата?"</string>
-    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
-    <skip />
-    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
-    <skip />
+    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Да се забравят ли всички потребители на устройството?"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> се използва от други потребители на това устройство и всички потребители на тази мрежа ще трябва да я настроят отново. Искате ли да бъде забравена въпреки това?"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 мрежа}other{# мрежи}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 абонамент}other{# абонамента}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 мрежа и абонамент}other{# мрежи и абонамента}}"</string>
@@ -2157,10 +2155,10 @@
     <string name="slow_keys_summary" msgid="3852534180402969185">"Промяна на времето, през което трябва да задържите клавиш, преди да бъде регистриран"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Фиксирани клавиши"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Натискайте клавишите от съответните комбинации един по един, вместо да ги задържате заедно"</string>
-    <string name="mouse_keys" msgid="6237254627808525540">"Бутони на мишката"</string>
-    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Използване на бутоните на мишката"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Клавиши за мишката"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Използване на клавишите за мишката"</string>
     <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Пряк път за „Клавиши за мишката“"</string>
-    <string name="mouse_keys_summary" msgid="6512910710030108693">"Използвайте клавиатурата, за да управлявате курсора"</string>
+    <string name="mouse_keys_summary" msgid="6512910710030108693">"Използване на клавиатурата за управление на курсора"</string>
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"Скорост"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Намаляване"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"Увеличаване"</string>
@@ -2182,12 +2180,12 @@
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Ускоряване на курсора"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"При по-бързи движения с мишката курсорът ще се премества по-далеч"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Бутони на мишката за <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
-    <string name="mouse_keys_directional_summary" msgid="2215425656757420699">"Използвайте клавишите <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>, за да местите курсора на мишката"</string>
-    <string name="mouse_keys_click_summary" msgid="8271700153598258484">"Използвайте клавиша <xliff:g id="CLICK_LABEL">%s</xliff:g>, за да кликнете с основния бутон на мишката"</string>
-    <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Използвайте клавиша <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>, за да натиснете и задържите основния бутон на мишката"</string>
+    <string name="mouse_keys_directional_summary" msgid="2215425656757420699">"Използвайте клавишите „<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>“, за да местите курсора на мишката"</string>
+    <string name="mouse_keys_click_summary" msgid="8271700153598258484">"Използвайте клавиша „<xliff:g id="CLICK_LABEL">%s</xliff:g>“, за да кликнете с основния бутон на мишката"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Използвайте клавиша „<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>“, за да натиснете и задържите основния бутон на мишката"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Използвайте клавиша „<xliff:g id="RELEASE_LABEL">%s</xliff:g>“, за да освободите основния бутон на мишката"</string>
-    <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"Използвайте клавиша „<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>“, за да превключвате режима на превъртане. По този начин клавишите <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> ще превключват изгледа нагоре, надолу, наляво или надясно"</string>
-    <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Използвайте клавиша <xliff:g id="RELEASE_2_LABEL">%s</xliff:g>, за да кликнете с вторичния бутон на мишката"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"Използвайте клавиша „<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>“, за да превключвате режима на превъртане. По този начин клавишите „<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>“ ще превключват изгледа нагоре, надолу, наляво или надясно"</string>
+    <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"Използвайте клавиша „<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>“, за да кликнете с вторичния бутон на мишката"</string>
     <string name="mouse_keys_acceleration_seekbar_title" msgid="2329098889930361504">"Ускоряване"</string>
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"Бърза"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"Бавна"</string>
@@ -3673,6 +3671,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"винаги включен фонов дисплей, дисплей, открояващ важни неща"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, маркер, четец"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"клавиатура, осезателна обратна връзка, вибриране,"</string>
+    <!-- no translation found for keywords_external_display_settings (4717990369488386495) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Сила на звука и вибриране"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Сила на звука за мултимедия"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Сила на звука на Google Cast"</string>
@@ -3857,22 +3857,17 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Водещи материали, редакторски статии и др."</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Харесвания, публикации и др."</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Бюлетини, препоръчани медии и др."</string>
-    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
-    <skip />
+    <string name="notification_ai_features_title" msgid="2241618579100257538">"Управление с AI"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Обобщения на известията"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Получавайте кратка обзорна информация за по-дългите съобщения"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Използване на обобщения на известията"</string>
-    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
-    <skip />
+    <string name="notification_summarization_description" msgid="3185465631219791854">"Обобщавайте дълги съобщения и групови разговори, за да получавате кратка обзорна информация.\n\nОбобщенията използват AI на устройството ви, който понякога може да прави грешки. Съобщенията ви никога не се изпращат до Google."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Известията от тези приложения няма да бъдат обобщавани"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Управление на приложенията"</string>
-    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
-    <skip />
+    <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Управление на приложенията за обобщенията на известията"</string>
     <string name="notification_excluded_apps" msgid="317898848790046528">"Без включване на тези приложения"</string>
-    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
-    <skip />
-    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
-    <skip />
+    <string name="notification_app_level_summarize_title" msgid="488390574186154905">"Обобщения на известията"</string>
+    <string name="notification_app_level_summarize_subtext" msgid="2064371198044287108">"Получавайте кратка обзорна информация за по-дългите съобщения"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Известия в реално време"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Актуализации на живо"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Показване на текущите и ограничени във времето известия в лентата на състоянието и на заключения екран"</string>
@@ -4026,16 +4021,11 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Прилагане за приложенията в служебния потребителски профил"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Инструмент за организиране на известията"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Групиране и заглушаване на известията с по-нисък приоритет"</string>
-    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
-    <skip />
-    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
-    <skip />
-    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
-    <skip />
-    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
-    <skip />
+    <string name="notification_bundle_main_control_title" msgid="6413211155343788835">"Използване на инструмента за организиране на известията"</string>
+    <string name="notification_bundle_description" msgid="4202633316211056848">"Изберете типовете известия, които искате да заглушите и групирате, за да намалите прекъсванията.\n\nИнструментът за организиране използва AI на устройството ви, който понякога може да прави грешки. Известията ви никога не се изпращат до Google."</string>
+    <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Инструмент за организиране на известията"</string>
+    <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Групиране и заглушаване на известията с по-нисък приоритет"</string>
+    <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Управление на приложенията за инструмента за организиране на известията"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Прилагане за приложенията в служебния потребителски профил"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Помощни услуги за VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Никое инсталирано приложение не е заявило да се изпълнява като помощна услуга за VR."</string>
@@ -5921,4 +5911,14 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"При опита за изтриване на ПИН кода възникна грешка."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Анимация за <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Контролите не могат да бъдат включени"</string>
+    <!-- no translation found for identity_check_issue_card_title (864543931965445926) -->
+    <skip />
+    <!-- no translation found for identity_check_issue_card_summary (5216214598056911479) -->
+    <skip />
+    <!-- no translation found for identity_check_issue_card_button_text (9194407367671256494) -->
+    <skip />
+    <!-- no translation found for identity_check_promo_card_title (1495226082133610343) -->
+    <skip />
+    <!-- no translation found for identity_check_promo_card_summary (5745161401829550512) -->
+    <skip />
 </resources>

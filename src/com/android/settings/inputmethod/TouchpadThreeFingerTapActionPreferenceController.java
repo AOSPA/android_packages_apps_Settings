@@ -27,7 +27,6 @@ import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.hardware.input.InputGestureData;
 import android.hardware.input.InputManager;
-import android.hardware.input.InputSettings;
 import android.hardware.input.KeyGestureEvent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -105,13 +104,7 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
 
     @Override
     public int getAvailabilityStatus() {
-        boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
-        if (mPreferenceKey.equals(APP_KEY)
-                && !InputSettings.isTouchpadThreeFingerTapShortcutFeatureFlagEnabled()) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
-        return (InputSettings.isTouchpadThreeFingerTapShortcutFeatureFlagEnabled() && isTouchpad)
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return InputPeripheralsSettingsUtils.isTouchpad() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

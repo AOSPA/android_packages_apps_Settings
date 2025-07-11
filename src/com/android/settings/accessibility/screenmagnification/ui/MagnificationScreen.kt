@@ -25,9 +25,10 @@ import com.android.settings.Settings.MagnificationActivity
 import com.android.settings.accessibility.Flags
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.ProvidePreferenceScreen
 import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(MagnificationScreen.KEY)
@@ -64,6 +65,17 @@ open class MagnificationScreen : PreferenceScreenMixin {
         preferenceHierarchy(context) {
             +MagnificationTopIntroPreference()
             +MagnificationIllustrationPreference()
+            +PreferenceCategory(
+                "general_categories",
+                R.string.accessibility_screen_option
+            ) += {
+                +MagnifyKeyboardSwitchPreference()
+                +FollowTypingSwitchPreference()
+                +OneFingerPanningSwitchPreference()
+                +AlwaysOnSwitchPreference()
+                +JoystickSwitchPreference()
+                +FollowKeyboardSwitchPreference()
+            }
         }
 
     companion object {

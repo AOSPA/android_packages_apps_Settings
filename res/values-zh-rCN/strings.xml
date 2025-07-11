@@ -215,8 +215,7 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"语言可能与应用中可用的语言不同。部分应用可能不支持此设置。"</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"为每个应用选择语言。"</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"为每个应用选择语言。可选的语言或许会不同于应用支持的语言。某些应用可能不支持此设置。"</string>
-    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
-    <skip />
+    <string name="desc_introduction_of_language_picker" msgid="2164004945569753730">"设备、应用和网站会使用首选语言列表中的第一个受支持的语言。"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"如需为每个应用选择语言，请进入应用语言设置页面。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"详细了解应用语言"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"要将地区更改为%s吗？"</string>
@@ -993,7 +992,8 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"重启"</string>
     <string name="external_display_on" msgid="2560104443500154333">"已打开"</string>
     <string name="external_display_off" msgid="5634413756025351374">"已关闭"</string>
-    <string name="external_display_settings_title" msgid="4690843697498496237">"外接显示器"</string>
+    <!-- no translation found for external_display_settings_title (3865786552022665355) -->
+    <skip />
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"内置显示屏"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"使用外接显示器"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"显示分辨率"</string>
@@ -1219,10 +1219,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"无法保存网络"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"取消"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"要取消保存网络吗？"</string>
-    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
-    <skip />
-    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
-    <skip />
+    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"要取消保存所有设备用户吗？"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"“<xliff:g id="NETWORK_NAME">%1$s</xliff:g>”已被此设备上的其他用户使用，使用此网络的所有用户都需要重新设置网络。仍要取消保存此网络吗？"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 个网络}other{# 个网络}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 项订阅}other{# 项订阅}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 个网络和订阅}other{# 个网络和订阅}}"</string>
@@ -2183,11 +2181,11 @@
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"鼠标移动得越快，光标移动得越远"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"“<xliff:g id="KEYBOARD_NAME">%s</xliff:g>”的鼠标键"</string>
     <string name="mouse_keys_directional_summary" msgid="2215425656757420699">"按“<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>”键可移动鼠标指针"</string>
-    <string name="mouse_keys_click_summary" msgid="8271700153598258484">"按“<xliff:g id="CLICK_LABEL">%s</xliff:g>”键表示点击鼠标主键"</string>
-    <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"按“<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>”键表示按住鼠标主键"</string>
+    <string name="mouse_keys_click_summary" msgid="8271700153598258484">"按“<xliff:g id="CLICK_LABEL">%s</xliff:g>”键可点击鼠标主键"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"按“<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>”键可按住鼠标主键"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"按“<xliff:g id="RELEASE_LABEL">%s</xliff:g>”键可松开鼠标主键"</string>
-    <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"按“<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>”键可切换滚动模式，这样按“<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>”键就会将视图向上、向下、向左或向右滚动"</string>
-    <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"按“<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>”键表示点击鼠标辅助键"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"按“<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>”键可切换滚动模式，这样按“<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>”键就会向上、向下、向左或向右滚动视图"</string>
+    <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"按“<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>”键可点击鼠标辅助键"</string>
     <string name="mouse_keys_acceleration_seekbar_title" msgid="2329098889930361504">"加速"</string>
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"快速"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"慢速"</string>
@@ -3675,6 +3673,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"氛围屏保始终保持开启状态, AOD, always on ambient display, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, 标签, tag, 读取器, reader"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"键盘、触感反馈、振动、"</string>
+    <!-- no translation found for keywords_external_display_settings (4717990369488386495) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"音量和振动"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"媒体音量"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast 音量"</string>
@@ -3860,22 +3860,17 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"热门报道、社论…"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"点赞、帖子…"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"简报、推荐的媒体…"</string>
-    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
-    <skip />
+    <string name="notification_ai_features_title" msgid="2241618579100257538">"利用 AI 进行管理"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"通知摘要"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"快速掌握长消息的重点"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"使用通知摘要"</string>
-    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
-    <skip />
+    <string name="notification_summarization_description" msgid="3185465631219791854">"总结长消息和群组对话内容，快速生成重点摘要。\n\n摘要使用设备上的 AI 技术生成，有时可能会出错。您的消息绝不会发送给 Google。"</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"系统不会总结来自这些应用的通知"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"管理应用"</string>
-    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
-    <skip />
+    <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"管理用于总结通知的应用"</string>
     <string name="notification_excluded_apps" msgid="317898848790046528">"排除这些应用"</string>
-    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
-    <skip />
-    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
-    <skip />
+    <string name="notification_app_level_summarize_title" msgid="488390574186154905">"通知摘要"</string>
+    <string name="notification_app_level_summarize_subtext" msgid="2064371198044287108">"快速掌握长消息的重点"</string>
     <string name="live_notifications" msgid="4650406646292963831">"实时通知"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"实时动态"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"在状态栏和锁定的屏幕上显示具有时效性的持续性通知"</string>
@@ -4029,16 +4024,11 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"应用于工作资料应用"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"通知整理工具"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"对优先级较低的通知进行整合并静音"</string>
-    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
-    <skip />
-    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
-    <skip />
-    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
-    <skip />
-    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
-    <skip />
+    <string name="notification_bundle_main_control_title" msgid="6413211155343788835">"使用通知整理工具"</string>
+    <string name="notification_bundle_description" msgid="4202633316211056848">"选择您要将哪些通知类型静音并归为一组来减少干扰。\n\n整理工具会在设备上使用 AI，因此有时可能会出错。系统绝不会将您的通知发送给 Google。"</string>
+    <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"通知整理工具"</string>
+    <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"对优先级较低的通知进行整合并静音"</string>
+    <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"管理用于整理通知的应用"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"应用于工作资料应用"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服务"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"没有任何已安装的应用请求以 VR 助手服务的形式运行。"</string>
@@ -5939,4 +5929,14 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"尝试删除 PIN 码时出错。"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"“<xliff:g id="FEATURE">%1$s</xliff:g>”动画"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"无法开启控制功能"</string>
+    <!-- no translation found for identity_check_issue_card_title (864543931965445926) -->
+    <skip />
+    <!-- no translation found for identity_check_issue_card_summary (5216214598056911479) -->
+    <skip />
+    <!-- no translation found for identity_check_issue_card_button_text (9194407367671256494) -->
+    <skip />
+    <!-- no translation found for identity_check_promo_card_title (1495226082133610343) -->
+    <skip />
+    <!-- no translation found for identity_check_promo_card_summary (5745161401829550512) -->
+    <skip />
 </resources>

@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,9 +46,8 @@ import com.google.android.setupdesign.GlifPreferenceLayout;
 public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPreferenceFragment {
 
     @Override
-    public void addPreferencesFromResource(int preferencesResId) {
-        super.addPreferencesFromResource(preferencesResId);
-
+    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         adjustPreviewPaddingsForSetupWizard();
     }
 

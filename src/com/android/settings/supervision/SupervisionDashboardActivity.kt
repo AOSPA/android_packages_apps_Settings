@@ -33,19 +33,31 @@ class SupervisionDashboardActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (shouldRedirectToFullSupervision()) {
+            val intent =
+                Intent(FULL_SUPERVISION_REDIRECT_ACTION).setPackage(systemSupervisionPackageName)
+            startActivity(intent)
+            finish()
+        }
+
         // If the supervision package doesn't have the necessary components, the dashboard can't be
         // directly loaded.
         if (!hasNecessarySupervisionComponent(matchAll = true)) {
             // Check if the app provides any mitigating actions and trigger them if so.
-            if (systemSupervisionPackageName != null) {
-                val installIntent =
-                    Intent(INSTALL_SUPERVISION_APP_ACTION).setPackage(systemSupervisionPackageName)
-                if (
-                    packageManager
-                        .queryIntentActivitiesAsUser(installIntent, 0, userId)
-                        .isNotEmpty()
-                ) {
+            val installActivityInfo = getSupervisionAppInstallActivityInfo()
+            if (installActivityInfo != null) {
+                if (installActivityInfo.isEnabled()) {
+                    // There is a mitigating action available, launch it.
+                    val installIntent =
+                        Intent(SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION)
+                            .setPackage(installActivityInfo.packageName)
                     startActivity(installIntent)
+                } else {
+                    // There is a mitigating action available, but the component is disabled.
+                    // Launch the loading screen to try to enable it.
+                    val loadingActivity =
+                        Intent(this, SupervisionDashboardLoadingActivity::class.java)
+                    startActivity(loadingActivity)
                 }
             }
             finish()
@@ -59,13 +71,6 @@ class SupervisionDashboardActivity :
             startActivity(loadingActivity)
             finish()
             return
-        }
-
-        if (shouldRedirectToFullSupervision()) {
-            val intent =
-                Intent(FULL_SUPERVISION_REDIRECT_ACTION).setPackage(systemSupervisionPackageName)
-            startActivity(intent)
-            finish()
         }
     }
 
@@ -82,7 +87,5 @@ class SupervisionDashboardActivity :
 
     companion object {
         const val FULL_SUPERVISION_REDIRECT_ACTION = "android.app.supervision.action.VIEW_SETTINGS"
-        const val INSTALL_SUPERVISION_APP_ACTION =
-            "android.app.supervision.action.INSTALL_SUPERVISION_APP"
     }
 }

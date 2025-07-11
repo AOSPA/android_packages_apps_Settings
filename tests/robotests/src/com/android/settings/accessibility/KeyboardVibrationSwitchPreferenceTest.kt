@@ -48,9 +48,8 @@ class KeyboardVibrationSwitchPreferenceTest {
     private val resourcesSpy: Resources =
         spy(ApplicationProvider.getApplicationContext<Context>().resources)
 
-    private val vibratorSpy: Vibrator = spy(
-        ApplicationProvider.getApplicationContext<Context>().getSystemService<Vibrator>()!!
-    )
+    private val vibratorSpy: Vibrator =
+        spy(ApplicationProvider.getApplicationContext<Context>().getSystemService<Vibrator>()!!)
 
     private val context: Context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
@@ -267,14 +266,12 @@ class KeyboardVibrationSwitchPreferenceTest {
     private fun setMainVibrationValue(value: Boolean?) =
         SettingsSystemStore.get(context).setBoolean(Settings.System.VIBRATE_ON, value)
 
-    private fun createWidget(): SwitchPreferenceCompat =
-        preference.createAndBindWidget(context)
+    private fun createWidget(): SwitchPreferenceCompat = preference.createAndBindWidget(context)
 
     private fun bindWidget(widget: SwitchPreferenceCompat) {
-        PreferenceBindingFactory.defaultFactory.getPreferenceBinding(preference)!!.bind(
-            widget,
-            preference
-        )
+        PreferenceBindingFactory.defaultFactory
+            .getPreferenceBinding(preference)!!
+            .bind(widget, preference)
     }
 }
 // LINT.ThenChange(keyboardVibrationTogglePreferenceControllerTest.java)

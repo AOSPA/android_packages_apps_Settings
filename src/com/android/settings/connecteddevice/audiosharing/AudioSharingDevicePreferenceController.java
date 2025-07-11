@@ -403,8 +403,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             Log.d(TAG, "Ignore onProfileConnectionStateChanged, not init correctly");
             return;
         }
-        if (Flags.promoteAudioSharingForSecondAutoConnectedLeaDevice() && mBroadcast.isEnabled(
-                null)) {
+        if (mBroadcast.isEnabled(null)) {
             Log.d(TAG, "Ignore onProfileConnectionStateChanged, in broadcast");
             // Device connected in broadcast will be handled in sysui via settingslib
             return;

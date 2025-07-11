@@ -44,6 +44,6 @@ class AmbientWallpaperPreference(context: Context) :
         const val KEY = DOZE_ALWAYS_ON_WALLPAPER_ENABLED
 
         private val Context.dataStore: KeyValueStore
-            get() = SettingsSecureStore.get(this).apply { setDefaultValue(KEY, true) }
+            get() = SettingsSecureStore.get(this).apply { setDefaultValue(KEY, false) }
     }
 }

@@ -29,7 +29,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.supervision.SupervisionDashboardActivity.Companion.FULL_SUPERVISION_REDIRECT_ACTION
-import com.android.settings.supervision.SupervisionDashboardActivity.Companion.INSTALL_SUPERVISION_APP_ACTION
+import com.android.settings.supervision.SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.ipc.MessengerServiceRule
@@ -56,7 +56,7 @@ import org.robolectric.shadows.ShadowContextImpl
 class SupervisionDashboardActivityTest {
     private val context = ApplicationProvider.getApplicationContext<Context>()
     private val shadowPackageManager = shadowOf(context.packageManager)
-    private val mockSupervisionManager = mock<RoleManager>()
+    private val mockRoleManager = mock<RoleManager>()
 
     @get:Rule
     val serviceRule =
@@ -67,18 +67,21 @@ class SupervisionDashboardActivityTest {
     @Before
     fun setup() {
         Shadow.extract<ShadowContextImpl>((context as Application).baseContext).apply {
-            setSystemService(Context.ROLE_SERVICE, mockSupervisionManager)
+            setSystemService(Context.ROLE_SERVICE, mockRoleManager)
         }
         SettingsShadowResources.overrideResource(
             com.android.internal.R.string.config_systemSupervision,
             TEST_SUPERVISION_PACKAGE,
         )
+        mockRoleManager.stub {
+            on { getRoleHolders(RoleManager.ROLE_SUPERVISION) } doReturn emptyList()
+        }
     }
 
     @Test
     fun hasNecessaryComponent_enabled_loadInitialFragment() = runTest {
         // Setup necessary supervision component to be present
-        mockSupervisionManager.stub {
+        mockRoleManager.stub {
             on { getRoleHolders(eq(RoleManager.ROLE_SYSTEM_SUPERVISION)) } doReturn
                 listOf(TEST_SUPERVISION_PACKAGE)
         }
@@ -95,7 +98,7 @@ class SupervisionDashboardActivityTest {
     @Test
     fun hasNecessaryComponent_disabled_startLoadingActivityAndFinishSelf() = runTest {
         // No supervision component to be present
-        mockSupervisionManager.stub {
+        mockRoleManager.stub {
             on { getRoleHolders(eq(RoleManager.ROLE_SYSTEM_SUPERVISION)) } doReturn
                 listOf(TEST_SUPERVISION_PACKAGE)
         }
@@ -116,7 +119,7 @@ class SupervisionDashboardActivityTest {
     @Test
     fun hasNecessaryComponentEnabled_enabled_fullySupervised_intentResolved_redirect() = runTest {
         // Setup necessary supervision component to be present
-        mockSupervisionManager.stub {
+        mockRoleManager.stub {
             on { getRoleHolders(any()) } doReturn listOf(TEST_SUPERVISION_PACKAGE)
         }
         setUpMessengerServiceComponent(disabled = false)
@@ -135,10 +138,6 @@ class SupervisionDashboardActivityTest {
     @Test
     fun hasNecessaryComponent_enabled_notFullySupervised_doNotRedirect() = runTest {
         // Setup necessary supervision component to be present
-        mockSupervisionManager.stub {
-            on { getRoleHolders(eq(RoleManager.ROLE_SYSTEM_SUPERVISION)) } doReturn
-                listOf(TEST_SUPERVISION_PACKAGE)
-        }
         setUpMessengerServiceComponent(disabled = false)
         setUpRedirectActivityComponent(FULL_SUPERVISION_REDIRECT_ACTION)
 
@@ -154,10 +153,7 @@ class SupervisionDashboardActivityTest {
 
     @Test
     fun hasNecessaryComponent_enabled_redirectIntentNotResolved_doNotRedirect() = runTest {
-        // Setup necessary supervision component to be present
-        mockSupervisionManager.stub {
-            on { getRoleHolders(any()) } doReturn listOf(TEST_SUPERVISION_PACKAGE)
-        }
+        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn emptyList() }
         setUpMessengerServiceComponent(disabled = false)
 
         val activityScenario = ActivityScenario.launch(SupervisionDashboardActivity::class.java)
@@ -172,10 +168,7 @@ class SupervisionDashboardActivityTest {
 
     @Test
     fun noNecessaryComponent_appInstallIntentNotResolved_doNotRedirect() = runTest {
-        // Setup necessary supervision component to be present
-        mockSupervisionManager.stub {
-            on { getRoleHolders(any()) } doReturn listOf(TEST_SUPERVISION_PACKAGE)
-        }
+        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn emptyList() }
         val activityScenario = ActivityScenario.launch(SupervisionDashboardActivity::class.java)
         val nextActivityIntent = shadowOf(context as Application).nextStartedActivity
 
@@ -188,10 +181,6 @@ class SupervisionDashboardActivityTest {
 
     @Test
     fun noNecessaryComponent_appInstallIntentResolved_redirectAppInstall() = runTest {
-        // Setup necessary supervision component to be present
-        mockSupervisionManager.stub {
-            on { getRoleHolders(any()) } doReturn listOf(TEST_SUPERVISION_PACKAGE)
-        }
         setUpRedirectActivityComponent(INSTALL_SUPERVISION_APP_ACTION)
 
         val activityScenario = ActivityScenario.launch(SupervisionDashboardActivity::class.java)
@@ -199,6 +188,21 @@ class SupervisionDashboardActivityTest {
 
         // Check that the app install activity is started
         assertThat(nextActivityIntent.action).isEqualTo(INSTALL_SUPERVISION_APP_ACTION)
+
+        // Check that the dashboard activity is finished
+        assertThat(activityScenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+    }
+
+    @Test
+    fun noNecessaryComponent_appInstallIntentResolvedButDisabled_startLoadingActivity() = runTest {
+        setUpRedirectActivityComponent(INSTALL_SUPERVISION_APP_ACTION, disabled = true)
+
+        val activityScenario = ActivityScenario.launch(SupervisionDashboardActivity::class.java)
+        val nextActivityIntent = shadowOf(context as Application).nextStartedActivity
+
+        // Check that the loading activity is started
+        assertThat(nextActivityIntent.component?.className)
+            .isEqualTo(SupervisionDashboardLoadingActivity::class.java.name)
 
         // Check that the dashboard activity is finished
         assertThat(activityScenario.state).isEqualTo(Lifecycle.State.DESTROYED)
@@ -222,12 +226,19 @@ class SupervisionDashboardActivityTest {
         shadowPackageManager.addIntentFilterForService(serviceComponentName, intentFilter)
     }
 
-    private fun setUpRedirectActivityComponent(action: String) {
+    private fun setUpRedirectActivityComponent(action: String, disabled: Boolean = false) {
         val redirectComponentName = ComponentName(TEST_SUPERVISION_PACKAGE, TEST_REDIRECT_ACTIVITY)
         val intentFilter = IntentFilter(action)
 
         shadowPackageManager.addActivityIfNotPresent(redirectComponentName)
         shadowPackageManager.addIntentFilterForActivity(redirectComponentName, intentFilter)
+        if (disabled) {
+            context.packageManager.setApplicationEnabledSetting(
+                TEST_SUPERVISION_PACKAGE,
+                COMPONENT_ENABLED_STATE_DISABLED,
+                /* flags= */ 0,
+            )
+        }
     }
 
     companion object {

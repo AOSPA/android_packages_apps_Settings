@@ -64,8 +64,10 @@ public class ConfigureWifiSettings extends DashboardFragment {
         super.onAttach(context);
         if (isGuestUser(context)) return;
 
-        mWifiWakeupPreferenceController = use(WifiWakeupPreferenceController.class);
-        mWifiWakeupPreferenceController.setFragment(this);
+        if (!isCatalystEnabled()) {
+            mWifiWakeupPreferenceController = use(WifiWakeupPreferenceController.class);
+            mWifiWakeupPreferenceController.setFragment(this);
+        }
     }
 
     @Override

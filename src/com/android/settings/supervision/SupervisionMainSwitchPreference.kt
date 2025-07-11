@@ -64,6 +64,7 @@ class SupervisionMainSwitchPreference(
     private val supervisionMainSwitchStorage = SupervisionMainSwitchStorage(context)
     private var preferenceDataMap: Map<String, PreferenceData>? = null
     private lateinit var lifeCycleContext: PreferenceLifecycleContext
+    private var pendingNewValue: Boolean? = null
 
     override val key
         get() = KEY
@@ -141,14 +142,17 @@ class SupervisionMainSwitchPreference(
         if (resultCode == Activity.RESULT_OK) {
             val mainSwitchPreference = lifeCycleContext.requirePreference<MainSwitchPreference>(KEY)
 
-            // Value only needs to be toggled in the non-setup case. The setup flow will
-            // unconditionally enable supervision internally when successful.
+            // Determine the new switch value based on the request code.
+            // For setup, as setup activity will always set the value to true,
+            // we need to use the pending value.
+            // For confirmation, toggle the current value.
             val newValue =
                 if (requestCode == REQUEST_CODE_SET_UP_SUPERVISION) {
-                    true
+                    pendingNewValue ?: false
                 } else {
                     !supervisionMainSwitchStorage.getBoolean(KEY)!!
                 }
+            pendingNewValue = null
             mainSwitchPreference.setChecked(newValue)
             lifeCycleContext.notifyPreferenceChange(KEY)
             updateDependentPreferencesEnabledState(mainSwitchPreference, newValue)
@@ -198,6 +202,7 @@ class SupervisionMainSwitchPreference(
         // If supervision is being toggled but either the supervising profile hasn't been
         // created or the credentials aren't set, launch SetupSupervisionActivity.
         if (!preference.context.isSupervisingCredentialSet) {
+            pendingNewValue = newValue
             val intent = Intent(lifeCycleContext, SetupSupervisionActivity::class.java)
             lifeCycleContext.startActivityForResult(intent, REQUEST_CODE_SET_UP_SUPERVISION, null)
             return false

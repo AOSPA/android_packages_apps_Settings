@@ -31,20 +31,21 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
 import com.google.common.truth.Truth.assertThat
+import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.Rule
 
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.robolectric.RobolectricTestParameterInjector
 import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
 
 @Config(shadows = [ShadowInputDevice::class])
-@RunWith(RobolectricTestRunner::class)
+@RunWith(RobolectricTestParameterInjector::class)
 class FollowKeyboardSwitchPreferenceTest {
     @get:Rule(order = 0) val settingsStoreRule = SettingsStoreRule()
 
-    private val context : Context = ApplicationProvider.getApplicationContext()
+    private val context: Context = ApplicationProvider.getApplicationContext()
     private val preference = FollowKeyboardSwitchPreference()
 
     @Test
@@ -66,58 +67,44 @@ class FollowKeyboardSwitchPreferenceTest {
     }
 
     @Test
-    fun performClick_switchOn_assertSwitchOff() {
+    @TestParameters(
+        value =
+            [
+                "{settingsEnabled: false, expectedChecked: true}",
+                "{settingsEnabled: true, expectedChecked: false}",
+            ]
+    )
+    fun performClick(settingsEnabled: Boolean, expectedChecked: Boolean) {
         getStorage().setBoolean(
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED, true)
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED, settingsEnabled)
         val preferenceWidget = createFollowKeyboardWidget()
-        assertThat(preferenceWidget.isChecked).isTrue()
+        assertThat(preferenceWidget.isChecked).isEqualTo(settingsEnabled)
 
         preferenceWidget.performClick()
 
-        assertThat(preferenceWidget.isChecked).isFalse()
-        assertThat(getStorage().getBoolean(
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED)).isFalse()
+        assertThat(preferenceWidget.isChecked).isEqualTo(expectedChecked)
+        assertThat(
+            getStorage().getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED)
+        ).isEqualTo(expectedChecked)
     }
 
     @Test
-    fun performClick_switchOff_assertSwitchOn() {
-        getStorage().setBoolean(
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED, false)
-        val preferenceWidget = createFollowKeyboardWidget()
-        assertThat(preferenceWidget.isChecked).isFalse()
+    @TestParameters(
+        value =
+            [
+                "{inSetupWizard: false, hasHardwareKeyboard: false, expectedAvailable: false}",
+                "{inSetupWizard: false, hasHardwareKeyboard: true, expectedAvailable: true}",
+                "{inSetupWizard: true, hasHardwareKeyboard: false, expectedAvailable: false}",
+                "{inSetupWizard: true, hasHardwareKeyboard: true, expectedAvailable: false}",
 
-        preferenceWidget.performClick()
-
-        assertThat(preferenceWidget.isChecked).isTrue()
-        assertThat(getStorage().getBoolean(
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED)).isTrue()
-    }
-
-    @Test
-    fun isAvailable_inSetupWizard_isUnavailable() {
-        assertIsAvailable(
-            inSetupWizard = true,
-            hasHardwareKeyboard = true,
-            expectedAvailability = false,
-        )
-    }
-
-    @Test
-    fun isAvailable_noHardwareKeyboard_isUnavailable() {
-        assertIsAvailable(
-            inSetupWizard = false,
-            hasHardwareKeyboard = false,
-            expectedAvailability = false,
-        )
-    }
-
-    @Test
-    fun isAvailable_hasHardwareKeyboard_isAvailable() {
-        assertIsAvailable(
-            inSetupWizard = false,
-            hasHardwareKeyboard = true,
-            expectedAvailability = true,
-        )
+            ]
+    )
+    fun isAvailable(
+        inSetupWizard: Boolean,
+        hasHardwareKeyboard: Boolean,
+        expectedAvailable: Boolean,
+    ) {
+        assertIsAvailable(inSetupWizard, hasHardwareKeyboard, expectedAvailable)
     }
 
     private fun assertIsAvailable(

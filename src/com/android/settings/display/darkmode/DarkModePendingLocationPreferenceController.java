@@ -46,7 +46,7 @@ public class DarkModePendingLocationPreferenceController extends BasePreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return isActive() ? AVAILABLE_UNSEARCHABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

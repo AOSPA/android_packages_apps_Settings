@@ -65,15 +65,16 @@ class VibrationToggleSettingsStoreTest {
                 settingsProviderKey = SETTINGS_KEY,
                 keyValueStoreDelegate = settingsStore,
                 defaultValue = DEFAULT_VALUE,
-                dependencyStore = VibrationIntensitySettingsStore(
-                    context,
-                    preferenceKey = "some_key",
-                    settingsProviderKey = Settings.System.ALARM_VIBRATION_INTENSITY,
-                    vibrationUsage = VibrationAttributes.USAGE_ALARM,
-                    defaultIntensity = Vibrator.VIBRATION_INTENSITY_MEDIUM,
-                    supportedIntensityLevels = 3,
-                    keyValueStoreDelegate = settingsStore,
-                )
+                dependencyStore =
+                    VibrationIntensitySettingsStore(
+                        context,
+                        preferenceKey = "some_key",
+                        settingsProviderKey = Settings.System.ALARM_VIBRATION_INTENSITY,
+                        vibrationUsage = VibrationAttributes.USAGE_ALARM,
+                        defaultIntensity = Vibrator.VIBRATION_INTENSITY_MEDIUM,
+                        supportedIntensityLevels = 3,
+                        keyValueStoreDelegate = settingsStore,
+                    ),
             )
         settingsStore.setBoolean(Settings.System.ALARM_VIBRATION_INTENSITY, null)
         assertThat(testStore.isPreferenceEnabled()).isTrue()

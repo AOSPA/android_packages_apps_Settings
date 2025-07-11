@@ -57,12 +57,13 @@ class RampingRingerVibrationSwitchPreference(
             context,
             preferenceKey = key,
             settingsProviderKey = APPLY_RAMPING_RINGER,
-            dependencyStore = VibrationIntensitySettingsStore(
-                context,
-                preferenceKey = ringPreferenceKey,
-                settingsProviderKey = RING_VIBRATION_INTENSITY,
-                vibrationUsage = USAGE_RINGTONE,
-            ),
+            dependencyStore =
+                VibrationIntensitySettingsStore(
+                    context,
+                    preferenceKey = ringPreferenceKey,
+                    settingsProviderKey = RING_VIBRATION_INTENSITY,
+                    vibrationUsage = USAGE_RINGTONE,
+                ),
         )
     }
 

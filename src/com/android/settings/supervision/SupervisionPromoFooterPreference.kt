@@ -20,6 +20,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.android.settings.R
@@ -62,8 +63,7 @@ class SupervisionPromoFooterPreference(
         if (initialized) {
             val context = preference.context
             val targetIntent =
-                Intent(preferenceData?.action).apply {
-                    `package` = preferenceData?.targetPackage
+                Intent(preferenceData?.action, preferenceData?.intentData?.toUri()).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
             intent = if (targetIntent.isValid(context)) targetIntent else null
@@ -123,9 +123,7 @@ class SupervisionPromoFooterPreference(
     }
 
     private fun Intent.isValid(context: Context) =
-        action != null &&
-            `package` != null &&
-            context.packageManager.queryIntentActivitiesAsUser(this, 0, context.userId).isNotEmpty()
+        context.packageManager.queryIntentActivitiesAsUser(this, 0, context.userId).isNotEmpty()
 
     companion object {
         const val KEY = "promo_footer"

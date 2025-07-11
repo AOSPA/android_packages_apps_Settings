@@ -24,7 +24,7 @@ import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_R
 import static android.telephony.NetworkRegistrationInfo.SERVICE_TYPE_DATA;
 import static android.telephony.NetworkRegistrationInfo.SERVICE_TYPE_SMS;
 
-import static com.android.settings.network.telephony.satellite.SatelliteCarrierSettingUtils.isSatelliteDataRestricted;
+import static com.android.settings.network.telephony.satellite.SatelliteCarrierSettingUtils.getSatelliteDataMode;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -121,14 +121,13 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
     }
 
     void updateRoamingNtnAvailabilityToController(boolean isSmsAvailable, boolean isDataAvailable) {
-        boolean isDataAvailableAndNotRestricted = isDataAvailable && !isSatelliteDataRestricted(
-                getContext(), mSubId);
+        int satelliteDataMode = getSatelliteDataMode(getContext(), mSubId);
         use(SatelliteAppListCategoryController.class).setCarrierRoamingNtnAvailability(
-                isSmsAvailable, isDataAvailableAndNotRestricted);
+                isSmsAvailable, isDataAvailable, satelliteDataMode);
         use(SatelliteSettingAccountInfoController.class).setCarrierRoamingNtnAvailability(
-                isSmsAvailable, isDataAvailableAndNotRestricted);
+                isSmsAvailable, isDataAvailable, satelliteDataMode);
         use(SatelliteSettingIndicatorController.class).setCarrierRoamingNtnAvailability(
-                isSmsAvailable, isDataAvailableAndNotRestricted);
+                isSmsAvailable, isDataAvailable, satelliteDataMode);
         forceUpdatePreferences();
     }
 

@@ -55,6 +55,18 @@ class SupervisionDashboardLoadingActivity : FragmentActivity() {
                 0,
             )
 
+            // The package doesn't have the necessary component at all, check for the mitigating
+            // action instead.
+            if (!hasNecessarySupervisionComponent(matchAll = true)) {
+                while ((getSupervisionAppInstallActivityInfo()?.isEnabled() ?: false) == false) {
+                    delay(100) // Check every 100 ms (adjust as needed)
+                }
+                lifecycleScope.launch(Dispatchers.Main) {
+                    startActivity(getSupervisionAppInstallIntent())
+                    finish()
+                    return@launch
+                }
+            }
             // Update category after enabling supervision app
             CategoryMixin(this@SupervisionDashboardLoadingActivity).updateCategories()
             val dashboardFeatureProvider = featureFactory.dashboardFeatureProvider
