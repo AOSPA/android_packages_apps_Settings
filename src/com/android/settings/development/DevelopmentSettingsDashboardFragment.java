@@ -94,6 +94,8 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 import com.android.settingslib.search.SearchIndexable;
 
+import co.aospa.settings.development.HideDeveloperStatusPreferenceController;
+
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
@@ -847,6 +849,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new GrammaticalGenderPreferenceController(context));
         controllers.add(new SensitiveContentProtectionPreferenceController(context));
         controllers.add(new ShadeDisplayAwarenessPreferenceController(context));
+        controllers.add(new HideDeveloperStatusPreferenceController(context));
 
         return controllers;
     }
