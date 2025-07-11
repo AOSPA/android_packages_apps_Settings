@@ -19,6 +19,12 @@
                   android:key="development_prefs_screen"
                   android:title="@string/development_settings_title">
 
+    <Preference
+        android:key="hide_developer_status_settings"
+        android:title="@string/hide_developer_status_title"
+        android:summary="@string/hide_developer_status_summary"
+        android:fragment="co.aospa.settings.development.HideDeveloperStatusSettings" />
+
     <PreferenceCategory
         android:key="debug_misc_category"
         android:order="100">
