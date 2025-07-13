@@ -29,7 +29,6 @@ import androidx.preference.PreferenceScreen
 import com.android.internal.accessibility.common.ShortcutConstants
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE
-import com.android.internal.accessibility.util.ShortcutUtils
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilitySettingsContentObserver.ContentObserverCallback
 import com.android.settings.core.BasePreferenceController
@@ -92,9 +91,9 @@ open class ToggleShortcutPreferenceController(context: Context, key: String) :
     override fun updateState(preference: Preference?) {
         if (preference as? ShortcutPreference != null && componentName != null) {
             preference.isChecked =
-                ShortcutUtils.getEnabledShortcutTypes(
+                AccessibilityUtil.getUserShortcutTypesFromSettings(
                     mContext,
-                    getComponentNameAsString()
+                    componentName!!
                 ) != UserShortcutType.DEFAULT
         }
         refreshSummary(preference)

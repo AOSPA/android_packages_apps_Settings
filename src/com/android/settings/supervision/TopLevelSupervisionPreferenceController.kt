@@ -20,7 +20,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.preference.Preference
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.supervision.SupervisionDashboardActivity.Companion.INSTALL_SUPERVISION_APP_ACTION
 
 /** Controller for the top level Supervision settings Preference item. */
 class TopLevelSupervisionPreferenceController(context: Context, key: String) :
@@ -41,20 +40,12 @@ class TopLevelSupervisionPreferenceController(context: Context, key: String) :
             mContext.hasNecessarySupervisionComponent(matchAll = true)
         if (
             !Flags.enableSupervisionSettingsScreen() ||
-                !hasNecessarySupervisionComponent && !supervisionAppSupportsInstallAction()
+                (!hasNecessarySupervisionComponent &&
+                    mContext.getSupervisionAppInstallActivityInfo() == null)
         ) {
             return UNSUPPORTED_ON_DEVICE
         }
 
         return AVAILABLE
-    }
-
-    private fun supervisionAppSupportsInstallAction(): Boolean {
-        val supervisionPackage: String =
-            mContext.resources.getString(com.android.internal.R.string.config_systemSupervision)
-        val intent = Intent(INSTALL_SUPERVISION_APP_ACTION).setPackage(supervisionPackage)
-        return mContext.packageManager
-            .queryIntentActivitiesAsUser(intent, 0, mContext.userId)
-            .isNotEmpty()
     }
 }

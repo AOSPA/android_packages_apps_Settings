@@ -21,6 +21,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
@@ -42,6 +43,7 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 import java.util.Optional;
 
+// LINT.IfChange
 @SearchIndexable
 public class ZenModesListFragment extends ZenModesFragmentBase {
 
@@ -136,6 +138,11 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
                                 mode.getId(), getMetricsCategory()).launch());
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ZenModesListScreen.KEY;
+    }
+
     /**
      * For Search.
      */
@@ -158,3 +165,4 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
                 }
             };
 }
+// LINT.ThenChange(ZenModesListScreen.kt)

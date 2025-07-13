@@ -94,10 +94,7 @@ open class PictureInPictureAppDetailScreen(context: Context, arguments: Bundle) 
         fun parameters(context: Context, showSystemApp: Boolean) =
             parameters(context, showSystemApp, ::hasPictureInPictureActivity)
 
-        private fun hasPictureInPictureActivity(
-            context: Context,
-            appInfo: ApplicationInfo?,
-        ): Boolean {
+        fun hasPictureInPictureActivity(context: Context, appInfo: ApplicationInfo?): Boolean {
             if (appInfo == null) return false
             val packageInfo =
                 try {

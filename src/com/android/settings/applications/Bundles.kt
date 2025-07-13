@@ -19,6 +19,7 @@ package com.android.settings.applications
 import android.os.Bundle
 
 private const val KEY_PACKAGE_NAME = "pkg"
+private const val KEY_INTENT_SOURCE = "source"
 
 /** Saves a package name to [Bundle] with key [KEY_PACKAGE_NAME]. */
 fun String.toArguments(capacity: Int = 1) =
@@ -27,3 +28,11 @@ fun String.toArguments(capacity: Int = 1) =
 /** Returns the package name in Bundle with key [KEY_PACKAGE_NAME]. */
 val Bundle.packageName: String
     get() = getString(KEY_PACKAGE_NAME)!!
+
+/**
+ * Returns where the [Bundle] is coming from with key [KEY_INTENT_SOURCE].
+ *
+ * <p> Indicates where this intent is coming from.
+ */
+val Bundle.source: String
+    get() = getString(KEY_INTENT_SOURCE, "")

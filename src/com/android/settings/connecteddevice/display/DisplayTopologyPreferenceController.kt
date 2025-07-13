@@ -176,6 +176,9 @@ class DisplayTopologyPreferenceController(
 
     @VisibleForTesting
     fun refreshPane() {
+        if (!this::paneContent.isInitialized) {
+            return
+        }
         val topology = injector.displayTopology
         if (topology == null) {
             // This occurs when no topology is active.

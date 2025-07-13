@@ -260,6 +260,22 @@ class SupervisionHelperTest {
         assertThat(context.hasNecessarySupervisionComponent(testPackageName, true)).isTrue()
     }
 
+    @Test
+    fun getSupervisionAppInstallActivityInfo() {
+        val testPackageName = "com.android.supervision"
+        mockResources.stub {
+            on { getString(com.android.internal.R.string.config_systemSupervision) }
+                .thenReturn(testPackageName)
+        }
+
+        setUpInstallSupervisionAppComponent(packageName = testPackageName)
+
+        val info = context.getSupervisionAppInstallActivityInfo()
+        assertThat(info).isNotNull()
+        assertThat(info?.packageName).isEqualTo(testPackageName)
+        assertThat(info?.componentName?.className).isEqualTo("FakeInstallComponent")
+    }
+
     private fun setUpMessengerServiceComponent(packageName: String, disabled: Boolean) {
         val serviceComponentName = ComponentName(packageName, "FakeSupervisionMessengerService")
         val intentFilter =
@@ -275,6 +291,14 @@ class SupervisionHelperTest {
 
         shadowPackageManager.addServiceIfNotPresent(serviceComponentName)
         shadowPackageManager.addIntentFilterForService(serviceComponentName, intentFilter)
+    }
+
+    private fun setUpInstallSupervisionAppComponent(packageName: String) {
+        val installComponentName = ComponentName(packageName, "FakeInstallComponent")
+        val intentFilter = IntentFilter(SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION)
+
+        shadowPackageManager.addActivityIfNotPresent(installComponentName)
+        shadowPackageManager.addIntentFilterForActivity(installComponentName, intentFilter)
     }
 
     private fun contextOf(roleManager: RoleManager?): Context =

@@ -215,8 +215,7 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Die Sprache kann von den in der App verfügbaren Sprachen abweichen. Einige Apps unterstützen diese Einstellung möglicherweise nicht."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Wähle die Sprache für jede App aus."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Wähle die Sprache für jede App aus. Sie kann von den in der App verfügbaren Sprachen abweichen. Einige Apps unterstützen diese Einstellung möglicherweise nicht."</string>
-    <!-- no translation found for desc_introduction_of_language_picker (2164004945569753730) -->
-    <skip />
+    <string name="desc_introduction_of_language_picker" msgid="2164004945569753730">"Dein Gerät, deine Apps und deine Websites verwenden die erste deiner bevorzugten Sprachen, die unterstützt wird."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Unter „App-Sprachen“ kannst du für jede App eine andere Sprache festlegen."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Weitere Informationen zu App-Sprachen"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Region ändern zu „%s“?"</string>
@@ -993,7 +992,8 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Neu starten"</string>
     <string name="external_display_on" msgid="2560104443500154333">"An"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Aus"</string>
-    <string name="external_display_settings_title" msgid="4690843697498496237">"Externes Display"</string>
+    <!-- no translation found for external_display_settings_title (3865786552022665355) -->
+    <skip />
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Integriertes Display"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Externes Display verwenden"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Displayauflösung"</string>
@@ -1219,10 +1219,8 @@
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Netzwerk konnte nicht gespeichert werden."</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Abbrechen"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"Netzwerk entfernen?"</string>
-    <!-- no translation found for shared_wifi_forget_dialog_title (741401954205753903) -->
-    <skip />
-    <!-- no translation found for shared_wifi_forget_dialog_message (2832563880561408585) -->
-    <skip />
+    <string name="shared_wifi_forget_dialog_title" msgid="741401954205753903">"Netzwerk für alle Nutzer des Geräts entfernen?"</string>
+    <string name="shared_wifi_forget_dialog_message" msgid="2832563880561408585">"Da „<xliff:g id="NETWORK_NAME">%1$s</xliff:g>“ auch von anderen Nutzern auf diesem Gerät verwendet wird, muss das Netzwerk von allen Nutzern neu eingerichtet werden. Möchtest du es trotzdem entfernen?"</string>
     <string name="wifi_saved_access_points_summary" msgid="6637163320524940353">"{count,plural, =1{1 Netzwerk}other{# Netzwerke}}"</string>
     <string name="wifi_saved_passpoint_access_points_summary" msgid="8939933724918673785">"{count,plural, =1{1 Abo}other{# Abos}}"</string>
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 Netzwerk und Abo}other{# Netzwerke und Abos}}"</string>
@@ -2154,7 +2152,7 @@
     <string name="input_setting_bounce_keys_seekbar_desc" msgid="4575595566548124309">"Bounce-Tasten – Grenzwert (Zeit)"</string>
     <string name="input_setting_slow_keys_seekbar_desc" msgid="2171726970136563995">"Anschlagverz. – Grenzwert (Zeit)"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Anschlagverzögerung"</string>
-    <string name="slow_keys_summary" msgid="3852534180402969185">"Lege fest, wie lange du eine Taste gedrückt halten musst, damit sie erfasst wird"</string>
+    <string name="slow_keys_summary" msgid="3852534180402969185">"Festlegen, wie lange du eine Taste gedrückt halten musst, damit sie erfasst wird"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Einfingerbedienung"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Bei Tastenkombinationen Tasten einzeln drücken, statt sie zusammen gedrückt zu halten"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Tastaturmaus"</string>
@@ -2473,8 +2471,8 @@
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Du kannst auf dem Display schnell heranzoomen, um Inhalte zu vergrößern"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über den Kurzbefehl&lt;br/&gt; {1,number,integer}. Tippe auf das Display&lt;br/&gt; {2,number,integer}. Ziehe mit zwei Fingern, um den angezeigten Bildschirmausschnitt zu ändern&lt;br/&gt; {3,number,integer}. Ziehe zwei Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; {4,number,integer}. Beende die Vergrößerung über den Kurzbefehl&lt;br/&gt;&lt;br/&gt; &lt;b&gt;So zoomst du vorübergehend heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Achte darauf, dass als Art der Vergrößerung „Vollbild“ ausgewählt ist&lt;br/&gt; {1,number,integer}. Starte die Vergrößerung über den Kurzbefehl&lt;br/&gt; {2,number,integer}. Halte eine beliebige Stelle auf dem Display gedrückt&lt;br/&gt; {3,number,integer}. Ziehe mit dem Finger, um den angezeigten Bildschirmausschnitt zu ändern&lt;br/&gt; {4,number,integer}. Hebe den Finger, um die Vergrößerung zu beenden"</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;Zoomen mit der Tastatur:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Tastenkombination&lt;br/&gt; {1,number,integer}. Halte &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; und &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; gedrückt und drücke auf „+“ oder „-“, um heran- oder herauszuzoomen&lt;br/&gt; {2,number,integer}. Halte &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; und &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; gedrückt und drücke die Pfeiltasten, um dich auf dem Bildschirm zu bewegen&lt;br/&gt; {3,number,integer}. Verwende die Tastenkombination, um die Vergrößerung zu beenden."</string>
-    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Touch-Geste für Bedienungshilfen&lt;br/&gt; {1,number,integer}. Tippe auf das Display&lt;br/&gt; {2,number,integer}. Ziehe mit 2 Fingern, um den angezeigten Bildschirmausschnitt zu verschieben&lt;br/&gt; {3,number,integer}. Ziehe 2 Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; {4,number,integer}. Stoppe die Vergrößerung über die Touch-Geste für Bedienungshilfen&lt;br/&gt;&lt;br/&gt; Du kannst auch vorübergehend heranzoomen und mehr."</string>
-    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Touch-Geste für Bedienungshilfen&lt;br/&gt; {1,number,integer}. Tippe auf das Display&lt;br/&gt; {2,number,integer}. Ziehe mit 1 oder 2 Fingern, um den angezeigten Bildschirmausschnitt zu verschieben&lt;br/&gt; {3,number,integer}. Ziehe 2 Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; {4,number,integer}. Stoppe die Vergrößerung über die Touch-Geste für Bedienungshilfen&lt;br/&gt;&lt;br/&gt; Du kannst auch vorübergehend heranzoomen und mehr."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Touchgeste für Bedienungshilfen&lt;br/&gt; {1,number,integer}. Tippe auf das Display&lt;br/&gt; {2,number,integer}. Ziehe mit 2 Fingern, um den angezeigten Bildschirmausschnitt zu verschieben&lt;br/&gt; {3,number,integer}. Ziehe 2 Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; {4,number,integer}. Stoppe die Vergrößerung über die Touchgeste für Bedienungshilfen&lt;br/&gt;&lt;br/&gt; Du kannst auch vorübergehend heranzoomen und mehr."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Touchgeste für Bedienungshilfen&lt;br/&gt; {1,number,integer}. Tippe auf das Display&lt;br/&gt; {2,number,integer}. Ziehe mit 1 oder 2 Fingern, um den angezeigten Bildschirmausschnitt zu verschieben&lt;br/&gt; {3,number,integer}. Ziehe 2 Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; {4,number,integer}. Stoppe die Vergrößerung über die Touchgeste für Bedienungshilfen&lt;br/&gt;&lt;br/&gt; Du kannst auch vorübergehend heranzoomen und mehr."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Wenn die Vergrößerung aktiviert ist, kannst du Elemente auf dem Bildschirm heranzoomen.\n\n"<b>"Wenn du zoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm.\n"<ul><li>"Zum Scrollen ziehe mit zwei oder mehr Fingern"</li>\n<li>"Zum Anpassen des Zooms ziehe zwei oder mehr Finger zusammen bzw. auseinander"</li></ul>\n\n<b>"Wenn du vorübergehend heranzoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm und halte sie gedrückt.\n"<ul><li>"Wenn du den angezeigten Bildschirmausschnitt verschieben möchtest, ziehe den Bildschirm"</li>\n<li>"Zum Herauszoomen hebe den Finger"</li></ul>\n\n"In die Tastatur oder Navigationsleiste kann nicht hineingezoomt werden."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Seite <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> von <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Kurzbefehl: Schaltfläche „Bedienungshilfen“"</string>
@@ -2482,7 +2480,7 @@
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Kurzbefehl: 3-mal tippen"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Kurzbefehl: Doppeltippen mit %1$d Fingern"</string>
     <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Verknüpfung für die Schnelleinstellungen"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Kurzbefehl für Touch-Geste für Bedienungshilfen"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Kurzbefehl für Touchgeste für Bedienungshilfen"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Tippe zum Verwenden dieser Funktion unten auf dem Display auf die Schaltfläche „Bedienungshilfen“ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nWenn du zwischen den Funktionen wechseln möchtest, halte diese Schaltfläche gedrückt."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Tippe zum Verwenden dieser Funktion auf dem Display auf die Schaltfläche „Bedienungshilfen“"</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Halte zum Verwenden dieser Funktion beide Lautstärketasten gedrückt"</string>
@@ -2490,7 +2488,7 @@
     <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"Tippe zum Starten und Beenden der Vergrößerung schnell %1$d-mal auf das Display"</string>
     <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"Tippe zum Starten und Beenden der Vergrößerung schnell 2-mal mit %1$d Fingern auf das Display"</string>
     <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Wische zum Verwenden dieser Funktion vom oberen Displayrand nach unten. Suche dann nach der Kachel „{featureName}“.}other{Wische zum Verwenden dieser Funktion mit # Fingern vom oberen Displayrand nach unten. Suche dann nach der Kachel „{featureName}“.}}"</string>
-    <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Diese Touch-Geste ist nach Abschluss der Geräteeinrichtung verfügbar."</string>
+    <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Diese Touchgeste ist nach Abschluss der Geräteeinrichtung verfügbar."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Wenn du diese Funktion verwenden möchtest, wische vom unteren Displayrand mit zwei Fingern nach oben.\n\nWenn du zwischen den Funktionen wechseln möchtest, wische mit zwei Fingern über das Display nach oben und halte."</string>
     <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Wische zum Verwenden dieser Funktion vom unteren Displayrand nach oben}other{Wische zum Verwenden dieser Funktion mit # Fingern vom unteren Displayrand nach oben}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Wenn du diese Funktion verwenden möchtest, wische vom unteren Displayrand mit drei Fingern nach oben.\n\nWenn du zwischen den Funktionen wechseln möchtest, wische mit drei Fingern über das Display nach oben und halte."</string>
@@ -2499,19 +2497,19 @@
     <string name="accessibility_tutorial_dialog_configure_software_shortcut_type" msgid="8041105223988170653">"Weitere Optionen"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Kurzbefehl für <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="48978719406821294">"Schaltfläche „Bedienungshilfen“"</string>
-    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"Touch-Geste für Bedienungshilfen"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="7346399253904683940">"Touchgeste für Bedienungshilfen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Mit zwei Fingern nach oben wischen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Mit drei Fingern nach oben wischen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Schaltfläche „Bedienungshilfen“"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Tippe auf die unverankerte Schaltfläche."</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Touch-Geste für Bedienungshilfen"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Touchgeste für Bedienungshilfen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Tippe unten auf dem Display auf die Schaltfläche „Bedienungshilfen“ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>. Um zwischen den Funktionen umzuschalten, halte diese Schaltfläche gedrückt."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Wische vom unteren Displayrand nach oben. Wenn du zwischen Funktionen umschalten möchtest, wische nach oben und halte das Display gedrückt.}other{Wische vom unteren Displayrand mit # Fingern nach oben. Wenn du zwischen Funktionen umschalten möchtest, wische mit # Fingern nach oben und halte das Display gedrückt.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Weitere Optionen"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Weitere Informationen zu <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Schnelleinstellungen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Wische vom oberen Displayrand nach unten.}other{Wische vom oberen Displayrand mit # Fingern nach unten.}}"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Wische vom oberen Displayrand nach unten. Diese Touch-Geste ist nach Abschluss der Geräteeinrichtung verfügbar.}other{Wische vom oberen Displayrand mit # Fingern nach unten. Diese Touch-Geste ist nach Abschluss der Geräteeinrichtung verfügbar.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Wische vom oberen Displayrand nach unten. Diese Touchgeste ist nach Abschluss der Geräteeinrichtung verfügbar.}other{Wische vom oberen Displayrand mit # Finger nach unten. Diese Touchgeste ist nach Abschluss der Geräteeinrichtung verfügbar.}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Schnelleinstellungen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Lautstärketasten"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"Lautstärketasten"</string>
@@ -2524,7 +2522,7 @@
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"3-mal tippen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Erweitert"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Die Schaltfläche für die Bedienungshilfen ist auf <xliff:g id="SERVICE">%1$s</xliff:g> gestellt. Um die Vergrößerung nutzen zu können, tippe &amp; halte die Schaltfläche für die Bedienungshilfen gedrückt und wähle anschließend \"Vergrößerung\" aus."</string>
-    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Die Touch-Geste für die Bedienungshilfen ist auf den Dienst \"<xliff:g id="SERVICE">%1$s</xliff:g>\" eingestellt. Wenn du die Vergrößerung verwenden möchtest, wische mit zwei Fingern vom unteren Bildschirmrand nach oben und halte den Bildschirm gedrückt. Wähle dann \"Vergrößerung\" aus."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Die Touchgeste für die Bedienungshilfen ist auf den Dienst \"<xliff:g id="SERVICE">%1$s</xliff:g>\" eingestellt. Wenn du die Vergrößerung verwenden möchtest, wische mit zwei Fingern vom unteren Bildschirmrand nach oben und halte den Bildschirm gedrückt. Wähle dann \"Vergrößerung\" aus."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Kurzbefehl für die Lautstärketasten"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Einstellungen für Verknüpfungen"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Kurzbefehl für die Lautstärketasten auf dem Sperrbildschirm"</string>
@@ -2534,7 +2532,7 @@
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Über die Schaltfläche „Bedienungshilfen“"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Über die Schaltfläche „Bedienungshilfen“ und Gesten"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Weitere Informationen zur Schaltfläche „Bedienungshilfen“ und zu Gesten"</string>
-    <string name="accessibility_button_intro" msgid="2601976470525277903">"Schaltfläche „Bedienungshilfen“ wird verwendet. Bei Bedienung über 3 Schaltflächen ist die Touch-Geste nicht verfügbar."</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Schaltfläche „Bedienungshilfen“ wird verwendet. Bei Bedienung über 3 Schaltflächen ist die Touchgeste nicht verfügbar."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Schnell auf Bedienungshilfen zugreifen"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;So gehts&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gehe zu den Einstellungen für Bedienungshilfen&lt;br/&gt; {1,number,integer}. Wähle eine Bedienungshilfe aus und tippe auf den Kurzbefehl&lt;br/&gt; {2,number,integer}. Wähle die Taste aus, die du für den Zugriff auf die Bedienungshilfe verwenden möchtest&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Ort"</string>
@@ -3603,7 +3601,7 @@
     <string name="keywords_location" msgid="8016374808099706213">"in der nähe, ort, standort, verlauf, berichterstellung, bericht erstellung, bericht erstellen, berichte erstellen, GPS"</string>
     <string name="keywords_accounts" msgid="3013897982630845506">"Konto, ein Konto hinzufügen, Arbeitsprofil, Konto hinzufügen, entfernen, löschen"</string>
     <string name="keywords_users" msgid="3497517660077620843">"einschränkung, einschränken, eingeschränkt"</string>
-    <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"text korrektur, textkorrektur, korrigieren, sound, ton, vibrieren, automatisch, sprache, geste, touch-geste, vorschlagen, vorschlag, design, anstößig, wort, eingeben, emoji, international"</string>
+    <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"text korrektur, textkorrektur, korrigieren, sound, ton, vibrieren, automatisch, sprache, geste, touchgeste, vorschlagen, vorschlag, design, anstößig, wort, eingeben, emoji, international"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"zurücksetzen, einstellungen, standard, standardeinstellung"</string>
     <string name="keywords_all_apps" msgid="9016323378609007166">"apps, download, anwendungen, system"</string>
     <string name="keywords_app_permissions" msgid="2061773665663541610">"apps, berechtigungen, sicherheit"</string>
@@ -3673,6 +3671,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"immer aktiver Bildschirmschoner, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, Tag, Lesegerät"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"Tastatur, Haptik, Vibration"</string>
+    <!-- no translation found for keywords_external_display_settings (4717990369488386495) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Lautstärke und Vibration"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medienlautstärke"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast-Lautstärke"</string>
@@ -3857,22 +3857,17 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Top-Meldungen, Artikel und mehr"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Likes, Beiträge und mehr"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Newsletter, empfohlene Medien und mehr"</string>
-    <!-- no translation found for notification_ai_features_title (2241618579100257538) -->
-    <skip />
+    <string name="notification_ai_features_title" msgid="2241618579100257538">"Mit KI verwalten"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Zusammenfassung von Benachrichtigungen"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Du kannst kurze Zusammenfassungen längerer Nachrichten erhalten"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Zusammenfassung von Benachrichtigungen verwenden"</string>
-    <!-- no translation found for notification_summarization_description (3185465631219791854) -->
-    <skip />
+    <string name="notification_summarization_description" msgid="3185465631219791854">"Du kannst lange Nachrichten und Gruppenunterhaltungen zusammenfassen lassen, damit du schnell einen Überblick bekommst.\n\nZusammenfassungen werden mithilfe von KI auf deinem Gerät erstellt, die manchmal Fehler machen kann. Deine Nachrichten werden niemals an Google gesendet."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Benachrichtigungen von diesen Apps werden nicht zusammengefasst"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Apps verwalten"</string>
-    <!-- no translation found for notification_summarization_manage_excluded_apps_title (8021261855337614327) -->
-    <skip />
+    <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Apps für Zusammenfassungen von Benachrichtigungen verwalten"</string>
     <string name="notification_excluded_apps" msgid="317898848790046528">"Diese Apps nicht einbeziehen"</string>
-    <!-- no translation found for notification_app_level_summarize_title (488390574186154905) -->
-    <skip />
-    <!-- no translation found for notification_app_level_summarize_subtext (2064371198044287108) -->
-    <skip />
+    <string name="notification_app_level_summarize_title" msgid="488390574186154905">"Zusammenfassungen von Benachrichtigungen"</string>
+    <string name="notification_app_level_summarize_subtext" msgid="2064371198044287108">"Du kannst kurze Zusammenfassungen längerer Nachrichten erhalten"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Live-Benachrichtigungen"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Livemeldungen"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Du kannst zeitkritische Benachrichtigungen über laufende Aktivitäten in der Statusleiste und auf dem Sperrbildschirm anzeigen lassen"</string>
@@ -4026,16 +4021,11 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Auf Apps im Arbeitsprofil anwenden"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Benachrichtigungs­organisator"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Benachrichtigungen mit niedriger Priorität bündeln und stummschalten"</string>
-    <!-- no translation found for notification_bundle_main_control_title (6413211155343788835) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (4202633316211056848) -->
-    <skip />
-    <!-- no translation found for notification_app_level_bundle_title (2154075763770894707) -->
-    <skip />
-    <!-- no translation found for notification_app_level_bundle_subtext (8652218688050450291) -->
-    <skip />
-    <!-- no translation found for notification_bundle_manage_excluded_apps_title (6825808714530730009) -->
-    <skip />
+    <string name="notification_bundle_main_control_title" msgid="6413211155343788835">"Benachrichtigungsorganisator verwenden"</string>
+    <string name="notification_bundle_description" msgid="4202633316211056848">"Du kannst auswählen, welche Arten von Benachrichtigen stummgeschaltet und gebündelt werden sollen, um Unterbrechungen zu minimieren.\n\nDer Organisator verwendet KI auf deinem Gerät, die manchmal Fehler machen kann. Deine Benachrichtigungen werden niemals an Google gesendet."</string>
+    <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Benachrichtigungs­organisator"</string>
+    <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Benachrichtigungen mit niedriger Priorität bündeln und stummschalten"</string>
+    <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Apps für den Benachrichtigungsorganisator verwalten"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Auf Apps im Arbeitsprofil anwenden"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-Hilfsdienste"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Keine installierte App hat die Ausführung als VR-Hilfsdienst angefordert."</string>
@@ -4762,7 +4752,7 @@
     <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet öffnen"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_title" msgid="9210589521260265387">"Verknüpfung für Sperrbildschirm ändern?"</string>
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> ist auch der Kurzbefehl für den Sperrbildschirm. Tippe, um ihn zu ändern."</string>
-    <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Deine aktuelle Standard-Wallet-App unterstützt diese Touch-Geste nicht"</string>
+    <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Deine aktuelle Standard-Wallet-App unterstützt diese Touchgeste nicht"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Standard-Wallet ändern"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Für Selfie-Modus Handgelenk drehen"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
@@ -4795,11 +4785,11 @@
     <string name="left_edge" msgid="1513576842959071849">"Linker Rand"</string>
     <string name="right_edge" msgid="1505309103265829121">"Rechter Rand"</string>
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Wenn du die Empfindlichkeit erhöhst, werden eventuell App-spezifische Touch-Gesten am Bildschirmrand beeinträchtigt."</string>
-    <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Empfindlichkeit bei Touch-Geste „Zurück“"</string>
+    <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Empfindlichkeit bei Touchgeste „Zurück“"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Bedienung über Gesten"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Demo ausprobieren"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Bedienung über Schaltflächen"</string>
-    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"bedienung über gesten, gestensteuerung, gestenbedienung, empfindlichkeit bei touch-geste zurück, empfindlichkeit geste zurück, empfindlichkeit zurückgeste, touch-geste zurück, geste zurück, zurückgeste"</string>
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"bedienung über gesten, gestensteuerung, gestenbedienung, empfindlichkeit bei touchgeste zurück, empfindlichkeit geste zurück, empfindlichkeit zurückgeste, touchgeste zurück, geste zurück, zurückgeste"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigation, bedienung, startbildschirmtaste, taste in der mitte, home-taste, home button"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Einhandmodus"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Einhandmodus verwenden"</string>
@@ -5919,4 +5909,14 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Beim Löschen der PIN ist ein Fehler aufgetreten."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation der Bedienungshilfe „<xliff:g id="FEATURE">%1$s</xliff:g>“"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Einstellungen können nicht aktiviert werden"</string>
+    <!-- no translation found for identity_check_issue_card_title (864543931965445926) -->
+    <skip />
+    <!-- no translation found for identity_check_issue_card_summary (5216214598056911479) -->
+    <skip />
+    <!-- no translation found for identity_check_issue_card_button_text (9194407367671256494) -->
+    <skip />
+    <!-- no translation found for identity_check_promo_card_title (1495226082133610343) -->
+    <skip />
+    <!-- no translation found for identity_check_promo_card_summary (5745161401829550512) -->
+    <skip />
 </resources>

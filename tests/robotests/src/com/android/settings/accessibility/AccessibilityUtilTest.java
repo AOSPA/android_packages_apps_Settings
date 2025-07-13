@@ -24,11 +24,13 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.icu.text.CaseMap;
 import android.os.Build;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.settings.R;
 
 import org.junit.Before;
@@ -38,6 +40,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.Locale;
 
 @RunWith(RobolectricTestRunner.class)
 public final class AccessibilityUtilTest {
@@ -93,6 +96,35 @@ public final class AccessibilityUtilTest {
 
         assertThat(result)
                 .isEqualTo(mContext.getText(R.string.switch_off_text));
+    }
+
+    @Test
+    public void getShortcutSummaryList_defaultShortcut_shouldReturnEmptyString() {
+        final CharSequence result = AccessibilityUtil.getShortcutSummaryList(mContext,
+                UserShortcutType.DEFAULT);
+
+        assertThat(result.isEmpty()).isEqualTo(true);
+    }
+
+    @Test
+    public void getShortcutSummaryList_keyGestureShortcut_shouldReturnEmptyString() {
+        final CharSequence result = AccessibilityUtil.getShortcutSummaryList(mContext,
+                UserShortcutType.KEY_GESTURE);
+
+        assertThat(result.isEmpty()).isEqualTo(true);
+    }
+
+    @Test
+    public void getShortcutSummaryList_softwareShortcut_shouldReturnNonEmptyString() {
+        final CharSequence result = AccessibilityUtil.getShortcutSummaryList(mContext,
+                UserShortcutType.SOFTWARE);
+
+        assertThat(result.isEmpty()).isEqualTo(false);
+        final CharSequence summary = CaseMap.toTitle().wholeString().noLowercase().apply(
+                Locale.getDefault(),
+                /* iter= */ null,
+                mContext.getText(R.string.accessibility_shortcut_edit_summary_software));
+        assertThat(result.toString()).isEqualTo(summary.toString());
     }
 
     @Test

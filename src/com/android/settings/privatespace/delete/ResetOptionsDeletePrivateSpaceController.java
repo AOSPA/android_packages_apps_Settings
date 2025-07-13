@@ -64,8 +64,7 @@ public class ResetOptionsDeletePrivateSpaceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return android.multiuser.Flags.enablePrivateSpaceFeatures()
-                        && android.multiuser.Flags.deletePrivateSpaceFromReset()
+        return android.multiuser.Flags.deletePrivateSpaceFromReset()
                         && isPrivateSpaceEntryPointEnabled()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;

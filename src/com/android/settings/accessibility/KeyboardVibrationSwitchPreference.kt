@@ -61,7 +61,8 @@ class KeyboardVibrationSwitchPreference(
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(
-            com.android.internal.R.bool.config_keyboardVibrationSettingsSupported)
+            com.android.internal.R.bool.config_keyboardVibrationSettingsSupported
+        )
 
     override fun isEnabled(context: Context) = storage.isPreferenceEnabled()
 

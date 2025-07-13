@@ -1184,4 +1184,12 @@
         <item name="cornerSize">12dp</item>
     </style>
 
+    <style name="IdentityCheckPromoCardDialogStyle" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/Widget.App.BottomSheet.Modal</item>
+    </style>
+
+    <style name="Widget.App.BottomSheet.Modal" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/identity_check_promo_card_background</item>
+    </style>
 </resources>

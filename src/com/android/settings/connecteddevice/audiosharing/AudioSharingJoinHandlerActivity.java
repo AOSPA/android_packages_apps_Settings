@@ -24,7 +24,6 @@ import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.bluetooth.BluetoothUtils;
-import com.android.settingslib.flags.Flags;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 public class AudioSharingJoinHandlerActivity extends SettingsActivity {
@@ -33,8 +32,7 @@ public class AudioSharingJoinHandlerActivity extends SettingsActivity {
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-        if (!Flags.promoteAudioSharingForSecondAutoConnectedLeaDevice()
-                || !BluetoothUtils.isAudioSharingUIAvailable(this)) {
+        if (!BluetoothUtils.isAudioSharingUIAvailable(this)) {
             finish();
         }
     }
@@ -42,8 +40,7 @@ public class AudioSharingJoinHandlerActivity extends SettingsActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (!Flags.promoteAudioSharingForSecondAutoConnectedLeaDevice()
-                || !BluetoothUtils.isAudioSharingUIAvailable(this)) {
+        if (!BluetoothUtils.isAudioSharingUIAvailable(this)) {
             finish();
         }
         if (intent != null) {

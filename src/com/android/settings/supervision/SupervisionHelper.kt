@@ -20,6 +20,7 @@ import android.app.role.RoleManager
 import android.app.supervision.SupervisionManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager.MATCH_ALL
 import android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS
 import android.os.UserHandle
@@ -28,6 +29,11 @@ import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.util.Log
 import com.android.settings.supervision.ipc.SupervisionMessengerClient.Companion.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
 import com.android.settingslib.supervision.SupervisionLog.TAG
+
+object SupervisionHelper {
+    const val INSTALL_SUPERVISION_APP_ACTION =
+        "android.app.supervision.action.INSTALL_SUPERVISION_APP"
+}
 
 val Context.isSupervisingCredentialSet: Boolean
     get() {
@@ -69,6 +75,20 @@ fun Context.hasNecessarySupervisionComponent(
     val intent = Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION).setPackage(packageName)
     val resolveInfoFlag = if (matchAll) (MATCH_ALL or MATCH_DISABLED_COMPONENTS) else 0
     return packageManager?.queryIntentServices(intent, resolveInfoFlag)?.isNotEmpty() == true
+}
+
+fun Context.getSupervisionAppInstallIntent(): Intent {
+    val supervisionPackage =
+        resources.getString(com.android.internal.R.string.config_systemSupervision)
+    return Intent(SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION).setPackage(supervisionPackage)
+}
+
+fun Context.getSupervisionAppInstallActivityInfo(): ActivityInfo? {
+    val intent = getSupervisionAppInstallIntent()
+    return packageManager
+        ?.queryIntentActivities(intent, MATCH_ALL or MATCH_DISABLED_COMPONENTS)
+        ?.firstOrNull()
+        ?.activityInfo
 }
 
 /**

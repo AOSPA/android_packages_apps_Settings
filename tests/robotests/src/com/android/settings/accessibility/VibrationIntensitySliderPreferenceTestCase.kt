@@ -227,9 +227,10 @@ abstract class VibrationIntensitySliderPreferenceTestCase {
     fun summary_preferenceDisabledByRingerModeSilent_isSilentModeMessage() {
         assumeTrue(hasRingerModeDependency)
         setRingerMode(AudioManager.RINGER_MODE_SILENT)
-        val expectedSummary = context.getString(
-            R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary
-        )
+        val expectedSummary =
+            context.getString(
+                R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary
+            )
         setMainSwitchValue(true)
         setSupportedLevels(3)
         setDefaultIntensity(Vibrator.VIBRATION_INTENSITY_LOW)

@@ -23,6 +23,7 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import android.provider.Settings.Secure.AccessibilityMagnificationCursorFollowingMode
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
@@ -31,6 +32,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.MagnificationCapabilities
 import com.android.settings.accessibility.extensions.isInSetupWizard
+import com.android.settings.accessibility.screenmagnification.dialogs.CursorFollowingModeChooser
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 
@@ -41,6 +43,7 @@ class CursorFollowingModePreferenceController(context: Context, prefKey: String)
     BasePreferenceController(context, prefKey), DefaultLifecycleObserver {
 
     private var preference: Preference? = null
+    private lateinit var fragmentManager: FragmentManager
 
     private val contentObserver: ContentObserver =
         object : ContentObserver(Handler(Looper.getMainLooper())) {
@@ -48,6 +51,10 @@ class CursorFollowingModePreferenceController(context: Context, prefKey: String)
                 preference?.run { updateState(this) }
             }
         }
+
+    fun setFragmentManager(fragmentManager: FragmentManager) {
+        this.fragmentManager = fragmentManager
+    }
 
     override fun onResume(owner: LifecycleOwner) {
         MagnificationCapabilities.registerObserver(mContext, contentObserver)
@@ -131,10 +138,17 @@ class CursorFollowingModePreferenceController(context: Context, prefKey: String)
 
     override fun handlePreferenceTreeClick(preference: Preference?): Boolean {
         if (preference?.key == preferenceKey) {
-            preference.preferenceManager.showDialog(preference)
+            CursorFollowingModeChooser.showDialog(
+                fragmentManager,
+                CURSOR_FOLLOWING_MODE_CHOOSER_REQUEST_KEY,
+            )
             return true
         }
 
         return super.handlePreferenceTreeClick(preference)
+    }
+
+    companion object {
+        private const val CURSOR_FOLLOWING_MODE_CHOOSER_REQUEST_KEY = "cursorFollowingModeChooser"
     }
 }

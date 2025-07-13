@@ -49,7 +49,6 @@ import org.robolectric.shadows.ShadowLooper
 import org.robolectric.shadows.ShadowPackageManager
 
 /** Tests for [FooterPreferenceController] */
-@EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_KEYBOARD_CONTROL)
 @Config(shadows = [SettingsShadowResources::class, ShadowInputDevice::class])
 @RunWith(RobolectricTestParameterInjector::class)
 class FooterPreferenceControllerTest {
@@ -57,60 +56,69 @@ class FooterPreferenceControllerTest {
     private val prefKey = "prefKey"
     private val lifeCycleOwner = TestLifecycleOwner(initialState = Lifecycle.State.INITIALIZED)
     private val context: Context = ApplicationProvider.getApplicationContext()
-    private val oneFingerPanningOnDefaultSummary = Html.fromHtml(
-        MessageFormat.format(
-            context.getString(
-                R.string.accessibility_screen_magnification_summary_one_finger_panning_on
-            ),
-            1,
-            2,
-            3,
-            4,
-            5,
-        ),
-        Html.FROM_HTML_MODE_COMPACT
-    ).toString()
-    private val oneFingerPanningOffDefaultSummary = Html.fromHtml(
-        MessageFormat.format(
-            context.getString(
-                R.string.accessibility_screen_magnification_summary_one_finger_panning_off
-            ),
-            1,
-            2,
-            3,
-            4,
-            5,
-        ),
-        Html.FROM_HTML_MODE_COMPACT
-    ).toString()
-    private val defaultSummary =Html.fromHtml(
-        MessageFormat.format(context.getString(R.string.accessibility_screen_magnification_summary),
-            1,
-            2,
-            3,
-            4,
-            5,
-        ),
-        Html.FROM_HTML_MODE_COMPACT
-    ).toString()
+    private val oneFingerPanningOnDefaultSummary =
+        Html.fromHtml(
+                MessageFormat.format(
+                    context.getString(
+                        R.string.accessibility_screen_magnification_summary_one_finger_panning_on
+                    ),
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                ),
+                Html.FROM_HTML_MODE_COMPACT,
+            )
+            .toString()
+    private val oneFingerPanningOffDefaultSummary =
+        Html.fromHtml(
+                MessageFormat.format(
+                    context.getString(
+                        R.string.accessibility_screen_magnification_summary_one_finger_panning_off
+                    ),
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                ),
+                Html.FROM_HTML_MODE_COMPACT,
+            )
+            .toString()
+    private val defaultSummary =
+        Html.fromHtml(
+                MessageFormat.format(
+                    context.getString(R.string.accessibility_screen_magnification_summary),
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                ),
+                Html.FROM_HTML_MODE_COMPACT,
+            )
+            .toString()
     private val metaString = context.getString(R.string.modifier_keys_meta)
     private val altString = context.getString(R.string.modifier_keys_alt)
-    private val keyboardSummary = Html.fromHtml(
-        MessageFormat.format(
-            context.getString(
-                R.string.accessibility_screen_magnification_keyboard_summary,
-                metaString,
-                altString,
-                metaString,
-                altString,
-            ),
-            1,
-            2,
-            3,
-            4,
-        ),
-        Html.FROM_HTML_MODE_COMPACT
-    ).toString()
+    private val keyboardSummary =
+        Html.fromHtml(
+                MessageFormat.format(
+                    context.getString(
+                        R.string.accessibility_screen_magnification_keyboard_summary,
+                        metaString,
+                        altString,
+                        metaString,
+                        altString,
+                    ),
+                    1,
+                    2,
+                    3,
+                    4,
+                ),
+                Html.FROM_HTML_MODE_COMPACT,
+            )
+            .toString()
     private val shadowContentResolver = shadowOf(context.contentResolver)
     private val controller = FooterPreferenceController(context, prefKey)
     private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)

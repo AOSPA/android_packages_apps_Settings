@@ -63,15 +63,14 @@ public class SatelliteCarrierSettingUtils {
     /**
      * Use getSatelliteDataSupportMode to check data mode is restricted.
      *
-     * @return true if data mode is restricted.
+     * @return Integer of {@code CarrierConfigManager#SATELLITE_DATA_SUPPORT_MODE}
      */
-    public static boolean isSatelliteDataRestricted(Context context, int subId) {
+    public static int getSatelliteDataMode(Context context, int subId) {
         SatelliteManagerWrapper wrapper =
                 sSatelliteManagerWrapper == null ? new SatelliteManagerWrapper(context)
                         : sSatelliteManagerWrapper;
-        return wrapper.getSatelliteDataSupportMode(subId) <= SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
+        return wrapper.getSatelliteDataSupportMode(subId);
     }
-
 
     /**
      * Check if current carrier is supported in this region.

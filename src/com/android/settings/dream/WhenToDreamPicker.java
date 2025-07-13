@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.widget.CandidateInfo;
@@ -118,6 +119,10 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
     }
 
     private String[] entries() {
+        if (Flags.resolveMissingWhenToDream()) {
+            return DreamUtils.getWhenToDreamEntries(getResources());
+        }
+
         if (mDreamsSupportedOnBattery) {
             return getResources().getStringArray(R.array.when_to_start_screensaver_entries);
         }
@@ -125,6 +130,10 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
     }
 
     private String[] keys() {
+        if (Flags.resolveMissingWhenToDream()) {
+            return DreamUtils.getWhenToDreamKeys(getResources());
+        }
+
         if (mDreamsSupportedOnBattery) {
             return getResources().getStringArray(R.array.when_to_start_screensaver_values);
         }

@@ -32,7 +32,6 @@ import android.hardware.input.AppLaunchData;
 import android.hardware.input.AppLaunchData.ComponentData;
 import android.hardware.input.InputGestureData;
 import android.hardware.input.InputManager;
-import android.hardware.input.InputSettings;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
@@ -220,9 +219,7 @@ public class TouchpadThreeFingerTapAppListController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
-        return (InputSettings.isTouchpadThreeFingerTapShortcutFeatureFlagEnabled() && isTouchpad)
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return InputPeripheralsSettingsUtils.isTouchpad() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

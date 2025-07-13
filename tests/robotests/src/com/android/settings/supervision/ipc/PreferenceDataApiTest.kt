@@ -48,6 +48,7 @@ class PreferenceDataApiTest {
                         targetPackage = "com.google.android.gms.kids",
                         isVisible = false,
                         learnMoreLink = "https://support.google.com/families/answer/1234567",
+                        intentData = "https://www.familylink.com",
                     ),
             )
         val encoded = preferenceDataApi.responseCodec.encode(response)

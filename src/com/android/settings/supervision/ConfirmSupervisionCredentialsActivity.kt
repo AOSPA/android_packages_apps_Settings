@@ -62,6 +62,8 @@ import com.android.settingslib.supervision.SupervisionLog.TAG
  */
 class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
 
+    @VisibleForTesting var mProfileStarted = false
+
     @VisibleForTesting
     val mAuthenticationCallback =
         object : AuthenticationCallback() {
@@ -94,9 +96,12 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         }
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
-    override fun onStop() {
+    @VisibleForTesting
+    public override fun onStop() {
         super.onStop()
-        tryStopProfile()
+        if (mProfileStarted) {
+            tryStopProfile()
+        }
     }
 
     @RequiresPermission(
@@ -132,6 +137,8 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             if (!activityManager.startProfile(supervisingUser)) {
                 errorHandler("Unable to start supervising user, cannot verify credentials.")
                 return
+            } else {
+                mProfileStarted = true
             }
             showBiometricPrompt(supervisingUser.identifier)
         } else {
@@ -176,7 +183,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         return builder
             .addFallbackOption(
                 getString(R.string.supervision_auth_prompt_forgot_pin_button_label),
-                BiometricManager.IconType.ACCOUNT,
+                BiometricManager.ICON_TYPE_ACCOUNT,
                 ContextCompat.getMainExecutor(this),
                 listener,
             )
@@ -190,9 +197,10 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             this,
             SettingsEnums.ACTION_SUPERVISION_FORGOT_PIN_DURING_PIN_INVOCATION,
         )
-        val intent = Intent(this, SupervisionPinRecoveryActivity::class.java).apply {
-            action = SupervisionPinRecoveryActivity.ACTION_RECOVERY
-        }
+        val intent =
+            Intent(this, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_RECOVERY
+            }
         getResultLauncher.launch(intent)
     }
 
@@ -222,6 +230,8 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         val activityManager = getSystemService(ActivityManager::class.java)
         if (!activityManager.stopProfile(supervisingUser)) {
             Log.w(TAG, "Could not stop the supervising profile.")
+        } else {
+            mProfileStarted = false
         }
     }
 

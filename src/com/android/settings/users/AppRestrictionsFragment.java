@@ -17,6 +17,8 @@
 package com.android.settings.users;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.flags.Flags;
 import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -46,6 +48,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
@@ -98,6 +101,12 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     /** Key for extra passed in from calling fragment to indicate if this is a newly created user */
     public static final String EXTRA_NEW_USER = "new_user";
+
+    /**
+     * Settings' identifier for setting policies or restrictions in {@link DevicePolicyManager}.
+     */
+    public static final String SETTINGS_SYSTEM_ENTITY =
+            "com.android.settings";
 
     private boolean mFirstTime = true;
     private boolean mNewUser;
@@ -558,9 +567,20 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         default:
                             continue;
                         }
-                        mUserManager.setApplicationRestrictions(packageName,
-                                RestrictionsManager.convertRestrictionsToBundle(restrictions),
-                                mUser);
+                        if (Flags.appRestrictionsCoexistence()) {
+                            DevicePolicyManager dpm = getDevicePolicyManager();
+                            if (dpm != null) {
+                                dpm.setApplicationRestrictionsBySystem(
+                                    SETTINGS_SYSTEM_ENTITY, packageName,
+                                    RestrictionsManager.convertRestrictionsToBundle(restrictions));
+                            } else {
+                                Log.e(TAG, "Cannot set restrictions; No DPM found.");
+                            }
+                        } else {
+                            mUserManager.setApplicationRestrictions(packageName,
+                                    RestrictionsManager.convertRestrictionsToBundle(restrictions),
+                                    mUser);
+                        }
                         break;
                     }
                 }
@@ -598,8 +618,19 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
      */
     private void requestRestrictionsForApp(String packageName,
             AppRestrictionsPreference preference, boolean invokeIfCustom) {
-        Bundle oldEntries =
-                mUserManager.getApplicationRestrictions(packageName, mUser);
+        Bundle oldEntries;
+        if (Flags.appRestrictionsCoexistence()) {
+            DevicePolicyManager dpm = getDevicePolicyManager();
+            if (dpm != null) {
+                oldEntries =
+                    dpm.getApplicationRestrictionsBySystem(SETTINGS_SYSTEM_ENTITY, packageName);
+            } else {
+                Log.e(TAG, "Cannot get old restrictions; No DPM found.");
+                oldEntries = Bundle.EMPTY;
+            }
+        } else {
+            oldEntries =  mUserManager.getApplicationRestrictions(packageName, mUser);
+        }
         Intent intent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
         intent.setPackage(packageName);
         intent.putExtra(Intent.EXTRA_RESTRICTIONS_BUNDLE, oldEntries);
@@ -633,8 +664,20 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             if (restrictions != null && restrictionsIntent == null) {
                 onRestrictionsReceived(preference, restrictions);
                 if (mRestrictedProfile) {
-                    mUserManager.setApplicationRestrictions(packageName,
-                            RestrictionsManager.convertRestrictionsToBundle(restrictions), mUser);
+                    if (Flags.appRestrictionsCoexistence()) {
+                        DevicePolicyManager dpm = getDevicePolicyManager();
+                        if (dpm != null) {
+                            dpm.setApplicationRestrictionsBySystem(
+                                SETTINGS_SYSTEM_ENTITY, packageName,
+                                RestrictionsManager.convertRestrictionsToBundle(restrictions));
+                        } else {
+                            Log.e(TAG, "Cannot set restrictions; No DPM found.");
+                        }
+                    } else {
+                        mUserManager.setApplicationRestrictions(packageName,
+                                RestrictionsManager.convertRestrictionsToBundle(restrictions),
+                                mUser);
+                    }
                 }
             } else if (restrictionsIntent != null) {
                 preference.setRestrictions(restrictions);
@@ -778,17 +821,53 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     data.getParcelableArrayListExtra(Intent.EXTRA_RESTRICTIONS_LIST);
             Bundle bundle = data.getBundleExtra(Intent.EXTRA_RESTRICTIONS_BUNDLE);
             if (list != null) {
-                // If there's a valid result, persist it to the user manager.
                 pref.setRestrictions(list);
-                mUserManager.setApplicationRestrictions(packageName,
-                        RestrictionsManager.convertRestrictionsToBundle(list), mUser);
+                if (Flags.appRestrictionsCoexistence()) {
+                    DevicePolicyManager dpm = getDevicePolicyManager();
+                    if (dpm != null) {
+                        dpm.setApplicationRestrictionsBySystem(
+                            SETTINGS_SYSTEM_ENTITY, packageName,
+                            RestrictionsManager.convertRestrictionsToBundle(list));
+                    } else {
+                        Log.e(TAG, "Cannot set restrictions; No DPM found.");
+                    }
+                } else {
+                    // If there's a valid result, persist it to the user manager.
+                    mUserManager.setApplicationRestrictions(packageName,
+                            RestrictionsManager.convertRestrictionsToBundle(list), mUser);
+                }
             } else if (bundle != null) {
-                // If there's a valid result, persist it to the user manager.
-                mUserManager.setApplicationRestrictions(packageName, bundle, mUser);
+                if (Flags.appRestrictionsCoexistence()) {
+                    // If there's a valid result, persist it to the device policy manager.
+                    DevicePolicyManager dpm = getDevicePolicyManager();
+                    if (dpm != null) {
+                        dpm.setApplicationRestrictionsBySystem(
+                            SETTINGS_SYSTEM_ENTITY, packageName, bundle);
+                    } else {
+                        Log.e(TAG, "Cannot set restrictions; No DPM found.");
+                    }
+                } else {
+                    // If there's a valid result, persist it to the user manager.
+                    mUserManager.setApplicationRestrictions(packageName, bundle, mUser);
+                }
             }
         }
         // Remove request from the map
         mCustomRequestMap.remove(requestCode);
+    }
+
+    @Nullable
+    private DevicePolicyManager getDevicePolicyManager() {
+        try {
+            final Context managedProfileContext = getContext().createPackageContextAsUser(
+                    getContext().getPackageName(), 0 /* flags */, mUser);
+            final DevicePolicyManager dpm = managedProfileContext.getSystemService(
+                    DevicePolicyManager.class);
+            return dpm;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Failed to create user context", e);
+          return null;
+        }
     }
 
     private String findInArray(String[] choiceEntries, String[] choiceValues,

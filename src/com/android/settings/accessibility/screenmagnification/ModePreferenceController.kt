@@ -21,6 +21,7 @@ import android.database.ContentObserver
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
@@ -28,6 +29,7 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.accessibility.MagnificationCapabilities
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.extensions.isWindowMagnificationSupported
+import com.android.settings.accessibility.screenmagnification.dialogs.MagnificationModeChooser
 import com.android.settings.core.BasePreferenceController
 
 /** Handles the magnification mode preference content and its click behavior */
@@ -35,12 +37,17 @@ class ModePreferenceController(context: Context, prefKey: String) :
     BasePreferenceController(context, prefKey), DefaultLifecycleObserver {
 
     private var preference: Preference? = null
+    private lateinit var fragmentManager: FragmentManager
     private val contentObserver: ContentObserver =
         object : ContentObserver(Handler(Looper.getMainLooper())) {
             override fun onChange(selfChange: Boolean, uri: Uri?) {
                 preference?.run { updateState(this) }
             }
         }
+
+    fun setFragmentManager(fragmentManager: FragmentManager) {
+        this.fragmentManager = fragmentManager
+    }
 
     override fun getAvailabilityStatus(): Int {
         return if (mContext.isInSetupWizard() || !mContext.isWindowMagnificationSupported()) {
@@ -73,10 +80,14 @@ class ModePreferenceController(context: Context, prefKey: String) :
 
     override fun handlePreferenceTreeClick(preference: Preference?): Boolean {
         if (preference?.key == preferenceKey) {
-            preference.preferenceManager.showDialog(preference)
+            MagnificationModeChooser.showDialog(fragmentManager, MODE_CHOOSER_REQUEST_KEY)
             return true
         }
 
         return super.handlePreferenceTreeClick(preference)
+    }
+
+    companion object {
+        private const val MODE_CHOOSER_REQUEST_KEY = "magnificationModeChooser"
     }
 }

@@ -15,6 +15,7 @@
     limitations under the License.
 -->
 
+<!-- LINT.IfChange -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
@@ -56,7 +57,7 @@
         android:title="@string/category_title_text_style">
 
         <SwitchPreferenceCompat
-            android:key="toggle_force_bold_text"
+            android:key="font_weight_adjustment"
             android:persistent="false"
             android:title="@string/force_bold_text"
             settings:controller=
@@ -64,7 +65,7 @@
             settings:keywords="@string/keywords_bold_text" />
 
         <SwitchPreferenceCompat
-            android:key="toggle_high_text_contrast_preference"
+            android:key="high_text_contrast_enabled"
             android:persistent="false"
             android:title="@string/accessibility_toggle_maximize_text_contrast_preference_title"
             android:summary="@string/accessibility_toggle_maximize_text_contrast_preference_summary"
@@ -80,3 +81,5 @@
         android:icon="@drawable/ic_history"
         android:persistent="false" />
 </PreferenceScreen>
+<!-- LINT.ThenChange(/src/com/android/settings/accessibility/textreading/ui/TextReadingScreen.kt:ui_hierarchy) -->
+

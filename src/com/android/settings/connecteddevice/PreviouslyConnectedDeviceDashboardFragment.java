@@ -26,6 +26,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.utils.ThreadUtils;
 
 /**
  * This fragment contains previously connected device
@@ -75,7 +76,7 @@ public class PreviouslyConnectedDeviceDashboardFragment extends DashboardFragmen
     @Override
     public void onStart() {
         super.onStart();
-        enableBluetoothIfNecessary();
+        ThreadUtils.postOnBackgroundThread(() -> enableBluetoothIfNecessary());
     }
 
     @VisibleForTesting

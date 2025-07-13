@@ -27,7 +27,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.UserInfo
 import android.hardware.biometrics.BiometricManager
-import android.hardware.biometrics.PromptContentViewWithMoreOptionsButton
 import android.os.Build
 import android.os.Process
 import android.os.UserHandle
@@ -47,6 +46,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
@@ -164,6 +164,29 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
+    fun onCreate_startsConfirmationActivity_onStop_stopsProfile() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub {
+            on { startProfile(any()) } doReturn true
+            on { stopProfile(any()) } doReturn true
+        }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+
+        mActivityController.setup()
+
+        // Ensure that the supervising profile is started
+        val userCaptor = argumentCaptor<UserHandle>()
+        verify(mockActivityManager).startProfile(userCaptor.capture())
+        assert(userCaptor.lastValue.identifier == SUPERVISING_USER_ID)
+        assertThat(mActivity.mProfileStarted).isTrue()
+
+        mActivity.onStop()
+        verify(mockActivityManager).stopProfile(any())
+        assertThat(mActivity.mProfileStarted).isFalse()
+    }
+
+    @Test
     @Config(sdk = [Build.VERSION_CODES.BAKLAVA])
     fun onCreate_callerIsSystemUid_doesNotFinish() {
         ShadowBinder.setCallingUid(
@@ -207,6 +230,24 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
+    fun onCreate_onStartSetupActivity_onStop_notStopProfile() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub { on { startProfile(any()) } doReturn true }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+
+        mActivityController.setup()
+
+        assertThat(mActivity.isFinishing).isFalse()
+        assertThat(shadowActivity.nextStartedActivity.component?.className)
+            .isEqualTo(SetupSupervisionActivity::class.java.name)
+        assertThat(mActivity.mProfileStarted).isFalse()
+
+        mActivity.onStop()
+        verify(mockActivityManager, never()).stopProfile(any())
+    }
+
+    @Test
     fun getBiometricPrompt_recoveryEmailExist_showForgotPinButton() {
         val recoveryInfo = SupervisionRecoveryInfo("email", "default", STATE_PENDING, null)
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
@@ -223,11 +264,13 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(fallbackOptions).isNotNull()
         assertThat(fallbackOptions).hasSize(1)
 
-        val forgotPinOption = fallbackOptions.find {
-            it.getText().toString() == mActivity.getString(R.string.supervision_auth_prompt_forgot_pin_button_label)
-        }
+        val forgotPinOption =
+            fallbackOptions.find {
+                it.getText().toString() ==
+                    mActivity.getString(R.string.supervision_auth_prompt_forgot_pin_button_label)
+            }
         assertThat(forgotPinOption).isNotNull()
-        assertThat(forgotPinOption!!.getIconType()).isEqualTo(BiometricManager.IconType.ACCOUNT)
+        assertThat(forgotPinOption!!.getIconType()).isEqualTo(BiometricManager.ICON_TYPE_ACCOUNT)
 
         mActivity.onForgotPinFallbackClicked()
         verify(metricsRule.metricsFeatureProvider)

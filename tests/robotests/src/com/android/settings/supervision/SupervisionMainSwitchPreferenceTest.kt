@@ -180,6 +180,7 @@ class SupervisionMainSwitchPreferenceTest {
 
         assertThat(widget.isChecked).isFalse()
 
+        widget.performClick()
         preference.onActivityResult(
             mockLifeCycleContext,
             REQUEST_CODE_CONFIRM_SUPERVISION_CREDENTIALS,
@@ -203,6 +204,7 @@ class SupervisionMainSwitchPreferenceTest {
 
         assertThat(widget.isChecked).isFalse()
 
+        widget.performClick()
         preference.onActivityResult(
             mockLifeCycleContext,
             REQUEST_CODE_SET_UP_SUPERVISION,
@@ -231,6 +233,26 @@ class SupervisionMainSwitchPreferenceTest {
 
         assertThat(widget.isChecked).isFalse()
         verify(mockSupervisionManager, never()).setSupervisionEnabled(true)
+    }
+
+    @Test
+    fun toggleOn_supervisionNotSetUp_setupSucceeded_supervisionDisabled() {
+        setSupervisionEnabled(true)
+        setSupervisingProfileCreated(false)
+        val widget = getMainSwitchPreference()
+
+        assertThat(widget.isChecked).isTrue()
+        widget.performClick()
+
+        preference.onActivityResult(
+            mockLifeCycleContext,
+            REQUEST_CODE_SET_UP_SUPERVISION,
+            Activity.RESULT_OK,
+            null,
+        )
+
+        assertThat(widget.isChecked).isFalse()
+        verify(mockSupervisionManager).setSupervisionEnabled(false)
     }
 
     @Test

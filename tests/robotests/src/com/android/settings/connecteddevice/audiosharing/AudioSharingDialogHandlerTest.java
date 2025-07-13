@@ -50,7 +50,6 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Looper;
-import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
@@ -203,37 +202,7 @@ public class AudioSharingDialogHandlerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API)
-    @DisableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX)
-    public void handleUserTriggeredDeviceConnected_inCall_setActive() {
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
-                BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
-        when(mAudioManager.getMode()).thenReturn(AudioManager.MODE_IN_CALL);
-        setUpBroadcast(true);
-        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1);
-        when(mAssistant.getAllConnectedDevices()).thenReturn(deviceList);
-        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
-        boolean showDialog =
-                mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ true);
-        shadowOf(Looper.getMainLooper()).idle();
-        verify(mCachedDevice1).setActive();
-        assertThat(
-                        Settings.Secure.getInt(
-                                mContext.getContentResolver(),
-                                BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
-                                BluetoothCsipSetCoordinator.GROUP_ID_INVALID))
-                .isEqualTo(BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
-        assertThat(showDialog).isFalse();
-    }
-
-    @Test
-    @EnableFlags({
-        Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX,
-        Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API
-    })
-    public void handleUserTriggeredDeviceConnected_inCall_enableHysteresisFix_setAndSaveActive() {
+    public void handleUserTriggeredDeviceConnected_inCall_setAndSaveActive() {
         Settings.Secure.putInt(
                 mContext.getContentResolver(),
                 BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
@@ -534,7 +503,6 @@ public class AudioSharingDialogHandlerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API)
     public void handleDeviceConnected_inCall_doNothing() {
         when(mAudioManager.getMode()).thenReturn(AudioManager.MODE_IN_CALL);
         setUpBroadcast(true);

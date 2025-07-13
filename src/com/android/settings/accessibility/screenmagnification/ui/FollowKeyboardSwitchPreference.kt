@@ -29,7 +29,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
-class FollowKeyboardSwitchPreference:
+class FollowKeyboardSwitchPreference :
     SwitchPreference(
         KEY,
         R.string.accessibility_screen_magnification_follow_keyboard_title,
@@ -43,11 +43,7 @@ class FollowKeyboardSwitchPreference:
     override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
 
     override fun isAvailable(context: Context): Boolean {
-        return if (!context.isInSetupWizard() && isMagnificationKeyboardFollowingSupported()) {
-            true
-        } else {
-            false
-        }
+        return !context.isInSetupWizard() && isMagnificationKeyboardFollowingSupported()
     }
 
     private fun isMagnificationKeyboardFollowingSupported(): Boolean {

@@ -20,6 +20,7 @@ package com.android.settings.wifi.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.TetheringManager
@@ -60,10 +61,7 @@ var Context.wifiSoftApSsid
     get() = wifiSoftApConfig?.ssid
     set(value) {
         wifiSoftApConfig?.apply {
-            SoftApConfiguration.Builder(this)
-                .setSsid(value)
-                .build()
-                .let { wifiSoftApConfig = it }
+            SoftApConfiguration.Builder(this).setSsid(value).build().let { wifiSoftApConfig = it }
         }
     }
 
@@ -113,3 +111,11 @@ val Context.isDefaultNetworkWifi: Boolean
         connectivityManager
             ?.getNetworkCapabilities(connectivityManager?.activeNetwork)
             ?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+
+/**
+ * Gets the {@link android.location.LocationManager} system service.
+ *
+ * Use application context to get system services to avoid memory leaks.
+ */
+val Context.locationManager: LocationManager?
+    get() = applicationContext.getSystemService(LocationManager::class.java)

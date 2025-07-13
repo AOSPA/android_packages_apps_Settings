@@ -374,20 +374,18 @@ public class AudioSharingUtils {
     public static void setUserPreferredPrimary(
             @NonNull Context context, @Nullable CachedBluetoothDevice cachedDevice) {
         if (cachedDevice == null) return;
-        if (BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(context)) {
-            int groupId = BluetoothUtils.getGroupId(cachedDevice);
-            // TODO: use real key name in SettingsProvider
-            int userPreferredId =
-                    Settings.Secure.getInt(
-                            context.getContentResolver(),
-                            BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
-                            BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
-            if (groupId != userPreferredId) {
-                Settings.Secure.putInt(
+        int groupId = BluetoothUtils.getGroupId(cachedDevice);
+        // TODO: use real key name in SettingsProvider
+        int userPreferredId =
+                Settings.Secure.getInt(
                         context.getContentResolver(),
                         BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
-                        groupId);
-            }
+                        BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+        if (groupId != userPreferredId) {
+            Settings.Secure.putInt(
+                    context.getContentResolver(),
+                    BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
+                    groupId);
         }
     }
 

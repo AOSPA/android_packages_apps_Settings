@@ -70,7 +70,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             new BatteryLevelDataLoaderCallbacks();
 
     private boolean mIsChartDataLoaded = false;
-    private long mResumeTimestamp;
+    private long mStartTimestamp;
     private Map<Integer, Map<Integer, BatteryDiffData>> mBatteryUsageMap;
 
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
@@ -140,9 +140,14 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        mStartTimestamp = System.currentTimeMillis();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        mResumeTimestamp = System.currentTimeMillis();
         final Uri uri = DatabaseUtils.BATTERY_CONTENT_URI;
         if (uri != null) {
             getContext()
@@ -205,7 +210,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     private void onBatteryLevelDataUpdate(BatteryLevelData batteryLevelData) {
-        if (!isResumed()) {
+        if (!isVisible()) {
             return;
         }
         mBatteryLevelData = Optional.ofNullable(batteryLevelData);
@@ -215,12 +220,12 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     TAG,
                     String.format(
                             "Battery chart shows in %d millis",
-                            System.currentTimeMillis() - mResumeTimestamp));
+                            System.currentTimeMillis() - mStartTimestamp));
         }
     }
 
     private void onBatteryDiffDataMapUpdate(Map<Long, BatteryDiffData> batteryDiffDataMap) {
-        if (!isResumed() || mBatteryLevelData == null) {
+        if (!isVisible() || mBatteryLevelData == null) {
             return;
         }
         mHandler.post(() -> {
@@ -276,7 +281,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 TAG,
                 String.format(
                         "Battery usage list shows in %d millis",
-                        System.currentTimeMillis() - mResumeTimestamp));
+                        System.currentTimeMillis() - mStartTimestamp));
     }
 
     private void detectAnomaly() {
@@ -294,7 +299,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     private void onAnomalyDetected(PowerAnomalyEventList anomalyEventList) {
-        if (!isResumed() || anomalyEventList == null) {
+        if (!isVisible() || anomalyEventList == null) {
             return;
         }
         logPowerAnomalyEventList(anomalyEventList);

@@ -20,7 +20,6 @@ import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.content.Context
 import androidx.annotation.VisibleForTesting
-import androidx.preference.Preference
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
@@ -29,8 +28,6 @@ import com.android.settings.accessibility.ToggleShortcutPreferenceController
 import com.android.settings.accessibility.screenmagnification.CursorFollowingModePreferenceController
 import com.android.settings.accessibility.screenmagnification.ModePreferenceController
 import com.android.settings.accessibility.screenmagnification.ToggleMagnificationShortcutPreferenceController
-import com.android.settings.accessibility.screenmagnification.dialogs.CursorFollowingModeChooser
-import com.android.settings.accessibility.screenmagnification.dialogs.MagnificationModeChooser
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.search.SearchIndexable
 
@@ -38,23 +35,14 @@ import com.android.settingslib.search.SearchIndexable
 @SearchIndexable(forTarget = SearchIndexable.ALL and SearchIndexable.ARC.inv())
 open class MagnificationPreferenceFragment : ShortcutFragment() {
 
-    override fun onDisplayPreferenceDialog(preference: Preference) {
-        val preferenceKey = preference.key
-        if (use(ModePreferenceController::class.java)?.preferenceKey == preferenceKey) {
-            MagnificationModeChooser.showDialog(childFragmentManager, MODE_CHOOSER_REQUEST_KEY)
-            return
-        }
-        if (
-            use(CursorFollowingModePreferenceController::class.java)?.preferenceKey == preferenceKey
-        ) {
-            CursorFollowingModeChooser.showDialog(
-                childFragmentManager,
-                CURSOR_FOLLOWING_MODE_CHOOSER_REQUEST_KEY,
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        use<ModePreferenceController?>(ModePreferenceController::class.java)
+            ?.setFragmentManager(getChildFragmentManager())
+        use<CursorFollowingModePreferenceController?>(
+                CursorFollowingModePreferenceController::class.java
             )
-            return
-        }
-
-        super.onDisplayPreferenceDialog(preference)
+            ?.setFragmentManager(getChildFragmentManager())
     }
 
     override fun getShortcutPreferenceController(): ToggleShortcutPreferenceController? {
@@ -96,8 +84,6 @@ open class MagnificationPreferenceFragment : ShortcutFragment() {
 
     companion object {
         private val TAG = MagnificationPreferenceFragment::class.simpleName
-        private const val MODE_CHOOSER_REQUEST_KEY = "magnificationModeChooser"
-        private const val CURSOR_FOLLOWING_MODE_CHOOSER_REQUEST_KEY = "cursorFollowingModeChooser"
         const val MAGNIFICATION_SURVEY_KEY: String = "A11yMagnificationUser"
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =

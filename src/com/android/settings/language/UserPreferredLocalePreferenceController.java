@@ -121,10 +121,10 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
             String localeName = localeInfo.getFullNameNative();
             pref.setTitle(localeName);
             String summary = null;
-            if (localeInfo.getLocale().equals(Locale.getDefault())) {
-                summary = mContext.getString(R.string.desc_current_default_language);
-            } else if (!localeInfo.isTranslated()) {
+            if (!localeInfo.isTranslated()) {
                 summary = mContext.getString(R.string.locale_not_translated);
+            } else if (localeInfo.getLocale().equals(Locale.getDefault())) {
+                summary = mContext.getString(R.string.desc_current_default_language);
             }
             pref.setSummary(summary);
             pref.setKey(localeInfo.toString());

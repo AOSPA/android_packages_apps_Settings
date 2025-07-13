@@ -40,14 +40,14 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-/**
- * Preference controller for "Satellite connectivity"
- */
-class SatelliteSettingPreferenceController @JvmOverloads constructor(
+/** Preference controller for "Satellite connectivity" */
+class SatelliteSettingPreferenceController
+@JvmOverloads
+constructor(
     context: Context,
     key: String,
     private val carrierConfigCache: CarrierConfigCache = CarrierConfigCache.getInstance(context),
-    private val satelliteRepository: SatelliteRepository = SatelliteRepository(context)
+    private val satelliteRepository: SatelliteRepository = SatelliteRepository(context),
 ) : TelephonyBasePreferenceController(context, key) {
 
     private lateinit var preference: Preference
@@ -70,21 +70,22 @@ class SatelliteSettingPreferenceController @JvmOverloads constructor(
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            if (!mCarrierConfigs.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
-            ) {
+            if (!mCarrierConfigs.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)) {
                 preference.isVisible = false
                 return@launch
             }
 
             val isCarrierRoamingNtnConnectedTypeManual =
-                CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC != mCarrierConfigs.getInt(
-                    KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-                    CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
-                )
-
+                CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC !=
+                    mCarrierConfigs.getInt(
+                        KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                        CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+                    )
             if (isCarrierRoamingNtnConnectedTypeManual) {
                 if (satelliteRepository.requestIsSupportedFlow().first()) {
-                    if (satelliteRepository.carrierRoamingNtnAvailableServicesChangedFlow(mSubId)
+                    if (
+                        satelliteRepository
+                            .carrierRoamingNtnAvailableServicesChangedFlow(mSubId)
                             .first()
                     ) {
                         preference.isVisible = true
@@ -95,30 +96,23 @@ class SatelliteSettingPreferenceController @JvmOverloads constructor(
                 }
             } else {
                 preference.isVisible = true
-                if (!mCarrierConfigs.getBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false)
-                ) {
+                if (!mCarrierConfigs.getBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false)) {
                     preference.setSummary(R.string.satellite_setting_summary_without_entitlement)
                     return@launch
                 }
                 val isSatelliteEligible =
-                    SatelliteCarrierSettingUtils.isSatelliteAccountEligible(
-                        mContext, mSubId
-                    )
+                    SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)
                 val summary =
-                    if (isSatelliteEligible)
-                        R.string.satellite_setting_enabled_summary
-                    else
-                        R.string.satellite_setting_disabled_summary
+                    if (isSatelliteEligible) R.string.satellite_setting_enabled_summary
+                    else R.string.satellite_setting_disabled_summary
                 preference.setSummary(summary)
             }
         }
     }
 
     override fun getAvailabilityStatus(subId: Int): Int {
-        return if (SubscriptionManager.isValidSubscriptionId(subId))
-            AVAILABLE
-        else
-            CONDITIONALLY_UNAVAILABLE
+        return if (SubscriptionManager.isValidSubscriptionId(subId)) AVAILABLE
+        else CONDITIONALLY_UNAVAILABLE
     }
 
     override fun displayPreference(screen: PreferenceScreen) {
@@ -128,8 +122,8 @@ class SatelliteSettingPreferenceController @JvmOverloads constructor(
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (preferenceKey == preference.key) {
             // This activity runs in phone process, we must use intent to start
-            val intent = Intent(Settings.ACTION_SATELLITE_SETTING)
-                .setPackage(mContext.getPackageName())
+            val intent =
+                Intent(Settings.ACTION_SATELLITE_SETTING).setPackage(mContext.getPackageName())
             // This will setup the Home and Search affordance
             intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, true)
             intent.putExtra(SatelliteSetting.SUB_ID, mSubId)
@@ -143,26 +137,26 @@ class SatelliteSettingPreferenceController @JvmOverloads constructor(
     companion object {
         const val TAG = "SatelliteSettingPreferenceController"
 
-        class SatelliteConnectivitySearchItem(
-            private val context: Context,
-        ) : MobileNetworkSettingsSearchItem {
+        class SatelliteConnectivitySearchItem(private val context: Context) :
+            MobileNetworkSettingsSearchItem {
             private fun isAvailable(subId: Int): Boolean = runBlocking {
                 val carrierConfigCache = CarrierConfigCache.getInstance(context)
                 val carrierConfigs = getCarrierConfigs(subId, carrierConfigCache)
-                if (!carrierConfigs.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
-                ) {
+                if (!carrierConfigs.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)) {
                     return@runBlocking false
                 }
 
                 val isCarrierRoamingNtnConnectedTypeManual =
-                    CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC != carrierConfigs.getInt(
-                        KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-                        CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
-                    )
+                    CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC !=
+                        carrierConfigs.getInt(
+                            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                            CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+                        )
                 if (isCarrierRoamingNtnConnectedTypeManual) {
                     val satelliteRepository = SatelliteRepository(context)
                     if (satelliteRepository.requestIsSupportedFlow().first()) {
-                        satelliteRepository.carrierRoamingNtnAvailableServicesChangedFlow(subId)
+                        satelliteRepository
+                            .carrierRoamingNtnAvailableServicesChangedFlow(subId)
                             .first()
                     } else {
                         false
@@ -170,7 +164,6 @@ class SatelliteSettingPreferenceController @JvmOverloads constructor(
                 } else {
                     true
                 }
-
             }
 
             override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
@@ -184,13 +177,13 @@ class SatelliteSettingPreferenceController @JvmOverloads constructor(
 
         fun getCarrierConfigs(
             subId: Int,
-            carrierConfigCache: CarrierConfigCache
+            carrierConfigCache: CarrierConfigCache,
         ): PersistableBundle {
             return carrierConfigCache.getSpecificConfigsForSubId(
                 subId,
                 KEY_SATELLITE_ATTACH_SUPPORTED_BOOL,
                 KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL,
-                KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT
+                KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
             )
         }
     }

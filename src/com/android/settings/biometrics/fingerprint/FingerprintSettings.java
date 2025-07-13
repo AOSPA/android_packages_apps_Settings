@@ -76,7 +76,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
@@ -532,16 +531,6 @@ public class FingerprintSettings extends SubSettings {
                 case FingerprintManager.FINGERPRINT_ERROR_USER_CANCELED:
                     // Only happens if we get preempted by another activity, or canceled by the
                     // user (e.g. swipe up to home). Ignored.
-                    // See b/401470277, the authentication may be cancelled by
-                    // FingerprintResetLockoutClient which is triggered after the confirmation of
-                    // either ConfirmLockPassword or ConfirmLockPattern.
-                    // In this case or other unexpected cases, let's retry authentication.
-                    // If the cancellation dues to the device is going to sleep, then
-                    // this authentication attempt would be cancelled later within onPause().
-                    if (getLifecycle().getCurrentState() == Lifecycle.State.RESUMED) {
-                        mInFingerprintLockout = false;
-                        retryFingerprint();
-                    }
                     return;
                 case FingerprintManager.FINGERPRINT_ERROR_LOCKOUT:
                     mInFingerprintLockout = true;
@@ -1537,36 +1526,9 @@ public class FingerprintSettings extends SubSettings {
             if (fpref == null) {
                 return;
             }
-            if (isUdfps()) {
-                clearAllFingerprintPreferenceHighlight();
-                fpref.startHighlight();
-            } else {
-                highlightForSfps(fpref);
-            }
+            clearAllFingerprintPreferenceHighlight();
+            fpref.startHighlight();
             setupFingerprintRecognition(fpref.getView(), fpref.getFingerprint());
-        }
-
-        private void highlightForSfps(FingerprintPreference preference) {
-            final Drawable highlight = getHighlightDrawable();
-            if (highlight != null && preference != null) {
-                final View view = preference.getView();
-                if (view == null) {
-                    // FingerprintPreference is not bound to UI yet, so view is null.
-                    return;
-                }
-                final int centerX = view.getWidth() / 2;
-                final int centerY = view.getHeight() / 2;
-                highlight.setHotspot(centerX, centerY);
-                view.setBackground(highlight);
-                view.setPressed(true);
-                view.setPressed(false);
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        view.setBackground(null);
-                    }
-                }, RESET_HIGHLIGHT_DELAY_MS);
-            }
         }
 
         private void setupFingerprintRecognition(View view, Fingerprint fp) {
