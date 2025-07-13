@@ -30,13 +30,11 @@ import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowDialog
 import org.robolectric.shadows.ShadowLooper
 
-/** Base test cases for classes that inherits from [ShortcutFragment] */
-abstract class BaseShortcutFragmentTestCases<T : PreferenceFragmentCompat> {
-    protected val context: Context = ApplicationProvider.getApplicationContext<Context>()
+/** Base test cases for fragment class that that provides accessibility shortcut toggle. */
+abstract class BaseShortcutInteractionsTestCases<T : PreferenceFragmentCompat> {
+    protected val context: Context = ApplicationProvider.getApplicationContext()
     protected val a11yManager: ShadowAccessibilityManager =
-        Shadow.extract<ShadowAccessibilityManager>(
-            context.getSystemService<AccessibilityManager?>(AccessibilityManager::class.java)
-        )
+        Shadow.extract(context.getSystemService(AccessibilityManager::class.java))
 
     @Test
     fun clickShortcutToggle_shortcutWasOff_turnOnShortcutAndShowShortcutTutorial() {

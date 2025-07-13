@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -83,9 +85,10 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         }
     }
 
+    @NonNull
     @Override
-    public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
-            Bundle savedInstanceState) {
+    public RecyclerView onCreateRecyclerView(@NonNull LayoutInflater inflater,
+            @NonNull ViewGroup parent, @Nullable Bundle savedInstanceState) {
         if (parent instanceof GlifPreferenceLayout) {
             final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
             return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(
@@ -123,6 +126,7 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         return 0;
     }
 
+    @NonNull
     @Override
     public String getSurveyKey() {
         // Hides survey options in SuW

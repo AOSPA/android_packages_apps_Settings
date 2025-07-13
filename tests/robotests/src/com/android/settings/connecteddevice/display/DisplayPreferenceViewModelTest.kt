@@ -36,6 +36,8 @@ import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.verify
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.never
+import org.mockito.kotlin.reset
 import org.mockito.kotlin.times
 
 /** Unit test for [DisplayPreferenceViewModel] */
@@ -80,6 +82,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
             Settings.Secure.MIRROR_BUILT_IN_DISPLAY,
             if (enable) 1 else 0,
         )
+        viewModel.mirrorModeObserver.onChange(/* selfChange= */ false)
     }
 
     @Test
@@ -91,6 +94,20 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
             .containsExactly(EXTERNAL_DISPLAY_ID, OVERLAY_DISPLAY_ID)
 
         assertThat(state.selectedDisplayId).isEqualTo(initialSelectedDisplayId)
+        assertThat(state.isMirroring).isFalse()
+    }
+
+    @Test
+    fun mirrorModeSettingChanged_updatesUiState() {
+        assertThat(viewModel.uiState.value!!.isMirroring).isFalse()
+
+        setMirroringMode(true)
+
+        assertThat(viewModel.uiState.value!!.isMirroring).isTrue()
+
+        setMirroringMode(false)
+
+        assertThat(viewModel.uiState.value!!.isMirroring).isFalse()
     }
 
     @Test
@@ -133,11 +150,11 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
     fun inMirroringMode_displayListenerTriggersUpdate() {
         setMirroringMode(true)
         includeBuiltinDisplay()
-        verify(uiStateObserver, times(2)).onChanged(any())
+        reset(uiStateObserver)
 
         mListener.update(DEFAULT_DISPLAY)
 
-        verify(uiStateObserver, times(3)).onChanged(any())
+        verify(uiStateObserver, times(1)).onChanged(any())
         val state = viewModel.uiState.value!!
         assertThat(state.enabledDisplays).hasSize(3)
     }
@@ -146,22 +163,22 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
     fun inMirroringMode_topologyListenerDoesNotTriggerUpdate() {
         setMirroringMode(true)
         includeBuiltinDisplay()
-        verify(uiStateObserver, times(2)).onChanged(any())
+        reset(uiStateObserver)
 
         topologyListenerCaptor.firstValue.accept(displayTopology)
 
-        verify(uiStateObserver, times(2)).onChanged(any())
+        verify(uiStateObserver, never()).onChanged(any())
     }
 
     @Test
     fun inTopologyMode_topologyListenerTriggersUpdate() {
         setMirroringMode(false)
         includeBuiltinDisplay()
-        verify(uiStateObserver, times(2)).onChanged(any())
+        reset(uiStateObserver)
 
         topologyListenerCaptor.firstValue.accept(displayTopology)
 
-        verify(uiStateObserver, times(3)).onChanged(any())
+        verify(uiStateObserver, times(1)).onChanged(any())
         val state = viewModel.uiState.value!!
         assertThat(state.enabledDisplays).hasSize(3)
     }
@@ -170,10 +187,10 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
     fun inTopologyMode_displayListenerDoesNotTriggerUpdate() {
         setMirroringMode(false)
         includeBuiltinDisplay()
-        verify(uiStateObserver, times(2)).onChanged(any())
+        reset(uiStateObserver)
 
         mListener.update(DEFAULT_DISPLAY)
 
-        verify(uiStateObserver, times(2)).onChanged(any())
+        verify(uiStateObserver, never()).onChanged(any())
     }
 }

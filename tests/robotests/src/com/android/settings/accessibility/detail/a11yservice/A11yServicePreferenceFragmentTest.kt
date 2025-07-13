@@ -31,9 +31,7 @@ import android.text.Html
 import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentFactory
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.testing.FragmentScenario
-import androidx.fragment.app.testing.FragmentScenario.FragmentAction
 import androidx.lifecycle.Lifecycle
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
@@ -43,22 +41,14 @@ import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutT
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE
 import com.android.settings.R
 import com.android.settings.SettingsActivity
-import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_SHORTCUT
-import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE
-import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_TOGGLE
 import com.android.settings.accessibility.AccessibilityFooterPreference
 import com.android.settings.accessibility.AccessibilitySettings
-import com.android.settings.accessibility.BaseShortcutFragmentTestCases
+import com.android.settings.accessibility.BaseShortcutInteractionsTestCases
 import com.android.settings.accessibility.PreferredShortcut
 import com.android.settings.accessibility.PreferredShortcuts
 import com.android.settings.accessibility.ShortcutPreference
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
-import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment.Companion.SERVICE_WARNING_DIALOG_REQUEST_CODE
 import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment
-import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment.Companion.RESULT_DIALOG_CONTEXT
-import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment.Companion.RESULT_STATUS
-import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment.Companion.RESULT_STATUS_ALLOW
-import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment.Companion.RESULT_STATUS_DENY
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment
 import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settings.testutils.shadow.SettingsShadowResources
@@ -82,7 +72,7 @@ import org.robolectric.shadows.ShadowPackageManager
 
 @RunWith(RobolectricTestParameterInjector::class)
 class A11yServicePreferenceFragmentTest :
-    BaseShortcutFragmentTestCases<A11yServicePreferenceFragment>() {
+    BaseShortcutInteractionsTestCases<A11yServicePreferenceFragment>() {
     private var fragScenario: FragmentScenario<A11yServicePreferenceFragment>? = null
     private var fragment: A11yServicePreferenceFragment? = null
     private val packageManager: ShadowPackageManager = spy(shadowOf(context.packageManager))
@@ -213,14 +203,17 @@ class A11yServicePreferenceFragmentTest :
 
         val useServiceToggle = getUseServiceToggle()!!
         useServiceToggle.performClick()
-        val warningDialog = assertServiceWarningDialogShown()
-        warningDialog.setFragmentResult(
-            SERVICE_WARNING_DIALOG_REQUEST_CODE,
-            Bundle().apply {
-                putString(RESULT_STATUS, if (allow) RESULT_STATUS_ALLOW else RESULT_STATUS_DENY)
-                putInt(RESULT_DIALOG_CONTEXT, ENABLE_WARNING_FROM_TOGGLE)
-            },
-        )
+
+        val buttonId =
+            if (allow) {
+                com.android.internal.R.id.accessibility_permission_enable_allow_button
+            } else {
+                com.android.internal.R.id.accessibility_permission_enable_deny_button
+            }
+        assertServiceWarningDialogShown()
+        val dialog: ShadowDialog = shadowOf(ShadowDialog.getLatestDialog())
+        dialog.clickOn(buttonId)
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
         assertThat(useServiceToggle.isChecked).isEqualTo(expectServiceOn)
         assertThat(
@@ -308,14 +301,16 @@ class A11yServicePreferenceFragmentTest :
         widget!!.performClick()
         ShadowLooper.idleMainLooper()
 
-        val warningDialog = assertServiceWarningDialogShown()
-        warningDialog.setFragmentResult(
-            SERVICE_WARNING_DIALOG_REQUEST_CODE,
-            Bundle().apply {
-                putString(RESULT_STATUS, if (allow) RESULT_STATUS_ALLOW else RESULT_STATUS_DENY)
-                putInt(RESULT_DIALOG_CONTEXT, ENABLE_WARNING_FROM_SHORTCUT_TOGGLE)
-            },
-        )
+        val buttonId =
+            if (allow) {
+                com.android.internal.R.id.accessibility_permission_enable_allow_button
+            } else {
+                com.android.internal.R.id.accessibility_permission_enable_deny_button
+            }
+
+        assertServiceWarningDialogShown()
+        val dialog: ShadowDialog = shadowOf(ShadowDialog.getLatestDialog())
+        dialog.clickOn(buttonId)
 
         assertThat(shortcutToggle.isChecked).isEqualTo(expectShortcutOn)
     }
@@ -392,14 +387,16 @@ class A11yServicePreferenceFragmentTest :
         assertThat(pref).isNotNull()
         pref!!.performClick()
         ShadowLooper.idleMainLooper()
-        val warningDialog = assertServiceWarningDialogShown()
-        warningDialog.setFragmentResult(
-            SERVICE_WARNING_DIALOG_REQUEST_CODE,
-            Bundle().apply {
-                putString(RESULT_STATUS, if (allow) RESULT_STATUS_ALLOW else RESULT_STATUS_DENY)
-                putInt(RESULT_DIALOG_CONTEXT, ENABLE_WARNING_FROM_SHORTCUT)
-            },
-        )
+        val buttonId =
+            if (allow) {
+                com.android.internal.R.id.accessibility_permission_enable_allow_button
+            } else {
+                com.android.internal.R.id.accessibility_permission_enable_deny_button
+            }
+
+        assertServiceWarningDialogShown()
+        val dialog: ShadowDialog = shadowOf(ShadowDialog.getLatestDialog())
+        dialog.clickOn(buttonId)
 
         assertThat(isEditShortcutsScreenShown()).isEqualTo(expectEditShortcutsScreenShown)
     }
@@ -522,11 +519,11 @@ class A11yServicePreferenceFragmentTest :
     }
 
     override fun getShortcutToggle(): ShortcutPreference? {
-        return fragment?.findPreference<ShortcutPreference?>(SHORTCUT_PREF_KEY)
+        return fragment?.findPreference(SHORTCUT_PREF_KEY)
     }
 
     private fun getUseServiceToggle(): TwoStatePreference? {
-        return fragment?.findPreference<TwoStatePreference?>(USE_SERVICE_PREF_KEY)
+        return fragment?.findPreference(USE_SERVICE_PREF_KEY)
     }
 
     override fun launchFragment(): A11yServicePreferenceFragment {
@@ -559,9 +556,7 @@ class A11yServicePreferenceFragmentTest :
                 )
                 .moveToState(Lifecycle.State.RESUMED)
 
-        fragScenario!!.onFragment(
-            FragmentAction { frag: A11yServicePreferenceFragment? -> fragment = frag }
-        )
+        fragScenario!!.onFragment { frag: A11yServicePreferenceFragment? -> fragment = frag }
     }
 
     private fun createA11yServiceInfo(

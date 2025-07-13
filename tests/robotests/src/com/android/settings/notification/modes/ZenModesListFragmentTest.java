@@ -35,6 +35,7 @@ import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.testing.EmptyFragmentActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.android.settings.notification.modes.ZenModesListAddModePreferenceController.ModeType;
@@ -52,6 +53,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowActivity.IntentForResult;
+import org.robolectric.shadows.ShadowDialog;
 
 @RunWith(RobolectricTestRunner.class)
 public class ZenModesListFragmentTest {
@@ -85,10 +87,45 @@ public class ZenModesListFragmentTest {
 
         mFragment = new ZenModesListFragment();
         mActivityScenario.getScenario().onActivity(activity -> {
+            activity.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
             activity.getSupportFragmentManager().beginTransaction()
                     .add(mFragment, "tag").commitNow();
             mActivity = activity;
         });
+    }
+
+    @Test
+    public void onAvailableModeTypesForAdd_multipleTypes_showsChooser() {
+        mFragment.onAvailableModeTypesForAdd(
+                ImmutableList.of(CUSTOM_MANUAL_TYPE, APP_PROVIDED_MODE_TYPE));
+        mFragment.getParentFragmentManager().executePendingTransactions();
+
+        // Dialog for choosing the mode, no next activity.
+        assertThat(ShadowDialog.getShownDialogs()).hasSize(1);
+        assertThat(shadowOf(mActivity).getNextStartedActivityForResult()).isNull();
+    }
+
+    @Test
+    public void onAvailableModeTypesForAdd_singleType_startsCreation() {
+        mFragment.onAvailableModeTypesForAdd(ImmutableList.of(APP_PROVIDED_MODE_TYPE));
+
+        // Next activity, no dialog.
+        IntentForResult intent = shadowOf(mActivity).getNextStartedActivityForResult();
+        assertThat(intent).isNotNull();
+        assertThat(intent.intent).isEqualTo(APP_PROVIDED_MODE_TYPE.creationActivityIntent());
+        assertThat(ShadowDialog.getShownDialogs()).isEmpty();
+    }
+
+    @Test
+    public void onAvailableModeTypesForAdd_activityStopped_noCrash() {
+        mActivityScenario.getScenario().moveToState(Lifecycle.State.DESTROYED);
+
+        mFragment.onAvailableModeTypesForAdd(
+                ImmutableList.of(CUSTOM_MANUAL_TYPE, APP_PROVIDED_MODE_TYPE));
+
+        // No dialog or activity; also no crash.
+        assertThat(shadowOf(mActivity).getNextStartedActivityForResult()).isNull();
+        assertThat(ShadowDialog.getShownDialogs()).isEmpty();
     }
 
     @Test

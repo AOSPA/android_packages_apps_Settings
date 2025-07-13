@@ -296,9 +296,13 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
             LocaleStore.LocaleInfo saved = selectedLocaleInfo;
             mSelectedLocaleInfo = saved;
             int position = mUpdatedLocaleInfoList.indexOf(selectedLocaleInfo);
-            mUpdatedLocaleInfoList.remove(position);
-            mUpdatedLocaleInfoList.add(menuId == R.id.move_up ? position - 1 : position + 1,
-                    saved);
+            if (position != -1) {
+                mUpdatedLocaleInfoList.remove(position);
+                mUpdatedLocaleInfoList.add(menuId == R.id.move_up ? position - 1 : position + 1,
+                        saved);
+            } else {
+                Log.d(TAG, "Can not get the selected localeInfo :" + selectedLocaleInfo);
+            }
         } else {
             int position = mUpdatedLocaleInfoList.indexOf(selectedLocaleInfo);
             mUpdatedLocaleInfoList.remove(position);

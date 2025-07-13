@@ -33,6 +33,7 @@ import com.android.settings.accessibility.screenmagnification.dialogs.Magnificat
 import com.android.settings.core.BasePreferenceController
 
 /** Handles the magnification mode preference content and its click behavior */
+// LINT.IfChange
 class ModePreferenceController(context: Context, prefKey: String) :
     BasePreferenceController(context, prefKey), DefaultLifecycleObserver {
 
@@ -91,3 +92,4 @@ class ModePreferenceController(context: Context, prefKey: String) :
         private const val MODE_CHOOSER_REQUEST_KEY = "magnificationModeChooser"
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/MagnificationModePreference.kt)

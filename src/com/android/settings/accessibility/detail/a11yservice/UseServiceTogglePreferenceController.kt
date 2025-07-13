@@ -23,16 +23,23 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import androidx.preference.TwoStatePreference
 import com.android.settings.R
+import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums.ENABLE_WARNING_FROM_TOGGLE
 import com.android.settings.accessibility.extensions.getFeatureName
+import com.android.settings.accessibility.extensions.isServiceWarningRequired
 import com.android.settings.accessibility.extensions.targetSdkIsAtLeast
 import com.android.settings.accessibility.extensions.useService
+import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment
+import com.android.settings.accessibility.shared.dialogs.AccessibilityServiceWarningDialogFragment.Companion.RESULT_STATUS_ALLOW
+import com.android.settings.accessibility.shared.dialogs.DisableAccessibilityServiceDialogFragment
 import com.android.settings.core.BasePreferenceController
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.accessibility.AccessibilityUtils
 
 class UseServiceTogglePreferenceController(context: Context, prefKey: String) :
@@ -42,6 +49,8 @@ class UseServiceTogglePreferenceController(context: Context, prefKey: String) :
 
     private val settingsKey = Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
     private var serviceInfo: AccessibilityServiceInfo? = null
+    private var fragmentManager: FragmentManager? = null
+    private var sourceMetricsCategory: Int = 0
     private var preference: TwoStatePreference? = null
     private var contentObserver: ContentObserver =
         object : ContentObserver(Looper.myLooper()?.run { Handler(/* async= */ false) }) {
@@ -50,8 +59,14 @@ class UseServiceTogglePreferenceController(context: Context, prefKey: String) :
             }
         }
 
-    fun initialize(serviceInfo: AccessibilityServiceInfo) {
+    fun initialize(
+        serviceInfo: AccessibilityServiceInfo,
+        fragmentManager: FragmentManager,
+        sourceMetricsCategory: Int,
+    ) {
         this.serviceInfo = serviceInfo
+        this.fragmentManager = fragmentManager
+        this.sourceMetricsCategory = sourceMetricsCategory
     }
 
     override fun getAvailabilityStatus(): Int {
@@ -80,11 +95,11 @@ class UseServiceTogglePreferenceController(context: Context, prefKey: String) :
                 )
             onPreferenceClickListener =
                 object : Preference.OnPreferenceClickListener {
-                override fun onPreferenceClick(preference: Preference): Boolean {
-                    // We handled the preference click in #onPreferenceChange
-                    return true
+                    override fun onPreferenceClick(preference: Preference): Boolean {
+                        // We handled the preference click in #onPreferenceChange
+                        return true
+                    }
                 }
-            }
         }
         this.preference = preference
     }
@@ -104,8 +119,28 @@ class UseServiceTogglePreferenceController(context: Context, prefKey: String) :
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
-        preference.preferenceManager.onPreferenceTreeClickListener?.onPreferenceTreeClick(
-            preference
+        if (newValue == false) {
+            DisableAccessibilityServiceDialogFragment.showDialog(
+                fragmentManager = requireNotNull(fragmentManager),
+                componentName = requireNotNull(serviceInfo?.componentName),
+            )
+        } else {
+            if (serviceInfo?.isServiceWarningRequired(preference.context) != false) {
+                AccessibilityServiceWarningDialogFragment.showDialog(
+                    fragmentManager = requireNotNull(fragmentManager),
+                    componentName = requireNotNull(serviceInfo).componentName,
+                    source = ENABLE_WARNING_FROM_TOGGLE,
+                    requestKey = SERVICE_WARNING_DIALOG_REQUEST_CODE,
+                )
+            } else {
+                serviceInfo?.useService(mContext, enabled = true)
+            }
+        }
+
+        // log here since calling super.onPreferenceTreeClick will be skipped
+        featureFactory.metricsFeatureProvider.logClickedPreference(
+            preference,
+            sourceMetricsCategory,
         )
         return false
     }
@@ -113,7 +148,7 @@ class UseServiceTogglePreferenceController(context: Context, prefKey: String) :
     private fun isChecked(): Boolean {
         return serviceInfo?.componentName.let {
             AccessibilityUtils.getEnabledServicesFromSettings(mContext).contains(it)
-        } == true
+        }
     }
 
     override fun onCreate(owner: LifecycleOwner) {
@@ -123,10 +158,27 @@ class UseServiceTogglePreferenceController(context: Context, prefKey: String) :
             /* notifyForDescendants= */ false,
             contentObserver,
         )
+
+        fragmentManager?.setFragmentResultListener(
+            /* requestKey= */ SERVICE_WARNING_DIALOG_REQUEST_CODE,
+            /* lifecycleOwner= */ owner,
+        ) { requestKey, result ->
+            if (requestKey == SERVICE_WARNING_DIALOG_REQUEST_CODE) {
+                val allow: Boolean =
+                    AccessibilityServiceWarningDialogFragment.getResultStatus(result) ==
+                        RESULT_STATUS_ALLOW
+                serviceInfo?.useService(mContext, enabled = allow)
+            }
+        }
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
         super.onDestroy(owner)
         mContext.contentResolver.unregisterContentObserver(contentObserver)
+    }
+
+    companion object {
+        private const val SERVICE_WARNING_DIALOG_REQUEST_CODE =
+            "serviceWarningRequestFromUseServiceToggle"
     }
 }

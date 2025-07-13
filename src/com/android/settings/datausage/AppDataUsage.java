@@ -331,6 +331,9 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (super.onPreferenceTreeClick(preference)) {
+            return true;
+        }
         if (!(preference instanceof IntroPreference)) return false;
 
         String pkg = !mPackages.isEmpty() ? mPackages.valueAt(0) : null;

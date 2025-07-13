@@ -40,6 +40,7 @@ import java.util.Objects;
  * A {@link BasePreferenceController} for controlling the preview pager of the text and reading
  * options.
  */
+// LINT.IfChange
 class TextReadingPreviewController extends BasePreferenceController implements
         PreviewSizeSliderController.ProgressInteractionListener {
     private static final String TAG = "TextReadingPreviewCtrl";
@@ -255,3 +256,4 @@ class TextReadingPreviewController extends BasePreferenceController implements
         return configurations;
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/textreading/ui/TextReadingPreview.kt, /src/com/android/settings/accessibility/shared/utils/DebounceConfigurationCommitController.kt)

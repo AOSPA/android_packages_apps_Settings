@@ -24,11 +24,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.accessibility.actionbar.DisabilitySupportMenuController;
 import com.android.settings.accessibility.actionbar.FeedbackMenuController;
@@ -58,6 +61,15 @@ public abstract class BaseSupportFragment extends DashboardFragment {
         if (com.android.settings.accessibility.Flags.enableDisabilitySupport()) {
             handleDisabilitySupportFlow();
         }
+    }
+
+    @NonNull
+    @Override
+    public RecyclerView onCreateRecyclerView(@NonNull LayoutInflater inflater,
+            @NonNull ViewGroup parent, @Nullable Bundle savedInstanceState) {
+        RecyclerView recyclerView =
+                super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(recyclerView);
     }
 
     @Override

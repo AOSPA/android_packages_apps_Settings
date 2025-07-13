@@ -42,7 +42,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
-import com.android.settings.accessibility.ShortcutFragment;
+import com.android.settings.accessibility.BaseSupportFragment;
 import com.android.settings.accessibility.ToggleShortcutPreferenceController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.keyboard.Flags;
@@ -54,7 +54,7 @@ import com.android.settingslib.widget.LayoutPreference;
 import java.util.List;
 
 @SearchIndexable
-public class MouseKeysMainPageFragment extends ShortcutFragment
+public class MouseKeysMainPageFragment extends BaseSupportFragment
         implements InputManager.InputDeviceListener {
 
     private static final String TAG = "MouseKeysMainPageFragment";
@@ -80,8 +80,23 @@ public class MouseKeysMainPageFragment extends ShortcutFragment
             };
 
     @Override
-    public void onCreate(@NonNull Bundle bundle) {
-        super.onCreate(bundle);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ToggleShortcutPreferenceController shortcutController =
+                use(KeyboardAccessibilityMouseKeysShortcutController.class);
+        if (shortcutController != null) {
+            shortcutController.initialize(
+                    getFeatureComponentName(),
+                    getChildFragmentManager(),
+                    getFeatureName(),
+                    getMetricsCategory()
+            );
+        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mCurrentInputDevice = getInputDevice();
         final PreferenceScreen screen = getPreferenceScreen();
         mMouseKeyImagesPreference = screen.findPreference(KEY_MOUSE_KEY_LIST);
@@ -93,12 +108,6 @@ public class MouseKeysMainPageFragment extends ShortcutFragment
                         mCurrentInputDevice.getName());
         getActivity().setTitle(title);
         configureImagesPreference();
-    }
-
-    @Nullable
-    @Override
-    public ToggleShortcutPreferenceController getShortcutPreferenceController() {
-        return use(KeyboardAccessibilityMouseKeysShortcutController.class);
     }
 
     @Override
@@ -134,14 +143,12 @@ public class MouseKeysMainPageFragment extends ShortcutFragment
     }
 
     @NonNull
-    @Override
-    public CharSequence getFeatureName() {
+    private CharSequence getFeatureName() {
         return getContext().getString(R.string.mouse_keys);
     }
 
     @NonNull
-    @Override
-    public ComponentName getFeatureComponentName() {
+    private ComponentName getFeatureComponentName() {
         return MOUSE_KEYS_COMPONENT_NAME;
     }
 

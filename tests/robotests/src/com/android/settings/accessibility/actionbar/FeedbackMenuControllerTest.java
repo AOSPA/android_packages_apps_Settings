@@ -61,6 +61,7 @@ import org.robolectric.annotation.Config;
 public class FeedbackMenuControllerTest {
     private static final String PACKAGE_NAME = "com.android.test";
     private static final String DEFAULT_CATEGORY = "default category";
+    private static final String DEFAULT_TRIGGER_ID = "default triggerId";
 
     @Rule
     public final MockitoRule mMocks = MockitoJUnit.rule();
@@ -92,7 +93,8 @@ public class FeedbackMenuControllerTest {
         when(mHost.getActivity()).thenReturn(mActivity);
         when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
         when(mMenuItem.getItemId()).thenReturn(MenusUtils.MenuId.FEEDBACK.getValue());
-        mFeedbackManager = new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY);
+        mFeedbackManager = new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY,
+                DEFAULT_TRIGGER_ID);
     }
 
     @Test

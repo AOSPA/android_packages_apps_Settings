@@ -15,7 +15,8 @@
  */
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.FeedbackManager.CATEGORY_TAG;
+import static com.android.settings.accessibility.FeedbackManager.CATEGORY_TAG_EXTRA;
+import static com.android.settings.accessibility.FeedbackManager.TRIGGER_ID_EXTRA;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -45,6 +46,7 @@ public class FeedbackManagerTest {
 
     private static final String PACKAGE_NAME = "test.feedback.package";
     private static final String DEFAULT_CATEGORY = "default category";
+    private static final String DEFAULT_TRIGGER_ID = "default triggerId";
 
     private Activity mActivity;
 
@@ -57,7 +59,7 @@ public class FeedbackManagerTest {
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void isAvailable_enableLowVisionGenericFeedbackWithValidParams_returnsTrue() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY);
+                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.isAvailable()).isTrue();
     }
@@ -66,7 +68,7 @@ public class FeedbackManagerTest {
     @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void isAvailable_disableLowVisionGenericFeedback_returnsFalse() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY);
+                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.isAvailable()).isFalse();
     }
@@ -75,7 +77,8 @@ public class FeedbackManagerTest {
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void isAvailable_withNullCategory_returnsFalse() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, /* category= */ null);
+                new FeedbackManager(mActivity, PACKAGE_NAME, /* category= */ null,
+                        DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.isAvailable()).isFalse();
     }
@@ -84,7 +87,8 @@ public class FeedbackManagerTest {
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void isAvailable_withNullReporterPackage_returnsFalse() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, /* reporterPackage= */ null, DEFAULT_CATEGORY);
+                new FeedbackManager(mActivity, /* reporterPackage= */ null, DEFAULT_CATEGORY,
+                        DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.isAvailable()).isFalse();
     }
@@ -93,7 +97,8 @@ public class FeedbackManagerTest {
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void isAvailable_withNullActivity_returnsFalse() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(/* activity= */ null, PACKAGE_NAME, DEFAULT_CATEGORY);
+                new FeedbackManager(/* activity= */ null, PACKAGE_NAME, DEFAULT_CATEGORY,
+                        DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.isAvailable()).isFalse();
     }
@@ -102,7 +107,7 @@ public class FeedbackManagerTest {
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void sendFeedback_enableLowVisionGenericFeedbackWithValidParams_success() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY);
+                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.sendFeedback()).isTrue();
 
@@ -112,14 +117,15 @@ public class FeedbackManagerTest {
         assertThat(startedIntent.getPackage()).isEqualTo(PACKAGE_NAME);
         Bundle extras = startedIntent.getExtras();
         assertThat(extras).isNotNull();
-        assertThat(extras.getString(CATEGORY_TAG)).isEqualTo(DEFAULT_CATEGORY);
+        assertThat(extras.getString(CATEGORY_TAG_EXTRA)).isEqualTo(DEFAULT_CATEGORY);
+        assertThat(extras.getString(TRIGGER_ID_EXTRA)).isEqualTo(DEFAULT_TRIGGER_ID);
     }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void sendFeedback_disableLowVisionGenericFeedback_returnsFalse() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY);
+                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.sendFeedback()).isFalse();
     }
@@ -128,7 +134,8 @@ public class FeedbackManagerTest {
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void sendFeedback_withNullCategory_returnsFalse() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, /* category= */ null);
+                new FeedbackManager(mActivity, PACKAGE_NAME, /* category= */ null,
+                        DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.sendFeedback()).isFalse();
     }
@@ -137,7 +144,8 @@ public class FeedbackManagerTest {
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void sendFeedback_withNullReporterPackage_returnsFalse() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, /* reporterPackage= */ null, DEFAULT_CATEGORY);
+                new FeedbackManager(mActivity, /* reporterPackage= */ null, DEFAULT_CATEGORY,
+                        DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.sendFeedback()).isFalse();
     }
@@ -146,7 +154,8 @@ public class FeedbackManagerTest {
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void sendFeedback_withNullActivity_returnsFalse() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(/* activity= */ null, PACKAGE_NAME, DEFAULT_CATEGORY);
+                new FeedbackManager(/* activity= */ null, PACKAGE_NAME, DEFAULT_CATEGORY,
+                        DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.sendFeedback()).isFalse();
     }

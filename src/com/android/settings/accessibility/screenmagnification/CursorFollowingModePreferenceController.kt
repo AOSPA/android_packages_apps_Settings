@@ -39,6 +39,7 @@ import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 /**
  * Controller that shows the magnification cursor following mode and the preference click behavior.
  */
+// LINT.IfChange
 class CursorFollowingModePreferenceController(context: Context, prefKey: String) :
     BasePreferenceController(context, prefKey), DefaultLifecycleObserver {
 
@@ -152,3 +153,4 @@ class CursorFollowingModePreferenceController(context: Context, prefKey: String)
         private const val CURSOR_FOLLOWING_MODE_CHOOSER_REQUEST_KEY = "cursorFollowingModeChooser"
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/CursorFollowingPreference.kt)

@@ -22,8 +22,8 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.settings.R
+import com.android.settings.accessibility.BaseSupportFragment
 import com.android.settings.accessibility.Flags
-import com.android.settings.accessibility.ShortcutFragment
 import com.android.settings.accessibility.ToggleShortcutPreferenceController
 import com.android.settings.accessibility.screenmagnification.CursorFollowingModePreferenceController
 import com.android.settings.accessibility.screenmagnification.ModePreferenceController
@@ -33,19 +33,25 @@ import com.android.settingslib.search.SearchIndexable
 
 /** Displays the detail screen of the screen magnification feature */
 @SearchIndexable(forTarget = SearchIndexable.ALL and SearchIndexable.ARC.inv())
-open class MagnificationPreferenceFragment : ShortcutFragment() {
+open class MagnificationPreferenceFragment : BaseSupportFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        use<ModePreferenceController?>(ModePreferenceController::class.java)
-            ?.setFragmentManager(getChildFragmentManager())
-        use<CursorFollowingModePreferenceController?>(
-                CursorFollowingModePreferenceController::class.java
+        if (!Flags.catalystMagnification()) {
+            use(ModePreferenceController::class.java)?.setFragmentManager(getChildFragmentManager())
+            use(CursorFollowingModePreferenceController::class.java)
+                ?.setFragmentManager(getChildFragmentManager())
+        }
+        getShortcutPreferenceController()
+            ?.initialize(
+                getFeatureComponentName(),
+                childFragmentManager,
+                getFeatureName(),
+                metricsCategory,
             )
-            ?.setFragmentManager(getChildFragmentManager())
     }
 
-    override fun getShortcutPreferenceController(): ToggleShortcutPreferenceController? {
+    fun getShortcutPreferenceController(): ToggleShortcutPreferenceController? {
         return if (Flags.catalystMagnification()) {
             null
         } else {
@@ -53,11 +59,11 @@ open class MagnificationPreferenceFragment : ShortcutFragment() {
         }
     }
 
-    override fun getFeatureName(): CharSequence {
+    private fun getFeatureName(): CharSequence {
         return getText(R.string.accessibility_screen_magnification_title)
     }
 
-    override fun getFeatureComponentName(): ComponentName {
+    private fun getFeatureComponentName(): ComponentName {
         return AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME
     }
 

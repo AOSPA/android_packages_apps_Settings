@@ -20,7 +20,8 @@ import com.android.settings.flags.FeatureFlags
 import com.android.settings.flags.Flags
 
 /** Class handling Settings flags, but using the Desktop Experience developer option overrides. */
-class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) : FeatureFlags by featureFlagsImpl {
+class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) :
+    FeatureFlags by featureFlagsImpl {
 
     private val displayTopologyPaneInDisplayListFlag =
         DesktopExperienceFlag(
@@ -55,18 +56,19 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) : Featu
     private val showStackedMirroringDisplayConnectedDisplaySettingFlag =
         DesktopExperienceFlag(
             featureFlagsImpl::showStackedMirroringDisplayConnectedDisplaySetting,
-            /* shouldOverrideByDevOption= */ false,
+            /* shouldOverrideByDevOption= */ true,
             Flags.FLAG_SHOW_STACKED_MIRRORING_DISPLAY_CONNECTED_DISPLAY_SETTING,
         )
 
     override fun showStackedMirroringDisplayConnectedDisplaySetting(): Boolean =
         showStackedMirroringDisplayConnectedDisplaySettingFlag.isTrue
 
-    private val showTabbedConnectedDisplaySettingFlag = DesktopExperienceFlag(
-        featureFlagsImpl::showTabbedConnectedDisplaySetting,
-        /* shouldOverrideByDevOption= */ false,
-        Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING,
-    )
+    private val showTabbedConnectedDisplaySettingFlag =
+        DesktopExperienceFlag(
+            featureFlagsImpl::showTabbedConnectedDisplaySetting,
+            /* shouldOverrideByDevOption= */ false,
+            Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING,
+        )
 
     override fun showTabbedConnectedDisplaySetting(): Boolean =
         showTabbedConnectedDisplaySettingFlag.isTrue

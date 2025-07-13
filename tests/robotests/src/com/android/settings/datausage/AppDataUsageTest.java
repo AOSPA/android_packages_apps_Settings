@@ -64,6 +64,7 @@ import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 import com.android.settingslib.widget.IntroPreference;
@@ -92,6 +93,8 @@ public class AppDataUsageTest {
     private PackageManager mPackageManager;
     @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     private IntroPreference mIntroPreference;
 
@@ -177,7 +180,7 @@ public class AppDataUsageTest {
     @Config(shadows = ShadowFragment.class)
     public void bindAppHeader_allWorkApps_shouldNotShowAppInfoLink() {
         mFragment = spy(new TestFragment());
-
+        ReflectionHelpers.setField(mFragment, "mMetricsFeatureProvider", mMetricsFeatureProvider);
         when(mFragment.getPreferenceManager())
                 .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
@@ -202,6 +205,7 @@ public class AppDataUsageTest {
         final int fakeUserId = 100;
 
         mFragment = spy(new TestFragment());
+        ReflectionHelpers.setField(mFragment, "mMetricsFeatureProvider", mMetricsFeatureProvider);
         final ArraySet<String> packages = new ArraySet<>();
         packages.add("pkg");
         final AppItem appItem = new AppItem(123456789);

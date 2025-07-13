@@ -20,6 +20,7 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
@@ -33,8 +34,23 @@ import com.android.settingslib.search.SearchIndexable;
  * Settings page for color inversion.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ToggleColorInversionPreferenceFragment extends ShortcutFragment {
+public class ToggleColorInversionPreferenceFragment extends BaseSupportFragment {
     private static final String TAG = "ToggleColorInversionPreferenceFragment";
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ToggleShortcutPreferenceController shortcutPreferenceController = use(
+                ToggleShortcutPreferenceController.class);
+        if (shortcutPreferenceController != null) {
+            shortcutPreferenceController.initialize(
+                    getFeatureComponentName(),
+                    getChildFragmentManager(),
+                    getFeatureName(),
+                    getMetricsCategory()
+            );
+        }
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -70,15 +86,13 @@ public class ToggleColorInversionPreferenceFragment extends ShortcutFragment {
             new BaseSearchIndexProvider(R.xml.accessibility_color_inversion_settings);
 
     @NonNull
-    @Override
-    public CharSequence getFeatureName() {
+    private CharSequence getFeatureName() {
         return getString(
                 R.string.accessibility_display_inversion_preference_title);
     }
 
     @NonNull
-    @Override
-    public ComponentName getFeatureComponentName() {
+    private ComponentName getFeatureComponentName() {
         return COLOR_INVERSION_COMPONENT_NAME;
     }
 }

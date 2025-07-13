@@ -33,7 +33,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 /** Accessibility settings for hearing aids. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class AccessibilityHearingAidsFragment extends RestrictedShortcutFragment {
+public class AccessibilityHearingAidsFragment extends BaseRestrictedSupportFragment {
     private static final String TAG = "AccessibilityHearingAidsFragment";
 
     public AccessibilityHearingAidsFragment() {
@@ -46,6 +46,16 @@ public class AccessibilityHearingAidsFragment extends RestrictedShortcutFragment
         use(AvailableHearingDevicePreferenceController.class).init(this);
         use(SavedHearingDevicePreferenceController.class).init(this);
         use(HearingAidCompatibilityPreferenceController.class).init(this);
+        ToggleShortcutPreferenceController shortcutPreferenceController =
+                use(ToggleShortcutPreferenceController.class);
+        if (shortcutPreferenceController != null) {
+            shortcutPreferenceController.initialize(
+                    getFeatureComponentName(),
+                    getChildFragmentManager(),
+                    getFeatureName(),
+                    getMetricsCategory()
+            );
+        }
     }
 
     @Override
@@ -64,14 +74,12 @@ public class AccessibilityHearingAidsFragment extends RestrictedShortcutFragment
     }
 
     @NonNull
-    @Override
-    public ComponentName getFeatureComponentName() {
+    private ComponentName getFeatureComponentName() {
         return ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME;
     }
 
     @NonNull
-    @Override
-    public CharSequence getFeatureName() {
+    private CharSequence getFeatureName() {
         return getText(R.string.accessibility_hearingaid_title);
     }
 

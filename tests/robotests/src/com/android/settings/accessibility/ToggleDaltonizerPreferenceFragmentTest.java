@@ -52,7 +52,7 @@ import java.util.List;
 /** Tests for {@link ToggleDaltonizerPreferenceFragment} */
 @RunWith(RobolectricTestParameterInjector.class)
 public class ToggleDaltonizerPreferenceFragmentTest extends
-        BaseShortcutFragmentTestCases<ToggleDaltonizerPreferenceFragment> {
+        BaseShortcutInteractionsTestCases<ToggleDaltonizerPreferenceFragment> {
     private static final String MAIN_SWITCH_PREF_KEY = "daltonizer_switch_preference_key";
     private static final String SHORTCUT_PREF_KEY = "daltonizer_shortcut_key";
     private final Context mContext = ApplicationProvider.getApplicationContext();

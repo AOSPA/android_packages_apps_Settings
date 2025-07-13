@@ -27,7 +27,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.preference.Preference
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.settings.R
-import com.android.settings.accessibility.BaseShortcutFragmentTestCases
+import com.android.settings.accessibility.BaseShortcutInteractionsTestCases
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.MagnificationCapabilities
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode
@@ -49,7 +49,7 @@ import org.robolectric.shadows.ShadowLooper
 @Config(shadows = [ShadowInputDevice::class])
 @RunWith(RobolectricTestRunner::class)
 class MagnificationPreferenceFragmentTest :
-    BaseShortcutFragmentTestCases<MagnificationPreferenceFragment>() {
+    BaseShortcutInteractionsTestCases<MagnificationPreferenceFragment>() {
     private var fragScenario: FragmentScenario<MagnificationPreferenceFragment>? = null
     private var fragment: MagnificationPreferenceFragment? = null
 
@@ -152,7 +152,8 @@ class MagnificationPreferenceFragmentTest :
 
     companion object {
         private const val SHORTCUT_PREF_KEY = "magnification_shortcut_preference"
-        private const val MAGNIFICATION_MODE_PREF_KEY = "screen_magnification_mode"
-        private const val CURSOR_FOLLOWING_MODE_PREF_KEY = "magnification_cursor_following_mode"
+        private const val MAGNIFICATION_MODE_PREF_KEY = "accessibility_magnification_capability"
+        private const val CURSOR_FOLLOWING_MODE_PREF_KEY =
+            "accessibility_magnification_cursor_following_mode"
     }
 }
