@@ -17,8 +17,11 @@
 package com.android.settings.connecteddevice.display
 
 import android.app.Application
+import android.database.ContentObserver
 import android.hardware.display.DisplayTopology
+import android.provider.Settings
 import android.view.Display.DEFAULT_DISPLAY
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -37,11 +40,13 @@ constructor(
     data class DisplayUiState(
         val enabledDisplays: Map<Int, DisplayDevice>,
         val selectedDisplayId: Int,
+        val isMirroring: Boolean,
     )
 
     private val appContext = application.applicationContext
     private val selectedDisplayId = MutableLiveData<Int>()
     private val enabledDisplays = MutableLiveData<Map<Int, DisplayDevice>>()
+    private val isMirroring = MutableLiveData<Boolean>()
 
     private val uiStateMediator = MediatorLiveData<DisplayUiState>()
     val uiState: LiveData<DisplayUiState> = uiStateMediator
@@ -53,7 +58,7 @@ constructor(
                 // happen. In non-mirroring mode, both display update and topology update might
                 // happen, to prevent double update causing flickering, only listen to one at a
                 // time, depending on the mirroring mode
-                if (isDisplayInMirroringMode(appContext)) {
+                if (isMirroring.value == true) {
                     updateEnabledDisplays()
                 }
             }
@@ -61,8 +66,16 @@ constructor(
 
     private val topologyListener =
         Consumer<DisplayTopology> {
-            if (!isDisplayInMirroringMode(appContext)) {
+            if (isMirroring.value == false) {
                 updateEnabledDisplays()
+            }
+        }
+
+    @VisibleForTesting
+    val mirrorModeObserver =
+        object : ContentObserver(injector.handler) {
+            override fun onChange(selfChange: Boolean) {
+                updateMirroringState()
             }
         }
 
@@ -70,22 +83,27 @@ constructor(
         val updateMediator = {
             val displays = enabledDisplays.value ?: emptyMap()
             val selectedId = selectedDisplayId.value ?: getDefaultDisplayId()
-            uiStateMediator.value = DisplayUiState(displays, selectedId)
+            val mirroring = isMirroring.value ?: isDisplayInMirroringMode(appContext)
+            uiStateMediator.value = DisplayUiState(displays, selectedId, mirroring)
         }
         uiStateMediator.addSource(enabledDisplays) { updateMediator() }
         uiStateMediator.addSource(selectedDisplayId) { updateMediator() }
+        uiStateMediator.addSource(isMirroring) { updateMediator() }
 
         injector.registerDisplayListener(displayListener)
         injector.registerTopologyListener(topologyListener)
+        registerMirrorModeObserver()
 
         updateSelectedDisplay(getDefaultDisplayId())
         updateEnabledDisplays()
+        updateMirroringState()
     }
 
     override fun onCleared() {
         super.onCleared()
         injector.unregisterTopologyListener(topologyListener)
         injector.unregisterDisplayListener(displayListener)
+        appContext.contentResolver.unregisterContentObserver(mirrorModeObserver)
     }
 
     fun updateSelectedDisplay(newDisplayId: Int) {
@@ -106,6 +124,23 @@ constructor(
         if (currentSelectedId == null || !enabledDisplaysMap.contains(currentSelectedId)) {
             updateSelectedDisplay(getDefaultDisplayId())
         }
+    }
+
+    private fun updateMirroringState() {
+        // This doesn't need to trigger manual viewmodel updates for enabled displays as Display
+        // and/or DisplayTopology callback will eventually be called following mirroring update
+        val newMirroringState = isDisplayInMirroringMode(appContext)
+        if (isMirroring.value != newMirroringState) {
+            isMirroring.value = newMirroringState
+        }
+    }
+
+    private fun registerMirrorModeObserver() {
+        appContext.contentResolver.registerContentObserver(
+            Settings.Secure.getUriFor(Settings.Secure.MIRROR_BUILT_IN_DISPLAY),
+            /* notifyForDescendants= */ false,
+            mirrorModeObserver,
+        )
     }
 
     private fun getDefaultDisplayId(): Int {

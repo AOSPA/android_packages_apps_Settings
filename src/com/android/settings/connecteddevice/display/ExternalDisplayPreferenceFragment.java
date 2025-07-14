@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.display;
 
+import static com.android.settings.Utils.createAccessibleSequence;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
@@ -26,6 +27,7 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.TextView;
 import android.window.DesktopExperienceFlags;
@@ -565,9 +567,19 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
     private void addResolutionPreference(PrefRefresh refresh,
             final DisplayDevice display, int position) {
+        Display.Mode mode = display.getMode();
+        if (mode == null) {
+            return;
+        }
         var pref = reuseResolutionPreference(refresh, position);
-        pref.setSummary(display.getMode().getPhysicalWidth() + " x "
-                + display.getMode().getPhysicalHeight());
+        int width = mode.getPhysicalWidth();
+        int height = mode.getPhysicalHeight();
+        pref.setSummary(
+                createAccessibleSequence(
+                        width + " x " + height,
+                        getResources()
+                                .getString(
+                                        R.string.screen_resolution_delimiter_a11y, width, height)));
         pref.setOnPreferenceClickListener((Preference p) -> {
             writePreferenceClickMetric(p);
             launchResolutionSelector(display.getId());

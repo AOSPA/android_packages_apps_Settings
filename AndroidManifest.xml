@@ -4268,7 +4268,24 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.app.ConversationListSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
+                       android:value="@string/menu_key_notifications"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$BubbleNotificationSettingsActivity"
+            android:label="@string/bubbles_app_toggle_title"
+            android:featureFlag="com.android.settings.flags.deeplink_notifications_25q4"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NOTIFICATION_BUBBLE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.BubbleNotificationSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_notifications"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -4284,7 +4301,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.app.AppBubbleNotificationSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
+                       android:value="@string/menu_key_notifications"/>
         </activity>
 
         <activity
@@ -5005,6 +5022,20 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="com.android.settings.applications.AppDashboardFragment"/>
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_apps"/>
+        </activity>
+
+        <activity
+            android:name=".Settings$EmergencyDashboardActivity"
+            android:label="@string/emergency_settings_preference_title"
+            android:icon="@drawable/ic_homepage_emergency"
+            android:featureFlag="com.android.settings.flags.deeplink_others_25q4"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.EMERGENCY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_emergency"/>
         </activity>
 
         <activity

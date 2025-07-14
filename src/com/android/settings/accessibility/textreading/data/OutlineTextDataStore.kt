@@ -38,8 +38,11 @@ class OutlineTextDataStore(
         get() = settingsStore
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-        super.setValue(key, valueType, value)
         val newValue = value as? Boolean ?: false
+        keyValueStoreDelegate.setBoolean(
+            Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED,
+            newValue,
+        )
 
         SettingsStatsLog.write(
             ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED,

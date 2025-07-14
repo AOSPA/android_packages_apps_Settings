@@ -18,6 +18,7 @@ package com.android.settings.accessibility.detail.a11yactivity
 
 import android.accessibilityservice.AccessibilityShortcutInfo
 import android.content.Context
+import androidx.fragment.app.FragmentManager
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
@@ -27,8 +28,18 @@ class ShortcutPreferenceController(context: Context, prefKey: String) :
     ToggleShortcutPreferenceController(context, prefKey) {
     private var shortcutTitle: CharSequence? = null
 
-    fun initialize(shortcutInfo: AccessibilityShortcutInfo) {
-        super.initialize(shortcutInfo.componentName)
+    fun initialize(
+        shortcutInfo: AccessibilityShortcutInfo,
+        fragmentManager: FragmentManager,
+        featureName: CharSequence,
+        sourceMetricsCategory: Int,
+    ) {
+        super.initialize(
+            shortcutInfo.componentName,
+            fragmentManager,
+            featureName,
+            sourceMetricsCategory,
+        )
         shortcutTitle =
             mContext.getString(
                 R.string.accessibility_shortcut_title,
@@ -38,8 +49,6 @@ class ShortcutPreferenceController(context: Context, prefKey: String) :
 
     override fun displayPreference(screen: PreferenceScreen?) {
         super.displayPreference(screen)
-        shortcutTitle?.let {
-            screen?.findPreference<Preference>(preferenceKey)?.title = it
-        }
+        shortcutTitle?.let { screen?.findPreference<Preference>(preferenceKey)?.title = it }
     }
 }

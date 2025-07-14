@@ -34,12 +34,14 @@ import java.lang.ref.WeakReference;
  */
 public class FeedbackManager {
 
-    static final String CATEGORY_TAG = "category_tag";
+    static final String CATEGORY_TAG_EXTRA = "category_tag";
+    static final String TRIGGER_ID_EXTRA = "com.android.feedback.TRIGGER_ID_EXTRA";
     private static final int FEEDBACK_INTENT_RESULT_CODE = 0;
 
     private final WeakReference<Activity> mActivityWeakReference;
     @Nullable private final String mReporterPackage;
     @Nullable private final String mCategoryTag;
+    @Nullable private final String mTriggerId;
 
     /**
      * Constructs a new FeedbackManager.
@@ -52,7 +54,10 @@ public class FeedbackManager {
                 DeviceInfoUtils.getFeedbackReporterPackage(activity),
                 FeatureFactory.getFeatureFactory()
                         .getAccessibilityFeedbackFeatureProvider()
-                        .getCategory(pageId));
+                        .getCategory(pageId),
+                FeatureFactory.getFeatureFactory()
+                        .getAccessibilityFeedbackFeatureProvider()
+                        .getTriggerId(pageId));
     }
 
     /**
@@ -61,13 +66,15 @@ public class FeedbackManager {
      * @param activity The activity context. A WeakReference is used to prevent memory leaks.
      * @param reporterPackage The package name of the feedback reporter.
      * @param category The feedback bucket ID.
+     * @param triggerId The feedback trigger ID.
      */
     @VisibleForTesting
     public FeedbackManager(@Nullable Activity activity, @Nullable String reporterPackage,
-            @Nullable String category) {
+            @Nullable String category, @Nullable String triggerId) {
         this.mActivityWeakReference = new WeakReference<>(activity);
         this.mReporterPackage = reporterPackage;
         this.mCategoryTag = category;
+        this.mTriggerId = triggerId;
     }
 
     /**
@@ -101,7 +108,10 @@ public class FeedbackManager {
 
         final Intent intent = new Intent(Intent.ACTION_BUG_REPORT);
         intent.setPackage(mReporterPackage);
-        intent.putExtra(CATEGORY_TAG, mCategoryTag);
+        intent.putExtra(CATEGORY_TAG_EXTRA, mCategoryTag);
+        if (!TextUtils.isEmpty(mTriggerId)) {
+            intent.putExtra(TRIGGER_ID_EXTRA, mTriggerId);
+        }
         activity.startActivityForResult(intent, FEEDBACK_INTENT_RESULT_CODE);
         return true;
     }

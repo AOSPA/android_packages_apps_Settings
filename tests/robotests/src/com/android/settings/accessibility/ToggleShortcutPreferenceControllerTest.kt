@@ -48,10 +48,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
-import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
@@ -63,14 +61,6 @@ private const val PREFERENCE_TITLE = "prefTitle"
 @RunWith(RobolectricTestRunner::class)
 class ToggleShortcutPreferenceControllerTest {
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
-
-    @Mock
-    private lateinit var preferenceTreeClickListener:
-        PreferenceManager.OnPreferenceTreeClickListener
-
-    @Mock
-    private lateinit var displayPreferenceDialogListener:
-        PreferenceManager.OnDisplayPreferenceDialogListener
     private lateinit var shortcutPreference: ShortcutPreference
     private lateinit var controller: ToggleShortcutPreferenceController
     private lateinit var fragmentScenario: FragmentScenario<Fragment>
@@ -83,13 +73,19 @@ class ToggleShortcutPreferenceControllerTest {
 
     @Before
     fun setUp() {
-        preferenceManager.onPreferenceTreeClickListener = preferenceTreeClickListener
-        preferenceManager.onDisplayPreferenceDialogListener = displayPreferenceDialogListener
-        controller = ToggleShortcutPreferenceController(context, PREFERENCE_KEY)
-        controller.initialize(AUTOCLICK_COMPONENT_NAME)
-
         fragmentScenario = launchFragment<Fragment>(initialState = INITIALIZED)
-        fragmentScenario.onFragment { fragment -> fragment.lifecycle.addObserver(controller) }
+        fragmentScenario.onFragment { fragment ->
+            controller =
+                ToggleShortcutPreferenceController(fragment.requireContext(), PREFERENCE_KEY)
+
+            fragment.lifecycle.addObserver(controller)
+            controller.initialize(
+                AUTOCLICK_COMPONENT_NAME,
+                fragment.childFragmentManager,
+                PREFERENCE_TITLE,
+                0,
+            )
+        }
         shortcutPreference = ShortcutPreference(context, null)
         shortcutPreference.key = PREFERENCE_KEY
         shortcutPreference.title = PREFERENCE_TITLE
@@ -204,11 +200,14 @@ class ToggleShortcutPreferenceControllerTest {
     }
 
     @Test
-    fun clickSetting_triggerPreferenceTreeClick() {
+    fun clickSetting_showEditShortcutsScreenWithoutChangingShortcutToggleState() {
         controller.displayPreference(shortcutPreference.preferenceManager.preferenceScreen)
         viewHolder.itemView.performClick()
 
-        verify(preferenceTreeClickListener).onPreferenceTreeClick(shortcutPreference)
+        fragmentScenario.onFragment { fragment ->
+            AccessibilityTestUtils.assertEditShortcutsScreenShown(fragment)
+            assertThat(shortcutPreference.isChecked).isFalse()
+        }
     }
 
     @Test
@@ -218,10 +217,12 @@ class ToggleShortcutPreferenceControllerTest {
 
         viewHolder.itemView.findViewById<View>(shortcutPreference.switchResId).performClick()
 
-        verify(displayPreferenceDialogListener).onDisplayPreferenceDialog(shortcutPreference)
-        assertThat(shortcutPreference.isChecked).isTrue()
-        assertThat(ShortcutUtils.getEnabledShortcutTypes(context, testComponentString))
-            .isNotEqualTo(DEFAULT)
+        fragmentScenario.onFragment { fragment ->
+            assertThat(shortcutPreference.isChecked).isTrue()
+            AccessibilityTestUtils.assertShortcutsTutorialDialogShown(fragment)
+            assertThat(ShortcutUtils.getEnabledShortcutTypes(context, testComponentString))
+                .isNotEqualTo(DEFAULT)
+        }
     }
 
     @Test

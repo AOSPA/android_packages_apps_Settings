@@ -321,11 +321,13 @@ public final class DataProcessor {
                         .getPowerUsageFeatureProvider()
                         .getIgnoreScreenOnTimeTaskRootSet();
         for (final long userId : usageEventsMap.keySet()) {
+            long numCurrentUserEventsFetched = 0;
+            long numCurrentUserAllEventsFetched = 0;
             final UsageEvents usageEvents = usageEventsMap.get(userId);
             while (usageEvents.hasNextEvent()) {
                 final Event event = new Event();
                 usageEvents.getNextEvent(event);
-                numAllEventsFetched++;
+                numCurrentUserAllEventsFetched++;
                 switch (event.getEventType()) {
                     case Event.ACTIVITY_RESUMED:
                     case Event.ACTIVITY_STOPPED:
@@ -347,7 +349,7 @@ public final class DataProcessor {
                                 ConvertUtils.convertToAppUsageEvent(
                                         context, sUsageStatsManager, event, userId);
                         if (appUsageEvent != null) {
-                            numEventsFetched++;
+                            numCurrentUserEventsFetched++;
                             appUsageEventList.add(appUsageEvent);
                         }
                         break;
@@ -355,11 +357,18 @@ public final class DataProcessor {
                         break;
                 }
             }
+            Log.d(
+                    TAG,
+                    String.format(
+                            "Read %d relevant events (%d total) from UsageStatsManager for user %d",
+                            numCurrentUserEventsFetched, numCurrentUserAllEventsFetched, userId));
+            numEventsFetched += numCurrentUserEventsFetched;
+            numAllEventsFetched += numCurrentUserAllEventsFetched;
         }
         Log.w(
                 TAG,
                 String.format(
-                        "Read %d relevant events (%d total) from UsageStatsManager",
+                        "Read %d relevant events (%d total) from UsageStatsManager for all users",
                         numEventsFetched, numAllEventsFetched));
         return appUsageEventList;
     }

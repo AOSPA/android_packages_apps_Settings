@@ -184,6 +184,7 @@ public class AccessibilitySettings extends BaseSupportFragment implements
         return SettingsEnums.ACCESSIBILITY;
     }
 
+    @NonNull
     @Override
     protected String getDisabilitySupportUrl() {
         return FeatureFactory.getFeatureFactory()

@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.display;
 
 import static android.view.Display.INVALID_DISPLAY;
 
+import static com.android.settings.Utils.createAccessibleSequence;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
@@ -249,7 +250,16 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             pref = new SelectorWithWidgetPreference(context);
             pref.setPersistent(false);
             pref.setKey(modeStr);
-            pref.setTitle(mode.getPhysicalWidth() + " x " + mode.getPhysicalHeight());
+            int width = mode.getPhysicalWidth();
+            int height = mode.getPhysicalHeight();
+            pref.setTitle(
+                    createAccessibleSequence(
+                            width + " x " + height,
+                            getResources()
+                                    .getString(
+                                            R.string.screen_resolution_delimiter_a11y,
+                                            width,
+                                            height)));
             pref.setSingleLineTitle(true);
             pref.setOnClickListener(preference -> onDisplayModeClicked(preference, display));
             pref.setChecked(isCurrentMode);

@@ -49,14 +49,26 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
     // LINT.IfChange(ui_hierarchy)
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            val fontSizePreference = FontSizePreference(context, entryPoint)
+            val displaySizePreference = DisplaySizePreference(context, entryPoint)
+            +TextReadingPreview(
+                displaySizePreference.displaySizePreview,
+                fontSizePreference.fontSizePreview,
+            )
+
             +PreferenceCategory(
                 key = "display_text_size",
                 title = R.string.category_title_display_text_size,
-            )
+            ) +=
+                {
+                    +fontSizePreference
+                    +displaySizePreference
+                }
             +PreferenceCategory(key = "text_style", title = R.string.category_title_text_style) += {
                 +BoldTextPreference(context, entryPoint)
                 +OutlineTextPreference(context, entryPoint)
             }
+            +ResetPreference(entryPoint)
         }
     // LINT.ThenChange()
 }

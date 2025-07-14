@@ -20,10 +20,12 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -31,12 +33,27 @@ import com.android.settingslib.search.SearchIndexable;
 
 /** Settings for daltonizer. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ToggleDaltonizerPreferenceFragment extends ShortcutFragment {
+public class ToggleDaltonizerPreferenceFragment extends BaseSupportFragment {
 
     private static final String TAG = "ToggleDaltonizerPreferenceFragment";
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ToggleShortcutPreferenceController shortcutPreferenceController =
+                use(ToggleShortcutPreferenceController.class);
+        if (shortcutPreferenceController != null) {
+            shortcutPreferenceController.initialize(
+                    getFeatureComponentName(),
+                    getChildFragmentManager(),
+                    getFeatureName(),
+                    getMetricsCategory()
+            );
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final View rootView = getActivity().getWindow().peekDecorView();
         if (rootView != null) {
@@ -46,15 +63,13 @@ public class ToggleDaltonizerPreferenceFragment extends ShortcutFragment {
     }
 
     @NonNull
-    @Override
-    public CharSequence getFeatureName() {
+    private CharSequence getFeatureName() {
         return getText(com.android.settingslib.R
                 .string.accessibility_display_daltonizer_preference_title);
     }
 
     @NonNull
-    @Override
-    public ComponentName getFeatureComponentName() {
+    private ComponentName getFeatureComponentName() {
         return DALTONIZER_COMPONENT_NAME;
     }
 

@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 /**
  * Data class for storing the configurations related to the font size.
  */
+// LINT.IfChange
 final class FontSizeData extends PreviewSizeData<Float> {
     private static final float FONT_SCALE_DEF_VALUE = 1.0f;
 
@@ -83,3 +84,4 @@ final class FontSizeData extends PreviewSizeData<Float> {
                 FONT_SCALE_DEF_VALUE);
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/textreading/data/FontSizeDataStore.kt)

@@ -37,7 +37,7 @@ import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceControll
 import com.android.settings.overlay.FeatureFactory;
 
 /** Fragment for providing open activity button. */
-public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragment {
+public class LaunchAccessibilityActivityPreferenceFragment extends BaseSupportFragment {
 
     private static final String TAG = "LaunchAccessibilityActivityPreferenceFragment";
     @Nullable
@@ -67,7 +67,17 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragm
                 accessibilityShortcutInfo);
         use(LaunchAccessibilityActivityPreferenceController.class).initialize(
                 accessibilityShortcutInfo);
-        use(ShortcutPreferenceController.class).initialize(accessibilityShortcutInfo);
+
+        ShortcutPreferenceController shortcutPreferenceController =
+                use(ShortcutPreferenceController.class);
+        if (shortcutPreferenceController != null) {
+            shortcutPreferenceController.initialize(
+                    accessibilityShortcutInfo,
+                    getChildFragmentManager(),
+                    getFeatureName(),
+                    getMetricsCategory()
+            );
+        }
         use(SettingsPreferenceController.class).initialize(accessibilityShortcutInfo);
         use(LaunchAppInfoPreferenceController.class).initialize(
                 accessibilityShortcutInfo.getComponentName());
@@ -75,12 +85,6 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragm
                 accessibilityShortcutInfo);
         use(AccessibilityActivityFooterPreferenceController.class).initialize(
                 accessibilityShortcutInfo);
-    }
-
-    @Nullable
-    @Override
-    public ToggleShortcutPreferenceController getShortcutPreferenceController() {
-        return use(ShortcutPreferenceController.class);
     }
 
     @Override
@@ -105,8 +109,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragm
     }
 
     @NonNull
-    @Override
-    public CharSequence getFeatureName() {
+    private CharSequence getFeatureName() {
         if (mAccessibilityShortcutInfo == null
                 || mAccessibilityShortcutInfo.getActivityInfo() == null) {
             return "";
@@ -116,8 +119,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragm
     }
 
     @NonNull
-    @Override
-    public ComponentName getFeatureComponentName() {
+    private ComponentName getFeatureComponentName() {
         return getArguments().getParcelable(
                 AccessibilitySettings.EXTRA_COMPONENT_NAME, ComponentName.class);
     }

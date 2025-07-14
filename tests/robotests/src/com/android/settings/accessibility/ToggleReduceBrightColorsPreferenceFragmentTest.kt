@@ -50,7 +50,7 @@ import org.robolectric.shadows.ShadowLooper
 @Config(shadows = [ShadowColorDisplayManager::class, SettingsShadowResources::class])
 @RunWith(RobolectricTestRunner::class)
 class ToggleReduceBrightColorsPreferenceFragmentTest :
-    BaseShortcutFragmentTestCases<ToggleReduceBrightColorsPreferenceFragment>() {
+    BaseShortcutInteractionsTestCases<ToggleReduceBrightColorsPreferenceFragment>() {
     private val shadowColorDisplayManager: ShadowColorDisplayManager =
         Shadow.extract(context.getSystemService(ColorDisplayManager::class.java))
     private var fragScenario: FragmentScenario<ToggleReduceBrightColorsPreferenceFragment>? = null

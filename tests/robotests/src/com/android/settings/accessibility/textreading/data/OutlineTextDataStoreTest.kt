@@ -54,7 +54,8 @@ class OutlineTextDataStoreTest {
     fun setValue_callsSettingsStoreSetValue() {
         dataStore.setValue("key", Boolean::class.javaObjectType, true)
 
-        verify(mockSettingsStore).setValue("key", Boolean::class.javaObjectType, true)
+        verify(mockSettingsStore)
+            .setBoolean(Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, true)
     }
 
     @Test

@@ -22,6 +22,7 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.FragmentScenario.FragmentAction
 import androidx.lifecycle.Lifecycle
 import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 import com.android.settings.R
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.testutils.AccessibilityTestUtils
@@ -31,9 +32,9 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Test
 
-/** Base test cases for classes that inherits from [ShortcutFragment] that shows in Setup flow. */
-abstract class BaseShortcutFragmentInSuwTestCases<T : ShortcutFragment> :
-    BaseShortcutFragmentTestCases<T>() {
+/** Base test cases for fragment shown in Setup flow that provides accessibility shortcut toggle. */
+abstract class BaseShortcutInteractionsInSuwTestCases<T : PreferenceFragmentCompat> :
+    BaseShortcutInteractionsTestCases<T>() {
 
     protected var fragmentScenario: FragmentScenario<T>? = null
     protected var fragment: T? = null
@@ -64,8 +65,7 @@ abstract class BaseShortcutFragmentInSuwTestCases<T : ShortcutFragment> :
             .isEqualTo(getSetupWizardDescription())
         assertThat(glifPreferenceLayout.getDividerInsetStart()).isEqualTo(Int.Companion.MAX_VALUE)
         assertThat(glifPreferenceLayout.getDividerInsetEnd()).isEqualTo(0)
-        val footerBarMixin =
-            glifPreferenceLayout.getMixin<FooterBarMixin?>(FooterBarMixin::class.java)
+        val footerBarMixin = glifPreferenceLayout.getMixin(FooterBarMixin::class.java)
         assertThat(footerBarMixin.getPrimaryButton().getText().toString())
             .isEqualTo(context.getString(R.string.done))
         assertThat(fragment.findPreference<Preference?>(TOP_INTRO_PREF_KEY)!!.isVisible()).isFalse()
@@ -82,7 +82,7 @@ abstract class BaseShortcutFragmentInSuwTestCases<T : ShortcutFragment> :
             moveToState(Lifecycle.State.RESUMED)
             onFragment(
                 FragmentAction { fragment: T? ->
-                    this@BaseShortcutFragmentInSuwTestCases.fragment = fragment
+                    this@BaseShortcutInteractionsInSuwTestCases.fragment = fragment
                 }
             )
         }

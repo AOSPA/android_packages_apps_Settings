@@ -23,7 +23,6 @@ import android.content.ComponentName;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -34,25 +33,17 @@ import com.android.settingslib.search.SearchIndexable;
  * feature.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ToggleAutoclickPreferenceFragment extends ShortcutFragment {
+public class ToggleAutoclickPreferenceFragment extends BaseSupportFragment {
 
     private static final String TAG = "AutoclickPrefFragment";
 
-    @Nullable
-    @Override
-    public ToggleShortcutPreferenceController getShortcutPreferenceController() {
-        return use(ToggleAutoclickShortcutPreferenceController.class);
-    }
-
     @NonNull
-    @Override
-    public ComponentName getFeatureComponentName() {
+    private ComponentName getFeatureComponentName() {
         return AUTOCLICK_COMPONENT_NAME;
     }
 
     @NonNull
-    @Override
-    public CharSequence getFeatureName() {
+    private CharSequence getFeatureName() {
         return getText(R.string.accessibility_autoclick_preference_title);
     }
 
@@ -85,6 +76,17 @@ public class ToggleAutoclickPreferenceFragment extends ShortcutFragment {
 
         // Set up the main switch controller.
         use(ToggleAutoclickMainSwitchPreferenceController.class).setFragment(this);
+
+        ToggleShortcutPreferenceController shortcutPreferenceController =
+                use(ToggleAutoclickShortcutPreferenceController.class);
+        if (shortcutPreferenceController != null) {
+            shortcutPreferenceController.initialize(
+                    getFeatureComponentName(),
+                    getChildFragmentManager(),
+                    getFeatureName(),
+                    getMetricsCategory()
+            );
+        }
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

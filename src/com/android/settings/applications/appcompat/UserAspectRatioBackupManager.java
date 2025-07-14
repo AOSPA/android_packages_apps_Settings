@@ -23,7 +23,7 @@ import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_APP_DEFAUL
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
-import static android.hardware.display.DisplayManager.DISPLAY_CATEGORY_BUILT_IN_DISPLAYS;
+import static android.hardware.display.DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED;
 
 import static com.android.settings.applications.appcompat.UserAspectRatioBackupHelper.KEY_USER_ASPECT_RATIO;
 
@@ -443,12 +443,19 @@ class UserAspectRatioBackupManager {
         if (displayManager == null) {
             return null;
         }
+        // Query all internal displays - including disabled - to include inner screens for foldables
+        // when the device is folded.
         final Display[] displays = displayManager.getDisplays(
-                /* flags= */ DISPLAY_CATEGORY_BUILT_IN_DISPLAYS);
+                /* flags= */ DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED);
         final Rect maxDimensions = new Rect();
         for (Display display: displays) {
             final DisplayInfo outDisplayInfo = new DisplayInfo();
             display.getDisplayInfo(outDisplayInfo);
+            if (display.getType() != Display.TYPE_INTERNAL) {
+                // Some aspect ratios, like 'half-screen', are relative to the biggest internal
+                // display. Ignore other types of displays.
+                continue;
+            }
             final int width = outDisplayInfo.getNaturalWidth();
             final int height = outDisplayInfo.getNaturalHeight();
             if (width * height > maxDimensions.width() * maxDimensions.height())  {

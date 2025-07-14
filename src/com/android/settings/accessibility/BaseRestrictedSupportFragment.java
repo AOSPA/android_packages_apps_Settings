@@ -18,8 +18,12 @@ package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
@@ -71,5 +75,14 @@ public abstract class BaseRestrictedSupportFragment extends RestrictedDashboardF
      */
     protected int getFeedbackCategory() {
         return getMetricsCategory();
+    }
+
+    @NonNull
+    @Override
+    public RecyclerView onCreateRecyclerView(@NonNull LayoutInflater inflater,
+            @NonNull ViewGroup parent, @Nullable Bundle savedInstanceState) {
+        RecyclerView recyclerView =
+                super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(recyclerView);
     }
 }

@@ -41,7 +41,7 @@
             app:controller="com.android.settings.accessibility.screenmagnification.ToggleMagnificationShortcutPreferenceController" />
 
         <Preference
-            android:key="screen_magnification_mode"
+            android:key="accessibility_magnification_capability"
             android:persistent="false"
             android:title="@string/accessibility_magnification_mode_title"
             app:controller="com.android.settings.accessibility.screenmagnification.ModePreferenceController" />
@@ -67,7 +67,7 @@
             app:controller="com.android.settings.accessibility.screenmagnification.FollowKeyboardPreferenceController"/>
 
         <Preference
-            android:key="magnification_cursor_following_mode"
+            android:key="accessibility_magnification_cursor_following_mode"
             android:title="@string/accessibility_magnification_cursor_following_title"
             android:persistent="false"
             app:controller="com.android.settings.accessibility.screenmagnification.CursorFollowingModePreferenceController" />

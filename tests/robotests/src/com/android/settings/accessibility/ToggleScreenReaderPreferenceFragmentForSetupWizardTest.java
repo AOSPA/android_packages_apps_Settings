@@ -42,7 +42,7 @@ import java.util.List;
 /** Tests for {@link ToggleScreenReaderPreferenceFragmentForSetupWizard}. */
 @RunWith(RobolectricTestRunner.class)
 public class ToggleScreenReaderPreferenceFragmentForSetupWizardTest extends
-        BaseShortcutFragmentInSuwTestCases<ToggleScreenReaderPreferenceFragmentForSetupWizard> {
+        BaseShortcutInteractionsInSuwTestCases<ToggleScreenReaderPreferenceFragmentForSetupWizard> {
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";
     private static final String A11Y_SERVICE_CLASS_NAME = "fakeA11yServiceClass";

@@ -31,18 +31,31 @@ import com.android.settingslib.search.SearchIndexable;
 
 /** Settings for reducing brightness. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ToggleReduceBrightColorsPreferenceFragment extends ShortcutFragment {
+public class ToggleReduceBrightColorsPreferenceFragment extends BaseSupportFragment {
     private static final String TAG = "ToggleReduceBrightColorsPreferenceFragment";
 
-    @NonNull
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ToggleShortcutPreferenceController shortcutPreferenceController =
+                use(ToggleShortcutPreferenceController.class);
+        if (shortcutPreferenceController != null) {
+            shortcutPreferenceController.initialize(
+                    getFeatureComponentName(),
+                    getChildFragmentManager(),
+                    getFeatureName(),
+                    getMetricsCategory()
+            );
+        }
+    }
+
+    @NonNull
     public CharSequence getFeatureName() {
         return getString(R.string.reduce_bright_colors_preference_title);
     }
 
     @NonNull
-    @Override
-    public ComponentName getFeatureComponentName() {
+    private ComponentName getFeatureComponentName() {
         return REDUCE_BRIGHT_COLORS_COMPONENT_NAME;
     }
 
