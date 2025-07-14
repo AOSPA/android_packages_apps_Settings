@@ -75,6 +75,7 @@ open class MagnificationScreen : PreferenceScreenMixin {
                 +AlwaysOnSwitchPreference()
                 +JoystickSwitchPreference()
             }
+            +MagnificationFooterPreference()
         }
 
     companion object {

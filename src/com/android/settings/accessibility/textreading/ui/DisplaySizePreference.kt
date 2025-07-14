@@ -22,6 +22,8 @@ import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint
+import com.android.settings.accessibility.TooltipSliderPreference
+import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController
 import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController.Companion.CHANGE_BY_BUTTON_DELAY
 import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController.Companion.CHANGE_BY_SLIDER_DELAY
@@ -97,8 +99,17 @@ internal class DisplaySizePreference(context: Context, @EntryPoint private val e
     override val keywords: Int
         get() = R.string.keywords_display_size
 
-    override fun createWidget(context: Context) =
-        super.createWidget(context).apply {
+    override fun createWidget(context: Context): SliderPreference {
+        val widget =
+            if (context.isInSetupWizard()) {
+                // Use TooltipSliderPreference in setup wizard for the temp fix for b/421323125.
+                // TODO(b/407080818): Remove the setup wizard branch once we decouple SUW and
+                // Settings, since the slider doesn't need to show a quick settings tooltip
+                TooltipSliderPreference(context)
+            } else {
+                SliderPreference(context)
+            }
+        widget.apply {
             setIconStart(R.drawable.ic_remove_24dp)
             setIconStartContentDescription(R.string.screen_zoom_make_smaller_desc)
             setIconEnd(R.drawable.ic_add_24dp)
@@ -108,6 +119,8 @@ internal class DisplaySizePreference(context: Context, @EntryPoint private val e
             setExtraChangeListener(this@DisplaySizePreference)
             setExtraTouchListener(this@DisplaySizePreference)
         }
+        return widget
+    }
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)

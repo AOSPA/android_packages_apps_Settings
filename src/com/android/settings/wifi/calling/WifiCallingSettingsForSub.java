@@ -63,6 +63,7 @@ import com.android.settings.network.telephony.wificalling.IWifiCallingRepository
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.widget.TopIntroPreference;
 
 import kotlin.Unit;
 
@@ -78,11 +79,11 @@ public class WifiCallingSettingsForSub extends DashboardFragment
     private static final String TAG = "WifiCallingForSub";
 
     //String keys for preference lookup
+    private static final String PREFERENCE_WFC_TOP_INTRO = "wfc_top_intro";
     private static final String SWITCH_BAR = "wifi_calling_switch_bar";
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
     private static final String BUTTON_WFC_ROAMING_MODE = "wifi_calling_roaming_mode";
     private static final String PREFERENCE_EMERGENCY_ADDRESS = "emergency_address_key";
-    private static final String PREFERENCE_NO_OPTIONS_DESC = "no_options_description";
 
     @VisibleForTesting
     static final int REQUEST_CHECK_WFC_EMERGENCY_ADDRESS = 1;
@@ -293,8 +294,7 @@ public class WifiCallingSettingsForSub extends DashboardFragment
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(ImsManager.ACTION_WFC_IMS_REGISTRATION_ERROR);
 
-        updateDescriptionForOptions(
-                List.of(mButtonWfcMode, mButtonWfcRoamingMode, mUpdateAddress));
+        updateTopIntro(List.of(mButtonWfcMode, mButtonWfcRoamingMode, mUpdateAddress));
 
         List<AbstractPreferenceController> subscriptionPreferenceControllers =
                 useGroup(AbstractSubscriptionPreferenceController.class);
@@ -650,12 +650,11 @@ public class WifiCallingSettingsForSub extends DashboardFragment
             mButtonWfcRoamingMode.setVisible(false);
             mUpdateAddress.setVisible(false);
         }
-        updateDescriptionForOptions(
-                List.of(mButtonWfcMode, mButtonWfcRoamingMode, mUpdateAddress));
+        updateTopIntro(List.of(mButtonWfcMode, mButtonWfcRoamingMode, mUpdateAddress));
     }
 
-    private void updateDescriptionForOptions(List<Preference> visibleOptions) {
-        LinkifyDescriptionPreference pref = findPreference(PREFERENCE_NO_OPTIONS_DESC);
+    private void updateTopIntro(List<Preference> visibleOptions) {
+        TopIntroPreference pref = findPreference(PREFERENCE_WFC_TOP_INTRO);
         if (pref == null) {
             return;
         }
@@ -663,9 +662,9 @@ public class WifiCallingSettingsForSub extends DashboardFragment
         boolean optionsAvailable = visibleOptions.stream().anyMatch(Preference::isVisible);
         if (!optionsAvailable) {
             final Resources res = getResourcesForSubId();
-            String emptyViewText = res.getString(R.string.wifi_calling_off_explanation,
+            String titleText = res.getString(R.string.wifi_calling_off_explanation,
                     res.getString(R.string.wifi_calling_off_explanation_2));
-            pref.setSummary(emptyViewText);
+            pref.setTitle(titleText);
         }
         pref.setVisible(!optionsAvailable);
     }

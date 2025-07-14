@@ -102,5 +102,6 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
         FaceSafetySource.setSafetySourceData(context, safetyEvent);
         FingerprintSafetySource.setSafetySourceData(context, safetyEvent);
         WearSafetySource.setSafetySourceData(context, safetyEvent);
+        IdentityCheckSafetySource.Companion.setSafetySourceData(context, safetyEvent);
     }
 }

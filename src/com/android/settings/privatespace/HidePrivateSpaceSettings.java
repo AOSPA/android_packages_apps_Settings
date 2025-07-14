@@ -40,7 +40,10 @@ public class HidePrivateSpaceSettings extends DashboardFragment {
 
     @Override
     public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
+            super.onCreate(icicle);
+        }
     }
 
     @Override

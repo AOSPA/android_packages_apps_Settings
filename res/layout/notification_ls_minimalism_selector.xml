@@ -38,11 +38,14 @@
             android:id="@+id/button_compact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/lock_screen_notifs_show_compact"
+            android:importantForAccessibility="yes"
             android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="@dimen/contrast_button_total_size"
                 android:layout_height="@dimen/contrast_button_total_size"
+                android:importantForAccessibility="noHideDescendants"
                 android:background="@drawable/accessibility_contrast_button_background">
 
                 <ImageView
@@ -60,6 +63,7 @@
                 android:layout_marginTop="@dimen/contrast_button_text_spacing"
                 android:gravity="center_horizontal|top"
                 android:singleLine="false"
+                android:importantForAccessibility="no"
                 android:textSize="@dimen/contrast_button_text_size"
                 android:text="@string/lock_screen_notifs_show_compact"
                 android:textColor="@androidprv:color/materialColorOnSurface"/>
@@ -73,11 +77,14 @@
             android:id="@+id/button_full"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/lock_screen_notifs_show_full_list"
+            android:importantForAccessibility="yes"
             android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="@dimen/contrast_button_total_size"
                 android:layout_height="@dimen/contrast_button_total_size"
+                android:importantForAccessibility="noHideDescendants"
                 android:background="@drawable/accessibility_contrast_button_background">
 
                 <ImageView
@@ -95,6 +102,7 @@
                 android:layout_marginTop="@dimen/contrast_button_text_spacing"
                 android:gravity="center_horizontal|top"
                 android:singleLine="false"
+                android:importantForAccessibility="no"
                 android:textSize="@dimen/contrast_button_text_size"
                 android:text="@string/lock_screen_notifs_show_full_list"
                 android:textColor="@androidprv:color/materialColorOnSurface"/>

@@ -351,7 +351,7 @@ public class SafetySourceBroadcastReceiverTest {
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(mSafetyCenterManagerWrapper, times(6))
+        verify(mSafetyCenterManagerWrapper, times(7))
                 .setSafetySourceData(any(), captor.capture(), any(), any());
         List<String> safetySourceIdList = captor.getAllValues();
 
@@ -381,6 +381,10 @@ public class SafetySourceBroadcastReceiverTest {
                         safetySourceIdList.stream()
                                 .anyMatch(
                                         id -> id.equals(PrivateSpaceSafetySource.SAFETY_SOURCE_ID)))
+                .isTrue();
+        assertThat(
+                safetySourceIdList.stream()
+                        .anyMatch(id -> id.equals(IdentityCheckSafetySource.SAFETY_SOURCE_ID)))
                 .isTrue();
     }
 }

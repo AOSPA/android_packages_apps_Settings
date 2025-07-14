@@ -34,6 +34,7 @@ import com.android.settings.accessibility.HtmlFooterPreferenceController
 import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 
 /** PreferenceController for Screen Magnification detail page's footer */
+// LINT.IfChange
 class FooterPreferenceController(context: Context, prefKey: String) :
     HtmlFooterPreferenceController(context, prefKey), DefaultLifecycleObserver {
     init {
@@ -153,3 +154,4 @@ class FooterPreferenceController(context: Context, prefKey: String) :
         )
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/MagnificationFooterPreference.kt)

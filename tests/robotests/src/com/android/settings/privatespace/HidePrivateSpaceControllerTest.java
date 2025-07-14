@@ -17,6 +17,7 @@
 package com.android.settings.privatespace;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -61,15 +62,27 @@ public class HidePrivateSpaceControllerTest {
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
     }
 
-    /** Tests that the controller is available. */
+    /** Tests that when flags enabled the controller is available. */
     @Test
-    public void getAvailabilityStatus_returnsAvailable() {
+    public void getAvailabilityStatus_flagEnabled_returnsAvailable() {
+        mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+
         assertThat(mHidePrivateSpaceController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    /** Tests that when flags disabled the controller is unsupported. */
+    @Test
+    public void getAvailabilityStatus_flagDisabled_returnsUnsupported() {
+        mSetFlagsRule.disableFlags(android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+
+        assertThat(mHidePrivateSpaceController.getAvailabilityStatus())
+                .isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     /** Tests that when hide toggle is enabled dialog is displayed. */
     @Test
-    public void setChecked_showsDialog() {
+    public void setChecked_enabled_showsDialog() {
+        mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mHidePrivateSpaceController.setChecked(true);
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
@@ -83,6 +96,7 @@ public class HidePrivateSpaceControllerTest {
     /** Tests that when hide toggle is disabled dialog is not displayed. */
     @Test
     public void setChecked_disabled_NoDialogShown() {
+        mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mHidePrivateSpaceController.setChecked(false);
 
         ShadowAlertDialog shadowAlertDialog = getShadowAlertDialog();
@@ -92,6 +106,7 @@ public class HidePrivateSpaceControllerTest {
     /** Tests that when hide toggle is enabled then isChecked returns true. */
     @Test
     public void setChecked_enabled_isCheckedIsTrue() {
+        mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mHidePrivateSpaceController.setChecked(true);
         assertThat(mHidePrivateSpaceController.isChecked()).isTrue();
     }
@@ -99,6 +114,7 @@ public class HidePrivateSpaceControllerTest {
     /** Tests that when hide toggle is disabled then isChecked returns false. */
     @Test
     public void setChecked_disabled_isCheckedIsFalse() {
+        mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mHidePrivateSpaceController.setChecked(false);
         assertThat(mHidePrivateSpaceController.isChecked()).isFalse();
     }
@@ -106,6 +122,7 @@ public class HidePrivateSpaceControllerTest {
     /** Tests that hide preference summary displays On when toggle is enabled. */
     @Test
     public void setChecked_enable_summaryShouldDisplayOn() {
+        mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mHidePrivateSpaceController.setChecked(true);
 
         assertThat(mHidePrivateSpaceSummaryController.getSummary().toString()).isEqualTo("On");
@@ -114,6 +131,7 @@ public class HidePrivateSpaceControllerTest {
     /** Tests that hide preference summary displays Off when toggle is disabled. */
     @Test
     public void setChecked_disable_summaryShouldDisplayOff() {
+        mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mHidePrivateSpaceController.setChecked(false);
 
         assertThat(mHidePrivateSpaceSummaryController.getSummary().toString()).isEqualTo("Off");

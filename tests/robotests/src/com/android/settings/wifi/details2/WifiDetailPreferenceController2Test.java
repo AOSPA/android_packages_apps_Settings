@@ -224,6 +224,8 @@ public class WifiDetailPreferenceController2Test {
     @Mock
     private Preference mMockIpv6AddressesPref;
     @Mock
+    private Preference mMockNetworkFooterPref;
+    @Mock
     private PackageManager mMockPackageManager;
 
     @Captor
@@ -430,6 +432,8 @@ public class WifiDetailPreferenceController2Test {
                 .thenReturn(mMockIpv6Category);
         when(mMockScreen.findPreference(WifiDetailPreferenceController2.KEY_IPV6_ADDRESSES_PREF))
                 .thenReturn(mMockIpv6AddressesPref);
+        when(mMockScreen.findPreference(WifiDetailPreferenceController2.KEY_SHARED_NETWORK_FOOTER))
+                .thenReturn(mMockNetworkFooterPref);
     }
 
     private void displayAndResume() {
@@ -1592,6 +1596,34 @@ public class WifiDetailPreferenceController2Test {
         lp.setCaptivePortalData(null);
         updateLinkProperties(lp);
         inOrder.verify(mMockButtonsPref).setButton2Visible(false);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void sharedNetwork_networkNotOwned_showFooter() {
+        setUpForConnectedNetwork();
+        setUpController();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = Integer.MAX_VALUE;
+
+        displayAndResume();
+
+        verify(mMockNetworkFooterPref).setVisible(true);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void sharedNetwork_networkOwned_showFooter() {
+        setUpForConnectedNetwork();
+        setUpController();
+        final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfiguration);
+        mockWifiConfiguration.creatorUid = 1;
+
+        displayAndResume();
+
+        verify(mMockNetworkFooterPref, never()).setVisible(true);
     }
 
     @Test

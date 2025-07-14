@@ -582,25 +582,31 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     }
 
     private void init() {
-        mBroadcastIdToPreferenceMap.clear();
         boolean hasConnected =
                 AudioStreamsHelper.getCachedBluetoothDeviceInSharingOrLeConnected(mBluetoothManager)
                         .isPresent();
         Set<ComponentName> screenReaderServices = getEnabledScreenReaderServices(mContext);
-        AudioSharingUtils.postOnMainThread(
-                mContext,
-                () -> {
-                    if (mCategoryPreference != null) {
-                        mCategoryPreference.removeAudioStreamPreferences();
-                        mCategoryPreference.setVisible(hasConnected);
-                    }
-                });
         if (hasConnected && screenReaderServices.isEmpty()) {
-            startScanning();
+            startScanningIfNeeded();
             AudioSharingUtils.postOnMainThread(
-                    mContext, () -> AudioStreamsDialogFragment.dismissAll(mFragment));
+                    mContext,
+                    () -> {
+                        if (mCategoryPreference != null) {
+                            mCategoryPreference.setVisible(true);
+                        }
+                        AudioStreamsDialogFragment.dismissAll(mFragment);
+                    });
         } else {
             stopScanning();
+            mBroadcastIdToPreferenceMap.clear();
+            AudioSharingUtils.postOnMainThread(
+                    mContext,
+                    () -> {
+                        if (mCategoryPreference != null) {
+                            mCategoryPreference.removeAudioStreamPreferences();
+                            mCategoryPreference.setVisible(false);
+                        }
+                    });
             if (!hasConnected) {
                 AudioSharingUtils.postOnMainThread(
                         mContext,
@@ -621,9 +627,9 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         }
     }
 
-    private void startScanning() {
+    private void startScanningIfNeeded() {
         if (mLeBroadcastAssistant == null) {
-            Log.w(TAG, "startScanning(): LeBroadcastAssistant is null!");
+            Log.w(TAG, "startScanningIfNeeded(): LeBroadcastAssistant is null!");
             return;
         }
         mLeBroadcastAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);

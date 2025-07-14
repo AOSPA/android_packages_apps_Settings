@@ -22,6 +22,8 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
@@ -38,6 +40,7 @@ import com.android.settingslib.bluetooth.HearingAidStatsLogUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
@@ -126,6 +129,11 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                         || TextUtils.equals(Utils.SYSTEMUI_PACKAGE_NAME, callingAppPackageName);
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ConnectedDeviceDashboardScreen.KEY;
+    }
+
     private void logPageEntrypoint(Context context, String callingAppPackageName, Intent intent) {
         String action = intent != null ? intent.getAction() : "";
         if (TextUtils.equals(Utils.SYSTEMUI_PACKAGE_NAME, callingAppPackageName)) {
@@ -167,3 +175,4 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.connected_devices);
 }
+// LINT.ThenChange(ConnectedDeviceDashboardScreen.kt)

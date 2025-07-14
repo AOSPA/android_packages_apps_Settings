@@ -36,6 +36,10 @@ public class PrivateSpaceDeleteActivity extends FragmentActivity implements Inst
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (!android.os.Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
+            return;
+        }
         setTheme(SetupWizardUtils.getTheme(this, getIntent()));
         ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);

@@ -148,7 +148,8 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
             return;
         }
         try {
-            List<BatteryTip> batteryTips = bundle.getParcelableArrayList(KEY_BATTERY_TIPS);
+            List<BatteryTip> batteryTips =
+                    bundle.getParcelableArrayList(KEY_BATTERY_TIPS, BatteryTip.class);
             updateBatteryTips(batteryTips);
         } catch (BadParcelableException e) {
             Log.e(TAG, "failed to invoke restoreInstanceState()", e);

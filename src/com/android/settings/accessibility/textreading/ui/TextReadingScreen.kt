@@ -17,14 +17,19 @@ package com.android.settings.accessibility.textreading.ui
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.Settings
 import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint
 import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceCategory
+import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
@@ -73,7 +78,7 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
     // LINT.ThenChange()
 }
 
-// @ProvidePreferenceScreen(TextReadingScreen.KEY)
+@ProvidePreferenceScreen(TextReadingScreen.KEY)
 open class TextReadingScreen : BaseTextReadingScreen() {
     override val entryPoint: Int
         get() = EntryPoint.DISPLAY_SETTINGS
@@ -84,12 +89,20 @@ open class TextReadingScreen : BaseTextReadingScreen() {
         return true
     }
 
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
+        return makeLaunchIntent(
+            context,
+            Settings.TextReadingSettingsActivity::class.java,
+            metadata?.key,
+        )
+    }
+
     companion object {
         const val KEY = "text_reading_options"
     }
 }
 
-// @ProvidePreferenceScreen(TextReadingScreenOnAccessibility.KEY)
+@ProvidePreferenceScreen(TextReadingScreenOnAccessibility.KEY)
 open class TextReadingScreenOnAccessibility : BaseTextReadingScreen() {
     override val entryPoint: Int
         get() = EntryPoint.ACCESSIBILITY_SETTINGS
@@ -105,7 +118,7 @@ open class TextReadingScreenOnAccessibility : BaseTextReadingScreen() {
 }
 
 // TODO(b/407080818): Remove this catalyst screen once we decouple SUW and Settings
-// @ProvidePreferenceScreen(TextReadingScreenInSuw.KEY)
+@ProvidePreferenceScreen(TextReadingScreenInSuw.KEY)
 open class TextReadingScreenInSuw : BaseTextReadingScreen() {
     override val entryPoint: Int
         get() = EntryPoint.SUW_VISION_SETTINGS
@@ -127,7 +140,7 @@ open class TextReadingScreenInSuw : BaseTextReadingScreen() {
 }
 
 // TODO(b/407080818): Remove this catalyst screen once we decouple SUW and Settings
-// @ProvidePreferenceScreen(TextReadingScreenInAnythingElse.KEY)
+@ProvidePreferenceScreen(TextReadingScreenInAnythingElse.KEY)
 open class TextReadingScreenInAnythingElse : BaseTextReadingScreen() {
     override val entryPoint: Int
         get() = EntryPoint.SUW_ANYTHING_ELSE
@@ -151,7 +164,7 @@ open class TextReadingScreenInAnythingElse : BaseTextReadingScreen() {
     }
 }
 
-// @ProvidePreferenceScreen(TextReadingScreenFromNotification.KEY)
+@ProvidePreferenceScreen(TextReadingScreenFromNotification.KEY)
 open class TextReadingScreenFromNotification : BaseTextReadingScreen() {
     override val entryPoint: Int
         get() = EntryPoint.HIGH_CONTRAST_TEXT_NOTIFICATION

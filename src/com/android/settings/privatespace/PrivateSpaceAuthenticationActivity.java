@@ -28,6 +28,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Flags;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
@@ -76,6 +77,12 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!(Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures())) {
+            finish();
+            return;
+        }
+
         Intent intent = getIntent();
         String highlightMenuKey = getString(R.string.menu_key_security);
         if (shouldShowMultiPaneDeepLink(intent)

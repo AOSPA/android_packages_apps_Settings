@@ -105,6 +105,6 @@ public class WhenToDreamPreferenceControllerTest {
         assertTrue(AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime(mContext));
 
         mController.updateState(mockPref);
-        verify(mockPref).setSummary(R.string.screensaver_settings_when_to_dream_bedtime);
+        verify(mockPref).setSummary(R.string.screensaver_unavailable_due_to_mode);
     }
 }

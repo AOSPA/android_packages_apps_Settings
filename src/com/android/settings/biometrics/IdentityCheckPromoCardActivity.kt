@@ -19,25 +19,18 @@ package com.android.settings.biometrics
 import android.os.Bundle
 import android.provider.Settings
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 
-/**
- * Activity that shows the Identity Check promo card using
- * [IdentityCheckPromoCardFragment].
- */
+/** Activity that shows the Identity Check promo card using [IdentityCheckPromoCardFragment]. */
 class IdentityCheckPromoCardActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Settings.Global.putInt(
-            contentResolver,
-            Settings.Global.IDENTITY_CHECK_PROMO_CARD_SHOWN,
-            1
-        )
+        Settings.Secure.putInt(contentResolver, Settings.Secure.IDENTITY_CHECK_PROMO_CARD_SHOWN, 1)
 
-        val bottomSheetFragment = supportFragmentManager.findFragmentByTag(
-            BOTTOM_SHEET_FRAGMENT_TAG) as? IdentityCheckPromoCardFragment
+        val bottomSheetFragment =
+            supportFragmentManager.findFragmentByTag(BOTTOM_SHEET_FRAGMENT_TAG)
+                as? IdentityCheckPromoCardFragment
 
         if (bottomSheetFragment == null) {
             showBottomSheetFragment()
@@ -54,6 +47,9 @@ class IdentityCheckPromoCardActivity : FragmentActivity() {
 
     private fun showBottomSheetFragment() {
         val bottomSheetFragment = IdentityCheckPromoCardFragment()
+        val bundle = Bundle()
+        bundle.putString(IdentityCheckPromoCardFragment.KEY_INTENT_ACTION, intent.action)
+        bottomSheetFragment.arguments = bundle
         bottomSheetFragment.setOnDismissListener { onDismiss() }
         bottomSheetFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_TAG)
     }

@@ -40,7 +40,6 @@ import com.android.settingslib.supervision.SupervisionLog
 import com.android.settingslib.widget.SettingsThemeHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /**
  * This activity starts the flow for setting up device supervision.
@@ -130,12 +129,15 @@ class SetupSupervisionActivity : FragmentActivity() {
         // If a supervising profile does not already exist on the device, create one
         if (userHandle == null) {
             val userInfo =
-                userManager?.createUser(
+                userManager?.createProfileForUserEvenWhenDisallowed(
                     "Supervising",
                     USER_TYPE_PROFILE_SUPERVISING,
                     /* flags= */ 0,
+                    UserHandle.USER_NULL,
+                    /* disallowedPackages= */ null,
                 )
             if (userInfo == null) {
+                Log.w(SupervisionLog.TAG, "Could not create supervising profile.")
                 return null
             }
 

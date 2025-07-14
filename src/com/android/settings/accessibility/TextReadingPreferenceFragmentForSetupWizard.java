@@ -34,6 +34,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.accessibility.textreading.dialogs.TextReadingResetDialog;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.Utils;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
@@ -84,7 +86,13 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
                     });
             AccessibilitySetupWizardUtils.setSecondaryButton(getContext(), mixin,
                     R.string.accessibility_text_reading_reset_button_title,
-                    () -> showDialog(DIALOG_RESET_SETTINGS)
+                    () -> {
+                        if (Flags.catalystTextReadingScreen()) {
+                            TextReadingResetDialog.showDialog(getChildFragmentManager());
+                        } else {
+                            showDialog(DIALOG_RESET_SETTINGS);
+                        }
+                    }
             );
         }
     }

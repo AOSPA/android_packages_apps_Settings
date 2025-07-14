@@ -16,12 +16,19 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.Application
+import android.app.role.RoleManager
+import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
 import android.app.settings.SettingsEnums
 import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
@@ -31,26 +38,33 @@ import android.text.Spanned
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
+import androidx.preference.Preference
+import androidx.preference.PreferenceGroup
 import androidx.preference.PreferenceGroupAdapter
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.settings.R
-import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.testutils.SettingsStoreRule
+import com.android.settingslib.ipc.MessengerServiceClient
 import com.android.settingslib.ipc.MessengerServiceRule
 import com.android.settingslib.preference.launchFragmentScenario
+import com.android.settingslib.utils.StringUtil
 import com.android.settingslib.widget.FooterPreference
-import com.android.settingslib.widget.SelectorWithWidgetPreference
 import com.android.settingslib.widget.TopIntroPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.stub
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowContextImpl
 import org.robolectric.shadows.ShadowLooper
 import org.robolectric.shadows.ShadowPackageManager
 
@@ -60,18 +74,29 @@ class SupervisionWebContentFiltersScreenTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val supervisionWebContentFiltersScreen = SupervisionWebContentFiltersScreen()
     private lateinit var shadowPackageManager: ShadowPackageManager
+    private val mockRoleManager = mock<RoleManager>()
 
     @get:Rule(order = 0) val setFlagsRule = SetFlagsRule()
     @get:Rule(order = 1) val settingsStoreRule = SettingsStoreRule()
     @get:Rule(order = 2)
     val serviceRule =
-        MessengerServiceRule<SupervisionMessengerClient>(
-            TestSupervisionMessengerService::class.java
-        )
+        MessengerServiceRule<MessengerServiceClient>(TestSupervisionMessengerService::class.java)
 
     @Before
     fun setUp() {
+        val testPackageName = "com.android.supervision"
+        mockRoleManager.stub {
+            on { getRoleHolders(ROLE_SYSTEM_SUPERVISION) } doReturn listOf(testPackageName)
+        }
         shadowPackageManager = shadowOf(context.packageManager)
+        val appPackageName = "com.android.chrome"
+        shadowPackageManager.installPackage(
+            PackageInfo().apply {
+                packageName = appPackageName
+                this.applicationInfo = ApplicationInfo().apply { packageName = appPackageName }
+            }
+        )
+        shadowPackageManager.setApplicationIcon(appPackageName, ColorDrawable(Color.RED))
         val intentFilter =
             IntentFilter("android.app.supervision.action.CONFIRM_SUPERVISION_CREDENTIALS")
         val componentName =
@@ -81,6 +106,9 @@ class SupervisionWebContentFiltersScreenTest {
             )
         shadowPackageManager.addActivityIfNotPresent(componentName)
         shadowPackageManager.addIntentFilterForActivity(componentName, intentFilter)
+        (Shadow.extract((context as Application).baseContext) as ShadowContextImpl).apply {
+            setSystemService(Context.ROLE_SERVICE, mockRoleManager)
+        }
     }
 
     @Test
@@ -129,12 +157,12 @@ class SupervisionWebContentFiltersScreenTest {
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun topIntroExists() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
-                val topIntroPreference =
-                    fragment.findPreference<TopIntroPreference>(
-                        SupervisionWebContentFiltersTopIntroPreference.KEY
-                    )
-                assertThat(topIntroPreference).isNotNull()
-            }
+            val topIntroPreference =
+                fragment.findPreference<TopIntroPreference>(
+                    SupervisionWebContentFiltersTopIntroPreference.KEY
+                )
+            assertThat(topIntroPreference).isNotNull()
+        }
     }
 
     @Test
@@ -238,6 +266,34 @@ class SupervisionWebContentFiltersScreenTest {
             ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
             assertThat(searchSwitchWidget.isChecked).isFalse()
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
+    fun supportedApps() {
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val summaryString =
+                StringUtil.getIcuPluralsString(
+                    context,
+                    1,
+                    R.string.supervision_web_content_filters_switch_summary,
+                )
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+            val safeSitesSwitch: SwitchPreferenceCompat =
+                fragment.findPreference(SupervisionSafeSitesSwitchPreference.KEY)!!
+
+            assertThat(safeSitesSwitch.summaryOn).isEqualTo(summaryString)
+            assertThat(safeSitesSwitch.summaryOff).isEqualTo(summaryString)
+
+            val broswerFilterGroup: PreferenceGroup =
+                fragment.findPreference("browser_filters_group")!!
+            assertThat(broswerFilterGroup.preferenceCount).isEqualTo(2)
+
+            val supportedApp: Preference = broswerFilterGroup.getPreference(1)
+
+            assertThat(supportedApp.title).isEqualTo("Supported app")
+            assertThat(supportedApp.summary).isEqualTo("App summary")
         }
     }
 

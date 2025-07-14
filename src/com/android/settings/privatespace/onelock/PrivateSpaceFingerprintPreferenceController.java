@@ -45,7 +45,9 @@ public class PrivateSpaceFingerprintPreferenceController
 
     @Override
     protected boolean isUserSupported() {
-        return android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+        return android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
                 && getUserId() != UserHandle.USER_NULL;
     }
 
@@ -63,7 +65,9 @@ public class PrivateSpaceFingerprintPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+        return android.os.Flags.allowPrivateProfile()
+                        && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

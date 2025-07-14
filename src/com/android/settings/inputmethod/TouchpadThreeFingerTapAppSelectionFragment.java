@@ -23,7 +23,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -36,12 +36,12 @@ public class TouchpadThreeFingerTapAppSelectionFragment extends InputDeviceDashb
     private static final String TAG = "TouchpadThreeFingerTapAppSelectionFragment";
 
     @Override
-    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+    public void onCreatePreferences(@NonNull Bundle savedInstanceState, @NonNull String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
         Bundle args = getArguments();
         if (args != null) {
-            Bundle bundle = getPreferenceScreen().getExtras();
-            bundle.putBoolean(SET_GESTURE, args.getBoolean(SET_GESTURE, false));
+            Bundle extras = getPreferenceScreen().getExtras();
+            extras.putBoolean(SET_GESTURE, args.getBoolean(SET_GESTURE, false));
         }
     }
 

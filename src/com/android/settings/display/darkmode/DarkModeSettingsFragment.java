@@ -22,11 +22,13 @@ import android.os.Bundle;
 import android.os.PowerManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.BaseSupportFragment;
+import com.android.settings.accessibility.Flags;
 import com.android.settings.accessibility.ForceInvertPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -54,27 +56,33 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Context context = getContext();
-        mContentObserver = new DarkModeObserver(context);
+        if (!Flags.catalystDarkUiMode()) {
+            final Context context = getContext();
+            mContentObserver = new DarkModeObserver(context);
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        // Listen for changes only while visible.
-        mContentObserver.subscribe(() -> {
-            PreferenceScreen preferenceScreen = getPreferenceScreen();
-            mCustomStartController.displayPreference(preferenceScreen);
-            mCustomEndController.displayPreference(preferenceScreen);
-            updatePreferenceStates();
-        });
+        if (!Flags.catalystDarkUiMode()) {
+            // Listen for changes only while visible.
+            mContentObserver.subscribe(() -> {
+                PreferenceScreen preferenceScreen = getPreferenceScreen();
+                mCustomStartController.displayPreference(preferenceScreen);
+                mCustomEndController.displayPreference(preferenceScreen);
+                updatePreferenceStates();
+            });
+        }
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        use(ForceInvertPreferenceController.class).initializeForSurvey(this, getSurveyKey(),
-                getMetricsCategory());
+        if (!Flags.catalystDarkUiMode()) {
+            use(ForceInvertPreferenceController.class).initializeForSurvey(this, getSurveyKey(),
+                    getMetricsCategory());
+        }
     }
 
     @Override
@@ -92,8 +100,10 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
     @Override
     public void onStop() {
         super.onStop();
-        // Stop listening for state changes.
-        mContentObserver.unsubscribe();
+        if (!Flags.catalystDarkUiMode()) {
+            // Stop listening for state changes.
+            mContentObserver.unsubscribe();
+        }
     }
 
     @Override
@@ -167,11 +177,17 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
         }
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@Nullable Context context) {
+        return DarkModeScreen.KEY;
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.dark_mode_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return !context.getSystemService(PowerManager.class).isPowerSaveMode();
+                    return !Flags.catalystDarkUiMode()
+                            && !context.getSystemService(PowerManager.class).isPowerSaveMode();
                 }
             };
 

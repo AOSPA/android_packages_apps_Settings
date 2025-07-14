@@ -22,6 +22,7 @@ import com.android.settings.DisplaySettings
 import com.android.settings.R
 import com.android.settings.Settings.DisplaySettingsActivity
 import com.android.settings.accessibility.Flags as AccessibilityFlags
+import com.android.settings.accessibility.textreading.ui.TextReadingScreen
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.dream.ScreensaverScreen
@@ -76,6 +77,7 @@ open class DisplayScreen :
             }
             +Category("category_key_appearance", R.string.category_name_appearance) order -180 += {
                 if (AccessibilityFlags.catalystDarkUiMode()) +DarkModeScreen.KEY
+                if (Flags.catalystTextReadingScreen()) +TextReadingScreen.KEY
             }
             +Category("category_other", R.string.category_name_display_controls) order -150 += {
                 +PeakRefreshRateSwitchPreference()

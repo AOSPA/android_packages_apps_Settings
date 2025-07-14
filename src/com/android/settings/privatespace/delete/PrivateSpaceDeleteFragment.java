@@ -56,7 +56,10 @@ public class PrivateSpaceDeleteFragment extends InstrumentedFragment {
 
     @Override
     public void onCreate(@Nullable Bundle icicle) {
-        super.onCreate(icicle);
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
+            super.onCreate(icicle);
+        }
     }
 
     @Override

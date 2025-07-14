@@ -24,6 +24,7 @@ import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.pm.UserInfo
+import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.platform.test.annotations.EnableFlags
@@ -40,6 +41,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
+import org.mockito.kotlin.anyOrNull
 import org.mockito.kotlin.argThat
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
@@ -94,7 +96,9 @@ class SetupSupervisionActivityTest {
     fun onCreate_noSupervisingUser_createAndStartProfile_startSetPinActivity() {
         mockUserManager.stub {
             on { users } doReturn emptyList()
-            on { createUser(any(), any(), any()) } doReturn SUPERVISING_USER_INFO
+            on {
+                createProfileForUserEvenWhenDisallowed(any(), any(), any(), any(), anyOrNull())
+            } doReturn SUPERVISING_USER_INFO
         }
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
 
@@ -108,7 +112,13 @@ class SetupSupervisionActivityTest {
         }
 
         verify(mockUserManager)
-            .createUser("Supervising", USER_TYPE_PROFILE_SUPERVISING, /* flags= */ 0)
+            .createProfileForUserEvenWhenDisallowed(
+                "Supervising",
+                USER_TYPE_PROFILE_SUPERVISING,
+                /* flags= */ 0,
+                UserHandle.USER_NULL,
+                null,
+            )
         verify(mockActivityManager).startProfile(argThat { identifier == SUPERVISING_USER_ID })
     }
 
@@ -123,7 +133,8 @@ class SetupSupervisionActivityTest {
             }
         }
 
-        verify(mockUserManager, never()).createUser(any(), any(), any())
+        verify(mockUserManager, never())
+            .createProfileForUserEvenWhenDisallowed(any(), any(), any(), any(), any())
         verify(mockActivityManager).startProfile(argThat { identifier == SUPERVISING_USER_ID })
     }
 
@@ -131,7 +142,9 @@ class SetupSupervisionActivityTest {
     fun onCreate_createUserFails_canceled() {
         mockUserManager.stub {
             on { users } doReturn emptyList()
-            on { createUser(any(), any(), any()) } doReturn null
+            on {
+                createProfileForUserEvenWhenDisallowed(any(), any(), any(), any(), any())
+            } doReturn null
         }
 
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {

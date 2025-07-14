@@ -26,18 +26,26 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.graphics.hwui.flags.Flags;
 import com.android.modules.expresslog.Counter;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import com.android.settings.accessibility.textreading.ui.BoldTextPreference;
 import com.android.settings.accessibility.textreading.ui.OutlineTextPreference;
+import com.android.settings.accessibility.textreading.ui.TextReadingScreen;
+import com.android.settings.accessibility.textreading.ui.TextReadingScreenFromNotification;
+import com.android.settings.accessibility.textreading.ui.TextReadingScreenInAnythingElse;
+import com.android.settings.accessibility.textreading.ui.TextReadingScreenInSuw;
+import com.android.settings.accessibility.textreading.ui.TextReadingScreenOnAccessibility;
+import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -103,6 +111,9 @@ public class TextReadingPreferenceFragment extends BaseSupportFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Flags.catalystTextReadingScreen()) {
+            return;
+        }
 
         mNeedResetSettings = false;
         mResetStateListeners = getResetStateListeners();
@@ -122,7 +133,7 @@ public class TextReadingPreferenceFragment extends BaseSupportFragment {
             rootView.setAccessibilityPaneTitle(getString(
                     R.string.accessibility_text_reading_options_title));
         }
-        if (Flags.highContrastTextSmallTextRect()) {
+        if (com.android.graphics.hwui.flags.Flags.highContrastTextSmallTextRect()) {
             updateEntryPoint();
             if (mEntryPoint == EntryPoint.HIGH_CONTRAST_TEXT_NOTIFICATION
                     // Only log this counter during the first launch, not during activity refresh
@@ -148,7 +159,12 @@ public class TextReadingPreferenceFragment extends BaseSupportFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+    protected @Nullable List<AbstractPreferenceController> createPreferenceControllers(
+            Context context) {
+        if (Flags.catalystTextReadingScreen()) {
+            return null;
+        }
+
         updateEntryPoint();
 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
@@ -224,7 +240,7 @@ public class TextReadingPreferenceFragment extends BaseSupportFragment {
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
-        if (dialogId == DialogEnums.DIALOG_RESET_SETTINGS) {
+        if (!Flags.catalystTextReadingScreen() && dialogId == DialogEnums.DIALOG_RESET_SETTINGS) {
             return new AlertDialog.Builder(getPrefContext())
                     .setTitle(R.string.accessibility_text_reading_confirm_dialog_title)
                     .setMessage(R.string.accessibility_text_reading_confirm_dialog_message)
@@ -240,7 +256,7 @@ public class TextReadingPreferenceFragment extends BaseSupportFragment {
 
     @Override
     public int getDialogMetricsCategory(int dialogId) {
-        if (dialogId == DialogEnums.DIALOG_RESET_SETTINGS) {
+        if (!Flags.catalystTextReadingScreen() && dialogId == DialogEnums.DIALOG_RESET_SETTINGS) {
             return SettingsEnums.DIALOG_RESET_SETTINGS;
         }
 
@@ -251,14 +267,9 @@ public class TextReadingPreferenceFragment extends BaseSupportFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        if (mNeedResetSettings) {
+        if (!Flags.catalystTextReadingScreen() && mNeedResetSettings) {
             outState.putBoolean(NEED_RESET_SETTINGS, true);
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     protected boolean isCallingFromAnythingElseEntryPoint() {
@@ -313,6 +324,28 @@ public class TextReadingPreferenceFragment extends BaseSupportFragment {
                 c -> (ResetStateListener) c).collect(Collectors.toList());
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        if (!Flags.catalystTextReadingScreen()) return null;
+
+        String screenKey = super.getPreferenceScreenBindingKey(context);
+        if (TextUtils.isEmpty(screenKey)) {
+            // This is the scenario where the previous screen is not a PreferenceScreenMetadata.
+            updateEntryPoint();
+            screenKey = switch (mEntryPoint) {
+                case EntryPoint.SUW_VISION_SETTINGS -> TextReadingScreenInSuw.KEY;
+                case EntryPoint.SUW_ANYTHING_ELSE -> TextReadingScreenInAnythingElse.KEY;
+                case EntryPoint.ACCESSIBILITY_SETTINGS -> TextReadingScreenOnAccessibility.KEY;
+                case EntryPoint.HIGH_CONTRAST_TEXT_NOTIFICATION ->
+                        TextReadingScreenFromNotification.KEY;
+                default -> TextReadingScreen.KEY;
+            };
+        }
+        return screenKey;
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_text_reading_options);
+            new BaseSearchIndexProvider(
+                    (Flags.catalystTextReadingScreen() && Flags.catalystSettingsSearch()) ? 0
+                            : R.xml.accessibility_text_reading_options);
 }
