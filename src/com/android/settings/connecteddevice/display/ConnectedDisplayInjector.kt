@@ -35,6 +35,7 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.util.Size
 import android.view.Display
+import android.view.Display.DEFAULT_DISPLAY
 import android.view.Display.INVALID_DISPLAY
 import android.view.DisplayInfo
 import android.view.IWindowManager
@@ -47,6 +48,7 @@ import android.view.WindowManagerGlobal
 import com.android.server.display.feature.flags.Flags.enableModeLimitForExternalDisplay
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY
 import com.android.settings.flags.FeatureFlagsImpl
+import com.android.wm.shell.shared.desktopmode.DesktopState
 import java.util.function.Consumer
 
 /**
@@ -75,6 +77,27 @@ open class ConnectedDisplayInjector(open val context: Context?) {
 
     /** The window manager instance, or null if it cannot be retrieved. */
     val windowManager: IWindowManager? by lazy { WindowManagerGlobal.getWindowManagerService() }
+
+    inner class DesktopStateWrapper(val context: Context?) {
+        private val desktopState = context?.let { DesktopState.fromContext(context) }
+        private lateinit var defaultDisplay: Display
+
+        fun isDesktopModeSupportedOnDefaultDisplay(): Boolean {
+            if (desktopState == null) {
+                return false
+            }
+            if (!::defaultDisplay.isInitialized) {
+                defaultDisplay = displayManager?.getDisplay(DEFAULT_DISPLAY) ?: return false
+            }
+            return desktopState.isDesktopModeSupportedOnDisplay(defaultDisplay)
+        }
+    }
+
+    private val desktopStateWrapper = DesktopStateWrapper(context)
+
+    open fun isDesktopModeSupportedOnDefaultDisplay(): Boolean {
+        return desktopStateWrapper.isDesktopModeSupportedOnDefaultDisplay()
+    }
 
     /**
      * Reveals the wallpaper on the given display using a View with FLAG_SHOW_WALLPAPER flag set in
@@ -283,6 +306,10 @@ open class ConnectedDisplayInjector(open val context: Context?) {
 
     /** @return true if the display mode limit flag enabled. */
     open fun isModeLimitForExternalDisplayEnabled(): Boolean = enableModeLimitForExternalDisplay()
+
+    open fun isDefaultDisplayInTopologySwitchEnabled(): Boolean =
+        android.window.DesktopExperienceFlags.ENABLE_DEFAULT_DISPLAY_IN_TOPOLOGY_SWITCH.isTrue() &&
+            flags.enableDefaultDisplayInTopologySwitchBugfix()
 
     open var displayTopology: DisplayTopology?
         get() = displayManager?.displayTopology

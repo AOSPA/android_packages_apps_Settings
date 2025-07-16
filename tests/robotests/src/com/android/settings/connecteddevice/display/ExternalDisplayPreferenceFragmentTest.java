@@ -15,6 +15,7 @@
  */
 package com.android.settings.connecteddevice.display;
 
+import static android.provider.Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY;
 import static android.provider.Settings.Secure.MIRROR_BUILT_IN_DISPLAY;
 import static android.view.Display.INVALID_DISPLAY;
 
@@ -24,6 +25,7 @@ import static com.android.settings.connecteddevice.display.ExternalDisplayPrefer
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SETTINGS_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SIZE_SUMMARY_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_TITLE_RESOURCE;
+import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY_SUMMARY_RESOURCE;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
 
@@ -52,6 +54,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -465,6 +468,79 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     }
 
     @Test
+    @UiThreadTest
+    public void testIncludeDefaultDisplayInTopologyPreference() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
+        setIncludeDefaultDisplayInTopologySettings(true);
+        initFragment();
+        mHandler.flush();
+        var pref =
+                (SwitchPreferenceCompat)
+                        mPreferenceScreen.findPreference(
+                                PrefBasics.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY.key);
+        assertThat("" + pref.getTitle())
+                .isEqualTo(getText(PrefBasics.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY.titleResource));
+        assertThat("" + pref.getSummary())
+                .isEqualTo(getText(INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY_SUMMARY_RESOURCE));
+        assertThat(pref.isEnabled()).isTrue();
+        assertThat(pref.isChecked()).isTrue();
+        assertThat(pref.getOnPreferenceClickListener()).isNotNull();
+        assertThat(pref.getOnPreferenceClickListener().onPreferenceClick(pref)).isTrue();
+        verify(mMockedMetricsLogger).writePreferenceClickMetric(pref);
+    }
+
+    @Test
+    @UiThreadTest
+    public void testIncludeDefaultDisplayInTopologyPreference_verifySettingsChange() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
+        setIncludeDefaultDisplayInTopologySettings(false);
+        initFragment();
+        mHandler.flush();
+        var pref =
+                (SwitchPreferenceCompat)
+                        mPreferenceScreen.findPreference(
+                                PrefBasics.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY.key);
+
+        pref.setChecked(true);
+        pref.getOnPreferenceClickListener().onPreferenceClick(pref);
+
+        assertThat(getIncludeDefaultDisplayInTopologySettings()).isEqualTo(1);
+
+        pref.setChecked(false);
+        pref.getOnPreferenceClickListener().onPreferenceClick(pref);
+
+        assertThat(getIncludeDefaultDisplayInTopologySettings()).isEqualTo(0);
+    }
+
+    @Test
+    @UiThreadTest
+    public void testIncludeDefaultDisplayInTopologyPreference_mirroringMode_notAdding() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
+        Settings.Secure.putInt(mContext.getContentResolver(), MIRROR_BUILT_IN_DISPLAY, 1);
+        initFragment();
+        mHandler.flush();
+        var pref =
+                mPreferenceScreen.findPreference(
+                        PrefBasics.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY.key);
+
+        assertThat(pref).isNull();
+    }
+
+    @Test
+    @UiThreadTest
+    public void testIncludeDefaultDisplayInTopologyPreference_desktopModeSupported_notAdding() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
+        doReturn(true).when(mMockedInjector).isDesktopModeSupportedOnDefaultDisplay();
+        initFragment();
+        mHandler.flush();
+        var pref =
+                mPreferenceScreen.findPreference(
+                        PrefBasics.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY.key);
+
+        assertThat(pref).isNull();
+    }
+
+    @Test
     public void testSearchIndexProvider_getXmlResourcesToIndex() {
         final Indexable.SearchIndexProvider provider =
                 ExternalDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER;
@@ -591,5 +667,17 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
          * On preference click metric
          */
         void writePreferenceClickMetric(Preference preference);
+    }
+
+    private int getIncludeDefaultDisplayInTopologySettings() {
+        return Settings.Secure.getInt(
+                mContext.getContentResolver(),
+                INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY,
+                0);
+    }
+
+    private boolean setIncludeDefaultDisplayInTopologySettings(boolean value) {
+        return Settings.Secure.putInt(
+                mContext.getContentResolver(), INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY, value ? 1 : 0);
     }
 }

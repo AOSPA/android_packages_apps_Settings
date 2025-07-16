@@ -237,6 +237,9 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
     public void onDetach() {
         super.onDetach();
         localBluetoothManager.getEventManager().unregisterCallback(mBluetoothCallback);
+        if (cachedDevice == null) {
+            return;
+        }
         BluetoothDevice device = cachedDevice.getDevice();
         try {
             mBluetoothAdapter.removeOnMetadataChangedListener(

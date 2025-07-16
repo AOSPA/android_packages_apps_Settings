@@ -3244,6 +3244,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         </activity>
 
         <activity android:name=".password.SetupChooseLockGeneric$InternalActivity"
+            android:theme="@style/GlifTheme.Light"
             android:exported="false"
             android:enableOnBackInvokedCallback="false"
             android:excludeFromRecents="true" />
@@ -4157,7 +4158,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:exported="true"
             android:featureFlag="com.android.settings.flags.deeplink_apps_25q4">
             <intent-filter android:priority="1">
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.settings.SPECIAL_ACCESS_SETTINGS"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -6019,18 +6020,6 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="true"/>
         </activity>
 
-        <service
-            android:name=".appfunctions.DeviceStateAppFunctionService"
-            android:permission="android.permission.BIND_APP_FUNCTION_SERVICE"
-            android:exported="true"
-            android:featureFlag="com.android.settings.flags.device_state">
-            <property android:name="android.app.appfunctions"
-                android:value="appfunctions.xml"/>
-            <intent-filter>
-                <action android:name="android.app.appfunctions.AppFunctionService"/>
-            </intent-filter>
-        </service>
-
         <activity android:name="com.android.settings.biometrics.IdentityCheckPromoCardActivity"
             android:enabled="true"
             android:launchMode="singleTask"
@@ -6042,7 +6031,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:name="com.android.settings.safetycenter.IdentityCheckSafetySource"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.android.settings.safetycenter.action.IDENTITY_CHECK_ISSUE_CARD_DISMISSED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 

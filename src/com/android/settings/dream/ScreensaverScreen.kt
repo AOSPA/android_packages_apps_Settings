@@ -76,7 +76,7 @@ open class ScreensaverScreen(private val context: Context) :
                 )
 
             override fun dreamOffBedtime(context: Context) =
-                context.resources.getString(R.string.screensaver_settings_when_to_dream_bedtime)
+                context.resources.getString(R.string.screensaver_unavailable_due_to_mode)
         }
 
     private val screenSaverSettingKeys

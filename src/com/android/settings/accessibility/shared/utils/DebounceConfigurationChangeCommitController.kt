@@ -44,7 +44,6 @@ class DebounceConfigurationChangeCommitController(
     private val minCommitDelay: Duration = Duration.ZERO,
 ) {
     private var debounceJob: Job? = null
-    private val choreographer = Choreographer.getInstance()
     private var lastCommitTimeMillis = Duration.ZERO
 
     /**
@@ -73,7 +72,7 @@ class DebounceConfigurationChangeCommitController(
         debounceJob =
             scope.launch {
                 delay(adjustedDelayInMs)
-                choreographer.postFrameCallback {
+                Choreographer.getInstance().postFrameCallback {
                     commitAction.invoke()
                     lastCommitTimeMillis =
                         SystemClock.elapsedRealtime().toDuration(DurationUnit.MILLISECONDS)

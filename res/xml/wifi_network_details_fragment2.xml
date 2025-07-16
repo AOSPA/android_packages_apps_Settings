@@ -193,4 +193,10 @@
             android:key="ipv6_addresses"
             settings:enableCopying="true"/>
     </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="shared_network_footer"
+        android:title="@string/shared_network_footer"
+        settings:isPreferenceVisible="false">
+    </com.android.settingslib.widget.FooterPreference>
 </PreferenceScreen>

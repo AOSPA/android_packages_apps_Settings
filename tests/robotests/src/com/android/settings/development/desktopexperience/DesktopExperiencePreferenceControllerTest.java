@@ -49,6 +49,7 @@ import com.android.settings.R;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.development.RebootConfirmationDialogFragment;
 import com.android.window.flags.Flags;
+import com.android.wm.shell.shared.desktopmode.FakeDesktopState;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -59,7 +60,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowSystemProperties;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -84,10 +84,13 @@ public class DesktopExperiencePreferenceControllerTest {
     private Resources mResources;
     private Context mContext;
     private DesktopExperiencePreferenceController mController;
+    private FakeDesktopState mDesktopState;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+
+        mDesktopState = new FakeDesktopState();
 
         FragmentActivity activity = spy(Robolectric.buildActivity(
                 FragmentActivity.class).create().get());
@@ -99,24 +102,19 @@ public class DesktopExperiencePreferenceControllerTest {
         mResources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(mResources);
 
-        mController = new DesktopExperiencePreferenceController(mContext, mFragment);
+        mController = new DesktopExperiencePreferenceController(mContext, mFragment, mDesktopState);
 
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
 
         // Set desktop mode available
-        when(mResources.getBoolean(com.android.internal.R.bool.config_isDesktopModeSupported))
-                .thenReturn(true);
-        when(mResources
-                .getBoolean(com.android.internal.R.bool.config_canInternalDisplayHostDesktops))
-                .thenReturn(true);
-        ShadowSystemProperties.override("persist.wm.debug.desktop_mode_enforce_device_restrictions",
-                "false");
+        mDesktopState.setCanEnterDesktopMode(true);
     }
 
     @Test
     public void isAvailable_returnsTrue() {
         mController = spy(mController);
+        mDesktopState.setCanShowDesktopExperienceDevOption(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -193,6 +191,7 @@ public class DesktopExperiencePreferenceControllerTest {
     @DisableFlags({Flags.FLAG_ENABLE_DESKTOP_WINDOWING_MODE,
             FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT})
     public void updateState_whenDesktopModeAvailableButNotEnabled_checkSummary() {
+        mDesktopState.setDeviceEligibleForDesktopMode(true);
         SwitchPreference pref = new SwitchPreference(mContext);
 
         mController.updateState(pref);
@@ -205,6 +204,7 @@ public class DesktopExperiencePreferenceControllerTest {
     @DisableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
     @EnableFlags(Flags.FLAG_ENABLE_DESKTOP_WINDOWING_MODE)
     public void updateState_whenDesktopModeAvailableAndEnabled_checkSummary() {
+        mDesktopState.setDeviceEligibleForDesktopMode(true);
         SwitchPreference pref = new SwitchPreference(mContext);
 
         mController.updateState(pref);

@@ -63,7 +63,10 @@ public class PrivateSpaceDeletionProgressFragment extends InstrumentedFragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
+            super.onCreate(savedInstanceState);
+        }
     }
 
     @Override

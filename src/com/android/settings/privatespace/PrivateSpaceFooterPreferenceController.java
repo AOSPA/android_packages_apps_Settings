@@ -44,7 +44,9 @@ public class PrivateSpaceFooterPreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return android.multiuser.Flags.enablePrivateSpaceFeatures()
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @VisibleForTesting

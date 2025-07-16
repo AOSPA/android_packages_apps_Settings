@@ -19,6 +19,7 @@ package com.android.settings.privatespace;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Flags;
 import android.os.UserManager;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
@@ -61,6 +62,19 @@ public final class PrivateSpaceSafetySource {
         // user.
         if (userManager != null && !userManager.isMainUser()) {
             Log.i(TAG, "setSafetySourceData not main user");
+            return;
+        }
+
+        if (!Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
+            // Setting null safetySourceData so that an old entry gets cleared out and this way
+            // provide a response since SC always expects one on rescan.
+            SafetyCenterManagerWrapper.get().setSafetySourceData(
+                    context,
+                    SAFETY_SOURCE_ID,
+                    /* safetySourceData */ null,
+                    safetyEvent
+            );
             return;
         }
 

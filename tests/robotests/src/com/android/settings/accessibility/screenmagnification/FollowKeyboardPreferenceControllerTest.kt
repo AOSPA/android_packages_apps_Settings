@@ -90,6 +90,11 @@ class FollowKeyboardPreferenceControllerTest {
     }
 
     @Test
+    fun isChecked_default_returnFalse() {
+         assertThat(controller.isChecked).isFalse()
+    }
+
+    @Test
     fun isChecked_settingOn_returnTrue() {
         Settings.Secure.putInt(context.contentResolver, SETTING_KEY, AccessibilityUtil.State.ON)
 

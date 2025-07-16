@@ -153,6 +153,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     static final String KEY_IPV6_ADDRESSES_PREF = "ipv6_addresses";
     @VisibleForTesting
     static final String KEY_WIFI_TYPE_PREF = "type";
+    @VisibleForTesting
+    static final String KEY_SHARED_NETWORK_FOOTER = "shared_network_footer";
 
     private final WifiEntry mWifiEntry;
     private final ConnectivityManager mConnectivityManager;
@@ -378,6 +380,11 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         mDnsPref = screen.findPreference(KEY_DNS_PREF);
         mTypePref = screen.findPreference(KEY_WIFI_TYPE_PREF);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
+
+        if (!canModifyNetwork()) {
+            Preference footer = screen.findPreference(KEY_SHARED_NETWORK_FOOTER);
+            footer.setVisible(true);
+        }
     }
 
     /**

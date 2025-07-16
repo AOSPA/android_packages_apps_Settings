@@ -18,6 +18,7 @@ package com.android.settings.safetycenter
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.ACTION_BOOT_COMPLETED
 import android.hardware.biometrics.Flags
 import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.annotations.RequiresFlagsEnabled
@@ -45,24 +46,28 @@ import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-
 @RunWith(AndroidJUnit4::class)
 class IdentityCheckSafetySourceTest {
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
-    @get:Rule
-    val mCheckFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
-
-    private val applicationContext: Context = ApplicationProvider.getApplicationContext()
-    private val safetyEvent = SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
-        .setRefreshBroadcastId(IdentityCheckSafetySource.SAFETY_SOURCE_ID)
-        .build()
+    @get:Rule val mCheckFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     @Mock lateinit var safetyCenterManagerWrapper: SafetyCenterManagerWrapper
+
+    private val applicationContext: Context = ApplicationProvider.getApplicationContext()
+    private val safetyEvent =
+        SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
+            .setRefreshBroadcastId(IdentityCheckSafetySource.SAFETY_SOURCE_ID)
+            .build()
+    private val safetySourceDataArgumentCaptor = argumentCaptor<SafetySourceData>()
+
+    private lateinit var identityCheckSafetySource: IdentityCheckSafetySource
 
     @Before
     fun setUp() {
         SafetyCenterManagerWrapper.sInstance = safetyCenterManagerWrapper
+        identityCheckSafetySource = IdentityCheckSafetySource()
+        identityCheckSafetySource.onReceive(applicationContext, Intent(ACTION_BOOT_COMPLETED))
     }
 
     @After
@@ -74,106 +79,134 @@ class IdentityCheckSafetySourceTest {
     @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_whenSafetyCenterIsDisabled_doesNotSetData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(false)
+
         setIdentityCheckPromoCardShown(false)
-        setIdentityCheckEnabled(true)
+        setIdentityCheckEnabled()
 
         IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
 
-        verify(safetyCenterManagerWrapper, never())
-            .setSafetySourceData(any(), any(), any(), any())
+        verify(safetyCenterManagerWrapper, never()).setSafetySourceData(any(), any(), any(), any())
     }
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
-    fun refreshSafetySources_whenIdentityCheckDisabled_setsNullData() {
+    fun refreshSafetySources_whenIdentityCheckDisabledInV1_setsNullData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
         setIdentityCheckPromoCardShown(false)
-        setIdentityCheckEnabled(false)
+        setIdentityCheckEnabled(enabledV1Status = false, enabledCurrentStatus = true)
 
         IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
 
         verify(safetyCenterManagerWrapper)
-            .setSafetySourceData(eq(applicationContext),
-                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID), eq(null), eq(safetyEvent))
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                eq(null),
+                eq(safetyEvent),
+            )
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
+    fun refreshSafetySources_whenIdentityCheckDisabledCurrently_setsNullData() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
+        setIdentityCheckPromoCardShown(false)
+        setIdentityCheckEnabled(enabledV1Status = true, enabledCurrentStatus = false)
+
+        IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                eq(null),
+                eq(safetyEvent),
+            )
     }
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_whenPromoCardAlreadyShown_setsNullData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
         setIdentityCheckPromoCardShown(true)
-        setIdentityCheckEnabled(true)
+        setIdentityCheckEnabled()
 
         IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
 
         verify(safetyCenterManagerWrapper)
-            .setSafetySourceData(eq(applicationContext),
-                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID), eq(null), eq(safetyEvent))
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
-    fun refreshSafetySources_setsSafetySourceData() {
-        val safetySourceDataArgumentCaptor = argumentCaptor<SafetySourceData>()
-        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
-        setIdentityCheckPromoCardShown(false) // Should set data if promo card not shown
-        setIdentityCheckEnabled(true)
-
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
-
-        verify(safetyCenterManagerWrapper)
-            .setSafetySourceData(eq(applicationContext),
+            .setSafetySourceData(
+                eq(applicationContext),
                 eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
-                safetySourceDataArgumentCaptor.capture(), eq(safetyEvent))
-        assertThat(safetySourceDataArgumentCaptor.firstValue).isNotNull()
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
-    fun onReceiveIssueCardDismissed_setsPromoCardShown() {
-        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
-        setIdentityCheckPromoCardShown(false) // Initial state
-        setIdentityCheckEnabled(true)
-
-        IdentityCheckSafetySource().onReceive(
-            applicationContext,
-            Intent(IdentityCheckSafetySource.ISSUE_CARD_DISMISSED_ACTION)
-        )
-
-        val hasPromoCardBeenShown = Settings.Global.getInt(
-            applicationContext.contentResolver,
-            Settings.Global.IDENTITY_CHECK_PROMO_CARD_SHOWN,
-            0
-        )
-
-        assertThat(hasPromoCardBeenShown).isEqualTo(1)
+                eq(null),
+                eq(safetyEvent),
+            )
     }
 
     @Test
     @RequiresFlagsDisabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
     fun refreshSafetySources_whenFlagDisabled_setsNullData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
         setIdentityCheckPromoCardShown(false)
-        setIdentityCheckEnabled(true)
+        setIdentityCheckEnabled()
 
         IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
 
         verify(safetyCenterManagerWrapper)
-            .setSafetySourceData(eq(applicationContext),
-                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID), eq(null), eq(safetyEvent))
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                eq(null),
+                eq(safetyEvent),
+            )
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
+    fun refreshSafetySources_setsSafetySourceData() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
+        setIdentityCheckPromoCardShown(false)
+        setIdentityCheckEnabled()
+
+        IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                safetySourceDataArgumentCaptor.capture(),
+                eq(safetyEvent),
+            )
+
+        assertThat(safetySourceDataArgumentCaptor.firstValue).isNotNull()
     }
 
     private fun setIdentityCheckPromoCardShown(hasShown: Boolean) {
-        Settings.Global.putInt(
+        Settings.Secure.putInt(
             applicationContext.contentResolver,
-            Settings.Global.IDENTITY_CHECK_PROMO_CARD_SHOWN, if (hasShown) 1 else 0
+            Settings.Secure.IDENTITY_CHECK_PROMO_CARD_SHOWN,
+            if (hasShown) 1 else 0,
         )
     }
 
-    private fun setIdentityCheckEnabled(enabled: Boolean) {
+    private fun setIdentityCheckEnabled(
+        enabledV1Status: Boolean = true,
+        enabledCurrentStatus: Boolean = true,
+    ) {
         Settings.Secure.putInt(
             applicationContext.contentResolver,
-            Settings.Secure.MANDATORY_BIOMETRICS, if (enabled) 1 else 0
+            Settings.Secure.IDENTITY_CHECK_ENABLED_V1,
+            if (enabledV1Status) 1 else 0,
+        )
+
+        Settings.Secure.putInt(
+            applicationContext.contentResolver,
+            Settings.Secure.MANDATORY_BIOMETRICS,
+            if (enabledCurrentStatus) 1 else 0,
         )
     }
 }

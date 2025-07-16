@@ -895,4 +895,12 @@
         <item>1234</item>
         -->
     </integer-array>
+
+    <!-- Whether strings are provided to show Identity Check Watch promo card. This implies that
+         the following strings have overlays:
+         R.string.identity_check_watch_issue_card_title
+         R.string.identity_check_watch_issue_card_summary
+         R.string.identity_check_watch_promo_card_title
+         R.string.identity_check_promo_card_watch_summary -->
+    <bool name="config_show_identity_check_watch_promo">false</bool>
 </resources>

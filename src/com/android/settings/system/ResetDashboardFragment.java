@@ -69,8 +69,7 @@ public class ResetDashboardFragment extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         use(EraseEuiccDataController.class).setFragment(this);
-        if (android.multiuser.Flags.enablePrivateSpaceFeatures()
-                && android.multiuser.Flags.deletePrivateSpaceFromReset()) {
+        if (android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             ResetOptionsDeletePrivateSpaceController resetOptionsDeletePrivateSpaceController =
                     use(ResetOptionsDeletePrivateSpaceController.class);
             if (resetOptionsDeletePrivateSpaceController != null) {

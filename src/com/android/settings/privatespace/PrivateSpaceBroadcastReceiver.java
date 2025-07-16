@@ -31,7 +31,8 @@ public class PrivateSpaceBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (android.multiuser.Flags.blockPrivateSpaceCreation()) {
+        if (android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && android.multiuser.Flags.blockPrivateSpaceCreation()) {
             Log.d(TAG, "Received Intent: " + intent.getAction());
             PrivateSpaceMaintainer privateSpaceMaintainer =
                     PrivateSpaceMaintainer.getInstance(context);

@@ -21,6 +21,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_a11y_activity_detail"
+  namespace: "accessibility"
+  description: "Migrate accessibility activity screen to the Catalyst infrastructure"
+  bug: "337243383"
+}
+
+flag {
   name: "catalyst_dark_ui_mode"
   namespace: "accessibility"
   description: "Migrate dark mode screen to the Catalyst infrastructure"

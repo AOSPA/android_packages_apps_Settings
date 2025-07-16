@@ -28,6 +28,7 @@ import android.window.DesktopModeFlags;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
@@ -38,7 +39,7 @@ import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.development.RebootConfirmationDialogFragment;
 import com.android.settings.development.RebootConfirmationDialogHost;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.wm.shell.shared.desktopmode.DesktopModeStatus;
+import com.android.wm.shell.shared.desktopmode.DesktopState;
 
 public class DesktopExperiencePreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener,
@@ -49,15 +50,24 @@ public class DesktopExperiencePreferenceController extends DeveloperOptionsPrefe
     @Nullable
     private final DevelopmentSettingsDashboardFragment mFragment;
 
-    public DesktopExperiencePreferenceController(
-            Context context, @Nullable DevelopmentSettingsDashboardFragment fragment) {
+    private final DesktopState mDesktopState;
+
+    @VisibleForTesting
+    DesktopExperiencePreferenceController(Context context,
+            @Nullable DevelopmentSettingsDashboardFragment fragment, DesktopState desktopState) {
         super(context);
         mFragment = fragment;
+        mDesktopState = desktopState;
+    }
+
+    public DesktopExperiencePreferenceController(
+            Context context, @Nullable DevelopmentSettingsDashboardFragment fragment) {
+        this(context, fragment, DesktopState.fromContext(context));
     }
 
     @Override
     public boolean isAvailable() {
-        return DesktopModeStatus.canShowDesktopExperienceDevOption(mContext);
+        return mDesktopState.canShowDesktopExperienceDevOption();
     }
 
     @Override
@@ -108,7 +118,7 @@ public class DesktopExperiencePreferenceController extends DeveloperOptionsPrefe
 
     @Override
     public CharSequence getSummary() {
-        if (DesktopModeStatus.isDeviceEligibleForDesktopMode(mContext)
+        if (mDesktopState.isDeviceEligibleForDesktopMode()
                 && !DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_MODE.isTrue()) {
             return mContext.getString(
                     R.string.enable_desktop_experience_features_summary_with_desktop);

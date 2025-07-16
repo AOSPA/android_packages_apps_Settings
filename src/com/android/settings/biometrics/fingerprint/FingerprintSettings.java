@@ -1528,10 +1528,12 @@ public class FingerprintSettings extends SubSettings {
             }
             clearAllFingerprintPreferenceHighlight();
             fpref.startHighlight();
-            setupFingerprintRecognition(fpref.getView(), fpref.getFingerprint());
+            setupFingerprintRecognition(fpref, fpref.getFingerprint());
         }
 
-        private void setupFingerprintRecognition(View view, Fingerprint fp) {
+        private void setupFingerprintRecognition(
+                @NonNull FingerprintPreference fpref, Fingerprint fp) {
+            final View view = fpref.getView();
             final AccessibilityManager a11y =
                     view.getContext().getSystemService(AccessibilityManager.class);
             if (a11y == null || !a11y.isTouchExplorationEnabled()) return;
@@ -1547,8 +1549,7 @@ public class FingerprintSettings extends SubSettings {
                     if (event.getEventType() == TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
                         // Clear the content description for fp recognition that a11y would speak
                         // the content description of title.
-                        host.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_NONE);
-                        host.setContentDescription(null);
+                        fpref.clearDescription();
                     }
                     super.onInitializeAccessibilityEvent(host, event);
                 }
@@ -2106,8 +2107,15 @@ public class FingerprintSettings extends SubSettings {
                 mHighlightAnimator.cancel();
                 mHighlightAnimator = null;
             }
+            clearDescription();
             mView.removeCallbacks(mClearHighlightRunnable);
             mView.setBackgroundResource(getBackgroundRes(false /* isHighlighted */));
+        }
+
+        /** Clear the content description of the preference, as well as the a11y live region. **/
+        public void clearDescription() {
+            mView.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_NONE);
+            mView.setContentDescription(null);
         }
 
         private boolean isTopItemInParent() {

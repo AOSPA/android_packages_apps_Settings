@@ -72,4 +72,14 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) :
 
     override fun showTabbedConnectedDisplaySetting(): Boolean =
         showTabbedConnectedDisplaySettingFlag.isTrue
+
+    private val enableDefaultDisplayInTopologySwitchBugfixFlag =
+        DesktopExperienceFlag(
+            featureFlagsImpl::enableDefaultDisplayInTopologySwitchBugfix,
+            /* shouldOverrideByDevOption= */ false,
+            Flags.FLAG_ENABLE_DEFAULT_DISPLAY_IN_TOPOLOGY_SWITCH_BUGFIX,
+        )
+
+    override fun enableDefaultDisplayInTopologySwitchBugfix(): Boolean =
+        enableDefaultDisplayInTopologySwitchBugfixFlag.isTrue
 }

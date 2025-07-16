@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.display;
 
+import static android.provider.Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY;
+
 import static com.android.settings.Utils.createAccessibleSequence;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
@@ -27,6 +29,7 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Display;
 import android.view.View;
 import android.widget.TextView;
@@ -38,6 +41,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -65,6 +69,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     @VisibleForTesting enum PrefBasics {
         DISPLAY_TOPOLOGY(10, "display_topology_preference", null),
         MIRROR(20, "mirror_preference", R.string.external_display_mirroring_title),
+        INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY(
+                25,
+                "include_default_display_in_topology_preference",
+                R.string.builtin_display_settings_universal_cursor_title),
 
         // If shown, use toggle should be before other per-display settings.
         EXTERNAL_DISPLAY_USE(30, "external_display_use_preference",
@@ -138,6 +146,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     static final int EXTERNAL_DISPLAY_PORTRAIT_DRAWABLE =
             R.drawable.external_display_mirror_portrait;
     static final int EXTERNAL_DISPLAY_SIZE_SUMMARY_RESOURCE = R.string.screen_zoom_short_summary;
+    static final int INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY_SUMMARY_RESOURCE =
+            R.string.builtin_display_settings_universal_cursor_description;
 
     private boolean mStarted;
     @Nullable
@@ -356,6 +366,34 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         refresh.addPreference(pref);
     }
 
+    private void addIncludeDefaultDisplayInTopologyPreference(PrefRefresh refresh) {
+        Preference pref =
+                refresh.findUnusedPreference(PrefBasics.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY.key);
+        if (pref == null) {
+            pref = new SwitchPreferenceCompat(requireContext());
+            PrefBasics.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY.apply(pref, /* nth= */ null);
+            pref.setSummary(INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY_SUMMARY_RESOURCE);
+            final SwitchPreferenceCompat switchPref = (SwitchPreferenceCompat) pref;
+            boolean isActive =
+                    Settings.Secure.getInt(
+                                    requireContext().getContentResolver(),
+                                    INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY,
+                                    0)
+                            != 0;
+            switchPref.setChecked(isActive);
+            switchPref.setOnPreferenceClickListener(
+                    (p) -> {
+                        writePreferenceClickMetric(p);
+                        Settings.Secure.putInt(
+                                requireContext().getContentResolver(),
+                                INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY,
+                                switchPref.isChecked() ? 1 : 0);
+                        return true;
+                    });
+        }
+        refresh.addPreference(pref);
+    }
+
     @NonNull
     private ExternalDisplaySizePreference reuseSizePreference(
             PrefRefresh refresh, DisplayDevice display, int position) {
@@ -468,6 +506,11 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (mInjector.getFlags().displayTopologyPaneInDisplayList()) {
             screen.addPreference(getDisplayTopologyPreference());
             addMirrorPreference(screen);
+            if (mInjector.isDefaultDisplayInTopologySwitchEnabled()
+                    && !mInjector.isDesktopModeSupportedOnDefaultDisplay()
+                    && !isDisplayInMirroringMode(requireContext())) {
+                addIncludeDefaultDisplayInTopologyPreference(screen);
+            }
 
             // If topology is shown, we also show a preference for the built-in display for
             // consistency with the topology.

@@ -294,6 +294,9 @@
     <!-- Footer description for discoverable mode in bluetooth off state [CHAR LIMIT=none] -->
     <string name="bluetooth_off_footer">Turn on Bluetooth to connect to other devices.</string>
 
+    <!-- Footer description for shared network [CHAR LIMIT=none] -->
+    <string name="shared_network_footer">Contact the network owner or a device admin to make changes to this network.</string>
+
     <!-- Title for paired device group [CHAR LIMIT=none] -->
     <string name="bluetooth_paired_device_title">Your devices</string>
     <!-- Title for pairing bluetooth device page [CHAR LIMIT=none] -->
@@ -2228,6 +2231,10 @@
     <string name="external_display_settings_title">External displays</string>
     <!-- Built-in display settings category. Appears in External displays and Connected Displays fragments. -->
     <string name="builtin_display_settings_category">Built-in display</string>
+    <!-- Built-in display settings category. Toggle to include / exclude built-in display as part of DisplayTopology. -->
+    <string name="builtin_display_settings_universal_cursor_title">Universal cursor</string>
+    <!-- Built-in display settings category. Description for universal cursor settings. -->
+    <string name="builtin_display_settings_universal_cursor_description">Move your mouse between displays</string>
     <!-- External Display use. The title of the use preference. [CHAR LIMIT=40] -->
     <string name="external_display_use_title">Use external display</string>
     <!-- External Display resolution settings. The title of the screen. [CHAR LIMIT=40] -->
@@ -3438,6 +3445,8 @@
     <string name="keywords_screensaver">screensaver</string>
     <!-- Summary for screensaver unavailable when Bedtime mode is on [CHAR LIMIT=50] -->
     <string name="screensaver_settings_when_to_dream_bedtime">Unavailable because bedtime mode is on</string>
+    <!-- Summary for screensaver unavailable because it is suppressed by a mode. [CHAR LIMIT=50] -->
+    <string name="screensaver_unavailable_due_to_mode">Not available</string>
     <!-- The title for the toggle which disables/enables screen savers [CHAR_LIMIT=30] -->
     <string name="screensaver_settings_toggle_title">Use screen saver</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated when docked or asleep and charging [CHAR LIMIT=40] -->
@@ -7266,7 +7275,7 @@ Data usage charges may apply.</string>
     <!-- Header of Cellular security page 2G network protection [CHAR LIMIT=NONE]-->
     <string name="cellular_security_2G_network_generation_header">Network generation</string>
     <!-- Summary of Cellular security page 2G network protection [CHAR LIMIT=NONE]-->
-    <string name="cellular_security_2G_network_generation_summary">2G network protection avoids 2G networks, which are less secure. This may limit connectivity in some places. Emergency calling is always allowed.</string>
+    <string name="cellular_security_2G_network_generation_summary">2G network protection avoids 2G networks, which are less secure. This may limit connectivity in some places. 2G is always allowed for emergency calls, but calls may not connect if you\'re roaming internationally.</string>
     <!-- Title of Cellular security page 2G network protection [CHAR LIMIT=NONE]-->
     <string name="cellular_security_2G_network_generation_title">2G network protection</string>
 
@@ -14064,7 +14073,7 @@ Data usage charges may apply.</string>
     <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=40] -->
     <string name="enable_2g_title">2G network protection</string>
     <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=NONE] -->
-    <string name="enable_2g_summary">Avoids 2G networks, which are less secure. This may limit connectivity in some places. Emergency calling is always allowed.</string>
+    <string name="enable_2g_summary">Avoids 2G networks, which are less secure. This may limit connectivity in some places. 2G is always allowed for emergency calls, but calls may not connect if you\'re roaming internationally.</string>
     <!-- Title for if toggle access is disabled by carrier [CHAR LIMIT=NONE] -->
     <string name="enable_2g_summary_disabled_carrier"><xliff:g id="carrier_name_2g" example="Google Fi">%1$s</xliff:g> requires 2G to be available</string>
 
@@ -14917,4 +14926,13 @@ Data usage charges may apply.</string>
     <string name="identity_check_promo_card_title">Use Identity Check to secure more apps</string>
     <!-- Summary for Identity Check promo card in Safety Center [CHAR LIMIT=NONE] -->
     <string name="identity_check_promo_card_summary">When you use Identity Check for all apps that support Fingerprint and Face Unlock, you ensure stronger protection and a more consistent experience – without extra setup</string>
+
+    <!-- Title on issue card for Identity Check in Safety Center (watch-specific) [CHAR LIMIT=NONE] -->
+    <string name="identity_check_watch_issue_card_title">Identity Check works with your watch</string>
+    <!-- Summary on issue card for Identity Check in Safety Center (watch-specific) [CHAR LIMIT=NONE] -->
+    <string name="identity_check_watch_issue_card_summary">Prevent others from opening apps that require Fingerprint or Face Unlock. When connected to your watch, your security is assured with greater mobility.</string>
+    <!-- Title for Identity Check promo card in Safety Center (watch-specific) [CHAR LIMIT=NONE] -->
+    <string name="identity_check_watch_promo_card_title">Use Identity Check and watch on more apps</string>
+    <!-- Summary for Identity Check promo card in Safety Center (watch-specific) [CHAR LIMIT=NONE] -->
+    <string name="identity_check_promo_card_watch_summary">Ensure your identity protection on all apps that support Fingerprint and Face Unlock in trusted places like your home or office. Use Identity Check with your watch to extend your protection even beyond trusted places.</string>
 </resources>

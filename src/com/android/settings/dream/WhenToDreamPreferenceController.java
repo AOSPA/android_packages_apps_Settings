@@ -91,7 +91,7 @@ public class WhenToDreamPreferenceController extends BasePreferenceController im
     private @StringRes int getSummaryResId() {
         if (mDreamsDisabledByAmbientModeSuppression
                 && AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime(mContext)) {
-            return R.string.screensaver_settings_when_to_dream_bedtime;
+            return R.string.screensaver_unavailable_due_to_mode;
         } else {
             final int resId = DreamSettings.getDreamSettingDescriptionResId(
                     mBackend.getWhenToDreamSetting(), mDreamsEnabledOnBattery);

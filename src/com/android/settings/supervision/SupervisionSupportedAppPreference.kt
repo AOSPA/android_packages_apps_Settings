@@ -41,6 +41,6 @@ class SupervisionSupportedAppPreference(
         }
 
     companion object {
-        const val KEY = "browser_filters_supported_app"
+        const val KEY = "web_content_filters_supported_app"
     }
 }

@@ -20,14 +20,17 @@ import android.Manifest
 import android.app.settings.SettingsEnums
 import android.app.settings.SettingsEnums.ACTION_DARK_THEME
 import android.content.Context
+import android.content.Intent
 import android.os.PowerManager
 import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.Settings.DarkThemeSettingsActivity
 import com.android.settings.accessibility.Flags
 import com.android.settings.contract.KEY_DARK_THEME
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.metrics.PreferenceActionMetricsProvider
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
@@ -92,10 +95,13 @@ open class DarkModeScreen(context: Context) :
 
     override fun fragmentClass(): Class<out Fragment>? = DarkModeSettingsFragment::class.java
 
-    override fun hasCompleteHierarchy() = false
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
+        makeLaunchIntent(context, DarkThemeSettingsActivity::class.java, metadata?.key)
+
+    override fun hasCompleteHierarchy() = Flags.catalystDarkUiMode()
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +DarkModeTopIntroPreference() }
 
     override fun storage(context: Context): KeyValueStore = darkModeStorage
 
@@ -105,6 +111,9 @@ open class DarkModeScreen(context: Context) :
     }
 
     override fun isEnabled(context: Context) = !context.isPowerSaveMode()
+
+    override fun isIndexable(context: Context) =
+        Flags.catalystDarkUiMode() && !context.isPowerSaveMode()
 
     override fun getSummary(context: Context): CharSequence? {
         val active = darkModeStorage.getBoolean(KEY) == true
