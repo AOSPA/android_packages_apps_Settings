@@ -121,6 +121,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             if (uid == -1) {
                 // TODO: Log error.
                 activity.finish();
+                return;
             } else {
                 addUid(uid);
                 mAppItem = new AppItem(uid);

@@ -114,7 +114,12 @@ public class HearingAidCompatibilityPreferenceController extends TogglePreferenc
     /** Dialog to tell user about the disclaimer to turn on HAC */
     public static class HacDisclaimerDialog extends InstrumentedDialogFragment {
 
-        static HacDisclaimerDialog newInstance() {
+        /**
+         * Creates a new instance of the HAC (Hearing Aid Compatibility) disclaimer dialog.
+         *
+         * @return A new instance of {@link HacDisclaimerDialog}.
+         */
+        public static HacDisclaimerDialog newInstance() {
             return new HacDisclaimerDialog();
         }
 

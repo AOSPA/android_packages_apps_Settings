@@ -42,6 +42,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_hearing_devices"
+  namespace: "accessibility"
+  description: "Migrate hearing device screen to the Catalyst infrastructure"
+  bug: "337244007"
+}
+
+flag {
   name: "catalyst_magnification"
   namespace: "accessibility"
   description: "Migrate magnification screen to the Catalyst infrastructure"

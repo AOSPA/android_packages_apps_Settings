@@ -174,8 +174,10 @@ import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.notification.app.ChannelNotificationSettings;
 import com.android.settings.notification.app.ConversationListSettings;
 import com.android.settings.notification.history.NotificationStation;
+import com.android.settings.notification.modes.ZenModeCallsFragment;
 import com.android.settings.notification.modes.ZenModeDisplayFragment;
 import com.android.settings.notification.modes.ZenModeFragment;
+import com.android.settings.notification.modes.ZenModePeopleFragment;
 import com.android.settings.notification.modes.ZenModesListFragment;
 import com.android.settings.notification.zen.ZenAccessSettings;
 import com.android.settings.password.ChooseLockPassword;
@@ -423,6 +425,8 @@ public class SettingsGateway {
             ZenModesListFragment.class.getName(),
             ZenModeFragment.class.getName(),
             ZenModeDisplayFragment.class.getName(),
+            ZenModePeopleFragment.class.getName(),
+            ZenModeCallsFragment.class.getName(),
             ContactsStorageSettings.class.getName(),
             ContentProtectionPreferenceFragment.class.getName(),
             MagnificationPreferenceFragment.class.getName(),

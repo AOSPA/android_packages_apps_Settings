@@ -631,7 +631,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_REQUIRE_PIN_BEFORE_USER_DELETION)
     public void runKeyguardConfirmation_userHasScreenLock_shouldLaunchAuthenticationActivity() {
         setupSelectedUser();
         mFragment.mUserInfo = mUserInfo;
@@ -651,7 +650,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_REQUIRE_PIN_BEFORE_USER_DELETION)
     public void runKeyguardConfirmation_userHasNoScreenLock_shouldNotLaunchAuthentication() {
         setupSelectedUser();
         mFragment.mUserInfo = mUserInfo;
