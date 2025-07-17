@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.Manifest
+import android.app.admin.DevicePolicyManager
 import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
@@ -31,8 +32,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresPermission
 import androidx.fragment.app.FragmentActivity
+import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
+import com.android.settings.password.ChooseLockGeneric
 import com.android.settingslib.supervision.SupervisionIntentProvider
 import com.android.settingslib.supervision.SupervisionLog
 
@@ -230,7 +233,14 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
             logRecoveryResult(false)
             return
         }
-        val intent = Intent(this, SupervisionCredentialProxyActivity::class.java)
+        val intent =
+            Intent(this, ChooseLockGeneric::class.java).apply {
+                putExtra(
+                    LockPatternUtils.PASSWORD_TYPE_KEY,
+                    DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
+                )
+                putExtra(Intent.EXTRA_USER_ID, supervisingUserHandle?.identifier)
+            }
         setPinLauncher.launch(intent)
     }
 

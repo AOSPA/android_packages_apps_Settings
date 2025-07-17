@@ -29,12 +29,12 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -45,15 +45,12 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.core.util.Consumer;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.testing.EmptyFragmentActivity;
+import androidx.lifecycle.testing.TestLifecycleOwner;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
@@ -62,13 +59,15 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+
+import java.util.List;
 
 /** Tests for {@link ForceInvertPreferenceController}. */
 @Config(shadows = {
@@ -84,13 +83,7 @@ public class ForceInvertPreferenceControllerTest {
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
-    @Rule
-    public ActivityScenarioRule<EmptyFragmentActivity> mActivityScenario =
-            new ActivityScenarioRule<>(EmptyFragmentActivity.class);
-    @Mock
-    private FragmentActivity mActivity;
-    @Mock
-    private InstrumentedPreferenceFragment mHost;
+
     @Mock
     private Resources mResources;
     @Mock
@@ -107,15 +100,15 @@ public class ForceInvertPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        FakeFeatureFactory.setupForTest();
         mSurveyFeatureProvider =
-                FakeFeatureFactory.getFeatureFactory().getSurveyFeatureProvider(mActivity);
+                FakeFeatureFactory.setupForTest().getSurveyFeatureProvider(mContext);
+
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getConfiguration()).thenReturn(new Configuration());
-
         mController = new ForceInvertPreferenceController(mContext, "dark_theme_group");
-        mController.initializeForSurvey(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
-                TEST_PAGE_ID);
+        mController.setSurveyManager(
+                new SurveyManager(new TestLifecycleOwner(), mContext, TEST_SURVEY_TRIGGER_KEY,
+                        TEST_PAGE_ID));
 
         mStandardDarkThemePreference = new SelectorWithWidgetPreference(mContext);
         mStandardDarkThemePreference
@@ -214,16 +207,12 @@ public class ForceInvertPreferenceControllerTest {
 
         mController.onRadioButtonClicked(mExpandedDarkThemePreference);
 
-        verify(mSurveyFeatureProvider).checkSurveyAvailable(
-                any(InstrumentedPreferenceFragment.class), any(), any());
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).sendBroadcastAsUser(intentCaptor.capture(),
-                any(), eq(android.Manifest.permission.MANAGE_ACCESSIBILITY));
-        assertThat(intentCaptor.getValue().getAction()).isEqualTo(
-                ACTION_SCHEDULE_SURVEY_NOTIFICATION);
-        assertThat(intentCaptor.getValue().getPackage()).isEqualTo(SETTINGS_PACKAGE_NAME);
-        assertThat(intentCaptor.getValue().getIntExtra(EXTRA_PAGE_ID, /* def= */ -1))
-                .isEqualTo(TEST_PAGE_ID);
+        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
+        assertThat(intents).hasSize(1);
+        final Intent intent = intents.getFirst();
+        assertThat(intent.getAction()).isEqualTo(ACTION_SCHEDULE_SURVEY_NOTIFICATION);
+        assertThat(intent.getPackage()).isEqualTo(SETTINGS_PACKAGE_NAME);
+        assertThat(intent.getIntExtra(EXTRA_PAGE_ID, /* def= */ -1)).isEqualTo(TEST_PAGE_ID);
     }
 
     @Test
@@ -235,9 +224,8 @@ public class ForceInvertPreferenceControllerTest {
 
         mController.onRadioButtonClicked(mExpandedDarkThemePreference);
 
-        verify(mSurveyFeatureProvider).checkSurveyAvailable(
-                any(InstrumentedPreferenceFragment.class), any(), any());
-        verify(mContext, never()).sendBroadcastAsUser(any(), any(), any());
+        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
+        assertThat(intents).isEmpty();
     }
 
     @Test
@@ -258,14 +246,12 @@ public class ForceInvertPreferenceControllerTest {
 
         mController.onRadioButtonClicked(mStandardDarkThemePreference);
 
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).sendBroadcastAsUser(intentCaptor.capture(),
-                any(), eq(android.Manifest.permission.MANAGE_ACCESSIBILITY));
-        assertThat(intentCaptor.getValue().getAction()).isEqualTo(
-                ACTION_CANCEL_SURVEY_NOTIFICATION);
-        assertThat(intentCaptor.getValue().getPackage()).isEqualTo(SETTINGS_PACKAGE_NAME);
-        assertThat(intentCaptor.getValue().getIntExtra(EXTRA_PAGE_ID, /* def= */ -1))
-                .isEqualTo(TEST_PAGE_ID);
+        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
+        assertThat(intents).hasSize(1);
+        final Intent intent = intents.getFirst();
+        assertThat(intent.getAction()).isEqualTo(ACTION_CANCEL_SURVEY_NOTIFICATION);
+        assertThat(intent.getPackage()).isEqualTo(SETTINGS_PACKAGE_NAME);
+        assertThat(intent.getIntExtra(EXTRA_PAGE_ID, /* def= */ -1)).isEqualTo(TEST_PAGE_ID);
     }
 
     private void setForceInvertEnabled(boolean enabled) {

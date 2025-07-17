@@ -70,6 +70,8 @@ public class AiCategoryPreferenceControllerTest {
         mAppRow.pkg = "pkg.name";
         mAppRow.uid = 12345;
         mAppRow.userId = UserHandle.getUserId(mAppRow.uid);
+        when(mBackend.isNotificationBundlingSupported()).thenReturn(true);
+        when(mBackend.isNotificationSummarizationSupported()).thenReturn(true);
         mController.onResume(mAppRow, null, null, null, null, null, null);
     }
 

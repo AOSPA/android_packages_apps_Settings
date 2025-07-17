@@ -131,6 +131,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Üzenet-hozzáférési kérelem"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"A többi eszköz számára „<xliff:g id="DEVICE_NAME">^1</xliff:g>” néven jelenik meg."</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Kapcsolja be a Bluetooth-t, ha másik eszközökhöz szeretne csatlakozni."</string>
+    <!-- no translation found for shared_network_footer (5178404860420039168) -->
+    <skip />
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Eszközei"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Új eszköz párosítása"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP hardver tehermentesítésének letiltása"</string>
@@ -386,7 +388,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Mégse"</string>
-    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"Most nem"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Nem, köszönöm"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Elfogadom"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Bővebben"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Feloldás arccal"</string>
@@ -461,7 +463,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Fontos tudnivalók"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Használja ujjlenyomatát a telefon feloldásához vagy vásárlások engedélyezéséhez.\n\nMegjegyzés: Nem használhatja ujjlenyomatát azt eszköz feloldására. További információért forduljon szervezete rendszergazdájához."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Mégse"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Most nem"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Nem"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Elfogadom"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Koppintson duplán az átnevezéshez"</string>
     <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"<xliff:g id="FP_NAME">%1$s</xliff:g> felismerve"</string>
@@ -478,7 +480,7 @@
     <string name="fingerprint_check_enroll_touch_sensor" msgid="5010063281557456236">"Érintse meg az ujjlenyomat-érzékelőt"</string>
     <string name="fingerprint_check_enroll_not_recognized" msgid="2779520550437394431">"Az ujjlenyomat nem ismerhető fel"</string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Feloldás órával"</string>
-    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Megtekintés"</string>
+    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Óra"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Ha beállítja az Arcalapú feloldás és a Feloldás ujjlenyomattal funkciót, telefonja az ujjlenyomatát fogja kérni, amikor Ön maszkot visel, vagy sötét helyen van.\n\nA Feloldás órával funkció a telefon zárolásának másik kényelmes módja, például amikor nedvesek az ujjai, vagy az eszköz nem ismeri fel az arcát."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"A Feloldás órával funkció a telefon zárolásának másik kényelmes módja, például amikor az eszköz nem ismeri fel az ujjlenyomatát."</string>
     <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"A Feloldás órával funkció a telefon zárolásának másik kényelmes módja, például amikor az eszköz nem ismeri fel az arcát."</string>
@@ -992,9 +994,12 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Újraindítás"</string>
     <string name="external_display_on" msgid="2560104443500154333">"Be"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Ki"</string>
-    <!-- no translation found for external_display_settings_title (3865786552022665355) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="3865786552022665355">"Külső kijelzők"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Beépített kijelző"</string>
+    <!-- no translation found for builtin_display_settings_universal_cursor_title (209064877333151313) -->
+    <skip />
+    <!-- no translation found for builtin_display_settings_universal_cursor_description (4209129904885332824) -->
+    <skip />
     <string name="external_display_use_title" msgid="8198257340836261386">"Külső kijelző használata"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Kijelző felbontása"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Nem csatlakozik külső kijelző"</string>
@@ -3092,7 +3097,8 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Hálózati értesítések"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Értesítést kaphat, amikor eszköze nem titkosított hálózathoz csatlakozik, valamint ha egy hálózat rögzíti az Ön egyedi eszköz- vagy SIM-azonosítóját."</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Hálózat generálása"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="979187530909112413">"A 2G-hálózati védelem elkerüli a kevésbé biztonságos 2G-hálózatokat. Ez bizonyos helyeken korlátozhatja a kapcsolódást. A segélyhívások mindig engedélyezettek."</string>
+    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
+    <skip />
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G-hálózati védelem"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Titkosítás"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Hálózatgenerációk"</string>
@@ -3671,8 +3677,7 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"Mindig bekapcsolt környezeti kijelző (Always on Ambient Display, AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, címke, olvasó"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"billentyűzet, rezgés, vibrálás,"</string>
-    <!-- no translation found for keywords_external_display_settings (4717990369488386495) -->
-    <skip />
+    <string name="keywords_external_display_settings" msgid="4717990369488386495">"külső kijelző, csatlakoztatott kijelző, kibővített kijelző, második kijelző, beépített kijelző, kijelzők elrendezése, tükrözés, megjelenítési méret, elforgatás, felbontás, frissítési gyakoriság"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Hangerő és rezgés"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Média hangereje"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast hangereje"</string>
@@ -4533,8 +4538,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Ezt tiltja a hitelszolgáltatója"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Szülő szükséges"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Add oda szüleidnek a telefont a funkció beállításának elkezdéséhez"</string>
-    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"Szülői felügyelet miatt korlátozva"</string>
-    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"Ezt a beállítást csak a szülői felügyeletet kezelő személy módosíthatja."</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="2688144174399968452">"Segítségkérés"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="7645416358554171082">"A beállítást az eszköz vagy a fiók felügyeletét beállító személy módosíthatja."</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"A beállítás módosításához add oda szüleidnek a telefont."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"További információért forduljon a rendszergazdához"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"További részletek"</string>
@@ -5168,18 +5173,24 @@
     <string name="title_no_satellite_plan" msgid="7255726881685672846">"Az üzenetváltás szolgáltatás nem áll rendelkezésre a fiókjában"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"További információ"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Hogyan működik?"</string>
-    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"Amikor nem áll rendelkezésre mobil- vagy Wi-Fi-hálózat"</string>
+    <!-- no translation found for title_satellite_connection_guide (7080935804228845540) -->
+    <skip />
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"SMS küldése telefonszámra"</string>
-    <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"A telefon automatikusan csatlakozik az egyik műholdhoz. A jobb kapcsolat érdekében biztosítsa az eszköz szabad rálátását az égre."</string>
+    <!-- no translation found for summary_satellite_connection_guide (1962847581645612628) -->
+    <skip />
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Ha nem ér el mobilhálózatot, akkor megjelenik egy lehetőség a műhold használatához."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Miután telefonja műholdhoz kapcsolódik"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"A műholdhoz való csatlakozáshoz kövesse a lépéseket"</string>
-    <string name="summary_supported_service" msgid="5855066701346160193">"Bárkinek küldhet szöveges üzenetet, a segélyhívó szolgálatokat is beleértve, és használhat támogatott alkalmazásokat. A telefon újra fog csatlakozni egy mobilhálózatra, amint lehetséges."</string>
+    <!-- no translation found for summary_supported_service_with_constrained_data (8495750699335612848) -->
+    <skip />
+    <!-- no translation found for summary_supported_service_with_unconstrained_data (5010592489972147979) -->
+    <skip />
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Bárkinek küldhet szöveges üzeneteket, a segélyhívó szolgálatokat is beleértve. A telefon újra fog csatlakozni egy mobilhálózatra, amint lehetséges."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Miután telefonja csatlakozott, Ön bárkinek küldhet SMS-t, a segélyhívó szolgálatot is beleértve."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Fontos tudnivalók"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"A műholdas kapcsolódás hosszabb időt vehet igénybe, és csak bizonyos területeken áll rendelkezésre."</string>
-    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Az időjárás és bizonyos építmények befolyásolhatják a műholdas kapcsolatot."</string>
+    <!-- no translation found for satellite_footer_content_section_2 (555594211014015682) -->
+    <skip />
     <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"Műholdas telefonálásra nincs lehetőség."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Ettől függetlenül előfordulhat, hogy a segélyhívásokat kapcsolják."</string>
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"A külső linkek megtekintéséhez mobil- vagy Wi‑Fi-hálózat szükséges."</string>
@@ -5191,8 +5202,10 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Műhold"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Műholdas kapcsolat"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"műholdas kapcsolat"</string>
-    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"Műholdas üzenetváltás"</string>
-    <string name="title_have_satellite_data_plan" msgid="1101741256080690699">"Fiókjával használhatja a támogatott alkalmazásokat"</string>
+    <!-- no translation found for title_have_satellite_constrained_data_plan (8275865334911177900) -->
+    <skip />
+    <!-- no translation found for title_have_satellite_unconstrained_data_plan (5437095773679990375) -->
+    <skip />
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Támogatott alkalmazások a telefonon"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"A műhold által támogatott összes alkalmazás megtekintése"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Támogatott alkalmazások a telefonon"</string>
@@ -5548,7 +5561,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Hiányzik a telefonszám."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G-hálózati védelem"</string>
-    <string name="enable_2g_summary" msgid="6317192326100541563">"Elkerüli a kevésbé biztonságos 2G-hálózatokat. Ez bizonyos helyeken korlátozhatja a kapcsolódást. A segélyhívások mindig engedélyezettek."</string>
+    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
+    <skip />
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"A(z) <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> szolgáltató rendelkezésre állásához 2G-re van szüksége"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Csak titkosított hálózatok engedélyezése"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Ez biztonságosabb, de bizonyos helyeken korlátozhatja a mobilhálózati kapcsolatot. A segélyhívások mindig engedélyezettek."</string>
@@ -5904,19 +5918,22 @@
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN-kód frissítve"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Alkalmazás megnyitása"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Törli a PIN-kódot?"</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8999197100719062891">"A szülői felügyelet kikapcsolása a többi felhasználónál"</string>
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Nem sikerült törölni a PIN-kódot"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"A PIN-kód nem törölhető"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Hiba történt a PIN-kód törlése közben."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animációja"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Nem sikerült bekapcsolni a vezérlőket"</string>
-    <!-- no translation found for identity_check_issue_card_title (864543931965445926) -->
+    <string name="identity_check_issue_card_title" msgid="864543931965445926">"A Személyazonosság-ellenőrzés több alkalmazásban is rendelkezésre áll"</string>
+    <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"Bármely olyan alkalmazásban biztonságossá teheti a személyazonosság-védelmet, amely ujjlenyomat- vagy arcalapú feloldást kínál a személyazonosításhoz"</string>
+    <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Részletek megtekintése"</string>
+    <string name="identity_check_promo_card_title" msgid="1495226082133610343">"A Személyazonosság-ellenőrzés használata további alkalmazások biztonságosabbá tételéhez"</string>
+    <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"Ha a Feloldás ujjlenyomattal és Arcalapú feloldás funkciót támogató összes alkalmazásnál használja a Személyazonosság-ellenőrzés funkciót, azzal erősebb védelemhez és következetesebb élményhez jut – további beállítás nélkül"</string>
+    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
     <skip />
-    <!-- no translation found for identity_check_issue_card_summary (5216214598056911479) -->
+    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
     <skip />
-    <!-- no translation found for identity_check_issue_card_button_text (9194407367671256494) -->
+    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
     <skip />
-    <!-- no translation found for identity_check_promo_card_title (1495226082133610343) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (5745161401829550512) -->
+    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
     <skip />
 </resources>

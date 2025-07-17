@@ -24,6 +24,7 @@ import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.password.ChooseLockGeneric
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -58,7 +59,7 @@ class SupervisionChangePinPreferenceTest {
         whenever(mockKeyguardManager.isDeviceSecure(SUPERVISING_USER_ID)).thenReturn(true)
 
         assertThat(preference.intent(context)?.component)
-            .isEqualTo(ComponentName(context, SupervisionCredentialProxyActivity::class.java))
+            .isEqualTo(ComponentName(context, ChooseLockGeneric::class.java))
     }
 
     @Test

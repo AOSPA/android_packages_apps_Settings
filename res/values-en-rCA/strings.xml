@@ -131,6 +131,7 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Message access request"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Visible as \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" to other devices"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Turn on Bluetooth to connect to other devices."</string>
+    <string name="shared_network_footer" msgid="5178404860420039168">"Contact the network owner or a device admin to make changes to this network."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Your devices"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Pair new device"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Disable Bluetooth A2DP hardware offload"</string>
@@ -386,7 +387,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Cancel"</string>
-    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"Not now"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"No thanks"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"I agree"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"More"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Unlock with your face"</string>
@@ -461,7 +462,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Keep in mind"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Use your fingerprint to unlock your phone or approve purchases.\n\nNote: You can’t use your fingerprint to unlock this device. For more information, contact your organization’s admin."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancel"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Not now"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"No thanks"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"I agree"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"Double tap to rename"</string>
     <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"<xliff:g id="FP_NAME">%1$s</xliff:g> recognized"</string>
@@ -994,6 +995,8 @@
     <string name="external_display_off" msgid="5634413756025351374">"Off"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"External displays"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Built-in display"</string>
+    <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universal cursor"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Move your mouse between displays"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Use external display"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Display resolution"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"External display is disconnected"</string>
@@ -3091,7 +3094,8 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Network notifications"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Get notified when your device connects to an unencrypted network, or when a network records your unique device or SIM ID"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Network generation"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="979187530909112413">"2G network protection avoids 2G networks, which are less secure. This may limit connectivity in some places. Emergency calling is always allowed."</string>
+    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
+    <skip />
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G network protection"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Encryption"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Network generations"</string>
@@ -4531,8 +4535,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Blocked by your credit provider"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Parent needed"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Hand the phone to your parent to start setting this up"</string>
-    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"Restricted by parental controls"</string>
-    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"Only the person who manages your parental controls can change this setting"</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="2688144174399968452">"Ask for help"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="7645416358554171082">"To change this setting, the person who set up controls for your device or account will need to change it for you."</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Hand the phone to your parent to allow this setting to be changed."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"For more info, contact your IT admin"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"More details"</string>
@@ -5166,18 +5170,19 @@
     <string name="title_no_satellite_plan" msgid="7255726881685672846">"Messaging isn’t included with your account"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Learn More"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"How it works"</string>
-    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"When you don’t have a mobile or Wi-Fi network"</string>
+    <string name="title_satellite_connection_guide" msgid="7080935804228845540">"When you don’t have a mobile or Wi‑Fi network"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Text a phone number"</string>
-    <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Your phone will auto-connect to a satellite. For the best connection, keep a clear view of the sky."</string>
+    <string name="summary_satellite_connection_guide" msgid="1962847581645612628">"Your phone will auto‑connect to a satellite. For the best connection, keep a clear view of the sky."</string>
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"If you don’t have a mobile network, you’ll see an option to use satellite."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"After your phone connects to a satellite"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Follow steps to connect to the satellite"</string>
-    <string name="summary_supported_service" msgid="5855066701346160193">"You can text anyone, including emergency services, and use supported apps. Your phone will reconnect to a mobile network when available."</string>
+    <string name="summary_supported_service_with_constrained_data" msgid="8495750699335612848">"You can text anyone, including emergency services, and use supported apps. Your phone will reconnect to a mobile network when available."</string>
+    <string name="summary_supported_service_with_unconstrained_data" msgid="5010592489972147979">"You can text anyone, including emergency services, and use data for apps. Your phone will reconnect to a mobile network when available."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"After your phone is connected, you can text anyone, including emergency services."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Keep in mind"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Satellite connectivity may take longer and is available only in some areas."</string>
-    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Weather and certain structures may affect your satellite connection."</string>
+    <string name="satellite_footer_content_section_2" msgid="555594211014015682">"Weather and certain structures may affect the satellite connection."</string>
     <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"Calling over satellite isn’t available."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Emergency calls may still connect."</string>
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"A mobile or Wi‑Fi network is required to view external links."</string>
@@ -5189,8 +5194,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellite connectivity"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellite connectivity"</string>
-    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellite messaging"</string>
-    <string name="title_have_satellite_data_plan" msgid="1101741256080690699">"Use of supported apps is included with your account"</string>
+    <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Use of supported apps is included with your account"</string>
+    <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Data for all apps is included with your account"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Supported apps on your phone"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"See all apps supported by satellite"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Supported apps on your phone"</string>
@@ -5546,7 +5551,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Phone number is missing."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G network protection"</string>
-    <string name="enable_2g_summary" msgid="6317192326100541563">"Avoids 2G networks, which are less secure. This may limit connectivity in some places. Emergency calling is always allowed."</string>
+    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
+    <skip />
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requires 2G to be available"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Allow only encrypted networks"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"This is more secure but may limit your mobile network connection in some locations. Emergency calling is always allowed."</string>
@@ -5902,19 +5908,18 @@
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN updated"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Open app"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Delete PIN?"</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8999197100719062891">"Turn off parental controls for other users"</string>
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Can’t delete PIN"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN can not be deleted"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"An error occurred while trying to delete the PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Can’t turn on controls"</string>
-    <!-- no translation found for identity_check_issue_card_title (864543931965445926) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (5216214598056911479) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_button_text (9194407367671256494) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_title (1495226082133610343) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (5745161401829550512) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="864543931965445926">"Identity Check is available on more apps"</string>
+    <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"You can secure your identity protection on any app that offers Fingerprint or Face Unlock to identify you"</string>
+    <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"View details"</string>
+    <string name="identity_check_promo_card_title" msgid="1495226082133610343">"Use Identity Check to secure more apps"</string>
+    <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"When you use Identity Check for all apps that support Fingerprint and Face Unlock, you ensure stronger protection and a more consistent experience – without extra setup"</string>
+    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"Identity Check works with your watch"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Prevent others from opening apps that require Fingerprint or Face Unlock. When connected to your watch, your security is assured with greater mobility."</string>
+    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Use Identity Check and watch on more apps"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Ensure your identity protection on all apps that support Fingerprint and Face Unlock in trusted places like your home or office. Use Identity Check with your watch to extend your protection even beyond trusted places."</string>
 </resources>

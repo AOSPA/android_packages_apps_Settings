@@ -20,7 +20,6 @@ import android.content.Context
 import com.android.settings.accessibility.ColorAndMotionScreen
 import com.android.settings.accessibility.VibrationIntensityScreen
 import com.android.settings.accessibility.VibrationScreen
-import com.android.settings.appfunctions.DeviceStateCategory
 import com.android.settings.connecteddevice.BluetoothDashboardScreen
 import com.android.settings.datausage.DataSaverScreen
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoScreen
@@ -38,7 +37,7 @@ import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.dream.ScreensaverScreen
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummaryScreen
-import com.android.settings.language.LanguageSettingScreen
+import com.android.settings.language.LanguageAndRegionScreen
 import com.android.settings.location.LocationScreen
 import com.android.settings.location.RecentLocationAccessScreen
 import com.android.settings.network.AdaptiveConnectivityScreen
@@ -121,7 +120,7 @@ fun getCatalystScreenConfigs() =
             screenKey = NetworkProviderScreen.KEY,
             category = setOf(DeviceStateCategory.MOBILE_DATA),
         ),
-        PerScreenCatalystConfig(enabled = false, screenKey = LanguageSettingScreen.KEY),
+        PerScreenCatalystConfig(enabled = false, screenKey = LanguageAndRegionScreen.KEY),
         PerScreenCatalystConfig(enabled = false, screenKey = ModuleLicensesScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LegalSettingsScreen.KEY),
         PerScreenCatalystConfig(

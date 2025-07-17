@@ -15,12 +15,15 @@
  */
 package com.android.settings.supervision
 
+import android.app.admin.DevicePolicyManager
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_CHANGE_PIN
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
 import com.android.settings.metrics.PreferenceActionMetricsProvider
+import com.android.settings.password.ChooseLockGeneric
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.supervision.SupervisionLog.TAG
 
@@ -44,8 +47,14 @@ class SupervisionChangePinPreference : PreferenceMetadata, PreferenceActionMetri
             Log.w(TAG, "Supervising credential not set")
             return null
         }
-
-        return Intent(context, SupervisionCredentialProxyActivity::class.java)
+        return Intent(context, ChooseLockGeneric::class.java).apply {
+            // To go directly to setting up a PIN
+            putExtra(
+                LockPatternUtils.PASSWORD_TYPE_KEY,
+                DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
+            )
+            putExtra(Intent.EXTRA_USER_ID, context.supervisingUserHandle?.identifier)
+        }
     }
 
     companion object {

@@ -23,6 +23,7 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
@@ -99,7 +100,7 @@ public class ToggleAutoclickMainSwitchPreferenceController
                 isChecked ? ON : OFF);
 
         // Show navigation suggestion dialog when enabling.
-        if (isChecked && isGestureNavigationEnabled()) {
+        if (isChecked && isGestureNavigationEnabled() && !isLaptopDevice()) {
             showNavigationSuggestion();
         }
 
@@ -149,5 +150,12 @@ public class ToggleAutoclickMainSwitchPreferenceController
     private boolean isGestureNavigationEnabled() {
         int navigationMode = Settings.Secure.getInt(mContentResolver, NAVIGATION_MODE, -1);
         return navigationMode == 2;
+    }
+
+    /**
+     * Checks if the current device is a laptop device.
+     */
+    private boolean isLaptopDevice() {
+        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_PC);
     }
 }
