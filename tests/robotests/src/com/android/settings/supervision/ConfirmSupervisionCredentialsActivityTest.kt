@@ -164,7 +164,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun onCreate_startsConfirmationActivity_onStop_stopsProfile() {
+    fun onCreate_startsConfirmationActivity_activityFinishing_stopsProfile() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub {
@@ -181,9 +181,34 @@ class ConfirmSupervisionCredentialsActivityTest {
         assert(userCaptor.lastValue.identifier == SUPERVISING_USER_ID)
         assertThat(mActivity.mProfileStarted).isTrue()
 
-        mActivity.onStop()
+        mActivity.mAuthenticationCallback.onAuthenticationSucceeded(null)
+        assertThat(mActivity.isFinishing).isTrue()
+        mActivity.onDestroy()
         verify(mockActivityManager).stopProfile(any())
         assertThat(mActivity.mProfileStarted).isFalse()
+    }
+
+    @Test
+    fun configurationChange_doesNotStopProfile() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub {
+            on { startProfile(any()) } doReturn true
+            on { stopProfile(any()) } doReturn true
+        }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+
+        mActivityController.setup()
+
+        // Ensure that the supervising profile is started
+        val userCaptor = argumentCaptor<UserHandle>()
+        verify(mockActivityManager).startProfile(userCaptor.capture())
+        assert(userCaptor.lastValue.identifier == SUPERVISING_USER_ID)
+        assertThat(mActivity.mProfileStarted).isTrue()
+
+        mActivityController.recreate()
+        verify(mockActivityManager, never()).stopProfile(any())
+        assertThat(mActivity.mProfileStarted).isTrue()
     }
 
     @Test
@@ -230,7 +255,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun onCreate_onStartSetupActivity_onStop_notStopProfile() {
+    fun onCreate_onStartSetupActivity_onDestroy_notStopProfile() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
         mockActivityManager.stub { on { startProfile(any()) } doReturn true }
@@ -243,7 +268,7 @@ class ConfirmSupervisionCredentialsActivityTest {
             .isEqualTo(SetupSupervisionActivity::class.java.name)
         assertThat(mActivity.mProfileStarted).isFalse()
 
-        mActivity.onStop()
+        mActivity.onDestroy()
         verify(mockActivityManager, never()).stopProfile(any())
     }
 
