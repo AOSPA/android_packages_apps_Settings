@@ -116,7 +116,16 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
                             + e.getMessage());
         }
 
-        if (isNullCipherDisablementAvailable || areCellSecNotificationsAvailable) {
+        boolean isRadioCapabilitySupported = false;
+        try {
+            isRadioCapabilitySupported = mTelephonyManager.isRadioInterfaceCapabilitySupported(
+                    mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
+        } catch (UnsupportedOperationException e) {
+            Log.e(LOG_TAG, "Radio interface capability unsupported", e);
+        }
+
+        if (isNullCipherDisablementAvailable || areCellSecNotificationsAvailable
+                || isRadioCapabilitySupported) {
             return AVAILABLE;
         } else {
             return UNSUPPORTED_ON_DEVICE;

@@ -48,17 +48,19 @@ public class DarkModeExpandedFooterPreferenceController extends BasePreferenceCo
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
         FooterPreference footerPreference = checkNotNull(screen.findPreference(getPreferenceKey()));
+        footerPreference.setOrder(
+                DarkModePreferenceOrderUtil.Order.EXPANDED_DARK_THEME_FOOTER.getValue());
 
         final Intent helpIntent;
         helpIntent = HelpUtils.getHelpIntent(
                 mContext, mContext.getString(R.string.help_url_dark_theme_link),
                 mContext.getClass().getName());
-        footerPreference.setLearnMoreAction(
-                view -> view.startActivityForResult(helpIntent, 0));
-        footerPreference.setLearnMoreText(
-                mContext.getString(
-                        R.string.accessibility_dark_theme_footer_learn_more_helper_link));
-        footerPreference.setOrder(
-                DarkModePreferenceOrderUtil.Order.EXPANDED_DARK_THEME_FOOTER.getValue());
+        if (helpIntent != null) {
+            footerPreference.setLearnMoreAction(
+                    view -> view.startActivityForResult(helpIntent, 0));
+            footerPreference.setLearnMoreText(
+                    mContext.getString(
+                            R.string.accessibility_dark_theme_footer_learn_more_helper_link));
+        }
     }
 }

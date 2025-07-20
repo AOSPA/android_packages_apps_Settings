@@ -37,6 +37,7 @@ import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.password.ChooseLockGeneric
 import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity.Companion.EXTRA_FORCE_CONFIRMATION
 import com.android.settings.testutils.MetricsRule
 import com.google.common.truth.Truth.assertThat
@@ -500,7 +501,7 @@ class SupervisionPinRecoveryActivityTest {
     @Test
     fun onVerification_recoveryAction_supervisionEnabled_successfulResult_startsSetPinActivity() {
         // Test scenario where the RECOVERY action successfully verifies,
-        // leading to the start of the SupervisionCredentialProxyActivity (to set PIN).
+        // leading to the start of the ChooseLockGeneric activity (to set PIN).
         val intent =
             Intent(context, SupervisionPinRecoveryActivity::class.java).apply {
                 action = SupervisionPinRecoveryActivity.ACTION_RECOVERY
@@ -516,7 +517,7 @@ class SupervisionPinRecoveryActivityTest {
 
                 val startedIntent = shadowActivity.nextStartedActivity
                 assertThat(startedIntent.component?.className)
-                    .isEqualTo(SupervisionCredentialProxyActivity::class.java.name)
+                    .isEqualTo(ChooseLockGeneric::class.java.name)
             }
         }
     }
@@ -524,7 +525,7 @@ class SupervisionPinRecoveryActivityTest {
     @Test
     fun onVerification_recoveryAction_supervisionDisabled_successfulResult_startsSetPinActivity() {
         // Test scenario where the RECOVERY action successfully verifies,
-        // leading to the start of the SupervisionCredentialProxyActivity (to set PIN).
+        // leading to the start of the ChooseLockGeneric activity (to set PIN).
         val intent =
             Intent(context, SupervisionPinRecoveryActivity::class.java).apply {
                 action = SupervisionPinRecoveryActivity.ACTION_RECOVERY
@@ -540,7 +541,7 @@ class SupervisionPinRecoveryActivityTest {
 
                 val startedIntent = shadowActivity.nextStartedActivity
                 assertThat(startedIntent.component?.className)
-                    .isEqualTo(SupervisionCredentialProxyActivity::class.java.name)
+                    .isEqualTo(ChooseLockGeneric::class.java.name)
             }
         }
     }

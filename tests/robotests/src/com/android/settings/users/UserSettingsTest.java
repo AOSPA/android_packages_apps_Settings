@@ -52,14 +52,12 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.multiuser.Flags;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -440,7 +438,6 @@ public class UserSettingsTest {
 
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_REQUIRE_PIN_BEFORE_USER_DELETION)
     public void removeUserSelf_userHasScreenlock_shouldAskForCredentials() {
         doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
 
@@ -473,7 +470,6 @@ public class UserSettingsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_REQUIRE_PIN_BEFORE_USER_DELETION)
     public void removeUserSelf_userHasNoScreenlock_shouldNotAskForCredentials() {
         ShadowLockPatternUtils.setKeyguardStoredPasswordQuality(
                 DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);

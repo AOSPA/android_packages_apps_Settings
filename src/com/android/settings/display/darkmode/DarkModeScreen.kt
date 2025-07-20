@@ -44,8 +44,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
-@ProvidePreferenceScreen(DarkModeScreen.KEY)
-open class DarkModeScreen(context: Context) :
+abstract class BaseDarkModeScreen(context: Context) :
     PreferenceScreenMixin,
     PrimarySwitchPreferenceBinding,
     PreferenceActionMetricsProvider,
@@ -53,9 +52,6 @@ open class DarkModeScreen(context: Context) :
     PreferenceSummaryProvider {
 
     private val darkModeStorage = DarkModeStorage(context)
-
-    override val key: String
-        get() = KEY
 
     override val title: Int
         get() = R.string.dark_ui_mode
@@ -131,4 +127,28 @@ open class DarkModeScreen(context: Context) :
             getSystemService(PowerManager::class.java)?.isPowerSaveMode == true
     }
 }
+
 // LINT.ThenChange(../DarkUIPreferenceController.java)
+
+@ProvidePreferenceScreen(DarkModeScreen.KEY)
+open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context) {
+    override val key: String = KEY
+
+    companion object {
+        const val KEY = "dark_ui_mode"
+    }
+}
+
+@ProvidePreferenceScreen(DarkModeScreenOnAccessibility.KEY)
+open class DarkModeScreenOnAccessibility(context: Context) : BaseDarkModeScreen(context) {
+    override val key: String = KEY
+
+    override val icon: Int
+        get() = R.drawable.ic_dark_ui
+
+    override fun isIndexable(context: Context) = false
+
+    companion object {
+        const val KEY = "dark_ui_mode_accessibility"
+    }
+}

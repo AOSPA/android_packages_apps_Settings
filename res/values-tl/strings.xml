@@ -131,6 +131,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Kahilingan sa pag-access ng mensahe"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Nakikita bilang “<xliff:g id="DEVICE_NAME">^1</xliff:g>” sa iba pang device"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"I-on ang Bluetooth para kumonekta sa ibang device."</string>
+    <!-- no translation found for shared_network_footer (5178404860420039168) -->
+    <skip />
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Ang iyong mga device"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Magpares ng bagong device"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"I-disable ang Bluetooth A2DP hardware offload"</string>
@@ -386,7 +388,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Kanselahin"</string>
-    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"Huwag muna"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Hindi, salamat"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Sumasang-ayon ako"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Higit pa"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Mag-unlock gamit ang mukha mo"</string>
@@ -461,7 +463,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Tandaan"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Gamitin ang iyong fingerprint upang i-unlock ang telepono mo o aprubahan ang mga pagbili.\n\nTandaan: Hindi mo maaaring gamitin ang iyong fingerprint upang i-unlock ang device na ito. Para sa higit pang impormasyon, makipag-ugnayan sa admin ng iyong organisasyon."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Kanselahin"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Huwag muna"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Huwag na lang"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Sumasang-ayon ako"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"I-double tap para i-rename"</string>
     <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"Nakilala ang <xliff:g id="FP_NAME">%1$s</xliff:g>"</string>
@@ -992,9 +994,12 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"I-restart"</string>
     <string name="external_display_on" msgid="2560104443500154333">"Naka-on"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Naka-off"</string>
-    <!-- no translation found for external_display_settings_title (3865786552022665355) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="3865786552022665355">"Mga external na display"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Built-in na display"</string>
+    <!-- no translation found for builtin_display_settings_universal_cursor_title (209064877333151313) -->
+    <skip />
+    <!-- no translation found for builtin_display_settings_universal_cursor_description (4209129904885332824) -->
+    <skip />
     <string name="external_display_use_title" msgid="8198257340836261386">"Gumamit ng external na display"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolution ng display"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Nadiskonekta ang external na display"</string>
@@ -3092,7 +3097,8 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Mga notification sa network"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Maabisuhan kapag kumonekta ang iyong device sa isang hindi naka-encrypt na network, o kapag na-record ng network ang iyong natatanging device o SIM ID"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Pagbuo ng network"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="979187530909112413">"Iniiwasan ng proteksyon sa 2G network ang mga 2G network, na hindi gaanong secure. Posibleng malimitahan nito ang pagkakonekta sa ilang lugar. Palaging pinapayagan ang emergency na pagtawag."</string>
+    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
+    <skip />
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"Proteksyon sa 2G network"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Pag-encrypt"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Mga generation ng network"</string>
@@ -3671,8 +3677,7 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"palaging naka-on na ambient display, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, reader"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"keyboard, haptics, pag-vibrate,"</string>
-    <!-- no translation found for keywords_external_display_settings (4717990369488386495) -->
-    <skip />
+    <string name="keywords_external_display_settings" msgid="4717990369488386495">"external na display, nakakonektang display, naka-extend na display, pangalawang display, naka-built in na display, ayusin ang mga display, i-mirror, laki ng display, rotation, resolution, rate ng pag-refresh"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volume at pag-vibrate"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume ng media"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Volume ng Google Cast"</string>
@@ -4533,8 +4538,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Na-block ng iyong credit provider"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Kinakailangan ang magulang"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Ibigay ang telepono sa iyong magulang para simulan ang pag-set up dito"</string>
-    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"Pinaghihigpitan ng parental controls"</string>
-    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"Tanging ang taong namamahala sa iyong parental controls ang makakapagbago ng setting na ito"</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="2688144174399968452">"Humingi ng tulong"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="7645416358554171082">"Para baguhin ang setting na ito, kailangang baguhin ito ng taong nag-set up ng mga kontrol para sa iyong device o account para sa iyo."</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Ibigay ang telepono sa iyong magulang para mabago ang setting na ito."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Para sa higit pang impormasyon, makipag-ugnayan sa inyong IT admin"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Higit pang mga detalye"</string>
@@ -5168,18 +5173,19 @@
     <string name="title_no_satellite_plan" msgid="7255726881685672846">"Hindi kasama ang pagmemensahe sa iyong account"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Matuto Pa"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Paano ito gumagana"</string>
-    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"Kapag wala kang mobile o Wi-Fi network"</string>
+    <string name="title_satellite_connection_guide" msgid="7080935804228845540">"Kapag wala kang mobile o Wi-Fi network"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Mag-text ng numero ng telepono."</string>
-    <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Awtomatikong kokonekta ang iyong telepono sa satellite. Para sa pinakamahusay na koneksyon, manatili sa kung saan may malinaw na view ng kalangitan."</string>
+    <string name="summary_satellite_connection_guide" msgid="1962847581645612628">"Awomatikong kokonekta ang iyong telepono sa satellite. Para sa pinakamahusay na koneksyon, manatili sa kung saan may malinaw na view ng kalangitan."</string>
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Kung wala kang mobile network, may makikita kang opsyong gumamit ng satellite."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Kapag nakakonekta na ang iyong telepono sa satellite"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Sundin ang mga hakbang para kumonekta sa satellite"</string>
-    <string name="summary_supported_service" msgid="5855066701346160193">"Puwede kang mag-text sa kahit sino, kasama ang mga serbisyong pang-emergency, at gumamit ng mga sinusuportahang app. Kokonekta ulit ang iyong telepono sa mobile network kapag available."</string>
+    <string name="summary_supported_service_with_constrained_data" msgid="8495750699335612848">"Puwede kang mag-text sa kahit sino, kasama ang mga serbisyong pang-emergency, at gumamit ng mga sinusuportahang app. Kokonekta ulit ang iyong telepono sa mobile network kapag available."</string>
+    <string name="summary_supported_service_with_unconstrained_data" msgid="5010592489972147979">"Puwede kang mag-text sa kahit sino, kasama ang mga serbisyong pang-emergency, at gumamit ng data para sa mga app. Kokonekta ulit ang iyong telepono sa mobile network kapag available."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Puwede kang mag-text sa kahit sino, kasama ang mga serbisyong pang-emergency. Kokonekta ulit ang iyong telepono sa mobile network kapag available."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Kapag nakakonekta na ang iyong telepono, puwede kang mag-text sa kahit sino, kasama ang mga serbisyong pang-emergency."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Tandaan"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Posibleng mas tumagal ang koneksyon sa satellite at available lang ito sa ilang lugar."</string>
-    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"Puwedeng makaapekto sa iyong koneksyon sa satellite ang lagay ng panahon at ilang partikular na istruktura."</string>
+    <string name="satellite_footer_content_section_2" msgid="555594211014015682">"Puwedeng makaapekto sa koneksyon sa satellite ang lagay ng panahon at ilang partikular na istruktura."</string>
     <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"Hindi available ang pagtawag sa pamamagitan ng satellite."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Posibleng kumonekta pa rin ang mga emergency na tawag."</string>
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Nire-require ang mobile o Wi‑Fi network para makita ang mga external na link."</string>
@@ -5191,8 +5197,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Koneksyon sa satellite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"koneksyon sa satellite"</string>
-    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellite messaging"</string>
-    <string name="title_have_satellite_data_plan" msgid="1101741256080690699">"Kasama ang paggamit ng mga sinusuportahang app sa iyong account"</string>
+    <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Kasama ang paggamit ng mga sinusuportahang app sa iyong account"</string>
+    <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Kasama sa iyong account ang data para sa lahat ng app"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Mga sinusuportahang app sa iyong telepono"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Tingnan ang lahat ng app na sinusuportahan ng satellite"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Mga sinusuportahang app sa iyong telepono"</string>
@@ -5548,7 +5554,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Walang numero ng telepono."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"Proteksyon sa 2G network"</string>
-    <string name="enable_2g_summary" msgid="6317192326100541563">"Iniiwasan ang mga 2G network, na hindi gaanong secure. Puwede nitong limitahan ang pagkakakonekta sa ilang lugar. Palaging pinapayagan ang emergency na tawag."</string>
+    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
+    <skip />
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Kailangan ng <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> na available ang 2G"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Payagan lang ang mga encrypted network"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Mas secure ito pero posibleng limitahan nito ang iyong koneksyon sa mobile network sa ilang lokasyon. Palaging pinapayagan ang emergency na tawag."</string>
@@ -5904,19 +5911,22 @@
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Na-update na ang PIN"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Buksan ang app"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"I-delete ang PIN?"</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8999197100719062891">"I-off ang parental controls para sa iba pang user"</string>
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Hindi ma-delete ang PIN"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Hindi puwedeng i-delete ang PIN"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Nagka-error habang sinusubukang i-delete ang PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> animation"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Hindi ma-on ang mga control"</string>
-    <!-- no translation found for identity_check_issue_card_title (864543931965445926) -->
+    <string name="identity_check_issue_card_title" msgid="864543931965445926">"Available ang Pag-check sa Identity sa marami pang mga app"</string>
+    <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"Mase-secure mo ang proteksyon ng iyong identity sa anumang app na gumagamit ng Fingerprint o Pag-unlock Gamit ang Mukha para kilalanin ka"</string>
+    <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Tingnan ang mga detalye"</string>
+    <string name="identity_check_promo_card_title" msgid="1495226082133610343">"Gamitin ang Pag-check sa Identity para i-secure ang mas maraming app"</string>
+    <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"Kapag ginamit mo ang Pag-check sa Identity sa lahat ng app na may Fingerprint at Pag-unlock Gamit ang Mukha, tinitiyak mo ang mas malakas na proteksyon at mas consistent na experience – nang walang karagdagang pag-setup"</string>
+    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
     <skip />
-    <!-- no translation found for identity_check_issue_card_summary (5216214598056911479) -->
+    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
     <skip />
-    <!-- no translation found for identity_check_issue_card_button_text (9194407367671256494) -->
+    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
     <skip />
-    <!-- no translation found for identity_check_promo_card_title (1495226082133610343) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (5745161401829550512) -->
+    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
     <skip />
 </resources>

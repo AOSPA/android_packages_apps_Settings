@@ -131,6 +131,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"訊息存取權要求"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"向其他裝置顯示為「<xliff:g id="DEVICE_NAME">^1</xliff:g>」"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"開啟藍牙即可連接其他裝置。"</string>
+    <!-- no translation found for shared_network_footer (5178404860420039168) -->
+    <skip />
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"你的裝置"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"配對新裝置"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"停用藍牙 A2DP 硬件卸載功能"</string>
@@ -386,7 +388,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"取消"</string>
-    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"暫時不要"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"不用了，謝謝"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"我同意"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"更多"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"使用面孔解鎖"</string>
@@ -461,7 +463,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"注意事項"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"使用指紋解鎖手機或核准購物交易。\n\n請注意：你無法使用指紋解鎖此裝置。如需瞭解詳情，請聯絡你機構的管理員。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"取消"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"暫時不要"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"不用了，謝謝"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"我同意"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"輕按兩下即可重新命名"</string>
     <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"已識別「<xliff:g id="FP_NAME">%1$s</xliff:g>」"</string>
@@ -992,9 +994,12 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"重新啟動"</string>
     <string name="external_display_on" msgid="2560104443500154333">"開啟"</string>
     <string name="external_display_off" msgid="5634413756025351374">"關閉"</string>
-    <!-- no translation found for external_display_settings_title (3865786552022665355) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="3865786552022665355">"外部顯示屏"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"內置顯示屏"</string>
+    <!-- no translation found for builtin_display_settings_universal_cursor_title (209064877333151313) -->
+    <skip />
+    <!-- no translation found for builtin_display_settings_universal_cursor_description (4209129904885332824) -->
+    <skip />
     <string name="external_display_use_title" msgid="8198257340836261386">"使用外部顯示屏"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"顯示屏解像度"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"外部顯示屏已解除連接"</string>
@@ -2169,16 +2174,16 @@
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"如何使用主要按鍵"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"如何使用數字鍵盤"</string>
     <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2186017679302722178">"Num Lock 鍵啟用時一律使用數字鍵盤"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"向上捲動即可將頁面向下移動"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"向上捲動將頁面往下移"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"捲動"</string>
-    <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"受控制捲動"</string>
+    <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"受控捲動"</string>
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"捲動速度"</string>
     <string name="mouse_pointer_speed_make_faster_desc" msgid="7665912663672314461">"調高游標速度"</string>
     <string name="mouse_pointer_speed_make_slower_desc" msgid="116802579827902188">"調低游標速度"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"調換滑鼠主按鈕"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"將滑鼠左鍵當右鍵使用"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"游標加速"</string>
-    <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"滑鼠移動得越快，游標就移動得越遠"</string>
+    <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"滑鼠移得越快，游標就越遠"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"「<xliff:g id="KEYBOARD_NAME">%s</xliff:g>」的滑鼠鍵"</string>
     <string name="mouse_keys_directional_summary" msgid="2215425656757420699">"使用「<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>」鍵即可移動滑鼠游標"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"使用「<xliff:g id="CLICK_LABEL">%s</xliff:g>」鍵即可按一下滑鼠主要按鍵"</string>
@@ -3092,7 +3097,8 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"網絡通知"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"裝置連線至未加密的網絡，或網絡記錄你的獨特裝置或 SIM 卡 ID 時接收通知"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"網絡世代"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="979187530909112413">"2G 網絡保護措施避免使用安全性較低的 2G 網絡。使用此設定可能會限制部分地方的連接性。緊急電話則隨時可用，不受任何影響。"</string>
+    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
+    <skip />
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G 網絡保護措施"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"加密"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"網絡世代"</string>
@@ -4532,8 +4538,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"已被你的信貸提供者封鎖"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"必須取得家長同意"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"必須將手機交給家長以開始進行這項設定"</string>
-    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"受家長監控設定限制"</string>
-    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"只有管理家長監控設定的使用者可變更此設定"</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="2688144174399968452">"尋求協助"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="7645416358554171082">"只有為你的裝置或帳戶設定監控設定的使用者，才能變更此設定。"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"此設定必須經家長同意才能變更，因此請將手機交給家長。"</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"如需瞭解詳情，請聯絡 IT 管理員"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"更多詳細資料"</string>
@@ -5167,18 +5173,24 @@
     <string name="title_no_satellite_plan" msgid="7255726881685672846">"你的帳戶不支援訊息功能"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"瞭解詳情"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"運作方式"</string>
-    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"在沒有流動網絡或 Wi-Fi 網絡時"</string>
+    <!-- no translation found for title_satellite_connection_guide (7080935804228845540) -->
+    <skip />
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"向電話號碼發短訊"</string>
-    <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"手機將自動連接衛星。在清楚看到天空的的地方可獲得最佳連線。"</string>
+    <!-- no translation found for summary_satellite_connection_guide (1962847581645612628) -->
+    <skip />
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"如果沒有流動網絡，你會看到使用衛星的選項。"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"手機連接衛星後"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"按照以下步驟連線至衛星"</string>
-    <string name="summary_supported_service" msgid="5855066701346160193">"你可以向任何人 (包括緊急服務) 發短訊，以及使用支援的應用程式。如果有可用的流動網絡，手機就會重新連線。"</string>
+    <!-- no translation found for summary_supported_service_with_constrained_data (8495750699335612848) -->
+    <skip />
+    <!-- no translation found for summary_supported_service_with_unconstrained_data (5010592489972147979) -->
+    <skip />
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"你可發短訊給任何人，包括緊急服務。如果有可用的流動網絡，手機就會重新連線。"</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"手機連線後，你便可發短訊給任何人，包括緊急服務。"</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"注意事項"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"衛星連線可能需要比較長的時間才會送達，而且此功能只支援部分地區。"</string>
-    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"天氣和特定結構可能會影響衛星連線。"</string>
+    <!-- no translation found for satellite_footer_content_section_2 (555594211014015682) -->
+    <skip />
     <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"不支援衛星電話。"</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"但緊急電話可能仍能接通。"</string>
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"必須連線至流動網絡或 Wi-Fi 網絡，才能查看外部連結。"</string>
@@ -5190,8 +5202,10 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"衛星"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"衛星連接"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"衛星連接"</string>
-    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"衛星訊息"</string>
-    <string name="title_have_satellite_data_plan" msgid="1101741256080690699">"你可透過自己的帳戶使用支援的應用程式"</string>
+    <!-- no translation found for title_have_satellite_constrained_data_plan (8275865334911177900) -->
+    <skip />
+    <!-- no translation found for title_have_satellite_unconstrained_data_plan (5437095773679990375) -->
+    <skip />
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"手機支援的應用程式"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"查看所有衛星支援的應用程式"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"手機支援的應用程式"</string>
@@ -5373,7 +5387,7 @@
     <string name="enable_16k_pages" msgid="1758111531461408337">"使用 16KB 頁面大小啟動"</string>
     <string name="enable_16k_pages_summary" msgid="1937836453571509085">"使用支援 16KB 頁面大小的核心啟動裝置"</string>
     <string name="confirm_enable_16k_pages_title" msgid="5477376227161609124">"由 4KB 模式切換至 16KB 模式"</string>
-    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"如要使用 16KB 開發人員選項，此裝置的資料分區必須轉換成 ext4。這麼做將抹除裝置資料，並將檔案系統變更為 ext4。&lt;br&gt;&lt;br&gt; 如果使用 16KB 模式，只要重新啟動一次，就能在 4KB 和 16KB 模式間切換。&lt;br&gt;&lt;br&gt; 16KB 模式注意事項：&lt;br&gt;&lt;br&gt; &amp;#8226; 無法保證軟件完整性&lt;br&gt; &amp;#8226; 系統啟動載入程式解鎖時，手機上的資料可能會有風險&lt;br&gt; &amp;#8226; 部分功能會停用，因此特定應用程式可能會受影響&lt;br&gt;&lt;br&gt; 如要返回實際工作環境模式，你需要切換回 4KB 模式並鎖定啟動程式，這時裝置就會回復原廠設定。裝置成功啟動 Android 系統後，請前往開發人員選項停用 OEM 解鎖設定。&lt;br&gt;&lt;br&gt; 如要繼續切換至 16KB 模式，請輕按 [清除所有資料並更新]，這樣做會重新啟動裝置。"</string>
+    <string name="confirm_enable_16k_pages_update_wipe" msgid="5343202230812855846">"如要使用 16KB 開發人員選項，此裝置的資料分區必須轉換成 ext4。這將抹除裝置資料，並將檔案系統變更為 ext4。&lt;br&gt;&lt;br&gt; 如果使用 16KB 模式，只要重新啟動一次，就能在 4KB 和 16KB 模式間切換。&lt;br&gt;&lt;br&gt; 16KB 模式注意事項：&lt;br&gt;&lt;br&gt; &amp;#8226; 無法保證軟件完整性&lt;br&gt; &amp;#8226; 系統啟動載入程式解鎖時，手機上的資料可能會有風險&lt;br&gt; &amp;#8226; 部分功能會停用，因此特定應用程式可能會受影響&lt;br&gt;&lt;br&gt; 如要返回實際工作環境模式，你需要切換回 4KB 模式並鎖定啟動程式，這時裝置就會回復原廠設定。裝置成功啟動 Android 系統後，請前往開發人員選項停用 OEM 解鎖設定。&lt;br&gt;&lt;br&gt; 如要繼續切換至 16KB 模式，請輕按 [清除所有資料並更新]，這樣做會重新啟動裝置。"</string>
     <string name="confirm_enable_16k_pages_text" msgid="6211693250692246982">"你正處於執行 4KB 核心的頁面通用模式，即將切換至 16KB 模式。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。這樣做會重新啟動裝置。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要讓裝置返回實際工作環境模式，你需要切換回 4KB 模式並鎖定啟動程式，然後裝置就會回復原廠設定。裝置成功啟動 Android 後，請在開發人員選項中停用 OEM 解鎖設定。"</string>
     <string name="confirm_enable_4k_pages_title" msgid="3001009010581393119">"由 16KB 模式切換至 4KB 模式"</string>
     <string name="confirm_enable_4k_pages_text" msgid="3398001587586470689">"你正處於執行 16KB 核心的頁面通用模式，即將切換至 4KB 模式。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。這樣做會重新啟動裝置。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要讓裝置返回實際工作環境模式，你需要鎖定啟動程式，然後裝置就會回復原廠設定。裝置成功啟動 Android 後，請在開發人員選項中停用 OEM 解鎖設定。"</string>
@@ -5547,7 +5561,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"缺少電話號碼。"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"確定"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G 網絡保護措施"</string>
-    <string name="enable_2g_summary" msgid="6317192326100541563">"2G 網絡安全性較低，請避免使用。使用此設定可能會限制部分地方的連接性。緊急電話則隨時可用，不受任何影響。"</string>
+    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
+    <skip />
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>要求你啟用 2G"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"只允許已加密的網絡"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"這麼做雖然更加安全，但流動網絡連線在部分地區可能會受到限制。緊急電話則隨時可用，不受任何影響。"</string>
@@ -5903,19 +5918,22 @@
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN 已更新"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"開啟應用程式"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"要刪除 PIN 嗎？"</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8999197100719062891">"關閉其他使用者的家長監控設定"</string>
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"無法刪除 PIN"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN 不可刪除"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"嘗試刪除 PIN 時發生錯誤。"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>動畫"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"無法開啟控制項"</string>
-    <!-- no translation found for identity_check_issue_card_title (864543931965445926) -->
+    <string name="identity_check_issue_card_title" msgid="864543931965445926">"「身分檢查」現支援更多應用程式"</string>
+    <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"任何使用「指紋解鎖」或「面孔解鎖」識別你身分的應用程式都能保障你的身分安全"</string>
+    <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"查看詳情"</string>
+    <string name="identity_check_promo_card_title" msgid="1495226082133610343">"使用「身分檢查」保障更多應用程式安全"</string>
+    <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"在所有支援「指紋解鎖」或「面孔解鎖」的應用程式使用「身分檢查」，即可加強防護並提升體驗一致性，而且無需額外設定"</string>
+    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
     <skip />
-    <!-- no translation found for identity_check_issue_card_summary (5216214598056911479) -->
+    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
     <skip />
-    <!-- no translation found for identity_check_issue_card_button_text (9194407367671256494) -->
+    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
     <skip />
-    <!-- no translation found for identity_check_promo_card_title (1495226082133610343) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (5745161401829550512) -->
+    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
     <skip />
 </resources>

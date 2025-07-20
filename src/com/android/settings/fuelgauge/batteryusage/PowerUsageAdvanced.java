@@ -211,6 +211,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     private void onBatteryLevelDataUpdate(BatteryLevelData batteryLevelData) {
         if (!isVisible()) {
+            Log.w(TAG, "onBatteryLevelDataUpdate: not visible");
             return;
         }
         mBatteryLevelData = Optional.ofNullable(batteryLevelData);
@@ -225,7 +226,12 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     private void onBatteryDiffDataMapUpdate(Map<Long, BatteryDiffData> batteryDiffDataMap) {
-        if (!isVisible() || mBatteryLevelData == null) {
+        if (!isVisible()) {
+            Log.w(TAG, "onBatteryDiffDataMapUpdate: not visible");
+            return;
+        }
+        if (mBatteryLevelData == null) {
+            Log.w(TAG, "onBatteryDiffDataMapUpdate: batteryLevelData is null");
             return;
         }
         mHandler.post(() -> {
@@ -299,7 +305,12 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     private void onAnomalyDetected(PowerAnomalyEventList anomalyEventList) {
-        if (!isVisible() || anomalyEventList == null) {
+        if (!isVisible()) {
+            Log.w(TAG, "onAnomalyDetected: not visible");
+            return;
+        }
+        if (anomalyEventList == null) {
+            Log.d(TAG, "onAnomalyDetected: anomalyEventList is null");
             return;
         }
         logPowerAnomalyEventList(anomalyEventList);

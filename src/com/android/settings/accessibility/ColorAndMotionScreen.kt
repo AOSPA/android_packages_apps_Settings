@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ColorAndMotionActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.display.darkmode.DarkModeScreen
+import com.android.settings.display.darkmode.DarkModeScreenOnAccessibility
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceCategory
@@ -60,11 +60,15 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
             if (ColorDisplayManager.isColorTransformAccelerated(context)) {
                 +DaltonizerPreference()
                 +ColorInversionPreference()
-                +DarkModeScreen.KEY
+                if (com.android.settings.accessibility.Flags.catalystDarkUiMode()) {
+                    +DarkModeScreenOnAccessibility.KEY
+                }
                 +RemoveAnimationsPreference()
             } else {
                 +ColorInversionPreference()
-                +DarkModeScreen.KEY
+                if (com.android.settings.accessibility.Flags.catalystDarkUiMode()) {
+                    +DarkModeScreenOnAccessibility.KEY
+                }
                 +PreferenceCategory(
                     "experimental_category",
                     R.string.experimental_category_title,
@@ -74,7 +78,8 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
                         +RemoveAnimationsPreference()
                     }
             }
-            // LINT.ThenChange(/res/xml/accessibility_color_and_motion.xml, /src/com/android/settings/accessibility/ColorAndMotionFragment.java:ui_hierarchy)
+            // LINT.ThenChange(/res/xml/accessibility_color_and_motion.xml,
+            // /src/com/android/settings/accessibility/ColorAndMotionFragment.java:ui_hierarchy)
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =

@@ -423,16 +423,16 @@ public class Settings extends SettingsActivity {
     public static class PrintJobSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ModeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ModesSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class DndModeDisplaySettingsActivity extends SettingsActivity {
+    private static class DndBaseSettingsActivity extends SettingsActivity {
         @Override
-        protected void onCreate(Bundle savedState) {
-            super.onCreate(savedState);
-            if (getIntent() != null && !TextUtils.equals(
-                    getIntent().getStringExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID), MANUAL_RULE_ID)) {
-                finish();
-            }
+        public Intent getIntent() {
+            // specify the DND id
+            return super.getIntent().putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, MANUAL_RULE_ID);
         }
     }
+    public static class DndDisplaySettingsActivity extends DndBaseSettingsActivity { /* empty */ }
+    public static class DndPeopleSettingsActivity extends DndBaseSettingsActivity { /* empty */ }
+    public static class DndCallsSettingsActivity extends DndBaseSettingsActivity { /* empty */ }
     public static class SoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class VibrationSettingsActivity extends CatalystSettingsActivity {
         public VibrationSettingsActivity() {

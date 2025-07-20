@@ -25,9 +25,11 @@ import android.content.ComponentName;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.hearingdevices.ui.HearingDevicesScreen;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -43,18 +45,20 @@ public class AccessibilityHearingAidsFragment extends BaseRestrictedSupportFragm
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        use(AvailableHearingDevicePreferenceController.class).init(this);
-        use(SavedHearingDevicePreferenceController.class).init(this);
-        use(HearingAidCompatibilityPreferenceController.class).init(this);
-        ToggleShortcutPreferenceController shortcutPreferenceController =
-                use(ToggleShortcutPreferenceController.class);
-        if (shortcutPreferenceController != null) {
-            shortcutPreferenceController.initialize(
-                    getFeatureComponentName(),
-                    getChildFragmentManager(),
-                    getFeatureName(),
-                    getMetricsCategory()
-            );
+        if (!isCatalystEnabled()) {
+            use(AvailableHearingDevicePreferenceController.class).init(this);
+            use(SavedHearingDevicePreferenceController.class).init(this);
+            use(HearingAidCompatibilityPreferenceController.class).init(this);
+            ToggleShortcutPreferenceController shortcutPreferenceController =
+                    use(ToggleShortcutPreferenceController.class);
+            if (shortcutPreferenceController != null) {
+                shortcutPreferenceController.initialize(
+                        getFeatureComponentName(),
+                        getChildFragmentManager(),
+                        getFeatureName(),
+                        getMetricsCategory()
+                );
+            }
         }
     }
 
@@ -89,8 +93,15 @@ public class AccessibilityHearingAidsFragment extends BaseRestrictedSupportFragm
         return mHelper.isHearingAidSupported();
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return HearingDevicesScreen.KEY;
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_hearing_aids) {
+            new BaseSearchIndexProvider(Flags.catalystHearingDevices()
+                    && com.android.settings.flags.Flags.catalystSettingsSearch() ? 0
+                    : R.xml.accessibility_hearing_aids) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return AccessibilityHearingAidsFragment.isPageSearchEnabled(context);

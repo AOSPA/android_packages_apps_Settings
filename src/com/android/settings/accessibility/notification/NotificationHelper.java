@@ -150,6 +150,17 @@ public class NotificationHelper {
                     mContext.getString(R.string.dark_theme_survey_notification_action),
                     settingsIntent
             );
+        } else if (pageId == SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION) {
+            final Intent settingsIntent =
+                    new Intent(Settings.ACTION_SCREEN_MAGNIFICATION_SETTINGS)
+                            .setPackage(mContext.getPackageName());
+            showNotification(
+                    getNotificationId(pageId),
+                    mContext.getString(R.string.magnification_survey_notification_title),
+                    mContext.getString(R.string.magnification_survey_notification_summary),
+                    mContext.getString(R.string.magnification_survey_notification_action),
+                    settingsIntent
+            );
         }
     }
 }

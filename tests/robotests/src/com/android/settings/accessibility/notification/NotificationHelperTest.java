@@ -72,43 +72,19 @@ public class NotificationHelperTest {
     }
 
     @Test
-    public void showSurveyNotification_withDarkUiSettingsPageId_createAndPostsNotification() {
-        mNotificationHelper.showSurveyNotification(SettingsEnums.DARK_UI_SETTINGS);
+    public void showSurveyNotification_withDarkUiSettingsPageId_createAndPostNotification() {
+        final int pageId = SettingsEnums.DARK_UI_SETTINGS;
+        final String expectedAction = Settings.ACTION_DARK_THEME_SETTINGS;
+        final String expectedTitle =
+                mContext.getString(R.string.dark_theme_survey_notification_title);
+        final String expectedActionTitle =
+                mContext.getString(R.string.dark_theme_survey_notification_action);
 
-        int notificationId = mNotificationHelper.getNotificationId(SettingsEnums.DARK_UI_SETTINGS);
-        Notification notification = mShadowNotificationManager.getNotification(notificationId);
+        mNotificationHelper.showSurveyNotification(pageId);
 
-        assertThat(notification).isNotNull();
-        ShadowNotification shadowNotification = shadowOf(notification);
-        assertThat(shadowNotification.getContentTitle().toString()).isEqualTo(
-                mContext.getString(R.string.dark_theme_survey_notification_title));
-        assertThat(shadowNotification.getContentText().toString()).isEqualTo(
-                mContext.getString(R.string.dark_theme_survey_notification_summary));
-        assertThat(notification.actions.length).isEqualTo(1);
-        assertThat(notification.actions[0].title.toString()).isEqualTo(
-                mContext.getString(R.string.dark_theme_survey_notification_action));
-
-        // Verify content intent
-        PendingIntent contentPendingIntent = notification.contentIntent;
-        ShadowPendingIntent shadowContentPendingIntent = shadowOf(contentPendingIntent);
-        Intent contentIntent = shadowContentPendingIntent.getSavedIntent();
-        assertThat(contentIntent.getAction()).isEqualTo(Settings.ACTION_DARK_THEME_SETTINGS);
-        assertThat(contentIntent.getPackage()).isEqualTo(mContext.getPackageName());
-        assertThat(contentIntent.getStringExtra(EXTRA_SOURCE)).isEqualTo(SOURCE_START_SURVEY);
-        assertThat(contentIntent.getFlags()).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-        // Verify action intent
-        PendingIntent actionPendingIntent = notification.actions[0].actionIntent;
-        ShadowPendingIntent shadowActionPendingIntent = shadowOf(actionPendingIntent);
-        Intent actionIntent = shadowActionPendingIntent.getSavedIntent();
-        assertThat(actionIntent.getAction()).isEqualTo(Settings.ACTION_DARK_THEME_SETTINGS);
-        assertThat(actionIntent.getPackage()).isEqualTo(mContext.getPackageName());
-        assertThat(actionIntent.getStringExtra(EXTRA_SOURCE)).isEqualTo(SOURCE_START_SURVEY);
-        assertThat(actionIntent.getFlags()).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        Notification notification = getNotificationAndVerifyExistence(pageId);
+        verifyNotificationInfo(notification, expectedTitle, expectedActionTitle);
+        verifyNotificationIntents(notification, expectedAction);
     }
 
     @Test
@@ -121,6 +97,23 @@ public class NotificationHelperTest {
         assertThat(mShadowNotificationManager.getNotification(notificationId)).isNull();
     }
 
+
+    @Test
+    public void showSurveyNotification_withMagnificationSettingsPageId_createAndPostNotification() {
+        final int pageId = SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
+        final String expectedAction = Settings.ACTION_SCREEN_MAGNIFICATION_SETTINGS;
+        final String expectedTitle =
+                mContext.getString(R.string.magnification_survey_notification_title);
+        final String expectedActionTitle =
+                mContext.getString(R.string.magnification_survey_notification_action);
+
+        mNotificationHelper.showSurveyNotification(pageId);
+
+        Notification notification = getNotificationAndVerifyExistence(pageId);
+        verifyNotificationInfo(notification, expectedTitle, expectedActionTitle);
+        verifyNotificationIntents(notification, expectedAction);
+    }
+
     @Test
     public void getNotificationId_returnCorrectId() {
         int pageId = 123;
@@ -128,6 +121,37 @@ public class NotificationHelperTest {
         int expectedNotificationId = 751131 + pageId;
 
         assertThat(mNotificationHelper.getNotificationId(pageId)).isEqualTo(expectedNotificationId);
+    }
+
+    private Notification getNotificationAndVerifyExistence(int pageId) {
+        int notificationId = mNotificationHelper.getNotificationId(pageId);
+        Notification notification = mShadowNotificationManager.getNotification(notificationId);
+        assertThat(notification).isNotNull();
+        return notification;
+    }
+
+    private void verifyNotificationInfo(Notification notification, String expectedTitle,
+            String expectedActionTitle) {
+        ShadowNotification shadowNotification = shadowOf(notification);
+        assertThat(shadowNotification.getContentTitle().toString()).isEqualTo(expectedTitle);
+        assertThat(notification.actions.length).isEqualTo(1);
+        assertThat(notification.actions[0].title.toString()).isEqualTo(expectedActionTitle);
+    }
+
+    private void verifyNotificationIntents(Notification notification, String expectedAction) {
+        verifyPendingIntent(notification.contentIntent, expectedAction);
+        verifyPendingIntent(notification.actions[0].actionIntent, expectedAction);
+    }
+
+    private void verifyPendingIntent(PendingIntent pendingIntent, String expectedAction) {
+        ShadowPendingIntent shadowPendingIntent = shadowOf(pendingIntent);
+        Intent intent = shadowPendingIntent.getSavedIntent();
+        assertThat(intent.getAction()).isEqualTo(expectedAction);
+        assertThat(intent.getPackage()).isEqualTo(mContext.getPackageName());
+        assertThat(intent.getStringExtra(EXTRA_SOURCE)).isEqualTo(SOURCE_START_SURVEY);
+        assertThat(intent.getFlags()).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
     }
 }
 

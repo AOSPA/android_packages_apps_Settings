@@ -24,7 +24,6 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.multiuser.Flags;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.Trace;
@@ -130,11 +129,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 com.android.internal.R.bool.config_guestUserAutoCreated);
 
         initialize(context, getArguments());
-        if (Flags.requirePinBeforeUserDeletion()) {
-            mUserRemovalCredentialConfirmationActivityResultLauncher = registerForActivityResult(
-                    new ActivityResultContracts.StartActivityForResult(),
-                    result -> onRemoveUserConfirmationActivityLauncherResult(result));
-        }
+        mUserRemovalCredentialConfirmationActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> onRemoveUserConfirmationActivityLauncherResult(result));
     }
 
     @Override
@@ -522,7 +519,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     }
 
     private void removeUser() {
-        if (Flags.requirePinBeforeUserDeletion() && runUserRemovalKeyguardConfirmation()) {
+        if (runUserRemovalKeyguardConfirmation()) {
             // User deletion will be handled when the credential authentication result is successful
             return;
         }

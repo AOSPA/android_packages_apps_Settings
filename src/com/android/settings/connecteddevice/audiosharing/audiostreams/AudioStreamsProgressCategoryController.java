@@ -199,7 +199,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
             mAccessibilityManager.removeAccessibilityServicesStateChangeListener(
                     mAccessibilityListener);
         }
-        mExecutor.execute(this::stopScanning);
+        mExecutor.execute(this::stopScanningAndCleanUp);
     }
 
     void setFragment(Fragment fragment) {
@@ -597,16 +597,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                         AudioStreamsDialogFragment.dismissAll(mFragment);
                     });
         } else {
-            stopScanning();
-            mBroadcastIdToPreferenceMap.clear();
-            AudioSharingUtils.postOnMainThread(
-                    mContext,
-                    () -> {
-                        if (mCategoryPreference != null) {
-                            mCategoryPreference.removeAudioStreamPreferences();
-                            mCategoryPreference.setVisible(false);
-                        }
-                    });
+            stopScanningAndCleanUp();
             if (!hasConnected) {
                 AudioSharingUtils.postOnMainThread(
                         mContext,
@@ -710,15 +701,24 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         }
     }
 
-    private void stopScanning() {
+    private void stopScanningAndCleanUp() {
         mScanHelper.stopScanning();
         if (mLeBroadcastAssistant == null) {
-            Log.w(TAG, "stopScanning(): LeBroadcastAssistant is null!");
+            Log.w(TAG, "stopScanningAndCleanUp(): LeBroadcastAssistant is null!");
             return;
         }
         mLeBroadcastAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
         mMediaControlHelper.stop();
         mSourceFromQrCode = null;
+        mBroadcastIdToPreferenceMap.clear();
+        AudioSharingUtils.postOnMainThread(
+                mContext,
+                () -> {
+                    if (mCategoryPreference != null) {
+                        mCategoryPreference.removeAudioStreamPreferences();
+                        mCategoryPreference.setVisible(false);
+                    }
+                });
     }
 
     private AudioStreamPreference addNewPreference(

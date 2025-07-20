@@ -75,6 +75,8 @@ public class AdjustmentKeyPreferenceControllerTest {
         new PreferenceManager(mContext).createPreferenceScreen(mContext).addPreference(mSwitch);
         when(mBackend.hasSentValidMsg(anyString(), anyInt())).thenReturn(true);
         when(mBackend.getAllowedAssistantAdjustments()).thenReturn(List.of(KEY_TYPE));
+        when(mBackend.isNotificationBundlingSupported()).thenReturn(true);
+        when(mBackend.isNotificationSummarizationSupported()).thenReturn(true);
 
         mPrefController = new AdjustmentKeyPreferenceController(mContext, mBackend, KEY_TYPE);
 
@@ -112,6 +114,29 @@ public class AdjustmentKeyPreferenceControllerTest {
             Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI})
     public void testIsAvailable_summarization_notMsgApp() {
         when(mBackend.hasSentValidMsg(anyString(), anyInt())).thenReturn(false);
+
+        mPrefController = new AdjustmentKeyPreferenceController(
+                mContext, mBackend, KEY_SUMMARIZATION);
+        mPrefController.onResume(mAppRow, null, null, null, null, null, null);
+
+        assertThat(mPrefController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI})
+    public void testIsAvailable_bundle_NasNotSupported() {
+        when(mBackend.isNotificationBundlingSupported()).thenReturn(false);
+
+        mPrefController = new AdjustmentKeyPreferenceController(mContext, mBackend, KEY_TYPE);
+        mPrefController.onResume(mAppRow, null, null, null, null, null, null);
+
+        assertThat(mPrefController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_NM_SUMMARIZATION, Flags.FLAG_NM_SUMMARIZATION_UI})
+    public void testIsAvailable_summarization_NasNotSupported() {
+        when(mBackend.isNotificationSummarizationSupported()).thenReturn(false);
 
         mPrefController = new AdjustmentKeyPreferenceController(
                 mContext, mBackend, KEY_SUMMARIZATION);

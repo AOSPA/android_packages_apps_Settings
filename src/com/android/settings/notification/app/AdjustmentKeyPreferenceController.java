@@ -74,6 +74,15 @@ public class AdjustmentKeyPreferenceController extends
                 || backend.isInInvalidMsgState(pkg, uid))) {
             return false;
         }
+
+        if (isSummarizePref && !backend.isNotificationSummarizationSupported()) {
+            return false;
+        }
+
+        if (isBundlePref && !backend.isNotificationBundlingSupported()) {
+            return false;
+        }
+
         return backend.getAllowedAssistantAdjustments().contains(key);
     }
 

@@ -131,6 +131,8 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"메시지 액세스 요청"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"다른 기기에 \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\'로 표시됩니다."</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"다른 기기에 연결하려면 블루투스를 사용 설정하세요."</string>
+    <!-- no translation found for shared_network_footer (5178404860420039168) -->
+    <skip />
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"내 기기"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"새 기기와 페어링"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"블루투스 A2DP 하드웨어 오프로드 사용 중지"</string>
@@ -386,7 +388,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"취소"</string>
-    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"나중에"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"사용 안함"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"동의"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"더보기"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"얼굴로 잠금 해제"</string>
@@ -461,7 +463,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"주의사항"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"지문을 사용하여 휴대전화를 잠금 해제하거나 구매를 승인하세요.\n\n참고: 이 기기는 지문을 사용하여 잠금 해제할 수 없습니다. 자세한 내용은 조직의 관리자에게 문의하세요."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"취소"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"나중에"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"취소"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"동의"</string>
     <string name="security_settings_fingerprint_rename_description" msgid="6301505700382531086">"이름을 바꾸려면 두 번 탭하세요."</string>
     <string name="security_settings_fingerprint_recognition_description" msgid="1805171116182647136">"<xliff:g id="FP_NAME">%1$s</xliff:g> 인식됨"</string>
@@ -992,9 +994,12 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"다시 시작"</string>
     <string name="external_display_on" msgid="2560104443500154333">"사용"</string>
     <string name="external_display_off" msgid="5634413756025351374">"사용 안함"</string>
-    <!-- no translation found for external_display_settings_title (3865786552022665355) -->
-    <skip />
+    <string name="external_display_settings_title" msgid="3865786552022665355">"외부 디스플레이"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"내장 디스플레이"</string>
+    <!-- no translation found for builtin_display_settings_universal_cursor_title (209064877333151313) -->
+    <skip />
+    <!-- no translation found for builtin_display_settings_universal_cursor_description (4209129904885332824) -->
+    <skip />
     <string name="external_display_use_title" msgid="8198257340836261386">"외부 디스플레이 사용"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"디스플레이 해상도"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"외부 디스플레이가 연결되지 않았습니다"</string>
@@ -2169,16 +2174,16 @@
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"기본 키 사용 방법"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"숫자 키패드 사용 방법"</string>
     <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2186017679302722178">"숫자 키패드는 숫자 잠금(Num Lock)이 켜져 있으면 항상 사용됩니다."</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"위로 스크롤하여 페이지 아래로 이동합니다."</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"위로 스크롤하여 페이지 아래로 이동합니다"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"스크롤"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"스크롤 제어"</string>
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"스크롤 속도"</string>
     <string name="mouse_pointer_speed_make_faster_desc" msgid="7665912663672314461">"포인터 속도 높이기"</string>
     <string name="mouse_pointer_speed_make_slower_desc" msgid="116802579827902188">"포인터 속도 낮추기"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"기본 마우스 버튼 전환"</string>
-    <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"왼쪽 마우스 버튼을 오른쪽 버튼으로 사용합니다."</string>
+    <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"왼쪽 마우스 버튼을 오른쪽 버튼으로 사용합니다"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"커서 가속"</string>
-    <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"마우스를 더 빠르게 움직이면 커서가 더 멀리 이동합니다."</string>
+    <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"마우스를 더 빠르게 움직이면 커서가 더 멀리 이동합니다"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"<xliff:g id="KEYBOARD_NAME">%s</xliff:g>의 마우스 키"</string>
     <string name="mouse_keys_directional_summary" msgid="2215425656757420699">"\"<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>\" 키를 사용하여 마우스 포인터를 이동합니다."</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"\"<xliff:g id="CLICK_LABEL">%s</xliff:g>\" 키를 사용하여 기본 마우스 버튼을 클릭합니다."</string>
@@ -2201,11 +2206,11 @@
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"포인터 속도, 동작"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"탭하여 클릭"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"탭하고 드래그하여 항목 이동"</string>
-    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"손가락으로 터치패드를 두 번 탭한 후 드래그하여 객체를 움직이세요."</string>
+    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"손가락으로 터치패드를 두 번 탭한 후 드래그하여 객체를 움직이세요"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"터치패드 동작"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"개별 터치패드 탐색 동작 맞춤설정"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"역방향 스크롤"</string>
-    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"아래로 스크롤하면 콘텐츠가 위로 이동합니다."</string>
+    <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"아래로 스크롤하면 콘텐츠가 위로 이동합니다"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"오른쪽 하단 클릭"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"더 많은 옵션을 확인하려면 터치패드 오른쪽 하단을 클릭합니다"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"포인터 속도"</string>
@@ -3092,7 +3097,8 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"네트워크 알림"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"기기가 암호화되지 않은 네트워크에 연결되거나 네트워크가 고유 기기 또는 SIM ID를 기록하면 알림을 받습니다."</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"네트워크 생성"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="979187530909112413">"2G 네트워크 보호는 보안 수준이 낮은 2G 네트워크를 사용하지 않습니다. 이로 인해 일부 지역에서 연결이 제한될 수 있습니다. 긴급 전화는 항상 허용됩니다."</string>
+    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
+    <skip />
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G 네트워크 보호"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"암호화"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"네트워크 생성"</string>
@@ -3671,8 +3677,7 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"화면 보호 모드 상시 사용 설정(AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, 태그, 리더"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"키보드, 햅틱, 진동"</string>
-    <!-- no translation found for keywords_external_display_settings (4717990369488386495) -->
-    <skip />
+    <string name="keywords_external_display_settings" msgid="4717990369488386495">"외부 디스플레이, 연결된 디스플레이, 확장 디스플레이, 두 번째 디스플레이, 내장 디스플레이, 디스플레이 정렬, 미러링, 디스플레이 크기, 회전, 해상도, 화면 재생 빈도"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"볼륨 및 진동"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"미디어 볼륨"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast 볼륨"</string>
@@ -4533,8 +4538,8 @@
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"신용 상품 제공업체에서 차단함"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"부모 동의 필요"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"설정을 시작하려면 휴대전화를 부모님에게 건네주세요."</string>
-    <string name="disabled_by_policy_title_parental_controls" msgid="8875976588644052371">"자녀 보호 기능에 의해 제한됨"</string>
-    <string name="disabled_by_policy_content_parental_controls" msgid="4648160125103768738">"자녀 보호 기능을 관리하는 사람만 이 설정을 변경할 수 있습니다."</string>
+    <string name="disabled_by_policy_title_parental_controls" msgid="2688144174399968452">"도움 요청"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="7645416358554171082">"이 설정을 변경하려면 기기 또는 계정의 자녀 보호 기능을 설정한 사용자가 설정을 변경해야 합니다."</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"이 설정을 변경하려면 휴대전화를 부모님께 건네주세요."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"자세한 내용은 IT 관리자에게 문의하세요"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"세부정보 더보기"</string>
@@ -5168,18 +5173,24 @@
     <string name="title_no_satellite_plan" msgid="7255726881685672846">"메시지가 계정에 포함되어 있지 않음"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"자세히 알아보기"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"작동 방식"</string>
-    <string name="title_satellite_connection_guide" msgid="4730763872034574368">"모바일 또는 Wi-Fi 네트워크를 이용할 수 없는 경우"</string>
+    <!-- no translation found for title_satellite_connection_guide (7080935804228845540) -->
+    <skip />
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"전화번호로 문자를 보내세요"</string>
-    <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"휴대전화가 위성에 자동 연결됩니다. 최적의 연결을 위해 하늘이 잘 보이는 상태를 유지하세요."</string>
+    <!-- no translation found for summary_satellite_connection_guide (1962847581645612628) -->
+    <skip />
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"모바일 네트워크에 연결되어 있지 않으면 위성을 사용할 수 있는 옵션이 표시됩니다."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"휴대전화가 위성에 연결된 후"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"단계에 따라 위성에 연결하세요"</string>
-    <string name="summary_supported_service" msgid="5855066701346160193">"응급 서비스를 포함해 누구에게나 문자 메시지를 보낼 수 있으며 지원되는 앱을 사용할 수 있습니다. 모바일 네트워크가 사용 가능해지면 휴대전화가 네트워크에 다시 연결됩니다."</string>
+    <!-- no translation found for summary_supported_service_with_constrained_data (8495750699335612848) -->
+    <skip />
+    <!-- no translation found for summary_supported_service_with_unconstrained_data (5010592489972147979) -->
+    <skip />
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"응급 서비스를 포함해 누구에게나 문자 메시지를 보낼 수 있습니다. 모바일 네트워크가 사용 가능해지면 휴대전화가 네트워크에 다시 연결됩니다."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"휴대전화가 연결되면 응급 서비스를 포함해 누구에게나 문자 메시지를 보낼 수 있습니다."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"주의사항"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"위성 연결에는 시간이 더 오래 소요될 수 있으며, 일부 지역에서만 사용 가능합니다."</string>
-    <string name="satellite_footer_content_section_2" msgid="7699185178461362541">"날씨 및 특정 구조물이 위성 연결에 영향을 미칠 수 있습니다."</string>
+    <!-- no translation found for satellite_footer_content_section_2 (555594211014015682) -->
+    <skip />
     <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"위성을 통한 통화는 사용할 수 없습니다."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"긴급 전화는 계속 연결될 수 있습니다."</string>
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"외부 링크를 보려면 모바일 또는 Wi‑Fi 네트워크가 필요합니다."</string>
@@ -5191,8 +5202,10 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"위성"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"위성 연결"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"위성 연결"</string>
-    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"위성 메시지"</string>
-    <string name="title_have_satellite_data_plan" msgid="1101741256080690699">"내 계정으로 지원되는 앱을 사용할 수 있습니다"</string>
+    <!-- no translation found for title_have_satellite_constrained_data_plan (8275865334911177900) -->
+    <skip />
+    <!-- no translation found for title_have_satellite_unconstrained_data_plan (5437095773679990375) -->
+    <skip />
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"휴대전화에 설치된 지원되는 앱"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"위성에서 지원하는 모든 앱 보기"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"휴대전화에 설치된 지원되는 앱"</string>
@@ -5548,7 +5561,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"전화번호를 입력하세요."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"확인"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G 네트워크 보호"</string>
-    <string name="enable_2g_summary" msgid="6317192326100541563">"보안 수준이 낮은 2G 네트워크는 사용하지 않습니다. 이로 인해 일부 지역에서 연결이 제한될 수 있습니다. 긴급 전화는 항상 허용됩니다"</string>
+    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
+    <skip />
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 이동통신사 사용 시 2G 필요"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"암호화된 네트워크만 허용"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"이렇게 하면 보안을 강화하지만 일부 위치에서 모바일 네트워크 연결이 제한될 수 있습니다. 긴급 전화는 항상 허용됩니다."</string>
@@ -5904,19 +5918,22 @@
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN 업데이트됨"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"앱 열기"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"PIN을 삭제하시겠습니까?"</string>
-    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8999197100719062891">"다른 사용자에 대한 자녀 보호 기능을 사용 중지하세요"</string>
+    <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"PIN을 삭제할 수 없음"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"PIN을 삭제할 수 없습니다"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"PIN을 삭제하는 중에 오류가 발생했습니다."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> 애니메이션"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"컨트롤을 사용 설정할 수 없음"</string>
-    <!-- no translation found for identity_check_issue_card_title (864543931965445926) -->
+    <string name="identity_check_issue_card_title" msgid="864543931965445926">"더 많은 앱에서 본인 확인을 사용할 수 있습니다"</string>
+    <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"지문 또는 얼굴 인식 잠금 해제를 제공하여 사용자를 식별하는 모든 앱에서 신원 보호를 강화할 수 있습니다."</string>
+    <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"세부정보 보기"</string>
+    <string name="identity_check_promo_card_title" msgid="1495226082133610343">"본인 확인을 사용하여 더 많은 앱을 보호하세요"</string>
+    <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"지문 및 얼굴 인식 잠금 해제를 지원하는 모든 앱에 본인 확인을 사용하면 추가 설정 없이 더욱 안전한 보호 및 일관된 환경을 누릴 수 있습니다."</string>
+    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
     <skip />
-    <!-- no translation found for identity_check_issue_card_summary (5216214598056911479) -->
+    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
     <skip />
-    <!-- no translation found for identity_check_issue_card_button_text (9194407367671256494) -->
+    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
     <skip />
-    <!-- no translation found for identity_check_promo_card_title (1495226082133610343) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (5745161401829550512) -->
+    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
     <skip />
 </resources>

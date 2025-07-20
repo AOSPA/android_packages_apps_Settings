@@ -24,7 +24,7 @@ import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.settings.R
 import com.android.settings.accessibility.BaseSupportFragment
 import com.android.settings.accessibility.Flags
-import com.android.settings.accessibility.ToggleShortcutPreferenceController
+import com.android.settings.accessibility.SurveyManager
 import com.android.settings.accessibility.screenmagnification.CursorFollowingModePreferenceController
 import com.android.settings.accessibility.screenmagnification.ModePreferenceController
 import com.android.settings.accessibility.screenmagnification.ToggleMagnificationShortcutPreferenceController
@@ -42,16 +42,26 @@ open class MagnificationPreferenceFragment : BaseSupportFragment() {
             use(CursorFollowingModePreferenceController::class.java)
                 ?.setFragmentManager(getChildFragmentManager())
         }
-        getShortcutPreferenceController()
-            ?.initialize(
+
+        getShortcutPreferenceController()?.apply {
+            initialize(
                 getFeatureComponentName(),
                 childFragmentManager,
                 getFeatureName(),
                 metricsCategory,
             )
+            setSurveyManager(
+                SurveyManager(
+                    this@MagnificationPreferenceFragment,
+                    context,
+                    surveyKey,
+                    metricsCategory,
+                )
+            )
+        }
     }
 
-    fun getShortcutPreferenceController(): ToggleShortcutPreferenceController? {
+    fun getShortcutPreferenceController(): ToggleMagnificationShortcutPreferenceController? {
         return if (Flags.catalystMagnification()) {
             null
         } else {

@@ -17,7 +17,6 @@ package com.android.settings.supervision
 
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
-import android.app.ActivityManager
 import android.app.Application
 import android.app.KeyguardManager
 import android.app.supervision.SupervisionManager
@@ -34,7 +33,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.password.ChooseLockPassword
+import com.android.settings.password.ChooseLockGeneric
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -42,7 +41,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.anyOrNull
-import org.mockito.kotlin.argThat
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
@@ -57,7 +55,6 @@ import org.robolectric.shadows.ShadowKeyguardManager
 class SetupSupervisionActivityTest {
     private val context = ApplicationProvider.getApplicationContext<Context>()
 
-    private val mockActivityManager = mock<ActivityManager>()
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
 
@@ -67,13 +64,11 @@ class SetupSupervisionActivityTest {
     fun setUp() {
         shadowKeyguardManager = shadowOf(context.getSystemService(KeyguardManager::class.java))
         Shadow.extract<ShadowContextImpl>((context as Application).baseContext).apply {
-            setSystemService(Context.ACTIVITY_SERVICE, mockActivityManager)
             setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
             setSystemService(Context.USER_SERVICE, mockUserManager)
         }
 
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
-        mockActivityManager.stub { on { startProfile(any()) } doReturn true }
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
     }
 
@@ -93,7 +88,7 @@ class SetupSupervisionActivityTest {
     }
 
     @Test
-    fun onCreate_noSupervisingUser_createAndStartProfile_startSetPinActivity() {
+    fun onCreate_noSupervisingUser_createProfile_startSetPinActivity() {
         mockUserManager.stub {
             on { users } doReturn emptyList()
             on {
@@ -105,7 +100,7 @@ class SetupSupervisionActivityTest {
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
                 assertThat(shadowOf(activity).nextStartedActivity.component?.className)
-                    .isEqualTo(ChooseLockPassword::class.java.name)
+                    .isEqualTo(ChooseLockGeneric::class.java.name)
 
                 assertThat(activity.isFinishing).isFalse()
             }
@@ -119,15 +114,14 @@ class SetupSupervisionActivityTest {
                 UserHandle.USER_NULL,
                 null,
             )
-        verify(mockActivityManager).startProfile(argThat { identifier == SUPERVISING_USER_ID })
     }
 
     @Test
-    fun onCreate_existingSupervisingUser_canStartProfile_startSetPinActivity() {
+    fun onCreate_existingSupervisingUser_startSetPinActivity() {
         ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
                 assertThat(shadowOf(activity).nextStartedActivity.component?.className)
-                    .isEqualTo(ChooseLockPassword::class.java.name)
+                    .isEqualTo(ChooseLockGeneric::class.java.name)
 
                 assertThat(activity.isFinishing).isFalse()
             }
@@ -135,7 +129,6 @@ class SetupSupervisionActivityTest {
 
         verify(mockUserManager, never())
             .createProfileForUserEvenWhenDisallowed(any(), any(), any(), any(), any())
-        verify(mockActivityManager).startProfile(argThat { identifier == SUPERVISING_USER_ID })
     }
 
     @Test
@@ -146,17 +139,6 @@ class SetupSupervisionActivityTest {
                 createProfileForUserEvenWhenDisallowed(any(), any(), any(), any(), any())
             } doReturn null
         }
-
-        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
-            scenario ->
-            assertThat(scenario.state).isEqualTo(Lifecycle.State.RESUMED)
-            assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
-        }
-    }
-
-    @Test
-    fun onCreate_startProfileFails_canceled() {
-        mockActivityManager.stub { on { startProfile(any()) } doReturn false }
 
         ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
             scenario ->

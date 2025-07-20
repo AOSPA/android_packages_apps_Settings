@@ -19,8 +19,8 @@ import android.Manifest.permission.CREATE_USERS
 import android.Manifest.permission.INTERACT_ACROSS_USERS
 import android.Manifest.permission.INTERACT_ACROSS_USERS_FULL
 import android.Manifest.permission.MANAGE_USERS
-import android.app.ActivityManager
 import android.app.KeyguardManager
+import android.app.admin.DevicePolicyManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Intent
@@ -30,11 +30,15 @@ import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.util.Log
 import android.view.MenuItem
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresPermission
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
+import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
-import com.android.settings.password.ChooseLockPassword
+import com.android.settings.password.ChooseLockGeneric
 import com.android.settingslib.collapsingtoolbar.R.drawable.settingslib_expressive_icon_back as EXPRESSIVE_BACK_ICON
 import com.android.settingslib.supervision.SupervisionLog
 import com.android.settingslib.widget.SettingsThemeHelper
@@ -61,6 +65,16 @@ import kotlinx.coroutines.launch
  * 2. Handle the result in `onActivityResult()`.
  */
 class SetupSupervisionActivity : FragmentActivity() {
+
+    private val chooseLockLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            handleSetLockResult(result)
+        }
+
+    private val setupRecoveryLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            handlePinRecoveryResult(result)
+        }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -143,33 +157,24 @@ class SetupSupervisionActivity : FragmentActivity() {
 
             userHandle = userInfo.userHandle
         }
-        val activityManager = getSystemService(ActivityManager::class.java)
-        if (activityManager == null || !activityManager.startProfile(userHandle)) {
-            // TODO(399705794): Surface this error to user
-            Log.w(SupervisionLog.TAG, "Could not start supervising profile.")
-            return null
-        }
 
         return userHandle
     }
 
     @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, INTERACT_ACROSS_USERS])
     private fun startChooseLockActivity(userHandle: UserHandle) {
-        val intent = Intent(this, ChooseLockPassword::class.java)
-        startActivityForResultAsUser(intent, REQUEST_CODE_SET_SUPERVISION_LOCK, userHandle)
+        val intent =
+            Intent(this, ChooseLockGeneric::class.java).apply {
+                putExtra(
+                    LockPatternUtils.PASSWORD_TYPE_KEY,
+                    DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
+                )
+                putExtra(Intent.EXTRA_USER_ID, userHandle.identifier)
+            }
+        chooseLockLauncher.launch(intent)
     }
 
-    @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        when (requestCode) {
-            REQUEST_CODE_SET_SUPERVISION_LOCK -> handleSetLockResult(resultCode)
-            REQUEST_CODE_SET_PIN_RECOVERY -> handlePinRecoveryResult(resultCode)
-        }
-    }
-
-    private fun handleSetLockResult(resultCode: Int) {
+    private fun handleSetLockResult(result: ActivityResult) {
         val supervisingUser = supervisingUserHandle
         if (supervisingUser == null) {
             Log.w(SupervisionLog.TAG, "No supervising user handle found after lock setup.")
@@ -177,8 +182,6 @@ class SetupSupervisionActivity : FragmentActivity() {
             finish()
             return
         }
-        val activityManager = getSystemService(ActivityManager::class.java)
-        tryStopProfile(supervisingUser, activityManager)
         val keyguardManager = getSystemService(KeyguardManager::class.java)
         if (!keyguardManager.isDeviceSecure(supervisingUser.identifier)) {
             Log.w(SupervisionLog.TAG, "Lock for supervising user not set up.")
@@ -195,8 +198,8 @@ class SetupSupervisionActivity : FragmentActivity() {
         startPinRecoveryActivity()
     }
 
-    private fun handlePinRecoveryResult(resultCode: Int) {
-        if (resultCode == RESULT_CANCELED) {
+    private fun handlePinRecoveryResult(result: ActivityResult) {
+        if (result.resultCode == RESULT_CANCELED) {
             Log.i(SupervisionLog.TAG, "PIN recovery setup was skipped by the user.")
         }
         setResult(RESULT_OK)
@@ -215,18 +218,6 @@ class SetupSupervisionActivity : FragmentActivity() {
             Intent(this, SupervisionPinRecoveryActivity::class.java).apply {
                 action = SupervisionPinRecoveryActivity.ACTION_SETUP
             }
-        startActivityForResult(intent, REQUEST_CODE_SET_PIN_RECOVERY, null)
-    }
-
-    @RequiresPermission(anyOf = [INTERACT_ACROSS_USERS_FULL, MANAGE_USERS])
-    private fun tryStopProfile(supervisingUser: UserHandle, activityManager: ActivityManager) {
-        if (!activityManager.stopProfile(supervisingUser)) {
-            Log.w(SupervisionLog.TAG, "Could not stop the supervising profile.")
-        }
-    }
-
-    companion object {
-        private const val REQUEST_CODE_SET_SUPERVISION_LOCK = 1000
-        private const val REQUEST_CODE_SET_PIN_RECOVERY = 1001
+        setupRecoveryLauncher.launch(intent)
     }
 }

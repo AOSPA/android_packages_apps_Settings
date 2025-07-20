@@ -630,14 +630,20 @@ public final class Utils extends com.android.settingslib.Utils {
         return null;
     }
 
-   /**
-    * Returns true if the user provided is in the same profiles group as the current user.
-    */
-   private static boolean isProfileOf(UserManager um, UserHandle otherUser) {
-       if (um == null || otherUser == null) return false;
-       return (UserHandle.myUserId() == otherUser.getIdentifier())
-               || um.getUserProfiles().contains(otherUser);
-   }
+    /** Returns true if the user provided is in the same profiles group as the current user. */
+    private static boolean isProfileOf(UserManager um, UserHandle otherUser) {
+        if (um == null || otherUser == null) return false;
+        // The supervising profile is a parentless profile which is considered a valid profile
+        // for all full users.
+        final boolean isSupervisingProfile =
+                android.multiuser.Flags.allowSupervisingProfile()
+                        && um.getUserInfo(otherUser.getIdentifier())
+                                .userType
+                                .equals(UserManager.USER_TYPE_PROFILE_SUPERVISING);
+        return (UserHandle.myUserId() == otherUser.getIdentifier())
+                || um.getUserProfiles().contains(otherUser)
+                || isSupervisingProfile;
+    }
 
     /**
      * Queries for the UserInfo of a user. Returns null if the user doesn't exist (was removed).
@@ -813,6 +819,16 @@ public final class Utils extends com.android.settingslib.Utils {
         final int[] profileIds = um.getProfileIdsWithDisabled(UserHandle.myUserId());
         if (ArrayUtils.contains(profileIds, userId)) {
             return userId;
+        }
+        if (android.multiuser.Flags.allowSupervisingProfile()) {
+            for (UserInfo info : um.getUsers()) {
+                // The supervising profile is a parentless profile, and is therefore considered a
+                // valid profile for any full user.
+                if (info.id == userId
+                        && info.userType.equals(UserManager.USER_TYPE_PROFILE_SUPERVISING)) {
+                    return userId;
+                }
+            }
         }
         throw new SecurityException("Given user id " + userId + " does not belong to user "
                 + UserHandle.myUserId());

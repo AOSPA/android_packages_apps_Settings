@@ -17,11 +17,14 @@
 package com.android.settings.accessibility.textreading.ui
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint
+import com.android.settings.accessibility.TooltipSliderPreference
 import com.android.settings.accessibility.textreading.data.DisplaySizeDataStore
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settingslib.datastore.Permissions
@@ -29,10 +32,12 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.SliderPreference
+import com.google.android.setupcompat.util.WizardManagerHelper
 import com.google.common.truth.Truth.assertThat
 import org.junit.Assume.assumeTrue
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 
 /** Test for [DisplaySizePreference]. */
@@ -89,6 +94,24 @@ class DisplaySizePreferenceTest {
             .isEqualTo(context.getString(R.string.screen_zoom_short_summary))
         assertThat(sliderPreference.key).isEqualTo(DisplaySizePreference.KEY)
         assertThat(sliderPreference.value).isEqualTo(dataStore.displaySizeData.value.currentIndex)
+    }
+
+    @Test
+    fun createWidget_notInSetupWizard_returnsSliderPreference() {
+        val widget = preference.createWidget(context)
+
+        assertThat(widget).isInstanceOf(SliderPreference::class.java)
+        assertThat(widget).isNotInstanceOf(TooltipSliderPreference::class.java)
+    }
+
+    @Test
+    fun createWidget_inSetupWizard_returnsTooltipSliderPreference() {
+        val intent = Intent().apply { putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true) }
+        val activity = Robolectric.buildActivity(Activity::class.java, intent).setup().get()
+
+        val widget = preference.createWidget(activity)
+
+        assertThat(widget).isInstanceOf(TooltipSliderPreference::class.java)
     }
 
     @Test
