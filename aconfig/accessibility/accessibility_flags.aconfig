@@ -28,6 +28,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_a11y_service_detail"
+  namespace: "accessibility"
+  description: "Migrate accessibility service screen to the Catalyst infrastructure"
+  bug: "337243808"
+}
+
+flag {
   name: "catalyst_dark_ui_mode"
   namespace: "accessibility"
   description: "Migrate dark mode screen to the Catalyst infrastructure"

@@ -77,10 +77,7 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        if (android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
-            super.onCreate(savedInstanceState);
-        }
+        super.onCreate(savedInstanceState);
     }
 
     @NonNull

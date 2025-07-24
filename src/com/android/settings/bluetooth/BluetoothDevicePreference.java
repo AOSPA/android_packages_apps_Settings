@@ -50,7 +50,6 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.annotation.Retention;
@@ -450,21 +449,19 @@ Pair<Drawable, String> pair = mCachedDevice.getDrawableWithDescription();
             mCachedDevice.connect();
         } else if (bondState == BluetoothDevice.BOND_NONE) {
             var unused = ThreadUtils.postOnBackgroundThread(() -> {
-                if (Flags.enableTemporaryBondDevicesUi()) {
-                    if (BluetoothUtils.isBroadcasting(mLocalBtManager)) {
-                        metricsFeatureProvider.action(context,
-                                SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR_IN_AUDIO_SHARING);
-                    }
-                    if (Utils.shouldBlockPairingInAudioSharing(mLocalBtManager)) {
-                        context.getMainExecutor().execute(() ->
-                                mBlockPairingDialog =
-                                        Utils.showBlockPairingDialog(context, mBlockPairingDialog,
-                                                mLocalBtManager));
-                        metricsFeatureProvider.action(context,
-                                SettingsEnums
-                                        .ACTION_SETTINGS_BLUETOOTH_PAIR_BLOCKED_IN_AUDIO_SHARING);
-                        return;
-                    }
+                if (BluetoothUtils.isBroadcasting(mLocalBtManager)) {
+                    metricsFeatureProvider.action(context,
+                            SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR_IN_AUDIO_SHARING);
+                }
+                if (Utils.shouldBlockPairingInAudioSharing(mLocalBtManager)) {
+                    context.getMainExecutor().execute(() ->
+                            mBlockPairingDialog =
+                                    Utils.showBlockPairingDialog(context, mBlockPairingDialog,
+                                            mLocalBtManager));
+                    metricsFeatureProvider.action(context,
+                            SettingsEnums
+                                    .ACTION_SETTINGS_BLUETOOTH_PAIR_BLOCKED_IN_AUDIO_SHARING);
+                    return;
                 }
                 metricsFeatureProvider.action(context,
                         SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR);

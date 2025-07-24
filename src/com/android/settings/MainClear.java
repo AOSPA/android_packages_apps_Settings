@@ -562,9 +562,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                     titleText.setText(devicePolicyManager.getResources().getString(
                             WORK_CATEGORY_HEADER, () -> getString(
                                     com.android.settingslib.R.string.category_work)));
-                } else if (android.os.Flags.allowPrivateProfile()
-                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                        && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                } else if (android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
                         && userInfo.isPrivateProfile()) {
                     titleText.setText(devicePolicyManager.getResources().getString(
                             PRIVATE_CATEGORY_HEADER, () -> getString(

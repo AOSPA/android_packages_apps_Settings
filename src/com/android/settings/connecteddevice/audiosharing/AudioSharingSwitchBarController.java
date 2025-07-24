@@ -505,9 +505,15 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
      * Initialize the controller.
      *
      * @param fragment The fragment to host the {@link AudioSharingSwitchBarController} dialog.
+     * @param needHandleIntent Indicates if need to handle intent to start sharing.
+     *                         When screen rotates, the controller will be re-created, this param
+     *                         is set false to avoid the intent being re-handled unexpectedly.
      */
-    public void init(@NonNull Fragment fragment) {
+    public void init(@NonNull Fragment fragment, boolean needHandleIntent) {
         this.mFragment = fragment;
+        if (!needHandleIntent) {
+            mIntentHandleStage.set(StartIntentHandleStage.UNSUPPORTED.getId());
+        }
     }
 
     /** Handle auto add source to the just paired device in share then pair flow. */
@@ -956,7 +962,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     private enum StartIntentHandleStage {
         TO_HANDLE(0),
         HANDLE_AUTO_ADD(1),
-        HANDLED(2);
+        HANDLED(2),
+        UNSUPPORTED(3);
 
         private final int mId;
 

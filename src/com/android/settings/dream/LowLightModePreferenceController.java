@@ -78,7 +78,9 @@ public class LowLightModePreferenceController extends TogglePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return lowLightDreamBehavior() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return lowLightDreamBehavior()
+                && !DreamUtils.getLowLightBehaviors(mContext.getResources()).isEmpty()
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

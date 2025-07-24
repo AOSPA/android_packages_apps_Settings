@@ -17,6 +17,7 @@ package com.android.settings.network;
 
 import static android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED;
 import static android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED;
+import static android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -26,6 +27,7 @@ import android.provider.Settings;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -65,7 +67,11 @@ public class AdaptiveConnectivitySettings extends DashboardFragment {
   public void onCreatePreferences(@NonNull Bundle savedInstanceState, @NonNull String rootKey) {
     Log.i("Settings", "onCreatePreferences");
     super.onCreatePreferences(savedInstanceState, rootKey);
-    if (Flags.enableNestedToggleSwitches() && !isCatalystEnabled()) {
+    if (Flags.enableNestedToggleSwitches()) {
+      Preference legacyAdaptiveConnPref = findPreference(ADAPTIVE_CONNECTIVITY_ENABLED);
+      if (legacyAdaptiveConnPref != null) {
+        legacyAdaptiveConnPref.setVisible(false);
+      }
       setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED);
       setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED);
     }

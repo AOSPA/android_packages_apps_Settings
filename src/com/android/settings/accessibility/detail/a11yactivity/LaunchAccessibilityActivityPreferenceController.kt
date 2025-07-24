@@ -31,6 +31,7 @@ import com.android.settings.accessibility.AccessibilityStatsLogUtils
 import com.android.settings.core.BasePreferenceController
 import com.android.settingslib.widget.ButtonPreference
 
+// LINT.IfChange
 class LaunchAccessibilityActivityPreferenceController(context: Context, prefKey: String) :
     BasePreferenceController(context, prefKey) {
     private val TAG = "LaunchAccessibilityActivity"
@@ -55,17 +56,22 @@ class LaunchAccessibilityActivityPreferenceController(context: Context, prefKey:
                     R.string.accessibility_service_primary_open_title,
                     shortcutInfo?.activityInfo?.loadLabel(mContext.packageManager),
                 )
-            setOnClickListener(object : View.OnClickListener {
-                override fun onClick(view: View?) {
-                    if (view == null) return
-                    AccessibilityStatsLogUtils.logAccessibilityServiceEnabled(componentName, true)
-                    launchShortcutTargetActivity(
-                        view.context,
-                        view.context.displayId,
-                        componentName,
-                    )
+            setOnClickListener(
+                object : View.OnClickListener {
+                    override fun onClick(view: View?) {
+                        if (view == null) return
+                        AccessibilityStatsLogUtils.logAccessibilityServiceEnabled(
+                            componentName,
+                            true,
+                        )
+                        launchShortcutTargetActivity(
+                            view.context,
+                            view.context.displayId,
+                            componentName,
+                        )
+                    }
                 }
-            })
+            )
         }
     }
 
@@ -88,3 +94,4 @@ class LaunchAccessibilityActivityPreferenceController(context: Context, prefKey:
         }
     }
 }
+// LINT.ThenChange(ui/LaunchA11yActivityPreference.kt)

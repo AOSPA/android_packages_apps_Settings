@@ -34,6 +34,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
@@ -58,6 +59,7 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 @SearchIndexable
 public class SystemNavigationGestureSettings extends RadioButtonPickerFragment implements
         HelpResourceProvider {
@@ -216,6 +218,11 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         return true;
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return SystemNavigationGestureScreen.KEY;
+    }
+
     static void migrateOverlaySensitivityToSettings(Context context,
             IOverlayManager overlayManager) {
         if (!SystemNavigationPreferenceController.isGestureNavigationEnabled(context)) {
@@ -335,3 +342,4 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         return R.string.help_uri_default;
     }
 }
+// LINT.ThenChange(SystemNavigationGestureScreen.kt)

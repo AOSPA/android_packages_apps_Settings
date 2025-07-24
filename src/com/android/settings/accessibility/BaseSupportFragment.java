@@ -37,8 +37,6 @@ import com.android.settings.accessibility.actionbar.DisabilitySupportMenuControl
 import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.accessibility.actionbar.SurveyMenuController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.overlay.SurveyFeatureProvider;
 
 /**
  * Base fragment for dashboard style UI containing support-related items.
@@ -139,20 +137,19 @@ public abstract class BaseSupportFragment extends DashboardFragment {
             return;
         }
 
+        final SurveyManager surveyManager = new SurveyManager(this, context,
+                surveyKey, getMetricsCategory());
+
         // Handle direct survey triggers; no need to initialize survey menu.
         final Intent intent = getIntent();
         if (intent != null
                 && intent.getStringExtra(EXTRA_SOURCE) != null
                 && TextUtils.equals(intent.getStringExtra(EXTRA_SOURCE), SOURCE_START_SURVEY)) {
-            final SurveyFeatureProvider surveyFeatureProvider =
-                    FeatureFactory.getFeatureFactory().getSurveyFeatureProvider(context);
-            if (surveyFeatureProvider != null) {
-                surveyFeatureProvider.sendActivityIfAvailable(surveyKey);
-            }
+            surveyManager.startSurvey();
             return;
         }
 
-        SurveyMenuController.init(this, context, surveyKey, getFeedbackCategory());
+        SurveyMenuController.init(this, surveyManager);
     }
 
     private void handleFeedbackFlow() {

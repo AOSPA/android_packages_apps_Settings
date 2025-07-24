@@ -82,7 +82,6 @@ class AccessibilityServiceWarningDialogFragmentTest {
 
     @Before
     fun setUp() {
-        AccessibilityRepositoryProvider.resetInstanceForTesting()
         shadowAccessibilityManager.setInstalledAccessibilityServiceList(listOf(serviceInfo))
         fragmentScenario = launchFragment(themeResId = androidx.appcompat.R.style.Theme_AppCompat)
         fragmentScenario.onFragment { frag ->
@@ -97,6 +96,7 @@ class AccessibilityServiceWarningDialogFragmentTest {
 
     @After
     fun cleanUp() {
+        AccessibilityRepositoryProvider.resetInstanceForTesting()
         fragmentScenario.close()
     }
 

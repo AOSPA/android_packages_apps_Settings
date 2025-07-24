@@ -83,9 +83,7 @@ import com.android.settings.biometrics.combination.CombinedBiometricSettings;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.biometrics.fingerprint2.ui.settings.fragment.FingerprintSettingsV2Fragment;
-import com.android.settings.bluetooth.BluetoothBroadcastDialog;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
-import com.android.settings.bluetooth.BluetoothFindBroadcastsFragment;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bugreporthandler.BugReportHandlerPicker;
 import com.android.settings.communal.CommunalDashboardFragment;
@@ -379,8 +377,6 @@ public class SettingsGateway {
             LockScreenNotificationsPreferencePageFragment.class.getName(),
             MemtagPage.class.getName(),
             BluetoothDeviceDetailsFragment.class.getName(),
-            BluetoothBroadcastDialog.class.getName(),
-            BluetoothFindBroadcastsFragment.class.getName(),
             StylusUsiDetailsFragment.class.getName(),
             DataUsageList.class.getName(),
             ToggleBackupSettingFragment.class.getName(),

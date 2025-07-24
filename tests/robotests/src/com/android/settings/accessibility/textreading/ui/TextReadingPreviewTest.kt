@@ -18,7 +18,6 @@ package com.android.settings.accessibility.textreading.ui
 
 import android.content.Context
 import android.view.View
-import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.accessibility.TextReadingPreviewPreference
@@ -29,11 +28,13 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.argumentCaptor
@@ -62,11 +63,13 @@ class TextReadingPreviewTest {
         )
 
     private val previewMetadata = TextReadingPreview(displaySizeDataFlow, fontSizeDataFlow)
-    private val testDispatcher = StandardTestDispatcher()
+    private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
 
-    private val preferenceManager = PreferenceManager(context)
-    private val preferenceScreen = preferenceManager.createPreferenceScreen(context)
+    @After
+    fun cleanUp() {
+        testScope.cancel()
+    }
 
     @Test
     fun getKey() {

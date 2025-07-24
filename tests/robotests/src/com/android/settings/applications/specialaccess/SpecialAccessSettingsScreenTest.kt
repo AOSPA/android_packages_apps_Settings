@@ -16,11 +16,15 @@
 
 package com.android.settings.applications.specialaccess
 
+import androidx.lifecycle.LifecycleOwner
 import com.android.settings.Settings
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.robolectric.annotation.Config
+import org.robolectric.annotation.Implementation
+import org.robolectric.annotation.Implements
 
 class SpecialAccessSettingsScreenTest : SettingsCatalystTestCase() {
 
@@ -41,4 +45,15 @@ class SpecialAccessSettingsScreenTest : SettingsCatalystTestCase() {
         assertThat(underTest.component?.className)
             .isEqualTo(Settings.SpecialAccessSettingsActivity::class.java.getName())
     }
+
+    @Test
+    @Config(shadows = [ShadowDataSaverController::class])
+    override fun migration() {
+        super.migration()
+    }
+}
+
+@Implements(DataSaverController::class)
+class ShadowDataSaverController {
+    @Implementation fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {}
 }

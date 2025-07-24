@@ -19,6 +19,10 @@ import android.content.res.Resources;
 
 import com.android.settings.R;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * A collection of shared utility methods to work with dream settings.
  */
@@ -47,5 +51,22 @@ public class DreamUtils {
         }
 
         return options;
+    }
+
+    /**
+     * Returns the intersection between the supported and available low light display behaviors.
+     * Supported behaviors is defined as the set of low light display behaviors that the device has
+     * declared is available. Available behaviors is defined as the set of low light behaviors the
+     * platform offers. Note that the supported list is not used directly in case the available
+     * options is more restrictive or the values do not exist.
+     */
+    protected static Set<String> getLowLightBehaviors(Resources resources) {
+        final Set<String> values = new HashSet<>(Arrays.asList(
+                resources.getStringArray(R.array.low_light_display_behavior_supported_values)));
+
+        values.retainAll(Set.of(
+                        resources.getStringArray(R.array.low_light_display_behavior_values)));
+
+        return values;
     }
 }

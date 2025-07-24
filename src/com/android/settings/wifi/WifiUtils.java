@@ -358,7 +358,8 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
      */
     public static boolean isNetworkEditable(
             @NonNull WifiEntry wifiEntry, @NonNull Context context) {
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()) {
+        if (!com.android.settings.connectivity.Flags.wifiMultiuser()
+                || wifiEntry.isModifiableByOtherUsers()) {
             return true;
         }
 

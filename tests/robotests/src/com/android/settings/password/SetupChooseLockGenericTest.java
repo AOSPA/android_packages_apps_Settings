@@ -34,6 +34,7 @@ import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -208,6 +209,32 @@ public class SetupChooseLockGenericTest {
                 supportFingerprint);
         assertThat(fragment.getBiometricsPreferenceTitle(ScreenLockType.PASSWORD)).doesNotContain(
                 supportFace);
+    }
+
+    @Test
+    public void setupChooseLockGenericAddGlifLayoutForExpressive() {
+        ShadowSettingsThemeHelper.setExpressiveTheme(true);
+        Intent intent = new Intent("com.android.settings.SETUP_LOCK_SCREEN");
+        intent.putExtra(EXTRA_IS_SETUP_FLOW, true);
+        intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_HIGH);
+        SetupChooseLockGeneric activity =
+                Robolectric.buildActivity(SetupChooseLockGeneric.class, intent).create().get();
+
+        final FrameLayout glifLayout = (FrameLayout) activity.findViewById(R.id.main_content);
+        assertThat(glifLayout).isNotNull();
+    }
+
+    @Test
+    public void setupChooseLockGenericAddGlifLayoutForNonExpressive() {
+        ShadowSettingsThemeHelper.setExpressiveTheme(false);
+        Intent intent = new Intent("com.android.settings.SETUP_LOCK_SCREEN");
+        intent.putExtra(EXTRA_IS_SETUP_FLOW, true);
+        intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_HIGH);
+        SetupChooseLockGeneric activity =
+                Robolectric.buildActivity(SetupChooseLockGeneric.class, intent).create().get();
+
+        final FrameLayout glifLayout = (FrameLayout) activity.findViewById(R.id.main_content);
+        assertThat(glifLayout).isNotNull();
     }
 
     private SetupChooseLockGenericFragment getFragmentOfSetupChooseLockGeneric(

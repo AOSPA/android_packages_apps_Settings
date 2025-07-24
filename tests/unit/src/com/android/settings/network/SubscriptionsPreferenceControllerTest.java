@@ -16,10 +16,12 @@
 
 package com.android.settings.network;
 
+import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
 import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GOOD;
 import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GREAT;
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
+import static com.android.systemui.Flags.FLAG_STATUS_BAR_INFLATE_CARRIER_MERGED;
 import static com.android.wifitrackerlib.WifiEntry.WIFI_LEVEL_MAX;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -43,9 +45,12 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.wifi.WifiManager;
 import android.os.Looper;
+import android.os.PersistableBundle;
 import android.os.UserManager;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.telephony.AccessNetworkConstants;
+import android.telephony.CarrierConfigManager;
 import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
@@ -72,6 +77,7 @@ import com.android.settingslib.mobile.MobileMappings;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -85,6 +91,9 @@ public class SubscriptionsPreferenceControllerTest {
     private static final String KEY = "preference_group";
     private static final int SUB_ID = 1;
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
+
     @Mock
     private UserManager mUserManager;
     @Mock
@@ -95,6 +104,8 @@ public class SubscriptionsPreferenceControllerTest {
     private TelephonyManager mTelephonyManager;
     @Mock
     private TelephonyManager mTelephonyManagerForSub;
+    @Mock
+    public CarrierConfigManager mCarrierConfigManager;
     @Mock
     private Network mActiveNetwork;
     @Mock
@@ -124,6 +135,7 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Before
     public void setUp() {
+        mSetFlagsRule.disableFlags(FLAG_STATUS_BAR_INFLATE_CARRIER_MERGED);
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         if (Looper.myLooper() == null) {
@@ -149,6 +161,12 @@ public class SubscriptionsPreferenceControllerTest {
         when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         when(mLifecycleOwner.getLifecycle()).thenReturn(mLifecycleRegistry);
         when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
+
+        when(mContext.getSystemService(CarrierConfigManager.class))
+                .thenReturn(mCarrierConfigManager);
+        PersistableBundle carrierConfig = new PersistableBundle();
+        carrierConfig.putBoolean(CarrierConfigManager.KEY_INFLATE_SIGNAL_STRENGTH_BOOL, false);
+        when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(carrierConfig);
 
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
@@ -571,6 +589,28 @@ public class SubscriptionsPreferenceControllerTest {
         mController.getIcon(SUB_ID);
 
         verify(sInjector).getIcon(any(), eq(WIFI_LEVEL_MAX), anyInt(), anyBoolean(), anyBoolean());
+    }
+
+    @Test
+    @UiThreadTest
+    public void getIcon_carrierNetworkIsActive_useCarrierNetworkLevelAndInflate() {
+        mSetFlagsRule.enableFlags(FLAG_STATUS_BAR_INFLATE_CARRIER_MERGED);
+        PersistableBundle carrierConfig = new PersistableBundle();
+        carrierConfig.putBoolean(CarrierConfigManager.KEY_INFLATE_SIGNAL_STRENGTH_BOOL, true);
+        when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(carrierConfig);
+        // Fake mobile data not active and level is SIGNAL_STRENGTH_GOOD(3)
+        mNetworkRegistrationInfo = createNetworkRegistrationInfo(false /* dateState */);
+        when(mServiceState.getNetworkRegistrationInfo(anyInt(), anyInt()))
+                .thenReturn(mNetworkRegistrationInfo);
+        when(mSignalStrength.getLevel()).thenReturn(SIGNAL_STRENGTH_GOOD);
+        // Fake carrier network active and level is WIFI_LEVEL_MAX(4)
+        when(mWifiPickerTrackerHelper.isCarrierNetworkActive()).thenReturn(true);
+        when(mWifiPickerTrackerHelper.getCarrierNetworkLevel()).thenReturn(WIFI_LEVEL_MAX);
+
+        mController.getIcon(SUB_ID);
+
+        verify(sInjector).getIcon(any(), eq(WIFI_LEVEL_MAX + 1), eq(WIFI_LEVEL_MAX + 2),
+                anyBoolean(), anyBoolean());
     }
 
     @Test

@@ -15,14 +15,24 @@
  */
 package com.android.settings.supervision
 
+import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
 import android.app.role.RoleManager.ROLE_SUPERVISION
+import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
 import android.app.supervision.SupervisionManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings.Secure.USER_SETUP_COMPLETE
+import android.provider.Settings.Secure.getInt
+import android.provider.Settings.SettingNotFoundException
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
+import com.android.settings.supervision.EnableSupervisionDialogFragment.Companion.DIALOG_DISMISSED
+import com.android.settings.supervision.EnableSupervisionDialogFragment.Companion.DIALOG_NEGATIVE_BUTTON_CLICKED
+import com.android.settings.supervision.EnableSupervisionDialogFragment.Companion.DIALOG_POSITIVE_BUTTON_CLICKED
 import com.android.settingslib.supervision.SupervisionLog.TAG
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.launch
@@ -39,34 +49,77 @@ class EnableSupervisionActivity : FragmentActivity() {
 
         val packageName = callingPackage
         if (packageName == null) {
-            Log.w(TAG, "Calling package is null. Finishing activity.")
+            Log.w(TAG, "Calling package is null. Cannot proceed with supervision setup.")
             setResult(RESULT_CANCELED)
             finish()
             return
         }
 
-        lifecycleScope.launch {
-            if (grantSupervisionRole(packageName)) {
-                val supervisionManager = getSystemService(SupervisionManager::class.java)
-                if (supervisionManager == null) {
-                    Log.w(TAG, "SupervisionManager is null. Finishing activity.")
-                    setResult(RESULT_CANCELED)
-                }
-                supervisionManager.isSupervisionEnabled = true
-                setResult(RESULT_OK)
-            } else {
-                Log.w(TAG, "Caller cannot enable supervision. Finishing activity.")
-                setResult(RESULT_CANCELED)
-            }
-            finish()
+        if (canSkipUserConfirmation(packageName)) {
+            enableSupervisionAndFinish()
+        } else {
+            requestSupervision(savedInstanceState)
         }
     }
 
-    suspend fun grantSupervisionRole(packageName: String): Boolean {
+    /**
+     * Whether explicit user confirmation can be skipped when enabling supervision.
+     *
+     * Explicit user confirmation can be skipped if any of the following conditions are [true]:
+     *
+     * The user has not yet completed the user setup flow. The calling package holds the
+     * [ROLE_SYSTEM_SUPERVISION] role and is the profile owner.
+     *
+     * @return [true] if explicit user confirmation can be skipped; [false] otherwise.
+     */
+    @VisibleForTesting
+    fun canSkipUserConfirmation(packageName: String): Boolean {
+        val isCallerSystemSupervision = packageName == systemSupervisionPackageName
+        val hasUserSetupCompleted = hasUserSetupCompleted()
+        val isCallerProfileOwner = isProfileOwner(packageName)
+        return !hasUserSetupCompleted ||
+            (isCallerSystemSupervision && isCallerProfileOwner) ||
+            canBypassConfirmationDialog()
+    }
+
+    fun canBypassConfirmationDialog(): Boolean {
+        // TODO: b/415102122 - Update to check specifically for 36.1+ once it's available in
+        // VERSION_CODES_FULL.
+        return Build.VERSION.SDK_INT == Build.VERSION_CODES.BAKLAVA
+    }
+
+    private fun hasUserSetupCompleted(): Boolean {
+        return try {
+            getInt(contentResolver, USER_SETUP_COMPLETE) != 0
+        } catch (_: SettingNotFoundException) {
+            false
+        }
+    }
+
+    private suspend fun enableSupervision(packageName: String): Boolean {
+        if (!grantSupervisionRole(packageName)) {
+            Log.w(
+                TAG,
+                "Failed to grant supervision role for $packageName. Cannot enable supervision.",
+            )
+            return false
+        }
+
+        val supervisionManager = getSystemService(SupervisionManager::class.java)
+        if (supervisionManager == null) {
+            Log.w(TAG, "SupervisionManager is null or not accessible on this device.")
+            return false
+        }
+
+        supervisionManager.setSupervisionEnabled(true)
+        return true
+    }
+
+    private suspend fun grantSupervisionRole(packageName: String): Boolean {
         val executor = ContextCompat.getMainExecutor(this)
         val roleManager = getSystemService(RoleManager::class.java)
         if (roleManager == null) {
-            Log.w(TAG, "RoleManager is null. Finishing activity.")
+            Log.w(TAG, "RoleManager is null. Cannot grant supervision role.")
             return false
         }
         return suspendCoroutine { continuation ->
@@ -77,8 +130,84 @@ class EnableSupervisionActivity : FragmentActivity() {
                 user,
                 executor,
             ) { isSuccessful ->
+                if (!isSuccessful) {
+                    Log.w(TAG, "Failed to add ROLE_SUPERVISION for package: $packageName.")
+                }
                 continuation.resumeWith(Result.success(isSuccessful))
             }
         }
+    }
+
+    fun requestSupervision(savedInstanceState: Bundle?) {
+        // Only show the dialog if it hasn't been shown before.
+        // The FragmentManager will reattach the existing dialog fragment if it exists.
+        if (savedInstanceState == null) {
+            setFragmentResultListeners()
+
+            val message = getIntent().getCharSequenceExtra(EXTRA_SUPERVISION_DIALOG_EXPLANATION)
+            val appName = getIntent().getCharSequenceExtra(EXTRA_SUPERVISION_APP_NAME)
+
+            val dialog = EnableSupervisionDialogFragment.newInstance(message, appName)
+            dialog.show(supportFragmentManager, "enable_supervision_dialog")
+        }
+    }
+
+    private fun setFragmentResultListeners() {
+        supportFragmentManager.setFragmentResultListener(DIALOG_POSITIVE_BUTTON_CLICKED, this) {
+            _,
+            _ ->
+            enableSupervisionAndFinish()
+        }
+        supportFragmentManager.setFragmentResultListener(DIALOG_NEGATIVE_BUTTON_CLICKED, this) {
+            _,
+            _ ->
+            setResult(RESULT_CANCELED)
+            finish()
+        }
+        supportFragmentManager.setFragmentResultListener(DIALOG_DISMISSED, this) { _, _ ->
+            setResult(RESULT_CANCELED)
+            if (!isFinishing) {
+                finish()
+            }
+        }
+    }
+
+    private fun isProfileOwner(packageName: String): Boolean {
+        val devicePolicyManager = getSystemService(DevicePolicyManager::class.java)
+        if (devicePolicyManager == null) return false
+        return devicePolicyManager.isProfileOwnerApp(packageName)
+    }
+
+    private fun enableSupervisionAndFinish() {
+        val packageName = callingPackage
+        if (packageName == null) {
+            Log.w(TAG, "Calling package is null. Cannot proceed with supervision setup.")
+            setResult(RESULT_CANCELED)
+            finish()
+            return
+        }
+
+        lifecycleScope.launch {
+            if (enableSupervision(packageName)) {
+                Log.i(TAG, "Supervision successfully enabled for $packageName.")
+                setResult(RESULT_OK)
+            } else {
+                Log.e(TAG, "Failed to enable supervision for $packageName.")
+                setResult(RESULT_CANCELED)
+            }
+            finish()
+        }
+    }
+
+    companion object {
+        /**
+         * Message provided by the supervision app to be displayed as the dialog's first paragraph
+         */
+        const val EXTRA_SUPERVISION_DIALOG_EXPLANATION = "supervision_dialog_explanation"
+        /**
+         * The name of the app proposing to supervise the device. This is used in the dialog's
+         * supervision warning paragraph.
+         */
+        const val EXTRA_SUPERVISION_APP_NAME = "supervision_app_name"
     }
 }

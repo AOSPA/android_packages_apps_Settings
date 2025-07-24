@@ -233,8 +233,8 @@ public class MyDeviceInfoFragment extends DashboardFragment
         TelephonyManager telephonyManager = appContext.getSystemService(TelephonyManager.class);
         int phoneCount = telephonyManager.getPhoneCount();
         if (Utils.isSupportCTPA(appContext) && phoneCount >= 2) {
-            final int slot0PhoneType = telephonyManager.getCurrentPhoneTypeForSlot(0);
-            final int slot1PhoneType = telephonyManager.getCurrentPhoneTypeForSlot(1);
+            final int slot0PhoneType = telephonyManager.getCurrentPhoneType();
+            final int slot1PhoneType = telephonyManager.getCurrentPhoneType();
             if (PHONE_TYPE_CDMA != slot0PhoneType && PHONE_TYPE_CDMA != slot1PhoneType) {
                 imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY + (phoneCount + 1));
             } else if (PHONE_TYPE_CDMA == slot0PhoneType){

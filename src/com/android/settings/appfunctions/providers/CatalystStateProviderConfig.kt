@@ -37,6 +37,7 @@ import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.dream.ScreensaverScreen
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummaryScreen
+import com.android.settings.gestures.SystemNavigationGestureScreen
 import com.android.settings.language.LanguageAndRegionScreen
 import com.android.settings.location.LocationScreen
 import com.android.settings.location.RecentLocationAccessScreen
@@ -211,6 +212,11 @@ fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = ScreensaverScreen.KEY,
+            category = setOf(DeviceStateCategory.UNCATEGORIZED),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = SystemNavigationGestureScreen.KEY,
             category = setOf(DeviceStateCategory.UNCATEGORIZED),
         ),
     )

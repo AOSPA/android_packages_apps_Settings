@@ -132,8 +132,8 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
             return;
         }
 
-        ApplicationsState.AppFilter filter = android.multiuser.Flags.enablePrivateSpaceFeatures()
-                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+        ApplicationsState.AppFilter filter =
+                android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
                 ? ApplicationsState.FILTER_ENABLED_NOT_QUIET
                 : ApplicationsState.FILTER_ALL_ENABLED;
         // We initiate a rebuild in the background here. Once the rebuild is completed,
