@@ -65,6 +65,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.ListenableFuture;
 
 import kotlin.Unit;
 
@@ -127,6 +128,8 @@ public class NetworkSelectSettings extends DashboardFragment implements
     private NetworkSelectRepository mNetworkSelectRepository;
     private NetworkScanRepository.NetworkScanState mState =
             NetworkScanRepository.NetworkScanState.ACTIVE;
+
+    private ListenableFuture mSelectNetworkFuture;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -318,7 +321,7 @@ public class NetworkSelectSettings extends DashboardFragment implements
         enablePreferenceScreen(false);
 
         final OperatorInfo operator = mSelectedPreference.getOperatorInfo();
-        ThreadUtils.postOnBackgroundThread(() -> {
+        mSelectNetworkFuture = ThreadUtils.postOnBackgroundThread(() -> {
             final Message msg = mHandler.obtainMessage(
                     EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE);
             msg.obj = mTelephonyManager.setNetworkSelectionModeManual(
@@ -602,7 +605,11 @@ public class NetworkSelectSettings extends DashboardFragment implements
 
     @Override
     public void onDestroy() {
-        Log.d(TAG, "onDestroy()");
+        Log.d(TAG, "onDestroy(): mSelectNetworkFuture = " + mSelectNetworkFuture);
+        if (mSelectNetworkFuture != null && !mSelectNetworkFuture.isDone()) {
+            Log.d(TAG, "onDestroy(): call future cancel");
+            mSelectNetworkFuture.cancel(true);
+        }
         mSubscriptionsChangeListener.stop();
         mNetworkScanExecutor.shutdown();
         super.onDestroy();
