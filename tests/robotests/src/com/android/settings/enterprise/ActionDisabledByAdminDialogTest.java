@@ -37,6 +37,7 @@ import static org.mockito.Mockito.when;
 import android.app.admin.Authority;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.EnforcingAdmin;
+import android.app.admin.SystemAuthority;
 import android.app.admin.UnknownAuthority;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -137,7 +138,7 @@ public class ActionDisabledByAdminDialogTest {
     @Test
     public void testGetAdminDetailsFromIntent_nullComponent_advancedProtection_launchesNewDialog() {
         final int userId = UserHandle.myUserId();
-        final Authority advancedProtectionAuthority = new UnknownAuthority(
+        final Authority advancedProtectionAuthority = new SystemAuthority(
                 ADVANCED_PROTECTION_SYSTEM_ENTITY);
         final EnforcingAdmin advancedProtectionEnforcingAdmin = new EnforcingAdmin("test.pkg",
                 advancedProtectionAuthority, UserHandle.of(userId), mAdminComponent);

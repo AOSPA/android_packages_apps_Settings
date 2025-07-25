@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.setGestureType;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.verify;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.hardware.input.KeyGestureEvent;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.view.InputDevice;
@@ -34,6 +36,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
 import com.android.settings.testutils.shadow.ShadowSystemSettings;
@@ -104,5 +107,14 @@ public class TouchpadThreeFingerTapPreferenceControllerTest {
         verify(mFeatureFactory.metricsFeatureProvider).action(
                     any(), eq(SettingsEnums.ACTION_TOUCHPAD_THREE_FINGER_TAP_CUSTOMIZATION_CHANGED),
                     eq(customizationValue));
+    }
+
+    @Test
+    public void getSummary_goHome() {
+        setGestureType(mContext.getContentResolver(), KeyGestureEvent.KEY_GESTURE_TYPE_HOME);
+
+        String expected = mContext.getString(R.string.three_finger_tap_go_home);
+
+        assertEquals(expected, mController.getSummary().toString());
     }
 }

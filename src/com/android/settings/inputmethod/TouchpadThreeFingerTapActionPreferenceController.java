@@ -22,7 +22,9 @@ import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.SHARE
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.TARGET_ACTION_URI;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.TRIGGER;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.getCurrentGestureType;
+import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.getDefaultAssistantTitle;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.getGestureTypeByPrefKey;
+import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.getLabel;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.getLaunchingAppComponentName;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.setGestureType;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.setLaunchAppAsGestureType;
@@ -32,7 +34,6 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.hardware.input.InputGestureData;
@@ -42,8 +43,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -70,7 +69,6 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
 
     public static final String SET_GESTURE = "set_gesture_to_launch_app";
 
-    private static final String TAG = "ThreeFingerTapAction";
     private static final String ASSISTANT_KEY = "launch_gemini";
     private static final String APP_KEY = "launch_app";
 
@@ -143,7 +141,7 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
             }
             mPreference.setOnClickListener(this);
             if (touchpadSettingsDesignUpdate() && mPreferenceKey.equals(ASSISTANT_KEY)) {
-                updateDefaultAssistant(mPreference);
+                mPreference.setTitle(getDefaultAssistantTitle(mContext, mPackageManager));
             }
         }
     }
@@ -159,31 +157,6 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
             subSettingLauncher.setArguments(args);
         }
         return subSettingLauncher;
-    }
-
-    private void updateDefaultAssistant(@NonNull Preference preference) {
-        String flattened = Settings.Secure.getString(mContentResolver,
-                Settings.Secure.ASSISTANT);
-        if (flattened != null) {
-            ComponentName componentName = ComponentName.unflattenFromString(flattened);
-            CharSequence label = getLabelFromPackageName(componentName);
-            String title = mContext.getString(
-                    R.string.three_finger_tap_launch_default_assistant, label);
-            preference.setTitle(title);
-        }
-    }
-
-    private CharSequence getLabelFromPackageName(@Nullable ComponentName componentName) {
-        if (componentName != null) {
-            try {
-                ApplicationInfo appInfo = mPackageManager.getApplicationInfo(
-                        componentName.getPackageName(), /* flags= */ 0);
-                return appInfo.loadLabel(mPackageManager);
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "Package not found: " + componentName.getPackageName(), e);
-            }
-        }
-        return mContext.getString(R.string.three_finger_tap_launch_generic_assistant_name);
     }
 
     @Override
@@ -237,5 +210,18 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
         if (mPreference != null) {
             mPreference.setChecked(prefValue == currentValue);
         }
+    }
+
+    @Override
+    public @Nullable CharSequence getSummary() {
+        // We only show the summary for app selection
+        if (mPreferenceKey.equals(APP_KEY)) {
+            ComponentName componentName = getLaunchingAppComponentName(mSharedPreferences);
+            CharSequence label = getLabel(mPackageManager, componentName);
+            // Show instruction when no chosen app
+            return label == null
+                    ? mContext.getString(R.string.three_finger_tap_launch_app_summary) : label;
+        }
+        return null;
     }
 }

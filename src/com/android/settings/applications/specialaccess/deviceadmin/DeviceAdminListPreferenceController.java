@@ -167,9 +167,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
     }
 
     private boolean shouldSkipProfile(UserHandle profile) {
-        return android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
-                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+        return android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
                 && mUm.isQuietModeEnabled(profile)
                 && mUm.getUserProperties(profile).getShowInQuietMode()
                         == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN;

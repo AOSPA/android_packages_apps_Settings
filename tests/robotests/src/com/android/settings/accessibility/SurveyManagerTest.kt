@@ -32,6 +32,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
+import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.mockito.kotlin.doAnswer
@@ -96,6 +97,37 @@ class SurveyManagerTest {
         assertThat(intent.getPackage()).isEqualTo(Utils.SETTINGS_PACKAGE_NAME)
         assertThat(intent.getIntExtra(NotificationConstants.EXTRA_PAGE_ID, /* def= */ -1))
             .isEqualTo(TEST_PAGE_ID)
+    }
+
+    @Test
+    fun startSurvey_providerAvailable_sendsActivity() {
+        surveyManager.startSurvey()
+
+        verify(surveyFeatureProvider).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY)
+    }
+
+    @Test
+    fun checkSurveyAvailable_surveyAvailable_callbackInvokedWithTrue() {
+        setupSurveyAvailability(/* available= */ true)
+        var result: Boolean? = null
+        val callback = Consumer<Boolean> { available -> result = available }
+
+        surveyManager.checkSurveyAvailable(callback)
+
+        assertThat(result).isTrue()
+        verify(surveyFeatureProvider).checkSurveyAvailable(any(), anyString(), any())
+    }
+
+    @Test
+    fun checkSurveyAvailable_surveyUnavailable_callbackInvokedWithFalse() {
+        setupSurveyAvailability(/* available= */ false)
+        var result: Boolean? = null
+        val callback = Consumer<Boolean> { available -> result = available }
+
+        surveyManager.checkSurveyAvailable(callback)
+
+        assertThat(result).isFalse()
+        verify(surveyFeatureProvider).checkSurveyAvailable(any(), anyString(), any())
     }
 
     private fun setupSurveyAvailability(available: Boolean) {

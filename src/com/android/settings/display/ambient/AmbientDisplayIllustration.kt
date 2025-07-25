@@ -50,8 +50,8 @@ class AmbientDisplayIllustration(context: Context) : PreferenceMetadata, Prefere
     override fun isIndexable(context: Context) = false
 
     private fun updateImage(context: Context) {
-        val isWallpaperEnabled = storage.getBoolean(DOZE_ALWAYS_ON_WALLPAPER_ENABLED) != false
-        val isAmbientDisplayEnabled = storage.getBoolean(DOZE_ALWAYS_ON) != false
+        val isWallpaperEnabled = storage.getBoolean(DOZE_ALWAYS_ON_WALLPAPER_ENABLED) == true
+        val isAmbientDisplayEnabled = storage.getBoolean(DOZE_ALWAYS_ON) == true
         val drawable =
             when {
                 isWallpaperEnabled &&

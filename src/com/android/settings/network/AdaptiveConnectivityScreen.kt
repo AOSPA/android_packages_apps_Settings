@@ -49,10 +49,11 @@ open class AdaptiveConnectivityScreen : PreferenceScreenMixin {
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +AdaptiveConnectivityTogglePreference()
             if (Flags.enableNestedToggleSwitches()) {
                 +WifiScorerTogglePreference()
                 +AdaptiveMobileNetworkTogglePreference()
+            } else {
+                +AdaptiveConnectivityTogglePreference()
             }
         }
 

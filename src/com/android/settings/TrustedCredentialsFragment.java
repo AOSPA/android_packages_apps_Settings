@@ -124,9 +124,7 @@ public class TrustedCredentialsFragment extends ObservableFragment
 
     private boolean isBroadcastValidForAction(Intent intent) {
         String action = intent.getAction();
-        if (android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
+        if (android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
             UserHandle userHandle = intent.getParcelableExtra(Intent.EXTRA_USER, UserHandle.class);
             if (userHandle == null) {
                 Log.w(TAG, "received action " + action + " with missing user extra");
@@ -166,9 +164,7 @@ public class TrustedCredentialsFragment extends ObservableFragment
         }
 
         IntentFilter filter = new IntentFilter();
-        if (android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
+        if (android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
             filter.addAction(Intent.ACTION_PROFILE_AVAILABLE);
             filter.addAction(Intent.ACTION_PROFILE_UNAVAILABLE);
             filter.addAction(Intent.ACTION_PROFILE_ACCESSIBLE);
@@ -214,9 +210,7 @@ public class TrustedCredentialsFragment extends ObservableFragment
             return;
         }
         boolean isProfile = userInfo.isManagedProfile();
-        if (android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
+        if (android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
             isProfile |= userInfo.isPrivateProfile();
         }
         ChildAdapter adapter = mGroupAdapter.createChildAdapter(i);
@@ -376,9 +370,7 @@ public class TrustedCredentialsFragment extends ObservableFragment
             if (userInfo.isManagedProfile()) {
                 title.setText(mDevicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
                         () -> getString(com.android.settingslib.R.string.category_work)));
-            } else if (android.os.Flags.allowPrivateProfile()
-                    && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                    && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+            } else if (android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
                     && userInfo.isPrivateProfile()) {
                 title.setText(mDevicePolicyManager.getResources().getString(PRIVATE_CATEGORY_HEADER,
                         () -> getString(com.android.settingslib.R.string.category_private)));

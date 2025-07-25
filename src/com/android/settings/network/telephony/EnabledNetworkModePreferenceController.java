@@ -88,6 +88,11 @@ public class EnabledNetworkModePreferenceController extends
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
 
     private static final String LOG_TAG = "EnabledNetworkMode";
+    private static final long BITMASK_2G = TelephonyManager.NETWORK_TYPE_BITMASK_GSM
+            | TelephonyManager.NETWORK_TYPE_BITMASK_GPRS
+            | TelephonyManager.NETWORK_TYPE_BITMASK_EDGE
+            | TelephonyManager.NETWORK_TYPE_BITMASK_CDMA
+            | TelephonyManager.NETWORK_TYPE_BITMASK_1xRTT;
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
@@ -425,9 +430,14 @@ public class EnabledNetworkModePreferenceController extends
                                 CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
                 mShow4gForLTE = carrierConfig.getBoolean(
                         CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
-                mDisplay2gOptions = carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_PREFER_2G_BOOL);
 
+                long currentlyAllowedNetworkTypes =
+                        mTelephonyManager.getAllowedNetworkTypesForReason(
+                                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G);
+                boolean networkType2gEnable = (currentlyAllowedNetworkTypes & BITMASK_2G) != 0;
+                mDisplay2gOptions =
+                        carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)
+                                && networkType2gEnable;
                 if (flagHidePrefer3gItem) {
                     mDisplay3gOptions = carrierConfig.getBoolean(
                             CarrierConfigManager.KEY_PREFER_3G_VISIBILITY_BOOL);
@@ -1074,6 +1084,7 @@ public class EnabledNetworkModePreferenceController extends
     public void onSubscriptionsChanged() {
         if (mBuilder != null) {
             mBuilder.updateConfig();
+            updatePreference();
         }
     }
 

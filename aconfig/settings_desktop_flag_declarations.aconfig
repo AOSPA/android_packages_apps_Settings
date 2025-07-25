@@ -17,3 +17,10 @@ flag {
     description: "Controls whether to hide the user list in Settings for non-admins."
     bug: "406686772"
 }
+
+flag {
+    name: "show_user_details_settings_for_self"
+    namespace: "desktop_users_and_accounts"
+    description: " Show the user details settings for own account."
+    bug: "425579387"
+}

@@ -440,9 +440,7 @@ public class ChooseLockPassword extends SettingsActivity {
 
             public String getHint(Context context, boolean isAlpha, int type, ProfileType profile) {
                 if (isAlpha) {
-                    if (android.os.Flags.allowPrivateProfile()
-                            && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                            && profile.equals(ProfileType.Private)) {
+                    if (profile.equals(ProfileType.Private)) {
                         return context.getString(alphaHintForPrivateProfile);
                     } else if (type == TYPE_FINGERPRINT) {
                         return context.getString(alphaHintForFingerprint);
@@ -458,9 +456,7 @@ public class ChooseLockPassword extends SettingsActivity {
                         return context.getString(alphaHint);
                     }
                 } else {
-                    if (android.os.Flags.allowPrivateProfile()
-                            && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                            && profile.equals(ProfileType.Private)) {
+                    if (profile.equals(ProfileType.Private)) {
                         return context.getString(numericHintForPrivateProfile);
                     } else if (android.multiuser.Flags.allowSupervisingProfile()
                             && profile.equals(ProfileType.Supervising)) {
@@ -1237,9 +1233,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     /*flags=*/0).getSystemService(UserManager.class);
             if (userManager.isManagedProfile()) {
                 return ProfileType.Managed;
-            } else if (android.os.Flags.allowPrivateProfile()
-                    && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                    && userManager.isPrivateProfile()) {
+            } else if (userManager.isPrivateProfile()) {
                 return ProfileType.Private;
             } else if (android.multiuser.Flags.allowSupervisingProfile()
                     && userManager.isUserOfType(USER_TYPE_PROFILE_SUPERVISING)) {

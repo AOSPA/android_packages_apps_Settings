@@ -204,6 +204,7 @@ public class WifiUtilsTest {
         final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
         wifiConfiguration.creatorUid = 0;
         when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
+        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
 
         assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
     }
@@ -213,8 +214,21 @@ public class WifiUtilsTest {
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
         wifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(false);
         when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
         when(mUserManager.getUserCount()).thenReturn(1);
+
+        assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
+    }
+
+    @Test
+    public void isNetworkEditable_nowOwnedNetwork_multipleUser_networkModifiable() {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        final WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
+        wifiConfiguration.creatorUid = Integer.MAX_VALUE;
+        when(wifiEntry.getWifiConfiguration()).thenReturn(wifiConfiguration);
+        when(wifiEntry.isModifiableByOtherUsers()).thenReturn(true);
+        when(mUserManager.getUserCount()).thenReturn(3);
 
         assertThat(WifiUtils.isNetworkEditable(wifiEntry, mContext)).isTrue();
     }

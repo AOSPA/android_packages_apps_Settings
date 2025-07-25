@@ -80,7 +80,6 @@ import android.os.BatteryManager;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Flags;
 import android.os.IBinder;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
@@ -1426,9 +1425,7 @@ public final class Utils extends com.android.settingslib.Utils {
         for (UserHandle userHandle : profiles) {
             UserProperties userProperties = userManager.getUserProperties(userHandle);
             if (userProperties.getShowInSettings() == UserProperties.SHOW_IN_SETTINGS_SEPARATE) {
-                if (Flags.allowPrivateProfile()
-                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                        && userProperties.getShowInQuietMode()
+                if (userProperties.getShowInQuietMode()
                         == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN) {
                     if (!userManager.isQuietModeEnabled(userHandle)) {
                         return true;

@@ -244,9 +244,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
                 return WORK_TAB;
             }
             UserInfo userInfo = UserManager.get(activity).getUserInfo(userId);
-            if (Flags.allowPrivateProfile()
-                    && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                    && userInfo != null && userInfo.isPrivateProfile()) {
+            if (userInfo != null && userInfo.isPrivateProfile()) {
                 return PRIVATE_TAB;
             }
         }

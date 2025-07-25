@@ -34,7 +34,7 @@ class AmbientWallpaperPreference(context: Context) :
 
     override fun dependencies(context: Context) = arrayOf(AmbientDisplayMainSwitchPreference.KEY)
 
-    override fun isEnabled(context: Context) = dataStore.getBoolean(DOZE_ALWAYS_ON) != false
+    override fun isEnabled(context: Context) = dataStore.getBoolean(DOZE_ALWAYS_ON) == true
 
     override fun storage(context: Context) = dataStore
 

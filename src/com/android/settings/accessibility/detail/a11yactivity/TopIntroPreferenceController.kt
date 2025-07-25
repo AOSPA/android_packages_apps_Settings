@@ -23,6 +23,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.core.BasePreferenceController
 
+// LINT.IfChange
 class TopIntroPreferenceController(context: Context, prefKey: String) :
     BasePreferenceController(context, prefKey) {
     private var topIntro: CharSequence? = null
@@ -44,3 +45,4 @@ class TopIntroPreferenceController(context: Context, prefKey: String) :
         preference?.title = topIntro
     }
 }
+// LINT.ThenChange(ui/IntroPreference.kt)

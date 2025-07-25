@@ -39,6 +39,23 @@ constructor(
         featureFactory.getSurveyFeatureProvider(context)
 
     /**
+     * Triggers the survey sending process using the provided SurveyFeatureProvider.
+     *
+     * If a SurveyFeatureProvider is available, it initiates the survey activity using the feedback
+     * key. If the provider is null, this method does nothing.
+     */
+    fun startSurvey() = surveyFeatureProvider?.sendActivityIfAvailable(surveyKey)
+
+    /**
+     * Checks if a survey is available for the given host and feedback key.
+     *
+     * @param callback A Consumer that will be called with the survey availability status (true if
+     *   available, false otherwise).
+     */
+    fun checkSurveyAvailable(callback: Consumer<Boolean>) =
+        surveyFeatureProvider?.checkSurveyAvailable(lifecycleOwner, surveyKey, callback)
+
+    /**
      * Checks for survey availability and, if available, schedules a notification. This method uses
      * `SurveyFeatureProvider` to determine survey eligibility.
      */

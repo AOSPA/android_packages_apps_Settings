@@ -16,13 +16,16 @@
 package com.android.settings.supervision
 
 import android.app.KeyguardManager
+import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
 import android.app.supervision.SupervisionManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager.MATCH_ALL
 import android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS
+import android.content.res.Resources
 import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
@@ -142,4 +145,52 @@ fun Context.deleteSupervisionData(): Boolean {
     supervisionManager.setSupervisionEnabled(false)
     supervisionManager.setSupervisionRecoveryInfo(null)
     return userManager.removeUser(supervisingUser)
+}
+
+/** Checks if the current profile owner is one of the known supervision packages. */
+fun Context.isSupervisionPackageProfileOwner(): Boolean {
+    val dpm = getSystemService(DevicePolicyManager::class.java)
+    if (dpm == null) {
+        Log.e(TAG, "Can't check profile owner; DevicePolicyManager service not available.")
+        return false
+    }
+
+    val profileOwnerPackageName = dpm.profileOwner?.packageName ?: return false
+
+    val supervisedPackages =
+        listOfNotNull(
+            readDefaultSupervisionPackageNameFromResources(),
+            readSystemSupervisionPackageNameFromResources(),
+        )
+    return profileOwnerPackageName in supervisedPackages
+}
+
+/** Reads the default supervision package name from resources. Returns null in case of error. */
+fun Context.readDefaultSupervisionPackageNameFromResources(): String? {
+    return try {
+        resources
+            .getString(com.android.internal.R.string.config_defaultSupervisionProfileOwnerComponent)
+            .let { ComponentName.unflattenFromString(it)?.packageName }
+            .also { packageName ->
+                if (packageName == null) {
+                    Log.e(
+                        TAG,
+                        "Default supervision package name not defined or invalid in resources.",
+                    )
+                }
+            }
+    } catch (e: Resources.NotFoundException) {
+        Log.e(TAG, "Could not find defaultSupervisionProfileOwnerComponent resource.", e)
+        null
+    }
+}
+
+/** Reads the system supervision package name from resources. Returns null in case of error. */
+fun Context.readSystemSupervisionPackageNameFromResources(): String? {
+    return try {
+        resources.getString(com.android.internal.R.string.config_systemSupervision)
+    } catch (e: Resources.NotFoundException) {
+        Log.e(TAG, "Could not find systemSupervision resource.", e)
+        null
+    }
 }
