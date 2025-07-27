@@ -33,16 +33,18 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.core.util.Consumer;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.testing.EmptyFragmentActivity;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.SurveyManager;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -52,12 +54,14 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+
+import java.util.List;
 
 /** Tests for {@link SurveyMenuController} */
 @Config(shadows = {
@@ -70,13 +74,11 @@ public class SurveyMenuControllerTest {
 
     @Rule
     public final MockitoRule mMocks = MockitoJUnit.rule();
-    @Rule
-    public ActivityScenarioRule<EmptyFragmentActivity> mActivityScenario =
-            new ActivityScenarioRule<>(EmptyFragmentActivity.class);
 
-    private FragmentActivity mActivity;
+    private final Context mContext = ApplicationProvider.getApplicationContext();
     private InstrumentedPreferenceFragment mHost;
     private SurveyFeatureProvider mSurveyFeatureProvider;
+    private SurveyManager mSurveyManager;
     @Mock
     private Lifecycle mLifecycle;
     @Mock
@@ -86,26 +88,24 @@ public class SurveyMenuControllerTest {
 
     @Before
     public void setUp() {
-        FakeFeatureFactory.setupForTest();
-        mActivityScenario.getScenario().onActivity(activity -> mActivity = activity);
+        mSurveyFeatureProvider =
+                FakeFeatureFactory.setupForTest().getSurveyFeatureProvider(mContext);
         mHost = spy(new InstrumentedPreferenceFragment() {
             @Override
             public int getMetricsCategory() {
                 return 0;
             }
         });
-        when(mHost.getActivity()).thenReturn(mActivity);
         when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
         when(mMenuItem.getItemId()).thenReturn(MenusUtils.MenuId.SEND_SURVEY.getValue());
-        mSurveyFeatureProvider =
-                FakeFeatureFactory.getFeatureFactory().getSurveyFeatureProvider(mActivity);
+        mSurveyManager = new SurveyManager(mHost, mContext, TEST_SURVEY_TRIGGER_KEY, TEST_PAGE_ID);
     }
 
     @Test
     public void init_shouldAttachToLifecycle() {
         when(mHost.getSettingsLifecycle()).thenReturn(mLifecycle);
 
-        SurveyMenuController.init(mHost, mActivity, TEST_SURVEY_TRIGGER_KEY, TEST_PAGE_ID);
+        SurveyMenuController.init(mHost, mSurveyManager);
 
         verify(mLifecycle).addObserver(any(SurveyMenuController.class));
     }
@@ -114,8 +114,7 @@ public class SurveyMenuControllerTest {
     public void init_withSurveyFeatureProvider_shouldAttachToLifecycle() {
         when(mHost.getSettingsLifecycle()).thenReturn(mLifecycle);
 
-        SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
-                TEST_PAGE_ID);
+        SurveyMenuController.init(mHost, mSurveyManager);
 
         verify(mLifecycle).addObserver(any(SurveyMenuController.class));
     }
@@ -123,8 +122,7 @@ public class SurveyMenuControllerTest {
     @Test
     public void onCreateOptionsMenu_surveyAvailable_shouldAddSurveyMenu() {
         setupSurveyAvailability(/* available= */ true);
-        SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
-                TEST_PAGE_ID);
+        SurveyMenuController.init(mHost, mSurveyManager);
 
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, /* inflater= */ null);
 
@@ -136,8 +134,7 @@ public class SurveyMenuControllerTest {
     @Test
     public void onCreateOptionsMenu_surveyUnavailable_shouldNotAddSurveyMenu() {
         setupSurveyAvailability(/* available= */ false);
-        SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
-                TEST_PAGE_ID);
+        SurveyMenuController.init(mHost, mSurveyManager);
 
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, /* inflater= */ null);
 
@@ -150,21 +147,19 @@ public class SurveyMenuControllerTest {
         when(mockActivity.getPackageName()).thenReturn(SETTINGS_PACKAGE_NAME);
         when(mHost.getActivity()).thenReturn(mockActivity);
         when(mMenuItem.getItemId()).thenReturn(MenusUtils.MenuId.SEND_SURVEY.getValue());
-        SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
-                TEST_PAGE_ID);
+        SurveyMenuController.init(mHost, mSurveyManager);
 
         mHost.getSettingsLifecycle().onOptionsItemSelected(mMenuItem);
 
         // Verify it start to send survey
         verify(mSurveyFeatureProvider).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY);
         // Verify the cancel survey notification broadcast was sent
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mockActivity).sendBroadcastAsUser(intentCaptor.capture(),
-                any(), eq(android.Manifest.permission.MANAGE_ACCESSIBILITY));
-        assertThat(intentCaptor.getValue().getAction()).isEqualTo(
-                ACTION_CANCEL_SURVEY_NOTIFICATION);
-        assertThat(intentCaptor.getValue().getPackage()).isEqualTo(SETTINGS_PACKAGE_NAME);
-        assertThat(intentCaptor.getValue().getIntExtra(EXTRA_PAGE_ID, -1)).isEqualTo(TEST_PAGE_ID);
+        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
+        assertThat(intents).hasSize(1);
+        final Intent intent = intents.getFirst();
+        assertThat(intent.getAction()).isEqualTo(ACTION_CANCEL_SURVEY_NOTIFICATION);
+        assertThat(intent.getPackage()).isEqualTo(SETTINGS_PACKAGE_NAME);
+        assertThat(intent.getIntExtra(EXTRA_PAGE_ID, /* def= */ -1)).isEqualTo(TEST_PAGE_ID);
         // Verify that menu is updated and the item is not added
         verify(mockActivity).invalidateOptionsMenu();
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, /* inflater= */ null);
@@ -173,33 +168,10 @@ public class SurveyMenuControllerTest {
 
     @Test
     public void onOptionsItemSelected_otherMenuItemSelected_shouldNotStartSurvey() {
-        SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
-                TEST_PAGE_ID);
+        SurveyMenuController.init(mHost, mSurveyManager);
         when(mMenuItem.getItemId()).thenReturn(Menu.FIRST);
 
         mHost.getSettingsLifecycle().onOptionsItemSelected(mMenuItem);
-
-        verify(mSurveyFeatureProvider, never()).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY);
-    }
-
-    @Test
-    public void startSurvey_withSurveyFeatureProvider_shouldStartSurvey() {
-        final SurveyMenuController controller =
-                SurveyMenuController.init(mHost, mSurveyFeatureProvider, TEST_SURVEY_TRIGGER_KEY,
-                        TEST_PAGE_ID);
-
-        controller.startSurvey();
-
-        verify(mSurveyFeatureProvider).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY);
-    }
-
-    @Test
-    public void startSurvey_nullSurveyFeatureProvider_shouldNotStartSurvey() {
-        final SurveyMenuController controller =
-                SurveyMenuController.init(mHost, (SurveyFeatureProvider) null,
-                        TEST_SURVEY_TRIGGER_KEY, TEST_PAGE_ID);
-
-        controller.startSurvey();
 
         verify(mSurveyFeatureProvider, never()).sendActivityIfAvailable(TEST_SURVEY_TRIGGER_KEY);
     }

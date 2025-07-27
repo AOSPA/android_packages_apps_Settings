@@ -108,6 +108,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkSettings extends AbstractMobileNetworkSettings implements
         MobileNetworkRepository.MobileNetworkCallback {
@@ -845,4 +846,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
         onSubscriptionDetailChanged();
     }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return MobileNetworkScreen.KEY;
+    }
 }
+// LINT.ThenChange(MobileNetworkScreen.kt)

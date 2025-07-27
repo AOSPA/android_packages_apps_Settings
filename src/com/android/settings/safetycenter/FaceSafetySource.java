@@ -54,9 +54,7 @@ public final class FaceSafetySource {
 
         // Handle private profile case
         UserManager userManager = UserManager.get(context);
-        if (android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                && userManager.isPrivateProfile()) {
+        if (userManager.isPrivateProfile()) {
             // SC always expects a response from the source if the broadcast has been sent for this
             // source, therefore, we need to send a null SafetySourceData.
             sendNullData(context, safetyEvent);

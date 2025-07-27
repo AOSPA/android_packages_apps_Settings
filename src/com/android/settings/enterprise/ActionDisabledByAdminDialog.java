@@ -21,7 +21,7 @@ import static android.security.advancedprotection.AdvancedProtectionManager.ADVA
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.EnforcingAdmin;
-import android.app.admin.UnknownAuthority;
+import android.app.admin.SystemAuthority;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -128,8 +128,8 @@ public class ActionDisabledByAdminDialog extends Activity
         if (enforcingAdmin == null) {
             return;
         }
-        if (enforcingAdmin.getAuthority() instanceof UnknownAuthority authority
-                && ADVANCED_PROTECTION_SYSTEM_ENTITY.equals(authority.getName())) {
+        if (enforcingAdmin.getAuthority() instanceof SystemAuthority authority
+                && ADVANCED_PROTECTION_SYSTEM_ENTITY.equals(authority.getSystemEntity())) {
             Intent apmSupportIntent = AdvancedProtectionManager
                     .createSupportIntentForPolicyIdentifierOrRestriction(restriction,
                             AdvancedProtectionManager.SUPPORT_DIALOG_TYPE_UNKNOWN);

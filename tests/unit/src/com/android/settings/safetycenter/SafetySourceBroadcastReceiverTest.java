@@ -37,7 +37,6 @@ import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.safetycenter.SafetyEvent;
-import android.safetycenter.SafetySourceData;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -304,30 +303,6 @@ public class SafetySourceBroadcastReceiverTest {
                 .setSafetySourceData(any(), captor.capture(), any(), any());
 
         assertThat(captor.getValue()).isEqualTo(PrivateSpaceSafetySource.SAFETY_SOURCE_ID);
-    }
-
-    /** Tests that the PS source sets null data when it's disabled. */
-    @Test
-    public void onReceive_onRefresh_withPrivateSpaceFeatureDisabled_setsNullData() {
-        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
-        mSetFlagsRule.disableFlags(
-                android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
-
-        Intent intent =
-                new Intent()
-                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
-                        .putExtra(
-                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
-                                new String[] {PrivateSpaceSafetySource.SAFETY_SOURCE_ID})
-                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
-
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
-        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper, times(1))
-                .setSafetySourceData(any(), any(), captor.capture(), any());
-
-        assertThat(captor.getValue()).isEqualTo(null);
     }
 
     @Test

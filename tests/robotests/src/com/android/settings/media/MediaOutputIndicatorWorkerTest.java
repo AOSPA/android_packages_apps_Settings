@@ -295,36 +295,4 @@ public class MediaOutputIndicatorWorkerTest {
 
         assertThat(mMediaOutputIndicatorWorker.getActiveLocalMediaController()).isNull();
     }
-
-    @Test
-    public void isBroadcastSupported_leAudioBroadcastProfileIsNull_returnFalse() {
-        mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
-        mMediaOutputIndicatorWorker.onSlicePinned();
-
-        assertThat(mMediaOutputIndicatorWorker.isBroadcastSupported()).isFalse();
-    }
-
-    @Test
-    public void isBroadcastSupported_leAudioBroadcastProfileNotNull_returnTrue() {
-        mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
-        mMediaOutputIndicatorWorker.onSlicePinned();
-        when(mLocalBluetoothProfileManager.getLeAudioBroadcastProfile())
-                .thenReturn(mLeAudioBroadcastProfile);
-
-        assertThat(mMediaOutputIndicatorWorker.isBroadcastSupported()).isTrue();
-    }
-
-    @Test
-    public void isBroadcastSupported_noLocalMediaManager_returnFalse() {
-        mMediaOutputIndicatorWorker.mLocalMediaManager = null;
-
-        assertThat(mMediaOutputIndicatorWorker.isBroadcastSupported()).isFalse();
-    }
-
-    @Test
-    public void isDeviceBroadcasting_noLocalMediaManager_returnFalse() {
-        mMediaOutputIndicatorWorker.mLocalMediaManager = null;
-
-        assertThat(mMediaOutputIndicatorWorker.isDeviceBroadcasting()).isFalse();
-    }
 }

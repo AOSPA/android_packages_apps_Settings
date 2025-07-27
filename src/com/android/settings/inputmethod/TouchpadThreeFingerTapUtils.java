@@ -23,16 +23,22 @@ import static android.hardware.input.InputGestureData.createTouchpadTrigger;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.hardware.input.AppLaunchData;
 import android.hardware.input.InputGestureData;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyGestureEvent;
 import android.net.Uri;
 import android.provider.Settings;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.android.settings.R;
 
 import java.util.Map;
 
@@ -40,6 +46,8 @@ import java.util.Map;
  * Utility class for retrieving 3 Finger Tap related values in touchpad settings.
  */
 public final class TouchpadThreeFingerTapUtils {
+    static final String TAG = "TouchpadThreeFingerTap";
+
     static final String TARGET_ACTION =
             Settings.System.TOUCHPAD_THREE_FINGER_TAP_CUSTOMIZATION;
     static final Uri TARGET_ACTION_URI =
@@ -163,5 +171,64 @@ public final class TouchpadThreeFingerTapUtils {
         }
         String launchingApp = sharedPreferences.getString(LAUNCHING_APP_KEY, null);
         return launchingApp == null ? null : unflattenFromString(launchingApp);
+    }
+
+    /**
+     * Get the label of the default assistant
+     *
+     * @param resolver ContentResolver
+     * @param packageManager PackageManager
+     * @return the label of the default assistant
+     */
+    @Nullable
+    public static CharSequence getAssistantName(
+            @NonNull ContentResolver resolver, @NonNull PackageManager packageManager) {
+        String flattened = Settings.Secure.getString(resolver, Settings.Secure.ASSISTANT);
+        if (flattened != null) {
+            ComponentName componentName = ComponentName.unflattenFromString(flattened);
+            return getLabel(packageManager, componentName);
+        }
+        return null;
+    }
+
+    /**
+     * Get the action title with the default assistant's name if applicable
+     *
+     * @param context Context
+     * @param packageManager PackageManager
+     * @return the action title with the default assistant's name
+     */
+    public static CharSequence getDefaultAssistantTitle(
+            @NonNull Context context, @NonNull PackageManager packageManager) {
+        CharSequence assistantName = getAssistantName(context.getContentResolver(), packageManager);
+        // Use the generic name if we can't get the default assistant's label
+        if (assistantName == null) {
+            assistantName =
+                    context.getString(R.string.three_finger_tap_launch_generic_assistant_name);
+        }
+        return context.getString(
+                R.string.three_finger_tap_launch_default_assistant, assistantName);
+    }
+
+    /**
+     * Get the label of a given app
+     *
+     * @param packageManager ContentResolver
+     * @param componentName the ComponentName of the app
+     * @return the label of the app
+     */
+    @Nullable
+    public static CharSequence getLabel(
+            @NonNull PackageManager packageManager, @Nullable ComponentName componentName) {
+        if (componentName != null) {
+            try {
+                ApplicationInfo appInfo = packageManager.getApplicationInfo(
+                        componentName.getPackageName(), /* flags= */ 0);
+                return appInfo.loadLabel(packageManager);
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "Package not found: " + componentName.getPackageName(), e);
+            }
+        }
+        return null;
     }
 }

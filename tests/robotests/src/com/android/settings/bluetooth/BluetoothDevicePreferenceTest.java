@@ -35,7 +35,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.os.UserManager;
-import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.Pair;
@@ -177,43 +176,7 @@ public class BluetoothDevicePreferenceTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_TEMPORARY_BOND_DEVICES_UI)
-    public void onClicked_deviceNotBonded_shouldLogBluetoothPairEvent() {
-        when(mCachedBluetoothDevice.isConnected()).thenReturn(false);
-        when(mCachedBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_NONE);
-        when(mCachedBluetoothDevice.startPairing()).thenReturn(true);
-        when(mCachedBluetoothDevice.hasHumanReadableName()).thenReturn(true);
-
-        mPreference.onClicked();
-        Shadows.shadowOf(Looper.getMainLooper()).idle();
-
-        verify(mMetricsFeatureProvider)
-                .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
-        verify(mMetricsFeatureProvider, never())
-                .action(mContext,
-                        MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ENABLE_TEMPORARY_BOND_DEVICES_UI)
-    public void onClicked_deviceNotBonded_shouldLogBluetoothPairEventAndPairWithoutNameEvent() {
-        when(mCachedBluetoothDevice.isConnected()).thenReturn(false);
-        when(mCachedBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_NONE);
-        when(mCachedBluetoothDevice.startPairing()).thenReturn(true);
-        when(mCachedBluetoothDevice.hasHumanReadableName()).thenReturn(false);
-
-        mPreference.onClicked();
-        Shadows.shadowOf(Looper.getMainLooper()).idle();
-
-        verify(mMetricsFeatureProvider)
-                .action(mContext, MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
-        verify(mMetricsFeatureProvider)
-                .action(mContext,
-                        MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR_DEVICES_WITHOUT_NAMES);
-    }
-
-    @Test
-    @EnableFlags({Flags.FLAG_ENABLE_LE_AUDIO_SHARING, Flags.FLAG_ENABLE_TEMPORARY_BOND_DEVICES_UI})
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onClicked_deviceNotBonded_blockPairing() {
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mShadowBluetoothAdapter.setEnabled(true);

@@ -67,6 +67,7 @@ import com.android.settingslib.mobile.MobileMappings;
 import com.android.settingslib.mobile.MobileMappings.Config;
 import com.android.settingslib.mobile.TelephonyIcons;
 import com.android.settingslib.net.SignalStrengthUtil;
+import com.android.systemui.Flags;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -322,6 +323,10 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         if (isCarrierNetworkActive) {
             level = getCarrierNetworkLevel();
             numLevels = WifiEntry.WIFI_LEVEL_MAX + 1;
+            if (Flags.statusBarInflateCarrierMerged() && shouldInflateSignalStrength(subId)) {
+                level += 1;
+                numLevels += 1;
+            }
         } else if (shouldInflateSignalStrength(subId)) {
             level += 1;
             numLevels += 1;

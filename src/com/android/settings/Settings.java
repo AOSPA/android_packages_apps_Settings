@@ -43,6 +43,8 @@ import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.communal.CommunalPreferenceController;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.display.ColorModePreferenceFragment;
+import com.android.settings.display.ColorModeScreen;
 import com.android.settings.emergency.EmergencyDashboardFragment;
 import com.android.settings.emergency.EmergencyDashboardScreen;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
@@ -446,8 +448,8 @@ public class Settings extends SettingsActivity {
     }
     public static class ConfigureNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConversationListSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class BubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppBubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class BubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAssistantSettingsActivity extends SettingsActivity{ /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
     public static class NotificationExcludeSummarizationActivity extends SettingsActivity { /* empty */ }
@@ -656,6 +658,13 @@ public class Settings extends SettingsActivity {
     public static class SpecialAccessSettingsActivity extends CatalystSettingsActivity {
         public SpecialAccessSettingsActivity() {
             super(SpecialAccessSettingsScreen.KEY, SpecialAccessSettings.class);
+        }
+    }
+
+    /** Activity for Display & Touch -> Colors. */
+    public static class ColorModeActivity extends CatalystSettingsActivity {
+        public ColorModeActivity() {
+            super(ColorModeScreen.KEY, ColorModePreferenceFragment.class);
         }
     }
 }

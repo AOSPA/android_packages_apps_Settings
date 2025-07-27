@@ -30,6 +30,7 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
 import com.android.settings.network.SubscriptionUtil.getUniqueSubscriptionDisplayName
+import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.SimRepository
 import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settings.network.telephony.euicc.EuiccRepository
@@ -50,6 +51,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 @ProvidePreferenceScreen(MobileNetworkListScreen.KEY)
 open class MobileNetworkListScreen(context: Context) :
@@ -176,7 +178,16 @@ open class MobileNetworkListScreen(context: Context) :
     override fun fragmentClass(): Class<out Fragment>? = MobileNetworkListFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) { +MobileDataPreference() }
+        preferenceHierarchy(context) {
+            +MobileDataPreference()
+            addAsync(coroutineScope, Dispatchers.Default) {
+                if (Flags.deeplinkNetworkAndInternet25q4()) {
+                    MobileNetworkScreen.parameters(context).collect {
+                        +(MobileNetworkScreen.KEY args it)
+                    }
+                }
+            }
+        }
 
     companion object {
         const val KEY = "mobile_network_list"

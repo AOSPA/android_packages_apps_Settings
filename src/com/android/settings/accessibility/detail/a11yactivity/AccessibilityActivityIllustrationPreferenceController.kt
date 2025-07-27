@@ -23,6 +23,7 @@ import android.net.Uri
 import com.android.settings.R
 import com.android.settings.accessibility.IllustrationPreferenceController
 
+// LINT.IfChange
 class AccessibilityActivityIllustrationPreferenceController(context: Context, prefKey: String) :
     IllustrationPreferenceController(context, prefKey) {
 
@@ -49,3 +50,4 @@ class AccessibilityActivityIllustrationPreferenceController(context: Context, pr
         initialize(imageUri, contentDescription)
     }
 }
+// LINT.ThenChange(ui/A11yActivityIllustrationPreference.kt)

@@ -82,7 +82,8 @@ open class SoundScreen : PreferenceScreenMixin, PreferenceIconProvider {
             ) order -111 +=
                 {
                     +DialPadTonePreference() order -50
-                    if (Flags.catalystSoundScreen25q4()) {
+                    // TODO(b/432624175): rollback to Flags.catalystSoundScreen25q4
+                    if (Flags.deeplinkSoundAndVibration25q4()) {
                         +ScreenLockSoundPreference() order -45
                         +ChargingSoundPreference() order -40
                         +DockingSoundPreference() order -35

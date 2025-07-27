@@ -706,7 +706,6 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
-    @EnableFlags(com.android.settingslib.flags.Flags.FLAG_ENABLE_TEMPORARY_BOND_DEVICES_UI)
     public void temporaryBondDevice_renameButtonNotShown() {
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("true".getBytes());

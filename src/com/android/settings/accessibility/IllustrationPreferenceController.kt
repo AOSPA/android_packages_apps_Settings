@@ -29,6 +29,7 @@ import com.android.settingslib.utils.ThreadUtils
 import com.android.settingslib.widget.IllustrationPreference
 import com.android.settingslib.widget.SettingsThemeHelper
 
+// LINT.IfChange
 /** BasePreferenceController for [IllustrationPreference] */
 open class IllustrationPreferenceController(context: Context, prefKey: String) :
     BasePreferenceController(context, prefKey) {
@@ -88,6 +89,8 @@ open class IllustrationPreferenceController(context: Context, prefKey: String) :
         }
     }
 }
+
+// LINT.ThenChange(shared/ui/ImageUriPreference.kt)
 
 class ColorInversionIllustrationPreferenceController(context: Context, prefKey: String) :
     IllustrationPreferenceController(context, prefKey) {

@@ -33,7 +33,6 @@ import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
-import android.os.Flags;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -96,10 +95,6 @@ public class PrivateSpaceMaintainer {
      */
     @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
     public final synchronized boolean createPrivateSpace() {
-        if (!Flags.allowPrivateProfile()
-                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
-            return false;
-        }
         // Check if Private space already exists
         if (doesPrivateSpaceExist()) {
             return true;
@@ -170,10 +165,6 @@ public class PrivateSpaceMaintainer {
 
     /** Returns true if the Private space exists. */
     public synchronized boolean doesPrivateSpaceExist() {
-        if (!Flags.allowPrivateProfile()
-                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
-            return false;
-        }
         if (mUserHandle != null) {
             return true;
         }
@@ -398,9 +389,7 @@ public class PrivateSpaceMaintainer {
     }
 
     private boolean isPrivateSpaceAutoLockSupported() {
-        return android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.supportAutolockForPrivateSpace()
-                && android.multiuser.Flags.enablePrivateSpaceFeatures();
+        return android.multiuser.Flags.supportAutolockForPrivateSpace();
     }
 
     /**
@@ -446,10 +435,6 @@ public class PrivateSpaceMaintainer {
     }
 
     private synchronized void registerBroadcastReceiver() {
-        if (!android.os.Flags.allowPrivateProfile()
-                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
-            return;
-        }
         var broadcastReceiver = getProfileBroadcastReceiver();
         if (broadcastReceiver == null) {
             return;
@@ -458,10 +443,6 @@ public class PrivateSpaceMaintainer {
     }
 
     private synchronized void unregisterBroadcastReceiver() {
-        if (!android.os.Flags.allowPrivateProfile()
-                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
-            return;
-        }
         if (mProfileBroadcastReceiver == null) {
             Log.w(TAG, "Requested to unregister when there is no receiver.");
             return;
@@ -474,10 +455,6 @@ public class PrivateSpaceMaintainer {
     @VisibleForTesting
     @Nullable
     synchronized ProfileBroadcastReceiver getProfileBroadcastReceiver() {
-        if (!android.os.Flags.allowPrivateProfile()
-                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
-            return null;
-        }
         if (!doesPrivateSpaceExist()) {
             Log.e(TAG, "Cannot return a broadcast receiver when private space doesn't exist");
             return null;

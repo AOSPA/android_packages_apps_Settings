@@ -17,8 +17,9 @@
 package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
-
+import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
+import com.android.settings.accessibility.shared.utils.adjustIllustrationLayoutForSetupWizard
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.IllustrationPreference
@@ -31,11 +32,12 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
         get() = KEY
 
     override fun createWidget(context: Context): IllustrationPreference {
-        val lottieResId = if (SettingsThemeHelper.isExpressiveTheme(context)) {
-            R.raw.accessibility_magnification_banner_expressive
-        } else {
-            R.raw.accessibility_magnification_banner
-        }
+        val lottieResId =
+            if (SettingsThemeHelper.isExpressiveTheme(context)) {
+                R.raw.accessibility_magnification_banner_expressive
+            } else {
+                R.raw.accessibility_magnification_banner
+            }
 
         return IllustrationPreference(context).apply {
             isSelectable = false
@@ -43,9 +45,13 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
             contentDescription =
                 context.getString(
                     R.string.accessibility_illustration_content_description,
-                    context.getText(R.string.accessibility_screen_magnification_title)
+                    context.getText(R.string.accessibility_screen_magnification_title),
                 )
             applyDynamicColor()
+
+            setOnBindListener { view: LottieAnimationView? ->
+                view?.let { adjustIllustrationLayoutForSetupWizard(it) }
+            }
         }
     }
 

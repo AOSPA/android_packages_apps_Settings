@@ -17,6 +17,7 @@
 package com.android.settings.users;
 
 import static com.android.settings.flags.Flags.hideUserListForNonAdmins;
+import static com.android.settings.flags.Flags.showUserDetailsSettingsForSelf;
 import static com.android.settingslib.Utils.getColorAttrDefaultColor;
 
 import android.Manifest;
@@ -377,6 +378,12 @@ public class UserSettings extends SettingsPreferenceFragment
         mMePreference = new UserPreference(getPrefContext(), null /* attrs */, myUserId);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
+        if (showUserDetailsSettingsForSelf()
+                && getPrefContext()
+                        .getResources()
+                        .getBoolean(R.bool.config_show_user_details_settings_for_self)) {
+            mMePreference.setOnEditClickListener((view) -> showDialog(DIALOG_USER_PROFILE_EDITOR));
+        }
 
         mGuestCategory = findPreference(KEY_GUEST_CATEGORY);
 

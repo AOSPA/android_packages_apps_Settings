@@ -38,12 +38,12 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = AdaptiveConnectivityScreen()
     override val flagName
         get() = Flags.FLAG_CATALYST_ADAPTIVE_CONNECTIVITY
+
     private lateinit var fragment: AdaptiveConnectivitySettings
     private val mContext: Context = ApplicationProvider.getApplicationContext()
     private val testScope = TestScope()
 
-    @Test
-    override fun migration() {}
+    @Test override fun migration() {}
 
     @Test
     fun getPreferenceHierarchy_returnsHierarchy() {
@@ -59,10 +59,9 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     fun getPreferenceHierarchy_flagEnabled_returnsHierarchyWithNestedToggle() {
         val hierarchy: PreferenceHierarchy =
             preferenceScreenCreator.getPreferenceHierarchy(mContext, testScope)
-        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_ENABLED)).isNotNull()
+        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_ENABLED)).isNull()
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED)).isNotNull()
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED)).isNotNull()
-
     }
 
     @Test
@@ -71,13 +70,14 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
         scenario.onFragment { fragment ->
             this.fragment = fragment
             assertSwitchPreferenceCompatVisibility(
-                ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, fragment,
-                false
+                ADAPTIVE_CONNECTIVITY_WIFI_ENABLED,
+                fragment,
+                false,
             )
             assertSwitchPreferenceCompatVisibility(
                 ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED,
                 fragment,
-                false
+                false,
             )
         }
     }
@@ -89,17 +89,17 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
         scenario.onFragment { fragment ->
             this.fragment = fragment
             assertSwitchPreferenceCompatVisibility(
-                ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, fragment,
-                true
+                ADAPTIVE_CONNECTIVITY_WIFI_ENABLED,
+                fragment,
+                true,
             )
             assertSwitchPreferenceCompatVisibility(
                 ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED,
                 fragment,
-                true
+                true,
             )
         }
     }
-
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_NESTED_TOGGLE_SWITCHES)
@@ -153,20 +153,15 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
      * @param key the key of the setting to get.
      */
     private fun updateSetting(key: String): Boolean {
-        return (Settings.Secure.getInt(
-            mContext.contentResolver,
-            key,
-            0
-        ) == 1)
+        return (Settings.Secure.getInt(mContext.contentResolver, key, 0) == 1)
     }
 
     private fun assertSwitchPreferenceCompatVisibility(
         key: String,
         fragment: AdaptiveConnectivitySettings,
-        isVisible: Boolean
+        isVisible: Boolean,
     ) {
         val switchPreference = fragment.findPreference<SwitchPreferenceCompat>(key)
         assertThat(switchPreference?.isVisible).isEqualTo(isVisible)
     }
-
 }

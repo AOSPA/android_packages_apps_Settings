@@ -132,8 +132,8 @@ public class ZenModeAddBypassingAppsPreferenceController extends AbstractPrefere
             return;
         }
 
-        ApplicationsState.AppFilter filter = android.multiuser.Flags.enablePrivateSpaceFeatures()
-                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+        ApplicationsState.AppFilter filter =
+                android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
                 ? ApplicationsState.FILTER_ENABLED_NOT_QUIET
                 : ApplicationsState.FILTER_ALL_ENABLED;
         mAppSession.rebuild(filter, ApplicationsState.ALPHA_COMPARATOR);

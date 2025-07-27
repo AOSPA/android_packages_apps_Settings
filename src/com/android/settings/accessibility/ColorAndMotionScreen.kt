@@ -60,15 +60,11 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
             if (ColorDisplayManager.isColorTransformAccelerated(context)) {
                 +DaltonizerPreference()
                 +ColorInversionPreference()
-                if (com.android.settings.accessibility.Flags.catalystDarkUiMode()) {
-                    +DarkModeScreenOnAccessibility.KEY
-                }
+                +DarkModeScreenOnAccessibility.KEY
                 +RemoveAnimationsPreference()
             } else {
                 +ColorInversionPreference()
-                if (com.android.settings.accessibility.Flags.catalystDarkUiMode()) {
-                    +DarkModeScreenOnAccessibility.KEY
-                }
+                +DarkModeScreenOnAccessibility.KEY
                 +PreferenceCategory(
                     "experimental_category",
                     R.string.experimental_category_title,

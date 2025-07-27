@@ -17,7 +17,6 @@
 package com.android.settings.supervision
 
 import android.content.Intent
-import android.os.Bundle
 import com.android.settings.CatalystSettingsActivity
 
 /**
@@ -30,14 +29,18 @@ class SupervisionDashboardActivity :
         SupervisionDashboardScreen.KEY,
         SupervisionDashboardFragment::class.java,
     ) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        if (shouldRedirectToFullSupervision()) {
-            val intent =
-                Intent(FULL_SUPERVISION_REDIRECT_ACTION).setPackage(systemSupervisionPackageName)
-            startActivity(intent)
-            finish()
+    override fun onResume() {
+        super.onResume()
+
+        if (shouldRedirectToSupervisionApp()) {
+            val redirectIntent = getSupervisionAppIntent()
+            // We don't expect the intent to be null, but if it happens, we just skip the redirect.
+            if (redirectIntent != null) {
+                startActivity(redirectIntent)
+                finish()
+                return
+            }
         }
 
         // If the supervision package doesn't have the necessary components, the dashboard can't be
@@ -74,18 +77,21 @@ class SupervisionDashboardActivity :
         }
     }
 
-    private fun shouldRedirectToFullSupervision(): Boolean {
-        // The user is deemed to be fully supervised if the supervision role holder is not empty
-        if (supervisionRoleHolders.isEmpty() || systemSupervisionPackageName == null) {
-            return false
-        }
+    private fun shouldRedirectToSupervisionApp(): Boolean {
+        return supervisionRoleHolders.isNotEmpty() || isSupervisionPackageProfileOwner()
+    }
 
-        val intent =
-            Intent(FULL_SUPERVISION_REDIRECT_ACTION).setPackage(systemSupervisionPackageName)
-        return packageManager.queryIntentActivitiesAsUser(intent, 0, userId).isNotEmpty()
+    private fun getSupervisionAppIntent(): Intent? {
+        val packageName = readDefaultSupervisionPackageNameFromResources() ?: return null
+
+        val intent = Intent(INTERSTITIAL_REDIRECT_ACTION).setPackage(packageName)
+        return intent.takeIf {
+            packageManager.queryIntentActivitiesAsUser(it, 0, userId).isNotEmpty()
+        }
     }
 
     companion object {
-        const val FULL_SUPERVISION_REDIRECT_ACTION = "android.app.supervision.action.VIEW_SETTINGS"
+        const val INTERSTITIAL_REDIRECT_ACTION =
+            "android.app.supervision.action.INTERSTITIAL_SCREEN"
     }
 }

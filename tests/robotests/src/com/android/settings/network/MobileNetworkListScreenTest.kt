@@ -33,7 +33,10 @@ class MobileNetworkListScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_MOBILE_NETWORK_LIST
 
-    @DisableFlags(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
+    @DisableFlags(
+        Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED,
+        Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4,
+    )
     @Config(shadows = [ShadowSubscriptionManager::class])
     @Test
     override fun migration() {
