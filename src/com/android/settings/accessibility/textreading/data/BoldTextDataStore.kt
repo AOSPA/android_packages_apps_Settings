@@ -19,6 +19,7 @@ package com.android.settings.accessibility.textreading.data
 import android.content.Context
 import android.graphics.fonts.FontStyle
 import android.provider.Settings
+import android.util.Log
 import com.android.settings.accessibility.AccessibilityStatsLogUtils
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint
 import com.android.settings.accessibility.textreading.ui.BoldTextPreference
@@ -36,12 +37,27 @@ class BoldTextDataStore(
     override val keyValueStoreDelegate: KeyValueStore
         get() = settingsStore
 
-    override fun getBoolean(key: String): Boolean? {
-        return (keyValueStoreDelegate.getInt(KEY) == BOLD_TEXT_ADJUSTMENT)
+    override fun contains(key: String): Boolean {
+        return keyValueStoreDelegate.contains(KEY)
     }
 
-    override fun setBoolean(key: String, value: Boolean?) {
-        val newValue = value == true
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>): T? {
+        return false as? T?
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
+        return (keyValueStoreDelegate.getInt(KEY) == BOLD_TEXT_ADJUSTMENT) as? T?
+    }
+
+    override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
+        if (value !is Boolean?) {
+            Log.w(LOG_TAG, "Unsupported $valueType for $key: $value")
+            return
+        }
+
+        val newValue = value as? Boolean ?: getDefaultValue(key, Boolean::class.javaObjectType)!!
         keyValueStoreDelegate.setInt(KEY, if (newValue) BOLD_TEXT_ADJUSTMENT else 0)
 
         SettingsStatsLog.write(
@@ -57,5 +73,6 @@ class BoldTextDataStore(
         internal const val BOLD_TEXT_ADJUSTMENT =
             FontStyle.FONT_WEIGHT_BOLD - FontStyle.FONT_WEIGHT_NORMAL
         const val KEY = Settings.Secure.FONT_WEIGHT_ADJUSTMENT
+        private const val LOG_TAG = "BoldTextDataStore"
     }
 }

@@ -36,6 +36,7 @@ enum class DisplayIsEnabled {
 @Keep
 data class DisplayDevice(
     val id: Int,
+    val uniqueId: String,
     val name: String,
     val mode: Mode?,
     val supportedModes: List<Mode>,

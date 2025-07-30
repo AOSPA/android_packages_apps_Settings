@@ -18,6 +18,7 @@ package com.android.settings.accessibility.textreading.data
 
 import android.content.Context
 import android.provider.Settings
+import android.util.Log
 import com.android.settings.accessibility.AccessibilityStatsLogUtils
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint
 import com.android.settings.core.instrumentation.SettingsStatsLog
@@ -50,17 +51,26 @@ class FontSizeDataStore(
     private val _fontSizeData = MutableStateFlow(loadFontSize())
     val fontSizeData = _fontSizeData.asStateFlow()
 
-    override fun contains(key: String): Boolean = true
-
-    // The value is the index of the font size in the array
-    override fun getInt(key: String): Int? {
-        return _fontSizeData.value.currentIndex
+    override fun contains(key: String): Boolean {
+        return keyValueStoreDelegate.getString(FONT_SCALE_KEY) != null
     }
 
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>): T? {
+        val data = _fontSizeData.value
+        return getClosestFontIndex(value = data.defaultValue, fontSizes = data.values) as? T?
+    }
+
+    @Suppress("UNCHECKED_CAST")
     // The value is the index of the font size in the array
-    override fun setInt(key: String, value: Int?) {
-        if (value == null) {
-            return super.setInt(key, value)
+    override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
+        return _fontSizeData.value.currentIndex as? T?
+    }
+
+    override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
+        if (value !is Int?) {
+            Log.w(LOG_TAG, "Unsupported $valueType for $key: $value")
+            return
         }
         if (settingsSecure.getBoolean(HAS_BEEN_CHANGED_KEY) != true) {
             // HAS_BEEN_CHANGED settings is used to automatically add font size tile to quick
@@ -68,25 +78,26 @@ class FontSizeDataStore(
             settingsSecure.setBoolean(HAS_BEEN_CHANGED_KEY, true)
         }
         val data = _fontSizeData.value
-        if (data.currentIndex != value) {
+        val newValue = value as? Int ?: getDefaultValue(key, Int::class.javaObjectType)!!
+        if (data.currentIndex != newValue) {
             SettingsStatsLog.write(
                 SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED,
                 SettingsStatsLog
                     .ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__NAME__TEXT_READING_FONT_SIZE,
-                value,
+                newValue,
                 AccessibilityStatsLogUtils.convertToEntryPoint(entryPoint),
             )
-            keyValueStoreDelegate.setFloat(FONT_SCALE_KEY, data.values[value])
-            _fontSizeData.value = data.copy(currentIndex = value)
+            if (value != null) {
+                keyValueStoreDelegate.setFloat(FONT_SCALE_KEY, data.values[newValue])
+            } else {
+                keyValueStoreDelegate.setFloat(FONT_SCALE_KEY, null)
+            }
+            _fontSizeData.value = data.copy(currentIndex = newValue)
         }
     }
 
     fun resetToDefault() {
-        val data = _fontSizeData.value
-        setInt(
-            key = "reset",
-            value = getClosestFontIndex(value = data.defaultValue, fontSizes = data.values),
-        )
+        setInt(key = "reset", value = null)
     }
 
     private fun loadFontSize(): FontSize {
@@ -121,5 +132,6 @@ class FontSizeDataStore(
             Settings.Secure.ACCESSIBILITY_FONT_SCALING_HAS_BEEN_CHANGED
         private const val FONT_SCALE_KEY = Settings.System.FONT_SCALE
         private const val DEFAULT_FONT_SIZE_KEY = Settings.System.DEFAULT_DEVICE_FONT_SCALE
+        private const val LOG_TAG = "FontSizeDataStore"
     }
 }

@@ -62,8 +62,7 @@ class TextReadingScreenTest : SettingsCatalystTestCase() {
 
     @Test
     fun getHighlightMenuKey() {
-        assertThat(preferenceScreenCreator.highlightMenuKey)
-            .isEqualTo(R.string.menu_key_accessibility)
+        assertThat(preferenceScreenCreator.highlightMenuKey).isEqualTo(R.string.menu_key_display)
     }
 
     @Test

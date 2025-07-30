@@ -122,15 +122,12 @@ public abstract class LocationInjectedServiceBasePreferenceController
                 && mLocationEnabler.getShareLocationEnforcedAdmin(managedProfileId) == null) {
             userHandles.add(UserHandle.of(managedProfileId));
         }
-        if (android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
-            final UserHandle privateProfile = Utils.getProfileOfType(mUserManager,
-                    ProfileSelectFragment.ProfileType.PRIVATE);
-            if (privateProfile != null && mLocationEnabler
-                    .getShareLocationEnforcedAdmin(privateProfile.getIdentifier()) == null) {
-                userHandles.add(privateProfile);
-            }
+        final UserHandle privateProfile = Utils.getProfileOfType(mUserManager,
+            ProfileSelectFragment.ProfileType.PRIVATE);
+        if (privateProfile != null && mLocationEnabler
+                .getShareLocationEnforcedAdmin(privateProfile.getIdentifier()) == null) {
+          userHandles.add(privateProfile);
         }
-
         return mInjector.getInjectedSettings(mFragment.getPreferenceManager().getContext(),
                 userHandles);
     }

@@ -54,7 +54,7 @@ class DisplaySizeDataStore(
     }
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-        if (value !is Int) {
+        if (value !is Int?) {
             Log.w(
                 TAG,
                 "setValue(key = $key, value = $value) ignored because the value is not a Int",
@@ -64,25 +64,25 @@ class DisplaySizeDataStore(
 
         val data = _displaySizeData.value
         val currentIndex = data.currentIndex
-        if (value != currentIndex) {
-            if (data.values[value] == data.defaultValue) {
+        val newValue = value as? Int ?: getDefaultValue(key, Int::class.javaObjectType)!!
+        if (newValue != currentIndex) {
+            if (data.values[newValue] == data.defaultValue) {
                 displayDensityUtils.clearForcedDisplayDensity()
             } else {
-                displayDensityUtils.setForcedDisplayDensity(value)
+                displayDensityUtils.setForcedDisplayDensity(newValue)
             }
             SettingsStatsLog.write(
                 ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED,
                 ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__NAME__TEXT_READING_DISPLAY_SIZE,
-                value,
+                newValue,
                 AccessibilityStatsLogUtils.convertToEntryPoint(entryPoint),
             )
-            _displaySizeData.value = data.copy(currentIndex = value)
+            _displaySizeData.value = data.copy(currentIndex = newValue)
         }
     }
 
     fun resetToDefault() {
-        val data = _displaySizeData.value
-        setInt("reset", data.values.indexOf(data.defaultValue))
+        setInt(key = "reset", value = null)
     }
 
     private fun loadDisplaySize(): DisplaySize {

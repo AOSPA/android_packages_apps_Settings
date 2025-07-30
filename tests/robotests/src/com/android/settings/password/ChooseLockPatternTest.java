@@ -42,6 +42,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupdesign.GlifLayout;
 
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,6 +55,11 @@ import org.robolectric.annotation.Config;
 public class ChooseLockPatternTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
+    @After
+    public void tearDown() {
+        PartnerConfigHelper.applyGlifExpressiveBundle = null;
+    }
 
     @Test
     public void activityCreationTest() {
@@ -81,9 +87,7 @@ public class ChooseLockPatternTest {
 
     @Test
     public void intentBuilder_setPattern_shouldAddExtras_withExpressiveDesign() {
-        Bundle fakeBundle = new Bundle();
-        fakeBundle.putBoolean(PartnerConfigHelper.IS_GLIF_EXPRESSIVE_ENABLED, true);
-        PartnerConfigHelper.applyGlifExpressiveBundle = fakeBundle;
+        TestUtils.setGlifExpressiveInPartnerConfigHelper();
 
         Intent intent = new IntentBuilder(application)
                 .setPattern(createPattern("1234"))

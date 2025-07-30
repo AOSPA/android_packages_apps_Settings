@@ -25,7 +25,10 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDev
 class LockScreenStateSource : DeviceStateSource {
     override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
 
-    override fun get(context: Context): PerScreenDeviceStates {
+    override fun get(
+        context: Context,
+        sharedDeviceStateData: SharedDeviceStateData,
+    ): PerScreenDeviceStates {
         val areNotificationsOnLockScreenEnabled =
             Settings.Secure.getInt(
                 context.contentResolver,
@@ -39,9 +42,6 @@ class LockScreenStateSource : DeviceStateSource {
                 jsonValue = areNotificationsOnLockScreenEnabled.toString(),
             )
 
-        return PerScreenDeviceStates(
-            description = "Lock screen",
-            deviceStateItems = listOf(item),
-        )
+        return PerScreenDeviceStates(description = "Lock screen", deviceStateItems = listOf(item))
     }
 }

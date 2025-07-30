@@ -16,9 +16,14 @@
 
 package com.android.settings.accessibility
 
+import android.app.settings.SettingsEnums
+import android.content.ComponentName
+import com.android.settings.R
+import com.android.settings.Settings.ColorAndMotionActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
 class ColorAndMotionScreenTest : SettingsCatalystTestCase() {
@@ -27,6 +32,57 @@ class ColorAndMotionScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_ACCESSIBILITY_COLOR_AND_MOTION
 
+    @Test override fun migration() {}
+
     @Test
-    override fun migration() {}
+    fun isIndexable_returnTrue() {
+        assertThat(preferenceScreenCreator.isIndexable(appContext)).isTrue()
+    }
+
+    @Test
+    fun getMetricsCategory() {
+        assertThat(preferenceScreenCreator.getMetricsCategory())
+            .isEqualTo(SettingsEnums.ACCESSIBILITY_COLOR_AND_MOTION)
+    }
+
+    @Test
+    fun getKey() {
+        assertThat(preferenceScreenCreator.key).isEqualTo(ColorAndMotionScreen.KEY)
+    }
+
+    @Test
+    fun getTitle() {
+        assertThat(preferenceScreenCreator.title)
+            .isEqualTo(R.string.accessibility_color_and_motion_title)
+    }
+
+    @Test
+    fun getIcon() {
+        assertThat(preferenceScreenCreator.icon).isEqualTo(R.drawable.ic_color_and_motion)
+    }
+
+    @Test
+    fun getHighlightMenuKey() {
+        assertThat(preferenceScreenCreator.highlightMenuKey)
+            .isEqualTo(R.string.menu_key_accessibility)
+    }
+
+    @Test
+    fun hasCompleteHierarchy() {
+        assertThat(preferenceScreenCreator.hasCompleteHierarchy()).isTrue()
+    }
+
+    @Test
+    fun getFragmentClass() {
+        assertThat(preferenceScreenCreator.fragmentClass())
+            .isEqualTo(ColorAndMotionFragment::class.java)
+    }
+
+    @Test
+    fun getLaunchIntent_returnColorAndMotionActivityIntent() {
+        val expectedComponent = ComponentName(appContext, ColorAndMotionActivity::class.java)
+        val intent = preferenceScreenCreator.getLaunchIntent(appContext, null)
+        assertThat(intent).isNotNull()
+        assertThat(intent!!.component).isEqualTo(expectedComponent)
+    }
 }

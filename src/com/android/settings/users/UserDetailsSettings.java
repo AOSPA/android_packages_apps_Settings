@@ -18,6 +18,8 @@ package com.android.settings.users;
 
 import static android.os.UserHandle.USER_NULL;
 
+import static com.android.settings.flags.Flags.showUserDetailsSettingsForSelf;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -241,7 +243,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE:
                 return UserDialogs.createRemoveDialog(getActivity(), mUserInfo.id,
-                        (dialog, which) -> removeUser());
+                        (dialog, which) -> removeUserWithAuthCheck());
             case DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS:
                 return UserDialogs.createEnablePhoneCallsAndSmsDialog(getActivity(),
                         (dialog, which) -> enableCallsAndSms(true));
@@ -284,8 +286,13 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         CustomDialogHelper dialogHelper = new CustomDialogHelper(context);
         dialogHelper.setIcon(
                 context.getDrawable(com.android.settingslib.R.drawable.ic_admin_panel_settings));
-        dialogHelper.setTitle(R.string.user_revoke_admin_confirm_title);
-        dialogHelper.setMessage(R.string.user_revoke_admin_confirm_message);
+        if (mUserInfo.id == UserHandle.myUserId()) {
+            dialogHelper.setTitle(R.string.user_revoke_admin_for_self_confirm_title);
+            dialogHelper.setMessage(R.string.user_revoke_admin_for_self_confirm_message);
+        } else {
+            dialogHelper.setTitle(R.string.user_revoke_admin_confirm_title);
+            dialogHelper.setMessage(R.string.user_revoke_admin_confirm_message);
+        }
         dialogHelper.setMessagePadding(MESSAGE_PADDING);
         dialogHelper.setPositiveButton(R.string.remove, view -> {
             updateUserAdminStatus(false);
@@ -387,9 +394,25 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             }
         }
 
-        if (!mUserManager.isAdminUser()) { // non admin users can't remove users and allow calls
-            removePreference(KEY_ENABLE_TELEPHONY_CALLING);
+        if (mUserManager.isAdminUser() || canRemoveSelf()) {
+            if (mUserInfo.isGuest()) {
+                mRemoveUserPref.setTitle(
+                        mGuestUserAutoCreated
+                                ? com.android.settingslib.R.string.guest_reset_guest
+                                : com.android.settingslib.R.string.guest_exit_guest);
+                if (mGuestUserAutoCreated) {
+                    mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
+                }
+            } else {
+                mRemoveUserPref.setTitle(R.string.user_remove_user);
+            }
+            mRemoveUserPref.setOnPreferenceClickListener(this);
+        } else {
             removePreference(KEY_REMOVE_USER);
+        }
+
+        if (!mUserManager.isAdminUser()) { // not allow calls for non admin users.
+            removePreference(KEY_ENABLE_TELEPHONY_CALLING);
             removePreference(KEY_APP_AND_CONTENT_ACCESS);
             removePreference(KEY_APP_COPYING);
         } else {
@@ -412,19 +435,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
             if (mUserInfo.isGuest()) {
                 removePreference(KEY_ENABLE_TELEPHONY_CALLING);
-                mRemoveUserPref.setTitle(mGuestUserAutoCreated
-                        ? com.android.settingslib.R.string.guest_reset_guest
-                        : com.android.settingslib.R.string.guest_exit_guest);
-                if (mGuestUserAutoCreated) {
-                    mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
-                }
                 if (!SHOW_APP_COPYING_PREF) {
                     removePreference(KEY_APP_COPYING);
                 }
             } else {
                 mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
-                mRemoveUserPref.setTitle(R.string.user_remove_user);
                 removePreference(KEY_APP_COPYING);
             }
 
@@ -436,7 +452,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 removePreference(KEY_REMOVE_USER);
             }
 
-            mRemoveUserPref.setOnPreferenceClickListener(this);
             mPhonePref.setOnPreferenceChangeListener(this);
             mGrantAdminPref.setOnPreferenceChangeListener(this);
             mAppAndContentAccessPref.setOnPreferenceClickListener(this);
@@ -446,7 +461,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @VisibleForTesting
     boolean canDeleteUser() {
-        if (!mUserManager.isAdminUser() || mUserInfo.isMain()) {
+        if ((!mUserManager.isAdminUser() && !canRemoveSelf()) || mUserInfo.isMain()) {
             return false;
         }
 
@@ -513,18 +528,46 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mGrantAdminPref.setChecked(isSetAdmin);
         if (!isSetAdmin) {
             mUserManager.revokeUserAdmin(mUserInfo.id);
+            if (mUserInfo.id == UserHandle.myUserId()) {
+                // Hides the toggle after an admin self-revokes their admin status, as they can no
+                // longer modify it.
+                mGrantAdminPref.setVisible(false);
+            }
         } else if ((mUserInfo.flags & UserInfo.FLAG_ADMIN) == 0) {
             mUserManager.setUserAdmin(mUserInfo.id);
         }
     }
 
-    private void removeUser() {
+    private void removeUserWithAuthCheck() {
         if (runUserRemovalKeyguardConfirmation()) {
             // User deletion will be handled when the credential authentication result is successful
             return;
         }
-        mUserManager.removeUser(mUserInfo.id);
-        finishFragment();
+        removeUser();
+    }
+
+    private void removeUser() {
+        if (mUserInfo.id == UserHandle.myUserId()) {
+            removeThisUser();
+        } else {
+            mUserManager.removeUser(mUserInfo.id);
+            finishFragment();
+        }
+    }
+
+    private void removeThisUser() {
+        if (mUserManager.getUserSwitchability() != UserManager.SWITCHABILITY_STATUS_OK) {
+            Log.w(TAG, "Cannot remove current user when switching is disabled");
+            return;
+        }
+        try {
+            mUserManager.removeUserWhenPossible(
+                    UserHandle.of(UserHandle.myUserId()), /* overrideDevicePolicy= */ false);
+            ActivityManager.getService().switchUser(
+                    mUserManager.getPreviousForegroundUser().getIdentifier());
+        } catch (RemoteException re) {
+            Log.e(TAG, "Unable to remove self user");
+        }
     }
 
     /**
@@ -546,8 +589,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private void onRemoveUserConfirmationActivityLauncherResult(ActivityResult result) {
         if (result.getResultCode() == Activity.RESULT_OK) {
-            mUserManager.removeUser(mUserInfo.id);
-            finishFragment();
+            removeUser();
         }
     }
 
@@ -622,5 +664,10 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 mUserInfo.getUserHandle());
 
         return currentUserRestricted || targetUserRestricted;
+    }
+
+    private boolean canRemoveSelf() {
+        boolean isCurrentUser = (UserHandle.myUserId() == mUserInfo.id);
+        return showUserDetailsSettingsForSelf() && isCurrentUser;
     }
 }

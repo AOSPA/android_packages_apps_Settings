@@ -33,6 +33,7 @@ import com.android.settingslib.widget.BannerMessagePreference;
 /**
  * Controller to take the user to location settings page
  */
+// LINT.IfChange
 public class TwilightLocationPreferenceController extends BasePreferenceController {
     private final LocationManager mLocationManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -73,3 +74,4 @@ public class TwilightLocationPreferenceController extends BasePreferenceControll
         mContext.startActivity(intent);
     }
 }
+// LINT.ThenChange(darkmode/TwilightLocationPreference.kt)

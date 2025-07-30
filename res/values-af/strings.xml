@@ -131,8 +131,7 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Boodskaptoegangversoek"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Vir ander toestelle sigbaar as \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\""</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Skakel Bluetooth aan om aan ander toestelle te koppel."</string>
-    <!-- no translation found for shared_network_footer (5178404860420039168) -->
-    <skip />
+    <string name="shared_network_footer" msgid="5178404860420039168">"Kontak die netwerkeienaar of ’n toesteladmin om veranderinge aan hierdie netwerk te maak."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Jou toestelle"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Bind nuwe toestel saam"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Deaktiveer Bluetooth A2DP-hardeware-oordrag"</string>
@@ -996,10 +995,8 @@
     <string name="external_display_off" msgid="5634413756025351374">"Af"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Eksterne skerms"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Ingeboude skerm"</string>
-    <!-- no translation found for builtin_display_settings_universal_cursor_title (209064877333151313) -->
-    <skip />
-    <!-- no translation found for builtin_display_settings_universal_cursor_description (4209129904885332824) -->
-    <skip />
+    <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universele skermpyltjie"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Beweeg jou muis tussen skerms"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Gebruik eksterne skerm"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Skermresolusie"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Eksterne skerm is ontkoppel"</string>
@@ -1464,7 +1461,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Gebruik ’n donker agtergrond om dit gemakliker te maak om na jou skerm te kyk en batterygebruik op sommige skerms te verminder. As jy ’n skedule het, sal jou tema verander wanneer die skerm af is."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Donkertema volgs tans jou Slaaptydmodus-skedule"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Slaaptydmodus-instellings"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Modusse kan ook donkertema aktiveer}=1{{mode_1} aktiveer ook donkertema}=2{{mode_1} en {mode_2} aktiveer ook donkertema}=3{{mode_1}, {mode_2} en {mode_3} aktiveer ook donkertema}other{{mode_1}, {mode_2} en nog # aktiveer ook donkertema}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Modusinstellings"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Verhelder en verbreed die kleurreeks en -duidelikheid in prente en video’s van hoë dinamiese omvang (HDR). HDR-inhoud sal meer helder voorkom."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Skermuitteltyd"</string>
@@ -1481,6 +1479,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Sluimerskerm"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"sluimerskerm"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Nie beskikbaar nie omdat slaaptydmodus aan is"</string>
+    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Nie beskikbaar nie"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Gebruik sluimerskerm"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Terwyl dit laai of gedok is"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Terwyl dit gedok is en laai"</string>
@@ -2392,9 +2391,16 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Gradeer ons"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Kontak Google Gestremdheidsteundiens"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Toeganklikheidsopname"</string>
-    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Geniet jy donkertema in nog apps?"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Deel jou terugvoer"</string>
+    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Neem deel aan opname"</string>
+    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
+    <skip />
+    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
+    <skip />
+    <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Neem deel aan opname"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Afgelaaide apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimenteel"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Kenmerkvlae"</string>
@@ -2558,12 +2564,17 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Dateer outomaties skermvergroting op"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Dateer skermvergroting op tydens programverwisseling"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Kragknoppie beëindig oproep"</string>
-    <string name="dark_theme_version_category" msgid="8563711427335567656">"Modus"</string>
+    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
+    <skip />
+    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standaard"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Standaarddonkertema"</string>
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Pas donkertema in jou toestel en gesteunde apps toe"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Uitgevou"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Uitgevoude donkertema"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
+    <skip />
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Pas outomaties donkertema op meer apps toe vir beter toeganklikheid"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Verwyder animasies"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Verminder beweging op die skerm"</string>
@@ -2662,7 +2673,8 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Meer oor kleuromkering"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Meer inligting oor kleuromkering"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Kry meer inligting oor donkertema"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Sommige apps steun dalk nie donkertema in die uitgevoude instelling nie. Gebruik die standaardinstelling as jy probleme met voorkoms ervaar."</string>
+    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
+    <skip />
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Wys onderskrifte"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Net vir gesteunde app"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Grootte en styl van onderskrif"</string>
@@ -2863,6 +2875,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Geoptimeer"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Beperk"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Laat batterygebruik op die agtergrond sonder beperkings toe. Sal dalk meer batterykrag gebruik."</string>
+    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"Laat batterygebruik op die agtergrond toe. Sal dalk meer batterykrag gebruik."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimeer op grond van jou gebruik. Aanbeveel vir die meeste apps."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Beperk batterygebruik terwyl dit op die agtergrond is. App sal dalk nie werk soos verwag nie. Kennisgewings kan vertraag word."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"\'n App se werkverrigting kan geraak word as jy verander hoe dit jou battery gebruik."</string>
@@ -2892,6 +2905,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Sommige kenmerke kan beperk word"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Hoër battery gebruik"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Sien programme met die hoogste gebruik"</string>
+    <string name="battery_tip_default_limited_temporarily_title" msgid="2244840552837449409">"Die laaiproses is beperk om die battery te beskerm"</string>
+    <string name="battery_tip_default_limited_temporarily_summary" msgid="182448435746170298">"Jou battery was vir ’n lang tydperk warm. Die gewone laaiproses sal hervat sodra jou battery verder afgekoel het"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Laaiproses word geoptimeer om jou battery te beskerm"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"Laaiproses is geoptimeer om jou battery se lewensduur te help verleng"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Kom meer te wete oor laaiproses wat onderbreek is"</string>
@@ -2910,7 +2925,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Hierdie app sal batterykrag op die agtergrond kan gebruik. Jou battery sal dalk gouer as verwag afloop."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Verwyder"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Kanselleer"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"Ignoreer"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6599920924910821386">"Laai in elk geval"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Gaan die laaibykomstigheid na"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Kom meer te wete oor onversoenbare laaiproses"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Batterybestuurder"</string>
@@ -3097,8 +3112,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Netwerkkennisgewings"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Kry ’n kennisgewing wanneer jou toestel aan ’n ongeënkripteerde netwerk verbind of wanneer ’n netwerk jou unieke toestel- of SIM-ID aanteken"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Netwerkgenerering"</string>
-    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G-netwerkbeskerming vermy 2G-netwerke wat minder veilig is. Dit kan konnektiwiteit in sommige plekke beperk. 2G word altyd toegelaat vir noodoproepe, maar oproepe sal dalk nie verbind as jy internasionaal swerf nie."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G-netwerkbeskerming"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Enkripsie"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Netwerkgenerasies"</string>
@@ -3786,8 +3800,10 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Verdonker die muurpapier"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"verdonker die muurpapier"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtreer die helderheid van die muurpapier"</string>
-    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Aktiveer donkertema"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"aktiveer donkertema"</string>
+    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
+    <skip />
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Wissel die toesteltema om ’n donker agtergrond te gebruik, wat makliker vir die oë is"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Geen skermveranderinge nie}=1{{effect_1}}=2{{effect_1} en {effect_2}}=3{{effect_1}, {effect_2} en {effect_3}}other{{effect_1}, {effect_2}, en nog #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Laat alle kennisgewings toe"</string>
@@ -5173,24 +5189,19 @@
     <string name="title_no_satellite_plan" msgid="7255726881685672846">"Boodskappe is nie by jou rekening ingesluit nie"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Kry meer inligting"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Hoe dit werk"</string>
-    <!-- no translation found for title_satellite_connection_guide (7080935804228845540) -->
-    <skip />
+    <string name="title_satellite_connection_guide" msgid="7080935804228845540">"As jy nie ’n sel- of wi-fi-netwerk het nie"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Stuur ’n teksboodskap na ’n foonnommer"</string>
-    <!-- no translation found for summary_satellite_connection_guide (1962847581645612628) -->
-    <skip />
+    <string name="summary_satellite_connection_guide" msgid="1962847581645612628">"Jou foon sal outomaties aan ’n satelliet verbind. Vir die beste verbinding, maak seker jy kan die lug duidelik sien."</string>
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"As jy nie ’n selnetwerk het nie, sal jy ’n opsie sien om satelliet te gebruik."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Nadat jou foon aan ’n satelliet verbind"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Volg die stappe om aan die satelliet te koppel"</string>
-    <!-- no translation found for summary_supported_service_with_constrained_data (8495750699335612848) -->
-    <skip />
-    <!-- no translation found for summary_supported_service_with_unconstrained_data (5010592489972147979) -->
-    <skip />
+    <string name="summary_supported_service_with_constrained_data" msgid="8495750699335612848">"Jy kan ’n teksboodskap na enigiemand toe stuur, insluitend nooddienste, en gesteunde apps gebruik. Jou foon sal weer aan ’n selnetwerk verbind wanneer dit beskikbaar is."</string>
+    <string name="summary_supported_service_with_unconstrained_data" msgid="5010592489972147979">"Jy kan ’n teksboodskap na enigiemand toe stuur, insluitend nooddienste, en data vir apps gebruik. Jou foon sal weer aan ’n selnetwerk verbind wanneer dit beskikbaar is."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Jy kan ’n teksboodskap na enigiemand toe stuur, insluitend nooddienste. Jou foon sal weer aan ’n selnetwerk verbind wanneer dit beskikbaar is."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Jy kan vir enige iemand ’n teksboodskap stuur nadat jou foon gekoppel is, insluitend nooddienste."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Hou in gedagte"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Satellietkonnektiwiteit kan langer neem en is net in sekere gebiede beskikbaar."</string>
-    <!-- no translation found for satellite_footer_content_section_2 (555594211014015682) -->
-    <skip />
+    <string name="satellite_footer_content_section_2" msgid="555594211014015682">"Die weer en sekere strukture kan die satellietverbinding affekteer."</string>
     <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"Satellietoproepe is nie beskikbaar nie."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Noodoproepe kan dalk steeds verbind."</string>
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"’n Sel- of wi-fi-netwerk is nodig om eksterne skakels te bekyk."</string>
@@ -5202,10 +5213,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satelliet"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellietkonnektiwiteit"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellietkonnektiwiteit"</string>
-    <!-- no translation found for title_have_satellite_constrained_data_plan (8275865334911177900) -->
-    <skip />
-    <!-- no translation found for title_have_satellite_unconstrained_data_plan (5437095773679990375) -->
-    <skip />
+    <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Die gebruik van gesteunde apps is by jou rekening ingesluit"</string>
+    <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Data vir alle apps is by jou rekening ingesluit"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Gesteunde apps op jou foon"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Sien alle apps wat deur satelliet gesteun word"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Gesteunde apps op jou foon"</string>
@@ -5561,8 +5570,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Foonnommer ontbreek."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G-netwerkbeskerming"</string>
-    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
-    <skip />
+    <string name="enable_2g_summary" msgid="6194875539424151678">"/vermy 2G-netwerke wat minder veilig is. Dit kan konnektiwiteit in sommige plekke beperk. 2G word altyd toegelaat vir noodoproepe, maar oproepe sal dalk nie verbind as jy internasionaal swerf nie."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> vereis 2G om beskikbaar te wees"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Laat slegs geënkripteerde netwerke toe"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Dit is veiliger, maar kan jou selnetwerkverbinding in sekere liggings beperk. Noodoproepe word altyd toegelaat."</string>
@@ -5640,21 +5648,7 @@
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Deaktiveer beperkings op die stelselhulpbrongebruik van die app se kindprosesse"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Verplig aktivering van Notas-rol"</string>
     <string name="enable_notes_role_summary" msgid="5495721409392395089">"Aktiveer integrasie van stelsels om notas te maak met die Notas-rol. Doen niks as die Notas-rol reeds geaktiveer is nie. Vereis herselflaai."</string>
-    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Saai uit"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Saai <xliff:g id="CURRENTAPP">%1$s</xliff:g> uit"</string>
-    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Luister na uitsendings wat in jou omtrek speel"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Saai media na toestelle in jou omtrek uit, of luister na iemand anders se uitsending"</string>
-    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Uitsendings"</string>
-    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Luister tans na"</string>
-    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Soek uitsendings"</string>
-    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Verlaat uitsending"</string>
-    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Skandeer QR-kode"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Voer wagwoord in"</string>
-    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Kan nie koppel nie. Probeer weer."</string>
-    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Verkeerde wagwoord"</string>
-    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Kan nie by die uitsending aansluit nie"</string>
-    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Plaas die QR-kode hieronder in die middel om te begin luister"</string>
-    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-kode is nie ’n geldige formaat nie"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Skakel om na e-SIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Dra e-SIM oor na ’n ander toestel"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# app}other{# apps}}"</string>
@@ -5928,12 +5922,8 @@
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Bekyk besonderhede"</string>
     <string name="identity_check_promo_card_title" msgid="1495226082133610343">"Gebruik Identiteitkontrole om meer apps te beveilig"</string>
     <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"Wanneer jy Identiteitkontrole gebruik vir alle apps wat Vingerafdruk- en Gesigslot steun, verseker jy sterker beskerming en ’n meer konsekwente ervaring – sonder ekstra opstelling"</string>
-    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
-    <skip />
+    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"Identiteitkontrole werk deur jou horlosie"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Verhoed ander om apps oop te maak wat Vingerafdruk of Gesigslot vereis. In die geval van meer mobiliteit, is jou veiligheid verseker as jou horlosie gekoppel is."</string>
+    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Gebruik Identiteitkontrole en jou horlosie op meer apps"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Verseker jou identiteitbeskerming op alle apps wat Vingerafdruk en Gesigslot in vertroude plekke soos jou huis of kantoor steun. Gebruik Identiteitkontrole met jou horlosie om jou beskerming verder as net in jou vertroude plekke uit te brei."</string>
 </resources>

@@ -30,6 +30,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -144,5 +145,8 @@ public class ColorAndMotionFragment extends BaseSupportFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_color_and_motion);
+            new BaseSearchIndexProvider(
+                    Flags.catalystAccessibilityColorAndMotion() && Flags.catalystSettingsSearch()
+                            ? 0 :
+                            R.xml.accessibility_color_and_motion);
 }

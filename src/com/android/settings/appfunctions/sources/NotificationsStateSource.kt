@@ -20,7 +20,6 @@ import android.app.INotificationManager
 import android.app.usage.IUsageStatsManager
 import android.app.usage.UsageEvents
 import android.content.Context
-import android.content.pm.PackageManager
 import android.icu.text.RelativeDateTimeFormatter
 import android.os.ServiceManager
 import com.android.settings.appfunctions.DeviceStateCategory
@@ -33,7 +32,10 @@ class NotificationsStateSource : DeviceStateSource {
     override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
 
     // TODO: prototype implementation, to be replaced in b/426005115
-    override fun get(context: Context): PerScreenDeviceStates {
+    override fun get(
+        context: Context,
+        sharedDeviceStateData: SharedDeviceStateData,
+    ): PerScreenDeviceStates {
         val packageManager = context.packageManager
         val notificationManager =
             INotificationManager.Stub.asInterface(
@@ -44,18 +46,15 @@ class NotificationsStateSource : DeviceStateSource {
                 ServiceManager.getService(Context.USAGE_STATS_SERVICE)
             )
 
-        val installedApplications =
-            packageManager.getInstalledApplications(PackageManager.MATCH_DISABLED_COMPONENTS)
-
         val nowMs = System.currentTimeMillis()
         val lastNotificationTimeMsByPackage =
             queryLastNotificationTimes(context, nowMs, usageStatsManager)
 
         val deviceStateItems = mutableListOf<DeviceStateItem>()
-        for (info in installedApplications) {
-            val packageName = info.packageName
-            val appName = packageManager.getApplicationLabel(info.applicationInfo)
-            val uid = info.uid
+        for (app in sharedDeviceStateData.installedApplications) {
+            val packageName = app.info.packageName
+            val appName = app.label
+            val uid = app.info.uid
             val areNotificationsEnabled =
                 notificationManager?.areNotificationsEnabledForPackage(packageName, uid) ?: false
             val lastNotificationTimeAgoMs =

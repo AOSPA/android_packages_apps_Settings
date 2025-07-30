@@ -131,8 +131,7 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Permintaan akses pesan"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Terlihat sebagai “<xliff:g id="DEVICE_NAME">^1</xliff:g>” oleh perangkat lain"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Aktifkan Bluetooth untuk menghubungkan ke perangkat lain."</string>
-    <!-- no translation found for shared_network_footer (5178404860420039168) -->
-    <skip />
+    <string name="shared_network_footer" msgid="5178404860420039168">"Hubungi pemilik jaringan atau admin perangkat untuk membuat perubahan pada jaringan ini."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Perangkat Anda"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Sambungkan perangkat baru"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Nonaktifkan offload hardware Bluetooth A2DP"</string>
@@ -996,10 +995,8 @@
     <string name="external_display_off" msgid="5634413756025351374">"Nonaktif"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Layar eksternal"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Layar bawaan"</string>
-    <!-- no translation found for builtin_display_settings_universal_cursor_title (209064877333151313) -->
-    <skip />
-    <!-- no translation found for builtin_display_settings_universal_cursor_description (4209129904885332824) -->
-    <skip />
+    <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Kursor universal"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Memindahkan kursor mouse antar-layar"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Gunakan layar eksternal"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolusi layar"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Layar eksternal tidak terhubung"</string>
@@ -1464,7 +1461,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Gunakan latar belakang gelap untuk membuat layar Anda lebih nyaman dilihat dan mengurangi penggunaan baterai di beberapa layar. Jika Anda memiliki jadwal, tema akan berubah saat layar nonaktif."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tema gelap saat ini mengikuti jadwal Mode Waktu Tidur Anda"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Setelan Mode Waktu Tidur"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Mode juga dapat mengaktifkan tema gelap}=1{{mode_1} juga mengaktifkan tema gelap}=2{{mode_1} dan {mode_2} juga mengaktifkan tema gelap}=3{{mode_1}, {mode_2}, dan {mode_3} juga mengaktifkan tema gelap}other{{mode_1}, {mode_2}, dan # lainnya juga mengaktifkan tema gelap}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Setelan Mode"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Mencerahkan dan memperluas rentang warna dan kejelasan di gambar dan video Rentang Dinamis Tinggi (HDR). Konten HDR akan tampak lebih cerah."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Waktu tunggu layar"</string>
@@ -1481,6 +1479,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Screensaver"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"screensaver"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Tidak tersedia karena mode Waktu Tidur aktif"</string>
+    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Tidak tersedia"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Gunakan screensaver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Saat mengisi baterai atau terpasang di dok"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Saat dipasang ke dok &amp; mengisi daya"</string>
@@ -2392,9 +2391,16 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Beri kami rating"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Hubungi Dukungan Disabilitas Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Survei Aksesibilitas"</string>
-    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Ingin menikmati Tema gelap di aplikasi lainnya?"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Beri masukan"</string>
+    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Ikuti survei"</string>
+    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
+    <skip />
+    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
+    <skip />
+    <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Ikuti survei"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Aplikasi yang didownload"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Tanda fitur"</string>
@@ -2558,12 +2564,17 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Perbarui otomatis pembesaran layar"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Perbarui pembesaran layar di transisi aplikasi"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Tombol daya untuk tutup telepon"</string>
-    <string name="dark_theme_version_category" msgid="8563711427335567656">"Mode"</string>
+    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
+    <skip />
+    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standar"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Tema Gelap Standar"</string>
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Menerapkan Tema gelap di seluruh perangkat dan aplikasi yang didukung"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Diperluas"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Tema Gelap Diperluas"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
+    <skip />
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Secara otomatis menerapkan Tema gelap ke lebih banyak aplikasi untuk meningkatkan aksesibilitas"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Hapus animasi"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Kurangi gerakan di layar"</string>
@@ -2662,7 +2673,8 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Tentang inversi warna"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Pelajari inversi warna lebih lanjut"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Pelajari lebih lanjut Tema gelap"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Beberapa aplikasi mungkin tidak mendukung Tema gelap di setelan yang diperluas. Jika Anda mengalami masalah tampilan, gunakan setelan standar."</string>
+    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
+    <skip />
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Tampilkan teks"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Hanya untuk aplikasi yang didukung"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Ukuran dan gaya teks"</string>
@@ -2863,6 +2875,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Dioptimalkan"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Dibatasi"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Izinkan penggunaan baterai di latar belakang tanpa batasan. Konsumsi daya baterai mungkin lebih besar."</string>
+    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"Izinkan penggunaan baterai di latar belakang. Dapat menggunakan lebih banyak daya baterai."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimalkan berdasarkan penggunaan Anda. Direkomendasikan untuk sebagian besar aplikasi."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Batasi penggunaan baterai saat di latar belakang. Aplikasi mungkin tidak berfungsi sesuai harapan. Notifikasi mungkin tertunda."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Mengubah cara aplikasi menggunakan baterai dapat memengaruhi performanya."</string>
@@ -2892,6 +2905,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Beberapa fitur mungkin dibatasi"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Penggunaan baterai tinggi"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Lihat aplikasi dengan penggunaan tertinggi"</string>
+    <string name="battery_tip_default_limited_temporarily_title" msgid="2244840552837449409">"Pengisian daya dibatasi untuk melindungi baterai"</string>
+    <string name="battery_tip_default_limited_temporarily_summary" msgid="182448435746170298">"Suhu baterai Anda tinggi dalam waktu yang lama. Pengisian daya normal akan dilanjutkan setelah suhu baterai turun"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Pengisian daya dioptimalkan untuk melindungi baterai"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"Untuk membantu memperpanjang masa pakai baterai, pengisian daya dioptimalkan"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Pelajari lebih lanjut pengisian daya dijeda"</string>
@@ -2910,7 +2925,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Aplikasi ini dapat menggunakan baterai di latar belakang. Baterai mungkin lebih cepat habis dari biasanya."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Hapus"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Batal"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"Ganti"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6599920924910821386">"Tetap isi daya"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Periksa aksesori pengisi daya"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Pelajari lebih lanjut mengisi daya dengan pengisi daya yang tidak kompatibel"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Pengelola Baterai"</string>
@@ -3097,8 +3112,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Notifikasi jaringan"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Dapatkan notifikasi ketika perangkat Anda terhubung ke jaringan yang tidak terenkripsi atau ketika jaringan merekam ID unik perangkat atau kartu SIM Anda"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Generasi jaringan"</string>
-    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"Perlindungan dari jaringan 2G menghindari jaringan 2G yang kurang aman. Setelan ini mungkin membatasi konektivitas di beberapa tempat. Jaringan 2G selalu diizinkan untuk panggilan darurat, tetapi panggilan mungkin tidak terhubung jika Anda melakukan roaming internasional."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"Perlindungan dari jaringan 2G"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Enkripsi"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Generasi jaringan"</string>
@@ -3786,8 +3800,10 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Redupkan wallpaper"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"redupkan wallpaper"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filter kecerahan wallpaper"</string>
-    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Aktifkan tema gelap"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"aktifkan tema gelap"</string>
+    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
+    <skip />
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Ganti tema perangkat menjadi berlatar belakang gelap yang lebih nyaman di mata"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Tidak ada perubahan tampilan}=1{{effect_1}}=2{{effect_1} dan {effect_2}}=3{{effect_1}, {effect_2}, dan {effect_3}}other{{effect_1}, {effect_2}, dan # lainnya}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Izinkan semua notifikasi"</string>
@@ -5173,24 +5189,19 @@
     <string name="title_no_satellite_plan" msgid="7255726881685672846">"Fitur pesan tidak disertakan di akun Anda"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Pelajari Lebih Lanjut"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Cara kerjanya"</string>
-    <!-- no translation found for title_satellite_connection_guide (7080935804228845540) -->
-    <skip />
+    <string name="title_satellite_connection_guide" msgid="7080935804228845540">"Saat Anda tidak memiliki jaringan seluler atau Wi-Fi"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Kirim pesan ke nomor telepon"</string>
-    <!-- no translation found for summary_satellite_connection_guide (1962847581645612628) -->
-    <skip />
+    <string name="summary_satellite_connection_guide" msgid="1962847581645612628">"Ponsel Anda akan terhubung otomatis ke satelit. Untuk koneksi terbaik, pastikan langit terlihat jelas tanpa terhalang."</string>
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Jika jaringan seluler tidak tersedia, Anda akan melihat opsi untuk menggunakan satelit."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Setelah ponsel Anda terhubung ke satelit"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Ikuti langkah-langkah untuk terhubung ke satelit"</string>
-    <!-- no translation found for summary_supported_service_with_constrained_data (8495750699335612848) -->
-    <skip />
-    <!-- no translation found for summary_supported_service_with_unconstrained_data (5010592489972147979) -->
-    <skip />
+    <string name="summary_supported_service_with_constrained_data" msgid="8495750699335612848">"Anda dapat mengirim pesan kepada siapa pun, termasuk layanan darurat, dan menggunakan aplikasi yang didukung. Ponsel Anda akan terhubung kembali ke jaringan seluler jika tersedia."</string>
+    <string name="summary_supported_service_with_unconstrained_data" msgid="5010592489972147979">"Anda dapat mengirim pesan kepada siapa pun, termasuk layanan darurat, dan menggunakan data untuk aplikasi. Ponsel Anda akan terhubung kembali ke jaringan seluler jika tersedia."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Anda dapat mengirim pesan kepada siapa pun, termasuk layanan darurat. Ponsel Anda akan terhubung kembali ke jaringan seluler jika tersedia."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Setelah ponsel terhubung, Anda dapat mengirim pesan kepada siapa pun, termasuk layanan darurat."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Perlu diingat"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Konektivitas satelit mungkin memakan waktu lebih lama dan hanya tersedia di wilayah tertentu."</string>
-    <!-- no translation found for satellite_footer_content_section_2 (555594211014015682) -->
-    <skip />
+    <string name="satellite_footer_content_section_2" msgid="555594211014015682">"Cuaca dan struktur tertentu dapat memengaruhi koneksi satelit."</string>
     <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"Panggilan satelit tidak tersedia."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Panggilan darurat masih dapat terhubung."</string>
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Jaringan seluler atau Wi‑Fi diperlukan untuk melihat link eksternal."</string>
@@ -5202,10 +5213,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satelit"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Konektivitas satelit"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"konektivitas satelit"</string>
-    <!-- no translation found for title_have_satellite_constrained_data_plan (8275865334911177900) -->
-    <skip />
-    <!-- no translation found for title_have_satellite_unconstrained_data_plan (5437095773679990375) -->
-    <skip />
+    <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Penggunaan aplikasi yang didukung disertakan dalam akun Anda"</string>
+    <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Data untuk semua aplikasi disertakan dalam akun Anda"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Aplikasi yang didukung di ponsel Anda"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Lihat semua aplikasi yang didukung oleh satelit"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Aplikasi yang didukung di ponsel Anda"</string>
@@ -5561,8 +5570,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Tidak ada nomor telepon."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Oke"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"Perlindungan dari jaringan 2G"</string>
-    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
-    <skip />
+    <string name="enable_2g_summary" msgid="6194875539424151678">"Menghindari jaringan 2G yang kurang aman. Setelan ini mungkin membatasi konektivitas di beberapa tempat. Jaringan 2G selalu diizinkan untuk panggilan darurat, tetapi panggilan mungkin tidak terhubung jika Anda melakukan roaming internasional."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> mengharuskan jaringan 2G tersedia"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Hanya izinkan jaringan yang terenkripsi"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Setelan ini lebih aman tetapi mungkin membatasi koneksi jaringan seluler Anda di beberapa tempat. Panggilan darurat selalu diizinkan."</string>
@@ -5640,21 +5648,7 @@
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Nonaktifkan batasan penggunaan resource sistem pada proses turunan aplikasi"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Aktifkan paksa peran Catatan"</string>
     <string name="enable_notes_role_summary" msgid="5495721409392395089">"Aktifkan integrasi sistem pembuatan catatan melalui peran Catatan. Jika peran Catatan telah diaktifkan, setelan ini tidak melakukan apa pun. Memerlukan reboot."</string>
-    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Siaran"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Siarkan <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
-    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Dengarkan siaran yang diputar di dekat Anda"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Siarkan media ke perangkat di dekat Anda, atau dengarkan siaran orang lain"</string>
-    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Siaran"</string>
-    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Mendengarkan"</string>
-    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Temukan siaran"</string>
-    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Keluar dari siaran"</string>
-    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Pindai kode QR"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Masukkan sandi"</string>
-    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Tidak dapat terhubung. Coba lagi."</string>
-    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Sandi salah"</string>
-    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Tidak dapat bergabung ke siaran"</string>
-    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Untuk mulai mendengarkan, pusatkan kode QR di bawah"</string>
-    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Format kode QR tidak valid"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Konversi ke eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Transfer eSIM ke perangkat lain"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# aplikasi}other{# aplikasi}}"</string>
@@ -5928,12 +5922,8 @@
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Lihat detail"</string>
     <string name="identity_check_promo_card_title" msgid="1495226082133610343">"Gunakan Cek Identitas untuk mengamankan lebih banyak aplikasi"</string>
     <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"Saat Anda menggunakan Cek Identitas untuk semua aplikasi yang mendukung fitur Buka dengan Sidik Jari dan Buka dengan Wajah, Anda memastikan perlindungan yang lebih kuat dan pengalaman yang lebih konsisten, tanpa penyiapan tambahan"</string>
-    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
-    <skip />
+    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"Cek Identitas berfungsi dengan smartwatch Anda"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Cegah orang lain membuka aplikasi yang memerlukan fitur Buka dengan Sidik Jari atau Buka dengan Wajah. Saat terhubung ke smartwatch, keamanan Anda tetap terjaga dengan mobilitas yang lebih baik."</string>
+    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Gunakan Cek Identitas dan smartwatch di lebih banyak aplikasi"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Pastikan perlindungan identitas Anda di semua aplikasi yang mendukung fitur Buka dengan Sidik Jari dan Buka dengan Wajah di tempat tepercaya seperti rumah atau kantor Anda. Gunakan Cek Identitas dengan smartwatch untuk memperluas perlindungan Anda bahkan di luar tempat tepercaya."</string>
 </resources>

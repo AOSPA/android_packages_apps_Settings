@@ -444,8 +444,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         CONFIRM_WORK_PROFILE_PATTERN_HEADER,
                         () -> getString(R.string.lockpassword_confirm_your_work_pattern_header));
             }
-            if (android.multiuser.Flags.showCustomUnlockTitleInsidePrivateProfile()
-                    && Utils.isPrivateProfile(mEffectiveUserId, getActivity())
+            if (Utils.isPrivateProfile(mEffectiveUserId, getActivity())
                     && !UserManager.get(getActivity())
                     .isQuietModeEnabled(UserHandle.of(mEffectiveUserId))) {
                 return getString(R.string.private_space_confirm_your_pattern_header);

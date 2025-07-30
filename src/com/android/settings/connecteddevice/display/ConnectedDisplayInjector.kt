@@ -24,6 +24,7 @@ import android.hardware.display.DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DI
 import android.hardware.display.DisplayManager.EVENT_TYPE_DISPLAY_ADDED
 import android.hardware.display.DisplayManager.EVENT_TYPE_DISPLAY_CHANGED
 import android.hardware.display.DisplayManager.EVENT_TYPE_DISPLAY_REMOVED
+import android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK
 import android.hardware.display.DisplayManager.PRIVATE_EVENT_TYPE_DISPLAY_CONNECTION_CHANGED
 import android.hardware.display.DisplayManagerGlobal
 import android.hardware.display.DisplayTopology
@@ -75,29 +76,13 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         context?.getSystemService(DisplayManager::class.java)
     }
 
+    val desktopState: DesktopState? by lazy { context?.let { DesktopState.fromContext(it) } }
+
     /** The window manager instance, or null if it cannot be retrieved. */
     val windowManager: IWindowManager? by lazy { WindowManagerGlobal.getWindowManagerService() }
 
-    inner class DesktopStateWrapper(val context: Context?) {
-        private val desktopState = context?.let { DesktopState.fromContext(context) }
-        private lateinit var defaultDisplay: Display
-
-        fun isDesktopModeSupportedOnDefaultDisplay(): Boolean {
-            if (desktopState == null) {
-                return false
-            }
-            if (!::defaultDisplay.isInitialized) {
-                defaultDisplay = displayManager?.getDisplay(DEFAULT_DISPLAY) ?: return false
-            }
-            return desktopState.isDesktopModeSupportedOnDisplay(defaultDisplay)
-        }
-    }
-
-    private val desktopStateWrapper = DesktopStateWrapper(context)
-
-    open fun isDesktopModeSupportedOnDefaultDisplay(): Boolean {
-        return desktopStateWrapper.isDesktopModeSupportedOnDefaultDisplay()
-    }
+    open fun isDesktopModeSupportedOnDefaultDisplay(): Boolean =
+        desktopState?.isDesktopModeSupportedOnDisplay(DEFAULT_DISPLAY) ?: false
 
     /**
      * Reveals the wallpaper on the given display using a View with FLAG_SHOW_WALLPAPER flag set in
@@ -139,6 +124,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     ): DisplayDevice =
         DisplayDevice(
             display.displayId,
+            display.uniqueId ?: "",
             display.name,
             display.mode,
             display.supportedModes.asList(),
@@ -146,6 +132,11 @@ open class ConnectedDisplayInjector(open val context: Context?) {
             isConnectedDisplay,
         )
 
+    /**
+     * This is not limited to displays that are going to be included in the topology, but also
+     * displays that are relying on external display settings page to modify their settings (e.g.
+     * rotation)
+     */
     private fun isConnectedDisplay(display: Display): Boolean =
         display.type == Display.TYPE_EXTERNAL ||
             display.type == Display.TYPE_OVERLAY ||
@@ -264,6 +255,13 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         dm.disableConnectedDisplay(displayId)
         return true
     }
+
+    open fun getDisplayConnectionPreference(uniqueId: String?): Int =
+        displayManager?.getExternalDisplayConnectionPreference(uniqueId)
+            ?: EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK
+
+    open fun updateDisplayConnectionPreference(uniqueId: String, connectionPreference: Int) =
+        displayManager?.setExternalDisplayConnectionPreference(uniqueId, connectionPreference)
 
     /**
      * Get display rotation

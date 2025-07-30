@@ -73,9 +73,11 @@ public class BundleCombinedPreferenceControllerTest {
     @Mock
     private PreferenceCategory mTypesPrefCategory;
 
+
     private MainSwitchPreference mGlobalSwitch;
     private SwitchPreference mWorkSwitch;
     private CheckBoxPreference mPromoCheckbox, mNewsCheckbox, mSocialCheckbox, mRecsCheckbox;
+    private PreferenceCategory mExcludedAppsPrefCategory;
 
     @Before
     public void setUp() {
@@ -107,6 +109,10 @@ public class BundleCombinedPreferenceControllerTest {
         mRecsCheckbox = new CheckBoxPreference(mContext);
         when(mTypesPrefCategory.findPreference(
                 BundleCombinedPreferenceController.RECS_KEY)).thenReturn(mRecsCheckbox);
+        mExcludedAppsPrefCategory = new PreferenceCategory(mContext);
+        when(mPrefCategory.findPreference(
+                BundleCombinedPreferenceController.EXCLUDED_APPS_CATEGORY_KEY)).thenReturn(
+                mExcludedAppsPrefCategory);
 
         mController.updateState(mPrefCategory);
     }
@@ -219,6 +225,7 @@ public class BundleCombinedPreferenceControllerTest {
         // All individual type checkboxes should now not be visible.
         assertThat(mWorkSwitch.isVisible()).isFalse();
         verify(mTypesPrefCategory).setVisible(false);
+        assertThat(mExcludedAppsPrefCategory.isVisible()).isFalse();
     }
 
     @Test
@@ -242,6 +249,7 @@ public class BundleCombinedPreferenceControllerTest {
         assertThat(mNewsCheckbox.isChecked()).isTrue();
         assertThat(mRecsCheckbox.isChecked()).isFalse();
         assertThat(mSocialCheckbox.isChecked()).isFalse();
+        assertThat(mExcludedAppsPrefCategory.isVisible()).isTrue();
     }
 
     @Test

@@ -220,12 +220,6 @@ class DisableSupervisionActivityTest {
         verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
         // Verify the supervised user is removed
         verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
-        // Verify the profile owner is cleared
-        verify(mockDevicePolicyManager)
-            .forceRemoveActiveAdmin(
-                eq(CALLER_PROFILE_OWNER_COMPONENT.toComponentName()),
-                eq(MAIN_USER_ID),
-            )
         // Verify role removal is NOT called (caller didn't have the role)
         verifyRemoveSupervisionRole(/* times= */ 0)
         // Verify activity finishes successfully
@@ -257,12 +251,6 @@ class DisableSupervisionActivityTest {
         verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
         // Verify the supervised user is removed
         verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
-        // Verify the profile owner is cleared
-        verify(mockDevicePolicyManager)
-            .forceRemoveActiveAdmin(
-                eq(CALLER_PROFILE_OWNER_COMPONENT.toComponentName()),
-                eq(MAIN_USER_ID),
-            )
         // Verify role removal is NOT called (caller didn't have the role)
         verifyRemoveSupervisionRole(/* times= */ 0)
         // Verify activity finishes successfully
@@ -292,8 +280,6 @@ class DisableSupervisionActivityTest {
         verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
         verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
         verify(mockUserManager, never()).removeUser(any<UserHandle>())
-        // Verify the profile owner is not cleared
-        verify(mockDevicePolicyManager, never()).forceRemoveActiveAdmin(any(), any())
         // Verify role removal is NOT called (caller didn't have the role)
         verifyRemoveSupervisionRole(/* times= */ 0)
         // Verify activity finishes successfully
@@ -324,8 +310,6 @@ class DisableSupervisionActivityTest {
         verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
         verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
         verify(mockUserManager, never()).removeUser(any<UserHandle>())
-        // Verify the profile owner is not cleared
-        verify(mockDevicePolicyManager, never()).forceRemoveActiveAdmin(any(), any())
         // Verify role removal is NOT called (caller didn't have the role)
         verifyRemoveSupervisionRole(/* times= */ 0)
         // Verify activity finishes successfully

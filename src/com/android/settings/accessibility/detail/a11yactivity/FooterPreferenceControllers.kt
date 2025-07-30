@@ -25,14 +25,15 @@ open class AccessibilityActivityHtmlFooterPreferenceController(context: Context,
     HtmlFooterPreferenceController(context, prefKey) {
 
     open fun initialize(shortcutInfo: AccessibilityShortcutInfo) {
-        super.initialize(shortcutInfo.componentName)
         val packageManager = mContext.packageManager!!
         shortcutInfo.loadHtmlDescription(packageManager)?.let {
             setSummary(it, isHtml = true)
 
-            introductionTitle = mContext.getString(
-                R.string.accessibility_introduction_title,
-                shortcutInfo.activityInfo?.loadLabel(mContext.packageManager))
+            introductionTitle =
+                mContext.getString(
+                    R.string.accessibility_introduction_title,
+                    shortcutInfo.activityInfo?.loadLabel(mContext.packageManager),
+                )
         }
     }
 }
@@ -41,14 +42,15 @@ class AccessibilityActivityFooterPreferenceController(context: Context, prefKey:
     AccessibilityActivityHtmlFooterPreferenceController(context, prefKey) {
 
     override fun initialize(shortcutInfo: AccessibilityShortcutInfo) {
-        super.initialize(shortcutInfo.componentName)
         val packageManager = mContext.packageManager!!
         shortcutInfo.loadDescription(packageManager)?.let {
             setSummary(it, isHtml = false)
 
-            introductionTitle = mContext.getString(
-                R.string.accessibility_introduction_title,
-                shortcutInfo.activityInfo?.loadLabel(mContext.packageManager))
+            introductionTitle =
+                mContext.getString(
+                    R.string.accessibility_introduction_title,
+                    shortcutInfo.activityInfo?.loadLabel(mContext.packageManager),
+                )
         }
     }
 }

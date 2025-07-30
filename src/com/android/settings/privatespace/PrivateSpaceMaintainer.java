@@ -108,9 +108,7 @@ public class PrivateSpaceMaintainer {
                         userName, USER_TYPE_PROFILE_PRIVATE, new ArraySet<>());
             } catch (Exception e) {
                 Log.e(TAG, "Error creating private space", e);
-                if (android.multiuser.Flags.showDifferentCreationErrorForUnsupportedDevices()) {
-                    mErrorCode = ((UserManager.UserOperationException) e).getUserOperationResult();
-                }
+                mErrorCode = ((UserManager.UserOperationException) e).getUserOperationResult();
                 return false;
             }
 

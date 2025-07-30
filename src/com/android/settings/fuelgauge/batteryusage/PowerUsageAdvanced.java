@@ -29,6 +29,8 @@ import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -57,6 +59,7 @@ import java.util.concurrent.Executors;
 import java.util.function.Predicate;
 
 /** Advanced power usage. */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String TAG = "AdvancedBatteryUsage";
@@ -548,4 +551,10 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         @Override
         public void onLoaderReset(Loader<BatteryLevelData> loader) {}
     }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return PowerUsageAdvancedScreen.KEY;
+    }
 }
+// LINT.ThenChange(PowerUsageAdvancedScreen.kt)

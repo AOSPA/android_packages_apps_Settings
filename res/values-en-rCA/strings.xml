@@ -1461,7 +1461,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Use a dark background to make your screen more comfortable to view and reduce battery usage on some screens. Your theme will change if you have a schedule, when the screen is off."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Dark theme is currently following your Bedtime mode schedule"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Bedtime mode settings"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Modes can also activate dark theme}=1{{mode_1} also activates dark theme}=2{{mode_1} and {mode_2} also activate dark theme}=3{{mode_1}, {mode_2}, and {mode_3} also activate dark theme}other{{mode_1}, {mode_2}, and # more also activate dark theme}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Modes settings"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Brighten and expand the color range and clarity in High Dynamic Range (HDR) images and videos. HDR content will appear brighter."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Screen timeout"</string>
@@ -1478,6 +1479,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Screen saver"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"screensaver"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Unavailable because bedtime mode is on"</string>
+    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Not available"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Use screen saver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"While charging or docked"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"While docked and charging"</string>
@@ -2389,9 +2391,12 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Rate us"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Contact Google Disability Support"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Accessibility Survey"</string>
-    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Enjoying Dark theme in more apps?"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Share your feedback"</string>
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Share your feedback"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"How satisfied are you with Dark theme?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Take survey"</string>
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Share your feedback"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"How satisfied are you with magnification?"</string>
+    <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Take survey"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Downloaded apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Feature flags"</string>
@@ -2555,12 +2560,17 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Auto update screen magnification"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Update screen magnification on app transitions"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Power button ends call"</string>
-    <string name="dark_theme_version_category" msgid="8563711427335567656">"Mode"</string>
+    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
+    <skip />
+    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Standard Dark Theme"</string>
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Applies Dark theme across your device and supported apps"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expanded"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Expanded Dark Theme"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
+    <skip />
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Automatically applies Dark theme to more apps for improved accessibility"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remove animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce movement on the screen"</string>
@@ -2659,7 +2669,8 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"About color inversion"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Learn more about color inversion"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Learn more about Dark theme"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Some apps may not support Dark theme in the expanded setting. If you experience appearance issues, use the standard setting."</string>
+    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
+    <skip />
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Show captions"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"For supported app only"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Caption size and style"</string>
@@ -2860,6 +2871,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimized"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Restricted"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Allow battery usage in background without restrictions. May use more battery."</string>
+    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"Allow battery usage in background. May use more battery."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimize based on your usage. Recommended for most apps."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Restrict battery usage while in background. App may not work as expected. Notifications may be delayed."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Changing how an app uses your battery can affect its performance."</string>
@@ -2889,6 +2901,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Some features may be limited"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Higher battery usage"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"See apps with highest usage"</string>
+    <string name="battery_tip_default_limited_temporarily_title" msgid="2244840552837449409">"Charging is limited to protect battery"</string>
+    <string name="battery_tip_default_limited_temporarily_summary" msgid="182448435746170298">"Your battery was warm for an extended period. Normal charging will resume once your battery has cooled down further"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Charging optimized to protect your battery"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"To help extend your battery\'s lifespan, charging is optimized"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Learn more about charging is paused"</string>
@@ -2907,7 +2921,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"This app will be able to use battery in the background. Your battery may run out sooner than expected."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Remove"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancel"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"Override"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6599920924910821386">"Charge anyway"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Check charging accessory"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Learn more about incompatible charging"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
@@ -3094,8 +3108,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Network notifications"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Get notified when your device connects to an unencrypted network, or when a network records your unique device or SIM ID"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Network generation"</string>
-    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G network protection avoids 2G networks, which are less secure. This may limit connectivity in some places. 2G is always allowed for emergency calls, but calls may not connect if you\'re roaming internationally."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G network protection"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Encryption"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Network generations"</string>
@@ -3783,8 +3796,10 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Dim the wallpaper"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"dim the wallpaper"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filter the brightness of the wallpaper"</string>
-    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Enable dark theme"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"enable dark theme"</string>
+    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
+    <skip />
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Switch the device theme to use a dark background, which is easier on the eyes"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{No display changes}=1{{effect_1}}=2{{effect_1} and {effect_2}}=3{{effect_1}, {effect_2}, and {effect_3}}other{{effect_1}, {effect_2}, and # more}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Allow all notifications"</string>
@@ -5551,8 +5566,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Phone number is missing."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G network protection"</string>
-    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
-    <skip />
+    <string name="enable_2g_summary" msgid="6194875539424151678">"Avoids 2G networks, which are less secure. This may limit connectivity in some places. 2G is always allowed for emergency calls, but calls may not connect if you\'re roaming internationally."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requires 2G to be available"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Allow only encrypted networks"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"This is more secure but may limit your mobile network connection in some locations. Emergency calling is always allowed."</string>
@@ -5630,21 +5644,7 @@
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Disable restrictions on the system resource usage of the app child processes"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Force enable Notes role"</string>
     <string name="enable_notes_role_summary" msgid="5495721409392395089">"Enable note-taking system integrations via the Notes role. If the Notes role is already enabled, does nothing. Requires reboot."</string>
-    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Broadcast"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Broadcast <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
-    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Listen to broadcasts that are playing near you"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Broadcast media to devices near you, or listen to someone else’s broadcast"</string>
-    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Broadcasts"</string>
-    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Listening to"</string>
-    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Find broadcasts"</string>
-    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Leave broadcast"</string>
-    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Scan QR code"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Enter password"</string>
-    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Can’t connect. Try again."</string>
-    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Wrong password"</string>
-    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Can’t join the broadcast"</string>
-    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"To start listening, center the QR code below"</string>
-    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR code isn\'t a valid format"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Convert to eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Transfer eSIM to another device"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# app}other{# apps}}"</string>

@@ -18,6 +18,7 @@ package com.android.settings.accessibility.textreading.data
 
 import android.content.Context
 import android.provider.Settings
+import android.util.Log
 import com.android.settings.accessibility.AccessibilityStatsLogUtils
 import com.android.settings.accessibility.HighContrastTextMigrationReceiver
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint
@@ -37,8 +38,17 @@ class OutlineTextDataStore(
     override val keyValueStoreDelegate: KeyValueStore
         get() = settingsStore
 
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>): T? {
+        return false as? T?
+    }
+
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-        val newValue = value as? Boolean ?: false
+        if (value !is Boolean?) {
+            Log.w(LOG_TAG, "Unsupported $valueType for $key: $value")
+            return
+        }
+        val newValue = value as? Boolean ?: getDefaultValue(key, Boolean::class.java)!!
         keyValueStoreDelegate.setBoolean(
             Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED,
             newValue,
@@ -63,5 +73,9 @@ class OutlineTextDataStore(
             Settings.Secure.ACCESSIBILITY_HCT_RECT_PROMPT_STATUS,
             HighContrastTextMigrationReceiver.PromptState.PROMPT_UNNECESSARY,
         )
+    }
+
+    companion object {
+        private const val LOG_TAG = "OutlineTextDataStore"
     }
 }

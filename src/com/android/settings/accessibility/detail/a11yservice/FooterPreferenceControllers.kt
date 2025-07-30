@@ -28,7 +28,6 @@ class AccessibilityServiceHtmlFooterPreferenceController(context: Context, prefK
     HtmlFooterPreferenceController(context, prefKey) {
 
     fun initialize(serviceInfo: AccessibilityServiceInfo) {
-        super.initialize(serviceInfo.componentName)
         val packageManager = mContext.packageManager!!
         serviceInfo.loadHtmlDescription(packageManager)?.let {
             setSummary(it, isHtml = true)
@@ -46,8 +45,6 @@ class AccessibilityServiceFooterPreferenceController(context: Context, prefKey: 
     HtmlFooterPreferenceController(context, prefKey) {
 
     fun initialize(serviceInfo: AccessibilityServiceInfo) {
-        super.initialize(serviceInfo.componentName)
-
         val packageManager = mContext.packageManager!!
         val description =
             if (shouldShowCrashDescription(serviceInfo)) {

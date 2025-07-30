@@ -26,6 +26,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.testutils.FakeFeatureFactory
+import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.drawer.DashboardCategory
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
@@ -44,8 +45,10 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.stub
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowPackageManager
 
+@Config(shadows = [SettingsShadowResources::class])
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class SupervisionDashboardLoadingActivityTest {
@@ -54,14 +57,18 @@ class SupervisionDashboardLoadingActivityTest {
     private lateinit var featureFactory: FeatureFactory
     private lateinit var applicationContext: Context
     private lateinit var shadowPackageManager: ShadowPackageManager
-    // Resource is empty in test directory
-    private val testSupervisionPackage = ""
+    private val testSupervisionPackage = "com.google.android.test.supervision"
     private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
 
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
+
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.string.config_systemSupervision,
+            testSupervisionPackage,
+        )
 
         featureFactory = FakeFeatureFactory.setupForTest()
         featureFactory.stub {

@@ -34,7 +34,6 @@ import android.app.admin.ManagedSubscriptionsPolicy;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.FeatureFlagUtils;
 import android.view.View;
@@ -51,6 +50,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -99,6 +99,11 @@ public class ConfirmCredentialTest {
 
         FeatureFlagUtils.setEnabled(mContext,
                 FeatureFlagUtils.SETTINGS_REMOTE_DEVICE_CREDENTIAL_VALIDATION, true);
+    }
+
+    @After
+    public void tearDown() {
+        PartnerConfigHelper.applyGlifExpressiveBundle = null;
     }
 
     @Test
@@ -207,13 +212,9 @@ public class ConfirmCredentialTest {
         assertThat(fragment.mCancelButton.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
-    @Ignore("b/424068307")
     @Test
     public void remoteValidation_expressiveTheme_usesFooterBarButton() throws Exception {
-        // Override ThemeHelper#shouldApplyGlifExpressiveStyle to return true
-        Bundle fakeBundle = new Bundle();
-        fakeBundle.putBoolean(PartnerConfigHelper.IS_GLIF_EXPRESSIVE_ENABLED, true);
-        PartnerConfigHelper.applyGlifExpressiveBundle = fakeBundle;
+        TestUtils.setGlifExpressiveInPartnerConfigHelper();
 
         ConfirmDeviceCredentialBaseActivity activity = buildConfirmDeviceCredentialBaseActivity(
                 ConfirmLockPassword.class, createRemoteLockscreenValidationIntent(

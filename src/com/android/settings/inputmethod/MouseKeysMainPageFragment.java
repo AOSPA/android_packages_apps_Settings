@@ -45,7 +45,6 @@ import com.android.settings.R;
 import com.android.settings.accessibility.BaseSupportFragment;
 import com.android.settings.accessibility.ToggleShortcutPreferenceController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
-import com.android.settings.keyboard.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
@@ -202,10 +201,10 @@ public class MouseKeysMainPageFragment extends BaseSupportFragment
     private void updatePrimaryKeysImagesVisibility() {
         boolean usePrimaryKeys = InputSettings.isPrimaryKeysForMouseKeysEnabled(getContext());
         mMouseKeyImagesPreference.findViewById(R.id.mouse_keys_image_recycler_list)
-                    .setVisibility(usePrimaryKeys ? View.VISIBLE : View.GONE);
+                .setVisibility(usePrimaryKeys ? View.VISIBLE : View.GONE);
         mMouseKeyImagesPreference
-                    .findViewById(R.id.title_mouse_keys_image_recycler_list)
-                    .setVisibility(usePrimaryKeys ? View.VISIBLE : View.GONE);
+                .findViewById(R.id.title_mouse_keys_image_recycler_list)
+                .setVisibility(usePrimaryKeys ? View.VISIBLE : View.GONE);
     }
 
     private void configureImagesPreference() {
@@ -269,8 +268,7 @@ public class MouseKeysMainPageFragment extends BaseSupportFragment
             new BaseSearchIndexProvider(R.xml.mouse_keys_main_page) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return Flags.keyboardAndTouchpadA11yNewPageEnabled()
-                            && !getHardKeyboards(context).isEmpty();
+                    return !getHardKeyboards(context).isEmpty();
                 }
             };
 }

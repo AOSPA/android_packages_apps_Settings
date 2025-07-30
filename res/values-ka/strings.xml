@@ -131,8 +131,7 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"შეტყობინებებზე წვდომის მოთხოვნა"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"სხვა მოწყობილობებისთვის ჩანს, როგორც „<xliff:g id="DEVICE_NAME">^1</xliff:g>“"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"ჩართეთ Bluetooth სხვა მოწყობილობებთან დასაკავშირებლად."</string>
-    <!-- no translation found for shared_network_footer (5178404860420039168) -->
-    <skip />
+    <string name="shared_network_footer" msgid="5178404860420039168">"ამ ქსელში ცვლილებების შესატანად დაუკავშირდით ქსელის მფლობელს ან მოწყობილობის ადმინისტრატორს."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"თქვენი მოწყობილობები"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"ახალი მოწყობილობის დაწყვილება"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP-ის აპარატული განტვირთვის გათიშვა"</string>
@@ -996,10 +995,8 @@
     <string name="external_display_off" msgid="5634413756025351374">"გამორთული"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"გარე ეკრანები"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"ჩაშენებული ეკრანი"</string>
-    <!-- no translation found for builtin_display_settings_universal_cursor_title (209064877333151313) -->
-    <skip />
-    <!-- no translation found for builtin_display_settings_universal_cursor_description (4209129904885332824) -->
-    <skip />
+    <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"უნივერსალური კურსორი"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"ამოძრავეთ თქვენი მაუსი ეკრანებს შორის"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"გარე ეკრანის გამოყენება"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ეკრანის გარჩევადობა"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"გარე ეკრანთან კავშირი გაწყვეტილია"</string>
@@ -1464,7 +1461,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"გამოიყენეთ მუქი ფონი, რათა თქვენი ეკრანი უფრო კომფორტული სანახავი იყოს და შეამცირეთ ზოგიერთ ეკრანზე ბატარეის მოხმარება. გამორთული ეკრანისას შეიცვლება თქვენი თემა, თუ გაქვთ განრიგი."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"მუქი თემა ამჟამად მიჰყვება თქვენს ძილის დროის რეჟიმის განრიგს"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ძილის დროის რეჟიმის პარამეტრები"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{რეჟიმებმა შეიძლება მუქი თემაც გაააქტიუროს}=1{{mode_1} ასევე ააქტიურებს მუქ თემას}=2{{mode_1} და {mode_2} ასევე ააქტიურებს მუქ თემას}=3{{mode_1}, {mode_2} და {mode_3} ასევე ააქტიურებს მუქ თემას}other{{mode_1}, {mode_2} და # სხვა ასევე ააქტიურებს მუქ თემას}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"რეჟიმების პარამეტრები"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"გაანათეთ და გააფართოვეთ ფერების დიაპაზონი და სიცხადე High Dynamic Range-ის (HDR) სურათებსა თუ ვიდეოებში. HDR კონტენტი უფრო კაშკაშა გამოჩნდება."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ეკრანის დროის ლიმიტი"</string>
@@ -1481,6 +1479,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"ეკრანმზოგი"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"ეკრანმზოგი"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"მიუწვდომელია, რადგან ჩართულია ძილის დროის რეჟიმი"</string>
+    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"მიუწვდომელია"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"ეკრანმზოგის გამოყენება"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"დატენვისას ან სანამ ჩამაგრებულია"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"დამაგრებისა და დატენვისას"</string>
@@ -2392,9 +2391,16 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"შეგვაფასეთ"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Google-ის შშმ პირთა მხარდაჭერის გუნდთან დაკავშირება"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"მარტივი წვდომის გამოკითხვა"</string>
-    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"მუქი თემა სხვა აპებში"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"გაგვიზიარეთ გამოხმაურება"</string>
+    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"გამოკითხვაში მონაწილეობის მიღება"</string>
+    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
+    <skip />
+    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
+    <skip />
+    <string name="magnification_survey_notification_action" msgid="8042464088582144918">"გამოკითხვაში მონაწილეობის მიღება"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ჩამოტვირთული აპები"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"ექსპერიმენტული"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"ფუნქციების ალმები"</string>
@@ -2558,12 +2564,17 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"ეკრანის მასშტაბის ავტომატური განახლება"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ეკრანის მასშტაბის განახლება ერთი აპიდან მეორეზე გადასვლისას"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"ზარი შეწყდება ჩართვის ღილაკზე დაჭერით"</string>
-    <string name="dark_theme_version_category" msgid="8563711427335567656">"რეჟიმი"</string>
+    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
+    <skip />
+    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"სტანდარტული"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"სტანდარტული მუქი თემა"</string>
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"რთავს მუქ თემას თქვენს მოწყობილობასა და მხარდაჭერილ აპებზე"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"გაფართოებული"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"გაფართოებული მუქი თემა"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
+    <skip />
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"ავტომატურად რთავს მუქ თემას მეტ აპზე გაუმჯობესებული მისაწვდომობისთვის"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ანიმაციის გათიშვა"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"ეკრანზე მოძრაობის შემცირება"</string>
@@ -2662,7 +2673,8 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"ფერთა ინვერსიის შესახებ"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"შეიტყვეთ მეტი ფერთა ინვერსიის შესახებ"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"შეიტყვეთ მეტი მუქი თემის შესახებ"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"ზოგ აპს შეიძლება, არ ჰქონდეს მუქი თემის მხარდაჭერა გაფართოებულ პარამეტრებში. თუ გარეგნული ტიპის პრობლემას წააწყდებით, გამოიყენეთ სტანდარტული პარამეტრები."</string>
+    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
+    <skip />
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"სუბტიტრების ჩვენება"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"მხოლოდ მხარდაჭერილი აპებისთვის"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"სუბტიტრების ზომა და სტილი"</string>
@@ -2863,6 +2875,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"ოპტიმიზებული"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"შეზღუდული"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"დაიშვას ბატარეის მოხმარება ფონურად შეზღუდვების გარეშე. შეიძლება ბატარეის მოხმარება გაიზარდოს."</string>
+    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"ბატარეის მოხმარების ფონურ რეჟიმში დაშვება. შეიძლება ბატარეის მოხმარება გაიზარდოს."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"მოახდინეთ ოპტიმიზაცია მოხმარების მიხედვით. რეკომენდებულია აპების უმრავლესობისთვის."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"შეზღუდეთ ბატარეის მოხმარება ფონურ რეჟიმში. აპი შეიძლება სათანადოდ არ მუშაობდეს. შეტყობინებები შეიძლება დაყოვნდეს."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"იმის შეცვლამ, თუ როგორ იყენებს აპი ბატარეას, შეიძლება მის მუშაობაზე იმოქმედოს."</string>
@@ -2892,6 +2905,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"ზოგიერთი ფუნქცია შეიძლება შეზღუდული იყოს"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"ბატარეის მოხმარება"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"ყველაზე დიდი მოხმარების აპების ნახვა"</string>
+    <string name="battery_tip_default_limited_temporarily_title" msgid="2244840552837449409">"დატენა შეზღუდულია ბატარეის დასაცავად"</string>
+    <string name="battery_tip_default_limited_temporarily_summary" msgid="182448435746170298">"თქვენი ბატარეა თბილი იყო დიდი ხნის განმავლობაში. ნორმალური დატენა განახლდება მას შემდეგ, რაც თქვენი ბატარეა კიდევ უფრო გაგრილდება"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"დატენვა ოპტიმიზირებულია თქვენი ბატარეის დასაცავად"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"თქვენი ბატარეის სიცოცხლის ხანგრძლივობის გასაზრდელად, დატენვა ოპტიმიზებულია"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"შეიტყვეთ მეტი დატენვის შეწყვეტის შესახებ"</string>
@@ -2910,7 +2925,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"ეს აპი შეძლებს თქვენი ბატარეის ფონურ რეჟიმში მოხმარებას. ამან შესაძლოა ბატარეა სწრაფად ამოწუროს."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"წაშლა"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"გაუქმება"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"უგულებელყოფა"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6599920924910821386">"მაინც დატენა"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"შეამოწმეთ დამტენი აქსესუარი"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"შეიტყვეთ მეტი შეუთავსებელი დატენვის შესახებ"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
@@ -3097,8 +3112,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"ქსელის შეტყობინებები"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"მიიღეთ შეტყობინება, როდესაც თქვენი მოწყობილობა დაუშიფრავ ქსელს დაუკავშირდება, ან როდესაც ქსელი იწერს თქვენი მოწყობილობის უნიკალურ ან SIM-ის ID-ის"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"ქსელის გენერირება"</string>
-    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G ქსელის დაცვა თავს არიდებს იმ 2G ქსელებს, რომლებიც ნაკლებად უსაფრთხოა. ამან შესაძლოა, შეზღუდოს კავშირი ზოგ ადგილას. 2G ყოველთვის დაშვებულია გადაუდებელი ზარებისთვის, თუმცა, თუ საერთაშორისო როუმინგში იმყოფებით, ზარები შეიძლება ვერ განხორციელდეს."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G ქსელის დაცვა"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"დაშიფვრა"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"ქსელის გენერირება"</string>
@@ -3786,8 +3800,10 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"ფონის ჩაბნელება"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"ფონის ჩაბნელება"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"ფონის სიკაშკაშის გაფილტვრა"</string>
-    <string name="mode_dark_theme_title" msgid="8099007897943513209">"მუქი თემის ჩართვა"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"მუქი თემის ჩართვა"</string>
+    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
+    <skip />
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"შეცვალეთ მოწყობილობის თემა მუქი ფონზე, რაც ნაკლებად დაგიძაბავთ თვალებს"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{ეკრანის ცვლილებები არ დაფიქსირებულა}=1{{effect_1}}=2{{effect_1} და {effect_2}}=3{{effect_1}, {effect_2} და {effect_3}}other{{effect_1}, {effect_2} და # სხვა}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"ყველა შეტყობინების დაშვება"</string>
@@ -5554,8 +5570,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ტელეფონის ნომერი აკლია."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"კარგი"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G ქსელის დაცვა"</string>
-    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
-    <skip />
+    <string name="enable_2g_summary" msgid="6194875539424151678">"თავს არიდებს 2G ქსელებს, რომლებიც ნაკლებად უსაფრთხოა. ამან შესაძლოა, შეზღუდოს კავშირი ზოგ ადგილას. 2G ყოველთვის დაშვებულია გადაუდებელი ზარებისთვის, თუმცა, თუ საერთაშორისო როუმინგში იმყოფებით, ზარები შეიძლება ვერ განხორციელდეს."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> მოითხოვს 2G-ს ხელმისაწვდომობას"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"მხოლოდ დაშიფრული ქსელების დაშვება"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"ეს უფრო უსაფრთხოა, მაგრამ შესაძლოა გარკვეულ მდებარეობებში შეზღუდოს თქვენი მობილურ ქსელთან კავშირი. გადაუდებელი ზარი ყოველთვის დაშვებულია."</string>
@@ -5633,21 +5648,7 @@
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"გამორთეთ შეზღუდვები აპის ქვე დამუშავების სისტემის რესურსების გამოყენების შესახებ"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"ჩანიშვნების როლის იძულებით ჩართვა"</string>
     <string name="enable_notes_role_summary" msgid="5495721409392395089">"ჩართეთ ჩანიშვნების შექმნის სისტემის ინტეგრაციები ჩანიშვნების როლიდან. თუ ჩანიშვნების როლი უკვე ჩართულია, არაფერს მოიმოქმედებს. საჭიროებს გადატვირთვას."</string>
-    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"ტრანსლაცია"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"<xliff:g id="CURRENTAPP">%1$s</xliff:g>-ის ტრანსლაცია"</string>
-    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"მოუსმინეთ ტრანსლაციებს თქვენთან ახლოს"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"მოახდინეთ მედიის ახლომდებარე მოწყობილობებზე ტრანსლაცია ან მოუსმინეთ სხვა პირის ტრანსლაციას"</string>
-    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"ტრანსლაციები"</string>
-    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"უსმენთ"</string>
-    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"ტრანსლაციის პოვნა"</string>
-    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"ტრანსლაციის დატოვება"</string>
-    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR კოდის სკანირება"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"შეიყვანეთ პაროლი"</string>
-    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"დაკავშირება ვერ მოხერხდა. ცადეთ ხელახლა."</string>
-    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"პაროლი არასწორია"</string>
-    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"ტრანსლაციასთან მიერთება ვერ ხერხდება"</string>
-    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"მოსმენის დასაწყებად ცენტრში მოაქციეთ ქვემოთ მოცემული QR კოდი"</string>
-    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR კოდის ფორმატი არასწორია"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"eSIM-ზე გადაყვანა"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"გადაიტანეთ eSIM სხვა მოწყობილობაზე"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# აპი}other{# აპი}}"</string>
@@ -5921,12 +5922,8 @@
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"დეტალების ნახვა"</string>
     <string name="identity_check_promo_card_title" msgid="1495226082133610343">"იდენტობის შემოწმების გამოყენება უფრო მეტი აპის დასაცავად"</string>
     <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"როდესაც იყენებთ იდენტობის შემოწმებას ყველა აპში, რომლებითაც მხარდაჭერილია თითის ანაბეჭდი და სახით განბლოკვა, თქვენ უზრუნველყოფთ უფრო ძლიერ დაცვას და იღებთ უფრო თანმიმდევრულ გამოცდილებას დამატებითი ნაბიჯების გარეშე"</string>
-    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
-    <skip />
+    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"იდენტობის შემოწმება მუშაობს თქვენს საათზე"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"ნუ დაუშვებთ, რომ სხვა ადამიანებმა გახსნან აპები, რომლებიც საჭიროებს თითის ანაბეჭდს ან სახით განბლოკვას. Pixel Watch-თან დაკავშრებისას თქვენი უსაფრთხოება უზრუნველყოფილია მეტი მობილობით."</string>
+    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"გამოიყენეთ იდენტობის შემოწმება და საათი მეტ აპზე"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"უზრუნველყავით იდენტობის დაცვა ყველა აპზე, რომელიც მხარს უჭერს თითის ანაბეჭდს და სახით განბლოკვას სანდო ადგილებში, როგორებიცაა თქვენი სახლი ან ოფისი. გამოიყენეთ იდენტობის შემოწმება თქვენი საათით, რომ დაიცვათ საკუთარი თავი სანდო ადგილებს მიღმა."</string>
 </resources>

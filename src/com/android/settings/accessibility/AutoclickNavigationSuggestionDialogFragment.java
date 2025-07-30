@@ -66,8 +66,10 @@ public class AutoclickNavigationSuggestionDialogFragment extends InstrumentedDia
         return new AlertDialog.Builder(getContext())
                 .setTitle(R.string.accessibility_autoclick_navigation_title)
                 .setMessage(R.string.accessibility_autoclick_navigation_message)
-                .setNegativeButton(R.string.cancel, cancelListener)
-                .setPositiveButton(R.string.settings_label, settingsListener)
+                .setNegativeButton(R.string.accessibility_autoclick_keep_gesture_navigation,
+                        cancelListener)
+                .setPositiveButton(R.string.accessibility_autoclick_navigation_settings,
+                        settingsListener)
                 .create();
     }
 }

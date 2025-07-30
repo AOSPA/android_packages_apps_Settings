@@ -119,8 +119,8 @@ class TextReadingResetDialogTest {
         alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick()
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
-        assertThat(Settings.System.getFloat(context.contentResolver, Settings.System.FONT_SCALE))
-            .isEqualTo(1f)
+        assertThat(Settings.System.getString(context.contentResolver, Settings.System.FONT_SCALE))
+            .isNull()
         assertThat(
                 Settings.Secure.getInt(
                     context.contentResolver,

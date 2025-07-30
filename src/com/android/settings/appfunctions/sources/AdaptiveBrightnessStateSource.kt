@@ -25,7 +25,10 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDev
 class AdaptiveBrightnessStateSource : DeviceStateSource {
     override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
 
-    override fun get(context: Context): PerScreenDeviceStates {
+    override fun get(
+        context: Context,
+        sharedDeviceStateData: SharedDeviceStateData,
+    ): PerScreenDeviceStates {
         val isAdaptiveBrightnessEnabled =
             Settings.System.getInt(
                 context.contentResolver,

@@ -48,6 +48,7 @@ import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.bluetooth.ui.view.DeviceDetailsMoreSettingsFragment
 import com.android.settings.bluetooth.ui.viewmodel.BluetoothDeviceDetailsViewModel
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.dashboard.RestrictedDashboardFragment
 import com.android.settings.flags.Flags
@@ -118,6 +119,8 @@ abstract class BluetoothDetailsConfigurableFragment :
                 ?: run {
                     Log.w(TAG, "onAttach() address is null!")
                     super.onAttach(context)
+                    // Go to connected devices screen if address is null.
+                    launchConnectedDevicesScreen()
                     finish()
                     return
                 }
@@ -126,6 +129,8 @@ abstract class BluetoothDetailsConfigurableFragment :
                 ?: run {
                     Log.w(TAG, "onAttach() CachedDevice is null!")
                     super.onAttach(context)
+                    // Go to connected devices screen if the device is not found.
+                    launchConnectedDevicesScreen()
                     finish()
                     return
                 }
@@ -201,9 +206,8 @@ abstract class BluetoothDetailsConfigurableFragment :
                 // UntitledPreferenceCategory here.
                 val categoryKey = getPreferenceCategoryKey(settingId)
                 configDisplayOrder.add(categoryKey)
-                currentContainer = UntitledPreferenceCategory(requireContext()).apply {
-                    key = categoryKey
-                }
+                currentContainer =
+                    UntitledPreferenceCategory(requireContext()).apply { key = categoryKey }
                 preferenceScreen.addPreference(currentContainer)
             }
             if (existingPrefKey != null) {
@@ -254,14 +258,17 @@ abstract class BluetoothDetailsConfigurableFragment :
                         val item =
                             it
                                 ?: run {
-                                    existedPref?.let {
-                                        container.removePreference(existedPref)
-                                    }
+                                    existedPref?.let { container.removePreference(existedPref) }
                                     return@onEach
                                 }
                         addPreference(
                             container,
-                            existedPref, row, item, prefKey, settingItem.highlighted)
+                            existedPref,
+                            row,
+                            item,
+                            prefKey,
+                            settingItem.highlighted,
+                        )
                     }
                     .launchIn(lifecycleScope)
                     .also { uiJobs.add(it) }
@@ -672,11 +679,23 @@ abstract class BluetoothDetailsConfigurableFragment :
         if (cachedDevice != null) {
             return cachedDevice
         }
+        if (remoteDevice.bondState != BluetoothDevice.BOND_BONDED) {
+            return null
+        }
         Log.i(TAG, "Add device to cached device manager: " + remoteDevice.anonymizedAddress)
         return localBluetoothManager.cachedDeviceManager.addDevice(remoteDevice)
     }
 
     protected fun isCachedDeviceInitialized() = ::cachedDevice.isInitialized
+
+    private fun launchConnectedDevicesScreen() {
+        SubSettingLauncher(context)
+            .setDestination(ConnectedDeviceDashboardFragment::class.java.getName())
+            .setTitleRes(R.string.connected_devices_dashboard_title)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            .setSourceMetricsCategory(SettingsEnums.BLUETOOTH_DEVICE_DETAILS)
+            .launch()
+    }
 
     private class SpotlightPreference(context: Context) : Preference(context) {
         init {
@@ -702,7 +721,8 @@ abstract class BluetoothDetailsConfigurableFragment :
         private const val EVENT_INVISIBLE = 0
         private const val EVENT_VISIBLE = 1
 
-        private fun getPreferenceKey(settingId: Int) = "DEVICE_SETTING_${settingId}"
-        private fun getPreferenceCategoryKey(settingId: Int) = "CATEGORY_STARTS_WITH_${settingId}"
+        private fun getPreferenceKey(settingId: Int) = "DEVICE_SETTING_$settingId"
+
+        private fun getPreferenceCategoryKey(settingId: Int) = "CATEGORY_STARTS_WITH_$settingId"
     }
 }

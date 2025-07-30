@@ -95,6 +95,7 @@ class DisplayTopologyPreferenceTest {
                     val mode = Mode(it.value.width, it.value.height, 60f)
                     DisplayDevice(
                         it.key,
+                        "test:123",
                         "HDMI",
                         mode,
                         listOf(mode),
@@ -121,16 +122,14 @@ class DisplayTopologyPreferenceTest {
 
         override fun registerDisplayListener(listener: DisplayManager.DisplayListener) {
             if (displayListener != null) {
-                throw IllegalStateException(
-                    "already have a listener registered: ${displayListener}"
-                )
+                throw IllegalStateException("already have a listener registered: $displayListener")
             }
             displayListener = listener
         }
 
         override fun unregisterDisplayListener(listener: DisplayManager.DisplayListener) {
             if (displayListener != listener) {
-                throw IllegalStateException("no such listener registered: ${listener}")
+                throw IllegalStateException("no such listener registered: $listener")
             }
             displayListener = null
         }

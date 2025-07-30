@@ -194,7 +194,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         private final LocaleStore.LocaleInfo mSelectedLocaleInfo;
         private final int mMenuItemId;
         private final MetricsFeatureProvider mMetricsFeatureProvider;
-        private final boolean mShowDialogForNotTranslated;
+        private boolean mShowDialogForNotTranslated;
 
         private LanguageAndRegionSettings mParent;
 
@@ -263,7 +263,8 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                             R.string.desc_notice_device_locale_and_region_settings_change,
                             localeLanguage, localeCountry);
                     dialogContent.mMessage =
-                            mMenuItemId == R.id.remove && mSelectedLocaleInfo == defaultLocaleInfo
+                            mMenuItemId == R.id.remove && mSelectedLocaleInfo.toString().equals(
+                                    defaultLocaleInfo.toString())
                                     ? mContext.getString(
                                     R.string.dlg_desc_delete_preferred_default_locale,
                                     defaultLocaleInfo.getFullNameNative())
@@ -294,11 +295,19 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                     boolean changeSystemLanguage = mLocaleInfo.getLocale().toString().equals(
                             Locale.getDefault().toString());
                     String firstTranslatedInfoName = null;
+                    LocaleStore.LocaleInfo localeInfo;
                     if (changeSystemLanguage) {
-                        firstTranslatedInfoName = LocaleUtils.getUserLocaleList().stream().filter(
+                        localeInfo = LocaleUtils.getUserLocaleList().stream().filter(
                                 i -> (i.isTranslated() && !i.getLocale().equals(
-                                        Locale.getDefault()))).findFirst().get()
-                                .getFullNameNative();
+                                        Locale.getDefault()))).findFirst().orElse(null);
+                        firstTranslatedInfoName =
+                                localeInfo != null
+                                        ? localeInfo.getFullNameNative()
+                                        : LocaleUtils.getUserLocaleList().get(0)
+                                                .getFullNameNative();
+                        if (localeInfo == null) {
+                            mShowDialogForNotTranslated = true;
+                        }
                     }
                     int titleId = changeSystemLanguage
                             ? R.string.title_change_system_locale

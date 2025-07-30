@@ -131,8 +131,7 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Порака за барање пристап"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Видлив како „<xliff:g id="DEVICE_NAME">^1</xliff:g>“ за другите уреди"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Вклучете Bluetooth за да се поврзете со други уреди."</string>
-    <!-- no translation found for shared_network_footer (5178404860420039168) -->
-    <skip />
+    <string name="shared_network_footer" msgid="5178404860420039168">"Контактирајте со сопственикот на мрежата или администраторот на уредот за да извршите промени на мрежава."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Ваши уреди"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Спарување нов уред"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Оневозможи хардверско ослободување за Bluetooth A2DP"</string>
@@ -996,10 +995,8 @@
     <string name="external_display_off" msgid="5634413756025351374">"Исклучено"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Надворешни екрани"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Вграден екран"</string>
-    <!-- no translation found for builtin_display_settings_universal_cursor_title (209064877333151313) -->
-    <skip />
-    <!-- no translation found for builtin_display_settings_universal_cursor_description (4209129904885332824) -->
-    <skip />
+    <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Универзален курсор"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Преместувајте го глувчето од еден на друг екран"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Користи надворешен екран"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Резолуција на екранот"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Надворешниот екран е исклучен"</string>
@@ -1464,7 +1461,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Користете темна заднина за да го направите екранот попријатен за гледање и да го намалите користењето на батеријата на некои екрани. Вашата тема ќе се промени ако имате распоред, кога екранот е исклучен."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"„Темната тема“ во моментов го следи вашиот распоред за режимот „Време за спиење“"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Поставки за режимот „Време за спиење“"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Режимите може да активираат и „Темна тема“}=1{{mode_1} активира и „Темна тема“}=2{{mode_1} и {mode_2} активираат и „Темна тема“}=3{{mode_1}, {mode_2} и {mode_3} активираат и „Темна тема“}one{{mode_1}, {mode_2} и уште # активираат и „Темна тема“}other{{mode_1}, {mode_2} и уште # активираат и „Темна тема“}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Поставки за режими"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Осветлете и проширете го опсегот на бои и јасноста на сликите и видеата со висок динамички опсег (HDR). HDR-содржините ќе бидат посветли."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Исклучување на екранот"</string>
@@ -1481,6 +1479,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Штедач на екран"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"штедач на екран"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Недостапно бидејќи е вклучен режимот „Време за спиење“"</string>
+    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Не е достапно"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Користи „Штедач на екран“"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Додека се полни или е приклучен"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Додека е приклучен на док и се полни"</string>
@@ -2392,9 +2391,16 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Оценете нѐ"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Контактирајте со службата за поддршка за лица со попреченост на Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Анкета за пристапност"</string>
-    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Уживате во „Темната тема“ во повеќе апликации?"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Споделете повратни информации"</string>
+    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Пополнете ја анкетата"</string>
+    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
+    <skip />
+    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
+    <skip />
+    <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Пополнете ја анкетата"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Преземени апликации"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Експериментално"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Ознаки за функции"</string>
@@ -2558,12 +2564,17 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Автоматско ажурирање на зголемување на екран"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Ажурирај зголемување екран при премини меѓу аплик."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Прекини повик со копче за вклучување"</string>
-    <string name="dark_theme_version_category" msgid="8563711427335567656">"Режим"</string>
+    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
+    <skip />
+    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Стандардно"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Стандардна „Темна тема“"</string>
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Применува „Темна тема“ на вашиот уред и поддржаните апликации"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Проширено"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Проширена „Темна тема“"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
+    <skip />
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Автоматски применува „Темна тема“ на повеќе апликации заради подобра пристапност"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Отстрани анимации"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Намали го движењето на екранот"</string>
@@ -2662,7 +2673,8 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"За „Инверзија на боите“"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Дознајте повеќе за инверзијата на боите"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Дознајте повеќе за „Темната тема“"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Некои апликации може да не поддржуваат „Темна тема“ во проширената поставка. Ако имате проблеми со изгледот, користете ја стандардната поставка."</string>
+    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
+    <skip />
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Прикажувај титлови"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Само за поддржани апликации"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Големина и стил на титловите"</string>
@@ -2863,6 +2875,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Оптимизирано"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Ограничено"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Дозволете го користењето на батеријата во заднина без ограничувања. Може да троши повеќе батерија."</string>
+    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"Дозволете користење на батеријата во заднина. Може да троши повеќе батерија."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Оптимизирајте според користењето. Се препорачува за повеќето апликации."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Ограничете го користењето на батеријата во заднина. Апликацијата може да не работи според очекувањата. Известувањата може да бидат одложени."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Ако го промените начинот на кој апликацијата ја користи батеријата, тоа може да влијае на нејзината изведба."</string>
@@ -2892,6 +2905,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Некои функции може да бидат ограничени"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Поголемо користење на батеријата"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Прегледајте ги апликациите со најголемо користење"</string>
+    <string name="battery_tip_default_limited_temporarily_title" msgid="2244840552837449409">"Полнењето е ограничено за да се заштити батеријата"</string>
+    <string name="battery_tip_default_limited_temporarily_summary" msgid="182448435746170298">"Вашата батерија беше топла подолг период. Нормалното полнење ќе продолжи откако батеријата ќе се излади дополнително"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Полнењето е оптимизирано за да се заштити батеријата"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"За да помогне да се продолжи работниот век на батеријата, полнењето е оптимизирано"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Дознајте повеќе за паузираното полнење"</string>
@@ -2910,7 +2925,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Апликацијава ќе може да ја користи батеријата во заднина. Батеријата може да се потроши порано од очекуваното."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Да"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Откажи"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"Отфрли"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6599920924910821386">"Сепак полни"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Проверете го додатокот за полнење"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Дознајте повеќе за некомпатибилното полнење"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Управник со батерија"</string>
@@ -3097,8 +3112,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Известувања за мрежата"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Добивајте известувања кога вашиот уред ќе се поврзе на нешифрирана мрежа или кога мрежата ќе го евидентира уникатниот ID на уредот или на SIM-картичката"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Генерирање мрежа"</string>
-    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"Заштитата од 2G-мрежи ги избегнува 2G-мрежите, коишто се помалку безбедни. Ова може да ја ограничи поврзливоста на некои места. 2G е секогаш дозволена за итни повици, но повиците може да не се поврзат ако сте во меѓународен роаминг."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"Заштита од 2G-мрежи"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Шифрирање"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Генерации на мрежата"</string>
@@ -3786,8 +3800,10 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Затемнете го тапетот"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"затемнете го тапетот"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Филтрирање на осветленоста на тапетот"</string>
-    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Овозможете темна тема"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"овозможете темна тема"</string>
+    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
+    <skip />
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Сменете ја темата на уредот за да користите темна заднина, што е попријатна за очите"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Нема промени на екранот}=1{{effect_1}}=2{{effect_1} и {effect_2}}=3{{effect_1}, {effect_2} и {effect_3}}one{{effect_1}, {effect_2} и уште #}other{{effect_1}, {effect_2} и уште #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Дозволи ги сите известувања"</string>
@@ -5173,24 +5189,19 @@
     <string name="title_no_satellite_plan" msgid="7255726881685672846">"Размената на пораки не е опфатена во вашата сметка"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Дознајте повеќе"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Како функционира"</string>
-    <!-- no translation found for title_satellite_connection_guide (7080935804228845540) -->
-    <skip />
+    <string name="title_satellite_connection_guide" msgid="7080935804228845540">"Кога немате мобилна или Wi-Fi мрежа"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Испратете порака со телефонски број"</string>
-    <!-- no translation found for summary_satellite_connection_guide (1962847581645612628) -->
-    <skip />
+    <string name="summary_satellite_connection_guide" msgid="1962847581645612628">"Вашиот телефон ќе се поврзе на сателит автоматски. За најдобра врска, погрижете се да имате непречен поглед кон небото."</string>
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Ако немате мобилна мрежа, ќе видите опција за користење сателит."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Откако телефонот ќе ви се поврзе на сателит"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Следете ги чекорите за да се поврзете со сателитот"</string>
-    <!-- no translation found for summary_supported_service_with_constrained_data (8495750699335612848) -->
-    <skip />
-    <!-- no translation found for summary_supported_service_with_unconstrained_data (5010592489972147979) -->
-    <skip />
+    <string name="summary_supported_service_with_constrained_data" msgid="8495750699335612848">"Може да испраќате пораки до сите, вклучително и до службите за итни случаи и да користите поддржани апликации. Вашиот телефон ќе се поврзе на мобилна мрежа повторно кога ќе биде достапна."</string>
+    <string name="summary_supported_service_with_unconstrained_data" msgid="5010592489972147979">"Може да испраќате пораки до сите, вклучително и до службите за итни случаи и да користите мобилен интернет за апликации. Вашиот телефон ќе се поврзе на мобилна мрежа повторно кога ќе биде достапна."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Може да испраќате пораки до сите, меѓу кои и службите за итни случаи. Вашиот телефон ќе се поврзе на мобилна мрежа повторно кога ќе биде достапна."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"Откако ќе ви се поврзе телефонот, може да испраќате пораки до сите, меѓу кои и службите за итни случаи."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Имајте предвид"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"Поврзувањето на сателит може да трае подолго, а сателитската врска е достапна само во некои области."</string>
-    <!-- no translation found for satellite_footer_content_section_2 (555594211014015682) -->
-    <skip />
+    <string name="satellite_footer_content_section_2" msgid="555594211014015682">"Временските услови и одредени структури може да влијаат на сателитската врска."</string>
     <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"Повикувањето преку сателит не е достапно."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Сѐ уште може да се воспоставуваат итни повици."</string>
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Потребна е мобилна или Wi‑Fi мрежа за прегледување на надворешните линкови."</string>
@@ -5202,10 +5213,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Сателит"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Сателитска врска"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"сателитска врска"</string>
-    <!-- no translation found for title_have_satellite_constrained_data_plan (8275865334911177900) -->
-    <skip />
-    <!-- no translation found for title_have_satellite_unconstrained_data_plan (5437095773679990375) -->
-    <skip />
+    <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Користењето поддржани апликации е опфатено во вашата сметка"</string>
+    <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Користењето мобилен интернет за сите апликации е опфатено во вашата сметка"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Поддржани апликации на телефонот"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Погледнете ги сите апликации поддржани од сателит"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Поддржани апликации на телефонот"</string>
@@ -5561,8 +5570,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Телефонскиот број недостасува."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Во ред"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"Заштита од 2G-мрежи"</string>
-    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
-    <skip />
+    <string name="enable_2g_summary" msgid="6194875539424151678">"Избегнува 2G-мрежи, коишто се помалку безбедни. Ова може да ја ограничи поврзливоста на некои места. 2G е секогаш дозволена за итни повици, но повиците може да не се поврзат ако сте во меѓународен роаминг."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> има потреба од 2G за да биде достапен"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Дозволи само шифрирани мрежи"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Ова е побезбедно, но може да ја ограничи врската со мобилната мрежа на некои локации. Итните повици се секогаш дозволени."</string>
@@ -5640,21 +5648,7 @@
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Ги оневозможува ограничувањата за користење системски ресурси за подредените процеси на апликациите"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Присилно овозможување на улогата „Белешки“"</string>
     <string name="enable_notes_role_summary" msgid="5495721409392395089">"Овозможете системски интеграции за фаќање белешки преку улогата „Белешки“. Ако улогата „Белешки“ е веќе овозможена, не правете ништо. Потребно е рестартирање."</string>
-    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Емитување"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Емитување на <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
-    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Слушајте емитувања во ваша близина"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Емитувајте аудиовизуелни содржини на уреди во ваша близина или слушајте нечие емитување"</string>
-    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Емитувања"</string>
-    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Се слуша"</string>
-    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Најди емитувања"</string>
-    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Напушти го емитувањето"</string>
-    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Скенирај QR-код"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Внесете лозинка"</string>
-    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Не може да се поврзе. Обидете се повторно."</string>
-    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Погрешна лозинка"</string>
-    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Не може да се вклучи во емитувањето"</string>
-    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"За да започне слушањето, центрирајте го QR-кодот долу"</string>
-    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-кодот не е во важечки формат"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Конвертирај во eSIM-картичка"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Префрли ја eSIM-картичката на друг уред"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# апликација}one{# апликација}other{# апликации}}"</string>
@@ -5928,12 +5922,8 @@
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Прикажи ги деталите"</string>
     <string name="identity_check_promo_card_title" msgid="1495226082133610343">"Користете „Проверка на идентитетот“ за да заштитите повеќе апликации"</string>
     <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"Кога користите „Проверка на идентитет“ за сите апликации што поддржуваат „Отклучување со отпечаток“ и „Отклучување со лик“, обезбедувате посилна заштита и подоследно доживување – нема потреба од дополнително поставување"</string>
-    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
-    <skip />
+    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"„Проверка на идентитетот“ функционира со часовникот"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Спречете ги другите да отвораат апликации што бараат „Отклучување со лик“ или „Отклучување со отпечаток“. Кога сте поврзани со часовникот, вашата безбедност е загарантирана со поголема мобилност."</string>
+    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Користете „Проверка на идентитетот“ и часовник на повеќе апликации"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Заштитете го вашиот идентитет на сите апликации што поддржуваат „Отклучување со лик“ или „Отклучување со отпечаток“ на доверливи места како што се вашиот дом или канцеларија. Користете ја функцијата „Проверка на идентитетот“ со вашиот часовник за да ја проширите заштитата и надвор од доверливите места."</string>
 </resources>

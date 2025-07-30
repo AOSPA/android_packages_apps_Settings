@@ -20,8 +20,10 @@ import android.app.settings.SettingsEnums
 import android.os.Bundle
 import android.window.DesktopExperienceFlags
 import androidx.annotation.VisibleForTesting
+import androidx.lifecycle.ViewModelProvider
 import androidx.preference.ListPreference
 import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragmentBase
 import com.android.settings.Utils.createAccessibleSequence
@@ -33,11 +35,16 @@ import com.android.settings.core.SubSettingLauncher
  * Fragment containing list of preferences for a single display, which gets updated dynamically,
  * based on the currently selected display
  */
-open class SelectedDisplayPreferenceFragment : SettingsPreferenceFragmentBase() {
+open class SelectedDisplayPreferenceFragment(
+    private val testViewModel: DisplayPreferenceViewModel? = null
+) : SettingsPreferenceFragmentBase() {
 
     private lateinit var viewModel: DisplayPreferenceViewModel
 
+    private lateinit var selectedDisplayPreference: PreferenceCategory
     private lateinit var rotationEntries: Array<String>
+
+    private val prefComponents = mutableListOf<PrefComponent>()
 
     override fun getMetricsCategory(): Int {
         return SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY
@@ -78,12 +85,21 @@ open class SelectedDisplayPreferenceFragment : SettingsPreferenceFragmentBase() 
 
     override fun onCreateCallback(icicle: Bundle?) {
         addPreferencesFromResource(R.xml.external_display_settings)
-        // TODO(b/409354332): Setup viewmodel
+        if (testViewModel != null) {
+            // Test-only path
+            viewModel = testViewModel
+        } else {
+            viewModel =
+                ViewModelProvider(requireParentFragment())
+                    .get(DisplayPreferenceViewModel::class.java)
+        }
         setup()
     }
 
     override fun onStartCallback() {
-        // TODO(b/409354332): Observe viewmodel
+        viewModel.uiState.observe(viewLifecycleOwner) { state ->
+            update(state.selectedDisplayId, state.enabledDisplays, state.isMirroring)
+        }
     }
 
     override fun onStopCallback() {
@@ -91,15 +107,58 @@ open class SelectedDisplayPreferenceFragment : SettingsPreferenceFragmentBase() 
     }
 
     private fun setup() {
-        // TODO(b/409354332): Setup preference
+        selectedDisplayPreference = PreferenceCategory(requireContext())
+        preferenceScreen.addPreference(selectedDisplayPreference)
+
+        // Built-in display preferences
+        prefComponents.add(PrefComponent(mirroringPreference(), PrefInfo.DISPLAY_MIRRORING))
+        prefComponents.add(
+            PrefComponent(builtinDisplaySizePreference(), PrefInfo.DISPLAY_SIZE_AND_TEXT)
+        )
+        // TODO(b/420885578): Add universal cursor preference
+        // External display preferences
+        prefComponents.add(PrefComponent(externalDisplaySizePreference(), PrefInfo.DISPLAY_SIZE))
+        prefComponents.add(PrefComponent(resolutionPreference(), PrefInfo.DISPLAY_RESOLUTION))
+        prefComponents.add(PrefComponent(rotationPreference(), PrefInfo.DISPLAY_ROTATION))
+
+        prefComponents.forEach { selectedDisplayPreference.addPreference(it.preference) }
     }
 
     private fun update(
         displayId: Int,
         enabledDisplays: Map<Int, DisplayDevice>,
-        isMirroring: Boolean
+        isMirroring: Boolean,
     ) {
-        // TODO(b/409354332): Update preferences
+        val display = enabledDisplays[displayId]
+        // By design, if there's one or more enabled connected displays, `displayId` should always
+        // be a valid key of `enabledDisplays`. In case where there's no enabled connected display,
+        // parent fragment should set this fragment to INVISIBLE.
+        // This is just a fail-safe for unexpected behavior
+        if (display == null) {
+            prefComponents.forEach { it.preference.setVisible(false) }
+            selectedDisplayPreference.setTitle("")
+            return
+        }
+        val displayType =
+            if (display.isConnectedDisplay) DisplayType.EXTERNAL_DISPLAY
+            else DisplayType.BUILTIN_DISPLAY
+        prefComponents.forEach { it.preference.setVisible(it.prefInfo.displayType == displayType) }
+
+        if (displayType == DisplayType.BUILTIN_DISPLAY) {
+            selectedDisplayPreference.setTitle(R.string.builtin_display_settings_category)
+        } else {
+            selectedDisplayPreference.setTitle(display.name)
+
+            selectedDisplayPreference
+                .findPreference<ExternalDisplaySizePreference>(PrefInfo.DISPLAY_SIZE.key)
+                ?.let { updateExternalDisplaySizePreference(it, display, isMirroring) }
+            selectedDisplayPreference
+                .findPreference<Preference>(PrefInfo.DISPLAY_RESOLUTION.key)
+                ?.let { updateResolutionPreference(it, display) }
+            selectedDisplayPreference
+                .findPreference<ListPreference>(PrefInfo.DISPLAY_ROTATION.key)
+                ?.let { updateRotationPreference(it, display) }
+        }
     }
 
     private fun mirroringPreference(): MirrorPreference {
@@ -139,7 +198,12 @@ open class SelectedDisplayPreferenceFragment : SettingsPreferenceFragmentBase() 
     private fun updateExternalDisplaySizePreference(
         preference: ExternalDisplaySizePreference,
         display: DisplayDevice,
+        isMirroring: Boolean
     ) {
+        if (isMirroring) {
+            preference.setVisible(false)
+            return
+        }
         val displayMode = display.mode ?: return
         preference.setStateForPreference(
             displayMode.physicalWidth,
@@ -221,7 +285,6 @@ open class SelectedDisplayPreferenceFragment : SettingsPreferenceFragmentBase() 
     internal enum class DisplayType {
         BUILTIN_DISPLAY,
         EXTERNAL_DISPLAY,
-        UNKNOWN,
     }
 
     @VisibleForTesting
@@ -255,10 +318,7 @@ open class SelectedDisplayPreferenceFragment : SettingsPreferenceFragmentBase() 
             "pref_key_external_display_rotation",
             DisplayType.EXTERNAL_DISPLAY,
         ),
-        EMPTY_DISPLAY(
-            R.string.external_display_not_found_footer_title,
-            "pref_key_empty_display",
-            DisplayType.UNKNOWN,
-        ),
     }
+
+    private data class PrefComponent(val preference: Preference, val prefInfo: PrefInfo)
 }

@@ -48,6 +48,8 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
     override val highlightMenuKey
         get() = R.string.menu_key_accessibility
 
+    override fun isIndexable(context: Context): Boolean = true
+
     override fun isFlagEnabled(context: Context) = Flags.catalystAccessibilityColorAndMotion()
 
     override fun hasCompleteHierarchy(): Boolean = true

@@ -32,6 +32,8 @@ import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.LaunchAccessibilityActivityPreferenceFragment
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
+import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityFooterPreference.Companion.FOOTER_KEY
+import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityFooterPreference.Companion.HTML_FOOTER_KEY
 import com.android.settings.accessibility.shared.ui.LaunchAppInfoPreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
@@ -135,6 +137,8 @@ open class A11yActivityScreen(context: Context, override val arguments: Bundle) 
                             packageName = shortcutInfo.componentName.packageName,
                         )
                     }
+                +A11yActivityFooterPreference(HTML_FOOTER_KEY, shortcutInfo, loadHtmlFooter = true)
+                +A11yActivityFooterPreference(FOOTER_KEY, shortcutInfo, loadHtmlFooter = false)
             }
         }
 

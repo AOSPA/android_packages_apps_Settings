@@ -27,7 +27,6 @@ import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.keyboard.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -74,13 +73,7 @@ public class TouchpadAndMouseSettings extends DashboardFragment {
                     if (!fixTouchpadAndMouseSettingsSearchIndex()) {
                         return isFeatureOn && isTouchpad;
                     }
-                    boolean isNewPageFlagDisabled = !Flags.keyboardAndTouchpadA11yNewPageEnabled();
-                    boolean isPointerCustomizationEnabled =
-                            android.view.flags.Flags.enableVectorCursorA11ySettings();
-                    boolean isMouse = InputPeripheralsSettingsUtils.isMouse();
-                    return ((isFeatureOn && isTouchpad)
-                            || (isPointerCustomizationEnabled && isMouse))
-                            && isNewPageFlagDisabled;
+                    return false;
                 }
             };
 }
