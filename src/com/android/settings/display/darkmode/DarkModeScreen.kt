@@ -33,6 +33,7 @@ import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -97,6 +98,14 @@ abstract class BaseDarkModeScreen(context: Context) :
         preferenceHierarchy(context) {
             +DarkModeTopIntroPreference()
             +DarkModeMainSwitchPreference(darkModeStorage)
+            +TwilightLocationPreference()
+            if (android.view.accessibility.Flags.forceInvertColor()) {
+                +PreferenceCategory("dark_theme_group", R.string.dark_theme_version_category) += {
+                    val modeStorage = DarkThemeModeStorage(context)
+                    +StandardDarkModeSelectorPreference(modeStorage)
+                    +ExpandedDarkModeSelectorPreference(modeStorage)
+                }
+            }
         }
 
     override fun storage(context: Context): KeyValueStore = darkModeStorage

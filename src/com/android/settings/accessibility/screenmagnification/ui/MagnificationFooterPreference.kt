@@ -23,8 +23,8 @@ import android.text.Html
 import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.accessibility.screenmagnification.OneFingerPanningPreferenceController
-import com.android.settings.accessibility.shared.AccessibilityFooterPreferenceBinding
-import com.android.settings.accessibility.shared.AccessibilityFooterPreferenceMetadata
+import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceBinding
+import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceMetadata
 import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver

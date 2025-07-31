@@ -68,4 +68,9 @@ class OutlineTextDataStoreTest {
                 HighContrastTextMigrationReceiver.PromptState.PROMPT_UNNECESSARY,
             )
     }
+
+    @Test
+    fun getDefaultValue_returnFalse() {
+        assertThat(dataStore.getDefaultValue("key", Boolean::class.javaObjectType)).isFalse()
+    }
 }

@@ -131,8 +131,6 @@ public class UserAdapterTest {
 
     @Test
     public void createUserSpinnerAdapter_withWorkAndPrivateProfiles_shouldSucceed() {
-        mSetFlagsRule.enableFlags(
-                android.multiuser.Flags.FLAG_HANDLE_INTERLEAVED_SETTINGS_FOR_PRIVATE_SPACE);
         when(mUserManager.getUserProfiles()).thenReturn(
                 Lists.newArrayList(
                         UserHandle.of(mPersonalUserId),
@@ -150,8 +148,6 @@ public class UserAdapterTest {
 
     @Test
     public void createUserSpinnerAdapter_withWorkAndQuietPrivateProfile_shouldShowTwoProfiles() {
-        mSetFlagsRule.enableFlags(
-                android.multiuser.Flags.FLAG_HANDLE_INTERLEAVED_SETTINGS_FOR_PRIVATE_SPACE);
         when(mUserManager.getUserProfiles()).thenReturn(
                 Lists.newArrayList(
                         UserHandle.of(mPersonalUserId),

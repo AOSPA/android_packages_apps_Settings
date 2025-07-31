@@ -107,6 +107,7 @@
     <SwitchPreferenceCompat
         android:key="accessibility_control_autoclick_revert_to_left_click"
         android:title="@string/autoclick_revert_to_left_click_title"
+        android:summary="@string/autoclick_revert_to_left_click_summary"
         settings:controller="com.android.settings.accessibility.ToggleAutoclickRevertToLeftClickController"/>
 
     <com.android.settings.accessibility.AccessibilityFooterPreference

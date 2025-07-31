@@ -26,6 +26,7 @@ import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.getDe
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.getGestureTypeByPrefKey;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.getLabel;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.getLaunchingAppComponentName;
+import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.isGestureTypeLaunchApp;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.setGestureType;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.setLaunchAppAsGestureType;
 
@@ -137,7 +138,7 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
         if (mPreference != null) {
             if (mPreferenceKey.equals(APP_KEY)) {
                 mPreference.setExtraWidgetOnClickListener(
-                        v -> appSelectionLauncher(/* isSetGesture= */ false).launch());
+                        v -> appSelectionLauncher(/* isRadioClicked= */ false).launch());
             }
             mPreference.setOnClickListener(this);
             if (touchpadSettingsDesignUpdate() && mPreferenceKey.equals(ASSISTANT_KEY)) {
@@ -146,12 +147,13 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
         }
     }
 
-    private SubSettingLauncher appSelectionLauncher(boolean isSetGesture) {
+    private SubSettingLauncher appSelectionLauncher(boolean isRadioClicked) {
         SubSettingLauncher subSettingLauncher =
                 new SubSettingLauncher(mContext)
                         .setDestination(TouchpadThreeFingerTapAppSelectionFragment.class.getName())
                         .setSourceMetricsCategory(SettingsEnums.TOUCHPAD_THREE_FINGER_TAP);
-        if (isSetGesture) {
+        // The gesture has to be set right away if the action is launch app
+        if (isRadioClicked || isGestureTypeLaunchApp(mContentResolver)) {
             Bundle args = new Bundle();
             args.putBoolean(SET_GESTURE, true);
             subSettingLauncher.setArguments(args);
@@ -173,7 +175,7 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
                 // app chosen), we launch the app selection page to pick an app to launch
                 ComponentName launchingApp = getLaunchingAppComponentName(mSharedPreferences);
                 if (launchingApp == null) {
-                    appSelectionLauncher(/* isSetGesture= */ true).launch();
+                    appSelectionLauncher(/* isRadioClicked= */ true).launch();
                 } else {
                     setLaunchAppAsGestureType(mContentResolver, mInputManager, launchingApp);
                 }

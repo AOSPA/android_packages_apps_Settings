@@ -72,6 +72,11 @@ open class PowerUsageSummaryScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +BatteryHeaderPreference()
+            if (Flags.deeplinkBattery25q4()) {
+                +UntitledPreferenceCategoryMetadata("power_usage_summary_category") += {
+                    +PowerUsageAdvancedScreen.KEY
+                }
+            }
             +UntitledPreferenceCategoryMetadata("percentage_category") += {
                 +BatteryPercentageSwitchPreference()
             }

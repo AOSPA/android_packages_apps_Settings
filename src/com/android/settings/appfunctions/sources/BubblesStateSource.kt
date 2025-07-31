@@ -27,7 +27,10 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDev
 class BubblesStateSource : DeviceStateSource {
     override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
 
-    override fun get(context: Context): PerScreenDeviceStates {
+    override fun get(
+        context: Context,
+        sharedDeviceStateData: SharedDeviceStateData,
+    ): PerScreenDeviceStates {
         val isEnabled =
             Settings.Global.getInt(
                 context.contentResolver,

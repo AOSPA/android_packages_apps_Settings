@@ -131,8 +131,7 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Kahilingan sa pag-access ng mensahe"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Nakikita bilang “<xliff:g id="DEVICE_NAME">^1</xliff:g>” sa iba pang device"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"I-on ang Bluetooth para kumonekta sa ibang device."</string>
-    <!-- no translation found for shared_network_footer (5178404860420039168) -->
-    <skip />
+    <string name="shared_network_footer" msgid="5178404860420039168">"Makipag-ugnayan sa may-ari ng network o admin ng device para gumawa ng mga pagbabago sa network na ito."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Ang iyong mga device"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Magpares ng bagong device"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"I-disable ang Bluetooth A2DP hardware offload"</string>
@@ -996,10 +995,8 @@
     <string name="external_display_off" msgid="5634413756025351374">"Naka-off"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Mga external na display"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Built-in na display"</string>
-    <!-- no translation found for builtin_display_settings_universal_cursor_title (209064877333151313) -->
-    <skip />
-    <!-- no translation found for builtin_display_settings_universal_cursor_description (4209129904885332824) -->
-    <skip />
+    <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universal cursor"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Ilipat ang iyong mouse sa pagitan ng mga display"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Gumamit ng external na display"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolution ng display"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Nadiskonekta ang external na display"</string>
@@ -1464,7 +1461,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Gumamit ng madilim na background para gawing mas kumportableng tingnan ang iyong screen at mabawasan ang paggamit ng baterya sa ilang screen. Magbabago ang iyong tema kung mayroon kang iskedyul, kapag naka-off ang screen."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Kasalukuyang sumusunod ang Madilim na tema sa iskedyul ng iyong Bedtime mode"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Mga setting ng Bedtime mode"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Maa-activate din ng mga mode ang madilim na tema}=1{Maa-activate din ng {mode_1} ang madilim na tema}=2{Maa-activate din ng {mode_1} at {mode_2} ang madilim na tema}=3{Maa-activate din ng {mode_1}, {mode_2}, at {mode_3} ang madilim na tema}one{Maa-activate din ng {mode_1}, {mode_2}, at # pa ang madilim na tema}other{Maa-activate din ng {mode_1}, {mode_2}, at # pa ang madilim na tema}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Mga setting ng mga mode"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Paliwanagin at palawakin ang hanay ng kulay at linaw sa mga High Dynamic Range (HDR) na larawan at video. Magmumukhang mas maliwanag ang HDR na content."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Timeout ng screen"</string>
@@ -1481,6 +1479,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Screen saver"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"screensaver"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Hindi available dahil naka-on ang bedtime mode"</string>
+    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Hindi available"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Gumamit ng screen saver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Habang nagcha-charge o naka-dock"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Habang naka-dock at nagcha-charge"</string>
@@ -2392,9 +2391,16 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"I-rate kami"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Makipag-ugnayan sa Support Team ng Google para sa May Kapansanan"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Survey sa Accessibility"</string>
-    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Nae-enjoy ang Dark theme sa mas maraming app?"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"I-share ang iyong feedback"</string>
+    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Sagutan ang survey"</string>
+    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
+    <skip />
+    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
+    <skip />
+    <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Sagutan ang survey"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Mga na-download na app"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Pang-eksperimento"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Mga flag ng feature"</string>
@@ -2558,12 +2564,17 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"I-auto update pag-magnify ng screen"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"I-update pag-magnify ng screen sa app transition"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Tatapusin ng power button ang tawag"</string>
-    <string name="dark_theme_version_category" msgid="8563711427335567656">"Mode"</string>
+    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
+    <skip />
+    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Standard na Dark Theme"</string>
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Inilalapat ang Dark theme sa iyong device at mga sinusuportahang app"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Na-expand"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Na-expand na Dark Theme"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
+    <skip />
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Awtomatikong inilalapat ang Dark theme sa marami pang app para sa pinahusay na accessibility"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Alisin ang mga animation"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Bawasan ang paggalaw sa screen"</string>
@@ -2662,7 +2673,8 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Tungkol sa pag-invert ng kulay"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Matuto pa tungkol sa pag-invert ng kulay"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Matuto pa tungkol sa Dark theme"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Posibleng hindi sinusuportahan ng ilang app ang Dark theme sa pinalawak na setting. Kung nakakaranas ka ng mga isyu sa hitsura, gamitin ang karaniwang setting."</string>
+    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
+    <skip />
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Ipakita ang mga caption"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Para sa sinusuportahang app lang"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Laki at istilo ng caption"</string>
@@ -2863,6 +2875,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Naka-optimize"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Limitado"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Payagan ang paggamit ng baterya sa background nang walang paghihigpit. Puwedeng gumamit ng higit pang baterya."</string>
+    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"Payagan ang paggamit ng baterya sa background. Puwedeng gumamit ng higit pang baterya."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Naka-optimize batay sa iyong paggamit. Inirerekomenda para sa karamihan ng mga app."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Paghigpitan ang paggamit ng baterya habang nasa background. Posibleng hindi gumana ang app gaya ng inaasahan. Posibleng maantala ang mga notification."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Puwedeng maapektuhan ang performance ng isang app kapag binago ang paraan ng paggamit nito sa iyong baterya."</string>
@@ -2892,6 +2905,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Maaaring limitado ang ilang feature"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Mas malakas na paggamit ng baterya"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Tingnan ang mga app na pinakamalakas gumamit"</string>
+    <string name="battery_tip_default_limited_temporarily_title" msgid="2244840552837449409">"Limitado ang pag-charge para protektahan ang baterya"</string>
+    <string name="battery_tip_default_limited_temporarily_summary" msgid="182448435746170298">"Mainit ang iyong baterya sa loob ng mahabang panahon. Magpapatuloy ang normal na pag-charge kapag lumamig na ang iyong baterya"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Naka-optimize ang pag-charge para protektahan ang baterya mo"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"Para makatulong na mapatagal ang baterya mo, naka-optimize ang pag-charge"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Naka-pause ang matuto pa tungkol sa pag-charge."</string>
@@ -2910,7 +2925,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Makakagamit ang app na ito ng baterya sa background. Maaaring maubos ang iyong baterya nang mas maaga kaysa sa inaasahan."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Alisin"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Kanselahin"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"I-override"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6599920924910821386">"I-charge pa rin"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Suriin ang accessory sa pag-charge"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Matuto pa tungkol sa hindi compatible na pag-charge"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
@@ -3097,8 +3112,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Mga notification sa network"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Maabisuhan kapag kumonekta ang iyong device sa isang hindi naka-encrypt na network, o kapag na-record ng network ang iyong natatanging device o SIM ID"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Pagbuo ng network"</string>
-    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"Iniiwasan ng proteksyon sa 2G network ang mga 2G network, na hindi gaanong secure. Posibleng malimitahan nito ang pagkakonekta sa ilang lugar. Palaging pinapayagan ang 2G para sa mga emergency na tawag, pero posibleng hindi kumonekta ang mga tawag kung naka-roaming ka sa ibang bansa."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"Proteksyon sa 2G network"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Pag-encrypt"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Mga generation ng network"</string>
@@ -3786,8 +3800,10 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Padilimin ang wallpaper"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"padilimin ang wallpaper"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"I-filter ang liwanag ng wallpaper"</string>
-    <string name="mode_dark_theme_title" msgid="8099007897943513209">"I-enable ang madilim na tema"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"i-enable ang madilim na tema"</string>
+    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
+    <skip />
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Palitan ang tema ng device para gumamit ng madilim na background, na mas hindi nakakapagod sa mata"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Walang pagbabago sa display}=1{{effect_1}}=2{{effect_1} at {effect_2}}=3{{effect_1}, {effect_2}, at {effect_3}}one{{effect_1}, {effect_2}, at # pa}other{{effect_1}, {effect_2}, at # pa}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Payagan ang lahat ng notification"</string>
@@ -5554,8 +5570,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Walang numero ng telepono."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"Proteksyon sa 2G network"</string>
-    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
-    <skip />
+    <string name="enable_2g_summary" msgid="6194875539424151678">"Iniiwasan ang mga 2G network, na hindi gaanong secure. Posibleng malimitahan nito ang pagkakonekta sa ilang lugar. Palaging pinapayagan ang 2G para sa mga emergency na tawag, pero posibleng hindi kumonekta ang mga tawag kung naka-roaming ka sa ibang bansa."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Kailangan ng <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> na available ang 2G"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Payagan lang ang mga encrypted network"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Mas secure ito pero posibleng limitahan nito ang iyong koneksyon sa mobile network sa ilang lokasyon. Palaging pinapayagan ang emergency na tawag."</string>
@@ -5633,21 +5648,7 @@
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"I-disable ang mga paghihigpit sa paggamit ng resource ng system para sa mga proseso ng child ng app"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Sapilitang i-enable ang tungkuling Mga Tala"</string>
     <string name="enable_notes_role_summary" msgid="5495721409392395089">"I-enable ang mga integration ng system ng pagtatala sa pamamagitan ng tungkuling Mga Tala. Kung naka-enable na ang tungkuling Mga Tala, wala itong gagawin. Nagre-require ng pag-reboot."</string>
-    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Broadcast"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"I-broadcast ang <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
-    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Makinig sa mga broadcast na nagpe-play malapit sa iyo"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Mag-broadcast ng media sa mga device na malapit sa iyo, o makinig sa broadcast ng iba"</string>
-    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Mga Broadcast"</string>
-    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Nakikinig sa"</string>
-    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Maghanap ng mga broadcast"</string>
-    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Umalis sa broadcast"</string>
-    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"I-scan ang QR code"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Ilagay ang password"</string>
-    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Hindi makakonekta. Subukan ulit."</string>
-    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Maling password"</string>
-    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Hindi makasali sa broadcast"</string>
-    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Para simulang makinig, igitna ang QR code sa ibaba"</string>
-    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Hindi valid na format ang QR code"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"I-convert sa eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Ilipat ang eSIM sa ibang device"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# app}one{# app}other{# na app}}"</string>
@@ -5921,12 +5922,8 @@
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Tingnan ang mga detalye"</string>
     <string name="identity_check_promo_card_title" msgid="1495226082133610343">"Gamitin ang Pag-check sa Identity para i-secure ang mas maraming app"</string>
     <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"Kapag ginamit mo ang Pag-check sa Identity sa lahat ng app na may Fingerprint at Pag-unlock Gamit ang Mukha, tinitiyak mo ang mas malakas na proteksyon at mas consistent na experience – nang walang karagdagang pag-setup"</string>
-    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
-    <skip />
+    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"Gumagana ang Pag-check sa Identity sa relo mo"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Pigilan ang iba na magbukas ng mga app na nagre-require ng Pag-unlock Gamit ang Fingerprint o Mukha. Kapag nakakonekta sa iyong relo, matitiyak ang seguridad mo kapag may higit pang mobility."</string>
+    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Gamitin ang Pag-check sa Identity at relo sa mas maraming app"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Tiyakin ang proteksyon ng iyong pagkakakilanlan sa lahat ng app na may suporta sa Pag-unlock Gamit ang Fingerprint at Mukha sa mga pinagkakatiwalaang lugar tulad ng bahay o opisina mo. Gamitin ang Pag-check sa Identity sa iyong relo para palawigin ang proteksyon mo kahit hindi sa mga pinagkakatiwalaang lugar."</string>
 </resources>

@@ -26,10 +26,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.view.MenuItem;
 
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
@@ -39,10 +37,8 @@ import com.android.settings.localepicker.NotificationController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.widget.MenuHandler;
 import com.android.settingslib.widget.OrderMenuPreference;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -109,10 +105,7 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
         List<LocaleStore.LocaleInfo> localeInfoList = getUserLocaleList();
         int listSize = localeInfoList.size();
         for (int i = 0; i < listSize; i++) {
-            String preferencesTags = Settings.System.getString(
-                    mContext.getContentResolver(), Settings.System.LOCALE_PREFERENCES);
-            LocaleStore.LocaleInfo localeInfo = mayAppendUnicodeTags(localeInfoList.get(i),
-                    preferencesTags);
+            LocaleStore.LocaleInfo localeInfo = localeInfoList.get(i);
             OrderMenuPreference pref = existingPreferences.remove(localeInfo.getId());
             if (pref == null) {
                 pref = new OrderMenuPreference(mContext);
@@ -184,7 +177,11 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
         LocaleStore.LocaleInfo defaultAfterChange = localeInfoList.get(0);
         if (!defaultAfterChange.getLocale().equals(currentSystemLocale)) {
             if (Locale.getDefault().equals(defaultAfterChange.getLocale())) {
-                doTheUpdate();
+                if (mMenuItemId == R.id.remove) {
+                    displayRemovalDialogFragment(mSelectedLocaleInfo);
+                } else {
+                    doTheUpdate();
+                }
             } else {
                 if (mMenuItemId == R.id.move_up && !defaultAfterChange.isTranslated()) {
                     showUnavailableDialog(defaultAfterChange);
@@ -295,17 +292,22 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
         if (menuId == R.id.move_up || menuId == R.id.move_down) {
             LocaleStore.LocaleInfo saved = selectedLocaleInfo;
             mSelectedLocaleInfo = saved;
-            int position = mUpdatedLocaleInfoList.indexOf(selectedLocaleInfo);
-            if (position != -1) {
-                mUpdatedLocaleInfoList.remove(position);
-                mUpdatedLocaleInfoList.add(menuId == R.id.move_up ? position - 1 : position + 1,
-                        saved);
-            } else {
-                Log.d(TAG, "Can not get the selected localeInfo :" + selectedLocaleInfo);
+            for (int i = 0; i < mUpdatedLocaleInfoList.size(); i++) {
+                if (mUpdatedLocaleInfoList.get(i).toString().equals(
+                        selectedLocaleInfo.toString())) {
+                    mUpdatedLocaleInfoList.remove(i);
+                    mUpdatedLocaleInfoList.add(menuId == R.id.move_up ? i - 1 : i + 1, saved);
+                    break;
+                }
             }
         } else {
-            int position = mUpdatedLocaleInfoList.indexOf(selectedLocaleInfo);
-            mUpdatedLocaleInfoList.remove(position);
+            for (int i = 0; i < mUpdatedLocaleInfoList.size(); i++) {
+                if (mUpdatedLocaleInfoList.get(i).toString().equals(
+                        selectedLocaleInfo.toString())) {
+                    mUpdatedLocaleInfoList.remove(i);
+                    break;
+                }
+            }
         }
         return mUpdatedLocaleInfoList;
     }

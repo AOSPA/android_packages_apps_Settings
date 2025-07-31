@@ -41,7 +41,7 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
     override fun getMetricsCategory() = SettingsEnums.ACCESSIBILITY_TEXT_READING_OPTIONS
 
     override val highlightMenuKey
-        get() = R.string.menu_key_accessibility
+        get() = R.string.menu_key_display
 
     // There are multi-entrypoint to this screen. We only want the [TextReadingScreen] searchable to
     // prevent showing duplicate entries in the search results.
@@ -107,6 +107,9 @@ open class TextReadingScreenOnAccessibility : BaseTextReadingScreen() {
     override val entryPoint: Int
         get() = EntryPoint.ACCESSIBILITY_SETTINGS
 
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_accessibility
+
     override val key: String = KEY
 
     override val icon: Int
@@ -122,6 +125,9 @@ open class TextReadingScreenOnAccessibility : BaseTextReadingScreen() {
 open class TextReadingScreenInSuw : BaseTextReadingScreen() {
     override val entryPoint: Int
         get() = EntryPoint.SUW_VISION_SETTINGS
+
+    override val highlightMenuKey: Int
+        get() = R.string.menu_key_accessibility
 
     override val key: String = KEY
 

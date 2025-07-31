@@ -26,7 +26,10 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDev
 class NotificationHistoryStateSource : DeviceStateSource {
     override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
 
-    override fun get(context: Context): PerScreenDeviceStates {
+    override fun get(
+        context: Context,
+        sharedDeviceStateData: SharedDeviceStateData,
+    ): PerScreenDeviceStates {
         val isEnabled =
             Settings.Secure.getInt(context.contentResolver, NOTIFICATION_HISTORY_ENABLED, 0) == 1
 

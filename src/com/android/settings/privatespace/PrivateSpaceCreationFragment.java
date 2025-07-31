@@ -121,11 +121,9 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
             Log.i(TAG, "Private Space created");
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED, true);
-            if (android.multiuser.Flags.showDifferentCreationErrorForUnsupportedDevices()) {
-                mMetricsFeatureProvider.action(
-                        getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_ERRORS,
-                        PRIVATE_SPACE_SETUP_NO_ERROR);
-            }
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_ERRORS,
+                    PRIVATE_SPACE_SETUP_NO_ERROR);
             if (isConnectedToInternet()) {
                 registerReceiver();
                 sHandler.postDelayed(
@@ -138,16 +136,12 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
                     false);
-            if (android.multiuser.Flags.showDifferentCreationErrorForUnsupportedDevices()) {
-                int errorCode = PrivateSpaceMaintainer.getInstance(
-                        getActivity()).getPrivateSpaceCreateError();
-                mMetricsFeatureProvider.action(
-                        getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_ERRORS,
-                        errorCode);
-                showPrivateSpaceErrorScreen(errorCode);
-            } else {
-                showPrivateSpaceErrorScreen();
-            }
+            int errorCode = PrivateSpaceMaintainer.getInstance(
+                    getActivity()).getPrivateSpaceCreateError();
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_ERRORS,
+                    errorCode);
+            showPrivateSpaceErrorScreen(errorCode);
         }
     }
 

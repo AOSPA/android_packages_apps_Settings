@@ -37,11 +37,14 @@ import com.android.settings.core.BasePreferenceController;
 public class SummarizationCombinedPreferenceController extends BasePreferenceController {
     static final String GLOBAL_KEY = "global_pref";
     static final String WORK_PREF_KEY = "work_profile_pref";
+    static final String EXCLUDED_APPS_CATEGORY_KEY =
+            "notification_summarization_excluded_apps_list";
 
     @NonNull NotificationBackend mBackend;
     private @Nullable UserHandle mManagedProfile;
     private @Nullable TwoStatePreference mGlobalPref;
     private @Nullable TwoStatePreference mWorkPref;
+    private @Nullable PreferenceCategory mExcludedAppsPrefCategory;
 
     public SummarizationCombinedPreferenceController(@NonNull Context context,
             @NonNull String preferenceKey, @NonNull NotificationBackend backend) {
@@ -90,6 +93,8 @@ public class SummarizationCombinedPreferenceController extends BasePreferenceCon
             mWorkPref.setOnPreferenceChangeListener(mWorkPrefListener);
         }
 
+        mExcludedAppsPrefCategory = category.findPreference(EXCLUDED_APPS_CATEGORY_KEY);
+
         updatePrefValues();
     }
 
@@ -106,6 +111,11 @@ public class SummarizationCombinedPreferenceController extends BasePreferenceCon
                 mWorkPref.setChecked(
                         mBackend.isNotificationSummarizationEnabled(managedProfileId()));
             }
+        }
+
+        // if global switch is off hide the whole category
+        if (mExcludedAppsPrefCategory != null) {
+            mExcludedAppsPrefCategory.setVisible(isMainEnabled);
         }
     }
 

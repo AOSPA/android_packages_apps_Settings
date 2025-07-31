@@ -412,6 +412,19 @@ public class UserSettingsTest {
     }
 
     @Test
+    @EnableFlags(FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF)
+    public void withCurrentUserAdmin_enableShowUserDetailsForSlef_ShouldNotAddRemoveUserAction() {
+        mUserCapabilities.mIsMain = false;
+        mUserCapabilities.mIsAdmin = true;
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
+        Menu menu = mock(Menu.class);
+
+        mFragment.onCreateOptionsMenu(menu, mock(MenuInflater.class));
+
+        verify(menu, never()).add(anyInt(), anyInt(), anyInt(), any(CharSequence.class));
+    }
+
+    @Test
     public void withoutDisallowRemoveUser_ShouldNotDisableRemoveUser() {
         // Arrange
         doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
@@ -926,8 +939,6 @@ public class UserSettingsTest {
     @Test
     @EnableFlags(FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF)
     public void updateUserList_enableShowUserDetailsSettingsForSelf_shouldShowEditButton() {
-        SettingsShadowResources.overrideResource(
-                com.android.settings.R.bool.config_show_user_details_settings_for_self, true);
         givenUsers(getAdminUser(true), getSecondaryUser(false));
 
         mFragment.updateUserList();
@@ -1067,6 +1078,26 @@ public class UserSettingsTest {
         } finally {
             SettingsShadowResources.reset();
         }
+    }
+
+    @Test
+    @EnableFlags(FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF)
+    public void onPreferenceClick_currentUserClicked_openUserDetails() {
+        doReturn(mActivity).when(mFragment).getContext();
+        givenUsers(getAdminUser(true));
+
+        mFragment.onPreferenceClick(mMePreference);
+
+        Intent startedIntent = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(startedIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(UserDetailsSettings.class.getName());
+        Bundle arguments = startedIntent.getBundleExtra(
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        assertThat(arguments).isNotNull();
+        assertThat(arguments.getInt(UserDetailsSettings.EXTRA_USER_ID, 0))
+                .isEqualTo(ACTIVE_USER_ID);
+        assertThat(arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, true))
+                .isEqualTo(false);
     }
 
     @Test

@@ -33,12 +33,15 @@ import com.android.settings.R
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.AccessibilityStatsLogUtils
 import com.android.settings.accessibility.BaseSupportFragment
+import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleShortcutPreferenceController
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
+import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceScreen
 import com.android.settings.accessibility.extensions.getFeatureName
 import com.android.settings.accessibility.extensions.isServiceEnabled
 import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceController
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
 
 /** Fragment that shows the detail screen of an AccessibilityService */
 open class A11yServicePreferenceFragment : BaseSupportFragment() {
@@ -47,17 +50,18 @@ open class A11yServicePreferenceFragment : BaseSupportFragment() {
     private var startTimeMillisForLogging = 0L
     private var serviceInfo: AccessibilityServiceInfo? = null
 
-    private val packageRemovedReceiver =
+    private val packageRemovedReceiver by lazy {
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent) {
-                val packageName = intent.getData()?.getSchemeSpecificPart()
+                val packageName = intent.data?.schemeSpecificPart
                 if (serviceInfo?.componentName?.packageName == packageName) {
                     finish()
                 }
             }
         }
+    }
 
-    private var contentObserver: ContentObserver =
+    private val contentObserver: ContentObserver by lazy {
         object : ContentObserver(Looper.myLooper()?.run { Handler(/* async= */ false) }) {
             override fun onChange(selfChange: Boolean) {
                 context?.run {
@@ -67,6 +71,7 @@ open class A11yServicePreferenceFragment : BaseSupportFragment() {
                 }
             }
         }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -75,7 +80,10 @@ open class A11yServicePreferenceFragment : BaseSupportFragment() {
             AccessibilityRepositoryProvider.get(context).getAccessibilityServiceInfo(componentName)
         if (serviceInfo == null) {
             finish()
-        } else {
+            return
+        }
+
+        if (!Flags.catalystA11yServiceDetail()) {
             serviceInfo?.let {
                 writeConfigDefaultAccessibilityServiceShortcutTargetIfNeeded(it.componentName)
                 initializePreferenceControllers(it)
@@ -133,7 +141,10 @@ open class A11yServicePreferenceFragment : BaseSupportFragment() {
         if (savedInstanceState?.containsKey(KEY_HAS_LOGGED) == true) {
             disabledStateLogged = savedInstanceState.getBoolean(KEY_HAS_LOGGED)
         }
-        requireActivity().setTitle(getFeatureName())
+
+        if (!Flags.catalystA11yServiceDetail()) {
+            requireActivity().setTitle(getFeatureName())
+        }
         registerPackageRemoveReceiver()
 
         requireContext()
@@ -164,7 +175,7 @@ open class A11yServicePreferenceFragment : BaseSupportFragment() {
 
     private fun getFeatureComponentName(): ComponentName {
         return requireNotNull(
-            requireArguments()
+            getFragmentArguments()
                 .getParcelable(
                     AccessibilitySettings.EXTRA_COMPONENT_NAME,
                     ComponentName::class.java,
@@ -208,6 +219,34 @@ open class A11yServicePreferenceFragment : BaseSupportFragment() {
             )
             disabledStateLogged = true
         }
+    }
+
+    override fun getPreferenceScreenBindingKey(context: Context): String? {
+        return A11yServiceScreen.KEY
+    }
+
+    override fun getPreferenceScreenBindingArgs(context: Context): Bundle? {
+        return getFragmentArguments()
+    }
+
+    /**
+     * Retrieves the fragment arguments.
+     *
+     * If the arguments contain PreferenceScreenBindingKeyProviderKt#EXTRA_BINDING_SCREEN_ARGS the
+     * nested bundle associated with that key will be returned. Otherwise, the original arguments
+     * are returned.
+     *
+     * @return The fragment arguments, or the nested arguments if
+     *   PreferenceScreenBindingKeyProviderKt#EXTRA_BINDING_SCREEN_ARGS is present.
+     * @throws NullPointerException if the initial arguments are null or if the nested argument are
+     *   null
+     */
+    private fun getFragmentArguments(): Bundle {
+        var arguments: Bundle = requireArguments()
+        if (arguments.containsKey(EXTRA_BINDING_SCREEN_ARGS)) {
+            arguments = requireNotNull(arguments.getBundle(EXTRA_BINDING_SCREEN_ARGS))
+        }
+        return arguments
     }
 
     companion object {

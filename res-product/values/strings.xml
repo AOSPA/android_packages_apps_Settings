@@ -1012,6 +1012,22 @@
     <!-- Title of toggle to enable or disable device supervision on a desktop device [CHAR LIMIT=60] -->
     <string name="device_supervision_switch_title" product="desktop">Controls for this device</string>
 
+    <!-- Subheading on activity to choose a PIN for supervision setup on a phone [CHAR LIMIT=NONE] -->
+    <string name="supervision_pin_length_message" product="default">{count, plural,
+        =1      {Enter a PIN with at least # digit. You\u2019ll use it to manage controls on this phone.}
+        other   {Enter a PIN with at least # digits. You\u2019ll use it to manage controls on this phone.}
+        }</string>
+    <!-- Subheading on activity to choose a PIN for supervision setup on a tablet [CHAR LIMIT=NONE] -->
+    <string name="supervision_pin_length_message" product="tablet">{count, plural,
+        =1      {Enter a PIN with at least # digit. You\u2019ll use it to manage controls on this tablet.}
+        other   {Enter a PIN with at least # digits. You\u2019ll use it to manage controls on this tablet.}
+        }</string>
+    <!-- Subheading on activity to choose a PIN for supervision setup on a desktop device [CHAR LIMIT=NONE] -->
+    <string name="supervision_pin_length_message" product="desktop">{count, plural,
+        =1      {Enter a PIN with at least # digit. You\u2019ll use it to manage controls on this device.}
+        other   {Enter a PIN with at least # digits. You\u2019ll use it to manage controls on this device.}
+        }</string>
+
     <!-- Message in dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_supervision_enabled_message" product="default">Your parental controls PIN is shared across users. To delete your PIN, controls using this PIN must be off for all users on this phone.</string>
     <!-- Message in dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->

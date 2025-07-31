@@ -147,4 +147,17 @@ public class UserCapabilitiesTest {
         final UserCapabilities userCapabilities = UserCapabilities.create(mContext);
         assertThat(userCapabilities.mCanAddRestrictedProfile).isFalse();
     }
+
+    @Test
+    public void ephemeralGuestAndUserSwitchingDisabled_addGuestNotVisible() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_guestUserEphemeral, true);
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen, true);
+        mUserManager.setIsAdminUser(true);
+        mUserManager.setSupportsMultipleUsers(true);
+        mUserManager.setUserTypeEnabled(UserManager.USER_TYPE_FULL_GUEST, true);
+        UserCapabilities userCapabilities = UserCapabilities.create(mContext);
+        assertThat(userCapabilities.mCanAddGuest).isFalse();
+    }
 }

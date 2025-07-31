@@ -16,6 +16,9 @@
 
 package com.android.settings.connecteddevice.display;
 
+import static android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK;
+import static android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_DESKTOP;
+import static android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR;
 import static android.provider.Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY;
 
 import static com.android.settings.Utils.createAccessibleSequence;
@@ -86,6 +89,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 R.string.external_display_rotation),
         EXTERNAL_DISPLAY_RESOLUTION(60, "external_display_resolution",
                 R.string.external_display_resolution_settings_title),
+        EXTERNAL_DISPLAY_CONNECTION(65, "external_display_connection_preference",
+                R.string.external_display_connection_preference),
 
         // Built-in display link is before per-display settings.
         BUILTIN_DISPLAY_LIST(70, "builtin_display_list_preference",
@@ -149,6 +154,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     static final int INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY_SUMMARY_RESOURCE =
             R.string.builtin_display_settings_universal_cursor_description;
 
+    static final String CONNECTION_PREF_NONE = "none";
+    static final String CONNECTION_PREF_DESKTOP = "desktop";
+    static final String CONNECTION_PREF_MIRROR = "mirror";
+
     private boolean mStarted;
     @Nullable
     private Preference mDisplayTopologyPreference;
@@ -162,6 +171,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private String[] mRotationEntries;
     @Nullable
     private String[] mRotationEntriesValues;
+    @Nullable
+    private String[] mConnectionEntries;
+    @Nullable
+    private String[] mConnectionEntriesValues;
     @NonNull
     private final Runnable mUpdateRunnable = this::update;
     private final DisplayListener mListener = new DisplayListener() {
@@ -281,6 +294,18 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             PrefBasics.NO_EXTERNAL_DISPLAY_CONNECTED.apply(pref, /* nth= */ null);
         }
         refresh.addPreference(pref);
+    }
+
+    @NonNull
+    private ListPreference reuseConnectionPreference(PrefRefresh refresh, int position) {
+        ListPreference pref = refresh.findUnusedPreference(
+                PrefBasics.EXTERNAL_DISPLAY_CONNECTION.keyForNth(position));
+        if (pref == null) {
+            pref = new ListPreference(requireContext());
+            PrefBasics.EXTERNAL_DISPLAY_CONNECTION.apply(pref, position);
+        }
+        refresh.addPreference(pref);
+        return pref;
     }
 
     @NonNull
@@ -480,6 +505,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
         addResolutionPreference(refresh, display, position);
         addRotationPreference(refresh, display, displayRotation, position);
+        if (DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue()
+                && DesktopExperienceFlags.ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG.isTrue()) {
+            addConnectionPreference(refresh, display, position);
+        }
         if (mInjector.getFlags().resolutionAndEnableConnectedDisplaySetting()) {
             // Do not show the footer about changing resolution affecting apps. This is not in the
             // UX design for v2, and there is no good place to put it, since (a) if it is on the
@@ -608,6 +637,44 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 && mInjector.getFlags().rotationConnectedDisplaySetting());
     }
 
+    private void addConnectionPreference(PrefRefresh refresh, DisplayDevice display, int position) {
+        final int connectionType = mInjector.getDisplayConnectionPreference(display.getUniqueId());
+        var pref = reuseConnectionPreference(refresh, position);
+        if (mConnectionEntries == null || mConnectionEntriesValues == null) {
+            mConnectionEntries = new String[]{
+                    requireContext().getString(
+                            R.string.external_display_connection_preference_show_dialog),
+                    requireContext().getString(
+                            R.string.external_display_connection_preference_desktop),
+                    requireContext().getString(
+                            R.string.external_display_connection_preference_mirroring),
+            };
+            mConnectionEntriesValues = new String[] {
+                    CONNECTION_PREF_NONE,
+                    CONNECTION_PREF_DESKTOP,
+                    CONNECTION_PREF_MIRROR,
+            };
+        }
+        pref.setEntries(mConnectionEntries);
+        pref.setEntryValues(mConnectionEntriesValues);
+        pref.setValueIndex(connectionType);
+        pref.setSummary(mConnectionEntries[connectionType]);
+        pref.setOnPreferenceChangeListener((p, newValue) -> {
+            writePreferenceClickMetric(p);
+            final int selectedConnectionPreference = switch ((String) newValue) {
+                case CONNECTION_PREF_DESKTOP -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_DESKTOP;
+                case CONNECTION_PREF_MIRROR -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR;
+                default -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK;
+            };
+            mInjector.updateDisplayConnectionPreference(
+                    display.getUniqueId(), selectedConnectionPreference);
+            pref.setValue((String) newValue);
+            scheduleUpdate();
+            return true;
+        });
+        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES);
+    }
+
     private void addResolutionPreference(PrefRefresh refresh,
             final DisplayDevice display, int position) {
         Display.Mode mode = display.getMode();
@@ -650,7 +717,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         return Math.min(3, Math.max(0, mInjector.getDisplayUserRotation(displayId)));
     }
 
-    private void scheduleUpdate() {
+    @VisibleForTesting
+    void scheduleUpdate() {
         if (mInjector == null || !mStarted) {
             return;
         }

@@ -124,22 +124,17 @@ public class TrustedCredentialsFragment extends ObservableFragment
 
     private boolean isBroadcastValidForAction(Intent intent) {
         String action = intent.getAction();
-        if (android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
-            UserHandle userHandle = intent.getParcelableExtra(Intent.EXTRA_USER, UserHandle.class);
-            if (userHandle == null) {
-                Log.w(TAG, "received action " + action + " with missing user extra");
-                return false;
-            }
-
-            UserInfo userInfo = mUserManager.getUserInfo(userHandle.getIdentifier());
-            return (Intent.ACTION_PROFILE_AVAILABLE.equals(action)
-                    || Intent.ACTION_PROFILE_UNAVAILABLE.equals(action)
-                    || Intent.ACTION_PROFILE_ACCESSIBLE.equals(action))
-                    && (userInfo.isManagedProfile() || userInfo.isPrivateProfile());
+        UserHandle userHandle = intent.getParcelableExtra(Intent.EXTRA_USER, UserHandle.class);
+        if (userHandle == null) {
+            Log.w(TAG, "received action " + action + " with missing user extra");
+            return false;
         }
-        return (Intent.ACTION_MANAGED_PROFILE_AVAILABLE.equals(action)
-                || Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE.equals(action)
-                || Intent.ACTION_MANAGED_PROFILE_UNLOCKED.equals(action));
+
+        UserInfo userInfo = mUserManager.getUserInfo(userHandle.getIdentifier());
+        return (Intent.ACTION_PROFILE_AVAILABLE.equals(action)
+                || Intent.ACTION_PROFILE_UNAVAILABLE.equals(action)
+                || Intent.ACTION_PROFILE_ACCESSIBLE.equals(action))
+                && (userInfo.isManagedProfile() || userInfo.isPrivateProfile());
     }
 
     @Override
@@ -164,15 +159,9 @@ public class TrustedCredentialsFragment extends ObservableFragment
         }
 
         IntentFilter filter = new IntentFilter();
-        if (android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
-            filter.addAction(Intent.ACTION_PROFILE_AVAILABLE);
-            filter.addAction(Intent.ACTION_PROFILE_UNAVAILABLE);
-            filter.addAction(Intent.ACTION_PROFILE_ACCESSIBLE);
-        } else {
-            filter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
-            filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
-            filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNLOCKED);
-        }
+        filter.addAction(Intent.ACTION_PROFILE_AVAILABLE);
+        filter.addAction(Intent.ACTION_PROFILE_UNAVAILABLE);
+        filter.addAction(Intent.ACTION_PROFILE_ACCESSIBLE);
         activity.registerReceiver(mProfileChangedReceiver, filter);
     }
 
@@ -209,10 +198,8 @@ public class TrustedCredentialsFragment extends ObservableFragment
         if (Utils.shouldHideUser(userInfo.getUserHandle(), mUserManager)) {
             return;
         }
-        boolean isProfile = userInfo.isManagedProfile();
-        if (android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
-            isProfile |= userInfo.isPrivateProfile();
-        }
+        boolean isProfile = userInfo.isManagedProfile()
+                || userInfo.isPrivateProfile();
         ChildAdapter adapter = mGroupAdapter.createChildAdapter(i);
 
         LinearLayout containerView = (LinearLayout) inflater.inflate(
@@ -370,8 +357,7 @@ public class TrustedCredentialsFragment extends ObservableFragment
             if (userInfo.isManagedProfile()) {
                 title.setText(mDevicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
                         () -> getString(com.android.settingslib.R.string.category_work)));
-            } else if (android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
-                    && userInfo.isPrivateProfile()) {
+            } else if (userInfo.isPrivateProfile()) {
                 title.setText(mDevicePolicyManager.getResources().getString(PRIVATE_CATEGORY_HEADER,
                         () -> getString(com.android.settingslib.R.string.category_private)));
             } else {

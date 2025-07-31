@@ -38,6 +38,7 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 import java.util.List;
 
 /** A toggle preference controller for force invert (force dark). */
+// LINT.IfChange
 public class ForceInvertPreferenceController extends BasePreferenceController
         implements SelectorWithWidgetPreference.OnClickListener {
 
@@ -166,3 +167,4 @@ public class ForceInvertPreferenceController extends BasePreferenceController
         }
     }
 }
+// LINT.ThenChange(/src/com/android/settings/display/darkmode/DarkModeSelectorPreference.kt)

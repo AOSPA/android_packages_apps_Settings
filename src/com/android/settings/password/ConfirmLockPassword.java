@@ -340,8 +340,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         CONFIRM_WORK_PROFILE_PIN_HEADER,
                         () -> getString(R.string.lockpassword_confirm_your_work_pin_header));
             }
-            if (android.multiuser.Flags.showCustomUnlockTitleInsidePrivateProfile()
-                    && Utils.isPrivateProfile(mEffectiveUserId, getActivity())
+            if (Utils.isPrivateProfile(mEffectiveUserId, getActivity())
                     && !UserManager.get(getActivity())
                     .isQuietModeEnabled(UserHandle.of(mEffectiveUserId))) {
                 return mIsAlpha ? getString(R.string.private_space_confirm_your_password_header)

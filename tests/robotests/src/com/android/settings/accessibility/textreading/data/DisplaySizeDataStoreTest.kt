@@ -103,7 +103,7 @@ class DisplaySizeDataStoreTest {
     }
 
     @Test
-    fun setValue_updateValue_callDisplayDensityUtilsToSetDensity() {
+    fun setInt_updateValue_callDisplayDensityUtilsToSetDensity() {
         val currentIndex = 2
         setupMockDisplayDensityUtils(
             currentIndex = currentIndex,
@@ -130,6 +130,40 @@ class DisplaySizeDataStoreTest {
 
         verify(mockDisplayDensityUtils).clearForcedDisplayDensity()
         verify(mockDisplayDensityUtils, never()).setForcedDisplayDensity(any())
+    }
+
+    // Appfunction calls setValue with int type instead of setInt.
+    // Calling setValue with int won't invoke setInt; where as setInt will invoke setValue.
+    // Adding simple test to make sure that setValue is properly implemented
+    @Test
+    fun setValue_updateValue_callDisplayDensityUtilsToSetDensity() {
+        val currentIndex = 2
+        setupMockDisplayDensityUtils(
+            currentIndex = currentIndex,
+            values = intArrayOf(356, 420, 490),
+            defaultDensity = 420,
+        )
+        val dataStore = DisplaySizeDataStore(context, mockDisplayDensityUtils)
+        dataStore.setValue("display_size", Int::class.javaObjectType, 0)
+
+        verify(mockDisplayDensityUtils, never()).clearForcedDisplayDensity()
+        verify(mockDisplayDensityUtils).setForcedDisplayDensity(0)
+    }
+
+    // Appfunction calls getValue with int type instead of getInt.
+    // Calling getValue with int won't invoke getInt; where as getInt will invoke getValue.
+    // Adding simple test to make sure that getValue is properly implemented
+    @Test
+    fun getValue_intType_equalsGetInt() {
+        setupMockDisplayDensityUtils(
+            currentIndex = 2,
+            values = intArrayOf(356, 420, 490),
+            defaultDensity = 420,
+        )
+
+        val dataStore = DisplaySizeDataStore(context, mockDisplayDensityUtils)
+        assertThat(dataStore.getValue("display_size", Int::class.javaObjectType))
+            .isEqualTo(dataStore.getInt("display_size"))
     }
 
     private fun setupMockDisplayDensityUtils(

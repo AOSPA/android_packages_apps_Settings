@@ -186,8 +186,6 @@ public class LocationInjectedServicesPreferenceControllerTest {
 
     @Test
     public void privateProfileDisallowShareLocationOn_getParentUserLocationServicesOnly() {
-        mSetFlagsRule.enableFlags(
-                android.multiuser.Flags.FLAG_HANDLE_INTERLEAVED_SETTINGS_FOR_PRIVATE_SPACE);
         final int fakePrivateProfileId = 123;
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(
                 new int[]{UserHandle.myUserId(), fakePrivateProfileId});
@@ -219,8 +217,6 @@ public class LocationInjectedServicesPreferenceControllerTest {
 
     @Test
     public void privateProfileDisallowShareLocationOff_getAllUserLocationServices() {
-        mSetFlagsRule.enableFlags(
-                android.multiuser.Flags.FLAG_HANDLE_INTERLEAVED_SETTINGS_FOR_PRIVATE_SPACE);
         final int fakePrivateProfileId = 123;
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(
                 new int[]{UserHandle.myUserId(), fakePrivateProfileId});

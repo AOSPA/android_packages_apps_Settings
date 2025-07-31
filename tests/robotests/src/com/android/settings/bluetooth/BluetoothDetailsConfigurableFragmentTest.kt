@@ -30,7 +30,10 @@ import androidx.preference.PreferenceGroup
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.SettingsActivity
+import com.android.settings.SubSettings
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment
 import com.android.settings.flags.Flags
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils
@@ -67,6 +70,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
@@ -74,6 +78,7 @@ import org.robolectric.annotation.Config
 @OptIn(ExperimentalCoroutinesApi::class)
 class BluetoothDetailsConfigurableFragmentTest {
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
+
     @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule()
 
     private lateinit var activity: FragmentActivity
@@ -82,7 +87,9 @@ class BluetoothDetailsConfigurableFragmentTest {
     private lateinit var featureFactory: FakeFeatureFactory
 
     @Mock private lateinit var repository: DeviceSettingRepository
+
     @Mock private lateinit var bluetoothDevice: BluetoothDevice
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private lateinit var localBtManager: LocalBluetoothManager
 
@@ -98,11 +105,38 @@ class BluetoothDetailsConfigurableFragmentTest {
         ShadowBluetoothUtils.sLocalBluetoothManager = localBtManager
         whenever(localBtManager.bluetoothAdapter.getRemoteDevice(DEVICE_ADDRESS))
             .thenReturn(bluetoothDevice)
+        whenever(localBtManager.bluetoothAdapter.getRemoteDevice(INVALID_DEVICE_ADDRESS))
+            .thenReturn(null)
+        whenever(localBtManager.bluetoothAdapter.getRemoteDevice(DEVICE_ADDRESS))
+            .thenReturn(bluetoothDevice)
+        whenever(bluetoothDevice.bondState).thenReturn(BluetoothDevice.BOND_BONDED)
         whenever(localBtManager.cachedDeviceManager.findDevice(bluetoothDevice))
             .thenReturn(cachedDevice)
         whenever(featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(any(), any()))
             .thenReturn(repository)
     }
+
+    @Test
+    fun noAddress_launchConnectedDevicesScreen() =
+        buildFragment(address = null) {
+            assertThat(fragment.activity?.isFinishing).isTrue()
+            val startedIntent: Intent = shadowOf(fragment.activity).nextStartedActivity
+            val shadowIntent = shadowOf(startedIntent)
+            assertThat(shadowIntent.intentClass).isEqualTo(SubSettings::class.java)
+            assertThat(startedIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(ConnectedDeviceDashboardFragment::class.java.name)
+        }
+
+    @Test
+    fun deviceNotFound_launchConnectedDevicesScreen() =
+        buildFragment(address = INVALID_DEVICE_ADDRESS) {
+            assertThat(fragment.activity?.isFinishing).isTrue()
+            val startedIntent: Intent = shadowOf(fragment.activity).nextStartedActivity
+            val shadowIntent = shadowOf(startedIntent)
+            assertThat(shadowIntent.intentClass).isEqualTo(SubSettings::class.java)
+            assertThat(startedIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(ConnectedDeviceDashboardFragment::class.java.name)
+        }
 
     @Test
     fun setPreferenceDisplayOrder_null_unchanged() = buildFragment {
@@ -425,17 +459,14 @@ class BluetoothDetailsConfigurableFragmentTest {
             }
         }
 
-    private fun buildFragment(r: (() -> Unit)) {
+    private fun buildFragment(address: String? = DEVICE_ADDRESS, r: (() -> Unit)) {
         ActivityScenario.launch(EmptyFragmentActivity::class.java).use { activityScenario ->
             activityScenario.onActivity { activity: EmptyFragmentActivity ->
                 this@BluetoothDetailsConfigurableFragmentTest.activity = activity
                 fragment = TestConfigurableFragment()
                 fragment.arguments =
                     Bundle().apply {
-                        putString(
-                            BluetoothDetailsConfigurableFragment.KEY_DEVICE_ADDRESS,
-                            DEVICE_ADDRESS,
-                        )
+                        putString(BluetoothDetailsConfigurableFragment.KEY_DEVICE_ADDRESS, address)
                     }
                 activity.supportFragmentManager.beginTransaction().add(fragment, null).commitNow()
                 r.invoke()
@@ -480,5 +511,6 @@ class BluetoothDetailsConfigurableFragmentTest {
 
     private companion object {
         const val DEVICE_ADDRESS = "12:34:56:78:12:34"
+        const val INVALID_DEVICE_ADDRESS = "12345"
     }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.shared
+package com.android.settings.accessibility.shared.ui
 
 import android.content.Context
 import android.text.TextUtils
@@ -39,7 +39,7 @@ interface AccessibilityFooterPreferenceIntroductionTitleProvider {
     fun getIntroductionTitle(context: Context): CharSequence?
 }
 
-/** Metadata of [AccessibilityFooterPreference]. */
+/** Metadata of [com.android.settings.accessibility.AccessibilityFooterPreference]. */
 interface AccessibilityFooterPreferenceMetadata : FooterPreferenceMetadata {
     val introductionTitle: Int
         @StringRes get() = 0
@@ -73,9 +73,9 @@ interface AccessibilityFooterPreferenceBinding : FooterPreferenceBinding {
             }
 
         if (helpIntent != null) {
-            footerPreference.setLearnMoreAction(
-                View.OnClickListener { view: View? -> view!!.startActivityForResult(helpIntent, 0) }
-            )
+            footerPreference.setLearnMoreAction { view: View? ->
+                view!!.startActivityForResult(helpIntent, 0)
+            }
             footerPreference.setLearnMoreText(context.getString(metadata.learnMoreText))
             footerPreference.isLinkEnabled = true
         } else {
@@ -85,7 +85,7 @@ interface AccessibilityFooterPreferenceBinding : FooterPreferenceBinding {
         if (preference.isVisible) {
             updateContentDescription(
                 footerPreference,
-                getPreferenceIntroductionTitle(preference.context, metadata.introductionTitle),
+                getPreferenceIntroductionTitle(preference.context, metadata),
                 footerPreference.title,
             )
         }
@@ -102,21 +102,20 @@ interface AccessibilityFooterPreferenceBinding : FooterPreferenceBinding {
             return
         }
 
-        val sb = StringBuffer()
-        sb.append(introductionTitle).append("\n\n").append(textToDescribe)
-        footerPreference.contentDescription = sb.toString()
+        footerPreference.contentDescription = "$introductionTitle\n\n$textToDescribe"
     }
 
     private fun getPreferenceIntroductionTitle(
         context: Context,
-        introductionTitle: Int,
+        metadata: PreferenceMetadata,
     ): CharSequence? {
+        val introductionTitle =
+            (metadata as? AccessibilityFooterPreferenceMetadata)?.introductionTitle ?: 0
         return if (introductionTitle != 0) {
             context.getString(introductionTitle)
         } else {
-            (this as? AccessibilityFooterPreferenceIntroductionTitleProvider)?.getIntroductionTitle(
-                context
-            )
+            (metadata as? AccessibilityFooterPreferenceIntroductionTitleProvider)
+                ?.getIntroductionTitle(context)
         }
     }
 }

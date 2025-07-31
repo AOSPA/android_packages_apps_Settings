@@ -18,7 +18,6 @@ package com.android.settings.connecteddevice.display
 
 import android.app.Application
 import android.database.ContentObserver
-import android.hardware.display.DisplayTopology
 import android.provider.Settings
 import android.view.Display.DEFAULT_DISPLAY
 import androidx.annotation.VisibleForTesting
@@ -26,7 +25,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import java.util.function.Consumer
 
 /** Centralized data source to provide display updates for display preference fragments */
 class DisplayPreferenceViewModel
@@ -54,19 +52,6 @@ constructor(
     private val displayListener =
         object : ExternalDisplaySettingsConfiguration.DisplayListener() {
             override fun update(displayId: Int) {
-                // This listens to updates while in mirroring mode because topology update doesn't
-                // happen. In non-mirroring mode, both display update and topology update might
-                // happen, to prevent double update causing flickering, only listen to one at a
-                // time, depending on the mirroring mode
-                if (isMirroring.value == true) {
-                    updateEnabledDisplays()
-                }
-            }
-        }
-
-    private val topologyListener =
-        Consumer<DisplayTopology> {
-            if (isMirroring.value == false) {
                 updateEnabledDisplays()
             }
         }
@@ -91,7 +76,6 @@ constructor(
         uiStateMediator.addSource(isMirroring) { updateMediator() }
 
         injector.registerDisplayListener(displayListener)
-        injector.registerTopologyListener(topologyListener)
         registerMirrorModeObserver()
 
         updateSelectedDisplay(getDefaultDisplayId())
@@ -101,7 +85,6 @@ constructor(
 
     override fun onCleared() {
         super.onCleared()
-        injector.unregisterTopologyListener(topologyListener)
         injector.unregisterDisplayListener(displayListener)
         appContext.contentResolver.unregisterContentObserver(mirrorModeObserver)
     }
@@ -116,7 +99,10 @@ constructor(
         val enabledDisplaysMap =
             injector
                 .getDisplays()
-                .filter { it.isEnabled == DisplayIsEnabled.YES }
+                .filter {
+                    it.isEnabled == DisplayIsEnabled.YES &&
+                        (it.id == DEFAULT_DISPLAY || it.isConnectedDisplay)
+                }
                 .associateBy { it.id }
         enabledDisplays.value = enabledDisplaysMap
 

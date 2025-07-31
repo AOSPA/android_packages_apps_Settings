@@ -131,8 +131,7 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Begäran om meddelandeåtkomst"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Synlig för andra enheter som <xliff:g id="DEVICE_NAME">^1</xliff:g>"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Aktivera Bluetooth för att ansluta till andra enheter."</string>
-    <!-- no translation found for shared_network_footer (5178404860420039168) -->
-    <skip />
+    <string name="shared_network_footer" msgid="5178404860420039168">"Kontakta nätverksägaren eller en enhetsadministratör om du vill ändra det här nätverket."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Dina enheter"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Parkoppla en ny enhet"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Inaktivera hårdvaruavlastning för Bluetooth (A2DP)"</string>
@@ -996,10 +995,8 @@
     <string name="external_display_off" msgid="5634413756025351374">"Av"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Externa skärmar"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Inbyggd skärm"</string>
-    <!-- no translation found for builtin_display_settings_universal_cursor_title (209064877333151313) -->
-    <skip />
-    <!-- no translation found for builtin_display_settings_universal_cursor_description (4209129904885332824) -->
-    <skip />
+    <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universell markör"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Flytta musen mellan skärmarna"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Använd extern skärm"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Skärmens upplösning"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Extern skärm har kopplats från"</string>
@@ -1464,7 +1461,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Använd en mörk bakgrund för att göra det behagligare att titta på skärmen och minska batteriförbrukningen på vissa skärmar. Ditt tema ändras om du har ett schema när skärmen är av."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Mörkt tema följer för närvarande schemat för läggdagsläge"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Inställningar för läggdagsläget"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Mörkt tema kan även aktiveras av lägen}=1{{mode_1} aktiverar även mörkt tema}=2{{mode_1} och {mode_2} aktiverar även mörkt tema}=3{{mode_1}, {mode_2} och {mode_3} aktiverar även mörkt tema}other{{mode_1}, {mode_2} och # till aktiverar även mörkt tema}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Inställningar för lägen"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Öka ljusstyrkan, färgåtergivningen och klarheten i bilder och videor med HDR (High Dynamic Range) HDR-innehåll ser ljusare ut."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Skärmens tidsgräns"</string>
@@ -1481,6 +1479,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Skärmsläckare"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"skärmsläckare"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Inte tillgängligt eftersom läggdagsläget är på"</string>
+    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Inte tillgänglig"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Använd skärmsläckare"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Vid laddning eller dockning"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Vid laddning när den är dockad"</string>
@@ -2392,9 +2391,16 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Betygsätt oss"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Kontakta Googles support för användare med funktionsnedsättning"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Enkät om tillgänglighet"</string>
-    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Gillar du mörkt tema i fler appar?"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Dela din feedback"</string>
+    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Svara på enkäten"</string>
+    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
+    <skip />
+    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
+    <skip />
+    <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Svara på enkäten"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Nedladdade appar"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentella"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funktionsflaggor"</string>
@@ -2558,12 +2564,17 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Uppdatera skärmförstoring automatiskt"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Uppdatera skärmförstoring på appövergångar"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Avsluta samtal med av/på-knapp"</string>
-    <string name="dark_theme_version_category" msgid="8563711427335567656">"Läge"</string>
+    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
+    <skip />
+    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Mörkt standardtema"</string>
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Mörkt tema tillämpas på enheten och appar som stöds"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Utökat"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Utökat mörkt tema"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
+    <skip />
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Mörkt tema tillämpas automatiskt på fler appar för förbättrad tillgänglighet"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Ta bort animationer"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Minska rörelse på skärmen"</string>
@@ -2662,7 +2673,8 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Om inverterade färger"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Läs mer om inverterade färger"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Läs mer om mörkt tema"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Vissa appar kanske inte har stöd för mörkt tema i den utvidgade inställningen. Om du får problem med utseendet kan du använda standardinställningen."</string>
+    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
+    <skip />
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Visa textning"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Endast för app som stöds"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Textstorlek och format"</string>
@@ -2863,6 +2875,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimerad"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Begränsad"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Tillåt batteriförbrukning i bakgrunden utan begränsningar. Detta kan dra mer batteri."</string>
+    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"Tillåt batteriförbrukning i bakgrunden. Detta kan förbruka mer batteri."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimera utifrån din användning. Rekommenderas för de flesta appar."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Begränsa batteriförbrukningen i bakgrunden. Appen kanske inte fungerar som förväntat. Aviseringar kan fördröjas."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Om du ändrar hur en app använder batteriet kan appens prestanda påverkas."</string>
@@ -2892,6 +2905,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Vissa funktioner kan begränsas"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Högre batteriförbrukning"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appar med högst batteriförbrukning"</string>
+    <string name="battery_tip_default_limited_temporarily_title" msgid="2244840552837449409">"Laddningen begränsas för att skydda batteriet"</string>
+    <string name="battery_tip_default_limited_temporarily_summary" msgid="182448435746170298">"Batteriet var varmt under en längre tid. Normal laddning återupptas när batteriet har svalnat ytterligare."</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Laddningen optimeras för att skydda batteriet"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"Laddningen optimeras så att batteriet räcker längre"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Läs mer om att laddning är pausad"</string>
@@ -2910,7 +2925,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Den här appen kan dra batteri i bakgrunden. Batteriet kan ta slut snabbare än beräknat."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Ta bort"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Avbryt"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"Åsidosätt"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6599920924910821386">"Ladda ändå"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Kontrollera laddningstillbehöret"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Läs mer om inkompatibel laddning"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
@@ -3097,8 +3112,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Nätverksaviseringar"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Få en avisering när enheten ansluts till ett okrypterat nätverk eller när ett nätverk loggar ditt unika enhets- eller SIM-id."</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Nätverksgenerering"</string>
-    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G-nätverksskyddet undviker 2G-nätverk, som är mindre säkra. Detta kan begränsa anslutningen på vissa platser. 2G är alltid tillåtet för nödsamtal, men samtal kanske inte kopplas om du använder roaming utomlands."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G-nätverksskydd"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Kryptering"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Nätverksgenerationer"</string>
@@ -3786,8 +3800,10 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Dimma bakgrunden"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"dimma bakgrunden"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrera bakgrundens ljusstyrka"</string>
-    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Aktivera mörkt tema"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"aktivera mörkt tema"</string>
+    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
+    <skip />
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Byt enhetens tema till en mörk bakgrund, vilket är mer behagligt för ögonen"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Inga skärmändringar}=1{{effect_1}}=2{{effect_1} och {effect_2}}=3{{effect_1}, {effect_2} och {effect_3}}other{{effect_1}, {effect_2} och # till}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Tillåt alla aviseringar"</string>
@@ -5173,24 +5189,19 @@
     <string name="title_no_satellite_plan" msgid="7255726881685672846">"Meddelanden ingår inte i kontot"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Läs mer"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Så fungerar det"</string>
-    <!-- no translation found for title_satellite_connection_guide (7080935804228845540) -->
-    <skip />
+    <string name="title_satellite_connection_guide" msgid="7080935804228845540">"När du inte har något mobil- eller wifi-nätverk"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"Skicka sms till ett telefonnummer"</string>
-    <!-- no translation found for summary_satellite_connection_guide (1962847581645612628) -->
-    <skip />
+    <string name="summary_satellite_connection_guide" msgid="1962847581645612628">"Telefonen ansluter automatiskt till en satellit. Den bästa anslutningen får du utomhus med fri sikt mot himlen."</string>
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"Om du inte har något mobilnätverk visas alternativet att använda satellit."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"När telefonen ansluter till en satellit"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"Följ stegen för att ansluta till satelliten"</string>
-    <!-- no translation found for summary_supported_service_with_constrained_data (8495750699335612848) -->
-    <skip />
-    <!-- no translation found for summary_supported_service_with_unconstrained_data (5010592489972147979) -->
-    <skip />
+    <string name="summary_supported_service_with_constrained_data" msgid="8495750699335612848">"Du kan sms:a vem som helst, inklusive räddningstjänsten, och använda appar som stöds. Telefonen återansluter till ett mobilnätverk när det finns ett tillgängligt."</string>
+    <string name="summary_supported_service_with_unconstrained_data" msgid="5010592489972147979">"Du kan sms:a vem som helst, inklusive räddningstjänsten, och använda data för appar. Telefonen återansluter till ett mobilnätverk när det finns ett tillgängligt."</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"Du kan sms:a vem som helst, inklusive räddningstjänsten. Telefonen återansluter till ett mobilnätverk när det finns ett tillgängligt."</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"När telefonen är ansluten kan du sms:a vem som helst, inklusive räddningstjänsten."</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"Viktigt att tänka på"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"En satellitanslutning kan ta längre tid och är bara tillgänglig i vissa områden."</string>
-    <!-- no translation found for satellite_footer_content_section_2 (555594211014015682) -->
-    <skip />
+    <string name="satellite_footer_content_section_2" msgid="555594211014015682">"Väder och vissa byggnader kan påverka satellitanslutningen."</string>
     <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"Du kan inte ringa samtal via satellit."</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"Nödsamtal kanske fortfarande går fram."</string>
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Ett mobil- eller wifi-nätverk krävs för att visa externa länkar."</string>
@@ -5202,10 +5213,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellit"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellitanslutning"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellitanslutning"</string>
-    <!-- no translation found for title_have_satellite_constrained_data_plan (8275865334911177900) -->
-    <skip />
-    <!-- no translation found for title_have_satellite_unconstrained_data_plan (5437095773679990375) -->
-    <skip />
+    <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Användning av appar som stöds ingår i kontot"</string>
+    <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Data för alla appar ingår i kontot"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Appar som stöds på telefonen"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"Visa alla appar som stöds via satellit"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Appar som stöds på telefonen"</string>
@@ -5561,8 +5570,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Telefonnummer saknas."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G-nätverksskydd"</string>
-    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
-    <skip />
+    <string name="enable_2g_summary" msgid="6194875539424151678">"Undviker 2G-nätverk, som är mindre säkra. Detta kan begränsa anslutningen på vissa platser. 2G är alltid tillåtet för nödsamtal, men samtal kanske inte kopplas om du använder roaming utomlands."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> kräver att 2G är tillgängligt"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Tillåt endast krypterade nätverk"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Detta är säkrare men kan begränsa din mobilnätverksanslutning på vissa platser. Nödsamtal tillåts alltid."</string>
@@ -5640,21 +5648,7 @@
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Inaktivera begränsningar på användningen av systemresurser för appens underordnade processer"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Tvinga att aktivera rollen Anteckningar"</string>
     <string name="enable_notes_role_summary" msgid="5495721409392395089">"Aktivera systemintegrering för att göra anteckningar via rollen Anteckningar. Detta har ingen effekt om rollen Anteckningar redan har aktiverats. Enheten måste startas om."</string>
-    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Utsändning"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Sänd från <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
-    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Lyssna på utsändningar i närheten"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Sänd ut media till enheter i närheten eller lyssna på någon annans utsändning"</string>
-    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Utsändningar"</string>
-    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Lyssnar på"</string>
-    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Hitta utsändningar"</string>
-    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Lämna utsändning"</string>
-    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Skanna QR-kod"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Ange lösenord"</string>
-    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Det gick inte att ansluta. Försök igen."</string>
-    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Fel lösenord"</string>
-    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Det gick inte att gå med i utsändningen"</string>
-    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Centrera QR-koden nedan om du vill börja lyssna"</string>
-    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-kodens format är ogiltigt"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Konvertera till eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Överför eSIM till en annan enhet"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# app}other{# appar}}"</string>
@@ -5928,12 +5922,8 @@
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Visa information"</string>
     <string name="identity_check_promo_card_title" msgid="1495226082133610343">"Använd identitetskoll för att skydda fler appar"</string>
     <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"När du använder identitetskoll för alla appar som stöder fingeravtryckslås och ansiktslås får du ett starkare skydd och en mer konsekvent upplevelse – utan extra konfiguration"</string>
-    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
-    <skip />
+    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"Identitetskoll fungerar med klockan"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Förhindra att andra öppnar appar som kräver fingeravtryckslås eller ansiktslås. När den är ansluten till klockan är din säkerhet garanterad med större rörlighet."</string>
+    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Använd identitetskoll och klockan i fler appar"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Se till att ditt identitetsskydd är aktiverat i alla appar som stöder fingeravtryckslås och ansiktslås på betrodda platser som hemmet eller kontoret. Använd identitetskoll med klockan för att utöka skyddet även utanför betrodda platser."</string>
 </resources>

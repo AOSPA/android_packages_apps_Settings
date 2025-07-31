@@ -1410,8 +1410,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity android:name="Settings$PhysicalKeyboardLayoutPickerActivity"
             android:label="@string/physical_keyboard_layout_picker_title"
             android:exported="true"
-            android:clearTaskOnLaunch="true"
-            android:featureFlag="com.android.settings.keyboard.keyboard_and_touchpad_a11y_new_page_enabled">
+            android:clearTaskOnLaunch="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.HARD_KEYBOARD_LAYOUT_PICKER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />

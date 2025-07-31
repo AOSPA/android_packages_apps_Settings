@@ -91,7 +91,7 @@ class FontSizeDataStoreTest {
             )
         val expectedFontSize =
             FontSize(
-                currentIndex = 1, // the index of 1f in R.array.entryValues_font_size
+                currentIndex = getDefaultFontSizeIndex(),
                 values = fontSizes,
                 defaultValue = defaultFontSize,
             )
@@ -162,5 +162,55 @@ class FontSizeDataStoreTest {
                 )
             )
             .isEqualTo(defaultFontSize)
+    }
+
+    @Test
+    fun getDefaultValue_returnsDefaultFontSizeIndex() {
+        val defaultFontSizeIndex = getDefaultFontSizeIndex()
+
+        assertThat(dataStore.getDefaultValue("key", Int::class.javaObjectType))
+            .isEqualTo(defaultFontSizeIndex)
+    }
+
+    // Appfunction calls getValue with int type instead of getInt.
+    // Calling getValue with int won't invoke getInt; where as getInt will invoke getValue.
+    // Adding simple test to make sure that getValue is properly implemented
+    @Test
+    fun getValue_intType_equalsGetInt() {
+        assertThat(dataStore.getValue("key", Int::class.javaObjectType))
+            .isEqualTo(dataStore.getInt("key"))
+    }
+
+    // Appfunction calls setValue with int type instead of setInt.
+    // Calling setValue with int won't invoke setInt; where as setInt will invoke setValue.
+    // Adding simple test to make sure that setValue is properly implemented
+    @Test
+    fun setValue_intType_updatesValue() {
+        val newValue = dataStore.fontSizeData.value.values.size - 1
+        dataStore.setValue("key", Int::class.javaObjectType, newValue)
+
+        assertThat(dataStore.getInt("key")).isEqualTo(newValue)
+    }
+
+    private fun getDefaultFontSizeIndex(): Int {
+        val defaultFontSize =
+            Settings.System.getFloat(
+                context.contentResolver,
+                Settings.System.DEFAULT_DEVICE_FONT_SCALE,
+                FONT_SCALE_DEF_VALUE,
+            )
+
+        val fontSizes: FloatArray =
+            context.resources
+                .getStringArray(SettingsLibR.array.entryvalues_font_size)
+                .mapNotNull { it.toFloatOrNull() }
+                .toFloatArray()
+
+        for (i in 0 until fontSizes.size) {
+            if (fontSizes[i] == defaultFontSize) {
+                return i
+            }
+        }
+        return -1
     }
 }

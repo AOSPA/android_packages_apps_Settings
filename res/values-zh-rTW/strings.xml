@@ -131,8 +131,7 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"訊息存取權要求"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"向其他裝置顯示為「<xliff:g id="DEVICE_NAME">^1</xliff:g>」"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"開啟藍牙以連線到其他裝置。"</string>
-    <!-- no translation found for shared_network_footer (5178404860420039168) -->
-    <skip />
+    <string name="shared_network_footer" msgid="5178404860420039168">"如要變更這個網路，請與網路擁有者或裝置管理員聯絡。"</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"你的裝置"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"配對新裝置"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"停用藍牙 A2DP 硬體卸載"</string>
@@ -996,10 +995,8 @@
     <string name="external_display_off" msgid="5634413756025351374">"關閉"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"外接螢幕"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"內建螢幕"</string>
-    <!-- no translation found for builtin_display_settings_universal_cursor_title (209064877333151313) -->
-    <skip />
-    <!-- no translation found for builtin_display_settings_universal_cursor_description (4209129904885332824) -->
-    <skip />
+    <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"通用游標"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"在螢幕間移動滑鼠"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"使用外接螢幕"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"螢幕解析度"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"未連接外接螢幕"</string>
@@ -1393,7 +1390,7 @@
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"開啟"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"關閉"</string>
     <string name="hdr_brightness_title" msgid="6997980740096282616">"HDR 高亮度"</string>
-    <string name="hdr_brightness_level_title" msgid="770342878327164738">"強度"</string>
+    <string name="hdr_brightness_level_title" msgid="770342878327164738">"亮度"</string>
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"標準圖片"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR 圖片"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"這項設定只會影響支援高動態範圍 (HDR) 的圖片和影片。"</string>
@@ -1464,7 +1461,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"使用深色背景可讓你更舒適地觀看螢幕，顯示某些畫面時還可減少電池用量。如果已設定時間表，主題會在螢幕關閉時變更。"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"目前依照就寢模式時間表開啟或關閉深色主題"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"就寢模式設定"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{「模式」也可以啟用深色主題}=1{「{mode_1}」也會啟用深色主題}=2{「{mode_1}」和「{mode_2}」也會啟用深色主題}=3{「{mode_1}」、「{mode_2}」和「{mode_3}」也會啟用深色主題}other{「{mode_1}」、「{mode_2}」和另外 # 個模式也會啟用深色主題}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"「模式」設定"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"提高高動態範圍 (HDR) 圖片和影片的亮度，同時擴展色彩範圍並強化清晰度。HDR 內容會看起來更明亮。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"螢幕自動關閉"</string>
@@ -1481,6 +1479,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"螢幕保護程式"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"螢幕保護程式"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"就寢模式開啟時無法使用"</string>
+    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"無法使用"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"使用螢幕保護程式"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充電或安置於座架上時"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"在座架上充電時"</string>
@@ -1914,7 +1913,7 @@
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"驗證你的身分"</string>
     <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"請輸入其他裝置的解鎖圖案，才能轉移 Google 帳戶、設定等內容。請放心，系統會將解鎖圖案加密。"</string>
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"請輸入其他裝置的 PIN 碼，才能轉移 Google 帳戶、設定等內容。請放心，系統會將 PIN 碼加密。"</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"請輸入其他裝置的密碼，才能轉移 Google 帳戶、設定等內容。請放心，系統會將密碼加密。"</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"請輸入其他裝置的密碼，才能轉移 Google 帳戶、設定等內容。請放心，密碼會加密。"</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"一併使用圖案解鎖這部裝置"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"一併使用 PIN 碼解鎖這部裝置"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"一併使用密碼解鎖這部裝置"</string>
@@ -2392,9 +2391,16 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"給我們評分"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"與 Google 身心障礙支援團隊聯絡"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"無障礙功能問卷調查"</string>
-    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"想在更多應用程式中使用深色主題嗎？"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"提供意見"</string>
+    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
+    <skip />
+    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"參加問卷調查"</string>
+    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
+    <skip />
+    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
+    <skip />
+    <string name="magnification_survey_notification_action" msgid="8042464088582144918">"參加問卷調查"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"下載的應用程式"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"實驗性"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"功能標記"</string>
@@ -2558,12 +2564,17 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"自動更新螢幕放大設定"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"更新應用程式轉場後的螢幕放大設定"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"按電源鍵結束通話"</string>
-    <string name="dark_theme_version_category" msgid="8563711427335567656">"模式"</string>
+    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
+    <skip />
+    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"標準"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"標準深色主題"</string>
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"在裝置和支援的應用程式中套用深色主題"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"擴展"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"擴展深色主題"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
+    <skip />
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"自動在更多應用程式中套用深色主題，提升無障礙使用體驗"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"移除動畫"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"減少畫面上的動態效果"</string>
@@ -2662,7 +2673,8 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"關於色彩反轉"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"進一步瞭解色彩反轉"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"進一步瞭解深色主題"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"部分應用程式可能不支援擴充設定中的深色主題。如果你遇到顯示問題，請使用標準設定。"</string>
+    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
+    <skip />
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"顯示字幕"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"僅限支援的應用程式"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"字幕大小和樣式"</string>
@@ -2863,6 +2875,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"最佳化"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"受限制"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"不限制應用程式在背景執行時的電池用量。如果選擇這項設定，應用程式可能會比較耗電。"</string>
+    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"允許在背景使用電池。這樣可能會比較耗電。"</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"根據你的使用情形進行最佳化調整。這是適用於大多數應用程式的建議設定。"</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"限制應用程式在背景執行時的電池用量。應用程式可能無法正常運作，通知也可能會延後出現。"</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"變更應用程式的電池使用方式，可能會影響應用程式效能。"</string>
@@ -2892,6 +2905,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能受到限制"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"電池用量較高的應用程式"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看電池用量最高的應用程式"</string>
+    <string name="battery_tip_default_limited_temporarily_title" msgid="2244840552837449409">"系統限制充電，以保護電池"</string>
+    <string name="battery_tip_default_limited_temporarily_summary" msgid="182448435746170298">"電池先前長時間處於高溫狀態。溫度進一步降低後，就會恢復正常充電"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"為保護電池，充電效能已最佳化"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"為延長電池壽命，系統已最佳化充電效能"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"進一步瞭解暫停充電"</string>
@@ -2910,7 +2925,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"這個應用程式將會在背景耗用電量。你的電池電力可能會比預期更快耗盡。"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"移除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"取消"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"覆寫"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6599920924910821386">"仍要充電"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"請檢查充電配件"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"進一步瞭解不相容的變壓器充電"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
@@ -3097,8 +3112,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"網路通知"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"發生下列情況時接收通知：裝置連上未加密網路，或是網路記錄你的裝置專屬 ID/SIM 卡 ID"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"網路世代"</string>
-    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G 網路安全防護功能會避免使用安全性較低的 2G 網路，這可能會導致在某些地點無法連線。你隨時都能透過 2G 撥打緊急電話，但如果是在國外漫遊，可能無法接通電話。"</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G 網路安全防護"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"加密"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"各代網路"</string>
@@ -3786,8 +3800,10 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"調低桌布亮度"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"調低桌布亮度"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"變更桌布亮度"</string>
-    <string name="mode_dark_theme_title" msgid="8099007897943513209">"啟用深色主題"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"啟用深色主題"</string>
+    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
+    <skip />
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"將裝置主題切換成深色背景，減輕雙眼負擔"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{沒有顯示變更}=1{{effect_1}}=2{{effect_1}和{effect_2}}=3{{effect_1}、{effect_2}和{effect_3}}other{{effect_1}、{effect_2}和另外 # 個設定}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"允許所有通知"</string>
@@ -4539,7 +4555,7 @@
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"必須由家長操作"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"如要開始設定這項功能，請將手機交給家長"</string>
     <string name="disabled_by_policy_title_parental_controls" msgid="2688144174399968452">"請求協助"</string>
-    <string name="disabled_by_policy_content_parental_controls" msgid="7645416358554171082">"如要變更這項設定，請要求在裝置或帳戶上設定監護功能者協助。"</string>
+    <string name="disabled_by_policy_content_parental_controls" msgid="7645416358554171082">"只有原先在裝置或帳戶上設定監護功能的使用者，才能替你變更這項設定。"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"這項設定必須經由家長同意才能變更，因此請將手機交給家長。"</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"詳情請洽 IT 管理員"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"其他詳細資訊"</string>
@@ -5173,24 +5189,19 @@
     <string name="title_no_satellite_plan" msgid="7255726881685672846">"你的帳戶不支援衛星訊息功能"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"瞭解詳情"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"運作方式"</string>
-    <!-- no translation found for title_satellite_connection_guide (7080935804228845540) -->
-    <skip />
+    <string name="title_satellite_connection_guide" msgid="7080935804228845540">"沒有 Wi-Fi 或行動網路時"</string>
     <string name="title_satellite_connection_guide_for_manual_type" msgid="7223875100977941341">"傳送訊息到某個電話號碼"</string>
-    <!-- no translation found for summary_satellite_connection_guide (1962847581645612628) -->
-    <skip />
+    <string name="summary_satellite_connection_guide" msgid="1962847581645612628">"手機會自動連上衛星。為求最佳連線效果，請在沒有物體遮住天空的地方使用。"</string>
     <string name="summary_satellite_connection_guide_for_manual_type" msgid="2106091974353287661">"如果沒有行動網路，就會看到使用衛星的選項。"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"手機連上衛星後"</string>
     <string name="title_supported_service_for_manual_type" msgid="6009284624466359864">"按照步驟連上衛星"</string>
-    <!-- no translation found for summary_supported_service_with_constrained_data (8495750699335612848) -->
-    <skip />
-    <!-- no translation found for summary_supported_service_with_unconstrained_data (5010592489972147979) -->
-    <skip />
+    <string name="summary_supported_service_with_constrained_data" msgid="8495750699335612848">"你可以傳送訊息給任何人 (包括緊急救援服務)，也可以使用支援的應用程式。如果有可用的行動網路，手機就會重新連線。"</string>
+    <string name="summary_supported_service_with_unconstrained_data" msgid="5010592489972147979">"你可以傳送訊息給任何人 (包括緊急救援服務)，也可以在應用程式中使用衛星數據連線。如果有可用的行動網路，手機就會重新連線。"</string>
     <string name="summary_supported_service_without_data_supported" msgid="179845377285866178">"你可以傳送訊息給任何人，包括緊急救援服務。如果有可用的行動網路，手機就會重新連線。"</string>
     <string name="summary_supported_service_for_manual_type" msgid="2147958362763058271">"手機連線後，你可以傳送訊息給任何人，包括緊急救援服務。"</string>
     <string name="satellite_footer_content_section_0" msgid="4169483813004415556">"注意事項"</string>
     <string name="satellite_footer_content_section_1" msgid="7925931577373229601">"衛星連線的作業時間可能較長，而且僅支援部分地區。"</string>
-    <!-- no translation found for satellite_footer_content_section_2 (555594211014015682) -->
-    <skip />
+    <string name="satellite_footer_content_section_2" msgid="555594211014015682">"天氣和特定結構可能會影響衛星連線的品質。"</string>
     <string name="satellite_footer_content_section_3" msgid="4686525535095321485">"不支援衛星通話。"</string>
     <string name="satellite_footer_content_section_4" msgid="2294227482962815751">"你或許仍可撥打緊急電話。"</string>
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"如要查看外部連結，必須連上 Wi‑Fi 或行動網路。"</string>
@@ -5202,10 +5213,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"衛星"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"衛星連線"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"衛星連線"</string>
-    <!-- no translation found for title_have_satellite_constrained_data_plan (8275865334911177900) -->
-    <skip />
-    <!-- no translation found for title_have_satellite_unconstrained_data_plan (5437095773679990375) -->
-    <skip />
+    <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"你的帳戶可使用支援的應用程式"</string>
+    <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"你的帳戶數據連線可供所有應用程式使用"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"手機支援的應用程式"</string>
     <string name="title_satellite_supported_app_list_entry" msgid="891155574898209245">"查看衛星支援的所有應用程式"</string>
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"手機支援的應用程式"</string>
@@ -5561,8 +5570,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"缺少電話號碼。"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"確定"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G 網路安全防護"</string>
-    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
-    <skip />
+    <string name="enable_2g_summary" msgid="6194875539424151678">"避免使用安全性較低的 2G 網路，這可能會導致在某些地點無法連線。你隨時都能透過 2G 撥打緊急電話，但如果是在國外漫遊，可能無法接通電話。"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"必須啟用 2G 才能使用「<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>」的服務"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"僅允許加密網路"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"這麼做雖然更加安全，但行動網路連線在某些地區可能會受到限制。緊急電話撥號服務則隨時可用，不會受到影響"</string>
@@ -5640,21 +5648,7 @@
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"停止限制應用程式子程序的系統資源用量"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"強制啟用「記事」角色"</string>
     <string name="enable_notes_role_summary" msgid="5495721409392395089">"透過「記事」角色啟用記事系統整合作業。如果「記事」角色已啟用，系統不會有任何動作。必須重新啟動裝置。"</string>
-    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"廣播"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"播送「<xliff:g id="CURRENTAPP">%1$s</xliff:g>」的內容"</string>
-    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"收聽附近正在播放的廣播"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"對附近的裝置廣播媒體內容或收聽其他人的廣播"</string>
-    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"廣播"</string>
-    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"正在收聽"</string>
-    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"尋找廣播"</string>
-    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"離開廣播"</string>
-    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"掃描 QR code"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"輸入密碼"</string>
-    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"無法連線，請再試一次。"</string>
-    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"密碼錯誤"</string>
-    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"無法參與廣播訊息"</string>
-    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"如要開始收聽，請將掃描器對準下方的 QR 圖碼"</string>
-    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR 圖碼格式無效"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"轉換成 eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"將 eSIM 轉移到其他裝置"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# 個應用程式}other{# 個應用程式}}"</string>
@@ -5928,12 +5922,8 @@
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"查看詳細資料"</string>
     <string name="identity_check_promo_card_title" msgid="1495226082133610343">"使用身分驗證功能保護更多應用程式"</string>
     <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"在所有支援指紋與人臉解鎖的應用程式中使用身分驗證功能，即可享有更強大的保護機制和更一致的使用體驗，而且不必額外設定"</string>
-    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
-    <skip />
+    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"「身分驗證」支援手錶"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"防止他人開啟需要指紋或人臉解鎖的應用程式。連結手錶後，行動更自由，安全依然有保障。"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"使用「身分驗證」搭配手錶，保護更多應用程式資料"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"在住家或辦公室等信任的位置，為支援指紋和人臉解鎖的應用程式提供身分防護。如果搭配手錶使用「身分驗證」，即使不在信任的位置，也能享有安全保障。"</string>
 </resources>

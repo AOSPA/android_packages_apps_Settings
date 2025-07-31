@@ -225,6 +225,13 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
                         R.id.remove);
                 mUserPreferredLocalePreferenceController.doTheUpdate();
                 mUserPreferredLocalePreferenceController.updatePreferences();
+
+                boolean showNotTranslatedDialog = data.getBooleanExtra(
+                        LocaleDialogFragment.ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED, true);
+                localeInfo = LocaleStore.getLocaleInfo(Locale.getDefault());
+                if (showNotTranslatedDialog && !localeInfo.isTranslated()) {
+                    showUnavailableDialog(localeInfo);
+                }
             }
         } else if (requestCode == DIALOG_NOT_AVAILABLE_LOCALE) {
             if (resultCode == Activity.RESULT_OK) {

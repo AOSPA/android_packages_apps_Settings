@@ -106,9 +106,7 @@ public class DeviceStateAutoRotationHelper {
     /** Returns whether the device state based auto-rotation settings are enabled. */
     public static boolean isDeviceStateRotationEnabled(Context context) {
         return RotationPolicy.isRotationLockToggleVisible(context)
-                && isDeviceStateRotationLockEnabled(context)
-                && DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(context)
-                != null;
+                && isDeviceStateRotationLockEnabled(context);
     }
 
     /**
@@ -117,8 +115,6 @@ public class DeviceStateAutoRotationHelper {
      */
     public static boolean isDeviceStateRotationEnabledForA11y(Context context) {
         return RotationPolicy.isRotationSupported(context)
-                && isDeviceStateRotationLockEnabled(context)
-                && DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(context)
-                != null;
+                && isDeviceStateRotationLockEnabled(context);
     }
 }

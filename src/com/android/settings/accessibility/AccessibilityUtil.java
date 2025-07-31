@@ -204,7 +204,7 @@ public final class AccessibilityUtil {
      * @return The user shortcut type if component name existed in {@code UserShortcutType} string
      * Settings.
      */
-    static int getUserShortcutTypesFromSettings(@NonNull Context context,
+    public static int getUserShortcutTypesFromSettings(@NonNull Context context,
             @NonNull ComponentName componentName) {
         // TODO(b/147990389): Delete the branching logic for getting componentNameString after we
         //  migrated to MAGNIFICATION_COMPONENT_NAME.

@@ -18,8 +18,10 @@ package com.android.settings.appfunctions.providers
 
 import androidx.annotation.Keep
 import com.android.settings.appfunctions.DeviceStateCategory
-import com.android.settings.appfunctions.providers.DeviceStateProvider
-import com.android.settings.appfunctions.providers.DeviceStateProviderResult
+import com.android.settings.appfunctions.intents.getAccessibilityIntents
+import com.android.settings.appfunctions.intents.getModesIntents
+import com.android.settings.appfunctions.intents.getOtherIntents
+import com.android.settings.appfunctions.intents.getSecurityIntents
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 /**
@@ -62,3 +64,6 @@ class StaticIntentProvider(
         return DeviceStateProviderResult(states)
     }
 }
+
+fun getAllIntents(): List<StaticIntent> =
+    getModesIntents() + getSecurityIntents() + getAccessibilityIntents() + getOtherIntents()

@@ -55,18 +55,15 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
     static final int DEFAULT_LOW_REFRESH_RATE = 60;
     static final String MORE_OPTIONS_KEY = "more_options";
     static final String TOP_OPTIONS_KEY = "top_options";
-    static final int MORE_OPTIONS_TITLE_RESOURCE =
-            R.string.external_display_more_options_title;
+    static final int MORE_OPTIONS_TITLE_RESOURCE = R.string.external_display_more_options_title;
     static final int EXTERNAL_DISPLAY_RESOLUTION_SETTINGS_RESOURCE =
             R.xml.external_display_resolution_settings;
-    static final String DISPLAY_MODE_LIMIT_OVERRIDE_PROP = "persist.sys.com.android.server.display"
-            + ".feature.flags.enable_mode_limit_for_external_display-override";
-    @Nullable
-    private ConnectedDisplayInjector mInjector;
-    @Nullable
-    private PreferenceCategory mTopOptionsPreference;
-    @Nullable
-    private PreferenceCategory mMoreOptionsPreference;
+    static final String DISPLAY_MODE_LIMIT_OVERRIDE_PROP =
+            "persist.sys.com.android.server.display"
+                    + ".feature.flags.enable_mode_limit_for_external_display-override";
+    @Nullable private ConnectedDisplayInjector mInjector;
+    @Nullable private PreferenceCategory mTopOptionsPreference;
+    @Nullable private PreferenceCategory mMoreOptionsPreference;
     private boolean mStarted;
     private final HashSet<String> mResolutionPreferences = new HashSet<>();
     private int mExternalDisplayPeakWidth;
@@ -75,12 +72,13 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
     private boolean mRefreshRateSynchronizationEnabled;
     private boolean mMoreOptionsExpanded;
     private final Runnable mUpdateRunnable = this::update;
-    private final DisplayListener mListener = new DisplayListener() {
-        @Override
-        public void update(int displayId) {
-            scheduleUpdate();
-        }
-    };
+    private final DisplayListener mListener =
+            new DisplayListener() {
+                @Override
+                public void update(int displayId) {
+                    scheduleUpdate();
+                }
+            };
 
     @Override
     public int getMetricsCategory() {
@@ -168,16 +166,23 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             return;
         }
         mResolutionPreferences.clear();
-        var remainingModes = addModePreferences(context,
-                getTopPreference(context, screen),
-                display.getSupportedModes(), this::isTopMode, display);
-        addRemainingPreferences(context,
+        var remainingModes =
+                addModePreferences(
+                        context,
+                        getTopPreference(context, screen),
+                        display.getSupportedModes(),
+                        this::isTopMode,
+                        display);
+        addRemainingPreferences(
+                context,
                 getMorePreference(context, screen),
-                display, remainingModes.first, remainingModes.second);
+                display,
+                remainingModes.first,
+                remainingModes.second);
     }
 
-    private PreferenceCategory getTopPreference(@NonNull Context context,
-            @NonNull PreferenceScreen screen) {
+    private PreferenceCategory getTopPreference(
+            @NonNull Context context, @NonNull PreferenceScreen screen) {
         if (mTopOptionsPreference == null) {
             mTopOptionsPreference = new PreferenceCategory(context);
             mTopOptionsPreference.setPersistent(false);
@@ -189,15 +194,16 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         return mTopOptionsPreference;
     }
 
-    private PreferenceCategory getMorePreference(@NonNull Context context,
-            @NonNull PreferenceScreen screen) {
+    private PreferenceCategory getMorePreference(
+            @NonNull Context context, @NonNull PreferenceScreen screen) {
         if (mMoreOptionsPreference == null) {
             mMoreOptionsPreference = new PreferenceCategory(context);
             mMoreOptionsPreference.setPersistent(false);
             mMoreOptionsPreference.setTitle(MORE_OPTIONS_TITLE_RESOURCE);
-            mMoreOptionsPreference.setOnExpandButtonClickListener(() -> {
-                mMoreOptionsExpanded = true;
-            });
+            mMoreOptionsPreference.setOnExpandButtonClickListener(
+                    () -> {
+                        mMoreOptionsExpanded = true;
+                    });
             mMoreOptionsPreference.setKey(MORE_OPTIONS_KEY);
             screen.addPreference(mMoreOptionsPreference);
         } else {
@@ -206,18 +212,22 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         return mMoreOptionsPreference;
     }
 
-    private void addRemainingPreferences(@NonNull Context context,
-            @NonNull PreferenceCategory group, @NonNull DisplayDevice display,
-            boolean isSelectedModeFound, @NonNull List<Mode> moreModes) {
+    private void addRemainingPreferences(
+            @NonNull Context context,
+            @NonNull PreferenceCategory group,
+            @NonNull DisplayDevice display,
+            boolean isSelectedModeFound,
+            @NonNull List<Mode> moreModes) {
         if (moreModes.isEmpty()) {
             return;
         }
         mMoreOptionsExpanded |= !isSelectedModeFound;
         group.setInitialExpandedChildrenCount(mMoreOptionsExpanded ? Integer.MAX_VALUE : 0);
-        addModePreferences(context, group, moreModes, /*checkMode=*/ null, display);
+        addModePreferences(context, group, moreModes, /* checkMode= */ null, display);
     }
 
-    private Pair<Boolean, List<Mode>> addModePreferences(@NonNull Context context,
+    private Pair<Boolean, List<Mode>> addModePreferences(
+            @NonNull Context context,
             @NonNull PreferenceGroup group,
             @NonNull List<Mode> modes,
             @Nullable ToBooleanFunction<Mode> checkMode,
@@ -270,8 +280,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
     }
 
     private boolean isTopMode(@NonNull Mode mode) {
-        return mTopOptionsPreference != null
-                && mTopOptionsPreference.getPreferenceCount() < 3;
+        return mTopOptionsPreference != null && mTopOptionsPreference.getPreferenceCount() < 3;
     }
 
     private boolean isAllowedMode(@NonNull Mode mode) {
@@ -286,8 +295,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             Log.d(TAG, mode + " height is above the allowed limit");
             return false;
         }
-        if (mExternalDisplayPeakWidth > 0
-                && mode.getPhysicalWidth() > mExternalDisplayPeakWidth) {
+        if (mExternalDisplayPeakWidth > 0 && mode.getPhysicalWidth() > mExternalDisplayPeakWidth) {
             Log.d(TAG, mode + " width is above the allowed limit");
             return false;
         }
@@ -314,8 +322,8 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         mInjector.getHandler().removeCallbacks(mUpdateRunnable);
     }
 
-    private void onDisplayModeClicked(@NonNull SelectorWithWidgetPreference preference,
-            @NonNull DisplayDevice display) {
+    private void onDisplayModeClicked(
+            @NonNull SelectorWithWidgetPreference preference, @NonNull DisplayDevice display) {
         if (mInjector == null) {
             return;
         }
@@ -323,8 +331,9 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         int width = Integer.parseInt(modeResolution[0]);
         int height = Integer.parseInt(modeResolution[1]);
         for (var mode : display.getSupportedModes()) {
-            if (mode.getPhysicalWidth() == width && mode.getPhysicalHeight() == height
-                        && isAllowedMode(mode)) {
+            if (mode.getPhysicalWidth() == width
+                    && mode.getPhysicalHeight() == height
+                    && isAllowedMode(mode)) {
                 mInjector.setUserPreferredDisplayMode(display.getId(), mode);
                 return;
             }
@@ -346,16 +355,27 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         if (context == null) {
             return;
         }
-        mExternalDisplayPeakRefreshRate = getResources(context).getInteger(
-                    com.android.internal.R.integer.config_externalDisplayPeakRefreshRate);
+        mExternalDisplayPeakRefreshRate =
+                getResources(context)
+                        .getInteger(
+                                com.android.internal.R.integer
+                                        .config_externalDisplayPeakRefreshRate);
         if (isDisplayResolutionLimitEnabled()) {
-            mExternalDisplayPeakWidth = getResources(context).getInteger(
-                    com.android.internal.R.integer.config_externalDisplayPeakWidth);
-            mExternalDisplayPeakHeight = getResources(context).getInteger(
-                    com.android.internal.R.integer.config_externalDisplayPeakHeight);
+            mExternalDisplayPeakWidth =
+                    getResources(context)
+                            .getInteger(
+                                    com.android.internal.R.integer.config_externalDisplayPeakWidth);
+            mExternalDisplayPeakHeight =
+                    getResources(context)
+                            .getInteger(
+                                    com.android.internal.R.integer
+                                            .config_externalDisplayPeakHeight);
         }
-        mRefreshRateSynchronizationEnabled = getResources(context).getBoolean(
-                    com.android.internal.R.bool.config_refreshRateSynchronizationEnabled);
+        mRefreshRateSynchronizationEnabled =
+                getResources(context)
+                        .getBoolean(
+                                com.android.internal.R.bool
+                                        .config_refreshRateSynchronizationEnabled);
         Log.d(TAG, "mExternalDisplayPeakRefreshRate=" + mExternalDisplayPeakRefreshRate);
         Log.d(TAG, "mExternalDisplayPeakWidth=" + mExternalDisplayPeakWidth);
         Log.d(TAG, "mExternalDisplayPeakHeight=" + mExternalDisplayPeakHeight);

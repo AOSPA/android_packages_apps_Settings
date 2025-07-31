@@ -202,7 +202,7 @@ class DisplayTopologyPreferenceController(
     private fun applyTopology(topology: DisplayTopology) {
         // If stacked mirroring display is turned on, updates will come from DisplayListener since
         // there's no more topology update when display is added / removed
-        if (showStackedMirroringDisplay()) {
+        if (!this::paneContent.isInitialized || showStackedMirroringDisplay()) {
             return
         }
         // Step 1
@@ -252,7 +252,7 @@ class DisplayTopologyPreferenceController(
      */
     private fun applyDisplayUpdateInMirroringMode() {
         // If stacked mirroring display is turned off, update will be handled by topology update
-        if (!showStackedMirroringDisplay()) {
+        if (!this::paneContent.isInitialized || !showStackedMirroringDisplay()) {
             return
         }
         // Step 1

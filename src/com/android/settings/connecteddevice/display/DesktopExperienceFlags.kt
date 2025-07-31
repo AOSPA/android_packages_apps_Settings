@@ -76,7 +76,7 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) :
     private val enableDefaultDisplayInTopologySwitchBugfixFlag =
         DesktopExperienceFlag(
             featureFlagsImpl::enableDefaultDisplayInTopologySwitchBugfix,
-            /* shouldOverrideByDevOption= */ false,
+            /* shouldOverrideByDevOption= */ true,
             Flags.FLAG_ENABLE_DEFAULT_DISPLAY_IN_TOPOLOGY_SWITCH_BUGFIX,
         )
 

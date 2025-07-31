@@ -22,13 +22,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.InputDevice;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.keyboard.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
 
@@ -72,24 +70,9 @@ public class TouchpadAndMouseSettingsTest {
     }
 
     @Test
-    @DisableFlags({FLAG_FIX_TOUCHPAD_AND_MOUSE_SETTINGS_SEARCH_INDEX,
-            Flags.FLAG_KEYBOARD_AND_TOUCHPAD_A11Y_NEW_PAGE_ENABLED})
+    @DisableFlags({FLAG_FIX_TOUCHPAD_AND_MOUSE_SETTINGS_SEARCH_INDEX})
     public void withoutIndexFix_newPageEnabled_pageIndexIncluded() {
         assertIsPageSearchEnabled(true);
-    }
-
-    @Test
-    @EnableFlags(FLAG_FIX_TOUCHPAD_AND_MOUSE_SETTINGS_SEARCH_INDEX)
-    @DisableFlags(Flags.FLAG_KEYBOARD_AND_TOUCHPAD_A11Y_NEW_PAGE_ENABLED)
-    public void withIndexFix_newPageDisabled_pageIndexIncluded() {
-        assertIsPageSearchEnabled(true);
-    }
-
-    @Test
-    @EnableFlags({FLAG_FIX_TOUCHPAD_AND_MOUSE_SETTINGS_SEARCH_INDEX,
-            Flags.FLAG_KEYBOARD_AND_TOUCHPAD_A11Y_NEW_PAGE_ENABLED})
-    public void withIndexFix_newPageEnabled_pageIndexExcluded() {
-        assertIsPageSearchEnabled(false);
     }
 
     private void assertIsPageSearchEnabled(boolean expectedResult) {

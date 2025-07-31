@@ -23,16 +23,19 @@ import android.bluetooth.BluetoothHearingAid
 import android.bluetooth.BluetoothLeAudio
 import android.bluetooth.BluetoothProfile
 import android.content.BroadcastReceiver
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.fragment.app.Fragment
+import com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME
 import com.android.settings.R
 import com.android.settings.Settings.HearingDevicesActivity
 import com.android.settings.accessibility.AccessibilityHearingAidsFragment
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.HearingAidHelper
 import com.android.settings.accessibility.HearingAidUtils
+import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
 import com.android.settings.bluetooth.Utils
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
@@ -137,11 +140,12 @@ open class HearingDevicesScreen(context: Context) :
             +AvailableHearingDevicePreferenceCategory()
             +AddDevicePreference(context)
             +SavedHearingDevicePreferenceCategory()
-            +HearingDevicesFooterPreference(context)
             +HearingDeviceOptionsPreferenceCategory() += {
                 +AudioRoutingPreference()
+                +HearingDeviceShortcutPreference(context, coroutineScope, metricsCategory)
                 +HearingAidCompatibilitySwitchPreference(context)
             }
+            +HearingDevicesFooterPreference(context)
         }
 
     override fun isIndexable(context: Context): Boolean = true
@@ -203,7 +207,7 @@ open class HearingDevicesScreen(context: Context) :
             HearingAidUtils.launchHearingAidPairingDialog(
                 lifecycleContext?.fragmentManager,
                 activeDevice,
-                getMetricsCategory(),
+                metricsCategory,
             )
         }
     }
@@ -222,6 +226,25 @@ open class HearingDevicesScreen(context: Context) :
         key: String = "hearing_options_category",
         title: Int = R.string.accessibility_screen_option,
     ) : PreferenceCategory(key, title)
+
+    class HearingDeviceShortcutPreference(
+        context: Context,
+        coroutineScope: CoroutineScope,
+        metricsCategory: Int,
+        key: String = "hearing_aids_shortcut_preference",
+        title: Int = R.string.accessibility_hearing_device_shortcut_title,
+        componentName: ComponentName = ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME,
+        featureName: CharSequence = context.getText(R.string.accessibility_hearingaid_title),
+    ) :
+        AccessibilityShortcutPreference(
+            context,
+            coroutineScope,
+            key,
+            title,
+            componentName,
+            featureName,
+            metricsCategory,
+        )
 
     companion object {
         const val KEY = "hearing_devices"

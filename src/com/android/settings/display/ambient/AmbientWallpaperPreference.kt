@@ -31,10 +31,11 @@ class AmbientWallpaperPreference(context: Context) :
     ) {
 
     private val dataStore = context.dataStore
+    private val dozeAlwaysOnDataStore = AmbientDisplayStorage(context)
 
     override fun dependencies(context: Context) = arrayOf(AmbientDisplayMainSwitchPreference.KEY)
 
-    override fun isEnabled(context: Context) = dataStore.getBoolean(DOZE_ALWAYS_ON) == true
+    override fun isEnabled(context: Context) = dozeAlwaysOnDataStore.getBoolean(DOZE_ALWAYS_ON)!!
 
     override fun storage(context: Context) = dataStore
 

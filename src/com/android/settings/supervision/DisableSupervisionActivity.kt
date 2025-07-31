@@ -70,14 +70,6 @@ class DisableSupervisionActivity : FragmentActivity() {
             }
         }
 
-        // If the caller is an allowed profile owner, remove it.
-        if (isAllowedProfileOwner) {
-            devicePolicyManager?.forceRemoveActiveAdmin(
-                devicePolicyManager.profileOwner!!,
-                user.getIdentifier(),
-            )
-        }
-
         // Finally, revoke the supervision role for the caller when applicable.
         if (supervisionApps.contains(callingPackage)) {
             lifecycleScope.launch {

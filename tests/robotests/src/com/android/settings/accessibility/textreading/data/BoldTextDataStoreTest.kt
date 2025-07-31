@@ -74,4 +74,34 @@ class BoldTextDataStoreTest {
 
         assertThat(settingsStore.getInt(BoldTextDataStore.KEY)).isEqualTo(0)
     }
+
+    // Appfunction calls setValue with boolean type instead of setBoolean.
+    // Calling setValue with boolean won't invoke setBoolean; where as setBoolean will invoke
+    // setValue.
+    // Adding simple test to make sure that setValue is properly implemented
+    @Test
+    fun setValue_true_settingsUpdated() {
+        dataStore.setValue(BoldTextDataStore.KEY, Boolean::class.javaObjectType, true)
+
+        assertThat(settingsStore.getInt(BoldTextDataStore.KEY))
+            .isEqualTo(BoldTextDataStore.BOLD_TEXT_ADJUSTMENT)
+    }
+
+    // Appfunction calls getValue with boolean type instead of getBoolean.
+    // Calling getValue with boolean won't invoke getBoolean; where as getBoolean will invoke
+    // getValue.
+    // Adding simple test to make sure that getValue is properly implemented
+    @Test
+    fun getValue_boldTextOn_returnTrue() {
+        settingsStore.setInt(BoldTextDataStore.KEY, BoldTextDataStore.BOLD_TEXT_ADJUSTMENT)
+
+        assertThat(dataStore.getValue(BoldTextPreference.KEY, Boolean::class.javaObjectType))
+            .isTrue()
+    }
+
+    @Test
+    fun getDefaultValue_returnFalse() {
+        assertThat(dataStore.getDefaultValue(BoldTextPreference.KEY, Boolean::class.javaObjectType))
+            .isFalse()
+    }
 }

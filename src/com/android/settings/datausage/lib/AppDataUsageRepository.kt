@@ -164,12 +164,9 @@ class AppDataUsageRepository(
     }
 
     private fun shouldSkipProfile(userManager: UserManager, userHandle: UserHandle): Boolean {
-        if (android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
-            return (userManager.isQuietModeEnabled(userHandle) &&
-                userManager.getUserProperties(userHandle).showInQuietMode ==
-                    UserProperties.SHOW_IN_QUIET_MODE_HIDDEN)
-        }
-        return false
+        return (userManager.isQuietModeEnabled(userHandle) &&
+            userManager.getUserProperties(userHandle).showInQuietMode ==
+                UserProperties.SHOW_IN_QUIET_MODE_HIDDEN)
     }
 
     /**

@@ -100,9 +100,12 @@ public class UserCapabilities {
 
         final boolean canAddUsersWhenLocked = mIsAdmin || Settings.Global.getInt(
                 context.getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1;
-        mCanAddGuest = !mIsGuest && !mDisallowAddUser && canAddUsersWhenLocked
-                && userManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_GUEST);
-
+        mCanAddGuest =
+                !mIsGuest
+                        && !mDisallowAddUser
+                        && canAddUsersWhenLocked
+                        && userManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_GUEST)
+                        && !isGuestEphemeralAndUnswitchable(context);
         mDisallowSwitchUser = userManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH);
     }
 
@@ -122,6 +125,20 @@ public class UserCapabilities {
         return mEnforcedAdmin;
     }
 
+    private boolean isGuestEphemeralAndUnswitchable(Context context) {
+        // If guest users are ephemeral and switching users is not allowed in Settings, creating a
+        // guest user is meaningless since this user is going to be deleted on logout anyways, and
+        // this user cannot be accessed by switching to it.
+        boolean isGuestUserEphemeral =
+                context.getResources()
+                        .getBoolean(com.android.internal.R.bool.config_guestUserEphemeral);
+        boolean disallowUserSwitchInSettings =
+                context.getResources()
+                        .getBoolean(
+                                com.android.internal.R.bool
+                                        .config_userSwitchingMustGoThroughLoginScreen);
+        return isGuestUserEphemeral && disallowUserSwitchInSettings;
+    }
 
     @Override
     public String toString() {

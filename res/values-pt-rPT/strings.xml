@@ -1461,7 +1461,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Use um fundo escuro para tornar a visualização do ecrã mais confortável e reduzir a utilização da bateria em alguns ecrãs. Se tiver um horário, o tema vai mudar quando o ecrã estiver desligado."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Atualmente, o tema escuro segue o seu horário do Modo de hora de dormir"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Definições do Modo de hora de dormir"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Os modos também podem ativar o tema escuro}=1{{mode_1} também ativa o tema escuro}=2{{mode_1} e {mode_2} também ativam o tema escuro}=3{{mode_1}, {mode_2} e {mode_3} também ativam o tema escuro}other{{mode_1}, {mode_2} e mais # também ativam o tema escuro}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Definições de modos"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Aumente o brilho e expanda o intervalo de cores e a nitidez em imagens e vídeos de elevada amplitude dinâmica (HDR). O conteúdo HDR vai aparecer mais brilhante."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Limite de tempo do ecrã"</string>
@@ -1478,6 +1479,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Proteção de ecrã"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"proteção de ecrã"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Indisponível, modo de hora de dormir ativado"</string>
+    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Não disponível"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Usar proteção de ecrã"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Ao carregar ou na estação de carregamento"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Durante o carregamento e na estação"</string>
@@ -2389,9 +2391,12 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Avalie-nos"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Contactar apoio técnico da Google para pessoas com deficiência"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Inquérito de acessibilidade"</string>
-    <string name="dark_theme_survey_notification_title" msgid="4035183263314404750">"Está a usar o tema escuro em mais apps?"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="801472177955048195">"Partilhe o seu feedback"</string>
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Partilhe o seu feedback"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Qual é o seu nível de satisfação com o tema escuro?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Preencher inquérito"</string>
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Partilhe o seu feedback"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Qual é o seu nível de satisfação com a ampliação?"</string>
+    <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Preencher inquérito"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps transferidas"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Sinalizadores de funcionalidades"</string>
@@ -2555,12 +2560,17 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Atualiz. auto da ampliação do ecrã"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Atualizar ampliação do ecrã em transições de aplic"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Botão de ligar termina chamada"</string>
-    <string name="dark_theme_version_category" msgid="8563711427335567656">"Modo"</string>
+    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
+    <skip />
+    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Padrão"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="6182199392044601252">"Tema escuro padrão"</string>
+    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
+    <skip />
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Aplica o tema escuro em todo o dispositivo e apps compatíveis"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expandido"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="6003085770489582863">"Tema escuro expandido"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
+    <skip />
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Aplica automaticamente o tema escuro a mais apps para melhorar a acessibilidade"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remover animações"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduz o movimento no ecrã"</string>
@@ -2659,7 +2669,8 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Acerca da inversão de cores"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Saiba mais acerca da inversão de cores"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Saiba mais sobre o tema escuro"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="4431044600779983609">"Algumas apps podem não ser compatíveis com o tema escuro na definição expandida. Se tiver problemas relacionados com o aspeto, use a definição padrão."</string>
+    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
+    <skip />
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Mostrar legendas"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Apenas para a app suportada"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Tamanho e estilo das legendas"</string>
@@ -2860,6 +2871,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Otimizada"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Restrita"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Permite a utilização da bateria em segundo plano sem restrições. Pode consumir mais bateria."</string>
+    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"Permita a utilização da bateria em segundo plano. Pode consumir mais bateria."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Otimiza a bateria com base na utilização. Recomendado para a maioria das apps."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Restrinja a utilização da bateria quando estiver em segundo plano. A app pode não funcionar conforme esperado. As notificações podem sofrer atrasos."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Alterar forma como as apps usam a bateria pode afetar o respetivo desempenho."</string>
@@ -2889,6 +2901,8 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Algumas funcionalidades podem estar limitadas"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Maior utilização da bateria"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Veja as apps com maior utilização"</string>
+    <string name="battery_tip_default_limited_temporarily_title" msgid="2244840552837449409">"O carregamento está limitado para proteger a bateria"</string>
+    <string name="battery_tip_default_limited_temporarily_summary" msgid="182448435746170298">"A bateria esteve quente durante um período prolongado. O carregamento normal vai ser retomado quando a bateria arrefecer mais"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Carregamento otimizado para proteger a sua bateria"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"Para ajudar a aumentar a vida útil da bateria, o carregamento é otimizado"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Saiba mais sobre o carregamento pausado"</string>
@@ -2907,7 +2921,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Esta aplicação poderá utilizar a bateria em segundo plano e, por conseguinte, pode ficar sem bateria mais cedo do que o esperado."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Remover"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancelar"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"Substituir"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6599920924910821386">"Carregar mesmo assim"</string>
     <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"Verificar acessório de carregamento"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"Saiba mais sobre o carregamento com um carregador incompatível"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
@@ -3094,8 +3108,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Notificações de redes"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Receba uma notificação quando o seu dispositivo se ligar a uma rede não encriptada ou quando uma rede registar o ID exclusivo do seu dispositivo ou do SIM"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Geração de rede"</string>
-    <!-- no translation found for cellular_security_2G_network_generation_summary (4041699962072749477) -->
-    <skip />
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"A proteção de rede 2G evita redes 2G, que são menos seguras. Isto pode limitar a conetividade em alguns locais. O 2G é sempre permitido para chamadas de emergência, mas as chamadas podem não ser estabelecidas se estiver em roaming internacional."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"Proteção de rede 2G"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Encriptação"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Gerações de redes"</string>
@@ -3783,8 +3796,10 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Escurecer a imagem de fundo"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"escurecer a imagem de fundo"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtre o brilho da imagem de fundo"</string>
-    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Ativar tema escuro"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ativar tema escuro"</string>
+    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
+    <skip />
+    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
+    <skip />
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Mude o tema do dispositivo para usar um fundo escuro, que é mais confortável para os olhos"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nenhuma alteração de visualização}=1{{effect_1}}=2{{effect_1} e {effect_2}}=3{{effect_1}, {effect_2} e {effect_3}}other{{effect_1}, {effect_2} e mais #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permitir todas as notificações"</string>
@@ -5551,8 +5566,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"O número de telefone está em falta."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"Proteção de rede 2G"</string>
-    <!-- no translation found for enable_2g_summary (6194875539424151678) -->
-    <skip />
+    <string name="enable_2g_summary" msgid="6194875539424151678">"Evita redes 2G, que são menos seguras. Isto pode limitar a conetividade em alguns locais. O 2G é sempre permitido para chamadas de emergência, mas as chamadas podem não ser estabelecidas se estiver em roaming internacional."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"O operador <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requer que o 2G esteja disponível"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Permitir apenas redes encriptadas"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Esta opção é mais segura, mas pode limitar a sua ligação de rede móvel em alguns locais. As chamadas de emergência são sempre permitidas."</string>
@@ -5630,21 +5644,7 @@
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Desative as restrições de utilização dos recursos do sistema pelos processos secundários da app"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Force a ativação da função Notas"</string>
     <string name="enable_notes_role_summary" msgid="5495721409392395089">"Ative as integrações do sistema de notas através da função Notas. Se a função Notas já estiver ativada, não faz nada. É necessário reiniciar."</string>
-    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Transmissão"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Transmita a app <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
-    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Ouça transmissões em reprodução perto de si"</string>
-    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Transmita conteúdos multimédia para dispositivos perto de si ou ouça a transmissão de outra pessoa"</string>
-    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Transmissões"</string>
-    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"A ouvir"</string>
-    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Encontrar transmissões"</string>
-    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Sair de transmissão"</string>
-    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Ler código QR"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Introduza a palavra-passe"</string>
-    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Não é possível ligar. Tente novamente."</string>
-    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Palavra-passe incorreta"</string>
-    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Não é possível participar na transmissão"</string>
-    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Para começar a ouvir, centre o código QR abaixo"</string>
-    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"O código QR não é um formato válido"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Converter num eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Transfira o eSIM para outro dispositivo"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# app}other{# apps}}"</string>
@@ -5918,12 +5918,8 @@
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Ver detalhes"</string>
     <string name="identity_check_promo_card_title" msgid="1495226082133610343">"Use a Verificação de identidade para proteger mais apps"</string>
     <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"Quando usa a Verificação de identidade para todas as apps compatíveis com o Desbloqueio facial ou por impressão digital, garante uma proteção mais forte e uma experiência mais consistente, sem configuração adicional"</string>
-    <!-- no translation found for identity_check_watch_issue_card_title (5620062865816820265) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (4428268483778051478) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (2949028203850064175) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (1088786582274383831) -->
-    <skip />
+    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"A Verificação de identidade funciona com o seu relógio"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Impeça terceiros de abrir apps que requerem o Desbloqueio facial ou por impressão digital. Quando tiver ligação estabelecida ao relógio, a sua segurança é garantida com maior mobilidade."</string>
+    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Use a Verificação de identidade e veja conteúdo em mais apps"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Garanta a proteção da sua identidade em todas as apps compatíveis com o Desbloqueio facial ou por impressão digital em locais fidedignos, como a sua casa ou escritório. Use a Verificação de identidade com o relógio para aumentar a sua proteção, mesmo para além de locais fidedignos."</string>
 </resources>
