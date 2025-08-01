@@ -329,7 +329,15 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     open var displayTopology: DisplayTopology?
         get() = displayManager?.displayTopology
         set(value) {
-            displayManager?.let { it.displayTopology = value }
+            displayManager?.let {
+                try {
+                    it.displayTopology = value
+                } catch (e: IllegalArgumentException) {
+                    // This can happen if Display Manager updated the topology at the same time.
+                    // Cancel this and wait for an update from Display Manager.
+                    Log.w(TAG, "Topology not set, waiting for an update from Display Manager")
+                }
+            }
         }
 
     /**
