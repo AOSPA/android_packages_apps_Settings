@@ -23,6 +23,8 @@ import androidx.annotation.VisibleForTesting
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.settings.R
 import com.android.settings.accessibility.BaseSupportFragment
+import com.android.settings.accessibility.FeedbackButtonPreferenceController
+import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.SurveyManager
 import com.android.settings.accessibility.screenmagnification.CursorFollowingModePreferenceController
@@ -41,6 +43,8 @@ open class MagnificationPreferenceFragment : BaseSupportFragment() {
             use(ModePreferenceController::class.java)?.setFragmentManager(getChildFragmentManager())
             use(CursorFollowingModePreferenceController::class.java)
                 ?.setFragmentManager(getChildFragmentManager())
+            use(FeedbackButtonPreferenceController::class.java)
+                .initialize(FeedbackManager(context, metricsCategory))
         }
 
         getShortcutPreferenceController()?.apply {

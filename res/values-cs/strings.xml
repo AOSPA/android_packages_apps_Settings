@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Přesouvejte myš mezi displeji"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Použít externí displej"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Rozlišení displeje"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"Výchozí chování připojení"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Používat jako samostatný displej"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Zrcadlit vestavěný displej"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Zobrazit dialogové okno připojení"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Externí displej je odpojen"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Otočení"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Standardní"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Další možnosti"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Uspořádání displejů můžete změnit přetažením."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Zrcadlit vestavěný displej"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"zrcadlení"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Povolit bezdrátové zobrazení"</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Použijte tmavé pozadí, aby se na obrazovku dívalo příjemněji a na některých obrazovkách se snížilo využití baterie. Pokud máte plán, motiv se změní, i když je obrazovka vypnutá."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tmavý motiv se aktuálně řídí plánem režimu nočního klidu"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Nastavení režimu nočního klidu"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Režimy můžou taky zapnout tmavý motiv}=1{{mode_1} taky zapíná tmavý motiv}=2{{mode_1} a {mode_2} taky zapínají tmavý motiv}=3{{mode_1}, {mode_2} a {mode_3} taky zapínají tmavý motiv}few{{mode_1}, {mode_2} a # další režimy taky zapínají tmavý motiv}many{{mode_1}, {mode_2} a # dalšího režimu taky zapíná tmavý motiv}other{{mode_1}, {mode_2} a # dalších režimů taky zapíná tmavý motiv}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Nastavení režimů"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Projasní a rozšíří barevný rozsah a ostrost obrázků a videí s technologií High Dynamic Range (HDR). Obsah s HDR bude jasnější."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Interval vypnutí obrazovky"</string>
@@ -2035,7 +2044,8 @@
     <string name="filter_apps_running" msgid="535465683273284141">"Spuštěné"</string>
     <string name="not_installed" msgid="5074606858798519449">"Pro tohoto uživ. nenainstal."</string>
     <string name="installed" msgid="2837449358488825884">"Nainstalováno"</string>
-    <string name="no_applications" msgid="985069304755391640">"Žádné aplikace"</string>
+    <!-- no translation found for no_applications (5471491608902031500) -->
+    <skip />
     <string name="internal_storage" msgid="999496851424448809">"Interní úložiště"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Přepočítávání velikosti..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Smazat data aplikace?"</string>
@@ -2391,15 +2401,11 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Ohodnoťte nás"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Kontaktovat podporu Google pro osoby s postižením"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Průzkum přístupnosti"</string>
-    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
-    <skip />
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Podělte se o svůj názor"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Jak vám vyhovuje tmavý motiv?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Vyplnit průzkum"</string>
-    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
-    <skip />
-    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
-    <skip />
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Podělte se o svůj názor"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Jak vám vyhovuje zvětšení?"</string>
     <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Vyplnit průzkum"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Stažené aplikace"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentální"</string>
@@ -2564,17 +2570,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Automaticky aktualizovat přiblížení"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Aktual. přiblížení obrazovky při přepnutí aplikací"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Vypínač ukončí hovor"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"Možnosti"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"Načasování"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standardní"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Standardní tmavý motiv"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Použije tmavý motiv na celé zařízení a v podporované aplikace"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Rozšířený"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Rozšířený tmavý motiv"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Pro lepší přístupnost automaticky použije tmavý motiv u více aplikací"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Odstranit animace"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Omezit pohyb na obrazovce"</string>
@@ -2634,9 +2636,16 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Malá"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Velmi malá"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Ignorovat drobný pohyb kurzoru"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"Po akci vrátit na kliknutí levým tlačítkem"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"Pokud chcete používat automatické klikání, změňte navigační režim"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"K návratu zpět, přechodu na plochu a přepínání mezi aplikacemi při automatickém klikání používejte místo navigace gesty navigaci třemi tlačítky"</string>
+    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
+    <skip />
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Automatické klikání funguje lépe s navigací třemi tlačítky"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Ke snadnému návratu zpět, přechodu na plochu a přepínání mezi aplikacemi při používání automatického klikání používejte místo navigace gesty navigaci třemi tlačítky"</string>
+    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrace a hmatová odezva"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Nastavení síly vibrace pro různá použití"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Zapnuto"</string>
@@ -2673,8 +2682,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Převrácení barev"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Další informace o převrácení barev"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Další informace o tmavém motivu"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"Některé aplikace nemusí tmavý motiv s rozšířenou možností podporovat. Pokud něco nevypadá správně, použijte standardní možnost."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Zobrazovat titulky"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Jen pro podporovanou aplikaci"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Velikost a styl titulků"</string>
@@ -3436,6 +3444,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"S tímto uživatelem bude sdílena historie hovorů a SMS."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Odebrat administrátorská práva?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Pokud tomuto uživateli odeberete administrátorská práva, vy nebo jiný administrátor mu je můžete později opět udělit."</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Nouzové informace"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informace a kontakty uživatele <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Otevřít aplikaci <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3800,10 +3812,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Ztlumit jas tapety"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"ztlumit jas tapety"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrovat jas tapety"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Zapnout tmavý motiv"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"zapnout tmavý motiv"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Přepnout motiv zařízení na tmavé pozadí, které je šetrnější k očím"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Žádné změny zobrazení}=1{{effect_1}}=2{{effect_1} a {effect_2}}=3{{effect_1}, {effect_2} a {effect_3}}few{{effect_1}, {effect_2} a ještě #}many{{effect_1}, {effect_2} a ještě #}other{{effect_1}, {effect_2} a ještě #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Povolit všechna oznámení"</string>
@@ -4372,8 +4382,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"Správce oprávnění"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Aktualizace sdílení dat pro zjišťování polohy"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Zkontrolujte aplikace, které změnily způsob, jakým mohou sdílet vaše údaje o poloze"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Agentní ovládání ostatních aplikací"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Provádějte akce na zařízení a v ostatních aplikacích"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"Probudit klepnutím"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Dvojitým klepnutím kamkoli na obrazovku zařízení probudíte"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Otevírání odkazů"</string>
@@ -5889,6 +5901,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Nastavit PIN"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"dohled, rodičovská kontrola, rodiče, pin pro dohled, pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Spravovat kód PIN"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Rodičovský PIN, PIN rodičovské kontroly"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Přidat e-mail pro obnovení"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Ověřit e-mail pro obnovení"</string>
@@ -5910,7 +5924,8 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Když jsou tato nastavení vypnutá, můžou dál platit ostatní nastavení účtu."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Zadejte PIN rodičovské kontroly"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Nastavení PINu rodičovské kontroly"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Potvrdit PIN"</string>
+    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
+    <skip />
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN byl aktualizován"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Otevřít aplikaci"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Smazat PIN?"</string>

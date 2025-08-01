@@ -91,4 +91,12 @@
         settings:searchable="false"
         settings:controller="com.android.settings.display.darkmode.DarkModeCustomModesPreferenceController" />
 
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="feedback"
+        android:title="@string/accessibility_send_feedback_title"
+        android:icon="@drawable/ic_feedback"
+        settings:searchable="false"
+        settings:buttonPreferenceSize="normal"
+        settings:buttonPreferenceType="tonal"
+        settings:controller="com.android.settings.accessibility.FeedbackButtonPreferenceController" />
 </PreferenceScreen>

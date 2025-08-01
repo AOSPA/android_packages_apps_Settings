@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"ამოძრავეთ თქვენი მაუსი ეკრანებს შორის"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"გარე ეკრანის გამოყენება"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ეკრანის გარჩევადობა"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"კავშირის ნაგულისხმევი ქცევა"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"ცალკე ეკრანად გამოყენება"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"ჩაშენებული ეკრანის არეკვლა"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"კავშირის დიალოგის ჩვენება"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"გარე ეკრანთან კავშირი გაწყვეტილია"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"შეტრიალება"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"სტანდარტული"</string>
@@ -1012,6 +1016,9 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"სხვა ვარიანტები"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"ჩავლებით გადაიტანეთ ეკრანების თანმიმდევრობის გადასაწყობად."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"ჩაშენებული ეკრანის არეკვლა"</string>
+    <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"გსურთ ახალი პარამეტრების გამოყენება?"</string>
+    <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"თუ თქვენი ეკრანი არ მუშაობს ისე, როგორც გსურთ, შეგიძლიათ დაუბრუნდეთ წინა პარამეტრებს"</string>
+    <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"პარამეტრების გამოყენება"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"გამოსახულების ასლი"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"უსადენო ეკრანის ჩართვა"</string>
@@ -1461,8 +1468,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"გამოიყენეთ მუქი ფონი, რათა თქვენი ეკრანი უფრო კომფორტული სანახავი იყოს და შეამცირეთ ზოგიერთ ეკრანზე ბატარეის მოხმარება. გამორთული ეკრანისას შეიცვლება თქვენი თემა, თუ გაქვთ განრიგი."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"მუქი თემა ამჟამად მიჰყვება თქვენს ძილის დროის რეჟიმის განრიგს"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ძილის დროის რეჟიმის პარამეტრები"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{რეჟიმებსაც შეუძლია მუქი თემის ჩართვა}=1{{mode_1} ჩართავს მუქ თემას}=2{{mode_1} და {mode_2} ჩართავს მუქ თემას}=3{{mode_1}, {mode_2} და {mode_3} ჩართავს მუქ თემას}other{{mode_1}, {mode_2} და კიდევ # ჩართავს მუქ თემას}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"რეჟიმების პარამეტრები"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"გაანათეთ და გააფართოვეთ ფერების დიაპაზონი და სიცხადე High Dynamic Range-ის (HDR) სურათებსა თუ ვიდეოებში. HDR კონტენტი უფრო კაშკაშა გამოჩნდება."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ეკრანის დროის ლიმიტი"</string>
@@ -2035,7 +2041,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"გაშვებული"</string>
     <string name="not_installed" msgid="5074606858798519449">"ამ მომხმ. დაყენებული არ არის"</string>
     <string name="installed" msgid="2837449358488825884">"დაინსტალირებულია"</string>
-    <string name="no_applications" msgid="985069304755391640">"არ არის აპები."</string>
+    <string name="no_applications" msgid="5471491608902031500">"შესატყვისი აპები არ არის"</string>
     <string name="internal_storage" msgid="999496851424448809">"შიდა მეხსიერება"</string>
     <string name="recompute_size" msgid="1098091228370999128">"ზომის გადათვლა…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"წაიშალოს აპის მონაცემები?"</string>
@@ -2391,15 +2397,11 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"შეგვაფასეთ"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Google-ის შშმ პირთა მხარდაჭერის გუნდთან დაკავშირება"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"მარტივი წვდომის გამოკითხვა"</string>
-    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
-    <skip />
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"გაგვიზიარეთ გამოხმაურება"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"რამდენად კმაყოფილი ხართ მუქი თემით?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"გამოკითხვაში მონაწილეობის მიღება"</string>
-    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
-    <skip />
-    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
-    <skip />
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"გაგვიზიარეთ გამოხმაურება"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"რამდენად კმაყოფილი ხართ გადიდებით?"</string>
     <string name="magnification_survey_notification_action" msgid="8042464088582144918">"გამოკითხვაში მონაწილეობის მიღება"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ჩამოტვირთული აპები"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"ექსპერიმენტული"</string>
@@ -2564,17 +2566,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"ეკრანის მასშტაბის ავტომატური განახლება"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ეკრანის მასშტაბის განახლება ერთი აპიდან მეორეზე გადასვლისას"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"ზარი შეწყდება ჩართვის ღილაკზე დაჭერით"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"ვარიანტები"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"დრო"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"სტანდარტული"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"სტანდარტული მუქი თემა"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"რთავს მუქ თემას თქვენს მოწყობილობასა და მხარდაჭერილ აპებზე"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"გაფართოებული"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"გაფართოებული მუქი თემა"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"ავტომატურად რთავს მუქ თემას მეტ აპზე გაუმჯობესებული მისაწვდომობისთვის"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ანიმაციის გათიშვა"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"ეკრანზე მოძრაობის შემცირება"</string>
@@ -2634,9 +2632,12 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"პატარა"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"ძალიან პატარა"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"კურსორის მცირე მოძრაობის იგნორირება"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"ქმედების შემდეგ მარცხენა დაწკაპუნებაზე დაბრუნება"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"შეცვალეთ ნავიგაციის რეჟიმი ავტოდაწკაპუნების გამოსაყენებლად"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"ავტოდაწკაპუნების გამოყენებისას უკან, მთავარ ეკრანზე დასაბრუნებლად და აპებს შორის გადასართავად ჟესტებით ნავიგაციის ნაცვლად გამოიყენეთ 3-ღილაკიანი ნავიგაცია"</string>
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"მარცხენა დაწკაპუნების გამოყენება ნაგულისხმევ მოქმედებად"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"სხვა მოქმედების გამოყენებისას ავტოდაწკაპუნება ავტომატურად მარცხენა დაწკაპუნებაზე დაბრუნდება"</string>
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"ავტოდაწკაპუნება უკეთესად მუშაობს 3-ღილაკიანი ნავიგაციით"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"ავტოდაწკაპუნების გამოყენებისას უკან, მთავარ ეკრანზე დასაბრუნებლად და აპებს შორის გადასართავად ჟესტებით ნავიგაციის ნაცვლად გამოიყენეთ 3-ღილაკიანი ნავიგაცია"</string>
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"ჟესტებით ნავიგაციის შენარჩუნება"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"ნავიგაციის პარამეტრები"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"ვიბრაცია და შეხებისადმი მგრძნობელობა"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"აკონტროლეთ ვიბრაციის სიძლიერე სხვადასხვა გამოყენებისთვის"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"ჩართული"</string>
@@ -2673,8 +2674,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"ფერთა ინვერსიის შესახებ"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"შეიტყვეთ მეტი ფერთა ინვერსიის შესახებ"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"შეიტყვეთ მეტი მუქი თემის შესახებ"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"მუქი თემა გაფართოებული პარამეტრით შეიძლება არ იყოს მხარდაჭერილი ზოგიერთი აპის მიერ. თუ გარეგნული ტიპის პრობლემას წააწყდებით, გამოიყენეთ სტანდარტული პარამეტრები."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"სუბტიტრების ჩვენება"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"მხოლოდ მხარდაჭერილი აპებისთვის"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"სუბტიტრების ზომა და სტილი"</string>
@@ -3436,6 +3436,8 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"ზარის და SMS ისტორია გაზიარდება ამ მომხმარებელთან."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"გაუქმდეს ადმინისტრატორის პრივილეგიები?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"თუ ამ მომხმარებელს ადმინისტრატორის პრივილეგიებს ჩამოართმევთ, თქვენ ან სხვა ადმინისტრატორი მოგვიანებით ისევ შეძლებთ მათ აღდგენას."</string>
+    <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"ნამდვილად გსურთ თქვენი ადმინის პრივილეგიების გაუქმება?"</string>
+    <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"მხოლოდ სხვა ადმინისტრატორებს შეეძლებათ თქვენთვის ადმინის პრივილეგიების მინიჭება, თუ გააგრძელებთ."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"საგანგებო ინფორმაცია"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"ინფორმაცია და კონტაქტები (<xliff:g id="USER_NAME">%1$s</xliff:g>)"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g>-ის გახსნა"</string>
@@ -3800,10 +3802,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"ფონის ჩაბნელება"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"ფონის ჩაბნელება"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"ფონის სიკაშკაშის გაფილტვრა"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"მუქი თემის ჩართვა"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"მუქი თემის ჩართვა"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"შეცვალეთ მოწყობილობის თემა მუქი ფონზე, რაც ნაკლებად დაგიძაბავთ თვალებს"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{ეკრანის ცვლილებები არ დაფიქსირებულა}=1{{effect_1}}=2{{effect_1} და {effect_2}}=3{{effect_1}, {effect_2} და {effect_3}}other{{effect_1}, {effect_2} და # სხვა}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"ყველა შეტყობინების დაშვება"</string>
@@ -4372,8 +4372,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"ნებართვების მმართველი"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"მონაცემების გაზიარების განახლებები მდებარეობისთვის"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"აპების გადახედვა, რომლებშიც შეიცვალა თქვენი მდებარეობის მონაცემების გაზიარების მეთოდი"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"სხვა აპების აგენტის კონტროლი"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"მოქმედებების შესრულება თქვენს მოწყობილობასა და სხვა აპებში"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"შეეხეთ გამოსაღვიძებლად"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"ორმაგად შეეხეთ ეკრანის ნებისმიერ ადგილას მოწყობილობის გამოსაღვიძებლად"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"ბმულების გახსნა"</string>
@@ -5887,6 +5889,7 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN-კოდის დაყენება"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"ზედამხედველობა, მშობელთა კონტროლი, მშობლები, ზედამხედველობის ჩამაგრება, ჩამაგრება"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"თქვენი PIN-კოდის მართვა"</string>
+    <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"მშობელთა კონტროლის PIN-კოდი"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"მშობლის PIN-კოდი, მშობელთა კონტროლის PIN-კოდი"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"აღდგენის ელფოსტის დამატება"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"აღდგენის ელფოსტის დადასტურება"</string>
@@ -5908,7 +5911,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"როდესაც ეს პარამეტრები გამორთულია, სხვა ანგარიშის პარამეტრები, შესაძლოა, კვლავ მოქმედებდეს."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"მშობელთა კონტროლის PIN-კოდის შეყვანა"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"მშობელთა კონტროლის PIN-კოდის დაყენება"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"დაადასტურეთ PIN-კოდი"</string>
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"მშობელთა კონტროლის PIN-კოდის დადასტურება"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN-კოდი განახლებულია"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"აპის გახსნა"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"გსურთ PIN-კოდის წაშლა?"</string>

@@ -223,4 +223,11 @@
 
     </PreferenceCategory>
 
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="disability_support"
+        android:title="@string/accessibility_disability_support_title"
+        android:icon="@drawable/ic_contact_support"
+        settings:buttonPreferenceSize="normal"
+        settings:buttonPreferenceType="tonal"
+        settings:controller="com.android.settings.accessibility.DisabilitySupportButtonPreferenceController" />
 </PreferenceScreen>

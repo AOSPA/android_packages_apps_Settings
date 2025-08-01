@@ -59,13 +59,6 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizardTest extends
         ).isEqualTo(SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER);
     }
 
-    @Test
-    public void getFeedbackCategory_returnPageUnknown() {
-        assertThat(
-                new ToggleScreenReaderPreferenceFragmentForSetupWizard().getFeedbackCategory()
-        ).isEqualTo(SettingsEnums.PAGE_UNKNOWN);
-    }
-
     @NonNull
     @Override
     public ToggleScreenReaderPreferenceFragmentForSetupWizard launchFragment() {

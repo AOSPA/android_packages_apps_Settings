@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"अपने माउस को अलग-अलग डिसप्ले पर ले जाएं"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"बाहरी डिसप्ले का इस्तेमाल करें"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"डिसप्ले का रिज़ॉल्यूशन"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"कनेक्ट करने का डिफ़ॉल्ट तरीका"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"किसी अन्य डिसप्ले के तौर पर इस्तेमाल करें"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"पहले से मौजूद डिसप्ले की स्क्रीन शेयर करें"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"कनेक्शन डायलॉग दिखाएं"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"बाहरी डिसप्ले डिसकनेक्ट कर दिया गया है"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"रोटेशन"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"स्टैंडर्ड रोटेशन"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"ज़्यादा विकल्प"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"डिसप्ले का क्रम बदलने के लिए, उन्हें दबाकर रखें और खींचकर छोड़ें."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"पहले से मौजूद डिसप्ले की स्क्रीन शेयर करें"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"स्क्रीन शेयर करें"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"बिना वायर के स्क्रीन दिखाना (वायरलेस डिसप्ले) चालू करें"</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"गहरे रंग वाले बैकग्राउंड का इस्तेमाल करें, ताकि अलग-अलग स्क्रीन पर बैटरी कम खर्च हो और स्क्रीन को आसानी से देखा जा सके. स्क्रीन बंद होने पर, शेड्यूल के हिसाब से थीम बदल जाएगी."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"फ़िलहाल, गहरे रंग वाली थीम आपके बेडटाइम मोड वाले शेड्यूल के हिसाब से लागू है"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"बेडटाइम मोड की सेटिंग"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{मोड से भी गहरे रंग वाली थीम चालू होती है}=1{{mode_1} से भी गहरे रंग वाली थीम चालू होती है}=2{{mode_1} और {mode_2} से भी गहरे रंग वाली थीम चालू होती है}=3{{mode_1}, {mode_2}, और {mode_3} से भी गहरे रंग वाली थीम चालू होती है}one{{mode_1}, {mode_2}, और # अन्य मोड से भी गहरे रंग वाली थीम चालू होती है}other{{mode_1}, {mode_2}, और # अन्य मोड से भी गहरे रंग वाली थीम चालू होती है}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"मोड की सेटिंग"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"हाई डाइनैमिक रेंज (एचडीआर) इमेज और वीडियो की चमक, कलर रेंज, और क्वालिटी बढ़ाएं. एचडीआर कॉन्टेंट ज़्यादा चमकदार दिखता है."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"स्क्रीन टाइमआउट"</string>
@@ -2035,7 +2044,8 @@
     <string name="filter_apps_running" msgid="535465683273284141">"चल रहे ऐप्लिकेशन"</string>
     <string name="not_installed" msgid="5074606858798519449">"इस उपयोगकर्ता के लिए इंस्‍टॉल नहीं किया गया"</string>
     <string name="installed" msgid="2837449358488825884">"इंस्‍टॉल किया गया"</string>
-    <string name="no_applications" msgid="985069304755391640">"कोई ऐप्लिकेशन नहीं."</string>
+    <!-- no translation found for no_applications (5471491608902031500) -->
+    <skip />
     <string name="internal_storage" msgid="999496851424448809">"मोबाइल मेमोरी"</string>
     <string name="recompute_size" msgid="1098091228370999128">"आकार फिर से परिकलित कर रहा है…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ऐप्लिकेशन का डेटा मिटाना है?"</string>
@@ -2560,17 +2570,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"स्क्रीन को बड़ा करने की सुविधा को अपने आप अपडेट करें"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ऐप ट्रांज़िशन पर स्क्रीन को बड़ा दिखाना अपडेट करें"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"पावर बटन से कॉल काटने की सुविधा"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"विकल्प"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"समय"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"स्टैंडर्ड"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"गहरे रंग वाली स्टैंडर्ड थीम"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"आपके डिवाइस और उसके साथ काम करने वाले ऐप्लिकेशन पर, गहरे रंग वाली थीम लागू हो जाती है"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"सभी ऐप्लिकेशन पर लागू की गई थीम"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"सभी ऐप्लिकेशन पर लागू की गई गहरे रंग वाली थीम"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"ज़्यादा ऐप्लिकेशन पर गहरे रंग वाली थीम अपने-आप लागू होती है, ताकि उन्हें आसानी से ऐक्सेस किया जा सके"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ऐनिमेशन हटाएं"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"स्क्रीन पर ऐनिमेशन नहीं चलेंगे"</string>
@@ -2630,9 +2636,16 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"छोटा"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"ज़्यादा छोटा"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"कर्सर की हल्की-फुल्की हलचल को नज़रअंदाज़ करें"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"कार्रवाई के बाद, \'लेफ़्ट क्लिक करें\' पर स्विच करें"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"अपने-आप क्लिक होने की सुविधा का इस्तेमाल करने के लिए, नेविगेशन मोड को बदलें"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"अपने-आप क्लिक होने की सुविधा इस्तेमाल करने के दौरान पीछे, होम पेज, और किसी ऐप्लिकेशन पर जाने के लिए, जेस्चर वाले नेविगेशन के बजाय तीन बटन वाले नेविगेशन का इस्तेमाल करें"</string>
+    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
+    <skip />
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"अपने-आप क्लिक होने की सुविधा, तीन बटन वाले नेविगेशन के साथ बेहतर तरीके से काम करती है"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"अपने-आप क्लिक होने की सुविधा इस्तेमाल करने के दौरान आसानी से पीछे जाने, होम पेज पर जाने, और ऐप्लिकेशन स्विच करने के लिए, जेस्चर वाले नेविगेशन के बजाय तीन बटन वाले नेविगेशन का इस्तेमाल करें"</string>
+    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"वाइब्रेशन और हैप्टिक"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"वाइब्रेशन के स्तर को, अलग-अलग इस्तेमाल के हिसाब से कंट्रोल करें"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"चालू है"</string>
@@ -2669,8 +2682,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"रंग बदलने की सुविधा के बारे में जानकारी"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"रंग बदलने की सुविधा के बारे में ज़्यादा जानें"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"गहरे रंग वाली थीम के बारे में ज़्यादा जानें"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"ऐसा हो सकता है कि कुछ ऐप्लिकेशन, एक्सपेंडेड सेटिंग में गहरे रंग वाली थीम के साथ काम न करें. अगर आपको दिखने से जुड़ी समस्याएं आ रही हैं, तो स्टैंडर्ड विकल्प का इस्तेमाल करें."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"कैप्शन दिखाएं"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"सिर्फ़ इस सुविधा के साथ काम करने वाले ऐप्लिकेशन के लिए उपलब्ध है"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"कैप्शन का साइज़ और स्टाइल"</string>
@@ -3432,6 +3444,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"कॉल और मैसेज (एसएमएस) का इतिहास इस उपयोगकर्ता के साथ शेयर किया जाएगा."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"आपको एडमिन के खास अधिकार हटाने हैं?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"इस व्यक्ति के लिए एडमिन के खास अधिकार हटाए जाने के बाद, आप या कोई दूसरा एडमिन उसे सभी अधिकार वापस दे सकता है."</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"आपातकाल में दिखने वाली जानकारी"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> की जानकारी और संपर्क"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> खोलें"</string>
@@ -3796,10 +3812,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"वॉलपेपर की रोशनी कम रखें"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"वॉलपेपर की रोशनी कम हो जाएगी"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"वॉलपेपर की चमक कम हो जाएगी"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"इससे गहरे रंग वाली थीम चालू होती है"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"इससे गहरे रंग वाली थीम चालू होती है"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"गहरे रंग वाले बैकग्राउंड का इस्तेमाल करने के लिए, डिवाइस की थीम को बदलें. इससे आंखों को आराम मिलता है"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{डिसप्ले में कोई बदलाव नहीं किया गया}=1{{effect_1}}=2{{effect_1} और {effect_2}}=3{{effect_1}, {effect_2}, और {effect_3}}one{{effect_1}, {effect_2}, और # अन्य}other{{effect_1}, {effect_2}, और # अन्य}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"सभी सूचनाओं को अनुमति दें"</string>
@@ -4368,8 +4382,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"अनुमतियों को मैनेज करें"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"जगह की जानकारी का डेटा शेयर करने के तरीके के बारे में अपडेट"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ऐसे ऐप्लिकेशन देखें जिनमें आपकी जगह की जानकारी के डेटा को शेयर करने का तरीका बदल दिया है"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"अन्य ऐप्लिकेशन के लिए एजेंट कंट्रोल"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"डिवाइस और अन्य ऐप्लिकेशन में कार्रवाइयां करने की अनुमति दें"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"वेक करने के लिए टैप करें"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"डिवाइस की स्क्रीन को चालू करने के लिए, स्क्रीन पर कहीं भी दो बार छूएं"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"लिंक खुलने से जुड़ी सेटिंग"</string>
@@ -5883,6 +5899,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"पिन सेट अप करें"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"निगरानी, माता-पिता के कंट्रोल, माता-पिता, माता-पिता की निगरानी से जुड़ा पिन, पिन"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"अपना पिन मैनेज करें"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"माता-पिता का सेट किया गया पिन, माता-पिता के कंट्रोल वाला पिन"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"खाता वापस पाने के लिए ईमेल पता जोड़ें"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"खाता वापस पाने के लिए जोड़े गए ईमेल पते की पुष्टि करें"</string>
@@ -5904,7 +5922,8 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"ये सेटिंग बंद होने के बावजूद, खाते की अन्य सेटिंग लागू हो सकती हैं."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"\'माता-पिता के कंट्रोल\' सुविधा के लिए सेट किया गया पिन डालें"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"माता-पिता के कंट्रोल की सुविधा के लिए पिन सेट करें"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"पिन की पुष्टि करें"</string>
+    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
+    <skip />
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"पिन अपडेट किया गया"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"ऐप्लिकेशन खोलें"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"क्या आपको पिन मिटाना है?"</string>

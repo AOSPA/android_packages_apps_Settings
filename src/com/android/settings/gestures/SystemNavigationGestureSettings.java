@@ -29,7 +29,6 @@ import android.content.SharedPreferences;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
 import android.content.res.Resources;
-import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
@@ -40,7 +39,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.SubSettingLauncher;
@@ -79,12 +77,6 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     private IOverlayManager mOverlayManager;
 
     private IllustrationPreference mVideoPreference;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        FeedbackMenuController.init(this, SettingsEnums.SETTINGS_GESTURE_SWIPE_UP);
-    }
 
     @Override
     public void onAttach(Context context) {

@@ -50,6 +50,8 @@ public class ToggleColorInversionPreferenceFragment extends BaseSupportFragment 
                     getMetricsCategory()
             );
         }
+        use(FeedbackButtonPreferenceController.class).initialize(
+                new FeedbackManager(context, getMetricsCategory()));
     }
 
     @Override

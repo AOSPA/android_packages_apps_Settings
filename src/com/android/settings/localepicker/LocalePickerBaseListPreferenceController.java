@@ -166,7 +166,7 @@ public abstract class LocalePickerBaseListPreferenceController extends
         List<LocaleStore.LocaleInfo> searchItem = new ArrayList<>();
         for (LocaleStore.LocaleInfo option : listOptions) {
             for (LocaleStore.LocaleInfo suggested : listSuggested) {
-                if (suggested.toString().contains(option.toString())) {
+                if (suggested.toString().equals(option.toString())) {
                     searchItem.add(suggested);
                 }
             }

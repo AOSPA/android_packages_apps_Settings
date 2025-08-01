@@ -151,7 +151,8 @@ public class ToggleColorInversionPreferenceFragmentTest extends
                 "top_intro",
                 "animated_image",
                 "general_categories",
-                "html_description"
+                "html_description",
+                "feedback"
         );
 
         assertThat(niks).containsExactlyElementsIn(keys);

@@ -107,11 +107,6 @@ public class LaunchAccessibilityActivityPreferenceFragment extends BaseSupportFr
     }
 
     @Override
-    public int getFeedbackCategory() {
-        return getMetricsCategory();
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.accessibility_activity_detail_screen;
     }

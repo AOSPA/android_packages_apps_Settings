@@ -21,7 +21,7 @@ import android.widget.FrameLayout
 import com.android.settings.R
 
 /** View representation to manage display topology arrangement */
-class DisplayTopologyPreferenceView(val injector: ConnectedDisplayInjector) :
+open class DisplayTopologyPreferenceView(val injector: ConnectedDisplayInjector) :
     FrameLayout(injector.context!!) {
 
     private val controller = DisplayTopologyPreferenceController(context, injector)
@@ -48,13 +48,17 @@ class DisplayTopologyPreferenceView(val injector: ConnectedDisplayInjector) :
         controller.detach()
     }
 
-    fun setOnDisplayBlockSelectedListener(
+    open fun setOnDisplayBlockSelectedListener(
         listener: DisplayTopologyPreferenceController.OnDisplayBlockSelectedListener
     ) {
         controller.onDisplayBlockSelectedListener = listener
     }
 
-    fun selectDisplay(displayId: Int) {
+    open fun removeOnDisplayBlockSelectedListener() {
+        controller.onDisplayBlockSelectedListener = null
+    }
+
+    open fun selectDisplay(displayId: Int) {
         controller.selectDisplay(displayId)
     }
 }

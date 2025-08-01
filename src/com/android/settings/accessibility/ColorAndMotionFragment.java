@@ -76,6 +76,15 @@ public class ColorAndMotionFragment extends BaseSupportFragment {
         }
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (!Flags.catalystAccessibilityColorAndMotion()) {
+            use(FeedbackButtonPreferenceController.class).initialize(
+                    new FeedbackManager(context, getMetricsCategory()));
+        }
+    }
+
     private void updatePreferencesState() {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         getPreferenceControllers().forEach(controllers::addAll);

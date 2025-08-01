@@ -21,9 +21,11 @@ import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings
+import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint
 import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard
+import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
@@ -74,6 +76,7 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
                 +OutlineTextPreference(context, entryPoint)
             }
             +ResetPreference(entryPoint)
+            +FeedbackButtonPreference(FeedbackManager(context, metricsCategory))
         }
     // LINT.ThenChange()
 }

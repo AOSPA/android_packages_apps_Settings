@@ -20,63 +20,47 @@ import com.android.settings.appfunctions.providers.StaticIntent
 fun getOtherIntents(): List<StaticIntent> =
     listOf(
         StaticIntent(
-            description = "Pair a new Bluetooth device",
+            description = "Pair new device: Settings to pair a new Bluetooth device.",
             intentUri =
                 "intent:#Intent;action=android.settings.BLUETOOTH_PAIRING_SETTINGS;package=com.android.settings;end",
         ),
         StaticIntent(
-            description = "Show saved Bluetooth devices",
+            description =
+                "Saved devices: Settings to show the list of previously connected Bluetooth devices.",
             intentUri =
                 "intent:#Intent;action=com.android.settings.PREVIOUSLY_CONNECTED_DEVICE;package=com.android.settings;end",
         ),
         StaticIntent(
-            description = "Configure Cast settings",
+            description =
+                "Cast: Settings to configure Cast options to send screen or media to other devices.",
             intentUri =
                 "intent:#Intent;action=android.settings.CAST_SETTINGS;package=com.android.settings;end",
         ),
         StaticIntent(
-            description = "Configure Wallpaper & Style",
+            description =
+                "Wallpaper & Style: Settings to change the wallpaper and style of the device.",
             intentUri =
                 "intent:#Intent;component=com.android.settings/.wallpaper.StyleSuggestionActivity;end",
         ),
         StaticIntent(
-            description = "Configure Notification Conversations",
-            intentUri =
-                "intent:#Intent;action=android.settings.CONVERSATION_SETTINGS;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description = "Configure Notification Bubbles",
-            intentUri =
-                "intent:#Intent;action=android.settings.NOTIFICATION_BUBBLE_SETTINGS;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description = "Configure Notification read, reply & control",
-            intentUri =
-                "intent:#Intent;action=android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description = "Show Notification history",
-            intentUri =
-                "intent:#Intent;action=android.settings.NOTIFICATION_HISTORY;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description = "Configure Ringtone sound pattern",
+            description = "Ringtone: Settings to select a sound pattern for the device ringtone.",
             intentUri =
                 "intent:#Intent;action=android.intent.action.RINGTONE_PICKER;i.android.intent.extra.ringtone.TYPE=1;end",
         ),
         StaticIntent(
-            description = "Configure Notification sound pattern",
+            description =
+                "Notification: Settings to select a sound pattern for the device notification.",
             intentUri =
                 "intent:#Intent;action=android.intent.action.RINGTONE_PICKER;i.android.intent.extra.ringtone.TYPE=2;end",
         ),
         StaticIntent(
-            description = "Manage Unused apps",
-            intentUri =
-                "intent:#Intent;action=android.intent.action.MANAGE_UNUSED_APPS;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description = "Configure Backup settings",
+            description = "Backup: Settings to configure the backup options for the device.",
             intentUri =
                 "intent:#Intent;action=com.android.settings.BACKUP_SETTINGS;package=com.android.settings;end",
+        ),
+        StaticIntent(
+            description =
+                "Send feedback about this device: Intent to generate a report that you can share with the device manufacturer.",
+            intentUri = "intent:#Intent;action=android.intent.action.BUG_REPORT;end",
         ),
     )

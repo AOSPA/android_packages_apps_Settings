@@ -57,7 +57,7 @@ class CatalystStateProvider(
                     try {
                         buildPerScreenDeviceStates(screenKey, requestCategory)
                     } catch (e: Exception) {
-                        Log.e(TAG, "error building $screenKey", e)
+                        Log.e(TAG, "Error building per screen device states for $screenKey", e)
                         null
                     }
                 }
@@ -72,6 +72,7 @@ class CatalystStateProvider(
         screenKey: String,
         requestCategory: DeviceStateCategory,
     ): PerScreenDeviceStates? {
+        Log.v(TAG, "Building per screen device states for $screenKey")
         val perScreenConfig = perScreenConfigMap[screenKey]
         if (perScreenConfig == null || !perScreenConfig.enabled || requestCategory !in perScreenConfig.category) {
             return null
@@ -117,12 +118,14 @@ class CatalystStateProvider(
         }
 
         val launchingIntent = screenMetaData.getLaunchIntent(context, null)
-        return PerScreenDeviceStates(
+        val states = PerScreenDeviceStates(
             description = screenMetaData.getPreferenceScreenTitle(context)?.toString()
                 ?: "",
             deviceStateItems = deviceStateItemList,
             intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME)
         )
+        Log.v(TAG, "Built per screen device states for $screenKey")
+        return states
     }
 
     companion object {
