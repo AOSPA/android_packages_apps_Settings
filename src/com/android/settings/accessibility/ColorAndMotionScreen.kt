@@ -22,6 +22,7 @@ import android.hardware.display.ColorDisplayManager
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ColorAndMotionActivity
+import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.darkmode.DarkModeScreenOnAccessibility
 import com.android.settings.flags.Flags
@@ -76,6 +77,7 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
                         +RemoveAnimationsPreference()
                     }
             }
+            +FeedbackButtonPreference(FeedbackManager(context, metricsCategory))
             // LINT.ThenChange(/res/xml/accessibility_color_and_motion.xml,
             // /src/com/android/settings/accessibility/ColorAndMotionFragment.java:ui_hierarchy)
         }

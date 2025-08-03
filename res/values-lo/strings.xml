@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"ເລື່ອນເມົ້າຂອງທ່ານລະຫວ່າງຈໍສະແດງຜົນ"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"ໃຊ້ຈໍສະແດງຜົນພາຍນອກ"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ຄວາມລະອຽດຂອງຈໍສະແດງຜົນ"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"ພຶດຕິກຳການເຊື່ອມຕໍ່ເລີ່ມຕົ້ນ"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"ໃຊ້ເປັນຈໍແຍກ"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"ສະທ້ອນຈໍແບບໃນຕົວ"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"ສະແດງກ່ອງໂຕ້ຕອບການເຊື່ອມຕໍ່"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"ຍົກເລີກການເຊື່ອມຕໍ່ຈໍສະແດງຜົນພາຍນອກແລ້ວ"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"ການໝຸນ"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"ມາດຕະຖານ"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"ຕົວເລືອກເພີ່ມເຕີມ"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"ກົດຄ້າງແລ້ວລາກເພື່ອຈັດຮຽງຈໍສະແດງຜົນຄືນໃໝ່."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"ສະທ້ອນການສະແດງຜົນທີ່ມີໃນຕົວ"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ແວ່ນສະທ້ອນ"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ເປີດໃຊ້ງານການສະແດງພາບໄຮ້ສາຍ"</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"ໃຊ້ພາບພື້ນຫຼັງມືດເພື່ອເຮັດໃຫ້ໜ້າຈໍຂອງທ່ານເບິ່ງສະດວກສະບາຍຍິ່ງຂຶ້ນ ແລະ ຫຼຸດການໃຊ້ແບັດເຕີຣີຢູ່ບາງໜ້າຈໍ. ຮູບແບບສີສັນຂອງທ່ານຈະປ່ຽນຫາກທ່ານມີກຳນົດເວລາ, ເມື່ອໜ້າຈໍປິດ."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ຕອນນີ້ຮູບແບບສີສັນມືດກຳລັງປະຕິບັດຕາມກຳນົດເວລາໂໝດເວລານອນຂອງທ່ານ"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ການຕັ້ງຄ່າໂໝດເວລານອນ"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{ໂໝດຕ່າງໆສາມາດເປີດໃຊ້ຮູບແບບສີສັນມືດໄດ້ນຳ}=1{{mode_1} ສາມາດເປີດໃຊ້ຮູບແບບສີສັນມືດໄດ້ນຳ}=2{{mode_1} ແລະ {mode_2} ສາມາດເປີດໃຊ້ຮູບແບບສີສັນມືດໄດ້ນຳ}=3{{mode_1}, {mode_2} ແລະ {mode_3} ສາມາດເປີດໃຊ້ຮູບແບບສີສັນມືດໄດ້ນຳ}other{{mode_1}, {mode_2} ແລະ ອີກ # ໂໝດສາມາດເປີດໃຊ້ຮູບແບບສີສັນມືດໄດ້ນຳ}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"ການຕັ້ງຄ່າໂໝດ"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"ເພີ່ມຄວາມສະຫວ່າງ ແລະ ຂະຫຍາຍໄລຍະສີ ແລະ ຄວາມຄົມຊັດໃນຮູບພາບ ແລະ ວິດີໂອທີ່ມີຂອບ​ເຂດ​ໄດ​ນາ​ມິກ​ສູງ (HDR). ເນື້ອຫາ HDR ຈະປາກົດແຈ້ງຂຶ້ນ."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ໄລຍະໝົດເວລາໜ້າຈໍ"</string>
@@ -2035,7 +2044,8 @@
     <string name="filter_apps_running" msgid="535465683273284141">"ກຳລັງເຮັດວຽກ"</string>
     <string name="not_installed" msgid="5074606858798519449">"ບໍ່ໄດ້​ຕິດຕັ້ງ​ສຳລັບ​ຜູ່ໃຊ້ນີ້"</string>
     <string name="installed" msgid="2837449358488825884">"ຕິດຕັ້ງແລ້ວ"</string>
-    <string name="no_applications" msgid="985069304755391640">"ບໍ່ມີແອັບ."</string>
+    <!-- no translation found for no_applications (5471491608902031500) -->
+    <skip />
     <string name="internal_storage" msgid="999496851424448809">"ພື້ນທີ່ຈັດເກັບຂໍ້ມູນພາຍໃນ"</string>
     <string name="recompute_size" msgid="1098091228370999128">"ກຳລັງຄຳນວນຂະໜາດຄືນໃໝ່..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ລຶບຂໍ້ມູນແອັບບໍ່?"</string>
@@ -2391,15 +2401,11 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"ໃຫ້ຄະແນນພວກເຮົາ"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"ຕິດຕໍ່ຝ່າຍຊ່ວຍເຫຼືອຄົນພິການຂອງ Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"ແບບສຳຫຼວດກ່ຽວກັບການຊ່ວຍເຂົ້າເຖິງ"</string>
-    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
-    <skip />
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"ແບ່ງປັນຄຳຕິຊົມຂອງທ່ານ"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"ທ່ານພໍໃຈກັບຮູບແບບສີສັນມືດຫຼາຍໜ້ອຍເທົ່າໃດ?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"ເຮັດແບບສຳຫຼວດ"</string>
-    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
-    <skip />
-    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
-    <skip />
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"ແບ່ງປັນຄຳຕິຊົມຂອງທ່ານ"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"ທ່ານພໍໃຈກັບການຂະຫຍາຍຫຼາຍໜ້ອຍເທົ່າໃດ?"</string>
     <string name="magnification_survey_notification_action" msgid="8042464088582144918">"ເຮັດແບບສຳຫຼວດ"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ແອັບທີ່ດາວໂຫຼດແລ້ວ"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"ຍັງຢູ່ໃນການທົດລອງ"</string>
@@ -2564,17 +2570,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"ອັບເດດການຂະຫຍາຍໜ້າຈໍອັດຕະໂນມັດ"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ອັບເດດການຂະຫຍາຍໜ້າຈໍເມື່ອປ່ຽນແອັບພລິເຄຊັນ"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"ກົດປຸ່ມ ປິດ/ເປີດ ເພື່ອວາງສາຍ"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"ຕົວເລືອກ"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"ຊ່ວງເວລາ"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"ມາດຕະຖານ"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"ຮູບແບບສີສັນມືດມາດຕະຖານ"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"ນຳໃຊ້ຮູບແບບສີສັນມືດໃນທົ່ວອຸປະກອນຂອງທ່ານ ແລະ ແອັບທີ່ຮອງຮັບ"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"ຂະຫຍາຍແລ້ວ"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"ຮູບແບບສີສັນມືດແບບຂະຫຍາຍ"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"ນຳໃຊ້ຮູບແບບສີສັນມືດໂດຍອັດຕະໂນມັດກັບແອັບເພີ່ມເຕີມເພື່ອການຊ່ວຍເຂົ້າເຖິງທີ່ປັບປຸງແລ້ວ"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ລຶບການເຄື່ອນໄຫວອອກ"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"ຫຼຸດການເຄື່ອນໄຫວຢູ່ໜ້າຈໍ"</string>
@@ -2634,9 +2636,16 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"ນ້ອຍ"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"ນ້ອຍພິເສດ"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"ບໍ່ສົນໃຈການເໜັງຕີງເລັກໜ້ອຍຂອງເຄີເຊີ"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"ປ່ຽນກັບໄປເປັນການຄລິກຊ້າຍຫຼັງຈາກດຳເນີນການແລ້ວ"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"ປ່ຽນໂໝດການນຳທາງຂອງທ່ານເພື່ອໃຊ້ການຄລິກອັດຕະໂນມັດ"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"ເພື່ອກັບຄືນ, ໜ້າຫຼັກ ແລະ ສະຫຼັບລະຫວ່າງແອັບໂດຍໃຊ້ການຄລິກອັດຕະໂນມັດ, ໃຫ້ໃຊ້ການນຳທາງແບບ 3 ປຸ່ມແທນການນຳທາງແບບທ່າທາງ"</string>
+    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
+    <skip />
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"ການຄລິກອັດຕະໂນມັດຈະເຮັດວຽກໄດ້ດີຂຶ້ນດ້ວຍການນຳທາງແບບ 3 ປຸ່ມ"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"ເພື່ອກັບຄືນ, ໄປໜ້າຫຼັກ ແລະ ສະຫຼັບລະຫວ່າງແອັບໄດ້ຢ່າງງ່າຍດາຍໃນເວລາໃຊ້ການຄລິກອັດຕະໂນມັດ, ໃຫ້ໃຊ້ການນຳທາງແບບ 3 ປຸ່ມແທນການນຳທາງແບບທ່າທາງ"</string>
+    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"ການສັ່ນເຕືອນ ແລະ ການສຳຜັດ"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"ຄວບຄຸມຄວາມແຮງຂອງການສັ່ນເຕືອນສຳລັບການໃຊ້ທີ່ແຕກຕ່າງກັນ"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"ເປີດ"</string>
@@ -2673,8 +2682,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"ກ່ຽວກັບການປີ້ນສີ"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການປີ້ນສີ"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"ສຶກສາເພີ່ມເຕີມກ່ຽວກັບຮູບແບບສີສັນມືດ"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"ບາງແອັບອາດບໍ່ຮອງຮັບຮູບແບບສີສັນມືດເມື່ອຂະຫຍາຍຕົວເລືອກແລ້ວ. ຫາກທ່ານພົບບັນຫາກ່ຽວກັບລັກສະນະທີ່ປາກົດ, ໃຫ້ໃຊ້ຕົວເລືອກມາດຕະຖານ."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"ສະແດງຄຳບັນຍາຍ"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"ສຳລັບແອັບທີ່ຮອງຮັບເທົ່ານັ້ນ"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"ຂະໜາດ ແລະ ຮູບແບບຄຳບັນຍາຍ"</string>
@@ -3436,6 +3444,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"ປະ​ຫວັດ​ການ​ໂທ​ ແລະ ​ການ​ສົ່ງ SMS ຈະ​ຖືກ​ແບ່ງ​ປັນ​ໃຫ້​ກັບ​ຜູ້​ໃຊ້​ນີ້."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"ລຶບສິດທິຜູ້ເບິ່ງແຍງລະບົບອອກບໍ?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"ຫາກທ່ານລຶບສິດທິຜູ້ເບິ່ງແຍງລະບົບສຳລັບຜູ້ໃຊ້ຄົນນີ້ອອກ, ທ່ານ ຫຼື ຜູ້ເບິ່ງແຍງລະບົບຄົນອື່ນສາມາດໃຫ້ສິດທິດັ່ງກ່າວກັບເຂົາເຈົ້າຄືນໄດ້ໃນພາຍຫຼັງ."</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"ຂໍ້ມູນສຸກເສີນ"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"ຂໍ້ມູນ ແລະ ລາຍຊື່ຜູ້ຕິດຕໍ່ສຳລັບ <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"ເປີດ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3800,10 +3812,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"ຜ່ອນແສງຮູບພື້ນຫຼັງລົງ"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"ຜ່ອນແສງຮູບພື້ນຫຼັງລົງ"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"ປັບຄວາມສະຫວ່າງຂອງຮູບພື້ນຫຼັງ"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"ເປີດການນຳໃຊ້ຮູບແບບສີສັນມືດ"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"ເປີດການນຳໃຊ້ຮູບແບບສີສັນມືດ"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"ປ່ຽນຮູບແບບສີສັນອຸປະກອນເພື່ອໃຊ້ພື້ນຫຼັງສີເຂັ້ມ, ເຊິ່ງເຮັດໃຫ້ສະບາຍຕາກວ່າ"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{ບໍ່ມີການປ່ຽນແປງການສະແດງຜົນ}=1{{effect_1}}=2{{effect_1} ແລະ {effect_2}}=3{{effect_1}, {effect_2} ແລະ {effect_3}}other{{effect_1}, {effect_2} ແລະ ອີກ # ລາຍການ}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"ອະນຸຍາດການແຈ້ງເຕືອນທັງໝົດ"</string>
@@ -4372,8 +4382,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"ຕົວຈັດການສິດອະນຸຍາດ"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"ອັບເດດການແບ່ງປັນຂໍ້ມູນສຳລັບສະຖານທີ່"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ກວດສອບແອັບທີ່ປ່ຽນແປງວິທີການແບ່ງປັນຂໍ້ມູນສະຖານທີ່ຂອງທ່ານ"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"ຕົວແທນການຄວບຄຸມແອັບອື່ນໆ"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"ດຳເນີນຄຳສັ່ງຢູ່ອຸປະກອນຂອງທ່ານ ແລະ ໃນແອັບອື່ນໆ"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"ແຕະ​ເພື່ອ​ປຸກ"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"ແຕະ​ໜ້າ​ຈໍ​ຕຳແໜ່ງ​ໃດ​ກໍ​ໄດ້​ສອງ​ເທື່ອ ເພື່ອ​ປຸກ​ອຸ​ປະ​ກອນ"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"ການເປີດລິ້ງ"</string>
@@ -5887,6 +5899,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"ຕັ້ງລະຫັດ PIN"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"ການເບິ່ງແຍງກວດກາ, ການຄວບຄຸມຂອງພໍ່ແມ່, ຜູ້ປົກຄອງ, PIN ການເບິ່ງແຍງກວດກາ, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"ຈັດການ PIN ຂອງທ່ານ"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN ຜູ້ປົກຄອງ, PIN ການຄວບຄຸມຂອງພໍ່ແມ່"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"ເພີ່ມອີເມວກູ້ຂໍ້ມູນ"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"ຢັ້ງຢືນອີເມວກູ້ຂໍ້ມູນ"</string>
@@ -5908,7 +5922,8 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"ເມື່ອປິດການຕັ້ງຄ່າເຫຼົ່ານີ້, ການຕັ້ງຄ່າບັນຊີອື່ນໆອາດຍັງຄົງມີຜົນນຳໃຊ້."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"ລະບຸ PIN ການຄວບຄຸມຂອງພໍ່ແມ່"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"ຕັ້ງ PIN ການຄວບຄຸມຂອງພໍ່ແມ່"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"ຢືນຢັນ PIN"</string>
+    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
+    <skip />
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"ອັບເດດ PIN ແລ້ວ"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"ເປີດແອັບ"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"ລຶບ PIN ບໍ?"</string>

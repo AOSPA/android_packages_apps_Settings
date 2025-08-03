@@ -17,6 +17,7 @@
 package com.android.settings.accessibility.textreading.ui
 
 import android.content.Context
+import android.view.Display
 import android.view.View
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
@@ -35,19 +36,22 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
 
 /** Test for [TextReadingPreview]. */
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(RobolectricTestRunner::class)
 class TextReadingPreviewTest {
-    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private lateinit var context: Context
     private val displaySizeDataFlow =
         MutableStateFlow(
             DisplaySize(currentIndex = 1, values = intArrayOf(356, 420, 490), defaultValue = 420)
@@ -65,6 +69,12 @@ class TextReadingPreviewTest {
     private val previewMetadata = TextReadingPreview(displaySizeDataFlow, fontSizeDataFlow)
     private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
+
+    @Before
+    fun setUp() {
+        context = spy(ApplicationProvider.getApplicationContext<Context>())
+        doReturn(Display.DEFAULT_DISPLAY).whenever(context).getDisplayId()
+    }
 
     @After
     fun cleanUp() {
@@ -113,6 +123,23 @@ class TextReadingPreviewTest {
             assertThat(previewPagerAdapter.count).isEqualTo(previewCount)
             verify(previewPreference).setCurrentItem(if (isLayoutRtl) previewCount - 1 else 0)
             verify(previewPreference).setLastLayerIndex(expectedConfigIndex)
+        }
+
+    @Test
+    fun onCreate_onNonDefaultDisplay_preferenceNotAvailable() =
+        testScope.runTest {
+            doReturn(2).whenever(context).getDisplayId()
+            val previewPreference =
+                spy(previewMetadata.createAndBindWidget<TextReadingPreviewPreference>(context))
+            val preferenceLifecycleContext: PreferenceLifecycleContext = mock {
+                on { lifecycleScope }.thenReturn(testScope.backgroundScope)
+                on { findPreference<TextReadingPreviewPreference>(TextReadingPreview.KEY) }
+                    .thenReturn(previewPreference)
+            }
+            previewMetadata.onCreate(preferenceLifecycleContext)
+            runCurrent()
+
+            assertThat(previewMetadata.isAvailable(context)).isEqualTo(false)
         }
 
     @Test

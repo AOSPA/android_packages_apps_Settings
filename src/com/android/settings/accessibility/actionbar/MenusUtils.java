@@ -28,19 +28,9 @@ public final class MenusUtils {
     public enum MenuId {
 
         /**
-         * Identifier for the feedback menu option.
-         */
-        FEEDBACK(10),
-
-        /**
          * Identifier for the send survey menu option.
          */
-        SEND_SURVEY(20),
-
-        /**
-         * Identifier for the disability support menu option.
-         */
-        DISABILITY_SUPPORT(30);
+        SEND_SURVEY(20);
 
         private final int mValue;
 

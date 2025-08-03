@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Presúvanie myši medzi obrazovkami"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Použiť externú obrazovku"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Rozlíšenie displeja"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"Predvolené správanie pri pripojení"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Použiť ako samostatnú obrazovku"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Zrkadliť vstavanú obrazovku"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Zobraziť dialógové okno pripojenia"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Externá obrazovka je odpojená"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Otočenie"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Štandardné"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Ďalšie možnosti"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Pridržaním a presunutím môžete usporiadať obrazovky."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Zrkadlenie vstavanej obrazovky"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"zrkadlenie"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Povoliť bezdrôtové zobrazenie"</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Použite tmavé pozadie, aby sa vám na niektorých obrazovkách lepšie čítalo a znížila sa spotreba batérie. Ak máte nastavený plán, motív sa zmení, keď je obrazovka vypnutá."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tmavý motív sa momentálne riadi plánom režimu večierky"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Nastavenia režimu večierky"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Tmavý motív môžu zapnúť aj režimy}=1{{mode_1} zapne aj tmavý motív}=2{{mode_1} a {mode_2} zapnú aj tmavý motív}=3{{mode_1}, {mode_2} a {mode_3} zapnú aj tmavý motív}few{{mode_1}, {mode_2} a # ďalšie zapnú aj tmavý motív}many{{mode_1}, {mode_2}, and # more also turn on Dark theme}other{{mode_1}, {mode_2} a # ďalších zapnú aj tmavý motív}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Nastavenia režimov"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Rozjasnite a rozšírte farebný rozsah a jasnosť obrázkov a videí s technológiou HDR. Obsah s technológiou HDR bude jasnejší."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Časový limit obrazovky"</string>
@@ -2035,7 +2044,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"Spustené"</string>
     <string name="not_installed" msgid="5074606858798519449">"Pre tohto používateľa nenainš."</string>
     <string name="installed" msgid="2837449358488825884">"Nainštalované"</string>
-    <string name="no_applications" msgid="985069304755391640">"Žiadne aplikácie"</string>
+    <string name="no_applications" msgid="5471491608902031500">"Žiadne zodpovedajúce aplikácie"</string>
     <string name="internal_storage" msgid="999496851424448809">"Interný ukl. priestor"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Prebieha prepočítanie veľkosti..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Odstrániť dáta aplikácie?"</string>
@@ -2391,15 +2400,11 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Ohodnoťte nás"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Kontaktovať podporu Google pre ľudí s postihnutím"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Prieskum dostupnosti"</string>
-    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
-    <skip />
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Zdieľajte spätnú väzbu"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Aká je vaša spokojnosť s tmavým motívom?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Zúčastniť sa na prieskume"</string>
-    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
-    <skip />
-    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
-    <skip />
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Zdieľajte spätnú väzbu"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Aká je vaša spokojnosť so zväčšením?"</string>
     <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Zúčastniť sa na prieskume"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Stiahnuté aplikácie"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentálne"</string>
@@ -2564,17 +2569,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Auto. aktualiz. priblíž. obrazovky"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Aktualizovať priblíž. obrazov. pri prechodoch apl."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Ukončiť hovor vypínačom"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"Možnosti"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"Načasovanie"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Štandardný"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Štandardný tmavý motív"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Vo vašom zariadení a podporovaných aplikáciách sa začne používať tmavý motív"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Rozšírený"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Rozšírený tmavý motív"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Automaticky sa začne používať tmavý motív v ďalších aplikáciách, aby sa zlepšila dostupnosť"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Odstrániť animácie"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Zredukovať pohyb na obrazovke"</string>
@@ -2634,9 +2635,14 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Malá"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Veľmi malá"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Ignorovať menšie pohyby kurzora"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"Po akcii sa vrátiť na kliknutie ľavým tlačidlom"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"Ak chcete používať automatické kliknutie, zmeňte režim navigácie"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"Ak chcete pri používaní automatického kliknutia prejsť späť či na plochu alebo prepnúť aplikácie, používajte namiesto navigácie gestami trojtlačidlovú navigáciu"</string>
+    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
+    <skip />
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Automatické kliknutie funguje lepšie s trojtlačidlovou navigáciou"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Ak chcete pri používaní automatického kliknutia ľahko prejsť späť či na plochu alebo prepnúť aplikácie, používajte namiesto navigácie gestami trojtlačidlovú navigáciu"</string>
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Ponechať navigáciu gestami"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Nastavenia navigácie"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrácie a hmatová odozva"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Ovládajte silu vibrácií pre rôzne spôsoby použitia"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Zapnuté"</string>
@@ -2648,7 +2654,7 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Používať vibrácie a hmatovú odozvu"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibrácie pri budíku"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibrácie pri médiách"</string>
-    <string name="accessibility_keyboard_vibration_title" msgid="7559967730626765441">"Vibrovanie klávesnice"</string>
+    <string name="accessibility_keyboard_vibration_title" msgid="7559967730626765441">"Vibrácie klávesnice"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibrácie pri zvonení"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibrácie pri upozornení"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Odozva pri klepnutí"</string>
@@ -2673,8 +2679,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Inverzia farieb"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Ďalšie informácie o inverzii farieb"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Ďalšie informácie o tmavom motíve"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"Niektoré aplikácie nemusia podporovať tmavý motív s rozšírenou možnosťou. Ak máte problémy so vzhľadom, použite štandardnú možnosť."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Zobrazovať titulky"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Iba pre podporovanú aplikáciu"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Veľkosť a štýl titulkov"</string>
@@ -3436,6 +3441,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"S týmto používateľom sa bude zdieľať história hovorov a správ SMS."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Chcete odstrániť správcovské oprávnenia?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Ak tomuto používateľovi odoberiete správcovské oprávnenia, vy alebo iný správca mu ich môžete neskôr vrátiť."</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Tiesňové informácie"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informácie a kontakty používateľa <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Otvoriť aplikáciu <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3800,10 +3809,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Stmaviť tapetu"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"stmavenie tapety"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrovať jas tapety"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Zapnúť tmavý motív"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"zapnúť tmavý motív"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Prepnúť motív zariadenia na tmavé pozadie, pri ktorom sa menej namáhajú oči"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Žiadne zmeny zobrazenia}=1{{effect_1}}=2{{effect_1} a {effect_2}}=3{{effect_1}, {effect_2} a {effect_3}}few{{effect_1}, {effect_2} a # ďalšie}many{{effect_1}, {effect_2}, and # more}other{{effect_1}, {effect_2} a # ďalších}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Povoliť všetky upozornenia"</string>
@@ -4372,8 +4379,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"Správa povolení"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Aktualizácie zdieľania údajov o polohe"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Skontrolujte aplikácie, ktoré zmenili spôsob zdieľania vašich údajov o polohe"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Ovládanie iných aplikácií agentom"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Vykonávať akcie vo svojom zariadení a ďalších aplikáciách"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"Zobudiť klepnutím"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Zariadenie prebudíte dvojitým klepnutím na ľubovoľné miesto na obrazovke."</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Otváranie odkazov"</string>
@@ -5889,6 +5898,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Nastaviť kód PIN"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"dohľad, rodičovská kontrola, rodičia, pin dohľadu, pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Správa kódu PIN"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN rodiča, PIN rodičovskej kontroly"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Pridať e‑mail na obnovenie"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Overiť e‑mail na obnovenie"</string>
@@ -5910,7 +5921,8 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Keď sú tieto nastavenia vypnuté, môžu ďalej platiť iné nastavenia účtu."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Zadajte PIN rodičovskej kontroly"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Nastavte PIN rodičovskej kontroly"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Potvrďte PIN"</string>
+    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
+    <skip />
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Kód PIN bol aktualizovaný"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Otvoriť aplikáciu"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Chcete odstrániť PIN?"</string>

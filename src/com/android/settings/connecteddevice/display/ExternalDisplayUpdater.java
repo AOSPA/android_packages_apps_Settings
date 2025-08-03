@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.display;
 
+import static com.android.settings.flags.Flags.showTabbedConnectedDisplaySetting;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
@@ -80,12 +82,19 @@ public class ExternalDisplayUpdater {
         mPreference.setDisabledByAdmin(checkIfUsbDataSignalingIsDisabled(context));
         mPreference.setOnPreferenceClickListener((Preference p) -> {
             mMetricsFeatureProvider.logClickedPreference(p, mMetricsCategory);
-            // New version - uses a separate screen.
-            new SubSettingLauncher(context)
-                    .setDestination(ExternalDisplayPreferenceFragment.class.getName())
-                    .setTitleRes(R.string.external_display_settings_title)
-                    .setSourceMetricsCategory(mMetricsCategory)
-                    .launch();
+            if (showTabbedConnectedDisplaySetting()) {
+                new SubSettingLauncher(context)
+                        .setDestination(TabbedDisplayPreferenceFragment.class.getName())
+                        .setTitleRes(R.string.external_display_settings_title)
+                        .setSourceMetricsCategory(mMetricsCategory)
+                        .launch();
+            } else {
+                new SubSettingLauncher(context)
+                        .setDestination(ExternalDisplayPreferenceFragment.class.getName())
+                        .setTitleRes(R.string.external_display_settings_title)
+                        .setSourceMetricsCategory(mMetricsCategory)
+                        .launch();
+            }
             return true;
         });
     }

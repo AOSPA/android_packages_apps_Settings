@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"在螢幕間移動滑鼠"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"使用外接螢幕"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"螢幕解析度"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"預設連線行為"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"做為獨立螢幕使用"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"鏡像顯示內建螢幕"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"顯示連線對話方塊"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"未連接外接螢幕"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"旋轉"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"標準"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"更多選項"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"按住並拖曳即可重新排列螢幕。"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"鏡像顯示內建螢幕"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"鏡像"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"啟用無線螢幕分享"</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"使用深色背景可讓你更舒適地觀看螢幕，顯示某些畫面時還可減少電池用量。如果已設定時間表，主題會在螢幕關閉時變更。"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"目前依照就寢模式時間表開啟或關閉深色主題"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"就寢模式設定"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{「模式」也能啟用深色主題}=1{「{mode_1}」也會啟用深色主題}=2{「{mode_1}」和「{mode_2}」也會啟用深色主題}=3{「{mode_1}」、「{mode_2}」和「{mode_3}」也會啟用深色主題}other{「{mode_1}」、「{mode_2}」和另外 # 個模式也會啟用深色主題}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"「模式」設定"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"提高高動態範圍 (HDR) 圖片和影片的亮度，同時擴展色彩範圍並強化清晰度。HDR 內容會看起來更明亮。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"螢幕自動關閉"</string>
@@ -2035,7 +2044,8 @@
     <string name="filter_apps_running" msgid="535465683273284141">"執行中"</string>
     <string name="not_installed" msgid="5074606858798519449">"這位使用者並未安裝"</string>
     <string name="installed" msgid="2837449358488825884">"已安裝"</string>
-    <string name="no_applications" msgid="985069304755391640">"沒有應用程式。"</string>
+    <!-- no translation found for no_applications (5471491608902031500) -->
+    <skip />
     <string name="internal_storage" msgid="999496851424448809">"內部儲存空間"</string>
     <string name="recompute_size" msgid="1098091228370999128">"重新計算大小…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"你要刪除應用程式資料嗎？"</string>
@@ -2391,15 +2401,11 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"給我們評分"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"與 Google 身心障礙支援團隊聯絡"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"無障礙功能問卷調查"</string>
-    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
-    <skip />
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"提供意見"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"你對深色主題的滿意度為何？"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"參加問卷調查"</string>
-    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
-    <skip />
-    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
-    <skip />
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"提供意見"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"你對放大功能的滿意度為何？"</string>
     <string name="magnification_survey_notification_action" msgid="8042464088582144918">"參加問卷調查"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"下載的應用程式"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"實驗性"</string>
@@ -2564,17 +2570,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"自動更新螢幕放大設定"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"更新應用程式轉場後的螢幕放大設定"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"按電源鍵結束通話"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"選項"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"時間"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"標準"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"標準深色主題"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"在裝置和支援的應用程式中套用深色主題"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"擴展"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"擴展深色主題"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"自動在更多應用程式中套用深色主題，提升無障礙使用體驗"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"移除動畫"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"減少畫面上的動態效果"</string>
@@ -2634,9 +2636,16 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"小"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"特小"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"忽略微幅的游標移動"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"動作完成後回到先前的按左鍵動作"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"變更操作模式即可使用自動點選功能"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"如要使用自動點選功能返回上一頁、前往主畫面及切換應用程式，請改用三按鈕操作，而非手勢操作"</string>
+    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
+    <skip />
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"「自動點選」比較適合搭配三按鈕操作"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"使用自動點選功能時，如要輕鬆返回上一頁、前往主畫面及切換應用程式，請改用三按鈕操作，而非手勢操作"</string>
+    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"震動與觸覺回饋"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"控制各種使用情形的震動強度"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"已開啟"</string>
@@ -2673,8 +2682,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"關於色彩反轉"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"進一步瞭解色彩反轉"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"進一步瞭解深色主題"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"部分應用程式可能不支援深色主題搭配擴展選項。如果遇到顯示問題，請使用標準選項。"</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"顯示字幕"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"僅限支援的應用程式"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"字幕大小和樣式"</string>
@@ -3436,6 +3444,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"你將與這位使用者共用通話和簡訊記錄。"</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"要移除管理員權限嗎？"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"如果你移除這位使用者的管理員權限，你或其他管理員之後可以再次將這類權限授予該使用者。"</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"緊急資訊"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>的相關資訊和聯絡資料"</string>
     <string name="open_app_button" msgid="5025229765547191710">"開啟「<xliff:g id="APP_NAME">%1$s</xliff:g>」"</string>
@@ -3800,10 +3812,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"調低桌布亮度"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"調低桌布亮度"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"變更桌布亮度"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"啟用深色主題"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"啟用深色主題"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"將裝置主題切換成深色背景，減輕雙眼負擔"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{沒有顯示變更}=1{{effect_1}}=2{{effect_1}和{effect_2}}=3{{effect_1}、{effect_2}和{effect_3}}other{{effect_1}、{effect_2}和另外 # 個設定}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"允許所有通知"</string>
@@ -4372,8 +4382,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"權限管理工具"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"位置資料共用方式更新"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"查看曾變更位置資料共用方式的應用程式"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"其他應用程式的代理控制選項"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"在裝置和其他應用程式中執行操作"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"輕觸即可喚醒"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"在螢幕上任一處輕觸兩下即可喚醒裝置"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"開啟連結"</string>
@@ -5887,6 +5899,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"設定 PIN 碼"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"監護, 家長監護, 家長, 監護 PIN 碼, PIN 碼"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"管理 PIN 碼"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"家長 PIN 碼, 家長監護 PIN 碼"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"新增備援電子郵件地址"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"驗證備援電子郵件地址"</string>
@@ -5908,7 +5922,8 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"即使關閉這些設定，仍可能會套用其他帳戶設定。"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"輸入家長監護 PIN 碼"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"設定家長監護 PIN 碼"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"確認 PIN 碼"</string>
+    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
+    <skip />
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN 碼已更新"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"開啟應用程式"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"要刪除 PIN 碼嗎？"</string>

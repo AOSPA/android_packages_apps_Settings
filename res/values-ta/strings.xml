@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"காட்சிகளுக்கு இடையே உங்கள் மவுஸை நகர்த்தலாம்"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"வெளிப்புற டிஸ்ப்ளேவைப் பயன்படுத்துதல்"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"டிஸ்ப்ளே தெளிவுத்திறன்"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"இயல்புநிலை இணைப்புச் செயல்பாடு"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"தனிப்பட்ட டிஸ்ப்ளேவாகப் பயன்படுத்துதல்"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"உள்ளமைந்த டிஸ்ப்ளேவை மிரர் செய்தல்"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"இணைப்புத் தகவல் பெட்டியைக் காட்டுதல்"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"வெளிப்புற டிஸ்ப்ளே முடக்கப்பட்டுள்ளது"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"சுழற்சி"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"இயல்புநிலை"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"கூடுதல் விருப்பங்கள்"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"காட்சிகளை மறுவரிசைப்படுத்த பிடித்து இழுங்கள்."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"உள்ளமைந்த டிஸ்பிளேயை மிரர் செய்தல்"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"பிரதிபலித்தல்"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"வயர்லெஸ் காட்சியை இயக்கு"</string>
@@ -1393,7 +1403,7 @@
     <string name="hdr_brightness_level_title" msgid="770342878327164738">"ஒளிச்செறிவு"</string>
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"இயல்பான படம்"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR படம்"</string>
-    <string name="hdr_brightness_warning" msgid="2755151579539607928">"ஹை டைனமிக் ரேஞ்சை (HDR) ஆதரிக்கும் படங்களிலும் வீடியோகளிலும் மட்டுமே இந்த அமைப்பு தாக்கத்தை ஏற்படுத்தும்."</string>
+    <string name="hdr_brightness_warning" msgid="2755151579539607928">"ஹை டைனமிக் ரேஞ்சை (HDR) ஆதரிக்கும் படங்களிலும் வீடியோக்களிலும் மட்டுமே இந்த அமைப்பு மாற்றத்தை ஏற்படுத்தும்."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"வெண் சமநிலையை காட்சிப்படுத்தல்"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"மடக்கிய நிலையிலேயே தொடர்ந்து ஆப்ஸைப் பயன்படுத்துதல்"</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"உங்கள் திரையை மேலும் சௌகரியமாகப் பார்க்கவும் சில திரைகளில் பேட்டரி உபயோகத்தைக் குறைக்கவும் டார்க் பின்புலத்தைப் பயன்படுத்துங்கள். நீங்கள் திட்ட அட்டவணையை அமைத்திருந்தால், திரை ஆஃப் ஆகியிருக்கும்போது உங்கள் தீம் மாறும்."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"தற்போது உங்கள் உறக்கநேரப் பயன்முறையின் அட்டவணையை டார்க் தீம் பின்பற்றுகிறது"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"உறக்கநேரப் பயன்முறை அமைப்புகள்"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{பயன்முறைகள் டார்க் தீமையும் ஆன் செய்யலாம்}=1{{mode_1} டார்க் தீமையும் ஆன் செய்யலாம்}=2{{mode_1}, {mode_2} ஆகியவை டார்க் தீமையும் ஆன் செய்யலாம்}=3{{mode_1}, {mode_2}, {mode_3} ஆகியவை டார்க் தீமையும் ஆன் செய்யலாம்}other{{mode_1}, {mode_2} மற்றும் # பயன்முறைகள் டார்க் தீமையும் ஆன் செய்யலாம்}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"பயன்முறைகளுக்கான அமைப்புகள்"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"ஹை டைனமிக் ரேஞ்ச் (HDR) படங்களிலும் வீடியோக்களிலும் வண்ண அளவு மற்றும் தெளிவுத்தன்மையை அதிகரியுங்கள். HDR உள்ளடக்கம் பிரகாசமாகத் தெரியும்."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"திரை அணைவு நேரம்"</string>
@@ -2035,7 +2044,8 @@
     <string name="filter_apps_running" msgid="535465683273284141">"இயங்குகிறது"</string>
     <string name="not_installed" msgid="5074606858798519449">"இவருக்கு நிறுவப்படவில்லை"</string>
     <string name="installed" msgid="2837449358488825884">"நிறுவப்பட்டது"</string>
-    <string name="no_applications" msgid="985069304755391640">"ஆப்ஸ் இல்லை."</string>
+    <!-- no translation found for no_applications (5471491608902031500) -->
+    <skip />
     <string name="internal_storage" msgid="999496851424448809">"அகச் சேமிப்பிடம்"</string>
     <string name="recompute_size" msgid="1098091228370999128">"அளவை மீண்டும் கணக்கிடுகிறது…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ஆப்ஸ் தரவை நீக்கவா?"</string>
@@ -2391,15 +2401,11 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"எங்களை மதிப்பிடலாம்"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Google உதவிமையத்தைத் தொடர்புகொள்க"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"மாற்றுத்திறன் வசதி குறித்த கருத்துக்கணிப்பு"</string>
-    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
-    <skip />
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"உங்கள் கருத்தைப் பகிருங்கள்"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"டார்க் தீம் உங்களுக்கு எவ்வளவு திருப்திகரமாக உள்ளது?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"கருத்துக்கணிப்பைத் தொடங்கு"</string>
-    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
-    <skip />
-    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
-    <skip />
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"உங்கள் கருத்தைப் பகிருங்கள்"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"பெரிதாக்கல் அம்சம் உங்களுக்கு எவ்வளவு திருப்திகரமாக உள்ளது?"</string>
     <string name="magnification_survey_notification_action" msgid="8042464088582144918">"கருத்துக்கணிப்பைத் தொடங்கு"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"பதிவிறக்கிய ஆப்ஸ்"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"பரிசோதனை முயற்சி"</string>
@@ -2564,17 +2570,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"திரை உருப்பெருக்கத்தைத் தானாகப் புதுப்பி"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ஆப்ஸ் மாற்றங்களில் திரை உருப்பெருக்கத்தைப் புதுப்பிக்கவும்"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"பவர் பட்டன் மூலம் அழைப்பை நிறுத்து"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"விருப்பங்கள்"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"நேரம்"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"இயல்புநிலை"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"இயல்புநிலை டார்க் தீம்"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"உங்கள் சாதனம் மற்றும் ஆதரிக்கப்படும் ஆப்ஸ் முழுவதும் டார்க் தீம் அமைக்கப்படும்"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"விரிவாக்கப்பட்டது"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"விரிவாக்கப்பட்ட டார்க் தீம்"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"மேம்படுத்தப்பட்ட மாற்றுத்திறன் வசதிக்காக அதிக ஆப்ஸில் டார்க் தீம் தானாகவே அமைக்கப்படும்"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"அனிமேஷன்களை அகற்று"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"திரையில் அசைவைக் குறைக்கும்"</string>
@@ -2634,9 +2636,16 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"சிறியது"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"மிகச் சிறியது"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"கர்சரின் சிறிய அசைவுகளைத் தவிர்த்தல்"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"செயலுக்குப் பின்னர் இடதுபக்கக் கிளிக்கிற்கு முன்போல் மாற்றியமைத்தல்"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"ஆட்டோ கிளிக்கைப் பயன்படுத்த நகர்தல் பயன்முறையை மாற்றுதல்"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"ஆட்டோ கிளிக்கைப் பயன்படுத்தும்போது முகப்புக்குச் செல்லுதல், பின்செல்லுதல், ஆப்ஸுக்கிடையே மாறுதல் ஆகியவற்றைச் செய்ய சைகை வழிசெலுத்தலுக்குப் பதிலாக 3-பட்டன் வழிசெலுத்தலைப் பயன்படுத்தவும்"</string>
+    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
+    <skip />
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"3-பட்டன் வழிசெலுத்தலில் ஆட்டோ கிளிக் சிறப்பாகச் செயல்படும்"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"ஆட்டோ கிளிக்கைப் பயன்படுத்தும்போது பின்செல்லுதல், முகப்புக்குச் செல்லுதல், ஆப்ஸுக்கிடையே மாறுதல் ஆகியவற்றை எளிதாகச் செய்ய சைகை வழிசெலுத்தலுக்குப் பதிலாக 3-பட்டன் வழிசெலுத்தலைப் பயன்படுத்தவும்"</string>
+    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"அதிர்வு &amp; ஹாப்டிக்ஸ்"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"வெவ்வேறு பயன்பாடுகளுக்கான அதிர்வின் வலிமையைக் கட்டுப்படுத்தலாம்"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"இயக்கப்பட்டுள்ளது"</string>
@@ -2673,8 +2682,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"கலர் இன்வெர்ஷன் பற்றிய அறிமுகம்"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"கலர் இன்வெர்ஷன் பற்றி மேலும் அறிந்துகொள்ளலாம்"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"டார்க் தீம் பற்றி மேலும் அறிக"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"சில ஆப்ஸ் விரிவாக்கப்பட்ட விருப்பத்தில் டார்க் தீமை ஆதரிக்காமல் இருக்கலாம். தோற்றம் தொடர்பான சிக்கல்களை எதிர்கொண்டால் இயல்புநிலை விருப்பத்தைப் பயன்படுத்தவும்."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"வசனங்களைக் காட்டுதல்"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"ஆதரிக்கும் ஆப்ஸுக்கு மட்டும்"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"வசனத்தின் எழுத்தளவு மற்றும் தோற்றம்"</string>
@@ -3436,6 +3444,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"அழைப்பும் SMS வரலாறும் இவருடன் பகிரப்படும்."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"நிர்வாகச் சிறப்புரிமைகளை அகற்றவா?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"இந்தப் பயனருக்கு நிர்வாகி சிறப்புரிமைகளை அகற்றினால் நீங்களோ பிற நிர்வாகியோ அவருக்கு அதை மீண்டும் வழங்கலாம்."</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"அவசரத் தகவல்"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> தகவலும் தொடர்புகளும்"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> ஆப்ஸைத் திற"</string>
@@ -3800,10 +3812,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"வால்பேப்பரின் ஒளிகுறைத்தல்"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"வால்பேப்பரின் ஒளிகுறைத்தல்"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"வால்பேப்பரின் ஒளிர்வை ஃபில்டர் செய்யலாம்"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"டார்க் தீமினை இயக்குதல்"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"டார்க் தீமினை இயக்குதல்"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"டார்க் பின்னணியைப் பயன்படுத்த சாதனத்திற்கான தீமை மாற்றுங்கள், இது கண்களுக்கு ஏற்படும் சிரமத்தைக் குறைக்கும்"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{டிஸ்பிளே மாற்றங்கள் இல்லை}=1{{effect_1}}=2{{effect_1} மற்றும் {effect_2}}=3{{effect_1}, {effect_2} மற்றும் {effect_3}}other{{effect_1}, {effect_2}, மேலும் #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"அறிவிப்புகள் அனைத்தையும் அனுமதி"</string>
@@ -4372,8 +4382,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"அனுமதி நிர்வாகம்"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"இருப்பிடத்திற்கான தரவுப் பகிர்வு குறித்த அறிவிப்புகள்"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"உங்கள் இருப்பிடத் தரவைப் பகிரும் விதத்தை மாற்றிய ஆப்ஸ் எவை எனப் பாருங்கள்"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"பிற ஆப்ஸின் ஏஜெண்ட் கட்டுப்பாடு"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"உங்கள் சாதனத்திலும் பிற ஆப்ஸிலும் செயல்களைச் செய்யலாம்"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"இயக்க, தட்டவும்"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"சாதனத்தை இயக்க, திரையின் எந்த இடத்திலும் இருமுறை தட்டவும்"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"இணைப்புகளைத் திறக்க"</string>
@@ -5887,6 +5899,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"பின்னை அமைக்கலாம்"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"கண்காணிப்பு, பெற்றோர் கட்டுப்பாடுகள், பெற்றோர்கள், கண்காணிப்பு பின், பின்"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"உங்கள் பின்னை நிர்வகியுங்கள்"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"பெற்றோருக்கான பின் (PIN), பெற்றோர் கட்டுப்பாடுகள் பின்"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"மீட்பு மின்னஞ்சல் முகவரியைச் சேருங்கள்"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"மீட்பு மின்னஞ்சல் முகவரியை உறுதிசெய்யுங்கள்"</string>
@@ -5908,7 +5922,8 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"இந்த அமைப்புகள் ஆஃப் செய்யப்பட்டிருந்தாலும், பிற கணக்கு அமைப்புகளில் பயன்படுத்தப்படலாம்."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"பெற்றோர் கட்டுப்பாடுகள் அம்சத்திற்கான பின்னை டைப் செய்யவும்"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"பெற்றோர் கட்டுப்பாடுகளுக்கான பின்னை அமைத்தல்"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"பின்னை உறுதிப்படுத்துதல்"</string>
+    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
+    <skip />
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"பின் மாற்றப்பட்டது"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"ஆப்ஸைத் திறக்கும்"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"பின்னை நீக்கவா?"</string>

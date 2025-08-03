@@ -20,7 +20,6 @@ import static com.android.settings.accessibility.FeedbackManager.TRIGGER_ID_EXTR
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.platform.test.annotations.DisableFlags;
@@ -29,13 +28,10 @@ import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.server.accessibility.Flags;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.Shadows;
 
 /** Tests for {@link FeedbackManager}. */
 @RunWith(RobolectricTestRunner.class)
@@ -48,18 +44,11 @@ public class FeedbackManagerTest {
     private static final String DEFAULT_CATEGORY = "default category";
     private static final String DEFAULT_TRIGGER_ID = "default triggerId";
 
-    private Activity mActivity;
-
-    @Before
-    public void setUp() {
-        mActivity = Robolectric.buildActivity(Activity.class).create().get();
-    }
-
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void isAvailable_enableLowVisionGenericFeedbackWithValidParams_returnsTrue() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
+                new FeedbackManager(PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.isAvailable()).isTrue();
     }
@@ -68,7 +57,7 @@ public class FeedbackManagerTest {
     @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void isAvailable_disableLowVisionGenericFeedback_returnsFalse() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
+                new FeedbackManager(PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.isAvailable()).isFalse();
     }
@@ -77,7 +66,7 @@ public class FeedbackManagerTest {
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void isAvailable_withNullCategory_returnsFalse() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, /* category= */ null,
+                new FeedbackManager(PACKAGE_NAME, /* category= */ null,
                         DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.isAvailable()).isFalse();
@@ -87,76 +76,23 @@ public class FeedbackManagerTest {
     @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
     public void isAvailable_withNullReporterPackage_returnsFalse() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, /* reporterPackage= */ null, DEFAULT_CATEGORY,
+                new FeedbackManager(/* reporterPackage= */ null, DEFAULT_CATEGORY,
                         DEFAULT_TRIGGER_ID);
 
         assertThat(feedbackManager.isAvailable()).isFalse();
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
-    public void isAvailable_withNullActivity_returnsFalse() {
+    public void getFeedbackIntent_withValidParams_returnsExpectedIntent() {
         FeedbackManager feedbackManager =
-                new FeedbackManager(/* activity= */ null, PACKAGE_NAME, DEFAULT_CATEGORY,
-                        DEFAULT_TRIGGER_ID);
+                new FeedbackManager(PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
 
-        assertThat(feedbackManager.isAvailable()).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
-    public void sendFeedback_enableLowVisionGenericFeedbackWithValidParams_success() {
-        FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
-
-        assertThat(feedbackManager.sendFeedback()).isTrue();
-
-        Intent startedIntent = Shadows.shadowOf(mActivity).getNextStartedActivity();
-        assertThat(startedIntent).isNotNull();
+        Intent startedIntent = feedbackManager.getFeedbackIntent();
         assertThat(startedIntent.getAction()).isEqualTo(Intent.ACTION_BUG_REPORT);
         assertThat(startedIntent.getPackage()).isEqualTo(PACKAGE_NAME);
         Bundle extras = startedIntent.getExtras();
         assertThat(extras).isNotNull();
         assertThat(extras.getString(CATEGORY_TAG_EXTRA)).isEqualTo(DEFAULT_CATEGORY);
         assertThat(extras.getString(TRIGGER_ID_EXTRA)).isEqualTo(DEFAULT_TRIGGER_ID);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
-    public void sendFeedback_disableLowVisionGenericFeedback_returnsFalse() {
-        FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, DEFAULT_CATEGORY, DEFAULT_TRIGGER_ID);
-
-        assertThat(feedbackManager.sendFeedback()).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
-    public void sendFeedback_withNullCategory_returnsFalse() {
-        FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, PACKAGE_NAME, /* category= */ null,
-                        DEFAULT_TRIGGER_ID);
-
-        assertThat(feedbackManager.sendFeedback()).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
-    public void sendFeedback_withNullReporterPackage_returnsFalse() {
-        FeedbackManager feedbackManager =
-                new FeedbackManager(mActivity, /* reporterPackage= */ null, DEFAULT_CATEGORY,
-                        DEFAULT_TRIGGER_ID);
-
-        assertThat(feedbackManager.sendFeedback()).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_LOW_VISION_GENERIC_FEEDBACK)
-    public void sendFeedback_withNullActivity_returnsFalse() {
-        FeedbackManager feedbackManager =
-                new FeedbackManager(/* activity= */ null, PACKAGE_NAME, DEFAULT_CATEGORY,
-                        DEFAULT_TRIGGER_ID);
-
-        assertThat(feedbackManager.sendFeedback()).isFalse();
     }
 }

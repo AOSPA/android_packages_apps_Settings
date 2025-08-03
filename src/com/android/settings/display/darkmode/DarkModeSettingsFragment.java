@@ -28,6 +28,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.BaseSupportFragment;
+import com.android.settings.accessibility.FeedbackButtonPreferenceController;
+import com.android.settings.accessibility.FeedbackManager;
 import com.android.settings.accessibility.Flags;
 import com.android.settings.accessibility.ForceInvertPreferenceController;
 import com.android.settings.accessibility.SurveyManager;
@@ -84,6 +86,8 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
             final SurveyManager surveyManager = new SurveyManager(this, context,
                     getSurveyKey(), getMetricsCategory());
             use(ForceInvertPreferenceController.class).setSurveyManager(surveyManager);
+            use(FeedbackButtonPreferenceController.class).initialize(
+                    new FeedbackManager(context, getMetricsCategory()));
         }
     }
 

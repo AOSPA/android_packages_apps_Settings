@@ -298,7 +298,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                 || !getContext().getPackageName().equals(callingPackage)
                 || !isValidDialogType(dialogType)
                 || !isValidLocale(localeTag)
-                || LocaleUtils.isInSystemLocale(localeTag)) {
+                || LocaleUtils.isLanguageInSystemLocale(localeTag)) {
             return false;
         }
         return true;

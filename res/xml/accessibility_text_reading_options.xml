@@ -80,6 +80,15 @@
         settings:buttonPreferenceType="tonal"
         android:icon="@drawable/ic_history"
         android:persistent="false" />
+
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="feedback"
+        android:title="@string/accessibility_send_feedback_title"
+        android:icon="@drawable/ic_feedback"
+        settings:searchable="false"
+        settings:buttonPreferenceSize="normal"
+        settings:buttonPreferenceType="tonal"
+        settings:controller="com.android.settings.accessibility.FeedbackButtonPreferenceController" />
 </PreferenceScreen>
 <!-- LINT.ThenChange(/src/com/android/settings/accessibility/textreading/ui/TextReadingScreen.kt:ui_hierarchy) -->
 

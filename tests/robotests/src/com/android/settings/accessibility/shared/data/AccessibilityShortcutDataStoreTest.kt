@@ -18,14 +18,18 @@ package com.android.settings.accessibility.shared.data
 
 import android.content.ComponentName
 import android.content.Context
+import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME
+import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME
+import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.internal.accessibility.common.ShortcutConstants
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP
 import com.android.settings.accessibility.PreferredShortcut
 import com.android.settings.accessibility.PreferredShortcuts
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
@@ -41,6 +45,7 @@ import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
@@ -59,8 +64,13 @@ class AccessibilityShortcutDataStoreTest {
     private val a11yManager: ShadowAccessibilityManager =
         Shadow.extract(context.getSystemService(AccessibilityManager::class.java))
 
+    @After
+    fun cleanUp() {
+        Settings.Secure.clearProviderForTest()
+    }
+
     @Test
-    fun setValue_true_preferredShortcutEnabled() = runTest {
+    fun setValue_true_generalPreferredShortcutEnabled() = runTest {
         assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE)).isEmpty()
         assertThat(a11yManager.getAccessibilityShortcutTargets(HARDWARE)).isEmpty()
         setPreferredShortcuts(SOFTWARE or HARDWARE)
@@ -75,7 +85,7 @@ class AccessibilityShortcutDataStoreTest {
     }
 
     @Test
-    fun setValue_false_preferredShortcutDisabled() = runTest {
+    fun setValue_false_generalPreferredShortcutDisabled() = runTest {
         enableShortcuts(true, SOFTWARE or HARDWARE)
         assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE))
             .contains(testComponentString)
@@ -90,6 +100,55 @@ class AccessibilityShortcutDataStoreTest {
     }
 
     @Test
+    fun setValue_true_magnificationPreferredShortcutEnabled() = runTest {
+        assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE)).isEmpty()
+        assertThat(a11yManager.getAccessibilityShortcutTargets(HARDWARE)).isEmpty()
+        assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP)).isEmpty()
+        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP)).isEmpty()
+        setPreferredShortcuts(
+            SOFTWARE or HARDWARE or TRIPLETAP or TWOFINGER_DOUBLETAP,
+            MAGNIFICATION_CONTROLLER_NAME,
+        )
+        val dataStore = createDataStoreFromTestScope(this, MAGNIFICATION_COMPONENT_NAME)
+
+        dataStore.setBoolean(TEST_KEY, true)
+
+        assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE))
+            .contains(MAGNIFICATION_CONTROLLER_NAME)
+        assertThat(a11yManager.getAccessibilityShortcutTargets(HARDWARE))
+            .contains(MAGNIFICATION_CONTROLLER_NAME)
+        assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP))
+            .contains(MAGNIFICATION_CONTROLLER_NAME)
+        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP))
+            .contains(MAGNIFICATION_CONTROLLER_NAME)
+    }
+
+    @Test
+    fun setValue_false_magnificationPreferredShortcutDisabled() = runTest {
+        enableShortcuts(
+            true,
+            SOFTWARE or HARDWARE or TRIPLETAP or TWOFINGER_DOUBLETAP,
+            MAGNIFICATION_CONTROLLER_NAME,
+        )
+        assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE))
+            .contains(MAGNIFICATION_CONTROLLER_NAME)
+        assertThat(a11yManager.getAccessibilityShortcutTargets(HARDWARE))
+            .contains(MAGNIFICATION_CONTROLLER_NAME)
+        assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP))
+            .contains(MAGNIFICATION_CONTROLLER_NAME)
+        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP))
+            .contains(MAGNIFICATION_CONTROLLER_NAME)
+        val dataStore = createDataStoreFromTestScope(this, MAGNIFICATION_COMPONENT_NAME)
+
+        dataStore.setBoolean(TEST_KEY, false)
+
+        assertThat(a11yManager.getAccessibilityShortcutTargets(SOFTWARE)).isEmpty()
+        assertThat(a11yManager.getAccessibilityShortcutTargets(HARDWARE)).isEmpty()
+        assertThat(a11yManager.getAccessibilityShortcutTargets(TRIPLETAP)).isEmpty()
+        assertThat(a11yManager.getAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP)).isEmpty()
+    }
+
+    @Test
     fun getValue_assertValueCorrect() = runTest {
         val dataStore = createDataStoreFromTestScope(this)
 
@@ -101,9 +160,9 @@ class AccessibilityShortcutDataStoreTest {
     }
 
     @Test
-    fun addObserver_settingsStoreAddObserver() = runTest {
+    fun addObserver_general_settingsStoreAddObserver() = runTest {
         val mockSettingsStore = mock<KeyValueStore>()
-        val dataStore = createDataStoreFromTestScope(this, mockSettingsStore)
+        val dataStore = createDataStoreFromTestScope(this, settingsStore = mockSettingsStore)
 
         dataStore.addObserver(mock<KeyedObserver<String?>>(), mock<Executor>())
 
@@ -113,15 +172,43 @@ class AccessibilityShortcutDataStoreTest {
     }
 
     @Test
-    fun removeObserver_settingsStoreRemoveObserver() = runTest {
+    fun removeObserver_general_settingsStoreRemoveObserver() = runTest {
         val mockSettingsStore = mock<KeyValueStore>()
-        val dataStore = createDataStoreFromTestScope(this, mockSettingsStore)
+        val dataStore = createDataStoreFromTestScope(this, settingsStore = mockSettingsStore)
 
         val mockObserver = mock<KeyedObserver<String?>>()
         dataStore.addObserver(mockObserver, mock<Executor>())
         dataStore.removeObserver(mockObserver)
 
         for (settingsKey in ShortcutConstants.GENERAL_SHORTCUT_SETTINGS.toList()) {
+            verify(mockSettingsStore).removeObserver(settingsKey, dataStore)
+        }
+    }
+
+    @Test
+    fun addObserver_magnification_settingsStoreAddObserver() = runTest {
+        val mockSettingsStore = mock<KeyValueStore>()
+        val dataStore =
+            createDataStoreFromTestScope(this, MAGNIFICATION_COMPONENT_NAME, mockSettingsStore)
+
+        dataStore.addObserver(mock<KeyedObserver<String?>>(), mock<Executor>())
+
+        for (settingsKey in ShortcutConstants.MAGNIFICATION_SHORTCUT_SETTINGS.toList()) {
+            verify(mockSettingsStore).addObserver(settingsKey, dataStore, HandlerExecutor.main)
+        }
+    }
+
+    @Test
+    fun removeObserver_magnification_settingsStoreRemoveObserver() = runTest {
+        val mockSettingsStore = mock<KeyValueStore>()
+        val dataStore =
+            createDataStoreFromTestScope(this, MAGNIFICATION_COMPONENT_NAME, mockSettingsStore)
+
+        val mockObserver = mock<KeyedObserver<String?>>()
+        dataStore.addObserver(mockObserver, mock<Executor>())
+        dataStore.removeObserver(mockObserver)
+
+        for (settingsKey in ShortcutConstants.MAGNIFICATION_SHORTCUT_SETTINGS.toList()) {
             verify(mockSettingsStore).removeObserver(settingsKey, dataStore)
         }
     }
@@ -149,35 +236,43 @@ class AccessibilityShortcutDataStoreTest {
         assertThat(dataStore.getUserShortcutTypes()).isEqualTo(updatedShortcuts)
     }
 
-    private fun enableShortcuts(enable: Boolean, types: Int) {
+    private fun enableShortcuts(
+        enable: Boolean,
+        types: Int,
+        componentNameString: String = testComponentString,
+    ) {
         a11yManager.enableShortcutsForTargets(
             enable,
             types,
-            setOf(testComponentString),
+            setOf(componentNameString),
             context.userId,
         )
         if (types != ShortcutConstants.UserShortcutType.DEFAULT) {
             PreferredShortcuts.saveUserShortcutType(
                 context,
-                PreferredShortcut(testComponentString, types),
+                PreferredShortcut(componentNameString, types),
             )
         }
     }
 
-    private fun setPreferredShortcuts(types: Int) {
+    private fun setPreferredShortcuts(
+        types: Int,
+        componentNameString: String = testComponentString,
+    ) {
         PreferredShortcuts.saveUserShortcutType(
             context,
-            PreferredShortcut(testComponentString, types),
+            PreferredShortcut(componentNameString, types),
         )
     }
 
     private fun createDataStoreFromTestScope(
         testScope: TestScope,
+        componentName: ComponentName = testComponentName,
         settingsStore: KeyValueStore = SettingsSecureStore.get(context),
     ): AccessibilityShortcutDataStore =
         AccessibilityShortcutDataStore(
             context,
-            testComponentName,
+            componentName,
             testScope.backgroundScope,
             StandardTestDispatcher(testScope.testScheduler),
             settingsStore,

@@ -182,7 +182,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"שדה היציאה חייב להיות ריק אם שדה המארח ריק."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"היציאה שהקלדת אינה חוקית."</string>
     <string name="proxy_warning_limited_support" msgid="3277104160797351942">"‏שרת ה-Proxy של HTTP נמצא בשימוש הדפדפן, אך אפליקציות אחרות לא יכולות להשתמש בו."</string>
-    <string name="proxy_url_title" msgid="3502625766036404073">"‏כתובת URL של PAC: "</string>
+    <string name="proxy_url_title" msgid="3502625766036404073">"‏כתובת ה-URL של PAC: "</string>
     <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"‏שליחת פינג לשם המארח (www.google.com) מסוג IPv4:"</string>
     <string name="radio_info_http_client_test" msgid="5673975677271544085">"‏בדיקת לקוח HTTP:"</string>
     <string name="ping_test_label" msgid="265427033290391845">"הפעלת בדיקת פינג"</string>
@@ -344,7 +344,7 @@
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> לאחר תום הזמן הקצוב לתפוגה"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"מיד אחרי שנגמר הזמן הקצוב לתפוגה, חוץ מבמקרים שבהם נמנעת נעילה על ידי <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> אחרי שנגמר הזמן הקצוב לכיבוי המסך, חוץ מבמקרים שבהם הנעילה נמנעת על ידי <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
-    <string name="owner_info_settings_title" msgid="3555626140700093017">"הוספת טקסט במסך הנעילה"</string>
+    <string name="owner_info_settings_title" msgid="3555626140700093017">"הוספת טקסט למסך הנעילה"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"ללא"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"‏לדוגמה, ה-Android של יוסי."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"מיקום"</string>
@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"הזזת העכבר בין מסכים"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"שימוש במסך החיצוני"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"רזולוציית המסך"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"התנהגות ברירת המחדל כשמחברים מסך חיצוני"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"שימוש כמסך נפרד"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"שיקוף המסך המובנה"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"הצגת תיבת הדו-שיח של החיבור"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"המסך החיצוני לא מחובר"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"סיבוב"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"רגיל"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"אפשרויות נוספות"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"כדי לשנות את סדר התצוגות, לוחצים לחיצה ארוכה על תצוגה וגוררים אותה."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"שיקוף המסך המובנה"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"‏העברה (csat)"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"‏הפעלת תצוגת WiFi"</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"אפשר להשתמש ברקע כהה כדי שיהיה נוח יותר לצפות במסך וכדי לצמצם את השימוש בסוללה במסכים מסוימים. אם הגדרת לוח זמנים, העיצוב ישתנה אחרי שהמסך יכבה."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"העיצוב הכהה פועל כרגע בהתאם ללוח הזמנים של מצב שעת השינה"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"הגדרות של מצב שעת השינה"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{יכול להיות שהעיצוב הכהה יופעל במצבים באופן אוטומטי}=1{העיצוב הכהה גם יופעל במסגרת {mode_1}}=2{העיצוב הכהה גם יופעל במסגרת {mode_1} ובמסגרת {mode_2}}=3{העיצוב הכהה גם יופעל במסגרת {mode_1},‏ {mode_2} וגם {mode_3}}one{העיצוב הכהה גם יופעל במסגרת {mode_1},‏ {mode_2} ועוד # מצבים}other{העיצוב הכהה גם יופעל במסגרת {mode_1},‏ {mode_2} ועוד # מצבים}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"הגדרות של מצבים"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"‏הבהרה של התמונות והסרטונים עם טווח דינמי גבוה (HDR), הרחבת טווח הצבעים ושיפור החדות. תוכן באיכות HDR ייראה בהיר יותר."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"זמן קצוב לכיבוי המסך"</string>
@@ -2035,7 +2044,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"פועלות"</string>
     <string name="not_installed" msgid="5074606858798519449">"לא מותקן עבור משתמש זה"</string>
     <string name="installed" msgid="2837449358488825884">"מותקנת"</string>
-    <string name="no_applications" msgid="985069304755391640">"אין אפליקציות."</string>
+    <string name="no_applications" msgid="5471491608902031500">"לא נמצאו אפליקציות תואמות"</string>
     <string name="internal_storage" msgid="999496851424448809">"אחסון פנימי"</string>
     <string name="recompute_size" msgid="1098091228370999128">"הגודל מחושב מחדש..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"למחוק את נתוני האפליקציה?"</string>
@@ -2391,15 +2400,11 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"נשמח לדירוג ממך"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"‏פנייה לתמיכה של Google באנשים עם מוגבלויות"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"סקר בנושא נגישות"</string>
-    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
-    <skip />
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"שיתוף משוב"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"מה מידת שביעות הרצון שלך מהעיצוב הכהה?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"למילוי הסקר"</string>
-    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
-    <skip />
-    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
-    <skip />
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"שיתוף משוב"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"מה מידת שביעות הרצון שלך מההגדלה?"</string>
     <string name="magnification_survey_notification_action" msgid="8042464088582144918">"למילוי הסקר"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"אפליקציות שהורדת"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"ניסיוני"</string>
@@ -2564,17 +2569,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"עדכון אוטומטי של הגדלת מסך"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"עדכון הגדלת מסך במעבר בין אפליקציות"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"כפתור ההפעלה מסיים שיחה"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"אפשרויות"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"תזמון"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"רגיל"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"עיצוב כהה רגיל"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"העיצוב הכהה מופעל בממשקי המכשיר ובאפליקציות הנתמכות"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"מורחב"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"עיצוב כהה מורחב"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"הפעלת העיצוב הכהה באופן אוטומטי באפליקציות נוספות כדי לשפר את הנגישות"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"הסרת אנימציות"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"יהיו פחות תנועות במסך"</string>
@@ -2634,9 +2635,14 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"קטן"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"קטן במיוחד"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"התעלמות מתנועות קטנות של הסמן"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"חזרה ללחיצה שמאלית אחרי פעולה"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"כדי לעבור מסכים כשמשתמשים בקליק אוטומטי, צריך לשנות את שיטת הניווט"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"כדי לחזור לדף הקודם, לעבור למסך הבית ולעבור בין אפליקציות כשמשתמשים בקליק אוטומטי, צריך להשתמש בניווט ב-3 כפתורים במקום בניווט באמצעות תנועות"</string>
+    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
+    <skip />
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"התכונה \"קליק אוטומטי\" פועלת טוב יותר עם ניווט ב-3 כפתורים"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"כדי לחזור לדף הקודם, לעבור למסך הבית ולעבור בין אפליקציות כשמשתמשים בקליק אוטומטי, צריך להשתמש בניווט ב-3 כפתורים במקום בניווט באמצעות תנועות"</string>
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"המשך הניווט באמצעות תנועות"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"הגדרות ניווט"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"רטט ומשוב פיזי"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"שליטה בעוצמת הרטט לשימושים שונים"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"מופעל"</string>
@@ -2673,8 +2679,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"מידע על היפוך צבעים"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"מידע נוסף על היפוך צבעים"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"מידע נוסף על עיצוב כהה"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"יכול להיות שחלק מהאפליקציות לא תומכות בעיצוב כהה עם האפשרות המורחבת. אם יש בעיות במראה, צריך להשתמש בהגדרה הרגילה."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"הצגת הכתוביות"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"רק לאפליקציה נתמכת"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"גודל וסגנון הכתוביות"</string>
@@ -3301,8 +3306,8 @@
     <string name="vpn_ipsec_identifier" msgid="6976476088030400883">"‏מזהה IPSec*"</string>
     <string name="vpn_ipsec_secret" msgid="3110033645671775202">"‏מפתח IPSec ששותף מראש*"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"‏אישור משתמש IPSec"</string>
-    <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"‏אישור CA של IPSec"</string>
-    <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"‏אישור של שרת IPSec"</string>
+    <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"‏אישור CA ל-IPSec"</string>
+    <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"‏אישור שרת ל-IPSec"</string>
     <string name="vpn_show_options" msgid="6105437733943318667">"אפשרויות מתקדמות"</string>
     <string name="vpn_username_optional" msgid="8564310631984689947">"שם משתמש (אופציונלי)"</string>
     <string name="vpn_password_optional" msgid="1255147723869461543">"סיסמה (אופציונלית)"</string>
@@ -3436,6 +3441,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"‏יבוצע שיתוף של היסטוריית השיחות וה-SMS עם המשתמש הזה."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"להסיר את הרשאות האדמין?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"אם מסירים את הרשאות האדמין עבור המשתמש הזה, אחד מהאדמינים יוכל להחזיר אותן מאוחר יותר."</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"מידע למקרה חירום"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"המידע ואנשי הקשר של <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"פתיחה של <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3800,10 +3809,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"עמעום הטפט"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"עמעום הטפט"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"שליטה בבהירות של הטפט"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"הפעלת עיצוב כהה"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"הפעלת עיצוב כהה"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"שינוי העיצוב לרקע כהה, שפחות מאמץ את העיניים"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{לא בוצעו שינויים באפשרויות התצוגה}=1{‏{effect_1}}=2{‫{effect_1} וגם {effect_2}}=3{‫{effect_1}, {effect_2} וגם {effect_3}}one{‫{effect_1}, {effect_2} ועוד #}other{‫{effect_1}, {effect_2} ועוד #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"כל ההתראות"</string>
@@ -4372,8 +4379,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"מנהל הרשאות"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"עדכונים לגבי שיתוף נתוני מיקום"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"בדיקת אפליקציות ששינו את האופן שבו הן עשויות לשתף את נתוני המיקום"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"שליטה של סוכן באפליקציות אחרות"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"ביצוע פעולות במכשיר ובאפליקציות אחרות"</string>
+    <string name="app_function_access_settings_title" msgid="1837117989202166166">"סוכנים"</string>
+    <string name="app_function_access_settings_summary" msgid="3654291845453799170">"סוכנים שיכולים לגשת למידע או לבצע פעולות באפליקציות"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"יש ללחוץ כדי להעיר"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"יש ללחוץ פעמיים בנקודה כלשהי במסך כדי להעיר את המכשיר"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"פתיחת קישורים"</string>
@@ -5888,6 +5895,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"הגדרת קוד אימות"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"פיקוח, אמצעי בקרת הורים, הורים, קוד אימות לפיקוח, קוד אימות"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"עריכת קוד האימות"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"קוד אישור הורה, קוד אימות לאמצעי בקרת הורים"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"הוספה של כתובת אימייל לשחזור החשבון"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"אימות של כתובת האימייל לשחזור החשבון"</string>
@@ -5909,7 +5918,8 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"יכול להיות שההגדרות האחרות של החשבון יחולו גם כשההגדרות האלה מושבתות."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"הזנת קוד אימות לאמצעי בקרת ההורים"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"הגדרת קוד אימות לאמצעי בקרת ההורים"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"אישור קוד האימות"</string>
+    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
+    <skip />
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"קוד אימות עודכן"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"פתיחת האפליקציה"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"למחוק את קוד האימות?"</string>

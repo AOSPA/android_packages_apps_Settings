@@ -846,6 +846,15 @@ public class UserDetailsSettingsTest {
 
     @Test
     @EnableFlags(FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF)
+    public void initialize_nonAdminCurrentUserSelected_shouldHideSwitchPref() {
+        setupSelectedCurrentUser();
+        mFragment.initialize(mActivity, mArguments);
+
+        verify(mSwitchUserPref).setVisible(false);
+    }
+
+    @Test
+    @EnableFlags(FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF)
     public void initialize_adminCurrentUserSelected_shouldShowRemoveAndGrantAdminPref() {
         setupSelectedCurrentUser();
         mUserManager.setIsAdminUser(true);

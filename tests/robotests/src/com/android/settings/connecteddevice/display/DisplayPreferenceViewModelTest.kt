@@ -67,6 +67,15 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
         viewModel.mirrorModeObserver.onChange(/* selfChange= */ false)
     }
 
+    private fun setIncludeDefaultDisplayInTopology(enable: Boolean) {
+        Settings.Secure.putInt(
+            application.contentResolver,
+            Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY,
+            if (enable) 1 else 0,
+        )
+        viewModel.includeDefaultDisplayInTopologyObserver.onChange(/* selfChange= */ false)
+    }
+
     @Test
     fun init_loadsEnabledDisplaysAndSetsDefaultDisplay() {
         val state = viewModel.uiState.value!!
@@ -90,6 +99,19 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
         setMirroringMode(false)
 
         assertThat(viewModel.uiState.value!!.isMirroring).isFalse()
+    }
+
+    @Test
+    fun includeDefaultDisplayInTopologySettingChanged_updatesUiState() {
+        assertThat(viewModel.uiState.value!!.includeDefaultDisplayInTopology).isFalse()
+
+        setIncludeDefaultDisplayInTopology(true)
+
+        assertThat(viewModel.uiState.value!!.includeDefaultDisplayInTopology).isTrue()
+
+        setIncludeDefaultDisplayInTopology(false)
+
+        assertThat(viewModel.uiState.value!!.includeDefaultDisplayInTopology).isFalse()
     }
 
     @Test

@@ -20,9 +20,13 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.Fragment
+import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME
 import com.android.settings.R
 import com.android.settings.Settings.MagnificationActivity
+import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.Flags
+import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
+import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceCategory
@@ -66,6 +70,15 @@ open class MagnificationScreen : PreferenceScreenMixin {
             +MagnificationTopIntroPreference()
             +MagnificationIllustrationPreference()
             +PreferenceCategory("general_categories", R.string.accessibility_screen_option) += {
+                +AccessibilityShortcutPreference(
+                    context,
+                    coroutineScope,
+                    "magnification_shortcut_preference",
+                    R.string.accessibility_screen_magnification_shortcut_title,
+                    MAGNIFICATION_COMPONENT_NAME,
+                    context.getText(R.string.accessibility_screen_magnification_title),
+                    metricsCategory,
+                )
                 +MagnificationModePreference()
                 +MagnifyKeyboardSwitchPreference()
                 +FollowTypingSwitchPreference()
@@ -76,6 +89,7 @@ open class MagnificationScreen : PreferenceScreenMixin {
                 +JoystickSwitchPreference()
             }
             +MagnificationFooterPreference()
+            +FeedbackButtonPreference(FeedbackManager(context, metricsCategory))
         }
 
     companion object {

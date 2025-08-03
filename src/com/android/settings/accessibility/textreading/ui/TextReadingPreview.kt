@@ -18,12 +18,14 @@ package com.android.settings.accessibility.textreading.ui
 
 import android.content.Context
 import android.content.res.Configuration
+import android.view.Display
 import android.view.View
 import com.android.settings.R
 import com.android.settings.accessibility.TextReadingPreviewPreference
 import com.android.settings.accessibility.textreading.data.DisplaySize
 import com.android.settings.accessibility.textreading.data.FontSize
 import com.android.settings.display.PreviewPagerAdapter
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -36,7 +38,11 @@ import kotlinx.coroutines.launch
 internal class TextReadingPreview(
     private val displaySize: Flow<DisplaySize>,
     private val fontSize: Flow<FontSize>,
-) : PreferenceMetadata, PreferenceBinding, PreferenceLifecycleProvider {
+) :
+    PreferenceMetadata,
+    PreferenceBinding,
+    PreferenceLifecycleProvider,
+    PreferenceAvailabilityProvider {
     override val key: String
         get() = KEY
 
@@ -167,6 +173,13 @@ internal class TextReadingPreview(
             config.densityDpi = displaySizes[index % displaySizes.size]
             config
         }
+    }
+
+    override fun isAvailable(context: Context): Boolean {
+        // TODO(b/428700479): Preview preference is hidden in non default displays as preview is
+        //  created via default display density configuration which results in unrealistic
+        //  preview in other displays.
+        return context.getDisplayId() == Display.DEFAULT_DISPLAY
     }
 
     // LINT.ThenChange(:calculate_config_index)

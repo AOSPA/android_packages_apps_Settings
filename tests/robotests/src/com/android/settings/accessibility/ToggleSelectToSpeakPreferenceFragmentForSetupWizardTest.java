@@ -59,13 +59,6 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizardTest extends
         ).isEqualTo(SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SELECT_TO_SPEAK);
     }
 
-    @Test
-    public void getFeedbackCategory_returnPageUnknown() {
-        assertThat(
-                new ToggleSelectToSpeakPreferenceFragmentForSetupWizard().getFeedbackCategory()
-        ).isEqualTo(SettingsEnums.PAGE_UNKNOWN);
-    }
-
     @NonNull
     @Override
     public ComponentName getFeatureComponent() {

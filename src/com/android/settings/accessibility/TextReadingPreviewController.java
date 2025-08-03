@@ -22,6 +22,7 @@ import android.content.res.TypedArray;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.Choreographer;
+import android.view.Display;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -80,6 +81,12 @@ class TextReadingPreviewController extends BasePreferenceController implements
 
     @Override
     public int getAvailabilityStatus() {
+        // TODO(b/428700479): Preview preference is hidden in non default displays as preview is
+        //  created via default display density configuration which results in unrealistic
+        //  preview in other displays.
+        if (mContext.getDisplayId() != Display.DEFAULT_DISPLAY) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         return AVAILABLE;
     }
 

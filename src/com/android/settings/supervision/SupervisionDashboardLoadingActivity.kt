@@ -68,11 +68,7 @@ class SupervisionDashboardLoadingActivity : FragmentActivity(), CategoryMixin.Ca
         super.onResume()
 
         registerReceivers()
-        packageManager.setApplicationEnabledSetting(
-            supervisionPackage,
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            0,
-        )
+        tryEnableSupervisionPackage()
 
         setupActionBar()
         maybeLaunchDashboard()
@@ -147,5 +143,26 @@ class SupervisionDashboardLoadingActivity : FragmentActivity(), CategoryMixin.Ca
             featureFactory.dashboardFeatureProvider.getTilesForCategory(CATEGORY_SUPERVISION) !=
                 null
         return hasComponent && tilesExist
+    }
+
+    private fun tryEnableSupervisionPackage() {
+        try {
+            val packageInfo = packageManager.getPackageInfo(supervisionPackage, 0)
+            if (packageInfo == null) return
+
+            val applicationInfo = packageInfo.applicationInfo
+            if (applicationInfo == null) return
+
+            if (!applicationInfo.enabled) {
+                packageManager.setApplicationEnabledSetting(
+                    supervisionPackage,
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    0,
+                )
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+            // Supervision package is not installed, do nothing
+            return
+        }
     }
 }

@@ -95,12 +95,6 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
     }
 
     @Override
-    public int getFeedbackCategory() {
-        // The feedback options should not be displayed on the setup wizard page.
-        return SettingsEnums.PAGE_UNKNOWN;
-    }
-
-    @Override
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
         TwoStatePreference preference = findPreference(mMainActionPrefKey);

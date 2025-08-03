@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Տեղափոխեք մկնիկի նշորդը էկրանների միջև"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Արտաքին էկրանի օգտագործում"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Էկրանի լուծաչափ"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"Միացման կանխադրված վարքագիծը"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Օգտագործել որպես առանձին էկրան"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Հայելապատճենել ներկառուցված էկրանը"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Ցուցադրել միացման երկխոսության պատուհանը"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Արտաքին էկրանն անջատված է"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Պտտում"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Ստանդարտ"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Այլ ընտրանքներ"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Պահեք և քաշեք՝ էկրանները վերադասավորելու համար։"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Հայելապատճենել ներկառուցված էկրանը"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"հայելապատճենում"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Միացնել անլար էկրանը"</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Օգտագործեք մուգ ֆոն՝ որոշ էկրանների վրա ձեր էկրանն ավելի հարմարավետ դարձնելու և մարտկոցի օգտագործումը նվազեցնելու համար։ Ձեր թեման կփոխվի, եթե ունեք ժամանակացույց, երբ էկրանն անջատված է։"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Մուգ թեման այժմ օգտագործվում է «Քնելու ժամ» ռեժիմի ժամանակացույցի համաձայն"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"«Քնելու ժամ» ռեժիմի կարգավորումներ"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Ռեժիմները կարող են նաև միացնել մուգ թեման}=1{{mode_1} ռեժիմը նաև միացնում է մուգ թեման}=2{{mode_1} և {mode_2} ռեժիմները նաև միացնում են մուգ թեման}=3{{mode_1}, {mode_2} և {mode_3} ռեժիմները նաև միացնում են մուգ թեման}one{{mode_1} և {mode_2} ռեժիմներն ու ևս # ռեժիմ նաև միացնում են մուգ թեման}other{{mode_1} և {mode_2} ռեժիմներն ու ևս # ռեժիմ նաև միացնում են մուգ թեման}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Ռեժիմների կարգավորումներ"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Պայծառացրեք և ընդլայնեք գունային ընդգրկույթն ու պարզությունը Բարձր դինամիկական ընդգրկույթով (HDR) պատկերներում և տեսանյութերում։ HDR բովանդակությունն ավելի պայծառ կլինի։"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Էկրանի անջատում"</string>
@@ -2035,7 +2044,8 @@
     <string name="filter_apps_running" msgid="535465683273284141">"Աշխատեցվում է"</string>
     <string name="not_installed" msgid="5074606858798519449">"Տեղադրված չէ այս օգտատիրոջ համար"</string>
     <string name="installed" msgid="2837449358488825884">"Տեղադրված է"</string>
-    <string name="no_applications" msgid="985069304755391640">"Հավելվածներ չկան"</string>
+    <!-- no translation found for no_applications (5471491608902031500) -->
+    <skip />
     <string name="internal_storage" msgid="999496851424448809">"Ներքին պահոց"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Չափի վերահաշվարկում…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Ջնջե՞լ հավելվածի տվյալները"</string>
@@ -2391,15 +2401,11 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Գնահատել մեզ"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Կապվել Google-ի՝ հատուկ կարիքներով անձանց աջակցման թիմի հետ"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Հարցում հասանելիության վերաբերյալ"</string>
-    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
-    <skip />
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Հայտնեք ձեր կարծիքը"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Որքանո՞վ եք գոհ մուգ թեմայից։"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Մասնակցել հարցմանը"</string>
-    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
-    <skip />
-    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
-    <skip />
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Հայտնեք ձեր կարծիքը"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Որքանո՞վ եք գոհ խոշորացումից։"</string>
     <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Մասնակցել հարցմանը"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Ներբեռնված հավելվածներ"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Փորձնական"</string>
@@ -2564,17 +2570,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Ավտոմատ թարմացնել էկրանի խոշորությունը"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Թարմացնել էկրանի խոշորությունը ծրագրի տարանցումների վրա"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Սնուցման կոճակը ավարտում է զանգը"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"Տարբերակներ"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"Ժամադրոշմներ"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Ստանդարտ"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Ստանդարտ մուգ թեմա"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Կիրառում է մուգ թեման համակարգում և աջակցվող հավելվածներում"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Ծավալված է"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Ծավալված մուգ թեմա"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Ավտոմատ կերպով միացնում է մուգ թեման բոլոր հավելվածներում՝ հատուկ գործառույթները բարելավելու համար"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Հեռացնել անիմացիաները"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Նվազեցնել շարժումն էկրանին"</string>
@@ -2634,9 +2636,14 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Փոքր"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Շատ փոքր"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Անտեսել նշորդի փոքր շարժումը"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"Գործողությունից հետո վերադառնալ մկնիկի ձախ սեղմման ռեժիմին"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"Փոխեք նավիգացիայի ռեժիմը՝ ավտոմատ սեղմումն օգտագործելու համար"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"Ավտոմատ սեղմման միջոցով վերադառնալու, հիմնական էկրանը բացելու և մեկ հավելվածից մյուսն անցնելու համար ժեստերով նավիգացիայի փոխարեն օգտագործեք եռակոճակ նավիգացիան"</string>
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"Օգտագործեք ձախ կոճակի սեղմման ռեժիմը որպես կանխադրված գործողություն"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Երբ այլ գործողություն եք օգտագործում, ավտոմատ սեղմման գործառույթն ավտոմատ կանցնի ձախ կոճակի սեղմման ռեժիմին"</string>
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Ավտոմատ սեղմումը եռակոճակ նավիգացիայով ավելի լավ է աշխատում"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Ավտոմատ սեղմման միջոցով հեշտությամբ վերադառնալու, հիմնական էկրանը բացելու և մեկ հավելվածից մյուսն անցնելու համար ժեստերով նավիգացիայի փոխարեն օգտագործեք եռակոճակ նավիգացիան"</string>
+    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Թրթռոց և հապտիկ արձագանք"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Կառավարեք թրթռոցի ուժգնությունը տարբեր դեպքերի համար"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Միացված է"</string>
@@ -2673,8 +2680,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Գունաշրջում"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Իմացեք ավելին գունաշրջման մասին"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Իմանալ ավելին մուգ թեմայի մասին"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"Որոշ հավելվածներ կարող են չաջակցել մուգ թեման ընդլայնված տարբերակում։ Եթե ցուցադրման հետ կապված խնդիրներ են առաջացել, օգտագործեք կանխադրված տարբերակը։"</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Ցույց տալ ենթագրերը"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Միայն աջակցվող հավելվածի համար"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Ենթագրերի չափն ու ոճը"</string>
@@ -3436,6 +3442,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Զանգերի և SMS-ների պատմությունը հասանելի կլինի այս օգտատիրոջը:"</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Հեռացնե՞լ ադմինիստրատորի արտոնությունները"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Եթե դուք այս օգտատիրոջը զրկեք ադմինիստրատորի արտոնություններից, դուք կամ մեկ այլ ադմինիստրատոր կկարողանաք հետագայում կրկին տալ դրանք։"</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Անհետաձգելի բուժօգնության տվյալներ"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> – տվյալներ և կոնտակտներ"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Բացել <xliff:g id="APP_NAME">%1$s</xliff:g> հավելվածը"</string>
@@ -3800,10 +3810,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Խամրեցնել պաստառը"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"խամրեցնել պաստառը"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Ֆիլտրել պաստառի պայծառությունը"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Միացնել մուգ թեման"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"միացնել մուգ թեման"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Փոխել սարքի թեման՝ օգտագործելու մուգ ֆոն, որն ավելի հաճելի է աչքերի համար"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Առանց փոփոխությունների}=1{{effect_1}}=2{{effect_1} և {effect_2}}=3{{effect_1}, {effect_2} և {effect_3}}one{{effect_1}, {effect_2} ու ևս #-ը}other{{effect_1}, {effect_2} ու ևս #-ը}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Թույլատրել բոլոր ծանուցումները"</string>
@@ -4372,8 +4380,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"Թույլտվությունների կառավարիչ"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Տեղադրության տվյալներով կիսվելու թույլտվության թարմացում"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Ստուգեք հավելվածների ցանկը, որոնք փոխել են ձեր տեղադրության տվյալներով կիսվելու եղանակը"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Այլ հավելվածների կառավարում գործակալի միջոցով"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Կատարեք գործողություններ ձեր սարքում և այլ հավելվածներում"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"Հպեք՝ արթնացնելու համար"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Երկակի հպեք էկրանի ցանկացած մասին՝ սարքը արթնացնելու համար"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Հղումների բացում"</string>
@@ -5887,6 +5897,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Նշել PIN կոդ"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"վերահսկողություն, ծնողական վերահսկողություն, ծնողներ, ծնողական վերահսկողության pin կոդ, pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Կառավարեք ձեր PIN կոդը"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Ծնողի PIN կոդ, ծնողական վերահսկողության PIN կոդ"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Ավելացնել հաշվի վերականգնման հասցե"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Հաստատել վերականգնման հասցեն"</string>
@@ -5908,7 +5920,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Երբ այս կարգավորումներն անջատված են, հաշվի այլ կարգավորումներ նախկինի պես կարող են կիրառվել։"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Մուտքագրեք ծնողական վերահսկողության PIN կոդը"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Սահմանեք ծնողական վերահսկողության PIN կոդ"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Հաստատեք PIN կոդը"</string>
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Հաստատեք ծնողական վերահսկողության PIN կոդը"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN կոդը թարմացվեց"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Բացել հավելվածը"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Ջնջե՞լ PIN կոդը"</string>

@@ -126,6 +126,15 @@ public class TextReadingPreferenceFragment extends BaseSupportFragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (!Flags.catalystTextReadingScreen()) {
+            use(FeedbackButtonPreferenceController.class).initialize(
+                    new FeedbackManager(context, getMetricsCategory()));
+        }
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final View rootView = getActivity().getWindow().peekDecorView();

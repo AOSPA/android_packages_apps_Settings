@@ -17,9 +17,11 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.role.RoleManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.IntentFilter
+import android.os.Process
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -38,6 +40,7 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
+import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,6 +50,7 @@ import org.mockito.kotlin.stub
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowPackageManager
+import org.robolectric.shadows.ShadowRoleManager
 
 @Config(shadows = [SettingsShadowResources::class])
 @ExperimentalCoroutinesApi
@@ -89,14 +93,7 @@ class SupervisionDashboardLoadingActivityTest {
     @Test
     fun enableSupervisionApp_success_startDashboardActivity() =
         testScope.runTest {
-            val serviceIntentAction =
-                SupervisionMessengerClient.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
-            val fakeServiceClassName = "FakeSupervisionMessengerService"
-            val serviceComponentName = ComponentName(testSupervisionPackage, fakeServiceClassName)
-            val intentFilter = IntentFilter(serviceIntentAction)
-
-            shadowPackageManager.addServiceIfNotPresent(serviceComponentName)
-            shadowPackageManager.addIntentFilterForService(serviceComponentName, intentFilter)
+            setUpMessengerComponent()
 
             activityScenario =
                 ActivityScenario.launch(SupervisionDashboardLoadingActivity::class.java)
@@ -147,4 +144,41 @@ class SupervisionDashboardLoadingActivityTest {
                 assertThat(activity.isFinishing).isTrue()
             }
         }
+
+    @Test
+    fun enableSupervisionApp_alreadyEnabled_doesNotThrow() =
+        testScope.runTest {
+            ShadowRoleManager.addRoleHolder(
+                RoleManager.ROLE_SUPERVISION,
+                testSupervisionPackage,
+                Process.myUserHandle(),
+            )
+            setUpMessengerComponent()
+
+            try {
+                activityScenario =
+                    ActivityScenario.launch(SupervisionDashboardLoadingActivity::class.java)
+                advanceUntilIdle()
+
+                activityScenario.onActivity { activity ->
+                    val nextActivity = shadowOf(activity).nextStartedActivity
+                    assertThat(nextActivity.component?.className)
+                        .isEqualTo(SupervisionDashboardActivity::class.java.name)
+                    assertThat(activity.isFinishing).isTrue()
+                }
+            } catch (e: SecurityException) {
+                fail("Should not have thrown $e")
+            }
+        }
+
+    private fun setUpMessengerComponent() {
+        val serviceIntentAction =
+            SupervisionMessengerClient.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
+        val fakeServiceClassName = "FakeSupervisionMessengerService"
+        val serviceComponentName = ComponentName(testSupervisionPackage, fakeServiceClassName)
+        val intentFilter = IntentFilter(serviceIntentAction)
+
+        shadowPackageManager.addServiceIfNotPresent(serviceComponentName)
+        shadowPackageManager.addIntentFilterForService(serviceComponentName, intentFilter)
+    }
 }

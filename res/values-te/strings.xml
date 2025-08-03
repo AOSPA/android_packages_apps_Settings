@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"మీ మౌస్‌ను ఒక డిస్‌ప్లే నుండి ఇంకో డిస్‌ప్లేకు షిఫ్ట్ చేయండి"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"ఎక్స్‌టర్నల్ డిస్‌ప్లేను ఉపయోగించండి"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"డిస్‌ప్లే రిజల్యూషన్"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"ఆటోమేటిక్ కనెక్షన్ బిహేవియర్"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"ప్రత్యేక డిస్‌ప్లేగా ఉపయోగించండి"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"మిర్రర్ బిల్ట్-ఇన్ డిస్‌ప్లే"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"కనెక్షన్ డైలాగ్‌ను చూడండి"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"ఎక్స్‌టర్నల్ డిస్‌ప్లే డిస్‌కనెక్టయింది"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"రొటేషన్"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"స్టాండర్డ్"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"మరిన్ని ఆప్షన్‌లు"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"డిస్‌ప్లేల వరుస మార్చడానికి పట్టుకొని, లాగండి"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"మిర్రర్ బిల్ట్-ఇన్ డిస్‌ప్లే"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"మిర్రర్"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"వైర్‌లెస్ ప్రదర్శనను ప్రారంభించండి"</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"డార్క్ బ్యాక్‌గ్రౌండ్‌ను ఉపయోగించి మీ స్క్రీన్‌ను చూసేందుకు మరింత సౌకర్యవంతంగా చేయండి, కొన్ని స్క్రీన్‌లలో బ్యాటరీ వినియోగాన్ని తగ్గించండి. స్క్రీన్ ఆఫ్‌లో ఉన్నప్పుడు, మీకు షెడ్యూల్ ఉంటే, మీ థీమ్ మారుతుంది."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"డార్క్ థీమ్‌ ప్రస్తుతం మీ నిద్రించే సమయ మోడ్ షెడ్యూల్‌ను ఫాలో అవుతోంది"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"నిద్రించే సమయ మోడ్ సెట్టింగ్‌లు"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{మోడ్‌లు కూడా డార్క్ థీమ్‌ను ఆన్ చేయగలవు}=1{{mode_1} కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తాయి}=2{{mode_1}, {mode_2} కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తాయి}=3{{mode_1}, {mode_2}, ఇంకా {mode_3} కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తాయి}other{{mode_1}, {mode_2}, మరో # కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తాయి}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"మోడ్‌ల సెట్టింగ్‌లు"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"హై డైనమిక్ రేంజ్ (HDR) ఇమేజ్‌ల్లో, వీడియోల్లో రంగు పరిధిని (కలర్ రేంజిని), క్లారిటీని బ్రైట్‌గా చేస్తుంది, విస్తరిస్తుంది. HDR కంటెంట్ చాలా బ్రైట్‌గా కనిపిస్తుంది."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ఆటోమేటిక్ స్క్రీన్ గడువు ముగింపు"</string>
@@ -2035,7 +2044,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"అమలయ్యేవి"</string>
     <string name="not_installed" msgid="5074606858798519449">"ఈ యూజర్‌కు ఇన్‌స్టాల్ చేయలేదు"</string>
     <string name="installed" msgid="2837449358488825884">"ఇన్‌స్టాల్ చేయబడింది"</string>
-    <string name="no_applications" msgid="985069304755391640">"యాప్‌లు లేవు."</string>
+    <string name="no_applications" msgid="5471491608902031500">"మ్యాచ్ అయ్యే యాప్‌లు లేవు"</string>
     <string name="internal_storage" msgid="999496851424448809">"అంతర్గత స్టోరేజ్‌"</string>
     <string name="recompute_size" msgid="1098091228370999128">"పరిమాణాన్ని మళ్లీ గణిస్తోంది…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"యాప్ డేటాను తొలగించాలా?"</string>
@@ -2391,15 +2400,11 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"మాకు రేటింగ్ ఇవ్వండి"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"కాంటాక్ట్ Google వైకల్య సపోర్ట్"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"యాక్సెసిబిలిటీ సర్వే"</string>
-    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
-    <skip />
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"మీ ఫీడ్‌బ్యాక్‌ను షేర్ చేయండి"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"డార్క్ థీమ్‌తో మీరు ఎంత మేరకు సంతృప్తి చెందారు?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"సర్వేలో పాల్గొనండి"</string>
-    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
-    <skip />
-    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
-    <skip />
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"మీ ఫీడ్‌బ్యాక్‌ను షేర్ చేయండి"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"మ్యాగ్నిఫికేషన్‌తో మీరు ఎంత మేరకు సంతృప్తి చెందారు?"</string>
     <string name="magnification_survey_notification_action" msgid="8042464088582144918">"సర్వేలో పాల్గొనండి"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"డౌన్‌లోడ్ చేసిన యాప్‌లు"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"ప్రయోగాత్మకం"</string>
@@ -2564,17 +2569,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"స్క్రీన్ వర్ధనాన్ని ఆటోమేటిక్‌గా అప్‌డేట్ చేయండి"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"యాప్‌ పరివర్తనాల్లో స్క్రీన్ వర్ధనాన్ని అప్‌డేట్ చేయండి"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"పవర్ బటన్ కాల్‌ను ముగిస్తుంది"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"ఆప్షన్‌లు"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"సమయం"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"స్టాండర్డ్"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"స్టాండర్డ్ డార్క్ థీమ్"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"మీ డివైజ్ అంతటా, సపోర్ట్ చేసే యాప్‌లకు డార్క్ థీమ్‌ను ఆటోమేటిక్‌గా వర్తింపజేస్తుంది."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"విస్తరించింది"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"డార్క్ థీమ్‌ను విస్తరించింది"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"మెరుగైన యాక్సెసిబిలిటీ కోసం మరిన్ని యాప్‌లకు ఆటోమేటిక్‌గా డార్క్ థీమ్‌ను వర్తింపజేస్తుంది"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"యానిమేషన్‌లను తీసివేయండి"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"స్క్రీన్ మీద కదలికను తగ్గించండి"</string>
@@ -2634,9 +2635,14 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"చిన్నది"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"అతి చిన్నది"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"మైనర్ కర్సర్ కదలికను విస్మరించండి"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"చర్య జరిగిన తర్వాత ఎడమ క్లిక్‌కు తిరిగి వెళ్లండి"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"ఆటో-క్లిక్‌ను ఉపయోగించడానికి మీ నావిగేషన్ మోడ్‌ను మార్చండి"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"ఆటో-క్లిక్ ఉపయోగిస్తున్నప్పుడు వెనుకకు, హోమ్‌కు వెళ్లి, యాప్‌లను మార్చడానికి, సంజ్ఞ నావిగేషన్‌కు బదులుగా 3-బటన్ నావిగేషన్‌ను ఉపయోగించండి"</string>
+    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
+    <skip />
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"3-బటన్ నావిగేషన్‌తో ఆటో-క్లిక్ ఉత్తమంగా పని చేస్తుంది"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"ఆటో-క్లిక్ ఉపయోగిస్తున్నప్పుడు సులభంగా వెనుకకు, హోమ్‌కు వెళ్లి, యాప్‌లను మార్చడానికి, సంజ్ఞ నావిగేషన్‌కు బదులుగా 3-బటన్ నావిగేషన్‌ను ఉపయోగించండి"</string>
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"సంజ్ఞ నావిగేషన్‌ను అలాగే ఉంచండి"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"నావిగేషన్ సెట్టింగ్‌లు"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"వైబ్రేషన్ &amp; ప్రతిస్పందనలు"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"వివిధ ఉపయోగాల కోసం వైబ్రేషన్ స్థాయిని కంట్రోల్ చేయండి"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"ఆన్‌లో ఉంది"</string>
@@ -2673,8 +2679,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"కలర్ మార్పిడి గురించి"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"కలర్ మార్పిడి గురించి మరింత తెలుసుకోండి"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"డార్క్ థీమ్ గురించి మరింత తెలుసుకోండి"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"విస్తరణ ఆప్షన్‌తో కొన్ని యాప్‌లు డార్క్ థీమ్‌తో పని చేయకపోవచ్చు. ఏ యాప్ అయినా సరిగ్గా కనిపించకపోతే, స్టాండర్డ్ ఆప్షన్‌ను ఉపయోగించండి."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"క్యాప్షన్‌లను చూపించండి"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"సపోర్ట్ ఉన్న యాప్ కోసం మాత్రమే"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"క్యాప్షన్ సైజ్ &amp; స్టయిల్"</string>
@@ -3436,6 +3441,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"కాల్, SMS హిస్టరీ ఈ యూజర్‌తో షేర్ చేయబడుతుంది."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"అడ్మిన్ హక్కులను తీసివేయాలా?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"ఈ యూజర్‌కు మీరు అడ్మిన్ హక్కులను తీసివేస్తే, తర్వాత ఎప్పుడైనా మీరు గానీ లేదా వేరే అడ్మిన్ గానీ, వారికి తిరిగి అడ్మిన్ హక్కులను ఇవ్వవచ్చు."</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"ఎమర్జెన్సీ సమాచారం"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> సంబంధిత సమాచారం &amp; కాంటాక్ట్‌లు"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g>‌ను తెరవండి"</string>
@@ -3800,10 +3809,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"వాల్‌పేపర్‌ను డిమ్ చేయండి"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"వాల్‌పేపర్‌ను డిమ్ చేయండి"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"వాల్‌పేపర్ బ్రైట్‌నెస్‌ను ఫిల్టర్ చేయండి"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"డార్క్ థీమ్‌ను ఎనేబుల్ చేయండి"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"డార్క్ థీమ్‌ను ఎనేబుల్ చేయండి"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"కంటికి హాయిగా ఉండే డార్క్ బ్యాక్‌గ్రౌండ్‌ను ఉపయోగించడానికి డివైజ్ థీమ్‌ను మార్చండి"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{డిస్‌ప్లేలో మార్పులు ఏవీ లేవు}=1{{effect_1}}=2{{effect_1}, {effect_2}}=3{{effect_1}, {effect_2}, {effect_3}}other{{effect_1}, {effect_2}, అలాగే మరో # ఎఫెక్ట్‌లు}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"అన్ని నోటిఫికేషన్‌లను అనుమతించండి"</string>
@@ -4372,8 +4379,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"అనుమతి మేనేజర్"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"లొకేషన్ కోసం డేటా షేరింగ్ అప్‌డేట్‌లు"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"మీ లొకేషన్ డేటాను షేర్ చేసే విధానాన్ని మార్చిన యాప్‌లను రివ్యూ చేయండి"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"ఇతర యాప్‌ల ఏజెంట్ కంట్రోల్"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"మీ డివైజ్‌లో, ఇతర యాప్‌లలో చర్యలను అమలు చేయండి"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"సక్రియం చేయడానికి నొక్కండి"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"పరికరాన్ని సక్రియం చేయడానికి స్క్రీన్‌పై ఎక్కడైనా రెండుసార్లు నొక్కండి"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"లింక్‌లను తెరవడం"</string>
@@ -5887,6 +5896,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PINను సెటప్ చేయండి"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"పర్యవేక్షణ, తల్లిదండ్రుల కంట్రోల్స్, తల్లిదండ్రులు, పర్యవేక్షణ PIN, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"మీ PINను మేనేజ్ చేయండి"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"తల్లి/తండ్రి PIN, తల్లిదండ్రుల కంట్రోల్స్ PIN"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"రికవరీ ఈమెయిల్‌ను జోడించండి"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"రికవరీ ఈమెయిల్‌ను వెరిఫై చేయండి"</string>
@@ -5908,7 +5919,8 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"ఈ సెట్టింగ్‌లు ఆఫ్‌లో ఉన్నప్పుడు, ఇతర ఖాతా సెట్టింగ్‌లు ఇప్పటికీ వర్తించవచ్చు."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"తల్లిదండ్రుల కంట్రోల్స్ PINను ఎంటర్ చేయండి"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"తల్లిదండ్రుల కంట్రోల్స్ PINను సెట్ చేయండి"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"PINను నిర్ధారించండి"</string>
+    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
+    <skip />
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN అప్‌డేట్ చేయబడింది"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"యాప్‌ను తెరవండి"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"PINను తొలగించాలనుకుంటున్నారా?"</string>

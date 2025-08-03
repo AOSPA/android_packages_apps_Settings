@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"ഡിസ്പ്ലേകൾക്കിടയിൽ നിങ്ങളുടെ മൗസ് നീക്കുക"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"ബാഹ്യ ഡിസ്പ്ലേ ഉപയോഗിക്കുക"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ഡിസ്‌പ്ലേ റെസല്യൂഷൻ"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"ഡിഫോൾട്ട് കണക്ഷൻ രീതി"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"പ്രത്യേക ഡിസ്പ്ലേ ആയി ഉപയോഗിക്കുക"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"ബിൽറ്റ്-ഇൻ ഡിസ്‌പ്ലേ മിറർ ചെയ്യുക"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"കണക്ഷൻ ഡയലോഗ് കാണിക്കുക"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"ബാഹ്യ ഡിസ്പ്ലേ വിച്ഛേദിച്ചിരിക്കുന്നു"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"റൊട്ടേഷൻ"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"സ്‌റ്റാൻഡേർഡ്"</string>
@@ -1012,6 +1016,9 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"കൂടുതൽ ഓപ്ഷനുകൾ"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"ഡിസ്പ്ലേകൾ പുനഃക്രമീകരിക്കാൻ വലിച്ചിടുക."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"ബിൽറ്റ്-ഇൻ ഡിസ്‌പ്ലേ മിറർ ചെയ്യുക"</string>
+    <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"പുതിയ ക്രമീകരണം ഉപയോഗിക്കണോ?"</string>
+    <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"നിങ്ങളുടെ ഡിസ്പ്ലേ നിങ്ങൾ ആഗ്രഹിക്കുന്നത് പോലെ പ്രവർത്തിക്കുന്നില്ലെങ്കിൽ, മുമ്പത്തെ ക്രമീകരണത്തിലേക്ക് നിങ്ങൾക്ക് മടങ്ങാം"</string>
+    <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"ക്രമീകരണം ഉപയോഗിക്കുക"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"മിറർ"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"വയർലസ്‌ഡിസ്പ്ലേ സജീവമാക്കൂ"</string>
@@ -1461,8 +1468,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"നിങ്ങളുടെ സ്ക്രീൻ കാണുന്നത് കൂടുതൽ സൗകര്യപ്രദമാക്കുന്നതിനും ചില സ്ക്രീനുകളിൽ ബാറ്ററി ഉപയോഗം കുറയ്ക്കുന്നതിനും ഇരുണ്ട പശ്ചാത്തലം ഉപയോഗിക്കുക. നിങ്ങൾക്കൊരു ഷെഡ്യൂൾ ഉണ്ടെങ്കിൽ, സ്ക്രീൻ ഓഫാകുന്ന സമയത്ത് നിങ്ങളുടെ തീം മാറും."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ഡാർക്ക് തീം നിലവിൽ നിങ്ങളുടെ ഉറക്ക സമയ മോഡ് ഷെഡ്യൂൾ പിന്തുടരുന്നു"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ഉറക്ക സമയ മോഡ് ക്രമീകരണം"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{മോഡുകൾക്ക് ഡാർക്ക് തീം ഓണാക്കാനും കഴിയും}=1{{mode_1} ഡാർക്ക് തീം ഓണാക്കുകയും ചെയ്യുന്നു}=2{{mode_1}, {mode_2} എന്നിവ ഡാർക്ക് തീം ഓണാക്കുകയും ചെയ്യുന്നു}=3{{mode_1}, {mode_2}, {mode_3} എന്നിവ ഡാർക്ക് തീം ഓണാക്കുകയും ചെയ്യുന്നു}other{{mode_1}, {mode_2}, എന്നിവയും മറ്റ് # മോഡുകളും ഡാർക്ക് തീം ഓണാക്കുകയും ചെയ്യുന്നു}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"മോഡുകൾ ക്രമീകരണം"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"ഹൈ ഡൈനാമിക് റേഞ്ചിലുള്ള (HDR) ചിത്രങ്ങളിലും വീഡിയോകളിലും വർണ്ണ പരിധിയും വ്യക്തതയും, തെളിച്ചമുള്ളതാക്കുകയും വിപുലീകരിക്കുകയും ചെയ്യുക. HDR ഉള്ളടക്കം കൂടുതൽ തെളിച്ചമുള്ളതാകും."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"സ്ക്രീൻ തെളിഞ്ഞിരിക്കുന്ന സമയപരിധി"</string>
@@ -2035,7 +2041,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"പ്രവര്‍ത്തിക്കുന്നു"</string>
     <string name="not_installed" msgid="5074606858798519449">"ഈ ഉപയോക്താവിനായി ഇൻസ്‌റ്റാളുചെയ്‌തിട്ടില്ല"</string>
     <string name="installed" msgid="2837449358488825884">"ഇന്‍‌സ്റ്റാൾ ചെയ്‌തു"</string>
-    <string name="no_applications" msgid="985069304755391640">"ആപ്പുകളൊന്നുമില്ല."</string>
+    <string name="no_applications" msgid="5471491608902031500">"പൊരുത്തമുള്ള ആപ്പുകളില്ല"</string>
     <string name="internal_storage" msgid="999496851424448809">"ആന്തരിക സ്റ്റോറേജ്"</string>
     <string name="recompute_size" msgid="1098091228370999128">"വലുപ്പം വീണ്ടും കണക്കാക്കുന്നു..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ആപ്പ് ഡാറ്റ ഇല്ലാതാക്കണോ?"</string>
@@ -2560,17 +2566,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"സ്‌ക്രീൻ മാഗ്‌നിഫിക്കേഷൻ സ്വയമേവ അപ്‌ഡേറ്റ് ചെയ്യുക"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ആപ്പ് സംക്രമണങ്ങളിൽ സ്‌ക്രീൻ മാഗ്‌നിഫിക്കേഷൻ അപ്‌ഡേറ്റ് ചെയ്യുക"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"പവർബട്ടൺ കോൾ നിർത്തുന്നു"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"ഓപ്‌ഷനുകൾ"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"സമയക്രമം"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"സ്‌റ്റാൻഡേർഡ്"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"സ്‌റ്റാൻഡേർഡ് ഡാർക്ക് തീം"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"നിങ്ങളുടെ ഉപകരണത്തിലും പിന്തുണയ്ക്കുന്ന ആപ്പുകളിലും ഉടനീളം ഡാർക്ക് തീം ബാധകമാക്കുന്നു"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"വികസിപ്പിച്ചു"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"വിപുലീകരിച്ച ഡാർക്ക് തീം"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"ഉപയോഗസഹായി മെച്ചപ്പെടുത്താൻ കൂടുതൽ ആപ്പുകളിൽ സ്വയമേവ ഡാർക്ക് തീം ബാധകമാക്കുന്നു"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ആനിമേഷനുകൾ നീക്കം ചെയ്യുക"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"സ്‌ക്രീനിലെ ചലനം കുറയ്‌ക്കുക"</string>
@@ -2630,9 +2632,12 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"ചെറുത്"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"വളരെ ചെറുത്"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"കഴ്‌സറിന്റെ നേരിയ ചലനം അവഗണിക്കുക"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"പ്രവൃത്തിക്ക് ശേഷം ഇടത് ക്ലിക്ക് പുനഃസ്ഥാപിക്കുക"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"ഓട്ടോക്ലിക്ക് ഉപയോഗിക്കാൻ നാവിഗേഷൻ മോഡ് മാറ്റുക"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"ഓട്ടോക്ലിക്ക് ഉപയോഗിക്കുമ്പോൾ ഹോമിലേക്ക് മടങ്ങാനും ആപ്പുകൾ മാറാനും ജെസ്ച്ചർ നാവിഗേഷന് പകരം 3-ബട്ടൺ നാവിഗേഷൻ ഉപയോഗിക്കുക"</string>
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"ഡിഫോൾട്ട് പ്രവർത്തനമായി ഇടത്-ക്ലിക്ക് ഉപയോഗിക്കുക"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"നിങ്ങൾ മറ്റൊരു പ്രവർത്തനം ഉപയോഗിക്കുമ്പോൾ, ഓട്ടോക്ലിക്ക് സ്വയമേവ ഇടത്-ക്ലിക്കിലേക്ക് തിരികെ മാറും"</string>
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"3-ബട്ടൺ നാവിഗേഷനിൽ ഓട്ടോക്ലിക്ക് മികച്ച രീതിയിൽ പ്രവർത്തിക്കുന്നു"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"ഓട്ടോക്ലിക്ക് ഉപയോഗിക്കുമ്പോൾ ഹോമിലേക്ക് എളുപ്പത്തിൽ മടങ്ങാനും ആപ്പുകൾ മാറാനും ജെസ്ച്ചർ നാവിഗേഷന് പകരം 3-ബട്ടൺ നാവിഗേഷൻ ഉപയോഗിക്കുക"</string>
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"ജെസ്ച്ചർ നാവിഗേഷൻ തുടരുക"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"നാവിഗേഷൻ ക്രമീകരണം"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"വെെബ്രേഷനും സ്പർശനവും"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"വ്യത്യസ്‌ത ഉപയോഗങ്ങൾക്കുള്ള വൈബ്രേഷൻ ദൃഢത നിയന്ത്രിക്കുക"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"ഓണാണ്"</string>
@@ -2669,8 +2674,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"നിറം വിപരീതമാക്കലിനെ കുറിച്ച്"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"നിറം വിപരീതമാക്കലിനെ കുറിച്ച് കൂടുതലറിയുക"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"ഡാർക്ക് തീമിനെ കുറിച്ച് കൂടുതലറിയുക"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"വിപുലീകരിച്ച ഓപ്ഷനുള്ള ഡാർക്ക് തീമിനെ ചില ആപ്പുകൾ പിന്തുണച്ചേക്കില്ല. നിങ്ങൾക്ക് ദൃശ്യവുമായി ബന്ധപ്പെട്ട പ്രശ്നങ്ങൾ അനുഭവപ്പെടുകയാണെങ്കിൽ, സ്റ്റാൻഡേർഡ് ഓപ്ഷൻ ഉപയോഗിക്കുക."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"അടിക്കുറിപ്പുകൾ കാണിക്കുക"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"പിന്തുണയുള്ള ആപ്പിന് മാത്രം"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"അടിക്കുറിപ്പിന്റെ വലുപ്പവും സ്‌റ്റെെലും"</string>
@@ -3432,6 +3436,8 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"ഈ ഉപയോക്താവുമായി കോൾ, SMS എന്നിവയുടെ ചരിത്രം പങ്കിടും."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"പ്രത്യേക അഡ്‌മിൻ അധികാരങ്ങൾ നീക്കം ചെയ്യണോ?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"നിങ്ങൾ ഈ ഉപയോക്താവിനുള്ള അഡ്‌മിന്റെ പ്രത്യേക അധികാരങ്ങൾ നീക്കം ചെയ്താൽ, അത് തിരികെ നൽകാൻ നിങ്ങൾക്കോ മറ്റൊരു അഡ്‌മിനോ കഴിയും."</string>
+    <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"അഡ്‌മിന്റെ പ്രത്യേക അധികാരങ്ങൾ നീക്കം ചെയ്യണമെന്ന് തീർച്ചയാണോ?"</string>
+    <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"നിങ്ങൾ തുടരുകയാണെങ്കിൽ, മറ്റ് അഡ്‌മിൻമാർക്ക് മാത്രമേ അഡ്‌മിന്റെ പ്രത്യേക അധികാരങ്ങൾ നിങ്ങൾക്ക് നൽകാനാകൂ."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"അടിയന്തര വിവരം"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> -യ്ക്കുള്ള വിവരങ്ങളും കോൺടാക്‌റ്റുകളും"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> തുറക്കുക"</string>
@@ -3796,10 +3802,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"വാൾപേപ്പർ മങ്ങിക്കുക"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"വാൾപേപ്പർ മങ്ങിക്കുക"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"വാൾപേപ്പറിന്റെ തെളിച്ചം ഫിൽട്ടർ ചെയ്യുക"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"ഡാർക്ക് തീം പ്രവർത്തനക്ഷമമാക്കുക"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"ഡാർക്ക് തീം പ്രവർത്തനക്ഷമമാക്കുക"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"കണ്ണുകൾക്ക് സുഖപ്രദമായ ഇരുണ്ട പശ്ചാത്തലം ഉപയോഗിക്കുന്നതിന് ഉപകരണ തീം മാറ്റുക"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{ഡിസ്പ്ലേ മാറ്റങ്ങളൊന്നുമില്ല}=1{{effect_1}}=2{{effect_1}, {effect_2} എന്നിവ}=3{{effect_1}, {effect_2}, {effect_3} എന്നിവ}other{{effect_1}, {effect_2} എന്നിവയും മറ്റ് # എണ്ണവും}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"എല്ലാ അറിയിപ്പുകളും അനുവദിക്കുക"</string>
@@ -4368,8 +4372,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"അനുമതി മാനേജർ"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"ലൊക്കേഷനുള്ള ഡാറ്റാ പങ്കിടൽ അപ്‌ഡേറ്റുകൾ"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"നിങ്ങളുടെ ലൊക്കേഷൻ ഡാറ്റ പങ്കിടുന്ന രീതി മാറ്റിയ ആപ്പുകൾ അവലോകനം ചെയ്യുക"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"മറ്റ് ആപ്പുകളുടെ ഏജന്റ് നിയന്ത്രണം"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"നിങ്ങളുടെ ഉപകരണത്തിലും മറ്റ് ആപ്പുകളിലും പ്രവർത്തനങ്ങൾ നടത്തുക"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"സജീവമാക്കാൻ ടാപ്പുചെയ്യുക"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"ഉപകരണം സജീവമാക്കാൻ സ്‌ക്രീനിലെവിടെയെങ്കിലും ഡബിൾ ടാപ്പ് ചെയ്യുക"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"ലിങ്കുകൾ തുറക്കൽ"</string>
@@ -5883,6 +5889,7 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"പിൻ സജ്ജീകരിക്കുക"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"മേൽനോട്ടം, രക്ഷാകർതൃ നിയന്ത്രണങ്ങൾ, രക്ഷിതാക്കൾ, മേൽനോട്ടത്തിനുള്ള പിൻ, പിൻ"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"നിങ്ങളുടെ പിൻ മാനേജ് ചെയ്യുക"</string>
+    <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"രക്ഷാകർതൃ നിയന്ത്രണങ്ങളുടെ പിൻ"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"രക്ഷിതാക്കൾ സജ്ജീകരിക്കുന്ന പിൻ, രക്ഷാകർതൃ നിയന്ത്രണങ്ങളുടെ പിൻ"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"വീണ്ടെടുക്കൽ ഇമെയിൽ ചേർക്കുക"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"വീണ്ടെടുക്കൽ ഇമെയിൽ പരിശോധിച്ചുറപ്പിക്കുക"</string>
@@ -5904,7 +5911,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"ഈ ക്രമീകരണം ഓഫായിരിക്കുമ്പോഴും, മറ്റ് അക്കൗണ്ട് ക്രമീകരണം തുടർന്നും ബാധകമായേക്കാം."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"രക്ഷാകർതൃ നിയന്ത്രണങ്ങളുടെ പിൻ നൽകുക"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"ഒരു രക്ഷാകർതൃ നിയന്ത്രണ പിൻ സജ്ജീകരിക്കുക"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"പിൻ സ്ഥിരീകരിക്കുക"</string>
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"രക്ഷാകർതൃ നിയന്ത്രണങ്ങളുടെ പിൻ സ്ഥിരീകരിക്കുക"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"പിൻ അപ്ഡേറ്റ് ചെയ്‌തു"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"ആപ്പ് തുറക്കുക"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"പിൻ ഇല്ലാതാക്കണോ?"</string>

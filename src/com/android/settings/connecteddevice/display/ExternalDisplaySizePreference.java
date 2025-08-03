@@ -20,24 +20,25 @@ import android.content.Context;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.Choreographer;
-import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilitySeekBarPreference;
 import com.android.settings.accessibility.DisplaySizeData;
 import com.android.settingslib.display.DisplayDensityUtils;
+import com.android.settingslib.widget.SliderPreference;
+
+import com.google.android.material.slider.Slider;
 
 /**
  * The display size preference setting used for External displays.
  */
-public class ExternalDisplaySizePreference extends AccessibilitySeekBarPreference {
+public class ExternalDisplaySizePreference extends SliderPreference {
     private int mDisplayWidth;
     private int mDisplayHeight;
     private int mDisplayId;
-    private Context mContext;
+    private final Context mContext;
 
     public ExternalDisplaySizePreference(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -67,26 +68,31 @@ public class ExternalDisplaySizePreference extends AccessibilitySeekBarPreferenc
         var displaySizeData = new DisplaySizeData(mContext,
                 new DisplayDensityUtils(mContext, (info) -> info.displayId == mDisplayId));
         setMax(displaySizeData.getValues().size() - 1);
-        setProgress(displaySizeData.getInitialIndex());
+        setSliderIncrement(1);
+        setMin(0);
+        setUpdatesContinuously(false);
+        setTickVisible(true);
+        setValue(displaySizeData.getInitialIndex());
 
         ExternalDisplaySizePreferenceStateHandler
                 seekBarChangeHandler =
                 new ExternalDisplaySizePreferenceStateHandler(
                         displaySizeData);
 
-        setContinuousUpdates(false);
-        setOnSeekBarChangeListener(seekBarChangeHandler);
+        setExtraChangeListener(seekBarChangeHandler);
+        setExtraTouchListener(seekBarChangeHandler);
     }
 
     private class ExternalDisplaySizePreferenceStateHandler
-            implements SeekBar.OnSeekBarChangeListener {
+            implements Slider.OnSliderTouchListener, Slider.OnChangeListener {
         private static final long MIN_COMMIT_INTERVAL_MS = 800;
         private static final long CHANGE_BY_BUTTON_DELAY_MS = 300;
         private static final long CHANGE_BY_SEEKBAR_DELAY_MS = 100;
         private final DisplaySizeData mDisplaySizeData;
-        private int mLastDisplayProgress = getProgress();
+        private int mLastDisplayProgress = getValue();
         private long mLastCommitTime;
         private boolean mSeekByTouch;
+
         ExternalDisplaySizePreferenceStateHandler(DisplaySizeData displaySizeData) {
             mDisplaySizeData = displaySizeData;
         }
@@ -94,7 +100,7 @@ public class ExternalDisplaySizePreference extends AccessibilitySeekBarPreferenc
         final Choreographer.FrameCallback mCommit = this::tryCommitDisplaySizeConfig;
 
         private void tryCommitDisplaySizeConfig(long unusedFrameTimeNanos) {
-            final int displayProgress = getProgress();
+            final int displayProgress = getValue();
             if (displayProgress != mLastDisplayProgress) {
                 mDisplaySizeData.commit(displayProgress);
                 mLastDisplayProgress = displayProgress;
@@ -113,17 +119,17 @@ public class ExternalDisplaySizePreference extends AccessibilitySeekBarPreferenc
         }
 
         @Override
-        public void onProgressChanged(@NonNull SeekBar seekBar, int i, boolean b) {
+        public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
             if (!mSeekByTouch) postCommitDelayed(CHANGE_BY_BUTTON_DELAY_MS);
         }
 
         @Override
-        public void onStartTrackingTouch(@NonNull SeekBar seekBar) {
+        public void onStartTrackingTouch(@NonNull Slider slider) {
             mSeekByTouch = true;
         }
 
         @Override
-        public void onStopTrackingTouch(@NonNull SeekBar seekBar) {
+        public void onStopTrackingTouch(@NonNull Slider slider) {
             mSeekByTouch = false;
             postCommitDelayed(CHANGE_BY_SEEKBAR_DELAY_MS);
         }

@@ -26,7 +26,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -42,8 +41,6 @@ import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
-import com.android.settings.accessibility.actionbar.DisabilitySupportMenuController;
-import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.accessibility.actionbar.SurveyMenuController;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -121,70 +118,6 @@ public class BaseSupportFragmentTest {
         when(mHost.getSettingsLifecycle()).thenReturn(mLifecycle);
         when(mHost.getActivity()).thenReturn(mActivity);
         when(mActivity.getResources()).thenReturn(mResources);
-    }
-
-    @Test
-    public void handleFeedbackFlow_metricsCategoryUnknown_shouldNotAttachToLifecycle() {
-        mHost.onCreate(/* savedInstanceState= */ null);
-
-        verify(mLifecycle, never()).addObserver(any(FeedbackMenuController.class));
-    }
-
-    @Test
-    public void handleFeedbackFlow_metricsCategoryKnown_shouldAttachToLifecycle() {
-        when(mHost.getMetricsCategory()).thenReturn(SettingsEnums.ACCESSIBILITY);
-
-        mHost.onCreate(/* savedInstanceState= */ null);
-
-        verify(mLifecycle).addObserver(any(FeedbackMenuController.class));
-    }
-
-    @Test
-    public void handleFeedbackFlow_feedbackCategoryUnknown_shouldNotAttachToLifecycle() {
-        when(mHost.getFeedbackCategory()).thenReturn(SettingsEnums.PAGE_UNKNOWN);
-
-        mHost.onCreate(/* savedInstanceState= */ null);
-
-        verify(mLifecycle, never()).addObserver(any(FeedbackMenuController.class));
-    }
-
-    @Test
-    public void initFeedbackMenuController_feedbackCategoryKnown_shouldAttachToLifecycle() {
-        when(mHost.getFeedbackCategory()).thenReturn(SettingsEnums.ACCESSIBILITY);
-
-        mHost.onCreate(/* savedInstanceState= */ null);
-
-        verify(mLifecycle).addObserver(any(FeedbackMenuController.class));
-    }
-
-    @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
-    public void handleDisabilitySupportFlow_disabilitySupportUrlNotEmpty_shouldAttachToLifecycle() {
-        when(mHost.getDisabilitySupportUrl()).thenReturn(PLACEHOLDER_DISABILITY_SUPPORT_URL);
-
-        mHost.onCreate(/* savedInstanceState= */ null);
-
-        verify(mLifecycle).addObserver(any(DisabilitySupportMenuController.class));
-    }
-
-    @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
-    public void handleDisabilitySupportFlow_disabilitySupportUrlEmpty_shouldNotAttachToLifecycle() {
-        when(mHost.getDisabilitySupportUrl()).thenReturn("");
-
-        mHost.onCreate(/* savedInstanceState= */ null);
-
-        verify(mLifecycle, never()).addObserver(any(DisabilitySupportMenuController.class));
-    }
-
-    @Test
-    @DisableFlags(com.android.settings.accessibility.Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
-    public void handleDisabilitySupportFlow_disableDisabilitySupport_shouldNotAttachToLifecycle() {
-        when(mHost.getDisabilitySupportUrl()).thenReturn(PLACEHOLDER_DISABILITY_SUPPORT_URL);
-
-        mHost.onCreate(/* savedInstanceState= */ null);
-
-        verify(mLifecycle, never()).addObserver(any(DisabilitySupportMenuController.class));
     }
 
     @Test

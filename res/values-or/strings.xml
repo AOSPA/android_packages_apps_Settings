@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"ଆପଣଙ୍କ ମାଉସକୁ ଡିସପ୍ଲେଗୁଡ଼ିକ ମଧ୍ୟରେ ମୁଭ କରନ୍ତୁ"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"ଏକ୍ସଟର୍ନଲ ଡିସପ୍ଲେ ବ୍ୟବହାର କରନ୍ତୁ"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ଡିସପ୍ଲେ ରିଜୋଲ୍ୟୁସନ"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"ଡିଫଲ୍ଟ କନେକ୍ସନ ଆଚରଣ"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"ପୃଥକ ଡିସପ୍ଲେ ଭାବେ ବ୍ୟବହାର କରନ୍ତୁ"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"ମିରର ବିଲ୍ଟ-ଇନ ଡିସପ୍ଲେ"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"କନେକ୍ସନ ଡାଏଲଗ ଦେଖାନ୍ତୁ"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"ଏକ୍ସଟର୍ନଲ ଡିସପ୍ଲେକୁ ଡିସକନେକ୍ଟ କରାଯାଇଛି"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"ରୋଟେସନ"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"ଷ୍ଟାଣ୍ଡାର୍ଡ"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"ଅଧିକ ବିକଳ୍ପ"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"ଡିସପ୍ଲେ ପୁଣି ସଜାଇବା ପାଇଁ ହୋଲ୍ଡ କରି ଟାଣନ୍ତୁ।"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"ମିରର ବିଲ୍ଟ-ଇନ ଡିସପ୍ଲେ"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ମିରର୍"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ୱେୟାରଲେସ୍‌ ପ୍ରଦର୍ଶନ ସକ୍ଷମ କରନ୍ତୁ"</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"ଆପଣଙ୍କ ସ୍କ୍ରିନକୁ ଭ୍ୟୁ କରିବା ଅଧିକ ଆରାମଦାୟକ କରିବା ଏବଂ କିଛି ସ୍କ୍ରିନରେ ବେଟେରୀ ବ୍ୟବହାର ହ୍ରାସ କରିବାକୁ ଏକ ଡାର୍କ ବେକଗ୍ରାଉଣ୍ଡକୁ ବ୍ୟବହାର କରନ୍ତୁ। ଯଦି ଆପଣଙ୍କର ଏକ ସିଡୁଲ ଅଛି, ତେବେ ସ୍କ୍ରିନ ବନ୍ଦ ଥିବା ସମୟରେ ଆପଣଙ୍କର ଥିମ ପରିବର୍ତ୍ତନ ହେବ।"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ବର୍ତ୍ତମାନ ଗାଢ଼ା ଥିମ ଆପଣଙ୍କ ଶୋଇବା ସମୟ ମୋଡ ସିଡୁଲକୁ ଅନୁସରଣ କରୁଛି"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ଶୋଇବା ସମୟ ମୋଡ ସେଟିଂସ"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{ମୋଡଗୁଡ଼ିକ ଡାର୍କ ଥିମକୁ ମଧ୍ୟ ଚାଲୁ କରିପାରିବ}=1{{mode_1} ଡାର୍କ ଥିମକୁ ମଧ୍ୟ ଚାଲୁ କରେ}=2{{mode_1} ଏବଂ {mode_2} ଡାର୍କ ଥିମକୁ ମଧ୍ୟ ଚାଲୁ କରେ}=3{{mode_1}, {mode_2} ଏବଂ {mode_3} ଡାର୍କ ଥିମକୁ ମଧ୍ୟ ଚାଲୁ କରେ}other{{mode_1}, {mode_2} ଏବଂ ଅଧିକ # ଡାର୍କ ଥିମକୁ ମଧ୍ୟ ଚାଲୁ କରେ}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"ମୋଡ ସେଟିଂସ"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"ହାଇ ଡାଇନାମିକ ରେଞ୍ଜ (HDR) ଇମେଜ ଏବଂ ଭିଡିଓଗୁଡ଼ିକରେ ରଙ୍ଗର ରେଞ୍ଜ ଏବଂ ସ୍ପଷ୍ଟତାକୁ ଉଜ୍ଜ୍ୱଳ ଏବଂ ବିସ୍ତାର କରେ। HDR ବିଷୟବସ୍ତୁ ଉଜ୍ଜ୍ୱଳ ଦେଖାଯିବ।"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ସ୍କ୍ରିନ ଟାଇମଆଉଟ"</string>
@@ -2035,7 +2044,8 @@
     <string name="filter_apps_running" msgid="535465683273284141">"ଚାଲୁଛି"</string>
     <string name="not_installed" msgid="5074606858798519449">"ଏହି ୟୁଜରଙ୍କ ପାଇଁ ଇନଷ୍ଟଲ କରାଯାଇନାହିଁ"</string>
     <string name="installed" msgid="2837449358488825884">"ଇନ୍‌ଷ୍ଟଲ୍‌ କରାଯାଇଛି"</string>
-    <string name="no_applications" msgid="985069304755391640">"କୌଣସି ଆପ୍‌ ନାହିଁ।"</string>
+    <!-- no translation found for no_applications (5471491608902031500) -->
+    <skip />
     <string name="internal_storage" msgid="999496851424448809">"ଇଣ୍ଟର୍ନଲ୍‌ ଷ୍ଟୋରେଜ୍‌"</string>
     <string name="recompute_size" msgid="1098091228370999128">"ଆକାରକୁ ପୁଣି ଗଣୁଛି…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ଆପର ଡାଟା ଡିଲିଟ କରିବେ?"</string>
@@ -2560,17 +2570,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"ସ୍କ୍ରିନ୍‌ ମ୍ୟାଗ୍ନିଫାୟର୍‌ ସ୍ୱତଃ ଅପଡେଟ୍‌ କରନ୍ତୁ"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ଆପ୍‌ ବଦଳିବାବେଳେ ସ୍କ୍ରୀନ୍‌କୁ ବଡ଼ କର"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"ପାୱାର ବଟନ କଲ ସମାପ୍ତ କରେ"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"ବିକଳ୍ପ"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"ସମୟ"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"ଷ୍ଟାଣ୍ଡାର୍ଡ"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"ଷ୍ଟାଣ୍ଡାର୍ଡ ଡାର୍କ ଥିମ"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"ଆପଣଙ୍କ ଡିଭାଇସ ଏବଂ ସପୋର୍ଟ କରୁଥିବା ଆପ୍ସରେ ଡାର୍କ ଥିମ ଲାଗୁ କରେ"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"ବିସ୍ତାର କରାଯାଇଛି"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"ବିସ୍ତାରିତ ଡାର୍କ ଥିମ"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"ଉନ୍ନତ ଆକ୍ସେସିବିଲିଟୀ ପାଇଁ ଅଧିକ ଆପ୍ସରେ ସ୍ୱତଃ ଡାର୍କ ଥିମ ଲାଗୁ କରେ"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ଆନିମେସନଗୁଡ଼ିକୁ କାଢ଼ିଦିଅନ୍ତୁ"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"ସ୍କ୍ରିନରେ ମୁଭମେଣ୍ଟକୁ କମ କରନ୍ତୁ"</string>
@@ -2630,9 +2636,16 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"ଛୋଟ"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"ଅତିରିକ୍ତ ଛୋଟ"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"ସାମାନ୍ୟ କର୍ସର ମୁଭମେଣ୍ଟକୁ ଅଣଦେଖା କରନ୍ତୁ"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"କାର୍ଯ୍ୟ ପରେ ବାମପଟ କ୍ଲିକକୁ ରିଭାର୍ଟ କରନ୍ତୁ"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"ଅଟୋକ୍ଲିକ ବ୍ୟବହାର କରିବା ପାଇଁ ଆପଣଙ୍କ ନାଭିଗେସନ ମୋଡକୁ ପରିବର୍ତ୍ତନ କରନ୍ତୁ"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"ଅଟୋକ୍ଲିକ ବ୍ୟବହାର କରିବା ସମୟରେ ପଛକୁ ଫେରିବା, ହୋମକୁ ଯିବା ଏବଂ ଆପ୍ସ ସ୍ୱିଚ କରିବା ପାଇଁ, ଜେଶ୍ଚର ନାଭିଗେସନ ପରିବର୍ତ୍ତେ 3-ବଟନ ନାଭିଗେସନକୁ ବ୍ୟବହାର କରନ୍ତୁ"</string>
+    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
+    <skip />
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"3-ବଟନ ନାଭିଗେସନ ସହିତ ଅଟୋକ୍ଲିକ ଆହୁରି ଭଲ କାମ କରେ"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"ଅଟୋକ୍ଲିକ ବ୍ୟବହାର କରିବା ସମୟରେ ସହଜରେ ପଛକୁ ଫେରିବା, ହୋମକୁ ଯିବା ଏବଂ ଆପ୍ସ ସ୍ୱିଚ କରିବା ପାଇଁ, ଜେଶ୍ଚର ନାଭିଗେସନ ପରିବର୍ତ୍ତେ 3-ବଟନ ନାଭିଗେସନକୁ ବ୍ୟବହାର କରନ୍ତୁ"</string>
+    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"ଭାଇବ୍ରେସନ ଓ ହାପଟିକ୍ସ"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"ବିଭିନ୍ନ ପ୍ରକାରର ବ୍ୟବହାର ପାଇଁ ଭାଇବ୍ରେସନ କ୍ଷମତାକୁ ନିୟନ୍ତ୍ରଣ କରନ୍ତୁ"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"ଚାଲୁ ଅଛି"</string>
@@ -2669,8 +2682,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"କଲର ଇନଭର୍ସନ ବିଷୟରେ"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"କଲର ଇନଭର୍ସନ ବିଷୟରେ ଅଧିକ ଜାଣନ୍ତୁ"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"ଡାର୍କ ଥିମ ବିଷୟରେ ଅଧିକ ଜାଣନ୍ତୁ"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"କିଛି ଆପ୍ସ ବିସ୍ତାରିତ ବିକଳ୍ପ ସହ ଡାର୍କ ଥିମକୁ ସପୋର୍ଟ କରିନପାରେ। ଯଦି ଆପଣ ଏପିଏରେନ୍ସ ସମସ୍ୟାର ସମ୍ମୁଖୀନ ହୁଅନ୍ତି, ତେବେ ଷ୍ଟାଣ୍ଡାର୍ଡ ବିକଳ୍ପକୁ ବ୍ୟବହାର କରନ୍ତୁ।"</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"କେପ୍ସନଗୁଡ଼ିକୁ ଦେଖାନ୍ତୁ"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"କେବଳ ସମର୍ଥିତ ଆପ ପାଇଁ"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"କେପ୍ସନର ସାଇଜ ଏବଂ ଷ୍ଟାଇଲ"</string>
@@ -3432,6 +3444,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"କଲ୍‌ ଏବଂ SMS ଇତିହାସ ଏହି ୟୁଜରଙ୍କ ସହ ସେୟାର୍ କରାଯିବ।"</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"ଆଡମିନଙ୍କ ବିଶେଷ ଅଧିକାରଗୁଡ଼ିକୁ କାଢ଼ି ଦେବେ?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"ଯଦି ଆପଣ ଏହି ୟୁଜରଙ୍କ ପାଇଁ ଆଡମିନଙ୍କ ବିଶେଷ ଅଧିକାରଗୁଡ଼ିକୁ କାଢ଼ି ଦିଅନ୍ତି, ତେବେ ଆପଣ କିମ୍ବା ଅନ୍ୟ ଜଣେ ଆଡମିନ ପରେ ପୁଣି ସେଗୁଡ଼ିକ ଦେଇପାରିବେ।"</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"ଜରୁରୀକାଳୀନ ସୂଚନା"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>ଙ୍କ ପାଇଁ ସୂଚନା ଓ ସମ୍ପର୍କ"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> ଖୋଲନ୍ତୁ"</string>
@@ -3796,10 +3812,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"ୱାଲପେପରକୁ ଡିମ କରନ୍ତୁ"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"ୱାଲପେପରକୁ ଡିମ କରନ୍ତୁ"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"ୱାଲପେପରର ଉଜ୍ଜ୍ୱଳତାକୁ ଫିଲ୍ଟର କରନ୍ତୁ"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"ଡାର୍କ ଥିମକୁ ସକ୍ଷମ କରନ୍ତୁ"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"ଡାର୍କ ଥିମକୁ ସକ୍ଷମ କରନ୍ତୁ"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"ଏକ ଡାର୍କ ବେକଗ୍ରାଉଣ୍ଡ ବ୍ୟବହାର କରିବାକୁ ଡିଭାଇସ ଥିମ ସୁଇଚ କରନ୍ତୁ, ଯାହା ଆଖି ପାଇଁ ଆରାମଦାୟକ ଅଟେ"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{ଡିସପ୍ଲେରେ କୌଣସି ପରିବର୍ତ୍ତନ ନାହିଁ}=1{{effect_1}}=2{{effect_1} ଏବଂ {effect_2}}=3{{effect_1}, {effect_2} ଏବଂ {effect_3}}other{{effect_1}, {effect_2} ଏବଂ # ଅଧିକ}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"ସମସ୍ତ ବିଜ୍ଞପ୍ତିକୁ ଅନୁମତି ଦିଅନ୍ତୁ"</string>
@@ -4368,8 +4382,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"ଅନୁମତି ପରିଚାଳକ"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"ଲୋକେସନ ପାଇଁ ଡାଟା ସେୟାରିଂ ଅପଡେଟଗୁଡ଼ିକ"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ଆପଣଙ୍କ ଲୋକେସନ ଡାଟା ସେୟାର କରିବାର ଉପାୟକୁ ପରିବର୍ତ୍ତନ କରିଥିବା ଆପ୍ସକୁ ସମୀକ୍ଷା କରନ୍ତୁ"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"ଅନ୍ୟ ଆପ୍ସର ଏଜେଣ୍ଟ ନିୟନ୍ତ୍ରଣ"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"ଆପଣଙ୍କ ଡିଭାଇସ ଏବଂ ଅନ୍ୟ ଆପ୍ସରେ କାର୍ଯ୍ୟ ପରଫର୍ମ କରନ୍ତୁ"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"ଜାଗ୍ରତ କରିବାକୁ ଟାପ୍‌ କରନ୍ତୁ"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"ଡିଭାଇସ୍‌କୁ ଜାଗ୍ରତ କରିବା ପାଇଁ ସ୍କ୍ରୀନ୍‌ର ଯେକୌଣସି ସ୍ଥାନରେ ଟାପ୍‌ କରନ୍ତୁ"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"ଓପନିଂ ଲିଙ୍କ୍"</string>
@@ -5884,6 +5900,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN ସେଟ ଅପ କରନ୍ତୁ"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"ନିରୀକ୍ଷଣ, ବାପାମାଙ୍କ ନିୟନ୍ତ୍ରଣ, ବାପାମା, ନିରୀକ୍ଷଣ PIN, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"ଆପଣଙ୍କ PINକୁ ପରିଚାଳନା କରନ୍ତୁ"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"ବାପାମାଙ୍କ PIN, ବାପାମାଙ୍କ ନିୟନ୍ତ୍ରଣ PIN"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"ରିକଭରି ଇମେଲ ଯୋଗ କରନ୍ତୁ"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"ରିକଭରି ଇମେଲକୁ ଯାଞ୍ଚ କରନ୍ତୁ"</string>
@@ -5905,7 +5923,8 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"ଏହି ସେଟିଂସ ବନ୍ଦ ଥିବା ସମୟରେ, ଅନ୍ୟ ଆକାଉଣ୍ଟ ସେଟିଂସ ଏବେ ବି ଲାଗୁ ହୋଇପାରେ।"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"ବାପାମାଙ୍କ ନିୟନ୍ତ୍ରଣ PIN ଲେଖନ୍ତୁ"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"ଏକ ବାପାମାଙ୍କ ନିୟନ୍ତ୍ରଣ PIN ସେଟ କରନ୍ତୁ"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"PIN ସୁନିଶ୍ଚିତ କରନ୍ତୁ"</string>
+    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
+    <skip />
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PINକୁ ଅପଡେଟ କରାଯାଇଛି"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"ଆପ ଖୋଲନ୍ତୁ"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"PIN ଡିଲିଟ କରିବେ?"</string>

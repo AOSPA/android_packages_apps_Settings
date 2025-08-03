@@ -176,7 +176,8 @@ public class ToggleDaltonizerPreferenceFragmentTest extends
                 "top_intro",
                 "daltonizer_preview",
                 "general_categories",
-                "html_description"
+                "html_description",
+                "feedback"
         );
 
         assertThat(niks).containsExactlyElementsIn(keys);

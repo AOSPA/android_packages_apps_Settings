@@ -19,6 +19,7 @@ package com.android.settings.connecteddevice.display
 import android.app.Application
 import android.database.ContentObserver
 import android.provider.Settings
+import android.provider.Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY
 import android.view.Display.DEFAULT_DISPLAY
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.AndroidViewModel
@@ -39,12 +40,14 @@ constructor(
         val enabledDisplays: Map<Int, DisplayDevice>,
         val selectedDisplayId: Int,
         val isMirroring: Boolean,
+        val includeDefaultDisplayInTopology: Boolean,
     )
 
     private val appContext = application.applicationContext
     private val selectedDisplayId = MutableLiveData<Int>()
     private val enabledDisplays = MutableLiveData<Map<Int, DisplayDevice>>()
     private val isMirroring = MutableLiveData<Boolean>()
+    private val includeDefaultDisplayInTopology = MutableLiveData<Boolean>()
 
     private val uiStateMediator = MediatorLiveData<DisplayUiState>()
     val uiState: LiveData<DisplayUiState> = uiStateMediator
@@ -64,23 +67,37 @@ constructor(
             }
         }
 
+    @VisibleForTesting
+    val includeDefaultDisplayInTopologyObserver =
+        object : ContentObserver(injector.handler) {
+            override fun onChange(selfChange: Boolean) {
+                updateIncludeDefaultDisplayInTopology()
+            }
+        }
+
     init {
         val updateMediator = {
             val displays = enabledDisplays.value ?: emptyMap()
             val selectedId = selectedDisplayId.value ?: getDefaultDisplayId()
             val mirroring = isMirroring.value ?: isDisplayInMirroringMode(appContext)
-            uiStateMediator.value = DisplayUiState(displays, selectedId, mirroring)
+            val includeDefaultDisplayInTopology =
+                includeDefaultDisplayInTopology.value ?: isIncludeDefaultDisplayInTopology()
+            uiStateMediator.value =
+                DisplayUiState(displays, selectedId, mirroring, includeDefaultDisplayInTopology)
         }
         uiStateMediator.addSource(enabledDisplays) { updateMediator() }
         uiStateMediator.addSource(selectedDisplayId) { updateMediator() }
         uiStateMediator.addSource(isMirroring) { updateMediator() }
+        uiStateMediator.addSource(includeDefaultDisplayInTopology) { updateMediator() }
 
         injector.registerDisplayListener(displayListener)
         registerMirrorModeObserver()
+        registerIncludeDefaultDisplayInTopologyObserver()
 
         updateSelectedDisplay(getDefaultDisplayId())
         updateEnabledDisplays()
         updateMirroringState()
+        updateIncludeDefaultDisplayInTopology()
     }
 
     override fun onCleared() {
@@ -128,6 +145,28 @@ constructor(
             mirrorModeObserver,
         )
     }
+
+    private fun updateIncludeDefaultDisplayInTopology() {
+        val newState = isIncludeDefaultDisplayInTopology()
+        if (includeDefaultDisplayInTopology.value != newState) {
+            includeDefaultDisplayInTopology.value = newState
+        }
+    }
+
+    private fun registerIncludeDefaultDisplayInTopologyObserver() {
+        appContext.contentResolver.registerContentObserver(
+            Settings.Secure.getUriFor(INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY),
+            /* notifyForDescendants= */ false,
+            includeDefaultDisplayInTopologyObserver,
+        )
+    }
+
+    private fun isIncludeDefaultDisplayInTopology() =
+        Settings.Secure.getInt(
+            appContext.getContentResolver(),
+            INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY,
+            0,
+        ) != 0
 
     private fun getDefaultDisplayId(): Int {
         return injector.displayTopology?.primaryDisplayId ?: DEFAULT_DISPLAY

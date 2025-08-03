@@ -99,4 +99,12 @@
         app:controller="com.android.settings.accessibility.screenmagnification.FooterPreferenceController"
         app:searchable="false" />
 
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="feedback"
+        android:title="@string/accessibility_send_feedback_title"
+        android:icon="@drawable/ic_feedback"
+        app:searchable="false"
+        app:buttonPreferenceSize="normal"
+        app:buttonPreferenceType="tonal"
+        app:controller="com.android.settings.accessibility.FeedbackButtonPreferenceController" />
 </PreferenceScreen>

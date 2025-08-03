@@ -25,7 +25,9 @@ import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Settings.DarkThemeSettingsActivity
+import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.Flags
+import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
 import com.android.settings.contract.KEY_DARK_THEME
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.metrics.PreferenceActionMetricsProvider
@@ -106,6 +108,7 @@ abstract class BaseDarkModeScreen(context: Context) :
                     +ExpandedDarkModeSelectorPreference(modeStorage)
                 }
             }
+            +FeedbackButtonPreference(FeedbackManager(context, metricsCategory))
         }
 
     override fun storage(context: Context): KeyValueStore = darkModeStorage

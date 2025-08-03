@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Hambisa i-mouse yakho phakathi kwezibonisi"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Sebenzisa ukubonisa kwangaphandle"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Ukucaca kokubonisa"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"Ukuziphatha Kokuxhuma Okuzenzakalelayo"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Sebenzisa njengesibonisi esihlukile"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Fanisa ukubonisa okwakhelwe ngaphakathi"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Bonisa idayalogu yokuxhuma"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Ukubonisa kwangaphandle kunqanyuliwe"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Ukuzungezisa"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Okujwayelekile"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Okungakhethwa kukho okuningi"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Cindezela bese uyadonsa ukuze uhlele ukubukeka."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Fanisa ukubonisa kwangaphakathi"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"isibuko"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Nika amandla ukubukeka okungenantambo "</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Sebenzisa ingemuva elimnyama ukuze wenze isikrini sakho sibukeke ngendlela engakulimazi futhi unciphise ukusetshenziswa kwebhethri kwezinye izikrini. Itimu yakho izoshintsha uma uneshejuli, lapho isikrini sicinyiwe."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Itimu emnyama okwamanje ilandela ishejuli yemodi yesikhathi sokulala"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Amasethingi emodi yesikhathi sokulala"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Amamodi angaphinda avule itimu Emnyama}=1{I-{mode_1} futhi ivula itimu Emnyama}=2{I-{mode_1} ne- {mode_2} futhi ivula itimu Emnyama}=3{I-{mode_1}, I-{mode_2}, ne-{mode_3} futhi uvule itimu Emnyama}one{I-{mode_1}, I-{mode_2}, namanye angu-# engeziwe nawo avula itimu Emnyama}other{I-{mode_1}, I-{mode_2}, namanye angu-# engeziwe nawo avula itimu Emnyama}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Amasethingi amamodi"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Gqamisa futhi unwebe ububanzi bombala nokucaca ezithombeni nakumavidiyo ngeHigh Dynamic Range (i-HDR). Ikhontenti ye-HDR izovela igqamile."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Isikrini siphelelwe yisikhathi"</string>
@@ -2036,7 +2045,8 @@
     <string name="filter_apps_running" msgid="535465683273284141">"Sebenzayo"</string>
     <string name="not_installed" msgid="5074606858798519449">"Akufakiwe kulo msebenzisi"</string>
     <string name="installed" msgid="2837449358488825884">"Kufakiwe"</string>
-    <string name="no_applications" msgid="985069304755391640">"Azikho izinhlelo zokusebenza"</string>
+    <!-- no translation found for no_applications (5471491608902031500) -->
+    <skip />
     <string name="internal_storage" msgid="999496851424448809">"Isitoreji sangaphakathi"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Ilungisa kabusha usayizi..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Ngabe ususa yonke imininingo yohlelo lokusebenza?"</string>
@@ -2392,15 +2402,11 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Silinganise"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Thinta iGoogle Disability Support"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Inhlolovo Yokufinyeleleka"</string>
-    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
-    <skip />
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Yabelana ngempendulo yakho"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Ugculiseke kangakanani ngetimu Emnyama?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Yenza inhlolovo"</string>
-    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
-    <skip />
-    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
-    <skip />
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Yabelana ngempendulo yakho"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Ugculiseke kangakanani ngokukhuliswa?"</string>
     <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Yenza inhlolovo"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Izinhlelo zokusebenza ezila"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Okokulinga"</string>
@@ -2566,17 +2572,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Buyekeza ngokuzenzakalela isisondezi-skrini"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Buyekeza isisondezi-skrini ekushintshweni kohlelo lokusebenza"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Inkinobho yamandla ivala ikholi"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"Okungakhethwa kukho"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"Isikhathi"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Okujwayelekile"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Itimu Emnyama Ejwayelekile"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Isebenzisa itimu Emnyama kudivayisi yakho nakuma-app asekelwe"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Kunwetshiwe"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Itimu Emnyama Enwetshiwe"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Isebenzisa ngokuzenzakalela itimu Emnyama kuma-app amaningi ngokufinyeleleka okuthuthukisiwe"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Susa ukugqwayiza"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Yehlisa ukunyakaza esikrinini"</string>
@@ -2636,9 +2638,16 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Esincane"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Kuncane kakhulu"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Ziba ukunyakaza kwe-cursor okuncane"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"Buyela ekuchofozeni ngakwesokunxele ngemuva kwesenzo"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"Shintsha imodi yakho yokusebenzisa ukuze usebenzise ukuchofoza okuzenzakalelayo"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"Ukuze ubuyele emuva, Ekhaya, futhi ushintshe ama-app uma usebenzisa ukuchofoza okuzenzakalelayo, sebenzisa ukuzula kwezinkinobho ezi-3 esikhundleni sokuzula kokuthinta"</string>
+    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
+    <skip />
+    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
+    <skip />
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Ukuchofoza ngokuzenzakalelayo kusebenza kahle ngezinkinobho ezi-3 zokuzula"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Ukuze ubuyele emuva, Ekhaya, futhi ushintshe ama-app uma usebenzisa ukuchofoza okuzenzakalelayo, sebenzisa ukuzula kwezinkinobho ezi-3 esikhundleni sokuzula kokuthinta"</string>
+    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
+    <skip />
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Ukudlidliza nama-haptic"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Lawula amandla wokudlidliza wokusetshenziswa okwehlukile"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Vuliwe"</string>
@@ -2675,8 +2684,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Mayelana nokuguqulwa kombala"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Funda kabanzi ngokuguqulwa kombala"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Funda kabanzi ngetimu eMnyama"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"Amanye ama-app angase angayisekeli itimu Emnyama kokungakhethwa kukho okunwetshiwe. Uma uhlangabezana nenkinga yokubukeka, sebenzisa okungakhethwa kukho okujwayelekile."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Bonisa amagama-ncazo"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Ngokwe-app esekelwe kuphela"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Usayizi nesitayela samagama-ncazo"</string>
@@ -3438,6 +3446,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Umlando wekholi ne-SMS uzokwabiwa nalo msebenzisi."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Susa amalungelo okuphatha?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Uma ususa amalungelo okuphatha alo msebenzisi, wena noma omunye umlawuli ningawabuyisela kamuva."</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Ulwazi lwesimo esiphuthumayo"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Ulwazi noxhumana nabo baka-<xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Vula i-<xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3802,10 +3814,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Fiphaza isithombe sangemuva"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"fiphaza isithombe sangemuva"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Hlunga ukukhanya kwesithombe sangemuva"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Gunyaza itimu Emnyama"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"gunyaza itimu Emnyama"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Shintsha itimu yedivayisi ukuze usebenzise ingemuva emnyama, engawahlukumezi kakhulu amehlo"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Azikho izinguquko zokubonisa}=1{I-{effect_1}}=2{I-{effect_1} ne-{effect_2}}=3{I-{effect_1}, i-{effect_2}, ne-{effect_3}}one{I-{effect_1}, i-{effect_2}, nokungu-# ngaphezulu}other{I-{effect_1}, i-{effect_2}, nokungu-# ngaphezulu}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Vumela zonke izaziso"</string>
@@ -4374,8 +4384,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"Isiphathi semvume"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Izibuyekezo zokwabelana ngedatha zendawo"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Buyekeza ama-app aguqule indlela angabelana ngayo ngedatha yendawo yakho"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Isilawuli somenzeli samanye ama-app"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Yenza izenzo kudivayisi yakho nakwamanye ama-app"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"Thepha ukuze uvuse"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Thepha kabili noma yikuphi kusikrini ukuze uvuse idivayisi"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Ivula amalinki"</string>
@@ -5889,6 +5901,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Setha Iphinikhodi"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"ukugadwa, izilawuli zomzali, iphinikhodi yokuqaphela kwabazali , iphinikhodi"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Lawula Iphinikhodi yakho"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Iphinikhodi yomzali, I-PIN yezilawuli zomzali"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Faka i-imeyili yokutakula"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Qinisekisa i-imeyili yokutakula"</string>
@@ -5910,7 +5924,8 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Uma lawa masethingi avaliwe, amanye amasethingi e-akhawunti asengasebenza."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Faka Iphinikhodi yezilawuli zomzali"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Setha iphinikhodi yezilawuli zabazali"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Qinisekisa iphinikhodi"</string>
+    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
+    <skip />
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Iphinikhodi ibuyekeziwe"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Vula i-app"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Sula i-PIN?"</string>

@@ -201,13 +201,6 @@ class LaunchAccessibilityActivityPreferenceFragmentTest :
         assertThat(fragment!!.metricsCategory).isEqualTo(SettingsEnums.ACCESSIBILITY_SERVICE)
     }
 
-    @Test
-    fun getFeedbackCategory() {
-        launchFragment()
-
-        assertThat(fragment!!.feedbackCategory).isEqualTo(SettingsEnums.ACCESSIBILITY_SERVICE)
-    }
-
     private fun launchFragment(a11yShortcutInfo: AccessibilityShortcutInfo) {
         a11yManager.setInstalledAccessibilityShortcutListAsUser(listOf(a11yShortcutInfo))
         val bundle = Bundle()

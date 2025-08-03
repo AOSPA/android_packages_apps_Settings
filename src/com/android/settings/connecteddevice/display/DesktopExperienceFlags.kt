@@ -50,8 +50,16 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) :
             Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING,
         )
 
+    private val resolutionAndEnableConnectedDisplaySettingBugfixFlag =
+        DesktopExperienceFlag(
+            featureFlagsImpl::resolutionAndEnableConnectedDisplaySettingBugfix,
+            /* shouldOverrideByDevOption= */ true,
+            Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX,
+        )
+
     override fun resolutionAndEnableConnectedDisplaySetting(): Boolean =
-        resolutionAndEnableConnectedDisplaySettingFlag.isTrue
+        resolutionAndEnableConnectedDisplaySettingFlag.isTrue or
+            resolutionAndEnableConnectedDisplaySettingBugfixFlag.isTrue
 
     private val showStackedMirroringDisplayConnectedDisplaySettingFlag =
         DesktopExperienceFlag(

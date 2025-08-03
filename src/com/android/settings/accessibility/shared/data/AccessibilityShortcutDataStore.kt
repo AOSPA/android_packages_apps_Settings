@@ -19,6 +19,8 @@ package com.android.settings.accessibility.shared.data
 import android.content.ComponentName
 import android.content.Context
 import android.view.accessibility.AccessibilityManager
+import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME
+import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.internal.accessibility.common.ShortcutConstants
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.PreferredShortcut
@@ -46,7 +48,13 @@ open class AccessibilityShortcutDataStore(
     private val settingsStore: KeyValueStore = SettingsSecureStore.get(context),
 ) : AbstractKeyedDataObservable<String>(), KeyedObserver<String>, KeyValueStore {
 
-    protected open val shortcutSettingsKey = ShortcutConstants.GENERAL_SHORTCUT_SETTINGS.toList()
+    protected open val shortcutSettingsKey =
+        if (componentName == MAGNIFICATION_COMPONENT_NAME) {
+            ShortcutConstants.MAGNIFICATION_SHORTCUT_SETTINGS.toList()
+        } else {
+            ShortcutConstants.GENERAL_SHORTCUT_SETTINGS.toList()
+        }
+
     private val keyChangeFlow = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
 
     init {
@@ -109,11 +117,6 @@ open class AccessibilityShortcutDataStore(
     @ShortcutConstants.UserShortcutType
     open fun getDefaultShortcutTypes(): Int = ShortcutConstants.UserShortcutType.SOFTWARE
 
-    // TODO(b/147990389): Delete this function after we migrated to MAGNIFICATION_COMPONENT_NAME.
-    open fun getComponentNameAsString(): String {
-        return componentName.flattenToString()
-    }
-
     /** Returns the user preferred shortcut types or the default shortcut types if not set */
     @ShortcutConstants.UserShortcutType
     fun getUserShortcutTypes(): Int {
@@ -130,6 +133,14 @@ open class AccessibilityShortcutDataStore(
             getDefaultShortcutTypes(),
         )
     }
+
+    // TODO(b/147990389): Delete this function after we migrated to MAGNIFICATION_COMPONENT_NAME.
+    private fun getComponentNameAsString() =
+        if (componentName == MAGNIFICATION_COMPONENT_NAME) {
+            MAGNIFICATION_CONTROLLER_NAME
+        } else {
+            componentName.flattenToString()
+        }
 
     private fun updatePreferredShortcuts() {
         val shortcutTypes =

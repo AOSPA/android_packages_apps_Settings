@@ -999,6 +999,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Mova o mouse entre as telas"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Usar tela externa"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolução da tela"</string>
+    <string name="external_display_connection_preference" msgid="9158531639269299045">"Comportamento de conexão padrão"</string>
+    <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Usar como tela separada"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Espelhar tela integrada"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Mostrar caixa de diálogo de conexão"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"A tela externa está desconectada"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Rotação"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Padrão"</string>
@@ -1012,6 +1016,12 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Mais opções"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Pressione e arraste para reorganizar as telas."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Espelhar tela integrada"</string>
+    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"espelho"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Ativar tela sem fio"</string>
@@ -1461,8 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Use um plano de fundo escuro para facilitar a visualização e reduzir o uso da bateria em algumas telas. Quando a tela estiver desligada, o tema vai mudar se você tiver uma programação."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"O tema escuro está seguindo sua programação do modo hora de dormir"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Configurações do modo hora de dormir"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (5714706755357926751) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Os modos também podem ativar o tema escuro.}=1{O modo {mode_1} também ativa o tema escuro}=2{Os modos {mode_1} e {mode_2} também ativam o tema escuro}=3{Os modos {mode_1}, {mode_2} e {mode_3} também ativam o tema escuro}one{Os modos {mode_1}, {mode_2} e mais # também ativam o tema escuro}other{Os modos {mode_1}, {mode_2} e mais # também ativam o tema escuro}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Configurações de modos"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Melhore o brilho e a variedade de cores e a nitidez em imagens e vídeos High Dynamic Range (HDR). O conteúdo HDR vai aparecer mais claro."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Tempo limite da tela"</string>
@@ -2035,7 +2044,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"Rodando"</string>
     <string name="not_installed" msgid="5074606858798519449">"Não instalado para o usuário"</string>
     <string name="installed" msgid="2837449358488825884">"Instalado"</string>
-    <string name="no_applications" msgid="985069304755391640">"Nenhum app"</string>
+    <string name="no_applications" msgid="5471491608902031500">"Nenhum app correspondente"</string>
     <string name="internal_storage" msgid="999496851424448809">"Espaço interno"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Recalculando o tamanho…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Excluir os dados do app?"</string>
@@ -2391,15 +2400,11 @@
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Envie sua avaliação"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Suporte à Acessibilidade do Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Pesquisa sobre acessibilidade"</string>
-    <!-- no translation found for dark_theme_survey_notification_title (662387994868661452) -->
-    <skip />
-    <!-- no translation found for dark_theme_survey_notification_summary (2893701785229702405) -->
-    <skip />
+    <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Envie feedback"</string>
+    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Qual é seu nível de satisfação com o tema escuro?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Responda à pesquisa"</string>
-    <!-- no translation found for magnification_survey_notification_title (8308432889772152950) -->
-    <skip />
-    <!-- no translation found for magnification_survey_notification_summary (2238290609820811258) -->
-    <skip />
+    <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Envie feedback"</string>
+    <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Qual é seu nível de satisfação com a ampliação?"</string>
     <string name="magnification_survey_notification_action" msgid="8042464088582144918">"Responda à pesquisa"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Apps baixados"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentais"</string>
@@ -2564,17 +2569,13 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Atual. autom. da ampliação da tela"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Atualiz. ampliação da tela em transições de aplic."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Botão liga/desliga encerra chamadas"</string>
-    <!-- no translation found for dark_theme_version_category (3555549588764154187) -->
-    <skip />
-    <!-- no translation found for dark_theme_timing_category (8115211396437085819) -->
-    <skip />
+    <string name="dark_theme_version_category" msgid="3555549588764154187">"Opções"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"Marcação de tempo"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Padrão"</string>
-    <!-- no translation found for accessibility_standard_dark_theme_title_in_search (1374136983709402050) -->
-    <skip />
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Tema escuro padrão"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Aplica o tema escuro no dispositivo e nos apps compatíveis"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expandido"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_title_in_search (7467343853315678576) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Tema escuro expandido"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Aplica automaticamente o tema escuro em mais apps para melhorar a acessibilidade"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remover animações"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduzir o movimento na tela"</string>
@@ -2634,9 +2635,12 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Pequena"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Muito pequena"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Ignorar pequenos movimentos do cursor"</string>
-    <string name="autoclick_revert_to_left_click_title" msgid="9213418243482609005">"Reverter para o clique com botão esquerdo após a ação"</string>
-    <string name="accessibility_autoclick_navigation_title" msgid="6808216178814576714">"Mude o modo de navegação para usar o clique automático"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="112626284307103141">"Para voltar, acessar a tela inicial e alternar entre apps ao usar o clique automático, use a navegação com três botões em vez da navegação por gestos"</string>
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"Usar o clique com o botão esquerdo como ação padrão"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Quando você usar outra ação, o clique automático vai reverter automaticamente para o clique com o botão esquerdo"</string>
+    <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"O clique automático funciona melhor na navegação com três botões"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Para voltar, acessar a tela inicial e alternar entre apps ao usar o clique automático, use a navegação com três botões em vez da navegação por gestos"</string>
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Manter a navegação por gestos"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Configurações de navegação"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibração e retorno tátil"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Controle a intensidade da vibração para diferentes usos"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Ativados"</string>
@@ -2673,8 +2677,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Sobre a inversão de cores"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Saiba mais sobre a inversão de cores"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Saiba mais sobre o tema escuro"</string>
-    <!-- no translation found for accessibility_dark_theme_preference_footer_content (3162327942873394910) -->
-    <skip />
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"É possível que alguns apps ainda não sejam compatíveis com o tema escuro na opção expandida. Se você tiver problemas com a aparência, use a opção padrão."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Mostrar legendas"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Apenas para apps com suporte"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Tamanho e estilo das legendas"</string>
@@ -3436,6 +3439,10 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"O histórico de ligações e SMS será compartilhado com este usuário."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Remover privilégios de administrador?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Se você remover os privilégios de administrador desse usuário, eles poderão ser restituídos por outro administrador."</string>
+    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
+    <skip />
+    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Informações de emergência"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informações e contatos de <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Abrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3800,10 +3807,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Escurecer o plano de fundo"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"escurecer o plano de fundo"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrar o brilho do plano de fundo"</string>
-    <!-- no translation found for mode_dark_theme_title (1938553262958310149) -->
-    <skip />
-    <!-- no translation found for mode_dark_theme_title_secondary_list (2590918156799917127) -->
-    <skip />
+    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Ativar tema escuro"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"ativar tema escuro"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Mude o tema do dispositivo para usar um plano de fundo escuro, que é mais agradável aos olhos"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nenhuma mudança na tela}=1{{effect_1}}=2{{effect_1} e {effect_2}}=3{{effect_1}, {effect_2} e {effect_3}}one{{effect_1}, {effect_2} e mais #}other{{effect_1}, {effect_2} e mais #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permitir todas as notificações"</string>
@@ -4369,8 +4374,10 @@
     <string name="app_permissions" msgid="8666537659217653626">"Gestão de permissões"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Atualizações no compartilhamento de dados de local"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Revise os apps que mudaram a forma como podem compartilhar seus dados de local"</string>
-    <string name="app_function_access_settings_title" msgid="1474765429611652468">"Outros apps são controlados por um agente"</string>
-    <string name="app_function_access_settings_summary" msgid="6465715820745848068">"Realizar ações no dispositivo e em outros apps"</string>
+    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
+    <skip />
+    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"Tocar para ativar"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Toque duas vezes em qualquer parte da tela para ativar o dispositivo"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Abrir links"</string>
@@ -5884,6 +5891,8 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Definir o PIN"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"supervisão, controles da família, família, PIN de supervisão, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Gerenciar PIN"</string>
+    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
+    <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN da família, PIN dos controles da família"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Adicionar e-mail de recuperação"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Verificar e-mail de recuperação"</string>
@@ -5905,7 +5914,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Quando essas configurações são desativadas, outras configurações da conta ainda podem ser aplicadas."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Digite o PIN dos controles da família"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Definir um PIN dos controles da família"</string>
-    <string name="supervision_confirm_your_pin_header" msgid="8236956712482718354">"Confirmar PIN"</string>
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Confirmar o PIN dos controles da família"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN atualizado"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Abrir app"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Excluir o PIN?"</string>
