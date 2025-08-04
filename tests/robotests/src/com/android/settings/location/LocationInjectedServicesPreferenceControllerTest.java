@@ -72,7 +72,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
-    private static final String KEY_LOCATION_SERVICES = "location_service";
+    private static final String KEY_LOCATION_SERVICES = "location_services_screen";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LocationSettings mFragment;

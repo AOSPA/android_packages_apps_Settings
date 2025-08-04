@@ -19,6 +19,7 @@ package com.android.settings.network
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
+import android.telephony.SubscriptionManager
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.AdaptiveConnectivitySettingsActivity
@@ -51,7 +52,16 @@ open class AdaptiveConnectivityScreen : PreferenceScreenMixin {
         preferenceHierarchy(context) {
             if (Flags.enableNestedToggleSwitches()) {
                 +WifiScorerTogglePreference()
-                +AdaptiveMobileNetworkTogglePreference()
+                val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
+                val shouldHideMobileNetworkToggle =
+                    subscriptionManager != null &&
+                        SubscriptionUtil.hasSubscriptionForMobileNetworkToggleDisable(
+                            context,
+                            subscriptionManager,
+                        )
+                if (!shouldHideMobileNetworkToggle) {
+                    +AdaptiveMobileNetworkTogglePreference()
+                }
             } else {
                 +AdaptiveConnectivityTogglePreference()
             }

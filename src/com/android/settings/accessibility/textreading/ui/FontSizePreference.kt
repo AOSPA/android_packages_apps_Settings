@@ -51,24 +51,28 @@ import kotlinx.coroutines.launch
 
 internal class FontSizePreference(context: Context, @EntryPoint private val entryPoint: Int) :
     IntRangeValuePreference, SliderPreferenceBinding, PreferenceLifecycleProvider {
-    private val fontSizeDataStore = FontSizeDataStore(context = context, entryPoint = entryPoint)
-    private val fontSizes = fontSizeDataStore.fontSizeData.value.values
-    private val fontSizesLabel =
+    private val fontSizeDataStore by lazy {
+        FontSizeDataStore(context = context, entryPoint = entryPoint)
+    }
+    private val fontSizes by lazy { fontSizeDataStore.fontSizeData.value.values }
+    private val fontSizesLabel by lazy {
         fontSizes
             .map { value ->
                 context.getString(SettingsLibR.string.font_scale_percentage, (value * 100).toInt())
             }
             .toTypedArray()
+    }
     private var isDraggingSlider = false
-    private val _fontSizePreview = MutableStateFlow(fontSizeDataStore.fontSizeData.value)
+    private val _fontSizePreview by lazy { MutableStateFlow(fontSizeDataStore.fontSizeData.value) }
     /**
      * [fontSizePreview] is the temporary font size while the user is dragging and haven't commit
      * the change. This is useful when trying to display preview of the size changes.
      */
-    val fontSizePreview = _fontSizePreview.asStateFlow()
+    val fontSizePreview by lazy { _fontSizePreview.asStateFlow() }
 
-    private val debounceCommitController =
+    private val debounceCommitController by lazy {
         DebounceConfigurationChangeCommitController(minCommitDelay = MIN_COMMIT_DELAY)
+    }
 
     override fun getReadPermissions(context: Context) = Permissions.EMPTY
 

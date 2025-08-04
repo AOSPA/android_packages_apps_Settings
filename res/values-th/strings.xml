@@ -1016,12 +1016,9 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"ตัวเลือกเพิ่มเติม"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"กดค้างแล้วลากเพื่อจัดเรียงจอแสดงผลใหม่"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"จอแสดงผลมิเรอร์ในตัว"</string>
-    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
-    <skip />
+    <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"ใช้การตั้งค่าใหม่ใช่ไหม"</string>
+    <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"หากจอแสดงผลไม่ทำงานตามที่คุณต้องการ คุณสามารถเปลี่ยนกลับไปใช้การตั้งค่าก่อนหน้าได้"</string>
+    <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"ใช้การตั้งค่า"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"มิเรอร์"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"เปิดใช้การแสดงผลแบบไร้สาย"</string>
@@ -2044,8 +2041,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"ที่กำลังใช้งาน"</string>
     <string name="not_installed" msgid="5074606858798519449">"ไม่ได้ติดตั้งสำหรับผู้ใช้นี้"</string>
     <string name="installed" msgid="2837449358488825884">"ติดตั้งแล้ว"</string>
-    <!-- no translation found for no_applications (5471491608902031500) -->
-    <skip />
+    <string name="no_applications" msgid="5471491608902031500">"ไม่มีแอปที่ตรงกัน"</string>
     <string name="internal_storage" msgid="999496851424448809">"ที่เก็บข้อมูลภายใน"</string>
     <string name="recompute_size" msgid="1098091228370999128">"กำลังคำนวณขนาดใหม่..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ลบข้อมูลแอปไหม"</string>
@@ -2636,16 +2632,12 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"เล็ก"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"เล็กพิเศษ"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"ไม่สนใจการขยับเคอร์เซอร์เพียงเล็กน้อย"</string>
-    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
-    <skip />
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"ใช้คลิกซ้ายเป็นการดำเนินการเริ่มต้น"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"เมื่อคุณใช้การดำเนินการอื่น การคลิกอัตโนมัติจะเปลี่ยนกลับไปเป็นการคลิกซ้ายโดยอัตโนมัติ"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"การคลิกอัตโนมัติจะทำงานได้ดีขึ้นเมื่อใช้การไปยังส่วนต่างๆ แบบ 3 ปุ่ม"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"หากต้องการย้อนกลับไปที่หน้าแรกอย่างง่ายๆ และสลับแอปเมื่อใช้การคลิกอัตโนมัติ ให้ใช้การไปยังส่วนต่างๆ แบบ 3 ปุ่มแทนการไปยังส่วนต่างๆ ด้วยท่าทางสัมผัส"</string>
-    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
-    <skip />
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"ใช้การไปยังส่วนต่างๆ ด้วยท่าทางสัมผัสต่อไป"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"การตั้งค่าไปยังส่วนต่างๆ"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"การสั่นและการโต้ตอบการสัมผัส"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"ควบคุมความแรงของการสั่นสำหรับการใช้งานที่แตกต่างกัน"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"เปิด"</string>
@@ -3444,10 +3436,8 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"ระบบจะแชร์ประวัติการโทรและ SMS กับผู้ใช้รายนี้"</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"นำสิทธิ์ของผู้ดูแลระบบออกใช่ไหม"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"หากนำสิทธิ์ของผู้ดูแลระบบออกจากผู้ใช้รายนี้ คุณหรือผู้ดูแลระบบคนอื่นสามารถให้สิทธิ์ดังกล่าวอีกครั้งในภายหลังได้"</string>
-    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
-    <skip />
-    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
-    <skip />
+    <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"แน่ใจไหมว่าจะนำสิทธิ์ของผู้ดูแลระบบของคุณออก"</string>
+    <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"มีเพียงผู้ดูแลระบบรายอื่นเท่านั้นที่จะให้สิทธิ์ของผู้ดูแลระบบแก่คุณได้ หากดำเนินการต่อ"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"ข้อมูลสำหรับกรณีฉุกเฉิน"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"ข้อมูลและรายชื่อติดต่อสำหรับ <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"เปิด <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -5899,8 +5889,7 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"ตั้งค่า PIN"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"การควบคุมดูแล, การควบคุมโดยผู้ปกครอง, ผู้ปกครอง, PIN การควบคุมดูแล, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"จัดการ PIN"</string>
-    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
-    <skip />
+    <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN การควบคุมโดยผู้ปกครอง"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN ของผู้ปกครอง, PIN การควบคุมโดยผู้ปกครอง"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"เพิ่มอีเมลสำหรับการกู้คืน"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"ยืนยันอีเมลสำหรับการกู้คืน"</string>
@@ -5922,8 +5911,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"เมื่อปิดการตั้งค่าเหล่านี้ การตั้งค่าบัญชีอื่นๆ อาจยังคงมีผล"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"ป้อน PIN การควบคุมโดยผู้ปกครอง"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"ตั้งค่า PIN การควบคุมโดยผู้ปกครอง"</string>
-    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
-    <skip />
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"ยืนยัน PIN การควบคุมโดยผู้ปกครอง"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"อัปเดต PIN แล้ว"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"เปิดแอป"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"ลบ PIN ไหม"</string>

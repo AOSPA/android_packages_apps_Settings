@@ -1016,12 +1016,9 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"その他のオプション"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"ディスプレイを並べ替えるには長押ししてドラッグします。"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"内蔵ディスプレイをミラーリングする"</string>
-    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
-    <skip />
+    <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"新しい設定を使用しますか？"</string>
+    <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"ディスプレイが想定どおりに動作しない場合は、以前の設定に戻すことができます"</string>
+    <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"設定を使用"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ミラー"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ワイヤレス ディスプレイの有効化"</string>
@@ -1801,8 +1798,8 @@
     <string name="ethernet_network_usage" msgid="3795965384177426780">"ネットワーク使用状況"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"イーサネット テザリング"</string>
     <string name="ethernet_modify" msgid="1326316717004440503">"変更"</string>
-    <string name="tethering_footer_info" msgid="6824352505979800594">"このデバイスをアクセス ポイントとして機能させてテザリングすることで、データ通信のインターネット接続を他のデバイスと共有できます。アプリがアクセス ポイントを作成して、近くのデバイスに接続する場合もあります。"</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"このデバイスをアクセス ポイントとして機能させてテザリングすることで、Wi-Fi またはモバイルデータ通信のインターネット接続を他のデバイスと共有できます。アプリがアクセス ポイントを作成して、近くのデバイスに接続する場合もあります。"</string>
+    <string name="tethering_footer_info" msgid="6824352505979800594">"テザリングによりこのデバイスをアクセス ポイントとして使い、データ通信のインターネット接続を周囲のデバイスと共有できます。アプリがアクセス ポイントを作成して、近くのデバイスに接続する場合もあります。"</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"テザリングによりこのデバイスをアクセス ポイントとして使い、Wi-Fi またはモバイルデータ通信のインターネット接続を周囲のデバイスと共有できます。アプリがアクセス ポイントを作成して、近くのデバイスに接続する場合もあります。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ヘルプ"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"モバイル ネットワーク"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"SMS アプリ"</string>
@@ -2635,10 +2632,8 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"小"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"特小"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"軽微なカーソルの動きを無視する"</string>
-    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
-    <skip />
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"左クリックをデフォルトの操作として使用する"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"他の操作を行うと、自動クリックは自動的に左クリックに戻ります"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"3 ボタン ナビゲーションで自動クリックを有効活用"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"自動クリックを使用しているときに、戻る、ホームに移動する、アプリを切り替えるなどの操作を行うには、ジェスチャー ナビゲーションではなく 3 ボタン ナビゲーションを使用してください"</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"ジェスチャー ナビゲーションを維持する"</string>
@@ -3324,7 +3319,7 @@
     <string name="vpn_save" msgid="683868204634860888">"保存"</string>
     <string name="vpn_connect" msgid="7102335248484045354">"接続"</string>
     <string name="vpn_replace" msgid="1533147558671640341">"置換"</string>
-    <string name="vpn_edit" msgid="5862301148429324911">"VPN プロファイルの編集"</string>
+    <string name="vpn_edit" msgid="5862301148429324911">"VPN プロファイルを編集"</string>
     <string name="vpn_forget" msgid="2913950864877236737">"削除"</string>
     <string name="vpn_connect_to" msgid="216709261691085594">"<xliff:g id="PROFILE">%s</xliff:g>に接続"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"この VPN の接続を解除しますか？"</string>
@@ -3441,10 +3436,8 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"通話とSMSの履歴がこのユーザーと共有されます。"</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"管理者権限を削除しますか？"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"このユーザーの管理者権限を削除しても、あなたや他の管理者が後で管理者権限を再設定できます。"</string>
-    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
-    <skip />
-    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
-    <skip />
+    <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"ご自身の管理者権限を削除してもよろしいですか？"</string>
+    <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"続行すると、管理者権限を付与できるのは他の管理者のみになります。"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"緊急時情報"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>の情報と連絡先"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g>を開く"</string>
@@ -4379,10 +4372,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"権限マネージャー"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"位置情報を共有する方法の更新"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ユーザーの位置情報を共有する方法が変更されたアプリを確認"</string>
-    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1837117989202166166">"エージェント"</string>
+    <string name="app_function_access_settings_summary" msgid="3654291845453799170">"アプリで情報にアクセスし、操作できるエージェント"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"タップして復帰"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"画面をダブルタップするとデバイスが復帰します"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"リンクを開く"</string>
@@ -5896,8 +5887,7 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN を設定"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"管理機能, 保護者による使用制限, 保護者, 管理機能用の PIN, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN の管理"</string>
-    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
-    <skip />
+    <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"保護者による使用制限の PIN"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"保護者用 PIN, 保護者による使用制限の PIN"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"再設定用のメールアドレスの追加"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"再設定用のメールアドレスの検証"</string>
@@ -5919,8 +5909,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"これらの設定を OFF にしても、他のアカウント設定が適用される場合があります。"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"保護者による使用制限の PIN を入力"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"保護者による使用制限の PIN を設定する"</string>
-    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
-    <skip />
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"保護者による使用制限の PIN を確認する"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN を更新しました"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"アプリを開く"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"PIN を削除しますか？"</string>

@@ -98,7 +98,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
     private DevicePolicyManager mDevicePolicyManager;
     private SensorPrivacyManager.OnSensorPrivacyChangedListener mPrivacyChangedListener;
     private boolean mIsUserAuthenticated = false;
-    private final CancellationSignal mCancellationSignal = new CancellationSignal();
+    private CancellationSignal mCancellationSignal;
 
     @VisibleForTesting Context mContext;
 
@@ -192,6 +192,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
             mPrivacyManager.addSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
         }
         mIsUserAuthenticated = false;
+        mCancellationSignal = new CancellationSignal();
         if (!isCatalystScreenTimeoutQ3Enabled()) {
             FeatureFactory.getFeatureFactory()
                     .getDisplayFeatureProvider()

@@ -19,30 +19,20 @@ package com.android.settings.privacy
 import android.app.appfunctions.AppFunctionManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.permission.flags.Flags
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
+import com.android.settings.appfunctions.AppFunctionAccessUtil
 import com.android.settings.core.BasePreferenceController
 
 /** PreferenceController which hides the App Function access if app functions aren't enabled */
-class AppFunctionAccessPreferenceController(context: Context, preferenceKey: String)
-    : BasePreferenceController(context, preferenceKey) {
+class AppFunctionAccessPreferenceController(context: Context, preferenceKey: String) :
+    BasePreferenceController(context, preferenceKey) {
     override fun getAvailabilityStatus(): Int {
-        return if (isAppFunctionAccessEnabled(mContext)) {
+        return if (AppFunctionAccessUtil.isAppFunctionAccessEnabled(mContext)) {
             AVAILABLE
         } else {
             UNSUPPORTED_ON_DEVICE
         }
-    }
-
-    private fun isAppFunctionAccessEnabled(context: Context) : Boolean {
-        val packageManager: PackageManager = context.getPackageManager()
-        // TODO(b/414805948): Add app function access API flag here once exported
-        return Flags.appFunctionAccessUiEnabled()
-            && !packageManager.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE)
-            && !packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)
-            && !packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH);
     }
 
     override fun displayPreference(screen: PreferenceScreen) {
@@ -50,8 +40,9 @@ class AppFunctionAccessPreferenceController(context: Context, preferenceKey: Str
 
         val pref = screen.findPreference<Preference>(preferenceKey)
         if (pref != null) {
-            pref.intent = Intent(AppFunctionManager.ACTION_MANAGE_APP_FUNCTION_ACCESS)
-                .setPackage(mContext.packageManager.permissionControllerPackageName)
+            pref.intent =
+                Intent(AppFunctionManager.ACTION_MANAGE_APP_FUNCTION_ACCESS)
+                    .setPackage(mContext.packageManager.permissionControllerPackageName)
         }
     }
 }

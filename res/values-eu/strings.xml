@@ -479,7 +479,7 @@
     <string name="fingerprint_check_enroll_touch_sensor" msgid="5010063281557456236">"Ukitu hatz-marken sentsorea"</string>
     <string name="fingerprint_check_enroll_not_recognized" msgid="2779520550437394431">"Ez da ezagutu hatz-marka"</string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Erloju bidez desblokeatzea"</string>
-    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Ikusi"</string>
+    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Erlojua"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Aurpegi eta hatz-marka bidez desblokeatzeko eginbideak konfiguratzen badituzu, telefonoak hatz-marka eskatuko dizu inoiz maskara bat jantzita edo argi gutxirekin telefonoa aurpegiaren bidez desblokeatzen saiatuz gero.\n\nErloju bidez desblokeatzea telefonoa desblokeatzeko beste modu eroso bat da; adibidez, hatzak bustita dauzkazunean edo aurpegia ezagutzen ez denean."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Erloju bidez desblokeatzea telefonoa desblokeatzeko beste modu eroso bat da; adibidez, hatz-marka ezagutzen ez denean."</string>
     <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Erloju bidez desblokeatzea telefonoa desblokeatzeko beste modu eroso bat da; adibidez, aurpegia ezagutzen ez denean."</string>
@@ -2044,8 +2044,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"Abian"</string>
     <string name="not_installed" msgid="5074606858798519449">"Ez dago instalatuta erabiltzaile honentzat"</string>
     <string name="installed" msgid="2837449358488825884">"Instalatuta"</string>
-    <!-- no translation found for no_applications (5471491608902031500) -->
-    <skip />
+    <string name="no_applications" msgid="5471491608902031500">"Ez dago bat datorren aplikaziorik"</string>
     <string name="internal_storage" msgid="999496851424448809">"Barneko memoria"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Tamaina berriro kalkulatzen…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Aplikazioko datuak ezabatu nahi dituzu?"</string>
@@ -2308,7 +2307,7 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Erabiltzaileak hautatua: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Hizketa"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Hizketa"</string>
-    <string name="speech_preference_summary" msgid="5190362663352347487">"Kontrolatu hizketa-hautematea eta emaitza"</string>
+    <string name="speech_preference_summary" msgid="5190362663352347487">"Kontrolatu hizketa-hautematea eta ahots-irteera"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Erakuslearen abiadura"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Kurtsorearen tamaina"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Txikitu erakuslearen eskala"</string>
@@ -2399,7 +2398,7 @@
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Sistema kontrolatzeko aukerak"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Bidali oharrak"</string>
     <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Balora gaitzazu"</string>
-    <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Jarri Google-ren desgaitasunen laguntza-zerbitzuarekin harremanetan"</string>
+    <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Jarri Google-ren desgaitasuna duten pertsonentzako laguntza-taldearekin harremanetan"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Erabilerraztasunari buruzko inkesta"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Partekatu iritzia"</string>
     <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Zeinen gustura zaude gai ilunarekin?"</string>
@@ -2642,10 +2641,8 @@
     <skip />
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Automatikoki klik egiteko eginbideak hobeto funtzionatzen du 3 botoiko nabigazioarekin"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Automatikoki klik egiteko eginbidearen bidez erraz itzultzeko, orri nagusira joateko eta aplikazioak aldatzeko, erabili 3 botoiko nabigazioa keinu bidezko nabigazioaren ordez"</string>
-    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
-    <skip />
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Mantendu keinu bidezko nabigazioa"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Nabigazio-ezarpenak"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Dardara eta teknologia haptikoa"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Konfiguratu dardararen indarra erabileraren arabera"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Aktibatuta"</string>
@@ -5913,7 +5910,7 @@
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Egiaztatu helbide elektronikoa"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Webguneen eduki-iragazkiak"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Webguneen iragazkiak, webguneak blokeatzea, arakatzaileen iragazkiak, webgune esplizituak blokeatzea, webguneak iragaztea, bilaketa-emaitzak blokeatzea, bilaketa-emaitza esplizituak iragaztea, edukiaren murriztapenak"</string>
-    <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Lagundu eduki esplizitua iragazten telefono honetako zenbait aplikazio eta arakatzailetan. Baliteke eduki esplizitua beste aplikazio, gailu edo arakatzaile batzuetan agertzea."</string>
+    <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Telefono honetako zenbait aplikazio eta arakatzailetan eduki esplizitua iragazten laguntzen dute. Baliteke eduki esplizitua beste aplikazio, gailu edo arakatzaile batzuetan agertzea."</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Webguneak"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"Blokeatu webgune esplizituak"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"Bilaketa-emaitzak"</string>

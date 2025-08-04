@@ -40,7 +40,7 @@ class OutlineTextPreference(context: Context, @EntryPoint private val entryPoint
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
-    private val storage = OutlineTextDataStore(context, entryPoint)
+    private val storage by lazy { OutlineTextDataStore(context, entryPoint) }
 
     override val keywords: Int
         get() = R.string.keywords_maximize_text_contrast

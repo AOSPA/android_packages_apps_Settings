@@ -66,7 +66,11 @@ class TextReadingPreviewTest {
             )
         )
 
-    private val previewMetadata = TextReadingPreview(displaySizeDataFlow, fontSizeDataFlow)
+    private val previewMetadata =
+        TextReadingPreview(
+            displaySizeProvider = { displaySizeDataFlow },
+            fontSizeProvider = { fontSizeDataFlow },
+        )
     private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
 

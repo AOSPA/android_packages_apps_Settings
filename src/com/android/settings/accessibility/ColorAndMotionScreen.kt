@@ -77,7 +77,7 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
                         +RemoveAnimationsPreference()
                     }
             }
-            +FeedbackButtonPreference(FeedbackManager(context, metricsCategory))
+            +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
             // LINT.ThenChange(/res/xml/accessibility_color_and_motion.xml,
             // /src/com/android/settings/accessibility/ColorAndMotionFragment.java:ui_hierarchy)
         }

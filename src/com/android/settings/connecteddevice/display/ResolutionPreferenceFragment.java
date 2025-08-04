@@ -51,16 +51,19 @@ import java.util.HashSet;
 import java.util.List;
 
 public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase {
-    private static final String TAG = "ResolutionPreference";
-    static final int DEFAULT_LOW_REFRESH_RATE = 60;
-    static final String MORE_OPTIONS_KEY = "more_options";
-    static final String TOP_OPTIONS_KEY = "top_options";
-    static final int MORE_OPTIONS_TITLE_RESOURCE = R.string.external_display_more_options_title;
+    @VisibleForTesting static final int TOP_MODE_RES_MAX_COUNT = 3;
+    @VisibleForTesting static final String MORE_OPTIONS_KEY = "more_options";
+    @VisibleForTesting static final String TOP_OPTIONS_KEY = "top_options";
+
+    @VisibleForTesting
     static final int EXTERNAL_DISPLAY_RESOLUTION_SETTINGS_RESOURCE =
             R.xml.external_display_resolution_settings;
-    static final String DISPLAY_MODE_LIMIT_OVERRIDE_PROP =
-            "persist.sys.com.android.server.display"
-                    + ".feature.flags.enable_mode_limit_for_external_display-override";
+
+    private static final String TAG = "ResolutionPreference";
+    private static final int MORE_OPTIONS_TITLE_RESOURCE =
+            R.string.external_display_more_options_title;
+    private static final int DEFAULT_LOW_REFRESH_RATE = 60;
+
     @Nullable private ConnectedDisplayInjector mInjector;
     @Nullable private PreferenceCategory mTopOptionsPreference;
     @Nullable private PreferenceCategory mMoreOptionsPreference;
@@ -280,7 +283,8 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
     }
 
     private boolean isTopMode(@NonNull Mode mode) {
-        return mTopOptionsPreference != null && mTopOptionsPreference.getPreferenceCount() < 3;
+        return mTopOptionsPreference != null
+                && mTopOptionsPreference.getPreferenceCount() < TOP_MODE_RES_MAX_COUNT;
     }
 
     private boolean isAllowedMode(@NonNull Mode mode) {
@@ -340,17 +344,6 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         }
     }
 
-    private boolean isDisplayResolutionLimitEnabled() {
-        if (mInjector == null) {
-            return false;
-        }
-        var flagOverride = mInjector.getSystemProperty(DISPLAY_MODE_LIMIT_OVERRIDE_PROP);
-        var isOverrideEnabled = "true".equals(flagOverride);
-        var isOverrideEnabledOrNotSet = !"false".equals(flagOverride);
-        return (mInjector.isModeLimitForExternalDisplayEnabled() && isOverrideEnabledOrNotSet)
-                || isOverrideEnabled;
-    }
-
     private void updateDisplayModeLimits(@Nullable Context context) {
         if (context == null) {
             return;
@@ -360,17 +353,13 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
                         .getInteger(
                                 com.android.internal.R.integer
                                         .config_externalDisplayPeakRefreshRate);
-        if (isDisplayResolutionLimitEnabled()) {
-            mExternalDisplayPeakWidth =
-                    getResources(context)
-                            .getInteger(
-                                    com.android.internal.R.integer.config_externalDisplayPeakWidth);
-            mExternalDisplayPeakHeight =
-                    getResources(context)
-                            .getInteger(
-                                    com.android.internal.R.integer
-                                            .config_externalDisplayPeakHeight);
-        }
+        mExternalDisplayPeakWidth =
+                getResources(context)
+                        .getInteger(com.android.internal.R.integer.config_externalDisplayPeakWidth);
+        mExternalDisplayPeakHeight =
+                getResources(context)
+                        .getInteger(
+                                com.android.internal.R.integer.config_externalDisplayPeakHeight);
         mRefreshRateSynchronizationEnabled =
                 getResources(context)
                         .getBoolean(

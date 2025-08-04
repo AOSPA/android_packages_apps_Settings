@@ -225,7 +225,7 @@
     <string name="title_change_system_locale" msgid="4102991236063984803">"Systeemtaal wijzigen in %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"%s toevoegen aan voorkeurstalen?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Zo laat je apps en websites ook weten dat je de voorkeur geeft aan deze taal."</string>
-    <string name="desc_notice_device_locale_and_region_settings_change" msgid="909261686577914396">"Je apparaat gebruikt <xliff:g id="LANGUAGE">%1$s</xliff:g> en je regio wordt gewijzigd in <xliff:g id="REGION">%2$s</xliff:g>."</string>
+    <string name="desc_notice_device_locale_and_region_settings_change" msgid="909261686577914396">"Je apparaat gebruikt dan <xliff:g id="LANGUAGE">%1$s</xliff:g> en je regio wordt gewijzigd in <xliff:g id="REGION">%2$s</xliff:g>."</string>
     <string name="dlg_desc_delete_preferred_default_locale" msgid="690828405078078513">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> wordt verwijderd uit je voorkeurstalen"</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Wijzigen"</string>
     <string name="title_unavailable_locale" msgid="5382411204559213983">"Kan <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> niet instellen als systeemtaal"</string>
@@ -344,7 +344,7 @@
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> na time-out"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Onmiddellijk na time-out, behalve wanneer ontgrendeld gehouden door <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> na time-out, behalve wanneer ontgrendeld gehouden door <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
-    <string name="owner_info_settings_title" msgid="3555626140700093017">"Tekst toevoegen op vergrendelscherm"</string>
+    <string name="owner_info_settings_title" msgid="3555626140700093017">"Toevoegen op vergrendelscherm"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Geen"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Bijvoorbeeld \'Android van Jan\'."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Locatie"</string>
@@ -1016,12 +1016,9 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Meer opties"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Houd vast en sleep om schermen opnieuw te ordenen."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Ingebouwd scherm mirroren"</string>
-    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
-    <skip />
+    <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Nieuwe instellingen gebruiken?"</string>
+    <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Als je scherm niet werkt zoals je wilt, kun je teruggaan naar je vorige instellingen"</string>
+    <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Instellingen gebruiken"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirroren"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Draadloze weergave aanzetten"</string>
@@ -1680,7 +1677,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Gemeenschappelijk"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Gemeenschappelijke instellingen"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub-modus"</string>
-    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets op het vergrendelscherm"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets op vergrendelscherm"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Wanneer automatisch tonen"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nooit"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Tijdens opladen"</string>
@@ -2324,7 +2321,7 @@
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Indelingen fysiek toetsenbord"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Persoonlijk woordenboek"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Persoonlijk woordenboek voor je werk"</string>
-    <string name="user_dict_settings_summary" msgid="4939694372338975081">"Voeg woorden toe om te gebruiken in apps zoals Spellingcontrole"</string>
+    <string name="user_dict_settings_summary" msgid="4939694372338975081">"Voeg woorden toe voor gebruik in apps zoals Spellingcontrole"</string>
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"Toevoegen"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"Toevoegen aan woordenboek"</string>
     <string name="user_dict_settings_add_screen_title" msgid="1866408024073475379">"Woordgroep"</string>
@@ -3317,7 +3314,7 @@
     <string name="vpn_not_used" msgid="7229312881336083354">"(niet gebruikt)"</string>
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"(server niet verifiëren)"</string>
     <string name="vpn_no_server_cert" msgid="8106540968643125407">"(ontvangen van server)"</string>
-    <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"De opgegeven informatie is niet geschikt voor Always-on VPN"</string>
+    <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"De ingevoerde informatie is niet geschikt voor Always-on VPN"</string>
     <string name="vpn_field_required" msgid="582849543970781302">"*verplicht"</string>
     <string name="vpn_cancel" msgid="5929410618112404383">"Annuleren"</string>
     <string name="vpn_done" msgid="5137858784289564985">"Sluiten"</string>
@@ -3441,10 +3438,8 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"De gespreks- en sms-geschiedenis wordt gedeeld met deze gebruiker."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Beheerdersrechten verwijderen?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Als je de beheerdersrechten voor deze gebruiker verwijdert, kunnen jij of een andere beheerder deze later weer teruggeven."</string>
-    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
-    <skip />
-    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
-    <skip />
+    <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Weet je zeker dat je je eigen beheerdersrechten wilt verwijderen?"</string>
+    <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Alleen andere beheerders kunnen je beheerdersrechten geven als je doorgaat."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Noodinformatie"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informatie en contacten voor <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> openen"</string>
@@ -5896,8 +5891,7 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Pincode instellen"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"toezicht, ouderlijk toezicht, ouders, toezichtscode, code"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Je pincode beheren"</string>
-    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
-    <skip />
+    <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Pincode voor ouderlijk toezicht"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Pincode van ouder, pincode voor ouderlijk toezicht"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Herstelmailadres toevoegen"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Herstelmailadres laten verifiëren"</string>

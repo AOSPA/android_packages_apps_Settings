@@ -181,7 +181,7 @@
     <string name="proxy_error_empty_port" msgid="4250295137005082992">"Потрібно заповнити поле порту."</string>
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"Поле порту має бути порожнім, якщо поле хосту порожнє."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"Введений порт не дійсний."</string>
-    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Проксі-сервер HTTP використовується веб-переглядачем і не може використовуватися іншими додатками."</string>
+    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Проксі-сервер HTTP використовується вебпереглядачем і не може використовуватися іншими додатками."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"URL-адреса PAC: "</string>
     <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"Надіслати запит ping на ім’я хосту (www.google.com) через IPv4:"</string>
     <string name="radio_info_http_client_test" msgid="5673975677271544085">"Тест клієнта HTTP:"</string>
@@ -201,7 +201,7 @@
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Мова"</string>
     <string name="locale_picker_category_title" msgid="296835514014453679">"Вибрані мови"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Мови додатків"</string>
-    <string name="app_locale_picker_summary" msgid="616928580653613998">"Виберіть мову для кожного додатка"</string>
+    <string name="app_locale_picker_summary" msgid="616928580653613998">"Вибрати мову для кожного додатка"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Мова додатка"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Пропоновані мови"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Усі мови"</string>
@@ -216,7 +216,7 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Мова може відрізнятися від мов, доступних у додатку. Деякі додатки можуть не підтримувати це налаштування."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Виберіть мову для кожного додатка."</string>
     <string name="desc_app_locale_selection_supported_with_disclaimer" msgid="7622217531143496788">"Виберіть мову для кожного додатка. Мова може відрізнятися від мов, доступних у додатку. Деякі додатки можуть не підтримувати це налаштування."</string>
-    <string name="desc_introduction_of_language_picker" msgid="2164004945569753730">"Пристрій, додатки й вебсайти використовують першу підтримувану мову з вашого списку бажаних мов."</string>
+    <string name="desc_introduction_of_language_picker" msgid="2164004945569753730">"Пристрій, додатки й вебсайти використовують першу підтримувану мову з вашого списку вибраних мов."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Щоб вибрати мову для кожного додатка, перейдіть у його налаштування мови."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Докладніше про мови додатків"</string>
     <string name="title_change_system_region" msgid="9196602029960380112">"Змінити регіон на \"%s\"?"</string>
@@ -2044,8 +2044,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"Запущені"</string>
     <string name="not_installed" msgid="5074606858798519449">"Не встановлено для цього користувача"</string>
     <string name="installed" msgid="2837449358488825884">"Установлено"</string>
-    <!-- no translation found for no_applications (5471491608902031500) -->
-    <skip />
+    <string name="no_applications" msgid="5471491608902031500">"Відповідних додатків не знайдено"</string>
     <string name="internal_storage" msgid="999496851424448809">"Внутр. пам\'ять"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Повт. обчисл. розм…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Видалити дані додатка?"</string>
@@ -2642,10 +2641,8 @@
     <skip />
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Автоматичне натискання краще працює в режимі навігації за допомогою трьох кнопок"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Щоб легко повертатися, переходити на головний екран і перемикатися між додатками в режимі автоматичного натискання, використовуйте навігацію за допомогою трьох кнопок замість навігації жестами"</string>
-    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
-    <skip />
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Залишити навігацію за допомогою жестів"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Налаштування навігації"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Вібрація і вібровідгук"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Керуйте інтенсивністю вібрації для різних випадків"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Увімкнено"</string>
@@ -4664,7 +4661,7 @@
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Щойно оновлено"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Докладніше"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Заощадження трафіку"</string>
-    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Мобільний Інтернет із необмеженим трафіком"</string>
+    <string name="unrestricted_data_saver" msgid="5913547065342097274">"Необмежений моб. трафік"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Фоновий режим вимкнено"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Увімкнено"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Вимкнено"</string>
@@ -4836,9 +4833,9 @@
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Верхня частина екрана переміститься до рівня, куди досягає ваш великий палець."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Показати сповіщення"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"З’являться сповіщення й налаштування."</string>
-    <string name="ambient_display_summary" msgid="2650326740502690434">"Щоб перевірити час, сповіщення та іншу інформацію, двічі торкніться екрана."</string>
+    <string name="ambient_display_summary" msgid="2650326740502690434">"Щоб перевірити час, сповіщення й іншу інформацію, двічі торкніться екрана."</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Вивести дисплей із режиму сну"</string>
-    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Перевіряти час, сповіщення та іншу інформацію дотиком до екрана."</string>
+    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Перевіряти час, сповіщення й іншу інформацію дотиком до екрана."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Сигнал SOS"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Використовувати екстрені виклики"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Швидко натисніть кнопку живлення принаймні 5 разів, щоб виконати наведені нижче дії"</string>
@@ -5738,7 +5735,7 @@
     <string name="live_caption_enabled" msgid="5269360946200718949">"Увімкнено"</string>
     <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Аудіо: лівий <xliff:g id="PERCENT_LEFT">%1$s</xliff:g>, правий <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g>"</string>
     <string name="audio_seek_bar_state_right_first" msgid="6027686565598201061">"Аудіо: правий <xliff:g id="PERCENT_RIGHT">%1$s</xliff:g>, лівий <xliff:g id="PERCENT_LEFT">%2$s</xliff:g>"</string>
-    <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Назва пристрою відображається в установлених додатках. Її також можуть бачити інші користувачі, коли ви підключаєтеся до пристроїв із Bluetooth чи мережі Wi-Fi або налаштовуєте точку доступу Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Назву пристрою бачать установлені додатки. Її також можуть бачити інші користувачі, коли ви підключаєтеся до пристроїв із Bluetooth чи мережі Wi-Fi або налаштовуєте точку доступу Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Граматичний рід"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Виберіть граматичний рід"</string>
     <string name="content_protection_preference_title" msgid="5069260032659193074">"Сканування на предмет оманливих додатків"</string>

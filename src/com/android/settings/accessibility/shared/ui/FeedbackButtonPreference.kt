@@ -29,7 +29,7 @@ import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.ButtonPreference
 
 /** Represents a preference item for sending feedback within a preference screen. */
-class FeedbackButtonPreference(private val feedbackManager: FeedbackManager) :
+class FeedbackButtonPreference(feedbackManagerProvider: () -> FeedbackManager) :
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceLifecycleProvider,
@@ -43,6 +43,8 @@ class FeedbackButtonPreference(private val feedbackManager: FeedbackManager) :
 
     override val icon: Int
         get() = R.drawable.ic_feedback
+
+    private val feedbackManager: FeedbackManager by lazy { feedbackManagerProvider.invoke() }
 
     override fun isAvailable(context: Context): Boolean =
         !context.isInSetupWizard() && feedbackManager.isAvailable()

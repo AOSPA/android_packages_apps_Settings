@@ -181,7 +181,7 @@
     <string name="proxy_error_empty_port" msgid="4250295137005082992">"Jy moet die poortveld voltooi."</string>
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"Die poortveld moet leeg wees as die gasheerveld leeg is."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"Die poort wat jy ingevoer het, is nie geldig nie."</string>
-    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Die HTTP-instaanbediener word deur die blaaier gebruik, maar kan nie deur die ander programme gebruik word nie."</string>
+    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Die HTTP-instaanbediener word deur die blaaier gebruik, maar kan nie deur die ander apps gebruik word nie."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"PAC-URL: "</string>
     <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"Pieng gasheernaam(www.google.com) IPv4:"</string>
     <string name="radio_info_http_client_test" msgid="5673975677271544085">"HTTP-kliënttoets:"</string>
@@ -202,7 +202,7 @@
     <string name="locale_picker_category_title" msgid="296835514014453679">"Voorkeurtale"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Apptale"</string>
     <string name="app_locale_picker_summary" msgid="616928580653613998">"Kies die taal vir elke app"</string>
-    <string name="app_locale_picker_title" msgid="2431448962911301366">"Programtaal"</string>
+    <string name="app_locale_picker_title" msgid="2431448962911301366">"Apptaal"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Voorgestelde tale"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle tale"</string>
     <string name="suggested_locales_title" msgid="119908696638862861">"Voorgestel"</string>
@@ -350,7 +350,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Ligging"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Gebruik ligging"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Af"</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Aan/# app het toegang tot ligging}other{Aan/# apps het toegang tot ligging}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Aan / # app het toegang tot ligging}other{Aan / # apps het toegang tot ligging}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laai tans …"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Apps met die Toestelle in die Omtrek-toestemming kan die relatiewe posisie van gekoppelde toestelle bepaal."</string>
     <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Liggingtoegang is af vir apps en dienste. Jou toestelligging kan steeds aan nooddienspersoneel gestuur word wanneer jy ’n noodnommer kontak."</string>
@@ -1180,7 +1180,7 @@
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Outokoppel"</string>
     <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Laat aansluiting aan hierdie netwerk toe wanneer dit binne bereik is"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Voeg toestel by"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Gebruik \'n QR-kode om \'n toestel by hierdie netwerk te voeg"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Gebruik ’n QR-kode om ’n toestel by hierdie netwerk te voeg"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-kode is nie \'n geldige formaat nie"</string>
     <string name="retry" msgid="7542103800274026915">"Herprobeer"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Deel met ander toestelgebruikers"</string>
@@ -2044,8 +2044,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"Loop tans"</string>
     <string name="not_installed" msgid="5074606858798519449">"Nie vir hierdie gebruiker geïnstalleer nie"</string>
     <string name="installed" msgid="2837449358488825884">"Geïnstalleer"</string>
-    <!-- no translation found for no_applications (5471491608902031500) -->
-    <skip />
+    <string name="no_applications" msgid="5471491608902031500">"Geen apps wat pas nie"</string>
     <string name="internal_storage" msgid="999496851424448809">"Interne berging"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Herbereken tans grootte…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Vee programdata uit?"</string>
@@ -2340,7 +2339,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="316493656442362284">"Redigeer woord"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="4909198741914531509">"Redigeer"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="651550824433043545">"Vee uit"</string>
-    <string name="user_dict_settings_empty_text" msgid="86562873609647919">"Jy het geen woorde in die gebruikerwoordeboek nie. Tik op die Voeg By-knoppie (+) om \'n woord by te voeg."</string>
+    <string name="user_dict_settings_empty_text" msgid="86562873609647919">"Jy het geen woorde in die gebruikerwoordeboek nie. Tik op die Voeg By-knoppie (+) om ’n woord by te voeg."</string>
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Vir alle tale"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Meer tale..."</string>
     <string name="testing" msgid="6294172343766732037">"Toets"</string>
@@ -2642,10 +2641,8 @@
     <skip />
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Outoklik werk beter met 3-knoppienavigasie"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Gebruik 3-knoppienavigasie pleks van gebaarnavigasie om maklik terug te gaan na die tuisblad en apps te wissel wanneer jy outoklik gebruik"</string>
-    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
-    <skip />
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Behou gebaarnavigasie"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Navigasie-instellings"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrasie en fisiese terugvoer"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Beheer die vibrasiesterkte vir verskillende gebruike"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Aan"</string>
@@ -2735,7 +2732,7 @@
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Sien meer toestelle"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Oudio-aanpassing"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Oudiobeskrywing"</string>
-    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Hoor \'n beskrywing van wat op die skerm gebeur in gesteunde flieks en programme"</string>
+    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Hoor ’n beskrywing van wat op die skerm gebeur in gesteunde flieks en programme"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"oudiobeskrywing, oudio, beskrywing, swak sig,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Kortpad is aan"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Af"</string>
@@ -2754,7 +2751,7 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalie"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalie"</string>
-    <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra flou"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra donker"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Maak skerm ekstra donker"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Ekstra Donker-kortpad"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Meer oor ekstra donker"</string>
@@ -3320,7 +3317,7 @@
     <string name="vpn_not_used" msgid="7229312881336083354">"(nie gebruik nie)"</string>
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"(moenie bediener verifieer nie)"</string>
     <string name="vpn_no_server_cert" msgid="8106540968643125407">"(ontvang van bediener)"</string>
-    <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"Die inligting wat ingevoer is, steun nie altyd-aan VPN nie"</string>
+    <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"Die inligting wat ingevoer is, steun nie altyd-aan-VPN nie"</string>
     <string name="vpn_field_required" msgid="582849543970781302">"*word vereis"</string>
     <string name="vpn_cancel" msgid="5929410618112404383">"Kanselleer"</string>
     <string name="vpn_done" msgid="5137858784289564985">"Maak toe"</string>
@@ -3348,7 +3345,7 @@
     <string name="vpn_create" msgid="7546073242936894638">"Voeg VPN-profiel by"</string>
     <string name="vpn_menu_edit" msgid="5100387853773792379">"Redigeer profiel"</string>
     <string name="vpn_menu_delete" msgid="4455966182219039928">"Vee profiel uit"</string>
-    <string name="vpn_menu_lockdown" msgid="5284041663859541007">"Altydaan-VPN"</string>
+    <string name="vpn_menu_lockdown" msgid="5284041663859541007">"Altyd-aan-VPN"</string>
     <string name="vpn_no_vpns_added" msgid="7387080769821533728">"Geen VPN\'e is bygevoeg nie"</string>
     <string name="vpn_always_on_summary" msgid="2171252372476858166">"Bly te alle tye aan VPN gekoppel"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="9084872130449368437">"Nie gesteun deur hierdie app nie"</string>
@@ -5151,7 +5148,7 @@
     <string name="calls_preference" msgid="2166481296066890129">"Oproepevoorkeur"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS-voorkeur"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Vra elke keer"</string>
-    <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Voeg \'n netwerk by"</string>
+    <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Voeg ’n netwerk by"</string>
     <string name="default_for_calls" msgid="2788950217176988034">"Verstek vir oproepe"</string>
     <string name="default_for_sms" msgid="1316988329407434771">"Verstek vir SMS"</string>
     <string name="default_for_calls_and_sms" msgid="8223971369339958151">"Verstek vir oproepe en SMS"</string>
@@ -5494,7 +5491,7 @@
     <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Aktiveer die versteksagteware-implementering van gevorderde kamera-kenmerke soos HDR, Nag, of ander kamera-uitbreidings."</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth sal aanskakel"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
-    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM\'s"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM’s"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Oproepe en SMS\'e"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"Wi-fi-oproepe"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Maak en ontvang oproepe oor wi-fi"</string>

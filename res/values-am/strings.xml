@@ -1471,7 +1471,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"ማያ ገፅዎን ለመመልከት የበለጠ ምቹ ለማድረግ እና በአንዳንድ ማያ ገፆች ላይ የባትሪ አጠቃቀምን ለመቀነስ ጠቆር ያለ ዳራ ይጠቀሙ። መርሐግብር ካለዎት ማያ ገፅዎ ሲጠፋ ገጽታዎ ይለወጣል።"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ጠቆር ያለ ገጽታ በአሁኑ ጊዜ የእርስዎን የመኝታ ሰዓት ሁነታ መርሐግብር እየተከተለ ነው"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"የመኝታ ሰዓት ሁነታ ቅንብሮች"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{እንዲሁም ሁነታዎች ጠቆር ያለ ገጽታን ማብራት ይችላሉ}=1{እንዲሁም {mode_1} ጠቆር ያለ ገጽታን ያበራል}=2{እንዲሁም {mode_1} እና {mode_2} ጠቆር ያለ ገጽታን ያበራሉ}=3{እንዲሁም {mode_1}፣ {mode_2} እና {mode_3} ጠቆር ያለ ገጽታን ያበራሉ}one{እንዲሁም {mode_1}፣ {mode_2} እና # ሌላ ጠቆር ያለ ገጽታን ያበራሉ}other{እንዲሁም {mode_1}፣ {mode_2} እና # ሌላ ጠቆር ያለ ገጽታን ያበራሉ}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{እንዲሁም ሁነታዎች ጠቆር ያለ ገጽታን ማብራት ይችላሉ}=1{እንዲሁም {mode_1} ጠቆር ያለ ገጽታን ያበራል}=2{እንዲሁም {mode_1} እና {mode_2} ጠቆር ያለ ገጽታን ያበራሉ}=3{እንዲሁም {mode_1}፣ {mode_2} እና {mode_3} ጠቆር ያለ ገጽታን ያበራሉ}one{እንዲሁም {mode_1}፣ {mode_2} እና # ሌላ ጠቆር ያለ ገጽታን ያበራሉ}other{እንዲሁም {mode_1}፣ {mode_2} እና # ሌሎች ጠቆር ያለ ገጽታን ያበራሉ}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"የሁነታዎች ቅንብሮች"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"ከፍተኛ ተለዋዋጭ ክልል (ኤችዲአር) ምስሎች እና ቪድዮዎች ውስጥ የቀለም ክልል እና ግልፅነትን ብሩህ ያድርጉ እና ይዘርጉ። ኤችዲአር ይዘት ይበልጥ ብሩህ ሆኖ ይታያል።"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ማያ ጊዜው እረፍት"</string>
@@ -2044,8 +2044,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"አሂድ"</string>
     <string name="not_installed" msgid="5074606858798519449">"ለዚህ ተጠቃሚ አልተጫነም"</string>
     <string name="installed" msgid="2837449358488825884">"ተጭኗል"</string>
-    <!-- no translation found for no_applications (5471491608902031500) -->
-    <skip />
+    <string name="no_applications" msgid="5471491608902031500">"ተዛማጅ መተግበሪያዎች የሉም"</string>
     <string name="internal_storage" msgid="999496851424448809">"የውስጥ ማከማቻ"</string>
     <string name="recompute_size" msgid="1098091228370999128">"መጠን ድጋሚ በማስላት ላይ..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"መተግበሪያ ውሂብ ሰርዝ?"</string>
@@ -2642,10 +2641,8 @@
     <skip />
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"ራስ-ሰር ጠቅ ማድረግ ከባለ3-አዝራር ዳሰሳ ጋር በተሻለ ሁኔታ ይሠራል"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"በቀላሉ ወደ መነሻ ለመመለስ እና ራስ-ሰር ጠቅ ማድረግን እየተጠቀሙ ሳለ መተግበሪያዎችን ለመቀያየር ከእጅ ምልክት ዳሰሳ ይልቅ ባለ3-አዝራር ዳሰሳን ይጠቀሙ"</string>
-    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
-    <skip />
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"የእጅ ምልክት ዳሰሳን አቆይ"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"የዳሰሳ ቅንብሮች"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"ንዝረት እና ረቂቅ ንዝረት"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"ለተለያዩ አጠቃቀሞች የንዝረት ጥንካሬን ይቆጣጠሩ"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"በርቷል"</string>

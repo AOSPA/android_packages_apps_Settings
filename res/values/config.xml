@@ -896,6 +896,14 @@
         -->
     </integer-array>
 
+    <!-- Array of carrier IDs for which the Wi-Fi scorer toggle should be OFF by default. -->
+    <integer-array name="config_carrier_for_wifi_scorer_toggle_off" translatable="false">
+    </integer-array>
+
+    <!-- Array of carrier IDs for which the mobile network toggle should be disabled/hidden by default. -->
+    <integer-array name="config_carrier_for_mobile_network_toggle_disable" translatable="false">
+    </integer-array>
+
     <!-- Whether strings are provided to show Identity Check Watch promo card. This implies that
          the following strings have overlays:
          R.string.identity_check_watch_issue_card_title

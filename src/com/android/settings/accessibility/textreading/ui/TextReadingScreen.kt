@@ -59,8 +59,8 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
             val fontSizePreference = FontSizePreference(context, entryPoint)
             val displaySizePreference = DisplaySizePreference(context, entryPoint)
             +TextReadingPreview(
-                displaySizePreference.displaySizePreview,
-                fontSizePreference.fontSizePreview,
+                displaySizeProvider = { displaySizePreference.displaySizePreview },
+                fontSizeProvider = { fontSizePreference.fontSizePreview },
             )
 
             +PreferenceCategory(
@@ -76,7 +76,7 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
                 +OutlineTextPreference(context, entryPoint)
             }
             +ResetPreference(entryPoint)
-            +FeedbackButtonPreference(FeedbackManager(context, metricsCategory))
+            +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
         }
     // LINT.ThenChange()
 }

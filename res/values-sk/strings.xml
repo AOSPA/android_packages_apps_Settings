@@ -232,7 +232,7 @@
     <string name="desc_unavailable_locale" msgid="7223655766703116782">"Vaše zariadenie tento jazyk nepodporuje, ale aplikácie budú vedieť, že ho preferujete"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Vyhľadávanie"</string>
     <string name="language_and_region_title" msgid="8374151891112162767">"Jazyk a región"</string>
-    <string name="language_selection_title" msgid="968179636453982415">"Pridajte jazyk"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"Pridanie jazyka"</string>
     <string name="region_selection_title" msgid="3630336682851020349">"Výber regiónu"</string>
     <string name="numbering_system_selection_title" msgid="1065458493488382214">"Číselná sústava"</string>
     <string name="country_selection_title" msgid="5376929821458644732">"Preferovaný región"</string>
@@ -344,8 +344,8 @@
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po uplynutí časového limitu"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Okamžite po uplynutí časového limitu, ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po uplynutí časového limitu, ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
-    <string name="owner_info_settings_title" msgid="3555626140700093017">"Pridať text na uzamknutej obrazovke"</string>
-    <string name="owner_info_settings_summary" msgid="347238313388083297">"Žiadne"</string>
+    <string name="owner_info_settings_title" msgid="3555626140700093017">"Text na uzamknutej obrazovke"</string>
+    <string name="owner_info_settings_summary" msgid="347238313388083297">"Žiadny"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Napr. Petrov Android"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Poloha"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Používať polohu"</string>
@@ -1561,7 +1561,7 @@
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Aktualizácie systému"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"Verzia Androidu"</string>
-    <string name="security_patch" msgid="4071756145347865382">"Aktualizácia zabezpečenia Androidu"</string>
+    <string name="security_patch" msgid="4071756145347865382">"Bezpečnostná aktualizácia Androidu"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Hardvérová verzia"</string>
     <string name="manufactured_year" msgid="3401517138700926475">"Rok výroby"</string>
@@ -1602,7 +1602,7 @@
     <string name="status_operator" msgid="4335640583552058491">"Sieť"</string>
     <string name="status_wifi_mac_address" msgid="4447611754614388914">"Adresa MAC siete Wi‑Fi"</string>
     <string name="status_device_wifi_mac_address" msgid="1896121694334176494">"Adresa MAC siete Wi‑Fi zariadenia"</string>
-    <string name="status_bt_address" msgid="6919660304578476547">"Adresa Bluetooth"</string>
+    <string name="status_bt_address" msgid="6919660304578476547">"Adresa zariadenia Bluetooth"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Sériové číslo"</string>
     <string name="status_up_time" msgid="4250719389455342087">"Doba prevádzky"</string>
     <string name="battery_manufacture_date" msgid="7139426520156833987">"Dátum výroby"</string>
@@ -2635,10 +2635,8 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Malá"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Veľmi malá"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Ignorovať menšie pohyby kurzora"</string>
-    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
-    <skip />
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"Používať kliknutie ľavým tlačidlom ako predvolenú akciu"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Keď použijete inú akciu, automatické kliknutie sa automaticky vráti na kliknutie ľavým tlačidlom"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Automatické kliknutie funguje lepšie s trojtlačidlovou navigáciou"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Ak chcete pri používaní automatického kliknutia ľahko prejsť späť či na plochu alebo prepnúť aplikácie, používajte namiesto navigácie gestami trojtlačidlovú navigáciu"</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Ponechať navigáciu gestami"</string>
@@ -5907,7 +5905,7 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Zabudnutý kód PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Zabudli ste PIN?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Aktualizácia e‑mailu na obnovenie"</string>
-    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Odstránenie kódu PIN"</string>
+    <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Odstrániť kód PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Pridanie e‑mailu na obnovenie"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Overenie e‑mailu"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtre obsahu webu"</string>
@@ -5921,8 +5919,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Keď sú tieto nastavenia vypnuté, môžu ďalej platiť iné nastavenia účtu."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Zadajte PIN rodičovskej kontroly"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Nastavte PIN rodičovskej kontroly"</string>
-    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
-    <skip />
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Potvrďte PIN rodičovskej kontroly"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Kód PIN bol aktualizovaný"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Otvoriť aplikáciu"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Chcete odstrániť PIN?"</string>

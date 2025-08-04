@@ -535,8 +535,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (mInjector.getFlags().displayTopologyPaneInDisplayList()) {
             screen.addPreference(getDisplayTopologyPreference());
             addMirrorPreference(screen);
-            if (mInjector.isDefaultDisplayInTopologySwitchEnabled()
-                    && !mInjector.isDesktopModeSupportedOnDefaultDisplay()
+            if (mInjector.isDefaultDisplayInTopologyFlagEnabled()
+                    && mInjector.isProjectedModeEnabled()
                     && !isDisplayInMirroringMode(requireContext())) {
                 addIncludeDefaultDisplayInTopologyPreference(screen);
             }

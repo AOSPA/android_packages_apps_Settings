@@ -46,7 +46,6 @@ import android.view.View
 import android.view.ViewManager
 import android.view.WindowManager
 import android.view.WindowManagerGlobal
-import com.android.server.display.feature.flags.Flags.enableModeLimitForExternalDisplay
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY
 import com.android.settings.flags.FeatureFlagsImpl
 import com.android.wm.shell.shared.desktopmode.DesktopState
@@ -81,8 +80,8 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     /** The window manager instance, or null if it cannot be retrieved. */
     val windowManager: IWindowManager? by lazy { WindowManagerGlobal.getWindowManagerService() }
 
-    open fun isDesktopModeSupportedOnDefaultDisplay(): Boolean =
-        desktopState?.isDesktopModeSupportedOnDisplay(DEFAULT_DISPLAY) ?: false
+    open fun isProjectedModeEnabled(): Boolean =
+        desktopState?.isDesktopModeSupportedOnDisplay(DEFAULT_DISPLAY) != true
 
     /**
      * Reveals the wallpaper on the given display using a View with FLAG_SHOW_WALLPAPER flag set in
@@ -302,10 +301,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         DisplayManagerGlobal.getInstance().setUserPreferredDisplayMode(displayId, mode)
     }
 
-    /** @return true if the display mode limit flag enabled. */
-    open fun isModeLimitForExternalDisplayEnabled(): Boolean = enableModeLimitForExternalDisplay()
-
-    open fun isDefaultDisplayInTopologySwitchEnabled(): Boolean =
+    open fun isDefaultDisplayInTopologyFlagEnabled(): Boolean =
         android.window.DesktopExperienceFlags.ENABLE_DEFAULT_DISPLAY_IN_TOPOLOGY_SWITCH.isTrue() &&
             flags.enableDefaultDisplayInTopologySwitchBugfix()
 
