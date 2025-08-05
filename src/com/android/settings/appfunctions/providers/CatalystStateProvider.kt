@@ -19,9 +19,8 @@ package com.android.settings.appfunctions.providers
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateCategory
-import com.android.settings.appfunctions.getDeviceStateItemList
-import com.android.settings.appfunctions.getCatalystScreenConfigs
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
@@ -38,30 +37,30 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 
 /* A [DeviceStateProvider] that provides device state information for Settings that are
-exposed using Catalyst framework. Configured in [CatalystStateProviderConfig]. */
+exposed using Catalyst framework. Configured in [CatalystConfig]. */
 class CatalystStateProvider(
+    val config: CatalystConfig,
     private val context: Context,
     private val englishContext: Context,
 ) : DeviceStateProvider {
-    private val settingConfigMap = getDeviceStateItemList().associateBy { it.settingKey }
-    private val perScreenConfigMap = getCatalystScreenConfigs().associateBy { it.screenKey }
+    private val settingConfigMap = config.deviceStateItems.associateBy { it.settingKey }
+    private val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
     private val screenKeyList = perScreenConfigMap.keys.toList()
 
-    override suspend fun provide(
-        requestCategory: DeviceStateCategory
-    ): DeviceStateProviderResult {
+    override suspend fun provide(requestCategory: DeviceStateCategory): DeviceStateProviderResult {
         val perScreenDeviceStatesList = mutableListOf<PerScreenDeviceStates>()
         coroutineScope {
-            val deferredList = screenKeyList.map { screenKey ->
-                async {
-                    try {
-                        buildPerScreenDeviceStates(screenKey, requestCategory)
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Error building per screen device states for $screenKey", e)
-                        null
+            val deferredList =
+                screenKeyList.map { screenKey ->
+                    async {
+                        try {
+                            buildPerScreenDeviceStates(screenKey, requestCategory)
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Error building per screen device states for $screenKey", e)
+                            null
+                        }
                     }
                 }
-            }
             val results = deferredList.awaitAll()
             perScreenDeviceStatesList.addAll(results.filterNotNull())
         }
@@ -74,16 +73,19 @@ class CatalystStateProvider(
     ): PerScreenDeviceStates? {
         Log.v(TAG, "Building per screen device states for $screenKey")
         val perScreenConfig = perScreenConfigMap[screenKey]
-        if (perScreenConfig == null || !perScreenConfig.enabled || requestCategory !in perScreenConfig.category) {
+        if (
+            perScreenConfig == null ||
+                !perScreenConfig.enabled ||
+                requestCategory !in perScreenConfig.category
+        ) {
             return null
         }
         val screenMetaData =
-            PreferenceScreenRegistry.create(
-                context,
-                PreferenceScreenCoordinate(screenKey, null),
-            ) ?: return null
-        if (screenMetaData is PreferenceAvailabilityProvider &&
-            !screenMetaData.isAvailable(context)) {
+            PreferenceScreenRegistry.create(context, PreferenceScreenCoordinate(screenKey, null))
+                ?: return null
+        if (
+            screenMetaData is PreferenceAvailabilityProvider && !screenMetaData.isAvailable(context)
+        ) {
             return null
         }
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
@@ -106,24 +108,25 @@ class CatalystStateProvider(
                 deviceStateItemList.add(
                     DeviceStateItem(
                         key = metadata.key,
-                        name = LocalizedString(
-                            english = metadata.getPreferenceTitle(englishContext).toString(),
-                            localized = metadata.getPreferenceTitle(context).toString()
-                        ),
+                        name =
+                            LocalizedString(
+                                english = metadata.getPreferenceTitle(englishContext).toString(),
+                                localized = metadata.getPreferenceTitle(context).toString(),
+                            ),
                         jsonValue = it,
-                        hintText = config?.hintText(englishContext, metadata)
+                        hintText = config?.hintText(englishContext, metadata),
                     )
                 )
             }
         }
 
         val launchingIntent = screenMetaData.getLaunchIntent(context, null)
-        val states = PerScreenDeviceStates(
-            description = screenMetaData.getPreferenceScreenTitle(context)?.toString()
-                ?: "",
-            deviceStateItems = deviceStateItemList,
-            intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME)
-        )
+        val states =
+            PerScreenDeviceStates(
+                description = screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
+                deviceStateItems = deviceStateItemList,
+                intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
+            )
         Log.v(TAG, "Built per screen device states for $screenKey")
         return states
     }

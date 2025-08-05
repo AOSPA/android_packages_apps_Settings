@@ -15,7 +15,6 @@
  */
 package com.android.settings.supervision
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
@@ -87,11 +86,9 @@ class SupervisionPromoFooterPreference(
                 }
             (preference as CardPreference).setAdditionalAction(
                 trailingIcon,
-                contentDescription =
-                    context.getString(R.string.supervision_promo_footer_action_button_description),
-            ) {
-                @SuppressLint("RestrictedApi") it.performClick()
-            }
+                contentDescription = null,
+                action = null,
+            )
         }
 
         // Icon, Title, Summary may be null but at least one of title or summary must be valid

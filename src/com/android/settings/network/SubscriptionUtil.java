@@ -235,7 +235,7 @@ public class SubscriptionUtil {
             return false;
         }
 
-        // When all of the eSIM profiles are opprtunistic and no physical SIM,
+        // When all of the eSIM profiles are opportunistic and no physical SIM,
         // first opportunistic subscriptions with same group UUID can be primary.
         if (nonOpportunisticSubInfoList.size() <= 0) {
             if (physicalSubInfoList.size() > 0) {
@@ -887,6 +887,63 @@ public class SubscriptionUtil {
 
         return Arrays.stream(carriersThatUseRac)
                 .anyMatch(cid -> subs.stream().anyMatch(sub -> sub.getCarrierId() == cid));
+    }
+
+    /**
+     * Checks if default data subscription has a matching carrier id for which wifi scorer should be
+     * toggle OFF by default.
+     *
+     * @param context The context used to retrieve carriers that uses wifi scorer toggle off.
+     * @param subscriptionManager The subscription manager to get active subscriptions.
+     * @return {@code true} if default data subscription has a matching carrier id that uses wifi
+     *     scorer toggle off.
+     */
+    static boolean hasSubscriptionForWifiScorerToggleOff(
+            @NonNull Context context, SubscriptionManager subscriptionManager) {
+        final int defaultDataSubId = getDefaultDataSubscriptionId();
+        if (!SubscriptionManager.isValidSubscriptionId(defaultDataSubId)) {
+            return false;
+        }
+        final SubscriptionInfo subInfo =
+                subscriptionManager.getActiveSubscriptionInfo(defaultDataSubId);
+        if (subInfo == null) {
+            return false;
+        }
+        final int[] carriersWithWifiScorerToggleOff =
+                context.getResources()
+                        .getIntArray(R.array.config_carrier_for_wifi_scorer_toggle_off);
+        final int carrierId = subInfo.getCarrierId();
+        return Arrays.stream(carriersWithWifiScorerToggleOff)
+                .anyMatch(cid -> cid == carrierId);
+    }
+
+    /**
+     * Checks if default data subscription has a matching carrier id for which mobile network toggle
+     * should be disable/hidden.
+     *
+     * @param context The context used to retrieve carriers that has mobile network toggle disabled.
+     * @param subscriptionManager The subscription manager to get active subscriptions.
+     * @return {@code true} if the default data subscription has a matching carrier id that has mobile
+     *     network toggle disabled.
+     */
+    static boolean hasSubscriptionForMobileNetworkToggleDisable(
+            @NonNull Context context, SubscriptionManager subscriptionManager) {
+        final int defaultDataSubId = getDefaultDataSubscriptionId();
+        if (!SubscriptionManager.isValidSubscriptionId(defaultDataSubId)) {
+            return false;
+        }
+        final SubscriptionInfo subInfo =
+                subscriptionManager.getActiveSubscriptionInfo(defaultDataSubId);
+        if (subInfo == null) {
+            return false;
+        }
+        final int[] carriersWithMobileNetworkToggleDisable =
+                context.getResources()
+                        .getIntArray(R.array.config_carrier_for_mobile_network_toggle_disable);
+
+        final int carrierId = subInfo.getCarrierId();
+        return Arrays.stream(carriersWithMobileNetworkToggleDisable)
+                .anyMatch(cid -> cid == carrierId);
     }
 
     /**

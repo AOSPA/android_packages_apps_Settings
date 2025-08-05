@@ -38,58 +38,65 @@ import com.android.settingslib.search.SearchIndexable;
 /** Adaptive connectivity is a feature which automatically manages network connections. */
 @SearchIndexable
 public class AdaptiveConnectivitySettings extends DashboardFragment {
-  private static final String TAG = "AdaptiveConnectivitySettings";
+    private static final String TAG = "AdaptiveConnectivitySettings";
+    private static final String ADAPTIVE_CONNECTIVITY_SUMMARY = "adaptive_connectivity_summary";
 
-  @Override
-  public int getMetricsCategory() {
-    return SettingsEnums.ADAPTIVE_CONNECTIVITY_CATEGORY;
-  }
-
-  @Override
-  protected String getLogTag() {
-    return TAG;
-  }
-
-  @Override
-  protected int getPreferenceScreenResId() {
-    return R.xml.adaptive_connectivity_settings;
-  }
-
-  public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-      new BaseSearchIndexProvider(R.xml.adaptive_connectivity_settings);
-
-  @Override
-  public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
-    return AdaptiveConnectivityScreen.KEY;
-  }
-
-  @Override
-  public void onCreatePreferences(@NonNull Bundle savedInstanceState, @NonNull String rootKey) {
-    Log.i("Settings", "onCreatePreferences");
-    super.onCreatePreferences(savedInstanceState, rootKey);
-    if (Flags.enableNestedToggleSwitches()) {
-      Preference legacyAdaptiveConnPref = findPreference(ADAPTIVE_CONNECTIVITY_ENABLED);
-      if (legacyAdaptiveConnPref != null) {
-        legacyAdaptiveConnPref.setVisible(false);
-      }
-      setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED);
-      setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED);
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.ADAPTIVE_CONNECTIVITY_CATEGORY;
     }
-  }
 
-  private void setupSwitchPreferenceCompat(String key) {
-    SwitchPreferenceCompat switchPreference = findPreference(key);
-    if (switchPreference != null) {
-      switchPreference.setOnPreferenceChangeListener(
-          (preference, newValue) -> {
-            boolean isChecked = (Boolean) newValue;
-            Settings.Secure.putInt(getContentResolver(), key, isChecked ? 1 : 0);
-            if (preference.getKey().equals(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED)) {
-              getSystemService(WifiManager.class).setWifiScoringEnabled(isChecked);
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.adaptive_connectivity_settings;
+    }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.adaptive_connectivity_settings);
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return AdaptiveConnectivityScreen.KEY;
+    }
+
+    @Override
+    public void onCreatePreferences(@NonNull Bundle savedInstanceState, @NonNull String rootKey) {
+        Log.i("Settings", "onCreatePreferences");
+        super.onCreatePreferences(savedInstanceState, rootKey);
+        if (Flags.enableNestedToggleSwitches()) {
+            // remove summary
+            Preference topIntroPref = findPreference(ADAPTIVE_CONNECTIVITY_SUMMARY);
+            if (topIntroPref != null) {
+                topIntroPref.setVisible(false);
             }
-            return true;
-          });
-      switchPreference.setVisible(true);
+            // remove legacy master toggle
+            Preference legacyAdaptiveConnPref = findPreference(ADAPTIVE_CONNECTIVITY_ENABLED);
+            if (legacyAdaptiveConnPref != null) {
+                legacyAdaptiveConnPref.setVisible(false);
+            }
+            setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED);
+            setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED);
+        }
     }
-  }
+
+    private void setupSwitchPreferenceCompat(String key) {
+        SwitchPreferenceCompat switchPreference = findPreference(key);
+        if (switchPreference != null) {
+            switchPreference.setOnPreferenceChangeListener(
+                    (preference, newValue) -> {
+                        boolean isChecked = (Boolean) newValue;
+                        Settings.Secure.putInt(getContentResolver(), key, isChecked ? 1 : 0);
+                        if (preference.getKey().equals(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED)) {
+                            getSystemService(WifiManager.class).setWifiScoringEnabled(isChecked);
+                        }
+                        return true;
+                    });
+            switchPreference.setVisible(true);
+        }
+    }
 }

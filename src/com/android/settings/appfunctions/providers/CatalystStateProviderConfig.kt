@@ -130,7 +130,24 @@ data class PerScreenCatalystConfig(
     val category: Set<DeviceStateCategory> = setOf(DeviceStateCategory.UNCATEGORIZED),
 )
 
-fun getCatalystScreenConfigs() =
+/**
+ * Configuration of the device state app functions.
+ *
+ * @param screenConfigs a list of catalyst screen configurations
+ * @param deviceStateItems a list of device state items
+ */
+data class CatalystConfig(
+    val deviceStateItems: List<DeviceStateItemConfig>,
+    val screenConfigs: List<PerScreenCatalystConfig>,
+)
+
+fun getSettingsCatalystConfig() =
+    CatalystConfig(
+        screenConfigs = getCatalystScreenConfigs(),
+        deviceStateItems = getDeviceStateItemList(),
+    )
+
+private fun getCatalystScreenConfigs() =
     listOf(
         PerScreenCatalystConfig(enabled = true, screenKey = DarkModeScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorAndMotionScreen.KEY),
@@ -298,7 +315,7 @@ fun getCatalystScreenConfigs() =
         ),
     )
 
-fun getDeviceStateItemList() =
+private fun getDeviceStateItemList() =
     listOf(
         DeviceStateItemConfig(
             enabled = true,

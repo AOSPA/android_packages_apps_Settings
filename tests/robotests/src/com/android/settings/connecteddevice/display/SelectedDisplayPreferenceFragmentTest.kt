@@ -87,9 +87,15 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         viewModel.updateSelectedDisplay(DEFAULT_DISPLAY)
 
         val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
+        assertVisible(category, PrefInfo.BUILTIN_DISPLAY_SUB_CATEGORY.key, true)
+        val builtinDisplaySubPrefCategory =
+            category.findPreference<Preference>(PrefInfo.BUILTIN_DISPLAY_SUB_CATEGORY.key)!!
+                as PreferenceCategory
+
         assertVisible(category, PrefInfo.DISPLAY_MIRRORING.key, true)
-        assertVisible(category, PrefInfo.DISPLAY_SIZE_AND_TEXT.key, true)
-        assertVisible(category, PrefInfo.DISPLAY_SIZE.key, false)
+        assertVisible(category, PrefInfo.INCLUDE_DEFAULT_DISPLAY.key, true)
+        assertVisible(builtinDisplaySubPrefCategory, PrefInfo.BUILTIN_DISPLAY_DENSITY.key, true)
+        assertVisible(category, PrefInfo.EXTERNAL_DISPLAY_DENSITY.key, false)
         assertVisible(category, PrefInfo.DISPLAY_RESOLUTION.key, false)
         assertVisible(category, PrefInfo.DISPLAY_ROTATION.key, false)
     }
@@ -101,11 +107,40 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         viewModel.updateSelectedDisplay(DEFAULT_DISPLAY)
 
         val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
+        val builtinDisplaySubPrefCategory =
+            category.findPreference<Preference>(PrefInfo.BUILTIN_DISPLAY_SUB_CATEGORY.key)!!
+                as PreferenceCategory
+
         val sizeAndTextPref =
-            category.findPreference<Preference>(PrefInfo.DISPLAY_SIZE_AND_TEXT.key)
+            builtinDisplaySubPrefCategory.findPreference<Preference>(
+                PrefInfo.BUILTIN_DISPLAY_DENSITY.key
+            )
         sizeAndTextPref!!.onPreferenceClickListener!!.onPreferenceClick(sizeAndTextPref)
 
         assertTrue(fragment.isBuiltinDisplaySettingsLaunched)
+    }
+
+    @Test
+    fun testDefaultDisplaySelected_notProjectedMode_hideIncludeDefaultDisplayInTopology() {
+        doReturn(false).`when`<ConnectedDisplayInjector?>(mMockedInjector).isProjectedModeEnabled()
+        includeBuiltinDisplay()
+        viewModel.updateEnabledDisplays()
+        viewModel.updateSelectedDisplay(DEFAULT_DISPLAY)
+        setMirroringMode(false)
+
+        val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
+        assertVisible(category, PrefInfo.INCLUDE_DEFAULT_DISPLAY.key, false)
+    }
+
+    @Test
+    fun testDefaultDisplaySelected_isMirroring_hideIncludeDefaultDisplayInTopology() {
+        includeBuiltinDisplay()
+        viewModel.updateEnabledDisplays()
+        viewModel.updateSelectedDisplay(DEFAULT_DISPLAY)
+        setMirroringMode(true)
+
+        val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
+        assertVisible(category, PrefInfo.INCLUDE_DEFAULT_DISPLAY.key, false)
     }
 
     @Test
@@ -116,14 +151,15 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
         val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
         assertVisible(category, PrefInfo.DISPLAY_MIRRORING.key, false)
-        assertVisible(category, PrefInfo.DISPLAY_SIZE_AND_TEXT.key, false)
-        assertVisible(category, PrefInfo.DISPLAY_SIZE.key, true)
+        assertVisible(category, PrefInfo.INCLUDE_DEFAULT_DISPLAY.key, false)
+        assertVisible(category, PrefInfo.BUILTIN_DISPLAY_SUB_CATEGORY.key, false)
+        assertVisible(category, PrefInfo.EXTERNAL_DISPLAY_DENSITY.key, true)
         assertVisible(category, PrefInfo.DISPLAY_RESOLUTION.key, true)
         assertVisible(category, PrefInfo.DISPLAY_ROTATION.key, true)
     }
 
     @Test
-    fun testExternalDisplaySelected_isMirroring_hideDisplaySizePreference() {
+    fun testExternalDisplaySelected_isMirroring_hideDisplayDensityPreference() {
         val display = mDisplays.first { it.id == EXTERNAL_DISPLAY_ID }
 
         setMirroringMode(true)
@@ -131,8 +167,9 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
         val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
         assertVisible(category, PrefInfo.DISPLAY_MIRRORING.key, false)
-        assertVisible(category, PrefInfo.DISPLAY_SIZE_AND_TEXT.key, false)
-        assertVisible(category, PrefInfo.DISPLAY_SIZE.key, false)
+        assertVisible(category, PrefInfo.INCLUDE_DEFAULT_DISPLAY.key, false)
+        assertVisible(category, PrefInfo.BUILTIN_DISPLAY_SUB_CATEGORY.key, false)
+        assertVisible(category, PrefInfo.EXTERNAL_DISPLAY_DENSITY.key, false)
         assertVisible(category, PrefInfo.DISPLAY_RESOLUTION.key, true)
         assertVisible(category, PrefInfo.DISPLAY_ROTATION.key, true)
     }

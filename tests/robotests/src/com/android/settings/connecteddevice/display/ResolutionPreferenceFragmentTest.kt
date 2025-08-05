@@ -27,9 +27,9 @@ import androidx.preference.PreferenceScreen
 import androidx.test.annotation.UiThreadTest
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.DISPLAY_MODE_LIMIT_OVERRIDE_PROP
 import com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.EXTERNAL_DISPLAY_RESOLUTION_SETTINGS_RESOURCE
 import com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.MORE_OPTIONS_KEY
+import com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.TOP_MODE_RES_MAX_COUNT
 import com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.TOP_OPTIONS_KEY
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 import com.google.common.truth.Truth.assertThat
@@ -67,44 +67,15 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
 
     @Test
     @UiThreadTest
-    fun testModePreferences_modeLimitFlagIsOn_noOverride() {
-        doReturn(true).`when`(mMockedInjector).isModeLimitForExternalDisplayEnabled()
-        doReturn(null).`when`(mMockedInjector).getSystemProperty(DISPLAY_MODE_LIMIT_OVERRIDE_PROP)
-        val (topPref, morePref) = runTestModePreferences()
-        assertThat(topPref.preferenceCount).isEqualTo(3)
-        assertThat(morePref.preferenceCount).isEqualTo(1)
-    }
-
-    @Test
-    @UiThreadTest
-    fun testModePreferences_noModeLimitFlag_overrideIsTrue() {
-        doReturn(false).`when`(mMockedInjector).isModeLimitForExternalDisplayEnabled()
-        doReturn("true").`when`(mMockedInjector).getSystemProperty(DISPLAY_MODE_LIMIT_OVERRIDE_PROP)
-        val (topPref, morePref) = runTestModePreferences()
-        assertThat(topPref.preferenceCount).isEqualTo(3)
-        assertThat(morePref.preferenceCount).isEqualTo(1)
-    }
-
-    @Test
-    @UiThreadTest
-    fun testModePreferences_noModeLimitFlag_noOverride() {
-        doReturn(false).`when`(mMockedInjector).isModeLimitForExternalDisplayEnabled()
-        doReturn(null).`when`(mMockedInjector).getSystemProperty(DISPLAY_MODE_LIMIT_OVERRIDE_PROP)
-        val (topPref, morePref) = runTestModePreferences()
-        assertThat(topPref.preferenceCount).isEqualTo(3)
-        assertThat(morePref.preferenceCount).isEqualTo(2)
-    }
-
-    @Test
-    @UiThreadTest
-    fun testModePreferences_modeLimitFlagIsOn_butOverrideIsFalse() {
-        doReturn(true).`when`(mMockedInjector).isModeLimitForExternalDisplayEnabled()
-        doReturn("false")
-            .`when`(mMockedInjector)
-            .getSystemProperty(DISPLAY_MODE_LIMIT_OVERRIDE_PROP)
-        val (topPref, morePref) = runTestModePreferences()
-        assertThat(topPref.preferenceCount).isEqualTo(3)
-        assertThat(morePref.preferenceCount).isEqualTo(2)
+    fun testModePreferences_modeLimit() {
+        initFragment(mDisplays[0].id)
+        mHandler.flush()
+        val topPref = mPreferenceScreen.findPreference<PreferenceCategory>(TOP_OPTIONS_KEY)
+        assertThat(topPref).isNotNull()
+        val morePref = mPreferenceScreen.findPreference<PreferenceCategory>(MORE_OPTIONS_KEY)
+        assertThat(morePref).isNotNull()
+        assertThat(topPref!!.preferenceCount).isEqualTo(TOP_MODE_RES_MAX_COUNT)
+        assertThat(morePref!!.preferenceCount).isEqualTo(1)
     }
 
     @Test
@@ -136,16 +107,6 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
         activityScenario.scenario.onActivity { activity: EmptyFragmentActivity ->
             assertThat(activity.isFinishing).isTrue()
         }
-    }
-
-    private fun runTestModePreferences(): Pair<PreferenceCategory, PreferenceCategory> {
-        initFragment(mDisplays[0].id)
-        mHandler.flush()
-        val topPref = mPreferenceScreen.findPreference<PreferenceCategory>(TOP_OPTIONS_KEY)
-        assertThat(topPref).isNotNull()
-        val morePref = mPreferenceScreen.findPreference<PreferenceCategory>(MORE_OPTIONS_KEY)
-        assertThat(morePref).isNotNull()
-        return Pair(topPref!!, morePref!!)
     }
 
     private fun initFragment(displayId: Int) {

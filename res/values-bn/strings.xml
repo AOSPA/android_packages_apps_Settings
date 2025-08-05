@@ -2044,8 +2044,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"চলমান"</string>
     <string name="not_installed" msgid="5074606858798519449">"এই ব্যবহারকারীর জন্য ইনস্টল করা নেই"</string>
     <string name="installed" msgid="2837449358488825884">"ইনস্টল করা হয়েছে"</string>
-    <!-- no translation found for no_applications (5471491608902031500) -->
-    <skip />
+    <string name="no_applications" msgid="5471491608902031500">"একই রকমের কোনও অ্যাপ নেই"</string>
     <string name="internal_storage" msgid="999496851424448809">"ইন্টারনাল স্টোরেজ"</string>
     <string name="recompute_size" msgid="1098091228370999128">"আকার আবার গণনা করা হচ্ছে..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"অ্যাপ ডেটা মুছবেন?"</string>
@@ -2636,16 +2635,12 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"ছোট"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"অত্যন্ত ছোট"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"কার্সরের অল্প নড়াচড়া উপেক্ষা করুন"</string>
-    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
-    <skip />
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"ডিফল্ট অ্যাকশন হিসেবে বাঁদিকের-ক্লিক ব্যবহার করুন"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"আপনি অন্য কোনও অ্যাকশন ব্যবহার করলে, অটোক্লিক ফিচার অটোমেটিক বাঁদিকের-ক্লিক হিসেবে সেট হয়ে যাবে"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"অটোক্লিক, ৩টি-বোতাম দিয়ে করা নেভিগেশনের মাধ্যমে সবচেয়ে ভালো কাজ করে"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"অটোক্লিক ব্যবহার করার সময় আপনাকে যদি সহজেই হোমে ফিরে যেতে বা একটি অ্যাপ থেকে অন্য অ্যাপে সুইচ করতে হয়, সেক্ষেত্রে জেসচার নেভিগেশন ব্যবহার করার পরিবর্তে ৩টি-বোতাম দিয়ে করা নেভিগেশন ব্যবহার করুন"</string>
-    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
-    <skip />
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"জেসচার নেভিগেশন রাখুন"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"নেভিগেশন সংক্রান্ত সেটিংস"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"ভাইব্রেশন ও হ্যাপটিক"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"বিভিন্ন রকম ব্যবহারের ক্ষেত্রে ভাইব্রেশনের মাত্রা নিয়ন্ত্রণ করুন"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"চালু আছে"</string>
@@ -5905,7 +5900,7 @@
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"অ্যাকাউন্ট ফিরিয়ে আনার ইমেল যোগ করুন"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"অ্যাকাউন্ট ফিরিয়ে আনার ইমেল যাচাই করান"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"পিন পরিবর্তন করুন"</string>
-    <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"পিন ভুলে গেছি"</string>
+    <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"পিন মনে নেই"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"পিন ভুলে গেছেন?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"অ্যাকাউন্ট ফিরিয়ে আনার ইমেল আপডেট করুন"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"পিন মুছুন"</string>
@@ -5913,7 +5908,7 @@
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"আপনার ইমেল আইডি যাচাই করুন"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"ওয়েবসাইট কন্টেন্ট ফিল্টার"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"ওয়েবসাইট ফিল্টার, সাইট ব্লক করুন, ব্রাউজার ফিল্টার, অনুপযুক্ত সাইট ব্লক করুন, সাইট ফিল্টার করুন, সার্চ ফলাফল ব্লক করুন, অনুপযুক্ত সার্চ ফলাফল ফিল্টার করুন, কন্টেন্ট সংক্রান্ত বিধিনিষেধ"</string>
-    <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"এই ফোনের কিছু অ্যাপ এবং ব্রাউজারে অনুপযুক্ত কন্টেন্ট ফিল্টার করতে সাহায্য করুন। অনুপযুক্ত কন্টেন্ট এখনও অন্যান্য অ্যাপ, ডিভাইস বা ব্রাউজারে দেখা যেতে পারে।"</string>
+    <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"এই ফোনের কিছু অ্যাপ এবং ব্রাউজারে অনুপযুক্ত কন্টেন্ট ফিল্টার করতে সাহায্য করে। অনুপযুক্ত কন্টেন্ট এখনও অন্যান্য অ্যাপ, ডিভাইস বা ব্রাউজারে দেখা যেতে পারে।"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"ওয়েবসাইট"</string>
     <string name="supervision_web_content_filters_browser_filter_title" msgid="7957976669412075070">"অনুপযুক্ত সাইট ব্লক করুন"</string>
     <string name="supervision_web_content_filters_search_title" msgid="8608480392956106029">"সার্চ ফলাফল"</string>
@@ -5922,8 +5917,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"এই সেটিংস বন্ধ করা থাকলেও, অন্যান্য অ্যাকাউন্ট সেটিংস এরপরেও প্রযোজ্য হতে পারে।"</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"অভিভাবকীয় নিয়ন্ত্রণ ফিচারের পিন লিখুন"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"একটি অভিভাবকীয় নিয়ন্ত্রণ পিন সেট করুন"</string>
-    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
-    <skip />
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"অভিভাবকীয় নিয়ন্ত্রণ পিন কনফার্ম করুন"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"পিন আপডেট করা হয়েছে"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"অ্যাপ খুলুন"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"পিন মুছবেন?"</string>

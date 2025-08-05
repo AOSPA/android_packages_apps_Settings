@@ -57,8 +57,9 @@ class FeedbackButtonPreferenceTest {
     private var activityScenario: ActivityScenario<EmptyFragmentActivity>? = null
     private val preferenceManager = PreferenceManager(context)
     private val preferenceScreen = preferenceManager.createPreferenceScreen(context)
-    private val preference =
-        FeedbackButtonPreference(FeedbackManager(PACKAGE_NAME, CATEGORY_TAG, TRIGGER_ID))
+    private val preference = FeedbackButtonPreference {
+        FeedbackManager(PACKAGE_NAME, CATEGORY_TAG, TRIGGER_ID)
+    }
 
     @After
     fun tearDown() {

@@ -170,7 +170,7 @@
     <string name="proxy_settings_title" msgid="4201866858226087066">"Välityspalvelin"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Tyhjennä"</string>
     <string name="proxy_port_label" msgid="6698001018215165848">"Välityspalvelimen portti (valinnainen)"</string>
-    <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Ohita välityspalvelin seuraavasti:"</string>
+    <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Ohita välityspalvelin seuraavilta:"</string>
     <string name="proxy_defaultView_text" msgid="6795150505379688451">"Palauta oletukset"</string>
     <string name="proxy_action_text" msgid="1103328484441449542">"Valmis"</string>
     <string name="proxy_hostname_label" msgid="345510072664361960">"Välityspalvelimen isäntänimi (valinnainen)"</string>
@@ -1016,12 +1016,9 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Lisäasetukset"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Järjestele näyttöjä painamalla pitkään ja vetämällä."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Peilaa sisäänrakennettu näyttö"</string>
-    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
-    <skip />
+    <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Käytetäänkö uusia asetuksia?"</string>
+    <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Jos näyttö ei toimi haluamallasi tavalla, voit palauttaa aiemmat asetukset"</string>
+    <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Käytä asetuksia"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"peilaus"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Ota langaton näyttö käyttöön"</string>
@@ -1768,7 +1765,7 @@
     <string name="call_settings_summary" msgid="8244293779053318053">"Ota käyttöön puhelinvastaaja, soitonsiirrot, koputuspalvelu, soittajan tunnus"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"Jaettu yhteys USB:n kautta"</string>
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"Kannettava yhteyspiste"</string>
-    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Bluetoothin jakaminen"</string>
+    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Jakaminen Bluetoothilla"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Jaettu yhteys"</string>
     <string name="tether_settings_title_all" msgid="6807525590937697228">"Hotspot ja yhteyden jako"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Hotspot päällä, jaettu yhteys"</string>
@@ -1792,14 +1789,14 @@
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internetyhteyttä ei jaeta muille laitteille."</string>
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"Pois päältä"</string>
-    <string name="usb_tethering_button_text" msgid="7364633823180913777">"Internetin jakaminen USB:n kautta"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetoothin jakaminen"</string>
+    <string name="usb_tethering_button_text" msgid="7364633823180913777">"Jakaminen USB:llä"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Jakaminen Bluetoothilla"</string>
     <string name="ethernet_ip_address" msgid="4218340787862242573">"IP-osoite"</string>
     <string name="ethernet_mac_address_title" msgid="3235879195237611007">"MAC-osoite"</string>
     <string name="tx_ethernet_speed" msgid="4785035505065551012">"Julkisen liikenteen linkin nopeus"</string>
     <string name="rx_ethernet_speed" msgid="6642000569214969711">"Vastaanottolinkin nopeus"</string>
     <string name="ethernet_network_usage" msgid="3795965384177426780">"Verkon käyttö"</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernetin jakaminen"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Jakaminen Ethernetillä"</string>
     <string name="ethernet_modify" msgid="1326316717004440503">"Muokkaa"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"Hotspot- ja puhelimen käyttäminen modeemina ‑ominaisuuksien avulla voit jakaa internetyhteyden muille laitteille datayhteydellä. Sovellukset voivat myös luoda hotspotin ja jakaa sisältöä lähellä oleville laitteille."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Jaa internetyhteys muille laitteille Wi-Fin tai mobiilidatan avulla hotspotilla tai käyttämällä puhelinta modeemina. Sovellukset voivat myös luoda hotspotin ja jakaa sisältöä lähellä oleville laitteille."</string>
@@ -2044,8 +2041,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"Käynnissä"</string>
     <string name="not_installed" msgid="5074606858798519449">"Ei asennettu tälle käyttäjälle"</string>
     <string name="installed" msgid="2837449358488825884">"Asennettu"</string>
-    <!-- no translation found for no_applications (5471491608902031500) -->
-    <skip />
+    <string name="no_applications" msgid="5471491608902031500">"Sovelluksia ei löydy"</string>
     <string name="internal_storage" msgid="999496851424448809">"Sisäinen tallennustila"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Lasketaan kokoa uudelleen..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Poistetaanko sovelluksen tiedot?"</string>
@@ -2642,10 +2638,8 @@
     <skip />
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Automaattinen klikkaus toimii parhaiten kolmen painikkeen navigoinnin kanssa"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Jos haluat palata helposti takaisin, siirtyä aloitusnäytölle ja vaihtaa sovelluksia käyttäessäsi automaattista klikkaamista, käytä kolmen painikkeen navigointia eleillä navigoinnin sijaan"</string>
-    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
-    <skip />
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Säilytä eleillä navigointi"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Navigointiasetukset"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Värinä ja haptinen palaute"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Muuta värinän voimakkuutta eri käyttötarkoituksille"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Päällä"</string>
@@ -3306,7 +3300,7 @@
     <string name="vpn_name" msgid="1119885022967213297">"Nimi*"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Tyyppi"</string>
     <string name="vpn_server" msgid="5771717512763639505">"Palvelimen osoite*"</string>
-    <string name="vpn_ipsec_identifier" msgid="6976476088030400883">"IPSec-tunnus"</string>
+    <string name="vpn_ipsec_identifier" msgid="6976476088030400883">"IPSec-tunnus*"</string>
     <string name="vpn_ipsec_secret" msgid="3110033645671775202">"Esijaettu IPSec-avain*"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"IPSec-käyttäjävarmenne"</string>
     <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"IPSec-CA-varmenne"</string>
@@ -3444,10 +3438,8 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Soitto- ja tekstiviestihistoria jaetaan tämän käyttäjän kanssa."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Poistetaanko järjestelmänvalvojan oikeudet?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Jos poistat käyttäjän järjestelmänvalvojan oikeudet, sinä tai toinen järjestelmänvalvoja voi antaa oikeudet takaisin myöhemmin."</string>
-    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
-    <skip />
-    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
-    <skip />
+    <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Poistetaanko järjestelmänvalvojan oikeudet?"</string>
+    <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Vain muut järjestelmänvalvojat voivat myöntää sinulle järjestelmänvalvojan oikeudet, jos jatkat."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Vaaratiedot"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Käyttäjän <xliff:g id="USER_NAME">%1$s</xliff:g> tiedot ja yhteystiedot"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Avaa <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4437,7 +4429,7 @@
     <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"Webkamera"</string>
     <string name="usb_transcode_files" msgid="2441954752105119109">"Muunna videot AVC-muotoon"</string>
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"Videoita voidaan toistaa useammilla mediasoittimilla, mutta laatu saattaa olla heikompi"</string>
-    <string name="usb_use_tethering" msgid="2897063414491670531">"Internetin jakaminen USB:n kautta"</string>
+    <string name="usb_use_tethering" msgid="2897063414491670531">"Jakaminen USB:llä"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
     <string name="usb_use" msgid="6783183432648438528">"USB:n käyttökohteet"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"USB-oletusmääritys"</string>
@@ -4454,7 +4446,7 @@
     <string name="usb_summary_charging_only" msgid="678095599403565146">"Laitteen lataaminen"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"Yhdistetyn laitteen lataaminen"</string>
     <string name="usb_summary_file_transfers" msgid="5498487271972556431">"Tiedostonsiirto"</string>
-    <string name="usb_summary_tether" msgid="2554569836525075702">"Internetin jakaminen USB:n kautta"</string>
+    <string name="usb_summary_tether" msgid="2554569836525075702">"Jakaminen USB:llä"</string>
     <string name="usb_summary_photo_transfers" msgid="7331503733435780492">"PTP"</string>
     <string name="usb_summary_MIDI" msgid="2372443732675899571">"MIDI"</string>
     <string name="usb_summary_UVC" msgid="8733131110899174299">"Webkamera"</string>
@@ -5899,8 +5891,7 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Määritä PIN-koodi"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"valvonta, lapsilukko, vanhemmat, valvonnan PIN-koodi, PIN-koodi"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN-koodin hallinta"</string>
-    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
-    <skip />
+    <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Lapsilukon PIN-koodi"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Vanhemman PIN-koodi, lapsilukon PIN-koodi"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Lisää varasähköposti"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Vahvista varasähköposti"</string>

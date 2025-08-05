@@ -36,8 +36,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 internal class TextReadingPreview(
-    private val displaySize: Flow<DisplaySize>,
-    private val fontSize: Flow<FontSize>,
+    displaySizeProvider: () -> Flow<DisplaySize>,
+    fontSizeProvider: () -> Flow<FontSize>,
 ) :
     PreferenceMetadata,
     PreferenceBinding,
@@ -47,6 +47,8 @@ internal class TextReadingPreview(
         get() = KEY
 
     private var previewPagerAdapter: PreviewPagerAdapter? = null
+    private val displaySize: Flow<DisplaySize> by lazy { displaySizeProvider.invoke() }
+    private val fontSize: Flow<FontSize> by lazy { fontSizeProvider.invoke() }
 
     override fun createWidget(context: Context) =
         TextReadingPreviewPreference(context, /* attrs= */ null).apply { isSelectable = false }

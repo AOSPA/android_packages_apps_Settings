@@ -17,7 +17,9 @@
 package com.android.settings.supervision
 
 import android.content.Intent
+import android.util.Log
 import com.android.settings.CatalystSettingsActivity
+import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /**
  * Activity to display the Supervision settings landing page (Settings > Supervision).
@@ -41,6 +43,7 @@ class SupervisionDashboardActivity :
                 finish()
                 return
             }
+            Log.w(TAG, "Should redirect to supervision app but no intent available.")
         }
 
         // If the supervision package doesn't have the necessary components, the dashboard can't be
@@ -85,8 +88,12 @@ class SupervisionDashboardActivity :
         val packageName = readDefaultSupervisionPackageNameFromResources() ?: return null
 
         val intent = Intent(INTERSTITIAL_REDIRECT_ACTION).setPackage(packageName)
-        return intent.takeIf {
-            packageManager.queryIntentActivitiesAsUser(it, 0, userId).isNotEmpty()
+
+        if (packageManager.queryIntentActivitiesAsUser(intent, 0, userId).isNotEmpty()) {
+            return intent
+        } else {
+            Log.w(TAG, "Should redirect to supervision app but $intent did not resolve.")
+            return null
         }
     }
 

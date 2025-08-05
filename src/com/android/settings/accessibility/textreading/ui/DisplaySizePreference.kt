@@ -70,22 +70,26 @@ internal class DisplaySizePreference(context: Context, @EntryPoint private val e
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
-    private val displaySizeDataStore =
+    private val displaySizeDataStore by lazy {
         DisplaySizeDataStore(context = context, entryPoint = entryPoint)
+    }
 
-    private val displaySizes = displaySizeDataStore.displaySizeData.value.values
+    private val displaySizes by lazy { displaySizeDataStore.displaySizeData.value.values }
     private var isDraggingSlider = false
 
-    private val _displaySizePreview = MutableStateFlow(displaySizeDataStore.displaySizeData.value)
+    private val _displaySizePreview by lazy {
+        MutableStateFlow(displaySizeDataStore.displaySizeData.value)
+    }
 
     /**
      * [displaySizePreview] is the temporary display size while the user is dragging and haven't
      * commit the change. This is useful when trying to display preview of the size changes.
      */
-    val displaySizePreview = _displaySizePreview.asStateFlow()
+    val displaySizePreview by lazy { _displaySizePreview.asStateFlow() }
 
-    private val debounceCommitController =
+    private val debounceCommitController by lazy {
         DebounceConfigurationChangeCommitController(minCommitDelay = MIN_COMMIT_DELAY)
+    }
 
     override val key: String
         get() = KEY

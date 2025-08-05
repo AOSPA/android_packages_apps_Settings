@@ -89,7 +89,7 @@ open class MagnificationScreen : PreferenceScreenMixin {
                 +JoystickSwitchPreference()
             }
             +MagnificationFooterPreference()
-            +FeedbackButtonPreference(FeedbackManager(context, metricsCategory))
+            +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
         }
 
     companion object {

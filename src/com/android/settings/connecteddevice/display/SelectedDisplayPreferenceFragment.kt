@@ -18,12 +18,15 @@ package com.android.settings.connecteddevice.display
 
 import android.app.settings.SettingsEnums
 import android.os.Bundle
+import android.provider.Settings
+import android.provider.Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY
 import android.window.DesktopExperienceFlags
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
+import androidx.preference.SwitchPreferenceCompat
 import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragmentBase
 import com.android.settings.Utils.createAccessibleSequence
@@ -97,9 +100,7 @@ open class SelectedDisplayPreferenceFragment(
     }
 
     override fun onStartCallback() {
-        viewModel.uiState.observe(viewLifecycleOwner) { state ->
-            update(state.selectedDisplayId, state.enabledDisplays, state.isMirroring)
-        }
+        viewModel.uiState.observe(viewLifecycleOwner) { state -> update(state) }
     }
 
     override fun onStopCallback() {
@@ -113,22 +114,44 @@ open class SelectedDisplayPreferenceFragment(
         // Built-in display preferences
         prefComponents.add(PrefComponent(mirroringPreference(), PrefInfo.DISPLAY_MIRRORING))
         prefComponents.add(
-            PrefComponent(builtinDisplaySizePreference(), PrefInfo.DISPLAY_SIZE_AND_TEXT)
+            PrefComponent(
+                includeDefaultDisplayInTopologyPreference(),
+                PrefInfo.INCLUDE_DEFAULT_DISPLAY,
+            )
         )
-        // TODO(b/420885578): Add universal cursor preference
+        // Built-in display preferences - sub-category
+        val builtinDisplaySubCategory = PreferenceCategory(requireContext())
+        builtinDisplaySubCategory.key = PrefInfo.BUILTIN_DISPLAY_SUB_CATEGORY.key
+        prefComponents.add(
+            PrefComponent(builtinDisplaySubCategory, PrefInfo.BUILTIN_DISPLAY_SUB_CATEGORY)
+        )
+        prefComponents.add(
+            PrefComponent(builtinDisplayDensityPreference(), PrefInfo.BUILTIN_DISPLAY_DENSITY)
+        )
         // External display preferences
-        prefComponents.add(PrefComponent(externalDisplaySizePreference(), PrefInfo.DISPLAY_SIZE))
+        prefComponents.add(
+            PrefComponent(externalDisplayDensityPreference(), PrefInfo.EXTERNAL_DISPLAY_DENSITY)
+        )
         prefComponents.add(PrefComponent(resolutionPreference(), PrefInfo.DISPLAY_RESOLUTION))
         prefComponents.add(PrefComponent(rotationPreference(), PrefInfo.DISPLAY_ROTATION))
 
-        prefComponents.forEach { selectedDisplayPreference.addPreference(it.preference) }
+        // Add all pref components
+        prefComponents.forEach {
+            when (it.prefInfo.parentPrefCategory) {
+                ParentPrefCategory.ROOT -> selectedDisplayPreference.addPreference(it.preference)
+                ParentPrefCategory.BUILTIN_DISPLAY_SUB_CATEGORY ->
+                    builtinDisplaySubCategory.addPreference(it.preference)
+            }
+            it.preference.setPersistent(false)
+        }
     }
 
-    private fun update(
-        displayId: Int,
-        enabledDisplays: Map<Int, DisplayDevice>,
-        isMirroring: Boolean,
-    ) {
+    private fun update(state: DisplayPreferenceViewModel.DisplayUiState) {
+        val displayId = state.selectedDisplayId
+        val enabledDisplays = state.enabledDisplays
+        val isMirroring = state.isMirroring
+        val includeDefaultDisplayInTopology = state.includeDefaultDisplayInTopology
+
         val display = enabledDisplays[displayId]
         // By design, if there's one or more enabled connected displays, `displayId` should always
         // be a valid key of `enabledDisplays`. In case where there's no enabled connected display,
@@ -145,13 +168,21 @@ open class SelectedDisplayPreferenceFragment(
         prefComponents.forEach { it.preference.setVisible(it.prefInfo.displayType == displayType) }
 
         if (displayType == DisplayType.BUILTIN_DISPLAY) {
-            selectedDisplayPreference.setTitle(R.string.builtin_display_settings_category)
-        } else {
-            selectedDisplayPreference.setTitle(display.name)
-
             selectedDisplayPreference
-                .findPreference<ExternalDisplaySizePreference>(PrefInfo.DISPLAY_SIZE.key)
-                ?.let { updateExternalDisplaySizePreference(it, display, isMirroring) }
+                .findPreference<SwitchPreferenceCompat>(PrefInfo.INCLUDE_DEFAULT_DISPLAY.key)
+                ?.let {
+                    updateIncludeDefaultDisplayInTopologyPreference(
+                        it,
+                        isMirroring,
+                        includeDefaultDisplayInTopology,
+                    )
+                }
+        } else {
+            selectedDisplayPreference
+                .findPreference<ExternalDisplaySizePreference>(
+                    PrefInfo.EXTERNAL_DISPLAY_DENSITY.key
+                )
+                ?.let { updateExternalDisplayDensityPreference(it, display, isMirroring) }
             selectedDisplayPreference
                 .findPreference<Preference>(PrefInfo.DISPLAY_RESOLUTION.key)
                 ?.let { updateResolutionPreference(it, display) }
@@ -172,11 +203,49 @@ open class SelectedDisplayPreferenceFragment(
             }
     }
 
-    private fun builtinDisplaySizePreference(): Preference {
+    private fun includeDefaultDisplayInTopologyPreference(): SwitchPreferenceCompat {
+        return SwitchPreferenceCompat(requireContext()).apply {
+            setTitle(PrefInfo.INCLUDE_DEFAULT_DISPLAY.titleResource)
+            setSummary(R.string.builtin_display_settings_universal_cursor_description)
+            key = PrefInfo.INCLUDE_DEFAULT_DISPLAY.key
+            onPreferenceClickListener =
+                object : Preference.OnPreferenceClickListener {
+                    override fun onPreferenceClick(preference: Preference): Boolean {
+                        writePreferenceClickMetric(preference)
+                        Settings.Secure.putInt(
+                            requireContext().getContentResolver(),
+                            INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY,
+                            if ((preference as SwitchPreferenceCompat).isChecked()) 1 else 0,
+                        )
+                        return true
+                    }
+                }
+        }
+    }
+
+    private fun updateIncludeDefaultDisplayInTopologyPreference(
+        preference: SwitchPreferenceCompat,
+        isMirroring: Boolean,
+        includeDefaultDisplayInTopology: Boolean,
+    ) {
+        val showPreference =
+            !isMirroring &&
+                viewModel.injector.isDefaultDisplayInTopologyFlagEnabled() &&
+                viewModel.injector.isProjectedModeEnabled()
+        if (showPreference) {
+            preference.setVisible(true)
+            preference.setChecked(includeDefaultDisplayInTopology)
+        } else {
+            preference.setVisible(false)
+            return
+        }
+    }
+
+    private fun builtinDisplayDensityPreference(): Preference {
         return Preference(requireContext()).apply {
             isPersistent = false
-            setTitle(PrefInfo.DISPLAY_SIZE_AND_TEXT.titleResource)
-            key = PrefInfo.DISPLAY_SIZE_AND_TEXT.key
+            setTitle(PrefInfo.BUILTIN_DISPLAY_DENSITY.titleResource)
+            key = PrefInfo.BUILTIN_DISPLAY_DENSITY.key
             onPreferenceClickListener =
                 object : Preference.OnPreferenceClickListener {
                     override fun onPreferenceClick(preference: Preference): Boolean {
@@ -187,18 +256,18 @@ open class SelectedDisplayPreferenceFragment(
         }
     }
 
-    private fun externalDisplaySizePreference(): ExternalDisplaySizePreference {
+    private fun externalDisplayDensityPreference(): ExternalDisplaySizePreference {
         return ExternalDisplaySizePreference(requireContext(), /* attrs= */ null).apply {
-            setTitle(PrefInfo.DISPLAY_SIZE.titleResource)
-            key = PrefInfo.DISPLAY_SIZE.key
+            setTitle(PrefInfo.EXTERNAL_DISPLAY_DENSITY.titleResource)
+            key = PrefInfo.EXTERNAL_DISPLAY_DENSITY.key
             setSummary(R.string.screen_zoom_short_summary)
         }
     }
 
-    private fun updateExternalDisplaySizePreference(
+    private fun updateExternalDisplayDensityPreference(
         preference: ExternalDisplaySizePreference,
         display: DisplayDevice,
-        isMirroring: Boolean
+        isMirroring: Boolean,
     ) {
         if (isMirroring) {
             preference.setVisible(false)
@@ -281,6 +350,11 @@ open class SelectedDisplayPreferenceFragment(
         }
     }
 
+    internal enum class ParentPrefCategory {
+        ROOT,
+        BUILTIN_DISPLAY_SUB_CATEGORY,
+    }
+
     @VisibleForTesting
     internal enum class DisplayType {
         BUILTIN_DISPLAY,
@@ -292,31 +366,49 @@ open class SelectedDisplayPreferenceFragment(
         val titleResource: Int,
         val key: String,
         val displayType: DisplayType,
+        val parentPrefCategory: ParentPrefCategory,
     ) {
         DISPLAY_MIRRORING(
             R.string.external_display_mirroring_title,
             "pref_key_builtin_display_mirroring",
             DisplayType.BUILTIN_DISPLAY,
+            ParentPrefCategory.ROOT,
         ),
-        DISPLAY_SIZE_AND_TEXT(
-            R.string.accessibility_text_reading_options_title,
-            "pref_key_builtin_display_size_and_text",
+        INCLUDE_DEFAULT_DISPLAY(
+            R.string.builtin_display_settings_universal_cursor_title,
+            "pref_key_builtin_display_include_default_display_in_topology",
             DisplayType.BUILTIN_DISPLAY,
+            ParentPrefCategory.ROOT,
         ),
-        DISPLAY_SIZE(
+        BUILTIN_DISPLAY_SUB_CATEGORY(
+            -1,
+            "pref_key_builtin_display_sub_category",
+            DisplayType.BUILTIN_DISPLAY,
+            ParentPrefCategory.ROOT,
+        ),
+        BUILTIN_DISPLAY_DENSITY(
+            R.string.accessibility_text_reading_options_title,
+            "pref_key_builtin_display_density",
+            DisplayType.BUILTIN_DISPLAY,
+            ParentPrefCategory.BUILTIN_DISPLAY_SUB_CATEGORY,
+        ),
+        EXTERNAL_DISPLAY_DENSITY(
             R.string.screen_zoom_title,
-            "pref_key_external_display_size",
+            "pref_key_external_display_density",
             DisplayType.EXTERNAL_DISPLAY,
+            ParentPrefCategory.ROOT,
         ),
         DISPLAY_RESOLUTION(
             R.string.external_display_resolution_settings_title,
             "pref_key_external_display_resolution",
             DisplayType.EXTERNAL_DISPLAY,
+            ParentPrefCategory.ROOT,
         ),
         DISPLAY_ROTATION(
             R.string.external_display_rotation,
             "pref_key_external_display_rotation",
             DisplayType.EXTERNAL_DISPLAY,
+            ParentPrefCategory.ROOT,
         ),
     }
 

@@ -44,7 +44,7 @@ class BoldTextPreference(context: Context, @EntryPoint private val entryPoint: I
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
-    private val storage = BoldTextDataStore(context = context, entryPoint = entryPoint)
+    private val storage by lazy { BoldTextDataStore(context = context, entryPoint = entryPoint) }
 
     override val keywords: Int
         get() = R.string.keywords_bold_text

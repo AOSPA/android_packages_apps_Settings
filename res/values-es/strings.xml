@@ -2605,7 +2605,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usar Inversión de colores"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Acceso directo a Inversión de colores"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Inversión de colores hace que las pantallas claras se vuelvan oscuras y que las pantallas oscuras se vuelvan claras."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Ten en cuenta lo siguiente:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Los colores cambiarán en el contenido multimedia y las imágenes.&lt;/li&gt; &lt;li&gt; Inversión de colores funciona en todas las aplicaciones.&lt;/li&gt; &lt;li&gt; Si lo que quieres es que se muestre un fondo oscuro, prueba mejor a usar el tema oscuro.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Ten en cuenta que:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Los colores cambiarán en el contenido multimedia y las imágenes.&lt;/li&gt; &lt;li&gt; Inversión de colores funciona en todas las aplicaciones.&lt;/li&gt; &lt;li&gt; Si lo que quieres es que se muestre un fondo oscuro, prueba mejor a usar el tema oscuro.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"acceder a Ajustes"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Autoclic (tiempo detenido)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Clic automático (permanencia)"</string>
@@ -2635,10 +2635,8 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Pequeña"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Extrapequeña"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Ignorar movimientos ligeros del cursor"</string>
-    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
-    <skip />
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"Usar el clic con el botón izquierdo como acción predeterminada"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Cuando uses otra acción, el autoclic volverá automáticamente al clic con el botón izquierdo"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"El autoclic funciona mejor con la navegación con 3 botones"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Para ir atrás, a la pantalla de inicio y cambiar de aplicación fácilmente al usar el autoclic, usa la navegación con 3 botones en lugar de la navegación por gestos"</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Mantener navegación por gestos"</string>
@@ -3304,7 +3302,7 @@
     <string name="vpn_type" msgid="5533202873260826663">"Tipo"</string>
     <string name="vpn_server" msgid="5771717512763639505">"Dirección del servidor*"</string>
     <string name="vpn_ipsec_identifier" msgid="6976476088030400883">"Identificador de IPSec*"</string>
-    <string name="vpn_ipsec_secret" msgid="3110033645671775202">"Clave precompartida de IPSec*"</string>
+    <string name="vpn_ipsec_secret" msgid="3110033645671775202">"Clave precompartida IPSec*"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"Certificado de usuario de IPSec"</string>
     <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"Certificado AC de IPSec"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"Certificado del servidor IPSec"</string>
@@ -4697,8 +4695,8 @@
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizada"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Restringido"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Corrector predeterminado"</string>
-    <string name="choose_spell_checker" msgid="7402513404783243675">"Elige corrector ortográfico"</string>
-    <string name="spell_checker_primary_switch_title" msgid="529240542284039243">"Usar corrector ortográfico"</string>
+    <string name="choose_spell_checker" msgid="7402513404783243675">"Elige el corrector ortográfico"</string>
+    <string name="spell_checker_primary_switch_title" msgid="529240542284039243">"Usar Corrector ortográfico"</string>
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"No seleccionado"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
     <string name="notification_log_details_package" msgid="3205243985502010202">"paquete"</string>
@@ -5910,7 +5908,7 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Eliminar PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Añadir correo de recuperación"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verificar tu correo"</string>
-    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtros de contenido de sitios web"</string>
+    <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtros de contenido de sitios"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"exclusión de sitios web, bloquear sitios, filtros del navegador, bloquear sitios con contenido explícito, excluir sitios, bloquear resultados de búsqueda, excluir resultados de búsqueda con contenido explícito, restricciones de contenido"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Ayuda a excluir el contenido explícito en algunas aplicaciones y navegadores de este teléfono. Puede seguir apareciendo contenido explícito en otras aplicaciones, dispositivos o navegadores."</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Sitios web"</string>
@@ -5921,8 +5919,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Aunque estos ajustes estén desactivados, se pueden seguir aplicando otros ajustes de la cuenta."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Introduce el PIN de los controles parentales"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Configurar un PIN de controles parentales"</string>
-    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
-    <skip />
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Confirma el PIN de controles parentales"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN actualizado"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Abrir aplicación"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"¿Eliminar PIN?"</string>

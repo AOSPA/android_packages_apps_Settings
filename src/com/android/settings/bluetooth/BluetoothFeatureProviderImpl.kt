@@ -22,7 +22,6 @@ import android.media.AudioManager
 import android.media.Spatializer
 import android.net.Uri
 import androidx.preference.Preference
-import com.android.settingslib.bluetooth.BluetoothUtils
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepositoryImpl
@@ -38,10 +37,6 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
         return uriByte?.let { Uri.parse(String(it)) }
     }
 
-    override fun getBluetoothDeviceControlUri(bluetoothDevice: BluetoothDevice): String? {
-        return BluetoothUtils.getControlUriMetaData(bluetoothDevice)
-    }
-
     override fun getRelatedTools(): List<ComponentName>? {
         return null
     }
@@ -53,22 +48,20 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
 
     override fun getBluetoothExtraOptions(
         context: Context,
-        device: CachedBluetoothDevice
+        device: CachedBluetoothDevice,
     ): List<Preference>? {
         return ImmutableList.of<Preference>()
     }
 
     override fun getInvisibleProfilePreferenceKeys(
         context: Context,
-        bluetoothDevice: BluetoothDevice
+        bluetoothDevice: BluetoothDevice,
     ): Set<String> {
         return ImmutableSet.of()
     }
 
     override fun getDeviceSettingRepository(
         context: Context,
-        scope: CoroutineScope
-    ): DeviceSettingRepository =
-        DeviceSettingRepositoryImpl(context, scope, Dispatchers.IO)
-
+        scope: CoroutineScope,
+    ): DeviceSettingRepository = DeviceSettingRepositoryImpl(context, scope, Dispatchers.IO)
 }

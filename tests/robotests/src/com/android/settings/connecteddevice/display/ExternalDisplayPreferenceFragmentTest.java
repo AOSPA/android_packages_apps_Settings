@@ -722,9 +722,9 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
-    public void testIncludeDefaultDisplayInTopologyPreference_desktopModeSupported_notAdding() {
+    public void testIncludeDefaultDisplayInTopologyPreference_notProjectedMode_notAdding() {
         mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
-        doReturn(true).when(mMockedInjector).isDesktopModeSupportedOnDefaultDisplay();
+        doReturn(false).when(mMockedInjector).isProjectedModeEnabled();
         initFragment();
         mHandler.flush();
         var pref =

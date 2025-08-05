@@ -108,7 +108,7 @@ abstract class BaseDarkModeScreen(context: Context) :
                     +ExpandedDarkModeSelectorPreference(modeStorage)
                 }
             }
-            +FeedbackButtonPreference(FeedbackManager(context, metricsCategory))
+            +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
         }
 
     override fun storage(context: Context): KeyValueStore = darkModeStorage

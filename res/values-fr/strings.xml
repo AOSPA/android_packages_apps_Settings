@@ -1297,7 +1297,7 @@
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Nom du point d\'accès"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Mot de passe du point d\'accès"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Désactiver le point d\'accès automatiquement"</string>
-    <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Lorsqu\'il n\'y a aucun appareil connecté"</string>
+    <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Lorsqu\'aucun appareil n\'est connecté"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Étendre la compatibilité"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Aide d\'autres appareils à détecter ce point d\'accès. Réduit la vitesse de connexion du point d\'accès."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Aide d\'autres appareils à détecter ce point d\'accès. La batterie est davantage sollicitée."</string>
@@ -2044,8 +2044,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"En cours"</string>
     <string name="not_installed" msgid="5074606858798519449">"Non installé pour cet utilisateur"</string>
     <string name="installed" msgid="2837449358488825884">"Installée"</string>
-    <!-- no translation found for no_applications (5471491608902031500) -->
-    <skip />
+    <string name="no_applications" msgid="5471491608902031500">"Aucune application correspondante"</string>
     <string name="internal_storage" msgid="999496851424448809">"Stockage interne"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Calcul de la taille..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Supprimer les données de l\'application ?"</string>
@@ -2325,7 +2324,7 @@
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Dispositions de claviers physiques"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Dictionnaire personnel"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Dictionnaire personnel pour le travail"</string>
-    <string name="user_dict_settings_summary" msgid="4939694372338975081">"Ajoutez des mots à utiliser dans des applis comme le correcteur orthographique"</string>
+    <string name="user_dict_settings_summary" msgid="4939694372338975081">"Ajoutez des mots qui pourront être utilisés dans des applis comme le correcteur orthographique"</string>
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"Ajouter"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"Ajouter au dictionnaire"</string>
     <string name="user_dict_settings_add_screen_title" msgid="1866408024073475379">"Expression"</string>
@@ -2504,7 +2503,7 @@
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Pour lancer ou arrêter l\'agrandissement, appuyez trois fois n\'importe où sur l\'écran."</string>
     <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"Pour commencer et arrêter l\'agrandissement, appuyez rapidement %1$d fois sur votre écran."</string>
     <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"Pour commencer et arrêter l\'agrandissement, appuyez rapidement 2 fois sur l\'écran avec %1$d doigts."</string>
-    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Pour utiliser cette fonctionnalité, balayez votre écran de haut en bas. Recherchez ensuite le titre {featureName}.}one{Pour utiliser cette fonctionnalité, balayez votre écran de haut en bas avec # doigt. Recherchez ensuite le titre {featureName}.}other{Pour utiliser cette fonctionnalité, balayez votre écran de haut en bas avec # doigts. Recherchez ensuite le titre {featureName}.}}"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Pour utiliser cette fonctionnalité, balayez votre écran depuis le bord supérieur vers le bas. Recherchez ensuite le titre {featureName}.}one{Pour utiliser cette fonctionnalité, balayez votre écran depuis le bord supérieur vers le bas avec # doigt. Recherchez ensuite le titre {featureName}.}other{Pour utiliser cette fonctionnalité, balayez votre écran depuis le bord supérieur vers le bas avec # doigts. Recherchez ensuite le titre {featureName}.}}"</string>
     <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Ce raccourci sera disponible une fois que vous aurez fini de configurer votre appareil."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Pour utiliser cette fonctionnalité, balayez vers le haut depuis le bas de l\'écran avec deux doigts.\n\nPour changer de fonctionnalité, balayez vers le haut avec deux doigts et maintenez l\'appui."</string>
     <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Pour utiliser cette fonctionnalité, balayez vers le haut depuis le bas de l\'écran}one{Pour utiliser cette fonctionnalité, balayez vers le haut depuis le bas de l\'écran avec # doigt}other{Pour utiliser cette fonctionnalité, balayez vers le haut depuis le bas de l\'écran avec # doigts}}"</string>
@@ -2642,10 +2641,8 @@
     <skip />
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Le clic automatique fonctionne mieux avec la navigation à trois boutons"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Pour revenir en arrière, accéder à l\'accueil et changer d\'application en toute simplicité lorsque vous utilisez le clic automatique, utilisez la navigation à trois boutons plutôt que la navigation par gestes"</string>
-    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
-    <skip />
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Conserver la navigation par gestes"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Paramètres de navigation"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibreur et retour haptique"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Contrôler la force des vibrations pour différentes utilisations"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Activé"</string>
@@ -3320,7 +3317,7 @@
     <string name="vpn_not_used" msgid="7229312881336083354">"(non utilisé)"</string>
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"(ne pas valider le serveur)"</string>
     <string name="vpn_no_server_cert" msgid="8106540968643125407">"(reçu du serveur)"</string>
-    <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"Les informations saisies ne sont pas acceptées avec le VPN permanent"</string>
+    <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"Les informations saisies ne sont pas compatibles avec le VPN permanent"</string>
     <string name="vpn_field_required" msgid="582849543970781302">"* obligatoire"</string>
     <string name="vpn_cancel" msgid="5929410618112404383">"Annuler"</string>
     <string name="vpn_done" msgid="5137858784289564985">"Ignorer"</string>
@@ -3934,7 +3931,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"N\'afficher que les nouvelles notif. sur l\'écran verrouillage"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Supprimer automatiquement de l\'écran de verrouillage les notifications déjà consultées"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Liste complète"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Mode d\'affichage compact"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Affichage compact"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifications sur l\'écran de verrouillage"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Afficher les conversations, par défaut et silencieuses"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Afficher toutes les notifications"</string>
@@ -4293,7 +4290,7 @@
     <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Contrôlez votre attention"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Avertissement"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fermer"</string>
-    <string name="device_feedback" msgid="5351614458411688608">"Envoyer commentaires sur l\'appareil"</string>
+    <string name="device_feedback" msgid="5351614458411688608">"Envoyer des commentaires sur l\'appareil"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Saisir le code d\'accès administrateur"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Activé"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Désactivé"</string>
@@ -5903,13 +5900,13 @@
     <skip />
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Code parental, code de contrôle parental"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Ajouter une adresse e-mail de récupération"</string>
-    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Valider l\'adresse e-mail de récupération"</string>
+    <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Validez l\'adresse e-mail de récupération"</string>
     <string name="supervision_change_pin_preference_title" msgid="2288584039438231801">"Modifier le code"</string>
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Code oublié"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Code oublié ?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Mettre à jour l\'adresse e-mail de récupération"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Supprimer le code"</string>
-    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Ajouter une adresse e-mail de récupération"</string>
+    <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Ajoutez une adresse e-mail de récupération"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Valider votre adresse e-mail"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtres de contenu de site Web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtres de sites Web, bloquer les sites, filtres de navigateur, bloquer les sites au contenu explicite, filtrer les sites, bloquer les résultats de recherche, filtrer les résultats de recherche au contenu explicite, restrictions de contenu"</string>

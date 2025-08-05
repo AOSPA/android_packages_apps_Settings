@@ -170,7 +170,7 @@
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Șterge"</string>
     <string name="proxy_port_label" msgid="6698001018215165848">"Portul proxy (opțional)"</string>
-    <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Evită utilizarea unui proxy pentru"</string>
+    <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Omite utilizarea unui proxy pentru"</string>
     <string name="proxy_defaultView_text" msgid="6795150505379688451">"Restabilește valorile prestabilite"</string>
     <string name="proxy_action_text" msgid="1103328484441449542">"Terminat"</string>
     <string name="proxy_hostname_label" msgid="345510072664361960">"Numele gazdei proxy (opțional)"</string>
@@ -479,7 +479,7 @@
     <string name="fingerprint_check_enroll_touch_sensor" msgid="5010063281557456236">"Atinge senzorul de amprentă"</string>
     <string name="fingerprint_check_enroll_not_recognized" msgid="2779520550437394431">"Amprenta nu a fost recunoscută"</string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Deblocare cu ceasul"</string>
-    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Vizionează"</string>
+    <string name="security_settings_activeunlock" msgid="8922823742770802651">"Ceas"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Când configurezi Deblocarea facială și Deblocarea cu amprenta, telefonul îți va solicita amprenta atunci când porți mască sau te afli într-o zonă întunecoasă.\n\nDeblocarea cu ceasul este o altă modalitate convenabilă de a debloca telefonul, de exemplu, când ai degetele ude sau nu îți recunoaște chipul."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Deblocarea cu ceasul este o altă modalitate convenabilă de a debloca telefonul, de exemplu, când nu îți recunoaște amprenta."</string>
     <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Deblocarea cu ceasul este o altă modalitate convenabilă de a debloca telefonul, de exemplu, când nu îți recunoaște chipul."</string>
@@ -1258,8 +1258,8 @@
     <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – Se încarcă"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Conexiune hotspot"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Puterea conexiunii"</string>
-    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (dacă nu este înlocuit de un DNS privat)"</string>
-    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (dacă nu este înlocuit de un DNS privat)"</string>
+    <string name="ethernet_dns1" msgid="6487470669719468602">"DNS 1 (dacă nu este modificat de un DNS privat)"</string>
+    <string name="ethernet_dns2" msgid="484620572555181363">"DNS 2 (dacă nu este modificat de un DNS privat)"</string>
     <string name="ethernet_gateway" msgid="4064061619318875567">"Gateway"</string>
     <string name="ethernet_network_prefix_length" msgid="3693127271457763198">"Lungime prefix rețea"</string>
     <string name="ethernet_ip_settings" msgid="3344064201878792090">"Setări IP"</string>
@@ -1320,7 +1320,7 @@
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Dacă frecvența preferată nu este disponibilă, hotspotul poate folosi alta. Setările de securitate ale hotspotului se pot modifica dacă schimbi frecvența."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Nu este disponibilă cu 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Setările de securitate se pot schimba dacă schimbi frecvența hotspotului"</string>
-    <string name="wifi_hotspot_instant_title" msgid="7052526695338853703">"Hotspot instant"</string>
+    <string name="wifi_hotspot_instant_title" msgid="7052526695338853703">"Hotspot instantaneu"</string>
     <string name="wifi_hotspot_instant_summary_on" msgid="3142749148673081288">"Activat"</string>
     <string name="wifi_hotspot_instant_summary_off" msgid="8594065628453795615">"Dezactivat"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Se activează hotspotul..."</string>
@@ -2044,8 +2044,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"Rulează"</string>
     <string name="not_installed" msgid="5074606858798519449">"Nu este instal. pt. utilizator"</string>
     <string name="installed" msgid="2837449358488825884">"Instalată"</string>
-    <!-- no translation found for no_applications (5471491608902031500) -->
-    <skip />
+    <string name="no_applications" msgid="5471491608902031500">"Nicio aplicație nu corespunde"</string>
     <string name="internal_storage" msgid="999496851424448809">"Stocare internă"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Se recalculează dimensiunea..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Ștergi datele aplicației?"</string>
@@ -2642,10 +2641,8 @@
     <skip />
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Clicul automat funcționează mai bine cu navigarea cu 3 butoane"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Pentru a reveni cu ușurință, a accesa ecranul de pornire și a comuta între aplicații când folosești clicul automat, folosește navigarea cu 3 butoane în locul navigării prin gesturi"</string>
-    <!-- no translation found for accessibility_autoclick_keep_gesture_navigation (5403212927837555942) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_navigation_settings (26376319288642658) -->
-    <skip />
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Păstrează navigarea prin gesturi"</string>
+    <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Setări de navigare"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrații și feedback tactil"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Controlează intensitatea vibrației pentru diferite moduri de folosire"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Activate"</string>
@@ -3327,7 +3324,7 @@
     <string name="vpn_save" msgid="683868204634860888">"Salvează"</string>
     <string name="vpn_connect" msgid="7102335248484045354">"Conectează"</string>
     <string name="vpn_replace" msgid="1533147558671640341">"Înlocuiește"</string>
-    <string name="vpn_edit" msgid="5862301148429324911">"Editați profilul VPN"</string>
+    <string name="vpn_edit" msgid="5862301148429324911">"Editează profilul VPN"</string>
     <string name="vpn_forget" msgid="2913950864877236737">"Șterge"</string>
     <string name="vpn_connect_to" msgid="216709261691085594">"Conectează-te la <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Vrei să te deconectezi de la această rețea VPN?"</string>
