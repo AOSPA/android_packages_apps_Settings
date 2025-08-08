@@ -1400,14 +1400,14 @@
     <string name="hdr_brightness_level_title" msgid="770342878327164738">"Voimakkuus"</string>
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Vakiokuva"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR-kuva"</string>
-    <string name="hdr_brightness_warning" msgid="2755151579539607928">"Asetus vaikuttaa vain suuren dynaamisen alueen (HDR) ‑kuviin- ja ‑videotiedostoihin."</string>
+    <string name="hdr_brightness_warning" msgid="2755151579539607928">"Asetus vaikuttaa vain suuren dynaamisen alueen (HDR) kuviin ja videoihin."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Näytä valkotasapaino"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Jatka sovellusten käyttöä taitetussa tilassa"</string>
     <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Älä rajoita pelien kuvanopeutta"</string>
     <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Poista kuvanopeuden rajoittaminen <xliff:g id="FRAME_RATE">%1$d</xliff:g> hertsiin pelien osalta."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Smooth Display"</string>
-    <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Nostaa tietyn sisällön päivittymistiheyden automaattisesti <xliff:g id="ID_1">%1$d</xliff:g> hertsiin. Lisää akun käyttöä."</string>
+    <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Nostaa tietyn sisällön päivittymistiheyden automaattisesti <xliff:g id="ID_1">%1$d</xliff:g> hertsiin. Lisää akkuvirran kulutusta."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Pakota suurin mahdollinen päivitysväli"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Korkein päivitysväli parantaa kosketukseen vastaamista ja animaatioiden laatua. Lisää akun käyttöä."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Huomionäyttö"</string>
@@ -1877,12 +1877,19 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Sormenjälki: aseta kuvio"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Määritä PIN-koodi tietoturvan parantamiseksi."</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Sormenjälki: aseta PIN-koodi"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Lisää salasana uudelleen"</string>
+    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
+    <skip />
+    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
+    <skip />
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Lisää työsalasana uudelleen"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Työprofiilin salasanan lisääminen"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Vahvista kuvio"</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
+    <skip />
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Lisää työprofiilin kuvio"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Lisää PIN-koodi uudelleen"</string>
+    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
+    <skip />
+    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
+    <skip />
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Lisää työ-PIN uudelleen"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Lisää työprofiilin PIN-koodi"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Salasanat eivät täsmää"</string>
@@ -1901,12 +1908,18 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Unohditko salasanasi?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Unohditko kuviosi?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Unohditko PIN-koodisi?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Jatka piirtämällä kuvio"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Jatka lisäämällä PIN-koodi"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Jatka lisäämällä salasana"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Jatka piirtämällä työprofiilisi kuvio"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Jatka lisäämällä työprofiilisi PIN-koodi"</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Jatka antamalla työprofiilisi salasana."</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
+    <skip />
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Turvallisuussyistä pyydämme antamaan laitteen kuvion."</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Turvallisuussyistä pyydämme antamaan laitteen PIN-koodin."</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Turvallisuussyistä pyydämme antamaan laitteen salasanan."</string>
@@ -2394,7 +2407,8 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Ajoitussäätimet"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Järjestelmän hallinta"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Lähetä palautetta"</string>
-    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Arvioi meidät"</string>
+    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <skip />
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Yht.otto Googlen vammaistiimiin"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Saavutettavuuskysely"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Anna palautetta"</string>
@@ -2632,10 +2646,8 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Pieni"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Erittäin pieni"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Ohita vähäinen kohdistimen liike"</string>
-    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
-    <skip />
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"Käytä ykköspainikkeella klikkausta oletustoimintona"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Kun käytät toista toimintoa, automaattinen klikkaus palaa automaattisesti ykköspainikkeella klikkaukseen"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Automaattinen klikkaus toimii parhaiten kolmen painikkeen navigoinnin kanssa"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Jos haluat palata helposti takaisin, siirtyä aloitusnäytölle ja vaihtaa sovelluksia käyttäessäsi automaattista klikkaamista, käytä kolmen painikkeen navigointia eleillä navigoinnin sijaan"</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Säilytä eleillä navigointi"</string>
@@ -2696,7 +2708,8 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Ota käyttöön ja ylläpidä ASHA- ja LE Audio -kuulolaitteita, sisäkorvaimplantteja ja muita äänenvahvistuslaitteita"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Ota käyttöön ja ylläpidä ASHA-kuulolaitteita, sisäkorvaimplantteja ja muita äänenvahvistuslaitteita"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Ota käyttöön ja ylläpidä LE Audio -kuulolaitteita, sisäkorvaimplantteja ja muita äänenvahvistuslaitteita"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Ei yhdistettyjä kuulolaitteita"</string>
+    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
+    <skip />
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Lisää kuulolaitteita"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Liitä kuulolaitteet"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Napauta kuulolaitteitasi seuraavassa kohdassa. Sinun täytyy ehkä liittää vasen ja oikea korva erikseen.\n\nVarmista, että kuulolaitteet ovat päällä ja valmiita parin muodostukseen."</string>
@@ -2877,14 +2890,14 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimoitu"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Rajoitettu"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Salli akunkäyttö taustalla ilman rajoituksia. Saattaa lisätä akunkäyttöä."</string>
-    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"Salli akun käyttö taustalla. Saattaa lisätä akun käyttöä."</string>
+    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"Salli akkuvirran käyttö taustalla. Saattaa lisätä akkuvirran kulutusta."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimoi käytön perusteella. Tätä suositellaan useimmille sovelluksille."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Rajoita akunkäyttöä taustalla. Sovellus ei ehkä toimi odotetusti. Ilmoituksissa voi olla viiveitä."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Sovelluksen akunkäyttötavan muuttaminen voi vaikuttaa sen suorituskykyyn."</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Tämän sovelluksen akunkäytön täytyy olla <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"rajoittamaton"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"optimoitu"</string>
-    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"Lue lisää akun käytön valinnoista"</string>
+    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"Lue lisää akkuvirran käytön valinnoista"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Näytön käyttö täyden latauksen jälkeen"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Akun käyttö"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Historiatiedot"</string>
@@ -3102,10 +3115,14 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Päälle"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Pois"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Käytä mukautuvaa yhdistettävyyttä"</string>
-    <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"Automaattinen vaihto Wi-Fistä mobiilidataan"</string>
-    <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"Käytä automaattisesti mobiilidataa, kun Wi-Fi-yhteys on heikko tai sitä ei ole. Datan käytöstä voidaan veloittaa."</string>
-    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"Verkon autom. vaihto akunkeston parantamiseksi"</string>
-    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="2432517485362085341">"Pidennä akunkestoa ylläpitämällä verkkoyhteyksiä automaattisesti"</string>
+    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
+    <skip />
     <string name="cellular_security_title" msgid="5562899485544677941">"Mobiiliverkkoa koskeva turvallisuus"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Verkon tyyppi, salaus, ilmoitusvalinnat"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"Näiden asetusten avulla voit suojata puhelut, viestit ja datan vanhentuneilta tai salaamattomilta verkoilta, joiden kautta dataa saatetaan varastaa tai valvoa"</string>
@@ -3490,7 +3507,7 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"AMBER-hälytykset"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"Vastaanota tiedotteita kaapatuista lapsista"</string>
     <string name="repeat_title" msgid="8676570486899483606">"Toista"</string>
-    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Langattomat hätähälytykset"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Langattomat hätätiedotteet"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Verkko-operaattorit"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Tukiasemien nimet"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -4374,10 +4391,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"Lupienhallinta"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Sijainnin datan jakamisen päivitykset"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Tarkista sovellukset, jotka ovat muuttaneet tapaa, jolla ne voivat jakaa sijaintitietoja"</string>
-    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1837117989202166166">"Agentit"</string>
+    <string name="app_function_access_settings_summary" msgid="3654291845453799170">"Agentit, joilla on pääsy tietoihin ja jotka voivat tehdä toimintoja sovelluksissa"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Herätä napauttamalla"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Herätä laite napauttamalla näyttöä kahdesti."</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Linkkien avautuminen"</string>
@@ -5681,10 +5696,10 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sormenjälkitunnistin"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Valoilmoitukset"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Tietoa valoilmoituksista"</string>
-    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Pois päältä"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Päällä / kameran valoilmoitus"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Päällä / näytön valoilmoitus"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Päällä / kameran ja näytön valoilmoitus"</string>
+    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
+    <skip />
+    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
+    <skip />
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Käytä kamerassa tai näytöllä välkkyvää valoa ilmoituksen tai ilmoitusäänen aikana"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Käytä näytöllä välkkyvää valoa ilmoituksen tai ilmoitusäänen aikana"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Käytä valoilmoituksia harkiten, jos olet herkkä valolle"</string>
@@ -5913,8 +5928,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Kun nämä asetukset ovat pois päältä, muut tilin asetukset voivat silti olla voimassa."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Lisää lapsilukon PIN-koodi"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Aseta lapsilukon PIN-koodi"</string>
-    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
-    <skip />
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Vahvista lapsilukon PIN-koodi"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN-koodi päivitetty"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Avaa sovellus"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Poistetaanko PIN-koodi?"</string>

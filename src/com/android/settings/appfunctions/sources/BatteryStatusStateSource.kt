@@ -25,7 +25,7 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDev
 class BatteryStatusStateSource : DeviceStateSource {
     override val category: DeviceStateCategory = DeviceStateCategory.BATTERY
 
-    override fun get(
+    override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
     ): PerScreenDeviceStates {

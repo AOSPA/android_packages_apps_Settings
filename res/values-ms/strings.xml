@@ -285,7 +285,7 @@
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Simpan sekurang-kurangnya satu bahasa pilihan"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"Tidak tersedia sebagai bahasa sistem"</string>
     <string name="dlg_title_delete_preferred_locale" msgid="4167214348946940002">"Alih keluar <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g>?"</string>
-    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> akan dialih keluar daripada bahasa pilihan anda. Anda boleh menambahkan SDK itu semula nanti."</string>
+    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> akan dialih keluar daripada bahasa pilihan anda. Anda boleh menambahkan bahasa itu semula nanti."</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"Alihkan ke atas"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"Alih ke bawah"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"Alih ke paling atas"</string>
@@ -1380,11 +1380,11 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Hidup"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Di - Berasaskan wajah"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Pengesanan Wajah"</string>
-    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Ketahui lebih lanjut tentang autoputar"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Ketahui autoputar lebih lanjut"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Peleraian skrin"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Peleraian tinggi"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Peleraian maksimum"</string>
-    <string name="screen_resolution_footer" msgid="1230761249204935717">"Peleraian maksimum menggunakan lebih banyak bateri anda. Penukaran peleraian anda mungkin menyebabkan sesetengah apl dimulakan semula."</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"Peleraian maksimum menggunakan lebih banyak kuasa bateri. Penukaran peleraian mungkin menyebabkan sesetengah apl dimulakan semula."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"<xliff:g id="WIDTH">%1$s</xliff:g> kali <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Warna"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Asli"</string>
@@ -1393,7 +1393,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Boleh suai"</string>
     <string name="brightness" msgid="6216871641021779698">"Tahap kecerahan"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Kecerahan boleh suai"</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"Kecerahan skrin akan dilaraskan secara automatik dengan persekitaran dan aktiviti anda. Anda boleh mengalihkan peluncur secara manual untuk membantu kecerahan boleh suai mempelajari pilihan anda."</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"Kecerahan skrin akan dilaraskan secara automatik dengan persekitaran dan aktiviti anda. Anda boleh menggerakkan peluncur secara manual untuk membantu kecerahan boleh suai mempelajari pilihan anda."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Hidup"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Mati"</string>
     <string name="hdr_brightness_title" msgid="6997980740096282616">"Kecerahan HDR yang dipertingkatkan"</string>
@@ -1425,7 +1425,7 @@
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"Akses kamera diperlukan untuk Pengesanan Wajah. Ketik untuk mengurus kebenaran bagi Perkhidmatan Pemeribadian Peranti"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Urus kebenaran"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Cahaya Malam"</string>
-    <string name="night_display_text" msgid="4789324042428095383">"Cahaya Malam memberikan seri warna kuning jingga pada skrin anda. Ini memudahkan lagi anda melihat skrin atau membaca dalam cahaya malap dan mungkin dapat membantu anda tidur dengan lebih mudah."</string>
+    <string name="night_display_text" msgid="4789324042428095383">"Cahaya Malam memberikan seri warna kuning jingga pada skrin. Keadaan ini memudahkan lagi anda melihat skrin atau membaca dalam cahaya malap malah mungkin membantu anda tidur dengan lebih mudah."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Jadual"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Tiada"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Dihidupkan pada waktu tersuai"</string>
@@ -1877,12 +1877,19 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Buat corak untuk guna cap jari"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Untuk keselamatan, tetapkan PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Buat PIN untuk guna cap jari"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Masukkan semula kata laluan anda"</string>
+    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
+    <skip />
+    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
+    <skip />
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Masukkan semula kata laluan profil kerja"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Masukkan kata laluan kerja anda"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Sahkan corak anda"</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
+    <skip />
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Masukkan corak profil kerja"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Masukkan semula PIN"</string>
+    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
+    <skip />
+    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
+    <skip />
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Masukkan semula PIN profil kerja"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Masukkan PIN profil kerja"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Kata laluan tidak sepadan"</string>
@@ -1901,12 +1908,18 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Terlupa kata laluan anda?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Terlupa corak anda?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Terlupa nombor PIN anda?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Lukis corak anda untuk teruskan"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Masukkan PIN anda untuk teruskan"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Masukkan kata laluan anda untuk teruskan"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Lukis corak kerja anda untuk teruskan"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Masukkan PIN kerja anda untuk meneruskan"</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Masukkan kata laluan kerja anda untuk meneruskan"</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
+    <skip />
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Untuk keselamatan tambahan, gunakan corak peranti anda"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Untuk keselamatan tambahan, masukkan PIN peranti anda"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Untuk keselamatan tambahan, masukkan kata laluan peranti anda"</string>
@@ -2066,7 +2079,7 @@
     <string name="system_package" msgid="7559476279008519360">"Kemas kini sistem tidak boleh dipasangkan pada media luaran."</string>
     <string name="move_error_device_admin" msgid="1561502976834303626">"Apl pentadbir peranti tidak boleh dipasang pada media luaran"</string>
     <string name="force_stop_dlg_title" msgid="86745852555490146">"Henti paksa?"</string>
-    <string name="force_stop_dlg_text" msgid="1527286468544457368">"Jika anda menghentikan aplikasi secara paksa, mungkin fungsinya akan terganggu."</string>
+    <string name="force_stop_dlg_text" msgid="1527286468544457368">"Jika anda menghentikan aplikasi secara paksa, fungsinya mungkin akan terganggu."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Lumpuhkan apl"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Jika anda melumpuhkan apl ini, Android dan apl lain mungkin tidak berfungsi seperti yang sepatutnya. Jangan lupa, anda tidak boleh memadamkan apl ini kerana apl diprapasang pada peranti anda. Dengan melumpuhkan apl, anda mematikan dan menyembunyikan apl ini pada peranti anda."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Gedung"</string>
@@ -2304,7 +2317,7 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Pengguna dipilih: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Pertuturan"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Pertuturan"</string>
-    <string name="speech_preference_summary" msgid="5190362663352347487">"Kawal pengecaman pertuturan dan output"</string>
+    <string name="speech_preference_summary" msgid="5190362663352347487">"Kawal pengecaman dan output pertuturan"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Kelajuan penuding"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Saiz kursor"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Kurangkan skala penuding"</string>
@@ -2394,7 +2407,8 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Kawalan pemasaan"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Kawalan sistem"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Hantar maklum balas"</string>
-    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Berikan penilaian kepada kami"</string>
+    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <skip />
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Hubungi Sokongan Orang Kurang Upaya Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Tinjauan Kebolehaksesan"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Kongsi maklum balas anda"</string>
@@ -2500,7 +2514,7 @@
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Untuk memulakan dan menghentikan pembesaran, ketik tiga kali di mana-mana bahagian skrin anda."</string>
     <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"Untuk memulakan dan menghentikan pembesaran, ketik skrin %1$d kali dengan pantas"</string>
     <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"Untuk memulakan dan menghentikan pembesaran, ketik skrin dua kali dengan pantas menggunakan %1$d jari"</string>
-    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Untuk menggunakan ciri ini, leret ke bawah daripada bahagian atas skrin anda. Kemudian, cari jubin {featureName}.}other{Untuk menggunakan ciri ini, leret ke bawah daripada bahagian atas skrin anda menggunakan # jari. Kemudian, cari jubin {featureName}.}}"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Untuk menggunakan ciri ini, leret ke bawah dari bahagian atas skrin. Kemudian, cari jubin {featureName}.}other{Untuk menggunakan ciri ini, leret ke bawah dari bahagian atas skrin menggunakan # jari. Kemudian, cari jubin {featureName}.}}"</string>
     <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Pintasan ini akan tersedia selepas anda menyelesaikan persediaan peranti."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Untuk menggunakan ciri ini, leret ke atas dari bawah skrin dengan 2 jari.\n\nUntuk beralih antara ciri, leret ke atas dengan 2 jari dan tahan."</string>
     <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Untuk menggunakan ciri ini, leret ke atas dari bahagian bawah skrin}other{Untuk menggunakan ciri ini, leret ke atas menggunakan # jari dari bahagian bawah skrin}}"</string>
@@ -2670,9 +2684,9 @@
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Gunakan pembetulan warna"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Pintasan pembetulan warna"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Perihal pembetulan warna"</string>
-    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Ketahui lebih lanjut tentang pembetulan warna"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Ketahui pembetulan warna lebih lanjut"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Perihal penyongsangan warna"</string>
-    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Ketahui lebih lanjut tentang penyongsangan warna"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Ketahui penyongsangan warna lebih lanjut"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Ketahui Tema gelap dengan lebih lanjut"</string>
     <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"Sesetengah apl mungkin tidak menyokong Tema gelap dengan pilihan dikembangkan. Jika anda mengalami masalah penampilan, gunakan pilihan standard."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Tunjukkan sari kata"</string>
@@ -2694,7 +2708,8 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Sediakan dan urus alat bantu pendengaran, implan koklea dan peranti penguatan ASHA dan LE Audio yang lain"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Sediakan dan urus alat bantu pendengaran, implan koklea dan peranti penguatan ASHA yang lain"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Sediakan dan urus alat bantu pendengaran, implan koklea dan peranti penguatan LE Audio yang lain"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Tiada peranti pendengaran disambungkan"</string>
+    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
+    <skip />
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Tambah alat bantu dengar"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Gandingkan alat bantu pendengaran"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Pada skrin seterusnya, ketik pada alat bantu pendengaran anda. Anda mungkin perlu menggandingkan telinga kiri dan kanan secara berasingan.\n\nPastikan alat bantu pendengaran anda dihidupkan dan sedia untuk digandingkan."</string>
@@ -2878,11 +2893,11 @@
     <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"Benarkan penggunaan bateri pada latar. Mungkin menggunakan lebih banyak bateri."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimumkan mengikut penggunaan anda. Disyorkan untuk kebanyakan apl."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Hadkan penggunaan bateri semasa di latar. Apl mungkin tidak berfungsi seperti yang dijangkakan. Pemberitahuan mungkin ditangguhkan."</string>
-    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Tindakan mengubah cara apl mengunakan bateri boleh menjejaskan prestasi."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Perubahan cara apl mengunakan bateri boleh mempengaruhi prestasinya."</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Apl ini memerlukan penggunaan bateri yang <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"tiada sekatan"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"dioptimumkan"</string>
-    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"Ketahui lebih lanjut tentang pilihan penggunaan bateri"</string>
+    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"Ketahui pilihan penggunaan bateri lebih lanjut"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Penggunaan skrin sejak cas penuh"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Penggunaan bateri"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Butiran sejarah"</string>
@@ -3100,10 +3115,14 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Hidup"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Mati"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Gunakan kesambungan boleh suai"</string>
-    <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"Autotukar Wi-Fi kepada Selular"</string>
-    <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"Gunakan data selular secara automatik apabila sambungan Wi-Fi lemah atau tidak tersedia. Caj penggunaan data mungkin dikenakan."</string>
-    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"Autotukar rangkaian mudah alih untuk hayat bateri"</string>
-    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="2432517485362085341">"Lanjutkan hayat bateri dengan mengurus sambungan rangkaian secara automatik"</string>
+    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
+    <skip />
     <string name="cellular_security_title" msgid="5562899485544677941">"Keselamatan rangkaian mudah alih"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Jenis rangkaian, penyulitan, kawalan pemberitahuan"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"Tetapan ini melindungi panggilan, mesej dan data anda daripada rangkaian sudah lapuk atau tidak disulitkan yang boleh mendedahkan anda kepada kecurian data atau pengawasan"</string>
@@ -3340,7 +3359,7 @@
     <string name="vpn_create" msgid="7546073242936894638">"Tambah profil VPN"</string>
     <string name="vpn_menu_edit" msgid="5100387853773792379">"Edit profil"</string>
     <string name="vpn_menu_delete" msgid="4455966182219039928">"Padam profil"</string>
-    <string name="vpn_menu_lockdown" msgid="5284041663859541007">"VPN sentiasa dihidupkan"</string>
+    <string name="vpn_menu_lockdown" msgid="5284041663859541007">"VPN sentiasa hidup"</string>
     <string name="vpn_no_vpns_added" msgid="7387080769821533728">"Tiada VPN ditambahkan"</string>
     <string name="vpn_always_on_summary" msgid="2171252372476858166">"Kekal tersambung ke VPN sepanjang masa"</string>
     <string name="vpn_always_on_summary_not_supported" msgid="9084872130449368437">"Tidak disokong oleh apl ini"</string>
@@ -4093,7 +4112,7 @@
     <string name="notification_channels" msgid="8080872820677975820">"Kategori pemberitahuan"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Lain-lain"</string>
     <string name="no_channels" msgid="4716199078612071915">"Apl ini belum menyiarkan sebarang pemberitahuan"</string>
-    <string name="no_recent_channels" msgid="5068574296267584043">"Tunjukkan kategori tidak digunakan"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Tunjukkan kategori yang tidak digunakan"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Tetapan tambahan dalam apl"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Tunjukkan kategori tidak digunakan"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Sembunyikan kategori tidak digunakan"</string>
@@ -4732,7 +4751,7 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Tunjukkan atau sembunyikan kandungan pemberitahuan"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Petua &amp; sokongan"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Lebar terkecil"</string>
-    <string name="premium_sms_none" msgid="4718916765158062108">"Tiada apl dipasang yang telah meminta SMS Premium"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Tiada apl dipasang yang meminta SMS Premium"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"SMS Premium bukan percuma dan cajnya akan ditambahkan pada bil pembawa anda. Jika anda mendayakan kebenaran untuk apl, anda akan dapat menghantar SMS premium menggunakan apl itu."</string>
     <string name="premium_sms_access" msgid="8487315743197916530">"SMS Premium"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Mati"</string>
@@ -4826,7 +4845,7 @@
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Pemberitahuan dan tetapan akan muncul."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Untuk menyemak masa, pemberitahuan dan maklumat lain, ketik dua kali pada skrin anda."</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Paparan waktu bangkit daripada tidur"</string>
-    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Untuk menyemak masa, pemberitahuan dan maklumat lain, ketik skrin"</string>
+    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Untuk menyemak masa, pemberitahuan dan maklumat lain, ketik skrin."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS Kecemasan"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Gunakan SOS Kecemasan"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Tekan butang Kuasa dengan cepat sebanyak 5 kali atau lebih untuk memulakan tindakan di bawah"</string>
@@ -5139,7 +5158,7 @@
     <string name="calls_preference" msgid="2166481296066890129">"Pilihan panggilan"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Pilihan SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Tanya setiap kali"</string>
-    <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Tambah rangkaian"</string>
+    <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Tambahkan rangkaian"</string>
     <string name="default_for_calls" msgid="2788950217176988034">"Lalai untuk panggilan"</string>
     <string name="default_for_sms" msgid="1316988329407434771">"Lalai untuk SMS"</string>
     <string name="default_for_calls_and_sms" msgid="8223971369339958151">"Lalai untuk panggilan &amp; SMS"</string>
@@ -5147,7 +5166,7 @@
     <string name="mobile_data_active" msgid="8683694456401350210">"Data mudah alih aktif"</string>
     <string name="mobile_data_off" msgid="2702029611959308269">"Data mudah alih dimatikan"</string>
     <string name="subscription_available" msgid="2659722770210403365">"Tersedia"</string>
-    <string name="mobile_network_list_add_more" msgid="5076722903436552813">"Tambah SIM"</string>
+    <string name="mobile_network_list_add_more" msgid="5076722903436552813">"Tambahkan SIM"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Aktif / SIM"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Tidak aktif / SIM"</string>
     <string name="mobile_network_active_esim" msgid="3984452275968408382">"Aktif / eSIM"</string>
@@ -5264,7 +5283,7 @@
     <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"Label"</string>
     <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"Pilih SIM untuk digunakan"</string>
     <string name="sim_onboarding_select_sim_msg" msgid="5638859405391915048">"Anda boleh menggunakan 2 SIM serentak"</string>
-    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Tetapkan SIM utama anda"</string>
+    <string name="sim_onboarding_primary_sim_title" msgid="2793090401371135675">"Tetapkan SIM utama"</string>
     <string name="sim_onboarding_primary_sim_msg" msgid="5484656671490558032">"Pilih SIM yang akan digunakan secara lalai untuk panggilan, teks dan data"</string>
     <string name="primary_sim_title" msgid="2508161011657571566">"SIM utama"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Panggilan"</string>
@@ -5677,10 +5696,10 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Penderia cap jari"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Pemberitahuan denyar"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Perihal pemberitahuan denyar"</string>
-    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Mati"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Hidup / Denyar kamera"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Hidup / Denyar skrin"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Hidup / Denyar kamera dan skrin"</string>
+    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
+    <skip />
+    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
+    <skip />
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Denyarkan lampu kamera atau skrin apabila anda menerima pemberitahuan atau apabila penggera berbunyi"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Denyarkan skrin apabila anda menerima pemberitahuan atau apabila penggera berbunyi"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Gunakan pemberitahuan denyar dengan berhati-hati jika anda sensitif terhadap cahaya"</string>

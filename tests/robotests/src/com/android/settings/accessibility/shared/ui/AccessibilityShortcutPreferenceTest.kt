@@ -81,6 +81,7 @@ class AccessibilityShortcutPreferenceTest {
             mockPreferenceLifecycleContext.stub {
                 on { requirePreference<ShortcutPreference>(TEST_KEY) } doReturn shortcutWidget
                 on { fragmentManager } doReturn fragment.childFragmentManager
+                on { childFragmentManager } doReturn fragment.childFragmentManager
             }
         }
     }
@@ -190,7 +191,6 @@ class AccessibilityShortcutPreferenceTest {
     inner class TestableAccessibilityShortcutPreference :
         AccessibilityShortcutPreference(
             context,
-            testScope,
             TEST_KEY,
             TEST_TITLE_RES,
             testComponentName,

@@ -238,7 +238,6 @@ open class HearingDevicesScreen(context: Context) :
     ) :
         AccessibilityShortcutPreference(
             context,
-            coroutineScope,
             key,
             title,
             componentName,

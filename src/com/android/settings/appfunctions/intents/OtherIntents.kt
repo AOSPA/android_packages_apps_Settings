@@ -43,17 +43,6 @@ fun getOtherIntents(): List<StaticIntent> =
                 "intent:#Intent;component=com.android.settings/.wallpaper.StyleSuggestionActivity;end",
         ),
         StaticIntent(
-            description = "Ringtone: Settings to select a sound pattern for the device ringtone.",
-            intentUri =
-                "intent:#Intent;action=android.intent.action.RINGTONE_PICKER;i.android.intent.extra.ringtone.TYPE=1;end",
-        ),
-        StaticIntent(
-            description =
-                "Notification: Settings to select a sound pattern for the device notification.",
-            intentUri =
-                "intent:#Intent;action=android.intent.action.RINGTONE_PICKER;i.android.intent.extra.ringtone.TYPE=2;end",
-        ),
-        StaticIntent(
             description = "Backup: Settings to configure the backup options for the device.",
             intentUri =
                 "intent:#Intent;action=com.android.settings.BACKUP_SETTINGS;package=com.android.settings;end",

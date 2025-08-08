@@ -107,7 +107,7 @@ class CursorFollowingPreference :
 
     override fun onPreferenceClick(preference: Preference): Boolean {
         CursorFollowingModeChooser.showDialog(
-            lifecycleContext.fragmentManager,
+            lifecycleContext.childFragmentManager,
             CURSOR_FOLLOWING_MODE_CHOOSER_REQUEST_KEY,
         )
         return true

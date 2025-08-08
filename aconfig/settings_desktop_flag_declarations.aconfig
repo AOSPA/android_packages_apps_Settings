@@ -2,16 +2,6 @@ package: "com.android.settings.flags"
 container: "system_ext"
 
 flag {
-    name: "settings_search_result_deep_link_in_same_task"
-    namespace: "desktop_personalization"
-    description: "Show the search result deep link in the same task (same window)"
-    bug: "381127948"
-    metadata {
-        purpose: PURPOSE_BUGFIX
-    }
-}
-
-flag {
     name: "hide_user_list_for_non_admins"
     namespace: "desktop_users_and_accounts"
     description: "Controls whether to hide the user list in Settings for non-admins."

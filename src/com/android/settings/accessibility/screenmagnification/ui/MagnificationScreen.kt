@@ -72,7 +72,6 @@ open class MagnificationScreen : PreferenceScreenMixin {
             +PreferenceCategory("general_categories", R.string.accessibility_screen_option) += {
                 +AccessibilityShortcutPreference(
                     context,
-                    coroutineScope,
                     "magnification_shortcut_preference",
                     R.string.accessibility_screen_magnification_shortcut_title,
                     MAGNIFICATION_COMPONENT_NAME,

@@ -113,7 +113,7 @@ public class DarkModeCustomModesPreferenceControllerTest {
 
         mModeCustomModesPreferenceController.displayPreference(mScreen);
 
-        verify(mCustomModesFooterPreference).setTitle("A also turns on Dark theme");
+        verify(mCustomModesFooterPreference).setTitle("A also turns on Dark theme.");
         verify(mCustomModesFooterPreference).setLearnMoreAction(any());
         verify(mCustomModesFooterPreference).setLearnMoreText("Modes settings");
     }
@@ -126,7 +126,7 @@ public class DarkModeCustomModesPreferenceControllerTest {
 
         mModeCustomModesPreferenceController.displayPreference(mScreen);
 
-        verify(mCustomModesFooterPreference).setTitle("A and B also turn on Dark theme");
+        verify(mCustomModesFooterPreference).setTitle("A and B also turn on Dark theme.");
         verify(mCustomModesFooterPreference).setLearnMoreAction(any());
         verify(mCustomModesFooterPreference).setLearnMoreText("Modes settings");
     }
@@ -143,7 +143,7 @@ public class DarkModeCustomModesPreferenceControllerTest {
 
         mModeCustomModesPreferenceController.displayPreference(mScreen);
 
-        verify(mCustomModesFooterPreference).setTitle("A, B, and 3 more also turn on Dark theme");
+        verify(mCustomModesFooterPreference).setTitle("A, B, and 3 more also turn on Dark theme.");
         verify(mCustomModesFooterPreference).setLearnMoreAction(any());
         verify(mCustomModesFooterPreference).setLearnMoreText("Modes settings");
     }
@@ -154,7 +154,7 @@ public class DarkModeCustomModesPreferenceControllerTest {
 
         mModeCustomModesPreferenceController.displayPreference(mScreen);
 
-        verify(mCustomModesFooterPreference).setTitle("Modes can also turn on Dark theme");
+        verify(mCustomModesFooterPreference).setTitle("Modes can also turn on Dark theme.");
         verify(mCustomModesFooterPreference).setLearnMoreAction(any());
         verify(mCustomModesFooterPreference).setLearnMoreText("Modes settings");
     }

@@ -353,7 +353,7 @@
     <string name="erase_external_storage_description" product="default" msgid="3294267929524578503">"Cancella tutti i dati sulla scheda SD, come musica o foto"</string>
     <string name="main_clear_button_text" product="tablet" msgid="3763748694468489783">"Cancella tutti i dati"</string>
     <string name="main_clear_button_text" product="default" msgid="3763748694468489783">"Cancella tutti i dati"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="5969806206311342779">"Condividi la connessione a Internet del telefono tramite USB"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="5969806206311342779">"Condividi la connessione a internet del telefono tramite USB"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="4550828946207155142">"Condividi la connessione a Internet del tablet tramite USB"</string>
     <string name="usb_tethering_subtext" product="device" msgid="6586391707794559573">"Condividi la connessione a internet del dispositivo tramite USB"</string>
     <string name="usb_tethering_subtext" product="desktop" msgid="6586391707794559573">"Condividi la connessione a internet del dispositivo tramite USB"</string>
@@ -389,7 +389,7 @@
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="2025941326724094318">"Diminuisci ulteriormente la luminosità minima dello schermo del dispositivo"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="3106979202311807559">"Diminuisci ulteriormente la luminosità minima dello schermo del tablet"</string>
     <string name="reduce_bright_colors_preference_summary" product="desktop" msgid="7810358416215416035">"Diminuisci ulteriormente la luminosità minima dello schermo del dispositivo"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="9162440023310121356">"L\'attenuazione extra può essere utile quando: &lt;ol&gt; &lt;li&gt; La luminosità minima predefinita del telefono è ancora troppo forte&lt;/li&gt; &lt;li&gt; Usi il telefono al buio, ad esempio di notte o in una stanza buia prima di andare a letto&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="9162440023310121356">"L\'attenuazione extra può essere utile quando: &lt;ol&gt; &lt;li&gt; La luminosità minima predefinita dello smartphone è ancora troppo forte&lt;/li&gt; &lt;li&gt; Usi lo smartphone al buio, ad esempio di notte o in una stanza buia prima di andare a letto&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5747242697890472822">"L\'attenuazione extra può essere utile quando: &lt;ol&gt; &lt;li&gt; La luminosità minima predefinita del tablet è ancora troppo chiara&lt;/li&gt; &lt;li&gt; Usi il tablet al buio, ad esempio di notte o in una stanza buia prima di andare a letto&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="desktop" msgid="3114657547062643684">"L\'attenuazione extra può essere utile quando: &lt;ol&gt; &lt;li&gt; La luminosità minima predefinita del dispositivo è ancora troppo chiara&lt;/li&gt; &lt;li&gt; Usi il dispositivo al buio, ad esempio di notte o in una stanza buia prima di andare a letto&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="battery_tip_summary_summary" product="default" msgid="1880496476760792933">"Il telefono ha un consumo standard della batteria in background"</string>
@@ -481,18 +481,15 @@
     <string name="battery_tip_incompatible_charging_message" product="device" msgid="4208335872169818919">"Il dispositivo potrebbe ricaricarsi lentamente o non ricaricarsi affatto. Per velocizzare la ricarica, usa un cavo e un alimentatore consigliati."</string>
     <string name="battery_tip_incompatible_charging_message" product="tablet" msgid="5697523201841444736">"Il tablet potrebbe ricaricarsi lentamente o non ricaricarsi affatto. Per velocizzare la ricarica, usa un cavo e un alimentatore consigliati."</string>
     <string name="battery_tip_incompatible_charging_message" product="desktop" msgid="4208335872169818919">"Il dispositivo potrebbe ricaricarsi lentamente o non ricaricarsi affatto. Per velocizzare la ricarica, usa un cavo e un alimentatore consigliati."</string>
-    <string name="lockscreen_trivial_controls_summary" product="default" msgid="42562533085885152">"Senza sbloccare il telefono"</string>
+    <string name="lockscreen_trivial_controls_summary" product="default" msgid="42562533085885152">"Senza sbloccare lo smartphone"</string>
     <string name="lockscreen_trivial_controls_summary" product="tablet" msgid="9052068482124729345">"Senza sbloccare il tablet"</string>
     <string name="lockscreen_trivial_controls_summary" product="desktop" msgid="8183513643394359332">"Senza sbloccare il dispositivo"</string>
     <string name="device_supervision_switch_title" product="default" msgid="5711051584668311080">"Controlli per questo smartphone"</string>
     <string name="device_supervision_switch_title" product="tablet" msgid="5400384750840247844">"Controlli per questo tablet"</string>
     <string name="device_supervision_switch_title" product="desktop" msgid="2140192989162020111">"Controlli per questo dispositivo"</string>
-    <!-- no translation found for supervision_pin_length_message (7142997986515800901) -->
-    <skip />
-    <!-- no translation found for supervision_pin_length_message (1772471880165492225) -->
-    <skip />
-    <!-- no translation found for supervision_pin_length_message (7689193597679628648) -->
-    <skip />
+    <string name="supervision_pin_length_message" product="default" msgid="7142997986515800901">"{count,plural, =1{Inserisci un PIN di almeno # cifra. Lo userai per gestire i controlli su questo smartphone.}other{Inserisci un PIN di almeno # cifre. Lo userai per gestire i controlli su questo smartphone.}}"</string>
+    <string name="supervision_pin_length_message" product="tablet" msgid="1772471880165492225">"{count,plural, =1{Inserisci un PIN di almeno # cifra. Lo userai per gestire i controlli su questo tablet.}other{Inserisci un PIN di almeno # cifre. Lo userai per gestire i controlli su questo tablet.}}"</string>
+    <string name="supervision_pin_length_message" product="desktop" msgid="7689193597679628648">"{count,plural, =1{Inserisci un PIN di almeno # cifra. Lo userai per gestire i controlli su questo dispositivo.}other{Inserisci un PIN di almeno # cifre. Lo userai per gestire i controlli su questo dispositivo.}}"</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="default" msgid="3538726164054428290">"Il PIN del Controllo genitori è condiviso tra gli utenti. Per eliminare il PIN, i controlli che lo usano devono essere disattivati per tutti gli utenti su questo smartphone."</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="tablet" msgid="5923679321161365699">"Il PIN del Controllo genitori è condiviso tra gli utenti. Per eliminare il PIN, i controlli che lo usano devono essere disattivati per tutti gli utenti su questo tablet."</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="desktop" msgid="4418588055965155673">"Il PIN del Controllo genitori è condiviso tra gli utenti. Per eliminare il PIN, i controlli che lo usano devono essere disattivati per tutti gli utenti su questo dispositivo."</string>

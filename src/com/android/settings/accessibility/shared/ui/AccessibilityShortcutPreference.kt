@@ -39,7 +39,6 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.PreferenceBinding
-import kotlinx.coroutines.CoroutineScope
 
 /**
  * Metadata of Accessibility shortcuts.
@@ -50,7 +49,6 @@ import kotlinx.coroutines.CoroutineScope
  */
 open class AccessibilityShortcutPreference(
     context: Context,
-    coroutineScope: CoroutineScope,
     override val key: String,
     override val title: Int,
     val componentName: ComponentName,
@@ -62,8 +60,9 @@ open class AccessibilityShortcutPreference(
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
 
-    private val dataStore: AccessibilityShortcutDataStore =
-        AccessibilityShortcutDataStore(context, componentName, coroutineScope)
+    private val dataStore: AccessibilityShortcutDataStore by lazy {
+        AccessibilityShortcutDataStore(context, componentName)
+    }
 
     override fun createWidget(context: Context): Preference = ShortcutPreference(context, null)
 
@@ -117,7 +116,7 @@ open class AccessibilityShortcutPreference(
                 override fun onToggleClicked(preference: ShortcutPreference?) {
                     if (shortcutPreference.isChecked) {
                         showShortcutsTutorial(
-                            context.fragmentManager,
+                            context.childFragmentManager,
                             dataStore.getUserShortcutTypes(),
                             shortcutPreference.context.isInSetupWizard(),
                         )

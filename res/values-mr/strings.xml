@@ -1203,7 +1203,7 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"वाय-फाय बंद असताना देखील, स्थान अचूकतेमध्ये सुधारणा करण्यासाठी आणि इतर कारणांसाठी नेटवर्क स्कॅनिंग सुरू करणे आवश्यक आहे.\n\nस्कॅन करायच्या असलेल्या सर्व अ‍ॅप्सना अनुमती द्यायची का?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"अनुमती द्या"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"नकार द्या"</string>
-    <string name="wifi_field_required" msgid="6312381745503042588">"*आवश्यक"</string>
+    <string name="wifi_field_required" msgid="6312381745503042588">"*आवश्यक आहे"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"हे शेअर केलेले नेटवर्क आहे. एकदा लॉग इन केल्यानंतर तुम्ही ही सेटिंग बदलू शकता."</string>
     <string name="share_wifi_network" msgid="4064997404339571584">"डिव्हाइसच्या इतर वापरकर्त्यांसोबत हे नेटवर्क शेअर करा"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"या डिव्हाइसवरील सर्व वापरकर्ते शेअर केलेले नेटवर्क पाहू आणि कनेक्ट करू शकतात. अ‍ॅडमिनिस्ट्रेटर शेअर केलेले नेटवर्क हटवू शकतात. अधिक जाणून घ्या"</string>
@@ -1859,7 +1859,7 @@
     <string name="terms_title" msgid="2071742973672326073">"अटी आणि नियम"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"सिस्टीम WebView परवाना"</string>
     <string name="wallpaper_attributions" msgid="4323659759250650736">"वॉलपेपर श्रेय"</string>
-    <string name="wallpaper_attributions_values" msgid="987277439026021925">"उपग्रह इमेज पुरवठादार:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
+    <string name="wallpaper_attributions_values" msgid="987277439026021925">"सॅटेलाइट इमेजरी पुरवठादार:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"मॅन्युअल"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"व्यक्तिचलित लोड करताना समस्या आली."</string>
     <string name="settings_license_activity_title" msgid="7832071619364734914">"तृतीय पक्ष परवाने"</string>
@@ -1877,12 +1877,19 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"फिंगरप्रिंट वापरण्यासाठी पॅटर्न सेट करा"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"सुरक्षिततेसाठी, पिन सेट करा"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"फिंगरप्रिंट वापरण्यासाठी पिन सेट करा"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"तुमचा पासवर्ड पुन्‍हा एंटर करा"</string>
+    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
+    <skip />
+    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
+    <skip />
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"कार्य प्रोफाइल पासवर्ड पुन्हा एंटर करा"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"तुमचा कार्य प्रोफाइल पासवर्ड एंटर करा"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"तुमचा पॅटर्न कन्फर्म करा"</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
+    <skip />
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"कार्य प्रोफाइल पॅटर्न एंटर करा"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"तुमचा पिन पुन्हा एंटर करा"</string>
+    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
+    <skip />
+    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
+    <skip />
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"तुमचा कार्य प्रोफाइल पिन पुन्हा एंटर करा"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"तुमचा कार्य प्रोफाइल पिन एंटर करा"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"पासवर्ड जुळत नाहीत"</string>
@@ -1901,12 +1908,18 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"तुमचा पासवर्ड विसरलात का?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"तुमचा पॅटर्न विसरलात का?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"तुमचा पिन विसरलात का?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"पुढे सुरू ठेवण्यासाठी तुमचा पॅटर्न ड्रॉ करा"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"पुढे सुरू ठेवण्यासाठी तुमचा पिन एंटर करा"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"पुढे सुरू ठेवण्यासाठी तुमचा पासवर्ड एंटर करा"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"पुढे सुरू ठेवण्यासाठी तुमच्या कार्य प्रोफाइलचा पॅटर्न ड्रॉ करा"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"सुरू ठेवण्यासाठी तुमचा कार्य पिन एंटर करा"</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"सुरू ठेवण्यासाठी तुमचा कार्य पासवर्ड एंटर करा"</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
+    <skip />
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"वाढीव सुरक्षिततेसाठी, तुमच्या डीव्हाइसचा पॅटर्न वापरा"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"वाढीव सुरक्षिततेसाठी, तुमच्या डिव्हाइसचा पिन टाका"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"वाढीव सुरक्षिततेसाठी, तुमच्या डिव्हाइसचा पासवर्ड टाका"</string>
@@ -2394,7 +2407,8 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"वेळ नियंत्रणे"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"सिस्‍टीमची नियंत्रणे"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"फीडबॅक पाठवा"</string>
-    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"आम्हाला रेट करा"</string>
+    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <skip />
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Google ची भिन्नक्षमतेशी संबंधित सपोर्ट टीम याच्याशी संपर्क साधा"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"अ‍ॅक्सेसिबिलिटी सर्वेक्षण"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"तुमचा फीडबॅक शेअर करा"</string>
@@ -2632,10 +2646,8 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"लहान"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"खूप लहान"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"कर्सरच्या किरकोळ हालचालीकडे दुर्लक्ष करा"</string>
-    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
-    <skip />
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"डीफॉल्ट कृती म्हणून डावे क्लिक वापरा"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"तुम्ही दुसरी कृती वापरल्यावर, ऑटोक्लिक आपोआप डाव्या क्लिकवर परत रिव्हर्ट होईल"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"ऑटोक्लिक हे तीन बटण नेव्हिगेशनसह उत्तम काम करते"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"ऑटोक्लिक वापरताना सहजपणे मागे जाण्यासाठी, होम वर जाण्यासाठी आणि अ‍ॅप्स स्विच करण्यासाठी, जेश्चर नेव्हिगेशनऐवजी तीन बटण नेव्हिगेशन वापरा"</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"जेश्चर नेव्हिगेशन ठेवा"</string>
@@ -2696,7 +2708,8 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA आणि LE ऑडिओ श्रवणयंत्रे, कॉक्लियर इंप्लांट आणि इतर अँप्लिफिकेशन डिव्हाइस सेट करा व व्यवस्थापित करा"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"ASHA श्रवणयंत्रे, कॉक्लियर इंप्लांट आणि इतर अँप्लिफिकेशन डिव्हाइस सेट करा व व्यवस्थापित करा"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"LE ऑडिओ श्रवणयंत्रे, कॉक्लियर इंप्लांट आणि इतर अँप्लिफिकेशन डिव्हाइस सेट करा व व्यवस्थापित करा"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"कोणतीही श्रवणयंत्रे कनेक्ट केलेली नाहीत"</string>
+    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
+    <skip />
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"श्रवणयंत्रे जोडा"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"श्रवणयंत्रे पेअर करा"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"पुढील स्क्रीनवर, तुमच्या श्रवणयंत्रांवर टॅप करा. तुम्हाला डावे आणि उजवे कान स्वतंत्रपणे पेअर करावे लागतील.\n\nतुमची श्रवणयंत्रे सुरू केलेली आणि जोडण्यासाठी तयार असल्याची खात्री करा."</string>
@@ -3102,10 +3115,14 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"सुरू"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"बंद"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"अडॅप्टिव्ह कनेक्टिव्हिटी वापरा"</string>
-    <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"वाय-फाय मोबाइलवर ऑटो-स्विच करा"</string>
-    <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"वाय-फाय कनेक्शन खराब असेल किंवा उपलब्ध नसेल, तेव्हा आपोआप मोबाइल डेटा वापरा. डेटा वापर शुल्क लागू होऊ शकते."</string>
-    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"बॅटरी लाइफसाठी मोबाइल नेटवर्क ऑटो-स्विच करा"</string>
-    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="2432517485362085341">"नेटवर्क कनेक्शन आपोआप व्यवस्थापित करून बॅटरी लाइफ वाढवा"</string>
+    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
+    <skip />
     <string name="cellular_security_title" msgid="5562899485544677941">"मोबाइल नेटवर्क सुरक्षा"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"नेटवर्क प्रकार, एन्क्रिप्शन, नोटिफिकेशन नियंत्रणे"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"या सेटिंग्ज तुमचा डेटा चोरू शकणाऱ्या किंवा तुमच्यावर लक्ष ठेवणाऱ्या कालबाह्य अथवा एन्क्रिप्ट न केलेल्या नेटवर्कपासून तुमचे कॉल, मेसेज आणि डेटा यांचे संरक्षण करण्यात मदत करतात."</string>
@@ -4374,10 +4391,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"परवानगी व्यवस्थापक"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"स्थानासाठी डेटा शेअरिंगसंबंधित अपडेट"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ज्या अ‍ॅप्सनी तुमचा स्थान डेटा शेअर करण्याची त्यांची पद्धत बदलली अशा अ‍ॅप्सचे पुनरावलोकन करा"</string>
-    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1837117989202166166">"एजंट"</string>
+    <string name="app_function_access_settings_summary" msgid="3654291845453799170">"या अ‍ॅप्समधील माहिती अ‍ॅक्सेस करू शकणारे आणि कृती करू शकणारे एजंट"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"सक्रिय करण्यासाठी टॅप करा"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"डिव्हाइस ॲक्टिव्हेट करण्यासाठी स्क्रीनवर कुठेही दोनदा टॅप करा"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"उघडणाऱ्या लिंक"</string>
@@ -5681,10 +5696,10 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"फिंगरप्रिंट सेन्सर"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"फ्लॅश नोटिफिकेशन"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"फ्लॅश सूचनांबद्दल"</string>
-    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"बंद"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"सुरू आहे / कॅमेराचा फ्लॅश"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"सुरू आहे / स्क्रीनचा फ्लॅश"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"सुरू आहे / कॅमेरा आणि स्क्रीनचा फ्लॅश"</string>
+    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
+    <skip />
+    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
+    <skip />
     <string name="flash_notifications_intro" msgid="8409873413480928249">"तुम्हाला नोटिफिकेशन मिळाल्यावर किंवा अलार्म वाजल्यावर कॅमेराचा लाइट किंवा स्क्रीन फ्लॅश करा"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"तुम्हाला सूचना मिळाल्यावर किंवा अलार्म वाजल्यावर स्क्रीन फ्लॅश करा"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"तुम्ही प्रकाशाबाबत संवेदनशील असाल, तर फ्लॅश नोटिफिकेशन सावधगिरीने वापरा"</string>
@@ -5913,8 +5928,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"ही सेटिंग्ज बंद असली, तरीही इतर खाते सेटिंग्ज लागू होऊ शकतात."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"पालक नियंत्रणे पिन एंटर करा"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"पालक नियंत्रणे पिन सेट करा"</string>
-    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
-    <skip />
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"पालक नियंत्रणांचा पिन कन्फर्म करा"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"पिन अपडेट केला"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"अ‍ॅप उघडा"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"पिन हटवायचा आहे का?"</string>

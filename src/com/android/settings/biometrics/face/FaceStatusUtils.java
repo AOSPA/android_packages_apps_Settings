@@ -111,9 +111,7 @@ public class FaceStatusUtils {
 
     /** Returns the class name of the Settings page corresponding to face settings. */
     public String getSettingsClassName() {
-        return hasEnrolled()
-                ? Settings.FaceSettingsInternalActivity.class.getName()
-                : FaceEnroll.class.getName();
+        return Settings.FaceSettingsInternalActivity.class.getName();
     }
 
     /** Returns whether at least one face template has been enrolled. */

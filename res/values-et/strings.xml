@@ -1016,12 +1016,9 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Rohkem valikuid"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Kuvade ümberkorraldamiseks hoidke all ja lohistage."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Sisseehitatud ekraani peegeldamine"</string>
-    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
-    <skip />
+    <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Kas kasutada uusi seadeid?"</string>
+    <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Kui teie ekraan ei tööta soovitud viisil, saate taastada eelmised sätted"</string>
+    <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Seadete kasutamine"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"peegeldamine"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Luba juhtmeta ekraaniühendus"</string>
@@ -1638,7 +1635,7 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Kas unustada <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Kõik üksusele <xliff:g id="NAME">^1</xliff:g> salvestatud rakendused, fotod ja andmed kaovad jäädavalt."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Jaotis Süsteem hõlmab Androidi versiooni <xliff:g id="VERSION">%s</xliff:g> käitamiseks vajalikke faile"</string>
-    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"See hõlmab operatsioonisüsteemi ja teie telefoni sujuvaks tööks vajalikke faile. Failide terviklikkuse kaitsmiseks ei ole neile võimalik juurde pääseda."</string>
+    <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"See hõlmab operatsioonisüsteemi ja teie telefoni sujuvaks tööks vajalikke faile. Failide tervikluse kaitsmiseks ei ole neile võimalik juurde pääseda."</string>
     <string name="storage_other_files_detail_dialog_system" msgid="8241153880150866635">"See hõlmab vahemälu ja teisi teie operatsioonisüsteemi puhul vajalikke ajutisi faile. Aja jooksul võite märgata kasutatavas salvestusruumi mahus muudatusi."</string>
     <string name="storage_system_label" msgid="8320948583086758295">"Süsteem"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"Külalisrež. kasutajad ei saa SD-kaarte vormindada"</string>
@@ -1880,12 +1877,19 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Sõrmejälje kasutamiseks määrake muster"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Turvalisuse huvides määrake PIN-kood"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Sõrmejälje kasutamiseks määrake PIN-kood"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Sisestage oma parool uuesti"</string>
+    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
+    <skip />
+    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
+    <skip />
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Sisestage tööprofiili parool uuesti"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Sisestage tööprofiili parool"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Mustri kinnitamine"</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
+    <skip />
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Sisestage tööprofiili muster"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Sisestage oma PIN-kood uuesti"</string>
+    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
+    <skip />
+    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
+    <skip />
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Sisestage tööprofiili PIN-kood uuesti"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Sisestage tööprofiili PIN-kood"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Paroolid ei ühti"</string>
@@ -1904,12 +1908,18 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Kas unustasite parooli?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Kas unustasite mustri?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Kas unustasite PIN-koodi?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Jätkamiseks joonistage oma muster."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Jätkamiseks sisestage oma PIN-kood."</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Jätkamiseks sisestage oma parool."</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Jätkamiseks joonistage oma tööprofiili muster."</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Jätkamiseks sisestage oma tööprofiili PIN-kood."</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Jätkamiseks sisestage oma tööprofiili parool."</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
+    <skip />
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Lisaturvalisuse jaoks kasutage seadme mustrit"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Lisaturvalisuse jaoks sisestage oma seadme PIN-kood"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Lisaturvalisuse jaoks sisestage oma seadme parool"</string>
@@ -2397,7 +2407,8 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Ajastuse juhtelemendid"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Süsteemi juhtelemendid"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Tagasiside saatmine"</string>
-    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Hinnake meid"</string>
+    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <skip />
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Võtke ühendust Google\'i puuetega inimeste tugitiimiga"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Juurdepääsetavuse küsitlus"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Andke tagasisidet"</string>
@@ -2697,7 +2708,8 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Saate seadistada ja hallata ASHA ning LE Audio toega kuuldeaparaate, kõrvaimplantaate ja muid võimendusseadmeid."</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Saate seadistada ja hallata ASHA toega kuuldeaparaate, kõrvaimplantaate ja muid võimendusseadmeid."</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Saate seadistada ja hallata LE Audio toega kuuldeaparaate, kõrvaimplantaate ja muid võimendusseadmeid."</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Ühtegi kuuldeseadet pole ühendatud"</string>
+    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
+    <skip />
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Lisa kuuldeaparaate"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Kuuldeaparaatide sidumine"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Puudutage järgmisel kuval oma kuuldeaparaate. Võib juhtuda, et peate vasaku ja parema kõrva eraldi siduma.\n\nVeenduge, et kuuldeaparaadid oleksid sisse lülitatud ja sidumiseks valmis."</string>
@@ -3103,10 +3115,14 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Sees"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Väljas"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Kasuta kohanduvat ühenduvust"</string>
-    <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"Vaheta WiFi-lt mobiilsidele automaatselt"</string>
-    <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"Kui WiFi-ühendus on kehv või pole saadaval, kasutatakse automaatselt mobiilset andmesidet. Rakenduda võivad andmesidetasud."</string>
-    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"Vaheta aku jaoks mobiilsidevõrku automaatselt"</string>
-    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="2432517485362085341">"Aku pikema tööea jaoks hallatakse võrguühendust automaatselt"</string>
+    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
+    <skip />
     <string name="cellular_security_title" msgid="5562899485544677941">"Mobiilsidevõrgu turve"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Võrgu tüüp, krüpteerimine, märguannete juhtnupud"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"Need seaded aitavad kaitsta teie kõnesid, sõnumeid ja andmeid aegunud või krüpteerimata võrkude eest, mis võivad tuua teie jaoks kaasa andmete varguse või jälgimise ohu."</string>
@@ -3439,10 +3455,8 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Selle kasutajaga jagatakse kõne- ja SMS-ajalugu."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Kas eemaldada administraatoriõigused?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Kui eemaldate selle kasutaja administraatoriõigused, saate teie või teine administraator need hiljem tagasi anda."</string>
-    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
-    <skip />
-    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
-    <skip />
+    <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Kas soovite administraatoriõigused eemaldada?"</string>
+    <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Jätkamisel saavad teile administraatoriõigusi anda ainult teised administraatorid."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Hädaabiteave"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Kasutaja <xliff:g id="USER_NAME">%1$s</xliff:g> teave ja kontaktid"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Ava <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4090,7 +4104,7 @@
     <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Režiimidele juurdepääs"</string>
     <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Luba juurdepääs režiimidele"</string>
     <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Ükski installitud rakendus pole taotlenud juurdepääsu režiimidele."</string>
-    <string name="app_notifications_off_desc" msgid="2484843759466874201">"Te pole selle rakenduse märguandeid lubanud"</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"Te pole selle rakenduse märguandeid lubanud."</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Teie taotluse kohaselt blokeerib Android selle märguandekategooria kuvamise selles seadmes"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Teie taotluse kohaselt blokeerib Android selle märguandegrupi kuvamise selles seadmes"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"See rakendus ei saada märguandeid"</string>
@@ -4329,7 +4343,7 @@
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Toetatud linkide avamine"</string>
     <string name="app_launch_open_in_app" msgid="2208182888681699512">"Rakenduses"</string>
     <string name="app_launch_open_in_browser" msgid="766170191853009756">"Teie brauseris"</string>
-    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Valige, kuidas selle rakenduse jaoks veebilinke avada"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Valige, kuidas selle rakenduse jaoks veebilinke avada."</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Rakenduses avatavad lingid"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Toetatud lingid"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Muud vaike-eelistused"</string>
@@ -4737,7 +4751,7 @@
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Märguande sisu kuvamine või peitmine"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Nõuanded ja tugi"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Kõige väiksem laius"</string>
-    <string name="premium_sms_none" msgid="4718916765158062108">"Ükski installitud rakendus pole taotlenud juurdepääsu tasuliste SMS-ide saatmiseks"</string>
+    <string name="premium_sms_none" msgid="4718916765158062108">"Ükski installitud rakendus pole taotlenud juurdepääsu tasuliste SMS-ide saatmiseks."</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Tasuliste SMS-ide saatmisel võidakse teilt nõuda tasu, mis lisatakse operaatori esitatud arvele. Kui annate rakendusele loa, saate selle rakendusega tasulisi SMS-e saata."</string>
     <string name="premium_sms_access" msgid="8487315743197916530">"Tasuline SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Väljas"</string>
@@ -5682,10 +5696,10 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sõrmejäljeandur"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Vilkuvad märguanded"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Teave vilkuvate märguannete kohta"</string>
-    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Väljas"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Sees / kaamera välgu vilkumine"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Sees / ekraani vilkumine"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Sees / kaamera välgu ja ekraani vilkumine"</string>
+    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
+    <skip />
+    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
+    <skip />
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Kui saate märguande või kui esitatakse äratuse heli, vilgub kaamera tuli või seadme ekraan."</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Kui saate märguande või kui esitatakse äratuse heli, vilgub seadme ekraan."</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Kui olete valgustundlik, olge vilkuvate märguannete kasutamisel ettevaatlik."</string>
@@ -5892,8 +5906,7 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN-koodi seadistamine"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"järelevalve, vanemlik järelevalve, vanemad, järelevalve pin-kood, pin-kood"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN-koodi haldamine"</string>
-    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
-    <skip />
+    <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Vanemliku järelevalve PIN-kood"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"vanema PIN-kood, vanemliku järelevalve PIN-kood"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Taastamise e-posti aadressi lisamine"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Taastamise e-posti aadressi kinnitamine"</string>

@@ -66,7 +66,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String KEY_REFRESH_TYPE = "refresh_type";
     private static final String KEY_BATTERY_CHART = "battery_chart";
 
-    @VisibleForTesting BatteryHistoryPreference mHistPref;
+    @VisibleForTesting
+    BatteryHistoryPreference mHistPref;
 
     @VisibleForTesting
     final BatteryLevelDataLoaderCallbacks mBatteryLevelDataLoaderCallbacks =
@@ -213,8 +214,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     private void onBatteryLevelDataUpdate(BatteryLevelData batteryLevelData) {
-        if (!isVisible()) {
-            Log.w(TAG, "onBatteryLevelDataUpdate: not visible");
+        if (!isVisible() && !isResumed()) {
+            Log.w(TAG, "onBatteryLevelDataUpdate: fragment not ready");
             return;
         }
         mBatteryLevelData = Optional.ofNullable(batteryLevelData);
@@ -229,8 +230,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     private void onBatteryDiffDataMapUpdate(Map<Long, BatteryDiffData> batteryDiffDataMap) {
-        if (!isVisible()) {
-            Log.w(TAG, "onBatteryDiffDataMapUpdate: not visible");
+        if (!isVisible() && !isResumed()) {
+            Log.w(TAG, "onBatteryDiffDataMapUpdate: fragment not ready");
             return;
         }
         if (mBatteryLevelData == null) {
@@ -308,8 +309,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     private void onAnomalyDetected(PowerAnomalyEventList anomalyEventList) {
-        if (!isVisible()) {
-            Log.w(TAG, "onAnomalyDetected: not visible");
+        if (!isVisible() && !isResumed()) {
+            Log.w(TAG, "onAnomalyDetected: fragment not ready");
             return;
         }
         if (anomalyEventList == null) {
