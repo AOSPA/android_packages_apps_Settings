@@ -26,17 +26,19 @@ import android.view.accessibility.AccessibilityManager
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.internal.accessibility.common.ShortcutConstants
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE
 import com.android.settings.R
-import com.android.settings.accessibility.AccessibilitySettingsContentObserver.ContentObserverCallback
 import com.android.settings.accessibility.extensions.isInSetupWizard
+import com.android.settings.accessibility.shared.utils.debounce
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * A [com.android.settings.core.BasePreferenceController] that handles binding the shortcut
@@ -76,13 +78,16 @@ open class ToggleShortcutPreferenceController(context: Context, key: String) :
 
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
-        settingsContentObserver.registerKeysToObserverCallback(
-            shortcutSettingsKey,
-            ContentObserverCallback { key: String? ->
+        val debounceUpdateData =
+            debounce(100.milliseconds, owner.lifecycleScope) {
                 updateShortcutPreferenceData()
                 updateState(shortcutPreference)
-            },
-        )
+            }
+
+        settingsContentObserver.registerKeysToObserverCallback(shortcutSettingsKey) { key: String?
+            ->
+            debounceUpdateData.invoke()
+        }
         settingsContentObserver.register(mContext.contentResolver)
         // Always update the user preferred shortcuts when screen is shown,
         // because the user could change the shortcut types outside of this screen.
