@@ -82,7 +82,7 @@ class MagnificationModePreference :
 
     override fun onPreferenceClick(preference: Preference): Boolean {
         MagnificationModeChooser.showDialog(
-            lifecycleContext.fragmentManager,
+            lifecycleContext.childFragmentManager,
             MODE_CHOOSER_REQUEST_KEY,
         )
         return true

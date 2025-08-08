@@ -131,6 +131,7 @@ open class A11yActivityScreen(context: Context, override val arguments: Bundle) 
                     title = R.string.accessibility_screen_option,
                 ) +=
                     {
+                        +ShortcutPreference(context, shortcutInfo, metricsCategory)
                         +A11yActivitySettingPreference(shortcutInfo)
                         +LaunchAppInfoPreference(
                             key = "accessibility_activity_app_info",

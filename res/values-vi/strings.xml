@@ -255,7 +255,7 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Ngày đầu tiên trong tuần"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Lựa chọn ưu tiên về số"</string>
     <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Hệ thống đo lường"</string>
-    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Dùng tùy chọn mặc định"</string>
+    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Dùng giá trị mặc định"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Độ C (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Độ F (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Chủ Nhật"</string>
@@ -1016,12 +1016,9 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Lựa chọn khác"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Giữ và kéo để sắp xếp lại màn hình."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Phản chiếu màn hình tích hợp"</string>
-    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
-    <skip />
+    <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Sử dụng chế độ cài đặt mới?"</string>
+    <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Nếu màn hình không hoạt động như bạn mong muốn, bạn có thể quay lại các chế độ cài đặt trước đây"</string>
+    <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Sử dụng chế độ cài đặt"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"phản chiếu"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Bật hiển thị không dây"</string>
@@ -1471,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Dùng một nền tối để màn hình dễ nhìn hơn và giảm mức sử dụng pin trên một số màn hình. Khi màn hình đang tắt, giao diện sẽ thay đổi nếu bạn có lịch biểu."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Giao diện tối đang tuân thủ lịch biểu của Chế độ giờ đi ngủ"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Cài đặt Chế độ giờ đi ngủ"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Các chế độ cũng có thể bật Giao diện tối}=1{{mode_1} cũng bật chế độ Giao diện tối}=2{{mode_1} và {mode_2} cũng bật Giao diện tối}=3{{mode_1}, {mode_2} và {mode_3} cũng bật Giao diện tối}other{{mode_1}, {mode_2} và # chế độ khác cũng bật Giao diện tối}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Cài đặt Chế độ"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Tăng độ sáng, mở rộng dải màu và cải thiện độ rõ nét cho hình ảnh và video có Dải động cao (HDR). Nội dung HDR sẽ hiển thị sáng hơn."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Thời gian chờ khóa màn hình"</string>
@@ -1732,7 +1730,7 @@
     <string name="restore_default_apn" msgid="6596048535642130689">"Đang khôi phục cài đặt APN mặc định."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Đặt lại về mặc định"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Đã đặt lại xong các tùy chọn cài đặt APN mặc định về trạng thái ban đầu."</string>
-    <string name="reset_dashboard_title" msgid="7423200250697886918">"Tùy chọn đặt lại"</string>
+    <string name="reset_dashboard_title" msgid="7423200250697886918">"Đặt lại các lựa chọn"</string>
     <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Đặt lại chế độ cài đặt mạng di động"</string>
     <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Thao tác này sẽ đặt lại tất cả chế độ cài đặt mạng di động"</string>
     <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Đặt lại chế độ mạng di động?"</string>
@@ -2397,7 +2395,8 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Điều khiển có hẹn giờ"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Điều khiển hệ thống"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Gửi phản hồi"</string>
-    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Đánh giá chúng tôi"</string>
+    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <skip />
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Liên hệ với Nhóm hỗ trợ người khuyết tật của Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Khảo sát về khả năng hỗ trợ tiếp cận"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Chia sẻ ý kiến phản hồi của bạn"</string>
@@ -2635,10 +2634,8 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Nhỏ"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Rất nhỏ"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Bỏ qua chuyển động nhỏ của con trỏ"</string>
-    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
-    <skip />
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"Sử dụng thao tác nhấp chuột trái làm thao tác mặc định"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Khi bạn dùng một thao tác khác, tính năng tự động nhấp sẽ tự động quay về thao tác nhấp chuột trái"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Tính năng tự động nhấp hoạt động hiệu quả hơn với thao tác bằng 3 nút"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Để dễ dàng quay lại, về Màn hình chính và chuyển đổi ứng dụng khi dùng tính năng tự động nhấp, hãy dùng thao tác bằng 3 nút thay vì thao tác bằng cử chỉ"</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Tiếp tục dùng chế độ thao tác bằng cử chỉ"</string>
@@ -2699,7 +2696,8 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Thiết lập và quản lý các thiết bị trợ thính ASHA và Âm thanh năng lượng thấp, ốc tai điện tử và các thiết bị khuếch đại âm thanh khác"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Thiết lập và quản lý các thiết bị trợ thính ASHA, ốc tai điện tử và các thiết bị khuếch đại âm thanh khác"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Thiết lập và quản lý các thiết bị trợ thính Âm thanh năng lượng thấp, ốc tai điện tử và các thiết bị khuếch đại âm thanh khác"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Chưa kết nối với thiết bị trợ thính nào"</string>
+    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
+    <skip />
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Thêm thiết bị trợ thính"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Ghép nối máy trợ thính"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Trên màn hình tiếp theo, hãy nhấn vào máy trợ thính. Bạn có thể phải ghép nối riêng tai trái và tai phải.\n\nĐảm bảo đã bật máy trợ thính và máy ở trạng thái sẵn sàng ghép nối."</string>
@@ -2742,8 +2740,8 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Dịch vụ này đang hoạt động không bình thường."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Lối tắt hỗ trợ tiếp cận"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Hiển thị trong Cài đặt nhanh"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Khó phân biệt màu đỏ – xanh lục, xanh lục"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Khó phân biệt màu đỏ – xanh lục, đỏ"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Đỏ – xanh lục, khó phân biệt xanh lục"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Đỏ – xanh lục, khó phân biệt đỏ"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Xanh lam – vàng"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Thang màu xám"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Cường độ"</string>
@@ -3105,10 +3103,14 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Đang bật"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Tắt"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Dùng kết nối thích ứng"</string>
-    <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"Tự động chuyển từ Wi-Fi sang mạng di động"</string>
-    <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"Tự động dùng dữ liệu di động khi kết nối Wi‑Fi kém hoặc không có. Bạn có thể mất thêm phí sử dụng dữ liệu."</string>
-    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"Tự đổi mạng di động để cải thiện thời lượng pin"</string>
-    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="2432517485362085341">"Tự động quản lý các kết nối mạng để kéo dài thời lượng pin"</string>
+    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
+    <skip />
     <string name="cellular_security_title" msgid="5562899485544677941">"Bảo mật mạng di động"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Loại mạng, quy trình mã hoá, quyền kiểm soát thông báo"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"Những chế độ này giúp bảo vệ cuộc gọi, tin nhắn và dữ liệu của bạn trước những hệ thống mạng lỗi thời hoặc chưa được mã hoá có thể khiến bạn bị theo dõi hoặc mất cắp dữ liệu"</string>
@@ -3441,10 +3443,8 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Nhật ký cuộc gọi và tin nhắn SMS sẽ được chia sẻ với người dùng này."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Xoá đặc quyền của quản trị viên?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Nếu thu hồi đặc quyền của quản trị viên đối với người dùng này, bạn hoặc một quản trị viên khác có thể cấp lại cho họ sau."</string>
-    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
-    <skip />
-    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
-    <skip />
+    <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Xoá đặc quyền quản trị viên của bạn?"</string>
+    <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Chỉ những quản trị viên khác mới có thể cấp cho bạn đặc quyền của quản trị viên nếu bạn tiếp tục."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Thông tin khẩn cấp"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Thông tin và người liên hệ của <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Mở <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4379,10 +4379,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"Trình quản lý quyền"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Cập nhật đối với tính năng chia sẻ dữ liệu vị trí"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Xem xét những ứng dụng đã thay đổi cách mà chúng có thể chia sẻ dữ liệu vị trí của bạn"</string>
-    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1837117989202166166">"Tác nhân"</string>
+    <string name="app_function_access_settings_summary" msgid="3654291845453799170">"Tác nhân có thể truy cập vào thông tin hoặc thực hiện thao tác trong ứng dụng"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Nhấn để đánh thức"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Nhấn đúp vào vị trí bất kỳ trên màn hình để đánh thức thiết bị"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Mở đường liên kết"</string>
@@ -4647,7 +4645,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 ứng dụng được phép dùng dữ liệu di động không bị hạn chế khi Trình tiết kiệm dữ liệu đang bật}other{# ứng dụng được phép dùng dữ liệu di động không bị hạn chế khi Trình tiết kiệm dữ liệu đang bật}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Dữ liệu chính"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Dữ liệu Wi‑Fi"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"Đã dùng <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"Trên <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_remaining" msgid="6316251496381922837">"Còn <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Biểu đồ cho biết mức sử dụng dữ liệu từ <xliff:g id="START_DATE">%1$s</xliff:g> đến <xliff:g id="END_DATE">%2$s</xliff:g>."</string>
@@ -5686,10 +5685,10 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Cảm biến vân tay"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Nháy sáng khi có thông báo"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Giới thiệu về thông báo bằng đèn flash"</string>
-    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Đang tắt"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Đang bật/Đèn flash của máy ảnh"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Đang bật/Đèn flash của màn hình"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Đang bật/Đèn flash của máy ảnh và màn hình"</string>
+    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
+    <skip />
+    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
+    <skip />
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Bật đèn flash của camera hoặc nháy sáng màn hình khi bạn nhận được thông báo hoặc khi chuông báo kêu"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Nháy sáng màn hình khi bạn nhận được thông báo hoặc khi chuông báo kêu"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Hãy thận trọng khi sử dụng tính năng thông báo bằng đèn flash nếu bạn nhạy cảm với ánh sáng"</string>
@@ -5896,8 +5895,7 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Thiết lập mã PIN"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"giám sát, chế độ kiểm soát của cha mẹ, cha mẹ, mã pin giám sát, mã pin"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Quản lý mã PIN của bạn"</string>
-    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
-    <skip />
+    <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"Mã PIN cho chế độ kiểm soát của cha mẹ"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Mã PIN dành cho cha mẹ, mã PIN cho chế độ kiểm soát của cha mẹ"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Thêm email khôi phục"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Xác minh email khôi phục"</string>
@@ -5919,8 +5917,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Khi bạn tắt những chế độ cài đặt này, các chế độ cài đặt khác của tài khoản có thể vẫn được áp dụng."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Nhập mã PIN cho chế độ kiểm soát của cha mẹ"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Đặt mã PIN cho chế độ kiểm soát của cha mẹ"</string>
-    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
-    <skip />
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Xác nhận mã PIN cho chế độ kiểm soát của cha mẹ"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"Đã cập nhật mã PIN"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Mở ứng dụng"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Xoá mã PIN?"</string>

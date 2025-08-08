@@ -222,7 +222,7 @@
     <string name="title_change_system_region" msgid="9196602029960380112">"เปลี่ยนภูมิภาคเป็น%sไหม"</string>
     <string name="desc_notice_device_region_change" msgid="6702773189066944100">"อุปกรณ์จะเก็บภาษา%sไว้เป็นภาษาของระบบ"</string>
     <string name="desc_notice_device_region_change_for_preferred_language" msgid="408517366942324267">"%1$s จะแทนที่ %2$s ในภาษาที่ต้องการ"</string>
-    <string name="title_change_system_locale" msgid="4102991236063984803">"เปลี่ยนภาษาของระบบเป็นภาษา%sไหม"</string>
+    <string name="title_change_system_locale" msgid="4102991236063984803">"เปลี่ยนภาษาของระบบเป็นภาษา %s ไหม"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"เพิ่มภาษา %s เป็นภาษาที่ต้องการใช่ไหม"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"การดำเนินการนี้จะช่วยให้แอปและเว็บไซต์ทราบว่าคุณต้องการภาษานี้ด้วย"</string>
     <string name="desc_notice_device_locale_and_region_settings_change" msgid="909261686577914396">"อุปกรณ์ของคุณจะใช้ภาษา<xliff:g id="LANGUAGE">%1$s</xliff:g> และภูมิภาคจะเปลี่ยนเป็น<xliff:g id="REGION">%2$s</xliff:g>"</string>
@@ -284,8 +284,8 @@
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"ไม่สามารถนำทุกภาษาออกได้"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"เก็บภาษาที่ต้องการไว้อย่างน้อย 1 ภาษา"</string>
     <string name="locale_not_translated" msgid="3071618135527110152">"ไม่พร้อมใช้งานเป็นภาษาของระบบ"</string>
-    <string name="dlg_title_delete_preferred_locale" msgid="4167214348946940002">"นำภาษา<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> ออกใช่ไหม"</string>
-    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"ระบบจะนำภาษา<xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> ออกจากภาษาที่ต้องการ โดยสามารถเพิ่มอีกครั้งได้ในภายหลัง"</string>
+    <string name="dlg_title_delete_preferred_locale" msgid="4167214348946940002">"นำภาษา <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> ออกใช่ไหม"</string>
+    <string name="dlg_desc_delete_preferred_locale" msgid="4658301652628456858">"ระบบจะนำภาษา <xliff:g id="REMOVED_LANGUAGE">%s</xliff:g> ออกจากภาษาที่ต้องการ โดยสามารถเพิ่มอีกครั้งได้ในภายหลัง"</string>
     <string name="action_drag_label_move_up" msgid="3392196942330705015">"เลื่อนขึ้น"</string>
     <string name="action_drag_label_move_down" msgid="9069518740553953426">"เลื่อนลง"</string>
     <string name="action_drag_label_move_top" msgid="2430471023612171619">"เลื่อนไปบนสุด"</string>
@@ -1468,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"ใช้พื้นหลังสีเข้มเพื่อให้อ่านหน้าจอได้สบายตาขึ้นและลดการใช้งานแบตเตอรี่ในหน้าจอบางประเภท ธีมจะเปลี่ยน หากคุณมีกำหนดเวลาปิดหน้าจอ"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ปัจจุบันธีมมืดจะเป็นไปตามกำหนดเวลาของโหมดเวลาเข้านอน"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"การตั้งค่าโหมดเวลาเข้านอน"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{โหมดยังเปิดธีมมืดได้ด้วย}=1{{mode_1} ยังเปิดธีมมืดด้วย}=2{{mode_1} และ {mode_2} ยังเปิดธีมมืดด้วย}=3{{mode_1}, {mode_2} และ{mode_3} ยังเปิดธีมมืดด้วย}other{{mode_1}, {mode_2} และอีก # โหมดยังเปิดธีมมืดด้วย}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"การตั้งค่าโหมด"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"เพิ่มความสว่างและขยายช่วงสี รวมทั้งเพิ่มความคมชัดให้กับรูปภาพและวิดีโอแบบ High Dynamic Range (HDR) เนื้อหา HDR จะปรากฏสว่างขึ้น"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ระยะหมดเวลาหน้าจอ"</string>
@@ -1799,7 +1800,7 @@
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"เชื่อมต่ออินเทอร์เน็ตผ่านอีเทอร์เน็ต"</string>
     <string name="ethernet_modify" msgid="1326316717004440503">"แก้ไข"</string>
     <string name="tethering_footer_info" msgid="6824352505979800594">"ใช้ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือเพื่อให้อุปกรณ์อื่นๆ ใช้อินเทอร์เน็ตจากการเชื่อมต่ออินเทอร์เน็ตของคุณได้ แอปยังสร้างฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้เคียงได้ด้วย"</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ใช้ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือเพื่อ⁠ให้⁠อุ⁠ป⁠ก⁠ร⁠ณ์อื่นๆ ใช้อินเทอร์เน็ตจาก Wi-Fi หรือการเชื่อมต่ออินเทอร์เน็ตมือถือของคุณได้ แอปยังสร้าง​ฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้เคียงได้อีกด้วย"</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ใช้ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือเพื่อ⁠ให้⁠อุ⁠ป⁠ก⁠ร⁠ณ์อื่นๆ ใช้อินเทอร์เน็ตจาก Wi-Fi หรือการเชื่อมต่ออินเทอร์เน็ตมือถือของคุณได้ แอปยังสร้าง​​ฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้เคียงได้อีกด้วย"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ความช่วยเหลือ"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"เครือข่ายมือถือ"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"แอป SMS"</string>
@@ -1859,7 +1860,7 @@
     <string name="terms_title" msgid="2071742973672326073">"ข้อกำหนดในการให้บริการ"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"ใบอนุญาต WebView ของระบบ"</string>
     <string name="wallpaper_attributions" msgid="4323659759250650736">"เครดิตวอลเปเปอร์"</string>
-    <string name="wallpaper_attributions_values" msgid="987277439026021925">"ผู้ให้บริการภาพถ่ายดาวเทียม:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
+    <string name="wallpaper_attributions_values" msgid="987277439026021925">"ผู้ให้บริการภาพถ่ายจากดาวเทียม:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"คู่มือ"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"พบปัญหาในการโหลดคู่มือ"</string>
     <string name="settings_license_activity_title" msgid="7832071619364734914">"ใบอนุญาตของบุคคลที่สาม"</string>
@@ -2394,7 +2395,8 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"การควบคุมเวลา"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"การควบคุมระบบ"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"ส่งความคิดเห็น"</string>
-    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"ให้คะแนนเรา"</string>
+    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <skip />
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"ติดต่อทีมสนับสนุนคนพิการของ Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"แบบสำรวจเกี่ยวกับการช่วยเหลือพิเศษ"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"แชร์ความคิดเห็น"</string>
@@ -2572,7 +2574,7 @@
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"ธีมมืดมาตรฐาน"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"ใช้ธีมมืดในอุปกรณ์และแอปที่รองรับ"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"ขยายแล้ว"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"ขยายธีมมืดแล้ว"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"ธีมมืดแบบขยาย"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"ใช้ธีมมืดกับแอปอื่นๆ โดยอัตโนมัติเพื่อปรับปรุงการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"นำภาพเคลื่อนไหวออก"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"ลดการเคลื่อนไหวบนหน้าจอ"</string>
@@ -2694,7 +2696,8 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ตั้งค่าและจัดการเครื่องช่วยฟังของ ASHA และ LE Audio, ประสาทหูเทียม และอุปกรณ์ขยายเสียงอื่นๆ"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"ตั้งค่าและจัดการเครื่องช่วยฟัง ASHA, ประสาทหูเทียม และอุปกรณ์ขยายเสียงอื่นๆ"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"ตั้งค่าและจัดการเครื่องช่วยฟัง LE Audio, ประสาทหูเทียม และอุปกรณ์ขยายเสียงอื่นๆ"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"ไม่ได้เชื่อมต่อเครื่องช่วยฟังไว้"</string>
+    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
+    <skip />
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"เพิ่มเครื่องช่วยฟัง"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"จับคู่เครื่องช่วยฟัง"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"ในหน้าจอถัดไป ให้แตะที่เครื่องช่วยฟัง คุณอาจต้องจับคู่อุปกรณ์ของหูฟังข้างซ้ายและขวาแยกกัน\n\nโปรดตรวจสอบว่าคุณเปิดเครื่องช่วยฟังแล้วและอุปกรณ์พร้อมจับคู่"</string>
@@ -3100,10 +3103,14 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"เปิด"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"ปิด"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"ใช้การเชื่อมต่อแบบปรับอัตโนมัติ"</string>
-    <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"เปลี่ยน Wi-Fi เป็นอินเทอร์เน็ตมือถือโดยอัตโนมัติ"</string>
-    <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"ใช้อินเทอร์เน็ตมือถือโดยอัตโนมัติเมื่อการเชื่อมต่อ Wi-Fi ไม่ดีหรือไม่พร้อมใช้งาน อาจมีการเรียกเก็บเงินตามปริมาณการใช้อินเทอร์เน็ต"</string>
-    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"สลับเครือข่ายมือถืออัตโนมัติเพื่อยืดระยะเวลาการใช้งานแบตเตอรี่"</string>
-    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="2432517485362085341">"ยืดระยะเวลาการใช้งานแบตเตอรี่ด้วยการจัดการการเชื่อมต่อเครือข่ายโดยอัตโนมัติ"</string>
+    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
+    <skip />
     <string name="cellular_security_title" msgid="5562899485544677941">"การรักษาความปลอดภัยของเครือข่ายมือถือ"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"ประเภทเครือข่าย การเข้ารหัส ส่วนควบคุมการแจ้งเตือน"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"การตั้งค่าเหล่านี้จะช่วยปกป้องการโทร ข้อความ และข้อมูลของคุณจากเครือข่ายที่ล้าสมัยหรือไม่ได้เข้ารหัสซึ่งเสี่ยงต่อการถูกรวบรวมหรือขโมยข้อมูลได้"</string>
@@ -3112,7 +3119,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"การแจ้งเตือนเกี่ยวกับเครือข่าย"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"รับการแจ้งเตือนเมื่ออุปกรณ์เชื่อมต่อกับเครือข่ายที่ไม่ได้เข้ารหัส หรือเมื่อเครือข่ายบันทึกรหัสซิมหรืออุปกรณ์ที่เฉพาะเจาะจงของคุณ"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"รุ่นเครือข่าย"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"การป้องกันเครือข่าย 2G หลีกเลี่ยงเครือข่าย 2G ซึ่งปลอดภัยน้อยกว่า ซึ่งอาจจำกัดการเชื่อมต่อในบางสถานที่ ระบบจะอนุญาตให้ใช้ 2G สำหรับการโทรฉุกเฉินเสมอ แต่อาจโทรไม่ติดหากคุณโรมมิ่งในต่างประเทศ"</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"การป้องกันเครือข่าย 2G จะหลีกเลี่ยงเครือข่าย 2G ซึ่งปลอดภัยน้อยกว่า ทำให้อาจจำกัดการเชื่อมต่อในบางสถานที่ ระบบจะอนุญาตให้ใช้ 2G สำหรับการโทรฉุกเฉินเสมอ แต่อาจโทรไม่ติดหากคุณโรมมิ่งในต่างประเทศ"</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"การป้องกันเครือข่าย 2G"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"การเข้ารหัส"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"รุ่นเครือข่าย"</string>
@@ -4372,10 +4379,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"เครื่องมือจัดการสิทธิ์"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"การอัปเดตการแชร์ข้อมูลตำแหน่ง"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ตรวจสอบแอปที่เปลี่ยนแปลงวิธีที่อาจใช้แชร์ข้อมูลตำแหน่งของคุณ"</string>
-    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1837117989202166166">"ตัวแทน"</string>
+    <string name="app_function_access_settings_summary" msgid="3654291845453799170">"ตัวแทนที่เข้าถึงข้อมูลหรือดำเนินการในแอปได้"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"แตะเพื่อปลุก"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"แตะที่ใดก็ได้บนหน้าจอ 2 ครั้งเพื่อปลุกอุปกรณ์"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"การเปิดลิงก์"</string>
@@ -4460,7 +4465,7 @@
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"อนุญาตให้แอปผู้ช่วยสามารถเข้าถึงรูปภาพของหน้าจอ"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"กะพริบหน้าจอ"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"กะพริบขอบของหน้าจอเมื่อแอปผู้ช่วยเข้าถึงข้อความจากหน้าจอหรือภาพหน้าจอ"</string>
-    <string name="assist_footer" msgid="8248015363806299068">"แอปผู้ช่วยจะช่วยเหลือคุณโดยใช้ข้อมูลจากหน้าจอที่กำลังดูอยู่ บางแอปจะสนับสนุนทั้ง Launcher และบริการป้อนข้อมูลด้วยเสียงเพื่อให้ความช่วยเหลือแบบรอบด้านแก่คุณ"</string>
+    <string name="assist_footer" msgid="8248015363806299068">"แอปผู้ช่วยจะช่วยเหลือคุณโดยใช้ข้อมูลจากหน้าจอที่กำลังดูอยู่ บางแอปจะรองรับทั้ง Launcher และบริการป้อนข้อมูลด้วยเสียงเพื่อให้ความช่วยเหลือแบบรอบด้านแก่คุณ"</string>
     <string name="average_memory_use" msgid="717313706368825388">"การใช้หน่วยความจำโดยเฉลี่ย"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"การใช้หน่วยความจำสูงสุด"</string>
     <string name="memory_usage" msgid="5594133403819880617">"การใช้หน่วยความจำ"</string>
@@ -4640,7 +4645,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 แอปได้รับอนุญาตให้ใช้อินเทอร์เน็ตมือถือแบบไม่จำกัดเมื่อเปิดการประหยัดอินเทอร์เน็ตไว้}other{# แอปได้รับอนุญาตให้ใช้อินเทอร์เน็ตมือถือแบบไม่จำกัดเมื่อเปิดการประหยัดอินเทอร์เน็ตไว้}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"ข้อมูลหลัก"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"อินเทอร์เน็ตจาก Wi‑Fi"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"ใช้ไป <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"เกิน <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_remaining" msgid="6316251496381922837">"เหลือ <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"กราฟแสดงปริมาณการใช้อินเทอร์เน็ตระหว่างวันที่ <xliff:g id="START_DATE">%1$s</xliff:g> ถึง <xliff:g id="END_DATE">%2$s</xliff:g>"</string>
@@ -5261,7 +5267,7 @@
     <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"ตั้งค่ากำหนดของซิม"</string>
     <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"ตั้งค่ากำหนดเครือข่ายมือถือเพื่อใช้หลายซิมบนอุปกรณ์นี้"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"ติดป้ายกำกับซิม"</string>
-    <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"คุณจะเห็นป้ายกำกับเหล่านี้เมื่อทำการโทร ส่งข้อความ และเชื่อมต่ออินเทอร์เน็ต รวมถึงในการตั้งค่า"</string>
+    <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"คุณจะเห็นป้ายกำกับเหล่านี้เมื่อโทร ส่งข้อความ และเชื่อมต่ออินเทอร์เน็ต รวมถึงในการตั้งค่า"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"ป้ายกำกับซิม"</string>
     <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"ป้ายกำกับ"</string>
     <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"เลือกซิมที่จะใช้"</string>
@@ -5271,7 +5277,7 @@
     <string name="primary_sim_title" msgid="2508161011657571566">"ซิมหลักของคุณ"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"โทร"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"ข้อความ"</string>
-    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"การเปลี่ยนการเชื่อมต่ออินเทอร์เน็ตอัตโนมัติ"</string>
+    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"การสลับอินเทอร์เน็ตโดยอัตโนมัติ"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"ใช้การเชื่อมต่ออินเทอร์เน็ตจากซิมใดก็ได้โดยขึ้นอยู่กับความครอบคลุมและความพร้อมใช้งาน"</string>
     <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"รีสตาร์ทเพื่อใช้ 2 ซิม"</string>
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"หากต้องการใช้ 2 ซิมพร้อมกัน ให้รีสตาร์ทอุปกรณ์แล้วเปิดใช้งาน 2 ซิม"</string>
@@ -5679,10 +5685,10 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"เซ็นเซอร์ลายนิ้วมือ"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"การแจ้งเตือนด้วยแฟลช"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"เกี่ยวกับการแจ้งเตือนด้วยแฟลช"</string>
-    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"ปิด"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"เปิด / กะพริบแฟลชกล้อง"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"เปิด / กะพริบแฟลชหน้าจอ"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"เปิด / กะพริบแฟลชกล้องและหน้าจอ"</string>
+    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
+    <skip />
+    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
+    <skip />
     <string name="flash_notifications_intro" msgid="8409873413480928249">"อุปกรณ์จะกะพริบแฟลชกล้องหรือหน้าจอ เมื่อได้รับการแจ้งเตือนหรือเมื่อเสียงนาฬิกาปลุกดัง"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"กะพริบหน้าจอเมื่อคุณได้รับการแจ้งเตือนหรือเมื่อเสียงนาฬิกาปลุกดัง"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"ใช้การแจ้งเตือนด้วยแฟลชอย่างระมัดระวัง หากคุณมีภาวะดวงตาไวต่อแสง"</string>

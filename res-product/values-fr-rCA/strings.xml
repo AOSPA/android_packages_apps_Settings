@@ -322,7 +322,7 @@
     <string name="status_number" product="tablet" msgid="6746773328312218158">"MDN"</string>
     <string name="status_number" product="default" msgid="2333455505912871374">"Numéro de téléphone"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="2595836594107617972">"MDN (fente pour carte SIM %1$d)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="7154930998382872847">"Num. de tél. (fente pour carte SIM %1$d)"</string>
+    <string name="status_number_sim_slot" product="default" msgid="7154930998382872847">"Numéro de téléphone (fente SIM %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="9003886361856568694">"NRM sur la carte SIM"</string>
     <string name="status_number_sim_status" product="default" msgid="7536755538266735352">"N° de téléphone sur la carte SIM"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="2049551739429034707">"Formater la carte SD en tant que mémoire interne"</string>
@@ -487,12 +487,9 @@
     <string name="device_supervision_switch_title" product="default" msgid="5711051584668311080">"Contrôles pour ce téléphone"</string>
     <string name="device_supervision_switch_title" product="tablet" msgid="5400384750840247844">"Commandes pour cette tablette"</string>
     <string name="device_supervision_switch_title" product="desktop" msgid="2140192989162020111">"Commandes pour cet appareil"</string>
-    <!-- no translation found for supervision_pin_length_message (7142997986515800901) -->
-    <skip />
-    <!-- no translation found for supervision_pin_length_message (1772471880165492225) -->
-    <skip />
-    <!-- no translation found for supervision_pin_length_message (7689193597679628648) -->
-    <skip />
+    <string name="supervision_pin_length_message" product="default" msgid="7142997986515800901">"{count,plural, =1{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur ce téléphone.}one{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur ce téléphone.}other{Entrez un NIP d\'au moins # chiffres. Vous l\'utiliserez pour gérer les commandes sur ce téléphone.}}"</string>
+    <string name="supervision_pin_length_message" product="tablet" msgid="1772471880165492225">"{count,plural, =1{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur cette tablette.}one{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur cette tablette.}other{Entrez un NIP d\'au moins # chiffres. Vous l\'utiliserez pour gérer les commandes sur cette tablette.}}"</string>
+    <string name="supervision_pin_length_message" product="desktop" msgid="7689193597679628648">"{count,plural, =1{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur cet appareil.}one{Entrez un NIP d\'au moins # chiffre. Vous l\'utiliserez pour gérer les commandes sur cet appareil.}other{Entrez un NIP d\'au moins # chiffres. Vous l\'utiliserez pour gérer les commandes sur cet appareil.}}"</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="default" msgid="3538726164054428290">"Votre NIP de contrôles parentaux est partagé entre les utilisateurs. Pour que vous puissiez supprimer votre NIP, les contrôles utilisant ce NIP doivent être désactivés pour tous les utilisateurs de ce téléphone."</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="tablet" msgid="5923679321161365699">"Votre NIP de contrôles parentaux est partagé entre les utilisateurs. Pour que vous puissiez supprimer votre NIP, les contrôles utilisant ce NIP doivent être désactivés pour tous les utilisateurs de cette tablette."</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="desktop" msgid="4418588055965155673">"Votre NIP de contrôles parentaux est partagé entre les utilisateurs. Pour que vous puissiez supprimer votre NIP, les contrôles utilisant ce NIP doivent être désactivés pour tous les utilisateurs de cet appareil."</string>

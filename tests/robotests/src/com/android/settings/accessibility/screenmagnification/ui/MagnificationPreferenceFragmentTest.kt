@@ -18,7 +18,9 @@ package com.android.settings.accessibility.screenmagnification.ui
 
 import android.app.settings.SettingsEnums
 import android.content.ComponentName
+import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.view.InputDevice
 import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.testing.FragmentScenario
@@ -40,6 +42,7 @@ import com.android.settings.testutils.inflateViewHolder
 import com.android.settings.testutils.shadow.ShadowInputDevice
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -50,6 +53,7 @@ import org.robolectric.shadows.ShadowLooper
 @RunWith(RobolectricTestRunner::class)
 class MagnificationPreferenceFragmentTest :
     BaseShortcutInteractionsTestCases<MagnificationPreferenceFragment>() {
+    @get:Rule val setFlagsRule = SetFlagsRule()
     private var fragScenario: FragmentScenario<MagnificationPreferenceFragment>? = null
     private var fragment: MagnificationPreferenceFragment? = null
 
@@ -112,6 +116,7 @@ class MagnificationPreferenceFragmentTest :
         assertThat(fragment.helpResource).isEqualTo(R.string.help_url_magnification)
     }
 
+    @DisableFlags(Flags.FLAG_CATALYST_MAGNIFICATION)
     @Test
     fun getSearchIndexDataProvider_verifyXmlResourcesToIndex() {
         val searchIndexableResource =

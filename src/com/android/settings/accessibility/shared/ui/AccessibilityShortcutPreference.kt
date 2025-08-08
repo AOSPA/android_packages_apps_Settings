@@ -19,6 +19,7 @@ package com.android.settings.accessibility.shared.ui
 import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
+import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentManager
 import androidx.preference.Preference
 import com.android.settings.R
@@ -32,14 +33,21 @@ import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
-import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.PreferenceBinding
-import kotlinx.coroutines.CoroutineScope
+
+/**
+ * An interface for providing the name of the feature associated with the accessibility shortcut.
+ * This is used, for example, to display the feature name in the accessibility shortcut tutorial.
+ */
+interface ShortcutFeatureNameProvider {
+    fun getFeatureName(context: Context): CharSequence
+}
 
 /**
  * Metadata of Accessibility shortcuts.
@@ -50,20 +58,20 @@ import kotlinx.coroutines.CoroutineScope
  */
 open class AccessibilityShortcutPreference(
     context: Context,
-    coroutineScope: CoroutineScope,
     override val key: String,
-    override val title: Int,
+    @StringRes override val title: Int = 0,
     val componentName: ComponentName,
-    val featureName: CharSequence,
+    @StringRes val featureName: Int = 0,
     val metricsCategory: Int = METRICS_CATEGORY_UNKNOWN,
 ) :
-    SwitchPreference(key, title),
+    BooleanValuePreference,
     PreferenceBinding,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
 
-    private val dataStore: AccessibilityShortcutDataStore =
-        AccessibilityShortcutDataStore(context, componentName, coroutineScope)
+    private val dataStore: AccessibilityShortcutDataStore by lazy {
+        AccessibilityShortcutDataStore(context, componentName)
+    }
 
     override fun createWidget(context: Context): Preference = ShortcutPreference(context, null)
 
@@ -104,10 +112,7 @@ open class AccessibilityShortcutPreference(
             object : ShortcutPreference.OnClickCallback {
 
                 override fun onSettingsClicked(preference: ShortcutPreference?) {
-                    showEditShortcutsScreen(
-                        shortcutPreference.context,
-                        shortcutPreference.title ?: "",
-                    )
+                    showEditShortcutsScreen(shortcutPreference.context, preference?.title ?: "")
                     featureFactory.metricsFeatureProvider.logClickedPreference(
                         shortcutPreference,
                         metricsCategory,
@@ -117,7 +122,8 @@ open class AccessibilityShortcutPreference(
                 override fun onToggleClicked(preference: ShortcutPreference?) {
                     if (shortcutPreference.isChecked) {
                         showShortcutsTutorial(
-                            context.fragmentManager,
+                            context,
+                            context.childFragmentManager,
                             dataStore.getUserShortcutTypes(),
                             shortcutPreference.context.isInSetupWizard(),
                         )
@@ -143,14 +149,22 @@ open class AccessibilityShortcutPreference(
     open fun getSettingsEditable(context: Context): Boolean = true
 
     private fun showShortcutsTutorial(
+        context: Context,
         fragmentManager: FragmentManager,
         shortcutTypes: Int,
         isInSetupWizard: Boolean,
     ) {
+        val featureLabel: CharSequence =
+            when {
+                title != 0 -> context.getText(title)
+                this is ShortcutFeatureNameProvider -> getFeatureName(context)
+                else -> ""
+            }
+
         AccessibilityShortcutsTutorial.DialogFragment.showDialog(
             fragmentManager,
             shortcutTypes,
-            featureName,
+            featureLabel,
             isInSetupWizard,
         )
     }

@@ -55,6 +55,12 @@ class TextReadingScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
+    fun getSummary() {
+        assertThat(preferenceScreenCreator.summary)
+            .isEqualTo(R.string.accessibility_text_reading_options_subtext)
+    }
+
+    @Test
     fun getMetricsCategory() {
         assertThat(preferenceScreenCreator.metricsCategory)
             .isEqualTo(SettingsEnums.ACCESSIBILITY_TEXT_READING_OPTIONS)

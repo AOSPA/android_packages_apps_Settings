@@ -1016,12 +1016,9 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Weitere Optionen"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Zum Neuanordnen der Displays halten und ziehen."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Integriertes Display spiegeln"</string>
-    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
-    <skip />
+    <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Neue Einstellungen verwenden?"</string>
+    <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Wenn dein Display nicht wie gewünscht funktioniert, kannst du zu deinen vorherigen Einstellungen zurückkehren"</string>
+    <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Einstellungen verwenden"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spiegeln"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Kabellose Übertragung aktivieren"</string>
@@ -1276,7 +1273,7 @@
     <string name="wifi_dns1" msgid="6764769531843748514">"DNS 1 (sofern nicht von privatem DNS überschrieben)"</string>
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (sofern nicht von privatem DNS überschrieben)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Gateway"</string>
-    <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Länge d. Netzwerkpräfixes"</string>
+    <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Länge des Netzwerkpräfixes"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_menu_search" msgid="8383306178784876840">"Nach Geräten suchen"</string>
     <string name="wifi_p2p_menu_searching" msgid="3428767661028761100">"Suche läuft…"</string>
@@ -1471,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Mit einem dunklen Hintergrund werden die Augen weniger beansprucht und der Akkuverbrauch auf einigen Displays reduziert. Wenn du einen Zeitplan festgelegt hast, wird dein Design geändert, wenn das Display aus ist."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"„Dunkles Design“ wird aktuell gemäß deinem Zeitplan für den Schlafenszeitmodus aktiviert"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Schlafenszeitmodus – Einstellungen"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Das dunkle Design kann auch über Modi aktiviert werden}=1{Das dunkle Design kann auch über den Modus „{mode_1}“ aktiviert werden}=2{Das dunkle Design kann auch über die Modi „{mode_1}“ und „{mode_2}“ aktiviert werden}=3{Das dunkle Design kann auch über die Modi „{mode_1}“, „{mode_2}“ und „{mode_3}“ aktiviert werden}other{Das dunkle Design kann auch über die Modi „{mode_1}“, „{mode_2}“ und # weitere aktiviert werden}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Einstellungen für Modi"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Mit dieser Funktion kannst du den Farbbereich und die Klarheit von HDR-Bildern und -Videos aufhellen und erweitern. HDR-Inhalte werden heller angezeigt."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Display automatisch ausschalten"</string>
@@ -2397,7 +2395,8 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Einstellungen für Zeitvorgaben"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"System­steuerelemente"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Feedback geben"</string>
-    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Bewerten"</string>
+    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <skip />
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Support für Barrierefreiheit bei Google-Produkten kontaktieren"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Umfrage zu Bedienungshilfen"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Feedback geben"</string>
@@ -2520,7 +2519,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Tippe auf die unverankerte Schaltfläche."</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Touchgeste für Bedienungshilfen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Tippe unten auf dem Display auf die Schaltfläche „Bedienungshilfen“ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>. Um zwischen den Funktionen umzuschalten, halte diese Schaltfläche gedrückt."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Wische vom unteren Displayrand nach oben. Wenn du zwischen Funktionen umschalten möchtest, wische nach oben und halte das Display gedrückt.}other{Wische vom unteren Displayrand mit # Fingern nach oben. Wenn du zwischen Funktionen umschalten möchtest, wische mit # Fingern nach oben und halte das Display gedrückt.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Wische vom unteren Displayrand nach oben. Wenn du zwischen den Funktionen wechseln möchtest, wische nach oben und halte das Display gedrückt.}other{Wische vom unteren Displayrand mit # Fingern nach oben. Wenn du zwischen den Funktionen wechseln möchtest, wische mit # Fingern nach oben und halte das Display gedrückt.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Weitere Optionen"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Weitere Informationen zu <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Schnelleinstellungen"</string>
@@ -2635,10 +2634,8 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Klein"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Sehr klein"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Geringfügige Cursorbewegung ignorieren"</string>
-    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
-    <skip />
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"Linksklick als Standardaktion verwenden"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Wenn du eine andere Aktion verwendest, wird der automatische Klick automatisch wieder zum Linksklick"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Die Bedienungshilfe „Automatischer Klick“ funktioniert mit der Bedienung über 3 Schaltflächen besser"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Wenn du bei der Verwendung der Bedienungshilfe „Automatischer Klick“ einfach zurückgehen, den Startbildschirm aufrufen oder die App wechseln möchtest, verwende die Bedienung über 3 Schaltflächen anstelle der Bedienung über Gesten"</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Bedienung über Gesten beibehalten"</string>
@@ -2699,7 +2696,8 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Du kannst Hörgeräte, Cochlea-Implantate und andere Verstärker, die mit ASHA und LE Audio kompatibel sind, einrichten und verwalten"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Du kannst Hörgeräte, Cochlea-Implantate und andere Verstärker, die mit ASHA kompatibel sind, einrichten und verwalten"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Du kannst Hörgeräte, Cochlea-Implantate und andere Verstärker, die mit LE Audio kompatibel sind, einrichten und verwalten"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Keine Hörgeräte verbunden"</string>
+    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
+    <skip />
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Hörgeräte hinzufügen"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Hörgeräte koppeln"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Wähle auf dem nächsten Bildschirm deine Hörgeräte aus. Das linke und rechte Ohr müssen möglicherweise separat gekoppelt werden.\n\nDeine Hörgeräte müssen eingeschaltet und bereit zum Koppeln sein."</string>
@@ -3105,10 +3103,14 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"An"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Aus"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Adaptive Konnektivität verwenden"</string>
-    <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"WLAN automatisch zu Mobilfunk wechseln lassen"</string>
-    <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"Es wird automatisch eine mobile Datenverbindung verwendet, wenn die WLAN-Verbindung schlecht oder nicht verfügbar ist. Dadurch können Gebühren für die Datennutzung anfallen."</string>
-    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"Mobilfunknetz für längere Akkulaufzeit automatisch wechseln"</string>
-    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="2432517485362085341">"Verlängere die Akkulaufzeit, indem du Netzwerkverbindungen automatisch verwalten lässt"</string>
+    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
+    <skip />
     <string name="cellular_security_title" msgid="5562899485544677941">"Sicherheit des Mobilfunknetzes"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Netzwerktyp, Verschlüsselung, Benachrichtigungseinstellungen"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"Diese Einstellungen tragen zum Schutz deiner Anrufe, Nachrichten und Daten vor veralteten oder unverschlüsselten Netzwerken bei, in denen möglicherweise das Risiko von Datendiebstahl oder Überwachung besteht"</string>
@@ -3188,7 +3190,7 @@
     <string name="select_device_admin_msg" msgid="2506262585633022884">"Geräteadministrator"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Keine App zur Geräteverwaltung verfügbar"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Keine verfügbaren Trust Agents"</string>
-    <string name="add_device_admin_msg" msgid="7730006568970042119">"App zur Geräteverwaltung aktivieren?"</string>
+    <string name="add_device_admin_msg" msgid="7730006568970042119">"App zur Geräte­ver­wal­tung aktivieren?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Diese App zur Geräteverwaltung aktivieren"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Geräteadministrator"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"Wenn diese App zur Geräteverwaltung aktiviert ist, kann die App „<xliff:g id="APP_NAME">%1$s</xliff:g>“ Folgendes tun:"</string>
@@ -3441,10 +3443,8 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Anrufliste und SMS-Verlauf werden für diesen Nutzer freigegeben."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Administrator­­berechti­gun­gen widerrufen?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Wenn du die Administrator­berechtigungen für diesen Nutzer entfernst, können sie von dir oder einem anderen Administrator später wiederhergestellt werden."</string>
-    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
-    <skip />
-    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
-    <skip />
+    <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Möchtest du deine eigenen Administratorberechtigungen wirklich entfernen?"</string>
+    <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Wenn du fortfährst, können dir nur andere Administratoren Administratorberechtigungen gewähren."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Notfallinformationen"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informationen und Kontaktdaten für <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"„<xliff:g id="APP_NAME">%1$s</xliff:g>“ öffnen"</string>
@@ -4379,10 +4379,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"Berechtigungs­manager"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Änderungen bei der Weitergabe von Standortdaten"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Apps ansehen, bei denen sich die Art der Weitergabe deiner Standortdaten geändert hat"</string>
-    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1837117989202166166">"KI-Agenten"</string>
+    <string name="app_function_access_settings_summary" msgid="3654291845453799170">"KI-Agenten, die in Apps auf Informationen zugreifen oder Aktionen ausführen können"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Zum Aktivieren tippen"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Tippe doppelt auf den Bildschirm, um das Gerät zu aktivieren."</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Links öffnen"</string>
@@ -4498,7 +4496,7 @@
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimieren"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Der Akku könnte hierdurch schneller leer sein, denn die App kann jetzt auch im Hintergrund Energie verbrauchen."</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Zur Verlängerung der Akkulaufzeit empfohlen"</string>
-    <string name="app_list_preference_none" msgid="1635406344616653756">"Keine App"</string>
+    <string name="app_list_preference_none" msgid="1635406344616653756">"Kein Dienst"</string>
     <string name="work_profile_usage_access_warning" msgid="7579246573371327219">"Das Deaktivieren von App-Nutzungsdaten für diese App hindert deinen Administrator nicht am Erfassen der Datennutzung für Apps in deinem Arbeitsprofil"</string>
     <string name="draw_overlay" msgid="7902083260500573027">"Über anderen Apps einblenden"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Über anderen Apps einblenden"</string>
@@ -4647,7 +4645,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 App darf trotz aktiviertem Datensparmodus unbegrenzte mobile Daten nutzen}other{# Apps dürfen trotz aktiviertem Datensparmodus unbegrenzte mobile Daten nutzen}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Primärdaten"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"WLAN-Daten"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> verbraucht"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"<xliff:g id="ID_1">^1</xliff:g> über dem Limit"</string>
     <string name="data_remaining" msgid="6316251496381922837">"<xliff:g id="ID_1">^1</xliff:g> verbleibend"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Grafik zeigt Datennutzung zwischen dem <xliff:g id="START_DATE">%1$s</xliff:g> und dem <xliff:g id="END_DATE">%2$s</xliff:g>."</string>
@@ -4987,7 +4986,7 @@
     <string name="credman_picker_page_summary" msgid="4633938046738617332">"Wähle aus, in welchem Dienst Daten für die Anmeldung und Autofill-Vorschläge gespeichert werden sollen"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s deaktivieren?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Diesen Dienst deaktivieren?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Gespeicherte Daten wie Passwörter, Passkeys, Zahlungsmethoden usw. werden beim Anmelden nicht eingetragen. Wenn du deine gespeicherten Daten verwenden möchtest, nutze einen Passwort-, Passkey- oder Datendienst."</string>
-    <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Passwörter, Passkeys &amp; Konten"</string>
+    <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Passwörter, Passkeys &amp; Konten"</string>
     <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Alle Dienste deaktivieren?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Passwörter, Passkeys und andere gespeicherte Informationen werden nicht mehr automatisch ausgefüllt, wenn du dich anmeldest"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Bevorzugten Dienst zu &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ändern?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Neue Passwörter, Passkeys und weitere Informationen werden ab sofort hier gespeichert. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kann anhand dessen, was auf deinem Bildschirm zu sehen ist, bestimmen, was automatisch ausgefüllt werden kann."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s verwenden?"</string>
@@ -5081,7 +5080,7 @@
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Stummschalten"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrieren"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Stummschalten"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Ändere zum Aktivieren erst „Ein-/Aus-Taste gedrückt halten“ zu „Ein-/Aus-Menü“."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Ändere zum Aktivieren erst „Ein/Aus-Taste gedrückt halten“ zu „Ein/Aus-Menü“."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Netzwerkdetails"</string>
     <string name="devices_title" msgid="649715719278562515">"Geräte"</string>
     <string name="choose_network_title" msgid="5355609223363859430">"Netzwerk auswählen"</string>
@@ -5436,17 +5435,17 @@
     <string name="system_default_app_subtext" msgid="5212055189703164839">"System-Standard­einstellung"</string>
     <string name="default_app_none" msgid="5420632042222036264">"Keine"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Diese Auswahl ist nicht mehr gültig. Bitte versuch es noch einmal."</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"Ein-/Aus-Taste gedrückt halten"</string>
-    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Für Zugriff Ein-/Aus-Taste gedrückt halten"</string>
-    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Ein-/Aus-Menü"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Ein/Aus-Taste gedrückt halten"</string>
+    <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Für Zugriff Ein/Aus-Taste gedrückt halten"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Ein/Aus-Menü"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digitaler Assistent"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Auf digitalen Assistenten zugreifen"</string>
-    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Auf Ein-/Aus-Menü zugreifen"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Auf Ein/Aus-Menü zugreifen"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Lege zuerst eine Displaysperre fest, damit du die Option verwenden kannst"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Ein-/Aus-Menü:\nEin-/Aus-Taste und Lautertaste gleichzeitig drücken"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Ein/Aus-Menü:\nEin/Aus-Taste und Lautertaste gleichzeitig drücken"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Klingeln verhindern:\nFür Verknüpfung eine Lautstärketaste drücken"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Dauer des Gedrückthaltens"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Stelle die Empfindlichkeit ein, indem du festlegst, wie lange du die Ein-/Aus-Taste gedrückt halten musst"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Stelle die Empfindlichkeit ein, indem du festlegst, wie lange du die Ein/Aus-Taste gedrückt halten musst"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Kurz"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Lang"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Wallet anzeigen"</string>
@@ -5686,10 +5685,10 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingerabdrucksensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Aufleuchten bei Benachrichtigungen"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Infos zum Aufleuchten bei Benachrichtigungen"</string>
-    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Aus"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"An / Aufleuchten des Kamerablitzes bei Benachrichtigungen"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"An / Aufleuchten des Bildschirms bei Benachrichtigungen"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"An / Kamerablitz und Bildschirm leuchten kurz auf"</string>
+    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
+    <skip />
+    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
+    <skip />
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Wenn du eine Benachrichtigung erhältst oder ein Wecker klingelt, leuchten der Kamerablitz oder der Bildschirm kurz auf"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Wenn du eine Benachrichtigung erhältst oder ein Wecker klingelt, leuchtet der Bildschirm kurz auf"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Wenn du lichtempfindlich bist, solltest du das Aufleuchten bei Benachrichtigungen mit Vorsicht verwenden"</string>
@@ -5896,8 +5895,7 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN einrichten"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"Elternaufsicht, Jugendschutzeinstellungen, Eltern, PIN für die Elternaufsicht, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"PIN verwalten"</string>
-    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
-    <skip />
+    <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN für Jugendschutzeinstellungen"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"Eltern-PIN, PIN für Jugendschutzeinstellungen"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"E‑Mail-Adresse zur Kontowiederherstellung hinzufügen"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"E‑Mail-Adresse zur Kontowiederherstellung bestätigen"</string>
@@ -5919,8 +5917,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Wenn diese Einstellungen deaktiviert sind, gelten andere Kontoeinstellungen möglicherweise weiterhin."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"PIN für Jugend­schutz­ein­stel­lungen eingeben"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"PIN für Jugendschutzeinstellungen festlegen"</string>
-    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
-    <skip />
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"PIN für Jugendschutzeinstellungen bestätigen"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN aktualisiert"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"App öffnen"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"PIN löschen?"</string>

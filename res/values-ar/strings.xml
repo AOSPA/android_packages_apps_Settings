@@ -1383,8 +1383,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"مزيد من المعلومات عن التدوير التلقائي"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"دقة الشاشة"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"دقة عالية"</string>
-    <string name="screen_resolution_option_full" msgid="4456839315039000517">"الحد الأقصى للدقة"</string>
-    <string name="screen_resolution_footer" msgid="1230761249204935717">"يستهلك الحد الأقصى للدقة مزيدًا من طاقة البطارية. وقد يؤدي تبديل الدقة إلى إعادة تشغيل بعض التطبيقات."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"الدقة القصوى"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"تستهلك الدقة القصوى مزيدًا من طاقة البطارية. وقد يؤدي تبديل الدقة إلى إعادة تشغيل بعض التطبيقات."</string>
     <string name="screen_resolution_delimiter_a11y" msgid="5826162120538795842">"‫<xliff:g id="WIDTH">%1$s</xliff:g> في <xliff:g id="HEIGHT">%2$s</xliff:g>"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"الألوان"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"طبيعية"</string>
@@ -1399,7 +1399,7 @@
     <string name="hdr_brightness_title" msgid="6997980740096282616">"السطوع المحسّن بتكنولوجيا النطاق العالي الديناميكية"</string>
     <string name="hdr_brightness_level_title" msgid="770342878327164738">"درجة السطوع"</string>
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"الصورة العادية"</string>
-    <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"صورة بنطاق عالي الديناميكية"</string>
+    <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"الصورة بالنطاق العالي الديناميكية"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"يؤثّر هذا الإعداد فقط في الصور والفيديوهات التي تدعم تكنولوجيا النطاق العالي الديناميكية."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"موازنة اللون الأبيض للشاشة"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
@@ -1468,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"يمكنك استخدام خلفية داكنة لجعل الشاشة مريحة أكثر للعين وتقليل استخدام البطارية في بعض الشاشات. وسيتغيّر مظهر الجهاز إذا ضبطت جدولاً زمنيًا، وذلك عندما تكون الشاشة مغلقة."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"يتبع وضع \"المظهر الداكن\" حاليًا الجدول الزمني لوضع \"وقت النوم\"."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"إعدادات وضع \"وقت النوم\""</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{يمكن للأوضاع تفعيل \"المظهر الداكن\" أيضًا}=1{يمكن لوضع \"{mode_1}\" تفعيل \"المظهر الداكن\" أيضًا}=2{يمكن لوضعَي \"{mode_1}\" و\"{mode_2}\" تفعيل \"المظهر الداكن\" أيضًا}=3{يمكن لوضع \"{mode_1}\" ووضع \"{mode_2}\" ووضع \"{mode_3}\" تفعيل \"المظهر الداكن\" أيضًا}few{يمكن لوضع \"{mode_1}\" ووضع \"{mode_2}\" و# أوضاع أخرى تفعيل \"المظهر الداكن\" أيضًا}many{يمكن لوضع \"{mode_1}\" ووضع \"{mode_2}\" و# وضعًا آخر تفعيل \"المظهر الداكن\" أيضًا}other{يمكن لوضع \"{mode_1}\" ووضع \"{mode_2}\" و# وضع آخر تفعيل \"المظهر الداكن\" أيضًا}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"إعدادات \"الأوضاع\""</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"توفّر هذه الميزة صورًا وفيديوهات أكثر سطوعًا مع نطاق ألوان أوسع ووضوح من خلال تكنولوجيا النطاق العالي الديناميكية. وسيظهر المحتوى بالنطاق العالي الديناميكية أكثر سطوعًا."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"المهلة قبل غلق الشاشة"</string>
@@ -1495,7 +1496,7 @@
     <string name="screensaver_settings_summary_postured" msgid="6346392320858994892">"في وضع عمودي"</string>
     <string name="screensaver_settings_summary_postured_and_charging" msgid="5111797042509819055">"أثناء الشحن في وضع عمودي"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"مفعّلة / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
-    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"غير مفعّلة"</string>
+    <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"الميزة غير مفعّلة"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7756170756065029160">"وقت العرض"</string>
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"وضع الإضاءة المنخفضة"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"الرفع لتنبيه الجهاز"</string>
@@ -1514,7 +1515,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"عندما تكون الشاشة داكنة، ستُضاء لعرض الإشعارات الجديدة"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"إظهار الوقت والمعلومات دائمًا"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"تشغيل الشاشة دائمًا"</string>
-    <string name="doze_always_on_summary" msgid="509097829739647852">"يزيد استخدام البطارية"</string>
+    <string name="doze_always_on_summary" msgid="509097829739647852">"يزيد استهلاك البطارية"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"عرض خلفية شاشة القفل عندما تكون الشاشة مغلقة"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"إخفاء خلفية شاشة القفل عندما تكون الشاشة مغلقة"</string>
     <string name="doze_always_on_summary_long" msgid="9198713049143867176">"تعرض ميزة \"تشغيل الشاشة دائمًا\" الوقت والتاريخ وغيرها من المعلومات عندما تكون الشاشة مغلقة"</string>
@@ -2066,7 +2067,7 @@
     <string name="system_package" msgid="7559476279008519360">"لا يمكن تثبيت تحديثات النظام على وسائط خارجية."</string>
     <string name="move_error_device_admin" msgid="1561502976834303626">"لا يمكن تثبيت تطبيق مشرف الجهاز على وسائط خارجية"</string>
     <string name="force_stop_dlg_title" msgid="86745852555490146">"هل تريد فرض الإيقاف؟"</string>
-    <string name="force_stop_dlg_text" msgid="1527286468544457368">"في حالة فرض إيقاف التطبيق، قد لا يعمل بشكل صحيح."</string>
+    <string name="force_stop_dlg_text" msgid="1527286468544457368">"في حال فرض إيقاف التطبيق، قد لا يعمل بشكل صحيح."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"إيقاف التطبيق"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"‏قد يؤدي إيقاف هذا التطبيق إلى عدم عمل كل من نظام التشغيل Android وتطبيقات أخرى على النحو المنشود. يجب الانتباه إلى أنه لا يمكنك حذف هذا التطبيق لأنه تم تثبيته مسبقًا على جهازك. ويعني إيقاف التطبيق أنه سيتم إيقافه وإخفاؤه على جهازك."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"المتجر"</string>
@@ -2394,7 +2395,8 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"عناصر التحكّم في التوقيت"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"عناصر التحكّم في النظام"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"إرسال ملاحظات"</string>
-    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"المشاركة بتقييم لنا"</string>
+    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <skip />
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"‏التواصل مع فريق الدعم في Google المخصّص لذوي الاحتياجات الخاصة"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"استطلاع تسهيل الاستخدام"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"ملاحظاتك تهمنا"</string>
@@ -2694,7 +2696,8 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"‏يمكنك إعداد وإدارة السماعات الطبية والقواقع المزروعة وغيرها من أجهزة تضخيم الصوت المتوافقة مع بروتوكول ASHA وتكنولوجيا LE Audio"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"‏يمكنك إعداد وإدارة سماعات ASHA الطبية والقواقع المزروعة وغيرها من أجهزة تضخيم الصوت"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"‏يمكنك إعداد وإدارة سماعات LE Audio الطبية والقواقع المزروعة وغيرها من أجهزة تضخيم الصوت"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"لم يتم توصيل سماعات أذن طبية"</string>
+    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
+    <skip />
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"إضافة سمّاعات الأذن الطبية"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"إقران سماعتَي الأذن الطبيتين"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"في الشاشة التالية، انقر على سماعات الأذن الطبية. قد يُطلَب منك إقران سماعتَي الأذن الطبيتين اليسرى واليمنى بشكل منفصل.\n\nتأكَّد من تشغيل سماعتَي الأذن الطبيتين وجاهزيتهما للإقران."</string>
@@ -2875,7 +2878,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"الاستخدام المحسَّن"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"الاستخدام المحدّد بقيود"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"يتم السماح باستخدام البطارية في الخلفية بدون قيود. قد يؤدي هذا الخيار إلى استخدام المزيد من شحن البطارية."</string>
-    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"يسمح هذا الإعداد باستخدام البطارية في الخلفية، وقد يؤدي إلى استخدام المزيد من الطاقة."</string>
+    <string name="manager_battery_usage_unrestricted_summary_v2" msgid="7857049686332197528">"يسمح هذا الإعداد باستخدام البطارية في الخلفية، وقد يؤدي إلى استهلاك المزيد من الطاقة."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"تحسين الإعدادات بناءً على الاستخدام (مقترح لمعظم التطبيقات)"</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"يتم حظر استخدام البطارية أثناء العمل في الخلفية. وبالتالي، قد لا يعمل التطبيق على النحو المتوقع. وقد تتأخر الإشعارات."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"يمكن لتغيير طريقة استخدام التطبيق للبطارية أن يؤثر في أدائها."</string>
@@ -3100,10 +3103,14 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"مفعّل"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"إيقاف"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"استخدام \"الاتصال التكيفي\""</string>
-    <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"‏التبديل التلقائي من شبكة Wi-Fi إلى بيانات شبكة الجوّال"</string>
-    <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"‏يتم استخدام بيانات شبكة الجوّال تلقائيًا عندما يكون اتصال Wi‑Fi ضعيفًا أو غير متوفّر. وقد يتم تحصيل رسوم مقابل استخدام البيانات."</string>
-    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"التبديل التلقائي بين شبكات الجوّال لإطالة عمر البطارية"</string>
-    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="2432517485362085341">"إطالة عمر البطارية عن طريق إدارة اتصالات الشبكة تلقائيًا"</string>
+    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
+    <skip />
     <string name="cellular_security_title" msgid="5562899485544677941">"أمان شبكة الجوّال"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"عناصر التحكّم في نوع الشبكة والتشفير والإشعارات"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"تساعد هذه الإعدادات في حماية مكالماتك والرسائل والبيانات من خطر الاختراق أو المراقبة عبر الشبكات القديمة أو الشبكات غير المشفّرة"</string>
@@ -4324,7 +4331,7 @@
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"فتح الروابط المتوافقة"</string>
     <string name="app_launch_open_in_app" msgid="2208182888681699512">"في التطبيق"</string>
     <string name="app_launch_open_in_browser" msgid="766170191853009756">"في المتصفِّح"</string>
-    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"اختيار كيفية فتح روابط الويب لهذا التطبيق"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"اختَر كيفية فتح روابط الويب لهذا التطبيق"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"الروابط المراد فتحها في هذا التطبيق"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"الروابط المتوافقة"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"الإعدادات المفضّلة الأخرى"</string>
@@ -4368,14 +4375,12 @@
     <string name="filter_enabled_apps" msgid="8868356616126759124">"التطبيقات المثبَّتة"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"التطبيقات الفورية"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"تطبيقات تم إيقاف إشعاراتها"</string>
-    <string name="advanced_apps" msgid="7643010673326578815">"إعدادات متقدّمة"</string>
+    <string name="advanced_apps" msgid="7643010673326578815">"الإعدادات المتقدّمة"</string>
     <string name="app_permissions" msgid="8666537659217653626">"إدارة الأذونات"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"تعديلات مشاركة بيانات الموقع الجغرافي"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"مراجعة التطبيقات التي غيّرت الطريقة التي قد تشارك بها بيانات موقعك الجغرافي"</string>
-    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1837117989202166166">"الوكلاء"</string>
+    <string name="app_function_access_settings_summary" msgid="3654291845453799170">"الوكلاء الذين يمكنهم الوصول إلى المعلومات أو اتخاذ إجراءات في التطبيقات"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"انقر للتنبيه من وضع السكون"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"انقر مرّتين على أي مكان بالشاشة لتنبيه الجهاز من وضع السكون"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"فتح الروابط"</string>
@@ -4497,7 +4502,7 @@
     <string name="system_alert_window_settings" msgid="6458633954424862521">"الظهور فوق التطبيقات الأخرى"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"السماح بظهور التطبيق فوق التطبيقات الأخرى"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"يمكنك السماح بعرض واجهة هذا التطبيق فوق التطبيقات الأخرى التي تستخدمها. سيتمكّن هذا التطبيق من معرفة الأماكن التي تنقر عليها أو من تغيير ما يتم عرضه على الشاشة."</string>
-    <string name="media_routing_control_title" msgid="6402800638960066807">"تغيير جهاز بث الوسائط"</string>
+    <string name="media_routing_control_title" msgid="6402800638960066807">"تغيير تطبيق تشغيل الوسائط"</string>
     <string name="allow_media_routing_control" msgid="4907036637509360616">"السماح للتطبيق بتبديل جهاز إخراج الوسائط"</string>
     <string name="allow_media_routing_description" msgid="8343709701298051207">"يؤدي تفعيل هذا الإعداد إلى السماح لهذا التطبيق باختيار واحد من الأجهزة المتصلة لتشغيل الصوت أو الفيديو من تطبيقات أخرى. في حال تفعيل الإعداد، يمكن لهذا التطبيق الوصول إلى قائمة بالأجهزة المتاحة، مثل سمّاعات الرأس ومكبّرات الصوت، ثم اختيار جهاز إخراج لتشغيل الصوت أو الفيديو أو بثّهما."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"الوصول إلى كل الملفات"</string>
@@ -4640,7 +4645,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{هناك تطبيق واحد مسموح له بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}zero{هناك # تطبيق مسموح له بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}two{هناك تطبيقان مسموح لهما بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}few{هناك # تطبيقات مسموح لها بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}many{هناك # تطبيقًا مسموحًا له بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}other{هناك # تطبيق مسموح له بالاستخدام غير المحدود لبيانات الجوّال عندما تكون ميزة \"توفير البيانات\" مفعَّلة}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"البيانات الأساسية"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"‏بيانات Wi‑Fi"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"تم استخدام <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"يزيد عن <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_remaining" msgid="6316251496381922837">"يتبقى <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"رسم بياني يوضح استخدام البيانات بين <xliff:g id="START_DATE">%1$s</xliff:g> و<xliff:g id="END_DATE">%2$s</xliff:g>."</string>
@@ -4668,7 +4674,7 @@
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"سيتم التفعيل تلقائيًا عند الوصول إلى <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"الميزة غير مفعّلة"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"استخدام التطبيقات للبطارية"</string>
-    <string name="app_battery_usage_summary" msgid="6349965904306339539">"ضبط إعدادات استخدام التطبيقات للبطارية"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"يمكنك ضبط إعدادات استخدام التطبيقات للبطارية"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"عرض الإعدادات"</string>
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"التحقّق"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"حسنًا"</string>
@@ -4687,7 +4693,7 @@
     <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"استهلاك مرتفع للبطارية في الخلفية"</string>
     <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"استهلاك مرتفع للبطارية في المقدّمة"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"الاستخدام غير المحدّد بقيود"</string>
-    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"تم التحسين لإطالة عمر البطارية"</string>
+    <string name="filter_battery_optimized_title" msgid="8236647176487754796">"الاستخدام المحسَّن لإطالة عمر البطارية"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"الاستخدام المحدّد بقيود"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"التدقيق الإملائي التلقائي"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"اختيار المدقق الإملائي"</string>
@@ -4852,7 +4858,7 @@
     <string name="web_action_enable_title" msgid="6654581786741216382">"التطبيقات الفورية"</string>
     <string name="web_action_enable_summary" msgid="2658930257777545990">"فتح الروابط في التطبيقات، حتى إذا لم تكن التطبيقات مثبّتة"</string>
     <string name="web_action_section_title" msgid="994717569424234098">"التطبيقات الفورية"</string>
-    <string name="instant_apps_settings" msgid="4280942494969957858">"إعدادات التطبيقات الفورية"</string>
+    <string name="instant_apps_settings" msgid="4280942494969957858">"الإعدادات المفضّلة للتطبيقات الفورية"</string>
     <string name="domain_url_section_title" msgid="9028890472923474958">"التطبيقات المثبَّتة"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"تتم إدارة مساحة التخزين لجهازك الآن عن طريق مدير مساحة التخزين"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"حسابات <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -5058,7 +5064,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"‏يمكنك السماح لهذا التطبيق بتفعيل شبكة Wi-Fi أو إيقافها، أو البحث عن شبكات Wi-Fi والاتصال بها، أو إضافة الشبكات أو إزالتها، أو بدء نقطة اتصال للأجهزة المحلية فقط."</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"‏التشغيل من خلال تقنية NFC"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"‏السماح بتشغيل التطبيق عند مسح علامة NFC ضوئيًا"</string>
-    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"‏السماح بتشغيل هذا التطبيق عندما يتم مسح علامة NFC ضوئيًا\nإذا كان هذا الإذن مفعّلاً، سيتوفّر التطبيق كخيار كلّما تم رصد علامة."</string>
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"‏يمكنك السماح بتشغيل هذا التطبيق عندما يتم مسح علامة NFC ضوئيًا\nإذا كان هذا الإذن مفعّلاً، سيتوفّر التطبيق كخيار كلّما تم رصد علامة."</string>
     <string name="media_output_title" msgid="8283629315159510680">"تشغيل الوسائط على"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"تشغيل <xliff:g id="LABEL">%s</xliff:g> على"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"سيتم تشغيل الصوت على"</string>
@@ -5683,10 +5689,10 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"أداة استشعار بصمة الإصبع"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"الإشعارات المصحوبة بوميض"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"لمحة عن الإشعارات المصحوبة بوميض"</string>
-    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"الميزة غير مفعّلة"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"الخيار مفعَّل / وميض فلاش الكاميرا"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"الخيار مفعَّل / وميض الشاشة"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"الخيار مفعَّل / وميض فلاش الكاميرا والشاشة"</string>
+    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
+    <skip />
+    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
+    <skip />
     <string name="flash_notifications_intro" msgid="8409873413480928249">"وميض فلاش الكاميرا أو الشاشة عند تلقّي إشعارات أو عندما تبدأ المنبّهات"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"وميض الشاشة عند تلقّي إشعارات أو عندما تبدأ المنبّهات"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"يُرجى توخّي الحذر عند استخدام الإشعارات المصحوبة بوميض إذا كنت تعاني من حساسية الضوء"</string>

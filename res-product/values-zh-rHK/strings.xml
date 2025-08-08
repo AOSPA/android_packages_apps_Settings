@@ -310,7 +310,7 @@
     <string name="wifi_add_app_networks_summary" product="default" msgid="7014504084783236696">"「<xliff:g id="APPNAME">%1$s</xliff:g>」想將這些網絡儲存至你的手機"</string>
     <string name="wifi_add_app_networks_summary" product="tablet" msgid="6433255556506891439">"「<xliff:g id="APPNAME">%1$s</xliff:g>」想在你的平板電腦中新增這些網絡"</string>
     <string name="wifi_add_app_networks_summary" product="desktop" msgid="4238956725252527159">"「<xliff:g id="APPNAME">%1$s</xliff:g>」想在你的裝置儲存這些網絡"</string>
-    <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"當你將手機在直向或橫向模式之間轉換時，螢幕都會自動旋轉以調整方向"</string>
+    <string name="auto_rotate_screen_summary" product="default" msgid="5562937346878935483">"隨著你將手機轉為直向或橫向，自動調整螢幕方向"</string>
     <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"當你以直向或橫向模式使用平板電腦時，螢幕都會自動旋轉以調整方向"</string>
     <string name="auto_rotate_screen_summary" product="desktop" msgid="3805199344834364732">"隨裝置方向自動調整屏幕定向 (直向或橫向)"</string>
     <string name="sim_lock_on" product="tablet" msgid="227481196121403470">"需要 PIN 碼才能使用平板電腦"</string>
@@ -361,7 +361,7 @@
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="1339730853653511849">"透過藍牙分享平板電腦的互聯網連線"</string>
     <string name="bluetooth_tethering_subtext" product="device" msgid="4847586521141330988">"透過藍牙分享裝置的互聯網連線"</string>
     <string name="bluetooth_tethering_subtext" product="desktop" msgid="4847586521141330988">"透過藍牙分享裝置的互聯網連線"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="8652438909365718644">"透過以太網分享手機的互聯網連線"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="8652438909365718644">"透過以太網絡分享手機的互聯網連線"</string>
     <string name="ethernet_tethering_subtext" product="tablet" msgid="2227710549796706455">"透過以太網絡分享平板電腦的互聯網連線"</string>
     <string name="ethernet_tethering_subtext" product="device" msgid="454840171632885947">"透過以太網絡分享裝置的互聯網連線"</string>
     <string name="ethernet_tethering_subtext" product="desktop" msgid="454840171632885947">"透過以太網絡分享裝置的互聯網連線"</string>
@@ -487,12 +487,9 @@
     <string name="device_supervision_switch_title" product="default" msgid="5711051584668311080">"此手機的控制項"</string>
     <string name="device_supervision_switch_title" product="tablet" msgid="5400384750840247844">"此平板電腦的控制項"</string>
     <string name="device_supervision_switch_title" product="desktop" msgid="2140192989162020111">"此裝置的控制項"</string>
-    <!-- no translation found for supervision_pin_length_message (7142997986515800901) -->
-    <skip />
-    <!-- no translation found for supervision_pin_length_message (1772471880165492225) -->
-    <skip />
-    <!-- no translation found for supervision_pin_length_message (7689193597679628648) -->
-    <skip />
+    <string name="supervision_pin_length_message" product="default" msgid="7142997986515800901">"{count,plural, =1{輸入至少 # 個數字的 PIN。你將使用此 PIN 管理此手機上的控制項。}other{輸入至少 # 個數字的 PIN。你將使用此 PIN 管理此手機上的控制項。}}"</string>
+    <string name="supervision_pin_length_message" product="tablet" msgid="1772471880165492225">"{count,plural, =1{輸入至少 # 個數字的 PIN。你將使用此 PIN 管理此平板電腦上的控制項。}other{輸入至少 # 個數字的 PIN。你將使用此 PIN 管理此平板電腦上的控制項。}}"</string>
+    <string name="supervision_pin_length_message" product="desktop" msgid="7689193597679628648">"{count,plural, =1{輸入至少 # 個數字的 PIN。你將使用此 PIN 管理此裝置上的控制項。}other{輸入至少 # 個數字的 PIN。你將使用此 PIN 管理此裝置上的控制項。}}"</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="default" msgid="3538726164054428290">"家長監控 PIN 已與所有使用者分享。如要刪除 PIN，使用此 PIN 為此手機使用者設定的監控設定必須關閉。"</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="tablet" msgid="5923679321161365699">"家長監控 PIN 已與所有使用者分享。如要刪除 PIN，使用此 PIN 為此平板電腦使用者設定的監控設定必須關閉。"</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="desktop" msgid="4418588055965155673">"家長監控 PIN 已與所有使用者分享。如要刪除 PIN，使用此 PIN 為此裝置使用者設定的監控設定必須關閉。"</string>

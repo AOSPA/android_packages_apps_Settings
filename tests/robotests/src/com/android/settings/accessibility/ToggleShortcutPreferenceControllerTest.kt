@@ -53,6 +53,7 @@ import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowLooper
 
 private const val PREFERENCE_KEY = "prefKey"
 private const val PREFERENCE_TITLE = "prefTitle"
@@ -99,6 +100,7 @@ class ToggleShortcutPreferenceControllerTest {
     @After
     fun cleanUp() {
         fragmentScenario.close()
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
     }
 
     @Test
@@ -248,6 +250,7 @@ class ToggleShortcutPreferenceControllerTest {
                 /* selfChange= */ false,
                 Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_GESTURE_TARGETS),
             )
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
         assertThat(shortcutPreference.isChecked).isTrue()
         assertThat(shortcutPreference.summary)

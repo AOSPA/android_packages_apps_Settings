@@ -487,12 +487,9 @@
     <string name="device_supervision_switch_title" product="default" msgid="5711051584668311080">"控制這支手機"</string>
     <string name="device_supervision_switch_title" product="tablet" msgid="5400384750840247844">"控制這台平板電腦"</string>
     <string name="device_supervision_switch_title" product="desktop" msgid="2140192989162020111">"控制這部裝置"</string>
-    <!-- no translation found for supervision_pin_length_message (7142997986515800901) -->
-    <skip />
-    <!-- no translation found for supervision_pin_length_message (1772471880165492225) -->
-    <skip />
-    <!-- no translation found for supervision_pin_length_message (7689193597679628648) -->
-    <skip />
+    <string name="supervision_pin_length_message" product="default" msgid="7142997986515800901">"{count,plural, =1{請輸入至少 # 位數的 PIN 碼。PIN 碼將用於管理這支手機的監護功能。}other{請輸入至少 # 位數的 PIN 碼。PIN 碼將用於管理這支手機的監護功能。}}"</string>
+    <string name="supervision_pin_length_message" product="tablet" msgid="1772471880165492225">"{count,plural, =1{請輸入至少 # 位數的 PIN 碼。PIN 碼將用於管理這部平板電腦的監護功能。}other{請輸入至少 # 位數的 PIN 碼。PIN 碼將用於管理這部平板電腦的監護功能。}}"</string>
+    <string name="supervision_pin_length_message" product="desktop" msgid="7689193597679628648">"{count,plural, =1{請輸入至少 # 位數的 PIN 碼。PIN 碼將用於管理這部裝置的監護功能。}other{請輸入至少 # 位數的 PIN 碼。PIN 碼將用於管理這部裝置的監護功能。}}"</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="default" msgid="3538726164054428290">"家長監護 PIN 碼適用於所有使用者。如要刪除，必須關閉這支手機上所有使用者的家長監護功能。"</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="tablet" msgid="5923679321161365699">"家長監護 PIN 碼適用於所有使用者。如要刪除，必須關閉這部平板電腦上所有使用者的家長監護功能。"</string>
     <string name="supervision_delete_pin_supervision_enabled_message" product="desktop" msgid="4418588055965155673">"家長監護 PIN 碼適用於所有使用者。如要刪除，必須關閉這部裝置上所有使用者的家長監護功能。"</string>
@@ -539,6 +536,6 @@
     <string name="audio_sharing_confirm_dialog_content_with_link" product="tablet" msgid="282597208139437138">"如要分享音訊，請先將 LE Audio 耳機連到平板電腦。"<annotation id="link">"進一步瞭解相容裝置"</annotation></string>
     <string name="audio_sharing_confirm_dialog_content_with_link" product="device" msgid="668964968208427465">"如要分享音訊，請先將 LE Audio 耳機連線到裝置。"<annotation id="link">"進一步瞭解相容裝置"</annotation></string>
     <string name="audio_sharing_confirm_dialog_content_with_link" product="desktop" msgid="668964968208427465">"如要分享音訊，請先將 LE Audio 耳機連線到裝置。"<annotation id="link">"進一步瞭解相容裝置"</annotation></string>
-    <string name="network_dashboard_summary_mobile" product="default" msgid="1856501121269595911">"行動網路、Wi‑Fi、無線基地台"</string>
-    <string name="network_dashboard_summary_mobile" product="desktop" msgid="8770767156162473221">"Wi‑Fi、行動網路、無線基地台"</string>
+    <string name="network_dashboard_summary_mobile" product="default" msgid="1856501121269595911">"行動網路、Wi‑Fi、熱點"</string>
+    <string name="network_dashboard_summary_mobile" product="desktop" msgid="8770767156162473221">"Wi‑Fi、行動網路、熱點"</string>
 </resources>

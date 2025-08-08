@@ -40,8 +40,9 @@ import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.whenever
+import org.mockito.kotlin.stub
 import org.robolectric.RobolectricTestParameterInjector
 import org.robolectric.android.controller.ActivityController
 
@@ -98,7 +99,9 @@ class MagnificationModePreferenceTest {
         val mockLifecycleContext = mock<PreferenceLifecycleContext>()
         val fragmentScenario = launchFragment<Fragment>(initialState = INITIALIZED)
         fragmentScenario.onFragment { fragment ->
-            whenever(mockLifecycleContext.fragmentManager).thenReturn(fragment.childFragmentManager)
+            mockLifecycleContext.stub {
+                on { childFragmentManager } doReturn fragment.childFragmentManager
+            }
             preference.onCreate(mockLifecycleContext)
 
             val widget: Preference = preference.createAndBindWidget(context)

@@ -41,6 +41,9 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
     override val title: Int
         get() = R.string.accessibility_color_and_motion_title
 
+    override val summary: Int
+        get() = R.string.accessibility_color_and_motion_subtext
+
     override val icon: Int
         get() = R.drawable.ic_color_and_motion
 

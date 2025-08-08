@@ -1016,12 +1016,9 @@
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Altre opzioni"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Tieni premuto e trascina per riordinare i display."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Esegui il mirroring del display integrato"</string>
-    <!-- no translation found for external_display_resolution_change_dialog_title (8834095214420638411) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_description (813174417182932956) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_change_dialog_confirm (8451683005995976984) -->
-    <skip />
+    <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Vuoi utilizzare le nuove impostazioni?"</string>
+    <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Se il display non funziona come vorresti, puoi ripristinare le impostazioni precedenti"</string>
+    <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Impostazioni d\'uso"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirroring"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Attiva display wireless"</string>
@@ -1206,7 +1203,7 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Per migliorare la precisione della posizione e per altri scopi, un\'app sconosciuta vuole attivare la ricerca della rete, anche se il Wi‑Fi non è attivo.\n\nVuoi autorizzare ogni app che richiede di eseguire la ricerca?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Consenti"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Rifiuta"</string>
-    <string name="wifi_field_required" msgid="6312381745503042588">"* campo obbligatorio"</string>
+    <string name="wifi_field_required" msgid="6312381745503042588">"* obbligatorio"</string>
     <string name="wifi_shared_network_login_screen_warning" msgid="7611029233083731552">"Questa è una rete condivisa. Puoi modificare questa impostazione dopo aver eseguito l\'accesso."</string>
     <string name="share_wifi_network" msgid="4064997404339571584">"Condividi questa rete con altri utenti del dispositivo"</string>
     <string name="share_wifi_network_summary" msgid="4316236421149769333">"Tutti gli utenti di questo dispositivo possono visualizzare e connettersi a una rete condivisa. Gli amministratori possono eliminare una rete condivisa. Scopri di più"</string>
@@ -1238,7 +1235,7 @@
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 rete e 1 abbonamento}other{# reti e # abbonamenti}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Indirizzo MAC del dispositivo"</string>
-    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Indirizzo MAC casuale"</string>
+    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Indirizzo MAC randomizzato"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"Indirizzo MAC casuale (ultimo usato)"</string>
     <string name="wifi_certificate_summary_Certificates" msgid="7849788154375655654">"<xliff:g id="NUMBER">%d</xliff:g> certificati"</string>
     <string name="wifi_certificate_summary_system" msgid="6521297326433133669">"Certificato di sistema"</string>
@@ -1410,7 +1407,7 @@
     <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Disattiva frequenza fotogrammi"</string>
     <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Disattiva la limitazione della frequenza massima di fotogrammi per i giochi a <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Display fluido"</string>
-    <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Aumenta automaticamente la frequenza di aggiornamento fino a <xliff:g id="ID_1">%1$d</xliff:g> Hz per alcuni contenuti. Comporta un maggior utilizzo della batteria"</string>
+    <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Aumenta automaticamente la frequenza di aggiornamento fino a <xliff:g id="ID_1">%1$d</xliff:g> Hz per alcuni contenuti. Comporta un maggior utilizzo della batteria."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forza frequenza di aggiornamento massima"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Massima frequenza di aggiornamento per migliore reattività al tocco e qualità dell\'animazione; aumenta il consumo della batteria"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Schermo vigile"</string>
@@ -1471,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Usa uno sfondo scuro per rendere più confortevole la visualizzazione e ridurre l\'utilizzo della batteria su alcuni schermi. Se hai una programmazione, il tema cambierà quando lo schermo è spento."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Al momento il tema scuro viene attivato/disattivato in base alla pianificazione della modalità Riposo"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Impostazioni modalità Riposo"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Le modalità possono anche attivare il tema scuro}=1{{mode_1} attiva anche il tema scuro}=2{{mode_1} e {mode_2} attivano anche il tema scuro}=3{{mode_1}, {mode_2} e {mode_3} attivano anche il tema scuro}other{{mode_1}, {mode_2} e # altre modalità attivano anche il tema scuro}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Impostazioni modalità"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Aumenta luminosità e nitidezza e amplia la gamma di colori in immagini e video HDR (High Dynamic Range). I contenuti HDR saranno più luminosi."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Spegnimento dello schermo"</string>
@@ -2048,7 +2046,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Memoria interna"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Ricalcolo dimensioni…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Eliminare i dati dell\'app?"</string>
-    <string name="clear_data_dlg_text" msgid="3440011276559762619">"I dati di questa app, inclusi i file e le impostazioni, verranno eliminati definitivamente da questo dispositivo."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"I dati di questa app, inclusi i file e le impostazioni, verranno eliminati definitivamente da questo dispositivo"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Annulla"</string>
     <string name="dlg_delete" msgid="1790919205039397659">"Elimina"</string>
@@ -2397,7 +2395,8 @@
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Controlli basati sul tempo"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controlli di sistema"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Invia feedback"</string>
-    <string name="accessibility_send_survey_title" msgid="7899716184811587023">"Valutaci"</string>
+    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <skip />
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Contatta il team di assistenza per l\'accessibilità di Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Sondaggio sull\'accessibilità"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Condividi il tuo feedback"</string>
@@ -2604,7 +2603,7 @@
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversione dei colori"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usa l\'inversione dei colori"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Scorciatoia per l\'inversione dei colori"</string>
-    <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"La funzionalità di inversione dei colori rende scure le schermate chiare e chiare le schermate scure"</string>
+    <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"La funzionalità di inversione dei colori rende scure le schermate chiare e chiare le schermate scure."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Ricorda&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; I colori cambieranno nei contenuti multimediali e nelle immagini&lt;/li&gt; &lt;li&gt; L\'inversione dei colori funziona in tutte le app&lt;/li&gt; &lt;li&gt; Per visualizzare uno sfondo scuro, è possibile usare in alternativa il tema scuro&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"inserire impostazioni"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Clic automatico (tempo di interazione)"</string>
@@ -2635,10 +2634,8 @@
     <string name="autoclick_cursor_area_size_dialog_option_small" msgid="3987901922883658043">"Piccola"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_small" msgid="6056674574040448864">"Molto piccola"</string>
     <string name="autoclick_ignore_minor_cursor_movement_title" msgid="5038721995720529808">"Ignora i piccoli spostamenti del cursore"</string>
-    <!-- no translation found for autoclick_revert_to_left_click_title (6868866422993461739) -->
-    <skip />
-    <!-- no translation found for autoclick_revert_to_left_click_summary (9207568192335942225) -->
-    <skip />
+    <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"Usa il clic sinistro come azione predefinita"</string>
+    <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Quando utilizzi un\'altra azione, il clic automatico tornerà automaticamente al clic sinistro"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Il clic automatico funziona meglio con la navigazione con tre pulsanti"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Per tornare indietro facilmente, andare alla schermata Home e cambiare app quando usi il clic automatico, usa la navigazione con tre pulsanti anziché quella tramite gesti"</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Mantieni la navigazione tramite gesti"</string>
@@ -2672,7 +2669,7 @@
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Puoi anche aggiungere la modalità a una mano alle Impostazioni rapide dalla parte superiore dello schermo"</string>
     <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Impostazione Dimensioni carattere aggiunta alle Impostazioni rapide. Scorri verso il basso per cambiare le dimensioni del carattere in qualsiasi momento."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Ignora"</string>
-    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usa correzione del colore"</string>
+    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usa la correzione del colore"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Scorciatoia per la correzione del colore"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Info sulla correzione del colore"</string>
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Scopri di più sulla correzione del colore"</string>
@@ -2699,7 +2696,7 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura e gestisci apparecchi acustici, impianti cocleari e altri dispositivi di amplificazione ASHA e LE Audio"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Configura e gestisci apparecchi acustici, impianti cocleari e altri dispositivi di amplificazione ASHA"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Configura e gestisci apparecchi acustici, impianti cocleari e altri dispositivi di amplificazione LE Audio"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Nessuna protesi uditiva connessa"</string>
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="3534747218670001784">"Configura e gestisci apparecchi acustici e altri dispositivi di amplificazione"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Aggiungi apparecchi acustici"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Accoppia apparecchi acustici"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Nella schermata successiva, seleziona i tuoi apparecchi acustici. Potresti dover accoppiare l\'orecchio destro e sinistro separatamente.\n\nAssicurati che gli apparecchi acustici siano accesi e pronti per l\'accoppiamento."</string>
@@ -3105,10 +3102,14 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"On"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Off"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Usa Connettività adattiva"</string>
-    <string name="adaptive_connectivity_wifi_switch_title" msgid="5899985025046319472">"Passa automaticamente dal Wi-Fi ai dati mobili"</string>
-    <string name="adaptive_connectivity_wifi_switch_summary" msgid="4650230240134029595">"Utilizza automaticamente i dati mobili quando la connessione Wi-Fi è scarsa o non disponibile. Potrebbero essere applicati costi per l\'utilizzo dei dati."</string>
-    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="2473274404695643218">"Attiva il passaggio automatico alla rete mobile per risparmiare batteria"</string>
-    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="2432517485362085341">"Prolunga la durata della batteria gestendo automaticamente le connessioni di rete."</string>
+    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
+    <skip />
     <string name="cellular_security_title" msgid="5562899485544677941">"Sicurezza di rete mobile"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipo di rete, crittografia, controlli di notifica"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"Queste impostazioni ti aiutano a proteggere le tue chiamate, i tuoi messaggi e i tuoi dati da reti obsolete o non criptate che potrebbero esporti a furti di dati o sorveglianza"</string>
@@ -3441,10 +3442,8 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"La cronologia chiamate e SMS verrà condivisa con questo utente."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Vuoi rimuovere i privilegi amministrativi?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Se rimuovi i privilegi amministrativi per questo utente, tu o un altro amministratore potrete concederglieli di nuovo in un secondo momento."</string>
-    <!-- no translation found for user_revoke_admin_for_self_confirm_title (5661292626700927475) -->
-    <skip />
-    <!-- no translation found for user_revoke_admin_for_self_confirm_message (4397795314721962937) -->
-    <skip />
+    <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Vuoi rimuovere i tuoi privilegi amministrativi?"</string>
+    <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Se procedi, solo gli altri amministratori potranno concederti i privilegi amministrativi."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Informazioni d\'emergenza"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Dati e contatti di <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Apri <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3931,7 +3930,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostra solo le nuove notifiche sulla schermata di blocco"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Rimuovi automaticamente dalla schermata di blocco le notifiche già visualizzate"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Elenco completo"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Visualizzazione compatta"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Visualizz. compatta"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifiche su schermata di blocco"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostra conversazioni, notifiche predefinite e silenziose"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostra conversazioni, notifiche predefinite e silenziose"</string>
@@ -4379,10 +4378,8 @@
     <string name="app_permissions" msgid="8666537659217653626">"Gestione autorizzazioni"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Aggiornamenti alla condivisione dei dati per la posizione"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Controlla le app che hanno cambiato la modalità di condivisione dei tuoi dati sulla posizione"</string>
-    <!-- no translation found for app_function_access_settings_title (1837117989202166166) -->
-    <skip />
-    <!-- no translation found for app_function_access_settings_summary (3654291845453799170) -->
-    <skip />
+    <string name="app_function_access_settings_title" msgid="1837117989202166166">"Agenti"</string>
+    <string name="app_function_access_settings_summary" msgid="3654291845453799170">"Agenti che possono accedere alle informazioni o eseguire azioni nelle app"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Tocca per riattivare"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Tocca due volte un punto qualsiasi dello schermo per riattivare il dispositivo"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Apertura link"</string>
@@ -4647,7 +4644,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 app autorizzata a usare dati mobili senza limitazioni quando è attiva la funzionalità Risparmio dati}other{# app autorizzate a usare dati mobili senza limitazioni quando è attiva la funzionalità Risparmio dati}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Dati principali"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Dati Wi‑Fi"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"Dati utilizzati: <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"Superiore a <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_remaining" msgid="6316251496381922837">"Dati rimanenti: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Grafico che mostra l\'utilizzo dei dati dal giorno <xliff:g id="START_DATE">%1$s</xliff:g> al giorno <xliff:g id="END_DATE">%2$s</xliff:g>."</string>
@@ -5550,7 +5548,7 @@
     <string name="category_name_general" msgid="7737273712848115886">"Generali"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Usa il tema scuro"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Usa il Bluetooth"</string>
-    <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"Usa la luminosità HDR avanzata"</string>
+    <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"Usa Luminosità HDR avanzata"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Usa Disattiva suoneria"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Usa hotspot Wi‑Fi"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Usa Blocco app su schermo"</string>
@@ -5686,10 +5684,8 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensore di impronte digitali"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flash di notifica"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Informazioni sul flash di notifica"</string>
-    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Off"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"On/Flash della fotocamera"</string>
-    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"On/Flash dello schermo"</string>
-    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"On/Flash di fotocamera e schermo"</string>
+    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"Off - Ricevi avvisi con un flash della fotocamera o dello schermo per notifiche e sveglie"</string>
+    <string name="flash_notifications_summary_on" msgid="7750683903778104666">"On - Ricevi avvisi con un flash della fotocamera o dello schermo per notifiche e sveglie"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Fai lampeggiare la luce della fotocamera o lo schermo quando ricevi notifiche o quando suonano le sveglie"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Fai lampeggiare lo schermo quando ricevi notifiche o quando suonano le sveglie"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Se sei fotosensibile, usa con cautela il flash di notifica"</string>
@@ -5896,8 +5892,7 @@
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Configura il PIN"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"supervisione, controllo genitori, genitori, PIN di supervisione, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Gestisci il PIN"</string>
-    <!-- no translation found for supervision_pin_management_screen_title (9118601026702645173) -->
-    <skip />
+    <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN del Controllo genitori"</string>
     <string name="supervision_pin_management_preference_keywords" msgid="5034450635706621750">"PIN del genitore, PIN del Controllo genitori"</string>
     <string name="supervision_pin_management_preference_summary_add" msgid="2247921267270577374">"Aggiungi email di recupero"</string>
     <string name="supervision_pin_management_preference_summary_verify_recovery" msgid="5072554239108915119">"Verifica l\'email di recupero"</string>
@@ -5919,8 +5914,7 @@
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Quando queste impostazioni sono disattivate, potrebbero comunque essere applicate altre impostazioni dell\'account."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Inserisci il PIN del Controllo genitori"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Imposta un PIN del Controllo genitori"</string>
-    <!-- no translation found for supervision_confirm_your_pin_header (1560013211840245690) -->
-    <skip />
+    <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Conferma il PIN del Controllo genitori"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN aggiornato"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Apri app"</string>
     <string name="supervision_delete_pin_confirm_header" msgid="8499276643990949268">"Eliminare il PIN?"</string>

@@ -24,71 +24,81 @@ import android.view.View
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.accessibility.TextCursorBlinkRateSliderPreference
+import com.android.settings.core.PreferenceControllerMixin
 import com.android.settingslib.development.DeveloperOptionsPreferenceController
 import com.google.android.material.slider.Slider
 
-class TextCursorBlinkRatePreferenceController (val context: Context) :
+class TextCursorBlinkRatePreferenceController(val context: Context) :
     DeveloperOptionsPreferenceController(context),
-    Preference.OnPreferenceChangeListener {
+    Preference.OnPreferenceChangeListener,
+    PreferenceControllerMixin {
 
     private val TAG = "TextCursorBlinkRatePrefController"
     private val resources: Resources = context.getResources()
 
-    private val defaultDurationMs = resources.getInteger(
-        com.android.internal.R.integer.def_accessibility_text_cursor_blink_interval_ms
-    )
+    private val defaultDurationMs =
+        resources.getInteger(
+            com.android.internal.R.integer.def_accessibility_text_cursor_blink_interval_ms
+        )
 
-    private val noBlinkDurationMs = resources.getInteger(
-        com.android.internal.R.integer.no_blink_accessibility_text_cursor_blink_interval_ms
-    )
+    private val noBlinkDurationMs =
+        resources.getInteger(
+            com.android.internal.R.integer.no_blink_accessibility_text_cursor_blink_interval_ms
+        )
 
     // The blink intervals are displayed from no-blink to slow to fast on the slider, so the
     // intervals should be reversed from how they are stored (smallest to largest).
     // The resulting array should look like this:
     // [0, 1000, 833, 714, 625, 556, 500, 455, 417, 385, 357, 333]
-    private val durationValues = resources.getIntArray(
-        com.android.internal.R.array.accessibility_text_cursor_blink_intervals
-    )
-        .plus(noBlinkDurationMs)
-        .reversed()
+    private val durationValues =
+        resources
+            .getIntArray(com.android.internal.R.array.accessibility_text_cursor_blink_intervals)
+            .plus(noBlinkDurationMs)
+            .reversed()
 
-    private val noBlinkLabel = resources.getString(
-        com.android.internal.R.string.no_blink_accessibility_text_cursor_blink_label
-    )
+    private val noBlinkLabel =
+        resources.getString(
+            com.android.internal.R.string.no_blink_accessibility_text_cursor_blink_label
+        )
 
     // The blink intervals are displayed from no-blink to slow to fast on the slider, so the
     // corresponding labels should be reversed from how they are stored (smallest to largest).
     // The resulting array should look like this:
     // [Don't blink, 50%, 60%, 70%, 80%, 90%, 100% (default), 110%, 120%, 130%, 140%, 150%]
-    private val durationLabels = resources.getStringArray(
-        com.android.internal.R.array.accessibility_text_cursor_blink_labels
-    )
-        .plus(noBlinkLabel)
-        .reversed()
+    private val durationLabels =
+        resources
+            .getStringArray(com.android.internal.R.array.accessibility_text_cursor_blink_labels)
+            .plus(noBlinkLabel)
+            .reversed()
 
     override fun getPreferenceKey(): String = "accessibility_text_cursor_blink_interval_ms"
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
-        val preference: TextCursorBlinkRateSliderPreference? = screen.findPreference(getPreferenceKey())
+        val preference: TextCursorBlinkRateSliderPreference? =
+            screen.findPreference(getPreferenceKey())
         preference?.apply {
-            setResetClickListener(object: View.OnClickListener {
-                override fun onClick(view: View?) {
-                    if (view == null) return
-                    Settings.Secure.putInt(
-                        mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_TEXT_CURSOR_BLINK_INTERVAL_MS,
-                        defaultDurationMs
-                    )
-                    updateState(preference)
+            setResetClickListener(
+                object : View.OnClickListener {
+                    override fun onClick(view: View?) {
+                        if (view == null) return
+                        Settings.Secure.putInt(
+                            mContext.getContentResolver(),
+                            Settings.Secure.ACCESSIBILITY_TEXT_CURSOR_BLINK_INTERVAL_MS,
+                            defaultDurationMs,
+                        )
+                        updateState(preference)
+                    }
                 }
-            })
-            setExtraChangeListener(object: Slider.OnChangeListener {
+            )
+            setExtraChangeListener(
+                object : Slider.OnChangeListener {
                     override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
                         val intVal: Int = value.toInt()
                         onPreferenceChange(preference, intVal)
                     }
-                })
+                }
+            )
             min = 0
             max = durationValues.size - 1
         }
@@ -102,8 +112,8 @@ class TextCursorBlinkRatePreferenceController (val context: Context) :
         Settings.Secure.putInt(
             mContext.getContentResolver(),
             Settings.Secure.ACCESSIBILITY_TEXT_CURSOR_BLINK_INTERVAL_MS,
-            convertIndexToDuration(newValue)
-            )
+            convertIndexToDuration(newValue),
+        )
         setSliderStateDescription(pref, newValue)
         return true
     }
@@ -116,22 +126,24 @@ class TextCursorBlinkRatePreferenceController (val context: Context) :
             return
         }
 
-        val durationMs = Settings.Secure.getInt(
-            mContext.getContentResolver(),
-            Settings.Secure.ACCESSIBILITY_TEXT_CURSOR_BLINK_INTERVAL_MS,
-            defaultDurationMs)
+        val durationMs =
+            Settings.Secure.getInt(
+                mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_TEXT_CURSOR_BLINK_INTERVAL_MS,
+                defaultDurationMs,
+            )
         val index = convertDurationToIndex(durationMs)
 
         preference.setValue(index)
         setSliderStateDescription(preference, index)
     }
 
-    override public fun onDeveloperOptionsSwitchDisabled() {
+    public override fun onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled()
         Settings.Secure.putInt(
             mContext.getContentResolver(),
             Settings.Secure.ACCESSIBILITY_TEXT_CURSOR_BLINK_INTERVAL_MS,
-            defaultDurationMs
+            defaultDurationMs,
         )
     }
 

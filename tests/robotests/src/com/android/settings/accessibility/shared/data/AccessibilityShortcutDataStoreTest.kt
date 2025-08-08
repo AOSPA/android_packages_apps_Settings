@@ -40,7 +40,6 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.google.common.truth.Truth.assertThat
 import java.util.concurrent.Executor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -274,7 +273,6 @@ class AccessibilityShortcutDataStoreTest {
             context,
             componentName,
             testScope.backgroundScope,
-            StandardTestDispatcher(testScope.testScheduler),
             settingsStore,
         )
 }

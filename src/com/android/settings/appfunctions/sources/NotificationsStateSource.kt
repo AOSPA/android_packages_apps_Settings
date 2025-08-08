@@ -32,7 +32,7 @@ class NotificationsStateSource : DeviceStateSource {
     override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
 
     // TODO: prototype implementation, to be replaced in b/426005115
-    override fun get(
+    override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
     ): PerScreenDeviceStates {

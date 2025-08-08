@@ -18,11 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto">
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="connection_header"
-        android:layout="@layout/settings_entity_header"
-        android:selectable="false"
-        android:order="-10000"/>
+    <com.android.settingslib.widget.IntroPreference
+        android:key="wifi_details_intro"/>
 
     <com.android.settings.datausage.DataUsageSummaryPreference
         android:key="status_header"

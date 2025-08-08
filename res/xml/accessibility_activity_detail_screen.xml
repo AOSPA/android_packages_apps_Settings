@@ -27,11 +27,13 @@
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="animated_image"
+        android:selectable="false"
         app:controller="com.android.settings.accessibility.detail.a11yactivity.AccessibilityActivityIllustrationPreferenceController"
         app:searchable="false" />
 
     <com.android.settingslib.widget.ButtonPreference
         android:key="launch_preference"
+        android:persistent="false"
         app:buttonPreferenceSize="extra"
         app:buttonPreferenceType="tonal"
         app:controller="com.android.settings.accessibility.detail.a11yactivity.LaunchAccessibilityActivityPreferenceController"
@@ -44,7 +46,7 @@
 
         <com.android.settings.accessibility.ShortcutPreference
             android:key="shortcut_preference_key"
-            android:persistent="false"
+            android:persistent="true"
             app:controller="com.android.settings.accessibility.detail.a11yactivity.ShortcutPreferenceController"
             tools:title="Sound Amplifier shortcuts" />
 

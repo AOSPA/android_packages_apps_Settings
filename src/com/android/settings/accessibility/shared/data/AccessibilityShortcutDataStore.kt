@@ -25,46 +25,38 @@ import com.android.internal.accessibility.common.ShortcutConstants
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.PreferredShortcut
 import com.android.settings.accessibility.PreferredShortcuts
+import com.android.settings.accessibility.shared.utils.debounce
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.launch
 
-@OptIn(FlowPreview::class)
 open class AccessibilityShortcutDataStore(
     private val context: Context,
     private val componentName: ComponentName,
-    private val coroutineScope: CoroutineScope,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
     private val settingsStore: KeyValueStore = SettingsSecureStore.get(context),
 ) : AbstractKeyedDataObservable<String>(), KeyedObserver<String>, KeyValueStore {
 
-    protected open val shortcutSettingsKey =
+    private val shortcutSettingKeys =
         if (componentName == MAGNIFICATION_COMPONENT_NAME) {
             ShortcutConstants.MAGNIFICATION_SHORTCUT_SETTINGS.toList()
         } else {
             ShortcutConstants.GENERAL_SHORTCUT_SETTINGS.toList()
         }
-
-    private val keyChangeFlow = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    private val debounceUpdateData: () -> Unit by lazy {
+        debounce(100.milliseconds, coroutineScope) {
+            updatePreferredShortcuts()
+            notifyChange(DataChangeReason.UPDATE)
+        }
+    }
 
     init {
-        // Set up the debounce collector
-        coroutineScope.launch(dispatcher) {
-            keyChangeFlow.debounce(100L).collect {
-                updatePreferredShortcuts()
-                notifyChange(DataChangeReason.UPDATE)
-            }
-        }
         // Always update the shortcut data when data store is created, because the user could
         // change the shortcut types outside of this data store.
         updatePreferredShortcuts()
@@ -76,11 +68,11 @@ open class AccessibilityShortcutDataStore(
     override fun <T : Any> getValue(key: String, valueType: Class<T>): T? =
         ((AccessibilityUtil.getUserShortcutTypesFromSettings(context, componentName) !=
             ShortcutConstants.UserShortcutType.DEFAULT)
-            as T?)
+            as? T?)
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
         if (valueType == Boolean::class.javaObjectType) {
-            val enabled = value as Boolean
+            val enabled = value as? Boolean ?: false
             val shortcutTypes =
                 PreferredShortcuts.retrieveUserShortcutType(
                     context,
@@ -88,8 +80,8 @@ open class AccessibilityShortcutDataStore(
                     getDefaultShortcutTypes(),
                 )
             context
-                .getSystemService(AccessibilityManager::class.java)!!
-                .enableShortcutsForTargets(
+                .getSystemService(AccessibilityManager::class.java)
+                ?.enableShortcutsForTargets(
                     enabled,
                     shortcutTypes,
                     setOf(getComponentNameAsString()),
@@ -99,23 +91,23 @@ open class AccessibilityShortcutDataStore(
     }
 
     override fun onFirstObserverAdded() {
-        for (settingsKey in shortcutSettingsKey) {
+        for (settingsKey in shortcutSettingKeys) {
             settingsStore.addObserver(settingsKey, this, HandlerExecutor.main)
         }
     }
 
     override fun onLastObserverRemoved() {
-        for (settingsKey in shortcutSettingsKey) {
+        for (settingsKey in shortcutSettingKeys) {
             settingsStore.removeObserver(settingsKey, this)
         }
     }
 
     override fun onKeyChanged(key: String, reason: Int) {
-        coroutineScope.launch(dispatcher) { keyChangeFlow.emit(Unit) }
+        debounceUpdateData.invoke()
     }
 
     @ShortcutConstants.UserShortcutType
-    open fun getDefaultShortcutTypes(): Int = ShortcutConstants.UserShortcutType.SOFTWARE
+    protected open fun getDefaultShortcutTypes(): Int = ShortcutConstants.UserShortcutType.SOFTWARE
 
     /** Returns the user preferred shortcut types or the default shortcut types if not set */
     @ShortcutConstants.UserShortcutType

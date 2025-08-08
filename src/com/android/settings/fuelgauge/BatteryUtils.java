@@ -445,7 +445,12 @@ public class BatteryUtils {
         try {
             batteryUsageStats =
                     systemService.getBatteryUsageStats(
-                            new BatteryUsageStatsQuery.Builder().includeBatteryHistory().build());
+                            new BatteryUsageStatsQuery
+                                    .Builder()
+                                    .includeBatteryHistory()
+                                    .accumulated()
+                                    .build()
+                    );
         } catch (RuntimeException e) {
             Log.e(TAG, "getBatteryInfo() error from getBatteryUsageStats()", e);
             // Use default BatteryUsageStats.

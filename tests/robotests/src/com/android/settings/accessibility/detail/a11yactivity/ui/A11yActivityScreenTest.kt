@@ -18,20 +18,22 @@ package com.android.settings.accessibility.detail.a11yactivity.ui
 
 import android.accessibilityservice.AccessibilityShortcutInfo
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import android.view.accessibility.AccessibilityManager
-import androidx.test.core.app.ApplicationProvider
+import androidx.fragment.app.testing.FragmentScenario
+import androidx.preference.PreferenceFragmentCompat
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilitySettings
+import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.LaunchAccessibilityActivityPreferenceFragment
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
+import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.TwoTargetPreference
 import com.google.common.truth.Truth.assertThat
@@ -39,27 +41,21 @@ import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.shadow.api.Shadow
 
-/**
- * Tests for [A11yActivityScreen].
- *
- * Note: [SettingsCatalystTestCase] doesn't work well with this screen as the screen needs extra
- * arguments to be initialized.
- */
-@RunWith(RobolectricTestRunner::class)
-class A11yActivityScreenTest {
+/** Tests for [A11yActivityScreen]. */
+class A11yActivityScreenTest : SettingsCatalystTestCase() {
     private val arguments =
         Bundle().apply {
             putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_ACTIVITY_COMPONENT)
         }
-    private val appContext: Context = ApplicationProvider.getApplicationContext()
-    private lateinit var screen: A11yActivityScreen
+
+    override val preferenceScreenCreator: A11yActivityScreen by lazy {
+        A11yActivityScreen(appContext, arguments)
+    }
     private val a11yManager: ShadowAccessibilityManager =
         Shadow.extract(appContext.getSystemService(AccessibilityManager::class.java))
 
@@ -77,7 +73,6 @@ class A11yActivityScreenTest {
         whenever(mockInfo.activityInfo).thenReturn(activityInfo)
         whenever(mockInfo.loadSummary(any())).thenReturn(DEFAULT_SUMMARY)
         a11yManager.setInstalledAccessibilityShortcutListAsUser(listOf(mockInfo))
-        screen = A11yActivityScreen(appContext, arguments)
     }
 
     @After
@@ -87,12 +82,13 @@ class A11yActivityScreenTest {
 
     @Test
     fun getKey() {
-        assertThat(screen.key).isEqualTo(A11yActivityScreen.KEY)
+        assertThat(preferenceScreenCreator.key).isEqualTo(A11yActivityScreen.KEY)
     }
 
     @Test
     fun getHighlightMenuKey() {
-        assertThat(screen.highlightMenuKey).isEqualTo(R.string.menu_key_accessibility)
+        assertThat(preferenceScreenCreator.highlightMenuKey)
+            .isEqualTo(R.string.menu_key_accessibility)
     }
 
     @Test
@@ -104,46 +100,47 @@ class A11yActivityScreenTest {
                 )
             )
             .thenReturn(expectedPageId)
-        assertThat(screen.getMetricsCategory()).isEqualTo(expectedPageId)
+        assertThat(preferenceScreenCreator.getMetricsCategory()).isEqualTo(expectedPageId)
     }
 
     @Test
     fun getSummary() {
-        assertThat(screen.getSummary(appContext)).isEqualTo(DEFAULT_SUMMARY)
+        assertThat(preferenceScreenCreator.getSummary(appContext)).isEqualTo(DEFAULT_SUMMARY)
     }
 
     @Test
     fun getTitle() {
-        assertThat(screen.getTitle(appContext)).isEqualTo(DEFAULT_LABEL)
+        assertThat(preferenceScreenCreator.getTitle(appContext)).isEqualTo(DEFAULT_LABEL)
     }
 
     @Test
     fun createWidget_verifyWidgetTypeAndIconSpaceReserved() {
-        val widget = screen.createWidget(appContext)
+        val widget = preferenceScreenCreator.createWidget(appContext)
         assertThat(widget).isInstanceOf(TwoTargetPreference::class.java)
         assertThat(widget.isIconSpaceReserved).isTrue()
     }
 
     @Test
     fun bind_verifyIcon() {
-        val widget = screen.createAndBindWidget<TwoTargetPreference>(appContext)
+        val widget = preferenceScreenCreator.createAndBindWidget<TwoTargetPreference>(appContext)
         assertThat(widget.icon).isNotNull()
     }
 
     @Test
     fun getFragmentClass() {
-        assertThat(screen.fragmentClass())
+        assertThat(preferenceScreenCreator.fragmentClass())
             .isEqualTo(LaunchAccessibilityActivityPreferenceFragment::class.java)
     }
 
     @Test
     fun getBindingKey() {
-        assertThat(screen.bindingKey).isEqualTo(A11Y_ACTIVITY_COMPONENT.flattenToString())
+        assertThat(preferenceScreenCreator.bindingKey)
+            .isEqualTo(A11Y_ACTIVITY_COMPONENT.flattenToString())
     }
 
     @Test
     fun getLaunchIntent_hasStringExtraForComponent() {
-        val intent = screen.getLaunchIntent(appContext, null)
+        val intent = preferenceScreenCreator.getLaunchIntent(appContext, null)
         assertThat(intent.getStringExtra(Intent.EXTRA_COMPONENT_NAME))
             .isEqualTo(A11Y_ACTIVITY_COMPONENT.flattenToString())
     }
@@ -177,11 +174,28 @@ class A11yActivityScreenTest {
             )
     }
 
+    override fun launchFragmentScenario(
+        fragmentClass: Class<PreferenceFragmentCompat>
+    ): FragmentScenario<PreferenceFragmentCompat> {
+        val scenario = FragmentScenario.launch(fragmentClass, arguments)
+        scenario.onFragment { fragment ->
+            // Pre catalyst, we didn't set up the preference screen's title.
+            // Hence, we had to add the title to preference screen directly in order to test the
+            // migration test case.
+            // We also have a separate test case to test the title in post-catalyst scenario
+            fragment.preferenceScreen.title = DEFAULT_LABEL
+        }
+        return scenario
+    }
+
     private fun createMockShortcutInfo(componentName: ComponentName): AccessibilityShortcutInfo {
         val mockInfo: AccessibilityShortcutInfo = mock()
         whenever(mockInfo.componentName).thenReturn(componentName)
         return mockInfo
     }
+
+    override val flagName: String
+        get() = Flags.FLAG_CATALYST_A11Y_ACTIVITY_DETAIL
 
     companion object {
         private const val PACKAGE_NAME = "com.foo.bar"

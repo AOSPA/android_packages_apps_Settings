@@ -17,24 +17,29 @@
 package com.android.settings.accessibility.flashnotifications.ui
 
 import android.util.FeatureFlagUtils
+import com.android.settings.R
 import com.android.settings.accessibility.Flags
+import com.android.settings.accessibility.FlashNotificationsUtil
+import com.android.settings.accessibility.ShadowFlashNotificationsUtils
+import com.android.settings.accessibility.ShadowFlashNotificationsUtils.setFlashNotificationsState
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.robolectric.annotation.Config
 
+@Config(shadows = [ShadowFlashNotificationsUtils::class])
 class FlashNotificationsScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = FlashNotificationsScreen()
     override val flagName: String = Flags.FLAG_CATALYST_FLASH_NOTIFICATIONS
 
-    @Test
-    override fun migration() {}
+    @Test override fun migration() {}
 
     @Test
     fun isAvailable_flashNotificationNotSupported_returnFalse() {
         FeatureFlagUtils.setEnabled(
             appContext,
             FeatureFlagUtils.SETTINGS_FLASH_NOTIFICATIONS,
-            false
+            false,
         )
 
         assertThat(preferenceScreenCreator.isAvailable(appContext)).isFalse()
@@ -45,5 +50,37 @@ class FlashNotificationsScreenTest : SettingsCatalystTestCase() {
         FeatureFlagUtils.setEnabled(appContext, FeatureFlagUtils.SETTINGS_FLASH_NOTIFICATIONS, true)
 
         assertThat(preferenceScreenCreator.isAvailable(appContext)).isTrue()
+    }
+
+    @Test
+    fun getSummary_stateOff_assertOff() {
+        setFlashNotificationsState(FlashNotificationsUtil.State.OFF)
+
+        assertThat(preferenceScreenCreator.getSummary(appContext).toString())
+            .isEqualTo(appContext.getString(R.string.flash_notifications_summary_off))
+    }
+
+    @Test
+    fun getSummary_stateCamera_assertOn() {
+        setFlashNotificationsState(FlashNotificationsUtil.State.CAMERA)
+
+        assertThat(preferenceScreenCreator.getSummary(appContext).toString())
+            .isEqualTo(appContext.getString(R.string.flash_notifications_summary_on))
+    }
+
+    @Test
+    fun getSummary_stateScreen_assertOn() {
+        setFlashNotificationsState(FlashNotificationsUtil.State.SCREEN)
+
+        assertThat(preferenceScreenCreator.getSummary(appContext).toString())
+            .isEqualTo(appContext.getString(R.string.flash_notifications_summary_on))
+    }
+
+    @Test
+    fun getSummary_stateCameraScreen_assertOn() {
+        setFlashNotificationsState(FlashNotificationsUtil.State.CAMERA_SCREEN)
+
+        assertThat(preferenceScreenCreator.getSummary(appContext).toString())
+            .isEqualTo(appContext.getString(R.string.flash_notifications_summary_on))
     }
 }

@@ -57,6 +57,12 @@ class ColorAndMotionScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
+    fun getSummary() {
+        assertThat(preferenceScreenCreator.summary)
+            .isEqualTo(R.string.accessibility_color_and_motion_subtext)
+    }
+
+    @Test
     fun getIcon() {
         assertThat(preferenceScreenCreator.icon).isEqualTo(R.drawable.ic_color_and_motion)
     }
