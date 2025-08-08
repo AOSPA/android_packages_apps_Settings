@@ -314,7 +314,7 @@
     <string name="date_time_auto" msgid="1759599045100040686">"Fecha y hora automáticas"</string>
     <string name="date_time_auto_summary" msgid="8294938565417729698">"Se establecen automáticamente con la red y las señales inalámbricas"</string>
     <string name="zone_auto_title" msgid="3520584257065861479">"Zona horaria automática"</string>
-    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Configurar automáticamente según las redes móviles cercanas"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Se establece automáticamente según las redes móviles cercanas"</string>
     <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"Se establecen automáticamente con la ubicación del dispositivo (si está disponible)"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar configuración regional predeterminada"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Formato de 24 horas"</string>
@@ -326,7 +326,7 @@
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Fecha"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"Búsqueda por región"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"Región"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="2130108030162342594">"Desplazamiento de GMT"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="2130108030162342594">"Desfase horario respecto a GMT"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Zona horaria: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -1468,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Usa un fondo oscuro para que la pantalla sea más fácil de ver y reducir el uso de batería en algunas pantallas. El tema cambiará si tienes un programa, cuando la pantalla está apagada."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"El tema oscuro se activa o desactiva a partir del horario para dormir"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Configuración del Modo hora de dormir"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Los modos también pueden activar el tema oscuro}=1{{mode_1} también activa el tema oscuro}=2{{mode_1} y {mode_2} también activan el tema oscuro}=3{{mode_1}, {mode_2} y {mode_3} también activan el tema oscuro}other{{mode_1}, {mode_2} y # más también activan el tema oscuro}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Configuración de los modos"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Aumenta el brillo y expande el rango de color y la claridad de las imágenes y los videos con alto rango dinámico (HDR). El contenido HDR se verá más brillante."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Tiempo de espera de la pantalla"</string>
@@ -1877,19 +1878,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para usar tu huella, configura un patrón"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Por motivos de seguridad, establece un PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Configura el PIN para usar la huella"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Vuelve a ingresar tu contraseña"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Reingresa tu contraseña de trabajo"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Ingresa tu contraseña de trabajo"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirma el patrón"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Ingresa tu patrón de trabajo"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Vuelve a ingresar el PIN"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Vuelve a ingresar el PIN de trabajo"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Ingresa tu PIN de trabajo"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Las contraseñas no coinciden"</string>
@@ -1908,18 +1902,12 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"¿Olvidaste la contraseña?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"¿Olvidaste el patrón?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"¿Olvidaste el PIN?"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Para continuar, ingresa tu patrón"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Para continuar, ingresa tu PIN"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Para continuar, ingresa tu contraseña"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Para continuar, ingresa tu patrón de trabajo"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Para continuar, ingresa tu PIN de trabajo"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Para continuar, ingresa la contraseña de tu perfil de trabajo"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Para mayor seguridad, usa el patrón de tu dispositivo"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Para mayor seguridad, ingresa el PIN de tu dispositivo"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Para mayor seguridad, ingresa la contraseña de tu dispositivo"</string>
@@ -2531,7 +2519,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Presiona el botón flotante"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Gesto de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Presiona el botón de accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ubicado en la parte inferior de la pantalla. Para cambiar entre funciones, mantén presionado el botón de accesibilidad."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Desliza hacia arriba desde la parte inferior de la pantalla. Para cambiar entre funciones, desliza hacia arriba y mantén presionado.}other{Desliza hacia arriba con # dedos desde la parte inferior de la pantalla. Para cambiar entre funciones, desliza hacia arriba con # dedos y mantén presionado.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{Desliza hacia arriba desde la parte inferior de la pantalla. Para cambiar de función, desliza hacia arriba y mantén presionado.}other{Desliza hacia arriba con # dedos desde la parte inferior de la pantalla. Para cambiar de función, desliza hacia arriba con # dedos y mantén presionado.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Más opciones"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Más información sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Configuración rápida"</string>
@@ -2605,7 +2593,7 @@
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 segundos"</string>
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minuto"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minutos"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Tiempo de espera para realizar acción"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Tiempo de acción (accesibilidad)"</string>
     <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Acerca del tiempo de acción (tiempo de espera de accesibilidad)"</string>
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Más información sobre el tiempo de acción (tiempo de espera de accesibilidad)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Tiempo de acción"</string>
@@ -2708,8 +2696,7 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura y administra audífonos ASHA y LE Audio, implantes cocleares y otros dispositivos de amplificación de sonido"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Configura y administra audífonos ASHA, implantes cocleares y otros dispositivos de amplificación de sonido"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Configura y administra audífonos LE Audio, implantes cocleares y otros dispositivos de amplificación de sonido"</string>
-    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
-    <skip />
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="3534747218670001784">"Configura y administra audífonos y otros dispositivos de amplificación de sonido"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Agregar audífonos"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Vincula los audífonos"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"En la siguiente pantalla, presiona tus audífonos. Es posible que debas vincular el audífono izquierdo y el derecho por separado.\n\nAsegúrate de que los audífonos estén encendidos y listos para la vinculación."</string>
@@ -3817,7 +3804,7 @@
     <string name="mode_grayscale_summary" msgid="6682099523626777038">"Cambia la pantalla a blanco y negro"</string>
     <string name="mode_aod_title" msgid="5903435070341237325">"Mantener la pantalla oscura"</string>
     <string name="mode_aod_title_secondary_list" msgid="8268180392811027557">"Mantener la pantalla oscura"</string>
-    <string name="mode_aod_summary" msgid="7516159044827627065">"Inhabilitar pantalla siempre activa"</string>
+    <string name="mode_aod_summary" msgid="7516159044827627065">"Inhabilita la pantalla siempre activa"</string>
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Atenuar fondo de pantalla"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"atenuar fondo de pantalla"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtra el brillo del fondo de pantalla"</string>
@@ -4237,7 +4224,7 @@
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Agregar apps"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Todas las notificaciones"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Algunas notificaciones"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Las personas seleccionadas podrán comunicarse contigo, incluso si no permites que las apps causen interrupciones."</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Las personas seleccionadas podrán comunicarse contigo, incluso si no permites que las apps causen interrupciones"</string>
     <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Ninguna app puede interrumpir}=1{{app_1} puede interrumpir}=2{{app_1} y {app_2} pueden interrumpir}=3{{app_1}, {app_2} y {app_3} pueden interrumpir}other{{app_1}, {app_2} y # más pueden interrumpir}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apps"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notificaciones que pueden interrumpir"</string>
@@ -4657,7 +4644,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 app tiene permiso para usar datos móviles ilimitados cuando el Ahorro de datos está activado}other{# apps tienen permiso para usar datos móviles ilimitados cuando el Ahorro de datos está activado}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Datos principales"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Datos de Wi-Fi"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"Se usaron <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"Exceso: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_remaining" msgid="6316251496381922837">"Datos restantes: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Un gráfico que muestra el uso de datos entre el <xliff:g id="START_DATE">%1$s</xliff:g> y el <xliff:g id="END_DATE">%2$s</xliff:g>"</string>
@@ -4774,7 +4762,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Es posible que el administrador de TI pueda ver las búsquedas y las llamadas entrantes"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Sincronizar perfiles en el calendario"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Mostrar eventos de trabajo en el calendario personal"</string>
-    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Cuando las apps de trabajo están desactivadas, se detienen y no se puede acceder a ellas ni pueden enviar notificaciones"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Cuando las apps de trabajo están desactivadas, se detienen y no pueden enviarte notificaciones, ni se puede acceder a ellas"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Administrar el almacenamiento"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"El administrador de almacenamiento quita de tu dispositivo las fotos y los videos con copia de seguridad para liberar espacio de almacenamiento."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Quitar fotos y videos"</string>
@@ -4998,8 +4986,8 @@
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"¿Quieres desactivar %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;¿Quieres desactivar este servicio?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; La información guardada, como contraseñas, llaves de acceso, formas de pago y otros datos, no se rellenará cuando accedas. Para usar la información guardada, elige un servicio de contraseña, llave de acceso o datos."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Contraseñas, llaves de acceso y cuentas"</string>
-    <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;¿Quieres desactivar todos los servicios?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Las contraseñas, llaves de acceso y otra información guardada no estarán disponibles para autocompletar cuando accedas."</string>
-    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;¿Quieres cambiar tu servicio preferido a &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Las contraseñas, llaves de acceso y otra información nueva se guardarán en ese servicio de ahora en adelante. Es posible que &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; use el contenido de la pantalla para determinar lo que se puede autocompletar."</string>
+    <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;¿Quieres desactivar todos los servicios?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Las contraseñas, llaves de acceso y otra información guardada no estarán disponibles para autocompletar cuando accedas"</string>
+    <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;¿Quieres cambiar tu servicio preferido a &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Las contraseñas, llaves de acceso y otra información nueva se guardarán en ese servicio de ahora en adelante. Es posible que &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; use el contenido de la pantalla para determinar lo que se puede autocompletar"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"¿Usar %1$s?"</string>
     <string name="credman_on_off_switch_content_description" msgid="2930826358220917851">"%1$s activado/desactivado"</string>
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"Desactivar"</string>
@@ -5696,10 +5684,8 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor de huellas dactilares"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificaciones con flash"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Info. sobre notificaciones con flash"</string>
-    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
-    <skip />
+    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"Desactivado / Recibe alertas con un flash de la cámara o de la pantalla para notificaciones y alarmas"</string>
+    <string name="flash_notifications_summary_on" msgid="7750683903778104666">"Activado / Recibe alertas con un flash de la cámara o de la pantalla para las notificaciones y alarmas"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Ilumina la luz de la cámara o de la pantalla cuando recibes notificaciones o cuando suena una alarma"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Ilumina la pantalla cuando recibes notificaciones o cuando suena una alarma"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Usa las notificaciones con flash con precaución si eres sensible a la luz"</string>

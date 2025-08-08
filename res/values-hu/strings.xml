@@ -1468,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"A sötét háttér használatával kényelmesebbé teheti a képernyő nézését, és egyes képernyőkön csökkentheti az akkumulátorhasználatot. Ha van ütemezése, a téma akkor módosul, amikor a képernyő ki van kapcsolva."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"A Sötét téma jelenleg az Alvásidő mód ütemezését követi"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Az Alvásidő mód beállításai"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{A módok a sötét témát is bekapcsolhatják}=1{A(z) {mode_1} a Sötét témát is bekapcsolja}=2{A(z) {mode_1} és a(z) {mode_2} a Sötét témát is bekapcsolja}=3{A(z) {mode_1}, a(z) {mode_2} és a(z) {mode_3} a sötét témát is bekapcsolja}other{A(z) {mode_1}, a(z) {mode_2} és # további a sötét témát is bekapcsolja}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Módbeállítások"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Világosíthatja a nagy dinamikatartományú (HDR) képeket és videókat, bővítheti a színtartományukat, és javíthatja a tisztaságukat. A HDR-tartalmak világosabbak lesznek."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Képernyő időkorlátja"</string>
@@ -1877,19 +1878,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Minta az ujjlenyomathoz"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"A biztonság érdekében állítson be PIN-kódot"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"PIN-kód az ujjlenyomathoz"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Adja meg újra a jelszót"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Adja meg újra munkahelyi jelszavát"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Adja meg munkahelyi jelszavát"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Erősítse meg a mintát"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Adja meg munkahelyi mintáját"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Adja meg újra a PIN-kódot"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Adja meg újra munkahelyi PIN-kódját"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Adja meg munkahelyi PIN-kódját"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"A jelszavak nem egyeznek"</string>
@@ -1908,18 +1902,12 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Elfelejtette jelszavát?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Elfelejtette mintáját?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Elfelejtette PIN-kódját?"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"A folytatáshoz rajzolja le a mintáját"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"A folytatáshoz adja meg PIN-kódját"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"A folytatáshoz adja meg a jelszavát"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"A folytatáshoz rajzolja le munkaprofilja mintáját"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"A folytatáshoz írja be munkaprofilja PIN-kódját"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"A folytatáshoz írja be munkaprofilja jelszavát"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"A nagyobb biztonság érdekében használja az eszköz feloldó mintáját"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"A nagyobb biztonság érdekében adja meg az eszköz PIN-kódját"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"A nagyobb biztonság érdekében adja meg az eszközhöz tartozó jelszót"</string>
@@ -4657,7 +4645,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 alkalmazás számára engedélyezett a korlátlan mobiladatcsomag, ha az Adatforgalom-csökkentő be van kapcsolva.}other{# alkalmazás számára engedélyezett a korlátlan mobiladatcsomag, ha az Adatforgalom-csökkentő be van kapcsolva.}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Elsődleges Adat"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi-adatok"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> felhasználva"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"<xliff:g id="ID_1">^1</xliff:g> túllépve"</string>
     <string name="data_remaining" msgid="6316251496381922837">"<xliff:g id="ID_1">^1</xliff:g> van hátra"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"<xliff:g id="START_DATE">%1$s</xliff:g> és <xliff:g id="END_DATE">%2$s</xliff:g> közötti adathasználatot megjelenítő diagram."</string>
@@ -4994,7 +4983,7 @@
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Használja a(z) &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; alkalmazást?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Az új jelszavakat, az azonosítókulcsokat és az egyéb információkat mostantól ide menti a rendszer. A(z) &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; alkalmazás felhasználhatja az Ön képernyőjén megjelenő információkat az automatikusan kitölthető elemek meghatározásához."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"Preferált szolgáltatás a jelszavaknál, az azonosítókulcsoknál és az automatikus kitöltésnél"</string>
     <string name="credman_picker_title_new" msgid="4292105803864397398">"Előnyben részesített szolgáltatás"</string>
-    <string name="credman_picker_page_summary" msgid="4633938046738617332">"Válassza ki a kívánt szolgáltatást a bejelentkezéshez és az automatikus kitöltési javaslatokhoz szükséges adatok mentéséhez"</string>
+    <string name="credman_picker_page_summary" msgid="4633938046738617332">"Válassza ki a kívánt szolgáltatást a bejelentkezéshez és az automatikus kitöltési javaslatokhoz szükséges adatok mentéséhez."</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Kikapcsolja a következőt: %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Kikapcsolja a szolgáltatást?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; A mentett adatokat, például jelszavakat, azonosítókulcsokat, fizetési módokat és egyéb információkat a rendszer nem fogja kitölteni, amikor be van jelentkezve. A mentett adatok használatához válasszon egy jelszót, azonosítókulcsot vagy adatszolgáltatást."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Jelszavak, azonosítókulcsok és fiókok"</string>

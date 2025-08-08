@@ -40,6 +40,9 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
     override val title: Int
         get() = R.string.accessibility_text_reading_options_title
 
+    override val summary: Int
+        get() = R.string.accessibility_text_reading_options_subtext
+
     override fun getMetricsCategory() = SettingsEnums.ACCESSIBILITY_TEXT_READING_OPTIONS
 
     override val highlightMenuKey

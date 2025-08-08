@@ -232,7 +232,7 @@
     <string name="desc_unavailable_locale" msgid="7223655766703116782">"お使いのデバイスはこの言語に対応していませんが、アプリはこの言語を優先言語として認識します"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"検索"</string>
     <string name="language_and_region_title" msgid="8374151891112162767">"言語と地域"</string>
-    <string name="language_selection_title" msgid="968179636453982415">"言語の追加"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"言語を追加"</string>
     <string name="region_selection_title" msgid="3630336682851020349">"地域の選択"</string>
     <string name="numbering_system_selection_title" msgid="1065458493488382214">"番号体系"</string>
     <string name="country_selection_title" msgid="5376929821458644732">"地域設定"</string>
@@ -1468,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"一部の画面で暗い背景を使用することで、画面が見やすくなり、バッテリーの使用量を減らせます。スケジュールを設定すると、画面が OFF のときにテーマが変更されます。"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ダークモードは現在、おやすみ時間モードのスケジュールに合わせた設定になっています"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"おやすみ時間モードの設定"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{モードを設定すると、ダークモードも ON になる場合があります}=1{{mode_1} に設定すると、ダークモードも ON になります}=2{{mode_1} と {mode_2} に設定すると、ダークモードも ON になります}=3{{mode_1}、{mode_2}、{mode_3} に設定すると、ダークモードも ON になります}other{{mode_1}、{mode_2}、他 # 個のモードに設定すると、ダークモードも ON になります}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"モードの設定"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"ハイ ダイナミック レンジ（HDR）の画像や動画の明るさを補正し、色範囲を広げ、より鮮明にできます。HDR コンテンツがより明るく表示されます。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"画面自動消灯"</string>
@@ -1877,19 +1878,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"指紋認証にはパターンが必要です"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"セキュリティ強化のため、PIN を設定してください"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"指紋認証には PIN が必要です"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"パスワードを再入力"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"仕事パスワードをもう一度入力してください"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"仕事用のパスワードを入力"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"パターンの確認"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"仕事用のパターンを入力"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"PIN を再入力"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"仕事用 PIN をもう一度入力してください"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"仕事用の PIN を入力"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"パスワードが一致しません"</string>
@@ -1908,18 +1902,12 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"パスワードを忘れた場合"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"パターンを忘れた場合"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"PIN を忘れた場合"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"続行するにはパターンを入力してください"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"続行するには PIN を入力してください"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"続行するにはパスワードを入力してください"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"続行するには仕事用のパターンを入力してください"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"続行するには仕事用の PIN を入力してください"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"続行するには仕事用のパスワードを入力してください"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"セキュリティ強化のため、デバイスのパターンを入力してください"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"セキュリティ強化のため、デバイスの PIN を入力してください"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"セキュリティ強化のため、デバイスのパスワードを入力してください"</string>
@@ -2708,8 +2696,7 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA や LE Audio に対応した補聴器や人工内耳などの聴覚補助器を設定、管理できます"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"ASHA に対応した補聴器や人工内耳などの聴覚補助器を設定、管理できます"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"LE Audio に対応した補聴器や人工内耳などの聴覚補助器を設定、管理できます"</string>
-    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
-    <skip />
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="3534747218670001784">"補聴器などの聴覚補助器を設定、管理できます"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"補聴器を追加する"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"補聴器のペア設定"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"次の画面で、お使いの補聴器をタップしてください。左右の耳を別々にペア設定することが必要となる場合もあります。\n\n補聴器の電源が入り、ペア設定できる状態になっていることをご確認ください。"</string>
@@ -4657,7 +4644,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{データセーバーが ON のときのモバイルデータの無制限利用を 1 件のアプリに許可しています}other{データセーバーが ON のときのモバイルデータの無制限利用を # 件のアプリに許可しています}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"メインデータ"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi データ"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> 使用"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"<xliff:g id="ID_1">^1</xliff:g> 超過"</string>
     <string name="data_remaining" msgid="6316251496381922837">"あと <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"このグラフは、<xliff:g id="START_DATE">%1$s</xliff:g>～<xliff:g id="END_DATE">%2$s</xliff:g>のデータ使用量を示しています。"</string>
@@ -4708,7 +4696,7 @@
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"制限あり"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"デフォルトのスペル チェッカー"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"スペル チェッカーを選択"</string>
-    <string name="spell_checker_primary_switch_title" msgid="529240542284039243">"スペルチェックの使用"</string>
+    <string name="spell_checker_primary_switch_title" msgid="529240542284039243">"スペルチェックを使用"</string>
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"選択していません"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
     <string name="notification_log_details_package" msgid="3205243985502010202">"パッケージ"</string>
@@ -5696,10 +5684,8 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指紋認証センサー"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"点滅による通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"点滅による通知について"</string>
-    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
-    <skip />
+    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"OFF / 通知やアラームをカメラや画面の点滅でお知らせします"</string>
+    <string name="flash_notifications_summary_on" msgid="7750683903778104666">"ON / 通知やアラームをカメラや画面の点滅でお知らせします"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"通知を受け取ったときやアラームが鳴ったときに、カメラのライトや画面を点滅させます"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"通知を受け取ったときやアラームが鳴ったときに画面が点滅します"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"光に敏感な方は、点滅による通知を慎重に使用してください"</string>

@@ -50,6 +50,7 @@
             android:key="accessibility_color_and_motion"
             android:icon="@drawable/ic_color_and_motion"
             android:persistent="false"
+            android:summary="@string/accessibility_color_and_motion_subtext"
             android:title="@string/accessibility_color_and_motion_title"
             settings:searchable="true"/>
 
@@ -83,6 +84,7 @@
             android:key="tap_assistance_preference_screen"
             android:icon="@drawable/ic_tap_assistance"
             android:persistent="false"
+            android:summary="@string/accessibility_tap_assistance_subtext"
             android:title="@string/accessibility_tap_assistance_title"
             settings:searchable="true"/>
 
@@ -91,6 +93,7 @@
             android:key="system_controls_preference_screen"
             android:icon="@drawable/ic_system_controls"
             android:title="@string/accessibility_system_controls_title"
+            settings:controller="com.android.settings.accessibility.SystemControlsPreferenceController"
             settings:searchable="true"/>
 
         <Preference
@@ -100,8 +103,7 @@
             android:persistent="false"
             android:title="@string/accessibility_vibration_settings_title"
             settings:controller="com.android.settings.accessibility.VibrationPreferenceController"
-            settings:keywords="@string/keywords_vibration"
-            android:summary="@string/accessibility_vibration_settings_summary"/>
+            settings:keywords="@string/keywords_vibration"/>
 
         <Preference
             android:fragment="com.android.settings.inputmethod.PointerTouchpadFragment"
@@ -147,7 +149,7 @@
         <Preference
             android:key="rtt_setting"
             android:icon="@drawable/ic_rtt_settings"
-            android:summary="@string/summary_placeholder"
+            android:summary="@string/rtt_settings_summary"
             android:title="@string/rtt_settings_title"
             settings:keywords="@string/keywords_rtt"
             settings:controller="com.android.settings.accessibility.RTTSettingPreferenceController"/>
@@ -193,6 +195,7 @@
             android:key="audio_adjustment_preference_screen"
             android:icon="@drawable/ic_audio_adjustment"
             android:persistent="false"
+            android:summary="@string/accessibility_audio_adjustment_subtext"
             android:title="@string/accessibility_audio_adjustment_title"
             settings:searchable="true"/>
 
@@ -211,6 +214,7 @@
             android:fragment="com.android.settings.accessibility.ShortcutsSettingsFragment"
             android:key="accessibility_shortcuts_preference_screen"
             android:persistent="false"
+            android:summary="@string/accessibility_shortcuts_settings_subtext"
             android:title="@string/accessibility_shortcuts_settings_title"
             settings:searchable="true"/>
 
@@ -218,6 +222,7 @@
             android:fragment="com.android.settings.tts.TextToSpeechSettings"
             android:key="tts_settings_preference"
             android:persistent="false"
+            android:summary="@string/tts_subtext"
             android:title="@string/tts_settings_title"
             settings:controller="com.android.settings.language.TtsPreferenceController"/>
 

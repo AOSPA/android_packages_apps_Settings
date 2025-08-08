@@ -326,7 +326,7 @@
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Päiväys"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"Hae aluetta"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"Alue"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="2130108030162342594">"Ero GMT:hen verrattuna"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="2130108030162342594">"GMT-aikaero"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Käyttää aikavyöhykettä <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
@@ -1468,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Tumman taustan käyttö tekee näytön katselusta miellyttävämpää ja vähentää akun käyttöä joillain näytöillä. Jos sinulla on aikataulu, teema vaihtuu, kun näyttö on sammutettu."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tumma teema toimii nyt nukkuma-aikatilasi aikataulun mukaan"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Nukkuma-aikatilan asetukset"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Tilat voivat myös laittaa tumman teeman päälle}=1{{mode_1} laittaa myös tumman teeman päälle}=2{{mode_1} ja {mode_2} laittavat myös tumman teeman päälle}=3{{mode_1}, {mode_2} ja {mode_3} laittavat myös tumman teeman päälle}other{{mode_1}, {mode_2} ja # muuta laittavat myös tumman teeman päälle}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Tilojen asetukset"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Kirkasta ja laajenna suuren dynaamisen alueen (HDR) ‑kuvien ja ‑videoiden väriskaalaa ja selkeyttä. HDR-sisältö näyttää kirkkaammalta."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Näytön aikakatkaisu"</string>
@@ -1877,19 +1878,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Sormenjälki: aseta kuvio"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Määritä PIN-koodi tietoturvan parantamiseksi."</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Sormenjälki: aseta PIN-koodi"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Lisää salasana uudelleen"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Lisää työsalasana uudelleen"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Työprofiilin salasanan lisääminen"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Vahvista kuvio"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Lisää työprofiilin kuvio"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Lisää PIN-koodi uudelleen"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Lisää työ-PIN uudelleen"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Lisää työprofiilin PIN-koodi"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Salasanat eivät täsmää"</string>
@@ -1908,18 +1902,12 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Unohditko salasanasi?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Unohditko kuviosi?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Unohditko PIN-koodisi?"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Jatka piirtämällä kuvio"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Jatka lisäämällä PIN-koodi"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Jatka lisäämällä salasana"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Jatka piirtämällä työprofiilisi kuvio"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Jatka lisäämällä työprofiilisi PIN-koodi"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Jatka antamalla työprofiilisi salasana."</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Turvallisuussyistä pyydämme antamaan laitteen kuvion."</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Turvallisuussyistä pyydämme antamaan laitteen PIN-koodin."</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Turvallisuussyistä pyydämme antamaan laitteen salasanan."</string>
@@ -2605,13 +2593,13 @@
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 sekuntia"</string>
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minuutti"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minuuttia"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Toiminnon aika (saavutettavuuskatkaisu)"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Reagointiaika (saavutettavuuskatkaisu)"</string>
     <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Tietoja toiminnon ajasta (saavutettavuuskatkaisu)"</string>
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Lue lisää reagointiajasta (saavutettavuuden aikakatkaisu)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Reagointiaika"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Kaikki sovellukset eivät tue tätä ajoitusasetusta"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Valitse, miten pitkään haluat nähdä tilapäiset viestit, joissa pyydetään tekemään toiminto"</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Pitkäkestoisen kosketuksen viive"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Pitkän kosketuksen viive"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Käänteiset värit"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Käytä käänteisiä värejä"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Käänteisten värien pikanäppäin"</string>
@@ -2776,7 +2764,7 @@
     <string name="accessibility_autoclick_delay_unit_second" msgid="1562809410497613173">"{count,plural, =1{{time} sekunti}other{{time} sekuntia}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Asetukset"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Päällä"</string>
-    <string name="accessibility_feature_state_off" msgid="169119895905460512">"Ei päällä"</string>
+    <string name="accessibility_feature_state_off" msgid="169119895905460512">"Pois päältä"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Esikatselu"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Vakioasetukset"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Kieli"</string>
@@ -4426,7 +4414,7 @@
     <string name="high_power_on" msgid="8778058701270819268">"Ei optimointia"</string>
     <string name="high_power_off" msgid="317000444619279018">"Akun käyttöä optimoidaan"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Akun käytön optimointi ei käytettävissä"</string>
-    <string name="high_power_prompt_title" msgid="2574478825228409124">"Annetaanko sovellukselle oikeus toimia aina taustalla?"</string>
+    <string name="high_power_prompt_title" msgid="2574478825228409124">"Annetaanko sovelluksen toimia aina taustalla?"</string>
     <string name="high_power_prompt_body" msgid="8570446878622133298">"Jos <xliff:g id="APP_NAME">%1$s</xliff:g> saa toimia aina taustalla, laitteen akku voi kulua loppuun nopeammin. \n\nVoit muuttaa tätä myöhemmin valitsemalla Asetukset -&gt; Sovellukset."</string>
     <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> käytetty täyteen lataamisen jälkeen"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> käytetty 24 viime tunnin aikana"</string>
@@ -4657,7 +4645,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 sovellus saa käyttää rajatonta mobiilidataa, kun Data Saver on päällä}other{# sovellusta saa käyttää rajatonta mobiilidataa, kun Data Saver on päällä}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Ensisijainen data"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi-data"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> käytetty"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"<xliff:g id="ID_1">^1</xliff:g> yli rajan"</string>
     <string name="data_remaining" msgid="6316251496381922837">"<xliff:g id="ID_1">^1</xliff:g> jäljellä"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Kaavio datan käytöstä <xliff:g id="START_DATE">%1$s</xliff:g>–<xliff:g id="END_DATE">%2$s</xliff:g>"</string>
@@ -4838,7 +4827,7 @@
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Pyyhkäise alas:"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Käytä pikakuvaketta:"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Vedä näytön yläosa alas, jotta ulotut siihen helpommin yhdellä kädellä"</string>
-    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Näin voit käyttää yhden käden moodia"</b>\n" • Varmista, että eleillä navigointi on valittu järjestelmän navigointiasetuksista\n • Pyyhkäise alas näytön alareunasta"</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Näin käytät yhden käden moodia"</b>\n" • Varmista, että eleillä navigointi on valittu järjestelmän navigointiasetuksista\n • Pyyhkäise alas näytön alareunasta"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Vedä näyttö ulottuvillesi"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Näytön yläreuna siirtyy peukalosi ulottuville."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Näytä ilmoitukset"</string>
@@ -4860,7 +4849,7 @@
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Sormenjäljen pyyhkäisy"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Katso ilmoitukset nopeasti"</string>
     <string name="gesture_setting_on" msgid="3223448394997988591">"Päällä"</string>
-    <string name="gesture_setting_off" msgid="3444029475726294919">"Ei päällä"</string>
+    <string name="gesture_setting_off" msgid="3444029475726294919">"Pois päältä"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"Käynnistysohjelman lukitus on jo avattu"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"Muodosta internetyhteys tai ota yhteyttä operaattoriin"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="168124660162907358">"Ei käytettävissä operaattorin lukitsemissa laitteissa"</string>
@@ -5455,7 +5444,7 @@
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Käyttääksesi tätä aseta ensin näytön lukitus"</string>
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Virtavalikko:\nPaina virtapainiketta ja äänenvoimakkuuden lisäyspainiketta yhtä aikaa"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Estä soiminen:\nKäytä pikakomentoa painamalla äänenvoimakkuuspainiketta"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Valitse kesto painamalla pitkään"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Pitkän painalluksen kesto"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Säädä herkkyyttä valitsemalla, kauanko virtapainiketta täytyy painaa"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Lyhyen ajan"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Pitkään"</string>

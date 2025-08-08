@@ -1468,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Use a dark background to make your screen more comfortable to view and reduce battery usage on some screens. Your theme will change if you have a schedule, when the screen is off."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Dark theme is currently following your Bedtime mode schedule"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Bedtime mode settings"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Modes can also turn on Dark theme}=1{{mode_1} also turns on Dark theme}=2{{mode_1} and {mode_2} also turn on Dark theme}=3{{mode_1}, {mode_2}, and {mode_3} also turn on Dark theme}other{{mode_1}, {mode_2}, and # more also turn on Dark theme}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Modes settings"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Brighten and expand the color range and clarity in High Dynamic Range (HDR) images and videos. HDR content will appear brighter."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Screen timeout"</string>
@@ -1877,14 +1878,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"To use fingerprint, set pattern"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"For security, set PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"To use fingerprint, set PIN"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="4988519671035171367">"Enter your device password"</string>
-    <string name="lockpassword_reenter_your_password_header" msgid="7257189484651655897">"Re-enter your password"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Re-enter your password"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Re-enter your work password"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Enter your work password"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="2473024535487015289">"Enter your device pattern"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirm your pattern"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Enter your work pattern"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="541025103892074808">"Enter your device PIN"</string>
-    <string name="lockpassword_reenter_your_pin_header" msgid="373337443492549650">"Re-enter your PIN"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Re-enter your PIN"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Re-enter your work PIN"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Enter your work PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Passwords don’t match"</string>
@@ -1903,12 +1902,12 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Forgot your password?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Forgot your pattern?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Forgot your PIN?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="4983618652824112610">"Your pattern verifies it\'s you"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"Your PIN verifies it\'s you"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"Your password verifies it\'s you"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="2552062474449423029">"Your work pattern verifies it\'s you"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6556640367641079244">"Your work PIN verifies it\'s you"</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5700270644291633820">"Your work password verifies it\'s you"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Draw your pattern to continue"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Enter your PIN to continue"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Enter your password to continue"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Draw your work pattern to continue"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Enter your work PIN to continue"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Enter your work password to continue"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"For added security, use your device pattern"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"For added security, enter your device PIN"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"For added security, enter your device password"</string>
@@ -4640,7 +4639,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 app allowed to use unrestricted mobile data when Data Saver is on}other{# apps allowed to use unrestricted mobile data when Data Saver is on}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Primary data"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi data"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> used"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"<xliff:g id="ID_1">^1</xliff:g> over"</string>
     <string name="data_remaining" msgid="6316251496381922837">"<xliff:g id="ID_1">^1</xliff:g> left"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Graph showing data usage between <xliff:g id="START_DATE">%1$s</xliff:g> and <xliff:g id="END_DATE">%2$s</xliff:g>."</string>

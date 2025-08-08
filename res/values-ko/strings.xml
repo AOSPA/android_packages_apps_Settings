@@ -1468,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"어두운 배경을 사용하면 화면을 더 편하게 볼 수 있으며 일부 화면에서 배터리 사용량을 줄일 수 있습니다. 일정이 있는 경우 화면이 꺼져 있을 때 테마가 변경됩니다."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"어두운 테마는 현재 취침 모드 일정을 따릅니다."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"취침 모드 설정"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{모드에서도 어두운 테마를 사용 설정할 수 있습니다.}=1{{mode_1}에서도 어두운 테마가 사용 설정됩니다.}=2{{mode_1} 및 {mode_2}에서도 어두운 테마가 사용 설정됩니다.}=3{{mode_1}, {mode_2}, {mode_3}에서도 어두운 테마가 사용 설정됩니다.}other{{mode_1}, {mode_2} 외 #개 모드에서도 어두운 테마가 사용 설정됩니다.}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"모드 설정"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"HDR(High Dynamic Range) 이미지 및 동영상의 색상 범위와 선명도를 확장하고 밝기를 향상시킵니다. HDR 콘텐츠가 더 밝게 표시됩니다."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"화면 자동 잠금 시간"</string>
@@ -1877,19 +1878,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"지문 사용을 위한 패턴 설정"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"보안을 위해 PIN을 설정하세요."</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"PIN 설정 후 지문 사용"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"비밀번호 다시 입력"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"직장 비밀번호를 다시 입력하세요"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"직장 비밀번호 입력"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"패턴 확인"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"직장 패턴 입력"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"PIN 다시 입력"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"직장 PIN을 다시 입력하세요"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"직장 PIN 입력"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"비밀번호가 일치하지 않음"</string>
@@ -1908,18 +1902,12 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"비밀번호를 잊으셨나요?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"패턴을 잊으셨나요?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"PIN을 잊으셨나요?"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"계속 진행하려면 패턴을 그리세요."</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"계속 진행하려면 PIN을 입력하세요."</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"계속 진행하려면 비밀번호를 입력하세요."</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"계속 진행하려면 직장 패턴을 그리세요."</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"계속하려면 직장 PIN을 입력하세요."</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"계속하려면 직장 비밀번호를 입력하세요."</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"보안을 강화하려면 기기 패턴을 사용하세요."</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"보안을 강화하려면 기기 PIN을 입력하세요."</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"보안을 강화하려면 기기 비밀번호를 입력하세요."</string>
@@ -4657,7 +4645,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{데이터 절약 모드가 켜져 있을 때 1개의 앱이 무제한 모바일 데이터를 사용하도록 허용됨}other{데이터 절약 모드가 켜져 있을 때 #개의 앱이 무제한 모바일 데이터를 사용하도록 허용됨}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"기본 자료"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi 데이터"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g><xliff:g id="ID_2">^2</xliff:g> 사용됨"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"<xliff:g id="ID_1">^1</xliff:g> 초과"</string>
     <string name="data_remaining" msgid="6316251496381922837">"<xliff:g id="ID_1">^1</xliff:g> 남음"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"<xliff:g id="START_DATE">%1$s</xliff:g>부터 <xliff:g id="END_DATE">%2$s</xliff:g>까지의 데이터 사용량을 보여 주는 그래프입니다."</string>

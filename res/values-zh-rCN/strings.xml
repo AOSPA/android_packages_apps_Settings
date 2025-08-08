@@ -1468,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"深色背景能够带来更舒适的屏幕观看体验，同时还能降低部分屏幕的电池用量。如果您设置了时间表，屏幕关闭时主题就会发生变化。"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"深色主题目前会按照睡眠模式时间表开启/关闭"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"睡眠模式设置"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{某些模式也会开启深色主题}=1{“{mode_1}”也会开启深色主题}=2{“{mode_1}”和“{mode_2}”也会开启深色主题}=3{“{mode_1}”“{mode_2}”和“{mode_3}”也会开启深色主题}other{“{mode_1}”“{mode_2}”和另外 # 种模式也会开启深色主题}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"模式设置"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"为高动态范围 (HDR) 图片和视频增强亮度、扩展颜色范围并提高清晰度。HDR 内容会看起来更明亮。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"自动锁屏"</string>
@@ -1877,19 +1878,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"要使用指纹，请设置解锁图案"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"为了安全起见，请设置 PIN 码"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"要使用指纹，请设置 PIN 码"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"再次输入密码"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"再次输入您的工作资料密码"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"请输入您的工作资料密码"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"请确认解锁图案"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"请绘制您的工作资料解锁图案"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"再次输入 PIN 码"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"再次输入您的工作资料 PIN 码"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"请输入您的工作资料 PIN 码"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"密码不一致"</string>
@@ -1908,18 +1902,12 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"忘记了密码？"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"忘记了图案？"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"忘记了 PIN 码？"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"绘制解锁图案后即可继续操作"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"输入 PIN 码才能继续"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"输入密码才能继续"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"绘制工作资料解锁图案才能继续"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"需输入您的工作资料 PIN 码才能继续"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"请输入您的工作密码以继续"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"为了提升安全性，请绘制您的设备解锁图案"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"为了提升安全性，请输入您的设备 PIN 码"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"为了提升安全性，请输入您的设备密码"</string>
@@ -2659,7 +2647,7 @@
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"设备已设为静音，因此该设置已停用"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"通话"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"通知和闹钟"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"互动式反馈"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"互动式触感反馈"</string>
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"启用振动和触感反馈"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"闹钟振动"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"媒体振动"</string>
@@ -4660,7 +4648,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{开启流量节省模式时不限制 1 个应用的移动数据用量}other{开启流量节省模式时不限制 # 个应用的移动数据用量}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"主要数据"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"WLAN 数据"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"已使用 <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"超过 <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_remaining" msgid="6316251496381922837">"还剩 <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"这张图表显示的是 <xliff:g id="START_DATE">%1$s</xliff:g>到 <xliff:g id="END_DATE">%2$s</xliff:g>之间的数据用量。"</string>

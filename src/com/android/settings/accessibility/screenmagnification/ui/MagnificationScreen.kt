@@ -71,12 +71,12 @@ open class MagnificationScreen : PreferenceScreenMixin {
             +MagnificationIllustrationPreference()
             +PreferenceCategory("general_categories", R.string.accessibility_screen_option) += {
                 +AccessibilityShortcutPreference(
-                    context,
-                    "magnification_shortcut_preference",
-                    R.string.accessibility_screen_magnification_shortcut_title,
-                    MAGNIFICATION_COMPONENT_NAME,
-                    context.getText(R.string.accessibility_screen_magnification_title),
-                    metricsCategory,
+                    context = context,
+                    key = "magnification_shortcut_preference",
+                    title = R.string.accessibility_screen_magnification_shortcut_title,
+                    componentName = MAGNIFICATION_COMPONENT_NAME,
+                    featureName = R.string.accessibility_screen_magnification_title,
+                    metricsCategory = metricsCategory,
                 )
                 +MagnificationModePreference()
                 +MagnifyKeyboardSwitchPreference()

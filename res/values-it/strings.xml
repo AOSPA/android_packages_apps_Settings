@@ -1468,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Usa uno sfondo scuro per rendere più confortevole la visualizzazione e ridurre l\'utilizzo della batteria su alcuni schermi. Se hai una programmazione, il tema cambierà quando lo schermo è spento."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Al momento il tema scuro viene attivato/disattivato in base alla pianificazione della modalità Riposo"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Impostazioni modalità Riposo"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Le modalità possono anche attivare il tema scuro}=1{{mode_1} attiva anche il tema scuro}=2{{mode_1} e {mode_2} attivano anche il tema scuro}=3{{mode_1}, {mode_2} e {mode_3} attivano anche il tema scuro}other{{mode_1}, {mode_2} e # altre modalità attivano anche il tema scuro}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Impostazioni modalità"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Aumenta luminosità e nitidezza e amplia la gamma di colori in immagini e video HDR (High Dynamic Range). I contenuti HDR saranno più luminosi."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Spegnimento dello schermo"</string>
@@ -1877,19 +1878,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Per usare l\'impronta, imposta una sequenza"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Per sicurezza, imposta un PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Per usare l\'impronta, imposta un PIN"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Inserisci di nuovo la password"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Reinserisci password per profilo lavoro"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Inserisci password del profilo di lavoro"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Conferma la tua sequenza"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Ins. sequenza profilo lavoro"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Inserisci di nuovo il PIN"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Reinserisci PIN per profilo lavoro"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Inserisci PIN del profilo di lavoro"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Le password non corrispondono"</string>
@@ -1908,18 +1902,12 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Hai dimenticato la password?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Hai dimenticato la sequenza?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Hai dimenticato il PIN?"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Traccia la sequenza per continuare"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Inserisci il PIN per continuare"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Inserisci la password per continuare"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Inserisci la sequenza di lavoro per continuare"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Per continuare devi inserire il PIN del tuo profilo di lavoro"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Per continuare devi inserire la password del tuo profilo di lavoro"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Per maggiore sicurezza, usa la sequenza del dispositivo"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Per maggiore sicurezza, inserisci il PIN del dispositivo"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Per maggiore sicurezza, inserisci la password del dispositivo"</string>
@@ -2708,8 +2696,7 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura e gestisci apparecchi acustici, impianti cocleari e altri dispositivi di amplificazione ASHA e LE Audio"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Configura e gestisci apparecchi acustici, impianti cocleari e altri dispositivi di amplificazione ASHA"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Configura e gestisci apparecchi acustici, impianti cocleari e altri dispositivi di amplificazione LE Audio"</string>
-    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
-    <skip />
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="3534747218670001784">"Configura e gestisci apparecchi acustici e altri dispositivi di amplificazione"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Aggiungi apparecchi acustici"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Accoppia apparecchi acustici"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Nella schermata successiva, seleziona i tuoi apparecchi acustici. Potresti dover accoppiare l\'orecchio destro e sinistro separatamente.\n\nAssicurati che gli apparecchi acustici siano accesi e pronti per l\'accoppiamento."</string>
@@ -4657,7 +4644,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 app autorizzata a usare dati mobili senza limitazioni quando è attiva la funzionalità Risparmio dati}other{# app autorizzate a usare dati mobili senza limitazioni quando è attiva la funzionalità Risparmio dati}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Dati principali"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Dati Wi‑Fi"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"Dati utilizzati: <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"Superiore a <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_remaining" msgid="6316251496381922837">"Dati rimanenti: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Grafico che mostra l\'utilizzo dei dati dal giorno <xliff:g id="START_DATE">%1$s</xliff:g> al giorno <xliff:g id="END_DATE">%2$s</xliff:g>."</string>
@@ -5696,10 +5684,8 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensore di impronte digitali"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flash di notifica"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Informazioni sul flash di notifica"</string>
-    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
-    <skip />
+    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"Off - Ricevi avvisi con un flash della fotocamera o dello schermo per notifiche e sveglie"</string>
+    <string name="flash_notifications_summary_on" msgid="7750683903778104666">"On - Ricevi avvisi con un flash della fotocamera o dello schermo per notifiche e sveglie"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Fai lampeggiare la luce della fotocamera o lo schermo quando ricevi notifiche o quando suonano le sveglie"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Fai lampeggiare lo schermo quando ricevi notifiche o quando suonano le sveglie"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Se sei fotosensibile, usa con cautela il flash di notifica"</string>

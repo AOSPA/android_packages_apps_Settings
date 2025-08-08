@@ -25,6 +25,7 @@ import android.util.Log
 import android.util.Size
 import android.view.Display.DEFAULT_DISPLAY
 import android.view.MotionEvent
+import android.view.MotionEvent.CLASSIFICATION_TWO_FINGER_SWIPE
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -388,6 +389,9 @@ class DisplayTopologyPreferenceController(
                 block.setOnTouchListener(null)
             } else {
                 block.setOnTouchListener { view, ev ->
+                    if (ev.classification == CLASSIFICATION_TWO_FINGER_SWIPE) {
+                        return@setOnTouchListener false
+                    }
                     when (ev.actionMasked) {
                         MotionEvent.ACTION_DOWN -> onBlockTouchDown(id, pos, block, ev)
                         MotionEvent.ACTION_MOVE -> onBlockTouchMove(ev)

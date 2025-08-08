@@ -23,7 +23,6 @@ import android.bluetooth.BluetoothHearingAid
 import android.bluetooth.BluetoothLeAudio
 import android.bluetooth.BluetoothProfile
 import android.content.BroadcastReceiver
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -142,7 +141,7 @@ open class HearingDevicesScreen(context: Context) :
             +SavedHearingDevicePreferenceCategory()
             +HearingDeviceOptionsPreferenceCategory() += {
                 +AudioRoutingPreference()
-                +HearingDeviceShortcutPreference(context, coroutineScope, metricsCategory)
+                +HearingDeviceShortcutPreference(context, metricsCategory)
                 +HearingAidCompatibilitySwitchPreference(context)
             }
             +HearingDevicesFooterPreference(context)
@@ -227,22 +226,14 @@ open class HearingDevicesScreen(context: Context) :
         title: Int = R.string.accessibility_screen_option,
     ) : PreferenceCategory(key, title)
 
-    class HearingDeviceShortcutPreference(
-        context: Context,
-        coroutineScope: CoroutineScope,
-        metricsCategory: Int,
-        key: String = "hearing_aids_shortcut_preference",
-        title: Int = R.string.accessibility_hearing_device_shortcut_title,
-        componentName: ComponentName = ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME,
-        featureName: CharSequence = context.getText(R.string.accessibility_hearingaid_title),
-    ) :
+    class HearingDeviceShortcutPreference(context: Context, metricsCategory: Int) :
         AccessibilityShortcutPreference(
             context,
-            key,
-            title,
-            componentName,
-            featureName,
-            metricsCategory,
+            key = "hearing_aids_shortcut_preference",
+            title = R.string.accessibility_hearing_device_shortcut_title,
+            componentName = ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME,
+            featureName = R.string.accessibility_hearingaid_title,
+            metricsCategory = metricsCategory,
         )
 
     companion object {

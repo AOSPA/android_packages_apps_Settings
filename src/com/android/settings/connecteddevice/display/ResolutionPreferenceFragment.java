@@ -158,13 +158,11 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
 
     private void update() {
         final PreferenceScreen screen = getPreferenceScreen();
-        if (screen == null || mInjector == null) {
+        if (!isAdded() || screen == null || mInjector == null) {
             return;
         }
-        var context = mInjector.getContext();
-        if (context == null) {
-            return;
-        }
+        // Ensure not null if isAdded() returns true
+        Context context = requireContext();
         var display = mInjector.getDisplay(getDisplayIdArg());
         if (display == null) {
             finishFragment();

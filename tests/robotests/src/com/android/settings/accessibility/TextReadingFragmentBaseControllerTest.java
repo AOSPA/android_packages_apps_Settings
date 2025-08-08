@@ -28,6 +28,8 @@ import android.content.Context;
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -61,5 +63,13 @@ public class TextReadingFragmentBaseControllerTest {
                         ACCESSIBILITY_SETTINGS);
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+    }
+
+    @Test
+    public void getSummary_returnExpectedString() {
+        final String summary = new TextReadingFragmentBaseController(mContext, FRAGMENT_PREF_KEY,
+                ACCESSIBILITY_SETTINGS).getSummary().toString();
+        assertThat(summary).isEqualTo(
+                mContext.getString(R.string.accessibility_text_reading_options_subtext));
     }
 }

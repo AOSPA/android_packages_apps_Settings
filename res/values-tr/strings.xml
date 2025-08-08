@@ -1468,7 +1468,8 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Ekranınızı daha rahat görüntülemek ve bazı ekranlarda pil kullanımını azaltmak için koyu arka plan kullanın. Program kullanıyorsanız ekran kapandığında temanız değişir."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Koyu tema şu anda Uyku Vakti modu programınıza uyuyor."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Uyku Vakti modu ayarları"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="5714706755357926751">"{count,plural,offset:2 =0{Modlar, koyu temayı da açabilir}=1{{mode_1}, koyu temayı da açar}=2{{mode_1} ve {mode_2}, koyu temayı da açar}=3{{mode_1}, {mode_2} ve {mode_3}, koyu temayı da açar}other{{mode_1}, {mode_2} ve diğer # mod koyu temayı da açar}}"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
+    <skip />
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Mod ayarları"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Yüksek Dinamik Aralık (HDR) özellikli görsel ve videolardaki renk aralığını/netliği artırın ve parlaklaştırın. HDR içerikler daha parlak görünür."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Ekran zaman aşımı"</string>
@@ -1877,19 +1878,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Parmak izi için desen ayarlayın"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Güvenlik için PIN oluşturun"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Parmak izi için PIN ayarlayın"</string>
-    <!-- no translation found for lockpassword_confirm_your_password_header (4988519671035171367) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_password_header (7257189484651655897) -->
-    <skip />
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Şifrenizi yeniden girin"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"İş şifrenizi tekrar girin"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"İş şifrenizi girin"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_header (2473024535487015289) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Deseninizi onaylayın"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"İş deseninizi girin"</string>
-    <!-- no translation found for lockpassword_confirm_your_pin_header (541025103892074808) -->
-    <skip />
-    <!-- no translation found for lockpassword_reenter_your_pin_header (373337443492549650) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"PIN\'inizi yeniden girin"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"İş PIN\'inizi tekrar girin"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"İş PIN\'inizi girin"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Şifreler eşleşmiyor"</string>
@@ -1908,18 +1902,12 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Şifrenizi mi unuttunuz?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Deseninizi mi unuttunuz?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"PIN\'inizi mi unuttunuz?"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (4983618652824112610) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (45398445305933355) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (1263500907003586594) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (2552062474449423029) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (6556640367641079244) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (5700270644291633820) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Devam etmek için deseninizi çizin"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Devam etmek için PIN\'inizi girin"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Devam etmek için şifrenizi girin"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Devam etmek için iş profilinizin desenini çizin"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Devam etmek için iş profilinizin PIN\'ini girin"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Devam etmek için iş profilinizin şifresini girin"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Daha fazla güvenlik için cihaz deseninizi kullanın"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Daha fazla güvenlik için cihaz PIN\'inizi girin"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Daha fazla güvenlik için cihaz şifrenizi girin"</string>
@@ -4658,7 +4646,8 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{Veri Tasarrufu açıkken 1 uygulamanın sınırsız mobil veri kullanmasına izin verildi}other{Veri Tasarrufu açıkken # uygulamanın sınırsız mobil veri kullanmasına izin verildi}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Birincil veri"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Kablosuz ağ verisi"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> kullanıldı"</string>
+    <!-- no translation found for data_used_formatted (6825854220655476713) -->
+    <skip />
     <string name="data_overusage" msgid="3680477320458707259">"<xliff:g id="ID_1">^1</xliff:g>\'ın üzerinde"</string>
     <string name="data_remaining" msgid="6316251496381922837">"<xliff:g id="ID_1">^1</xliff:g> kaldı"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"<xliff:g id="START_DATE">%1$s</xliff:g>-<xliff:g id="END_DATE">%2$s</xliff:g> tarihleri arasındaki veri kullanımını gösteren grafik."</string>

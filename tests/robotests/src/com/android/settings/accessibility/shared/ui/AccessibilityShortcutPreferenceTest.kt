@@ -56,7 +56,7 @@ import org.robolectric.shadow.api.Shadow
 
 const val TEST_KEY = "testKey"
 const val TEST_TITLE_RES = 0
-const val TEST_FEATURE_NAME = "testFeatureName"
+const val TEST_FEATURE_NAME_RES = 0
 
 @RunWith(RobolectricTestRunner::class)
 class AccessibilityShortcutPreferenceTest {
@@ -194,7 +194,7 @@ class AccessibilityShortcutPreferenceTest {
             TEST_KEY,
             TEST_TITLE_RES,
             testComponentName,
-            TEST_FEATURE_NAME,
+            TEST_FEATURE_NAME_RES,
         ) {
         private var isSettingsEditable: Boolean = true
 
