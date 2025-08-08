@@ -25,17 +25,21 @@ import com.android.settings.R
 import com.android.settings.Settings.FlashNotificationsActivity
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.FlashNotificationsPreferenceFragment
+import com.android.settings.accessibility.FlashNotificationsUtil
+import com.android.settings.accessibility.FlashNotificationsUtil.State
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(FlashNotificationsScreen.KEY)
-open class FlashNotificationsScreen : PreferenceScreenMixin, PreferenceAvailabilityProvider {
+open class FlashNotificationsScreen :
+    PreferenceScreenMixin, PreferenceAvailabilityProvider, PreferenceSummaryProvider {
     override val key: String
         get() = KEY
 
@@ -77,6 +81,15 @@ open class FlashNotificationsScreen : PreferenceScreenMixin, PreferenceAvailabil
         FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_FLASH_NOTIFICATIONS)
 
     override fun isIndexable(context: Context): Boolean = true
+
+    override fun getSummary(context: Context): CharSequence? {
+        return when (FlashNotificationsUtil.getFlashNotificationsState(context)) {
+            State.CAMERA,
+            State.SCREEN,
+            State.CAMERA_SCREEN -> context.getString(R.string.flash_notifications_summary_on)
+            else -> context.getString(R.string.flash_notifications_summary_off)
+        }
+    }
 
     companion object {
         const val KEY = "flash_notifications"

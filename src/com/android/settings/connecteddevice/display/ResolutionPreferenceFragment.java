@@ -47,8 +47,9 @@ import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfi
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase {
     @VisibleForTesting static final int TOP_MODE_RES_MAX_COUNT = 3;
@@ -68,7 +69,8 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
     @Nullable private PreferenceCategory mTopOptionsPreference;
     @Nullable private PreferenceCategory mMoreOptionsPreference;
     private boolean mStarted;
-    private final HashSet<String> mResolutionPreferences = new HashSet<>();
+    // Maps a resolution preference key (e.g., "1920x1080") to its corresponding Display.Mode.
+    private final Map<String, Mode> mResolutionPreferences = new HashMap<>();
     private int mExternalDisplayPeakWidth;
     private int mExternalDisplayPeakHeight;
     private int mExternalDisplayPeakRefreshRate;
@@ -182,6 +184,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
                 display,
                 remainingModes.first,
                 remainingModes.second);
+        Log.i(TAG, "Currently selected display mode: " + modeToReadableString(getSelectedMode()));
     }
 
     private PreferenceCategory getTopPreference(
@@ -236,14 +239,13 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             @Nullable ToBooleanFunction<Mode> checkMode,
             @NonNull DisplayDevice display) {
         Mode curMode = display.getMode();
-        var currentResolution = curMode.getPhysicalWidth() + "x" + curMode.getPhysicalHeight();
-        var rotatedResolution = curMode.getPhysicalHeight() + "x" + curMode.getPhysicalWidth();
+        var currentResolution = modeToPrefKey(curMode);
+        var rotatedResolution = rotatedModeToPrefKey(curMode);
         var skippedModes = new ArrayList<Mode>();
         var isAnyOfModesSelected = false;
         for (var mode : modes) {
-            var modeStr = mode.getPhysicalWidth() + "x" + mode.getPhysicalHeight();
-            SelectorWithWidgetPreference pref = group.findPreference(modeStr);
-            if (pref != null) {
+            var modeStr = modeToPrefKey(mode);
+            if (mResolutionPreferences.containsKey(modeStr)) {
                 continue;
             }
             if (checkMode != null && !checkMode.apply(mode)) {
@@ -255,19 +257,15 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             if (!isCurrentMode && !isAllowedMode(mode)) {
                 continue;
             }
-            if (mResolutionPreferences.contains(modeStr)) {
-                // Added to "Top modes" already.
-                continue;
-            }
-            mResolutionPreferences.add(modeStr);
-            pref = new SelectorWithWidgetPreference(context);
+            mResolutionPreferences.put(modeStr, mode);
+            SelectorWithWidgetPreference pref = new SelectorWithWidgetPreference(context);
             pref.setPersistent(false);
             pref.setKey(modeStr);
             int width = mode.getPhysicalWidth();
             int height = mode.getPhysicalHeight();
             pref.setTitle(
                     createAccessibleSequence(
-                            width + " x " + height,
+                            modeToReadableString(mode),
                             getResources()
                                     .getString(
                                             R.string.screen_resolution_delimiter_a11y,
@@ -328,20 +326,11 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
 
     private void onDisplayModeClicked(
             @NonNull SelectorWithWidgetPreference preference, @NonNull DisplayDevice display) {
-        if (mInjector == null) {
+        Mode mode = mResolutionPreferences.get(preference.getKey());
+        if (mode == null || mInjector == null) {
             return;
         }
-        String[] modeResolution = preference.getKey().split("x");
-        int width = Integer.parseInt(modeResolution[0]);
-        int height = Integer.parseInt(modeResolution[1]);
-        for (var mode : display.getSupportedModes()) {
-            if (mode.getPhysicalWidth() == width
-                    && mode.getPhysicalHeight() == height
-                    && isAllowedMode(mode)) {
-                mInjector.setUserPreferredDisplayMode(display.getId(), mode);
-                return;
-            }
-        }
+        mInjector.setUserPreferredDisplayMode(display.getId(), mode);
     }
 
     private void updateDisplayModeLimits(@Nullable Context context) {
@@ -369,5 +358,52 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         Log.d(TAG, "mExternalDisplayPeakWidth=" + mExternalDisplayPeakWidth);
         Log.d(TAG, "mExternalDisplayPeakHeight=" + mExternalDisplayPeakHeight);
         Log.d(TAG, "mRefreshRateSynchronizationEnabled=" + mRefreshRateSynchronizationEnabled);
+    }
+
+    private @Nullable Mode getSelectedMode() {
+        Mode mode = getSelectedMode(mTopOptionsPreference);
+        if (mode != null) {
+            return mode;
+        }
+        return getSelectedMode(mMoreOptionsPreference);
+    }
+
+    private @Nullable Mode getSelectedMode(@Nullable PreferenceGroup group) {
+        if (group == null) {
+            return null;
+        }
+        for (int i = 0; i < group.getPreferenceCount(); i++) {
+            SelectorWithWidgetPreference pref =
+                    (SelectorWithWidgetPreference) group.getPreference(i);
+            if (pref.isChecked()) {
+                return mResolutionPreferences.get(pref.getKey());
+            }
+        }
+        return null;
+    }
+
+    private String modeToPrefKey(@Nullable Mode m) {
+        if (m == null) {
+            return "";
+        }
+        return toPrefKey(m.getPhysicalWidth(), m.getPhysicalHeight());
+    }
+
+    private String rotatedModeToPrefKey(@Nullable Mode m) {
+        if (m == null) {
+            return "";
+        }
+        return toPrefKey(m.getPhysicalHeight(), m.getPhysicalWidth());
+    }
+
+    private String toPrefKey(int w, int h) {
+        return w + "x" + h;
+    }
+
+    private String modeToReadableString(@Nullable Mode m) {
+        if (m == null) {
+            return "";
+        }
+        return m.getPhysicalWidth() + " x " + m.getPhysicalHeight();
     }
 }

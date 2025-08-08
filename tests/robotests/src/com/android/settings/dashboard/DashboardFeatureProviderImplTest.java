@@ -32,6 +32,7 @@ import static com.android.settingslib.drawer.TileUtils.PROFILE_ALL;
 import static com.android.settingslib.drawer.TileUtils.PROFILE_PRIMARY;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.util.concurrent.MoreExecutors.directExecutor;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -56,6 +57,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Pair;
@@ -100,13 +102,14 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowIcon;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUserManager.class)
+@Config(shadows = {ShadowUserManager.class, ShadowIcon.class})
 public class DashboardFeatureProviderImplTest {
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -161,6 +164,7 @@ public class DashboardFeatureProviderImplTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mImpl = new DashboardFeatureProviderImpl(mContext);
         mFragment = new TestFragment();
+        ShadowIcon.overrideExecutor(directExecutor());
     }
 
     @Test
@@ -176,8 +180,10 @@ public class DashboardFeatureProviderImplTest {
         doReturn(Icon.createWithBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565)))
                 .when(tile).getIcon(any(Context.class));
         mActivityInfo.metaData.putString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS, "HI");
+
         mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(preference.getTitle()).isEqualTo(mContext.getText(R.string.settings_label));
         assertThat(preference.getSummary())
@@ -196,9 +202,11 @@ public class DashboardFeatureProviderImplTest {
         mSwitchMetaData.putInt(META_DATA_KEY_ORDER, 10);
         doReturn(Icon.createWithBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565)))
                 .when(tile).getIcon(any(Context.class));
+
         final List<DynamicDataObserver> observers = mImpl.bindPreferenceToTileAndGetObservers(
                 mActivity, mFragment, mForceRoundedIcon, preference, tile, null /* key*/,
                 Preference.DEFAULT_ORDER);
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(preference.getTitle()).isEqualTo(mContext.getText(R.string.settings_label));
         assertThat(preference.getSummary())
@@ -456,6 +464,7 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON, R.drawable.ic_add_40dp);
 
         mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
 
         final Bitmap preferenceBmp = Utils.createIconWithDrawable(preference.getIcon()).getBitmap();
         final Drawable staticIcon = Icon.createWithResource(mActivityInfo.packageName,
@@ -475,6 +484,7 @@ public class DashboardFeatureProviderImplTest {
                 "content://com.android.settings/tile_icon");
 
         mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(preference.getIcon()).isNotNull();
     }
@@ -491,6 +501,7 @@ public class DashboardFeatureProviderImplTest {
                 "content://com.android.settings/tile_icon");
 
         mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
 
         final Bitmap preferenceBmp = Utils.createIconWithDrawable(preference.getIcon()).getBitmap();
         final Drawable staticIcon = Icon.createWithResource(mActivityInfo.packageName,
@@ -515,6 +526,7 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
 
         mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(preference.getIcon()).isNull();
     }
