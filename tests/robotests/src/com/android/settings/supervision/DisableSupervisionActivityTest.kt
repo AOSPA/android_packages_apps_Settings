@@ -22,7 +22,6 @@ import android.app.supervision.SupervisionManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.UserInfo
-import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_FULL_SECONDARY
 import android.os.UserManager.USER_TYPE_FULL_SYSTEM
@@ -91,7 +90,7 @@ class DisableSupervisionActivityTest {
 
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-            on { removeUser(UserHandle(SUPERVISING_USER_ID)) } doReturn true
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
         }
         mockSupervisionManager.stub {
             on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
@@ -137,7 +136,7 @@ class DisableSupervisionActivityTest {
 
         verify(mockSupervisionManager).setSupervisionEnabled(false)
         verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
-        verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
         verifyRemoveSupervisionRole(/* times= */ 0) // Role removal is not called
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
         assertThat(mActivity.isFinishing).isTrue()
@@ -153,7 +152,7 @@ class DisableSupervisionActivityTest {
 
         verify(mockSupervisionManager).setSupervisionEnabled(false)
         verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
-        verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
         verifyRemoveSupervisionRole(/* times= */ 1).firstValue.accept(true) // Role removal succeeds
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
         assertThat(mActivity.isFinishing).isTrue()
@@ -190,7 +189,7 @@ class DisableSupervisionActivityTest {
 
         verify(mockSupervisionManager).setSupervisionEnabled(false)
         verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
-        verify(mockUserManager, never()).removeUser(any<UserHandle>())
+        verify(mockUserManager, never()).removeUserEvenWhenDisallowed(any<Int>())
         verifyRemoveSupervisionRole(/* times= */ 1).firstValue.accept(true) // Role removal succeeds
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
         assertThat(mActivity.isFinishing).isTrue()
@@ -219,7 +218,7 @@ class DisableSupervisionActivityTest {
         verify(mockSupervisionManager).setSupervisionEnabled(false)
         verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
         // Verify the supervised user is removed
-        verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
         // Verify role removal is NOT called (caller didn't have the role)
         verifyRemoveSupervisionRole(/* times= */ 0)
         // Verify activity finishes successfully
@@ -250,7 +249,7 @@ class DisableSupervisionActivityTest {
         verify(mockSupervisionManager).setSupervisionEnabled(false)
         verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
         // Verify the supervised user is removed
-        verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
         // Verify role removal is NOT called (caller didn't have the role)
         verifyRemoveSupervisionRole(/* times= */ 0)
         // Verify activity finishes successfully
@@ -279,7 +278,7 @@ class DisableSupervisionActivityTest {
         // Verify supervision is not disabled
         verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
         verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
-        verify(mockUserManager, never()).removeUser(any<UserHandle>())
+        verify(mockUserManager, never()).removeUserEvenWhenDisallowed(any<Int>())
         // Verify role removal is NOT called (caller didn't have the role)
         verifyRemoveSupervisionRole(/* times= */ 0)
         // Verify activity finishes successfully
@@ -309,7 +308,7 @@ class DisableSupervisionActivityTest {
         // Verify supervision is not disabled
         verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
         verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
-        verify(mockUserManager, never()).removeUser(any<UserHandle>())
+        verify(mockUserManager, never()).removeUserEvenWhenDisallowed(any<Int>())
         // Verify role removal is NOT called (caller didn't have the role)
         verifyRemoveSupervisionRole(/* times= */ 0)
         // Verify activity finishes successfully

@@ -136,7 +136,7 @@ fun Context.deleteSupervisionData(): Boolean {
         return false
     }
 
-    val supervisingUser = supervisingUserHandle
+    val supervisingUser = supervisingUserHandle?.identifier
     if (supervisingUser == null) {
         Log.e(TAG, "Can't delete supervision data; supervising user does not exist.")
         return false
@@ -144,7 +144,7 @@ fun Context.deleteSupervisionData(): Boolean {
 
     supervisionManager.setSupervisionEnabled(false)
     supervisionManager.setSupervisionRecoveryInfo(null)
-    return userManager.removeUser(supervisingUser)
+    return userManager.removeUserEvenWhenDisallowed(supervisingUser)
 }
 
 /** Checks if the current profile owner is one of the known supervision packages. */

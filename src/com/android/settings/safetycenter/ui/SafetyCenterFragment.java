@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 The Android Open Source Project
+ * Copyright (C) 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,32 +14,34 @@
  * limitations under the License.
  */
 
-package com.android.settings.inputmethod;
-
-import static com.android.settings.inputmethod.InputPeripheralsSettingsUtils.isMouse;
-import static com.android.settings.inputmethod.InputPeripheralsSettingsUtils.isTouchpad;
+package com.android.settings.safetycenter.ui;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 
-import com.android.settings.R;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-/** Input settings for action corners. */
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ActionCornerFragment extends InputDeviceDashboardFragment {
+/**
+ * Fragment for the  Safety Center UI.
+ *
+ * This fragment hosts the preferences for the Security & privacy settings page
+ * and is searchable when the feature flag is enabled.
+ */
 
-    private static final String TAG = "ActionCornerFragment";
+@SearchIndexable
+public class SafetyCenterFragment extends DashboardFragment {
+    private static final String TAG = "SafetyCenterFragment";
 
-    @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.ACTION_CORNERS;
-    }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.action_corner_customization;
+        return com.android.settings.R.xml.safety_center_main_page;
     }
 
     @Override
@@ -47,16 +49,18 @@ public class ActionCornerFragment extends InputDeviceDashboardFragment {
         return TAG;
     }
 
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.SAFETY_CENTER;
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.action_corner_customization) {
+            new BaseSearchIndexProvider(
+                    com.android.settings.R.xml.safety_center_main_page) {
+
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return isTouchpad() || isMouse();
+                    return Flags.enableSafetyCenterNewUi();
                 }
             };
-
-    @Override
-    protected boolean needToFinishEarly() {
-        return isMouseDetached() && isTouchpadDetached();
-    }
 }

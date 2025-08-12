@@ -5126,9 +5126,13 @@
     <string name="mouse_scrolling_acceleration">Controlled scrolling</string>
     <!-- Title for the 'Scrolling speed' slider seekbar, which controls how fast content scrolls when the user moves the scroll wheel. [CHAR LIMIT=60]-->
     <string name="mouse_scrolling_speed">Scrolling speed</string>
-    <!-- Description for the button that makes mouse pointer speed faster. [CHAR_LIMIT=NONE] -->
+    <!-- Accessibility label for button next to a slider that makes mouse scrolling speed faster. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_scrolling_speed_make_faster_description">Make scrolling faster</string>
+    <!-- Accessibility label for button next to a slider that makes mouse scrolling speed slower. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_scrolling_speed_make_slower_description">Make scrolling slower</string>
+    <!-- Accessibility label for button next to a slider that makes mouse pointer speed faster. [CHAR_LIMIT=NONE] -->
     <string name="mouse_pointer_speed_make_faster_desc">Make pointer faster</string>
-    <!-- Description for the button that makes mouse pointer speed slower. [CHAR_LIMIT=NONE] -->
+    <!-- Accessibility label for button next to a slider that makes mouse pointer speed slower. [CHAR_LIMIT=NONE] -->
     <string name="mouse_pointer_speed_make_slower_desc">Make pointer slower</string>
     <!-- Title for the 'Swap buttons' preference switch, which swaps the left and right buttons of connected mice so that right click will be the primary action button and left clicking will be the secondary action, for example showing the context menu. [CHAR LIMIT=60] -->
     <string name="mouse_swap_primary_button">Swap primary mouse button</string>
@@ -8930,7 +8934,12 @@
     <string name="live_caption_title">Live Caption</string>
 
     <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
-    <string name="live_caption_summary">Automatically caption media</string>
+    <string name="live_caption_summary">Get captions for calls, videos, and other media</string>
+
+    <!-- State and summary when audio captioning is enabled. [CHAR LIMIT=NONE]-->
+    <string name="live_caption_on_summary">On / Get captions for calls, videos, and other media</string>
+    <!-- State and summary when audio captioning is disabled. [CHAR LIMIT=NONE]-->
+    <string name="live_caption_off_summary">Off / Get captions for calls, videos, and other media</string>
 
     <!-- Output device type for the wired headphones that is available for spatializer effect. [CHAR LIMIT=NONE]-->
     <string name="spatial_audio_wired_headphones">Wired headphones</string>
@@ -9379,6 +9388,8 @@
     <!-- [CHAR LIMIT=100] Notification bundle type summary: content recommendations -->
     <string name="notification_bundle_recs_summary">Newsletters, recommended media, and more</string>
 
+    <!-- Notification bundling: text to be displayed when there are no apps excluded from being bundled -->
+    <string name="notification_bundle_no_apps_desc">All apps are currently using notification organizer</string>
 
     <!-- App Info > Notifications: Title for section where notifications AI features can be configured [CHAR LIMIT=80]-->
     <string name="notification_ai_features_title">Manage with AI</string>
@@ -9394,6 +9405,9 @@
     <string name="notification_excluded_apps">Don\'t include these apps</string>
     <string name="notification_app_level_summarize_title">Notification summaries</string>
     <string name="notification_app_level_summarize_subtext">Get quick recaps of longer messages</string>
+
+    <!-- Notification summarization: text to be displayed when there are no messaging apps excluded from being summarized -->
+    <string name="notification_summarization_no_apps_desc">All applicable apps are currently using notification summaries</string>
 
     <!-- App Info > Notifications: Title for section controlling whether this app may show notifications in a promoted format [CHAR LIMIT=80] -->
     <string name="live_notifications">Live notifications</string>

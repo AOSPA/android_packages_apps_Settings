@@ -194,6 +194,7 @@ import com.android.settings.regionalpreferences.RegionPickerFragment;
 import com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment;
 import com.android.settings.regionalpreferences.TemperatureUnitFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
+import com.android.settings.safetycenter.ui.SafetyCenterFragment;
 import com.android.settings.security.ContentProtectionPreferenceFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.MemtagPage;
@@ -432,6 +433,7 @@ public class SettingsGateway {
             AppLocalePickerFragment.class.getName(),
             SupervisionDashboardFragment.class.getName(),
             SummarizationPreferenceFragment.class.getName(),
+            SafetyCenterFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

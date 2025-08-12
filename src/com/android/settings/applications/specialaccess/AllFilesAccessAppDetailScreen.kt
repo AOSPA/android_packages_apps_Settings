@@ -16,35 +16,36 @@
 
 package com.android.settings.applications.specialaccess
 
-import android.Manifest.permission.CHANGE_WIFI_STATE
-import android.Manifest.permission.NETWORK_SETTINGS
+import android.Manifest.permission.MANAGE_EXTERNAL_STORAGE
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.content.pm.PackageInfo.REQUESTED_PERMISSION_GRANTED
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Process
 import android.os.UserHandle
 import androidx.core.net.toUri
 import com.android.settings.R
-import com.android.settings.Settings.ChangeWifiStateActivity
+import com.android.settings.Settings.ManageExternalStorageActivity
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
+import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
+import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settings.utils.highlightPreference
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
-import kotlin.collections.indexOf
 
 /**
- * The app detail catalyst screen for "Wi-Fi control" special app access.
+ * The app detail catalyst screen for "All files access" special app access.
  *
- * This screen is accessible from: Settings > Apps > Special app access > Wi-Fi control > [app name]
+ * This screen is accessible from: Settings > Apps > Special app access > All files
+ * access > [app name]
  */
-@ProvidePreferenceScreen(WifiControlAppDetailScreen.KEY, parameterized = true)
-open class WifiControlAppDetailScreen(context: Context, arguments: Bundle) :
+@ProvidePreferenceScreen(AllFilesAccessAppDetailScreen.KEY, parameterized = true)
+open class AllFilesAccessAppDetailScreen(context: Context, arguments: Bundle) :
     SpecialAccessAppDetailScreen(context, arguments) {
 
     override val key
@@ -54,47 +55,53 @@ open class WifiControlAppDetailScreen(context: Context, arguments: Bundle) :
         get() = "$KEY-$packageName"
 
     override val screenTitle
-        get() = R.string.change_wifi_state_title
+        get() = R.string.manage_external_storage_title
 
     override val op
-        get() = AppOpsManager.OP_CHANGE_WIFI_STATE
+        get() = AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE
+
+    override val setModeByUid: Boolean?
+        get() = true
 
     override val switchPreferenceTitle
-        get() = R.string.change_wifi_state_app_detail_switch
+        get() = R.string.permit_manage_external_storage
 
     override val footerPreferenceTitle
-        get() = R.string.change_wifi_state_app_detail_summary
+        get() = R.string.allow_manage_external_storage_description
 
-    // Edge case: what if the app's change wifi state permission is revoked/granted
+    // Edge case: what if the app's read permission is revoked/granted
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&
-            hasChangeWifiStateControlPermission(context, packageInfo?.applicationInfo)
+            hasManageExternalStoragePermission(context, packageInfo?.applicationInfo)
 
-    override fun getMetricsCategory() = SettingsEnums.CONFIGURE_WIFI
+    override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
+    override fun tags(context: Context) =
+        arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+
     override fun getAccessChangeActionMetrics(allowed: Boolean): Int =
         when (allowed) {
-            true -> SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_ALLOW
-            else -> SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_DENY
+            true -> SettingsEnums.APP_SPECIAL_PERMISSION_MANAGE_EXT_STRG_ALLOW
+            else -> SettingsEnums.APP_SPECIAL_PERMISSION_MANAGE_EXT_STRG_DENY
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, ChangeWifiStateActivity::class.java, metadata?.key).apply {
+        makeLaunchIntent(context, ManageExternalStorageActivity::class.java, metadata?.key).apply {
             data = "package:$packageName".toUri()
             highlightPreference(arguments, metadata?.bindingKey)
         }
 
     companion object {
-        const val KEY = "sa_wfc_app_detail"
+        const val KEY = "sa_afa_app_detail"
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 
         fun parameters(context: Context, showSystemApp: Boolean) =
-            parameters(context, showSystemApp, ::hasChangeWifiStateControlPermission)
+            parameters(context, showSystemApp, ::hasManageExternalStoragePermission)
 
-        private fun hasChangeWifiStateControlPermission(
+        private fun hasManageExternalStoragePermission(
             context: Context,
             appInfo: ApplicationInfo?,
         ): Boolean {
@@ -110,19 +117,18 @@ open class WifiControlAppDetailScreen(context: Context, arguments: Bundle) :
                     return false
                 }
 
-            // NETWORK_SETTINGS permission trumps CHANGE_WIFI_CONFIG.
-            if (isPermissionGranted(packageInfo, NETWORK_SETTINGS)) {
-                return false
-            }
-
-            return isPermissionGranted(packageInfo, CHANGE_WIFI_STATE)
-        }
-
-        private fun isPermissionGranted(packageInfo: PackageInfo?, permission: String): Boolean {
-            val index = packageInfo?.requestedPermissions?.indexOf(permission) ?: -1
+            val index = packageInfo?.requestedPermissions?.indexOf(MANAGE_EXTERNAL_STORAGE) ?: -1
             val flags = if (index >= 0) packageInfo?.requestedPermissionsFlags!![index] else 0
 
-            return (flags and REQUESTED_PERMISSION_GRANTED) != 0
+            return (flags and REQUESTED_PERMISSION_GRANTED) != 0 &&
+                !isSystemOrRootUid(appInfo) &&
+                isNotChangeablePackages(appInfo)
         }
+
+        private fun isSystemOrRootUid(appInfo: ApplicationInfo): Boolean =
+            UserHandle.getAppId(appInfo.uid) in listOf(Process.SYSTEM_UID, Process.ROOT_UID)
+
+        private fun isNotChangeablePackages(appInfo: ApplicationInfo): Boolean =
+            appInfo.packageName !in setOf("com.android.systemui")
     }
 }

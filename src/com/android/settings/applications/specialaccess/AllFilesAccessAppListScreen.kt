@@ -19,40 +19,43 @@ package com.android.settings.applications.specialaccess
 import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
-import com.android.settings.Settings.ChangeWifiStateActivity
+import com.android.settings.Settings.ManageExternalStorageActivity
+import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 
 /**
- * Catalyst screen to display the list of special apps with "Wi-Fi control" permission.
+ * Catalyst screen to display the list of special apps with "All files access" permission.
  *
- * This screen is accessible from: Settings > Apps > Special app access > Wi-Fi control
+ * This screen is accessible from: Settings > Apps > Special app access > All files access
  */
-@ProvidePreferenceScreen(WifiControlAppListScreen.KEY)
-open class WifiControlAppListScreen : SpecialAccessAppListScreen() {
+@ProvidePreferenceScreen(AllFilesAccessAppListScreen.KEY)
+open class AllFilesAccessAppListScreen : SpecialAccessAppListScreen() {
 
     override val key: String
         get() = KEY
 
     override val title: Int
-        get() = R.string.change_wifi_state_title
+        get() = R.string.manage_external_storage_title
 
     override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
+    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
+
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, ChangeWifiStateActivity::class.java, metadata?.key)
+        makeLaunchIntent(context, ManageExternalStorageActivity::class.java, metadata?.key)
 
     override val appDetailScreenKey: String
-        get() = WifiControlAppDetailScreen.KEY
+        get() = AllFilesAccessAppDetailScreen.KEY
 
     override fun appDetailParameters(context: Context, hierarchyType: Boolean) =
-        WifiControlAppDetailScreen.parameters(context, hierarchyType)
+        AllFilesAccessAppDetailScreen.parameters(context, hierarchyType)
 
     companion object {
-        const val KEY = "sa_wfc_app_list"
+        const val KEY = "sa_afa_app_list"
     }
 }

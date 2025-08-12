@@ -18,41 +18,41 @@ package com.android.settings.applications.specialaccess
 
 import android.app.settings.SettingsEnums
 import android.content.Context
-import com.android.settings.R
-import com.android.settings.Settings.ChangeWifiStateActivity
+import com.android.settings.Settings.AlarmsAndRemindersActivity
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.R
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 
 /**
- * Catalyst screen to display the list of special apps with "Wi-Fi control" permission.
+ * Catalyst screen to display the list of special apps with "Alarms & reminders" permission.
  *
- * This screen is accessible from: Settings > Apps > Special app access > Wi-Fi control
+ * This screen is accessible from: Settings > Apps > Special app access > Alarms & reminders
  */
-@ProvidePreferenceScreen(WifiControlAppListScreen.KEY)
-open class WifiControlAppListScreen : SpecialAccessAppListScreen() {
+@ProvidePreferenceScreen(AlarmsAndRemindersAppListScreen.KEY)
+open class AlarmsAndRemindersAppListScreen : SpecialAccessAppListScreen() {
 
     override val key: String
         get() = KEY
 
     override val title: Int
-        get() = R.string.change_wifi_state_title
+        get() = R.string.alarms_and_reminders_title
 
     override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, ChangeWifiStateActivity::class.java, metadata?.key)
+        makeLaunchIntent(context, AlarmsAndRemindersActivity::class.java, metadata?.key)
 
     override val appDetailScreenKey: String
-        get() = WifiControlAppDetailScreen.KEY
+        get() = AlarmsAndRemindersAppDetailScreen.KEY
 
     override fun appDetailParameters(context: Context, hierarchyType: Boolean) =
-        WifiControlAppDetailScreen.parameters(context, hierarchyType)
+        AlarmsAndRemindersAppDetailScreen.parameters(context, hierarchyType)
 
     companion object {
-        const val KEY = "sa_wfc_app_list"
+        const val KEY = "sa_aar_app_list"
     }
 }
