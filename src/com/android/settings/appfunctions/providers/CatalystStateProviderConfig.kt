@@ -87,6 +87,7 @@ import com.android.settings.spa.app.catalyst.AppInfoInteractAcrossProfilesScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
+import com.android.settings.spa.app.catalyst.AppsFullScreenIntentScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
 import com.android.settings.supervision.SupervisionPinManagementScreen
 import com.android.settings.supervision.SupervisionWebContentFiltersScreen
@@ -315,6 +316,7 @@ private fun getCatalystScreenConfigs() =
             screenKey = WifiHotspotScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
+        PerScreenCatalystConfig(enabled = true, screenKey = AppsFullScreenIntentScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =

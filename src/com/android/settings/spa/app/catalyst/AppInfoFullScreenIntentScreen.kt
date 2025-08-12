@@ -36,6 +36,7 @@ import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
@@ -43,7 +44,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-//@ProvidePreferenceScreen(AppInfoFullScreenIntentScreen.KEY, parameterized = true)
+@ProvidePreferenceScreen(AppInfoFullScreenIntentScreen.KEY, parameterized = true)
 open class AppInfoFullScreenIntentScreen(context: Context, override val arguments: Bundle) :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider {
 
