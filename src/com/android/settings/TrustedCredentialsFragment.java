@@ -64,6 +64,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.app.UnlaunchableAppActivity;
@@ -846,7 +847,8 @@ public class TrustedCredentialsFragment extends ObservableFragment
         }
     }
 
-    /* package */ static class CertHolder implements Comparable<CertHolder> {
+    @VisibleForTesting
+    public static class CertHolder implements Comparable<CertHolder> {
         public int mProfileId;
         private final IKeyChainService mService;
         private final GroupAdapter mAdapter;

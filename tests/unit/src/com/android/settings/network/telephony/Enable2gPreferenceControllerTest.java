@@ -147,7 +147,10 @@ public final class Enable2gPreferenceControllerTest {
     @Test
     public void setChecked_disabledByAdmin_returnFalse() {
         when2gIsDisabledByAdmin(true);
+
         assertThat(mController.setChecked(false)).isFalse();
+        verify(mPreference).useAdminDisabledSummary(true);
+        verify(mPreference).getRestrictedPreferenceHelper();
     }
 
     @Test
@@ -225,6 +228,26 @@ public final class Enable2gPreferenceControllerTest {
 
     @Test
     public void updateState_simNameAsSummary() {
+        when2gIsDisabledByAdmin(false);
+        String simName = "SIM1";
+        SubscriptionInfo subscriptionInfo = new SubscriptionInfo.Builder()
+                .setId(SUB_ID)
+                .setDisplayName(simName)
+                .build();
+        List<SubscriptionInfo> subInfos = new ArrayList();
+        subInfos.add(subscriptionInfo);
+        when(mSubscriptionManager.getAllSubscriptionInfoList()).thenReturn(subInfos);
+        mController.init(SUB_ID, true);
+
+        mController.updateState((Preference) mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.getSummary().toString()).isEqualTo(simName);
+    }
+
+    @Test
+    public void updateState_simNameAsSummary_2gPreferenceDisableByAdmin() {
+        when2gIsDisabledByAdmin(true);
         String simName = "SIM1";
         SubscriptionInfo subscriptionInfo = new SubscriptionInfo.Builder()
                 .setId(SUB_ID)

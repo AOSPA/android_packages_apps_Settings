@@ -17,7 +17,9 @@
 package com.android.settings.connecteddevice.display
 
 import android.os.Bundle
+import android.view.InputDevice
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -27,6 +29,7 @@ import com.android.settings.R
 import com.android.settings.core.SettingsBaseActivity
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
 import com.google.common.collect.HashBiMap
+import kotlin.math.min
 
 /**
  * The main fragment that holds both the DisplayTopologyPreferenceView and the
@@ -77,6 +80,7 @@ open class TabbedDisplayPreferenceFragment(
         selectedDisplayPrefContainer = view.findViewById(R.id.selected_display_preference_container)
         noDisplayConnectedLayout = view.findViewById(R.id.no_display_connected_layout)
 
+        setupAppBarLayout()
         setupDisplayTopologyPreferenceView(view)
         setupSelectedDisplayPreferenceFragment(savedInstanceState)
         startListeningForUpdates()
@@ -86,6 +90,9 @@ open class TabbedDisplayPreferenceFragment(
         super.onDestroyView()
         if (::displayTopologyPreferenceView.isInitialized) {
             displayTopologyPreferenceView.removeOnDisplayBlockSelectedListener()
+        }
+        if (::appBarLayout.isInitialized) {
+            appBarLayout.setOnGenericMotionListener(null)
         }
         getCurrentActivity()?.removeOnItemSelectedListener()
     }
@@ -138,6 +145,27 @@ open class TabbedDisplayPreferenceFragment(
         appBarLayout.visibility = View.GONE
         selectedDisplayPrefContainer.visibility = View.GONE
         noDisplayConnectedLayout.visibility = View.VISIBLE
+    }
+
+    private fun setupAppBarLayout() {
+        // TODO(b/428853467): AppBarLayout doesn't support mouse scrolling
+        appBarLayout.setOnGenericMotionListener { view, event ->
+            if (
+                event.action != MotionEvent.ACTION_SCROLL ||
+                    !event.isFromSource(InputDevice.SOURCE_MOUSE)
+            ) {
+                return@setOnGenericMotionListener false
+            }
+            // Propagate scroll events to selectedDisplayPrefContainer to match the
+            // `appbar_scrolling_view_behavior` property
+            val newEvent = MotionEvent.obtain(event)
+            // Limit the Y position as any yCoord >= target.height will be ignored
+            val maxY = min(newEvent.y, (selectedDisplayPrefContainer.height - 1).toFloat())
+            newEvent.offsetLocation(/* deltaX= */ 0f, maxY - newEvent.y)
+            selectedDisplayPrefContainer.dispatchGenericMotionEvent(newEvent)
+            newEvent.recycle()
+            return@setOnGenericMotionListener true
+        }
     }
 
     private fun setupDisplayTopologyPreferenceView(layoutView: View) {

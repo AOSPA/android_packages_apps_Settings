@@ -36,6 +36,7 @@ import com.android.settings.appfunctions.sources.OpenByDefaultStateSource
 import com.android.settings.appfunctions.sources.RecentAppsStateSource
 import com.android.settings.appfunctions.sources.ScreenTimeoutStateSource
 import com.android.settings.appfunctions.sources.SharedDeviceStateData
+import com.android.settings.appfunctions.sources.WifiStatusStateSource
 import com.android.settings.appfunctions.sources.ZenModesStateSource
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -66,6 +67,7 @@ class AndroidApiStateProvider(private val context: Context) : DeviceStateProvide
             OpenByDefaultStateSource(),
             RecentAppsStateSource(),
             ScreenTimeoutStateSource(),
+            WifiStatusStateSource(),
             ZenModesStateSource(),
             // Add other sources instances here
         )
