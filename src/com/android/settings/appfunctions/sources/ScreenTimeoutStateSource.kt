@@ -18,13 +18,14 @@ package com.android.settings.appfunctions.sources
 
 import android.content.Context
 import android.provider.Settings
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 import java.util.concurrent.TimeUnit
 
 class ScreenTimeoutStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_UNCATEGORIZED
 
     override suspend fun get(
         context: Context,
@@ -38,7 +39,12 @@ class ScreenTimeoutStateSource : DeviceStateSource {
             )
         val screenTimeoutSeconds = TimeUnit.MILLISECONDS.toSeconds(screenTimeoutMilliseconds)
 
-        val item = DeviceStateItem(key = "screen_timeout", jsonValue = "$screenTimeoutSeconds s")
+        val item =
+            DeviceStateItem(
+                key = "screen_timeout",
+                purpose = "screen_timeout",
+                jsonValue = "$screenTimeoutSeconds s",
+            )
 
         return PerScreenDeviceStates(
             description = "Screen timeout",

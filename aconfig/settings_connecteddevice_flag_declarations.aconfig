@@ -72,3 +72,13 @@ flag {
         purpose: PURPOSE_BUGFIX
     }
 }
+
+flag {
+    name: "enable_resolution_apply_confirmation_bugfix"
+    namespace: "display_manager"
+    description: "Shows dialog to let user confirms if the resolution selected should be persisted"
+    bug: "421018668"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
+}

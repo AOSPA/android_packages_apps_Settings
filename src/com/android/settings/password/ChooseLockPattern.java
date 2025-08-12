@@ -58,9 +58,12 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.flags.Flags;
+import com.android.settings.msds.MSDLPlayerWrapper;
 import com.android.settings.notification.RedactionInterstitial;
 
 import com.google.android.collect.Lists;
+import com.google.android.msdl.data.model.MSDLToken;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
@@ -454,6 +457,10 @@ public class ChooseLockPattern extends SettingsActivity {
         private static final String KEY_PATTERN_CHOICE = "chosenPattern";
         private static final String KEY_CURRENT_PATTERN = "currentPattern";
 
+        private final LockPatternView.ExternalHapticsPlayer mExternalHapticsPlayer = () -> {
+            MSDLPlayerWrapper.INSTANCE.playToken(MSDLToken.DRAG_INDICATOR_DISCRETE);
+        };
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -559,6 +566,9 @@ public class ChooseLockPattern extends SettingsActivity {
             mHeaderText.setMinLines(2);
             mDefaultHeaderColorList = mHeaderText.getTextColors();
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
+            if (Flags.msdlFeedback()) {
+                mLockPatternView.setExternalHapticsPlayer(mExternalHapticsPlayer);
+            }
             mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
             mLockPatternView.setFadePattern(false);
             mLockPatternView.setClickable(false);
@@ -626,6 +636,9 @@ public class ChooseLockPattern extends SettingsActivity {
                 setRightButtonEnabled(false);
                 mSaveAndFinishWorker.setListener(this);
             }
+            if (mLockPatternView != null && Flags.msdlFeedback()) {
+                mLockPatternView.setExternalHapticsPlayer(mExternalHapticsPlayer);
+            }
         }
 
         @Override
@@ -634,6 +647,9 @@ public class ChooseLockPattern extends SettingsActivity {
             if (mSaveAndFinishWorker != null) {
                 mSaveAndFinishWorker.setListener(null);
             }
+            if (mLockPatternView != null) {
+                mLockPatternView.setExternalHapticsPlayer(null);
+            }
         }
 
         @Override
@@ -641,6 +657,9 @@ public class ChooseLockPattern extends SettingsActivity {
             super.onDestroy();
             if (mCurrentCredential != null) {
                 mCurrentCredential.zeroize();
+            }
+            if (mLockPatternView != null) {
+                mLockPatternView.setExternalHapticsPlayer(null);
             }
             // Force a garbage collection immediately to remove remnant of user password shards
             // from memory.

@@ -24,8 +24,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.extensions.appfunctions.AppFunctionException
 import com.android.extensions.appfunctions.ExecuteAppFunctionRequest
 import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
-import com.android.settings.appfunctions.providers.DeviceStateProvider
-import com.android.settings.appfunctions.providers.DeviceStateProviderResult
+import com.android.settings.appfunctions.providers.DeviceStateExecutor
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 import com.google.common.truth.Truth.assertThat
 import java.util.Locale
@@ -46,7 +45,7 @@ class AbstractDeviceStateAppFunctionServiceTest {
 
     @get:Rule val mockitoRule = MockitoJUnit.rule()
 
-    @Mock private lateinit var mockProvider: DeviceStateProvider
+    @Mock private lateinit var mockProvider: DeviceStateExecutor
     @Mock
     private lateinit var mockCallback:
         OutcomeReceiver<ExecuteAppFunctionResponse, AppFunctionException>
@@ -57,7 +56,7 @@ class AbstractDeviceStateAppFunctionServiceTest {
 
     // Test implementation of the abstract class that allows injecting mocks
     private class TestDeviceStateAppFunctionService(
-        override val providers: List<DeviceStateProvider>,
+        override val deviceStateProviderExecutors: List<DeviceStateExecutor>
     ) : AbstractDeviceStateAppFunctionService() {
         init {
             // Attach a base context to allow applicationContext to be used
@@ -98,15 +97,16 @@ class AbstractDeviceStateAppFunctionServiceTest {
         val request =
             ExecuteAppFunctionRequest.Builder(
                     "test.package",
-                    DeviceStateCategory.STORAGE.functionId,
+                    DeviceStateAppFunctionType.GET_STORAGE.functionId,
                 )
                 .build()
         val providerResult =
-            DeviceStateProviderResult(
+            DeviceStateProviderExecutorResult(
                 states = listOf(PerScreenDeviceStates(description = "Storage State")),
                 hintText = "Storage Hint",
             )
-        `when`(mockProvider.provide(DeviceStateCategory.STORAGE)).thenReturn(providerResult)
+        `when`(mockProvider.execute(DeviceStateAppFunctionType.GET_STORAGE))
+            .thenReturn(providerResult)
 
         // Act
         service.onExecuteFunction(request, "test.package", CancellationSignal(), mockCallback)

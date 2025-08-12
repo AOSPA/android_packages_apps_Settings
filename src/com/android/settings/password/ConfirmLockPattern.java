@@ -57,10 +57,13 @@ import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.Utils;
+import com.android.settings.flags.Flags;
+import com.android.settings.msds.MSDLPlayerWrapper;
 import com.android.settingslib.animation.AppearAnimationCreator;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
+import com.google.android.msdl.data.model.MSDLToken;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
@@ -123,6 +126,10 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private boolean mIsManagedProfile;
 
+        private final LockPatternView.ExternalHapticsPlayer mExternalHapticsPlayer = () -> {
+            MSDLPlayerWrapper.INSTANCE.playToken(MSDLToken.DRAG_INDICATOR_DISCRETE);
+        };
+
         // required constructor for fragments
         public ConfirmLockPatternFragment() {
 
@@ -141,6 +148,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             View view = inflater.inflate(layoutId, container, false);
             mGlifLayout = view.findViewById(R.id.setup_wizard_layout);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
+            if (Flags.msdlFeedback() && mLockPatternView != null) {
+                mLockPatternView.setExternalHapticsPlayer(mExternalHapticsPlayer);
+            }
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
             // TODO(b/243008023) Workaround for Glif layout on 2 panel choose lock settings.
             mSudContent = mGlifLayout.findViewById(
@@ -279,6 +289,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (mSaveAndFinishWorker != null) {
                 mSaveAndFinishWorker.setListener(null);
             }
+            if (mLockPatternView != null) {
+                mLockPatternView.setExternalHapticsPlayer(null);
+            }
         }
 
         @Override
@@ -310,6 +323,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             }
             if (mSaveAndFinishWorker != null) {
                 mSaveAndFinishWorker.setListener(this);
+            }
+            if (mLockPatternView != null && Flags.msdlFeedback()) {
+                mLockPatternView.setExternalHapticsPlayer(mExternalHapticsPlayer);
             }
         }
 

@@ -18,8 +18,11 @@ package com.android.settings.connecteddevice.display
 
 import android.content.Context
 import android.content.res.Resources
+import android.os.Bundle
+import android.os.Looper
 import android.view.View
 import android.widget.TextView
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.testing.EmptyFragmentActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
@@ -40,6 +43,7 @@ import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
+import org.robolectric.Shadows.shadowOf
 
 /** Unit tests for [ResolutionPreferenceFragment]. */
 @RunWith(AndroidJUnit4::class)
@@ -80,17 +84,66 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
 
     @Test
     @UiThreadTest
-    fun testModeChange() {
+    fun testOnModeChange_showsConfirmationDialog() {
+        val display = mDisplays[0]
+        initFragment(display.id)
+        mHandler.flush()
+        val topPref = mPreferenceScreen.findPreference<PreferenceCategory>(TOP_OPTIONS_KEY)!!
+        (topPref.getPreference(1) as SelectorWithWidgetPreference).onClick()
+        shadowOf(Looper.getMainLooper()).idle()
+
+        verify(mMockedInjector)
+            .setUserPreferredDisplayMode(
+                display.id,
+                display.supportedModes[1],
+                /* storeMode= */ false,
+            )
+        assertThat(
+                fragment.parentFragmentManager.findFragmentByTag(ResolutionChangeDialogFragment.TAG)
+            )
+            .isNotNull()
+    }
+
+    @Test
+    @UiThreadTest
+    fun testOnDialogConfirmed_storeUserPreferredDisplayMode() {
         val display = mDisplays[0]
         val displayId = display.id
         initFragment(displayId)
         mHandler.flush()
-        val topPref = mPreferenceScreen.findPreference<PreferenceCategory>(TOP_OPTIONS_KEY)
-        assertThat(topPref).isNotNull()
-        val modePref = topPref!!.getPreference(1) as SelectorWithWidgetPreference
-        modePref.onClick()
-        val mode = display.supportedModes[1]
-        verify(mMockedInjector).setUserPreferredDisplayMode(displayId, mode)
+        val newMode = display.supportedModes[1]
+
+        val bundle = Bundle()
+        bundle.putBoolean(ResolutionChangeDialogFragment.KEY_CONFIRMED, true)
+        bundle.putParcelable(ResolutionChangeDialogFragment.KEY_NEW_MODE, newMode)
+        fragment.setFragmentResult(ResolutionChangeDialogFragment.KEY_RESULT, bundle)
+        shadowOf(Looper.getMainLooper()).idle()
+
+        verify(mMockedInjector)
+            .setUserPreferredDisplayMode(displayId, newMode, /* storeMode= */ true)
+    }
+
+    @Test
+    @UiThreadTest
+    fun testOnDialogCancelled_resetModeAndUi() {
+        val display = mDisplays[0]
+        val displayId = display.id
+        initFragment(displayId)
+        mHandler.flush()
+        val existingMode = display.supportedModes[0]
+
+        val topPref = mPreferenceScreen.findPreference<PreferenceCategory>(TOP_OPTIONS_KEY)!!
+        (topPref.getPreference(1) as SelectorWithWidgetPreference).onClick()
+        shadowOf(Looper.getMainLooper()).idle()
+
+        val bundle = Bundle()
+        bundle.putBoolean(ResolutionChangeDialogFragment.KEY_CONFIRMED, false)
+        bundle.putParcelable(ResolutionChangeDialogFragment.KEY_EXISTING_MODE, existingMode)
+        fragment.setFragmentResult(ResolutionChangeDialogFragment.KEY_RESULT, bundle)
+        shadowOf(Looper.getMainLooper()).idle()
+
+        assertThat((topPref.getPreference(0) as SelectorWithWidgetPreference).isChecked).isTrue()
+        verify(mMockedInjector).resetUserPreferredDisplayMode(displayId)
     }
 
     @Test
@@ -122,6 +175,8 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
                 metricsLogger,
             )
         activityScenario.scenario.onActivity { activity: EmptyFragmentActivity ->
+            // Dialog needs AppCompat theme set
+            activity.setTheme(androidx.appcompat.R.style.Theme_AppCompat)
             activity.supportFragmentManager.beginTransaction().add(fragment, "tag").commitNow()
         }
         fragment.onCreateCallback(null)

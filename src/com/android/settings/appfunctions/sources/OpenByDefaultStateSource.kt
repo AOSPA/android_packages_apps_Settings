@@ -19,13 +19,14 @@ package com.android.settings.appfunctions.sources
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.pm.verify.domain.DomainVerificationManager
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.applications.intentpicker.IntentPickerUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 class OpenByDefaultStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_UNCATEGORIZED
 
     override suspend fun get(
         context: Context,
@@ -50,6 +51,7 @@ class OpenByDefaultStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "preferred_settings_enabled_package_$packageName",
+                    purpose = "preferred_settings_enabled_package_$packageName",
                     jsonValue = isEnabled.toString(),
                     hintText = "App: $appName",
                 )

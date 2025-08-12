@@ -18,13 +18,14 @@ package com.android.settings.appfunctions.sources
 
 import android.app.AutomaticZenRule
 import android.content.Context
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.notification.modes.ZenModesBackend
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 class ZenModesStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_UNCATEGORIZED
 
     override suspend fun get(
         context: Context,
@@ -42,9 +43,17 @@ class ZenModesStateSource : DeviceStateSource {
         }
 
         val dndItem =
-            DeviceStateItem(key = "zen_mode_dnd_active", jsonValue = isDndActive.toString())
+            DeviceStateItem(
+                key = "zen_mode_dnd_active",
+                purpose = "zen_mode_dnd_active",
+                jsonValue = isDndActive.toString(),
+            )
         val bedtimeItem =
-            DeviceStateItem(key = "zen_mode_bedtime_active", jsonValue = isBedtimeActive.toString())
+            DeviceStateItem(
+                key = "zen_mode_bedtime_active",
+                purpose = "zen_mode_bedtime_active",
+                jsonValue = isBedtimeActive.toString(),
+            )
 
         return PerScreenDeviceStates(
             description = "Modes",

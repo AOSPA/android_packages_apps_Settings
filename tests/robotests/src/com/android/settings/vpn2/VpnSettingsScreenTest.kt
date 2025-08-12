@@ -28,7 +28,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.Implementation
 import org.robolectric.annotation.Implements
 
-@Config(shadows = [ShadowRestrictedDashboardFragment::class])
+@Config(shadows = [ShadowRestrictedDashboardFragment::class, ShadowUpdatePreferences::class])
 class VpnSettingsScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = VpnSettingsScreen()
 
@@ -47,6 +47,11 @@ class VpnSettingsScreenTest : SettingsCatalystTestCase() {
         assertThat(underTest.component?.className)
             .isEqualTo(Settings.VpnSettingsActivity::class.java.getName())
     }
+}
+
+@Implements(VpnSettings.UpdatePreferences::class)
+class ShadowUpdatePreferences {
+    @Implementation fun run() {}
 }
 
 @Implements(RestrictedDashboardFragment::class)

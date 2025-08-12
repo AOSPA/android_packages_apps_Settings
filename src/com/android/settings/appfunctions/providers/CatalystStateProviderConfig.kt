@@ -24,8 +24,6 @@ import com.android.settings.accessibility.VibrationScreen
 import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityScreen
 import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceScreen
 import com.android.settings.accessibility.flashnotifications.ui.FlashNotificationsScreen
-import com.android.settings.accessibility.hearingdevices.ui.HearingDevicesScreen
-import com.android.settings.accessibility.screenmagnification.ui.MagnificationScreen
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen
 import com.android.settings.accounts.AccountScreen
 import com.android.settings.applications.AppDashboardScreen
@@ -123,13 +121,15 @@ data class DeviceStateItemConfig(
  *
  * @param enabled whether expose device states on this screen to App Functions.
  * @param screenKey the unique ID for the screen.
- * @param category the device state category of the screen. The default is UNCATEGORIZED.
+ * @param appFunctionTypes the app function associated with this screen. The default is
+ *   UNCATEGORIZED.
  */
 data class PerScreenCatalystConfig(
     val enabled: Boolean,
     val screenKey: String,
     // TODO(b/405344827): map categories to PreferenceMetadata#tags
-    val category: Set<DeviceStateCategory> = setOf(DeviceStateCategory.UNCATEGORIZED),
+    val appFunctionTypes: Set<DeviceStateAppFunctionType> =
+        setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
 )
 
 /**
@@ -158,7 +158,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = BatterySaverScreen.KEY,
-            category = setOf(DeviceStateCategory.BATTERY),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LockScreenPreferenceScreen.KEY),
@@ -167,7 +167,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = NetworkProviderScreen.KEY,
-            category = setOf(DeviceStateCategory.MOBILE_DATA),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = false, screenKey = LanguageAndRegionScreen.KEY),
         PerScreenCatalystConfig(enabled = false, screenKey = ModuleLicensesScreen.KEY),
@@ -176,30 +176,30 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = LocationScreen.KEY,
-            category = setOf(DeviceStateCategory.UNCATEGORIZED),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = RecentLocationAccessScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = MobileNetworkListScreen.KEY,
-            category = setOf(DeviceStateCategory.MOBILE_DATA),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = MyDeviceInfoScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DataSaverScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = NetworkDashboardScreen.KEY,
-            category = setOf(DeviceStateCategory.MOBILE_DATA),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = PowerUsageSummaryScreen.KEY,
-            category = setOf(DeviceStateCategory.BATTERY),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
         ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = PowerUsageAdvancedScreen.KEY,
-            category = setOf(DeviceStateCategory.BATTERY),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ScreenTimeoutScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = SoundScreen.KEY),
@@ -207,7 +207,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = TetherScreen.KEY,
-            category = setOf(DeviceStateCategory.MOBILE_DATA),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = false, screenKey = SupervisionDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = VibrationIntensityScreen.KEY),
@@ -215,27 +215,27 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = AppStorageAppListScreen.KEY,
-            category = setOf(DeviceStateCategory.STORAGE),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_STORAGE),
         ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = AllAppsScreen.KEY,
-            category = setOf(DeviceStateCategory.STORAGE),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_STORAGE),
         ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = StoragePreferenceScreen.KEY,
-            category = setOf(DeviceStateCategory.STORAGE),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_STORAGE),
         ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = ScreensaverScreen.KEY,
-            category = setOf(DeviceStateCategory.UNCATEGORIZED),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
         ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = SystemNavigationGestureScreen.KEY,
-            category = setOf(DeviceStateCategory.UNCATEGORIZED),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = A11yActivityScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = A11yServiceScreen.KEY),
@@ -250,7 +250,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = ConfigureWifiScreen.KEY,
-            category = setOf(DeviceStateCategory.MOBILE_DATA),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = AdvancedConnectedDeviceScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ConversationListScreen.KEY),
@@ -263,18 +263,18 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = AppInfoStorageScreen.KEY,
-            category = setOf(DeviceStateCategory.STORAGE),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_STORAGE),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = FlashNotificationsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DoubleTapPowerScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = HearingDevicesScreen.KEY),
+        //        PerScreenCatalystConfig(enabled = true, screenKey = HearingDevicesScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AppInfoScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = MagnificationScreen.KEY),
+        //        PerScreenCatalystConfig(enabled = true, screenKey = MagnificationScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = MediaControlsScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = MobileNetworkScreen.KEY,
-            category = setOf(DeviceStateCategory.MOBILE_DATA),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = NfcAndPaymentScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = NightDisplayScreen.KEY),
@@ -303,17 +303,17 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = VpnSettingsScreen.KEY,
-            category = setOf(DeviceStateCategory.MOBILE_DATA),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = WifiCallingScreen.KEY,
-            category = setOf(DeviceStateCategory.MOBILE_DATA),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = WifiHotspotScreen.KEY,
-            category = setOf(DeviceStateCategory.MOBILE_DATA),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
     )
 

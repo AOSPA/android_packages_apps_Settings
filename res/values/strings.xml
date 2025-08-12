@@ -4432,17 +4432,21 @@
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_fingerprint">To use fingerprint, set PIN</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
-    <string name="lockpassword_confirm_your_password_header">Re-enter your password</string>
+    <string name="lockpassword_confirm_your_password_header">Enter your device password</string>
+    <!-- Header on password setup confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_reenter_your_password_header">Re-enter your password</string>
     <!-- Header on work profile password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_reenter_your_profile_password_header">Re-enter your work password</string>
     <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_work_password_header">Enter your work password</string>
     <!-- Header on pattern confirm screen [CHAR LIMIT=30] -->
-    <string name="lockpassword_confirm_your_pattern_header">Confirm your pattern</string>
+    <string name="lockpassword_confirm_your_pattern_header">Enter your device pattern</string>
     <!-- Header on pattern confirm screen for the work profile [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_your_work_pattern_header">Enter your work pattern</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
-    <string name="lockpassword_confirm_your_pin_header">Re-enter your PIN</string>
+    <string name="lockpassword_confirm_your_pin_header">Enter your device PIN</string>
+    <!-- Header on password setup confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_reenter_your_pin_header">Re-enter your PIN</string>
     <!-- Header on work profile password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_reenter_your_profile_pin_header">Re-enter your work PIN</string>
     <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
@@ -4485,22 +4489,22 @@
 
     <!-- Message to be used to explain the users that they need to enter their pattern to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_pattern_generic">Draw your pattern to continue</string>
+    <string name="lockpassword_confirm_your_pattern_generic">Your pattern verifies it\'s you</string>
     <!-- Message to be used to explain the users that they need to enter their PIN to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_pin_generic">Enter your PIN to continue</string>
+    <string name="lockpassword_confirm_your_pin_generic">Your PIN verifies it\'s you</string>
     <!-- Message to be used to explain the users that they need to enter their password to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_password_generic">Enter your password to continue</string>
+    <string name="lockpassword_confirm_your_password_generic">Your password verifies it\'s you</string>
     <!-- Message to be used to explain the users that they need to enter their work pattern to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_pattern_generic_profile">Draw your work pattern to continue</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile">Your work pattern verifies it\'s you</string>
     <!-- Message to be used to explain the users that they need to enter their work PIN to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_pin_generic_profile">Enter your work PIN to continue</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile">Your work PIN verifies it\'s you</string>
     <!-- Message to be used to explain the users that they need to enter their work password to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_password_generic_profile">Enter your work password to continue</string>
+    <string name="lockpassword_confirm_your_password_generic_profile">Your work password verifies it\'s you</string>
 
     <!-- This string shows up on a screen where a user can enter a pattern that
      unlocks their device. This is an extra security measure that's required for them to

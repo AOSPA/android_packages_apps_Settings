@@ -16,9 +16,11 @@
 
 package com.android.settings.appfunctions.providers
 
+import android.app.appsearch.GenericDocument
 import android.content.Context
 import android.util.Log
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
+import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settings.appfunctions.sources.AdaptiveBrightnessStateSource
 import com.android.settings.appfunctions.sources.AppsStorageStateSource
 import com.android.settings.appfunctions.sources.BatterySaverStateSource
@@ -42,12 +44,12 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
 /**
- * A [DeviceStateProvider] that gathers device state information directly from Android APIs rather
+ * A [DeviceStateExecutor] that gathers device state information directly from Android APIs rather
  * than using Catalyst.
  *
  * @param context The application context.
  */
-class AndroidApiStateProvider(private val context: Context) : DeviceStateProvider {
+class AndroidApiStateProviderExecutor(private val context: Context) : DeviceStateExecutor {
 
     // List of all active DeviceStateSource
     private val settingStates: List<DeviceStateSource> =
@@ -72,12 +74,15 @@ class AndroidApiStateProvider(private val context: Context) : DeviceStateProvide
             // Add other sources instances here
         )
 
-    override suspend fun provide(requestCategory: DeviceStateCategory): DeviceStateProviderResult {
+    override suspend fun execute(
+        appFunctionType: DeviceStateAppFunctionType,
+        params: GenericDocument?,
+    ): DeviceStateProviderExecutorResult {
         val sharedDeviceStateData = SharedDeviceStateData(context)
 
         val states = coroutineScope {
             settingStates
-                .filter { it.category == requestCategory }
+                .filter { it.appFunctionType == appFunctionType }
                 .map { provider ->
                     async {
                         val providerName = provider::class.simpleName
@@ -95,10 +100,10 @@ class AndroidApiStateProvider(private val context: Context) : DeviceStateProvide
                 .mapNotNull { it.await() }
         }
 
-        return DeviceStateProviderResult(states = states)
+        return DeviceStateProviderExecutorResult(states = states)
     }
 
     companion object {
-        private const val TAG = "AndroidApiStateProvider"
+        private const val TAG = "AndroidApiStateProviderExecutor"
     }
 }

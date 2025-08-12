@@ -1468,8 +1468,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Use a dark background to make your screen more comfortable to view and reduce battery usage on some screens. Your theme will change if you have a schedule, when the screen is off."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Dark theme is currently following your Bedtime mode schedule"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Bedtime mode settings"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="22160899184470368">"{count,plural,offset:2 =0{Modes can also turn on Dark theme.}=1{{mode_1} also turns on Dark theme.}=2{{mode_1} and {mode_2} also turn on Dark theme.}=3{{mode_1}, {mode_2}, and {mode_3} also turn on Dark theme.}other{{mode_1}, {mode_2}, and # more also turn on Dark theme.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Modes settings"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Brighten and expand the color range and clarity in High Dynamic Range (HDR) images and videos. HDR content will appear brighter."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Screen timeout"</string>
@@ -2370,7 +2369,8 @@
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"General"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Display"</string>
-    <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Colour and motion"</string>
+    <string name="accessibility_color_and_motion_title" msgid="1085072332445818494">"Color &amp; motion"</string>
+    <string name="accessibility_color_and_motion_subtext" msgid="1150281881647191503">"Dark theme, color correction, remove animations"</string>
     <string name="accessibility_pointer_and_touchpad_title" msgid="5703454643194245909">"Cursor and touchpad accessibility"</string>
     <string name="accessibility_pointer_and_touchpad_summary" msgid="8588221231953604340">"Size, colour, type"</string>
     <string name="accessibility_pointer_color_customization_title" msgid="2841888132681075999">"Cursor colour"</string>
@@ -2393,7 +2393,10 @@
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Turn screen darker"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaction controls"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Timing controls"</string>
+    <string name="accessibility_tap_assistance_subtext" msgid="1805279944665087799">"Touch &amp; hold delay, time to take action"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"System controls"</string>
+    <string name="accessibility_system_controls_subtext" msgid="2722046038429586174">"Navigation mode, one-handed mode, screen rotation"</string>
+    <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Navigation mode, screen rotation"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Send feedback"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Take survey"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Contact Google Disability Support"</string>
@@ -2467,7 +2470,8 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Magnify with shortcut"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Magnify with shortcut &amp; triple-tap"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"About <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Display size and text"</string>
+    <string name="accessibility_text_reading_options_title" msgid="2059907327364152763">"Display size &amp; text"</string>
+    <string name="accessibility_text_reading_options_subtext" msgid="3480489973093251705">"Font size, display size, bold text, outline text"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Change how text displays"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Subject: Hot air balloon designs"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"From: Bill"</string>
@@ -2641,8 +2645,8 @@
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Navigation settings"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibration and haptics"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Control the vibration strength for different usages"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"On"</string>
-    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Off"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"On / Control vibration levels for calls, notifications, and alarms"</string>
+    <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"Off / Control vibration levels for calls, notifications, and alarms"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Setting disabled because device is set to silent"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Calls"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notifications and alarms"</string>
@@ -2662,6 +2666,7 @@
     <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"You can also add color correction to Quick Settings from the top of your screen"</string>
     <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"Color inversion added to Quick Settings. Swipe down to turn it on or off anytime."</string>
     <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"You can also add color inversion to Quick Settings from the top of your screen"</string>
+    <string name="reduce_bright_colors_preference_summary" msgid="8112736110942731246">"Dim screen beyond the minimum brightness"</string>
     <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"Extra dim added to Quick Settings. Swipe down to turn it on or off anytime."</string>
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"You can also add extra dim to Quick Settings from the top of your screen"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"One-handed mode added to Quick Settings. Swipe down to turn it on or off anytime."</string>
@@ -2727,6 +2732,7 @@
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Don’t see your hearing device?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"See more devices"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Audio adjustment"</string>
+    <string name="accessibility_audio_adjustment_subtext" msgid="2190523175597700025">"Mono audio, audio balance"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Audio description"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Hear a description of what’s happening on screen in supported movies and shows"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"audio description, audio, description, low vision,"</string>
@@ -2737,6 +2743,7 @@
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Not working. Tap for info."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"This service is malfunctioning."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Accessibility shortcuts"</string>
+    <string name="accessibility_shortcuts_settings_subtext" msgid="3870836550836457943">"Accessibility button, volume keys shortcut"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Show in Quick Settings"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Red-green, green weak"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Red-green, red weak"</string>
@@ -3080,6 +3087,7 @@
     <string name="on_device_recognition_settings" msgid="6503160369314598069">"On-device recognition settings"</string>
     <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"On-device recognition"</string>
     <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"On-device speech recognition"</string>
+    <string name="tts_subtext" msgid="8958790811881046789">"Adjust speech rate and pitch"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Preferred engine"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Engine settings"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Speech rate &amp; pitch"</string>
@@ -4639,8 +4647,7 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 app allowed to use unrestricted mobile data when Data Saver is on}other{# apps allowed to use unrestricted mobile data when Data Saver is on}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Primary data"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi data"</string>
-    <!-- no translation found for data_used_formatted (6825854220655476713) -->
-    <skip />
+    <string name="data_used_formatted" msgid="6825854220655476713">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="data_overusage" msgid="3680477320458707259">"<xliff:g id="ID_1">^1</xliff:g> over"</string>
     <string name="data_remaining" msgid="6316251496381922837">"<xliff:g id="ID_1">^1</xliff:g> left"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Graph showing data usage between <xliff:g id="START_DATE">%1$s</xliff:g> and <xliff:g id="END_DATE">%2$s</xliff:g>."</string>
@@ -5458,6 +5465,7 @@
       <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
     </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_summary" msgid="9011338875202712756">"Use text to communicate during a call"</string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
@@ -5716,10 +5724,10 @@
     <string name="color_inversion_state_on" msgid="1160969033636440368">"On"</string>
     <string name="color_inversion_state_off" msgid="6925638668080451724">"Off"</string>
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Turns light screens dark and dark screens light"</string>
-    <string name="magnification_feature_summary" msgid="2053971569640663564">"Zoom in on the screen"</string>
+    <string name="magnification_feature_summary" msgid="4403387702011660253">"Zoom in to make content larger on your screen"</string>
     <string name="autoclick_disabled" msgid="3213396804955002120">"Off"</string>
-    <string name="show_captions_disabled" msgid="690650956523818755">"Off"</string>
-    <string name="show_captions_enabled" msgid="7089043007924626">"On"</string>
+    <string name="show_captions_disabled" msgid="924366862253349790">"Off / Customize caption size and style"</string>
+    <string name="show_captions_enabled" msgid="3495595825041704052">"On / Customize caption size and style"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Off"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"On"</string>
     <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Audio <xliff:g id="PERCENT_LEFT">%1$s</xliff:g> left, <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g> right"</string>

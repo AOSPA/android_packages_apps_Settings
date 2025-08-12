@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.Manifest
+import android.app.Activity.RESULT_CANCELED
 import android.app.admin.DevicePolicyManager
 import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
@@ -207,19 +208,13 @@ class SupervisionPinRecoveryActivity : FragmentActivity() {
     }
 
     private fun onPinSet(resultCode: Int) {
-        if (resultCode == RESULT_OK) {
+        if (resultCode != RESULT_CANCELED) {
             // After the new PIN being set.
-            Toast.makeText(
-                    this,
-                    getString(R.string.supervision_pin_reset_success_toast),
-                    Toast.LENGTH_SHORT,
-                )
-                .show()
             logRecoveryResult(true)
             handleSuccess()
         } else {
             logRecoveryResult(false)
-            handleError("Setting new PIN failed with result: $resultCode")
+            handleError("Setting new PIN failed with result cancelled.")
         }
     }
 

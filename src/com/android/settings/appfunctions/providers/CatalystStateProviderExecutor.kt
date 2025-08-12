@@ -16,15 +16,14 @@
 
 package com.android.settings.appfunctions.providers
 
+import android.app.appsearch.GenericDocument
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
+import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settingslib.metadata.PersistentPreference
-import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.PreferenceScreenCoordinate
-import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
@@ -37,24 +36,27 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 
 /* A [DeviceStateProvider] that provides device state information for Settings that are
-exposed using Catalyst framework. Configured in [CatalystConfig]. */
-class CatalystStateProvider(
+exposed using Catalyst framework. Configured in [CatalystStateProviderConfig]. */
+class CatalystStateProviderExecutor(
     val config: CatalystConfig,
     private val context: Context,
     private val englishContext: Context,
-) : DeviceStateProvider {
+) : DeviceStateExecutor {
     private val settingConfigMap = config.deviceStateItems.associateBy { it.settingKey }
     private val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
     private val screenKeyList = perScreenConfigMap.keys.toList()
 
-    override suspend fun provide(requestCategory: DeviceStateCategory): DeviceStateProviderResult {
+    override suspend fun execute(
+        appFunctionType: DeviceStateAppFunctionType,
+        params: GenericDocument?,
+    ): DeviceStateProviderExecutorResult {
         val perScreenDeviceStatesList = mutableListOf<PerScreenDeviceStates>()
         coroutineScope {
             val deferredList =
                 screenKeyList.map { screenKey ->
                     async {
                         try {
-                            buildPerScreenDeviceStates(screenKey, requestCategory)
+                            buildPerScreenDeviceStates(screenKey, appFunctionType)
                         } catch (e: Exception) {
                             Log.e(TAG, "Error building per screen device states for $screenKey", e)
                             null
@@ -64,37 +66,21 @@ class CatalystStateProvider(
             val results = deferredList.awaitAll()
             perScreenDeviceStatesList.addAll(results.filterNotNull())
         }
-        return DeviceStateProviderResult(states = perScreenDeviceStatesList)
+        return DeviceStateProviderExecutorResult(states = perScreenDeviceStatesList)
     }
 
     private suspend fun CoroutineScope.buildPerScreenDeviceStates(
         screenKey: String,
-        requestCategory: DeviceStateCategory,
+        appFunctionType: DeviceStateAppFunctionType,
     ): PerScreenDeviceStates? {
-        Log.v(TAG, "Building per screen device states for $screenKey")
-        val perScreenConfig = perScreenConfigMap[screenKey]
-        if (
-            perScreenConfig == null ||
-                !perScreenConfig.enabled ||
-                requestCategory !in perScreenConfig.category
-        ) {
-            return null
-        }
-        val screenMetaData =
-            PreferenceScreenRegistry.create(context, PreferenceScreenCoordinate(screenKey, null))
+        val (screenMetaData, preferencesHierarchy) =
+            getEnabledPreferencesHierarchy(config, context, appFunctionType, screenKey)
                 ?: return null
-        if (
-            screenMetaData is PreferenceAvailabilityProvider && !screenMetaData.isAvailable(context)
-        ) {
-            return null
-        }
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
-        // TODO if child node is PreferenceScreen, recursively process it
-        screenMetaData.getPreferenceHierarchy(context, this).forEachRecursivelyAsync {
+        preferencesHierarchy.forEach {
             val metadata = it.metadata
             val config = settingConfigMap[metadata.key]
             // skip over explicitly disabled preferences
-            if (config?.enabled == false) return@forEachRecursivelyAsync
             val jsonValue =
                 when (metadata) {
                     is PersistentPreference<*> ->
@@ -108,6 +94,7 @@ class CatalystStateProvider(
                 deviceStateItemList.add(
                     DeviceStateItem(
                         key = metadata.key,
+                        purpose = metadata.key,
                         name =
                             LocalizedString(
                                 english = metadata.getPreferenceTitle(englishContext).toString(),
@@ -132,6 +119,6 @@ class CatalystStateProvider(
     }
 
     companion object {
-        private const val TAG = "CatalystStateProvider"
+        private const val TAG = "CatalystStateProviderExecutor"
     }
 }

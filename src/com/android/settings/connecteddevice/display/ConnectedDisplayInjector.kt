@@ -297,8 +297,13 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     }
 
     /** Enforce display mode on the given display. */
-    open fun setUserPreferredDisplayMode(displayId: Int, mode: Display.Mode) {
-        DisplayManagerGlobal.getInstance().setUserPreferredDisplayMode(displayId, mode)
+    open fun setUserPreferredDisplayMode(displayId: Int, mode: Display.Mode, storeMode: Boolean) {
+        DisplayManagerGlobal.getInstance().setUserPreferredDisplayMode(displayId, mode, storeMode)
+    }
+
+    /** Resets preferred display mode that has not been persisted yet. */
+    open fun resetUserPreferredDisplayMode(displayId: Int) {
+        DisplayManagerGlobal.getInstance().resetUserPreferredDisplayMode(displayId)
     }
 
     open fun isDefaultDisplayInTopologyFlagEnabled(): Boolean =

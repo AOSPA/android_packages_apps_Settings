@@ -21,6 +21,7 @@ import static com.android.settings.connecteddevice.display.ExternalDisplaySettin
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
 import static com.android.settings.flags.Flags.FLAG_ENABLE_DEFAULT_DISPLAY_IN_TOPOLOGY_SWITCH_BUGFIX;
+import static com.android.settings.flags.Flags.FLAG_ENABLE_RESOLUTION_APPLY_CONFIRMATION_BUGFIX;
 import static com.android.settings.flags.Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX;
 import static com.android.settings.flags.Flags.FLAG_ROTATION_CONNECTED_DISPLAY_SETTING;
@@ -86,6 +87,7 @@ public class ExternalDisplayTestBase {
         mFlags.setFlag(FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX, true);
         mFlags.setFlag(FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING, true);
         mFlags.setFlag(FLAG_ENABLE_DEFAULT_DISPLAY_IN_TOPOLOGY_SWITCH_BUGFIX, true);
+        mFlags.setFlag(FLAG_ENABLE_RESOLUTION_APPLY_CONFIRMATION_BUGFIX, true);
         updateDisplaysAndTopology(List.of(createExternalDisplay(DisplayIsEnabled.YES),
                 createOverlayDisplay(DisplayIsEnabled.YES)));
         doReturn(mInjectedFlags).when(mMockedInjector).getFlags();

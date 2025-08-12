@@ -16,8 +16,10 @@
 
 package com.android.settings.appfunctions.providers
 
+import android.app.appsearch.GenericDocument
 import androidx.annotation.Keep
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
+import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settings.appfunctions.intents.getAccessibilityIntents
 import com.android.settings.appfunctions.intents.getAppsIntents
 import com.android.settings.appfunctions.intents.getModesIntents
@@ -30,24 +32,27 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDev
 @Keep data class StaticIntent(val description: String, val intentUri: String)
 
 /**
- * A [DeviceStateProvider] that provides a static list of device states from a list of
+ * A [DeviceStateExecutor] that provides a static list of device states from a list of
  * [StaticIntent]s.
  *
  * This provider is useful for adding simple, non-dynamic states that consist only of a description
- * and an intent URI. It will only provide states if the [requestCategory] matches the category this
- * provider is configured with.
+ * and an intent URI. It will only provide states if the [requestAppFunctionType] matches the app
+ * function this provider is configured with.
  *
  * @param staticIntents The list of [StaticIntent]s to provide.
- * @param category The [DeviceStateCategory] this provider is associated with.
+ * @param appFunctionType The [DeviceStateAppFunctionType] this provider is associated with.
  */
 @Keep
-class StaticIntentProvider(
+class StaticIntentProviderExecutor(
     val staticIntents: List<StaticIntent>,
-    private val category: DeviceStateCategory,
-) : DeviceStateProvider {
-    override suspend fun provide(requestCategory: DeviceStateCategory): DeviceStateProviderResult {
-        if (requestCategory != category) {
-            return DeviceStateProviderResult(emptyList())
+    private val appFunctionType: DeviceStateAppFunctionType,
+) : DeviceStateExecutor {
+    override suspend fun execute(
+        appFunctionType: DeviceStateAppFunctionType,
+        params: GenericDocument?,
+    ): DeviceStateProviderExecutorResult {
+        if (appFunctionType != this@StaticIntentProviderExecutor.appFunctionType) {
+            return DeviceStateProviderExecutorResult(emptyList())
         }
 
         val states =
@@ -58,7 +63,7 @@ class StaticIntentProvider(
                     deviceStateItems = emptyList(),
                 )
             }
-        return DeviceStateProviderResult(states)
+        return DeviceStateProviderExecutorResult(states)
     }
 }
 

@@ -18,14 +18,15 @@ package com.android.settings.appfunctions.sources
 
 import android.app.usage.StorageStatsManager
 import android.content.Context
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.spaprivileged.framework.common.BytesFormatter
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 class AppsStorageStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.STORAGE
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_STORAGE
 
     override suspend fun get(
         context: Context,
@@ -54,6 +55,7 @@ class AppsStorageStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "app_size_package_$packageName",
+                    purpose = "app_size_package_$packageName",
                     jsonValue = bytesFormatter.format(appBytes, BytesFormatter.UseCase.FileSize),
                     hintText = "App: $appName",
                 )
@@ -61,6 +63,7 @@ class AppsStorageStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "data_size_package_$packageName",
+                    purpose = "data_size_package_$packageName",
                     jsonValue = bytesFormatter.format(dataBytes, BytesFormatter.UseCase.FileSize),
                     hintText = "App: $appName",
                 )
@@ -68,6 +71,7 @@ class AppsStorageStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "cache_size_package_$packageName",
+                    purpose = "cache_size_package_$packageName",
                     jsonValue = bytesFormatter.format(cacheBytes, BytesFormatter.UseCase.FileSize),
                     hintText = "App: $appName",
                 )
@@ -75,6 +79,7 @@ class AppsStorageStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "total_size_package_$packageName",
+                    purpose = "total_size_package_$packageName",
                     jsonValue = bytesFormatter.format(totalBytes, BytesFormatter.UseCase.FileSize),
                     hintText = "App: $appName",
                 )

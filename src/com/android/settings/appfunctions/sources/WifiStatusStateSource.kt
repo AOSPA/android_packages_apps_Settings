@@ -21,7 +21,7 @@ import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
 import android.util.Log
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +29,8 @@ import kotlinx.coroutines.withContext
 
 /** Provides device state information related to saved Wi-Fi networks. */
 class WifiStatusStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.MOBILE_DATA
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_MOBILE_DATA
 
     override suspend fun get(
         context: Context,
