@@ -94,4 +94,12 @@
         android:summary="@string/charging_control_summary"
         android:fragment="co.aospa.settings.lineage.health.ChargingControlSettings"
         settings:controller="co.aospa.settings.lineage.health.ChargingControlPreferenceController" />
+
+    <ListPreference
+        android:entries="@*android:array/charging_speed_entries"
+        android:entryValues="@*android:array/charging_speed_values"
+        android:key="charging_speed"
+        android:summary="%s"
+        android:title="@*android:string/charging_speed"
+        settings:controller="co.aospa.settings.lineage.health.ChargingSpeedPreferenceController" />
 </PreferenceScreen>
