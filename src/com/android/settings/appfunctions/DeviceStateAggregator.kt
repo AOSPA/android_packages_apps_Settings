@@ -16,52 +16,36 @@
 
 package com.android.settings.appfunctions
 
+import android.app.appsearch.GenericDocument
 import androidx.annotation.Keep
-import com.android.settings.appfunctions.providers.DeviceStateProvider
+import com.android.settings.appfunctions.providers.DeviceStateExecutor
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateResponse
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 
 /**
  * Orchestrates the collection and transformation of device state information.
  *
- * This class fetches data from multiple [DeviceStateProvider]s in parallel, aggregates the
- * results to produce the final [DeviceStateResponse].
-*
-* @property providers The list of [DeviceStateProvider]s to query for device state.
-*/
+ * This class executes from multiple [DeviceStateExecutor]s in parallel, aggregates the results to
+ * produce the final [DeviceStateResponse].
+ *
+ * @property executors The list of [DeviceStateExecutor]s to query for device state.
+ */
 @Keep
-class DeviceStateAggregator(
-    private val providers: List<DeviceStateProvider>
-) {
+abstract class DeviceStateAggregator(private val executors: List<DeviceStateExecutor>) {
     /**
      * Aggregates device state from all registered providers.
      *
      * This function performs the following steps:
-     * 1. Calls all [DeviceStateProvider]s concurrently to gather device state information.
+     * 1. Calls all [DeviceStateExecutor]s concurrently to gather device state information.
      * 2. Combines the states and hint text from all provider results.
      * 3. Constructs and returns the final [DeviceStateResponse].
      *
-     * @param requestCategory The category of device state to fetch, passed to each provider.
+     * @param appFunctionType The device state app function to fetch, passed to each provider.
      * @param deviceLocale The current locale of the device, included in the final response.
      * @return A [DeviceStateResponse] containing the fully aggregated device state.
      */
-     suspend fun aggregate(
-        requestCategory: DeviceStateCategory,
-        deviceLocale: String
-    ): DeviceStateResponse {
-        val providerResults = coroutineScope {
-            providers.map { provider ->
-                async { provider.provide(requestCategory) }
-            }.map { it.await() }
-        }
-
-        val allStates = providerResults.flatMap { it.states }
-        val allHintText = providerResults.mapNotNull { it.hintText }.joinToString(separator = "\n")
-
-        return DeviceStateResponse(
-            perScreenDeviceStates = allStates,
-            deviceLocale = deviceLocale
-        )
-    }
+    abstract suspend fun aggregate(
+        appFunctionType: DeviceStateAppFunctionType,
+        params: GenericDocument,
+        deviceLocale: String,
+    ): Any
 }

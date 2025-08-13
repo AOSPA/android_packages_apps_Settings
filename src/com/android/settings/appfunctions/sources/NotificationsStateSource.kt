@@ -22,14 +22,15 @@ import android.app.usage.UsageEvents
 import android.content.Context
 import android.icu.text.RelativeDateTimeFormatter
 import android.os.ServiceManager
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.utils.StringUtil
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 import java.util.concurrent.TimeUnit
 
 class NotificationsStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_UNCATEGORIZED
 
     // TODO: prototype implementation, to be replaced in b/426005115
     override suspend fun get(
@@ -73,6 +74,7 @@ class NotificationsStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "notifications_enabled_package_$packageName",
+                    purpose = "notifications_enabled_package_$packageName",
                     jsonValue = areNotificationsEnabled.toString(),
                     hintText = "App: $appName",
                 )
@@ -80,6 +82,7 @@ class NotificationsStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "notifications_last_notification_time_package_$packageName",
+                    purpose = "notifications_last_notification_time_package_$packageName",
                     jsonValue = formattedLastNotificationTimeAgo.toString(),
                     hintText = "App: $appName",
                 )

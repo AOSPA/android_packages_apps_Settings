@@ -29,11 +29,11 @@ import com.android.extensions.appfunctions.AppFunctionException.ERROR_FUNCTION_N
 import com.android.extensions.appfunctions.AppFunctionService
 import com.android.extensions.appfunctions.ExecuteAppFunctionRequest
 import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
-import com.android.settings.appfunctions.providers.DeviceStateProvider
-import com.android.settings.appfunctions.providers.CatalystStateProvider
-import com.android.settings.appfunctions.providers.AndroidApiStateProvider
-import com.android.settings.appfunctions.DeviceStateAggregator
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.providers.AndroidApiStateProviderExecutor
+import com.android.settings.appfunctions.providers.CatalystStateMetadataProviderExecutor
+import com.android.settings.appfunctions.providers.CatalystStateProviderExecutor
+import com.android.settings.appfunctions.providers.CatalystStateSetterExecutor
+import com.android.settings.appfunctions.providers.DeviceStateExecutor
 import com.android.settings.utils.getLocale
 import java.util.Locale
 import kotlinx.coroutines.runBlocking
@@ -41,19 +41,61 @@ import kotlinx.coroutines.runBlocking
 /**
  * An abstract [AppFunctionService] that provides device state information.
  *
- * Subclasses must implement [providers] to define the data sources and transformations
- * for device state.
+ * Subclasses must implement [executors] to define the data sources and transformations for device
+ * state.
  */
 @Keep
 abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
     protected lateinit var englishContext: Context
         private set
 
-    /** The list of [DeviceStateProvider]s to query for device state information. */
-    abstract val providers: List<DeviceStateProvider>
+    open val deviceStateProviderExecutors: List<DeviceStateExecutor> by lazy {
+        listOf(
+            CatalystStateProviderExecutor(
+                getSettingsCatalystConfig(),
+                applicationContext,
+                englishContext,
+            ),
+            AndroidApiStateProviderExecutor(applicationContext),
+        )
+    }
+    val deviceStateProviderAggregator by lazy {
+        DeviceStateProviderAggregator(deviceStateProviderExecutors)
+    }
 
-    private val aggregator: DeviceStateAggregator by lazy {
-        DeviceStateAggregator(providers)
+    open val deviceStateMetadataProviderExecutors: List<DeviceStateExecutor> by lazy {
+        listOf(
+            CatalystStateMetadataProviderExecutor(
+                getSettingsCatalystConfig(),
+                applicationContext,
+                englishContext,
+            )
+        )
+    }
+    val deviceStateMetadataProviderAggregator by lazy {
+        DeviceStateMetadataProviderAggregator(deviceStateMetadataProviderExecutors)
+    }
+
+    open val deviceStateSetterExecutors: List<DeviceStateExecutor> by lazy {
+        listOf(CatalystStateSetterExecutor(applicationContext, englishContext))
+    }
+    val deviceStateSetterAggregator by lazy {
+        DeviceStateSetterAggregator(deviceStateSetterExecutors)
+    }
+
+    open val aggregators by lazy {
+        mapOf(
+            DeviceStateAppFunctionType.GET_UNCATEGORIZED to deviceStateProviderAggregator,
+            DeviceStateAppFunctionType.GET_STORAGE to deviceStateProviderAggregator,
+            DeviceStateAppFunctionType.GET_BATTERY to deviceStateProviderAggregator,
+            DeviceStateAppFunctionType.GET_MOBILE_DATA to deviceStateProviderAggregator,
+            DeviceStateAppFunctionType.GET_METADATA to deviceStateMetadataProviderAggregator,
+            DeviceStateAppFunctionType.SET_DEVICE_STATE to deviceStateSetterAggregator,
+            DeviceStateAppFunctionType.ADJUST_DEVICE_STATE_BY_PERCENTAGE to
+                deviceStateSetterAggregator,
+            DeviceStateAppFunctionType.OFFSET_DEVICE_STATE_BY_VALUE to deviceStateSetterAggregator,
+            DeviceStateAppFunctionType.TOGGLE_DEVICE_STATE to deviceStateSetterAggregator,
+        )
     }
 
     override fun onCreate() {
@@ -63,15 +105,16 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
 
     final override fun onExecuteFunction(
         request: ExecuteAppFunctionRequest,
-        callingPackage: String, cancellationSignal: CancellationSignal,
-        callback: OutcomeReceiver<ExecuteAppFunctionResponse, AppFunctionException>
+        callingPackage: String,
+        cancellationSignal: CancellationSignal,
+        callback: OutcomeReceiver<ExecuteAppFunctionResponse, AppFunctionException>,
     ) {
-        val requestCategory = DeviceStateCategory.fromId(request.functionIdentifier)
-        if (requestCategory == null) {
+        val appFunctionType = DeviceStateAppFunctionType.fromId(request.functionIdentifier)
+        if (appFunctionType == null) {
             callback.onError(
                 AppFunctionException(
                     ERROR_FUNCTION_NOT_FOUND,
-                    "${request.functionIdentifier} not supported."
+                    "${request.functionIdentifier} not supported.",
                 )
             )
             return
@@ -79,10 +122,20 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
         runBlocking {
             Trace.beginSection("DeviceStateAppFunction ${request.functionIdentifier}")
             Log.d(TAG, "device state app function ${request.functionIdentifier} called.")
-            val responseData = aggregator.aggregate(
-                requestCategory,
-                applicationContext.getLocale().toString()
-            )
+            if (!aggregators.containsKey(appFunctionType)) {
+                callback.onError(
+                    AppFunctionException(
+                        ERROR_FUNCTION_NOT_FOUND,
+                        "${request.functionIdentifier} not supported.",
+                    )
+                )
+            }
+            val responseData =
+                aggregators[appFunctionType]!!.aggregate(
+                    appFunctionType,
+                    request.parameters,
+                    applicationContext.getLocale().toString(),
+                )
             val response = buildResponse(responseData)
             callback.onResult(response)
             Log.d(TAG, "app function ${request.functionIdentifier} fulfilled.")
@@ -91,15 +144,14 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
     }
 
     private fun buildResponse(responseData: Any): ExecuteAppFunctionResponse {
-        val jetpackDocument =
-            androidx.appsearch.app.GenericDocument.fromDocumentClass(responseData)
+        val jetpackDocument = androidx.appsearch.app.GenericDocument.fromDocumentClass(responseData)
         val platformDocument =
             GenericDocumentToPlatformConverter.toPlatformGenericDocument(jetpackDocument)
         val result =
             GenericDocument.Builder<GenericDocument.Builder<*>>("", "", "")
                 .setPropertyDocument(
                     ExecuteAppFunctionResponse.PROPERTY_RETURN_VALUE,
-                    platformDocument
+                    platformDocument,
                 )
                 .build()
         return ExecuteAppFunctionResponse(result)
@@ -112,6 +164,6 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
     }
 
     companion object {
-        private const val TAG = "SettingsDeviceStateAppFunctionService"
+        private const val TAG = "AbstractDeviceStateAppFunctionService"
     }
 }

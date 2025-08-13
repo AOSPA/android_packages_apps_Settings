@@ -18,9 +18,9 @@ package com.android.settings.applications.specialaccess
 
 import android.app.settings.SettingsEnums
 import android.content.Context
-import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
-import com.android.settings.applications.CatalystAppListFragment
+import com.android.settings.Settings.ChangeWifiStateActivity
+import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -39,14 +39,12 @@ open class WifiControlAppListScreen : SpecialAccessAppListScreen() {
     override val title: Int
         get() = R.string.change_wifi_state_title
 
-    override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN
+    override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
+
+    override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        if (metadata == null) {
-            makeLaunchIntent(context, WifiControlAppListActivity::class.java, null)
-        } else {
-            null
-        }
+        makeLaunchIntent(context, ChangeWifiStateActivity::class.java, metadata?.key)
 
     override val appDetailScreenKey: String
         get() = WifiControlAppDetailScreen.KEY
@@ -58,6 +56,3 @@ open class WifiControlAppListScreen : SpecialAccessAppListScreen() {
         const val KEY = "sa_wfc_app_list"
     }
 }
-
-class WifiControlAppListActivity :
-    CatalystSettingsActivity(WifiControlAppListScreen.KEY, CatalystAppListFragment::class.java)

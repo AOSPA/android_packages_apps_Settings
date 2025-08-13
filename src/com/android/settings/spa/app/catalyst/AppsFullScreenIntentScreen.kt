@@ -23,18 +23,21 @@ import android.os.Bundle
 import com.android.settings.R
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.spa.SpaBridgeActivity
+import com.android.settings.flags.Flags
+import com.android.settings.spa.SpaActivity
 import com.android.settings.spa.app.catalyst.AppInfoFullScreenIntentScreen.Companion.hasFullScreenPermission
+import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.spa.framework.util.appendSpaParams
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
-//@ProvidePreferenceScreen(AppsFullScreenIntentAppListScreen.KEY)
-open class AppsFullScreenIntentAppListScreen :
-    PreferenceScreenMixin, PreferenceHierarchyGenerator<Boolean> {
+@ProvidePreferenceScreen(AppsFullScreenIntentScreen.KEY)
+class AppsFullScreenIntentScreen : PreferenceScreenMixin, PreferenceHierarchyGenerator<Boolean> {
 
     override val key: String
         get() = KEY
@@ -49,12 +52,16 @@ open class AppsFullScreenIntentAppListScreen :
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
-    override fun isFlagEnabled(context: Context) = false
+    override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
     override fun hasCompleteHierarchy() = false
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent =
-        Intent(context, SpaBridgeActivity::class.java)
+        Intent(context, SpaActivity::class.java)
+            .appendSpaParams(
+                destination = UseFullScreenIntentAppListProvider.getAppListRoute(),
+                highlightItemKey = metadata?.key,
+            )
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         generatePreferenceHierarchy(context, coroutineScope, true)
@@ -62,20 +69,22 @@ open class AppsFullScreenIntentAppListScreen :
     override fun generatePreferenceHierarchy(
         context: Context,
         coroutineScope: CoroutineScope,
-        type: Boolean, // whether to include system apps
-    ) = preferenceHierarchy(context) {
-        addAsync(coroutineScope, Dispatchers.Default) {
-            AppListRepositoryImpl(context).loadAndMaybeExcludeSystemApps(context.userId, type)
-                .forEach {
-                    if (it.hasFullScreenPermission(context)) {
-                        val arguments = Bundle(1).apply { putString("app", it.packageName) }
-                        +(AppInfoFullScreenIntentScreen.KEY args arguments)
+        hierarchyType: Boolean, // whether to exclude system apps
+    ) =
+        preferenceHierarchy(context) {
+            addAsync(coroutineScope, Dispatchers.Default) {
+                AppListRepositoryImpl(context)
+                    .loadAndMaybeExcludeSystemApps(context.userId, hierarchyType)
+                    .forEach {
+                        if (it.hasFullScreenPermission(context)) {
+                            val arguments = Bundle(1).apply { putString("app", it.packageName) }
+                            +(AppInfoFullScreenIntentScreen.KEY args arguments)
+                        }
                     }
-                }
+            }
         }
-    }
 
     companion object {
-        const val KEY = "device_state_apps_full_screen_intent"
+        const val KEY = "use_full_screen_intent"
     }
 }

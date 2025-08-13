@@ -46,8 +46,7 @@ public final class PrivateSpaceSafetySource {
         UserManager userManager = context.getSystemService(UserManager.class);
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(context);
-        if (android.multiuser.Flags.enablePrivateSpaceFeatures()
-                && android.multiuser.Flags.blockPrivateSpaceCreation()) {
+        if (android.multiuser.Flags.blockPrivateSpaceCreation()) {
             // Do not add the entry point when
             // -Private Profile is not present and
             // -Private Profile cannot be added.

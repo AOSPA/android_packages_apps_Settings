@@ -350,7 +350,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Posizione"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usa posizione"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Off"</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{On/# app ha accesso alla posizione}other{On/# app hanno accesso alla posizione}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{On: # app ha accesso alla posizione}other{On: # app hanno accesso alla posizione}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Caricamento…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Le app con autorizzazione di accesso ai dispositivi nelle vicinanze possono stabilire la posizione relativa dei dispositivi connessi."</string>
     <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"L\'accesso alla posizione è disattivato per app e servizi. La posizione del dispositivo potrebbe essere comunque inviata al personale di primo intervento se contatti un numero di emergenza."</string>
@@ -1449,7 +1449,7 @@
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"Disattiva fino al tramonto"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"Modalità scura"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Pianificazione"</string>
-    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Mai"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Nessuna"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Attivo dal tramonto all\'alba"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Attivo in orario personalizzato"</string>
     <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"Attivo in modalità Riposo"</string>
@@ -1465,7 +1465,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Verrà disattivato automaticamente al termine del riposo"</string>
     <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"Si disattiverà al termine di <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Il tema scuro usa uno sfondo nero per aumentare la durata della batteria su alcuni schermi. Le pianificazioni del tema scuro si attivano solo se lo schermo è spento."</string>
-    <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Usa uno sfondo scuro per rendere più confortevole la visualizzazione e ridurre l\'utilizzo della batteria su alcuni schermi. Se hai una programmazione, il tema cambierà quando lo schermo è spento."</string>
+    <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Usa uno sfondo scuro per rendere più confortevole la visualizzazione e ridurre l\'utilizzo della batteria su alcuni schermi. Se hai una pianificazione, il tema cambierà quando lo schermo è spento."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Al momento il tema scuro viene attivato/disattivato in base alla pianificazione della modalità Riposo"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Impostazioni modalità Riposo"</string>
     <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
@@ -1825,7 +1825,7 @@
     <string name="location_low_battery_use" msgid="5218950289737996431">"Basso utilizzo della batteria"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Ricerca di reti Wi-Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Consenti ad app e servizi di cercare reti Wi-Fi in qualsiasi momento, anche quando il Wi-Fi non è attivo. Questa funzione è utile, ad esempio, per migliorare funzioni e servizi basati sulla posizione."</string>
-    <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Scansione di dispositivi Bluetooth"</string>
+    <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Scansione Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Consenti ad app e servizi di cercare dispositivi nelle vicinanze in qualsiasi momento, anche quando il Bluetooth non è attivo. Questa funzione è utile, ad esempio, per migliorare funzioni e servizi basati sulla posizione."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Servizi di localizzazione"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Servizi di localizzazione"</string>
@@ -2370,7 +2370,10 @@
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Generali"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Visualizzazione"</string>
-    <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Colore e movimento"</string>
+    <!-- no translation found for accessibility_color_and_motion_title (1085072332445818494) -->
+    <skip />
+    <!-- no translation found for accessibility_color_and_motion_subtext (1150281881647191503) -->
+    <skip />
     <string name="accessibility_pointer_and_touchpad_title" msgid="5703454643194245909">"Accessibilità del cursore e del touchpad"</string>
     <string name="accessibility_pointer_and_touchpad_summary" msgid="8588221231953604340">"Dimensioni, colore, tipo"</string>
     <string name="accessibility_pointer_color_customization_title" msgid="2841888132681075999">"Colore cursore"</string>
@@ -2393,10 +2396,15 @@
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Scurisci lo schermo"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Controlli di interazione"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Controlli basati sul tempo"</string>
-    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controlli di sistema"</string>
-    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Invia feedback"</string>
-    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <!-- no translation found for accessibility_tap_assistance_subtext (1805279944665087799) -->
     <skip />
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controlli di sistema"</string>
+    <!-- no translation found for accessibility_system_controls_subtext (2722046038429586174) -->
+    <skip />
+    <!-- no translation found for accessibility_system_controls_subtext_one_handed_not_supported (4973507525360793402) -->
+    <skip />
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Invia feedback"</string>
+    <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Partecipa al sondaggio"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Contatta il team di assistenza per l\'accessibilità di Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Sondaggio sull\'accessibilità"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Condividi il tuo feedback"</string>
@@ -2468,7 +2476,10 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Ingrandisci con scorciatoia"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Ingrandisci con scorciatoia e triplo tocco"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Informazioni su <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Dimensioni visualizzazione e testo"</string>
+    <!-- no translation found for accessibility_text_reading_options_title (2059907327364152763) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_options_subtext (3480489973093251705) -->
+    <skip />
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Cambia la modalità di visualizzazione del testo"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Oggetto: design mongolfiera"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Da: Paolo"</string>
@@ -2534,7 +2545,7 @@
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Tocca tre volte"</string>
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Tocca rapidamente lo schermo %1$d volte. L\'operazione potrebbe rallentare il dispositivo."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Tocca due volte con %1$d dita"</string>
-    <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"tocca tre volte"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"triplo tocco"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avanzate"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Il pulsante Accessibilità è impostato su <xliff:g id="SERVICE">%1$s</xliff:g>. Per utilizzare l\'ingrandimento, tocca e tieni premuto il pulsante Accessibilità, quindi seleziona l\'ingrandimento."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Il gesto di accessibilità è impostato per <xliff:g id="SERVICE">%1$s</xliff:g>. Per usare l\'ingrandimento, scorri con due dita verso l\'alto dalla parte inferiore dello schermo e tieni premuto. Dopodiché seleziona l\'ingrandimento."</string>
@@ -2642,8 +2653,10 @@
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Impostazioni di navigazione"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrazione e feedback aptico"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Controlla l\'intensità della vibrazione per i vari utilizzi"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"On"</string>
-    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Off"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (3316037269092584284) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (113565506991847845) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Impostazione disattivata perché il dispositivo è in modalità silenziosa"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Chiamate"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notifiche e sveglie"</string>
@@ -2663,6 +2676,8 @@
     <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"Inoltre puoi aggiungere la correzione del colore alle Impostazioni rapide dalla parte superiore dello schermo"</string>
     <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"Inversione dei colori aggiunta alle Impostazioni rapide. Scorri verso il basso per attivarla o disattivarla quando vuoi."</string>
     <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"Inoltre puoi aggiungere l\'inversione dei colori alle Impostazioni rapide dalla parte superiore dello schermo"</string>
+    <!-- no translation found for reduce_bright_colors_preference_summary (8112736110942731246) -->
+    <skip />
     <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"Attenuazione extra aggiunta alle Impostazioni rapide. Scorri verso il basso per attivarla o disattivarla quando vuoi."</string>
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Inoltre puoi aggiungere l\'attenuazione extra alle Impostazioni rapide dalla parte superiore dello schermo"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Modalità a una mano aggiunta alle Impostazioni rapide. Scorri verso il basso per attivarla o disattivarla quando vuoi."</string>
@@ -2721,13 +2736,15 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary" msgid="3531758698830915205">"Per trovare altre protesi uditive non supportate da LE Audio, tocca &lt;b&gt;Accoppia nuovo dispositivo&lt;/b&gt; &gt; &lt;b&gt;Visualizza altri dispositivi&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Per trovare altre protesi uditive non supportate da LE Audio, tocca "<b>"Accoppia nuovo dispositivo"</b>" e poi "<b>"Visualizza altri dispositivi"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Accoppia protesi uditiva"</string>
-    <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"In questa pagina, puoi accoppiare le protesi uditive ASHA e LE audio. Assicurati che la tua protesi uditiva sia accesa e pronta per l\'accoppiamento."</string>
+    <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"In questa pagina, puoi accoppiare le protesi uditive ASHA e LE Audio. Assicurati che la tua protesi uditiva sia accesa e pronta per l\'accoppiamento."</string>
     <string name="accessibility_hearing_device_pairing_asha_only_intro" msgid="5679230908462987522">"In questa pagina, puoi accoppiare le protesi uditive ASHA. Assicurati che la tua protesi uditiva sia accesa e pronta per l\'accoppiamento."</string>
     <string name="accessibility_hearing_device_pairing_hap_only_intro" msgid="2233661046254311681">"In questa pagina, puoi accoppiare le protesi uditive LE Audio. Assicurati che la tua protesi uditiva sia accesa e pronta per l\'accoppiamento."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Protesi uditive disponibili"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Non trovi la tua protesi uditiva?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Visualizza altri dispositivi"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Regolazione dell\'audio"</string>
+    <!-- no translation found for accessibility_audio_adjustment_subtext (2190523175597700025) -->
+    <skip />
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Descrizione audio"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Ascolta la descrizione di ciò che accade sullo schermo in film e programmi supportati"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"descrizione audio, audio, descrizione, ipovedente,"</string>
@@ -2738,6 +2755,8 @@
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Non funziona. Tocca per avere informazioni."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Questo servizio non funziona correttamente."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Scorciatoie di accessibilità"</string>
+    <!-- no translation found for accessibility_shortcuts_settings_subtext (3870836550836457943) -->
+    <skip />
     <string name="enable_quick_setting" msgid="6648073323202243604">"Mostra in Impostazioni rapide"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Rosso-verde, ridotta percezione del verde"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Rosso-verde, ridotta percezione del rosso"</string>
@@ -3081,6 +3100,8 @@
     <string name="on_device_recognition_settings" msgid="6503160369314598069">"Impostazioni di riconoscimento sul dispositivo"</string>
     <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Riconoscimento sul dispositivo"</string>
     <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Riconoscimento vocale sul dispositivo"</string>
+    <!-- no translation found for tts_subtext (8958790811881046789) -->
+    <skip />
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Motore preferito"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Impostazioni motore"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Velocità voce e tono"</string>
@@ -3102,14 +3123,10 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"On"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Off"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Usa Connettività adattiva"</string>
-    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
-    <skip />
-    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
-    <skip />
-    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
-    <skip />
-    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
-    <skip />
+    <string name="adaptive_connectivity_wifi_switch_title" msgid="8534819376336827298">"Passa automaticamente alla rete mobile"</string>
+    <string name="adaptive_connectivity_wifi_switch_summary" msgid="827122572213043364">"Garantisce la connettività quando la connessione Wi-Fi è scarsa o non disponibile. Potrebbero essere applicati dei costi per i dati."</string>
+    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="1852172801040818123">"Ottimizza la rete per la durata della batteria"</string>
+    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Seleziona automaticamente la migliore connessione di rete per prolungare la durata della batteria"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Sicurezza di rete mobile"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipo di rete, crittografia, controlli di notifica"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"Queste impostazioni ti aiutano a proteggere le tue chiamate, i tuoi messaggi e i tuoi dati da reti obsolete o non criptate che potrebbero esporti a furti di dati o sorveglianza"</string>
@@ -4042,7 +4059,7 @@
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Altre impostazioni"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Altre impostazioni sono disponibili all\'interno di quest\'app"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Attenuazione delle notifiche"</string>
-    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Usa attenuazione delle notifiche"</string>
+    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Usa Attenuazione delle notifiche"</string>
     <string name="notification_polite_description" msgid="6137533404978878957">"Quando ricevi molte notifiche in un breve periodo di tempo, il dispositivo abbasserà il volume e ridurrà al minimo gli avvisi per un massimo di 1 minuto. Non ci sono ripercussioni su chiamate, sveglie e conversazioni prioritarie. \n\nLe notifiche ricevute durante l\'attenuazione possono essere trovate facendo scorrere lo schermo dall\'alto verso il basso."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Applica ai profili di lavoro"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Applica alle app del profilo di lavoro"</string>
@@ -4495,7 +4512,7 @@
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Ottimizza"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"La batteria potrebbe scaricarsi più rapidamente. L\'uso della batteria in background non sarà più impedito all\'app."</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Opzione consigliata per una durata maggiore della batteria"</string>
-    <string name="app_list_preference_none" msgid="1635406344616653756">"Nessuna"</string>
+    <string name="app_list_preference_none" msgid="1635406344616653756">"Nessuno"</string>
     <string name="work_profile_usage_access_warning" msgid="7579246573371327219">"Se disattivi l\'accesso ai dati sull\'utilizzo di questa app, l\'amministratore potrà comunque monitorare l\'utilizzo dei dati per le app nel tuo profilo di lavoro"</string>
     <string name="draw_overlay" msgid="7902083260500573027">"Mostra sopra altre app"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Mostra sopra altre app"</string>
@@ -5463,6 +5480,8 @@
       <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
     </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <!-- no translation found for rtt_settings_summary (9011338875202712756) -->
+    <skip />
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
@@ -5721,10 +5740,13 @@
     <string name="color_inversion_state_on" msgid="1160969033636440368">"On"</string>
     <string name="color_inversion_state_off" msgid="6925638668080451724">"Off"</string>
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Rende gli schermi chiari in scuri e gli schermi scuri in chiari"</string>
-    <string name="magnification_feature_summary" msgid="2053971569640663564">"Aumenta lo zoom sullo schermo"</string>
+    <!-- no translation found for magnification_feature_summary (4403387702011660253) -->
+    <skip />
     <string name="autoclick_disabled" msgid="3213396804955002120">"Off"</string>
-    <string name="show_captions_disabled" msgid="690650956523818755">"Off"</string>
-    <string name="show_captions_enabled" msgid="7089043007924626">"On"</string>
+    <!-- no translation found for show_captions_disabled (924366862253349790) -->
+    <skip />
+    <!-- no translation found for show_captions_enabled (3495595825041704052) -->
+    <skip />
     <string name="live_caption_disabled" msgid="3562035026547887366">"Off"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"On"</string>
     <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Audio <xliff:g id="PERCENT_LEFT">%1$s</xliff:g> a sinistra, <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g> a destra"</string>

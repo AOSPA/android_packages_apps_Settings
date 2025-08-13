@@ -18,12 +18,13 @@ package com.android.settings.appfunctions.sources
 
 import android.content.Context
 import android.nfc.NfcAdapter
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 class NfcStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_UNCATEGORIZED
 
     override suspend fun get(
         context: Context,
@@ -32,7 +33,12 @@ class NfcStateSource : DeviceStateSource {
         val nfcAdapter = NfcAdapter.getDefaultAdapter(context)
         val nfcEnabled = nfcAdapter?.isEnabled
 
-        val item = DeviceStateItem(key = "toggle_nfc", jsonValue = nfcEnabled.toString())
+        val item =
+            DeviceStateItem(
+                key = "toggle_nfc",
+                purpose = "toggle_nfc",
+                jsonValue = nfcEnabled.toString(),
+            )
 
         return PerScreenDeviceStates(description = "NFC", deviceStateItems = listOf(item))
     }

@@ -19,12 +19,11 @@ import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
-import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
-import com.android.settings.utils.highlightPreference
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -123,7 +122,7 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        Intent("android.settings.SUPERVISION_SETTINGS").apply { highlightPreference(metadata?.key) }
+        makeLaunchIntent(context, SupervisionDashboardActivity::class.java, metadata?.key)
 
     private fun getSupervisionClient(context: Context) =
         supervisionClient ?: SupervisionMessengerClient(context).also { supervisionClient = it }

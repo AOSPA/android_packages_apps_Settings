@@ -16,50 +16,48 @@
 
 package com.android.settings.appfunctions
 
+import android.app.appsearch.GenericDocument
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
-import com.android.settings.appfunctions.DeviceStateCategory
-import com.android.settings.appfunctions.providers.DeviceStateProvider
-import com.android.settings.appfunctions.providers.DeviceStateProviderResult
+import com.android.settings.appfunctions.providers.DeviceStateExecutor
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnit
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.junit.MockitoJUnit
 
 @RunWith(AndroidJUnit4::class)
 class DeviceStateAggregatorTest {
 
-    @get:Rule
-    val mockitoRule = MockitoJUnit.rule()
+    @get:Rule val mockitoRule = MockitoJUnit.rule()
 
-    @Mock
-    private lateinit var provider1: DeviceStateProvider
+    @Mock private lateinit var provider1: DeviceStateExecutor
 
-    @Mock
-    private lateinit var provider2: DeviceStateProvider
+    @Mock private lateinit var provider2: DeviceStateExecutor
 
     @Test
     fun aggregate_combinesResultsFromMultipleProviders() = runTest {
         // Arrange
         val states1 = listOf(PerScreenDeviceStates(description = "State from Provider 1"))
-        val result1 = DeviceStateProviderResult(states = states1, hintText = "Hint 1")
-        `when`(provider1.provide(DeviceStateCategory.UNCATEGORIZED)).thenReturn(result1)
+        val result1 = DeviceStateProviderExecutorResult(states = states1, hintText = "Hint 1")
+        `when`(provider1.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)).thenReturn(result1)
 
         val states2 = listOf(PerScreenDeviceStates(description = "State from Provider 2"))
-        val result2 = DeviceStateProviderResult(states = states2, hintText = "Hint 2")
-        `when`(provider2.provide(DeviceStateCategory.UNCATEGORIZED)).thenReturn(result2)
+        val result2 = DeviceStateProviderExecutorResult(states = states2, hintText = "Hint 2")
+        `when`(provider2.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)).thenReturn(result2)
 
-        val aggregator = DeviceStateAggregator(
-            providers = listOf(provider1, provider2)
-        )
+        val aggregator = DeviceStateProviderAggregator(executors = listOf(provider1, provider2))
 
         // Act
-        val response = aggregator.aggregate(DeviceStateCategory.UNCATEGORIZED, "en-US")
+        val response =
+            aggregator.aggregate(
+                DeviceStateAppFunctionType.GET_UNCATEGORIZED,
+                GenericDocument.Builder<GenericDocument.Builder<*>>("", "", "").build(),
+                "en-US",
+            )
 
         // Assert
         assertThat(response.perScreenDeviceStates).containsExactlyElementsIn(states1 + states2)
@@ -69,10 +67,15 @@ class DeviceStateAggregatorTest {
     @Test
     fun aggregate_withNoProviders_returnsEmptyResponse() = runTest {
         // Arrange
-        val aggregator = DeviceStateAggregator(providers = emptyList())
+        val aggregator = DeviceStateProviderAggregator(executors = emptyList())
 
         // Act
-        val response = aggregator.aggregate(DeviceStateCategory.UNCATEGORIZED, "en-US")
+        val response =
+            aggregator.aggregate(
+                DeviceStateAppFunctionType.GET_UNCATEGORIZED,
+                GenericDocument.Builder<GenericDocument.Builder<*>>("", "", "").build(),
+                "en-US",
+            )
 
         // Assert
         assertThat(response.perScreenDeviceStates).isEmpty()

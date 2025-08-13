@@ -19,7 +19,7 @@ package com.android.settings.appfunctions.sources
 import android.app.usage.UsageStats
 import android.content.Context
 import android.icu.text.RelativeDateTimeFormatter
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.applications.AppsPreferenceController
 import com.android.settings.applications.RecentAppStatsMixin
 import com.android.settingslib.utils.StringUtil
@@ -27,7 +27,8 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateI
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 class RecentAppsStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_UNCATEGORIZED
 
     override suspend fun get(
         context: Context,
@@ -43,6 +44,7 @@ class RecentAppsStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "recent_apps_category_package_${stats.packageName}",
+                    purpose = "recent_apps_category_package_${stats.packageName}",
                     jsonValue =
                         StringUtil.formatRelativeTime(
                             context,

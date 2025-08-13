@@ -24,7 +24,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.UserInfo
 import android.net.Uri
-import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_FULL_SECONDARY
 import android.os.UserManager.USER_TYPE_FULL_SYSTEM
@@ -178,7 +177,7 @@ class SupervisionDeletePinPreferenceTest {
     fun onConfirmDeleteClick_currentUserSupervised_deletesSupervisionData() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-            on { removeUser(UserHandle(SUPERVISING_USER_ID)) } doReturn true
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
         }
         mockSupervisionManager.stub {
             on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
@@ -192,7 +191,7 @@ class SupervisionDeletePinPreferenceTest {
 
         verify(mockSupervisionManager).supervisionRecoveryInfo = null
         verify(mockSupervisionManager).isSupervisionEnabled = false
-        verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
 
         assertThat(backPressedCalled).isTrue()
         assertThat(startedIntent).isNull()
@@ -202,7 +201,7 @@ class SupervisionDeletePinPreferenceTest {
     fun onConfirmDeleteClick_removeUserFails_doesNotDeleteSupervisionRecoveryData() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-            on { removeUser(UserHandle(SUPERVISING_USER_ID)) } doReturn false
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn false
         }
         mockSupervisionManager.stub {
             on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
@@ -226,7 +225,7 @@ class SupervisionDeletePinPreferenceTest {
         onActivityResult(ActivityResult(Activity.RESULT_CANCELED, null))
 
         verify(mockSupervisionManager, never()).isSupervisionEnabled = any()
-        verify(mockUserManager, never()).removeUser(UserHandle(SUPERVISING_USER_ID))
+        verify(mockUserManager, never()).removeUserEvenWhenDisallowed(SUPERVISING_USER_ID)
         verify(lifeCycleContext, never()).notifyPreferenceChange(any())
         assertThat(startedIntent).isNull()
     }

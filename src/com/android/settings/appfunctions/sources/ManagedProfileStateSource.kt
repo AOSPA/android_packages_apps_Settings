@@ -19,12 +19,13 @@ package com.android.settings.appfunctions.sources
 import android.content.Context
 import android.os.UserManager
 import com.android.settings.Utils
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 class ManagedProfileStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_UNCATEGORIZED
 
     override suspend fun get(
         context: Context,
@@ -34,7 +35,11 @@ class ManagedProfileStateSource : DeviceStateSource {
         val hasManagedProfile = Utils.getManagedProfile(userManager) != null
 
         val item =
-            DeviceStateItem(key = "has_managed_profile", jsonValue = hasManagedProfile.toString())
+            DeviceStateItem(
+                key = "has_managed_profile",
+                purpose = "has_managed_profile",
+                jsonValue = hasManagedProfile.toString(),
+            )
 
         return PerScreenDeviceStates(
             description = "Managed profile",

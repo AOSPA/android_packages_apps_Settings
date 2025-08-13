@@ -19,12 +19,13 @@ package com.android.settings.appfunctions.sources
 import android.content.Context
 import android.provider.Settings
 import android.provider.Settings.Secure.NOTIFICATION_HISTORY_ENABLED
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 class NotificationHistoryStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_UNCATEGORIZED
 
     override suspend fun get(
         context: Context,
@@ -33,7 +34,12 @@ class NotificationHistoryStateSource : DeviceStateSource {
         val isEnabled =
             Settings.Secure.getInt(context.contentResolver, NOTIFICATION_HISTORY_ENABLED, 0) == 1
 
-        val item = DeviceStateItem(key = "notification_history", jsonValue = isEnabled.toString())
+        val item =
+            DeviceStateItem(
+                key = "notification_history",
+                purpose = "notification_history",
+                jsonValue = isEnabled.toString(),
+            )
 
         return PerScreenDeviceStates(
             description = "Notification history",

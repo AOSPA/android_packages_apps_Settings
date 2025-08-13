@@ -4432,17 +4432,21 @@
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_fingerprint">To use fingerprint, set PIN</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
-    <string name="lockpassword_confirm_your_password_header">Re-enter your password</string>
+    <string name="lockpassword_confirm_your_password_header">Enter your device password</string>
+    <!-- Header on password setup confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_reenter_your_password_header">Re-enter your password</string>
     <!-- Header on work profile password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_reenter_your_profile_password_header">Re-enter your work password</string>
     <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_work_password_header">Enter your work password</string>
     <!-- Header on pattern confirm screen [CHAR LIMIT=30] -->
-    <string name="lockpassword_confirm_your_pattern_header">Confirm your pattern</string>
+    <string name="lockpassword_confirm_your_pattern_header">Enter your device pattern</string>
     <!-- Header on pattern confirm screen for the work profile [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_your_work_pattern_header">Enter your work pattern</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
-    <string name="lockpassword_confirm_your_pin_header">Re-enter your PIN</string>
+    <string name="lockpassword_confirm_your_pin_header">Enter your device PIN</string>
+    <!-- Header on password setup confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_reenter_your_pin_header">Re-enter your PIN</string>
     <!-- Header on work profile password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_reenter_your_profile_pin_header">Re-enter your work PIN</string>
     <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
@@ -4485,22 +4489,22 @@
 
     <!-- Message to be used to explain the users that they need to enter their pattern to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_pattern_generic">Draw your pattern to continue</string>
+    <string name="lockpassword_confirm_your_pattern_generic">Your pattern verifies it\'s you</string>
     <!-- Message to be used to explain the users that they need to enter their PIN to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_pin_generic">Enter your PIN to continue</string>
+    <string name="lockpassword_confirm_your_pin_generic">Your PIN verifies it\'s you</string>
     <!-- Message to be used to explain the users that they need to enter their password to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_password_generic">Enter your password to continue</string>
+    <string name="lockpassword_confirm_your_password_generic">Your password verifies it\'s you</string>
     <!-- Message to be used to explain the users that they need to enter their work pattern to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_pattern_generic_profile">Draw your work pattern to continue</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile">Your work pattern verifies it\'s you</string>
     <!-- Message to be used to explain the users that they need to enter their work PIN to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_pin_generic_profile">Enter your work PIN to continue</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile">Your work PIN verifies it\'s you</string>
     <!-- Message to be used to explain the users that they need to enter their work password to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_password_generic_profile">Enter your work password to continue</string>
+    <string name="lockpassword_confirm_your_password_generic_profile">Your work password verifies it\'s you</string>
 
     <!-- This string shows up on a screen where a user can enter a pattern that
      unlocks their device. This is an extra security measure that's required for them to
@@ -5126,9 +5130,13 @@
     <string name="mouse_scrolling_acceleration">Controlled scrolling</string>
     <!-- Title for the 'Scrolling speed' slider seekbar, which controls how fast content scrolls when the user moves the scroll wheel. [CHAR LIMIT=60]-->
     <string name="mouse_scrolling_speed">Scrolling speed</string>
-    <!-- Description for the button that makes mouse pointer speed faster. [CHAR_LIMIT=NONE] -->
+    <!-- Accessibility label for button next to a slider that makes mouse scrolling speed faster. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_scrolling_speed_make_faster_description">Make scrolling faster</string>
+    <!-- Accessibility label for button next to a slider that makes mouse scrolling speed slower. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_scrolling_speed_make_slower_description">Make scrolling slower</string>
+    <!-- Accessibility label for button next to a slider that makes mouse pointer speed faster. [CHAR_LIMIT=NONE] -->
     <string name="mouse_pointer_speed_make_faster_desc">Make pointer faster</string>
-    <!-- Description for the button that makes mouse pointer speed slower. [CHAR_LIMIT=NONE] -->
+    <!-- Accessibility label for button next to a slider that makes mouse pointer speed slower. [CHAR_LIMIT=NONE] -->
     <string name="mouse_pointer_speed_make_slower_desc">Make pointer slower</string>
     <!-- Title for the 'Swap buttons' preference switch, which swaps the left and right buttons of connected mice so that right click will be the primary action button and left clicking will be the secondary action, for example showing the context menu. [CHAR LIMIT=60] -->
     <string name="mouse_swap_primary_button">Swap primary mouse button</string>
@@ -8930,7 +8938,12 @@
     <string name="live_caption_title">Live Caption</string>
 
     <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
-    <string name="live_caption_summary">Automatically caption media</string>
+    <string name="live_caption_summary">Get captions for calls, videos, and other media</string>
+
+    <!-- State and summary when audio captioning is enabled. [CHAR LIMIT=NONE]-->
+    <string name="live_caption_on_summary">On / Get captions for calls, videos, and other media</string>
+    <!-- State and summary when audio captioning is disabled. [CHAR LIMIT=NONE]-->
+    <string name="live_caption_off_summary">Off / Get captions for calls, videos, and other media</string>
 
     <!-- Output device type for the wired headphones that is available for spatializer effect. [CHAR LIMIT=NONE]-->
     <string name="spatial_audio_wired_headphones">Wired headphones</string>
@@ -9379,6 +9392,8 @@
     <!-- [CHAR LIMIT=100] Notification bundle type summary: content recommendations -->
     <string name="notification_bundle_recs_summary">Newsletters, recommended media, and more</string>
 
+    <!-- Notification bundling: text to be displayed when there are no apps excluded from being bundled -->
+    <string name="notification_bundle_no_apps_desc">All apps are currently using notification organizer</string>
 
     <!-- App Info > Notifications: Title for section where notifications AI features can be configured [CHAR LIMIT=80]-->
     <string name="notification_ai_features_title">Manage with AI</string>
@@ -9394,6 +9409,9 @@
     <string name="notification_excluded_apps">Don\'t include these apps</string>
     <string name="notification_app_level_summarize_title">Notification summaries</string>
     <string name="notification_app_level_summarize_subtext">Get quick recaps of longer messages</string>
+
+    <!-- Notification summarization: text to be displayed when there are no messaging apps excluded from being summarized -->
+    <string name="notification_summarization_no_apps_desc">All applicable apps are currently using notification summaries</string>
 
     <!-- App Info > Notifications: Title for section controlling whether this app may show notifications in a promoted format [CHAR LIMIT=80] -->
     <string name="live_notifications">Live notifications</string>
@@ -10783,6 +10801,18 @@
 
     <!-- Summary for the entrypoint that navigates to the App Function Access Settings page. [CHAR LIMIT=130]-->
     <string name="app_function_access_settings_summary">Agents that can access info or take actions in apps</string>
+
+    <!-- Title for the entrypoint that navigates to the Manage App Function Access for specific Agent Settings page. [CHAR LIMIT=70]-->
+    <string name="manage_agent_app_function_access_settings_title">App access</string>
+
+    <!-- Summary for the entrypoint that navigates to the Manage App Function Access for specific Agent Settings page. [CHAR LIMIT=130]-->
+    <string name="manage_agent_app_function_access_settings_summary">Allow this agent to access info or take actions in apps</string>
+
+    <!-- Title for the entrypoint that navigates to the App Function Access of this Target app Settings page. [CHAR LIMIT=70]-->
+    <string name="manage_target_app_function_access_settings_title">Agent access</string>
+
+    <!-- Summary for the entrypoint that navigates to the App Function Access  of this Target app Settings page. [CHAR LIMIT=130]-->
+    <string name="manage_target_app_function_access_settings_summary">Agents that can access info or take actions in this app</string>
 
     <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
     <string name="tap_to_wake">Tap to wake</string>
@@ -14961,4 +14991,10 @@
     <string name="identity_check_watch_promo_card_title">Use Identity Check and watch on more apps</string>
     <!-- Summary for Identity Check promo card in Safety Center (watch-specific) [CHAR LIMIT=NONE] -->
     <string name="identity_check_promo_card_watch_summary">Ensure your identity protection on all apps that support Fingerprint and Face Unlock in trusted places like your home or office. Use Identity Check with your watch to extend your protection even beyond trusted places.</string>
+
+    <!-- Title for Other settings category in Safety Center [CHAR LIMIT=60] -->
+    <string name="more_security_privacy_category_title">Other settings</string>
+    <!-- Summary for more_security_privacy_summary category in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="more_security_privacy_summary">Autofill, notifications, and more</string>
+
 </resources>

@@ -27,7 +27,6 @@ import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 import android.content.pm.PackageManager.DONT_KILL_APP
 import android.content.pm.UserInfo
 import android.content.res.Resources
-import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_FULL_SECONDARY
 import android.os.UserManager.USER_TYPE_FULL_SYSTEM
@@ -166,7 +165,7 @@ class SupervisionHelperTest {
     fun deleteSupervisionData_currentUserSupervised_deletesSupervisionData() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-            on { removeUser(UserHandle(SUPERVISING_USER_ID)) } doReturn true
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
         }
         mockSupervisionManager.stub {
             on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
@@ -179,7 +178,7 @@ class SupervisionHelperTest {
         assertThat(result).isTrue()
         verify(mockSupervisionManager).setSupervisionEnabled(false)
         verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
-        verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
     }
 
     @Test
@@ -198,7 +197,7 @@ class SupervisionHelperTest {
         assertThat(result).isFalse()
         verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
         verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
-        verify(mockUserManager, never()).removeUser(any<UserHandle>())
+        verify(mockUserManager, never()).removeUserEvenWhenDisallowed(any<Int>())
     }
 
     @Test

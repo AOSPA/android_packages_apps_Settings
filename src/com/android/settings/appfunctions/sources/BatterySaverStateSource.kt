@@ -18,12 +18,13 @@ package com.android.settings.appfunctions.sources
 
 import android.content.Context
 import android.provider.Settings
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 class BatterySaverStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.BATTERY
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_BATTERY
 
     override suspend fun get(
         context: Context,
@@ -39,6 +40,7 @@ class BatterySaverStateSource : DeviceStateSource {
         val item =
             DeviceStateItem(
                 key = "battery_saver_reminders",
+                purpose = "battery_saver_reminders",
                 jsonValue = areRemindersEnabled.toString(),
             )
 

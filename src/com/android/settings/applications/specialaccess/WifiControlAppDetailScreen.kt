@@ -27,8 +27,14 @@ import android.content.pm.PackageInfo.REQUESTED_PERMISSION_GRANTED
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.UserHandle
+import androidx.core.net.toUri
 import com.android.settings.R
+import com.android.settings.Settings.ChangeWifiStateActivity
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
+import com.android.settings.flags.Flags
+import com.android.settings.utils.highlightPreference
+import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import kotlin.collections.indexOf
 
@@ -66,10 +72,18 @@ open class WifiControlAppDetailScreen(context: Context, arguments: Bundle) :
 
     override fun getMetricsCategory() = SettingsEnums.CONFIGURE_WIFI
 
+    override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
+
     override fun getAccessChangeActionMetrics(allowed: Boolean): Int =
         when (allowed) {
             true -> SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_ALLOW
             else -> SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_DENY
+        }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, ChangeWifiStateActivity::class.java, metadata?.key).apply {
+            data = "package:$packageName".toUri()
+            highlightPreference(arguments, metadata?.bindingKey)
         }
 
     companion object {

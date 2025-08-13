@@ -19,13 +19,14 @@ package com.android.settings.appfunctions.sources
 import android.content.Context
 import android.provider.Settings
 import android.provider.Settings.Global.NOTIFICATION_BUBBLES
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.notification.BubbleHelper
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 class BubblesStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.UNCATEGORIZED
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_UNCATEGORIZED
 
     override suspend fun get(
         context: Context,
@@ -39,7 +40,11 @@ class BubblesStateSource : DeviceStateSource {
             ) == BubbleHelper.SYSTEM_WIDE_ON
 
         val item =
-            DeviceStateItem(key = "global_notification_bubbles", jsonValue = isEnabled.toString())
+            DeviceStateItem(
+                key = "global_notification_bubbles",
+                purpose = "global_notification_bubbles",
+                jsonValue = isEnabled.toString(),
+            )
 
         return PerScreenDeviceStates(description = "Bubbles", deviceStateItems = listOf(item))
     }

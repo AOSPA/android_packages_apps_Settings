@@ -17,13 +17,14 @@
 package com.android.settings.appfunctions.sources
 
 import android.content.Context
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.fuelgauge.BatteryUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 class BatteryStatusStateSource : DeviceStateSource {
-    override val category: DeviceStateCategory = DeviceStateCategory.BATTERY
+    override val appFunctionType: DeviceStateAppFunctionType =
+        DeviceStateAppFunctionType.GET_BATTERY
 
     override suspend fun get(
         context: Context,
@@ -38,14 +39,24 @@ class BatteryStatusStateSource : DeviceStateSource {
         val chargedByLabel =
             if (isCharging) batteryInfo.remainingLabel ?: batteryInfo.statusLabel else null
 
-        val batteryStatusItem = DeviceStateItem(key = "battery_status", jsonValue = statusLabel)
+        val batteryStatusItem =
+            DeviceStateItem(
+                key = "battery_status",
+                purpose = "battery_status",
+                jsonValue = statusLabel,
+            )
         val batteryTimeRemainingItem =
             DeviceStateItem(
                 key = "battery_time_remaining",
+                purpose = "battery_time_remaining",
                 jsonValue = timeRemainingLabel.toString(),
             )
         val batteryChargedByItem =
-            DeviceStateItem(key = "battery_charged_by", jsonValue = chargedByLabel.toString())
+            DeviceStateItem(
+                key = "battery_charged_by",
+                purpose = "battery_charged_by",
+                jsonValue = chargedByLabel.toString(),
+            )
 
         return PerScreenDeviceStates(
             description = "Battery status",

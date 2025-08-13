@@ -16,14 +16,24 @@
 
 package com.android.settings.appfunctions
 
-enum class DeviceStateCategory(val functionId: String) {
-    UNCATEGORIZED("getUncategorizedDeviceState"),
-    STORAGE("getStorageDeviceState"),
-    BATTERY("getBatteryDeviceState"),
-    MOBILE_DATA("getMobileDataUsageDeviceState");
+enum class DeviceStateAppFunctionType(val functionId: String) {
+    // AppFunctions for getting device state
+    GET_UNCATEGORIZED("getUncategorizedDeviceState"),
+    GET_STORAGE("getStorageDeviceState"),
+    GET_BATTERY("getBatteryDeviceState"),
+    GET_MOBILE_DATA("getMobileDataUsageDeviceState"),
+
+    // AppFunctions for getting device state metadata
+    GET_METADATA("getDeviceStateMetadata"),
+
+    // AppFunctions for setting device state
+    SET_DEVICE_STATE("setDeviceState"),
+    ADJUST_DEVICE_STATE_BY_PERCENTAGE("adjustNumericDeviceStateByPercentage"),
+    OFFSET_DEVICE_STATE_BY_VALUE("offsetNumericDeviceStateByValue"),
+    TOGGLE_DEVICE_STATE("toggleDeviceState");
 
     companion object {
-        fun fromId(functionId: String): DeviceStateCategory? {
+        fun fromId(functionId: String): DeviceStateAppFunctionType? {
             return entries.firstOrNull { it.functionId == functionId }
         }
     }

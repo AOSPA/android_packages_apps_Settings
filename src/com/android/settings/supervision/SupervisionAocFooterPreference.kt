@@ -53,9 +53,12 @@ class SupervisionAocFooterPreference(
 
     override fun onResume(context: PreferenceLifecycleContext) {
         context.lifecycleScope.launch {
-            // Immediately update the UI with cached data
-            preferenceData = preferenceDataProvider.getCachedPreferenceData(listOf(KEY))[KEY]
-            context.notifyPreferenceChange(KEY)
+            val cachedData = preferenceDataProvider.getCachedPreferenceData(listOf(KEY))[KEY]
+
+            if (cachedData != null) {
+                preferenceData = cachedData
+                context.notifyPreferenceChange(KEY)
+            }
 
             // Asynchronously fetch fresh data and update the UI
             val freshPreferenceData =

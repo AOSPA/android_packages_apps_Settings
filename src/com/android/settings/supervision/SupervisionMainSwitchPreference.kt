@@ -111,9 +111,12 @@ class SupervisionMainSwitchPreference(
             }
 
         context.lifecycleScope.launch {
-            // Immediately update the UI with cached data
-            preferenceDataMap = preferenceDataProvider.getCachedPreferenceData(preferenceKeys)
-            updateDependentPreferenceSummary(mainSwitchPreference)
+            val cachedData = preferenceDataProvider.getCachedPreferenceData(preferenceKeys)
+
+            if (cachedData.isNotEmpty()) {
+                preferenceDataMap = cachedData
+                updateDependentPreferenceSummary(mainSwitchPreference)
+            }
 
             // TODO(b/426048474): when navigating from supervision app back to dashboard, the
             // settings injection often overrides the first preference data update, here we

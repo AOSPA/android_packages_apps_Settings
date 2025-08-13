@@ -1504,11 +1504,11 @@
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Көмескі жарық режимін пайдалану"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Көмескі жарық режимінде көрсетілетін элементтерді таңдау"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Экранды өшіру"</string>
-    <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Көмескі жарықтағы сағат"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Жарығы аз сағат"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"Қосулы/<xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Өшірулі"</string>
     <string name="low_light_display_behavior_screen_off_full_summary" msgid="6671607843870561892">"Қоршаған орта қараңғы болған кезде, экран өшеді"</string>
-    <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"Көмескі жарықтағы сағат қоршаған орта қараңғы болған кезде көрсетіледі"</string>
+    <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"Қараңғы кезде жарығы аз сағат көрсетіледі."</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Экранды автоматты қосу"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Көрсетілетін уақыты"</string>
     <string name="doze_title" msgid="1523090408230862316">"Хабарландыру үшін экранды қосу"</string>
@@ -1847,7 +1847,7 @@
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Құрылғы локациясы қолжетімді болса, ол уақыт белдеуін орнату үшін пайдаланылуы мүмкін."</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Хабарландырулар"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Уақыт белдеуінің өзгеруі"</string>
-    <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Уақыт белдеуі автоматты түрде жаңартылған кезде хабарландыру алу"</string>
+    <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Уақыт белдеуі автоматты түрде жаңартылған кезде, хабарландыру алу"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"хабарландыру, уақыт, белдеу, уақыт белдеуі"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Заңнамалық ақпарат, күйін, бағдарлама нұсқасын қарау"</string>
     <string name="legal_information" msgid="7509900979811934843">"Құқықтық ақпарат"</string>
@@ -2256,7 +2256,7 @@
     <string name="gesture_summary_recent_apps" msgid="6643179135202417509">"Үш саусақпен жоғары сырғытып, ұстап тұрыңыз да, жіберіңіз."</string>
     <string name="gesture_title_notifications" msgid="791717222472350194">"Жылдам параметрлер мен хабарландыруларды көру"</string>
     <string name="gesture_summary_notifications" msgid="8419514601638387255">"Негізгі экранда үш саусақпен төмен сырғытыңыз."</string>
-    <string name="gesture_title_switch_apps" msgid="5840994412037872157">"Қолданбаларды ауыстыру"</string>
+    <string name="gesture_title_switch_apps" msgid="5840994412037872157">"Қолданбалар арасында ауысу"</string>
     <string name="gesture_summary_switch_apps" msgid="6842648062151413042">"Төрт саусақпен солға не оңға сырғытыңыз."</string>
     <string name="gesture_button_skip" msgid="5174842083451193213">"Өткізіп жіберу"</string>
     <string name="gesture_button_next" msgid="695288092704187356">"Келесі"</string>
@@ -2370,7 +2370,10 @@
     <string name="audio_category_title" msgid="5283853679967605826">"Аудио"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Жалпы"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Дисплей"</string>
-    <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Түс және қозғалыс"</string>
+    <!-- no translation found for accessibility_color_and_motion_title (1085072332445818494) -->
+    <skip />
+    <!-- no translation found for accessibility_color_and_motion_subtext (1150281881647191503) -->
+    <skip />
     <string name="accessibility_pointer_and_touchpad_title" msgid="5703454643194245909">"Курсор мен сенсорлық тақтаның арнайы мүмкіндіктері"</string>
     <string name="accessibility_pointer_and_touchpad_summary" msgid="8588221231953604340">"Өлшем, түс, түр"</string>
     <string name="accessibility_pointer_color_customization_title" msgid="2841888132681075999">"Курсор түсі"</string>
@@ -2393,10 +2396,15 @@
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Экранды қараңғылау"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Басқару элементтері"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Уақытты басқару элементтері"</string>
-    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Жүйені басқару элементтері"</string>
-    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Пікір жіберу"</string>
-    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <!-- no translation found for accessibility_tap_assistance_subtext (1805279944665087799) -->
     <skip />
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Жүйені басқару элементтері"</string>
+    <!-- no translation found for accessibility_system_controls_subtext (2722046038429586174) -->
+    <skip />
+    <!-- no translation found for accessibility_system_controls_subtext_one_handed_not_supported (4973507525360793402) -->
+    <skip />
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Пікір жіберу"</string>
+    <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Сауалнамаға қатысу"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Google мүгедектік қолдау ұжымы"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Арнайы мүмкіндіктер сауалнамасы"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Пікіріңізді бөлісіңіз"</string>
@@ -2432,14 +2440,14 @@
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"Тінтуірді экранның ортасында ұстау арқылы экранды жылжыту"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"Тінтуір экранның шетіне тиген кезде экранды жылжыту"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Терген мәтінге ілесу"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"Мәтін тергенде, ұлғайтқыш ілесіп отырады"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"Мәтін тергенде, ұлғайтқыш ілесіп отырады."</string>
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Пернетақтаның ерекшеленген элементіне ілесу"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"Пернетақта көмегімен шарлаған кезде, ұлғайтқыш ерекшеленген элементке ілеседі"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Пернетақтаны ұлғайту"</string>
-    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Толық экранды ұлғайту кезінде эмоджилер мен әріптерді көру үшін пернетақтаны ұлғайтыңыз"</string>
+    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Толық экранды ұлғайту кезінде эмоджилер мен әріптерді көру үшін пернетақтаны ұлғайтыңыз."</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Экранның тек бір бөлігін ұлғайтуға жарамайды"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Қолданбаларды ауыстырғанда қосулы қалдыру"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="642275893256862796">"Ұлғайтқыш қосулы қалады және қолданбаларды ауыстырған кезде кішірейеді"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="642275893256862796">"Ұлғайтқыш қосулы қалады және қолданбаларды ауыстырған кезде кішірейеді."</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"Экранның тек бір бөлігін ұлғайту кезінде қолданылмайды."</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Джойстик"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"Экрандағы джойстикпен ұлғайтқышты іске қосыңыз және жылжытыңыз. Ұлғайтқышты басқару үшін джойстикті басып ұстаңыз да, сүйреңіз. Джойстиктің өзін жылжыту үшін оны басып, сүйреңіз."</string>
@@ -2468,7 +2476,10 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Таңбашамен үлкейту"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Таңбашамен және үш рет түртіп үлкейту"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g> туралы ақпарат"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Масштаб және мәтін"</string>
+    <!-- no translation found for accessibility_text_reading_options_title (2059907327364152763) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_options_subtext (3480489973093251705) -->
+    <skip />
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Мәтіннің көрсетілу жолын өзгерту"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Тақырып: Әуе шарларының дизайны"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Жіберуші: Асқар"</string>
@@ -2593,13 +2604,13 @@
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 секунд"</string>
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 минут"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 минут"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Шара қолдану ұзақтығы"</string>
-    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Шара қолдану ұзақтығы (арнайы мүмкіндіктерді күту уақыты) туралы"</string>
-    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Шара қолдану ұзақтығы туралы толық ақпарат"</string>
-    <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Шара қолдану ұзақтығы"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Әрекет ету уақыты"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Әрекет ету уақыты туралы"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Әрекет ету уақыты туралы толық ақпарат"</string>
+    <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Әрекет ету уақыты"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Бұл уақыт белгілеу параметрі қолданбалардың барлығында бола бермейді."</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Шара қолдануды талап ететін уақытша хабарлардың көрсетілу ұзақтығын таңдаңыз."</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Түртіп ұстағандағы кідіріс"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Басып тұрғандағы кідіріс"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Түс инверсиясы"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Түс инверсиясын пайдалану"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Түс инверсиясының жылдам пәрмені"</string>
@@ -2642,8 +2653,10 @@
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Навигация параметрлері"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Діріл және хептика"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Әртүрлі қолданыстағы діріл күшін бақылаңыз."</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Қосулы"</string>
-    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Өшірулі"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (3316037269092584284) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (113565506991847845) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Құрылғы дыбысы өшірілгендіктен, ол дірілдемейді."</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Қоңыраулар"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Хабарландырулар мен оятқыштар"</string>
@@ -2663,6 +2676,8 @@
     <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"\"Жылдам параметрлер\" мәзіріне түсті түзету функциясын экранның жоғарғы жағынан да енгізе аласыз."</string>
     <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"\"Жылдам параметрлер\" мәзіріне түс инверсиясы функциясы енгізілді. Оны қосу немесе өшіру үшін төмен сырғытыңыз."</string>
     <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"\"Жылдам параметрлер\" мәзіріне түс инверсиясы функциясын экранның жоғарғы жағынан да енгізе аласыз."</string>
+    <!-- no translation found for reduce_bright_colors_preference_summary (8112736110942731246) -->
+    <skip />
     <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"\"Жылдам параметрлер\" мәзіріне экранды қарайту функциясы енгізілді. Оны қосу немесе өшіру үшін төмен сырғытыңыз."</string>
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"\"Жылдам параметрлер\" мәзіріне экранды қарайту функциясын экранның жоғарғы жағынан да енгізе аласыз."</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"\"Жылдам параметрлер\" мәзіріне бір қолмен басқару режимі енгізілді. Оны қосу немесе өшіру үшін төмен сырғытыңыз."</string>
@@ -2728,6 +2743,8 @@
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Қажетті есту құрылғысы көрінбей тұр ма?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Басқа құрылғыларды көру"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Аудионы реттеу"</string>
+    <!-- no translation found for accessibility_audio_adjustment_subtext (2190523175597700025) -->
+    <skip />
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Аудиосипаттама"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Қолдау көрсетілетін фильмдер мен сериалдарда экрандағы әрекеттің дыбыстық сипаттамасын есту"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"аудиосипаттама, аудио, сипаттама, көру қабілеті нашар,"</string>
@@ -2738,6 +2755,8 @@
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Жұмыс істеп тұрған жоқ. Ақпарат алу үшін түртіңіз."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Бұл қызмет жұмыс істемейді."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Арнайы мүмкіндіктердің жылдам пәрмендері"</string>
+    <!-- no translation found for accessibility_shortcuts_settings_subtext (3870836550836457943) -->
+    <skip />
     <string name="enable_quick_setting" msgid="6648073323202243604">"Жылдам параметрлер арқылы көрсету"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Қызыл мен жасыл, жасылды нашар көру"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Қызыл мен жасыл, қызылды нашар көру"</string>
@@ -3008,10 +3027,10 @@
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Қолданбаның <xliff:g id="SLOT">%s</xliff:g> пайдалануы"</string>
     <string name="battery_system_usage_since_last_full_charge_to" msgid="4196795733829841971">"Соңғы толық зарядталған уақыттан (<xliff:g id="SLOT_TIMESTAMP">%s</xliff:g>) бергі жүйенің пайдаланылуы"</string>
     <string name="battery_app_usage_since_last_full_charge_to" msgid="4339201995118102114">"Соңғы толық зарядталған уақыттан (<xliff:g id="SLOT_TIMESTAMP">%s</xliff:g>) бергі қолданбаның пайдаланылуы"</string>
-    <string name="battery_usage_total_less_than_one_minute" msgid="951460680288855780">"Барлығы: бір минуттан аз."</string>
-    <string name="battery_usage_background_less_than_one_minute" msgid="267133882897827276">"Фон: бір минуттан аз."</string>
-    <string name="battery_usage_screen_time_less_than_one_minute" msgid="578511021578427369">"Пайдаланылу уақыты: бір минуттан аз."</string>
-    <string name="power_usage_time_less_than_one_minute" msgid="1599706998204418081">"Бір минуттан аз."</string>
+    <string name="battery_usage_total_less_than_one_minute" msgid="951460680288855780">"Барлығы: бір минуттан аз"</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="267133882897827276">"Фон: бір минуттан аз"</string>
+    <string name="battery_usage_screen_time_less_than_one_minute" msgid="578511021578427369">"Пайдаланылу уақыты: бір минуттан аз"</string>
+    <string name="power_usage_time_less_than_one_minute" msgid="1599706998204418081">"Бір минуттан аз"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Барлығы: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Фондық режимде: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Пайдалану уақыты: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3081,6 +3100,8 @@
     <string name="on_device_recognition_settings" msgid="6503160369314598069">"Құрылғыда тану параметрлері"</string>
     <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Құрылғыда тану"</string>
     <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Құрылғыда сөз тану"</string>
+    <!-- no translation found for tts_subtext (8958790811881046789) -->
+    <skip />
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Таңдалған жүйе"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Жүйе параметрлері"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Сөйлеу жылдамдығы және екпін"</string>
@@ -3102,14 +3123,10 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Қосулы"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Өшіру"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Байланысты бейімдеу функциясын пайдалану"</string>
-    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
-    <skip />
-    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
-    <skip />
-    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
-    <skip />
-    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
-    <skip />
+    <string name="adaptive_connectivity_wifi_switch_title" msgid="8534819376336827298">"Мобильдік желіге автоматты түрде ауысу"</string>
+    <string name="adaptive_connectivity_wifi_switch_summary" msgid="827122572213043364">"Wi-Fi нашар немесе қолжетімсіз болса, байланысты қамтамасыз етеді. Трафик ақысы алынуы мүмкін."</string>
+    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="1852172801040818123">"Батарея жұмысының ұзақтығына арналған оңтайлы желі"</string>
+    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Батарея жұмысының ұзақтығын арттыру үшін ең жақсы желі байланысын автоматты түрде таңдайды."</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Мобильдік желінің қауіпсіздігі"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Желі түрі, шифрлау, хабарландыруды басқару элементтері"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"Бұл параметрлер қоңырауларды, хабарларды және деректерді ескірген не шифрланбаған желілерден қорғауға көмектеседі. Мұндай желілер деректеріңіздің ұрлануына немесе бақылануына себепші болуы мүмкін."</string>
@@ -3737,7 +3754,7 @@
     <string name="sound_audio_category_title" msgid="3445871661303518618">"Аудио"</string>
     <string name="system_sounds_and_vibrations_category_title" msgid="4162079598490981456">"Жүйе дыбыстары және дірілдері"</string>
     <string name="work_profile_sound_category_title" msgid="1708926655170323454">"Жұмыс профилінің дыбысы"</string>
-    <string name="live_caption_title" msgid="8617086825712756983">"Live Caption"</string>
+    <string name="live_caption_title" msgid="8617086825712756983">"Автоматты субтитр"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Автоматты субтитр қосу"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Сымды құлақаспап"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Үйлесімді медиақұрылғылардан дыбыс барынша иммерсивті шығады."</string>
@@ -3810,7 +3827,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Тұсқағаз жарықтығының сүзгісін реттеу"</string>
     <string name="mode_dark_theme_title" msgid="1938553262958310149">"Қараңғы режимді қосу"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"қараңғы режимді қосу"</string>
-    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Көзге жайлы қараңғы фонды пайдалану үшін құрылғы тақырыбын ауыстырыңыз."</string>
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Көзге жайлы қараңғы фонды пайдалану үшін құрылғы тақырыбын ауыстыру"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Дисплей өзгерістері жоқ}=1{{effect_1}}=2{{effect_1} және {effect_2}}=3{{effect_1}, {effect_2} және {effect_3}}other{{effect_1}, {effect_2} және тағы # әсер}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Барлық хабарландыруға рұқсат ету"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Адамдар, қолданбалар және дыбыстар тоқтата алады."</string>
@@ -4192,7 +4209,7 @@
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"оятқыштар"</string>
     <string name="zen_mode_alarms_list_first" msgid="2780418316613576610">"Оятқыштар"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"Mультимeдиа дыбыстары"</string>
-    <string name="zen_mode_media_summary" msgid="7174081803853351461">"Бейнелердің, ойындардың және басқа медиафайлдардың дыбыстары"</string>
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"Бейнелердің, ойындардың және басқа мультимедианың дыбыстары"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"мультимeдиа"</string>
     <string name="zen_mode_media_list_first" msgid="7824427062528618442">"Meдиафайлдар"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Түрту дыбысы"</string>
@@ -4218,7 +4235,7 @@
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Қолданбаларға қайта анықтауға рұқсат беру"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Тоқтата алатын қолданбалар"</string>
-    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Басқа да қолданбаларды таңдаңыз"</string>
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Басқа қолданбалар"</string>
     <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Ешқандай қолданба таңдалмады"</string>
     <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Ешқандай қолданба тоқтата алмайды."</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Қолданба қосу"</string>
@@ -4672,7 +4689,7 @@
     <string name="battery_saver_on_summary" msgid="4605146593966255848">"Қосулы"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Заряд деңгейі <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> болғанда қосылады."</string>
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Өшірулі"</string>
-    <string name="app_battery_usage_title" msgid="346558380609793334">"Қолданбаның батарея шығындау көрсеткіші"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Қолданбаның батарея шығыны"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Қолданбаларда батарея шығындау көрсеткішін орнату"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Параметрлерді көру"</string>
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Тексеру"</string>
@@ -5463,6 +5480,8 @@
       <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
     </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <!-- no translation found for rtt_settings_summary (9011338875202712756) -->
+    <skip />
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
@@ -5721,10 +5740,13 @@
     <string name="color_inversion_state_on" msgid="1160969033636440368">"Қосулы"</string>
     <string name="color_inversion_state_off" msgid="6925638668080451724">"Өшірулі"</string>
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Жарық экрандарды қараңғы, ал қараңғы экрандарды жарық қылады."</string>
-    <string name="magnification_feature_summary" msgid="2053971569640663564">"Экранда ұлғайту"</string>
+    <!-- no translation found for magnification_feature_summary (4403387702011660253) -->
+    <skip />
     <string name="autoclick_disabled" msgid="3213396804955002120">"Өшірулі"</string>
-    <string name="show_captions_disabled" msgid="690650956523818755">"Өшірулі"</string>
-    <string name="show_captions_enabled" msgid="7089043007924626">"Қосулы"</string>
+    <!-- no translation found for show_captions_disabled (924366862253349790) -->
+    <skip />
+    <!-- no translation found for show_captions_enabled (3495595825041704052) -->
+    <skip />
     <string name="live_caption_disabled" msgid="3562035026547887366">"Өшірулі"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Қосулы"</string>
     <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Аудио: <xliff:g id="PERCENT_LEFT">%1$s</xliff:g> сол жақ, <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g> оң жақ"</string>

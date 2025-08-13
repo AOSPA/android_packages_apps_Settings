@@ -18,7 +18,7 @@ package com.android.settings.appfunctions.sources
 
 import android.content.Context
 import androidx.annotation.Keep
-import com.android.settings.appfunctions.DeviceStateCategory
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 /**
@@ -28,10 +28,10 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDev
 @Keep
 interface DeviceStateSource {
     /**
-     * The category this device state source belongs to. Each implementation must define its
-     * specific category.
+     * The app function this device state source belongs to. Each implementation must define its
+     * specific app function.
      */
-    val category: DeviceStateCategory
+    val appFunctionType: DeviceStateAppFunctionType
 
     /**
      * Retrieves the [PerScreenDeviceStates] for the current context. If no specific states are

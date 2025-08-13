@@ -33,7 +33,6 @@ import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Flags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
@@ -93,9 +92,7 @@ public class AutoLockSettingsFragmentTest {
     @Test
     public void verifyMetricsConstant() {
         mSetFlagsRule.enableFlags(
-                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE,
-                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
         assertThat(mFragment.getMetricsCategory()).isEqualTo(SettingsEnums.PRIVATE_SPACE_SETTINGS);
     }
 
@@ -103,9 +100,7 @@ public class AutoLockSettingsFragmentTest {
     @UiThreadTest
     public void getCandidates_returnsCandidateInfoListWithAllKeys() {
         mSetFlagsRule.enableFlags(
-                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE,
-                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
         mFragment.onAttach(mContext);
 
         final List<? extends CandidateInfo> candidates = mFragment.getCandidates();
@@ -121,9 +116,7 @@ public class AutoLockSettingsFragmentTest {
     @UiThreadTest
     public void getDefaultKey_returnsStoredAutoLockOptionsValue() {
         mSetFlagsRule.enableFlags(
-                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE,
-                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
 
         mFragment.onAttach(mContext);
 
@@ -148,9 +141,7 @@ public class AutoLockSettingsFragmentTest {
     @UiThreadTest
     public void setDefaultKey_storesCorrectAutoLockOptionValue() {
         mSetFlagsRule.enableFlags(
-                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE,
-                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
 
         mFragment.onAttach(mContext);
         mFragment.setDefaultKey("2");

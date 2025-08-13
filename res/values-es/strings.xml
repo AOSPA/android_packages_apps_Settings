@@ -326,12 +326,12 @@
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Fecha"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"Buscar región"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"Región"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="2130108030162342594">"Compensación de GMT"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="2130108030162342594">"Compensación horaria con GMT"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
     <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Usa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
     <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> empieza el <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Se usa la <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> (sin horario de verano)."</string>
+    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Se usa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> (sin horario de verano)."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Horario de verano"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Hora estándar"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Seleccionar por región"</string>
@@ -1470,7 +1470,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Ajustes del modo Descanso"</string>
     <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
     <skip />
-    <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Ajustes de modos"</string>
+    <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Ajustes de los modos"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Mejora la iluminación, la claridad y la gama de colores de las imágenes y los vídeos de alto rango dinámico (HDR). El contenido HDR se verá más brillante."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Tiempo de espera de la pantalla"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Tras <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
@@ -2370,7 +2370,10 @@
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"General"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Visualización"</string>
-    <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Color y movimiento"</string>
+    <!-- no translation found for accessibility_color_and_motion_title (1085072332445818494) -->
+    <skip />
+    <!-- no translation found for accessibility_color_and_motion_subtext (1150281881647191503) -->
+    <skip />
     <string name="accessibility_pointer_and_touchpad_title" msgid="5703454643194245909">"Accesibilidad del cursor y del panel táctil"</string>
     <string name="accessibility_pointer_and_touchpad_summary" msgid="8588221231953604340">"Tamaño, color y tipo"</string>
     <string name="accessibility_pointer_color_customization_title" msgid="2841888132681075999">"Color del cursor"</string>
@@ -2393,10 +2396,15 @@
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Oscurecer pantalla"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Controles de interacción"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Controles de tiempo"</string>
-    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controles del sistema"</string>
-    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Enviar comentarios"</string>
-    <!-- no translation found for accessibility_send_survey_title (7494065908292980253) -->
+    <!-- no translation found for accessibility_tap_assistance_subtext (1805279944665087799) -->
     <skip />
+    <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controles del sistema"</string>
+    <!-- no translation found for accessibility_system_controls_subtext (2722046038429586174) -->
+    <skip />
+    <!-- no translation found for accessibility_system_controls_subtext_one_handed_not_supported (4973507525360793402) -->
+    <skip />
+    <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Enviar comentarios"</string>
+    <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Responder encuesta"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Asistencia (personas con discapacidad)"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Encuesta sobre accesibilidad"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Comparte tu opinión"</string>
@@ -2436,7 +2444,7 @@
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Seguir el foco del teclado"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"La lupa sigue el elemento enfocado a medida que te desplazas con el teclado"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Ampliar teclado"</string>
-    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Amplía el teclado para verlo mejor al usar la ampliación a pantalla completa"</string>
+    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Amplía el teclado para ver los emojis y las letras al usar la ampliación a pantalla completa"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"No disponible cuando se amplía solo parte de la pantalla"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Mantener activada al cambiar de aplicación"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="642275893256862796">"La lupa permanece activada y se aleja al cambiar de aplicación"</string>
@@ -2468,7 +2476,10 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Ampliación con acceso directo"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Amplía con un acceso directo y tres toques"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Información de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Tamaño de visualización y texto"</string>
+    <!-- no translation found for accessibility_text_reading_options_title (2059907327364152763) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_options_subtext (3480489973093251705) -->
+    <skip />
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Cambiar cómo se muestra el texto"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Asunto: Diseños de globos aerostáticos"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"De: Juan"</string>
@@ -2569,11 +2580,11 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Actualizar ampliación de la pantalla al cambiar aplicaciones"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Colgar con botón de encendido"</string>
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Opciones"</string>
-    <string name="dark_theme_timing_category" msgid="8115211396437085819">"Tiempo"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"Horario"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Estándar"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Tema oscuro estándar"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Aplica el tema oscuro en tu dispositivo y en las aplicaciones compatibles"</string>
-    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Desplegado"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Ampliada"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Tema oscuro ampliado"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Aplica automáticamente el tema oscuro en más aplicaciones para mejorar la accesibilidad"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Quitar animaciones"</string>
@@ -2642,14 +2653,16 @@
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Ajustes de navegación"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibración y vibración al pulsar"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Controla la intensidad de la vibración en distintos usos"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Activado"</string>
-    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Desactivado"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (3316037269092584284) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (113565506991847845) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Ajuste inhabilitado porque el dispositivo está en silencio"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Llamadas"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notificaciones y alarmas"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Vibración interactiva"</string>
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Usar Vibración y vibración al pulsar"</string>
-    <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibración de alarmas"</string>
+    <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibración de las alarmas"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibración de contenido multimedia"</string>
     <string name="accessibility_keyboard_vibration_title" msgid="7559967730626765441">"Vibración del teclado"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibración del tono"</string>
@@ -2663,6 +2676,8 @@
     <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"También puedes añadir la corrección de color a los ajustes rápidos desde la parte superior de la pantalla"</string>
     <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"Se ha añadido la inversión de colores a los ajustes rápidos. Desliza el dedo hacia abajo en cualquier momento para activarla o para desactivarla."</string>
     <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"También puedes añadir la inversión de colores a los ajustes rápidos desde la parte superior de la pantalla"</string>
+    <!-- no translation found for reduce_bright_colors_preference_summary (8112736110942731246) -->
+    <skip />
     <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"Se ha añadido la atenuación extra a los ajustes rápidos. Desliza el dedo hacia abajo en cualquier momento para activarla o para desactivarla."</string>
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"También puedes añadir la atenuación extra a los ajustes rápidos desde la parte superior de la pantalla"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Modo Una mano añadido a los ajustes rápidos. Desliza hacia abajo en cualquier momento para activarlo o desactivarlo."</string>
@@ -2696,8 +2711,7 @@
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura y gestiona audífonos ASHA y LE Audio, implantes cocleares y otros dispositivos de amplificación de sonido"</string>
     <string name="accessibility_hearingaid_asha_only_intro" msgid="7402419984664822832">"Configura y gestiona audífonos ASHA, implantes cocleares y otros dispositivos de amplificación de sonido"</string>
     <string name="accessibility_hearingaid_hap_only_intro" msgid="3332144138443825311">"Configura y gestiona audífonos LE Audio, implantes cocleares y otros dispositivos de amplificación de sonido"</string>
-    <!-- no translation found for accessibility_hearingaid_not_connected_summary (3534747218670001784) -->
-    <skip />
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="3534747218670001784">"Configura y gestiona audífonos y otros dispositivos de amplificación de sonido"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Añadir audífonos"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Emparejar audífonos"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"En la pantalla siguiente, toca tus audífonos. Puede que tengas que emparejar el audífono del oído izquierdo y el del derecho por separado.\n\nAsegúrate de que los audífonos están encendidos y listos para emparejarse."</string>
@@ -2729,6 +2743,8 @@
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"¿No ves tu audífono?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Ver más dispositivos"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Ajuste de audio"</string>
+    <!-- no translation found for accessibility_audio_adjustment_subtext (2190523175597700025) -->
+    <skip />
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Audiodescripción"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Escucha una descripción de lo que está pasando en pantalla en películas y series compatibles"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"audiodescripción, audio, descripción, baja visión,"</string>
@@ -2739,6 +2755,8 @@
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"No funciona. Toca para obtener información."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Este servicio no funciona correctamente."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Accesos directos de accesibilidad"</string>
+    <!-- no translation found for accessibility_shortcuts_settings_subtext (3870836550836457943) -->
+    <skip />
     <string name="enable_quick_setting" msgid="6648073323202243604">"Mostrar en ajustes rápidos"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Rojo-verde, percepción débil del verde"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Rojo-verde, percepción débil del rojo"</string>
@@ -3082,6 +3100,8 @@
     <string name="on_device_recognition_settings" msgid="6503160369314598069">"Ajustes de reconocimiento en el dispositivo"</string>
     <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Reconocimiento en el dispositivo"</string>
     <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Reconocimiento de voz en el dispositivo"</string>
+    <!-- no translation found for tts_subtext (8958790811881046789) -->
+    <skip />
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Motor preferido"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Configuración del motor"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Velocidad y tono de la voz"</string>
@@ -3103,14 +3123,10 @@
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Activado"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Desactivado"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Usar Conectividad adaptativa"</string>
-    <!-- no translation found for adaptive_connectivity_wifi_switch_title (8534819376336827298) -->
-    <skip />
-    <!-- no translation found for adaptive_connectivity_wifi_switch_summary (827122572213043364) -->
-    <skip />
-    <!-- no translation found for adaptive_connectivity_mobile_network_switch_title (1852172801040818123) -->
-    <skip />
-    <!-- no translation found for adaptive_connectivity_mobile_network_switch_summary (8336459750352233615) -->
-    <skip />
+    <string name="adaptive_connectivity_wifi_switch_title" msgid="8534819376336827298">"Cambiar automáticamente a la red móvil"</string>
+    <string name="adaptive_connectivity_wifi_switch_summary" msgid="827122572213043364">"Asegura la conectividad cuando la conexión Wi-Fi es deficiente o no está disponible. Se pueden aplicar cargos por el uso de datos."</string>
+    <string name="adaptive_connectivity_mobile_network_switch_title" msgid="1852172801040818123">"Optimizar la red para que dure la batería"</string>
+    <string name="adaptive_connectivity_mobile_network_switch_summary" msgid="8336459750352233615">"Selecciona automáticamente la mejor conexión de red para prolongar la duración de la batería"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Seguridad de redes móviles"</string>
     <string name="cellular_security_summary" msgid="1893770670709928113">"Tipo de red, cifrado, controles de notificaciones"</string>
     <string name="cellular_security_top_intro" msgid="6749166804080092892">"Estos ajustes te ayudan a proteger tus llamadas, mensajes y datos de redes desactualizadas o no cifradas que puedan exponerte a que roben o vigilen tus datos"</string>
@@ -3220,7 +3236,7 @@
     <string name="add_account_label" msgid="7134707140831385869">"Añadir cuenta"</string>
     <string name="managed_profile_not_available_label" msgid="7500578232182547365">"El perfil de trabajo aún no está disponible"</string>
     <string name="work_mode_label" msgid="4687734487641548872">"Aplicaciones de trabajo"</string>
-    <string name="remove_managed_profile_label" msgid="1294933737673830431">"Quitar perfil de trabajo"</string>
+    <string name="remove_managed_profile_label" msgid="1294933737673830431">"Eliminar perfil de trabajo"</string>
     <string name="background_data" msgid="321903213000101158">"Datos en segundo plano"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Las aplicaciones pueden sincronizar datos, enviarlos y recibirlos."</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"¿Inhabilitar datos en segundo plano?"</string>
@@ -3736,7 +3752,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Sonidos de encendido"</string>
     <string name="sound_patterns_category_title" msgid="4290495769747444271">"Patrones de sonido"</string>
     <string name="sound_audio_category_title" msgid="3445871661303518618">"Audio"</string>
-    <string name="system_sounds_and_vibrations_category_title" msgid="4162079598490981456">"Sonido y vibraciones del sistema"</string>
+    <string name="system_sounds_and_vibrations_category_title" msgid="4162079598490981456">"Sonidos y vibraciones del sistema"</string>
     <string name="work_profile_sound_category_title" msgid="1708926655170323454">"Sonido del perfil de trabajo"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Subtítulos automáticos"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Subtitula automáticamente el contenido multimedia"</string>
@@ -4013,7 +4029,7 @@
     <string name="no_notification_assistant" msgid="2533323397091834096">"Nada"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Ninguna aplicación instalada ha solicitado acceso a las notificaciones."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Permitir acceso a las notificaciones"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Las notificaciones mejoradas sustituyeron las notificaciones adaptativas en Android 12. Esta función te muestra acciones y respuestas sugeridas, y organiza tus notificaciones.\n\nLas notificaciones mejoradas pueden acceder al contenido de tus notificaciones, incluida información personal, como nombres de contactos y mensajes. También permiten descartar o responder a notificaciones (por ejemplo, puedes contestar llamadas telefónicas) y controlar el modo No molestar."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Las notificaciones mejoradas sustituyeron las notificaciones adaptativas en Android 12. Esta función te muestra acciones y respuestas sugeridas, y organiza tus notificaciones.\n\nLas notificaciones mejoradas pueden acceder al contenido de tus notificaciones, incluida información personal, como nombres de contactos y mensajes. También permiten descartar o responder a notificaciones (por ejemplo, puedes contestar llamadas telefónicas) y controlar el modo No molestar."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"¿Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> acceda a las notificaciones?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"La aplicación <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones, incluidas las que tengan información personal, como nombres de contactos, fotos y texto de mensajes que recibas. Esta aplicación también podrá posponer o cerrar notificaciones, o seleccionar botones de notificaciones como el de contestar llamadas de teléfono. \n\nAdemás, podrá activar o desactivar el modo No molestar y modificar ajustes relacionados."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"La aplicación <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá hacer lo siguiente:"</string>
@@ -4044,9 +4060,9 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Hay más ajustes disponibles en la aplicación"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Bajar volumen de notificaciones"</string>
     <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Bajar el volumen de notificaciones"</string>
-    <string name="notification_polite_description" msgid="6137533404978878957">"Cuando recibas muchas notificaciones en poco tiempo, tu dispositivo bajará el volumen y minimizará las alertas durante un máximo de 1 minuto. Las llamadas, alarmas y conversaciones prioritarias no se verán afectadas. \n\nLas notificaciones recibidas durante ese periodo se pueden encontrar arrastrando hacia abajo la parte superior de la pantalla."</string>
+    <string name="notification_polite_description" msgid="6137533404978878957">"Cuando recibas muchas notificaciones en poco tiempo, tu dispositivo bajará el volumen y minimizará las alertas durante un máximo de 1 minuto. Las llamadas, alarmas y conversaciones prioritarias no se verán afectadas. \n\nLas notificaciones recibidas durante ese periodo se pueden encontrar arrastrando hacia abajo la parte superior de la pantalla."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Aplicar a perfiles de trabajo"</string>
-    <string name="notification_polite_work_summary" msgid="5014189280132951378">"Se aplica a las aplicaciones del perfil de trabajo"</string>
+    <string name="notification_polite_work_summary" msgid="5014189280132951378">"Se aplica a las apps del perfil de trabajo"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Organizador de notificaciones"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Agrupar y silenciar las notificaciones de menor prioridad"</string>
     <string name="notification_bundle_main_control_title" msgid="6413211155343788835">"Usar el organizador de notificaciones"</string>
@@ -4098,7 +4114,7 @@
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Esta aplicación no envía notificaciones"</string>
     <string name="app_notification_settings" msgid="2848603567344392693">"Ajustes de la aplicación"</string>
     <string name="notification_channels" msgid="8080872820677975820">"Categorías de notificaciones"</string>
-    <string name="notification_channels_other" msgid="18159805343647908">"Otros"</string>
+    <string name="notification_channels_other" msgid="18159805343647908">"Otras"</string>
     <string name="no_channels" msgid="4716199078612071915">"Esta aplicación no ha publicado ninguna notificación"</string>
     <string name="no_recent_channels" msgid="5068574296267584043">"Mostrar categorías no usadas"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Ajustes adicionales de la aplicación"</string>
@@ -4210,7 +4226,7 @@
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Eventos"</string>
     <string name="zen_mode_apps_title" msgid="1691010857014041183">"Aplicaciones"</string>
     <string name="zen_mode_apps_category" msgid="4082380323683889391">"Aplicaciones que pueden interrumpirte"</string>
-    <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Aplicaciones seleccionadas"</string>
+    <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Apps seleccionadas"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Ninguna"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Ninguna aplicación puede interrumpirte}=1{{app_1} puede interrumpirte}=2{{app_1} y {app_2} pueden interrumpirte}=3{{app_1}, {app_2} y {app_3} pueden interrumpirte}other{{app_1}, {app_2} y # más pueden interrumpirte}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (trabajo)"</string>
@@ -4785,7 +4801,7 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> también es tu acceso directo de la pantalla de bloqueo. Toca para cambiarlo."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"La aplicación de cartera predeterminada no admite este gesto."</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Cambiar cartera predeterminada"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambiar de cámara para hacer selfie"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambiar cámara para selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modo de navegación"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navegación con 2 botones"</string>
@@ -4803,7 +4819,7 @@
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navegación por gestos"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Para ir a la pantalla de inicio, desliza hacia arriba desde la parte inferior de la pantalla. Para cambiar de aplicación, desliza hacia arriba desde la parte inferior de la pantalla, mantenla pulsada y levanta el dedo. Para ir atrás, desliza desde el borde izquierdo o el derecho."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navegación con 3 botones"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Ve hacia atrás, a la pantalla de inicio, y cambia de aplicación con botones en la parte inferior de la pantalla."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Ve hacia atrás, a la pantalla de inicio, y cambia de aplicación con los botones en la parte inferior de la pantalla."</string>
     <string name="nav_tutorial_button_description" msgid="7195363082216233970">"Iniciar tutorial de navegación por gestos"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navegación del sistema, navegación con 2 botones, navegación con 3 botones, navegación por gestos, deslizar"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Asistente digital"</string>
@@ -4985,7 +5001,7 @@
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;¿Usar &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Las nuevas contraseñas, llaves de acceso y otra información se guardarán aquí a partir de ahora. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; puede usar el contenido que hay en tu pantalla para determinar qué se puede autocompletar."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"Servicio preferido para contraseñas, llaves de acceso y autocompletar"</string>
     <string name="credman_picker_title_new" msgid="4292105803864397398">"Servicio preferido"</string>
-    <string name="credman_picker_page_summary" msgid="4633938046738617332">"Elige el servicio que prefieras para guardar los datos de inicio de sesión y las sugerencias de Autocompletar"</string>
+    <string name="credman_picker_page_summary" msgid="4633938046738617332">"Elige el servicio que prefieras para guardar los datos de inicio de sesión y las sugerencias de autocompletado"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"¿Desactivar %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;¿Desactivar este servicio?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; La información guardada, como contraseñas, llaves de acceso, métodos de pago y otros datos no se rellenarán cuando inicies sesión. Para usar tu información guardada, elige un servicio de contraseñas, llaves de acceso o datos."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Contraseñas, llaves de acceso y cuentas"</string>
@@ -5466,6 +5482,8 @@
       <item quantity="one"><xliff:g id="FIRST_0">%1$s</xliff:g></item>
     </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <!-- no translation found for rtt_settings_summary (9011338875202712756) -->
+    <skip />
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
@@ -5687,10 +5705,8 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor de huellas digitales"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificaciones con flash"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Acerca de las notificaciones con flash"</string>
-    <!-- no translation found for flash_notifications_summary_off (5425509923465184385) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on (7750683903778104666) -->
-    <skip />
+    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"Desactivadas / Recibe alertas con el flash de la cámara o de la pantalla para las notificaciones y las alarmas"</string>
+    <string name="flash_notifications_summary_on" msgid="7750683903778104666">"Activadas / Recibe alertas con el flash de la cámara o de la pantalla para las notificaciones y alarmas"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Ilumina la luz de la cámara o la pantalla cuando recibas notificaciones o suenen alarmas"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Ilumina la pantalla cuando recibas notificaciones o suenen alarmas"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Usa las notificaciones con flash con precaución si eres sensible a la luz"</string>
@@ -5726,10 +5742,13 @@
     <string name="color_inversion_state_on" msgid="1160969033636440368">"Activado"</string>
     <string name="color_inversion_state_off" msgid="6925638668080451724">"Desactivado"</string>
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Hace que las pantallas claras se vuelvan oscuras y que las pantallas oscuras se vuelven claras"</string>
-    <string name="magnification_feature_summary" msgid="2053971569640663564">"Amplía la pantalla"</string>
+    <!-- no translation found for magnification_feature_summary (4403387702011660253) -->
+    <skip />
     <string name="autoclick_disabled" msgid="3213396804955002120">"Desactivado"</string>
-    <string name="show_captions_disabled" msgid="690650956523818755">"Desactivado"</string>
-    <string name="show_captions_enabled" msgid="7089043007924626">"Activado"</string>
+    <!-- no translation found for show_captions_disabled (924366862253349790) -->
+    <skip />
+    <!-- no translation found for show_captions_enabled (3495595825041704052) -->
+    <skip />
     <string name="live_caption_disabled" msgid="3562035026547887366">"Desactivado"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Activado"</string>
     <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Audio: <xliff:g id="PERCENT_LEFT">%1$s</xliff:g> a la izquierda y <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g> a la derecha"</string>
@@ -5918,7 +5937,7 @@
     <string name="supervision_web_content_filters_switch_summary" msgid="2095166099345288321">"{count,plural, =1{En # aplicación}other{En # aplicaciones}}"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Aunque estos ajustes estén desactivados, se pueden seguir aplicando otros ajustes de la cuenta."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Introduce el PIN de los controles parentales"</string>
-    <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Configurar un PIN de controles parentales"</string>
+    <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Configura un PIN de controles parentales"</string>
     <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Confirma el PIN de controles parentales"</string>
     <string name="supervision_pin_reset_success_toast" msgid="9163550161698311831">"PIN actualizado"</string>
     <string name="supervision_promo_footer_action_button_description" msgid="7617359721703338141">"Abrir aplicación"</string>
