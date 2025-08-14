@@ -17,6 +17,8 @@ package com.android.settings.network.telephony.satellite
 
 import android.content.Context
 import android.os.PersistableBundle
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.telephony.CarrierConfigManager
 import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED
 import androidx.preference.Preference
@@ -24,9 +26,11 @@ import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceManager
 import androidx.test.annotation.UiThreadTest
 import androidx.test.core.app.ApplicationProvider
+import com.android.internal.telephony.flags.Flags
 import com.android.settings.testutils.ResourcesUtils
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
@@ -34,6 +38,8 @@ import org.mockito.kotlin.spy
 
 @UiThreadTest
 class SatelliteSettingIndicatorControllerTest {
+    @get:Rule val setFlagsRule = SetFlagsRule()
+
     private var mContext: Context? = null
     private var mController: SatelliteSettingIndicatorController? = null
     private val mCarrierConfig = PersistableBundle()
@@ -147,6 +153,39 @@ class SatelliteSettingIndicatorControllerTest {
         mCarrierConfig.putInt(
             CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
             CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
+        )
+        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        val preferenceManager = PreferenceManager(mContext!!)
+        val preferenceScreen = preferenceManager.createPreferenceScreen(mContext!!)
+        val category = Mockito.spy<PreferenceCategory>(PreferenceCategory(mContext!!))
+        category.setKey(
+            SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS
+        )
+        category.title = "test title"
+        val preference1 = Mockito.spy<Preference>(Preference(mContext!!))
+        preference1.setKey(
+            SatelliteSettingIndicatorController.Companion.KEY_SATELLITE_CONNECTION_GUIDE
+        )
+        preference1.title = "preference1"
+        val preference2 = Mockito.spy<Preference>(Preference(mContext!!))
+        preference2.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
+        preference2.title = "preference2"
+        preferenceScreen.addPreference(category)
+        preferenceScreen.addPreference(preference1)
+        preferenceScreen.addPreference(preference2)
+
+        mController?.updateHowItWorksContent(preferenceScreen, false)
+
+        Mockito.verify(preference1).setSummary(ArgumentMatchers.any<CharSequence?>())
+        Mockito.verify(preference2).setSummary(ArgumentMatchers.any<CharSequence?>())
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
+    fun updateHowItWorksContent_ntnConnectIsHybrid_summaryChanged() {
+        mCarrierConfig.putInt(
+            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID,
         )
         mController?.init(TEST_SUB_ID, mCarrierConfig)
         val preferenceManager = PreferenceManager(mContext!!)
