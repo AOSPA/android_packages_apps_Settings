@@ -3955,6 +3955,18 @@
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_network"/>
         </activity>
+        <activity
+            android:name="Settings$BillingCycleActivity"
+            android:featureFlag="com.android.settings.flags.deeplink_network_and_internet_25q4"
+            android:exported="true"
+            android:label="@string/billing_cycle">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MOBILE_DATA_USAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_network"/>
+        </activity>
 
         <activity
             android:name="Settings$DreamSettingsActivity"
