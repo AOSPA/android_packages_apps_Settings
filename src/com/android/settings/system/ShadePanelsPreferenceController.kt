@@ -100,11 +100,6 @@ class ShadePanelsPreferenceController(context: Context, key: String) :
             context: Context,
             thresholdDp: Int,
         ): Boolean {
-            // Minor optimization that captures the vast majority of cases.
-            if (context.resources.configuration.smallestScreenWidthDp < MIN_LARGE_SCREEN_WIDTH_DP) {
-                Log.d(TAG, "The current display has smallestScreenWidthDp under the threshold")
-                return true
-            }
 
             val displayManager =
                 context.getSystemService(Context.DISPLAY_SERVICE) as? DisplayManager
@@ -118,7 +113,10 @@ class ShadePanelsPreferenceController(context: Context, key: String) :
             // Iterate through all currently available logical displays, including built-in screens
             // (like inner/outer on foldables) and connected external displays (HDMI, wireless
             // display etc.)
-            for (display in displayManager.displays) {
+            for (display in
+                displayManager.getDisplays(
+                    DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED
+                )) {
                 val id = display.displayId
                 try {
                     display.getRealMetrics(displayMetrics)
