@@ -66,6 +66,7 @@
                 android:importantForAccessibility="no"
                 android:textSize="@dimen/contrast_button_text_size"
                 android:text="@string/lock_screen_notifs_show_compact"
+                android:hyphenationFrequency="full"
                 android:textColor="@androidprv:color/materialColorOnSurface"/>
         </LinearLayout>
 
@@ -105,6 +106,7 @@
                 android:importantForAccessibility="no"
                 android:textSize="@dimen/contrast_button_text_size"
                 android:text="@string/lock_screen_notifs_show_full_list"
+                android:hyphenationFrequency="full"
                 android:textColor="@androidprv:color/materialColorOnSurface"/>
         </LinearLayout>
 

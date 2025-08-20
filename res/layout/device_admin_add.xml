@@ -57,6 +57,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold"
                     android:singleLine="true"
+                    android:gravity="start"
+                    android:textAlignment="viewStart"
                     android:ellipsize="marquee" />
             </LinearLayout>
 
@@ -68,14 +70,14 @@
                 android:orientation="vertical">
 
                 <TextView android:id="@+id/profile_owner_warning"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="0dp"
                     android:visibility="gone"
                     android:text="@string/adding_profile_owner_warning" />
 
                 <TextView android:id="@+id/admin_description"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="0dip"
                     android:layout_weight="0"
                     android:padding="0dip" />
@@ -96,14 +98,14 @@
 
                     <TextView
                         android:id="@+id/add_msg"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:padding="10dip" />
                 </LinearLayout>
 
                 <TextView android:id="@+id/admin_warning"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_weight="1"

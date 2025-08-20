@@ -18,6 +18,8 @@ package com.android.settings.network.telephony.satellite
 import android.content.Context
 import android.content.Intent
 import android.os.PersistableBundle
+import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
+import android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT
 import android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL
 import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.Preference
@@ -30,13 +32,10 @@ import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
-import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
-
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.whenever
@@ -44,34 +43,59 @@ import org.mockito.kotlin.whenever
 @RunWith(AndroidJUnit4::class)
 class SatelliteSettingPreferenceControllerTest {
     private val mockCarrierConfigCache = mock<CarrierConfigCache>()
-    private val mockSatelliteRepository = mock<SatelliteRepository>()
+    private var mockSatelliteRepository =
+        mock<SatelliteRepository>().stub {
+            on { isSatelliteAccessConfigurationForCurrentLocationFlow(TEST_SUB_ID) }
+                .thenReturn(flowOf(true))
+        }
     private val context: Context = ApplicationProvider.getApplicationContext()
-
     private val preferenceIntent = Intent()
-    private val preference = Preference(context).apply {
-        key = KEY
-        intent = preferenceIntent
-    }
+    private val preference =
+        Preference(context).apply {
+            key = KEY
+            intent = preferenceIntent
+        }
     private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
 
-    private val controller = SatelliteSettingPreferenceController(
-        context = context,
-        key = KEY,
-        carrierConfigCache = mockCarrierConfigCache,
-        satelliteRepository = mockSatelliteRepository,
-    )
+    private val controller =
+        SatelliteSettingPreferenceController(
+            context = context,
+            key = KEY,
+            carrierConfigCache = mockCarrierConfigCache,
+            satelliteRepository = mockSatelliteRepository,
+        )
+
+    @Test
+    fun isVisible_outOfFence_disabled() = runBlocking {
+        val carrierConfigs = PersistableBundle()
+        carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
+        whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
+            .thenReturn(carrierConfigs)
+        whenever(
+                mockSatelliteRepository.isSatelliteAccessConfigurationForCurrentLocationFlow(
+                    TEST_SUB_ID
+                )
+            )
+            .thenReturn(flowOf(false))
+
+        preference.key = controller.preferenceKey
+
+        controller.initialize(TEST_SUB_ID)
+        preferenceScreen.addPreference(preference)
+
+        controller.displayPreference(preferenceScreen)
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
+
+        assertThat(preference.isEnabled).isEqualTo(false)
+    }
 
     @Test
     fun isVisible_satelliteIsNotSupported_inVisible() = runBlocking {
         val carrierConfigs = PersistableBundle()
         carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
-        whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(
-            eq(TEST_SUB_ID),
-            any()
-        )
-        ).thenReturn(
-            carrierConfigs
-        )
+        whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
+            .thenReturn(carrierConfigs)
         controller.initialize(TEST_SUB_ID)
         preferenceScreen.addPreference(preference)
         controller.displayPreference(preferenceScreen)
@@ -79,26 +103,19 @@ class SatelliteSettingPreferenceControllerTest {
         controller.onViewCreated(TestLifecycleOwner())
         delay(100)
 
-        assertThat(preference.isVisible)
-            .isEqualTo(false)
+        assertThat(preference.isVisible).isEqualTo(false)
     }
 
     @Test
-    @Ignore("b/420558473, Will implement this test and other in the future.")
-    fun isVisible_satelliteIsSupported_inVisible() = runBlocking {
+    fun isVisible_autoType_visible() = runBlocking {
         val carrierConfigs = PersistableBundle()
         carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
-        whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(
-            eq(TEST_SUB_ID),
-            any()
+        carrierConfigs.putInt(
+            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+            CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
         )
-        ).thenReturn(
-            carrierConfigs
-        )
-        mockSatelliteRepository.stub {
-            on { requestIsSupportedFlow() } doReturn(flowOf(true))
-            on { carrierRoamingNtnAvailableServicesChangedFlow(TEST_SUB_ID) } doReturn(flowOf(true))
-        }
+        whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
+            .thenReturn(carrierConfigs)
 
         controller.initialize(TEST_SUB_ID)
         preferenceScreen.addPreference(preference)
@@ -107,8 +124,7 @@ class SatelliteSettingPreferenceControllerTest {
         controller.onViewCreated(TestLifecycleOwner())
         delay(100)
 
-        assertThat(preference.isVisible)
-            .isEqualTo(false)
+        assertThat(preference.isVisible).isEqualTo(true)
     }
 
     companion object {

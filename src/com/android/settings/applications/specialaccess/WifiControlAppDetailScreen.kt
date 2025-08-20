@@ -87,7 +87,7 @@ open class WifiControlAppDetailScreen(context: Context, arguments: Bundle) :
         }
 
     companion object {
-        const val KEY = "sa_wfc_app_detail"
+        const val KEY = "special_access_wifi_control_app_detail"
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 

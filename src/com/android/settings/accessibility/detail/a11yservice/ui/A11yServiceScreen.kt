@@ -32,11 +32,20 @@ import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment
+import com.android.settings.accessibility.detail.a11yservice.data.UseServiceDataStore
+import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceFooterPreference.Companion.FOOTER_KEY
+import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceFooterPreference.Companion.HTML_FOOTER_KEY
 import com.android.settings.accessibility.extensions.getFeatureName
+import com.android.settings.accessibility.shared.ui.LaunchAppInfoPreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.RestrictedPreference
+import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.PreferenceCategory
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -52,7 +61,11 @@ import kotlinx.coroutines.flow.flow
 
 @ProvidePreferenceScreen(A11yServiceScreen.KEY, parameterized = true)
 open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
-    PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider, PreferenceBinding {
+    PreferenceScreenMixin,
+    PreferenceSummaryProvider,
+    PreferenceTitleProvider,
+    PreferenceBinding,
+    PreferenceLifecycleProvider {
 
     private val featureComponentName: ComponentName by lazy {
         requireNotNull(
@@ -67,6 +80,9 @@ open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
         AccessibilityRepositoryProvider.get(context)
             .getAccessibilityServiceInfo(featureComponentName)
     }
+
+    private var serviceEnablementStorage: UseServiceDataStore? = null
+    private var serviceEnablementObserver: KeyedObserver<String>? = null
 
     override fun isFlagEnabled(context: Context): Boolean {
         return Flags.catalystA11yServiceDetail()
@@ -87,8 +103,11 @@ open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
     }
 
     override fun getSummary(context: Context): CharSequence? {
-        // get enabled/shortcut enablement state from storage
-        return null
+        return AccessibilitySettings.getServiceSummary(
+            context,
+            accessibilityServiceInfo,
+            serviceEnablementStorage?.getBoolean(key) ?: false,
+        )
     }
 
     override fun fragmentClass(): Class<out Fragment>? {
@@ -124,11 +143,55 @@ open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
         return Utils.getAdaptiveIcon(context, icon, Color.WHITE)
     }
 
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        super.onCreate(context)
+        if (context.preferenceScreenKey != key) {
+            // Register an observer for updating summary based on service's on/off state.
+            accessibilityServiceInfo?.let { a11yServiceInfo ->
+                val dataStore = UseServiceDataStore(context, a11yServiceInfo)
+                val observer =
+                    KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(bindingKey) }
+                dataStore.addObserver(bindingKey, observer, HandlerExecutor.main)
+
+                serviceEnablementStorage = dataStore
+                serviceEnablementObserver = observer
+            }
+        }
+    }
+
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        super.onDestroy(context)
+        if (context.preferenceScreenKey != key) {
+            serviceEnablementObserver?.let { observer ->
+                serviceEnablementStorage?.removeObserver(bindingKey, observer)
+            }
+        }
+    }
+
     override val bindingKey: String
         get() = featureComponentName.flattenToString()
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            val serviceInfo = accessibilityServiceInfo ?: return@preferenceHierarchy
+            +IntroPreference(serviceInfo)
+            +A11yServiceIllustrationPreference(serviceInfo)
+            +UseServicePreference(context, serviceInfo, metricsCategory)
+            +PreferenceCategory(
+                key = "general_categories",
+                title = R.string.accessibility_screen_option,
+            ) +=
+                {
+                    +A11yServiceShortcutPreference(context, serviceInfo, metricsCategory)
+                    +A11yServiceSettingPreference(serviceInfo)
+                    +LaunchAppInfoPreference(
+                        key = "accessibility_service_app_info",
+                        packageName = serviceInfo.componentName.packageName,
+                    )
+                }
+            +A11yServiceFooterPreference(HTML_FOOTER_KEY, serviceInfo, loadHtmlFooter = true)
+            +A11yServiceFooterPreference(FOOTER_KEY, serviceInfo, loadHtmlFooter = false)
+        }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent {
         return Intent(Settings.ACTION_ACCESSIBILITY_DETAILS_SETTINGS).apply {

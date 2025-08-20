@@ -47,5 +47,5 @@ interface DeviceStateSource {
     suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates
+    ): List<PerScreenDeviceStates>
 }

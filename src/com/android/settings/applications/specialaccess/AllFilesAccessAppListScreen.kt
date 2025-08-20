@@ -56,6 +56,6 @@ open class AllFilesAccessAppListScreen : SpecialAccessAppListScreen() {
         AllFilesAccessAppDetailScreen.parameters(context, hierarchyType)
 
     companion object {
-        const val KEY = "sa_afa_app_list"
+        const val KEY = "special_access_all_files_access_app_list"
     }
 }

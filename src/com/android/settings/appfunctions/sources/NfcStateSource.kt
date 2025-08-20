@@ -29,7 +29,7 @@ class NfcStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val nfcAdapter = NfcAdapter.getDefaultAdapter(context)
         val nfcEnabled = nfcAdapter?.isEnabled
 
@@ -40,6 +40,6 @@ class NfcStateSource : DeviceStateSource {
                 jsonValue = nfcEnabled.toString(),
             )
 
-        return PerScreenDeviceStates(description = "NFC", deviceStateItems = listOf(item))
+        return listOf(PerScreenDeviceStates(description = "NFC", deviceStateItems = listOf(item)))
     }
 }

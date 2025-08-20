@@ -30,7 +30,7 @@ class ZenModesStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         var isDndActive = false
         var isBedtimeActive = false
         for (mode in ZenModesBackend.getInstance(context).getModes()) {
@@ -55,9 +55,11 @@ class ZenModesStateSource : DeviceStateSource {
                 jsonValue = isBedtimeActive.toString(),
             )
 
-        return PerScreenDeviceStates(
-            description = "Modes",
-            deviceStateItems = listOf(dndItem, bedtimeItem),
+        return listOf(
+            PerScreenDeviceStates(
+                description = "Modes",
+                deviceStateItems = listOf(dndItem, bedtimeItem),
+            )
         )
     }
 }

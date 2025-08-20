@@ -87,7 +87,7 @@ open class PictureInPictureAppDetailScreen(context: Context, arguments: Bundle) 
         }
 
     companion object {
-        const val KEY = "sa_pip_app_detail"
+        const val KEY = "special_access_picture_in_picture_app_detail"
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 

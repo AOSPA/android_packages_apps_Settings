@@ -14,12 +14,16 @@
 
 package com.android.settings.display.darkmode;
 
+import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_SOURCE;
+import static com.android.internal.accessibility.common.NotificationConstants.SOURCE_START_SURVEY;
+
 import android.app.Dialog;
-import android.app.UiModeManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,7 +35,7 @@ import com.android.settings.accessibility.BaseSupportFragment;
 import com.android.settings.accessibility.FeedbackButtonPreferenceController;
 import com.android.settings.accessibility.FeedbackManager;
 import com.android.settings.accessibility.Flags;
-import com.android.settings.accessibility.ForceInvertPreferenceController;
+import com.android.settings.accessibility.ForceInvertSurveyButtonPreferenceController;
 import com.android.settings.accessibility.SurveyManager;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -59,35 +63,29 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!Flags.catalystDarkUiMode()) {
-            final Context context = getContext();
-            mContentObserver = new DarkModeObserver(context);
-        }
+        final Context context = getContext();
+        mContentObserver = new DarkModeObserver(context);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (!Flags.catalystDarkUiMode()) {
-            // Listen for changes only while visible.
-            mContentObserver.subscribe(() -> {
-                PreferenceScreen preferenceScreen = getPreferenceScreen();
-                mCustomStartController.displayPreference(preferenceScreen);
-                mCustomEndController.displayPreference(preferenceScreen);
-                updatePreferenceStates();
-            });
-        }
+        // Listen for changes only while visible.
+        mContentObserver.subscribe(() -> {
+            PreferenceScreen preferenceScreen = getPreferenceScreen();
+            mCustomStartController.displayPreference(preferenceScreen);
+            mCustomEndController.displayPreference(preferenceScreen);
+            updatePreferenceStates();
+        });
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (!Flags.catalystDarkUiMode()) {
-            final SurveyManager surveyManager = new SurveyManager(this, context,
-                    getSurveyKey(), getMetricsCategory());
-            use(ForceInvertPreferenceController.class).setSurveyManager(surveyManager);
             use(FeedbackButtonPreferenceController.class).initialize(
                     new FeedbackManager(context, getMetricsCategory()));
+            initForceInvertSurvey(context);
         }
     }
 
@@ -106,10 +104,8 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (!Flags.catalystDarkUiMode()) {
-            // Stop listening for state changes.
-            mContentObserver.unsubscribe();
-        }
+        // Stop listening for state changes.
+        mContentObserver.unsubscribe();
     }
 
     @Override
@@ -161,17 +157,6 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
     }
 
     @Override
-    @NonNull
-    public String getSurveyKey() {
-        final UiModeManager uiModeManager = getContext().getSystemService(UiModeManager.class);
-        if (uiModeManager != null
-                && uiModeManager.getForceInvertState() == UiModeManager.FORCE_INVERT_TYPE_DARK) {
-            return FORCE_INVERT_SURVEY_KEY;
-        }
-        return super.getSurveyKey();
-    }
-
-    @Override
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case DIALOG_START_TIME:
@@ -188,12 +173,24 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
         return DarkModeScreen.KEY;
     }
 
+    private void initForceInvertSurvey(@NonNull Context context) {
+        final SurveyManager surveyManager = new SurveyManager(this, context,
+                FORCE_INVERT_SURVEY_KEY, getMetricsCategory());
+        final Intent intent = getIntent();
+        if (intent != null
+                && intent.getStringExtra(EXTRA_SOURCE) != null
+                && TextUtils.equals(intent.getStringExtra(EXTRA_SOURCE), SOURCE_START_SURVEY)) {
+            surveyManager.startSurvey();
+        } else {
+            use(ForceInvertSurveyButtonPreferenceController.class).initialize(surveyManager);
+        }
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.dark_mode_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return !Flags.catalystDarkUiMode()
-                            && !context.getSystemService(PowerManager.class).isPowerSaveMode();
+                    return !context.getSystemService(PowerManager.class).isPowerSaveMode();
                 }
             };
 

@@ -30,7 +30,7 @@
         app:searchable="false" />
 
     <com.android.settingslib.widget.MainSwitchPreference
-        android:key="color_inversion_switch_preference_key"
+        android:key="accessibility_display_inversion_enabled"
         android:title="@string/accessibility_display_inversion_switch_title"
         app:controller="com.android.settings.accessibility.ColorInversionMainSwitchPreferenceController" />
 
@@ -40,13 +40,14 @@
         app:searchable="false">
         <com.android.settings.accessibility.ShortcutPreference
             android:key="color_inversion_shortcut_key"
-            android:persistent="false"
+            android:persistent="true"
             android:title="@string/accessibility_display_inversion_shortcut_title"
             app:controller="com.android.settings.accessibility.ToggleShortcutPreferenceController" />
     </PreferenceCategory>
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="html_description"
+        android:persistent="false"
         app:controller="com.android.settings.accessibility.ColorInversionFooterPreferenceController"
         app:searchable="false" />
 
@@ -54,6 +55,7 @@
         android:key="feedback"
         android:title="@string/accessibility_send_feedback_title"
         android:icon="@drawable/ic_feedback"
+        android:persistent="false"
         app:searchable="false"
         app:buttonPreferenceSize="normal"
         app:buttonPreferenceType="tonal"

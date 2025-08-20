@@ -53,7 +53,7 @@ open class PictureInPictureAppListScreen : SpecialAccessAppListScreen() {
         PictureInPictureAppDetailScreen.parameters(context, hierarchyType)
 
     companion object {
-        const val KEY = "sa_pip_app_list"
+        const val KEY = "special_access_picture_in_picture_app_list"
     }
 }
 

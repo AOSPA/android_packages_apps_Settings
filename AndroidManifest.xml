@@ -3062,6 +3062,17 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:excludeFromRecents="true"
             android:exported="false"/>
 
+        <activity android:name=".supervision.SupervisionRestrictionBypassActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.Settings.NoActionBar"
+            android:featureFlag="android.app.supervision.flags.supervision_manager_apis">
+            <intent-filter>
+                <action android:name="android.settings.BYPASS_SUPERVISION_RESTRICTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".SetupRedactionInterstitial"
             android:enabled="false"
             android:exported="true"
@@ -6058,6 +6069,13 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <activity android:name="com.android.settings.biometrics.IdentityCheckNotificationPromoCardActivity"
+            android:enabled="true"
+            android:launchMode="singleTask"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@style/Transparent"/>
 
         <activity
             android:name="Settings$SafetyCenterActivity"

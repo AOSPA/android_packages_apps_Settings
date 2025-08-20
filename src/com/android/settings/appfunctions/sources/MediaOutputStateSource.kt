@@ -36,7 +36,7 @@ class MediaOutputStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val audioManager = context.getSystemService(AudioManager::class.java)
         val localMediaManager = LocalMediaManager(context, /* packageName= */ null)
 
@@ -55,9 +55,11 @@ class MediaOutputStateSource : DeviceStateSource {
 
         val item =
             DeviceStateItem(key = "media_output", purpose = "media_output", jsonValue = summary)
-        return PerScreenDeviceStates(
-            description = "Sound & vibration",
-            deviceStateItems = listOf(item),
+        return listOf(
+            PerScreenDeviceStates(
+                description = "Sound & vibration",
+                deviceStateItems = listOf(item),
+            )
         )
     }
 

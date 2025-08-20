@@ -17,8 +17,24 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
+        android:key="security_category"
+        android:title="@string/security_header">
+
+        <Preference
+            android:key="device_unlock_subpage"
+            android:title="@string/device_unlock_subpage_title"
+            android:fragment="com.android.settings.safetycenter.ui.DeviceUnlockSubPageFragment"
+            settings:controller="com.android.settings.safetycenter.ui.SubpagePreferenceController"/>
+    </PreferenceCategory>
+    <PreferenceCategory
         android:key="privacy_category"
         android:title="@string/privacy_dashboard_title">
+        <Preference
+            android:key="privacy_controls_page"
+            android:title="@string/privacy_sources_title"
+            android:summary="@string/privacy_sources_summary"
+            android:fragment="com.android.settings.safetycenter.ui.PrivacyControlsFragment">
+        </Preference>
         <Preference
             android:key="privacy_permissions_usage"
             android:summary="@string/permissions_usage_summary"

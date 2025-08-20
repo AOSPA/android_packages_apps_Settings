@@ -29,7 +29,7 @@ class LockScreenStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val areNotificationsOnLockScreenEnabled =
             Settings.Secure.getInt(
                 context.contentResolver,
@@ -44,6 +44,8 @@ class LockScreenStateSource : DeviceStateSource {
                 jsonValue = areNotificationsOnLockScreenEnabled.toString(),
             )
 
-        return PerScreenDeviceStates(description = "Lock screen", deviceStateItems = listOf(item))
+        return listOf(
+            PerScreenDeviceStates(description = "Lock screen", deviceStateItems = listOf(item))
+        )
     }
 }

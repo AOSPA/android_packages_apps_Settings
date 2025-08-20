@@ -31,7 +31,7 @@ class OpenByDefaultStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val packageManager = context.packageManager
         val installedApplications =
             packageManager.getInstalledApplications(PackageManager.MATCH_DISABLED_COMPONENTS)
@@ -58,9 +58,11 @@ class OpenByDefaultStateSource : DeviceStateSource {
             )
         }
 
-        return PerScreenDeviceStates(
-            description = "Open by default",
-            deviceStateItems = deviceStateItems,
+        return listOf(
+            PerScreenDeviceStates(
+                description = "Open by default",
+                deviceStateItems = deviceStateItems,
+            )
         )
     }
 }

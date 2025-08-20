@@ -110,7 +110,14 @@ public class WhenToStartHubPicker extends RadioButtonPickerFragment {
             throw new IllegalArgumentException("Entries and values must be of the same length.");
         }
 
+        final boolean supportAutoShowWhilePostured =
+                getResources().getBoolean(R.bool.config_posturing_supported);
         for (int i = 0; i < entries.length; i++) {
+            final String key = values[i];
+            if (key.equals(SHOW_WHILE_CHARGING_AND_UPRIGHT) && !supportAutoShowWhilePostured) {
+                continue;
+            }
+
             candidates.add(new WhenToStartHubCandidateInfo(entries[i], values[i]));
         }
 

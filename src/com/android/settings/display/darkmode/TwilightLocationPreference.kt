@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.location.LocationManager
+import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Settings.LocationSettingsActivity
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
@@ -46,8 +47,12 @@ class TwilightLocationPreference :
 
     override fun isIndexable(context: Context) = false
 
-    override fun createWidget(context: Context) =
-        BannerMessagePreference(context).apply {
+    override fun createWidget(context: Context) = BannerMessagePreference(context)
+
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+        preference as BannerMessagePreference
+        preference.apply {
             setPositiveButtonText(R.string.twilight_mode_launch_location)
             setPositiveButtonOnClickListener { v ->
                 featureFactory.metricsFeatureProvider.logClickedPreference(
@@ -60,6 +65,7 @@ class TwilightLocationPreference :
                 context.startActivity(intent)
             }
         }
+    }
 
     companion object {
         const val KEY = "dark_ui_location_off"

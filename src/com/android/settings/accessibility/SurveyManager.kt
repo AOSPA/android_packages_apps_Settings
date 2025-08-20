@@ -55,20 +55,9 @@ constructor(
     fun checkSurveyAvailable(callback: Consumer<Boolean>) =
         surveyFeatureProvider?.checkSurveyAvailable(lifecycleOwner, surveyKey, callback)
 
-    /**
-     * Checks for survey availability and, if available, schedules a notification. This method uses
-     * `SurveyFeatureProvider` to determine survey eligibility.
-     */
+    /** Schedule a broadcast to trigger the scheduling of any eligible survey notifications. */
     fun scheduleSurveyNotification() =
-        surveyFeatureProvider?.checkSurveyAvailable(
-            lifecycleOwner,
-            surveyKey,
-            Consumer { available: Boolean ->
-                if (available) {
-                    sendSurveyBroadcast(NotificationConstants.ACTION_SCHEDULE_SURVEY_NOTIFICATION)
-                }
-            },
-        )
+        sendSurveyBroadcast(NotificationConstants.ACTION_SCHEDULE_SURVEY_NOTIFICATION)
 
     /** Cancels any existing or pending survey notifications. */
     fun cancelSurveyNotification() =

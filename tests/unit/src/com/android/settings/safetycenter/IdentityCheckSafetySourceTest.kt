@@ -17,8 +17,6 @@
 package com.android.settings.safetycenter
 
 import android.content.Context
-import android.content.Intent
-import android.content.Intent.ACTION_BOOT_COMPLETED
 import android.hardware.biometrics.Flags
 import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.annotations.RequiresFlagsEnabled
@@ -27,12 +25,18 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.provider.Settings
 import android.safetycenter.SafetyEvent
 import android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_REFRESH_REQUESTED
+import android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED
 import android.safetycenter.SafetySourceData
+import android.safetycenter.SafetySourceIssue
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
+import com.android.settings.safetycenter.IdentityCheckSafetySource.Companion.ACTION_ISSUE_CARD_SHOW_DETAILS
+import com.android.settings.safetycenter.IdentityCheckSafetySource.Companion.ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -55,10 +59,12 @@ class IdentityCheckSafetySourceTest {
     @Mock lateinit var safetyCenterManagerWrapper: SafetyCenterManagerWrapper
 
     private val applicationContext: Context = ApplicationProvider.getApplicationContext()
-    private val safetyEvent =
+    private val refreshSafetyEvent =
         SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
             .setRefreshBroadcastId(IdentityCheckSafetySource.SAFETY_SOURCE_ID)
             .build()
+    private val sourceChangeSafetyEvent =
+        SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build()
     private val safetySourceDataArgumentCaptor = argumentCaptor<SafetySourceData>()
 
     private lateinit var identityCheckSafetySource: IdentityCheckSafetySource
@@ -67,7 +73,6 @@ class IdentityCheckSafetySourceTest {
     fun setUp() {
         SafetyCenterManagerWrapper.sInstance = safetyCenterManagerWrapper
         identityCheckSafetySource = IdentityCheckSafetySource()
-        identityCheckSafetySource.onReceive(applicationContext, Intent(ACTION_BOOT_COMPLETED))
     }
 
     @After
@@ -83,7 +88,7 @@ class IdentityCheckSafetySourceTest {
         setIdentityCheckPromoCardShown(false)
         setIdentityCheckEnabled()
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
 
         verify(safetyCenterManagerWrapper, never()).setSafetySourceData(any(), any(), any(), any())
     }
@@ -96,14 +101,14 @@ class IdentityCheckSafetySourceTest {
         setIdentityCheckPromoCardShown(false)
         setIdentityCheckEnabled(enabledV1Status = false, enabledCurrentStatus = true)
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
 
         verify(safetyCenterManagerWrapper)
             .setSafetySourceData(
                 eq(applicationContext),
                 eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
                 eq(null),
-                eq(safetyEvent),
+                eq(refreshSafetyEvent),
             )
     }
 
@@ -115,14 +120,14 @@ class IdentityCheckSafetySourceTest {
         setIdentityCheckPromoCardShown(false)
         setIdentityCheckEnabled(enabledV1Status = true, enabledCurrentStatus = false)
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
 
         verify(safetyCenterManagerWrapper)
             .setSafetySourceData(
                 eq(applicationContext),
                 eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
                 eq(null),
-                eq(safetyEvent),
+                eq(refreshSafetyEvent),
             )
     }
 
@@ -134,14 +139,14 @@ class IdentityCheckSafetySourceTest {
         setIdentityCheckPromoCardShown(true)
         setIdentityCheckEnabled()
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
 
         verify(safetyCenterManagerWrapper)
             .setSafetySourceData(
                 eq(applicationContext),
                 eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
                 eq(null),
-                eq(safetyEvent),
+                eq(refreshSafetyEvent),
             )
     }
 
@@ -153,36 +158,154 @@ class IdentityCheckSafetySourceTest {
         setIdentityCheckPromoCardShown(false)
         setIdentityCheckEnabled()
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
 
         verify(safetyCenterManagerWrapper)
             .setSafetySourceData(
                 eq(applicationContext),
                 eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
                 eq(null),
-                eq(safetyEvent),
+                eq(refreshSafetyEvent),
+            )
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    fun refreshSafetySources_whenWatchSupportedValueNotSet_setsNullData() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
+        setIdentityCheckPromoCardShown(false)
+        setIdentityCheckEnabled()
+        resetWatchRangingSupportedValue()
+
+        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                eq(null),
+                eq(refreshSafetyEvent),
             )
     }
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
-    fun refreshSafetySources_setsSafetySourceData() {
+    fun refreshSafetySources_notificationNotClicked_setsSafetySourceDataWithNotification() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
+        setIdentityCheckNotificationBeenClicked(false)
         setIdentityCheckPromoCardShown(false)
+        setWatchRangingSupportedValue(false)
         setIdentityCheckEnabled()
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, safetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
 
         verify(safetyCenterManagerWrapper)
             .setSafetySourceData(
                 eq(applicationContext),
                 eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
                 safetySourceDataArgumentCaptor.capture(),
-                eq(safetyEvent),
+                eq(refreshSafetyEvent),
             )
 
-        assertThat(safetySourceDataArgumentCaptor.firstValue).isNotNull()
+        val safetySourceIssue: SafetySourceIssue =
+            safetySourceDataArgumentCaptor.firstValue.issues[0]!!
+        val actionPendingIntent = safetySourceIssue.actions[0].pendingIntent
+
+        assertThat(safetySourceIssue.customNotification).isNotNull()
+        assertThat(actionPendingIntent.intent.action).isEqualTo(ACTION_ISSUE_CARD_SHOW_DETAILS)
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
+    fun refreshSafetySources_notificationClicked_setsSafetySourceDataWithoutNotification() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
+        setIdentityCheckNotificationBeenClicked(true)
+        setIdentityCheckPromoCardShown(false)
+        setWatchRangingSupportedValue(false)
+        setIdentityCheckEnabled()
+
+        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                safetySourceDataArgumentCaptor.capture(),
+                eq(refreshSafetyEvent),
+            )
+
+        val safetySourceIssue: SafetySourceIssue =
+            safetySourceDataArgumentCaptor.firstValue.issues[0]!!
+        val actionPendingIntent = safetySourceIssue.actions[0].pendingIntent
+
+        assertThat(safetySourceIssue.customNotification).isNull()
+        assertThat(actionPendingIntent.intent.action).isEqualTo(ACTION_ISSUE_CARD_SHOW_DETAILS)
+    }
+
+    @Test
+    @Ignore("b/353706169")
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    fun refreshSafetySources_watchAvailableOnPrimaryDevice_setsSafetySourceData() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
+        setWatchRangingSupportedValue(true)
+        setIdentityCheckPromoCardShown(false)
+        setIdentityCheckEnabled()
+
+        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                safetySourceDataArgumentCaptor.capture(),
+                eq(refreshSafetyEvent),
+            )
+
+        val safetySourceData = safetySourceDataArgumentCaptor.firstValue
+        val actionPendingIntent = safetySourceData.issues[0].actions[0].pendingIntent
+        val showWatchPromo =
+            applicationContext.resources.getBoolean(R.bool.config_show_identity_check_watch_promo)
+        val expectedAction =
+            if (showWatchPromo) ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS
+            else ACTION_ISSUE_CARD_SHOW_DETAILS
+
+        assertThat(actionPendingIntent.intent.action).isEqualTo(expectedAction)
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    fun watchContentObserver_onChange_setsSafetySourceData() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
+        setWatchRangingSupportedValue(true)
+        setIdentityCheckPromoCardShown(false)
+        setIdentityCheckEnabled()
+
+        val observer = IdentityCheckSafetySource.WatchContentObserver(applicationContext)
+        val uri =
+            Settings.Global.getUriFor(Settings.Global.WATCH_RANGING_SUPPORTED_BY_PRIMARY_DEVICE)
+
+        observer.onChange(false, uri)
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                any(),
+                eq(sourceChangeSafetyEvent),
+            )
+    }
+
+    private fun setIdentityCheckNotificationBeenClicked(clicked: Boolean) {
+        Settings.Secure.putInt(
+            applicationContext.contentResolver,
+            Settings.Secure.IDENTITY_CHECK_NOTIFICATION_VIEW_DETAILS_CLICKED,
+            if (clicked) 1 else 0,
+        )
     }
 
     private fun setIdentityCheckPromoCardShown(hasShown: Boolean) {
@@ -190,6 +313,22 @@ class IdentityCheckSafetySourceTest {
             applicationContext.contentResolver,
             Settings.Secure.IDENTITY_CHECK_PROMO_CARD_SHOWN,
             if (hasShown) 1 else 0,
+        )
+    }
+
+    private fun setWatchRangingSupportedValue(isWatchAvailable: Boolean) {
+        Settings.Global.putInt(
+            applicationContext.contentResolver,
+            Settings.Global.WATCH_RANGING_SUPPORTED_BY_PRIMARY_DEVICE,
+            if (isWatchAvailable) 1 else 0,
+        )
+    }
+
+    private fun resetWatchRangingSupportedValue() {
+        Settings.Global.putString(
+            applicationContext.contentResolver,
+            Settings.Global.WATCH_RANGING_SUPPORTED_BY_PRIMARY_DEVICE,
+            null,
         )
     }
 

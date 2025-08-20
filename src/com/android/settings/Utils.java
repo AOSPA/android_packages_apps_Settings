@@ -1580,6 +1580,19 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Returns true if the userId is the supervising profile, false otherwise.
+     */
+    public static boolean isSupervisingProfile(int userId, @NonNull Context context) {
+        if (!android.multiuser.Flags.allowSupervisingProfile()) {
+            return false;
+        }
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        UserInfo userInfo = userManager.getUserInfo(userId);
+        return !Objects.isNull(userInfo)
+                && userInfo.userType.equals(UserManager.USER_TYPE_PROFILE_SUPERVISING);
+    }
+
+    /**
      * Enable new edge to edge feature.
      *
      * @param activity the Activity need to setup the edge to edge feature.

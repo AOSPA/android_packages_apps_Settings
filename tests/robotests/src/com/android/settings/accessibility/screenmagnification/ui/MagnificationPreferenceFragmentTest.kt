@@ -18,8 +18,10 @@ package com.android.settings.accessibility.screenmagnification.ui
 
 import android.app.settings.SettingsEnums
 import android.content.ComponentName
-import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
+import android.platform.test.annotations.RequiresFlagsDisabled
+import android.platform.test.flag.junit.CheckFlagsRule
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.platform.test.flag.junit.SetFlagsRule
 import android.view.InputDevice
 import androidx.fragment.app.FragmentFactory
@@ -36,7 +38,6 @@ import com.android.settings.accessibility.MagnificationCapabilities.Magnificatio
 import com.android.settings.accessibility.ShortcutPreference
 import com.android.settings.accessibility.screenmagnification.dialogs.CursorFollowingModeChooser
 import com.android.settings.accessibility.screenmagnification.dialogs.MagnificationModeChooser
-import com.android.settings.accessibility.screenmagnification.ui.MagnificationPreferenceFragment.Companion.MAGNIFICATION_SURVEY_KEY
 import com.android.settings.testutils.AccessibilityTestUtils.assertDialogShown
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settings.testutils.shadow.ShadowInputDevice
@@ -53,6 +54,7 @@ import org.robolectric.shadows.ShadowLooper
 @RunWith(RobolectricTestRunner::class)
 class MagnificationPreferenceFragmentTest :
     BaseShortcutInteractionsTestCases<MagnificationPreferenceFragment>() {
+    @get:Rule val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
     @get:Rule val setFlagsRule = SetFlagsRule()
     private var fragScenario: FragmentScenario<MagnificationPreferenceFragment>? = null
     private var fragment: MagnificationPreferenceFragment? = null
@@ -95,13 +97,6 @@ class MagnificationPreferenceFragmentTest :
     }
 
     @Test
-    fun getSurveyKey_returnCorrectKey() {
-        val fragment = launchFragment()
-
-        assertThat(fragment.surveyKey).isEqualTo(MAGNIFICATION_SURVEY_KEY)
-    }
-
-    @Test
     fun getMetricsCategory_returnsCorrectCategory() {
         val fragment = launchFragment()
 
@@ -116,7 +111,7 @@ class MagnificationPreferenceFragmentTest :
         assertThat(fragment.helpResource).isEqualTo(R.string.help_url_magnification)
     }
 
-    @DisableFlags(Flags.FLAG_CATALYST_MAGNIFICATION)
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_MAGNIFICATION)
     @Test
     fun getSearchIndexDataProvider_verifyXmlResourcesToIndex() {
         val searchIndexableResource =

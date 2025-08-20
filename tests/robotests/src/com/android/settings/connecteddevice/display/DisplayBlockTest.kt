@@ -75,8 +75,10 @@ class DisplayBlockTest {
 
         parentView.addView(block)
         block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
+        injector.testHandler.flush()
 
         block.updateSurfaceView()
+        injector.testHandler.flush()
 
         assertThat(injector.updateLog.toString())
             .isEqualTo(
@@ -99,10 +101,12 @@ class DisplayBlockTest {
         assertThat(injector.wallpapers.put(DISPLAY_ID, wallpaperB)).isEqualTo(wallpaperA)
 
         block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(30f, 30f), 0.4f, DISPLAY_SIZE)
+        injector.testHandler.flush()
 
         // Should not have fetched wallpaper or display info yet.
         assertThat(injector.wallpapers.get(DISPLAY_ID)).isEqualTo(wallpaperB)
         block.updateSurfaceView()
+        injector.testHandler.flush()
         assertThat(injector.wallpapers.get(DISPLAY_ID)).isNull()
 
         assertThat(injector.updateLog.toString())
@@ -125,7 +129,9 @@ class DisplayBlockTest {
 
         parentView.addView(block)
         block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
+        injector.testHandler.flush()
         block.updateSurfaceView()
+        injector.testHandler.flush()
 
         assertThat(injector.updateLog.toString())
             .isEqualTo(
@@ -138,6 +144,7 @@ class DisplayBlockTest {
         // Same size and scale as before, but a new wallpaper and different position in parent view.
         injector.wallpapers.put(DISPLAY_ID, wallpaperY)
         block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 10f), PointF(70f, 20f), 0.5f, DISPLAY_SIZE)
+        injector.testHandler.flush()
         assertThat(injector.updateLog.toString())
             .isEqualTo(
                 "oldSurfaces: [$wallpaperX], surface: $wallpaperY, surfaceScale: 0.50, " +
@@ -149,6 +156,7 @@ class DisplayBlockTest {
         // Repeat the pattern, but with a new scale and reverting back to wallpaperX.
         injector.wallpapers.put(DISPLAY_ID, wallpaperX)
         block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 30f), PointF(70f, 40f), 0.2f, DISPLAY_SIZE)
+        injector.testHandler.flush()
         assertThat(injector.updateLog.toString())
             .isEqualTo(
                 "oldSurfaces: [$wallpaperY], surface: $wallpaperX, surfaceScale: 0.20, " +
@@ -162,11 +170,15 @@ class DisplayBlockTest {
 
         parentView.addView(block)
         block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
+        injector.testHandler.flush()
         block.updateSurfaceView()
+        injector.testHandler.flush()
 
         assertThat(injector.updateLog.toString()).isEqualTo("")
         injector.wallpapers.put(DISPLAY_ID, wallpaperW)
-
+        // One wait to resume the deferred retry
+        injector.testHandler.flush()
+        // One wait to wait for task posted to main thread to run
         injector.testHandler.flush()
         assertThat(injector.updateLog.toString())
             .isEqualTo(

@@ -20,6 +20,7 @@ import android.app.Application
 import android.app.role.RoleManager
 import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
 import android.app.settings.SettingsEnums
+import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
@@ -42,6 +43,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceGroup
 import androidx.preference.PreferenceGroupAdapter
 import androidx.preference.SwitchPreferenceCompat
+import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -71,10 +73,11 @@ import org.robolectric.shadows.ShadowPackageManager
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.INSTRUMENTATION_TEST)
 class SupervisionWebContentFiltersScreenTest {
+    private lateinit var shadowPackageManager: ShadowPackageManager
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val supervisionWebContentFiltersScreen = SupervisionWebContentFiltersScreen()
-    private lateinit var shadowPackageManager: ShadowPackageManager
     private val mockRoleManager = mock<RoleManager>()
+    private val mockSupervisionManager = mock<SupervisionManager>()
 
     @get:Rule(order = 0) val setFlagsRule = SetFlagsRule()
     @get:Rule(order = 1) val settingsStoreRule = SettingsStoreRule()
@@ -108,6 +111,7 @@ class SupervisionWebContentFiltersScreenTest {
         shadowPackageManager.addIntentFilterForActivity(componentName, intentFilter)
         (Shadow.extract((context as Application).baseContext) as ShadowContextImpl).apply {
             setSystemService(Context.ROLE_SERVICE, mockRoleManager)
+            setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
         }
     }
 
@@ -342,6 +346,20 @@ class SupervisionWebContentFiltersScreenTest {
             val intent = shadowOf(fragment.activity).nextStartedActivity
             assertThat(intent.dataString).isEqualTo(learnMoreLink)
             assertThat(intent.action).isEqualTo(Intent.ACTION_VIEW)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN_SEARCH_REDIRECTION)
+    fun redirectToSupervisionDashboard_whenSupervisionIsNotEnabled() {
+        mockSupervisionManager.stub { on { isSupervisionEnabled } doReturn false }
+        ActivityScenario.launch(SupervisionWebContentFiltersActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                val nextActivity = shadowOf(activity).nextStartedActivity
+                assertThat(nextActivity.component?.className)
+                    .isEqualTo(SupervisionDashboardActivity::class.java.name)
+                assertThat(activity.isFinishing).isTrue()
+            }
         }
     }
 }

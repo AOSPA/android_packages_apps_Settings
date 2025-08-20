@@ -21,7 +21,6 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_W
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PASSWORD_ATTEMPT_BEFORE_WIPE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PIN_ATTEMPT_BEFORE_WIPE;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
-import static android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING;
 
 import static com.android.settings.biometrics.GatekeeperPasswordProvider.containsGatekeeperPasswordHandle;
 import static com.android.settings.biometrics.GatekeeperPasswordProvider.getGatekeeperPasswordHandle;
@@ -188,9 +187,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     Context.INPUT_METHOD_SERVICE);
 
             mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
-            boolean isSupervisingProfile =
-                    android.multiuser.Flags.allowSupervisingProfile() && UserManager.get(
-                            getActivity()).isUserOfType(USER_TYPE_PROFILE_SUPERVISING);
+            boolean isSupervisingProfile = Utils.isSupervisingProfile(mUserId, getActivity());
 
             Intent intent = getActivity().getIntent();
             if (intent != null) {
@@ -324,10 +321,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             if (mRemoteValidation) {
                 return getString(R.string.lockpassword_remote_validation_header);
             }
-            if (android.multiuser.Flags.allowSupervisingProfile() && !mIsAlpha) {
-                if (UserManager.get(getActivity()).isUserOfType(USER_TYPE_PROFILE_SUPERVISING)) {
-                    return getString(R.string.supervision_full_screen_pin_verification_title);
-                }
+            if (Utils.isSupervisingProfile(mUserId, getActivity()) && !mIsAlpha) {
+                return getString(R.string.supervision_full_screen_pin_verification_title);
             }
             if (mIsManagedProfile) {
                 if (mIsAlpha) {

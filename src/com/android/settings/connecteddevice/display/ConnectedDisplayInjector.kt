@@ -189,7 +189,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         }
 
         oldSurfaces.forEach { t.remove(it) }
-        t.apply(true)
+        t.apply()
         oldSurfaces.forEach { it.release() }
     }
 

@@ -39,9 +39,7 @@ public class AutoLockPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return android.multiuser.Flags.supportAutolockForPrivateSpace()
-                ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return AVAILABLE;
     }
 
     @NonNull

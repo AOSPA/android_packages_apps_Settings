@@ -999,7 +999,8 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Переміщуйте курсор миші між екранами"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Використовувати зовнішній дисплей"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Роздільна здатність дисплея"</string>
-    <string name="external_display_connection_preference" msgid="9158531639269299045">"Поведінка за умовчанням під час підключення"</string>
+    <!-- no translation found for external_display_connection_preference (3337612335495542718) -->
+    <skip />
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Використовувати як окремий дисплей"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Дублювати вбудований дисплей"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Показувати діалогове вікно підключення"</string>
@@ -1468,8 +1469,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Використовуйте темний фон, щоб зручніше переглядати екран і заощаджувати заряд акумулятора на деяких пристроях. Якщо ви налаштували розклад, тема зміниться, коли екран буде вимкнено."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Темна тема наразі вмикається згідно з розкладом нічного режиму"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Налаштування нічного режиму"</string>
-    <!-- no translation found for dark_ui_modes_footer_summary (22160899184470368) -->
-    <skip />
+    <string name="dark_ui_modes_footer_summary" msgid="22160899184470368">"{count,plural,offset:2 =0{У режимах також може вмикатися темна тема}=1{У режимі \"{mode_1}\" також вмикається темна тема.}=2{У режимах \"{mode_1}\" і \"{mode_2}\" також вмикається темна тема.}=3{У режимах \"{mode_1}\", \"{mode_2}\" і \"{mode_3}\" також вмикається темна тема.}one{У режимах \"{mode_1}\", \"{mode_2}\" і ще # також вмикається темна тема.}few{У режимах \"{mode_1}\", \"{mode_2}\" і ще # також вмикається темна тема.}many{У режимах \"{mode_1}\", \"{mode_2}\" і ще # також вмикається темна тема.}other{У режимах \"{mode_1}\", \"{mode_2}\" і ще # також вмикається темна тема.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Налаштування режимів"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Зробіть кольори на своїх зображеннях і відео з розширеним дінамічним діапазоном (HDR) яскравішими й багатшими. Контент у якості HDR буде яскравішим."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Час вимкнення екрана"</string>
@@ -1878,12 +1878,14 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Щоб користуватися відбитком пальця, налаштуйте ключ"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"З міркувань безпеки налаштуйте PIN-код"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Щоб користуватися відбитком пальця, налаштуйте PIN-код"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Введіть пароль ще раз"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="4988519671035171367">"Введіть пароль пристрою"</string>
+    <string name="lockpassword_reenter_your_password_header" msgid="7257189484651655897">"Введіть пароль ще раз"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Введіть пароль ще раз"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Введіть пароль робочого профілю"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Підтвердьте ключ розблокування"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="2473024535487015289">"Введіть ключ пристрою"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Введіть ключ робочого профілю"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Введіть PIN-код ще раз"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="541025103892074808">"Введіть PIN-код пристрою"</string>
+    <string name="lockpassword_reenter_your_pin_header" msgid="373337443492549650">"Введіть PIN-код ще раз"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Введіть PIN-код ще раз"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Введіть PIN-код робочого профілю"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Паролі не збігаються"</string>
@@ -1902,12 +1904,12 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Забули пароль?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Забули ключ?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Забули PIN-код?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Щоб продовжити, намалюйте ключ"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Щоб продовжити, введіть PIN-код"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Щоб продовжити, введіть пароль"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Щоб продовжити, намалюйте ключ для робочого профіля"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Щоб продовжити, введіть PIN-код робочого профілю"</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Щоб продовжити, введіть пароль робочого профілю"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="4983618652824112610">"Ключ підтверджує вашу особу"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"PIN-код підтверджує вашу особу"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"Пароль підтверджує вашу особу"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="2552062474449423029">"Ключ робочого профілю підтверджує вашу особу"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6556640367641079244">"PIN-код робочого профілю підтверджує вашу особу"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5700270644291633820">"Пароль робочого профілю підтверджує вашу особу"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"З міркувань безпеки введіть ключ пристрою"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"З міркувань безпеки введіть PIN-код пристрою"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"З міркувань безпеки введіть пароль пристрою"</string>
@@ -2184,6 +2186,8 @@
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Прокручування"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Контрольоване прокручування"</string>
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Швидкість прокручування"</string>
+    <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"Збільшити швидкість прокручування"</string>
+    <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"Зменшити швидкість прокручування"</string>
     <string name="mouse_pointer_speed_make_faster_desc" msgid="7665912663672314461">"Збільшити швидкість курсора"</string>
     <string name="mouse_pointer_speed_make_slower_desc" msgid="116802579827902188">"Зменшити швидкість курсора"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Змінити основну кнопку миші"</string>
@@ -2370,10 +2374,8 @@
     <string name="audio_category_title" msgid="5283853679967605826">"Аудіо"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Загальні"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Екран"</string>
-    <!-- no translation found for accessibility_color_and_motion_title (1085072332445818494) -->
-    <skip />
-    <!-- no translation found for accessibility_color_and_motion_subtext (1150281881647191503) -->
-    <skip />
+    <string name="accessibility_color_and_motion_title" msgid="1085072332445818494">"Кольори й рух"</string>
+    <string name="accessibility_color_and_motion_subtext" msgid="1150281881647191503">"Темна тема, корекція кольору, вимкнення анімації"</string>
     <string name="accessibility_pointer_and_touchpad_title" msgid="5703454643194245909">"Функції доступності курсора й сенсорної панелі"</string>
     <string name="accessibility_pointer_and_touchpad_summary" msgid="8588221231953604340">"Розмір, колір, тип"</string>
     <string name="accessibility_pointer_color_customization_title" msgid="2841888132681075999">"Колір курсора"</string>
@@ -2396,13 +2398,10 @@
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Затемняти екран"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Елементи керування взаємодією"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Налаштування часу реагування"</string>
-    <!-- no translation found for accessibility_tap_assistance_subtext (1805279944665087799) -->
-    <skip />
+    <string name="accessibility_tap_assistance_subtext" msgid="1805279944665087799">"Затримка натискання й утримування, час на виконання дії"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Елементи керування системою"</string>
-    <!-- no translation found for accessibility_system_controls_subtext (2722046038429586174) -->
-    <skip />
-    <!-- no translation found for accessibility_system_controls_subtext_one_handed_not_supported (4973507525360793402) -->
-    <skip />
+    <string name="accessibility_system_controls_subtext" msgid="2722046038429586174">"Режим навігації, режим керування однією рукою, обертання екрана"</string>
+    <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Режим навігації, обертання екрана"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Надіслати відгук"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Узяти участь в опитуванні"</string>
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Зв’язатися зі службою підтримки Google із питань доступності"</string>
@@ -2476,10 +2475,8 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Збільшувати кнопкою/жестом"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Збільшувати кнопкою й потрійним дотиком"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Про сервіс <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <!-- no translation found for accessibility_text_reading_options_title (2059907327364152763) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_options_subtext (3480489973093251705) -->
-    <skip />
+    <string name="accessibility_text_reading_options_title" msgid="2059907327364152763">"Розмір шрифту й масштаб"</string>
+    <string name="accessibility_text_reading_options_subtext" msgid="3480489973093251705">"Розмір шрифту, масштаб, жирний шрифт, текст із фоном"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Змініть параметри відображення тексту"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Тема: Проекти повітряних куль"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Від: Борис"</string>
@@ -2509,7 +2506,7 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Швидка дія жестом функцій доступності"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Щоб використовувати цю функцію, натисніть кнопку функцій доступності <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> унизу екрана.\n\nЩоб переключитися між функціями, натисніть і утримуйте цю кнопку."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Щоб використовувати цю функцію, натисніть кнопку функцій доступності на екрані"</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Щоб використовувати цю функцію, натисніть і утримуйте обидві клавіші гучності"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Щоб використовувати цю функцію, натисніть і втримуйте обидві клавіші гучності"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Щоб почати або припинити збільшення, тричі натисніть будь-де на екрані."</string>
     <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"Щоб почати або припинити збільшення, швидко торкніться екрана %1$d рази"</string>
     <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"Щоб почати або припинити збільшення, швидко двічі торкніться екрана %1$d пальцями"</string>
@@ -2552,7 +2549,7 @@
     <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Швидка дія клавішами гучності"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Налаштування засобу спеціальних можливостей"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Швидка дія клавішами гучності на заблоков. екрані"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Дає змогу вмикати функцію із заблокованого екрана за допомогою комбінації клавіш. Натисніть і утримуйте обидві клавіші гучності впродовж кількох секунд."</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Дає змогу вмикати функцію із заблокованого екрана за допомогою комбінації клавіш. Натисніть і втримуйте обидві клавіші гучності впродовж кількох секунд."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Кнопка функцій доступності"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"Вмикайте функції доступності з будь-якого екрана"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Про кнопку спеціальних можливостей"</string>
@@ -2653,10 +2650,8 @@
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Налаштування навігації"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Вібрація і вібровідгук"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Керуйте інтенсивністю вібрації для різних випадків"</string>
-    <!-- no translation found for accessibility_vibration_settings_state_on (3316037269092584284) -->
-    <skip />
-    <!-- no translation found for accessibility_vibration_settings_state_off (113565506991847845) -->
-    <skip />
+    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"Увімкнено / Налаштувати рівень вібрації для дзвінків, сповіщень і будильників"</string>
+    <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"Вимкнено / Налаштувати рівень вібрації для дзвінків, сповіщень і будильників"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Налаштування вимкнено, оскільки на пристрої активовано беззвучний режим"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Виклики"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Сповіщення й будильники"</string>
@@ -2676,8 +2671,7 @@
     <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"Додати корекцію кольору до Швидких налаштувань також можна вгорі екрана"</string>
     <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"Інверсію кольорів додано до Швидких налаштувань. Щоб будь-коли ввімкнути або вимкнути її, проведіть пальцем по екрану вниз."</string>
     <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"Додати інверсію кольорів до Швидких налаштувань також можна вгорі екрана"</string>
-    <!-- no translation found for reduce_bright_colors_preference_summary (8112736110942731246) -->
-    <skip />
+    <string name="reduce_bright_colors_preference_summary" msgid="8112736110942731246">"Зменште яскравість екрана нижче за мінімальний рівень"</string>
     <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"Додаткове зменшення яскравості додано до Швидких налаштувань. Щоб будь-коли ввімкнути або вимкнути його, проведіть пальцем по екрану вниз."</string>
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Додати додаткове зменшення яскравості до Швидких налаштувань також можна вгорі екрана"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Режим керування однією рукою додано до Швидких налаштувань. Щоб будь-коли ввімкнути або вимкнути його, проведіть пальцем по екрану вниз."</string>
@@ -2743,8 +2737,7 @@
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Не бачите свій слуховий апарат?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Переглянути інші пристрої"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Налаштування аудіо"</string>
-    <!-- no translation found for accessibility_audio_adjustment_subtext (2190523175597700025) -->
-    <skip />
+    <string name="accessibility_audio_adjustment_subtext" msgid="2190523175597700025">"Монофонічне аудіо, баланс аудіо"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Голосовий супровід"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Озвучувати, що відбувається на екрані, у підтримуваних фільмах і серіалах"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"голосовий супровід, голосовий, супровід, поганий зір,"</string>
@@ -2755,8 +2748,7 @@
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Не працює. Торкніться, щоб дізнатися більше."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Ця служба не працює."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Швидке ввімкнення функцій доступності"</string>
-    <!-- no translation found for accessibility_shortcuts_settings_subtext (3870836550836457943) -->
-    <skip />
+    <string name="accessibility_shortcuts_settings_subtext" msgid="3870836550836457943">"Кнопка функцій доступності, швидка дія клавішами гучності"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Показувати на панелі швидкого налаштування"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Червоний–зелений, слабке сприйняття зеленого"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Червоний–зелений, слабке сприйняття червоного"</string>
@@ -3100,8 +3092,7 @@
     <string name="on_device_recognition_settings" msgid="6503160369314598069">"Налаштування розпізнавання на пристрої"</string>
     <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Розпізнавання на пристрої"</string>
     <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Розпізнавання мовлення на пристрої"</string>
-    <!-- no translation found for tts_subtext (8958790811881046789) -->
-    <skip />
+    <string name="tts_subtext" msgid="8958790811881046789">"Налаштуйте швидкість і висоту тону мовлення"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Система за умовчанням"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Налаштування системи"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Темп і тон мовлення"</string>
@@ -3755,7 +3746,9 @@
     <string name="system_sounds_and_vibrations_category_title" msgid="4162079598490981456">"Системні звуки й вібрація"</string>
     <string name="work_profile_sound_category_title" msgid="1708926655170323454">"Звук у робочому профілі"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Живі субтитри"</string>
-    <string name="live_caption_summary" msgid="2898451867595161809">"Автоматичні субтитри (медіа)"</string>
+    <string name="live_caption_summary" msgid="7290150167089515457">"Відображати субтитри для дзвінків, відео й інших медіафайлів"</string>
+    <string name="live_caption_on_summary" msgid="8921561021882989495">"Увімкнено / Відображати субтитри для дзвінків, відео й інших медіафайлів"</string>
+    <string name="live_caption_off_summary" msgid="6761535729357010911">"Вимкнено / Відображати субтитри для дзвінків, відео й інших медіафайлів"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Дротові навушники"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Звук стає реалістичнішим (якщо контент підтримує цю функцію)"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Вимкнено"</string>
@@ -3901,6 +3894,7 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Головні новини, редакційні статті тощо"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Позначки \"подобається\", дописи тощо"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Інформаційні листи, рекомендований медіаконтент тощо"</string>
+    <string name="notification_bundle_no_apps_desc" msgid="6357770877341582580">"Усі додатки зараз використовують органайзер сповіщень"</string>
     <string name="notification_ai_features_title" msgid="2241618579100257538">"Керування за допомогою ШІ"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Короткі перекази сповіщень"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Отримуйте короткі перекази довгих повідомлень"</string>
@@ -3912,6 +3906,7 @@
     <string name="notification_excluded_apps" msgid="317898848790046528">"Не включати ці додатки"</string>
     <string name="notification_app_level_summarize_title" msgid="488390574186154905">"Короткі перекази сповіщень"</string>
     <string name="notification_app_level_summarize_subtext" msgid="2064371198044287108">"Отримуйте короткі перекази довгих повідомлень"</string>
+    <string name="notification_summarization_no_apps_desc" msgid="6058658379217986963">"Усі відповідні додатки зараз використовують короткі перекази сповіщень"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Сповіщення в реальному часі"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Новини в реальному часі"</string>
     <string name="live_notifications_desc" msgid="6857161077319125625">"Показувати поточні термінові сповіщення в рядку стану й на заблокованому екрані"</string>
@@ -4397,6 +4392,14 @@
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Перегляньте додатки, які змінили спосіб передавання ваших геоданих"</string>
     <string name="app_function_access_settings_title" msgid="1837117989202166166">"Агенти"</string>
     <string name="app_function_access_settings_summary" msgid="3654291845453799170">"Агенти, які можуть отримувати доступ до інформації або виконувати дії в додатках"</string>
+    <!-- no translation found for manage_agent_app_function_access_settings_title (2407736540086293094) -->
+    <skip />
+    <!-- no translation found for manage_agent_app_function_access_settings_summary (5513761879561499076) -->
+    <skip />
+    <!-- no translation found for manage_target_app_function_access_settings_title (6517416582918633839) -->
+    <skip />
+    <!-- no translation found for manage_target_app_function_access_settings_summary (3578937757835411954) -->
+    <skip />
     <string name="tap_to_wake" msgid="3313433536261440068">"Торкніться, щоб активувати"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Двічі торкніться екрана, щоб активувати пристрій"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Відкривання посилань"</string>
@@ -4661,8 +4664,7 @@
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 додатку дозволено використовувати мобільний Інтернет із необмеженим трафіком, коли ввімкнено Заощадження трафіку}one{# додатку дозволено використовувати мобільний Інтернет із необмеженим трафіком, коли ввімкнено Заощадження трафіку}few{# додаткам дозволено використовувати мобільний Інтернет із необмеженим трафіком, коли ввімкнено Заощадження трафіку}many{# додаткам дозволено використовувати мобільний Інтернет із необмеженим трафіком, коли ввімкнено Заощадження трафіку}other{# додатку дозволено використовувати мобільний Інтернет із необмеженим трафіком, коли ввімкнено Заощадження трафіку}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"Основні дані"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Дані Wi-Fi"</string>
-    <!-- no translation found for data_used_formatted (6825854220655476713) -->
-    <skip />
+    <string name="data_used_formatted" msgid="6825854220655476713">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="data_overusage" msgid="3680477320458707259">"<xliff:g id="ID_1">^1</xliff:g> понад ліміт"</string>
     <string name="data_remaining" msgid="6316251496381922837">"Залишилося <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Графік показує використання трафіку за період <xliff:g id="START_DATE">%1$s</xliff:g> – <xliff:g id="END_DATE">%2$s</xliff:g>."</string>
@@ -4834,6 +4836,14 @@
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Навігація за допомогою жестів"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Увімкнути демонстрацію"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Навігація за допомогою кнопок"</string>
+    <!-- no translation found for button_navigation_settings_order_title (4256756895101424865) -->
+    <skip />
+    <!-- no translation found for navbar_back_button (6386920156044420082) -->
+    <skip />
+    <!-- no translation found for navbar_home_button (951459586446869883) -->
+    <skip />
+    <!-- no translation found for navbar_recent_button (6005580570601162420) -->
+    <skip />
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"навігація за допомогою жестів, чутливість країв екрана, жест \"назад\""</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"навігація, кнопка головного екрана"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Режим керування однією рукою"</string>
@@ -5482,8 +5492,7 @@
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
     </plurals>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
-    <!-- no translation found for rtt_settings_summary (9011338875202712756) -->
-    <skip />
+    <string name="rtt_settings_summary" msgid="9011338875202712756">"Обмінюйтеся текстовими повідомленнями під час викликів"</string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
@@ -5742,13 +5751,10 @@
     <string name="color_inversion_state_on" msgid="1160969033636440368">"Увімкнено"</string>
     <string name="color_inversion_state_off" msgid="6925638668080451724">"Вимкнено"</string>
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Перетворює світлі кольори на темні й навпаки"</string>
-    <!-- no translation found for magnification_feature_summary (4403387702011660253) -->
-    <skip />
+    <string name="magnification_feature_summary" msgid="4403387702011660253">"Наблизьте вміст екрана, щоб краще його роздивитися"</string>
     <string name="autoclick_disabled" msgid="3213396804955002120">"Вимкнено"</string>
-    <!-- no translation found for show_captions_disabled (924366862253349790) -->
-    <skip />
-    <!-- no translation found for show_captions_enabled (3495595825041704052) -->
-    <skip />
+    <string name="show_captions_disabled" msgid="924366862253349790">"Вимкнено / Налаштувати розмір і стиль субтитрів"</string>
+    <string name="show_captions_enabled" msgid="3495595825041704052">"Увімкнено / Налаштувати розмір і стиль субтитрів"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Вимкнено"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Увімкнено"</string>
     <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Аудіо: лівий <xliff:g id="PERCENT_LEFT">%1$s</xliff:g>, правий <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g>"</string>
@@ -5956,4 +5962,20 @@
     <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Інші користувачі не зможуть відкривати додатки, що вимагають розблокування за допомогою відбитка пальця або фейс-контролю. Підключившись до годинника, ви можете бути впевнені в захисті своїх даних, де б ви не були."</string>
     <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Використовуйте перевірку особи на годиннику в різних додатках"</string>
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Захистіть свої дані в усіх додатках із підтримкою фейс-контролю й розблокування відбитком пальця в надійних місцях, як-от удома чи в офісі. Використовуйте перевірку особи на годиннику, щоб захистити свої дані навіть поза межами надійних місць."</string>
+    <!-- no translation found for more_security_privacy_category_title (6107292123094705732) -->
+    <skip />
+    <!-- no translation found for more_security_privacy_summary (8049801531406061219) -->
+    <skip />
+    <!-- no translation found for privacy_sources_title (7648842637181479352) -->
+    <skip />
+    <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
+    <skip />
+    <!-- no translation found for device_unlock_subpage_title (8619367783572270468) -->
+    <skip />
+    <!-- no translation found for lock_screen_title (4701994278040604018) -->
+    <skip />
+    <!-- no translation found for location_settings (6833222354060094170) -->
+    <skip />
+    <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
+    <skip />
 </resources>

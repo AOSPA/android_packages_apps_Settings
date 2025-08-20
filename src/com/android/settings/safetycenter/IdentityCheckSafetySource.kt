@@ -15,20 +15,27 @@
  */
 package com.android.settings.safetycenter
 
+import android.app.Notification
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.database.ContentObserver
 import android.hardware.biometrics.Flags
+import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.proximity.IProximityResultCallback
 import android.proximity.ProximityResultCode
 import android.safetycenter.SafetyEvent
+import android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED
 import android.safetycenter.SafetySourceData
 import android.safetycenter.SafetySourceIssue
 import android.security.authenticationpolicy.AuthenticationPolicyManager
 import android.util.Log
 import com.android.settings.R
+import com.android.settings.biometrics.IdentityCheckNotificationPromoCardActivity
 import com.android.settings.biometrics.IdentityCheckPromoCardActivity
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.SettableFuture
@@ -41,8 +48,10 @@ import java.util.concurrent.Executors
  */
 class IdentityCheckSafetySource : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        val intentAction = intent.action
-        if (intentAction.equals(Intent.ACTION_BOOT_COMPLETED)) {
+        context.updateIfIdentityCheckWasEnabledInV1()
+        WatchContentObserver(context).registerContentObserver()
+
+        if (intent.action?.equals(Intent.ACTION_BOOT_COMPLETED) == true) {
             val pendingResult = goAsync()
             val watchRangingFuture = context.getWatchRangingAvailabilityFuture()
             watchRangingFuture.addListener(
@@ -58,7 +67,6 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                 },
                 Executors.newSingleThreadExecutor(),
             )
-            context.updateIfIdentityCheckWasEnabledInV1()
         }
     }
 
@@ -68,10 +76,15 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
             "com.android.settings.safetycenter.action.IDENTITY_CHECK_ISSUE_CARD_SHOW_DETAILS"
         const val ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS =
             "com.android.settings.safetycenter.action.IDENTITY_CHECK_ISSUE_CARD_WATCH_SHOW_DETAILS"
+        const val ACTION_ISSUE_NOTIFICATION_CLICKED =
+            "com.android.settings.safetycenter.action.IDENTITY_CHECK_NOTIFICATION_CLICKED"
         private const val TAG = "ICSafetySource"
+        private const val REQUEST_ID = 0
         private const val ISSUE_CARD_VIEW_DETAILS = 1
         private const val IDENTITY_CHECK_PROMO_CARD_ISSUE_ID = "IdentityCheckPromoCardIssue"
         private const val IDENTITY_CHECK_PROMO_CARD_ISSUE_TYPE = "IdentityCheckAllSurfaces"
+        private const val IDENTITY_CHECK_PROMO_NOTIFICATION_ACTION_ID =
+            "identity_check_promo_notification_action_id"
 
         /** Sets the safety source data with the Identity Check issue info. */
         fun setSafetySourceData(context: Context, safetyEvent: SafetyEvent) {
@@ -81,6 +94,12 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
             if (!Flags.identityCheckAllSurfaces()) {
                 sendNullData(context, safetyEvent)
                 return
+            }
+            if (Flags.identityCheckWatch()) {
+                if (!isWatchRangingSupportedValueUpdated(context)) {
+                    sendNullData(context, safetyEvent)
+                    return
+                }
             }
             if (!hasPromoCardBeenShown(context) && isIdentityCheckEnabled(context)) {
                 val safetySourceData =
@@ -109,7 +128,7 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                 .setSafetySourceData(
                     context,
                     SAFETY_SOURCE_ID,
-                    null /* safetySourceData */,
+                    null, /* safetySourceData */
                     safetyEvent,
                 )
         }
@@ -122,24 +141,30 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
             ) == 1
 
         private fun getIssue(context: Context): SafetySourceIssue {
-            var issueCardTitle = context.getString(R.string.identity_check_issue_card_title)
-            var issueCardSummary = context.getString(R.string.identity_check_issue_card_summary)
-            var intentAction = ACTION_ISSUE_CARD_SHOW_DETAILS
+            var issueCardDetails =
+                IssueCardDetails(
+                    context.getString(R.string.identity_check_issue_card_title),
+                    context.getString(R.string.identity_check_issue_card_summary),
+                    ACTION_ISSUE_CARD_SHOW_DETAILS,
+                )
+            var notificationDetails =
+                NotificationDetails(
+                    context.getString(R.string.identity_check_notification_title),
+                    context.getString(R.string.identity_check_notification_summary),
+                    context.getString(R.string.identity_check_view_details),
+                )
+
             if (shouldShowWatchRangingPromoCard(context)) {
                 val watchIssueCardTitle =
                     context.getString(R.string.identity_check_watch_issue_card_title)
                 val watchIssueCardSummary =
                     context.getString(R.string.identity_check_watch_issue_card_summary)
-                issueCardTitle = watchIssueCardTitle
-                issueCardSummary = watchIssueCardSummary
-                intentAction = ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS
+                issueCardDetails.title = watchIssueCardTitle
+                issueCardDetails.summary = watchIssueCardSummary
+                issueCardDetails.intentAction = ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS
             }
-            return getIdentityCheckAllSurfacesIssue(
-                context,
-                issueCardTitle,
-                issueCardSummary,
-                intentAction,
-            )
+
+            return getIssue(context, issueCardDetails, notificationDetails)
         }
 
         /**
@@ -151,19 +176,34 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                 context.resources.getBoolean(R.bool.config_show_identity_check_watch_promo)
         }
 
-        private fun isWatchRangingSupported(context: Context): Boolean =
-            Settings.Global.getInt(
+        private fun isWatchRangingSupported(context: Context): Boolean {
+            return Settings.Global.getInt(
                 context.contentResolver,
                 Settings.Global.WATCH_RANGING_SUPPORTED_BY_PRIMARY_DEVICE,
-                0, /* def */
+            ) == 1
+        }
+
+        private fun isWatchRangingSupportedValueUpdated(context: Context): Boolean {
+            try {
+                isWatchRangingSupported(context)
+                return true
+            } catch (e: Settings.SettingNotFoundException) {
+                return false
+            }
+        }
+
+        private fun getIfIdentityCheckPromoNotificationHasBeenClicked(context: Context): Boolean =
+            Settings.Secure.getInt(
+                context.contentResolver,
+                Settings.Secure.IDENTITY_CHECK_NOTIFICATION_VIEW_DETAILS_CLICKED,
+                0,
             ) == 1
 
         /** Returns the safety source issue for Identity Check. */
-        private fun getIdentityCheckAllSurfacesIssue(
+        private fun getIssue(
             context: Context,
-            issueCardTitle: String,
-            issueCardSummary: String,
-            intentAction: String,
+            issueCardDetails: IssueCardDetails,
+            notificationDetails: NotificationDetails,
         ): SafetySourceIssue {
             val issueCardButtonText =
                 context.getString(R.string.identity_check_issue_card_button_text)
@@ -174,23 +214,55 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                         PendingIntent.getActivity(
                             context,
                             ISSUE_CARD_VIEW_DETAILS,
-                            Intent(intentAction)
+                            Intent(issueCardDetails.intentAction)
                                 .setClass(context, IdentityCheckPromoCardActivity::class.java),
                             PendingIntent.FLAG_IMMUTABLE,
                         ),
                     )
                     .build()
-            return SafetySourceIssue.Builder(
-                    IDENTITY_CHECK_PROMO_CARD_ISSUE_ID,
-                    issueCardTitle,
-                    issueCardSummary,
-                    SafetySourceData.SEVERITY_LEVEL_INFORMATION,
-                    IDENTITY_CHECK_PROMO_CARD_ISSUE_TYPE,
+            val notificationIntent =
+                Intent(ACTION_ISSUE_NOTIFICATION_CLICKED)
+                    .setClass(context, IdentityCheckNotificationPromoCardActivity::class.java)
+
+            val notificationPendingIntent =
+                PendingIntent.getActivity(
+                    context,
+                    REQUEST_ID,
+                    notificationIntent,
+                    PendingIntent.FLAG_IMMUTABLE,
                 )
-                .setIssueCategory(SafetySourceIssue.ISSUE_CATEGORY_GENERAL)
-                .addAction(action)
-                .setIssueActionability(SafetySourceIssue.ISSUE_ACTIONABILITY_TIP)
-                .build()
+            val notification =
+                SafetySourceIssue.Notification.Builder(
+                        notificationDetails.title,
+                        notificationDetails.summary,
+                    )
+                    .addAction(
+                        SafetySourceIssue.Action.Builder(
+                                IDENTITY_CHECK_PROMO_NOTIFICATION_ACTION_ID,
+                                notificationDetails.buttonText,
+                                notificationPendingIntent,
+                            )
+                            .build()
+                    )
+                    .build()
+            val issue =
+                SafetySourceIssue.Builder(
+                        IDENTITY_CHECK_PROMO_CARD_ISSUE_ID,
+                        issueCardDetails.title,
+                        issueCardDetails.summary,
+                        SafetySourceData.SEVERITY_LEVEL_INFORMATION,
+                        IDENTITY_CHECK_PROMO_CARD_ISSUE_TYPE,
+                    )
+                    .setIssueCategory(SafetySourceIssue.ISSUE_CATEGORY_GENERAL)
+                    .addAction(action)
+                    .setIssueActionability(SafetySourceIssue.ISSUE_ACTIONABILITY_TIP)
+
+            if (!getIfIdentityCheckPromoNotificationHasBeenClicked(context)) {
+                issue
+                    .setCustomNotification(notification)
+                    .setNotificationBehavior(SafetySourceIssue.NOTIFICATION_BEHAVIOR_IMMEDIATELY)
+            }
+            return issue.build()
         }
     }
 
@@ -214,11 +286,9 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
 
     private fun Context.getWatchRangingAvailabilityFuture(): ListenableFuture<Boolean> {
         val future = SettableFuture.create<Boolean>()
+        val authenticationPolicyManager = getSystemService(AuthenticationPolicyManager::class.java)
 
         if (!hasPromoCardBeenShown(this) && Flags.identityCheckWatch()) {
-            val authenticationPolicyManager =
-                getSystemService(AuthenticationPolicyManager::class.java)
-
             if (authenticationPolicyManager == null) {
                 Log.e(TAG, "Authentication policy manager is null. Setting future to false.")
                 future.set(false)
@@ -250,4 +320,33 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
             Settings.Global.WATCH_RANGING_SUPPORTED_BY_PRIMARY_DEVICE,
             if (boolean) 1 else 0,
         )
+
+    // Data class to encapsulate issue card details
+    data class IssueCardDetails(var title: String, var summary: String, var intentAction: String)
+
+    // Data class to encapsulate notification details
+    data class NotificationDetails(val title: String, val summary: String, val buttonText: String)
+
+    class WatchContentObserver(private val context: Context) :
+        ContentObserver(Handler(Looper.getMainLooper())) {
+        private val WATCH_RANGING_SUPPORTED_BY_PRIMARY_DEVICE =
+            Settings.Global.getUriFor(Settings.Global.WATCH_RANGING_SUPPORTED_BY_PRIMARY_DEVICE)
+
+        fun registerContentObserver() {
+            context.contentResolver.registerContentObserver(
+                WATCH_RANGING_SUPPORTED_BY_PRIMARY_DEVICE,
+                false, /* notifyForDescendants */
+                this,
+            )
+        }
+
+        override fun onChange(selfChange: Boolean, uri: Uri?) {
+            if (WATCH_RANGING_SUPPORTED_BY_PRIMARY_DEVICE.equals(uri)) {
+                setSafetySourceData(
+                    context,
+                    SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build(),
+                )
+            }
+        }
+    }
 }

@@ -63,7 +63,7 @@ import androidx.preference.PreferenceGroup;
 import com.android.ims.ImsManager;
 
 import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.network.telephony.SubscriptionRepository;
 import com.android.settings.spa.SpaActivity;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -78,7 +78,7 @@ import java.util.Map;
 import java.util.Set;
 
 /** Handle each different apn setting. */
-public class ApnSettings extends RestrictedSettingsFragment
+public class ApnSettings extends RestrictedDashboardFragment
         implements Preference.OnPreferenceChangeListener {
     static final String TAG = "ApnSettings";
 
@@ -198,18 +198,22 @@ public class ApnSettings extends RestrictedSettingsFragment
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.apn_settings;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         getEmptyTextView().setText(com.android.settingslib.R.string.apn_settings_not_available);
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
-        if (mUnavailable) {
-            addPreferencesFromResource(R.xml.placeholder_prefs);
-            return;
-        }
-
-        addPreferencesFromResource(R.xml.apn_settings);
     }
 
     @Override

@@ -21,17 +21,13 @@ import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
 // LINT.IfChange
 class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage) :
-    PreferenceMetadata,
-    MainSwitchPreferenceBinding,
-    BooleanValuePreference,
-    PreferenceSummaryProvider {
+    PreferenceMetadata, MainSwitchPreferenceBinding, BooleanValuePreference {
 
     override val key: String
         get() = KEY
@@ -55,9 +51,6 @@ class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage) :
         get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun isIndexable(context: Context) = false
-
-    override fun getSummary(context: Context): CharSequence? =
-        AutoDarkTheme.getStatus(context, dataStore.getBoolean(KEY)!!)
 
     companion object {
         const val KEY = "dark_ui_activated"

@@ -460,6 +460,7 @@ public class EnterprisePrivacyFeatureProviderImplTest {
                 .thenReturn(ImmutableList.of(new ResolveInfo()));
         when(mPackageManager.queryIntentActivities(any(Intent.class), anyInt()))
                 .thenReturn(ImmutableList.of(resolveInfo));
+        when(mSupervisionManager.isSupervisionEnabled()).thenReturn(true);
 
         // If the intent is resolved, then we can use it to launch the activity.
         assertThat(mProvider.showParentalControls()).isTrue();

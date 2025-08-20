@@ -33,7 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment;
-import com.android.settings.accessibility.detail.a11yservice.UseServiceTogglePreferenceController;
+import com.android.settings.accessibility.detail.a11yservice.ui.UseServicePreference;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -42,7 +42,7 @@ import com.google.android.setupdesign.GlifPreferenceLayout;
 public class ToggleScreenReaderPreferenceFragmentForSetupWizard
         extends A11yServicePreferenceFragment {
     private boolean mToggleSwitchWasInitiallyChecked;
-    private String mMainActionPrefKey;
+    private final String mMainActionPrefKey = UseServicePreference.KEY;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -64,7 +64,6 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
                     });
         }
 
-        mMainActionPrefKey = use(UseServiceTogglePreferenceController.class).getPreferenceKey();
         TwoStatePreference preference = findPreference(mMainActionPrefKey);
         mToggleSwitchWasInitiallyChecked = preference.isChecked();
     }

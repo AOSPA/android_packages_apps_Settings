@@ -22,6 +22,8 @@ enum class DeviceStateAppFunctionType(val functionId: String) {
     GET_STORAGE("getStorageDeviceState"),
     GET_BATTERY("getBatteryDeviceState"),
     GET_MOBILE_DATA("getMobileDataUsageDeviceState"),
+    GET_NOTIFICATIONS("getNotificationsDeviceState"),
+    GET_APPS("getAppsDeviceState"),
 
     // AppFunctions for getting device state metadata
     GET_METADATA("getDeviceStateMetadata"),

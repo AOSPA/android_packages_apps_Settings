@@ -16,23 +16,16 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeature;
 import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeatureImpl;
-import com.android.settings.biometrics.fingerprint.feature.SfpsRestToUnlockFeature;
-import com.android.settings.biometrics.fingerprint.feature.SfpsRestToUnlockFeatureImpl;
 
 public class FingerprintFeatureProviderImpl implements FingerprintFeatureProvider {
 
     @Nullable
     private SfpsEnrollmentFeature mSfpsEnrollmentFeatureImpl = null;
-
-    @Nullable
-    private SfpsRestToUnlockFeature mSfpsRestToUnlockFeature = null;
 
     @Override
     public SfpsEnrollmentFeature getSfpsEnrollmentFeature() {
@@ -40,14 +33,6 @@ public class FingerprintFeatureProviderImpl implements FingerprintFeatureProvide
             mSfpsEnrollmentFeatureImpl = new SfpsEnrollmentFeatureImpl();
         }
         return mSfpsEnrollmentFeatureImpl;
-    }
-
-    @Override
-    public SfpsRestToUnlockFeature getSfpsRestToUnlockFeature(@NonNull Context context) {
-        if (mSfpsRestToUnlockFeature == null) {
-            mSfpsRestToUnlockFeature = new SfpsRestToUnlockFeatureImpl();
-        }
-        return mSfpsRestToUnlockFeature;
     }
 
     @NonNull

@@ -17,6 +17,7 @@ package com.android.settings.gestures
 
 import android.content.ComponentName
 import android.content.ContextWrapper
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
@@ -28,6 +29,7 @@ import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL
 import com.android.internal.R
 import com.android.settings.Settings
 import com.android.settings.flags.Flags
+import com.android.settings.testutils.SystemProperty
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
@@ -36,6 +38,7 @@ import org.mockito.ArgumentMatchers.eq
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
+import org.robolectric.Shadows
 
 class SystemNavigationGestureScreenTest : SettingsCatalystTestCase() {
 
@@ -159,10 +162,41 @@ class SystemNavigationGestureScreenTest : SettingsCatalystTestCase() {
         assertThat(preferenceScreenCreator.key).isEqualTo(SystemNavigationGestureScreen.KEY)
     }
 
-    // TODO(b/432318565): Properly fix this test.
-    @Test override fun migration() {}
+    @Test
+    override fun migration() {
+        // avoid UnsupportedOperationException when getDisplay from context
+        SystemProperty("robolectric.createActivityContexts", "true").use {
+
+            // Make sure resolve info for quickstep intent is added to the package manager
+            val recentsComponentName =
+                ComponentName.unflattenFromString(
+                    appContext.getString(R.string.config_recentsComponentName)
+                )
+
+            val quickStepIntent =
+                Intent(ACTION_QUICKSTEP).apply { setPackage(recentsComponentName?.packageName) }
+
+            val resolveInfo =
+                ResolveInfo().apply {
+                    resolvePackageName = recentsComponentName?.packageName
+                    serviceInfo =
+                        ServiceInfo().apply {
+                            packageName = resolvePackageName
+                            name = recentsComponentName?.className
+                            applicationInfo =
+                                ApplicationInfo().apply { flags = ApplicationInfo.FLAG_SYSTEM }
+                        }
+                }
+
+            val shadowPackageManager = Shadows.shadowOf(appContext.packageManager)
+            shadowPackageManager.addResolveInfoForIntent(quickStepIntent, resolveInfo)
+
+            super.migration()
+        }
+    }
 
     companion object {
         const val TEST_RECENTS_COMPONENT_NAME = "test.component.name/.testActivity"
+        const val ACTION_QUICKSTEP = "android.intent.action.QUICKSTEP_SERVICE"
     }
 }

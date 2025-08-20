@@ -29,7 +29,7 @@ class AdaptiveBrightnessStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val isAdaptiveBrightnessEnabled =
             Settings.System.getInt(
                 context.contentResolver,
@@ -44,9 +44,11 @@ class AdaptiveBrightnessStateSource : DeviceStateSource {
                 jsonValue = isAdaptiveBrightnessEnabled.toString(),
             )
 
-        return PerScreenDeviceStates(
-            description = "Adaptive brightness",
-            deviceStateItems = listOf(item),
+        return listOf(
+            PerScreenDeviceStates(
+                description = "Adaptive brightness",
+                deviceStateItems = listOf(item),
+            )
         )
     }
 }

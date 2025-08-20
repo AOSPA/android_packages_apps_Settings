@@ -22,6 +22,7 @@ import android.util.Log
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settings.appfunctions.sources.AdaptiveBrightnessStateSource
+import com.android.settings.appfunctions.sources.AppsStateSource
 import com.android.settings.appfunctions.sources.AppsStorageStateSource
 import com.android.settings.appfunctions.sources.BatterySaverStateSource
 import com.android.settings.appfunctions.sources.BatteryStatusStateSource
@@ -31,6 +32,7 @@ import com.android.settings.appfunctions.sources.LockScreenStateSource
 import com.android.settings.appfunctions.sources.ManagedProfileStateSource
 import com.android.settings.appfunctions.sources.MediaOutputStateSource
 import com.android.settings.appfunctions.sources.MobileDataUsageStateSource
+import com.android.settings.appfunctions.sources.MobileNetworkStateSource
 import com.android.settings.appfunctions.sources.NfcStateSource
 import com.android.settings.appfunctions.sources.NotificationHistoryStateSource
 import com.android.settings.appfunctions.sources.NotificationsStateSource
@@ -40,6 +42,7 @@ import com.android.settings.appfunctions.sources.ScreenTimeoutStateSource
 import com.android.settings.appfunctions.sources.SharedDeviceStateData
 import com.android.settings.appfunctions.sources.WifiStatusStateSource
 import com.android.settings.appfunctions.sources.ZenModesStateSource
+import com.android.settings.fuelgauge.batteryusage.BatteryUsageStateSource
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
@@ -58,11 +61,13 @@ class AndroidApiStateProviderExecutor(private val context: Context) : DeviceStat
             AppsStorageStateSource(),
             BatterySaverStateSource(),
             BatteryStatusStateSource(),
+            BatteryUsageStateSource(),
             BubblesStateSource(),
             LockScreenStateSource(),
             ManagedProfileStateSource(),
             MediaOutputStateSource(),
             MobileDataUsageStateSource(),
+            MobileNetworkStateSource(),
             NfcStateSource(),
             NotificationHistoryStateSource(),
             NotificationsStateSource(),
@@ -71,6 +76,7 @@ class AndroidApiStateProviderExecutor(private val context: Context) : DeviceStat
             ScreenTimeoutStateSource(),
             WifiStatusStateSource(),
             ZenModesStateSource(),
+            AppsStateSource(),
             // Add other sources instances here
         )
 
@@ -100,7 +106,7 @@ class AndroidApiStateProviderExecutor(private val context: Context) : DeviceStat
                 .mapNotNull { it.await() }
         }
 
-        return DeviceStateProviderExecutorResult(states = states)
+        return DeviceStateProviderExecutorResult(states = states.flatten())
     }
 
     companion object {

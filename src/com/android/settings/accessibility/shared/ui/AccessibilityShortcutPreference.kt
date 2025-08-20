@@ -69,7 +69,7 @@ open class AccessibilityShortcutPreference(
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
 
-    private val dataStore: AccessibilityShortcutDataStore by lazy {
+    protected open val dataStore: AccessibilityShortcutDataStore by lazy {
         AccessibilityShortcutDataStore(context, componentName)
     }
 
@@ -112,26 +112,39 @@ open class AccessibilityShortcutPreference(
             object : ShortcutPreference.OnClickCallback {
 
                 override fun onSettingsClicked(preference: ShortcutPreference?) {
-                    showEditShortcutsScreen(shortcutPreference.context, preference?.title ?: "")
-                    featureFactory.metricsFeatureProvider.logClickedPreference(
-                        shortcutPreference,
-                        metricsCategory,
-                    )
+                    if (preference == null) return
+                    onSettingsClicked(preference, context)
                 }
 
                 override fun onToggleClicked(preference: ShortcutPreference?) {
-                    if (shortcutPreference.isChecked) {
-                        showShortcutsTutorial(
-                            context,
-                            context.childFragmentManager,
-                            dataStore.getUserShortcutTypes(),
-                            shortcutPreference.context.isInSetupWizard(),
-                        )
-                    }
-                    dataStore.setBoolean(key, shortcutPreference.isChecked)
+                    if (preference == null) return
+                    onToggleClicked(preference, context)
                 }
             }
         )
+    }
+
+    protected open fun onSettingsClicked(
+        preference: ShortcutPreference,
+        context: PreferenceLifecycleContext,
+    ) {
+        showEditShortcutsScreen(preference.context, preference.title ?: "")
+        featureFactory.metricsFeatureProvider.logClickedPreference(preference, metricsCategory)
+    }
+
+    protected open fun onToggleClicked(
+        preference: ShortcutPreference,
+        context: PreferenceLifecycleContext,
+    ) {
+        if (preference.isChecked) {
+            showShortcutsTutorial(
+                context,
+                context.childFragmentManager,
+                dataStore.getUserShortcutTypes(),
+                preference.context.isInSetupWizard(),
+            )
+        }
+        dataStore.setBoolean(key, preference.isChecked)
     }
 
     override fun getSummary(context: Context): CharSequence? {
@@ -146,9 +159,9 @@ open class AccessibilityShortcutPreference(
         return AccessibilityUtil.getShortcutSummaryList(context, dataStore.getUserShortcutTypes())
     }
 
-    open fun getSettingsEditable(context: Context): Boolean = true
+    protected open fun getSettingsEditable(context: Context): Boolean = true
 
-    private fun showShortcutsTutorial(
+    protected fun showShortcutsTutorial(
         context: Context,
         fragmentManager: FragmentManager,
         shortcutTypes: Int,
@@ -169,7 +182,7 @@ open class AccessibilityShortcutPreference(
         )
     }
 
-    private fun showEditShortcutsScreen(context: Context, screenTitle: CharSequence) {
+    protected fun showEditShortcutsScreen(context: Context, screenTitle: CharSequence) {
         EditShortcutsPreferenceFragment.showEditShortcutScreen(
             context,
             metricsCategory,

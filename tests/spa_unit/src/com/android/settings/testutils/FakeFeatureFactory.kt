@@ -17,7 +17,6 @@
 package com.android.settings.testutils
 
 import android.content.Context
-import com.android.settings.accessibility.AccessibilityDisabilitySupportFeatureProvider
 import com.android.settings.accessibility.AccessibilityFeedbackFeatureProvider
 import com.android.settings.accessibility.AccessibilityPageIdFeatureProvider
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider
@@ -68,6 +67,7 @@ class FakeFeatureFactory : FeatureFactory() {
 
     override val suggestionFeatureProvider: SuggestionFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider
         get() = TODO("Not yet implemented")
 
@@ -108,8 +108,10 @@ class FakeFeatureFactory : FeatureFactory() {
 
     override val slicesFeatureProvider: SlicesFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val accountFeatureProvider: AccountFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val panelFeatureProvider: PanelFeatureProvider
         get() = TODO("Not yet implemented")
 
@@ -119,43 +121,58 @@ class FakeFeatureFactory : FeatureFactory() {
 
     override val bluetoothFeatureProvider: BluetoothFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val biometricsFeatureProvider: BiometricsFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val faceFeatureProvider: FaceFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val fingerprintFeatureProvider: FingerprintFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val wifiTrackerLibProvider: WifiTrackerLibProvider
         get() = TODO("Not yet implemented")
+
     override val securitySettingsFeatureProvider: SecuritySettingsFeatureProvider
         get() = TODO("Not yet implemented")
-    override val accessibilityDisabilitySupportFeatureProvider:
-            AccessibilityDisabilitySupportFeatureProvider
-        get() = TODO("Not yet implemented")
+
     override val accessibilityFeedbackFeatureProvider: AccessibilityFeedbackFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val accessibilitySearchFeatureProvider: AccessibilitySearchFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val accessibilityPageIdFeatureProvider: AccessibilityPageIdFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val advancedVpnFeatureProvider: AdvancedVpnFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val wifiFeatureProvider: WifiFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val keyboardSettingsFeatureProvider: KeyboardSettingsFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val stylusFeatureProvider: StylusFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val threadNetworkFeatureProvider: ThreadNetworkFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val fastPairFeatureProvider: FastPairFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val privateSpaceLoginFeatureProvider: PrivateSpaceLoginFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val displayFeatureProvider: DisplayFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider
         get() = TODO("Not yet implemented")
+
     override val audioSharingFeatureProvider: AudioSharingFeatureProvider
         get() = TODO("Not yet implemented")
 }

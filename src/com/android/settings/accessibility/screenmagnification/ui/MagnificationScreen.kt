@@ -89,6 +89,7 @@ open class MagnificationScreen : PreferenceScreenMixin {
             }
             +MagnificationFooterPreference()
             +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
+            +MagnificationSurveyButtonPreference(metricsCategory)
         }
 
     companion object {

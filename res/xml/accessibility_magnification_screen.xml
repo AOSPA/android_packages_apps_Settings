@@ -107,4 +107,13 @@
         app:buttonPreferenceSize="normal"
         app:buttonPreferenceType="tonal"
         app:controller="com.android.settings.accessibility.FeedbackButtonPreferenceController" />
+
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="survey"
+        android:title="@string/accessibility_send_survey_title"
+        android:icon="@drawable/ic_rate_review"
+        app:searchable="false"
+        app:buttonPreferenceSize="normal"
+        app:buttonPreferenceType="tonal"
+        app:controller="com.android.settings.accessibility.MagnificationSurveyButtonPreferenceController" />
 </PreferenceScreen>

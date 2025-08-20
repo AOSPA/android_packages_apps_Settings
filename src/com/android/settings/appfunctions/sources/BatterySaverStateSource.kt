@@ -29,7 +29,7 @@ class BatterySaverStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val areRemindersEnabled =
             Settings.Global.getInt(
                 context.getContentResolver(),
@@ -44,6 +44,8 @@ class BatterySaverStateSource : DeviceStateSource {
                 jsonValue = areRemindersEnabled.toString(),
             )
 
-        return PerScreenDeviceStates(description = "Battery Saver", deviceStateItems = listOf(item))
+        return listOf(
+            PerScreenDeviceStates(description = "Battery Saver", deviceStateItems = listOf(item))
+        )
     }
 }

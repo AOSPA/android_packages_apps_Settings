@@ -301,8 +301,6 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void createPrivateSpace_psDoesNotExist_resetsPSAutoLockSettings() {
-        mSetFlagsRule.enableFlags(
-                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
         assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
         final int autoLockOption = 2;
         PrivateSpaceMaintainer privateSpaceMaintainer =
@@ -324,7 +322,6 @@ public class PrivateSpaceMaintainerTest {
      */
     @Test
     public void createPrivateSpace_psExists_doesNotResetPSAutoLockSettings() {
-        mSetFlagsRule.enableFlags(android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
         assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
         final int privateSpaceAutLockValue = 1;
         PrivateSpaceMaintainer privateSpaceMaintainer =

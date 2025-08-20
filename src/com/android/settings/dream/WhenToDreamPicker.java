@@ -91,9 +91,11 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
             throw new IllegalArgumentException("Entries and values must be of the same length.");
         }
 
+        final boolean supportDreamWhilePostured = allowDreamWhenPostured()
+                && getResources().getBoolean(R.bool.config_posturing_supported);
         for (int i = 0; i < entries.length; i++) {
             final String key = values[i];
-            if (DreamSettings.WHILE_POSTURED_ONLY.equals(key) && !allowDreamWhenPostured()) {
+            if (DreamSettings.WHILE_POSTURED_ONLY.equals(key) && !supportDreamWhilePostured) {
                 continue;
             }
             candidates.add(new WhenToDreamCandidateInfo(entries[i], key));

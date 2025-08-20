@@ -53,6 +53,6 @@ open class AlarmsAndRemindersAppListScreen : SpecialAccessAppListScreen() {
         AlarmsAndRemindersAppDetailScreen.parameters(context, hierarchyType)
 
     companion object {
-        const val KEY = "sa_aar_app_list"
+        const val KEY = "special_access_alarms_and_reminders_app_list"
     }
 }

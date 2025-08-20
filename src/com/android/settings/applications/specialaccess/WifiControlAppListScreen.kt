@@ -53,6 +53,6 @@ open class WifiControlAppListScreen : SpecialAccessAppListScreen() {
         WifiControlAppDetailScreen.parameters(context, hierarchyType)
 
     companion object {
-        const val KEY = "sa_wfc_app_list"
+        const val KEY = "special_access_wifi_control_app_list"
     }
 }

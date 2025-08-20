@@ -29,7 +29,7 @@ class BatteryStatusStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val batteryUtils = BatteryUtils.getInstance(context)
         val batteryInfo = batteryUtils.getBatteryInfo(TAG)
 
@@ -58,10 +58,12 @@ class BatteryStatusStateSource : DeviceStateSource {
                 jsonValue = chargedByLabel.toString(),
             )
 
-        return PerScreenDeviceStates(
-            description = "Battery status",
-            deviceStateItems =
-                listOf(batteryStatusItem, batteryTimeRemainingItem, batteryChargedByItem),
+        return listOf(
+            PerScreenDeviceStates(
+                description = "Battery status",
+                deviceStateItems =
+                    listOf(batteryStatusItem, batteryTimeRemainingItem, batteryChargedByItem),
+            )
         )
     }
 

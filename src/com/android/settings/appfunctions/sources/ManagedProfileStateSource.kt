@@ -30,7 +30,7 @@ class ManagedProfileStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
         val hasManagedProfile = Utils.getManagedProfile(userManager) != null
 
@@ -41,9 +41,8 @@ class ManagedProfileStateSource : DeviceStateSource {
                 jsonValue = hasManagedProfile.toString(),
             )
 
-        return PerScreenDeviceStates(
-            description = "Managed profile",
-            deviceStateItems = listOf(item),
+        return listOf(
+            PerScreenDeviceStates(description = "Managed profile", deviceStateItems = listOf(item))
         )
     }
 }

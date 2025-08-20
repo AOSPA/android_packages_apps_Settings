@@ -116,13 +116,6 @@ class DarkModeScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CATALYST_DARK_UI_MODE)
-    fun hasCompleteHierarchy_isTrue() {
-        assertThat(preferenceScreenCreator.hasCompleteHierarchy()).isTrue()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_CATALYST_DARK_UI_MODE)
     fun hasCompleteHierarchy_isFalse() {
         assertThat(preferenceScreenCreator.hasCompleteHierarchy()).isFalse()
     }
