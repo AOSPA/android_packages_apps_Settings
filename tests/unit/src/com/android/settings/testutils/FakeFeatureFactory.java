@@ -19,7 +19,6 @@ import static org.mockito.Mockito.mock;
 
 import android.content.Context;
 
-import com.android.settings.accessibility.AccessibilityDisabilitySupportFeatureProvider;
 import com.android.settings.accessibility.AccessibilityFeedbackFeatureProvider;
 import com.android.settings.accessibility.AccessibilityPageIdFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
@@ -41,6 +40,7 @@ import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.i18n.RegionalCustomizationFeatureProvider;
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider;
@@ -103,14 +103,13 @@ public class FakeFeatureFactory extends FeatureFactory {
     public StylusFeatureProvider mStylusFeatureProvider;
     public ThreadNetworkFeatureProvider mThreadNetworkFeatureProvider;
     public OnboardingFeatureProvider mOnboardingFeatureProvider;
+    public RegionalCustomizationFeatureProvider mRegionalCustomizationFeatureProvider;
     public FastPairFeatureProvider mFastPairFeatureProvider;
     public PrivateSpaceLoginFeatureProvider mPrivateSpaceLoginFeatureProvider;
     public DisplayFeatureProvider mDisplayFeatureProvider;
     public SyncAcrossDevicesFeatureProvider mSyncAcrossDevicesFeatureProvider;
     public AccessibilityFeedbackFeatureProvider mAccessibilityFeedbackFeatureProvider;
     public AudioSharingFeatureProvider mAudioSharingFeatureProvider;
-    public AccessibilityDisabilitySupportFeatureProvider
-            mAccessibilityDisabilitySupportFeatureProvider;
 
     /** Call this in {@code @Before} method of the test class to use fake factory. */
     public static FakeFeatureFactory setupForTest() {
@@ -339,6 +338,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
+    public RegionalCustomizationFeatureProvider getRegionalCustomizationFeatureProvider() {
+        return mRegionalCustomizationFeatureProvider;
+    }
+
+    @Override
     public FastPairFeatureProvider getFastPairFeatureProvider() {
         return mFastPairFeatureProvider;
     }
@@ -366,11 +370,5 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AudioSharingFeatureProvider getAudioSharingFeatureProvider() {
         return mAudioSharingFeatureProvider;
-    }
-
-    @Override
-    public AccessibilityDisabilitySupportFeatureProvider
-            getAccessibilityDisabilitySupportFeatureProvider() {
-        return mAccessibilityDisabilitySupportFeatureProvider;
     }
 }

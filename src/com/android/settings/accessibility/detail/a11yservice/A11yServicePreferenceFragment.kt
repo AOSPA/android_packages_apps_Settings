@@ -83,9 +83,9 @@ open class A11yServicePreferenceFragment : BaseSupportFragment() {
             return
         }
 
-        if (!Flags.catalystA11yServiceDetail()) {
-            serviceInfo?.let {
-                writeConfigDefaultAccessibilityServiceShortcutTargetIfNeeded(it.componentName)
+        serviceInfo?.let {
+            writeConfigDefaultAccessibilityServiceShortcutTargetIfNeeded(it.componentName)
+            if (!Flags.catalystA11yServiceDetail()) {
                 initializePreferenceControllers(it)
             }
         }

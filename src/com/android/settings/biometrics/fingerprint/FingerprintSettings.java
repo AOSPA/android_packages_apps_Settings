@@ -134,11 +134,7 @@ public class FingerprintSettings extends SubSettings {
 
     private static final long LOCKOUT_DURATION = 30000; // time we have to wait for fp to reset, ms
 
-    public static final String ANNOTATION_URL = "url";
-    public static final String ANNOTATION_ADMIN_DETAILS = "admin_details";
-
     private static final int RESULT_FINISHED = BiometricEnrollBase.RESULT_FINISHED;
-    private static final int RESULT_SKIP = BiometricEnrollBase.RESULT_SKIP;
     private static final int RESULT_TIMEOUT = BiometricEnrollBase.RESULT_TIMEOUT;
     @VisibleForTesting
     static final VibrationEffect SUCCESS_VIBRATION_EFFECT =
@@ -886,21 +882,6 @@ public class FingerprintSettings extends SubSettings {
                         this::fingerprintUnlockCategoryHasChild);
             }
             if (isSfps()) {
-                // For both SFPS "screen on to auth" and "rest to unlock"
-                final Preference restToUnlockPreference = FeatureFactory.getFeatureFactory()
-                        .getFingerprintFeatureProvider()
-                        .getSfpsRestToUnlockFeature(getContext())
-                        .getRestToUnlockPreference(getContext());
-                if (restToUnlockPreference != null) {
-                    // Use custom featured preference if any.
-                    mRequireScreenOnToAuthPreference.setTitle(restToUnlockPreference.getTitle());
-                    mRequireScreenOnToAuthPreference.setSummary(
-                            restToUnlockPreference.getSummary());
-                    mRequireScreenOnToAuthPreference.setChecked(
-                            ((TwoStatePreference) restToUnlockPreference).isChecked());
-                    mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
-                            restToUnlockPreference.getOnPreferenceChangeListener());
-                }
                 setupFingerprintUnlockCategoryPreferencesForScreenOnToAuth();
             } else if (screenOffUnlockUdfps() && isScreenOffUnlcokSupported()) {
                 setupFingerprintUnlockCategoryPreferencesForScreenOffUnlock();
@@ -1527,7 +1508,11 @@ public class FingerprintSettings extends SubSettings {
                 return;
             }
             clearAllFingerprintPreferenceHighlight();
-            fpref.startHighlight();
+            if (isUdfps()) {
+                fpref.startHighlight();
+            } else {
+                fpref.startSfpsHighlight();
+            }
             setupFingerprintRecognition(fpref, fpref.getFingerprint());
         }
 
@@ -2049,6 +2034,11 @@ public class FingerprintSettings extends SubSettings {
         private static final long HIGHLIGHT_DURATION = 200L;
         private static final long RESET_HIGHLIGHT_DURATION = 15000L;
 
+        private static final int ITEM_POSITION_TOP = 0;
+        private static final int ITEM_POSITION_CENTER = 1;
+        private static final int ITEM_POSITION_BOTTOM = 2;
+        private static final int ITEM_POSITION_SINGLE = 3;
+
         private final OnDeleteClickListener mOnDeleteClickListener;
 
         private Fingerprint mFingerprint;
@@ -2090,6 +2080,9 @@ public class FingerprintSettings extends SubSettings {
             clearHighlight();
             final int backgroundFrom = getBackgroundRes(false /* isHighlighted */);
             final int backgroundTo = getBackgroundRes(true /* isHighlighted */);
+            if (backgroundTo == 0 || backgroundFrom == 0) {
+                return;
+            }
             mHighlightAnimator = ValueAnimator.ofObject(
                     new ArgbEvaluator(), backgroundFrom, backgroundTo);
             mHighlightAnimator.setDuration(HIGHLIGHT_DURATION);
@@ -2101,6 +2094,19 @@ public class FingerprintSettings extends SubSettings {
             mView.postDelayed(mClearHighlightRunnable, RESET_HIGHLIGHT_DURATION);
         }
 
+        /** Start the highlight animation for Sfps devices */
+        public void startSfpsHighlight() {
+            if (mView == null) {
+                return;
+            }
+            final int backgroundRes = getBackgroundRes(true /* isHighlighted */);
+            if (backgroundRes > 0) {
+                mView.setBackgroundResource(backgroundRes);
+                mView.postDelayed(mClearHighlightRunnable,
+                        FingerprintSettingsFragment.RESET_HIGHLIGHT_DELAY_MS);
+            }
+        }
+
         /** Clear the highlight effect */
         public void clearHighlight() {
             if (mHighlightAnimator != null && mHighlightAnimator.isRunning()) {
@@ -2109,7 +2115,10 @@ public class FingerprintSettings extends SubSettings {
             }
             clearDescription();
             mView.removeCallbacks(mClearHighlightRunnable);
-            mView.setBackgroundResource(getBackgroundRes(false /* isHighlighted */));
+            final int backgroundRes = getBackgroundRes(false /* isHighlighted */);
+            if (backgroundRes > 0) {
+                mView.setBackgroundResource(backgroundRes);
+            }
         }
 
         /** Clear the content description of the preference, as well as the a11y live region. **/
@@ -2118,29 +2127,53 @@ public class FingerprintSettings extends SubSettings {
             mView.setContentDescription(null);
         }
 
-        private boolean isTopItemInParent() {
+        private int getItemPosition() {
             final PreferenceGroup parent = getParent();
-            if (parent != null && parent.getPreferenceCount() > 0) {
-                return this == parent.getPreference(0);
+            final int count = parent == null ? 0 : parent.getPreferenceCount();
+            if (count > 0) {
+                if (count == 1) {
+                    return ITEM_POSITION_SINGLE;
+                } else if (this == parent.getPreference(0)) {
+                    return ITEM_POSITION_TOP;
+                } else if (this == parent.getPreference(count - 1)) {
+                    return ITEM_POSITION_BOTTOM;
+                } else {
+                    return ITEM_POSITION_CENTER;
+                }
             }
-            return false;
+            return -1;
         }
 
-        private @DrawableRes int getBackgroundRes(boolean isHighlighted) {
-            final boolean isTop = isTopItemInParent();
+        @DrawableRes int getBackgroundRes(boolean isHighlighted) {
             if (SettingsThemeHelper.isExpressiveTheme(getContext())) {
-                if (isTop) {
+                final int pos = getItemPosition();
+                if (pos == ITEM_POSITION_SINGLE) {
+                    return isHighlighted
+                            ? com.android.settingslib.widget.theme.R.drawable
+                            .settingslib_round_background_highlighted
+                            : com.android.settingslib.widget.theme.R.drawable
+                                    .settingslib_round_background;
+                } else if (pos == ITEM_POSITION_TOP) {
                     return isHighlighted
                             ? com.android.settingslib.widget.theme.R.drawable
                             .settingslib_round_background_top_highlighted
                             : com.android.settingslib.widget.theme.R.drawable
                                     .settingslib_round_background_top;
-                } else {
+                } else if (pos == ITEM_POSITION_BOTTOM) {
+                    return isHighlighted
+                            ? com.android.settingslib.widget.theme.R.drawable
+                            .settingslib_round_background_bottom_highlighted
+                            :  com.android.settingslib.widget.theme.R.drawable
+                                    .settingslib_round_background_bottom;
+                } else if (pos == ITEM_POSITION_CENTER) {
                     return isHighlighted
                             ? com.android.settingslib.widget.theme.R.drawable
                             .settingslib_round_background_center_highlighted
                             :  com.android.settingslib.widget.theme.R.drawable
                                     .settingslib_round_background_center;
+                } else {
+                    Log.w(TAG, "invalid index for fingerprint item");
+                    return 0;
                 }
             } else {
                 return isHighlighted

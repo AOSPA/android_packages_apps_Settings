@@ -23,6 +23,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SubscriptionManager;
 import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
@@ -538,6 +539,7 @@ public class Settings extends SettingsActivity {
         public static final String EXTRA_SHOW_CAPABILITY_DISCOVERY_OPT_IN =
                 "show_capability_discovery_opt_in";
 
+        private Intent mCachedIntent = null;
         private MobileNetworkIntentConverter mIntentConverter;
 
         /**
@@ -558,7 +560,13 @@ public class Settings extends SettingsActivity {
 
         @Override
         public Intent getIntent() {
-            return convertIntent(super.getIntent());
+            Intent intent = super.getIntent();
+            if (isSameSubId(intent, mCachedIntent)) {
+                return mCachedIntent;
+            } else {
+                mCachedIntent = convertIntent(intent);
+                return mCachedIntent;
+            }
         }
 
         private Intent convertIntent(Intent copyFrom) {
@@ -577,10 +585,21 @@ public class Settings extends SettingsActivity {
 
         private static boolean isTargetIsMobileNetwork(@NonNull Intent intent) {
             String fragmentName = intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT);
-            if (fragmentName == null && fragmentName.isEmpty()) {
+            if (fragmentName != null && !fragmentName.isEmpty()) {
+                return fragmentName.equals(MOBILE_NETWORK_FRAGMENT_NAME);
+            }
+            return false;
+        }
+
+        private static boolean isSameSubId(Intent intent, Intent cachedIntent) {
+            if (intent == null || cachedIntent == null) {
                 return false;
             }
-            return fragmentName.equals(MOBILE_NETWORK_FRAGMENT_NAME);
+
+            return intent.getIntExtra(android.provider.Settings.EXTRA_SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID) == cachedIntent.getIntExtra(
+                    android.provider.Settings.EXTRA_SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         }
     }
 

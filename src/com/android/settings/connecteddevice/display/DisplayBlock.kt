@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.display
 
 import android.graphics.Outline
 import android.graphics.PointF
+import android.os.Trace
 import android.util.Log
 import android.util.Size
 import android.view.SurfaceControl
@@ -28,6 +29,8 @@ import android.view.ViewOutlineProvider
 import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
+import com.android.settingslib.utils.ThreadUtils
+import kotlin.time.Duration.Companion.milliseconds
 
 /** Represents a draggable block in the topology pane. */
 class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injector.context!!) {
@@ -62,40 +65,6 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
 
     private val updateSurfaceView = Runnable { updateSurfaceView() }
 
-    @VisibleForTesting
-    fun updateSurfaceView() {
-        val displayId = displayIdToShowWallpaper ?: return
-
-        if (parent == null) {
-            Log.i(TAG, "View for display $displayId has no parent - cancelling update")
-            return
-        }
-
-        var surface = wallpaperSurface
-        if (surface == null) {
-            surface = injector.wallpaper(displayId)
-            if (surface == null) {
-                injector.handler.postDelayed(updateSurfaceView, /* delayMillis= */ 500)
-                return
-            }
-            wallpaperSurface = surface
-        }
-
-        val surfaceScale = surfaceScale ?: return
-        val surfaceSize = surfaceSize ?: return
-        val isMirroringOtherDisplay = logicalDisplayId != displayIdToShowWallpaper
-        injector.updateSurfaceView(
-            oldSurfaces,
-            surface,
-            wallpaperView,
-            surfaceScale,
-            surfaceSize,
-            cornerRadiusPx.toFloat(),
-            isMirroringOtherDisplay,
-        )
-        oldSurfaces.clear()
-    }
-
     private val holderCallback =
         object : SurfaceHolder.Callback {
             override fun surfaceCreated(h: SurfaceHolder) {}
@@ -123,6 +92,17 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             background = context.getDrawable(R.drawable.display_block_selection_marker_background)
         }
 
+    /**
+     * The coordinates of the upper-left corner of the block in pane coordinates, not including the
+     * highlight border.
+     */
+    var positionInPane: PointF
+        get() = PointF(x + highlightPx, y + highlightPx)
+        set(value: PointF) {
+            x = value.x - highlightPx
+            y = value.y - highlightPx
+        }
+
     init {
         isScrollContainer = false
         isVerticalScrollBarEnabled = false
@@ -138,16 +118,67 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         wallpaperView.holder.addCallback(holderCallback)
     }
 
-    /**
-     * The coordinates of the upper-left corner of the block in pane coordinates, not including the
-     * highlight border.
-     */
-    var positionInPane: PointF
-        get() = PointF(x + highlightPx, y + highlightPx)
-        set(value: PointF) {
-            x = value.x - highlightPx
-            y = value.y - highlightPx
+    @VisibleForTesting
+    fun updateSurfaceView() {
+        val displayId = displayIdToShowWallpaper ?: return
+
+        if (parent == null) {
+            Log.i(TAG, "View for display $displayId has no parent - cancelling update")
+            return
         }
+
+        val currentSurface = wallpaperSurface
+        if (currentSurface != null) {
+            renderSurfaceView(currentSurface)
+            return
+        }
+        ThreadUtils.postOnBackgroundThread {
+            Trace.beginSection("Settings Wallpaper fetchSurfaceView $logicalDisplayId")
+            val fetchedSurface = injector.wallpaper(displayId)
+            Trace.endSection()
+            if (fetchedSurface == null) {
+                // Fetch failed, schedule a retry
+                injector.handler.postDelayed(
+                    ::updateSurfaceView,
+                    REFETCH_WALLPAPER_DELAY.inWholeMilliseconds,
+                )
+            } else {
+                injector.handler.post { handleFetchedWallpaperSurface(displayId, fetchedSurface) }
+            }
+        }
+    }
+
+    private fun handleFetchedWallpaperSurface(
+        fetchedForDisplayId: Int,
+        fetchedSurface: SurfaceControl,
+    ) {
+        // If the view is no longer attached or the target display has changed, ignore the result
+        if (parent == null || fetchedForDisplayId != displayIdToShowWallpaper) {
+            Log.i(TAG, "Wallpaper display changed or view detached, ignoring stale surface.")
+            return
+        }
+        wallpaperSurface = fetchedSurface
+        renderSurfaceView(fetchedSurface)
+    }
+
+    private fun renderSurfaceView(surface: SurfaceControl) {
+        val surfaceScale = surfaceScale ?: return
+        val surfaceSize = surfaceSize ?: return
+        val isMirroringOtherDisplay = logicalDisplayId != displayIdToShowWallpaper
+
+        Trace.beginSection("Settings Wallpaper renderSurfaceView display#$displayIdToShowWallpaper")
+        injector.updateSurfaceView(
+            oldSurfaces,
+            surface,
+            wallpaperView,
+            surfaceScale,
+            surfaceSize,
+            cornerRadiusPx.toFloat(),
+            isMirroringOtherDisplay,
+        )
+        oldSurfaces.clear()
+        Trace.endSection()
+    }
 
     fun setHighlighted(value: Boolean) {
         selectionMarkerView.visibility = if (value) VISIBLE else INVISIBLE
@@ -235,6 +266,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     }
 
     private companion object {
+        private val REFETCH_WALLPAPER_DELAY = 500.milliseconds
         private const val TAG = "DisplayBlock"
     }
 }

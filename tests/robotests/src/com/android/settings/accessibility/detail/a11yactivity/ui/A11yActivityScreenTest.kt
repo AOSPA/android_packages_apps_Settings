@@ -32,6 +32,7 @@ import com.android.settings.accessibility.LaunchAccessibilityActivityPreferenceF
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.testutils.FakeFeatureFactory
+import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.preference.createAndBindWidget
@@ -40,6 +41,7 @@ import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
@@ -48,6 +50,8 @@ import org.robolectric.shadow.api.Shadow
 
 /** Tests for [A11yActivityScreen]. */
 class A11yActivityScreenTest : SettingsCatalystTestCase() {
+    @get:Rule val settingStoreRule = SettingsStoreRule()
+
     private val arguments =
         Bundle().apply {
             putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_ACTIVITY_COMPONENT)

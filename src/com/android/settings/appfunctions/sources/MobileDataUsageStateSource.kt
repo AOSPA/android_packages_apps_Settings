@@ -34,7 +34,7 @@ class MobileDataUsageStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val networkStatsManager = context.getSystemService(NetworkStatsManager::class.java)
 
         // Determine the most recent cycle.
@@ -113,9 +113,11 @@ class MobileDataUsageStateSource : DeviceStateSource {
             )
         }
 
-        return PerScreenDeviceStates(
-            description = "Mobile Data Usage",
-            deviceStateItems = deviceStateItems,
+        return listOf(
+            PerScreenDeviceStates(
+                description = "Mobile Data Usage",
+                deviceStateItems = deviceStateItems,
+            )
         )
     }
 

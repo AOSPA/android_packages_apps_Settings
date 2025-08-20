@@ -25,9 +25,12 @@ import static com.google.common.truth.Truth.assertThat;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,13 +41,13 @@ import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
+import com.android.settings.testutils.SettingsStoreRule;
 
 import org.junit.After;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowLooper;
 
 import java.util.List;
@@ -53,13 +56,16 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class ToggleColorInversionPreferenceFragmentTest extends
         BaseShortcutInteractionsTestCases<ToggleColorInversionPreferenceFragment> {
-    private static final String MAIN_SWITCH_PREF_KEY = "color_inversion_switch_preference_key";
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+    @Rule
+    public final SettingsStoreRule mSettingsStoreRule = new SettingsStoreRule();
+    private static final String MAIN_SWITCH_PREF_KEY = "accessibility_display_inversion_enabled";
     private static final String SHORTCUT_PREF_KEY = "color_inversion_shortcut_key";
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private FragmentScenario<ToggleColorInversionPreferenceFragment> mFragScenario = null;
     private ToggleColorInversionPreferenceFragment mFragment;
-    private ShadowAccessibilityManager mA11yManager =
-            Shadow.extract(mContext.getSystemService(AccessibilityManager.class));
 
     @After
     public void cleanUp() {
@@ -143,6 +149,10 @@ public class ToggleColorInversionPreferenceFragmentTest extends
         assertThat(mFragment.getHelpResource()).isEqualTo(R.string.help_url_color_inversion);
     }
 
+    @RequiresFlagsDisabled({
+            Flags.FLAG_CATALYST_COLOR_INVERSION,
+            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH
+    })
     @Test
     public void getNonIndexableKeys_containsNonIndexableItems() {
         final List<String> niks = ToggleColorInversionPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
@@ -158,6 +168,10 @@ public class ToggleColorInversionPreferenceFragmentTest extends
         assertThat(niks).containsExactlyElementsIn(keys);
     }
 
+    @RequiresFlagsDisabled({
+            Flags.FLAG_CATALYST_COLOR_INVERSION,
+            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH
+    })
     @Test
     public void getXmlResourceToIndex() {
         final List<SearchIndexableResource> indexableResources =
@@ -168,6 +182,19 @@ public class ToggleColorInversionPreferenceFragmentTest extends
         assertThat(indexableResources.size()).isEqualTo(1);
         assertThat(indexableResources.getFirst().xmlResId).isEqualTo(
                 R.xml.accessibility_color_inversion_settings);
+    }
+
+    @RequiresFlagsEnabled({
+            Flags.FLAG_CATALYST_COLOR_INVERSION,
+            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH
+    })
+    @Test
+    public void getXmlResourceToIndex_catalystSearch() {
+        final List<SearchIndexableResource> indexableResources =
+                ToggleColorInversionPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, true);
+
+        assertThat(indexableResources).isNull();
     }
 
     private TwoStatePreference getMainSwitch() {

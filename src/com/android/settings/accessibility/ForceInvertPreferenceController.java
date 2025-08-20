@@ -52,22 +52,9 @@ public class ForceInvertPreferenceController extends BasePreferenceController
     @Nullable
     private SelectorWithWidgetPreference mExpandedDarkThemePreference;
 
-    @Nullable
-    private SurveyManager mSurveyManager;
-
     public ForceInvertPreferenceController(
             @NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
-    }
-
-    /**
-     * Sets the {@link SurveyManager} for this preference controller to enable survey-related
-     * functionalities.
-     *
-     * @param surveyManager The {@link SurveyManager} instance responsible for handling surveys.
-     */
-    public void setSurveyManager(@NonNull SurveyManager surveyManager) {
-        mSurveyManager = surveyManager;
     }
 
     @Override
@@ -90,7 +77,6 @@ public class ForceInvertPreferenceController extends BasePreferenceController
             return;
         }
         updateSelectorPreferenceStatus(isForceInvertEnabled);
-        scheduleForceInvertSurvey(isForceInvertEnabled);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED,
                 isForceInvertEnabled ? ON : OFF);
@@ -125,18 +111,6 @@ public class ForceInvertPreferenceController extends BasePreferenceController
         mExpandedDarkThemePreference.setChecked(isForceInvertEnabled);
     }
 
-    private void scheduleForceInvertSurvey(boolean isForceInvertEnabled) {
-        if (mSurveyManager == null) {
-            return;
-        }
-
-        if (isForceInvertEnabled && isNightMode()) {
-            mSurveyManager.scheduleSurveyNotification();
-        } else {
-            mSurveyManager.cancelSurveyNotification();
-        }
-    }
-
     private boolean isNightMode() {
         return (mContext.getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
@@ -155,6 +129,7 @@ public class ForceInvertPreferenceController extends BasePreferenceController
         expanded.key = EXPANDED_DARK_THEME_KEY;
         expanded.title = mContext.getString(
                 R.string.accessibility_expanded_dark_theme_title_in_search);
+        expanded.keywords = mContext.getString(R.string.keywords_expanded_dark_theme);
         rawData.add(expanded);
     }
 

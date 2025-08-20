@@ -88,7 +88,7 @@ open class DisplayOverOtherAppsAppDetailScreen(context: Context, arguments: Bund
         }
 
     companion object {
-        const val KEY = "sa_draw_overlay_app_detail"
+        const val KEY = "special_access_draw_overlay_app_detail"
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 

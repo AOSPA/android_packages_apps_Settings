@@ -45,12 +45,6 @@ class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest :
             .isEqualTo(0)
     }
 
-    @Test
-    fun getSurveyKey_returnEmptyString() {
-        assertThat(ToggleScreenMagnificationPreferenceFragmentForSetupWizard().getSurveyKey())
-            .isEqualTo("")
-    }
-
     override fun getSetupWizardTitle(): String {
         return context.getString(R.string.accessibility_screen_magnification_title)
     }

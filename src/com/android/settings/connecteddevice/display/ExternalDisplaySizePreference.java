@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.display;
 
+import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
+
 import android.content.Context;
 import android.os.SystemClock;
 import android.util.AttributeSet;
@@ -23,6 +25,7 @@ import android.view.Choreographer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.DisplaySizeData;
@@ -62,6 +65,12 @@ public class ExternalDisplaySizePreference extends SliderPreference {
         mDisplayId = displayId;
 
         setStateForPreferenceInternal();
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        holder.itemView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
     }
 
     private void setStateForPreferenceInternal() {

@@ -26,6 +26,7 @@
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="animated_image"
+        android:selectable="false"
         app:controller="com.android.settings.accessibility.detail.a11yservice.AccessibilityServiceIllustrationPreferenceController"
         app:searchable="false" />
 
@@ -41,7 +42,7 @@
 
         <com.android.settings.accessibility.ShortcutPreference
             android:key="service_shortcut"
-            android:persistent="false"
+            android:persistent="true"
             app:controller="com.android.settings.accessibility.detail.a11yservice.ShortcutPreferenceController"
             tools:title="TalkBack shortcut" />
 

@@ -21,26 +21,35 @@ import com.android.settings.accessibility.AccessibilityScreen
 import com.android.settings.accessibility.ColorAndMotionScreen
 import com.android.settings.accessibility.VibrationIntensityScreen
 import com.android.settings.accessibility.VibrationScreen
+import com.android.settings.accessibility.colorcorrection.ui.ColorCorrectionScreen
+import com.android.settings.accessibility.colorinversion.ui.ColorInversionScreen
 import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityScreen
 import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceScreen
 import com.android.settings.accessibility.flashnotifications.ui.FlashNotificationsScreen
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen
 import com.android.settings.accounts.AccountScreen
 import com.android.settings.applications.AppDashboardScreen
+import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppDetailScreen
+import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppListScreen
+import com.android.settings.applications.specialaccess.AllFilesAccessAppDetailScreen
+import com.android.settings.applications.specialaccess.AllFilesAccessAppListScreen
 import com.android.settings.applications.specialaccess.AppInfoInstallUnknownAppsScreen
 import com.android.settings.applications.specialaccess.AppInfoManageWriteSettingsScreen
+import com.android.settings.applications.specialaccess.AppsFullScreenIntentScreen
 import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen
 import com.android.settings.applications.specialaccess.SpecialAccessSettingsScreen
 import com.android.settings.applications.specialaccess.WifiControlAppDetailScreen
 import com.android.settings.applications.specialaccess.WifiControlAppListScreen
 import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen
 import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppListScreen
+import com.android.settings.applications.specialaccess.notificationaccess.AppsNotificationAccessScreen
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppListScreen
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceScreen
 import com.android.settings.connecteddevice.BluetoothDashboardScreen
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardScreen
 import com.android.settings.connecteddevice.NfcAndPaymentScreen
+import com.android.settings.connecteddevice.PreviouslyConnectedDeviceScreen
 import com.android.settings.datausage.DataSaverScreen
 import com.android.settings.datausage.DataUsageAppDetailScreen
 import com.android.settings.datetime.DateTimeSettingsScreen
@@ -64,6 +73,7 @@ import com.android.settings.emergency.EmergencyDashboardScreen
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvancedScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummaryScreen
+import com.android.settings.gestures.ButtonNavigationSettingsScreen
 import com.android.settings.gestures.DoubleTapPowerScreen
 import com.android.settings.gestures.SystemNavigationGestureScreen
 import com.android.settings.language.LanguageAndRegionScreen
@@ -87,7 +97,6 @@ import com.android.settings.spa.app.catalyst.AppInfoInteractAcrossProfilesScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
-import com.android.settings.spa.app.catalyst.AppsFullScreenIntentScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
 import com.android.settings.supervision.SupervisionPinManagementScreen
 import com.android.settings.supervision.SupervisionWebContentFiltersScreen
@@ -96,6 +105,7 @@ import com.android.settings.system.SystemDashboardScreen
 import com.android.settings.vpn2.VpnSettingsScreen
 import com.android.settings.wifi.ConfigureWifiScreen
 import com.android.settings.wifi.calling.WifiCallingScreen
+import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
 import com.android.settings.wifi.tether.WifiHotspotScreen
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.getPreferenceSummary
@@ -154,6 +164,8 @@ private fun getCatalystScreenConfigs() =
     listOf(
         PerScreenCatalystConfig(enabled = true, screenKey = DarkModeScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorAndMotionScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ColorInversionScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ColorCorrectionScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AdaptiveConnectivityScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AutoBrightnessScreen.KEY),
         PerScreenCatalystConfig(
@@ -203,7 +215,11 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ScreenTimeoutScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = SoundScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = SoundScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
         PerScreenCatalystConfig(enabled = false, screenKey = SupervisionPinManagementScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
@@ -254,7 +270,11 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = AdvancedConnectedDeviceScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = ConversationListScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = ConversationListScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoScreen.KEY),
         PerScreenCatalystConfig(
@@ -266,7 +286,11 @@ private fun getCatalystScreenConfigs() =
             screenKey = AppInfoStorageScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_STORAGE),
         ),
-        PerScreenCatalystConfig(enabled = true, screenKey = FlashNotificationsScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = FlashNotificationsScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = DoubleTapPowerScreen.KEY),
         //        PerScreenCatalystConfig(enabled = true, screenKey = HearingDevicesScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AppInfoScreen.KEY),
@@ -279,7 +303,11 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = NfcAndPaymentScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = NightDisplayScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = BubbleNotificationScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = BubbleNotificationScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = ResetDashboardScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
@@ -291,6 +319,8 @@ private fun getCatalystScreenConfigs() =
             enabled = true,
             screenKey = WriteSystemPreferencesAppListScreen.KEY,
         ),
+        PerScreenCatalystConfig(enabled = true, screenKey = AllFilesAccessAppListScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AlarmsAndRemindersAppListScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = SpecialAccessSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = SupervisionWebContentFiltersScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TextReadingScreen.KEY),
@@ -299,7 +329,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = AppDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ConnectedDeviceDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = EmergencyDashboardScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = ZenModesListScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = ZenModesListScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = SystemDashboardScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
@@ -317,6 +351,18 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = AppsFullScreenIntentScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AppsNotificationAccessScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = PreviouslyConnectedDeviceScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = ButtonNavigationSettingsScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = SavedAccessPointsWifiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
+        ),
     )
 
 private fun getDeviceStateItemList() =
@@ -686,5 +732,15 @@ private fun getDeviceStateItemList() =
             enabled = true,
             settingKey = WriteSystemPreferencesAppDetailScreen.KEY,
             settingScreenKey = WriteSystemPreferencesAppListScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AllFilesAccessAppDetailScreen.KEY,
+            settingScreenKey = AllFilesAccessAppListScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = AlarmsAndRemindersAppDetailScreen.KEY,
+            settingScreenKey = AlarmsAndRemindersAppListScreen.KEY,
         ),
     )

@@ -16,39 +16,20 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_SOURCE;
-import static com.android.internal.accessibility.common.NotificationConstants.SOURCE_START_SURVEY;
-
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.settings.accessibility.actionbar.SurveyMenuController;
 import com.android.settings.dashboard.DashboardFragment;
 
 /**
  * Base fragment for dashboard style UI containing support-related items.
  */
 public abstract class BaseSupportFragment extends DashboardFragment {
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (com.android.server.accessibility.Flags.enableLowVisionHats()) {
-            handleSurveyFlow();
-        }
-    }
-
     @NonNull
     @Override
     public RecyclerView onCreateRecyclerView(@NonNull LayoutInflater inflater,
@@ -56,54 +37,5 @@ public abstract class BaseSupportFragment extends DashboardFragment {
         RecyclerView recyclerView =
                 super.onCreateRecyclerView(inflater, parent, savedInstanceState);
         return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(recyclerView);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(@NonNull Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        if (menu.size() == 1) {
-            final MenuItem singleItem = menu.getItem(0);
-            if (singleItem != null) {
-                singleItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            }
-        } else if (menu.size() > 1) {
-            for (int i = 0; i < menu.size(); i++) {
-                final MenuItem item = menu.getItem(i);
-                if (item != null) {
-                    item.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-                }
-            }
-        }
-    }
-
-    @NonNull
-    protected String getSurveyKey() {
-        return "";
-    }
-
-    private void handleSurveyFlow() {
-        final Context context = getActivity();
-        if (context == null) {
-            return;
-        }
-
-        final String surveyKey = getSurveyKey();
-        if (TextUtils.isEmpty(surveyKey)) {
-            return;
-        }
-
-        final SurveyManager surveyManager = new SurveyManager(this, context,
-                surveyKey, getMetricsCategory());
-
-        // Handle direct survey triggers; no need to initialize survey menu.
-        final Intent intent = getIntent();
-        if (intent != null
-                && intent.getStringExtra(EXTRA_SOURCE) != null
-                && TextUtils.equals(intent.getStringExtra(EXTRA_SOURCE), SOURCE_START_SURVEY)) {
-            surveyManager.startSurvey();
-            return;
-        }
-
-        SurveyMenuController.init(this, surveyManager);
     }
 }

@@ -62,6 +62,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DecimalStyle;
 import java.time.format.FormatStyle;
 
 /** Utils for battery operation */
@@ -679,7 +680,8 @@ public class BatteryUtils {
         final String localDate =
                 instant.atZone(ZoneId.systemDefault())
                         .toLocalDate()
-                        .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+                        .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
+                                .withDecimalStyle(DecimalStyle.ofDefaultLocale()));
 
         return localDate;
     }

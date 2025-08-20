@@ -250,9 +250,7 @@ public class PrivateSpaceMaintainer {
     /** Sets the setting for private space auto lock option. */
     public void setPrivateSpaceAutoLockSetting(
             @Settings.Secure.PrivateSpaceAutoLockOption int value) {
-        if (isPrivateSpaceAutoLockSupported()) {
-            Settings.Secure.putInt(mContext.getContentResolver(), PRIVATE_SPACE_AUTO_LOCK, value);
-        }
+        Settings.Secure.putInt(mContext.getContentResolver(), PRIVATE_SPACE_AUTO_LOCK, value);
     }
 
     /** @return the setting to show PS entry point. */
@@ -266,13 +264,10 @@ public class PrivateSpaceMaintainer {
     /** @return the setting for PS auto lock option. */
     @Settings.Secure.PrivateSpaceAutoLockOption
     public int getPrivateSpaceAutoLockSetting() {
-        if (isPrivateSpaceAutoLockSupported()) {
-            return Settings.Secure.getInt(
-                    mContext.getContentResolver(),
-                    PRIVATE_SPACE_AUTO_LOCK,
-                    PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL);
-        }
-        return PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL;
+        return Settings.Secure.getInt(
+                mContext.getContentResolver(),
+                PRIVATE_SPACE_AUTO_LOCK,
+                PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL);
     }
 
     /**
@@ -384,10 +379,6 @@ public class PrivateSpaceMaintainer {
         Log.d(TAG, "setting SKIP_FIRST_USE_HINTS = 1 for private profile");
         Settings.Secure.putIntForUser(mContext.getContentResolver(), SKIP_FIRST_USE_HINTS,
                 1, mUserHandle.getIdentifier());
-    }
-
-    private boolean isPrivateSpaceAutoLockSupported() {
-        return android.multiuser.Flags.supportAutolockForPrivateSpace();
     }
 
     /**

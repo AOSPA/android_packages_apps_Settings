@@ -99,4 +99,13 @@
         settings:buttonPreferenceSize="normal"
         settings:buttonPreferenceType="tonal"
         settings:controller="com.android.settings.accessibility.FeedbackButtonPreferenceController" />
+
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="survey"
+        android:title="@string/accessibility_send_survey_title"
+        android:icon="@drawable/ic_rate_review"
+        settings:searchable="false"
+        settings:buttonPreferenceSize="normal"
+        settings:buttonPreferenceType="tonal"
+        settings:controller="com.android.settings.accessibility.ForceInvertSurveyButtonPreferenceController" />
 </PreferenceScreen>

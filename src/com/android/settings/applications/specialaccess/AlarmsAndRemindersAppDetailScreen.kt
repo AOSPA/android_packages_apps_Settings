@@ -88,7 +88,7 @@ open class AlarmsAndRemindersAppDetailScreen(context: Context, arguments: Bundle
         }
 
     companion object {
-        const val KEY = "sa_aar_app_detail"
+        const val KEY = "special_access_alarms_and_reminders_app_detail"
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 

@@ -18,7 +18,6 @@ package com.android.settings.accessibility.shared.data
 
 import android.content.ComponentName
 import android.content.Context
-import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME
@@ -32,6 +31,7 @@ import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutT
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP
 import com.android.settings.accessibility.PreferredShortcut
 import com.android.settings.accessibility.PreferredShortcuts
+import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
@@ -44,7 +44,7 @@ import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import org.junit.After
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
@@ -56,17 +56,13 @@ const val TEST_KEY = "testKey"
 
 @RunWith(RobolectricTestRunner::class)
 class AccessibilityShortcutDataStoreTest {
+    @get:Rule val settingStoreRule = SettingsStoreRule()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val testComponentName: ComponentName = ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME
     private val testComponentString: String = testComponentName.flattenToString()
     private val a11yManager: ShadowAccessibilityManager =
         Shadow.extract(context.getSystemService(AccessibilityManager::class.java))
-
-    @After
-    fun cleanUp() {
-        Settings.Secure.clearProviderForTest()
-    }
 
     @Test
     fun setValue_true_generalPreferredShortcutEnabled() = runTest {

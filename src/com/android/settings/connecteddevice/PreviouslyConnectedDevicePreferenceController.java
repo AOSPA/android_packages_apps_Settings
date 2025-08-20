@@ -53,6 +53,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// LINT.IfChange
 public class PreviouslyConnectedDevicePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, DevicePreferenceCallback, BluetoothCallback {
 
@@ -283,3 +284,4 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     }
 
 }
+// LINT.ThenChange(PreviouslyConnectedDeviceScreen.kt)

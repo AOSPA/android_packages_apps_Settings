@@ -45,6 +45,20 @@
         <enabled_by_default>true</enabled_by_default>
     </appfunction>
     <appfunction>
+        <function_id>getNotificationsDeviceState</function_id>
+        <schema_name>getNotificationsDeviceState</schema_name>
+        <schema_category>device_state</schema_category>
+        <schema_version>1</schema_version>
+        <enabled_by_default>true</enabled_by_default>
+    </appfunction>
+    <appfunction>
+        <function_id>getAppsDeviceState</function_id>
+        <schema_name>getAppsDeviceState</schema_name>
+        <schema_category>device_state</schema_category>
+        <schema_version>1</schema_version>
+        <enabled_by_default>true</enabled_by_default>
+    </appfunction>
+    <appfunction>
         <function_id>getDeviceStateMetadata</function_id>
         <schema_name>getDeviceStateMetadata</schema_name>
         <schema_category>device_state</schema_category>

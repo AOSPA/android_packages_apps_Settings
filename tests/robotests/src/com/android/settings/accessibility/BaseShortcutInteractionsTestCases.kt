@@ -22,9 +22,13 @@ import android.view.accessibility.AccessibilityManager
 import androidx.preference.PreferenceFragmentCompat
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
+import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.testutils.AccessibilityTestUtils
+import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
+import org.junit.Rule
 import org.junit.Test
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowDialog
@@ -32,9 +36,16 @@ import org.robolectric.shadows.ShadowLooper
 
 /** Base test cases for fragment class that that provides accessibility shortcut toggle. */
 abstract class BaseShortcutInteractionsTestCases<T : PreferenceFragmentCompat> {
+    @get:Rule val settingStoreRule = SettingsStoreRule()
+
     protected val context: Context = ApplicationProvider.getApplicationContext()
     protected val a11yManager: ShadowAccessibilityManager =
         Shadow.extract(context.getSystemService(AccessibilityManager::class.java))
+
+    @After
+    fun clearAccessibilityRepository() {
+        AccessibilityRepositoryProvider.resetInstanceForTesting()
+    }
 
     @Test
     fun clickShortcutToggle_shortcutWasOff_turnOnShortcutAndShowShortcutTutorial() {

@@ -28,6 +28,7 @@ import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.wifi.WifiDataUsagePreference
 import com.android.settings.wifi.WifiSwitchPreference
+import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -76,6 +77,7 @@ open class NetworkProviderScreen :
                 +WifiSwitchPreference()
             }
             +UntitledPreferenceCategoryMetadata("wifi_ext_category") += {
+                if (Flags.deeplinkNetworkAndInternet25q4()) +SavedAccessPointsWifiScreen.KEY
                 +WifiDataUsagePreference(context)
             }
         }

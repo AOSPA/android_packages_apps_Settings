@@ -89,6 +89,8 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
             DeviceStateAppFunctionType.GET_STORAGE to deviceStateProviderAggregator,
             DeviceStateAppFunctionType.GET_BATTERY to deviceStateProviderAggregator,
             DeviceStateAppFunctionType.GET_MOBILE_DATA to deviceStateProviderAggregator,
+            DeviceStateAppFunctionType.GET_NOTIFICATIONS to deviceStateProviderAggregator,
+            DeviceStateAppFunctionType.GET_APPS to deviceStateProviderAggregator,
             DeviceStateAppFunctionType.GET_METADATA to deviceStateMetadataProviderAggregator,
             DeviceStateAppFunctionType.SET_DEVICE_STATE to deviceStateSetterAggregator,
             DeviceStateAppFunctionType.ADJUST_DEVICE_STATE_BY_PERCENTAGE to

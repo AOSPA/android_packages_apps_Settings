@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_DELETE_PIN
 import android.app.supervision.SupervisionManager
 import android.content.Context
 import android.content.Intent
@@ -27,6 +28,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settings.spa.network.getActivity
 import com.android.settingslib.HelpUtils
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -143,6 +145,10 @@ class SupervisionDeletePinPreference() :
         if (resultCode == Activity.RESULT_OK) {
             if (lifeCycleContext.deleteSupervisionData()) {
                 lifeCycleContext.notifyPreferenceChange(KEY)
+                FeatureFactory.featureFactory.metricsFeatureProvider.action(
+                    lifeCycleContext,
+                    ACTION_SUPERVISION_DELETE_PIN,
+                )
                 // Programmatically trigger back press to properly return to the supervision
                 // dashboard with a correct back stack.
                 val activity =

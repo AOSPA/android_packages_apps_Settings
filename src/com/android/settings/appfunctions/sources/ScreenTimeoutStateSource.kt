@@ -30,7 +30,7 @@ class ScreenTimeoutStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val screenTimeoutMilliseconds =
             Settings.System.getLong(
                 context.contentResolver,
@@ -46,9 +46,8 @@ class ScreenTimeoutStateSource : DeviceStateSource {
                 jsonValue = "$screenTimeoutSeconds s",
             )
 
-        return PerScreenDeviceStates(
-            description = "Screen timeout",
-            deviceStateItems = listOf(item),
+        return listOf(
+            PerScreenDeviceStates(description = "Screen timeout", deviceStateItems = listOf(item))
         )
     }
 

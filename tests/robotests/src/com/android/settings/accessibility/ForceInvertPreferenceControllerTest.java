@@ -18,25 +18,14 @@ package com.android.settings.accessibility;
 
 import static android.view.accessibility.Flags.FLAG_FORCE_INVERT_COLOR;
 
-import static com.android.internal.accessibility.common.NotificationConstants.ACTION_CANCEL_SURVEY_NOTIFICATION;
-import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SCHEDULE_SURVEY_NOTIFICATION;
-import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_PAGE_ID;
-import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.platform.test.annotations.DisableFlags;
@@ -44,15 +33,11 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
-import androidx.core.util.Consumer;
-import androidx.lifecycle.testing.TestLifecycleOwner;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.overlay.SurveyFeatureProvider;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
@@ -64,10 +49,7 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-
-import java.util.List;
 
 /** Tests for {@link ForceInvertPreferenceController}. */
 @Config(shadows = {
@@ -75,9 +57,6 @@ import java.util.List;
 })
 @RunWith(RobolectricTestRunner.class)
 public class ForceInvertPreferenceControllerTest {
-
-    private static final String TEST_SURVEY_TRIGGER_KEY = "surveyTriggerKey";
-    private static final int TEST_PAGE_ID = 10;
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -93,22 +72,15 @@ public class ForceInvertPreferenceControllerTest {
 
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
-    private SurveyFeatureProvider mSurveyFeatureProvider;
     private ForceInvertPreferenceController mController;
     private SelectorWithWidgetPreference mStandardDarkThemePreference;
     private SelectorWithWidgetPreference mExpandedDarkThemePreference;
 
     @Before
     public void setUp() {
-        mSurveyFeatureProvider =
-                FakeFeatureFactory.setupForTest().getSurveyFeatureProvider(mContext);
-
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getConfiguration()).thenReturn(new Configuration());
         mController = new ForceInvertPreferenceController(mContext, "dark_theme_group");
-        mController.setSurveyManager(
-                new SurveyManager(new TestLifecycleOwner(), mContext, TEST_SURVEY_TRIGGER_KEY,
-                        TEST_PAGE_ID));
 
         mStandardDarkThemePreference = new SelectorWithWidgetPreference(mContext);
         mStandardDarkThemePreference
@@ -198,84 +170,8 @@ public class ForceInvertPreferenceControllerTest {
         assertThat(isForceInvertEnabled).isTrue();
     }
 
-    @Test
-    public void clickExpandedPreference_darkThemeAndSurveyAvailable_sendScheduleBroadcast() {
-        setForceInvertEnabled(false);
-        setDarkTheme();
-        setupSurveyAvailability(true);
-        mController.displayPreference(mScreen);
-
-        mController.onRadioButtonClicked(mExpandedDarkThemePreference);
-
-        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
-        assertThat(intents).hasSize(1);
-        final Intent intent = intents.getFirst();
-        assertThat(intent.getAction()).isEqualTo(ACTION_SCHEDULE_SURVEY_NOTIFICATION);
-        assertThat(intent.getPackage()).isEqualTo(SETTINGS_PACKAGE_NAME);
-        assertThat(intent.getIntExtra(EXTRA_PAGE_ID, /* def= */ -1)).isEqualTo(TEST_PAGE_ID);
-    }
-
-    @Test
-    public void clickExpandedPreference_darkThemeAndSurveyNotAvailable_noBroadcast() {
-        setForceInvertEnabled(false);
-        setDarkTheme();
-        setupSurveyAvailability(false);
-        mController.displayPreference(mScreen);
-
-        mController.onRadioButtonClicked(mExpandedDarkThemePreference);
-
-        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
-        assertThat(intents).isEmpty();
-    }
-
-    @Test
-    public void clickExpandedPreference_lightTheme_noSurveyCheck() {
-        setForceInvertEnabled(false);
-        setLightTheme();
-        mController.displayPreference(mScreen);
-
-        mController.onRadioButtonClicked(mExpandedDarkThemePreference);
-
-        verify(mSurveyFeatureProvider, never()).checkSurveyAvailable(any(), any(), any());
-    }
-
-    @Test
-    public void clickStandardPreference_sendCancelBroadcast() {
-        setForceInvertEnabled(true);
-        mController.displayPreference(mScreen);
-
-        mController.onRadioButtonClicked(mStandardDarkThemePreference);
-
-        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
-        assertThat(intents).hasSize(1);
-        final Intent intent = intents.getFirst();
-        assertThat(intent.getAction()).isEqualTo(ACTION_CANCEL_SURVEY_NOTIFICATION);
-        assertThat(intent.getPackage()).isEqualTo(SETTINGS_PACKAGE_NAME);
-        assertThat(intent.getIntExtra(EXTRA_PAGE_ID, /* def= */ -1)).isEqualTo(TEST_PAGE_ID);
-    }
-
     private void setForceInvertEnabled(boolean enabled) {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED, enabled ? ON : OFF);
-    }
-
-    private void setLightTheme() {
-        Configuration config = new Configuration();
-        config.uiMode = Configuration.UI_MODE_NIGHT_NO;
-        when(mResources.getConfiguration()).thenReturn(config);
-    }
-
-    private void setDarkTheme() {
-        Configuration config = new Configuration();
-        config.uiMode = Configuration.UI_MODE_NIGHT_YES;
-        when(mResources.getConfiguration()).thenReturn(config);
-    }
-
-    private void setupSurveyAvailability(boolean available) {
-        doAnswer(invocation -> {
-            Consumer<Boolean> consumer = invocation.getArgument(2);
-            consumer.accept(available);
-            return null;
-        }).when(mSurveyFeatureProvider).checkSurveyAvailable(any(), anyString(), any());
     }
 }

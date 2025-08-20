@@ -2241,7 +2241,7 @@
     <!-- External Display resolution settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="external_display_resolution_settings_title">Display resolution</string>
     <!-- External Display Connection Preference. The preferred method of connection for an external display. [CHAR LIMIT=40] -->
-    <string name="external_display_connection_preference">Default Connection Behaviour</string>
+    <string name="external_display_connection_preference">Default connection behavior</string>
     <!-- External Display settings. Always start in desktop mode when display is connected. -->
     <string name="external_display_connection_preference_desktop">Use as separate display</string>
     <!-- External Display settings. Always start in mirroring mode when display is connected. -->
@@ -3492,6 +3492,13 @@
     <string name="lift_to_wake_title">Lift to wake</string>
     <!-- Title of toggle preference in screensaver "when to start" screen to restrict to starting only when charging wirelessly [CHAR LIMIT=NONE] -->
     <string name="screensaver_restrict_to_wireless_charging_title">Restrict to wireless charging</string>
+
+    <!-- Title of the toggle to turn off blur [CHAR LIMIT=NONE] -->
+    <string name="blur_switch">Reduce blur effects</string>
+    <!-- Summary string of the toggle to turn off blur [CHAR LIMIT=60] -->
+    <string name="blur_switch_summary">Make backgrounds and panels easier to see</string>
+    <!-- Summary string on blur switch explaining why the toggle is disabled [CHAR LIMIT=60]  -->
+    <string name="blur_switch_disabled_summary">Temporarily disabled due to Battery Saver</string>
 
     <!-- Title for the main switch to enable or disable the low light display behavior. [CHAR LIMIT=NONE] -->
     <string name="low_light_display_behavior_main_switch_title">Use Low Light mode</string>
@@ -5821,11 +5828,44 @@
     <!-- Instructions on the accessibility preference screen teaching the user how to control magnification with a keyboard. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_keyboard_summary">
         <![CDATA[
-        <b>To zoom with the keyboard:</b><br/>
-        {0,number,integer}. Use the shortcut to start magnification<br/>
-        {1,number,integer}. Hold down <xliff:g id="meta1">%1$s</xliff:g> and <xliff:g id="alt1">%2$s</xliff:g> and press + or - to zoom in or out<br/>
-        {2,number,integer}. Hold down <xliff:g id="meta2">%3$s</xliff:g> and <xliff:g id="alt2">%4$s</xliff:g> and press the arrow keys to move around the screen<br/>
-        {3,number,integer}. Use the shortcut to stop magnification
+        <b>To zoom in:</b><br/>
+        {0,number,integer}. Use shortcut or press <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> + M to start magnification<br/>
+        {1,number,integer}. Press <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> + arrow keys to move around screen<br/>
+        {2,number,integer}. Press <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> and \"+\" or \"-\" to adjust zoom<br/>
+        {3,number,integer}. Use shortcut or <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> + M to stop magnification
+        ]]>
+    </string>
+    <!-- Instructions on the accessibility preference screen teaching the user how to control magnification with a keyboard when the feature flag for keyboard shortcuts is off. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary">
+        <![CDATA[
+        <b>To zoom in:</b><br/>
+        {0,number,integer}. Use shortcut to start magnification<br/>
+        {1,number,integer}. Press <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> + arrow keys to move around screen<br/>
+        {2,number,integer}. Press <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> and \"+\" or \"-\" to adjust zoom<br/>
+        {3,number,integer}. Use shortcut to stop magnification
+        ]]>
+    </string>
+    <!-- Instructions on the accessibility preference screen teaching the user how to control magnification with both keyboard and touch. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_keyboard_touch_summary">
+        <![CDATA[
+        <b>Keyboard</b><br/>
+        {0,number,integer}. Use shortcut or press <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> + M to start magnification<br/>
+        {1,number,integer}. Press <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> + arrow keys to move around screen<br/>
+        {2,number,integer}. Press <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> and \"+\" or \"-\" to adjust zoom<br/>
+        {3,number,integer}. Use shortcut or <xliff:g id="meta">%1$s</xliff:g> + <xliff:g id="alt">%2$s</xliff:g> + M to stop magnification<br/><br/>
+        <b>Touchscreen</b><br/>
+        To zoom in:<br/>
+        {0,number,integer}. Use shortcut to start magnification<br/>
+        {1,number,integer}. Tap the screen<br/>
+        {2,number,integer}. Drag 2 fingers to move around screen<br/>
+        {3,number,integer}. Pinch with 2 fingers to adjust zoom<br/>
+        {4,number,integer}. Use shortcut to stop magnification<br/><br/>
+        To zoom in temporarily:<br/>
+        {0,number,integer}. Make sure your magnification type is set to full screen<br/>
+        {1,number,integer}. Use shortcut to start magnification<br/>
+        {2,number,integer}. Touch & hold anywhere on the screen<br/>
+        {3,number,integer}. Drag finger to move around screen<br/>
+        {4,number,integer}. Lift finger to stop magnification
         ]]>
     </string>
     <!-- Instructions on the accessibility preference screen teaching the user how to interact with screen magnification when one finger panning feature is turned off. [CHAR LIMIT=none] -->
@@ -5929,6 +5969,8 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating"><annotation id="link">More options</annotation></string>
     <!-- Footer to show help link content description. [CHAR LIMIT=NONE] -->
     <string name="footer_learn_more_content_description">Learn more about <xliff:g id="service" example="Select to Speak">%1$s</xliff:g></string>
+    <!-- Link for accessibility disability support page. [CHAR LIMIT=NONE]-->
+    <string name="accessibility_disability_support_url" translatable="false">https://support.google.com/accessibility?p=android-A11Y_setting</string>
     <!-- Title for quick settings shortcut option in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings">Quick Settings</string>
     <!-- Summary for quick settings shortcut option in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
@@ -6052,6 +6094,8 @@
     <string name="accessibility_expanded_dark_theme_title_in_search">Expanded Dark theme</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=100] -->
     <string name="accessibility_expanded_dark_theme_summary">Automatically applies Dark theme to more apps for improved accessibility</string>
+    <!-- Search keywords for the Expanded dark theme settings. [CHAR_LIMIT=NONE] -->
+    <string name="keywords_expanded_dark_theme">force invert, color inversion, contrast</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
@@ -8708,6 +8752,9 @@
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
     <!-- Search keywords for dark mode settings [CHAR LIMIT=NONE] -->
     <string name="keywords_dark_ui_mode">theme, light, dark, mode, light sensitivity, photophobia, make darker, darken, dark mode, migraine</string>
+
+    <!-- Search keyword for the blur toggle [CHAR LIMIT=NONE] -->
+    <string name="keywords_blur_switch">blur effects</string>
 
     <!-- Search keyword for Device Theme Settings [CHAR LIMIT=NONE] -->
     <string name="keywords_systemui_theme">dark theme</string>
@@ -12048,6 +12095,16 @@
     <!-- Title for the screen to show all the 2- and 3-button navigation settings. [CHAR LIMIT=80] -->
     <string name="button_navigation_settings_activity_title">Button navigation</string>
 
+    <!-- Title text for changing the order of the navbar buttons -->
+    <string name="button_navigation_settings_order_title">Button order</string>
+
+    <!-- Text describing the back button on the navigation bar -->
+    <string name="navbar_back_button">Back</string>
+    <!-- Text describing the home button on the navigation bar -->
+    <string name="navbar_home_button">Home</string>
+    <!-- Text describing the recent button on the navigation bar -->
+    <string name="navbar_recent_button">Recents</string>
+
     <!-- Keywords for the gesture navigation settings. [CHAR LIMIT=NONE] -->
     <string name="keywords_gesture_navigation_settings">gesture navigation, back sensitivity, back gesture</string>
 
@@ -14962,12 +15019,12 @@
     <string name="supervision_unavailable_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_unavailable</string>
 
     <!-- Light theme customization for Face Education lottie illustration. Not translatable. -->
-    <string-array name="fac_education_illustration" translatable="false">
+    <string-array name="face_education_illustration" translatable="false">
         <item>.surfaceContainer:@sud_system_surface_container_light</item>
         <item>.primary:@sud_system_primary_light</item>
         <item>.primaryContainer:@sud_system_primary_container_light</item>
         <item>.outline:@sud_system_outline_light</item>
-        <item>.onSecondaryContainer:@sud_system_secondary_container_light</item>
+        <item>.onSecondaryContainer:@sud_system_on_secondary_container_light</item>
         <item>.tertiary:@sud_system_tertiary_light</item>
         <item>.inversePrimary:@sud_system_primary_inverse_light</item>
     </string-array>
@@ -14994,7 +15051,25 @@
 
     <!-- Title for Other settings category in Safety Center [CHAR LIMIT=60] -->
     <string name="more_security_privacy_category_title">Other settings</string>
-    <!-- Summary for more_security_privacy_summary category in Safety Center [CHAR LIMIT=NONE] -->
+    <!-- Summary for more_security_privacy_summary subpage in Safety Center [CHAR LIMIT=NONE] -->
     <string name="more_security_privacy_summary">Autofill, notifications, and more</string>
+    <!-- Title for Privacy controls subpage in Safety Center [CHAR LIMIT=60] -->
+    <string name="privacy_sources_title" >Privacy controls</string>
+    <!-- Summary for privacy_sources_summary subpage in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="privacy_sources_summary">Permissions, controls</string>
+    <!-- The title of the subpage for safety settings relating to screen lock and biometrics [CHAR LIMIT=60] -->
+    <string name="device_unlock_subpage_title">Device unlock</string>
+    <!-- The default title of the setting for managing the screen lock on the device [CHAR LIMIT=60] -->
+    <string name="lock_screen_title">Screen lock</string>
+    <!-- Title that leads to location settings in Safety Center [CHAR LIMIT=60] -->
+    <string name="location_settings">Location access</string>
+    <!-- Subtitle for the link to location in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="location_settings_subtitle">See apps and services that have access to location</string>
 
+    <!-- Title for promo notification for Identity Check -->
+    <string name="identity_check_notification_title">Identity Check works with more apps</string>
+    <!-- Summary for promo notification for Identity Check -->
+    <string name="identity_check_notification_summary">Identity Check prevents unwanted access to your apps. Now available with any app that uses Fingerprint or Face Unlock.</string>
+    <!-- Identity Check promo notification button text -->
+    <string name="identity_check_view_details">View details</string>
 </resources>

@@ -38,6 +38,7 @@ import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
 import com.android.settings.datetime.timezone.model.TimeZoneDataLoader;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -212,6 +213,9 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
                 new AppBarLayout.Behavior.DragCallback() {
                     @Override
                     public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+                        if (SettingsThemeHelper.isExpressiveTheme(appBarLayout.getContext())) {
+                            return false;
+                        }
                         return appBarLayout.getResources().getConfiguration().orientation
                                 == Configuration.ORIENTATION_LANDSCAPE;
                     }

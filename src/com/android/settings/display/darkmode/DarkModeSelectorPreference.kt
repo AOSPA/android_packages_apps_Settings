@@ -17,12 +17,14 @@
 package com.android.settings.display.darkmode
 
 import android.content.Context
+import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIndexableTitleProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 
@@ -44,10 +46,12 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
 
     override fun isIndexable(context: Context) = Flags.catalystDarkUiMode()
 
-    override fun createWidget(context: Context) =
-        SelectorWithWidgetPreference(context).apply {
-            setOnClickListener(this@DarkModeSelectorPreference)
-        }
+    override fun createWidget(context: Context) = SelectorWithWidgetPreference(context)
+
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+        (preference as SelectorWithWidgetPreference).setOnClickListener(this)
+    }
 
     override fun onRadioButtonClicked(emiter: SelectorWithWidgetPreference) {
         emiter.isChecked = true
@@ -87,6 +91,9 @@ class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
 
     override val summary
         get() = R.string.accessibility_expanded_dark_theme_summary
+
+    override val keywords: Int
+        get() = R.string.keywords_expanded_dark_theme
 
     override fun getIndexableTitle(context: Context): CharSequence? =
         context.getText(R.string.accessibility_expanded_dark_theme_title_in_search)

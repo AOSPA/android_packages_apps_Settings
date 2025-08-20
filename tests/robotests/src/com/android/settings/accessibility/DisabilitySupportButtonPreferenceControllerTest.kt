@@ -28,9 +28,9 @@ import androidx.fragment.app.testing.EmptyFragmentActivity
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.R
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
-import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settingslib.widget.ButtonPreference
 import com.google.common.truth.Truth.assertThat
@@ -38,7 +38,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.`when` as whenever
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.Shadows.shadowOf
@@ -53,61 +52,40 @@ class DisabilitySupportButtonPreferenceControllerTest {
     private val preferenceScreen = preferenceManager.createPreferenceScreen(context)
     private lateinit var preference: ButtonPreference
     private lateinit var controller: DisabilitySupportButtonPreferenceController
-    private lateinit var accessibilityDisabilitySupportFeatureProvider:
-        AccessibilityDisabilitySupportFeatureProvider
 
     @Before
     fun setUp() {
-        accessibilityDisabilitySupportFeatureProvider =
-            FakeFeatureFactory.setupForTest().accessibilityDisabilitySupportFeatureProvider
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
-    fun getAvailabilityStatus_disabilitySupportUrlEmpty_returnUnavailable() {
-        setUp("")
-
-        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
-    fun getAvailabilityStatus_disabilitySupportUrlNotEmpty_returnAvailable() {
-        setUp(URL)
-
-        assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE)
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
-    fun getAvailabilityStatus_disableDisabilitySupport_returnUnavailable() {
-        setUp(URL)
-
-        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
-    fun performClick_shouldStartBugReportIntent() {
-        setUp(URL)
-
-        preference.button.performClick()
-
-        val startedIntent = Shadows.shadowOf(context as Application?).nextStartedActivity
-        assertThat(startedIntent.getAction()).isEqualTo(Intent.ACTION_VIEW)
-        assertThat(startedIntent.categories.contains(Intent.CATEGORY_BROWSABLE)).isTrue()
-        assertThat(startedIntent.data).isEqualTo(URL.toUri())
-    }
-
-    private fun setUp(url: String) {
-        whenever(accessibilityDisabilitySupportFeatureProvider.url).thenReturn(url)
-        var newContext: Context = createContext()
+        val newContext: Context = createContext()
         controller = DisabilitySupportButtonPreferenceController(newContext, KEY)
         preference = ButtonPreference(newContext)
         preference.setKey(KEY)
         preferenceScreen.addPreference(preference)
         controller.displayPreference(preferenceScreen)
         preference.onBindViewHolder(preference.inflateViewHolder())
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
+    fun getAvailabilityStatus_flagOn_returnAvailable() {
+        assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
+    fun getAvailabilityStatus_flagOff_returnUnavailable() {
+        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
+    fun performClick_shouldStartBugReportIntent() {
+        preference.button.performClick()
+
+        val startedIntent = Shadows.shadowOf(context as Application?).nextStartedActivity
+        assertThat(startedIntent.action).isEqualTo(Intent.ACTION_VIEW)
+        assertThat(startedIntent.categories.contains(Intent.CATEGORY_BROWSABLE)).isTrue()
+        assertThat(startedIntent.data)
+            .isEqualTo(context.getString(R.string.accessibility_disability_support_url).toUri())
     }
 
     private fun createContext(): Context {
@@ -123,6 +101,5 @@ class DisabilitySupportButtonPreferenceControllerTest {
 
     companion object {
         private const val KEY = "test_key"
-        private const val URL = "url"
     }
 }

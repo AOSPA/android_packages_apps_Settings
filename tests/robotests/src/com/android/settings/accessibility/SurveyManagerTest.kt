@@ -60,9 +60,7 @@ class SurveyManagerTest {
     }
 
     @Test
-    fun scheduleSurveyNotification_surveyAvailable_sendScheduleBroadcast() {
-        setupSurveyAvailability(/* available= */ true)
-
+    fun scheduleSurveyNotification_sendCancelBroadcast() {
         surveyManager.scheduleSurveyNotification()
 
         val intents = Shadows.shadowOf(context as Application?).getBroadcastIntents()
@@ -73,16 +71,6 @@ class SurveyManagerTest {
         assertThat(intent.getPackage()).isEqualTo(Utils.SETTINGS_PACKAGE_NAME)
         assertThat(intent.getIntExtra(NotificationConstants.EXTRA_PAGE_ID, /* def= */ -1))
             .isEqualTo(TEST_PAGE_ID)
-    }
-
-    @Test
-    fun scheduleSurveyNotification_surveyUnavailable_noBroadcast() {
-        setupSurveyAvailability(/* available= */ false)
-
-        surveyManager.scheduleSurveyNotification()
-
-        val intents = Shadows.shadowOf(context as Application?).getBroadcastIntents()
-        assertThat(intents).isEmpty()
     }
 
     @Test

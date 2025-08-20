@@ -125,11 +125,4 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         // Hides help center in action bar and footer bar in SuW
         return 0;
     }
-
-    @NonNull
-    @Override
-    public String getSurveyKey() {
-        // Hides survey options in SuW
-        return "";
-    }
 }

@@ -33,7 +33,7 @@ class RecentAppsStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val recentAppStatsMixin = RecentAppStatsMixin(context, RECENT_APP_COUNT)
         recentAppStatsMixin.loadDisplayableRecentApps(RECENT_APP_COUNT)
         val deviceStateItems = mutableListOf<DeviceStateItem>()
@@ -57,7 +57,9 @@ class RecentAppsStateSource : DeviceStateSource {
             )
         }
 
-        return PerScreenDeviceStates(description = "Apps", deviceStateItems = deviceStateItems)
+        return listOf(
+            PerScreenDeviceStates(description = "Apps", deviceStateItems = deviceStateItems)
+        )
     }
 
     companion object {

@@ -17,11 +17,8 @@
 package com.android.settings.accessibility.screenmagnification
 
 import android.content.Context
-import androidx.preference.Preference
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.internal.accessibility.common.ShortcutConstants
-import com.android.settings.accessibility.ShortcutPreference
-import com.android.settings.accessibility.SurveyManager
 import com.android.settings.accessibility.ToggleShortcutPreferenceController
 
 /**
@@ -31,32 +28,9 @@ import com.android.settings.accessibility.ToggleShortcutPreferenceController
 class ToggleMagnificationShortcutPreferenceController(context: Context, key: String) :
     ToggleShortcutPreferenceController(context, key) {
 
-    private lateinit var surveyManager: SurveyManager
-
-    /**
-     * Sets the {@link SurveyManager} for this preference controller to enable survey-related
-     * functionalities.
-     *
-     * @param surveyManager The {@link SurveyManager} instance responsible for handling surveys.
-     */
-    fun setSurveyManager(manager: SurveyManager) {
-        surveyManager = manager
-    }
-
     override val shortcutSettingsKey = ShortcutConstants.MAGNIFICATION_SHORTCUT_SETTINGS.toList()
 
     override fun getComponentNameAsString(): String {
         return AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
-    }
-
-    override fun updateState(preference: Preference?) {
-        super.updateState(preference)
-        if (preference as? ShortcutPreference != null) {
-            if (preference.isChecked) {
-                surveyManager.scheduleSurveyNotification()
-            } else {
-                surveyManager.cancelSurveyNotification()
-            }
-        }
     }
 }

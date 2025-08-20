@@ -128,7 +128,7 @@ public final class AccessibilityUtil {
      * Returns On/Off string according to the setting which specifies the integer value 1 or 0. This
      * setting is defined in the secure system settings {@link android.provider.Settings.Secure}.
      */
-    static CharSequence getSummary(
+    public static CharSequence getSummary(
             Context context, String settingsSecureKey, @StringRes int enabledString,
             @StringRes int disabledString) {
         boolean enabled = Settings.Secure.getInt(context.getContentResolver(),

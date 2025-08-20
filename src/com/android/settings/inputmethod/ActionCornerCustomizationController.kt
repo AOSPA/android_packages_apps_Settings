@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.provider.Settings
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_HOME
+import android.provider.Settings.Secure.ACTION_CORNER_ACTION_LOCKSCREEN
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_NONE
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_NOTIFICATIONS
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_OVERVIEW
@@ -115,6 +116,7 @@ class ActionCornerCustomizationController(context: Context, preferenceKey: Strin
                 ACTION_CORNER_ACTION_OVERVIEW.toString(),
                 ACTION_CORNER_ACTION_NOTIFICATIONS.toString(),
                 ACTION_CORNER_ACTION_QUICK_SETTINGS.toString(),
+                ACTION_CORNER_ACTION_LOCKSCREEN.toString(),
             )
     }
 

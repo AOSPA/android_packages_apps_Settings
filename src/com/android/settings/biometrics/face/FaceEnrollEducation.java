@@ -411,7 +411,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         return mIsUsingExpressiveStyle ? a11yButtonExpressive : a11yButton;
     }
     private void setupllIllustrationAnim(LottieAnimationView illustrationLottie) {
-        String[] colorArray = getResources().getStringArray(R.array.fac_education_illustration);
+        String[] colorArray = getResources().getStringArray(R.array.face_education_illustration);
         List<String> colorMappings = Arrays.asList(colorArray);
         LottieAnimationHelper.get().applyColor(getApplicationContext(), illustrationLottie,
                 colorMappings);

@@ -142,14 +142,14 @@ abstract class SpecialAccessAppDetailScreen(context: Context, override val argum
             }
         keyedObserver = observer
         val executor = HandlerExecutor.main
-        if (context.preferenceScreenKey == bindingKey) {
+        if (isContainer(context)) {
             PackageObservable.get(context).addObserver(packageName, observer, executor)
         }
         dataStore.addObserver(SpecialAccessSwitchPreference.KEY, observer, executor)
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        if (context.preferenceScreenKey == bindingKey) {
+        if (isContainer(context)) {
             PackageObservable.get(context).removeObserver(packageName, keyedObserver)
         }
         dataStore.removeObserver(SpecialAccessSwitchPreference.KEY, keyedObserver)

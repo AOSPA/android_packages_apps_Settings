@@ -52,6 +52,11 @@ class ExpandedDarkModeSelectorPreferenceTest {
     }
 
     @Test
+    fun getKeywords() {
+        assertThat(preference.keywords).isEqualTo(R.string.keywords_expanded_dark_theme)
+    }
+
+    @Test
     fun getIndexableTitle() {
         assertThat(preference.getIndexableTitle(context))
             .isEqualTo(

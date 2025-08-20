@@ -53,7 +53,7 @@ open class DisplayOverOtherAppsAppListScreen :
         DisplayOverOtherAppsAppDetailScreen.parameters(context, hierarchyType)
 
     companion object {
-        const val KEY = "sa_draw_overlay_app_list"
+        const val KEY = "special_access_draw_overlay_app_list"
     }
 
     override fun isAvailable(context: Context) = isSystemAlertWindowEnabled(context)

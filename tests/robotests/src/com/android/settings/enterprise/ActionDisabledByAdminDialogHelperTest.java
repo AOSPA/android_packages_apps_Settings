@@ -16,8 +16,6 @@
 
 package com.android.settings.enterprise;
 
-import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_FINANCED;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -295,7 +293,7 @@ public class ActionDisabledByAdminDialogHelperTest {
                 "some.package.name.SomeClass");
         dpmShadow.setDeviceOwner(component);
         dpmShadow.setDeviceOwnerComponentOnAnyUser(component);
-        dpmShadow.setDeviceOwnerType(component, DEVICE_OWNER_TYPE_FINANCED);
+        dpmShadow.setIsFinancedDevice(true);
         dpmShadow.setShortSupportMessageForUser(component, 123, null);
         dpmShadow.setIsAdminActiveAsUser(true);
     }

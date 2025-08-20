@@ -71,37 +71,32 @@ class MagnificationFooterPreference :
     override fun isIndexable(context: Context): Boolean = false
 
     override fun getTitle(context: Context): CharSequence? {
-        val hasTouchScreen =
+        val hasTouch =
             context.packageManager.run {
                 hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN) ||
                     hasSystemFeature(PackageManager.FEATURE_FAKETOUCH)
             }
 
-        val showKeyboardSummary = InputPeripheralsSettingsUtils.isHardKeyboard()
-        val showDefaultSummary = hasTouchScreen || !showKeyboardSummary
+        val hasKeyboard = InputPeripheralsSettingsUtils.isHardKeyboard()
 
-        val stringBuilder = StringBuilder()
-        if (showKeyboardSummary) {
-            stringBuilder.append(getKeyboardIntro(context))
-        }
-
-        if (showDefaultSummary) {
-            if (stringBuilder.isNotBlank()) {
-                stringBuilder.append("<br/><br/>")
-            }
-
-            stringBuilder.append(getDefaultIntro(context))
+        var summary: String
+        if (hasTouch && hasKeyboard) {
+            summary = getKeyboardTouchSummary(context)
+        } else if (hasKeyboard) {
+            summary = getKeyboardOnlySummary(context)
+        } else { // hasTouch only, which is the default
+            summary = getTouchOnlySummary(context)
         }
 
         return Html.fromHtml(
-            stringBuilder.toString(),
+            summary,
             Html.FROM_HTML_MODE_COMPACT,
             /* imageGetter= */ null,
             /* tagHandler= */ null,
         )
     }
 
-    private fun getDefaultIntro(context: Context): String {
+    private fun getTouchOnlySummary(context: Context): String {
         if (Flags.enableMagnificationOneFingerPanningGesture()) {
             val isOneFingerPanningOn =
                 OneFingerPanningPreferenceController.isOneFingerPanningEnabled(context)
@@ -129,22 +124,73 @@ class MagnificationFooterPreference :
         }
     }
 
-    private fun getKeyboardIntro(context: Context): String {
+    private fun getKeyboardOnlySummary(context: Context): String {
         val meta: String? = context.getString(R.string.modifier_keys_meta)
         val alt: String? = context.getString(R.string.modifier_keys_alt)
-        return MessageFormat.format(
-            context.getString(
-                R.string.accessibility_screen_magnification_keyboard_summary,
-                meta,
-                alt,
-                meta,
-                alt,
-            ),
-            1,
-            2,
-            3,
-            4,
-        )
+        if (com.android.hardware.input.Flags.enableTalkbackAndMagnifierKeyGestures()) {
+            return MessageFormat.format(
+                context.getString(
+                    R.string.accessibility_screen_magnification_keyboard_summary,
+                    meta,
+                    alt,
+                ),
+                1,
+                2,
+                3,
+                4,
+            )
+        } else {
+            return MessageFormat.format(
+                context.getString(
+                    R.string.accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary,
+                    meta,
+                    alt,
+                ),
+                1,
+                2,
+                3,
+                4,
+            )
+        }
+    }
+
+    private fun getKeyboardTouchSummary(context: Context): String {
+        val meta: String? = context.getString(R.string.modifier_keys_meta)
+        val alt: String? = context.getString(R.string.modifier_keys_alt)
+        if (com.android.hardware.input.Flags.enableTalkbackAndMagnifierKeyGestures()) {
+            return MessageFormat.format(
+                context.getString(
+                    R.string.accessibility_screen_magnification_keyboard_touch_summary,
+                    meta,
+                    alt,
+                ),
+                1,
+                2,
+                3,
+                4,
+                5,
+            )
+        } else {
+            val stringBuilder = StringBuilder()
+            stringBuilder.append(
+                MessageFormat.format(
+                    context.getString(
+                        R.string
+                            .accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary,
+                        meta,
+                        alt,
+                    ),
+                    1,
+                    2,
+                    3,
+                    4,
+                )
+            )
+
+            stringBuilder.append("<br/><br/>")
+            stringBuilder.append(getTouchOnlySummary(context))
+            return stringBuilder.toString()
+        }
     }
 
     companion object {

@@ -39,14 +39,14 @@ abstract class AppListScreen :
         get() = R.string.menu_key_apps
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        if (context.preferenceScreenKey == bindingKey) {
-            observer = KeyedObserver<String?> { _, _ -> context.regeneratePreferenceHierarchy() }
+        if (isContainer(context)) {
+            observer = KeyedObserver { _, _ -> context.regeneratePreferenceHierarchy() }
             PackageObservable.get(context).addObserver(observer, HandlerExecutor.main)
         }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        if (context.preferenceScreenKey == bindingKey) {
+        if (isContainer(context)) {
             PackageObservable.get(context).removeObserver(observer)
         }
     }

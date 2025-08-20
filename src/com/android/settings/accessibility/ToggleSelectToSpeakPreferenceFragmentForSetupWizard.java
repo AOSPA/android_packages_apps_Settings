@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment;
+import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceShortcutPreference;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -41,7 +42,7 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
         extends A11yServicePreferenceFragment {
 
     private boolean mToggleSwitchWasInitiallyChecked;
-    @Nullable private String mMainActionPrefKey;
+    private final String mMainActionPrefKey = A11yServiceShortcutPreference.KEY;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -63,15 +64,8 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
                     });
         }
 
-        ToggleShortcutPreferenceController prefController = getShortcutPreferenceController();
-        if (prefController != null) {
-            mMainActionPrefKey = prefController.getPreferenceKey();
-            ShortcutPreference preference = findPreference(mMainActionPrefKey);
-            mToggleSwitchWasInitiallyChecked = preference.isChecked();
-        } else {
-            mMainActionPrefKey = null;
-            mToggleSwitchWasInitiallyChecked = false;
-        }
+        ShortcutPreference preference = findPreference(mMainActionPrefKey);
+        mToggleSwitchWasInitiallyChecked = preference.isChecked();
     }
 
     @NonNull
@@ -102,11 +96,6 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
     @Override
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
-        if (mMainActionPrefKey == null) {
-            super.onStop();
-            return;
-        }
-
         ShortcutPreference preference = findPreference(mMainActionPrefKey);
         if (preference.isChecked() != mToggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(getContext(),

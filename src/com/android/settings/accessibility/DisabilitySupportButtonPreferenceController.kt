@@ -18,29 +18,20 @@ package com.android.settings.accessibility
 
 import android.content.Context
 import android.content.Intent
-import android.text.TextUtils
 import androidx.core.net.toUri
 import androidx.preference.PreferenceScreen
+import com.android.settings.R
 import com.android.settings.accessibility.Flags.enableDisabilitySupport
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.widget.ButtonPreference
 
 /** Controller for managing the display and behavior of a disability support button preference. */
 class DisabilitySupportButtonPreferenceController(context: Context, prefKey: String) :
     BasePreferenceController(context, prefKey) {
+    private val url = context.getString(R.string.accessibility_disability_support_url)
 
     override fun getAvailabilityStatus(): Int =
-        if (
-            enableDisabilitySupport() &&
-                !TextUtils.isEmpty(
-                    FeatureFactory.featureFactory.accessibilityDisabilitySupportFeatureProvider.url
-                )
-        ) {
-            AVAILABLE
-        } else {
-            CONDITIONALLY_UNAVAILABLE
-        }
+        if (enableDisabilitySupport() && url.isNotEmpty()) AVAILABLE else CONDITIONALLY_UNAVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
@@ -49,10 +40,7 @@ class DisabilitySupportButtonPreferenceController(context: Context, prefKey: Str
             val browserIntent =
                 Intent(Intent.ACTION_VIEW).apply {
                     addCategory(Intent.CATEGORY_BROWSABLE)
-                    data =
-                        FeatureFactory.featureFactory.accessibilityDisabilitySupportFeatureProvider
-                            .url
-                            .toUri()
+                    data = url.toUri()
                 }
             view.context.startActivity(browserIntent)
         }

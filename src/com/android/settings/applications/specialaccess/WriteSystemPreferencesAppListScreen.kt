@@ -53,7 +53,7 @@ open class WriteSystemPreferencesAppListScreen : SpecialAccessAppListScreen() {
         WriteSystemPreferencesAppDetailScreen.parameters(context, hierarchyType)
 
     companion object {
-        const val KEY = "sa_wsp_app_list"
+        const val KEY = "special_access_write_system_preferences_app_list"
     }
 }
 

@@ -94,13 +94,13 @@ open class DataUsageAppDetailScreen(context: Context, override val arguments: Bu
             }
         keyedObserver = observer
         val executor = HandlerExecutor.main
-        if (context.preferenceScreenKey == bindingKey) {
+        if (isContainer(context)) {
             PackageObservable.get(context).addObserver(packageName, observer, executor)
         }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        if (context.preferenceScreenKey == bindingKey) {
+        if (isContainer(context)) {
             PackageObservable.get(context).removeObserver(packageName, keyedObserver)
         }
     }

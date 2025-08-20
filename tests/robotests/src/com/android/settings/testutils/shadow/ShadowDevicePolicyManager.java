@@ -16,14 +16,12 @@
 
 package com.android.settings.testutils.shadow;
 
-import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_DEFAULT;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
 import static android.os.Build.VERSION_CODES.O;
 import static android.os.Build.VERSION_CODES.Q;
 
 import android.annotation.UserIdInt;
 import android.app.admin.DevicePolicyManager;
-import android.app.admin.DevicePolicyManager.DeviceOwnerType;
 import android.app.admin.IDevicePolicyManager;
 import android.app.admin.ManagedSubscriptionsPolicy;
 import android.app.admin.PasswordMetrics;
@@ -50,7 +48,7 @@ import java.util.Set;
 public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDevicePolicyManager {
 
     private final Map<Integer, Long> mProfileTimeouts = new HashMap<>();
-    private final Map<String, Integer> mDeviceOwnerTypes = new HashMap<>();
+    private boolean mIsFinancedDevice;
     private Map<Integer, CharSequence> mSupportMessagesMap = new HashMap<>();
     private boolean mIsAdminActiveAsUser = false;
     private ComponentName mProfileOwner;
@@ -115,18 +113,16 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
         mDeviceOwnerComponentName = admin;
     }
 
-    public void setDeviceOwnerType(@NonNull ComponentName admin,
-            @DeviceOwnerType int deviceOwnerType) {
-        mDeviceOwnerTypes.put(admin.getPackageName(), deviceOwnerType);
+    public void setIsFinancedDevice(boolean financed) {
+        mIsFinancedDevice = financed;
     }
 
     public void setManagedSubscriptionsPolicy(ManagedSubscriptionsPolicy policy) {
         mManagedSubscriptionsPolicy = policy;
     }
 
-    @DeviceOwnerType
-    public int getDeviceOwnerType(@NonNull ComponentName admin) {
-        return mDeviceOwnerTypes.getOrDefault(admin.getPackageName(), DEVICE_OWNER_TYPE_DEFAULT);
+    public boolean isFinancedDevice() {
+        return mIsFinancedDevice;
     }
 
     @Implementation

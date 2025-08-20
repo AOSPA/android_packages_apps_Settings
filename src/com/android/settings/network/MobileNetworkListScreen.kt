@@ -177,6 +177,9 @@ open class MobileNetworkListScreen(context: Context) :
 
     override fun fragmentClass(): Class<out Fragment>? = MobileNetworkListFragment::class.java
 
+    // Please refer to this link (https://b.corp.google.com/issues/419310279#comment11).
+    // This hierarchical UI won't be shown while the MobileNetworkListFragment finished.
+    // Keep it for the external apps may retrieve it through the Setting Graph.
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +MobileDataPreference()

@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_DELETE_PIN
 import android.app.supervision.SupervisionManager
 import android.content.ComponentName
 import android.content.Context
@@ -37,10 +38,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.testutils.MetricsRule
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
@@ -60,7 +63,7 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowAlertDialogCompat::class])
 class SupervisionDeletePinPreferenceTest {
-
+    @get:Rule val metricsRule = MetricsRule()
     private val appContext: Context = ApplicationProvider.getApplicationContext()
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
@@ -195,6 +198,9 @@ class SupervisionDeletePinPreferenceTest {
 
         assertThat(backPressedCalled).isTrue()
         assertThat(startedIntent).isNull()
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(lifeCycleContext, ACTION_SUPERVISION_DELETE_PIN)
     }
 
     @Test

@@ -31,7 +31,7 @@ class BubblesStateSource : DeviceStateSource {
     override suspend fun get(
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
-    ): PerScreenDeviceStates {
+    ): List<PerScreenDeviceStates> {
         val isEnabled =
             Settings.Global.getInt(
                 context.contentResolver,
@@ -46,6 +46,8 @@ class BubblesStateSource : DeviceStateSource {
                 jsonValue = isEnabled.toString(),
             )
 
-        return PerScreenDeviceStates(description = "Bubbles", deviceStateItems = listOf(item))
+        return listOf(
+            PerScreenDeviceStates(description = "Bubbles", deviceStateItems = listOf(item))
+        )
     }
 }

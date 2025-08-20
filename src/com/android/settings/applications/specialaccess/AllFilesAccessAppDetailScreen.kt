@@ -94,7 +94,7 @@ open class AllFilesAccessAppDetailScreen(context: Context, arguments: Bundle) :
         }
 
     companion object {
-        const val KEY = "sa_afa_app_detail"
+        const val KEY = "special_access_all_files_access_app_detail"
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 
