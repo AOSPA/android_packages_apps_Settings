@@ -15,15 +15,36 @@
  */
 package com.android.settings.supervision
 
+import android.app.Activity
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_FORGOT_PIN
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.VisibleForTesting
+import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.preference.PreferenceBinding
 
-class SupervisionPinRecoveryPreference : PreferenceMetadata, PreferenceAvailabilityProvider {
+class SupervisionPinRecoveryPreference :
+    PreferenceMetadata,
+    PreferenceAvailabilityProvider,
+    PreferenceLifecycleProvider,
+    PreferenceBinding,
+    Preference.OnPreferenceClickListener {
+
+    private lateinit var lifeCycleContext: PreferenceLifecycleContext
+    private lateinit var pinRecoveryLauncher: ActivityResultLauncher<Intent>
+
     override val key: String
         get() = KEY
 
@@ -41,9 +62,45 @@ class SupervisionPinRecoveryPreference : PreferenceMetadata, PreferenceAvailabil
             ?.getSupervisionRecoveryInfo() != null
     }
 
-    override fun intent(context: Context): Intent? =
-        Intent(context, SupervisionPinRecoveryActivity::class.java)
-            .setAction(SupervisionPinRecoveryActivity.ACTION_RECOVERY)
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        lifeCycleContext = context
+        pinRecoveryLauncher =
+            context.registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult(),
+                ::onRecoveryFlowComplete,
+            )
+    }
+
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+        preference.onPreferenceClickListener = this
+    }
+
+    @VisibleForTesting
+    fun onRecoveryFlowComplete(result: ActivityResult) {
+        if (
+            Flags.enableSupervisionPinSnackbarsToastMessage() &&
+                result.resultCode == Activity.RESULT_OK
+        ) {
+            Toast.makeText(
+                    lifeCycleContext,
+                    lifeCycleContext.getString(R.string.supervision_pin_updated),
+                    Toast.LENGTH_SHORT,
+                )
+                .show()
+        }
+    }
+
+    override fun onPreferenceClick(preference: Preference): Boolean {
+        val intent =
+            Intent(preference.context, SupervisionPinRecoveryActivity::class.java).apply {
+                action = SupervisionPinRecoveryActivity.ACTION_RECOVERY
+            }
+        val metricsFeatureProvider = FeatureFactory.featureFactory.metricsFeatureProvider
+        metricsFeatureProvider.action(preference.context, ACTION_SUPERVISION_FORGOT_PIN)
+        pinRecoveryLauncher.launch(intent)
+        return true
+    }
 
     companion object {
         const val KEY = "supervision_pin_recovery"
