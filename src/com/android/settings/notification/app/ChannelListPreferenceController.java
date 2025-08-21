@@ -41,7 +41,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.flags.Flags;
 import com.android.settings.notification.FutureUtil;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.PrimarySwitchPreference;
@@ -125,13 +124,10 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
             @Nullable NotificationChannel channel, @Nullable NotificationChannelGroup group,
             Drawable conversationDrawable, ShortcutInfo conversationInfo,
             RestrictedLockUtils.EnforcedAdmin admin, List<String> preferenceFilter) {
-        if (Flags.notificationsRememberChannelListState()) {
-            // If we previously toggled "Show All", don't lose that on the next onResume()
-            if (mAppRow != null && mAppRow.showAllChannels) {
-                appRow.showAllChannels = true;
-            }
+        // If we previously toggled "Show All", don't lose that on the next onResume()
+        if (mAppRow != null && mAppRow.showAllChannels) {
+            appRow.showAllChannels = true;
         }
-
         super.onResume(appRow, channel, group, conversationDrawable, conversationInfo, admin,
                 preferenceFilter);
     }
@@ -190,8 +186,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         Preference showMore = mPreference.findPreference(KEY_SHOW_MORE);
         if (!mAppRow.showAllChannels && mVisibleChannelCount != mChannelCount) {
             if (showMore == null) {
-                if (Flags.notificationsRememberChannelListState()
-                        && SettingsThemeHelper.isExpressiveTheme(mContext)) {
+                if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
                     ButtonPreference showMoreButton = new ButtonPreference(mContext);
                     showMoreButton.setButtonStyle(ButtonPreference.TYPE_TONAL,
                             ButtonPreference.SIZE_LARGE);

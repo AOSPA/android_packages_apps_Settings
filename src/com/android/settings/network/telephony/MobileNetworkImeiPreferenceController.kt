@@ -49,10 +49,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
-/**
- * Preference controller for "IMEI"
- */
+/** Preference controller for "IMEI" */
 class MobileNetworkImeiPreferenceController(context: Context, key: String) :
     TelephonyBasePreferenceController(context, key) {
 
@@ -77,20 +74,23 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
         this.fragment = fragment
         lazyViewModel = fragment.viewModels()
         mSubId = subId
-        mTelephonyManager = mContext.getSystemService(TelephonyManager::class.java)
-            ?.createForSubscriptionId(mSubId)!!
+        mTelephonyManager = 
+            mContext
+                .getSystemService(TelephonyManager::class.java)
+                ?.createForSubscriptionId(mSubId)!!
         simSlot = mTelephonyManager.slotIndex
         TelephonyUtils.connectExtTelephonyService(mContext)
     }
 
-    override fun getAvailabilityStatus(subId: Int): Int = when {
-        !Utils.isMobileDataCapable(mContext)
-            && !Utils.isVoiceCapable(mContext) -> UNSUPPORTED_ON_DEVICE
-        !mContext.userManager.isAdminUser -> DISABLED_FOR_USER
-        !Flags.isDualSimOnboardingEnabled()
-            || !SubscriptionManager.isValidSubscriptionId(subId) -> CONDITIONALLY_UNAVAILABLE
-        else -> AVAILABLE
-    }
+    override fun getAvailabilityStatus(subId: Int): Int =
+        when {
+            !Utils.isMobileDataCapable(mContext) && !Utils.isVoiceCapable(mContext) ->
+                UNSUPPORTED_ON_DEVICE
+            !mContext.userManager.isAdminUser -> DISABLED_FOR_USER
+            !Flags.isDualSimOnboardingEnabled() ||
+                !SubscriptionManager.isValidSubscriptionId(subId) -> CONDITIONALLY_UNAVAILABLE
+            else -> AVAILABLE
+        }
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
@@ -101,27 +101,23 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
         if (!this::lazyViewModel.isInitialized) {
             Log.e(
                 this.javaClass.simpleName,
-                "lateinit property lazyViewModel has not been initialized"
+                "lateinit property lazyViewModel has not been initialized",
             )
             return
         }
         val viewModel by lazyViewModel
         val coroutineScope = viewLifecycleOwner.lifecycleScope
 
-        viewModel.subscriptionInfoListFlow
-                .collectLatestWithLifecycle(viewLifecycleOwner) { subscriptionInfoList ->
-                    subscriptionInfoList
-                            .firstOrNull { subInfo -> subInfo.subscriptionId == mSubId }
-                            ?.let {
-                                coroutineScope.launch {
-                                    refreshData(it)
-                                }
-                            }
-                }
+        viewModel.subscriptionInfoListFlow.collectLatestWithLifecycle(viewLifecycleOwner) {
+            subscriptionInfoList ->
+            subscriptionInfoList
+                .firstOrNull { subInfo -> subInfo.subscriptionId == mSubId }
+                ?.let { coroutineScope.launch { refreshData(it) } }
+        }
     }
 
     @VisibleForTesting
-    suspend fun refreshData(subscription:SubscriptionInfo){
+    suspend fun refreshData(subscription: SubscriptionInfo) {
         withContext(Dispatchers.Default) {
             title = getTitle()
             imei = getImei()
@@ -130,7 +126,7 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
         refreshUi()
     }
 
-    private fun refreshUi(){
+    private fun refreshUi() {
         preference.title = title
         preference.summary = imei
     }
@@ -177,58 +173,25 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
         return imei
     }
 
+    /**
+     * As per GSMA specification TS37, below Primary IMEI requirements are mandatory to support
+     * TS37_2.2_REQ_5 TS37_2.2_REQ_8 (Attached the document has description about this test cases)
+     *
+     * b/434700998, using the lower IMEI as the primary IMEI. IMEI 1 = primary IMEI i.e. lower IMEI
+     * IMEI 2 = non-primary IMEI
+     */
     private fun getTitleForGsmPhone(): String {
-        return mContext.getString(
-            if (isPrimaryImei()) R.string.imei_primary else R.string.status_imei)
+        return mContext.getString(R.string.status_imei)
     }
 
     private fun getTitleForCdmaPhone(): String {
-        return mContext.getString(
-            if (isPrimaryImei()) R.string.meid_primary else R.string.status_meid_number)
+        return mContext.getString(R.string.status_meid_number)
     }
 
     private fun getTitle(): String {
         val phoneType = getPhoneType()
         return if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) getTitleForCdmaPhone()
-                else getTitleForGsmPhone()
-    }
-
-    /**
-     * As per GSMA specification TS37, below Primary IMEI requirements are mandatory to support
-     *
-     * TS37_2.2_REQ_5
-     * TS37_2.2_REQ_8 (Attached the document has description about this test cases)
-     */
-    protected fun isPrimaryImei(): Boolean {
-        val imei = getImei()
-        var primaryImei = String()
-
-        try {
-            if (isMinHalVersion2_1) {
-                primaryImei = mTelephonyManager.primaryImei
-                return primaryImei != null && primaryImei == imei && isMultiSim()
-            } else {
-                if (qtiImeiInfo == null) {
-                    qtiImeiInfo = TelephonyUtils.getImeiInfo()
-                }
-                if (qtiImeiInfo != null) {
-                    for (i in qtiImeiInfo!!.indices) {
-                        if (qtiImeiInfo!![i] != null
-                                && qtiImeiInfo!![i]!!.slotId == simSlot
-                                && qtiImeiInfo!![i]!!.imeiType == QtiImeiInfo.IMEI_TYPE_PRIMARY) {
-                            return true
-                        }
-                    }
-                }
-            }
-        } catch (exception: Exception) {
-            Log.e(TAG, "PrimaryImei not available. $exception")
-        }
-        return false
-    }
-
-    private fun isMultiSim(): Boolean {
-        return mTelephonyManager.activeModemCount > 1
+        else getTitleForGsmPhone()
     }
 
     private fun makeRadioVersion(major: Int, minor: Int): Int {

@@ -167,6 +167,7 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
                 return true;
             });
             pref.setNumber(i + 1);
+            pref.setShowIconsInPopupMenu(true);
             mPreferences.put(localeInfo.getId(), pref);
         }
     }

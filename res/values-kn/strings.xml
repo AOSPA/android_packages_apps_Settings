@@ -181,7 +181,7 @@
     <string name="proxy_error_empty_port" msgid="4250295137005082992">"ನೀವು ಪೋರ್ಟ್‌ ಕ್ಷೇತ್ರವನ್ನು ಪೂರ್ಣಗೊಳಿಸುವ ಅಗತ್ಯವಿದೆ."</string>
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"ಹೋಸ್ಟ್ ಕ್ಷೇತ್ರವು ಖಾಲಿ ಇದ್ದಲ್ಲಿ, ಪೋರ್ಟ್‌ ಕ್ಷೇತ್ರವು ಕೂಡ ಖಾಲಿ ಇರಬೇಕು."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"ನೀವು ಟೈಪ್‌ ಮಾಡಿದ ಪೋರ್ಟ್ ಮಾನ್ಯವಾಗಿಲ್ಲ."</string>
-    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"ಬ್ರೌಸರ್, HTTP ಪ್ರಾಕ್ಸಿ ಬಳಸುತ್ತದೆ ಮತ್ತು ಇತರೆ ಆ್ಯಪ್‌ಗಳು ಇದನ್ನು ಬಳಸದಿರಬಹುದು."</string>
+    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"HTTP ಪ್ರಾಕ್ಸಿಯನ್ನು ಬ್ರೌಸರ್ ಬಳಸುತ್ತದೆ, ಇತರೆ ಆ್ಯಪ್‌ಗಳು ಬಳಸದಿರಬಹುದು."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"PAC URL: "</string>
     <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"ಹೋಸ್ಟ್‌ಹೆಸರನ್ನು ಪಿಂಗ್ ಮಾಡಿ(www.google.com) IPv4:"</string>
     <string name="radio_info_http_client_test" msgid="5673975677271544085">"HTTP ಕ್ಲೈಂಟ್ ಪರೀಕ್ಷೆ:"</string>
@@ -999,8 +999,7 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"ನಿಮ್ಮ ಮೌಸ್ ಅನ್ನು ಡಿಸ್‌ಪ್ಲೇಗಳ ನಡುವೆ ಸರಿಸಿ"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"ಬಾಹ್ಯ ಡಿಸ್‌ಪ್ಲೇ ಬಳಸಿ"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ಡಿಸ್‌ಪ್ಲೇ ರೆಸಲ್ಯೂಷನ್"</string>
-    <!-- no translation found for external_display_connection_preference (3337612335495542718) -->
-    <skip />
+    <string name="external_display_connection_preference" msgid="3337612335495542718">"ಡೀಫಾಲ್ಟ್ ಕನೆಕ್ಷನ್ ಬಿಹೇವಿಯರ್"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"ಪ್ರತ್ಯೇಕ ಡಿಸ್‌ಪ್ಲೇ ಆಗಿ ಬಳಸಿ"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"ಮಿರರ್ ಬಿಲ್ಟ್-ಇನ್ ಡಿಸ್‌ಪ್ಲೇ"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"ಕನೆಕ್ಷನ್ ಡೈಲಾಗ್ ಅನ್ನು ತೋರಿಸಿ"</string>
@@ -1108,7 +1107,7 @@
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID ನಮೂದಿಸಿ"</string>
     <string name="wifi_security" msgid="9095934643631406913">"ಭದ್ರತೆ"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"ಮರೆಮಾಡಲಾಗಿರುವ ನೆಟ್‌ವರ್ಕ್"</string>
-    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"ನಿಮ್ಮ ನೆಟ್‌ವರ್ಕ್ ID ಯನ್ನು ರೂಟರ್ ಪ್ರಸಾರ ಮಾಡದಿದ್ದಲ್ಲಿ ಆದರೆ ಭವಿಷ್ಯದಲ್ಲಿ ನೀವು ಅದಕ್ಕೆ ಸಂಪರ್ಕಿಸಲು ಬಯಸಿದರೆ, ನೀವು ನೆಟ್‌ವರ್ಕ್ ಅನ್ನು ಮರೆಮಾಡಲಾಗಿರುವುದು ಎಂದು ಹೊಂದಿಸಬಹುದು.\n\nನಿಮ್ಮ ಫೋನ್ ನಿಯಮಿತವಾಗಿ ನೆಟ್ವರ್ಕ್ ಅನ್ನು ಹುಡುಕಲು ಸಿಗ್ನಲ್ ಅನ್ನು ಪ್ರಸಾರ ಮಾಡುವುದರಿಂದ ಭದ್ರತಾ ಅಪಾಯ ಎದುರಾಗಬಹುದು.\n\nನೆಟ್‌ವರ್ಕ್‌ ಅನ್ನು ಮರೆಮಾಡಿದ ಕೂಡಲೇ ರೂಟರ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಬದಲಾಗುವುದಿಲ್ಲ."</string>
+    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"ನಿಮ್ಮ ರೂಟರ್ ನೆಟ್‌ವರ್ಕ್ ID ಯನ್ನು ರೂಟರ್ ಬ್ರಾಡ್‍ಕಾಸ್ಟ್ ಮಾಡದಿದ್ದರೂ ಭವಿಷ್ಯದಲ್ಲಿ ನೀವು ಅದಕ್ಕೆ ಕನೆಕ್ಟ್ ಮಾಡಲು ಬಯಸಿದರೆ, ನೀವು ನೆಟ್‌ವರ್ಕ್ ಅನ್ನು ಮರೆಮಾಡಲಾಗಿರುವುದು ಎಂದು ಸೆಟ್ ಮಾಡಬಹುದು.\n\nನಿಮ್ಮ ಫೋನ್ ನಿಯಮಿತವಾಗಿ ನೆಟ್‍ವರ್ಕ್ ಅನ್ನು ಹುಡುಕಲು ಸಿಗ್ನಲ್ ಅನ್ನು ಬ್ರಾಡ್‍ಕಾಸ್ಟ್ ಮಾಡುವುದರಿಂದ ಭದ್ರತಾ ಅಪಾಯ ಎದುರಾಗಬಹುದು.\n\nನೆಟ್‌ವರ್ಕ್‌ ಅನ್ನು ಮರೆಮಾಡಲಾಗಿರುವುದು ಎಂದು ಸೆಟ್ ಮಾಡಿದ ಮಾತ್ರಕ್ಕೆ ನಿಮ್ಮ ರೂಟರ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಬದಲಾಗುವುದಿಲ್ಲ."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"ಸಿಗ್ನಲ್ ಸಾಮರ್ಥ್ಯ"</string>
     <string name="wifi_status" msgid="5349199188871002778">"ಸ್ಥಿತಿ"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"ಟ್ರಾನ್ಸ್‌ಮಿಟ್ ಲಿಂಕ್ ವೇಗ"</string>
@@ -1431,7 +1430,7 @@
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"ಯಾವುದೂ ಇಲ್ಲ"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"ಕಸ್ಟಮ್ ಸಮಯಕ್ಕೆ ಆನ್ ಆಗುತ್ತದೆ"</string>
     <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"ಸೂರ್ಯಾಸ್ತದಿಂದ ಸೂರ್ಯೋದಯದವರೆಗೂ ಆನ್‌ ಆಗಿರುತ್ತದೆ"</string>
-    <string name="night_display_start_time_title" msgid="2611541851596977786">"ಪ್ರಾರಂಭದ ಸಮಯ"</string>
+    <string name="night_display_start_time_title" msgid="2611541851596977786">"ಪ್ರಾರಂಭ ಸಮಯ"</string>
     <string name="night_display_end_time_title" msgid="5243112480391192111">"ಮುಕ್ತಾಯ ಸಮಯ"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"ತೀಕ್ಷ್ಣತೆ"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"ಎಂದಿಗೂ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆನ್ ಆಗುವುದಿಲ್ಲ"</string>
@@ -1501,6 +1500,12 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"ಕಡಿಮೆ ಬೆಳಕಿನ ಮೋಡ್"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"ಎಬ್ಬಿಸಲು ಎತ್ತಿರಿ"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"ವೈರ್‌ಲೆಸ್ ಚಾರ್ಜಿಂಗ್‍ಗೆ ಸೀಮಿತಗೊಳಿಸಿ"</string>
+    <!-- no translation found for blur_switch (1391073945502754948) -->
+    <skip />
+    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
+    <skip />
+    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
+    <skip />
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"ಕಡಿಮೆ ಬೆಳಕಿನ ಮೋಡ್ ಅನ್ನು ಬಳಸಿ"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"ಕಡಿಮೆ ಬೆಳಕಿನ ಮೋಡ್‌ನಲ್ಲಿ ಏನನ್ನು ತೋರಿಸಬೇಕು ಎಂಬುದನ್ನು ಆರಿಸಿ"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"ಸ್ಕ್ರೀನ್ ಆಫ್ ಆಗಿದೆ"</string>
@@ -2175,7 +2180,7 @@
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"ವೇಗ"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"ಕಡಿಮೆ ಮಾಡಿ"</string>
     <string name="mouse_keys_seek_bar_increase_button_description" msgid="2721662400858172203">"ಹೆಚ್ಚಿಸಿ"</string>
-    <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"ಹಿಮ್ಮುಖ ಸ್ಕ್ರಾಲ್ ಮಾಡುವಿಕೆ"</string>
+    <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"ರಿವರ್ಸ್ ಸ್ಕ್ರಾಲಿಂಗ್"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"ಪ್ರಾಥಮಿಕ ಕೀಗಳನ್ನು ಬಳಸಿ"</string>
     <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"ಸಂಖ್ಯಾ ಕೀಪ್ಯಾಡ್ ಬದಲಿಗೆ ಅಕ್ಷರಗಳು ಮತ್ತು ಸಂಖ್ಯೆಗಳೊಂದಿಗೆ ಕೀಬೋರ್ಡ್ ಅನ್ನು ನಿಯಂತ್ರಿಸಿ"</string>
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ರೀಸೆಟ್ ಮಾಡಿ"</string>
@@ -2219,7 +2224,7 @@
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"ವಸ್ತು ಸರಿಸಲು ಟಚ್‌ಪ್ಯಾಡ್‌ನಲ್ಲಿ ಬೆರಳನ್ನು ಡಬಲ್-ಟ್ಯಾಪ್ ಮಾಡಿ, ಎಳೆಯಿರಿ"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"ಟಚ್‌ಪ್ಯಾಡ್ ಗೆಸ್ಚರ್‌ಗಳು"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"ವೈಯಕ್ತಿಕ ಟಚ್‌ಪ್ಯಾಡ್ ನ್ಯಾವಿಗೇಷನ್ ಗೆಸ್ಚರ್‌ಗಳನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ"</string>
-    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"ಹಿಮ್ಮುಖ ಸ್ಕ್ರಾಲ್ ಮಾಡುವಿಕೆ"</string>
+    <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"ರಿವರ್ಸ್ ಸ್ಕ್ರಾಲಿಂಗ್"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"ನೀವು ಕೆಳಗೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಿದಾಗ ವಿಷಯವು ಮೇಲಕ್ಕೆ ಸರಿಯುತ್ತದೆ"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"ಕೆಳಗಿನ-ಬಲಭಾಗದ ಕ್ಲಿಕ್"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"ಇನ್ನಷ್ಟು ಆಯ್ಕೆಗೆ ಟಚ್‌ಪ್ಯಾಡ್‌ನ ಕೆಳ ಬಲ ಮೂಲೆಯನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ"</string>
@@ -2493,7 +2498,12 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"ಝೂಮ್ ಮಾಡಲು ಒಂದು ಬಟನ್ ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"ವಿಷಯವು ದೊಡ್ಡದಾಗಿ ಕಾಣಿಸಲು ಸ್ಕ್ರೀನ್ ಮೇಲೆ ತ್ವರಿತವಾಗಿ ಝೂಮ್ ಇನ್ ಮಾಡಿ"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;ಝೂಮ್ ಇನ್ ಮಾಡಲು:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ಹಿಗ್ಗಿಸುವಿಕೆಯನ್ನು ಪ್ರಾರಂಭಿಸಲು ಶಾರ್ಟ್‌ಕಟ್ ಬಳಸಿ&lt;br/&gt; {1,number,integer}. ಸ್ಕ್ರೀನ್ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ&lt;br/&gt; {2,number,integer}. ಸ್ಕ್ರೀನ್‌ನ ಮೇಲೆ ಸರಿಸಲು 2 ಬೆರಳುಗಳಿಂದ ಡ್ರ್ಯಾಗ್ ಮಾಡಿ&lt;br/&gt; {3,number,integer}. ಝೂಮ್ ಹೊಂದಿಸಲು 2 ಬೆರಳುಗಳಿಂದ ಪಿಂಚ್ ಮಾಡಿ&lt;br/&gt; {4,number,integer}. ಹಿಗ್ಗಿಸುವಿಕೆಯನ್ನು ನಿಲ್ಲಿಸಲು ಶಾರ್ಟ್‌ಕಟ್ ಬಳಸಿ&lt;br/&gt;&lt;br/&gt; &lt;b&gt;ತಾತ್ಕಾಲಿಕವಾಗಿ ಝೂಮ್ ಇನ್ ಮಾಡಲು:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ನಿಮ್ಮ ಹಿಗ್ಗಿಸುವಿಕೆಯ ವಿಧಾನವು ಫುಲ್‌ಸ್ಕ್ರೀನ್‌ಗೆ ಸೆಟ್ ಆಗಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ&lt;br/&gt; {1,number,integer}. ಹಿಗ್ಗಿಸುವಿಕೆಯನ್ನು ಪ್ರಾರಂಭಿಸಲು ಶಾರ್ಟ್‌ಕಟ್ ಬಳಸಿ&lt;br/&gt; {2,number,integer}. ಸ್ಕ್ರೀನ್‌ನ ಯಾವುದೇ ಭಾಗದಲ್ಲಿ ಸ್ಪರ್ಶಿಸಿ ಮತ್ತು ಒತ್ತಿಹಿಡಿಯಿರಿ&lt;br/&gt; {3,number,integer}. ಸ್ಕ್ರೀನ್‌ನ ಮೇಲೆ ಸರಿಸಲು ಬೆರಳನ್ನು ಡ್ರ್ಯಾಗ್ ಮಾಡಿ&lt;br/&gt; {4,number,integer}. ಹಿಗ್ಗಿಸುವಿಕೆಯನ್ನು ನಿಲ್ಲಿಸಲು ಬೆರಳನ್ನು ಮೇಲಕ್ಕೆತ್ತಿ"</string>
-    <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;ಕೀಬೋರ್ಡ್ ಮೂಲಕ ಝೂಮ್ ಮಾಡಲು:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ಹಿಗ್ಗಿಸುವಿಕೆಯನ್ನು ಪ್ರಾರಂಭಿಸಲು ಶಾರ್ಟ್‌ಕಟ್ ಬಳಸಿ&lt;br/&gt; {1,number,integer}. &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; ಮತ್ತು &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; ಒತ್ತಿ ಹಿಡಿದುಕೊಳ್ಳಿ ಮತ್ತು ಝೂಮ್ ಇನ್ ಅಥವಾ ಔಟ್ ಮಾಡಲು + ಅಥವಾ - ಒತ್ತಿರಿ&lt;br/&gt; {2,number,integer}. &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; ಮತ್ತು &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; ಒತ್ತಿ ಹಿಡಿದುಕೊಳ್ಳಿ ಹಾಗೂ ಸ್ಕ್ರೀನ್ ಸುತ್ತಲೂ ಚಲಿಸಲು ಬಾಣದ ಕೀಗಳನ್ನು ಒತ್ತಿರಿ&lt;br/&gt; {3,number,integer}. ಹಿಗ್ಗಿಸುವಿಕೆಯನ್ನು ನಿಲ್ಲಿಸಲು ಶಾರ್ಟ್‌ಕಟ್ ಅನ್ನು ಬಳಸಿ"</string>
+    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
+    <skip />
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;ಝೂಮ್ ಇನ್ ಮಾಡಲು:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ಹಿಗ್ಗಿಸುವಿಕೆಯನ್ನು ಪ್ರಾರಂಭಿಸಲು ಶಾರ್ಟ್‌ಕಟ್ ಬಳಸಿ&lt;br/&gt; {1,number,integer}. ಸ್ಕ್ರೀನ್ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ&lt;br/&gt; {2,number,integer}. ಸ್ಕ್ರೀನ್‌ನ ಮೇಲೆ ಸರಿಸಲು 2 ಬೆರಳುಗಳಿಂದ ಡ್ರ್ಯಾಗ್ ಮಾಡಿ&lt;br/&gt; {3,number,integer}. ಝೂಮ್ ಹೊಂದಿಸಲು 2 ಬೆರಳುಗಳಿಂದ ಪಿಂಚ್ ಮಾಡಿ&lt;br/&gt; {4,number,integer}. ಹಿಗ್ಗಿಸುವಿಕೆಯನ್ನು ನಿಲ್ಲಿಸಲು ಶಾರ್ಟ್‌ಕಟ್ ಬಳಸಿ&lt;br/&gt;&lt;br/&gt; ನೀವು ತಾತ್ಕಾಲಿಕವಾಗಿ ಝೂಮ್‌ ಇನ್‌ ಹಾಗೂ ಇನ್ನಷ್ಟು ಮಾಡಬಹುದು."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;ಝೂಮ್ ಇನ್ ಮಾಡಲು:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ಹಿಗ್ಗಿಸುವಿಕೆಯನ್ನು ಪ್ರಾರಂಭಿಸಲು ಶಾರ್ಟ್‌ಕಟ್ ಬಳಸಿ&lt;br/&gt; {1,number,integer}. ಸ್ಕ್ರೀನ್ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ&lt;br/&gt; {2,number,integer}. ಸ್ಕ್ರೀನ್‌ನ ಮೇಲೆ ಸರಿಸಲು 1 ಅಥವಾ 2 ಬೆರಳುಗಳಿಂದ ಡ್ರ್ಯಾಗ್ ಮಾಡಿ&lt;br/&gt; {3,number,integer}. ಝೂಮ್ ಹೊಂದಿಸಲು 2 ಬೆರಳುಗಳಿಂದ ಪಿಂಚ್ ಮಾಡಿ&lt;br/&gt; {4,number,integer}. ಹಿಗ್ಗಿಸುವಿಕೆಯನ್ನು ನಿಲ್ಲಿಸಲು ಶಾರ್ಟ್‌ಕಟ್ ಬಳಸಿ&lt;br/&gt;&lt;br/&gt; ನೀವು ತಾತ್ಕಾಲಿಕವಾಗಿ ಝೂಮ್‌ ಇನ್‌ ಹಾಗೂ ಇನ್ನಷ್ಟು ಮಾಡಬಹುದು."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"ಹಿಗ್ಗಿಸುವಿಕೆ ಅನ್ನು ಆನ್ ಮಾಡಿದಾಗ, ನಿಮ್ಮ ಪರದೆಯಲ್ಲಿ ನೀವು ಝೂಮ್‌ ಇನ್‌ ಮಾಡಬಹುದು.\n\n"<b>"ಝೂಮ್‌ ಮಾಡಲು"</b>", ಹಿಗ್ಗಿಸುವಿಕೆ ಅನ್ನು ಪ್ರಾರಂಭಿಸಿ, ನಂತರ ಪರದೆಯ ಮೇಲೆ ಎಲ್ಲಿಯಾದರೂ ಟ್ಯಾಪ್ ಮಾಡಿ.\n"<ul><li>"ಸ್ಕ್ರಾಲ್ ಮಾಡಲು 2 ಅಥವಾ ಹೆಚ್ಚು ಬೆರಳುಗಳನ್ನು ಡ್ರ್ಯಾಗ್ ಮಾಡಿ"</li>\n<li>"ಝೂಮ್ ಹೊಂದಿಸಲು, 2 ಅಥವಾ ಹೆಚ್ಚು ಬೆರಳುಗಳಿಂದ ಪಿಂಚ್ ಮಾಡಿ"</li></ul>\n\n<b>"ತಾತ್ಕಾಲಿಕವಾಗಿ ಝೂಮ್ ಮಾಡಲು"</b>", ಮ್ಯಾಗ್ನಿಫಿಕೇಶನ್ ಅನ್ನು ಪ್ರಾಂಭಿಸಿ, ನಂತರ ಪರದೆಯ ಮೇಲೆ ಎಲ್ಲಾದರೂ ಸ್ಪರ್ಶಿಸಿ, ಒತ್ತಿಹಿಡಿಯಿರಿ.\n"<ul><li>"ಪರದೆಯಲ್ಲಿ ಅತ್ತಿತ್ತ ಸರಿಸಲು, ಡ್ರ್ಯಾಗ್ ಮಾಡಿ"</li>\n<li>"ಝೂಮ್ ಔಟ್ ಮಾಡಲು ಬೆರಳನ್ನು ಎತ್ತಿ"</li></ul>\n\n"ನೀವು ಕೀಬೋರ್ಡ್ ಅಥವಾ ನ್ಯಾವಿಗೇಶನ್ ಬಾರ್‌ನಲ್ಲಿ ಝೂಮ್ ಇನ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
@@ -2584,6 +2594,8 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"ವಿಸ್ತೃತಗೊಳಿಸಿರುವುದು"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"ವಿಸ್ತೃತಗೊಳಿಸಲಾದ ಡಾರ್ಕ್ ಥೀಮ್"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"ಸುಧಾರಿತ ಆ್ಯಕ್ಸೆಸಿಬಿಲಿಟಿಗಾಗಿ ಹೆಚ್ಚಿನ ಆ್ಯಪ್‌ಗಳಿಗೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಡಾರ್ಕ್ ಥೀಮ್ ಅನ್ನು ಅನ್ವಯಿಸುತ್ತದೆ"</string>
+    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ಅನಿಮೇಷನ್‌ಗಳನ್ನು ತೆಗೆದುಹಾಕಿ"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"ಸ್ಕ್ರೀನ್ ಮೇಲೆ ಚಲನೆಗಳನ್ನು ಕಡಿಮೆಮಾಡಿ"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"ಪಠ್ಯ ಕರ್ಸರ್ ಬ್ಲಿಂಕಿಂಗ್"</string>
@@ -3668,6 +3680,8 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"ಬ್ಯಾಟರಿ ಮಾಹಿತಿ, ಉತ್ಪಾದನಾ ದಿನಾಂಕ, ಸೈಕಲ್ ಎಣಿಕೆ, ಮೊದಲ ಬಳಕೆ"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"android ಭದ್ರತೆ ಪ್ಯಾಚ್ ಮಟ್ಟ, ಬೇಸ್‌ಬ್ಯಾಂಡ್ ಆವೃತ್ತಿ, ಕೆರ್ನಲ್ ಆವೃತ್ತಿ"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"ಥೀಮ್, ಲೈಟ್, ಗಾಢ, ಮೋಡ್, ಬೆಳಕಿನ ಸೂಕ್ಷ್ಮತೆ, ಫೋಟೊಫೋಬಿಯಾ, ಗಾಢವಾಗಿಸಿ, ಗಾಢವಾಗಿಸಿ, ಡಾರ್ಕ್ ಮೋಡ್, ಮೈಗ್ರೇನ್"</string>
+    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
+    <skip />
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"ಗಾಢವಾದ ಥೀಮ್"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"ದೋಷ"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"ಆಂಬಿಯೆಂಟ್ ಡಿಸ್‌ಪ್ಲೇ, ಲಾಕ್ ಸ್ಕ್ರೀನ್ ಡಿಸ್‌ಪ್ಲೇ"</string>
@@ -4832,14 +4846,10 @@
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"ಜೆಸ್ಚರ್ ನ್ಯಾವಿಗೇಶನ್"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"ಡೆಮೋ ಪ್ರಯತ್ನಿಸಿ ನೋಡಿ"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ಬಟನ್ ನ್ಯಾವಿಗೇಶನ್"</string>
-    <!-- no translation found for button_navigation_settings_order_title (4256756895101424865) -->
-    <skip />
-    <!-- no translation found for navbar_back_button (6386920156044420082) -->
-    <skip />
-    <!-- no translation found for navbar_home_button (951459586446869883) -->
-    <skip />
-    <!-- no translation found for navbar_recent_button (6005580570601162420) -->
-    <skip />
+    <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"ಬಟನ್ ಆರ್ಡರ್"</string>
+    <string name="navbar_back_button" msgid="6386920156044420082">"ಹಿಂದಕ್ಕೆ"</string>
+    <string name="navbar_home_button" msgid="951459586446869883">"ಹೋಮ್"</string>
+    <string name="navbar_recent_button" msgid="6005580570601162420">"ಇತ್ತೀಚಿನವು"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ಗೆಸ್ಚರ್ ನ್ಯಾವಿಗೇಶನ್, ಹಿಂಬದಿ ಸೂಕ್ಷ್ಮತೆ, ಹಿಂಬದಿ ಗೆಸ್ಚರ್"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"ನ್ಯಾವಿಗೇಶನ್, ಹೋಮ್ ಬಟನ್"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"ಒಂದು ಕೈ ಮೋಡ್‌"</string>
@@ -5958,16 +5968,18 @@
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"ನಿಮ್ಮ ಮನೆ ಅಥವಾ ಕಚೇರಿಯಂತಹ ನಂಬಿಕಾರ್ಹ ಸ್ಥಳಗಳಲ್ಲಿ ಫಿಂಗರ್ ಪ್ರಿಂಟ್ ಮತ್ತು ಫೇಸ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಬೆಂಬಲಿಸುವ ಎಲ್ಲಾ ಆ್ಯಪ್‌ಗಳಲ್ಲಿ ನಿಮ್ಮ ಗುರುತನ್ನು ರಕ್ಷಿಸಲಾಗಿದೆ ಎಂಬುದನ್ನು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ. ನಂಬಿಕಾರ್ಹ ಸ್ಥಳಗಳಲ್ಲಿ ಮಾತ್ರವಲ್ಲದೇ ಇತರೆಡೆಗಳಲ್ಲಿ ನಿಮ್ಮ ರಕ್ಷಣೆಯನ್ನು ವಿಸ್ತರಿಸಲು ನಿಮ್ಮ ವಾಚ್‌ನಲ್ಲಿ ಐಡೆಂಟಿಟಿ ಚೆಕ್ ಅನ್ನು ಬಳಸಿ."</string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"ಇತರ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"ಆಟೋಫಿಲ್, ನೋಟಿಫಿಕೇಶನ್‌ಗಳು ಮತ್ತು ಇನ್ನಷ್ಟು"</string>
-    <!-- no translation found for privacy_sources_title (7648842637181479352) -->
-    <skip />
-    <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
-    <skip />
-    <!-- no translation found for device_unlock_subpage_title (8619367783572270468) -->
-    <skip />
-    <!-- no translation found for lock_screen_title (4701994278040604018) -->
-    <skip />
+    <string name="privacy_sources_title" msgid="7648842637181479352">"ಗೌಪ್ಯತೆ ನಿಯಂತ್ರಣಗಳು"</string>
+    <string name="privacy_sources_summary" msgid="8795612902105833258">"ಅನುಮತಿಗಳು, ಕಂಟ್ರೋಲ್‌ಗಳು"</string>
+    <string name="device_unlock_subpage_title" msgid="8619367783572270468">"ಸಾಧನದ ಅನ್‌ಲಾಕ್"</string>
+    <string name="lock_screen_title" msgid="4701994278040604018">"ಸ್ಕ್ರೀನ್ ಲಾಕ್"</string>
     <!-- no translation found for location_settings (6833222354060094170) -->
     <skip />
     <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
+    <skip />
+    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
     <skip />
 </resources>

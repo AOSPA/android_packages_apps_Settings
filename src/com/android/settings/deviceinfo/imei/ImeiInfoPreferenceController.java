@@ -50,6 +50,10 @@ import com.android.settings.network.telephony.TelephonyUtils;
 
 import com.qti.extphone.QtiImeiInfo;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Controller that manages preference for single and multi sim devices.
  *
@@ -158,7 +162,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         multiSimPreference.setEnabled(true);
         multiSimPreference.setCopyingEnabled(true);
         category.addPreference(multiSimPreference);
-        multiSimPreference.setTitle(getTitleForCdmaPhone(slotId, false));
+        multiSimPreference.setTitle(getTitleForCdmaPhone(slotId));
         multiSimPreference.setSummary(getMeid(slotId));
     }
 
@@ -172,6 +176,18 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     }
 
     private CharSequence getSummary(int simSlot) {
+        List<String> imeiList = getImeiList();
+        if (imeiList.isEmpty()) {
+            return "";
+        }
+        String imei = imeiList.get(simSlot);
+        if (TextUtils.isEmpty(imei)) {
+            return "";
+        }
+        return imei;
+    }
+
+    private String getImeiBySlot(int simSlot) {
         final int phoneType = getPhoneType(simSlot);
         return phoneType == PHONE_TYPE_CDMA ? mTelephonyManager.getMeid(simSlot)
                 : getImei(simSlot);
@@ -179,6 +195,49 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     private String getMeid(int simSlot) {
         return mTelephonyManager.getMeid(simSlot);
+    }
+
+    private List<String> getImeiListBySlot() {
+        List<String> imeiListBySlot = new ArrayList<>();
+
+        for (int i = 0; i < mSlotSimStatus.size(); i++) {
+            String imeiItem = getImeiBySlot(i);
+            if (!TextUtils.isEmpty(imeiItem)) {
+                imeiListBySlot.add(imeiItem);
+            }
+        }
+        return imeiListBySlot;
+    }
+
+    private String getPrimaryImei() {
+        String primaryImei = "";
+        try {
+            primaryImei = mTelephonyManager.getPrimaryImei();
+        } catch (Exception exception) {
+            Log.i(TAG, "PrimaryImei not available. " + exception);
+        }
+        return primaryImei;
+    }
+
+    /**
+     * As per GSMA specification TS37, below Primary IMEI requirements are mandatory to support
+     * TS37_2.2_REQ_5
+     * TS37_2.2_REQ_8 (Attached the document has description about this test cases)
+     *
+     * b/434700998, using the lower IMEI as the primary IMEI.
+     * IMEI 1 = primary IMEI i.e. lower IMEI
+     * IMEI 2 = non-primary IMEI
+     */
+    private List<String> getImeiList() {
+        List<String> imeiList = getImeiListBySlot();
+        String primaryImei = getPrimaryImei();
+
+        if (!TextUtils.isEmpty(primaryImei)) {
+            imeiList.remove(primaryImei);
+            Collections.sort(imeiList);
+            imeiList.addFirst(primaryImei);
+        }
+        return imeiList;
     }
 
     @Override
@@ -220,7 +279,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             return;
         }
         if (preference.getKey().startsWith(DEFAULT_MEID_KEY)) {
-            preference.setTitle(getTitleForCdmaPhone(simSlot, false));
+            preference.setTitle(getTitleForCdmaPhone(simSlot));
             preference.setSummary(getMeid(simSlot));
             return;
         }
@@ -255,54 +314,22 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         return imei;
     }
 
-    private CharSequence getTitleForGsmPhone(int simSlot, boolean isPrimaryImei) {
-        int titleId = isPrimaryImei ? R.string.imei_multi_sim_primary : R.string.imei_multi_sim;
-        return isMultiSim() ? mContext.getString(titleId, simSlot + 1)
+    private CharSequence getTitleForGsmPhone(int simSlot) {
+        // using simSlot as index
+        return isMultiSim() ? mContext.getString(R.string.imei_multi_sim, simSlot + 1)
                 : mContext.getString(R.string.status_imei);
     }
 
-    private CharSequence getTitleForCdmaPhone(int simSlot, boolean isPrimaryImei) {
-        int titleId = isPrimaryImei ? R.string.meid_multi_sim_primary : R.string.meid_multi_sim;
-        return isMultiSim() ? mContext.getString(titleId, simSlot + 1)
+    private CharSequence getTitleForCdmaPhone(int simSlot) {
+        // using simSlot as index
+        return isMultiSim() ? mContext.getString(R.string.meid_multi_sim, simSlot + 1)
                 : mContext.getString(R.string.status_meid_number);
     }
 
-    protected boolean isPrimaryImei(int simSlot) {
-        CharSequence imei = getSummary(simSlot);
-        if (imei == null) {
-            return false;
-        }
-        String primaryImei = null;
-        if (isMinHalVersion2_1() && !mIsDsdsToSsConfigValid) {
-            try {
-                primaryImei = mTelephonyManager.getPrimaryImei();
-            } catch (Exception exception) {
-                Log.i(TAG, "PrimaryImei not available. " + exception);
-            }
-            return ((primaryImei != null) && primaryImei.equals(imei.toString()));
-        } else {
-            if (mQtiImeiInfo == null) {
-                mQtiImeiInfo = TelephonyUtils.getImeiInfo();
-            }
-            if (mQtiImeiInfo != null) {
-                for (int i = 0; i < mQtiImeiInfo.length; i++) {
-                    if (null != mQtiImeiInfo[i] && mQtiImeiInfo[i].getSlotId() == simSlot &&
-                            mQtiImeiInfo[i].getImeiType() == QtiImeiInfo.IMEI_TYPE_PRIMARY) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
     private CharSequence getTitle(int simSlot) {
-
-        boolean isPrimaryImei = isMultiSim() && isPrimaryImei(simSlot);
-
         final int phoneType = getPhoneType(simSlot);
-        return phoneType == PHONE_TYPE_CDMA ? getTitleForCdmaPhone(simSlot, isPrimaryImei)
-                : getTitleForGsmPhone(simSlot, isPrimaryImei);
+        return phoneType == PHONE_TYPE_CDMA ? getTitleForCdmaPhone(simSlot)
+                : getTitleForGsmPhone(simSlot);
     }
 
     public int getPhoneType(int slotIndex) {

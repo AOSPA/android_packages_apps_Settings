@@ -41,4 +41,10 @@ fun getAppsIntents(): List<StaticIntent> =
             intentUri =
                 "intent:#Intent;action=android.intent.action.MANAGE_UNUSED_APPS;package=com.android.settings;end",
         ),
+        StaticIntent(
+            description =
+                "Connected work & personal apps: Settings to manage the connection between work and personal apps.",
+            intentUri =
+                "intent:#Intent;action=android.settings.MANAGE_CROSS_PROFILE_ACCESS;package=com.android.settings;end",
+        ),
     )

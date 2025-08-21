@@ -22,6 +22,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_SETT
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.Utils.isPrivateProfile;
 import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
+import static com.android.settings.biometrics.BiometricEnrollBase.CHOOSE_LOCK_GENERIC_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.ENROLL_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
@@ -54,6 +55,7 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -360,8 +362,14 @@ public class FaceSettings extends DashboardFragment {
 
             mConfirmingPassword = true;
             if (!launched) {
-                Log.e(TAG, "Password not set");
-                finish();
+                final Intent intent = new Intent();
+                intent.setClassName(SETTINGS_PACKAGE_NAME, ChooseLockGeneric.class.getName());
+                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS,
+                        true);
+                intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
+                startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
             }
         } else {
             mAttentionController.setToken(mToken);
@@ -377,7 +385,7 @@ public class FaceSettings extends DashboardFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CONFIRM_REQUEST) {
+        if (requestCode == CONFIRM_REQUEST || requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
             if (mToken == null && !BiometricUtils.containsGatekeeperPasswordHandle(data)) {
                 Log.e(TAG, "No credential");
                 finish();

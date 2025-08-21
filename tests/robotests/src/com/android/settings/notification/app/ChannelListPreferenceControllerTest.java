@@ -37,7 +37,6 @@ import android.app.NotificationChannelGroup;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ParceledListSlice;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceCategory;
@@ -48,7 +47,6 @@ import androidx.preference.SwitchPreferenceCompat;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.SmallTest;
 
-import com.android.settings.flags.Flags;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.NotificationsSentState;
 import com.android.settingslib.PrimarySwitchPreference;
@@ -104,7 +102,6 @@ public class ChannelListPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATIONS_REMEMBER_CHANNEL_LIST_STATE)
     public void onResume_preservesShowAll() {
         // 3 channels in 2 categories, 1 of them recent
         when(mBackend.getChannelCount(any(), anyInt())).thenReturn(3);

@@ -35,7 +35,7 @@
     <string name="radioInfo_service_out" msgid="1868347333892403287">"Вне зоны обслуживания"</string>
     <string name="radioInfo_service_off" msgid="6184928420860868571">"Сеть отключена"</string>
     <string name="radioInfo_roaming_in" msgid="8892550453644088692">"Роуминг"</string>
-    <string name="radioInfo_roaming_not" msgid="3137594549464975054">"Роуминг отключен"</string>
+    <string name="radioInfo_roaming_not" msgid="3137594549464975054">"Не в роуминге"</string>
     <string name="radioInfo_data_disconnected" msgid="362604130117666924">"Нет подключения"</string>
     <string name="radioInfo_data_connecting" msgid="7280819598028917888">"Подключение"</string>
     <string name="radioInfo_data_connected" msgid="8816467971633020141">"Подключено"</string>
@@ -134,7 +134,7 @@
     <string name="shared_network_footer" msgid="5178404860420039168">"Чтобы изменить сеть, обратитесь к ее владельцу или администратору устройства."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Ваши устройства"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Подключение нового устройства"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Отключить аппаратную разгрузку профиля Bluetooth A2DP"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Отключить аппаратную разгрузку Bluetooth A2DP"</string>
     <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Отключить аппаратную разгрузку Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Перезапустить устройство?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Чтобы изменить эту настройку, перезапустите устройство."</string>
@@ -370,7 +370,7 @@
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Модель лица добавлена"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Требуется настройка"</string>
     <string name="security_settings_face_preference_summary_none_new" msgid="1963253146734002815">"Добавить модель лица"</string>
-    <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Лицо"</string>
+    <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Фейсконтроль"</string>
     <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Лицо для рабочего профиля"</string>
     <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Лицо для частного пространства"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Фейсконтроль"</string>
@@ -422,7 +422,7 @@
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
     <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
-    <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Лицо"</string>
+    <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Фейсконтроль"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Использовать фейсконтроль"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Когда вы используете фейсконтроль"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Глаза должны быть открыты"</string>
@@ -1108,7 +1108,7 @@
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Введите название сети (SSID)"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Защита"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Скрытая сеть"</string>
-    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Если ваш маршрутизатор не транслирует идентификатор сети, но вы хотели бы подключаться к ней в будущем, можно присвоить этой сети статус скрытой.\n\nПри этом телефон будет постоянно транслировать сигнал, пытаясь найти эту сеть, что может отрицательно повлиять на безопасность вашего устройства.\n\nСохранение скрытой сети не повлияет на настройки вашего маршрутизатора."</string>
+    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Если маршрутизатор не транслирует идентификатор сети, но вы хотели бы подключаться к ней в будущем, ее можно сохранить как скрытую.\n\nЭто может создать риск безопасности, потому что телефон будет регулярно транслировать сигнал, пытаясь найти сеть.\n\nСохранение сети как скрытой не повлияет на настройки маршрутизатора."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Уровень сигнала"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Статус"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Скорость передачи данных"</string>
@@ -1501,6 +1501,12 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Режим низкой освещенности"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Активация в вертикальном положении"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Только при беспроводной зарядке"</string>
+    <!-- no translation found for blur_switch (1391073945502754948) -->
+    <skip />
+    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
+    <skip />
+    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
+    <skip />
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Использовать режим низкой освещенности"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Выберите, что будет отображаться в режиме низкой освещенности"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Выключение экрана"</string>
@@ -1514,7 +1520,7 @@
     <string name="doze_title" msgid="1523090408230862316">"Включать экран при получении уведомлений"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Экран включается при появлении новых уведомлений"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Показывать время и информацию"</string>
-    <string name="doze_always_on_title2" msgid="6806855871175589465">"Информация на заблок. экране"</string>
+    <string name="doze_always_on_title2" msgid="6806855871175589465">"Информация на заблокированном экране"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Батарея разряжается быстрее"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Показывать обои заблокированного экрана, когда он отключен"</string>
     <string name="doze_always_on_summary_without_wallpaper" msgid="2461602415293603846">"Скрывать обои заблокированного экрана, когда он отключен"</string>
@@ -1731,9 +1737,9 @@
     <string name="menu_restore" msgid="4310539620115151551">"Сбросить настройки"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Настройки по умолчанию восстановлены."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Сброс настроек"</string>
-    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Сбросить настройки моб. сети"</string>
+    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Сбросить настройки мобильной сети"</string>
     <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Будут сброшены все настройки мобильной сети."</string>
-    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Сбросить настройки моб. сети?"</string>
+    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Сбросить настройки мобильной сети?"</string>
     <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Сбросить настройки Bluetooth и Wi‑Fi"</string>
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Настройки Wi‑Fi и Bluetooth будут сброшены. Это действие нельзя отменить."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Сбросить"</string>
@@ -1750,9 +1756,9 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Не получилось удалить eSIM-карты"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Не получилось удалить eSIM-карты.\n\nПерезапустите устройство и повторите попытку."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Удалить частное пространство"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Если вы создавали частное пространство, оно будет стерто без возможности восстановления, а добавленный в него аккаунт Google удален с устройства. \n\nВсе приложения и их данные, хранящиеся в частном пространстве, будут удалены из "<b>"внутренней памяти"</b>" телефона."</string>
-    <string name="main_clear_title" msgid="277664302144837723">"Удалить все данные"</string>
-    <string name="main_clear_short_title" msgid="4752094765533020696">"Удалить все данные"</string>
+    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Если на устройстве есть частное пространство, оно будет стерто без возможности восстановления, а добавленный в него аккаунт Google – удален с устройства. \n\nВсе приложения и их данные, хранящиеся в частном пространстве, будут удалены из "<b>"внутренней памяти"</b>" телефона."</string>
+    <string name="main_clear_title" msgid="277664302144837723">"Удалить все данные (сброс настроек)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"Удалить все данные (сброс настроек)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"музыка;"</li>\n<li>"фото;"</li>\n<li>"другие данные."</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Вы не потеряете доступ к услугам оператора связи."</string>
@@ -2267,7 +2273,7 @@
     <string name="gesture_button_restart" msgid="1895850891992530133">"Перезапуск"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Готово"</string>
     <string name="action_corner_title" msgid="7411160165577367757">"Настроить активные углы"</string>
-    <string name="action_corner_summary" msgid="695618538930535335">"Используйте указатель для перехода к нужным меню"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"Использовать указатели для навигации в системе"</string>
     <string name="action_corner_intro" msgid="2170609118659718140">"Выберите области для настройки активных углов"</string>
     <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Левый нижний угол"</string>
     <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"Правый нижний угол"</string>
@@ -2493,7 +2499,12 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Чтобы увеличить масштаб, нажмите кнопку"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Быстрое увеличение масштаба."</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Чтобы увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Используйте команду быстрого запуска увеличения.&lt;br/&gt; {1,number,integer}. Коснитесь экрана.&lt;br/&gt; {2,number,integer}. Чтобы переместить область увеличения, проведите по экрану двумя пальцами.&lt;br/&gt; {3,number,integer}. Чтобы скорректировать масштаб, сведите или разведите два пальца.&lt;br/&gt; {4,number,integer}. Чтобы выйти из режима увеличения, используйте команду быстрого запуска.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Чтобы временно увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Убедитесь, что выбран режим увеличения \"Весь экран\".&lt;br/&gt; {1,number,integer}. Используйте команду быстрого запуска увеличения.&lt;br/&gt; {2,number,integer}. Коснитесь любой области экрана и удерживайте палец.&lt;br/&gt; {3,number,integer}. Если нужно, перетащите область увеличения.&lt;br/&gt; {4,number,integer}. Чтобы вернуть исходный масштаб, уберите палец с экрана."</string>
-    <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;Чтобы изменить масштаб с помощью клавиатуры:&lt;/b&gt;&lt;br/&gt;{0,number,integer}. Используйте сочетание клавиш для перехода в режим увеличения.&lt;br/&gt;{1,number,integer}. Чтобы увеличить или уменьшить масштаб, удерживайте &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; и &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; и нажмите клавишу плюс (+) или минус (-).&lt;br/&gt;{2,number,integer}. Для перемещения по экрану удерживайте &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; и &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; и нажимайте клавиши со стрелками.&lt;br/&gt;{3,number,integer}. Чтобы вернуть исходный масштаб, используйте сочетание клавиш."</string>
+    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
+    <skip />
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Чтобы увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Выполните действие быстрого запуска для перехода в режим увеличения.&lt;br/&gt; {1,number,integer}. Коснитесь экрана.&lt;br/&gt; {2,number,integer}. Перетащите область увеличения двумя пальцами.&lt;br/&gt; {3,number,integer}. Чтобы скорректировать масштаб, сведите два пальца вместе.&lt;br/&gt; {4,number,integer}. Чтобы выйти из режима увеличения, выполните действие быстрого запуска.&lt;br/&gt;&lt;br/&gt; Вы также можете временно увеличивать масштаб и выполнять другие команды."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Чтобы увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Выполните действие быстрого запуска для перехода в режим увеличения.&lt;br/&gt; {1,number,integer}. Коснитесь экрана.&lt;br/&gt; {2,number,integer}. Перетащите область увеличения одним или двумя пальцами.&lt;br/&gt; {3,number,integer}. Чтобы скорректировать масштаб, сведите два пальца вместе.&lt;br/&gt; {4,number,integer}. Чтобы выйти из режима увеличения, выполните действие быстрого запуска.&lt;br/&gt;&lt;br/&gt; Вы также можете временно увеличивать масштаб и выполнять другие команды."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Благодаря функции увеличения вы сможете приближать изображение на экране.\n\n"<b>"Если вы хотите увеличить изображение"</b>", включите функцию и нажмите на экран в любом месте.\n"<ul><li>"Для прокрутки проведите двумя пальцами."</li>\n<li>"Чтобы изменить масштаб, сведите два пальца вместе или разведите их."</li></ul>\n\n<b>"Если нужно временно увеличить масштаб"</b>", включите функцию увеличения, коснитесь экрана и удерживайте.\n"<ul><li>"Для обзора проведите по экрану."</li>\n<li>"Чтобы уменьшить масштаб, отпустите палец."</li></ul>\n\n"Эти жесты не работают на клавиатуре и панели навигации."</string>
@@ -2580,14 +2591,16 @@
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Расписание"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Стандартная"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Стандартная тёмная тема"</string>
-    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Включает тёмную тему для системы и поддерживаемых приложений."</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Включать тёмную тему для системы и поддерживаемых приложений"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Расширенная"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Тёмная тема с расширенными параметрами"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Автоматически включает тёмную тему во всех приложениях для улучшения доступности."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Автоматически включать тёмную тему во всех приложениях для улучшения доступности"</string>
+    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Убрать анимации"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Уменьшить количество движений на экране"</string>
-    <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Интенсивность мигания курсора"</string>
-    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"Настройте или отключите мигание. Может быть недоступно."</string>
+    <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Мигание текстового курсора"</string>
+    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"Отключить мигание или настроить его скорость. Может поддерживаться не всеми приложениями и сайтами."</string>
     <string name="accessibility_text_cursor_blink_rate_slower_desc" msgid="5255697869959801747">"Уменьшить интенсивность мигания"</string>
     <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"Увеличить интенсивность мигания"</string>
     <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"Сбросить"</string>
@@ -2685,7 +2698,7 @@
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Об инверсии цветов"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Подробнее об инверсии цветов…"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Подробнее о тёмной теме…"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"Расширенные параметры тёмной темы поддерживаются не во всех приложениях. Если у вас возникли проблемы с ее показом, используйте настройки по умолчанию."</string>
+    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"Некоторые приложения могут не поддерживать расширенную тёмную тему. Если она показывается неправильно, используйте стандартную."</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Субтитры"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Только в поддерживаемых приложениях"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Размер и стиль субтитров"</string>
@@ -3668,6 +3681,8 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"информация о батарее, дата изготовления, количество циклов, дата первого использования"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"обновление системы безопасности, прошивка модуля связи, версия ядра"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"тема, свет, темнота, режим, светобоязнь, фотофобия, сделать темнее, затемнить, тёмная тема, мигрень"</string>
+    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
+    <skip />
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"темная тема"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"ошибка"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Автоматическое включение экрана, заблокированный экран"</string>
@@ -4392,14 +4407,10 @@
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Проверить приложения, в которых изменились разрешения на передачу геоданных"</string>
     <string name="app_function_access_settings_title" msgid="1837117989202166166">"Агенты"</string>
     <string name="app_function_access_settings_summary" msgid="3654291845453799170">"Агенты, которые могут получать доступ к данным или выполнять действия в приложениях"</string>
-    <!-- no translation found for manage_agent_app_function_access_settings_title (2407736540086293094) -->
-    <skip />
-    <!-- no translation found for manage_agent_app_function_access_settings_summary (5513761879561499076) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_title (6517416582918633839) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_summary (3578937757835411954) -->
-    <skip />
+    <string name="manage_agent_app_function_access_settings_title" msgid="2407736540086293094">"Доступ к приложениям"</string>
+    <string name="manage_agent_app_function_access_settings_summary" msgid="5513761879561499076">"Разрешить этому агенту получать доступ к информации и выполнять действия в приложениях"</string>
+    <string name="manage_target_app_function_access_settings_title" msgid="6517416582918633839">"Доступ для агентов"</string>
+    <string name="manage_target_app_function_access_settings_summary" msgid="3578937757835411954">"Агенты, которые могут получать доступ к данным или выполнять действия в этом приложении"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Включение нажатием"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Дважды нажмите в любом месте экрана, чтобы включить устройство"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Открытие ссылок"</string>
@@ -5073,7 +5084,7 @@
     <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Внимание! Параметр позволяет использовать ANGLE в качестве драйвера OpenGL ES по умолчанию. Эта функция экспериментальная и может быть несовместима с некоторыми камерами и приложениями для видеосъемки."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Для изменения системного драйвера OpenGL ES требуется перезагрузка."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Изменение настроек совместимости приложений"</string>
-    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Показывать изменение настроек совместимости приложений"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Изменение настроек совместимости приложений"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Изменения, включенные по умолчанию"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Изменения, отключенные по умолчанию"</string>
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Настраивать изменение параметров совместимости можно только для приложений, доступных для отладки. Установите такое приложение и повторите попытку."</string>
@@ -5773,7 +5784,7 @@
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Показывать указатель при наведении стилусом"</string>
     <string name="media_drm_settings_title" msgid="897424966554739867">"Настройки DRM для медиаконтента"</string>
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Принудительно включить программную криптозащиту"</string>
-    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Принудительно включить управление ключами DRM для использования программной криптозащиты методом белого ящика"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Принудительно включить управление DRM-ключами для использования программной криптозащиты в белом ящике"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Очистите экран рядом с датчиком и повторите попытку."</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Преобразовано в eSIM. Извлеките и утилизируйте."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Синхронизация между устройствами"</string>
@@ -5962,10 +5973,8 @@
     <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Запретите другим пользователям открывать приложения, которые поддерживают разблокировку по отпечатку пальца или фейсконтроль. При подключении к часам безопасность обеспечивается за счет большей мобильности."</string>
     <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Используйте проверку личности и часы для работы с другими приложениями"</string>
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Включите проверку личности во всех приложениях, которые поддерживают разблокировку по отпечатку пальца или фейсконтроль, в таких безопасных местах, как дом или офис. А чтобы расширить область защиты за пределы безопасных мест, используйте проверку личности на часах."</string>
-    <!-- no translation found for more_security_privacy_category_title (6107292123094705732) -->
-    <skip />
-    <!-- no translation found for more_security_privacy_summary (8049801531406061219) -->
-    <skip />
+    <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Другие настройки"</string>
+    <string name="more_security_privacy_summary" msgid="8049801531406061219">"Автозаполнение, уведомления и другие параметры"</string>
     <!-- no translation found for privacy_sources_title (7648842637181479352) -->
     <skip />
     <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
@@ -5977,5 +5986,11 @@
     <!-- no translation found for location_settings (6833222354060094170) -->
     <skip />
     <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
+    <skip />
+    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
     <skip />
 </resources>

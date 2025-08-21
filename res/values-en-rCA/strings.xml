@@ -999,8 +999,7 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Move your mouse between displays"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Use external display"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Display resolution"</string>
-    <!-- no translation found for external_display_connection_preference (3337612335495542718) -->
-    <skip />
+    <string name="external_display_connection_preference" msgid="3337612335495542718">"Default connection behavior"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Use as separate display"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Mirror built-in display"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Show connection dialog"</string>
@@ -1501,6 +1500,9 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Low light mode"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Lift to wake"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Restrict to wireless charging"</string>
+    <string name="blur_switch" msgid="1391073945502754948">"Reduce blur effects"</string>
+    <string name="blur_switch_summary" msgid="5025895302219948597">"Make backgrounds and panels easier to see"</string>
+    <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Temporarily disabled due to Battery Saver"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Use Low Light mode"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Choose what to show in Low Light mode"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Screen off"</string>
@@ -2493,7 +2495,9 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tap a button to zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Quickly zoom in on the screen to make content larger"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Tap the screen&lt;br/&gt; {2,number,integer}. Drag two fingers to move around screen&lt;br/&gt; {3,number,integer}. Pinch with two fingers to adjust zoom&lt;br/&gt; {4,number,integer}. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; &lt;b&gt;To zoom in temporarily:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Make sure your magnification type is set to full screen&lt;br/&gt; {1,number,integer}. Use shortcut to start magnification&lt;br/&gt; {2,number,integer}. Touch and hold anywhere on the screen&lt;br/&gt; {3,number,integer}. Drag finger to move around screen&lt;br/&gt; {4,number,integer}. Lift finger to stop magnification"</string>
-    <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;To zoom with the keyboard:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use the shortcut to start magnification&lt;br/&gt; {1,number,integer}. Hold down &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; and &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; and press + or - to zoom in or out&lt;br/&gt; {2,number,integer}. Hold down &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; and &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; and press the arrow keys to move around the screen&lt;br/&gt; {3,number,integer}. Use the shortcut to stop magnification"</string>
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut or press &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M to start magnification&lt;br/&gt; {1,number,integer}. Press &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + arrow keys to move around screen&lt;br/&gt; {2,number,integer}. Press &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; and \"+\" or \"-\" to adjust zoom&lt;br/&gt; {3,number,integer}. Use shortcut or &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M to stop magnification"</string>
+    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Press &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + arrow keys to move around screen&lt;br/&gt; {2,number,integer}. Press &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; and \"+\" or \"-\" to adjust zoom&lt;br/&gt; {3,number,integer}. Use shortcut to stop magnification"</string>
+    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;Keyboard&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut or press &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M to start magnification&lt;br/&gt; {1,number,integer}. Press &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + arrow keys to move around screen&lt;br/&gt; {2,number,integer}. Press &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; and \"+\" or \"-\" to adjust zoom&lt;br/&gt; {3,number,integer}. Use shortcut or &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M to stop magnification&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Touchscreen&lt;/b&gt;&lt;br/&gt; To zoom in:&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Tap the screen&lt;br/&gt; {2,number,integer}. Drag 2 fingers to move around screen&lt;br/&gt; {3,number,integer}. Pinch with 2 fingers to adjust zoom&lt;br/&gt; {4,number,integer}. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; To zoom in temporarily:&lt;br/&gt; {0,number,integer}. Make sure your magnification type is set to full screen&lt;br/&gt; {1,number,integer}. Use shortcut to start magnification&lt;br/&gt; {2,number,integer}. Touch &amp; hold anywhere on the screen&lt;br/&gt; {3,number,integer}. Drag finger to move around screen&lt;br/&gt; {4,number,integer}. Lift finger to stop magnification"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Tap the screen&lt;br/&gt; {2,number,integer}. Drag 2 fingers to move around the screen&lt;br/&gt; {3,number,integer}. Pinch with 2 fingers to adjust zoom&lt;br/&gt; {4,number,integer}. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; You can also zoom in temporarily and more."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Tap the screen&lt;br/&gt; {2,number,integer}. Drag 1 or 2 fingers to move around the screen&lt;br/&gt; {3,number,integer}. Pinch with 2 fingers to adjust zoom&lt;br/&gt; {4,number,integer}. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; You can also zoom in temporarily and more."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"To zoom"</b>", start magnification, then tap the screen anywhere.\n"<ul><li>"Drag two or more fingers to scroll"</li>\n<li>"Pinch two or more fingers to adjust the zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", start magnification, then touch and hold the screen anywhere.\n"<ul><li>"Drag to move around the screen"</li>\n<li>"Lift finger to zoom out"</li></ul>\n\n"You can\'t zoom in on the keyboard or navigation bar."</string>
@@ -2584,6 +2588,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expanded"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Expanded Dark theme"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Automatically applies Dark theme to more apps for improved accessibility"</string>
+    <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"force invert, color inversion, contrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remove animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce movement on the screen"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Text cursor blinking"</string>
@@ -3668,6 +3673,7 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"battery info, manufacture date, cycle count, first use"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"android security patch level, baseband version, kernel version"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"theme, light, dark, mode, light sensitivity, photophobia, make darker, darken, dark mode, migraine"</string>
+    <string name="keywords_blur_switch" msgid="3482676740440346012">"blur effects"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"dark theme"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"bug"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Ambient display, Lock screen display"</string>
@@ -4832,14 +4838,10 @@
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Gesture Navigation"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Try a demo"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Button navigation"</string>
-    <!-- no translation found for button_navigation_settings_order_title (4256756895101424865) -->
-    <skip />
-    <!-- no translation found for navbar_back_button (6386920156044420082) -->
-    <skip />
-    <!-- no translation found for navbar_home_button (951459586446869883) -->
-    <skip />
-    <!-- no translation found for navbar_recent_button (6005580570601162420) -->
-    <skip />
+    <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Button order"</string>
+    <string name="navbar_back_button" msgid="6386920156044420082">"Back"</string>
+    <string name="navbar_home_button" msgid="951459586446869883">"Home"</string>
+    <string name="navbar_recent_button" msgid="6005580570601162420">"Recents"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"gesture navigation, back sensitivity, back gesture"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigation, home button"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"One-handed mode"</string>
@@ -5958,16 +5960,13 @@
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Ensure your identity protection on all apps that support Fingerprint and Face Unlock in trusted places like your home or office. Use Identity Check with your watch to extend your protection even beyond trusted places."</string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Other settings"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Autofill, notifications, and more"</string>
-    <!-- no translation found for privacy_sources_title (7648842637181479352) -->
-    <skip />
-    <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
-    <skip />
-    <!-- no translation found for device_unlock_subpage_title (8619367783572270468) -->
-    <skip />
-    <!-- no translation found for lock_screen_title (4701994278040604018) -->
-    <skip />
-    <!-- no translation found for location_settings (6833222354060094170) -->
-    <skip />
-    <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
-    <skip />
+    <string name="privacy_sources_title" msgid="7648842637181479352">"Privacy controls"</string>
+    <string name="privacy_sources_summary" msgid="8795612902105833258">"Permissions, controls"</string>
+    <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Device unlock"</string>
+    <string name="lock_screen_title" msgid="4701994278040604018">"Screen lock"</string>
+    <string name="location_settings" msgid="6833222354060094170">"Location access"</string>
+    <string name="location_settings_subtitle" msgid="8471780117911010030">"See apps and services that have access to location"</string>
+    <string name="identity_check_notification_title" msgid="8004343932775654492">"Identity Check works with more apps"</string>
+    <string name="identity_check_notification_summary" msgid="3762060079941053730">"Identity Check prevents unwanted access to your apps. Now available with any app that uses Fingerprint or Face Unlock."</string>
+    <string name="identity_check_view_details" msgid="8752343542345818128">"View details"</string>
 </resources>

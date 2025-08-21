@@ -373,7 +373,7 @@
     <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Gesicht"</string>
     <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Gesichtserkennung (Arbeitsprofil)"</string>
     <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Gesicht (vertrauliches Profil)"</string>
-    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Entsperrung per Gesichtserkennung"</string>
+    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Entsperren per Gesichtserkennung"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Entsperrung per Gesichtserkennung für die Arbeit"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Entsperrung per Gesichts­erkennung einrichten"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Entsperrung per Gesichtserkennung einrichten"</string>
@@ -986,7 +986,7 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Maximale Zahl verbundener Bluetooth-Audiogeräte auswählen"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Ausführliches NFC-Debugging-Log"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"In Fehlerberichte zusätzliche gerätespezifische Vendor-Logs aufnehmen, die private Informationen enthalten können"</string>
-    <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Ungefiltertes NFC-NCI-Protokoll"</string>
+    <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Ungefiltertes NFC-NCI-Log"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Detaillierte NFC-Pakete erfassen, die private Informationen enthalten können"</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Gerät neu starten?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Die detaillierte NFC-Protokollierung wird nur zu Entwicklungszwecken verwendet. Dazu gehören auch zusätzliche NFC-Daten in Fehlerberichten, die private Informationen enthalten können. Starte dein Gerät neu, um diese Einstellung zu ändern."</string>
@@ -1501,6 +1501,12 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Modus für wenig Licht"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Zum Aktivieren anheben"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Nur bei kabellosem Laden"</string>
+    <!-- no translation found for blur_switch (1391073945502754948) -->
+    <skip />
+    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
+    <skip />
+    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
+    <skip />
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Modus für wenig Licht verwenden"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Auswählen, was im Modus für wenig Licht angezeigt werden soll"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Display ausschalten"</string>
@@ -2493,7 +2499,12 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Zum Zoomen auf eine Schaltfläche tippen"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Du kannst auf dem Display schnell heranzoomen, um Inhalte zu vergrößern"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über den Kurzbefehl&lt;br/&gt; {1,number,integer}. Tippe auf das Display&lt;br/&gt; {2,number,integer}. Ziehe mit zwei Fingern, um den angezeigten Bildschirmausschnitt zu ändern&lt;br/&gt; {3,number,integer}. Ziehe zwei Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; {4,number,integer}. Beende die Vergrößerung über den Kurzbefehl&lt;br/&gt;&lt;br/&gt; &lt;b&gt;So zoomst du vorübergehend heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Achte darauf, dass als Art der Vergrößerung „Vollbild“ ausgewählt ist&lt;br/&gt; {1,number,integer}. Starte die Vergrößerung über den Kurzbefehl&lt;br/&gt; {2,number,integer}. Halte eine beliebige Stelle auf dem Display gedrückt&lt;br/&gt; {3,number,integer}. Ziehe mit dem Finger, um den angezeigten Bildschirmausschnitt zu ändern&lt;br/&gt; {4,number,integer}. Hebe den Finger, um die Vergrößerung zu beenden"</string>
-    <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;Zoomen mit der Tastatur:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Tastenkombination&lt;br/&gt; {1,number,integer}. Halte &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; und &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; gedrückt und drücke auf „+“ oder „-“, um heran- oder herauszuzoomen&lt;br/&gt; {2,number,integer}. Halte &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; und &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; gedrückt und drücke die Pfeiltasten, um dich auf dem Bildschirm zu bewegen&lt;br/&gt; {3,number,integer}. Verwende die Tastenkombination, um die Vergrößerung zu beenden."</string>
+    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
+    <skip />
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Touchgeste für Bedienungshilfen&lt;br/&gt; {1,number,integer}. Tippe auf das Display&lt;br/&gt; {2,number,integer}. Ziehe mit 2 Fingern, um den angezeigten Bildschirmausschnitt zu verschieben&lt;br/&gt; {3,number,integer}. Ziehe 2 Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; {4,number,integer}. Stoppe die Vergrößerung über die Touchgeste für Bedienungshilfen&lt;br/&gt;&lt;br/&gt; Du kannst auch vorübergehend heranzoomen und mehr."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Touchgeste für Bedienungshilfen&lt;br/&gt; {1,number,integer}. Tippe auf das Display&lt;br/&gt; {2,number,integer}. Ziehe mit 1 oder 2 Fingern, um den angezeigten Bildschirmausschnitt zu verschieben&lt;br/&gt; {3,number,integer}. Ziehe 2 Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; {4,number,integer}. Stoppe die Vergrößerung über die Touchgeste für Bedienungshilfen&lt;br/&gt;&lt;br/&gt; Du kannst auch vorübergehend heranzoomen und mehr."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Wenn die Vergrößerung aktiviert ist, kannst du Elemente auf dem Bildschirm heranzoomen.\n\n"<b>"Wenn du zoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm.\n"<ul><li>"Zum Scrollen ziehe mit zwei oder mehr Fingern"</li>\n<li>"Zum Anpassen des Zooms ziehe zwei oder mehr Finger zusammen bzw. auseinander"</li></ul>\n\n<b>"Wenn du vorübergehend heranzoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm und halte sie gedrückt.\n"<ul><li>"Wenn du den angezeigten Bildschirmausschnitt verschieben möchtest, ziehe den Bildschirm"</li>\n<li>"Zum Herauszoomen hebe den Finger"</li></ul>\n\n"In die Tastatur oder Navigationsleiste kann nicht hineingezoomt werden."</string>
@@ -2584,6 +2595,8 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Erweitert"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Erweitertes dunkles Design"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Das dunkle Design wird automatisch in weiteren Apps verwendet, um die Barrierefreiheit zu verbessern"</string>
+    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animationen entfernen"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Bewegung auf dem Bildschirm verringern"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Blinken des Textcursors"</string>
@@ -3668,6 +3681,8 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"Akkuinformationen, Herstellungsdatum, Anzahl der Ladezyklen, erste Verwendung"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"stand der sicherheitsupdates android, baseband version, kernel version"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"Design, hell, dunkel, Modus, Lichtempfindlichkeit, Fotophobie, dunkler machen, abdunkeln, dunkler Modus, Migräne"</string>
+    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
+    <skip />
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"Dunkles Design"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"Fehler"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Inaktivitätsdisplay, Sperrbildschirm"</string>
@@ -4392,14 +4407,10 @@
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Apps ansehen, bei denen sich die Art der Weitergabe deiner Standortdaten geändert hat"</string>
     <string name="app_function_access_settings_title" msgid="1837117989202166166">"KI-Agenten"</string>
     <string name="app_function_access_settings_summary" msgid="3654291845453799170">"KI-Agenten, die in Apps auf Informationen zugreifen oder Aktionen ausführen können"</string>
-    <!-- no translation found for manage_agent_app_function_access_settings_title (2407736540086293094) -->
-    <skip />
-    <!-- no translation found for manage_agent_app_function_access_settings_summary (5513761879561499076) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_title (6517416582918633839) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_summary (3578937757835411954) -->
-    <skip />
+    <string name="manage_agent_app_function_access_settings_title" msgid="2407736540086293094">"App-Zugriff"</string>
+    <string name="manage_agent_app_function_access_settings_summary" msgid="5513761879561499076">"Diesem KI-Agenten erlauben, in Apps auf Informationen zuzugreifen oder Aktionen auszuführen"</string>
+    <string name="manage_target_app_function_access_settings_title" msgid="6517416582918633839">"KI-Agenten-Zugriff"</string>
+    <string name="manage_target_app_function_access_settings_summary" msgid="3578937757835411954">"KI-Agenten, die in dieser App auf Informationen zugreifen oder Aktionen ausführen können"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Zum Aktivieren tippen"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Tippe doppelt auf den Bildschirm, um das Gerät zu aktivieren."</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Links öffnen"</string>
@@ -5960,10 +5971,8 @@
     <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Du kannst verhindern, dass andere Personen Apps öffnen, die die Entsperrung per Fingerabdruck oder Gesichtserkennung erfordern. Wenn eine Verbindung mit deiner Smartwatch besteht, hast du zusätzlich zur erhöhten Sicherheit mehr Mobilität."</string>
     <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Identitätsüberprüfung und Smartwatch mit weiteren Apps verwenden"</string>
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Mit dem Identitätsschutz kannst du deine Identität in allen Apps schützen, die die Entsperrung per Fingerabdruck oder Gesichtserkennung an vertrauenswürdigen Orten wie deinem Zuhause oder deinem Büro unterstützen. Die Identitätsüberprüfung auf deiner Smartwatch ermöglicht dir, den Schutz auf Bereiche außerhalb vertrauenswürdiger Orte auszuweiten."</string>
-    <!-- no translation found for more_security_privacy_category_title (6107292123094705732) -->
-    <skip />
-    <!-- no translation found for more_security_privacy_summary (8049801531406061219) -->
-    <skip />
+    <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Weitere Einstellungen"</string>
+    <string name="more_security_privacy_summary" msgid="8049801531406061219">"Autofill, Benachrichtigungen und mehr"</string>
     <!-- no translation found for privacy_sources_title (7648842637181479352) -->
     <skip />
     <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
@@ -5975,5 +5984,11 @@
     <!-- no translation found for location_settings (6833222354060094170) -->
     <skip />
     <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
+    <skip />
+    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
     <skip />
 </resources>

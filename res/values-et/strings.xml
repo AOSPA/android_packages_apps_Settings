@@ -1075,7 +1075,7 @@
     <string name="wifi_wakeup" msgid="3834327315861781611">"Lülita WiFi automaatselt sisse"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"WiFi lülitub uuesti sisse kvaliteetsete salvestatud võrkude, näiteks teie koduse võrgu läheduses"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Pole saadaval, sest asukoha otsimine on välja lülitatud. Lülitage valik "<annotation id="link">"Asukoht"</annotation>" sisse."</string>
-    <string name="wifi_install_credentials" msgid="5192903644606839972">"Sertifikaatide installimine"</string>
+    <string name="wifi_install_credentials" msgid="5192903644606839972">"Installi sertifikaadid"</string>
     <string name="wifi_scan_notify_text" msgid="7163137260385995873">"Asukoha täpsuse parandamiseks võivad rakendused ja teenused siiski alati otsida WiFi-võrke isegi siis, kui WiFi on väljas. Seda saab kasutada näiteks asukohapõhiste funktsioonide ja teenuste täiustamiseks. Seda saab muuta <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>WiFi-skannimise seadetes<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Asukoha täpsuse parandamiseks lülitage <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>WiFi-skannimise seadetes<xliff:g id="LINK_END_1">LINK_END</xliff:g> WiFi-skannimine sisse."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"Lülita automaatselt mobiilsele andmesidele"</string>
@@ -1469,7 +1469,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Kasutage tumedat tausta, et muuta ekraani vaatamine mugavamaks ja vähendada mõnel ekraanil akukasutust. Kui ekraan on välja lülitatud, muutub teie teema ajakava järgi."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tume teema järgib praegu teie magamamineku režiimi ajakava"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Magamamineku režiimi seaded"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="22160899184470368">"{count,plural,offset:2 =0{Režiimid võivad sisse lülitada ka tumeda teema.}=1{{mode_1} lülitab sisse ka tumeda teema.}=2{{mode_1} ja {mode_2} lülitavad sisse ka tumeda teema.}=3{{mode_1}, {mode_2} ja {mode_3} lülitavad sisse ka tumeda teema.}other{{mode_1}, {mode_2} ja veel # lülitavad sisse ka tumeda teema.}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="22160899184470368">"{count,plural,offset:2 =0{Tumeda teema võivad sisse lülitada ka režiimid.}=1{{mode_1} lülitab sisse ka tumeda teema.}=2{{mode_1} ja {mode_2} lülitavad sisse ka tumeda teema.}=3{{mode_1}, {mode_2} ja {mode_3} lülitavad sisse ka tumeda teema.}other{{mode_1}, {mode_2} ja veel # lülitavad sisse ka tumeda teema.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Režiimide seaded"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Muutke kõrge dünaamilise ulatusega (HDR) fotod ja videod eredamaks ning suurendage nende värviulatust ja selgust. HDR-sisu kuvatakse eredamana."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Ekraani ajalõpp"</string>
@@ -1501,6 +1501,12 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Vähese valguse režiim"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Tõstke äratamiseks"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Luba ainult juhtmeta laadimise korral"</string>
+    <!-- no translation found for blur_switch (1391073945502754948) -->
+    <skip />
+    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
+    <skip />
+    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
+    <skip />
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Vähese valguse režiimi kasutamine"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Valige, mis vähese valguse režiimis kuvada"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Ekraani väljalülitamine"</string>
@@ -2493,7 +2499,12 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Suumimiseks puudutage nuppu"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Suumige ekraanil kiiresti sisse, et sisu suuremalt kuvada."</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Sissesuumimiseks toimige järgmiselt.&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Kasutage suurendamise alustamiseks otseteed.&lt;br/&gt; {1,number,integer}. Puudutage ekraani.&lt;br/&gt; {2,number,integer}. Ekraanikuval liikumiseks lohistage kahe sõrmega.&lt;br/&gt; {3,number,integer}. Suumi kohandamiseks liigutage ekraanil kaht sõrme kokku-lahku.&lt;br/&gt; {4,number,integer}. Kasutage suurendamise lõpetamiseks otseteed.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Ajutiseks sissesuumimiseks toimige järgmiselt.&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Veenduge, et suurendamise tüübiks oleks valitud täisekraan.&lt;br/&gt; {1,number,integer}. Kasutage suurendamise alustamiseks otseteed.&lt;br/&gt; {2,number,integer}. Hoidke sõrme kus tahes ekraanikuval.&lt;br/&gt; {3,number,integer}. Lohistage ekraanikuval liikumiseks sõrme.&lt;br/&gt; {4,number,integer}. Suurendamise lõpetamiseks tõstke sõrm ekraanikuvalt."</string>
-    <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;Klaviatuuriga suumimiseks toimige järgmiselt.&lt;/b&gt;&lt;br/&gt; {0,arv,täisarv}. Kasutage suurendamise alustamiseks otseteed.&lt;br/&gt; {1,number,integer}. Hoidke all klahvi &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; ja &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; ja vajutage sisse või välja suumimiseks + või -&lt;br/&gt; {2,arv,täisarv}. Hoidke all klahvi &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; ja &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; ja vajutage ekraanil liikumiseks nooleklahve&lt;br/&gt; {3,arv,täisarv}. Kasutage suurenduse peatamiseks otseteed"</string>
+    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
+    <skip />
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Sissesuumimiseks toimige järgmiselt.&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Kasutage suurendamise alustamiseks otseteed.&lt;br/&gt; {1,number,integer}. Puudutage ekraani.&lt;br/&gt; {2,number,integer}. Ekraanikuval liikumiseks lohistage kahe sõrmega.&lt;br/&gt; {3,number,integer}. Suumi kohandamiseks liigutage ekraanil kaht sõrme kokku-lahku.&lt;br/&gt; {4,number,integer}. Kasutage suurenduse peatamiseks otseteed&lt;br/&gt;&lt;br/&gt; Saate ka ajutiselt sisse suumida ja muud teha."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Sissesuumimiseks toimige järgmiselt.&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Kasutage suurendamise alustamiseks otseteed.&lt;br/&gt; {1,number,integer}. Puudutage ekraani.&lt;br/&gt; {2,number,integer}. Ekraanikuval liikumiseks lohistage ühe või kahe sõrmega.&lt;br/&gt; {3,number,integer}. Suumi kohandamiseks liigutage ekraanil kaht sõrme kokku-lahku.&lt;br/&gt; {4,number,integer}. Kasutage suurenduse peatamiseks otseteed&lt;br/&gt;&lt;br/&gt; Saate ka ajutiselt sisse suumida ja muud teha."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Kui suurendusfunktsioon on sisse lülitatud, saate oma ekraanikuval sisse suumida.\n\n"<b>"Suumimiseks"</b>" käivitage suurendusfunktsioon ja puudutage siis ekraanikuval mis tahes kohta.\n"<ul><li>"Kerimiseks lohistage kahe või enama sõrmega."</li>\n<li>"Suumi kohandamiseks pigistage kahte või enamat sõrme kokku."</li></ul>\n\n<b>"Ajutiseks suumimiseks"</b>" käivitage suurendusfunktsioon ja puudutage siis ekraanikuval pikalt mis tahes kohta.\n"<ul><li>"Ekraanikuval teisaldamiseks lohistage sõrme."</li>\n<li>"Väljasuumimiseks tõstke sõrm ekraanilt."</li></ul>\n\n"Klaviatuuril ega navigeerimisribal ei saa sisse suumida."</string>
@@ -2584,6 +2595,8 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Laiendatud"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Laiendatud tume teema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Rakendab parema juurdepääsetavuse tagamiseks automaatselt tumedat teemat rohkematele rakendustele"</string>
+    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animatsioonide eemaldamine"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Ekraanikuval liikumise vähendamine"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Tekstikursori vilkumine"</string>
@@ -3668,6 +3681,8 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"aku teave, tootmiskuupäev, tsüklite arv, esmakordne kasutamine"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"androidi turbepaiga tase, põhiribaversioon, tuuma versioon"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"teema, hele, tume, režiim, valgustundlikkus, fotofoobia, tumedamaks muutmine, tumendamine, tume režiim, migreen"</string>
+    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
+    <skip />
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"tume teema"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"viga"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Säästlik ekraan, lukustuskuva ekraan"</string>
@@ -3965,7 +3980,7 @@
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Kuva nähtud märguannete ikoonid"</string>
     <string name="lock_screen_notification_show_silent_title" msgid="9177971841517814916">"Kuva hääletud märguanded"</string>
     <string name="lock_screen_notification_show_sensitive_content_title" msgid="3184973371036065258">"Kuva delikaatne sisu"</string>
-    <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"Tööprofiili delikaatse sisu kuvamine"</string>
+    <string name="lock_screen_notification_show_sensitive_work_content_title" msgid="532300440507441426">"Kuva tööprofiili delikaatne sisu"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Profiili märguanded"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Märguanded"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Rakenduste märguanded"</string>
@@ -4293,7 +4308,7 @@
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Vähendage katkestusi, lubades ainult olulistel inimestel ja rakendustel teiega ühendust võtta."</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Seadistage režiim, mis järgib tavapärast ajakava."</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Hoidke oma seade päevasündmustega sünkroonis"</string>
-    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Ärgake üles 100% puhanuna"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Ärgake üles 100% puhanuna."</string>
     <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Keskenduge teel olles ennekõike ohutusele"</string>
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Suurendage fookust, et keskenduda eesmärgile"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Hetkedeks, mil viisakus mängib rolli"</string>
@@ -4392,14 +4407,10 @@
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Vaadake üle rakendused, mis muutsid viisi, kuidas need võivad teie asukohaandmeid jagada"</string>
     <string name="app_function_access_settings_title" msgid="1837117989202166166">"Agendid"</string>
     <string name="app_function_access_settings_summary" msgid="3654291845453799170">"Agendid, kellel on juurdepääs teabele või kes saavad rakendustes toiminguid teha."</string>
-    <!-- no translation found for manage_agent_app_function_access_settings_title (2407736540086293094) -->
-    <skip />
-    <!-- no translation found for manage_agent_app_function_access_settings_summary (5513761879561499076) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_title (6517416582918633839) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_summary (3578937757835411954) -->
-    <skip />
+    <string name="manage_agent_app_function_access_settings_title" msgid="2407736540086293094">"Juurdepääs rakendustele"</string>
+    <string name="manage_agent_app_function_access_settings_summary" msgid="5513761879561499076">"Andke agendile juurdepääs teabele või lubage rakenduses toiminguid teha."</string>
+    <string name="manage_target_app_function_access_settings_title" msgid="6517416582918633839">"Agentide juurdepääs"</string>
+    <string name="manage_target_app_function_access_settings_summary" msgid="3578937757835411954">"Agendid, kes pääsevad selles rakenduses teabele juurde või saavad toiminguid teha."</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Puudutusega äratamine"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Seadme äratamiseks topeltpuudutage ekraani"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Linkide avamine"</string>
@@ -4684,7 +4695,7 @@
     <string name="data_saver_off" msgid="5891210864117269045">"Väljas"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Kasuta andmemahu säästjat"</string>
     <string name="unrestricted_app_title" msgid="8531936851059106374">"Mahupiiranguta mobiilse andmeside kasutus"</string>
-    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Luba juurdepääs mahupiiranguta mobiilsele andmesidele, kui andmemahu säästja on sisse lülitatud"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Luba mahupiiranguta juurdepääs mobiilsele andmesidele, kui andmemahu säästja on sisse lülitatud"</string>
     <string name="home_app" msgid="6056850504746902747">"Avakuva rakendus"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Lisage veel üks sõrmejälg"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Teise sõrmega avamine"</string>
@@ -5960,10 +5971,8 @@
     <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Takistage teistel avamast rakendusi, mis nõuavad sõrmejälge või näoga avamist. Kui funktsioon on kellaga ühendatud, on teie turvalisus tagatud enamates kohtades."</string>
     <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Identiteedikontrolli ja kella kasutamine enamate rakenduste puhul"</string>
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Tagage oma identiteedikaitse usaldusväärsetes kohtades (nt kodus või tööl) kõigis rakendustes, mis toetavad sõrmejälge ja näoga avamist. Kasutage identiteedikontrolli oma kella abil, et oleksite kaitstud ka mujal peale usaldusväärsete kohtade."</string>
-    <!-- no translation found for more_security_privacy_category_title (6107292123094705732) -->
-    <skip />
-    <!-- no translation found for more_security_privacy_summary (8049801531406061219) -->
-    <skip />
+    <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Muud seaded"</string>
+    <string name="more_security_privacy_summary" msgid="8049801531406061219">"Automaattäide, märguanded jm"</string>
     <!-- no translation found for privacy_sources_title (7648842637181479352) -->
     <skip />
     <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
@@ -5975,5 +5984,11 @@
     <!-- no translation found for location_settings (6833222354060094170) -->
     <skip />
     <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
+    <skip />
+    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
     <skip />
 </resources>

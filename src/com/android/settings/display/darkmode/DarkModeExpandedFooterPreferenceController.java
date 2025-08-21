@@ -28,6 +28,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.widget.FooterPreference;
 
+// LINT.IfChange
 public class DarkModeExpandedFooterPreferenceController extends BasePreferenceController {
     static final String DARK_MODE_EXPANDED_FOOTER_KEY = "dark_theme_expanded_footer";
 
@@ -64,3 +65,4 @@ public class DarkModeExpandedFooterPreferenceController extends BasePreferenceCo
         }
     }
 }
+// LINT.ThenChange(DarkModeExpandedFooterPreference.kt)

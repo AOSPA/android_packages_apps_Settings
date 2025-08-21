@@ -99,6 +99,7 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
+import com.android.settings.msds.MSDLPlayerWrapper;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -118,6 +119,7 @@ import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.settingslib.widget.TwoTargetPreference;
 
+import com.google.android.msdl.data.model.MSDLToken;
 import com.google.android.setupdesign.util.DeviceHelper;
 
 import java.util.ArrayList;
@@ -285,7 +287,8 @@ public class FingerprintSettings extends SubSettings {
                 "security_settings_screen_off_unlock_udfps";
         private static final String KEY_FINGERPRINTS_ENROLLED_CATEGORY =
                 "security_settings_fingerprints_enrolled";
-        private static final String KEY_FINGERPRINT_UNLOCK_CATEGORY =
+        @VisibleForTesting
+        static final String KEY_FINGERPRINT_UNLOCK_CATEGORY =
                 "security_settings_fingerprint_unlock_category";
         private static final String KEY_FINGERPRINT_UNLOCK_FOOTER =
                 "security_settings_fingerprint_footer";
@@ -317,7 +320,8 @@ public class FingerprintSettings extends SubSettings {
         private List<AbstractPreferenceController> mControllers;
         private FingerprintUnlockCategoryController
                 mFingerprintUnlockCategoryPreferenceController;
-        private FingerprintSettingsRequireScreenOnToAuthPreferenceController
+        @VisibleForTesting
+        public FingerprintSettingsRequireScreenOnToAuthPreferenceController
                 mRequireScreenOnToAuthPreferenceController;
         private FingerprintSettingsScreenOffUnlockUdfpsPreferenceController
                 mScreenOffUnlockUdfpsPreferenceController;
@@ -871,16 +875,25 @@ public class FingerprintSettings extends SubSettings {
         /**
          * Lambda function for setCategoryHasChildrenSupplier
          */
-        private boolean fingerprintUnlockCategoryHasChild() {
-            return mFingerprintUnlockCategory.getPreferenceCount() > 0;
+        private boolean fingerprintUnlockCategoryHasVisibleChild() {
+            if (!mExtPrefKeys.isEmpty()) return true;
+            boolean hasVisibleChild = false;
+            for (int i = 0; i < mFingerprintUnlockCategory.getPreferenceCount(); i++) {
+                if (mFingerprintUnlockCategory.getPreference(i).isVisible()) {
+                    hasVisibleChild = true;
+                    break;
+                }
+            }
+            return hasVisibleChild;
         }
 
         private void addFingerprintUnlockCategory() {
             mFingerprintUnlockCategory = findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
             if (mFingerprintUnlockCategoryPreferenceController != null) {
                 mFingerprintUnlockCategoryPreferenceController.setCategoryHasChildrenSupplier(
-                        this::fingerprintUnlockCategoryHasChild);
+                        this::fingerprintUnlockCategoryHasVisibleChild);
             }
+
             if (isSfps()) {
                 setupFingerprintUnlockCategoryPreferencesForScreenOnToAuth();
             } else if (screenOffUnlockUdfps() && isScreenOffUnlcokSupported()) {
@@ -891,10 +904,6 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void updateFingerprintUnlockCategoryVisibility() {
-            final int categoryStatus =
-                    mFingerprintUnlockCategoryPreferenceController.getAvailabilityStatus();
-            updatePreferenceVisibility(categoryStatus, mFingerprintUnlockCategory);
-
             if (mRequireScreenOnToAuthPreferenceController != null) {
                 final int status =
                         mRequireScreenOnToAuthPreferenceController.getAvailabilityStatus();
@@ -905,6 +914,11 @@ public class FingerprintSettings extends SubSettings {
                         mScreenOffUnlockUdfpsPreferenceController.getAvailabilityStatus();
                 updatePreferenceVisibility(status, mScreenOffUnlockUdfpsPreference);
             }
+
+            final int categoryStatus =
+                    mFingerprintUnlockCategoryPreferenceController.getAvailabilityStatus();
+            updatePreferenceVisibility(categoryStatus, mFingerprintUnlockCategory);
+
             if (!mExtPrefKeys.isEmpty()) {
                 for (String key: mExtPrefKeys) {
                     Preference preference = mFingerprintUnlockCategory.findPreference(key);
@@ -1501,7 +1515,11 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void highlightFingerprintItem(int fpId) {
-            mVibrator.vibrate(SUCCESS_VIBRATION_EFFECT);
+            if (Flags.msdlFeedback()) {
+                MSDLPlayerWrapper.INSTANCE.playToken(MSDLToken.UNLOCK);
+            } else {
+                mVibrator.vibrate(SUCCESS_VIBRATION_EFFECT);
+            }
             String prefName = genKey(fpId);
             FingerprintPreference fpref = (FingerprintPreference) findPreference(prefName);
             if (fpref == null) {
@@ -1828,8 +1846,12 @@ public class FingerprintSettings extends SubSettings {
 
                             @Override
                             public void onAuthenticationFailed() {
-                                vibrator.vibrate(
+                                if (Flags.msdlFeedback()) {
+                                    MSDLPlayerWrapper.INSTANCE.playToken(MSDLToken.FAILURE);
+                                } else {
+                                    vibrator.vibrate(
                                         VibrationEffect.get(VibrationEffect.EFFECT_DOUBLE_CLICK));
+                                }
                                 message.setText(R.string.fingerprint_check_enroll_not_recognized);
                                 message.postDelayed(() -> {
                                     message.setText(R.string.fingerprint_check_enroll_touch_sensor);
