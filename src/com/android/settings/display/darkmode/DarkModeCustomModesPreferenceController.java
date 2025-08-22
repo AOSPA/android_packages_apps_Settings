@@ -40,6 +40,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /** Controller for the dark theme Modes / Bedtime custom footer. */
+// LINT.IfChange
 public class DarkModeCustomModesPreferenceController extends BasePreferenceController {
     private final UiModeManager mUiModeManager;
     private final BedtimeSettings mBedtimeSettings;
@@ -89,3 +90,4 @@ public class DarkModeCustomModesPreferenceController extends BasePreferenceContr
         }
     }
 }
+// LINT.ThenChange(DarkModeCustomModesFooterPreference.kt)

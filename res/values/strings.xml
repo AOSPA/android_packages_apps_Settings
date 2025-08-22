@@ -3677,9 +3677,7 @@
     <!-- About phone, title of EID for multi-sim devices -->
     <string name="eid_multi_sim">E&#x200B;ID (SIM slot <xliff:g id="eid_slot_id">%1$d</xliff:g>)</string>
     <!-- About phone screen, title for IMEI for multi-sim devices -->
-    <string name="imei_multi_sim">IMEI (SIM slot <xliff:g id="imei_slot_id">%1$d</xliff:g>)</string>
-    <!-- About phone screen, title for primary IMEI for multi-sim devices -->
-    <string name="imei_multi_sim_primary">IMEI (SIM slot <xliff:g id="imei_slot_id_primary">%1$d</xliff:g>) (primary)</string>
+    <string name="imei_multi_sim">IMEI <xliff:g id="imei_id">%1$d</xliff:g></string>
     <!-- About phone screen, summary of the MAC address [CHAR LIMIT=80] -->
     <string name="view_saved_network">To view, choose saved network</string>
     <!-- About phone, status item title. This translation is for specific language only. Like: fr-CA -->
@@ -3695,9 +3693,7 @@
     <!-- About phone, status item title.  The phone PRL Version of the current device.-->
     <string name="status_prl_version">PRL version</string>
     <!-- About phone screen, title for MEID for multi-sim devices -->
-    <string name="meid_multi_sim">MEID (SIM slot <xliff:g id="meid_slot_id">%1$d</xliff:g>)</string>
-    <!-- About phone screen, title for primary MEID for multi-sim devices -->
-    <string name="meid_multi_sim_primary">MEID (SIM slot <xliff:g id="meid_slot_id_primary">%1$d</xliff:g>) (primary)</string>
+    <string name="meid_multi_sim">MEID <xliff:g id="meid_id">%1$d</xliff:g></string>
     <!-- The status text when (Wi-Fi or Bluetooth) scanning is on. [CHAR LIMIT=100] -->
     <string name="scanning_status_text_on">On</string>
     <!-- The status text when (Wi-Fi or Bluetooth) scanning is off. [CHAR LIMIT=100] -->
@@ -3939,7 +3935,7 @@
     <!-- Title of Hub mode category [CHAR LIMIT=30] -->
     <string name="hub_mode_category_title">Hub mode</string>
     <!-- Title of the "widgets on lockscreen" settings page. [CHAR LIMIT=NONE] -->
-    <string name="widgets_on_lockscreen_title">Widgets on lock screen</string>
+    <string name="widgets_on_lockscreen_title">Widgets on lock screen (beta)</string>
 
     <!-- Title of a setting to control when to automatically show widgets on the lockscren. [CHAR LIMIT=NONE] -->
     <string name="when_to_auto_show_hubmode_title">When to automatically show</string>
@@ -9614,6 +9610,9 @@
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Message asking the user how they want their profile notifications to appear when the device is locked [CHAR LIMIT=NONE] -->
     <string name="lock_screen_notifications_interstitial_message_profile">When your device is locked, how do you want profile notifications to show?</string>
 
+    <!-- Notification Settings > Notifications on lock screen > Title for showing notifications on the lock screen main switch. [CHAR LIMIT=100] -->
+    <string name="lockscreen_notification_show_switch">Show on lock screen</string>
+
     <!-- Notification Settings > Notifications on lock screen > Title for showing notifications on the lock screen. [CHAR LIMIT=100] -->
     <string name="lockscreen_notification_what_to_show_title">What to show on lock screen</string>
 
@@ -13440,10 +13439,6 @@
     <string name="sim_onboarding_progressbar_turning_sim_on">Turning on <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>&#8230;</string>
     <!-- Title of service provider name(SPN) at mobile network settings page. [CHAR LIMIT=30] -->
     <string name="mobile_network_spn_title">Mobile network</string>
-    <!-- At the mobile network page, title for primary IMEI for multi-sim devices -->
-    <string name="imei_primary">IMEI (primary)</string>
-    <!-- At the mobile network page, title for primary MEID for multi-sim devices -->
-    <string name="meid_primary">MEID (primary)</string>
     <!-- Title of phone number at mobile network settings page. [CHAR LIMIT=30] -->
     <string name="mobile_network_phone_number_title">Phone number</string>
     <!-- Title of SIM label and color editor dialog at mobile network settings page. [CHAR LIMIT=30] -->

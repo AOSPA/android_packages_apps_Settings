@@ -982,7 +982,7 @@
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"取消保存"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"取消与该应用的关联"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"更多设置"</string>
-    <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"已连接蓝牙音频设备的数量上限"</string>
+    <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"可连接的蓝牙音频设备的数量上限"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"选择已连接蓝牙音频设备的数量上限"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC 详细供应商调试日志"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"在 bug 报告中纳入更多的设备专属供应商日志，其中可能包含私密信息。"</string>
@@ -999,8 +999,7 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"在显示屏之间移动鼠标指针"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"使用外接显示器"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"显示分辨率"</string>
-    <!-- no translation found for external_display_connection_preference (3337612335495542718) -->
-    <skip />
+    <string name="external_display_connection_preference" msgid="3337612335495542718">"默认连接行为"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"用作单独的显示器"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"镜像内置显示器"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"显示连接对话框"</string>
@@ -1441,7 +1440,7 @@
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"将在<xliff:g id="ID_1">%1$s</xliff:g>自动关闭"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"将在日出时自动关闭"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"目前未开启夜间光效"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"需要开启位置信息模式，设备才能确定日落和日出时间。"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"需要设备位置信息，才能确定日落和日出时间。"</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"位置信息设置"</string>
     <string name="twilight_mode_pending_location" msgid="6829434234071614405">"位置信息服务已开启。位置确定后，时间表即会启用。"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"立即开启"</string>
@@ -1501,6 +1500,12 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"弱光模式"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"拿起设备时唤醒"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"仅限无线充电"</string>
+    <!-- no translation found for blur_switch (1391073945502754948) -->
+    <skip />
+    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
+    <skip />
+    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
+    <skip />
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"使用弱光模式"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"选择在弱光模式下显示的内容。"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"关闭屏幕"</string>
@@ -1733,9 +1738,9 @@
     <string name="reset_dashboard_title" msgid="7423200250697886918">"重置选项"</string>
     <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"重置移动网络设置"</string>
     <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"此操作将重置所有移动网络设置"</string>
-    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"重置移动网络设置？"</string>
+    <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"要重置移动网络设置吗？"</string>
     <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"重置蓝牙和 WLAN"</string>
-    <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"这将重置所有 WLAN 和蓝牙设置。此操作无法撤消。"</string>
+    <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"此操作将重置所有 WLAN 和蓝牙设置，且无法撤消。"</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"重置"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"蓝牙和 WLAN 已重置"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"清空 eSIM 卡"</string>
@@ -1750,7 +1755,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"无法清空 eSIM 卡"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"出了点问题，未能清空您的 eSIM 卡。\n\n请重启设备并重试。"</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"删除私密空间"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"设备上的私密空间（若有）将被永久删除，添加到您空间中的 Google 账号将被移除。\n\n您空间中的所有应用及其数据也将从手机的"<b>"内部存储空间"</b>"中永久删除。"</string>
+    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"如果您的设备上有私密空间，此操作会将其永久删除，添加到私密空间中的 Google 账号将被移除。\n\n私密空间中的所有应用及相应数据也将从设备的"<b>"内部存储空间"</b>"中永久删除。"</string>
     <string name="main_clear_title" msgid="277664302144837723">"清除所有数据（恢复出厂设置）"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"清除所有数据（恢复出厂设置）"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"音乐"</li>\n<li>"照片"</li>\n<li>"其他用户数据"</li></string>
@@ -2034,7 +2039,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"紧急警报应用"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"重置应用偏好设置"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"要重置应用偏好设置吗？"</string>
-    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"此操作将会重置以下所有项目的偏好设置：\n\n"<li>"已停用的应用"</li>\n<li>"已停用的应用通知"</li>\n<li>"执行操作的默认应用"</li>\n<li>"应用的后台流量限制"</li>\n<li>"任何权限限制"</li>\n<li>"电池使用情况设置"</li>\n\n"您将不会丢失任何应用数据。"</string>
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"此操作将会重置以下所有项目的偏好设置：\n\n"<li>"已停用的应用"</li>\n<li>"已停用的应用通知"</li>\n<li>"执行操作的默认应用"</li>\n<li>"应用的后台流量限制"</li>\n<li>"任何权限限制"</li>\n<li>"电池使用情况设置"</li>\n\n"您不会丢失任何应用数据。"</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"重置应用"</string>
     <string name="filter" msgid="9039576690686251462">"过滤"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"选择过滤选项"</string>
@@ -2266,8 +2271,8 @@
     <string name="gesture_button_next" msgid="695288092704187356">"下一页"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"重启"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"完成"</string>
-    <string name="action_corner_title" msgid="7411160165577367757">"自定义角落快捷键"</string>
-    <string name="action_corner_summary" msgid="695618538930535335">"使用光标在系统中四处移动"</string>
+    <string name="action_corner_title" msgid="7411160165577367757">"自定义角落快捷方式"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"使用光标来操作系统"</string>
     <string name="action_corner_intro" msgid="2170609118659718140">"从下方选择角落，自定义角落快捷键"</string>
     <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"左下角"</string>
     <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"右下角"</string>
@@ -2493,7 +2498,12 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"点按按钮即可放大"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"快速放大屏幕，更清晰地查看内容"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;如需放大屏幕，请执行以下操作：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 使用快捷方式启动放大功能&lt;br/&gt; {1,number,integer}. 点按屏幕&lt;br/&gt; {2,number,integer}. 拖动双指在屏幕上四处移动&lt;br/&gt; {3,number,integer}. 张合双指以调整缩放比例&lt;br/&gt; {4,number,integer}. 使用快捷方式停止放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;如需暂时放大屏幕，请执行以下操作：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 确保已将放大类型设为“全屏”&lt;br/&gt; {1,number,integer}. 使用快捷方式启动放大功能&lt;br/&gt; {2,number,integer}. 轻触并按住屏幕上的任意位置&lt;br/&gt; {3,number,integer}. 拖动单指在屏幕上四处移动&lt;br/&gt; {4,number,integer}. 抬起手指以停止放大功能"</string>
-    <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;使用键盘缩放：&lt;/b&gt;&lt;br/&gt;{0,number,integer}。使用快捷键开始放大&lt;br/&gt;{1,number,integer}。按住 &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; 和 &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt;，然后按“+”或“-”键放大或缩小&lt;br/&gt; {2,number,integer}。按住 &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; 和 &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt;，然后按箭头键在屏幕上四处移动&lt;br/&gt;{3,number,integer}。使用快捷键停止放大功能"</string>
+    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
+    <skip />
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;如需放大画面，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt;{0,number,integer}. 使用快捷手势开始放大&lt;br/&gt; {1,number,integer}. 点按画面&lt;br/&gt; {2,number,integer}. 拖动 2 指在画面上四处移动&lt;br/&gt; {3,number,integer}. 张合 2 指以调整缩放比例&lt;br/&gt; {4,number,integer}. 使用快捷手势停止放大&lt;br/&gt;&lt;br/&gt; 您还可以暂时放大画面及执行其他操作。"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;如需放大画面，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt;{0,number,integer}. 使用快捷手势开始放大&lt;br/&gt; {1,number,integer}. 点按画面&lt;br/&gt; {2,number,integer}. 拖动 1 或 2 根手指在画面上四处移动&lt;br/&gt; {3,number,integer}. 张合 2 指以调整缩放比例&lt;br/&gt; {4,number,integer}. 使用快捷手势停止放大&lt;br/&gt;&lt;br/&gt; 您还可以暂时放大画面及执行其他操作。"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"开启放大功能后，您就可以放大屏幕上的内容。\n\n"<b>"要放大内容"</b>"，请先启动放大功能，然后点按屏幕上的任意位置。\n"<ul><li>"拖动双指或多指即可进行滚动"</li>\n<li>"张合双指或多指即可调整缩放级别"</li></ul>\n\n<b>"要暂时性放大内容"</b>"，请先启动放大功能，然后轻触并按住屏幕上的任意位置。\n"<ul><li>"拖动手指即可在屏幕上四处移动"</li>\n<li>"松开手指即可缩小回原来的状态"</li></ul>\n\n"您无法针对键盘或导航栏使用放大功能。"</string>
@@ -2584,6 +2594,8 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"扩展版"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"扩展版深色主题"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"自动将深色主题应用于更多应用，改善无障碍功能"</string>
+    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"移除动画"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"减少屏幕动画"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"文本光标闪烁"</string>
@@ -3670,6 +3682,8 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"电池信息, battery info, 制造日期, manufacture date, 充电循环次数, cycle count, 首次使用, first use"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"Android 安全补丁程序级别, 基带版本, 内核版本"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"主题, 浅色, 深色, 模式, 光敏度, 畏光, 调暗, 调低亮度, 深色模式, 偏头痛, theme, light, dark, mode, light sensitivity, photophobia, make darker, darken, dark mode, migraine"</string>
+    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
+    <skip />
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"深色主题"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"错误"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"主动显示, 锁定屏幕显示"</string>
@@ -4395,14 +4409,10 @@
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"查看改变了位置数据共享方式的应用"</string>
     <string name="app_function_access_settings_title" msgid="1837117989202166166">"智能体"</string>
     <string name="app_function_access_settings_summary" msgid="3654291845453799170">"可在应用中访问信息或执行操作的智能体"</string>
-    <!-- no translation found for manage_agent_app_function_access_settings_title (2407736540086293094) -->
-    <skip />
-    <!-- no translation found for manage_agent_app_function_access_settings_summary (5513761879561499076) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_title (6517416582918633839) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_summary (3578937757835411954) -->
-    <skip />
+    <string name="manage_agent_app_function_access_settings_title" msgid="2407736540086293094">"应用访问权限"</string>
+    <string name="manage_agent_app_function_access_settings_summary" msgid="5513761879561499076">"允许此智能体在应用中访问信息或执行操作"</string>
+    <string name="manage_target_app_function_access_settings_title" msgid="6517416582918633839">"智能体访问权限"</string>
+    <string name="manage_target_app_function_access_settings_summary" msgid="3578937757835411954">"可在此应用中访问信息或执行操作的智能体"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"点按唤醒"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"在屏幕上的任意位置点按两次即可唤醒设备"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"打开链接"</string>
@@ -4637,7 +4647,7 @@
     <string name="ota_disable_automatic_update" msgid="1953894421412420231">"系统自动更新"</string>
     <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"设备重启时执行更新"</string>
     <string name="usage" msgid="287782903846013936">"流量消耗"</string>
-    <string name="cellular_data_usage" msgid="5874156338825285334">"移动数据用量"</string>
+    <string name="cellular_data_usage" msgid="5874156338825285334">"移动流量使用情况"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"应用的流量使用情况"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"WLAN 流量用量"</string>
     <string name="non_carrier_data_usage" msgid="6494603202578414755">"非运营商流量消耗"</string>
@@ -4839,14 +4849,10 @@
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"手势导航"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"查看演示"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"按钮导航"</string>
-    <!-- no translation found for button_navigation_settings_order_title (4256756895101424865) -->
-    <skip />
-    <!-- no translation found for navbar_back_button (6386920156044420082) -->
-    <skip />
-    <!-- no translation found for navbar_home_button (951459586446869883) -->
-    <skip />
-    <!-- no translation found for navbar_recent_button (6005580570601162420) -->
-    <skip />
+    <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"按钮顺序"</string>
+    <string name="navbar_back_button" msgid="6386920156044420082">"返回"</string>
+    <string name="navbar_home_button" msgid="951459586446869883">"主屏幕"</string>
+    <string name="navbar_recent_button" msgid="6005580570601162420">"最近"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"手势导航, 返回手势的灵敏度, 返回手势"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"导航, 主屏幕按钮, navigation, home button"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"单手模式"</string>
@@ -5293,7 +5299,7 @@
     <string name="sim_action_switch_sub_dialog_progress" msgid="697127154780501304">"正在切换到<xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="2718084141744769701">"无法切换 SIM 卡"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="8332742656111984482">"出了点问题。无法切换 SIM 卡。"</string>
-    <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"要停用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
+    <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"要停用“<xliff:g id="CARRIER_NAME">%1$s</xliff:g>”吗？"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"要停用 SIM 卡吗？"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"正在停用 SIM 卡<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="1808735136395980905">"无法关闭 SIM 卡"</string>
@@ -5306,7 +5312,7 @@
     <string name="sim_action_no_thanks" msgid="435717748384544195">"不用了"</string>
     <string name="sim_action_cancel" msgid="2668099867029610910">"取消"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"切换"</string>
-    <string name="sim_action_turn_off" msgid="3506698692916473000">"关闭"</string>
+    <string name="sim_action_turn_off" msgid="3506698692916473000">"停用"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"无法激活 SIM 卡"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"请尝试重新启用 SIM 卡。如果问题仍然存在，请重启您的设备。"</string>
     <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"设定您的 SIM 卡偏好设置"</string>
@@ -5980,20 +5986,20 @@
     <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"防止他人打开需要使用“指纹解锁”或“人脸解锁”的应用。连接手表后，您便可随时随地享受身份保护。"</string>
     <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"在更多应用内使用“身份检查”与手表"</string>
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"在住宅或办公室等可信地点，“身份检查”可通过所有支持“指纹解锁”和“人脸解锁”的应用确保您的身份安全。如果将“身份检查”与手表搭配使用，即使您位于可信地点之外也能获享身份保护。"</string>
-    <!-- no translation found for more_security_privacy_category_title (6107292123094705732) -->
-    <skip />
-    <!-- no translation found for more_security_privacy_summary (8049801531406061219) -->
-    <skip />
-    <!-- no translation found for privacy_sources_title (7648842637181479352) -->
-    <skip />
-    <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
-    <skip />
-    <!-- no translation found for device_unlock_subpage_title (8619367783572270468) -->
-    <skip />
-    <!-- no translation found for lock_screen_title (4701994278040604018) -->
-    <skip />
+    <string name="more_security_privacy_category_title" msgid="6107292123094705732">"其他设置"</string>
+    <string name="more_security_privacy_summary" msgid="8049801531406061219">"自动填充、通知等"</string>
+    <string name="privacy_sources_title" msgid="7648842637181479352">"隐私控制"</string>
+    <string name="privacy_sources_summary" msgid="8795612902105833258">"权限、控制"</string>
+    <string name="device_unlock_subpage_title" msgid="8619367783572270468">"设备解锁"</string>
+    <string name="lock_screen_title" msgid="4701994278040604018">"屏幕锁定"</string>
     <!-- no translation found for location_settings (6833222354060094170) -->
     <skip />
     <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
+    <skip />
+    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
     <skip />
 </resources>

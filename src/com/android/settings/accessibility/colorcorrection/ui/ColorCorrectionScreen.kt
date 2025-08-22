@@ -22,16 +22,22 @@ import android.content.Intent
 import android.provider.Settings
 import android.provider.Settings.ACTION_COLOR_CORRECTION_SETTINGS
 import androidx.fragment.app.Fragment
+import com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
+import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment
+import com.android.settings.accessibility.colorcorrection.data.ColorCorrectionModeDataStore
+import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
+import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.R as SettingsLibR
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -64,7 +70,7 @@ class ColorCorrectionScreen :
     override fun fragmentClass(): Class<out Fragment>? =
         ToggleDaltonizerPreferenceFragment::class.java
 
-    override fun hasCompleteHierarchy() = false
+    override fun isIndexable(context: Context) = true
 
     override fun isFlagEnabled(context: Context) = Flags.catalystDaltonizer()
 
@@ -102,7 +108,34 @@ class ColorCorrectionScreen :
         Intent(ACTION_COLOR_CORRECTION_SETTINGS).apply { highlightPreference(metadata?.key) }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            +IntroPreference()
+            +ColorCorrectionPreviewPreference()
+            +ColorCorrectionMainSwitchPreference(context)
+            +IntensityPreference(context)
+            val modeStorage = ColorCorrectionModeDataStore(context.applicationContext)
+            +DeuteranomalyModePreference(modeStorage)
+            +ProtanomalyModePreference(modeStorage)
+            +TritanomalyModePreference(modeStorage)
+            +GrayscaleModePreference(modeStorage)
+            +PreferenceCategory(
+                key = "general_categories",
+                title = R.string.accessibility_screen_option,
+            ) +=
+                {
+                    +AccessibilityShortcutPreference(
+                        context = context,
+                        key = "daltonizer_shortcut_key",
+                        title = R.string.accessibility_daltonizer_shortcut_title,
+                        componentName = DALTONIZER_COMPONENT_NAME,
+                        featureName =
+                            SettingsLibR.string.accessibility_display_daltonizer_preference_title,
+                        metricsCategory = metricsCategory,
+                    )
+                }
+            +FooterPreference()
+            +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
+        }
 
     companion object {
         const val KEY = "daltonizer_preference"

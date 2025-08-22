@@ -1199,7 +1199,7 @@
     <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"Percayai pada penggunaan pertama"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Nama jaringan terlalu panjang."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Domain harus ditentukan."</string>
-    <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Sertifikat diwajibkan."</string>
+    <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Informasi sertifikat wajib diisi."</string>
     <string name="wifi_scan_always_turnon_message" msgid="2165909441512029921">"Untuk meningkatkan ketepatan lokasi dan untuk tujuan lainnya, <xliff:g id="APP_NAME">%1$s</xliff:g> ingin mengaktifkan pemindaian jaringan, bahkan saat Wi-Fi sedang tidak aktif.\n\nIzinkan ini untuk semua aplikasi yang ingin memindai?"</string>
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Untuk meningkatkan akurasi lokasi dan untuk tujuan-tujuan lainnya, sebuah aplikasi yang tidak dikenal ingin mengaktifkan pemindaian jaringan, bahkan saat Wi‑Fi nonaktif.\n\nIzinkan ini untuk semua aplikasi yang ingin memindai?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="4154200627800959777">"Izinkan"</string>
@@ -1501,6 +1501,12 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Mode cahaya redup"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Angkat untuk membangunkan"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Hanya saat mengisi daya secara nirkabel"</string>
+    <!-- no translation found for blur_switch (1391073945502754948) -->
+    <skip />
+    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
+    <skip />
+    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
+    <skip />
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Gunakan mode Cahaya Redup"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Pilih apa yang akan ditampilkan dalam mode Cahaya Redup"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Layar nonaktif"</string>
@@ -1589,7 +1595,7 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Nonaktif"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <string name="status_data_network_type" msgid="3689772955330665876">"Jenis jaringan kuota"</string>
+    <string name="status_data_network_type" msgid="3689772955330665876">"Jenis jaringan data seluler"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Jenis jaringan suara seluler"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Info operator"</string>
     <string name="status_data_state" msgid="525196229491743487">"Status jaringan seluler"</string>
@@ -1735,7 +1741,7 @@
     <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"Tindakan ini akan mereset semua setelan jaringan seluler"</string>
     <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"Reset Setelan Jaringan Seluler?"</string>
     <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Reset Bluetooth &amp; Wi‑Fi"</string>
-    <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Tindakan ini akan mereset semua setelan Wi‑Fi &amp; Bluetooth. Anda tidak dapat mengurungkan tindakan ini."</string>
+    <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Tindakan ini akan mereset semua setelan Wi‑Fi &amp; Bluetooth. Anda tidak dapat mengurungkannya."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Reset"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth &amp; Wi‑Fi telah direset"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Hapus eSIM"</string>
@@ -2182,7 +2188,7 @@
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"Cara menggunakan tombol utama"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"Cara menggunakan keypad numerik"</string>
     <string name="mouse_keys_numpad_keys_image_list_summary" msgid="2186017679302722178">"Keypad numerik akan selalu digunakan saat Number Lock (Num Lock) aktif"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll ke atas untuk memindahkan halaman ke bawah"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll ke atas untuk menggerakkan halaman ke bawah"</string>
     <string name="mouse_scrolling_category_title" msgid="2992126595687187296">"Scroll"</string>
     <string name="mouse_scrolling_acceleration" msgid="7119758828203396430">"Scroll terkontrol"</string>
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Kecepatan scroll"</string>
@@ -2267,7 +2273,7 @@
     <string name="gesture_button_restart" msgid="1895850891992530133">"Mulai ulang"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Selesai"</string>
     <string name="action_corner_title" msgid="7411160165577367757">"Sesuaikan pintasan pojok"</string>
-    <string name="action_corner_summary" msgid="695618538930535335">"Gunakan kursor untuk membuka sistem"</string>
+    <string name="action_corner_summary" msgid="695618538930535335">"Gunakan kursor untuk mengoperasikan sistem"</string>
     <string name="action_corner_intro" msgid="2170609118659718140">"Pilih area berikut untuk menyesuaikan pintasan pojok"</string>
     <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Pojok kiri bawah"</string>
     <string name="action_corner_bottom_right_title" msgid="7222233500548465684">"Pojok kanan bawah"</string>
@@ -2493,7 +2499,12 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Ketuk tombol untuk zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Perbesar layar dengan cepat untuk membuat konten terlihat lebih besar"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Untuk memperbesar:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; {1,number,integer}. Ketuk layar&lt;br/&gt; {2,number,integer}. Tarik dengan 2 jari untuk berpindah pada layar&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk menyesuaikan zoom&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk memperbesar sementara:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Pastikan jenis pembesaran disetel ke layar penuh&lt;br/&gt; {1,number,integer}. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; {2,number,integer}. Sentuh lama di mana pun pada layar&lt;br/&gt; {3,number,integer}. Tarik dengan jari untuk berpindah pada layar&lt;br/&gt; {4,number,integer}. Angkat jari untuk menghentikan pembesaran"</string>
-    <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;Untuk memperbesar dengan keyboard:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; {1,number,integer}. Tahan &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; dan &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt;, lalu tekan + atau - untuk memperbesar atau memperkecil&lt;br/&gt; {2,number,integer}. Tahan &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; dan &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt;, lalu tekan tombol panah untuk berpindah pada layar&lt;br/&gt; {3,number,integer}. Gunakan pintasan untuk menghentikan pembesaran"</string>
+    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
+    <skip />
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Untuk memperbesar:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; {1,number,integer}. Ketuk layar&lt;br/&gt; {2,number,integer}. Tarik 2 jari untuk berpindah pada layar&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk menyesuaikan zoom&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; Anda juga dapat memperbesar sementara dan lainnya."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Untuk memperbesar:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; {1,number,integer}. Ketuk layar&lt;br/&gt; {2,number,integer}. Tarik 1 atau 2 jari untuk berpindah pada layar&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk menyesuaikan zoom&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; Anda juga dapat memperbesar sementara dan lainnya."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Jika pembesaran diaktifkan, Anda dapat memperbesar tampilan layar.\n\n"<b>"Untuk memperbesar tampilan"</b>", mulai pembesaran, lalu ketuk di bagian mana saja pada layar.\n"<ul><li>"Tarik dengan 2 jari atau lebih untuk melakukan scroll"</li>\n<li>"Cubit dengan 2 jari atau lebih untuk menyesuaikan pembesaran"</li></ul>\n\n<b>"Untuk memperbesar tampilan sementara"</b>", mulai pembesaran, lalu sentuh lama di bagian mana saja pada layar.\n"<ul><li>"• Tarik untuk menggeser layar"</li>\n<li>"• Angkat jari untuk memperkecil tampilan"</li></ul>\n\n"Anda tidak dapat memperbesar keyboard atau menu navigasi."</string>
@@ -2584,10 +2595,12 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Diperluas"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Tema gelap yang Diperluas"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Otomatis menerapkan Tema gelap ke lebih banyak aplikasi untuk meningkatkan aksesibilitas"</string>
+    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Hapus animasi"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Kurangi gerakan di layar"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Kursor teks berkedip"</string>
-    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"Atur kecepatan kedipan kursor teks atau nonaktifkan kedipan. Mungkin tidak didukung di semua aplikasi atau situs."</string>
+    <string name="accessibility_text_cursor_blink_rate_summary" msgid="6629885087638846245">"Atur kecepatan kedipan kursor teks atau nonaktifkan kedipan. Mungkin hanya aplikasi atau situs tertentu yang mendukungnya."</string>
     <string name="accessibility_text_cursor_blink_rate_slower_desc" msgid="5255697869959801747">"Kurangi kecepatan kedipan"</string>
     <string name="accessibility_text_cursor_blink_rate_faster_desc" msgid="5236406089575390876">"Tingkatkan kecepatan kedipan"</string>
     <string name="accessibility_text_cursor_blink_rate_reset_button_label" msgid="393679766407314372">"Reset"</string>
@@ -3668,6 +3681,8 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"info baterai, tanggal perakitan, jumlah siklus, penggunaan pertama"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"level patch keamanan android, versi pita basis, versi kernel"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, terang, gelap, mode, sensitivitas cahaya, fotofobia, buat lebih gelap, gelapkan, mode gelap, migrain"</string>
+    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
+    <skip />
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"tema gelap"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"bug"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Tampilan standby, tampilan Layar kunci"</string>
@@ -4392,14 +4407,10 @@
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Tinjau aplikasi yang mengubah caranya berbagi data lokasi Anda"</string>
     <string name="app_function_access_settings_title" msgid="1837117989202166166">"Agen"</string>
     <string name="app_function_access_settings_summary" msgid="3654291845453799170">"Agen yang dapat mengakses info atau mengambil tindakan di aplikasi"</string>
-    <!-- no translation found for manage_agent_app_function_access_settings_title (2407736540086293094) -->
-    <skip />
-    <!-- no translation found for manage_agent_app_function_access_settings_summary (5513761879561499076) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_title (6517416582918633839) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_summary (3578937757835411954) -->
-    <skip />
+    <string name="manage_agent_app_function_access_settings_title" msgid="2407736540086293094">"Akses aplikasi"</string>
+    <string name="manage_agent_app_function_access_settings_summary" msgid="5513761879561499076">"Izinkan agen ini mengakses info atau mengambil tindakan di aplikasi"</string>
+    <string name="manage_target_app_function_access_settings_title" msgid="6517416582918633839">"Akses agen"</string>
+    <string name="manage_target_app_function_access_settings_summary" msgid="3578937757835411954">"Agen yang dapat mengakses info atau mengambil tindakan di aplikasi ini"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Ketuk untuk membangunkan"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Ketuk layar dua kali di mana saja untuk membangunkan perangkat"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Membuka link"</string>
@@ -5771,7 +5782,7 @@
     <string name="show_stylus_pointer_icon" msgid="1010583689203665786">"Tampilkan pointer di tempat yang ditunjuk"</string>
     <string name="media_drm_settings_title" msgid="897424966554739867">"Setelan Media DRM"</string>
     <string name="force_swcrypto_fallback_title" msgid="8053166299808645593">"Paksa Software Secure Crypto"</string>
-    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Memaksa pengelolaan kunci DRM untuk menggunakan kripto whitebox berbasis software"</string>
+    <string name="force_swcrypto_fallback_summary" msgid="181969966310309701">"Paksa pengelolaan kunci DRM menggunakan kripto whitebox berbasis software"</string>
     <string name="fingerprint_acquired_imager_dirty_udfps" msgid="7005042288289506776">"Bersihkan layar di dekat sensor, lalu coba lagi"</string>
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Dikonversi ke eSIM. Hapus."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Sinkronkan di seluruh perangkat"</string>
@@ -5960,10 +5971,8 @@
     <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Cegah orang lain membuka aplikasi yang memerlukan fitur Buka dengan Sidik Jari atau Buka dengan Wajah. Saat terhubung ke smartwatch, keamanan Anda tetap terjaga dengan mobilitas yang lebih baik."</string>
     <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Gunakan Cek Identitas dan smartwatch di lebih banyak aplikasi"</string>
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Pastikan perlindungan identitas Anda di semua aplikasi yang mendukung fitur Buka dengan Sidik Jari dan Buka dengan Wajah di tempat tepercaya seperti rumah atau kantor Anda. Gunakan Cek Identitas dengan smartwatch untuk memperluas perlindungan Anda bahkan di luar tempat tepercaya."</string>
-    <!-- no translation found for more_security_privacy_category_title (6107292123094705732) -->
-    <skip />
-    <!-- no translation found for more_security_privacy_summary (8049801531406061219) -->
-    <skip />
+    <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Setelan lainnya"</string>
+    <string name="more_security_privacy_summary" msgid="8049801531406061219">"Isi otomatis, notifikasi, dan lainnya"</string>
     <!-- no translation found for privacy_sources_title (7648842637181479352) -->
     <skip />
     <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
@@ -5975,5 +5984,11 @@
     <!-- no translation found for location_settings (6833222354060094170) -->
     <skip />
     <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
+    <skip />
+    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
     <skip />
 </resources>

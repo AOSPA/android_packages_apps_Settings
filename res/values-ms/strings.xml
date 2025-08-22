@@ -987,7 +987,7 @@
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Log nyahpepijat vendor berjela NFC"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Sertakan log vendor khusus peranti tambahan dalam laporan pepijat, yang mungkin mengandungi maklumat peribadi."</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"Log NFC NCI yang tidak ditapis"</string>
-    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Catat butiran paket NFC yang mungkin mengandungi maklumat peribadi."</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Catat butiran paket NFC, yang mungkin mengandungi maklumat peribadi."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Mulakan Semula Peranti?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Pengelogan butiran NFC adalah khusus untuk tujuan pembangunan sahaja. Data tambahan NFC disertakan dalam laporan pepijat yang mungkin mengandungi maklumat peribadi. Mulakan semula peranti anda untuk menukar tetapan ini."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Mulakan semula"</string>
@@ -999,8 +999,7 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Gerakkan tetikus anda antara paparan"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Gunakan paparan luaran"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Peleraian paparan"</string>
-    <!-- no translation found for external_display_connection_preference (3337612335495542718) -->
-    <skip />
+    <string name="external_display_connection_preference" msgid="3337612335495542718">"Gelagat sambungan lalai"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Gunakan sebagai paparan berasingan"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Segerakkan paparan terbina dalam"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Tunjukkan dialog sambungan"</string>
@@ -1108,7 +1107,7 @@
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Masukkan SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Keselamatan"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Rangkaian tersembunyi"</string>
-    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Jika penghala anda tidak menyiarkan ID rangkaian tetapi anda mahu menyambungkan telefon ke rangkaian ini pada masa hadapan, anda boleh menetapkan rangkaian tersebut sebagai disembunyikan.\n\nIni boleh menimbulkan risiko keselamatan kerana telefon anda akan menyiarkan isyarat secara kerap untuk mencari rangkaian itu.\n\nPenetapan rangkaian sebagai disembunyikan tidak menukar tetapan penghala anda."</string>
+    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Jika penghala tidak menyiarkan ID rangkaian tetapi anda mahu menyambungkan telefon ke rangkaian ini pada masa hadapan, anda boleh menetapkan rangkaian sebagai disembunyikan.\n\nTindakan ini boleh menimbulkan risiko keselamatan kerana telefon anda akan menyiarkan isyarat secara kerap untuk mencari rangkaian.\n\nPenetapan rangkaian sebagai disembunyikan tidak menukar tetapan penghala."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Kekuatan isyarat"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Status"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Kelajuan pautan hantar"</string>
@@ -1466,7 +1465,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Akan dimatikan secara automatik selepas waktu tidur"</string>
     <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"Akan dimatikan apabila <xliff:g id="ID_1">%1$s</xliff:g> tamat"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Tema hitam menggunakan latar belakang hitam untuk memastikan bateri tahan lebih lama pada sesetengah skrin. Jadual tema gelap menunggu untuk dihidupkan hingga skrin anda dimatikan."</string>
-    <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Gunakan latar gelap untuk menjadikan skrin anda lebih selesa untuk ditonton dan mengurangkan penggunaan bateri pada sesetengah skrin. Tema anda akan ditukar jika anda mempunyai jadual, apabila skrin dimatikan."</string>
+    <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Gunakan latar gelap untuk menjadikan skrin anda lebih selesa untuk dilihat dan mengurangkan penggunaan bateri pada sesetengah skrin. Tema akan ditukar jika anda mempunyai jadual, apabila skrin dimatikan."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tema gelap kini mengikut jadual mod Waktu Tidur anda"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Tetapan mod waktu tidur"</string>
     <string name="dark_ui_modes_footer_summary" msgid="22160899184470368">"{count,plural,offset:2 =0{Mod juga boleh menghidupkan Tema gelap.}=1{{mode_1} juga menghidupkan Tema gelap.}=2{{mode_1} dan {mode_2} juga menghidupkan Tema gelap.}=3{{mode_1}, {mode_2} dan {mode_3} juga menghidupkan Tema gelap.}other{{mode_1}, {mode_2} dan # lagi juga menghidupkan Tema gelap.}}"</string>
@@ -1501,6 +1500,12 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Mod cahaya malap"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Angkat untuk bangunkan"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Hadkan kepada pengecasan wayarles"</string>
+    <!-- no translation found for blur_switch (1391073945502754948) -->
+    <skip />
+    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
+    <skip />
+    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
+    <skip />
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Gunakan Mod Cahaya Malap"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Pilih perkara yang mahu dipaparkan dalam mod Cahaya Malap"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Skrin dimatikan"</string>
@@ -1739,7 +1744,7 @@
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Tetapkan semula"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth &amp; Wi-Fi telah ditetapkan semula"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Padam eSIM"</string>
-    <string name="reset_esim_desc" msgid="6125192435907740751">"Tindakan ini tidak akan membatalkan pelan perkhidmatan mudah alih anda. Hubungi pembawa anda untuk mendapatkan penggantian SIM."</string>
+    <string name="reset_esim_desc" msgid="6125192435907740751">"Tindakan ini tidak akan membatalkan pelan perkhidmatan mudah alih anda. Hubungi pembawa anda untuk mendapatkan SIM pengganti."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Tetapkan semula tetapan"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Tetapkan semula semua tetapan rangkaian? Tindakan ini tidak boleh dibuat asal."</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Tetapkan semula semua tetapan rangkaian dan padamkan eSIM? Tindakan ini tidak boleh dibuat asal."</string>
@@ -2191,7 +2196,7 @@
     <string name="mouse_pointer_speed_make_faster_desc" msgid="7665912663672314461">"Tetapkan kelajuan penuding yang lebih pantas"</string>
     <string name="mouse_pointer_speed_make_slower_desc" msgid="116802579827902188">"Tetapkan kelajuan penuding yang lebih perlahan"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Tukar butang tetikus utama"</string>
-    <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Gunakan butang tetikus kiri sebagai klik kanan anda"</string>
+    <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Gunakan butang tetikus kiri sebagai klik kanan"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Pecutan kursor"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Pergerakan lebih pantas dengan tetikus anda akan menggerakkan kursor lebih jauh"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Kekunci tetikus untuk <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
@@ -2493,7 +2498,9 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Ketik butang untuk mengezum"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zum masuk dengan pantas pada skrin untuk menjadikan kandungan lebih besar"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Ketik skrin&lt;br/&gt; {2,number,integer}. Seret 2 jari untuk menerokai skrin&lt;br/&gt; {3,number,integer}. Jepit dengan 2 jari untuk melaraskan zum&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk mengezum masuk sementara:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Pastikan jenis pembesaran ditetapkan kepada skrin penuh&lt;br/&gt; {1,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {2,number,integer}. Sentuh &amp; tahan di mana-mana pada skrin&lt;br/&gt; {3,number,integer}. Seret jari untuk menerokai skrin&lt;br/&gt; {4,number,integer}. Angkat jari untuk menghentikan pembesaran"</string>
-    <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;Untuk mengezum dengan papan kekunci:&lt;/b&gt;&lt;br/&gt; {0,nombor,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,nombor,integer}. Tahan &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; dan &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; dan tekan + atau - untuk mengezum masuk atau keluar&lt;br/&gt; {2,nombor,integer}. Tahan &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; dan &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; dan tekan kekunci anak panah untuk bergerak sekitar skrin&lt;br/&gt; {3,nombor,integer}. Gunakan pintasan untuk menghentikan pembesaran"</string>
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan atau tekan &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Tekan &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + kekunci anak panah untuk menerokai skrin&lt;br/&gt; {2,number,integer}. Tekan &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; dan \"+\" atau \"-\" untuk melaraskan zum&lt;br/&gt; {3,number,integer}. Gunakan pintasan atau &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M untuk menghentikan pembesaran"</string>
+    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Tekan &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + kekunci anak panah untuk menerokai skrin&lt;br/&gt; {2,number,integer}. Tekan &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; dan \"+\" atau \"-\" untuk melaraskan zum&lt;br/&gt; {3,number,integer}. Gunakan pintasan untuk menghentikan pembesaran"</string>
+    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;Papan kekunci&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan atau tekan &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Tekan &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + kekunci anak panah untuk menerokai skrin&lt;br/&gt; {2,number,integer}. Tekan &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; dan \"+\" atau \"-\" untuk melaraskan zum&lt;br/&gt; {3,number,integer}. Gunakan pintasan atau &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Skrin sentuh&lt;/b&gt;&lt;br/&gt; Untuk zum masuk:&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Ketik skrin&lt;br/&gt; {2,number,integer}. Seret 2 jari untuk menerokai skrin&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk melaraskan zum&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; Untuk zum masuk sementara waktu:&lt;br/&gt; {0,number,integer}. Pastikan jenis pembesaran anda ditetapkan kepada skrin penuh&lt;br/&gt; {1,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {2,number,integer}. Sentuh &amp; tahan di mana-mana pada skrin&lt;br/&gt; {3,number,integer}. Seret jari untuk menerokai skrin&lt;br/&gt; {4,number,integer}. Angkat jari untuk menghentikan pembesaran"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Ketik skrin&lt;br/&gt; {2,number,integer}. Seret 2 jari untuk menerokai skrin&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk melaraskan zum&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; Anda juga boleh mengezum masuk untuk sementara waktu dan banyak lagi."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Ketik skrin&lt;br/&gt; {2,number,integer}. Seret 1 atau 2 jari untuk menerokai skrin&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk melaraskan zum&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; Anda juga boleh mengezum masuk untuk sementara waktu dan banyak lagi."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Apabila pembesaran dihidupkan, anda boleh mengezum masuk pada skrin.\n\n"<b>"Untuk mengezum"</b>", mulakan pembesaran, kemudian ketik di mana-mana pada skrin.\n"<ul><li>"Seret sekurang-kurangnya 2 jari untuk menatal"</li>\n<li>"Cubit menggunakan sekurang-kurangnya 2 jari untuk melaraskan zum"</li></ul>\n\n<b>"Untuk mengezum sementara"</b>", mulakan pembesaran, kemudian sentuh &amp; tahan di mana-mana pada skrin.\n"<ul><li>"Seret untuk beralih-alih di sekitar skrin"</li>\n<li>"Angkat jari untuk mengezum keluar"</li></ul>\n\n"Anda tidak boleh mengezum masuk pada papan kekunci atau bar navigasi."</string>
@@ -2584,6 +2591,8 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Dikembangkan"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Tema gelap dikembangkan"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Menggunakan Tema gelap secara automatik pada lebih banyak apl untuk kebolehaksesan yang ditingkatkan"</string>
+    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Alih keluar animasi"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Kurangkan pergerakan pada skrin"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Kursor teks berkelip"</string>
@@ -3668,6 +3677,8 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"maklumat bateri, tarikh pembuatan, kiraan kitaran, penggunaan pertama"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"tahap tampung keselamatan android, versi jalur dasar, versi inti"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, cerah, gelap, mod, kepekaan cahaya, fotofobia, jadikan lebih gelap, gelapkan, mod gelap, migrain"</string>
+    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
+    <skip />
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"tema gelap"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"pepijat"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Paparan ambien, Paparan skrin kunci"</string>
@@ -4832,14 +4843,10 @@
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigasi Gerak Isyarat"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Cuba tunjuk cara"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigasi butang"</string>
-    <!-- no translation found for button_navigation_settings_order_title (4256756895101424865) -->
-    <skip />
-    <!-- no translation found for navbar_back_button (6386920156044420082) -->
-    <skip />
-    <!-- no translation found for navbar_home_button (951459586446869883) -->
-    <skip />
-    <!-- no translation found for navbar_recent_button (6005580570601162420) -->
-    <skip />
+    <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Urutan butang"</string>
+    <string name="navbar_back_button" msgid="6386920156044420082">"Kembali"</string>
+    <string name="navbar_home_button" msgid="951459586446869883">"Laman Utama"</string>
+    <string name="navbar_recent_button" msgid="6005580570601162420">"Terbaharu"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigasi gerak isyarat, kepekaan ke belakang, gerak isyarat ke belakang"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigasi, butang skrin utama"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Mod sebelah tangan"</string>
@@ -5958,16 +5965,16 @@
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Memastikan perlindungan identiti anda pada semua apl yang menyokong Cap Jari dan Buka Kunci Wajah pada tempat yang dipercayai seperti rumah atau pejabat anda. Gunakan Semakan Identiti dengan jam tangan anda untuk melanjutkan perlindungan anda lebih jauh daripada tempat yang dipercayai."</string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Tetapan lain"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Autolengkap, pemberitahuan dan pelbagai lagi"</string>
-    <!-- no translation found for privacy_sources_title (7648842637181479352) -->
+    <string name="privacy_sources_title" msgid="7648842637181479352">"Kawalan privasi"</string>
+    <string name="privacy_sources_summary" msgid="8795612902105833258">"Kebenaran, kawalan"</string>
+    <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Buka kunci peranti"</string>
+    <string name="lock_screen_title" msgid="4701994278040604018">"Kunci skrin"</string>
+    <string name="location_settings" msgid="6833222354060094170">"Akses lokasi"</string>
+    <string name="location_settings_subtitle" msgid="8471780117911010030">"Lihat apl dan perkhidmatan yang mempunyai akses kepada lokasi"</string>
+    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
     <skip />
-    <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
+    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
     <skip />
-    <!-- no translation found for device_unlock_subpage_title (8619367783572270468) -->
-    <skip />
-    <!-- no translation found for lock_screen_title (4701994278040604018) -->
-    <skip />
-    <!-- no translation found for location_settings (6833222354060094170) -->
-    <skip />
-    <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
+    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
     <skip />
 </resources>

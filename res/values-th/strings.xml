@@ -1196,7 +1196,7 @@
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(เพิ่มใบรับรองหลายใบแล้ว)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"ใช้ใบรับรองของระบบ"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"ไม่ต้องระบุ"</string>
-    <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"Trust on First Use"</string>
+    <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"เชื่อถือเมื่อใช้ครั้งแรก"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"ชื่อเครือข่ายยาวเกินไป"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ต้องระบุโดเมน"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"ต้องมีใบรับรอง"</string>
@@ -1501,6 +1501,12 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"โหมดแสงน้อย"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"ยกขึ้นเพื่อเวก"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"จำกัดไว้ที่การชาร์จแบบไร้สาย"</string>
+    <!-- no translation found for blur_switch (1391073945502754948) -->
+    <skip />
+    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
+    <skip />
+    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
+    <skip />
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"ใช้โหมดแสงน้อย"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"เลือกสิ่งที่จะแสดงในโหมดแสงน้อย"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"หน้าจอปิดอยู่"</string>
@@ -1590,7 +1596,7 @@
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"ประเภทเครือข่ายเน็ตมือถือ"</string>
-    <string name="status_voice_network_type" msgid="8700356693062562884">"ประเภทเครือข่ายชุมสายมือถือ"</string>
+    <string name="status_voice_network_type" msgid="8700356693062562884">"ประเภทเครือข่ายเสียงสำหรับมือถือ"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"ข้อมูลผู้ให้บริการ"</string>
     <string name="status_data_state" msgid="525196229491743487">"สถานะเครือข่ายมือถือ"</string>
     <string name="status_esim_id" msgid="5158916796362809133">"EID"</string>
@@ -2152,9 +2158,9 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"การช่วยเหลือพิเศษ"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"แป้นพิมพ์จริง"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"เครื่องมือเลือกรูปแบบแป้นพิมพ์จริง"</string>
-    <string name="bounce_keys" msgid="7419450970351743904">"คีย์ตีกลับ"</string>
+    <string name="bounce_keys" msgid="7419450970351743904">"Bounce Key"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"ละเว้นการกดปุ่มเดียวกันซ้ำๆ อย่างรวดเร็ว"</string>
-    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"การหน่วงเวลาคีย์ตีกลับ"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"การหน่วงเวลา Bounce Key"</string>
     <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"เลือกระยะเวลาที่แป้นพิมพ์จะละเว้นการกดแป้นพิมพ์ซ้ำ"</string>
     <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0.2 วินาที"</string>
     <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0.4 วินาที"</string>
@@ -2162,7 +2168,7 @@
     <string name="input_setting_keys_dialog_option_custom" msgid="2353045390598308685">"<xliff:g id="THRESHOLD">%.1f</xliff:g> วินาที"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"กำหนดเอง"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"ค่าที่กำหนดเอง"</string>
-    <string name="input_setting_bounce_keys_seekbar_desc" msgid="4575595566548124309">"เวลาเกณฑ์ของคีย์ตีกลับ"</string>
+    <string name="input_setting_bounce_keys_seekbar_desc" msgid="4575595566548124309">"เวลาเกณฑ์ของ Bounce Key"</string>
     <string name="input_setting_slow_keys_seekbar_desc" msgid="2171726970136563995">"เวลาเกณฑ์ของการเพิ่มระยะเวลาในการกดปุ่ม"</string>
     <string name="slow_keys" msgid="2891452895499690837">"เพิ่มระยะเวลาในการกดปุ่ม"</string>
     <string name="slow_keys_summary" msgid="3852534180402969185">"เปลี่ยนระยะเวลาที่ต้องกดแป้นค้างไว้ก่อนที่จะลงทะเบียน"</string>
@@ -2294,7 +2300,7 @@
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"เลือกแป้นกดร่วม"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"เลือกคีย์ใหม่สำหรับ <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"การช่วยเหลือพิเศษด้วยแป้นพิมพ์จริง"</string>
-    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"คีย์ติดหนึบ คีย์ตีกลับ แป้นเมาส์"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"คีย์ติดหนึบ, Bounce Key, แป้นเมาส์"</string>
     <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"แป้นพิมพ์ซ้ำ"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"หน่วงเวลาก่อนพิมพ์ซ้ำ"</string>
     <string name="keyboard_repeat_keys_increase_delay_desc" msgid="9131810864682287872">"เพิ่มการหน่วงเวลา"</string>
@@ -2493,7 +2499,12 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"แตะปุ่มเพื่อซูม"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"ซูมเข้าอย่างรวดเร็วบนหน้าจอเพื่อทำให้เนื้อหาใหญ่ขึ้น"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer}. แตะหน้าจอ&lt;br/&gt; {2,number,integer}. ใช้ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer}. บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; {4,number,integer}. ใช้ทางลัดเพื่อหยุดการขยาย&lt;br/&gt;&lt;br/&gt; &lt;b&gt;วิธีซูมเข้าชั่วคราว&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ตรวจสอบว่าตั้งค่าประเภทการขยายเป็นแบบเต็มหน้าจอ&lt;br/&gt; {1,number,integer}. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {2,number,integer}. แตะที่ใดก็ได้บนหน้าจอค้างไว้&lt;br/&gt; {3,number,integer}. ลากนิ้วเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {4,number,integer}. ยกนิ้วขึ้นเพื่อหยุดการขยาย"</string>
-    <string name="accessibility_screen_magnification_keyboard_summary" msgid="2504303274186294767">"&lt;b&gt;วิธีซูมด้วยแป้นพิมพ์&lt;/b&gt;&lt;br/&gt; {0,number,integer} ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer} กด &lt;xliff:g id=meta1&gt;%1$s&lt;/xliff:g&gt; และ &lt;xliff:g id=alt1&gt;%2$s&lt;/xliff:g&gt; ค้างไว้ แล้วกด + หรือ - เพื่อซูมเข้าหรือออก&lt;br/&gt; {2,number,integer} กด &lt;xliff:g id=meta2&gt;%3$s&lt;/xliff:g&gt; และ &lt;xliff:g id=alt2&gt;%4$s&lt;/xliff:g&gt; ค้างไว้ แล้วกดปุ่มลูกศรเพื่อเคลื่อนที่ไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer} ใช้ทางลัดเพื่อหยุดการขยาย"</string>
+    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
+    <skip />
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; {0,number,integer} ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer} แตะหน้าจอ&lt;br/&gt; {2,number,integer} ใช้ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer} บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; {4,number,integer} ใช้ทางลัดเพื่อหยุดใช้งานการขยาย&lt;br/&gt;&lt;br/&gt; คุณยังซูมเข้าชั่วคราวและอื่นๆ ได้ด้วย"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; {0,number,integer} ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer} แตะหน้าจอ&lt;br/&gt; {2,number,integer} ใช้ 1 หรือ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer}. บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; {4,number,integer} ใช้ทางลัดเพื่อหยุดใช้งานการขยาย&lt;br/&gt;&lt;br/&gt; คุณยังซูมเข้าชั่วคราวและอื่นๆ ได้ด้วย"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"คุณจะซูมหน้าจอเข้าได้เมื่อเปิดการขยาย\n\n"<b>"วิธีซูมคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอ\n"<ul><li>"ลากนิ้วอย่างน้อย 2 นิ้วเพื่อเลื่อน"</li>\n<li>"บีบนิ้วอย่างน้อย 2 นิ้วเพื่อปรับการซูม"</li></ul>\n\n<b>"วิธีซูมชั่วคราวคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอค้างไว้\n"<ul><li>"ลากเพื่อไปยังส่วนต่างๆ ในหน้าจอ"</li>\n<li>"ยกนิ้วขึ้นเพื่อซูมออก"</li></ul>\n\n"คุณซูมเข้าโดยใช้แป้นพิมพ์หรือแถบนำทางไม่ได้"</string>
@@ -2584,6 +2595,8 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"แบบขยาย"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"ธีมมืดแบบขยาย"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"ใช้ธีมมืดกับแอปอื่นๆ โดยอัตโนมัติเพื่อปรับปรุงการช่วยเหลือพิเศษ"</string>
+    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"นำภาพเคลื่อนไหวออก"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"ลดการเคลื่อนไหวบนหน้าจอ"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"การกะพริบของเคอร์เซอร์ข้อความ"</string>
@@ -3610,7 +3623,7 @@
     <string name="keywords_draw_overlay" msgid="3170036145197260392">"ส่วนหัวของแชท ระบบ การแจ้งเตือน หน้าต่าง กล่องโต้ตอบ การแสดงผล ทับแอปอื่นๆ วาด"</string>
     <string name="keywords_flashlight" msgid="2133079265697578183">"ไฟฉาย ไฟ แฟลช"</string>
     <string name="keywords_change_wifi_state" msgid="7573039644328488165">"wifi, wi-fi, สลับ, การควบคุม"</string>
-    <string name="keywords_more_mobile_networks" msgid="5041272719326831744">"มือถือ, อุปกรณ์เคลื่อนที่, ผู้ให้บริการมือถือ, ไร้สาย, เน็ต, 4g, 3g, 2g, lte"</string>
+    <string name="keywords_more_mobile_networks" msgid="5041272719326831744">"มือถือ, มือถือ, ผู้ให้บริการมือถือ, ไร้สาย, เน็ต, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wifi, wi-fi, โทร, การโทร"</string>
     <string name="keywords_display" msgid="874738809280751745">"หน้าจอ, หน้าจอสัมผัส"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"หน้าจอสลัว, หน้าจอสัมผัส, แบตเตอรี่, ความสว่าง"</string>
@@ -3668,6 +3681,8 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"ข้อมูลแบตเตอรี่ วันที่ผลิต จำนวนรอบ การใช้งานครั้งแรก"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"ระดับแพตช์ความปลอดภัย android, เวอร์ชันเบสแบนด์, เวอร์ชันเคอร์เนล"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"ธีม สว่าง มืด โหมด ความไวต่อแสง อาการกลัวแสง ทำให้มืด ปรับให้มืด โหมดมืด ไมเกรน"</string>
+    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
+    <skip />
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"ธีมมืด"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"ข้อบกพร่อง"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"หน้าจอแอมเบียนท์ หน้าจอล็อก"</string>
@@ -4392,14 +4407,10 @@
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ตรวจสอบแอปที่เปลี่ยนแปลงวิธีที่อาจใช้แชร์ข้อมูลตำแหน่งของคุณ"</string>
     <string name="app_function_access_settings_title" msgid="1837117989202166166">"ตัวแทน"</string>
     <string name="app_function_access_settings_summary" msgid="3654291845453799170">"ตัวแทนที่เข้าถึงข้อมูลหรือดำเนินการในแอปได้"</string>
-    <!-- no translation found for manage_agent_app_function_access_settings_title (2407736540086293094) -->
-    <skip />
-    <!-- no translation found for manage_agent_app_function_access_settings_summary (5513761879561499076) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_title (6517416582918633839) -->
-    <skip />
-    <!-- no translation found for manage_target_app_function_access_settings_summary (3578937757835411954) -->
-    <skip />
+    <string name="manage_agent_app_function_access_settings_title" msgid="2407736540086293094">"สิทธิ์การเข้าถึงของแอป"</string>
+    <string name="manage_agent_app_function_access_settings_summary" msgid="5513761879561499076">"อนุญาตให้ตัวแทนนี้เข้าถึงข้อมูลหรือดำเนินการในแอป"</string>
+    <string name="manage_target_app_function_access_settings_title" msgid="6517416582918633839">"สิทธิ์เข้าถึงของตัวแทน"</string>
+    <string name="manage_target_app_function_access_settings_summary" msgid="3578937757835411954">"ตัวแทนที่เข้าถึงข้อมูลหรือดำเนินการในแอปนี้ได้"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"แตะเพื่อปลุก"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"แตะที่ใดก็ได้บนหน้าจอ 2 ครั้งเพื่อปลุกอุปกรณ์"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"การเปิดลิงก์"</string>
@@ -5960,10 +5971,8 @@
     <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"ป้องกันไม่ให้ผู้อื่นเปิดแอปที่ต้องใช้การปลดล็อกด้วยลายนิ้วมือหรือใบหน้า เมื่อเชื่อมต่อกับนาฬิกา คุณจะมั่นใจได้ในความปลอดภัยพร้อมความคล่องตัวที่มากขึ้น"</string>
     <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"ใช้การตรวจสอบตัวตนและดูในแอปเพิ่มเติม"</string>
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"รักษาความปลอดภัยให้กับข้อมูลระบุตัวตนในแอปทั้งหมดที่รองรับการปลดล็อกด้วยลายนิ้วมือและใบหน้าในสถานที่ที่เชื่อถือได้ เช่น บ้านหรือที่ทำงาน ใช้การตรวจสอบตัวตนกับนาฬิกาเพื่อขยายการปกป้องให้ครอบคลุมยิ่งกว่าสถานที่ที่เชื่อถือได้"</string>
-    <!-- no translation found for more_security_privacy_category_title (6107292123094705732) -->
-    <skip />
-    <!-- no translation found for more_security_privacy_summary (8049801531406061219) -->
-    <skip />
+    <string name="more_security_privacy_category_title" msgid="6107292123094705732">"การตั้งค่าอื่นๆ"</string>
+    <string name="more_security_privacy_summary" msgid="8049801531406061219">"การป้อนข้อความอัตโนมัติ การแจ้งเตือน และอื่นๆ"</string>
     <!-- no translation found for privacy_sources_title (7648842637181479352) -->
     <skip />
     <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
@@ -5975,5 +5984,11 @@
     <!-- no translation found for location_settings (6833222354060094170) -->
     <skip />
     <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
+    <skip />
+    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
+    <skip />
+    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
     <skip />
 </resources>

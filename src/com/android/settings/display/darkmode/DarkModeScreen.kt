@@ -109,6 +109,8 @@ abstract class BaseDarkModeScreen(context: Context) :
                     +ExpandedDarkModeSelectorPreference(modeStorage)
                 }
             }
+            +DarkModeExpandedFooterPreference()
+            +DarkModeCustomModesFooterPreference()
             +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
             +ForceInvertSurveyButtonPreference(metricsCategory)
         }
