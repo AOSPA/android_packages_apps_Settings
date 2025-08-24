@@ -79,7 +79,10 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
     @Test
     fun noExternalDisplay_showsNoDisplayConnected() {
-        doReturn(emptyList<DisplayDevice>()).`when`(mMockedInjector).getDisplays()
+        // Remove other external displays
+        mDisplays = emptyList()
+        includeBuiltinDisplay()
+        updateDisplaysAndTopology(mDisplays)
 
         viewModel.updateEnabledDisplays()
 

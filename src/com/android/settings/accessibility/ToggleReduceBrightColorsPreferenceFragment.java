@@ -24,8 +24,10 @@ import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.extradim.ui.ExtraDimScreen;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -80,6 +82,10 @@ public class ToggleReduceBrightColorsPreferenceFragment extends BaseSupportFragm
         return TAG;
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ExtraDimScreen.KEY;
+    }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_extra_dim_settings) {

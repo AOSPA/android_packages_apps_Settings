@@ -119,6 +119,17 @@ android_robolectric_test {
 }
 
 java_library {
+    name: "DSAutoRotateSetting-testutils",
+    srcs: [
+        "src/com/android/settings/testutils/DeviceStateAutoRotateSettingTestUtils.java",
+    ],
+    libs: [
+        "mockito-target-extended",
+    ],
+    test_only: true,
+}
+
+java_library {
     name: "Settings-robo-testutils",
     srcs: [
         "testutils/**/*.java",

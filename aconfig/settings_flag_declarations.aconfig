@@ -89,16 +89,6 @@ flag {
 }
 
 flag {
-  name: "fix_touchpad_and_mouse_settings_search_index"
-  namespace: "android_settings"
-  description: "Fix TouchpadAndMouseSettings indexing logic"
-  bug: "421850832"
-  metadata {
-      purpose: PURPOSE_BUGFIX
-    }
-}
-
-flag {
   name: "disable_update_height_profile_select_location_services"
   namespace: "android_settings"
   description: "Disable updateHeight in the Location Services page to allow scrolling in certain screen sizes / orientations"

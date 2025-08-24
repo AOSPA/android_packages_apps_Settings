@@ -65,12 +65,13 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    fun testNoDisplays_noPreferenceShown() {
-        doReturn(emptyList<DisplayDevice>()).`when`(mMockedInjector).getDisplays()
-
+    fun testNoDisplayAtStart_noPreferenceShown() {
+        // Simulate with the state of waiting for displays to be loaded
+        updateDisplaysAndTopology(emptyList())
         viewModel.updateEnabledDisplays()
 
         val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
+        assertThat(category).isNotNull()
         assertThat(category.title).isEqualTo("")
 
         // Verify all other preferences are hidden

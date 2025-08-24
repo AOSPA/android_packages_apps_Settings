@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system_ext"
+
+flag {
+  name: "enable_adaptive_connectivity_toggles"
+  namespace: "settings_experience"
+  description: "Enable toggle switches in new Adaptive connectivity settings UI"
+  bug: "393645580"
+}

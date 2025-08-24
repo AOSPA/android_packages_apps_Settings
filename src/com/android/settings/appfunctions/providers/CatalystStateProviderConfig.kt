@@ -25,6 +25,7 @@ import com.android.settings.accessibility.colorcorrection.ui.ColorCorrectionScre
 import com.android.settings.accessibility.colorinversion.ui.ColorInversionScreen
 import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityScreen
 import com.android.settings.accessibility.detail.a11yservice.ui.A11yServiceScreen
+import com.android.settings.accessibility.extradim.ui.ExtraDimScreen
 import com.android.settings.accessibility.flashnotifications.ui.FlashNotificationsScreen
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen
 import com.android.settings.accounts.AccountScreen
@@ -166,6 +167,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = ColorAndMotionScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorInversionScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorCorrectionScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ExtraDimScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AdaptiveConnectivityScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AutoBrightnessScreen.KEY),
         PerScreenCatalystConfig(

@@ -112,10 +112,8 @@ public class ExternalDisplayTestBase {
                 DEFAULT_DISPLAY, "local:1111111111", "Built-in display", mode, List.of(mode),
                 DisplayIsEnabled.YES, /* isConnectedDisplay= */ false);
         displays.addFirst(builtinDisplay);
-        mDisplays = displays;
         doReturn(builtinDisplay).when(mMockedInjector).getDisplay(DEFAULT_DISPLAY);
-        doReturn(mDisplays).when(mMockedInjector).getDisplays();
-        updateDisplayTopology();
+        updateDisplaysAndTopology(displays);
         return builtinDisplay;
     }
 
@@ -140,6 +138,24 @@ public class ExternalDisplayTestBase {
     void updateDisplaysAndTopology(List<DisplayDevice> displays) {
         mDisplays = displays;
         doReturn(mDisplays).when(mMockedInjector).getDisplays();
+        List<DisplayDeviceAdditionalInfo> displayAdditionalInfoList =
+                mDisplays.stream()
+                        .map(
+                                display ->
+                                        new DisplayDeviceAdditionalInfo(
+                                                display.getId(),
+                                                display.getUniqueId(),
+                                                display.getName(),
+                                                display.getMode(),
+                                                display.getSupportedModes(),
+                                                display.isEnabled(),
+                                                display.isConnectedDisplay(),
+                                                /* rotation= */ 0,
+                                                /* connectionPreference= */ 0))
+                        .toList();
+        doReturn(displayAdditionalInfoList)
+                .when(mMockedInjector)
+                .getDisplaysWithAdditionalInfo(null);
         for (var display : mDisplays) {
             doReturn(display).when(mMockedInjector).getDisplay(display.getId());
         }

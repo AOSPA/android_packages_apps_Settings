@@ -135,13 +135,19 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
             pref.setMenuItemClickListener((item, preference) -> {
                 int menuItemId = item.getItemId();
                 mMenuItemId = menuItemId;
-                if (menuItemId == R.id.move_up || menuItemId == R.id.move_down) {
+                if (menuItemId == R.id.move_top || menuItemId == R.id.move_up
+                        || menuItemId == R.id.move_down) {
                     LocaleStore.LocaleInfo saved = localeInfo;
                     mSelectedLocaleInfo = saved;
                     int position = localeInfoList.indexOf(localeInfo);
                     localeInfoList.remove(position);
-                    localeInfoList.add(menuItemId == R.id.move_up ? position - 1 : position + 1,
-                            saved);
+                    int toPosition = 0; // menuItemId is R.id.move_top
+                    if (menuItemId == R.id.move_up) {
+                        toPosition = position - 1;
+                    } else if (menuItemId == R.id.move_down) {
+                        toPosition = position + 1;
+                    }
+                    localeInfoList.add(toPosition, saved);
                     mUpdatedLocaleInfoList = localeInfoList;
                     showConfirmDialog(localeInfoList, null);
                     mMetricsFeatureProvider.action(mContext,
@@ -184,7 +190,8 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
                     doTheUpdate();
                 }
             } else {
-                if (mMenuItemId == R.id.move_up && !defaultAfterChange.isTranslated()) {
+                if ((mMenuItemId == R.id.move_up || mMenuItemId == R.id.move_top)
+                        && !defaultAfterChange.isTranslated()) {
                     showUnavailableDialog(defaultAfterChange);
                 } else {
                     displaySystemDialogFragment(defaultAfterChange, true);
@@ -290,14 +297,20 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
     protected List<LocaleStore.LocaleInfo> setUpdatedLocaleList(
             LocaleStore.LocaleInfo selectedLocaleInfo, int menuId) {
         mUpdatedLocaleInfoList = getUserLocaleList();
-        if (menuId == R.id.move_up || menuId == R.id.move_down) {
+        if (menuId == R.id.move_top || menuId == R.id.move_up || menuId == R.id.move_down) {
             LocaleStore.LocaleInfo saved = selectedLocaleInfo;
             mSelectedLocaleInfo = saved;
             for (int i = 0; i < mUpdatedLocaleInfoList.size(); i++) {
                 if (mUpdatedLocaleInfoList.get(i).toString().equals(
                         selectedLocaleInfo.toString())) {
                     mUpdatedLocaleInfoList.remove(i);
-                    mUpdatedLocaleInfoList.add(menuId == R.id.move_up ? i - 1 : i + 1, saved);
+                    int toPosition = 0; // menuId is R.id.move_top
+                    if (menuId == R.id.move_up) {
+                        toPosition = i - 1;
+                    } else if (menuId == R.id.move_down) {
+                        toPosition = i + 1;
+                    }
+                    mUpdatedLocaleInfoList.add(toPosition, saved);
                     break;
                 }
             }

@@ -18,7 +18,9 @@ package com.android.settings.datausage
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.android.settings.R
@@ -29,6 +31,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -44,13 +47,16 @@ import kotlinx.coroutines.flow.flow
 /** Preference screen for Apps -> Individual App Info -> Mobile data usage. */
 @ProvidePreferenceScreen(DataUsageAppDetailScreen.KEY, parameterized = true)
 open class DataUsageAppDetailScreen(context: Context, override val arguments: Bundle) :
-    PreferenceScreenMixin, PreferenceTitleProvider, PreferenceLifecycleProvider {
+    PreferenceScreenMixin,
+    PreferenceTitleProvider,
+    PreferenceLifecycleProvider,
+    PreferenceAvailabilityProvider {
 
     private lateinit var keyedObserver: KeyedObserver<String>
 
     private val packageName = arguments.getString(KEY_APP_PACKAGE_NAME)!!
 
-    private var appInfo = context.packageManager.getApplicationInfo(packageName, 0)
+    private var appInfo = context.getAppInfo(packageName)
 
     override val key: String
         get() = KEY
@@ -70,9 +76,11 @@ open class DataUsageAppDetailScreen(context: Context, override val arguments: Bu
         arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? =
-        appInfo.loadLabel(context.packageManager)
+        appInfo?.loadLabel(context.packageManager)
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
+
+    override fun isAvailable(context: Context) = appInfo != null
 
     override fun hasCompleteHierarchy() = false
 
@@ -80,7 +88,7 @@ open class DataUsageAppDetailScreen(context: Context, override val arguments: Bu
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, AppDataUsageActivity::class.java, arguments, metadata?.bindingKey)
-            .apply { data = "package:${appInfo.packageName}".toUri() }
+            .apply { data = "package:$packageName".toUri() }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {}
@@ -88,8 +96,8 @@ open class DataUsageAppDetailScreen(context: Context, override val arguments: Bu
     override fun onCreate(context: PreferenceLifecycleContext) {
         // observer to detect package changes (disabled/enabled/uninstall)
         val observer =
-            KeyedObserver<String> { key, _ ->
-                appInfo = context.packageManager.getApplicationInfo(packageName, 0)
+            KeyedObserver<String> { _, _ ->
+                appInfo = context.getAppInfo(packageName)
                 context.notifyPreferenceChange(bindingKey)
             }
         keyedObserver = observer
@@ -105,7 +113,17 @@ open class DataUsageAppDetailScreen(context: Context, override val arguments: Bu
         }
     }
 
+    private fun Context.getAppInfo(packageName: String) =
+        try {
+            packageManager.getApplicationInfo(packageName, 0)
+        } catch (e: PackageManager.NameNotFoundException) {
+            Log.w(TAG, "App not found: $packageName", e)
+            null
+        }
+
     companion object {
+        private const val TAG = "DataUsageAppDetailScreen"
+
         const val KEY = "app_data_usage_screen"
         const val KEY_APP_PACKAGE_NAME = "app"
 

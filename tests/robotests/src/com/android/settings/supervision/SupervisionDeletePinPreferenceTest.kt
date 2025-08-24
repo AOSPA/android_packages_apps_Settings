@@ -17,6 +17,7 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_DELETE_PIN
+import android.app.settings.SettingsEnums.SUPERVISION_MANAGE_PIN_SCREEN
 import android.app.supervision.SupervisionManager
 import android.content.ComponentName
 import android.content.Context
@@ -233,6 +234,14 @@ class SupervisionDeletePinPreferenceTest {
         verify(mockSupervisionManager, never()).isSupervisionEnabled = any()
         verify(mockUserManager, never()).removeUserEvenWhenDisallowed(SUPERVISING_USER_ID)
         verify(lifeCycleContext, never()).notifyPreferenceChange(any())
+        assertThat(startedIntent).isNull()
+    }
+
+    @Test
+    fun onPreferenceClick_logsClick() {
+        preference.onPreferenceClick(widget)
+        verify(metricsRule.metricsFeatureProvider)
+            .clicked(SUPERVISION_MANAGE_PIN_SCREEN, SupervisionDeletePinPreference.KEY)
         assertThat(startedIntent).isNull()
     }
 

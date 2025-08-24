@@ -50,7 +50,7 @@ open class AdaptiveConnectivityScreen : PreferenceScreenMixin {
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            if (Flags.enableNestedToggleSwitches()) {
+            if (Flags.enableAdaptiveConnectivityToggles()) {
                 +WifiScorerTogglePreference()
                 val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
                 val shouldHideMobileNetworkToggle =

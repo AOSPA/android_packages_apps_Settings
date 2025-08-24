@@ -17,6 +17,7 @@
 package com.android.settings.datausage
 
 import android.app.settings.SettingsEnums
+import android.content.Intent
 import android.net.NetworkPolicy
 import android.net.NetworkTemplate
 import android.os.Bundle
@@ -160,23 +161,28 @@ open class DataUsageList : DashboardFragment() {
                     Settings.EXTRA_SUB_ID,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID,
                 )
+            val localIntent: Intent = intent.clone() as Intent
             if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
                 subId =
                     getPreferenceScreenBindingArgs(requireContext())?.getInt(Settings.EXTRA_SUB_ID)
                         ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 Log.d(
                     TAG,
-                    "processArgument: get subid from ScreenBindingArgs and reset subId into intent.",
+                    "processArgument: get subId from ScreenBindingArgs and reset subId into intent.",
                 )
+                // Add this extra into the intent because it is required in the
+                // DataUsageUtils.getMobileNetworkTemplateFromSubId.
                 if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                    intent.putExtra(Settings.EXTRA_SUB_ID, subId)
+                    localIntent.putExtra(Settings.EXTRA_SUB_ID, subId)
                 }
             }
             template =
                 intent.getParcelableExtra(
                     Settings.EXTRA_NETWORK_TEMPLATE,
                     NetworkTemplate::class.java,
-                ) ?: DataUsageUtils.getMobileNetworkTemplateFromSubId(context, intent).getOrNull()
+                )
+                    ?: DataUsageUtils.getMobileNetworkTemplateFromSubId(context, localIntent)
+                        .getOrNull()
         }
     }
 
