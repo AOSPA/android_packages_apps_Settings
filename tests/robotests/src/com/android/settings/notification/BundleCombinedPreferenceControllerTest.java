@@ -16,6 +16,11 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.Secure.NOTIFICATION_BUNDLES_ALWAYS_EXPAND;
+
+import static com.android.settings.notification.BundleCombinedPreferenceController.OFF;
+import static com.android.settings.notification.BundleCombinedPreferenceController.ON;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -33,6 +38,7 @@ import android.os.UserHandle;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Settings;
 import android.service.notification.Adjustment;
 
 import androidx.preference.CheckBoxPreference;
@@ -76,6 +82,7 @@ public class BundleCombinedPreferenceControllerTest {
 
     private MainSwitchPreference mGlobalSwitch;
     private SwitchPreference mWorkSwitch;
+    private SwitchPreference mAlwaysExpandSwitch;
     private CheckBoxPreference mPromoCheckbox, mNewsCheckbox, mSocialCheckbox, mRecsCheckbox;
     private PreferenceCategory mExcludedAppsPrefCategory;
 
@@ -93,6 +100,11 @@ public class BundleCombinedPreferenceControllerTest {
         mWorkSwitch = new SwitchPreference(mContext);
         when(mPrefCategory.findPreference(
                 BundleCombinedPreferenceController.WORK_PREF_KEY)).thenReturn(mWorkSwitch);
+
+        mAlwaysExpandSwitch = new SwitchPreference(mContext);
+        when(mPrefCategory.findPreference(
+                BundleCombinedPreferenceController.ALWAYS_EXPAND_KEY)).thenReturn(
+                mAlwaysExpandSwitch);
 
         when(mPrefCategory.findPreference(
                 BundleCombinedPreferenceController.TYPE_CATEGORY_KEY)).thenReturn(
@@ -203,6 +215,7 @@ public class BundleCombinedPreferenceControllerTest {
         assertThat(mGlobalSwitch.isChecked()).isFalse();
         assertThat(mWorkSwitch.isVisible()).isFalse();
         verify(mTypesPrefCategory).setVisible(false);
+        assertThat(mAlwaysExpandSwitch.isVisible()).isFalse();
     }
 
     @Test
@@ -226,6 +239,7 @@ public class BundleCombinedPreferenceControllerTest {
         assertThat(mWorkSwitch.isVisible()).isFalse();
         verify(mTypesPrefCategory).setVisible(false);
         assertThat(mExcludedAppsPrefCategory.isVisible()).isFalse();
+        assertThat(mAlwaysExpandSwitch.isVisible()).isFalse();
     }
 
     @Test
@@ -250,6 +264,7 @@ public class BundleCombinedPreferenceControllerTest {
         assertThat(mRecsCheckbox.isChecked()).isFalse();
         assertThat(mSocialCheckbox.isChecked()).isFalse();
         assertThat(mExcludedAppsPrefCategory.isVisible()).isTrue();
+        assertThat(mAlwaysExpandSwitch.isVisible()).isTrue();
     }
 
     @Test
@@ -306,5 +321,54 @@ public class BundleCombinedPreferenceControllerTest {
 
         // This update should trigger a call to turn off the global switch
         verify(mBackend).setNotificationBundlingEnabled(mContext.getUserId(), false);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
+    public void alwaysExpandSwitch_reflectsSettings() {
+        when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(true);
+        when(mBackend.getAllowedBundleTypes()).thenReturn(Set.of(Adjustment.TYPE_SOCIAL_MEDIA));
+        mController.updatePrefValues();
+
+        // Always expand setting is true
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUNDLES_ALWAYS_EXPAND,
+                ON);
+        mController.updatePrefValues();
+        assertThat(mAlwaysExpandSwitch.isVisible()).isTrue();
+        assertThat(mAlwaysExpandSwitch.isChecked()).isTrue();
+
+        // Always expand setting is false
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUNDLES_ALWAYS_EXPAND,
+                OFF);
+        mController.updatePrefValues();
+        assertThat(mAlwaysExpandSwitch.isVisible()).isTrue();
+        assertThat(mAlwaysExpandSwitch.isChecked()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
+    public void toggleAlwaysExpandSwitch_updatesSetting() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUNDLES_ALWAYS_EXPAND,
+                OFF);
+        when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(true);
+        mController.updatePrefValues();
+
+        // Toggle on
+        mAlwaysExpandSwitch.getOnPreferenceChangeListener().onPreferenceChange(
+                mAlwaysExpandSwitch, true);
+        // Check that the secure setting was updated
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                NOTIFICATION_BUNDLES_ALWAYS_EXPAND, -1))
+                .isEqualTo(ON);
+
+        // Toggle off
+        mAlwaysExpandSwitch.getOnPreferenceChangeListener().onPreferenceChange(
+                mAlwaysExpandSwitch, false);
+        // Check that the secure setting was updated
+        assertThat(android.provider.Settings.Secure.getInt(mContext.getContentResolver(),
+                NOTIFICATION_BUNDLES_ALWAYS_EXPAND, -1))
+                .isEqualTo(OFF);
     }
 }

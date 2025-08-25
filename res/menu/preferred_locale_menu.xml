@@ -17,6 +17,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:tools="http://schemas.android.com/tools"
       tools:ignore="AlwaysShowAction">
+
+    <item
+        android:id="@+id/move_top"
+        android:showAsAction="never"
+        android:icon="@drawable/ic_menu_arrow_top"
+        android:title="@string/preferred_locale_menu_top"/>
+
     <item
         android:id="@+id/move_up"
         android:showAsAction="never"

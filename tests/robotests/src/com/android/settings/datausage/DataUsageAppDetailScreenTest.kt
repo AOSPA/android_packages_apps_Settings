@@ -31,6 +31,12 @@ class DataUsageAppDetailScreenTest : SettingsCatalystTestCase() {
             .installPackage(PackageInfo().apply { packageName = "com.test.package" })
     }
 
+    private val preferenceScreenCreatorWithInvalidPackage =
+        DataUsageAppDetailScreen(
+            appContext,
+            Bundle().apply { putString("app", "com.invalid.package") },
+        )
+
     override val preferenceScreenCreator =
         DataUsageAppDetailScreen(
             appContext,
@@ -66,6 +72,16 @@ class DataUsageAppDetailScreenTest : SettingsCatalystTestCase() {
             .isEqualTo("com.test.package")
         assertThat(underTest.getStringExtra(":settings:fragment_args_key"))
             .isEqualTo("testBindingKey")
+    }
+
+    @Test
+    fun isAvailable_whenPackageIsValid_isTrue() {
+        assertThat(preferenceScreenCreator.isAvailable(appContext)).isTrue()
+    }
+
+    @Test
+    fun isAvailable_whenPackageIsInvalid_isFalse() {
+        assertThat(preferenceScreenCreatorWithInvalidPackage.isAvailable(appContext)).isFalse()
     }
 }
 

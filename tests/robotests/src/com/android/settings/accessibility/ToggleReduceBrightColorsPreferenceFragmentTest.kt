@@ -30,6 +30,7 @@ import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME
 import com.android.settings.R
+import com.android.settings.accessibility.extradim.ui.ExtraDimScreen
 import com.android.settings.testutils.XmlTestUtils
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settings.testutils.shadow.SettingsShadowResources
@@ -363,6 +364,14 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
                 .filterNotNull()
 
         assertThat(actualKeys).containsExactlyElementsIn(expectedKeys)
+    }
+
+    @Test
+    fun getPreferenceScreenBindingKey_returnExtraDimScreenKey() {
+        assertThat(
+                ToggleReduceBrightColorsPreferenceFragment().getPreferenceScreenBindingKey(context)
+            )
+            .isEqualTo(ExtraDimScreen.KEY)
     }
 
     private fun setReduceBrightColorsAvailable(available: Boolean) {

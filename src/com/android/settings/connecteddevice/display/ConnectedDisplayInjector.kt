@@ -50,6 +50,11 @@ import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfi
 import com.android.settings.flags.FeatureFlagsImpl
 import com.android.wm.shell.shared.desktopmode.DesktopState
 import java.util.function.Consumer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 
 /**
  * Wallpaper is forced-revealed using a View added to the window manager with
@@ -208,6 +213,38 @@ open class ConnectedDisplayInjector(open val context: Context?) {
             }
             .toList()
     }
+
+    /**
+     * Alternative to [getDisplays] which also fetches additional info on top of [DisplayDevice].
+     * This method is heavier than [getDisplays] as it'll do multiple binder calls for each display.
+     * Hence, it should be called for a one-off operation such as on display update.
+     *
+     * @see DisplayDeviceAdditionalInfo
+     */
+    open suspend fun getDisplaysWithAdditionalInfo(): List<DisplayDeviceAdditionalInfo> =
+        coroutineScope {
+            val baseDisplayDevices = getDisplays()
+            val deferredInfo =
+                baseDisplayDevices.map { display ->
+                    // Fetch concurrently
+                    async(Dispatchers.IO) {
+                        val rotation = getDisplayUserRotation(display.id)
+                        val connectionPreference = getDisplayConnectionPreference(display.uniqueId)
+                        DisplayDeviceAdditionalInfo(
+                            display.id,
+                            display.uniqueId,
+                            display.name,
+                            display.mode,
+                            display.supportedModes,
+                            display.isEnabled,
+                            display.isConnectedDisplay,
+                            rotation,
+                            connectionPreference,
+                        )
+                    }
+                }
+            deferredInfo.awaitAll()
+        }
 
     /**
      * @param displayId which must be returned

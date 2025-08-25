@@ -70,6 +70,12 @@
                 android:title="@string/notification_adjustment_work_switch_title" />
         </com.android.settingslib.widget.UntitledPreferenceCategory>
 
+        <com.android.settingslib.widget.UntitledPreferenceCategory>
+            <SwitchPreferenceCompat
+                android:key="always_expand_pref"
+                android:title="@string/notification_bundle_expand_always_title"/>
+        </com.android.settingslib.widget.UntitledPreferenceCategory>
+
         <PreferenceCategory
             android:key="notification_bundle_excluded_apps_list"
             android:title="@string/notification_excluded_apps"

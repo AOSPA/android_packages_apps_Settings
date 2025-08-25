@@ -17,6 +17,7 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_DELETE_PIN
+import android.app.settings.SettingsEnums.SUPERVISION_MANAGE_PIN_SCREEN
 import android.app.supervision.SupervisionManager
 import android.content.Context
 import android.content.Intent
@@ -72,6 +73,10 @@ class SupervisionDeletePinPreference() :
     }
 
     override fun onPreferenceClick(preference: Preference): Boolean {
+        FeatureFactory.featureFactory.metricsFeatureProvider.clicked(
+            SUPERVISION_MANAGE_PIN_SCREEN,
+            KEY,
+        )
         showDeletionDialog(preference.context)
         return true
     }

@@ -146,11 +146,15 @@ open class SelectedDisplayPreferenceFragment(
         }
     }
 
+    /**
+     * Note that update will be called on every tab switch as well. So all the operations to update
+     * UI should be fast and not fetching any new data (use only what's available from
+     * [DisplayPreferenceViewModel.DisplayUiState])
+     */
     private fun update(state: DisplayPreferenceViewModel.DisplayUiState) {
         val displayId = state.selectedDisplayId
         val enabledDisplays = state.enabledDisplays
         val isMirroring = state.isMirroring
-        val includeDefaultDisplayInTopology = state.includeDefaultDisplayInTopology
 
         val display = enabledDisplays[displayId]
         // By design, if there's one or more enabled connected displays, `displayId` should always
@@ -170,13 +174,7 @@ open class SelectedDisplayPreferenceFragment(
         if (displayType == DisplayType.BUILTIN_DISPLAY) {
             selectedDisplayPreference
                 .findPreference<SwitchPreferenceCompat>(PrefInfo.INCLUDE_DEFAULT_DISPLAY.key)
-                ?.let {
-                    updateIncludeDefaultDisplayInTopologyPreference(
-                        it,
-                        isMirroring,
-                        includeDefaultDisplayInTopology,
-                    )
-                }
+                ?.let { updateIncludeDefaultDisplayInTopologyPreference(it, state) }
         } else {
             selectedDisplayPreference
                 .findPreference<ExternalDisplaySizePreference>(
@@ -225,16 +223,11 @@ open class SelectedDisplayPreferenceFragment(
 
     private fun updateIncludeDefaultDisplayInTopologyPreference(
         preference: SwitchPreferenceCompat,
-        isMirroring: Boolean,
-        includeDefaultDisplayInTopology: Boolean,
+        state: DisplayPreferenceViewModel.DisplayUiState,
     ) {
-        val showPreference =
-            !isMirroring &&
-                viewModel.injector.isDefaultDisplayInTopologyFlagEnabled() &&
-                viewModel.injector.isProjectedModeEnabled()
-        if (showPreference) {
+        if (state.showIncludeDefaultDisplayInTopologyPref) {
             preference.setVisible(true)
-            preference.setChecked(includeDefaultDisplayInTopology)
+            preference.setChecked(state.includeDefaultDisplayInTopology)
         } else {
             preference.setVisible(false)
             return
@@ -266,7 +259,7 @@ open class SelectedDisplayPreferenceFragment(
 
     private fun updateExternalDisplayDensityPreference(
         preference: ExternalDisplaySizePreference,
-        display: DisplayDevice,
+        display: DisplayDeviceAdditionalInfo,
         isMirroring: Boolean,
     ) {
         if (isMirroring) {
@@ -297,7 +290,10 @@ open class SelectedDisplayPreferenceFragment(
         }
     }
 
-    private fun updateResolutionPreference(preference: Preference, display: DisplayDevice) {
+    private fun updateResolutionPreference(
+        preference: Preference,
+        display: DisplayDeviceAdditionalInfo,
+    ) {
         val displayMode = display.mode ?: return
         val width = displayMode.getPhysicalWidth()
         val height = displayMode.getPhysicalHeight()
@@ -342,8 +338,11 @@ open class SelectedDisplayPreferenceFragment(
         }
     }
 
-    private fun updateRotationPreference(preference: ListPreference, display: DisplayDevice) {
-        val rotation = viewModel.injector.getDisplayUserRotation(display.id)
+    private fun updateRotationPreference(
+        preference: ListPreference,
+        display: DisplayDeviceAdditionalInfo,
+    ) {
+        val rotation = display.rotation
         preference.apply {
             setValueIndex(rotation)
             setSummary(rotationEntries[rotation])

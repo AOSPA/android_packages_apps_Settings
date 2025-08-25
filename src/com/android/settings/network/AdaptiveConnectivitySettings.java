@@ -74,7 +74,7 @@ public class AdaptiveConnectivitySettings extends DashboardFragment {
 
         final IllustrationPreference illustration =
                 checkNotNull(findPreference(ADAPTIVE_CONNECTIVITY_HEADER));
-        final boolean enableNestedToggles = Flags.enableNestedToggleSwitches();
+        final boolean enableNestedToggles = Flags.enableAdaptiveConnectivityToggles();
 
         illustration.setLottieAnimationResId(
                 enableNestedToggles

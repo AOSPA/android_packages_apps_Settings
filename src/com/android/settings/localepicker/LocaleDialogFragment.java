@@ -111,7 +111,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
             // default dialog only when user changes the locale.
             if ((type == DIALOG_CONFIRM_SYSTEM_DEFAULT || type == DIALOG_ADD_SYSTEM_LOCALE
                     || type == DIALOG_REMOVE_LOCALE || (type == DIALOG_NOT_AVAILABLE_LOCALE
-                    && menuItemId == R.id.move_up))
+                    && (menuItemId == R.id.move_up || menuItemId == R.id.move_top)))
                     && !mShouldKeepDialog) {
                 dismiss();
             }
@@ -220,7 +220,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                     || mDialogType == DIALOG_ADD_SYSTEM_LOCALE
                     || mDialogType == DIALOG_REMOVE_LOCALE
                     || (mDialogType == DIALOG_NOT_AVAILABLE_LOCALE
-                    && mMenuItemId == R.id.move_up)) {
+                    && (mMenuItemId == R.id.move_up || mMenuItemId == R.id.move_top))) {
                 int result = Activity.RESULT_CANCELED;
                 boolean changed = false;
                 if (which == DialogInterface.BUTTON_POSITIVE) {
@@ -278,7 +278,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                             R.string.title_unavailable_locale, mLocaleInfo.getFullNameNative());
                     dialogContent.mMessage = mContext.getString(R.string.desc_unavailable_locale);
                     dialogContent.mPositiveButton = mContext.getString(R.string.okay);
-                    if (mMenuItemId == R.id.move_up) {
+                    if (mMenuItemId == R.id.move_up || mMenuItemId == R.id.move_top) {
                         dialogContent.mNegativeButton = mContext.getString(R.string.cancel);
                     }
                     break;

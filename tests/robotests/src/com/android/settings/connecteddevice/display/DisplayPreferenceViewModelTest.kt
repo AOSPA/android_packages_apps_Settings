@@ -31,6 +31,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.kotlin.doReturn
 
 /** Unit test for [DisplayPreferenceViewModel] */
 @RunWith(AndroidJUnit4::class)
@@ -89,7 +90,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    fun mirrorModeSettingChanged_updatesUiState() {
+    fun mirrorModeSettingChanged_updatesUiState_isMirroring() {
         assertThat(viewModel.uiState.value!!.isMirroring).isFalse()
 
         setMirroringMode(true)
@@ -99,6 +100,27 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
         setMirroringMode(false)
 
         assertThat(viewModel.uiState.value!!.isMirroring).isFalse()
+    }
+
+    @Test
+    fun mirrorModeSettingChanged_updatesUiState_showIncludeDefaultDisplayInTopologyPref() {
+        assertThat(viewModel.uiState.value!!.showIncludeDefaultDisplayInTopologyPref).isTrue()
+
+        setMirroringMode(true)
+
+        assertThat(viewModel.uiState.value!!.showIncludeDefaultDisplayInTopologyPref).isFalse()
+
+        setMirroringMode(false)
+
+        assertThat(viewModel.uiState.value!!.showIncludeDefaultDisplayInTopologyPref).isTrue()
+    }
+
+    @Test
+    fun mirrorModeSettingChanged_notProjectedMode_showIncludeDefaultDisplayInTopologyPref_false() {
+        doReturn(false).`when`(mMockedInjector).isProjectedModeEnabled()
+        setMirroringMode(false)
+
+        assertThat(viewModel.uiState.value!!.showIncludeDefaultDisplayInTopologyPref).isFalse()
     }
 
     @Test
