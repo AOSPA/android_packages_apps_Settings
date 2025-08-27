@@ -84,7 +84,7 @@ class ImeiPreference(
         val imeiList = getImeiList()
         return when {
             imeiList.isEmpty() -> String()
-            slotIndex > imeiList.size -> imeiList[0]
+            slotIndex >= imeiList.size -> imeiList[0]
             else -> imeiList[slotIndex]
         }
     }
