@@ -21,6 +21,7 @@ import android.graphics.PointF
 import android.graphics.RectF
 import android.hardware.display.DisplayTopology
 import android.hardware.display.DisplayTopology.TreeNode
+import android.os.SystemClock
 import android.util.Log
 import android.util.Size
 import android.view.Display.DEFAULT_DISPLAY
@@ -379,6 +380,8 @@ class DisplayTopologyPreferenceController(
                 displaySize,
             )
 
+            block.onA11yMoveListener = { direction -> simulateA11yDrag(id, pos, block, direction) }
+
             // This is needed to ensure block is highlighted from the start if it's selected.
             // Example scenario would be when Display#2 is selected from the tab, and there's
             // another display added, Display#2 should still be highlighted.
@@ -404,6 +407,64 @@ class DisplayTopologyPreferenceController(
         timesRefreshedBlocks++
         // Cancel the drag if one is in progress.
         blockDrag = null
+    }
+
+    private fun simulateA11yDrag(
+        displayId: Int,
+        displayPos: RectF,
+        block: DisplayBlock,
+        direction: Direction,
+    ) {
+        val moveDistancePx = DisplayTopology.dpToPx(A11Y_MOVE_DISTANCE_DP, injector.densityDpi)
+
+        val startPoint = PointF(block.x + block.width / 2, block.y + block.height / 2)
+        val endPoint =
+            when (direction) {
+                Direction.UP -> PointF(startPoint.x, startPoint.y - moveDistancePx)
+                Direction.DOWN -> PointF(startPoint.x, startPoint.y + moveDistancePx)
+                Direction.LEFT -> PointF(startPoint.x - moveDistancePx, startPoint.y)
+                Direction.RIGHT -> PointF(startPoint.x + moveDistancePx, startPoint.y)
+            }
+
+        val downTime = SystemClock.uptimeMillis()
+
+        val screenPos = IntArray(2)
+        paneContent.getLocationOnScreen(screenPos)
+        val offset = PointF(screenPos[0].toFloat(), screenPos[1].toFloat())
+
+        // 1. ACTION_DOWN
+        val downEvent =
+            createMotionEvent(downTime, downTime, MotionEvent.ACTION_DOWN, startPoint, offset)
+        onBlockTouchDown(displayId, displayPos, block, downEvent)
+        downEvent.recycle()
+
+        // 2. ACTION_MOVE
+        for (i in 1..A11Y_DRAG_STEPS) {
+            val progress = i.toFloat() / A11Y_DRAG_STEPS
+            val currentX = startPoint.x + (endPoint.x - startPoint.x) * progress
+            val currentY = startPoint.y + (endPoint.y - startPoint.y) * progress
+            val eventTime = SystemClock.uptimeMillis()
+
+            val moveEvent =
+                createMotionEvent(
+                    downTime,
+                    eventTime,
+                    MotionEvent.ACTION_MOVE,
+                    PointF(currentX, currentY),
+                    offset,
+                )
+
+            onBlockTouchMove(moveEvent)
+            moveEvent.recycle()
+        }
+
+        // 3. ACTION_UP
+        val upEventTime = SystemClock.uptimeMillis()
+        val upEvent =
+            createMotionEvent(downTime, upEventTime, MotionEvent.ACTION_UP, endPoint, offset)
+
+        onBlockTouchUp(upEvent)
+        upEvent.recycle()
     }
 
     private fun onBlockTouchDown(

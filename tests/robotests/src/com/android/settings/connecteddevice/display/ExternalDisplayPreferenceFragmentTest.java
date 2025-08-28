@@ -15,6 +15,8 @@
  */
 package com.android.settings.connecteddevice.display;
 
+import static android.app.ActivityManager.LOCK_TASK_MODE_LOCKED;
+import static android.app.ActivityManager.LOCK_TASK_MODE_NONE;
 import static android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK;
 import static android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR;
 import static android.provider.Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY;
@@ -38,8 +40,10 @@ import static com.android.window.flags.Flags.FLAG_ENABLE_UPDATED_DISPLAY_CONNECT
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -48,8 +52,17 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.DevicePolicyResourcesManager;
+import android.app.admin.DpcAuthority;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -76,6 +89,7 @@ import com.android.settingslib.widget.MainSwitchPreference;
 
 import kotlin.Unit;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -97,6 +111,29 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     private int mResolutionSelectorDisplayId = INVALID_DISPLAY;
     @Mock
     private MetricsLogger mMockedMetricsLogger;
+    @Mock private DevicePolicyManager mMockDpm;
+
+    @Before
+    public void setUp() throws RemoteException {
+        super.setUp();
+        EnforcingAdmin enforcingAdmin =
+                new EnforcingAdmin(
+                        "pkg.test",
+                        DpcAuthority.DPC_AUTHORITY,
+                        UserHandle.of(UserHandle.myUserId()),
+                        new ComponentName("admin", "adminclass"));
+        PolicyEnforcementInfo mockPolicyInfo = mock(PolicyEnforcementInfo.class);
+        DevicePolicyResourcesManager mockPolicyResourcesManager =
+                mock(DevicePolicyResourcesManager.class);
+        doReturn(enforcingAdmin).when(mockPolicyInfo).getMostImportantEnforcingAdmin();
+        doReturn(mockPolicyInfo)
+                .when(mMockDpm)
+                .getEnforcingAdminsForPolicy(
+                        eq(DevicePolicyIdentifiers.LOCK_TASK_POLICY), anyInt());
+        doReturn("").when(mockPolicyResourcesManager).getString(any(), any());
+        doReturn(mockPolicyResourcesManager).when(mMockDpm).getResources();
+        doReturn(mMockDpm).when(mContext).getSystemService(Context.DEVICE_POLICY_SERVICE);
+    }
 
     @Test
     @UiThreadTest
@@ -732,6 +769,36 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
                         PrefBasics.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY.key);
 
         assertThat(pref).isNull();
+    }
+
+    @Test
+    @UiThreadTest
+    public void testLockTaskModeLocked_disableMirroringMode() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
+        ExternalDisplayPreferenceFragment fragment = initFragment();
+        mHandler.flush();
+
+        fragment.mLockTaskModeChangedListener.onLockTaskModeChanged(LOCK_TASK_MODE_LOCKED);
+        mHandler.flush();
+        var pref = mPreferenceScreen.findPreference(PrefBasics.MIRROR.key);
+
+        assertThat(pref.isEnabled()).isEqualTo(false);
+    }
+
+    @Test
+    @UiThreadTest
+    public void testLockTaskModeNone_enableMirroringMode() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
+        ExternalDisplayPreferenceFragment fragment = initFragment();
+        mHandler.flush();
+
+        fragment.mLockTaskModeChangedListener.onLockTaskModeChanged(LOCK_TASK_MODE_LOCKED);
+        mHandler.flush();
+        fragment.mLockTaskModeChangedListener.onLockTaskModeChanged(LOCK_TASK_MODE_NONE);
+        mHandler.flush();
+        var pref = mPreferenceScreen.findPreference(PrefBasics.MIRROR.key);
+
+        assertThat(pref.isEnabled()).isEqualTo(true);
     }
 
     @Test

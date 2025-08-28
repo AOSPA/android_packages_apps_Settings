@@ -1500,12 +1500,9 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Režim slabog osvetljenja"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Podigni za aktivaciju"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Ograniči na bežično punjenje"</string>
-    <!-- no translation found for blur_switch (1391073945502754948) -->
-    <skip />
-    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
-    <skip />
-    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
-    <skip />
+    <string name="blur_switch" msgid="1391073945502754948">"Smanji efekte zamagljivanja"</string>
+    <string name="blur_switch_summary" msgid="5025895302219948597">"Omogućava vam da lakše vidite pozadinu i okna"</string>
+    <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Privremeno je onemogućeno zbog uštede baterije"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Koristi režim slabog osvetljenja"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Odaberite šta će se prikazivati u režimu slabog osvetljenja"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Ekran je isključen"</string>
@@ -1580,16 +1577,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Podešavanja memorije"</string>
     <string name="status_eid" msgid="3588471107671992684">"EID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (otvor za SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim" msgid="27798473711249145">"IMEI (otvor za SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="4320457587114117400">"IMEI (otvor za SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primarni)"</string>
+    <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Da biste videli, odaberite sačuvanu mrežu"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL verzija"</string>
-    <string name="meid_multi_sim" msgid="5076814185188481456">"MEID (otvor za SIM <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="meid_multi_sim_primary" msgid="6269908735700854437">"MEID (otvor za SIM <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primarni)"</string>
+    <string name="meid_multi_sim" msgid="3124054561186721453">"MEID <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Uključeno"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Isključeno"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1683,7 +1678,8 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Zajedničko"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Zajednička podešavanja"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Režim centra"</string>
-    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Vidžeti na zaključanom ekranu"</string>
+    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Kada da se automatski prikazuju"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nikad"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Dok se puni"</string>
@@ -2498,12 +2494,9 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Dodirnite dugme da biste zumirali"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Brzo zumirajte na ekranu da bi sadržaj bio veći"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Da biste uvećali:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Koristite prečicu da biste pokrenuli uvećanje&lt;br/&gt; {1,number,integer}. Dodirnite ekran&lt;br/&gt; {2,number,integer}. Prevlačite pomoću 2 prsta da biste se kretali po ekranu&lt;br/&gt; {3,number,integer}. Skupite 2 prsta da biste prilagodili zumiranje&lt;br/&gt; {4,number,integer}. Koristite prečicu da biste zaustavili uvećanje&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Da biste privremeno uvećali:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Uverite se da je tip uvećanja podešen na ceo ekran&lt;br/&gt; {1,number,integer}. Koristite prečicu da biste pokrenuli uvećanje&lt;br/&gt; {2,number,integer}. Dodirnite i zadržite bilo koji deo ekrana&lt;br/&gt; {3,number,integer}. Prevlačite prst da biste se kretali po ekranu&lt;br/&gt; {4,number,integer}. Podignite prst da biste zaustavili uvećanje"</string>
-    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
-    <skip />
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;Da biste uvećali:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Koristite prečicu ili pritisnite &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M da biste pokrenuli uvećanje&lt;br/&gt; {1,number,integer}. Pritisnite &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + tastere sa strelicama da biste se kretali po ekranu&lt;br/&gt; {2,number,integer}. Pritisnite &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; i „+“ ili „–“ da biste prilagodili zumiranje&lt;br/&gt; {3,number,integer}. Koristite prečicu ili &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M da biste zaustavili uvećanje"</string>
+    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;Da biste uvećali:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Koristite prečicu da biste pokrenuli uvećanje&lt;br/&gt; {1,number,integer}. Pritisnite &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + tastere sa strelicama da biste se kretali po ekranu&lt;br/&gt; {2,number,integer}. Pritisnite &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; i „+“ ili „–“ da biste prilagodili zumiranje&lt;br/&gt; {3,number,integer}. Koristite prečicu da biste zaustavili uvećanje"</string>
+    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;Tastatura&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Koristite prečicu ili pritisnite &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M da biste pokrenuli uvećanje&lt;br/&gt; {1,number,integer}. Pritisnite &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + tastere sa strelicama da biste se kretali po ekranu&lt;br/&gt; {2,number,integer}. Pritisnite &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; i „+“ ili „–“ da biste prilagodili zumiranje&lt;br/&gt; {3,number,integer}. Koristite prečicu ili &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M da biste zaustavili uvećanje&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Dodirni ekran&lt;/b&gt;&lt;br/&gt; Da biste uvećali:&lt;br/&gt; {0,number,integer}. Koristite prečicu da biste pokrenuli uvećanje&lt;br/&gt; {1,number,integer}. Dodirnite ekran&lt;br/&gt; {2,number,integer}. Prevlačite pomoću 2 prsta da biste se kretali po ekranu&lt;br/&gt; {3,number,integer}. Skupite 2 prsta da biste prilagodili zumiranje&lt;br/&gt; {4,number,integer}. Koristite prečicu da biste zaustavili uvećanje&lt;br/&gt;&lt;br/&gt; Da biste privremeno uvećali:&lt;br/&gt; {0,number,integer}. Uverite se da je tip uvećanja podešen na ceo ekran&lt;br/&gt; {1,number,integer}. Koristite prečicu da biste pokrenuli uvećanje&lt;br/&gt; {2,number,integer}. Dodirnite i zadržite bilo koji deo ekrana&lt;br/&gt; {3,number,integer}. Prevlačite prst da biste se kretali po ekranu&lt;br/&gt; {4,number,integer}. Podignite prst da biste zaustavili uvećanje"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Da biste uvećali:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Koristite prečicu da biste pokrenuli uvećanje&lt;br/&gt; {1,number,integer}. Dodirnite ekran&lt;br/&gt; {2,number,integer}. Prevlačite pomoću 2 prsta da biste se kretali po ekranu&lt;br/&gt; {3,number,integer}. Skupite 2 prsta da biste prilagodili zumiranje&lt;br/&gt; {4,number,integer}. Koristite prečicu da biste zaustavili uvećanje&lt;br/&gt;&lt;br/&gt; Možete privremeno da zumirate i drugo."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Da biste uvećali:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Koristite prečicu da biste pokrenuli uvećanje&lt;br/&gt; {1,number,integer}. Dodirnite ekran&lt;br/&gt; {2,number,integer}. Prevlačite 1 ili 2 prsta da biste se kretali po ekranu &lt;br/&gt; {3,number,integer}. Skupite 2 prsta da biste prilagodili zumiranje&lt;br/&gt; {4,number,integer}. Koristite prečicu da biste zaustavili uvećanje&lt;br/&gt;&lt;br/&gt; Možete privremeno da zumirate i drugo."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Kada je uvećanje uključeno, možete da uvećate ekran.\n\n"<b>"Da biste zumirali"</b>", pokrenite uvećanje, pa dodirnite bilo koji deo ekrana.\n"<ul><li>"Prevlačite pomoću 2 ili više prstiju da biste pomerali prikaz"</li>\n<li>"Skupite 2 ili više prstiju da biste prilagodili zumiranje"</li></ul>\n\n<b>"Za privremeno zumiranje"</b>" pokrenite uvećanje, pa dodirnite i zadržite bilo koji deo ekrana.\n"<ul><li>"Prevlačite da biste se kretali po ekranu"</li>\n<li>"Podignite prst da biste umanjili prikaz"</li></ul>\n\n"Ne možete da uvećavate tastaturu ili traku za navigaciju."</string>
@@ -2594,8 +2587,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Prošireno"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Proširena tamna tema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Automatski primenjuje tamnu temu u više aplikacija radi bolje pristupačnosti"</string>
-    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
-    <skip />
+    <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"prinudna inverzija, inverzija boja, kontrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Ukloni animacije"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Smanjite pomeranja na ekranu"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Treptanje kursora za tekst"</string>
@@ -3680,8 +3672,7 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"informacije o bateriji, datum proizvodnje, broj ciklusa, prvo korišćenje"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"nivo bezbednosne zakrpe za android, verzija osnovnog propusnog opsega, verzija jezgra"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, svetla, tamna, režim, osetljivost na svetlost, fotofobija, zatamniti, tamni režim, migrena"</string>
-    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
-    <skip />
+    <string name="keywords_blur_switch" msgid="3482676740440346012">"efekti zamagljivanja"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"tamna tema"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"greška"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Ambijentalni ekran, prikaz na zaključanom ekranu"</string>
@@ -3974,6 +3965,8 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Prikazuj sav sadržaj obaveštenja o poslovnom profilu"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Sakrij osetljiv sadržaj poslovnog profila"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Kada je uređaj zaključan, kako želite da se prikazuju obaveštenja o profilu?"</string>
+    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
+    <skip />
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Šta da se prikazuje na zaključanom ekranu"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Prikaži pregledana obaveštenja"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Prikaži ikone pregledanih obaveštenja"</string>
@@ -4079,6 +4072,8 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organizator obaveštenja"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Grupišite obaveštenja nižeg prioriteta i isključite im zvuk"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Upravljajte aplikacijama za organizator obaveštenja"</string>
+    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Primeni na aplikacije poslovnog profila"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Usluge pomagača za virtuelnu realnost"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nijedna instalirana aplikacija nije zahtevala da se pokrene kao usluga pomagača za virtuelnu realnost."</string>
@@ -5320,8 +5315,6 @@
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Dalje"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Uključuje se <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobilna mreža"</string>
-    <string name="imei_primary" msgid="5312232202518974440">"IMEI (primarni)"</string>
-    <string name="meid_primary" msgid="3256732684155678106">"MEID (primarni)"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Broj telefona"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"Oznaka i boja SIM kartice"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Aktivacija mreže"</string>
@@ -5972,15 +5965,10 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"Kontrole privatnosti"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Dozvole, kontrole"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Otključavanje uređaja"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"Otključavanje ekrana"</string>
-    <!-- no translation found for location_settings (6833222354060094170) -->
-    <skip />
-    <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
-    <skip />
-    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
-    <skip />
-    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
-    <skip />
-    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
-    <skip />
+    <string name="lock_screen_title" msgid="4701994278040604018">"Zaključavanje ekrana"</string>
+    <string name="location_settings" msgid="6833222354060094170">"Pristup lokaciji"</string>
+    <string name="location_settings_subtitle" msgid="8471780117911010030">"Pogledajte aplikacije i usluge koje imaju pristup lokaciji"</string>
+    <string name="identity_check_notification_title" msgid="8004343932775654492">"Provera identiteta radi sa više aplikacija"</string>
+    <string name="identity_check_notification_summary" msgid="3762060079941053730">"Provera identiteta sprečava neželjeni pristup aplikacijama. Sada je dostupno u bilo kojoj aplikaciji koja koristi Otključavanje otiskom prsta ili Otključavanje licem."</string>
+    <string name="identity_check_view_details" msgid="8752343542345818128">"Prikaži detalje"</string>
 </resources>

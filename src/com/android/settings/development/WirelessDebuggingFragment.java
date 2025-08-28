@@ -98,7 +98,7 @@ public class WirelessDebuggingFragment extends DashboardFragment
     private PreferenceCategory mFooterCategory;
     private FooterPreference mOffMessagePreference;
     // Map of paired devices, with the device GUID is the key
-    private Map<String, AdbPairedDevicePreference> mPairedDevicePreferences;
+    private final Map<String, AdbPairedDevicePreference> mPairedDevicePreferences = new HashMap<>();
     private IAdbManager mAdbManager;
     private int mConnectionPort;
     private IntentFilter mIntentFilter;
@@ -230,6 +230,8 @@ public class WirelessDebuggingFragment extends DashboardFragment
 
         getActivity().registerReceiver(mReceiver, mIntentFilter,
                 Context.RECEIVER_EXPORTED_UNAUDITED);
+
+        fetchAndUpdatePairedDevices();
     }
 
     @Override
@@ -312,27 +314,38 @@ public class WirelessDebuggingFragment extends DashboardFragment
 
     @Override
     public void onEnabled(boolean enabled) {
-        if (enabled) {
-            showDebuggingPreferences();
-            mAdbManager = IAdbManager.Stub.asInterface(ServiceManager.getService(
-                    Context.ADB_SERVICE));
-            try {
-                FingerprintAndPairDevice[] newList = mAdbManager.getPairedDevices();
-                Map<String, PairDevice> newMap = new HashMap<>();
-                for (FingerprintAndPairDevice pair : newList) {
-                    newMap.put(pair.keyFingerprint, pair.device);
-                }
-                updatePairedDevicePreferences(newMap);
-                mConnectionPort = mAdbManager.getAdbWirelessPort();
-                if (mConnectionPort > 0) {
-                    Log.i(TAG, "onEnabled(): connect_port=" + mConnectionPort);
-                }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Unable to request the paired list for Adb wireless");
-            }
-            sAdbIpAddressPreferenceController.updateState(mIpAddrPreference);
-        } else {
+        if (!enabled) {
             showOffMessage();
+            return;
+        }
+        showDebuggingPreferences();
+        mAdbManager = IAdbManager.Stub.asInterface(ServiceManager.getService(Context.ADB_SERVICE));
+        try {
+            fetchAndUpdatePairedDevices();
+            mConnectionPort = mAdbManager.getAdbWirelessPort();
+            if (mConnectionPort > 0) {
+                Log.i(TAG, "onEnabled(): connect_port=" + mConnectionPort);
+            }
+        } catch (RemoteException e) {
+            Log.e(TAG, "Unable to request the adb wireless port");
+        }
+        sAdbIpAddressPreferenceController.updateState(mIpAddrPreference);
+    }
+
+    private void fetchAndUpdatePairedDevices() {
+        if (mAdbManager == null) {
+            return;
+        }
+
+        try {
+            FingerprintAndPairDevice[] pairedDevices = mAdbManager.getPairedDevices();
+            Map<String, PairDevice> keyToPairedDevice = new HashMap<>();
+            for (FingerprintAndPairDevice pair : pairedDevices) {
+                keyToPairedDevice.put(pair.keyFingerprint, pair.device);
+            }
+            updatePairedDevicePreferences(keyToPairedDevice);
+        } catch (RemoteException e) {
+            Log.e(TAG, "Unable to request the paired list for Adb wireless");
         }
     }
 
@@ -358,9 +371,6 @@ public class WirelessDebuggingFragment extends DashboardFragment
         if (newList == null) {
             mPairedDevicesCategory.removeAll();
             return;
-        }
-        if (mPairedDevicePreferences == null) {
-            mPairedDevicePreferences = new HashMap<String, AdbPairedDevicePreference>();
         }
         if (mPairedDevicePreferences.isEmpty()) {
             for (Map.Entry<String, PairDevice> entry : newList.entrySet()) {

@@ -999,8 +999,7 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Ilipat ang iyong mouse sa pagitan ng mga display"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Gumamit ng external na display"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolution ng display"</string>
-    <!-- no translation found for external_display_connection_preference (3337612335495542718) -->
-    <skip />
+    <string name="external_display_connection_preference" msgid="3337612335495542718">"Default na gawi sa koneksyon"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Gamitin bilang hiwalay na display"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"I-mirror ang built-in na display"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Ipakita ang dialog ng koneksyon"</string>
@@ -1581,16 +1580,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Mga setting ng storage"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (SIM slot <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim" msgid="27798473711249145">"IMEI (SIM slot <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="4320457587114117400">"IMEI (SIM slot <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (pangunahin)"</string>
+    <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Para tingnan, piliin ang naka-save na network"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL na bersyon"</string>
-    <string name="meid_multi_sim" msgid="5076814185188481456">"MEID (SIM slot <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="meid_multi_sim_primary" msgid="6269908735700854437">"MEID (SIM slot <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (pangunahin)"</string>
+    <string name="meid_multi_sim" msgid="3124054561186721453">"MEID <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Naka-on"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Naka-off"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1684,7 +1681,8 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Communal"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Mga communal setting"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub mode"</string>
-    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Mga widget sa lock screen"</string>
+    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Kailan awtomatikong ipapakita"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Hindi kailanman"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Habang nagcha-charge"</string>
@@ -2499,12 +2497,9 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Mag-tap ng button upang mag-zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Mabilisang mag-zoom in sa screen para palakihin ang content"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Para mag-zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gamitin ang shortcut para simulan ang pag-magnify&lt;br/&gt; {1,number,integer}. I-tap ang screen&lt;br/&gt; {2,number,integer}. I-drag ang 2 daliri para gumalaw sa screen&lt;br/&gt; {3,number,integer}. Mag-pinch gamit ang 2 daliri para i-adjust ang pag-zoom&lt;br/&gt; {4,number,integer}. Gamitin ang shortcut para ihinto ang pag-magnify&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Para mag-zoom in nang pansamantala:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Tiyaking nakatakda sa full screen ang iyong uri ng pag-magnify&lt;br/&gt; {1,number,integer}. Gamitin ang shortcut para simulan ang pag-magnify&lt;br/&gt; {2,number,integer}. Pumindot nang matagal kahit saan sa screen&lt;br/&gt; {3,number,integer}. I-drag ang daliri para gumalaw sa screen&lt;br/&gt; {4,number,integer}. Iangat ang daliri para ihinto ang pag-magnify"</string>
-    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
-    <skip />
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;Para mag-zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gamitin ang shortcut o pindutin ang &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M para simulan ang pag-magnify&lt;br/&gt; {1,number,integer}. Pindutin ang &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + mga arrow key para gumalaw-galaw sa screen&lt;br/&gt; {2,number,integer}. Pindutin ang &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; at \"+\" o \"-\" para i-adjust ang zoom&lt;br/&gt; {3,number,integer}. Gamitin ang shortcut o &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M para ihinto ang pag-magnify"</string>
+    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;Para mag-zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gamitin ang shortcut para simulan ang pag-magnify&lt;br/&gt; {1,number,integer}. Pindutin ang &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + mga arrow key para gumalaw-galaw sa screen&lt;br/&gt; {2,number,integer}. Pindutin ang &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; at \"+\" o \"-\" para i-adjust ang zoom&lt;br/&gt; {3,number,integer}. Gamitin ang shortcut para ihinto ang pag-magnify"</string>
+    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;Keyboard&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gamitin ang shortcut o pindutin ang &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M para simulan ang pag-magnify&lt;br/&gt; {1,number,integer}. Pindutin ang &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + mga arrow key para gumalaw-galaw sa screen&lt;br/&gt; {2,number,integer}. Pindutin ang &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; at \"+\" o \"-\" para i-adjust ang zoom&lt;br/&gt; {3,number,integer}. Gamitin ang shortcut o &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M para ihinto ang pag-magnify&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Touchscreen&lt;/b&gt;&lt;br/&gt; Para mag-zoom in:&lt;br/&gt; {0,number,integer}. Gamitin ang shortcut para simulan ang pag-magnify&lt;br/&gt; {1,number,integer}. I-tap ang screen&lt;br/&gt; {2,number,integer}. I-drag ang 2 daliri para gumalaw sa screen&lt;br/&gt; {3,number,integer}. Mag-pinch gamit ang 2 daliri para i-adjust ang pag-zoom&lt;br/&gt; {4,number,integer}. Gamitin ang shortcut para ihinto ang pag-magnify&lt;br/&gt;&lt;br/&gt; Para pansamantalang mag-zoom in:&lt;br/&gt; {0,number,integer}. Tiyaking nakatakda sa full screen ang iyong uri ng pag-magnify&lt;br/&gt; {1,number,integer}. Gamitin ang shortcut para simulan ang pag-magnify&lt;br/&gt; {2,number,integer}. Pumindot nang matagal kahit saan sa screen&lt;br/&gt; {3,number,integer}. I-drag ang daliri para gumalaw sa screen&lt;br/&gt; {4,number,integer}. Iangat ang daliri para ihinto ang pag-magnify"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Para mag-zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gamitin ang shortcut para simulan ang pag-magnify&lt;br/&gt; {1,number,integer}. I-tap ang screen&lt;br/&gt; {2,number,integer}. I-drag ang 2 daliri para gumalaw sa screen&lt;br/&gt; {3,number,integer}. Mag-pinch gamit ang 2 daliri para i-adjust ang pag-zoom&lt;br/&gt; {4,number,integer}. Gumamit ng shortcut para ihinto ang pag-magnify&lt;br/&gt;&lt;br/&gt; Puwede ka ring mag-zoom in pansamantala at higit pa."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Para mag-zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gamitin ang shortcut para simulan ang pag-magnify&lt;br/&gt; {1,number,integer}. I-tap ang screen&lt;br/&gt; {2,number,integer}. I-drag ang 1 o 2 daliri para gumalaw sa screen&lt;br/&gt; {3,number,integer}. Mag-pinch gamit ang 2 daliri para i-adjust ang pag-zoom&lt;br/&gt; {4,number,integer}. Gumamit ng shortcut para ihinto ang pag-magnify&lt;br/&gt;&lt;br/&gt; Puwede ka ring mag-zoom in pansamantala at higit pa."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Kapag naka-on ang pag-magnify, makakapag-zoom in ka sa iyong screen.\n\n"<b>"Para mag-zoom"</b>", simulan ang pag-magnify, pagkatapos ay mag-tap kahit saan sa screen.\n"<ul><li>"Mag-drag ng 2 o higit pang daliri para mag-scroll"</li>\n<li>"Mag-pinch ng 2 o higit pang daliri para isaayos ang pag-zoom"</li></ul>\n\n<b>"Para mag-zoom pansamantala"</b>", simulan ang pag-magnify, pagkatapos ay pumindot nang matagal kahit saan sa screen.\n"<ul><li>"Mag-drag para gumalaw-galaw sa screen"</li>\n<li>"Iangat ang daliri para mag-zoom out"</li></ul>\n\n"Hindi ka makakapag-zoom in sa keyboard o navigation bar."</string>
@@ -3975,6 +3970,8 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Ipakita, lahat ng content ng notification sa trabaho"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Itago ang sensitibong content ng trabaho"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Kapag naka-lock ang iyong device, paano mo gustong lumabas ang mga notification tungkol sa profile?"</string>
+    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
+    <skip />
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Ano\'ng ipapakita sa lock screen"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Ipakita ang mga natingnang notification"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Ipakita ang mga natingnang icon ng notification"</string>
@@ -4080,6 +4077,8 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organizer ng notification"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"I-bundle at i-mute ang mga notification na may mas mababang priyoridad"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Pamahalaan ang mga app para sa organizer ng notification"</string>
+    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Ilapat sa mga app ng profile sa trabaho"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Mga serbisyong pantulong sa VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Walang mga naka-install na app ang humiling na mapagana bilang mga serbisyong pantulong sa VR."</string>
@@ -4847,14 +4846,10 @@
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigation Gamit ang Galaw"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Sumubok ng demo"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Button na pag-navigate"</string>
-    <!-- no translation found for button_navigation_settings_order_title (4256756895101424865) -->
-    <skip />
-    <!-- no translation found for navbar_back_button (6386920156044420082) -->
-    <skip />
-    <!-- no translation found for navbar_home_button (951459586446869883) -->
-    <skip />
-    <!-- no translation found for navbar_recent_button (6005580570601162420) -->
-    <skip />
+    <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Pagkakaayos ng button"</string>
+    <string name="navbar_back_button" msgid="6386920156044420082">"Bumalik"</string>
+    <string name="navbar_home_button" msgid="951459586446869883">"Home"</string>
+    <string name="navbar_recent_button" msgid="6005580570601162420">"Mga Kamakailan"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigation gamit ang galaw, sensitivity ng bumalik, galaw na bumalik"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"pag-navigate, button ng home"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"One-hand mode"</string>
@@ -5325,8 +5320,6 @@
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Susunod"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Ino-on ang <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobile network"</string>
-    <string name="imei_primary" msgid="5312232202518974440">"IMEI (primary)"</string>
-    <string name="meid_primary" msgid="3256732684155678106">"MEID (primary)"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Numero ng telepono"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"Label at kulay ng SIM"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Pag-activate ng network"</string>
@@ -5973,18 +5966,12 @@
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Tiyakin ang proteksyon ng iyong pagkakakilanlan sa lahat ng app na may suporta sa Pag-unlock Gamit ang Fingerprint at Mukha sa mga pinagkakatiwalaang lugar tulad ng bahay o opisina mo. Gamitin ang Pag-check sa Identity sa iyong relo para palawigin ang proteksyon mo kahit hindi sa mga pinagkakatiwalaang lugar."</string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Iba pang setting"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Autofill, mga notification, at higit pa"</string>
-    <!-- no translation found for privacy_sources_title (7648842637181479352) -->
-    <skip />
-    <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
-    <skip />
-    <!-- no translation found for device_unlock_subpage_title (8619367783572270468) -->
-    <skip />
-    <!-- no translation found for lock_screen_title (4701994278040604018) -->
-    <skip />
-    <!-- no translation found for location_settings (6833222354060094170) -->
-    <skip />
-    <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
-    <skip />
+    <string name="privacy_sources_title" msgid="7648842637181479352">"Mga kontrol sa privacy"</string>
+    <string name="privacy_sources_summary" msgid="8795612902105833258">"Mga pahintulot, kontrol"</string>
+    <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Pag-unlock ng device"</string>
+    <string name="lock_screen_title" msgid="4701994278040604018">"Lock ng screen"</string>
+    <string name="location_settings" msgid="6833222354060094170">"Access sa lokasyon"</string>
+    <string name="location_settings_subtitle" msgid="8471780117911010030">"Tingnan ang mga app at serbisyong may access sa lokasyon"</string>
     <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
     <skip />
     <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->

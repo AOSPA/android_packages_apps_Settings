@@ -190,6 +190,9 @@ open class MobileNetworkListScreen(context: Context) :
                     }
                 }
             }
+            +SimCallsPreference() order +130
+            +SimSmsPreference() order +140
+            +SimMobileDataPreference() order +150
         }
 
     companion object {

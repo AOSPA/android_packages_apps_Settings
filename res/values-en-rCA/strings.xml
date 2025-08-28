@@ -1577,16 +1577,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Storage settings"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (SIM slot <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim" msgid="27798473711249145">"IMEI (SIM slot <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="4320457587114117400">"IMEI (SIM slot <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primary)"</string>
+    <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"To view, choose saved network"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL version"</string>
-    <string name="meid_multi_sim" msgid="5076814185188481456">"MEID (SIM slot <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="meid_multi_sim_primary" msgid="6269908735700854437">"MEID (SIM slot <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primary)"</string>
+    <string name="meid_multi_sim" msgid="3124054561186721453">"MEID <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"On"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Off"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1680,7 +1678,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Communal"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Communal settings"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub mode"</string>
-    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets on lock screen"</string>
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Widgets on lock screen (beta)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"When to automatically show"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Never"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"While charging"</string>
@@ -3966,6 +3964,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Show all work notification content"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Hide sensitive work content"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"When your device is locked, how do you want profile notifications to show?"</string>
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"Show on lock screen"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"What to show on lock screen"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Show viewed notifications"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Show viewed notification icons"</string>
@@ -4071,6 +4070,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Notification organizer"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Bundle and silence lower priority notifications"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Manage apps for notification organizer"</string>
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Always expand bundles"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Apply to work profile apps"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR helper services"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"No installed apps have requested to be run as VR helper services."</string>
@@ -5312,8 +5312,6 @@
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Next"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Turning on <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobile network"</string>
-    <string name="imei_primary" msgid="5312232202518974440">"IMEI (primary)"</string>
-    <string name="meid_primary" msgid="3256732684155678106">"MEID (primary)"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Phone number"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIM label and color"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Network activation"</string>

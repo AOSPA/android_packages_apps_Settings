@@ -999,8 +999,7 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Μετακίνηση του ποντικιού μεταξύ οθονών"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Χρήση εξωτερικής οθόνης"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Ανάλυση οθόνης"</string>
-    <!-- no translation found for external_display_connection_preference (3337612335495542718) -->
-    <skip />
+    <string name="external_display_connection_preference" msgid="3337612335495542718">"Προεπιλεγμένη συμπεριφορά σύνδεσης"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Χρήση ως ξεχωριστή οθόνη"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Κατοπτρισμός ενσωματωμένης οθόνης"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Εμφάνιση παραθύρου διαλόγου σύνδεσης"</string>
@@ -1581,16 +1580,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Ρυθμίσεις αποθ/κού χώρου"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (υποδοχή SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim" msgid="27798473711249145">"Αριθμός IMEI (υποδοχή SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="4320457587114117400">"Αριθμός IMEI (υποδοχή SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (κύρια)"</string>
+    <string name="imei_multi_sim" msgid="6990044568468728075">"Αριθμός IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Για προβολή, επιλέξτε το αποθηκευμένο δίκτυο"</string>
     <string name="status_imei" msgid="5719752369250485007">"Αριθμός IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"ΛΕΠΤΟ"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Έκδοση PRL"</string>
-    <string name="meid_multi_sim" msgid="5076814185188481456">"MEID (υποδοχή SIM <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="meid_multi_sim_primary" msgid="6269908735700854437">"MEID (υποδοχή SIM <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (κύρια)"</string>
+    <string name="meid_multi_sim" msgid="3124054561186721453">"MEID <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Ενεργή"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Ανενεργή"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1684,7 +1681,8 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Κοινόχρηστες"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Κοινόχρηστες ρυθμίσεις"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Λειτουργία Hub"</string>
-    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Γραφικά στοιχεία στην οθόνη κλειδώματος"</string>
+    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Πότε να εμφανίζεται αυτόματα"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Ποτέ"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Κατά τη φόρτιση"</string>
@@ -2499,12 +2497,9 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Πατήστε ένα κουμπί για εστίαση"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Μεγεθύνετε γρήγορα την οθόνη προκειμένου το περιεχόμενο να εμφανίζεται μεγαλύτερο"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Για μεγέθυνση:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Χρησιμοποιήστε τη συντόμευση για να ξεκινήσετε τη μεγιστοποίηση&lt;br/&gt; {1,number,integer}. Πατήστε την οθόνη&lt;br/&gt; {2,number,integer}. Σύρετε 2 δάχτυλα για να μετακινηθείτε στην οθόνη&lt;br/&gt; {3,number,integer}. Πλησιάστε δύο δάχτυλα μεταξύ τους για προσαρμογή της εστίασης&lt;br/&gt; {4,number,integer}. Χρησιμοποιήστε τη συντόμευση για να διακόψετε τη μεγιστοποίηση&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Για προσωρινή μεγέθυνση:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Βεβαιωθείτε ότι ο τύπος μεγέθυνσης έχει οριστεί σε πλήρη οθόνη&lt;br/&gt; {1,number,integer}. Χρησιμοποιήστε τη συντόμευση για να ξεκινήσετε τη μεγιστοποίηση&lt;br/&gt; {2,number,integer}. Αγγίξτε παρατεταμένα οπουδήποτε στην οθόνη&lt;br/&gt; {3,number,integer}. Σύρετε το δάχτυλό σας για να μετακινηθείτε στην οθόνη&lt;br/&gt; {4,number,integer}. Σηκώστε το δάχτυλό σας για διακοπή της μεγιστοποίησης"</string>
-    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
-    <skip />
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;Για μεγέθυνση:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Χρησιμοποιήστε τη συντόμευση ή πατήστε &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M για να ξεκινήσετε τη μεγιστοποίηση&lt;br/&gt; {1,number,integer}. Πατήστε &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + τα πλήκτρα βέλους για να μετακινηθείτε στην οθόνη&lt;br/&gt; {2,number,integer}. Πατήστε &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; και \"+\" ή \"-\" για προσαρμογή της εστίασης&lt;br/&gt; {3,number,integer}. Χρησιμοποιήστε τη συντόμευση ή &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M για διακοπή της μεγιστοποίησης"</string>
+    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;Για μεγέθυνση:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Χρησιμοποιήστε τη συντόμευση για να ξεκινήσετε τη μεγιστοποίηση&lt;br/&gt; {1,number,integer}. Πατήστε &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + τα πλήκτρα βέλους για να μετακινηθείτε στην οθόνη&lt;br/&gt; {2,number,integer}. Πατήστε &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; και \"+\" ή \"-\" για προσαρμογή της εστίασης&lt;br/&gt; {3,number,integer}. Χρησιμοποιήστε τη συντόμευση για διακοπή της μεγιστοποίησης"</string>
+    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;Πληκτρολόγιο&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Χρησιμοποιήστε τη συντόμευση ή πατήστε &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M για να ξεκινήσετε τη μεγιστοποίηση&lt;br/&gt; {1,number,integer}. Πατήστε &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + τα πλήκτρα βέλους για να μετακινηθείτε στην οθόνη&lt;br/&gt; {2,number,integer}. Πατήστε &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; και \"+\" ή \"-\" για προσαρμογή της εστίασης&lt;br/&gt; {3,number,integer}. Χρησιμοποιήστε τη συντόμευση ή &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M για διακοπή της μεγιστοποίησης&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Οθόνη αφής&lt;/b&gt;&lt;br/&gt; Για μεγέθυνση:&lt;br/&gt; {0,number,integer}. Χρησιμοποιήστε τη συντόμευση για να ξεκινήσετε τη μεγιστοποίηση&lt;br/&gt; {1,number,integer}. Πατήστε την οθόνη&lt;br/&gt; {2,number,integer}. Σύρετε 2 δάχτυλα για να μετακινηθείτε στην οθόνη&lt;br/&gt; {3,number,integer}. Πλησιάστε/απομακρύνετε δύο δάχτυλα για προσαρμογή της εστίασης&lt;br/&gt; {4,number,integer}. Χρησιμοποιήστε τη συντόμευση για διακοπή της μεγιστοποίησης&lt;br/&gt;&lt;br/&gt; Για προσωρινή μεγέθυνση:&lt;br/&gt; {0,number,integer}. Βεβαιωθείτε ότι ο τύπος μεγιστοποίησης έχει οριστεί σε πλήρη οθόνη&lt;br/&gt; {1,number,integer}. Χρησιμοποιήστε τη συντόμευση για να ξεκινήσετε τη μεγιστοποίηση&lt;br/&gt; {2,number,integer}. Αγγίξτε παρατεταμένα οπουδήποτε στην οθόνη&lt;br/&gt; {3,number,integer}. Σύρετε το δάχτυλό σας για να μετακινηθείτε στην οθόνη&lt;br/&gt; {4,number,integer}. Σηκώστε το δάχτυλό σας για διακοπή της μεγιστοποίησης"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Για μεγέθυνση:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Χρησιμοποιήστε τη συντόμευση για να ξεκινήσετε τη μεγιστοποίηση&lt;br/&gt; {1,number,integer}. Πατήστε την οθόνη&lt;br/&gt; {2,number,integer}. Σύρετε 2 δάχτυλα για να μετακινηθείτε στην οθόνη&lt;br/&gt; {3,number,integer}. Πλησιάστε 2 δάχτυλα μεταξύ τους για προσαρμογή της εστίασης&lt;br/&gt; {4,number,integer}. Χρησιμοποιήστε τη συντόμευση για να σταματήσετε τη μεγιστοποίηση&lt;br/&gt;&lt;br/&gt; Μπορείτε επίσης να κάνετε προσωρινά μεγέθυνση και πολλά άλλα."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Για μεγέθυνση:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Χρησιμοποιήστε τη συντόμευση για να ξεκινήσετε τη μεγιστοποίηση&lt;br/&gt; {1,number,integer}. Πατήστε την οθόνη&lt;br/&gt; {2,number,integer}. Σύρετε 1 ή 2 δάχτυλα για να μετακινηθείτε στην οθόνη&lt;br/&gt; {3,number,integer}. Πλησιάστε 2 δάχτυλα μεταξύ τους για προσαρμογή της εστίασης&lt;br/&gt; {4,number,integer}. Χρησιμοποιήστε τη συντόμευση για να σταματήσετε τη μεγιστοποίηση&lt;br/&gt;&lt;br/&gt; Μπορείτε επίσης να κάνετε προσωρινά μεγέθυνση και πολλά άλλα."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Όταν η μεγέθυνση είναι ενεργοποιημένη, μπορείτε να μεγεθύνετε την οθόνη σας.\n\n"<b>"Για εστίαση "</b>", ανοίξτε τη μεγέθυνση και, στη συνέχεια, πατήστε οπουδήποτε στην οθόνη σας.\n"<ul><li>"Σύρετε 2 ή περισσότερα δάχτυλα για κύλιση"</li>\n<li>"Πλησιάστε 2 ή περισσότερα δάχτυλα για να προσαρμόσετε την εστίαση"</li></ul>\n\n<b>"Για προσωρινή εστίαση"</b>", ανοίξτε τη μεγέθυνση και, στη συνέχεια, αγγίξτε παρατεταμένα οπουδήποτε στην οθόνη.\n"<ul><li>"Σύρετε για να μετακινηθείτε στην οθόνη"</li>\n<li>"Ανασηκώστε το δάχτυλο για σμίκρυνση"</li></ul>\n\n"Δεν μπορείτε να κάνετε μεγέθυνση στο πληκτρολόγιο ή τη γραμμή πλοήγησης."</string>
@@ -3975,6 +3970,8 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Εμφάνιση όλου του περιεχομ. ειδοποιήσεων εργασίας"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Απόκρυψη ευαίσθητου περιεχομένου εργασίας"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Πώς θέλετε να εμφανίζονται οι ειδοποιήσεις προφίλ στη συσκευή σας, όταν η συσκευή σας είναι κλειδωμένη;"</string>
+    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
+    <skip />
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Τι θα εμφανίζεται στην οθόνη κλειδώματος"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Εμφάνιση ειδοποιήσεων που έχουν προβληθεί"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Εμφάνιση εικονιδίων ειδοποιήσεων που έχουν προβληθεί"</string>
@@ -4080,6 +4077,8 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Διοργανωτής ειδοποιήσεων"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Ομαδοποίηση και σίγαση ειδοποιήσεων χαμηλότερης προτεραιότητας"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Διαχείριση εφαρμογών για τον διοργανωτή ειδοποιήσεων"</string>
+    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Εφαρμογή σε εφαρμογές του προφίλ εργασίας"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Βοηθητικές υπηρεσίες Εικονικής Πραγματικότητας"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Δεν έχει ζητηθεί η εκτέλεση εγκατεστημένων εφαρμογών ως βοηθητικών υπηρεσιών Εικονικής Πραγματικότητας."</string>
@@ -4847,14 +4846,10 @@
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Πλοήγηση με κινήσεις"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Δοκιμάστε μια επίδειξη"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Πλοήγηση με κουμπιά"</string>
-    <!-- no translation found for button_navigation_settings_order_title (4256756895101424865) -->
-    <skip />
-    <!-- no translation found for navbar_back_button (6386920156044420082) -->
-    <skip />
-    <!-- no translation found for navbar_home_button (951459586446869883) -->
-    <skip />
-    <!-- no translation found for navbar_recent_button (6005580570601162420) -->
-    <skip />
+    <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Σειρά κουμπιών"</string>
+    <string name="navbar_back_button" msgid="6386920156044420082">"Πίσω"</string>
+    <string name="navbar_home_button" msgid="951459586446869883">"Αρχική σελίδα"</string>
+    <string name="navbar_recent_button" msgid="6005580570601162420">"Πρόσφατα"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"πλοήγηση με κινήσεις, ευαισθησία κίνησης επιστροφής, κίνηση επιστροφής"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"πλοήγηση, κουμπί αρχικής οθόνης"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Λειτουργία ενός χεριού"</string>
@@ -5325,8 +5320,6 @@
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Επόμενο"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Ενεργοποίηση <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Δίκτυο κινητής τηλεφωνίας"</string>
-    <string name="imei_primary" msgid="5312232202518974440">"Αριθμός IMEI (κύριος)"</string>
-    <string name="meid_primary" msgid="3256732684155678106">"Αριθμός MEID (κύριος)"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Αριθμός τηλεφώνου"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"Ετικέτα και χρώμα SIM"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Ενεργοποίηση δικτύου"</string>
@@ -5973,18 +5966,12 @@
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Διασφαλίστε την προστασία της ταυτότητάς σας σε όλες τις εφαρμογές που υποστηρίζουν το Ξεκλείδωμα με δακτυλικό αποτύπωμα και το Ξεκλείδωμα με το πρόσωπο σε αξιόπιστα μέρη, όπως το σπίτι ή το γραφείο σας. Χρησιμοποιήστε τον έλεγχο ταυτότητας με το ρολόι σας, για να επεκτείνετε την προστασία ακόμα και όταν δεν βρίσκεστε σε αξιόπιστα μέρη."</string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Άλλες ρυθμίσεις"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Αυτόματη συμπλήρωση, ειδοποιήσεις κ.ά."</string>
-    <!-- no translation found for privacy_sources_title (7648842637181479352) -->
-    <skip />
-    <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
-    <skip />
-    <!-- no translation found for device_unlock_subpage_title (8619367783572270468) -->
-    <skip />
-    <!-- no translation found for lock_screen_title (4701994278040604018) -->
-    <skip />
-    <!-- no translation found for location_settings (6833222354060094170) -->
-    <skip />
-    <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
-    <skip />
+    <string name="privacy_sources_title" msgid="7648842637181479352">"Στοιχεία ελέγχου απορρήτου"</string>
+    <string name="privacy_sources_summary" msgid="8795612902105833258">"Άδειες, στοιχεία ελέγχου"</string>
+    <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Ξεκλείδωμα συσκευής"</string>
+    <string name="lock_screen_title" msgid="4701994278040604018">"Κλείδωμα οθόνης"</string>
+    <string name="location_settings" msgid="6833222354060094170">"Πρόσβαση τοποθεσίας"</string>
+    <string name="location_settings_subtitle" msgid="8471780117911010030">"Εμφάνιση εφαρμογών και υπηρεσιών που έχουν πρόσβαση σε αυτή την τοποθεσία"</string>
     <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
     <skip />
     <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
