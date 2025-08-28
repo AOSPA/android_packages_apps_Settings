@@ -36,7 +36,7 @@
 
         <com.android.settings.accessibility.ShortcutPreference
             android:key="magnification_shortcut_preference"
-            android:persistent="false"
+            android:persistent="true"
             android:title="@string/accessibility_screen_magnification_shortcut_title"
             app:controller="com.android.settings.accessibility.screenmagnification.ToggleMagnificationShortcutPreferenceController" />
 
@@ -47,49 +47,49 @@
             app:controller="com.android.settings.accessibility.screenmagnification.ModePreferenceController" />
 
         <SwitchPreferenceCompat
-            android:key="accessibility_magnify_nav_and_ime"
-            android:persistent="false"
+            android:key="accessibility_magnification_magnify_nav_and_ime"
+            android:persistent="true"
             android:title="@string/accessibility_screen_magnification_nav_ime_title"
             app:controller="com.android.settings.accessibility.screenmagnification.MagnifyKeyboardPreferenceController" />
 
         <SwitchPreferenceCompat
-            android:key="magnification_follow_typing"
+            android:key="accessibility_magnification_follow_typing_enabled"
             android:title="@string/accessibility_screen_magnification_follow_typing_title"
             android:summary="@string/accessibility_screen_magnification_follow_typing_summary"
-            android:persistent="false"
+            android:persistent="true"
             app:controller="com.android.settings.accessibility.screenmagnification.FollowTypingPreferenceController"/>
 
         <SwitchPreferenceCompat
-            android:key="magnification_focus_follow_keyboard"
+            android:key="accessibility_magnification_follow_keyboard_enabled"
             android:title="@string/accessibility_screen_magnification_follow_keyboard_title"
             android:summary="@string/accessibility_screen_magnification_follow_keyboard_summary"
-            android:persistent="false"
+            android:persistent="true"
             app:controller="com.android.settings.accessibility.screenmagnification.FollowKeyboardPreferenceController"/>
 
         <Preference
             android:key="accessibility_magnification_cursor_following_mode"
             android:title="@string/accessibility_magnification_cursor_following_title"
-            android:persistent="false"
+            android:persistent="true"
             app:controller="com.android.settings.accessibility.screenmagnification.CursorFollowingModePreferenceController" />
 
         <SwitchPreferenceCompat
             android:key="accessibility_single_finger_panning_enabled"
             android:title="@string/accessibility_magnification_one_finger_panning_title"
-            android:persistent="false"
+            android:persistent="true"
             app:controller="com.android.settings.accessibility.screenmagnification.OneFingerPanningPreferenceController"/>
 
         <SwitchPreferenceCompat
             android:key="accessibility_magnification_always_on_enabled"
             android:title="@string/accessibility_screen_magnification_always_on_title"
             android:summary="@string/accessibility_screen_magnification_always_on_summary"
-            android:persistent="false"
+            android:persistent="true"
             app:controller="com.android.settings.accessibility.screenmagnification.AlwaysOnPreferenceController"/>
 
         <SwitchPreferenceCompat
             android:key="accessibility_magnification_joystick_enabled"
             android:title="@string/accessibility_screen_magnification_joystick_title"
             android:summary="@string/accessibility_screen_magnification_joystick_summary"
-            android:persistent="false"
+            android:persistent="true"
             app:controller="com.android.settings.accessibility.screenmagnification.JoystickPreferenceController"/>
 
     </PreferenceCategory>
@@ -104,6 +104,7 @@
         android:title="@string/accessibility_send_feedback_title"
         android:icon="@drawable/ic_feedback"
         app:searchable="false"
+        android:persistent="false"
         app:buttonPreferenceSize="normal"
         app:buttonPreferenceType="tonal"
         app:controller="com.android.settings.accessibility.FeedbackButtonPreferenceController" />
@@ -113,6 +114,7 @@
         android:title="@string/accessibility_send_survey_title"
         android:icon="@drawable/ic_rate_review"
         app:searchable="false"
+        android:persistent="false"
         app:buttonPreferenceSize="normal"
         app:buttonPreferenceType="tonal"
         app:controller="com.android.settings.accessibility.MagnificationSurveyButtonPreferenceController" />
