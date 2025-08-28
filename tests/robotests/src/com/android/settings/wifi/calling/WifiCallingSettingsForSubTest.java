@@ -85,9 +85,9 @@ public class WifiCallingSettingsForSubTest {
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final int SUB_ID = 2;
 
-    private static final String PREFERENCE_WFC_TOP_INTRO = "wfc_top_intro";
     private static final String SWITCH_BAR = "wifi_calling_switch_bar";
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
+    private static final String PREFERENCE_NO_OPTIONS_DESC = "no_options_description";
     private static final String BUTTON_WFC_ROAMING_MODE = "wifi_calling_roaming_mode";
     private static final String TEST_EMERGENCY_ADDRESS_CARRIER_APP =
             "com.android.settings/.wifi.calling.TestEmergencyAddressCarrierApp";
@@ -117,7 +117,7 @@ public class WifiCallingSettingsForSubTest {
     @Mock
     private SettingsMainSwitchPreference mSwitchBarPreference;
     @Mock
-    private TopIntroPreference mTopIntroPreference;
+    private TopIntroPreference mDescriptionView;
     @Mock
     private ListWithEntrySummaryPreference mButtonWfcMode;
     @Mock
@@ -381,9 +381,6 @@ public class WifiCallingSettingsForSubTest {
 
         @Override
         public <T extends Preference> T findPreference(CharSequence key) {
-            if (PREFERENCE_WFC_TOP_INTRO.contentEquals(key)) {
-                return (T) mTopIntroPreference;
-            }
             if (SWITCH_BAR.contentEquals(key)) {
                 return (T) mSwitchPref;
             }
@@ -392,6 +389,9 @@ public class WifiCallingSettingsForSubTest {
             }
             if (BUTTON_WFC_ROAMING_MODE.contentEquals(key)) {
                 return (T) mButtonWfcRoamingMode;
+            }
+            if (PREFERENCE_NO_OPTIONS_DESC.contentEquals(key)) {
+                return (T) mDescriptionView;
             }
             if (PREFERENCE_EMERGENCY_ADDRESS.contentEquals(key)) {
                 return (T) mUpdateAddress;

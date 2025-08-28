@@ -24,6 +24,11 @@
         android:icon="@drawable/ic_menu_arrow_upward"
         android:title="@string/preferred_locale_menu_up"/>
     <item
+        android:id="@+id/move_down"
+        android:showAsAction="never"
+        android:icon="@drawable/ic_menu_arrow_downward"
+        android:title="@string/preferred_locale_menu_down"/>
+    <item
         android:id="@+id/remove"
         android:showAsAction="never"
         android:icon="@drawable/ic_delete"

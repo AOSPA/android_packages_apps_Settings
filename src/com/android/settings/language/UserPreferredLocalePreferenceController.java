@@ -123,55 +123,59 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
             pref.setKey(localeInfo.toString());
             if (listSize == 1) {
                 pref.setMenuButtonVisible(false);
-            }
-
-            int menuId = R.menu.preferred_locale_menu;
-            if (i == 0) {
-                menuId = R.menu.preferred_locale_menu_down;
-            } else if (i == (localeInfoList.size() - 1)) {
-                menuId = R.menu.preferred_locale_menu_up;
-            }
-            pref.setMenuResId(menuId);
-            pref.setMenuItemClickListener((item, preference) -> {
-                int menuItemId = item.getItemId();
-                mMenuItemId = menuItemId;
-                if (menuItemId == R.id.move_top || menuItemId == R.id.move_up
-                        || menuItemId == R.id.move_down) {
-                    LocaleStore.LocaleInfo saved = localeInfo;
-                    mSelectedLocaleInfo = saved;
-                    int position = localeInfoList.indexOf(localeInfo);
-                    localeInfoList.remove(position);
-                    int toPosition = 0; // menuItemId is R.id.move_top
-                    if (menuItemId == R.id.move_up) {
-                        toPosition = position - 1;
-                    } else if (menuItemId == R.id.move_down) {
-                        toPosition = position + 1;
-                    }
-                    localeInfoList.add(toPosition, saved);
-                    mUpdatedLocaleInfoList = localeInfoList;
-                    showConfirmDialog(localeInfoList, null);
-                    mMetricsFeatureProvider.action(mContext,
-                            SettingsEnums.ACTION_REORDER_LANGUAGE);
-                } else {
-                    NotificationController controller = NotificationController.getInstance(
-                            mContext);
-                    controller.removeNotificationInfo(
-                            localeInfo.getLocale().toLanguageTag());
-                    final Locale defaultBeforeRemoval = Locale.getDefault();
-                    mSelectedLocaleInfo = localeInfo;
-                    int position = localeInfoList.indexOf(localeInfo);
-                    localeInfoList.remove(position);
-                    mUpdatedLocaleInfoList = localeInfoList;
-
-                    if (position == 0) {
-                        showConfirmDialog(localeInfoList, defaultBeforeRemoval);
-                    } else {
-                        displayRemovalDialogFragment(localeInfo);
-                    }
+            } else {
+                int menuId = R.menu.preferred_locale_menu;
+                if (i == 0) {
+                    menuId = R.menu.preferred_locale_menu_down;
+                } else if (i == 1) {
+                    menuId = listSize == 2
+                            ? R.menu.preferred_locale_menu_up
+                            : R.menu.preferred_locale_menu_up_down;
+                } else if (i == (listSize - 1)) {
+                    menuId = R.menu.preferred_locale_menu_top;
                 }
-                updatePreferences();
-                return true;
-            });
+                pref.setMenuResId(menuId);
+                pref.setMenuItemClickListener((item, preference) -> {
+                    int menuItemId = item.getItemId();
+                    mMenuItemId = menuItemId;
+                    if (menuItemId == R.id.move_top || menuItemId == R.id.move_up
+                            || menuItemId == R.id.move_down) {
+                        LocaleStore.LocaleInfo saved = localeInfo;
+                        mSelectedLocaleInfo = saved;
+                        int position = localeInfoList.indexOf(localeInfo);
+                        localeInfoList.remove(position);
+                        int toPosition = 0; // menuItemId is R.id.move_top
+                        if (menuItemId == R.id.move_up) {
+                            toPosition = position - 1;
+                        } else if (menuItemId == R.id.move_down) {
+                            toPosition = position + 1;
+                        }
+                        localeInfoList.add(toPosition, saved);
+                        mUpdatedLocaleInfoList = localeInfoList;
+                        showConfirmDialog(localeInfoList, null);
+                        mMetricsFeatureProvider.action(mContext,
+                                SettingsEnums.ACTION_REORDER_LANGUAGE);
+                    } else {
+                        NotificationController controller = NotificationController.getInstance(
+                                mContext);
+                        controller.removeNotificationInfo(
+                                localeInfo.getLocale().toLanguageTag());
+                        final Locale defaultBeforeRemoval = Locale.getDefault();
+                        mSelectedLocaleInfo = localeInfo;
+                        int position = localeInfoList.indexOf(localeInfo);
+                        localeInfoList.remove(position);
+                        mUpdatedLocaleInfoList = localeInfoList;
+
+                        if (position == 0) {
+                            showConfirmDialog(localeInfoList, defaultBeforeRemoval);
+                        } else {
+                            displayRemovalDialogFragment(localeInfo);
+                        }
+                    }
+                    updatePreferences();
+                    return true;
+                });
+            }
             pref.setNumber(i + 1);
             pref.setShowIconsInPopupMenu(true);
             mPreferences.put(localeInfo.getId(), pref);
