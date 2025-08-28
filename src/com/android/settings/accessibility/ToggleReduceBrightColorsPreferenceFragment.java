@@ -39,15 +39,17 @@ public class ToggleReduceBrightColorsPreferenceFragment extends BaseSupportFragm
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        ToggleShortcutPreferenceController shortcutPreferenceController =
-                use(ToggleShortcutPreferenceController.class);
-        if (shortcutPreferenceController != null) {
-            shortcutPreferenceController.initialize(
-                    getFeatureComponentName(),
-                    getChildFragmentManager(),
-                    getFeatureName(),
-                    getMetricsCategory()
-            );
+        if (!Flags.catalystExtraDim()) {
+            ToggleShortcutPreferenceController shortcutPreferenceController =
+                    use(ToggleShortcutPreferenceController.class);
+            if (shortcutPreferenceController != null) {
+                shortcutPreferenceController.initialize(
+                        getFeatureComponentName(),
+                        getChildFragmentManager(),
+                        getFeatureName(),
+                        getMetricsCategory()
+                );
+            }
         }
     }
 
@@ -88,7 +90,11 @@ public class ToggleReduceBrightColorsPreferenceFragment extends BaseSupportFragm
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_extra_dim_settings) {
+            new BaseSearchIndexProvider(
+                    Flags.catalystExtraDim()
+                            && com.android.settings.flags.Flags.catalystSettingsSearch()
+                            ? 0 : R.xml.accessibility_extra_dim_settings) {
+
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return ColorDisplayManager.isReduceBrightColorsAvailable(context);

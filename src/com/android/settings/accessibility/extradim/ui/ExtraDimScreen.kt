@@ -22,16 +22,19 @@ import android.content.Intent
 import android.hardware.display.ColorDisplayManager
 import android.provider.Settings
 import androidx.fragment.app.Fragment
+import com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment
 import com.android.settings.accessibility.extradim.data.ExtraDimDataStore
+import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -68,7 +71,7 @@ open class ExtraDimScreen(context: Context) :
     override fun fragmentClass(): Class<out Fragment> =
         ToggleReduceBrightColorsPreferenceFragment::class.java
 
-    override fun hasCompleteHierarchy(): Boolean = false
+    override fun isIndexable(context: Context): Boolean = true
 
     override fun isFlagEnabled(context: Context): Boolean = Flags.catalystExtraDim()
 
@@ -103,7 +106,30 @@ open class ExtraDimScreen(context: Context) :
     override fun getPreferenceHierarchy(
         context: Context,
         coroutineScope: CoroutineScope,
-    ): PreferenceHierarchy = preferenceHierarchy(context) {}
+    ): PreferenceHierarchy =
+        preferenceHierarchy(context) {
+            val extraDimStorage = ExtraDimDataStore(context)
+            +IntroPreference()
+            +ExtraDimIllustrationPreference()
+            +ExtraDimMainSwitchPreference(context, extraDimStorage)
+            +PreferenceCategory(
+                key = "general_categories",
+                title = R.string.accessibility_screen_option,
+            ) +=
+                {
+                    +IntensityPreference(context, extraDimStorage)
+                    +PersistentAfterRestartsPreference(context, extraDimStorage)
+                    +AccessibilityShortcutPreference(
+                        context = context,
+                        key = "reduce_bright_colors_shortcut",
+                        title = R.string.reduce_bright_colors_shortcut_title,
+                        componentName = REDUCE_BRIGHT_COLORS_COMPONENT_NAME,
+                        featureName = R.string.reduce_bright_colors_preference_title,
+                        metricsCategory = metricsCategory,
+                    )
+                }
+            +FooterPreference()
+        }
 
     companion object {
         const val KEY = "reduce_bright_colors_preference"
