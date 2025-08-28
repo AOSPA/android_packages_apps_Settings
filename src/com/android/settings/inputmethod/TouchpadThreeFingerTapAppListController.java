@@ -30,6 +30,7 @@ import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.setDe
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.setLaunchAppAsGestureType;
 
 import android.app.ActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -55,6 +56,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.Comparator;
@@ -78,6 +81,8 @@ public class TouchpadThreeFingerTapAppListController extends BasePreferenceContr
     private ContentObserver mObserver;
     @Nullable
     private PreferenceScreen mPreferenceScreen;
+
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private final LauncherApps.Callback mLauncherAppsCallback = new LauncherApps.Callback() {
         @Override
@@ -188,6 +193,7 @@ public class TouchpadThreeFingerTapAppListController extends BasePreferenceContr
         mInputManager = inputManager;
         mSharedPreferences = sharedPreferences;
         mLauncherApps.registerCallback(mLauncherAppsCallback);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -312,6 +318,9 @@ public class TouchpadThreeFingerTapAppListController extends BasePreferenceContr
         }
         putLaunchingApp(mSharedPreferences, componentName);
         if (mPreferenceScreen.getExtras().getBoolean(SET_GESTURE)) {
+            mMetricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_TOUCHPAD_THREE_FINGER_TAP_LAUNCHING_APP,
+                    componentName.getPackageName());
             setLaunchAppAsGestureType(mContentResolver, mInputManager, componentName);
         }
     }

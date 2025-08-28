@@ -34,6 +34,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -56,6 +57,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flags.Flags;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
 import com.android.settings.testutils.shadow.ShadowSystemSettings;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
@@ -112,12 +114,14 @@ public class TouchpadThreeFingerTapActionPreferenceControllerTest {
     private ArgumentCaptor<Intent> mIntentCaptor;
 
     private ContentResolver mContentResolver;
+    private FakeFeatureFactory mFeatureFactory;
     private TouchpadThreeFingerTapActionPreferenceController mController;
 
     @Before
     public void setup() {
         final Context context = ApplicationProvider.getApplicationContext();
         mContentResolver = context.getContentResolver();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mMockContext.getContentResolver()).thenReturn(context.getContentResolver());
         when(mMockContext.getPackageManager()).thenReturn(mMockPackageManager);
         when(mMockContext.getSharedPreferences(eq(SHARED_PREF_NAME), anyInt()))
@@ -233,6 +237,9 @@ public class TouchpadThreeFingerTapActionPreferenceControllerTest {
 
         int gesture = getCurrentGestureType(mContentResolver);
         assertThat(gesture).isEqualTo(LAUNCH_APP_GESTURE);
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_TOUCHPAD_THREE_FINGER_TAP_LAUNCHING_APP),
+                eq("testPackage"));
     }
 
     @Test

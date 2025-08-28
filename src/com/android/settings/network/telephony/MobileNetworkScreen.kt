@@ -27,6 +27,7 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.MobileNetworkActivity
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.datausage.DataUsageListScreen
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.restriction.PreferenceRestrictionMixin
@@ -36,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
@@ -79,7 +81,13 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
     override fun hasCompleteHierarchy() = false
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            if (Flags.deeplinkNetworkAndInternet25q4()) {
+                +UntitledPreferenceCategoryMetadata("enabled_state_container") += {
+                    +(DataUsageListScreen.KEY args arguments)
+                }
+            }
+        }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
         return makeLaunchIntent(
