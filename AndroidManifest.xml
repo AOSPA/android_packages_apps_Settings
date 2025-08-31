@@ -3053,6 +3053,11 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             android:excludeFromRecents="true"
             android:exported="false" />
 
+        <activity android:name=".supervision.SupervisionErrorActivity"
+            android:theme="@style/GlifV4Theme.DayNight"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+
         <activity
             android:name=".supervision.SupervisionPinRecoveryActivity"
             android:excludeFromRecents="true"

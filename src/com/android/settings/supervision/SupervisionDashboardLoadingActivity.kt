@@ -16,23 +16,36 @@
 
 package com.android.settings.supervision
 
+import android.app.role.OnRoleHoldersChangedListener
+import android.app.role.RoleManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
 import com.android.settings.core.CategoryMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settingslib.collapsingtoolbar.R.drawable.settingslib_expressive_icon_back as EXPRESSIVE_BACK_ICON
 import com.android.settingslib.drawer.CategoryKey.CATEGORY_SUPERVISION
+import com.android.settingslib.supervision.SupervisionLog.TAG
 import com.android.settingslib.widget.SettingsThemeHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SupervisionDashboardLoadingActivity : FragmentActivity(), CategoryMixin.CategoryListener {
-
+    private var supervisionMessengerClient: SupervisionMessengerClient? = null
+    private var launchJob: Job? = null
     private lateinit var categoryMixin: CategoryMixin
     private lateinit var supervisionPackage: String
 
@@ -47,6 +60,12 @@ class SupervisionDashboardLoadingActivity : FragmentActivity(), CategoryMixin.Ca
                 }
             }
         }
+
+    private val roleObserver = OnRoleHoldersChangedListener { roleName, _ ->
+        if (roleName == RoleManager.ROLE_SYSTEM_SUPERVISION) {
+            maybeLaunchDashboard()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +96,7 @@ class SupervisionDashboardLoadingActivity : FragmentActivity(), CategoryMixin.Ca
     override fun onStop() {
         super.onStop()
 
+        supervisionMessengerClient?.close()
         unregisterReceivers()
     }
 
@@ -107,11 +127,17 @@ class SupervisionDashboardLoadingActivity : FragmentActivity(), CategoryMixin.Ca
             }
         registerReceiver(packageChangeReceiver, intentFilter, RECEIVER_NOT_EXPORTED)
         categoryMixin.addCategoryListener(this)
+
+        val roleManager = getSystemService(RoleManager::class.java)
+        roleManager?.addOnRoleHoldersChangedListenerAsUser(mainExecutor, roleObserver, user)
     }
 
     private fun unregisterReceivers() {
         unregisterReceiver(packageChangeReceiver)
         categoryMixin.removeCategoryListener(this)
+
+        val roleManager = getSystemService(RoleManager::class.java)
+        roleManager?.removeOnRoleHoldersChangedListenerAsUser(roleObserver, user)
     }
 
     override fun onCategoriesChanged(categories: Set<String>?) {
@@ -123,11 +149,29 @@ class SupervisionDashboardLoadingActivity : FragmentActivity(), CategoryMixin.Ca
 
     private fun maybeLaunchDashboard() {
         if (isFinishing) return
-        if (isSettingsDashboardReady()) {
-            // Supervision package with necessary component is ready, launch dashboard
-            val dashboardActivity = Intent(this, SupervisionDashboardActivity::class.java)
-            startActivity(dashboardActivity)
-            finish()
+
+        if (hasNecessarySupervisionComponent()) {
+            // Supervision package with necessary component is ready, check if dashboard is ready
+            // to be launched.
+
+            // If a launch job is already active, do not start another one.
+            if (launchJob?.isActive == true) {
+                return
+            }
+            launchJob =
+                lifecycleScope.launch(Dispatchers.IO) {
+                    if (isSettingsDashboardReady()) {
+                        withContext(Dispatchers.Main) {
+                            val dashboardActivity =
+                                Intent(
+                                    this@SupervisionDashboardLoadingActivity,
+                                    SupervisionDashboardActivity::class.java,
+                                )
+                            startActivity(dashboardActivity)
+                            finish()
+                        }
+                    }
+                }
         } else if (getSupervisionAppInstallActivityInfo() != null) {
             // Supervision package with necessary component is not ready, but a mitigation action
             // is available.
@@ -137,12 +181,80 @@ class SupervisionDashboardLoadingActivity : FragmentActivity(), CategoryMixin.Ca
         // Otherwise, wait for another event to trigger this check again.
     }
 
-    private fun isSettingsDashboardReady(): Boolean {
-        val hasComponent = hasNecessarySupervisionComponent()
+    private suspend fun isSettingsDashboardReady(): Boolean {
         val tilesExist =
             featureFactory.dashboardFeatureProvider.getTilesForCategory(CATEGORY_SUPERVISION) !=
                 null
-        return hasComponent && tilesExist
+
+        if (!hasSupervisionRole() || !tilesExist) {
+            return false
+        }
+
+        if (supervisionMessengerClient == null) {
+            supervisionMessengerClient = SupervisionMessengerClient(this)
+        }
+        return isPreferenceDataLoaded(supervisionMessengerClient!!)
+    }
+
+    private fun hasSupervisionRole(): Boolean {
+        val roleManager = getSystemService(RoleManager::class.java)
+        if (roleManager == null) {
+            Log.w(TAG, "null RoleManager")
+            return false
+        }
+
+        val result =
+            roleManager
+                .getRoleHolders(RoleManager.ROLE_SYSTEM_SUPERVISION)
+                .contains(supervisionPackage)
+        return result
+    }
+
+    private suspend fun isPreferenceDataLoaded(
+        client: SupervisionMessengerClient,
+        retries: Int = 3,
+        initialDelay: Long = 1000, // 1 second
+    ): Boolean {
+        val promoKey = SupervisionPromoFooterPreference.KEY
+        val aocKey = SupervisionAocFooterPreference.KEY
+        if (
+            client.getCachedPreferenceData(listOf(promoKey))[promoKey] != null ||
+                client.getCachedPreferenceData(listOf(aocKey))[aocKey] != null
+        ) {
+            return true
+        }
+
+        var currentDelay = initialDelay
+        for (attempt in 0 until retries) {
+            try {
+                // Attempt to fetch the data. This is the part that throws the exception.
+                val result =
+                    withContext(Dispatchers.IO) {
+                        val promoData = async { client.getPreferenceData(listOf(promoKey)) }
+                        val aocData = async { client.getPreferenceData(listOf(aocKey)) }
+                        promoData.await()[promoKey] != null && aocData.await()[aocKey] != null
+                    }
+                if (result) {
+                    // Only return if data was fetched successfully. Otherwise, retry.
+                    return true
+                }
+            } catch (e: Exception) {
+                Log.w(TAG, "Attempt ${attempt + 1} to fetch preference data failed.", e)
+            } finally {
+                if (attempt == retries - 1) {
+                    // If this was the last attempt, give up without delaying.
+                    break
+                }
+
+                // Wait for the delay period before the next attempt.
+                delay(currentDelay)
+                // Double the delay for the next retry (exponential backoff).
+                currentDelay *= 2
+            }
+        }
+        // If we reach here, we have exhausted all retries and should just return true
+        // instead of blocking the loading of the dashboard on the data load.
+        return true
     }
 
     private fun tryEnableSupervisionPackage() {

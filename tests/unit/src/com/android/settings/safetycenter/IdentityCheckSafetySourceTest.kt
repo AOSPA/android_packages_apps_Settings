@@ -17,6 +17,7 @@
 package com.android.settings.safetycenter
 
 import android.content.Context
+import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.Flags
 import android.platform.test.annotations.RequiresFlagsDisabled
 import android.platform.test.annotations.RequiresFlagsEnabled
@@ -57,6 +58,7 @@ class IdentityCheckSafetySourceTest {
     @get:Rule val mCheckFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     @Mock lateinit var safetyCenterManagerWrapper: SafetyCenterManagerWrapper
+    @Mock lateinit var biometricManager: BiometricManager
 
     private val applicationContext: Context = ApplicationProvider.getApplicationContext()
     private val refreshSafetyEvent =
@@ -73,6 +75,8 @@ class IdentityCheckSafetySourceTest {
     fun setUp() {
         SafetyCenterManagerWrapper.sInstance = safetyCenterManagerWrapper
         identityCheckSafetySource = IdentityCheckSafetySource()
+        whenever(biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG))
+            .thenReturn(BiometricManager.BIOMETRIC_SUCCESS)
     }
 
     @After
@@ -86,49 +90,14 @@ class IdentityCheckSafetySourceTest {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(false)
 
         setIdentityCheckPromoCardShown(false)
-        setIdentityCheckEnabled()
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+        )
 
         verify(safetyCenterManagerWrapper, never()).setSafetySourceData(any(), any(), any(), any())
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
-    fun refreshSafetySources_whenIdentityCheckDisabledInV1_setsNullData() {
-        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
-
-        setIdentityCheckPromoCardShown(false)
-        setIdentityCheckEnabled(enabledV1Status = false, enabledCurrentStatus = true)
-
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
-
-        verify(safetyCenterManagerWrapper)
-            .setSafetySourceData(
-                eq(applicationContext),
-                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
-                eq(null),
-                eq(refreshSafetyEvent),
-            )
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
-    fun refreshSafetySources_whenIdentityCheckDisabledCurrently_setsNullData() {
-        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
-
-        setIdentityCheckPromoCardShown(false)
-        setIdentityCheckEnabled(enabledV1Status = true, enabledCurrentStatus = false)
-
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
-
-        verify(safetyCenterManagerWrapper)
-            .setSafetySourceData(
-                eq(applicationContext),
-                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
-                eq(null),
-                eq(refreshSafetyEvent),
-            )
     }
 
     @Test
@@ -137,9 +106,12 @@ class IdentityCheckSafetySourceTest {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
         setIdentityCheckPromoCardShown(true)
-        setIdentityCheckEnabled()
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+        )
 
         verify(safetyCenterManagerWrapper)
             .setSafetySourceData(
@@ -156,9 +128,35 @@ class IdentityCheckSafetySourceTest {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
         setIdentityCheckPromoCardShown(false)
-        setIdentityCheckEnabled()
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+        )
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                eq(null),
+                eq(refreshSafetyEvent),
+            )
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
+    fun refreshSafetySources_whenInvalidDevice_setsNullData() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+        whenever(biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG))
+            .thenReturn(BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE)
+        setIdentityCheckPromoCardShown(false)
+
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+        )
 
         verify(safetyCenterManagerWrapper)
             .setSafetySourceData(
@@ -175,10 +173,13 @@ class IdentityCheckSafetySourceTest {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
         setIdentityCheckPromoCardShown(false)
-        setIdentityCheckEnabled()
         resetWatchRangingSupportedValue()
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+        )
 
         verify(safetyCenterManagerWrapper)
             .setSafetySourceData(
@@ -197,9 +198,12 @@ class IdentityCheckSafetySourceTest {
         setIdentityCheckNotificationBeenClicked(false)
         setIdentityCheckPromoCardShown(false)
         setWatchRangingSupportedValue(false)
-        setIdentityCheckEnabled()
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+        )
 
         verify(safetyCenterManagerWrapper)
             .setSafetySourceData(
@@ -225,9 +229,12 @@ class IdentityCheckSafetySourceTest {
         setIdentityCheckNotificationBeenClicked(true)
         setIdentityCheckPromoCardShown(false)
         setWatchRangingSupportedValue(false)
-        setIdentityCheckEnabled()
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+        )
 
         verify(safetyCenterManagerWrapper)
             .setSafetySourceData(
@@ -253,9 +260,12 @@ class IdentityCheckSafetySourceTest {
 
         setWatchRangingSupportedValue(true)
         setIdentityCheckPromoCardShown(false)
-        setIdentityCheckEnabled()
 
-        IdentityCheckSafetySource.setSafetySourceData(applicationContext, refreshSafetyEvent)
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+        )
 
         verify(safetyCenterManagerWrapper)
             .setSafetySourceData(
@@ -283,7 +293,6 @@ class IdentityCheckSafetySourceTest {
 
         setWatchRangingSupportedValue(true)
         setIdentityCheckPromoCardShown(false)
-        setIdentityCheckEnabled()
 
         val observer = IdentityCheckSafetySource.WatchContentObserver(applicationContext)
         val uri =
@@ -329,23 +338,6 @@ class IdentityCheckSafetySourceTest {
             applicationContext.contentResolver,
             Settings.Global.WATCH_RANGING_SUPPORTED_BY_PRIMARY_DEVICE,
             null,
-        )
-    }
-
-    private fun setIdentityCheckEnabled(
-        enabledV1Status: Boolean = true,
-        enabledCurrentStatus: Boolean = true,
-    ) {
-        Settings.Secure.putInt(
-            applicationContext.contentResolver,
-            Settings.Secure.IDENTITY_CHECK_ENABLED_V1,
-            if (enabledV1Status) 1 else 0,
-        )
-
-        Settings.Secure.putInt(
-            applicationContext.contentResolver,
-            Settings.Secure.MANDATORY_BIOMETRICS,
-            if (enabledCurrentStatus) 1 else 0,
         )
     }
 }

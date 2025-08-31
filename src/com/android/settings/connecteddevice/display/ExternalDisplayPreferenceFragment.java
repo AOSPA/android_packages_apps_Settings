@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.display;
 
+import static android.app.ActivityManager.LOCK_TASK_MODE_LOCKED;
 import static android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK;
 import static android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_DESKTOP;
 import static android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR;
@@ -26,12 +27,18 @@ import static com.android.settings.connecteddevice.display.ExternalDisplaySettin
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isExternalDisplaySettingsPageEnabled;
-import static com.android.settings.connecteddevice.display.ExternalDisplayUtilsKt.isDisplayInMirroringMode;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityTaskManager;
+import android.app.TaskStackListener;
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.view.Display;
 import android.view.View;
@@ -158,7 +165,12 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     static final String CONNECTION_PREF_DESKTOP = "desktop";
     static final String CONNECTION_PREF_MIRROR = "mirror";
 
+    @VisibleForTesting
+    final LockTaskModeChangedListener mLockTaskModeChangedListener =
+            new LockTaskModeChangedListener();
+
     private boolean mStarted;
+    private int mLockTaskMode;
     @Nullable
     private Preference mDisplayTopologyPreference;
     @Nullable
@@ -183,6 +195,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             scheduleUpdate();
         }
     };
+    private ActivityTaskManager mActivityTaskManager;
+    private DevicePolicyManager mDpm;
 
     public ExternalDisplayPreferenceFragment() {
         mInjector = new ConnectedDisplayInjector(/* context= */ null);
@@ -208,6 +222,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (mInjector.getContext() == null) {
             mInjector = new ConnectedDisplayInjector(requireContext());
         }
+        mActivityTaskManager = requireContext().getSystemService(ActivityTaskManager.class);
+        mDpm = requireContext().getSystemService(DevicePolicyManager.class);
         addPreferencesFromResource(EXTERNAL_DISPLAY_SETTINGS_RESOURCE);
     }
 
@@ -227,6 +243,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     @Override
     public void onStartCallback() {
         mStarted = true;
+        mLockTaskMode =
+                requireContext().getSystemService(ActivityManager.class).getLockTaskModeState();
+        mActivityTaskManager.registerTaskStackListener(mLockTaskModeChangedListener);
         mInjector.registerDisplayListener(mListener);
         scheduleUpdate();
     }
@@ -235,6 +254,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     public void onStopCallback() {
         mStarted = false;
         mInjector.unregisterDisplayListener(mListener);
+        mActivityTaskManager.unregisterTaskStackListener(mLockTaskModeChangedListener);
         unscheduleUpdate();
     }
 
@@ -382,11 +402,25 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     private void addMirrorPreference(PrefRefresh refresh) {
-        Preference pref = refresh.findUnusedPreference(PrefBasics.MIRROR.key);
+        MirrorPreference pref = refresh.findUnusedPreference(PrefBasics.MIRROR.key);
+        boolean isDisplayContentModeManagementFlagEnabled =
+                DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue();
         if (pref == null) {
             pref = new MirrorPreference(requireContext(),
-                DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue());
+                    isDisplayContentModeManagementFlagEnabled);
             PrefBasics.MIRROR.apply(pref, /* nth= */ null);
+        }
+        if (mLockTaskMode == LOCK_TASK_MODE_LOCKED) {
+            final EnforcingAdmin enforcingAdmin = mDpm.getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.LOCK_TASK_POLICY,
+                    UserHandle.myUserId()).getMostImportantEnforcingAdmin();
+            pref.setDisabledByAdmin(enforcingAdmin);
+            pref.setChecked(true);
+        } else {
+            pref.setDisabledByAdmin((EnforcingAdmin) null);
+            pref.setEnabled(isDisplayContentModeManagementFlagEnabled);
+            pref.setChecked(isDisplayInMirroringMode());
+            pref.setSummary("");
         }
         refresh.addPreference(pref);
     }
@@ -401,9 +435,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             final SwitchPreferenceCompat switchPref = (SwitchPreferenceCompat) pref;
             boolean isActive =
                     Settings.Secure.getInt(
-                                    requireContext().getContentResolver(),
-                                    INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY,
-                                    0)
+                            requireContext().getContentResolver(),
+                            INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY,
+                            0)
                             != 0;
             switchPref.setChecked(isActive);
             switchPref.setOnPreferenceClickListener(
@@ -526,7 +560,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             }
         }
         if (mInjector.getFlags().displaySizeConnectedDisplaySetting()
-                && !isDisplayInMirroringMode(requireContext())) {
+                && !isDisplayInMirroringMode()) {
             addSizePreference(refresh, display, position);
         }
     }
@@ -537,7 +571,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             addMirrorPreference(screen);
             if (mInjector.isDefaultDisplayInTopologyFlagEnabled()
                     && mInjector.isProjectedModeEnabled()
-                    && !isDisplayInMirroringMode(requireContext())) {
+                    && !isDisplayInMirroringMode()) {
                 addIncludeDefaultDisplayInTopologyPreference(screen);
             }
 
@@ -793,6 +827,17 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         }
     }
 
+    @VisibleForTesting
+    class LockTaskModeChangedListener extends TaskStackListener {
+
+        @Override
+        public void onLockTaskModeChanged(int mode) {
+            super.onLockTaskModeChanged(mode);
+            mLockTaskMode = mode;
+            scheduleUpdate();
+        }
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(EXTERNAL_DISPLAY_SETTINGS_RESOURCE) {
                 @Override
@@ -813,4 +858,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                     return rawData;
                 }
             };
+
+    private boolean isDisplayInMirroringMode() {
+        return mLockTaskMode == LOCK_TASK_MODE_LOCKED
+                || ExternalDisplayUtilsKt.isDisplayInMirroringMode(requireContext());
+    }
 }

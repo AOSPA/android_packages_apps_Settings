@@ -999,8 +999,7 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"تحريك الماوس بين الشاشات"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"استخدام الشاشة الخارجية"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"دقة الشاشة"</string>
-    <!-- no translation found for external_display_connection_preference (3337612335495542718) -->
-    <skip />
+    <string name="external_display_connection_preference" msgid="3337612335495542718">"السلوك التلقائي للاتصال"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"استخدام الشاشة كشاشة عرض منفصلة"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"مزامنة محتوى الشاشة المُضمَّنة مع الشاشة الخارجية"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"عرض مربّع حوار الاتصال"</string>
@@ -1501,12 +1500,9 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"وضع الإضاءة المنخفضة"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"الرفع لتنبيه الجهاز"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"البدء فقط عند الشحن لاسلكيًا"</string>
-    <!-- no translation found for blur_switch (1391073945502754948) -->
-    <skip />
-    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
-    <skip />
-    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
-    <skip />
+    <string name="blur_switch" msgid="1391073945502754948">"تقليل تأثيرات التمويه"</string>
+    <string name="blur_switch_summary" msgid="5025895302219948597">"تسهيل رؤية الخلفيات واللوحات"</string>
+    <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"تم الإيقاف مؤقتًا بسبب تفعيل ميزة \"توفير شحن البطارية\""</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"استخدام \"وضع الإضاءة المنخفضة\""</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"اختيار ما يتم عرضه في \"وضع الإضاءة المنخفضة\""</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"الشاشة مقفلة"</string>
@@ -1581,16 +1577,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"إعدادات وحدة التخزين"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"‏معرّف شريحة SIM المضمّنة (E​ID) (منفذ شريحة SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim" msgid="27798473711249145">"‏معرّف IMEI (منفذ شريحة SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="4320457587114117400">"‏معرّف IMEI (منفذ شريحة SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (الرئيسي)"</string>
+    <string name="imei_multi_sim" msgid="6990044568468728075">"‏رقم IMEI: <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"‏لعرض عنوان MAC، اختَر شبكة محفوظة"</string>
     <string name="status_imei" msgid="5719752369250485007">"‏معرّف IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"‏معرّف IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"دقيقة"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"‏إصدار PRL"</string>
-    <string name="meid_multi_sim" msgid="5076814185188481456">"‏معرّف MEID (منفذ شريحة SIM <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="meid_multi_sim_primary" msgid="6269908735700854437">"‏معرّف MEID (منفذ شريحة SIM <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (الرئيسي)"</string>
+    <string name="meid_multi_sim" msgid="3124054561186721453">"‏رقم MEID: <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"الميزة مفعّلة"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"الميزة غير مفعّلة"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1684,7 +1678,8 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"الإعدادات المشتركة"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"الإعدادات المشتركة"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"وضع الإرساء"</string>
-    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"التطبيقات المصغّرة على شاشة القفل"</string>
+    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"وقت العرض التلقائي"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"أبدًا"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"أثناء الشحن"</string>
@@ -2499,12 +2494,9 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"انقر على أحد الأزرار للتكبير"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"يمكنك تكبير الشاشة بسرعة لتكبير المحتوى"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"‏&lt;b&gt;لتكبير الشاشة:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. استخدِم الاختصار المخصّص لبدء تكبير المحتوى&lt;br/&gt; {1,number,integer}. انقر على الشاشة&lt;br/&gt; {2,number,integer}. اسحب بإصبعين للتنقّل على الشاشة&lt;br/&gt; {3,number,integer}. باعِد أو قارِب بإصبعين لتعديل مستوى التكبير/التصغير&lt;br/&gt; {4,number,integer}. استخدِم الاختصار المخصّص لإيقاف تكبير المحتوى&lt;br/&gt;&lt;br/&gt;&lt;b&gt;لتكبير المحتوى مؤقتًا:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. تأكّد من ضبط نوع التكبير على وضع ملء الشاشة&lt;br/&gt; {1,number,integer}. استخدِم الاختصار المخصّص لبدء تكبير المحتوى&lt;br/&gt; {2,number,integer}. انقر مع الاستمرار على أي مكان على الشاشة&lt;br/&gt; {3,number,integer}. اسحب بإصبعك للتنقّل على الشاشة&lt;br/&gt; {4,number,integer}. ارفع إصبعك لإيقاف تكبير الشاشة"</string>
-    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
-    <skip />
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"‏&lt;b&gt;لتكبير الشاشة:&lt;/b&gt;&lt;br/&gt; ‫{0,number,integer}. يُرجى استخدام الاختصار أو الضغط على &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; و&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; وحرف M لبدء تكبير الشاشة، ثمّ&lt;br/&gt; ‫{1,number,integer}. الضغط على &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; و&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ومفاتيح الأسهم للتنقّل في الشاشة&lt;br/&gt; ‫{2,number,integer}. الضغط على &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; و&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ورمز \"+\" أو \"-\" لتعديل مستوى التكبير أو التصغير&lt;br/&gt; ‫{3,number,integer}. استخدام الاختصار أو &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; و&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; وحرف M لإيقاف تكبير الشاشة"</string>
+    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"‏&lt;b&gt;لتكبير الشاشة:&lt;/b&gt;&lt;br/&gt; ‫{0,number,integer}. يُرجى استخدام الاختصار المخصّص لبدء تكبير الشاشة، ثم&lt;br/&gt; ‫{1,number,integer}. الضغط على &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; و&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ومفاتيح الأسهم للتنقّل في الشاشة&lt;br/&gt; ‫{2,number,integer}. الضغط على &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; و&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ورمز \"+\" أو \"-\" لتعديل مستوى التكبير أو التصغير&lt;br/&gt; ‫{3,number,integer}. استخدام الاختصار لإيقاف تكبير الشاشة"</string>
+    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"‏&lt;b&gt;لوحة المفاتيح:&lt;/b&gt;&lt;br/&gt; ‫{0,number,integer} يُرجى استخدام الاختصار أو الضغط على &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; و&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; وحرف M لبدء تكبير الشاشة، ثمّ&lt;br/&gt; ‫{1,number,integer}. الضغط على &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; و&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ومفاتيح الأسهم للتنقّل في الشاشة&lt;br/&gt; ‫{2,number,integer}. الضغط على &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; و&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ورمز \"+\" أو \"-\" لتعديل مستوى التكبير أو التصغير&lt;br/&gt; ‫{3,number,integer}. استخدام الاختصار أو &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; و&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; وحرف M لإيقاف تكبير الشاشة&lt;br/&gt;&lt;br/&gt; &lt;b&gt;شاشة تعمل باللمس&lt;/b&gt;&lt;br/&gt; لتكبير الشاشة:&lt;br/&gt; ‫{0,number,integer}. يُرجى استخدام الاختصار المخصّص لبدء تكبير الشاشة، ثم&lt;br/&gt; ‫{1,number,integer}. النقر على الشاشة&lt;br/&gt; ‫{2,number,integer}. سحب إصبعين للتنقّل على الشاشة&lt;br/&gt; ‫{3,number,integer}. التصغير أو التكبير بإصبعين لتعديل مستوى التكبير أو التصغير&lt;br/&gt; ‫{4,number,integer}. استخدام الاختصار المخصّص لإيقاف تكبير الشاشة&lt;br/&gt;&lt;br/&gt; لتكبير الشاشة مؤقتًا:&lt;br/&gt; ‫{0,number,integer}. يُرجى التأكّد من ضبط نوع التكبير على وضع ملء الشاشة، ثمّ&lt;br/&gt; ‫{1,number,integer}. استخدام الاختصار المخصّص لبدء تكبير الشاشة&lt;br/&gt; ‫{2,number,integer}. النقر مع الاستمرار على أي مكان على الشاشة&lt;br/&gt; ‫{3,number,integer}. سحب الإصبع للتنقّل على الشاشة&lt;br/&gt; ‫{4,number,integer}. رفع الإصبع لإيقاف تكبير الشاشة"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"‏&lt;b&gt;لتكبير الشاشة:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. استخدِم الاختصار المخصّص لبدء التكبير&lt;br/&gt; {1,number,integer}. انقر على الشاشة&lt;br/&gt; {2,number,integer}. اسحب بإصبعين للتنقّل على الشاشة&lt;br/&gt; {3,number,integer}. باعِد أو قارِب بإصبعين لتعديل مستوى التكبير أو التصغير&lt;br/&gt; {4,number,integer}. استخدِم الاختصار المخصَّص لإيقاف التكبير&lt;br/&gt;&lt;br/&gt; يمكنك أيضًا التكبير بشكل مؤقت وغير ذلك."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"‏&lt;b&gt;لتكبير الشاشة:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. استخدِم الاختصار المخصّص لبدء التكبير&lt;br/&gt; {1,number,integer}. انقر على الشاشة&lt;br/&gt; {2,number,integer}. اسحب بإصبع واحد أو إصبعين للتنقّل على الشاشة&lt;br/&gt; {3,number,integer}. باعِد أو قارِب بإصبعين لتعديل مستوى التكبير أو التصغير&lt;br/&gt; {4,number,integer}. استخدِم الاختصار المخصَّص لإيقاف التكبير&lt;br/&gt;&lt;br/&gt; يمكنك أيضًا التكبير بشكل مؤقت وغير ذلك."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"عند تفعيل ميزة \"التكبير\"، يمكنك تكبير حجم المحتوى على الشاشة.\n\n"<b>"للتكبير"</b>"، يمكنك تفعيل ميزة \"التكبير\" والنقر بعد ذلك على أي مكان في الشاشة.\n"<ul><li>"يمكنك سحب إصبعين أو أكثر للتمرير."</li>\n<li>"يمكنك ضمّ إصبعين أو أكثر لتعديل حجم المحتوى."</li></ul>\n\n<b>"للتكبير مؤقتًا"</b>"، يمكنك تفعيل ميزة التكبير والنقر مع الاستمرار على أي مكان في الشاشة.\n"<ul><li>"يمكنك السحب للتنقّل داخل الشاشة."</li>\n<li>"يمكنك رفع إصبعك للتصغير."</li></ul>\n\n"لن يكون بإمكانك التكبير على لوحة المفاتيح أو شريط التنقل."</string>
@@ -2595,8 +2587,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"الموسَّع"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"المظهر الداكن الموسَّع"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"يتم تطبيق \"المظهر الداكن\" تلقائيًا على مزيد من التطبيقات لتسهيل استخدامها"</string>
-    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
-    <skip />
+    <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"فرض قلب الألوان، قلب الألوان، التباين"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"إزالة الصور المتحركة"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"تقليل الحركة على الشاشة"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"وميض مؤشر النص"</string>
@@ -3681,8 +3672,7 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"معلومات البطارية، تاريخ التصنيع، عدد مرات تفريغ البطارية وشحنها، أول استخدام"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"‏مستوى رمز تصحيح أمان android، إصدار النطاق الأساسي، إصدار النواة"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"المظهر، الإضاءة، الوضع المُعتِم، حساسية الضوء، رهاب الضوء، تعتيم، جعله داكنًا، الوضع المُعتِم، الصداع الشقِّي"</string>
-    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
-    <skip />
+    <string name="keywords_blur_switch" msgid="3482676740440346012">"تأثيرات التمويه"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"المظهر الداكن"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"خطأ"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"العرض على الشاشة، عرض شاشة القفل"</string>
@@ -3975,6 +3965,8 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"عرض محتوى إشعارات العمل كاملاً"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"إخفاء محتوى العمل الحساس"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"كيف تريد أن يتم عرض إشعارات الملف الشخصي عندما يكون الجهاز مقفلاً؟"</string>
+    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
+    <skip />
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"الإشعارات التي ستظهر على شاشة القفل"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"إظهار الإشعارات التي تم الاطّلاع عليها"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"إظهار رموز الإشعارات التي تم الاطّلاع عليها"</string>
@@ -4080,6 +4072,8 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"منظّم الإشعارات"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"تجميع الإشعارات غير المهمة وكتم صوتها"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"إدارة ميزة \"منظّم الإشعارات\" للتطبيقات"</string>
+    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"يسري على تطبيقات ملف العمل"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"خدمات تحسّن تجربة الواقع الافتراضي"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"لم تطلب أي تطبيقات مثبَّتة أن يتم تشغيلها كخدمات تحسّن تجربة الواقع الافتراضي."</string>
@@ -4847,14 +4841,10 @@
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"التنقُّل بالإيماءات"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"مشاهدة عرض توضيحي"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"التنقل باستخدام الأزرار"</string>
-    <!-- no translation found for button_navigation_settings_order_title (4256756895101424865) -->
-    <skip />
-    <!-- no translation found for navbar_back_button (6386920156044420082) -->
-    <skip />
-    <!-- no translation found for navbar_home_button (951459586446869883) -->
-    <skip />
-    <!-- no translation found for navbar_recent_button (6005580570601162420) -->
-    <skip />
+    <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"ترتيب الأزرار"</string>
+    <string name="navbar_back_button" msgid="6386920156044420082">"رجوع"</string>
+    <string name="navbar_home_button" msgid="951459586446869883">"الشاشة الرئيسية"</string>
+    <string name="navbar_recent_button" msgid="6005580570601162420">"الأحدث"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"التنقُّل بالإيماءات، حساسية الرجوع، إيماءة الرجوع"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"التنقل، زر الشاشة الرئيسية"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"وضع \"التصفح بيد واحدة\""</string>
@@ -5325,8 +5315,6 @@
     <string name="sim_onboarding_next" msgid="6415025179929475355">"التالي"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"جارٍ تفعيل <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"شبكة الجوّال"</string>
-    <string name="imei_primary" msgid="5312232202518974440">"‏رقم IMEI (الرئيسي)"</string>
-    <string name="meid_primary" msgid="3256732684155678106">"‏رقم MEID (الرئيسي)"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"رقم الهاتف"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"‏تصنيف شريحة SIM ولونها"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"تفعيل الشبكة"</string>
@@ -5977,22 +5965,13 @@
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"يمكنك حماية هويتك في جميع التطبيقات التي تتوافق مع ميزتَي \"فتح الجهاز ببصمة الوجه\" و\"فتح الجهاز ببصمة الإصبع\" في الأماكن الموثوق بها مثل منزلك أو مكتبك. وبإمكانك استخدام ميزة \"التحقّق من الهوية\" في ساعتك لتوسيع نطاق الحماية حتى خارج تلك الأماكن."</string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"إعدادات أخرى"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"الملء التلقائي والإشعارات والمزيد"</string>
-    <!-- no translation found for privacy_sources_title (7648842637181479352) -->
-    <skip />
-    <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
-    <skip />
-    <!-- no translation found for device_unlock_subpage_title (8619367783572270468) -->
-    <skip />
-    <!-- no translation found for lock_screen_title (4701994278040604018) -->
-    <skip />
-    <!-- no translation found for location_settings (6833222354060094170) -->
-    <skip />
-    <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
-    <skip />
-    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
-    <skip />
-    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
-    <skip />
-    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
-    <skip />
+    <string name="privacy_sources_title" msgid="7648842637181479352">"عناصر التحكّم في الخصوصية"</string>
+    <string name="privacy_sources_summary" msgid="8795612902105833258">"الأذونات وعناصر التحكّم"</string>
+    <string name="device_unlock_subpage_title" msgid="8619367783572270468">"فتح قفل الجهاز"</string>
+    <string name="lock_screen_title" msgid="4701994278040604018">"قفل الشاشة"</string>
+    <string name="location_settings" msgid="6833222354060094170">"الوصول إلى الموقع الجغرافي"</string>
+    <string name="location_settings_subtitle" msgid="8471780117911010030">"عرض التطبيقات والخدمات التي يمكنها الوصول إلى الموقع الجغرافي"</string>
+    <string name="identity_check_notification_title" msgid="8004343932775654492">"ميزة \"التحقّق من الهوية\" متوفرة الآن في المزيد من التطبيقات"</string>
+    <string name="identity_check_notification_summary" msgid="3762060079941053730">"تمنع ميزة \"التحقّق من الهوية\" الوصول غير المرغوب فيه إلى تطبيقاتك. وتتوفّر هذه الميزة الآن في أي تطبيق يستخدم ميزتَي \"فتح الجهاز ببصمة الوجه\" أو \"فتح الجهاز ببصمة الإصبع\"."</string>
+    <string name="identity_check_view_details" msgid="8752343542345818128">"عرض التفاصيل"</string>
 </resources>

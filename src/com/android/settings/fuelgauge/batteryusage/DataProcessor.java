@@ -77,6 +77,9 @@ import java.util.stream.Stream;
  */
 public final class DataProcessor {
     private static final String TAG = "DataProcessor";
+
+    public static final long BATTERY_STATS_MAX_AGE_UNSET = -1L;
+
     private static final int POWER_COMPONENT_SYSTEM_SERVICES = 7;
     private static final int POWER_COMPONENT_WAKELOCK = 12;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
@@ -173,22 +176,7 @@ public final class DataProcessor {
     /** Gets the {@link BatteryUsageStats} from system service. */
     @NonNull
     public static BatteryUsageStats getBatteryUsageStats(final Context context) {
-        final long startTime = System.currentTimeMillis();
-        final BatteryUsageStatsQuery batteryUsageStatsQuery =
-                new BatteryUsageStatsQuery.Builder()
-                        .includeBatteryHistory()
-                        .includeProcessStateData()
-                        .accumulated()
-                        .build();
-        final BatteryUsageStats batteryUsageStats =
-                context.getSystemService(BatteryStatsManager.class)
-                        .getBatteryUsageStats(batteryUsageStatsQuery);
-        Log.d(
-                TAG,
-                String.format(
-                        "getBatteryUsageStats() from BatteryStatsManager in %d/ms",
-                        System.currentTimeMillis() - startTime));
-        return batteryUsageStats;
+        return getBatteryUsageStats(context, BATTERY_STATS_MAX_AGE_UNSET);
     }
 
     /** Gets the {@link UsageEvents} from system service for all unlocked users. */
@@ -950,6 +938,30 @@ public final class DataProcessor {
         return result;
     }
 
+    /** Gets the {@link BatteryUsageStats} from system service. */
+    @NonNull
+    private static BatteryUsageStats getBatteryUsageStats(final Context context,
+            final long maxStatsAgeMs) {
+        final long startTime = System.currentTimeMillis();
+        final BatteryUsageStatsQuery.Builder builder = new BatteryUsageStatsQuery.Builder();
+        if (maxStatsAgeMs != BATTERY_STATS_MAX_AGE_UNSET) {
+            builder.setMaxStatsAgeMs(maxStatsAgeMs);
+        }
+        builder
+                .includeBatteryHistory()
+                .includeProcessStateData()
+                .accumulated();
+        final BatteryUsageStats batteryUsageStats =
+                context.getSystemService(BatteryStatsManager.class)
+                        .getBatteryUsageStats(builder.build());
+        Log.d(TAG,
+                String.format(
+                        "getBatteryUsageStats() from BatteryStatsManager in %d/ms, "
+                                + "maxStatsAgeMs=%d",
+                        System.currentTimeMillis() - startTime, maxStatsAgeMs));
+        return batteryUsageStats;
+    }
+
     /**
      * Generates the list of {@link AppUsageEvent} within the specific time range. The buffer is
      * added to make sure the app usage calculation near the boundaries is correct.
@@ -1081,7 +1093,10 @@ public final class DataProcessor {
 
     @Nullable
     private static List<BatteryHistEntry> getBatteryHistListFromFromStatsService(Context context) {
-        try (BatteryUsageStats batteryUsageStats = getBatteryUsageStats(context)) {
+        try (BatteryUsageStats batteryUsageStats = getBatteryUsageStats(context,
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
+                        .getBatteryUsageStatsMaxAgeMs())) {
             final List<BatteryEntry> batteryEntryList =
                     generateBatteryEntryListFromBatteryUsageStats(context, batteryUsageStats);
             return convertToBatteryHistEntry(batteryEntryList, batteryUsageStats);

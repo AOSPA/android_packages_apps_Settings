@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.display
 
 import android.graphics.Outline
 import android.graphics.PointF
+import android.os.Bundle
 import android.os.Trace
 import android.util.Log
 import android.util.Size
@@ -26,6 +27,8 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
 import android.view.ViewOutlineProvider
+import android.view.accessibility.AccessibilityNodeInfo
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
 import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
@@ -86,6 +89,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         View(context).apply {
             background = context.getDrawable(R.drawable.display_block_background)
         }
+
     @VisibleForTesting
     val selectionMarkerView =
         View(context).apply {
@@ -103,10 +107,15 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             y = value.y - highlightPx
         }
 
+    var onA11yMoveListener: ((direction: Direction) -> Unit)? = null
+
     init {
         isScrollContainer = false
         isVerticalScrollBarEnabled = false
         isHorizontalScrollBarEnabled = false
+
+        isFocusable = true
+        isScreenReaderFocusable = true
 
         // Prevents shadow from appearing around edge of button.
         stateListAnimator = null
@@ -220,6 +229,13 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         this.surfaceScale = surfaceScale
         this.surfaceSize = surfaceSize
 
+        val displayDevice = injector.getDisplay(logicalDisplayId)
+        contentDescription =
+            context.getString(
+                R.string.external_display_topology_display_block_content_description,
+                displayDevice?.name ?: "Display $logicalDisplayId",
+            )
+
         val newWidth = (bottomRight.x - topLeft.x).toInt()
         val newHeight = (bottomRight.y - topLeft.y).toInt()
 
@@ -263,6 +279,65 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
 
         // The other two child views are MATCH_PARENT by default so will resize to fill up the
         // FrameLayout.
+    }
+
+    override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
+        super.onInitializeAccessibilityNodeInfo(info)
+        // Add custom actions for moving the display block
+        info.addAction(
+            AccessibilityAction(
+                R.id.action_move_display_block_up,
+                context.getString(R.string.external_display_topology_a11y_action_move_up),
+            )
+        )
+        info.addAction(
+            AccessibilityAction(
+                R.id.action_move_display_block_down,
+                context.getString(R.string.external_display_topology_a11y_action_move_down),
+            )
+        )
+        info.addAction(
+            AccessibilityAction(
+                R.id.action_move_display_block_left,
+                context.getString(R.string.external_display_topology_a11y_action_move_left),
+            )
+        )
+        info.addAction(
+            AccessibilityAction(
+                R.id.action_move_display_block_right,
+                context.getString(R.string.external_display_topology_a11y_action_move_right),
+            )
+        )
+    }
+
+    override fun performAccessibilityAction(action: Int, arguments: Bundle?): Boolean {
+        if (onA11yMoveListener == null) {
+            return super.performAccessibilityAction(action, arguments)
+        }
+
+        when (action) {
+            R.id.action_move_display_block_up -> {
+                onA11yMoveListener?.invoke(Direction.UP)
+                return true
+            }
+
+            R.id.action_move_display_block_down -> {
+                onA11yMoveListener?.invoke(Direction.DOWN)
+                return true
+            }
+
+            R.id.action_move_display_block_left -> {
+                onA11yMoveListener?.invoke(Direction.LEFT)
+                return true
+            }
+
+            R.id.action_move_display_block_right -> {
+                onA11yMoveListener?.invoke(Direction.RIGHT)
+                return true
+            }
+
+            else -> return super.performAccessibilityAction(action, arguments)
+        }
     }
 
     private companion object {

@@ -22,6 +22,7 @@ import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayTopology
 import android.hardware.display.DisplayTopology.POSITION_BOTTOM
 import android.hardware.display.DisplayTopology.POSITION_LEFT
+import android.hardware.display.DisplayTopology.POSITION_RIGHT
 import android.hardware.display.DisplayTopology.POSITION_TOP
 import android.provider.Settings
 import android.util.DisplayMetrics
@@ -891,6 +892,91 @@ class DisplayTopologyPreferenceTest {
         injector.displayListener!!.onDisplayAdded(DISPLAY_ID_3)
         // Pane updated
         assertThat(getPaneChildren()).hasSize(3)
+    }
+
+    @Test
+    fun a11yActionMoveUp_movesBlock() {
+        val (leftBlock, rightBlock) = setupPaneWithTwoDisplays()
+        val originalY = leftBlock.y
+
+        // Trigger the "move up" accessibility action
+        leftBlock.performAccessibilityAction(R.id.action_move_display_block_up, null)
+
+        // Verify the block has moved up from its original position
+        assertThat(leftBlock.y).isLessThan(originalY)
+
+        // Verify the topology was updated correctly
+        val rootChildren = injector.topology!!.root!!.children
+        assertThat(rootChildren).hasSize(1)
+        val child = rootChildren[0]
+        assertThat(child.position).isEqualTo(POSITION_LEFT)
+        // The offset should now be smaller (moved up)
+        assertThat(child.offset).isLessThan(42f)
+    }
+
+    @Test
+    fun a11yActionMoveDown_movesBlock() {
+        val (leftBlock, rightBlock) = setupPaneWithTwoDisplays()
+        val originalY = leftBlock.y
+
+        // Trigger the "move down" accessibility action
+        leftBlock.performAccessibilityAction(R.id.action_move_display_block_down, null)
+
+        // Verify the block has moved down from its original position
+        assertThat(leftBlock.y).isGreaterThan(originalY)
+
+        // Verify the topology was updated correctly
+        val rootChildren = injector.topology!!.root!!.children
+        assertThat(rootChildren).hasSize(1)
+        val child = rootChildren[0]
+        assertThat(child.position).isEqualTo(POSITION_LEFT)
+        // The offset should now be larger (moved down)
+        assertThat(child.offset).isGreaterThan(42f)
+    }
+
+    @Test
+    fun a11yAction_movesBlockToAdjacentSnapPoint() {
+        // Arrange the displays so the child is on the right, but vertically offset,
+        // creating an unambiguous 'up' move to align the centers.
+        // The main display is 160dp tall, the child is 80dp. An offset of 40 puts the
+        // child's top edge aligned with the parent's center.
+        val (leftBlock, rightBlock) =
+            setupPaneWithTwoDisplays(childPosition = POSITION_RIGHT, childOffset = 40f)
+
+        // Get the initial Y position of the block to be moved.
+        val originalY = rightBlock.y
+
+        // Perform a single "move up" action. This should be enough to trigger
+        // the clamping logic to snap the block into vertical alignment.
+        rightBlock.performAccessibilityAction(R.id.action_move_display_block_up, null)
+
+        // The block should have moved up to a new, stable position.
+        assertThat(rightBlock.y).isLessThan(originalY)
+
+        // Verify the underlying topology reflects the change. A perfectly centered
+        // alignment would result in an offset of (parentHeight - childHeight) / 2
+        // which is (160 - 80) / 2 = 40. Since we started at 40, a slight move up
+        // should get clamped to a smaller offset. We just check it changed.
+        val child = injector.topology!!.root!!.children[0]
+        assertThat(child.position).isEqualTo(POSITION_RIGHT)
+        assertThat(child.offset).isLessThan(40f)
+    }
+
+    @Test
+    fun a11yAction_cannotMoveSingleDisplay() {
+        setupSingleDisplay()
+        preparePane()
+
+        val block = getPaneChildren().first()
+        val originalX = block.x
+        val originalY = block.y
+
+        // Attempt to move the single block
+        block.performAccessibilityAction(R.id.action_move_display_block_down, null)
+
+        // Verify the block has not moved, as there's nothing to rearrange
+        assertThat(block.x).isWithin(0.01f).of(originalX)
+        assertThat(block.y).isWithin(0.01f).of(originalY)
     }
 
     private companion object {

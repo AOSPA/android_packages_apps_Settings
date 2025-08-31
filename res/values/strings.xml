@@ -2282,6 +2282,16 @@
     <string name="external_display_resolution_change_dialog_description">If your display isn\u2019t working as you\u2019d like, you can revert to your previous settings</string>
     <!-- External Display settings. Dialog description to confirm to apply resolution change (change was first temporarily applied while showing dialog). -->
     <string name="external_display_resolution_change_dialog_confirm">Use settings</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_display_block_content_description">Display: %1$s. Double-tap and hold to drag or view actions to move.</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_action_move_up">Move up</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_action_move_down">Move down</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_action_move_left">Move left</string>
+    <!-- External Display settings. Display topology a11y -->
+    <string name="external_display_topology_a11y_action_move_right">Move right</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Google Cast</string>
@@ -15016,6 +15026,12 @@
     <string name="supervision_multi_profile_error_title">Can\u2019t turn on controls</string>
     <!-- Learn more link for when device supervision is unavailable. [CHAR LIMIT=NONE]-->
     <string name="supervision_unavailable_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_unavailable</string>
+    <!-- Title on generic error screen that informs the user that controls cannot be enabled. [CHAR LIMIT=NONE] -->
+    <string name="supervision_generic_error_page_title">Something went wrong</string>
+    <!-- Message on generic error screen that informs the user that controls cannot be enabled. [CHAR LIMIT=NONE] -->
+    <string name="supervision_generic_error_page_message">Try again later</string>
+    <!-- Button label on generic error screen bottom that the user can click to retry to enable controls. [CHAR LIMIT=NONE] -->
+    <string name="supervision_generic_error_page_button_label">Go back</string>
 
     <!-- Light theme customization for Face Education lottie illustration. Not translatable. -->
     <string-array name="face_education_illustration" translatable="false">

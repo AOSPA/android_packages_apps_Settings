@@ -18,6 +18,7 @@ package com.android.settings.network
 
 import android.content.Context
 import android.content.res.Resources
+import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.provider.Settings
 import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED
@@ -62,6 +63,7 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     @Test override fun migration() {}
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLES)
     fun getPreferenceHierarchy_returnsHierarchy() {
         val hierarchy: PreferenceHierarchy =
             preferenceScreenCreator.getPreferenceHierarchy(mContext, testScope)
@@ -81,6 +83,7 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLES)
     fun flagDefaultDisabled_noSwitchPreferenceCompatExists() {
         val scenario = launchFragmentInContainer<AdaptiveConnectivitySettings>()
         scenario.onFragment { fragment ->

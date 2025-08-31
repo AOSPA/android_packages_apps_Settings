@@ -21,10 +21,12 @@ import android.content.Context
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import androidx.test.core.app.ApplicationProvider
+import com.android.server.accessibility.Flags as serverFlags
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.accessibility.Flags
+import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -40,7 +42,12 @@ class MagnificationScreenTest : SettingsCatalystTestCase() {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
-    override fun migration() {}
+    override fun migration() {
+        // For update the availability of the one-finger panning switch preference.
+        AccessibilityTestUtils.setWindowMagnificationSupported(context, true)
+        setFlagsRule.enableFlags(serverFlags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+        super.migration()
+    }
 
     @Test
     fun key() {

@@ -50,6 +50,6 @@ class ExtraDimMainSwitchPreference(
     ): @ReadWritePermit Int = ReadWritePermit.ALLOW
 
     companion object {
-        const val KEY = "rbc_switch"
+        const val KEY = "reduce_bright_colors_switch"
     }
 }

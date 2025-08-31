@@ -999,8 +999,7 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Flyt din mus mellem skærme"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Brug ekstern skærm"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Skærmopløsning"</string>
-    <!-- no translation found for external_display_connection_preference (3337612335495542718) -->
-    <skip />
+    <string name="external_display_connection_preference" msgid="3337612335495542718">"Standardadfærd for forbindelse"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Brug som separat skærm"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Spejl indbygget skærm"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Vis dialogboks for forbindelse"</string>
@@ -1581,16 +1580,16 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Indstillinger for lagerplads"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (SIM-kortrille <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim" msgid="27798473711249145">"IMEI (SIM-kortrille <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="4320457587114117400">"IMEI (SIM-kortrille <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primær)"</string>
+    <!-- no translation found for imei_multi_sim (6990044568468728075) -->
+    <skip />
     <string name="view_saved_network" msgid="1232387673095080910">"Vælg et gemt netværk for at se"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI-nummer"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL-version"</string>
-    <string name="meid_multi_sim" msgid="5076814185188481456">"MEID (SIM-kortrille <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="meid_multi_sim_primary" msgid="6269908735700854437">"MEID (SIM-kortrille <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (primær)"</string>
+    <!-- no translation found for meid_multi_sim (3124054561186721453) -->
+    <skip />
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Til"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Fra"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1684,7 +1683,8 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Fælles"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Fælles indstillinger"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub-tilstand"</string>
-    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets på låseskærmen"</string>
+    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Hvornår skal de vises automatisk?"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Aldrig"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Når enheden oplades"</string>
@@ -1744,7 +1744,7 @@
     <string name="reset_bluetooth_wifi_desc" msgid="4030295669083059711">"Denne handling nulstiller alle indstillinger for Wi‑Fi og Bluetooth. Denne handling kan ikke fortrydes."</string>
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Nulstil"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Bluetooth og Wi‑Fi er blevet nulstillet"</string>
-    <string name="reset_esim_title" msgid="4194570573425902754">"Ryd eSIM"</string>
+    <string name="reset_esim_title" msgid="4194570573425902754">"Slet eSIM"</string>
     <string name="reset_esim_desc" msgid="6125192435907740751">"Dette opsiger ikke dit mobilabonnement. Kontakt dit mobilselskab for at få et nyt SIM-kort."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Nulstil indstillinger"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Vil du nulstille alle netværksindstillinger? Denne handling kan ikke fortrydes."</string>
@@ -2499,12 +2499,9 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tryk på en knap for at zoome"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zoom hurtigt ind på skærmen for at forstørre indhold"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Sådan zoomer du ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {1,number,integer}. Tryk på skærmen&lt;br/&gt; {2,number,integer}. Træk med to fingre for at navigere rundt på skærmen&lt;br/&gt; {3,number,integer}. Knib med to fingre for at zoome ind eller ud&lt;br/&gt; {4,number,integer}. Brug genvejen til at stoppe forstørrelse&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Sådan zoomer du midlertidigt ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Sørg for, at forstørrelsestypen er indstillet til fuld skærm&lt;br/&gt; {1,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {2,number,integer}. Hold fingeren nede et vilkårligt sted på skærmen&lt;br/&gt; {3,number,integer}. Træk fingeren for at navigere rundt på skærmen&lt;br/&gt; {4,number,integer}. Løft fingeren for at stoppe forstørrelse"</string>
-    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
-    <skip />
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;Sådan zoomer du ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Brug genvejen, eller tryk på &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M for at starte forstørrelse&lt;br/&gt; {1,number,integer}. Tryk på &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + piletasterne for at navigere rundt på skærmen&lt;br/&gt; {2,number,integer}. Tryk på &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; og \"+\" eller \"-\" for at justere zoom&lt;br/&gt; {3,number,integer}. Brug genvejen eller &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M til at stoppe forstørrelse"</string>
+    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;Sådan zoomer du ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {1,number,integer}. Tryk på &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + piletasterne for at navigere rundt på skærmen&lt;br/&gt; {2,number,integer}. Tryk på &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; og \"+\" eller \"-\" for at justere zoom&lt;br/&gt; {3,number,integer}. Brug genvejen til at stoppe forstørrelse"</string>
+    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;Tastatur&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Brug genvejen, eller tryk på &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M for at starte forstørrelse&lt;br/&gt; {1,number,integer}. Tryk på &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + piletasterne for at navigere rundt på skærmen&lt;br/&gt; {2,number,integer}. Tryk på &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; og \"+\" eller \"-\" for at justere zoom&lt;br/&gt; {3,number,integer}. Brug genvejen eller &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M til at stoppe forstørrelse&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Touchskærm&lt;/b&gt;&lt;br/&gt; Sådan zoomer du ind:&lt;br/&gt; {0,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {1,number,integer}. Tryk på skærmen&lt;br/&gt; {2,number,integer}. Træk med to fingre for at navigere rundt på skærmen&lt;br/&gt; {3,number,integer}. Knib med 2 fingre for at justere zoom&lt;br/&gt; {4,number,integer}. Brug genvejen til at stoppe forstørrelse&lt;br/&gt;&lt;br/&gt; Sådan zoomer du midlertidigt ind:&lt;br/&gt; {0,number,integer}. Sørg for, at forstørrelsestypen er indstillet til fuld skærm&lt;br/&gt; {1,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {2,number,integer}. Hold fingeren på et vilkårligt sted på skærmen&lt;br/&gt; {3,number,integer}. Træk fingeren for at navigere rundt på skærmen&lt;br/&gt; {4,number,integer}. Løft fingeren for at stoppe forstørrelse"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Sådan zoomer du ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {1,number,integer}. Tryk på skærmen&lt;br/&gt; {2,number,integer}. Naviger rundt på skærmen ved at trække med 2 fingre&lt;br/&gt; {3,number,integer}. Knib med 2 fingre for at justere zoom&lt;br/&gt; {4,number,integer}. Brug genvejen til at stoppe forstørrelse&lt;br/&gt;&lt;br/&gt; Du kan også midlertidigt zoome ind m.m."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Sådan zoomer du ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {1,number,integer}. Tryk på skærmen&lt;br/&gt; {2,number,integer}. Naviger rundt på skærmen ved at trække med 1 finger eller 2 fingre&lt;br/&gt; {3,number,integer}. Knib med 2 fingre for at justere zoom&lt;br/&gt; {4,number,integer}. Brug genvejen til at stoppe forstørrelse&lt;br/&gt;&lt;br/&gt; Du kan også midlertidigt zoome ind m.m."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Når forstørrelse er aktiveret, kan du zoome ind på skærmen.\n\n"<b>"Hvis du vil zoome"</b>", skal du åbne forstørrelse og derefter trykke et vilkårligt sted på skærmen.\n"<ul><li>"Træk med to eller flere fingre for at rulle"</li>\n<li>"Knib sammen med to eller flere fingre for at justere zoomniveauet"</li></ul>\n\n<b>"Hvis du vil zoome midlertidigt"</b>", skal du åbne forstørrelse og holde fingeren nede et vilkårligt sted på skærmen.\n"<ul><li>"Træk for at udforske forskellige dele af skærmen"</li>\n<li>"Løft fingeren for at zoome ud"</li></ul>\n\n"Du kan ikke zoome ind på tastaturet eller navigationslinjen."</string>
@@ -3975,6 +3972,8 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Vis alt indhold i arbejdsnotifikationer"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Skjul følsomt arbejdsindhold"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Hvordan skal profilunderretninger vises, når din enhed er låst?"</string>
+    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
+    <skip />
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Hvad skal der vises på låseskærmen?"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Vis notifikationer, der er blevet set"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Vis ikoner for notifikationer, der er blevet set"</string>
@@ -4080,6 +4079,8 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Notifikations­organisering"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Gruppér og ignorer notifikationer med lavere prioritet"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Administrer apps til notifikationsorganisering"</string>
+    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Anvend på apps på arbejdsprofilen"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-hjælpetjenester"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ingen installerede apps har anmodet om at blive kørt som VR-hjælpetjenester."</string>
@@ -4847,14 +4848,10 @@
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigation med bevægelser"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Prøv en demo"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigation med knapper"</string>
-    <!-- no translation found for button_navigation_settings_order_title (4256756895101424865) -->
-    <skip />
-    <!-- no translation found for navbar_back_button (6386920156044420082) -->
-    <skip />
-    <!-- no translation found for navbar_home_button (951459586446869883) -->
-    <skip />
-    <!-- no translation found for navbar_recent_button (6005580570601162420) -->
-    <skip />
+    <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Rækkefølge af knapper"</string>
+    <string name="navbar_back_button" msgid="6386920156044420082">"Tilbage"</string>
+    <string name="navbar_home_button" msgid="951459586446869883">"Hjem"</string>
+    <string name="navbar_recent_button" msgid="6005580570601162420">"Seneste"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigation med bevægelser, følsomhed for bevægelse fra kant, bevægelse til at gå tilbage"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigation, knappen Hjem"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Enhåndstilstand"</string>
@@ -5204,7 +5201,7 @@
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Fra"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="7182341033728911879">"Fjern SIM-kortet for at deaktivere det"</string>
     <string name="mobile_network_tap_to_activate" msgid="5280456487243915465">"Tryk for at aktivere dit SIM-kort fra <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="mobile_network_erase_sim" msgid="5387971155494245850">"Ryd eSIM"</string>
+    <string name="mobile_network_erase_sim" msgid="5387971155494245850">"Slet eSIM"</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Foretrukken netværkstype"</string>
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"Skift driftstilstand for netværket"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Foretrukken netværkstype"</string>
@@ -5325,8 +5322,6 @@
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Næste"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Aktiverer <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobilnetværk"</string>
-    <string name="imei_primary" msgid="5312232202518974440">"IMEI (primært)"</string>
-    <string name="meid_primary" msgid="3256732684155678106">"MEID (primært)"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Telefonnummer"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIM-etiket og -farve"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Netværksaktivering"</string>
@@ -5973,18 +5968,12 @@
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Sørg for, at din identitet er beskyttet i alle apps, der understøtter finger- og ansigtsoplåsning på sikre steder som f.eks. dit hjem eller kontor. Brug identitetstjek med dit ur for at øge din beskyttelse – også uden for dine sikre steder."</string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Andre indstillinger"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Autofyld, notifikationer m.m."</string>
-    <!-- no translation found for privacy_sources_title (7648842637181479352) -->
-    <skip />
-    <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
-    <skip />
-    <!-- no translation found for device_unlock_subpage_title (8619367783572270468) -->
-    <skip />
-    <!-- no translation found for lock_screen_title (4701994278040604018) -->
-    <skip />
-    <!-- no translation found for location_settings (6833222354060094170) -->
-    <skip />
-    <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
-    <skip />
+    <string name="privacy_sources_title" msgid="7648842637181479352">"Privatlivsindstillinger"</string>
+    <string name="privacy_sources_summary" msgid="8795612902105833258">"Tilladelser, indstillinger"</string>
+    <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Enhedsoplåsning"</string>
+    <string name="lock_screen_title" msgid="4701994278040604018">"Skærmlås"</string>
+    <string name="location_settings" msgid="6833222354060094170">"Lokationsadgang"</string>
+    <string name="location_settings_subtitle" msgid="8471780117911010030">"Se de apps og tjenester, der har adgang til lokation"</string>
     <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
     <skip />
     <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->

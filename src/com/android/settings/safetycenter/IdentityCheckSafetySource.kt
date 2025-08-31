@@ -15,12 +15,13 @@
  */
 package com.android.settings.safetycenter
 
-import android.app.Notification
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.database.ContentObserver
+import android.hardware.biometrics.BiometricManager
+import android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import android.hardware.biometrics.Flags
 import android.net.Uri
 import android.os.Handler
@@ -34,6 +35,7 @@ import android.safetycenter.SafetySourceData
 import android.safetycenter.SafetySourceIssue
 import android.security.authenticationpolicy.AuthenticationPolicyManager
 import android.util.Log
+import com.android.internal.annotations.VisibleForTesting
 import com.android.settings.R
 import com.android.settings.biometrics.IdentityCheckNotificationPromoCardActivity
 import com.android.settings.biometrics.IdentityCheckPromoCardActivity
@@ -48,7 +50,6 @@ import java.util.concurrent.Executors
  */
 class IdentityCheckSafetySource : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        context.updateIfIdentityCheckWasEnabledInV1()
         WatchContentObserver(context).registerContentObserver()
 
         if (intent.action?.equals(Intent.ACTION_BOOT_COMPLETED) == true) {
@@ -88,7 +89,28 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
 
         /** Sets the safety source data with the Identity Check issue info. */
         fun setSafetySourceData(context: Context, safetyEvent: SafetyEvent) {
+            setSafetySourceData(
+                context,
+                safetyEvent,
+                context.getSystemService(BiometricManager::class.java),
+            )
+        }
+
+        @VisibleForTesting
+        fun setSafetySourceData(
+            context: Context,
+            safetyEvent: SafetyEvent,
+            biometricManager: BiometricManager?,
+        ) {
             if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
+                return
+            }
+            if (biometricManager == null) {
+                Log.e(TAG, "Biometric manager is null")
+                return
+            }
+            if (!isIdentityCheckSupportedOnDevice(biometricManager)) {
+                sendNullData(context, safetyEvent)
                 return
             }
             if (!Flags.identityCheckAllSurfaces()) {
@@ -101,7 +123,7 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                     return
                 }
             }
-            if (!hasPromoCardBeenShown(context) && isIdentityCheckEnabled(context)) {
+            if (!hasPromoCardBeenShown(context)) {
                 val safetySourceData =
                     SafetySourceData.Builder().addIssue(getIssue(context)).build()
                 SafetyCenterManagerWrapper.get()
@@ -110,18 +132,6 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                 sendNullData(context, safetyEvent)
             }
         }
-
-        private fun isIdentityCheckEnabled(context: Context): Boolean =
-            Settings.Secure.getInt(
-                context.contentResolver,
-                Settings.Secure.IDENTITY_CHECK_ENABLED_V1,
-                0,
-            ) == 1 &&
-                Settings.Secure.getInt(
-                    context.contentResolver,
-                    Settings.Secure.MANDATORY_BIOMETRICS,
-                    0, /* default */
-                ) == 1
 
         private fun sendNullData(context: Context, safetyEvent: SafetyEvent) {
             SafetyCenterManagerWrapper.get()
@@ -154,7 +164,7 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                     context.getString(R.string.identity_check_view_details),
                 )
 
-            if (shouldShowWatchRangingPromoCard(context)) {
+            if (Flags.identityCheckWatch() && shouldShowWatchRangingPromoCard(context)) {
                 val watchIssueCardTitle =
                     context.getString(R.string.identity_check_watch_issue_card_title)
                 val watchIssueCardSummary =
@@ -172,7 +182,8 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
          * not empty.
          */
         private fun shouldShowWatchRangingPromoCard(context: Context): Boolean {
-            return isWatchRangingSupported(context) &&
+            return isWatchRangingSupportedValueUpdated(context) &&
+                isWatchRangingSupported(context) &&
                 context.resources.getBoolean(R.bool.config_show_identity_check_watch_promo)
         }
 
@@ -187,8 +198,15 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
             try {
                 isWatchRangingSupported(context)
                 return true
-            } catch (e: Settings.SettingNotFoundException) {
+            } catch (_: Settings.SettingNotFoundException) {
                 return false
+            }
+        }
+
+        private fun isIdentityCheckSupportedOnDevice(biometricManager: BiometricManager): Boolean {
+            return when (biometricManager.canAuthenticate(BIOMETRIC_STRONG)) {
+                BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> false
+                else -> true
             }
         }
 
@@ -263,24 +281,6 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                     .setNotificationBehavior(SafetySourceIssue.NOTIFICATION_BEHAVIOR_IMMEDIATELY)
             }
             return issue.build()
-        }
-    }
-
-    private fun Context.updateIfIdentityCheckWasEnabledInV1() {
-        try {
-            Settings.Secure.getInt(contentResolver, Settings.Secure.IDENTITY_CHECK_ENABLED_V1)
-        } catch (exception: Settings.SettingNotFoundException) {
-            val identityCheckToggleEnabled =
-                Settings.Secure.getInt(
-                    contentResolver,
-                    Settings.Secure.MANDATORY_BIOMETRICS,
-                    0, /* default */
-                )
-            Settings.Secure.putInt(
-                contentResolver,
-                Settings.Secure.IDENTITY_CHECK_ENABLED_V1,
-                identityCheckToggleEnabled,
-            )
         }
     }
 

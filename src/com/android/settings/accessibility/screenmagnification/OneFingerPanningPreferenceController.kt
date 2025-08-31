@@ -78,7 +78,7 @@ class OneFingerPanningPreferenceController(context: Context, prefKey: String) :
 
     override fun updateState(preference: Preference?) {
         super.updateState(preference)
-        if (preference != null) {
+        if (preference?.key == preferenceKey) {
             @MagnificationMode val mode = MagnificationCapabilities.getCapabilities(mContext)
             preference.isEnabled = mode == FULLSCREEN || mode == ALL
             refreshSummary(preference)
@@ -104,14 +104,11 @@ class OneFingerPanningPreferenceController(context: Context, prefKey: String) :
     }
 
     override fun setChecked(isChecked: Boolean): Boolean {
-        val toReturn =
-            Settings.Secure.putInt(
-                mContext.contentResolver,
-                SETTING_KEY,
-                if (isChecked) AccessibilityUtil.State.ON else AccessibilityUtil.State.OFF,
-            )
-        switchPreference?.run { updateState(this) }
-        return toReturn
+        return Settings.Secure.putInt(
+            mContext.contentResolver,
+            SETTING_KEY,
+            if (isChecked) AccessibilityUtil.State.ON else AccessibilityUtil.State.OFF,
+        )
     }
 
     override fun getSliceHighlightMenuRes(): Int {

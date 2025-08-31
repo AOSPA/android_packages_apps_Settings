@@ -267,6 +267,26 @@ class SetupSupervisionActivityTest {
         }
     }
 
+    @Test
+    fun onCreate_createUserFails_showsErrorScreen() {
+        mockUserManager.stub {
+            on { users } doReturn emptyList()
+            on {
+                createProfileForUserEvenWhenDisallowed(any(), any(), any(), any(), anyOrNull())
+            } doReturn null
+        }
+
+        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                val nextStartedActivity = shadowOf(activity).nextStartedActivity
+                assertThat(nextStartedActivity.component?.className)
+                    .isEqualTo(SupervisionErrorActivity::class.java.name)
+
+                assertThat(activity.isFinishing).isTrue()
+            }
+        }
+    }
+
     private companion object {
         const val SUPERVISING_USER_ID = 5
         val SUPERVISING_USER_INFO =

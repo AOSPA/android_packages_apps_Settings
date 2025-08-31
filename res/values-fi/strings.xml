@@ -684,7 +684,7 @@
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Sama kuin laitteen näytön lukitus"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Valitaanko yksityiselle tilalle uusi lukitus?"</string>
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"Sinun pitää lisätä laitteen PIN-koodi, kuvio tai salasana seuraavalla näytöllä"</string>
-    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Lukitse yksityinen tila automaattisesti"</string>
+    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Yksityisen tilan automaattinen lukitus"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Voit lukita yksityisen tilan automaattisesti, jos et ole käyttänyt laitettasi hetkeen"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Aina kun laite lukittuu"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 minuuttia näytön aikakatkaisun jälkeen"</string>
@@ -702,10 +702,10 @@
     <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Saat pääsyn yksityiseen tilaan siirtymällä siihen sovelluslistan hakukentästä."</string>
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"OK"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Järjestelmä"</string>
-    <string name="private_space_delete_title" msgid="636873505724100006">"Poista yksityinen tila"</string>
+    <string name="private_space_delete_title" msgid="636873505724100006">"Yksityisen tilan poistaminen"</string>
     <string name="private_space_delete_header" msgid="4594429153176776184">"Poistetaanko yksityinen tila?"</string>
     <string name="private_space_delete_summary" msgid="7507302208399543921">"Yksityinen tila poistetaan laitteelta pysyvästi. \n\nKaikki tilan sovellukset ja niiden data poistetaan pysyvästi puhelimen "<b>"sisäisestä tallennustilasta"</b>"."</string>
-    <string name="private_space_accounts" msgid="1078277762792056395">"Seuraavat tilit kirjataan poistetaan yksityisestä tilasta:"</string>
+    <string name="private_space_accounts" msgid="1078277762792056395">"Seuraavat tilit poistetaan yksityisestä tilasta:"</string>
     <string name="private_space_delete_button_label" msgid="1256981385318225002">"Poista"</string>
     <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Poistetaan yksityistä tilaa…"</string>
     <string name="private_space_deleted" msgid="7692240901492540053">"Yksityinen tila poistettu"</string>
@@ -999,8 +999,7 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Siirrä hiirtä näyttöjen välillä"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Käytä ulkoista näyttöä"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Näytön resoluutio"</string>
-    <!-- no translation found for external_display_connection_preference (3337612335495542718) -->
-    <skip />
+    <string name="external_display_connection_preference" msgid="3337612335495542718">"Oletusyhteyden toiminta"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Käytä erillisenä näyttönä"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Peilaa sisäänrakennettu näyttö"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Näytä yhteyden valintaikkuna"</string>
@@ -1581,16 +1580,16 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Tallennusasetukset"</string>
     <string name="status_eid" msgid="3588471107671992684">"EID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"EID (SIM-korttipaikka <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim" msgid="27798473711249145">"IMEI-koodi (SIM-korttipaikka <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="imei_multi_sim_primary" msgid="4320457587114117400">"IMEI-koodi (SIM-korttipaikka <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (ensisijainen)"</string>
+    <!-- no translation found for imei_multi_sim (6990044568468728075) -->
+    <skip />
     <string name="view_saved_network" msgid="1232387673095080910">"Näet tämän, kun valitset tallennetun verkon"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI-koodi"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL-versio"</string>
-    <string name="meid_multi_sim" msgid="5076814185188481456">"MEID (SIM-korttipaikka <xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <string name="meid_multi_sim_primary" msgid="6269908735700854437">"MEID (SIM-korttipaikka <xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>) (ensisijainen)"</string>
+    <!-- no translation found for meid_multi_sim (3124054561186721453) -->
+    <skip />
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Päällä"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Ei käytössä"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1684,7 +1683,8 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Yhteiskäyttö"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Yhteiskäytön asetukset"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hubitila"</string>
-    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgetit lukitusnäytöllä"</string>
+    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Milloin widgetit näkyvät automaattisesti"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Ei koskaan"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Latauksen aikana"</string>
@@ -1755,7 +1755,7 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Verkkoasetuksesi on nollattu."</string>
     <string name="reset_esim_error_title" msgid="6516110227665862295">"eSIMien poistaminen ei onnistu"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Jotain meni pieleen, eikä eSIMejä poistettu.\n\nKäynnistä laite uudelleen ja yritä sitten uudelleen."</string>
-    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Poista yksityinen tila"</string>
+    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Yksityisen tilan poistaminen"</string>
     <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Jos laitteella on yksityinen tila, se poistetaan pysyvästi ja tilaan lisätty Google-tili poistetaan. \n\nKaikki tilan sovellukset ja niiden data poistetaan pysyvästi puhelimen "<b>"sisäisestä tallennustilasta"</b>"."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Poista data (tehdasasetuksiin)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Poista data (tehdasasetuksiin)"</string>
@@ -2221,13 +2221,13 @@
     <string name="mouse_settings_summary" msgid="1308610072914620926">"Osoitinnopeus, painikkeen muokkaus"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Osoittimen nopeus, eleet"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Napauttamalla klikkaus ‑toiminto"</string>
-    <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Siirrä napauttamalla ja vetämällä"</string>
+    <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Siirto napauttamalla ja vetämällä"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Siirrä kaksoisnapauttamalla ja vetämällä sormea levyllä"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Kosketuslevyn eleet"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Luo yksilöllisiä kosketuslevyn navigointieleitä"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Käänteinen vieritys"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Sisältö siirtyy ylös, kun vierität alas"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klikkaa oikeaa alakulmaa"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Oikean alakulman klikkaus"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Näet lisäasetukset, kun klikkaat kosketuslevyn oikeaa alakulmaa"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Osoittimen nopeus"</string>
     <string name="trackpad_pointer_speed_make_faster_desc" msgid="2855950278314583596">"Nopeuta osoittimen liikettä"</string>
@@ -2272,7 +2272,7 @@
     <string name="gesture_button_next" msgid="695288092704187356">"Seuraava"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"Käynnistä"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"Valmis"</string>
-    <string name="action_corner_title" msgid="7411160165577367757">"Muokkaa kulman pikanäppäimiä"</string>
+    <string name="action_corner_title" msgid="7411160165577367757">"Kulman pikanäppäinten muokkaus"</string>
     <string name="action_corner_summary" msgid="695618538930535335">"Siirry järjestelmässä kohdistimien avulla"</string>
     <string name="action_corner_intro" msgid="2170609118659718140">"Valitse seuraavat alueet, niin voit muokata kulman pikanäppäimiä"</string>
     <string name="action_corner_bottom_left_title" msgid="2857258272736432174">"Vasen alakulma"</string>
@@ -2499,12 +2499,9 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Zoomaa napauttamalla painiketta."</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Lähennä näyttöä nopeasti, niin näet sisällön suurempana"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Näin voit lähentää näyttöä:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Aloita suurennus käyttämällä pikanäppäintä&lt;br/&gt; {1,number,integer}. Napauta näyttöä&lt;br/&gt; {2,number,integer}. Siirry näytöllä vetämällä kahdella sormella&lt;br/&gt; {3,number,integer}. Säädä zoomausta nipistämällä kahdella sormella&lt;br/&gt; {4,number,integer}. Lopeta suurennus käyttämällä pikanäppäintä&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Väliaikainen lähentäminen:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Varmista, että suurennustapa on asetettu koko näytölle &lt;br/&gt; {1,number,integer}. Aloita suurennus käyttämällä pikanäppäintä&lt;br/&gt; {2,number,integer}. Kosketa näyttöä mistä tahansa pitkään&lt;br/&gt; {3,number,integer}. Siirry näytöllä vetämällä kahdella sormella&lt;br/&gt; {4,number,integer}. Lopeta suurennus nostamalla sormi näytöltä"</string>
-    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
-    <skip />
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;Näin voit lähentää näyttöä:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Aloita suurennus käyttämällä pikanäppäintä tai painamalla &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M&lt;br/&gt; {1,number,integer}. Siirry näytöllä painamalla &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + nuolinäppäimiä&lt;br/&gt; {2,number,integer}. Säädä zoomausta painamalla &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ja \"+\" tai \"–\"&lt;br/&gt; {3,number,integer}. Lopeta suurennus pikanäppäimellä tai &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M"</string>
+    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;Näin voit lähentää näyttöä:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Aloita suurennus käyttämällä pikanäppäintä&lt;br/&gt; {1,number,integer}. Siirry näytöllä painamalla &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + nuolinäppäimiä&lt;br/&gt; {2,number,integer}. Säädä zoomausta painamalla &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ja \"+\" tai \"–\"&lt;br/&gt; {3,number,integer}. Lopeta suurennus käyttämällä pikanäppäintä"</string>
+    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;Näppäimistö&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Aloita suurennus käyttämällä pikanäppäintä tai painamalla &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M&lt;br/&gt; {1,number,integer}. Siirry näytöllä painamalla &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + nuolinäppäimiä&lt;br/&gt; {2,number,integer}. Säädä zoomausta painamalla &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ja \"+\" tai \"–\"&lt;br/&gt; {3,number,integer}. Lopeta suurennus pikanäppäimellä tai &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Kosketusnäyttö&lt;/b&gt;&lt;br/&gt; Lähentäminen:&lt;br/&gt; {0,number,integer}. Aloita suurennus käyttämällä pikanäppäintä&lt;br/&gt; {1,number,integer}. Napauta näyttöä&lt;br/&gt; {2,number,integer}. Siirry näytöllä vetämällä kahdella sormella&lt;br/&gt; {3,number,integer}. Säädä zoomausta nipistämällä kahdella sormella&lt;br/&gt; {4,number,integer}. Lopeta suurennus käyttämällä pikanäppäintä&lt;br/&gt;&lt;br/&gt; Väliaikainen lähentäminen:&lt;br/&gt; {0,number,integer}. Varmista, että suurennustapa on asetettu koko näytölle &lt;br/&gt; {1,number,integer}. Aloita suurennus käyttämällä pikanäppäintä&lt;br/&gt; {2,number,integer}. Kosketa näyttöä mistä tahansa pitkään&lt;br/&gt; {3,number,integer}. Siirry näytöllä vetämällä kahdella sormella&lt;br/&gt; {4,number,integer}. Lopeta suurennus nostamalla sormi näytöltä"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Näin voit lähentää näyttöä:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Aloita suurennus käyttämällä pikakomentoa&lt;br/&gt; {1,number,integer}. Napauta näyttöä&lt;br/&gt; {2,number,integer}. Siirry näytöllä vetämällä kahdella sormella&lt;br/&gt; {3,number,integer}. Säädä zoomausta nipistämällä kahdella sormella&lt;br/&gt; {4,number,integer}. Lopeta suurennus käyttämällä pikakomentoa&lt;br/&gt;&lt;br/&gt; Voit myös esimerkiksi lähentää tilapäisesti."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Näin voit lähentää näyttöä:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Aloita suurennus käyttämällä pikakomentoa&lt;br/&gt; {1,number,integer}. Napauta näyttöä&lt;br/&gt; {2,number,integer}. Siirry näytöllä vetämällä yhdellä tai kahdella sormella&lt;br/&gt; {3,number,integer}. Säädä zoomausta nipistämällä kahdella sormella&lt;br/&gt; {4,number,integer}. Lopeta suurennus käyttämällä pikakomentoa&lt;br/&gt;&lt;br/&gt; Voit myös esimerkiksi lähentää tilapäisesti."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Kun suurennus on käytössä, voit suurentaa näytöllä olevia kohteita.\n\n"<b>"Zoomaa:"</b>" käynnistä suurennus ja napauta sitten haluamaasi kohtaa näytöllä\n"<ul><li>"Vieritä: vedä vähintään kahta sormea näytön poikki"</li>\n<li>"Säädä zoomausta: nipistä vähintään kaksi sormea yhteen tai levitä ne erilleen"</li></ul>\n\n<b>"Zoomaa väliaikaisesti:"</b>" käynnistä suurennus ja paina pitkään missä tahansa näytöllä\n"<ul><li>"Liiku näytöllä: vedä sormea eri suuntiin"</li>\n<li>"Loitonna: nosta sormi"</li></ul>\n\n"Suurennus ei toimi näppäimistöllä tai siirtymispalkissa."</string>
@@ -3727,7 +3724,7 @@
     <string name="media_volume_option_title" msgid="5966569685119475630">"Median äänenvoimakkuus"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Castin äänenvoimakkuus"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Puhelun äänenvoimakkuus"</string>
-    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Hälytyksen voimakkuus"</string>
+    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Herätyksen voimakkuus"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Soittoäänen/ilmoitusten voimakkuus"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Soittoäänen voimakkuus"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Ilmoituksen äänenvoimakkuus"</string>
@@ -3975,6 +3972,8 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Näytä kaikki työilmoitussisältö"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Piilota arkaluontoinen työsisältö"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Miten haluat profiilin ilmoitusten näkyvän, kun laite on lukittu?"</string>
+    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
+    <skip />
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Mitä lukitusnäytöllä näkyy"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Näytä katsotut ilmoitukset"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Näytä katsotut ilmoituskuvakkeet"</string>
@@ -4080,6 +4079,8 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Ilmoitusten järjestäjä"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Niputa ja hiljennä vähemmän tärkeät ilmoitukset"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Hallinnoi ilmoitusten järjestäjän sovelluksia"</string>
+    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Käytä työprofiilin sovelluksissa"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-avustinpalvelut"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Asennettuja sovelluksia ei ole pyydetty toimimaan VR-avustinpalveluina."</string>
@@ -4847,14 +4848,10 @@
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Eleillä navigointi"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Demon kokeilu"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Painikkeilla siirtyminen"</string>
-    <!-- no translation found for button_navigation_settings_order_title (4256756895101424865) -->
-    <skip />
-    <!-- no translation found for navbar_back_button (6386920156044420082) -->
-    <skip />
-    <!-- no translation found for navbar_home_button (951459586446869883) -->
-    <skip />
-    <!-- no translation found for navbar_recent_button (6005580570601162420) -->
-    <skip />
+    <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Painikkeiden järjestys"</string>
+    <string name="navbar_back_button" msgid="6386920156044420082">"Takaisin"</string>
+    <string name="navbar_home_button" msgid="951459586446869883">"Etusivu"</string>
+    <string name="navbar_recent_button" msgid="6005580570601162420">"Viimeaikaiset"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"eleillä navigointi, Takaisin-eleen herkkyys, Takaisin-ele"</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"siirtyminen, aloitusnäyttöpainike"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Yhden käden moodi"</string>
@@ -5325,8 +5322,6 @@
     <string name="sim_onboarding_next" msgid="6415025179929475355">"Seuraava"</string>
     <string name="sim_onboarding_progressbar_turning_sim_on" msgid="1163318788393361574">"Laitetaan <xliff:g id="CARRIER_NAME">%1$s</xliff:g> päälle…"</string>
     <string name="mobile_network_spn_title" msgid="3053793174495329077">"Mobiiliverkko"</string>
-    <string name="imei_primary" msgid="5312232202518974440">"IMEI-koodi (ensisijainen)"</string>
-    <string name="meid_primary" msgid="3256732684155678106">"MEID-koodi (ensisijainen)"</string>
     <string name="mobile_network_phone_number_title" msgid="2090794402855021784">"Puhelinnumero"</string>
     <string name="mobile_network_sim_label_color_title" msgid="2401352348041132876">"SIMin tunniste ja väri"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Verkon aktivointi"</string>
@@ -5386,8 +5381,8 @@
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Vapaamuotoiset ikkunat toissijaisella näytöllä"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Ota käyttöön kiinteän kokoiset usean ikkunan tilassa"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Sallii kiinteän kokoiset sovellukset usean ikkunan tilassa"</string>
-    <string name="hwui_force_dark_title" msgid="4256904905631994219">"Ohita SmartDarkin pakottaminen päälle"</string>
-    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Ohittaa toiminnon, joka pakottaa SmartDark-ominaisuuden aina päälle"</string>
+    <string name="hwui_force_dark_title" msgid="4256904905631994219">"Ohita tumman teeman pakottaminen päälle"</string>
+    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Ohittaa tumman tilan pakottamisen aina päälle"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Yksityisyys"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Luvat, tilitoiminta, henkilökohtaiset tiedot"</string>
     <string name="privacy_controls_title" msgid="1383047169455206604">"Asetukset"</string>
@@ -5693,7 +5688,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Poista käytöstä alatason prosessirajoitukset"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Poista käytöstä rajoitukset, jotka liittyvät järjestelmäresurssin käyttöön sovelluksen alatason prosesseissa"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Pakota Muistiinpanot-rooli käyttöön"</string>
-    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Ota käyttöön muistiinpanojärjestelmän integraatioita Muistiinpanot-roolin avulla. Jos Muistiinpanot-rooli on jo käytössä, tämä ei vaikuta mitenkään. Vaatii uudelleenkäynnistystä."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Ota käyttöön muistiinpanojärjestelmän integraatioita Muistiinpanot-roolin avulla. Jos Muistiinpanot-rooli on jo käytössä, tämä ei vaikuta mitenkään. Vaatii uudelleenkäynnistyksen."</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Lisää salasana"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Muunna eSIMiksi"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"eSIMin siirtäminen toiselle laitteelle"</string>
@@ -5973,18 +5968,12 @@
     <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Varmista henkilöllisyyden suojaus kaikissa sovelluksissa, jotka tukevat sormenjälki- ja kasvojentunnistusavausta luotetuissa paikoissa, kuten kotona tai toimistossa. Käytä tunnistautumista kellon kanssa, jotta voit laajentaa suojausta myös luotettujen paikkojen ulkopuolelle."</string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Muut asetukset"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Automaattinen täyttö, ilmoitukset ja muuta"</string>
-    <!-- no translation found for privacy_sources_title (7648842637181479352) -->
-    <skip />
-    <!-- no translation found for privacy_sources_summary (8795612902105833258) -->
-    <skip />
-    <!-- no translation found for device_unlock_subpage_title (8619367783572270468) -->
-    <skip />
-    <!-- no translation found for lock_screen_title (4701994278040604018) -->
-    <skip />
-    <!-- no translation found for location_settings (6833222354060094170) -->
-    <skip />
-    <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
-    <skip />
+    <string name="privacy_sources_title" msgid="7648842637181479352">"Yksityisyysasetukset"</string>
+    <string name="privacy_sources_summary" msgid="8795612902105833258">"Luvat, asetukset"</string>
+    <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Laitteen lukituksen avaus"</string>
+    <string name="lock_screen_title" msgid="4701994278040604018">"Näytön lukitus"</string>
+    <string name="location_settings" msgid="6833222354060094170">"Pääsy sijaintiin"</string>
+    <string name="location_settings_subtitle" msgid="8471780117911010030">"Katso sovellukset ja palvelut, joilla on pääsy sijaintiin"</string>
     <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
     <skip />
     <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->

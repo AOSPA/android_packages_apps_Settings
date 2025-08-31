@@ -127,13 +127,17 @@ class SetupSupervisionActivity : FragmentActivity() {
                 if (supervisingUser != null) {
                     startChooseLockActivity(supervisingUser)
                 } else {
-                    // Failure: Show error, set result, and finish the activity
-                    // TODO(399705794): Surface this error to the user
-                    setResult(RESULT_CANCELED)
-                    finish()
+                    showGenericErrorScreen()
                 }
             }
         }
+    }
+
+    /** Displays the generic error screen */
+    private fun showGenericErrorScreen() {
+        startActivity(Intent(this, SupervisionErrorActivity::class.java))
+        setResult(RESULT_CANCELED)
+        finish()
     }
 
     @RequiresPermission(anyOf = [CREATE_USERS, MANAGE_USERS])

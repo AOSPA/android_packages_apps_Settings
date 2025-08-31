@@ -21,6 +21,7 @@ import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import org.junit.Ignore
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.robolectric.Shadows.shadowOf
@@ -37,6 +38,7 @@ class MobileNetworkListScreenTest : SettingsCatalystTestCase() {
         Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED,
         Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4,
     )
+    @Ignore("UI of MobileNetworkListScreen is replaced by SPA now.")
     @Config(shadows = [ShadowSubscriptionManager::class])
     @Test
     override fun migration() {

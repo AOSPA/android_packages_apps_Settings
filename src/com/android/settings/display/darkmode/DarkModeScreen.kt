@@ -16,6 +16,7 @@
 
 package com.android.settings.display.darkmode
 
+import android.app.UiModeManager
 import android.app.settings.SettingsEnums
 import android.app.settings.SettingsEnums.ACTION_DARK_THEME
 import android.content.Context
@@ -95,8 +96,6 @@ abstract class BaseDarkModeScreen(context: Context) :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
         makeLaunchIntent(context, DarkThemeSettingsActivity::class.java, metadata?.key)
 
-    override fun hasCompleteHierarchy() = false
-
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +DarkModeTopIntroPreference()
@@ -109,6 +108,14 @@ abstract class BaseDarkModeScreen(context: Context) :
                     +ExpandedDarkModeSelectorPreference(modeStorage)
                 }
             }
+            +PreferenceCategory("display_category", R.string.dark_theme_timing_category) += {
+                val uiModeManager =
+                    context.getSystemService<UiModeManager?>(UiModeManager::class.java)
+                +DarkModeSchedulePreference(uiModeManager!!, BedtimeSettings(context))
+                +StartTimePreference(uiModeManager)
+                +EndTimePreference(uiModeManager)
+            }
+            +DarkModePendingLocationFooterPreference()
             +DarkModeExpandedFooterPreference()
             +DarkModeCustomModesFooterPreference()
             +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
