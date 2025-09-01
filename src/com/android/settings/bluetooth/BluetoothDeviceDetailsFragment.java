@@ -62,7 +62,6 @@ import java.util.function.Consumer;
 
 public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurableFragment {
     private static final String TAG = "BTDeviceDetailsFrg";
-    private static final int METADATA_FAST_PAIR_CUSTOMIZED_FIELDS = 25;
 
     /**
      * An interface to let tests override the normal mechanism for looking up the

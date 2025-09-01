@@ -60,15 +60,10 @@
         android:key="action_buttons"
         settings:allowDividerBelow="true"/>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.ChainedPreferenceGroup
         android:key="device_stylus"/>
 
-    <com.android.settings.slices.SlicePreference
-        android:key="bt_extra_control"
-        settings:controller="com.android.settings.slices.SlicePreferenceController"
-        settings:allowDividerAbove="true"/>
-
-    <com.android.settingslib.widget.UntitledPreferenceCategory
+    <com.android.settingslib.widget.ChainedPreferenceGroup
         android:key="audio_sharing_control"/>
 
     <PreferenceCategory
@@ -81,22 +76,21 @@
     <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="hearing_device_group" />
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.ChainedPreferenceGroup
         android:key="bluetooth_audio_device_type_group"
         android:featureFlag="!com.android.settings.flags.enable_bluetooth_settings_expressive_design_read_only"/>
 
-    <PreferenceCategory
-        android:key="spatial_audio_group"
-        android:featureFlag="!com.android.settings.flags.enable_bluetooth_settings_expressive_design_read_only"/>
+    <com.android.settingslib.widget.ChainedPreferenceGroup
+        android:key="spatial_audio_group"/>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.ChainedPreferenceGroup
         android:key="bluetooth_profiles"/>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.ChainedPreferenceGroup
         android:key="bluetooth_audio_device_type_group"
         android:featureFlag="com.android.settings.flags.enable_bluetooth_settings_expressive_design_read_only"/>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.ChainedPreferenceGroup
         android:key="bt_extra_options"/>
 
     <PreferenceCategory
@@ -110,7 +104,7 @@
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.ChainedPreferenceGroup
         android:key="data_sync_group"/>
 
     <Preference
