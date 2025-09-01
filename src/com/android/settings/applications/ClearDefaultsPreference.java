@@ -16,6 +16,10 @@
 
 package com.android.settings.applications;
 
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -58,6 +62,7 @@ public class ClearDefaultsPreference extends Preference {
 
     private final boolean mAppsControlDisallowedBySystem;
     private final RestrictedLockUtils.EnforcedAdmin mAppsControlDisallowedAdmin;
+    private final EnforcingAdmin mAppsControlEnforcingAdmin;
 
     public ClearDefaultsPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
@@ -70,12 +75,24 @@ public class ClearDefaultsPreference extends Preference {
         IBinder b = ServiceManager.getService(Context.USB_SERVICE);
         mUsbManager = IUsbManager.Stub.asInterface(b);
 
-        mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
-                getContext(), UserManager.DISALLOW_APPS_CONTROL, UserHandle.myUserId());
-        mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-                getContext(), UserManager.DISALLOW_APPS_CONTROL, UserHandle.myUserId());
-
-
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            PolicyEnforcementInfo appsControlEnforcementInfo = getContext().getSystemService(
+                    DevicePolicyManager.class).getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                            UserManager.DISALLOW_APPS_CONTROL), UserHandle.myUserId());
+            mAppsControlEnforcingAdmin =
+                    appsControlEnforcementInfo.getMostImportantEnforcingAdmin();
+            // Init as null to avoid variable not initialized errors.
+            // TODO(b/414733570): Remove mAppsControlDisallowedAdmin during the flag clean-up.
+            mAppsControlDisallowedAdmin = null;
+            mAppsControlDisallowedBySystem = appsControlEnforcementInfo.isEnforcedBySystem();
+        } else {
+            mAppsControlEnforcingAdmin = null;
+            mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                    getContext(), UserManager.DISALLOW_APPS_CONTROL, UserHandle.myUserId());
+            mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
+                    getContext(), UserManager.DISALLOW_APPS_CONTROL, UserHandle.myUserId());
+        }
     }
 
     public ClearDefaultsPreference(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -108,9 +125,20 @@ public class ClearDefaultsPreference extends Preference {
         mActivitiesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
-                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
-                            getContext(), mAppsControlDisallowedAdmin);
+                boolean isDisallowedByAdmin;
+                if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                    isDisallowedByAdmin = mAppsControlEnforcingAdmin != null;
+                } else {
+                    isDisallowedByAdmin = mAppsControlDisallowedAdmin != null;
+                }
+                if (isDisallowedByAdmin && !mAppsControlDisallowedBySystem) {
+                    if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
+                                mAppsControlEnforcingAdmin, null);
+                    } else {
+                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
+                                mAppsControlDisallowedAdmin);
+                    }
                     return;
                 }
 
