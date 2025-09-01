@@ -20,18 +20,18 @@ import android.Manifest.permission.CHANGE_WIFI_STATE
 import android.Manifest.permission.NETWORK_SETTINGS
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.core.net.toUri
 import com.android.settings.R
-import com.android.settings.Settings.ChangeWifiStateActivity
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
 import com.android.settings.applications.getPackageInfoWithPermissions
 import com.android.settings.applications.isPermissionRequested
 import com.android.settings.flags.Flags
 import com.android.settings.utils.highlightPreference
-import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 
@@ -80,7 +80,12 @@ open class WifiControlAppDetailScreen(context: Context, arguments: Bundle) :
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, ChangeWifiStateActivity::class.java, metadata?.key).apply {
+        Intent().apply {
+            component =
+                ComponentName(
+                    "com.android.settings",
+                    "com.android.settings.WifiControlAppDetailIntent",
+                )
             data = "package:$packageName".toUri()
             highlightPreference(arguments, metadata?.bindingKey)
         }
