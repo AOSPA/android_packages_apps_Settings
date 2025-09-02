@@ -2,6 +2,13 @@ package: "com.android.settings.flags"
 container: "system_ext"
 
 flag {
+    name: "hide_lskf_skip_during_suw"
+    namespace: "android_settings"
+    description: "Feature flag for hiding skip buttons on lskf screens during SetupWizard."
+    bug: "396519167"
+}
+
+flag {
     name: "enable_pattern_input_click_support"
     namespace: "desktop_oobe"
     description: "Feature flag for click support in pattern input."
