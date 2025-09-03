@@ -19,7 +19,11 @@ package com.android.settings.network.apn
 import android.content.ContextWrapper
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.telephony.CarrierConfigManager
+import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
@@ -28,8 +32,10 @@ import com.android.settings.dashboard.RestrictedDashboardFragment
 import com.android.settings.flags.Flags
 import com.android.settings.network.CarrierConfigCache
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settings.utils.putSubId
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
@@ -37,15 +43,19 @@ import org.mockito.kotlin.stub
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.Implementation
 import org.robolectric.annotation.Implements
+import org.robolectric.util.ReflectionHelpers
 
 class ApnSettingsScreenTest : SettingsCatalystTestCase() {
     private val subId = 42
+    private val invalidSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
+
+    @get:Rule val platformFlags = SetFlagsRule()
 
     override val flagName: String
         get() = Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4
 
     override val preferenceScreenCreator =
-        ApnSettingsScreen(Bundle().apply { putInt(ApnSettings.SUB_ID, subId) })
+        ApnSettingsScreen(Bundle().apply { putSubId(ApnSettings.SUB_ID, subId) })
 
     private val mockTelephonyManager = mock<TelephonyManager>()
 
@@ -108,6 +118,73 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
         mockCarrierConfigCache.stub { on { getConfigForSubId(subId) } doReturn bundle }
 
         assertThat(preferenceScreenCreator.isAvailable(context)).isEqualTo(false)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagTrue_validString_parsedCorrectly() {
+        val args = Bundle().apply { putString(ApnSettings.SUB_ID, subId.toString()) }
+        val screen = ApnSettingsScreen(args)
+
+        assertThat(screen.getSubId()).isEqualTo(subId)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagTrue_invalidString_returnsDefault() {
+        val args = Bundle().apply { putString(ApnSettings.SUB_ID, "invalid") }
+        val screen = ApnSettingsScreen(args)
+
+        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagTrue_missingKey_returnsDefault() {
+        val args = Bundle()
+        val screen = ApnSettingsScreen(args)
+
+        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagTrue_subIdIsInt_returnsDefault() {
+        val args = Bundle().apply { putInt(ApnSettings.SUB_ID, subId) }
+        val screen = ApnSettingsScreen(args)
+
+        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagFalse_validInt_parsedCorrectly() {
+        val args = Bundle().apply { putInt(ApnSettings.SUB_ID, subId) }
+        val screen = ApnSettingsScreen(args)
+
+        assertThat(screen.getSubId()).isEqualTo(subId)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagFalse_missingKey_returnsDefault() {
+        val args = Bundle()
+        val screen = ApnSettingsScreen(args)
+
+        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_flagFalse_subIdIsString_returnsDefault() {
+        val args = Bundle().apply { putString(ApnSettings.SUB_ID, subId.toString()) }
+        val screen = ApnSettingsScreen(args)
+
+        assertThat(screen.getSubId()).isEqualTo(invalidSubId)
+    }
+
+    private fun ApnSettingsScreen.getSubId(): Int {
+        return ReflectionHelpers.getField(this, "subId")
     }
 
     @Test

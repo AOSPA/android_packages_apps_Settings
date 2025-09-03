@@ -17,6 +17,7 @@
 package com.android.settings.wifi.calling;
 
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
+import static com.android.settings.wifi.calling.WifiCallingSettingsForSub.FRAGMENT_BUNDLE_SUBID;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -142,6 +143,7 @@ public class WifiCallingSettingsForSubTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(anyInt());
         doReturn(mock(LifecycleOwner.class)).when(mFragment).getViewLifecycleOwner();
         final Bundle bundle = new Bundle();
+        bundle.putInt(FRAGMENT_BUNDLE_SUBID, SUB_ID);
         when(mFragment.getArguments()).thenReturn(bundle);
         doNothing().when(mFragment).addPreferencesFromResource(anyInt());
         doNothing().when(mFragment).finish();

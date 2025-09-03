@@ -31,17 +31,23 @@ import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.NetworkPolicyManager;
 import android.os.Bundle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -58,6 +64,10 @@ import java.util.List;
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class MobileNetworkSettingsTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
@@ -66,9 +76,13 @@ public class MobileNetworkSettingsTest {
     private NetworkPolicyManager mNetworkPolicyManager;
     @Mock
     private FragmentActivity mActivity;
+    @Mock
+    private SubscriptionManager mSubscriptionManager;
 
     private Context mContext;
     private MobileNetworkSettings mFragment;
+
+    private static final int SUBSCRIPTION_ID = 1234;
 
     @Before
     public void setUp() {
@@ -80,12 +94,19 @@ public class MobileNetworkSettingsTest {
         when(mContext.getSystemService(NetworkStatsManager.class)).thenReturn(mNetworkStatsManager);
         ShadowEntityHeaderController.setUseMock(mock(EntityHeaderController.class));
 
+        when(mContext.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE)).thenReturn(
+                mSubscriptionManager);
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(
+                mSubscriptionManager);
+        when(mSubscriptionManager.getActiveSubscriptionIdList()).thenReturn(new int[]{
+                SUBSCRIPTION_ID});
+
         mFragment = spy(new MobileNetworkSettings());
         final Bundle args = new Bundle();
-        final int subscriptionId = 1234;
-        args.putInt(Settings.EXTRA_SUB_ID, subscriptionId);
+        args.putInt(Settings.EXTRA_SUB_ID, SUBSCRIPTION_ID);
         mFragment.setArguments(args);
         when(mFragment.getActivity()).thenReturn(mActivity);
+        when(mFragment.getContext()).thenReturn(mContext);
         when(mActivity.isFinishing()).thenReturn(false);
         when(mActivity.getSystemService(NetworkPolicyManager.class)).thenReturn(
                 mNetworkPolicyManager);
@@ -123,6 +144,33 @@ public class MobileNetworkSettingsTest {
         mFragment.notifyAirplaneModeForPreferences(true);
 
         verify(testPreferenceController).notifyAirplaneModeChanged(true);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    public void getPreferenceScreenBindingArgs_flagIsTrue_putsString() {
+        Bundle args = mFragment.getPreferenceScreenBindingArgs(mContext);
+
+        assertThat(args).isNotNull();
+        assertThat(args.getString(Settings.EXTRA_SUB_ID)).isEqualTo(
+                String.valueOf(SUBSCRIPTION_ID)
+        );
+        assertThat(args.containsKey(Settings.EXTRA_SUB_ID)).isTrue();
+        // Verify it's not stored as an Int
+        assertThat(args.getInt(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID))
+                .isEqualTo(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    public void getPreferenceScreenBindingArgs_flagIsFalse_putsInt() {
+        Bundle args = mFragment.getPreferenceScreenBindingArgs(mContext);
+
+        assertThat(args).isNotNull();
+        assertThat(args.getInt(Settings.EXTRA_SUB_ID)).isEqualTo(SUBSCRIPTION_ID);
+        assertThat(args.containsKey(Settings.EXTRA_SUB_ID)).isTrue();
+        // Verify it's not stored as a String
+        assertThat(args.getString(Settings.EXTRA_SUB_ID)).isNull();
     }
 
     public static class TestPreferenceController extends TelephonyBasePreferenceController {
