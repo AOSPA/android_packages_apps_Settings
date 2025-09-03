@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -43,7 +43,10 @@ import kotlinx.coroutines.flow.merge
 open class WifiCallingScreen(override val arguments: Bundle) :
     PreferenceScreenMixin, PreferenceAvailabilityProvider {
 
-    private val subId = arguments.getInt(EXTRA_SUB_ID, getDefaultSubscriptionId())
+    private val subId =
+        if (Flags.catalystKeyParameters())
+            arguments.getString(EXTRA_SUB_ID)?.toIntOrNull() ?: getDefaultSubscriptionId()
+        else arguments.getInt(EXTRA_SUB_ID, getDefaultSubscriptionId())
 
     override val key: String
         get() = KEY
@@ -81,7 +84,11 @@ open class WifiCallingScreen(override val arguments: Bundle) :
          */
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
-            fun Int.toArguments() = Bundle(1).also { it.putInt(EXTRA_SUB_ID, this) }
+            fun Int.toArguments() =
+                Bundle(1).also {
+                    if (Flags.catalystKeyParameters()) it.putString(EXTRA_SUB_ID, this.toString())
+                    else it.putInt(EXTRA_SUB_ID, this)
+                }
             // handle backward compatibility with default subscription id
             val defaultSubId = getDefaultSubscriptionId()
             val flow =
