@@ -16,6 +16,9 @@
   -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto">
+    <com.android.settingslib.widget.StatusBannerPreference
+        android:key="safety_center_status_banner"
+        settings:controller="com.android.settings.safetycenter.ui.StatusBannerPreferenceController" />
     <PreferenceCategory
         android:key="security_category"
         android:title="@string/security_header">
