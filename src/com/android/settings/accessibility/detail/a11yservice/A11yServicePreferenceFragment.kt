@@ -174,13 +174,22 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
     }
 
     private fun getFeatureComponentName(): ComponentName {
-        return requireNotNull(
-            getFragmentArguments()
-                .getParcelable(
+        val arguments = getFragmentArguments()
+
+        return if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+            requireNotNull(
+                arguments.getString(AccessibilitySettings.EXTRA_COMPONENT_NAME)?.let {
+                    ComponentName.unflattenFromString(it)
+                }
+            )
+        } else {
+            requireNotNull(
+                arguments.getParcelable(
                     AccessibilitySettings.EXTRA_COMPONENT_NAME,
                     ComponentName::class.java,
                 )
-        )
+            )
+        }
     }
 
     override fun getPreferenceScreenResId(): Int {
@@ -226,7 +235,17 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
     }
 
     override fun getPreferenceScreenBindingArgs(context: Context): Bundle? {
-        return getFragmentArguments()
+        return if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+            // TODO: b/447555338 - Replace this Bundle with KeyParameters.
+            Bundle(1).apply {
+                putString(
+                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                    getFeatureComponentName().flattenToString(),
+                )
+            }
+        } else {
+            getFragmentArguments()
+        }
     }
 
     /**
