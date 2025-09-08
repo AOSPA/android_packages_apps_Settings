@@ -51,7 +51,7 @@
     <string name="font_size_make_larger_desc" msgid="5774611876657293550">"Aumentar el tamaño de la fuente"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Siempre"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"La pantalla frontal se enciende cuando pliegas el dispositivo"</string>
-    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Desliza el dedo hacia arriba para continuar"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Deslizar hacia arriba para continuar"</string>
     <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Pliega el teléfono y desliza el dedo hacia arriba en la pantalla frontal para continuar usando la app, o bien espera unos segundos hasta que se bloquee la pantalla (los juegos y las apps de video seguirán ejecutándose automáticamente)"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nunca"</string>
     <string name="sleep_on_fold_summary" msgid="4191753338303043456">"La pantalla frontal se apaga y se bloquea cuando pliegas el dispositivo"</string>
@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Mover hacia arriba"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Mover hacia abajo"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Quitar"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Mover al principio"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencias regionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Establece tus preferencias de unidades y números"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que las apps sepan tus preferencias regionales para que puedan personalizar la experiencia."</string>
@@ -335,7 +336,7 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Horario de verano"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Hora estándar"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Seleccionar por región"</string>
-    <string name="zone_menu_by_offset" msgid="543648951618438204">"Seleccionar por compensación de GMT"</string>
+    <string name="zone_menu_by_offset" msgid="543648951618438204">"Seleccionar por desfase GMT"</string>
     <string name="time_feedback_category_title" msgid="5942621686512255208">"Comentarios"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"comentarios, errores, hora, zona, zona horaria"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"Enviar comentarios sobre hora"</string>
@@ -965,7 +966,7 @@
     <string name="device_details_title" msgid="1155622417516195481">"Detalles del dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Configuración del teclado"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Más parámetros de configuración"</string>
-    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Actualizaciones de firmware, información y mucho más"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Actualizaciones de firmware, información y más"</string>
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Sugerencias y asistencia"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Dirección Bluetooth del dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Dirección Bluetooth del dispositivo:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -1019,6 +1020,11 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"¿Quieres usar la nueva configuración?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Si la pantalla no funciona como quieres, puedes volver a la configuración anterior"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Usar configuración"</string>
+    <string name="external_display_topology_display_block_content_description" msgid="4638018879987232608">"Pantalla: %1$s. Presiona dos veces y mantén presionado para arrastrar o ver las acciones para mover."</string>
+    <string name="external_display_topology_a11y_action_move_up" msgid="5585023811277652685">"Mover hacia arriba"</string>
+    <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"Mover hacia abajo"</string>
+    <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"Mover hacia la izquierda"</string>
+    <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"Mover hacia la derecha"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"duplicar"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Habilitar pantalla inalámbrica"</string>
@@ -1526,7 +1532,7 @@
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"El fondo de pantalla de la pantalla de bloqueo es visible con la pantalla siempre activa"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Texto en negrita"</string>
     <string name="title_font_size" msgid="570613010306330622">"Tamaño de fuente"</string>
-    <string name="short_summary_font_size" msgid="8444689613442419978">"Aumenta o reduce el texto"</string>
+    <string name="short_summary_font_size" msgid="8444689613442419978">"Amplía o reduce el texto"</string>
     <string name="category_title_display_text_size" msgid="4234285020731751694">"Opciones de tamaño"</string>
     <string name="category_title_text_style" msgid="5905015084935695611">"Opciones de estilo"</string>
     <string name="sim_lock_settings" msgid="7331982427303002613">"Configuración de bloqueo de SIM"</string>
@@ -1577,16 +1583,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Configuración de almacenamiento"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (ranura de SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <!-- no translation found for imei_multi_sim (6990044568468728075) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Elige una red guardada para verla"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Versión de PRL"</string>
-    <!-- no translation found for meid_multi_sim (3124054561186721453) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="3124054561186721453">"MEID (<xliff:g id="MEID_ID">%1$d</xliff:g>)"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Activada"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Desactivada"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1680,8 +1684,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Comunal"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Configuraciones compartidas"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Modo Hub"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Widgets en la pantalla de bloqueo (beta)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Cuándo mostrar automáticamente"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nunca"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Mientras se carga"</string>
@@ -2410,7 +2413,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Comunícate con la Asistencia de Google para Personas con Discapacidad"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Encuesta sobre accesibilidad"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Comparte tus comentarios"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"¿Qué tan satisfecho estás con el Tema oscuro?"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Completa la encuesta"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Comparte tus comentarios"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"¿Qué tan satisfecho estás con la ampliación?"</string>
@@ -2736,7 +2740,7 @@
     <string name="accessibility_hearing_device_footer_hap_only_summary" msgid="3531758698830915205">"Para encontrar otros dispositivos auditivos que no sean compatibles con LE Audio, presiona &lt;b&gt;Vincular dispositivo nuevo&lt;/b&gt; &gt; &lt;b&gt;Ver más dispositivos&lt;/b&gt;"</string>
     <string name="accessibility_hearing_device_footer_hap_only_summary_tts" msgid="4440097982533045507">"Para encontrar otros dispositivos auditivos que no sean compatibles con LE Audio, presiona "<b>"Vincular dispositivo nuevo"</b>" y, luego, "<b>"Ver más dispositivos"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Vincular dispos. auditivo"</string>
-    <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Puedes vincular los dispositivos auditivos ASHA y LE Audio en esta página. Asegúrate de que los dispositivos auditivos estén encendidos y listos para la vinculación."</string>
+    <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Puedes vincular dispositivos auditivos ASHA y LE Audio en esta página. Asegúrate de que los dispositivos auditivos estén encendidos y listos para la vinculación."</string>
     <string name="accessibility_hearing_device_pairing_asha_only_intro" msgid="5679230908462987522">"Puedes vincular los dispositivos auditivos ASHA en esta página. Asegúrate de que dichos dispositivos estén encendidos y listos para la vinculación."</string>
     <string name="accessibility_hearing_device_pairing_hap_only_intro" msgid="2233661046254311681">"Puedes vincular los dispositivos auditivos LE Audio en esta página. Asegúrate de que dichos dispositivos estén encendidos y listos para la vinculación."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Dispositivos disponibles"</string>
@@ -3674,7 +3678,7 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"información de la batería, fecha de fabricación, conteo de ciclos, primer uso"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"nivel de parche de seguridad de android, versión de banda base, versión de kernel"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, claro, oscuro, modo, sensibilidad a la luz, fotofobia, oscurecer, modo oscuro, migraña"</string>
-    <string name="keywords_blur_switch" msgid="3482676740440346012">"Efectos de desenfoque"</string>
+    <string name="keywords_blur_switch" msgid="3482676740440346012">"efectos de desenfoque"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"tema oscuro"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"error"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Pantalla Ambiente, pantalla bloqueada"</string>
@@ -3811,7 +3815,7 @@
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloquear alteraciones visuales"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permitir señales visuales"</string>
-    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Filtros de notificación"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Filtros de notificaciones"</string>
     <string name="mode_device_effects_title" msgid="6019908499525166737">"Más parámetros de configuración"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Desactivado}=1{Desactivado/se puede activar automáticamente 1 modo}other{Desactivado/se pueden activar automáticamente # modos}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Configuración de visualización"</string>
@@ -3857,7 +3861,7 @@
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmas y otras interrupciones"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Duración para la Configuración rápida"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Sonidos del perfil de trabajo"</string>
-    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Usa los sonidos del perfil personal"</string>
+    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Usar los sonidos del perfil personal"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Usa los mismos sonidos que el perfil personal"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"Tono del teléfono de trabajo"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Sonido predeterminado para notificaciones de trabajo"</string>
@@ -3967,8 +3971,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Muestra el contenido de notificaciones de trabajo"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ocultar contenido de trabajo confidencial"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"¿Cómo deseas ver las notificaciones de perfil cuando esté bloqueado el dispositivo?"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"Mostrar en la pantalla de bloqueo"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Qué mostrar en la pantalla de bloqueo"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Mostrar notificaciones vistas"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Mostrar íconos de notificaciones vistas"</string>
@@ -3991,7 +3994,7 @@
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"No hay conversaciones prioritarias"</string>
     <string name="priority_conversation_count" msgid="7291234530844412077">"{count,plural, =1{# conversación prioritaria}other{# conversaciones prioritarias}}"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Conversaciones prioritarias"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Se muestran en la parte superior de la sección de conversaciones como burbujas flotantes."</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Se muestran en la parte superior de la sección de conversaciones y aparecen como burbujas flotantes."</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Se mostrarán en la parte superior de la sección de conversaciones"</string>
     <string name="other_conversations" msgid="551178916855139870">"Conversaciones no prioritarias"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversaciones que modificaste"</string>
@@ -4010,7 +4013,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Permitir interrupciones"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permite que la app emita sonidos, vibre y muestre notificaciones en pantalla"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioritaria"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Aparece en la parte superior de la sección de conversaciones, en forma de burbuja flotante, y muestra la foto de perfil en la pantalla de bloqueo."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Aparece en la parte superior de la sección de conversaciones, en forma de burbuja flotante y muestra la foto de perfil en la pantalla de bloqueo."</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> no es compatible con la mayoría de las funciones de conversaciones. No podrás establecer una conversación como prioritaria y las conversaciones no aparecerán como burbujas flotantes."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"En el panel desplegable, mostrar las notificaciones en una línea"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sin sonido ni vibración"</string>
@@ -4074,8 +4077,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organizador de notificaciones"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Agrupa y silencia las notificaciones de menor prioridad"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Administra apps para el organizador de notificaciones"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Expandir siempre los paquetes"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Aplicar a apps del perfil de trabajo"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicio de ayuda de RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ninguna app instalada solicitó que se la ejecutara como servicio de ayuda de RV."</string>
@@ -5202,7 +5204,7 @@
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Tipo de red preferido"</string>
     <string name="carrier_settings_version" msgid="3364919669057317776">"Versión de la configuración del operador"</string>
     <string name="call_category" msgid="641461844504128789">"Llamadas"</string>
-    <string name="video_calling_settings_title" msgid="5490466306783552190">"Videollamada con el proveedor"</string>
+    <string name="video_calling_settings_title" msgid="5490466306783552190">"Videollamadas mediante el operador"</string>
     <string name="cdma_system_select_title" msgid="8261408056382123386">"Sistema seleccionado"</string>
     <string name="cdma_system_select_summary" msgid="384128007068464145">"Cambiar el modo de roaming de CDMA"</string>
     <string name="cdma_system_select_dialogtitle" msgid="6143586810486936984">"Sistema seleccionado"</string>
@@ -5952,6 +5954,9 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Se produjo un error cuando se intentaba borrar el PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animación de <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"No se pueden activar los controles"</string>
+    <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Se produjo un error"</string>
+    <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Vuelve a intentarlo más tarde"</string>
+    <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Atrás"</string>
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"Verificación de identidad está disponible en más apps"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"Puedes proteger tu identidad en cualquier app que ofrezca el Desbloqueo facial o con huellas dactilares para identificarte"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Ver detalles"</string>

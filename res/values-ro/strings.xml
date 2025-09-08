@@ -211,7 +211,7 @@
     <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Toate regiunile"</string>
     <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Toate sistemele de numerotare"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Limba sistemului"</string>
-    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Prestabilit de sistem"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Prestabilită de sistem"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Selectarea limbii pentru această aplicație din Setări nu este disponibilă."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Limba poate fi alta decât limbile disponibile în aplicație. Este posibil ca unele aplicații să nu accepte această setare."</string>
     <string name="desc_app_locale_selection_supported" msgid="7363315876602221125">"Alege limba pentru fiecare aplicație."</string>
@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Mută în sus"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Mută în jos"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Elimină"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Mută la început"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferințe regionale"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Setează preferințele pentru unități și cifre"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Setează preferințele regionale pentru ca aplicațiile să-ți poată personaliza experiența."</string>
@@ -342,8 +343,8 @@
     <string name="keywords_time_feedback" msgid="929965356597294030">"feedback, eroare, oră, zonă, fus orar"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Blochează după dezactivarea ecranului"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după dezactivarea ecranului"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Imediat după dezactivarea ecranului, dacă dispozitivul nu este menținut în activitate de <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"La <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după dezactivarea ecranului, dacă dispozitivul nu este menținut în activitate de <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Imediat după dezactivarea ecranului, dacă dispozitivul nu este menținut deblocat de <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"La <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> după dezactivarea ecranului, dacă dispozitivul nu este menținut deblocat de <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Adaugă text pe ecranul de blocare"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Niciunul"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"De ex., dispozitivul Android al lui Andrei."</string>
@@ -687,7 +688,7 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Blochează automat spațiul privat"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Poți bloca automat spațiul privat dacă nu ai folosit dispozitivul o perioadă de timp"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"La fiecare blocare a dispozitivului"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"Cinci minute după dezactivarea ecranului"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"La 5 minute după dezactivarea ecranului"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Doar după ce dispozitivul repornește"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Ascunde spațiul privat"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Ascunde spațiul privat când este blocat"</string>
@@ -1019,6 +1020,16 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Folosești noile setări?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Dacă ecranul nu funcționează așa cum dorești, poți reveni la setările anterioare"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Folosește setările"</string>
+    <!-- no translation found for external_display_topology_display_block_content_description (4638018879987232608) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_up (5585023811277652685) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_down (497925070033309302) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_left (5207345941599286131) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_right (6258194449439072825) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"oglindă"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activează ecranul wireless"</string>
@@ -1500,12 +1511,9 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Modul Luminozitate redusă"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Ridică pentru a reactiva"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Restricționează la încărcarea wireless"</string>
-    <!-- no translation found for blur_switch (1391073945502754948) -->
-    <skip />
-    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
-    <skip />
-    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
-    <skip />
+    <string name="blur_switch" msgid="1391073945502754948">"Redu efectele de estompare"</string>
+    <string name="blur_switch_summary" msgid="5025895302219948597">"Fă fundalurile și panourile mai ușor de văzut"</string>
+    <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Dezactivat temporar de Economisirea bateriei"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Folosește modul Luminozitate redusă"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Alege ce să afișezi în modul Luminozitate redusă"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Ecran dezactivat"</string>
@@ -1580,16 +1588,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Setări de stocare"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"EID (slot pentru SIM <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <!-- no translation found for imei_multi_sim (6990044568468728075) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Alege rețeaua salvată pentru afișare"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Versiune PRL"</string>
-    <!-- no translation found for meid_multi_sim (3124054561186721453) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="3124054561186721453">"MEID <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Activată"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Dezactivată"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1683,8 +1689,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Comune"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Setări comune"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Modul hub"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Widgeturi pe ecranul de blocare (beta)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Când să afișezi automat"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Niciodată"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"În timpul încărcării"</string>
@@ -1965,7 +1970,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Setează modelul profilului ca vizibil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrare la atingere"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Blocare rapidă cu butonul de pornire"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Dacă dispozitivul nu este menținut în activitate de <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Dacă dispozitivul nu este menținut deblocat de <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Setează modelul pentru deblocare"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Schimbă modelul pentru deblocare"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Modul de desenare a unui model de deblocare"</string>
@@ -2413,7 +2418,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Contactează asistența Google pentru persoanele cu dizabilități"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Sondaj privind accesibilitatea"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Trimite feedback"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Care este gradul tău de mulțumire față de Tema întunecată?"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Participă la sondaj"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Trimite feedback"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Care este gradul tău de mulțumire față de mărire?"</string>
@@ -2592,8 +2598,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Extinsă"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Temă întunecată extinsă"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Aplică automat Tema întunecată mai multor aplicații pentru accesibilitate îmbunătățită"</string>
-    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
-    <skip />
+    <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"inversare forțată, inversarea culorilor, contrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Elimină animațiile"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Redu mișcarea de pe ecran"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Clipirea cursorului de text"</string>
@@ -3678,8 +3683,7 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"informații despre baterie, data fabricării, numărul de cicluri, prima folosire"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"nivelul corecției de securitate Android, versiunea benzii de bază, versiune nucleu"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"temă, luminozitate, întunecat, mod, sensibilitate la lumină, fotofobie, întunecă, modul întunecat, migrenă"</string>
-    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
-    <skip />
+    <string name="keywords_blur_switch" msgid="3482676740440346012">"efecte de estompare"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"temă întunecată"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"eroare"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Afișare ambient, Afișare ecran de blocare"</string>
@@ -3867,7 +3871,7 @@
     <string name="work_ringtone_title" msgid="4810802758746102589">"Ton de apel telefon serviciu"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Sunet prestabilit pentru notificarea de serviciu"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"Sunet prestabilit pentru alarma de serviciu"</string>
-    <string name="work_sound_same_as_personal" msgid="1836913235401642334">"Aceleași ca la profilul personal"</string>
+    <string name="work_sound_same_as_personal" msgid="1836913235401642334">"Același ca la profilul personal"</string>
     <string name="work_sync_dialog_title" msgid="7810248132303515469">"Folosești sunetele profilului personal?"</string>
     <string name="work_sync_dialog_yes" msgid="5785488304957707534">"Confirmă"</string>
     <string name="work_sync_dialog_message" msgid="5066178064994040223">"Profilul tău de serviciu va folosi aceleași sunete ca profilul personal"</string>
@@ -3972,8 +3976,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Afișează tot conținutul notificărilor de serviciu"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ascunde conținutul de lucru sensibil"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Cum vrei să fie afișate notificările din profil când dispozitivul este blocat?"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"Afișează pe ecranul de blocare"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Ce să afișezi pe ecranul de blocare"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Afișează notificările văzute"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Afișează pictogramele de notificare văzute"</string>
@@ -4079,8 +4082,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organizator de notificări"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Grupează notificările cu prioritate redusă și dezactivează sunetul lor"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Gestionează aplicațiile pentru organizatorul de notificări"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Extinde întotdeauna bundle-urile"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Aplică pentru aplicațiile din profilul de serviciu"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicii de ajutor pentru RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nicio aplicație instalată nu a solicitat să fie rulată ca un serviciu de ajutor pentru RV."</string>
@@ -4330,7 +4332,7 @@
     <string name="screen_pinning_description" msgid="5822120806426139396">"Atunci când o aplicație este fixată, aceasta poate deschide alte aplicații și pot fi accesate date cu caracter personal. \n\nPentru a folosi fixarea aplicației: 	\n{0,number,integer}. activează fixarea aplicației; 	\n{1,number,integer}. deschide Prezentare generală; 	\n{2,number,integer}. atinge pictograma aplicației din partea de sus a ecranului, apoi atinge Fixează."</string>
     <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"Atunci când o aplicație este fixată, aceasta poate deschide alte aplicații și pot fi accesate date cu caracter personal. \n\nDacă dorești să permiți în siguranță accesul cuiva la dispozitivul tău, folosește un utilizator invitat. \n\nPentru a folosi fixarea aplicației: 	\n{0,number,integer}. activează fixarea aplicației; 	\n{1,number,integer}. deschide Recente; 	\n{2,number,integer}. atinge pictograma aplicației din partea de sus a ecranului, apoi atinge Fixează."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Atunci când o aplicație este fixată: \n\n•		pot fi accesate date cu caracter personal \n		(cum ar fi agenda și conținutul e-mailurilor); \n•		aplicația fixată poate deschide alte aplicații. \n\nFolosește fixarea aplicației numai cu persoane în care ai încredere."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Solicită mai întâi modelul pentru deblocare"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Solicită modelul înainte de a anula fixarea"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Solicită codul PIN înainte de a anula fixarea"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Solicită parola înainte de a anula fixarea"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Blochează dispozitivul la anularea fixării"</string>
@@ -5381,8 +5383,8 @@
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Activează ferestrele cu formă liberă pe ecranul II"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Permite aplicații fără redimensionare în ferestre multiple"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permite aplicațiile fără redimensionare în ferestre multiple"</string>
-    <string name="hwui_force_dark_title" msgid="4256904905631994219">"Modifică funcția Force-Dark"</string>
-    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Modifică funcția Force-Dark să fie activată mereu"</string>
+    <string name="hwui_force_dark_title" msgid="4256904905631994219">"Modifică funcția Forțează tema întunecată"</string>
+    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Modifică funcția Forțează tema întunecată să fie activată mereu"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Confidențialitate"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Permisiuni, activitatea contului, date cu caracter personal"</string>
     <string name="privacy_controls_title" msgid="1383047169455206604">"Comenzi"</string>
@@ -5958,6 +5960,12 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"A apărut o eroare la încercarea de ștergere a codului PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animație pentru <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Nu se pot activa comenzile"</string>
+    <!-- no translation found for supervision_generic_error_page_title (1890873741445464953) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_message (1532001782155323205) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_button_label (8972577027819946993) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"Verificarea identității este disponibilă în mai multe aplicații"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"Poți să-ți protejezi identitatea în orice aplicație care oferă Deblocarea cu amprenta sau Deblocarea facială pentru a te identifica"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Vezi detaliile"</string>
@@ -5975,10 +5983,7 @@
     <string name="lock_screen_title" msgid="4701994278040604018">"Blocarea ecranului"</string>
     <string name="location_settings" msgid="6833222354060094170">"Acces la locație"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Vezi aplicațiile și serviciile care au acces la locație"</string>
-    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
-    <skip />
-    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
-    <skip />
-    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
-    <skip />
+    <string name="identity_check_notification_title" msgid="8004343932775654492">"Verificarea identității funcționează cu mai multe aplicații"</string>
+    <string name="identity_check_notification_summary" msgid="3762060079941053730">"Verificarea identității împiedică accesul nedorit la aplicații. Este disponibilă acum cu orice aplicație care folosește Deblocarea cu amprenta sau Deblocarea facială."</string>
+    <string name="identity_check_view_details" msgid="8752343542345818128">"Vezi detaliile"</string>
 </resources>

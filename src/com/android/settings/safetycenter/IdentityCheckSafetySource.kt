@@ -15,6 +15,7 @@
  */
 package com.android.settings.safetycenter
 
+import android.app.ActivityManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -26,6 +27,7 @@ import android.hardware.biometrics.Flags
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemProperties
 import android.provider.Settings
 import android.proximity.IProximityResultCallback
 import android.proximity.ProximityResultCode
@@ -101,8 +103,18 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
             context: Context,
             safetyEvent: SafetyEvent,
             biometricManager: BiometricManager?,
+            isTablet: Boolean = isTablet(),
+            isLowRamDevice: Boolean = isLowRam(context),
         ) {
             if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
+                return
+            }
+            if (isTablet) {
+                sendNullData(context, safetyEvent)
+                return
+            }
+            if (isLowRamDevice) {
+                sendNullData(context, safetyEvent)
                 return
             }
             if (biometricManager == null) {
@@ -208,6 +220,15 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
                 BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> false
                 else -> true
             }
+        }
+
+        private fun isLowRam(context: Context): Boolean {
+            val activityManager = context.getSystemService(ActivityManager::class.java)
+            return activityManager.isLowRamDevice
+        }
+
+        private fun isTablet(): Boolean {
+            return "tablet" in SystemProperties.get("ro.build.characteristics", "").split(',')
         }
 
         private fun getIfIdentityCheckPromoNotificationHasBeenClicked(context: Context): Boolean =

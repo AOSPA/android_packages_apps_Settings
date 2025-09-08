@@ -319,7 +319,8 @@
                 settings:controller="com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController"/>
         </PreferenceCategory>
 
-        <com.android.settingslib.widget.UntitledPreferenceCategory>
+        <com.android.settingslib.widget.UntitledPreferenceCategory
+            android:key="apn_and_protection_container">
           <!--We want separate APN setting from reset of settings because we want user to change it with caution-->
           <com.android.settingslib.RestrictedPreference
               android:key="telephony_apn_key"

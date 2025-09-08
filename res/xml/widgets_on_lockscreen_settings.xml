@@ -20,6 +20,11 @@
     android:key="widgets_on_lockscreen"
     android:title="@string/widgets_on_lockscreen_title">
 
+    <com.android.settings.widget.SettingsMainSwitchPreference
+        android:key="widgets_on_lockscreen_main_switch"
+        android:title="@string/widgets_on_lockscreen_title"
+        settings:controller="com.android.settings.display.WidgetsOnLockscreenMainPreferenceController"/>
+
     <Preference
         android:key="when_to_start_hubmode"
         android:title="@string/when_to_auto_show_hubmode_title"

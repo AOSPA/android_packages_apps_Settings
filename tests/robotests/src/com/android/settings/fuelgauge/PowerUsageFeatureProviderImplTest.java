@@ -101,8 +101,10 @@ public class PowerUsageFeatureProviderImplTest {
 
     @Test
     public void getBatteryUsageStatsMaxAgeMs_returnUnsetValue() {
-        assertThat(mPowerFeatureProvider.getBatteryUsageStatsMaxAgeMs()).isEqualTo(
-                DataProcessor.BATTERY_STATS_MAX_AGE_UNSET);
+        assertThat(mPowerFeatureProvider.getBatteryUsageStatsMaxAgeMs(/* isFromPeriodJob= */true))
+                .isEqualTo(DataProcessor.BATTERY_STATS_MAX_AGE_UNSET);
+        assertThat(mPowerFeatureProvider.getBatteryUsageStatsMaxAgeMs(/* isFromPeriodJob= */false))
+                .isEqualTo(DataProcessor.BATTERY_STATS_MAX_AGE_UNSET);
     }
 
     @Test

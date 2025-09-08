@@ -84,7 +84,7 @@ class ColorCorrectionScreen :
             R.string.daltonizer_state_off,
         )
 
-    override fun onStart(context: PreferenceLifecycleContext) {
+    override fun onCreate(context: PreferenceLifecycleContext) {
         if (isEntryPoint(context)) {
             val observer =
                 KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(bindingKey) }
@@ -94,7 +94,7 @@ class ColorCorrectionScreen :
         }
     }
 
-    override fun onStop(context: PreferenceLifecycleContext) {
+    override fun onDestroy(context: PreferenceLifecycleContext) {
         if (isEntryPoint(context)) {
             settingsKeyedObserver?.let {
                 val storage = SettingsSecureStore.get(context)

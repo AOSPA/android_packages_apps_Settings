@@ -1,2 +1,12 @@
 package: "com.android.settings.flags"
 container: "system_ext"
+
+flag {
+  name: "notification_use_dpc_policy"
+  namespace: "notifications"
+  description: "Enable or disable notification settings based on the active DPC permission policy"
+  bug: "376360807"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+}

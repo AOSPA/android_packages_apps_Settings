@@ -481,8 +481,12 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     private void updateScreen(final PrefRefresh screen) {
-        final var displaysToShow = mInjector.getDisplays().stream().filter(
+        var displaysToShow = mInjector.getDisplays().stream().filter(
                 DisplayDevice::isConnectedDisplay).toList();
+        if (mInjector.getFlags().displayTopologyPaneInDisplayList()) {
+            displaysToShow = displaysToShow.stream().filter(
+                    display -> display.isEnabled() == DisplayIsEnabled.YES).toList();
+        }
 
         if (displaysToShow.isEmpty()) {
             showTextWhenNoDisplaysToShow(screen, /* position= */ 0);
@@ -540,7 +544,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         addResolutionPreference(refresh, display, position);
         addRotationPreference(refresh, display, displayRotation, position);
         if (DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue()
-                && DesktopExperienceFlags.ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG.isTrue()) {
+                && DesktopExperienceFlags.ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG.isTrue()
+                && mInjector.isProjectedModeEnabled()) {
             addConnectionPreference(refresh, display, position);
         }
         if (mInjector.getFlags().resolutionAndEnableConnectedDisplaySetting()) {
@@ -674,39 +679,48 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private void addConnectionPreference(PrefRefresh refresh, DisplayDevice display, int position) {
         final int connectionType = mInjector.getDisplayConnectionPreference(display.getUniqueId());
         var pref = reuseConnectionPreference(refresh, position);
-        if (mConnectionEntries == null || mConnectionEntriesValues == null) {
-            mConnectionEntries = new String[]{
-                    requireContext().getString(
-                            R.string.external_display_connection_preference_show_dialog),
-                    requireContext().getString(
-                            R.string.external_display_connection_preference_desktop),
-                    requireContext().getString(
-                            R.string.external_display_connection_preference_mirroring),
-            };
-            mConnectionEntriesValues = new String[] {
-                    CONNECTION_PREF_NONE,
-                    CONNECTION_PREF_DESKTOP,
-                    CONNECTION_PREF_MIRROR,
-            };
+        if (mLockTaskMode == LOCK_TASK_MODE_LOCKED) {
+            // When kiosk mode is enabled, we hide the desktop option and force mirroring only,
+            // so we should also lock the preference to mirror only as well
+            pref.setValue(CONNECTION_PREF_MIRROR);
+            pref.setSummary(requireContext().getString(
+                    R.string.external_display_connection_preference_mirroring));
+            pref.setEnabled(false);
+        } else {
+            if (mConnectionEntries == null || mConnectionEntriesValues == null) {
+                mConnectionEntries = new String[]{
+                        requireContext().getString(
+                                R.string.external_display_connection_preference_show_dialog),
+                        requireContext().getString(
+                                R.string.external_display_connection_preference_desktop),
+                        requireContext().getString(
+                                R.string.external_display_connection_preference_mirroring),
+                };
+                mConnectionEntriesValues = new String[]{
+                        CONNECTION_PREF_NONE,
+                        CONNECTION_PREF_DESKTOP,
+                        CONNECTION_PREF_MIRROR,
+                };
+            }
+            pref.setEntries(mConnectionEntries);
+            pref.setEntryValues(mConnectionEntriesValues);
+            pref.setValueIndex(connectionType);
+            pref.setSummary(mConnectionEntries[connectionType]);
+            pref.setOnPreferenceChangeListener((p, newValue) -> {
+                writePreferenceClickMetric(p);
+                final int selectedConnectionPreference = switch ((String) newValue) {
+                    case CONNECTION_PREF_DESKTOP -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_DESKTOP;
+                    case CONNECTION_PREF_MIRROR -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR;
+                    default -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK;
+                };
+                mInjector.updateDisplayConnectionPreference(
+                        display.getUniqueId(), selectedConnectionPreference);
+                pref.setValue((String) newValue);
+                scheduleUpdate();
+                return true;
+            });
+            pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES);
         }
-        pref.setEntries(mConnectionEntries);
-        pref.setEntryValues(mConnectionEntriesValues);
-        pref.setValueIndex(connectionType);
-        pref.setSummary(mConnectionEntries[connectionType]);
-        pref.setOnPreferenceChangeListener((p, newValue) -> {
-            writePreferenceClickMetric(p);
-            final int selectedConnectionPreference = switch ((String) newValue) {
-                case CONNECTION_PREF_DESKTOP -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_DESKTOP;
-                case CONNECTION_PREF_MIRROR -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR;
-                default -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK;
-            };
-            mInjector.updateDisplayConnectionPreference(
-                    display.getUniqueId(), selectedConnectionPreference);
-            pref.setValue((String) newValue);
-            scheduleUpdate();
-            return true;
-        });
-        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES);
     }
 
     private void addResolutionPreference(PrefRefresh refresh,

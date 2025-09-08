@@ -89,8 +89,12 @@ public final class Enable2gToggleListControllerTest {
 
         mPreferenceCategory = spy(new PreferenceCategory(mContext));
         mPreferenceCategory.setKey(PREFERENCE_KEY);
+        RestrictedSwitchPreference preferenceCategory =
+                spy(new com.android.settingslib.RestrictedSwitchPreference(mContext));
+        preferenceCategory.setKey(ENABLE_2G + SUB_ID);
         mPreferenceScreen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         mPreferenceScreen.addPreference(mPreferenceCategory);
+        mPreferenceScreen.addPreference(preferenceCategory);
     }
 
     @Test

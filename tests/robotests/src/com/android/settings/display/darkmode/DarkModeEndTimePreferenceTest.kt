@@ -26,15 +26,19 @@ import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.testutils.AccessibilityTestUtils.assertDialogShown
+import com.android.settings.testutils.SettingsStoreRule
+import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import java.time.LocalTime
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.reset
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
@@ -44,6 +48,7 @@ import org.robolectric.shadows.ShadowLooper
 
 @RunWith(RobolectricTestRunner::class)
 class DarkModeEndTimePreferenceTest {
+    @get:Rule val settingsStoreRule = SettingsStoreRule()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val mockUiModeManager = mock<UiModeManager>()
@@ -52,6 +57,11 @@ class DarkModeEndTimePreferenceTest {
     @Before
     fun setUp() {
         mockUiModeManager.stub { on { customNightModeEnd } doReturn LocalTime.of(3, 40) }
+        SettingsSecureStore.get(context)
+            .setInt(
+                DarkModeCustomTimePreference.NIGHT_MODE_CUSTOM_TYPE_SETTING_KEY,
+                UiModeManager.MODE_NIGHT_CUSTOM_TYPE_SCHEDULE,
+            )
     }
 
     @Test
@@ -124,5 +134,36 @@ class DarkModeEndTimePreferenceTest {
         }
 
         assertThat(preference.isAvailable(context)).isFalse()
+    }
+
+    @Test
+    fun onStart_settingChanges_notifyPrefChange() {
+        val mockLifecycleContext = mock<PreferenceLifecycleContext>()
+
+        preference.onStart(mockLifecycleContext)
+        SettingsSecureStore.get(context)
+            .setInt(
+                DarkModeCustomTimePreference.NIGHT_MODE_CUSTOM_TYPE_SETTING_KEY,
+                UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME,
+            )
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
+
+        verify(mockLifecycleContext).notifyPreferenceChange(EndTimePreference.KEY)
+    }
+
+    @Test
+    fun onStop_settingChanges_doNotNotifyPrefChange() {
+        val mockLifecycleContext = mock<PreferenceLifecycleContext>()
+
+        preference.onStart(mockLifecycleContext)
+        preference.onStop(mockLifecycleContext)
+        SettingsSecureStore.get(context)
+            .setInt(
+                DarkModeCustomTimePreference.NIGHT_MODE_CUSTOM_TYPE_SETTING_KEY,
+                UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME,
+            )
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
+
+        verify(mockLifecycleContext, never()).notifyPreferenceChange(EndTimePreference.KEY)
     }
 }

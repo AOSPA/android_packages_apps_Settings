@@ -63,13 +63,13 @@ class ColorCorrectionScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    fun onStart_shownAsEntrypoint_settingChanges_notifyPrefChange() {
+    fun onCreate_shownAsEntrypoint_settingChanges_notifyPrefChange() {
         val mockLifecycleContext =
             mock<PreferenceLifecycleContext> {
                 on { preferenceScreenKey } doReturn "other_screen_key"
             }
 
-        preferenceScreenCreator.onStart(mockLifecycleContext)
+        preferenceScreenCreator.onCreate(mockLifecycleContext)
         SettingsSecureStore.get(appContext).setBoolean(ColorCorrectionScreen.SETTING_KEY, true)
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
@@ -78,13 +78,13 @@ class ColorCorrectionScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    fun onStart_shownAsContainer_settingChanges_doNotNotifyPrefChange() {
+    fun onCreate_shownAsContainer_settingChanges_doNotNotifyPrefChange() {
         val mockLifecycleContext =
             mock<PreferenceLifecycleContext> {
                 on { preferenceScreenKey } doReturn preferenceScreenCreator.key
             }
 
-        preferenceScreenCreator.onStart(mockLifecycleContext)
+        preferenceScreenCreator.onCreate(mockLifecycleContext)
         SettingsSecureStore.get(appContext).setBoolean(ColorCorrectionScreen.SETTING_KEY, true)
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
@@ -92,13 +92,13 @@ class ColorCorrectionScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    fun onStop_shownAsEntryPoint_settingChanges_doNotNotifyPrefChange() {
+    fun onDestroy_shownAsEntryPoint_settingChanges_doNotNotifyPrefChange() {
         val mockLifecycleContext =
             mock<PreferenceLifecycleContext> {
                 on { preferenceScreenKey } doReturn "other_screen_key"
             }
-        preferenceScreenCreator.onStart(mockLifecycleContext)
-        preferenceScreenCreator.onStop(mockLifecycleContext)
+        preferenceScreenCreator.onCreate(mockLifecycleContext)
+        preferenceScreenCreator.onDestroy(mockLifecycleContext)
 
         SettingsSecureStore.get(appContext).setBoolean(ColorCorrectionScreen.SETTING_KEY, true)
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
@@ -107,13 +107,13 @@ class ColorCorrectionScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    fun onStop_shownAsContainer_settingChanges_doNotNotifyPrefChange() {
+    fun onDestroy_shownAsContainer_settingChanges_doNotNotifyPrefChange() {
         val mockLifecycleContext =
             mock<PreferenceLifecycleContext> {
                 on { preferenceScreenKey } doReturn preferenceScreenCreator.key
             }
-        preferenceScreenCreator.onStart(mockLifecycleContext)
-        preferenceScreenCreator.onStop(mockLifecycleContext)
+        preferenceScreenCreator.onCreate(mockLifecycleContext)
+        preferenceScreenCreator.onDestroy(mockLifecycleContext)
 
         SettingsSecureStore.get(appContext).setBoolean(ColorCorrectionScreen.SETTING_KEY, true)
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()

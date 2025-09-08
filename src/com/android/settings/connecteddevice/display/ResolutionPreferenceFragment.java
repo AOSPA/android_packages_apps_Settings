@@ -387,6 +387,11 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
 
     private void onDisplayModeClicked(
             @NonNull SelectorWithWidgetPreference preference, @NonNull DisplayDevice display) {
+        Mode curMode = display.getMode();
+        var currentResolution = modeToPrefKey(curMode);
+        if (currentResolution.equals(preference.getKey())) {
+            return;
+        }
         Mode mode = mResolutionPreferences.get(preference.getKey());
         if (mode == null || mInjector == null) {
             return;

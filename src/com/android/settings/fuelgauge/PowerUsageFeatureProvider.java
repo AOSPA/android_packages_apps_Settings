@@ -68,7 +68,7 @@ public interface PowerUsageFeatureProvider {
     int getDataRetentionDays();
 
     /** Returns the max age of battery usage stats set for getBatteryUsageStats() method */
-    long getBatteryUsageStatsMaxAgeMs();
+    long getBatteryUsageStatsMaxAgeMs(boolean isFromPeriodJob);
 
     /** Check whether location setting is enabled */
     boolean isLocationSettingEnabled(String[] packages);

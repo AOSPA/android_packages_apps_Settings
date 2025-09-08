@@ -773,6 +773,24 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
+    @EnableFlags({
+            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT,
+            FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG,
+    })
+    public void testAddConnectionPreference_notProjectedMode_notAdding() {
+        doReturn(false).when(mMockedInjector).isProjectedModeEnabled();
+        initFragment();
+        mHandler.flush();
+
+        var category = getExternalDisplayCategory(0);
+        var pref = category.findPreference(
+                PrefBasics.EXTERNAL_DISPLAY_CONNECTION.keyForNth(0));
+
+        assertThat(pref).isNull();
+    }
+
+    @Test
+    @UiThreadTest
     public void testLockTaskModeLocked_disableMirroringMode() {
         mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
         ExternalDisplayPreferenceFragment fragment = initFragment();
@@ -797,6 +815,48 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         fragment.mLockTaskModeChangedListener.onLockTaskModeChanged(LOCK_TASK_MODE_NONE);
         mHandler.flush();
         var pref = mPreferenceScreen.findPreference(PrefBasics.MIRROR.key);
+
+        assertThat(pref.isEnabled()).isEqualTo(true);
+    }
+
+    @Test
+    @UiThreadTest
+    @EnableFlags({
+            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT,
+            FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG,
+    })
+    public void testLockTaskModeLocked_disableConnectionPreference() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
+        ExternalDisplayPreferenceFragment fragment = initFragment();
+        mHandler.flush();
+
+        fragment.mLockTaskModeChangedListener.onLockTaskModeChanged(LOCK_TASK_MODE_LOCKED);
+        mHandler.flush();
+        var category = getExternalDisplayCategory(0);
+        ListPreference pref = category.findPreference(
+                PrefBasics.EXTERNAL_DISPLAY_CONNECTION.keyForNth(0));
+
+        assertThat(pref.isEnabled()).isEqualTo(false);
+    }
+
+    @Test
+    @UiThreadTest
+    @EnableFlags({
+            FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT,
+            FLAG_ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG,
+    })
+    public void testLockTaskModeNone_enableConnectionPreference() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
+        ExternalDisplayPreferenceFragment fragment = initFragment();
+        mHandler.flush();
+
+        fragment.mLockTaskModeChangedListener.onLockTaskModeChanged(LOCK_TASK_MODE_LOCKED);
+        mHandler.flush();
+        fragment.mLockTaskModeChangedListener.onLockTaskModeChanged(LOCK_TASK_MODE_NONE);
+        mHandler.flush();
+        var category = getExternalDisplayCategory(0);
+        ListPreference pref = category.findPreference(
+                PrefBasics.EXTERNAL_DISPLAY_CONNECTION.keyForNth(0));
 
         assertThat(pref.isEnabled()).isEqualTo(true);
     }

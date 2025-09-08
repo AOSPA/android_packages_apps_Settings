@@ -35,9 +35,13 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.PrimarySwitchPreferenceBinding
+import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceCategory
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -52,9 +56,11 @@ abstract class BaseDarkModeScreen(context: Context) :
     PrimarySwitchPreferenceBinding,
     PreferenceActionMetricsProvider,
     BooleanValuePreference,
-    PreferenceSummaryProvider {
+    PreferenceSummaryProvider,
+    PreferenceLifecycleProvider {
 
     private val darkModeStorage = DarkModeStorage(context)
+    private var powerSaveModeObserver: KeyedObserver<String?>? = null
 
     override val title: Int
         get() = R.string.dark_ui_mode
@@ -127,6 +133,23 @@ abstract class BaseDarkModeScreen(context: Context) :
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         if (preference is DarkModePreference) preference.setCatalystEnabled(true)
+    }
+
+    override fun onStart(context: PreferenceLifecycleContext) {
+        if (isContainer(context)) {
+            val observer = KeyedObserver<String?> { _, _ -> context.notifyPreferenceChange(key) }
+            powerSaveModeObserver = observer
+            PowerSaveModeObservable.get(context).addObserver(observer, HandlerExecutor.main)
+        }
+    }
+
+    override fun onStop(context: PreferenceLifecycleContext) {
+        if (isContainer(context)) {
+            powerSaveModeObserver?.let {
+                PowerSaveModeObservable.get(context).removeObserver(powerSaveModeObserver!!)
+                powerSaveModeObserver = null
+            }
+        }
     }
 
     override fun isEnabled(context: Context) = !context.isPowerSaveMode()

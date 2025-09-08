@@ -137,6 +137,30 @@ class ImeiPreferenceTest {
         assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
     }
 
+    @Test
+    fun getSummary_index1_bothSlotsAreSameImei_returnImei1() {
+        mockTelephonyManager.stub {
+            on { getImei(0) } doReturn IMEI_1
+            on { getImei(1) } doReturn IMEI_1
+        }
+
+        preference = ImeiPreference(context, 0, 2)
+
+        assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
+    }
+
+    @Test
+    fun getSummary_index2_bothSlotsAreSameImei_returnImei1() {
+        mockTelephonyManager.stub {
+            on { getImei(0) } doReturn IMEI_1
+            on { getImei(1) } doReturn IMEI_1
+        }
+
+        preference = ImeiPreference(context, 1, 2)
+
+        assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
+    }
+
     companion object {
         const val IMEI_1 = "111111111111115"
         const val IMEI_2 = "222222222222225"

@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Преместване нагоре"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Преместване надолу"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Премахване"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Преместване в горната част"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регионални предпочитания"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Задаване на предпочитания за мерните единици и цифрите"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Разрешете на приложенията да осъществяват достъп до регионалните ви предпочитания, за да могат да персонализират практическата ви работа."</string>
@@ -687,7 +688,7 @@
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Авт. заключване на частното пространство"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Частното ви пространство може да се заключва автоматично, ако не сте използвали устройството си за определен период от време"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"При всяко заключване на устройството"</string>
-    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 мин. след авт. изключване на екрана"</string>
+    <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 мин след авт. изключване на екрана"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Само след рестартиране на устройството"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Скриване на частното пространство"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Скриване на частното пространство, когато е заключено"</string>
@@ -1019,6 +1020,16 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Да се използват ли новите настройки?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Ако дисплеят ви не работи така, както искате, можете да се върнете към предишните си настройки"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Използване на настройките"</string>
+    <!-- no translation found for external_display_topology_display_block_content_description (4638018879987232608) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_up (5585023811277652685) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_down (497925070033309302) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_left (5207345941599286131) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_right (6258194449439072825) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"дублиране"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Активир. на безжичния дисплей"</string>
@@ -1678,8 +1689,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Общи"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Общи настройки"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Режим „Контролен център“"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Приспособления на заключения екран (бета-версия)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Кога да се показва автоматично"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Никога"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"При зареждане"</string>
@@ -2408,7 +2418,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Екип за хора с уврежд.: Свързв."</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Анкета за достъпност"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Споделяне на отзиви"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Доколко сте доволни от тъмната тема?"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Участие в анкетата"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Споделяне на отзиви"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Доколко сте доволни от функцията за увеличение?"</string>
@@ -3965,8 +3976,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Показване на цялото съдържание на служ. известия"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Скриване на поверителното служебно съдържание"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Как искате да се показват известията от потребителския профил, когато устройството ви е заключено?"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"Показване на заключения екран"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Какво да се показва на заключения екран"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Показване на прегледаните известия"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Показване на иконите за прегледаните известия"</string>
@@ -4072,8 +4082,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Инструмент за организиране на известията"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Групиране и заглушаване на известията с по-нисък приоритет"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Управление на приложенията за инструмента за организиране на известията"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Групите да се разгъват винаги"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Прилагане за приложенията в служебния потребителски профил"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Помощни услуги за VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Никое инсталирано приложение не е заявило да се изпълнява като помощна услуга за VR."</string>
@@ -5952,6 +5961,12 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"При опита за изтриване на ПИН кода възникна грешка."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Анимация за <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Контролите не могат да бъдат включени"</string>
+    <!-- no translation found for supervision_generic_error_page_title (1890873741445464953) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_message (1532001782155323205) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_button_label (8972577027819946993) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"Проверката на самоличността е налице в още приложения"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"Можете да подобрите защитата на самоличността си във всяко приложение, което може да ви идентифицира чрез „Отключване с отпечатък“ или „Отключване с лице“"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Преглед на подробностите"</string>

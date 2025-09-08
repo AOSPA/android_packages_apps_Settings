@@ -60,7 +60,8 @@ public final class BatteryUsageDataLoader {
     static void loadBatteryStatsData(final Context context, final boolean isFullChargeStart) {
         BatteryUsageLogUtils.writeLog(context, Action.FETCH_USAGE_DATA, "");
         final long currentTime = System.currentTimeMillis();
-        try (BatteryUsageStats batteryUsageStats = DataProcessor.getBatteryUsageStats(context)) {
+        try (BatteryUsageStats batteryUsageStats = DataProcessor.getBatteryUsageStats(
+                context, /* isFromPeriodJob= */ true)) {
             final List<BatteryEntry> batteryEntryList =
                     sFakeBatteryEntryListSupplier != null
                             ? sFakeBatteryEntryListSupplier.get()

@@ -190,7 +190,7 @@
     <string name="next_label" msgid="1248293387735652187">"הבא"</string>
     <string name="region_picker_preference_title" msgid="9195149951917299277">"אזור"</string>
     <string name="region_picker_title" msgid="6743800249134439329">"בחירת אזור"</string>
-    <string name="region_picker_sub_title" msgid="7092062110753164836">"לפי האזור שייבחר תוגדר התצוגה של השעה, התאריכים, הטמפרטורה ופרטים נוספים במכשיר."</string>
+    <string name="region_picker_sub_title" msgid="7092062110753164836">"האזור שייבחר יגדיר את התצוגה של השעה, התאריכים, הטמפרטורה ופרטים נוספים במכשיר."</string>
     <string name="suggested_region_title" msgid="2554129334404390153">"הצעות"</string>
     <string name="all_supported_region_title" msgid="4817156933097703066">"כל האזורים"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"שפות"</string>
@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"הזזה למעלה"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"הזזה למטה"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"הסרה"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"העברה לראש הרשימה"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"העדפות פורמט ומידות"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"הגדרת העדפות של יחידות ומספרים"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"הרשאת גישה לאפליקציות להעדפות פורמט ומידות כדי שיתאימו אישית את חוויית המשתמש."</string>
@@ -349,7 +350,7 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"‏לדוגמה, ה-Android של יוסי."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"מיקום"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"שימוש במיקום"</string>
-    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"כבוי"</string>
+    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"כבויה"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ההגדרה פועלת / לאפליקציה אחת (#) יש גישה למיקום}one{ההגדרה פועלת / ל-# אפליקציות יש גישה למיקום}two{ההגדרה פועלת / ל-# אפליקציות יש גישה למיקום}other{ההגדרה פועלת / ל-# אפליקציות יש גישה למיקום}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"בטעינה…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"אפליקציות עם ההרשאה \"מכשירים בקרבת מקום\" יכולות להעריך את המיקום היחסי של המכשירים המחוברים."</string>
@@ -660,7 +661,7 @@
     <string name="private_space_description" msgid="4059594203775816136">"כדאי לשמור אפליקציות פרטיות במרחב נפרד שאפשר להסתיר או לנעול"</string>
     <string name="private_space_lock_title" msgid="7230836881433350526">"נעילה של המרחב הפרטי"</string>
     <string name="private_space_one_lock_summary" msgid="2106513606571219068">"אפשר לפתוח את המרחב הפרטי באותה דרך שפותחים את המכשיר או לבחור בשיטת נעילה אחרת"</string>
-    <string name="private_space_screen_lock_title" msgid="8679383894967823163">"שימוש בשיטה לביטול נעילת המסך"</string>
+    <string name="private_space_screen_lock_title" msgid="8679383894967823163">"שימוש בשיטה לפתיחת נעילת המסך"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"פתיחה בזיהוי פנים ובטביעת אצבע"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"פתיחה בטביעת אצבע"</string>
     <string name="private_space_face_title" msgid="3290402865367663079">"פתיחה בזיהוי פנים"</string>
@@ -683,7 +684,7 @@
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"דרכים לפתיחת הנעילה"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"זהה לנעילת המסך במכשיר"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"רוצה לבחור שיטת נעילה חדשה למרחב הפרטי?"</string>
-    <string name="private_space_new_lock_message" msgid="3117703578905489206">"יהיה עליך להזין את קוד האימות, קו ביטול הנעילה או הסיסמה של המכשיר שלך במסך הבא"</string>
+    <string name="private_space_new_lock_message" msgid="3117703578905489206">"במסך הבא יהיה עליך להזין את קוד האימות, קו פתיחת הנעילה או הסיסמה של המכשיר שלך"</string>
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"נעילת המרחב הפרטי באופן אוטומטי"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"אפשר לנעול את המרחב הפרטי באופן אוטומטי אם לא משתמשים במכשיר במשך פרק זמן מסוים"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"בכל פעם שהמכשיר ננעל"</string>
@@ -695,7 +696,7 @@
     <string name="private_space_access_header" msgid="1077082416567150819">"גישה למרחב הפרטי כשהוא מוסתר"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"בסרגל החיפוש, מזינים \"המרחב הפרטי\""</string>
     <string name="private_space_tap_tile_description" msgid="6173556870938267361">"לוחצים על "<b>"המרחב הפרטי"</b></string>
-    <string name="private_space_unlock_description" msgid="5527228922778630361">"ביטול הנעילה של המרחב הפרטי"</string>
+    <string name="private_space_unlock_description" msgid="5527228922778630361">"פותחים את הנעילה של המרחב הפרטי"</string>
     <string name="private_space_hide_off_summary" msgid="8565973976602078315">"מצב מושבת"</string>
     <string name="private_space_hide_on_summary" msgid="3450844101901438867">"מצב פעיל"</string>
     <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"המרחב הפרטי יוסתר בפעם הבאה שהוא יינעל"</string>
@@ -736,8 +737,8 @@
     <string name="private_space_error_description" msgid="6591005734266923120">"המרחב הפרטי לא זמין.\nלהצגת סיבות אפשריות"</string>
     <string name="private_space_error_causes_text" msgid="1649162505129365620">"הצגת הגורמים האפשריים"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"רוצה לבחור שיטת נעילה חדשה למרחב הפרטי?"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"אפשר להגדיר שיטת נעילה חדשה למרחב הפרטי בלבד, או להשתמש באותה שיטה שמשמשת לביטול נעילת המכשיר"</string>
-    <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"שימוש בביטול נעילת המסך"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"אפשר להגדיר שיטת נעילה חדשה למרחב הפרטי בלבד, או להשתמש באותה שיטה שמשמשת  לפתיחה של נעילת המכשיר"</string>
+    <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"שימוש בנעילת המסך"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"בחירת נעילה חדשה"</string>
     <string name="private_space_wait_screen_title" msgid="1535431437075585381">"רק רגע…"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"הכול מוכן!"</string>
@@ -1019,6 +1020,16 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"להמשיך עם ההגדרות החדשות?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"אם תצוגת המסך לא פועלת כמו שציפית, אפשר לחזור להגדרות הקודמות"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"שימוש בהגדרות"</string>
+    <!-- no translation found for external_display_topology_display_block_content_description (4638018879987232608) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_up (5585023811277652685) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_down (497925070033309302) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_left (5207345941599286131) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_right (6258194449439072825) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"‏העברה (csat)"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"‏הפעלת תצוגת WiFi"</string>
@@ -1527,7 +1538,7 @@
     <string name="force_bold_text" msgid="4620929631102086716">"טקסט מודגש"</string>
     <string name="title_font_size" msgid="570613010306330622">"גודל הגופן"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"הגדלה או הקטנה של הטקסט"</string>
-    <string name="category_title_display_text_size" msgid="4234285020731751694">"אפשרויות הגודל"</string>
+    <string name="category_title_display_text_size" msgid="4234285020731751694">"גדלים"</string>
     <string name="category_title_text_style" msgid="5905015084935695611">"אפשרויות הסגנון"</string>
     <string name="sim_lock_settings" msgid="7331982427303002613">"‏הגדרות נעילת כרטיס ה-SIM"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"‏נעילת כרטיס SIM"</string>
@@ -1577,16 +1588,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"הגדרות אחסון"</string>
     <string name="status_eid" msgid="3588471107671992684">"EID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"‏‫EID (חריץ SIM ‏<xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <!-- no translation found for imei_multi_sim (6990044568468728075) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="6990044568468728075">"‫IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"כדי שתופיע כתובת, צריך לבחור רשת שמורה"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"‏גרסת PRL"</string>
-    <!-- no translation found for meid_multi_sim (3124054561186721453) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="3124054561186721453">"‫MEID <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"פועל"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"כבוי"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1680,8 +1689,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"שיתופי"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"הגדרות שיתופיות"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"‏מצב Hub"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"ווידג\'טים במסך הנעילה (בטא)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"מתי להציג באופן אוטומטי"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"אף פעם"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"בזמן טעינה"</string>
@@ -1884,9 +1892,9 @@
     <string name="lockpassword_confirm_your_password_header" msgid="4988519671035171367">"צריך להזין את סיסמת המכשיר"</string>
     <string name="lockpassword_reenter_your_password_header" msgid="7257189484651655897">"צריך להזין את הסיסמה שוב"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"צריך להזין מחדש את הסיסמה לפרופיל העבודה"</string>
-    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"צריל להזין את הסיסמה של פרופיל העבודה"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="2473024535487015289">"צריך להזין את קו ביטול הנעילה של המכשיר"</string>
-    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"הזנת קו פתיחת הנעילה לעבודה"</string>
+    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"צריך להזין את הסיסמה של פרופיל העבודה"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="2473024535487015289">"צריך להזין את קו פתיחת הנעילה של המכשיר"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"צריך להזין את קו פתיחת הנעילה לעבודה"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="541025103892074808">"צריך להזין את קוד האימות של המכשיר"</string>
     <string name="lockpassword_reenter_your_pin_header" msgid="373337443492549650">"צריך להזין שוב את קוד האימות"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"צריך להזין מחדש את קוד האימות לעבודה"</string>
@@ -2219,7 +2227,7 @@
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"מהירות המצביע, תנועות"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"נוגעים נגיעה קלה"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"לחיצה וגרירה כדי להזיז פריטים"</string>
-    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"כדי להזיז פריטים, אפשר יהיה ללחוץ לחיצה כפולה ולגרור את האצבע על לוח המגע"</string>
+    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"הזזת פריטים על ידי לחיצה כפולה וגרירה של האצבע על לוח המגע"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"תנועות בלוח המגע"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"התאמה אישית של תנועות ניווט נפרדות בלוח המגע"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"גלילה הפוכה"</string>
@@ -2303,7 +2311,7 @@
     <string name="keyboard_repeat_keys_increase_delay_desc" msgid="9131810864682287872">"הארכת משך ההשהיה"</string>
     <string name="keyboard_repeat_keys_decrease_delay_desc" msgid="6762794746507398346">"הפחתת משך ההשהיה"</string>
     <string name="keyboard_repeat_keys_delay_title" msgid="5954595732341624638">"קצב החזרה"</string>
-    <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"לוחצים לחיצה ארוכה על מקש כדי לחזור על התו שלו עד שמפסיקים ללחוץ על המקש"</string>
+    <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"לחץ לחיצה ארוכה על מקש כדי לחזור על התו שלו. כדי לסיים, פשוט הפסק ללחוץ על המקש"</string>
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"הגברת קצב החזרה"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"הורדת קצב החזרה"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"פריסה של <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
@@ -2339,7 +2347,7 @@
     <string name="user_dict_settings_add_word_option_name" msgid="2686051785623698231">"מילה:"</string>
     <string name="user_dict_settings_add_shortcut_option_name" msgid="5722204336242646866">"קיצור דרך:"</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="2117468247460253346">"שפה:"</string>
-    <string name="user_dict_settings_add_word_hint" msgid="4560494723256242785">"יש להקליד מילה"</string>
+    <string name="user_dict_settings_add_word_hint" msgid="4560494723256242785">"צריך להקליד מילה"</string>
     <string name="user_dict_settings_add_shortcut_hint" msgid="6209624157217434640">"קיצור דרך אופציונלי"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="316493656442362284">"עריכת מילה"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="4909198741914531509">"עריכה"</string>
@@ -2410,7 +2418,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"‏פנייה לתמיכה של Google באנשים עם מוגבלויות"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"סקר בנושא נגישות"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"שיתוף משוב"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"מה מידת שביעות הרצון שלך מהעיצוב הכהה?"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"למילוי הסקר"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"שיתוף משוב"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"מה מידת שביעות הרצון שלך מההגדלה?"</string>
@@ -2496,9 +2505,9 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"לחיצה על כפתור כדי לשנות את מרחק התצוגה"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"רוצה לראות טוב יותר את התוכן? התכונה הזו מגדילה את התצוגה"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"‏&lt;b&gt;כדי להגדיל את התצוגה:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. משתמשים בקיצור הדרך כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. לוחצים על המסך&lt;br/&gt; {2,number,integer}. גוררים 2 אצבעות על המסך כדי לזוז בו&lt;br/&gt; {3,number,integer}. פותחים או סוגרים 2 אצבעות על המסך כדי לשנות את מרחק התצוגה&lt;br/&gt; {4,number,integer}. משתמשים בקיצור הדרך כדי להפסיק את ההגדלה&lt;br/&gt;&lt;br/&gt; &lt;b&gt;כדי להגדיל את התצוגה באופן זמני:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. מוודאים שסוג ההגדלה הוא \"מסך מלא\"&lt;br/&gt; {1,number,integer}. משתמשים בקיצור הדרך כדי להתחיל בהגדלה&lt;br/&gt; {2,number,integer}. לוחצים לחיצה ארוכה במקום כלשהו במסך&lt;br/&gt; {3,number,integer}. גוררים את האצבע על המסך כדי לזוז בו&lt;br/&gt; {4,number,integer}. כדי להפסיק את ההגדלה, מרימים את האצבע"</string>
-    <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"‏‫&lt;b&gt;כדי להגדיל את התצוגה:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. אפשר להשתמש בקיצור דרך או ללחוץ על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + מקשי החצים כדי לנוע במסך&lt;br/&gt; {2,number,integer}. כדי להתאים את מרחק התצוגה, לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ואז על + או על -‏&lt;br/&gt; {3,number,integer}. כדי להפסיק את ההגדלה, אפשר להשתמש בקיצור דרך או ב-&lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M"</string>
-    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"‏‫&lt;b&gt;כדי להגדיל את התצוגה:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. משתמשים בקיצור דרך כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + מקשי החצים כדי לנוע במסך&lt;br/&gt; {2,number,integer}. כדי להתאים את מרחק התצוגה, לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ואז על + או על -‏&lt;br/&gt; {3,number,integer}. משתמשים בקיצור דרך כדי להפסיק את ההגדלה"</string>
-    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"‏‫&lt;b&gt;מקלדת&lt;/b&gt;&lt;br/&gt; {0,number,integer}. אפשר להשתמש בקיצור דרך או ללחוץ על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + מקשי החצים כדי לנוע במסך&lt;br/&gt; {2,number,integer}. כדי להתאים את מרחק התצוגה, לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ואז על + או על -‏&lt;br/&gt; {3,number,integer}. אפשר להשתמש בקיצור דרך או ב-&lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M כדי להפסיק את ההגדלה&lt;br/&gt;&lt;br/&gt; &lt;b&gt;מסך מגע&lt;/b&gt;&lt;br/&gt; כדי להגדיל את התצוגה:&lt;br/&gt; {0,number,integer}. משתמשים בקיצור דרך כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. לוחצים על המסך&lt;br/&gt; {2,number,integer}. גוררים 2 אצבעות על המסך כדי לזוז בו&lt;br/&gt; {3,number,integer}. עושים תנועת צביטה עם 2 אצבעות כדי לשנות את מרחק התצוגה&lt;br/&gt; {4,number,integer}. משתמשים בקיצור דרך כדי להפסיק את ההגדלה&lt;br/&gt;&lt;br/&gt; כדי להתקרב באופן זמני:&lt;br/&gt; {0,number,integer}. מוודאים שסוג ההגדלה הוא \"מסך מלא\"&lt;br/&gt; {1,number,integer}. משתמשים בקיצור דרך כדי להתחיל בהגדלה&lt;br/&gt; {2,number,integer}. לוחצים לחיצה ארוכה במקום כלשהו במסך&lt;br/&gt; {3,number,integer}. גוררים אצבע על המסך כדי לזוז בו&lt;br/&gt; {4,number,integer}. מרימים את האצבע כדי להפסיק את ההגדלה"</string>
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"‏‫&lt;b&gt;כדי להגדיל את התצוגה:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. אפשר ללחוץ על מקש קיצור או על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + מקשי החצים כדי לנוע במסך&lt;br/&gt; {2,number,integer}. כדי לכוונן את מרחק התצוגה, לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ואז על + או על -‏&lt;br/&gt; {3,number,integer}. כדי להפסיק את ההגדלה, אפשר ללחוץ על מקש קיצור או על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M"</string>
+    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"‏‫&lt;b&gt;כדי להגדיל את התצוגה:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. לוחצים על מקש קיצור כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + מקשי החצים כדי לנוע במסך&lt;br/&gt; {2,number,integer}. כדי לכוונן את מרחק התצוגה, לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ואז על + או על -‏&lt;br/&gt; {3,number,integer}. לוחצים על מקש קיצור כדי להפסיק את ההגדלה"</string>
+    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"‏‫&lt;b&gt;מקלדת&lt;/b&gt;&lt;br/&gt; {0,number,integer}. אפשר ללחוץ על מקש קיצור או על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + מקשי החצים כדי לנוע במסך&lt;br/&gt; {2,number,integer}. כדי לכוונן את מרחק התצוגה, לוחצים על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ואז על + או על -‏&lt;br/&gt; {3,number,integer}. אפשר ללחוץ על מקש קיצור או על &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M כדי להפסיק את ההגדלה&lt;br/&gt;&lt;br/&gt; &lt;b&gt;מסך מגע&lt;/b&gt;&lt;br/&gt; כדי להגדיל את התצוגה:&lt;br/&gt; {0,number,integer}. לוחצים על מקש קיצור כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. לוחצים על המסך&lt;br/&gt; {2,number,integer}. גוררים 2 אצבעות על המסך כדי לזוז בו&lt;br/&gt; {3,number,integer}. עושים תנועת צביטה עם 2 אצבעות כדי לשנות את מרחק התצוגה&lt;br/&gt; {4,number,integer}. לוחצים על מקש קיצור כדי להפסיק את ההגדלה&lt;br/&gt;&lt;br/&gt; כדי להגדיל את התצוגה באופן זמני:&lt;br/&gt; {0,number,integer}. מוודאים שסוג ההגדלה הוא \"מסך מלא\"&lt;br/&gt; {1,number,integer}. לוחצים על מקש קיצור כדי להתחיל בהגדלה&lt;br/&gt; {2,number,integer}. לוחצים לחיצה ארוכה במקום כלשהו במסך&lt;br/&gt; {3,number,integer}. גוררים אצבע על המסך כדי לזוז בו&lt;br/&gt; {4,number,integer}. מרימים את האצבע כדי להפסיק את ההגדלה"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"‏&lt;b&gt;כדי להגדיל את התצוגה:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. משתמשים במקש קיצור כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. לוחצים על המסך&lt;br/&gt; {2,number,integer}. גוררים 2 אצבעות על המסך כדי לזוז בו&lt;br/&gt; {3,number,integer}. עושים תנועת צביטה עם 2 אצבעות כדי לשנות את מרחק התצוגה&lt;br/&gt; {4,number,integer}. אפשר להשתמש במקש קיצור כדי לעצור את ההגדלה&lt;br/&gt;&lt;br/&gt; ניתן גם להגדיל את התצוגה באופן זמני ועוד."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"‏&lt;b&gt;כדי להגדיל את התצוגה:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. משתמשים במקש קיצור כדי להתחיל בהגדלה&lt;br/&gt; {1,number,integer}. לוחצים על המסך&lt;br/&gt; {2,number,integer}. גוררים אצבע אחת או שתיים על המסך כדי לזוז בו&lt;br/&gt; {3,number,integer}. עושים תנועת צביטה עם 2 אצבעות כדי לשנות את מרחק התצוגה&lt;br/&gt; {4,number,integer}. אפשר להשתמש במקש קיצור כדי לעצור את ההגדלה&lt;br/&gt;&lt;br/&gt; ניתן גם להגדיל את התצוגה באופן זמני ועוד."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"כשההגדלה מופעלת, ניתן להתקרב למסך.\n\n"<b>"כדי להתקרב,"</b>", מתחילים בהגדלה ולאחר מכן לוחצים במקום כלשהו במסך.\n"<ul><li>"גוררים שתי אצבעות או יותר כדי לגלול"</li>\n<li>"עושים תנועת צביטה עם שתי אצבעות או יותר כדי לשנות את מרחק התצוגה"</li></ul>\n\n<b>"כדי להתקרב באופן זמני"</b>", מתחילים בהגדלה ולאחר מכן, לוחצים לחיצה ארוכה במקום כלשהו במסך.\n"<ul><li>"גוררים כדי לנוע במסך"</li>\n<li>"מרימים את האצבע כדי להתרחק"</li></ul>\n\n"לא ניתן להתקרב באמצעות המקלדת או סרגל הניווט."</string>
@@ -2626,7 +2635,7 @@
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"אפשר להגדיר קליק אוטומטי בעכבר מחובר כשהסמן מפסיק לזוז למשך זמן מסוים"</string>
     <string name="accessibility_autoclick_description" msgid="6695732131412361101">"הקליק האוטומטי עוזר אם קשה לך ללחוץ על העכבר"</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"הקליק האוטומטי מושבת"</string>
-    <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"קצר"</string>
+    <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"לחיצה קצרה יחסית"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0.2 שניות"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"בינוני"</string>
     <string name="accessibility_autoclick_medium_summary" msgid="1343390686514222871">"0.6 שניות"</string>
@@ -3453,7 +3462,7 @@
     <string name="user_grant_admin" msgid="5942118263054572074">"הגדרת המשתמש הזה כאדמין"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"מחיקת המשתמש"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"‏האם להפעיל שיחות טלפון ו-SMS?"</string>
-    <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"‏יבוצע שיתוף של היסטוריית השיחות וה-SMS עם המשתמש הזה."</string>
+    <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"‏היסטוריית השיחות וה-SMS תשותף עם המשתמש הזה."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"להסיר את הרשאות האדמין?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"אם מסירים את הרשאות האדמין עבור המשתמש הזה, אחד מהאדמינים יוכל להחזיר אותן מאוחר יותר."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"בחרת להסיר את הרשאות האדמין שלך. להמשיך?"</string>
@@ -3858,14 +3867,14 @@
     <string name="zen_category_duration" msgid="7515850842082631460">"כמה זמן פועלות ההגדרות המהירות"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"צלילי פרופיל עבודה"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"שימוש בצלילי הפרופיל האישי"</string>
-    <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"שימוש באותם הצלילים מהפרופיל האישי"</string>
+    <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"אותם צלילים כמו בפרופיל האישי"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"הרינגטון של הטלפון לפרופיל העבודה"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"צליל ברירת המחדל להתראות של פרופיל העבודה"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"צליל ברירת המחדל לשעון מעורר בפרופיל העבודה"</string>
     <string name="work_sound_same_as_personal" msgid="1836913235401642334">"אותו אחד כמו בפרופיל האישי"</string>
     <string name="work_sync_dialog_title" msgid="7810248132303515469">"להשתמש בצלילים מהפרופיל האישי?"</string>
     <string name="work_sync_dialog_yes" msgid="5785488304957707534">"אישור"</string>
-    <string name="work_sync_dialog_message" msgid="5066178064994040223">"בפרופיל העבודה שלך ייעשה שימוש באותם הצלילים מהפרופיל האישי"</string>
+    <string name="work_sync_dialog_message" msgid="5066178064994040223">"הצלילים בפרופיל העבודה שלך יהיו זהים לצלילים בפרופיל האישי"</string>
     <string name="configure_notification_settings" msgid="1492820231694314376">"התראות"</string>
     <string name="notification_dashboard_summary" msgid="7530169251902320652">"היסטוריית ההתראות, שיחות"</string>
     <string name="conversation_notifs_category" msgid="2549844862379963273">"שיחה"</string>
@@ -3967,8 +3976,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"אפשר לראות את כל התוכן של התראות מהעבודה"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"הסתרה של תוכן עבודה רגיש"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"איך להציג התראות פרופיל כשהמכשיר נעול?"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"הצגה במסך הנעילה"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"מה להציג במסך הנעילה"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"הצגת התראות שנקראו"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"סמלי התראות שנקראו"</string>
@@ -4074,8 +4082,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"הכלי לארגון התראות"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"קיבוץ והשתקה של התראות בעדיפות נמוכה"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"ניהול האפליקציות לכלי לארגון ההתראות"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"תמיד להרחיב חבילות"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"הפעלה באפליקציות של פרופיל העבודה"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"‏תשתיות ל-VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"‏לא התקבלו בקשות מאפליקציות מותקנות לפעול כשירותי סיוע של VR."</string>
@@ -4100,7 +4107,7 @@
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"לאפליקציות מקושרות יש הרשאות משותפות, ויש להן גישה לנתונים שבכל אחת מהן."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"‏כדאי לקשר רק אפליקציות מהימנות, שלא ישותף באמצעותן מידע אישי עם אדמין ממחלקת IT."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"תמיד אפשר לנתק אפליקציות בהגדרות הפרטיות של המכשיר."</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"האם מקובל עליך לחשוף את המידע האישי שלך לאפליקציה <xliff:g id="NAME">%1$s</xliff:g>, שמיועדת לעבודה?"</string>
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"אפשר לחשוף את המידע האישי שלך לאפליקציה <xliff:g id="NAME">%1$s</xliff:g>, שמיועדת לעבודה?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"‏כדאי לקשר רק אפליקציות מהימנות, שלא ישותף באמצעותן מידע אישי עם אדמין ממחלקת IT."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"נתוני האפליקציה"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"האפליקציה הזו תוכל לגשת לנתונים של האפליקציה <xliff:g id="NAME">%1$s</xliff:g> בפרופיל האישי."</string>
@@ -4250,7 +4257,7 @@
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"האנשים שבחרת יוכלו ליצור איתך קשר, גם אם לא אישרת לאפליקציות להפריע"</string>
     <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{אף אפליקציה לא יכולה להפריע}=1{האפליקציה {app_1} יכולה להפריע}=2{האפליקציות {app_1} וגם {app_2} יכולות להפריע}=3{האפליקציות {app_1}, {app_2} וגם {app_3} יכולות להפריע}one{האפליקציות {app_1}, {app_2} ועוד # יכולות להפריע}other{האפליקציות {app_1}, {app_2} ועוד # יכולות להפריע}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"אפליקציות"</string>
-    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"איזה התראות יכולות להפריע"</string>
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"אילו התראות יכולות להפריע"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"אישור לכל ההתראות"</string>
     <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{שום דבר לא יכול להפריע}=1{הקטגוריה {sound_category_1} יכולה להפריע}=2{הקטגוריות {sound_category_1} ו{sound_category_2} יכולות להפריע}=3{הקטגוריות {sound_category_1}, {sound_category_2} ו{sound_category_3} יכולות להפריע}one{הקטגוריות {sound_category_1}, {sound_category_2} ועוד # יכולות להפריע}other{הקטגוריות {sound_category_1}, {sound_category_2} ועוד # יכולות להפריע}}"</string>
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"שום דבר לא יכול להפריע"</string>
@@ -4289,7 +4296,7 @@
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"המידע וההגדרות של <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"בניהול של <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"להשבית את <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"המצב הזה אף פעם לא יופעל כשהוא מושבת"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"אם המצב הזה מושבת, הוא לא יופעל"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"השבתה"</string>
     <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"להפעיל את <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
     <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"יכול להיות שהמצב הזה יופעל באופן אוטומטי. תלוי בהגדרות שלו."</string>
@@ -4305,7 +4312,7 @@
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"אפשר להגדיר מצב עם לוח זמנים קבוע"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"שמירה על סנכרון המכשיר עם האירועים של היום"</string>
     <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"להתעורר באנרגיות מחודשות"</string>
-    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"בטיחות לפני הכול בזמן הנהיגה"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"קודם כל בטיחות בזמן הנהיגה"</string>
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"מתרכזים ונכנסים לשוונג"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"לרגעים שבהם חשוב הנימוס"</string>
     <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"שימוש מודרך עוזר להישאר בידיים טובות"</string>
@@ -4321,10 +4328,10 @@
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"פועלת"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"מושבתת"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"הצמדת אפליקציה"</string>
-    <string name="app_pinning_intro" msgid="6409063008733004245">"התכונה \'הצמדת אפליקציה\' מאפשרת לקבע את האפליקציה הנוכחית בתצוגה עד לביטול ההצמדה. אפשר להשתמש בתכונה, למשל, כשנותנים לחבר שסומכים עליו לשחק במשחק מסוים."</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"התכונה \"הצמדת אפליקציה\" מאפשרת לקבע את האפליקציה הנוכחית בתצוגה עד לביטול ההצמדה. אפשר להשתמש בתכונה, למשל, כשנותנים לחבר שסומכים עליו לשחק במשחק מסוים."</string>
     <string name="screen_pinning_description" msgid="5822120806426139396">"‏לאחר הצמדת אפליקציה כלשהי, יכול להיות שייפתחו אפליקציות אחרות מאותה אפליקציה ושתתאפשר גישה למידע האישי. \n\nכדי להשתמש בהצמדת אפליקציה: 	\n{0,number,integer}. מפעילים את התכונה \'הצמדת האפליקציה\' 	\n{1,number,integer}. פותחים את הסקירה הכללית 	\n{2,number,integer}. לוחצים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז לוחצים על \'הצמדה\'"</string>
     <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"‏לאחר הצמדת אפליקציה כלשהי, יכול להיות שייפתחו אפליקציות אחרות מאותה אפליקציה ושתתאפשר גישה למידע האישי. \n\nכדי לשתף את המכשיר באופן מאובטח עם אדם אחר, כדאי להשתמש במשתמש אורח במקום זאת. \n\nכדי להשתמש בהצמדת אפליקציה: 	\n{0,number,integer}. מפעילים את התכונה \'הצמדת האפליקציה\' 	\n{1,number,integer}. פותחים את הסקירה הכללית 	\n{2,number,integer}. לוחצים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז לוחצים על \'הצמדה\'"</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"לאחר שמצמידים אפליקציה: \n\n•	 ייתכן שתתאפשר גישה למידע אישי \n		(כמו אנשי קשר ותוכן מהאימייל) \n•	 האפליקציה שהוצמדה עשויה לפתוח אפליקציות אחרות \n\nיש להשתמש בהצמדת אפליקציה רק עם אנשים מהימנים."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"אחרי הצמדת אפליקציה: \n\n•	 יכול להיות שתתאפשר גישה למידע אישי \n		(כמו אנשי קשר ותוכן מהאימייל) \n•	 האפליקציה שהוצמדה עשויה לפתוח אפליקציות אחרות \n\nצריך להשתמש בהצמדת אפליקציה רק עם אנשים מהימנים."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"בקשת קו ביטול נעילה לפני ביטול הצמדה"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"בקשת קוד גישה לפני ביטול הצמדה"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"יש לבקש סיסמה לפני ביטול הצמדה"</string>
@@ -4590,7 +4597,7 @@
     <string name="disabled_by_policy_title_parental_controls" msgid="2688144174399968452">"בקשת עזרה"</string>
     <string name="disabled_by_policy_content_parental_controls" msgid="7645416358554171082">"כדי לשנות את ההגדרה הזו, מי שהגדיר/ה את אמצעי הבקרה במכשיר או בחשבון שלך צריך/ה לשנות אותה עבורך."</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"צריך להעביר את הטלפון להורה כדי לאשר את שינוי ההגדרה הזו."</string>
-    <string name="default_admin_support_msg" msgid="8816296554831532033">"‏למידע נוסף, אפשר ליצור קשר עם מנהל ה-IT"</string>
+    <string name="default_admin_support_msg" msgid="8816296554831532033">"‏למידע נוסף, אפשר ליצור קשר עם האדמין ממחלקת ה-IT"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"פרטים נוספים"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"מנהל המכשיר יכול לפקח על אפליקציות ונתונים המשויכים לפרופיל העבודה שלך ולנהל אותם, כולל הגדרות, הרשאות, גישה ארגונית, פעילות הרשת ומידע על מיקום המכשיר."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"מנהל המכשיר יכול לפקח על אפליקציות ונתונים המשויכים למשתמש זה ולנהל אותם, כולל הגדרות, הרשאות, גישה ארגונית, פעילות הרשת ומידע על מיקום המכשיר."</string>
@@ -5052,7 +5059,7 @@
     <string name="disabled_feature" msgid="7151433782819744211">"התכונה לא זמינה"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"התכונה הזו הושבתה מפני שהיא מאטה את הטלפון שלך"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"הצגת דו-שיח של קריסות תמיד"</string>
-    <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"הצגת דו-שיח בכל פעם שאפליקציה קורסת"</string>
+    <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"תיבת דו-שיח תופיע בכל פעם שאפליקציה קורסת"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"‏בחירת אפליקציה המותאמת ל-ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"‏לא הוגדרה אפליקציה המותאמת ל-ANGLE"</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"‏אפליקציה המותאמת ל-ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -5682,9 +5689,9 @@
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"הגדרת הגבלה לקצב ההורדה ברשת"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"אין מגבלה"</string>
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"השבתת ההגבלות על תהליכי הצאצא"</string>
-    <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"השבתת הגבלות השימוש במשאבי המערכת של תהליכי הצאצא של האפליקציה"</string>
+    <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"ההגבלות שחלות על השימוש במשאבי המערכת של תהליכי הצאצא של האפליקציה יושבתו"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"אילוץ הפעלה של פונקציית ההערות"</string>
-    <string name="enable_notes_role_summary" msgid="5495721409392395089">"הפעלת שילובי מערכת של כתיבת הערות דרך הפונקציה \'הערות\'. אם פונקציית ההערות כבר מופעלת, שום דבר לא יקרה. נדרשת הפעלה מחדש."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"הפעלת שילובי מערכת של כתיבת הערות דרך הפונקציה \"הערות\". אם פונקציית ההערות כבר מופעלת, שום דבר לא יקרה. נדרשת הפעלה מחדש."</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"זה המקום להזין סיסמה"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"‏המרת eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"‏העברת ה-eSIM למכשיר אחר"</string>
@@ -5953,6 +5960,12 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"הייתה שגיאה במהלך הניסיון למחוק את קוד האימות."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"אנימציה של <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"לא ניתן להפעיל את אמצעי הבקרה"</string>
+    <!-- no translation found for supervision_generic_error_page_title (1890873741445464953) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_message (1532001782155323205) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_button_label (8972577027819946993) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"בדיקת הזהות זמינה באפליקציות נוספות"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"יש לך אפשרות לאבטח את ההגנה על הזהות בכל אפליקציה שמציעה פתיחה בטביעת אצבע או בזיהוי פנים"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"עיון בפרטים"</string>

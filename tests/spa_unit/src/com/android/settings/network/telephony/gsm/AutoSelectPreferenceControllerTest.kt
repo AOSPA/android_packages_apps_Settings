@@ -60,25 +60,24 @@ import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class AutoSelectPreferenceControllerTest {
-    @get:Rule
-    val mockito = MockitoJUnit.rule()
+    @get:Rule val mockito = MockitoJUnit.rule()
 
-    @get:Rule
-    val composeTestRule = createComposeRule()
+    @get:Rule val composeTestRule = createComposeRule()
 
-    private val mockTelephonyManager = mock<TelephonyManager> {
-        on { createForSubscriptionId(SUB_ID) } doReturn mock
-        on { simOperatorName } doReturn OPERATOR_NAME
-    }
+    private val mockTelephonyManager =
+        mock<TelephonyManager> {
+            on { createForSubscriptionId(SUB_ID) } doReturn mock
+            on { simOperatorName } doReturn OPERATOR_NAME
+        }
 
-    private val mockSatelliteManager = mock<SatelliteManager> {
-    }
+    private val mockSatelliteManager = mock<SatelliteManager> {}
 
-    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
-        on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
-        on { getSystemService(SatelliteManager::class.java) } doReturn mockSatelliteManager
-        doNothing().whenever(mock).startActivity(any())
-    }
+    private val context: Context =
+        spy(ApplicationProvider.getApplicationContext()) {
+            on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
+            on { getSystemService(SatelliteManager::class.java) } doReturn mockSatelliteManager
+            doNothing().whenever(mock).startActivity(any())
+        }
 
     private val preference = ComposePreference(context).apply { key = TEST_KEY }
     private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
@@ -87,29 +86,29 @@ class AutoSelectPreferenceControllerTest {
 
     private val carrierConfig = persistableBundleOf()
 
-    private val controller = AutoSelectPreferenceController(
-        context = context,
-        key = TEST_KEY,
-        allowedNetworkTypesFlowFactory = { emptyFlow() },
-        serviceStateFlowFactory = { flowOf(serviceState) },
-        getConfigForSubId = { carrierConfig },
-    ).init(subId = SUB_ID)
+    private val controller =
+        AutoSelectPreferenceController(
+                context = context,
+                key = TEST_KEY,
+                allowedNetworkTypesFlowFactory = { emptyFlow() },
+                serviceStateFlowFactory = { flowOf(serviceState) },
+                getConfigForSubId = { carrierConfig },
+            )
+            .init(subId = SUB_ID)
 
     @Before
     fun setUp() {
         preferenceScreen.addPreference(preference)
         controller.displayPreference(preferenceScreen)
+        serviceState.isManualSelection = false
     }
 
     @Test
     fun isChecked_isAutoSelection_on() {
-        serviceState.isManualSelection = false
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
-
-        composeTestRule.onNodeWithText(context.getString(R.string.select_automatically))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.select_automatically))
             .assertIsOn()
     }
 
@@ -117,11 +116,10 @@ class AutoSelectPreferenceControllerTest {
     fun isChecked_isManualSelection_off() {
         serviceState.isManualSelection = true
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.select_automatically))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.select_automatically))
             .assertIsOff()
     }
 
@@ -129,11 +127,10 @@ class AutoSelectPreferenceControllerTest {
     fun isEnabled_isRoaming_enabled() {
         serviceState.roaming = true
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.select_automatically))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.select_automatically))
             .assertIsEnabled()
     }
 
@@ -141,14 +138,14 @@ class AutoSelectPreferenceControllerTest {
     fun isEnabled_notOnlyAutoSelectInHome_enabled() {
         serviceState.roaming = false
         carrierConfig.putBoolean(
-            CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL, false
+            CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL,
+            false,
         )
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.select_automatically))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.select_automatically))
             .assertIsEnabled()
     }
 
@@ -156,29 +153,45 @@ class AutoSelectPreferenceControllerTest {
     fun isEnabled_onlyAutoSelectInHome_notEnabled() {
         serviceState.roaming = false
         carrierConfig.putBoolean(
-            CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL, true
+            CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL,
+            true,
         )
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.onNodeWithText("Unavailable when connected to T-mobile")
+        composeTestRule
+            .onNodeWithText("Unavailable when connected to T-mobile")
             .assertIsNotEnabled()
+    }
+
+    @Test
+    fun isEnabled_onlyAutoSelectInHome_isManualSelection_enabled() {
+        serviceState.isManualSelection = true
+        serviceState.roaming = false
+        carrierConfig.putBoolean(
+            CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL,
+            true,
+        )
+
+        composeTestRule.setContent { controller.Content() }
+
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.select_automatically))
+            .assertIsEnabled()
     }
 
     @Test
     fun isEnabled_isSatelliteSessionStartedAndSelectedSubForSatellite_disabled() {
         controller.selectedNbIotSatelliteSubscriptionCallback
             .onSelectedNbIotSatelliteSubscriptionChanged(SUB_ID)
-        controller.satelliteModemStateCallback
-            .onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED)
+        controller.satelliteModemStateCallback.onSatelliteModemStateChanged(
+            SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED
+        )
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.select_automatically))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.select_automatically))
             .assertIsNotEnabled()
     }
 
@@ -186,14 +199,14 @@ class AutoSelectPreferenceControllerTest {
     fun isEnabled_isSatelliteSessionNotStartedButIsSelectedSubForSatellite_enabled() {
         controller.selectedNbIotSatelliteSubscriptionCallback
             .onSelectedNbIotSatelliteSubscriptionChanged(SUB_ID)
-        controller.satelliteModemStateCallback
-            .onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_OFF)
+        controller.satelliteModemStateCallback.onSatelliteModemStateChanged(
+            SatelliteManager.SATELLITE_MODEM_STATE_OFF
+        )
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.select_automatically))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.select_automatically))
             .assertIsEnabled()
     }
 
@@ -201,14 +214,14 @@ class AutoSelectPreferenceControllerTest {
     fun isEnabled_isSatelliteSessionStartedButNotSelectedSubForSatellite_enabled() {
         controller.selectedNbIotSatelliteSubscriptionCallback
             .onSelectedNbIotSatelliteSubscriptionChanged(0)
-        controller.satelliteModemStateCallback
-            .onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED)
+        controller.satelliteModemStateCallback.onSatelliteModemStateChanged(
+            SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED
+        )
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.select_automatically))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.select_automatically))
             .assertIsEnabled()
     }
 
@@ -217,26 +230,21 @@ class AutoSelectPreferenceControllerTest {
         `when`(context.getSystemService(SatelliteManager::class.java)).thenReturn(null)
 
         AutoSelectPreferenceController(
-            context = context,
-            key = TEST_KEY,
-            allowedNetworkTypesFlowFactory = { emptyFlow() },
-            serviceStateFlowFactory = { flowOf(serviceState) },
-            getConfigForSubId = { carrierConfig },
-        ).init(subId = SUB_ID)
+                context = context,
+                key = TEST_KEY,
+                allowedNetworkTypesFlowFactory = { emptyFlow() },
+                serviceStateFlowFactory = { flowOf(serviceState) },
+                getConfigForSubId = { carrierConfig },
+            )
+            .init(subId = SUB_ID)
     }
 
     @Test
     fun onClick_turnOff_startNetworkSelectActivity() {
-        serviceState.isManualSelection = false
-
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
         composeTestRule.onRoot().performClick()
 
-        val intent = argumentCaptor<Intent> {
-            verify(context).startActivity(capture())
-        }.firstValue
+        val intent = argumentCaptor<Intent> { verify(context).startActivity(capture()) }.firstValue
         assertThat(intent.component!!.className).isEqualTo(NetworkSelectActivity::class.java.name)
         assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID, 0)).isEqualTo(SUB_ID)
     }
@@ -246,9 +254,7 @@ class AutoSelectPreferenceControllerTest {
         serviceState.isManualSelection = true
         controller.progressDialog = mock()
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
         composeTestRule.onRoot().performClick()
         delay(100)
 

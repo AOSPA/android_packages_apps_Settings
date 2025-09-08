@@ -34,15 +34,15 @@ import com.android.settingslib.preference.launchFragmentScenario
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.kotlin.argumentCaptor
 import org.robolectric.annotation.LooperMode
 
 @RunWith(AndroidJUnit4::class)
@@ -135,8 +135,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     fun getTitle() {
-        assertThat(preferenceScreenCreator.title)
-            .isEqualTo(R.string.supervision_settings_title)
+        assertThat(preferenceScreenCreator.title).isEqualTo(R.string.supervision_settings_title)
     }
 
     @Test

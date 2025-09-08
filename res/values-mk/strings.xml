@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Премести нагоре"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Премести надолу"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Отстрани"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Премести најгоре"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регионални поставки"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Одредете поставки за мерни единици и броеви"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Дозволете им на апликациите да пристапуваат до вашите регионални поставки за да ви овозможат персонализирано доживување."</string>
@@ -299,7 +300,7 @@
     <string name="done" msgid="7497982645646431310">"Готово"</string>
     <string name="apply" msgid="7834684883190163536">"Примени"</string>
     <string name="share" msgid="8502235338607613795">"Сподели"</string>
-    <string name="add" msgid="8335206931421683426">"Додај"</string>
+    <string name="add" msgid="8335206931421683426">"Додајте"</string>
     <string name="remove" msgid="1028414219245072102">"Отстрани"</string>
     <string name="process" msgid="2614220641928709668">"Обработи"</string>
     <string name="settings_label" msgid="943294133671632976">"Поставки"</string>
@@ -447,7 +448,7 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Отпечаток"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"При користење „Отклучување со отпечаток“"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Отпечаток за работен профил"</string>
-    <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"Отпеч. за раб. профил"</string>
+    <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"Отпечаток за работен профил"</string>
     <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"Проверете ги регистрираните отпечатоци"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Додајте отпечаток"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Додаден е отпечаток}one{Додадени се # отпечаток}other{Додадени се # отпечатоци}}"</string>
@@ -1019,6 +1020,16 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Да се користат новите поставки?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Ако вашиот екран не работи како што сакате, може да го вратите на претходните поставки"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Користи ги поставките"</string>
+    <!-- no translation found for external_display_topology_display_block_content_description (4638018879987232608) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_up (5585023811277652685) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_down (497925070033309302) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_left (5207345941599286131) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_right (6258194449439072825) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"огледало"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Овозможи приказ на безжични мрежи"</string>
@@ -1577,16 +1588,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Подесување на меморија"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (SIM-отвор <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <!-- no translation found for imei_multi_sim (6990044568468728075) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI: <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"За преглед, изберете зачувана мрежа"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL верзија"</string>
-    <!-- no translation found for meid_multi_sim (3124054561186721453) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="3124054561186721453">"MEID: <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Вклучено"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Исклучено"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1680,8 +1689,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Заедница"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Заеднички поставки"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Режим Hub"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Виџети на заклучен екран (бета)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Кога да се прикаже автоматски"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Никогаш"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Додека се полни"</string>
@@ -1978,7 +1986,7 @@
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="6276915393736137843">"Користи едно заклучување"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Користи едно заклучување"</string>
     <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Исто како заклучувањето екран на уредот"</string>
-    <string name="manageapplications_settings_title" msgid="9198876415524237657">"Управувај со апликации"</string>
+    <string name="manageapplications_settings_title" msgid="9198876415524237657">"Управувајте со апликациите"</string>
     <string name="applications_settings" msgid="1941993743933425622">"Информации за апликација"</string>
     <string name="applications_settings_header" msgid="3154670675856048015">"Поставки на апликација"</string>
     <string name="install_applications" msgid="3921609656584369901">"Непознати извори"</string>
@@ -2410,7 +2418,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Контактирајте со службата за поддршка за лица со попреченост на Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Анкета за пристапност"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Споделете повратни информации"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Колку сте задоволни од „Темната тема“?"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Пополнете ја анкетата"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Споделете повратни информации"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Колку сте задоволни од зголемувањето?"</string>
@@ -2481,7 +2490,7 @@
     <string name="accessibility_text_reading_options_title" msgid="2059907327364152763">"Големина на приказот и текстот"</string>
     <string name="accessibility_text_reading_options_subtext" msgid="3480489973093251705">"Големина на фонт, големина на приказ, текст во болд, истакнат текст"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Променете како се прикажува текстот"</string>
-    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Предмет: дизајни на балони на топол воздух"</string>
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Предмет: Дизајни за балони на топол воздух"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Од: Бил"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Добро утро!\n\nСамо сакав да проверам како оди со дизајните. Дали ќе бидат готови пред да почнеме да ги правиме новите балони?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Ресетирај поставки"</string>
@@ -2496,12 +2505,9 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Допрете копче за зумирање"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Брзо зумирајте на екранот за да го зголемите приказот на содржините"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;За да зумирате:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Употребете кратенка за почеток на зголемувањето&lt;br/&gt; {1,number,integer}. Допрете го екранот&lt;br/&gt; {2,number,integer}. Повлечете со два прста за да се движите низ екранот&lt;br/&gt; {3,number,integer}. Штипнете со два прста за да го приспособите зумот&lt;br/&gt; {4,number,integer}. Употребете кратенка за крај на зголемувањето&lt;br/&gt;&lt;br/&gt;&lt;b&gt;За да зумирате привремено:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Погрижете се типот на зголемувањето да биде поставен на цел екран&lt;br/&gt; {1,number,integer}. Употребете кратенка за почеток на зголемувањето&lt;br/&gt; {2,number,integer}. Допрете и задржете каде било на екранот&lt;br/&gt; {3,number,integer}. Повлечете со прст за да се движите низ екранот&lt;br/&gt; {4,number,integer}. Подигнете го прстот за крај на зголемувањето"</string>
-    <!-- no translation found for accessibility_screen_magnification_keyboard_summary (5376202602229533488) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary (4390658165464462006) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_keyboard_touch_summary (7623681880843239997) -->
-    <skip />
+    <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;За да зумирате:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Користете ја кратенката или притиснете &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M за да го стартувате зголемувањето&lt;br/&gt; {1,number,integer}. Притиснете &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + копчињата со стрелки за да се движите низ екранот&lt;br/&gt; {2,number,integer}. Притиснете &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; и „+“ или „–“ за да го приспособите зумот&lt;br/&gt; {3,number,integer}. Користете ја кратенката или &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M за да го сопрете зголемувањето"</string>
+    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;За да зумирате:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Користете ја кратенката за да го стартувате зголемувањето&lt;br/&gt; {1,number,integer}. Притиснете &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + копчињата со стрелки за да се движите низ екранот&lt;br/&gt; {2,number,integer}. Притиснете &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; и „+“ или „–“ за да го приспособите зумот&lt;br/&gt; {3,number,integer}. Користете ја кратенката за да го сопрете зголемувањето"</string>
+    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;Тастатура&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Користете ја кратенката или притиснете &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M за да го стартувате зголемувањето&lt;br/&gt; {1,number,integer}. Притиснете &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + копчињата со стрелки за да се движите низ екранот&lt;br/&gt; {2,number,integer}. Притиснете &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; и „+“ или „–“ за да го приспособите зумот&lt;br/&gt; {3,number,integer}. Користете ја кратенката или &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M за да го сопрете зголемувањето&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Допирен екран&lt;/b&gt;&lt;br/&gt; За да зумирате:&lt;br/&gt; {0,number,integer}. Користете ја кратенката за да го стартувате зголемувањето&lt;br/&gt; {1,number,integer}. Допрете го екранот&lt;br/&gt; {2,number,integer}. Повлечете со 2 прста за да се движите низ екранот&lt;br/&gt; {3,number,integer}. Штипнете со 2 прста за да го приспособите зумот&lt;br/&gt; {4,number,integer}. Користете ја кратенката за да го сопрете зголемувањето&lt;br/&gt;&lt;br/&gt; За да зумирате привремено:&lt;br/&gt; {0,number,integer}. Погрижете се типот на зголемувањето да биде поставен на цел екран&lt;br/&gt; {1,number,integer}. Користете ја кратенката за да го стартувате зголемувањето&lt;br/&gt; {2,number,integer}. Допрете и задржете каде било на екранот&lt;br/&gt; {3,number,integer}. Повлечете со прст за да се движите низ екранот&lt;br/&gt; {4,number,integer}. Подигнете го прстот за да го сопрете зголемувањето"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;За да зумирате:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Употребете кратенка за почеток на зголемувањето&lt;br/&gt; {1,number,integer}. Допрете го екранот&lt;br/&gt; {2,number,integer}. Повлечете со 2 прста за да се движите низ екранот&lt;br/&gt; {3,number,integer}. Штипнете со 2 прста за да го приспособите зумот&lt;br/&gt; {4,number,integer}. Употребете кратенка за сопирање на зголемувањето&lt;br/&gt;&lt;br/&gt; Може и да зумирате привремено и друго."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;За да зумирате:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Употребете кратенка за почеток на зголемувањето&lt;br/&gt; {1,number,integer}. Допрете го екранот&lt;br/&gt; {2,number,integer}. Повлечете со 1 или 2 прста за да се движите низ екранот&lt;br/&gt; {3,number,integer}. Штипнете со 2 прста за да го приспособите зумот&lt;br/&gt; {4,number,integer}. Употребете кратенка за сопирање на зголемувањето&lt;br/&gt;&lt;br/&gt; Може и да зумирате привремено и друго."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Кога е вклучено зумирањето, може да зумирате на екранот.\n\n"<b>"За да зумирате"</b>", стартувајте го зголемувањето, па допрете каде било на екранот.\n"<ul><li>"Повлечете со два или повеќе прсти за да лизгате"</li>\n<li>"Штипнете со два или повеќе прсти за да го приспособите зумот"</li></ul>\n\n<b>"За да зумирате привремено"</b>", стартувајте го зголемувањето, а потоа допрете и задржете каде било на екранот.\n"<ul><li>"Повлечете за да се движите околу екранот"</li>\n<li>"Подигнете го прстот за да одзумирате"</li></ul>\n\n"Не може да зумирате на тастатурата или на лентата за навигација."</string>
@@ -3163,7 +3169,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"Корисн. сертиф. за VPN и апл."</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Сертификат за Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Податоците нема да бидат приватни"</string>
-    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Веб-сајтовите, апликациите и VPN користат CA-сертификати заради шифрирање. Инсталирајте CA-сертификати само од организации во кои имате доверба. \n\nАко инсталирате CA-сертификат, сопственикот на сертификатот ќе може да пристапува до вашите податоци, како лозинките или деталите за кредитните картички, од веб-сајтовите што ги посетувате или апликациите што ги користите, дури и ако тие податоци се шифрирани."</string>
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Веб-сајтовите, апликациите и VPN користат CA-сертификати заради шифрирање. Инсталирајте CA-сертификати само од организации во кои имате доверба. \n\nАко инсталирате CA-сертификат, сопственикот на сертификатот би можел да пристапува до вашите податоци, како лозинките или податоците за кредитните картички, од веб-сајтовите што ги посетувате или од апликациите што ги користите – дури и ако тие податоци се шифрирани."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Не инсталирај"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Сепак инсталирај"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Сертификатот не е инсталиран"</string>
@@ -3970,8 +3976,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Прикажувај ги сите известувања од работниот профил"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Скриј чувствителни работни содржини"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Кога уредот е заклучен, како сакате да се прикажуваат известувањата на профилот?"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"Прикажи на заклучениот екран"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Што да се прикажува на заклучен екран"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Прикажувај прегледани известувања"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Прикажувај икони за прегледани известувања"</string>
@@ -4077,8 +4082,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Организатор за известувања"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Групирајте ги и исклучете им го звукот на известувањата со понизок приоритет"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Управувајте со апликации за „Организатор за известувања“"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Секогаш проширувај ги пакетите"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Примени на апликациите во работниот профил"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Помошни услуги за VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ниедна инсталирана апликација не побара извршување како помошна услуга за VR."</string>
@@ -4369,7 +4373,7 @@
     <string name="app_launch_checking_links_title" msgid="6119228853554114201">"Се проверува за други поддржани линкови…"</string>
     <string name="app_launch_dialog_cancel" msgid="6961071841814898663">"Откажи"</string>
     <string name="app_launch_supported_links_title" msgid="2457931321701095763">"{count,plural, =1{# поддржан линк}one{# поддржан линк}other{# поддржани линка}}"</string>
-    <string name="app_launch_supported_links_add" msgid="3271247750388016131">"Додај"</string>
+    <string name="app_launch_supported_links_add" msgid="3271247750388016131">"Додајте"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"Се отвора во <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> искористени во <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="979243131665635278">"внатрешна меморија"</string>
@@ -4762,7 +4766,7 @@
     <string name="long_background_tasks_title" msgid="3272230637974707490">"Долги задачи во заднина"</string>
     <string name="long_background_tasks_footer_title" msgid="9117342254914743097">"Дозволете апликацијава да извршува долги задачи во заднина. Ова ѝ овозможува на апликацијата да извршува задачи што може да траат подолго од неколку минути, како што се преземања и прикачувања. \n\nАко не ја доделите дозволава, системот ќе ограничи колку долго апликацијата може да извршува такви задачи во заднина."</string>
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"долги задачи, пренос на податоци, задачи во заднина"</string>
-    <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Ресетирајте го ограничувањето за бројот на барања до ShortcutManager"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Ресетирај го ограничувањето за бројот на барања до ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Ограничувањето оценки на ShortcutManager е ресетирано"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Контролирајте ги информациите на заклучениот екран"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Прикажете или сокријте содржина на известување"</string>
@@ -5685,8 +5689,8 @@
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Нема ограничување"</string>
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Оневозможи ги ограничувањата за подредени процеси"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Ги оневозможува ограничувањата за користење системски ресурси за подредените процеси на апликациите"</string>
-    <string name="enable_notes_role_title" msgid="7662702013496114763">"Присилно овозможување на улогата „Белешки“"</string>
-    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Овозможете системски интеграции за фаќање белешки преку улогата „Белешки“. Ако улогата „Белешки“ е веќе овозможена, не правете ништо. Потребно е рестартирање."</string>
+    <string name="enable_notes_role_title" msgid="7662702013496114763">"Принудно овозможи ја улогата „Белешки“"</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Овозможува системски интеграции за фаќање белешки преку улогата „Белешки“. Ако улогата „Белешки“ е веќе овозможена, не се презема никакво дејство. Потребно е рестартирање."</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Внесете лозинка"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Конвертирај во eSIM-картичка"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Префрли ја eSIM-картичката на друг уред"</string>
@@ -5955,6 +5959,12 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Се јави грешка при бришењето на PIN-кодот."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Анимација на <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Не може да се вклучат контролите"</string>
+    <!-- no translation found for supervision_generic_error_page_title (1890873741445464953) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_message (1532001782155323205) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_button_label (8972577027819946993) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"„Проверка на идентитетот“ е достапна на повеќе апликации"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"Може да ја обезбедите заштитата на вашиот идентитет на која било апликација што ја нуди функцијата „Отклучување со отпечаток“ или „Отклучување со лик“ за да ве идентификува"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Прикажи ги деталите"</string>
@@ -5970,10 +5980,8 @@
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Дозволи, контроли"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Отклучување на уредот"</string>
     <string name="lock_screen_title" msgid="4701994278040604018">"Заклучување екран"</string>
-    <!-- no translation found for location_settings (6833222354060094170) -->
-    <skip />
-    <!-- no translation found for location_settings_subtitle (8471780117911010030) -->
-    <skip />
+    <string name="location_settings" msgid="6833222354060094170">"Пристап до локацијата"</string>
+    <string name="location_settings_subtitle" msgid="8471780117911010030">"Погледнете ги апликациите и услугите што имаат пристап до локацијата"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"„Проверка на идентитетот“ функционира со повеќе апликации"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"„Проверка на идентитетот“ спречува несакан пристап до вашите апликации. Отсега достапна со која било апликација што користи „Отклучување со отпечаток“ или „Отклучување со лик“."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Прикажи ги деталите"</string>

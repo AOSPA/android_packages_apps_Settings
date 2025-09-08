@@ -57,6 +57,7 @@ import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import kotlinx.coroutines.CoroutineScope
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -69,12 +70,11 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.time.Duration.Companion.seconds
 
-/**
- * Preference controller for "Auto Select Network"
- */
-class AutoSelectPreferenceController @JvmOverloads constructor(
+/** Preference controller for "Auto Select Network" */
+class AutoSelectPreferenceController
+@JvmOverloads
+constructor(
     context: Context,
     key: String,
     private val allowedNetworkTypesFlowFactory: (subId: Int) -> Flow<Long> =
@@ -96,20 +96,20 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
         context.getSystemService(SatelliteManager::class.java)
     private val listeners = mutableListOf<OnNetworkSelectModeListener>()
 
-    @VisibleForTesting
-    var progressDialog: ProgressDialog? = null
+    @VisibleForTesting var progressDialog: ProgressDialog? = null
 
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     lateinit var coroutineScope: CoroutineScope
 
     val satelliteModemStateCallback = SatelliteModemStateCallback { state ->
-        isSatelliteSessionStarted = when (state) {
-            SatelliteManager.SATELLITE_MODEM_STATE_OFF,
-            SatelliteManager.SATELLITE_MODEM_STATE_UNAVAILABLE,
-            SatelliteManager.SATELLITE_MODEM_STATE_UNKNOWN -> false
+        isSatelliteSessionStarted =
+            when (state) {
+                SatelliteManager.SATELLITE_MODEM_STATE_OFF,
+                SatelliteManager.SATELLITE_MODEM_STATE_UNAVAILABLE,
+                SatelliteManager.SATELLITE_MODEM_STATE_UNKNOWN -> false
 
-            else -> true
-        }
+                else -> true
+            }
     }
 
     val selectedNbIotSatelliteSubscriptionCallback =
@@ -117,13 +117,11 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
             isSelectedSubIdForSatellite = selectedSubId == subId
         }
 
-    /**
-     * Initialization based on given subscription id.
-     */
+    /** Initialization based on given subscription id. */
     fun init(subId: Int): AutoSelectPreferenceController {
         this.subId = subId
-        telephonyManager = mContext.getSystemService(TelephonyManager::class.java)!!
-            .createForSubscriptionId(subId)
+        telephonyManager =
+            mContext.getSystemService(TelephonyManager::class.java)!!.createForSubscriptionId(subId)
         return this
     }
 
@@ -142,47 +140,54 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
         val isAutoOverridableFlow = remember {
             OverridableFlow(serviceStateFlow.map { !it.isManualSelection })
         }
-        val isAuto by isAutoOverridableFlow.flow
-            .onEach(::updateListenerValue)
-            .collectAsStateWithLifecycle(initialValue = null)
-        val disallowedSummary by serviceStateFlow.map(::getDisallowedSummary)
-            .collectAsStateWithLifecycle(initialValue = "")
-        SwitchPreference(object : SwitchPreferenceModel {
-            override val title = stringResource(R.string.select_automatically)
-            override val summary = { disallowedSummary }
-            override val changeable = {
-                disallowedSummary.isEmpty()
-                        && !(isSatelliteSessionStarted && isSelectedSubIdForSatellite)
-            }
-            override val checked = { isAuto }
-            override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
-                Log.i(LOG_TAG, "onCheckedChange newChecked = $newChecked")
-                if (newChecked) {
-                    coroutineScope.launch { setAutomaticSelectionMode(isAutoOverridableFlow) }
-                } else {
-                    mContext.startActivity(Intent().apply {
-                        setClass(mContext, NetworkSelectActivity::class.java)
-                        putExtra(Settings.EXTRA_SUB_ID, subId)
-                    })
+        val isAuto by
+            isAutoOverridableFlow.flow
+                .onEach(::updateListenerValue)
+                .collectAsStateWithLifecycle(initialValue = null)
+        val disallowedSummary by
+            serviceStateFlow
+                .map(::getDisallowedSummary)
+                .collectAsStateWithLifecycle(initialValue = "")
+        SwitchPreference(
+            object : SwitchPreferenceModel {
+                override val title = stringResource(R.string.select_automatically)
+                override val summary = { disallowedSummary }
+                override val changeable = {
+                    disallowedSummary.isEmpty() &&
+                        !(isSatelliteSessionStarted && isSelectedSubIdForSatellite)
+                }
+                override val checked = { isAuto }
+                override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
+                    if (newChecked) {
+                        coroutineScope.launch { setAutomaticSelectionMode(isAutoOverridableFlow) }
+                    } else {
+                        mContext.startActivity(
+                            Intent().apply {
+                                setClass(mContext, NetworkSelectActivity::class.java)
+                                putExtra(Settings.EXTRA_SUB_ID, subId)
+                            }
+                        )
+                    }
                 }
             }
-        })
+        )
     }
 
     override fun onStart(owner: LifecycleOwner) {
         if (satelliteManager != null) {
             try {
                 satelliteManager.registerForModemStateChanged(
-                    mContext.mainExecutor, satelliteModemStateCallback
+                    mContext.mainExecutor,
+                    satelliteModemStateCallback,
                 )
                 satelliteManager.registerForSelectedNbIotSatelliteSubscriptionChanged(
-                    mContext.mainExecutor, selectedNbIotSatelliteSubscriptionCallback
+                    mContext.mainExecutor,
+                    selectedNbIotSatelliteSubscriptionCallback,
                 )
             } catch (e: IllegalStateException) {
                 Log.w(TAG, "IllegalStateException $e")
             }
         }
-
     }
 
     override fun onStop(owner: LifecycleOwner) {
@@ -200,13 +205,14 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
 
     private suspend fun getDisallowedSummary(serviceState: ServiceState): String =
         withContext(Dispatchers.Default) {
-            val phoneType = getPhoneType()
-            if (!serviceState.roaming && onlyAutoSelectInHome()) {
+            if (
+                !serviceState.roaming && onlyAutoSelectInHome() && !serviceState.isManualSelection
+            ) {
                 mContext.getString(
                     R.string.manual_mode_disallowed_summary,
-                    telephonyManager.simOperatorName
+                    telephonyManager.simOperatorName,
                 )
-            } else if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
+            } else if (getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
                 mContext.getString(
                     R.string.cdma_manual_mode_disallowed_summary
                 )
@@ -237,9 +243,10 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
         allowedNetworkTypesFlowFactory(subId).collectLatestWithLifecycle(viewLifecycleOwner) {
-            preference.isVisible = withContext(Dispatchers.Default) {
-                MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, subId)
-            }
+            preference.isVisible =
+                withContext(Dispatchers.Default) {
+                    MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, subId)
+                }
         }
     }
 
@@ -259,12 +266,13 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
 
     private fun showAutoSelectProgressBar() {
         if (progressDialog == null) {
-            progressDialog = ProgressDialog(mContext).apply {
-                setMessage(mContext.resources.getString(R.string.register_automatically))
-                setCanceledOnTouchOutside(false)
-                setCancelable(false)
-                isIndeterminate = true
-            }
+            progressDialog =
+                ProgressDialog(mContext).apply {
+                    setMessage(mContext.resources.getString(R.string.register_automatically))
+                    setCanceledOnTouchOutside(false)
+                    setCancelable(false)
+                    isIndeterminate = true
+                }
         }
         progressDialog?.show()
     }

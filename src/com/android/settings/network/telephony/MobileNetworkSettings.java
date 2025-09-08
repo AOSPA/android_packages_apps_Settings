@@ -501,14 +501,22 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         // settings (backup calling).
         new ViewModelProvider(this).get(CrossSimCallingViewModel.class);
         use(AutoDataSwitchPreferenceController.class).init(mSubId);
-        use(DisabledSubscriptionController.class).init(mSubId);
+        if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
+            use(DisabledSubscriptionController.class).init(mSubId);
+        }
         use(DeleteSimProfilePreferenceController.class).init(mSubId);
         use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
 
-        use(MobileNetworkSpnPreferenceController.class).init(this, mSubId);
         use(MobileNetworkPhoneNumberPreferenceController.class).init(mSubId);
-        use(MobileNetworkImeiPreferenceController.class).init(this, mSubId);
+        if (!isCatalystEnabled()) {
+            use(MobileNetworkSpnPreferenceController.class).init(this, mSubId);
+            use(MobileNetworkImeiPreferenceController.class).init(this, mSubId);
+        }
+
+        if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
+            use(ApnPreferenceController.class).init(mSubId);
+        }
 
         final MobileDataPreferenceController mobileDataPreferenceController =
                 use(MobileDataPreferenceController.class);

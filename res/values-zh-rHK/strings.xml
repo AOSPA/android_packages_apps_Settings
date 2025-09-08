@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"向上移"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"向下移"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"移除"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"移至頂端"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"地區偏好設定"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"設定單位及數字偏好設定"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"讓應用程式存取地區偏好設定，為你提供個人化體驗。"</string>
@@ -679,7 +680,7 @@
     <string name="private_space_face_enroll_introduction_info_less_secure" msgid="8460719783943533172">"使用複雜的上鎖圖案、PIN 或密碼解鎖私人空間，會比使用面孔解鎖更安全"</string>
     <string name="private_space_face_settings_require_attention_details" msgid="2799569069549999689">"如要解鎖私人空間，你必須張開眼睛。為獲得最佳效果，請除下太陽眼鏡。"</string>
     <string name="private_space_face_settings_footer" msgid="7722256209563543711">"使用面孔解鎖私人空間。\n\n注意事項：\n你每次只可設定一張面孔。如要新增其他面孔，請刪除目前設定的面孔。\n\n只要看著手機，就可能會讓私人空間意外解鎖。\n\n如果其他人將裝置舉到你面前，私人空間亦會解鎖。\n\n樣貌與你十分相似的人 (例如孿生兄弟姊妹) 都有可能解鎖私人空間。"</string>
-    <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"使用「面孔解鎖」時，一律需要確認步驟"</string>
+    <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"使用「面孔解鎖」時，一律需要確認"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"解鎖方法"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"與裝置的螢幕鎖定相同"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"要為私人空間選擇新的鎖定方式嗎？"</string>
@@ -752,7 +753,7 @@
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"你可以使用指紋解鎖私人空間。為安全起見，此選項需要設定後備鎖定方式。"</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"設定私人空間的 PIN"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"設定私人空間密碼"</string>
-    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"設定私人空間上鎖圖案"</string>
+    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"設定私人空間的解鎖圖案"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"鎖定"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"隱藏"</string>
     <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"確認輸入私人空間圖案"</string>
@@ -766,10 +767,10 @@
     <string name="encryption_settings_title" msgid="2848716008695618360">"加密"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"已加密"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"設定螢幕鎖定"</string>
-    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"為提升安全性，請為此裝置設定 PIN、圖案或密碼。"</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"為加強安全，建議你為此裝置設定 PIN、解鎖圖案或密碼。"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"設定螢幕鎖定"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"設定螢幕鎖定"</string>
-    <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"為提升安全性，請為此裝置設定 PIN、圖案或密碼。"</string>
+    <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"為加強安全，建議你為此裝置設定 PIN、解鎖圖案或密碼。"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"保護手機安全"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"新增用於解鎖的指紋"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"選擇螢幕鎖定方式"</string>
@@ -898,7 +899,7 @@
     <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{必須包含至少 # 個字元}other{至少要有 # 個字元}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{如果只使用數字作為密碼，必須至少有 1 個數字}other{如果只使用數字作為密碼，必須至少有 # 個數字}}"</string>
     <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN 必須包含至少 # 個數字}other{PIN 必須至少有 # 個數字}}"</string>
-    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{PIN 必須包含至少 # 個數字，但建議使用 {minAutoConfirmLen} 位數 PIN 以提升安全性}other{PIN 必須包含至少 # 個數字，但建議使用 {minAutoConfirmLen} 位數 PIN 以提升安全性}}"</string>
+    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{PIN 必須包含至少 # 個數字，但使用 {minAutoConfirmLen} 位數 PIN 更安全}other{PIN 必須包含至少 # 個數字，但使用 {minAutoConfirmLen} 位數 PIN 更安全}}"</string>
     <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{必須少於 # 個字元}other{必須少於 # 個字元}}"</string>
     <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{必須少於 # 個數字}other{必須少於 # 個數字}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"裝置管理員不允許使用最近用過的 PIN 碼"</string>
@@ -1019,6 +1020,16 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"要使用新設定嗎？"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"如顯示畫面不如預期，你可還原至先前的設定"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"使用設定"</string>
+    <!-- no translation found for external_display_topology_display_block_content_description (4638018879987232608) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_up (5585023811277652685) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_down (497925070033309302) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_left (5207345941599286131) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_right (6258194449439072825) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"鏡像"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"啟用無線螢幕分享"</string>
@@ -1147,7 +1158,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"將二維條碼置於下方中間，即可連接至「<xliff:g id="SSID">%1$s</xliff:g>」"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"掃瞄 QR 碼加入 Wi-Fi"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"分享 Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"使用其他裝置掃瞄此二維條碼以加入「<xliff:g id="SSID">%1$s</xliff:g>」"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"使用其他裝置掃瞄此 QR 碼以加入「<xliff:g id="SSID">%1$s</xliff:g>」"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"掃描此二維條碼，即可連接「<xliff:g id="SSID">%1$s</xliff:g>」"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"請再試一次。如果仍有問題，請聯絡裝置製造商"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"發生問題"</string>
@@ -1403,13 +1414,13 @@
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"此設定只會影響支援高動態範圍 (HDR) 的圖片和影片。"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"顯示屏白平衡"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"在摺疊模式下繼續使用應用程式"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"摺疊時繼續使用應用程式"</string>
     <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"停用遊戲預設影格速率"</string>
     <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"停用遊戲影格速率上限 (<xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz)。"</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"流暢畫面"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"自動將部分內容的更新率調高至 <xliff:g id="ID_1">%1$d</xliff:g>Hz。電池用量會因而增加。"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"強制使用最高重新整理頻率"</string>
-    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"最高的重新整理頻率，帶來更靈敏的觸控反應和更高畫質的動畫。這會增加電池用量。"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"使用最高重新整理頻率可提升觸控反應的靈敏度和動畫畫質，但會增加耗電量。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"保持螢幕亮起"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"需要獲取相機權限"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"需要相機權限，才能保持螢幕亮起。輕按即可管理「裝置個人化服務」權限"</string>
@@ -1500,12 +1511,9 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"弱光模式"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"拿起即可喚醒"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"只限無線充電時"</string>
-    <!-- no translation found for blur_switch (1391073945502754948) -->
-    <skip />
-    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
-    <skip />
-    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
-    <skip />
+    <string name="blur_switch" msgid="1391073945502754948">"減少模糊處理效果"</string>
+    <string name="blur_switch_summary" msgid="5025895302219948597">"令背景和面板更清楚易讀"</string>
+    <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"因「省電模式」而暫時停用"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"使用「弱光模式」"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"選擇在「弱光模式」下顯示的內容"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"關閉螢幕"</string>
@@ -1580,16 +1588,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"儲存設定"</string>
     <string name="status_eid" msgid="3588471107671992684">"EID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"EID (SIM 卡插槽 <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <!-- no translation found for imei_multi_sim (6990044568468728075) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"如要查看，請選擇已儲存的網絡"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL 版本"</string>
-    <!-- no translation found for meid_multi_sim (3124054561186721453) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="3124054561186721453">"MEID <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"已開啟"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"關閉"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1683,8 +1689,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"共用"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"共用設定"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"插座模式"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"上鎖畫面小工具 (Beta 版本)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"自動顯示時機"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"一律不要"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"充電時"</string>
@@ -2340,7 +2345,7 @@
     <string name="user_dict_settings_add_dialog_less_options" msgid="100432503633458156">"較少選項"</string>
     <string name="user_dict_settings_add_dialog_confirm" msgid="1866751313790655088">"確定"</string>
     <string name="user_dict_settings_add_word_option_name" msgid="2686051785623698231">"字詞："</string>
-    <string name="user_dict_settings_add_shortcut_option_name" msgid="5722204336242646866">"捷徑："</string>
+    <string name="user_dict_settings_add_shortcut_option_name" msgid="5722204336242646866">"快速鍵："</string>
     <string name="user_dict_settings_add_locale_option_name" msgid="2117468247460253346">"語言："</string>
     <string name="user_dict_settings_add_word_hint" msgid="4560494723256242785">"輸入字詞"</string>
     <string name="user_dict_settings_add_shortcut_hint" msgid="6209624157217434640">"自選快速鍵"</string>
@@ -2413,7 +2418,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"聯絡 Google 殘疾支援團隊"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"無障礙功能問卷"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"分享意見"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"你對深色主題背景有多滿意？"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"參加問卷"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"分享意見"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"你對放大功能有多滿意？"</string>
@@ -2592,8 +2598,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"擴展"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"擴展深色主題背景"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"自動在更多應用程式中套用深色主題背景，提升無障礙體驗"</string>
-    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
-    <skip />
+    <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"強制反轉, 色彩反轉, 對比度"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"移除動畫"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"減少畫面上的動態效果"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"文字游標閃動"</string>
@@ -2655,7 +2660,7 @@
     <string name="autoclick_revert_to_left_click_title" msgid="6868866422993461739">"使用按一下左鍵為預設操作"</string>
     <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"當你使用另一個操作時，自動點擊會自動還原為按一下左鍵"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"自動點擊配搭三按鈕導覽功能使用效果最佳"</string>
-    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"使用自動點擊功能時，從手勢導覽改用三按鈕導覽，即可輕鬆返回上一頁、前往主畫面及切換應用程式"</string>
+    <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"使用自動點擊功能時，如要輕鬆返回上一頁、前往主畫面及切換應用程式，請改用三按鈕導覽，而不使用手勢導覽"</string>
     <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"保留手勢導覽"</string>
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"導覽設定"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"震動和觸感反應"</string>
@@ -3678,8 +3683,7 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"電池資訊、製造日期、週期數、首次使用"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"Android 安全性修補程式等級, 基頻版本, 核心版本"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"主題, 淺色, 深色, 模式, 光敏度, 光敏, 調暗, 調低亮度, 暗光模式, 偏頭痛"</string>
-    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
-    <skip />
+    <string name="keywords_blur_switch" msgid="3482676740440346012">"模糊處理效果"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"深色主題背景"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"錯誤"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"微光螢幕, 上鎖畫面"</string>
@@ -3972,8 +3976,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"顯示所有工作通知內容"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"隱藏敏感的工作內容"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"裝置鎖定時，應如何顯示個人檔案通知？"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"在上鎖畫面顯示"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"上鎖畫面顯示的內容"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"顯示查看過的通知"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"顯示查看過的通知圖示"</string>
@@ -4079,8 +4082,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"通知整理工具"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"將優先順序較低的通知分類並設定為靜音"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"管理通知整理工具使用的應用程式"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"一律展開分類通知"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"套用至工作設定檔應用程式"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服務"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"沒有已安裝的應用程式要求提供 VR 助手服務。"</string>
@@ -4302,7 +4304,7 @@
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"設定模式助你遵從有規律的時間表"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"設定模式以同步日曆活動和邀請答覆"</string>
     <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"設計能平靜身心的睡眠安排，包括設定鬧鐘、調暗螢幕和封鎖通知。"</string>
-    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"以路上安全為重，開車時保持專注，免被分心"</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"以行車安全為重，開車時保持專注，不受干擾"</string>
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"阻擋來自裝置的干擾以提升專注力"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"消除一切干擾，營造一個寧靜的環境"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"個人化裝置體驗和適合不同使用者的設定"</string>
@@ -4433,7 +4435,7 @@
     <string name="apps_storage" msgid="643866814746927111">"應用程式儲存空間"</string>
     <string name="usage_access" msgid="640680494210288246">"應用程式使用情況資料"</string>
     <string name="permit_usage_access" msgid="1590518257313260262">"允許存取應用程式使用情況資料"</string>
-    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"裝置使用時間"</string>
+    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"應用程式使用時間"</string>
     <string name="usage_access_description" msgid="2593955296993609047">"應用程式使用情況資料讓應用程式追蹤使用中的其他應用程式、使用頻率、流動網絡供應商、語言設定和其他詳細資料。"</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"記憶體"</string>
     <string name="always_running" msgid="9012705720688200252">"經常執行 (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -4538,7 +4540,7 @@
     <string name="allow_media_routing_description" msgid="8343709701298051207">"允許此應用程式選擇要使用哪一部連結的裝置播放其他應用程式的音訊或影片。如果允許，此應用程式可存取存取清單中的可用裝置 (例如耳機和喇叭)，並選擇要使用哪一部輸出裝置串流播放或投放音訊或影片。"</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"所有檔案存取權"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"允許存取以管理所有檔案"</string>
-    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允許此應用程式讀取、修改和刪除此裝置或任何已連接儲存卷上的所有檔案。如獲得權限，應用程式可能會在你不知情的情況下存取檔案。"</string>
+    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允許此應用程式讀取、修改和刪除此裝置或任何已連接儲存磁區上的所有檔案。如獲得權限，應用程式可能會在你不知情的情況下存取檔案。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可存取所有檔案"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全螢幕通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允許此應用程式的全螢幕通知"</string>
@@ -4582,7 +4584,7 @@
     <string name="users_summary" msgid="8473589474976307510">"已使用<xliff:g id="USER_NAME">%1$s</xliff:g>的身分登入"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"已更新至 Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"有可用的更新"</string>
-    <string name="disabled_by_policy_title" msgid="6852347040813204503">"已因工作政策而被封鎖"</string>
+    <string name="disabled_by_policy_title" msgid="6852347040813204503">"公司政策禁止這項設定"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"無法變更音量"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"無法撥打電話"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"無法傳送短訊"</string>
@@ -4862,7 +4864,7 @@
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"此捷徑的用途"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"將上半部螢幕畫面往下拉，方便你單手操作"</string>
     <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"如何使用單手模式"</b>\n" • 確保在系統導覽設定中選取手勢導覽\n • 在螢幕底部邊緣附近向下滑動"</string>
-    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"將畫面拉至觸及範圍內"</string>
+    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"將畫面拉到手指輕觸到的範圍內"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"畫面頂部會移至拇指能觸及的範圍內。"</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"顯示通知"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"系統會顯示通知和設定。"</string>
@@ -5343,7 +5345,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"日後如要使用流動數據、通話和短訊功能，請前往 [網絡設定] 調整設定內容"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM 卡"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"要清除此 eSIM 卡嗎？"</string>
-    <string name="erase_sim_dialog_text" msgid="3982216582200709197">"清除此 eSIM 卡即會從此裝置中移除 <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> 服務。<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> 的服務將不會取消。請聯絡流動網絡供應商索取新 eSIM。"</string>
+    <string name="erase_sim_dialog_text" msgid="3982216582200709197">"清除此 eSIM 卡即會從此裝置中移除 <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> 服務。<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> 的服務將不會取消。請聯絡流動網絡供應商索取新 eSIM 卡。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"清除"</string>
     <string name="erasing_sim" msgid="4237180547590463930">"正在清除 eSIM 卡…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"無法清除 eSIM 卡"</string>
@@ -5381,8 +5383,8 @@
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"在次要螢幕上啟用自由形態視窗"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"允許多重視窗模式顯示無法調整大小的應用程式"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"允許透過多重視窗模式顯示無法調整大小的應用程式"</string>
-    <string name="hwui_force_dark_title" msgid="4256904905631994219">"蓋過強制深色模式"</string>
-    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"蓋過永遠啟用強制深色模式的設定"</string>
+    <string name="hwui_force_dark_title" msgid="4256904905631994219">"蓋過強制深色主題背景"</string>
+    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"蓋過一律啟用強制深色主題背景的設定"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"私隱"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"權限、帳戶活動、個人資料"</string>
     <string name="privacy_controls_title" msgid="1383047169455206604">"控制項"</string>
@@ -5688,7 +5690,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"停用對子處理過程的限制"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"停用對應用程式子處理過程的系統資源使用限制"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"強制啟用「筆記」角色"</string>
-    <string name="enable_notes_role_summary" msgid="5495721409392395089">"透過「筆記」角色啟用筆記系統整合。如已啟用「筆記」角色，則無需執行任何操作。 (需要重新啟動裝置)。"</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"透過「筆記」角色啟用筆記系統整合。如已啟用「筆記」角色，則系統不會有任何操作 (需要重新啟動裝置)。"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"輸入密碼"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"轉換成 eSIM 卡"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"將 eSIM 卡轉移到其他裝置"</string>
@@ -5766,10 +5768,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"你安裝的應用程式可以取得你的裝置名稱。當你連接藍牙裝置或 Wi-Fi 網絡，或設定 Wi-Fi 熱點時，其他人亦可能會看到你的裝置名稱。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"語法性別"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"選取語法性別"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"透過掃瞄找出欺詐應用程式"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"掃瞄找出欺詐應用程式"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"檢查應用程式活動是否有仿冒詐騙行為"</string>
-    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"使用掃瞄功能找出欺詐性應用程式"</string>
-    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"使用掃瞄功能找出欺詐性工作應用程式"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"使用掃瞄功能找出欺詐應用程式"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"使用掃瞄功能找出欺詐工作應用程式"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"密碼現已設定"</string>
@@ -5957,6 +5959,12 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"嘗試刪除 PIN 時發生錯誤。"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g>動畫"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"無法開啟控制項"</string>
+    <!-- no translation found for supervision_generic_error_page_title (1890873741445464953) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_message (1532001782155323205) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_button_label (8972577027819946993) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"「身分檢查」現支援更多應用程式"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"任何使用「指紋解鎖」或「面孔解鎖」識別你身分的應用程式都能保障你的身分安全"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"查看詳情"</string>
@@ -5974,10 +5982,7 @@
     <string name="lock_screen_title" msgid="4701994278040604018">"螢幕鎖定"</string>
     <string name="location_settings" msgid="6833222354060094170">"位置存取權"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"查看擁有位置存取權的應用程式和服務"</string>
-    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
-    <skip />
-    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
-    <skip />
-    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
-    <skip />
+    <string name="identity_check_notification_title" msgid="8004343932775654492">"「身分檢查」可配搭更多應用程式使用"</string>
+    <string name="identity_check_notification_summary" msgid="3762060079941053730">"「身分檢查」能防止他人未經授權存取你的應用程式。現適用於任何使用「指紋解鎖」或「面孔解鎖」的應用程式。"</string>
+    <string name="identity_check_view_details" msgid="8752343542345818128">"查看詳情"</string>
 </resources>

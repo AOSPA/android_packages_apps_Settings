@@ -39,7 +39,7 @@ class WifiPickerRepository(
     private val context: Context,
     private val createWifiPickerTracker:
         (
-            workerThread: HandlerThread, callback: WifiPickerTracker.WifiPickerTrackerCallback
+            workerThread: HandlerThread, callback: WifiPickerTracker.WifiPickerTrackerCallback,
         ) -> WifiPickerTracker =
         { workerThread, callback ->
             featureFactory.wifiTrackerLibProvider.createWifiPickerTracker(
@@ -52,7 +52,7 @@ class WifiPickerRepository(
                 SCAN_INTERVAL_MILLIS,
                 callback,
             )
-        }
+        },
 ) {
 
     fun connectedWifiEntryFlow(): Flow<WifiEntry?> =
@@ -82,7 +82,6 @@ class WifiPickerRepository(
 
                 awaitClose {
                     tracker.onStop()
-                    tracker.onDestroy()
                     workerThread.quit()
                 }
             }

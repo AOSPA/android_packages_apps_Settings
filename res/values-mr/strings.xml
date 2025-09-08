@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"वर हलवा"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"खाली हलवा"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"काढून टाका"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"सर्वात वरती हलवा"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"प्रादेशिक प्राधान्ये"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"युनिट आणि नंबर प्राधान्ये सेट करा"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"अ‍ॅप्सना तुमची प्रादेशिक प्राधान्ये सांगा ज्यामुळे ते तुमचा अनुभव पर्सनलाइझ करतील."</string>
@@ -1019,6 +1020,11 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"नवीन सेटिंग्ज वापरायची आहेत का?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"तुमचा डिस्प्ले तुम्हाला हवा तसा काम करत नसल्यास, तुम्ही तुमच्या मागील सेटिंग्जवर परत येऊ शकता"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"सेटिंग्ज वापरा"</string>
+    <string name="external_display_topology_display_block_content_description" msgid="4638018879987232608">"डिस्प्ले: %1$s. हलवण्यासाठी कृती ड्रॅग करण्याकरिता किंवा पाहण्यासाठी दोनदा टॅप करून धरून ठेवा."</string>
+    <string name="external_display_topology_a11y_action_move_up" msgid="5585023811277652685">"वर हलवा"</string>
+    <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"खाली हलवा"</string>
+    <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"डावीकडे हलवा"</string>
+    <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"उजवीकडे हलवा"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"मिरर करा"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"वायरलेस डिस्प्ले सुरू करा"</string>
@@ -1500,12 +1506,9 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"कमी प्रकाश मोड"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"सक्रिय करण्‍यासाठी लिफ्‍ट"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"वायरलेस चार्जिंगपुरते प्रतिबंधित करा"</string>
-    <!-- no translation found for blur_switch (1391073945502754948) -->
-    <skip />
-    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
-    <skip />
-    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
-    <skip />
+    <string name="blur_switch" msgid="1391073945502754948">"ब्लर इफेक्ट कमी करा"</string>
+    <string name="blur_switch_summary" msgid="5025895302219948597">"बॅकग्राउंड आणि पॅनल पाहणे सोपे करा"</string>
+    <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"बॅटरी सेव्हर मुळे तात्पुरते बंद केले आहे"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"कमी प्रकाश मोड वापरणे"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"कमी प्रकाश मोडमध्ये काय दाखवायचे आहे ते निवडा"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"स्क्रीन बंद आहे"</string>
@@ -1681,8 +1684,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"सामुदायिक"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"सामुदायिक सेटिंग्ज"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"हब मोड"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"लॉक स्‍क्रीनवरील विजेट (बीटा)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"आपोआप कधी दाखवायचे"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"कधीही नाही"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"चार्ज करताना"</string>
@@ -1877,7 +1879,7 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"कार्य प्रोफाइलसाठी पिन सेट करा"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"पॅटर्न सेट करा"</string>
     <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"अतिरिक्त सुरक्षेसाठी, डिव्हाइस अनलॉक करण्याकरिता पॅटर्न सेट करा"</string>
-    <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"कार्य प्रोफाईलसाठी पॅटर्न सेट करा"</string>
+    <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"कार्य प्रोफाइलसाठी पॅटर्न सेट करा"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"फिंगरप्रिंट वापरण्यासाठी पासवर्ड सेट करा"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"फिंगरप्रिंट वापरण्यासाठी पॅटर्न सेट करा"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"सुरक्षिततेसाठी, पिन सेट करा"</string>
@@ -2043,7 +2045,7 @@
     <string name="filter" msgid="9039576690686251462">"फिल्टर"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"फिल्टर पर्याय निवडा"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"सर्व अ‍ॅप्स"</string>
-    <string name="filter_apps_disabled" msgid="5068011814871004105">"बंद केलेले अ‍ॅप्स"</string>
+    <string name="filter_apps_disabled" msgid="5068011814871004105">"बंद केलेली अ‍ॅप्स"</string>
     <string name="filter_apps_third_party" msgid="9049447784849114843">"डाउनलोड केले"</string>
     <string name="filter_apps_running" msgid="535465683273284141">"सुरू आहे"</string>
     <string name="not_installed" msgid="5074606858798519449">"या वापरकर्त्यासाठी इंस्टॉल केले नाही"</string>
@@ -2411,7 +2413,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Google ची भिन्नक्षमतेशी संबंधित सपोर्ट टीम याच्याशी संपर्क साधा"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"अ‍ॅक्सेसिबिलिटी सर्वेक्षण"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"तुमचा फीडबॅक शेअर करा"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"तुम्ही गडद थीमबाबत कितपत समाधानी आहात?"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"सर्वेक्षण करा"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"तुमचा फीडबॅक शेअर करा"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"तुम्ही मॅग्निफिकेशनबाबत कितपत समाधानी आहात?"</string>
@@ -2590,8 +2593,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"विस्तारित"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"विस्तारित गडद थीम"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"सुधारित अ‍ॅक्सेसिबिलिटीसाठी अधिक अ‍ॅप्सवर आपोआप गडद थीम लागू करते"</string>
-    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
-    <skip />
+    <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"फोर्स इन्व्हर्ट, कलर इन्व्हर्जन, काँट्रास्ट"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"अ‍ॅनिमेशन काढून टाका"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"स्क्रीनवरील हालचाल कमी करा"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"मजकुराचा कर्सर ब्लिंक होणे"</string>
@@ -3676,8 +3678,7 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"बॅटरी संबंधित माहिती, निर्माण केल्याची तारीख, चार्ज/डिस्चार्ज चक्राची संख्या, पहिला वापर"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"Android सुरक्षितता पॅच पातळी, बेसबँड आवृत्ती, कर्नल आवृत्ती"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"थीम, फिकट, गडद, मोड, प्रकाशाची संवेदनशीलता, फोटोफोबिया, आणखी गडद करा, गडद केलेले, गडद मोड, मायग्रेन"</string>
-    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
-    <skip />
+    <string name="keywords_blur_switch" msgid="3482676740440346012">"ब्लर इफेक्ट"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"गडद थीम"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"बग"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"अँबियन्ट डिस्‍प्‍ले, लॉक स्‍क्रीन डिस्‍प्‍ले"</string>
@@ -3859,7 +3860,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"अ‍ॅप्स"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"अलार्म आणि इतर व्यत्यय"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"क्विक सेटिंग्ज यासाठी कालावधी"</string>
-    <string name="sound_work_settings" msgid="752627453846309092">"कार्य प्रोफाइल आवाज"</string>
+    <string name="sound_work_settings" msgid="752627453846309092">"कार्य प्रोफाइलचा आवाज"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"वैयक्तिक प्रोफाइलचा आवाज वापरा"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"तुमच्या वैयक्तिक प्रोफाइलसारखाच आवाज वापरा"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"कार्य फोन रिंगटोन"</string>
@@ -3970,8 +3971,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"सर्व कार्य प्रोफाइल नोटिफिकेशन आशय दाखवा"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"संवेदनशील कार्य आशय लपवा"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"तुमचे डिव्हाइस लॉक केले असताना, प्रोफाईल सूचना कशा दर्शविल्या जाव्यात असे तुम्ही इच्छिता?"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"लॉक स्क्रीनवर दाखवा"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"लॉक स्‍क्रीनवर काय दाखवायचे आहे"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"पाहिलेली नोटिफिकेशन दाखवा"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"पाहिलेल्या नोटिफिकेशनचे आयकन दाखवा"</string>
@@ -4077,8 +4077,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"नोटिफिकेशन ऑर्गनायझर"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"कमी प्राधान्य असलेली नोटिफिकेशन बंडल करा आणि सायलंट करा"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"नोटिफिकेशन ऑर्गनायझरसाठी अ‍ॅप्स व्यवस्थापित करा"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"नेहमी बंडलचा विस्तार करा"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"कार्य प्रोफाइलच्या अ‍ॅप्सना लागू करा"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR मदतनीस सेवा"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"कोणत्याही इंस्टॉल केलेल्या अ‍ॅप्सनी VR मदतनीस सेवा म्हणून चालवण्यासाठी विनंती केली नाही."</string>
@@ -4132,7 +4131,7 @@
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{# वर्गवारी हटवली}other{# वर्गवाऱ्या हटवल्या}}"</string>
     <string name="app_notification_block_title" msgid="3880322745749900296">"सर्व ब्लॉक करा"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"या सूचना कधीही दर्शवू नका"</string>
-    <string name="notification_content_block_title" msgid="6689085826061361351">"सूचना दर्शवा"</string>
+    <string name="notification_content_block_title" msgid="6689085826061361351">"नोटिफिकेशन दर्शवा"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"सूचना कधीही रंगछटांंमध्ये किंवा डिव्हाइसच्या किनारीवर दर्शवू नका"</string>
     <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"फुल-स्क्रीन नोटिफिकेशनना अनुमती द्या"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"डिव्हाइस लॉक केलेले असताना नोटिफिकेशना फुल स्क्रीन वापरण्याची अनुमती द्या"</string>
@@ -4253,8 +4252,8 @@
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"तुम्ही अ‍ॅप्‍सना व्यत्यय आणण्याची अनुमती दिली नसली तरीही निवडक लोक तुमच्याशी संपर्क साधू शकतात"</string>
     <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{No apps can interrupt}=1{{app_1} व्यत्यय आणू शकते}=2{{app_1} आणि {app_2} व्यत्यय आणू शकतात}=3{{app_1}, {app_2}, आणि {app_3} व्यत्यय आणू शकतात}other{{app_1}, {app_2} आणि आणखी # व्यत्यय आणू शकतात}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"अ‍ॅप्स"</string>
-    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"व्यत्यय आणणाऱ्या सूचना"</string>
-    <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"सर्व सूचनांना अनुमती द्या"</string>
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"व्यत्यय आणणारी नोटिफिकेशन"</string>
+    <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"सर्व नोटिफिकेशनना अनुमती द्या"</string>
     <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Nothing can interrupt}=1{{sound_category_1} व्यत्यय आणू शकते}=2{{sound_category_1} आणि {sound_category_2} व्यत्यय आणू शकतात}=3{{sound_category_1}, {sound_category_2}, आणि {sound_category_3} व्यत्यय आणू शकतात}other{{sound_category_1}, {sound_category_2} आणि आणखी # व्यत्यय आणू शकते}}"</string>
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"काहीही व्यत्यय आणू शकत नाही"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"कोणीही व्यत्यय आणू शकत नाही"</string>
@@ -5955,6 +5954,9 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"पिन हटवण्याचा प्रयत्न करताना एरर आली."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> अ‍ॅनिमेशन"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"नियंत्रणे सुरू करू शकत नाही"</string>
+    <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"काहीतरी चुकले"</string>
+    <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"नंतर पुन्हा प्रयत्न करा"</string>
+    <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"मागे जा"</string>
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"ओळख तपासणी आणखी अ‍ॅप्समध्ये उपलब्ध आहे"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"तुमची ओळख पटवण्यासाठी फिंगरप्रिंट किंवा फेस अनलॉक देणाऱ्या कोणत्याही अ‍ॅपमध्ये तुम्ही तुमची ओळख सुरक्षित ठेवू शकता"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"तपशील पहा"</string>
@@ -5972,10 +5974,7 @@
     <string name="lock_screen_title" msgid="4701994278040604018">"स्क्रीन लॉक"</string>
     <string name="location_settings" msgid="6833222354060094170">"स्थान अ‍ॅक्सेस"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"स्थानाचा अ‍ॅक्सेस असलेली अ‍ॅप्स आणि सेवा पहा"</string>
-    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
-    <skip />
-    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
-    <skip />
-    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
-    <skip />
+    <string name="identity_check_notification_title" msgid="8004343932775654492">"ओळख तपासणी आणखी अ‍ॅप्ससह काम करते"</string>
+    <string name="identity_check_notification_summary" msgid="3762060079941053730">"ओळख तपासणी तुमच्या अ‍ॅप्सचा नको असलेला अ‍ॅक्सेस प्रतिबंधित करते. आता फिंगरप्रिंट किंवा फेस अनलॉक वापरणाऱ्या कोणत्याही अ‍ॅपसह उपलब्ध आहे."</string>
+    <string name="identity_check_view_details" msgid="8752343542345818128">"तपशील पहा"</string>
 </resources>

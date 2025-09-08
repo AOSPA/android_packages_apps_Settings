@@ -282,6 +282,34 @@ public final class DataProcessManagerTest {
         assertThat(mDataProcessManager.getAppUsageEventList()).isEmpty();
         assertThat(mDataProcessManager.getAppUsagePeriodMap()).isNull();
         assertThat(mDataProcessManager.getShowScreenOnTime()).isFalse();
+        // Verify that the loading flags are set to true for early return.
+        assertThat(mDataProcessManager.getIsCurrentAppUsageLoaded()).isTrue();
+        assertThat(mDataProcessManager.getIsDatabaseAppUsageLoaded()).isTrue();
+    }
+
+    @Test
+    public void start_loadCurrentAppUsageFails_setsFlagAndReturns() throws RemoteException {
+        // Arrange: Mock setup to simulate null UsageEvents for the current user,
+        // which should trigger an early return in loadCurrentAppUsageList.
+        doReturn(null)
+                .when(mUsageStatsManager)
+                .queryEventsWithFilter(any(), anyString());
+        doReturn(false).when(mUserIdsSeries).isCurrentUserLocked();
+        doReturn(true).when(mUserManager).isUserUnlocked(anyInt());
+        final int currentUserId = 123;
+        doReturn(currentUserId).when(mUserIdsSeries).getCurrentUserId();
+        doReturn(List.of(currentUserId)).when(mUserIdsSeries).getVisibleUserIds();
+
+        // Act: Start the data processing.
+        mDataProcessManager.start();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
+
+        // Assert: Verify that the loading flag is set to true despite the early return,
+        // ensuring the final callback is not blocked.
+        assertThat(mDataProcessManager.getIsCurrentAppUsageLoaded()).isTrue();
+        // Also assert that no app usage events were added from the current load.
+        assertThat(mDataProcessManager.getAppUsageEventList()).isEmpty();
     }
 
     @Test

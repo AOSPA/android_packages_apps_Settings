@@ -212,6 +212,11 @@
     <!-- List of a11y components on the device allowed to be enabled by Settings Slices -->
     <string-array name="config_settings_slices_accessibility_components" translatable="false"/>
 
+    <!-- The disability support title of OEM preferred devices. -->
+    <string name="config_accessibility_disability_support_title" translatable="false"/>
+    <!-- The disability support link of OEM preferred devices. -->
+    <string name="config_accessibility_disability_support_url" translatable="false"/>
+
     <!-- Whether or not to show the night light suggestion. -->
     <bool name="config_night_light_suggestion_enabled">true</bool>
 
@@ -742,6 +747,12 @@
 
     <!-- Whether posturing detection is supported. -->
     <bool name="config_posturing_supported">false</bool>
+
+    <!-- Whether to show the "glanceable hub" settings. -->
+    <bool name="config_show_glanceable_hub_toggle_setting">false</bool>
+
+    <!-- Whether to show the "glanceable hub" settings on mobile. -->
+    <bool name="config_show_glanceable_hub_toggle_setting_mobile">false</bool>
 
     <!-- Whether to show a "restrict to wireless charging" settings option in screensaver and hub
          mode settings (false by default). -->

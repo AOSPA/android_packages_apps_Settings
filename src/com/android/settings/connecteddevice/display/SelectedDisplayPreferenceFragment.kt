@@ -37,9 +37,12 @@ import com.android.settings.core.SubSettingLauncher
 /**
  * Fragment containing list of preferences for a single display, which gets updated dynamically,
  * based on the currently selected display
+ *
+ * Keep [parentViewModel] param as nullable since config changes could only re-create Fragment with
+ * empty constructor, even though [parentViewModel] will always be passed
  */
 open class SelectedDisplayPreferenceFragment(
-    private val testViewModel: DisplayPreferenceViewModel? = null
+    private val parentViewModel: DisplayPreferenceViewModel? = null
 ) : SettingsPreferenceFragmentBase() {
 
     private lateinit var viewModel: DisplayPreferenceViewModel
@@ -88,10 +91,12 @@ open class SelectedDisplayPreferenceFragment(
 
     override fun onCreateCallback(icicle: Bundle?) {
         addPreferencesFromResource(R.xml.external_display_settings)
-        if (testViewModel != null) {
-            // Test-only path
-            viewModel = testViewModel
+        if (parentViewModel != null) {
+            viewModel = parentViewModel
         } else {
+            // ViewModel will be passed from parent fragment, but when fragment is recreated from
+            // config changes, constructor param will be empty, and has to re-fetch the ViewModel
+            // here
             viewModel =
                 ViewModelProvider(requireParentFragment())
                     .get(DisplayPreferenceViewModel::class.java)
