@@ -23,6 +23,8 @@ import android.media.Spatializer;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -83,4 +85,12 @@ public interface BluetoothFeatureProvider {
     DeviceSettingRepository getDeviceSettingRepository(
             @NonNull Context context,
             @NonNull CoroutineScope scope);
+
+    /** Gets the alert dialogs for Bluetooth Diagnosis. */
+    @Nullable
+    AlertDialog getBluetoothDiagnosisAlertDialog(
+            @NonNull Context context,
+            @BluetoothDiagnosisEntryPoint int entryPoint,
+            @Nullable CachedBluetoothDevice device,
+            int metricsCategory);
 }

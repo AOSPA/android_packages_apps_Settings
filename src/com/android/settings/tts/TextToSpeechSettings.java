@@ -286,6 +286,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             }
 
             @Override
+            public void onStop(String utteranceId, boolean interrupted) {
+                updateWidgetState(true);
+            }
+
+            @Override
             public void onError(String utteranceId) {
                 Log.e(TAG, "Error while trying to synthesize sample text");
                 // Re-enable just in case, although there isn't much hope that following synthesis

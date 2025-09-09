@@ -105,7 +105,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public long getBatteryUsageStatsMaxAgeMs() {
+    public long getBatteryUsageStatsMaxAgeMs(boolean isFromPeriodJob) {
         return DataProcessor.BATTERY_STATS_MAX_AGE_UNSET;
     }
 

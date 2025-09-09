@@ -50,7 +50,7 @@
     <string name="font_size_make_smaller_desc" msgid="9149663537989624487">"Lettergrootte verkleinen"</string>
     <string name="font_size_make_larger_desc" msgid="5774611876657293550">"Lettergrootte vergroten"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Altijd"</string>
-    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Het scherm aan de voorkant gaat aan als je het apparaat vouwt"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Het scherm aan de voorkant gaat aan als je het apparaat dichtvouwt"</string>
     <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Swipe omhoog om door te gaan"</string>
     <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Vouw je telefoon dicht en swipe omhoog op het scherm aan de voorkant om de app te blijven gebruiken, of wacht een paar seconden totdat het scherm is vergrendeld. Games en video-apps gaan automatisch verder."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nooit"</string>
@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Omhoog verplaatsen"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Omlaag verplaatsen"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Verwijderen"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Bovenaan zetten"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionale voorkeuren"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Stel voorkeuren voor eenheden en cijfers in"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Stel je regionale voorkeuren in voor apps, zodat ze de functionaliteit kunnen personaliseren."</string>
@@ -679,7 +680,7 @@
     <string name="private_space_face_enroll_introduction_info_less_secure" msgid="8460719783943533172">"Je gezicht gebruiken om je privégedeelte te ontgrendelen zorgt misschien voor minder goede beveiliging dan een sterk patroon, een sterke pincode of een sterk wachtwoord"</string>
     <string name="private_space_face_settings_require_attention_details" msgid="2799569069549999689">"Je ogen moeten open zijn om het privégedeelte te ontgrendelen. Zet je zonnebril af voor de beste resultaten."</string>
     <string name="private_space_face_settings_footer" msgid="7722256209563543711">"Gebruik je gezicht om je privégedeelte te ontgrendelen.\n\nGoed om te weten:\nJe kunt maar één gezicht tegelijk instellen. Als je een ander gezicht wilt toevoegen, moet je het huidige gezicht verwijderen.\n\nAls je naar de telefoon kijkt, kun je het privégedeelte onbedoeld ontgrendelen.\n\nJe privégedeelte kan door iemand anders worden ontgrendeld als je apparaat voor je gezicht wordt gehouden.\n\nJe privégedeelte kan worden ontgrendeld door iemand die veel op je lijkt, zoals een tweelingbroer of -zus."</string>
-    <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"Altijd een bevestigingsstap vereisen bij gebruik van Ontgrendelen via gezichtsherkenning"</string>
+    <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"Vereis altijd een bevestigingsstap bij gebruik van Ontgrendelen via gezichtsherkenning"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Manieren om te ontgrendelen"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Dezelfde als die van het apparaat"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Nieuwe vergrendeling voor privégedeelte kiezen?"</string>
@@ -773,7 +774,7 @@
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Beveilig je telefoon"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Voeg vingerafdruk toe om te ontgrendelen"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Scherm­vergrendeling kiezen"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Scherm­vergrendeling kiezen"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Kies een scherm­vergrendeling"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Nieuwe scherm­vergrendeling"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Vergrendeling werk-apps kiezen"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Nieuwe vergrendeling voor werk-apps kiezen"</string>
@@ -1019,6 +1020,16 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Nieuwe instellingen gebruiken?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Als je scherm niet werkt zoals je wilt, kun je teruggaan naar je vorige instellingen"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Instellingen gebruiken"</string>
+    <!-- no translation found for external_display_topology_display_block_content_description (4638018879987232608) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_up (5585023811277652685) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_down (497925070033309302) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_left (5207345941599286131) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_right (6258194449439072825) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirroren"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Draadloze weergave aanzetten"</string>
@@ -1500,12 +1511,9 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Modus voor weinig licht"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Optillen om te activeren"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Beperken tot draadloos opladen"</string>
-    <!-- no translation found for blur_switch (1391073945502754948) -->
-    <skip />
-    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
-    <skip />
-    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
-    <skip />
+    <string name="blur_switch" msgid="1391073945502754948">"Vervagingseffecten verminderen"</string>
+    <string name="blur_switch_summary" msgid="5025895302219948597">"Achtergronden en deelvensters beter zichtbaar maken"</string>
+    <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Tijdelijk uit vanwege Batterijbesparing"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Modus voor weinig licht gebruiken"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Kies wat je wilt bekijken in de modus voor weinig licht"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Scherm uit"</string>
@@ -1681,8 +1689,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Gemeenschappelijk"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Gemeenschappelijke instellingen"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub-modus"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Widgets op het vergrendelscherm (bèta)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Wanneer automatisch tonen"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nooit"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Tijdens opladen"</string>
@@ -2411,7 +2418,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Contact opnemen met Google-supportteam voor gebruikers met een beperking"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Enquête over toegankelijkheid"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Je feedback delen"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Hoe tevreden ben je met het donkere thema?"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Enquête invullen"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Je feedback delen"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Hoe tevreden ben je over de vergroting?"</string>
@@ -2590,8 +2598,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Uitgebreid"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Uitgebreid donker thema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Het donkere thema wordt automatisch toegepast op meer apps voor betere toegankelijkheid"</string>
-    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
-    <skip />
+    <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"inversie afdwingen, kleurinversie, contrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animaties verwijderen"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Minder beweging op het scherm"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Knipperende tekstcursor"</string>
@@ -3519,7 +3526,7 @@
     <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"LTE-services gebruiken voor betere audiogesprekken (aanbevolen)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"4G-services gebruiken voor betere audiogesprekken (aanbevolen)"</string>
     <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
-    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"5G gebruiken voor audiogesprekken"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Gebruik 5G voor audiogesprekken"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Contacten naar provider sturen"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Telefoonnummers van je contacten sturen om geavanceerde functies te bieden"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Contacten naar <xliff:g id="CARRIER">%1$s</xliff:g> sturen?"</string>
@@ -3676,8 +3683,7 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"batterij-informatie, productiedatum, aantal cycli, eerste gebruik"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"niveau van android-beveiligingspatch, smalbandversie, kernel-versie"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"thema, licht, donker, modus, lichtgevoeligheid, fotofobie, donkerder maken, donkerder, donkere modus, migraine"</string>
-    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
-    <skip />
+    <string name="keywords_blur_switch" msgid="3482676740440346012">"vervagingseffecten"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"donker thema"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"bug"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Inactief scherm, vergrendelscherm"</string>
@@ -3970,8 +3976,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Toon content van alle werkmeldingen"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Verberg gevoelige werkcontent"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Hoe moeten profielmeldingen worden getoond als je apparaat is vergrendeld?"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"Weergeven op vergrendelscherm"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Wat je wilt tonen op het vergrendelscherm"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Bekeken meldingen tonen"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Iconen voor bekeken meldingen tonen"</string>
@@ -4077,8 +4082,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Meldingsorganisator"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Bundel meldingen met lagere prioriteit en zet ze op stil"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Apps beheren voor meldingenbeheer"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Bundels altijd uitvouwen"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Deze instelling toepassen op apps in werkprofielen"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-helperservices"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Er zijn geen geïnstalleerde apps die hebben gevraagd om te worden uitgevoerd als VR-helperservices."</string>
@@ -5379,8 +5383,8 @@
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Vensters met vrije vorm aanzetten op secundair scherm"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Apps met niet-aanpasbaar formaat aanzetten in meerdere vensters"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Staat apps met een niet-aanpasbaar formaat toe in meerdere vensters"</string>
-    <string name="hwui_force_dark_title" msgid="4256904905631994219">"Gedwongen donker maken negeren"</string>
-    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Overschrijft de functie voor gedwongen donker maken zodat deze altijd aanstaat"</string>
+    <string name="hwui_force_dark_title" msgid="4256904905631994219">"Donker afdwingen negeren"</string>
+    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Overschrijft de functie voor donker afdwingen zodat deze altijd aanstaat"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privacy"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Rechten, accountactiviteit, persoonsgegevens"</string>
     <string name="privacy_controls_title" msgid="1383047169455206604">"Opties"</string>
@@ -5955,6 +5959,12 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Er is een fout opgetreden bij het verwijderen van de pincode."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animatie voor <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Kan bedieningselementen niet aanzetten"</string>
+    <!-- no translation found for supervision_generic_error_page_title (1890873741445464953) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_message (1532001782155323205) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_button_label (8972577027819946993) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"Identiteitscontrole is beschikbaar in meer apps"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"Je kunt je identiteit beveiligen in elke app die Ontgrendelen met vingerafdruk of Ontgrendelen via gezichtsherkenning biedt om je te identificeren"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Details bekijken"</string>
@@ -5972,10 +5982,7 @@
     <string name="lock_screen_title" msgid="4701994278040604018">"Schermvergrendeling"</string>
     <string name="location_settings" msgid="6833222354060094170">"Locatietoegang"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Bekijk apps en services die toegang hebben tot de locatie"</string>
-    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
-    <skip />
-    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
-    <skip />
-    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
-    <skip />
+    <string name="identity_check_notification_title" msgid="8004343932775654492">"Identiteitscontrole werkt met meer apps"</string>
+    <string name="identity_check_notification_summary" msgid="3762060079941053730">"Identiteitscontrole voorkomt ongewenste toegang tot je apps. Nu beschikbaar voor elke app die Ontgrendelen met vingerafdruk of Ontgrendelen via gezichtsherkenning gebruikt."</string>
+    <string name="identity_check_view_details" msgid="8752343542345818128">"Details bekijken"</string>
 </resources>

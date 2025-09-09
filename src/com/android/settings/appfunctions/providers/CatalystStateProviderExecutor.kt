@@ -73,6 +73,7 @@ class CatalystStateProviderExecutor(
         screenKey: String,
         appFunctionType: DeviceStateAppFunctionType,
     ): PerScreenDeviceStates? {
+        Log.v(TAG, "Building per screen device states for $screenKey")
         val (screenMetaData, preferencesHierarchy) =
             getEnabledPreferencesHierarchy(config, context, appFunctionType, screenKey)
                 ?: return null

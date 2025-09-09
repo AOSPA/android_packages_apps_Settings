@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"ផ្លាស់ទី​ឡើង​លើ"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"ផ្លាស់ទី​ចុះ​ក្រោម"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"ដកចេញ"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"ផ្លាស់ទីទៅខាង​លើបំផុត"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"ចំណូលចិត្តតាមតំបន់"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"កំណត់​ចំណូលចិត្តលេខ និងខ្នាត"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"អនុញ្ញាតឱ្យ​កម្មវិធីដឹងពី​ចំណូលចិត្តតាមតំបន់​របស់អ្នក ដើម្បីឱ្យកម្មវិធីទាំងនោះ​អាចកំណត់​បទពិសោធន៍ប្រើប្រាស់របស់អ្នក​ឱ្យមានលក្ខណៈផ្ទាល់ខ្លួន។"</string>
@@ -775,7 +776,7 @@
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"ជ្រើស​រើសការ​ចាក់សោ​អេក្រង់"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"ជ្រើសរើសការចាក់សោអេក្រង់"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"ជ្រើសរើសការចាក់សោអេក្រង់ថ្មី"</string>
-    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"ជ្រើសរើសការចាក់សោសម្រាប់កម្មវិធីការងារ"</string>
+    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"រើសសោសម្រាប់កម្មវិធីការងារ"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"ជ្រើសរើសការចាក់សោការងារថ្មី"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"ដើម្បី​ទទួលបាន​សុវត្ថិភាព​បន្ថែម សូម​កំណត់​ការចាក់​សោអេក្រង់​បម្រុងទុក"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"ជ្រើសរើស​វិធីចាក់សោ​អេក្រង់បម្រុង​របស់អ្នក"</string>
@@ -1019,6 +1020,11 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"ប្រើការកំណត់ថ្មីៗឬ?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"ប្រសិនបើផ្ទាំងអេក្រង់របស់អ្នកមិនដំណើរការដូចដែលអ្នកចង់បានទេ អ្នកអាចត្រឡប់ទៅការកំណត់មុនរបស់អ្នកបាន"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"ប្រើការកំណត់"</string>
+    <string name="external_display_topology_display_block_content_description" msgid="4638018879987232608">"ផ្ទាំងអេក្រង់៖ %1$s។ ចុចពីរដង ហើយសង្កត់ឱ្យជាប់ ដើម្បីអូស ឬមើលសកម្មភាពដើម្បីផ្លាស់ទី។"</string>
+    <string name="external_display_topology_a11y_action_move_up" msgid="5585023811277652685">"ផ្លាស់ទី​ឡើង​លើ"</string>
+    <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"ផ្លាស់ទី​ចុះ​ក្រោម"</string>
+    <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"ផ្លាស់ទី​ទៅ​ឆ្វេង"</string>
+    <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"ផ្លាស់ទីទៅ​ស្ដាំ"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"កញ្ចក់"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"បើក​ការ​បង្ហាញ​ឥត​ខ្សែ"</string>
@@ -1577,16 +1583,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"កំណត់​ការ​​ផ្ទុក"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"EID (រន្ធស៊ីម <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <!-- no translation found for imei_multi_sim (6990044568468728075) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"ដើម្បីមើល សូមជ្រើសរើស​បណ្តាញដែលបាន​រក្សាទុក"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"កំណែ PRL"</string>
-    <!-- no translation found for meid_multi_sim (3124054561186721453) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="3124054561186721453">"MEID <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"បើក"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"បិទ"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1680,8 +1684,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"ទូទៅ"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"ការកំណត់ទូទៅ"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"មុខងារមណ្ឌល"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"ធាតុ​ក្រាហ្វិកនៅលើអេក្រង់ចាក់សោ (បេតា)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"ពេលដែលត្រូវបង្ហាញដោយស្វ័យប្រវត្តិ"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"កុំឱ្យសោះ"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"ពេលសាកថ្ម"</string>
@@ -2410,7 +2413,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"ទាក់ទងទៅផ្នែកជំនួយពិការភាព Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"ការស្ទង់មតិអំពីភាពងាយស្រួល"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"ចែករំលែកមតិកែលម្អរបស់អ្នក"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"តើអ្នកពេញចិត្តនឹងទម្រង់រចនាងងឹតកម្រិតណា?"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"ចូលរួមស្ទង់មតិ"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"ចែករំលែកមតិកែលម្អរបស់អ្នក"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"តើអ្នកពេញចិត្តនឹងការពង្រីកកម្រិតណា?"</string>
@@ -3792,7 +3796,7 @@
     <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"​ទប់ស្កាត់កត្តារំខាន ឬការរំខាន"</string>
     <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"រៀបចំ <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"បើកមុខងារកុំរំខាន"</string>
-    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"សំឡេង​មេឌៀ និង​ម៉ោងរោទ៍​អាច​ផ្អាកបាន"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"សំឡេង​មេឌៀ និង​ម៉ោងរោទ៍​អាច​រំខានបាន"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"កាលវិភាគ"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"លុបកាលវិភាគ"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"លុប"</string>
@@ -3967,8 +3971,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"បង្ហាញខ្លឹមសារនៃការជូនដំណឹងការងារទាំងអស់"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"លាក់​ខ្លឹមសារ​ការងារ​រសើប"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"នៅពេលដែលឧបករណ៍របស់អ្នកជាប់សោ តើអ្នកចង់ឲ្យការជូនដំណឹងប្រវត្តិរូបបង្ហាញដោយរបៀបណា?"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"បង្ហាញ​នៅលើ​អេក្រង់ចាក់សោ"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"អ្វីដែលត្រូវបង្ហាញនៅលើអេក្រង់ចាក់សោ"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"បង្ហាញការជូនដំណឹងដែលបានមើល"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"បង្ហាញរូបតំណាងការជូនដំណឹងដែលបានមើល"</string>
@@ -4074,8 +4077,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"កម្មវិធីរៀបចំការជូនដំណឹង"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"ដាក់ជាក្រុម និងបិទ​សំឡេងការជូនដំណឹងដែលមិនសូវសំខាន់"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"គ្រប់គ្រងកម្មវិធីសម្រាប់កម្មវិធីរៀបចំការជូនដំណឹង"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"ពង្រីកកញ្ចប់ជូនដំណឹងជានិច្ច"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"ដាក់ប្រើលើកម្មវិធីកម្រងព័ត៌មានការងារ"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"សេវាកម្មជំនួយ VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"មិនមានកម្មវិធីដែលបានដំឡើងត្រូវបានស្នើឲ្យដំណើរការជាសេវាកម្មជំនួយ VR នោះទេ។"</string>
@@ -4234,7 +4236,7 @@
     <string name="zen_mode_apps_category" msgid="4082380323683889391">"កម្មវិធី​ដែលអាច​ផ្អាកបាន"</string>
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"កម្មវិធីដែលបានជ្រើសរើស"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"គ្មាន"</string>
-    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{គ្មាន​កម្មវិធី​ដែលអាចផ្អាក​បានទេ}=1{{app_1} អាច​ផ្អាកបាន}=2{{app_1} និង {app_2} អាចផ្អាកបាន}=3{{app_1}, {app_2} និង {app_3} អាចផ្អាកបាន}other{{app_1}, {app_2} និង # ទៀតអាចផ្អាកបាន}}"</string>
+    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{គ្មាន​កម្មវិធី​ដែលអាចរំខាន​បានទេ}=1{{app_1} អាច​រំខានបាន}=2{{app_1} និង {app_2} អាចរំខានបាន}=3{{app_1}, {app_2} និង {app_3} អាចរំខានបាន}other{{app_1}, {app_2} និង # ទៀតអាចរំខានបាន}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (ការងារ)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"កំពុងគណនា…"</string>
     <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"ការកំណត់កម្មវិធី"</string>
@@ -4243,7 +4245,7 @@
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"កម្មវិធី​ដែលអាច​ផ្អាកបាន"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"ជ្រើសរើស​កម្មវិធី​ច្រើនទៀត"</string>
     <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"គ្មានកម្មវិធី​ដែលបាន​ជ្រើសរើសទេ"</string>
-    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"គ្មាន​កម្មវិធី​ណាមួយ​អាចផ្អាក​បានទេ"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"គ្មាន​កម្មវិធី​ណាមួយ​អាចរំខាន​បានទេ"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"បញ្ចូល​កម្មវិធី"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"ការ​ជូន​ដំណឹង​ទាំងអស់"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"ការជូនដំណឹង​មួយចំនួន"</string>
@@ -4255,7 +4257,7 @@
     <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{គ្មានអ្វីមួយ​អាចផ្អាក​បានទេ}=1{{sound_category_1} អាច​ផ្អាកបាន}=2{{sound_category_1} និង {sound_category_2} អាចផ្អាកបាន}=3{{sound_category_1}, {sound_category_2} និង {sound_category_3} អាចផ្អាកបាន}other{{sound_category_1}, {sound_category_2} និង # ទៀតអាចផ្អាកបាន}}"</string>
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"គ្មានអ្វីមួយ​អាចផ្អាក​បានទេ"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"គ្មាន​នរណា​អាចផ្អាក​បានទេ"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"មនុស្ស​មួយចំនួន​អាចផ្អាក​បាន"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"មនុស្ស​មួយចំនួន​អាចរំខាន​បាន"</string>
     <string name="zen_mode_people_repeat_callers" msgid="4499084111069828761">"អ្នកហៅទូរសព្ទ​ដដែលៗអាចផ្អាកបាន"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"នរណា​ក៏អាច​ផ្អាក​បានដែរ"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"អ្នកហៅចូលសាជាថ្មី"</string>
@@ -5952,6 +5954,9 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"មានបញ្ហាកើតឡើង ពេលព្យាយាមលុបកូដ PIN។"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"រូបមានចលនា <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"មិនអាចបើកការគ្រប់គ្រងបានទេ"</string>
+    <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"មានអ្វីមួយខុសប្រក្រតី"</string>
+    <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"ព្យាយាម​ម្ដងទៀត​នៅពេលក្រោយ"</string>
+    <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"ថយ​ក្រោយ"</string>
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"អាចប្រើការពិនិត្យអត្តសញ្ញាណនៅលើកម្មវិធីច្រើនទៀត"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"អ្នកអាចរក្សាការការពារអត្តសញ្ញាណរបស់អ្នកឱ្យមានសុវត្ថិភាពនៅលើកម្មវិធីណាមួយដែលផ្ដល់ជូនការដោះ​សោ​ដោយស្កេន​មុខ ឬការដោះសោដោយស្កេនស្នាមម្រាមដៃ ដើម្បីកំណត់អត្តសញ្ញាណអ្នក"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"មើលព័ត៌មានលម្អិត"</string>

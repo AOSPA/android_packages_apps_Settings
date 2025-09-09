@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Perkelti aukštyn"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Perkelti žemyn"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Pašalinti"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Perkelti į viršų"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Tinkamumo nustatymai pagal regioną"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Nustatyti vienetus ir numerių nuostatas"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Leiskite programoms žinoti jūsų tinkamumo nustatymus pagal regioną, kad galėtų suasmeninti funkcijas."</string>
@@ -1019,6 +1020,11 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Naudoti naujus nustatymus?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Jei ekranas neveikia taip, kaip norėtumėte, galite grįžti prie ankstesnių nustatymų"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Naudoti nustatymus"</string>
+    <string name="external_display_topology_display_block_content_description" msgid="4638018879987232608">"Ekranas: %1$s. Dukart palieskite ir palaikykite, kad nuvilktumėte arba peržiūrėtumėte veiksmus, kuriuos norite perkelti."</string>
+    <string name="external_display_topology_a11y_action_move_up" msgid="5585023811277652685">"Perkelti aukštyn"</string>
+    <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"Perkelti žemyn"</string>
+    <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"Perkelti kairėn"</string>
+    <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"Perkelti dešinėn"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ekrano vaizdo bendrinimas"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Įgalinti belaidį rodymą"</string>
@@ -1678,8 +1684,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Bendruomenės"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Bendruomenės nustatymai"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Centro režimas"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Valdikliai užrakinimo ekrane (beta versija)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Kada rodyti automatiškai"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Niekada"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Įkraunant"</string>
@@ -2408,7 +2413,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Susisiekite su „Google“ palaikymo neįgaliesiems komanda"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Pritaikomumo apklausa"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Bendrinkite atsiliepimą"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Kiek esate patenkinti tamsiąja tema?"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Dalyvauti apklausoje"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Bendrinkite atsiliepimą"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Kiek esate patenkinti didinimu?"</string>
@@ -3965,8 +3971,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Rodyti visą darbo pranešimų turinį"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Slėpti neskelbtiną darbo turinį"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Kaip norite matyti profilio pranešimus, kai įrenginys užrakintas?"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"Rodyti užrakinimo ekrane"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Ką rodyti užrakinimo ekrane"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Rodyti peržiūrėtus pranešimus"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Rodyti peržiūrėtų pranešimų piktogramas"</string>
@@ -4072,8 +4077,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Pranešimų tvarkyklė"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Sugrupuokite ir nutildykite žemesnio prioriteto pranešimus"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Pranešimų tvarkyklės programų tvarkymas"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Visada išskleisti rinkinius"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Taikyti darbo profilio programoms"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Pagalbinės virtualiosios realybės paslaugos"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nėra įdiegtų programų, kurios pateikė užklausą būti vykdomos kaip pagalbinės virtualiosios realybės paslaugos."</string>
@@ -4757,7 +4761,7 @@
     <string name="long_background_tasks_title" msgid="3272230637974707490">"Ilgai trunkančios užduotys fone"</string>
     <string name="long_background_tasks_footer_title" msgid="9117342254914743097">"Leidžiama šiai programai atlikti ilgai trunkančias užduotis fone. Programa gali vykdyti užduotis, kurios gali trukti ilgiau nei kelias minutes, pvz., atsisiuntimai ir įkėlimai. \n\nAtmetus šį leidimą sistema apribos, kiek laiko programa gali vykdyti tokias užduotis fone."</string>
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"ilgai trunkantys darbai, duomenų perkėlimas, fone atliekamos užduotys"</string>
-    <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Iš naujo nustatyti „ShortcutManager“ įkainių ribojimą"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Iš naujo nustatyti „ShortcutManager“ normos ribojimą"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"„ShortcutManager“ įkainių ribojimas nustatytas iš naujo"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Valdykite informaciją užrakinimo ekrane"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Rodykite arba slėpkite pranešimo turinį"</string>
@@ -5952,6 +5956,9 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Bandant ištrinti PIN kodą įvyko klaida."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"„<xliff:g id="FEATURE">%1$s</xliff:g>“ animacija"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Nepavyko įjungti valdiklių"</string>
+    <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Kažkas nepavyko"</string>
+    <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Vėliau bandykite dar kartą"</string>
+    <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Grįžti"</string>
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"Tapatybės patikra pasiekiama daugiau programų"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"Galite apsaugoti savo tapatybę bet kurioje programoje, kurioje naudojamas tapatybės nustatymas pagal piršto atspaudą arba atrakinimas pagal veidą"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Žr. išsamią informaciją"</string>

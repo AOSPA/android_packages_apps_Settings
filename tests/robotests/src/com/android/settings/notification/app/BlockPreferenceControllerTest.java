@@ -29,6 +29,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -38,19 +40,28 @@ import static org.mockito.Mockito.when;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.UserManager;
+import android.os.UserHandle;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -65,6 +76,11 @@ import java.util.ArrayList;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowInteractionJankMonitor.class})
 public class BlockPreferenceControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
+    private static final ComponentName DEVICE_ADMIN_COMPONENT =
+            new ComponentName("deviceAdmin", "DO");
 
     private Context mContext;
     @Mock
@@ -73,6 +89,8 @@ public class BlockPreferenceControllerTest {
     private NotificationManager mNm;
     @Mock
     private UserManager mUm;
+    @Mock
+    private DevicePolicyManager mDpm;
 
     @Mock
     private NotificationSettings.DependentFieldListener mDependentFieldListener;
@@ -81,15 +99,23 @@ public class BlockPreferenceControllerTest {
     private SettingsMainSwitchPreference mPreference;
 
     @Before
-    public void setUp() {
+    public void setUp() throws NameNotFoundException {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
-        mContext = RuntimeEnvironment.application;
+        shadowApplication.setSystemService(Context.DEVICE_POLICY_SERVICE, mDpm);
+        mContext = spy(RuntimeEnvironment.application);
+
         mController = spy(
                 new BlockPreferenceController(mContext, mDependentFieldListener, mBackend));
-        mPreference = new SettingsMainSwitchPreference(mContext);
+        mPreference = spy(new SettingsMainSwitchPreference(mContext));
+
+        doReturn(mContext).when(mContext).createPackageContextAsUser(any(String.class), anyInt(),
+            any(UserHandle.class));
+        final UserHandle user = mContext.getUser();
+        when(mDpm.getDeviceOwnerUser()).thenReturn(user);
+        when(mDpm.getDeviceOwnerComponentOnAnyUser()).thenReturn(null);
 
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         final View view = inflater.inflate(mPreference.getLayoutResource(),
@@ -208,6 +234,7 @@ public class BlockPreferenceControllerTest {
         mController.onResume(appRow, null, null, null, null, null, null);
         mController.updateState(mPreference);
         assertFalse(mPreference.getSwitchBar().isEnabled());
+        verify(mPreference).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -217,6 +244,7 @@ public class BlockPreferenceControllerTest {
         mController.onResume(appRow, null, null, null, null, null, null);
         mController.updateState(mPreference);
         assertFalse(mPreference.getSwitchBar().isEnabled());
+        verify(mPreference).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -227,6 +255,7 @@ public class BlockPreferenceControllerTest {
                 appRow, null, new NotificationChannelGroup("a", "a"), null, null, null, null);
         mController.updateState(mPreference);
         assertFalse(mPreference.getSwitchBar().isEnabled());
+        verify(mPreference).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -237,6 +266,7 @@ public class BlockPreferenceControllerTest {
                 null, null, null);
         mController.updateState(mPreference);
         assertFalse(mPreference.getSwitchBar().isEnabled());
+        verify(mPreference).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -249,6 +279,7 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertTrue(mPreference.getSwitchBar().isEnabled());
+        verify(mPreference).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -259,6 +290,8 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertTrue(mPreference.getSwitchBar().isEnabled());
+        assertTrue(mPreference.isEnabled());
+        verify(mPreference).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -275,6 +308,7 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertTrue(mPreference.isChecked());
+        verify(mPreference, times(2)).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -300,6 +334,7 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertTrue(mPreference.isChecked());
+        verify(mPreference, times(3)).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -324,6 +359,7 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertTrue(mPreference.isChecked());
+        verify(mPreference, times(3)).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -333,6 +369,7 @@ public class BlockPreferenceControllerTest {
         mController.onResume(appRow, channel, null, null, null, null, null);
         mController.updateState(mPreference);
         mController.updateState(mPreference);
+        verify(mPreference, times(2)).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -343,6 +380,7 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertEquals(IMPORTANCE_LOW, channel.getImportance());
+        verify(mPreference).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -367,6 +405,7 @@ public class BlockPreferenceControllerTest {
 
         verify(mBackend, times(2)).setNotificationsEnabledForPackage(
                 anyString(), anyInt(), anyBoolean());
+        verify(mPreference).setDisabledByAdmin(eq(null));
     }
 
     @Test
@@ -384,5 +423,48 @@ public class BlockPreferenceControllerTest {
         assertEquals(IMPORTANCE_HIGH, channel.getImportance());
 
         verify(mBackend, times(2)).updateChannel(any(), anyInt(), any());
+        verify(mPreference).setDisabledByAdmin(eq(null));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_NOTIFICATION_USE_DPC_POLICY)
+    public void testDPCPolicyPrompt_switchIsNotDisabledByAdmin() {
+        when(mDpm.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_ADMIN_COMPONENT);
+        when(mDpm.getPermissionPolicy(any())).thenReturn(
+                DevicePolicyManager.PERMISSION_POLICY_PROMPT);
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.updateState(mPreference);
+        assertTrue(mPreference.getSwitchBar().isEnabled());
+        assertTrue(mPreference.isEnabled());
+        verify(mPreference).setDisabledByAdmin(eq(null));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_NOTIFICATION_USE_DPC_POLICY)
+    public void testDPCPolicyAutoGrant_switchIsDisabledByAdmin() {
+        when(mDpm.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_ADMIN_COMPONENT);
+        when(mDpm.getPermissionPolicy(any())).thenReturn(
+                DevicePolicyManager.PERMISSION_POLICY_AUTO_GRANT);
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.updateState(mPreference);
+        assertTrue(mPreference.getSwitchBar().isEnabled());
+        assertTrue(mPreference.isEnabled());
+        verify(mPreference, times(1)).setDisabledByAdmin(any(EnforcedAdmin.class));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_NOTIFICATION_USE_DPC_POLICY)
+    public void testDPCPolicyAutoDeny_switchIsDisabledByAdmin() {
+        when(mDpm.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_ADMIN_COMPONENT);
+        when(mDpm.getPermissionPolicy(any())).thenReturn(
+                DevicePolicyManager.PERMISSION_POLICY_AUTO_DENY);
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.updateState(mPreference);
+        assertTrue(mPreference.getSwitchBar().isEnabled());
+        assertTrue(mPreference.isEnabled());
+        verify(mPreference, times(1)).setDisabledByAdmin(any(EnforcedAdmin.class));
     }
 }

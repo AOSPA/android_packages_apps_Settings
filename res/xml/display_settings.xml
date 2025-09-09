@@ -108,12 +108,6 @@
             android:persistent="false"
             android:title="@string/accessibility_text_reading_options_title"
             settings:controller="com.android.settings.accessibility.TextReadingFragmentForDisplaySettingsController"/>
-
-        <Preference
-            android:key="widgets_on_lockscreen"
-            android:title="@string/widgets_on_lockscreen_title"
-            android:fragment="com.android.settings.communal.WidgetsOnLockscreenFragment"
-            settings:controller="com.android.settings.display.WidgetsOnLockscreenPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -86,6 +86,7 @@ import com.android.settings.network.AdaptiveConnectivityScreen
 import com.android.settings.network.MobileNetworkListScreen
 import com.android.settings.network.NetworkDashboardScreen
 import com.android.settings.network.NetworkProviderScreen
+import com.android.settings.network.apn.ApnSettingsScreen
 import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.BubbleNotificationScreen
@@ -198,6 +199,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = MobileNetworkListScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = ApnSettingsScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = MyDeviceInfoScreen.KEY),

@@ -82,7 +82,7 @@ class DarkModeCustomModesFooterPreferenceTest {
             on { getModes() } doReturn listOf<ZenMode?>(modeThatDoesNotChange)
         }
 
-        assertThat(preference.getTitle(context)).isEqualTo("Modes can also turn on Dark theme.")
+        assertThat(preference.getTitle(context)).isEqualTo("Modes can also turn on dark theme")
     }
 
     @Test
@@ -95,7 +95,7 @@ class DarkModeCustomModesFooterPreferenceTest {
                 .build()
         mockZenModesBackend.stub { on { getModes() } doReturn listOf<ZenMode?>(modeThatChanges1) }
 
-        assertThat(preference.getTitle(context)).isEqualTo("Inactive also turns on Dark theme.")
+        assertThat(preference.getTitle(context)).isEqualTo("Inactive also turns on dark theme")
     }
 
     @Test
@@ -117,7 +117,7 @@ class DarkModeCustomModesFooterPreferenceTest {
         }
 
         assertThat(preference.getTitle(context))
-            .isEqualTo("Inactive and Active also turn on Dark theme.")
+            .isEqualTo("Inactive and Active also turn on dark theme")
     }
 
     @Test
@@ -146,7 +146,7 @@ class DarkModeCustomModesFooterPreferenceTest {
         }
 
         assertThat(preference.getTitle(context))
-            .isEqualTo("Inactive, Active, and Display also turn on Dark theme.")
+            .isEqualTo("Inactive, Active, and Display also turn on dark theme")
     }
 
     @Test
@@ -186,7 +186,7 @@ class DarkModeCustomModesFooterPreferenceTest {
         }
 
         assertThat(preference.getTitle(context))
-            .isEqualTo("Inactive, Active, and 2 more also turn on Dark theme.")
+            .isEqualTo("Inactive, Active, and 2 more also turn on dark theme")
     }
 
     @Test

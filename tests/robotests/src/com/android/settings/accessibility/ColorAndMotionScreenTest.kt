@@ -18,21 +18,20 @@ package com.android.settings.accessibility
 
 import android.app.settings.SettingsEnums
 import android.content.ComponentName
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings.ColorAndMotionActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 
-class ColorAndMotionScreenTest : SettingsCatalystTestCase() {
-    override val preferenceScreenCreator: PreferenceScreenMixin = ColorAndMotionScreen()
-
-    override val flagName: String
-        get() = Flags.FLAG_CATALYST_ACCESSIBILITY_COLOR_AND_MOTION
-
-    @Test override fun migration() {}
+@RunWith(AndroidJUnit4::class)
+class ColorAndMotionScreenTest {
+    private val preferenceScreenCreator: PreferenceScreenMixin = ColorAndMotionScreen()
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
     @Test
     fun isIndexable_returnTrue() {

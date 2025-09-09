@@ -179,6 +179,14 @@ public final class DataProcessor {
         return getBatteryUsageStats(context, BATTERY_STATS_MAX_AGE_UNSET);
     }
 
+    /** Gets the {@link BatteryUsageStats} from system service. */
+    @NonNull
+    public static BatteryUsageStats getBatteryUsageStats(final Context context,
+            final boolean isFromPeriodJob) {
+        return getBatteryUsageStats(context, FeatureFactory.getFeatureFactory()
+                .getPowerUsageFeatureProvider().getBatteryUsageStatsMaxAgeMs(isFromPeriodJob));
+    }
+
     /** Gets the {@link UsageEvents} from system service for all unlocked users. */
     @Nullable
     public static Map<Long, UsageEvents> getAppUsageEvents(
@@ -938,7 +946,7 @@ public final class DataProcessor {
         return result;
     }
 
-    /** Gets the {@link BatteryUsageStats} from system service. */
+    /** Gets the {@link BatteryUsageStats} from system service with tolerance age. */
     @NonNull
     private static BatteryUsageStats getBatteryUsageStats(final Context context,
             final long maxStatsAgeMs) {
@@ -1093,10 +1101,8 @@ public final class DataProcessor {
 
     @Nullable
     private static List<BatteryHistEntry> getBatteryHistListFromFromStatsService(Context context) {
-        try (BatteryUsageStats batteryUsageStats = getBatteryUsageStats(context,
-                FeatureFactory.getFeatureFactory()
-                        .getPowerUsageFeatureProvider()
-                        .getBatteryUsageStatsMaxAgeMs())) {
+        try (BatteryUsageStats batteryUsageStats = getBatteryUsageStats(
+                context, /* isFromPeriodJob= */ false)) {
             final List<BatteryEntry> batteryEntryList =
                     generateBatteryEntryListFromBatteryUsageStats(context, batteryUsageStats);
             return convertToBatteryHistEntry(batteryEntryList, batteryUsageStats);

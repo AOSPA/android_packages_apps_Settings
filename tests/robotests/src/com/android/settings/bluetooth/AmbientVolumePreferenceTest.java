@@ -45,7 +45,7 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settingslib.bluetooth.AmbientVolumeUi;
+import com.android.settingslib.bluetooth.hearingdevices.ui.AmbientVolumeUi;
 import com.android.settingslib.widget.SliderPreference;
 
 import org.junit.Before;
@@ -96,7 +96,7 @@ public class AmbientVolumePreferenceTest {
         preferenceScreen.addPreference(mPreference);
 
         prepareDevices();
-        mPreference.setupSliders(mSideToDeviceMap);
+        mPreference.setupSliders(mSideToDeviceMap.keySet());
         mPreference.getSliders().forEach((side, slider) -> {
             slider.setMin(0);
             slider.setMax(4);
@@ -134,6 +134,9 @@ public class AmbientVolumePreferenceTest {
 
     @Test
     public void setControlExpandable_notExpandable_expandIconGone() {
+        // Change the state from its default (false) to true. This ensures that the subsequent call
+        // to setControlExpandable(false) will trigger the update logic.
+        mPreference.setControlExpandable(true);
         mPreference.setControlExpandable(false);
 
         assertThat(mExpandIcon.getVisibility()).isEqualTo(View.GONE);
@@ -144,29 +147,18 @@ public class AmbientVolumePreferenceTest {
         mPreference.setControlExpanded(true);
 
         assertControlUiCorrect();
-    }
-
-    @Test
-    public void setControlExpanded_notExpanded_assertControlUiCorrect() {
-        mPreference.setControlExpanded(false);
-
-        assertControlUiCorrect();
-    }
-
-    @Test
-    public void updateLayout_expanded_volumeIconIsCorrect() {
-        mPreference.setControlExpanded(true);
-        mPreference.updateLayout();
-
         int expectedLevel = calculateVolumeLevel(TEST_LEFT_VOLUME_LEVEL, TEST_RIGHT_VOLUME_LEVEL);
         assertThat(mVolumeIcon.getDrawable().getLevel()).isEqualTo(expectedLevel);
     }
 
     @Test
-    public void updateLayout_notExpanded_volumeIconIsCorrect() {
+    public void setControlExpanded_notExpanded_assertControlUiCorrect() {
+        // Change the state from its default (false) to true. This ensures that the subsequent call
+        // to setControlExpanded(false) will trigger the update logic.
+        mPreference.setControlExpanded(true);
         mPreference.setControlExpanded(false);
-        mPreference.updateLayout();
 
+        assertControlUiCorrect();
         int expectedLevel = calculateVolumeLevel(TEST_UNIFIED_VOLUME_LEVEL,
                 TEST_UNIFIED_VOLUME_LEVEL);
         assertThat(mVolumeIcon.getDrawable().getLevel()).isEqualTo(expectedLevel);

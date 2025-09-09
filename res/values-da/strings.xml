@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"Flyt op"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Flyt ned"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Fjern"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Flyt til toppen"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionsindstillinger"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Angiv præferencer for måleenheder og numre"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Giv apps besked om dine regionsindstillinger, så de kan foretage personlig tilpasning af din brugeroplevelse."</string>
@@ -1019,6 +1020,16 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Vil du bruge de nye indstillinger?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Hvis din skærm ikke fungerer, som du gerne vil have den til, kan du vende tilbage til dine tidligere indstillinger"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Brug indstillinger"</string>
+    <!-- no translation found for external_display_topology_display_block_content_description (4638018879987232608) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_up (5585023811277652685) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_down (497925070033309302) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_left (5207345941599286131) -->
+    <skip />
+    <!-- no translation found for external_display_topology_a11y_action_move_right (6258194449439072825) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spejl"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktivér trådløs skærm"</string>
@@ -1500,12 +1511,9 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"Tilstanden Svag belysning"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Løft enheden for at vække den"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Begræns til trådløs opladning"</string>
-    <!-- no translation found for blur_switch (1391073945502754948) -->
-    <skip />
-    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
-    <skip />
-    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
-    <skip />
+    <string name="blur_switch" msgid="1391073945502754948">"Reducer sløringseffekter"</string>
+    <string name="blur_switch_summary" msgid="5025895302219948597">"Gør baggrunde og paneler nemmere at se"</string>
+    <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Midlertidigt deaktiveret på grund af Batterisparefunktion"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Brug tilstanden Svag belysning"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Vælg, hvad der skal vises i tilstanden Svag belysning"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"Slukket skærm"</string>
@@ -1580,16 +1588,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"Indstillinger for lagerplads"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (SIM-kortrille <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <!-- no translation found for imei_multi_sim (6990044568468728075) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Vælg et gemt netværk for at se"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI-nummer"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL-version"</string>
-    <!-- no translation found for meid_multi_sim (3124054561186721453) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="3124054561186721453">"MEID <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Til"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Fra"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1683,8 +1689,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Fælles"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Fælles indstillinger"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub-tilstand"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Widgets på låseskærmen (beta)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Hvornår skal de vises automatisk?"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Aldrig"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Når enheden oplades"</string>
@@ -2413,7 +2418,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Kontakt Googles support til brugere med handicap"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Undersøgelse om tilgængelighed"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Giv os feedback"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"Hvor tilfreds er du med Mørkt tema?"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Deltag i undersøgelsen"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Giv os feedback"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Hvor tilfreds er du med Forstørrelse?"</string>
@@ -2592,8 +2598,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Udvidet"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Udvidet Mørkt tema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Mørkt tema anvendes automatisk i flere apps for at forbedre tilgængeligheden"</string>
-    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
-    <skip />
+    <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"tving ombytning, ombytning af farver, kontrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Fjern animationer"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Begrænser bevægelse på skærmen"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Blinkende tekstmarkør"</string>
@@ -3678,8 +3683,7 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"batterioplysninger, produktionsdato, antal cyklusser, ibrugtagning"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"seneste sikkerhedsopdatering i Android, basebandversion, kernesystem"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, lyst, mørkt, tilstand, lysfølsomhed, fotofobi, gør mørkere, mørkere, mørk tilstand, migræne"</string>
-    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
-    <skip />
+    <string name="keywords_blur_switch" msgid="3482676740440346012">"sløringseffekter"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"mørkt tema"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"fejl"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Aktiv låseskærm, visning af låseskærm"</string>
@@ -3972,8 +3976,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Vis alt indhold i arbejdsnotifikationer"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Skjul følsomt arbejdsindhold"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Hvordan skal profilunderretninger vises, når din enhed er låst?"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"Vis på låseskærmen"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"Hvad skal der vises på låseskærmen?"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"Vis notifikationer, der er blevet set"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"Vis ikoner for notifikationer, der er blevet set"</string>
@@ -4079,8 +4082,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Notifikations­organisering"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Gruppér og ignorer notifikationer med lavere prioritet"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Administrer apps til notifikationsorganisering"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Udvid altid pakker"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Anvend på apps på arbejdsprofilen"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-hjælpetjenester"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ingen installerede apps har anmodet om at blive kørt som VR-hjælpetjenester."</string>
@@ -4101,12 +4103,12 @@
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Der er ingen forbundne apps"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"på tværs af profiler tilknyttet app apps arbejde og personlige"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Tilknyttet"</string>
-    <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Forbind disse apps"</string>
-    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Forbundne apps deler tilladelser og har adgang til hinandens data."</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Du bør kun forbinde apps, hvis du har tillid til, at de ikke deler personoplysninger med din it-administrator."</string>
+    <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Tilknyt disse apps"</string>
+    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Tilknyttede apps deler tilladelser og har adgang til hinandens data."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Du bør kun tilknytte apps, hvis du har tillid til, at de ikke deler personoplysninger med din it-administrator."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Du kan til enhver tid fjerne forbindelsen mellem dine apps i privatlivsindstillingerne for din enhed."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Vil du dele dine personoplysninger med arbejdsappen <xliff:g id="NAME">%1$s</xliff:g>?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Du bør kun forbinde apps, hvis du har tillid til, at de ikke deler personoplysninger med din it-administrator."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Du bør kun tilknytte apps, hvis du har tillid til, at de ikke deler personoplysninger med din it-administrator."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Appdata"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Denne app har adgang til data i din personlige <xliff:g id="NAME">%1$s</xliff:g>-app."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Tilladelser"</string>
@@ -5904,7 +5906,7 @@
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Adgangskoden kan ikke ændres under deling. Deaktiver lyddeling for at ændre adgangskoden."</string>
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Din adgangskode skal indeholde 4-16 tegn og må kun bestå af bogstaver, tal og symboler"</string>
     <string name="audio_streams_main_page_name_dialog_format_alert" msgid="6797839340871206774">"Navnet på din lydstream skal indeholde 4-32 tegn og må kun bestå af bogstaver, tal og symboler"</string>
-    <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-kodescanner"</string>
+    <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-kode­scanner"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Har du brug for hjælp?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Søg i Indstillinger"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"kontakter, lagerplads, konto"</string>
@@ -5957,6 +5959,12 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Der opstod en fejl under forsøget på at slette pinkoden."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation af <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Indstillingerne kan ikke aktiveres"</string>
+    <!-- no translation found for supervision_generic_error_page_title (1890873741445464953) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_message (1532001782155323205) -->
+    <skip />
+    <!-- no translation found for supervision_generic_error_page_button_label (8972577027819946993) -->
+    <skip />
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"Identitetstjek er tilgængelig i flere apps"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"Du kan beskytte din identitet i alle apps, der tilbyder fingeroplåsning eller ansigtsoplåsning til at identificere dig"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Se oplysninger"</string>
@@ -5974,10 +5982,7 @@
     <string name="lock_screen_title" msgid="4701994278040604018">"Skærmlås"</string>
     <string name="location_settings" msgid="6833222354060094170">"Lokationsadgang"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Se de apps og tjenester, der har adgang til lokation"</string>
-    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
-    <skip />
-    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
-    <skip />
-    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
-    <skip />
+    <string name="identity_check_notification_title" msgid="8004343932775654492">"Identitetstjek fungerer med flere apps"</string>
+    <string name="identity_check_notification_summary" msgid="3762060079941053730">"Identitetstjek forhindrer uønsket adgang til dine apps. Nu tilgængelig med alle apps, der bruger fingeroplåsning eller ansigtsoplåsning."</string>
+    <string name="identity_check_view_details" msgid="8752343542345818128">"Se oplysninger"</string>
 </resources>

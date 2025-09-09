@@ -29,11 +29,11 @@ import static org.mockito.Mockito.when;
 import androidx.preference.PreferenceCategory;
 
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
-import com.android.settingslib.bluetooth.AmbientVolumeUiController;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.bluetooth.VolumeControlProfile;
+import com.android.settingslib.bluetooth.hearingdevices.ui.AmbientVolumeUiController;
 
 import org.junit.Before;
 import org.junit.Rule;

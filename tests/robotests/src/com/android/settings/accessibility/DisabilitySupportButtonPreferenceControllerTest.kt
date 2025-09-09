@@ -65,7 +65,10 @@ class DisabilitySupportButtonPreferenceControllerTest {
     @Before
     fun setUp() {
         Settings.Global.putInt(context.contentResolver, Settings.Global.DEVICE_PROVISIONED, 1)
-        SettingsShadowResources.overrideResource(R.string.accessibility_disability_support_url, URL)
+        SettingsShadowResources.overrideResource(
+            R.string.config_accessibility_disability_support_url,
+            URL,
+        )
         setupIntentResolver()
     }
 
@@ -97,7 +100,10 @@ class DisabilitySupportButtonPreferenceControllerTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
     fun getAvailabilityStatus_helpIntentIsEmpty_returnUnavailable() {
-        SettingsShadowResources.overrideResource(R.string.accessibility_disability_support_url, "")
+        SettingsShadowResources.overrideResource(
+            R.string.config_accessibility_disability_support_url,
+            "",
+        )
         setupController()
 
         assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
@@ -145,7 +151,7 @@ class DisabilitySupportButtonPreferenceControllerTest {
                     addCategory(CATEGORY_DEFAULT)
                     addCategory(CATEGORY_BROWSABLE)
                     addDataScheme("https")
-                    addDataAuthority("support.google.com", null)
+                    addDataAuthority("support.example.com", null)
                 },
             )
             addActivityIfNotPresent(ComponentName(context, EmptyFragmentActivity::class.java))
@@ -154,6 +160,6 @@ class DisabilitySupportButtonPreferenceControllerTest {
 
     companion object {
         private const val KEY = "test_key"
-        private const val URL = "https://support.google.com/accessibility?p=android-A11Y_setting"
+        private const val URL = "https://support.example.com/accessibility"
     }
 }

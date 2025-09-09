@@ -17,7 +17,8 @@
 package com.android.settings.display.darkmode
 
 import android.app.settings.SettingsEnums
-import android.content.ContextWrapper
+import android.content.Context
+import android.content.Intent
 import android.os.PowerManager
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
@@ -27,29 +28,32 @@ import com.android.settings.Settings
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.accessibility.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
 import org.junit.Test
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.stub
+import org.mockito.kotlin.never
+import org.mockito.kotlin.verify
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowLooper
 
 class DarkModeScreenTest : SettingsCatalystTestCase() {
-    private val mockPowerManager = mock<PowerManager>()
-    private val context =
-        object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
-            override fun getSystemService(name: String): Any? =
-                when (name) {
-                    getSystemServiceName(PowerManager::class.java) -> mockPowerManager
-                    else -> super.getSystemService(name)
-                }
-        }
+    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val shadowPowerManager = shadowOf(context.getSystemService(PowerManager::class.java))!!
 
     override val preferenceScreenCreator = DarkModeScreen(context)
     override val flagName: String
         get() = Flags.FLAG_CATALYST_DARK_UI_MODE
 
     override fun migration() {}
+
+    @After
+    fun cleanup() {
+        PowerSaveModeObservable.resetInstance()
+    }
 
     @Test
     fun key() {
@@ -79,14 +83,14 @@ class DarkModeScreenTest : SettingsCatalystTestCase() {
 
     @Test
     fun isEnabled_isTrue() {
-        mockPowerManager.stub { on { isPowerSaveMode } doReturn false }
+        shadowPowerManager.setIsPowerSaveMode(false)
 
         assertThat(preferenceScreenCreator.isEnabled(context)).isTrue()
     }
 
     @Test
     fun isEnabled_isFalse() {
-        mockPowerManager.stub { on { isPowerSaveMode } doReturn true }
+        shadowPowerManager.setIsPowerSaveMode(true)
 
         assertThat(preferenceScreenCreator.isEnabled(context)).isFalse()
     }
@@ -94,7 +98,7 @@ class DarkModeScreenTest : SettingsCatalystTestCase() {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_DARK_UI_MODE)
     fun isIndexable_flagOn_isTrue() {
-        mockPowerManager.stub { on { isPowerSaveMode } doReturn false }
+        shadowPowerManager.setIsPowerSaveMode(false)
 
         assertThat(preferenceScreenCreator.isIndexable(context)).isTrue()
     }
@@ -102,7 +106,7 @@ class DarkModeScreenTest : SettingsCatalystTestCase() {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_DARK_UI_MODE)
     fun isIndexable_flagOn_isFalse() {
-        mockPowerManager.stub { on { isPowerSaveMode } doReturn true }
+        shadowPowerManager.setIsPowerSaveMode(true)
 
         assertThat(preferenceScreenCreator.isIndexable(context)).isFalse()
     }
@@ -110,7 +114,7 @@ class DarkModeScreenTest : SettingsCatalystTestCase() {
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_DARK_UI_MODE)
     fun isIndexable_flagOFF_isFalse() {
-        mockPowerManager.stub { on { isPowerSaveMode } doReturn false }
+        shadowPowerManager.setIsPowerSaveMode(false)
 
         assertThat(preferenceScreenCreator.isIndexable(context)).isFalse()
     }
@@ -125,6 +129,37 @@ class DarkModeScreenTest : SettingsCatalystTestCase() {
     @DisableFlags(Flags.FLAG_CATALYST_DARK_UI_MODE)
     fun isFlagEnabled_isFalse() {
         assertThat(preferenceScreenCreator.isFlagEnabled(context)).isFalse()
+    }
+
+    @Test
+    fun onStart_settingChanges_notifyPrefChange() {
+        val mockLifecycleContext =
+            mock<PreferenceLifecycleContext> {
+                on { preferenceScreenKey } doReturn preferenceScreenCreator.key
+                on { applicationContext } doReturn context
+            }
+        preferenceScreenCreator.onStart(mockLifecycleContext)
+
+        context.sendBroadcast(Intent(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED))
+        ShadowLooper.idleMainLooper()
+
+        verify(mockLifecycleContext).notifyPreferenceChange(DarkModeScreen.KEY)
+    }
+
+    @Test
+    fun onStop_settingChanges_doNotNotifyPrefChange() {
+        val mockLifecycleContext =
+            mock<PreferenceLifecycleContext> {
+                on { preferenceScreenKey } doReturn preferenceScreenCreator.key
+                on { applicationContext } doReturn context
+            }
+        preferenceScreenCreator.onStart(mockLifecycleContext)
+        preferenceScreenCreator.onStop(mockLifecycleContext)
+
+        context.sendBroadcast(Intent(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED))
+        ShadowLooper.idleMainLooper()
+
+        verify(mockLifecycleContext, never()).notifyPreferenceChange(DarkModeScreen.KEY)
     }
 
     @Test

@@ -130,11 +130,22 @@ open class ConnectedDisplayInjector(open val context: Context?) {
             display.displayId,
             display.uniqueId ?: "",
             display.name,
-            display.mode,
+            getDisplayMode(display),
             display.supportedModes.asList(),
             isEnabled,
             isConnectedDisplay,
         )
+
+    private fun getDisplayMode(display: Display): Display.Mode {
+        val userPreferredMode = display.userPreferredDisplayMode
+        if (
+            userPreferredMode != null &&
+                (userPreferredMode.flags and Display.Mode.FLAG_SIZE_OVERRIDE) != 0
+        ) {
+            return userPreferredMode
+        }
+        return display.mode
+    }
 
     /**
      * This is not limited to displays that are going to be included in the topology, but also

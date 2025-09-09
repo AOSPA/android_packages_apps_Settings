@@ -26,23 +26,31 @@ import android.view.View
 import android.view.accessibility.Flags
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.inflateViewHolder
+import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.FooterPreference
 import com.android.settingslib.widget.preference.footer.R as SettingsLibR
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.shadows.ShadowLooper
 
 @RunWith(RobolectricTestRunner::class)
 class DarkModePendingLocationFooterPreferenceTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
+    @get:Rule val settingsStoreRule = SettingsStoreRule()
     private val mockUiModeManager = mock<UiModeManager>()
     private val mockLocationManager = mock<LocationManager>()
     private val context =
@@ -51,6 +59,15 @@ class DarkModePendingLocationFooterPreferenceTest {
             on { getSystemService(LocationManager::class.java) } doReturn mockLocationManager
         }
     private val preference = DarkModePendingLocationFooterPreference()
+
+    @Before
+    fun setUp() {
+        SettingsSecureStore.get(context)
+            .setInt(
+                DarkModePendingLocationFooterPreference.NIGHT_MODE_SETTING_KEY,
+                UiModeManager.MODE_NIGHT_CUSTOM,
+            )
+    }
 
     @Test
     fun key() {
@@ -100,6 +117,39 @@ class DarkModePendingLocationFooterPreferenceTest {
         }
 
         assertThat(preference.isAvailable(context)).isFalse()
+    }
+
+    @Test
+    fun onStart_settingChanges_notifyPrefChange() {
+        val mockLifecycleContext = mock<PreferenceLifecycleContext>()
+
+        preference.onStart(mockLifecycleContext)
+        SettingsSecureStore.get(context)
+            .setInt(
+                DarkModePendingLocationFooterPreference.NIGHT_MODE_SETTING_KEY,
+                UiModeManager.MODE_NIGHT_AUTO,
+            )
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
+
+        verify(mockLifecycleContext)
+            .notifyPreferenceChange(DarkModePendingLocationFooterPreference.KEY)
+    }
+
+    @Test
+    fun onStop_settingChanges_doNotNotifyPrefChange() {
+        val mockLifecycleContext = mock<PreferenceLifecycleContext>()
+
+        preference.onStart(mockLifecycleContext)
+        preference.onStop(mockLifecycleContext)
+        SettingsSecureStore.get(context)
+            .setInt(
+                DarkModePendingLocationFooterPreference.NIGHT_MODE_SETTING_KEY,
+                UiModeManager.MODE_NIGHT_AUTO,
+            )
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
+
+        verify(mockLifecycleContext, never())
+            .notifyPreferenceChange(DarkModePendingLocationFooterPreference.KEY)
     }
 
     @Test

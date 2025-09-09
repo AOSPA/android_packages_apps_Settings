@@ -201,6 +201,7 @@ public class ImeiInfoPreferenceControllerTest {
 
         final String imei = "Tap to show info";
         when(mTelephonyManager.getImei(anyInt())).thenReturn(imei);
+        when(mTelephonyManager.getPrimaryImei()).thenReturn(imei);
 
         mController.displayPreference(mScreen);
         mController.updateState(mPreference);
@@ -215,6 +216,7 @@ public class ImeiInfoPreferenceControllerTest {
 
         final String imei = "Tap to show info";
         when(mTelephonyManager.getImei(anyInt())).thenReturn(imei);
+        when(mTelephonyManager.getPrimaryImei()).thenReturn(imei);
 
         mController.displayPreference(mScreen);
         mController.updateState(mPreference);
@@ -226,6 +228,28 @@ public class ImeiInfoPreferenceControllerTest {
                 mContext.getString(R.string.imei_multi_sim, 2 /* sim slot */));
         verify(mPreference).setSummary(imei);
         verify(mSecondSimPreference).setSummary(imei);
+    }
+
+    @Test
+    public void displayPreference_multiSimGsm_differentImei_shouldSetMultiSimGsmTitleAndImei() {
+        setupPhoneCount(2, PHONE_TYPE_GSM, PHONE_TYPE_GSM);
+
+        final String imei = "01234";
+        final String imei2 = "01235";
+        when(mTelephonyManager.getImei(0)).thenReturn(imei);
+        when(mTelephonyManager.getImei(1)).thenReturn(imei2);
+        when(mTelephonyManager.getPrimaryImei()).thenReturn(imei);
+
+        mController.displayPreference(mScreen);
+        mController.updateState(mPreference);
+        mSecondController.displayPreference(mScreen);
+        mSecondController.updateState(mSecondSimPreference);
+
+        verify(mPreference).setTitle(mContext.getString(R.string.imei_multi_sim, 1 /* sim slot */));
+        verify(mSecondSimPreference).setTitle(
+                mContext.getString(R.string.imei_multi_sim, 2 /* sim slot */));
+        verify(mPreference).setSummary(imei);
+        verify(mSecondSimPreference).setSummary(imei2);
     }
 
     @Test

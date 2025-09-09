@@ -19,8 +19,12 @@ package com.android.settings.display.darkmode
 import android.app.UiModeManager
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.provider.Settings
 import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -39,6 +43,8 @@ sealed class DarkModeCustomTimePreference(protected val uiModeManager: UiModeMan
     Preference.OnPreferenceClickListener {
 
     protected lateinit var lifecycleContext: PreferenceLifecycleContext
+
+    private var nightModeCustomTypeObserver: KeyedObserver<String>? = null
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
@@ -63,6 +69,20 @@ sealed class DarkModeCustomTimePreference(protected val uiModeManager: UiModeMan
         }
     }
 
+    override fun onStart(context: PreferenceLifecycleContext) {
+        val observer = KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(key) }
+        nightModeCustomTypeObserver = observer
+        SettingsSecureStore.get(context)
+            .addObserver(NIGHT_MODE_CUSTOM_TYPE_SETTING_KEY, observer, HandlerExecutor.main)
+    }
+
+    override fun onStop(context: PreferenceLifecycleContext) {
+        nightModeCustomTypeObserver?.let {
+            SettingsSecureStore.get(context).removeObserver(NIGHT_MODE_CUSTOM_TYPE_SETTING_KEY, it)
+            nightModeCustomTypeObserver = null
+        }
+    }
+
     override fun isAvailable(context: Context) =
         uiModeManager.nightMode == UiModeManager.MODE_NIGHT_CUSTOM &&
             uiModeManager.nightModeCustomType == UiModeManager.MODE_NIGHT_CUSTOM_TYPE_SCHEDULE
@@ -70,6 +90,10 @@ sealed class DarkModeCustomTimePreference(protected val uiModeManager: UiModeMan
     override fun isIndexable(context: Context) = false
 
     abstract fun updateCustomTime(time: LocalTime)
+
+    companion object {
+        const val NIGHT_MODE_CUSTOM_TYPE_SETTING_KEY = Settings.Secure.UI_NIGHT_MODE_CUSTOM_TYPE
+    }
 }
 
 /** The "Start Time" preference. */

@@ -246,6 +246,7 @@
     <string name="preferred_locale_menu_up" msgid="4009560552099567485">"ຍ້າຍຂຶ້ນ"</string>
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"ຍ້າຍລົງ"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"ລຶບອອກ"</string>
+    <string name="preferred_locale_menu_top" msgid="9110819342909557531">"ຍ້າຍໄປເທິງສຸດ"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"ການຕັ້ງຄ່າຕາມພາກພື້ນ"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"ກຳນົດການຕັ້ງຄ່າຫົວໜ່ວຍ ແລະ ຕົວເລກ"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"ບອກໃຫ້ແອັບຮູ້ການຕັ້ງຄ່າຕາມພາກພື້ນຂອງທ່ານເພື່ອໃຫ້ແອັບສາມາດປັບແຕ່ງປະສົບການຂອງທ່ານໃຫ້ເປັນແບບສ່ວນຕົວໄດ້."</string>
@@ -335,7 +336,7 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"ການປ່ຽນເວລາກາງເວັນ"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"ເວລາມາດຕະຖານ"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"ເລືອກຕາມຂົງເຂດ"</string>
-    <string name="zone_menu_by_offset" msgid="543648951618438204">"ເລືອກຕາມການຊົດເຊີຍ GMT"</string>
+    <string name="zone_menu_by_offset" msgid="543648951618438204">"ເລືອກຕາມການຊົດເຊີຍເວລາ GMT"</string>
     <string name="time_feedback_category_title" msgid="5942621686512255208">"ຄຳຕິຊົມ"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"ຄຳຕິຊົມ, ຂໍ້ຜິດພາດ, ເວລາ, ເຂດ, ເຂດເວລາ"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"ສົ່ງຄຳຕິຊົມກ່ຽວກັບເວລາ"</string>
@@ -1019,6 +1020,11 @@
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"ໃຊ້ການຕັ້ງຄ່າໃໝ່ບໍ?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"ຫາກຈໍສະແດງຜົນຂອງທ່ານບໍ່ເຮັດວຽກຕາມທີ່ທ່ານຕ້ອງການ, ທ່ານສາມາດແປງກັບຄືນໄປໃຊ້ການຕັ້ງຄ່າກ່ອນໜ້າຂອງທ່ານໄດ້"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"ໃຊ້ການຕັ້ງຄ່າ"</string>
+    <string name="external_display_topology_display_block_content_description" msgid="4638018879987232608">"ຈໍສະແດງຜົນ: %1$s. ແຕະສອງເທື່ອຄ້າງໄວ້ເພື່ອລາກ ຫຼື ເບິ່ງຄຳສັ່ງທີ່ຈະຍ້າຍ."</string>
+    <string name="external_display_topology_a11y_action_move_up" msgid="5585023811277652685">"ຍ້າຍຂຶ້ນ"</string>
+    <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"ຍ້າຍລົງ"</string>
+    <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"ຍ້າຍໄປທາງຊ້າຍ"</string>
+    <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"ຍ້າຍໄປທາງຂວາ"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ແວ່ນສະທ້ອນ"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ເປີດໃຊ້ງານການສະແດງພາບໄຮ້ສາຍ"</string>
@@ -1409,7 +1415,7 @@
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"ເພີ່ມອັດຕາການຣີເຟຣຊສູງສຸດເຖິງ <xliff:g id="ID_1">%1$d</xliff:g> Hz ສຳລັບບາງເນື້ອຫາໂດຍອັດຕະໂນມັດ. ຈະໃຊ້ແບັດເຕີຣີຫຼາຍຂຶ້ນ."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"ບັງຄັບອັດຕາຣີເຟຣຊສູງສຸດ"</string>
-    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"ອັດຕາຣີເຟຣດສູງສຸດເພື່ອປັບປຸງການຕອບສະໜອງການສຳຜັດ ແລະ ຄຸນນະພາບອະນິເມຊັນ. ເພີ່ມການນຳໃຊ້ແບັດເຕີຣີ."</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"ອັດຕາຣີເຟຣຊສູງສຸດເພື່ອປັບປຸງການຕອບສະໜອງການສຳຜັດ ແລະ ຄຸນນະພາບອະນິເມຊັນ. ເພີ່ມການນຳໃຊ້ແບັດເຕີຣີ."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"ການເອົາໃຈໃສ່ໜ້າຈໍ"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"ຕ້ອງການສິດເຂົ້າເຖິງກ້ອງຖ່າຍຮູບ"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"ຕ້ອງມີສິດເຂົ້າເຖິງກ້ອງຖ່າຍຮູບສຳລັບການເອົາໃຈໃສ່ໜ້າຈໍ. ແຕະເພື່ອຈັດການການອະນຸຍາດສຳລັບບໍລິການປັບແຕ່ງອຸປະກອນໃຫ້ເປັນສ່ວນຕົວ"</string>
@@ -1500,12 +1506,9 @@
     <string name="screensaver_settings_low_light_mode" msgid="271972828076673743">"ໂໝດແສງໜ້ອຍ"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"ຍົກ​ເພື່ອ​ເປີດ​ໜ້າ​ຈໍ"</string>
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"ຈຳກັດການສາກໄຟໄຮ້ສາຍ"</string>
-    <!-- no translation found for blur_switch (1391073945502754948) -->
-    <skip />
-    <!-- no translation found for blur_switch_summary (5025895302219948597) -->
-    <skip />
-    <!-- no translation found for blur_switch_disabled_summary (4664341513589412290) -->
-    <skip />
+    <string name="blur_switch" msgid="1391073945502754948">"ຫຼຸດເອັບເຟັກມົວ"</string>
+    <string name="blur_switch_summary" msgid="5025895302219948597">"ເຮັດໃຫ້ພື້ນຫຼັງ ແລະ ແຜງເບິ່ງເຫັນໄດ້ງ່າຍຂຶ້ນ"</string>
+    <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"ປິດການນຳໃຊ້ຊົ່ວຄາວເນື່ອງຈາກຢູ່ໃນໂໝດຕົວປະຢັດແບັດເຕີຣີ"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"ໃຊ້ໂໝດແສງໜ້ອຍ"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"ເລືອກວ່າຈະສະແດງຫຍັງໃນໂໝດແສງໜ້ອຍ"</string>
     <string name="low_light_display_behavior_screen_off" msgid="4203092158668290404">"ໜ້າຈໍປິດຢູ່"</string>
@@ -1580,16 +1583,14 @@
     <string name="storage_settings_title" msgid="486118156723194815">"ການຕັ້ງຄ່າບ່ອນຈັດເກັບຂໍ້ມູນ"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (ຊ່ອງຊິມ <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
-    <!-- no translation found for imei_multi_sim (6990044568468728075) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"ກະລຸນາເລືອກເຄືອຂ່າຍທີ່ບັນທຶກໄວ້ເພື່ອເບິ່ງ"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"ເວີຊັນ PRL"</string>
-    <!-- no translation found for meid_multi_sim (3124054561186721453) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="3124054561186721453">"MEID <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
     <string name="scanning_status_text_on" msgid="3846571210578042940">"ເປີດ"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"ປິດ"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
@@ -1683,8 +1684,7 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"ສ່ວນກາງ"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"ການຕັ້ງຄ່າສ່ວນກາງ"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"ໂໝດ Hub"</string>
-    <!-- no translation found for widgets_on_lockscreen_title (1492206992134138952) -->
-    <skip />
+    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"ວິດເຈັດຢູ່ໜ້າຈໍລັອກ (ເບຕ້າ)"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"ເມື່ອໃດຄວນສະແດງອັດຕະໂນມັດ"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"ບໍ່ໃຊ້"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"ໃນຂະນະທີ່ກຳລັງສາກໄຟຢູ່"</string>
@@ -2413,7 +2413,8 @@
     <string name="accessibility_disability_support_title" msgid="7934160403456751664">"ຕິດຕໍ່ຝ່າຍຊ່ວຍເຫຼືອຄົນພິການຂອງ Google"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"ແບບສຳຫຼວດກ່ຽວກັບການຊ່ວຍເຂົ້າເຖິງ"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"ແບ່ງປັນຄຳຕິຊົມຂອງທ່ານ"</string>
-    <string name="dark_theme_survey_notification_summary" msgid="2893701785229702405">"ທ່ານພໍໃຈກັບຮູບແບບສີສັນມືດຫຼາຍໜ້ອຍເທົ່າໃດ?"</string>
+    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
+    <skip />
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"ເຮັດແບບສຳຫຼວດ"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"ແບ່ງປັນຄຳຕິຊົມຂອງທ່ານ"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"ທ່ານພໍໃຈກັບການຂະຫຍາຍຫຼາຍໜ້ອຍເທົ່າໃດ?"</string>
@@ -2592,8 +2593,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"ຂະຫຍາຍແລ້ວ"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"ຮູບແບບສີສັນມືດແບບຂະຫຍາຍ"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"ນຳໃຊ້ຮູບແບບສີສັນມືດໂດຍອັດຕະໂນມັດກັບແອັບເພີ່ມເຕີມເພື່ອການຊ່ວຍເຂົ້າເຖິງທີ່ປັບປຸງແລ້ວ"</string>
-    <!-- no translation found for keywords_expanded_dark_theme (8366925785183600306) -->
-    <skip />
+    <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"ບັງຄັບໃຫ້ປີ້ນສີ, ການປີ້ນສີ, ຄອນທຣາສ"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ລຶບການເຄື່ອນໄຫວອອກ"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"ຫຼຸດການເຄື່ອນໄຫວຢູ່ໜ້າຈໍ"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"ການກະພິບເຄີເຊີຂໍ້ຄວາມ"</string>
@@ -3678,8 +3678,7 @@
     <string name="keywords_battery_info" msgid="3319796850366687033">"ຂໍ້ມູນແບັດເຕີຣີ, ວັນທີທີ່ຜະລິດ, ຈຳນວນຮອບ, ການນຳໃຊ້ເທື່ອທຳອິດ"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"android security patch level, ເວີຊັນ baseband, ເວີຊັນ kernel"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"ຮູບແບບສີສັນ, ແຈ້ງ, ໂໝດມືດ, ໄວແສງ, ຢ້ານແສງ, ເຮັດໃຫ້ມືດລົງ, ມືດລົງ, ໂໝດມືດ, ໄມເກຣນ"</string>
-    <!-- no translation found for keywords_blur_switch (3482676740440346012) -->
-    <skip />
+    <string name="keywords_blur_switch" msgid="3482676740440346012">"ເອັບເຟັກມົວ"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"ສີສັນໜ້າຕາແບບມືດ"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"ຂໍ້ຜິດພາດ"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"ການສະແດງຜົນຕາມແສງສະພາບແວດລ້ອມ, ໜ້າຈໍລັອກ"</string>
@@ -3972,8 +3971,7 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"ສະແດງເນື້ອຫາການແຈ້ງເຕືອນບ່ອນເຮັດວຽກທັງໝົດ"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"ເຊື່ອງເນື້ອຫາວຽກທີ່ລະອຽດອ່ອນ"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"​ທ່ານ​ຕ້ອງ​ການ​ໃຫ້​ສະ​ແດງ​​ການ​ແຈ້ງ​ເຕືອນ​ໂປຣໄຟລ໌ແນວ​ໃດ​ໃນ​ເວ​ລາ​ທີ່​ອຸ​ປະ​ກອນ​ຖືກ​ລັອກ?"</string>
-    <!-- no translation found for lockscreen_notification_show_switch (7324668881962101312) -->
-    <skip />
+    <string name="lockscreen_notification_show_switch" msgid="7324668881962101312">"ສະແດງຢູ່ໜ້າຈໍລັອກ"</string>
     <string name="lockscreen_notification_what_to_show_title" msgid="707880305538256400">"ສິ່ງທີ່ຈະສະແດງຢູ່ໜ້າຈໍລັອກ"</string>
     <string name="lock_screen_notification_show_viewed_notifs" msgid="4104703346314965171">"ສະແດງການແຈ້ງເຕືອນທີ່ເບິ່ງແລ້ວ"</string>
     <string name="lock_screen_notification_show_viewed_notif_icons" msgid="1197681203638927375">"ສະແດງໄອຄອນການແຈ້ງເຕືອນທີ່ເບິ່ງແລ້ວ"</string>
@@ -4079,8 +4077,7 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"ຕົວຈັດລະບຽບການແຈ້ງເຕືອນ"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"ຮວມກຸ່ມ ແລະ ປິດສຽງການແຈ້ງເຕືອນທີ່ມີລຳດັບຄວາມສຳຄັນໜ້ອຍກວ່າ"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"ຈັດການແອັບສຳລັບຕົວຈັດລະບຽບການແຈ້ງເຕືອນ"</string>
-    <!-- no translation found for notification_bundle_expand_always_title (3647586646644565332) -->
-    <skip />
+    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"ຂະຫຍາຍເປັນຊຸສະເໝີ"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"ໃຊ້ກັບແອັບໃນໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ບໍລິການຕົວຊ່ວຍ VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ບໍ່ມີແອັບທີ່ຕິດຕັ້ງແລ້ວທີ່ຮ້ອງຂໍໃຫ້ໃຊ້ເປັນບໍລິການຕົວຊ່ວຍ VR."</string>
@@ -4283,7 +4280,7 @@
     <string name="zen_mode_summary_always" msgid="722093064250082317">"ປ່ຽນ​ເປັນ​ຂັດ​ຈັງ​ຫວະ​ທຸກ​ຄັ້ງ"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"ແກ້ໄຂໂໝດ"</string>
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"ສ້າງໂໝດ"</string>
-    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"ໂໝດທີ່ກຳນົດເອງ"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"ກຳນົດໂໝດ"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"ຊື່ໂໝດ"</string>
     <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"ຊື່ໂໝດບໍ່ສາມາດຫວ່າງເປົ່າໄດ້"</string>
     <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"ເລືອກໄອຄອນ"</string>
@@ -4300,7 +4297,7 @@
     <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"ໂໝດນີ້ອາດເປີດໂດຍອັດຕະໂນມັດຕາມການຕັ້ງຄ່າ"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"ເປີດການນຳໃຊ້"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"ຕັ້ງຄ່າໂໝດທີ່ເປັນໄປຕາມກຳນົດເວລາປົກກະຕິ"</string>
-    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"ຕັ້ງຄ່າໂໝດການຊິ້ງກັບນັດໝາຍປະຕິທິນ ແລະ ການຕອບກັບຄຳເຊີນ"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"ຕັ້ງຄ່າໂໝດໃຫ້ຊິ້ງກັບນັດໝາຍປະຕິທິນ ແລະ ຕອບກັບຄຳເຊີນ"</string>
     <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"ອອກແບບກິດຈະວັດການນອນທີ່ຜ່ອນຄາຍ. ຕັ້ງໂມງປຸກ, ຫຼຸດແສງໜ້າຈໍ ແລະ ບລັອກການແຈ້ງເຕືອນ."</string>
     <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"ໃຫ້ຄວາມສຳຄັນກັບຄວາມປອດໄພເທິງຖະໜົນເພື່ອການຂັບລົດທີ່ມີສະມາທິ ແລະ ບໍ່ມີສິ່ງລົບກວນ"</string>
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"ບລັອກສິ່ງລົບກວນ ຫຼື ສິ່ງຂັດຈັງຫວະຈາກອຸປະກອນຂອງທ່ານເພື່ອໃຫ້ມີສະມາທິຫຼາຍຂຶ້ນ"</string>
@@ -5957,6 +5954,9 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"ເກີດຂໍ້ຜິດພາດຂຶ້ນໃນຂະນະທີ່ກຳລັງພະຍາຍາມລຶມ PIN."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"ອະນິເມຊັນ <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"ບໍ່ສາມາດເປີດການຄວບຄຸມໄດ້"</string>
+    <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"ມີບາງຢ່າງຜິດພາດເກີດຂຶ້ນ"</string>
+    <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ"</string>
+    <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"ກັບຄືນ"</string>
     <string name="identity_check_issue_card_title" msgid="864543931965445926">"ການກວດສອບຕົວຕົນພ້ອມນຳໃຊ້ໃນແອັບອື່ນໆ"</string>
     <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"ທ່ານສາມາດຮັກສາຄວາມປອດໄພຂອງການປົກປ້ອງຕົວຕົນຂອງທ່ານໃນແອັບໃດກໍໄດ້ທີ່ມີການປົດລັອກດ້ວຍລາຍນິ້ວມື ຫຼື ການປົດລັອກດ້ວຍໜ້າເພື່ອລະບຸຕົວຕົນຂອງທ່ານ"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"ເບິ່ງລາຍລະອຽດ"</string>
@@ -5974,10 +5974,7 @@
     <string name="lock_screen_title" msgid="4701994278040604018">"ລັອກໜ້າຈໍ"</string>
     <string name="location_settings" msgid="6833222354060094170">"ສິດເຂົ້າເຖິງສະຖານທີ່"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"ເບິ່ງແອັບ ແລະ ບໍລິການທີ່ມີສິດເຂົ້າເຖິງສະຖານທີ່"</string>
-    <!-- no translation found for identity_check_notification_title (8004343932775654492) -->
-    <skip />
-    <!-- no translation found for identity_check_notification_summary (3762060079941053730) -->
-    <skip />
-    <!-- no translation found for identity_check_view_details (8752343542345818128) -->
-    <skip />
+    <string name="identity_check_notification_title" msgid="8004343932775654492">"ການກວດສອບຕົວຕົນເຮັດວຽກຮ່ວມກັບແອັບອື່ນໆອີກ"</string>
+    <string name="identity_check_notification_summary" msgid="3762060079941053730">"ການກວດສອບຕົວຕົນຈະປ້ອງກັນການເຂົ້າເຖິງແອັບຂອງທ່ານທີ່ບໍ່ພຶງປະສົງ. ຕອນນີ້ພ້ອມນຳໃຊ້ກັບທຸກແອັບທີ່ໃຊ້ການປົດລັອກດ້ວຍລາຍນິ້ວມື ຫຼື ການປົດລັອກດ້ວຍໜ້າ."</string>
+    <string name="identity_check_view_details" msgid="8752343542345818128">"ເບິ່ງລາຍລະອຽດ"</string>
 </resources>

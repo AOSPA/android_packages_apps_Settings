@@ -43,6 +43,7 @@ import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
+import org.mockito.kotlin.never
 import org.robolectric.Shadows.shadowOf
 
 /** Unit tests for [ResolutionPreferenceFragment]. */
@@ -80,6 +81,28 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
         assertThat(morePref).isNotNull()
         assertThat(topPref!!.preferenceCount).isEqualTo(TOP_MODE_RES_MAX_COUNT)
         assertThat(morePref!!.preferenceCount).isEqualTo(1)
+    }
+
+    @Test
+    @UiThreadTest
+    fun testOnSameDisplayModeClicked_noModeChange_dialogNotShown() {
+        val display = mDisplays[0]
+        initFragment(display.id)
+        mHandler.flush()
+        val topPref = mPreferenceScreen.findPreference<PreferenceCategory>(TOP_OPTIONS_KEY)!!
+        (topPref.getPreference(0) as SelectorWithWidgetPreference).onClick()
+        shadowOf(Looper.getMainLooper()).idle()
+
+        verify(mMockedInjector, never())
+            .setUserPreferredDisplayMode(
+                display.id,
+                display.supportedModes[0],
+                /* storeMode= */ false,
+            )
+        assertThat(
+                fragment.parentFragmentManager.findFragmentByTag(ResolutionChangeDialogFragment.TAG)
+            )
+            .isNull()
     }
 
     @Test

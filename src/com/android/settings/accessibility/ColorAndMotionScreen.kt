@@ -27,7 +27,6 @@ import com.android.settings.accessibility.colorinversion.ui.ColorInversionScreen
 import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.darkmode.DarkModeScreenOnAccessibility
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -56,10 +55,6 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
 
     override fun isIndexable(context: Context): Boolean = true
 
-    override fun isFlagEnabled(context: Context) = Flags.catalystAccessibilityColorAndMotion()
-
-    override fun hasCompleteHierarchy(): Boolean = true
-
     override fun fragmentClass(): Class<out Fragment>? = ColorAndMotionFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
@@ -85,8 +80,7 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
                     }
             }
             +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
-            // LINT.ThenChange(/res/xml/accessibility_color_and_motion.xml,
-            // /src/com/android/settings/accessibility/ColorAndMotionFragment.java:ui_hierarchy)
+            // LINT.ThenChange(/res/xml/accessibility_color_and_motion.xml)
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =

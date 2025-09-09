@@ -168,6 +168,50 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
+    fun refreshSafetySources_whenDeviceIsATablet_setsNullData() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+        setIdentityCheckPromoCardShown(false)
+
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+            isTablet = true,
+        )
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                eq(null),
+                eq(refreshSafetyEvent),
+            )
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
+    fun refreshSafetySources_whenDeviceIsALowRamTablet_setsNullData() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+        setIdentityCheckPromoCardShown(false)
+
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+            isLowRamDevice = true,
+        )
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                eq(null),
+                eq(refreshSafetyEvent),
+            )
+    }
+
+    @Test
     @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
     fun refreshSafetySources_whenWatchSupportedValueNotSet_setsNullData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)

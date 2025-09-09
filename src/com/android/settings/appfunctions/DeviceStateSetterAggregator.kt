@@ -21,7 +21,7 @@ import androidx.annotation.Keep
 import com.android.settings.appfunctions.providers.DeviceStateExecutor
 import com.android.settings.appfunctions.providers.DeviceStateExecutorResult
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateResponse
-import com.google.android.appfunctions.schema.common.v1.devicestate.SetDeviceStateResponse
+import com.google.android.appfunctions.schema.common.v1.devicestate.SetDeviceStateItemResponse
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
@@ -29,7 +29,7 @@ import kotlinx.coroutines.coroutineScope
  * Orchestrates the collection and transformation of the device state setter results.
  *
  * This class executes from multiple [DeviceStateExecutor]s in parallel, aggregates the results to
- * produce the final [SetDeviceStateResponse].
+ * produce the final [SetDeviceStateItemResponse].
  *
  * @property executors The list of [DeviceStateExecutor]s to call for setting device state.
  */
@@ -47,7 +47,7 @@ class DeviceStateSetterAggregator(private val executors: List<DeviceStateExecuto
         appFunctionType: DeviceStateAppFunctionType,
         params: GenericDocument,
         deviceLocale: String,
-    ): SetDeviceStateResponse {
+    ): SetDeviceStateItemResponse {
         val executorResults = coroutineScope {
             executors
                 .map { executor ->
@@ -73,5 +73,5 @@ class DeviceStateSetterAggregator(private val executors: List<DeviceStateExecuto
  * data class.
  */
 @Keep
-data class DeviceStateSetterExecutorResult(val result: SetDeviceStateResponse?) :
+data class DeviceStateSetterExecutorResult(val result: SetDeviceStateItemResponse?) :
     DeviceStateExecutorResult()

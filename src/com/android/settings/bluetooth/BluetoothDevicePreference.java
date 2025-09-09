@@ -319,23 +319,53 @@ public final class BluetoothDevicePreference extends GearPreference {
 
     @SuppressWarnings("FutureReturnValueIgnored")
     void onPreferenceAttributesChanged() {
-Pair<Drawable, String> pair = mCachedDevice.getDrawableWithDescription();
-        setIcon(pair.first);
-        contentDescription = pair.second;
+        try {
+            ThreadUtils.postOnBackgroundThread(() -> {
+                if (mCachedDevice.getDevice() != null) {
+                    Log.d(TAG, "onPreferenceAttributesChanged, start updating for device "
+                            + mCachedDevice.getDevice().getAnonymizedAddress());
+                }
+                @Nullable String name = mCachedDevice.getName();
+                // Null check is done at the framework
+                @Nullable String connectionSummary = getConnectionSummary();
+                @NonNull Pair<Drawable, String> pair = mCachedDevice.getDrawableWithDescription();
+                boolean isBusy = mCachedDevice.isBusy();
+                // Device is only visible in the UI if it has a valid name besides MAC address or
+                // when user allows showing devices without user-friendly name in developer settings
+                boolean isVisible =
+                        mShowDevicesWithoutNames || mCachedDevice.hasHumanReadableName();
+                boolean showFailureIcon =
+                        BluetoothUtils.isBluetoothDiagnosisAvailable(getContext())
+                                && (BluetoothUtils.showPairingFailure(mCachedDevice)
+                                    || BluetoothUtils.showConnectionFailure(mCachedDevice));
 
-        /*
-         * The preference framework takes care of making sure the value has
-         * changed before proceeding. It will also call notifyChanged() if
-         * any preference info has changed from the previous value.
-         */
-        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        if (adapter != null &&
-                mCachedDevice.getAddress().equals(adapter.getAddress())) {
-            //for ba related things, using the same preference
-            //for showing the local device
-            setTitle(adapter.getName()+"(self)");
-        } else {
-            setTitle(mCachedDevice.getName());
+                ThreadUtils.postOnMainThread(() -> {
+                    /*
+                     * The preference framework takes care of making sure the value has
+                     * changed before proceeding. It will also call notifyChanged() if
+                     * any preference info has changed from the previous value.
+                     */
+                    setTitle(name);
+                    setSummary(connectionSummary);
+                    // TODO: Move the logic into CachedBluetoothDevice when SystemUI is supported.
+                    setIcon(showFailureIcon
+                            ? getContext().getDrawable(
+                                    com.android.settingslib.R.drawable.bluetooth_warning_icon)
+                            : pair.first);
+                    contentDescription = pair.second;
+                    // Used to gray out the item
+                    setEnabled(!isBusy);
+                    setVisible(isVisible);
+
+                    // This could affect ordering, so notify that
+                    if (mNeedNotifyHierarchyChanged) {
+                        notifyHierarchyChanged();
+                    }
+                });
+                Log.d(TAG, "onPreferenceAttributesChanged, complete updating for device " + name);
+            });
+        } catch (RejectedExecutionException e) {
+            Log.w(TAG, "Handler thread unavailable, skipping getConnectionSummary!");
         }
         // Null check is done at the framework
         if (!mHideSummary) {
@@ -503,6 +533,17 @@ Pair<Drawable, String> pair = mCachedDevice.getDrawableWithDescription();
 
     private String getConnectionSummary() {
         String summary = null;
+        // TODO: Move the logic into CachedBluetoothDevice when SystemUI is supported.
+        if (BluetoothUtils.isBluetoothDiagnosisAvailable(getContext())) {
+            if (BluetoothUtils.showPairingFailure(mCachedDevice)) {
+                return getContext()
+                        .getString(com.android.settingslib.R.string.bluetooth_pairing_failure);
+            } else if (BluetoothUtils.showConnectionFailure(mCachedDevice)) {
+                return getContext()
+                        .getString(com.android.settingslib.R.string.bluetooth_connection_failure);
+            }
+        }
+
         if (mCachedDevice.getBondState() != BluetoothDevice.BOND_NONE) {
             summary = mCachedDevice.getConnectionSummary();
         }
