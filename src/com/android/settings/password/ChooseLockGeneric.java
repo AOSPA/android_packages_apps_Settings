@@ -69,6 +69,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.insets.ProtectionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -106,6 +107,7 @@ import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Activity class that provides a generic implementation for displaying options to choose a lock
@@ -134,11 +136,24 @@ public class ChooseLockGeneric extends SettingsActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Flags.chooseAScreenLockSupportExpressive()) {
-            if (ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext())) {
-                ThemeHelper.trySetSuwTheme(this);
-            }
+        final boolean useExpressive = ThemeHelper.shouldApplyGlifExpressiveStyle(
+                getApplicationContext());
+        if (Flags.chooseAScreenLockSupportExpressive() && useExpressive) {
+            ThemeHelper.trySetSuwTheme(this);
             setContentView(R.layout.choose_lock_generic_glif);
+
+            // TODO(b/440023111):This can be removed once SetupDesignLib and SettingsLib have
+            //  integrated the solution.
+            if (Flags.removeProtectionLayout()) {
+                final GlifLayout glifLayout = findViewById(R.id.main_content);
+                if (glifLayout != null) {
+                    final ProtectionLayout protect = glifLayout.findViewById(
+                            com.google.android.setupdesign.R.id.sud_layout_protection);
+                    if (protect != null) {
+                        protect.setProtections(Collections.emptyList());
+                    }
+                }
+            }
         }
     }
 
