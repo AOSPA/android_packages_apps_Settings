@@ -48,12 +48,13 @@ open class ColorAndMotionScreen : PreferenceScreenMixin {
     override val icon: Int
         get() = R.drawable.ic_color_and_motion
 
+    override val indexable
+        get() = true
+
     override fun getMetricsCategory() = SettingsEnums.ACCESSIBILITY_COLOR_AND_MOTION
 
     override val highlightMenuKey
         get() = R.string.menu_key_accessibility
-
-    override fun isIndexable(context: Context): Boolean = true
 
     override fun fragmentClass(): Class<out Fragment>? = ColorAndMotionFragment::class.java
 

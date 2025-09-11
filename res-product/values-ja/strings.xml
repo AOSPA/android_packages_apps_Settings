@@ -164,10 +164,10 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8772005555323461143">"あなたとお子様はいつでも [設定] で指紋の画像や指紋モデルを削除したり指紋認証を OFF にしたりできます。指紋の画像と指紋モデルは、削除するまでタブレットに保存されたままになります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7254955922685507093">"あなたとお子様はいつでも [設定] で指紋の画像や指紋モデルを削除したり指紋認証を OFF にしたりできます。指紋の画像と指紋モデルは、削除するまでデバイスに保存されたままになります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="desktop" msgid="7254955922685507093">"あなたとお子様はいつでも [設定] で指紋の画像や指紋モデルを削除したり指紋認証を OFF にしたりできます。指紋の画像と指紋モデルは、削除するまでデバイスに保存されたままになります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="6272159089589340181">"誰かがスマートフォンをあなたの指に近づけた場合など、意図せずスマートフォンのロックが解除されることがあります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="2420109998272019149">"あなたの指にタブレットを近づけられた場合など、意図せずタブレットのロックが解除されることがあります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="5915844445830045866">"あなたの指にデバイスを近づけられた場合など、意図せずデバイスのロックが解除されることがあります。"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="desktop" msgid="5915844445830045866">"あなたの指にデバイスを近づけられた場合など、意図せずデバイスのロックが解除されることがあります。"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="6838578698434849838">"誰かがスマートフォンをあなたの指に近づけた場合など、意図せずスマートフォンのロックが解除されることがあります"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7796353046744228477">"誰かがタブレットをあなたの指に近づけた場合など、意図せずタブレットのロックが解除されることがあります"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="5075445491909690772">"誰かがデバイスをあなたの指に近づけた場合など、意図せずデバイスのロックが解除されることがあります"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="desktop" msgid="5075445491909690772">"誰かがデバイスをあなたの指に近づけた場合など、意図せずデバイスのロックが解除されることがあります"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="6556725426776167791">"お子様の指にスマートフォンを近づけられた場合など、意図せずお子様のスマートフォンのロックが解除されることがあります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="5156581794964551571">"お子様の指にタブレットを近づけられた場合など、意図せずお子様のタブレットのロックが解除されることがあります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="8309101436391515400">"お子様の指にデバイスを近づけられた場合など、意図せずお子様のデバイスのロックが解除されることがあります。"</string>
@@ -321,8 +321,10 @@
     <string name="sim_lock_off" product="desktop" msgid="903164661366964150">"デバイスの使用時に PIN を要求する"</string>
     <string name="status_number" product="tablet" msgid="6746773328312218158">"MDN"</string>
     <string name="status_number" product="default" msgid="2333455505912871374">"電話番号"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="2595836594107617972">"MDN（SIM スロット %1$d）"</string>
-    <string name="status_number_sim_slot" product="default" msgid="7154930998382872847">"電話番号（SIM スロット %1$d）"</string>
+    <!-- no translation found for status_number_sim_slot (201933499714762935) -->
+    <skip />
+    <!-- no translation found for status_number_sim_slot (8033783200178721660) -->
+    <skip />
     <string name="status_number_sim_status" product="tablet" msgid="9003886361856568694">"SIM の MDN"</string>
     <string name="status_number_sim_status" product="default" msgid="7536755538266735352">"SIM の電話番号"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="2049551739429034707">"内部ストレージとして SD カードをフォーマット"</string>
@@ -380,7 +382,7 @@
     <string name="testing_phone_info" product="tablet" msgid="8267746802132630741">"タブレット情報"</string>
     <string name="testing_phone_info" product="default" msgid="7507506297352160191">"携帯電話情報"</string>
     <string name="testing_phone_info" product="desktop" msgid="3607717850300762272">"デバイス情報"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="1773409172676594981">"ディスプレイのサイズとテキストの設定をスマートフォンの元の設定にリセットします"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="1773409172676594981">"ディスプレイのサイズとテキストをスマートフォンの初期設定にリセットします"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="2547948891207211388">"ディスプレイのサイズとテキストの設定をタブレットの元の設定にリセットします"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="desktop" msgid="4248088107680338580">"ディスプレイのサイズとテキストの設定をデバイスの元の設定にリセットします"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="5234458848997942613">"スマートフォンでの色表示を補正できます"</string>

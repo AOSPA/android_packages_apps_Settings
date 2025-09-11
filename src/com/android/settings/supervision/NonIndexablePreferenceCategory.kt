@@ -15,10 +15,10 @@
  */
 package com.android.settings.supervision
 
-import android.content.Context
 import com.android.settingslib.metadata.PreferenceCategory
 
 /** A [PreferenceCategory] that is not search indexable, even though it has a non-empty title. */
 class NonIndexablePreferenceCategory(key: String, title: Int) : PreferenceCategory(key, title) {
-    override fun isIndexable(context: Context) = false
+    override val indexable
+        get() = false
 }

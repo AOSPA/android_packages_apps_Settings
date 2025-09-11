@@ -19,8 +19,8 @@ package com.android.settings.fuelgauge.batteryusage
 import android.content.Context
 import android.util.Log
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
-import com.android.settings.appfunctions.sources.DeviceStateSource
-import com.android.settings.appfunctions.sources.SharedDeviceStateData
+import com.android.settings.appfunctions.providersources.DeviceStateSource
+import com.android.settings.appfunctions.providersources.SharedDeviceStateData
 import com.android.settingslib.Utils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates

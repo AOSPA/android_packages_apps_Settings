@@ -26,6 +26,9 @@ class ColorInversionIllustrationPreference : PreferenceMetadata, PreferenceBindi
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = false
+
     override fun createWidget(context: Context) =
         IllustrationPreference(context).apply {
             isSelectable = false
@@ -36,8 +39,6 @@ class ColorInversionIllustrationPreference : PreferenceMetadata, PreferenceBindi
                     context.getText(R.string.accessibility_display_inversion_preference_title),
                 )
         }
-
-    override fun isIndexable(context: Context) = false
 
     companion object {
         const val KEY = "animated_image"

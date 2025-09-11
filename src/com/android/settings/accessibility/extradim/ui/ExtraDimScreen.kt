@@ -56,6 +56,9 @@ open class ExtraDimScreen(context: Context) :
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = true
+
     override val keywords: Int
         get() = R.string.keywords_reduce_bright_colors
 
@@ -70,8 +73,6 @@ open class ExtraDimScreen(context: Context) :
 
     override fun fragmentClass(): Class<out Fragment> =
         ToggleReduceBrightColorsPreferenceFragment::class.java
-
-    override fun isIndexable(context: Context): Boolean = true
 
     override fun isFlagEnabled(context: Context): Boolean = Flags.catalystExtraDim()
 

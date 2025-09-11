@@ -17,10 +17,11 @@
 package com.android.settings.accessibility.textreading.ui
 
 import android.Manifest
-import android.app.Application
-import android.content.Context
+import android.app.Activity
+import androidx.fragment.app.testing.EmptyFragmentActivity
 import androidx.preference.PreferenceManager
-import androidx.test.core.app.ApplicationProvider
+import androidx.preference.PreferenceScreen
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.android.internal.accessibility.AccessibilityShortcutController.FONT_SIZE_COMPONENT_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityQuickSettingUtils
@@ -35,6 +36,8 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Assume.assumeTrue
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -44,12 +47,25 @@ import org.robolectric.shadows.ShadowApplication
 /** Test for [FontSizePreference]. */
 @RunWith(RobolectricTestRunner::class)
 class FontSizePreferenceTest {
-    private val context = ApplicationProvider.getApplicationContext<Context>()
+    @get:Rule
+    val activityScenario: ActivityScenarioRule<EmptyFragmentActivity> =
+        ActivityScenarioRule(EmptyFragmentActivity::class.java)
     @EntryPoint private val entryPoint = EntryPoint.DISPLAY_SETTINGS
-    private val preference = FontSizePreference(context, entryPoint)
-    private val dataStore = preference.storage(context) as FontSizeDataStore
-    private val preferenceManager = PreferenceManager(context)
-    private val preferenceScreen = preferenceManager.createPreferenceScreen(context)
+
+    private lateinit var context: Activity
+    private lateinit var preference: FontSizePreference
+    private lateinit var dataStore: FontSizeDataStore
+    private lateinit var preferenceManager: PreferenceManager
+    private lateinit var preferenceScreen: PreferenceScreen
+
+    @Before
+    fun setUp() {
+        activityScenario.scenario.onActivity { activity -> context = activity }
+        preference = FontSizePreference(context, entryPoint)
+        dataStore = preference.storage(context) as FontSizeDataStore
+        preferenceManager = PreferenceManager(context)
+        preferenceScreen = preferenceManager.createPreferenceScreen(context)
+    }
 
     @Test
     fun getReadPermission_returnEmptyPermission() {
@@ -191,7 +207,7 @@ class FontSizePreferenceTest {
     fun verifyChangeFontSize_showTooltipView() {
         verifyFontSizePreviewDataChangesWhenSliderValueIsChanged()
 
-        val shadowApplication: ShadowApplication = shadowOf(context as Application)
+        val shadowApplication: ShadowApplication = shadowOf(context.application)
         assertThat(shadowApplication.latestPopupWindow).isNotNull()
     }
 
@@ -204,7 +220,7 @@ class FontSizePreferenceTest {
 
         verifyFontSizePreviewDataChangesWhenSliderValueIsChanged()
 
-        val shadowApplication: ShadowApplication = shadowOf(context as Application)
+        val shadowApplication: ShadowApplication = shadowOf(context.application)
         assertThat(shadowApplication.latestPopupWindow).isNull()
     }
 }

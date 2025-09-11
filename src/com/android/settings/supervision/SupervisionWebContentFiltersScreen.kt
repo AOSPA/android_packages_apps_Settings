@@ -76,6 +76,9 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
     override val title: Int
         get() = R.string.supervision_web_content_filters_title
 
+    override val indexable
+        get() = true
+
     override val keywords: Int
         get() = R.string.supervision_web_content_filters_keywords
 
@@ -88,15 +91,17 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
         get() = R.string.menu_key_supervision
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        supervisionClient = getSupervisionClient(context)
-        addSupportedApps(context)
+        if (isContainer(context)) {
+            supervisionClient = getSupervisionClient(context)
+            addSupportedApps(context)
+        }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        supervisionClient?.close()
+        if (isContainer(context)) {
+            supervisionClient?.close()
+        }
     }
-
-    override fun isIndexable(context: Context) = true
 
     override fun hasCompleteHierarchy() = true
 

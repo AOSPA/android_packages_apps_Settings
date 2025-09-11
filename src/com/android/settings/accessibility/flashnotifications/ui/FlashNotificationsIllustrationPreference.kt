@@ -27,6 +27,9 @@ class FlashNotificationsIllustrationPreference : PreferenceMetadata, PreferenceB
     override val key: String
         get() = "flash_notifications_illustration"
 
+    override val indexable
+        get() = false
+
     override fun createWidget(context: Context) =
         IllustrationPreference(context).apply {
             lottieAnimationResId = R.drawable.flash_notifications_illustration
@@ -36,6 +39,4 @@ class FlashNotificationsIllustrationPreference : PreferenceMetadata, PreferenceB
         super.bind(preference, metadata)
         preference.isSelectable = false
     }
-
-    override fun isIndexable(context: Context) = false
 }

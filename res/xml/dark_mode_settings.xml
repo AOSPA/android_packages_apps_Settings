@@ -33,6 +33,7 @@
     <com.android.settingslib.widget.BannerMessagePreference
         android:key="dark_ui_location_off"
         android:title="@string/twilight_mode_location_off_dialog_message"
+        android:persistent="false"
         settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
 
     <PreferenceCategory
@@ -57,6 +58,7 @@
             android:key="dark_ui_auto_mode"
             android:title="@string/dark_ui_auto_mode_title"
             android:summary="%s"
+            android:persistent="false"
             android:entries="@array/dark_ui_scheduler_preference_titles"
             android:entryValues="@array/dark_ui_scheduler_preference_titles"
             settings:controller="com.android.settings.display.darkmode.DarkModeScheduleSelectorController"
@@ -95,6 +97,7 @@
         android:title="@string/accessibility_send_feedback_title"
         android:icon="@drawable/ic_feedback"
         settings:searchable="false"
+        android:persistent="false"
         settings:buttonPreferenceSize="normal"
         settings:buttonPreferenceType="tonal"
         settings:controller="com.android.settings.accessibility.FeedbackButtonPreferenceController" />
@@ -104,6 +107,7 @@
         android:title="@string/accessibility_send_survey_title"
         android:icon="@drawable/ic_rate_review"
         settings:searchable="false"
+        android:persistent="false"
         settings:buttonPreferenceSize="normal"
         settings:buttonPreferenceType="tonal"
         settings:controller="com.android.settings.accessibility.ForceInvertSurveyButtonPreferenceController" />

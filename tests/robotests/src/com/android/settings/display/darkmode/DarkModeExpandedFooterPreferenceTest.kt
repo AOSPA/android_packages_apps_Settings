@@ -66,7 +66,7 @@ class DarkModeExpandedFooterPreferenceTest {
 
     @Test
     fun isIndexable() {
-        assertThat(preference.isIndexable(context)).isFalse()
+        assertThat(preference.indexable).isFalse()
     }
 
     @EnableFlags(Flags.FLAG_FORCE_INVERT_COLOR)

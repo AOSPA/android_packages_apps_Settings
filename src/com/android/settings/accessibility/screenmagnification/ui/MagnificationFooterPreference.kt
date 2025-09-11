@@ -44,6 +44,9 @@ class MagnificationFooterPreference :
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = false
+
     override val introductionTitle: Int
         get() = R.string.accessibility_screen_magnification_about_title
 
@@ -67,8 +70,6 @@ class MagnificationFooterPreference :
             mSettingsKeyedObserver = null
         }
     }
-
-    override fun isIndexable(context: Context): Boolean = false
 
     override fun getTitle(context: Context): CharSequence? {
         val hasTouch =

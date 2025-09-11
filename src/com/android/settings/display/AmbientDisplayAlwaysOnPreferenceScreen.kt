@@ -85,6 +85,9 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     override val keywords: Int
         get() = R.string.keywords_always_show_time_info
 
+    override val indexable
+        get() = true
+
     override fun getMetricsCategory() = SettingsEnums.AMBIENT_DISPLAY_ALWAYS_ON
 
     override val highlightMenuKey: Int
@@ -122,21 +125,23 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
         )
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
-        ambientWallpaperPreference
-            .storage(context)
-            .addObserver(AmbientWallpaperPreference.KEY, keyedObserver, HandlerExecutor.main)
+        if (isEntryPoint(context)) {
+            keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
+            ambientWallpaperPreference
+                .storage(context)
+                .addObserver(AmbientWallpaperPreference.KEY, keyedObserver, HandlerExecutor.main)
+        }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        ambientWallpaperPreference
-            .storage(context)
-            .removeObserver(AmbientWallpaperPreference.KEY, keyedObserver)
+        if (isEntryPoint(context)) {
+            ambientWallpaperPreference
+                .storage(context)
+                .removeObserver(AmbientWallpaperPreference.KEY, keyedObserver)
+        }
     }
 
     override fun fragmentClass(): Class<out Fragment>? = AmbientPreferenceFragment::class.java
-
-    override fun isIndexable(context: Context) = true
 
     override fun hasCompleteHierarchy() = true
 

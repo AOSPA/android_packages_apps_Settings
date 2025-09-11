@@ -30,6 +30,7 @@ import com.android.extensions.appfunctions.AppFunctionService
 import com.android.extensions.appfunctions.ExecuteAppFunctionRequest
 import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
 import com.android.settings.appfunctions.providers.AndroidApiStateProviderExecutor
+import com.android.settings.appfunctions.providers.AndroidApiStateSetterExecutor
 import com.android.settings.appfunctions.providers.CatalystStateMetadataProviderExecutor
 import com.android.settings.appfunctions.providers.CatalystStateProviderExecutor
 import com.android.settings.appfunctions.providers.CatalystStateSetterExecutor
@@ -77,7 +78,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
     }
 
     open val deviceStateSetterExecutors: List<DeviceStateExecutor> by lazy {
-        listOf(CatalystStateSetterExecutor(applicationContext, englishContext))
+        listOf(CatalystStateSetterExecutor(), AndroidApiStateSetterExecutor(applicationContext))
     }
     val deviceStateSetterAggregator by lazy {
         DeviceStateSetterAggregator(deviceStateSetterExecutors)
@@ -137,7 +138,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                     appFunctionType,
                     request.parameters,
                     applicationContext.getLocale().toString(),
-                )
+                    )
             val response = buildResponse(responseData)
             callback.onResult(response)
             Log.d(TAG, "app function ${request.functionIdentifier} fulfilled.")

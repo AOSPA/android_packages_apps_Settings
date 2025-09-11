@@ -206,13 +206,20 @@ class DisplayTopologyPreferenceController(
         if (!this::paneContent.isInitialized || showStackedMirroringDisplay()) {
             return
         }
+        val topologyBounds = topology.absoluteBounds
         // Step 1
-        topologyHint.text = context.getString(R.string.external_display_topology_hint)
+        topologyHint.text =
+            if (topologyBounds.size() > 1) {
+                context.getString(R.string.external_display_topology_hint)
+            } else {
+                ""
+            }
         // Step 2
         val oldBounds = topologyInfo?.positions
         val newBounds = buildList {
-            val bounds = topology.absoluteBounds
-            (0..bounds.size() - 1).forEach { add(Pair(bounds.keyAt(it), bounds.valueAt(it))) }
+            (0..topologyBounds.size() - 1).forEach {
+                add(Pair(topologyBounds.keyAt(it), topologyBounds.valueAt(it)))
+            }
         }
         if (
             oldBounds != null &&

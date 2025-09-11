@@ -25,6 +25,7 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -94,11 +95,19 @@ public class AdaptiveConnectivitySettings extends DashboardFragment {
                 legacyAdaptiveConnPref.setVisible(false);
             }
             setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED);
-            setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED);
+            final SubscriptionManager subscriptionManager =
+                    getContext().getSystemService(SubscriptionManager.class);
+            final boolean shouldHideMobileNetworkToggle =
+                    subscriptionManager != null
+                            && SubscriptionUtil.hasSubscriptionForMobileNetworkToggleDisable(
+                                    getContext(), subscriptionManager);
+            if (!shouldHideMobileNetworkToggle) {
+                setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED);
+            }
         }
     }
 
-    private void setupSwitchPreferenceCompat(String key) {
+    void setupSwitchPreferenceCompat(String key) {
         SwitchPreferenceCompat switchPreference = findPreference(key);
         if (switchPreference != null) {
             switchPreference.setOnPreferenceChangeListener(

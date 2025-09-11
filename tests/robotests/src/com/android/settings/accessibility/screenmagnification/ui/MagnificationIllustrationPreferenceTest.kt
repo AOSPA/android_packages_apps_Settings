@@ -18,18 +18,16 @@ package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-
 import com.android.settings.R
 import com.android.settingslib.widget.IllustrationPreference
 import com.google.common.truth.Truth.assertThat
-
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class MagnificationIllustrationPreferenceTest {
-    private val context : Context = ApplicationProvider.getApplicationContext()
+    private val context: Context = ApplicationProvider.getApplicationContext()
     private val magnificationIllustrationPreference = MagnificationIllustrationPreference()
 
     @Test
@@ -39,16 +37,20 @@ class MagnificationIllustrationPreferenceTest {
 
     @Test
     fun isIndexable() {
-        assertThat(magnificationIllustrationPreference.isIndexable(context)).isFalse()
+        assertThat(magnificationIllustrationPreference.indexable).isFalse()
     }
 
     @Test
     fun getContentDescription() {
-        val preference : IllustrationPreference =
+        val preference: IllustrationPreference =
             magnificationIllustrationPreference.createWidget(context)
 
         assertThat(preference.getContentDescription())
-            .isEqualTo(context.getString(R.string.accessibility_illustration_content_description,
-                context.getText(R.string.accessibility_screen_magnification_title)))
+            .isEqualTo(
+                context.getString(
+                    R.string.accessibility_illustration_content_description,
+                    context.getText(R.string.accessibility_screen_magnification_title),
+                )
+            )
     }
 }

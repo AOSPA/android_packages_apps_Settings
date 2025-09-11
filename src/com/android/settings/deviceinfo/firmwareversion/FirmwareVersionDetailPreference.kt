@@ -48,9 +48,10 @@ class FirmwareVersionDetailPreference :
     override val title: Int
         get() = R.string.firmware_version
 
-    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_PREFERENCE)
+    override val indexable
+        get() = false
 
-    override fun isIndexable(context: Context) = false
+    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_PREFERENCE)
 
     override fun intent(context: Context): Intent? =
         Intent(Intent.ACTION_MAIN)

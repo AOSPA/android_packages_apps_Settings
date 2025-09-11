@@ -46,6 +46,9 @@ sealed class DarkModeCustomTimePreference(protected val uiModeManager: UiModeMan
 
     private var nightModeCustomTypeObserver: KeyedObserver<String>? = null
 
+    override val indexable
+        get() = false
+
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         preference.onPreferenceClickListener = this
@@ -86,8 +89,6 @@ sealed class DarkModeCustomTimePreference(protected val uiModeManager: UiModeMan
     override fun isAvailable(context: Context) =
         uiModeManager.nightMode == UiModeManager.MODE_NIGHT_CUSTOM &&
             uiModeManager.nightModeCustomType == UiModeManager.MODE_NIGHT_CUSTOM_TYPE_SCHEDULE
-
-    override fun isIndexable(context: Context) = false
 
     abstract fun updateCustomTime(time: LocalTime)
 

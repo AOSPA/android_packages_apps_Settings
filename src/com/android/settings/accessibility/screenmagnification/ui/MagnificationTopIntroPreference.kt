@@ -17,7 +17,6 @@
 package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
-
 import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
@@ -31,9 +30,10 @@ internal class MagnificationTopIntroPreference : PreferenceMetadata, PreferenceB
     override val title: Int
         get() = R.string.accessibility_screen_magnification_intro_text
 
-    override fun createWidget(context: Context) = TopIntroPreference(context)
+    override val indexable
+        get() = false
 
-    override fun isIndexable(context: Context) = false
+    override fun createWidget(context: Context) = TopIntroPreference(context)
 
     companion object {
         const val KEY = "top_intro"

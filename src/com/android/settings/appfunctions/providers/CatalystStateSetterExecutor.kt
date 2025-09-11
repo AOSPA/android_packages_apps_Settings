@@ -17,28 +17,34 @@
 package com.android.settings.appfunctions.providers
 
 import android.app.appsearch.GenericDocument
-import android.content.Context
 import android.util.Log
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateSetterExecutorResult
-import com.google.android.appfunctions.schema.common.v1.devicestate.AdjustNumericDeviceStateItemByPercentageParams
-import com.google.android.appfunctions.schema.common.v1.devicestate.OffsetNumericDeviceStateItemByValueParams
-import com.google.android.appfunctions.schema.common.v1.devicestate.SetDeviceStateItemParams
+import com.android.settings.appfunctions.GenericDeviceStateItemSetterParams
 import com.google.android.appfunctions.schema.common.v1.devicestate.SetDeviceStateItemResponse
-import com.google.android.appfunctions.schema.common.v1.devicestate.ToggleDeviceStateItemParams
 
-/* A [DeviceStateExecutor] that provides device state metadata information for Settings that are
-exposed using Catalyst framework. Configured in [CatalystStateProviderConfig]. */
-class CatalystStateSetterExecutor(
-    private val context: Context,
-    private val englishContext: Context,
-) : DeviceStateExecutor {
+/**
+ * A [DeviceStateExecutor] that sets device state for Settings that are exposed using Catalyst
+ * framework. Configured in [CatalystStateProviderConfig].
+ */
+class CatalystStateSetterExecutor() : DeviceStateExecutor {
 
+    /**
+     * Asynchronously executes the device state set request.
+     *
+     * @param appFunctionType The app function type requested by the caller. The executor will only
+     *   execute if it matches the requested type.
+     * @param params The required params to execute the set request.
+     * @return A [DeviceStateSetterExecutorResult] containing the outcome of the set operation.
+     */
     override suspend fun execute(
         appFunctionType: DeviceStateAppFunctionType,
         params: GenericDocument?,
     ): DeviceStateSetterExecutorResult {
         try {
+            if (params == null) {
+                throw IllegalArgumentException("Provided params are null.")
+            }
             var result = executeSetDeviceStateRequest(appFunctionType, params)
 
             // TODO: replace with actual result
@@ -53,16 +59,18 @@ class CatalystStateSetterExecutor(
 
     private fun executeSetDeviceStateRequest(
         appFunctionType: DeviceStateAppFunctionType,
-        params: GenericDocument?,
+        params: GenericDocument,
     ): SetDeviceStateItemResponse? {
         Log.i(TAG, "Executing a setDeviceStateRequest with appFunctionType: $appFunctionType")
+        val parsedParams = GenericDeviceStateItemSetterParams(appFunctionType, params)
         return when (appFunctionType) {
-            DeviceStateAppFunctionType.SET_DEVICE_STATE -> setDeviceState(params)
+            DeviceStateAppFunctionType.SET_DEVICE_STATE -> setDeviceState(parsedParams)
             DeviceStateAppFunctionType.OFFSET_DEVICE_STATE_BY_VALUE ->
-                offsetNumericDeviceStateByValue(params)
+                offsetNumericDeviceStateByValue(parsedParams)
             DeviceStateAppFunctionType.ADJUST_DEVICE_STATE_BY_PERCENTAGE ->
-                adjustNumericDeviceStateByPercentage(params)
-            DeviceStateAppFunctionType.TOGGLE_DEVICE_STATE -> toggleDeviceStateItemParams(params)
+                adjustNumericDeviceStateByPercentage(parsedParams)
+            DeviceStateAppFunctionType.TOGGLE_DEVICE_STATE ->
+                toggleDeviceStateItemParams(parsedParams)
             else -> {
                 Log.i(TAG, "Unrecognised appFunctionType: $appFunctionType")
                 return null
@@ -70,109 +78,40 @@ class CatalystStateSetterExecutor(
         }
     }
 
-    private fun setDeviceState(unparsedParams: GenericDocument?): SetDeviceStateItemResponse? {
-        val params = parseSetDeviceStateItemParams(unparsedParams)
+    private fun setDeviceState(
+        genericParams: GenericDeviceStateItemSetterParams
+    ): SetDeviceStateItemResponse? {
+        val params = genericParams.getSetDeviceStateItemParams()
         // TODO: call into appropriate setter APIs
 
         return null
     }
 
     private fun offsetNumericDeviceStateByValue(
-        unparsedParams: GenericDocument?
+        genericParams: GenericDeviceStateItemSetterParams
     ): SetDeviceStateItemResponse? {
-        val params = parseOffsetNumericDeviceStateItemByValueParams(unparsedParams)
+        val params = genericParams.getOffsetNumericDeviceStateItemByValueParams()
         // TODO: call into appropriate setter APIs
 
         return null
     }
 
     private fun adjustNumericDeviceStateByPercentage(
-        unparsedParams: GenericDocument?
+        genericParams: GenericDeviceStateItemSetterParams
     ): SetDeviceStateItemResponse? {
-        val params = parseAdjustNumericDeviceStateItemByPercentageParams(unparsedParams)
+        val params = genericParams.getAdjustNumericDeviceStateItemByPercentageParams()
         // TODO: call into appropriate setter APIs
 
         return null
     }
 
     private fun toggleDeviceStateItemParams(
-        unparsedParams: GenericDocument?
+        genericParams: GenericDeviceStateItemSetterParams
     ): SetDeviceStateItemResponse? {
-        val params = parseToggleDeviceStateItemParams(unparsedParams)
+        val params = genericParams.getToggleDeviceStateItemParams()
         // TODO: call into appropriate setter APIs
 
         return null
-    }
-
-    private fun parseSetDeviceStateItemParams(params: GenericDocument?): SetDeviceStateItemParams? {
-        val setDeviceStateItemParams: SetDeviceStateItemParams? = null
-
-        val unparsedParams = params?.getPropertyDocument("setDeviceStateItemParams")
-        if (unparsedParams == null) {
-            throw IllegalArgumentException(
-                "Missing setDeviceStateItemParams in the request: $params"
-            )
-        } else {
-            Log.i(TAG, "Found setDeviceStateItemParams: $unparsedParams")
-            // TODO: need to manually parse and construct the object
-        }
-        return setDeviceStateItemParams
-    }
-
-    private fun parseOffsetNumericDeviceStateItemByValueParams(
-        params: GenericDocument?
-    ): OffsetNumericDeviceStateItemByValueParams? {
-        val offsetNumericDeviceStateItemByValueParams: OffsetNumericDeviceStateItemByValueParams? =
-            null
-
-        val unparsedParams =
-            params?.getPropertyDocument("offsetNumericDeviceStateItemByValueParams")
-        if (unparsedParams == null) {
-            throw IllegalArgumentException(
-                "Missing offsetNumericDeviceStateItemByValueParams in the request: $params"
-            )
-        } else {
-            Log.i(TAG, "Found offsetNumericDeviceStateItemByValueParams: $unparsedParams")
-            // TODO: need to manually parse and construct the object
-        }
-        return offsetNumericDeviceStateItemByValueParams
-    }
-
-    private fun parseAdjustNumericDeviceStateItemByPercentageParams(
-        params: GenericDocument?
-    ): AdjustNumericDeviceStateItemByPercentageParams? {
-        val adjustNumericDeviceStateItemByPercentageParams:
-            AdjustNumericDeviceStateItemByPercentageParams? =
-            null
-
-        val unparsedParams =
-            params?.getPropertyDocument("adjustNumericDeviceStateItemByPercentageParams")
-        if (unparsedParams == null) {
-            throw IllegalArgumentException(
-                "Missing adjustNumericDeviceStateItemByPercentageParams in the request: $params"
-            )
-        } else {
-            Log.i(TAG, "Found adjustNumericDeviceStateItemByPercentageParams: $unparsedParams")
-            // TODO: need to manually parse and construct the object
-        }
-        return adjustNumericDeviceStateItemByPercentageParams
-    }
-
-    private fun parseToggleDeviceStateItemParams(
-        params: GenericDocument?
-    ): ToggleDeviceStateItemParams? {
-        val toggleDeviceStateItemParams: ToggleDeviceStateItemParams? = null
-
-        val unparsedParams = params?.getPropertyDocument("toggleDeviceStateItemParams")
-        if (unparsedParams == null) {
-            throw IllegalArgumentException(
-                "Missing toggleDeviceStateItemParams in the request: $params"
-            )
-        } else {
-            Log.i(TAG, "Found toggleDeviceStateItemParams: $unparsedParams")
-            // TODO: need to manually parse and construct the object
-        }
-        return toggleDeviceStateItemParams
     }
 
     companion object {

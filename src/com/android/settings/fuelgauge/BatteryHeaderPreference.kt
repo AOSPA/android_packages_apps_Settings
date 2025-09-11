@@ -55,6 +55,9 @@ class BatteryHeaderPreference :
     override val title: Int
         get() = R.string.summary_placeholder
 
+    override val indexable
+        get() = false
+
     override val preferenceActionMetrics: Int
         get() = ACTION_BATTERY_LEVEL
 
@@ -69,8 +72,6 @@ class BatteryHeaderPreference :
             quickUpdateHeaderPreference(preference)
         }
     }
-
-    override fun isIndexable(context: Context) = false
 
     override fun isAvailable(context: Context) =
         com.android.settings.Utils.isBatteryPresent(context)

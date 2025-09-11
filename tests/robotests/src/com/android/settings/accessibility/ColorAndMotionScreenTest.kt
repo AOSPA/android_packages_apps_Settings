@@ -35,7 +35,7 @@ class ColorAndMotionScreenTest {
 
     @Test
     fun isIndexable_returnTrue() {
-        assertThat(preferenceScreenCreator.isIndexable(appContext)).isTrue()
+        assertThat(preferenceScreenCreator.indexable).isTrue()
     }
 
     @Test

@@ -108,9 +108,7 @@ class AlwaysOnSwitchPreferenceTest {
 
         assertThat(preference.getSummary(context))
             .isEqualTo(
-                context.getString(
-                    R.string.accessibility_screen_magnification_always_on_summary
-                )
+                context.getString(R.string.accessibility_screen_magnification_always_on_summary)
             )
     }
 
@@ -120,9 +118,7 @@ class AlwaysOnSwitchPreferenceTest {
 
         assertThat(preference.getSummary(context))
             .isEqualTo(
-                context.getString(
-                    R.string.accessibility_screen_magnification_always_on_summary
-                )
+                context.getString(R.string.accessibility_screen_magnification_always_on_summary)
             )
     }
 
@@ -151,9 +147,11 @@ class AlwaysOnSwitchPreferenceTest {
     )
     fun performClick(settingsEnabled: Boolean, expectedChecked: Boolean) {
         MagnificationCapabilities.setCapabilities(context, MagnificationMode.ALL)
-        getStorage().setBoolean(
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED, settingsEnabled
-        )
+        getStorage()
+            .setBoolean(
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED,
+                settingsEnabled,
+            )
         val preferenceWidget = createAlwaysOnWidget()
         assertThat(preferenceWidget.isChecked).isEqualTo(settingsEnabled)
 
@@ -161,8 +159,10 @@ class AlwaysOnSwitchPreferenceTest {
 
         assertThat(preferenceWidget.isChecked).isEqualTo(expectedChecked)
         assertThat(
-            getStorage().getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED)
-        ).isEqualTo(expectedChecked)
+                getStorage()
+                    .getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED)
+            )
+            .isEqualTo(expectedChecked)
     }
 
     @Test
@@ -177,7 +177,6 @@ class AlwaysOnSwitchPreferenceTest {
                 "{supportAlwaysOn: true, inSetupWizard: false, supportWindowMag: true, expectedAvailable: true}",
                 "{supportAlwaysOn: true, inSetupWizard: true, supportWindowMag: false, expectedAvailable: false}",
                 "{supportAlwaysOn: true, inSetupWizard: true, supportWindowMag: true, expectedAvailable: false}",
-
             ]
     )
     fun isAvailable(
@@ -199,9 +198,9 @@ class AlwaysOnSwitchPreferenceTest {
         try {
             activityController =
                 ActivityController.of(
-                    ComponentActivity(),
-                    Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
-                )
+                        ComponentActivity(),
+                        Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
+                    )
                     .create()
                     .start()
                     .postCreate(null)

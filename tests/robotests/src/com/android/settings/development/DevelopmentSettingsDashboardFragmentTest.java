@@ -422,7 +422,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         }
     }
 
-    @Implements(WirelessDebuggingPreferenceController.class)
+    @Implements(AdbWirelessDebuggingPreferenceController.class)
     public static class ShadowWirelessDebuggingPreferenceController {
         @Implementation
         protected boolean isAvailable() {

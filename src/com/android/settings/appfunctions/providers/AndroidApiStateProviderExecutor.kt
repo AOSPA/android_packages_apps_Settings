@@ -21,30 +21,33 @@ import android.content.Context
 import android.util.Log
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
-import com.android.settings.appfunctions.sources.AdaptiveBrightnessStateSource
-import com.android.settings.appfunctions.sources.AppsStateSource
-import com.android.settings.appfunctions.sources.AppsStorageStateSource
-import com.android.settings.appfunctions.sources.BatterySaverStateSource
-import com.android.settings.appfunctions.sources.BatteryStatusStateSource
-import com.android.settings.appfunctions.sources.BubblesStateSource
-import com.android.settings.appfunctions.sources.DeviceStateSource
-import com.android.settings.appfunctions.sources.LockScreenStateSource
-import com.android.settings.appfunctions.sources.ManagedProfileStateSource
-import com.android.settings.appfunctions.sources.MediaOutputStateSource
-import com.android.settings.appfunctions.sources.MobileDataUsageStateSource
-import com.android.settings.appfunctions.sources.MobileNetworkStateSource
-import com.android.settings.appfunctions.sources.NfcStateSource
-import com.android.settings.appfunctions.sources.NotificationHistoryStateSource
-import com.android.settings.appfunctions.sources.NotificationsStateSource
-import com.android.settings.appfunctions.sources.OpenByDefaultStateSource
-import com.android.settings.appfunctions.sources.RecentAppsStateSource
-import com.android.settings.appfunctions.sources.ScreenTimeoutStateSource
-import com.android.settings.appfunctions.sources.SharedDeviceStateData
-import com.android.settings.appfunctions.sources.WifiStatusStateSource
-import com.android.settings.appfunctions.sources.ZenModesStateSource
+import com.android.settings.appfunctions.providersources.AdaptiveBrightnessStateSource
+import com.android.settings.appfunctions.providersources.AppsStateSource
+import com.android.settings.appfunctions.providersources.AppsStorageStateSource
+import com.android.settings.appfunctions.providersources.BatterySaverStateSource
+import com.android.settings.appfunctions.providersources.BatteryStatusStateSource
+import com.android.settings.appfunctions.providersources.BubblesStateSource
+import com.android.settings.appfunctions.providersources.DeviceStateSource
+import com.android.settings.appfunctions.providersources.LockScreenStateSource
+import com.android.settings.appfunctions.providersources.ManagedProfileStateSource
+import com.android.settings.appfunctions.providersources.MediaOutputStateSource
+import com.android.settings.appfunctions.providersources.MobileDataUsageStateSource
+import com.android.settings.appfunctions.providersources.MobileNetworkStateSource
+import com.android.settings.appfunctions.providersources.NfcStateSource
+import com.android.settings.appfunctions.providersources.NotificationHistoryStateSource
+import com.android.settings.appfunctions.providersources.NotificationsStateSource
+import com.android.settings.appfunctions.providersources.OpenByDefaultStateSource
+import com.android.settings.appfunctions.providersources.RecentAppsStateSource
+import com.android.settings.appfunctions.providersources.ScreenTimeoutStateSource
+import com.android.settings.appfunctions.providersources.SharedDeviceStateData
+import com.android.settings.appfunctions.providersources.WifiStatusStateSource
+import com.android.settings.appfunctions.providersources.ZenModesStateSource
+import com.android.settings.flags.Flags
 import com.android.settings.fuelgauge.batteryusage.BatteryUsageStateSource
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withPermit
 
 /**
  * A [DeviceStateExecutor] that gathers device state information directly from Android APIs rather
@@ -53,6 +56,7 @@ import kotlinx.coroutines.coroutineScope
  * @param context The application context.
  */
 class AndroidApiStateProviderExecutor(private val context: Context) : DeviceStateExecutor {
+    private val sharedDeviceStateData = SharedDeviceStateData(context)
 
     // List of all active DeviceStateSource
     private val settingStates: List<DeviceStateSource> =
@@ -84,22 +88,39 @@ class AndroidApiStateProviderExecutor(private val context: Context) : DeviceStat
         appFunctionType: DeviceStateAppFunctionType,
         params: GenericDocument?,
     ): DeviceStateProviderExecutorResult {
-        val sharedDeviceStateData = SharedDeviceStateData(context)
+        sharedDeviceStateData.initialize()
 
         val states = coroutineScope {
+            val semaphore = Semaphore(MAX_PARALLELISM)
+
             settingStates
                 .filter { it.appFunctionType == appFunctionType }
                 .map { provider ->
                     async {
-                        val providerName = provider::class.simpleName
-                        try {
-                            Log.v(TAG, "Getting device state from $providerName")
-                            val state = provider.get(context, sharedDeviceStateData)
-                            Log.v(TAG, "Got device state from $providerName")
-                            state
-                        } catch (e: Exception) {
-                            Log.e(TAG, "Error getting device state from $providerName", e)
-                            null
+                        if (Flags.parameterisedScreensInAppFunctions()) {
+                            semaphore.withPermit {
+                                val providerName = provider::class.simpleName
+                                try {
+                                    Log.v(TAG, "Getting device state from $providerName")
+                                    val state = provider.get(context, sharedDeviceStateData)
+                                    Log.v(TAG, "Got device state from $providerName")
+                                    state
+                                } catch (e: Exception) {
+                                    Log.e(TAG, "Error getting device state from $providerName", e)
+                                    null
+                                }
+                            }
+                        } else {
+                            val providerName = provider::class.simpleName
+                            try {
+                                Log.v(TAG, "Getting device state from $providerName")
+                                val state = provider.get(context, sharedDeviceStateData)
+                                Log.v(TAG, "Got device state from $providerName")
+                                state
+                            } catch (e: Exception) {
+                                Log.e(TAG, "Error getting device state from $providerName", e)
+                                null
+                            }
                         }
                     }
                 }
@@ -111,5 +132,6 @@ class AndroidApiStateProviderExecutor(private val context: Context) : DeviceStat
 
     companion object {
         private const val TAG = "AndroidApiStateProviderExecutor"
+        private const val MAX_PARALLELISM = 5
     }
 }

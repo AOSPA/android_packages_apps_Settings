@@ -27,7 +27,8 @@ class SupervisionSupportedAppPreference(
     override val key: String
         get() = KEY
 
-    override fun isIndexable(context: Context) = false
+    override val indexable
+        get() = false
 
     override fun createWidget(context: Context) =
         NonClickablePreference(context, /* attrs= */ null).apply {

@@ -147,27 +147,31 @@ open class MobileNetworkListScreen(context: Context) :
     }
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        val executor = HandlerExecutor.main
-        val observer = KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(KEY) }
-        airplaneModeObserver = observer
-        airplaneModeDataStore.addObserver(AirplaneModePreference.KEY, observer, executor)
-        context.getSystemService(SubscriptionManager::class.java)?.let {
-            val listener =
-                object : OnSubscriptionsChangedListener() {
-                    override fun onSubscriptionsChanged() {
-                        subscriptionInfoList = null // invalid cache
-                        context.notifyPreferenceChange(KEY)
+        if (isEntryPoint(context)) {
+            val executor = HandlerExecutor.main
+            val observer = KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(KEY) }
+            airplaneModeObserver = observer
+            airplaneModeDataStore.addObserver(AirplaneModePreference.KEY, observer, executor)
+            context.getSystemService(SubscriptionManager::class.java)?.let {
+                val listener =
+                    object : OnSubscriptionsChangedListener() {
+                        override fun onSubscriptionsChanged() {
+                            subscriptionInfoList = null // invalid cache
+                            context.notifyPreferenceChange(KEY)
+                        }
                     }
-                }
-            it.addOnSubscriptionsChangedListener(executor, listener)
-            onSubscriptionsChangedListener = listener
+                it.addOnSubscriptionsChangedListener(executor, listener)
+                onSubscriptionsChangedListener = listener
+            }
         }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        airplaneModeDataStore.removeObserver(AirplaneModePreference.KEY, airplaneModeObserver)
-        context.getSystemService(SubscriptionManager::class.java)?.apply {
-            onSubscriptionsChangedListener?.let { removeOnSubscriptionsChangedListener(it) }
+        if (isEntryPoint(context)) {
+            airplaneModeDataStore.removeObserver(AirplaneModePreference.KEY, airplaneModeObserver)
+            context.getSystemService(SubscriptionManager::class.java)?.apply {
+                onSubscriptionsChangedListener?.let { removeOnSubscriptionsChangedListener(it) }
+            }
         }
     }
 

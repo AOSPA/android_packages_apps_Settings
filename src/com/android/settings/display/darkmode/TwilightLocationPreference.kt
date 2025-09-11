@@ -39,13 +39,14 @@ class TwilightLocationPreference :
     override val title: Int
         get() = R.string.twilight_mode_location_off_dialog_message
 
+    override val indexable
+        get() = false
+
     override fun isAvailable(context: Context): Boolean {
         val locationManager =
             context.getSystemService<LocationManager?>(LocationManager::class.java)
         return locationManager?.isLocationEnabled == false
     }
-
-    override fun isIndexable(context: Context) = false
 
     override fun createWidget(context: Context) = BannerMessagePreference(context)
 

@@ -62,6 +62,9 @@ open class DoubleTapPowerScreen(context: Context) :
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = false
+
     override val highlightMenuKey: Int
         get() = R.string.menu_key_system
 
@@ -70,8 +73,6 @@ open class DoubleTapPowerScreen(context: Context) :
     override fun isFlagEnabled(context: Context) = Flags.deeplinkSystem25q4()
 
     override fun hasCompleteHierarchy() = false
-
-    override fun isIndexable(context: Context) = false
 
     override fun fragmentClass(): Class<out Fragment>? = DoubleTapPowerSettings::class.java
 
@@ -116,19 +117,23 @@ open class DoubleTapPowerScreen(context: Context) :
         }
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
-        for (doubleTapKey in doubleTapKeys) {
-            doubleTapPowerToOpenCameraDataStore.addObserver(
-                doubleTapKey,
-                keyedObserver,
-                HandlerExecutor.main,
-            )
+        if (isEntryPoint(context)) {
+            keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
+            for (doubleTapKey in doubleTapKeys) {
+                doubleTapPowerToOpenCameraDataStore.addObserver(
+                    doubleTapKey,
+                    keyedObserver,
+                    HandlerExecutor.main,
+                )
+            }
         }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        for (doubleTapKey in doubleTapKeys) {
-            doubleTapPowerToOpenCameraDataStore.removeObserver(doubleTapKey, keyedObserver)
+        if (isEntryPoint(context)) {
+            for (doubleTapKey in doubleTapKeys) {
+                doubleTapPowerToOpenCameraDataStore.removeObserver(doubleTapKey, keyedObserver)
+            }
         }
     }
 

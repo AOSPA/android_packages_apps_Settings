@@ -62,7 +62,7 @@ class LaunchA11yActivityPreferenceTest {
     @Test
     fun isIndexable_returnFalse() {
         val preference = LaunchA11yActivityPreference(shortcutInfo)
-        assertThat(preference.isIndexable(appContext)).isFalse()
+        assertThat(preference.indexable).isFalse()
     }
 
     @Test

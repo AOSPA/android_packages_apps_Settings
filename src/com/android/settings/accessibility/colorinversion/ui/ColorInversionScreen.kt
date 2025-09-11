@@ -60,6 +60,9 @@ open class ColorInversionScreen :
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
 
+    override val indexable
+        get() = true
+
     override val keywords: Int
         get() = R.string.keywords_color_inversion
 
@@ -67,8 +70,6 @@ open class ColorInversionScreen :
 
     override fun fragmentClass(): Class<out Fragment>? =
         ToggleColorInversionPreferenceFragment::class.java
-
-    override fun isIndexable(context: Context) = true
 
     override fun isFlagEnabled(context: Context) = Flags.catalystColorInversion()
 

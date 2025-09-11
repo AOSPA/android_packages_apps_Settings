@@ -51,6 +51,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -78,6 +80,7 @@ import com.android.settingslib.widget.TwoTargetPreference;
  * on the system.  In that case, the enable option will not be shown but other
  * remote display routes will continue to be made available.
  */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public final class WifiDisplaySettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "WifiDisplaySettings";
@@ -145,6 +148,11 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
     @Override
     public int getHelpResource() {
         return R.string.help_url_remote_display;
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return WifiDisplayScreen.KEY;
     }
 
     @Override
@@ -777,3 +785,4 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.wifi_display_settings);
 }
+// LINT.ThenChange(WifiDisplayScreen.kt)

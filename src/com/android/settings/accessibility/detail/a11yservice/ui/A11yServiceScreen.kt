@@ -145,7 +145,7 @@ open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
-        if (context.preferenceScreenKey != key) {
+        if (isEntryPoint(context)) {
             // Register an observer for updating summary based on service's on/off state.
             accessibilityServiceInfo?.let { a11yServiceInfo ->
                 val dataStore = UseServiceDataStore(context, a11yServiceInfo)
@@ -161,7 +161,7 @@ open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
         super.onDestroy(context)
-        if (context.preferenceScreenKey != key) {
+        if (isEntryPoint(context)) {
             serviceEnablementObserver?.let { observer ->
                 serviceEnablementStorage?.removeObserver(bindingKey, observer)
             }

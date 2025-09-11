@@ -16,7 +16,9 @@
 
 package com.android.settings.connecteddevice.display
 
+import android.app.ActivityManager.LOCK_TASK_MODE_LOCKED
 import android.app.Application
+import android.app.TaskStackListener
 import android.provider.Settings
 import android.view.Display
 import android.view.Display.DEFAULT_DISPLAY
@@ -30,8 +32,11 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentCaptor
+import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.verify
 
 /** Unit test for [DisplayPreferenceViewModel] */
 @RunWith(AndroidJUnit4::class)
@@ -42,21 +47,32 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
 
     @Mock private lateinit var uiStateObserver: Observer<DisplayPreferenceViewModel.DisplayUiState>
 
-    private lateinit var application: Application
+    @Captor private lateinit var taskStackListenerCaptor: ArgumentCaptor<TaskStackListener>
+
     private lateinit var viewModel: DisplayPreferenceViewModel
+    private lateinit var application: Application
 
     @Before
     override fun setUp() {
         super.setUp()
         application = ApplicationProvider.getApplicationContext()
-
-        viewModel = DisplayPreferenceViewModel(application, mMockedInjector)
-        viewModel.uiState.observeForever(uiStateObserver)
     }
 
     @After
     fun tearDown() {
         viewModel.uiState.removeObserver(uiStateObserver)
+    }
+
+    private fun setupViewModel() {
+        viewModel =
+            DisplayPreferenceViewModel(
+                application,
+                mMockedInjector,
+                mActivityManager,
+                mActivityTaskManager,
+                mDevicePolicyManager,
+            )
+        viewModel.uiState.observeForever(uiStateObserver)
     }
 
     private fun setMirroringMode(enable: Boolean) {
@@ -79,6 +95,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
 
     @Test
     fun init_loadsEnabledDisplaysAndSetsDefaultDisplay() {
+        setupViewModel()
         val state = viewModel.uiState.value!!
 
         assertThat(state.enabledDisplays).hasSize(2)
@@ -91,6 +108,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
 
     @Test
     fun mirrorModeSettingChanged_updatesUiState_isMirroring() {
+        setupViewModel()
         assertThat(viewModel.uiState.value!!.isMirroring).isFalse()
 
         setMirroringMode(true)
@@ -103,7 +121,22 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
     }
 
     @Test
+    fun mirrorModeSettingChanged_lockTaskModeLocked_isMirroringIsTrue() {
+        setupViewModel()
+        verify(mActivityTaskManager).registerTaskStackListener(taskStackListenerCaptor.capture())
+        setMirroringMode(true)
+        assertThat(viewModel.uiState.value!!.isMirroring).isTrue()
+
+        taskStackListenerCaptor.value.onLockTaskModeChanged(LOCK_TASK_MODE_LOCKED)
+        mHandler.flush()
+        setMirroringMode(false)
+
+        assertThat(viewModel.uiState.value!!.isMirroring).isTrue()
+    }
+
+    @Test
     fun mirrorModeSettingChanged_updatesUiState_showIncludeDefaultDisplayInTopologyPref() {
+        setupViewModel()
         assertThat(viewModel.uiState.value!!.showIncludeDefaultDisplayInTopologyPref).isTrue()
 
         setMirroringMode(true)
@@ -117,6 +150,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
 
     @Test
     fun mirrorModeSettingChanged_notProjectedMode_showIncludeDefaultDisplayInTopologyPref_false() {
+        setupViewModel()
         doReturn(false).`when`(mMockedInjector).isProjectedModeEnabled()
         setMirroringMode(false)
 
@@ -124,7 +158,32 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
     }
 
     @Test
+    fun initialLockTaskModeLockedupdatesUiState() {
+        doReturn(LOCK_TASK_MODE_LOCKED).`when`(mActivityManager).lockTaskModeState
+        setupViewModel()
+
+        assertThat(viewModel.uiState.value!!.lockTaskPolicyInfo.lockTaskMode)
+            .isEqualTo(LOCK_TASK_MODE_LOCKED)
+        assertThat(viewModel.uiState.value!!.isMirroring).isTrue()
+        assertThat(viewModel.uiState.value!!.showIncludeDefaultDisplayInTopologyPref).isFalse()
+    }
+
+    @Test
+    fun lockTaskModeChanged_updatesUiState() {
+        setupViewModel()
+        verify(mActivityTaskManager).registerTaskStackListener(taskStackListenerCaptor.capture())
+        taskStackListenerCaptor.value.onLockTaskModeChanged(LOCK_TASK_MODE_LOCKED)
+        mHandler.flush()
+
+        assertThat(viewModel.uiState.value!!.lockTaskPolicyInfo.lockTaskMode)
+            .isEqualTo(LOCK_TASK_MODE_LOCKED)
+        assertThat(viewModel.uiState.value!!.isMirroring).isTrue()
+        assertThat(viewModel.uiState.value!!.showIncludeDefaultDisplayInTopologyPref).isFalse()
+    }
+
+    @Test
     fun includeDefaultDisplayInTopologySettingChanged_updatesUiState() {
+        setupViewModel()
         assertThat(viewModel.uiState.value!!.includeDefaultDisplayInTopology).isFalse()
 
         setIncludeDefaultDisplayInTopology(true)
@@ -138,6 +197,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
 
     @Test
     fun updateSelectedDisplay_selectedDisplayUpdated() {
+        setupViewModel()
         viewModel.updateSelectedDisplay(123)
 
         val state = viewModel.uiState.value!!
@@ -146,6 +206,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
 
     @Test
     fun updateEnabledDisplays_includeBuiltinDisplay_selectedDisplayIdKept_enabledDisplaysUpdated() {
+        setupViewModel()
         val primaryDisplayId = mDisplayTopology.primaryDisplayId
         includeBuiltinDisplay()
 
@@ -160,6 +221,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
 
     @Test
     fun updateEnabledDisplays_excludeNonConnectedDisplaysAndNotDefaultDisplay() {
+        setupViewModel()
         val initialState = viewModel.uiState.value!!
         assertThat(initialState.enabledDisplays).hasSize(2)
 
@@ -187,6 +249,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
 
     @Test
     fun updateEnabledDisplays_excludeNonEnabledDisplaysAndNotDefaultDisplay() {
+        setupViewModel()
         val initialState = viewModel.uiState.value!!
         assertThat(initialState.enabledDisplays).hasSize(2)
 
@@ -214,6 +277,7 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
 
     @Test
     fun updateEnabledDisplays_removeSelectedDisplay_selectedDisplayUpdated() {
+        setupViewModel()
         val initialState = viewModel.uiState.value!!
         assertThat(initialState.enabledDisplays).hasSize(2)
 

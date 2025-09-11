@@ -26,6 +26,9 @@ class ExtraDimIllustrationPreference : PreferenceMetadata, PreferenceBinding {
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = false
+
     override fun createWidget(context: Context) =
         IllustrationPreference(context).apply {
             isSelectable = false
@@ -36,8 +39,6 @@ class ExtraDimIllustrationPreference : PreferenceMetadata, PreferenceBinding {
                     context.getText(R.string.reduce_bright_colors_preference_title),
                 )
         }
-
-    override fun isIndexable(context: Context) = false
 
     companion object {
         const val KEY = "animated_image"

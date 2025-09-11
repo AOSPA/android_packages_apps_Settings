@@ -33,6 +33,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -43,6 +44,7 @@ class AlwaysOnSwitchPreference :
     SwitchPreference(KEY, R.string.accessibility_screen_magnification_always_on_title),
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider,
+    PreferenceIndexableProvider,
     PreferenceLifecycleProvider,
     KeyedObserver<String?> {
 
@@ -72,8 +74,8 @@ class AlwaysOnSwitchPreference :
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() &&
-                context.isWindowMagnificationSupported() &&
-                isAlwaysOnSupported(context)
+            context.isWindowMagnificationSupported() &&
+            isAlwaysOnSupported(context)
     }
 
     override fun isIndexable(context: Context): Boolean {

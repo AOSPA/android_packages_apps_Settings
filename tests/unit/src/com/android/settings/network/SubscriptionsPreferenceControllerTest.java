@@ -16,12 +16,10 @@
 
 package com.android.settings.network;
 
-import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
 import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GOOD;
 import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GREAT;
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
-import static com.android.systemui.Flags.FLAG_STATUS_BAR_INFLATE_CARRIER_MERGED;
 import static com.android.wifitrackerlib.WifiEntry.WIFI_LEVEL_MAX;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -47,7 +45,6 @@ import android.net.wifi.WifiManager;
 import android.os.Looper;
 import android.os.PersistableBundle;
 import android.os.UserManager;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.telephony.AccessNetworkConstants;
 import android.telephony.CarrierConfigManager;
@@ -91,9 +88,6 @@ public class SubscriptionsPreferenceControllerTest {
     private static final String KEY = "preference_group";
     private static final int SUB_ID = 1;
 
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
-
     @Mock
     private UserManager mUserManager;
     @Mock
@@ -135,7 +129,6 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mSetFlagsRule.disableFlags(FLAG_STATUS_BAR_INFLATE_CARRIER_MERGED);
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         if (Looper.myLooper() == null) {
@@ -594,7 +587,6 @@ public class SubscriptionsPreferenceControllerTest {
     @Test
     @UiThreadTest
     public void getIcon_carrierNetworkIsActive_useCarrierNetworkLevelAndInflate() {
-        mSetFlagsRule.enableFlags(FLAG_STATUS_BAR_INFLATE_CARRIER_MERGED);
         PersistableBundle carrierConfig = new PersistableBundle();
         carrierConfig.putBoolean(CarrierConfigManager.KEY_INFLATE_SIGNAL_STRENGTH_BOOL, true);
         when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(carrierConfig);
