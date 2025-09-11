@@ -23,7 +23,9 @@ import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
+import com.android.settings.applications.applicationInfoComparator
 import com.android.settings.applications.packageName
 import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen
 import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen.Companion.displayOverOtherAppsFilter
@@ -94,9 +96,10 @@ open class AppInfoScreen(context: Context, override val arguments: Bundle) :
 
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
-            AppListRepositoryImpl(context).loadAndFilterApps(context.userId, true).forEach {
-                emit(Bundle(1).apply { putString("pkg", it.packageName) })
-            }
+            AppListRepositoryImpl(context)
+                .loadAndMaybeExcludeSystemApps(context.userId, !DEFAULT_SHOW_SYSTEM)
+                .sortedWith(context.applicationInfoComparator)
+                .forEach { emit(Bundle(1).apply { putString("pkg", it.packageName) }) }
         }
     }
 }
