@@ -42,7 +42,6 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
 
     protected static final int[] CODEC_TYPES = {
             BluetoothCodecConfig.SOURCE_CODEC_TYPE_OPUS,
-            BluetoothCodecConfig.SOURCE_CODEC_TYPE_LC3,
             BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC,
             BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD,
             BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX,
