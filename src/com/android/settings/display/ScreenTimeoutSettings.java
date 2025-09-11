@@ -24,7 +24,10 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 import static com.android.settings.display.UtilsKt.isAdaptiveSleepSupported;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -102,7 +105,10 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
 
     @VisibleForTesting Context mContext;
 
+    // TODO(414733570): Remove mAdmin when all usage is updated to use mEnforcingAdmin.
     @VisibleForTesting RestrictedLockUtils.EnforcedAdmin mAdmin;
+
+    @VisibleForTesting EnforcingAdmin mEnforcingAdmin;
 
     @VisibleForTesting FooterPreference mDisableOptionsPreference;
 
@@ -280,7 +286,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
             screen.addPreference(mPrivacyPreference);
         }
 
-        if (mAdmin != null) {
+        if (mAdmin != null || mEnforcingAdmin != null) {
             setupDisabledFooterPreference();
             screen.addPreference(mDisableOptionsPreference);
         } else {
@@ -315,7 +321,12 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         mDisableOptionsPreference.setLearnMoreText(textMoreDetails);
         mDisableOptionsPreference.setLearnMoreAction(
                 v -> {
-                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), mAdmin);
+                    if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
+                                mEnforcingAdmin, DevicePolicyIdentifiers.MAX_TIME_TO_LOCK_POLICY);
+                    } else {
+                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), mAdmin);
+                    }
                 });
         mDisableOptionsPreference.setIcon(R.drawable.ic_info_outline_24dp);
 
@@ -379,10 +390,16 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         if (dpm == null) {
             return Long.MAX_VALUE;
         }
-        if (mAdmin == null) { // Don't overwrite mocked mAdmin
-            mAdmin = RestrictedLockUtilsInternal.checkIfMaximumTimeToLockIsSet(context);
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            PolicyEnforcementInfo maxTimeToLockPolicyEnforcement = dpm.getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.MAX_TIME_TO_LOCK_POLICY, UserHandle.myUserId());
+            mEnforcingAdmin = maxTimeToLockPolicyEnforcement.getMostImportantEnforcingAdmin();
+        } else {
+            if (mAdmin == null) { // Don't overwrite mocked mAdmin
+                mAdmin = RestrictedLockUtilsInternal.checkIfMaximumTimeToLockIsSet(context);
+            }
         }
-        if (mAdmin != null) {
+        if (mAdmin != null || mEnforcingAdmin != null) {
             // Get the admin max screen timeout
             adminMaxTimeout = dpm.getMaximumTimeToLock(null /* admin */, UserHandle.myUserId());
         }
