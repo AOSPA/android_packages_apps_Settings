@@ -43,7 +43,7 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowSecureSettings.class)
-public class AmbientDisplayAlwaysOnPreferenceControllerTest {
+public class AmbientDisplayAlwaysOnPreferenceScreenControllerTest {
 
     @Mock
     private AmbientDisplayConfiguration mConfig;
@@ -54,20 +54,14 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
 
     private ContentResolver mContentResolver;
 
-    private AmbientDisplayAlwaysOnPreferenceController mController;
+    private AmbientDisplayAlwaysOnPreferenceScreenController mController;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mContentResolver = mContext.getContentResolver();
-        mController = new AmbientDisplayAlwaysOnPreferenceController(mContext, "key") {
-            @Override
-            protected boolean ambientAodMigration() {
-                // Always return true in order to make the preference available
-                return true;
-            }
-        };
+        mController = new AmbientDisplayAlwaysOnPreferenceScreenController(mContext, "key");
         mController.setConfig(mConfig);
 
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
@@ -80,7 +74,7 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
         when(mConfig.alwaysOnAvailableForUser(anyInt())).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                AmbientDisplayAlwaysOnPreferenceController.AVAILABLE);
+                AmbientDisplayAlwaysOnPreferenceScreenController.AVAILABLE);
     }
 
     @Test
@@ -88,7 +82,7 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
         when(mConfig.alwaysOnAvailableForUser(anyInt())).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                AmbientDisplayAlwaysOnPreferenceController.UNSUPPORTED_ON_DEVICE);
+                AmbientDisplayAlwaysOnPreferenceScreenController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -123,16 +117,16 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
 
     @Test
     public void isPublicSliceCorrectKey_returnsTrue() {
-        final AmbientDisplayAlwaysOnPreferenceController controller =
-                new AmbientDisplayAlwaysOnPreferenceController(mContext,
+        final AmbientDisplayAlwaysOnPreferenceScreenController controller =
+                new AmbientDisplayAlwaysOnPreferenceScreenController(mContext,
                         "ambient_display_always_on");
         assertThat(controller.isPublicSlice()).isTrue();
     }
 
     @Test
     public void isPublicSliceIncorrectKey_returnsFalse() {
-        final AmbientDisplayAlwaysOnPreferenceController controller =
-                new AmbientDisplayAlwaysOnPreferenceController(mContext, "bad_key");
+        final AmbientDisplayAlwaysOnPreferenceScreenController controller =
+                new AmbientDisplayAlwaysOnPreferenceScreenController(mContext, "bad_key");
         assertThat(controller.isPublicSlice()).isFalse();
     }
 
@@ -145,13 +139,13 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     public void isAodSuppressedByBedtime_bedTimeModeOn_returnTrue() {
         when(mPowerManager.isAmbientDisplaySuppressed()).thenReturn(true);
 
-        assertThat(AmbientDisplayAlwaysOnPreferenceController
+        assertThat(AmbientDisplayAlwaysOnPreferenceScreenController
                 .isAodSuppressedByBedtime(mContext)).isTrue();
     }
 
     @Test
     public void isAodSuppressedByBedtime_bedTimeModeOff_returnFalse() {
-        assertThat(AmbientDisplayAlwaysOnPreferenceController
+        assertThat(AmbientDisplayAlwaysOnPreferenceScreenController
                 .isAodSuppressedByBedtime(mContext)).isFalse();
     }
 

@@ -36,7 +36,6 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
-import com.android.systemui.shared.Flags.ambientAod
 import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(DisplayScreen.KEY)
@@ -73,7 +72,7 @@ open class DisplayScreen :
             }
             +Category("category_lock_display", R.string.category_name_lock_display) order -190 += {
                 if (Flags.catalystLockscreenFromDisplaySettings()) +LockScreenPreferenceScreen.KEY
-                if (ambientAod()) +AmbientDisplayAlwaysOnPreferenceScreen.KEY
+                +AmbientDisplayAlwaysOnPreferenceScreen.KEY
             }
             +Category("category_key_appearance", R.string.category_name_appearance) order -180 += {
                 if (AccessibilityFlags.catalystDarkUiMode()) +DarkModeScreen.KEY
