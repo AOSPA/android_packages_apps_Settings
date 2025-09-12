@@ -63,7 +63,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private final Set<Integer> mManagedProfiles = new HashSet<>();
     private final Map<Integer, Integer> mProfileToParent = new HashMap<>();
     private final Map<Integer, UserInfo> mUserInfoMap = new HashMap<>();
-    private final Set<String> mEnabledTypes = new HashSet<>();
+    private final Set<String> mSupportedTypes = new HashSet<>();
     private BiMap<UserHandle, Long> mUserProfiles = HashBiMap.create();
     private boolean mIsQuietModeEnabled = false;
     private int[] mProfileIdsForUser = new int[0];
@@ -293,15 +293,15 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    protected boolean isUserTypeEnabled(String userType) {
-        return mEnabledTypes.contains(userType);
+    protected boolean isUserTypeSupported(String userType) {
+        return mSupportedTypes.contains(userType);
     }
 
-    public void setUserTypeEnabled(String type, boolean enabled) {
-        if (enabled) {
-            mEnabledTypes.add(type);
+    public void setUserTypeSupported(String type, boolean supported) {
+        if (supported) {
+            mSupportedTypes.add(type);
         } else {
-            mEnabledTypes.remove(type);
+            mSupportedTypes.remove(type);
         }
     }
 
