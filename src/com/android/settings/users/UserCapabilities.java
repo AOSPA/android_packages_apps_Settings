@@ -95,7 +95,6 @@ public class UserCapabilities {
         mUserSwitcherEnabled = userManager.isUserSwitcherEnabled();
         mCanAddUser = true;
         if (!mIsAdmin
-                || UserManager.getMaxSupportedUsers() < 2
                 || !UserManager.supportsMultipleUsers()
                 || mDisallowAddUser
                 || (!userManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_SECONDARY)
