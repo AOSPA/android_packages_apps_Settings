@@ -80,7 +80,9 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     /**
      * If admin is not null, disables the text and switch but keeps the view clickable (unless the
      * switch is disabled for other reasons). Otherwise, calls setEnabled.
+     * @deprecated Use {@link #setDisabledByAdmin(EnforcingAdmin)} instead.
      */
+    @Deprecated
     public void setDisabledByAdmin(EnforcedAdmin admin) {
         mEnforcedAdmin = admin;
         if (admin != null) {

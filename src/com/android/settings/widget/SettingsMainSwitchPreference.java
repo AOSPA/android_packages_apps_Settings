@@ -235,7 +235,9 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
      * If admin is not null, disables the text and switch but keeps the view clickable.
      * Otherwise, calls setEnabled which will enables the entire view including
      * the text and switch.
+     * @deprecated Use {@link #setDisabledByAdmin(EnforcingAdmin)} instead.
      */
+    @Deprecated
     public void setDisabledByAdmin(EnforcedAdmin admin) {
         mEnforcedAdmin = admin;
         if (mMainSwitchBar != null) {
