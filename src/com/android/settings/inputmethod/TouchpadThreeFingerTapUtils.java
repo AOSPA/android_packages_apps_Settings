@@ -72,6 +72,17 @@ public final class TouchpadThreeFingerTapUtils {
             Map.entry("middle_click", KeyGestureEvent.KEY_GESTURE_TYPE_UNSPECIFIED));
 
     /**
+     * Returns the file name that should be backed up and restored by SharedPreferencesBackupHelper
+     * infrastructure.
+     *
+     * @return the shared preference's name
+     */
+    public static String getFileToBackup() {
+        // only a singleton
+        return SHARED_PREF_NAME;
+    }
+
+    /**
      * @param resolver ContentResolver
      * @return the current KeyGestureEvent set for three finger tap
      */

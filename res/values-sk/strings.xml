@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Zvukový výstup"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Prehrávajte zvuk v načúvacom zariadení alebo reproduktore telefónu"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Podobné"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"Odosielajte obsah rýchlejšie pomocou funkcie <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"Ak chcete čo najrýchlejšie zdieľať obsah so zariadeniami s Androidom a počítačmi v okolí, vyskúšajte <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> pre Windows"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Vyskúšajte <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Najrýchlejšie zdieľanie súborov medzi zariadeniami s Androidom a počítačmi pomocou našej aplikácie <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> pre Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Tóny zvonenia a budíky"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Zvuk počas hovorov"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Médiá a zvuky systému"</string>
@@ -997,7 +997,7 @@
     <string name="external_display_settings_title" msgid="3865786552022665355">"Externé obrazovky"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Vstavaná obrazovka"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Univerzálny kurzor"</string>
-    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Presúvanie myši medzi obrazovkami"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Presúvať myš medzi obrazovkami"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Použiť externú obrazovku"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Rozlíšenie displeja"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"Predvolené správanie pri pripojení"</string>
@@ -1015,21 +1015,17 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nie je pripojená žiadna obrazovka"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Ak chcete začať, pripojte externú obrazovku, prípadne skúste použiť iný kábel"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Ďalšie možnosti"</string>
-    <string name="external_display_topology_hint" msgid="854973327795578470">"Pridržaním a presunutím môžete usporiadať obrazovky."</string>
-    <string name="external_display_mirroring_title" msgid="2688288527687724603">"Zrkadlenie vstavanej obrazovky"</string>
+    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
+    <skip />
+    <string name="external_display_mirroring_title" msgid="2688288527687724603">"Zrkadliť vstavanú obrazovku"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Chcete použiť nové nastavenia?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Ak obrazovka nefunguje tak, ako chcete, môžete sa vrátiť k predchádzajúcim nastaveniam"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Použiť nastavenia"</string>
-    <!-- no translation found for external_display_topology_display_block_content_description (4638018879987232608) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_up (5585023811277652685) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_down (497925070033309302) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_left (5207345941599286131) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_right (6258194449439072825) -->
-    <skip />
+    <string name="external_display_topology_display_block_content_description" msgid="4638018879987232608">"Zobrazenie: %1$s. Dvojitým klepnutím a pridržaním presuňte alebo zobrazte akcie na premiestnenie."</string>
+    <string name="external_display_topology_a11y_action_move_up" msgid="5585023811277652685">"Presunúť nahor"</string>
+    <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"Presunúť nadol"</string>
+    <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"Presunúť doľava"</string>
+    <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"Presunúť doprava"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"zrkadlenie"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Povoliť bezdrôtové zobrazenie"</string>
@@ -1412,6 +1408,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Štandardný obrázok"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"Obrázok HDR"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Toto nastavenie sa týka iba obrázkov a videí, ktoré podporujú technológiu HDR."</string>
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Intenzita, môžete ju znížiť alebo zvýšiť."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Zobrazenie vyváženia bielej"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Po zložení ďalej používať aplikácie"</string>
@@ -1479,7 +1476,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Použite tmavé pozadie, aby sa vám na niektorých obrazovkách lepšie čítalo a znížila sa spotreba batérie. Ak máte nastavený plán, motív sa zmení, keď je obrazovka vypnutá."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tmavý motív sa momentálne riadi plánom režimu večierky"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Nastavenia režimu večierky"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="22160899184470368">"{count,plural,offset:2 =0{Tmavý motív môžu zapnúť aj režimy.}=1{{mode_1} zapne aj tmavý motív.}=2{{mode_1} a {mode_2} zapnú aj tmavý motív.}=3{{mode_1}, {mode_2} a {mode_3} zapnú aj tmavý motív.}few{{mode_1}, {mode_2} a # ďalšie zapnú aj tmavý motív.}many{{mode_1}, {mode_2}, and # more also turn on Dark theme.}other{{mode_1}, {mode_2} a # ďalších zapnú aj tmavý motív.}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Tmavý motív môžu zapnúť aj režimy}=1{Režim {mode_1} tiež zapne tmavý motív}=2{Režimy {mode_1} a {mode_2} tiež zapnú tmavý motív}=3{Režimy {mode_1}, {mode_2} a {mode_3} tiež zapnú tmavý motív}few{Režimy {mode_1}, {mode_2} a # ďalšie tiež zapnú tmavý motív}many{{mode_1}, {mode_2}, and # more also turn on dark theme}other{Režimy {mode_1}, {mode_2} a # ďalších tiež zapnú tmavý motív}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Nastavenia režimov"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Rozjasnite a rozšírte farebný rozsah a jasnosť obrázkov a videí s technológiou HDR. Obsah s technológiou HDR bude jasnejší."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Časový limit obrazovky"</string>
@@ -1587,7 +1584,8 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Ukladací priestor a vyrovnávacia pamäť"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Nastavenia úložiska"</string>
     <string name="status_eid" msgid="3588471107671992684">"EID"</string>
-    <string name="eid_multi_sim" msgid="6659492335576379274">"EID (<xliff:g id="EID_SLOT_ID">%1$d</xliff:g>. slot na SIM kartu)"</string>
+    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
+    <skip />
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Zobrazte výberom uloženej siete"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -1953,6 +1951,8 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Nakreslite bezpečnostný vzor"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Pomocníka zobrazíte stlačením klávesy Menu."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Na záver zdvihnite prst z obrazovky"</string>
+    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
+    <skip />
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Spojte aspoň <xliff:g id="NUMBER">%d</xliff:g> body. Skúste to znova."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Vzor bol zaznamenaný"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Na potvrdenie nakreslite vzor ešte raz"</string>
@@ -2415,11 +2415,9 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Režim navigácie, otočenie obrazovky"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Poslať spätnú väzbu"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Zúčastniť sa na prieskume"</string>
-    <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Kontaktovať podporu Google pre ľudí s postihnutím"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Prieskum dostupnosti"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Zdieľajte spätnú väzbu"</string>
-    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
-    <skip />
+    <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Aká je vaša spokojnosť s tmavým motívom?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"Zúčastniť sa na prieskume"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"Zdieľajte spätnú väzbu"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"Aká je vaša spokojnosť so zväčšením?"</string>
@@ -2594,10 +2592,10 @@
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Načasovanie"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Štandardný"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Štandardný tmavý motív"</string>
-    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"Vo vašom zariadení a podporovaných aplikáciách sa začne používať tmavý motív"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Zapne tmavý motív vo vašom zariadení a aplikáciách, ktoré ho podporujú"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Rozšírený"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Rozšírený tmavý motív"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"Automaticky sa začne používať tmavý motív v ďalších aplikáciách, aby sa zlepšila dostupnosť"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Automaticky sa začne používať tmavý motív vo väčšine aplikácií, ktoré ho nepodporujú. Môže to zlepšiť dostupnosť a čitateľnosť, ale môže to spôsobiť, že niektoré aplikácie budú obsah zobrazovať nesprávne."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"vynútená inverzia, inverzia farieb, kontrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Odstrániť animácie"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Obmedziť pohyb na obrazovke"</string>
@@ -2699,8 +2697,7 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Ďalšie informácie o úprave farieb"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Inverzia farieb"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Ďalšie informácie o inverzii farieb"</string>
-    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"Ďalšie informácie o tmavom motíve"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"Niektoré aplikácie nemusia podporovať tmavý motív s rozšírenou možnosťou. Ak máte problémy so vzhľadom, použite štandardnú možnosť."</string>
+    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="6728089199404860746">"Ďalšie informácie o tmavom motíve"</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Zobrazovať titulky"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"Iba pre podporovanú aplikáciu"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"Veľkosť a štýl titulkov"</string>
@@ -3576,7 +3573,8 @@
     <string name="color_orange" msgid="216547825489739010">"Oranžová"</string>
     <string name="color_purple" msgid="6603701972079904843">"Purpurová"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Stav SIM karty"</string>
-    <string name="sim_status_title_sim_slot" msgid="5421926522479103027">"Stav SIM karty (%1$d. slot na SIM kartu)"</string>
+    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
+    <skip />
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"SIM karty boli vymenené"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Klepnutím prejdete do Nastavení"</string>
@@ -4017,7 +4015,7 @@
     <string name="notification_alert_title" msgid="1632401211722199217">"Predvolené"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Povoliť vyrušenia"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Povoliť aplikácii vydávať zvuky, vibrovať alebo zobrazovať vyskakovacie upozornenia"</string>
-    <string name="notification_priority_title" msgid="5554834239080425229">"Priorita"</string>
+    <string name="notification_priority_title" msgid="5554834239080425229">"Prioritné"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Zobrazuje sa hore v sekcii konverzácií ako plávajúca bublina a ako profilová fotka na uzamknutej obrazovke"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> nepodporuje väčšinu funkcií konverzácie. Určitú konverzáciu môžete nastaviť ako prioritu a konverzácie sa nebudú zobrazovať ako plávajúce bubliny."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Na paneli upozornení zbaliť upozornenia do jedného riadka"</string>
@@ -4815,6 +4813,10 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> je aj váš odkaz na uzamknutej obrazovke. Klepnutím to môžete zmeniť."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Vaša aktuálna predvolená aplikácia s peňaženkou toto gesto nepodporuje"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Zmena predvolenej peňaženky"</string>
+    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
+    <skip />
+    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Prepnutie kamery pokrútením"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Režim navigácie"</string>
@@ -5584,7 +5586,7 @@
     <string name="category_name_color" msgid="937514550918977151">"Farba"</string>
     <string name="category_name_display_controls" msgid="7046581691184725216">"Ďalšie ovládanie obrazovky"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Všeobecné"</string>
-    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Používať tmavý motív"</string>
+    <string name="dark_theme_main_switch_title" msgid="4570920398981775904">"Použiť tmavý motív"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Používať Bluetooth"</string>
     <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"Používať zlepšený jas HDR"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Vypnúť zvonenie"</string>
@@ -5800,7 +5802,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Heslo"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Zlepšovať kompatibilitu"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Pomáha s pripojením niektorých zariadení (napríklad načúvadiel) tým, že znižuje kvalitu zvuku"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Vypne zdieľanie zvuku, aby sa dala nakonfigurovať kompatibilita"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Vypne zdieľanie zvuku, aby sa dala nakonfigurovať kompatibilita"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Počúvanie zvuku v okolí"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Zdieľanie zvuku podporuje Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Názov zvukového streamu"</string>
@@ -5961,21 +5963,18 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Pri pokuse o odstránenie kódu PIN sa vyskytla chyba."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animácia <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Ovládanie sa nedá zapnúť"</string>
-    <!-- no translation found for supervision_generic_error_page_title (1890873741445464953) -->
-    <skip />
-    <!-- no translation found for supervision_generic_error_page_message (1532001782155323205) -->
-    <skip />
-    <!-- no translation found for supervision_generic_error_page_button_label (8972577027819946993) -->
-    <skip />
-    <string name="identity_check_issue_card_title" msgid="864543931965445926">"Overenie totožnosti je k dispozícii vo viacerých aplikáciách"</string>
-    <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"Ochranu totožnosti môžete nastaviť v akejkoľvek aplikácii, ktorá má funkciu odomknutia odtlačkom prsta alebo tvárou na účely overenia totožnosti"</string>
+    <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Niečo sa pokazilo"</string>
+    <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Skúste to neskôr"</string>
+    <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Späť"</string>
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Overenie totožnosti funguje s ďalšími aplikáciami"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Overenie totožnosti zabráni nežiaducemu prístupu k vašim aplikáciám. Teraz je k dispozícii v akejkoľvek aplikácii, ktorá používa odomknutie odtlačkom prsta alebo tvárou."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Zobraziť podrobnosti"</string>
-    <string name="identity_check_promo_card_title" msgid="1495226082133610343">"Zabezpečte ďalšie aplikácie pomocou overenia totožnosti"</string>
-    <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"Keď budete overenie totožnosti používať pre všetky aplikácie, ktoré podporujú odomknutie odtlačkom prsta a tvárou, zaistíte tým účinnejšiu ochranu aj konzistentnejšie prostredie a nič iné nebudete musieť nastaviť"</string>
-    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"Overenie totožnosti funguje s vašimi hodinkami"</string>
-    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"Zabráňte ostatným otvárať aplikácie, ktoré vyžadujú odomknutie odtlačkom prsta alebo tvárou. Pri pripojení k hodinkám bude zaistené zabezpečenie s väčšou mobilitou."</string>
-    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"Používajte overenie totožnosti a pozerajte vo viacerých aplikáciách"</string>
-    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"Zaistite ochranu svojej totožnosti vo všetkých aplikáciách, ktoré podporujú odomknutie odtlačkom prsta a tvárou na dôveryhodných miestach, ako je domov alebo kancelária. Rozšírte ochranu aj mimo dôveryhodných miest pomocou overenia totožnosti v hodinkách."</string>
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Overenie totožnosti funguje s ďalšími aplikáciami"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Aktuality:\n"<ul><li>"Overenie totožnosti poskytuje ochranu každej aplikácii, ktorá používa odomknutie odtlačkom prsta alebo tvárou."</li>\n<li>"Overenie totožnosti môže časom pridať ďalšie spôsoby overenia vašej totožnosti a zabezpečiť tak aplikácie vo vašom zariadení. "<a href="https://support.google.com/android?p=identity_check">"Kedy a kde máte k dispozícii ochranu"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Overenie totožnosti a hodinky"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Keď máte pripojené hodinky, overenie totožnosti pridá ďalšie spôsoby overenia vašej totožnosti, aby zabránilo nežiaducemu prístupu k aplikáciám"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Overenie totožnosti a hodinky"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Aktuality:\n"<ul><li>"Keď pripojíte hodinky a nebudete na dôveryhodnom mieste, prístup k aplikáciám budete mať pomocou biometrie alebo kódu PIN."</li>\n<li>"Overenie totožnosti môže časom pridať ďalšie spôsoby overenia vašej totožnosti a zabezpečiť tak aplikácie vo vašom zariadení. "<a href="https://support.google.com/android?p=identity_check">"Kedy a kde máte k dispozícii ochranu"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Ďalšie nastavenia"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Automatické dopĺňanie, upozornenia a ďalšie možnosti"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Nastavenia ochrany súkromia"</string>

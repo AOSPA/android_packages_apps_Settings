@@ -17,10 +17,18 @@ package com.android.settings.safetycenter.ui
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import com.android.settings.R
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
+import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
+import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFactory
 import com.android.settings.search.BaseSearchIndexProvider
+import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.search.SearchIndexable
 
 /**
@@ -31,6 +39,31 @@ import com.android.settingslib.search.SearchIndexable
  */
 @SearchIndexable
 class SafetyCenterFragment : DashboardFragment() {
+
+    private val viewModel: LiveSafetyCenterViewModel by viewModels {
+        LiveSafetyCenterViewModelFactory(requireActivity().application)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupSubpagePreferenceControllers(viewLifecycleOwner)
+    }
+
+    private fun setupSubpagePreferenceControllers(owner: LifecycleOwner) {
+        Log.d(TAG, "Setting Up the sub-page preference controllers")
+        val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
+
+        for (controller in allControllers) {
+            if (controller is SubpagePreferenceController) {
+                when (controller.preferenceKey) {
+                    DEVICE_UNLOCK_SUBPAGE_KEY -> {
+                        controller.setRelatedSafetySources(DEVICE_UNLOCK_SAFETY_SOURCE_IDS)
+                        controller.setViewModelAndLifecycle(viewModel, owner)
+                    }
+                }
+            }
+        }
+    }
 
     protected override fun getPreferenceScreenResId(): Int {
         return R.xml.safety_center_main_page
@@ -46,6 +79,9 @@ class SafetyCenterFragment : DashboardFragment() {
 
     companion object {
         private const val TAG = "SafetyCenterFragment"
+        private const val ANDROID_LOCK_SCREEN_SOURCE_ID = "AndroidLockScreen"
+        private const val DEVICE_UNLOCK_SUBPAGE_KEY = "device_unlock_subpage"
+        private val DEVICE_UNLOCK_SAFETY_SOURCE_IDS = listOf(ANDROID_LOCK_SCREEN_SOURCE_ID)
 
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =

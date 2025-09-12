@@ -87,7 +87,7 @@ class WifiPickerRepository(
             }
             .conflate()
             .onEach { Log.d(TAG, "connectedWifiEntryFlow: $it") }
-            .flowOn(Dispatchers.Default)
+            .flowOn(Dispatchers.Main)
 
     companion object {
         private const val TAG = "WifiPickerRepository"

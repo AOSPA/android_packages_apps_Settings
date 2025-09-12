@@ -37,9 +37,10 @@ class SimpleBuildNumberPreference :
     override val title: Int
         get() = R.string.build_number
 
-    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_PREFERENCE)
+    override val indexable
+        get() = false
 
-    override fun isIndexable(context: Context) = false
+    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_PREFERENCE)
 
     override fun getSummary(context: Context): CharSequence? {
         val isRtl = context.resources.configuration.layoutDirection == LAYOUT_DIRECTION_RTL

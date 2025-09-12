@@ -40,6 +40,9 @@ open class MagnificationScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = true
+
     override val keywords: Int
         get() = R.string.keywords_magnification
 
@@ -55,8 +58,6 @@ open class MagnificationScreen : PreferenceScreenMixin {
     override fun getMetricsCategory() = SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION
 
     override fun isFlagEnabled(context: Context) = Flags.catalystMagnification()
-
-    override fun isIndexable(context: Context) = true
 
     override fun hasCompleteHierarchy() = Flags.catalystMagnification()
 

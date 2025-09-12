@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"מידע על פלט האודיו"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"ניתוב הצלילים למכשיר השמיעה או לרמקול של הטלפון"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"קשורים"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"שליחה מהירה יותר עם <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"‏<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> ל-Windows היא הדרך המהירה ביותר לשתף עם מכשירי Android ומחשבי Windows בקרבת מקום"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"אני רוצה לנסות את <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"‏הדרך המהירה ביותר לשתף קבצים בין מכשירי Android ועם מחשבים היא באמצעות אפליקציית <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> שלנו ל-Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"רינגטון ושעונים מעוררים"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"אודיו במהלך שיחות"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"צלילי מדיה ומערכת"</string>
@@ -1015,21 +1015,17 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"אין מסך מחובר"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"כדי להתחיל, צריך לחבר מסך חיצוני או להשתמש בכבל אחר"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"אפשרויות נוספות"</string>
-    <string name="external_display_topology_hint" msgid="854973327795578470">"כדי לשנות את סדר התצוגות, לוחצים לחיצה ארוכה על תצוגה וגוררים אותה."</string>
+    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"שיקוף המסך המובנה"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"להמשיך עם ההגדרות החדשות?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"אם תצוגת המסך לא פועלת כמו שציפית, אפשר לחזור להגדרות הקודמות"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"שימוש בהגדרות"</string>
-    <!-- no translation found for external_display_topology_display_block_content_description (4638018879987232608) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_up (5585023811277652685) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_down (497925070033309302) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_left (5207345941599286131) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_right (6258194449439072825) -->
-    <skip />
+    <string name="external_display_topology_display_block_content_description" msgid="4638018879987232608">"‏תצוגה: %1$s. צריך ללחוץ לחיצה ארוכה כדי לגרור או לראות פעולות שאפשר להעביר."</string>
+    <string name="external_display_topology_a11y_action_move_up" msgid="5585023811277652685">"העברה למעלה"</string>
+    <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"העברה למטה"</string>
+    <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"הזזה שמאלה"</string>
+    <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"הזזה ימינה"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"‏העברה (csat)"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"‏הפעלת תצוגת WiFi"</string>
@@ -1412,6 +1408,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"תמונה רגילה"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"‏תמונה באיכות HDR"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"‏ההגדרה הזו משפיעה רק על תמונות וסרטונים עם תמיכה בטווח דינמי גבוה (HDR)."</string>
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"עוצמה, אפשר להכהות או להבהיר את העוצמה."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"הצגת איזון לבן"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"המשך השימוש באפליקציות כשהמכשיר מקופל"</string>
@@ -1479,7 +1476,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"אפשר להשתמש ברקע כהה כדי שיהיה נוח יותר לצפות במסך וכדי לצמצם את השימוש בסוללה במסכים מסוימים. אם הגדרת לוח זמנים, העיצוב ישתנה אחרי שהמסך יכבה."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"העיצוב הכהה פועל כרגע בהתאם ללוח הזמנים של מצב שעת השינה"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"הגדרות של מצב שעת השינה"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="22160899184470368">"{count,plural,offset:2 =0{יכול להיות שהעיצוב הכהה יופעל במצבים באופן אוטומטי.}=1{העיצוב הכהה גם יופעל במצב {mode_1}}=2{העיצוב הכהה גם יופעל במצב {mode_1},‏ וגם במצב {mode_2}}=3{העיצוב הכהה גם יופעל במצבים {mode_1},‏ {mode_2} וגם {mode_3}}one{העיצוב הכהה גם יופעל במצבים {mode_1},‏ {mode_2} ובעוד # מצבים}other{העיצוב הכהה גם יופעל במצבים {mode_1},‏ {mode_2} ובעוד # מצבים}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{יש מצבים שיכולים להפעיל את העיצוב הכהה באופן אוטומטי}=1{העיצוב הכהה גם יופעל במצב {mode_1}}=2{העיצוב הכהה גם יופעל במצב {mode_1},‏ ובמצב {mode_2}}=3{העיצוב הכהה גם יופעל במצבים {mode_1},‏ {mode_2} וגם {mode_3}}one{העיצוב הכהה גם יופעל במצבים {mode_1},‏ {mode_2} ובעוד # מצבים}other{העיצוב הכהה גם יופעל במצבים {mode_1},‏ {mode_2} ובעוד # מצבים}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"הגדרות של מצבים"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"‏תוכן באיכות HDR נראה בהיר יותר. התכונה מבהירה תמונות וסרטונים, מרחיבה את טווח הצבעים ומשפרת את החדות."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"זמן קצוב לכיבוי המסך"</string>
@@ -1587,7 +1584,8 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"אחסון ומטמון"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"הגדרות אחסון"</string>
     <string name="status_eid" msgid="3588471107671992684">"EID"</string>
-    <string name="eid_multi_sim" msgid="6659492335576379274">"‏‫EID (חריץ SIM ‏<xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
+    <skip />
     <string name="imei_multi_sim" msgid="6990044568468728075">"‫IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"כדי שתופיע כתובת, צריך לבחור רשת שמורה"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -1953,6 +1951,8 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"מהו קו ביטול הנעילה שלך?"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"לקבלת עזרה יש ללחוץ על \'תפריט\'."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"כשמסיימים, פשוט מרימים את האצבע"</string>
+    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
+    <skip />
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"יש לחבר לפחות <xliff:g id="NUMBER">%d</xliff:g> נקודות. אפשר לנסות שוב."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"קו פתיחת הנעילה נשמר"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"צריך לשרטט שוב את קו פתיחת הנעילה כדי לוודא את הזהות"</string>
@@ -2415,11 +2415,9 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"מעבר בין מסכים, סיבוב המסך"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"שליחת משוב"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"למילוי הסקר"</string>
-    <string name="accessibility_disability_support_title" msgid="7934160403456751664">"‏פנייה לתמיכה של Google באנשים עם מוגבלויות"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"סקר בנושא נגישות"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"שיתוף משוב"</string>
-    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
-    <skip />
+    <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"מה מידת שביעות הרצון שלך מהעיצוב הכהה?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"למילוי הסקר"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"שיתוף משוב"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"מה מידת שביעות הרצון שלך מההגדלה?"</string>
@@ -2594,10 +2592,10 @@
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"תזמון"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"רגיל"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"עיצוב כהה רגיל"</string>
-    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"העיצוב הכהה מופעל בממשקי המכשיר ובאפליקציות הנתמכות"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"הפעלת העיצוב הכהה במכשיר ובאפליקציות שתומכות בעיצוב כהה."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"מורחב"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"עיצוב כהה מורחב"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"הפעלת העיצוב הכהה באופן אוטומטי באפליקציות נוספות כדי לשפר את הנגישות"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"הפעלה אוטומטית של העיצוב הכהה ברוב האפליקציות שלא תומכות בו. הפעולה הזו יכולה לשפר את הנגישות ואת הקריאות, אבל היא עלולה גם לגרום לבעיות בתצוגה באפליקציות מסוימות."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"אילוץ היפוך, היפוך צבעים, ניגודיות"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"הסרת אנימציות"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"יהיו פחות תנועות במסך"</string>
@@ -2699,8 +2697,7 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"מידע נוסף על תיקון צבע"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"מידע על היפוך צבעים"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"מידע נוסף על היפוך צבעים"</string>
-    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"מידע נוסף על עיצוב כהה"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"יכול להיות שחלק מהאפליקציות לא תומכות בעיצוב כהה עם האפשרות המורחבת. אם האפליקציה לא נראית כמו שצריך, מומלץ להשתמש בהגדרה הרגילה."</string>
+    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="6728089199404860746">"מידע נוסף על העיצוב הכהה"</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"הצגת הכתוביות"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"רק לאפליקציה נתמכת"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"גודל וסגנון הכתוביות"</string>
@@ -3576,7 +3573,8 @@
     <string name="color_orange" msgid="216547825489739010">"כתום"</string>
     <string name="color_purple" msgid="6603701972079904843">"סגול"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"‏סטטוס SIM"</string>
-    <string name="sim_status_title_sim_slot" msgid="5421926522479103027">"‏סטטוס SIM (חריץ SIM ‏%1$d)"</string>
+    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
+    <skip />
     <string name="sim_signal_strength" msgid="6351052821700294501">"‏<xliff:g id="DBM">%1$d</xliff:g> ‎dBm ‏<xliff:g id="ASU">%2$d</xliff:g> ‎asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"‏כרטיסי ה-SIM שונו"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"יש ללחוץ כדי להגדיר"</string>
@@ -3785,7 +3783,7 @@
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"הגדרת לוח זמנים"</string>
     <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"לוח הזמנים מבוסס על"</string>
     <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"יום ושעה"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9:00 - 17:00 ימי חול\""</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"‏\"09:00-17:00‎‎ ימי חול\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"אירועים ביומן"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{מצב {mode_1} פעיל}=2{‫{mode_1} ו{mode_2} פעילים}=3{‫{mode_1}, {mode_2}, ו{mode_3} פעילים}one{‫{mode_1}, {mode_2} ועוד # פעילים}other{‫{mode_1}, {mode_2} ועוד # פעילים}}"</string>
     <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{נא לא להפריע}=1{{mode_1}}=2{‏{mode_1}, ‏{mode_2}}one{{mode_1}, {mode_2}, {mode_3}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
@@ -4815,6 +4813,10 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"קיצור הדרך שמוגדר במסך הנעילה הוא <xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>. אפשר ללחוץ כאן כדי להחליף אותו."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"אפליקציית הארנק שמוגדרת כברירת מחדל לא תומכת בתנועה הזאת."</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"שינוי הארנק שמוגדר כברירת המחדל"</string>
+    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
+    <skip />
+    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"סיבוב מהיר של הטלפון פעמיים כדי לעבור למצב סלפי במצלמה"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"מעבר בין מסכים"</string>
@@ -5583,7 +5585,7 @@
     <string name="category_name_color" msgid="937514550918977151">"צבע"</string>
     <string name="category_name_display_controls" msgid="7046581691184725216">"הגדרות תצוגה נוספות"</string>
     <string name="category_name_general" msgid="7737273712848115886">"כללי"</string>
-    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"שימוש בעיצוב כהה"</string>
+    <string name="dark_theme_main_switch_title" msgid="4570920398981775904">"עיצוב כהה"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"‏שימוש ב-Bluetooth"</string>
     <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"‏שימוש בבהירות HDR משופרת"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"מניעת השמעה של צלצול"</string>
@@ -5636,7 +5638,7 @@
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"‏UWB לא זמין במיקום הנוכחי"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"‏פרוטוקול Thread"</string>
     <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"‏שימוש בפרוטוקול Thread"</string>
-    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"‏פרוטוקול Thread עוזר למכשירים לבית החכם להתחבר ומשפר את היעילות והביצועים.\n\nכשהפרוטוקול מופעל, המכשיר הזה עומד בדרישות להצטרף לרשת Thread וכך לשלוט במכשירים שתומכים בתקן Matter באמצעות הטלפון."</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"‏פרוטוקול Thread עוזר למכשירים לבית החכם להתחבר ומשפר את היעילות והביצועים.\n\nכשהפרוטוקול מופעל, המכשיר הזה יכול להצטרף לרשת Thread. כך אפשר לשלוט מהטלפון במכשירים שתומכים בתקן Matter."</string>
     <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"‏מידע נוסף על פרוטוקול Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"גישה למצלמה"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"גישה למיקרופון"</string>
@@ -5799,7 +5801,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"סיסמה"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"שיפור התאימות"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"ההגדרה הזו מורידה את איכות האודיו כדי שמכשירים כמו מכשירי שמיעה יוכלו להתחבר"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"ההגדרה הזו משביתה את שיתוף האודיו כדי להגדיר את התאימות"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"ההגדרה הזו משביתה את שיתוף האודיו כדי להגדיר את התאימות"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"האזנה לאודיו בקרבת מקום"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"‏התכונה \'שיתוף אודיו\' תומכת ב-‎Auracast™‎"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"השם של שידור האודיו"</string>
@@ -5960,21 +5962,18 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"הייתה שגיאה במהלך הניסיון למחוק את קוד האימות."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"אנימציה של <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"לא ניתן להפעיל את אמצעי הבקרה"</string>
-    <!-- no translation found for supervision_generic_error_page_title (1890873741445464953) -->
-    <skip />
-    <!-- no translation found for supervision_generic_error_page_message (1532001782155323205) -->
-    <skip />
-    <!-- no translation found for supervision_generic_error_page_button_label (8972577027819946993) -->
-    <skip />
-    <string name="identity_check_issue_card_title" msgid="864543931965445926">"בדיקת הזהות זמינה באפליקציות נוספות"</string>
-    <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"יש לך אפשרות לאבטח את ההגנה על הזהות בכל אפליקציה שמציעה פתיחה בטביעת אצבע או בזיהוי פנים"</string>
+    <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"משהו השתבש"</string>
+    <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"אפשר לנסות שוב אחר כך"</string>
+    <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"חזרה"</string>
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"התכונה \"בדיקת הזהות\" פועלת עם יותר אפליקציות"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"התכונה \"בדיקת הזהות\" מונעת גישה לא רצויה לאפליקציות שלך. עכשיו אפשר להשתמש בה בכל אפליקציה שמשתמשת בטביעת אצבע או בפתיחה בזיהוי פנים."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"עיון בפרטים"</string>
-    <string name="identity_check_promo_card_title" msgid="1495226082133610343">"שימוש בבדיקת הזהות כדי לאבטח יותר אפליקציות"</string>
-    <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"כשמשתמשים בבדיקת הזהות בכל האפליקציות שתומכות בפתיחה בטביעת אצבע או בזיהוי פנים, מוודאים שההגנה טובה יותר והחוויה עקבית יותר בלי הגדרה נוספת"</string>
-    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"בדיקת הזהות פועלת עם השעון"</string>
-    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"אפשר למנוע מאחרים לפתוח אפליקציות שדורשות פתיחה בטביעת אצבע או בזיהוי פנים. כשמחוברים לשעון, ממשיכים להיות בטוחים גם כשעוברים ממקום למקום."</string>
-    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"שימוש בבדיקת הזהות ובשעון באפליקציות נוספות"</string>
-    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"אפשר להגן על הזהות שלך בכל האפליקציות שתומכות בפתיחה בטביעת אצבע או בזיהוי פנים במקומות בטוחים כמו הבית או המשרד. כדאי להשתמש בתכונה \"בדיקת הזהות\" בשעון כדי להרחיב את ההגנה גם מעבר למקומות הבטוחים."</string>
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"התכונה \"בדיקת הזהות\" פועלת עם יותר אפליקציות"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"עדכונים:\n"<ul><li>"התכונה \"בדיקת הזהות\" מוסיפה הגנה לכל אפליקציה שמשתמשת בפתיחה בטביעת אצבע או בזיהוי פנים"</li>\n<li>"עם הזמן, יכול להיות שיתווספו לבדיקת הזהות דרכים נוספות לאימות הזהות שלך ולאבטחת האפליקציות במכשיר. "<a href="https://support.google.com/android?p=identity_check">"כאן מוסבר מתי ואיפה ההגנה פועלת"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"בדיקת הזהות והשעון"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"כשהשעון מחובר, התכונה \"בדיקת הזהות\" מוסיפה עוד דרכים לאימות הזהות שלך כדי למנוע גישה לא רצויה לאפליקציות"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"בדיקת הזהות והשעון"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"עדכונים:\n"<ul><li>"כשמחברים שעון, אפשר להשתמש בנתונים ביומטריים או בקוד האימות כדי לגשת לאפליקציות כשנמצאים מחוץ למקום בטוח"</li>\n<li>"עם הזמן, יכול להיות שיתווספו לבדיקת הזהות דרכים נוספות לאימות הזהות שלך ולאבטחת האפליקציות במכשיר. "<a href="https://support.google.com/android?p=identity_check">"כאן מוסבר מתי ואיפה ההגנה פועלת"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"הגדרות אחרות"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"מילוי אוטומטי, התראות ועוד"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"אמצעי בקרה על פרטיות"</string>

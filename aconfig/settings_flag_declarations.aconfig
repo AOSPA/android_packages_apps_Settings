@@ -97,3 +97,13 @@ flag {
     purpose: PURPOSE_BUGFIX
   }
 }
+
+flag {
+    name: "parameterised_screens_in_app_functions"
+    namespace: "android_settings"
+    description: "Includes screens which require parameters in the output of device state appfunctions"
+    bug: "438437269"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
+}

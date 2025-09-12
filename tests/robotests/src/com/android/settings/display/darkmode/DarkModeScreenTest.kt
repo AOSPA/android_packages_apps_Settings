@@ -16,6 +16,7 @@
 
 package com.android.settings.display.darkmode
 
+import android.app.UiModeManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
@@ -27,20 +28,27 @@ import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.accessibility.Flags
+import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.notification.modes.TestModeBuilder
+import com.android.settingslib.notification.modes.ZenMode
+import com.android.settingslib.notification.modes.ZenModesBackend
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowLooper
 
 class DarkModeScreenTest : SettingsCatalystTestCase() {
+    @get:Rule val settingsStoreRule = SettingsStoreRule()
     private val context = ApplicationProvider.getApplicationContext<Context>()
     private val shadowPowerManager = shadowOf(context.getSystemService(PowerManager::class.java))!!
 
@@ -48,7 +56,22 @@ class DarkModeScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_DARK_UI_MODE
 
-    override fun migration() {}
+    override fun migration() {
+        // For custom modes footer preference to display title.
+        val mockZenModesBackend = mock<ZenModesBackend>()
+        ZenModesBackend.setInstance(mockZenModesBackend)
+        val modeThatDoesNotChange = TestModeBuilder().setName("Unrelated").build()
+        mockZenModesBackend.stub {
+            on { getModes() } doReturn listOf<ZenMode?>(modeThatDoesNotChange)
+        }
+
+        // For update the availability of the custom preference controller.
+        val uiModeManager = context.getSystemService(UiModeManager::class.java)!!
+        uiModeManager.nightMode = UiModeManager.MODE_NIGHT_CUSTOM
+        uiModeManager.nightModeCustomType = UiModeManager.MODE_NIGHT_CUSTOM_TYPE_SCHEDULE
+
+        super.migration()
+    }
 
     @After
     fun cleanup() {

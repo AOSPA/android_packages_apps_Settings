@@ -25,10 +25,11 @@ class ColorCorrectionPreviewPreference : PreferenceMetadata, PreferenceBinding {
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = false
+
     override fun createWidget(context: Context) =
         PaletteListPreference(context, null).apply { isSelectable = false }
-
-    override fun isIndexable(context: Context) = false
 
     companion object {
         const val KEY = "daltonizer_preview"

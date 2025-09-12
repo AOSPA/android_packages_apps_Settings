@@ -51,6 +51,9 @@ open class FirmwareVersionScreen : PreferenceScreenMixin, PreferenceSummaryProvi
     override val keywords: Int
         get() = R.string.keywords_android_version
 
+    override val indexable
+        get() = true
+
     // Once fully launch, change to PreferenceFragment and clean up FirmwareVersionScreenTest
     override fun fragmentClass(): Class<out Fragment>? = FirmwareVersionSettings::class.java
 
@@ -58,8 +61,6 @@ open class FirmwareVersionScreen : PreferenceScreenMixin, PreferenceSummaryProvi
 
     override val highlightMenuKey: Int
         get() = R.string.menu_key_about_device
-
-    override fun isIndexable(context: Context) = true
 
     override fun hasCompleteHierarchy() = true
 

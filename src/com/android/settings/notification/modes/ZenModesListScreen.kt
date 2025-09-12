@@ -98,14 +98,18 @@ open class ZenModesListScreen :
         preferenceHierarchy(context) {}
 
     override fun onStart(context: PreferenceLifecycleContext) {
-        val observer = ZenSettingsObserver(context) { context.notifyPreferenceChange(KEY) }
-        observer.register()
-        zenSettingsObserver = observer
+        if (isEntryPoint(context)) {
+            val observer = ZenSettingsObserver(context) { context.notifyPreferenceChange(KEY) }
+            observer.register()
+            zenSettingsObserver = observer
+        }
     }
 
     override fun onStop(context: PreferenceLifecycleContext) {
-        zenSettingsObserver?.unregister()
-        zenSettingsObserver = null
+        if (isEntryPoint(context)) {
+            zenSettingsObserver?.unregister()
+            zenSettingsObserver = null
+        }
     }
 
     companion object {

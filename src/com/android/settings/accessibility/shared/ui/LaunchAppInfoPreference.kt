@@ -37,7 +37,8 @@ class LaunchAppInfoPreference(
     private val packageName: String,
 ) : PreferenceMetadata, PreferenceAvailabilityProvider {
 
-    override fun isIndexable(context: Context): Boolean = false
+    override val indexable
+        get() = false
 
     override fun intent(context: Context): Intent? {
         return if (context.packageManager.isPackageAvailable(packageName)) {

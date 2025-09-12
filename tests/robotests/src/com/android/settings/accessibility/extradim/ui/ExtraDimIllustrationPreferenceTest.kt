@@ -36,7 +36,7 @@ class ExtraDimIllustrationPreferenceTest {
 
     @Test
     fun isIndexable() {
-        assertThat(preference.isIndexable(context)).isFalse()
+        assertThat(preference.indexable).isFalse()
     }
 
     @Test

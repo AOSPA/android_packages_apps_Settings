@@ -43,6 +43,7 @@ import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListPro
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
+import com.android.settings.spa.app.specialaccess.UsageDataAppListProvider
 import com.android.settings.spa.app.specialaccess.WriteSystemPreferencesAppListProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
@@ -172,6 +173,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
             WriteSystemPreferencesAppListProvider.InfoPageEntryItem(app)
             Enable16KbAppCompatPreference(app, packageInfoPresenter)
+            UsageDataAppListProvider.InfoPageEntryItem(app)
         }
 
         Category(title = stringResource(R.string.app_install_details_group_title)) {

@@ -35,6 +35,7 @@ import com.android.settings.network.apn.ApnSettingsScreen
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -52,6 +53,7 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
     PreferenceScreenMixin,
     PreferenceAvailabilityProvider,
     PreferenceTitleProvider,
+    PreferenceIndexableProvider,
     PreferenceRestrictionMixin {
 
     private val subId =
@@ -85,8 +87,11 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             if (Flags.deeplinkNetworkAndInternet25q4()) {
+                +MobileNetworkMainSwitchPreference(context, subId) order +0
+                val data = MobileNetworkData(context, coroutineScope, subId)
                 +EnabledStateUntitledCategory(subId) += {
                     +MobileNetworkSpnPreference(context, subId)
+                    +MobileNetworkPhoneNumberPreference(data)
                     +MobileNetworkImeiPreference(context, subId)
                     +(DataUsageListScreen.KEY args arguments)
                     +UntitledPreferenceCategoryMetadata("apn_and_protection_container") += {

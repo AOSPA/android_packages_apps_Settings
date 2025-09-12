@@ -37,12 +37,13 @@ class LaunchA11yActivityPreference(private val shortcutInfo: AccessibilityShortc
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = false
+
     override fun getTitle(context: Context): CharSequence? {
         val activityLabel = shortcutInfo.activityInfo.loadLabel(context.packageManager)
         return context.getString(R.string.accessibility_service_primary_open_title, activityLabel)
     }
-
-    override fun isIndexable(context: Context): Boolean = false
 
     override fun createWidget(context: Context): Preference {
         return ButtonPreference(context).apply {

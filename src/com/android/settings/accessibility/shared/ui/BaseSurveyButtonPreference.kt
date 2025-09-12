@@ -57,6 +57,9 @@ abstract class BaseSurveyButtonPreference(val metricsCategory: Int = METRICS_CAT
     override val icon: Int
         get() = R.drawable.ic_rate_review
 
+    override val indexable
+        get() = false
+
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
         if (enableLowVisionHats()) {
@@ -104,8 +107,6 @@ abstract class BaseSurveyButtonPreference(val metricsCategory: Int = METRICS_CAT
         ButtonPreference(context).apply {
             setButtonStyle(ButtonPreference.TYPE_TONAL, ButtonPreference.SIZE_NORMAL)
         }
-
-    override fun isIndexable(context: Context): Boolean = false
 
     protected fun scheduleSurvey(context: Context) {
         if (isAvailable(context)) {

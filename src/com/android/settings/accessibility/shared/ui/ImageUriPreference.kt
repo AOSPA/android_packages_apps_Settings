@@ -38,9 +38,10 @@ abstract class ImageUriPreference :
     override val key: String
         get() = KEY
 
-    abstract fun getImageUri(context: Context): Uri?
+    override val indexable
+        get() = false
 
-    override fun isIndexable(context: Context): Boolean = false
+    abstract fun getImageUri(context: Context): Uri?
 
     override fun isAvailable(context: Context): Boolean = getImageUri(context) != null
 

@@ -16,6 +16,7 @@
 
 package com.android.settings
 
+import android.app.admin.EnforcingAdmin
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
@@ -34,10 +35,19 @@ class RestrictedRadioButtonItem : RadioButtonItem {
     public val enforcedAdmin: EnforcedAdmin?
         get() = _enforcedAdmin
 
+    private var _enforcingAdmin: EnforcingAdmin? = null
+    public val enforcingAdmin: EnforcingAdmin?
+        get() = _enforcingAdmin
+
+    private var _restriction: String? = null
+    public val restriction: String?
+        get() = _restriction
+
     constructor() : super()
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
+    @Deprecated("Use setDisabledByAdmin(EnforcingAdmin, String) instead.")
     fun setDisabledByAdmin(admin: EnforcedAdmin?) {
         val disabled = (admin != null)
         _enforcedAdmin = admin
@@ -45,6 +55,20 @@ class RestrictedRadioButtonItem : RadioButtonItem {
             _disabledByAdmin = disabled
             Log.i(TAG, "item $id is disabledByAdmin=$disabledByAdmin")
         }
+    }
+
+    fun setDisabledByAdmin(admin: EnforcingAdmin?) {
+        val disabled = (admin != null)
+        _enforcingAdmin = admin
+        _restriction = restriction
+        if (_disabledByAdmin != disabled) {
+            _disabledByAdmin = disabled
+            Log.i(TAG, "item $id is disabledByAdmin=$disabledByAdmin")
+        }
+    }
+
+    fun setRestriction(restriction: String) {
+        _restriction = restriction
     }
 
     override fun onBindView(view: View) {

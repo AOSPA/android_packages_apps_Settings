@@ -56,7 +56,7 @@ class LaunchAppInfoPreferenceTest {
 
     @Test
     fun isIndexable_returnFalse() {
-        assertThat(launchAppInfoPreference.isIndexable(context)).isFalse()
+        assertThat(launchAppInfoPreference.indexable).isFalse()
     }
 
     @TestParameters(

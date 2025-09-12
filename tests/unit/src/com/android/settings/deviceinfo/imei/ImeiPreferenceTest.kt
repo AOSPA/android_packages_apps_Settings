@@ -58,25 +58,36 @@ class ImeiPreferenceTest {
             on { getImei(0) } doReturn IMEI_1
             on { getImei(1) } doReturn IMEI_2
             on { primaryImei } doReturn IMEI_1
+            on { activeModemCount } doReturn MULTI_SLOT
         }
-        preference = ImeiPreference(context, 0, 1)
+        preference = ImeiPreference(context, 0, 1, imeiList_oneImei)
     }
 
     @Test
-    fun init_getPrimaryImeiThrowException_doNotCrash() {
-        mockTelephonyManager.stub { on { primaryImei } doThrow (IllegalStateException()) }
+    fun initUi_noImei_doNotCrash() {
+        preference = ImeiPreference(context, 0, 2, listOf<String>())
+    }
 
-        preference = ImeiPreference(context, 0, 2)
+    @Test
+    fun initUi_oneImei_doNotCrash() {
+        preference = ImeiPreference(context, 0, 2, imeiList_oneImei)
+    }
+
+    @Test
+    fun initUi_twoImei_doNotCrash() {
+        preference = ImeiPreference(context, 0, 2, imeiList)
     }
 
     @Test
     fun getKey_slotIndex0_returnImeiWithIndex() {
+        preference = ImeiPreference(context, 0, 2, imeiList)
+
         assertThat(preference.key).isEqualTo(ImeiPreference.KEY_PREFIX + "1")
     }
 
     @Test
     fun getKey_slotIndex1_returnImeiWithIndex() {
-        preference = ImeiPreference(context, 1, 2)
+        preference = ImeiPreference(context, 1, 2, imeiList)
 
         assertThat(preference.key).isEqualTo(ImeiPreference.KEY_PREFIX + "2")
     }
@@ -90,7 +101,7 @@ class ImeiPreferenceTest {
     fun isAvailable_isNotAdminUser_returnFalse() {
         mockUserManager.stub { on { isAdminUser } doReturn false }
 
-        preference = ImeiPreference(context, 0, 1)
+        preference = ImeiPreference(context, 0, 1, imeiList_oneImei)
 
         assertThat(preference.isAvailable(context)).isFalse()
     }
@@ -102,67 +113,104 @@ class ImeiPreferenceTest {
             on { isDeviceVoiceCapable } doReturn false
         }
 
-        preference = ImeiPreference(context, 0, 1)
+        preference = ImeiPreference(context, 0, 1, imeiList_oneImei)
 
         assertThat(preference.isAvailable(context)).isFalse()
     }
 
     @Test
-    fun getSummary_index0_returnImei1() {
+    fun getSummary_oneImei_index0_returnImei1() {
         assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
     }
 
     @Test
-    fun getSummary_index1_returnImei2() {
-        preference = ImeiPreference(context, 1, 2)
+    fun getSummary_twoImei_index0_returnImei1() {
+        preference = ImeiPreference(context, 0, 2, imeiList)
+
+        assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
+    }
+
+    @Test
+    fun getSummary_twoImei_index1_returnImei2() {
+        preference = ImeiPreference(context, 1, 2, imeiList)
 
         assertThat(preference.getSummary(context)).isEqualTo(IMEI_2)
     }
 
     @Test
-    fun getSummary_primaryIsSlot2_index1_returnImei2() {
-        mockTelephonyManager.stub { on { primaryImei } doReturn IMEI_2 }
-
-        preference = ImeiPreference(context, 0, 2)
-
-        assertThat(preference.getSummary(context)).isEqualTo(IMEI_2)
-    }
-
-    @Test
-    fun getSummary_primaryIsSlot2_index2_returnImei1() {
-        mockTelephonyManager.stub { on { primaryImei } doReturn IMEI_2 }
-
-        preference = ImeiPreference(context, 1, 2)
+    fun getSummary_index0_bothSlotsAreSameImei_returnImei1() {
+        preference = ImeiPreference(context, 0, 2, imeiList_sameImei)
 
         assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
     }
 
     @Test
     fun getSummary_index1_bothSlotsAreSameImei_returnImei1() {
-        mockTelephonyManager.stub {
-            on { getImei(0) } doReturn IMEI_1
-            on { getImei(1) } doReturn IMEI_1
-        }
-
-        preference = ImeiPreference(context, 0, 2)
+        preference = ImeiPreference(context, 1, 2, imeiList_sameImei)
 
         assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
     }
 
     @Test
-    fun getSummary_index2_bothSlotsAreSameImei_returnImei1() {
+    fun getSummary_index2_indexNotInList_returnEmptyString() {
+        preference = ImeiPreference(context, 2, 2, imeiList)
+
+        assertThat(preference.getSummary(context)).isEqualTo("")
+    }
+
+    @Test
+    fun getImeiList_singleActiveSlot_getOneImei() {
+        mockTelephonyManager.stub {
+            on { activeModemCount } doReturn SINGLE_SLOT
+            on { getImei(0) } doReturn IMEI_1
+            on { primaryImei } doReturn IMEI_1
+        }
+
+        assertThat(context.getImeiList).hasSize(1)
+        assertThat(context.getImeiList[0]).isEqualTo(IMEI_1)
+    }
+
+    @Test
+    fun getImeiList_multiActiveSlot_getTwoImei() {
+        assertThat(context.getImeiList).hasSize(2)
+        assertThat(context.getImeiList[0]).isEqualTo(IMEI_1)
+        assertThat(context.getImeiList[1]).isEqualTo(IMEI_2)
+    }
+
+    @Test
+    fun getImeiList_multiActiveSlot_primaryImei_getTwoImei() {
+        mockTelephonyManager.stub { on { primaryImei } doReturn IMEI_2 }
+
+        assertThat(context.getImeiList[0]).isEqualTo(IMEI_2)
+        assertThat(context.getImeiList[1]).isEqualTo(IMEI_1)
+    }
+
+    @Test
+    fun getImeiList_multiActiveSlot_sameImei_getTwoImei() {
         mockTelephonyManager.stub {
             on { getImei(0) } doReturn IMEI_1
             on { getImei(1) } doReturn IMEI_1
         }
+        mockTelephonyManager.stub { on { primaryImei } doReturn IMEI_1 }
 
-        preference = ImeiPreference(context, 1, 2)
+        assertThat(context.getImeiList[0]).isEqualTo(IMEI_1)
+        assertThat(context.getImeiList[1]).isEqualTo(IMEI_1)
+    }
 
-        assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
+    @Test
+    fun getImeiList_getPrimaryImeiThrowException_doNotCrash() {
+        mockTelephonyManager.stub { on { primaryImei } doThrow (IllegalStateException()) }
+
+        context.getImeiList
     }
 
     companion object {
+        const val SINGLE_SLOT = 1
+        const val MULTI_SLOT = 2
         const val IMEI_1 = "111111111111115"
         const val IMEI_2 = "222222222222225"
+        val imeiList = listOf(IMEI_1, IMEI_2)
+        val imeiList_sameImei = listOf(IMEI_1, IMEI_1)
+        val imeiList_oneImei = listOf(IMEI_1)
     }
 }

@@ -85,7 +85,7 @@ class MagnificationScreenTest : SettingsCatalystTestCase() {
 
     @Test
     fun isIndexable() {
-        assertThat(preferenceScreenCreator.isIndexable(context)).isTrue()
+        assertThat(preferenceScreenCreator.indexable).isTrue()
     }
 
     @Test

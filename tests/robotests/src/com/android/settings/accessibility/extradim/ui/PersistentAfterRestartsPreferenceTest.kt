@@ -70,7 +70,7 @@ class PersistentAfterRestartsPreferenceTest {
 
     @Test
     fun isIndexable_returnFalse() {
-        assertThat(preference.isIndexable(context)).isFalse()
+        assertThat(preference.indexable).isFalse()
     }
 
     @Test

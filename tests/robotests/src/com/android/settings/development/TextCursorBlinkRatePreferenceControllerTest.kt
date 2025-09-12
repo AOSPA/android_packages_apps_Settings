@@ -32,7 +32,11 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.atLeastOnce
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
@@ -43,7 +47,8 @@ class TextCursorBlinkRatePreferenceControllerTest {
 
     val controller = TextCursorBlinkRatePreferenceController(context)
 
-    val preference = TextCursorBlinkRateSliderPreference(context)
+    // Spy on the preference to verify method calls on it
+    val preference = spy(TextCursorBlinkRateSliderPreference(context))
     val preferenceScreen = mock<PreferenceScreen>()
 
     private val noBlinkDurationMs = 0
@@ -224,6 +229,50 @@ class TextCursorBlinkRatePreferenceControllerTest {
         controller.updateState(preference)
 
         assertThat(getSliderStateDescription()).isEqualTo(fastBlinkLabel)
+    }
+
+    @Test
+    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
+    fun onDeveloperOptionsSwitchDisabled_resetsToDefault() {
+        // Set a non-default value first to ensure it changes
+        setSecureSettingsValue(fastBlinkDurationMs)
+        assertThat(getSecureSettingsValue()).isEqualTo(fastBlinkDurationMs)
+
+        // Action: Disable developer options
+        controller.onDeveloperOptionsSwitchDisabled()
+
+        // Verify: The setting is reset to the default value
+        assertThat(getSecureSettingsValue()).isEqualTo(defaultDurationMs)
+    }
+
+    @Test
+    @EnableFlags(android.view.accessibility.Flags.FLAG_TEXT_CURSOR_BLINK_INTERVAL)
+    fun displayPreference_resetClickListener_resetsToDefault() {
+        // In setup(), displayPreference() is called, which sets a reset click listener.
+        // We capture the listener to invoke it and verify its behavior.
+        val listenerCaptor = argumentCaptor<View.OnClickListener>()
+        // Note: setResetClickListener may be called multiple times during setup. We verify at
+        // least one call happened and grab the first listener, which is the one set by our
+        // controller.
+        verify(preference, atLeastOnce()).setResetClickListener(listenerCaptor.capture())
+        val resetClickListener = listenerCaptor.firstValue
+
+        // Set a non-default value to ensure it changes
+        setSecureSettingsValue(fastBlinkDurationMs)
+        // Update the preference to reflect the non-default value
+        controller.updateState(preference)
+        assertThat(preference.value).isEqualTo(maxSliderValue)
+        assertThat(getSecureSettingsValue()).isEqualTo(fastBlinkDurationMs)
+
+        // Action: Simulate a click on the reset button
+        resetClickListener.onClick(mock())
+
+        // Verify: The setting in Settings.Secure is reset to the default value
+        assertThat(getSecureSettingsValue()).isEqualTo(defaultDurationMs)
+
+        // Verify: The preference UI is also updated to the default value,
+        // because the listener calls updateState().
+        assertThat(preference.value).isEqualTo(defaultSliderValue)
     }
 
     private fun getSecureSettingsValue(): Int {

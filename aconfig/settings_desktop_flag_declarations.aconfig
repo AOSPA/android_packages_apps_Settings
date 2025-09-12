@@ -2,6 +2,13 @@ package: "com.android.settings.flags"
 container: "system_ext"
 
 flag {
+    name: "enable_pattern_input_click_support"
+    namespace: "desktop_oobe"
+    description: "Feature flag for click support in pattern input."
+    bug: "403345215"
+}
+
+flag {
     name: "hide_user_list_for_non_admins"
     namespace: "desktop_users_and_accounts"
     description: "Controls whether to hide the user list in Settings for non-admins."

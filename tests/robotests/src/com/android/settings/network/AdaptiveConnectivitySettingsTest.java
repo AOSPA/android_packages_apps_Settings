@@ -19,6 +19,7 @@ package com.android.settings.network;
 import static android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED;
 import static android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED;
 import static android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED;
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -34,15 +35,20 @@ import static org.mockito.Mockito.when;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
+import androidx.fragment.app.testing.FragmentScenario;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.widget.IllustrationPreference;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,6 +56,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowSubscriptionManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUtils.class})
@@ -66,6 +73,9 @@ public class AdaptiveConnectivitySettingsTest {
   @Mock private Preference mLegacyTogglePreference;
   @Mock private SwitchPreferenceCompat mWifiSwitchPreference;
   @Mock private SwitchPreferenceCompat mMobileNetworkSwitchPreference;
+  @Mock private SubscriptionManager mSubscriptionManager;
+  @Mock private Resources mResources;
+  @Mock private PreferenceManager mPreferenceManager;
 
   private AdaptiveConnectivitySettings mFragment;
   private Context mContext;
@@ -73,8 +83,14 @@ public class AdaptiveConnectivitySettingsTest {
   @Before
   public void setUp() {
     MockitoAnnotations.initMocks(this);
-    mContext = ApplicationProvider.getApplicationContext();
+    mContext = spy(ApplicationProvider.getApplicationContext());
     mFragment = spy(new AdaptiveConnectivitySettings());
+
+    doReturn(mContext).when(mFragment).getContext();
+    doReturn(mPreferenceManager).when(mFragment).getPreferenceManager();
+    when(mPreferenceManager.getContext()).thenReturn(mContext);
+    when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+    when(mContext.getResources()).thenReturn(mResources);
 
     doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
     doReturn(mIllustrationPreference).when(mFragment).findPreference(ADAPTIVE_CONNECTIVITY_HEADER);
@@ -311,5 +327,27 @@ public class AdaptiveConnectivitySettingsTest {
     }
     verify(mWifiManager, never()).setWifiScoringEnabled(false);
     verify(mWifiManager, times(1)).setWifiScoringEnabled(true);
+  }
+
+  @Test
+  public void onCreatePreferences_mobileToggleShownForCarrier() {
+      FragmentScenario<AdaptiveConnectivitySettings> scenario =
+          FragmentScenario.launchInContainer(AdaptiveConnectivitySettings.class);
+
+      scenario.onFragment(fragment -> {
+          SwitchPreferenceCompat mobileNetworkPreference = fragment.findPreference(
+              ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED);
+          SwitchPreferenceCompat wifiPreference = fragment.findPreference(
+              ADAPTIVE_CONNECTIVITY_WIFI_ENABLED);
+          Preference summaryPreference = fragment.findPreference(
+              ADAPTIVE_CONNECTIVITY_SUMMARY);
+          Preference legacyTogglePreference = fragment.findPreference(
+              ADAPTIVE_CONNECTIVITY_ENABLED);
+
+          assertThat(mobileNetworkPreference.isVisible()).isTrue();
+          assertThat(wifiPreference.isVisible()).isTrue();
+          assertThat(summaryPreference.isVisible()).isFalse();
+          assertThat(legacyTogglePreference.isVisible()).isFalse();
+      });
   }
 }

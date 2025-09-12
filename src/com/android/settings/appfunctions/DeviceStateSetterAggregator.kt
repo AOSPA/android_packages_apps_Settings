@@ -62,8 +62,15 @@ class DeviceStateSetterAggregator(private val executors: List<DeviceStateExecuto
 
         return when (validResults.size) {
             0 -> throw IllegalStateException("No valid executor found for $appFunctionType")
-            1 -> validResults.first()
-            else -> throw IllegalStateException("Multiple executors found for $appFunctionType")
+            // TODO: use commented logic once we properly implement setters in catalyst, at the
+            //  moment we're always returning a dummy result from catalyst so will cause an
+            //  exception if combined with any result from AndroidApiStateSetterExecutor implemented
+            //  by OEMs.
+            else -> validResults.first()
+        //            1 -> validResults.first()
+        //            else -> throw IllegalStateException("Multiple executors found for
+        // $appFunctionType" +
+        //                    "with params $params")
         }
     }
 }

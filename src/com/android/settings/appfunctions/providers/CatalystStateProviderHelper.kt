@@ -19,12 +19,15 @@ package com.android.settings.appfunctions.providers
 import android.content.Context
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
+import com.android.settings.appfunctions.DeviceStateItemConfig
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.toList
+import com.android.settings.flags.Flags;
 
 /**
  * A generic helper function to process preferences for a given screen. It handles the common logic
@@ -43,19 +46,73 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
     context: Context,
     appFunctionType: DeviceStateAppFunctionType? = null,
     screenKey: String,
-): Pair<PreferenceScreenMetadata, List<PreferenceHierarchyNode>>? {
+): Map<PreferenceScreenMetadata, List<PreferenceHierarchyNode>> {
+    if (!Flags.parameterisedScreensInAppFunctions()) {
+        return getEnabledPreferencesHierarchyWithoutParameterised(config, context, appFunctionType, screenKey)
+    }
     val settingConfigMap = config.deviceStateItems.associateBy { it.settingKey }
     val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
     val perScreenConfig = perScreenConfigMap[screenKey]
     if (
         perScreenConfig == null ||
-            !perScreenConfig.enabled ||
-            (appFunctionType != null && appFunctionType !in perScreenConfig.appFunctionTypes)
+        !perScreenConfig.enabled ||
+        (appFunctionType != null && appFunctionType !in perScreenConfig.appFunctionTypes)
     ) {
-        return null
+        return mapOf()
+    }
+
+    val hierarchies = if (PreferenceScreenRegistry.isParameterized(context, screenKey)) {
+        PreferenceScreenRegistry.getParameters(context, screenKey).toList().map {
+            getPreferenceHierarchy(context, PreferenceScreenCoordinate(screenKey, it), settingConfigMap)
+        }
+    } else {
+        listOf(getPreferenceHierarchy(context, PreferenceScreenCoordinate(screenKey, null), settingConfigMap))
+    }
+
+    return hierarchies.filterNotNull().toMap()
+}
+
+private suspend fun CoroutineScope.getEnabledPreferencesHierarchyWithoutParameterised(
+    config: CatalystConfig,
+    context: Context,
+    appFunctionType: DeviceStateAppFunctionType? = null,
+    screenKey: String,
+): Map<PreferenceScreenMetadata, List<PreferenceHierarchyNode>> {
+    val settingConfigMap = config.deviceStateItems.associateBy { it.settingKey }
+    val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
+    val perScreenConfig = perScreenConfigMap[screenKey]
+    if (
+        perScreenConfig == null ||
+        !perScreenConfig.enabled ||
+        (appFunctionType != null && appFunctionType !in perScreenConfig.appFunctionTypes)
+    ) {
+        return mapOf()
     }
     val screenMetaData =
         PreferenceScreenRegistry.create(context, PreferenceScreenCoordinate(screenKey, null))
+            ?: return mapOf()
+    if (screenMetaData is PreferenceAvailabilityProvider && !screenMetaData.isAvailable(context)) {
+        return mapOf()
+    }
+    val preferenceHierarchy = mutableListOf<PreferenceHierarchyNode>()
+    // TODO if child node is PreferenceScreen, recursively process it
+    screenMetaData.getPreferenceHierarchy(context, this).forEachRecursivelyAsync {
+        val metadata = it.metadata
+        val config = settingConfigMap[metadata.key]
+        // Skip over explicitly disabled preferences
+        if (config?.enabled == false) return@forEachRecursivelyAsync
+
+        preferenceHierarchy.add(it)
+    }
+    return mapOf(screenMetaData to preferenceHierarchy)
+}
+
+private suspend fun CoroutineScope.getPreferenceHierarchy(
+    context: Context,
+    coordinate: PreferenceScreenCoordinate,
+    settingConfigMap: Map<String, DeviceStateItemConfig>): Pair<PreferenceScreenMetadata, List<PreferenceHierarchyNode>>? {
+    val screenMetaData =
+        PreferenceScreenRegistry.create(context, coordinate)
             ?: return null
     if (screenMetaData is PreferenceAvailabilityProvider && !screenMetaData.isAvailable(context)) {
         return null

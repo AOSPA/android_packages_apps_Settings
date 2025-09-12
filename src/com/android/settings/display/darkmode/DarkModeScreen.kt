@@ -40,6 +40,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceCategory
+import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -57,6 +58,7 @@ abstract class BaseDarkModeScreen(context: Context) :
     PreferenceActionMetricsProvider,
     BooleanValuePreference,
     PreferenceSummaryProvider,
+    PreferenceIndexableProvider,
     PreferenceLifecycleProvider {
 
     private val darkModeStorage = DarkModeStorage(context)
@@ -85,12 +87,8 @@ abstract class BaseDarkModeScreen(context: Context) :
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(
-        context: Context,
-        value: Boolean?,
-        callingPid: Int,
-        callingUid: Int,
-    ) = ReadWritePermit.ALLOW
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
@@ -115,8 +113,7 @@ abstract class BaseDarkModeScreen(context: Context) :
                 }
             }
             +PreferenceCategory("display_category", R.string.dark_theme_timing_category) += {
-                val uiModeManager =
-                    context.getSystemService<UiModeManager?>(UiModeManager::class.java)
+                val uiModeManager = context.getSystemService(UiModeManager::class.java)
                 +DarkModeSchedulePreference(uiModeManager!!, BedtimeSettings(context))
                 +StartTimePreference(uiModeManager)
                 +EndTimePreference(uiModeManager)
@@ -146,7 +143,7 @@ abstract class BaseDarkModeScreen(context: Context) :
     override fun onStop(context: PreferenceLifecycleContext) {
         if (isContainer(context)) {
             powerSaveModeObserver?.let {
-                PowerSaveModeObservable.get(context).removeObserver(powerSaveModeObserver!!)
+                PowerSaveModeObservable.get(context).removeObserver(it)
                 powerSaveModeObserver = null
             }
         }
@@ -176,7 +173,8 @@ abstract class BaseDarkModeScreen(context: Context) :
 
 @ProvidePreferenceScreen(DarkModeScreen.KEY)
 open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context) {
-    override val key: String = KEY
+    override val key
+        get() = KEY
 
     companion object {
         const val KEY = "dark_ui_mode"
@@ -185,7 +183,8 @@ open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context) {
 
 @ProvidePreferenceScreen(DarkModeScreenOnAccessibility.KEY)
 open class DarkModeScreenOnAccessibility(context: Context) : BaseDarkModeScreen(context) {
-    override val key: String = KEY
+    override val key
+        get() = KEY
 
     override val icon: Int
         get() = R.drawable.ic_dark_ui

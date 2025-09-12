@@ -29,7 +29,8 @@ interface FooterPreferenceMetadata : PreferenceMetadata {
     override val icon: Int
         get() = R.drawable.settingslib_ic_info_outline_24
 
-    override fun isIndexable(context: Context) = false
+    override val indexable
+        get() = false
 }
 
 /** Binding for [FooterPreferenceMetadata]. */

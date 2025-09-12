@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"ઑડિયો આઉટપુટ વિશે"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"સાઉન્ડને તમારા ડિવાઇસ અથવા ફોન સ્પીકર પર રુટ કરો"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"સંબંધિત"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2307943703595855441">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> વડે વધુ ઝડપથી મોકલો"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="2808932450696996548">"નજીકના Android અને PCs સાથે શેર કરવાની સૌથી ઝડપી રીત માટે, Windows માટે <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> અજમાવો"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> વડે વધુ ઝડપથી મોકલો"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"નજીકના Android અને PCs સાથે શેર કરવાની સૌથી ઝડપી રીત માટે, Windows માટે <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> અજમાવો"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"રિંગટોન અને અલાર્મ"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"કૉલ દરમિયાન ઑડિયો"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"મીડિયા અને સિસ્ટમ સાઉન્ડ"</string>
@@ -1015,21 +1015,17 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"કોઈ ડિસ્પ્લે કનેક્ટ કરેલું નથી"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"શરૂઆત કરવા માટે બાહ્ય ડિસ્પ્લે કનેક્ટ કરો અથવા જુદો કેબલ ઉપયોગમાં લઈને પ્રયાસ કરો"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"વધુ વિકલ્પો"</string>
-    <string name="external_display_topology_hint" msgid="854973327795578470">"ડિસ્પ્લેનો ક્રમ બદલવા માટે દબાવી રાખીને ખેંચો."</string>
+    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
+    <skip />
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"મિરર બિલ્ટ-ઇન ડિસ્પ્લે"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"નવા સેટિંગનો ઉપયોગ કરીએ?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"જો તમારું ડિસ્પ્લે તમારી ઇચ્છા અનુસાર કામ ન કરી રહ્યું હોય, તો તમે તમારા અગાઉના સેટિંગ પર પાછા જઈ શકો છો"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"સેટિંગનો ઉપયોગ કરો"</string>
-    <!-- no translation found for external_display_topology_display_block_content_description (4638018879987232608) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_up (5585023811277652685) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_down (497925070033309302) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_left (5207345941599286131) -->
-    <skip />
-    <!-- no translation found for external_display_topology_a11y_action_move_right (6258194449439072825) -->
-    <skip />
+    <string name="external_display_topology_display_block_content_description" msgid="4638018879987232608">"ડિસ્પ્લે: %1$s. ખેંચવા માટે અથવા ખસેડવાની ક્રિયાઓ જોવા માટે બે વાર ટૅપ કરીને દબાવી રાખો."</string>
+    <string name="external_display_topology_a11y_action_move_up" msgid="5585023811277652685">"ઉપર ખસેડો"</string>
+    <string name="external_display_topology_a11y_action_move_down" msgid="497925070033309302">"નીચે ખસેડો"</string>
+    <string name="external_display_topology_a11y_action_move_left" msgid="5207345941599286131">"ડાબે ખસેડો"</string>
+    <string name="external_display_topology_a11y_action_move_right" msgid="6258194449439072825">"જમણે ખસેડો"</string>
     <string name="wifi_display_settings_title" msgid="2622548133505158832">"Google Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"મીરર"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"વાયરલેસ ડિસ્પ્લે સક્ષમ કરો"</string>
@@ -1412,6 +1408,8 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"સ્ટૅન્ડર્ડ છબી"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR છબી"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"આ સેટિંગની અસર માત્ર ઉચ્ચ ડાઇનૅમિક શ્રેણી (HDR)ને સપોર્ટ કરતી છબીઓ અને વીડિયો પર થાય છે."</string>
+    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
+    <skip />
     <string name="display_white_balance_title" msgid="2624544323029364713">"વ્હાઇટ બૅલેન્સ ડિસ્પ્લે"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"ફોલ્ડ હોવા પર ઍપનો ઉપયોગ કરવાનું ચાલુ રાખો"</string>
@@ -1479,7 +1477,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"તમારી સ્ક્રીનને જોવાનું વધુ અનુકૂળ બનાવવા માટે અને અમુક સ્ક્રીન પર બૅટરીનો વપરાશ ઘટાડવા માટે ડાર્ક બૅકગ્રાઉન્ડનો ઉપયોગ કરો. જો તમારું કોઈ શેડ્યૂલ હોય, તો જ્યારે સ્ક્રીન બંધ હોય ત્યારે તમારી થીમ બદલાશે."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ઘેરી થીમ હાલમાં તમારા બેડટાઇમ મોડના શેડ્યૂલને અનુસરી રહી છે"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"બેડટાઇમ મોડનાં સેટિંગ"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="22160899184470368">"{count,plural,offset:2 =0{મોડ પણ ડાર્ક થીમ ચાલુ કરી શકે છે.}=1{{mode_1} પણ ડાર્ક થીમ ચાલુ કરે છે.}=2{{mode_1} અને {mode_2} પણ ડાર્ક થીમ ચાલુ કરે છે.}=3{{mode_1}, {mode_2} અને {mode_3} પણ ડાર્ક થીમ ચાલુ કરે છે.}one{{mode_1}, {mode_2} અને વધુ # મોડ પણ ડાર્ક થીમ ચાલુ કરે છે.}other{{mode_1}, {mode_2} અને વધુ # મોડ પણ ડાર્ક થીમ ચાલુ કરે છે.}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{મોડને કારણે પણ ડાર્ક થીમ ચાલુ થઈ શકે છે}=1{{mode_1}ને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે}=2{{mode_1} અને {mode_2}ને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે}=3{{mode_1}, {mode_2} અને {mode_3}ને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે}one{{mode_1}, {mode_2} અને વધુ # મોડને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે}other{{mode_1}, {mode_2} અને વધુ # મોડને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"મોડના સેટિંગ"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"ઉચ્ચ ડાઇનૅમિક શ્રેણી (HDR)ની છબીઓ અને વીડિયોની રંગની શ્રેણી અને સ્પષ્ટતામાં વધારો કરો તેમજ તેને વધુ બ્રાઇટ બનાવો. HDR કન્ટેન્ટ વધુ બ્રાઇટ દેખાશે."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"સ્ક્રીનનો ઑટોમૅટિક સમાપ્તિ સમય"</string>
@@ -1587,7 +1585,8 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"સ્ટોરેજ અને કૅશ મેમરી"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"સ્ટોરેજ સેટિંગ"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <string name="eid_multi_sim" msgid="6659492335576379274">"E​ID (સિમ કાર્ડનો સ્લૉટ <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
+    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
+    <skip />
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"જોવા માટે, સાચવેલું નેટવર્ક પસંદ કરો"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -1953,6 +1952,8 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"એક અનલૉક પૅટર્ન દોરો"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"સહાય માટે મેનૂ દબાવો."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"પૂર્ણ થવા પર આંગળી છોડી દો"</string>
+    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
+    <skip />
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"ઓછામાં ઓછા <xliff:g id="NUMBER">%d</xliff:g> ડોટ્સ કનેક્ટ કરો. ફરીથી પ્રયાસ કરો."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"પૅટર્ન રેકોર્ડ કરી"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"કન્ફર્મ કરવા માટે ફરીથી પૅટર્ન દોરો"</string>
@@ -2415,11 +2416,9 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"નૅવિગેશન મોડ, સ્ક્રીન રોટેશન"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"પ્રતિસાદ મોકલો"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"સર્વેક્ષણમાં ભાગ લો"</string>
-    <string name="accessibility_disability_support_title" msgid="7934160403456751664">"Googleની વિકલાંગતા માટેની સપોર્ટ ટીમનો સંપર્ક કરો"</string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"ઍક્સેસિબિલિટીનું સર્વેક્ષણ"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"તમારો પ્રતિસાદ શેર કરો"</string>
-    <!-- no translation found for dark_theme_survey_notification_summary (8706870943336979672) -->
-    <skip />
+    <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"ડાર્ક થીમથી તમે કેટલા સંતુષ્ટ છો?"</string>
     <string name="dark_theme_survey_notification_action" msgid="7693304950750954402">"સર્વેક્ષણમાં ભાગ લો"</string>
     <string name="magnification_survey_notification_title" msgid="8308432889772152950">"તમારો પ્રતિસાદ શેર કરો"</string>
     <string name="magnification_survey_notification_summary" msgid="2238290609820811258">"મોટું કરવાની સુવિધાથી તમે કેટલા સંતુષ્ટ છો?"</string>
@@ -2594,10 +2593,10 @@
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"સમય"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"સ્ટૅન્ડર્ડ"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"સ્ટૅન્ડર્ડ ડાર્ક થીમ"</string>
-    <string name="accessibility_standard_dark_theme_summary" msgid="5462837198570089294">"તમારા સમગ્ર ડિવાઇસ અને સપોર્ટેડ ઍપ પર ડાર્ક થીમ લાગુ કરે છે"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"આ સુવિધા, ડાર્ક થીમને સપોર્ટ કરતા તમારા ડિવાઇસ અને ઍપ માટે ડાર્ક થીમ ચાલુ કરે છે"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"મોટું કરેલું"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"મોટી કરેલી ડાર્ક થીમ"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="7600947929245673753">"બહેતર બનાવેલી ઍક્સેસિબિલિટી માટે વધુ ઍપ પર ઑટોમૅટિક રીતે ડાર્ક થીમ લાગુ કરે છે"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"આ સુવિધા, ડાર્ક થીમને સપોર્ટ ન કરતી મોટાભાગની ઍપ પર ઑટોમૅટિક રીતે ડાર્ક થીમ લાગુ કરે છે. આ સુવિધા, ઍક્સેસિબિલિટી અને વાંચનક્ષમતાને બહેતર બનાવે છે, પરંતુ તેને કારણે કેટલીક ઍપ અયોગ્ય રીતે ડિસ્પ્લે થઈ શકે છે."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"ઉલટાવવાની ફરજ પાડો, વિપરીત રંગમાં બદલવું, કૉન્ટ્રાસ્ટ"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ઍનિમેશન કાઢી નાખો"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"સ્ક્રીન પર હિલચાલ ઘટાડો"</string>
@@ -2699,8 +2698,7 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"રંગ સુધારણાની સુવિધા વિશે વધુ જાણો"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"વિપરીત રંગમાં બદલવાની સુવિધા વિશે"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"વિપરીત રંગમાં બદલવાની સુવિધા વિશે વધુ જાણો"</string>
-    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="7084955775821075280">"ડાર્ક થીમ વિશે વધુ જાણો"</string>
-    <string name="accessibility_dark_theme_preference_footer_content" msgid="3162327942873394910">"મોટું કરેલા વિકલ્પ સાથે કેટલીક ઍપ કદાચ ડાર્ક થીમને સપોર્ટ ન કરે. જો તમે જોવામાં કોઈ સમસ્યા અનુભવી રહ્યાં હો, તો સ્ટૅન્ડર્ડ વિકલ્પનો ઉપયોગ કરો."</string>
+    <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="6728089199404860746">"ડાર્ક થીમ વિશે વધુ જાણો"</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"કૅપ્શન બતાવો"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"માત્ર સપોર્ટ કરતી ઍપ માટે"</string>
     <string name="captioning_appearance_title" msgid="3128792092290011408">"કૅપ્શનનું કદ અને શૈલી"</string>
@@ -3139,7 +3137,7 @@
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"મોબાઇલ નેટવર્ક સુરક્ષા"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"નોટિફિકેશન"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"નેટવર્ક સંબંધિત નોટિફિકેશન"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"જ્યારે તમારું ડિવાઇસ એન્ક્રિપ્ટ નહીં થયેલા નેટવર્ક સાથે કનેક્ટ થાય અથવા જ્યારે કોઈ નેટવર્ક તમારા અજોડ ડિવાઇસ અથવા સિમ કાર્ડ IDને રેકોર્ડ કરે ત્યારે નોટિફિકેશન મેળવો"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"જ્યારે તમારું ડિવાઇસ એન્ક્રિપ્ટ નહીં થયેલા નેટવર્ક સાથે કનેક્ટ થાય અથવા જ્યારે કોઈ નેટવર્ક તમારા વિશિષ્ટ ડિવાઇસ અથવા સિમ કાર્ડ IDને રેકોર્ડ કરે ત્યારે નોટિફિકેશન મેળવો"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"નેટવર્ક જનરેશન"</string>
     <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G નેટવર્ક સુરક્ષા ઓછા સુરક્ષિત હોય તેવા 2G નેટવર્કને ટાળે છે. આનાથી કેટલીક જગ્યાએ કનેક્ટિવિટી મર્યાદિત થઈ શકે છે. ઇમર્જન્સી કૉલ માટે 2Gની હંમેશાં માટે મંજૂરી આપી છે, પરંતુ જો તમે આંતરરાષ્ટ્રીય રોમિંગમાં હો, તો કૉલ કનેક્ટ ન પણ થઈ શકે."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G નેટવર્ક સુરક્ષા"</string>
@@ -3576,7 +3574,8 @@
     <string name="color_orange" msgid="216547825489739010">"નારંગી"</string>
     <string name="color_purple" msgid="6603701972079904843">"જાંબલી"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"સિમ સ્થિતિ"</string>
-    <string name="sim_status_title_sim_slot" msgid="5421926522479103027">"સિમ કાર્ડનું સ્ટેટસ (સિમ કાર્ડનો સ્લૉટ %1$d)"</string>
+    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
+    <skip />
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"તમારા સિમ કાર્ડ બદલાયા છે"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"સેટ કરવા માટે ટૅપ કરો"</string>
@@ -4815,6 +4814,10 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> પણ તમારી લૉક સ્ક્રીનનો શૉર્ટકટ છે. તેને બદલવા માટે ટૅપ કરો."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"તમારી હાલની ડિફૉલ્ટ વૉલેટ ઍપ આ સંકેતને સપોર્ટ કરતી નથી"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"ડિફૉલ્ટ વૉલેટ બદલો"</string>
+    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
+    <skip />
+    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"સેલ્ફી માટે કૅમેરાને ફ્લિપ કરો"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"નૅવિગેશન મોડ"</string>
@@ -5582,7 +5585,7 @@
     <string name="category_name_color" msgid="937514550918977151">"રંગ"</string>
     <string name="category_name_display_controls" msgid="7046581691184725216">"ડિસ્પ્લે સંબંધિત અન્ય નિયંત્રણો"</string>
     <string name="category_name_general" msgid="7737273712848115886">"સામાન્ય"</string>
-    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"ડાર્ક થીમનો ઉપયોગ કરો"</string>
+    <string name="dark_theme_main_switch_title" msgid="4570920398981775904">"ડાર્ક થીમનો ઉપયોગ કરો"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"બ્લૂટૂથનો ઉપયોગ કરો"</string>
     <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"HDRની વધારેલી બ્રાઇટનેસનો ઉપયોગ કરો"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"\'રિંગ વાગતી અટકાવો\'નો ઉપયોગ કરો"</string>
@@ -5798,7 +5801,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"પાસવર્ડ"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"સુસંગતતા બહેતર બનાવો"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"સાંભળવામાં મદદ આપતા યંત્રો જેવા અમુક ડિવાઇસને ઑડિયોની ક્વૉલિટી ઘટાડીને કનેક્ટ થવામાં સહાય કરે છે"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"સુસંગતતા ગોઠવવા માટે ઑડિયો શેરિંગ બંધ કરે છે"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"સુસંગતતા ગોઠવવા માટે ઑડિયો શેરિંગ બંધ કરે છે"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"નજીકના ઑડિયો સાંભળો"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Auracast™ને ઑડિયો શેરિંગ સપોર્ટ કરે છે"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"ઑડિયો સ્ટ્રીમનું નામ"</string>
@@ -5959,21 +5962,26 @@
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"પિન ડિલીટ કરવાનો પ્રયાસ કરતી વખતે કોઈ ભૂલ આવી."</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"<xliff:g id="FEATURE">%1$s</xliff:g> ઍનિમેશન"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"નિયંત્રણો ચાલુ કરી શકતા નથી"</string>
-    <!-- no translation found for supervision_generic_error_page_title (1890873741445464953) -->
+    <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"કંઈક ખોટું થયું"</string>
+    <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"થોડા સમય પછી ફરી પ્રયાસ કરો"</string>
+    <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"પાછા જાઓ"</string>
+    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
     <skip />
-    <!-- no translation found for supervision_generic_error_page_message (1532001782155323205) -->
+    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
     <skip />
-    <!-- no translation found for supervision_generic_error_page_button_label (8972577027819946993) -->
-    <skip />
-    <string name="identity_check_issue_card_title" msgid="864543931965445926">"વધુ ઍપ પર ઓળખની તપાસ ઉપલબ્ધ છે"</string>
-    <string name="identity_check_issue_card_summary" msgid="5216214598056911479">"તમને ઓળખવા માટે ફિંગરપ્રિન્ટ અથવા ફેસ અનલૉક ઓફર કરતી કોઈપણ ઍપ પર, તમે તમારી \'ઓળખની સુરક્ષા\'ને સુરક્ષિત બનાવી શકો છો"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"વિગતો જુઓ"</string>
-    <string name="identity_check_promo_card_title" msgid="1495226082133610343">"વધુ ઍપની સુરક્ષા કરવા બનાવવા માટે ઓળખની તપાસનો ઉપયોગ કરો"</string>
-    <string name="identity_check_promo_card_summary" msgid="5745161401829550512">"જ્યારે તમે ફિંગરપ્રિન્ટ અને ફેસ અનલૉકને સપોર્ટ કરતી બધી ઍપ માટે ઓળખની તપાસનો ઉપયોગ કરો છો, ત્યારે તમે વધુ સશક્ત સુરક્ષા અને વધુ સુસંગત અનુભવ મેળવવાની ખાતરી કરો છો – તે પણ કોઈ વધારાના સેટઅપ વિના"</string>
-    <string name="identity_check_watch_issue_card_title" msgid="5620062865816820265">"તમારી વૉચ વડે ઓળખની તપાસની સુવિધાનો ઉપયોગ કરી શકાય છે"</string>
-    <string name="identity_check_watch_issue_card_summary" msgid="4428268483778051478">"અન્ય લોકોને, ફિંગરપ્રિન્ટ કે ફેસ અનલૉકની જરૂર પડતી હોય તેવી ઍપ ખોલતા રોકો. તમારી વૉચ સાથે કનેક્ટ કરવાથી તમારી સુરક્ષાની સાથે બહેતર ગતિશીલતાની ખાતરી મળે છે."</string>
-    <string name="identity_check_watch_promo_card_title" msgid="2949028203850064175">"ઓળખની તપાસની સુવિધા અને વૉચનો ઉપયોગ વધુ ઍપમાં કરો"</string>
-    <string name="identity_check_promo_card_watch_summary" msgid="1088786582274383831">"તમારા ઘર કે ઑફિસ જેવી જાણીતી જગ્યાઓમાં, ફિંગરપ્રિન્ટ અને ફેસ અનલૉકને સપોર્ટ કરતી બધી ઍપ પર તમારી ઓળખની સુરક્ષાની ખાતરી કરો. જાણીતી જગ્યાઓ સિવાય અન્ય જગ્યાઓ પર પણ તમારી સુરક્ષા બહેતર બનાવવા માટે તમારી વૉચની મદદથી ઓળખની તપાસની સુવિધાનો ઉપયોગ કરો."</string>
+    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
+    <skip />
+    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
+    <skip />
+    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
+    <skip />
+    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
+    <skip />
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"અન્ય સેટિંગ"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"ઑટોમૅટિક રીતે ભરવાની સુવિધા, નોટિફિકેશન અને બીજું ઘણું"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"પ્રાઇવસીને લગતા નિયંત્રણો"</string>

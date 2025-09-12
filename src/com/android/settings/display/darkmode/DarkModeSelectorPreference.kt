@@ -44,8 +44,6 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
 
     override fun isAvailable(context: Context) = Flags.catalystDarkUiMode()
 
-    override fun isIndexable(context: Context) = Flags.catalystDarkUiMode()
-
     override fun createWidget(context: Context) = SelectorWithWidgetPreference(context)
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

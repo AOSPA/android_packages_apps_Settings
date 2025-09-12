@@ -259,7 +259,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     @Override
     public void setSliderEnabled(int side, boolean enabled) {
         SliderPreference slider = mSideToSliderMap.get(side);
-        if (slider != null && slider.isEnabled() != enabled) {
+        if (slider != null) {
             slider.setEnabled(enabled);
             if (!enabled) {
                 slider.setValue(slider.getMin());

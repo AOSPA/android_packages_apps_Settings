@@ -396,7 +396,9 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         if (mode == null || mInjector == null) {
             return;
         }
-        if (!enableResolutionApplyConfirmation()) {
+        // Don't show confirmation dialog for synthetic mode
+        boolean isSyntheticMode = (mode.getFlags() & Mode.FLAG_SIZE_OVERRIDE) != 0;
+        if (isSyntheticMode || !enableResolutionApplyConfirmation()) {
             mInjector.setUserPreferredDisplayMode(display.getId(), mode, /* storeMode= */ true);
         } else {
             updateAllPreferenceStates(mode);

@@ -50,7 +50,7 @@ public class PromotedNotificationsPreferenceController extends
         if (!Flags.uiRichOngoing()) {
             return false;
         }
-        return isPermissionRequested() && super.isAvailable();
+        return super.isAvailable() && isPermissionRequested();
     }
 
     private boolean isPermissionRequested() {
@@ -58,9 +58,12 @@ public class PromotedNotificationsPreferenceController extends
             PackageInfo packageInfo = mPm.getPackageInfo(
                     mAppRow.pkg, PackageManager.GET_PERMISSIONS);
 
-            for (String requestedPermission : packageInfo.requestedPermissions) {
-                if (Manifest.permission.POST_PROMOTED_NOTIFICATIONS.equals(requestedPermission)) {
-                    return true;
+            if (packageInfo.requestedPermissions != null) {
+                for (String requestedPermission : packageInfo.requestedPermissions) {
+                    if (Manifest.permission.POST_PROMOTED_NOTIFICATIONS.equals(
+                            requestedPermission)) {
+                        return true;
+                    }
                 }
             }
         } catch (PackageManager.NameNotFoundException e) {

@@ -492,7 +492,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         }
 
-        use(MobileNetworkSwitchController.class).init(mSubId);
+        if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
+            use(MobileNetworkSwitchController.class).init(mSubId);
+        }
         use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
         use(BillingCyclePreferenceController.class).init(mSubId);
         use(MmsMessagePreferenceController.class).init(mSubId);
@@ -508,9 +510,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
 
-        use(MobileNetworkPhoneNumberPreferenceController.class).init(mSubId);
         if (!isCatalystEnabled()) {
             use(MobileNetworkSpnPreferenceController.class).init(this, mSubId);
+            use(MobileNetworkPhoneNumberPreferenceController.class).init(mSubId);
             use(MobileNetworkImeiPreferenceController.class).init(this, mSubId);
         }
 

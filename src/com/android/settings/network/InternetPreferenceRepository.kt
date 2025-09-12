@@ -32,7 +32,6 @@ import com.android.settings.wifi.repository.WifiRepository
 import com.android.settingslib.net.SignalStrengthUtil.shouldInflateSignalStrength
 import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBooleanFlow
 import com.android.settingslib.wifi.WifiUtils.Companion.getInternetIconResource
-import com.android.systemui.Flags
 import com.android.wifitrackerlib.WifiEntry.WIFI_LEVEL_MAX
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -104,12 +103,10 @@ class InternetPreferenceRepository(
                 summary = summary,
                 iconResId =
                     if (newStatusBarIcons()) {
-                        if (
-                            Flags.statusBarInflateCarrierMerged() &&
-                                shouldInflateSignalStrength(
-                                    context,
-                                    SubscriptionManager.getDefaultDataSubscriptionId(),
-                                )
+                        if (shouldInflateSignalStrength(
+                                context,
+                                SubscriptionManager.getDefaultDataSubscriptionId(),
+                            )
                         )
                             com.android.settingslib.R.drawable.ic_mobile_5_5_bar
                         else com.android.settingslib.R.drawable.ic_mobile_4_4_bar

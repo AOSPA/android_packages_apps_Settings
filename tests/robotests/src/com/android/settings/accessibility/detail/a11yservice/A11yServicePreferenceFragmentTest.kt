@@ -66,6 +66,7 @@ import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestParameterInjector
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.shadows.ShadowDeviceConfig
 import org.robolectric.shadows.ShadowDialog
 import org.robolectric.shadows.ShadowLooper
 import org.robolectric.shadows.ShadowPackageManager
@@ -503,6 +504,37 @@ class A11yServicePreferenceFragmentTest :
                 )
             )
             .isEqualTo(expectedVolumeShortcutTargets)
+    }
+
+    @Test
+    @Config(shadows = [SettingsShadowResources::class, ShadowDeviceConfig::class])
+    fun onAttach_writesDefaultService() {
+        val a11yServiceInfo = createA11yServiceInfo()
+        // Arrange: Set this service as the default accessibility service in resources.
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.string.config_defaultAccessibilityService,
+            a11yServiceInfo.componentName.flattenToString(),
+        )
+        // Arrange: Ensure the shortcut target service setting is initially null, so we can
+        // verify it gets written.
+        Settings.Secure.putString(
+            context.contentResolver,
+            Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE,
+            null,
+        )
+
+        // Act: Launch the fragment.
+        launchFragment(a11yServiceInfo)
+
+        // Assert: The default service was written to settings, proving
+        // writeConfigDefaultAccessibilityServiceShortcutTargetIfNeeded() was called.
+        assertThat(
+                Settings.Secure.getString(
+                    context.contentResolver,
+                    Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE,
+                )
+            )
+            .isEqualTo(a11yServiceInfo.componentName.flattenToString())
     }
 
     @Test

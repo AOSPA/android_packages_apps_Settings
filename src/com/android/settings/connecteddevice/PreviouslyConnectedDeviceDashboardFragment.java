@@ -26,6 +26,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
@@ -85,7 +86,9 @@ public class PreviouslyConnectedDeviceDashboardFragment extends DashboardFragmen
     @Override
     public void onStart() {
         super.onStart();
-        ThreadUtils.postOnBackgroundThread(() -> enableBluetoothIfNecessary());
+        if (!isCatalystEnabled() || !Flags.deeplinkConnectedDevices25q4()) {
+            ThreadUtils.postOnBackgroundThread(() -> enableBluetoothIfNecessary());
+        }
     }
 
     @VisibleForTesting

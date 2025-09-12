@@ -18,17 +18,15 @@ package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
-
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class MagnificationTopIntroPreferenceTest {
-    private val context : Context = ApplicationProvider.getApplicationContext()
+    private val context: Context = ApplicationProvider.getApplicationContext()
     private val preference = MagnificationTopIntroPreference()
 
     @Test
@@ -44,6 +42,6 @@ class MagnificationTopIntroPreferenceTest {
 
     @Test
     fun isIndexable() {
-        assertThat(preference.isIndexable(context)).isFalse()
+        assertThat(preference.indexable).isFalse()
     }
 }

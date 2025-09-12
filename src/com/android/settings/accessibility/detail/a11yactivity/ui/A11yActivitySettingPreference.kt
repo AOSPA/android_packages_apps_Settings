@@ -34,7 +34,8 @@ class A11yActivitySettingPreference(private val shortcutInfo: AccessibilityShort
     override val title: Int
         get() = R.string.accessibility_menu_item_settings
 
-    override fun isIndexable(context: Context): Boolean = false
+    override val indexable
+        get() = false
 
     override fun intent(context: Context): Intent? {
         val settingsActivityName = shortcutInfo.settingsActivityName ?: return null

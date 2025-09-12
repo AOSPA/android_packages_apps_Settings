@@ -72,6 +72,9 @@ open class HearingDevicesScreen(context: Context) :
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
 
+    override val indexable
+        get() = true
+
     override val keywords: Int
         get() = R.string.keywords_hearing_aids
 
@@ -93,34 +96,40 @@ open class HearingDevicesScreen(context: Context) :
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
-        lifecycleContext = context
+        if (isEntryPoint(context)) {
+            lifecycleContext = context
+        }
     }
 
     override fun onStart(context: PreferenceLifecycleContext) {
         super.onStart(context)
-        val filter =
-            IntentFilter().apply {
-                addAction(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED)
-                addAction(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED)
-                addAction(BluetoothLeAudio.ACTION_LE_AUDIO_CONNECTION_STATE_CHANGED)
-                addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
-            }
-        context.registerReceiver(hearingDeviceEventChangedReceiver, filter)
-        localBluetoothManager.eventManager?.registerCallback(this)
+        if (isEntryPoint(context)) {
+            val filter =
+                IntentFilter().apply {
+                    addAction(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED)
+                    addAction(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED)
+                    addAction(BluetoothLeAudio.ACTION_LE_AUDIO_CONNECTION_STATE_CHANGED)
+                    addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
+                }
+            context.registerReceiver(hearingDeviceEventChangedReceiver, filter)
+            localBluetoothManager.eventManager?.registerCallback(this)
 
-        // Can't get connected hearing aids when hearing aids related profiles are not ready. The
-        // profiles will be ready after the services are connected. Needs to add listener and
-        // updates the information when all hearing aids related services are connected.
-        if (!hearingAidHelper.isAllHearingAidRelatedProfilesReady) {
-            profileManager.addServiceListener(this)
+            // Can't get connected hearing aids when hearing aids related profiles are not ready.
+            // The profiles will be ready after the services are connected. Needs to add listener
+            // and updates the information when all hearing aids related services are connected.
+            if (!hearingAidHelper.isAllHearingAidRelatedProfilesReady) {
+                profileManager.addServiceListener(this)
+            }
         }
     }
 
     override fun onStop(context: PreferenceLifecycleContext) {
         super.onStop(context)
-        context.unregisterReceiver(hearingDeviceEventChangedReceiver)
-        localBluetoothManager.eventManager?.unregisterCallback(this)
-        profileManager.removeServiceListener(this)
+        if (isEntryPoint(context)) {
+            context.unregisterReceiver(hearingDeviceEventChangedReceiver)
+            localBluetoothManager.eventManager?.unregisterCallback(this)
+            profileManager.removeServiceListener(this)
+        }
     }
 
     override fun getMetricsCategory(): Int = SettingsEnums.ACCESSIBILITY_HEARING_AID_SETTINGS
@@ -146,8 +155,6 @@ open class HearingDevicesScreen(context: Context) :
             }
             +HearingDevicesFooterPreference(context)
         }
-
-    override fun isIndexable(context: Context): Boolean = true
 
     override fun isAvailable(context: Context): Boolean = hearingAidHelper.isHearingAidSupported
 

@@ -92,11 +92,13 @@ open class SavedAccessPointsWifiScreen :
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
-        lifeCycleContext = context
-        if (context.wifiManager != null) {
-            val fragment = context.findFragment("NetworkProviderSettings") ?: return
-            WifiPickerTrackerHelper(fragment.lifecycle, context, this).apply {
-                wifiTracker = wifiPickerTracker
+        if (isEntryPoint(context)) {
+            lifeCycleContext = context
+            if (context.wifiManager != null) {
+                val fragment = context.findFragment("NetworkProviderSettings") ?: return
+                WifiPickerTrackerHelper(fragment.lifecycle, context, this).apply {
+                    wifiTracker = wifiPickerTracker
+                }
             }
         }
     }
