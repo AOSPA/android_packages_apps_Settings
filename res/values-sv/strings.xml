@@ -81,6 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Inställningar för hörhjälpmedel"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Genväg, kompatibilitet med hörapparat"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Förinställning"</string>
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Vänster förinställning"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Höger förinställning"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Vänster: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Höger: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Inga förinställningar har gjorts av din audionom"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Det gick inte att uppdatera förinställningen"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Omgivningsläge"</string>
@@ -1683,7 +1686,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Allmänt"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Allmänna inställningar"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hubbläge"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Widgetar på låsskärmen (beta)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgetar på låsskärmen"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"När de ska visas automatiskt"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Aldrig"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Vid laddning"</string>
@@ -1947,8 +1954,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Rita ett mönster"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Tryck på Menu om du vill ha hjälp."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Lyft fingret när du är klar"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Anslut minst <xliff:g id="NUMBER">%d</xliff:g> punkter"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Anslut minst <xliff:g id="NUMBER">%d</xliff:g> punkter. Försök igen."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Mönstret har registrerats"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Rita mönstret igen för att bekräfta"</string>
@@ -2411,6 +2417,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Navigeringsläge, skärmrotering"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Skicka feedback"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Svara på enkäten"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Enkät om tillgänglighet"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Dela din feedback"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Hur nöjd är du med mörkt tema?"</string>
@@ -2587,10 +2594,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Alternativ"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Tid"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Mörkt standardtema"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Mörkt standardtema"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Aktiverar mörkt tema för enheten och appar som har stöd för mörkt tema"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Utökat"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Utökat mörkt tema"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Utökat mörkt tema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Tillämpar automatiskt mörkt tema i de flesta appar utan stöd för det. Detta kan förbättra tillgängligheten och läsbarheten, men vissa appar kan visas felaktigt."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"tvinga invertering, inverterade färger, kontrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Ta bort animationer"</string>
@@ -2621,7 +2628,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Använd inverterade färger"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Genväg till inverterade färger"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Med inverterade färger blir ljusa skärmar mörka och mörka skärmar ljusa."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Tänk på detta&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Färger ändras i media och bilder&lt;/li&gt; &lt;li&gt; Inverterade färger fungerar i alla appar&lt;/li&gt; &lt;li&gt; Om du vill göra bakgrunden mörk kan du använda Mörkt tema i stället&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Tänk på detta&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Färger ändras i media och bilder&lt;/li&gt; &lt;li&gt; Inverterade färger fungerar i alla appar&lt;/li&gt; &lt;li&gt; Om du vill göra bakgrunden mörk kan du använda Mörkt tema i stället&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"öppna inställningarna"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Automatiskt klick (hovringstid)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Om automatiskt klick (hovringstid)"</string>
@@ -3388,8 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Vill du att systemets CA-certifikat ska aktiveras?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Vill du att systemets CA-certifikat ska inaktiveras?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Vill du att användarens CA-certifikat ska tas bort permanent?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"CA-certifikat inom <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>, komprimerad, dubbeltryck om du vill komprimera"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"CA-certifikat inom <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>, utökad, dubbeltryck om du vill komprimera"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Används just nu av"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Denna post innehåller"</string>
     <string name="one_userkey" msgid="6363426728683951234">"En användarnyckel"</string>
@@ -3429,6 +3436,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Ta bort <xliff:g id="USER_NAME">%1$s</xliff:g> från enheten"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Inställningar för låsskärm"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Lägg till användare från låsskärmen"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Byt till administratörsanvändare vid dockning"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Vill du ta bort dig själv?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vill du radera användaren?"</string>
@@ -3829,8 +3838,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Dimma bakgrunden"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"dimma bakgrunden"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrera bakgrundens ljusstyrka"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Aktivera mörkt tema"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"aktivera mörkt tema"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Aktivera mörkt tema"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"aktivera mörkt tema"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Byt enhetens tema till en mörk bakgrund, vilket är mer behagligt för ögonen"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Inga skärmändringar}=1{{effect_1}}=2{{effect_1} och {effect_2}}=3{{effect_1}, {effect_2} och {effect_3}}other{{effect_1}, {effect_2} och # till}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Tillåt alla aviseringar"</string>
@@ -3953,7 +3962,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Visa endast nya aviseringar på låsskärmen"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Ta automatiskt bort tidigare visade aviseringar från låsskärmen"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Hela listan"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Kompakt vy"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Kompakt"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Aviseringar på låsskärmen"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Visa konversationer, standard och ljudlösa"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Visa konversationer, standard och ljudlösa"</string>
@@ -4599,7 +4608,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Av säkerhetsskäl kräver Avancerat skydd att den här inställningen förblir aktiverad"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Av säkerhetsskäl kräver Avancerat skydd att den här inställningen förblir inaktiverad"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Av säkerhetsskäl förhindrar Avancerat skydd den här åtgärden"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Det här nätverket använder WEP, en inaktuell krypteringsmetod som kan utgöra en risk för din data. WEP-anslutningar blockeras av Avancerat skydd."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Inställningar"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Inaktivera"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Aktivera"</string>
@@ -4776,7 +4784,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Tillfälligt inaktiverat i batterisparläge"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Inaktivera batterisparläge"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Tillfälligt aktiverat i batterisparläge"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Testa Mörkt tema"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Testa Mörkt tema"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Hjälper till att förlänga batteritiden"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Utvecklarrutor för snabbinställningar"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Inaktivera tidsgräns för adb-auktorisering"</string>
@@ -4807,10 +4815,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> är även genvägen på låsskärmen. Tryck för att ändra."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Din nuvarande standardplånboksapp har inte stöd för rörelsen."</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Ändra standardplånbok"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"rörelser, kortkommando"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"betala, betalningar"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Vänd kameran för att ta en selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigeringsläge"</string>
@@ -5935,6 +5941,7 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Radera pinkod"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Lägg till en återställningsadress"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verifiera din e-postadress"</string>
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Appbutiksfilter"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filter för webbplatsinnehåll"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Webbplatsfilter, blockera webbplatser, webbläsarfilter, blockera explicita webbplatser, filtrera webbplatser, blockera sökresultat, filtrera explicita sökresultat, innehållsbegränsningar"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Hjälp till att filtrera bort explicit innehåll i vissa appar och webbläsare på den här telefonen. Explicit innehåll kan fortfarande visas i andra appar, enheter eller webbläsare."</string>
@@ -5978,4 +5985,14 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Identitetskoll fungerar med fler appar"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Identitetskoll förhindrar oönskad åtkomst till dina appar. Nu tillgängligt med alla appar som använder fingeravtryckslås eller ansiktslås."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Visa information"</string>
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Det gick inte att kontrollera inställningarna"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Ingen information än"</string>
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

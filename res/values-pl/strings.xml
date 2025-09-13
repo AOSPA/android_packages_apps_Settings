@@ -81,6 +81,12 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Ustawienia urządzenia słuchowego"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Skrót, zgodność z aparatem słuchowym"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Gotowe ustawienia"</string>
+    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
+    <skip />
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Twój audiolog nie zaprogramował żadnych gotowych ustawień"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Nie udało się zaktualizować gotowego ustawienia"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Otoczenie"</string>
@@ -217,7 +223,7 @@
     <string name="desc_introduction_of_language_picker" msgid="2164004945569753730">"Urządzenie, aplikacje i witryny używają pierwszego obsługiwanego języka z listy preferowanych języków."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Aby wybrać języki poszczególnych aplikacji, otwórz ustawienia języków w aplikacjach."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Więcej informacji o językach aplikacji"</string>
-    <string name="title_change_system_region" msgid="9196602029960380112">"Zmienić region na %s?"</string>
+    <string name="title_change_system_region" msgid="9196602029960380112">"Zmienić region na: %s?"</string>
     <string name="desc_notice_device_region_change" msgid="6702773189066944100">"Język %s będzie nadal ustawiony jako systemowy na tym urządzeniu"</string>
     <string name="desc_notice_device_region_change_for_preferred_language" msgid="408517366942324267">"%1$s zastąpi %2$s w Twoich preferowanych językach"</string>
     <string name="title_change_system_locale" msgid="4102991236063984803">"Zmienić język systemu na %s?"</string>
@@ -725,7 +731,7 @@
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Pamiętaj"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Aplikacje przestają działać, gdy blokujesz swoją przestrzeń"</b>\n"Gdy zablokujesz przestrzeń, działające w niej aplikacje zostaną zatrzymane i nie będziesz otrzymywać powiadomień z nich"</string>
     <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Przestrzenie prywatne nie są odpowiednie dla aplikacji, które muszą działać w tle lub wysyłać krytyczne powiadomienia (jak np. aplikacje medyczne). Wynika to z tego, że działanie w tle i powiadomienia są wstrzymywane, gdy przestrzeń jest zablokowana.\n\nZablokowanie przestrzeni prywatnej spowoduje też, że umieszczone w niej aplikacje nie będą widoczne w menedżerze uprawnień, panelu prywatności ani innych ustawieniach.\n\nPrzestrzeni prywatnej nie można przenieść na inne urządzenie. Jeśli chcesz z niej korzystać na innym urządzeniu, musisz utworzyć nową przestrzeń.\n\nKażdy, kto połączy Twoje urządzenie z komputerem lub zainstaluje na urządzeniu szkodliwe aplikacje, będzie mógł uzyskać dostęp do Twojej przestrzeni prywatnej."</string>
-    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Przestrzenie prywatne nie są odpowiednie dla aplikacji, które muszą działać w tle lub wysyłać krytyczne powiadomienia (jak np. aplikacje medyczne). Wynika to z tego, że działanie w tle i powiadomienia są wstrzymywane, gdy przestrzeń jest zablokowana.\n\nZablokowanie przestrzeni prywatnej spowoduje też, że umieszczone w niej aplikacje nie będą też widoczne w menedżerze uprawnień, panelu prywatności ani innych ustawieniach.\n\nPrzestrzeni prywatnej nie można przywrócić na innym urządzeniu. Jeśli chcesz z niej korzystać na innym urządzeniu, musisz utworzyć nową przestrzeń.\n\nKażdy, kto połączy Twoje urządzenie z komputerem lub zainstaluje na urządzeniu szkodliwe aplikacje, będzie mógł uzyskać dostęp do Twojej przestrzeni prywatnej."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Przestrzenie prywatne nie są odpowiednie dla aplikacji, które muszą działać w tle lub wysyłać krytyczne powiadomienia (jak np. aplikacje medyczne). Wynika to z tego, że działanie w tle i powiadomienia są wstrzymywane, gdy przestrzeń jest zablokowana.\n\nZablokowanie przestrzeni prywatnej spowoduje też, że umieszczone w niej aplikacje nie będą widoczne w menedżerze uprawnień, panelu prywatności ani innych ustawieniach.\n\nPrzestrzeni prywatnej nie można przywrócić na innym urządzeniu. Jeśli chcesz z niej korzystać na innym urządzeniu, musisz utworzyć nową przestrzeń.\n\nKażdy, kto połączy Twoje urządzenie z komputerem lub zainstaluje na urządzeniu szkodliwe aplikacje, będzie mógł uzyskać dostęp do Twojej przestrzeni prywatnej."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Więcej o przestrzeni prywatnej"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Potrwa to kilka chwil"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Konfiguruję przestrzeń prywatną…"</string>
@@ -990,7 +996,7 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Uruchomić urządzenie ponownie?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Szczegółowe logowanie NFC jest przeznaczone tylko dla programistów. Dodatkowe dane NFC są dołączane do raportów o błędach i mogą zawierać informacje prywatne. Uruchom urządzenie ponownie, aby zmienić to ustawienie."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Uruchom ponownie"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"Włączony"</string>
+    <string name="external_display_on" msgid="2560104443500154333">"Wł."</string>
     <string name="external_display_off" msgid="5634413756025351374">"Wyłączony"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Wyświetlacze zewnętrzne"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Wyświetlacz wbudowany"</string>
@@ -1013,8 +1019,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nie podłączono wyświetlacza"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Aby rozpocząć, podłącz wyświetlacz zewnętrzny lub użyj innego kabla"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Więcej opcji"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Przytrzymaj i przeciągnij, aby zmienić kolejność wyświetlaczy"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Pokaż odbicie lustrzane wbudowanego wyświetlacza"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Użyć nowych ustawień?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Jeśli wyświetlacz nie działa zgodnie z oczekiwaniami, możesz przywrócić poprzednie ustawienia"</string>
@@ -1582,8 +1587,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Pamięć wewnętrzna i podręczna"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Ustawienia pamięci"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI: <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Aby wyświetlić, wybierz zapisaną sieć"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -1685,7 +1689,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Wspólne"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Wspólne ustawienia"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Tryb centrali"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Widżety na ekranie blokady (beta)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widżety na ekranie blokady"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Kiedy automatycznie wyświetlać"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nigdy"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Podczas ładowania"</string>
@@ -1949,8 +1957,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Narysuj wzór odblokowania"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Naciśnij Menu, aby uzyskać pomoc."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Podnieś palec, gdy skończysz"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Połącz punkty (co najmniej <xliff:g id="NUMBER">%d</xliff:g>)"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Połącz co najmniej <xliff:g id="NUMBER">%d</xliff:g> kropki. Spróbuj ponownie."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Wzór zapisany"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Narysuj ponownie wzór, aby go potwierdzić"</string>
@@ -2413,6 +2420,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Tryb nawigacji, obrót ekranu"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Prześlij opinię"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Wypełnij ankietę"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Ankieta dotycząca ułatwień dostępu"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Prześlij opinię"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Jak oceniasz ciemny motyw?"</string>
@@ -2571,7 +2579,7 @@
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokalizacja"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Rozmiar"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Zanikanie, gdy nie jest używany"</string>
-    <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Zanika po kilku sekundach, aby nie utrudniać oglądania ekranu"</string>
+    <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Zanika po kilku sekundach, aby nie zasłaniać ekranu"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Przezroczystość, gdy nie jest używany"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Przezroczyste"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Nieprzezroczyste"</string>
@@ -2589,10 +2597,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Opcje"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Czas"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standardowy"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Standardowy ciemny motyw"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Standardowy ciemny motyw"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Włącza ciemny motyw na urządzeniu i w aplikacjach, które go obsługują"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Rozszerzony"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Rozszerzony ciemny motyw"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Rozszerzony ciemny motyw"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Automatycznie stosuje ciemny motyw w większości aplikacji, które go nie obsługują, by poprawić dostępność i czytelność. Niektóre mogą się wyświetlać nieprawidłowo."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"wymuś odwrócenie, odwrócenie kolorów, kontrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Usuwaj animacje"</string>
@@ -2623,7 +2631,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Odwracaj kolory"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Skrót do odwrócenia kolorów"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Odwrócenie kolorów zamienia jasne obszary na ciemne. Z kolei ciemne obszary zamienia na jasne."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Pamiętaj&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Zmienią się kolory w multimediach i na obrazach&lt;/li&gt; &lt;li&gt; Odwrócenie kolorów działa we wszystkich aplikacjach&lt;/li&gt; &lt;li&gt; Ciemne tło można też wyświetlać w ciemnym motywie&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Pamiętaj&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Zmienią się kolory w multimediach i na obrazach&lt;/li&gt; &lt;li&gt; Odwrócenie kolorów działa we wszystkich aplikacjach&lt;/li&gt; &lt;li&gt; Ciemne tło można też wyświetlać w ciemnym motywie&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"przejść do ustawień"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Automatyczne kliknięcie (po czasie oczekiwania)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"O automatycznym kliknięciu (po czasie oczekiwania)"</string>
@@ -3390,7 +3398,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Włączyć systemowy certyfikat CA?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Wyłączyć systemowy certyfikat CA?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Trwale usunąć certyfikat CA użytkownika?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Używane przez aplikację lub usługę"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Ta pozycja zawiera"</string>
@@ -3431,6 +3441,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Usuń użytkownika <xliff:g id="USER_NAME">%1$s</xliff:g> z tego urządzenia"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Ustawienia ekranu blokady"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Dodawaj użytkowników na ekranie blokady"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Po zadokowaniu przełącz się na administratora"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Chcesz usunąć siebie?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Usunąć tego użytkownika?"</string>
@@ -3573,8 +3585,7 @@
     <string name="color_orange" msgid="216547825489739010">"Pomarańczowy"</string>
     <string name="color_purple" msgid="6603701972079904843">"Fioletowy"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Stan karty SIM"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"Stan karty SIM %1$d"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Karty SIM zostały zmienione"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Dotknij, by skonfigurować"</string>
@@ -3832,8 +3843,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Przyciemnienie tapety"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"przyciemnienie tapety"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtruj jasność tapety"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Włącz ciemny motyw"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"włącz ciemny motyw"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Włącz ciemny motyw"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"włącz ciemny motyw"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Zmień motyw urządzenia, aby używać ciemnego tła, które jest łagodniejsze dla oczu"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Brak zmian dotyczących wyświetlania}=1{{effect_1}}=2{{effect_1} i {effect_2}}=3{{effect_1}, {effect_2} i {effect_3}}few{{effect_1}, {effect_2} i # więcej}many{{effect_1}, {effect_2} i # więcej}other{{effect_1}, {effect_2} i # więcej}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Zezwalaj na wszystkie powiadomienia"</string>
@@ -3956,7 +3967,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Na ekranie blokady pokazuj tylko nowe powiadomienia"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automatycznie usuwaj już wyświetlone powiadomienia z ekranu blokady"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Pełna lista"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Widok kompaktowy"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Kompaktowe"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Powiadomienia na ekranie blokady"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Pokazuj rozmowy, domyślne i ciche"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Pokazuj rozmowy, domyślne i ciche"</string>
@@ -4602,7 +4613,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Ze względów bezpieczeństwa Ochrona zaawansowana wymaga, aby to ustawienie pozostało włączone"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Ze względów bezpieczeństwa Ochrona zaawansowana wymaga, aby to ustawienie pozostało wyłączone"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Ze względów bezpieczeństwa Ochrona zaawansowana uniemożliwia wykonanie tego działania"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Ta sieć korzysta z przestarzałej metody szyfrowania WEP, która może narazić Twoje dane na ryzyko. Połączenia WEP są blokowane przez Ochronę zaawansowaną."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Ustawienia"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Wyłącz"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Włącz"</string>
@@ -4779,7 +4789,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Ustawienie wyłączone czasowo z powodu oszczędzania baterii"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Wyłącz oszczędzanie baterii"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Czasowo włączony z powodu oszczędzania baterii"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Wypróbuj ciemny motyw"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Wypróbuj ciemny motyw"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Wydłuża czas pracy baterii"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Kafelki szybkich ustawień dla programisty"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Wyłącz czas oczekiwania autoryzacji adb"</string>
@@ -4810,10 +4820,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> jest też skrótem na ekranie blokady. Kliknij, aby to zmienić."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Obecna domyślna aplikacja portfela nie obsługuje tego gestu."</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Zmień domyślny portfel"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"gesty, skrót"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"płacenie, płatności"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Odwracaj aparat do selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Tryb nawigacji"</string>
@@ -5799,7 +5807,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Hasło"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Popraw zgodność"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Pomaga łączyć się niektórym urządzeniom, takim jak aparaty słuchowe, obniżając jakość dźwięku"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Wyłącza udostępnianie dźwięku, aby można było skonfigurować zgodność"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Aby zmienić ustawienia, wyłącz udostępnianie dźwięku"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Słuchaj dźwięku w pobliżu"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Udostępnianie dźwięku obsługuje Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Nazwa strumienia audio"</string>
@@ -5940,6 +5948,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Usuń PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Dodaj pomocniczy adres e-mail"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Potwierdź adres e-mail"</string>
+    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtry treści witryn"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtry witryn, blokowanie witryn, filtry przeglądarki, blokowanie witryn dla pełnoletnich, filtrowanie witryn, blokowanie wyników wyszukiwania, filtrowanie wyników wyszukiwania dla pełnoletnich, ograniczenia treści"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Pomagaj odfiltrowywać treści dla dorosłych w niektórych aplikacjach i przeglądarkach na tym telefonie. Treści te mogą nadal pojawiać się w innych aplikacjach i przeglądarkach oraz na innych urządzeniach."</string>
@@ -5983,4 +5993,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Potwierdzenie tożsamości działa z większą liczbą aplikacji"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Potwierdzenie tożsamości zapobiega niepożądanemu dostępowi do Twoich aplikacji. Teraz jest ono dostępne w każdej aplikacji korzystającej z odblokowywania odciskiem palca lub przez rozpoznawanie twarzy."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Wyświetl szczegóły"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

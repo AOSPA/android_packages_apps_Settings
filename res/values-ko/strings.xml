@@ -81,6 +81,12 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"청각 보조 기기 설정"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"단축키, 보청기 호환성"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"미리 설정"</string>
+    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
+    <skip />
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"청능사가 사전 설정한 프로그램이 없습니다."</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"사전 설정을 업데이트할 수 없음"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"주변 소리"</string>
@@ -685,7 +691,7 @@
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"다음 화면에서 기기 PIN, 패턴 또는 비밀번호를 입력해야 합니다."</string>
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"비공개 스페이스 자동 잠금"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"일정 시간 동안 기기를 사용하지 않은 경우 비공개 스페이스를 자동으로 잠글 수 있습니다."</string>
-    <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"기기를 잠글 때마다"</string>
+    <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"기기가 잠길 때마다"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"화면 자동 잠금 시간 후 5분 경과"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"기기를 다시 시작한 후에만"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"비공개 스페이스 숨기기"</string>
@@ -1683,7 +1689,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"커뮤니티"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"커뮤니티 설정"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"허브 모드"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"잠금 화면의 위젯(베타)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"잠금 화면의 위젯"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"자동으로 표시되는 경우"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"사용 안함"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"충전 중"</string>
@@ -1947,8 +1957,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"잠금 해제 패턴을 그리세요."</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"도움말을 보려면 메뉴를 누르세요."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"완료되면 손가락을 뗍니다."</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"최소 <xliff:g id="NUMBER">%d</xliff:g>개의 점을 연결하세요."</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"<xliff:g id="NUMBER">%d</xliff:g>개 이상의 점을 연결해야 합니다. 다시 시도하세요."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"패턴이 기록되었습니다."</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"확인을 위해 패턴을 다시 그리세요."</string>
@@ -2411,6 +2420,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"탐색 모드, 화면 회전"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"의견 보내기"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"설문조사 참여"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"접근성 설문조사"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"의견 공유"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"어두운 테마에 얼마나 만족하시나요?"</string>
@@ -2587,10 +2597,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"옵션"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"시간 설정"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"표준"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"표준 어두운 테마"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"표준 어두운 테마"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"어두운 테마를 지원하는 기기 및 앱에 어두운 테마를 사용 설정합니다."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"확장형"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"확장형 어두운 테마"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"확장형 어두운 테마"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"어두운 테마를 지원하지 않는 대부분의 앱에 어두운 테마를 자동으로 적용합니다. 이렇게 하면 접근성과 가독성이 개선될 수 있지만 일부 앱이 잘못 표시될 수 있습니다."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"강제 반전, 색상 반전, 대비"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"애니메이션 삭제"</string>
@@ -2621,7 +2631,8 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"색상 반전 사용"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"색상 반전 바로가기"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"색상 반전은 밝은 색상을 어두운 색상으로, 어두운 색상을 밝은 색상으로 바꿉니다."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;주의사항&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; 미디어 및 이미지에서 색상이 바뀝니다.&lt;/li&gt; &lt;li&gt; 색상 반전은 모든 앱에 적용됩니다.&lt;/li&gt; &lt;li&gt; 어두운 배경을 표시하려면 어두운 테마를 대신 사용해도 됩니다.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for accessibility_display_inversion_preference_subtitle (8748527808247125417) -->
+    <skip />
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"settings 입력"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"자동 클릭(포인터 정지 시간)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"자동 클릭 정보(체류 시간)"</string>
@@ -3388,7 +3399,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"시스템 CA 인증서를 사용하시겠습니까?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"시스템 CA 인증서를 사용 중지하시겠습니까?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"사용자 CA 인증서를 영구 삭제하시겠습니까?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"사용처"</string>
     <string name="credential_contains" msgid="3146519680449595771">"이 항목 포함사항"</string>
@@ -3429,6 +3442,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"이 기기에서 <xliff:g id="USER_NAME">%1$s</xliff:g>님 삭제"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"잠금 화면 설정"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"잠금 화면에서 사용자 추가"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"도킹 시 관리자로 전환"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"본인을 삭제하시겠습니까?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"사용자를 삭제하시겠습니까?"</string>
@@ -3829,8 +3844,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"배경화면 밝기 낮추기"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"배경화면 밝기 낮추기"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"배경화면 밝기 필터링"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"어두운 테마 사용"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"어두운 테마 사용"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"어두운 테마 사용"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"어두운 테마 사용"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"기기 테마를 어두운 배경으로 전환하여 눈의 피로도 줄이기"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{디스플레이 변경사항 없음}=1{{effect_1}}=2{{effect_1} 및 {effect_2}}=3{{effect_1}, {effect_2}, {effect_3}}other{{effect_1}, {effect_2} 외 #개}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"모든 알림 허용"</string>
@@ -3953,7 +3968,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"잠금 화면에 새 알림만 표시"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"잠금 화면에서 이미 본 알림 자동으로 삭제"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"전체 목록"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"간단히 보기"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"간단히"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"잠금 화면에 알림 표시"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"대화, 기본 및 무음 알림 표시"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"모든 대화와 기본 및 무음 알림 표시"</string>
@@ -4599,7 +4614,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"보안을 위해 고급 보호를 사용하려면 이 설정을 계속 사용 설정해야 합니다."</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"보안을 위해 고급 보호를 사용하려면 이 설정을 계속 사용 중지해야 합니다."</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"보안을 위해 고급 보호 기능이 이 작업을 차단합니다"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"이 네트워크는 데이터를 위험에 빠뜨릴 수 있는 오래된 암호화 방법인 WEP를 사용합니다. 고급 보호에서 WEP 연결을 차단합니다."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"설정"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"사용 중지"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"사용 설정"</string>
@@ -4776,7 +4790,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"절전 모드로 인해 일시적으로 사용 중지됨"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"절전 모드 사용 중지"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"절전 모드로 인해 일시적으로 사용 중지됨"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"어두운 테마 사용해 보기"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"어두운 테마 사용해 보기"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"배터리 수명 연장에 도움이 됩니다."</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"빠른 설정 개발자 타일"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb 승인 시간 제한 사용 중지"</string>
@@ -4807,10 +4821,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>은(는) 잠금 화면 바로가기로도 설정되어 있습니다. 변경하려면 탭하세요."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"현재 기본 월렛 앱은 이 동작을 지원하지 않습니다"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"기본 월렛 변경"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"동작, 바로가기"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"결제, 결제"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"뒤집어서 셀피용 카메라로 전환"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"탐색 모드"</string>
@@ -5935,6 +5947,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN 삭제"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"복구 이메일 추가"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"이메일을 확인하세요"</string>
+    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"웹사이트 콘텐츠 필터"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"웹사이트 필터, 사이트 차단, 브라우저 필터, 선정적인 사이트 차단, 사이트 필터링, 검색 결과 차단, 선정적인 검색 결과 필터링, 콘텐츠 제한"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"이 휴대전화의 일부 앱과 브라우저에서 선정적인 콘텐츠를 필터링하는 데 도움이 됩니다. 다른 앱, 기기 또는 브라우저에는 선정적인 콘텐츠가 계속 표시될 수 있습니다."</string>
@@ -5978,4 +5992,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"더 많은 앱에서 본인 확인 사용 가능"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"본인 확인은 앱에 대한 무단 액세스를 방지합니다. 이제 지문 또는 얼굴 인식 잠금 해제를 사용하는 모든 앱에서 본인 확인을 사용할 수 있습니다."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"세부정보 보기"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>
