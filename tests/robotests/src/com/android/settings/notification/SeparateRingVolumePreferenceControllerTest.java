@@ -20,7 +20,9 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Application;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -28,6 +30,8 @@ import android.content.res.Resources;
 import android.media.AudioManager;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
@@ -68,7 +72,8 @@ public class SeparateRingVolumePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowContext = ShadowApplication.getInstance();
+        ShadowApplication shadowContext =
+                shadowOf((Application) ApplicationProvider.getApplicationContext());
         shadowContext.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
         shadowContext.setSystemService(Context.AUDIO_SERVICE, mAudioManager);
         shadowContext.setSystemService(Context.VIBRATOR_SERVICE, mVibrator);

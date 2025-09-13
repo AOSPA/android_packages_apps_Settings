@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Informationen zur Audioausgabe"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Audio an dein Hörgerät oder den Lautsprecher deines Smartphones weiterleiten lassen"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Ähnlich"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Mit <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> Dateien schneller senden"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Wenn du Dateien über die schnellste Möglichkeit mit Android-Geräten und PCs in der Nähe teilen möchtest, probiere <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> für Windows aus"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> ausprobieren"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Schnellste Dateifreigabe zwischen Android-Geräten und mit PCs über unsere <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> App für Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Klingeltöne und Wecker"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio bei Anrufen"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Medien- und Systemtöne"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio deaktivieren"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Deaktiviert die Bluetooth LE Audio-Funktion, wenn das Gerät LE Audio-Hardwarefunktionen unterstützt."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio-Modus"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Vorschau der Benutzerroberfläche für die Übertragung per Bluetooth LE Audio aktivieren"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Aktiviert die Vorschau für die Benutzeroberfläche der LE Audiofreigabe, einschließlich der persönlichen Audiofreigabe und der privaten Übertragung"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Ein/Aus für LE Audio in Gerätedetails"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Audio-Zulassungsliste umgehen"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio wird standardmäßig verwendet, selbst wenn ein LE Audio-Peripheriegerät nicht die Kriterien der Zulassungsliste erfüllt."</string>
@@ -994,12 +992,12 @@
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Neu starten"</string>
     <string name="external_display_on" msgid="2560104443500154333">"An"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Aus"</string>
-    <string name="external_display_settings_title" msgid="3865786552022665355">"Externe Anzeigen"</string>
-    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Integriertes Display"</string>
+    <string name="external_display_settings_title" msgid="3865786552022665355">"Externe Displays und Bildschirme"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Interner Bildschirm"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universeller Cursor"</string>
-    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Cursor zwischen Displays bewegen"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Cursor zwischen Bildschirmen bewegen"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Externes Display verwenden"</string>
-    <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Displayauflösung"</string>
+    <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Bildschirmauflösung"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"Standardverhalten bei Verbindung"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Als separates Display verwenden"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Integriertes Display spiegeln"</string>
@@ -1011,13 +1009,13 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Das Ändern der Ausrichtung oder der Auflösung kann dazu führen, dass Apps, die momentan ausgeführt werden, angehalten werden"</string>
-    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"Kein Display angeschlossen\n\nSchließe ein externes Display an oder verwende ein anderes Kabel"</string>
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"Kein Bildschirm angeschlossen\n\nSchließe einen externen Bildschirm an oder verwende ein anderes Kabel"</string>
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Kein Display angeschlossen"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Schließe ein externes Display an, um zu beginnen, oder verwende ein anderes Kabel"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Weitere Optionen"</string>
     <!-- no translation found for external_display_topology_hint (885396727047321347) -->
     <skip />
-    <string name="external_display_mirroring_title" msgid="2688288527687724603">"Integriertes Display spiegeln"</string>
+    <string name="external_display_mirroring_title" msgid="2688288527687724603">"Bildschirminhalt dieses Geräts spiegeln"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Neue Einstellungen verwenden?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Wenn dein Display nicht wie gewünscht funktioniert, kannst du zu deinen vorherigen Einstellungen zurückkehren"</string>
     <string name="external_display_resolution_change_dialog_confirm" msgid="8451683005995976984">"Einstellungen verwenden"</string>
@@ -1408,8 +1406,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Standardbild"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR-Bild"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Diese Einstellung wirkt sich nur auf Bilder und Videos aus, die HDR (High Dynamic Range) unterstützen."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Intensität: Du kannst die Intensität des HDR-Effekts verringern oder erhöhen."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Weißabgleich des Bildschirms"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Apps nach Zuklappen weiter verwenden"</string>
@@ -2590,7 +2587,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Vergrößerung bei App-Übergängen aktualisieren"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Ein/Aus-Taste beendet Anruf"</string>
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Optionen"</string>
-    <string name="dark_theme_timing_category" msgid="8115211396437085819">"Zeitliche Planung"</string>
+    <string name="dark_theme_timing_category" msgid="8115211396437085819">"Zeitplan"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Standardmäßiges dunkles Design"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Das dunkle Design wird für dein Gerät und Apps aktiviert, die das dunkle Design unterstützen"</string>
@@ -3393,6 +3390,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"System-CA-Zertifikat aktivieren?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"System-CA-Zertifikat deaktivieren?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"CA-Zertifikat des Nutzers endgültig entfernen?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Wird verwendet von"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Dieser Eintrag beinhaltet"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 Nutzerschlüssel"</string>
@@ -5965,23 +5964,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Ein Fehler ist aufgetreten"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Versuch es später noch einmal"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Zurück"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Die Identitätsüberprüfung funktioniert mit weiteren Apps"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Die Identitätsüberprüfung verhindert unerwünschten Zugriff auf deine Apps. Jetzt für alle Apps mit Entsperrung per Fingerabdruck oder Gesichtserkennung verfügbar."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Details anzeigen"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Die Identitätsüberprüfung funktioniert mit weiteren Apps"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Neu:\n"<ul><li>"Die Identitätsüberprüfung bietet zusätzlichen Schutz für alle Apps mit Entsperrung per Fingerabdruck oder Gesichtserkennung"</li>\n<li>"In Zukunft wird die Identitätsüberprüfung möglicherweise weitere Methoden bieten, mit denen du deine Identität bestätigen und Apps auf deinem Gerät schützen kannst. "<a href="https://support.google.com/android?p=identity_check">"Weitere Informationen dazu, wann und wo Schutzmaßnahmen angewendet werden"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Identitätsüberprüfung und Smartwatch"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Wenn eine Smartwatch verbunden ist, bietet die Identitätsüberprüfung weitere Möglichkeiten, mit denen du deine Identität bestätigen und unerwünschten Zugriff auf Apps verhindern kannst"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Identitätsüberprüfung und Smartwatch"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Neu:\n"<ul><li>"Wenn du eine Smartwatch verbindest, kannst du entweder biometrische Daten oder deine PIN verwenden, um auf Apps zuzugreifen, wenn du dich nicht an einem vertrauenswürdigen Ort befindest"</li>\n<li>"In Zukunft wird die Identitätsüberprüfung möglicherweise weitere Methoden bieten, mit denen du deine Identität bestätigen und Apps auf deinem Gerät schützen kannst. "<a href="https://support.google.com/android?p=identity_check">"Weitere Informationen dazu, wann und wo Schutzmaßnahmen angewendet werden"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Weitere Einstellungen"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Autofill, Benachrichtigungen und mehr"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Datenschutzeinstellungen"</string>

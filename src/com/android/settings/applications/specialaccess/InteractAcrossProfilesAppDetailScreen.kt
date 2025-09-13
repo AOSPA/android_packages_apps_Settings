@@ -16,20 +16,22 @@
 
 package com.android.settings.applications.specialaccess
 
-import android.Manifest.permission.USE_FULL_SCREEN_INTENT
-import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
+import android.content.pm.CrossProfileApps
 import android.os.Bundle
+import android.os.UserManager
+import android.provider.Settings.ACTION_MANAGE_CROSS_PROFILE_ACCESS
 import androidx.core.net.toUri
 import com.android.settings.R
+import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetails
+import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.flags.Flags
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.BooleanValuePreference
@@ -38,27 +40,27 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-@ProvidePreferenceScreen(AppInfoFullScreenIntentScreen.KEY, parameterized = true)
-open class AppInfoFullScreenIntentScreen(context: Context, override val arguments: Bundle) :
+@ProvidePreferenceScreen(InteractAcrossProfilesAppDetailScreen.KEY, parameterized = true)
+open class InteractAcrossProfilesAppDetailScreen(context: Context, override val arguments: Bundle) :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider {
 
     private val packageName = arguments.getString("app")!!
 
     private val appInfo = context.packageManager.getApplicationInfo(packageName, 0)
 
-    private val storage: KeyValueStore = FullScreenIntentStorage(context, appInfo, packageName)
+    private val storage: KeyValueStore =
+        InteractAcrossProfilesStorage(context, appInfo, packageName)
 
     override val key: String
         get() = KEY
 
     override val screenTitle: Int
-        get() = R.string.full_screen_intent_title
+        get() = R.string.interact_across_profiles_title
 
     override val highlightMenuKey: Int
         get() = R.string.menu_key_apps
@@ -73,70 +75,68 @@ open class AppInfoFullScreenIntentScreen(context: Context, override val argument
 
     override fun getSummary(context: Context): CharSequence =
         context.getString(
-            when (storage.getBoolean(FullScreenIntentMainSwitch.KEY)) {
-                true -> R.string.app_permission_summary_allowed
-                else -> R.string.app_permission_summary_not_allowed
+            when (storage.getBoolean(InteractAcrossProfilesMainSwitch.KEY)) {
+                true -> R.string.interact_across_profiles_summary_allowed
+                else -> R.string.interact_across_profiles_summary_not_allowed
             }
         )
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        Intent("android.settings.MANAGE_APP_USE_FULL_SCREEN_INTENT").apply {
+        Intent(ACTION_MANAGE_CROSS_PROFILE_ACCESS).apply {
             data = "package:${appInfo.packageName}".toUri()
+            // Only one switch so no need to highlight it with [IntentUtils.highlightPreference].
         }
 
-    override fun isFlagEnabled(context: Context) = false
+    override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
+
+    override fun extras(context: Context): Bundle? =
+        Bundle(1).apply { putString(KEY_EXTRA_PACKAGE_NAME, arguments.getString("app")) }
 
     override fun hasCompleteHierarchy() = false
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) { +FullScreenIntentMainSwitch(storage) }
+        preferenceHierarchy(context) { +InteractAcrossProfilesMainSwitch(storage) }
 
     companion object {
-        const val KEY = "device_state_app_info_full_screen_intent"
+        const val KEY = "special_access_interact_across_profiles_app_detail"
+
+        const val KEY_EXTRA_PACKAGE_NAME = "package_name"
 
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
-            val repo = AppListRepositoryImpl(context)
-            repo.loadApps(context.userId).forEach { app ->
-                if (app.hasFullScreenPermission(context)) {
-                    emit(Bundle(1).apply { putString("app", app.packageName) })
-                }
-            }
-        }
+            val packageManager = context.packageManager
+            val userManager = context.getSystemService(UserManager::class.java)
+            val crossProfileApps = context.getSystemService(CrossProfileApps::class.java)
 
-        fun ApplicationInfo.hasFullScreenPermission(context: Context): Boolean {
-            return try {
-                val packageInfo: PackageInfo =
-                    context.packageManager.getPackageInfo(
-                        this.packageName,
-                        PackageManager.GET_PERMISSIONS,
-                    )
-                val requestedPermissions = packageInfo.requestedPermissions
-                requestedPermissions?.contains(USE_FULL_SCREEN_INTENT) == true
-            } catch (e: Exception) {
-                false
-            }
+            InteractAcrossProfilesSettings.collectConfigurableApps(
+                    packageManager,
+                    userManager,
+                    crossProfileApps,
+                )
+                .forEach { appUser ->
+                    emit(Bundle(1).apply { putString("app", appUser.first.packageName) })
+                }
         }
     }
 }
 
-private class FullScreenIntentMainSwitch(private val storage: KeyValueStore) :
+private class InteractAcrossProfilesMainSwitch(private val storage: KeyValueStore) :
     BooleanValuePreference, MainSwitchPreferenceBinding {
 
     override val key
         get() = KEY
 
     override val title
-        get() = R.string.permit_full_screen_intent
+        get() = R.string.interact_across_profiles_title
 
     override fun storage(context: Context) = storage
 
     companion object {
-        const val KEY = "device_state_app_ops_settings_switch"
+        const val KEY = "device_state_interact_across_profiles_settings_switch"
     }
 }
 
-private class FullScreenIntentStorage(
+private class InteractAcrossProfilesStorage(
     private val context: Context,
     private val appInfo: ApplicationInfo,
     private val packageName: String,
@@ -148,26 +148,9 @@ private class FullScreenIntentStorage(
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any> getValue(key: String, valueType: Class<T>): T {
-        return hasGrantedPermission(context, packageName, appInfo) as T
+        return InteractAcrossProfilesDetails.isInteractAcrossProfilesEnabled(context, packageName)
+            as T
     }
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {}
-
-    companion object {
-        fun hasGrantedPermission(
-            context: Context,
-            packageName: String,
-            appInfo: ApplicationInfo,
-        ): Boolean {
-            val appOpsManager =
-                context.getSystemService(Context.APP_OPS_SERVICE) as? AppOpsManager ?: return false
-            val mode =
-                appOpsManager.checkOpNoThrow(
-                    AppOpsManager.OPSTR_USE_FULL_SCREEN_INTENT,
-                    appInfo.uid,
-                    packageName,
-                )
-            return mode == AppOpsManager.MODE_ALLOWED || mode == AppOpsManager.MODE_FOREGROUND
-        }
-    }
 }

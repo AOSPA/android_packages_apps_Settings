@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Адключыць Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Адключае функцыю Bluetooth LE audio, калі прылада падтрымлівае апаратнае забеспячэнне LE audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Рэжым Bluetooth LE Audio"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Уключыць перадпрагляд інтэрфейсу для Bluetooth LE Audio Broadcast"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Уключае перадпрагляд інтэрфейсу абагульвання LE Audio, у тым ліку абагульвання асабістага аўдыя і прыватнай трансляцыі"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Паказ пераключальніка LE audio у Звестках пра прыладу"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Абыходзіць белы спіс Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Выкарыстоўваць LE Audio стандартна, нават калі перыферыйная прылада LE Audio не адпавядае крытэрыям белага спіса."</string>
@@ -1015,8 +1013,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Няма падключаных дысплэяў"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Каб пачаць, падключыцеся да знешняга дысплэя ці паспрабуйце выкарыстаць іншы кабель"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Дадатковыя параметры"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Націсніце і перацягніце, каб змяніць парадак дысплэяў"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Адлюстроўваць убудаваны дысплэй"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Прымяніць новыя налады?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Калі выява на дысплэі вас не задавальняе, вы можаце вярнуцца да папярэдніх налад"</string>
@@ -1584,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Сховішча і кэш"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Налады сховішча"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"EID: <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Для прагляду выберыце захаваную сетку"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -3392,6 +3388,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Уключыць сістэмны сертыфікат ЦС?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Адключыць сістэмны сертыфікат ЦС?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Канчаткова выдаліць сертыфікат карыстальніка CA?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Выкарыстоўваецца праграмай"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Гэты запіс змяшчае:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 ключ карыстальніка"</string>
@@ -3573,8 +3571,7 @@
     <string name="color_orange" msgid="216547825489739010">"Аранжавы"</string>
     <string name="color_purple" msgid="6603701972079904843">"Фіялетавы"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Статус SIM-карты"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"Стан SIM-карты: %1$d"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> дБм <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"SIM-карты зменены"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Краніце, каб наладзіць"</string>
@@ -5802,7 +5799,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Пароль"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Паляпшэнне сумяшчальнасці"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Памагае падключыць некаторыя прылады (напрыклад, слыхавыя апараты) шляхам зніжэння якасці аўдыя"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Адключае абагульванне аўдыя для наладжвання сумяшчальнасці"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Каб змяніць налады, выключыце абагульванне аўдыя"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Слухайце аўдыя паблізу"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Функцыя \"Абагульванне аўдыя\" падтрымлівае тэхналогію Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Назва аўдыяплыні"</string>

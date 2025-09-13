@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Disable Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Disables Bluetooth LE audio feature if the device supports LE audio hardware capabilities."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio mode"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Enable Bluetooth LE Audio Broadcast UI preview"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Enables the LE Audio Sharing UI preview including personal audio sharing and private broadcast"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Show LE audio toggle in Device Details"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bypass Bluetooth LE Audio Allowlist"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Use LE Audio by default even if LE Audio peripheral hasn\'t been verified to meet Allowlist criteria."</string>
@@ -1949,8 +1947,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Draw an unlock pattern"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Press Menu for help."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Release finger when done"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Connect at least <xliff:g id="NUMBER">%d</xliff:g> dots"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Connect at least <xliff:g id="NUMBER">%d</xliff:g> dots. Try again."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Pattern recorded"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Draw pattern again to confirm"</string>
@@ -3390,6 +3387,7 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Enable the system CA certificate?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Disable the system CA certificate?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Permanently remove the user CA certificate?"</string>
+    <string name="trusted_credentials_category_content_description" msgid="3231536425237166912">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA certificates, double tap to expand or collapse"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Being used by"</string>
     <string name="credential_contains" msgid="3146519680449595771">"This entry contains"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 user key"</string>
@@ -4810,10 +4808,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> is also your lock screen shortcut. Tap to change it."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Your current default wallet app does not support this gesture"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Change default wallet"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"gestures, shortcut"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"pay, payments"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Flip camera for selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigation mode"</string>

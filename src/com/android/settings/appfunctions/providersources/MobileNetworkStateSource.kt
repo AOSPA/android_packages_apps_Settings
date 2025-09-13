@@ -69,7 +69,8 @@ class MobileNetworkStateSource : DeviceStateSource {
                 DeviceStateItem(
                     key = "mobile_data_used_$subId",
                     jsonValue = getDataUsedString(context, subId),
-                    hintText = "Data used of subscription ID $subId in this cycle",
+                    hintText =
+                        "Data used of subscription ID $subId in this cycle | This SIM data usage screen shows the amount of data each app has consumed from a specific SIM card.",
                 ),
                 DeviceStateItem(
                     key = "mobile_network_name_$subId",
@@ -81,11 +82,6 @@ class MobileNetworkStateSource : DeviceStateSource {
                     key = "phone_number_$subId",
                     jsonValue = SubscriptionUtil.getBidiFormattedPhoneNumber(context, it),
                     hintText = "Phone number of subscription ID $subId",
-                ),
-                DeviceStateItem(
-                    key = "imei_$subId",
-                    jsonValue = getImei(telephonyManager),
-                    hintText = "IMEI of subscription ID $subId",
                 ),
                 DeviceStateItem(
                     key = "data_roaming_enabled_$subId",
@@ -139,12 +135,6 @@ class MobileNetworkStateSource : DeviceStateSource {
         val template: CharSequence = context.getText(R.string.data_used_formatted)
 
         return TextUtils.expandTemplate(template, number, units).toString()
-    }
-
-    private fun getImei(telephonyManager: TelephonyManager): String {
-        val phoneType = telephonyManager.currentPhoneType
-        return if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) telephonyManager.meid ?: String()
-        else telephonyManager.imei ?: String()
     }
 
     private fun getPreferredNetworkMode(context: Context, subId: Int): String {

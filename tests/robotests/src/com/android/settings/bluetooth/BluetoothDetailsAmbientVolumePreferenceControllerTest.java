@@ -22,7 +22,6 @@ import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceContro
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -38,20 +37,15 @@ import com.android.settingslib.bluetooth.hearingdevices.ui.AmbientVolumeUiContro
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 /** Tests for {@link BluetoothDetailsAmbientVolumePreferenceController}. */
-@RunWith(RobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowThreadUtils.class
-})
+@Config(shadows = { ShadowThreadUtils.class })
 public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
         BluetoothDetailsControllerTestBase {
     @Rule
@@ -73,14 +67,10 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
     @Before
     public void setUp() {
         super.setUp();
-
-        mContext = spy(mContext);
-
         when(mBluetoothManager.getProfileManager()).thenReturn(mProfileManager);
         when(mBluetoothManager.getEventManager()).thenReturn(mEventManager);
-        mController = spy(
-                new BluetoothDetailsAmbientVolumePreferenceController(mContext, mBluetoothManager,
-                        mFragment, mCachedDevice, mLifecycle, mUiController));
+        mController = new BluetoothDetailsAmbientVolumePreferenceController(mContext,
+                mBluetoothManager, mFragment, mCachedDevice, mLifecycle, mUiController);
 
         PreferenceCategory deviceControls = new PreferenceCategory(mContext);
         deviceControls.setKey(KEY_HEARING_DEVICE_GROUP);

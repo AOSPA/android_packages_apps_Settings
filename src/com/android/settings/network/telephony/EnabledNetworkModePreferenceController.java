@@ -30,6 +30,7 @@ import static com.android.settings.network.telephony.TelephonyConstants.RadioAcc
 import android.app.AlertDialog;
 import static com.android.settings.network.telephony.mode.NetworkModes.addNrToLteNetworkMode;
 import static com.android.settings.network.telephony.mode.NetworkModes.reduceNrToLteNetworkMode;
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,6 +41,8 @@ import android.content.res.Resources;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.provider.Settings;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.RadioAccessFamily;
@@ -72,6 +75,7 @@ import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.network.telephony.mode.NetworkModes;
 import com.android.settings.network.telephony.NetworkModeChoicesProto.EnabledNetworks;
 import com.android.settings.network.telephony.NetworkModeChoicesProto.UiOptions;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -437,7 +441,7 @@ public class EnabledNetworkModePreferenceController extends
                 boolean networkType2gEnable = (currentlyAllowedNetworkTypes & BITMASK_2G) != 0;
                 mDisplay2gOptions =
                         carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)
-                                && networkType2gEnable;
+                                && networkType2gEnable && !isDisabledByAdmin();
                 if (flagHidePrefer3gItem) {
                     mDisplay3gOptions = carrierConfig.getBoolean(
                             CarrierConfigManager.KEY_PREFER_3G_VISIBILITY_BOOL);
@@ -474,6 +478,15 @@ public class EnabledNetworkModePreferenceController extends
                     + " ,Display3gOptions:" + mDisplay3gOptions
                     + " ,Display4gOptions" + mLteEnabled
                     + " ,Show4gForLTE :" + mShow4gForLTE);
+        }
+
+        private EnforcedAdmin getEnforcedAdmin() {
+            return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(mContext,
+                    UserManager.DISALLOW_CELLULAR_2G, UserHandle.myUserId());
+        }
+
+        private boolean isDisabledByAdmin() {
+            return getEnforcedAdmin() != null;
         }
 
         void setPreferenceEntries() {

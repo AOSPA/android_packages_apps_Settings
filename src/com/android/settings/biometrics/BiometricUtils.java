@@ -17,7 +17,10 @@
 package com.android.settings.biometrics;
 
 
+import static android.content.pm.PackageManager.FEATURE_PC;
+
 import static com.android.settings.biometrics.BiometricEnrollActivity.EXTRA_SKIP_INTRO;
+import static com.android.settings.flags.Flags.biometricEnrollmentSkipSplitscreenChecksOnDesktop;
 
 import android.annotation.IntDef;
 import android.app.Activity;
@@ -52,6 +55,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupChooseLockGeneric;
+import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -572,5 +576,21 @@ public class BiometricUtils {
 
     private static String capitalize(final String input) {
         return Character.toUpperCase(input.charAt(0)) + input.substring(1);
+    }
+
+    /** Check if split screen enrollment is disabled. Note this is a temporary workaround. */
+    @Deprecated
+    public static boolean isSplitScreenEnrollmentDisabled(@NonNull Activity hostActivity) {
+        // TODO(b/419423592): Fix properly but allow desktop devices to bypass check for now
+        // A form factor check should not be needed. Instead, only prevent in cases
+        // where it won't work or requires new UI to be built to support it (i.e. udfps)
+        if (biometricEnrollmentSkipSplitscreenChecksOnDesktop()) {
+            if (hostActivity.getPackageManager().hasSystemFeature(FEATURE_PC)) {
+                return false;
+            }
+        }
+
+        return hostActivity.isInMultiWindowMode() &&
+                !ActivityEmbeddingUtils.isActivityEmbedded(hostActivity);
     }
 }

@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Desativar Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Desativa o recurso de Bluetooth LE Audio caso o hardware do dispositivo tenha essa opção."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Modo Bluetooth LE Audio"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Ativar a visualização da interface de transmissão do Bluetooth LE Audio"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Ativa a visualização da interface de compartilhamento do LE Audio, incluindo o compartilhamento de áudio pessoal e a transmissão particular"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Mostrar a chave do Bluetooth LE Audio nos Detalhes do dispositivo"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Ignorar lista de permissões do Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Usa o LE Audio por padrão, mesmo que o periférico dele não tenha sido verificado para atender aos critérios da lista de permissões."</string>
@@ -336,7 +334,7 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Horário de verão"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Horário padrão"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Selecionar por região"</string>
-    <string name="zone_menu_by_offset" msgid="543648951618438204">"Selecionar pelo desvio do GMT"</string>
+    <string name="zone_menu_by_offset" msgid="543648951618438204">"Selecionar por fuso GMT"</string>
     <string name="time_feedback_category_title" msgid="5942621686512255208">"Feedback"</string>
     <string name="keywords_time_feedback_category" msgid="4553921538559830393">"feedback, bug, horário, fuso, fuso horário"</string>
     <string name="time_feedback_title" msgid="7720948068042783614">"Enviar feedback sobre horário"</string>
@@ -1015,8 +1013,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nenhuma tela conectada"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Conecte uma tela externa para começar ou tente usar um cabo diferente"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Mais opções"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Pressione e arraste para reorganizar as telas"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Espelhar tela integrada"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Usar novas configurações?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Se a tela não estiver funcionando como você quer, é possível reverter para as configurações anteriores"</string>
@@ -1584,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Armazenamento e cache"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Configurações de armazenamento"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID: <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Selecione uma rede salva para ver"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -3392,6 +3388,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Ativar o certificado de CA do sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Desativar o certificado de CA do sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Remover permanentemente o certificado de CA do usuário?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Em uso por"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Esta entrada contém"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 chave de usuário"</string>
@@ -3573,8 +3571,7 @@
     <string name="color_orange" msgid="216547825489739010">"Laranja"</string>
     <string name="color_purple" msgid="6603701972079904843">"Roxo"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Status do chip"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"Status do chip: %1$d"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Seus chips foram trocados"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Toque para configurar"</string>
@@ -5797,7 +5794,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Senha"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Melhorar a compatibilidade"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Ajuda alguns dispositivos, como aparelhos auditivos, a se conectarem, reduzindo a qualidade do áudio"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Desativa o compartilhamento de áudio para configurar a compatibilidade"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Desative o compartilhamento de áudio para mudar as configurações"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Ouça o áudio próximo"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"O compartilhamento de áudio oferece suporte ao Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Nome do stream de áudio"</string>

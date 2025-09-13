@@ -23,8 +23,11 @@ import android.app.ActivityManager
 import android.app.role.RoleManager
 import android.app.settings.SettingsEnums
 import android.app.supervision.SupervisionManager
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.IntentFilter
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.BiometricPrompt
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
@@ -62,7 +65,36 @@ import com.android.settingslib.supervision.SupervisionLog.TAG
  */
 class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
 
+    private lateinit var mSupervisingUser: UserHandle
     @VisibleForTesting var mProfileStarted = false
+    private var mBiometricPromptShown = false
+
+    private val userStateChangeReceiver =
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                val userId = intent.getIntExtra(Intent.EXTRA_USER_HANDLE, -1)
+
+                when (intent.action) {
+                    Intent.ACTION_USER_STOPPED -> {
+                        if (mSupervisingUser.identifier != userId) {
+                            return
+                        }
+                        // Restart the supervising profile since it was stopped.
+                        val activityManager = getSystemService(ActivityManager::class.java)
+                        if (!activityManager.startProfile(mSupervisingUser)) {
+                            errorHandler("Unable to start supervising user")
+                            return
+                        } else {
+                            mProfileStarted = true
+                        }
+                        if (!mBiometricPromptShown) {
+                            showBiometricPrompt(mSupervisingUser.identifier)
+                            mBiometricPromptShown = true
+                        }
+                    }
+                }
+            }
+        }
 
     @VisibleForTesting
     val mAuthenticationCallback =
@@ -106,18 +138,22 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             )
             return
         }
+        val supervisingUser = supervisingUserHandle
+        if (supervisingUser == null) {
+            errorHandler("No supervising user exists, cannot verify credentials.")
+            return
+        }
+        mSupervisingUser = supervisingUser
+        val intentFilter = IntentFilter().apply { addAction(Intent.ACTION_USER_STOPPED) }
+        registerReceiver(userStateChangeReceiver, intentFilter, RECEIVER_NOT_EXPORTED)
 
         if (savedInstanceState != null) {
             mProfileStarted = savedInstanceState.getBoolean(KEY_PROFILE_STARTED, mProfileStarted)
+            mBiometricPromptShown =
+                savedInstanceState.getBoolean(KEY_BIOMETRIC_PROMPT_SHOWN, mBiometricPromptShown)
         } else {
             // BiometricPrompt persists through configuration change, so only create it on initial
             // activity creation.
-            val supervisingUser = supervisingUserHandle
-            if (supervisingUser == null) {
-                errorHandler("No supervising user exists, cannot verify credentials.")
-                return
-            }
-
             if (!isSupervisingCredentialSet) {
                 // Redirects to the setup supervision flow when credential is not set.
                 val setupIntent = Intent(this, SetupSupervisionActivity::class.java)
@@ -130,13 +166,17 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                     !SupervisionAuthController.getInstance(this).isSessionActive(taskId)
             ) {
                 val activityManager = getSystemService(ActivityManager::class.java)
-                if (!activityManager.startProfile(supervisingUser)) {
+                if (!activityManager.startProfile(mSupervisingUser)) {
                     errorHandler("Unable to start supervising user, cannot verify credentials.")
                     return
                 } else {
                     mProfileStarted = true
                 }
-                showBiometricPrompt(supervisingUser.identifier)
+                val isUserRunning = activityManager.isUserRunning(mSupervisingUser.identifier)
+                if (isUserRunning) {
+                    showBiometricPrompt(mSupervisingUser.identifier)
+                    mBiometricPromptShown = true
+                }
             } else {
                 Log.i(TAG, "Bypassing authentication due to active session")
                 setResult(RESULT_OK)
@@ -147,6 +187,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean(KEY_PROFILE_STARTED, mProfileStarted)
+        outState.putBoolean(KEY_BIOMETRIC_PROMPT_SHOWN, mBiometricPromptShown)
         super.onSaveInstanceState(outState)
     }
 
@@ -154,6 +195,7 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     @VisibleForTesting
     public override fun onDestroy() {
         super.onDestroy()
+        unregisterReceiver(userStateChangeReceiver)
         // Do not stop the profile on configuration change, since the authentication session in
         // BiometricPrompt is still active.
         if (mProfileStarted && isFinishing) {
@@ -259,5 +301,6 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         @VisibleForTesting const val EXTRA_FORCE_CONFIRMATION = "force_confirmation"
         // Whether the supervising profile was started by this activity
         const val KEY_PROFILE_STARTED = "profile_started"
+        const val KEY_BIOMETRIC_PROMPT_SHOWN = "biometric_prompt_shown"
     }
 }

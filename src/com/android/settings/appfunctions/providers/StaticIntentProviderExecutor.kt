@@ -54,14 +54,9 @@ class StaticIntentProviderExecutor(
         if (appFunctionType != this@StaticIntentProviderExecutor.appFunctionType) {
             return DeviceStateProviderExecutorResult(emptyList())
         }
-
         val states =
             staticIntents.map {
-                PerScreenDeviceStates(
-                    description = it.description,
-                    intentUri = it.intentUri,
-                    deviceStateItems = emptyList(),
-                )
+                PerScreenDeviceStates(description = it.description, intentUri = it.intentUri)
             }
         return DeviceStateProviderExecutorResult(states)
     }

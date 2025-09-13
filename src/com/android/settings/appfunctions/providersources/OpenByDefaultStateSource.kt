@@ -18,6 +18,7 @@ package com.android.settings.appfunctions.providersources
 
 import android.content.Context
 import android.content.pm.verify.domain.DomainVerificationManager
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.applications.intentpicker.IntentPickerUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
@@ -42,12 +43,14 @@ class OpenByDefaultStateSource : DeviceStateSource {
                     domainVerificationManager,
                     app.info.packageName,
                 )
-            val isEnabled = userState?.isLinkHandlingAllowed ?: false
+            val stringResId =
+                if (userState?.isLinkHandlingAllowed ?: false) R.string.app_launch_open_in_app
+                else R.string.app_launch_open_in_browser
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "preferred_settings_enabled_package_$packageName",
                     purpose = "preferred_settings_enabled_package_$packageName",
-                    jsonValue = isEnabled.toString(),
+                    jsonValue = context.getString(stringResId),
                     hintText = "App: $appName",
                 )
             )

@@ -25,12 +25,12 @@ import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.UserHandle
 import android.provider.Settings.ACTION_PICTURE_IN_PICTURE_SETTINGS
 import androidx.core.net.toUri
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
+import com.android.settings.applications.getPackageInfoWithActivities
 import com.android.settings.applications.specialaccess.SpecialAccessAppDetailScreen
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
@@ -54,6 +54,9 @@ open class PictureInPictureAppDetailScreen(context: Context, arguments: Bundle) 
     override val op
         get() = AppOpsManager.OP_PICTURE_IN_PICTURE
 
+    override val permission: String?
+        get() = null
+
     override val setModeByUid: Boolean?
         get() = false // set op mode by package
 
@@ -69,8 +72,7 @@ open class PictureInPictureAppDetailScreen(context: Context, arguments: Bundle) 
     override fun isFlagEnabled(context: Context) = context.isPictureInPictureEnabled()
 
     override fun isAvailable(context: Context) =
-        super.isAvailable(context) &&
-            hasPictureInPictureActivity(context, packageInfo?.applicationInfo)
+        super.isAvailable(context) && pictureInPictureFilter(context, packageInfo?.applicationInfo)
 
     override fun getMetricsCategory() = SettingsEnums.SETTINGS_MANAGE_PICTURE_IN_PICTURE_DETAIL
 
@@ -92,21 +94,14 @@ open class PictureInPictureAppDetailScreen(context: Context, arguments: Bundle) 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 
         fun parameters(context: Context, showSystemApp: Boolean) =
-            parameters(context, showSystemApp, ::hasPictureInPictureActivity)
+            parameters(context, showSystemApp, ::pictureInPictureFilter)
 
-        fun hasPictureInPictureActivity(context: Context, appInfo: ApplicationInfo?): Boolean {
+        fun pictureInPictureFilter(context: Context, appInfo: ApplicationInfo?): Boolean {
             if (appInfo == null) return false
             val packageInfo =
-                try {
-                    context.packageManager.getPackageInfoAsUser(
-                        appInfo.packageName,
-                        PackageManager.GET_ACTIVITIES,
-                        UserHandle.myUserId(),
-                    )
-                } catch (_: Exception) {
-                    return false
-                }
-            return packageInfo?.activities?.any(ActivityInfo::supportsPictureInPicture) == true
+                context.getPackageInfoWithActivities(appInfo.packageName) ?: return false
+
+            return packageInfo.activities?.any(ActivityInfo::supportsPictureInPicture) == true
         }
     }
 }

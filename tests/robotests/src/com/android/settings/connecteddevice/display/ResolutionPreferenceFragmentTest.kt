@@ -85,6 +85,32 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
 
     @Test
     @UiThreadTest
+    fun testModePreferences_areSortedByResolution() {
+        initFragment(mDisplays[0].id)
+        mHandler.flush()
+
+        val topPref = mPreferenceScreen.findPreference<PreferenceCategory>(TOP_OPTIONS_KEY)!!
+        val morePref = mPreferenceScreen.findPreference<PreferenceCategory>(MORE_OPTIONS_KEY)!!
+
+        val allPrefs = mutableListOf<Preference>()
+        (0 until topPref.preferenceCount).mapTo(allPrefs) { topPref.getPreference(it) }
+        (0 until morePref.preferenceCount).mapTo(allPrefs) { morePref.getPreference(it) }
+
+        // Splits W X H and ensure descending width and descending height
+        val resolutionComparator =
+            Comparator.comparingInt { pref: Preference ->
+                    pref.title.toString().split(" x ")[0].toInt()
+                }
+                .thenComparingInt { pref: Preference ->
+                    pref.title.toString().split(" x ")[1].toInt()
+                }
+                .reversed()
+
+        assertThat(allPrefs).isInOrder(resolutionComparator)
+    }
+
+    @Test
+    @UiThreadTest
     fun testOnSameDisplayModeClicked_noModeChange_dialogNotShown() {
         val display = mDisplays[0]
         initFragment(display.id)

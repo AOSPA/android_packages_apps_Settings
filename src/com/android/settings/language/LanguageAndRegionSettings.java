@@ -21,9 +21,16 @@ import static android.os.UserManager.DISALLOW_CONFIG_LOCALE;
 import static com.android.settings.flags.Flags.localeNotificationEnabled;
 import static com.android.settings.flags.Flags.regionalPreferencesApiEnabled;
 import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_APP_LOCALE;
+import static com.android.settings.localepicker.LocaleDialogFragment.ARG_DIALOG_TYPE;
+import static com.android.settings.localepicker.LocaleDialogFragment.ARG_MENU_ITEM_ID;
+import static com.android.settings.localepicker.LocaleDialogFragment.ARG_SELECTED_LOCALE;
+import static com.android.settings.localepicker.LocaleDialogFragment.ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED;
+import static com.android.settings.localepicker.LocaleDialogFragment.ARG_TARGET_LOCALE;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_ADD_SYSTEM_LOCALE;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE;
+import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE_WITH_CANCEL;
+import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_REMOVE_AND_CHANGE_SYSTEM_LOCALE;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_REMOVE_LOCALE;
 import static com.android.settings.localepicker.LocaleUtils.getUserLocaleList;
 import static com.android.settings.localepicker.LocaleUtils.mayAppendUnicodeTags;
@@ -45,6 +52,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
@@ -70,7 +78,6 @@ import java.util.Locale;
 // LINT.IfChange
 @SearchIndexable
 public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
-    protected static final String INTENT_LOCALE_KEY = "localeInfo";
     protected static final String EXTRA_SYSTEM_LOCALE_DIALOG_TYPE = "system_locale_dialog_type";
     protected static final String LOCALE_SUGGESTION = "locale_suggestion";
 
@@ -85,11 +92,18 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
     private static final String TAG_DIALOG_NOT_AVAILABLE = "dialog_not_available_locale";
     private static final String TAG_DIALOG_ADD_SYSTEM_LOCALE = "dialog_add_system_locale";
     private static final String INDEX_KEY_ADD_LANGUAGE = "add_language";
+    private static final String TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT = "dialog_confirm_system_default";
+    private static final String TAG_DIALOG_REMOVE_LOCALE = "dialog_remove_locale";
+    private static final String TAG_DIALOG_REMOVE_AND_CHANGE_LOCALE =
+            "dialog_remove_and_change_locale";
+    private static final String TAG_DIALOG_NOT_AVAILABLE_WITH_CANCEL =
+            "dialog_not_available_locale_with_cancel";
 
     private ButtonPreference mAddLanguagePreference;
     private boolean mLocaleAdditionMode = false;
     private boolean mIsUiRestricted;
     private UserPreferredLocalePreferenceController mUserPreferredLocalePreferenceController;
+    private LanguageAndRegionViewModel mViewModel;
 
     @SuppressWarnings("NullAway")
     public LanguageAndRegionSettings() {
@@ -130,6 +144,13 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(LanguageAndRegionViewModel.class);
+        mViewModel.getDialogType().observe(this, this::showConfirmDialogByType);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         // Hack to update action bar title. It's necessary to refresh title because this page user
@@ -161,7 +182,7 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
             mLocaleAdditionMode = savedInstanceState.getBoolean(CFGKEY_ADD_LOCALE, false);
         }
         Log.d(TAG, "LocaleAdditionMode:" + mLocaleAdditionMode);
-        if (!mLocaleAdditionMode && shouldShowConfirmationDialog()) {
+        if (!mLocaleAdditionMode && shouldShowAddedLocaleDialog()) {
             showDialogForAddedLocale();
             mLocaleAdditionMode = true;
         }
@@ -183,16 +204,12 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
         if (requestCode == DIALOG_CONFIRM_SYSTEM_DEFAULT) {
             if (resultCode == Activity.RESULT_OK) {
                 boolean showNotTranslatedDialog = data.getBooleanExtra(
-                        LocaleDialogFragment.ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED, true);
+                        ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED, true);
                 LocaleStore.LocaleInfo selectedLocaleInfo =
                         (LocaleStore.LocaleInfo) data.getExtras().getSerializable(
-                                LocaleDialogFragment.ARG_SELECTED_LOCALE);
-                int menuId = data.getExtras().getInt(
-                        LocaleDialogFragment.ARG_MENU_ITEM_ID);
-                mUserPreferredLocalePreferenceController.setUpdatedLocaleList(selectedLocaleInfo,
-                        menuId);
-                mUserPreferredLocalePreferenceController.doTheUpdate();
-                mUserPreferredLocalePreferenceController.updatePreferences();
+                                ARG_SELECTED_LOCALE);
+                int menuId = data.getExtras().getInt(ARG_MENU_ITEM_ID);
+                updatePreference(selectedLocaleInfo, menuId);
                 localeInfo = LocaleStore.getLocaleInfo(Locale.getDefault());
                 if (showNotTranslatedDialog && !localeInfo.isTranslated()) {
                     showUnavailableDialog(localeInfo);
@@ -203,10 +220,9 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
             if (resultCode == Activity.RESULT_OK) {
                 List<LocaleStore.LocaleInfo> feedItemList = getUserLocaleList();
                 localeInfo = (LocaleStore.LocaleInfo) data.getExtras().getSerializable(
-                        LocaleDialogFragment.ARG_TARGET_LOCALE);
+                        ARG_TARGET_LOCALE);
                 String preferencesTags = Settings.System.getString(
-                        getContext().getContentResolver(),
-                        Settings.System.LOCALE_PREFERENCES);
+                        getContext().getContentResolver(), Settings.System.LOCALE_PREFERENCES);
                 feedItemList.add(mayAppendUnicodeTags(localeInfo, preferencesTags));
                 LocaleList localeList = new LocaleList(feedItemList.stream()
                         .map(LocaleStore.LocaleInfo::getLocale)
@@ -216,40 +232,93 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
                 action = SettingsEnums.ACTION_ADD_SYSTEM_LOCALE_FROM_RECOMMENDATION;
             }
             mMetricsFeatureProvider.action(getContext(), action);
-        } else if (requestCode == DIALOG_REMOVE_LOCALE) {
+        } else if (requestCode == DIALOG_REMOVE_LOCALE
+                || requestCode == DIALOG_REMOVE_AND_CHANGE_SYSTEM_LOCALE) {
             if (resultCode == Activity.RESULT_OK) {
                 LocaleStore.LocaleInfo removedLocaleInfo =
                         (LocaleStore.LocaleInfo) data.getExtras().getSerializable(
-                                LocaleDialogFragment.ARG_TARGET_LOCALE);
-                mUserPreferredLocalePreferenceController.setUpdatedLocaleList(removedLocaleInfo,
-                        R.id.remove);
-                mUserPreferredLocalePreferenceController.doTheUpdate();
-                mUserPreferredLocalePreferenceController.updatePreferences();
-
-                boolean showNotTranslatedDialog = data.getBooleanExtra(
-                        LocaleDialogFragment.ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED, true);
-                localeInfo = LocaleStore.getLocaleInfo(Locale.getDefault());
-                if (showNotTranslatedDialog && !localeInfo.isTranslated()) {
-                    showUnavailableDialog(localeInfo);
+                                requestCode == DIALOG_REMOVE_AND_CHANGE_SYSTEM_LOCALE
+                                        ? ARG_SELECTED_LOCALE : ARG_TARGET_LOCALE);
+                updatePreference(removedLocaleInfo, R.id.remove);
+                if (requestCode == DIALOG_REMOVE_AND_CHANGE_SYSTEM_LOCALE) {
+                    boolean showNotTranslatedDialog = data.getBooleanExtra(
+                            ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED, true);
+                    if (showNotTranslatedDialog) {
+                        showUnavailableDialog(LocaleStore.getLocaleInfo(Locale.getDefault()));
+                    }
                 }
             }
-        } else if (requestCode == DIALOG_NOT_AVAILABLE_LOCALE) {
+        } else if (requestCode == DIALOG_NOT_AVAILABLE_LOCALE
+                || requestCode == DIALOG_NOT_AVAILABLE_LOCALE_WITH_CANCEL) {
             if (resultCode == Activity.RESULT_OK) {
                 LocaleStore.LocaleInfo selectedLocaleInfo =
                         (LocaleStore.LocaleInfo) data.getExtras().getSerializable(
-                                LocaleDialogFragment.ARG_SELECTED_LOCALE);
-                int menuId = data.getExtras().getInt(
-                        LocaleDialogFragment.ARG_MENU_ITEM_ID);
-                mUserPreferredLocalePreferenceController.setUpdatedLocaleList(selectedLocaleInfo,
-                        menuId);
-                mUserPreferredLocalePreferenceController.doTheUpdate();
-                mUserPreferredLocalePreferenceController.updatePreferences();
+                                ARG_SELECTED_LOCALE);
+                int menuId = data.getExtras().getInt(ARG_MENU_ITEM_ID);
+                updatePreference(selectedLocaleInfo, menuId);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private boolean shouldShowConfirmationDialog() {
+    private void updatePreference(LocaleStore.LocaleInfo localeInfo, int menuId) {
+        mUserPreferredLocalePreferenceController.setUpdatedLocaleList(localeInfo, menuId);
+        mUserPreferredLocalePreferenceController.doTheUpdate();
+        mUserPreferredLocalePreferenceController.updatePreferences();
+    }
+
+    private void showConfirmDialogByType(Integer type) {
+        if (isAdded()) {
+            Log.d(TAG, "getDialogType, type = " + type);
+            LocaleDialogFragment localeDialogFragment = LocaleDialogFragment.newInstance();
+            Bundle args = new Bundle();
+            args.putInt(ARG_DIALOG_TYPE, type.intValue());
+            LocaleStore.LocaleInfo defaultAfterChange = mViewModel.getDefaultAfterChange();
+            LocaleStore.LocaleInfo selectedLocaleInfo = mViewModel.getSelectedLocaleInfo();
+            int menuItemId = mViewModel.getMenuItemId();
+            switch (type) {
+                case DIALOG_CONFIRM_SYSTEM_DEFAULT -> {
+                    args.putSerializable(ARG_TARGET_LOCALE, defaultAfterChange);
+                    args.putSerializable(ARG_SELECTED_LOCALE, selectedLocaleInfo);
+                    args.putInt(ARG_MENU_ITEM_ID, menuItemId);
+                    localeDialogFragment.setArguments(args);
+                    localeDialogFragment.show(getChildFragmentManager(),
+                            TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT);
+                    mViewModel.clearType();
+                }
+                case DIALOG_NOT_AVAILABLE_LOCALE_WITH_CANCEL -> {
+                    args.putSerializable(ARG_TARGET_LOCALE, defaultAfterChange);
+                    args.putSerializable(ARG_SELECTED_LOCALE, selectedLocaleInfo);
+                    args.putInt(ARG_MENU_ITEM_ID, menuItemId);
+                    localeDialogFragment.setArguments(args);
+                    localeDialogFragment.show(getChildFragmentManager(),
+                            TAG_DIALOG_NOT_AVAILABLE_WITH_CANCEL);
+                    mViewModel.clearType();
+                    mMetricsFeatureProvider.action(getContext(),
+                            SettingsEnums.ACTION_NOT_SUPPORTED_SYSTEM_LANGUAGE);
+                }
+                case DIALOG_REMOVE_LOCALE -> {
+                    args.putSerializable(ARG_TARGET_LOCALE, defaultAfterChange);
+                    localeDialogFragment.setArguments(args);
+                    localeDialogFragment.show(getChildFragmentManager(),
+                            TAG_DIALOG_REMOVE_LOCALE);
+                    mViewModel.clearType();
+                }
+                case DIALOG_REMOVE_AND_CHANGE_SYSTEM_LOCALE -> {
+                    args.putSerializable(ARG_TARGET_LOCALE, defaultAfterChange);
+                    args.putBoolean(ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED,
+                            !defaultAfterChange.isTranslated());
+                    args.putSerializable(ARG_SELECTED_LOCALE, selectedLocaleInfo);
+                    localeDialogFragment.setArguments(args);
+                    localeDialogFragment.show(getChildFragmentManager(),
+                            TAG_DIALOG_REMOVE_AND_CHANGE_LOCALE);
+                    mViewModel.clearType();
+                }
+            }
+        }
+    }
+
+    private boolean shouldShowAddedLocaleDialog() {
         Intent intent = this.getIntent();
         String dialogType = intent.getStringExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE);
         String localeTag = intent.getStringExtra(EXTRA_APP_LOCALE);
@@ -289,9 +358,8 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
     private void showUnavailableDialog(LocaleStore.LocaleInfo localeInfo) {
         Log.d(TAG, "showUnavailableDialog");
         Bundle args = new Bundle();
-        args.putInt(LocaleDialogFragment.ARG_DIALOG_TYPE,
-                DIALOG_NOT_AVAILABLE_LOCALE);
-        args.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, localeInfo);
+        args.putInt(ARG_DIALOG_TYPE, DIALOG_NOT_AVAILABLE_LOCALE);
+        args.putSerializable(ARG_TARGET_LOCALE, localeInfo);
         LocaleDialogFragment localeDialogFragment = LocaleDialogFragment.newInstance();
         localeDialogFragment.setArguments(args);
         localeDialogFragment.show(getChildFragmentManager(), TAG_DIALOG_NOT_AVAILABLE);
@@ -308,8 +376,8 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
                 Locale.forLanguageTag(appLocaleTag));
         final LocaleDialogFragment localeDialogFragment = LocaleDialogFragment.newInstance();
         Bundle args = new Bundle();
-        args.putInt(LocaleDialogFragment.ARG_DIALOG_TYPE, DIALOG_ADD_SYSTEM_LOCALE);
-        args.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, localeInfo);
+        args.putInt(ARG_DIALOG_TYPE, DIALOG_ADD_SYSTEM_LOCALE);
+        args.putSerializable(ARG_TARGET_LOCALE, localeInfo);
         localeDialogFragment.setArguments(args);
         localeDialogFragment.show(getChildFragmentManager(), TAG_DIALOG_ADD_SYSTEM_LOCALE);
     }
@@ -334,8 +402,7 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
 
         mUserPreferredLocalePreferenceController =
                 new UserPreferredLocalePreferenceController(context,
-                        KEY_PREFERENCE_USER_PREFERRED_LOCALE_LIST);
-        mUserPreferredLocalePreferenceController.setFragmentManager(getChildFragmentManager());
+                        KEY_PREFERENCE_USER_PREFERRED_LOCALE_LIST, getSettingsLifecycle(), this);
         controllers.add(mUserPreferredLocalePreferenceController);
 
         final DefaultVoiceInputPreferenceController defaultVoiceInputPreferenceController =

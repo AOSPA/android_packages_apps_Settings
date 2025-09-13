@@ -31,6 +31,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.SwitchPreferenceCompat
 import com.android.settings.R
+import com.android.settings.RestrictedListPreference
 import com.android.settings.SettingsPreferenceFragmentBase
 import com.android.settings.Utils.createAccessibleSequence
 import com.android.settings.accessibility.TextReadingPreferenceFragment
@@ -59,7 +60,7 @@ open class SelectedDisplayPreferenceFragment(
     private val prefComponents = mutableListOf<PrefComponent>()
 
     override fun getMetricsCategory(): Int {
-        return SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY
+        return SettingsEnums.SETTINGS_EXTERNAL_DISPLAY_CATEGORY
     }
 
     override fun getHelpResource(): Int {
@@ -214,7 +215,9 @@ open class SelectedDisplayPreferenceFragment(
                 ?.let { updateRotationPreference(it, display) }
             if (shouldShowDisplayConnectionPref) {
                 selectedDisplayPreference
-                    .findPreference<ListPreference>(PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key)
+                    .findPreference<RestrictedListPreference>(
+                        PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key
+                    )
                     ?.let { updateConnectionPreference(it, display, state.lockTaskPolicyInfo) }
             }
         }
@@ -396,7 +399,7 @@ open class SelectedDisplayPreferenceFragment(
         }
     }
 
-    private fun connectionPreference(): ListPreference {
+    private fun connectionPreference(): RestrictedListPreference {
         val context = requireContext()
         connectionPreferenceEntries =
             arrayOf(
@@ -411,7 +414,7 @@ open class SelectedDisplayPreferenceFragment(
                 DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_DESKTOP.toString(),
                 DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR.toString(),
             )
-        return ListPreference(context).apply {
+        return RestrictedListPreference(context).apply {
             setTitle(PrefInfo.DISPLAY_CONNECTION_PREFERENCE.titleResource)
             key = PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key
             setEntries(connectionPreferenceEntries)
@@ -441,20 +444,26 @@ open class SelectedDisplayPreferenceFragment(
     }
 
     private fun updateConnectionPreference(
-        preference: ListPreference,
+        preference: RestrictedListPreference,
         display: DisplayDeviceAdditionalInfo,
         lockTaskPolicyInfo: DisplayPreferenceViewModel.LockTaskPolicyInfo,
     ) {
         if (lockTaskPolicyInfo.lockTaskMode == LOCK_TASK_MODE_LOCKED) {
-            // TODO(b/429288575): Use RestrictedListPreference to show DPM policy
-            preference.isEnabled = false
+            val connectionPreference = DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR
+            preference.apply {
+                setDisabledByAdmin(lockTaskPolicyInfo.enforcingAdmin)
+                setValueIndex(connectionPreference)
+                setSummary(connectionPreferenceEntries[connectionPreference])
+            }
         } else {
-            preference.isEnabled = true
-        }
-        val connectionPreference = display.connectionPreference
-        preference.apply {
-            setValueIndex(connectionPreference)
-            setSummary(connectionPreferenceEntries[connectionPreference])
+            val connectionPreference = display.connectionPreference
+            preference.apply {
+                // Reset the pref state when it was previously disabled by lock task policy
+                setDisabledByAdmin(null as EnforcingAdmin?)
+                setEnabled(true)
+                setValueIndex(connectionPreference)
+                setSummary(connectionPreferenceEntries[connectionPreference])
+            }
         }
     }
 

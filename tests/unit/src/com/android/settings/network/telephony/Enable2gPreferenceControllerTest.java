@@ -277,6 +277,17 @@ public final class Enable2gPreferenceControllerTest {
         assertFalse(mPreference.isEnabled());
     }
 
+    @Test
+    public void updateState_isDisabledByAdmin_networkTypeLte_preferenceDisable() {
+        when2gIsDisabledByAdmin(true);
+        mPreference.setEnabled(false);
+        mockAllowedNetworkTypes(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+
+        mController.updateState((Preference) mPreference);
+
+        assertFalse(mPreference.isEnabled());
+    }
+
     private void mockAllowedNetworkTypes(long allowedNetworkType) {
         doReturn(allowedNetworkType).when(mTelephonyManager).getAllowedNetworkTypesForReason(
                 TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);

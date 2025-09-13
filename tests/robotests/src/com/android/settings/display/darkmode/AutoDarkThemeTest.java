@@ -23,7 +23,9 @@ import static android.app.UiModeManager.MODE_NIGHT_CUSTOM;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Application;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -68,7 +70,8 @@ public class AutoDarkThemeTest {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
 
-        ShadowApplication shadowApp = ShadowApplication.getInstance();
+        ShadowApplication shadowApp =
+                shadowOf((Application) ApplicationProvider.getApplicationContext());
         shadowApp.setSystemService(Context.UI_MODE_SERVICE, mUiModeManager);
 
         ZenModesBackend.setInstance(mZenModesBackend);

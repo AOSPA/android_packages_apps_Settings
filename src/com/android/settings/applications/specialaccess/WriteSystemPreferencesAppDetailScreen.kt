@@ -17,16 +17,17 @@
 package com.android.settings.applications.specialaccess
 
 import android.Manifest.permission.READ_SYSTEM_PREFERENCES
+import android.Manifest.permission.WRITE_SYSTEM_PREFERENCES
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo.REQUESTED_PERMISSION_GRANTED
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.UserHandle
 import com.android.settings.R
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
+import com.android.settings.applications.getPackageInfoWithPermissions
+import com.android.settings.applications.isPermissionGranted
+import com.android.settings.applications.isPermissionRequested
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 
 @ProvidePreferenceScreen(WriteSystemPreferencesAppDetailScreen.KEY, parameterized = true)
@@ -45,6 +46,9 @@ open class WriteSystemPreferencesAppDetailScreen(context: Context, arguments: Bu
     override val op
         get() = AppOpsManager.OP_WRITE_SYSTEM_PREFERENCES
 
+    override val permission: String?
+        get() = PERMISSION
+
     override val switchPreferenceTitle
         get() = R.string.write_system_preferences_switch_title
 
@@ -54,36 +58,29 @@ open class WriteSystemPreferencesAppDetailScreen(context: Context, arguments: Bu
     // Edge case: what if the app's read permission is revoked/granted
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&
-            hasReadSystemPreferencesPermission(context, packageInfo?.applicationInfo)
+            writeSystemPreferencesFilter(context, packageInfo?.applicationInfo)
 
     override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN
 
     companion object {
         const val KEY = "special_access_write_system_preferences_app_detail"
+        const val PERMISSION = WRITE_SYSTEM_PREFERENCES
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 
         fun parameters(context: Context, showSystemApp: Boolean) =
-            parameters(context, showSystemApp, ::hasReadSystemPreferencesPermission)
+            parameters(context, showSystemApp, ::writeSystemPreferencesFilter)
 
-        private fun hasReadSystemPreferencesPermission(
+        private fun writeSystemPreferencesFilter(
             context: Context,
             appInfo: ApplicationInfo?,
         ): Boolean {
             if (appInfo == null) return false
             val packageInfo =
-                try {
-                    context.packageManager.getPackageInfoAsUser(
-                        appInfo.packageName,
-                        PackageManager.GET_PERMISSIONS,
-                        UserHandle.myUserId(),
-                    )
-                } catch (_: Exception) {
-                    return false
-                }
-            val index = packageInfo?.requestedPermissions?.indexOf(READ_SYSTEM_PREFERENCES) ?: -1
-            val flags = if (index >= 0) packageInfo.requestedPermissionsFlags!![index] else 0
-            return (flags and REQUESTED_PERMISSION_GRANTED) != 0
+                context.getPackageInfoWithPermissions(appInfo.packageName) ?: return false
+
+            return isPermissionGranted(packageInfo, READ_SYSTEM_PREFERENCES) &&
+                isPermissionRequested(packageInfo, PERMISSION)
         }
     }
 }

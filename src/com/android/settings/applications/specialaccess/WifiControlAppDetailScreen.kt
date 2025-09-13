@@ -22,21 +22,18 @@ import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
-import android.content.pm.PackageInfo.REQUESTED_PERMISSION_GRANTED
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.UserHandle
 import androidx.core.net.toUri
 import com.android.settings.R
 import com.android.settings.Settings.ChangeWifiStateActivity
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
+import com.android.settings.applications.getPackageInfoWithPermissions
+import com.android.settings.applications.isPermissionRequested
 import com.android.settings.flags.Flags
 import com.android.settings.utils.highlightPreference
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
-import kotlin.collections.indexOf
 
 /**
  * The app detail catalyst screen for "Wi-Fi control" special app access.
@@ -59,6 +56,9 @@ open class WifiControlAppDetailScreen(context: Context, arguments: Bundle) :
     override val op
         get() = AppOpsManager.OP_CHANGE_WIFI_STATE
 
+    override val permission: String?
+        get() = PERMISSION
+
     override val switchPreferenceTitle
         get() = R.string.change_wifi_state_app_detail_switch
 
@@ -67,8 +67,7 @@ open class WifiControlAppDetailScreen(context: Context, arguments: Bundle) :
 
     // Edge case: what if the app's change wifi state permission is revoked/granted
     override fun isAvailable(context: Context) =
-        super.isAvailable(context) &&
-            hasChangeWifiStateControlPermission(context, packageInfo?.applicationInfo)
+        super.isAvailable(context) && wifiStateControlFilter(context, packageInfo?.applicationInfo)
 
     override fun getMetricsCategory() = SettingsEnums.CONFIGURE_WIFI
 
@@ -88,41 +87,24 @@ open class WifiControlAppDetailScreen(context: Context, arguments: Bundle) :
 
     companion object {
         const val KEY = "special_access_wifi_control_app_detail"
+        const val BROADER_PERMISSION = NETWORK_SETTINGS
+        const val PERMISSION = CHANGE_WIFI_STATE
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 
         fun parameters(context: Context, showSystemApp: Boolean) =
-            parameters(context, showSystemApp, ::hasChangeWifiStateControlPermission)
+            parameters(context, showSystemApp, ::wifiStateControlFilter)
 
-        private fun hasChangeWifiStateControlPermission(
-            context: Context,
-            appInfo: ApplicationInfo?,
-        ): Boolean {
+        private fun wifiStateControlFilter(context: Context, appInfo: ApplicationInfo?): Boolean {
             if (appInfo == null) return false
             val packageInfo =
-                try {
-                    context.packageManager.getPackageInfoAsUser(
-                        appInfo.packageName,
-                        PackageManager.GET_PERMISSIONS,
-                        UserHandle.myUserId(),
-                    )
-                } catch (_: Exception) {
-                    return false
-                }
+                context.getPackageInfoWithPermissions(appInfo.packageName) ?: return false
 
-            // NETWORK_SETTINGS permission trumps CHANGE_WIFI_CONFIG.
-            if (isPermissionGranted(packageInfo, NETWORK_SETTINGS)) {
-                return false
-            }
+            val isChangeable =
+                isPermissionRequested(packageInfo, PERMISSION) &&
+                    !isPermissionRequested(packageInfo, BROADER_PERMISSION)
 
-            return isPermissionGranted(packageInfo, CHANGE_WIFI_STATE)
-        }
-
-        private fun isPermissionGranted(packageInfo: PackageInfo?, permission: String): Boolean {
-            val index = packageInfo?.requestedPermissions?.indexOf(permission) ?: -1
-            val flags = if (index >= 0) packageInfo?.requestedPermissionsFlags!![index] else 0
-
-            return (flags and REQUESTED_PERMISSION_GRANTED) != 0
+            return isChangeable
         }
     }
 }

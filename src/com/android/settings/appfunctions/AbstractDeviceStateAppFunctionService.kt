@@ -16,6 +16,8 @@
 
 package com.android.settings.appfunctions
 
+import android.app.KeyguardManager
+import android.app.appfunctions.AppFunctionException.ERROR_DENIED
 import android.app.appsearch.GenericDocument
 import android.content.Context
 import android.content.res.Configuration
@@ -122,6 +124,20 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
             )
             return
         }
+
+        if (
+            shouldCheckForDeviceLock(request.parameters, appFunctionType) &&
+                applicationContext.getSystemService(KeyguardManager::class.java).isDeviceLocked
+        ) {
+            callback.onError(
+                AppFunctionException(
+                    ERROR_DENIED,
+                    "Attempting to execute a device state app function while " +
+                        "the device is locked.",
+                )
+            )
+        }
+
         runBlocking {
             Trace.beginSection("DeviceStateAppFunction ${request.functionIdentifier}")
             Log.d(TAG, "device state app function ${request.functionIdentifier} called.")
@@ -138,7 +154,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                     appFunctionType,
                     request.parameters,
                     applicationContext.getLocale().toString(),
-                    )
+                )
             val response = buildResponse(responseData)
             callback.onResult(response)
             Log.d(TAG, "app function ${request.functionIdentifier} fulfilled.")
@@ -164,6 +180,15 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
         val configuration = Configuration(applicationContext.resources.configuration)
         configuration.setLocale(Locale.US)
         return applicationContext.createConfigurationContext(configuration)
+    }
+
+    private fun shouldCheckForDeviceLock(
+        params: GenericDocument,
+        appFunctionType: DeviceStateAppFunctionType,
+    ): Boolean {
+        return params
+            .getPropertyDocument(appFunctionType.functionId + "Params")
+            ?.getPropertyBoolean("requestInitiatedWhileUnlocked") != true
     }
 
     companion object {

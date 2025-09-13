@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"關於音訊輸出"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"將聲音轉送至助聽器或手機喇叭"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"相關工具"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"使用 <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> 可加快傳送速度"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"如要以最快速的方式與鄰近的 Android 裝置和電腦分享內容，請試試 <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> for Windows"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"試用 <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"在 Android 裝置之間快速分享檔案，或者透過「<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>」Windows 版應用程式與電腦快速分享檔案"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"鈴聲和鬧鐘"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"通話期間的音訊"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"媒體和系統音效"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用藍牙 LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果裝置支援 LE Audio 硬體功能，就停用藍牙 LE Audio 功能。"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"藍牙 LE Audio 模式"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"啟用藍牙 LE Audio 廣播使用者介面預覽"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"啟用 LE Audio 分享使用者介面預覽，包括個人音訊分享和私人廣播"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"在「裝置詳細資料」中顯示 LE Audio 切換鈕"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"略過藍牙 LE Audio 許可清單"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"即使 LE Audio 周邊裝置未經過驗證，尚未確認符合許可清單的條件，系統仍會預設使用 LE Audio。"</string>
@@ -1013,7 +1011,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"變更旋轉角度或解析度，可能會導致執行中的應用程式停止運作"</string>
     <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"未連接任何螢幕\n\n外接螢幕即可開始使用。你也可以使用其他傳輸線"</string>
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"未連接任何螢幕"</string>
-    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"外接螢幕即可開始使用。你也可以使用其他傳輸線"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"連接外接螢幕即可開始使用，或換另一條傳輸線再試一次"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"更多選項"</string>
     <!-- no translation found for external_display_topology_hint (885396727047321347) -->
     <skip />
@@ -1408,8 +1406,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"標準圖片"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR 圖片"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"這項設定只會影響支援高動態範圍 (HDR) 的圖片和影片。"</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"強度：調整明暗變化的強度。"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"螢幕白平衡"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"折疊時繼續使用應用程式"</string>
@@ -3393,6 +3390,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"要啟用這個系統 CA 憑證嗎？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"要停用這個系統 CA 憑證嗎？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"永久移除使用者 CA 憑證嗎？"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"正在使用這個憑證的應用程式/服務："</string>
     <string name="credential_contains" msgid="3146519680449595771">"這個項目包含："</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 個使用者金鑰"</string>
@@ -5965,23 +5964,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"發生錯誤"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"請稍後再試"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"返回"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"「身分驗證」支援更多應用程式"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"「身分驗證」可防止他人擅自使用你的應用程式，目前支援指紋或人臉解鎖。"</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"查看詳細資料"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"「身分驗證」支援更多應用程式"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"最新消息：\n"<ul><li>"「身分驗證」可保護所有使用指紋或人臉解鎖的應用程式"</li>\n<li>"「身分驗證」日後會逐步新增更多驗證方式，保護裝置上的應用程式。"<a href="https://support.google.com/android?p=identity_check">"進一步瞭解啟動保護機制的場合與時機"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"身分驗證和手錶"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"「身分驗證」可透過連結的手錶提供更多驗證方式，防止他人擅自存取應用程式"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"身分驗證和手錶"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"最新消息：\n"<ul><li>"連結手錶後，當你不在信任的位置時，可以使用生物辨識或 PIN 碼存取應用程式"</li>\n<li>"「身分驗證」日後會逐步新增更多驗證方式，保護裝置上的應用程式。"<a href="https://support.google.com/android?p=identity_check">"進一步瞭解啟動保護機制的場合與時機"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"其他設定"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"自動填入、通知等等"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"隱私權控制項"</string>

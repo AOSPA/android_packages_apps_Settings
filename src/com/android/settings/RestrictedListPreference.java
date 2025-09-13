@@ -56,6 +56,10 @@ public class RestrictedListPreference extends CustomListPreference implements
     private boolean mRequiresActiveUnlockedProfile = false;
     private int mProfileUserId;
 
+    public RestrictedListPreference(Context context) {
+        this(context, null);
+    }
+
     public RestrictedListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mHelper = new RestrictedPreferenceHelper(context, this, attrs);

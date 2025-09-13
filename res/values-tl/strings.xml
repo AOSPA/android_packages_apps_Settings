@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Tungkol sa audio output"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Iruta ang mga tunog sa iyong hearing device o speaker ng telepono"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Kaugnay"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Magpadala nang mas mabilis gamit ang <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Para sa pinakamabilis na paraan ng pag-share sa mga kalapit na Android at PC, subukan ang <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> para Windows"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Subukan ang <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Pinakamabilis na pag-share ng file sa pagitan ng mga Android device, at sa mga PC gamit ang aming <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> App para sa Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Ringtone at mga alarm"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio sa mga tawag"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Mga tunog ng media at system"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"I-disable ang Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Dini-disable ang feature na Bluetooth LE audio kung sinusuportahan ng device ang mga kakayahan ng LE audio hardware."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio mode"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"I-enable ang preview ng UI ng Broadcast ng Bluetooth LE Audio"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Ine-enable ang preview ng UI ng LE Audio Sharing kasama na ang personal na pagbabahagi ng audio at pribadong broadcast"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Ipakita ang toggle ng LE audio sa Mga Detalye ng Device"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"I-bypass ang Allowlist ng Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Gamitin ang LE Audio bilang default kahit na hindi pa na-verify ang peripheral ng LE Audio para matugunan ang mga pamantayan sa Allowlist."</string>
@@ -1015,8 +1013,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Walang nakakonektang display"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Magkonekta ng external na display para makapagsimula, o subukang gumamit ng ibang cable"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Higit pang opsyon"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"I-hold at i-drag para baguhin ang ayos ng mga display"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"I-mirror ang built-in na display"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Gamitin ang mga bagong setting?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Kung hindi gumagana tulad ng gusto mo ang iyong display, puwede kang bumalik sa dati mong mga setting"</string>
@@ -1408,8 +1405,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Standard na larawan"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR na larawan"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Naaapektuhan lang ng setting na ito ang mga larawan at video na sumusuporta sa High Dynamic Range (HDR)."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Intensity, gawing mas madilim o mas maliwanag ang intensity."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"White balance ng display"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Magpatuloy sa paggamit ng mga app kapag naka-fold"</string>
@@ -1585,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Storage at cache"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Mga setting ng storage"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Para tingnan, piliin ang naka-save na network"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -3393,6 +3388,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"I-enable ang CA certificate system?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"I-disable ang CA certificate system?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Permanenteng alisin ang CA certificate ng user?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Ginagamit ng"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Naglalaman ang entry na ito ng"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 user key"</string>
@@ -3574,8 +3571,7 @@
     <string name="color_orange" msgid="216547825489739010">"Orange"</string>
     <string name="color_purple" msgid="6603701972079904843">"Lila"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Status ng SIM"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"Status ng SIM %1$d"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Napalitan ang iyong mga SIM"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"I-tap upang mag-set up"</string>
@@ -5801,7 +5797,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Password"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Pahusayin ang compatibility"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Tumutulong sa ilang device, tulad ng mga hearing aid, na kumonekta sa pamamagitan ng pagpapababa ng kalidad ng audio"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Ino-off ang pag-share ng audio para i-configure ang compatibility"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"I-off ang pag-share ng audio para mabago ang mga setting"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Makinig sa audio sa malapit"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Sinusuportahan ng pag-share ng audio ang Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Pangalan ng audio stream"</string>
@@ -5965,23 +5961,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Nagkaproblema"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Subukan ulit sa ibang pagkakataon"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Bumalik"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Gumagana ang Pag-check sa Identity sa mas maraming app"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Pinipigilan ng Pag-check sa Identity ang hindi gustong pag-access sa iyong mga app. Available na sa anumang app na gumagamit ng Pag-unlock Gamit ang Fingerprint o Mukha."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Tingnan ang mga detalye"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Gumagana ang Pag-check sa Identity sa mas maraming app"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Mga update:\n"<ul><li>"Nagdaragdag ang Pag-check sa Identity ng proteksyon sa anumang app na gumagamit ng Pag-unlock Gamit ang Fingerprint o Mukha"</li>\n<li>"Sa paglipas ng panahon, puwede pang magdagdag ang Pag-check sa Identity ng mga paraan ng pag-verify na ikaw talaga iyan at pag-secure ng mga app sa iyong device. "<a href="https://support.google.com/android?p=identity_check">"Matuto pa tungkol sa kung kailan at saan ka protektado"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Pag-check sa Identity at Relo"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Gamit ang nakakonektang relo, magdaragdag pa ang Pag-check sa Identity ng mga paraan ng pag-verify na ikaw talaga iyan para maiwasan ang hindi ginustong access sa mga app"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Pag-check sa Identity at Relo"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Mga update:\n"<ul><li>"Sa pagkonekta sa relo, magagamit mo ang biometrics o ang iyong PIN para ma-access ang mga app kapag wala ka sa pinagkakatiwalaang lugar"</li>\n<li>"Sa paglipas ng panahon, puwede pang magdagdag ang Pag-check sa Identity ng mga paraan ng pag-verify na ikaw talaga iyan at pag-secure ng mga app sa iyong device. "<a href="https://support.google.com/android?p=identity_check">"Matuto pa tungkol sa kung kailan at saan ka protektado"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Iba pang setting"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Autofill, mga notification, at higit pa"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Mga kontrol sa privacy"</string>

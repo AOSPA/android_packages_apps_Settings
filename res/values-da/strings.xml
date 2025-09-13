@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Om lydudgang"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Få din lyd til at gå gennem dit høreapparat eller din telefonhøjttaler"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Relaterede"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Send hurtigere med <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Prøv <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> til Windows for at få adgang til den hurtigste måde at dele med Android-enheder og computere i nærheden på"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Prøv <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Den hurtigste fildeling mellem Android-enheder og med pc\'er ved hjælp af vores app <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> til Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Ringetone og alarmer"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Lyd under opkald"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Medie- og systemlyde"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Deaktiver Bluetooth LE-lyd"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Deaktiverer funktionen Bluetooth LE-lyd, hvis enheden understøtter denne LE-lyd til hardware."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Tilstanden Bluetooth LE-lyd"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Aktivér preview af brugerfladen for broadcast af Bluetooth LE-lyd"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Aktiverer preview af brugerfladen for LE-lyddeling, herunder personlig lyddeling og privat broadcast"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Vis kontakten til LE-lyd i Enhedsoplysninger"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Omgå tilladelsesliste for Bluetooth LE-lyd"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Brug LE-lyd som standard, selvom det ikke er verificeret, at den eksterne LE-lydenhed opfylder kriterierne for tilladelseslisten."</string>
@@ -1408,8 +1406,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Standardbillede"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR-billede"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Denne indstilling påvirker kun billeder og videoer, der understøtter HDR (High Dynamic Range)."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Intensitet: Gør intensiteten svagere eller stærkere."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Skærmens hvidbalance"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Fortsæt med at bruge apps på foldet skærm"</string>
@@ -3057,7 +3054,7 @@
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Skærmtid for <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Vis efter apps"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Vis efter systemer"</string>
-    <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"Mere end <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"Mindre end <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"mindre end <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_cycle_count_footer" msgid="3642121059800373545">"På grund af kvalitetstjek inden afsending er cyklusantallet muligvis ikke nul, første gang du bruger enheden"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Processtatistikker"</string>
@@ -3393,6 +3390,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Vil du aktivere systemets CA-certifikat?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Vil du deaktivere systemets CA-certifikat?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Vil du fjerne bruger-CA-certifikatet?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Anvendes i øjeblikket af"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Denne post indeholder"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 brugernøgle"</string>
@@ -5965,23 +5964,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Noget gik galt"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Prøv igen senere"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Gå tilbage"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Identitetstjek fungerer med flere apps"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Identitetstjek forhindrer uønsket adgang til dine apps. Nu tilgængelig med alle apps, der bruger fingeroplåsning eller ansigtsoplåsning."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Se oplysninger"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Identitetstjek fungerer med flere apps"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Opdateringer:\n"<ul><li>"Identitetstjek føjer beskyttelse til alle apps, der bruger fingeroplåsning eller ansigtsoplåsning"</li>\n<li>"Med tiden kan Identitetstjek tilføje flere måder at verificere din identitet på og beskytte apps på din enhed. "<a href="https://support.google.com/android?p=identity_check">"Få flere oplysninger om, hvornår og hvor du er beskyttet"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Identitetstjek og ur"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Når du har et forbundet ur, tilføjer Identitetstjek flere måder at verificere din identitet på for at forhindre uønsket adgang til apps"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Identitetstjek og ur"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Opdateringer:\n"<ul><li>"Når du forbinder et ur, kan du enten bruge biometriske data eller din pinkode til at tilgå apps, når du ikke er på et sikkert sted"</li>\n<li>"Med tiden kan Identitetstjek tilføje flere måder at verificere din identitet på og beskytte apps på din enhed. "<a href="https://support.google.com/android?p=identity_check">"Få flere oplysninger om, hvornår og hvor du er beskyttet"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Andre indstillinger"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Autofyld, notifikationer m.m."</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Privatlivsindstillinger"</string>

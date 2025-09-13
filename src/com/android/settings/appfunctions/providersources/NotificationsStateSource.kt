@@ -79,14 +79,16 @@ class NotificationsStateSource : DeviceStateSource {
                     hintText = "App: $appName",
                 )
             )
-            deviceStateItems.add(
-                DeviceStateItem(
-                    key = "notifications_last_notification_time_package_$packageName",
-                    purpose = "notifications_last_notification_time_package_$packageName",
-                    jsonValue = formattedLastNotificationTimeAgo.toString(),
-                    hintText = "App: $appName",
+            formattedLastNotificationTimeAgo?.let { timeAgo ->
+                deviceStateItems.add(
+                    DeviceStateItem(
+                        key = "notifications_last_notification_time_package_$packageName",
+                        purpose = "notifications_last_notification_time_package_$packageName",
+                        jsonValue = timeAgo,
+                        hintText = "App: $appName",
+                    )
                 )
-            )
+            }
         }
 
         return listOf(

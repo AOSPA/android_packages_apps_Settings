@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Audio-irteerari buruz"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Bideratu soinuak entzumen-gailura edo telefonoaren bozgorailura"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Antzekoak"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Bidali bizkorrago <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> erabilita"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Inguruko Android-eko gailuekin eta PCekin edukia partekatzeko modu bizkorrena Windows-erako <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> erabiltzea da"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Probatu <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Partekatu fitxategiak ahalik eta bizkorren Android-eko gailuen artean, baita ordenagailuekin ere Windows-erako <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> aplikazioarekin"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Tonua eta alarmak"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Deietako audioa"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Multimedia-eduki eta sistemaren soinuak"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Desgaitu kontsumo txikiko Bluetooth bidezko audioa"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Kontsumo txikiko Bluetooth bidezko audioa darabilten hardware-gaitasunak gailuarekin bateragarriak badira, Kontsumo txikiko Bluetooth bidezko audioa eginbidea desgaitzen du."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Kontsumo txikiko Bluetooth bidezko audioaren modua"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Gaitu kontsumo txikiko Bluetooth bidezko audioa igortzeko erabiltzaile-interfazearen aurrebista"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Kontsumo txikiko Bluetooth bidezko audioa partekatzeko erabiltzaile-interfazearen aurrebista gaitzen du, audio pertsonala partekatzeko eginbidea eta aldi bereko igorpen pribatuak barne"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Erakutsi kontsumo txikiko audioaren etengailua gailuaren xehetasunetan"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Ez aplikatu kontsumo txikiko Bluetooth bidezko audioaren baimendutakoen zerrenda"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Erabili kontsumo txikiko audioa modu lehenetsian, hura darabilen gailu periferikoak baimendutakoen zerrendako irizpideak betetzen dituen egiaztatu ez bada ere."</string>
@@ -1408,8 +1406,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Irudi arrunta"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDRko irudia"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"HDRa onartzen duten irudi eta bideoei soilik eragiten die ezarpen honek."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Argitasuna: txikitu edo handitu argitasuna."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Pantailaren zuri-balantzea"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Jarraitu aplikazioak erabiltzen gailua tolestuta egon bitartean"</string>
@@ -3393,6 +3390,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Autoritate ziurtagiri-emaile batek jaulkitako sistema-ziurtagiria gaitu?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Autoritate ziurtagiri-emaile batek jaulkitako sistema-ziurtagiria desgaitu?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Autoritate ziurtagiri-emaile batek jaulkitako erabiltzaile-ziurtagiria betiko kendu?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Hauek darabilte:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Sarreraren edukia:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"Erabiltzaile-gako bat"</string>
@@ -5965,23 +5964,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Arazoren bat izan da"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Saiatu berriro geroago"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Egin atzera"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Identitate-egiaztapenak aplikazio gehiagorekin funtzionatzen du orain"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Identitate-egiaztapenak zure aplikazioetan baimenik gabe sartzea ekiditen du. Aurpegi edo hatz-marka bidez desblokeatzeko eginbidea darabilten aplikazio guztietan erabilgarri duzu orain."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Ikusi xehetasunak"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Identitate-egiaztapenak aplikazio gehiagorekin funtzionatzen du orain"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Berritasunak:\n"<ul><li>"Identitate-egiaztapenak babesa gehitzen die aurpegi edo hatz-marka bidez desblokeatzeko eginbidea darabilten aplikazio guztiei."</li>\n<li>"Denborarekin, baliteke identitate-egiaztapenak zeu zarela egiaztatzeko eta gailuko aplikazioak babesteko modu gehiago eskaintzea. "<a href="https://support.google.com/android?p=identity_check">"Lortu informazio gehiago noiz eta non zauden babestuta jakiteko"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Identitate-egiaztapena eta erlojua"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Erlojua konektatuta badago, identitate-egiaztapenak zeu zarela egiaztatzeko eta aplikazioetan baimenik gabe sartzea ekiditeko modu gehiago eskaintzen ditu"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Identitate-egiaztapena eta erlojua"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Berritasunak:\n"<ul><li>"Erloju batera konektatzen bazara, sistema biometrikoak nahiz PINa erabil ditzakezu aplikazioak atzitzeko, toki fidagarri batean ez zaudenean."</li>\n<li>"Denborarekin, baliteke identitate-egiaztapenak zeu zarela egiaztatzeko eta gailuko aplikazioak babesteko modu gehiago eskaintzea. "<a href="https://support.google.com/android?p=identity_check">"Lortu informazio gehiago noiz eta non zauden babestuta jakiteko"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Beste ezarpen batzuk"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Betetze automatikoa, jakinarazpenak eta abar"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Pribatutasun-ezarpenak"</string>

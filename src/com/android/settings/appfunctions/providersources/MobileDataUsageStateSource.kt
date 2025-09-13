@@ -115,7 +115,8 @@ class MobileDataUsageStateSource : DeviceStateSource {
 
         return listOf(
             PerScreenDeviceStates(
-                description = "Mobile Data Usage",
+                description =
+                    "Mobile Data Usage. This app data usage screen displays the total data consumed by this application. This includes usage from all SIM cards and different networks if the user has multiple.",
                 deviceStateItems = deviceStateItems,
             )
         )

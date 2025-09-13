@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.spa.app.catalyst
+package com.android.settings.applications.specialaccess
 
 import android.app.settings.SettingsEnums
 import android.content.Context
@@ -28,11 +28,12 @@ import com.android.settings.applications.specialaccess.interactacrossprofiles.In
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
-//@ProvidePreferenceScreen(AppInteractAcrossProfilesAppListScreen.KEY)
-open class AppInteractAcrossProfilesAppListScreen : PreferenceScreenMixin {
+@ProvidePreferenceScreen(InteractAcrossProfilesAppListScreen.KEY)
+open class InteractAcrossProfilesAppListScreen : PreferenceScreenMixin {
 
     override val key: String
         get() = KEY
@@ -69,11 +70,11 @@ open class AppInteractAcrossProfilesAppListScreen : PreferenceScreenMixin {
                 )
                 .forEach { app_user ->
                     val arguments = Bundle(1).apply { putString("app", app_user.first.packageName) }
-                    +(AppInfoInteractAcrossProfilesScreen.KEY args arguments)
+                    +(InteractAcrossProfilesAppDetailScreen.KEY args arguments)
                 }
         }
 
     companion object {
-        const val KEY = "device_state_apps_interact_across_profiles"
+        const val KEY = "special_access_interact_across_profiles_app_list"
     }
 }

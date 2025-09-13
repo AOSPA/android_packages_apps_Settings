@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Informazioni su uscita audio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Indirizza il suono verso la protesi uditiva o l\'altoparlante dello smartphone"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Correlati"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Invia contenuti più rapidamente con <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Per condividere velocemente contenuti con i dispositivi Android e PC nelle vicinanze, prova <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> per Windows"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Prova <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Più rapida condivisione di file tra dispositivi Android e con PC utilizzando la nostra app <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> per Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Suoneria e sveglie"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio durante le chiamate"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Suoni cont. multim. e sistema"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Disattiva Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Disattiva la funzionalità Bluetooth LE audio se il dispositivo supporta funzioni hardware LE audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Modalità Bluetooth LE audio"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Attiva anteprima UI di trasmissione Bluetooth LE audio"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Attiva l\'anteprima della UI di condivisione LE audio, incluse la condivisione audio personale e la trasmissione privata"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Mostra comandi LE audio nei dettagli dispositivo"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Ignora lista consentita Bluetooth LE audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Usa LE audio per impostazione predefinita anche se non è stato verificato che la periferica LE audio soddisfa i criteri della lista consentita."</string>
@@ -997,7 +995,7 @@
     <string name="external_display_settings_title" msgid="3865786552022665355">"Display esterni"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Display incorporato"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Cursore universale"</string>
-    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Sposta il mouse tra gli schermi"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Sposta il mouse tra i display"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Usa display esterno"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Risoluzione del display"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"Comportamento predefinito connessione"</string>
@@ -1015,8 +1013,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nessun display connesso"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Per iniziare, collega un display esterno o prova a usare un altro cavo"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Altre opzioni"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Tieni premuto e trascina per riordinare i display"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Esegui il mirroring del display integrato"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Vuoi utilizzare le nuove impostazioni?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Se il display non funziona come vorresti, puoi ripristinare le impostazioni precedenti"</string>
@@ -1408,8 +1405,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Immagine standard"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"Immagine HDR"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Questa impostazione influisce solo su immagini e video che supportano l\'High Dynamic Range (HDR)."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Intensità: diminuisci o aumenta l\'intensità."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Bilanciamento bianco display"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Continua a usare le app quando chiuso"</string>
@@ -1585,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Spazio di archiviazione e cache"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Impostazioni spazio di archiviazione"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Per visualizzarlo, seleziona la rete salvata"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -3393,6 +3388,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Abilitare il certificato CA del sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Disabilitare il certificato CA del sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Rimuovere definitivamente il certificato CA dell\'utente?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Attualmente in uso da"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Questa voce contiene"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 chiave utente"</string>
@@ -3574,8 +3571,7 @@
     <string name="color_orange" msgid="216547825489739010">"Arancione"</string>
     <string name="color_purple" msgid="6603701972079904843">"Viola"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Stato SIM"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"Stato SIM %1$d"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Le tue SIM sono state scambiate"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Tocca per configurare"</string>
@@ -5801,7 +5797,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Password"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Migliora la compatibilità"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Consente ad alcuni dispositivi, come gli apparecchi acustici, di connettersi riducendo la qualità audio"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Disattiva la condivisione audio per configurare la compatibilità"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Disattiva la condivisione audio per modificare le impostazioni"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Ascolta audio nelle vicinanze"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Condivisione audio supporta Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Nome stream audio"</string>
@@ -5965,23 +5961,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Si è verificato un problema"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Riprova più tardi"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Indietro"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"La Verifica dell\'identità funziona con più app"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"La Verifica dell\'identità impedisce l\'accesso indesiderato alle tue app. Ora disponibile con qualsiasi app che utilizza lo Sblocco con l\'Impronta o con il Volto."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Visualizza dettagli"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"La Verifica dell\'identità funziona con più app"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Aggiornamenti:\n"<ul><li>"La Verifica dell\'identità aggiunge protezione a qualsiasi app che utilizza lo Sblocco con l\'Impronta o con il Volto"</li>\n<li>"Nel tempo, la Verifica dell\'identità potrebbe aggiungere altri modi per verificare la tua identità e proteggere le app sul tuo dispositivo. "<a href="https://support.google.com/android?p=identity_check">"Scopri di più su quando e dove sei al sicuro"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Verifica dell\'identità e smartwatch"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Con uno smartwatch connesso, la Verifica dell\'identità aggiunge altri modi per verificare la tua identità e impedire l\'accesso indesiderato alle app"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Verifica dell\'identità e smartwatch"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Aggiornamenti:\n"<ul><li>"Se connetti uno smartwatch, puoi usare i dati biometrici o il PIN per accedere alle app quando non ti trovi in un posto attendibile"</li>\n<li>"Nel tempo, la Verifica dell\'identità potrebbe aggiungere altri modi per verificare la tua identità e proteggere le app sul tuo dispositivo. "<a href="https://support.google.com/android?p=identity_check">"Scopri di più su quando e dove sei al sicuro"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Altre impostazioni"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Compilazione automatica, notifiche e altro ancora"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Controlli per la privacy"</string>

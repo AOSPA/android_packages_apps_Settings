@@ -42,12 +42,14 @@ import com.android.settings.appfunctions.providersources.ScreenTimeoutStateSourc
 import com.android.settings.appfunctions.providersources.SharedDeviceStateData
 import com.android.settings.appfunctions.providersources.WifiStatusStateSource
 import com.android.settings.appfunctions.providersources.ZenModesStateSource
-import com.android.settings.flags.Flags
 import com.android.settings.fuelgauge.batteryusage.BatteryUsageStateSource
+import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
+import kotlinx.coroutines.withTimeout
 
 /**
  * A [DeviceStateExecutor] that gathers device state information directly from Android APIs rather
@@ -97,30 +99,32 @@ class AndroidApiStateProviderExecutor(private val context: Context) : DeviceStat
                 .filter { it.appFunctionType == appFunctionType }
                 .map { provider ->
                     async {
-                        if (Flags.parameterisedScreensInAppFunctions()) {
-                            semaphore.withPermit {
-                                val providerName = provider::class.simpleName
-                                try {
-                                    Log.v(TAG, "Getting device state from $providerName")
-                                    val state = provider.get(context, sharedDeviceStateData)
-                                    Log.v(TAG, "Got device state from $providerName")
-                                    state
-                                } catch (e: Exception) {
-                                    Log.e(TAG, "Error getting device state from $providerName", e)
-                                    null
+                        try {
+                            withTimeout(PER_SCREEN_TIMEOUT_MS) {
+                                semaphore.withPermit {
+                                    val providerName = provider::class.simpleName
+                                    try {
+                                        Log.v(TAG, "Getting device state from $providerName")
+                                        val state = provider.get(context, sharedDeviceStateData)
+                                        Log.v(TAG, "Got device state from $providerName")
+                                        state
+                                    } catch (e: Exception) {
+                                        Log.e(
+                                            TAG,
+                                            "Error getting device state from $providerName",
+                                            e,
+                                        )
+                                        null
+                                    }
                                 }
                             }
-                        } else {
-                            val providerName = provider::class.simpleName
-                            try {
-                                Log.v(TAG, "Getting device state from $providerName")
-                                val state = provider.get(context, sharedDeviceStateData)
-                                Log.v(TAG, "Got device state from $providerName")
-                                state
-                            } catch (e: Exception) {
-                                Log.e(TAG, "Error getting device state from $providerName", e)
-                                null
-                            }
+                        } catch (e: TimeoutCancellationException) {
+                            Log.e(
+                                TAG,
+                                "Timed out getting state from provider: $provider::class.simpleName",
+                                e,
+                            )
+                            null
                         }
                     }
                 }
@@ -132,6 +136,7 @@ class AndroidApiStateProviderExecutor(private val context: Context) : DeviceStat
 
     companion object {
         private const val TAG = "AndroidApiStateProviderExecutor"
-        private const val MAX_PARALLELISM = 5
+        private const val MAX_PARALLELISM = 3
+        private val PER_SCREEN_TIMEOUT_MS = 5.seconds
     }
 }

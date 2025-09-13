@@ -18,6 +18,8 @@ package com.android.settings.applications.specialaccess
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.content.Intent
+import android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.Utils.isSystemAlertWindowEnabled
@@ -25,6 +27,7 @@ import com.android.settings.applications.CatalystAppListFragment
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 
 @ProvidePreferenceScreen(DisplayOverOtherAppsAppListScreen.KEY)
@@ -45,6 +48,9 @@ open class DisplayOverOtherAppsAppListScreen :
     override fun getMetricsCategory() = SettingsEnums.SYSTEM_ALERT_WINDOW_APPS
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        if (metadata == null) Intent(ACTION_MANAGE_OVERLAY_PERMISSION) else null
 
     override val appDetailScreenKey
         get() = DisplayOverOtherAppsAppDetailScreen.KEY

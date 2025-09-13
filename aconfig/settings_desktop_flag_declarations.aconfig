@@ -16,6 +16,16 @@ flag {
 }
 
 flag {
+    name: "setupfingerprintenrollfindsensor_skipdialog_theme"
+    namespace: "desktop_oobe"
+    description: "Bugfix flag for theme fix in SetupFingerprintEnrollFindSensor SkipDialog."
+    bug: "432304017"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
+}
+
+flag {
     name: "show_user_details_settings_for_self"
     namespace: "desktop_users_and_accounts"
     description: " Show the user details settings for own account."

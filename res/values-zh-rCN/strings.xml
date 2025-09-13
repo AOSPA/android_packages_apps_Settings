@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用蓝牙 LE 音频"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果设备支持 LE 音频硬件功能，则停用蓝牙 LE 音频功能。"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"蓝牙 LE 音频模式"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"启用蓝牙 LE 音频广播界面预览"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"启用 LE 音频分享界面预览，包括个人音频分享和私人广播"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"在“设备详细信息”中显示 LE 音频切换开关"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"绕过蓝牙 LE 音频许可名单"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"默认使用 LE 音频，即使 LE 音频外围设备尚未通过验证，不符合列入许可名单的条件，也是如此。"</string>
@@ -208,7 +206,7 @@
     <string name="suggested_locales_title" msgid="119908696638862861">"建议的语言"</string>
     <string name="all_supported_locales_title" msgid="2535112632133166546">"所有语言"</string>
     <string name="more_supported_locales_title" msgid="599492013949604604">"更多语言"</string>
-    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"所有区域"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"所有地区"</string>
     <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"所有记数系统"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"系统语言"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"系统默认设置"</string>
@@ -1011,12 +1009,11 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"更改旋转角度或分辨率可能会导致当前正在运行的任何应用停止运行"</string>
-    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"未连接任何显示器\n\n请连接外接显示器以开始使用，或尝试使用其他数据线"</string>
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"未连接任何显示屏\n\n请连接外接显示屏以开始使用，或尝试使用其他数据线"</string>
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"未连接任何显示器"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"请连接外接显示器以开始使用，或尝试使用其他数据线"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"更多选项"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"按住并拖动即可重新排列显示屏"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"镜像内置显示屏"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"使用新设置？"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"如果显示效果不符合您的预期，您可以恢复到之前的设置"</string>
@@ -1584,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"存储空间和缓存"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"存储设置"</string>
     <string name="status_eid" msgid="3588471107671992684">"EID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"EID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"如需查看，请选择已保存的网络"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -2592,8 +2588,8 @@
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"时间"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"标准"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"标准版深色主题"</string>
-    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"为支持深色主题的设备和应用开启深色主题"</string>
-    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"扩展版"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"为设备和支持深色主题的应用开启深色主题"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"扩展"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"扩展版深色主题"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"自动将深色主题应用于大多数不支持深色主题的应用。这样做可以提升无障碍和阅读体验，但可能会导致某些应用无法正常显示。"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"强制反转、颜色反转、对比"</string>
@@ -3392,6 +3388,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"要启用该系统 CA 证书吗？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"要停用该系统CA证书吗？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"要永久移除该用户 CA 证书吗？"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"目前使用方："</string>
     <string name="credential_contains" msgid="3146519680449595771">"此条目包含："</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 个用户密钥"</string>
@@ -3575,8 +3573,7 @@
     <string name="color_orange" msgid="216547825489739010">"橙色"</string>
     <string name="color_purple" msgid="6603701972079904843">"紫色"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM 卡状态"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"SIM 卡 %1$d 状态"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"您的 SIM 卡发生了变更"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"点按即可进行设置"</string>
@@ -5820,7 +5817,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"密码"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"提高兼容性"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"通过降低音频质量，帮助某些设备（如助听器）进行连接。"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"关闭“音频分享”功能以配置兼容性"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"关闭音频分享功能即可更改设置"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"收听附近的音频"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"“音频分享”功能支持 Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"音频流名称"</string>

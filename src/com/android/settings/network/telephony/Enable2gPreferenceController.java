@@ -150,10 +150,8 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
             return;
         }
 
-        preference.setEnabled(!is2gPreferredNetworkMode());
         if (mShowSummaryAsSimName) {
             preference.setSummary(getSimCardName());
-            return;
         }
 
         // The device admin decision overrides any carrier preferences
@@ -161,10 +159,13 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
             return;
         }
 
+        preference.setEnabled(!is2gPreferredNetworkMode());
         if (!SubscriptionManager.isUsableSubscriptionId(mSubId)) {
             return;
         }
-        preference.setSummary(mContext.getString(R.string.enable_2g_summary));
+        if (!mShowSummaryAsSimName) {
+            preference.setSummary(mContext.getString(R.string.enable_2g_summary));
+        }
     }
 
     private String getSimCardName() {

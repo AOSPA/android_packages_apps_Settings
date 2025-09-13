@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio функциясын өшіру"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Құрылғы LE Audio жабдық мүмкіндіктерін қолдайтын болса, Bluetooth LE Audio функциясы өшіріледі."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio режимі"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Bluetooth LE аудио тарату пайдаланушы интерфейсінің алғы нұсқасын қосу"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"LE аудио бөлісу пайдаланушы интерфейсінің алғы нұсқасын, соның ішінде жеке аудио бөлісу және жеке тарату опцияларын қосады."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"LE Audio ауыстырғышын \"Құрылғы туралы мәлімет\" бөлімінде көрсету"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Audio рұқсат тізімін айналып өту"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio перифериялық құрылғысының рұқсат тізімі шарттарына сәйкес келуі расталмаса да, LE Audio әдепкісінше пайдаланылады."</string>
@@ -997,13 +995,13 @@
     <string name="external_display_settings_title" msgid="3865786552022665355">"Сыртқы дисплейлер"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Ендірілген дисплей"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Әмбебап курсор"</string>
-    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Тінтуірді дисплейлер арасында жылжытыңыз"</string>
+    <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"Тінтуір дисплейлер арасында қозғала береді."</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Сыртқы дисплейді пайдалану"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Дисплей ажыратымдылығы"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"Әдепкі жалғау әрекеті"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Бөлек дисплей ретінде пайдалану"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Ендірілген дисплей көшірмесін көрсету"</string>
-    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Қосылудың диалогтік терезесін көрсету"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Дисплей жалғанғаны туралы диалогтік терезе көрсету"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Сыртқы дисплей ажыратылған."</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Бұру"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Стандартты"</string>
@@ -1013,10 +1011,9 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Бұру шамасын немесе ажыратымдылықты өзгертсе, қазір жұмыс істеп тұрған қолданбалар тоқтауы мүмкін"</string>
     <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"Ешқандай дисплей қосылмады\n\nБастау үшін сыртқы дисплей қосыңыз немесе басқа кабель пайдаланып көріңіз"</string>
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Ешқандай дисплей қосылмады"</string>
-    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Бастау үшін сыртқы дисплей қосыңыз немесе басқа кабель пайдаланып көріңіз"</string>
+    <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Жұмысты бастау үшін сыртқы дисплей жалғаңыз немесе басқа кабель пайдаланып көріңіз."</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Басқа опциялар"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Дисплейлердің ретін өзгерту үшін басып тұрып, сүйреңіз"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Ендірілген дисплейдің көшірмесі"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Жаңа параметрлерді пайдалану қажет пе?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Дисплей ойдағыдай істемесе, алдыңғы параметрлерге қайтаруға болады."</string>
@@ -1473,7 +1470,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Ұйқы режимі аяқталған соң автоматты түрде қосылады."</string>
     <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"<xliff:g id="ID_1">%1$s</xliff:g> басталған кезде, өшіріледі."</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Қараңғы батарея кейбір экрандарда батарея зарядын ұзаққа жеткізу үшін қара фонды пайдаланады. Экран өшпейінше, қараңғы режим кестелері қосылмайды."</string>
-    <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Кейбір экрандарда батарея шығынын азайту және экранды көруге ыңғайлырақ ету үшін қараңғы фонды пайдаланыңыз. Егер сізде кесте болса, экран өшірулі кезде режим өзгереді."</string>
+    <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Кейбір экрандарда батарея шығынын азайту және экранды көруге ыңғайлырақ ету үшін қараңғы фон қойылады. Кесте орнатылса, экран өшкеннен кейін, режим өзгереді."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Қараңғы режим қазір \"Ұйқы\" режимінің кестесіне қолданылып жатыр."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Ұйқы режимі параметрлері"</string>
     <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Режимдер қараңғы режимді қоса алады.}=1{{mode_1} қараңғы режимді қоса алады.}=2{{mode_1} және {mode_2} қараңғы режимді қоса алады.}=3{{mode_1}, {mode_2} және {mode_3} қараңғы режимді қоса алады.}other{{mode_1}, {mode_2} және тағы # режим қараңғы режимді қоса алады.}}"</string>
@@ -1584,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Жад және кэш"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Жад параметрлері"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID: <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI (<xliff:g id="IMEI_ID">%1$d</xliff:g>)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Көру үшін сақталған желіні таңдаңыз."</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -2592,10 +2588,10 @@
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Уақыт"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Стандартты"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Стандартты қараңғы режим"</string>
-    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Құрылғыңызда және қараңғы режим қолданылатын қолданбаларда қараңғы режимді қосады."</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Құрылғыңызда және қараңғы режимді қолдайтын қолданбаларда қараңғы режимді қосады."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Кеңейтілген"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Кеңейтілген қараңғы режим"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Қараңғы режим қолданылмайтын көптеген қолданбаға оны автоматты түрде қолданады. Бұл қолжетімділік пен оқу ыңғайлылығын жақсартқанымен, кейбір қолданбалар дұрыс көрсетілмеуі мүмкін."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Қараңғы режимді қолдамайтын көптеген қолданбаға оны автоматты түрде орнатады. Пайдалануға және оқуға ыңғайлы болғанымен, кейбір қолданбалар дұрыс көрсетілмеуі мүмкін."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"мәжбүрлі инверсия, түс инверсиясы, контраст"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Анимацияны өшіру"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Экрандағы қозғалысты азайту"</string>
@@ -3392,6 +3388,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Жүйенің CA сертификаты қосылсын ба?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Жүйенің CA сертификаты өшірілсін бе?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Пайдаланушы РА сертификаты мүлдем алынсын ба?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Пайдаланып жатқан:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Бұл жазбада берілетіндер:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 пайдаланушы кілті"</string>
@@ -3423,7 +3421,7 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Құрылмаған"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Жасақталмаған - Шектеулі профайл"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Орнатылмаған – жұмыс профилі"</string>
-    <string name="user_owner" msgid="2079206733011361994">"Құрылғы иесі"</string>
+    <string name="user_owner" msgid="2079206733011361994">"Ие"</string>
     <string name="user_admin" msgid="4024553191395768119">"Әкімші"</string>
     <string name="user_you" msgid="3070562015202859996">"Сіз (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Басқа пайдаланушы қоса алмайсыз. Жаңасын қосу үшін бұрынғылардың біреуін өшіру қажет."</string>
@@ -3573,8 +3571,7 @@
     <string name="color_orange" msgid="216547825489739010">"Қызғылт сары"</string>
     <string name="color_purple" msgid="6603701972079904843">"Күлгін"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM күйі"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"SIM %1$d күйі"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"SIM карталарыңыз өзгертілді"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Реттеу үшін түртіңіз"</string>
@@ -5800,7 +5797,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Құпия сөз"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Үйлесімділікті жақсарту"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Дыбыс сапасын азайту арқылы есту аппараттары сияқты кейбір құрылғыларды жалғауға көмектеседі."</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Үйлесімділікті конфигурациялау үшін аудио бөлісу функциясын өшіреді."</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Параметрлерді өзгерту үшін аудио бөлісу функциясын өшіріңіз"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Жақын жердегі аудионы тыңдаңыз"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Аудио бөлісу Auracast™ технологиясына қолдау көрсетеді."</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Аудио трансляция атауы"</string>

@@ -18,9 +18,9 @@ package com.android.settings.applications.specialaccess
 
 import android.app.settings.SettingsEnums
 import android.content.Context
-import com.android.settings.Settings.AlarmsAndRemindersActivity
+import android.content.Intent
+import android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
 import com.android.settings.flags.Flags
-import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.R
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -44,7 +44,7 @@ open class AlarmsAndRemindersAppListScreen : SpecialAccessAppListScreen() {
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, AlarmsAndRemindersActivity::class.java, metadata?.key)
+        if (metadata == null) Intent(ACTION_REQUEST_SCHEDULE_EXACT_ALARM) else null
 
     override val appDetailScreenKey: String
         get() = AlarmsAndRemindersAppDetailScreen.KEY
