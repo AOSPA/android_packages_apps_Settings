@@ -18,6 +18,7 @@ package com.android.settings.network
 import android.app.settings.SettingsEnums.SETTINGS_NETWORK_CATEGORY
 import android.content.Context
 import androidx.fragment.app.Fragment
+import com.android.server.connectivity.Flags as ConnectivityFlags
 import com.android.settings.R
 import com.android.settings.Settings.NetworkDashboardActivity
 import com.android.settings.core.PreferenceScreenMixin
@@ -62,7 +63,15 @@ open class NetworkDashboardScreen : PreferenceScreenMixin, PreferenceIconProvide
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             if (Flags.catalystMobileNetworkList()) +MobileNetworkListScreen.KEY order -15
-            +AirplaneModePreference() order -5
+            if (ConnectivityFlags.syncAirplaneModeWithWatches()) {
+                // Note : The following 2 preferences are mutually exclusive and only at most one of
+                // them can be shown at a time. This is because they use different Preferences under
+                // the hood and are shown based on whether or not a watch is connected to the phone.
+                +AirplaneModeTogglePreference() order -5
+                +AirplaneModeSettingsScreen.KEY order 0
+            } else {
+                +AirplaneModePreference() order -5
+            }
             if (Flags.catalystRestrictBackgroundParentEntry()) +DataSaverScreen.KEY order 10
         }
 
