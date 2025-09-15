@@ -16,8 +16,8 @@
 
 package com.android.settings.safetycenter.ui.model
 
-import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterStatus
+import com.android.settingslib.safetycenter.SafetyCenterUiData
 import com.android.settingslib.widget.StatusBannerPreference.BannerStatus
 
 /**
@@ -28,9 +28,9 @@ import com.android.settingslib.widget.StatusBannerPreference.BannerStatus
 data class StatusUiData(val status: SafetyCenterStatus) {
     /**
      * A convenience constructor to create an instance of [StatusUiData] directly from a
-     * [SafetyCenterData] object.
+     * [SafetyCenterUiData] object.
      */
-    constructor(safetyCenterData: SafetyCenterData) : this(safetyCenterData.status)
+    constructor(safetyCenterUiData: SafetyCenterUiData) : this(safetyCenterUiData.status)
 
     val title: CharSequence by status::title
     val summary: CharSequence by status::summary
