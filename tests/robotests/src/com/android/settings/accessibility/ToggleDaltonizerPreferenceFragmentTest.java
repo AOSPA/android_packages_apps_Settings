@@ -177,6 +177,9 @@ public class ToggleDaltonizerPreferenceFragmentTest extends
             customName = "grayscale",
             value = "{modePrefKey: \"daltonizer_mode_grayscale\", expectedValue: 0}")
     public void setDaltonizerMode_updateSettingData(String modePrefKey, int expectedValue) {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, ON);
+
         launchFragment();
         CheckBoxPreference modePref = mFragment.findPreference(modePrefKey);
         assertThat(modePref).isNotNull();
