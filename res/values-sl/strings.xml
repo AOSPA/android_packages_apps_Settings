@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"O zvočnem izhodu"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Zvoke usmerite v slušni pripomoček ali zvočnik telefona."</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Sorodno"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Pošljite hitreje s funkcijo <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Če želite izkoristiti najhitrejši način deljenja z napravami Android in osebnimi računalniki v bližini, preizkusite <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> za Windows"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Preizkusite aplikacijo <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Najhitrejše deljenje datotek med napravami Android in z osebnimi računalniki z našo aplikacijo <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> za Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Zvonjenje in alarmi"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Zvok med klici"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Predstavnost in sistemski zvoki"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Onemogoči funkcijo Bluetooth LE zvok"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Onemogoči funkcijo Bluetooth LE zvok, če naprava podpira strojno opremo za LE zvok."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Način Bluetooth LE zvok"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Omogoči predogled uporabniškega vmesnika za oddajanje po protokolu Bluetooth LE zvok"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Omogoči predogled uporabniškega vmesnika za deljenje po protokolu LE zvok, vključno z osebnim deljenjem zvoka in zasebnim oddajanjem."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Pokaži preklopnik za LE zvok v podrobnostih o napravi"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Zaobidenje seznama dovoljenih za funkcijo Bluetooth LE zvok"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Privzeta uporaba funkcije LE zvok, tudi če dodatna oprema LE zvok ni potrjena, da izpolnjuje merila za uvrstitev na seznam dovoljenih."</string>
@@ -1015,8 +1013,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Ni povezanega zaslona"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Če želite začeti, povežite zunanji zaslon ali poskusite uporabiti drug kabel."</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Več možnosti"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Pridržite in povlecite, da prerazporedite zaslone"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Zrcaljenje vgrajenega zaslona"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Želite uporabiti nove nastavitve?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Če zaslon ne deluje, kot želite, lahko preklopite nazaj na prejšnje nastavitve"</string>
@@ -1408,8 +1405,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Standardna slika"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"Slika HDR"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Ta nastavitev vpliva samo na slike in videoposnetke, ki podpirajo visok dinamični razpon (HDR)."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Intenzivnost – zmanjšajte ali povečajte intenzivnost."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Prikaz ravnovesja beline"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Nadaljevanje uporabe aplikacij po zlaganju naprave"</string>
@@ -1585,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Shramba in predpomnilnik"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Nastavitve shrambe"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Za ogled izberite shranjeno omrežje"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -3393,6 +3388,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Želite omogočiti sistemsko overjeno potrdilo?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Želite onemogočiti sistemsko overjeno potrdilo?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Želite trajno odstraniti uporabniško overjeno potrdilo?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Trenutno uporabljeno za"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Ta vnos vsebuje"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 uporabniški ključ"</string>
@@ -3574,8 +3571,7 @@
     <string name="color_orange" msgid="216547825489739010">"Oranžna"</string>
     <string name="color_purple" msgid="6603701972079904843">"Vijolična"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Stanje kartice SIM"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"Stanje kartice SIM %1$d"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Preklop med karticama SIM je uspel"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Dotaknite se, če želite nastaviti"</string>
@@ -5803,7 +5799,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Geslo"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Izboljšanje združljivosti"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Z zmanjšanjem kakovosti zvoka pomaga vzpostaviti povezavo nekaterim napravam, kot so slušni aparati"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Izklopi deljenje zvoka za konfiguriranje združljivosti"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Izklopite deljenje zvoka, če želite spremeniti nastavitve"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Poslušanje zvoka v bližini"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Deljenje zvoka podpira funkcijo Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Ime pretočnega predvajanja zvoka"</string>
@@ -5967,23 +5963,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Prišlo je do težave"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Poskusite znova pozneje"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Nazaj"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Preverjanje identitete deluje z več aplikacijami"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Preverjanje identitete preprečuje neželen dostop do aplikacij. Zdaj je na voljo v vseh aplikacijah, ki uporabljajo odklepanje s prstnim odtisom ali obrazom."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Prikaži podrobnosti"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Preverjanje identitete deluje z več aplikacijami"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Posodobitve:\n"<ul><li>"Preverjanje identitete doda zaščito vsem aplikacijam, ki uporabljajo odklepanje s prstnim odtisom ali obrazom."</li>\n<li>"Preverjanje identitete bo sčasoma morda dodalo več načinov za preverjanje vaše identitete in zaščito aplikacij v napravi. "<a href="https://support.google.com/android?p=identity_check">"Preberite več o tem, kdaj in kje ste zaščiteni"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Preverjanje identitete in ura"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Preverjanje identitete s povezano uro omogoča več načinov za preverjanje vaše istovetnosti, da prepreči neželen dostop do aplikacij"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Preverjanje identitete in ura"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Posodobitve:\n"<ul><li>"Če povežete uro, lahko za dostop do aplikacij, ko niste na zaupanja vrednem mestu, uporabite biometrične podatke ali kodo PIN."</li>\n<li>"Preverjanje identitete bo sčasoma morda dodalo več načinov za preverjanje vaše identitete in zaščito aplikacij v napravi. "<a href="https://support.google.com/android?p=identity_check">"Preberite več o tem, kdaj in kje ste zaščiteni"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Druge nastavitve"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Samodejno izpolnjevanje, obvestila in drugo"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Nastavitve zasebnosti"</string>

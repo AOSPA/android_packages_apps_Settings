@@ -59,6 +59,8 @@ public class AccessibilityHearingAidsFragment extends BaseRestrictedSupportFragm
                         getMetricsCategory()
                 );
             }
+            use(HearingDevicesFeedbackButtonPreferenceController.class).initialize(
+                    new FeedbackManager(context, getMetricsCategory()));
         }
     }
 
@@ -99,9 +101,7 @@ public class AccessibilityHearingAidsFragment extends BaseRestrictedSupportFragm
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(Flags.catalystHearingDevices()
-                    && com.android.settings.flags.Flags.catalystSettingsSearch() ? 0
-                    : R.xml.accessibility_hearing_aids) {
+            new BaseSearchIndexProvider(R.xml.accessibility_hearing_aids) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return AccessibilityHearingAidsFragment.isPageSearchEnabled(context);

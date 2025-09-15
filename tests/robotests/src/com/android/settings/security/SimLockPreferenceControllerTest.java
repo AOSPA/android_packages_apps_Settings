@@ -24,7 +24,9 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.PersistableBundle;
@@ -36,6 +38,7 @@ import android.telephony.TelephonyManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -74,7 +77,8 @@ public class SimLockPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        ShadowApplication shadowApplication =
+                shadowOf((Application) ApplicationProvider.getApplicationContext());
         shadowApplication.setSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE,
                 mSubscriptionManager);
         when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);

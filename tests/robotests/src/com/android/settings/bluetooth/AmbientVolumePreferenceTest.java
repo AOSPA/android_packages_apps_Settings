@@ -30,12 +30,9 @@ import static com.android.settingslib.bluetooth.HearingAidInfo.DeviceSide.SIDE_R
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.util.ArrayMap;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -59,6 +56,7 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.Map;
+import java.util.Set;
 
 /** Tests for {@link AmbientVolumePreference}. */
 @RunWith(RobolectricTestRunner.class)
@@ -83,7 +81,6 @@ public class AmbientVolumePreferenceTest {
     private AmbientVolumePreference mPreference;
     private ImageView mExpandIcon;
     private ImageView mVolumeIcon;
-    private final Map<Integer, BluetoothDevice> mSideToDeviceMap = new ArrayMap<>();
 
     @Before
     public void setUp() {
@@ -95,8 +92,7 @@ public class AmbientVolumePreferenceTest {
         mPreference.setControlExpandable(true);
         preferenceScreen.addPreference(mPreference);
 
-        prepareDevices();
-        mPreference.setupSliders(mSideToDeviceMap.keySet());
+        mPreference.setupSliders(Set.of(SIDE_LEFT, SIDE_RIGHT));
         mPreference.getSliders().forEach((side, slider) -> {
             slider.setMin(0);
             slider.setMax(4);
@@ -246,10 +242,5 @@ public class AmbientVolumePreferenceTest {
         assertThat(sliders.get(SIDE_RIGHT).isVisible()).isEqualTo(expanded);
         final float rotation = expanded ? ROTATION_EXPANDED : ROTATION_COLLAPSED;
         assertThat(mExpandIcon.getRotation()).isEqualTo(rotation);
-    }
-
-    private void prepareDevices() {
-        mSideToDeviceMap.put(SIDE_LEFT, mock(BluetoothDevice.class));
-        mSideToDeviceMap.put(SIDE_RIGHT, mock(BluetoothDevice.class));
     }
 }

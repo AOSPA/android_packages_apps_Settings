@@ -106,11 +106,11 @@ class SafetyCenterFragmentTest {
                 .perform(scrollTo())
                 .check(matches(isDisplayed()))
 
+            onView(isRoot()).perform(swipeUp())
             onView(withText(mApplication.getString(R.string.more_security_privacy_category_title)))
                 .perform(scrollTo())
                 .check(matches(isDisplayed()))
 
-            onView(isRoot()).perform(swipeUp())
             onView(withText(mApplication.getString(R.string.more_security_privacy_settings)))
                 .check(matches(isDisplayed()))
         }

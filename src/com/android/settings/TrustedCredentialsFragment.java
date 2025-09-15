@@ -356,22 +356,18 @@ public class TrustedCredentialsFragment extends ObservableFragment
 
             TextView title = convertView.findViewById(android.R.id.title);
             UserInfo userInfo = getUserInfoByGroup(groupPosition);
-            String category;
             if (userInfo.isManagedProfile()) {
-                category = mDevicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
-                        () -> getString(com.android.settingslib.R.string.category_work));
+                title.setText(mDevicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
+                        () -> getString(com.android.settingslib.R.string.category_work)));
             } else if (userInfo.isPrivateProfile()) {
-                category = mDevicePolicyManager.getResources().getString(PRIVATE_CATEGORY_HEADER,
-                        () -> getString(com.android.settingslib.R.string.category_private));
+                title.setText(mDevicePolicyManager.getResources().getString(PRIVATE_CATEGORY_HEADER,
+                        () -> getString(com.android.settingslib.R.string.category_private)));
             } else {
-                category = mDevicePolicyManager.getResources().getString(
+                title.setText(mDevicePolicyManager.getResources().getString(
                         PERSONAL_CATEGORY_HEADER,
-                        () -> getString(com.android.settingslib.R.string.category_personal));
+                        () -> getString(com.android.settingslib.R.string.category_personal)));
 
             }
-            title.setText(category);
-            title.setContentDescription(
-                    getString(R.string.trusted_credentials_category_content_description, category));
             title.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
 
             return convertView;
@@ -658,6 +654,14 @@ public class TrustedCredentialsFragment extends ObservableFragment
                     : mHideListLayoutParams);
             mContainerView.setLayoutParams(mIsListExpanded ? mShowLayoutParams
                     : mHideContainerLayoutParams);
+
+            TextView title = mHeaderView.findViewById(android.R.id.title);
+            String description = getString(mIsListExpanded
+                            ?
+                            R.string.trusted_credentials_category_content_description_to_collapse
+                            : R.string.trusted_credentials_category_content_description_to_expand,
+                    title.getText());
+            title.setContentDescription(description);
         }
 
         // Get group indicator from styles of ExpandableListView
@@ -1050,7 +1054,7 @@ public class TrustedCredentialsFragment extends ObservableFragment
                     }
                 }
             } catch (CertificateEncodingException | SecurityException | IllegalStateException
-                    | RemoteException e) {
+                     | RemoteException e) {
                 Log.w(TAG, "Error while toggling alias " + mCertHolder.mAlias, e);
                 return false;
             }

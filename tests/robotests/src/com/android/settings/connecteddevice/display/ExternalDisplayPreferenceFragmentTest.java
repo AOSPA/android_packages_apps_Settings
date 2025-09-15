@@ -82,6 +82,7 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.R;
+import com.android.settings.RestrictedListPreference;
 import com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.PrefBasics;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexableRaw;
@@ -612,7 +613,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         mHandler.flush();
 
         var category = getExternalDisplayCategory(0);
-        ListPreference pref = category.findPreference(
+        RestrictedListPreference pref = category.findPreference(
                 PrefBasics.EXTERNAL_DISPLAY_CONNECTION.keyForNth(0));
         assertThat(pref.getTitle().toString()).isEqualTo(
                 getText(PrefBasics.EXTERNAL_DISPLAY_CONNECTION.titleResource));

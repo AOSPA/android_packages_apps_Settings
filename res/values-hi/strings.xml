@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"ऑडियो आउटपुट की जानकारी"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"साउंड को कान की मशीन या फ़ोन स्पीकर पर रूट करें"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"मिलते-जुलते टूल"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> की मदद से जल्दी फ़ाइलें भेजें"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"आस-पास मौजूद Android डिवाइसों और पीसी के साथ तेज़ी से फ़ाइलें शेयर करने के लिए, Windows में <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> का इस्तेमाल करें"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> आज़माएं"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Windows के लिए बने <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> ऐप्लिकेशन का इस्तेमाल करके, Android डिवाइसों और Android डिवाइस से पीसी के बीच तेज़ी से फ़ाइलें शेयर की जा सकती हैं"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"रिंगटोन और अलार्म"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"कॉल में सुनाई देने वाला ऑडियो"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"मीडिया और सिस्टम की आवाज़ें"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"\'ब्लूटूथ LE Audio\' को बंद करें"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"अगर डिवाइस पर LE Audio हार्डवेयर चलता है, तो \'ब्लूटूथ LE Audio\' को बंद करें."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"ब्लूटूथ LE Audio मोड"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"ब्लूटूथ LE Audio की ब्रॉडकास्ट सुविधा के यूआई की झलक दिखाएं"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"यह सेटिंग चालू करने पर, LE Audio के ज़रिए ऑडियो शेयर करने से जुड़े यूआई की झलक दिखने लगती है. इसमें निजी ऑडियो शेयर करने और प्राइवेट ब्रॉडकास्ट करने से जुड़ी सुविधा की झलक भी शामिल होती है"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"डिवाइस डिटेल में LE Audio टॉगल दिखाएं"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"ब्लूटूथ LE Audio के लिए अनुमति वाली सूची को बायपास करें"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio का इस्तेमाल डिफ़ॉल्ट रूप से करें, भले ही अनुमति वाली सूची में शामिल करने के लिए, LE Audio वाले सहायक डिवाइसों की पुष्टि न की गई हो."</string>
@@ -1002,7 +1000,7 @@
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"डिसप्ले का रिज़ॉल्यूशन"</string>
     <string name="external_display_connection_preference" msgid="3337612335495542718">"कनेक्ट करने का डिफ़ॉल्ट तरीका"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"किसी अन्य डिसप्ले के तौर पर इस्तेमाल करें"</string>
-    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"पहले से मौजूद डिसप्ले की स्क्रीन शेयर करें"</string>
+    <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"पहले से मौजूद डिसप्ले को मिरर मोड में दिखाएं"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"कनेक्शन डायलॉग दिखाएं"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"बाहरी डिसप्ले डिसकनेक्ट कर दिया गया है"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"रोटेशन"</string>
@@ -1408,8 +1406,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"स्टैंडर्ड इमेज"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"एचडीआर इमेज"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"यह सेटिंग सिर्फ़ हाई डाइनैमिक रेंज (एचडीआर) इमेज और वीडियो पर लागू होती है."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"इंटेंसिटी स्लाइडर से स्क्रीन की रोशनी को कम या ज़्यादा किया जा सकता है."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"डिसप्ले का वाइट बैलेंस"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"फ़ोल्ड करने पर भी ऐप्लिकेशन का इस्तेमाल जारी रखें"</string>
@@ -2593,7 +2590,7 @@
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"समय"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"स्टैंडर्ड"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"गहरे रंग वाली स्टैंडर्ड थीम"</string>
-    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"यह सेटिंग, ऐसे डिवाइस और ऐप्लिकेशन के लिए गहरे रंग वाली थीम चालू करती है जिन पर यह थीम काम करती है"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"इससे गहरे रंग वाली थीम, आपके डिवाइस और उन ऐप के लिए चालू हो जाती है जिनके साथ यह थीम काम करती है"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"एक्सपैंडेड"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"एक्सपैंडेड"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"इससे ऐसे ज़्यादातर ऐप पर गहरे रंग वाली थीम अपने-आप लागू हो जाती है जिन पर यह थीम काम नहीं करती. इससे ऐप ऐक्सेस करना और उनका कॉन्टेंट पढ़ना आसान हो सकता है, लेकिन मुमकिन है कि कुछ ऐप का कॉन्टेंट सही से न दिखे."</string>
@@ -3393,6 +3390,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"सिस्‍टम CA प्रमाणपत्र सक्षम करना है?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"सिस्‍टम CA प्रमाणपत्र अक्षम करना है?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"स्‍थायी रूप से उपयोगकर्ता CA प्रमाणपत्र निकालना चाहते हैं?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"इन आइटम में क्रेडेंशियल का इस्तेमाल किया जा रहा है"</string>
     <string name="credential_contains" msgid="3146519680449595771">"इस एंट्री में ये आइटम शामिल हैं"</string>
     <string name="one_userkey" msgid="6363426728683951234">"एक यूज़र बटन"</string>
@@ -5965,23 +5964,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"कोई गड़बड़ी हुई"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"कुछ देर बाद कोशिश करें"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"वापस जाएं"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"पहचान की पुष्टि करने की सुविधा को अब ज़्यादा ऐप्लिकेशन में इस्तेमाल किया जा सकता है"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"पहचान की पुष्टि करने की सुविधा, आपके ऐप्लिकेशन को बिना अनुमति के ऐक्सेस किए जाने से रोकती है. अब यह सुविधा, फ़िंगरप्रिंट या फे़स अनलॉक की सुविधा वाले हर ऐप्लिकेशन के लिए उपलब्ध है."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"जानकारी देखें"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"पहचान की पुष्टि करने की सुविधा को अब ज़्यादा ऐप्लिकेशन में इस्तेमाल किया जा सकता है"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"अपडेट:\n"<ul><li>"पहचान की पुष्टि करने की सुविधा, फ़िंगरप्रिंट या फ़ेस अनलॉक की सुविधा वाले सभी ऐप्लिकेशन को सुरक्षित रखती है"</li>\n<li>"समय के साथ, पहचान की पुष्टि करने की सुविधा, डिवाइस पर मौजूद ऐप्लिकेशन सुरक्षित रखने और पहचान की पुष्टि करने के और तरीके जोड़ सकती है. "<a href="https://support.google.com/android?p=identity_check">"जानें कि आपको कब और कहां सुरक्षा मिलती है"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"पहचान की पुष्टि करने की सुविधा और स्मार्टवॉच"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"स्मार्टवॉच कनेक्ट होने पर पहचान की पुष्टि करने की सुविधा, आपको पहचान की पुष्टि करने के ज़्यादा विकल्प देती है. इससे ऐप्लिकेशन को बिना अनुमति के ऐक्सेस किए जाने से रोका जा सकता है"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"पहचान की पुष्टि करने की सुविधा और स्मार्टवॉच"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"अपडेट:\n"<ul><li>"स्मार्टवॉच कनेक्ट करके, भरोसेमंद जगह पर न होने के दौरान ऐप्लिकेशन ऐक्सेस करने के लिए, बायोमेट्रिक डेटा या पिन का इस्तेमाल किया जा सकता है"</li>\n<li>"समय के साथ, पहचान की पुष्टि करने की सुविधा, डिवाइस पर मौजूद ऐप्लिकेशन सुरक्षित रखने और पहचान की पुष्टि करने के और तरीके जोड़ सकती है. "<a href="https://support.google.com/android?p=identity_check">"जानें कि आपको कब और कहां सुरक्षा मिलती है"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"अन्य सेटिंग"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"ऑटोमैटिक तरीके से भरने की सुविधा, सूचनाएं वगैरह"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"निजता सेटिंग"</string>

@@ -18,9 +18,11 @@
 package com.android.settings.connecteddevice.display
 
 import android.app.ActivityManager.LOCK_TASK_MODE_LOCKED
+import android.app.ActivityManager.LOCK_TASK_MODE_NONE
 import android.app.Application
 import android.app.TaskStackListener
 import android.content.Context
+import android.hardware.display.DisplayManager
 import android.provider.Settings
 import android.view.Display.DEFAULT_DISPLAY
 import androidx.lifecycle.Lifecycle
@@ -32,6 +34,7 @@ import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.RestrictedListPreference
 import com.android.settings.connecteddevice.display.SelectedDisplayPreferenceFragment.PrefInfo
 import com.android.settings.testutils.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
@@ -303,7 +306,7 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         viewModel.updateSelectedDisplay(display.id)
 
         val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
-        assertNull(category.findPreference<Preference>(PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key))
+        assertNull(category.findPreference(PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key))
     }
 
     @Test
@@ -314,7 +317,9 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         viewModel.updateSelectedDisplay(display.id)
         val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
         val connectionPref =
-            category.findPreference<ListPreference>(PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key)!!
+            category.findPreference<RestrictedListPreference>(
+                PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key
+            )!!
 
         assertThat(connectionPref.value).isEqualTo("0")
 
@@ -323,6 +328,32 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         assertThat(fragment.writtenMetricsPreference).isEqualTo(connectionPref)
         verify(mMockedInjector).updateDisplayConnectionPreference(display.uniqueId, 1)
         assertThat(connectionPref.value).isEqualTo("1")
+    }
+
+    @Test
+    fun testExternalDisplaySelected_lockTaskLocked_disableConnectionPreference() {
+        fragment = initFragment()
+        verify(mActivityTaskManager).registerTaskStackListener(taskStackListenerCaptor.capture())
+        val display = mDisplays.first { it.id == EXTERNAL_DISPLAY_ID }
+
+        viewModel.updateSelectedDisplay(display.id)
+        taskStackListenerCaptor.value.onLockTaskModeChanged(LOCK_TASK_MODE_LOCKED)
+        mHandler.flush()
+
+        val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
+        var connectionPref =
+            category.findPreference<RestrictedListPreference>(
+                PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key
+            )!!
+        assertThat(connectionPref.isEnabled).isEqualTo(false)
+        assertThat(connectionPref.value)
+            .isEqualTo(DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR.toString())
+
+        taskStackListenerCaptor.value.onLockTaskModeChanged(LOCK_TASK_MODE_NONE)
+        mHandler.flush()
+        connectionPref = category.findPreference(PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key)!!
+        assertThat(connectionPref.isEnabled).isEqualTo(true)
+        assertThat(connectionPref.value).isEqualTo("0")
     }
 
     private fun setMirroringMode(enable: Boolean) {

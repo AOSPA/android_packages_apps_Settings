@@ -24,7 +24,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -37,6 +39,8 @@ import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
 import android.net.Uri;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.slices.ShadowSliceBackgroundWorker;
@@ -96,7 +100,7 @@ public class MediaOutputIndicatorWorkerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mShadowApplication = ShadowApplication.getInstance();
+        mShadowApplication = shadowOf((Application) ApplicationProvider.getApplicationContext());
         mContext = spy(RuntimeEnvironment.application);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);

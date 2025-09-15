@@ -18,10 +18,15 @@ package com.android.settings.network.telephony
 
 import android.os.Bundle
 import android.provider.Settings
+import com.android.settings.Settings.MobileNetworkActivity
+import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
 
 class MobileNetworkScreenTest : SettingsCatalystTestCase() {
     private val subId = 123
@@ -40,6 +45,19 @@ class MobileNetworkScreenTest : SettingsCatalystTestCase() {
     @Test
     fun getBindingKey_returnsCorrectBindingKey() {
         assertThat(preferenceScreenCreator.bindingKey).isEqualTo("${MobileNetworkScreen.KEY}-123")
+    }
+
+    @Test
+    fun getLaunchIntent_returnsIntentWithSubId() {
+        val prefKey = "fakePrefKey"
+        val mockPrefMetadata = mock<PreferenceMetadata> { on { bindingKey } doReturn prefKey }
+        val intent = preferenceScreenCreator.getLaunchIntent(appContext, mockPrefMetadata)
+
+        assertThat(intent).isNotNull()
+        assertThat(intent!!.component?.className).isEqualTo(MobileNetworkActivity::class.java.name)
+        assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID, -1)).isEqualTo(subId)
+        assertThat(intent.hasExtra(EXTRA_FRAGMENT_ARG_KEY)).isTrue()
+        assertThat(intent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY)).isEqualTo(prefKey)
     }
 
     // TODO(b/419310279): Migration test fails when instantiating a BillingCycleRepository due to a

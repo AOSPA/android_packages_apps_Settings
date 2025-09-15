@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Аудио оролтын тухай"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Сонсголын төхөөрөмж эсвэл утасны чанга яригч руугаа дуу чимээ чиглүүлнэ үү"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Холбоотой"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>-р илүү хурдан илгээх"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Ойролцоох Android, PC-тэй хуваалцах хамгийн хурдан аргыг авах бол Windows-д зориулсан <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>-г туршина уу"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>-г турших"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Android төхөөрөмжүүд болон Windows-д зориулсан манай <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> аппыг ашигладаг PC-н хооронд хамгийн хурдан файл хуваалцах"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Хонхны ая болон сэрүүлэг"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Дуудлагын үеэрх аудио"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Медиа, системийн дуу чимээнүүд"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE аудиог идэвхгүй болгох"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Хэрэв төхөөрөмж LE аудио техник хангамжийн чадамжийг дэмждэг бол Bluetooth LE аудио онцлогийг идэвхгүй болгоно."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Аудио горим"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Bluetooth LE Аудио аппын нэвтрүүлэх UI-г урьдчилан үзэхийг идэвхжүүлэх"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Хувийн аудио хуваалцах, хувийн байдлаар нэвтрүүлэх зэрэг LE Аудио аппын хуваалцах UI-г урьдчилан үзэхийг идэвхжүүлнэ"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Төхөөрөмжийн дэлгэрэнгүйд LE аудионы асаах/унтраахыг харуул"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Аудиогийн зөвшөөрсөн жагсаалтыг алгасах"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Аудиогийн нэмэлт хэрэгслийг Зөвшөөрсөн жагсаалтын шалгуурт нийцэж байгаа эсэхийг баталгаажуулаагүй байсан ч өгөгдмөлөөр LE Аудиог ашиглана уу."</string>
@@ -1015,8 +1013,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Ямар ч дэлгэц холбогдоогүй"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Эхлүүлэхийн тулд гаднын дэлгэцэд холбогдох эсвэл өөр кабель ашиглаж үзнэ үү"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Бусад сонголт"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Дэлгэцүүдийг дахин эмхлэхийн тулд удаан дараад, чирэх"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Бүрэлдэхүүн дэлгэцийн тусгал үүсгэх"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Шинэ тохиргоог ашиглах уу?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Хэрэв таны дэлгэц хүссэнээр тань ажиллахгүй байвал та өмнөх тохиргоо руугаа буцаах боломжтой"</string>
@@ -1408,8 +1405,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Стандарт зураг"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR зураг"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Энэ тохиргоо зөвхөн High Dynamic Range (HDR)-г дэмждэг зураг, видеонд нөлөөлнө."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Эрчим, эрчмийг бүдгэрүүлэх эсвэл илүү тод болгоно уу."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Дэлгэцийн цайралтын тэнцвэр"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Эвхэгддэг дэлгэцэд аппуудыг үргэлжлүүлэн ашиглах"</string>
@@ -1585,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Хадгалах сан ба завсрын санах ой"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Хадгалах сангийн тохиргоо"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Үзэхийн тулд хадгалсан сүлжээг сонгоно уу"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -3393,6 +3388,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Системийн CA сертификатыг идэвхжүүлэх үү?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Системийн CA сертификатыг идэвхгүйжүүлэх үү?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Хэрэглэгчийн CA сертификатыг бүрмөсөн арилгах уу?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Ашиглаж байна"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Энэ оролтод"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 хэрэглэгчийн түлхүүр"</string>
@@ -3574,8 +3571,7 @@
     <string name="color_orange" msgid="216547825489739010">"Улбар шар"</string>
     <string name="color_purple" msgid="6603701972079904843">"Ягаан"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM статус"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"SIM-н %1$d төлөв"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Таны SIM-үүдийг өөрчилсөн"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Тохируулахын тулд дарна уу"</string>
@@ -5801,7 +5797,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Нууц үг"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Тохиромжтой байдлыг сайжруулах"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Сонсголын төхөөрөмж зэрэг зарим төхөөрөмжид аудионы чанарыг багасгаснаар холбогдоход тусалдаг"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Тохиромжтой байдлыг тохируулахын тулд аудио хуваалцахыг унтраадаг"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Тохиргоог өөрчлөхийн тулд аудио хуваалцахыг унтраана уу"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Ойролцоох аудиог сонсох"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Аудио хуваалцах нь Auracast™-г дэмждэг"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Аудио дамжуулалтын нэр"</string>
@@ -5965,23 +5961,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Ямар нэг алдаа гарлаа"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Дараа дахин оролдоно уу"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Буцах"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Өөрөө мөн эсэхийг шалгах онцлог илүү олон апптай ажилладаг"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Өөрөө мөн эсэхийг шалгах онцлог таны аппуудад хүсээгүй байдлаар хандахаас сэргийлнэ. Одоо хурууны хээ, царайгаар түгжээ тайлахыг ашигладаг ямар ч апп дээр ашиглах боломжтой боллоо."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Дэлгэрэнгүй үзэх"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Өөрөө мөн эсэхийг шалгах онцлог илүү олон апптай ажилладаг"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Шинэчлэлт:\n"<ul><li>"Өөрөө мөн эсэхийг шалгах онцлог хурууны хээ, царайгаар түгжээ тайлахыг ашигладаг ямар ч аппад хамгаалалт нэмнэ"</li>\n<li>"Цаг хугацааны явцад Өөрөө мөн эсэхийг шалгах онцлог таныг мөн эсэхийг баталгаажуулах илүү олон аргыг нэмж, таны төхөөрөмж дээрх аппуудыг хамгаалж болно. "<a href="https://support.google.com/android?p=identity_check">"Та хэзээ, хаана хамгаалагдсан байдаг талаар нэмэлт мэдээлэл аваарай"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Өөрөө мөн эсэхийг шалгах, цаг"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Холбогдсон цагны тусламжтайгаар Өөрөө мөн эсэхийг шалгах онцлог аппуудад хүсээгүй байдлаар хандахаас сэргийлэхийн тулд таныг мөн болохыг баталгаажуулах илүү олон аргыг нэмдэг."</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Өөрөө мөн эсэхийг шалгах, цаг"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Шинэчлэлт:\n"<ul><li>"Та цагаа холбосноор итгэмжлэгдсэн газар байхгүй үедээ аппуудад хандахын тулд биометр, ПИН кодоо ашиглах боломжтой"</li>\n<li>"Цаг хугацааны явцад Өөрөө мөн эсэхийг шалгах онцлог таныг мөн эсэхийг баталгаажуулах илүү олон аргыг нэмж, таны төхөөрөмж дээрх аппуудыг хамгаалж болно. "<a href="https://support.google.com/android?p=identity_check">"Та хэзээ, хаана хамгаалагдсан байдаг талаар нэмэлт мэдээлэл аваарай"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Бусад тохиргоо"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Автоматаар бөглөх хэсэг, мэдэгдэл болон бусад"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Нууцлалын тохиргоо"</string>

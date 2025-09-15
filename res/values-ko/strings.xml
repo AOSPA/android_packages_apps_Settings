@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"블루투스 LE 오디오 사용 중지"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"기기가 LE 오디오 하드웨어 기능을 지원하는 경우 블루투스 LE 오디오 기능을 사용 중지합니다."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"블루투스 LE 오디오 모드"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"블루투스 LE 오디오 브로드캐스트 UI 미리보기 사용 설정"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"개인 오디오 공유 및 비공개 브로드캐스트를 포함한 LE 오디오 공유 UI 미리보기 사용 설정"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"기기 세부정보에 LE 오디오 전환 버튼 표시"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"블루투스 LE 오디오 허용 목록 우회"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE 오디오 주변기기가 허용 목록 기준을 충족하는 것으로 확인되지 않은 경우에도 기본적으로 LE 오디오를 사용합니다."</string>
@@ -1015,8 +1013,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"연결된 디스플레이가 없음"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"시작하려면 외부 디스플레이를 연결하거나 다른 케이블을 사용해 보세요."</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"옵션 더보기"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"길게 터치한 후 드래그하여 디스플레이를 재정렬하세요."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"내장 디스플레이 미러링"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"새 설정을 사용하시겠습니까?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"디스플레이가 원하는 대로 작동하지 않으면 이전 설정으로 되돌릴 수 있습니다."</string>
@@ -1584,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"저장용량 및 캐시"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"저장소 설정"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"확인하려면 저장된 네트워크를 선택하세요."</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -3392,6 +3388,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"시스템 CA 인증서를 사용하시겠습니까?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"시스템 CA 인증서를 사용 중지하시겠습니까?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"사용자 CA 인증서를 영구 삭제하시겠습니까?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"사용처"</string>
     <string name="credential_contains" msgid="3146519680449595771">"이 항목 포함사항"</string>
     <string name="one_userkey" msgid="6363426728683951234">"사용자 키 1개"</string>
@@ -3573,8 +3571,7 @@
     <string name="color_orange" msgid="216547825489739010">"주황색"</string>
     <string name="color_purple" msgid="6603701972079904843">"보라색"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM 상태"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"SIM %1$d 상태"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g>dBm <xliff:g id="ASU">%2$d</xliff:g>asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"SIM이 변경됨"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"탭하여 설정"</string>
@@ -5800,7 +5797,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"비밀번호"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"호환성 개선"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"음질을 낮춰 보청기와 같은 일부 기기의 연결을 지원합니다."</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"호환성 구성을 위해 오디오 공유를 사용 중지합니다."</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"설정을 변경하려면 오디오 공유를 사용 중지하세요."</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"주변 오디오 듣기"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"오디오 공유는 Auracast™를 지원합니다."</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"오디오 스트림 이름"</string>
@@ -5970,7 +5967,7 @@
     <string name="identity_check_promo_card_title" msgid="4467736415491327717">"더 많은 앱에서 본인 확인 사용 가능"</string>
     <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"업데이트:\n"<ul><li>"본인 확인 기능이 지문 또는 얼굴 인식 잠금 해제를 사용하는 모든 앱의 보안을 강화합니다"</li>\n<li>"시간이 지남에 따라 본인 확인 기능에 본인임을 인증하고 기기의 앱을 보호하는 방법이 추가될 수도 있습니다. "<a href="https://support.google.com/android?p=identity_check">"언제 어디서 보호받을 수 있는지 자세히 알아보기"</a></li></ul></string>
     <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"본인 확인 및 워치"</string>
-    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"워치가 연결되어 있으면 본인 확인 기능에 본인 인증 방법이 추가되어 앱에 대한 원치 않는 액세스를 방지할 수 있습니다"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"워치가 연결되어 있으면 본인 확인 기능에 본인 인증 방법이 추가되어 앱에 대한 무단 액세스를 방지할 수 있습니다"</string>
     <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"본인 확인 및 워치"</string>
     <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"업데이트:\n"<ul><li>"워치를 연결하면 신뢰할 수 있는 장소에 있지 않을 때 생체 인식 또는 PIN을 사용하여 앱에 액세스할 수 있습니다."</li>\n<li>"시간이 지남에 따라 본인 확인 기능에 본인임을 인증하고 기기의 앱을 보호하는 방법이 추가될 수도 있습니다. "<a href="https://support.google.com/android?p=identity_check">"언제 어디서 보호받을 수 있는지 자세히 알아보기"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"기타 설정"</string>

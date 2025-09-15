@@ -90,6 +90,7 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
                 +MobileNetworkMainSwitchPreference(context, subId) order +0
                 val data = MobileNetworkData(context, coroutineScope, subId)
                 +EnabledStateUntitledCategory(subId) += {
+                    +MobileNetworkDataUsagePreference(context, coroutineScope, subId)
                     +MobileNetworkSpnPreference(context, subId)
                     +MobileNetworkPhoneNumberPreference(data)
                     +MobileNetworkImeiPreference(context, subId)
@@ -103,12 +104,15 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
-        return makeLaunchIntent(
-            context,
-            MobileNetworkActivity::class.java,
-            arguments,
-            metadata?.bindingKey,
-        )
+        val intent =
+            makeLaunchIntent(
+                context,
+                MobileNetworkActivity::class.java,
+                arguments,
+                metadata?.bindingKey,
+            )
+        intent.putExtra(Settings.EXTRA_SUB_ID, subId)
+        return intent
     }
 
     override val restrictionKeys

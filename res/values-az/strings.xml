@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Audio çıxışı haqqında"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Səsləri eşitmə cihazına və ya telefon dinamikinə yönləndirin"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Oxşar"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> ilə sürətlə göndərin"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Yaxınlıqda olan Android və kompüterlərlə ən sürətli paylaşım məqsədilə Windows üçün <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> tətbiqini sınayın."</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> tətbiqini sınayın"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Android cihazlar arasında və Windows üçün <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> Tətbiqimizdən istifadə edərək kompüterlərlə ən sürətli fayl paylaşımı"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Zəng melodiyası, zəngli saat"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Zənglər zamanı audio"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Media və sistem səsləri"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE audionu deaktiv edin"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Cihaz LE audio avadanlıq imkanlarını dəstəkləyirsə, Bluetooth LE audio funksiyasını deaktiv edir."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio rejimi"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Bluetooth LE Audio Yayım üzrə istifadəçi interfeysi önizləməsini aktiv edin"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Şəxsi audio paylaşma və şəxsi yayım da daxil olmaqla LE Audio Paylaşım üzrə istifadəçi interfeysi önizləməsini aktivləşdirir"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"LE audio açarı görünsün: Cihaz detalları"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Audio üzrə icazə verilənlər siyahısına qoşulmayın"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio periferik cihazının icazə verilənlər siyahısı üzrə meyarlara cavab verdiyi doğrulanmasa da, defolt olaraq LE Audio istifadə edin."</string>
@@ -1408,8 +1406,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Standart şəkil"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR şəkli"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Bu ayar yalnız Yüksək Dinamikli Diapazonu (HDR) dəstəkləyən şəkillərə və videolara təsir edir."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"İntensivlik: intensivliyi azaldın və ya artırın."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Ağlıq balansını göstərin"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Qatlandıqda tətbiqlərdən istifadəyə davam edin"</string>
@@ -3393,6 +3390,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Sistem CA sertifikatı aktiv edilsin?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Sistem CA sertifikatı deaktiv edilsin?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"İstifadəçi CA sertifikatı həmişəlik silinsin?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Bunun tərəfindən istifadə edilir:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Bu giriş bunlardan ibarətdir:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 istifadəçi açarı"</string>
@@ -5965,23 +5964,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Xəta oldu"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Sonra cəhd edin"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Geri qayıdın"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Kimlik yoxlanılması bir çox tətbiqlə işləyir"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Kimlik yoxlanılması tətbiqlərinizə arzuolunmaz girişin qarşısını alır. Artıq Barmaq izi və ya Üz ilə kiliddən açma funksiyasından istifadə edən hər hansı tətbiqlə əlçatandır."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Təfərrüatlara baxın"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Kimlik yoxlanılması bir çox tətbiqlə işləyir"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Güncəllənmələr:\n"<ul><li>"Kimlik yoxlanılması Barmaq izi və ya Üz ilə kiliddən açma funksiyasından istifadə edən istənilən tətbiqə qoruma əlavə edir"</li>\n<li>"Zaman keçdikcə Kimlik yoxlanılması kimliyinizi doğrulamaq və tətbiqləri təhlükəsiz saxlamaq üçün daha çox yol əlavə edə bilər. "<a href="https://support.google.com/android?p=identity_check">"Nə vaxt və harada qorunduğunuz barədə ətraflı məlumat"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Kimlik yoxlanılması və saat"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Əlaqələndirilmiş saat sayəsində Kimlik yoxlanılması tətbiqlərə icazəsiz girişin qarşısını almaq üçün kimliyinizi doğrulamağın daha çox yolunu əlavə edir"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Kimlik yoxlanılması və saat"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Güncəllənmələr:\n"<ul><li>"Saatı əlaqələndirərərək etibarlı olmayan yerdə olarkən tətbiqlərə daxil olmaq üçün biometrik məlumatlardan və ya PIN-dən istifadə edə bilərsiniz"</li>\n<li>"Zaman keçdikcə Kimlik yoxlanılması kimliyinizi doğrulamaq və tətbiqləri təhlükəsiz saxlamaq üçün daha çox yol əlavə edə bilər. "<a href="https://support.google.com/android?p=identity_check">"Nə vaxt və harada qorunduğunuz barədə ətraflı məlumat"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Digər ayarlar"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Avto doldurma, bildirişlər və s."</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Məxfilik nizamlayıcıları"</string>

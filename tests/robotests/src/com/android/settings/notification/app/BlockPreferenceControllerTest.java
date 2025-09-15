@@ -36,7 +36,9 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
@@ -44,8 +46,8 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.UserManager;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.LayoutInflater;
@@ -53,12 +55,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceViewHolder;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.flags.Flags;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.SettingsMainSwitchPreference;
-import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -101,7 +104,8 @@ public class BlockPreferenceControllerTest {
     @Before
     public void setUp() throws NameNotFoundException {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        ShadowApplication shadowApplication =
+                shadowOf((Application) ApplicationProvider.getApplicationContext());
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         shadowApplication.setSystemService(Context.DEVICE_POLICY_SERVICE, mDpm);

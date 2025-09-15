@@ -22,7 +22,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
@@ -31,6 +33,7 @@ import android.os.UserManager;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -45,7 +48,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 public class CombinedBiometricStatusPreferenceControllerTest {
@@ -79,10 +81,12 @@ public class CombinedBiometricStatusPreferenceControllerTest {
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)).thenReturn(true);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
-        ShadowApplication.getInstance().setSystemService(Context.FINGERPRINT_SERVICE,
-                mFingerprintManager);
-        ShadowApplication.getInstance().setSystemService(Context.FACE_SERVICE, mFaceManager);
-        ShadowApplication.getInstance().setSystemService(Context.USER_SERVICE, mUm);
+        shadowOf((Application) ApplicationProvider.getApplicationContext())
+                .setSystemService(Context.FINGERPRINT_SERVICE, mFingerprintManager);
+        shadowOf((Application) ApplicationProvider.getApplicationContext())
+                .setSystemService(Context.FACE_SERVICE, mFaceManager);
+        shadowOf((Application) ApplicationProvider.getApplicationContext())
+                .setSystemService(Context.USER_SERVICE, mUm);
         mPreference = new Preference(mContext);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))

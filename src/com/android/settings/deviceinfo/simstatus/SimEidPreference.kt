@@ -136,8 +136,8 @@ class SimEidPreference(private val context: Context) :
     private data class EidMetadata(val eid: String, val associatedSlotId: Int?)
 
     private fun EidMetadata?.getTitle(context: Context): String {
-        val slotId = this?.associatedSlotId ?: return context.getString(R.string.status_eid)
-        return context.getString(R.string.eid_multi_sim, slotId + 1)
+        // Since there is the MEP feature, there is one EID item.
+        return context.getString(R.string.status_eid)
     }
 
     companion object {

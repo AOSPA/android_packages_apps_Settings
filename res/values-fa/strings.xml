@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"درباره خروجی صوتی"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"انتقال صدا به دستگاه کمک‌شنوایی یا بلندگوی تلفن"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"مرتبط شده"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"ارسال سریع‌تر با «<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>»"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"‏برای تجربه سریع‌ترین روش هم‌رسانی با رایانه‌های شخصی و دستگاه‌های Android اطراف، «<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>» ویژه Windows را امتحان کنید"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"امتحان کردن <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"‏سریع‌ترین روش هم‌رسانی فایل بین دستگاه‌های Android و با رایانه‌ها بااستفاده از برنامه <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> ما برای Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"آهنگ زنگ و هشدار"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"صدا درطول تماس"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"صداهای رسانه و سیستم"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"غیرفعال کردن «صدای بلوتوث کم‌مصرف»"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"اگر دستگاه از ویژگی‌های سخت‌افزار «صدای کم‌مصرف» پشتیبانی کند، ویژگی «صدای بلوتوث کم‌مصرف» را غیرفعال می‌کند."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"حالت «صدای بلوتوث کم‌مصرف»"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"فعال کردن پیش‌نمایش واسط کاربر «همه‌فرستی صدای بلوتوث کم‌مصرف»"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"پیش‌نمایش واسط کاربر «اشتراک صدای کم‌مصرف» را فعال می‌کند، ازجمله اشتراک صدای شخصی و همه‌فرستی خصوصی"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"نمایش تنظیم «صدای کم‌مصرف» در جزئیات دستگاه"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"کنار گذاشتن فهرست «صدای بلوتوث کم‌مصرف» مجاز"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"استفاده از «صدای کم‌مصرف» به‌طور پیش‌فرض حتی درصورتی‌که دستگاه جانبی مجهز به «صدای کم‌مصرف» ازلحاظ مطابقت با معیارهای «فهرست مجازها» تأیید نشده باشد"</string>
@@ -1000,10 +998,10 @@
     <string name="builtin_display_settings_universal_cursor_description" msgid="4209129904885332824">"می‌توانید موشواره را بین نمایشگرها جابه‌جا کنید"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"استفاده از نمایشگر خارجی"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"وضوح صفحه‌نمایش"</string>
-    <string name="external_display_connection_preference" msgid="3337612335495542718">"رفتار پیش فرض اتصال"</string>
+    <string name="external_display_connection_preference" msgid="3337612335495542718">"رفتار پیش‌فرض اتصال"</string>
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"استفاده به‌عنوان نمایشگر مستقل"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"قرینه‌سازی نمایشگر داخلی"</string>
-    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"نمایش کادر گفتگوی اتصال"</string>
+    <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"نشان دادن کادر گفتگوی اتصال"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"نمایشگر خارجی قطع شده است"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"چرخش"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"استاندارد"</string>
@@ -1011,8 +1009,8 @@
     <string name="external_display_rotation_180" msgid="6469137724447819841">"‎۱۸۰°"</string>
     <string name="external_display_rotation_270" msgid="7819322302457740514">"‎۲۷۰°"</string>
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"تغییر چرخش یا وضوح ممکن است باعث شود برنامه‌هایی که اکنون درحال اجرا هستند متوقف شوند"</string>
-    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"هیچ نمایشگری متصل نیست\n\nبرای شروع، یک نمایشگر خارجی وصل کنید، یا از کابل دیگری استفاده کنید"</string>
-    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"هیچ نمایشگری متصل نیست"</string>
+    <string name="external_display_not_found_footer_title" msgid="3974573337788760338">"هیچ نمایشگری متصل نشده است\n\nبرای شروع، یک نمایشگر خارجی وصل کنید، یا از کابل دیگری استفاده کنید"</string>
+    <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"هیچ نمایشگری متصل نشده است"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"برای شروع، یک نمایشگر خارجی وصل کنید، یا از کابل دیگری استفاده کنید"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"گزینه‌های بیشتر"</string>
     <!-- no translation found for external_display_topology_hint (885396727047321347) -->
@@ -1408,8 +1406,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"تصویر استاندارد"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"‏تصویر HDR"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"‏این تنظیم فقط بر تصاویر و ویدیوهایی تأثیر می‌گذارد که از دامنه پویای بالا (HDR) پشتیبانی می‌کنند."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"شدت روشنایی: شدت نور روشنایی را کم یا زیاد کنید."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"تعادل سفیدی نمایشگر"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"ادامه دادن به استفاده از برنامه‌ها درحالت تاخوردگی"</string>
@@ -1863,7 +1860,7 @@
     <string name="legal_information" msgid="7509900979811934843">"اطلاعات حقوقی"</string>
     <string name="manual" msgid="3651593989906084868">"دفترچه راهنما"</string>
     <string name="regulatory_labels" msgid="5960251403367154270">"برچسب‌های نظارتی"</string>
-    <string name="safety_and_regulatory_info" msgid="8285048080439298528">"راهنمای ایمنی و مقررات نظارتی"</string>
+    <string name="safety_and_regulatory_info" msgid="8285048080439298528">"راهنمای ایمنی و نظارتی"</string>
     <string name="copyright_title" msgid="83245306827757857">"حق نشر"</string>
     <string name="license_title" msgid="8745742085916617540">"مجوز"</string>
     <string name="module_license_title" msgid="8705484239826702828">"‏مجوزهای به‌روزرسانی سیستم Google Play"</string>
@@ -3396,6 +3393,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"‏گواهی CA سیستم فعال شود؟"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"‏گواهی CA سیستم غیرفعال شود؟"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"‏گواهی CA کاربر به صورت دائمی حذف شود؟"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"درحال استفاده توسط"</string>
     <string name="credential_contains" msgid="3146519680449595771">"موارد موجود در این ورودی:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"یک کلید کاربر"</string>
@@ -3588,7 +3587,7 @@
     <string name="dashboard_title" msgid="5660733037244683387">"تنظیمات"</string>
     <string name="network_dashboard_title" msgid="788543070557731240">"شبکه و اینترنت"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"‏Wi-Fi، نقطه اتصال"</string>
-    <string name="connected_devices_dashboard_title" msgid="19868275519754895">"دستگاه‌های متصل"</string>
+    <string name="connected_devices_dashboard_title" msgid="19868275519754895">"دستگاه‌های متصل‌شده"</string>
     <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"بلوتوث، جفت‌سازی"</string>
     <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"‏بلوتوث، حالت رانندگی، NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"بلوتوث، حالت رانندگی"</string>
@@ -4477,7 +4476,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"‏اولویت‌های USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"‏USB تحت کنترل"</string>
-    <string name="usb_control_host" msgid="7404215921555021871">"دستگاه متصل‏"</string>
+    <string name="usb_control_host" msgid="7404215921555021871">"دستگاه متصل‌شده"</string>
     <string name="usb_control_device" msgid="527916783743021577">"این دستگاه"</string>
     <string name="usb_switching" msgid="3654709188596609354">"درحال رفتن به…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"تغییر وضعیت انجام نشد"</string>
@@ -5968,23 +5967,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"مشکلی پیش آمد"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"بعداً دوباره امتحان کنید"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"برگشتن"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"احراز هویت با برنامه‌های بیشتری کار می کند."</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"احراز هویت دسترسی غیرمجاز به برنامه‌های شما را مسدود می‌کند. اکنون برای تمام برنامه‌های که از اثر انگشت یا قفل‌گشایی با چهره استفاده می‌کند، دردسترس است."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"مشاهده جزئیات"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"احراز هویت با برنامه‌های بیشتری کار می کند."</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"به‌روزرسانی‌ها: \n"<ul><li>" احراز هویت به هر برنامه‌ای که از اثر انگشت یا قفل‌گشایی با چهره استفاده می‌کند، محافظت اضافه می‌کند. "</li>\n<li>" با گذر زمان، احراز هویت ممکن است روش‌های بیشتری برای درستی‌سنجی هویت شما و ایمن نگه داشتن برنامه‌ها روی دستگاه اضافه کند. "<a href="https://support.google.com/android?p=identity_check">"درباره زمان و مکانی که محافظت می‌شوید بیشتر بدانید "</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"احراز هویت و مراقبت"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"با یک ساعت متصل، احراز هویت روش‌های بیشتری برای درستی‌سنجی هویت شما اضافه می‌کند تا از دسترسی غیرمجاز به برنامه‌ها جلوگیری شود."</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"احراز هویت و مراقبت"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"به‌روزرسانی‌ها:\n"<ul><li>" با اتصال یک ساعت، می‌توانید از زیست‌سنجشی یا پین خود برای دسترسی به برنامه‌ها زمانی که در جای مطمئن نیستید استفاده کنید. "</li>\n<li>" با گذر زمان، احراز هویت ممکن است روش‌های بیشتری برای درستی‌سنجی‌ هویت شما و ایمن نگه داشتن برنامه‌ها روی دستگاه اضافه کند. "<a href="https://support.google.com/android?p=identity_check">"درباره زمان و مکانی که محافظت می‌شوید بیشتر بدانید "</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"تنظیمات دیگر"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"تکمیل خودکار، اعلان‌ها، و موارد دیگر"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"کنترل‌های حریم خصوصی"</string>

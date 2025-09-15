@@ -58,6 +58,10 @@ class SafetyCenterFragment : DashboardFragment() {
                 when (controller.preferenceKey) {
                     DEVICE_UNLOCK_SUBPAGE_KEY -> {
                         controller.setRelatedSafetySources(DEVICE_UNLOCK_SAFETY_SOURCE_IDS)
+                        controller.setRelatedIssueOnlySafetySources(emptyList())
+                        controller.setDefaultSummaryResId(
+                            R.string.device_unlock_subpage_default_summary
+                        )
                         controller.setViewModelAndLifecycle(viewModel, owner)
                     }
                 }

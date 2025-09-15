@@ -55,6 +55,7 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.RestrictedListPreference;
 import com.android.settings.SettingsPreferenceFragmentBase;
 import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
@@ -209,7 +210,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY;
+        return SettingsEnums.SETTINGS_EXTERNAL_DISPLAY_CATEGORY;
     }
 
     @Override
@@ -317,11 +318,11 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     @NonNull
-    private ListPreference reuseConnectionPreference(PrefRefresh refresh, int position) {
-        ListPreference pref = refresh.findUnusedPreference(
+    private RestrictedListPreference reuseConnectionPreference(PrefRefresh refresh, int position) {
+        RestrictedListPreference pref = refresh.findUnusedPreference(
                 PrefBasics.EXTERNAL_DISPLAY_CONNECTION.keyForNth(position));
         if (pref == null) {
-            pref = new ListPreference(requireContext());
+            pref = new RestrictedListPreference(requireContext());
             PrefBasics.EXTERNAL_DISPLAY_CONNECTION.apply(pref, position);
         }
         refresh.addPreference(pref);
@@ -685,7 +686,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             pref.setValue(CONNECTION_PREF_MIRROR);
             pref.setSummary(requireContext().getString(
                     R.string.external_display_connection_preference_mirroring));
-            pref.setEnabled(false);
+            final EnforcingAdmin enforcingAdmin = mDpm.getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.LOCK_TASK_POLICY,
+                    UserHandle.myUserId()).getMostImportantEnforcingAdmin();
+            pref.setDisabledByAdmin(enforcingAdmin);
         } else {
             if (mConnectionEntries == null || mConnectionEntriesValues == null) {
                 mConnectionEntries = new String[]{
@@ -719,6 +723,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 scheduleUpdate();
                 return true;
             });
+            pref.setDisabledByAdmin((EnforcingAdmin) null);
             pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES);
         }
     }

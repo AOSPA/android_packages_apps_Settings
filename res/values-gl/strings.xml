@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Acerca da saída de audio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Transmite sons ao teu dispositivo auditivo ou ao altofalante do teléfono"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Relacionado"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Enviar contido máis rápido con <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Para compartir contido con dispositivos Android e PC próximos da forma máis rápida, proba <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> para Windows"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Probar <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Comparte ficheiros máis rápido entre dispositivos Android e con PC grazas á nosa aplicación <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> para Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Ton de chamada e alarmas"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio durante as chamadas"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Sons do sistema e multimedia"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Sen Bluetooth de baixo consumo (audio)"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Desactiva a función de audio por Bluetooth de baixo consumo se o dispositivo é compatible coas funcións do hardware de audio de baixo consumo."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Modo audio por Bluetooth baixo consumo"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Actualizar vista previa da interface de difusión do audio por Bluetooth de baixo consumo"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Activa a vista previa da interface do audio de baixo consumo compartido, incluídos o uso compartido do audio persoal e a difusión privada"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Botón Audio de baixo consumo en detalles"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Sortear lista de entidades permitidas para o audio por Bluetooth de baixo consumo"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Usa o audio de baixo consumo de forma predeterminada mesmo no caso de que non se verificase se o seu dispositivo periférico cumpre os criterios da lista de entidades permitidas."</string>
@@ -992,8 +990,8 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Queres reiniciar o dispositivo?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"O rexistro detallado de NFC só se utiliza para fins de programación. Os datos de NFC adicionais inclúense nos informes de erros, que poden conter información privada. Reinicia o dispositivo para cambiar esta opción de configuración."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Reiniciar"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"Activada"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Desactivada"</string>
+    <string name="external_display_on" msgid="2560104443500154333">"Opción activada"</string>
+    <string name="external_display_off" msgid="5634413756025351374">"Opción desactivada"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Pantallas externas"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Pantalla integrada"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Cursor universal"</string>
@@ -1015,8 +1013,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Non hai ningunha pantalla conectada"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Conecta unha pantalla externa para comezar ou proba cun cable diferente"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Máis opcións"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Mantén premido e arrastra para reordenar as pantallas"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Replicar pantalla integrada"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Queres usar a nova configuración?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Se a pantalla non funciona como queres, podes volver á configuración anterior"</string>
@@ -1408,8 +1405,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Imaxe estándar"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"Imaxe HDR"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Esta opción de configuración aplícase unicamente a imaxes e vídeos que admiten o alto rango dinámico (HDR)."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Intensidade; aumenta ou diminúe a intensidade."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balance de brancos da pantalla"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Usar apps co dispositivo pregado"</string>
@@ -1585,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Almacenamento e memoria caché"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Configuración do almacenamento"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI: <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Para velo, escolle a rede gardada"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -3395,6 +3390,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Queres activar o certificado de CA do sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Queres desactivar o certificado da autoridade de certificación do sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Queres quitar o certificado de CA do usuario permanentemente?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"En uso por parte de"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Esta entrada contén"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 clave de usuario"</string>
@@ -3576,8 +3573,7 @@
     <string name="color_orange" msgid="216547825489739010">"Laranxa"</string>
     <string name="color_purple" msgid="6603701972079904843">"Violeta"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Estado da SIM"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"Estado da SIM %1$d"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Cambiáronse as SIM"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Tocar para configurar"</string>
@@ -5800,7 +5796,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Contrasinal"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Mellorar a compatibilidade"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Axuda a que algúns dispositivos, como os audiófonos, se conecten reducindo a calidade do audio"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Desactiva o audio compartido para configurar a compatibilidade"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Desactiva o uso compartido do audio para cambiar a configuración"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Escoitar un audio próximo"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"O audio compartido é compatible con Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Nome da emisión de audio"</string>
@@ -5964,23 +5960,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Produciuse un erro"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Téntao de novo máis tarde"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Volver"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Comprobación de identidade está dispoñible en máis aplicacións"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Comprobación de identidade evita que calquera poida acceder ás túas aplicacións. Agora está dispoñible en todas as aplicacións que usen o desbloqueo facial ou dactilar."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Ver detalles"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Comprobación de identidade está dispoñible en máis aplicacións"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Actualizacións:\n"<ul><li>"Comprobación de identidade engade protección a calquera aplicación que use o desbloqueo facial ou dactilar"</li>\n<li>"Máis adiante é posible que agregue máis métodos para verificar a túa identidade e protexer as aplicacións do teu dispositivo. "<a href="https://support.google.com/android?p=identity_check">"Máis información sobre cando e onde contarás con protección"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Comprobación de identidade e reloxo"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Cun reloxo conectado, Comprobación de identidade engadirá máis métodos para verificar a túa identidade co fin de evitar accesos non desexados ás aplicacións"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Comprobación de identidade e reloxo"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Actualizacións:\n"<ul><li>"Se conectas un reloxo, poderás usar tanto os datos biométricos como o PIN para acceder ás aplicacións cando non esteas nun lugar de confianza"</li>\n<li>"Máis adiante é posible que Comprobación de identidade engada máis métodos para verificar a túa identidade e protexer as aplicacións do teu dispositivo. "<a href="https://support.google.com/android?p=identity_check">"Máis información sobre cando e onde contarás con protección"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Outras opcións de configuración"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Autocompletar, notificacións e outras opcións"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Controis de privacidade"</string>

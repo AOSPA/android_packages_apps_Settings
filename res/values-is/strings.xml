@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Um hljóðúttak"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Beindu hljóði í heyrnartæki eða hljóðnema símans"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Tengt"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Senda hraðar með <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Fyrir hröðustu leiðina til að deila með nálægum Android-tækjum og tölvum skaltu prófa <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> fyrir Windows"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Prófa <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Hraðasta skjaladeiling milli Android-tækja, og með PC-tölvum sem nota <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>-forritið okkar fyrir Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Hringitónn og vekjarar"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Hljóð í símtölum"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Efni og kerfishljóð"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Slökkva á Bluetooth LE-hljóði"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Slekkur á Bluetooth LE-hljóðeiginleika ef tækið styður vélbúnaðareiginleika LE-hljóðs."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE-hljóðstilling"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Virkja forskoðun á notendaviðmóti fyrir útsendingu Bluetooth LE-hljóðs"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Virkjar forskoðun á notendaviðmóti LE-hljóðdeilingar, þ.m.t. persónulegrar hljóðdeilingar og lokaðrar útsendingar"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Sýna rofa LE-hljóðs í tækjaupplýsingum"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Sneiða hjá hvítum lista Bluetooth LE-hljóðs"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Nota LE-hljóð sjálfkrafa jafnvel þótt jaðartæki LE-hljóðs hafi ekki verið staðfest með tilliti til skilyrða hvíta listans."</string>
@@ -1408,8 +1406,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Stöðluð mynd"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR-mynd"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Þessi stilling hefur eingöngu áhrif á myndir og vídeó sem styðja hástyrksvið (HDR)."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Styrkleiki, minnka eða auka styrkleika."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Sýna hvítjöfnun"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Halda áfram að nota forrit þegar tæki er brotið saman"</string>
@@ -2596,7 +2593,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Kveikir á dökku þema í tækinu þínu og forritum sem styðja það"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Framlengt"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Framlengt dökkt þema"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Kveikir sjálfkrafa á dökku þema í flestum forritum sem styðja það ekki Þetta getur aukið aðgengi og læsileika en gæti valdið því að forrit birtist ekki með réttum hætti."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Kveikir sjálfkrafa á dökku þema í flestum forritum sem styðja það ekki. Þetta getur aukið aðgengi og læsileika en gæti valdið því að forrit birtist ekki með réttum hætti."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"þvinga umsnúning, umsnúningur lita, birtuskil"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Fjarlægja hreyfimyndir"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Draga úr hreyfingu á skjánum"</string>
@@ -3393,6 +3390,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Gera CA-vottorð kerfis virkt?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Gera CA-vottorð kerfis óvirkt?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Fjarlægja CA-vottorð notanda fyrir fullt og allt?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Notað af"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Þessi færsla inniheldur"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 notandalykill"</string>
@@ -5965,23 +5964,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Eitthvað fór úrskeiðis"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Reyndu aftur síðar"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Til baka"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Sannvottun auðkennis virkar með fleiri forritum"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Sannvottun auðkennis kemur í veg fyrir óæskilegan aðgang að forritunum þínum. Nú í boði með öllum forritum sem nota Fingrafar eða Andlitskenni."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Sjá nánar"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Sannvottun auðkennis virkar með fleiri forritum"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Uppfærslur:\n"<ul><li>"Sannvottun auðkennis bætir við vernd fyrir öll forrit sem nota Fingrafar eða Andlitskenni"</li>\n<li>"Sannvottun auðkennis kann með tímanum að bæta við fleiri leiðum til að staðfesta að þetta sért þú og tryggja öryggi forrita í tækinu þínu. "<a href="https://support.google.com/android?p=identity_check">"Nánar um tímasetningar og staðsetningar varnar"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Sannvottun auðkennis og Úr"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Með tengdu úri bæti Sannvottun auðkennis við fleiri leiðum til að staðfesta að þetta sért þú til að koma í veg fyrir óheimilan aðgang að forritum"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Sannvottun auðkennis og Úr"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Uppfærslur:\n"<ul><li>"Með því að tengja úr geturðu notað annaðhvort lífkenni eða PIN-númerið þitt til að opna forrit þegar þú ert á ótraustum stað"</li>\n<li>"Sannvottun auðkennis kann með tímanum að bæta við fleiri leiðum til að staðfesta að þetta sért þú og tryggja öryggi forrita í tækinu þínu. "<a href="https://support.google.com/android?p=identity_check">"Nánar um tímasetningar og staðsetningar varnar"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Aðrar stillingar"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Sjálfvirk útfylling, tilkynningar og fleira"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Persónuverndarstillingar"</string>

@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Tietoa audion toistotavasta"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Ohjaa äänet kuulolaitteeseen tai puhelimen kaiuttimeen"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Samankaltaisia"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Lähetä nopeammin: <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Nopein tapa jakaa lähellä oleville Android-laitteille ja tietokoneille on <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> Windowsille"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Kokeile: <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Nopein tiedostojen jakaminen Android-laitteiden välillä, ja lisäksi tietokoneilla <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> -sovelluksen Windows-versiolla."</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Soittoääni ja hälytykset"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Audio puheluiden aikana"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Median ja järjestelmän äänet"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Poista Bluetooth LE audio käytöstä"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Poistaa Bluetooth LE ‑audio-ominaisuuden käytöstä, jos laite tukee LE-audiolaitteistoja"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio ‑tila"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Ota käyttöön Bluetooth LE Audion lähetys-UI:n esikatselu"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Ottaa käyttöön LE Audion jakamis-UI:n esikatselun, joka sisältää henkilökohtaisen audion jakamisen ja yksityisen lähetyksen"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Näytä LE Audio ‑valitsin laitetiedoissa"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Ohita Bluetooth LE Audio ‑sallitut"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Käytä oletuksena LE Audiota, vaikka LE Audio ‑lisälaitteen ei olisi vahvistettu täyttävän sallitut-listan kriteerejä."</string>
@@ -1408,8 +1406,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Vakiokuva"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR-kuva"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Asetus vaikuttaa vain suuren dynaamisen alueen (HDR) kuviin ja videoihin."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Voimakkuus, vähennä tai lisää voimakkuutta."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Näytä valkotasapaino"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Sovellusten käyttö taitettuna"</string>
@@ -3393,6 +3390,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Otetaanko järjestelmän CA-varmenne käyttöön?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Poistetaanko järjestelmän CA-varmenne käytöstä?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Poistetaanko käyttäjän CA-varmenne pysyvästi?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Tätä käyttää:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Sisältää:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 käyttäjän avain"</string>
@@ -5965,23 +5964,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Jotain meni pieleen"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Yritä myöhemmin uudelleen"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Takaisin"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Tunnistautuminen toimii useammissa sovelluksissa"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Tunnistautuminen estää ei-toivotun pääsyn sovelluksiisi. Saatavilla nyt kaikissa sovelluksissa, jotka käyttävät sormenjälki- tai kasvojentunnistusavausta."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Näytä tiedot"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Tunnistautuminen toimii useammissa sovelluksissa"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Päivitykset:\n"<ul><li>"Tunnistautuminen lisää suojausta kaikkiin sovelluksiin, jotka käyttävät sormenjälki- tai kasvojentunnistusavausta."</li>\n<li>"Tunnistautumiseen voidaan ajan mittaan lisätä enemmän tapoja todistaa henkilöllisyys ja suojata laitteen sovelluksia. "<a href="https://support.google.com/android?p=identity_check">"Lue lisää siitä, milloin ja missä sinua suojataan"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Tunnistautuminen ja kello"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Kun kello on yhdistetty, tunnistautumiseen lisätään enemmän tapoja todistaa henkilöllisyys ja estää ei-toivottu pääsy sovelluksiin"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Tunnistautuminen ja kello"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Päivitykset:\n"<ul><li>"Kun yhdistät kellon, voit käyttää joko biometriikkaa tai PIN-koodia sovellusten avaamiseen, kun et ole luotetussa paikassa."</li>\n<li>"Tunnistautumiseen voidaan ajan mittaan lisätä enemmän tapoja todistaa henkilöllisyys ja suojata laitteen sovelluksia. "<a href="https://support.google.com/android?p=identity_check">"Lue lisää siitä, milloin ja missä sinua suojataan"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Muut asetukset"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Automaattinen täyttö, ilmoitukset ja muuta"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Yksityisyysasetukset"</string>

@@ -17,7 +17,8 @@ package com.android.settings.supervision
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.content.pm.PackageManager.MATCH_UNINSTALLED_PACKAGES
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.preference.Preference
@@ -27,8 +28,13 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.Shadows.shadowOf
-import org.robolectric.shadows.ShadowPackageManager
+import org.mockito.Mockito.mock
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionSupportedAppPreferenceTest {
@@ -37,22 +43,22 @@ class SupervisionSupportedAppPreferenceTest {
     private val summary = "summary"
     private val appPackageName = "packageName"
     private val appIcon = ColorDrawable(Color.RED)
+    private val mockPackageManager = mock(PackageManager::class.java)
     private lateinit var preference: Preference
-    private lateinit var shadowPackageManager: ShadowPackageManager
 
     @Before
     fun setUp() {
-        shadowPackageManager = shadowOf(context.packageManager)
-        val applicationInfo = ApplicationInfo().apply { packageName = appPackageName }
-        shadowPackageManager.installPackage(
-            PackageInfo().apply {
-                packageName = appPackageName
-                this.applicationInfo = applicationInfo
-            }
-        )
-        shadowPackageManager.setApplicationIcon(appPackageName, appIcon)
+        val fakeApplicationInfo = ApplicationInfo().apply { packageName = appPackageName }
+        val spyContext = spy(context) { on { packageManager } doReturn mockPackageManager }
+
+        mockPackageManager.stub {
+            on { getApplicationInfo(eq(appPackageName), any<Int>()) } doReturn fakeApplicationInfo
+            on { getApplicationIcon(fakeApplicationInfo) } doReturn appIcon
+        }
+
         preference =
-            SupervisionSupportedAppPreference(title, summary, appPackageName).createWidget(context)
+            SupervisionSupportedAppPreference(title, summary, appPackageName)
+                .createWidget(spyContext)
     }
 
     @Test
@@ -68,5 +74,11 @@ class SupervisionSupportedAppPreferenceTest {
     @Test
     fun getIcon() {
         assertThat(preference.icon).isEqualTo(appIcon)
+    }
+
+    @Test
+    fun createWidget_callsGetApplicationInfoWithCorrectFlags() {
+        val expectedFlags = MATCH_UNINSTALLED_PACKAGES
+        verify(mockPackageManager).getApplicationInfo(eq(appPackageName), eq(expectedFlags))
     }
 }

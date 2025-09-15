@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Ses çıkışı hakkında"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Sesleri işitme cihazınıza veya telefon hoparlörünüze yönlendirin"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Benzer"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> ile daha hızlı gönderin"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Yakındaki Android cihazlar ve PC\'lerle en hızlı şekilde içerik paylaşmak için Windows\'a özel <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> uygulamasını deneyin"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"<xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> özelliğini deneyin"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Android cihazlarla ve Windows için <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> uygulamamızı kullanarak PC\'lerle en hızlı dosya paylaşımı"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Zil sesi ve alarmlar"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Telefon görüşmelerinde ses"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Medya ve sistem sesleri"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio\'yu devre dışı bırak"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Cihaz, LE Audio donanımı özelliklerini destekliyorsa Bluetooth LE Audio özelliğini devre dışı bırakır."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio modu"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Bluetooth LE Audio Broadcast kullanıcı arayüzü önizlemesini etkinleştir"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Kişisel ses paylaşımı ve özel yayın dahil olmak üzere LE Audio Sharing kullanıcı arayüzü önizlemesini etkinleştirir"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Cihaz Ayrıntıları\'nda LE Audio açma/kapatmayı göster"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Audio izin verilenler listesini atla"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio çevre biriminin, izin verilenler listesi kriterlerini karşıladığı doğrulanmamış olsa bile varsayılan olarak LE Audio\'yu kullan"</string>
@@ -1408,8 +1406,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Standart görsel"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR görüntü"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Bu ayar yalnızca Yüksek Dinamik Aralık (HDR) özelliğini destekleyen görselleri ve videoları etkiler."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Yoğunluk: Yoğunluğu azaltın veya artırın."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Beyaz dengeyi göster"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Cihaz katlıyken uygulamaları kullanmaya devam edin"</string>
@@ -1477,7 +1474,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Ekranınızı daha rahat görüntülemek ve bazı ekranlarda pil kullanımını azaltmak için koyu arka plan kullanın. Program kullanıyorsanız ekran kapandığında temanız değişir."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Koyu tema şu anda Uyku Vakti modu programınıza uyuyor."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Uyku Vakti modu ayarları"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Modlar, koyu temayı da açabilir.}=1{{mode_1}, koyu temayı da açar.}=2{{mode_1} ve {mode_2} koyu temayı da açar.}=3{{mode_1}, {mode_2} ve {mode_3}, koyu temayı da açar.}other{{mode_1}, {mode_2} ve diğer # mod, koyu temayı da açar.}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Modlar koyu temayı açabilir.}=1{{mode_1} koyu temayı açabilir.}=2{{mode_1} ve {mode_2} koyu temayı açabilir.}=3{{mode_1}, {mode_2} ve {mode_3} koyu temayı açabilir.}other{{mode_1}, {mode_2} ve diğer # mod koyu temayı açabilir.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Mod ayarları"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Yüksek Dinamik Aralık (HDR) özellikli görsel ve videolardaki renk aralığını/netliği artırın ve parlaklaştırın. HDR içerikler daha parlak görünür."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Ekran zaman aşımı"</string>
@@ -3394,6 +3391,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Sistem CA sertifikası etkinleştirilsin mi?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Sistem CA sertifikası devre dışı bırakılsın mı?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Kullanıcı CA sertifikası kalıcı olarak kaldırılsın mı?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Aşağıdakiler tarafından kullanılıyor:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Bu giriş şunları içeriyor:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 kullanıcı anahtarı"</string>
@@ -4480,7 +4479,7 @@
     <string name="usb_switching" msgid="3654709188596609354">"Geçiş yapılıyor…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Geçiş yapılamadı"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"Bu cihazı şarj ediyor"</string>
-    <string name="usb_summary_power_only" msgid="4901734938857822887">"Bağlı cihazı şarj etme"</string>
+    <string name="usb_summary_power_only" msgid="4901734938857822887">"Bağlı cihazı şarj ediyor"</string>
     <string name="usb_summary_file_transfers" msgid="5498487271972556431">"Dosya aktarımı"</string>
     <string name="usb_summary_tether" msgid="2554569836525075702">"USB tethering"</string>
     <string name="usb_summary_photo_transfers" msgid="7331503733435780492">"PTP"</string>
@@ -5966,23 +5965,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Bir hata oluştu"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Daha sonra tekrar deneyin"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Geri dön"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Kimlik Kontrolü daha fazla uygulamada kullanılabilir"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Kimlik Kontrolü, uygulamalarınıza istenmeyen erişimi engeller. Artık Parmak İzi veya Yüz Tanıma Kilidi özelliği olan tüm uygulamalarda kullanılabilir."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Ayrıntıları göster"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Kimlik Kontrolü daha fazla uygulamada kullanılabilir"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Güncellemeler:\n"<ul><li>"Kimlik Kontrolü özelliği; Parmak İzi veya Yüz Tanıma Kilidi kullanan tüm uygulamalara koruma sağlar"</li>\n<li>"Kimlik Kontrolü, kimliğinizi doğrulamak ve cihazınızdaki uygulamaların güvenliğini sağlamak için zaman içinde daha başka yöntemler sunabilir. "<a href="https://support.google.com/android?p=identity_check">"Korunduğunuz zamanlar ve yerler hakkında daha fazla bilgi edinin"</a></li></ul>"."</string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Kimlik Kontrolü ve Kol Saati"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Bir kol saati bağlandığında; Kimlik Kontrolü özelliği uygulamalara istenmeyen erişimi önlemek için kimliğinizi doğrulamanın daha başka yollarını sunar"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Kimlik Kontrolü ve Kol Saati"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Güncellemeler:\n"<ul><li>"Kol saati bağlayarak, güvenilir bir yerde olmadığınızda uygulamalara erişmek için biyometri özelliğini veya PIN\'inizi kullanabilirsiniz."</li>\n<li>"Kimlik Kontrolü, kimliğinizi doğrulamak ve cihazınızdaki uygulamaların güvenliğini sağlamak için zaman içinde daha başka yöntemler sunabilir. "<a href="https://support.google.com/android?p=identity_check">"Korunduğunuz zamanlar ve yerler hakkında daha fazla bilgi edinin"</a></li></ul>"."</string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Diğer ayarlar"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Otomatik doldurma, bildirimler ve daha fazlası"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Gizlilik denetimleri"</string>

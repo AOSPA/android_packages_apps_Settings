@@ -273,14 +273,27 @@
     <color name="pointer_fill_hovered_color">#1C201A1E</color>
 
     <!-- Safety Center Colors -->
-    <color name="safety_center_info">@color/gm_green_500</color>
-    <color name="safety_center_recommend">@color/gm_yellow_500</color>
-    <color name="safety_center_warn">@color/gm_red_500</color>
-    <color name="safety_center_null">@color/gm_grey_600</color>
-    <color name="sc_shield_accent">@color/gm_grey_900</color>
+    <color name="sc_icon_info_light">@color/gm_green_500</color>
+    <color name="sc_icon_recommend_light">@color/gm_yellow_500</color>
+    <color name="sc_icon_warn_light">@color/gm_red_500</color>
+
     <color name="gm_green_500">#34A853</color>
     <color name="gm_yellow_500">#FBBC04</color>
     <color name="gm_red_500">#EA4335</color>
-    <color name="gm_grey_600">#80868B</color>
+
+    <color name="sc_icon_info_dark">@color/gm_green_400</color>
+    <color name="sc_icon_recommend_dark">@color/gm_yellow_400</color>
+    <color name="sc_icon_warn_dark">@color/gm_red_400</color>
+
+    <color name="gm_green_400">#5BB974</color>
+    <color name="gm_yellow_400">#FCC934</color>
+    <color name="gm_red_400">#EE675C</color>
+
+    <color name="sc_shield_accent">#FFFFFF</color>
+    <color name="sc_shield_accent_light">@color/sc_shield_accent</color>
+    <color name="sc_shield_accent_dark">@color/gm_grey_900</color>
+    <color name="sc_shield_accent_fixed_variant">@color/sc_shield_accent_dark</color>
+
     <color name="gm_grey_900">#202124</color>
+
 </resources>

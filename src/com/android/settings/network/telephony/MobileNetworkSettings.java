@@ -22,15 +22,12 @@
 
 package com.android.settings.network.telephony;
 
-import static com.android.settings.network.MobileNetworkListFragment.collectAirplaneModeAndFinishIfOn;
-
 import static android.telephony.AccessNetworkConstants.TRANSPORT_TYPE_WWAN;
 import static android.telephony.ims.feature.ImsFeature.FEATURE_MMTEL;
 import static android.telephony.ims.stub.ImsRegistrationImplBase.REGISTRATION_TECH_CROSS_SIM;
 import static android.telephony.NetworkRegistrationInfo.DOMAIN_PS;
 
 import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_ON_CIWLAN_CONFIG_CHANGE;
-
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
@@ -643,7 +640,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        collectAirplaneModeAndFinishIfOn(this);
 
         LifecycleOwner viewLifecycleOwner = getViewLifecycleOwner();
         new SubscriptionRepository(requireContext())

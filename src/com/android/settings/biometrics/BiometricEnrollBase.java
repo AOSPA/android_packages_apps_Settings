@@ -46,7 +46,6 @@ import com.android.settings.biometrics.metrics.OnboardingScreenInfoEvent;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
 import com.android.systemui.unfold.updates.FoldProvider;
 
@@ -417,7 +416,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     }
 
     protected boolean shouldShowSplitScreenDialog() {
-        return isInMultiWindowMode() && !ActivityEmbeddingUtils.isActivityEmbedded(this);
+        return BiometricUtils.isSplitScreenEnrollmentDisabled(this);
     }
 
     protected int getOnboardingScreen() {

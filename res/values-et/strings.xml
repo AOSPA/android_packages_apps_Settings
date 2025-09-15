@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Keela Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Keelab funktsiooni Bluetooth LE Audio, kui seade toetab LE Audio riistvara võimalusi."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio režiim"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Bluetooth LE Audio Broadcast UI eelvaate lubamine"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Lubab LE Audio Sharing UI eelvaate, sh isikliku heli jagamise ja privaatse leviedastuse"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Kuva seadme üksikasjades LE Audio lüliti"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Audio lubamisloendist möödaminek"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audiot kasutatakse vaikimisi isegi siis, kui LE Audio välisseadme vastavust lubamisloendi kriteeriumitele pole kinnitatud."</string>
@@ -1015,8 +1013,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Ühtegi ekraani pole ühendatud"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Alustamiseks ühendage väline ekraan või proovige kasutada muud kaablit."</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Rohkem valikuid"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Kuvade ümberkorraldamiseks hoidke all ja lohistage."</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Sisseehitatud ekraani peegeldamine"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Kas kasutada uusi seadeid?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Kui teie ekraan ei tööta soovitud viisil, saate taastada eelmised sätted"</string>
@@ -1476,7 +1473,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Kasutage tumedat tausta, et muuta ekraani vaatamine mugavamaks ja vähendada mõnel ekraanil akukasutust. Kui ekraan on välja lülitatud, muutub teie teema ajakava järgi."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tume teema järgib praegu teie magamamineku režiimi ajakava"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Magamamineku režiimi seaded"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Režiimid võivad sisse lülitada ka tumeda teema.}=1{{mode_1} lülitab sisse ka tumeda teema.}=2{{mode_1} ja {mode_2} lülitavad sisse ka tumeda teema.}=3{{mode_1}, {mode_2} ja {mode_3} lülitavad sisse ka tumeda teema.}other{{mode_1}, {mode_2} ja veel # lülitavad sisse ka tumeda teema.}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Tumeda teema võivad sisse lülitada ka režiimid.}=1{{mode_1} lülitab sisse ka tumeda teema.}=2{{mode_1} ja {mode_2} lülitavad sisse ka tumeda teema.}=3{{mode_1}, {mode_2} ja {mode_3} lülitavad sisse ka tumeda teema.}other{{mode_1}, {mode_2} ja veel # lülitavad sisse ka tumeda teema.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Režiimide seaded"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Muutke kõrge dünaamilise ulatusega (HDR) fotod ja videod eredamaks ning suurendage nende värviulatust ja selgust. HDR-sisu kuvatakse eredamana."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Ekraani ajalõpp"</string>
@@ -1584,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Salvestusruum ja vahemälu"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Mäluruumi seaded"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Vaatamiseks valige salvestatud võrk"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -2595,7 +2591,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Lülitab sisse tumeda teema teie seadmes ja rakendustes, mis tumedat teemat toetavad."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Laiendatud"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Laiendatud tume teema"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Rakendab automaatselt tumedat teemat enamikule rakendustele, mis seda ei toeta. See võib parandada juurdepääsetavust ja loetavust, kuid mõnesid rakendusi ei pruugita õigesti kuvada."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Rakendab automaatselt tumeda teema enamikule rakendustele, mis seda ei toeta. See võib parandada juurdepääsetavust ja loetavust, kuid mõnda rakendust ei pruugita õigesti kuvada."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"negatiiv, värvide ümberpööramine, kontrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animatsioonide eemaldamine"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Ekraanikuval liikumise vähendamine"</string>
@@ -3392,6 +3388,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Kas lubada süsteemi CA-sertifikaat?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Kas keelata süsteemi CA-sertifikaat?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Kas eemaldada kasutaja CA-sertifikaat jäädavalt?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Kasutab:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"See kirje sisaldab:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 kasutaja võti"</string>
@@ -3573,8 +3571,7 @@
     <string name="color_orange" msgid="216547825489739010">"Oranž"</string>
     <string name="color_purple" msgid="6603701972079904843">"Lilla"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM-i olek"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"SIM %1$d olek"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"SIM-kaardid on vahetatud"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Puudutage seadistamiseks"</string>
@@ -5584,7 +5581,7 @@
     <string name="category_name_color" msgid="937514550918977151">"Värv"</string>
     <string name="category_name_display_controls" msgid="7046581691184725216">"Muud ekraanikuva juhtelemendid"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Üldine"</string>
-    <string name="dark_theme_main_switch_title" msgid="4570920398981775904">"Tumeda teema kasutamine"</string>
+    <string name="dark_theme_main_switch_title" msgid="4570920398981775904">"Kasuta tumedat teemat"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Kasuta Bluetoothi"</string>
     <string name="hdr_brightness_main_switch_title" msgid="1850974699921514297">"Kasuta täiustatud HDR-eredust"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Helisemise vältimise kasutamine"</string>
@@ -5800,7 +5797,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Parool"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Ühilduvuse parandamine"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Aitab mõnel seadmel (nt kuuldeaparaadid) ühendust luua, alandades helikvaliteeti"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Lülitab ühilduvuse seadistamiseks heli jagamise välja"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Seadete muutmiseks lülitage heli jagamine välja."</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Läheduses esitatava heli kuulamine"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Heli jagamine toetab Auracast™-i"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Helivoo nimi"</string>

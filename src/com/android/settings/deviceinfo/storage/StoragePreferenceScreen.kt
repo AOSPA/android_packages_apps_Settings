@@ -31,6 +31,7 @@ import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.deviceinfo.StorageDashboardFragment
 import com.android.settings.flags.Flags
+import com.android.settings.utils.highlightPreference
 import com.android.settingslib.applications.StorageStatsSource
 import com.android.settingslib.deviceinfo.PrivateStorageInfo
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider
@@ -55,13 +56,11 @@ open class StoragePreferenceScreen(private val context: Context) :
 
     override fun getMetricsCategory() = SettingsEnums.SETTINGS_STORAGE_CATEGORY
 
-    override fun getLaunchIntent(
-        context: Context,
-        metadata: PreferenceMetadata?
-    ): Intent? {
-        return Intent("android.settings.INTERNAL_STORAGE_SETTINGS")
-            .setPackage(context.packageName)
-    }
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        Intent("android.settings.INTERNAL_STORAGE_SETTINGS").apply {
+            setPackage(context.packageName)
+            highlightPreference(metadata?.key)
+        }
 
     override fun isFlagEnabled(context: Context) = Flags.catalystSystemStorage()
 
@@ -73,191 +72,170 @@ open class StoragePreferenceScreen(private val context: Context) :
     override fun generatePreferenceHierarchy(
         context: Context,
         coroutineScope: CoroutineScope,
-        type: Int // userId
-    ) = preferenceHierarchy(context) {
-        val cache = getStorageCache(context, type)
+        type: Int, // userId
+    ) =
+        preferenceHierarchy(context) {
+            val cache = getStorageCache(context, type)
 
-        // Storage Used
-        +StoragePreference(
-            KEY_SUMMARY_USED,
-            0,
-            { null },
-            { null },
-            {
-                StorageUtils.getStorageSummary(
-                    context,
-                    R.string.storage_usage_summary,
-                    cache.totalUsedSize
-                )
-            }
-        )
+            // Storage Used
+            +StoragePreference(
+                KEY_SUMMARY_USED,
+                0,
+                { null },
+                { null },
+                {
+                    StorageUtils.getStorageSummary(
+                        context,
+                        R.string.storage_usage_summary,
+                        cache.totalUsedSize,
+                    )
+                },
+            )
 
+            // Storage Total
+            +StoragePreference(
+                KEY_SUMMARY_TOTAL,
+                0,
+                { null },
+                { null },
+                {
+                    StorageUtils.getStorageSummary(
+                        context,
+                        R.string.storage_total_summary,
+                        cache.totalSize,
+                    )
+                },
+            )
 
-        // Storage Total
-        +StoragePreference(
-            KEY_SUMMARY_TOTAL,
-            0,
-            { null },
-            { null },
-            {
-                StorageUtils.getStorageSummary(
-                    context,
-                    R.string.storage_total_summary,
-                    cache.totalSize
-                )
-            }
-        )
+            // Free up space
+            +StoragePreference(
+                KEY_FREE_UP_SPACE,
+                R.string.storage_free_up_space_title,
+                { c ->
+                    Intent(StorageManager.ACTION_MANAGE_STORAGE).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                },
+                { c -> c.getString(R.string.storage_free_up_space_summary) },
+            )
 
-        // Free up space
-        +StoragePreference(
-            KEY_FREE_UP_SPACE,
-            R.string.storage_free_up_space_title,
-            { c ->
-                Intent(StorageManager.ACTION_MANAGE_STORAGE).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-            },
-            { c -> c.getString(R.string.storage_free_up_space_summary) }
-        )
+            // Apps
+            +StoragePreference(
+                KEY_PREF_APPS,
+                R.string.storage_apps,
+                { c ->
+                    Intent("android.intent.action.MANAGE_PACKAGE_STORAGE").setPackage(c.packageName)
+                },
+                { StorageUtils.getStorageSizeLabel(context, cache.allAppsExceptGamesSize) },
+            )
 
-        // Apps
-        +StoragePreference(
-            KEY_PREF_APPS,
-            R.string.storage_apps,
-            { c ->
-                Intent("android.intent.action.MANAGE_PACKAGE_STORAGE")
-                    .setPackage(c.packageName)
-            },
-            {
-                StorageUtils.getStorageSizeLabel(context, cache.allAppsExceptGamesSize)
-            }
-        )
+            // Trash
+            +StoragePreference(
+                KEY_PREF_TRASH,
+                R.string.storage_trash,
+                { c ->
+                    val intent = Intent("android.settings.VIEW_TRASH")
+                    if (c.packageManager.resolveActivityAsUser(intent, 0, type) == null) {
+                        // Settings' trash handling doesn't have a dedicated intent.
+                        // Must be handled from the Storage page itself
+                        getLaunchIntent(c, null)
+                    } else {
+                        intent
+                    }
+                },
+                { StorageUtils.getStorageSizeLabel(context, cache.trashSize) },
+            )
 
-        // Trash
-        +StoragePreference(
-            KEY_PREF_TRASH,
-            R.string.storage_trash,
-            { c ->
-                val intent = Intent("android.settings.VIEW_TRASH")
-                if (c.packageManager.resolveActivityAsUser(intent, 0, type) == null) {
-                    // Settings' trash handling doesn't have a dedicated intent.
-                    // Must be handled from the Storage page itself
-                    getLaunchIntent(c, null)
-                } else {
-                    intent
-                }
-            },
-            {
-                StorageUtils.getStorageSizeLabel(context, cache.trashSize)
-            }
-        )
+            // Images
+            +StoragePreference(
+                KEY_PREF_IMAGES,
+                R.string.storage_images,
+                { c ->
+                    Intent(Intent.ACTION_VIEW).apply {
+                        data = c.getString(R.string.config_images_storage_category_uri).toUri()
+                    }
+                },
+                { StorageUtils.getStorageSizeLabel(context, cache.imagesSize) },
+            )
 
-        // Images
-        +StoragePreference(
-            KEY_PREF_IMAGES,
-            R.string.storage_images,
-            { c ->
-                Intent(Intent.ACTION_VIEW).apply {
-                    data = c.getString(R.string.config_images_storage_category_uri).toUri()
-                }
-            },
-            {
-                StorageUtils.getStorageSizeLabel(context, cache.imagesSize)
-            }
-        )
+            // Games
+            +StoragePreference(
+                KEY_PREF_GAMES,
+                R.string.storage_games,
+                {
+                    // TODO no intent for games storage exposed
+                    null
+                },
+                { StorageUtils.getStorageSizeLabel(context, cache.gamesSize) },
+            )
 
-        // Games
-        +StoragePreference(
-            KEY_PREF_GAMES,
-            R.string.storage_games,
-            {
-                // TODO no intent for games storage exposed
-                null
-            },
-            {
-                StorageUtils.getStorageSizeLabel(context, cache.gamesSize)
-            }
-        )
+            // Documents
+            +StoragePreference(
+                KEY_PREF_DOCUMENTS,
+                R.string.storage_documents,
+                { c ->
+                    Intent(Intent.ACTION_VIEW).apply {
+                        data = c.getString(R.string.config_documents_storage_category_uri).toUri()
+                    }
+                },
+                { StorageUtils.getStorageSizeLabel(context, cache.documentsSize) },
+            )
 
-        // Documents
-        +StoragePreference(
-            KEY_PREF_DOCUMENTS,
-            R.string.storage_documents,
-            { c ->
-                Intent(Intent.ACTION_VIEW).apply {
-                    data = c.getString(R.string.config_documents_storage_category_uri).toUri()
-                }
-            },
-            {
-                StorageUtils.getStorageSizeLabel(context, cache.documentsSize)
-            }
-        )
+            // Other
+            +StoragePreference(
+                KEY_PREF_OTHER,
+                R.string.storage_other,
+                { c ->
+                    Intent(Intent.ACTION_VIEW).apply {
+                        data = c.getString(R.string.config_other_storage_category_uri).toUri()
+                    }
+                },
+                { StorageUtils.getStorageSizeLabel(context, cache.otherSize) },
+            )
 
-        // Other
-        +StoragePreference(
-            KEY_PREF_OTHER,
-            R.string.storage_other,
-            { c ->
-                Intent(Intent.ACTION_VIEW).apply {
-                    data = c.getString(R.string.config_other_storage_category_uri).toUri()
-                }
-            },
-            {
-                StorageUtils.getStorageSizeLabel(context, cache.otherSize)
-            }
-        )
+            // Audio
+            +StoragePreference(
+                KEY_PREF_AUDIO,
+                R.string.storage_audio,
+                { c ->
+                    Intent(Intent.ACTION_VIEW).apply {
+                        data = c.getString(R.string.config_audio_storage_category_uri).toUri()
+                    }
+                },
+                { StorageUtils.getStorageSizeLabel(context, cache.audioSize) },
+            )
 
-        // Audio
-        +StoragePreference(
-            KEY_PREF_AUDIO,
-            R.string.storage_audio,
-            { c ->
-                Intent(Intent.ACTION_VIEW).apply {
-                    data = c.getString(R.string.config_audio_storage_category_uri).toUri()
-                }
-            },
-            {
-                StorageUtils.getStorageSizeLabel(context, cache.audioSize)
-            }
-        )
+            // Video
+            +StoragePreference(
+                KEY_PREF_VIDEOS,
+                R.string.storage_videos,
+                { c ->
+                    Intent(Intent.ACTION_VIEW).apply {
+                        data = c.getString(R.string.config_videos_storage_category_uri).toUri()
+                    }
+                },
+                { StorageUtils.getStorageSizeLabel(context, cache.videosSize) },
+            )
 
-        // Video
-        +StoragePreference(
-            KEY_PREF_VIDEOS,
-            R.string.storage_videos,
-            { c ->
-                Intent(Intent.ACTION_VIEW).apply {
-                    data = c.getString(R.string.config_videos_storage_category_uri).toUri()
-                }
-            },
-            {
-                StorageUtils.getStorageSizeLabel(context, cache.videosSize)
-            }
-        )
+            // System - OS
+            +StoragePreference(
+                KEY_PREF_SYSTEM,
+                0,
+                { null },
+                { StorageUtils.getStorageSizeLabel(context, cache.systemSize) },
+                { c ->
+                    c.getString(R.string.storage_os_name, Build.VERSION.RELEASE_OR_PREVIEW_DISPLAY)
+                },
+            )
 
-        // System - OS
-        +StoragePreference(
-            KEY_PREF_SYSTEM,
-            0,
-            { null },
-            {
-                StorageUtils.getStorageSizeLabel(context, cache.systemSize)
-            },
-            { c ->
-                c.getString(R.string.storage_os_name, Build.VERSION.RELEASE_OR_PREVIEW_DISPLAY)
-            }
-        )
-
-        // System - Temp
-        +StoragePreference(
-            KEY_PREF_TEMP,
-            R.string.storage_temporary_files,
-            { null },
-            {
-                StorageUtils.getStorageSizeLabel(context, cache.temporaryFilesSize)
-            }
-        )
-    }
+            // System - Temp
+            +StoragePreference(
+                KEY_PREF_TEMP,
+                R.string.storage_temporary_files,
+                { null },
+                { StorageUtils.getStorageSizeLabel(context, cache.temporaryFilesSize) },
+            )
+        }
 
     override fun fragmentClass(): Class<out Fragment>? = StorageDashboardFragment::class.java
 
@@ -268,22 +246,24 @@ open class StoragePreferenceScreen(private val context: Context) :
             cacheHelper.retrieveCachedSize()
         } else {
             val storageEntry = StorageEntry.getDefaultInternalStorageEntry(context)
-            val volumeSizesLoader = VolumeSizesLoader(
-                context,
-                StorageManagerVolumeProvider(
-                    context.getSystemService(StorageManager::class.java)
-                ),
-                context.getSystemService(StorageStatsManager::class.java),
-                storageEntry.volumeInfo
-            )
+            val volumeSizesLoader =
+                VolumeSizesLoader(
+                    context,
+                    StorageManagerVolumeProvider(
+                        context.getSystemService(StorageManager::class.java)
+                    ),
+                    context.getSystemService(StorageStatsManager::class.java),
+                    storageEntry.volumeInfo,
+                )
             val privateStorageInfo = volumeSizesLoader.loadInBackground()
-            val loader = StorageAsyncLoader(
-                context,
-                context.getSystemService(UserManager::class.java),
-                storageEntry.getFsUuid(),
-                StorageStatsSource(context),
-                context.packageManager
-            )
+            val loader =
+                StorageAsyncLoader(
+                    context,
+                    context.getSystemService(UserManager::class.java),
+                    storageEntry.getFsUuid(),
+                    StorageStatsSource(context),
+                    context.packageManager,
+                )
             val storageResults = loader.loadInBackground()
             populateStorageCache(userId, cacheHelper, storageResults, privateStorageInfo)
         }
@@ -293,7 +273,7 @@ open class StoragePreferenceScreen(private val context: Context) :
         userId: Int,
         cacheHelper: StorageCacheHelper,
         resultArray: SparseArray<StorageAsyncLoader.StorageResult>?,
-        privateStorageInfo: PrivateStorageInfo?
+        privateStorageInfo: PrivateStorageInfo?,
     ): StorageCacheHelper.StorageCache {
         val cache = StorageCacheHelper.StorageCache()
         if (privateStorageInfo != null) {
@@ -332,10 +312,8 @@ open class StoragePreferenceScreen(private val context: Context) :
                         otherData -= attr.duplicateCodeSize
                     }
                     otherData += result.systemSize
-                    temporaryFilesSize = kotlin.math.max(
-                        DataUnit.GIBIBYTES.toBytes(1),
-                        totalUsedSize - otherData
-                    )
+                    temporaryFilesSize =
+                        kotlin.math.max(DataUnit.GIBIBYTES.toBytes(1), totalUsedSize - otherData)
                 }
                 cacheHelper.cacheSizeInfo(cache)
             }

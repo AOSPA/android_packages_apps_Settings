@@ -25,13 +25,17 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Application;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserManager;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.ActiveUnlockTestUtils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
@@ -49,7 +53,6 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDeviceConfig.class, ShadowRestrictedLockUtilsInternal.class})
@@ -72,10 +75,12 @@ public class BiometricFingerprintStatusPreferenceControllerTest {
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)).thenReturn(true);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
-        ShadowApplication.getInstance()
+        shadowOf((Application) ApplicationProvider.getApplicationContext())
                 .setSystemService(Context.FINGERPRINT_SERVICE, mFingerprintManager);
-        ShadowApplication.getInstance().setSystemService(Context.FACE_SERVICE, mFaceManager);
-        ShadowApplication.getInstance().setSystemService(Context.USER_SERVICE, mUserManager);
+        shadowOf((Application) ApplicationProvider.getApplicationContext())
+                .setSystemService(Context.FACE_SERVICE, mFaceManager);
+        shadowOf((Application) ApplicationProvider.getApplicationContext())
+                .setSystemService(Context.USER_SERVICE, mUserManager);
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {1234});
         mPreference = new RestrictedPreference(mContext);
         mController = new BiometricFingerprintStatusPreferenceController(mContext, "preferenceKey");

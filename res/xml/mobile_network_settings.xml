@@ -27,15 +27,15 @@
         android:key="use_sim_switch"
         settings:controller="com.android.settings.network.telephony.MobileNetworkSwitchController"/>
 
-    <com.android.settings.datausage.DataUsageSummaryPreference
-        android:key="status_header"
-        android:visibility="gone"
-        android:selectable="false"/>
-
     <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="enabled_state_container"
         android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.network.telephony.DisabledSubscriptionController">
+
+        <com.android.settings.datausage.DataUsageSummaryPreference
+            android:key="status_header"
+            android:visibility="gone"
+            android:selectable="false"/>
 
         <ListPreference
             android:key="data_preference"

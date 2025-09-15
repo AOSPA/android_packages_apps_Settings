@@ -103,8 +103,8 @@
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Giới thiệu về đầu ra âm thanh"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Định tuyến âm thanh đến thiết bị trợ thính hoặc loa điện thoại của bạn"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Công cụ liên quan"</string>
-    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Gửi nhanh hơn bằng <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
-    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Để chia sẻ nhanh nhất với các thiết bị Android và máy tính ở gần, hãy dùng <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> dành cho Windows"</string>
+    <string name="bluetooth_try_nearby_share_title" msgid="2228393576097141630">"Dùng thử <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g>"</string>
+    <string name="bluetooth_try_nearby_share_summary" msgid="4026595293154711379">"Chia sẻ tệp theo cách nhanh nhất giữa các thiết bị Android và với máy tính bằng ứng dụng <xliff:g id="NEARBY_SHARING_APP_LABEL">%s</xliff:g> dành cho Windows"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Nhạc chuông và chuông báo"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Âm thanh trong cuộc gọi"</string>
     <string name="bluetooth_media_title" msgid="2878373577382067290">"Âm thanh nội dung nghe nhìn và hệ thống"</string>
@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Tắt âm thanh năng lượng thấp qua Bluetooth"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Tắt tính năng âm thanh năng lượng thấp qua Bluetooth nếu thiết bị hỗ trợ chức năng phần cứng âm thanh năng lượng thấp."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth Âm thanh năng lượng thấp"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Bật chế độ xem trước giao diện người dùng của tính năng truyền phát qua Bluetooth Âm thanh năng lượng thấp"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Bật chế độ xem trước giao diện người dùng của tính năng Chia sẻ âm thanh năng lượng thấp, bao gồm cả tính năng chia sẻ âm thanh cá nhân và truyền phát ở chế độ riêng tư"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Hiện nút bật/tắt Âm thanh năng lượng thấp"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bỏ qua danh sách cho phép đối với tính năng Bluetooth Âm thanh năng lượng thấp"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Sử dụng Âm thanh năng lượng thấp theo mặc định, ngay cả khi chưa xác minh được rằng thiết bị ngoại vi Âm thanh năng lượng thấp đáp ứng tiêu chí của danh sách cho phép."</string>
@@ -1408,8 +1406,7 @@
     <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Hình ảnh chuẩn"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"Hình ảnh HDR"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Chế độ cài đặt này chỉ ảnh hưởng đến những hình ảnh và video hỗ trợ Dải động cao (HDR)."</string>
-    <!-- no translation found for hdr_brightness_slider_description (3743611389738391772) -->
-    <skip />
+    <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Cường độ, giảm hoặc tăng độ sáng."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Cân bằng trắng của màn hình"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Tiếp tục dùng ứng dụng sau khi gập điện thoại"</string>
@@ -2594,7 +2591,7 @@
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Tiêu chuẩn"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Giao diện tối tiêu chuẩn"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Bật giao diện tối cho thiết bị và các ứng dụng hỗ trợ giao diện tối"</string>
-    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Đã mở rộng"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Mở rộng"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Giao diện tối mở rộng"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Tự động áp dụng giao diện tối cho hầu hết các ứng dụng không hỗ trợ giao diện tối. Điều này có thể cải thiện khả năng tiếp cận và khả năng đọc, nhưng có thể khiến một số ứng dụng hiển thị không chính xác."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"buộc đảo ngược, đảo màu, độ tương phản"</string>
@@ -3393,6 +3390,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Bật chứng chỉ CA hệ thống?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Tắt chứng chỉ CA hệ thống?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Xóa vĩnh viễn chứng chỉ CA người dùng?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Đang dùng bởi"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Mục này chứa"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 khoá người dùng"</string>
@@ -5965,23 +5964,15 @@
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Đã xảy ra lỗi"</string>
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"Hãy thử lại sau"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"Quay lại"</string>
-    <!-- no translation found for identity_check_issue_card_title (1409291461773228899) -->
-    <skip />
-    <!-- no translation found for identity_check_issue_card_summary (2563597018905365665) -->
-    <skip />
+    <string name="identity_check_issue_card_title" msgid="1409291461773228899">"Tính năng Kiểm tra danh tính hoạt động với nhiều ứng dụng hơn"</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"Tính năng Kiểm tra danh tính giúp ngăn chặn hành vi truy cập không mong muốn vào các ứng dụng của bạn. Hiện có trên mọi ứng dụng dùng tính năng Mở khoá bằng vân tay hoặc Mở khoá bằng khuôn mặt."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"Xem chi tiết"</string>
-    <!-- no translation found for identity_check_promo_card_title (4467736415491327717) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_summary (3363308846024080168) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_title (6381107354718121574) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_issue_card_summary (3887632285786695570) -->
-    <skip />
-    <!-- no translation found for identity_check_watch_promo_card_title (8159072228404620911) -->
-    <skip />
-    <!-- no translation found for identity_check_promo_card_watch_summary (830666785343476988) -->
-    <skip />
+    <string name="identity_check_promo_card_title" msgid="4467736415491327717">"Tính năng Kiểm tra danh tính hoạt động với nhiều ứng dụng hơn"</string>
+    <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"Thông tin cập nhật:\n"<ul><li>"Tính năng Kiểm tra danh tính bổ sung một lớp bảo vệ cho các ứng dụng dùng tính năng Mở khoá bằng khuôn mặt hoặc vân tay"</li>\n<li>"Theo thời gian, tính năng Kiểm tra danh tính có thể thêm nhiều cách xác minh danh tính khác và bảo mật các ứng dụng trên thiết bị của bạn. "<a href="https://support.google.com/android?p=identity_check">"Tìm hiểu thêm về thời điểm và địa điểm bạn được bảo vệ"</a></li></ul></string>
+    <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"Kiểm tra danh tính và đồng hồ"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"Khi đồng hồ được kết nối, tính năng Kiểm tra danh tính sẽ thêm nhiều cách xác minh danh tính để ngăn chặn hành vi truy cập không mong muốn vào ứng dụng"</string>
+    <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"Kiểm tra danh tính và đồng hồ"</string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"Thông tin cập nhật:\n"<ul><li>"Khi kết nối đồng hồ, bạn có thể dùng dữ liệu sinh trắc học hoặc mã PIN để truy cập vào ứng dụng khi không ở địa điểm đáng tin cậy"</li>\n<li>"Theo thời gian, tính năng Kiểm tra danh tính có thể thêm nhiều cách xác minh danh tính khác và bảo mật ứng dụng trên thiết bị của bạn. "<a href="https://support.google.com/android?p=identity_check">"Tìm hiểu thêm về thời điểm và địa điểm bạn được bảo vệ"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"Chế độ cài đặt khác"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Tự động điền, thông báo và nhiều chế độ cài đặt khác"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Chế độ kiểm soát quyền riêng tư"</string>

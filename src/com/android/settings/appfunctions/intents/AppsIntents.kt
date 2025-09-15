@@ -27,7 +27,7 @@ fun getAppsIntents(): List<StaticIntent> =
         ),
         StaticIntent(
             description =
-                "App screen time: Intent to open the app screen time screen for a specific app. The Intent uri is the following (replace \${package_name} with the app package name)",
+                "App screen time: Intent to open the app screen time screen for a specific app. The Intent uri is the following (replace \${package_name} with the app package name). This screen includes the daily and hourly breakdown of screen time for a particular app.",
             intentUri =
                 "intent:#Intent;action=android.settings.APP_USAGE_SETTINGS;S.android.intent.extra.PACKAGE_NAME=\${package_name};end",
         ),

@@ -143,8 +143,6 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"„Bluetooth LE Audio“ išjungimas"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Jei įrenginys palaiko „LE Audio“ aparatinės įrangos galimybes, išjungiama funkcija „Bluetooth LE Audio“."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"„Bluetooth LE Audio“ režimas"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"„Bluetooth LE Audio“ transliacijos NS peržiūros įgalinimas"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Įgalinama „LE Audio“ bendrinimo NS peržiūra, įskaitant asmeninių garso įrašų bendrinimą ir privatų transliavimą"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Rodyti „LE Audio“ jungiklį įrenginio informacijoje"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"„Bluetooth LE Audio“ leidžiamųjų sąrašo išskyrimas"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Naudoti „LE Audio“ pagal numatytuosius nustatymus, net jei „LE Audio“ išorinis įrenginys nebuvo patvirtintas kaip atitinkantis leidžiamųjų sąrašo kriterijus."</string>
@@ -1015,8 +1013,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Nėra prijungto ekrano"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Prijunkite išorinį ekraną, kad pradėtumėte, arba bandykite naudoti kitą laidą"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Daugiau parinkčių"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Laikykite ir vilkite, kad pertvarkytumėte ekranus"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Įtaisytojo ekrano vaizdo bendrinimas"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Naudoti naujus nustatymus?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Jei ekranas neveikia taip, kaip norėtumėte, galite grįžti prie ankstesnių nustatymų"</string>
@@ -1584,8 +1581,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Saugykla ir talpykla"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Atmintinės nustatymai"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"<xliff:g id="IMEI_ID">%1$d</xliff:g> IMEI"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Norėdami peržiūrėti pasirinkite išsaugotą tinklą"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -3392,6 +3388,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Įgalinti sistemos CA sertifikatą?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Neleisti sistemos CA sertifikato?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Visam laikui pašalinti naudotojo CA sertifikatą?"</string>
+    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Naudojama"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Šiame įraše yra toliau nurodyti dalykai"</string>
     <string name="one_userkey" msgid="6363426728683951234">"Vienas naudotojo raktas"</string>
@@ -3573,8 +3571,7 @@
     <string name="color_orange" msgid="216547825489739010">"Oranžinė"</string>
     <string name="color_purple" msgid="6603701972079904843">"Purpurinė"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM būsena"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"%1$d SIM kortelės būsena"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> ASU"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Jūsų SIM kortelė pakeista"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Palieskite, kad nustatytumėte"</string>
@@ -5802,7 +5799,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Slaptažodis"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Suderinamumo didinimas"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Padedama tam tikriems įrenginiams, pvz., klausos aparatams, prisijungti sumažinant garso kokybę"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Išjungiamas garso įrašų bendrinimas, kad būtų galima konfigūruoti suderinamumą"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Išjunkite garso įrašų bendrinimą, kad galėtumėte pakeisti nustatymus"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Garso įrašo netoliese klausymas"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Garso įrašų bendrinimo funkcija palaiko „Auracast™“"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Garso srauto pavadinimas"</string>
