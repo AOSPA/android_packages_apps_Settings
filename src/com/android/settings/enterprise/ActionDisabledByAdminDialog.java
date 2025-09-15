@@ -61,7 +61,7 @@ public class ActionDisabledByAdminDialog extends Activity
                 (android.app.supervision.flags.Flags.deprecateDpmSupervisionApis()
                         && enforcedAdmin.component == null)
                         ? mDialogHelper.prepareDialogBuilder(restriction,
-                            getEnforcingAdmin(restriction, getUserIdFromIntent(getIntent())))
+                            getEnforcingAdmin(getIntent()))
                         : mDialogHelper.prepareDialogBuilder(restriction, enforcedAdmin);
         dialogBuilder.setOnDismissListener(this).show();
     }
@@ -74,8 +74,7 @@ public class ActionDisabledByAdminDialog extends Activity
 
         if (android.app.supervision.flags.Flags.deprecateDpmSupervisionApis()
                 && admin.component == null) {
-            mDialogHelper.updateDialog(restriction,
-                    getEnforcingAdmin(restriction, getUserIdFromIntent(intent)));
+            mDialogHelper.updateDialog(restriction, getEnforcingAdmin(intent));
         } else {
             mDialogHelper.updateDialog(restriction, admin);
         }
@@ -94,12 +93,12 @@ public class ActionDisabledByAdminDialog extends Activity
 
         final String restriction = getRestrictionFromIntent(intent);
         if (enforcedAdmin.component == null && restriction != null) {
-            if (shouldLaunchAdvancedProtectionDialog(userId, restriction)) {
+            if (shouldLaunchAdvancedProtectionDialog(intent)) {
                 // TODO(b/381025131): Move advanced protection logic to DevicePolicyManager or
                 //  elsewhere.
                 launchAdvancedProtectionDialog(userId, restriction);
             } else {
-                EnforcingAdmin enforcingAdmin = getEnforcingAdmin(restriction, userId);
+                EnforcingAdmin enforcingAdmin = getEnforcingAdmin(intent);
                 if (enforcingAdmin != null) {
                     enforcedAdmin.component = enforcingAdmin.getComponentName();
                 }
@@ -126,14 +125,23 @@ public class ActionDisabledByAdminDialog extends Activity
         finish();
     }
 
-    private boolean shouldLaunchAdvancedProtectionDialog(int userId, String restriction) {
-        EnforcingAdmin enforcingAdmin = getEnforcingAdmin(restriction, userId);
+    private boolean shouldLaunchAdvancedProtectionDialog(Intent intent) {
+        EnforcingAdmin enforcingAdmin = getEnforcingAdmin(intent);
         return isAdvancedProtectionAdmin(enforcingAdmin);
     }
 
     @VisibleForTesting
     @Nullable
-    EnforcingAdmin getEnforcingAdmin(String restriction, int userId) {
+    EnforcingAdmin getEnforcingAdmin(Intent intent) {
+        if (intent == null) {
+            return null;
+        }
+        if (android.app.admin.flags.Flags.enforcingAdminExtraEnabled()
+                && intent.hasExtra(DevicePolicyManager.EXTRA_ENFORCING_ADMIN)) {
+            return intent.getParcelableExtra(DevicePolicyManager.EXTRA_ENFORCING_ADMIN,
+                    EnforcingAdmin.class);
+        }
+        String restriction = getRestrictionFromIntent(intent);
         if (restriction == null) {
             return null;
         }
@@ -143,6 +151,7 @@ public class ActionDisabledByAdminDialog extends Activity
             return null;
         }
 
+        final int userId = getUserIdFromIntent(intent);
 
         if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
             PolicyEnforcementInfo policyEnforcementInfo = dpm.getEnforcingAdminsForPolicy(
