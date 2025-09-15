@@ -78,7 +78,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         context?.getSystemService(DisplayManager::class.java)
     }
 
-    val desktopState: DesktopState? by lazy { context?.let { DesktopState.fromContext(it) } }
+    val desktopState: DesktopState? by lazy { context?.let { DesktopState.getInstance(it) } }
 
     /** The window manager instance, or null if it cannot be retrieved. */
     val windowManager: IWindowManager? by lazy { WindowManagerGlobal.getWindowManagerService() }
