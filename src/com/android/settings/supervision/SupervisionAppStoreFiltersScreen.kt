@@ -47,8 +47,10 @@ open class SupervisionAppStoreFiltersScreen : PreferenceScreenMixin {
 
     override fun getMetricsCategory() = SettingsEnums.SUPERVISION_APP_STORE_FILTERS
 
+    override fun hasCompleteHierarchy() = true
+
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +SupervisionAppStoreFiltersTopIntroPreference() }
 
     companion object {
         const val KEY = "supervision_app_store_filters"
