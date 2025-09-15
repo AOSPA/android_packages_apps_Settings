@@ -16,7 +16,7 @@
 
 package com.android.settings.privatespace.delete;
 
-import static com.android.internal.app.SetScreenLockDialogActivity.LAUNCH_REASON_RESET_PRIVATE_SPACE_SETTINGS_ACCESS;
+import static com.android.internal.app.SetScreenLockDialogContract.LAUNCH_REASON_RESET_PRIVATE_SPACE_SETTINGS_ACCESS;
 import static com.android.settings.system.ResetDashboardFragment.PRIVATE_SPACE_DELETE_CREDENTIAL_REQUEST;
 
 import android.app.Activity;
@@ -37,7 +37,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 import com.android.internal.annotations.Initializer;
-import com.android.internal.app.SetScreenLockDialogActivity;
 import com.android.internal.app.SetScreenLockDialogContract;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -164,15 +163,9 @@ public class ResetOptionsDeletePrivateSpaceController extends BasePreferenceCont
 
     private void promptToSetDeviceLock() {
         Intent setScreenLockPromptIntent;
-        if (android.multiuser.Flags.moveSetScreenLockDialogToSettingsApp()) {
-            setScreenLockPromptIntent =
-                    SetScreenLockDialogContract
-                            .createDialogIntent(LAUNCH_REASON_RESET_PRIVATE_SPACE_SETTINGS_ACCESS);
-        } else {
-            setScreenLockPromptIntent =
-                    SetScreenLockDialogActivity
-                            .createBaseIntent(LAUNCH_REASON_RESET_PRIVATE_SPACE_SETTINGS_ACCESS);
-        }
+        setScreenLockPromptIntent =
+                SetScreenLockDialogContract
+                        .createDialogIntent(LAUNCH_REASON_RESET_PRIVATE_SPACE_SETTINGS_ACCESS);
         mContext.startActivity(setScreenLockPromptIntent);
     }
 }
