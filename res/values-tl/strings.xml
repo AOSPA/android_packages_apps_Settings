@@ -81,6 +81,12 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Mga setting ng hearing device"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Shortcut, compatibility ng hearing aid"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Preset"</string>
+    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
+    <skip />
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Walang preset na na-program ng iyong audiologist"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Hindi ma-update ang preset"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Paligid"</string>
@@ -1683,7 +1689,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Communal"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Mga communal setting"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub mode"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Mga widget sa lock screen (beta)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Mga widget sa lock screen"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Kailan awtomatikong ipapakita"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Hindi kailanman"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Habang nagcha-charge"</string>
@@ -1947,8 +1957,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Gumawa ng pattern sa pag-unlock"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Pindutin ang Menu para sa tulong."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Iangat ang daliri kapag tapos na"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Magkonekta ng hindi bababa sa <xliff:g id="NUMBER">%d</xliff:g> (na) dot."</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Pagdugtungin ang hindi bababa sa <xliff:g id="NUMBER">%d</xliff:g> (na) tuldok. Subukang muli."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Na-record na ang pattern"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Iguhit ulit ang pattern para kumpirmahin"</string>
@@ -2411,6 +2420,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Navigation mode, pag-rotate ng screen"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Magpadala ng feedback"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Sagutan ang survey"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Survey sa Accessibility"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"I-share ang iyong feedback"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Gaano ka nasisiyahan sa dark theme?"</string>
@@ -2587,10 +2597,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Mga Opsyon"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Timing"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Standard na Dark theme"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Standard na Dark theme"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Ino-on ang dark theme para sa iyong device at sa mga app na sumusuporta sa dark theme"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Na-expand"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Na-expand na Dark theme"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Na-expand na Dark theme"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Awtomatikong inilalapat ang dark theme sa karamihan sa mga app na hindi ito sinusuportahan. Mapapahusay nito ang accessibility at readability, pero posibleng magdulot ito ng maling display sa ilang app."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"sapilitang pag-invert, pag-invert ng kulay, contrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Alisin ang mga animation"</string>
@@ -2621,7 +2631,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Gamitin ang pag-invert ng kulay"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Shortcut ng pag-invert ng kulay"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Pinapadilim ng pag-invert ng kulay ang maliliwanag na screen. Pinapaliwanag din nito ang madidilim na screen."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Tandaan&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Magbabago ang mga kulay sa media at mga larawan&lt;/li&gt; &lt;li&gt; Gumagana ang pag-invert ng kulay sa lahat ng app&lt;/li&gt; &lt;li&gt; Para magpakita ng madilim na background, puwedeng gumamit na lang ng Madilim na tema&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Tandaan&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Magbabago ang mga kulay sa media at mga larawan&lt;/li&gt; &lt;li&gt; Gumagana ang pag-invert ng kulay sa lahat ng app&lt;/li&gt; &lt;li&gt; Para magpakita ng madilim na background, puwedeng gumamit na lang ng Madilim na tema&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"pumunta sa mga setting"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Autoclick (Timing ng pananatili)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Tungkol sa autoclick (dwell timing)"</string>
@@ -3388,7 +3398,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"I-enable ang CA certificate system?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"I-disable ang CA certificate system?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Permanenteng alisin ang CA certificate ng user?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Ginagamit ng"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Naglalaman ang entry na ito ng"</string>
@@ -3429,6 +3441,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Tanggal <xliff:g id="USER_NAME">%1$s</xliff:g> dito device"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Mga setting ng lock screen"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Magdagdag ng mga user mula sa lock screen"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Lumipat sa admin user kapag naka-dock"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"I-delete ang iyong sarili?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"I-delete ang user na ito?"</string>
@@ -3829,8 +3843,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Padilimin ang wallpaper"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"padilimin ang wallpaper"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"I-filter ang liwanag ng wallpaper"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"I-enable ang Dark theme"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"i-enable ang Dark theme"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"I-enable ang madilim na tema"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"i-enable ang madilim na tema"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Palitan ang tema ng device para gumamit ng madilim na background, na mas hindi nakakapagod sa mata"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Walang pagbabago sa display}=1{{effect_1}}=2{{effect_1} at {effect_2}}=3{{effect_1}, {effect_2}, at {effect_3}}one{{effect_1}, {effect_2}, at # pa}other{{effect_1}, {effect_2}, at # pa}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Payagan ang lahat ng notification"</string>
@@ -3953,7 +3967,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Ipakita ang mga bagong notification lang sa lock screen"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Awtomatikong alisin ang mga natingnan nang notification sa lock screen"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Buong listahan"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Compact na View"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Compact"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Mga notification sa lock screen"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Ipakita ang mga pag-uusap, default, at naka-silent"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Ipakita ang mga pag-uusap, default, at naka-silent"</string>
@@ -4599,7 +4613,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Para sa iyong seguridad, nire-require ng Advanced na Proteksyon na manatiling naka-on ang setting na ito"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Para sa iyong seguridad, nire-require ng Advanced na Proteksyon na manatiling naka-off ang setting na ito"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Para sa iyong seguridad, pinipigilan ng Advanced na Proteksyon ang aksyon na ito"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Gumagamit ang network na ito ng WEP, isang lumang paraan ng pag-encrypt na puwedeng maglagay sa data mo sa panganib. Na-block ng Advanced na Proteksyon ang mga WEP na koneksyon."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Mga Setting"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"I-off"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"I-on"</string>
@@ -4776,7 +4789,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Pansamantalang na-disable dahil sa Pantipid ng Baterya"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"I-off ang pangtipid sa baterya"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Pansamantalang na-on dahil sa Pantipid ng Baterya"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Subukan ang Madilim na tema"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Subukan ang Madilim na tema"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Tumutulong na patagalin ang baterya"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Mga tile ng developer para sa mga mabilisang setting"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"I-disable ang pag-time out ng pahintulot sa adb"</string>
@@ -4807,10 +4820,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"Shortcut sa lock screen mo rin ang <xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>. I-tap para baguhin ito."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Hindi sinusuportahan ng kasalukuyan mong default na wallet app ang galaw na ito"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Baguhin ang default na wallet"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"mga galaw, shortcut"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"magbayad, mga pagbabayad"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"I-flip ang camera para sa selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigation mode"</string>
@@ -5935,6 +5946,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"I-delete ang PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Magdagdag ng email sa pag-recover"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"I-verify ang iyong email"</string>
+    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Mga filter ng content ng website"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Mga filter ng website, I-block ang mga site, Mga filter ng browser, I-block ang mga explicit na site, I-filter ang mga site, I-block ang mga resulta ng paghahanap, I-filter ang mga explicit na resulta ng paghahanap, mga paghihigpit sa content"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Tumulong sa pag-filter ng explicit na content sa ilang app at browser sa teleponong ito. Posibleng may lumabas pa ring explicit na content sa iba pang app, device, o browser."</string>
@@ -5978,4 +5991,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Gumagana ang Pag-check sa Identity sa mas maraming app"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Pinipigilan ng Pag-check sa Identity ang hindi gustong pag-access sa iyong mga app. Available na sa anumang app na gumagamit ng Pag-unlock Gamit ang Fingerprint o Mukha."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Tingnan ang mga detalye"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

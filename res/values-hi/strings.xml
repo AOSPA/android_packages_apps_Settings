@@ -81,6 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"कान की मशीन की सेटिंग"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"शॉर्टकट, कान की मशीन के साथ काम करने की सुविधा"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"प्रीसेट"</string>
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"लेफ़्ट प्रीसेट"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"राइट प्रीसेट"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"लेफ़्ट: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> राइट: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"आपके ऑडियोलॉजिस्ट ने कोई प्रीसेट सेट नहीं किया है"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"प्रीसेट अपडेट नहीं किया जा सका"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"आस-पास की जगहें"</string>
@@ -697,7 +700,7 @@
     <string name="private_space_unlock_description" msgid="5527228922778630361">"अपना प्राइवेट स्पेस अनलॉक करें"</string>
     <string name="private_space_hide_off_summary" msgid="8565973976602078315">"बंद है"</string>
     <string name="private_space_hide_on_summary" msgid="3450844101901438867">"चालू है"</string>
-    <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"प्राइवेट स्पेस को लॉक करने पर, वह छिप जाएगा"</string>
+    <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"प्राइवेट स्पेस को लॉक करने पर वह छिप जाएगा"</string>
     <string name="private_space_hide_dialog_message" msgid="618693520130744836">"प्राइवेट स्पेस ऐक्सेस करने के लिए, ऐप्लिकेशन सूची के खोज बार में \"प्राइवेट स्पेस\" डालें."</string>
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"ठीक है"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"सिस्टम"</string>
@@ -1013,8 +1016,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"कोई डिसप्ले कनेक्ट नहीं है"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"शुरू करने के लिए, बाहरी डिसप्ले कनेक्ट करें या कोई दूसरे केबल का इस्तेमाल करें"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"ज़्यादा विकल्प"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"डिसप्ले का क्रम बदलने के लिए, उन्हें दबाकर रखें और खींचकर छोड़ें"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"पहले से मौजूद डिसप्ले की स्क्रीन शेयर करें"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"क्या आपको नई सेटिंग इस्तेमाल करनी हैं?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"अगर डिसप्ले सही तरीके से काम नहीं कर रहा है, तो पिछली सेटिंग पर वापस जाएं"</string>
@@ -1582,8 +1584,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"स्टोरेज और कैश मेमोरी"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"मेमोरी सेटिंग"</string>
     <string name="status_eid" msgid="3588471107671992684">"ईआईडी"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"ईआईडी <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"आईएमईआई <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"देखने के लिए, सेव किया गया नेटवर्क चुनें"</string>
     <string name="status_imei" msgid="5719752369250485007">"आईएमईआई"</string>
@@ -1685,7 +1686,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"कम्यूनिटी"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"कम्यूनिटी सेटिंग"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"हब मोड"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"लॉक स्क्रीन पर विजेट (बीटा वर्शन)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"लॉक स्क्रीन पर विजेट"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"विजेट कब अपने-आप दिखें"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"कभी नहीं"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"चार्ज करते समय"</string>
@@ -1949,8 +1954,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"लॉक खोलने का पैटर्न बनाएं"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"सहायता के लिए मेन्यू दबाएं."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"सेट अप के बाद उंगली हटा लें"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"कम से कम <xliff:g id="NUMBER">%d</xliff:g> डॉट कनेक्ट करें"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"कम से कम <xliff:g id="NUMBER">%d</xliff:g> बिंदुओं को कनेक्‍ट करें. फिर से कोशिश करें."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"पैटर्न रिकॉर्ड किया गया"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"पुष्टि करने के लिए फिर से पैटर्न बनाएं"</string>
@@ -2413,6 +2417,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"नेविगेशन मोड, स्क्रीन घुमाने की सुविधा"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"सुझाव, राय या शिकायत भेजें"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"सर्वे में हिस्सा लें"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"सुलभता सुविधाओं से जुड़ा सर्वे"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"सुझाव/राय दें या शिकायत करें"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"आप गहरे रंग वाली थीम से किस हद तक संतुष्ट हैं?"</string>
@@ -2589,10 +2594,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"विकल्प"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"समय"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"स्टैंडर्ड"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"गहरे रंग वाली स्टैंडर्ड थीम"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"गहरे रंग वाली स्टैंडर्ड थीम"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"इससे गहरे रंग वाली थीम, आपके डिवाइस और उन ऐप के लिए चालू हो जाती है जिनके साथ यह थीम काम करती है"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"एक्सपैंडेड"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"एक्सपैंडेड"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"एक्सपैंडेड"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"इससे ऐसे ज़्यादातर ऐप पर गहरे रंग वाली थीम अपने-आप लागू हो जाती है जिन पर यह थीम काम नहीं करती. इससे ऐप ऐक्सेस करना और उनका कॉन्टेंट पढ़ना आसान हो सकता है, लेकिन मुमकिन है कि कुछ ऐप का कॉन्टेंट सही से न दिखे."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"फ़ोर्स इनवर्ट, रंग बदलने की सुविधा, कंट्रास्ट"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ऐनिमेशन हटाएं"</string>
@@ -2623,7 +2628,8 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"रंग बदलने की सुविधा का इस्तेमाल करें"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"रंग बदलने की सुविधा का शॉर्टकट"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"रंग बदलने की सुविधा चालू रहने पर, हल्के रंग की स्क्रीन गहरे रंग में बदल जाती हैं. वहीं, गहरे रंग की स्क्रीन हल्के रंग में दिखने लगती हैं."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;ध्यान दें&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; रंग बदलने की सुविधा चालू रहने पर, मीडिया और इमेज भी अलग रंग में दिखेंगी&lt;/li&gt; &lt;li&gt; रंग बदलने की सुविधा, सभी ऐप्लिकेशन पर लागू होगी&lt;/li&gt; &lt;li&gt; गहरे रंग का बैकग्राउंड रखने के लिए, रंग बदलने की सुविधा के बजाय गहरे रंग वाली थीम का इस्तेमाल करें&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for accessibility_display_inversion_preference_subtitle (8748527808247125417) -->
+    <skip />
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"सेटिंग पर जाएं"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"अपने-आप क्लिक होने की सुविधा (जब कर्सर तय समय तक रुके)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"ऑटो क्लिक (कॉन्टेंट पर बिताया गया समय) के बारे में जानकारी"</string>
@@ -3390,7 +3396,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"सिस्‍टम CA प्रमाणपत्र सक्षम करना है?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"सिस्‍टम CA प्रमाणपत्र अक्षम करना है?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"स्‍थायी रूप से उपयोगकर्ता CA प्रमाणपत्र निकालना चाहते हैं?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"इन आइटम में क्रेडेंशियल का इस्तेमाल किया जा रहा है"</string>
     <string name="credential_contains" msgid="3146519680449595771">"इस एंट्री में ये आइटम शामिल हैं"</string>
@@ -3431,6 +3439,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"डिवाइस से <xliff:g id="USER_NAME">%1$s</xliff:g> को मिटाएं"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"लॉक स्‍क्रीन सेटिंग"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"लॉक स्क्रीन से उपयोगकर्ताओं को जोड़ें"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"डिवाइस के डॉक होने पर एडमिन खाते पर जाएं"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"खुद को मिटाएं?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"उपयोगकर्ता को हटाना है?"</string>
@@ -3573,8 +3583,7 @@
     <string name="color_orange" msgid="216547825489739010">"ऑरेंज"</string>
     <string name="color_purple" msgid="6603701972079904843">"पर्पल"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"सिम स्थिति"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"सिम %1$d की स्थिति"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"आपका सिम बदल दिया गया है"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"सेट करने के लिए टैप करें"</string>
@@ -3832,8 +3841,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"वॉलपेपर की रोशनी कम रखें"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"वॉलपेपर की रोशनी कम हो जाएगी"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"वॉलपेपर की चमक कम हो जाएगी"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"गहरे रंग वाली थीम चालू करें"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"गहरे रंग वाली थीम चालू करें"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"गहरे रंग वाली थीम चालू करें"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"इससे गहरे रंग वाली थीम चालू होती है"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"गहरे रंग वाले बैकग्राउंड का इस्तेमाल करने के लिए, डिवाइस की थीम को बदलें. इससे आंखों को आराम मिलता है"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{डिसप्ले में कोई बदलाव नहीं किया गया}=1{{effect_1}}=2{{effect_1} और {effect_2}}=3{{effect_1}, {effect_2}, और {effect_3}}one{{effect_1}, {effect_2}, और # अन्य}other{{effect_1}, {effect_2}, और # अन्य}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"सभी सूचनाओं को अनुमति दें"</string>
@@ -3956,7 +3965,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"लॉक स्क्रीन पर सिर्फ़ नई सूचनाएं दिखाएं"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"देखी जा चुकी सूचनाएं लॉक स्क्रीन से अपने-आप हट जाएंगी"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"पूरी सूची"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"कंपैक्ट व्यू"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"संक्षिप्त"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"लॉक स्क्रीन पर सूचनाएं"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"डिफ़ॉल्ट और साइलेंट, दोनों मोड वाली सूचनाएं और बातचीत दिखाएं"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"बातचीत, डिफ़ॉल्ट, और साइलेंट मोड पर सेट की गई सूचनाएं दिखाएं"</string>
@@ -4602,7 +4611,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"ऐडवांस सुरक्षा के लिए इस सेटिंग को चालू रखना ज़रूरी है, ताकि आपका डेटा सुरक्षित रहे"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"ऐडवांस सुरक्षा के लिए इस सेटिंग को बंद रखना ज़रूरी है, ताकि आपका डेटा सुरक्षित रहे"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"ऐडवांस सुरक्षा की सेटिंग इस कार्रवाई को रोक देती है, ताकि आपका डेटा सुरक्षित रहे"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"यह नेटवर्क WEP का इस्तेमाल करता है. WEP, डिवाइस को एन्क्रिप्ट यानी सुरक्षित करने का पुराना तरीका है. इससे आपके डेटा की सुरक्षा को खतरा हो सकता है. ऐडवांस सुरक्षा की सेटिंग के ज़रिए, WEP कनेक्शन ब्लॉक कर दिए गए हैं."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"सेटिंग"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"बंद करें"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"चालू करें"</string>
@@ -4779,7 +4787,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"कुछ समय के लिए बंद किया गया है, क्योंकि बैटरी सेवर चालू है"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"बैटरी सेवर की सुविधा बंद करें"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"\'बैटरी सेवर\' की वजह से कुछ समय के लिए चालू है"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"गहरे रंग वाली थीम आज़माएं"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"गहरे रंग वाली थीम आज़माएं"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"बैटरी लाइफ़ बढ़ाने में मदद करती है"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"क्विक सेटिंग डेवलपर टाइल"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb अनुमतियों के लिए टाइम आउट बंद करें"</string>
@@ -4810,10 +4818,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> भी लॉक स्क्रीन का एक शॉर्टकट है. इसे बदलने के लिए टैप करें."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"आपके मौजूदा डिफ़ॉल्ट वॉलेट ऐप्लिकेशन में, हाथ के इस जेस्चर को इस्तेमाल करने की सुविधा उपलब्ध नहीं है"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"डिफ़ॉल्ट वॉलेट बदलें"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"हाथ के जेस्चर, शॉर्टकट"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"पेमेंट करें, पेमेंट"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"सेल्फ़ी के लिए कैमरा फ़्लिप करें"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"नेविगेशन मोड"</string>
@@ -5797,7 +5803,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"पासवर्ड"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"अन्य डिवाइसों के साथ काम करने की क्षमता को बेहतर बनाएं"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"ऑडियो क्वालिटी कम करके, कान की मशीन जैसे डिवाइसों को अपने फ़ोन से कनेक्ट करें"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"इससे, ऑडियो शेयर करने की सुविधा बंद हो जाती है, ताकि अन्य डिवाइसों के साथ काम करने की क्षमता को बेहतर बनाने के लिए सेटिंग कॉन्फ़िगर की जा सकें"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"सेटिंग बदलने के लिए, ऑडियो शेयर करने की सुविधा को बंद करें"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"आस-पास चलने वाला ऑडियो सुनें"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"ऑडियो शेयर करने की सुविधा, Auracast™ में काम करती है"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"ऑडियो स्ट्रीम का नाम"</string>
@@ -5938,6 +5944,7 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"पिन मिटाएं"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"खाता वापस पाने के लिए ईमेल पता जोड़ें"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"अपने ईमेल पते की पुष्टि करें"</string>
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ऐप स्टोर के फ़िल्टर"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"वेबसाइट के कॉन्टेंट के आधार पर फ़िल्टर"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"वेबसाइट फ़िल्टर, साइटें ब्लॉक करना, ब्राउज़र फ़िल्टर, अश्लील साइटें ब्लॉक करना, साइटें फ़िल्टर करना, खोज के नतीजे ब्लॉक करना, अश्लील कॉन्टेंट वाले खोज नतीजे फ़िल्टर करना, कॉन्टेंट से जुड़ी पाबंदियां"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"इस फ़ोन पर कुछ ऐप्लिकेशन और ब्राउज़र के लिए अश्लील कॉन्टेंट को फ़िल्टर करें. हालांकि, अन्य ऐप्लिकेशन, डिवाइसों या ब्राउज़र में अश्लील कॉन्टेंट फिर भी दिख सकता है."</string>
@@ -5981,4 +5988,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"पहचान की पुष्टि करने की सुविधा को अब ज़्यादा ऐप्लिकेशन में इस्तेमाल किया जा सकता है"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"पहचान की पुष्टि करने की सुविधा, आपके ऐप्लिकेशन को बिना अनुमति के ऐक्सेस किए जाने से रोकती है. अब यह सुविधा, फ़िंगरप्रिंट या फे़स अनलॉक की सुविधा देने वाले हर ऐप्लिकेशन में उपलब्ध है."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"जानकारी देखें"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

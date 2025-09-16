@@ -81,6 +81,12 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"تنظیمات دستگاه سمعک"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"میان‌بر، سازگاری با سمعک"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"پیش‌تنظیم"</string>
+    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
+    <skip />
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"متخصص شنوایی‌سنجی شما هیچ پیش‌تنظیمی برنامه‌ریزی نکرده است"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"پیش‌تنظیم به‌روزرسانی نشد"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"پیرامون"</string>
@@ -1013,8 +1019,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"هیچ نمایشگری متصل نشده است"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"برای شروع، یک نمایشگر خارجی وصل کنید، یا از کابل دیگری استفاده کنید"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"گزینه‌های بیشتر"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"برای تغییر دادن ترتیب نمایشگرها، نگه دارید و بکشید"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"قرینه‌سازی نمایشگر داخلی"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"از تنظیمات جدید استفاده شود؟"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"اگر نمایشگر طبق انتظار کار نمی‌کند، می‌توانید به تنظیمات قبلی برگردید"</string>
@@ -1582,8 +1587,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"فضای ذخیره‌سازی و حافظه نهان"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"تنظیمات ذخیره‌سازی"</string>
     <string name="status_eid" msgid="3588471107671992684">"‏سند شناسایی جاسازی‌شده (EID)"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"‏سند شناسایی جاسازی‌شده (EID): <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"برای مشاهده، شبکه ذخیره‌شده را انتخاب کنید"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -1685,7 +1689,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"عمومی"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"تنظیمات عمومی"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"حالت متصل"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"ویجت‌ها روی صفحه قفل (بتا)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"ابزاره‌ها در صفحه قفل"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"شرایط نمایش خودکار"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"هرگز"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"هنگام شارژ شدن"</string>
@@ -1949,8 +1957,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"الگوی بازگشایی قفل را بکشید"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"برای دریافت راهنمایی روی منو فشار دهید."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"وقتی الگو را کشیدید، انگشتتان را بردارید"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"حداقل <xliff:g id="NUMBER">%d</xliff:g> نقطه را به‌هم وصل کنید"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"حداقل <xliff:g id="NUMBER">%d</xliff:g> نقطه را به یکدیگر متصل کنید. دوباره امتحان کنید."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"الگو ضبط شد"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"برای تأیید، دوباره الگو را بکشید"</string>
@@ -2413,6 +2420,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"حالت پیمایش، چرخش صفحه"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"ارسال بازخورد"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"شرکت در نظرسنجی"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"نظرسنجی دسترس‌پذیری"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"هم‌رسانی بازخورد"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"چقدر از زمینه تیره راضی هستید؟"</string>
@@ -2592,10 +2600,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"گزینه‌ها"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"زمان‌بندی"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"استاندارد"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"«زمینه تیره» استاندارد"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"«زمینه تیره» استاندارد"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"زمینه تیره را برای دستگاه و برنامه‌هایی که از زمینه تیره پشتیبانی می‌کنند، روشن می‌کند"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"ازهم بازکردن"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"«زمینه تیره» گسترش‌یافته"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"«زمینه تیره» گسترش‌یافته"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"به‌صورت خودکار زمینه تیره را روی اکثر برنامه‌هایی که از آن پشتیبانی نمی‌کنند، اعمال می‌کند. این امر می‌تواند دسترس‌پذیری و خوانایی را بهبود بخشد، اما ممکن است باعث شود برخی‌از برنامه‌ها به‌صورت نادرست نمایش داده شوند."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"معکوس اجباری، وارونگی رنگ، کنتراست"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"برداشتن پویانمایی‌ها"</string>
@@ -2626,7 +2634,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"استفاده از وارونگی رنگ"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"میان‌بر «وارونگی رنگ»"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"«وارونگی رنگ» صفحه روشن را تیره می‌کند. صفحه تیره را هم روشن می‌کند."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"‏&lt;b&gt;به‌خاطر داشته باشید&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; رنگ‌ها در رسانه‌ها و تصاویر تغییر خواهد کرد&lt;/li&gt; &lt;li&gt; «وارونگی رنگ» در همه برنامه‌ها کار می‌کند&lt;/li&gt; &lt;li&gt; برای نمایش پس‌زمینه تاریک، می‌توان به‌جای آن از «زمینه تاریک» استفاده کرد&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"‏&lt;b&gt;به‌خاطر داشته باشید&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; رنگ‌ها در رسانه‌ها و تصاویر تغییر خواهد کرد&lt;/li&gt; &lt;li&gt; «وارونگی رنگ» در همه برنامه‌ها کار می‌کند&lt;/li&gt; &lt;li&gt; برای نمایش پس‌زمینه تاریک، می‌توان به‌جای آن از «زمینه تاریک» استفاده کرد&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"ورود به تنظیمات"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"کلیک خودکار (زمان‌بندی توقف)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"درباره کلیک خودکار (مدت ایست)"</string>
@@ -3393,8 +3401,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"‏گواهی CA سیستم فعال شود؟"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"‏گواهی CA سیستم غیرفعال شود؟"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"‏گواهی CA کاربر به صورت دائمی حذف شود؟"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"گواهینامه مرکز صدور گواهی <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>، جمع شده است، برای ازهم باز کردن، دو تک‌ضرب بزنید"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"گواهینامه مرکز صدور گواهی <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>، ازهم باز شده است، برای جمع کردن، دو تک‌ضرب بزنید"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"درحال استفاده توسط"</string>
     <string name="credential_contains" msgid="3146519680449595771">"موارد موجود در این ورودی:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"یک کلید کاربر"</string>
@@ -3434,6 +3442,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"حذف <xliff:g id="USER_NAME">%1$s</xliff:g> از این دستگاه"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"تنظیمات صفحه قفل"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"افزودن کاربران از صفحه قفل"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"هنگام اتصال به پایه، به کاربر سرپرست جابه‌جا شود"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"حذف خودتان؟"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"این کاربر حذف شود؟"</string>
@@ -3576,8 +3586,7 @@
     <string name="color_orange" msgid="216547825489739010">"نارنجی"</string>
     <string name="color_purple" msgid="6603701972079904843">"بنفش"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"وضعیت سیم‌کارت"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"‏وضعیت سیم‌کارت %1$d"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"سیم‌کارت‌ها تغییر کرد"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"برای راه‌اندازی، تک‌ضرب بزنید"</string>
@@ -3754,7 +3763,7 @@
     <string name="dock_audio_media_title" msgid="6474579339356398330">"پخش بلندگوی پایه"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"فقط صوت"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"فقط رسانه صوتی"</string>
-    <string name="emergency_tone_silent" msgid="5048069815418450902">"سکوت"</string>
+    <string name="emergency_tone_silent" msgid="5048069815418450902">"بی‌صدا"</string>
     <string name="emergency_tone_alert" msgid="1977698889522966589">"آهنگ‌ها"</string>
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"لرزش‌ها"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"صدای راه‌اندازی"</string>
@@ -3835,8 +3844,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"کم‌نور کردن کاغذدیواری"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"کم‌نور کردن کاغذدیواری"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"فیلتر کردن روشنایی کاغذدیواری"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"فعال کردن «زمینه تیره»"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"فعال کردن «زمینه تیره»"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"فعال کردن زمینه تیره"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"فعال کردن زمینه تیره"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"زمینه دستگاه را به پس‌زمینه تیره‌ای که برای چشم‌ها راحت‌تر است تغییر دهید"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{بدون تغییر در نمایشگر}=1{‫{effect_1}}=2{‫{effect_1} و {effect_2}}=3{‫{effect_1}، {effect_2}، و {effect_3}}one{‫{effect_1}، {effect_2}، و # مورد دیگر}other{‫{effect_1}، {effect_2}، و # مورد دیگر}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"مجاز کردن همه اعلان‌ها"</string>
@@ -3959,7 +3968,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"نشان دادن تنها اعلان‌های جدید در صفحه قفل"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"اعلان‌هایی که قبلاً مشاهده شده‌اند به‌طور خودکار از صفحه قفل برداشته می‌شوند"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"فهرست کامل"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"نمای فشرده"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"فشرده"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"اعلان‌ها در صفحه قفل"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"نمایش مکالمه‌ها، پیش‌فرض، و بی‌صدا"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"نمایش مکالمه‌ها، پیش‌فرض، و بی‌صدا"</string>
@@ -4605,7 +4614,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"برای امنیت شما، «محافظت پیشرفته» لازم می‌داند این تنظیم روشن بماند"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"برای امنیت شما، «محافظت پیشرفته» لازم می‌داند این تنظیم خاموش بماند"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"برای امنیت شما، «محافظت پیشرفته» مانع از انجام این کنش می‌شود"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"‏این شبکه از WEP استفاده می‌کند، یک روش رمزگذاری قدیمی که می‌تواند داده‌های شما را درمعرض خطر قرار دهد. «محافظت پیشرفته» اتصالات WEP را مسدود می‌کند."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"تنظیمات"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"خاموش کردن"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"روشن کردن"</string>
@@ -4782,7 +4790,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"به‌دلیل روشن بودن «بهینه‌سازی باتری»، موقتاً غیرفعال شده است"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"خاموش کردن بهینه‌سازی باتری"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"به‌دلیل روشن بودن «بهینه‌سازی باتری»، این تنظیم موقتاً فعال شد"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"زمینه تاریک را امتحان کنید"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"زمینه تاریک را امتحان کنید"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"به افزایش عمر باتری کمک می‌کند"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"کاشی‌های برنامه‌نویسی تنظیمات سریع"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"‏غیرفعال کردن مهلت مجوز adb"</string>
@@ -4813,10 +4821,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> نیز میان‌بر صفحه قفل شما است. برای تغییر دادن آن، تک‌ضرب بزنید."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"برنامه کیف پول پیش‌فرض فعلی‌تان از این اشاره پشتیبانی نمی‌کند"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"تغییر کیف پول پیش‌فرض"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"اشاره‌ها، میان‌بر"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"پرداخت، پرداخت‌ها"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"سلفی با چرخاندن دوربین"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"حالت پیمایش"</string>
@@ -5800,7 +5806,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"گذرواژه"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"بهبود سازگاری"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"به برخی دستگاه‌ها (مثل سمعک) کمک می‌کند با کاهش کیفیت صدا متصل شوند"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"اشتراک صدا را برای پیکربندی سازگاری خاموش می‌کند"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"اشتراک صدا را برای تغییر تنظیمات خاموش کنید"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"گوش دادن به صدای اطراف"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"‏«اشتراک صدا» از Auracast™‎ پشتیبانی می‌کند"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"نام جاری‌سازی صوتی"</string>
@@ -5941,6 +5947,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"حذف پین"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"افزودن ایمیل بازیابی"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"درستی‌سنجی کردن ایمیل"</string>
+    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"فیلترهای محتوای وب‌سایت"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"فیلترهای وب‌سایت، مسدود کردن سایت‌ها، فیلترهای مرورگر، مسدود کردن سایت‌های صریح، فیلتر کردن سایت‌ها، مسدود کردن نتایج جستجو، فیلتر کردن نتایج جستجوی صریح، محدودیت‌های محتوا"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"به فیلتر کردن محتوای صریح در برخی‌از برنامه‌ها و مرورگرهای این تلفن کمک می‌کند. ممکن است محتوای صریح همچنان در سایر برنامه‌ها، دستگاه‌ها، یا مرورگرها نمایش داده شود."</string>
@@ -5984,4 +5992,14 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"احراز هویت در برنامه‌های بیشتر فعال است."</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"احراز هویت دسترسی غیرمجاز به برنامه‌ها را مسدود می‌کند. اکنون برای تمام برنامه‌های دارای اثر انگشت یا باز کردن قفل‌گشایی با چهره فعال است."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"مشاهده جزئیات"</string>
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"تنظیمات بررسی نشدند"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"هنوز اطلاعاتی دردسترس نیست"</string>
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

@@ -81,6 +81,12 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"ההגדרות של מכשיר השמיעה"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"קיצור דרך, תאימות למכשירי שמיעה"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"הגדרה קבועה מראש"</string>
+    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
+    <skip />
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"לא תוכנתו הגדרות קבועות מראש על ידי האודיולוג שלך"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"לא ניתן לעדכן את ההגדרה הקבועה מראש"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"הרעשים בסביבה"</string>
@@ -1533,7 +1539,7 @@
     <string name="title_font_size" msgid="570613010306330622">"גודל הגופן"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"הגדלה או הקטנה של הטקסט"</string>
     <string name="category_title_display_text_size" msgid="4234285020731751694">"גדלים"</string>
-    <string name="category_title_text_style" msgid="5905015084935695611">"אפשרויות הסגנון"</string>
+    <string name="category_title_text_style" msgid="5905015084935695611">"סגנון"</string>
     <string name="sim_lock_settings" msgid="7331982427303002613">"‏הגדרות נעילת כרטיס ה-SIM"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"‏נעילת כרטיס SIM"</string>
     <string name="sim_pin_toggle" msgid="6814489621760857328">"‏נעילת כרטיס ה-SIM"</string>
@@ -1683,7 +1689,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"שיתופי"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"הגדרות שיתופיות"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"‏מצב Hub"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"ווידג\'טים במסך הנעילה (בטא)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"ווידג\'טים במסך הנעילה"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"מתי להציג באופן אוטומטי"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"אף פעם"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"בזמן טעינה"</string>
@@ -1947,8 +1957,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"מהו קו ביטול הנעילה שלך?"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"לקבלת עזרה יש ללחוץ על \'תפריט\'."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"כשמסיימים, פשוט מרימים את האצבע"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"צריך לחבר לפחות <xliff:g id="NUMBER">%d</xliff:g> נקודות"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"יש לחבר לפחות <xliff:g id="NUMBER">%d</xliff:g> נקודות. אפשר לנסות שוב."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"קו פתיחת הנעילה נשמר"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"צריך לשרטט שוב את קו פתיחת הנעילה כדי לוודא את הזהות"</string>
@@ -2411,6 +2420,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"מעבר בין מסכים, סיבוב המסך"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"שליחת משוב"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"למילוי הסקר"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"סקר בנושא נגישות"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"שיתוף משוב"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"מה מידת שביעות הרצון שלך מהעיצוב הכהה?"</string>
@@ -2580,17 +2590,17 @@
     <string name="accessibility_notification_high_contrast_text_body_message" msgid="6846453833480117658">"במקום ניגודיות גבוהה, הטקסט יופיע עם קווי מתאר. אפשר להפעיל את התכונה הזו ב<xliff:g id="SETTINGS">%1$s</xliff:g>."</string>
     <string name="accessibility_notification_high_contrast_text_action_open_settings" msgid="5945069315472850294">"מעבר אל <xliff:g id="SETTINGS">%1$s</xliff:g>"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8848579943445806659">"קו המתאר של הטקסט"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"אפשר להוסיף רקע שחור או לבן מסביב לטקסט כדי להגביר את הניגודיות"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"הוספה של רקע שחור או לבן מסביב לטקסט כדי להגביר את הניגודיות"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"עדכון אוטומטי של הגדלת מסך"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"עדכון הגדלת מסך במעבר בין אפליקציות"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"כפתור ההפעלה מנתק שיחה"</string>
     <string name="dark_theme_version_category" msgid="3555549588764154187">"אפשרויות"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"תזמון"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"רגיל"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"עיצוב כהה רגיל"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"עיצוב כהה רגיל"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"הפעלת העיצוב הכהה במכשיר ובאפליקציות שתומכות בעיצוב כהה."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"מורחב"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"עיצוב כהה מורחב"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"עיצוב כהה מורחב"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"הפעלה אוטומטית של העיצוב הכהה ברוב האפליקציות שלא תומכות בו. הפעולה הזו יכולה לשפר את הנגישות ואת הקריאות, אבל היא עלולה גם לגרום לבעיות בתצוגה באפליקציות מסוימות."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"אילוץ היפוך, היפוך צבעים, ניגודיות"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"הסרת אנימציות"</string>
@@ -2621,7 +2631,8 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"שימוש בהיפוך צבעים"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"מקש קיצור להיפוך צבעים"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"התכונה \"היפוך צבעים\" הופכת מסכים בהירים לכהים ומסכים כהים לבהירים."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"‏&lt;b&gt;לתשומת ליבך&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; הצבעים ישתנו במדיה ובתמונות&lt;/li&gt; &lt;li&gt; היפוך הצבעים פועל בכל האפליקציות&lt;/li&gt; &lt;li&gt; כדי להציג רקע כהה, אפשר להשתמש בעיצוב כהה&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for accessibility_display_inversion_preference_subtitle (8748527808247125417) -->
+    <skip />
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"להזין את ההגדרות"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"קליק אוטומטי (משך ההמתנה)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"מידע על קליק אוטומטי (משך ההמתנה)"</string>
@@ -3388,8 +3399,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"‏להפעיל את אישור ה-CA של המערכת?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"‏להשבית את אישור ה-CA של המערכת?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"‏להסיר לצמיתות את אישור ה-CA של המשתמש?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"‏רשימת אישורי CA בקטגוריה \"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>\". הרשימה מכווצת. כדי לכווץ אותה, אפשר ללחוץ לחיצה כפולה"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"‏רשימת אישורי CA בקטגוריה \"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>\". הרשימה מורחבת. כדי לכווץ אותה, אפשר ללחוץ לחיצה כפולה"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"בשימוש על ידי"</string>
     <string name="credential_contains" msgid="3146519680449595771">"הרשומה הזו כוללת"</string>
     <string name="one_userkey" msgid="6363426728683951234">"מפתח משתמש אחד"</string>
@@ -3429,6 +3440,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"מחיקת <xliff:g id="USER_NAME">%1$s</xliff:g> ממכשיר זה"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"הגדרות מסך נעילה"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"הוספת משתמשים ממסך הנעילה"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"מעבר למשתמש עם הרשאת אדמין במהלך עגינה"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"האם למחוק אותך?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"למחוק את המשתמש/ת?"</string>
@@ -3829,8 +3842,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"עמעום הטפט"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"עמעום הטפט"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"שליטה בבהירות של הטפט"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"הפעלת עיצוב כהה"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"הפעלת עיצוב כהה"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"הפעלת העיצוב הכהה"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"הפעלת העיצוב הכהה"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"שינוי העיצוב לרקע כהה, שפחות מאמץ את העיניים"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{לא בוצעו שינויים באפשרויות התצוגה}=1{‏{effect_1}}=2{‫{effect_1} וגם {effect_2}}=3{‫{effect_1}, {effect_2} וגם {effect_3}}one{‫{effect_1}, {effect_2} ועוד #}other{‫{effect_1}, {effect_2} ועוד #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"כל ההתראות"</string>
@@ -3953,7 +3966,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"הצגת התראות חדשות בלבד במסך הנעילה"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"הסרה אוטומטית של התראות שנצפו ממסך הנעילה"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"רשימה מלאה"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"תצוגה קומפקטית"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"קומפקטית"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"התראות במסך הנעילה"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"הצגת שיחות, ברירת מחדל והתראות שקטות"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"הצגת שיחות, ברירת מחדל והתראות שקטות"</string>
@@ -4599,7 +4612,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"מטעמי אבטחה, כשההגנה המתקדמת פועלת, ההגדרה הזו צריכה להיות מופעלת"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"מטעמי אבטחה, כשההגנה המתקדמת פועלת, ההגדרה הזו צריכה להיות מושבתת"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"מטעמי אבטחה, ההגנה המתקדמת חוסמת את הפעולה הזו"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"‏ברשת הזו פועלת שיטת ההצפנה WEP. היא מיושנת ולכן הנתונים שלך עלולים להיות בסיכון.  ההגנה המתקדמת חוסמת חיבורי WEP."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"הגדרות"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"כיבוי"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"הפעלה"</string>
@@ -4776,7 +4788,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"מושבת זמנית כי הופעל מצב \'חיסכון בסוללה\'"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"כיבוי החיסכון בסוללה"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"המתג מופעל באופן זמני כי מצב \'חיסכון בסוללה\' הופעל"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"כדאי לנסות עיצוב כהה"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"כדאי לנסות עיצוב כהה"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"עוזר להארכת חיי הסוללה"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"כפתורים למפתחים בהגדרות המהירות"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"‏השבתה של זמן קצוב לתפוגה של הרשאת adb"</string>
@@ -4807,10 +4819,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"קיצור הדרך שמוגדר במסך הנעילה הוא <xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>. אפשר ללחוץ כאן כדי להחליף אותו."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"אפליקציית הארנק שמוגדרת כברירת מחדל לא תומכת בתנועה הזאת."</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"שינוי הארנק שמוגדר כברירת המחדל"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"תנועות, קיצור דרך"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"ביצוע תשלום, תשלומים"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"סיבוב מהיר של הטלפון פעמיים כדי לעבור למצב סלפי במצלמה"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"מעבר בין מסכים"</string>
@@ -5936,6 +5946,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"מחיקת קוד האימות"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"הוספה של כתובת אימייל לשחזור החשבון"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"אימות של כתובת האימייל"</string>
+    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"מסנני תוכן של אתרים"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"מסנני אתרים, חסימת אתרים, מסנני דפדפן, חסימת אתרים בוטים, סינון אתרים, חסימת תוצאות חיפוש, סינון תוצאות חיפוש בוטות, הגבלות תוכן"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"סינון תוכן בוטה בחלק מהאפליקציות והדפדפנים בטלפון הזה. תוכן בוטה עדיין יכול להופיע באפליקציות, במכשירים או בדפדפנים אחרים."</string>
@@ -5979,4 +5991,14 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"התכונה \"בדיקת הזהות\" פועלת עם יותר אפליקציות"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"התכונה \"בדיקת הזהות\" מונעת גישה לא רצויה לאפליקציות שלך. עכשיו אפשר להשתמש בה בכל אפליקציה שמשתמשת בטביעת אצבע או בפתיחה בזיהוי פנים."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"עיון בפרטים"</string>
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"לא הצלחנו לבדוק את ההגדרות"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"אין עדיין פרטים"</string>
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>
