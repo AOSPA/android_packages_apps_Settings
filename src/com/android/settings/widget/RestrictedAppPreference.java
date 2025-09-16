@@ -96,6 +96,10 @@ public class RestrictedAppPreference extends AppPreference implements
         }
     }
 
+    /**
+     * @deprecated Use {@link #setDisabledByAdmin(EnforcingAdmin)} instead.
+     */
+    @Deprecated
     public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
         if (mHelper.setDisabledByAdmin(admin)) {
             notifyChanged();
