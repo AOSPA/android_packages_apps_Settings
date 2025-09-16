@@ -25,14 +25,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsDashboardFragment;
-import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsHelper;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -45,7 +44,7 @@ public class BluetoothDetailsAudioSharingController extends BluetoothDetailsCont
     private static final String KEY_AUDIO_SHARING = "audio_sharing";
     private static final String KEY_FIND_AUDIO_STREAM = "find_audio_stream";
 
-    @Nullable PreferenceCategory mProfilesContainer;
+    @Nullable PreferenceGroup mProfilesContainer;
     LocalBluetoothManager mLocalBluetoothManager;
 
     public BluetoothDetailsAudioSharingController(
@@ -82,12 +81,7 @@ public class BluetoothDetailsAudioSharingController extends BluetoothDetailsCont
         mProfilesContainer.setVisible(true);
         mProfilesContainer.removeAll();
         mProfilesContainer.addPreference(createAudioSharingPreference());
-        if ((BluetoothUtils.isActiveLeAudioDevice(mCachedDevice)
-                        || AudioStreamsHelper.hasBroadcastSource(
-                                mCachedDevice, mLocalBluetoothManager))
-                && !BluetoothUtils.isBroadcasting(mLocalBluetoothManager)) {
-            mProfilesContainer.addPreference(createFindAudioStreamPreference());
-        }
+        mProfilesContainer.addPreference(createFindAudioStreamPreference());
     }
 
     private Preference createAudioSharingPreference() {
@@ -113,9 +107,20 @@ public class BluetoothDetailsAudioSharingController extends BluetoothDetailsCont
         Preference findAudioStreamPref = new Preference(mContext);
         findAudioStreamPref.setKey(KEY_FIND_AUDIO_STREAM);
         findAudioStreamPref.setTitle(R.string.audio_streams_main_page_title);
+        if (BluetoothUtils.isBroadcasting(mLocalBluetoothManager)) {
+            findAudioStreamPref.setSummary(
+                    R.string.audio_streams_preference_subtitle_audio_sharing_on);
+            findAudioStreamPref.setEnabled(false);
+        } else {
+            findAudioStreamPref.setSummary(null);
+            findAudioStreamPref.setEnabled(true);
+        }
         findAudioStreamPref.setIcon(com.android.settingslib.R.drawable.ic_bt_le_audio_sharing);
         findAudioStreamPref.setOnPreferenceClickListener(
                 preference -> {
+                    if (!BluetoothUtils.isActiveLeAudioDevice(mCachedDevice)) {
+                        mCachedDevice.setActive();
+                    }
                     new SubSettingLauncher(mContext)
                             .setDestination(AudioStreamsDashboardFragment.class.getName())
                             .setSourceMetricsCategory(SettingsEnums.BLUETOOTH_DEVICE_DETAILS)
