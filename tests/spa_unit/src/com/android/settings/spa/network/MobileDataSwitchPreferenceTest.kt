@@ -30,7 +30,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.network.SatelliteRepository
 import com.android.settings.network.telephony.MobileDataRepository
-import com.android.settings.network.telephony.SubscriptionActivationRepository
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
@@ -45,20 +44,15 @@ import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class MobileDataSwitchPreferenceTest {
-    @get:Rule
-    val composeTestRule = createComposeRule()
+    @get:Rule val composeTestRule = createComposeRule()
 
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {}
 
     private val mockMobileDataRepository =
         mock<MobileDataRepository> { on { isMobileDataEnabledFlow(any()) } doReturn emptyFlow() }
 
-    private val mockSatelliteRepository=
-        mock<SatelliteRepository> {
-            on { getIsSessionStartedFlow() } doReturn flowOf(
-                false
-            )
-        }
+    private val mockSatelliteRepository =
+        mock<SatelliteRepository> { on { getIsSessionStartedFlow() } doReturn flowOf(false) }
 
     @Test
     fun title_displayed() {
@@ -67,7 +61,7 @@ class MobileDataSwitchPreferenceTest {
                 MobileDataSwitchPreference(
                     SUB_ID,
                     mockMobileDataRepository,
-                    mockSatelliteRepository
+                    mockSatelliteRepository,
                 ) {}
             }
         }
@@ -84,7 +78,7 @@ class MobileDataSwitchPreferenceTest {
                 MobileDataSwitchPreference(
                     SUB_ID,
                     mockMobileDataRepository,
-                    mockSatelliteRepository
+                    mockSatelliteRepository,
                 ) {}
             }
         }
@@ -105,7 +99,7 @@ class MobileDataSwitchPreferenceTest {
                 MobileDataSwitchPreference(
                     SUB_ID,
                     mockMobileDataRepository,
-                    mockSatelliteRepository
+                    mockSatelliteRepository,
                 ) {
                     newCheckedCalled = it
                 }
@@ -125,18 +119,15 @@ class MobileDataSwitchPreferenceTest {
             on { isMobileDataEnabledFlow(SUB_ID) } doReturn flowOf(true)
         }
 
-        mockSatelliteRepository.stub {
-            on { getIsSessionStartedFlow() } doReturn flowOf(true)
-        }
+        mockSatelliteRepository.stub { on { getIsSessionStartedFlow() } doReturn flowOf(true) }
 
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
                 MobileDataSwitchPreference(
                     SUB_ID,
                     mockMobileDataRepository,
-                    mockSatelliteRepository
-                ) {
-                }
+                    mockSatelliteRepository,
+                ) {}
             }
         }
 
@@ -156,9 +147,8 @@ class MobileDataSwitchPreferenceTest {
                 MobileDataSwitchPreference(
                     SUB_ID,
                     mockMobileDataRepository,
-                    mockSatelliteRepository
-                ) {
-                }
+                    mockSatelliteRepository,
+                ) {}
             }
         }
 

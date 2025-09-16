@@ -60,6 +60,7 @@ import com.android.settings.SettingsPreferenceFragmentBase;
 import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settings.flags.FeatureFlagsImpl;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -255,6 +256,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     public void onStopCallback() {
         mStarted = false;
         mInjector.unregisterDisplayListener(mListener);
+        ExternalDisplaySettingsLoggerStore.removeAllLoggers();
         mActivityTaskManager.unregisterTaskStackListener(mLockTaskModeChangedListener);
         unscheduleUpdate();
     }
@@ -544,6 +546,14 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
         addResolutionPreference(refresh, display, position);
         addRotationPreference(refresh, display, displayRotation, position);
+
+        ExternalDisplaySettingsLoggerStore.ExternalDisplayMetricsLogger logger =
+                ExternalDisplaySettingsLoggerStore.getLogger(display.getId());
+        logger.updateRotation(displayRotation * 90);
+        Display.Mode mode = display.getMode();
+        if (mode != null) {
+            logger.updateResolution(mode.getPhysicalWidth(), mode.getPhysicalHeight());
+        }
         if (DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue()
                 && DesktopExperienceFlags.ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG.isTrue()
                 && mInjector.isProjectedModeEnabled()) {
@@ -671,6 +681,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 return false;
             }
             pref.setValueIndex(rotation);
+            ExternalDisplaySettingsLoggerStore.ExternalDisplayMetricsLogger logger =
+                    ExternalDisplaySettingsLoggerStore.getLogger(display.getId());
+            logger.updateRotation(rotation * 90);
+            logger.log(SettingsStatsLog.EXTERNAL_DISPLAY_SETTINGS_CHANGED__SETTING__ROTATION);
             return true;
         });
         pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES

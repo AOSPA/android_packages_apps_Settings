@@ -45,6 +45,7 @@ import com.android.internal.util.ToBooleanFunction;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragmentBase;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
+import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
@@ -347,10 +348,16 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         boolean isSyntheticMode = (mode.getFlags() & Mode.FLAG_SIZE_OVERRIDE) != 0;
         if (isSyntheticMode || !enableResolutionApplyConfirmation()) {
             mInjector.setUserPreferredDisplayMode(display.getId(), mode, /* storeMode= */ true);
+
+            ExternalDisplaySettingsLoggerStore.ExternalDisplayMetricsLogger logger =
+                    ExternalDisplaySettingsLoggerStore.getLogger(display.getId());
+            logger.updateResolution(mode.getPhysicalWidth(), mode.getPhysicalHeight());
+            logger.log(SettingsStatsLog.EXTERNAL_DISPLAY_SETTINGS_CHANGED__SETTING__RESOLUTION);
         } else {
             updateAllPreferenceStates(mode);
             showDialog();
             Log.i(TAG, "Selected display mode: " + modeToReadableString(mode));
+            // TODO(b/421018668): Add logging for deferred resolution update.
         }
     }
 

@@ -23,6 +23,7 @@ import android.telephony.TelephonyManager
 import android.telephony.data.ApnSetting
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleOwner
+import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.Settings.MobileNetworkActivity.EXTRA_MMS_MESSAGE
@@ -42,13 +43,15 @@ constructor(
     private val getDefaultDataSubId: () -> Int = {
         SubscriptionManager.getDefaultDataSubscriptionId()
     },
-) : TogglePreferenceController(context, key) {
+) : TogglePreferenceController(context, key), AirplaneModeChangedCallback {
 
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     private var telephonyManager: TelephonyManager =
         context.getSystemService(TelephonyManager::class.java)!!
     private val carrierConfigRepository = CarrierConfigRepository(context)
     private var preferenceScreen: PreferenceScreen? = null
+    private var preference: Preference? = null
+    @VisibleForTesting var isAirplaneModeOn: Boolean = false
 
     fun init(subId: Int) {
         this.subId = subId
@@ -67,6 +70,7 @@ constructor(
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preferenceScreen = screen
+        preference = screen.findPreference(preferenceKey)
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
@@ -93,6 +97,15 @@ constructor(
             isChecked,
         )
         return true
+    }
+
+    override fun notifyAirplaneModeChanged(isAirplaneModeOn: Boolean) {
+        this.isAirplaneModeOn = isAirplaneModeOn
+    }
+
+    override fun updateState(preference: Preference?) {
+        super.updateState(preference)
+        preference?.isEnabled = !isAirplaneModeOn
     }
 
     companion object {

@@ -30,6 +30,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+data class EnabledNetworkModeData(
+    val isAvailable: Boolean = false,
+    val summary: CharSequence? = null,
+)
+
 open class MobileNetworkData(
     val context: Context,
     val coroutineScope: CoroutineScope? = null,
@@ -43,19 +48,31 @@ open class MobileNetworkData(
 
     val phoneNumberDataFlow = MutableStateFlow(PhoneNumberData())
 
+    val enabledNetworkModeFlow = MutableStateFlow(EnabledNetworkModeData())
+    val enabledNetworkModeEntriesBuilder =
+        EnabledNetworkModePreferenceController.PreferenceEntriesBuilder(context, subId)
+
     init {
         refresh()
     }
 
     fun refresh() {
         coroutineScope?.launch {
-            withContext(Dispatchers.IO) {
+            withContext(Dispatchers.Default) {
                 phoneNumberDataFlow.value =
                     PhoneNumberData(
                         isAvailable = isMobileNetworkAvailable(),
                         summary = getPhoneNumber(),
                     )
-                Log.d(TAG, "refresh(),subId=$subId,phoneNumberData=${phoneNumberDataFlow.value}")
+                Log.d(TAG, "subId=$subId,phoneNumberData=${phoneNumberDataFlow.value}")
+
+                enabledNetworkModeEntriesBuilder.refresh()
+                enabledNetworkModeFlow.value =
+                    EnabledNetworkModeData(
+                        isAvailable = isEnabledNetworkModeAvailable,
+                        summary = enabledNetworkModeEntriesBuilder.summary,
+                    )
+                Log.d(TAG, "subId=$subId,enabledNetworkMode=${enabledNetworkModeFlow.value}")
             }
         }
     }
@@ -75,6 +92,9 @@ open class MobileNetworkData(
             SubscriptionUtil.getBidiFormattedPhoneNumber(context, it)
         } ?: ""
     }
+
+    val isEnabledNetworkModeAvailable: Boolean =
+        getNetworkModePreferenceType(context, subId) == NetworkModePreferenceType.EnabledNetworkMode
 
     companion object {
         private const val TAG = "MobileNetworkData"

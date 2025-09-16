@@ -31,3 +31,10 @@ flag {
     description: " Show the user details settings for own account."
     bug: "425579387"
 }
+
+flag {
+    name: "show_add_users_from_signin_toggle"
+    namespace: "desktop_users_and_accounts"
+    description: "Controls whether to show the 'add users from the sign-in screen' toggle in Settings."
+    bug: "391862614"
+}

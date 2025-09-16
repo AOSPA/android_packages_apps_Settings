@@ -29,6 +29,8 @@ import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settings.testutils.shadow.ShadowDeviceConfig
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
 import com.google.common.truth.Truth.assertThat
@@ -67,6 +69,28 @@ class JoystickSwitchPreferenceTest {
     }
 
     @Test
+    fun getReadPermissions_returnsSettingsSecureStoreReadPermissions() {
+        assertThat(preference.getReadPermissions(context))
+            .isEqualTo(SettingsSecureStore.getReadPermissions())
+    }
+
+    @Test
+    fun getWritePermissions_returnsSettingsSecureStoreWritePermissions() {
+        assertThat(preference.getWritePermissions(context))
+            .isEqualTo(SettingsSecureStore.getWritePermissions())
+    }
+
+    @Test
+    fun getReadPermit_returnsAllow() {
+        assertThat(preference.getReadPermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
+    fun getWritePermit_returnsAllow() {
+        assertThat(preference.getWritePermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
     @TestParameters(
         value =
             [
@@ -75,8 +99,11 @@ class JoystickSwitchPreferenceTest {
             ]
     )
     fun performClick(settingsEnabled: Boolean, expectedChecked: Boolean) {
-        getStorage().setBoolean(
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED, settingsEnabled)
+        getStorage()
+            .setBoolean(
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED,
+                settingsEnabled,
+            )
         val preferenceWidget = createJoystickWidget()
         assertThat(preferenceWidget.isChecked).isEqualTo(settingsEnabled)
 
@@ -84,8 +111,10 @@ class JoystickSwitchPreferenceTest {
 
         assertThat(preferenceWidget.isChecked).isEqualTo(expectedChecked)
         assertThat(
-            getStorage().getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED)
-        ).isEqualTo(expectedChecked)
+                getStorage()
+                    .getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED)
+            )
+            .isEqualTo(expectedChecked)
     }
 
     @Test
@@ -100,7 +129,6 @@ class JoystickSwitchPreferenceTest {
                 "{supportJoystick: true, inSetupWizard: false, supportWindowMag: true, expectedAvailable: true}",
                 "{supportJoystick: true, inSetupWizard: true, supportWindowMag: false, expectedAvailable: false}",
                 "{supportJoystick: true, inSetupWizard: true, supportWindowMag: true, expectedAvailable: false}",
-
             ]
     )
     fun isAvailable(
@@ -122,9 +150,9 @@ class JoystickSwitchPreferenceTest {
         try {
             activityController =
                 ActivityController.of(
-                    ComponentActivity(),
-                    Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
-                )
+                        ComponentActivity(),
+                        Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
+                    )
                     .create()
                     .start()
                     .postCreate(null)

@@ -21,6 +21,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_UNLO
 import static com.android.settings.biometrics.BiometricUtils.GatekeeperCredentialNotMatchException;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PolicyEnforcementInfo;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -405,6 +406,13 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected boolean isDisabledByAdmin() {
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()
+                && android.app.admin.flags.Flags.setKeyguardDisabledFeaturesCoexistence()) {
+            final PolicyEnforcementInfo info =
+                    RestrictedLockUtilsInternal.getEnforcingAdminsForKeyguardFeatures(this,
+                            DevicePolicyManager.KEYGUARD_DISABLE_FACE, getUserId());
+            return info != null && info.getMostImportantEnforcingAdmin() != null;
+        }
         return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                 this, DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null;
     }

@@ -85,6 +85,7 @@ open class VibrationIntensitySliderPreference(
         super.bind(preference, metadata)
         preference.onPreferenceChangeListener = this
         (preference as SliderPreference).apply {
+            setTickVisible(true) // Show ticks on slider
             // Haptics previews played by the Settings app don't bypass user settings to be played.
             // The sliders continuously updates the intensity value so the previews can apply them.
             updatesContinuously = true

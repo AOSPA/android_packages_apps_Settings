@@ -29,17 +29,21 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Application;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserManager;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.ActiveUnlockTestUtils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.After;
@@ -59,6 +63,8 @@ import org.robolectric.annotation.Config;
 public class BiometricFingerprintStatusPreferenceControllerTest {
 
     @Rule public final MockitoRule mMocks = MockitoJUnit.rule();
+
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock private UserManager mUserManager;
     @Mock private PackageManager mPackageManager;
@@ -135,7 +141,24 @@ public class BiometricFingerprintStatusPreferenceControllerTest {
         final RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
         mController.updateState(restrictedPreference);
 
-        verify(restrictedPreference).setDisabledByAdmin(any());
+        verify(restrictedPreference).setDisabledByAdmin((RestrictedLockUtils.EnforcedAdmin) any());
+    }
+
+
+    @Test
+    @EnableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED,
+            android.app.admin.flags.Flags.FLAG_SET_KEYGUARD_DISABLED_FEATURES_COEXISTENCE})
+    public void fingerprintDisabled_whenDpmRefactorEnabled_whenAdminAndNoFingerprintsEnrolled() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+
+        ShadowRestrictedLockUtilsInternal
+                .setKeyguardDisabledFeatures(DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
+
+        final RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
+        mController.updateState(restrictedPreference);
+
+        verify(restrictedPreference).setDisabledByAdmin((EnforcingAdmin) any());
     }
 
     @Test
@@ -149,7 +172,25 @@ public class BiometricFingerprintStatusPreferenceControllerTest {
         final RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
         mController.updateState(restrictedPreference);
 
-        verify(restrictedPreference, never()).setDisabledByAdmin(any());
+        verify(restrictedPreference, never()).setDisabledByAdmin(
+                (RestrictedLockUtils.EnforcedAdmin) any());
+        verify(restrictedPreference).setEnabled(true);
+    }
+
+    @Test
+    @EnableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED,
+            android.app.admin.flags.Flags.FLAG_SET_KEYGUARD_DISABLED_FEATURES_COEXISTENCE})
+    public void fingerprintNotDisabled_whenDpmRefactorEnabled_whenAdminAndFingerprintsEnrolled() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(true);
+
+        ShadowRestrictedLockUtilsInternal
+                .setKeyguardDisabledFeatures(DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
+
+        final RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
+        mController.updateState(restrictedPreference);
+
+        verify(restrictedPreference, never()).setDisabledByAdmin((EnforcingAdmin) any());
         verify(restrictedPreference).setEnabled(true);
     }
 
@@ -160,7 +201,8 @@ public class BiometricFingerprintStatusPreferenceControllerTest {
         final RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
         mController.updateState(restrictedPreference);
 
-        verify(restrictedPreference, never()).setDisabledByAdmin(any());
+        verify(restrictedPreference, never()).setDisabledByAdmin(
+                (RestrictedLockUtils.EnforcedAdmin) any());
         verify(restrictedPreference).setEnabled(true);
     }
 }

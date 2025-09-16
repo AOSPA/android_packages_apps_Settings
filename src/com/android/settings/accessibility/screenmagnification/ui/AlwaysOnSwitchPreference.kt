@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
@@ -55,6 +56,18 @@ class AlwaysOnSwitchPreference :
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 
     override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
+
+    override fun getReadPermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int = ReadWritePermit.ALLOW
+
+    override fun getWritePermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)

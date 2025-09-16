@@ -21,11 +21,13 @@ import static android.os.Build.VERSION_CODES.O;
 import static android.os.Build.VERSION_CODES.Q;
 
 import android.annotation.UserIdInt;
+import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.IDevicePolicyManager;
 import android.app.admin.ManagedSubscriptionsPolicy;
 import android.app.admin.PasswordMetrics;
 import android.app.admin.PasswordPolicy;
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.ComponentName;
 import android.content.Context;
 
@@ -47,6 +49,9 @@ import java.util.Set;
 @Implements(DevicePolicyManager.class)
 public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDevicePolicyManager {
 
+    private static final PolicyEnforcementInfo EMPTY_POLICY_ENFORCEMENT_INFO =
+            new PolicyEnforcementInfo(Collections.emptyList());
+
     private final Map<Integer, Long> mProfileTimeouts = new HashMap<>();
     private boolean mIsFinancedDevice;
     private Map<Integer, CharSequence> mSupportMessagesMap = new HashMap<>();
@@ -61,6 +66,8 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
     private Set<String> mCrossProfileCalendarPackages = Collections.emptySet();
 
     private List<String> mPermittedAccessibilityServices = null;
+
+    private Map<String, PolicyEnforcementInfo> mPolicyEnforcementInfoMap = new HashMap<>();
 
     @Implementation(minSdk = O)
     protected void __constructor__(Context context, IDevicePolicyManager service) {
@@ -193,5 +200,36 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
         if (!admin.equals(mProfileOwner)) {
             throw new SecurityException("[" + admin + "] is not a profile owner");
         }
+    }
+
+    /**
+     * Sets the {@link PolicyEnforcementInfo} for a policy.
+     */
+    public void setPolicyEnforcementInfoForPolicy(String policy, PolicyEnforcementInfo info) {
+        mPolicyEnforcementInfoMap.put(policy, info);
+    }
+
+    /**
+     * Sets the {@link PolicyEnforcementInfo} for a user restriction.
+     */
+    public void setPolicyEnforcementInfoForUserRestriction(String userRestriction,
+            PolicyEnforcementInfo info) {
+        mPolicyEnforcementInfoMap.put(
+                DevicePolicyIdentifiers.getIdentifierForUserRestriction(userRestriction), info);
+    }
+
+    /**
+     * Returns the {@link PolicyEnforcementInfo} that's set by
+     * {@link #setPolicyEnforcementInfoForPolicy} and
+     * {@link #setPolicyEnforcementInfoForUserRestriction}.
+     * If it's not set before, returns empty {@link PolicyEnforcementInfo}.
+     */
+    @Implementation
+    public PolicyEnforcementInfo getEnforcingAdminsForPolicy(String policyIdentifier,
+            int userHandle) {
+        if (!mPolicyEnforcementInfoMap.containsKey(policyIdentifier)) {
+            return EMPTY_POLICY_ENFORCEMENT_INFO;
+        }
+        return mPolicyEnforcementInfoMap.get(policyIdentifier);
     }
 }

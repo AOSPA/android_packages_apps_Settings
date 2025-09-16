@@ -72,7 +72,8 @@ import java.util.regex.Pattern;
  * Preference controller for "Preferred network mode"
  */
 public class PreferredNetworkModePreferenceController extends BasePreferenceController
-        implements ListPreference.OnPreferenceChangeListener, DefaultLifecycleObserver {
+        implements ListPreference.OnPreferenceChangeListener, DefaultLifecycleObserver,
+        AirplaneModeChangedCallback {
     private static final String TAG = "PrefNetworkModeCtrl";
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -83,6 +84,7 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
     private Preference mPreference;
     private boolean mIsSatelliteSessionStarted = false;
     private boolean mIsCurrentSubscriptionForSatellite = false;
+    protected boolean mIsAirplaneModeOn = false;
     private PhoneCallStateListener mPhoneStateListener;
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
     @VisibleForTesting
@@ -152,7 +154,8 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
             return;
         }
         super.updateState(preference);
-        preference.setEnabled(!(mIsCurrentSubscriptionForSatellite && mIsSatelliteSessionStarted));
+        preference.setEnabled(!(mIsCurrentSubscriptionForSatellite && mIsSatelliteSessionStarted)
+                && !mIsAirplaneModeOn);
         final ListPreference listPreference = (ListPreference) preference;
         final int networkMode = getPreferredNetworkMode();
         listPreference.setValue(Integer.toString(networkMode));
@@ -270,6 +273,11 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
                    }
                });
         builder.show();
+    }
+
+    @Override
+    public void notifyAirplaneModeChanged(boolean isAirplaneModeOn) {
+        this.mIsAirplaneModeOn = isAirplaneModeOn;
     }
 
     public void init(Lifecycle lifecycle, int subId) {

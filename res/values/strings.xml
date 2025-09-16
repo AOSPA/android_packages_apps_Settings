@@ -3962,9 +3962,15 @@
     <!-- Title of Hub mode category [CHAR LIMIT=30] -->
     <string name="hub_mode_category_title">Hub mode</string>
     <!-- Title of the "widgets on lockscreen" settings page. [CHAR LIMIT=NONE] -->
-    <string name="widgets_on_lockscreen_title">Widgets on lock screen (beta)</string>
+    <string name="widgets_on_lockscreen_title">Widgets on lock screen</string>
+    <!-- Instructional footer text that appears on the "widgets on lockscreen" settings screen. [CHAR LIMIT=NONE] -->
+    <string name="widgets_on_lockscreen_footer">To access your favorite widgets, swipe left from your Lock Screen.
+        \n\nWhen you open an app using a widget, you’ll need to verify it’s you. Also keep in mind that anyone can view them.</string>
 
-    <!-- Title of a setting to control when to automatically show widgets on the lockscren. [CHAR LIMIT=NONE] -->
+    <!-- Label for a 'beta' tag. [CHAR LIMIT=NONE] -->
+    <string name="settings_beta_tag">Beta</string>
+
+    <!-- Title of a setting to control when to automatically show widgets on the lockscreen. [CHAR LIMIT=NONE] -->
     <string name="when_to_auto_show_hubmode_title">When to automatically show</string>
     <!-- Summary for when to automatically show hub mode (widgets on lockscreen): never  [CHAR LIMIT=100] -->
     <string name="when_to_show_hubmode_never">Never</string>
@@ -5667,6 +5673,8 @@
     <string name="accessibility_send_feedback_title">Send feedback</string>
     <!-- Title for button preference to start the survey process for the accessibility [CHAR LIMIT=30] -->
     <string name="accessibility_send_survey_title">Take survey</string>
+    <!-- Title for button preference to start disability support [CHAR LIMIT=NONE] -->
+    <string name="accessibility_disability_support_title"></string>
     <!-- Channel name for the accessibility survey notification. [CHAR LIMIT=50] -->
     <string name="accessibility_send_survey_notification_channel">Accessibility Survey</string>
     <!-- Title of a survey notification about dark theme. [CHAR LIMIT=50] -->
@@ -6117,14 +6125,14 @@
     <string name="dark_theme_timing_category">Timing</string>
     <!-- Title for the accessibility preference for applying the original dark theme. [CHAR LIMIT=35] -->
     <string name="accessibility_standard_dark_theme_title">Standard</string>
-    <!-- Title in the search result for standard dark theme mode. -->
-    <string name="accessibility_standard_dark_theme_title_in_search">Standard Dark theme</string>
+    <!-- Title in the search result for standard dark theme mode. [BACKUP_MESSAGE_ID: 1374136983709402050] -->
+    <string name="accessibility_standard_dark_theme_title_in_search">Standard dark theme</string>
     <!-- Summary for the accessibility preference for applying the original dark theme. [CHAR LIMIT=100] -->
     <string name="accessibility_standard_dark_theme_summary">Turns on dark theme for your device and apps that support dark theme</string>
     <!-- Title for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=35] -->
     <string name="accessibility_expanded_dark_theme_title">Expanded</string>
-    <!-- Title in the search result for expanded dark theme mode. -->
-    <string name="accessibility_expanded_dark_theme_title_in_search">Expanded Dark theme</string>
+    <!-- Title in the search result for expanded dark theme mode. [BACKUP_MESSAGE_ID: 7467343853315678576] -->
+    <string name="accessibility_expanded_dark_theme_title_in_search">Expanded dark theme</string>
     <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=NONE] -->
     <string name="accessibility_expanded_dark_theme_summary">Automatically applies dark theme to most apps that don\'t support it. This can improve accessibility and readability, but may cause some apps to display incorrectly.</string>
     <!-- Search keywords for the Expanded dark theme settings. [CHAR_LIMIT=NONE] -->
@@ -6187,13 +6195,13 @@
     <string name="accessibility_display_inversion_shortcut_title">Color inversion shortcut</string>
     <!-- Intro for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_intro_text">Color inversion turns light screens dark. It also turns dark screens light.</string>
-    <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
+    <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID: 4494767676482389509] -->
     <string name="accessibility_display_inversion_preference_subtitle">
         <![CDATA[<b>Keep in mind</b><br/>
         <ol>
             <li>\u00a0Colors will change in media and images</li>
             <li>\u00a0Color inversion works on all apps</li>
-            <li>\u00a0To display a dark background, Dark theme can be used instead</li>
+            <li>\u00a0To display a dark background, dark theme can be used instead</li>
         </ol>
         ]]>
     </string>
@@ -8102,6 +8110,8 @@
     <string name="user_lockscreen_settings">Lock screen settings</string>
     <!-- User settings item to allow creating new users from locks screen [CHAR LIMIT=50] -->
     <string name="user_add_on_lockscreen_menu">Add users from lock screen</string>
+    <!-- User settings item to allow creating new users from sign-in screen [CHAR LIMIT=50] -->
+    <string name="user_add_on_signin_screen_menu">Add users from the sign-in screen</string>
     <!-- TODO(b/257333623): HSUM has no 1:1 admin:dream relationship. There can even be >1 admin -->
     <!-- User settings item to allow the system to automatically switch back to the Dock User when
          the device is docked. [CHAR LIMIT=50] -->
@@ -8454,6 +8464,8 @@
     <string name="help_url_insecure_vpn" translatable="false"></string>
     <!-- url for learning more about IT admin policy disabling -->
     <string name="help_url_action_disabled_by_it_admin" translatable="false"></string>
+    <!-- Url for Accessibility Disability Support [DO NOT TRANSLATE] -->
+    <string name="help_url_accessibility_disability_support" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -9258,10 +9270,10 @@
     <string name="mode_wallpaper_title_secondary_list">dim the wallpaper</string>
     <!-- Do not disturb: device effect summary [CHAR LIMIT=NONE] -->
     <string name="mode_wallpaper_summary">Filter the brightness of the wallpaper</string>
-    <!-- Do not disturb: device effect option, title or first in list [CHAR LIMIT=80] -->
-    <string name="mode_dark_theme_title">Enable Dark theme</string>
-    <!-- Do not disturb: device effect option, not first in list [CHAR LIMIT=80] -->
-    <string name="mode_dark_theme_title_secondary_list">enable Dark theme</string>
+    <!-- Do not disturb: device effect option, title or first in list [CHAR LIMIT=80] [BACKUP_MESSAGE_ID: 1938553262958310149] -->
+    <string name="mode_dark_theme_title">Enable dark theme</string>
+    <!-- Do not disturb: device effect option, not first in list [CHAR LIMIT=80] [BACKUP_MESSAGE_ID: 2590918156799917127] -->
+    <string name="mode_dark_theme_title_secondary_list">enable dark theme</string>
     <!-- Do not disturb: device effect summary [CHAR LIMIT=NONE] -->
     <string name="mode_dark_theme_summary">Switch the device theme to use a dark background, which is easier on the eyes</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Summary for sound interruption settings -->
@@ -11450,8 +11462,6 @@
     <string name="disabled_by_advanced_protection_setting_is_off_message">For your security, Advanced Protection requires this setting to remain off</string>
     <!-- Short summary for dialog displayed when user performs an action on their phone that's blocked by Advanced Protection. [CHAR LIMIT=NONE] -->
     <string name="disabled_by_advanced_protection_action_message">For your security, Advanced Protection prevents this action</string>
-    <!-- Short summary for dialog displayed when user tries to connect to a Wi-Fi Wired Equivalent Privacy (WEP) network on their phone that's blocked by Advanced Protection. [CHAR LIMIT=NONE] -->
-    <string name="disabled_by_advanced_protection_wep_action_message">This network uses WEP, an outdated encryption method that can put your data at risk. WEP connections are blocked by Advanced Protection.</string>
     <!-- Title for a button that will resolve to a help URL explaining what Advanced Protection is. [CHAR LIMIT=50] -->
     <string name="disabled_by_advanced_protection_help_button_title">Settings</string>
 
@@ -11966,8 +11976,8 @@
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is off-->
     <string name="dark_ui_mode_disabled_summary_dark_theme_off">Temporarily turned on due to Battery Saver</string>
 
-    <!-- [CHAR_LIMIT=50] Title string in the dark theme slice(suggestion) -->
-    <string name="dark_theme_slice_title">Try Dark theme</string>
+    <!-- [CHAR_LIMIT=50] Title string in the dark theme slice(suggestion) [BACKUP_MESSAGE_ID: 4684222119481114062] -->
+    <string name="dark_theme_slice_title">Try dark theme</string>
 
     <!-- [CHAR_LIMIT=50] Subtitle string in the dark theme slice(suggestion) -->
     <string name="dark_theme_slice_subtitle">Helps extend battery life</string>

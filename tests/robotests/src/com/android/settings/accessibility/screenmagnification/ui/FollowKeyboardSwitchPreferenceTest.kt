@@ -22,18 +22,18 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
-
 import com.android.settings.R
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settings.testutils.shadow.ShadowInputDevice
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
 import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.Rule
-
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestParameterInjector
@@ -67,6 +67,28 @@ class FollowKeyboardSwitchPreferenceTest {
     }
 
     @Test
+    fun getReadPermissions_returnsSettingsSecureStoreReadPermissions() {
+        assertThat(preference.getReadPermissions(context))
+            .isEqualTo(SettingsSecureStore.getReadPermissions())
+    }
+
+    @Test
+    fun getWritePermissions_returnsSettingsSecureStoreWritePermissions() {
+        assertThat(preference.getWritePermissions(context))
+            .isEqualTo(SettingsSecureStore.getWritePermissions())
+    }
+
+    @Test
+    fun getReadPermit_returnsAllow() {
+        assertThat(preference.getReadPermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
+    fun getWritePermit_returnsAllow() {
+        assertThat(preference.getWritePermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
     @TestParameters(
         value =
             [
@@ -75,8 +97,11 @@ class FollowKeyboardSwitchPreferenceTest {
             ]
     )
     fun performClick(settingsEnabled: Boolean, expectedChecked: Boolean) {
-        getStorage().setBoolean(
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED, settingsEnabled)
+        getStorage()
+            .setBoolean(
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED,
+                settingsEnabled,
+            )
         val preferenceWidget = createFollowKeyboardWidget()
         assertThat(preferenceWidget.isChecked).isEqualTo(settingsEnabled)
 
@@ -84,8 +109,10 @@ class FollowKeyboardSwitchPreferenceTest {
 
         assertThat(preferenceWidget.isChecked).isEqualTo(expectedChecked)
         assertThat(
-            getStorage().getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED)
-        ).isEqualTo(expectedChecked)
+                getStorage()
+                    .getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED)
+            )
+            .isEqualTo(expectedChecked)
     }
 
     @Test
@@ -96,7 +123,6 @@ class FollowKeyboardSwitchPreferenceTest {
                 "{inSetupWizard: false, hasHardwareKeyboard: true, expectedAvailable: true}",
                 "{inSetupWizard: true, hasHardwareKeyboard: false, expectedAvailable: false}",
                 "{inSetupWizard: true, hasHardwareKeyboard: true, expectedAvailable: false}",
-
             ]
     )
     fun isAvailable(
@@ -116,9 +142,9 @@ class FollowKeyboardSwitchPreferenceTest {
         try {
             activityController =
                 ActivityController.of(
-                    ComponentActivity(),
-                    Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
-                )
+                        ComponentActivity(),
+                        Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
+                    )
                     .create()
                     .start()
                     .postCreate(null)

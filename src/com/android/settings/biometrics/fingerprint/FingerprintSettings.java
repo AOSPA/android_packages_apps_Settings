@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 
+import static android.app.admin.DevicePolicyIdentifiers.KEYGUARD_DISABLED_FEATURES_POLICY;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FINGERPRINT_UNLOCK_DISABLED_EXPLANATION;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_FINGERPRINT_LAST_DELETE_MESSAGE;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
@@ -38,6 +39,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PolicyEnforcementInfo;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -107,7 +109,6 @@ import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -663,8 +664,20 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void updateFooterColumns(@NonNull Activity activity) {
-            final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
-                    activity, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId);
+            boolean isFingerprintDisabledByAdmin;
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()
+                    && android.app.admin.flags.Flags.setKeyguardDisabledFeaturesCoexistence()) {
+                PolicyEnforcementInfo info =
+                        RestrictedLockUtilsInternal.getEnforcingAdminsForKeyguardFeatures(activity,
+                                DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId);
+                isFingerprintDisabledByAdmin =
+                        info != null && info.getMostImportantEnforcingAdmin() != null;
+            } else {
+                isFingerprintDisabledByAdmin =
+                        RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(activity,
+                                DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId) != null;
+            }
+
             final Intent helpIntent = HelpUtils.getHelpIntent(
                     activity, getString(getHelpResource()), activity.getClass().getName());
             final View.OnClickListener learnMoreClickListener = (v) -> {
@@ -672,7 +685,7 @@ public class FingerprintSettings extends SubSettings {
             };
 
             mFooterColumns.clear();
-            if (admin != null) {
+            if (isFingerprintDisabledByAdmin) {
                 final DevicePolicyManager devicePolicyManager =
                         getSystemService(DevicePolicyManager.class);
                 final FooterColumn column1 = new FooterColumn();
@@ -682,8 +695,26 @@ public class FingerprintSettings extends SubSettings {
                                 R.string.security_fingerprint_disclaimer_lockscreen_disabled_1
                         )
                 );
-                column1.mLearnMoreClickListener = (v) -> RestrictedLockUtils
-                        .sendShowAdminSupportDetailsIntent(activity, admin);
+
+                if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()
+                        && android.app.admin.flags.Flags.setKeyguardDisabledFeaturesCoexistence()) {
+                    PolicyEnforcementInfo info =
+                            RestrictedLockUtilsInternal.getEnforcingAdminsForKeyguardFeatures(
+                                    activity, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT,
+                                    mUserId);
+                    column1.mLearnMoreClickListener =
+                            (v) -> RestrictedLockUtils.sendShowAdminSupportDetailsIntent(activity,
+                                    info.getMostImportantEnforcingAdmin(),
+                                    KEYGUARD_DISABLED_FEATURES_POLICY);
+                } else {
+                    column1.mLearnMoreClickListener =
+                            (v) -> RestrictedLockUtils.sendShowAdminSupportDetailsIntent(activity,
+                                    RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                                            activity,
+                                            DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT,
+                                            mUserId));
+                }
+
                 column1.mLearnMoreOverrideText = getText(R.string.admin_support_more_info);
                 mFooterColumns.add(column1);
 
@@ -1035,15 +1066,26 @@ public class FingerprintSettings extends SubSettings {
             // retryFingerprint() will be called when remove finishes
             // need to disable enroll or have a way to determine if enroll is in progress
             final boolean removalInProgress = mRemovalSidecar.inProgress();
-            final boolean isDeviceOwnerBlockingAuth =
-                    RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
-                            getContext(), DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT,
-                            mUserId) != null;
+            boolean iAdminBlockingAuth;
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()
+                    && android.app.admin.flags.Flags.setKeyguardDisabledFeaturesCoexistence()) {
+                final PolicyEnforcementInfo policyInfo =
+                        RestrictedLockUtilsInternal.getEnforcingAdminsForKeyguardFeatures(
+                                getContext(), DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT,
+                                mUserId);
+                iAdminBlockingAuth =
+                        (policyInfo != null && policyInfo.getMostImportantEnforcingAdmin() != null);
+            } else {
+                iAdminBlockingAuth =
+                        RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                                getContext(), DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT,
+                                mUserId) != null;
+            }
 
             CharSequence maxSummary = tooMany ?
                     getContext().getString(R.string.fingerprint_add_max, max) : "";
             mAddFingerprintPreference.setSummary(maxSummary);
-            mAddFingerprintPreference.setEnabled(!isDeviceOwnerBlockingAuth
+            mAddFingerprintPreference.setEnabled(!iAdminBlockingAuth
                     && !tooMany && !removalInProgress && mToken != null);
         }
 

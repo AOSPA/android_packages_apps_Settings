@@ -36,14 +36,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
-import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
+import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spaprivileged.model.enterprise.Restrictions
 import com.android.settingslib.spaprivileged.template.preference.RestrictedSwitchPreference
 
 /** Preference controller for "Roaming" */
+// LINT.IfChange
 class RoamingPreferenceController
 @JvmOverloads
 constructor(
@@ -73,8 +75,10 @@ constructor(
         RoamingPreferenceControllerUtil.init(mContext)
     }
 
-    override fun getAvailabilityStatus() =
-        if (roamingSearchItem.isAvailable(subId)) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+    override fun getAvailabilityStatus(): Int {
+        if (Flags.deeplinkNetworkAndInternet25q4()) return CONDITIONALLY_UNAVAILABLE
+        return if (roamingSearchItem.isAvailable(subId)) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+    }
 
     @Composable
     override fun Content() {
@@ -119,7 +123,9 @@ constructor(
 
         // Need dialog if we need to turn on roaming and the roaming charge indication is allowed
         return !carrierConfigRepository.getBoolean(
-                subId, CarrierConfigManager.KEY_DISABLE_CHARGE_INDICATION_BOOL)
+            subId,
+            CarrierConfigManager.KEY_DISABLE_CHARGE_INDICATION_BOOL,
+        )
     }
 
     private fun showDialog(type: Int, preftitle: String) {
@@ -138,7 +144,9 @@ constructor(
             fun isAvailable(subId: Int): Boolean =
                 SubscriptionManager.isValidSubscriptionId(subId) &&
                     !carrierConfigRepository.getBoolean(
-                        subId, CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL)
+                        subId,
+                        CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL,
+                    )
 
             override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
                 if (!isAvailable(subId)) return null
@@ -150,3 +158,4 @@ constructor(
         }
     }
 }
+// LINT.ThenChange(RoamingPreference.kt)

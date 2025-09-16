@@ -49,14 +49,13 @@ class VideoCallingPreferenceControllerTest {
     private val mockCallStateRepository = mock<CallStateRepository> {}
     private val mockVideoCallingRepository = mock<VideoCallingRepository> {}
 
-
     private var controller =
         spy(
             VideoCallingPreferenceController(
                 context = context,
                 key = TEST_KEY,
                 callStateRepository = mockCallStateRepository,
-                videoCallingRepository = mockVideoCallingRepository
+                videoCallingRepository = mockVideoCallingRepository,
             )
         ) {
             on { queryImsState(SUB_ID) } doReturn mockVtQueryImsState
@@ -72,7 +71,6 @@ class VideoCallingPreferenceControllerTest {
         preferenceScreen.addPreference(preference)
         controller.displayPreference(preferenceScreen)
     }
-
 
     @Test
     fun displayPreference_uiInitState_isHidden() {
@@ -160,6 +158,28 @@ class VideoCallingPreferenceControllerTest {
 
         assertThat(preference.isEnabled).isTrue()
         assertThat(preference.isChecked).isTrue()
+    }
+
+    @Test
+    fun notifyAirplaneModeChanged_isAirplaneModeOn_setEnableFalse() = runBlocking {
+        mockVideoCallingRepository.stub {
+            on { isVideoCallReadyFlow(SUB_ID) } doReturn flowOf(true)
+        }
+        mockVtQueryImsState.stub {
+            on { isEnabledByUser } doReturn true
+            on { isAllowUserControl } doReturn true
+        }
+        mockQueryVoLteState.stub { on { isEnabledByUser } doReturn true }
+        mockCallStateRepository.stub {
+            on { callStateFlow(SUB_ID) } doReturn flowOf(TelephonyManager.CALL_STATE_IDLE)
+        }
+
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
+        controller.notifyAirplaneModeChanged(true)
+        controller.updateState(preference)
+
+        assertThat(preference.isEnabled).isFalse()
     }
 
     @Test
