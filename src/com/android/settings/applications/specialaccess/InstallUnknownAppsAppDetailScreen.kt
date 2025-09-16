@@ -82,7 +82,7 @@ open class InstallUnknownAppsAppDetailScreen(context: Context, arguments: Bundle
         fun parameters(context: Context, showSystemApp: Boolean) =
             parameters(context, showSystemApp, ::installUnknownAppsFilter)
 
-        private fun installUnknownAppsFilter(context: Context, appInfo: ApplicationInfo?): Boolean {
+        fun installUnknownAppsFilter(context: Context, appInfo: ApplicationInfo?): Boolean {
             if (appInfo == null) return false
             val packageInfo =
                 context.getPackageInfoWithPermissions(appInfo.packageName) ?: return false
