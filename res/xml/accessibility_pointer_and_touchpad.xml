@@ -30,9 +30,9 @@
             android:min="@integer/pointer_scale_seek_bar_start"
             android:max="@integer/pointer_scale_seek_bar_end"
             settings:seekBarIncrement="1"
-            settings:iconEnd="@drawable/ic_add_24dp"
+            settings:iconEnd="@drawable/ic_slider_add_24dp"
             settings:iconEndContentDescription="@string/pointer_scale_increase_content_description"
-            settings:iconStart="@drawable/ic_remove_24dp"
+            settings:iconStart="@drawable/ic_slider_minus_24dp"
             settings:iconStartContentDescription="@string/pointer_scale_decrease_content_description"
             settings:keywords="@string/pointer_scale_keywords"
             settings:controller="com.android.settings.inputmethod.PointerScaleSliderController" />
