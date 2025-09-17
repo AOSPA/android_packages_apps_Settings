@@ -17,6 +17,7 @@
 package com.android.settings.accessibility.colorcorrection.ui
 
 import android.content.Context
+import android.provider.Settings
 import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
@@ -24,6 +25,7 @@ import com.android.settings.accessibility.colorcorrection.data.ColorCorrectionMo
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.SelectorWithWidgetPreference
@@ -31,7 +33,12 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
+import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.shadows.ShadowLooper
 
 @RunWith(RobolectricTestRunner::class)
 class ModePreferenceTest {
@@ -102,6 +109,77 @@ class ModePreferenceTest {
     }
 
     @Test
+    fun isEnabled_colorCorrectionOff_returnFalse() {
+        val modePreference = DeuteranomalyModePreference(colorCorrectionModeDataStore)
+        setColorCorrectionState(enabled = false)
+
+        assertThat(modePreference.isEnabled(appContext)).isFalse()
+    }
+
+    @Test
+    fun isEnabled_colorCorrectionOn_returnTrue() {
+        val modePreference = DeuteranomalyModePreference(colorCorrectionModeDataStore)
+        setColorCorrectionState(enabled = true)
+
+        assertThat(modePreference.isEnabled(appContext)).isTrue()
+    }
+
+    @Test
+    fun turnOffColorCorrection_disableModePreferenceWidget() {
+        setColorCorrectionState(enabled = true)
+        val modePreference = DeuteranomalyModePreference(colorCorrectionModeDataStore)
+        val widget =
+            modePreference.createAndBindWidget<SelectorWithWidgetPreference>(appContext).apply {
+                inflateViewHolder()
+            }
+        assertThat(widget.isEnabled).isTrue()
+        val lifecycleContext = getPreferenceLifecycleContext(widget, modePreference)
+        modePreference.onCreate(lifecycleContext)
+
+        setColorCorrectionState(enabled = false)
+        ShadowLooper.idleMainLooper()
+
+        assertThat(widget.isEnabled).isFalse()
+    }
+
+    @Test
+    fun turnOnColorCorrection_enableModePreferenceWidget() {
+        setColorCorrectionState(enabled = false)
+        val modePreference = DeuteranomalyModePreference(colorCorrectionModeDataStore)
+        val widget =
+            modePreference.createAndBindWidget<SelectorWithWidgetPreference>(appContext).apply {
+                inflateViewHolder()
+            }
+        assertThat(widget.isEnabled).isFalse()
+        val lifecycleContext = getPreferenceLifecycleContext(widget, modePreference)
+        modePreference.onCreate(lifecycleContext)
+
+        setColorCorrectionState(enabled = true)
+        ShadowLooper.idleMainLooper()
+
+        assertThat(widget.isEnabled).isTrue()
+    }
+
+    @Test
+    fun turnOnColorCorrectionAfterOnDestroy_didNotTriggerNotifyChange() {
+        setColorCorrectionState(enabled = false)
+        val modePreference = DeuteranomalyModePreference(colorCorrectionModeDataStore)
+        val widget =
+            modePreference.createAndBindWidget<SelectorWithWidgetPreference>(appContext).apply {
+                inflateViewHolder()
+            }
+        assertThat(widget.isEnabled).isFalse()
+        val lifecycleContext = getPreferenceLifecycleContext(widget, modePreference)
+        modePreference.onCreate(lifecycleContext)
+        modePreference.onDestroy(lifecycleContext)
+
+        setColorCorrectionState(enabled = true)
+        ShadowLooper.idleMainLooper()
+
+        verify(lifecycleContext, never()).notifyPreferenceChange(any())
+    }
+
+    @Test
     fun deuteranomalyModePreference_verifyKeyTitleSummary() {
         val modePreference = DeuteranomalyModePreference(colorCorrectionModeDataStore)
 
@@ -135,5 +213,20 @@ class ModePreferenceTest {
         assertThat(modePreference.key).isEqualTo("daltonizer_mode_grayscale")
         assertThat(modePreference.title).isEqualTo(R.string.daltonizer_mode_grayscale_title)
         assertThat(modePreference.summary).isEqualTo(0)
+    }
+
+    private fun setColorCorrectionState(enabled: Boolean) {
+        SettingsSecureStore.get(appContext)
+            .setBoolean(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, enabled)
+    }
+
+    private fun getPreferenceLifecycleContext(
+        preference: SelectorWithWidgetPreference,
+        metadata: ModePreference,
+    ): PreferenceLifecycleContext {
+        return mock {
+            on { notifyPreferenceChange(preference.key) }
+                .then { metadata.bind(preference, metadata) }
+        }
     }
 }
