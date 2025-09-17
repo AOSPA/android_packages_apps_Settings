@@ -148,6 +148,9 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
                 } else if (i == (listSize - 1)) {
                     menuId = R.menu.preferred_locale_menu_top;
                 }
+                pref.setMenuButtonContentDescription(
+                        mContext.getString(R.string.action_label_menu_option,
+                                localeInfo.getFullNameNative()));
                 pref.setMenuResId(menuId);
                 pref.setMenuItemClickListener((item, preference) -> {
                     int menuItemId = item.getItemId();
