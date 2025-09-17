@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Cài đặt thiết bị trợ thính"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Phím tắt, khả năng tương thích với thiết bị trợ thính"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Chế độ đặt sẵn"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Chế độ đặt sẵn cho tai trái"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Chế độ đặt sẵn cho tai phải"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Trái: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Phải: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Không có chế độ đặt sẵn do chuyên gia thính học lập trình"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Không cập nhật được giá trị đặt trước"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Âm lượng xung quanh"</string>
@@ -2631,7 +2628,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Sử dụng tính năng đảo màu"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Lối tắt cho đảo màu"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Tính năng đảo màu chuyển màn hình sáng thành tối. Hoặc bạn cũng có thể chuyển từ tối thành sáng."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Lưu ý&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Màu sắc trong hình ảnh và nội dung nghe nhìn sẽ thay đổi&lt;/li&gt; &lt;li&gt; Tính năng đảo màu dùng được trên mọi ứng dụng&lt;/li&gt; &lt;li&gt; Để hiển thị nền tối, bạn có thể dùng Giao diện tối để thay thế&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Lưu ý&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Màu sắc sẽ thay đổi trong ảnh và nội dung nghe nhìn&lt;/li&gt; &lt;li&gt; Tính năng đảo màu hoạt động trong mọi ứng dụng&lt;/li&gt; &lt;li&gt; Để hiển thị nền tối, bạn có thể sử dụng giao diện tối&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"mở phần cài đặt"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Tự động nhấp (Thời gian dừng)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Giới thiệu tính năng tự động nhấp (thời gian dừng)"</string>
@@ -3398,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Bật chứng chỉ CA hệ thống?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Tắt chứng chỉ CA hệ thống?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Xóa vĩnh viễn chứng chỉ CA người dùng?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"Chứng chỉ CA <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> đang ở chế độ thu gọn, nhấn đúp để mở rộng"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"Chứng chỉ CA <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> đang ở chế độ mở rộng, nhấn đúp để thu gọn"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Đang dùng bởi"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Mục này chứa"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 khoá người dùng"</string>
@@ -3441,8 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Xóa <xliff:g id="USER_NAME">%1$s</xliff:g> khỏi thiết bị"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Cài đặt màn hình khóa"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Thêm người dùng từ màn hình khóa"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Thêm người dùng trong màn hình đăng nhập"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Chuyển sang người dùng quản trị khi gắn vào đế sạc"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Xóa chính bạn?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Xóa người dùng này?"</string>
@@ -4789,7 +4783,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Tạm thời tắt do Trình tiết kiệm pin"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Tắt trình tiết kiệm pin"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Tạm thời bật do Trình tiết kiệm pin"</string>
-    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Thử dùng Giao diện tối"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Dùng thử giao diện tối"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Giúp kéo dài thời lượng pin"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Ô cài đặt nhanh dành cho nhà phát triển"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Tắt thời gian chờ ủy quyền adb"</string>
@@ -5946,7 +5940,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Xoá mã PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Thêm email khôi phục"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Xác minh email của bạn"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Bộ lọc theo cửa hàng ứng dụng"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Bộ lọc nội dung trang web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Bộ lọc trang web, Chặn trang web, Bộ lọc trình duyệt, Chặn trang web có nội dung phản cảm, Lọc trang web, Chặn kết quả tìm kiếm, Lọc kết quả tìm kiếm có nội dung phản cảm, giới hạn nội dung"</string>
@@ -5991,10 +5986,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Tính năng Kiểm tra danh tính hoạt động với nhiều ứng dụng hơn"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Tính năng Kiểm tra danh tính giúp ngăn chặn hành vi truy cập không mong muốn vào các ứng dụng của bạn. Hiện có trên mọi ứng dụng dùng tính năng Mở khoá bằng vân tay hoặc Mở khoá bằng khuôn mặt."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Xem chi tiết"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Không kiểm tra được các chế độ cài đặt"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Chưa có thông tin"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Ajustes de audífonos"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Acceso directo, compatibilidad con audífonos"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Preajuste"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Preajuste izquierdo"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Preajuste derecho"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Izquierda: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g>, derecha: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Tu audiólogo no ha programado ningún preajuste"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"No se ha podido actualizar el preajuste"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Alrededores"</string>
@@ -2054,7 +2051,7 @@
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Restablecer apps"</string>
     <string name="filter" msgid="9039576690686251462">"Filtrar"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Seleccionar opciones de filtrado"</string>
-    <string name="filter_apps_all" msgid="5705421199299914620">"Todas las aplicaciones"</string>
+    <string name="filter_apps_all" msgid="5705421199299914620">"Todas las apps"</string>
     <string name="filter_apps_disabled" msgid="5068011814871004105">"Aplicaciones inhabilitadas"</string>
     <string name="filter_apps_third_party" msgid="9049447784849114843">"Descargadas"</string>
     <string name="filter_apps_running" msgid="535465683273284141">"En ejecución"</string>
@@ -2631,8 +2628,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usar inversión de colores"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Acceso directo a inversión de colores"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Inversión de colores hace que las pantallas claras se vuelvan oscuras y que las pantallas oscuras se vuelvan claras."</string>
-    <!-- no translation found for accessibility_display_inversion_preference_subtitle (8748527808247125417) -->
-    <skip />
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Ten en cuenta lo siguiente:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Los colores cambiarán en el contenido multimedia y las imágenes.&lt;/li&gt; &lt;li&gt; La inversión de colores funciona en todas las apps.&lt;/li&gt; &lt;li&gt; Si lo que quieres es que se muestre un fondo oscuro, prueba mejor a usar el tema oscuro.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"acceder a Ajustes"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Autoclic (tiempo detenido)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Clic automático (permanencia)"</string>
@@ -3399,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"¿Quieres habilitar el certificado AC del sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"¿Quieres inhabilitar el certificado AC del sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"¿Eliminar el certificado AC de usuario de forma permanente?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"Certificados AC (<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>) contraídos; toca dos veces para desplegarlos"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"Certificados AC (<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>) desplegados; toca dos veces para contraerlos"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"La está usando"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Esta entrada incluye"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 clave de usuario"</string>
@@ -3442,8 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Eliminar a <xliff:g id="USER_NAME">%1$s</xliff:g> de este dispositivo"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Ajustes de pantalla de bloqueo"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Añadir usuarios desde la pantalla de bloqueo"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Añadir usuarios desde la pantalla de inicio de sesión"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Cambiar al usuario administrador al conectarse"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"¿Eliminarte a ti mismo?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"¿Eliminar este usuario?"</string>
@@ -4407,7 +4400,7 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Quita permisos, elimina archivos temporales y detiene las notificaciones"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Gestionar la aplicación si no se usa"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Quita permisos, elimina archivos temporales, detiene las notificaciones y archiva la aplicación"</string>
-    <string name="filter_all_apps" msgid="6645539744080251371">"Todas las aplicaciones"</string>
+    <string name="filter_all_apps" msgid="6645539744080251371">"Todas las apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplicaciones instaladas"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Aplicaciones instantáneas"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Desactivadas"</string>
@@ -5628,7 +5621,7 @@
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Todos los servicios"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostrar acceso al portapapeles"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Muestra un mensaje cuando las aplicaciones acceden a texto, imágenes u otro contenido que has copiado"</string>
-    <string name="all_apps" msgid="3054120149509114789">"Todas las aplicaciones"</string>
+    <string name="all_apps" msgid="3054120149509114789">"Todas las apps"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"No permitir"</string>
     <string name="virtual_device_connected" msgid="6082030549955977794">"Conectado"</string>
     <string name="virtual_device_disconnected" msgid="4148915248176291618">"Desconectado"</string>
@@ -5947,7 +5940,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Eliminar PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Añadir correo de recuperación"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verificar tu correo"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtros de tiendas de apps"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtros de contenido de sitios"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"exclusión de sitios web, bloquear sitios, filtros del navegador, bloquear sitios con contenido explícito, excluir sitios, bloquear resultados de búsqueda, excluir resultados de búsqueda con contenido explícito, restricciones de contenido"</string>
@@ -5992,10 +5986,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Verificación de identidad funciona con más apps"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Verificación de identidad evita el acceso no deseado a tus apps. Ya está disponible en cualquier app que use Desbloqueo con huella digital o Desbloqueo facial."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Ver detalles"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"No se han podido comprobar los ajustes"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Aún no hay información"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

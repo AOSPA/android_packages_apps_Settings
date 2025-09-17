@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Есту құрылғысының параметрлері"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Жылдам пәрмен, есту аппаратының үйлесімділігі"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Параметрлер жинағы"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Сол жақ құрылғының параметрлер жинағы"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Оң жақ құрылғының параметрлер жинағы"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Сол жақ: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g>, оң жақ: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Аудиолог бағдарламалаған параметрлер жинағы жоқ."</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Параметрлер жинағы жаңартылмады."</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Айнала"</string>
@@ -2631,7 +2628,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Түс инверсиясын пайдалану"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Түс инверсиясының жылдам пәрмені"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Түс инверсиясы жарық экранды қарайтады немесе қараңғы экранды жарық қылады."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Есіңізде болсын:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Түстер медиафайлдар мен суреттерде өзгереді.&lt;/li&gt; &lt;li&gt; Түс инверсиясы барлық қолданбада істейді.&lt;/li&gt; &lt;li&gt; Қараңғы фон шығару үшін оның орнына қараңғы режимді қолдануға болады.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Есіңізде болсын:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Түстер медиафайлдар мен суреттерде өзгереді.&lt;/li&gt; &lt;li&gt; Түс инверсиясы барлық қолданбада істейді.&lt;/li&gt; &lt;li&gt; Қараңғы фон көрсету үшін оның орнына қараңғы режимді қолдануға болады.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"параметрлерді енгізу"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Автоматты басу (кідіру уақыты)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Автоматты басу (кідіру уақыты) туралы"</string>
@@ -3398,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Жүйенің CA сертификаты қосылсын ба?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Жүйенің CA сертификаты өшірілсін бе?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Пайдаланушы РА сертификаты мүлдем алынсын ба?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA сертификаттары жиылған. Жаю үшін екі рет түртіңіз"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA сертификаттары жайылған. Жию үшін екі рет түртіңіз"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Пайдаланып жатқан:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Бұл жазбада берілетіндер:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 пайдаланушы кілті"</string>
@@ -3441,8 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g> осы құралдан жою"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Құлып экранының параметрлері"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Құлыптаулы экраннан пайдаланушыларды қосу"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Пайдаланушыларды кіру экранынан қосыңыз"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Қондырылғанда әкімші пайдаланушыға ауысу"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Өзіңізді жоясыз ба?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Пайдаланушы жойылсын ба?"</string>
@@ -4789,7 +4783,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Батареяны үнемдеу режиміне байланысты уақытша өшірілген."</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Батареяны үнемдеу режимін өшіру"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Батареяны үнемдеу режиміне байланысты уақытша қосулы"</string>
-    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Қараңғы режимді пайдаланып көру"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Қараңғы режимді пайдаланып көріңіз"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Батарея жұмысын ұзартуға көмектеседі."</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Жылдам параметрлердің әзірлеушілерге арналған бөлшектері"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb авторизациясынан автоматты бас тартуды өшіру"</string>
@@ -5946,7 +5940,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN кодын жою"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Қалпына келтіру электрондық мекенжайын қосу"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Электрондық мекенжайды растаңыз"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Қолданбалар дүкенінің сүзгілері"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Веб-сайттың контент сүзгілері"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Веб-сайт сүзгілері, сайттарды блоктау, браузер сүзгілері, цензурасыз сайттарды блоктау, сайттарды іріктеу, іздеу нәтижелерін блоктау, цензурасыз іздеу нәтижелерін іріктеу, контент шектеулері"</string>
@@ -5991,10 +5986,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Жеке басты тексеру функциясы көбірек қолданбада істейді"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Жеке басты тексеру функциясы қолданбаларға рұқсатсыз кіруге жол бермейді. Енді саусақ ізі немесе бет тану функциясы пайдаланылатын кез келген қолданбада қолжетімді."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Мәліметтерді көру"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Параметрлерді тексеру мүмкін болмады."</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Әзірге мәлімет жоқ"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Podešavanja slušnog aparata"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Prečica, kompatibilnost sa slušnim aparatima"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Zadata podešavanja"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Zadata podešavanja, levo"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Zadata podešavanja, desno"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Levo: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Desno: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Ne postoje zadata podešavanja koja je programirao audiolog"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Ažuriranje zadatih podešavanja nije uspelo"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Okruženje"</string>
@@ -3398,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Želite li da omogućite sistemski CA sertifikat?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Želite li da onemogućite sistemski CA sertifikat?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Želite da trajno uklonite CA sertifikat korisnika?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"CA sertifikati iz kategorije <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>, skupljeno, dvaput dodirnite da biste proširili"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"CA sertifikati iz kategorije <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>, prošireno, dvaput dodirnite da biste skupili"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Koristi"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Ovaj unos obuhvata"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 korisnički ključ"</string>
@@ -3441,8 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Izbriši <xliff:g id="USER_NAME">%1$s</xliff:g> sa uređaja"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Podešavanja zaključanog ekrana"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Dodaj korisnike sa zaključanog ekrana"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Dodajte korisnike sa ekrana za prijavljivanje"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Prebaci na administratora na baznoj stanici"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Želite li da izbrišete sebe?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Brišete ovog korisnika?"</string>
@@ -4789,7 +4783,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Privremeno je onemogućeno zbog uštede baterije"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Isključi uštedu baterije"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Privremeno uključeno zbog Uštede baterije"</string>
-    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Isprobaj Tamnu temu"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Isprobajte tamnu temu"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Pomaže da produžite trajanje baterije"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Pločice programera za brza podešavanja"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Onemogući vremensko ograničenje ovlašćenja adb-a"</string>
@@ -5947,7 +5941,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Izbriši PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Dodajte imejl za vraćanje pristupa nalogu"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verifikujte imejl"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filteri prodavnice aplikacija"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filteri sadržaja veb-sajtova"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"filteri veb-sajtova, blokiranje sajtova, filteri pregledača, blokiranje eksplicitnih sajtova, filtriranje sajtova, blokiranje rezultata pretrage, filtriranje eksplicitnih rezultata pretrage, ograničenja sadržaja"</string>
@@ -5992,10 +5987,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Provera identiteta radi sa više aplikacija"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Provera identiteta sprečava neželjeni pristup aplikacijama. Sada je dostupno u bilo kojoj aplikaciji koja koristi Otključavanje otiskom prsta ili Otključavanje licem."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Prikaži detalje"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Provera podešavanja nije uspela"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Još nema informacija"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

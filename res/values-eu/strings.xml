@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Entzumen-gailuen ezarpenak"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Lasterbidea eta audifonoekiko bateragarritasuna"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Aurrezarpena"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Ezkerreko gailuaren aurrezarpenak"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Eskuineko gailuaren aurrezarpenak"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Ezkerreko gailua: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g>; Eskuineko gailua: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Zure audiologoak ez du aurrezarpenik programatu"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Ezin izan da eguneratu aurrezarpena"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Ingurunea"</string>
@@ -3398,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Autoritate ziurtagiri-emaile batek jaulkitako sistema-ziurtagiria gaitu?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Autoritate ziurtagiri-emaile batek jaulkitako sistema-ziurtagiria desgaitu?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Autoritate ziurtagiri-emaile batek jaulkitako erabiltzaile-ziurtagiria betiko kendu?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"Autoritate ziurtagiri-emaile batek jaulkitako <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> ziurtagiriak, tolestuta, sakatu birritan zabaltzeko"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"Autoritate ziurtagiri-emaile batek jaulkitako <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> ziurtagiriak, zabalduta, sakatu birritan tolesteko"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Hauek darabilte:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Sarreraren edukia:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"Erabiltzaile-gako bat"</string>
@@ -3441,8 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Ezabatu <xliff:g id="USER_NAME">%1$s</xliff:g> gailutik"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Pantaila blokeatuaren ezarpenak"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Gehitu erabiltzaileak pantaila blokeatutik"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Gehitu erabiltzaileak saioa hasteko pantailan"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Aldatu administratzailea den erabiltzailera gailua oinarrian jarrita dagoenean"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Zeure burua ezabatu nahi duzu?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Erabiltzaile hau ezabatu?"</string>
@@ -5946,7 +5940,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Ezabatu PINa"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Gehitu kontua berreskuratzeko helbide elektronikoa"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Egiaztatu helbide elektronikoa"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Aplikazio-dendako iragazkiak"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Webguneen eduki-iragazkiak"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Webguneen iragazkiak, webguneak blokeatzea, arakatzaileen iragazkiak, webgune esplizituak blokeatzea, webguneak iragaztea, bilaketa-emaitzak blokeatzea, bilaketa-emaitza esplizituak iragaztea, edukiaren murriztapenak"</string>
@@ -5991,10 +5986,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Identitate-egiaztapenak aplikazio gehiagorekin funtzionatzen du orain"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Identitate-egiaztapenak zure aplikazioetan baimenik gabe sartzea ekiditen du. Aurpegi edo hatz-marka bidez desblokeatzeko eginbidea darabilten aplikazio guztietan erabilgarri duzu orain."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Ikusi xehetasunak"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Ezin izan dira egiaztatu ezarpenak"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Ez dago informaziorik oraindik"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

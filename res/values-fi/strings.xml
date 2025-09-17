@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Kuulolaiteasetukset"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Pikanäppäin, kuulolaiteyhteensopivuus"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Esiasetus"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Vasen esiasetus"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Oikea esiasetus"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"<xliff:g id="PRESET_NAME_0">%1$s</xliff:g> vasemmalla, <xliff:g id="PRESET_NAME_1">%2$s</xliff:g> oikealla"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Audiologi ei ole ohjelmoinut esiasetuksia"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Esiasetusta ei voitu muuttaa"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Ympäristö"</string>
@@ -551,7 +548,7 @@
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Kasvojentunnistus- ja sormenjälkiavaus työkäyttöön"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Edellyttää käyttöönottoa"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Kasvot ja sormenjäljet lisättiin"</string>
-    <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Kasvot ja sormenjälki lisättiin"</string>
+    <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Kasvot ja sormenjälki lisätty"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Otettuasi kasvojentunnistus- ja sormenjälkiavauksen käyttöön puhelimesi pyytää sormenjälkeäsi, kun käytät maskia tai olet pimeässä ympäristössä"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Lukituksen avaustavat"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Käytä kasvoja tai sormenjälkeä seuraaviin:"</string>
@@ -2625,14 +2622,13 @@
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Lue lisää reagointiajasta (saavutettavuuden aikakatkaisu)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Reagointiaika"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Kaikki sovellukset eivät tue tätä ajoitusasetusta"</string>
-    <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Valitse, miten pitkään haluat nähdä tilapäiset viestit, joissa pyydetään tekemään toiminto"</string>
+    <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Valitse, miten pitkään haluat nähdä tilapäiset viestit, joissa kehotetaan toimimaan"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Pitkän kosketuksen viive"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Käänteiset värit"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Käytä käänteisiä värejä"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Käänteisten värien pikanäppäin"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Käänteiset värit tekevät kirkkaista näytöistä tummia. Myös tummista näytöistä tulee kirkkaita."</string>
-    <!-- no translation found for accessibility_display_inversion_preference_subtitle (8748527808247125417) -->
-    <skip />
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Pidä mielessäd&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Median ja kuvien värit muuttuvat&lt;/li&gt; &lt;li&gt; Käänteiset värit toimii kaikilla sovelluksilla&lt;/li&gt; &lt;li&gt; Saat tumman taustan käyttämällä tummaa teemaa&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"lisää asetukset"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Automaattinen klikkaus (viiveaika)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Automaattinen klikkaus (viiveaika)"</string>
@@ -3399,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Otetaanko järjestelmän CA-varmenne käyttöön?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Poistetaanko järjestelmän CA-varmenne käytöstä?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Poistetaanko käyttäjän CA-varmenne pysyvästi?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>: CA-varmenteet, tiivistetty, laajenna kaksoisnapauttamalla"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>: CA-varmenteet, laajennettu, tiivistä kaksoisnapauttamalla"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Tätä käyttää:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Sisältää:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 käyttäjän avain"</string>
@@ -3442,8 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Poista <xliff:g id="USER_NAME">%1$s</xliff:g> laitteesta"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Lukitusnäytön asetukset"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Lisää käyttäjiä lukitusnäytöllä"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Lisää käyttäjiä kirjautumisnäytöltä"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Vaihda järjestelmänvalvojakäyttäjään telineessä"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Haluatko poistaa itsesi?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Poistetaanko käyttäjä?"</string>
@@ -5039,7 +5032,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Muuta"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Sinulla voi olla samaan aikaan vain viisi palvelua päällä"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Laita vähintään yksi palvelu pois päältä, jotta voit lisätä toisen"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Valitse haluamasi palvelu, jotta voit tallentaa dataa sisäänkirjautumisen ja automaattisen täytön ehdotuksia varten. Laita lisäpalvelut päälle, jos haluat ehdotuksia myös niiltä."</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Valitse palvelu, johon haluat tallentaa dataa sisäänkirjautumisen ja automaattisen täytön ehdotuksia varten. Jos haluat kyseiseltä palvelulta myös ehdotuksia, laita lisäpalvelut päälle."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s päättelee näytön kohteiden perusteella, mitä voidaan täyttää automaattisesti."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Salasanojen, avainkoodien ja datapalveluiden rajoitus"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Sinulla voi olla yhtä aikaa aktiivisena enintään viisi salasanaa, avainkoodia ja datapalvelua. Laita palvelu pois päältä, jos haluat lisätä uusia sellaisia."</string>
@@ -5947,7 +5940,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Poista PIN-koodi"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Varasähköpostin lisääminen"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Sähköpostiosoitteen vahvistaminen"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Sovelluskauppasuodattimet"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Verkkosivuston sisältösuodattimet"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Verkkosivustojen suodattimet, Sivustojen estäminen, Selaimen suodattimet, Avoimen seksuaalisen sisällön sivustojen estäminen, Sivustojen suodattaminen, Hakutulosten estäminen, Avoimen seksuaalisen sisällön hakutulosten suodattaminen, Sisältörajoitukset"</string>
@@ -5992,10 +5986,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Tunnistautuminen toimii useammissa sovelluksissa"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Tunnistautuminen estää ei-toivotun pääsyn sovelluksiisi. Saatavilla nyt kaikissa sovelluksissa, jotka käyttävät sormenjälki- tai kasvojentunnistusavausta."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Näytä tiedot"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Asetusten tarkistaminen ei onnistunut"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Ei vielä tietoja"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

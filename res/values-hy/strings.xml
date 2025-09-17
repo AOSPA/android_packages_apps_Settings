@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Լսողական սարքի կարգավորումներ"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Դյուրանցում, լսողական սարքի համատեղելիություն"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Կարգավորումների հավաքածու"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Ձախ կողմի կարգավորումներ"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Աջ կողմի կարգավորումներ"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Ձախ՝ <xliff:g id="PRESET_NAME_0">%1$s</xliff:g>, աջ՝ <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Մասնագետի կողմից կազմված կարգավորումների հավաքածուներ չկան"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Չհաջողվեց թարմացնել կարգավորումների հավաքածուն"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Շրջակայք"</string>
@@ -2631,7 +2628,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Օգտագործել գունաշրջումը"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Գունաշրջման դյուրանցում"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Գունաշրջումը էկրանի բաց գույները դարձնում է մուգ, իսկ մուգ գույները՝ բաց։"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Նկատի առեք&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Կփոխվեն մեդիա բովանդակության և պատկերների գույները&lt;/li&gt; &lt;li&gt; Գունաշրջումը գործում է բոլոր հավելվածներում&lt;/li&gt; &lt;li&gt; Մուգ ֆոն ստանալու համար գունաշրջման փոխարեն կարելի է օգտագործել մուգ թեման&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Նկատի առեք&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Մեդիայի և պատկերների գույները կփոխվեն&lt;/li&gt; &lt;li&gt; Գունաշրջումը գործում է բոլոր հավելվածներում&lt;/li&gt; &lt;li&gt; Մուգ ֆոն ստանալու համար գունաշրջման փոխարեն կարելի է օգտագործել մուգ թեման&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"անցնել կարգավորումներ"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Ավտոմատ սեղմում (հապաղման ժամանակը)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Ավտոմատ սեղմում (հապաղման ժամանակը)"</string>
@@ -3398,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Ապաակտիվացնե՞լ համակարգի CA վկայագիրը:"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Ապաակտիվացնե՞լ համակարգի CA վկայագիրը:"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Ժամանակավորապես հեռացնե՞լ օգտատիրոջ CA վկայագիրը:"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA հավաստագրեր, ծալված է, կրկնակի հպեք ծավալելու համար"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA հավաստագրեր, ծավալված է, կրկնակի հպեք ծալելու համար"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Օգտագործվում է հետևյալ տարրերի կողմից՝"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Այս գրառումը պարունակում է"</string>
     <string name="one_userkey" msgid="6363426728683951234">"Օգտատիրոջ 1 բանալի"</string>
@@ -3441,8 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Ջնջել <xliff:g id="USER_NAME">%1$s</xliff:g>-ին այս սարքից"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Էկրանի կողպման կարգավորումները"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Ավելացնել օգտատերեր կողպէկրանից"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Ավելացրեք օգտատերեր մուտքի էկրանից"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Դոկ-կայանում անցնել ադմինիստրատորի ռեժիմին"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Ջնջե՞լ ձեզ:"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Ջնջե՞լ օգտատիրոջը"</string>
@@ -5946,7 +5940,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Ջնջել PIN կոդը"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Ավելացրեք հաշվի վերականգնման հասցե"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Հաստատեք ձեր էլ․ հասցեն"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App Store-ի զտիչներ"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Կայքի բովանդակության զտիչներ"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Կայքերի զտիչներ, արգելափակել կայքեր, դիտարկիչի զտիչներ, արգելափակել մեծահասակների համար նախատեսված կայքերը, զտել կայքերը, արգելափակել որոնման արդյունքները, զտել մեծահասակների համար նախատեսված որոնման արդյունքները, բովանդակության սահմանափակումներ"</string>
@@ -5991,10 +5986,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Ինքնության ստուգումն աշխատում է ավելի շատ հավելվածների հետ"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Ինքնության ստուգումը կանխում է անցանկալի մուտքը ձեր հավելվածներ։ Այժմ հասանելի է ցանկացած հավելվածով, որն օգտագործում է մատնահետքով կամ դեմքով ապակողպում։"</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Դիտել մանրամասները"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Չհաջողվեց ստուգել կարգավորումները"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Տեղեկություններ դեռ չկան"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

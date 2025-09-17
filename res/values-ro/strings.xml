@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Setări pentru aparate auditive"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Comandă rapidă, compatibilitate cu aparatele auditive"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Presetare"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Presetarea pentru partea stângă"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Presetarea pentru partea dreaptă"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Stânga <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Dreapta <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Audiologul nu a configurat presetări"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Nu s-a putut actualiza presetarea"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Împrejurimi"</string>
@@ -1019,7 +1016,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Niciun ecran conectat"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Conectează un ecran extern pentru a începe sau încearcă să folosești alt cablu"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Mai multe opțiuni"</string>
-    <string name="external_display_topology_hint" msgid="885396727047321347">"Ține apăsat și trage pentru a rearanja afișările"</string>
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Ține apăsat și trage pentru a rearanja ecranele"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Oglindește ecranul încorporat"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Folosești noile setări?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Dacă ecranul nu funcționează așa cum dorești, poți reveni la setările anterioare"</string>
@@ -2631,8 +2628,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Folosește inversarea culorilor"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Comandă rapidă pentru inversarea culorilor"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Inversarea culorilor întunecă ecranele luminoase. În plus, deschide ecranele întunecate."</string>
-    <!-- no translation found for accessibility_display_inversion_preference_subtitle (8748527808247125417) -->
-    <skip />
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Reține&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; culorile conținutului media și ale imaginilor se schimbă;&lt;/li&gt; &lt;li&gt; inversarea culorilor funcționează în toate aplicațiile;&lt;/li&gt; &lt;li&gt; poți folosi Tema întunecată pentru a afișa un fundal întunecat.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"pentru a accesa setările"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Clic automat (durată de staționare)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Despre clicul automat (durată de staționare)"</string>
@@ -3399,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Activezi certificatul CA de sistem?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Dezactivezi certificatul CA de sistem?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Elimini definitiv certificatul de utilizator CA?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> certificate CA, restrânse, atinge de două ori pentru a extinde"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> certificate CA, extinse, atinge de două ori pentru a restrânge"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Sunt folosite de"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Această intrare conține"</string>
     <string name="one_userkey" msgid="6363426728683951234">"O cheie de utilizator"</string>
@@ -3442,8 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Șterge <xliff:g id="USER_NAME">%1$s</xliff:g> de pe dispozitiv"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Setările ecranului de blocare"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Adaugă utilizatori din ecranul de blocare"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Adaugă utilizatori din ecranul de conectare"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Treci la administrator când este andocat"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Te excluzi ca utilizator?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Ștergi utilizatorul?"</string>
@@ -5948,7 +5941,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Șterge codul PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Adaugă o adresă de e-mail pentru recuperare"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Confirmă adresa de e-mail"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtre pentru magazinul de aplicații"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtre de conținut pentru site-uri"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtre pentru site-uri, Blochează site-uri, Filtre pentru browser, Blochează site-urile cu conținut explicit, Filtrează site-urile, Blochează rezultatele căutării, Filtrează rezultatele explicite ale căutării, restricții de conținut"</string>
@@ -5993,10 +5987,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Verificarea identității funcționează cu mai multe aplicații"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Verificarea identității împiedică accesul nedorit la aplicații. Este disponibilă acum cu orice aplicație care folosește Deblocarea cu amprenta sau Deblocarea facială."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Vezi detaliile"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Nu s-au putut verifica setările"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Nu există informații încă"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
