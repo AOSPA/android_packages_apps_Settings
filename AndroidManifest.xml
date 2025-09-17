@@ -4789,6 +4789,18 @@
                 android:value="true" />
         </activity>
 
+        <activity-alias android:name="WifiControlAppDetailIntent"
+            android:exported="true"
+            android:targetActivity=".spa.SpaAppBridgeActivity">
+            <intent-filter>
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                android:value="TogglePermissionAppInfoPage/WifiControl"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
         <activity
             android:name="Settings$AlarmsAndRemindersActivity"
             android:exported="true"
