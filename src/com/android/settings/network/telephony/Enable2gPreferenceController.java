@@ -159,7 +159,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
             return;
         }
 
-        preference.setEnabled(!is2gPreferredNetworkMode());
+        preference.setEnabled(!is2gPreferredNetworkMode() && !mIsAirplaneModeOn);
         if (!SubscriptionManager.isUsableSubscriptionId(mSubId)) {
             return;
         }

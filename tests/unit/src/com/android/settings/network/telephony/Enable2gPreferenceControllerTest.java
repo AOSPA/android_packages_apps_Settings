@@ -268,6 +268,17 @@ public final class Enable2gPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_isAirplaneModeOn_preferenceDisable() {
+        when2gIsDisabledByAdmin(false);
+        mockAllowedNetworkTypes(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+        mController.notifyAirplaneModeChanged(true);
+
+        mController.updateState((Preference) mPreference);
+
+        assertFalse(mPreference.isEnabled());
+    }
+
+    @Test
     public void updateState_preferenceDisable() {
         when2gIsDisabledByAdmin(false);
         mockAllowedNetworkTypes(TelephonyManager.NETWORK_MODE_GSM_ONLY);

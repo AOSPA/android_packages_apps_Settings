@@ -35,6 +35,8 @@ import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
+import java.util.Objects;
+
 public class MultiUserMainSwitchPreferenceController extends TogglePreferenceController
         implements OnCheckedChangeListener {
 
@@ -90,15 +92,33 @@ public class MultiUserMainSwitchPreferenceController extends TogglePreferenceCon
         if (mPreference != null) {
             mUserCaps.updateAddUserCapabilities(mContext);
             mPreference.setChecked(isChecked());
-            RestrictedLockUtils.EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal
-                    .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_USER_SWITCH,
-                            UserHandle.myUserId());
-            if (enforcedAdmin != null) {
-                mPreference.setDisabledByAdmin(enforcedAdmin);
-            } else {
+            if (!handleUserSwitchRestrictedByAdmin()) {
                 mPreference.setSwitchBarEnabled(
                         mUserCaps.mIsMain && !mUserCaps.mDisallowSwitchUser);
             }
+        }
+    }
+
+    private boolean handleUserSwitchRestrictedByAdmin() {
+        Objects.requireNonNull(mPreference);
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            if (!mUserCaps.mDisallowSwitchUserRestrictionEnforcementInfo.getAllAdmins().isEmpty()
+                    && !mUserCaps.mDisallowSwitchUserRestrictionEnforcementInfo
+                    .isOnlyEnforcedBySystem()) {
+                mPreference.setDisabledByAdmin(
+                        mUserCaps.mDisallowSwitchUserRestrictionEnforcementInfo
+                                .getMostImportantEnforcingAdmin());
+                return true;
+            }
+            return false;
+        } else {
+            RestrictedLockUtils.EnforcedAdmin enforcedAdmin =
+                    RestrictedLockUtilsInternal.checkIfRestrictionEnforced(mContext,
+                            UserManager.DISALLOW_USER_SWITCH, UserHandle.myUserId());
+            if (enforcedAdmin != null) {
+                mPreference.setDisabledByAdmin(enforcedAdmin);
+            }
+            return enforcedAdmin != null;
         }
     }
 

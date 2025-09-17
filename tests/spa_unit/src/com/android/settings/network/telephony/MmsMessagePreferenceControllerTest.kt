@@ -21,6 +21,7 @@ import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID
 import android.telephony.TelephonyManager
 import android.telephony.data.ApnSetting
+import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.core.BasePreferenceController.AVAILABLE
@@ -158,6 +159,28 @@ class MmsMessagePreferenceControllerTest {
         val availabilityStatus = controller.getAvailabilityStatus()
 
         assertThat(availabilityStatus).isEqualTo(AVAILABLE)
+    }
+
+    @Test
+    fun notifyAirplaneModeChanged_isAirplaneModeOn_setEnableFalse() {
+        val testPreference = mock<Preference>()
+
+        controller.notifyAirplaneModeChanged(true)
+        controller.updateState(testPreference)
+
+        assertThat(controller.isAirplaneModeOn).isTrue()
+        verify(testPreference).isEnabled = false
+    }
+
+    @Test
+    fun notifyAirplaneModeChanged_isAirplaneModeOff_setEnableTrue() {
+        val testPreference = mock<Preference>()
+
+        controller.notifyAirplaneModeChanged(false)
+        controller.updateState(testPreference)
+
+        assertThat(controller.isAirplaneModeOn).isFalse()
+        verify(testPreference).isEnabled = true
     }
 
     @Test

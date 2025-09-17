@@ -17,7 +17,8 @@
 package com.android.settings.appfunctions.providers
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.appfunctions.DeviceStateAppFunctionType
+import com.android.settings.appfunctions.DeviceStateAppFunctionType.GET_STORAGE
+import com.android.settings.appfunctions.DeviceStateAppFunctionType.GET_UNCATEGORIZED
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -31,17 +32,18 @@ class StaticIntentProviderTest {
         // Arrange
         val staticIntents =
             listOf(
-                StaticIntent("description1", "intentUri1"),
-                StaticIntent("description2", "intentUri2"),
+                StaticIntents(
+                    GET_UNCATEGORIZED,
+                    listOf(
+                        StaticIntent("description1", "intentUri1"),
+                        StaticIntent("description2", "intentUri2"),
+                    ),
+                )
             )
-        val provider =
-            StaticIntentProviderExecutor(
-                staticIntents,
-                DeviceStateAppFunctionType.GET_UNCATEGORIZED,
-            )
+        val provider = StaticIntentProviderExecutor(staticIntents)
 
         // Act
-        val result = provider.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+        val result = provider.execute(GET_UNCATEGORIZED)
 
         // Assert
         assertThat(result.states).hasSize(2)
@@ -55,12 +57,12 @@ class StaticIntentProviderTest {
     @Test
     fun execute_whenCategoryDoesNotMatch_returnsEmptyList() = runTest {
         // Arrange
-        val staticIntents = listOf(StaticIntent("description1", "intentUri1"))
-        val provider =
-            StaticIntentProviderExecutor(staticIntents, DeviceStateAppFunctionType.GET_STORAGE)
+        val staticIntents =
+            listOf(StaticIntents(GET_STORAGE, listOf(StaticIntent("description1", "intentUri1"))))
+        val provider = StaticIntentProviderExecutor(staticIntents)
 
         // Act
-        val result = provider.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+        val result = provider.execute(GET_UNCATEGORIZED)
 
         // Assert
         assertThat(result.states).isEmpty()
@@ -70,11 +72,10 @@ class StaticIntentProviderTest {
     @Test
     fun execute_withEmptyIntents_returnsEmptyList() = runTest {
         // Arrange
-        val provider =
-            StaticIntentProviderExecutor(emptyList(), DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+        val provider = StaticIntentProviderExecutor(emptyList())
 
         // Act
-        val result = provider.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+        val result = provider.execute(GET_UNCATEGORIZED)
 
         // Assert
         assertThat(result.states).isEmpty()

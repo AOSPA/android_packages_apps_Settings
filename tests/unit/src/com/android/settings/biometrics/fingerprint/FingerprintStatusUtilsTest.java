@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static com.android.settings.testutils.AdminRestrictionUtils.SUPERVISION_ROLE_AUTHORITY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -23,6 +25,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
 import android.app.supervision.SupervisionManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -183,6 +186,41 @@ public class FingerprintStatusUtilsTest {
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
 
         assertThat(mFingerprintStatusUtils.getDisablingAdmin()).isNull();
+    }
+
+    @Test
+    @RequiresFlagsDisabled(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
+    public void getEnforcingAdmin_whenFingerprintDisabled_returnsEnforcedAdmin() {
+        when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(USER_HANDLE))
+                .thenReturn(COMPONENT_NAME);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
+                .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
+
+        final EnforcingAdmin admin = mFingerprintStatusUtils.getEnforcingAdmin();
+
+        assertThat(admin).isEqualTo(
+                new EnforcingAdmin(COMPONENT_NAME.getPackageName(), SUPERVISION_ROLE_AUTHORITY,
+                        USER_HANDLE, COMPONENT_NAME));
+    }
+
+    @Test
+    @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
+    public void getEnforcingAdmin_whenFingerprintDisabled_returnsRestriction() {
+        when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
+        when(mSupervisionManager.getActiveSupervisionAppPackage()).thenReturn("supervision.pkg");
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(null))
+                .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
+
+        final EnforcingAdmin admin = mFingerprintStatusUtils.getEnforcingAdmin();
+
+        assertThat(admin.getUserHandle()).isEqualTo(USER_HANDLE);
+    }
+
+    @Test
+    public void getEnforcingAdmin_withFingerprintEnabled_returnsNull() {
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
+
+        assertThat(mFingerprintStatusUtils.getEnforcingAdmin()).isNull();
     }
 
     @Test

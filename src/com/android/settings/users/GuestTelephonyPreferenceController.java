@@ -16,6 +16,9 @@
 
 package com.android.settings.users;
 
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -85,12 +88,62 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
             restrictedSwitchPreference.setVisible(false);
         } else {
             restrictedSwitchPreference.setVisible(true);
+            if (!handleRemoveUserRestrictionByAdmin(restrictedSwitchPreference)) {
+                // We only need to check add user restrictions if removing user is not restricted.
+                handleAddUserRestriction(restrictedSwitchPreference);
+            }
+        }
+    }
+
+    /**
+     * Sets the preference as disabled by admin if the add user is restricted by admin.
+     *
+     * @return true if the preference is disabled by admin, false otherwise.
+     */
+    private boolean handleRemoveUserRestrictionByAdmin(RestrictedSwitchPreference preference) {
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            DevicePolicyManager dpm = mContext.getSystemService(DevicePolicyManager.class);
+            if (dpm == null) {
+                return false;
+            }
+            final PolicyEnforcementInfo policyEnforcementInfo = dpm.getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                            UserManager.DISALLOW_REMOVE_USER), UserHandle.myUserId());
+            boolean disallowRemoveUser = !policyEnforcementInfo.getAllAdmins().isEmpty()
+                    && !policyEnforcementInfo.isOnlyEnforcedBySystem();
+            if (disallowRemoveUser) {
+                preference.setDisabledByAdmin(
+                        policyEnforcementInfo.getMostImportantEnforcingAdmin());
+            }
+            return disallowRemoveUser;
+        } else {
             final RestrictedLockUtils.EnforcedAdmin disallowRemoveUserAdmin =
                     RestrictedLockUtilsInternal.checkIfRestrictionEnforced(mContext,
                             UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
             if (disallowRemoveUserAdmin != null) {
-                restrictedSwitchPreference.setDisabledByAdmin(disallowRemoveUserAdmin);
-            } else if (mUserCaps.mDisallowAddUserSetByAdmin) {
+                preference.setDisabledByAdmin(disallowRemoveUserAdmin);
+            }
+            return disallowRemoveUserAdmin != null;
+        }
+
+    }
+
+    private void handleAddUserRestriction(RestrictedSwitchPreference restrictedSwitchPreference) {
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            // Do nothing if adding user is allowed.
+            if (!mUserCaps.mDisallowAddUser) {
+                return;
+            }
+            if (mUserCaps.mDisallowAddUserSetByAdmin) {
+                restrictedSwitchPreference.setDisabledByAdmin(
+                        mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
+                                .getMostImportantEnforcingAdmin());
+            } else {
+                // Adding user is restricted by system.
+                restrictedSwitchPreference.setVisible(false);
+            }
+        } else {
+            if (mUserCaps.mDisallowAddUserSetByAdmin) {
                 restrictedSwitchPreference.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
             } else if (mUserCaps.mDisallowAddUser) {
                 // Adding user is restricted by system

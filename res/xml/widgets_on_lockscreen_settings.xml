@@ -20,6 +20,13 @@
     android:key="widgets_on_lockscreen"
     android:title="@string/widgets_on_lockscreen_title">
 
+    <com.android.settings.communal.BetaTagPreference
+        android:key="widgets_on_lockscreen_beta_tag"/>
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="widgets_on_lockscreen_illustration"
+        settings:controller="com.android.settings.communal.WidgetsIllustrationPreferenceController"/>
+
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="widgets_on_lockscreen_main_switch"
         android:title="@string/widgets_on_lockscreen_title"
@@ -30,5 +37,9 @@
         android:title="@string/when_to_auto_show_hubmode_title"
         android:fragment="com.android.settings.communal.WhenToStartHubPicker"
         settings:controller="com.android.settings.communal.WhenToStartHubPreferenceController" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="footer_pref"
+        android:title="@string/widgets_on_lockscreen_footer"/>
 
 </PreferenceScreen>

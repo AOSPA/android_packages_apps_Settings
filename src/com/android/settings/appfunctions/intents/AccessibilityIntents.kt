@@ -15,30 +15,35 @@
  */
 package com.android.settings.appfunctions.intents
 
+import com.android.settings.appfunctions.DeviceStateAppFunctionType.GET_UNCATEGORIZED
 import com.android.settings.appfunctions.providers.StaticIntent
+import com.android.settings.appfunctions.providers.StaticIntents
 
-fun getAccessibilityIntents(): List<StaticIntent> =
-    listOf(
-        StaticIntent(
-            description = "Accessibility: Intent to open Accessibility settings.",
-            intentUri =
-                "intent:#Intent;action=android.settings.ACCESSIBILITY_SETTINGS;package=com.android.settings;end",
-        ),
-        StaticIntent(
-            description = "Talkback: Intent to open Talkback accessibility service settings.",
-            intentUri =
-                "intent:#Intent;action=android.settings.ACCESSIBILITY_DETAILS_SETTINGS;S.android.intent.extra.COMPONENT_NAME=com.google.android.marvin.talkback/.TalkBackService;end",
-        ),
-        StaticIntent(
-            description =
-                "Select to Speak: Intent to open Select to Speak accessibility service settings.",
-            intentUri =
-                "intent:#Intent;action=android.settings.ACCESSIBILITY_DETAILS_SETTINGS;S.android.intent.extra.COMPONENT_NAME=com.google.android.marvin.talkback/com.google.android.accessibility.selecttospeak.SelectToSpeakService;end",
-        ),
-        StaticIntent(
-            description =
-                "Live Transcribe: Intent to open Live Transcribe accessibility service settings.",
-            intentUri =
-                "intent:#Intent;action=android.settings.ACCESSIBILITY_DETAILS_SETTINGS;S.android.intent.extra.COMPONENT_NAME=com.google.audio.hearing.visualization.accessibility.scribe/.MainActivity;end",
+fun getAccessibilityIntents() =
+    StaticIntents(
+        GET_UNCATEGORIZED,
+        listOf(
+            StaticIntent(
+                description = "Accessibility: Intent to open Accessibility settings.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.ACCESSIBILITY_SETTINGS;package=com.android.settings;end",
+            ),
+            StaticIntent(
+                description = "Talkback: Intent to open Talkback accessibility service settings.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.ACCESSIBILITY_DETAILS_SETTINGS;S.android.intent.extra.COMPONENT_NAME=com.google.android.marvin.talkback/.TalkBackService;end",
+            ),
+            StaticIntent(
+                description =
+                    "Select to Speak: Intent to open Select to Speak accessibility service settings.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.ACCESSIBILITY_DETAILS_SETTINGS;S.android.intent.extra.COMPONENT_NAME=com.google.android.marvin.talkback/com.google.android.accessibility.selecttospeak.SelectToSpeakService;end",
+            ),
+            StaticIntent(
+                description =
+                    "Live Transcribe: Intent to open Live Transcribe accessibility service settings.",
+                intentUri =
+                    "intent:#Intent;action=android.settings.ACCESSIBILITY_DETAILS_SETTINGS;S.android.intent.extra.COMPONENT_NAME=com.google.audio.hearing.visualization.accessibility.scribe/.MainActivity;end",
+            ),
         ),
     )

@@ -66,7 +66,7 @@ class DisabilitySupportButtonPreferenceControllerTest {
     fun setUp() {
         Settings.Global.putInt(context.contentResolver, Settings.Global.DEVICE_PROVISIONED, 1)
         SettingsShadowResources.overrideResource(
-            R.string.config_accessibility_disability_support_url,
+            R.string.help_url_accessibility_disability_support,
             URL,
         )
         setupIntentResolver()
@@ -101,7 +101,7 @@ class DisabilitySupportButtonPreferenceControllerTest {
     @EnableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
     fun getAvailabilityStatus_helpIntentIsEmpty_returnUnavailable() {
         SettingsShadowResources.overrideResource(
-            R.string.config_accessibility_disability_support_url,
+            R.string.help_url_accessibility_disability_support,
             "",
         )
         setupController()

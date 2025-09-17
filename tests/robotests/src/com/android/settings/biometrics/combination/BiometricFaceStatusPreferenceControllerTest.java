@@ -40,6 +40,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.testutils.ActiveUnlockTestUtils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.After;
@@ -133,7 +134,7 @@ public class BiometricFaceStatusPreferenceControllerTest {
         final RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
         mController.updateState(restrictedPreference);
 
-        verify(restrictedPreference).setDisabledByAdmin(any());
+        verify(restrictedPreference).setDisabledByAdmin((RestrictedLockUtils.EnforcedAdmin) any());
     }
 
     @Test
@@ -147,7 +148,8 @@ public class BiometricFaceStatusPreferenceControllerTest {
         final RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
         mController.updateState(restrictedPreference);
 
-        verify(restrictedPreference, never()).setDisabledByAdmin(any());
+        verify(restrictedPreference, never())
+                .setDisabledByAdmin((RestrictedLockUtils.EnforcedAdmin) any());
         verify(restrictedPreference).setEnabled(true);
     }
 
@@ -158,7 +160,8 @@ public class BiometricFaceStatusPreferenceControllerTest {
         final RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
         mController.updateState(restrictedPreference);
 
-        verify(restrictedPreference, never()).setDisabledByAdmin(any());
+        verify(restrictedPreference, never())
+                .setDisabledByAdmin((RestrictedLockUtils.EnforcedAdmin) any());
         verify(restrictedPreference).setEnabled(true);
     }
 }

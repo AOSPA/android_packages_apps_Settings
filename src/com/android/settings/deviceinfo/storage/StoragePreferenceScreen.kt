@@ -78,34 +78,22 @@ open class StoragePreferenceScreen(private val context: Context) :
             val cache = getStorageCache(context, type)
 
             // Storage Used
-            +StoragePreference(
-                KEY_SUMMARY_USED,
-                0,
-                { null },
-                { null },
-                {
-                    StorageUtils.getStorageSummary(
-                        context,
-                        R.string.storage_usage_summary,
-                        cache.totalUsedSize,
-                    )
-                },
-            )
+            val usedSummary =
+                StorageUtils.getStorageSummary(
+                    context,
+                    R.string.storage_usage_summary,
+                    cache.totalUsedSize,
+                )
+            +StoragePreference(KEY_SUMMARY_USED, 0, { null }, { usedSummary }, { usedSummary })
 
             // Storage Total
-            +StoragePreference(
-                KEY_SUMMARY_TOTAL,
-                0,
-                { null },
-                { null },
-                {
-                    StorageUtils.getStorageSummary(
-                        context,
-                        R.string.storage_total_summary,
-                        cache.totalSize,
-                    )
-                },
-            )
+            val totalSummary =
+                StorageUtils.getStorageSummary(
+                    context,
+                    R.string.storage_total_summary,
+                    cache.totalSize,
+                )
+            +StoragePreference(KEY_SUMMARY_TOTAL, 0, { null }, { totalSummary }, { totalSummary })
 
             // Free up space
             +StoragePreference(

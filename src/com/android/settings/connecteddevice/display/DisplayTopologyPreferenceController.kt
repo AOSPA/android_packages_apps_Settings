@@ -31,6 +31,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
+import com.android.settings.core.instrumentation.SettingsStatsLog
 import java.util.function.Consumer
 import kotlin.math.abs
 import kotlin.math.min
@@ -578,6 +579,8 @@ class DisplayTopologyPreferenceController(
         applyTopology(newTopology)
 
         injector.displayTopology = newTopology
+        val logger = ExternalDisplaySettingsLoggerStore.getLogger(drag.displayId)
+        logger.log(SettingsStatsLog.EXTERNAL_DISPLAY_SETTINGS_CHANGED__SETTING__TOPOLOGY)
 
         return true
     }

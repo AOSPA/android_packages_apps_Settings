@@ -18,13 +18,13 @@ package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
 import android.provider.Settings
-
 import com.android.settings.R
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.extensions.isWindowMagnificationSupported
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
@@ -32,7 +32,8 @@ class FollowTypingSwitchPreference :
     SwitchPreference(
         KEY,
         R.string.accessibility_screen_magnification_follow_typing_title,
-        R.string.accessibility_screen_magnification_follow_typing_summary),
+        R.string.accessibility_screen_magnification_follow_typing_summary,
+    ),
     PreferenceAvailabilityProvider {
 
     override fun storage(context: Context): KeyValueStore = SettingsSecureStore.get(context)
@@ -40,6 +41,18 @@ class FollowTypingSwitchPreference :
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 
     override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
+
+    override fun getReadPermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int = ReadWritePermit.ALLOW
+
+    override fun getWritePermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && context.isWindowMagnificationSupported()

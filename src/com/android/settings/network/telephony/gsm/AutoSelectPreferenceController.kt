@@ -48,6 +48,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.Settings.NetworkSelectActivity
 import com.android.settings.network.CarrierConfigCache
+import com.android.settings.network.telephony.AirplaneModeRepository
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.network.telephony.allowedNetworkTypesFlow
 import com.android.settings.network.telephony.serviceStateFlow
@@ -84,6 +85,7 @@ constructor(
     private val getConfigForSubId: (subId: Int) -> PersistableBundle = { subId ->
         CarrierConfigCache.getInstance(context).getConfigForSubId(subId)
     },
+    private val airplaneModeRepository: AirplaneModeRepository = AirplaneModeRepository(context),
 ) : ComposePreferenceController(context, key), DefaultLifecycleObserver,
     SelectNetworkPreferenceController.OnNetworkScanTypeListener {
 
@@ -148,12 +150,15 @@ constructor(
             serviceStateFlow
                 .map(::getDisallowedSummary)
                 .collectAsStateWithLifecycle(initialValue = "")
+        val isAirplaneModeOn by
+            airplaneModeRepository.airplaneModeChangedFlow().collectAsStateWithLifecycle(false)
         SwitchPreference(
             object : SwitchPreferenceModel {
                 override val title = stringResource(R.string.select_automatically)
                 override val summary = { disallowedSummary }
                 override val changeable = {
-                    disallowedSummary.isEmpty() &&
+                    !isAirplaneModeOn &&
+                        disallowedSummary.isEmpty() &&
                         !(isSatelliteSessionStarted && isSelectedSubIdForSatellite)
                 }
                 override val checked = { isAuto }

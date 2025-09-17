@@ -32,7 +32,7 @@ class DisabilitySupportButtonPreferenceController(context: Context, prefKey: Str
     private val helpIntent: Intent? =
         HelpUtils.getHelpIntent(
             context,
-            context.getString(R.string.config_accessibility_disability_support_url),
+            context.getString(R.string.help_url_accessibility_disability_support),
             context::class.java.name,
         )
 

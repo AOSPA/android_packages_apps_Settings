@@ -17,6 +17,7 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.ActivityManager
+import android.app.Application
 import android.app.KeyguardManager
 import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
 import android.app.settings.SettingsEnums
@@ -28,6 +29,7 @@ import android.content.Intent
 import android.content.pm.UserInfo
 import android.hardware.biometrics.BiometricManager
 import android.os.Build
+import android.os.Bundle
 import android.os.Process
 import android.os.UserHandle
 import android.os.UserManager
@@ -48,6 +50,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.robolectric.Robolectric
@@ -164,6 +167,27 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
+    fun onCreate_userIsRunning_savesPromptShownState() {
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub {
+            on { startProfile(any()) } doReturn true
+            on { isUserRunning(SUPERVISING_USER_ID) } doReturn true
+        }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+
+        mActivityController.setup()
+        assertThat(mActivity.isFinishing).isFalse()
+
+        val outState = Bundle()
+        mActivityController.saveInstanceState(outState)
+        assertThat(
+                outState.getBoolean(ConfirmSupervisionCredentialsActivity.KEY_BIOMETRIC_PROMPT_SHOWN)
+            )
+            .isTrue()
+    }
+
+    @Test
     fun onCreate_startsConfirmationActivity_activityFinishing_stopsProfile() {
         ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
         mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
@@ -273,6 +297,100 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
+    fun userStateChangeReceiver_receivesUserStopped_restartsProfileAndShowsPrompt() {
+        // Arrange: Set up activity but ensure prompt is not shown in onCreate
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub {
+            on { startProfile(any()) } doReturn true
+            on { isUserRunning(SUPERVISING_USER_ID) } doReturn false
+        }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+        mActivityController.setup()
+
+        // Act: Simulate the USER_STOPPED broadcast for the supervising user
+        val intent =
+            Intent(Intent.ACTION_USER_STOPPED).putExtra(
+                Intent.EXTRA_USER_HANDLE,
+                SUPERVISING_USER_ID
+            )
+        shadowOf(ApplicationProvider.getApplicationContext<Application>())
+            .getReceiversForIntent(intent)
+            .first()
+            .onReceive(context, intent)
+
+        // Assert: Profile is restarted and prompt state is updated
+        verify(mockActivityManager, times(2)).startProfile(SUPERVISING_USER_HANDLE)
+        assertThat(mActivity.mProfileStarted).isTrue()
+        assertThat(mActivity.isFinishing).isFalse()
+
+        val outState = Bundle()
+        mActivityController.saveInstanceState(outState)
+        assertThat(
+                outState.getBoolean(ConfirmSupervisionCredentialsActivity.KEY_BIOMETRIC_PROMPT_SHOWN)
+            )
+            .isTrue()
+    }
+
+    @Test
+    fun userStateChangeReceiver_receivesUserStopped_startProfileFails_finishesActivity() {
+        // Arrange: Set up activity, mock startProfile to fail on the second call
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        whenever(mockActivityManager.startProfile(any()))
+            .thenReturn(true) // First call in onCreate succeeds
+            .thenReturn(false) // Second call in receiver fails
+        whenever(mockActivityManager.isUserRunning(SUPERVISING_USER_ID)).thenReturn(false)
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+        mActivityController.setup()
+        assertThat(mActivity.isFinishing).isFalse()
+
+        // Act: Simulate the USER_STOPPED broadcast
+        val intent =
+            Intent(Intent.ACTION_USER_STOPPED).putExtra(
+                Intent.EXTRA_USER_HANDLE,
+                SUPERVISING_USER_ID
+            )
+        shadowOf(ApplicationProvider.getApplicationContext<Application>())
+            .getReceiversForIntent(intent)
+            .first()
+            .onReceive(context, intent)
+
+        // Assert: Activity finishes with RESULT_CANCELED
+        verify(mockActivityManager, times(2)).startProfile(SUPERVISING_USER_HANDLE)
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+    }
+
+    @Test
+    fun userStateChangeReceiver_receivesUserStopped_forDifferentUser_doesNothing() {
+        // Arrange: Set up activity
+        ShadowRoleManager.addRoleHolder(ROLE_SYSTEM_SUPERVISION, callingPackage, currentUser)
+        mockUserManager.stub { on { users } doReturn listOf(SUPERVISING_USER_INFO) }
+        mockActivityManager.stub {
+            on { startProfile(any()) } doReturn true
+            on { isUserRunning(SUPERVISING_USER_ID) } doReturn false
+        }
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+        mActivityController.setup()
+
+        // Act: Simulate USER_STOPPED broadcast for a different user
+        val intent =
+            Intent(Intent.ACTION_USER_STOPPED).putExtra(
+                Intent.EXTRA_USER_HANDLE,
+                SUPERVISING_USER_ID + 1
+            )
+        shadowOf(ApplicationProvider.getApplicationContext<Application>())
+            .getReceiversForIntent(intent)
+            .first()
+            .onReceive(context, intent)
+
+        // Assert: No further action is taken
+        verify(mockActivityManager, times(1)).startProfile(SUPERVISING_USER_HANDLE)
+        assertThat(mActivity.isFinishing).isFalse()
+    }
+
+    @Test
     fun getBiometricPrompt_recoveryEmailExist_showForgotPinButton() {
         val recoveryInfo = SupervisionRecoveryInfo("email", "default", STATE_PENDING, null)
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
@@ -354,6 +472,7 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     private companion object {
         const val SUPERVISING_USER_ID = 5
+        val SUPERVISING_USER_HANDLE = UserHandle.of(SUPERVISING_USER_ID)
         val SUPERVISING_USER_INFO =
             UserInfo(
                 SUPERVISING_USER_ID,

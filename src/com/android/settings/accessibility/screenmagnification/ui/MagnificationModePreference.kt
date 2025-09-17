@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -65,6 +66,18 @@ class MagnificationModePreference :
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 
     override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
+
+    override fun getReadPermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int = ReadWritePermit.ALLOW
+
+    override fun getWritePermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)

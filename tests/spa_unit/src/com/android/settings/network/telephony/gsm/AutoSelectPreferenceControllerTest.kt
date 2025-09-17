@@ -38,6 +38,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings.NetworkSelectActivity
 import com.android.settings.spa.preference.ComposePreference
+import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBoolean
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.emptyFlow
@@ -96,11 +97,14 @@ class AutoSelectPreferenceControllerTest {
             )
             .init(subId = SUB_ID)
 
+    var isAirplaneModeOn by context.settingsGlobalBoolean(Settings.Global.AIRPLANE_MODE_ON)
+
     @Before
     fun setUp() {
         preferenceScreen.addPreference(preference)
         controller.displayPreference(preferenceScreen)
         serviceState.isManualSelection = false
+        isAirplaneModeOn = false
     }
 
     @Test
@@ -132,6 +136,18 @@ class AutoSelectPreferenceControllerTest {
         composeTestRule
             .onNodeWithText(context.getString(R.string.select_automatically))
             .assertIsEnabled()
+    }
+
+    @Test
+    fun isEnabled_isAirplaneModeOn_disable() {
+        serviceState.roaming = true
+        isAirplaneModeOn = true
+
+        composeTestRule.setContent { controller.Content() }
+
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.select_automatically))
+            .assertIsNotEnabled()
     }
 
     @Test

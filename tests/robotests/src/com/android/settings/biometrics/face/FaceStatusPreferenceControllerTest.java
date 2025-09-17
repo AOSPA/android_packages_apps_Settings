@@ -188,6 +188,7 @@ public class FaceStatusPreferenceControllerTest {
         reset(admin);
 
         mController.updateStateInternal(null /* enforcedAdmin */);
-        verify(restrictedPreference, never()).setDisabledByAdmin(any());
+        verify(restrictedPreference, never())
+                .setDisabledByAdmin((RestrictedLockUtils.EnforcedAdmin) any());
     }
 }

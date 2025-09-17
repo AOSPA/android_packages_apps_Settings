@@ -238,7 +238,7 @@ public class BlockPreferenceControllerTest {
         mController.onResume(appRow, null, null, null, null, null, null);
         mController.updateState(mPreference);
         assertFalse(mPreference.getSwitchBar().isEnabled());
-        verify(mPreference).setDisabledByAdmin(eq(null));
+        verify(mPreference).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -248,7 +248,7 @@ public class BlockPreferenceControllerTest {
         mController.onResume(appRow, null, null, null, null, null, null);
         mController.updateState(mPreference);
         assertFalse(mPreference.getSwitchBar().isEnabled());
-        verify(mPreference).setDisabledByAdmin(eq(null));
+        verify(mPreference).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -259,7 +259,7 @@ public class BlockPreferenceControllerTest {
                 appRow, null, new NotificationChannelGroup("a", "a"), null, null, null, null);
         mController.updateState(mPreference);
         assertFalse(mPreference.getSwitchBar().isEnabled());
-        verify(mPreference).setDisabledByAdmin(eq(null));
+        verify(mPreference).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -270,7 +270,7 @@ public class BlockPreferenceControllerTest {
                 null, null, null);
         mController.updateState(mPreference);
         assertFalse(mPreference.getSwitchBar().isEnabled());
-        verify(mPreference).setDisabledByAdmin(eq(null));
+        verify(mPreference).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -283,7 +283,7 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertTrue(mPreference.getSwitchBar().isEnabled());
-        verify(mPreference).setDisabledByAdmin(eq(null));
+        verify(mPreference).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -295,7 +295,7 @@ public class BlockPreferenceControllerTest {
 
         assertTrue(mPreference.getSwitchBar().isEnabled());
         assertTrue(mPreference.isEnabled());
-        verify(mPreference).setDisabledByAdmin(eq(null));
+        verify(mPreference).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -312,7 +312,7 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertTrue(mPreference.isChecked());
-        verify(mPreference, times(2)).setDisabledByAdmin(eq(null));
+        verify(mPreference, times(2)).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -338,7 +338,7 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertTrue(mPreference.isChecked());
-        verify(mPreference, times(3)).setDisabledByAdmin(eq(null));
+        verify(mPreference, times(3)).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -363,7 +363,7 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertTrue(mPreference.isChecked());
-        verify(mPreference, times(3)).setDisabledByAdmin(eq(null));
+        verify(mPreference, times(3)).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -373,7 +373,7 @@ public class BlockPreferenceControllerTest {
         mController.onResume(appRow, channel, null, null, null, null, null);
         mController.updateState(mPreference);
         mController.updateState(mPreference);
-        verify(mPreference, times(2)).setDisabledByAdmin(eq(null));
+        verify(mPreference, times(2)).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -384,7 +384,7 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertEquals(IMPORTANCE_LOW, channel.getImportance());
-        verify(mPreference).setDisabledByAdmin(eq(null));
+        verify(mPreference).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -409,7 +409,7 @@ public class BlockPreferenceControllerTest {
 
         verify(mBackend, times(2)).setNotificationsEnabledForPackage(
                 anyString(), anyInt(), anyBoolean());
-        verify(mPreference).setDisabledByAdmin(eq(null));
+        verify(mPreference).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -427,7 +427,7 @@ public class BlockPreferenceControllerTest {
         assertEquals(IMPORTANCE_HIGH, channel.getImportance());
 
         verify(mBackend, times(2)).updateChannel(any(), anyInt(), any());
-        verify(mPreference).setDisabledByAdmin(eq(null));
+        verify(mPreference).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test
@@ -441,7 +441,7 @@ public class BlockPreferenceControllerTest {
         mController.updateState(mPreference);
         assertTrue(mPreference.getSwitchBar().isEnabled());
         assertTrue(mPreference.isEnabled());
-        verify(mPreference).setDisabledByAdmin(eq(null));
+        verify(mPreference).setDisabledByAdmin(eq((EnforcedAdmin) null));
     }
 
     @Test

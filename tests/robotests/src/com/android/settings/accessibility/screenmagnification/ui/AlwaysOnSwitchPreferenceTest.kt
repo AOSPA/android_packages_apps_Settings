@@ -37,6 +37,8 @@ import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.android.settings.testutils.shadow.ShadowDeviceConfig
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
 import com.google.common.truth.Truth.assertThat
@@ -69,6 +71,28 @@ class AlwaysOnSwitchPreferenceTest {
     fun getTitle() {
         assertThat(preference.title)
             .isEqualTo(R.string.accessibility_screen_magnification_always_on_title)
+    }
+
+    @Test
+    fun getReadPermissions_returnsSettingsSecureStoreReadPermissions() {
+        assertThat(preference.getReadPermissions(context))
+            .isEqualTo(SettingsSecureStore.getReadPermissions())
+    }
+
+    @Test
+    fun getWritePermissions_returnsSettingsSecureStoreWritePermissions() {
+        assertThat(preference.getWritePermissions(context))
+            .isEqualTo(SettingsSecureStore.getWritePermissions())
+    }
+
+    @Test
+    fun getReadPermit_returnsAllow() {
+        assertThat(preference.getReadPermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
+    fun getWritePermit_returnsAllow() {
+        assertThat(preference.getWritePermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
     }
 
     @Test

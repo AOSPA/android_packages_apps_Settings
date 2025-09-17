@@ -256,7 +256,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = AllAppsScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_STORAGE),
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
         ),
         PerScreenCatalystConfig(
             enabled = true,

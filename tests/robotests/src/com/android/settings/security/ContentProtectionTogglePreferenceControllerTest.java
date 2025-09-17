@@ -24,11 +24,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -40,8 +37,8 @@ import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -233,7 +230,8 @@ public class ContentProtectionTogglePreferenceControllerTest {
         mController.updateState(mMockSwitchPreference);
 
         assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
-        verify(mMockSwitchPreference, never()).setDisabledByAdmin(any());
+        verify(mMockSwitchPreference, never()).setDisabledByAdmin(
+                any(RestrictedLockUtils.EnforcedAdmin.class));
         verify(mMockSwitchPreference, never()).setEnabled(false);
     }
 
@@ -259,7 +257,8 @@ public class ContentProtectionTogglePreferenceControllerTest {
         mController.updateState(mMockSwitchPreference);
 
         assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
-        verify(mMockSwitchPreference, never()).setDisabledByAdmin(any());
+        verify(mMockSwitchPreference, never()).setDisabledByAdmin(
+                any(RestrictedLockUtils.EnforcedAdmin.class));
         verify(mMockSwitchPreference, never()).setEnabled(false);
     }
 
@@ -272,7 +271,8 @@ public class ContentProtectionTogglePreferenceControllerTest {
         mController.updateState(mMockSwitchPreference);
 
         assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
-        verify(mMockSwitchPreference, never()).setDisabledByAdmin(any());
+        verify(mMockSwitchPreference, never()).setDisabledByAdmin(
+                any(RestrictedLockUtils.EnforcedAdmin.class));
         verify(mMockSwitchPreference, never()).setEnabled(false);
     }
 
@@ -310,7 +310,8 @@ public class ContentProtectionTogglePreferenceControllerTest {
         mController.updateState(mMockSwitchPreference);
 
         assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
-        verify(mMockSwitchPreference, never()).setDisabledByAdmin(any());
+        verify(mMockSwitchPreference, never()).setDisabledByAdmin(
+                any(RestrictedLockUtils.EnforcedAdmin.class));
         verify(mMockSwitchPreference, never()).setEnabled(false);
     }
 
@@ -352,7 +353,8 @@ public class ContentProtectionTogglePreferenceControllerTest {
         mController.updateState(mMockSwitchPreference);
 
         assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
-        verify(mMockSwitchPreference, never()).setDisabledByAdmin(any());
+        verify(mMockSwitchPreference, never()).setDisabledByAdmin(
+                any(RestrictedLockUtils.EnforcedAdmin.class));
         verify(mMockSwitchPreference, never()).setEnabled(false);
     }
 
