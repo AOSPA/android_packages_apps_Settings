@@ -34,10 +34,12 @@ import androidx.test.espresso.action.ViewActions.swipeUp
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.safetycenter.ui.SafetyCenterFragment
+import com.android.settingslib.widget.preference.statusbanner.R as SettingsLibR
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -80,7 +82,9 @@ class SafetyCenterFragmentTest {
     }
 
     private fun launchScenario(): FragmentScenario<SafetyCenterFragment> {
-        return launchFragmentInContainer<SafetyCenterFragment>()
+        return launchFragmentInContainer<SafetyCenterFragment>(
+            themeResId = R.style.Theme_SubSettings
+        )
     }
 
     @Test
@@ -89,6 +93,9 @@ class SafetyCenterFragmentTest {
 
         scenario.onFragment { fragment ->
             ShadowLooper.idleMainLooper()
+
+            onView(withId(SettingsLibR.id.banner_container))
+                .check(matches(isDisplayed()))
 
             onView(withText(mApplication.getString(R.string.security_header)))
                 .check(matches(isDisplayed()))
@@ -108,7 +115,6 @@ class SafetyCenterFragmentTest {
 
             onView(isRoot()).perform(swipeUp())
             onView(withText(mApplication.getString(R.string.more_security_privacy_category_title)))
-                .perform(scrollTo())
                 .check(matches(isDisplayed()))
 
             onView(withText(mApplication.getString(R.string.more_security_privacy_settings)))
