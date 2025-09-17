@@ -303,6 +303,52 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun browserSupportedAppsEntryTitle() {
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val title =
+                StringUtil.getIcuPluralsString(
+                    context,
+                    1,
+                    R.string.supervision_web_content_filters_switch_summary,
+                )
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+
+            val preference =
+                fragment.findPreference<Preference>(
+                    SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY
+                )
+            assertThat(preference?.title).isEqualTo(title)
+        }
+    }
+
+    @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun searchSupportedAppsEntryTitle() {
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val title =
+                StringUtil.getIcuPluralsString(
+                    context,
+                    0,
+                    R.string.supervision_web_content_filters_switch_summary,
+                )
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+
+            val preference =
+                fragment.findPreference<Preference>(
+                    SupervisionWebContentFiltersSearchSupportedAppsScreen.KEY
+                )
+            assertThat(preference?.title).isEqualTo(title)
+        }
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun footerPreference() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
