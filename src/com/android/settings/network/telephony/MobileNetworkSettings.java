@@ -250,7 +250,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             use(MobileNetworkSwitchController.class).init(mSubId);
         }
         use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
-        use(BillingCyclePreferenceController.class).init(mSubId);
+        if (!isCatalystEnabled() || !Flags.deeplinkNetworkAndInternet25q4()) {
+            use(BillingCyclePreferenceController.class).init(mSubId);
+        }
         use(MmsMessagePreferenceController.class).init(mSubId);
         // CrossSimCallingViewModel is responsible for maintaining the correct cross sim calling
         // settings (backup calling).

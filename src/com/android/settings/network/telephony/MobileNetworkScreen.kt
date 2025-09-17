@@ -27,6 +27,7 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.MobileNetworkActivity
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.datausage.BillingCycleScreen
 import com.android.settings.datausage.DataUsageListScreen
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
@@ -97,6 +98,7 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
                     +EnabledNetworkModePreference(data)
                     +MobileNetworkImeiPreference(context, subId)
                     +(DataUsageListScreen.KEY args arguments)
+                    +(BillingCycleScreen.KEY args arguments) order 115
                     +UntitledPreferenceCategoryMetadata("apn_and_protection_container") += {
                         val bundle = Bundle(1).also { it.putInt(ApnSettings.SUB_ID, subId) }
                         +(ApnSettingsScreen.KEY args bundle)
