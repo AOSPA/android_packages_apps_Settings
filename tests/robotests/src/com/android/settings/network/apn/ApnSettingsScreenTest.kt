@@ -33,6 +33,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.network.CarrierConfigCache
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settings.utils.putSubId
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -55,7 +56,7 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
         get() = Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4
 
     override val preferenceScreenCreator =
-        ApnSettingsScreen(Bundle().apply { putSubId(ApnSettings.SUB_ID, subId) })
+        createScreen(Bundle().apply { putSubId(ApnSettings.SUB_ID, subId) })
 
     private val mockTelephonyManager = mock<TelephonyManager>()
 
@@ -124,7 +125,7 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_validString_parsedCorrectly() {
         val args = Bundle().apply { putString(ApnSettings.SUB_ID, subId.toString()) }
-        val screen = ApnSettingsScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(subId)
     }
@@ -133,7 +134,7 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_invalidString_returnsDefault() {
         val args = Bundle().apply { putString(ApnSettings.SUB_ID, "invalid") }
-        val screen = ApnSettingsScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
@@ -142,7 +143,7 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_missingKey_returnsDefault() {
         val args = Bundle()
-        val screen = ApnSettingsScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
@@ -151,7 +152,7 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
     @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagTrue_subIdIsInt_returnsDefault() {
         val args = Bundle().apply { putInt(ApnSettings.SUB_ID, subId) }
-        val screen = ApnSettingsScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
@@ -160,7 +161,7 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagFalse_validInt_parsedCorrectly() {
         val args = Bundle().apply { putInt(ApnSettings.SUB_ID, subId) }
-        val screen = ApnSettingsScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(subId)
     }
@@ -169,7 +170,7 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagFalse_missingKey_returnsDefault() {
         val args = Bundle()
-        val screen = ApnSettingsScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
@@ -178,13 +179,21 @@ class ApnSettingsScreenTest : SettingsCatalystTestCase() {
     @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun subId_flagFalse_subIdIsString_returnsDefault() {
         val args = Bundle().apply { putString(ApnSettings.SUB_ID, subId.toString()) }
-        val screen = ApnSettingsScreen(args)
+        val screen = createScreen(args)
 
         assertThat(screen.getSubId()).isEqualTo(invalidSubId)
     }
 
     private fun ApnSettingsScreen.getSubId(): Int {
         return ReflectionHelpers.getField(this, "subId")
+    }
+
+    private fun createScreen(args: Bundle): ApnSettingsScreen {
+        return if (CatalystFlags.catalystUseKeyParameters()) {
+            ApnSettingsScreen(ApnSettingsScreen.parametersSchema.prepare(args))
+        } else {
+            ApnSettingsScreen(args)
+        }
     }
 
     @Test
