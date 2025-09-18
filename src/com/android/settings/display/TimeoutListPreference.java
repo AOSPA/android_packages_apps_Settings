@@ -43,6 +43,7 @@ import java.util.ArrayList;
 public class TimeoutListPreference extends RestrictedListPreference {
     private static final String TAG = "TimeoutListPreference";
     private EnforcedAdmin mAdmin;
+    private EnforcingAdmin mEnforcingAdmin;
     private final CharSequence[] mInitialEntries;
     private final CharSequence[] mInitialValues;
 
@@ -56,7 +57,7 @@ public class TimeoutListPreference extends RestrictedListPreference {
     protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
         super.onPrepareDialogBuilder(builder, listener);
-        if (mAdmin != null) {
+        if (mAdmin != null || mEnforcingAdmin != null) {
             updateTextOnDialog(builder);
         } else {
             builder.setView(null);
@@ -81,19 +82,30 @@ public class TimeoutListPreference extends RestrictedListPreference {
     protected void onDialogCreated(Dialog dialog) {
         super.onDialogCreated(dialog);
         dialog.create();
-        if (mAdmin != null) {
+        // According to the enablement of flag, either mAdmin or mEnforcingAdmin is populated
+        // when admin disables the pref.
+        if (mAdmin != null || mEnforcingAdmin != null) {
             View footerView = dialog.findViewById(R.id.admin_disabled_other_options);
             footerView.findViewById(R.id.admin_more_details_link).setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
-                                    getContext(), mAdmin);
+                            if (mEnforcingAdmin != null) {
+                                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                                        getContext(), mEnforcingAdmin, null);
+                            } else if (mAdmin != null) {
+                                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                                        getContext(), mAdmin);
+                            }
                         }
                     });
         }
     }
 
+    /**
+     * @deprecated use {@link #removeRestrictedTimeoutsFromOptions(long, EnforcingAdmin)} instead.
+     */
+    @Deprecated
     public void removeUnusableTimeouts(long maxTimeout, EnforcedAdmin admin) {
         final DevicePolicyManager dpm = (DevicePolicyManager) getContext().getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
@@ -144,6 +156,62 @@ public class TimeoutListPreference extends RestrictedListPreference {
                 // Select the largest value from the list by default.
                 Log.w(TAG, "Default to longest timeout. Value disabled by admin:" + userPreference);
                 setValue(revisedValues.get(revisedValues.size() - 1).toString());
+            }
+        }
+    }
+
+    /**
+     * Removes timeouts that are restricted by admin from the list of options.
+     */
+    public void removeRestrictedTimeoutsFromOptions(long maxTimeout, EnforcingAdmin admin) {
+        final DevicePolicyManager dpm = getContext().getSystemService(DevicePolicyManager.class);
+        if (dpm == null) {
+            return;
+        }
+
+        if (admin == null && mEnforcingAdmin == null && !isDisabledByAdmin()) {
+            return;
+        }
+        if (admin == null) {
+            maxTimeout = Long.MAX_VALUE;
+        }
+
+        ArrayList<CharSequence> revisedEntries = new ArrayList<CharSequence>();
+        ArrayList<CharSequence> revisedValues = new ArrayList<CharSequence>();
+        for (int i = 0; i < mInitialValues.length; ++i) {
+            long timeout = Long.parseLong(mInitialValues[i].toString());
+            if (timeout <= maxTimeout) {
+                revisedEntries.add(mInitialEntries[i]);
+                revisedValues.add(mInitialValues[i]);
+            }
+        }
+
+        // If there are no possible options for the user, then set this preference as disabled
+        // by admin, otherwise remove the padlock in case it was set earlier.
+        if (revisedValues.isEmpty()) {
+            setDisabledByAdmin(admin);
+            return;
+        } else {
+            setDisabledByAdmin((EnforcingAdmin) null);
+        }
+
+        if (revisedEntries.size() != getEntries().length) {
+            final int userPreference = Integer.parseInt(getValue());
+            setEntries(revisedEntries.toArray(new CharSequence[0]));
+            setEntryValues(revisedValues.toArray(new CharSequence[0]));
+            mEnforcingAdmin = admin;
+            if (userPreference <= maxTimeout) {
+                setValue(String.valueOf(userPreference));
+            } else if (!revisedValues.isEmpty()
+                    && Long.parseLong(revisedValues.getLast().toString())
+                    == maxTimeout) {
+                // If the last one happens to be the same as the max timeout, select that
+                setValue(String.valueOf(maxTimeout));
+            } else {
+                // The selected time out value is longer than the max timeout allowed by the admin.
+                // Select the largest value from the list by default.
+                Log.w(TAG, "Default to longest timeout. Value disabled by admin:" + userPreference);
+                setValue(revisedValues.getLast().toString());
             }
         }
     }

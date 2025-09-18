@@ -33,11 +33,15 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.EnforcingAdmin;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
@@ -47,6 +51,7 @@ import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
 import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -61,6 +66,8 @@ public class AdaptiveSleepPreferenceControllerTest {
     private AdaptiveSleepPreferenceController mController;
     private ContentResolver mContentResolver;
 
+    @Rule
+    public SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock
     private PackageManager mPackageManager;
     @Mock
@@ -69,6 +76,9 @@ public class AdaptiveSleepPreferenceControllerTest {
     private RestrictionUtils mRestrictionUtils;
     @Mock
     private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
+
+    @Mock
+    private EnforcingAdmin mEnforcingAdmin;
 
     @Before
     public void setUp() {
@@ -81,6 +91,8 @@ public class AdaptiveSleepPreferenceControllerTest {
         when(mPackageManager.checkPermission(any(), any())).thenReturn(
                 PackageManager.PERMISSION_GRANTED);
         when(mRestrictionUtils.checkIfRestrictionEnforced(any(),
+                eq(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT))).thenReturn(null);
+        when(mRestrictionUtils.checkIfUserRestrictionEnforced(any(),
                 eq(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT))).thenReturn(null);
 
         mController = spy(new AdaptiveSleepPreferenceController(mContext, mRestrictionUtils));
@@ -155,12 +167,26 @@ public class AdaptiveSleepPreferenceControllerTest {
         assertThat(mController.mPreference.isEnabled()).isFalse();
     }
 
+    @DisableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
     public void addToScreen_enforcedAdmin_disablePreference() {
         mController.mPreference.setEnabled(true);
 
         when(mRestrictionUtils.checkIfRestrictionEnforced(any(),
                 eq(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT))).thenReturn(mEnforcedAdmin);
+
+        mController.addToScreen(mScreen);
+
+        assertThat(mController.mPreference.isEnabled()).isFalse();
+    }
+
+    @EnableFlags(android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @Test
+    public void addToScreen_enforcedAdmin_disablePreference_withEnforcingAdmin() {
+        mController.mPreference.setEnabled(true);
+
+        when(mRestrictionUtils.checkIfUserRestrictionEnforced(any(),
+                eq(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT))).thenReturn(mEnforcingAdmin);
 
         mController.addToScreen(mScreen);
 
