@@ -21,6 +21,8 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.applications.specialaccess.InteractAcrossProfilesAppDetailScreen.Companion.KEY_APP_PACKAGE_NAME
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -40,11 +42,7 @@ class InteractAcrossProfilesAppDetailScreenTest {
             on { getApplicationInfo("app.not.found", 0) } doThrow
                 PackageManager.NameNotFoundException()
         }
-        val screen =
-            InteractAcrossProfilesAppDetailScreen(
-                context,
-                Bundle().apply { putString("app", "app.not.found") },
-            )
+        val screen = createScreen()
 
         assertThat(screen.isAvailable(context)).isFalse()
     }
@@ -52,12 +50,24 @@ class InteractAcrossProfilesAppDetailScreenTest {
     @Test
     fun isAvailable_whenAppInfoIsNotNull_returnsTrue() {
         packageManager.stub { on { getApplicationInfo("app.found", 0) } doReturn ApplicationInfo() }
-        val screen =
+        val screen = createScreen()
+
+        assertThat(screen.isAvailable(context)).isTrue()
+    }
+
+    private fun createScreen(): InteractAcrossProfilesAppDetailScreen {
+        return if (CatalystFlags.catalystUseKeyParameters()) {
+            InteractAcrossProfilesAppDetailScreen(
+                context,
+                InteractAcrossProfilesAppDetailScreen.parametersSchema.prepare(
+                    KEY_APP_PACKAGE_NAME to "app.found"
+                ),
+            )
+        } else {
             InteractAcrossProfilesAppDetailScreen(
                 context,
                 Bundle().apply { putString("app", "app.found") },
             )
-
-        assertThat(screen.isAvailable(context)).isTrue()
+        }
     }
 }

@@ -47,8 +47,15 @@ open class WriteSystemPreferencesAppListScreen : SpecialAccessAppListScreen() {
     override val appDetailScreenKey: String
         get() = WriteSystemPreferencesAppDetailScreen.KEY
 
+    @Deprecated(
+        message =
+            "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use appDetailKeyParameters instead."
+    )
     override fun appDetailParameters(context: Context, hierarchyType: Boolean) =
         WriteSystemPreferencesAppDetailScreen.parameters(context, hierarchyType)
+
+    override fun appDetailKeyParameters(context: Context, hierarchyType: Boolean) =
+        WriteSystemPreferencesAppDetailScreen.keyParameters(context, hierarchyType)
 
     companion object {
         const val KEY = "special_access_write_system_preferences_app_list"
