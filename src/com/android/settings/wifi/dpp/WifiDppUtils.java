@@ -436,7 +436,7 @@ public class WifiDppUtils {
      */
     public static void showLockScreen(@NonNull Context context, @NonNull Runnable successRunnable) {
         KeyguardManager keyguardManager = context.getSystemService(KeyguardManager.class);
-        if (keyguardManager == null || !keyguardManager.isKeyguardSecure()) {
+        if (keyguardManager == null || !keyguardManager.isDeviceSecure()) {
             successRunnable.run();
             return;
         }
@@ -457,7 +457,7 @@ public class WifiDppUtils {
             @NonNull Runnable successRunnable,
             @NonNull CancellationSignal cancellationSignal) {
         KeyguardManager keyguardManager = context.getSystemService(KeyguardManager.class);
-        if (keyguardManager == null || !keyguardManager.isKeyguardSecure()) {
+        if (keyguardManager == null || !keyguardManager.isDeviceSecure()) {
             successRunnable.run();
             return;
         }
@@ -476,7 +476,7 @@ public class WifiDppUtils {
     public static void showLockScreenForWifiSharing(
             @NonNull Context context, @NonNull Runnable successRunnable) {
         KeyguardManager keyguardManager = context.getSystemService(KeyguardManager.class);
-        if (keyguardManager == null || !keyguardManager.isKeyguardSecure()) {
+        if (keyguardManager == null || !keyguardManager.isDeviceSecure()) {
             successRunnable.run();
             return;
         }
@@ -511,14 +511,12 @@ public class WifiDppUtils {
         BiometricPrompt.Builder builder =
                 new BiometricPrompt.Builder(context)
                         .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title));
-        if (keyguardManager.isDeviceSecure()) {
-            builder.setDeviceCredentialAllowed(true);
-            builder.setTextForDeviceCredential(
-                    null /* title */,
-                    Utils.getConfirmCredentialStringForUser(
-                            context, userId, Utils.getCredentialType(context, userId)),
-                    null /* description */);
-        }
+        builder.setDeviceCredentialAllowed(true);
+        builder.setTextForDeviceCredential(
+                null /* title */,
+                Utils.getConfirmCredentialStringForUser(
+                        context, userId, Utils.getCredentialType(context, userId)),
+                null /* description */);
         BiometricPrompt bp = builder.build();
         Handler handler = new Handler(Looper.getMainLooper());
         bp.authenticate(
