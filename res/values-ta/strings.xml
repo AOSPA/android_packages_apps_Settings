@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"செவித்துணைச் சாதன அமைப்புகள்"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"ஷார்ட்கட், செவித்துணைக் கருவியுடனான இணக்கத்தன்மை"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"முன்னமைவு"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"இடது முன்னமைவு"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"வலது முன்னமைவு"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"இடது: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> வலது: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"முன்னமைவுகள் எதையும் உங்கள் ஆடியாலஜிஸ்ட் திட்டமிடவில்லை"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"முன்னமைவைப் புதுப்பிக்க முடியவில்லை"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"சுற்றுப்புறங்கள்"</string>
@@ -2631,7 +2628,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"கலர் இன்வெர்ஷனைப் பயன்படுத்து"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"கலர் இன்வெர்ஷன் ஷார்ட்கட்"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"\'கலர் இன்வெர்ஷன்\' அம்சம் லைட் ஸ்கிரீன்களை டார்க்காக மாற்றும். அதேபோன்று டார்க் ஸ்கிரீன்களை லைட்டாக மாற்றும்."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;கவனத்திற்கு:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt;மீடியாவிலும் படங்களிலும் வண்ணங்கள் மாறும்&lt;/li&gt; &lt;li&gt; கலர் இன்வெர்ஷன் எல்லா ஆப்ஸிலுமே செயல்படும்&lt;/li&gt; &lt;li&gt; டார்க் பின்னணி வேண்டுமெனில் டார்க் தீமினைப் பயன்படுத்திக் கொள்ளலாம்&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;கவனத்திற்கு:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt;மீடியாவிலும் படங்களிலும் வண்ணங்கள் மாறும்&lt;/li&gt; &lt;li&gt; கலர் இன்வெர்ஷன் அனைத்து ஆப்ஸிலும் செயல்படும்&lt;/li&gt; &lt;li&gt; டார்க் பின்னணி வேண்டுமெனில் டார்க் தீமினைப் பயன்படுத்திக் கொள்ளலாம்&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"அமைப்புகளுக்குச் செல்லும்"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"ஆட்டோ கிளிக் (இருப்பு நேரம்)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"ஆட்டோ கிளிக் பற்றி (இருப்பு நேரம்)"</string>
@@ -3398,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"அமைப்பின் CA சான்றிதழை இயக்கவா?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"அமைப்பின் CA சான்றிதழை முடக்கவா?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"பயனரின் CA சான்றிதழை நிரந்தரமாக அகற்றவா?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA சான்றிதழ்கள் சுருக்கப்பட்டுள்ளன, விரிக்க இருமுறை தட்டவும்"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA சான்றிதழ்கள் விரிக்கப்பட்டுள்ளன, சுருக்க இருமுறை தட்டவும்"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"பயன்படுத்துகின்ற நெட்வொர்க்"</string>
     <string name="credential_contains" msgid="3146519680449595771">"இந்த உள்ளீட்டில் இருப்பவை"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 பயனர் குறியீடு"</string>
@@ -3441,8 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"சாதனத்திலிருந்து <xliff:g id="USER_NAME">%1$s</xliff:g> ஐ நீக்கு"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"லாக் ஸ்கிரீன் அமைப்புகள்"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"லாக் ஸ்கிரீனிலிருந்து பயனர்களைச் சேர்"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"உள்நுழைவு திரையில் இருந்து பயனர்களைச் சேருங்கள்"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"இணைந்திருக்கும்போது நிர்வாகப் பயனருக்கு மாறு"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"உங்களை நீக்கவா?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"இந்தப் பயனரை நீக்கவா?"</string>
@@ -4789,7 +4783,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"பேட்டரி சேமிப்பான் காரணமாகத் தற்காலிகமாக முடக்கப்பட்டுள்ளது"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"பேட்டரி சேமிப்பானை முடக்கு"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"பேட்டரி சேமிப்பான் காரணமாக தற்காலிகமாக ஆன் செய்யப்பட்டது"</string>
-    <string name="dark_theme_slice_title" msgid="2376057429427046530">"டார்க் தீம்மை முயல்க"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"டார்க் தீமினைப் பயன்படுத்திப் பாருங்கள்"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"பேட்டரி ஆயுளை நீட்டிக்க உதவும்"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"விரைவு அமைப்புகளின் டெவெலப்பர் கட்டங்கள்"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb அங்கீகரிப்பு நேர முடிவை முடக்குதல்"</string>
@@ -4852,7 +4846,7 @@
     <string name="high_label" msgid="357503396626018487">"அதிகம்"</string>
     <string name="left_edge" msgid="1513576842959071849">"இடதுபுற ஓரம்"</string>
     <string name="right_edge" msgid="1505309103265829121">"வலதுபுற ஓரம்"</string>
-    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"அதிக உணர்திறன் ஆப்ஸ் சைகைகளுடன் திரை ஓரங்களில் முரண்படலாம்."</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"அதிக உணர்திறன் திரை ஓரங்களில் ஆப்ஸ் சைகைகளுடன் முரண்படலாம்."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"பின்செல்வதற்கான உணர்திறன்"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"சைகை வழிசெலுத்தல்"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"டெமோவைப் பாருங்கள்"</string>
@@ -5946,7 +5940,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"பின்னை நீக்குதல்"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"மீட்பு மின்னஞ்சல் முகவரியைச் சேருங்கள்"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"மின்னஞ்சல் முகவரியை உறுதிப்படுத்துங்கள்"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ஆப்ஸ்டோர் ஃபில்டர்கள்"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"இணையதள உள்ளடக்க ஃபில்ட்டர்கள்"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"இணையதள ஃபில்டர்கள், தளங்களைத் தடுத்தல், பிரவுசர் ஃபில்டர்கள், வெளிப்படையான தளங்களைத் தடுத்தல், தளங்களை ஃபில்டர் செய்தல், தேடல் முடிவுகளைத் தடுத்தல், வெளிப்படையான தேடல் முடிவுகளை ஃபில்டர் செய்தல், உள்ளடக்கக் கட்டுப்பாடுகள்"</string>
@@ -5991,10 +5986,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"அடையாளச் சரிபார்ப்பு மேலும் பல ஆப்ஸுடன் செயல்படுகிறது"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"அடையாளச் சரிபார்ப்பு உங்கள் ஆப்ஸுக்கான தேவையற்ற அணுகலைத் தடுக்கிறது. இப்போது கைரேகை அல்லது முகம் காட்டித் திறத்தல் அம்சத்தைப் பயன்படுத்தும் அனைத்து ஆப்ஸிலும் கிடைக்கிறது."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"விவரங்களைக் காட்டு"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"அமைப்புகளைச் சரிபார்க்க முடியவில்லை"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"தகவல்கள் எதுவுமில்லை"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

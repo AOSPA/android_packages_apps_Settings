@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Ustawienia urządzenia słuchowego"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Skrót, zgodność z aparatem słuchowym"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Gotowe ustawienia"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Gotowe ustawienia lewego aparatu słuchowego"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Gotowe ustawienia prawego aparatu słuchowego"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Lewy aparat słuchowy: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Prawy aparat słuchowy: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Twój audiolog nie zaprogramował żadnych gotowych ustawień"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Nie udało się zaktualizować gotowego ustawienia"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Otoczenie"</string>
@@ -2631,7 +2628,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Odwracaj kolory"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Skrót do odwrócenia kolorów"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Odwrócenie kolorów zamienia jasne obszary na ciemne. Z kolei ciemne obszary zamienia na jasne."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Pamiętaj&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Zmienią się kolory w multimediach i na obrazach&lt;/li&gt; &lt;li&gt; Odwrócenie kolorów działa we wszystkich aplikacjach&lt;/li&gt; &lt;li&gt; Ciemne tło można też wyświetlać w ciemnym motywie&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Pamiętaj&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Zmienią się kolory w multimediach i na obrazach&lt;/li&gt; &lt;li&gt; Odwrócenie kolorów działa we wszystkich aplikacjach&lt;/li&gt; &lt;li&gt; Ciemne tło można też uzyskać, wybierając ciemny motyw&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"przejść do ustawień"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Automatyczne kliknięcie (po czasie oczekiwania)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"O automatycznym kliknięciu (po czasie oczekiwania)"</string>
@@ -3398,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Włączyć systemowy certyfikat CA?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Wyłączyć systemowy certyfikat CA?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Trwale usunąć certyfikat CA użytkownika?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> certyfikaty CA, zwinięte, kliknij dwukrotnie, aby rozwinąć"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> certyfikaty CA, rozwinięte, kliknij dwukrotnie, aby zwinąć"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Używane przez aplikację lub usługę"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Ta pozycja zawiera"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 klucz użytkownika"</string>
@@ -3441,8 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Usuń użytkownika <xliff:g id="USER_NAME">%1$s</xliff:g> z tego urządzenia"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Ustawienia ekranu blokady"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Dodawaj użytkowników na ekranie blokady"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Dodawaj użytkowników z poziomu ekranu logowania"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Po zadokowaniu przełącz się na administratora"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Chcesz usunąć siebie?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Usunąć tego użytkownika?"</string>
@@ -5948,7 +5942,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Usuń PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Dodaj pomocniczy adres e-mail"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Potwierdź adres e-mail"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtry sklepu z aplikacjami"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtry treści witryn"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtry witryn, blokowanie witryn, filtry przeglądarki, blokowanie witryn dla pełnoletnich, filtrowanie witryn, blokowanie wyników wyszukiwania, filtrowanie wyników wyszukiwania dla pełnoletnich, ograniczenia treści"</string>
@@ -5993,10 +5988,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Potwierdzenie tożsamości działa z większą liczbą aplikacji"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Potwierdzenie tożsamości zapobiega niepożądanemu dostępowi do Twoich aplikacji. Teraz jest ono dostępne w każdej aplikacji korzystającej z odblokowywania odciskiem palca lub przez rozpoznawanie twarzy."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Wyświetl szczegóły"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Nie udało się sprawdzić ustawień"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Nie ma jeszcze informacji"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

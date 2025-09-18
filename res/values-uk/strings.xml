@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Налаштування слухового апарата"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Ярлик, сумісність зі слуховими апаратами"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Набір налаштувань"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Набір налаштувань для апарата зліва"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Набір налаштувань для апарата справа"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Ліворуч: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g>, праворуч: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Немає наборів налаштувань, запрограмованих вашим аудіологом"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Не вдалось оновити набір налаштувань"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Звуки оточення"</string>
@@ -152,7 +149,7 @@
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Перемикач LE Audio в інф. про пристрій"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Обходити білий список Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio використовуватиметься за умовчанням, навіть якщо периферійний пристрій LE Audio не перевірено на відповідність критеріям білого списку."</string>
-    <string name="connected_device_media_device_title" msgid="3783388247594566734">"Носії"</string>
+    <string name="connected_device_media_device_title" msgid="3783388247594566734">"Медіапристрої"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Пристрої для дзвінків"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Інші пристрої"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Збережені пристрої"</string>
@@ -3398,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Увімкнути сертифікат ЦС для системи?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Вимкнути сертифікат ЦС для системи?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Назавжди видалити сертифікат ЦС для користувача?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"Сертифікати центру сертифікації категорії \"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>\", згорнуто (двічі торкніться, щоб розгорнути)"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"Сертифікати центру сертифікації категорії \"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>\", розгорнуто (двічі торкніться, щоб згорнути)"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Де використовується:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Цей запис містить:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 ключ користувача"</string>
@@ -5686,7 +5681,7 @@
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Синхронізуйте дозволи з телефона"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Надайте годиннику такі самі дозволи для додатків, які ви надали на телефоні"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Тип аудіопристрою"</string>
-    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Не налаштовано"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="5299284975435974206">"Не вказано"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Колонка"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Навушники"</string>
     <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="6311786545025321187">"Слуховий апарат"</string>
@@ -5797,7 +5792,7 @@
     <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Дозволити надсилання аудіо"</string>
     <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Дзвінки й будильники"</string>
     <string name="audio_sharing_description" msgid="1660255584523640628">"Слухайте медіафайли разом з іншими людьми. Для цього їм потрібно мати власні навушники LE Audio."</string>
-    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Активні носії"</string>
+    <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Активні медіапристрої"</string>
     <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Аудіопристрої для дзвінків"</string>
     <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Відтворювати лише на пристрої \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
     <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Перевірити звук"</string>
@@ -5812,7 +5807,7 @@
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Надсилання аудіо підтримує Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Назва потокового аудіо"</string>
     <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Пароль потокового аудіо"</string>
-    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Інші носії"</string>
+    <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Інші медіапристрої"</string>
     <string name="audio_sharing_summary_on" msgid="611197542982323788">"Увімкнено"</string>
     <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Вимкнено"</string>
     <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Надішліть аудіо"</string>
@@ -5948,7 +5943,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Видалити PIN-код"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Додайте резервну електронну адресу"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Підтвердьте електронну адресу"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Фільтри магазину додатків"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Фільтри контенту вебсайтів"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Фільтри вебсайтів, блокувати сайти, фільтри вебпереглядача, блокувати сайти з відвертим контентом, фільтрувати сайти, блокувати результати пошуку, блокувати результати пошуку з відвертим контентом, обмеження контенту"</string>
@@ -5993,10 +5989,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Перевірка особи працює з більшою кількістю додатків"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Перевірка особи запобігає небажаному доступу до ваших додатків. Тепер вона доступна в усіх додатках, де використовується розблокування відбитком пальця або фейс-контроль."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Докладніше"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Не вдалося перевірити налаштування"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Поки немає інформації"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

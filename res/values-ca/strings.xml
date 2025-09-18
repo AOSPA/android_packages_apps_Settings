@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Configuració de l\'audiòfon"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Drecera, compatibilitat amb audiòfons"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Valors predefinits"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Valors predefinits de l\'esquerra"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Valors predefinits de la dreta"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Esquerra: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Dreta: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"L\'audiòleg no ha programat cap valor predefinit"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"No s\'ha pogut actualitzar el valor predefinit"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Entorn"</string>
@@ -3400,10 +3397,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Vols activar el certificat de CA del sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Vols desactivar el certificat de CA del sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Vols suprimir el certificat de CA d\'usuari permanentment?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"Certificats de CA (<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>), replegats; fes doble toc per desplegar-los."</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"Certificats de CA (<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>), desplegats; fes doble toc per replegar-los."</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"En ús per"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Aquesta entrada conté"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 clau d\'usuari"</string>
@@ -3443,8 +3438,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Suprimeix <xliff:g id="USER_NAME">%1$s</xliff:g> del dispositiu"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Configuració de la pantalla de bloqueig"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Afegeix usuaris des de la pantalla de bloqueig"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Afegeix usuaris des de la pantalla d\'inici de sessió"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Canvia a l\'administrador en acoblar-se a la base"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Et vols suprimir a tu mateix?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vols suprimir l\'usuari?"</string>
@@ -5948,7 +5942,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Suprimeix el PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Afegeix una adreça electrònica de recuperació"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verifica l\'adreça electrònica"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtres de la botiga d\'aplicacions"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtres de contingut de llocs web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtres de llocs web, bloqueig de llocs web, filtres del navegador, bloqueig de llocs web explícits, filtració de llocs web, bloqueig de resultats de cerca, filtració de resultats de cerca explícits, restriccions de contingut"</string>
@@ -5993,10 +5988,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Comprovació d\'identitat funciona amb més aplicacions"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Comprovació d\'identitat impedeix l\'accés no desitjat a les teves aplicacions. Ara està disponible amb qualsevol aplicació que utilitzi Desbloqueig amb empremta digital o Desbloqueig facial."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Mostra els detalls"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"No s\'ha pogut comprovar la configuració"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Encara no hi ha informació"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

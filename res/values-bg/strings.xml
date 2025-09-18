@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Настройки за слуховия апарат"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Пряк път, съвместимост със слухови апарати"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Предварително зададено"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Предварително зададено за лявата страна"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Предварително зададено за дясната страна"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Ляво: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g>, дясно: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Няма предвар. зададени стойности, програмирани от аудиолога"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Предварително зададените настройки не бяха актуализирани"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Околни звуци"</string>
@@ -2631,7 +2628,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Използване на инвертиране на цветовете"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Пряк път за инвертиране на цветовете"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Функцията за инвертиране на цветовете превръща светлите цветове на екрана в тъмни, а тъмните – в светли."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Имайте предвид следното&lt;/b&gt;:&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Цветовете в мултимедийното съдържание и изображенията ще се променят.&lt;/li&gt; &lt;li&gt; Функцията за инвертиране на цветовете работи във всички приложения.&lt;/li&gt; &lt;li&gt; Тъмната тема може да се използва за показване на тъмен фон.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Имайте предвид следното&lt;/b&gt;:&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Цветовете в мултимедийното съдържание и изображенията ще се променят.&lt;/li&gt; &lt;li&gt; Функцията за инвертиране на цветовете работи във всички приложения.&lt;/li&gt; &lt;li&gt; Тъмната тема може да се използва за показване на тъмен фон.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"за вход в настройките"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Автоматично кликване (време на задържане на курсора на мишката)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Авт. кликване (време на задържане)"</string>
@@ -3398,10 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Да се активира ли сертификатът от сертифициращ орган за системата?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Да се деактивира ли сертификатът от сертифициращ орган за системата?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Да се премахне ли завинаги сертификатът от сертифициращ орган за потребителя?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> сертификати от сертифициращ орган, свити, докоснете два пъти за разгъване"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> сертификати от сертифициращ орган, разгънати, докоснете два пъти за свиване"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Използва се от"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Този запис съдържа"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 потребителски ключ"</string>
@@ -3441,8 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Изтриване на <xliff:g id="USER_NAME">%1$s</xliff:g> от у-вото"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Настройки на заключения екран"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Добавяне на потребители от заключения екран"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Добавяне на потребители от екрана за вход"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Докинг станция: Превкл. към потр. с админ. достъп"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Искате ли да се изтриете?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Изтриване на потребителя?"</string>
@@ -5946,7 +5940,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Изтриване на ПИН кода"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Добавяне на имейл адрес за възстановяване"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Потвърдете имейл адреса си"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Филтри за магазина за приложения"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Филтри за съдържанието на уебсайтовете"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"филтри за уебсайтове, блокиране на сайтове, филтри на браузъра, блокиране на сайтове с нецензурно съдържание, филтриране на сайтове, блокиране на резултатите от търсенето, филтриране на резултатите от търсенето с нецензурно съдържание, ограничения за съдържанието"</string>
@@ -5991,10 +5986,8 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Функцията за проверка на самоличността работи с повече приложения"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Проверката на самоличността предотвратява нежелан достъп до приложенията ви. Вече е налице за всяко приложение, което използва „Отключване с отпечатък“ или „Отключване с лице“."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Преглед на подробностите"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Настройките не бяха проверени"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Още няма информация"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
