@@ -104,7 +104,7 @@ public class SetupFingerprintEnrollFindSensorTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_SETUPFINGERPRINTENROLLFINDSENSOR_SKIPDIALOG_THEME)
+    @DisableFlags(Flags.FLAG_SETUPFINGERPRINTENROLLFINDSENSOR_SKIPDIALOG_THEMEFIX)
     public void fingerprintEnroll_showsAlert_setAlertDialogTheme() {
         final AlertDialog alertDialog = setupAlertDialog();
 

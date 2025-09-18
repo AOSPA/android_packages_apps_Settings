@@ -79,7 +79,7 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
         @NonNull
         public AlertDialog.Builder onCreateDialogBuilder() {
             AlertDialog.Builder builder;
-            if (Flags.setupfingerprintenrollfindsensorSkipdialogTheme()) {
+            if (Flags.setupfingerprintenrollfindsensorSkipdialogThemefix()) {
                 builder = new AlertDialog.Builder(getActivity());
             } else {
                 builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AlertDialog);
