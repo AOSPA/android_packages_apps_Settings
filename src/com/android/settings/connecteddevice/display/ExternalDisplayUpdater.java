@@ -144,6 +144,11 @@ public class ExternalDisplayUpdater {
                 DisplayDevice::isConnectedDisplay).toList();
         for (var display : allDisplays) {
             if (display.isEnabled() == DisplayIsEnabled.YES) {
+                if (mInjector.getFlags().displayTopologyPaneInDisplayList()) {
+                    // In the new DisplayTopology settings, "External display" preference should
+                    // be displayed without a summary as there's no longer "on" / "off" toggle
+                    return "";
+                }
                 return context.getString(R.string.external_display_on);
             }
         }
