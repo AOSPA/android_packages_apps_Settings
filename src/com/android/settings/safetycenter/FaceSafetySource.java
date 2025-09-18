@@ -92,13 +92,13 @@ public final class FaceSafetySource {
                 EnforcingAdmin admin = faceStatusUtils.getEnforcingAdmin();
                 isFaceDisabledByAdmin = admin != null;
                 biometricSettingsIntent = biometricNavigationUtils.getBiometricSettingsIntent(
-                        context, settingClassName, admin, Bundle.EMPTY);
+                        context, settingClassName, admin, bundle);
             } else {
                 RestrictedLockUtils.EnforcedAdmin disablingAdmin =
                         faceStatusUtils.getDisablingAdmin();
                 isFaceDisabledByAdmin = disablingAdmin != null;
                 biometricSettingsIntent = biometricNavigationUtils.getBiometricSettingsIntent(
-                        context, settingClassName, disablingAdmin, Bundle.EMPTY);
+                        context, settingClassName, disablingAdmin, bundle);
             }
             BiometricSourcesUtils.setBiometricSafetySourceData(
                     SAFETY_SOURCE_ID,
