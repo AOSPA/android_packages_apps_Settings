@@ -16,8 +16,8 @@
 package com.android.settings.appfunctions.intents
 
 import com.android.settings.appfunctions.DeviceStateAppFunctionType.GET_UNCATEGORIZED
-import com.android.settings.appfunctions.providers.StaticIntent
-import com.android.settings.appfunctions.providers.StaticIntents
+import com.android.settings.appfunctions.executors.StaticIntent
+import com.android.settings.appfunctions.executors.StaticIntents
 
 fun getAccessibilityIntents() =
     StaticIntents(
