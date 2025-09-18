@@ -25,7 +25,9 @@ import com.android.settings.Settings.StorageUseActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
+import com.android.settings.spa.app.catalyst.AppInfoStorageScreen.Companion.KEY_APP_PACKAGE_NAME
 import com.android.settings.spa.app.storage.StorageType
+import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -67,17 +69,28 @@ open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyG
         context: Context,
         coroutineScope: CoroutineScope,
         type: Boolean, // whether to include system apps
-    ) = preferenceHierarchy(context) {
-        addAsync(coroutineScope, Dispatchers.Default) {
-            AppListRepositoryImpl(context).loadAndMaybeExcludeSystemApps(context.userId, type)
-                .forEach { app ->
-                    if (StorageType.Apps.filter(app)) {
-                        val arguments = Bundle(1).apply { putString("app", app.packageName) }
-                        +(AppInfoStorageScreen.KEY args arguments)
+    ) =
+        preferenceHierarchy(context) {
+            addAsync(coroutineScope, Dispatchers.Default) {
+                AppListRepositoryImpl(context)
+                    .loadAndMaybeExcludeSystemApps(context.userId, type)
+                    .forEach { app ->
+                        if (StorageType.Apps.filter(app)) {
+                            if (CatalystFlags.catalystUseKeyParameters()) {
+                                val parameters =
+                                    AppInfoStorageScreen.parametersSchema.prepare(
+                                        KEY_APP_PACKAGE_NAME to app.packageName
+                                    )
+                                +(AppInfoStorageScreen.KEY withParameters parameters)
+                            } else {
+                                val arguments =
+                                    Bundle(1).apply { putString("app", app.packageName) }
+                                +(AppInfoStorageScreen.KEY args arguments)
+                            }
+                        }
                     }
-                }
+            }
         }
-    }
 
     companion object {
         const val KEY = "device_state_apps_storage"
