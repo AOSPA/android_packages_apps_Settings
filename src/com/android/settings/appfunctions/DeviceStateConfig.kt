@@ -31,8 +31,7 @@ enum class DeviceStateAppFunctionType(val functionId: String) {
     // AppFunctions for setting device state
     SET_DEVICE_STATE("setDeviceStateItem"),
     ADJUST_DEVICE_STATE_BY_PERCENTAGE("adjustNumericDeviceStateItemByPercentage"),
-    OFFSET_DEVICE_STATE_BY_VALUE("offsetNumericDeviceStateItemByValue"),
-    TOGGLE_DEVICE_STATE("toggleDeviceStateItem");
+    OFFSET_DEVICE_STATE_BY_VALUE("offsetNumericDeviceStateItemByValue");
 
     companion object {
         fun fromId(functionId: String): DeviceStateAppFunctionType? {

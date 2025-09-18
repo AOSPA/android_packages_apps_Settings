@@ -74,7 +74,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                 applicationContext,
                 englishContext,
             ),
-            AndroidApiStateMetadataProviderExecutor(applicationContext)
+            AndroidApiStateMetadataProviderExecutor(applicationContext),
         )
     }
     val deviceStateMetadataProviderAggregator by lazy {
@@ -101,7 +101,6 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
             DeviceStateAppFunctionType.ADJUST_DEVICE_STATE_BY_PERCENTAGE to
                 deviceStateSetterAggregator,
             DeviceStateAppFunctionType.OFFSET_DEVICE_STATE_BY_VALUE to deviceStateSetterAggregator,
-            DeviceStateAppFunctionType.TOGGLE_DEVICE_STATE to deviceStateSetterAggregator,
         )
     }
 
