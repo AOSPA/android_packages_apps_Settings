@@ -18,8 +18,8 @@ package com.android.settings.appfunctions
 
 import android.app.appsearch.GenericDocument
 import androidx.annotation.Keep
-import com.android.settings.appfunctions.providers.DeviceStateExecutor
-import com.android.settings.appfunctions.providers.DeviceStateExecutorResult
+import com.android.settings.appfunctions.executors.DeviceStateExecutor
+import com.android.settings.appfunctions.executors.DeviceStateExecutorResult
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateResponse
 import com.google.android.appfunctions.schema.common.v1.devicestate.SetDeviceStateItemResponse
 import kotlinx.coroutines.async
@@ -66,11 +66,10 @@ class DeviceStateSetterAggregator(private val executors: List<DeviceStateExecuto
             //  moment we're always returning a dummy result from catalyst so will cause an
             //  exception if combined with any result from AndroidApiStateSetterExecutor implemented
             //  by OEMs.
-            else -> validResults.first()
-        //            1 -> validResults.first()
-        //            else -> throw IllegalStateException("Multiple executors found for
-        // $appFunctionType" +
-        //                    "with params $params")
+            1 -> validResults.first()
+            2 -> validResults.first { it.currentValue != "dummyValue" }
+            else -> throw IllegalStateException("Multiple executors found for" +
+                    "$appFunctionType" + "with params $params")
         }
     }
 }
