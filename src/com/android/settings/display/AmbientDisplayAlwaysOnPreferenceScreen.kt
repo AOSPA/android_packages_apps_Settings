@@ -29,7 +29,7 @@ import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.contract.KEY_AMBIENT_DISPLAY_ALWAYS_ON
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime
+import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceScreenController.isAodSuppressedByBedtime
 import com.android.settings.display.ambient.AmbientDisplayIllustration
 import com.android.settings.display.ambient.AmbientDisplayMainSwitchPreference
 import com.android.settings.display.ambient.AmbientDisplayStorage
@@ -54,7 +54,6 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.systemui.shared.Flags.ambientAod
 import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
@@ -77,7 +76,7 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     private lateinit var keyedObserver: KeyedObserver<String>
 
     override val title: Int
-        get() = if (ambientAod()) R.string.doze_always_on_title2 else R.string.doze_always_on_title
+        get() = R.string.doze_always_on_title2
 
     override val key: String
         get() = KEY
@@ -104,7 +103,6 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override fun isAvailable(context: Context): Boolean {
-        if (!ambientAod()) return false
         return !SystemProperties.getBoolean(PROP_AWARE_AVAILABLE, false) &&
             AmbientDisplayConfiguration(context).alwaysOnAvailableForUser(UserHandle.myUserId())
     }
@@ -180,11 +178,10 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
         const val PROP_AWARE_AVAILABLE = "ro.vendor.aware_available"
 
         private val Context.isAmbientWallpaperOptionsAvailable: Boolean
-            get() = ambientAod() && resources.getBoolean(config_dozeSupportsAodWallpaper)
+            get() = resources.getBoolean(config_dozeSupportsAodWallpaper)
     }
 }
-
-// LINT.ThenChange(AmbientDisplayAlwaysOnPreferenceController.java)
+// LINT.ThenChange(AmbientDisplayAlwaysOnPreferenceScreenController.java)
 
 class AmbientDisplayAlwaysOnActivity :
     CatalystSettingsActivity(

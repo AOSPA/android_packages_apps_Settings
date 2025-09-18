@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,7 @@
  */
 package com.android.settings.display;
 
-import static com.android.systemui.shared.Flags.ambientAod;
-
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.PowerManager;
 import android.os.SystemProperties;
@@ -31,18 +28,91 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
-public class AmbientDisplayAlwaysOnPreferenceScreenController extends 
-        AmbientDisplayAlwaysOnPreferenceController {
+// LINT.IfChange
+public class AmbientDisplayAlwaysOnPreferenceScreenController extends TogglePreferenceController {
+
+    private final int ON = 1;
+    private final int OFF = 0;
+
+    private static final int MY_USER = UserHandle.myUserId();
+    private static final String PROP_AWARE_AVAILABLE = "ro.vendor.aware_available";
+
+    private AmbientDisplayConfiguration mConfig;
 
     public AmbientDisplayAlwaysOnPreferenceScreenController(Context context, String key) {
         super(context, key);
     }
 
-    /**
-     * Assists in migrating the AOD setting to the Display subpage.
-     */
     @Override
-    protected boolean ambientAodMigration() {
-        return ambientAod();
+    public int getAvailabilityStatus() {
+        return isAvailable(getConfig())
+                && !SystemProperties.getBoolean(PROP_AWARE_AVAILABLE, false) ?
+                AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        refreshSummary(preference);
+    }
+
+    @Override
+    public boolean isSliceable() {
+        return true;
+    }
+
+    @Override
+    public boolean isPublicSlice() {
+        return TextUtils.equals(getPreferenceKey(), "ambient_display_always_on");
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
+    }
+
+    @Override
+    public boolean isChecked() {
+        return getConfig().alwaysOnEnabled(MY_USER);
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        int enabled = isChecked ? ON : OFF;
+        Settings.Secure.putInt(
+                mContext.getContentResolver(), Settings.Secure.DOZE_ALWAYS_ON, enabled);
+        return true;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return mContext.getText(
+                isAodSuppressedByBedtime(mContext) ? R.string.aware_summary_when_bedtime_on
+                        : R.string.doze_always_on_summary);
+    }
+
+    public AmbientDisplayAlwaysOnPreferenceScreenController setConfig(
+            AmbientDisplayConfiguration config) {
+        mConfig = config;
+        return this;
+    }
+
+    public static boolean isAvailable(AmbientDisplayConfiguration config) {
+        return config.alwaysOnAvailableForUser(MY_USER);
+    }
+
+    private AmbientDisplayConfiguration getConfig() {
+        if (mConfig == null) {
+            mConfig = new AmbientDisplayConfiguration(mContext);
+        }
+        return mConfig;
+    }
+
+    /**
+     * Returns whether AOD is suppressed by Bedtime mode, a feature of Digital Wellbeing.
+     */
+    public static boolean isAodSuppressedByBedtime(Context context) {
+        return context.getSystemService(PowerManager.class).isAmbientDisplaySuppressed();
     }
 }
+// LINT.ThenChange(AmbientDisplayAlwaysOnPreferenceScreen.kt)

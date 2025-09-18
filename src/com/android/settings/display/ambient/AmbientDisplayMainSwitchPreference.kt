@@ -20,7 +20,6 @@ import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
-import com.android.systemui.shared.Flags.ambientAod
 
 class AmbientDisplayMainSwitchPreference : BooleanValuePreference, MainSwitchPreferenceBinding {
 
@@ -28,7 +27,7 @@ class AmbientDisplayMainSwitchPreference : BooleanValuePreference, MainSwitchPre
         get() = KEY
 
     override val title
-        get() = if (ambientAod()) R.string.doze_always_on_title2 else R.string.doze_always_on_title
+        get() = R.string.doze_always_on_title2
 
     override fun storage(context: Context): KeyValueStore = AmbientDisplayStorage(context)
 

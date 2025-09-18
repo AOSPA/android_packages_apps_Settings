@@ -33,7 +33,7 @@ import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
+import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceScreenController;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
 
@@ -102,7 +102,7 @@ public class WhenToDreamPreferenceControllerTest {
         when(mBackend.getWhenToDreamSetting()).thenReturn(DreamBackend.WHILE_CHARGING);
         when(mPowerManager.isAmbientDisplaySuppressed()).thenReturn(true);
 
-        assertTrue(AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime(mContext));
+        assertTrue(AmbientDisplayAlwaysOnPreferenceScreenController.isAodSuppressedByBedtime(mContext));
 
         mController.updateState(mockPref);
         verify(mockPref).setSummary(R.string.screensaver_unavailable_due_to_mode);
