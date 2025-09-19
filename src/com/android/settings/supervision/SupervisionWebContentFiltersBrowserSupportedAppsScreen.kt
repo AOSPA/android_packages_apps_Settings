@@ -22,7 +22,6 @@ import com.android.settings.R
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
-import com.android.settingslib.utils.StringUtil
 
 /** Activity to display [SupervisionWebContentFiltersBrowserSupportedAppsScreen]. */
 class SupervisionWebContentFiltersBrowserSupportedAppsActivity :
@@ -43,13 +42,6 @@ open class SupervisionWebContentFiltersBrowserSupportedAppsScreen :
 
     override val screenTitle: Int
         get() = R.string.supervision_web_content_filters_browser_filter_title
-
-    override fun getTitle(context: Context): CharSequence? =
-        StringUtil.getIcuPluralsString(
-            context,
-            supportedApps.size,
-            R.string.supervision_web_content_filters_switch_summary,
-        )
 
     override fun getMetricsCategory() =
         SettingsEnums.SUPERVISION_WEB_CONTENT_FILTERS_BROWSER_SUPPORTED_APPS

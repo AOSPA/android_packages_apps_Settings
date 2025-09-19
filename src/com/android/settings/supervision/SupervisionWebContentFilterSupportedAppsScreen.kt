@@ -17,14 +17,21 @@ package com.android.settings.supervision
 
 import android.app.supervision.flags.Flags
 import android.content.Context
+import android.content.pm.PackageManager
+import android.util.Log
+import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.supervision.ipc.SupportedApp
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.preference.PreferenceBinding
+import com.android.settingslib.supervision.SupervisionLog.TAG
+import com.android.settingslib.utils.StringUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,9 +39,16 @@ import kotlinx.coroutines.withContext
 
 /** Abstract base class for screens displaying supported apps for web content filters. */
 abstract class SupervisionWebContentFilterSupportedAppsScreen :
-    PreferenceScreenMixin, PreferenceLifecycleProvider, PreferenceTitleProvider {
+    PreferenceScreenMixin, PreferenceLifecycleProvider, PreferenceTitleProvider, PreferenceBinding {
     protected var supportedApps: List<SupportedApp> = emptyList()
     private var supervisionClient: SupervisionMessengerClient? = null
+
+    override fun getTitle(context: Context): CharSequence? =
+        StringUtil.getIcuPluralsString(
+            context,
+            supportedApps.size,
+            R.string.supervision_web_content_filters_switch_summary,
+        )
 
     /** The key used to fetch the list of supported apps from [SupervisionMessengerClient]. */
     abstract val supportedAppsKey: String
@@ -52,17 +66,52 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
             supervisionClient ?: SupervisionMessengerClient(context).also { supervisionClient = it }
 
         context.lifecycleScope.launch {
-            supportedApps =
+            val rawSupportedApps =
                 withContext(Dispatchers.IO) {
                         supervisionClient?.getSupportedApps(listOf(supportedAppsKey))
                     }
                     ?.get(supportedAppsKey) ?: emptyList()
+
+            supportedApps =
+                rawSupportedApps
+                    .filter { it.packageName != null }
+                    .filter { supportedApp ->
+                        val packageName = supportedApp.packageName!!
+                        try {
+                            context.packageManager.getApplicationInfo(packageName, 0)
+                            true
+                        } catch (e: PackageManager.NameNotFoundException) {
+                            Log.d(
+                                TAG,
+                                "Package not found for supported app, skipping: $packageName",
+                                e,
+                            )
+                            false
+                        } catch (e: Exception) {
+                            Log.d(
+                                TAG,
+                                "Exception thrown for supported app, skipping: $packageName",
+                                e,
+                            )
+                            false
+                        }
+                    }
             context.notifyPreferenceChange(key)
         }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
         supervisionClient?.close()
+    }
+
+    override fun createWidget(context: Context): Preference =
+        SupervisionWebContentFiltersSupportedAppsEntryPointPreference(context, supportedApps)
+
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+        if (preference is SupervisionWebContentFiltersSupportedAppsEntryPointPreference) {
+            preference.updateSupportedApps(supportedApps)
+        }
     }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
