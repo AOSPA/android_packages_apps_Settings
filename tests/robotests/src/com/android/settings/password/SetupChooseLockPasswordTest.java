@@ -21,6 +21,8 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_U
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
+import static org.junit.Assert.assertThrows;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -217,6 +219,23 @@ public class SetupChooseLockPasswordTest {
         final AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(chooserDialog).isNotNull();
         assertThat(shadowImm.isSoftInputVisible()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_HIDE_LSKF_SKIP_DURING_SUW)
+    public void createActivity_skipButtonInIntroductionStage_shouldBeGoneFeature() {
+        SettingsShadowResources.overrideResource(R.bool.config_hide_skip_security_options_in_suw,
+                true);
+
+        SetupChooseLockPassword activity = createSetupChooseLockPassword();
+        final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        final Button skipOrClearButton =
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
+
+        assertThat(skipOrClearButton).isNotNull();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.GONE);
+
+        assertThrows(IllegalStateException.class, () -> skipOrClearButton.performClick());
     }
 
     @Test
