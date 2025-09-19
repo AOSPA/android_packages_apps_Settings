@@ -156,7 +156,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (sIsPatternInputClickSupportedForTesting != null) {
                 return sIsPatternInputClickSupportedForTesting;
             }
-            return Flags.enablePatternInputClickSupport()
+            return Flags.patternInputClickSupport()
                     && getResources().getBoolean(R.bool.config_enable_pattern_input_click_support);
         }
 
