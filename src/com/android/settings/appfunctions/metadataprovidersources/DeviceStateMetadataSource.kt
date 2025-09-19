@@ -21,9 +21,7 @@ import androidx.annotation.Keep
 import com.android.settings.appfunctions.stateprovidersources.SharedDeviceStateData
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenMetadata
 
-/**
- * Retrieves a specific aspect of the device's state metadata directly from Android APIs.
- */
+/** Retrieves a specific aspect of the device's state metadata directly from Android APIs. */
 @Keep
 interface DeviceStateMetadataSource {
 
@@ -32,8 +30,8 @@ interface DeviceStateMetadataSource {
      *
      * @param context The Android [android.content.Context] which might be needed to access system
      *   services or resources.
-     * @param sharedDeviceStateData Data shared by multiple [DeviceStateMetadataSource]s, which is computed
-     *   lazily.
+     * @param sharedDeviceStateData Data shared by multiple [DeviceStateMetadataSource]s, which is
+     *   computed lazily.
      * @return A [PerScreenMetadata] object.
      */
     suspend fun get(

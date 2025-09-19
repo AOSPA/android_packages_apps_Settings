@@ -68,8 +68,10 @@ class DeviceStateSetterAggregator(private val executors: List<DeviceStateExecuto
             //  by OEMs.
             1 -> validResults.first()
             2 -> validResults.first { it.currentValue != "dummyValue" }
-            else -> throw IllegalStateException("Multiple executors found for" +
-                    "$appFunctionType" + "with params $params")
+            else ->
+                throw IllegalStateException(
+                    "Multiple executors found for" + "$appFunctionType" + "with params $params"
+                )
         }
     }
 }

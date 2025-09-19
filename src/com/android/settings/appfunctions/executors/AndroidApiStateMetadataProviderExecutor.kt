@@ -32,8 +32,8 @@ import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
 
 /**
- * A [DeviceStateExecutor] that provides device state metadata information
- * directly from Android APIs rather than using Catalyst.
+ * A [DeviceStateExecutor] that provides device state metadata information directly from Android
+ * APIs rather than using Catalyst.
  *
  * @param context The application context.
  */

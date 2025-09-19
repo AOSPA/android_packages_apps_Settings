@@ -21,7 +21,6 @@ import android.util.Log
 import com.google.android.appfunctions.schema.common.v1.devicestate.AdjustNumericDeviceStateItemByPercentageParams
 import com.google.android.appfunctions.schema.common.v1.devicestate.OffsetNumericDeviceStateItemByValueParams
 import com.google.android.appfunctions.schema.common.v1.devicestate.SetDeviceStateItemParams
-import com.google.android.appfunctions.schema.common.v1.devicestate.ToggleDeviceStateItemParams
 import java.lang.IllegalArgumentException
 
 /**
@@ -45,8 +44,6 @@ class GenericDeviceStateItemSetterParams(
                 parseOffsetNumericDeviceStateItemByValueParams(params)
             DeviceStateAppFunctionType.ADJUST_DEVICE_STATE_BY_PERCENTAGE ->
                 parseAdjustNumericDeviceStateItemByPercentageParams(params)
-            DeviceStateAppFunctionType.TOGGLE_DEVICE_STATE ->
-                parseToggleDeviceStateItemParams(params)
             else -> {
                 throw IllegalArgumentException("Unrecognised appFunctionType: $appFunctionType")
             }
@@ -87,17 +84,6 @@ class GenericDeviceStateItemSetterParams(
         return params as AdjustNumericDeviceStateItemByPercentageParams
     }
 
-    /**
-     * Returns the parsed ToggleDeviceStateItemParams if the provided appFunctionType was
-     * TOGGLE_DEVICE_STATE, otherwise throws an Exception.
-     */
-    fun getToggleDeviceStateItemParams(): ToggleDeviceStateItemParams {
-        check(appFunctionType == DeviceStateAppFunctionType.TOGGLE_DEVICE_STATE) {
-            "Requesting getToggleDeviceStateItemParams for a $appFunctionType params."
-        }
-        return params as ToggleDeviceStateItemParams
-    }
-
     /** Returns the non-parametrised preference key. */
     fun getKey(): String {
         return when (appFunctionType) {
@@ -106,7 +92,6 @@ class GenericDeviceStateItemSetterParams(
                 getOffsetNumericDeviceStateItemByValueParams().key
             DeviceStateAppFunctionType.ADJUST_DEVICE_STATE_BY_PERCENTAGE ->
                 getAdjustNumericDeviceStateItemByPercentageParams().key
-            DeviceStateAppFunctionType.TOGGLE_DEVICE_STATE -> getToggleDeviceStateItemParams().key
             else -> {
                 throw IllegalStateException("Invalid app function type $appFunctionType")
             }
@@ -114,92 +99,99 @@ class GenericDeviceStateItemSetterParams(
     }
 
     private fun parseSetDeviceStateItemParams(params: GenericDocument): SetDeviceStateItemParams {
-        val unparsedParams = requireNotNull(
-            params.getPropertyDocument(SET_DEVICE_STATE_ITEM_PARAMS)) {
-            "Missing setDeviceStateItemParams in the request: $params"
+        val unparsedParams =
+            requireNotNull(params.getPropertyDocument(SET_DEVICE_STATE_ITEM_PARAMS)) {
+                "Missing setDeviceStateItemParams in the request: $params"
             }
         Log.i(TAG, "Found setDeviceStateItemParams: $unparsedParams")
-        val key = requireNotNull(
-            unparsedParams.getPropertyString(PREFERENCE_KEY)) {
-            "Missing key in the params: $unparsedParams"
-        }
-        val itemizationKeys = unparsedParams.getPropertyStringArray(ITEMIZATION_KEYS)?.toList()
-            ?: emptyList()
-        val value = requireNotNull(unparsedParams.getPropertyString(VALUE)) {
-            "Missing value in the params: $unparsedParams"
-        }
-        val requestInitiatedWhileUnlocked = unparsedParams.getPropertyBoolean(REQUEST_INITIATED_WHILE_UNLOCKED)
-        return SetDeviceStateItemParams(key = key, value = value, itemizationKeys = itemizationKeys, requestInitiatedWhileUnlocked = requestInitiatedWhileUnlocked)
-
+        val key =
+            requireNotNull(unparsedParams.getPropertyString(PREFERENCE_KEY)) {
+                "Missing key in the params: $unparsedParams"
+            }
+        val itemizationKeys =
+            unparsedParams.getPropertyStringArray(ITEMIZATION_KEYS)?.toList() ?: emptyList()
+        val value =
+            requireNotNull(unparsedParams.getPropertyString(VALUE)) {
+                "Missing value in the params: $unparsedParams"
+            }
+        val requestInitiatedWhileUnlocked =
+            unparsedParams.getPropertyBoolean(REQUEST_INITIATED_WHILE_UNLOCKED)
+        return SetDeviceStateItemParams(
+            key = key,
+            value = value,
+            itemizationKeys = itemizationKeys,
+            requestInitiatedWhileUnlocked = requestInitiatedWhileUnlocked,
+        )
     }
 
     private fun parseOffsetNumericDeviceStateItemByValueParams(
         params: GenericDocument
     ): OffsetNumericDeviceStateItemByValueParams {
-        val unparsedParams = requireNotNull(
-            params.getPropertyDocument(OFFSET_NUMERIC_DEVICE_STATE_ITEM_BY_VALUE_PARAMS)) {
-            "Missing offsetNumericDeviceStateItemByValueParams in the request: $params"
-        }
+        val unparsedParams =
+            requireNotNull(
+                params.getPropertyDocument(OFFSET_NUMERIC_DEVICE_STATE_ITEM_BY_VALUE_PARAMS)
+            ) {
+                "Missing offsetNumericDeviceStateItemByValueParams in the request: $params"
+            }
         Log.i(TAG, "Found offsetNumericDeviceStateItemByValueParams: $unparsedParams")
-        val key = requireNotNull(
-            unparsedParams.getPropertyString(PREFERENCE_KEY)) {
-            "Missing key in the params: $unparsedParams"
-        }
-        val itemizationKeys = unparsedParams.getPropertyStringArray(ITEMIZATION_KEYS)?.toList()
-            ?: emptyList()
-        val valueAdjustment = requireNotNull(unparsedParams.getPropertyDouble(
-            VALUE_ADJUSTMENT)) {
-            "Missing valueAdjustment in the params: $unparsedParams"
-        }
-        val requestInitiatedWhileUnlocked = unparsedParams.getPropertyBoolean(REQUEST_INITIATED_WHILE_UNLOCKED)
-        return OffsetNumericDeviceStateItemByValueParams(key = key, valueAdjustment = valueAdjustment, itemizationKeys = itemizationKeys, requestInitiatedWhileUnlocked = requestInitiatedWhileUnlocked)
+        val key =
+            requireNotNull(unparsedParams.getPropertyString(PREFERENCE_KEY)) {
+                "Missing key in the params: $unparsedParams"
+            }
+        val itemizationKeys =
+            unparsedParams.getPropertyStringArray(ITEMIZATION_KEYS)?.toList() ?: emptyList()
+        val valueAdjustment =
+            requireNotNull(unparsedParams.getPropertyDouble(VALUE_ADJUSTMENT)) {
+                "Missing valueAdjustment in the params: $unparsedParams"
+            }
+        val requestInitiatedWhileUnlocked =
+            unparsedParams.getPropertyBoolean(REQUEST_INITIATED_WHILE_UNLOCKED)
+        return OffsetNumericDeviceStateItemByValueParams(
+            key = key,
+            valueAdjustment = valueAdjustment,
+            itemizationKeys = itemizationKeys,
+            requestInitiatedWhileUnlocked = requestInitiatedWhileUnlocked,
+        )
     }
 
     private fun parseAdjustNumericDeviceStateItemByPercentageParams(
         params: GenericDocument
     ): AdjustNumericDeviceStateItemByPercentageParams {
-        val unparsedParams = requireNotNull(
-            params.getPropertyDocument(ADJUST_NUMERIC_DEVICE_STATE_ITEM_BY_PERCENTAGE_PARAMS)) {
-            "Missing adjustNumericDeviceStateItemByPercentageParams in the request: $params"
-        }
+        val unparsedParams =
+            requireNotNull(
+                params.getPropertyDocument(ADJUST_NUMERIC_DEVICE_STATE_ITEM_BY_PERCENTAGE_PARAMS)
+            ) {
+                "Missing adjustNumericDeviceStateItemByPercentageParams in the request: $params"
+            }
         Log.i(TAG, "Found adjustNumericDeviceStateItemByPercentageParams: $unparsedParams")
-        val key = requireNotNull(
-            unparsedParams.getPropertyString(PREFERENCE_KEY)) {
-            "Missing key in the params: $unparsedParams"
-        }
-        val itemizationKeys = unparsedParams.getPropertyStringArray(ITEMIZATION_KEYS)?.toList()
-            ?: emptyList()
-        val percentageAdjustment = requireNotNull(unparsedParams.getPropertyLong(
-            PERCENTAGE_ADJUSTMENT).toInt()) {
-            "Missing valueAdjustment in the params: $unparsedParams"
-        }
-        val requestInitiatedWhileUnlocked = unparsedParams.getPropertyBoolean(REQUEST_INITIATED_WHILE_UNLOCKED)
-        return AdjustNumericDeviceStateItemByPercentageParams(key = key, percentageAdjustment = percentageAdjustment, itemizationKeys = itemizationKeys, requestInitiatedWhileUnlocked = requestInitiatedWhileUnlocked)
-    }
-
-    private fun parseToggleDeviceStateItemParams(
-        params: GenericDocument?
-    ): ToggleDeviceStateItemParams {
-        val toggleDeviceStateParams = ToggleDeviceStateItemParams(key = "key")
-
-        val unparsedParams = params?.getPropertyDocument("toggleDeviceStateItemParams")
-        if (unparsedParams == null) {
-            throw IllegalArgumentException(
-                "Missing toggleDeviceStateItemParams in the request: $params"
-            )
-        } else {
-            Log.i(TAG, "Found toggleDeviceStateItemParams: $unparsedParams")
-            // TODO: need to manually parse and construct the object
-        }
-        return toggleDeviceStateParams
+        val key =
+            requireNotNull(unparsedParams.getPropertyString(PREFERENCE_KEY)) {
+                "Missing key in the params: $unparsedParams"
+            }
+        val itemizationKeys =
+            unparsedParams.getPropertyStringArray(ITEMIZATION_KEYS)?.toList() ?: emptyList()
+        val percentageAdjustment =
+            requireNotNull(unparsedParams.getPropertyLong(PERCENTAGE_ADJUSTMENT).toInt()) {
+                "Missing valueAdjustment in the params: $unparsedParams"
+            }
+        val requestInitiatedWhileUnlocked =
+            unparsedParams.getPropertyBoolean(REQUEST_INITIATED_WHILE_UNLOCKED)
+        return AdjustNumericDeviceStateItemByPercentageParams(
+            key = key,
+            percentageAdjustment = percentageAdjustment,
+            itemizationKeys = itemizationKeys,
+            requestInitiatedWhileUnlocked = requestInitiatedWhileUnlocked,
+        )
     }
 
     companion object {
         private const val TAG = "GenericDeviceStateItemSetterParams"
 
         private const val SET_DEVICE_STATE_ITEM_PARAMS = "setDeviceStateItemParams"
-        private const val OFFSET_NUMERIC_DEVICE_STATE_ITEM_BY_VALUE_PARAMS = "offsetNumericDeviceStateItemByValueParams"
-        private const val ADJUST_NUMERIC_DEVICE_STATE_ITEM_BY_PERCENTAGE_PARAMS = "adjustNumericDeviceStateItemByPercentageParams"
+        private const val OFFSET_NUMERIC_DEVICE_STATE_ITEM_BY_VALUE_PARAMS =
+            "offsetNumericDeviceStateItemByValueParams"
+        private const val ADJUST_NUMERIC_DEVICE_STATE_ITEM_BY_PERCENTAGE_PARAMS =
+            "adjustNumericDeviceStateItemByPercentageParams"
 
         private const val PREFERENCE_KEY = "key"
         private const val ITEMIZATION_KEYS = "itemizationKeys"

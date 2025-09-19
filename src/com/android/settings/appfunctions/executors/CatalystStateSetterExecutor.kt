@@ -50,7 +50,8 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
             // TODO: replace with actual result
             var dummyResult =
                 SetDeviceStateItemResponse(isSuccessful = true, currentValue = "dummyValue")
-            return result?.let { DeviceStateSetterExecutorResult(result = it) } ?: DeviceStateSetterExecutorResult(result = dummyResult)
+            return result?.let { DeviceStateSetterExecutorResult(result = it) }
+                ?: DeviceStateSetterExecutorResult(result = dummyResult)
         } catch (e: Exception) {
             Log.e(TAG, "error executing $appFunctionType", e)
             return DeviceStateSetterExecutorResult(result = null)
@@ -69,8 +70,6 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
                 offsetNumericDeviceStateByValue(parsedParams)
             DeviceStateAppFunctionType.ADJUST_DEVICE_STATE_BY_PERCENTAGE ->
                 adjustNumericDeviceStateByPercentage(parsedParams)
-            DeviceStateAppFunctionType.TOGGLE_DEVICE_STATE ->
-                toggleDeviceStateItemParams(parsedParams)
             else -> {
                 Log.i(TAG, "Unrecognised appFunctionType: $appFunctionType")
                 return null
@@ -100,15 +99,6 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
         genericParams: GenericDeviceStateItemSetterParams
     ): SetDeviceStateItemResponse? {
         val params = genericParams.getAdjustNumericDeviceStateItemByPercentageParams()
-        // TODO: call into appropriate setter APIs
-
-        return null
-    }
-
-    private fun toggleDeviceStateItemParams(
-        genericParams: GenericDeviceStateItemSetterParams
-    ): SetDeviceStateItemResponse? {
-        val params = genericParams.getToggleDeviceStateItemParams()
         // TODO: call into appropriate setter APIs
 
         return null
