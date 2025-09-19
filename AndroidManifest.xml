@@ -4005,6 +4005,18 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_network"/>
         </activity>
+        <activity
+            android:name="Settings$BillingCycleActivity"
+            android:featureFlag="com.android.settings.flags.deeplink_network_and_internet_25q4"
+            android:exported="true"
+            android:label="@string/billing_cycle">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MOBILE_DATA_USAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_network"/>
+        </activity>
 
         <activity
             android:name="Settings$DreamSettingsActivity"
@@ -4826,6 +4838,18 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
+
+        <activity-alias android:name="WifiControlAppDetailIntent"
+            android:exported="true"
+            android:targetActivity=".spa.SpaAppBridgeActivity">
+            <intent-filter>
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                android:value="TogglePermissionAppInfoPage/WifiControl"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
+        </activity-alias>
 
         <activity
             android:name="Settings$AlarmsAndRemindersActivity"

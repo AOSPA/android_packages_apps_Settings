@@ -71,10 +71,7 @@ open class WriteSystemPreferencesAppDetailScreen(context: Context, arguments: Bu
         fun parameters(context: Context, showSystemApp: Boolean) =
             parameters(context, showSystemApp, ::writeSystemPreferencesFilter)
 
-        private fun writeSystemPreferencesFilter(
-            context: Context,
-            appInfo: ApplicationInfo?,
-        ): Boolean {
+        fun writeSystemPreferencesFilter(context: Context, appInfo: ApplicationInfo?): Boolean {
             if (appInfo == null) return false
             val packageInfo =
                 context.getPackageInfoWithPermissions(appInfo.packageName) ?: return false

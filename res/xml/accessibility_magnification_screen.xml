@@ -22,7 +22,8 @@
     <com.android.settingslib.widget.TopIntroPreference
         android:key="top_intro"
         android:title="@string/accessibility_screen_magnification_intro_text"
-        app:searchable="false" />
+        app:searchable="false"
+        app:isPreferenceVisible="false"/>
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="animated_image"

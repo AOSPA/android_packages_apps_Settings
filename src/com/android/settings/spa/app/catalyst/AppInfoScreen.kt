@@ -23,11 +23,21 @@ import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
+import com.android.settings.applications.applicationInfoComparator
 import com.android.settings.applications.packageName
+import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppDetailScreen
+import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppDetailScreen.Companion.alarmsAndRemindersFilter
 import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen
 import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen.Companion.displayOverOtherAppsFilter
+import com.android.settings.applications.specialaccess.InstallUnknownAppsAppDetailScreen
+import com.android.settings.applications.specialaccess.InstallUnknownAppsAppDetailScreen.Companion.installUnknownAppsFilter
+import com.android.settings.applications.specialaccess.ManageWriteSettingsAppDetailScreen
+import com.android.settings.applications.specialaccess.ManageWriteSettingsAppDetailScreen.Companion.manageWriteSettingsFilter
 import com.android.settings.applications.specialaccess.SpecialAccessAppDetailScreen.Companion.hasSpecialAccessPermission
+import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen
+import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen.Companion.writeSystemPreferencesFilter
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen.Companion.pictureInPictureFilter
 import com.android.settings.core.PreferenceScreenMixin
@@ -79,11 +89,23 @@ open class AppInfoScreen(context: Context, override val arguments: Bundle) :
         preferenceHierarchy(context) {
             +PreferenceCategory("advanced_app_info", R.string.advanced_apps) += {
                 arguments.putString("source", SOURCE)
+                if (hasSpecialAccessPermission(context, appInfo, ::displayOverOtherAppsFilter)) {
+                    +(DisplayOverOtherAppsAppDetailScreen.KEY args arguments)
+                }
+                if (hasSpecialAccessPermission(context, appInfo, ::manageWriteSettingsFilter)) {
+                    +(ManageWriteSettingsAppDetailScreen.KEY args arguments)
+                }
                 if (hasSpecialAccessPermission(context, appInfo, ::pictureInPictureFilter)) {
                     +(PictureInPictureAppDetailScreen.KEY args arguments)
                 }
-                if (hasSpecialAccessPermission(context, appInfo, ::displayOverOtherAppsFilter)) {
-                    +(DisplayOverOtherAppsAppDetailScreen.KEY args arguments)
+                if (hasSpecialAccessPermission(context, appInfo, ::installUnknownAppsFilter)) {
+                    +(InstallUnknownAppsAppDetailScreen.KEY args arguments)
+                }
+                if (hasSpecialAccessPermission(context, appInfo, ::alarmsAndRemindersFilter)) {
+                    +(AlarmsAndRemindersAppDetailScreen.KEY args arguments)
+                }
+                if (hasSpecialAccessPermission(context, appInfo, ::writeSystemPreferencesFilter)) {
+                    +(WriteSystemPreferencesAppDetailScreen.KEY args arguments)
                 }
             }
         }
@@ -94,9 +116,10 @@ open class AppInfoScreen(context: Context, override val arguments: Bundle) :
 
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
-            AppListRepositoryImpl(context).loadAndFilterApps(context.userId, true).forEach {
-                emit(Bundle(1).apply { putString("pkg", it.packageName) })
-            }
+            AppListRepositoryImpl(context)
+                .loadAndMaybeExcludeSystemApps(context.userId, !DEFAULT_SHOW_SYSTEM)
+                .sortedWith(context.applicationInfoComparator)
+                .forEach { emit(Bundle(1).apply { putString("pkg", it.packageName) }) }
         }
     }
 }

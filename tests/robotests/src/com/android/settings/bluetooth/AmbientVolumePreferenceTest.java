@@ -170,6 +170,31 @@ public class AmbientVolumePreferenceTest {
     }
 
     @Test
+    public void setSliderEnabled_alreadyDisabled_resetsValueToMin() {
+        SliderPreference leftSlider = mPreference.getSliders().get(SIDE_LEFT);
+        final int minValue = leftSlider.getMin();
+        final int testValue = minValue + 2;
+        // Ensure initial value is not min
+        leftSlider.setValue(testValue);
+        assertThat(leftSlider.getValue()).isEqualTo(testValue);
+
+        // Disable the slider, value should be reset to min
+        mPreference.setSliderEnabled(SIDE_LEFT, false);
+        assertThat(leftSlider.getValue()).isEqualTo(minValue);
+        assertThat(leftSlider.isEnabled()).isFalse();
+
+        // Manually set value to non-min while slider is disabled to create the bug scenario
+        leftSlider.setValue(testValue);
+        assertThat(leftSlider.getValue()).isEqualTo(testValue);
+
+        // Call setSliderEnabled(false) again on the already disabled slider
+        mPreference.setSliderEnabled(SIDE_LEFT, false);
+
+        // Verify the value is reset to min again, confirming the fix
+        assertThat(leftSlider.getValue()).isEqualTo(minValue);
+    }
+
+    @Test
     public void setSliderValue_expandedAndLeftValueChanged_volumeIconIsCorrect() {
         mPreference.setControlExpanded(true);
         mPreference.setSliderValue(SIDE_LEFT, 4);

@@ -16,18 +16,42 @@
 
 package com.android.settings.accessibility.screenmagnification.ui
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import androidx.fragment.app.testing.EmptyFragmentActivity
+import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
 import com.google.common.truth.Truth.assertThat
+import com.google.testing.junit.testparameterinjector.TestParameters
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.robolectric.RobolectricTestParameterInjector
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowPackageManager
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(RobolectricTestParameterInjector::class)
 class MagnificationTopIntroPreferenceTest {
-    private val context: Context = ApplicationProvider.getApplicationContext()
+
+    private lateinit var context: Context
+    private lateinit var shadowPackageManager: ShadowPackageManager
+    private var activityScenario: ActivityScenario<EmptyFragmentActivity>? = null
     private val preference = MagnificationTopIntroPreference()
+
+    @Before
+    fun setUp() {
+        context = ApplicationProvider.getApplicationContext()
+        shadowPackageManager = shadowOf(context.packageManager)
+    }
+
+    @After
+    fun tearDown() {
+        activityScenario?.close()
+    }
 
     @Test
     fun key() {
@@ -43,5 +67,33 @@ class MagnificationTopIntroPreferenceTest {
     @Test
     fun isIndexable() {
         assertThat(preference.indexable).isFalse()
+    }
+
+    @Test
+    @TestParameters(
+        value =
+            [
+                "{inSetupWizard: false, expectedValue: true}",
+                "{inSetupWizard: true, expectedValue: false}",
+            ]
+    )
+    fun isAvailable_returnExpectedValue(inSetupWizard: Boolean, expectedValue: Boolean) {
+        val newContext = createContext(inSetupWizard)
+
+        assertThat(preference.isAvailable(newContext)).isEqualTo(expectedValue)
+    }
+
+    private fun createContext(inSetupWizard: Boolean): Context {
+        shadowPackageManager.addActivityIfNotPresent(
+            ComponentName(context, EmptyFragmentActivity::class.java)
+        )
+        var startedActivity: Context? = null
+        val intent = Intent(context, EmptyFragmentActivity::class.java)
+        if (inSetupWizard) {
+            intent.putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard)
+        }
+        activityScenario = ActivityScenario.launch(intent)
+        activityScenario!!.onActivity { activity -> startedActivity = activity }
+        return startedActivity!!
     }
 }

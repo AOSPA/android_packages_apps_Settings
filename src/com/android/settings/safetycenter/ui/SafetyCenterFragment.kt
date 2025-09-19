@@ -46,7 +46,18 @@ class SafetyCenterFragment : DashboardFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupStatusBannerController(viewLifecycleOwner)
         setupSubpagePreferenceControllers(viewLifecycleOwner)
+    }
+
+    private fun setupStatusBannerController(owner: LifecycleOwner) {
+        Log.d(TAG, "Setting up StatusBannerPreferenceController")
+
+        val statusBannerController =
+            preferenceControllers.flatten().firstOrNull { it is StatusBannerPreferenceController }
+                as? StatusBannerPreferenceController
+
+        statusBannerController?.setViewModelAndLifecycle(viewModel, owner)
     }
 
     private fun setupSubpagePreferenceControllers(owner: LifecycleOwner) {

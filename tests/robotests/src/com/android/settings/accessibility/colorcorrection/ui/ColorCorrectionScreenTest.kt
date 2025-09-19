@@ -52,6 +52,12 @@ class ColorCorrectionScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
+    override fun migration() {
+        SettingsSecureStore.get(appContext).setBoolean(ColorCorrectionScreen.SETTING_KEY, true)
+        super.migration()
+    }
+
+    @Test
     fun getLaunchIntent_returnColorInversionScreenIntent() {
         val prefKey = "fakePrefKey"
         val mockPrefMetadata = mock<PreferenceMetadata> { on { key } doReturn prefKey }
