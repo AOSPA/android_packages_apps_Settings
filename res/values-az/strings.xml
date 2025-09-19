@@ -81,6 +81,12 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Eşitmə cihazı ayarları"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Qısayol, eşitmə cihazı uyğunluğu"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Hazır ayar"</string>
+    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
+    <skip />
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Audioloq tərəfindən proqramlaşdırılmış hazır ayar yoxdur"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Hazır ayar güncəllənmədi"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Ətraf mühit"</string>
@@ -1013,8 +1019,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Displey qoşulmayıb"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Başlamaq üçün xarici ekranı qoşun və ya başqa kabeldən istifadə etməyə çalışın"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Digər seçimlər"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Displeyləri yenidən tənzimləmək üçün basıb saxlayın və dartın"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Daxili displeyi əks etdirin"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Yeni ayarlardan istifadə edilsin?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Displeyiniz istədiyiniz kimi işləmirsə, əvvəlki ayarlara qayıda bilərsiniz"</string>
@@ -1582,8 +1587,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Yaddaş və keş"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Yaddaş parametrləri"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Baxmaq üçün saxlanılmış şəbəkə seçin"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -1685,7 +1689,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Kommunal"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Kommunal ayarlar"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hab rejimi"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Kilid ekranındakı vidcetlər (beta)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Kilid ekranındakı vidcetlər"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Nə zaman avtomatik göstərməli"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Heç vaxt"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Şarj edildikdə"</string>
@@ -1949,8 +1957,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Qrafik açar çəkin"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Yardım üçün Menyuya basın."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Ediləndən sonra barmağı götürün"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Minimum <xliff:g id="NUMBER">%d</xliff:g> nöqtəni birləşdirin"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Ən azı <xliff:g id="NUMBER">%d</xliff:g> nöqtə birləşdirin. Yenidən cəhd edin."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Qrafik açar qeyd edildi"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Qrafik açarı təkrar çəkin"</string>
@@ -2413,6 +2420,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Naviqasiya rejimi, ekran rotasiyası"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Rəy göndərin"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Sorğuda iştirak edin"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Xüsusi imkanlar sorğusu"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Rəy bildirin"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Tünd temadan nə dərəcədə razısınız?"</string>
@@ -2589,10 +2597,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Seçimlər"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Zamanlama"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standart"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Standart Tünd tema"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Standart Tünd tema"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Cihazınız və tünd temanı dəstəkləyən tətbiqlər üçün tünd temanı aktivləşdirir"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Genişləndirildi"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Genişləndirilmiş Tünd tema"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Genişləndirilmiş Tünd tema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Tünd temanı dəstəkləməyən əksər tətbiqlərə avtomatik tətbiq edir. Bu, əlçatanlığı və oxunaqlılığı yaxşılaşdıra bilər, lakin bəzi tətbiqlərin düzgün göstərilməməsinə səbəb ola bilər."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"məcburi inversiya, rəng inversiyası, kontrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animasiyalar silinsin"</string>
@@ -2623,7 +2631,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Rəng inversiyasından istifadə edin"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Rəng inversiyası qısayolu"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Rəng inversiyası işıqlı ekranları tündləşdirir. O, həmçinin tünd ekranları işıqlı edir."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Qeyd&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Mediada və şəkillərdə rənglər dəyişəcək&lt;/li&gt; &lt;li&gt; Rəng inversiyası bütün tətbiqlərdə işləyir&lt;/li&gt; &lt;li&gt; Tünd arxa fon nümayiş etdirmək üçün tünd temadan istifadə edilə bilər&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Qeyd&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Mediada və şəkillərdə rənglər dəyişəcək&lt;/li&gt; &lt;li&gt; Rəng inversiyası bütün tətbiqlərdə işləyir&lt;/li&gt; &lt;li&gt; Tünd arxa fon nümayiş etdirmək üçün tünd temadan istifadə edilə bilər&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"ayarlara daxil olun"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Avtomatik klikləmə (gecikmə müddəti)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Avtomatik toxunma haqqında (fasilə zamanlaması)"</string>
@@ -3390,7 +3398,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Sistem CA sertifikatı aktiv edilsin?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Sistem CA sertifikatı deaktiv edilsin?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"İstifadəçi CA sertifikatı həmişəlik silinsin?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Bunun tərəfindən istifadə edilir:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Bu giriş bunlardan ibarətdir:"</string>
@@ -3431,6 +3441,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g> adlı istifadəçini bu cihazdan silin"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Ekran ayarlarını kilidləyin"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Kilid ekranından istifadəçi əlavə edin"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Doka yerləşdirildikdə admin istifadəçiyə keçin"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Özünüzü silirsiniz?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Bu istifadəçi silinsin?"</string>
@@ -3573,8 +3585,7 @@
     <string name="color_orange" msgid="216547825489739010">"Narıncı"</string>
     <string name="color_purple" msgid="6603701972079904843">"Bənövşəyi"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM statusu"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"SIM %1$d statusu"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"SIM-lər dəyişdi"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Quraşdırmaq üçün tıklayın"</string>
@@ -3832,8 +3843,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Divar kağızını qaraldın"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"divar kağızını qaraldın"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Divar kağızının parlaqlığını filtrləyin"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Tünd temanı aktivləşdirin"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"Tünd temanı aktivləşdirin"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Tünd temanı aktivləşdirin"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"tünd temanı aktivləşdirin"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Gözlər üçün daha asan olan qaranlıq fondan istifadə etmək məqsədilə cihazın temasını dəyişin"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Displey dəyişikliyi yoxdur}=1{{effect_1}}=2{{effect_1} və {effect_2}}=3{{effect_1}, {effect_2} və {effect_3}}other{{effect_1}, {effect_2} və daha # effekt}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Bütün bildirişlərə icazə verin"</string>
@@ -3956,7 +3967,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Kilid ekranında yalnız yeni bildirişləri göstərin"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Əvvəlcədən baxılan bildirişləri kilid ekranından avtomatik silin"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Tam siyahı"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Kompakt baxış"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Yığcam"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Kilid ekranında bildirişlər"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Defolt və səssizlər daxil olmaqla, söhbətləri göstərin"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Hamısı göstərilsin"</string>
@@ -4605,7 +4616,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Təhlükəsizliyiniz üçün Qabaqcıl Qoruma bu ayarın yanılı qalmasını tələb edir"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Təhlükəsizliyiniz üçün Qabaqcıl Qoruma bu ayarın sönülü qalmasını tələb edir"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Təhlükəsizliyiniz üçün Qabaqcıl Qoruma bu əməliyyatın qarşısını alır"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Bu şəbəkə datanızı riskə ata biləcək köhnə şifrələmə üsulu olan WEP istifadə edir. WEP bağlantıları Qabaqcıl Qoruma tərəfindən bloklanır."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Ayarlar"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Söndür"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Aktivləşdirin"</string>
@@ -4782,7 +4792,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Enerjiyə Qənaət rejiminə görə müvəqqəti deaktivdir"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Enerjiyə qənaət rejimini deaktiv edin"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Enerjiyə Qənaət rejiminə görə müvəqqəti aktivdir"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Tünd temanı sınayın"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Tünd temanı sınayın"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Batareya istifadəsini artırmağa imkan verir"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Cəld ayarlarda elementlər"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Adb icazəsi vaxt bitməsi deaktiv edilsin"</string>
@@ -4813,10 +4823,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> həm də kilid ekranı qısayoludur. Dəyişmək üçün toxunun."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Cari defolt pulqabı tətbiqiniz bu jesti dəstəkləmir"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Defolt pulqabını dəyişin"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"jestlər, qısayol"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"ödəyin, ödənişlər"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Ön kameraya keçirin"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Naviqasiya rejimi"</string>
@@ -5800,7 +5808,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Parol"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Uyğunluğun artırılması"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Audio keyfiyyətini azaltmaqla eşitmə aparatı kimi bəzi cihazların qoşulmasına kömək edir"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Uyğunluğu konfiqurasiya etmək üçün audio paylaşmanı deaktiv edir"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Ayarları dəyişmək üçün audio paylaşımını söndürün"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Yaxınlıqdakı audionu dinləyin"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Audio paylaşma Auracast™-i dəstəkləyir"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Audio yayımı adı"</string>
@@ -5941,6 +5949,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN-i silin"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Bərpa e-poçtu əlavə edin"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"E-poçtunuzu doğrulayın"</string>
+    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Veb-sayt kontenti məhdudiyyətləri"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Veb-sayt filtrləri, Saytları bloklayın, Brauzer filtrləri, Açıq-saçıq saytları bloklayın, Saytları filtrləyin, Axtarış nəticələrini bloklayın, Açıq-saçıq axtarış nəticələrini filtrləyin, kontent məhdudiyyətləri"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Bu telefondakı bəzi tətbiq və brauzerlərdə açıq-saçıq kontenti filtrləməyə kömək edin. Açıq-saçıq kontent yenə də digər tətbiqlərdə, cihazlarda və ya brauzerlərdə görünə bilər."</string>
@@ -5984,4 +5994,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Kimlik yoxlanılması bir çox tətbiqlə işləyir"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Kimlik yoxlanılması tətbiqlərinizə arzuolunmaz girişin qarşısını alır. Artıq Barmaq izi və ya Üz ilə kiliddən açma funksiyasından istifadə edən hər hansı tətbiqlə əlçatandır."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Təfərrüatlara baxın"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

@@ -105,6 +105,10 @@ public class GenericSwitchController extends SwitchWidgetController implements
         return false;
     }
 
+    /**
+     * @deprecated Use {@link #setDisabledByAdmin(EnforcingAdmin)} instead.
+     */
+    @Deprecated
     @Override
     public void setDisabledByAdmin(EnforcedAdmin admin) {
         if (mPreference instanceof PrimarySwitchPreference) {

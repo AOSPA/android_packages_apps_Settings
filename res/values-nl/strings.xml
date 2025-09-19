@@ -81,6 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Instellingen voor hoortoestel"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Sneltoets, geschiktheid voor hoortoestellen"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Voorinstelling"</string>
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Voorinstelling links"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Voorinstelling rechts"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Links: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Rechts: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Geen voorinstellingen geprogrammeerd door je audioloog"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Kan voorinstelling niet updaten"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Omgevingsgeluid"</string>
@@ -1683,7 +1686,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Gemeenschappelijk"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Gemeenschappelijke instellingen"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub-modus"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Widgets op het vergrendelscherm (bèta)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets op vergrendelscherm"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Wanneer automatisch tonen"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nooit"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Tijdens opladen"</string>
@@ -1947,8 +1954,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Teken een ontgrendelingspatroon"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Druk op \'Menu\' voor hulp."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Haal je vinger van het scherm als je klaar bent"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Verbind minstens <xliff:g id="NUMBER">%d</xliff:g> stippen"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Verbind minimaal <xliff:g id="NUMBER">%d</xliff:g> punten. Probeer het opnieuw."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Patroon opgeslagen"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Teken het patroon nog eens ter bevestiging"</string>
@@ -2411,6 +2417,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Navigatiemodus, schermrotatie"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Feedback sturen"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Enquête invullen"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Enquête over toegankelijkheid"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Je feedback delen"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Hoe tevreden ben je met het donkere thema?"</string>
@@ -2587,10 +2594,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Opties"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Timing"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standaard"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Standaard donker thema"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Standaard donker thema"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Zet het donkere thema aan voor je apparaat en apps die het donkere thema ondersteunen"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Uitgebreid"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Uitgebreid donker thema"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Uitgebreid donker thema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Past automatisch het donkere thema toe op de meeste apps die dit niet ondersteunen. Dit kan de toegankelijkheid en leesbaarheid verbeteren, maar kan ertoe leiden dat sommige apps niet correct worden getoond."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"inversie afdwingen, kleurinversie, contrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animaties verwijderen"</string>
@@ -2621,7 +2628,8 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Kleurinversie gebruiken"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Snelkoppeling voor kleurinversie"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Met kleurinversie worden lichte schermen donker en donkere schermen licht."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Houd rekening met het volgende:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Kleuren in media en afbeeldingen veranderen&lt;/li&gt; &lt;li&gt; Kleurinversie werkt voor alle apps&lt;/li&gt; &lt;li&gt; Voor een donkere achtergrond gebruik je misschien beter het donkere thema&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for accessibility_display_inversion_preference_subtitle (8748527808247125417) -->
+    <skip />
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"instellingen openen"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Automatisch klikken (rusttijd)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Over automatisch klikken (rusttijd)"</string>
@@ -3388,8 +3396,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Het CA-certificaat voor het systeem aanzetten?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"CA-certificaat voor systeem uitzetten?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"CA-certificaat van gebruiker permanent verwijderen?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA-certificaten, samengevouwen, dubbeltik om uit te vouwen"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA-certificaten, uitgevouwen, dubbeltik om samen te vouwen"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Wordt gebruikt door"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Dit inlogitem bevat"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 gebruikerssleutel"</string>
@@ -3429,6 +3437,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g> verwijderen van dit apparaat"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Instellingen voor vergrendelscherm"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Gebruikers toevoegen vanaf vergrendelscherm"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Overschakelen naar beheerder indien gedockt"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Wil je jezelf verwijderen?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Gebruiker verwijderen?"</string>
@@ -3829,8 +3839,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Achtergrond dimmen"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"achtergrond dimmen"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filter de helderheid van de achtergrond"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Donker thema aanzetten"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"donker thema aanzetten"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Donker thema aanzetten"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"donker thema aanzetten"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Wissel het apparaatthema om een donkere achtergrond te gebruiken, wat prettiger is voor de ogen"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Geen weergavewijzigingen}=1{{effect_1}}=2{{effect_1} en {effect_2}}=3{{effect_1}, {effect_2} en {effect_3}}other{{effect_1}, {effect_2} en nog #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Alle meldingen toestaan"</string>
@@ -3953,7 +3963,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Alleen nieuwe meldingen tonen op vergrendelscherm"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Verwijder eerder bekeken meldingen automatisch van het vergrendelscherm"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Volledige lijst"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Compacte weergave"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Compact"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Meldingen op vergrendelscherm"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Gesprekken tonen (standaard en stil)"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Toon gesprekken (standaard en stil)"</string>
@@ -4602,7 +4612,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Uit veiligheidsoverwegingen vereist Geavanceerde beveiliging dat deze instelling blijft aanstaan"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Uit veiligheidsoverwegingen vereist Geavanceerde beveiliging dat deze instelling blijft uitstaan"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Uit veiligheidsoverwegingen voorkomt Geavanceerde beveiliging deze actie"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Dit netwerk gebruikt WEP, een verouderde versleutelingsmethode die je gegevens in gevaar kan brengen. WEP-verbindingen worden door Geavanceerde beveiliging geblokkeerd."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Instellingen"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Uitzetten"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Aanzetten"</string>
@@ -4779,7 +4788,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Tijdelijk uit vanwege Batterijbesparing"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Batterijbesparing uitzetten"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Tijdelijk aangezet vanwege Batterijbesparing"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Probeer \'Donker thema\'"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Probeer \'Donker thema\'"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Helpt de batterijduur te verlengen"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Ontwikkelaarstegels voor Snelle instellingen"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Time-out voor uitzetten ADB-machtiging"</string>
@@ -4810,10 +4819,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> is ook je snelkoppeling op het vergrendelscherm. Tik om dit te wijzigen."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Je huidige standaardportemonnee-app ondersteunt dit gebaar niet"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Standaardportemonnee wijzigen"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"gebaren, snelkoppeling"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"betalen, betalingen"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Camera omdraaien voor selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigatiemodus"</string>
@@ -5938,6 +5945,7 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Pincode verwijderen"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Herstelmailadres toevoegen"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Je e-mailadres laten verifiëren"</string>
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Appstore-filters"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Contentfilters voor websites"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Websitefilters, Sites blokkeren, Browserfilters, Expliciete sites blokkeren, Sites filteren, Zoekresultaten blokkeren, Expliciete zoekresultaten filteren, Contentbeperkingen"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Help expliciete content te filteren in bepaalde apps en browsers op deze telefoon. Expliciete content kan nog steeds worden getoond in andere apps, op andere apparaten of in andere browsers."</string>
@@ -5981,4 +5989,14 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Identiteitscontrole werkt met meer apps"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Identiteitscontrole voorkomt ongewenste toegang tot je apps. Nu beschikbaar voor elke app die Ontgrendelen met vingerafdruk of Ontgrendelen via gezichtsherkenning gebruikt."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Details bekijken"</string>
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Kan instellingen niet checken"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Nog geen informatie"</string>
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

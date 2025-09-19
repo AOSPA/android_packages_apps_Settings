@@ -81,6 +81,12 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Cài đặt thiết bị trợ thính"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Phím tắt, khả năng tương thích với thiết bị trợ thính"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Chế độ đặt sẵn"</string>
+    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
+    <skip />
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Không có chế độ đặt sẵn do chuyên gia thính học lập trình"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Không cập nhật được giá trị đặt trước"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Âm lượng xung quanh"</string>
@@ -1013,8 +1019,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Chưa kết nối màn hình nào"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Hãy kết nối màn hình ngoài để bắt đầu hoặc thử dùng một cáp khác"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Lựa chọn khác"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Giữ và kéo để sắp xếp lại màn hình"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Phản chiếu màn hình tích hợp"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Sử dụng chế độ cài đặt mới?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Nếu màn hình không hoạt động như bạn mong muốn, bạn có thể quay lại các chế độ cài đặt trước đây"</string>
@@ -1582,8 +1587,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Bộ nhớ và bộ nhớ đệm"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Cài đặt bộ nhớ"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Để xem, hãy chọn mạng đã lưu"</string>
     <string name="status_imei" msgid="5719752369250485007">"Số IMEI"</string>
@@ -1685,7 +1689,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Dùng chung"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Các chế độ cài đặt dùng chung"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Chế độ thiết bị trung tâm"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Tiện ích trên màn hình khoá (thử nghiệm)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Các tiện ích trên màn hình khoá"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Thời điểm tự động hiển thị"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Không bao giờ"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Trong khi sạc"</string>
@@ -1949,8 +1957,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Vẽ hình mở khóa"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Nhấn vào Menu để được trợ giúp."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Thả ngón tay khi xong"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Hãy nối ít nhất <xliff:g id="NUMBER">%d</xliff:g> dấu chấm"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Kết nối ít nhất <xliff:g id="NUMBER">%d</xliff:g> điểm. Hãy thử lại."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Đã ghi lại hình mở khóa"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Vẽ lại hình mở khoá để xác nhận"</string>
@@ -2413,6 +2420,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Chế độ thao tác, xoay màn hình"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Gửi phản hồi"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Tham gia khảo sát"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Khảo sát về khả năng hỗ trợ tiếp cận"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Chia sẻ ý kiến phản hồi của bạn"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Bạn có hài lòng với giao diện tối không?"</string>
@@ -2589,10 +2597,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Lựa chọn"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Hẹn giờ"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Tiêu chuẩn"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Giao diện tối tiêu chuẩn"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Giao diện tối tiêu chuẩn"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Bật giao diện tối cho thiết bị và các ứng dụng hỗ trợ giao diện tối"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Mở rộng"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Giao diện tối mở rộng"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Giao diện tối mở rộng"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Tự động áp dụng giao diện tối cho hầu hết các ứng dụng không hỗ trợ giao diện tối. Điều này có thể cải thiện khả năng tiếp cận và khả năng đọc, nhưng có thể khiến một số ứng dụng hiển thị không chính xác."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"buộc đảo ngược, đảo màu, độ tương phản"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Xóa hiệu ứng động"</string>
@@ -2623,7 +2631,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Sử dụng tính năng đảo màu"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Lối tắt cho đảo màu"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Tính năng đảo màu chuyển màn hình sáng thành tối. Hoặc bạn cũng có thể chuyển từ tối thành sáng."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Lưu ý&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Màu sắc trong hình ảnh và nội dung nghe nhìn sẽ thay đổi&lt;/li&gt; &lt;li&gt; Tính năng đảo màu dùng được trên mọi ứng dụng&lt;/li&gt; &lt;li&gt; Để hiển thị nền tối, bạn có thể dùng Giao diện tối để thay thế&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Lưu ý&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Màu sắc trong hình ảnh và nội dung nghe nhìn sẽ thay đổi&lt;/li&gt; &lt;li&gt; Tính năng đảo màu dùng được trên mọi ứng dụng&lt;/li&gt; &lt;li&gt; Để hiển thị nền tối, bạn có thể dùng Giao diện tối để thay thế&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"mở phần cài đặt"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Tự động nhấp (Thời gian dừng)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Giới thiệu tính năng tự động nhấp (thời gian dừng)"</string>
@@ -3390,7 +3398,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Bật chứng chỉ CA hệ thống?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Tắt chứng chỉ CA hệ thống?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Xóa vĩnh viễn chứng chỉ CA người dùng?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Đang dùng bởi"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Mục này chứa"</string>
@@ -3431,6 +3441,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Xóa <xliff:g id="USER_NAME">%1$s</xliff:g> khỏi thiết bị"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Cài đặt màn hình khóa"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Thêm người dùng từ màn hình khóa"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Chuyển sang người dùng quản trị khi gắn vào đế sạc"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Xóa chính bạn?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Xóa người dùng này?"</string>
@@ -3573,8 +3585,7 @@
     <string name="color_orange" msgid="216547825489739010">"Cam"</string>
     <string name="color_purple" msgid="6603701972079904843">"Tía"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Trạng thái SIM"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"Trạng thái của SIM %1$d"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Đã thay đổi SIM"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Nhấn để thiết lập"</string>
@@ -3832,8 +3843,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Giảm độ sáng hình nền"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"giảm độ sáng hình nền"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Lọc độ sáng của hình nền"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Bật Giao diện tối"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"bật Giao diện tối"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Bật giao diện tối"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"bật giao diện tối"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Chuyển giao diện thiết bị để dùng nền tối, dễ nhìn hơn"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Không thay đổi chế độ hiển thị}=1{{effect_1}}=2{{effect_1} và {effect_2}}=3{{effect_1}, {effect_2} và {effect_3}}other{{effect_1}, {effect_2} và # chế độ khác}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Cho phép tất cả thông báo"</string>
@@ -3956,7 +3967,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Chỉ hiển thị thông báo mới trên màn hình khoá"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Tự động xoá thông báo đã xem trước đó khỏi màn hình khoá"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Danh sách đầy đủ"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Chế độ xem thu gọn"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Thu gọn"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Thông báo trên màn hình khóa"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Hiện thông báo cuộc trò chuyện, mặc định và im lặng"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Hiện các cuộc trò chuyện ở chế độ mặc định và im lặng"</string>
@@ -4605,7 +4616,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Để đảm bảo tính bảo mật, bạn phải luôn bật chế độ cài đặt này khi dùng tính năng Bảo vệ nâng cao"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Để đảm bảo tính bảo mật, bạn phải luôn tắt chế độ cài đặt này khi dùng tính năng Bảo vệ nâng cao"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Để đảm bảo tính bảo mật, tính năng Bảo vệ nâng cao sẽ chặn thao tác này"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Mạng này sử dụng WEP, một phương thức mã hoá đã lỗi thời có thể gây rủi ro cho dữ liệu của bạn. Tính năng Bảo vệ nâng cao đã chặn các kết nối qua WEP."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Cài đặt"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Tắt"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Bật"</string>
@@ -4782,7 +4792,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Tạm thời tắt do Trình tiết kiệm pin"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Tắt trình tiết kiệm pin"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Tạm thời bật do Trình tiết kiệm pin"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Thử dùng Giao diện tối"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Thử dùng Giao diện tối"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Giúp kéo dài thời lượng pin"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Ô cài đặt nhanh dành cho nhà phát triển"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Tắt thời gian chờ ủy quyền adb"</string>
@@ -4813,10 +4823,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> cũng là lối tắt trên màn hình khoá. Nhấn để thay đổi."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Ứng dụng ví mặc định hiện tại của bạn không hỗ trợ cử chỉ này"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Thay đổi ví mặc định"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"cử chỉ, phím tắt"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"thanh toán, hoạt động thanh toán"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Lật máy ảnh để selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Chế độ điều hướng"</string>
@@ -5800,7 +5808,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Mật khẩu"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Cải thiện khả năng tương thích"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Giúp một số thiết bị (như thiết bị trợ thính) kết nối bằng cách giảm chất lượng âm thanh"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Tắt tính năng chia sẻ âm thanh để định cấu hình khả năng tương thích"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Tắt tính năng chia sẻ âm thanh để thay đổi chế độ cài đặt"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Nghe âm thanh ở gần"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Tính năng chia sẻ âm thanh có hỗ trợ Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Tên luồng âm thanh"</string>
@@ -5941,6 +5949,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Xoá mã PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Thêm email khôi phục"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Xác minh email của bạn"</string>
+    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Bộ lọc nội dung trang web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Bộ lọc trang web, Chặn trang web, Bộ lọc trình duyệt, Chặn trang web có nội dung phản cảm, Lọc trang web, Chặn kết quả tìm kiếm, Lọc kết quả tìm kiếm có nội dung phản cảm, giới hạn nội dung"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Giúp lọc nội dung phản cảm trên một số ứng dụng và trình duyệt trên điện thoại này. Nội dung phản cảm có thể vẫn hiển thị trên các ứng dụng, thiết bị hoặc trình duyệt khác."</string>
@@ -5984,4 +5994,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Tính năng Kiểm tra danh tính hoạt động với nhiều ứng dụng hơn"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Tính năng Kiểm tra danh tính giúp ngăn chặn hành vi truy cập không mong muốn vào các ứng dụng của bạn. Hiện có trên mọi ứng dụng dùng tính năng Mở khoá bằng vân tay hoặc Mở khoá bằng khuôn mặt."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Xem chi tiết"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

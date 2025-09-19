@@ -81,6 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Nastavitve slušnega aparata"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Bližnjica, združljivost s slušnimi aparati"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Prednastavljeno"</string>
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Prednastavitev levo"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Prednastavitev desno"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Levo: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Desno: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Avdiolog ni programiral nobenih prednastavljenih vrednosti"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Prednastavljenih vrednosti ni bilo mogoče posodobiti"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Okolica"</string>
@@ -1683,7 +1686,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Skupno"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Skupne nastavitve"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Način središča"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Pripomočki na zaklenjenem zaslonu (beta)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Pripomočki na zaklenjenem zaslonu"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Kdaj naj bo samodejno prikazano"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nikoli"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Med polnjenjem"</string>
@@ -1947,8 +1954,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Narišite vzorec za odklepanje."</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Če želite pomoč, pritisnite meni."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Ko končate, dvignite prst."</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Povežite vsaj toliko pik: <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Povežite vsaj toliko pik: <xliff:g id="NUMBER">%d</xliff:g>. Poskusite znova."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Vzorec je shranjen."</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Znova narišite vzorec, da ga potrdite."</string>
@@ -2411,6 +2417,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Način krmarjenja, sukanje zaslona"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Pošljite povratne informacije"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Izpolnite anketo"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Anketa o dostopnosti"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Pošljite povratne informacije"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Kako zadovoljni ste s temno temo?"</string>
@@ -2587,10 +2594,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Možnosti"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Časovni razpored"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standardno"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Standardna temna tema"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Standardna temna tema"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Vklopi temno temo za napravo in aplikacije, ki podpirajo temno temo"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Razširjeno"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Razširjena temna tema"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Razširjena temna tema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Samodejno uporabi temno temo za večino aplikacij, ki je ne podpirajo. S tem lahko izboljšate dostopnost in berljivost, vendar so lahko zaradi tega nekatere aplikacije nepravilno prikazane."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"prisilna inverzija, inverzija barv, kontrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Odstranjevanje animacij"</string>
@@ -2621,7 +2628,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Uporabi inverzijo barv"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Bližnjica za inverzijo barv"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Pri inverziji barv se svetli zasloni spremenijo v temne. Poleg tega se temni zasloni spremenijo v svetle."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Upoštevajte:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Barve se spremenijo v predstavnosti in na slikah.&lt;/li&gt; &lt;li&gt; Inverzija barv deluje v vseh aplikacijah.&lt;/li&gt; &lt;li&gt; Za prikaz temnega ozadja lahko vklopite tudi temno temo.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Upoštevajte:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Barve se spremenijo v predstavnosti in na slikah.&lt;/li&gt; &lt;li&gt; Inverzija barv deluje v vseh aplikacijah.&lt;/li&gt; &lt;li&gt; Za prikaz temnega ozadja lahko vklopite tudi temno temo.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"vnos nastavitev"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Samodejni klik (na podlagi časa mirovanja)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"O samodejnem kliku (na podlagi časa mirovanja)"</string>
@@ -3388,7 +3395,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Želite omogočiti sistemsko overjeno potrdilo?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Želite onemogočiti sistemsko overjeno potrdilo?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Želite trajno odstraniti uporabniško overjeno potrdilo?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Trenutno uporabljeno za"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Ta vnos vsebuje"</string>
@@ -3429,6 +3438,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Izbris up. <xliff:g id="USER_NAME">%1$s</xliff:g> iz napr."</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Nastavitve zaklepanja zaslona"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Dodajanje uporabnikov na zaklenjenem zaslonu"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Preklopi na skrbniš. uporabnika, ko je v nosilcu"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Želite izbrisati sebe?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Želite izbrisati uporabnika?"</string>
@@ -3829,8 +3840,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Zatemnitev zaslonskega ozadja"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"zatemnitev zaslonskega ozadja"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Zmanjšanje svetlosti zaslonskega ozadja"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Omogoči temno temo"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"omogoči temno temo"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Omogoči temno temo"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"omogoči temno temo"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Temo naprave preklopite na temno ozadje, ki je prijaznejše do oči"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Brez sprememb prikaza}=1{{effect_1}}=2{{effect_1} in {effect_2}}=3{{effect_1}, {effect_2} in {effect_3}}one{{effect_1}, {effect_2} in še #}two{{effect_1}, {effect_2} in še #}few{{effect_1}, {effect_2} in še #}other{{effect_1}, {effect_2} in še #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Dovoli vsa obvestila"</string>
@@ -3953,7 +3964,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Na zaklenjenem zaslonu prikaži samo nova obvestila"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Že ogledana obvestila samodejno odstrani z zaklenjenega zaslona."</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Celotni seznam"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Strnjen prikaz"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Strnjeno"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Obvestila na zaklenjenem zaslonu"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Prikaži pogovore ter privzeta in tiha obvestila."</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Prikaži obvestila za privzeto in tiho v razdelku Pogovori."</string>
@@ -4602,7 +4613,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Zaradi vaše varnosti dodatna zaščita zahteva, da ta nastavitev ostane vklopljena"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Zaradi vaše varnosti dodatna zaščita zahteva, da ta nastavitev ostane izklopljena."</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Zaradi vaše varnosti dodatna zaščita preprečuje to dejanje"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"To omrežje uporablja WEP, zastarel način šifriranja, ki lahko ogrozi vaše podatke. Povezave WEP blokira dodatna zaščita."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Nastavitve"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Izklopi"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Vklopi"</string>
@@ -4779,7 +4789,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Začasno onemogočeno zaradi varčevanja z energijo baterije."</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Izklopi varčevanje z energijo baterije"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Začasno vklopljeno zaradi varčevanja z energijo baterije"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Preizkusite temno temo"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Preizkusite temno temo"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Podaljša čas delovanja baterije"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Ploščice razvijalcev za hitre nastavitve"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Onemogoči časovno omejitev pooblastila ADB"</string>
@@ -4810,10 +4820,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"Dejanje »<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g>« je tudi bližnjica za zaklepanje zaslona. Dotaknite se, če želite spremeniti."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Vaša trenutna privzeta aplikacija za denarnico ne podpira te poteze"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Sprememba privzete denarnice"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"poteze, bližnjica"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"plačilo, plačila"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Zasuk fotoaparata za selfije"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Način krmarjenja"</string>
@@ -5940,6 +5948,7 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Brisanje kode PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Dodajte e-poštni naslov za obnovitev"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Preverite e-poštni naslov"</string>
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtri trgovine z aplikacijami"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtri vsebine spletnih mest"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"filtri spletnih mest, blokiranje spletnih mest, filtri v brskalniku, blokiranje eksplicitnih spletnih mest, filtriranje spletnih mest, blokiranje rezultatov iskanja, filtriranje eksplicitnih rezultatov iskanja, omejitve vsebine"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Pomagajo filtrirati eksplicitno vsebino v nekaterih aplikacijah in brskalnikih v tem telefonu. Eksplicitna vsebina bo morda še vedno prikazana v drugih aplikacijah, napravah ali brskalnikih."</string>
@@ -5983,4 +5992,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Preverjanje identitete deluje z več aplikacijami"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Preverjanje identitete preprečuje neželen dostop do aplikacij. Zdaj je na voljo v vseh aplikacijah, ki uporabljajo odklepanje s prstnim odtisom ali obrazom."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Prikaži podrobnosti"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

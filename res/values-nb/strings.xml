@@ -81,6 +81,12 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Innstillinger for høreapparater"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Snarvei, kompatibilitet med høreapparater"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Forhåndsinnstilling"</string>
+    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
+    <skip />
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Ingen forhåndsinnstillinger er programmert av audiografen"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Kunne ikke oppdatere forhåndsinnstillingen"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Omgivelser"</string>
@@ -1013,8 +1019,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Ingen skjerm er tilkoblet"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Koble til en ekstern skjerm for å komme i gang, eller prøv å bruke en annen kabel"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Flere alternativer"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Hold og dra for å omorganisere skjermer"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Speil den innebygde skjermen"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Vil du bruke de nye innstillingene?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Hvis ikke skjermen fungerer som du vil, kan du gå tilbake til de forrige innstillingene"</string>
@@ -1582,8 +1587,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Lagring og buffer"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Innstillinger for lagring"</string>
     <string name="status_eid" msgid="3588471107671992684">"EID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"For å se, velg lagret nettverk"</string>
     <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
@@ -1685,7 +1689,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Felles"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Fellesinnstillinger"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub-modus"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Moduler på låseskjermen (beta)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Moduler på låseskjermen"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Når skal det vises automatisk?"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Aldri"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Når enheten lades"</string>
@@ -1949,8 +1957,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Tegn et opplåsingsmønster"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Trykk menyknappen for hjelp."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Løft fingeren når du er ferdig."</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Knytt sammen minst <xliff:g id="NUMBER">%d</xliff:g> prikker"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Berør minst <xliff:g id="NUMBER">%d</xliff:g> punkter. Prøv på nytt."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Mønsteret er registrert"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Tegn mønsteret på nytt for å bekrefte"</string>
@@ -2413,6 +2420,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Navigasjonsmodus, skjermrotasjon"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Send tilbakemelding"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Svar på undersøkelsen"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Tilgjengelighetsundersøkelse"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Del tilbakemeldingen din"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Hvor fornøyd er du med det mørke temaet?"</string>
@@ -2589,10 +2597,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Alternativer"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Tid"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Standard mørkt tema"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Standard mørkt tema"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Slår på mørkt tema for enheten din og apper som støtter mørkt tema"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Utvidet"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Utvidet mørkt tema"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Utvidet mørkt tema"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Bruker automatisk mørkt tema i de fleste apper som ikke støtter det. Dette kan gjøre det enklere å bruke og lese appene, men kan føre til at noen apper vises feil."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"tving invertering, fargeinvertering, kontrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Fjern animasjoner"</string>
@@ -2623,7 +2631,8 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Bruk fargeinvertering"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Snarvei til fargeinvertering"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Med fargeinvertering blir lyse skjermer mørke. I tillegg blir mørke skjermer lyse."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Husk&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt;&amp;nbsp;Farger endres i medier og bilder.&lt;/li&gt; &lt;li&gt;&amp;nbsp;Fargeinvertering fungerer i alle apper.&lt;/li&gt; &lt;li&gt;&amp;nbsp;For å vise mørke bakgrunner kan mørkt tema brukes i stedet.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for accessibility_display_inversion_preference_subtitle (8748527808247125417) -->
+    <skip />
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"åpne innstillingene"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Autoklikk (holdetid)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Om autoklikk (holdetid)"</string>
@@ -3390,7 +3399,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Vil du slå på systemets CA-sertifikat?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Vil du slå av systemets CA-sertifikat?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Vil du fjerne brukerens CA-sertifikat permanent?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Brukes av"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Denne oppføringen inneholder"</string>
@@ -3431,6 +3442,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Slett <xliff:g id="USER_NAME">%1$s</xliff:g> fra denne enheten"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Innstillinger for låseskjermen"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Legg til brukere fra låseskjermen"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Bytt til administratorbruker under dokking"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Vil du slette deg selv?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vil du slette brukeren?"</string>
@@ -3573,8 +3586,7 @@
     <string name="color_orange" msgid="216547825489739010">"Oransje"</string>
     <string name="color_purple" msgid="6603701972079904843">"Lilla"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM-status"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"SIM %1$d-status"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"SIM-kortene dine er endret"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Konfigurer"</string>
@@ -3832,8 +3844,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Ton ned bakgrunnen"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"ton ned bakgrunnen"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrer lysstyrken til bakgrunnen"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Slå på mørkt tema"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"slå på mørkt tema"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Slå på mørkt tema"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"slå på mørkt tema"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Bytt enhetstemaet til å bruke en mørk bakgrunn, som er mer behagelig for øynene"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Ingen visningsendringer}=1{{effect_1}}=2{{effect_1} og {effect_2}}=3{{effect_1}, {effect_2} og {effect_3}}other{{effect_1}, {effect_2} og # andre}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Tillat alle varsler"</string>
@@ -3956,7 +3968,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Bare vis nye varsler på låseskjermen"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Fjern automatisk varsler som er sett, fra låseskjermen"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Full liste"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Kompaktvisning"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Kompakt"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Varsler på låseskjermen"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Vis samtaler, standard og lydløs"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Vis samtaler, både standard og lydløse"</string>
@@ -4605,7 +4617,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Av sikkerhetshensyn krever Avansert beskyttelse at denne innstillingen forblir på"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Av sikkerhetshensyn krever Avansert beskyttelse at denne innstillingen forblir av"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Av sikkerhetshensyn forhindrer Avansert beskyttelse denne handlingen"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Dette nettverket bruker WEP, en utdatert krypteringsmetode som kan utsette dataene dine for risiko. WEP-tilkoblinger er blokkert av Avansert beskyttelse."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Innstillinger"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Slå av"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Slå på"</string>
@@ -4782,7 +4793,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Midlertidig slått av på grunn av Batterisparing"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Slå av batterisparing"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Midlertidig slått på for Batterisparing"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Prøv mørkt tema"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Prøv mørkt tema"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Bidrar til å forlenge batterilevetiden"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Hurtiginnstillingsruter for utviklere"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Slå av tidsavbrudd for adb-autorisasjon"</string>
@@ -4813,10 +4824,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> er også snarveien på låseskjermen. Trykk for å endre det."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Lommebokappen du bruker som standard, støtter ikke denne bevegelsen."</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Bytt standardlommebok"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"bevegelser, snarvei"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"betal, betalinger"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Vend kameraet for å ta selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigasjonsmodus"</string>
@@ -5800,7 +5809,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Passord"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Forbedre kompatibiliteten"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Hjelper noen enheter, for eksempel høreapparater, med å koble til ved å redusere lydkvaliteten"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Slår av lyddelingen for å konfigurere kompatibiliteten"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Slå av lyddeling for å endre innstillingene"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Lytt til lyd i nærheten"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Lyddeling støtter Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Navn på lydstrømmen"</string>
@@ -5941,6 +5950,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Slett PIN-koden"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Legg til gjenopprettingsadresse"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Bekreft e-postadressen din"</string>
+    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Innholdsfiltre for nettsteder"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Nettstedsfiltre, Blokker nettsteder, Nettleserfiltre, Blokker ikke-barnevennlige nettsteder, Filtrer nettsteder, Blokker søkeresultater, Filtrer ikke-barnevennlige søkeresultater, innholdsbegrensninger"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Bidra til å filtrere bort ikke-barnevennlig innhold i enkelte apper og nettlesere på denne telefonen. Ikke-barnevennlig innhold kan fortsatt vises i andre apper, på andre enheter eller i andre nettlesere."</string>
@@ -5984,4 +5995,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Identitetssjekk fungerer med flere apper"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Identitetssjekk forhindrer uønsket tilgang til appene dine. Nå tilgjengelig med alle apper som bruker fingeravtrykk eller ansiktslås."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Se detaljer"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

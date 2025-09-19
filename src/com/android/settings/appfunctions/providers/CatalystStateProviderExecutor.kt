@@ -133,8 +133,8 @@ class CatalystStateProviderExecutor(
             val config = settingConfigMap[metadata.key]
             val jsonValue =
                 when {
-                    // TODO(b/444419242): Handle IME redaction properly.
-                    isImePreference(metadata.key) -> "REDACTED"
+                    // TODO(b/444419242): Handle IMEI redaction properly.
+                    isImeiPreference(metadata.key) -> "REDACTED"
                     metadata is PersistentPreference<*> ->
                         metadata
                             .storage(context)
@@ -186,7 +186,7 @@ class CatalystStateProviderExecutor(
         return states
     }
 
-    private fun isImePreference(prefKey: String): Boolean {
+    private fun isImeiPreference(prefKey: String): Boolean {
         return prefKey.startsWith(ImeiPreference.KEY_PREFIX)
     }
 

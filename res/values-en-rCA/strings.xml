@@ -81,6 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Hearing device settings"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Shortcut, hearing aid compatibility"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Preset"</string>
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Left Preset"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Right Preset"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Left: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Right: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"There are no presets programmed by your audiologist"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Couldn’t update preset"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Surroundings"</string>
@@ -1683,7 +1686,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Communal"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Communal settings"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub mode"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Widgets on lock screen (beta)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets on lock screen"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"When to automatically show"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Never"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"While charging"</string>
@@ -2380,8 +2387,8 @@
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"General"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Display"</string>
-    <string name="accessibility_color_and_motion_title" msgid="1085072332445818494">"Color &amp; motion"</string>
-    <string name="accessibility_color_and_motion_subtext" msgid="1150281881647191503">"Dark theme, color correction, remove animations"</string>
+    <string name="accessibility_color_and_motion_title" msgid="1085072332445818494">"Colour and motion"</string>
+    <string name="accessibility_color_and_motion_subtext" msgid="1150281881647191503">"Dark theme, colour correction, remove animations"</string>
     <string name="accessibility_pointer_and_touchpad_title" msgid="5703454643194245909">"Cursor and touchpad accessibility"</string>
     <string name="accessibility_pointer_and_touchpad_summary" msgid="8588221231953604340">"Size, colour, type"</string>
     <string name="accessibility_pointer_color_customization_title" msgid="2841888132681075999">"Cursor colour"</string>
@@ -2410,6 +2417,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Navigation mode, screen rotation"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Send feedback"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Take survey"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Accessibility Survey"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Share your feedback"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"How satisfied are you with dark theme?"</string>
@@ -2586,12 +2594,12 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Options"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Timing"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Standard Dark theme"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Standard dark theme"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Turns on dark theme for your device and apps that support dark theme"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expanded"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Expanded Dark theme"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Expanded dark theme"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Automatically applies dark theme to most apps that don\'t support it. This can improve accessibility and readability, but may cause some apps to display incorrectly."</string>
-    <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"force invert, color inversion, contrast"</string>
+    <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"force invert, colour inversion, contrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remove animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce movement on the screen"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Text cursor blinking"</string>
@@ -2616,11 +2624,11 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"This timing preference isn’t supported by all apps"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Choose how long to show temporary messages that ask you to take action"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Touch and hold delay"</string>
-    <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Color inversion"</string>
-    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Use color inversion"</string>
-    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Color inversion shortcut"</string>
-    <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Color inversion turns light screens dark. It also turns dark screens light."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Keep in mind&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Colors will change in media and images&lt;/li&gt; &lt;li&gt; Color inversion works on all apps&lt;/li&gt; &lt;li&gt; To display a dark background, Dark theme can be used instead&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Colour inversion"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Use colour inversion"</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Colour inversion shortcut"</string>
+    <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Colour inversion turns light screens dark. It also turns dark screens light."</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Keep in mind&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt;&amp;nbsp;Colours will change in media and images&lt;/li&gt; &lt;li&gt;&amp;nbsp;Colour inversion works on all apps&lt;/li&gt; &lt;li&gt;&amp;nbsp;To display a dark background, Dark theme can be used instead&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"enter settings"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Autoclick (Dwell timing)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"About autoclick (dwell timing)"</string>
@@ -2675,10 +2683,10 @@
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Open <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> added to Quick Settings. Swipe down to turn it on or off anytime."</string>
     <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"You can also add <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> to Quick Settings from the top of your screen"</string>
-    <string name="accessibility_color_correction_auto_added_qs_tooltip_content" msgid="9092661358437404374">"Color correction added to Quick Settings. Swipe down to turn it on or off anytime."</string>
-    <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"You can also add color correction to Quick Settings from the top of your screen"</string>
-    <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"Color inversion added to Quick Settings. Swipe down to turn it on or off anytime."</string>
-    <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"You can also add color inversion to Quick Settings from the top of your screen"</string>
+    <string name="accessibility_color_correction_auto_added_qs_tooltip_content" msgid="9092661358437404374">"Colour correction added to Quick Settings. Swipe down to turn it on or off anytime."</string>
+    <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"You can also add colour correction to Quick Settings from the top of your screen"</string>
+    <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"Colour inversion added to Quick Settings. Swipe down to turn it on or off anytime."</string>
+    <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"You can also add colour inversion to Quick Settings from the top of your screen"</string>
     <string name="reduce_bright_colors_preference_summary" msgid="8112736110942731246">"Dim screen beyond the minimum brightness"</string>
     <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"Extra dim added to Quick Settings. Swipe down to turn it on or off anytime."</string>
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"You can also add extra dim to Quick Settings from the top of your screen"</string>
@@ -2686,12 +2694,12 @@
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"You can also add one-handed mode to Quick Settings from the top of your screen"</string>
     <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Font size added to Quick Settings. Swipe down to change the font size anytime."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Dismiss"</string>
-    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Use color correction"</string>
-    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Color correction shortcut"</string>
-    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"About color correction"</string>
-    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Learn more about color correction"</string>
-    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"About color inversion"</string>
-    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Learn more about color inversion"</string>
+    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Use colour correction"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Colour correction shortcut"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"About colour correction"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Learn more about colour correction"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"About colour inversion"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Learn more about colour inversion"</string>
     <string name="accessibility_dark_theme_footer_learn_more_helper_link" msgid="6728089199404860746">"Learn more about dark theme"</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"Show captions"</string>
     <string name="accessibility_captioning_primary_switch_summary" msgid="2544094070306830218">"For supported app only"</string>
@@ -2762,7 +2770,7 @@
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Blue-yellow"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Grayscale"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensity"</string>
-    <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Unavailable for grayscale mode or when color correction is disabled"</string>
+    <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Unavailable for greyscale mode or when colour correction is disabled"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomaly"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomaly"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomaly"</string>
@@ -3387,7 +3395,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Enable the system CA certificate?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Disable the system CA certificate?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Permanently remove the user CA certificate?"</string>
-    <string name="trusted_credentials_category_content_description" msgid="3231536425237166912">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA certificates, double tap to expand or collapse"</string>
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA certificates, collapsed, double tap to expand"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA certificates, expanded, double tap to collapse"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Being used by"</string>
     <string name="credential_contains" msgid="3146519680449595771">"This entry contains"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 user key"</string>
@@ -3427,6 +3436,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Delete <xliff:g id="USER_NAME">%1$s</xliff:g> from this device"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Lock screen settings"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Add users from lock screen"</string>
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Add users from the sign-in screen"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Switch to admin user when docked"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Delete yourself?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Delete this user?"</string>
@@ -3827,8 +3837,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Dim the wallpaper"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"dim the wallpaper"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filter the brightness of the wallpaper"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Enable Dark theme"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"enable Dark theme"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Enable dark theme"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"enable dark theme"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Switch the device theme to use a dark background, which is easier on the eyes"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{No display changes}=1{{effect_1}}=2{{effect_1} and {effect_2}}=3{{effect_1}, {effect_2}, and {effect_3}}other{{effect_1}, {effect_2}, and # more}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Allow all notifications"</string>
@@ -3951,7 +3961,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Show only new notifications on lock screen"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automatically remove previously viewed notifications from the lock screen"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Full list"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Compact View"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Compact"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifications on lock screen"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Show conversations, default, and silent"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Show conversations, default, and silent"</string>
@@ -4600,7 +4610,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"For your security, Advanced Protection requires this setting to remain on"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"For your security, Advanced Protection requires this setting to remain off"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"For your security, Advanced Protection prevents this action"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"This network uses WEP, an outdated encryption method that can put your data at risk. WEP connections are blocked by Advanced Protection."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Settings"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Turn off"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Turn on"</string>
@@ -4777,7 +4786,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Temporarily disabled due to Battery Saver"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Turn off battery saver"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Temporarily turned on due to Battery Saver"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Try Dark theme"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Try dark theme"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Helps extend battery life"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Quick settings developer tiles"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Disable adb authorization timeout"</string>
@@ -5934,6 +5943,7 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Delete PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Add recovery email"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verify your email"</string>
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App store filters"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Website content filters"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Help filter explicit content on some apps and browsers on this phone. Explicit content may still show on other apps, devices, or browsers."</string>
@@ -5977,4 +5987,14 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Identity Check works with more apps"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Identity Check prevents unwanted access to your apps. Now available with any app that uses Fingerprint or Face Unlock."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"View details"</string>
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Couldnt check settings"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"No info yet"</string>
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

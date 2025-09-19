@@ -81,6 +81,12 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"ශ්‍රවණ උපකරණ සැකසීම්"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"කෙටිමඟ, ශ්‍රවණාධාරක අනුකූලත්වය"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"පෙරසැකසුම"</string>
+    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
+    <skip />
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"ඔබේ ශ්‍රව්‍ය විද්‍යාඥයා විසින් වැඩසටහන්ගත කළ පෙර සැකසීම් නොමැත"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"පෙර සැකසීම යාවත්කාලීන කළ නොහැකි විය"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"වටපිටාව"</string>
@@ -1683,7 +1689,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"වාර්ගික"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"වාර්ගික සැකසීම්"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"මධ්‍යස්ථාන ප්‍රකාරය"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"අගුළු තිරයෙහි විජට් (බීටා)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"අගුළු තිරයෙහි විජට්"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"ස්වයංක්‍රීයව පෙන්විය යුත්තේ කෙවිට ද"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"කවදාවත් නෑ"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"ආරෝපණය වන අතරේ"</string>
@@ -1947,8 +1957,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"අඟුළු හැරීමේ රටාවක් අඳින්න"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"උදව් සඳහා මෙනු ඔබන්න."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"අවසන් කළ විට ඇඟිල්ල අත්හරින්න"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"අඩු තරමින් තිත් <xliff:g id="NUMBER">%d</xliff:g>ක් සම්බන්ධ කරන්න"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"අඩු තරමින් ලක්ෂ්‍ය <xliff:g id="NUMBER">%d</xliff:g> ක් වත් සම්බන්ධ කරන්න. නැවත උත්සාහ කරන්න."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"රටාව වාර්තා කර ගැනිණි"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"තහවුරු කිරීමට රටාව නැවත අඳින්න"</string>
@@ -2411,6 +2420,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"සංචාලන මාදිලිය, තිර කරකැවීම"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"ප්‍රතිපෝෂණය යවන්න"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"සමීක්ෂණය ගන්න"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"ප්‍රවේශ්‍යතා සමීක්ෂණය"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"ඔබේ ප්‍රතිපෝෂණය බෙදා ගන්න"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"අඳුරු තේමාව ගැන ඔබ කෙතරම් තෘප්තිමත් ද?"</string>
@@ -2587,10 +2597,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"විකල්ප"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"කාල නියාමනය"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"සම්මත"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"සම්මත අඳුරු තේමාව"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"සම්මත අඳුරු තේමාව"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"ඔබේ උපාංගය සහ අඳුරු තේමාවට සහය දක්වන යෙදුම් සඳහා අඳුරු තේමාව ක්‍රියාත්මක කරයි"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"දිග හරින ලදි"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"පුළුල් කළ අඳුරු තේමාව"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"පුළුල් කළ අඳුරු තේමාව"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"එයට සහය නොදක්වන බොහෝ යෙදුම් සඳහා අඳුරු තේමාව ස්වයංක්‍රීයව යොදයි. මෙය ප්‍රවේශ්‍යතාව සහ කියවීමේ හැකියාව වැඩි දියුණු කළ හැකි නමුත්, සමහර යෙදුම් වැරදි ලෙස පෙන්වීමට හේතු විය හැක."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"බලපෑම් සහිත අපවර්තනය,වර්ණ අපවර්තනය, පරස්පරතාව"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"සජීවීකරණ ඉවත් කරන්න"</string>
@@ -2621,7 +2631,8 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"වර්ණ අපවර්තනය භාවිත කරන්න"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"වර්ණ අපවර්තනය කිරීමේ කෙටි මග"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"වර්ණ අපවර්තනය ළා තිර අඳුරු බවට හරවයි. එය අඳුරු තිර ළා බවටද හරවයි."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;සිතෙහි තබා ගන්න&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; මාධ්‍ය සහ රූපවල වර්ණ වෙනස් වනු ඇත&lt;/li&gt; &lt;li&gt; වර්ණ අපවර්තනය සියලු යෙදුම්වල ක්‍රියා කරයි&lt;/li&gt; &lt;li&gt; අඳුරු පසුබිමක් සංදර්ශනය කිරීමට, ඒ වෙනුවට අඳුරු තේමාව භාවිත කළ හැකිය&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for accessibility_display_inversion_preference_subtitle (8748527808247125417) -->
+    <skip />
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"සැකසීම් ඇතුළත් කරන්න"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"ස්වයං ක්ලික් කිරීම (රැඳී සිටින කාල නිර්ණය)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"ස්වයං ක්ලික් ගැන (රැඳී සිටින කාලය)"</string>
@@ -3388,7 +3399,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"පද්ධති CA සහතිකය සබල කරන්නද?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"පද්ධති CA සහතිකය අබල කරන්නද?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"පරිශීලක CA සහතික සදාකාලිකවම ඉවත් කරන්නද?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"මගින් භාවිතා කරමින් ඇත"</string>
     <string name="credential_contains" msgid="3146519680449595771">"මෙම ඇතුළත් කිරීමේ අඩංගු වේ"</string>
@@ -3429,6 +3442,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"මෙම උපාංගයෙන් <xliff:g id="USER_NAME">%1$s</xliff:g> මකන්න"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"අගුලු තිර සැකසීම්"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"අගුලු තිරයෙන් පරිශීලකයන් එක් කරන්න"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"ඈඳූ වූ විට පරිපාලක පරිශීලක වෙත මාරු වන්න"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"ඔබව මකන්නද?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"මෙම පරිශීලකයා මකන්නද?"</string>
@@ -3829,8 +3844,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"වෝල්පේපරය අඳුරු කරන්න"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"වෝල්පේපරය අඳුරු කරන්න"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"බිතුපතේ දීප්තිය පෙරන්න"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"අඳුරු තේමාව සබල කරන්න"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"අඳුරු තේමාව සබල කරන්න"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"අඳුරු තේමාව සබල කරන්න"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"අඳුරු තේමාව සබල කරන්න"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"ඇස්වලට පහසු අඳුරු පසුබිමක් භාවිත කිරීමට උපාංග තේමාව මාරු කරන්න"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{සංදර්ශක වෙනස්කම් කිසිවක් නැත}=1{{effect_1}}=2{{effect_1} සහ {effect_2}}=3{{effect_1}, {effect_2} සහ {effect_3}}one{{effect_1}, {effect_2}, සහ තව # ක්}other{{effect_1}, {effect_2}, සහ තව # ක්}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"සියලු දැනුම්දීම්වලට ඉඩ දෙන්න"</string>
@@ -3953,7 +3968,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"අගුළු තිරයෙහි නව දැනුම්දීම් පමණක් පෙන්වන්න"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"අගුළු තිරයෙන් කලින් බැලූ දැනුම්දීම් ස්වයංක්‍රීයව ඉවත් කරන්න"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"සම්පූර්ණ ලැයිස්තුව"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"සංයුක්ත දසුන"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"සංයුක්ත"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"අගුලු තිරයෙහි දැනුම් දීම්"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"සංවාද, පෙරනිමි සහ නිහඬ කරන්න පෙන්වන්න"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"සංවාද, පෙරනිමිය සහ නිහඬ පෙන්වන්න"</string>
@@ -4602,7 +4617,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"ඔබේ ආරක්ෂාව සඳහා, උසස් ආරක්ෂාවට මෙම සැකසීම ක්‍රියාත්මකව පැවතීම අවශ්‍ය වේ"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"ඔබේ ආරක්ෂාව සඳහා, උසස් ආරක්ෂාවට මෙම සැකසීම ක්‍රියාවිරහිතව තිබීම අවශ්‍ය වේ"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"ඔබේ ආරක්ෂාව සඳහා, උසස් ආරක්ෂාව මෙම ක්‍රියාව වළක්වයි"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"මෙම ජාලය WEP භාවිත කරයි, එය ඔබේ දත්ත අවදානමට ලක් කළ හැකි යල් පැන ගිය සංකේතන ක්‍රමයකි. උසස් ආරක්ෂණය මඟින් WEP සම්බන්ධතා අවහිර කර ඇත."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"සැකසීම්"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"ක්‍රියා විරහිත කරන්න"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"ක්‍රියාත්මක කරන්න"</string>
@@ -4779,7 +4793,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"බැටරි සුරැකුම හේතුවෙන් තාවකාලිකව අබල කරන ලදි"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"බැටරි සුරැකුම ක්‍රියාවිරහිත කරන්න"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"බැටරි සුරැකුම හේතුවෙන් තාවකාලිකව සක්‍රීය කළා"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"අඳුරු තේමාව උත්සාහ කරන්න"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"අඳුරු තේමාව උත්සාහ කරන්න"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"බැටරි ආයු කාලය දීර්ඝ කිරීමට උදව් වේ"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"ඉක්මන් සැකසීම් සංවර්ධක ටයිල්"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb අනුමැති කාල විරාමය අබල කරන්න"</string>
@@ -4810,10 +4824,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> ඔබේ අගුළු තිර කෙටිමඟ ද වේ. එය වෙනස් කිරීමට තට්ටු කරන්න."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"ඔබේ වත්මන් පෙරනිමි පසුම්බි යෙදුම මෙම අභිනයට සහාය නොදක්වයි"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"පෙරනිමි පසුම්බිය වෙනස් කරන්න"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"ඉංගිත, කෙටිමඟ"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"ගෙවන්න, ගෙවීම්"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"සෙල්ෆි සඳහා කැමරාව ෆ්ලිප් කරන්න"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"සංචාලනය ප්‍රකාරය"</string>
@@ -5938,6 +5950,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN එක මකන්න"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"ප්‍රතිසාධන ඉ-තැපෑල එක් කරන්න"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"ඔබේ ඉ-තැපෑල සත්‍යාපනය කරන්න"</string>
+    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"වෙබ් අඩවි අන්තර්ගත පෙරහන්"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"වෙබ් අඩවි පෙරහන්, අඩවි අවහිර කරන්න, බ්‍රව්සර් පෙරහන්, අසභ්‍ය අඩවි අවහිර කරන්න, අඩවි පෙරහන් කරන්න, සෙවුම් ප්‍රතිඵල අවහිර කරන්න, අසභ්‍ය සෙවුම් ප්‍රතිඵල පෙරහන් කරන්න, අන්තර්ගත සීමා කිරීම්"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"මෙම දුරකථනයේ සමහර යෙදුම් සහ බ්‍රව්සර්වල අසභ්‍ය අන්තර්ගතය පෙරහන් කිරීමට උදවු කරන්න. වෙනත් යෙදුම්, උපාංග හෝ බ්‍රව්සර්වල තවමත් අසභ්‍ය අන්තර්ගතයන් පෙන්විය හැක."</string>
@@ -5981,4 +5995,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"අනන්‍යතා පරීක්ෂාව තවත් යෙදුම් සමඟ ක්‍රියා කරයි"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"අනන්‍යතා පරීක්ෂාව ඔබගේ යෙදුම් වෙත අනවශ්‍ය ප්‍රවේශය වළක්වයි. දැන් ඇඟිලි සලකුණු හෝ මුහුණු අගුළු හැරීම භාවිතා කරන ඕනෑම යෙදුමක් සමඟ ලබා ගත හැකිය."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"විස්තර බලන්න"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>
