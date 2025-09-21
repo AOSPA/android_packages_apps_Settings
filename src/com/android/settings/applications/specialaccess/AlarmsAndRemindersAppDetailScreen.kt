@@ -98,7 +98,7 @@ open class AlarmsAndRemindersAppDetailScreen(context: Context, arguments: Bundle
         fun parameters(context: Context, showSystemApp: Boolean) =
             parameters(context, showSystemApp, ::alarmsAndRemindersFilter)
 
-        private fun alarmsAndRemindersFilter(context: Context, appInfo: ApplicationInfo?): Boolean {
+        fun alarmsAndRemindersFilter(context: Context, appInfo: ApplicationInfo?): Boolean {
             if (appInfo == null) return false
             val packageInfo =
                 context.getPackageInfoWithPermissions(appInfo.packageName) ?: return false

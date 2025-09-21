@@ -81,6 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Eshitish qurilmasi sozlamalari"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Tezkor tugma, eshitish apparati bilan moslik"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Andoza"</string>
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Chap andoza"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Oʻng andoza"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Chap: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Oʻng: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Audiolog dasturlagan andozalar topilmadi"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Andoza yangilanmadi"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Atrof-muhit"</string>
@@ -1683,7 +1686,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Umumiy"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Umumiy sozlamalar"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub rejimi"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Ekran qulfidagi vidjetlar (beta)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Ekran qulfidagi vidjetlar"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Qachon avtomatik chiqsin"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Hech qachon"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Quvvat olayotganda"</string>
@@ -1947,8 +1954,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Grafik kalitni chizing"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Yordam uchun Menyu‘ni bosing."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Tugagach, barmoqni ekrandan oling"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Kamida <xliff:g id="NUMBER">%d</xliff:g> ta nuqtani ulang"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Kamida <xliff:g id="NUMBER">%d</xliff:g> ta nuqtani ulang"</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Grafik kalit saqlandi"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Kalitni yana bir marta chizing"</string>
@@ -2411,6 +2417,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Navigatsiya rejimi, ekranni burish"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Fikr-mulohaza"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Ishtirok etish"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Qulaylik soʻrovnomasi"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Fikr-mulohaza bildiring"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Tungi mavzudan qanchalik qoniqdingiz?"</string>
@@ -2587,10 +2594,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Variantlar"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Vaqtlar"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standart"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Standart Tungi mavzu"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Standart Tungi mavzu"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Tungi mavzuni dastaklovchi qurilma va ilovalar uchun tungi mavzuni faollashtiradi."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Yoyilgan"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Kengaytirilgan Tungi mavzu"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Kengaytirilgan Tungi mavzu"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Uni dastaklamaydigan aksariyat ilovalarga tungi mavzuni avtomatik tatbiq etadi. Bu qulaylik va oʻqilish imkoniyatini yaxshilashi mumkin, ammo ayrim ilovalar xato aks etishiga olib kelishi mumkin."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"majburiy akslantirish, rangni akslantirish, kontrast"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animatsiyalarni olib tashlash"</string>
@@ -2621,7 +2628,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Ranglarni akslantirish"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Ranglarni akslantirish tezkor tugmasi"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Ranglarni akslantirish yorqin ranglarni qora ranglarga almashtiradi. Shuningdek, qora ekranni yorqinlashtiradi."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Yodda tuting&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Ranglar media va rasmlardan almashadi&lt;/li&gt; &lt;li&gt; Ranglarni akslantirish barcha ilovalarda ishlaydi&lt;/li&gt; &lt;li&gt; Qora orqa fonni koʻrsatish uchun tungi mavzu ishlatilishi mumkin&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Yodda tuting&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Ranglar media va rasmlardan almashadi&lt;/li&gt; &lt;li&gt; Ranglarni akslantirish barcha ilovalarda ishlaydi&lt;/li&gt; &lt;li&gt; Qora orqa fonni koʻrsatish uchun tungi mavzu ishlatilishi mumkin&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"sozlamalarga kiring"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Avtoklik (kechikish vaqti)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Avtobosish haqida (kechikish vaqti)"</string>
@@ -3388,7 +3395,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Tizimning SM sertifikati yoqilsinmi?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Tizimning SM sertifikati o‘chirib qo‘yilsinmi?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Foydalanuvchining SM sertifikati butunlay o‘chirilsinmi?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Bu tomondan ishlatilmoqda"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Bu quyidagilardan tashkil topgan"</string>
@@ -3429,6 +3438,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Olib tashlash (<xliff:g id="USER_NAME">%1$s</xliff:g>)"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Qulflangan ekran sozlamalari"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Foydalanuvchilarni ekran qulfidan qo‘shish"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Dok-stantsiyasiga ulanganda administratorga oʻtish"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Profilingiz o‘chirilsinmi?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Olib tashlansinmi?"</string>
@@ -3829,8 +3840,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Fon rasmini xiralashtirish"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"fon rasmini xiralashtirish"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Fon rasmi yorqinligini filrtlash"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Tungi mavzuni yoqish"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"Tungi mavzuni yoqish"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Tungi mavzuni yoqish"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"tungi mavzuni yoqish"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Qurilma mavzusini koʻzlar uchun qulay boʻlgan tungi fonga oʻzgartiring"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Ekran oʻzgarishlarsiz}=1{{effect_1}}=2{{effect_1} va {effect_2}}=3{{effect_1}, {effect_2} va {effect_3}}other{{effect_1}, {effect_2} va yana # ta}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Barcha bildirishnomalarga ruxsat"</string>
@@ -3953,7 +3964,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Ekran qulfida faqat yangi bildirishnomalarni chiqarish"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Bloklangan ekrandan oldin ochilgan bildirishnomalarni avtomatik olib tashlash"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Butun roʻyxat"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Ixcham rejim"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Ixcham"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Ekran qulfida bildirishnomalar"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Suhbatlarni chiqarish, standart holatda, sokin"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Suhbatlarni chiqarish, standart holatda, sokin"</string>
@@ -4602,7 +4613,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Xavfsizligingiz uchun Kengaytirilgan himoya bu sozlamaning yoniq turishini talab qiladi"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Xavfsizligingiz uchun Kengaytirilgan himoya bu sozlamani faolsizlantirishni talab qiladi"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Xavfsizligingiz uchun Kengaytirilgan himoya bu harakatning oldini oladi"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Bu tarmoq maʼlumotlaringizni xavf ostiga qoʻyishi mumkin boʻlgan eskirgan WEP shifrlash usulidan foydalanadi. WEP ulanishlari Kengaytirilgan himoya tomonidan bloklangan."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Sozlamalar"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Faolsizlantirish"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Yoqish"</string>
@@ -4779,7 +4789,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Quvvat tejash maqsadida vaqtinchalik faolsizlantirilgan"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Quvvat tejash rejimidan chiqish"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Quvvat tejash rejimi sababli vaqtinchalik yoqilgan"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Tungi mavzuni sinang"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Tungi mavzuni sinang"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Batareya quvvatini tejaydi"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Tezkor sozlamalarning dasturchi tugmalari"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb avtorizatsiyasini bekor qilishni faolsizlantirish"</string>
@@ -4810,10 +4820,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> ham sizning ekran qulfi yorligʻingizdir. Uni oʻzgartirish uchun bosing."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Joriy birlamchi hamyon ilovangizda bu ishora ishlamaydi"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Birlamchi hamyonni oʻzgartirish"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"ishoralar, tezkor tugma"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"toʻlash, toʻlovlar"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Selfi uchun old kamera"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigatsiya rejimi"</string>
@@ -5938,6 +5946,7 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN kodni oʻchirish"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Zaxiraviy email kiritish"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Email manzilingizni tasdiqlang"</string>
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App Store filtrlari"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Veb-sayt kontent filtri"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Veb-sayt filtrlari, Saytlarni bloklash, Brauzer filtrlari, Behayo saytlarni bloklash, Saytlarni filtrlash, Qidiruv natijalarini bloklash, Behayo qidiruv natijalarini filtrlash, kontent uchun cheklovlar"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Bu telefondagi ayrim ilovalar va brauzerlarda behayo kontentni filtrlashga yordam beradi. Behayo kontent hanuz boshqa ilovalar, qurilmalar yoki brauzerlarda chiqishi mumkin."</string>
@@ -5981,4 +5990,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Shaxsni tasdiqlash endi koʻproq ilovalarda ishlaydi"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Shaxsni tasdiqlash ilovalar ruxsatsiz ochilishini cheklaydi. Endi Barmoq izi yoki Yuz bilan ochish mumkin istalgan ilovada ishlaydi."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Batafsil"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

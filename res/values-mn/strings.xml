@@ -81,6 +81,12 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Сонсголын төхөөрөмжийн тохиргоо"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Товчлол, сонсголын төхөөрөмжийн зохицол"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Урьдчилсан тохируулга"</string>
+    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
+    <skip />
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Сонсгол судлаачийн программчилсан урьдчилсан тохируулга алга"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Урьдчилсан тохируулгыг шинэчилж чадсангүй"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Орчин тойрон"</string>
@@ -1683,7 +1689,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Нийтийн"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Нийтийн тохиргоо"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub горим"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Түгжээтэй дэлгэц дээрх виджет (бета)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Түгжээтэй дэлгэц дээрх виджет"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Хэзээ автоматаар харуулах вэ?"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Хэзээ ч үгүй"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Цэнэглэж байхад"</string>
@@ -1947,8 +1957,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Тайлах хээг зурна уу"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Цэсийг дарж туслам аваарай."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Дуусаад хуруугаа аваарай"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Дор хаяж <xliff:g id="NUMBER">%d</xliff:g> цэг холбоно уу"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Хамгийн багадаа <xliff:g id="NUMBER">%d</xliff:g> цэгийг холбоно уу. Дахиж оролдоорой."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Хээ бичигдсэн"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Баталгаажуулахын тулд хээг дахиад зурна уу"</string>
@@ -2411,6 +2420,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Шилжих горим, дэлгэц эргүүлэх"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Санал хүсэлт илгээх"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Судалгаа бөглөх"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Хүртээмжтэй байдлын судалгаа"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Санал хүсэлтээ хуваалцах"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Та бараан загварт хэр сэтгэл хангалуун байна вэ?"</string>
@@ -2587,10 +2597,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Сонголтууд"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Цагийн тохиргоо"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Стандарт"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Стандарт Бараан загвар"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Стандарт Бараан загвар"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Бараан загварыг дэмждэг таны төхөөрөмж, аппуудын бараан загварыг асаана"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Өргөтгөсөн"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Өргөтгөсөн Бараан загвар"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Өргөтгөсөн Бараан загвар"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Бараан загварыг дэмждэггүй ихэнх аппад автоматаар ашиглана. Энэ нь хүртээмж, уншигдах байдлыг сайжруулж болох ч зарим аппыг буруу харуулж болзошгүй."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"албадан урвуулах, өнгө урвуулах, ялгарал"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Анимацийг хасах"</string>
@@ -2621,7 +2631,8 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Өнгө урвуулахыг ашиглах"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Өнгө урвуулах товчлол"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Өнгө урвуулах онцлог нь цайвар дэлгэцийг бараан болгоно. Энэ нь мөн бараан дэлгэцийг цайвар болгоно."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Анхаарна уу&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Медиа болон зураг дахь өнгөнүүд өөрчлөгдөнө&lt;/li&gt; &lt;li&gt; Өнгө урвуулах онцлог нь бүх апп дээр ажиллана&lt;/li&gt; &lt;li&gt; Бараан дэвсгэрийг үзүүлэхийн тулд оронд нь Бараан загварыг ашиглах боломжтой&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for accessibility_display_inversion_preference_subtitle (8748527808247125417) -->
+    <skip />
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"тохиргоо оруулах"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Автомат товшилт (курсор зогссоноос эхлэн автоматаар товшихын хоорондох хугацаа)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Автомат товшилтын талаар (тодорхой хугацаа)"</string>
@@ -3388,7 +3399,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Системийн CA сертификатыг идэвхжүүлэх үү?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Системийн CA сертификатыг идэвхгүйжүүлэх үү?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Хэрэглэгчийн CA сертификатыг бүрмөсөн арилгах уу?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Ашиглаж байна"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Энэ оролтод"</string>
@@ -3429,6 +3442,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g>-г энэ төхөөрөмжөөс устгах"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Дэлгэц түгжих тохиргоо"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Түгжээтэй дэлгэцээс хэрэглэгч нэмэх"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Суурилуулах үед админ хэрэглэгч рүү сэлгэх"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Өөрийгөө устгах уу?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Энэ хэрэглэгчийг устгах уу?"</string>
@@ -3829,8 +3844,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Дэлгэцийн зургийг бүдгэрүүлэх"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"дэлгэцийн зургийг бүдгэрүүлэх"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Дэлгэцийн зургийн гэрэлтүүлгийг шүүх"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Бараан загварыг идэвхжүүлэх"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"Бараан загварыг идэвхжүүлэх"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Бараан загварыг идэвхжүүлэх"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"бараан загварыг идэвхжүүлэх"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Төхөөрөмжийн загварыг нүдэнд ачаалал бага өгөх бараан дэвсгэр ашиглахаар сэлгэнэ үү"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Дэлгэцийн ямар ч өөрчлөлт байхгүй}=1{{effect_1}}=2{{effect_1}, {effect_2}}=3{{effect_1}, {effect_2}, {effect_3}}other{{effect_1}, {effect_2}, өөр #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Бүх мэдэгдлийг зөвшөөрөх"</string>
@@ -3953,7 +3968,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Түгжигдсэн дэлгэцэд зөвхөн шинэ мэдэгдэл харуулах"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Өмнө нь үзсэн мэдэгдлийг түгжигдсэн дэлгэцээс автоматаар хасах"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Бүтэн жагсаалт"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Товч тодорхой харагдах байдал"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Товч тодорхой"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Түгжээтэй дэлгэц дээрх мэдэгдэл"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Харилцан яриа, өгөгдмөл болон чимээгүй мэдэгдлийг харуулна"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Харилцан яриа, өгөгдмөл болон чимээгүй мэдэгдлийг харуулна"</string>
@@ -4602,7 +4617,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Таныг аюулгүй байлгах үүднээс Дэвшилтэт хамгаалалт энэ тохиргоог асаалттай байхыг шаарддаг"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Таныг аюулгүй байлгах үүднээс Дэвшилтэт хамгаалалт энэ тохиргоог унтраалттай байхыг шаарддаг"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Таныг аюулгүй байлгах үүднээс Дэвшилтэт хамгаалалт энэ үйлдлээс сэргийлсэн"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Энэ сүлжээ таны өгөгдлийг эрсдэлд оруулж болох хуучирсан шифрлэх арга болох WEP-г ашигладаг. WEP холболтыг Дэвшилтэт хамгаалалтаас блоклосон."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Тохиргоо"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Унтраах"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Асаах"</string>
@@ -4779,7 +4793,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Батарей хэмнэгчийн улмаас түр зуур идэвхгүй болгосон"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Батарей хэмнэгчийн унтраах"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Батарей хэмнэгчийн улмаас түр хугацаанд асаасан"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Бараан загварыг туршиж үзнэ үү"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Бараан загварыг туршиж үзнэ үү"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Батарейн ажиллах хугацааг сунгахад тусалдаг"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Шуурхай тохиргоо хөгжүүлэгчийн хавтан"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"ADB-н зөвшөөрлийн хугацааг идэвхгүй болгох"</string>
@@ -4810,10 +4824,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> нь мөн таны түгжээтэй дэлгэцийн товчлол юм. Үүнийг өөрчлөхийн тулд товшино уу."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"Таны одоогийн түрийвчийн өгөгдмөл апп энэ ангааг дэмждэггүй"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Өгөгдмөл түрийвчийг өөрчилнө үү"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"зангаа, товчлол"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"төлөх, төлбөр"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Сельфи авахын тулд камерыг далбилзуулах"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Навигацын горим"</string>
@@ -5938,6 +5950,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"ПИН-г устгах"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Сэргээх имэйл хаяг нэмэх"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Имэйлээ баталгаажуулах"</string>
+    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Вебсайтын контентын шүүлтүүр"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Вебсайтын шүүлтүүр, Сайтыг блоклох, Хөтчийн шүүлтүүр, Насанд хүрэгчдийн сайтыг блоклох, Сайтыг шүүх, Хайлтын илэрцийг блоклох, Насанд хүрэгчдийн хайлтын илэрцийг шүүх, контентын хязгаарлалт"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Энэ утсан дээрх зарим, хөтөч дээрх насанд хүрэгчдийн контентыг шүүхэд тусална уу. Бусад апп, төхөөрөмж, хөтөч дээр насанд хүрэгчдийн контентыг харуулсаар байж магадгүй."</string>
@@ -5981,4 +5995,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Өөрөө мөн эсэхийг шалгах нь илүү олон апптай ажилладаг"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Өөрөө мөн эсэхийг шалгах нь таны аппуудад хүсээгүй байдлаар хандахаас сэргийлнэ. Одоо хурууны хээ эсвэл царайгаар түгжээ тайлахыг ашигладаг ямар ч апп дээр ашиглах боломжтой."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Дэлгэрэнгүй үзэх"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

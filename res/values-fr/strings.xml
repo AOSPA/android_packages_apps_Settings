@@ -81,6 +81,12 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Paramètres de l\'appareil auditif"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Raccourci, compatibilité avec les appareils auditifs"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Préréglages"</string>
+    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
+    <skip />
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Votre spécialiste de l\'audition n\'a configuré aucun préréglage"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Impossible de mettre à jour les préréglages"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Sons environnants"</string>
@@ -1013,8 +1019,7 @@
     <string name="external_display_no_display_connected_screen_title" msgid="4854597444155430591">"Aucun écran connecté"</string>
     <string name="external_display_no_display_connected_screen_summary" msgid="3114991534614756600">"Connectez un écran externe pour commencer ou essayez d\'utiliser un autre câble"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Autres options"</string>
-    <!-- no translation found for external_display_topology_hint (885396727047321347) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="885396727047321347">"Appuyez de manière prolongée et faites glisser pour réorganiser les écrans"</string>
     <string name="external_display_mirroring_title" msgid="2688288527687724603">"Dupliquer l\'écran intégré"</string>
     <string name="external_display_resolution_change_dialog_title" msgid="8834095214420638411">"Utiliser les nouveaux paramètres ?"</string>
     <string name="external_display_resolution_change_dialog_description" msgid="813174417182932956">"Si votre écran ne fonctionne pas comme vous le souhaitez, vous pouvez rétablir vos paramètres précédents"</string>
@@ -1582,8 +1587,7 @@
     <string name="storage_settings_for_app" msgid="229425418984637483">"Espace de stockage et cache"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Paramètres de stockage"</string>
     <string name="status_eid" msgid="3588471107671992684">"Numéro E​ID"</string>
-    <!-- no translation found for eid_multi_sim (3054468215477777096) -->
-    <skip />
+    <string name="eid_multi_sim" msgid="3054468215477777096">"E​ID <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
     <string name="imei_multi_sim" msgid="6990044568468728075">"IMEI <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Pour l\'afficher, sélectionnez un réseau enregistré"</string>
     <string name="status_imei" msgid="5719752369250485007">"Code IMEI"</string>
@@ -1685,7 +1689,11 @@
     <string name="communal_settings_title" msgid="2845678473945902115">"Communs"</string>
     <string name="communal_settings_summary" msgid="4923914136953940317">"Paramètres communs"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Mode Hub"</string>
-    <string name="widgets_on_lockscreen_title" msgid="1492206992134138952">"Widgets sur l\'écran de verrouillage (bêta)"</string>
+    <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets sur l\'écran de verrouillage"</string>
+    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
+    <skip />
+    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
+    <skip />
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Quand afficher les widgets automatiquement"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Jamais"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Lorsque l\'appareil est en charge"</string>
@@ -1949,8 +1957,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Dessinez un schéma de déverrouillage"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Appuyez sur Menu pour obtenir de l\'aide."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Relevez le doigt lorsque vous avez terminé"</string>
-    <!-- no translation found for lockpattern_recording_inprogress_click (8502597789237564270) -->
-    <skip />
+    <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"Reliez au moins <xliff:g id="NUMBER">%d</xliff:g> points"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Reliez au moins <xliff:g id="NUMBER">%d</xliff:g> points. Réessayez."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Schéma enregistré"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Tracez de nouveau le schéma pour confirmer"</string>
@@ -2413,6 +2420,7 @@
     <string name="accessibility_system_controls_subtext_one_handed_not_supported" msgid="4973507525360793402">"Mode de navigation, rotation de l\'écran"</string>
     <string name="accessibility_send_feedback_title" msgid="6455703838689943046">"Envoyer des commentaires"</string>
     <string name="accessibility_send_survey_title" msgid="7494065908292980253">"Répondre à l\'enquête"</string>
+    <string name="accessibility_disability_support_title" msgid="6485961044665887515"></string>
     <string name="accessibility_send_survey_notification_channel" msgid="6136555229886306184">"Enquête sur l\'accessibilité"</string>
     <string name="dark_theme_survey_notification_title" msgid="662387994868661452">"Envoyer des commentaires"</string>
     <string name="dark_theme_survey_notification_summary" msgid="8706870943336979672">"Dans quelle mesure êtes-vous satisfait du thème sombre ?"</string>
@@ -2589,10 +2597,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Options"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Programmation"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="1374136983709402050">"Thème sombre standard"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Thème sombre standard"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Active le thème sombre pour votre appareil et les applis qui le prennent en charge"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Étendu"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="7467343853315678576">"Thème sombre étendu"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Thème sombre étendu"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Applique automatiquement le thème sombre à la plupart des applis qui ne le prennent pas en charge. Cela peut améliorer l\'accessibilité et la lisibilité, mais certaines applis peuvent s\'afficher de manière incorrecte."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"forcer l\'inversion, inversion des couleurs, contraste"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Supprimer les animations"</string>
@@ -2623,7 +2631,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utiliser l\'inversion des couleurs"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Raccourci vers Inversion des couleurs"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Avec l\'inversion des couleurs, les écrans clairs deviennent sombres et les écrans sombres deviennent clairs."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;À noter&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Les contenus multimédias et les images changeront de couleur&lt;/li&gt; &lt;li&gt; L\'inversion des couleurs fonctionne dans toutes les applis&lt;/li&gt; &lt;li&gt; Pour afficher un fond noir, le thème sombre peut être utilisé à la place&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;À noter&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Les contenus multimédias et les images changeront de couleur&lt;/li&gt; &lt;li&gt; L\'inversion des couleurs fonctionne dans toutes les applis&lt;/li&gt; &lt;li&gt; Pour afficher un fond noir, le thème sombre peut être utilisé à la place&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"saisissez settings"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Clic auto (temps d\'interaction)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"À propos clic auto (temps d\'interaction)"</string>
@@ -3390,7 +3398,9 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Activer le certificat d\'autorité du système ?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Désactiver le certificat d\'autorité du système ?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Supprimer définitivement le certificat d\'autorité utilisateur ?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description (3231536425237166912) -->
+    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
+    <skip />
+    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
     <skip />
     <string name="credential_being_used_by" msgid="3682869943025283499">"Utilisé actuellement par"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Cette entrée contient"</string>
@@ -3431,6 +3441,8 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Supp. <xliff:g id="USER_NAME">%1$s</xliff:g> de l\'appareil"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Paramètres de l\'écran de verrouillage"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Ajouter des utilisateurs depuis l\'écran de verrouillage"</string>
+    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
+    <skip />
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Passer en admin quand sur station d\'accueil"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Supprimer cet utilisateur ?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Supprimer l\'utilisateur ?"</string>
@@ -3573,8 +3585,7 @@
     <string name="color_orange" msgid="216547825489739010">"Orange"</string>
     <string name="color_purple" msgid="6603701972079904843">"Violet"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"État de la carte SIM"</string>
-    <!-- no translation found for sim_status_title_sim_slot (8727408941064901486) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"État de la carte SIM %1$d"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Vos cartes SIM ont été interchangées"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Appuyez pour configurer."</string>
@@ -3832,8 +3843,8 @@
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Diminuer la luminosité du fond d\'écran"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"diminuer la luminosité du fond d\'écran"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrer la luminosité du fond d\'écran"</string>
-    <string name="mode_dark_theme_title" msgid="1938553262958310149">"Activer le thème sombre"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="2590918156799917127">"activer le thème sombre"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Activer le thème sombre"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"activer le thème sombre"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Changer le thème de l\'appareil pour un arrière-plan sombre, plus reposant pour les yeux"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Aucun changement appliqué à l\'affichage}=1{{effect_1}}=2{{effect_1} et {effect_2}}=3{{effect_1}, {effect_2} et {effect_3}}one{{effect_1}, {effect_2} et # autre}other{{effect_1}, {effect_2} et # autres}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Autoriser toutes les notifications"</string>
@@ -3956,7 +3967,7 @@
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"N\'afficher que les nouvelles notif. sur l\'écran verrouillage"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Supprimer automatiquement de l\'écran de verrouillage les notifications déjà consultées"</string>
     <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Liste complète"</string>
-    <string name="lock_screen_notifs_show_compact" msgid="1944867696357706016">"Affichage compact"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Compact"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifications sur l\'écran de verrouillage"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Afficher les conversations, par défaut et silencieuses"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Afficher toutes les notifications"</string>
@@ -4605,7 +4616,6 @@
     <string name="disabled_by_advanced_protection_setting_is_on_message" msgid="4242986779932956593">"Pour votre sécurité, la Protection Avancée nécessite que ce paramètre reste activé"</string>
     <string name="disabled_by_advanced_protection_setting_is_off_message" msgid="7777487013672230696">"Pour votre sécurité, la Protection Avancée nécessite que ce paramètre reste désactivé"</string>
     <string name="disabled_by_advanced_protection_action_message" msgid="7164789633582857150">"Pour votre sécurité, la Protection Avancée empêche cette action"</string>
-    <string name="disabled_by_advanced_protection_wep_action_message" msgid="239574547298386495">"Ce réseau utilise le WEP, une méthode de chiffrement obsolète qui peut mettre vos données en danger. Les connexions WEP sont bloquées par la Protection Avancée."</string>
     <string name="disabled_by_advanced_protection_help_button_title" msgid="6539346613660731777">"Paramètres"</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Désactiver"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Activer"</string>
@@ -4782,7 +4792,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Temporairement désactivé par l\'économiseur de batterie"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Désactiver l\'économiseur de batterie"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Temporairement activé par l\'économiseur de batterie"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Essayer le thème sombre"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Essayer le thème sombre"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Améliore l\'autonomie de la batterie"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Blocs Réglages rapides pour les développeurs"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Désactiver le délai d\'expiration des autorisations adb"</string>
@@ -4813,10 +4823,8 @@
     <string name="double_tap_power_lockscreen_shortcut_tip_description" msgid="7572626485518591928">"<xliff:g id="DOUBLE_TAP_POWER_TARGET_ACTION">%1$s</xliff:g> est aussi votre raccourci d\'écran de verrouillage. Appuyez pour le modifier."</string>
     <string name="double_tap_power_wallet_footer_title" msgid="4626950875173822614">"L\'appli de portefeuille par défaut actuelle n\'est pas compatible avec ce geste"</string>
     <string name="double_tap_power_wallet_footer_learn_more_text" msgid="4871482943751760132">"Modifier le portefeuille par défaut"</string>
-    <!-- no translation found for keywords_double_tap_power (1238828843085517844) -->
-    <skip />
-    <!-- no translation found for keywords_double_tap_power_wallet_action (1118418868964220150) -->
-    <skip />
+    <string name="keywords_double_tap_power" msgid="1238828843085517844">"gestes, raccourci"</string>
+    <string name="keywords_double_tap_power_wallet_action" msgid="1118418868964220150">"payer, paiements"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Basculer entre les caméras"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Mode de navigation"</string>
@@ -5800,7 +5808,7 @@
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Mot de passe"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Améliorer la compatibilité"</string>
     <string name="audio_sharing_stream_compatibility_description" msgid="8170241188606110963">"Aide certains appareils, comme les appareils auditifs, à se connecter en réduisant la qualité audio"</string>
-    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Désactive le partage audio pour configurer la compatibilité"</string>
+    <string name="audio_sharing_stream_compatibility_disabled_description" msgid="689007549232438065">"Désactivez le partage audio pour modifier les paramètres"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Écouter l\'audio à proximité"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Le partage audio est compatible avec Auracast™"</string>
     <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Nom du flux audio"</string>
@@ -5941,6 +5949,8 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Supprimer le code"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Ajouter une adresse e-mail de récupération"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Valider votre adresse e-mail"</string>
+    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtres de contenu de site Web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtres de sites Web, bloquer les sites, filtres de navigateur, bloquer les sites au contenu explicite, filtrer les sites, bloquer les résultats de recherche, filtrer les résultats de recherche au contenu explicite, restrictions de contenu"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Aidez à filtrer le contenu explicite sur certaines applis et certains navigateurs sur ce téléphone. Le contenu explicite peut toujours s\'afficher sur d\'autres applis, appareils ou navigateurs."</string>
@@ -5984,4 +5994,16 @@
     <string name="identity_check_notification_title" msgid="8004343932775654492">"La vérification de l\'identité fonctionne avec plus d\'applis"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"La vérification de l\'identité empêche les accès indésirables à vos applis. Désormais disponible avec n\'importe quelle appli utilisant le déverrouillage par empreinte digitale ou par reconnaissance faciale."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Afficher les détails"</string>
+    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
+    <skip />
+    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
+    <skip />
+    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
+    <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
+    <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
+    <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
+    <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
+    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
 </resources>

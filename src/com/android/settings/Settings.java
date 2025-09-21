@@ -42,6 +42,8 @@ import com.android.settings.applications.specialaccess.SpecialAccessSettings;
 import com.android.settings.applications.specialaccess.SpecialAccessSettingsScreen;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.communal.CommunalPreferenceController;
+import com.android.settings.datausage.BillingCycleScreen;
+import com.android.settings.datausage.BillingCycleSettings;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.display.ColorModePreferenceFragment;
@@ -383,6 +385,11 @@ public class Settings extends SettingsActivity {
     public static class DeviceAdminSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DataUsageSummaryActivity extends SettingsActivity { /* empty */ }
     public static class MobileDataUsageListActivity extends SettingsActivity { /* empty */ }
+    public static class BillingCycleActivity extends CatalystSettingsActivity {
+        public BillingCycleActivity() {
+            super(BillingCycleScreen.KEY, BillingCycleSettings.class);
+        }
+    }
     public static class ConfigureWifiSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SavedAccessPointsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TextToSpeechSettingsActivity extends SettingsActivity { /* empty */ }

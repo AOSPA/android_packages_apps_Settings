@@ -13,34 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.android.settings.accessibility.screenmagnification.ui
+package com.android.settings.supervision
 
 import android.content.Context
 import com.android.settings.R
-import com.android.settings.accessibility.extensions.isInSetupWizard
-import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TopIntroPreference
 
-internal class MagnificationTopIntroPreference :
-    PreferenceMetadata, PreferenceBinding, PreferenceAvailabilityProvider {
-
+class SupervisionAppStoreFiltersTopIntroPreference : PreferenceMetadata, PreferenceBinding {
     override val key: String
         get() = KEY
 
     override val title: Int
-        get() = R.string.accessibility_screen_magnification_intro_text
+        get() = R.string.supervision_app_store_filters_top_intro
 
-    override val indexable
+
+    override val indexable: Boolean
         get() = false
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
 
-    override fun isAvailable(context: Context): Boolean = !context.isInSetupWizard()
-
     companion object {
-        const val KEY = "top_intro"
+        const val KEY = "supervision_app_store_filters_intro"
     }
 }

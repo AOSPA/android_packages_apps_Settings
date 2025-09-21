@@ -81,6 +81,10 @@ public class MainSwitchBarController extends SwitchWidgetController implements
         }
     }
 
+    /**
+     * @deprecated Use {@link #setDisabledByAdmin(EnforcingAdmin)} instead.
+     */
+    @Deprecated
     @Override
     public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
         mMainSwitch.setDisabledByAdmin(admin);

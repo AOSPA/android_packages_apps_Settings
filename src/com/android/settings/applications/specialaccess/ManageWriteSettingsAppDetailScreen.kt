@@ -82,10 +82,7 @@ open class ManageWriteSettingsAppDetailScreen(context: Context, arguments: Bundl
         fun parameters(context: Context, showSystemApp: Boolean) =
             parameters(context, showSystemApp, ::manageWriteSettingsFilter)
 
-        private fun manageWriteSettingsFilter(
-            context: Context,
-            appInfo: ApplicationInfo?,
-        ): Boolean {
+        fun manageWriteSettingsFilter(context: Context, appInfo: ApplicationInfo?): Boolean {
             if (appInfo == null) return false
             val packageInfo =
                 context.getPackageInfoWithPermissions(appInfo.packageName) ?: return false
