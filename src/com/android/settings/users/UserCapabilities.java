@@ -76,7 +76,7 @@ public class UserCapabilities {
         boolean offerRestricted =
                 context.getResources().getBoolean(R.bool.config_offer_restricted_profiles);
         caps.mCanAddRestrictedProfile =
-                offerRestricted && !dpm.isDeviceManaged() && userManager.isUserTypeEnabled(
+                offerRestricted && !dpm.isDeviceManaged() && userManager.isUserTypeSupported(
                         UserManager.USER_TYPE_FULL_RESTRICTED);
         caps.mUserSwitchingUiEnabled = context.getResources().getBoolean(
                 com.android.internal.R.bool.config_allowChangeUserSwitcherEnabled);
@@ -97,7 +97,7 @@ public class UserCapabilities {
         if (!mIsAdmin
                 || !UserManager.supportsMultipleUsers()
                 || mDisallowAddUser
-                || (!userManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_SECONDARY)
+                || (!userManager.isUserTypeSupported(UserManager.USER_TYPE_FULL_SECONDARY)
                     && !mCanAddRestrictedProfile)) {
             mCanAddUser = false;
         }
@@ -108,7 +108,7 @@ public class UserCapabilities {
                 !mIsGuest
                         && !mDisallowAddUser
                         && canAddUsersWhenLocked
-                        && userManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_GUEST)
+                        && userManager.isUserTypeSupported(UserManager.USER_TYPE_FULL_GUEST)
                         && !isGuestEphemeralAndUnswitchable(context);
         updateSwitchUserRestriction(context);
     }
