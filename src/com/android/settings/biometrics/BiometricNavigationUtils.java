@@ -22,6 +22,7 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
 
 import android.annotation.NonNull;
+import android.annotation.Nullable;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.EnforcingAdmin;
 import android.content.Context;
@@ -31,7 +32,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.Nullable;
 
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.settings.core.SettingsBaseActivity;
