@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -39,6 +40,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.network.MobileDataContentObserver;
+import com.android.settings.network.RoamingPreferenceContentObserver;
 import com.android.settings.network.SubscriptionsChangeListener;
 
 public class DataDuringCallsPreferenceController extends TelephonyTogglePreferenceController
@@ -50,6 +52,7 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
     private SubscriptionsChangeListener mChangeListener;
     private TelephonyManager mManager;
     private MobileDataContentObserver mMobileDataContentObserver;
+    private RoamingPreferenceContentObserver mRoamingPreferenceContentObserver;
     private PreferenceScreen mScreen;
 
     private final BroadcastReceiver mDefaultDataChangedReceiver = new BroadcastReceiver() {
@@ -75,6 +78,7 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
+        Log.d(TAG, "onResume");
         if (mChangeListener == null) {
             mChangeListener = new SubscriptionsChangeListener(mContext, this);
         }
@@ -85,10 +89,22 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
             mMobileDataContentObserver.setOnMobileDataChangedListener(() -> refreshPreference());
         }
         mMobileDataContentObserver.register(mContext, mSubId);
+
+        if (mRoamingPreferenceContentObserver == null) {
+            mRoamingPreferenceContentObserver = new RoamingPreferenceContentObserver(
+                    new Handler(Looper.getMainLooper()));
+            mRoamingPreferenceContentObserver.setOnRoamingPreferenceChangedListener(
+                    () -> refreshPreference());
+        }
+        mRoamingPreferenceContentObserver.register(mContext, mSubId);
         final int defaultDataSub = SubscriptionManager.getDefaultDataSubscriptionId();
-        // Listen to mobile data status of DDS on non-DDS SUB
+
         if (defaultDataSub != mSubId) {
+            // Listen to mobile data status of DDS on non-DDS SUB
             mMobileDataContentObserver.register(mContext, defaultDataSub);
+
+            // Listen to roaming UI status of DDS on non-DDS SUB
+            mRoamingPreferenceContentObserver.register(mContext, defaultDataSub);
         }
         mContext.registerReceiver(mDefaultDataChangedReceiver,
                 new IntentFilter(TelephonyIntents.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED));
@@ -101,6 +117,9 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
         }
         if (mMobileDataContentObserver != null) {
             mMobileDataContentObserver.unRegister(mContext);
+        }
+        if (mRoamingPreferenceContentObserver != null) {
+            mRoamingPreferenceContentObserver.unRegister(mContext);
         }
         mContext.unregisterReceiver(mDefaultDataChangedReceiver);
     }
@@ -136,6 +155,7 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
 
     @Override
     public int getAvailabilityStatus(int subId) {
+        Log.d(TAG, "getAvailabilityStatus : subId = " + subId);
         if (!SubscriptionManager.isValidSubscriptionId(subId)
                 || SubscriptionManager.getDefaultDataSubscriptionId() == subId
                 || (!hasMobileData())) {
@@ -150,6 +170,27 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
         // Do not show 'Data during calls' preference when mobile data switch
         // for the DDS sub is turned off.
         if (!isDefDataEnabled) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        boolean isRoamingStateEnabled = mManager.createForSubscriptionId(
+                SubscriptionManager.getDefaultDataSubscriptionId()).isDataRoamingEnabled();
+
+        ServiceState serviceState =  mManager.createForSubscriptionId(
+                SubscriptionManager.getDefaultDataSubscriptionId()).getServiceState();
+
+        if (serviceState == null) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        boolean isDefaultDataInRoaming = serviceState.getDataRoaming();
+
+        Log.d(TAG, "getAvailabilityStatus : DDS Roaming UI = " + isRoamingStateEnabled
+                + ", DDS in roaming state = " + isDefaultDataInRoaming);
+
+        // Do not show 'Data during calls' preference when roaming UI switch
+        // for the DDS sub is turned off when DDS is in roaming.
+        if (!isRoamingStateEnabled && isDefaultDataInRoaming) {
             return CONDITIONALLY_UNAVAILABLE;
         }
 
@@ -189,6 +230,7 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
      */
     @VisibleForTesting
     public void refreshPreference() {
+        Log.d(TAG, "refreshPreference");
         if (mScreen != null) {
             super.displayPreference(mScreen);
         }
