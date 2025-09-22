@@ -47,11 +47,13 @@ class PersistentAfterRestartsPreferenceTest {
     private lateinit var context: Context
     private lateinit var shadowColorDisplayManager: ShadowColorDisplayManager
     private lateinit var preference: PersistentAfterRestartsPreference
+    private lateinit var settingsStore: SettingsSecureStore
 
     @Before
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
         preference = PersistentAfterRestartsPreference(context)
+        settingsStore = SettingsSecureStore.get(context)
         shadowColorDisplayManager =
             Shadow.extract(context.getSystemService(ColorDisplayManager::class.java))
     }
@@ -75,27 +77,28 @@ class PersistentAfterRestartsPreferenceTest {
 
     @Test
     fun isEnabled_extraDimOn_returnTrue() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = true
-
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, true)
         assertThat(preference.isEnabled(context)).isTrue()
     }
 
     @Test
     fun isEnabled_extraDimOff_returnFalse() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = false
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, false)
 
         assertThat(preference.isEnabled(context)).isFalse()
     }
 
     @Test
     fun onCreate_extraDimTurnedOff_widgetBecomesDisabled() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = true
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, true)
+
         val widget = preference.createAndBindWidget<SwitchPreferenceCompat>(context)
         val lifecycleContext = getPreferenceLifecycleContext(widget, preference)
         preference.onCreate(lifecycleContext)
         assertThat(widget.isEnabled).isTrue()
 
-        shadowColorDisplayManager.isReduceBrightColorsActivated = false
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, false)
+
         SettingsSecureStore.get(context).notifyChange(PreferenceChangeReason.STATE)
 
         assertThat(widget.isEnabled).isFalse()
@@ -103,13 +106,15 @@ class PersistentAfterRestartsPreferenceTest {
 
     @Test
     fun onCreate_extraDimTurnedOn_widgetBecomesEnabled() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = false
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, false)
+
         val widget = preference.createAndBindWidget<SwitchPreferenceCompat>(context)
         val lifecycleContext = getPreferenceLifecycleContext(widget, preference)
         preference.onCreate(lifecycleContext)
         assertThat(widget.isEnabled).isFalse()
 
-        shadowColorDisplayManager.isReduceBrightColorsActivated = true
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, true)
+
         SettingsSecureStore.get(context).notifyChange(PreferenceChangeReason.STATE)
 
         assertThat(widget.isEnabled).isTrue()

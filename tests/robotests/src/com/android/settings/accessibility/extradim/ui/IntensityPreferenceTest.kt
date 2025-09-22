@@ -17,7 +17,7 @@
 package com.android.settings.accessibility.extradim.ui
 
 import android.content.Context
-import android.hardware.display.ColorDisplayManager
+import android.provider.Settings
 import android.widget.TextView
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
@@ -30,7 +30,6 @@ import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.createAndBindWidget
-import com.android.settingslib.testutils.shadow.ShadowColorDisplayManager
 import com.android.settingslib.widget.SliderPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -39,7 +38,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.shadow.api.Shadow
 import org.robolectric.util.ReflectionHelpers
 
 /** Tests for [IntensityPreference]. */
@@ -47,15 +45,15 @@ import org.robolectric.util.ReflectionHelpers
 class IntensityPreferenceTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
     private lateinit var context: Context
-    private lateinit var shadowColorDisplayManager: ShadowColorDisplayManager
     private lateinit var intensityPreference: IntensityPreference
+
+    private lateinit var settingsStore: SettingsSecureStore
 
     @Before
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
         intensityPreference = IntensityPreference(context)
-        shadowColorDisplayManager =
-            Shadow.extract(context.getSystemService(ColorDisplayManager::class.java))
+        settingsStore = SettingsSecureStore.get(context)
     }
 
     @Test
@@ -118,27 +116,29 @@ class IntensityPreferenceTest {
 
     @Test
     fun isEnabled_extraDimOn_returnTrue() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = true
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, true)
 
         assertThat(intensityPreference.isEnabled(context)).isTrue()
     }
 
     @Test
     fun isEnabled_extraDimOff_returnFalse() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = false
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, false)
 
         assertThat(intensityPreference.isEnabled(context)).isFalse()
     }
 
     @Test
     fun onCreate_extraDimTurnedOff_widgetBecomesDisabled() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = true
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, true)
+
         val widget = intensityPreference.createAndBindWidget<SliderPreference>(context)
         val lifecycleContext = getPreferenceLifecycleContext(widget, intensityPreference)
         intensityPreference.onCreate(lifecycleContext)
         assertThat(widget.isEnabled).isTrue()
 
-        shadowColorDisplayManager.isReduceBrightColorsActivated = false
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, false)
+
         SettingsSecureStore.get(context).notifyChange(PreferenceChangeReason.STATE)
 
         assertThat(widget.isEnabled).isFalse()
@@ -146,13 +146,15 @@ class IntensityPreferenceTest {
 
     @Test
     fun onCreate_extraDimTurnedOn_widgetBecomesEnabled() {
-        shadowColorDisplayManager.isReduceBrightColorsActivated = false
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, false)
+
         val widget = intensityPreference.createAndBindWidget<SliderPreference>(context)
         val lifecycleContext = getPreferenceLifecycleContext(widget, intensityPreference)
         intensityPreference.onCreate(lifecycleContext)
         assertThat(widget.isEnabled).isFalse()
 
-        shadowColorDisplayManager.isReduceBrightColorsActivated = true
+        settingsStore.setBoolean(Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, true)
+
         SettingsSecureStore.get(context).notifyChange(PreferenceChangeReason.STATE)
 
         assertThat(widget.isEnabled).isTrue()
