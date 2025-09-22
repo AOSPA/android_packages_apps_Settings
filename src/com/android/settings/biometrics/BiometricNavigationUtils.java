@@ -88,7 +88,7 @@ public class BiometricNavigationUtils {
      * @param extras        Extras to put into the result {@link Intent}.
      */
     public Intent getBiometricSettingsIntent(Context context, String className,
-            EnforcedAdmin enforcedAdmin, Bundle extras) {
+            @Nullable EnforcedAdmin enforcedAdmin, Bundle extras) {
         if (enforcedAdmin != null) {
             return getRestrictedDialogIntent(context, enforcedAdmin);
         }
