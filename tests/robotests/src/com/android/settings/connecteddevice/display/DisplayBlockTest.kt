@@ -145,8 +145,14 @@ class DisplayBlockTest {
         val wallpaperB = SurfaceControl.Builder().setName("wallpaperB").build()
 
         injector.wallpapers[DISPLAY_ID] = wallpaperA
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
-        injector.testHandler.flush()
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(0.0f, 0.0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
+            0.5f,
+            DISPLAY_SIZE,
+        )
         block.updateSurfaceView()
         injector.testHandler.flush()
 
@@ -159,7 +165,15 @@ class DisplayBlockTest {
 
         // Same size and scale as before, but a new wallpaper and different position in parent view.
         injector.wallpapers[DISPLAY_ID] = wallpaperB
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 10f), PointF(70f, 20f), 0.5f, DISPLAY_SIZE)
+        val moveOffsetPx = 10f
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(moveOffsetPx, moveOffsetPx),
+            PointF(moveOffsetPx + BLOCK_WIDTH, moveOffsetPx + BLOCK_HEIGHT),
+            0.5f,
+            DISPLAY_SIZE,
+        )
         injector.testHandler.flush()
         verify(mockTransaction).reparent(eq(wallpaperB), any())
         verify(mockTransaction).setScale(eq(wallpaperB), eq(0.5f), eq(0.5f))
@@ -171,7 +185,14 @@ class DisplayBlockTest {
 
         // Repeat the pattern, but with a new scale and reverting back to wallpaperA.
         injector.wallpapers.put(DISPLAY_ID, wallpaperA)
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(60f, 30f), PointF(70f, 40f), 0.2f, DISPLAY_SIZE)
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(0.0f, 0.0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
+            0.2f,
+            DISPLAY_SIZE,
+        )
         injector.testHandler.flush()
 
         verify(mockTransaction).reparent(eq(wallpaperA), any())
@@ -210,7 +231,7 @@ class DisplayBlockTest {
             DISPLAY_ID,
             DISPLAY_ID,
             PointF(0f, 0f),
-            PointF(0f, 0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             surfaceScale,
             DISPLAY_SIZE,
         )
@@ -237,7 +258,7 @@ class DisplayBlockTest {
             DISPLAY_ID,
             DISPLAY_ID,
             PointF(0f, 0f),
-            PointF(0f, 0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             surfaceScale,
             DISPLAY_SIZE,
         )
@@ -257,7 +278,7 @@ class DisplayBlockTest {
             DISPLAY_ID,
             MIRRORED_DISPLAY_ID,
             PointF(0f, 0f),
-            PointF(0f, 0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             0.5f,
             DISPLAY_SIZE,
         )
@@ -276,7 +297,7 @@ class DisplayBlockTest {
             DISPLAY_ID,
             MIRRORED_DISPLAY_ID,
             PointF(0f, 0f),
-            PointF(0f, 0f),
+            PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             0.5f,
             DISPLAY_SIZE,
         )
@@ -310,7 +331,7 @@ class DisplayBlockTest {
         private const val DISPLAY_ID = 123
         private const val MIRRORED_DISPLAY_ID = 456
         private val DISPLAY_SIZE = Size(1280, 720)
-        private const val BLOCK_WIDTH = 200
-        private const val BLOCK_HEIGHT = 300
+        private const val BLOCK_WIDTH = 200f
+        private const val BLOCK_HEIGHT = 300f
     }
 }
