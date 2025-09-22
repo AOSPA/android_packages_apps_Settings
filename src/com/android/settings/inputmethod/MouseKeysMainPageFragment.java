@@ -42,9 +42,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
-import com.android.settings.accessibility.BaseSupportFragment;
 import com.android.settings.accessibility.ToggleShortcutPreferenceController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
@@ -53,7 +53,7 @@ import com.android.settingslib.widget.LayoutPreference;
 import java.util.List;
 
 @SearchIndexable
-public class MouseKeysMainPageFragment extends BaseSupportFragment
+public class MouseKeysMainPageFragment extends DashboardFragment
         implements InputManager.InputDeviceListener {
 
     private static final String TAG = "MouseKeysMainPageFragment";

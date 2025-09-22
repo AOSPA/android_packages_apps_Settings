@@ -25,7 +25,6 @@ import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.internal.accessibility.common.NotificationConstants.EXTRA_SOURCE
 import com.android.internal.accessibility.common.NotificationConstants.SOURCE_START_SURVEY
 import com.android.settings.R
-import com.android.settings.accessibility.BaseSupportFragment
 import com.android.settings.accessibility.FeedbackButtonPreferenceController
 import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.Flags
@@ -34,13 +33,14 @@ import com.android.settings.accessibility.SurveyManager
 import com.android.settings.accessibility.screenmagnification.CursorFollowingModePreferenceController
 import com.android.settings.accessibility.screenmagnification.ModePreferenceController
 import com.android.settings.accessibility.screenmagnification.ToggleMagnificationShortcutPreferenceController
+import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.search.SearchIndexable
 import com.android.settingslib.widget.TopIntroPreference
 
 /** Displays the detail screen of the screen magnification feature */
 @SearchIndexable(forTarget = SearchIndexable.ALL and SearchIndexable.ARC.inv())
-open class MagnificationPreferenceFragment : BaseSupportFragment() {
+open class MagnificationPreferenceFragment : DashboardFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
