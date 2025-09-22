@@ -19,7 +19,6 @@ package com.android.settings.development;
 import static com.android.settings.development.GameDefaultFrameRatePreferenceController.Injector;
 import static com.android.settings.development.GameDefaultFrameRatePreferenceController.PROPERTY_DEBUG_GFX_GAME_DEFAULT_FRAME_RATE_DISABLED;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,7 +31,6 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
-import com.android.settings.flags.Flags;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -79,7 +77,6 @@ public class GameDefaultFrameRatePreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_settingEnabled_shouldChecked() throws RemoteException {
-        mSetFlagsRule.enableFlags(Flags.FLAG_DEVELOPMENT_GAME_DEFAULT_FRAME_RATE);
         assertTrue(mController.isAvailable());
         when(mSysPropsMock.getBoolean(
                 ArgumentMatchers.eq(PROPERTY_DEBUG_GFX_GAME_DEFAULT_FRAME_RATE_DISABLED),
@@ -92,7 +89,6 @@ public class GameDefaultFrameRatePreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_settingDisabled_shouldUnchecked() throws RemoteException {
-        mSetFlagsRule.enableFlags(Flags.FLAG_DEVELOPMENT_GAME_DEFAULT_FRAME_RATE);
         assertTrue(mController.isAvailable());
         when(mSysPropsMock.getBoolean(
                 ArgumentMatchers.eq(PROPERTY_DEBUG_GFX_GAME_DEFAULT_FRAME_RATE_DISABLED),
@@ -104,7 +100,6 @@ public class GameDefaultFrameRatePreferenceControllerTest {
 
     @Test
     public void updateState_settingEnabled_shouldChecked() throws RemoteException {
-        mSetFlagsRule.enableFlags(Flags.FLAG_DEVELOPMENT_GAME_DEFAULT_FRAME_RATE);
         assertTrue(mController.isAvailable());
         when(mSysPropsMock.getBoolean(
                 ArgumentMatchers.eq(PROPERTY_DEBUG_GFX_GAME_DEFAULT_FRAME_RATE_DISABLED),
@@ -116,7 +111,6 @@ public class GameDefaultFrameRatePreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_shouldUnchecked() throws RemoteException {
-        mSetFlagsRule.enableFlags(Flags.FLAG_DEVELOPMENT_GAME_DEFAULT_FRAME_RATE);
         assertTrue(mController.isAvailable());
         when(mSysPropsMock.getBoolean(
                 ArgumentMatchers.eq(PROPERTY_DEBUG_GFX_GAME_DEFAULT_FRAME_RATE_DISABLED),
@@ -127,16 +121,7 @@ public class GameDefaultFrameRatePreferenceControllerTest {
     }
 
     @Test
-    public void settingNotAvailable_flagsOff() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_DEVELOPMENT_GAME_DEFAULT_FRAME_RATE);
-        mController = new GameDefaultFrameRatePreferenceController(
-                mContext, mGameManagerService, new Injector());
-        assertFalse(mController.isAvailable());
-    }
-
-    @Test
-    public void settingAvailable_flagsOn() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_DEVELOPMENT_GAME_DEFAULT_FRAME_RATE);
+    public void settingAvailable() {
         mController = new GameDefaultFrameRatePreferenceController(
                 mContext, mGameManagerService, new Injector());
         assertTrue(mController.isAvailable());
@@ -145,7 +130,6 @@ public class GameDefaultFrameRatePreferenceControllerTest {
     @Test
     public void onDeveloperOptionsSwitchDisabled_preferenceUnchecked_shouldNotTurnOffPreference()
             throws RemoteException {
-        mSetFlagsRule.enableFlags(Flags.FLAG_DEVELOPMENT_GAME_DEFAULT_FRAME_RATE);
         when(mSysPropsMock.getBoolean(
                 ArgumentMatchers.eq(PROPERTY_DEBUG_GFX_GAME_DEFAULT_FRAME_RATE_DISABLED),
                 ArgumentMatchers.eq(false)))
@@ -161,7 +145,6 @@ public class GameDefaultFrameRatePreferenceControllerTest {
     @Test
     public void onDeveloperOptionsSwitchDisabled_preferenceChecked_shouldTurnOffPreference()
             throws RemoteException {
-        mSetFlagsRule.enableFlags(Flags.FLAG_DEVELOPMENT_GAME_DEFAULT_FRAME_RATE);
         when(mSysPropsMock.getBoolean(
                 ArgumentMatchers.eq(PROPERTY_DEBUG_GFX_GAME_DEFAULT_FRAME_RATE_DISABLED),
                 ArgumentMatchers.eq(false)))
