@@ -248,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Siirrä alas"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Poista"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Siirrä ylös"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Alueelliset valinnat"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Valitse yksikkö- ja numeroasetukset"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ilmoita alueellisista valinnoista sovelluksille, jotta ne voivat personoida kokemuksesi."</string>
@@ -1523,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Näyttämisaika"</string>
     <string name="doze_title" msgid="1523090408230862316">"Ilmoitukset herättävät näytön"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Kun näyttö on pimeä, se aktivoituu uusien ilmoitusten myötä"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Näytä aina aika ja tiedot"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Aina päällä oleva näyttö"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Asetus lisää akkuvirran kulutusta"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Näytä lukitusnäytön taustakuva, kun näyttö on pois päältä"</string>
@@ -1687,11 +1688,9 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Yhteiskäytön asetukset"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hubitila"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgetit lukitusnäytöllä"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
-    <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Milloin widgetit näkyvät automaattisesti"</string>
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"Pääset suosikkiwidgeteihin pyyhkäisemällä lukitusnäytöltä vasemmalle. \n\nKun avaat sovelluksen widgetin avulla, sinun täytyy vahvistaa henkilöllisyytesi. Muista myös, että widgetit näkyvät kaikille."</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"Beta"</string>
+    <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Automaattinen näkyminen"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Ei koskaan"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Latauksen aikana"</string>
     <string name="when_to_show_hubmode_charging_and_upright" msgid="537039046490426922">"Pystyasennossa ja latauksessa"</string>
@@ -4191,7 +4190,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"–"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ei yhtään}=1{1 keskustelu}other{# keskustelua}}"</string>
     <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"Keskusteluasetukset"</string>
-    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Kuka saa keskeyttää"</string>
+    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Seuraavat voivat keskeyttää"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"Vaikka viesti- ja puhelusovellukset eivät voi lähettää sinulle ilmoituksia, täällä valitsemasi henkilöt saavat kuitenkin sinuun yhteyden kyseisten sovellusten kautta"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Puhelut"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Puhelut"</string>
@@ -5941,7 +5940,9 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Varasähköpostin lisääminen"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Sähköpostiosoitteen vahvistaminen"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Sovelluskauppasuodattimet"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Verkkosivuston sisältösuodattimet"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Verkkosivustojen suodattimet, Sivustojen estäminen, Selaimen suodattimet, Avoimen seksuaalisen sisällön sivustojen estäminen, Sivustojen suodattaminen, Hakutulosten estäminen, Avoimen seksuaalisen sisällön hakutulosten suodattaminen, Sisältörajoitukset"</string>
@@ -5980,7 +5981,6 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"Yksityisyysasetukset"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Luvat, asetukset"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Laitteen lukituksen avaus"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"Näytön lukitus"</string>
     <string name="location_settings" msgid="6833222354060094170">"Pääsy sijaintiin"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Katso sovellukset ja palvelut, joilla on pääsy sijaintiin"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Tunnistautuminen toimii useammissa sovelluksissa"</string>

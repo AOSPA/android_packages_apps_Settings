@@ -248,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Mover hacia abajo"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Quitar"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Mover al principio"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencias regionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Define preferencias de unidades y números"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que las apps sepan tus preferencias regionales para que puedan personalizar tu experiencia."</string>
@@ -1523,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Cuándo debe mostrarse"</string>
     <string name="doze_title" msgid="1523090408230862316">"Activar pantalla si hay notificaciones"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Cuando la pantalla está apagada, se activa si hay notificaciones nuevas"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Mostrar siempre información y hora"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Pantalla siempre activa"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Aumenta el uso de la batería"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Mostrar el fondo de la pantalla de bloqueo cuando la pantalla esté apagada"</string>
@@ -1687,10 +1688,8 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Ajustes comunes"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Modo Base"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets en la pantalla de bloqueo"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"Para acceder a tus widgets favoritos, desliza hacia la izquierda desde la pantalla de bloqueo. \n\nCuando abras una app a través de un widget, tendrás que verificar que eres tú. Además, ten en cuenta que cualquier persona podrá verlos."</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"Beta"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Cuándo mostrar automáticamente"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nunca"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Mientras esté cargándose"</string>
@@ -2476,7 +2475,7 @@
     <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Cambiar entre pantalla completa y parcial"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"Toca el interruptor para moverte entre las dos opciones"</string>
     <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Esto puede ralentizar tu teclado"</string>
-    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Si usas tres toques para ampliar parte de la pantalla, puede que notes algún problema en el teclado.\n\nPara evitarlo, cambia el acceso directo de ampliar a otra opción que no sea el triple toque.\n"<annotation id="link">"Cambiar ajuste"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Si usas tres toques para hacer zoom en la pantalla, puede que notes algún problema en el teclado.\n\nPara evitarlo, cambia el acceso directo para hacer zoom en la pantalla.\n"<annotation id="link">"Cambiar ajuste"</annotation></string>
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuar de todos modos"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Cancelar"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Ajustes de ampliación"</string>
@@ -2733,7 +2732,7 @@
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Audífonos"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Guardados"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Controles de audífonos"</string>
-    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Acceso directo de audífono"</string>
+    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Acceso directo a audífono"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibilidad con audífonos"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Mejora la compatibilidad con las telebobinas y reduce el ruido no deseado"</string>
     <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
@@ -5941,7 +5940,9 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Añadir correo de recuperación"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verificar tu correo"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtros de tiendas de apps"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtros de contenido de sitios"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"exclusión de sitios web, bloquear sitios, filtros del navegador, bloquear sitios con contenido explícito, excluir sitios, bloquear resultados de búsqueda, excluir resultados de búsqueda con contenido explícito, restricciones de contenido"</string>
@@ -5980,7 +5981,6 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"Controles de privacidad"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Permisos, controles"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Desbloqueo del dispositivo"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"Bloqueo de pantalla"</string>
     <string name="location_settings" msgid="6833222354060094170">"Acceso a la ubicación"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Consulta las apps y servicios que tienen acceso a tu ubicación"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Verificación de identidad funciona con más apps"</string>
