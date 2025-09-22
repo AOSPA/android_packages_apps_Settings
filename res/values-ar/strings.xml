@@ -248,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"نقل للأسفل"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"إزالة"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"نقل العنصر إلى أعلى القائمة"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"الإعدادات المفضّلة لمنطقتك"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"يمكنك ضبط الإعدادات المفضّلة لوحدات القياس والأرقام"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"السماح للتطبيقات بمعرفة الإعدادات المفضّلة لمنطقتك لتتمكن من تخصيص تجربتك"</string>
@@ -1523,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"وقت العرض"</string>
     <string name="doze_title" msgid="1523090408230862316">"تنشيط الشاشة لعرض الإشعارات"</string>
     <string name="doze_summary" msgid="8252867381522942804">"عندما تكون الشاشة داكنة، ستُضاء لعرض الإشعارات الجديدة"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"إظهار الوقت والمعلومات دائمًا"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"تشغيل الشاشة دائمًا"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"يزيد استهلاك البطارية"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"عرض خلفية شاشة القفل عندما تكون الشاشة مغلقة"</string>
@@ -1687,7 +1688,7 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"الإعدادات المشتركة"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"وضع الإرساء"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"التطبيقات المصغّرة على شاشة القفل"</string>
-    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"للوصول إلى تطبيقاتك المصغّرة المفضّلة، يُرجى التمرير سريعًا إلى اليمين من شاشة القفل. \n\nعند فتح تطبيق باستخدام تطبيق مصغَّر، عليك إثبات هويتك. يُرجى أيضًا ملاحظة أنّ أي شخص يمكنه الاطّلاع على محتوى التطبيقات المصغَّرة."</string>
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"للوصول إلى تطبيقاتك المصغّرة المفضّلة، مرّر سريعًا إلى اليمين من شاشة القفل. \n\nعند فتح تطبيق باستخدام تطبيق مصغَّر، عليك إثبات هويتك. يُرجى أيضًا ملاحظة أنّ أي شخص يمكنه الاطّلاع على محتوى التطبيقات المصغَّرة."</string>
     <string name="settings_beta_tag" msgid="8646243453760353582">"ميزة تجريبية"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"وقت العرض التلقائي"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"أبدًا"</string>
@@ -4026,8 +4027,8 @@
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"بدون صوت أو اهتزاز وتظهر في أسفل قسم المحادثات"</string>
     <string name="notification_channel_summary_default" msgid="1168420867670390611">"يمكن إصدار رنين أو اهتزاز بناءً على إعدادات الجهاز"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"عند فتح قفل الجهاز، تظهر الإشعارات في صورة بانر أعلى الشاشة"</string>
-    <string name="notification_switch_label" msgid="8029371325967501557">"جميع إشعارات \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
-    <string name="notification_app_switch_label" msgid="4422902423925084193">"جميع إشعارات \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="notification_switch_label" msgid="8029371325967501557">"جميع إشعارات <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"جميع إشعارات <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{حوالي إشعار واحد في اليوم}zero{حوالي # إشعار في اليوم}two{حوالي إشعارَين في اليوم}few{حوالي # إشعارات في اليوم}many{حوالي # إشعارًا في اليوم}other{حوالي # إشعار في اليوم}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{حوالي إشعار واحد في الأسبوع}zero{ما من إشعارات في الأسبوع}two{حوالي إشعارَين في الأسبوع}few{حوالي # إشعارات في الأسبوع}many{حوالي # إشعارًا في الأسبوع}other{حوالي # إشعار في الأسبوع}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"أبدًا"</string>
@@ -5943,7 +5944,9 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"إضافة عنوان البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"تأكيد عنوان البريد الإلكتروني"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"فلاتر متجر التطبيقات"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"فلاتر محتوى الموقع الإلكتروني"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"فلاتر المواقع الإلكترونية، حظر المواقع الإلكترونية، فلاتر المتصفّح، حظر المواقع الإلكترونية التي تتضمّن محتوى فاضحًا، فلترة المواقع الإلكترونية، حظر نتائج البحث، فلترة نتائج البحث الفاضحة، قيود المحتوى"</string>
@@ -5982,7 +5985,6 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"عناصر التحكّم في الخصوصية"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"الأذونات وعناصر التحكّم"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"فتح قفل الجهاز"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"قفل الشاشة"</string>
     <string name="location_settings" msgid="6833222354060094170">"الوصول إلى الموقع الجغرافي"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"عرض التطبيقات والخدمات التي يمكنها الوصول إلى الموقع الجغرافي"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"ميزة \"التحقّق من الهوية\" متوفرة الآن في المزيد من التطبيقات"</string>

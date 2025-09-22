@@ -248,6 +248,7 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Move down"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Remove"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Move to top"</string>
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Edit system language list, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regional preferences"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Set units and number preferences"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Let apps know your regional preferences so they can personalize your experience."</string>
@@ -1523,7 +1524,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"When to show"</string>
     <string name="doze_title" msgid="1523090408230862316">"Wake screen for notifications"</string>
     <string name="doze_summary" msgid="8252867381522942804">"When screen is dark, it turns on for new notifications"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Always show time and info"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Always-on display"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Increased battery usage"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Show lock screen wallpaper when screen is off"</string>
@@ -5939,8 +5939,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Add recovery email"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verify your email"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App store filters"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filter apps based on the maturity of their content"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Each app may block different types of content. App stores not listed must be managed separately."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Website content filters"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Help filter explicit content on some apps and browsers on this phone. Explicit content may still show on other apps, devices, or browsers."</string>
@@ -5978,7 +5978,6 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"Privacy controls"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Permissions, controls"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Device unlock"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"Screen lock"</string>
     <string name="location_settings" msgid="6833222354060094170">"Location access"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"See apps and services that have access to location"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Identity Check works with more apps"</string>

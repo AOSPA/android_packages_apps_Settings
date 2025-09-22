@@ -248,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Перемістити вниз"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Вилучити"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Перемістити вгору"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регіональні налаштування"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Установіть параметри одиниць і чисел"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Укажіть регіональні налаштування, щоб додатки могли персоналізувати для вас свій інтерфейс."</string>
@@ -1523,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Коли показувати"</string>
     <string name="doze_title" msgid="1523090408230862316">"Вмикати екран для сповіщень"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Коли екран темний, він вмикається, щоб показати нові сповіщення"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Завжди показувати час і дані"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Інформація на заблок. екрані"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Підвищує використання заряду акумулятора"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Показувати фоновий малюнок заблокованого екрана, коли екран вимкнено"</string>
@@ -1687,10 +1688,8 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Налаштування для спільного використання"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Режим центру керування"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Віджети на заблокованому екрані"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"Щоб отримати доступ до улюблених віджетів, проведіть пальцем уліво по заблокованому екрану. \n\nЩоб відкрити додаток за допомогою віджета, вам потрібно буде підтвердити особу. Пам’ятайте також, що бачити віджети можуть усі."</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"Бета"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Коли показувати автоматично"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Ніколи"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Під час заряджання"</string>
@@ -2594,10 +2593,10 @@
     <string name="dark_theme_version_category" msgid="3555549588764154187">"Варіанти"</string>
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Час"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Стандартний режим"</string>
-    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Стандартне застосування темної теми"</string>
+    <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Стандартна темна тема"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Темна тема вмикатиметься для пристрою і додатків, які її підтримують"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Розширений режим"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Розширене застосування темної теми"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Розширена темна тема"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Темна тема автоматично застосовуватиметься до більшості додатків, які її не підтримують. Це може покращити доступність і читабельність, але деякі додатки можуть відображатися неправильно."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"примусова інверсія, інверсія кольорів, контраст"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Вимкнути анімацію"</string>
@@ -2628,7 +2627,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Використовувати інверсію кольорів"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Швидкий запуск інверсії кольорів"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Інверсія кольорів перетворює світлі кольори на темні й навпаки."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Зверніть увагу&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Інверсія також змінить кольори зображень і мультимедійного контенту&lt;/li&gt; &lt;li&gt; Інверсія кольорів вплине на всі додатки&lt;/li&gt; &lt;li&gt; Якщо потрібно зробити фон інтерфейсу не таким яскравим, натомість увімкніть Темну тему&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Зверніть увагу&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Інверсія також змінить кольори зображень і мультимедійного контенту&lt;/li&gt; &lt;li&gt; Інверсія кольорів вплине на всі додатки&lt;/li&gt; &lt;li&gt; Якщо потрібно зробити фон інтерфейсу не таким яскравим, натомість увімкніть темну тему&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"відкрити налаштування"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Автоматичне натискання (час взаємодії)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Про авт. натискання (час взаємодії)"</string>
@@ -3436,8 +3435,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g> – видалити з пристрою"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Параметри блокування екрана"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Додавати користувачів на заблокованому екрані"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Додавати користувачів на екрані входу"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Переходити в режим адміністратора в док-станції"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Видалити ваш профіль?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Видалити користувача?"</string>
@@ -5944,7 +5942,9 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Додайте резервну електронну адресу"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Підтвердьте електронну адресу"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Фільтри магазину додатків"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (5941890239932676705) -->
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Фільтри контенту вебсайтів"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Фільтри вебсайтів, блокувати сайти, фільтри вебпереглядача, блокувати сайти з відвертим контентом, фільтрувати сайти, блокувати результати пошуку, блокувати результати пошуку з відвертим контентом, обмеження контенту"</string>
@@ -5983,7 +5983,6 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"Налаштування конфіденційності"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Дозволи, налаштування"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Розблокування пристрою"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"Блокування екрана"</string>
     <string name="location_settings" msgid="6833222354060094170">"Доступ до геоданих"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Перегляньте додатки й сервіси, які мають доступ до геоданих"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Перевірка особи працює з більшою кількістю додатків"</string>
