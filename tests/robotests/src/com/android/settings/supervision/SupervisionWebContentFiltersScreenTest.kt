@@ -275,6 +275,7 @@ class SupervisionWebContentFiltersScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun supportedApps() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val summaryString =
