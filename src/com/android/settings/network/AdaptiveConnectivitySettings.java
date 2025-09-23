@@ -17,7 +17,7 @@ package com.android.settings.network;
 
 import static android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED;
 import static android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED;
-import static android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import android.app.settings.SettingsEnums;
@@ -27,10 +27,12 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
@@ -61,7 +63,13 @@ public class AdaptiveConnectivitySettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.adaptive_connectivity_settings);
+            new BaseSearchIndexProvider(R.xml.adaptive_connectivity_settings) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return context.getResources().getBoolean(
+                            R.bool.config_show_adaptive_connectivity);
+                }
+            };
 
     @Override
     public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
@@ -88,11 +96,6 @@ public class AdaptiveConnectivitySettings extends DashboardFragment {
             Preference topIntroPref = findPreference(ADAPTIVE_CONNECTIVITY_SUMMARY);
             if (topIntroPref != null) {
                 topIntroPref.setVisible(false);
-            }
-            // remove legacy master toggle
-            Preference legacyAdaptiveConnPref = findPreference(ADAPTIVE_CONNECTIVITY_ENABLED);
-            if (legacyAdaptiveConnPref != null) {
-                legacyAdaptiveConnPref.setVisible(false);
             }
             setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED);
             final SubscriptionManager subscriptionManager =

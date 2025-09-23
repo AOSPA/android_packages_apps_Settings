@@ -24,6 +24,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.flags.Flags;
 
 /**
  * {@link TogglePreferenceController}
@@ -46,7 +47,8 @@ public class AdaptiveConnectivityTogglePreferenceController extends TogglePrefer
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        // If flag is enabled, remove legacy master toggle
+        return Flags.enableAdaptiveConnectivityToggleSwitches() ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
     }
 
     @Override
