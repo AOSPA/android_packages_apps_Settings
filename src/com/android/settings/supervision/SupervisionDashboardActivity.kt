@@ -16,6 +16,7 @@
 
 package com.android.settings.supervision
 
+import android.app.supervision.flags.Flags
 import android.content.Intent
 import android.util.Log
 import com.android.settings.CatalystSettingsActivity
@@ -35,7 +36,7 @@ class SupervisionDashboardActivity :
     override fun onResume() {
         super.onResume()
 
-        if (shouldRedirectToSupervisionApp()) {
+        if (!Flags.enableSupervisionSettingsUiUpdates() && shouldRedirectToSupervisionApp()) {
             val redirectIntent = getSupervisionAppIntent()
             // We don't expect the intent to be null, but if it happens, we just skip the redirect.
             if (redirectIntent != null) {
