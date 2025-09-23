@@ -17,9 +17,6 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
 import androidx.compose.runtime.CompositionLocalProvider
@@ -35,7 +32,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
-import com.android.settings.flags.Flags
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
@@ -48,7 +44,6 @@ import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class RoamingPreferenceControllerTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
     @get:Rule val composeTestRule = createComposeRule()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -67,7 +62,6 @@ class RoamingPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun getAvailabilityStatus_validSubId_returnAvailable() {
         controller.init(mock<FragmentManager>(), SUB_ID)
 
@@ -77,7 +71,6 @@ class RoamingPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun getAvailabilityStatus_invalidSubId_returnConditionallyUnavailable() {
         controller.init(mock<FragmentManager>(), SubscriptionManager.INVALID_SUBSCRIPTION_ID)
 
@@ -87,7 +80,6 @@ class RoamingPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun getAvailabilityStatus_forceHomeNetworkIsTrue_returnConditionallyUnavailable() {
         CarrierConfigRepository.setBooleanForTest(
             subId = SUB_ID,
@@ -102,7 +94,6 @@ class RoamingPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun getAvailabilityStatus_forceHomeNetworkIsFalse_returnAvailable() {
         CarrierConfigRepository.setBooleanForTest(
             subId = SUB_ID,
@@ -117,17 +108,6 @@ class RoamingPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
-    fun getAvailabilityStatus_flagEnabled_returnConditionalUnavailable() {
-        controller.init(mock<FragmentManager>(), SUB_ID)
-
-        val availabilityStatus = controller.getAvailabilityStatus()
-
-        assertThat(availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun title_displayed() {
         controller.init(mock<FragmentManager>(), SUB_ID)
 
@@ -139,7 +119,6 @@ class RoamingPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun summary_displayed() {
         controller.init(mock<FragmentManager>(), SUB_ID)
 
@@ -153,7 +132,6 @@ class RoamingPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun isDialogNeeded_enableChargeIndication_returnTrue() {
         CarrierConfigRepository.setBooleanForTest(
             subId = SUB_ID,
@@ -168,7 +146,6 @@ class RoamingPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun isDialogNeeded_disableChargeIndication_returnFalse() {
         CarrierConfigRepository.setBooleanForTest(
             subId = SUB_ID,
@@ -183,7 +160,6 @@ class RoamingPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun checked_roamingEnabled_isOn() {
         mockMobileDataRepository.stub {
             on { isDataRoamingEnabledFlow(SUB_ID) } doReturn flowOf(true)
@@ -198,7 +174,6 @@ class RoamingPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4)
     fun checked_roamingDisabled_isOff() {
         mockMobileDataRepository.stub {
             on { isDataRoamingEnabledFlow(SUB_ID) } doReturn flowOf(false)
