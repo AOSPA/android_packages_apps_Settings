@@ -15,6 +15,9 @@
  */
 package com.android.settings.supervision
 
+import android.app.Application
+import android.app.role.RoleManager
+import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
 import android.app.settings.SettingsEnums
 import android.app.supervision.flags.Flags
 import android.content.Context
@@ -24,19 +27,41 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settingslib.ipc.MessengerServiceClient
+import com.android.settingslib.ipc.MessengerServiceRule
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.mock
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowContextImpl
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.INSTRUMENTATION_TEST)
 class SupervisionWebContentFiltersSearchSupportedAppsScreenTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val searchSupportedAppsScreen = SupervisionWebContentFiltersSearchSupportedAppsScreen()
+    private val packageName: String = "com.android.supervision"
+    private val mockRoleManager: RoleManager = mock {
+        on { getRoleHolders(ROLE_SYSTEM_SUPERVISION) }.thenReturn(listOf(packageName))
+    }
 
     @get:Rule(order = 0) val setFlagsRule = SetFlagsRule()
+    @get:Rule(order = 1)
+    val serviceRule =
+        MessengerServiceRule<MessengerServiceClient>(TestSupervisionMessengerService::class.java)
+
+    @Before
+    fun setUp() {
+        (Shadow.extract((context as Application).baseContext) as ShadowContextImpl).apply {
+            setSystemService(Context.ROLE_SERVICE, mockRoleManager)
+        }
+    }
 
     @Test
     fun key() {

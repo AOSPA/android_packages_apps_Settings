@@ -16,16 +16,13 @@
 package com.android.settings.supervision
 
 import android.app.settings.SettingsEnums
-import android.app.supervision.flags.Flags
 import android.content.Context
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
-import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
-import com.android.settingslib.metadata.preferenceHierarchy
-import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.utils.StringUtil
 
 /** Activity to display [SupervisionWebContentFiltersBrowserSupportedAppsScreen]. */
 class SupervisionWebContentFiltersBrowserSupportedAppsActivity :
@@ -36,9 +33,10 @@ class SupervisionWebContentFiltersBrowserSupportedAppsActivity :
  * Websites - on x apps).
  */
 @ProvidePreferenceScreen(SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY)
-open class SupervisionWebContentFiltersBrowserSupportedAppsScreen : PreferenceScreenMixin {
-
-    override fun isFlagEnabled(context: Context) = Flags.enableSupervisionSettingsUiUpdates()
+open class SupervisionWebContentFiltersBrowserSupportedAppsScreen :
+    SupervisionWebContentFilterSupportedAppsScreen() {
+    override val supportedAppsKey: String
+        get() = BROWSER_FILTERS_SUPPORTED_APPS
 
     override val key: String
         get() = KEY
@@ -46,11 +44,12 @@ open class SupervisionWebContentFiltersBrowserSupportedAppsScreen : PreferenceSc
     override val screenTitle: Int
         get() = R.string.supervision_web_content_filters_browser_filter_title
 
-    override val indexable
-        get() = true
-
-    override val highlightMenuKey: Int
-        get() = R.string.menu_key_supervision
+    override fun getTitle(context: Context): CharSequence? =
+        StringUtil.getIcuPluralsString(
+            context,
+            supportedApps.size,
+            R.string.supervision_web_content_filters_switch_summary,
+        )
 
     override fun getMetricsCategory() =
         SettingsEnums.SUPERVISION_WEB_CONTENT_FILTERS_BROWSER_SUPPORTED_APPS
@@ -62,10 +61,8 @@ open class SupervisionWebContentFiltersBrowserSupportedAppsScreen : PreferenceSc
             metadata?.key,
         )
 
-    override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
-
     companion object {
         const val KEY = "supervision_web_content_filters_browser_supported_apps"
+        internal const val BROWSER_FILTERS_SUPPORTED_APPS = "browser_filters_supported_apps"
     }
 }
