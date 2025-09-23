@@ -147,7 +147,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_GUEST_EXIT = "guest_exit";
     private static final String KEY_REMOVE_GUEST_ON_EXIT = "remove_guest_on_exit";
     private static final String KEY_GUEST_USER_CATEGORY = "guest_user_category";
-    private static final String KEY_ALLOW_MULTIPLE_USERS = "allow_multiple_users";
     private static final String KEY_USER_SETTINGS_SCREEN = "user_settings_screen";
     private static final String KEY_USER_SWITCH_TOGGLE = "multiple_users_main_switch";
 
@@ -1948,20 +1947,6 @@ public class UserSettings extends SettingsPreferenceFragment
                             context.getString(R.string.user_settings_title);
                     rawData.add(multipleUsersData);
 
-                    SearchIndexableRaw allowMultipleUsersResult = new SearchIndexableRaw(context);
-
-                    allowMultipleUsersResult.key = KEY_ALLOW_MULTIPLE_USERS;
-                    allowMultipleUsersResult.title =
-                            context.getString(R.string.multiple_users_main_switch_title);
-                    allowMultipleUsersResult.keywords =
-                            context.getString(R.string.multiple_users_main_switch_keywords);
-                    allowMultipleUsersResult.screenTitle =
-                            context.getString(R.string.user_settings_title);
-                    allowMultipleUsersResult.className =
-                            MultiUserSwitchBarController.class.getName();
-
-                    rawData.add(allowMultipleUsersResult);
-
                     SearchIndexableRaw addUserData = new SearchIndexableRaw(context);
                     addUserData.key = KEY_ADD_USER;
 
@@ -2001,9 +1986,6 @@ public class UserSettings extends SettingsPreferenceFragment
                             .updateNonIndexableKeys(niks);
                     new AutoSyncWorkDataPreferenceController(context, null /* parent */)
                             .updateNonIndexableKeys(niks);
-                    if (suppressAllPage) {
-                        niks.add(KEY_ALLOW_MULTIPLE_USERS);
-                    }
                     return niks;
                 }
             };
