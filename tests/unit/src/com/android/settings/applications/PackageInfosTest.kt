@@ -16,13 +16,45 @@
 
 package com.android.settings.applications
 
+import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageInfo.REQUESTED_PERMISSION_GRANTED
+import android.content.pm.PackageManager
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.google.common.truth.Truth.assertThat
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.doThrow
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.stub
 
+@RunWith(AndroidJUnit4::class)
 class PackageInfosTest {
+    private val packageManager: PackageManager = mock()
+    private val context: Context = mock { on { packageManager } doReturn packageManager }
+
+    @Test
+    fun getApplicationInfo_whenAppIsNotFound_returnsNull() {
+        packageManager.stub {
+            on { getApplicationInfo("app.not.found", 0) } doThrow
+                PackageManager.NameNotFoundException()
+        }
+
+        assertThat(context.getApplicationInfo("app.not.found")).isNull()
+    }
+
+    @Test
+    fun getApplicationInfo_whenAppIsFound_returnsAppInfo() {
+        val appInfo = ApplicationInfo()
+        packageManager.stub { on { getApplicationInfo("app.found", 0) } doReturn appInfo }
+
+        assertThat(context.getApplicationInfo("app.found")).isEqualTo(appInfo)
+    }
+
     @Test
     fun isPermissionGranted_nullPackageInfo_returnsFalse() {
         assertFalse(isPermissionGranted(null, "android.permission.CAMERA"))
