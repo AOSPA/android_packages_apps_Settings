@@ -108,7 +108,7 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
             return
         }
 
-        val entry = data.getEntry(targetUserHandle.identifier, safetySourceId!!)
+        val entry = data.getEntry(targetUserHandle.identifier, safetySourceId)
         if (entry == null) {
             Log.d(
                 TAG,
