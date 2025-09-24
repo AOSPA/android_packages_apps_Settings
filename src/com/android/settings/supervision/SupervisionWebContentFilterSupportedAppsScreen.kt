@@ -115,5 +115,5 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
     }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +SupervisionWebContentFiltersFooterPreference() }
 }
