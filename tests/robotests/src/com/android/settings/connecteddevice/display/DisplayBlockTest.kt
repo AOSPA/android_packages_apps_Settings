@@ -22,6 +22,7 @@ import android.os.Handler
 import android.util.Size
 import android.view.SurfaceControl
 import android.view.SurfaceView
+import android.view.View
 import android.widget.FrameLayout
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
@@ -315,6 +316,17 @@ class DisplayBlockTest {
         verify(mockTransaction).show(eq(backgroundSurface))
 
         verify(mockTransaction).setLayer(eq(wallpaper), eq(1))
+    }
+
+    @Test
+    fun init_addsArrowButtons_notVisible() {
+        assertThat(block.arrowButtons.keys)
+            .containsExactly(Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT)
+
+        for (arrowButtonView in block.arrowButtons.values) {
+            assertThat(arrowButtonView.parent).isEqualTo(block)
+            assertThat(arrowButtonView.visibility).isEqualTo(View.GONE)
+        }
     }
 
     private fun applyRequestedSize() {
