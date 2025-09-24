@@ -21,8 +21,10 @@ import android.graphics.PointF
 import android.os.Handler
 import android.util.Size
 import android.view.SurfaceControl
+import android.view.SurfaceView
 import android.widget.FrameLayout
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -216,8 +218,8 @@ class DisplayBlockTest {
         block.updateSurfaceView()
         injector.testHandler.flush()
 
-        val wallpaperViewWidth = block.wallpaperView.width.toFloat()
-        val wallpaperViewHeight = block.wallpaperView.height.toFloat()
+        val wallpaperViewWidth = block.wallpaperView().width.toFloat()
+        val wallpaperViewHeight = block.wallpaperView().height.toFloat()
         val scaledSurfaceWidth = DISPLAY_SIZE.width * surfaceScale
         val scaledSurfaceHeight = DISPLAY_SIZE.height * surfaceScale
         val expectedPosX = (wallpaperViewWidth - scaledSurfaceWidth) / 2f
@@ -285,7 +287,7 @@ class DisplayBlockTest {
         val surfaceCaptor = ArgumentCaptor.forClass(SurfaceControl::class.java)
         // Verify both the wallpaper and backgroundSurface is reparented
         verify(mockTransaction, times(2))
-            .reparent(surfaceCaptor.capture(), eq(block.wallpaperView.surfaceControl))
+            .reparent(surfaceCaptor.capture(), eq(block.wallpaperView().surfaceControl))
         val backgroundSurface = surfaceCaptor.allValues.get(1)
 
         verify(mockTransaction).setAlpha(eq(backgroundSurface), eq(0.5f))
@@ -300,6 +302,11 @@ class DisplayBlockTest {
     }
 
     private companion object {
+
+        private fun DisplayBlock.wallpaperView(): SurfaceView {
+            return findViewById<SurfaceView>(R.id.display_block_wallpaper)
+        }
+
         private const val DISPLAY_ID = 123
         private const val MIRRORED_DISPLAY_ID = 456
         private val DISPLAY_SIZE = Size(1280, 720)

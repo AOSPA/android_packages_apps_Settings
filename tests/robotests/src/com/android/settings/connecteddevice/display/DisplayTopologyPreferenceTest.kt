@@ -256,7 +256,7 @@ class DisplayTopologyPreferenceTest {
 
     private fun assertSelected(block: DisplayBlock, expected: Boolean) {
         val vis = if (expected) View.VISIBLE else View.INVISIBLE
-        assertThat(block.selectionMarkerView.visibility).isEqualTo(vis)
+        assertThat(block.selectionMarkerView().visibility).isEqualTo(vis)
     }
 
     private fun setMirroringMode(enable: Boolean) {
@@ -980,6 +980,10 @@ class DisplayTopologyPreferenceTest {
     }
 
     private companion object {
+        private fun DisplayBlock.selectionMarkerView(): View {
+            return findViewById<View>(R.id.display_block_selection_marker)
+        }
+
         private const val DISPLAY_ID_1 = DEFAULT_DISPLAY
         private const val DISPLAY_ID_2 = 123
         private const val DISPLAY_ID_3 = 456

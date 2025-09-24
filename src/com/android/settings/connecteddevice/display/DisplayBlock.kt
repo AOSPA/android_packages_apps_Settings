@@ -88,15 +88,16 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             override fun surfaceDestroyed(h: SurfaceHolder) {}
         }
 
-    val wallpaperView = SurfaceView(context)
+    private val wallpaperView = SurfaceView(context).apply { id = R.id.display_block_wallpaper }
     private val backgroundView =
         View(context).apply {
+            id = R.id.display_block_background
             background = context.getDrawable(R.drawable.display_block_background)
         }
 
-    @VisibleForTesting
-    val selectionMarkerView =
+    private val selectionMarkerView =
         View(context).apply {
+            id = R.id.display_block_selection_marker
             background = context.getDrawable(R.drawable.display_block_selection_marker_background)
         }
 
