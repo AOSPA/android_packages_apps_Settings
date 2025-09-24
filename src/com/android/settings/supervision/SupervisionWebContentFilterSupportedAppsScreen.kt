@@ -20,10 +20,12 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.preference.Preference
+import androidx.preference.PreferenceGroup
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.supervision.ipc.SupportedApp
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -32,6 +34,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.supervision.SupervisionLog.TAG
 import com.android.settingslib.utils.StringUtil
+import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,7 +42,11 @@ import kotlinx.coroutines.withContext
 
 /** Abstract base class for screens displaying supported apps for web content filters. */
 abstract class SupervisionWebContentFilterSupportedAppsScreen :
-    PreferenceScreenMixin, PreferenceLifecycleProvider, PreferenceTitleProvider, PreferenceBinding {
+    PreferenceScreenMixin,
+    PreferenceLifecycleProvider,
+    PreferenceTitleProvider,
+    PreferenceBinding,
+    PreferenceAvailabilityProvider {
     protected var supportedApps: List<SupportedApp> = emptyList()
     private var supervisionClient: SupervisionMessengerClient? = null
 
@@ -53,7 +60,7 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
     /** The key used to fetch the list of supported apps from [SupervisionMessengerClient]. */
     abstract val supportedAppsKey: String
 
-    override fun isFlagEnabled(context: Context) = Flags.enableSupervisionSettingsUiUpdates()
+    override fun isAvailable(context: Context) = Flags.enableSupervisionSettingsUiUpdates()
 
     override val indexable
         get() = true
@@ -96,6 +103,8 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
                             false
                         }
                     }
+            addSupportedAppsPreferences(context)
+
             context.notifyPreferenceChange(key)
         }
     }
@@ -115,5 +124,26 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
     }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) { +SupervisionWebContentFiltersFooterPreference() }
+        preferenceHierarchy(context) {
+            +UntitledPreferenceCategoryMetadata(SUPPORTED_APPS_GROUP)
+            +SupervisionWebContentFiltersFooterPreference()
+        }
+
+    private fun addSupportedAppsPreferences(context: PreferenceLifecycleContext) {
+        context.findPreference<PreferenceGroup>(SUPPORTED_APPS_GROUP)?.apply {
+            for (supportedApp in supportedApps) {
+                SupervisionSupportedAppPreference(
+                        supportedApp.title,
+                        supportedApp.summary,
+                        supportedApp.packageName!!,
+                    )
+                    .createWidget(context)
+                    .let { addPreference(it) }
+            }
+        }
+    }
+
+    companion object {
+        const val SUPPORTED_APPS_GROUP = "supported_apps_group"
+    }
 }
