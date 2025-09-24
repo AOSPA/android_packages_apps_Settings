@@ -144,7 +144,11 @@ public class ExternalDisplayTestBase {
                 new Mode(3, 640, 480, 60, 60, new float[0], new int[0]),
                 new Mode(4, 640, 480, 50, 60, new float[0], new int[0]),
                 new Mode(5, 2048, 1024, 60, 60, new float[0], new int[0]),
-                new Mode(6, 720, 480, 60, 60, new float[0], new int[0]));
+                new Mode(6, 720, 480, 60, 60, new float[0], new int[0]),
+                new Mode(7, 1, Mode.FLAG_ANISOTROPY_CORRECTION, 760, 600, 60, 60, new float[0],
+                        new int[0]),
+                new Mode(8, 3, Mode.FLAG_ANISOTROPY_CORRECTION, 720, 480, 60, 60, new float[0],
+                        new int[0]));
         return new DisplayDevice(EXTERNAL_DISPLAY_ID, "local:0987654321", "HDMI",
                 supportedModes.get(0), supportedModes, isEnabled, /* isConnectedDisplay= */ true);
     }
