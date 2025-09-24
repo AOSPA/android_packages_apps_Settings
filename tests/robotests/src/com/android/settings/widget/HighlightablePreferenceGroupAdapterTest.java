@@ -29,11 +29,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.FrameLayout;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -52,12 +55,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowAccessibilityManager;
+import org.robolectric.shadows.ShadowLooper;
 import org.robolectric.util.ReflectionHelpers;
+
+import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -79,18 +87,30 @@ public class HighlightablePreferenceGroupAdapterTest {
     private PreferenceViewHolder mViewHolder;
     private Preference mPreference;
 
+    private TestActivity mActivity;
+    private FrameLayout mRootView;
+
     @Before
     public void setUp() {
+        ActivityController<TestActivity> controller = Robolectric.buildActivity(TestActivity.class);
+        mActivity = controller.create().start().resume().visible().get();
+        mRootView = mActivity.findViewById(android.R.id.content);
+
+        // Use the Activity as the context from now on.
+        mContext = mActivity;
+
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
         mPreference = new Preference(mContext);
         mPreference.setKey(TEST_KEY);
         when(mPreferenceCategory.getContext()).thenReturn(mContext);
         mAdapter = spy(new HighlightablePreferenceGroupAdapter(mPreferenceCategory, TEST_KEY,
                 false /* highlighted*/));
         when(mAdapter.getItem(anyInt())).thenReturn(mPreference);
-        mViewHolder = PreferenceViewHolder.createInstanceForTests(
-                View.inflate(mContext, androidx.preference.R.layout.preference, null));
+
+        View itemView = View.inflate(mContext,
+                androidx.preference.R.layout.preference,
+                mRootView);
+        mViewHolder = PreferenceViewHolder.createInstanceForTests(itemView);
     }
 
     @Test
@@ -224,11 +244,11 @@ public class HighlightablePreferenceGroupAdapterTest {
         ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
         ReflectionHelpers.setField(mViewHolder, "itemView", spy(mViewHolder.itemView));
         when(mViewHolder.itemView.isShown()).thenReturn(true);
-        assertThat(mAdapter.mFadeInAnimated).isFalse();
+        assertThat(mAdapter.mHighlightVisible).isFalse();
 
         mAdapter.updateBackground(mViewHolder, 10);
 
-        assertThat(mAdapter.mFadeInAnimated).isTrue();
+        assertThat(mAdapter.mHighlightVisible).isTrue();
         assertThat(mViewHolder.itemView.getBackground()).isInstanceOf(TransitionDrawable.class);
         assertThat(mViewHolder.itemView.getTag(R.id.preference_highlighted)).isEqualTo(true);
     }
@@ -241,7 +261,7 @@ public class HighlightablePreferenceGroupAdapterTest {
 
         mAdapter.updateBackground(mViewHolder, 10);
 
-        assertThat(mAdapter.mFadeInAnimated).isFalse();
+        assertThat(mAdapter.mHighlightVisible).isFalse();
     }
 
     @Test
@@ -249,11 +269,11 @@ public class HighlightablePreferenceGroupAdapterTest {
         ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
         ReflectionHelpers.setField(mViewHolder, "itemView", spy(mViewHolder.itemView));
         when(mViewHolder.itemView.isShown()).thenReturn(true);
-        assertThat(mAdapter.mFadeInAnimated).isFalse();
+        assertThat(mAdapter.mHighlightVisible).isFalse();
         mAdapter.updateBackground(mViewHolder, 10);
         // mFadeInAnimated change from false to true - indicating background change is scheduled
         // through animation.
-        assertThat(mAdapter.mFadeInAnimated).isTrue();
+        assertThat(mAdapter.mHighlightVisible).isTrue();
 
         ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
         mAdapter.updateBackground(mViewHolder, 10);
@@ -271,5 +291,38 @@ public class HighlightablePreferenceGroupAdapterTest {
         assertThat(mViewHolder.itemView.getBackground())
                 .isNotEqualTo(mAdapter.mHighlightBackgroundRes);
         assertThat(mViewHolder.itemView.getTag(R.id.preference_highlighted)).isEqualTo(false);
+    }
+
+    @Test
+    public void requestRemoveHighlightDelayed_shouldSetHighlightToFalse() {
+        ShadowLooper mainLooper = Shadows.shadowOf(Looper.getMainLooper());
+        // Setup an item that is highlighted.
+        ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
+        ReflectionHelpers.setField(mViewHolder, "itemView", spy(mViewHolder.itemView));
+        when(mViewHolder.itemView.isShown()).thenReturn(true);
+        mAdapter.updateBackground(mViewHolder, 10);
+
+        // Remove the highlight from the item and wait for the delay to pass.
+        mAdapter.requestRemoveHighlightDelayed(mViewHolder, 10);
+        assertThat(mAdapter.mHighlightVisible).isTrue();
+        mainLooper.idleFor(HighlightablePreferenceGroupAdapter.HIGHLIGHT_DURATION,
+                        TimeUnit.MILLISECONDS);
+
+        assertThat(mAdapter.mHighlightVisible).isFalse();
+    }
+
+    /**
+     * We need this TestActivity because a View's internal timer (used for postDelayed)
+     * only works if the View is part of a real window.
+     * Inflating a View by itself in a test doesn't give it a window, so postDelayed fails.
+     * By adding our View to this Activity, we simulate a real app environment,
+     * which "turns on" the timer and lets our test control it.
+     */
+    public static class TestActivity extends Activity {
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(new FrameLayout(this));
+        }
     }
 }
