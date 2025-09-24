@@ -2,13 +2,6 @@ package: "com.android.settings.flags"
 container: "system_ext"
 
 flag {
-  name: "rotation_connected_display_setting"
-  namespace: "display_manager"
-  description: "Allow changing rotation of the connected display."
-  bug: "294015706"
-}
-
-flag {
   name: "resolution_and_enable_connected_display_setting"
   namespace: "display_manager"
   description: "Allow enabling/disabling and changing resolution of the connected display."

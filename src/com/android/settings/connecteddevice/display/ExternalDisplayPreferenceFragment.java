@@ -26,7 +26,6 @@ import static com.android.settings.Utils.createAccessibleSequence;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
-import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isExternalDisplaySettingsPageEnabled;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -693,8 +692,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             logger.log(SettingsStatsLog.EXTERNAL_DISPLAY_SETTINGS_CHANGED__SETTING__ROTATION);
             return true;
         });
-        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES
-                && mInjector.getFlags().rotationConnectedDisplaySetting());
+        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES);
     }
 
     private void addConnectionPreference(PrefRefresh refresh, DisplayDevice display, int position) {
@@ -878,9 +876,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 public @NonNull List<SearchIndexableRaw> getRawDataToIndex(@NonNull Context context,
                         boolean enabled) {
                     List<SearchIndexableRaw> rawData = new ArrayList<>();
-                    if (!isExternalDisplaySettingsPageEnabled(new FeatureFlagsImpl())) {
-                        return rawData;
-                    }
                     SearchIndexableRaw indexInfo = new SearchIndexableRaw(context);
                     indexInfo.key = "external_display_screen_title";
                     indexInfo.title = context.getString(EXTERNAL_DISPLAY_TITLE_RESOURCE);
