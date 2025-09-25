@@ -122,6 +122,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
 
     var onA11yMoveListener: ((direction: Direction) -> Unit)? = null
     @VisibleForTesting internal val arrowButtons: Map<Direction, View>
+    private var arrowMovement: ArrowMovement = ArrowMovement.immovable()
 
     init {
         isScrollContainer = false
@@ -293,6 +294,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         bottomRight: PointF,
         surfaceScale: Float,
         surfaceSize: Size,
+        arrowMovement: ArrowMovement,
     ) {
         wallpaperSurface?.let { oldSurfaces.add(it) }
         letterboxBackgroundSurface?.let { oldSurfaces.add(it) }
@@ -305,6 +307,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         this.displayIdToShowWallpaper = displayIdToShowWallpaper
         this.surfaceScale = surfaceScale
         this.surfaceSize = surfaceSize
+        this.arrowMovement = arrowMovement
 
         val displayDevice = injector.getDisplay(logicalDisplayId)
         contentDescription =

@@ -246,6 +246,7 @@ class DisplayTopologyPreferenceController(
             newBounds,
             logicalDisplaySizeFetcher,
             /* isMirroring= */ false,
+            calculateDisplayArrowMovement(topology.graph),
         )
         topologyInfo = TopologyInfo(topology, scaling, newBounds)
         // Step 4
@@ -282,6 +283,7 @@ class DisplayTopologyPreferenceController(
             newBounds,
             logicalDisplaySizeFetcher,
             /* isMirroring= */ true,
+            newBounds.associate { (id, _) -> id to ArrowMovement.immovable() },
         )
         topologyInfo = null
         // Step 4
@@ -345,6 +347,7 @@ class DisplayTopologyPreferenceController(
         newBounds: List<Pair<Int, RectF>>,
         logicalDisplaySizeFetcher: LogicalDisplaySizeFetcher,
         isMirroring: Boolean,
+        displaysArrowMovement: Map<Int, ArrowMovement>,
     ) {
         // Resize pane holder
         paneHolder.layoutParams.let {
@@ -386,6 +389,7 @@ class DisplayTopologyPreferenceController(
                 bottomRight,
                 displaySurfaceToBlockScale,
                 displaySize,
+                displaysArrowMovement.get(id) ?: ArrowMovement.immovable(),
             )
 
             block.onA11yMoveListener = { direction -> simulateA11yDrag(id, pos, block, direction) }

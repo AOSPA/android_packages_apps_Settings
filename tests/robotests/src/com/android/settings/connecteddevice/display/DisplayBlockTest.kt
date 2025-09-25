@@ -100,7 +100,15 @@ class DisplayBlockTest {
     fun normalUpdateFlow() {
         val wallpaper = SurfaceControl.Builder().setName("wallpaper").build()
         injector.wallpapers[DISPLAY_ID] = wallpaper
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(20f, 20f),
+            0.5f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
         injector.testHandler.flush()
 
         block.updateSurfaceView()
@@ -118,12 +126,28 @@ class DisplayBlockTest {
         val wallpaperB = SurfaceControl.Builder().setName("wallpaperB").build()
         injector.wallpapers[DISPLAY_ID] = wallpaperA
 
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.25f, DISPLAY_SIZE)
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(20f, 20f),
+            0.25f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
 
         // Should not have fetched wallpaper info yet. Replace wallpaper setting with wallpaperB.
         assertThat(injector.wallpapers.put(DISPLAY_ID, wallpaperB)).isEqualTo(wallpaperA)
 
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(30f, 30f), 0.4f, DISPLAY_SIZE)
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(30f, 30f),
+            0.4f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
         injector.testHandler.flush()
 
         // Should not have fetched wallpaper or display info yet.
@@ -153,6 +177,7 @@ class DisplayBlockTest {
             PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             0.5f,
             DISPLAY_SIZE,
+            ArrowMovement.immovable(),
         )
         block.updateSurfaceView()
         injector.testHandler.flush()
@@ -174,6 +199,7 @@ class DisplayBlockTest {
             PointF(moveOffsetPx + BLOCK_WIDTH, moveOffsetPx + BLOCK_HEIGHT),
             0.5f,
             DISPLAY_SIZE,
+            ArrowMovement.immovable(),
         )
         injector.testHandler.flush()
         verify(mockTransaction).reparent(eq(wallpaperB), any())
@@ -193,6 +219,7 @@ class DisplayBlockTest {
             PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             0.2f,
             DISPLAY_SIZE,
+            ArrowMovement.immovable(),
         )
         injector.testHandler.flush()
 
@@ -204,7 +231,15 @@ class DisplayBlockTest {
 
     @Test
     fun retryIfWallpaperNotReady() {
-        block.reset(DISPLAY_ID, DISPLAY_ID, PointF(10f, 10f), PointF(20f, 20f), 0.5f, DISPLAY_SIZE)
+        block.reset(
+            DISPLAY_ID,
+            DISPLAY_ID,
+            PointF(10f, 10f),
+            PointF(20f, 20f),
+            0.5f,
+            DISPLAY_SIZE,
+            ArrowMovement.immovable(),
+        )
         injector.testHandler.flush()
         block.updateSurfaceView()
         injector.testHandler.flush()
@@ -235,6 +270,7 @@ class DisplayBlockTest {
             PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             surfaceScale,
             DISPLAY_SIZE,
+            ArrowMovement.immovable(),
         )
 
         block.updateSurfaceView()
@@ -262,6 +298,7 @@ class DisplayBlockTest {
             PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             surfaceScale,
             DISPLAY_SIZE,
+            ArrowMovement.immovable(),
         )
 
         block.updateSurfaceView()
@@ -282,6 +319,7 @@ class DisplayBlockTest {
             PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             0.5f,
             DISPLAY_SIZE,
+            ArrowMovement.immovable(),
         )
 
         block.updateSurfaceView()
@@ -301,6 +339,7 @@ class DisplayBlockTest {
             PointF(BLOCK_WIDTH, BLOCK_HEIGHT),
             0.5f,
             DISPLAY_SIZE,
+            ArrowMovement.immovable(),
         )
 
         block.updateSurfaceView()
