@@ -56,6 +56,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_edit_shortcuts"
+  namespace: "accessibility"
+  description: "Migrate edit shortcuts screen to the Catalyst infrastructure"
+  bug: "440383851"
+}
+
+flag {
   name: "catalyst_extra_dim"
   namespace: "accessibility"
   description: "Migrate extra dim screen to the Catalyst infrastructure"
