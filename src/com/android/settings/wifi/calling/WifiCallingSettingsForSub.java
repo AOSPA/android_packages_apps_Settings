@@ -56,7 +56,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.AbstractSubscriptionPreferenceController;
 import com.android.settings.network.telephony.wificalling.IWifiCallingRepository;
@@ -734,16 +733,5 @@ public class WifiCallingSettingsForSub extends DashboardFragment
     @Override
     public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
         return WifiCallingScreen.KEY;
-    }
-
-    @Override
-    public @Nullable Bundle getPreferenceScreenBindingArgs(@NonNull Context context) {
-        Bundle bundle = new Bundle();
-        if (Flags.catalystKeyParameters()) {
-            bundle.putString(EXTRA_SUB_ID, String.valueOf(mSubId));
-        } else {
-            bundle.putInt(EXTRA_SUB_ID, mSubId);
-        }
-        return bundle;
     }
 }
