@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.Activity
 import android.app.supervision.SupervisionManager
 import android.app.supervision.SupervisionRecoveryInfo
 import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
@@ -37,6 +38,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Answers.CALLS_REAL_METHODS
+import org.mockito.kotlin.UseConstructor.Companion.withArguments
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
@@ -44,24 +47,30 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.robolectric.shadows.ShadowToast
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionUpdateRecoveryEmailPreferenceTest {
 
     private val appContext: Context = ApplicationProvider.getApplicationContext()
-    private val mockLifeCycleContext = mock<PreferenceLifecycleContext>()
     private val mockSupervisionManager = mock<SupervisionManager>()
-
-    @get:Rule val setFlagsRule = SetFlagsRule()
     private val preference = SupervisionUpdateRecoveryEmailPreference()
     private val context =
         object : ContextWrapper(appContext) {
             override fun getSystemService(name: String): Any =
                 when (name) {
-                    Context.SUPERVISION_SERVICE -> mockSupervisionManager
+                    SUPERVISION_SERVICE -> mockSupervisionManager
                     else -> super.getSystemService(name)
                 }
         }
+
+    private val mockLifeCycleContext =
+        mock<PreferenceLifecycleContext>(
+            useConstructor = withArguments(context),
+            defaultAnswer = CALLS_REAL_METHODS,
+        )
+
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Before
     fun setUp() {
@@ -193,15 +202,52 @@ class SupervisionUpdateRecoveryEmailPreferenceTest {
     @Test
     fun onClick_triggersPinRecoveryActivity() {
         val widget: Preference = preference.createAndBindWidget(context)
-
         mockLifeCycleContext.stub {
             on { findPreference<Preference>(SupervisionUpdateRecoveryEmailPreference.KEY) } doReturn
                 widget
         }
-
         widget.performClick()
-
         verifyPinRecoveryActivityStarted()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
+    fun onActivityResult_showsCorrectToastString() {
+        val expectedToastMessage = context.getString(R.string.supervision_recovery_email_updated)
+        preference.onActivityResult(
+            mockLifeCycleContext,
+            REQUEST_CODE_UPDATE_RECOVERY,
+            Activity.RESULT_OK,
+            null,
+        )
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(expectedToastMessage)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
+    fun onActivityResult_flagDisabled_noToast() {
+        preference.onActivityResult(
+            mockLifeCycleContext,
+            REQUEST_CODE_UPDATE_RECOVERY,
+            Activity.RESULT_OK,
+            null,
+        )
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isNull()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
+    fun onActivityResult_resultCanceled_noToast() {
+        preference.onActivityResult(
+            mockLifeCycleContext,
+            REQUEST_CODE_UPDATE_RECOVERY,
+            Activity.RESULT_CANCELED,
+            null,
+        )
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isNull()
     }
 
     private fun verifyPinRecoveryActivityStarted() {
@@ -217,5 +263,10 @@ class SupervisionUpdateRecoveryEmailPreferenceTest {
             .isEqualTo(SupervisionPinRecoveryActivity::class.java.name)
         assertThat(intentCaptor.firstValue.action)
             .isEqualTo(SupervisionPinRecoveryActivity.ACTION_UPDATE)
+    }
+
+    companion object {
+        const val KEY = "supervision_update_recovery_email"
+        const val REQUEST_CODE_UPDATE_RECOVERY = 2
     }
 }

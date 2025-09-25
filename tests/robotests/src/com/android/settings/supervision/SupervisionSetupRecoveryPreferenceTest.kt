@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ADD_RECOVERY
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_VERIFY_RECOVERY
 import android.app.supervision.SupervisionManager
@@ -28,6 +29,7 @@ import android.content.Intent
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.preference.Preference
@@ -42,6 +44,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Answers.CALLS_REAL_METHODS
+import org.mockito.kotlin.UseConstructor.Companion.withArguments
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
@@ -49,14 +53,13 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.robolectric.shadows.ShadowToast
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionSetupRecoveryPreferenceTest {
 
     private val appContext: Context = ApplicationProvider.getApplicationContext()
-    private val mockLifeCycleContext = mock<PreferenceLifecycleContext>()
     private val mockSupervisionManager = mock<SupervisionManager>()
-
     private val mockActivityResultLauncher = mock<ActivityResultLauncher<Intent>>()
 
     @get:Rule val metricsRule = MetricsRule()
@@ -70,6 +73,12 @@ class SupervisionSetupRecoveryPreferenceTest {
                     else -> super.getSystemService(name)
                 }
         }
+
+    private val mockLifeCycleContext =
+        mock<PreferenceLifecycleContext>(
+            useConstructor = withArguments(context),
+            defaultAnswer = CALLS_REAL_METHODS,
+        )
 
     @Before
     fun setUp() {
@@ -206,12 +215,100 @@ class SupervisionSetupRecoveryPreferenceTest {
                 widget
             on { getSystemService(SupervisionManager::class.java) } doReturn mockSupervisionManager
         }
-
         widget.performClick()
 
         verifyPinRecoveryActivityStarted(SupervisionPinRecoveryActivity.ACTION_POST_SETUP_VERIFY)
         verify(metricsRule.metricsFeatureProvider)
             .action(context, ACTION_SUPERVISION_VERIFY_RECOVERY)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
+    fun updateRecoveryInfo_addFlow_showsCorrectToastString() {
+        val expectedToastMessage = context.getString(R.string.supervision_recovery_email_added)
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
+        val widget: Preference = preference.createAndBindWidget(context)
+        widget.performClick()
+        preference.updateRecoveryInfo(ActivityResult(Activity.RESULT_OK, null))
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(expectedToastMessage)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
+    fun updateRecoveryInfo_verifyFlow_showsCorrectToastString() {
+        val expectedToastMessage = context.getString(R.string.supervision_recovery_email_verified)
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
+            )
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+        val widget: Preference = preference.createAndBindWidget(context)
+        widget.performClick()
+        preference.updateRecoveryInfo(ActivityResult(Activity.RESULT_OK, null))
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(expectedToastMessage)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
+    fun updateRecoveryInfo_addFlow_disableFlags_noToast() {
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
+        val widget: Preference = preference.createAndBindWidget(context)
+        widget.performClick()
+        preference.updateRecoveryInfo(ActivityResult(Activity.RESULT_OK, null))
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isNull()
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
+    fun updateRecoveryInfo_verifyFlow_disableFlags_noToast() {
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
+            )
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+        val widget: Preference = preference.createAndBindWidget(context)
+        widget.performClick()
+        preference.updateRecoveryInfo(ActivityResult(Activity.RESULT_OK, null))
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isNull()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
+    fun updateRecoveryInfo_addFlowCanceled_noToast() {
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
+        val widget: Preference = preference.createAndBindWidget(context)
+        widget.performClick()
+        preference.updateRecoveryInfo(ActivityResult(Activity.RESULT_CANCELED, null))
+
+        assertThat(ShadowToast.getLatestToast()).isNull()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
+    fun updateRecoveryInfo_verifyFlowCanceled_noToast() {
+        val recoveryInfo =
+            SupervisionRecoveryInfo(
+                /* accountName */ "email",
+                /* accountType */ "default",
+                /* state */ STATE_PENDING,
+                /* accountData */ null,
+            )
+        whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(recoveryInfo)
+        val widget: Preference = preference.createAndBindWidget(context)
+        widget.performClick()
+        preference.updateRecoveryInfo(ActivityResult(Activity.RESULT_CANCELED, null))
+
+        assertThat(ShadowToast.getLatestToast()).isNull()
     }
 
     private fun verifyPinRecoveryActivityStarted(expectedAction: String) {

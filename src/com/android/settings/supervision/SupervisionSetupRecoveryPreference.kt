@@ -24,6 +24,7 @@ import android.app.supervision.SupervisionRecoveryInfo.STATE_PENDING
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -54,6 +55,7 @@ class SupervisionSetupRecoveryPreference :
 
     private lateinit var lifeCycleContext: PreferenceLifecycleContext
     private lateinit var setUpRecoveryLauncher: ActivityResultLauncher<Intent>
+    private var isVerificationFlow: Boolean = false
 
     override val key: String
         get() = KEY
@@ -100,19 +102,37 @@ class SupervisionSetupRecoveryPreference :
     fun updateRecoveryInfo(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
             lifeCycleContext.notifyPreferenceChange(KEY)
+            if (Flags.enableSupervisionPinSnackbarsToastMessage()) {
+                val messageResId =
+                    if (isVerificationFlow) {
+                        R.string.supervision_recovery_email_verified
+                    } else {
+                        R.string.supervision_recovery_email_added
+                    }
+                Toast.makeText(
+                        lifeCycleContext,
+                        lifeCycleContext.getString(messageResId),
+                        Toast.LENGTH_SHORT,
+                    )
+                    .show()
+            }
         }
     }
 
     override fun onPreferenceClick(preference: Preference): Boolean {
         val intent = Intent(lifeCycleContext, SupervisionPinRecoveryActivity::class.java)
         val metricsFeatureProvider = FeatureFactory.featureFactory.metricsFeatureProvider
-        if (hasAccountNameToVerify(lifeCycleContext)) {
+        isVerificationFlow = hasAccountNameToVerify(lifeCycleContext)
+        if (isVerificationFlow) {
+            // It's a "verify" flow
             intent.action = SupervisionPinRecoveryActivity.ACTION_POST_SETUP_VERIFY
             metricsFeatureProvider.action(preference.context, ACTION_SUPERVISION_VERIFY_RECOVERY)
         } else {
+            // It's an "add" flow
             intent.action = SupervisionPinRecoveryActivity.ACTION_SETUP_VERIFIED
             metricsFeatureProvider.action(preference.context, ACTION_SUPERVISION_ADD_RECOVERY)
         }
+
         setUpRecoveryLauncher.launch(intent)
         return true
     }

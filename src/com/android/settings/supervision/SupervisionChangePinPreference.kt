@@ -15,23 +15,41 @@
  */
 package com.android.settings.supervision
 
+import android.app.Activity
 import android.app.admin.DevicePolicyManager
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_CHANGE_PIN
-import android.content.Context
+import android.app.supervision.flags.Flags
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.VisibleForTesting
+import androidx.preference.Preference
 import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.password.ChooseLockGeneric
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.supervision.SupervisionLog.TAG
 
 /**
  * Setting on PIN Management screen (Settings > Supervision > Manage Pin) that invokes the flow to
  * update the existing device supervision PIN.
  */
-class SupervisionChangePinPreference : PreferenceMetadata, PreferenceActionMetricsProvider {
+class SupervisionChangePinPreference :
+    PreferenceMetadata,
+    PreferenceActionMetricsProvider,
+    PreferenceLifecycleProvider,
+    PreferenceBinding,
+    Preference.OnPreferenceClickListener {
+
+    private lateinit var lifeCycleContext: PreferenceLifecycleContext
+    private lateinit var changePinLauncher: ActivityResultLauncher<Intent>
 
     override val key: String
         get() = KEY
@@ -42,19 +60,54 @@ class SupervisionChangePinPreference : PreferenceMetadata, PreferenceActionMetri
     override val preferenceActionMetrics: Int
         get() = ACTION_SUPERVISION_CHANGE_PIN
 
-    override fun intent(context: Context): Intent? {
-        if (!context.isSupervisingCredentialSet) {
-            Log.w(TAG, "Supervising credential not set")
-            return null
-        }
-        return Intent(context, ChooseLockGeneric::class.java).apply {
-            // To go directly to setting up a PIN
-            putExtra(
-                LockPatternUtils.PASSWORD_TYPE_KEY,
-                DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        lifeCycleContext = context
+        changePinLauncher =
+            context.registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult(),
+                ::onChangePinComplete,
             )
-            putExtra(Intent.EXTRA_USER_ID, context.supervisingUserHandle?.identifier)
+    }
+
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+        preference.onPreferenceClickListener = this
+    }
+
+    @VisibleForTesting
+    fun onChangePinComplete(result: ActivityResult) {
+        // Assume success if the flow was not canceled.
+        if (
+            Flags.enableSupervisionPinSnackbarsToastMessage() &&
+                result.resultCode != Activity.RESULT_CANCELED
+        ) {
+            Toast.makeText(
+                    lifeCycleContext,
+                    lifeCycleContext.getString(R.string.supervision_pin_changed),
+                    Toast.LENGTH_SHORT,
+                )
+                .show()
+        } else {
+            // The user cancelled the flow. No action needed.
+            Log.d(TAG, "PIN change was likely canceled by the user.")
         }
+    }
+
+    override fun onPreferenceClick(preference: Preference): Boolean {
+        if (!preference.context.isSupervisingCredentialSet) {
+            Log.w(TAG, "Supervising credential not set")
+            return false
+        }
+        val intent =
+            Intent(preference.context, ChooseLockGeneric::class.java).apply {
+                putExtra(
+                    LockPatternUtils.PASSWORD_TYPE_KEY,
+                    DevicePolicyManager.PASSWORD_QUALITY_NUMERIC,
+                )
+                putExtra(Intent.EXTRA_USER_ID, preference.context.supervisingUserHandle?.identifier)
+            }
+        changePinLauncher.launch(intent)
+        return true
     }
 
     companion object {
