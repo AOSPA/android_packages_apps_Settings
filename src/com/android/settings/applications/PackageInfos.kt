@@ -46,6 +46,14 @@ fun Context.getPackageInfo(packageName: String) =
         null
     }
 
+/** Returns [PackageInfo] of given package, null if not found. */
+fun Context.getApplicationInfo(packageName: String) =
+    try {
+        packageManager.getApplicationInfo(packageName, 0)
+    } catch (_: NameNotFoundException) {
+        null
+    }
+
 /** Returns [PackageInfo] of given package with activities flags set, null if not found. */
 fun Context.getPackageInfoWithActivities(packageName: String) =
     try {

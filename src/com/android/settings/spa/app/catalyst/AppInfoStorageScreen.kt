@@ -25,6 +25,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.applications.AppStorageSettings
+import com.android.settings.applications.getApplicationInfo
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
@@ -32,6 +33,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.spa.app.storage.StorageType
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.applications.StorageStatsSource
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -45,9 +47,13 @@ import kotlinx.coroutines.flow.flow
 
 @ProvidePreferenceScreen(AppInfoStorageScreen.KEY, parameterized = true)
 open class AppInfoStorageScreen(context: Context, override val arguments: Bundle) :
-    PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider {
+    PreferenceScreenMixin,
+    PreferenceSummaryProvider,
+    PreferenceTitleProvider,
+    PreferenceAvailabilityProvider {
 
-    private val appInfo = context.packageManager.getApplicationInfo(arguments.getString("app")!!, 0)
+    private val packageName = arguments.getString("app")!!
+    private val appInfo = context.getApplicationInfo(packageName)
 
     private val repo = AppStorageRepositoryImpl(context)
 
@@ -66,11 +72,13 @@ open class AppInfoStorageScreen(context: Context, override val arguments: Bundle
         arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? =
-        appInfo.loadLabel(context.packageManager)
+        appInfo?.loadLabel(context.packageManager)
 
-    override fun getSummary(context: Context): CharSequence? = repo.formatSize(appInfo)
+    override fun getSummary(context: Context): CharSequence? = appInfo?.let { repo.formatSize(it) }
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
+
+    override fun isAvailable(context: Context) = appInfo != null
 
     override fun extras(context: Context): Bundle? =
         Bundle(1).apply { putString(KEY_EXTRA_PACKAGE_NAME, arguments.getString("app")) }
@@ -81,7 +89,7 @@ open class AppInfoStorageScreen(context: Context, override val arguments: Bundle
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         Intent("com.android.settings.APP_STORAGE_SETTINGS").apply {
-            data = "package:${appInfo.packageName}".toUri()
+            data = "package:$packageName".toUri()
             highlightPreference(arguments, metadata?.key)
         }
 
@@ -96,8 +104,10 @@ open class AppInfoStorageScreen(context: Context, override val arguments: Bundle
 
     private fun Context.getStatsForPackage() =
         try {
-            StorageStatsSource(this)
-                .getStatsForPackage(appInfo.volumeUuid, appInfo.packageName, UserHandle.of(userId))
+            appInfo?.let {
+                StorageStatsSource(this)
+                    .getStatsForPackage(it.volumeUuid, it.packageName, UserHandle.of(userId))
+            }
         } catch (_: Exception) {
             // error during lookup, return no result
             null
