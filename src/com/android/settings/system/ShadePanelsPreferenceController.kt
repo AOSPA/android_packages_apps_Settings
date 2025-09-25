@@ -77,6 +77,11 @@ class ShadePanelsPreferenceController(context: Context, key: String) :
                 return CONDITIONALLY_UNAVAILABLE
             }
 
+            if (!Flags.dualShade()) {
+                Log.i(TAG, "Dual Shade is disabled")
+                return CONDITIONALLY_UNAVAILABLE
+            }
+
             val settingEnabled =
                 context.resources.getBoolean(
                     com.android.settingslib.R.bool.config_useDualShadeSetting
