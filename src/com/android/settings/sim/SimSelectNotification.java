@@ -231,7 +231,7 @@ public class SimSelectNotification extends BroadcastReceiver {
             int slotIndex = SubscriptionManager.getSlotIndex(subId);
             // If there is only one subscription, ask if user wants to use if for everything
             Intent newIntent = new Intent(context, SimDialogActivity.class);
-            newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             newIntent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY,
                     SimDialogActivity.PREFERRED_PICK);
             newIntent.putExtra(SimDialogActivity.PREFERRED_SIM, slotIndex);
@@ -239,7 +239,7 @@ public class SimSelectNotification extends BroadcastReceiver {
         } else if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA) {
             // If there are multiple, ensure they pick default data
             Intent newIntent = new Intent(context, SimDialogActivity.class);
-            newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             newIntent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.DATA_PICK);
             context.startActivity(newIntent);
         }
