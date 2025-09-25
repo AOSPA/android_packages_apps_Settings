@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"助聽器設定"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"捷徑、助聽器兼容性"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"預設"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"左側預設"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"右側預設"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"左側：<xliff:g id="PRESET_NAME_0">%1$s</xliff:g> 右側：<xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"沒有聽力師的預設設定"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"無法更新預設"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"環境聲音"</string>
@@ -251,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"向下移"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"移除"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"移至頂端"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"地區偏好設定"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"設定單位及數字偏好設定"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"讓應用程式存取地區偏好設定，為你提供個人化體驗。"</string>
@@ -1526,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"何時顯示"</string>
     <string name="doze_title" msgid="1523090408230862316">"喚醒螢幕顯示通知"</string>
     <string name="doze_summary" msgid="8252867381522942804">"收到新通知時，關閉的螢幕會亮起"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"一律顯示時間和資料"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"螢幕長亮模式"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"此功能會增加耗電量"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"螢幕關閉時顯示上鎖畫面桌布"</string>
@@ -1690,10 +1688,8 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"共用設定"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"插座模式"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"上鎖畫面上的小工具"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"在上鎖畫面向左滑動，即可存取常用小工具。\n\n使用小工具開啟應用程式時，系統會要求你驗證身分。請注意，任何人都可查看小工具。"</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"Beta 版本"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"自動顯示時機"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"一律不要"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"充電時"</string>
@@ -2631,7 +2627,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"使用色彩反轉"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"色彩反轉捷徑"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"色彩反轉功能可以將明亮的畫面調暗，亦會將深色畫面轉為淺色。"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;注意事項&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; 媒體和圖像中的色彩都會改變&lt;/li&gt; &lt;li&gt; 色彩反轉的效果會套用到所有應用程式&lt;/li&gt; &lt;li&gt; 如要讓背景呈現深色，可以改用深色主題&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;注意事項&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; 媒體同圖片嘅色彩將會有變&lt;/li&gt; &lt;li&gt; 所有應用程式都會色彩反轉&lt;/li&gt; &lt;li&gt; 你可以改用深色主題背景顯示深色背景&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"輸入設定"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"自動點擊 (停留時間)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"關於自動點擊 (停留時間)"</string>
@@ -3398,10 +3394,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"啟用系統 CA 憑證嗎？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"停用系統 CA 憑證嗎？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"永久移除使用者 CA 憑證嗎？"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA 憑證，已收合，輕按兩下即可展開"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA 憑證，已展開，輕按兩下即可收合"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"正在使用："</string>
     <string name="credential_contains" msgid="3146519680449595771">"此項目包含："</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 個使用者密鑰"</string>
@@ -3441,8 +3435,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"將 <xliff:g id="USER_NAME">%1$s</xliff:g> 從這部裝置中刪除"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"上鎖畫面設定"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"在上鎖畫面加入使用者"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"在登入畫面新增使用者"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"放上插座後切換至管理員使用者"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"你要刪除自己嗎？"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"要刪除這名使用者嗎？"</string>
@@ -5949,7 +5942,10 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"刪除 PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"新增備援電郵地址"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"驗證電郵地址"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"應用程式商店篩選器"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"網站內容篩選器"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"網站篩選器, 封鎖網站, 瀏覽器篩選器, 封鎖露骨色情網站, 篩選網站, 封鎖搜尋結果, 篩選鎖露骨色情搜尋結果, 內容限制"</string>
@@ -5988,16 +5984,13 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"私隱權設定"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"權限、控制項"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"裝置解鎖"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"螢幕鎖定"</string>
     <string name="location_settings" msgid="6833222354060094170">"位置存取權"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"查看擁有位置存取權的應用程式和服務"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"「身分檢查」可配搭更多應用程式使用"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"「身分檢查」能防止他人未經授權存取你的應用程式。現適用於任何使用「指紋解鎖」或「面孔解鎖」的應用程式。"</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"查看詳情"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"無法檢查設定"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"暫時沒有資料"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

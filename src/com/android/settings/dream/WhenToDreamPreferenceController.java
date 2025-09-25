@@ -17,6 +17,7 @@
 package com.android.settings.dream;
 
 import static android.service.dreams.Flags.dreamsV2;
+import static com.android.settings.display.AmbientDisplayAlwaysOnPreferenceScreenController.isAodSuppressedByBedtime;
 
 import android.annotation.StringRes;
 import android.content.Context;
@@ -27,7 +28,6 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 
 public class WhenToDreamPreferenceController extends BasePreferenceController implements
@@ -89,8 +89,7 @@ public class WhenToDreamPreferenceController extends BasePreferenceController im
     }
 
     private @StringRes int getSummaryResId() {
-        if (mDreamsDisabledByAmbientModeSuppression
-                && AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime(mContext)) {
+        if (mDreamsDisabledByAmbientModeSuppression && isAodSuppressedByBedtime(mContext)) {
             return R.string.screensaver_unavailable_due_to_mode;
         } else {
             final int resId = DreamSettings.getDreamSettingDescriptionResId(

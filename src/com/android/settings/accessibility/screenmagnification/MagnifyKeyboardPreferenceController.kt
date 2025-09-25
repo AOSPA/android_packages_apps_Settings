@@ -28,7 +28,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.internal.accessibility.util.AccessibilityUtils
-import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.MagnificationCapabilities
@@ -91,10 +90,7 @@ class MagnifyKeyboardPreferenceController(context: Context, prefKey: String) :
     }
 
     override fun getAvailabilityStatus(): Int {
-        return if (
-            Flags.enableMagnificationMagnifyNavBarAndIme() &&
-                mContext.isWindowMagnificationSupported()
-        ) {
+        return if (mContext.isWindowMagnificationSupported()) {
             AVAILABLE
         } else {
             CONDITIONALLY_UNAVAILABLE

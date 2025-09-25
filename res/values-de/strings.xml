@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Hörgeräteeinstellungen"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Verknüpfung, Kompatibilität mit Hörgeräten"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Voreinstellung"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Voreinstellung für das linke Hörgerät"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Voreinstellung für das rechte Hörgerät"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Links: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Rechts: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Der Hörgeräteakustiker hat keine Voreinstellungen festgelegt"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Voreinstellung konnte nicht aktualisiert werden"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Umgebungsgeräusche"</string>
@@ -251,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Nach unten verschieben"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Entfernen"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"An den Anfang verschieben"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionale Einstellungen"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Einstellungen für Einheiten und Zahlen festlegen"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Wenn du Apps deine regionalen Einstellungen mitteilst, können ihre Dienste für dich personalisiert werden."</string>
@@ -1526,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Ist wann aktiviert?"</string>
     <string name="doze_title" msgid="1523090408230862316">"Display bei Benachrichtigungen aktivieren"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Wenn das Display inaktiv ist, wird es bei neuen Benachrichtigungen aktiviert"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Zeit und Informationen immer anzeigen"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Always-on-Display"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Erhöhter Akkuverbrauch"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Sperrbildschirmhintergrund anzeigen, wenn das Display ausgeschaltet ist"</string>
@@ -1690,10 +1688,8 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Gemeinschaftliche Einstellungen"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Hub-Modus"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets auf dem Sperrbildschirm"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"Wenn du auf deine bevorzugten Widgets zugreifen möchtest, wische auf dem Sperrbildschirm nach links. \n\nWenn du eine App über ein Widget öffnest, musst du deine Identität bestätigen. Beachte auch, dass jeder die Widgets sehen kann."</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"Beta"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Wann werden Widgets automatisch angezeigt?"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nie"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Wenn Gerät geladen wird"</string>
@@ -2631,7 +2627,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Farbumkehr aktivieren"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Kurzbefehl für Farbumkehr"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Die Farbumkehr macht helle Displays dunkel und dunkle Displays hell."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Hinweis&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Das führt zu einer veränderten Wiedergabe der Farben in Medien und Bildern&lt;/li&gt; &lt;li&gt; Die Farbumkehr funktioniert in allen Apps&lt;/li&gt; &lt;li&gt; Ein dunkler Hintergrund kann stattdessen mit dem dunklen Design angezeigt werden&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Hinweis&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Farben in Medien und Bildern werden verändert wiedergegeben&lt;/li&gt; &lt;li&gt; Die Farbumkehr funktioniert in allen Apps&lt;/li&gt; &lt;li&gt; Ein dunkler Hintergrund kann stattdessen mit dem dunklen Design angezeigt werden&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"um die Einstellungen aufzurufen"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Autom. Klick (Verweildauer)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Über automatischer Klick (Verweildauer)"</string>
@@ -3398,10 +3394,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"System-CA-Zertifikat aktivieren?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"System-CA-Zertifikat deaktivieren?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"CA-Zertifikat des Nutzers endgültig entfernen?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>-CA-Zertifikate, minimiert, zum Maximieren doppeltippen"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>-CA-Zertifikate, maximiert, zum Minimieren doppeltippen"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Wird verwendet von"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Dieser Eintrag beinhaltet"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 Nutzerschlüssel"</string>
@@ -3441,8 +3435,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g> vom Gerät löschen"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Einstellungen für den Sperrbildschirm"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Nutzer vom Sperrbildschirm aus hinzufügen"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Nutzer über den Anmeldebildschirm hinzufügen"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Zu Administrator wechseln, wenn angedockt"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Dich selbst löschen?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Diesen Nutzer löschen?"</string>
@@ -4792,7 +4785,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Wegen Energiesparmodus vorübergehend deaktiviert"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Energiesparmodus ausschalten"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Wegen Energiesparmodus vorübergehend aktiviert"</string>
-    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Dunkles Design testen"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Dunkles Design ausprobieren"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Verlängert die Akkulaufzeit"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Kacheln für Schnelleinstellungen für Entwickler"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Zeitlimit für ADB-Autorisierung deaktivieren"</string>
@@ -5949,7 +5942,10 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN löschen"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"E‑Mail-Adresse zur Kontowiederherstellung hinzufügen"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"E‑Mail-Adresse bestätigen"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filter für App-Shop"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filter für Websiteinhalte"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Websitefilter, Websites blockieren, Browserfilter, Anstößige Websites blockieren, Websites filtern, Suchergebnisse blockieren, Anstößige Suchergebnisse filtern, Inhaltsbeschränkungen"</string>
@@ -5988,16 +5984,13 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"Datenschutzeinstellungen"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Berechtigungen, Einstellungen"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Geräteentsperrung"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"Displaysperre"</string>
     <string name="location_settings" msgid="6833222354060094170">"Standortzugriff"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Apps und Dienste ansehen, die Zugriff auf den Standort haben"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Die Identitätsüberprüfung funktioniert mit weiteren Apps"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Die Identitätsüberprüfung verhindert unerwünschten Zugriff auf deine Apps. Jetzt für jede App verfügbar, die die Entsperrung per Fingerabdruck oder Gesichtserkennung verwendet."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Details ansehen"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Einstellungen konnten nicht überprüft werden"</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Noch keine Angaben vorhanden"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

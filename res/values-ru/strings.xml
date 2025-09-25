@@ -248,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Переместить вниз"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Удалить"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Переместить в начало"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Региональные настройки"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Укажите предпочтительные единицы измерения и форматы отображения чисел"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Приложения используют эти параметры для персонализации."</string>
@@ -1523,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Когда показывать"</string>
     <string name="doze_title" msgid="1523090408230862316">"Включать экран при получении уведомлений"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Экран включается при появлении новых уведомлений"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Показывать время и информацию"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Информация на заблокированном экране"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Батарея разряжается быстрее"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Показывать обои заблокированного экрана, когда он отключен"</string>
@@ -1687,10 +1688,8 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Совместные настройки"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Режим домашнего центра"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Виджеты на заблокированном экране"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"Чтобы открыть виджеты, проведите по заблокированному экрану влево. \n\nПри открытии приложения с помощью виджета необходимо подтвердить личность. Обратите внимание, что виджеты видны всем."</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"Бета"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Когда показывать автоматически"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Никогда"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Во время зарядки"</string>
@@ -2628,7 +2627,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Инверсия цветов"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Быстрый запуск инверсии цветов"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Инверсия цветов позволяет сделать светлые цвета темными, а темные – светлыми."</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Обратите внимание:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Цвета в медиаконтенте и изображениях изменятся.&lt;/li&gt; &lt;li&gt; Инверсия цветов затронет все приложения.&lt;/li&gt; &lt;li&gt; Чтобы темным был только фон экрана, включите тёмную тему, а не инверсию.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Обратите внимание:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Инверсия цветов будет применяться в медиаконтенте и изображениях.&lt;/li&gt; &lt;li&gt; Инверсия цветов затронет все приложения.&lt;/li&gt; &lt;li&gt; Чтобы темным был только фон экрана, включите тёмную тему, а не инверсию.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"перейти в настройки"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Автонажатие (обнаружение задержки)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Об автонажатии (обнаружении задержки)"</string>
@@ -3395,10 +3394,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Включить сертификат ЦС системы?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Отключить сертификат ЦС системы?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Полностью удалить сертификат ЦС пользователя?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"Категория сертификатов ЦС \"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>\", свернуто, нажмите дважды, чтобы развернуть"</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"Категория сертификатов ЦС \"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g>\", развернуто, нажмите дважды, чтобы свернуть"</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Используется"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Содержимое записи"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 ключ пользователя"</string>
@@ -3438,8 +3435,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Удалить пользователя <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Заблокированный экран"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Добавлять пользователей ­на заблокированном экране"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Добавлять пользователей на экране входа"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"На док-станции переключаться на администратора"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Удалить ваш профиль?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Удалить пользователя?"</string>
@@ -3839,7 +3835,7 @@
     <string name="mode_aod_summary" msgid="7516159044827627065">"Не показывать информацию на заблокированном экране"</string>
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Уменьшать яркость обоев"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"уменьшать яркость обоев"</string>
-    <string name="mode_wallpaper_summary" msgid="665480011615603784">"Менять яркость обоев"</string>
+    <string name="mode_wallpaper_summary" msgid="665480011615603784">"Делать обои менее яркими"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Использовать тёмную тему"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"использовать темную тему"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Переключить тему устройства, чтобы использовать темный фон, который более комфортен для глаз"</string>
@@ -4789,7 +4785,7 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Временно отключено из-за режима энергосбережения"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Выкл. энергосбережение"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Временно включена из-за режима энергосбережения"</string>
-    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Тёмная тема"</string>
+    <string name="dark_theme_slice_title" msgid="2376057429427046530">"Попробуйте тёмную тему"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Продлить время работы от батареи"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Параметры для разработчиков в быстрых настройках"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Отключить автоматический отзыв авторизации adb"</string>
@@ -5949,6 +5945,10 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Добавить резервный адрес электронной почты"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Подтвердить адрес электронной почты"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Фильтры магазина приложений"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
+    <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Фильтры для контента сайтов"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Фильтры сайтов, заблокировать сайты, фильтры браузера, заблокировать сайты для взрослых, отфильтровать сайты, заблокировать результаты поиска, отфильтровать результаты поиска для взрослых, ограничения на контент"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Помогите отфильтровывать контент для взрослых в некоторых приложениях и браузерах на этом телефоне. Возможно, такие материалы будут по-прежнему показываться в других приложениях, браузерах и на других устройствах."</string>
@@ -5986,16 +5986,13 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"Настройки конфиденциальности"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Разрешения и параметры"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Разблокировка устройства"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"Блокировка экрана"</string>
     <string name="location_settings" msgid="6833222354060094170">"Доступ к геоданным"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Приложения и сервисы, которым доступны сведения о местоположении"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Проверка личности теперь поддерживается в большем количестве приложений"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Проверка личности предотвращает несанкционированный доступ к вашим приложениям. Ею теперь можно пользоваться в любом приложении, которое поддерживает разблокировку по отпечатку пальца или фейсконтроль."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Подробнее"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Не удалось проверить параметры."</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Данных пока нет"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

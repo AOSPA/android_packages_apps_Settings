@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Configurações do aparelho auditivo"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Atalho, compatibilidade com aparelhos auditivos"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Predefinição"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Predefinição do lado esquerdo"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Predefinição do lado direito"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Esquerdo: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Direito: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Não há predefinições programadas pelo seu audiologista"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Não foi possível atualizar a predefinição"</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Som ambiente"</string>
@@ -251,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Mover para baixo"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Remover"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Mover para o início"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferências regionais"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Definir preferências de número e unidades"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permita que os apps saibam suas preferências regionais para personalizar sua experiência."</string>
@@ -1526,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Quando mostrar"</string>
     <string name="doze_title" msgid="1523090408230862316">"Ativar tela para notificações"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Quando a tela está escura, ela é ativada quando chegam notificações"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Sempre mostrar hora e informações"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Tela sempre ativada"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Usa mais bateria"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Mostrar plano de fundo da tela de bloqueio quando a tela estiver desligada"</string>
@@ -1690,10 +1688,8 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Configurações compartilhadas"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Modo Hub"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Widgets na tela de bloqueio"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"Para acessar seus widgets favoritos, deslize da esquerda para a direita na tela de bloqueio. \n\nAo abrir um app usando um widget, você precisará confirmar sua identidade. Além disso, não se esqueça de que qualquer pessoa pode ver os widgets."</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"Beta"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Quando mostrar automaticamente"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nunca"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Ao carregar"</string>
@@ -2600,7 +2596,7 @@
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Tema escuro padrão"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Ativa o tema escuro no dispositivo e nos apps compatíveis com essa opção"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expandido"</string>
-    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema escuro expandido"</string>
+    <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema escuro ampliado"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6910183648769192345">"Aplica automaticamente o tema escuro à maioria dos apps que não têm essa opção. Isso pode melhorar a acessibilidade e a legibilidade, mas talvez alguns apps sejam mostrados incorretamente."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"forçar inversão, inversão de cores, contraste"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remover animações"</string>
@@ -2631,8 +2627,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usar inversão de cores"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Atalho para inversão de cores"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"A inversão de cores escurece telas claras e clareia telas escuras."</string>
-    <!-- no translation found for accessibility_display_inversion_preference_subtitle (8748527808247125417) -->
-    <skip />
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;Importante:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; As cores vão mudar em mídias e imagens.&lt;/li&gt; &lt;li&gt; A Inversão de Cores funciona em todos os apps.&lt;/li&gt; &lt;li&gt; Para mostrar um plano de fundo escuro, você pode usar o tema escuro.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"acessar as configurações"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Clique automático (tempo de permanência)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Sobre o clique automático (tempo de permanência)"</string>
@@ -3399,7 +3394,7 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Ativar o certificado de CA do sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Desativar o certificado de CA do sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Remover permanentemente o certificado de CA do usuário?"</string>
-    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"Caterogira de certificados de CA <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> aberta. Toque duas vezes para abrir."</string>
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"Categoria de certificados de CA <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> aberta. Toque duas vezes para abrir."</string>
     <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"Categoria de certificados de CA <xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> aberta. Toque duas vezes para fechar."</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"Em uso por"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Esta entrada contém"</string>
@@ -3440,8 +3435,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Excluir <xliff:g id="USER_NAME">%1$s</xliff:g> do dispositivo"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Configurações de tela de bloqueio"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Adicionar usuários pela tela de bloqueio"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Adicionar usuários pela tela de login"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Mudar para usuário admin quando encaixado na base"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Excluir a si mesmo?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Excluir este usuário?"</string>
@@ -5945,7 +5939,10 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Excluir PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Adicionar e-mail de recuperação"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verifique seu e-mail"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtros da app store"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Filtros de conteúdo do site"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtros de sites, Bloquear sites, Filtros do navegador, Bloquear sites explícitos, Filtrar sites, Bloquear resultados de pesquisa, Filtrar resultados de pesquisa com linguagem explícita, restrições de conteúdo"</string>
@@ -5984,7 +5981,6 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"Controles de privacidade"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Permissões, controles"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Desbloqueio do dispositivo"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"Bloqueio de tela"</string>
     <string name="location_settings" msgid="6833222354060094170">"Acesso ao local"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Veja apps e serviços que têm acesso à localização"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"A Confirmação de Identidade funciona com mais apps"</string>

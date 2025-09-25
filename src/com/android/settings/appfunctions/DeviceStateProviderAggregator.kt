@@ -18,8 +18,8 @@ package com.android.settings.appfunctions
 
 import android.app.appsearch.GenericDocument
 import androidx.annotation.Keep
-import com.android.settings.appfunctions.providers.DeviceStateExecutor
-import com.android.settings.appfunctions.providers.DeviceStateExecutorResult
+import com.android.settings.appfunctions.executors.DeviceStateExecutor
+import com.android.settings.appfunctions.executors.DeviceStateExecutorResult
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateResponse
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 import kotlinx.coroutines.async
