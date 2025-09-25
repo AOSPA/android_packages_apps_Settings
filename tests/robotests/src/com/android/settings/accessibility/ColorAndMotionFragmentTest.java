@@ -16,39 +16,18 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
-import android.provider.SearchIndexableResource;
-
-import androidx.test.core.app.ApplicationProvider;
-
-import com.android.settings.R;
-import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-import java.util.List;
-
 /** Tests for {@link ColorAndMotionFragment}. */
 @RunWith(RobolectricTestRunner.class)
 public class ColorAndMotionFragmentTest {
-
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
-
-    private final Context mContext = ApplicationProvider.getApplicationContext();
     private ColorAndMotionFragment mFragment;
 
     @Before
@@ -64,42 +43,11 @@ public class ColorAndMotionFragmentTest {
 
     @Test
     public void getPreferenceScreenResId_returnsCorrectXml() {
-        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
-                R.xml.accessibility_color_and_motion);
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(0);
     }
 
     @Test
     public void getLogTag_returnsCorrectTag() {
         assertThat(mFragment.getLogTag()).isEqualTo("ColorAndMotionFragment");
-    }
-
-    @Test
-    public void getNonIndexableKeys_existInXmlLayout() {
-        final List<String> niks = ColorAndMotionFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
-        final List<String> keys =
-                XmlTestUtils.getKeysFromPreferenceXml(mContext,
-                        R.xml.accessibility_color_and_motion);
-
-        assertThat(keys).containsAtLeastElementsIn(niks);
-    }
-
-    @RequiresFlagsDisabled(FLAG_CATALYST_SETTINGS_SEARCH)
-    @Test
-    public void getXmlResourcesToIndex_returnXmlResource() {
-        List<SearchIndexableResource> indexableResources =
-                ColorAndMotionFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
-                        mContext, true);
-
-        assertThat(indexableResources.size()).isEqualTo(1);
-        assertThat(indexableResources.getFirst().xmlResId).isEqualTo(
-                R.xml.accessibility_color_and_motion);
-    }
-
-    @RequiresFlagsEnabled(FLAG_CATALYST_SETTINGS_SEARCH)
-    @Test
-    public void getXmlResourcesToIndex_returnNull() {
-        assertThat(ColorAndMotionFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
-                mContext, true)).isNull();
     }
 }

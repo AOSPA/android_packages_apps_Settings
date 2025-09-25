@@ -22,13 +22,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.settings.R;
-import com.android.settings.flags.Flags;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
-
+// TODO(b/445978289): Use CatalystFragment
 /** Accessibility settings for color and motion. */
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ColorAndMotionFragment extends BaseSupportFragment {
 
     private static final String TAG = "ColorAndMotionFragment";
@@ -40,7 +35,7 @@ public class ColorAndMotionFragment extends BaseSupportFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.accessibility_color_and_motion;
+        return 0;
     }
 
     @Override
@@ -53,8 +48,4 @@ public class ColorAndMotionFragment extends BaseSupportFragment {
     public String getPreferenceScreenBindingKey(@NonNull Context context) {
         return ColorAndMotionScreen.KEY;
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(
-                    Flags.catalystSettingsSearch() ? 0 : R.xml.accessibility_color_and_motion);
 }

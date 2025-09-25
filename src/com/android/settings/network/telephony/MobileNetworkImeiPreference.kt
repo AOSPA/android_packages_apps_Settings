@@ -34,14 +34,20 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
 @SuppressLint("MissingPermission")
-class MobileNetworkImeiPreference(private val context: Context, private val subId: Int) :
+class MobileNetworkImeiPreference(
+    private val context: Context,
+    private val subId: Int,
+    private val imeiList: List<String> = listOf<String>(),
+) :
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceLifecycleProvider,
+    PreferenceTitleProvider,
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider {
 
@@ -50,12 +56,11 @@ class MobileNetworkImeiPreference(private val context: Context, private val subI
             (Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context)) &&
             (Flags.isDualSimOnboardingEnabled() && SubscriptionManager.isValidSubscriptionId(subId))
     private var imei: String? = if (isAvailable) context.telephonyManager(subId)?.imei else ""
+    private var indexing: Int = imeiList.indexOf(imei)
+    private val formattedTitle: String = getFormattedTitle()
 
     override val key: String
         get() = KEY
-
-    override val title: Int
-        get() = R.string.status_imei
 
     override fun getSummary(context: Context): CharSequence? = imei
 
@@ -75,12 +80,21 @@ class MobileNetworkImeiPreference(private val context: Context, private val subI
                         ImeiInfoDialogFragment.show(
                             context.childFragmentManager,
                             this,
-                            context.getString(R.string.status_imei),
+                            formattedTitle,
                         )
                     }
                 return@OnPreferenceClickListener true
             }
     }
+
+    override fun getTitle(context: Context): CharSequence? = formattedTitle
+
+    private fun getFormattedTitle(): String =
+        if (indexing != -1 && imeiList.size >= 2) {
+            context.getString(R.string.imei_multi_sim, indexing + 1)
+        } else {
+            context.getString(R.string.status_imei)
+        }
 
     private fun getSlotIndex(): Int {
         val subscription =

@@ -21,6 +21,8 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_U
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
+import static org.junit.Assert.assertThrows;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -46,6 +48,7 @@ import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -55,6 +58,7 @@ import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -71,7 +75,13 @@ import org.robolectric.util.ReflectionHelpers.ClassParameter;
 import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class, ShadowLockPatternUtils.class})
+@Config(
+        shadows = {
+                SettingsShadowResources.class,
+                ShadowAlertDialogCompat.class,
+                ShadowLockPatternUtils.class,
+                ShadowUtils.class
+        })
 public class SetupChooseLockPatternTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -88,13 +98,12 @@ public class SetupChooseLockPatternTest {
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
 
-        final Intent intent =
-                SetupChooseLockPattern.modifyIntentForSetup(
-                        mContext,
-                        new IntentBuilder(mContext)
-                                .setUserId(UserHandle.myUserId())
-                                .build());
-        mActivity = ActivityController.of(new SetupChooseLockPattern(), intent).setup().get();
+        mActivity = createSetupChooseLockPattern();
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -196,6 +205,23 @@ public class SetupChooseLockPatternTest {
         skipOrClearButton.performClick();
         AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(chooserDialog).isNotNull();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_HIDE_LSKF_SKIP_DURING_SUW)
+    public void skipButton_shouldBeGoneFeature() {
+        SettingsShadowResources.overrideResource(R.bool.config_hide_skip_security_options_in_suw,
+                true);
+
+        SetupChooseLockPattern activity = createSetupChooseLockPattern();
+        final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        final Button skipOrClearButton =
+                layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
+
+        assertThat(skipOrClearButton).isNotNull();
+        assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.GONE);
+
+        assertThrows(IllegalStateException.class, () -> skipOrClearButton.performClick());
     }
 
     @Test
@@ -382,6 +408,16 @@ public class SetupChooseLockPatternTest {
         assertThat(nextButton.getText().toString()).isEqualTo(
                 mContext.getString(R.string.lockpattern_confirm_button_text));
         assertThat(nextButton.isEnabled()).isTrue();
+    }
+
+    private SetupChooseLockPattern createSetupChooseLockPattern() {
+        final Intent intent =
+                SetupChooseLockPattern.modifyIntentForSetup(
+                        mContext,
+                        new IntentBuilder(mContext)
+                                .setUserId(UserHandle.myUserId())
+                                .build());
+        return ActivityController.of(new SetupChooseLockPattern(), intent).setup().get();
     }
 
     private ChooseLockPatternFragment findFragment(FragmentActivity activity) {

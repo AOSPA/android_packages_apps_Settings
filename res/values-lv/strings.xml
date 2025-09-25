@@ -81,12 +81,9 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Dzirdes aparāta iestatījumi"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Saīsne, saderība ar dzirdes aparātiem."</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Pirmsiestatījums"</string>
-    <!-- no translation found for bluetooth_hearing_aids_presets_left (2530839293093821552) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_right (3188794865892539568) -->
-    <skip />
-    <!-- no translation found for bluetooth_hearing_aids_presets_binaural_summary (6589148374887968671) -->
-    <skip />
+    <string name="bluetooth_hearing_aids_presets_left" msgid="2530839293093821552">"Kreisās puses pirmsiestatījums"</string>
+    <string name="bluetooth_hearing_aids_presets_right" msgid="3188794865892539568">"Labās puses pirmsiestatījums"</string>
+    <string name="bluetooth_hearing_aids_presets_binaural_summary" msgid="6589148374887968671">"Kreisā puse: <xliff:g id="PRESET_NAME_0">%1$s</xliff:g> Labā puse: <xliff:g id="PRESET_NAME_1">%2$s</xliff:g>"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Jūsu audiologs nav ieprogrammējis nekādus pirmsiestatījumus."</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Nebija iespējams atjaunināt pirmsiestatījumu."</string>
     <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Apkārtnes skaņas"</string>
@@ -251,6 +248,8 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Pārvietot uz leju"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Noņemt"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Pārvietot uz sākumu"</string>
+    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Reģionālās preferences"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Iestatiet vienību un skaitļu preferences."</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Atklājiet lietotnēm savas reģionālās preferences, lai lietotnes varētu personalizēt jums pieejamās iespējas."</string>
@@ -1526,7 +1525,6 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Kad rādīt"</string>
     <string name="doze_title" msgid="1523090408230862316">"Aktivizēt ekrānu paziņojumiem"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Kad ekrāns ir tumšs, tas tiek ieslēgts, saņemot jaunus paziņojumus"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Vienmēr rādīt laiku un inform."</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Nepārtraukti aktīvs displejs"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Palielināts akumulatora lietojums"</string>
     <string name="doze_always_on_summary_with_wallpaper" msgid="7193043498368623388">"Rādīt bloķēšanas ekrāna fona tapeti, kad ekrāns ir izslēgts"</string>
@@ -1690,10 +1688,8 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"Kopīgie iestatījumi"</string>
     <string name="hub_mode_category_title" msgid="5290081595872103974">"Centra režīms"</string>
     <string name="widgets_on_lockscreen_title" msgid="6979558402208585885">"Logrīki bloķēšanas ekrānā"</string>
-    <!-- no translation found for widgets_on_lockscreen_footer (4167358720910932731) -->
-    <skip />
-    <!-- no translation found for settings_beta_tag (8646243453760353582) -->
-    <skip />
+    <string name="widgets_on_lockscreen_footer" msgid="4167358720910932731">"Lai piekļūtu saviem iecienītākajiem logrīkiem, bloķēšanas ekrānā velciet pa kreisi. \n\nKad atvērsiet kādu lietotni, izmantojot logrīku, jums būs jāapstiprina sava identitāte. Turklāt ņemiet vērā, ka jebkurš var skatīt logrīkus."</string>
+    <string name="settings_beta_tag" msgid="8646243453760353582">"Beta"</string>
     <string name="when_to_auto_show_hubmode_title" msgid="2307148913387518369">"Kad automātiski parādīt"</string>
     <string name="when_to_show_hubmode_never" msgid="976644329215156021">"Nekad"</string>
     <string name="when_to_show_hubmode_charging" msgid="1874391105066805128">"Uzlādes laikā"</string>
@@ -2796,7 +2792,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Priekšskatījums"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Standarta opcijas"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Valoda"</string>
-    <string name="captioning_text_size" msgid="5764254558945371745">"Parakstu lielums"</string>
+    <string name="captioning_text_size" msgid="5764254558945371745">"Subtitru lielums"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"Subtitru stils"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Pielāgotas opcijas"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Fona krāsa"</string>
@@ -3398,10 +3394,8 @@
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Vai iespējot sistēmas CA sertifikātu?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Vai atspējot sistēmas CA sertifikātu?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"Vai neatgriezeniski noņemt lietotāja CA sertifikātu?"</string>
-    <!-- no translation found for trusted_credentials_category_content_description_to_expand (4155557109281717240) -->
-    <skip />
-    <!-- no translation found for trusted_credentials_category_content_description_to_collapse (3516888823115459423) -->
-    <skip />
+    <string name="trusted_credentials_category_content_description_to_expand" msgid="4155557109281717240">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA sertifikāti, sakļauti. Lai izvērstu, veiciet dubultskārienu."</string>
+    <string name="trusted_credentials_category_content_description_to_collapse" msgid="3516888823115459423">"<xliff:g id="CREDENTIAL_CATEGORY">%s</xliff:g> CA sertifikāti, izvērsti. Lai sakļautu, veiciet dubultskārienu."</string>
     <string name="credential_being_used_by" msgid="3682869943025283499">"To izmanto:"</string>
     <string name="credential_contains" msgid="3146519680449595771">"Šajā ierakstā ir:"</string>
     <string name="one_userkey" msgid="6363426728683951234">"1 lietotāja atslēga"</string>
@@ -3441,8 +3435,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Dzēst šajā ierīcē: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Bloķēšanas ekrāna iestatījumi"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Pievienot lietotājus no bloķēšanas ekrāna"</string>
-    <!-- no translation found for user_add_on_signin_screen_menu (41745747918077302) -->
-    <skip />
+    <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Pievienot lietotājus no pierakstīšanās ekrāna"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Dokošanas laikā iespējot administratora piekļuvi"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Vai dzēst jūsu kontu?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vai dzēst šo lietotāju?"</string>
@@ -5950,7 +5943,10 @@
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Dzēst PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Atkopšanas e-pasta adreses pievienošana"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"E-pasta adreses verificēšana"</string>
-    <!-- no translation found for supervision_app_store_filters_title (3358631395247752727) -->
+    <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Lietotņu veikala filtri"</string>
+    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
+    <skip />
+    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
     <skip />
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Tīmekļa vietņu satura filtri"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Vietņu filtri, Bloķēt vietnes, Pārlūka filtri, Bloķēt necenzētas vietnes, Filtrēt vietnes, Bloķēt meklēšanas rezultātus, Filtrēt necenzētus meklēšanas rezultātus, satura ierobežojumi"</string>
@@ -5989,16 +5985,13 @@
     <string name="privacy_sources_title" msgid="7648842637181479352">"Konfidencialitātes vadīklas"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Atļaujas, vadīklas"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Ierīces atbloķēšana"</string>
-    <string name="lock_screen_title" msgid="4701994278040604018">"Ekrāna bloķēšana"</string>
     <string name="location_settings" msgid="6833222354060094170">"Piekļuve atrašanās vietai"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Skatīt lietotnes un pakalpojumus, kas var piekļūt atrašanās vietai"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Identitātes pārbaudes funkcija darbojas ar papildu lietotnēm"</string>
     <string name="identity_check_notification_summary" msgid="3762060079941053730">"Identitātes pārbaudes funkcija novērš nevēlamu piekļuvi jūsu lietotnēm. Tagad šī funkcija ir pieejama jebkurā lietotnē, kurā tiek izmantota autorizācija ar pirksta nospiedumu vai autorizācija pēc sejas."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"Skatīt detalizētu informāciju"</string>
-    <!-- no translation found for safety_center_refresh_error (1735955120364376704) -->
-    <skip />
-    <!-- no translation found for safety_center_subpage_unknown_summary (874864620851714312) -->
-    <skip />
+    <string name="safety_center_refresh_error" msgid="1735955120364376704">"Nevarēja pārbaudīt iestatījumus."</string>
+    <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Vēl nav informācijas"</string>
     <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>

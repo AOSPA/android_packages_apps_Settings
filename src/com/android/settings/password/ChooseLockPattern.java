@@ -45,6 +45,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.insets.ProtectionLayout;
 import androidx.fragment.app.Fragment;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -543,6 +544,17 @@ public class ChooseLockPattern extends SettingsActivity {
                 }
                 return false;
             });
+
+            // TODO(b/440023111):This can be removed once SetupDesignLib and SettingsLib have
+            //  integrated the solution.
+            if (Flags.removeProtectionLayout()
+                    && ThemeHelper.shouldApplyGlifExpressiveStyle(getContext())) {
+                final ProtectionLayout protect = layout.findViewById(
+                        com.google.android.setupdesign.R.id.sud_layout_protection);
+                if (protect != null) {
+                    protect.setProtections(Collections.emptyList());
+                }
+            }
             updateActivityTitle();
             layout.setHeaderText(getActivity().getTitle());
             layout.getHeaderTextView().setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);

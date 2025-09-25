@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import static com.android.settings.network.SatelliteWarningDialogActivity.EXTRA_TYPE_OF_SATELLITE_WARNING_DIALOG;
 import static com.android.settings.network.SatelliteWarningDialogActivity.TYPE_IS_BLUETOOTH;
 
+import android.app.admin.EnforcingAdmin;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -250,6 +251,24 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
      */
     @VisibleForTesting
     boolean maybeEnforceRestrictions() {
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            EnforcingAdmin admin = mRestrictionUtils.checkIfUserRestrictionEnforced(
+                    mContext, UserManager.DISALLOW_BLUETOOTH);
+            String restriction = UserManager.DISALLOW_BLUETOOTH;
+            // If DISALLOW_BLUETOOTH restriction is not set, check DISALLOW_CONFIG_BLUETOOTH.
+            if (admin == null) {
+                admin = mRestrictionUtils.checkIfUserRestrictionEnforced(mContext,
+                        UserManager.DISALLOW_CONFIG_BLUETOOTH);
+                restriction = UserManager.DISALLOW_CONFIG_BLUETOOTH;
+            }
+            if (admin != null) {
+                mSwitchController.setRestriction(restriction);
+                mSwitchController.setChecked(false);
+            }
+            mSwitchController.setDisabledByAdmin(admin);
+            return admin != null;
+        }
+        // TODO(414733570): Remove getEnforcedAdmin() during flag clean-up.
         EnforcedAdmin admin = getEnforcedAdmin(mRestrictionUtils, mContext);
         mSwitchController.setDisabledByAdmin(admin);
         if (admin != null) {

@@ -24,7 +24,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.extensions.appfunctions.AppFunctionException
 import com.android.extensions.appfunctions.ExecuteAppFunctionRequest
 import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
-import com.android.settings.appfunctions.providers.DeviceStateExecutor
+import com.android.settings.appfunctions.executors.DeviceStateExecutor
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 import com.google.common.truth.Truth.assertThat
 import java.util.Locale

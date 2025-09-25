@@ -185,12 +185,12 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
     }
 
     @VisibleForTesting
-    LocaleDialogController getLocaleDialogController(Context context,
+    public LocaleDialogController getLocaleDialogController(Context context,
             LocaleDialogFragment dialogFragment, LanguageAndRegionSettings parentFragment) {
         return new LocaleDialogController(context, dialogFragment, parentFragment);
     }
 
-    class LocaleDialogController implements DialogInterface.OnClickListener {
+    public class LocaleDialogController implements DialogInterface.OnClickListener {
         private final Context mContext;
         private final int mDialogType;
         private final LocaleStore.LocaleInfo mLocaleInfo;
@@ -245,7 +245,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         }
 
         @VisibleForTesting
-        DialogContent getDialogContent() {
+        public DialogContent getDialogContent() {
             DialogContent dialogContent = new DialogContent();
             switch (mDialogType) {
                 case DIALOG_ADD_SYSTEM_LOCALE:
@@ -335,9 +335,9 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         }
 
         @VisibleForTesting
-        static class DialogContent {
-            String mTitle = "";
-            String mMessage = "";
+        public static class DialogContent {
+            public String mTitle = "";
+            public String mMessage = "";
             String mPositiveButton = "";
             String mNegativeButton = "";
         }

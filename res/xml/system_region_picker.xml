@@ -16,8 +16,10 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="key_system_region_picker_page"
-    android:title="@string/region_picker_title">
+    android:title="@string/region_picker_title"
+    settings:keywords="@string/keywords_region_page">
 
   <com.android.settingslib.widget.TopIntroPreference
       android:key="key_region_picker_sub_title"

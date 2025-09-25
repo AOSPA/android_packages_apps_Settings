@@ -189,6 +189,24 @@ public class FaceSafetySourceTest {
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void setSafetySourceData_withMultipleBiometrics_whenNotDisabledByAdmin_setsData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
+
+        FaceSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
+
+        assertSafetySourceEnabledDataSetWithSingularSummary(
+                "security_settings_face_preference_title_new",
+                "security_settings_face_preference_summary_none_new",
+                BiometricEnrollActivity.InternalActivity.class.getName());
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     @DisableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void setSafetySourceData_withFaceNotEnrolled_whenDisabledByAdmin_setsData() {
         when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(
