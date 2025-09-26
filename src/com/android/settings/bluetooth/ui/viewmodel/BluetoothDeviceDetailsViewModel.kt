@@ -27,8 +27,8 @@ import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
-import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingLayout
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import kotlin.coroutines.CoroutineContext
@@ -55,18 +55,11 @@ class BluetoothDeviceDetailsViewModel(
             deviceSettingRepository.getDeviceSettingsConfig(cachedDevice)
         }
 
-    suspend fun getItems(fragment: FragmentTypeModel): List<DeviceSettingConfigItemModel>? =
+    suspend fun getNodes(fragment: FragmentTypeModel): DeviceSettingLayout? =
         when (fragment) {
             is FragmentTypeModel.DeviceDetailsMainFragment -> items.await()?.mainItems
             is FragmentTypeModel.DeviceDetailsMoreSettingsFragment ->
                 items.await()?.moreSettingsItems
-        }
-
-    suspend fun getHelpItem(fragment: FragmentTypeModel): DeviceSettingConfigItemModel? =
-        when (fragment) {
-            is FragmentTypeModel.DeviceDetailsMainFragment -> null
-            is FragmentTypeModel.DeviceDetailsMoreSettingsFragment ->
-                items.await()?.moreSettingsHelpItem
         }
 
     fun getDeviceSetting(

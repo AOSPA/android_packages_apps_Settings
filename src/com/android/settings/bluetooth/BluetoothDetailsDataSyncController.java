@@ -23,8 +23,8 @@ import android.companion.datatransfer.PermissionSyncRequest;
 import android.content.Context;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
@@ -50,7 +50,7 @@ public class BluetoothDetailsDataSyncController extends BluetoothDetailsControll
     private static final String KEY_PERM_SYNC = "perm_sync";
 
     @VisibleForTesting
-    PreferenceCategory mPreferenceCategory;
+    PreferenceGroup mPreferenceContainer;
     @VisibleForTesting
     int mAssociationId = DUMMY_ASSOCIATION_ID;
 
@@ -105,16 +105,16 @@ public class BluetoothDetailsDataSyncController extends BluetoothDetailsControll
 
     @Override
     protected void init(PreferenceScreen screen) {
-        mPreferenceCategory = screen.findPreference(getPreferenceKey());
+        mPreferenceContainer = screen.findPreference(getPreferenceKey());
         refresh();
     }
 
     @Override
     protected void refresh() {
-        TwoStatePreference permSyncPref = mPreferenceCategory.findPreference(KEY_PERM_SYNC);
+        TwoStatePreference permSyncPref = mPreferenceContainer.findPreference(KEY_PERM_SYNC);
         if (permSyncPref == null) {
-            permSyncPref = createPermSyncPreference(mPreferenceCategory.getContext());
-            mPreferenceCategory.addPreference(permSyncPref);
+            permSyncPref = createPermSyncPreference(mPreferenceContainer.getContext());
+            mPreferenceContainer.addPreference(permSyncPref);
         }
 
         if (mAssociationId == DUMMY_ASSOCIATION_ID) {

@@ -29,8 +29,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
@@ -103,7 +103,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private boolean mHasExtraSpace;
 
     @VisibleForTesting
-    PreferenceCategory mProfilesContainer;
+    PreferenceGroup mProfilesContainer;
 
     public BluetoothDetailsProfilesController(
             Context context,
@@ -129,14 +129,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
 
     @Override
     protected void init(PreferenceScreen screen) {
-        mProfilesContainer = (PreferenceCategory) screen.findPreference(getPreferenceKey());
-        if (Flags.enableBluetoothSettingsExpressiveDesign()) {
-            mProfilesContainer.setLayoutResource(
-                    com.android.settingslib.widget.category.R.layout
-                            .settingslib_expressive_untitled_preference_category);
-        } else {
-            mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
-        }
+        mProfilesContainer = screen.findPreference(getPreferenceKey());
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();
@@ -554,23 +547,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                     mProfilesContainer.findPreference(removedProfile.toString());
             if (pref != null) {
                 mProfilesContainer.removePreference(pref);
-            }
-        }
-
-        if (!Flags.enableBluetoothSettingsExpressiveDesign()) {
-            Preference preference = mProfilesContainer.findPreference(KEY_BOTTOM_PREFERENCE);
-            if (preference == null) {
-                preference = new Preference(mContext);
-                if (mHasExtraSpace) {
-                    preference.setLayoutResource(R.layout.preference_bluetooth_profile_category);
-                } else {
-                    preference.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
-                }
-                preference.setEnabled(false);
-                preference.setKey(KEY_BOTTOM_PREFERENCE);
-                preference.setOrder(ORDINAL);
-                preference.setSelectable(false);
-                mProfilesContainer.addPreference(preference);
             }
         }
 
