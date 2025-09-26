@@ -132,6 +132,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
             display.supportedModes.asList(),
             isEnabled,
             isConnectedDisplay,
+            display.rotation,
         )
 
     private fun getDisplayMode(display: Display): Display.Mode {
@@ -192,7 +193,6 @@ open class ConnectedDisplayInjector(open val context: Context?) {
                 baseDisplayDevices.map { display ->
                     // Fetch concurrently
                     async(Dispatchers.IO) {
-                        val rotation = getDisplayUserRotation(display.id)
                         val connectionPreference = getDisplayConnectionPreference(display.uniqueId)
                         DisplayDeviceAdditionalInfo(
                             display.id,
@@ -202,7 +202,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
                             display.supportedModes,
                             display.isEnabled,
                             display.isConnectedDisplay,
-                            rotation,
+                            display.rotation,
                             connectionPreference,
                         )
                     }
@@ -262,22 +262,6 @@ open class ConnectedDisplayInjector(open val context: Context?) {
 
     open fun updateDisplayConnectionPreference(uniqueId: String, connectionPreference: Int) =
         displayManager?.setExternalDisplayConnectionPreference(uniqueId, connectionPreference)
-
-    /**
-     * Get display rotation
-     *
-     * @param displayId display identifier
-     * @return rotation
-     */
-    open fun getDisplayUserRotation(displayId: Int): Int {
-        val wm = windowManager ?: return 0
-        try {
-            return wm.getDisplayUserRotation(displayId)
-        } catch (e: RemoteException) {
-            Log.e(TAG, "Error getting user rotation of display $displayId", e)
-            return 0
-        }
-    }
 
     /**
      * Freeze rotation of the display in the specified rotation.

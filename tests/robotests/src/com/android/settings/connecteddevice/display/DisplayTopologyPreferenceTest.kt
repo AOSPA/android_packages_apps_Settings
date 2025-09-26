@@ -102,6 +102,7 @@ class DisplayTopologyPreferenceTest {
                         listOf(mode),
                         /* isEnabled= */ DisplayIsEnabled.YES,
                         /* isConnectedDisplay= */ true,
+                        /* rotation= */ 0,
                     )
                 }
                 .toList()
