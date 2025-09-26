@@ -30,7 +30,7 @@
         android:layout_marginBottom="5dp"
         android:fontFamily="@*android:string/config_headlineFontFamily"
         android:paddingTop="0dp"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@color/materialColorOnSurface"
         android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Display1"
         android:hyphenationFrequency="normalFast"
         android:lineBreakWordStyle="phrase"
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textColor="@color/materialColorOnSurfaceVariant"
         android:paddingBottom="5dp"
         android:hyphenationFrequency="normalFast"
         android:lineBreakWordStyle="phrase"
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/materialColorOnSurfaceVariant" />
 
         <Space
             android:layout_width="0dp"
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/materialColorOnSurfaceVariant" />
 
     </LinearLayout>
 

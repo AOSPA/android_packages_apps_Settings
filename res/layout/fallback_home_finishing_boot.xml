@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:text="@*android:string/android_start_title"/>
 
         <ProgressBar
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12.75dp"
-            android:colorControlActivated="?android:attr/textColorPrimary"
+            android:colorControlActivated="@color/materialColorOnSurface"
             android:indeterminate="true"/>
 
     </LinearLayout>

@@ -19,7 +19,7 @@
        android:shape="rectangle">
     <solid
         android:featureFlag="android.app.notifications_redesign_fonts"
-        android:color="@androidprv:color/materialColorSecondaryContainer"/>
+        android:color="@color/materialColorSecondaryContainer"/>
     <solid
         android:featureFlag="!android.app.notifications_redesign_fonts"
         android:color="?attr/notification_importance_button_background_color_selected"/>
@@ -27,7 +27,7 @@
     <stroke
         android:width="1dp"
         android:featureFlag="android.app.notifications_redesign_fonts"
-        android:color="@androidprv:color/materialColorOutline"/>
+        android:color="@color/materialColorOutline"/>
     <stroke
         android:width="1dp"
         android:featureFlag="!android.app.notifications_redesign_fonts"

@@ -31,7 +31,7 @@
         android:ellipsize="marquee"
         android:fadingEdge="horizontal"
         android:src="@drawable/ic_check_24dp"
-        android:tint="@androidprv:color/materialColorPrimary"/>
+        android:tint="@color/materialColorPrimary"/>
 
     <TextView
         android:id="@+id/modifier_key_text"
@@ -63,7 +63,7 @@
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/modifier_key_left_bracket"
         android:fadingEdge="horizontal"
-        android:tint="?android:attr/textColorPrimary"/>
+        android:tint="@color/materialColorOnSurface"/>
 
     <TextView
         android:id="@+id/modifier_key_right_bracket"
