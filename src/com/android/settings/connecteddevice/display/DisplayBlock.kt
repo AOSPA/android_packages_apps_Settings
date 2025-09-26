@@ -136,6 +136,12 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         wallpaperView.holder.addCallback(holderCallback)
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        setTouchListener(null)
+        onA11yMoveListener = null
+    }
+
     @VisibleForTesting
     fun updateSurfaceView() {
         val displayId = displayIdToShowWallpaper ?: return
