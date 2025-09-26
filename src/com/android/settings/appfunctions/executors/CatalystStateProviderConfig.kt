@@ -282,7 +282,11 @@ private fun getCatalystScreenConfigs() =
             additionalDescription =
                 ". Always-on-display settings indicates whether the lock screen, including the time, is visible when the phone is off.",
         ),
-        PerScreenCatalystConfig(enabled = true, screenKey = DataUsageAppDetailScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = DataUsageAppDetailScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = InstallUnknownAppsAppListScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ManageWriteSettingsAppListScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorModeScreen.KEY),
