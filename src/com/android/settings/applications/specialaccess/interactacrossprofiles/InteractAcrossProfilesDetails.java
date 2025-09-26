@@ -56,7 +56,6 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.stats.devicepolicy.DevicePolicyEnums;
 import android.util.IconDrawableFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +63,7 @@ import android.widget.ImageView;
 import android.widget.Space;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
@@ -130,13 +130,23 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
             addPreferencesFromResource(
                     R.xml.interact_across_profiles_permissions_details_expressive);
-            hideFooterPreferenceIcon("interact_across_profiles_summary_2");
-            hideFooterPreferenceIcon("interact_across_profiles_extra_summary");
+            FooterPreference footerPref1 = findPreference("interact_across_profiles_summary_1");
+            FooterPreference footerPref2 = findPreference("interact_across_profiles_summary_2");
+            FooterPreference footerPref3 = findPreference(
+                    INTERACT_ACROSS_PROFILE_EXTRA_SUMMARY_KEY);
+            // Prevent PreferenceScreen sorting preferences alphabetically
+            footerPref1.setOrder(10);
+            footerPref2.setOrder(20);
+            footerPref3.setOrder(30);
+            // Only show icon for the 1st preference
+            footerPref2.setIconVisibility(View.GONE);
+            footerPref3.setIconVisibility(View.GONE);
         } else {
             addPreferencesFromResource(R.xml.interact_across_profiles_permissions_details);
         }
     }
 
+    @NonNull
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -319,8 +329,9 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         final TextView dialogTitle = dialogView.findViewById(
                 R.id.interact_across_profiles_consent_dialog_title);
         dialogTitle.setText(mDpm.getResources().getString(CONNECT_APPS_DIALOG_TITLE, () ->
-                getString(R.string.interact_across_profiles_consent_dialog_title, mAppLabel),
-                    mAppLabel));
+                        getString(R.string.interact_across_profiles_consent_dialog_title,
+                                mAppLabel),
+                mAppLabel));
 
         final TextView appDataSummary = dialogView.findViewById(R.id.app_data_summary);
         appDataSummary.setText(
@@ -632,14 +643,4 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                 .map(pkg -> new HashSet<>(Arrays.asList(pkg.split(","))))
                 .orElseGet(HashSet::new);
     }
-
-    private void hideFooterPreferenceIcon(String preferenceKey) {
-        Preference preference = findPreference(preferenceKey);
-        if (preference instanceof FooterPreference) {
-            ((FooterPreference) preference).setIconVisibility(View.GONE);
-        } else {
-            Log.d(TAG, "Could not find preference " + preferenceKey);
-        }
-    }
-
 }
