@@ -248,7 +248,12 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Տեղափոխել ներքև"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Հեռացնել"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Տեղափոխել սկիզբ"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <string name="action_label_menu_option" msgid="6881627571783854975">"Փոխել համակարգի լեզուների ցանկը, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <!-- no translation found for keywords_region_page (7148673842253297212) -->
+    <skip />
+    <!-- no translation found for keywords_temperature_page (5447163674488205412) -->
+    <skip />
+    <!-- no translation found for keywords_measurement_system_page (403273002514842186) -->
     <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Տարածաշրջանային կարգավորումներ"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Սահմանել չափման միավորների և թվերի կարգավորումներ"</string>
@@ -356,7 +361,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Անջատված է"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Միացված է / Տեղադրության տվյալները հասանելի են # հավելվածի}one{Միացված է / Տեղադրության տվյալները հասանելի են # հավելվածի}other{Միացված է / Տեղադրության տվյալները հասանելի են # հավելվածի}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Բեռնում…"</string>
-    <string name="location_settings_footer_general" msgid="3447585552176173502">"Հավելվածները, որոնց հասանելի են մոտակա սարքերը, կարող են որոշել միացված սարքերի հարաբերական դիրքը։"</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Հավելվածները, որոնց հասանելի են մոտակա սարքերը, կարող են որոշել կապակցված սարքերի հարաբերական դիրքը։"</string>
     <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"Տեղադրության տվյալների օգտագործման թույլտվությունն անջատված է հավելվածների և ծառայությունների համար։ Ձեր սարքի տեղադրության տվյալները կարող են ուղարկվել արագ արձագանքման ծառայություններին, եթե դուք կապ հաստատեք արտակարգ իրավիճակների հեռախոսահամարով։"</string>
     <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"Տեղադրության տվյալների օգտագործման թույլտվությունն անջատված է հավելվածների և ծառայությունների համար։"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Իմանալ ավելին տեղադրության կարգավորումների մասին"</string>
@@ -1533,6 +1538,10 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Պաստառի ընտրանքներ"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Ցույց տալ կողպէկրանի պաստառը"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"Կողպէկրանի պաստառը ցուցադրվում է, երբ մշտապես ակտիվ էկրանը միացված է"</string>
+    <!-- no translation found for doze_always_on_inactivity_detection_title (7953501407683982654) -->
+    <skip />
+    <!-- no translation found for doze_always_on_inactivity_detection_summary (3486468877414144614) -->
+    <skip />
     <string name="force_bold_text" msgid="4620929631102086716">"Թավ տեքստ"</string>
     <string name="title_font_size" msgid="570613010306330622">"Տառաչափ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Տեքստի չափսի փոփոխում"</string>
@@ -3588,7 +3597,7 @@
     <string name="dashboard_title" msgid="5660733037244683387">"Կարգավորումներ"</string>
     <string name="network_dashboard_title" msgid="788543070557731240">"Ցանց և ինտերնետ"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Wi-Fi, թեժ կետ"</string>
-    <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Միացված սարքեր"</string>
+    <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Կապակցված սարքեր"</string>
     <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"Bluetooth, զուգակցում"</string>
     <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, վարելու ռեժիմ, NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, վարելու ռեժիմ"</string>
@@ -3701,7 +3710,7 @@
     <string name="keywords_zen_mode_settings" msgid="7810203406522669584">"չանհանգստացնել, ժամանակացույց, ծանուցումներ, արգելափակել, անձայն ռեժիմ, թրթռալ, քուն, աշխատանք, կենտրոնացում, ձայն, անջատել ձայնը, օր, աշխատանքային օր, հանգստյան օր, աշխատանքային օրվա երեկո, միջոցառում"</string>
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"էկրան, կողպման ժամանակը, անջատում, կողպէկրան"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"հիշողություն, քեշ, տվյալներ, ջնջել, մաքրել, ազատել, տարածք"</string>
-    <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"միացված, սարք, ականջակալ, բարձրախոս, անլար, զուգակցել, ներդիր ականջակալ, երաժշտություն, մեդիա"</string>
+    <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"կապակցված, սարք, ականջակալ, բարձրախոս, անլար, զուգակցել, ներդիր ականջակալ, երաժշտություն, մեդիա"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"ֆոն, թեմա, ցանց, կարգավորել, անհատականացնել"</string>
     <string name="keywords_styles" msgid="1137053187860081131">"պատկերակ, պատկերակներ, ակցենտ, գույն, հիմնական էկրան, կողպէկրան, դյուրանցում, ժամացույցի չափս"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"կանխադրված, օգնական"</string>
@@ -3773,7 +3782,7 @@
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Միացված է/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Միացված է/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> և <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Դուք կարող եք նաև միացնել տարածական հնչողությունը Bluetooth սարքերի համար։"</string>
-    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Կապված սարքերի կարգավորումներ"</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Կապակցված սարքերի կարգավորումներ"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Տարածական հնչողութ․"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Անջատված է"</string>
     <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"Ֆիքսված"</string>
@@ -4458,7 +4467,7 @@
     <string name="share_remote_bugreport_action" msgid="7173093464692893276">"Տրամադրել"</string>
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"Մերժել"</string>
     <string name="usb_use_charging_only" msgid="1743303747327057947">"Միայն լիցքավորում"</string>
-    <string name="usb_use_power_only" msgid="3408055485802114621">"Միացված սարքի լիցքավորում"</string>
+    <string name="usb_use_power_only" msgid="3408055485802114621">"Կապակցված սարքի լիցքավորում"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Ֆայլերի փոխանցում"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP ռեժիմ"</string>
     <string name="usb_use_uvc_webcam" msgid="6595429508472038732">"Վեբ տեսախցիկ"</string>
@@ -4474,12 +4483,12 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-ի կարգավորումներ"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB-ն վերահսկող սարքը"</string>
-    <string name="usb_control_host" msgid="7404215921555021871">"Միացված սարքը"</string>
+    <string name="usb_control_host" msgid="7404215921555021871">"Կապակցված սարք"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Այս սարքը"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Սպասեք…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Չհաջողվեց փոխարկել"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"Այս սարքի լիցքավորում"</string>
-    <string name="usb_summary_power_only" msgid="4901734938857822887">"Միացված սարքի լիցքավորում"</string>
+    <string name="usb_summary_power_only" msgid="4901734938857822887">"Կապակցված սարքի լիցքավորում"</string>
     <string name="usb_summary_file_transfers" msgid="5498487271972556431">"Ֆայլերի փոխանցում"</string>
     <string name="usb_summary_tether" msgid="2554569836525075702">"USB մոդեմ"</string>
     <string name="usb_summary_photo_transfers" msgid="7331503733435780492">"PTP ռեժիմ"</string>
@@ -4536,7 +4545,7 @@
     <string name="allow_overlay_description" msgid="1607235723669496298">"Թույլատրել այս հավելվածի ցուցադրումը մյուս ակտիվ հավելվածների վրայից: Այն կկարողանա տեսնել հպումները և փոխել էկրանին ցուցադրվող բովանդակությունը։"</string>
     <string name="media_routing_control_title" msgid="6402800638960066807">"Փոխել մեդիա արտածումը"</string>
     <string name="allow_media_routing_control" msgid="4907036637509360616">"Թույլատրել հավելվածին փոխել մեդիա արտածումը"</string>
-    <string name="allow_media_routing_description" msgid="8343709701298051207">"Թույլատրել այս հավելվածին ընտրել, թե որ միացված սարքը աուդիո կամ վիդեո նվագարկի այլ հավելվածներից։ Թույլտվության դեպքում այս հավելվածը կկարողանա բացել հասանելի սարքերի, օրինակ՝ ականջակալների և բարձրախոսների ցանկը և ընտրել, թե արտածման որ սարքն օգտագործվի աուդիո կամ վիդեո հեռարձակելու համար։"</string>
+    <string name="allow_media_routing_description" msgid="8343709701298051207">"Թույլատրել այս հավելվածին ընտրել, թե որ կապակցված սարքը աուդիո կամ վիդեո նվագարկի այլ հավելվածներից։ Թույլտվության դեպքում այս հավելվածը կկարողանա բացել հասանելի սարքերի, օրինակ՝ ականջակալների և բարձրախոսների ցանկը և ընտրել, թե արտածման որ սարքն օգտագործվի աուդիո կամ վիդեո հեռարձակելու համար։"</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Բոլոր ֆայլերի հասանելիություն"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Բոլոր ֆայլերը կառավարելու թույլտվություն տալ"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Դուք կարող եք թույլատրել այս հավելվածին կարդալ, փոփոխել և ջնջել այս սարքի կամ միացված կրիչների բոլոր ֆայլերը։ Եթե թույլատրեք, հավելվածը կկարողանա օգտվել ֆայյլերից առանց ձեր իմացության։"</string>
@@ -5940,10 +5949,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Ավելացրեք հաշվի վերականգնման հասցե"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Հաստատեք ձեր էլ․ հասցեն"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"App Store-ի զտիչներ"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Զտել հավելվածները բովանդակության տարիքային սահմանափակման հիման վրա"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"Յուրաքանչյուր հավելված կարող է արգելափակել որոշակի տեսակի բովանդակություն։ Հավելվածների խանութները, որոնք նշված չեն ցանկում, անհրաժեշտ է առանձին կառավարել։"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"Կայքի բովանդակության զտիչներ"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Կայքերի զտիչներ, արգելափակել կայքեր, դիտարկիչի զտիչներ, արգելափակել մեծահասակների համար նախատեսված կայքերը, զտել կայքերը, արգելափակել որոնման արդյունքները, զտել մեծահասակների համար նախատեսված որոնման արդյունքները, բովանդակության սահմանափակումներ"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"Օգնեք ձեր հեռախոսում զտել մեծահասակների համար նախատեսված բովանդակությունը որոշ հավելվածներում և դիտարկիչներում։ Մեծահասակների համար նախատեսված բովանդակությունը նախկինի պես կարող է ցուցադրվել այլ հավելվածներում, սարքերում և դիտարկիչներում։"</string>

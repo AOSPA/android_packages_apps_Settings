@@ -248,7 +248,12 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"ಕೆಳಗೆ ಸರಿಸಿ"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"ತೆಗೆದುಹಾಕಿ"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"ಮೇಲಕ್ಕೆ ಸರಿಸಿ"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <string name="action_label_menu_option" msgid="6881627571783854975">"ಸಿಸ್ಟಂ ಭಾಷೆ ಪಟ್ಟಿ ಎಡಿಟ್ ಮಾಡಿ, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <!-- no translation found for keywords_region_page (7148673842253297212) -->
+    <skip />
+    <!-- no translation found for keywords_temperature_page (5447163674488205412) -->
+    <skip />
+    <!-- no translation found for keywords_measurement_system_page (403273002514842186) -->
     <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"ಪ್ರಾದೇಶಿಕ ಆದ್ಯತೆಗಳು"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"ಯೂನಿಟ್‌ಗಳು ಹಾಗೂ ಸಂಖ್ಯೆಯ ಆದ್ಯತೆಗಳನ್ನು ಸೆಟ್ ಮಾಡಿ"</string>
@@ -1533,6 +1538,10 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"ವಾಲ್‌ಪೇಪರ್ ಆಯ್ಕೆಗಳು"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"ಲಾಕ್ ಸ್ಕ್ರೀನ್ ವಾಲ್‌ಪೇಪರ್ ಅನ್ನು ತೋರಿಸಿ"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"ಲಾಕ್ ಸ್ಕ್ರೀನ್ ವಾಲ್‌ಪೇಪರ್ ಯಾವಾಗಲೂ ಡಿಸ್‌ಪ್ಲೇ ಆನ್‌ ಆಗಿರಲಿ ಎಂಬ ಫೀಚರ್ ಮೂಲಕ ಗೋಚರಿಸುತ್ತದೆ"</string>
+    <!-- no translation found for doze_always_on_inactivity_detection_title (7953501407683982654) -->
+    <skip />
+    <!-- no translation found for doze_always_on_inactivity_detection_summary (3486468877414144614) -->
+    <skip />
     <string name="force_bold_text" msgid="4620929631102086716">"ಬೋಲ್ಡ್ ಪಠ್ಯ"</string>
     <string name="title_font_size" msgid="570613010306330622">"ಫಾಂಟ್ ಗಾತ್ರ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ಪಠ್ಯವನ್ನು ದೊಡ್ಡದು ಅಥವಾ ಚಿಕ್ಕದು ಮಾಡಿ"</string>
@@ -4850,7 +4859,7 @@
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"ಜೆಸ್ಚರ್ ನ್ಯಾವಿಗೇಶನ್"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"ಡೆಮೋ ಪ್ರಯತ್ನಿಸಿ ನೋಡಿ"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ಬಟನ್ ನ್ಯಾವಿಗೇಶನ್"</string>
-    <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"ಬಟನ್ ಆರ್ಡರ್"</string>
+    <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"ಬಟನ್ ಕ್ರಮ"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"ಹಿಂದಕ್ಕೆ"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"ಹೋಮ್"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"ಇತ್ತೀಚಿನವು"</string>
@@ -5940,10 +5949,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"ಮರುಪ್ರಾಪ್ತಿ ಇಮೇಲ್ ಅನ್ನು ಸೇರಿಸಿ"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"ನಿಮ್ಮ ಇಮೇಲ್ ಅನ್ನು ದೃಢೀಕರಿಸಿ"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"ಆ್ಯಪ್ ಸ್ಟೋರ್ ಫಿಲ್ಟರ್‌ಗಳು"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"ಆ್ಯಪ್‌ಗಳನ್ನು ಅವುಗಳ ಕಂಟೆಂಟ್‌ನ ಪ್ರಬುದ್ಧತೆಯ ಆಧಾರದ ಮೇಲೆ ಫಿಲ್ಟರ್ ಮಾಡಿ"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"ಪ್ರತಿಯೊಂದು ಆ್ಯಪ್ ವಿಭಿನ್ನ ರೀತಿಯ ಕಂಟೆಂಟ್ ಅನ್ನು ನಿರ್ಬಂಧಿಸಬಹುದು. ಪಟ್ಟಿ ಮಾಡದ ಆ್ಯಪ್ ಸ್ಟೋರ್‌ಗಳನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ನಿರ್ವಹಿಸಬೇಕು."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"ವೆಬ್‌ಸೈಟ್ ಕಂಟೆಂಟ್ ಫಿಲ್ಟರ್‌ಗಳು"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"ವೆಬ್‌ಸೈಟ್ ಫಿಲ್ಟರ್‌ಗಳು, ಸೈಟ್‌ಗಳನ್ನು ನಿರ್ಬಂಧಿಸಿ, ಬ್ರೌಸರ್ ಫಿಲ್ಟರ್‌ಗಳು, ಅಶ್ಲೀಲ ಸೈಟ್‌ಗಳನ್ನು ನಿರ್ಬಂಧಿಸಿ, ಸೈಟ್‌ಗಳನ್ನು ಫಿಲ್ಟರ್ ಮಾಡಿ, ಹುಡುಕಾಟ ಫಲಿತಾಂಶಗಳನ್ನು ನಿರ್ಬಂಧಿಸಿ, ಅಶ್ಲೀಲ ಹುಡುಕಾಟ ಫಲಿತಾಂಶಗಳನ್ನು ಫಿಲ್ಟರ್ ಮಾಡಿ, ಕಂಟೆಂಟ್ ನಿರ್ಬಂಧಗಳು"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"ಈ ಫೋನ್‌ನಲ್ಲಿರುವ ಕೆಲವು ಆ್ಯಪ್‌ಗಳು ಮತ್ತು ಬ್ರೌಸರ್‌ಗಳಲ್ಲಿ ಅಶ್ಲೀಲ ಕಂಟೆಂಟ್ ಅನ್ನು ಫಿಲ್ಟರ್ ಮಾಡಲು ಸಹಾಯ ಮಾಡಿ. ಇತರ ಆ್ಯಪ್‌ಗಳು, ಸಾಧನಗಳು ಅಥವಾ ಬ್ರೌಸರ್‌ಗಳಲ್ಲಿ ಅಶ್ಲೀಲ ಕಂಟೆಂಟ್ ಇನ್ನೂ ಕಾಣಿಸಿಕೊಳ್ಳಬಹುದು."</string>
