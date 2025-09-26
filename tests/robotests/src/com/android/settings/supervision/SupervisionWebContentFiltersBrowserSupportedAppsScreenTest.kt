@@ -24,6 +24,10 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
@@ -33,11 +37,13 @@ import android.text.Spanned
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
+import androidx.preference.PreferenceGroup
 import androidx.preference.PreferenceGroupAdapter
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.settings.R
+import com.android.settings.supervision.SupervisionWebContentFilterSupportedAppsScreen.Companion.SUPPORTED_APPS_GROUP
 import com.android.settingslib.ipc.MessengerServiceClient
 import com.android.settingslib.ipc.MessengerServiceRule
 import com.android.settingslib.preference.launchFragmentScenario
@@ -53,11 +59,13 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowContextImpl
+import org.robolectric.shadows.ShadowPackageManager
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.INSTRUMENTATION_TEST)
 class SupervisionWebContentFiltersBrowserSupportedAppsScreenTest {
+    private lateinit var shadowPackageManager: ShadowPackageManager
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val browserSupportedAppsScreen =
         SupervisionWebContentFiltersBrowserSupportedAppsScreen()
@@ -65,6 +73,7 @@ class SupervisionWebContentFiltersBrowserSupportedAppsScreenTest {
     private val mockRoleManager: RoleManager = mock {
         on { getRoleHolders(ROLE_SYSTEM_SUPERVISION) }.thenReturn(listOf(packageName))
     }
+    private val iconDrawable: ColorDrawable = ColorDrawable(Color.RED)
 
     @get:Rule(order = 0) val setFlagsRule = SetFlagsRule()
     @get:Rule(order = 1)
@@ -76,6 +85,15 @@ class SupervisionWebContentFiltersBrowserSupportedAppsScreenTest {
         (Shadow.extract((context as Application).baseContext) as ShadowContextImpl).apply {
             setSystemService(Context.ROLE_SERVICE, mockRoleManager)
         }
+        shadowPackageManager = shadowOf(context.packageManager)
+        val appPackageName = "com.android.chrome"
+        shadowPackageManager.installPackage(
+            PackageInfo().apply {
+                packageName = appPackageName
+                this.applicationInfo = ApplicationInfo().apply { packageName = appPackageName }
+            }
+        )
+        shadowPackageManager.setApplicationIcon(appPackageName, iconDrawable)
     }
 
     @Test
@@ -98,13 +116,13 @@ class SupervisionWebContentFiltersBrowserSupportedAppsScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun flagEnabled() {
-        assertThat(browserSupportedAppsScreen.isFlagEnabled(context)).isTrue()
+        assertThat(browserSupportedAppsScreen.isAvailable(context)).isTrue()
     }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun flagDisabled() {
-        assertThat(browserSupportedAppsScreen.isFlagEnabled(context)).isFalse()
+        assertThat(browserSupportedAppsScreen.isAvailable(context)).isFalse()
     }
 
     @Test
@@ -112,6 +130,20 @@ class SupervisionWebContentFiltersBrowserSupportedAppsScreenTest {
     fun getMetricsCategory() {
         assertThat(browserSupportedAppsScreen.getMetricsCategory())
             .isEqualTo(SettingsEnums.SUPERVISION_WEB_CONTENT_FILTERS_BROWSER_SUPPORTED_APPS)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun supportedAppsPreferences() {
+        browserSupportedAppsScreen.launchFragmentScenario().onFragment { fragment ->
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+            val preferenceGroup = fragment.findPreference<PreferenceGroup>(SUPPORTED_APPS_GROUP)
+            assertThat(preferenceGroup?.preferenceCount).isEqualTo(1)
+            val preference = preferenceGroup?.getPreference(0)
+            assertThat(preference?.title).isEqualTo("Supported app")
+            assertThat(preference?.summary).isEqualTo("App summary")
+            assertThat(preference?.icon).isEqualTo(iconDrawable)
+        }
     }
 
     @Test

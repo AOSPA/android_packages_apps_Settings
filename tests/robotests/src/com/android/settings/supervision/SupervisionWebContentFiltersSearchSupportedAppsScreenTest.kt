@@ -97,13 +97,13 @@ class SupervisionWebContentFiltersSearchSupportedAppsScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun flagEnabled() {
-        assertThat(searchSupportedAppsScreen.isFlagEnabled(context)).isTrue()
+        assertThat(searchSupportedAppsScreen.isAvailable(context)).isTrue()
     }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun flagDisabled() {
-        assertThat(searchSupportedAppsScreen.isFlagEnabled(context)).isFalse()
+        assertThat(searchSupportedAppsScreen.isAvailable(context)).isFalse()
     }
 
     @Test
