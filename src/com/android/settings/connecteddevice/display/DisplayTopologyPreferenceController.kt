@@ -396,11 +396,11 @@ class DisplayTopologyPreferenceController(
             block.setHighlighted(id == selectedDisplayId)
 
             if (isMirroring) {
-                block.setOnTouchListener(null)
+                block.setTouchListener(null)
             } else {
-                block.setOnTouchListener { view, ev ->
+                block.setTouchListener { view, ev ->
                     if (ev.isSynthesizedTouchpadGesture()) {
-                        return@setOnTouchListener false
+                        return@setTouchListener false
                     }
                     when (ev.actionMasked) {
                         MotionEvent.ACTION_DOWN -> onBlockTouchDown(id, pos, block, ev)

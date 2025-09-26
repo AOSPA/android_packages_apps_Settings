@@ -44,6 +44,9 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     @VisibleForTesting
     internal val cornerRadiusPx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_corner_radius)
+    @VisibleForTesting
+    internal val arrowSizePx =
+        context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_size)
 
     // Id of the logical display this DisplayBlock represents
     var logicalDisplayId: Int = -1
@@ -88,15 +91,15 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             override fun surfaceDestroyed(h: SurfaceHolder) {}
         }
 
-    val wallpaperView = SurfaceView(context)
+    private val wallpaperView = SurfaceView(context).apply { id = R.id.display_block_wallpaper }
     private val backgroundView =
         View(context).apply {
+            id = R.id.display_block_background
             background = context.getDrawable(R.drawable.display_block_background)
         }
-
-    @VisibleForTesting
-    val selectionMarkerView =
+    private val selectionMarkerView =
         View(context).apply {
+            id = R.id.display_block_selection_marker
             background = context.getDrawable(R.drawable.display_block_selection_marker_background)
         }
 
@@ -105,10 +108,10 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
      * highlight border.
      */
     var positionInPane: PointF
-        get() = PointF(x + highlightPx, y + highlightPx)
+        get() = PointF(x + highlightPx + arrowSizePx, y + highlightPx + arrowSizePx)
         set(value: PointF) {
-            x = value.x - highlightPx
-            y = value.y - highlightPx
+            x = value.x - highlightPx - arrowSizePx
+            y = value.y - highlightPx - arrowSizePx
         }
 
     var onA11yMoveListener: ((direction: Direction) -> Unit)? = null
@@ -127,6 +130,8 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         addView(wallpaperView)
         addView(backgroundView)
         addView(selectionMarkerView)
+
+        // TODO(438649236): Setup arrow buttons
 
         wallpaperView.holder.addCallback(holderCallback)
     }
@@ -241,6 +246,16 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         z = if (value) 2f else 1f
     }
 
+    // DisplayBlock bounds are bigger than the actual display wallpaper (+ padding) area. Sets
+    // touch listener to specific view
+    fun setTouchListener(listener: OnTouchListener?) {
+        if (listener == null) {
+            backgroundView.setOnTouchListener(null)
+        } else {
+            backgroundView.setOnTouchListener { v, e -> listener.onTouch(v, e) }
+        }
+    }
+
     /**
      * Sets position and size of the block given coordinates in pane space.
      *
@@ -281,12 +296,40 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
                 R.string.external_display_topology_display_block_content_description,
                 displayDevice?.name ?: "Display $logicalDisplayId",
             )
+        setupLayoutBounds(
+            Size((bottomRight.x - topLeft.x).toInt(), (bottomRight.y - topLeft.y).toInt())
+        )
+    }
 
-        val newWidth = (bottomRight.x - topLeft.x).toInt()
-        val newHeight = (bottomRight.y - topLeft.y).toInt()
-
-        val paddedWidth = newWidth + 2 * highlightPx
-        val paddedHeight = newHeight + 2 * highlightPx
+    /**
+     * DisplayBlock is rendered with multiple View stacked on top of each other. Each View serves a
+     * purpose, there are 4 layers:
+     * 1. Wallpaper: The actual display wallpaper rendered on a SurfaceView
+     * 2. Background: Applies padding overlay on top of the surface to create an appearance of block
+     *    being distanced from one another
+     * 3. Highlight: Border around the wallpaper highlighting selected display
+     * 4. DisplayBlock parent container: The container for the block itself, this is set to be
+     *    larger than the actual visible area to accommodate for A11y arrow buttons sticking out
+     *    from wallpaper (+ highlight).
+     * <pre>
+     * ......................  <-- DisplayBlock outermost boundary (.)
+     *            ^         .  <-- A11y arrow buttons (<^>v)
+     * .  ########|#######  .  <-- Highlight, `selectionMarkerView` (#)
+     * .  #/------|-----\#  .  <-- Padding, `backgroundView` (-)
+     * .  #|-WWWWWWWWWW-|#  .
+     * .  #|-WWWWWWWWWW-|#  .  <-- Wallpaper / Surface, `wallpaperView` (W)
+     * . <===WWWWWWWWWW===> .
+     * .  #|-WWWWWWWWWW-|#  .
+     * .  #|-WWWWWWWWWW-|#  .
+     * .  #\------|-----/#  .
+     * .  ########|#######  .
+     * .          v          .
+     * ......................
+     * </pre>
+     */
+    private fun setupLayoutBounds(bounds: Size) {
+        val paddedWidth = bounds.width + 2 * highlightPx + 2 * arrowSizePx
+        val paddedHeight = bounds.height + 2 * highlightPx + 2 * arrowSizePx
 
         if (width == paddedWidth && height == paddedHeight) {
             // Will not receive a surfaceChanged callback, so in case the wallpaper is different,
@@ -304,15 +347,29 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         // The highlight is the outermost border. The highlight is shown outside of the parent
         // FrameLayout so that it consumes the padding between the blocks.
         wallpaperView.layoutParams.let {
-            it.width = newWidth
-            it.height = newHeight
+            it.width = bounds.width
+            it.height = bounds.height
             if (it is MarginLayoutParams) {
-                it.leftMargin = highlightPx
-                it.topMargin = highlightPx
-                it.bottomMargin = highlightPx
-                it.topMargin = highlightPx
+                val marginToParentBounds = highlightPx + arrowSizePx
+                it.setMargins(
+                    marginToParentBounds,
+                    marginToParentBounds,
+                    marginToParentBounds,
+                    marginToParentBounds,
+                )
             }
             wallpaperView.layoutParams = it
+        }
+        // Padding is already applied in xml layout
+        (backgroundView.layoutParams as MarginLayoutParams).let {
+            it.width = bounds.width + 2 * highlightPx
+            it.height = bounds.height + 2 * highlightPx
+            it.setMargins(arrowSizePx, arrowSizePx, arrowSizePx, arrowSizePx)
+        }
+        (selectionMarkerView.layoutParams as MarginLayoutParams).let {
+            it.width = bounds.width + 2 * highlightPx
+            it.height = bounds.height + 2 * highlightPx
+            it.setMargins(arrowSizePx, arrowSizePx, arrowSizePx, arrowSizePx)
         }
 
         wallpaperView.outlineProvider =
@@ -323,8 +380,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             }
         wallpaperView.clipToOutline = true
 
-        // The other two child views are MATCH_PARENT by default so will resize to fill up the
-        // FrameLayout.
+        requestLayout()
     }
 
     override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
