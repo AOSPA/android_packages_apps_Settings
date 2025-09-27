@@ -28,6 +28,7 @@ import android.text.Spanned
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
+import androidx.preference.PreferenceGroup
 import androidx.preference.PreferenceGroupAdapter
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -81,6 +82,17 @@ class SupervisionAppStoreFiltersScreenTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
+    fun preferenceGroupExists() {
+        supervisionAppStoreFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val preferenceGroup =
+                fragment.findPreference<PreferenceGroup>(
+                    SupervisionAppStoreFiltersScreen.SUPERVISION_APP_STORE_FILTERS_GROUP
+                )
+            assertThat(preferenceGroup).isNotNull()
+        }
+    }
+
     @EnableFlags(Flags.FLAG_ENABLE_APP_STORE_FILTERS_SCREEN)
     fun footerPreference() {
         supervisionAppStoreFiltersScreen.launchFragmentScenario().onFragment { fragment ->
