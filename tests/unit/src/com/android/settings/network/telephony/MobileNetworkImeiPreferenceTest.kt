@@ -123,6 +123,32 @@ class MobileNetworkImeiPreferenceTest {
             .isEqualTo(context.getString(R.string.imei_multi_sim, IMEI_INDEXING_2))
     }
 
+    @Test
+    fun getTitle_imeiListNotMultiSim_returnDefaultTitle() {
+        // Scenario: The list of IMEIs has less than 2 entries, so it's not considered multi-SIM.
+        val singleImeiList = listOf(IMEI_1)
+        mockTelephonyManagerForSubId.stub { on { imei } doReturn IMEI_1 }
+
+        // Create preference with a single IMEI in the list.
+        preference = MobileNetworkImeiPreference(context, 0, singleImeiList)
+
+        // Assert that the title is the default IMEI string, not the multi-SIM formatted one.
+        assertThat(preference.getTitle(context)).isEqualTo(context.getString(R.string.status_imei))
+    }
+
+    @Test
+    fun getTitle_imeiNotInList_returnDefaultTitle() {
+        // Scenario: The device's IMEI is not found in the provided list of all IMEIs.
+        val unknownImei = "unknown_imei"
+        mockTelephonyManagerForSubId.stub { on { imei } doReturn unknownImei }
+
+        // Create preference with the original multi-IMEI list.
+        preference = MobileNetworkImeiPreference(context, 0, imeiList)
+
+        // Assert that the title is the default IMEI string because the IMEI was not found.
+        assertThat(preference.getTitle(context)).isEqualTo(context.getString(R.string.status_imei))
+    }
+
     companion object {
         const val IMEI_1 = "111111111111115"
         const val IMEI_2 = "222222222222225"
