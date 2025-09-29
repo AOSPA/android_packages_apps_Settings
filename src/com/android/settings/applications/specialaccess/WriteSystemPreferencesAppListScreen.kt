@@ -18,10 +18,8 @@ package com.android.settings.applications.specialaccess
 
 import android.app.settings.SettingsEnums
 import android.content.Context
-import com.android.settings.CatalystSettingsActivity
+import android.content.Intent
 import com.android.settings.R
-import com.android.settings.applications.CatalystAppListFragment
-import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -41,7 +39,7 @@ open class WriteSystemPreferencesAppListScreen : SpecialAccessAppListScreen() {
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         if (metadata == null) {
-            makeLaunchIntent(context, WriteSystemPreferencesAppListActivity::class.java, null)
+            Intent("android.settings.action.WRITE_SYSTEM_PREFERENCES")
         } else {
             null
         }
@@ -56,9 +54,3 @@ open class WriteSystemPreferencesAppListScreen : SpecialAccessAppListScreen() {
         const val KEY = "special_access_write_system_preferences_app_list"
     }
 }
-
-class WriteSystemPreferencesAppListActivity :
-    CatalystSettingsActivity(
-        WriteSystemPreferencesAppListScreen.KEY,
-        CatalystAppListFragment::class.java,
-    )
