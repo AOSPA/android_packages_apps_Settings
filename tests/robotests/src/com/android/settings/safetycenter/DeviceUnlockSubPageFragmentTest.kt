@@ -18,7 +18,6 @@ package com.android.settings.safetycenter
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
 import android.content.pm.UserInfo
 import android.os.UserManager
 import android.permission.flags.Flags
@@ -46,7 +45,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
-import org.robolectric.shadows.ShadowContextImpl
 import org.robolectric.shadows.ShadowLooper
 import org.robolectric.shadows.ShadowSafetyCenterManager
 import org.robolectric.shadows.ShadowUserManager
@@ -68,9 +66,6 @@ class DeviceUnlockSubPageFragmentTest {
         val shadowUserManager = Shadow.extract(userManager) as ShadowUserManager
         val safetyCenterManager = application.getSystemService(SafetyCenterManager::class.java)!!
         shadowSafetyCenterManager = Shadow.extract(safetyCenterManager)
-
-        val shadowContextImpl = Shadow.extract<ShadowContextImpl>(application.baseContext)
-        shadowContextImpl.setSystemService(Context.USER_SERVICE, userManager)
 
         shadowUserManager.addUser(USER_PERSONAL.identifier, "Personal", 0)
         shadowUserManager.addProfile(

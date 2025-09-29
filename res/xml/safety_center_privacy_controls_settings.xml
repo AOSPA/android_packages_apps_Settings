@@ -25,10 +25,31 @@
         settings:controller="com.android.settings.privacy.ManagePermissionsPreferenceController"
         android:order="10" />
 
+    <com.android.settingslib.safetycenter.SafetySourcePreference
+        android:key="health_connect"
+        settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:safetySource="AndroidHealthConnect"
+        settings:profile="personal_profile"
+        android:order="25" />
+
+    <com.android.settingslib.safetycenter.SafetySourcePreference
+        android:key="app_function_access"
+        settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:safetySource="AndroidAppFunctionAccess"
+        settings:profile="personal_profile"
+        android:order="30" />
+
+    <com.android.settingslib.safetycenter.SafetySourcePreference
+        android:key="location_data_sharing_updates"
+        settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
+        settings:safetySource="AndroidPrivacyAppDataSharingUpdates"
+        settings:profile="personal_profile"
+        android:order="35" />
+
     <PreferenceCategory
         android:key="privacy_controls_page"
         android:title="@string/privacy_controls_title"
-        android:order="30">
+        android:order="40">
 
         <!-- Camera toggle -->
         <com.android.settingslib.RestrictedSwitchPreference
@@ -36,7 +57,7 @@
             android:title="@string/camera_toggle_title"
             android:summary="@string/perm_toggle_description"
             settings:controller="com.android.settings.privacy.CameraToggleController"
-            android:order="40" />
+            android:order="45" />
 
         <!-- Microphone toggle -->
         <com.android.settingslib.RestrictedSwitchPreference
