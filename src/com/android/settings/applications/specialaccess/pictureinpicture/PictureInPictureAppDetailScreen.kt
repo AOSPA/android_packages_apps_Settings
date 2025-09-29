@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.specialaccess.pictureinpicture
 
+import android.Manifest.permission.USE_PINNED_WINDOWING_LAYER
 import android.app.ActivityManager
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
@@ -30,7 +31,7 @@ import androidx.core.net.toUri
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
-import com.android.settings.applications.getPackageInfoWithActivities
+import com.android.settings.applications.getPackageInfoWithActivitiesAndPermissions
 import com.android.settings.applications.specialaccess.SpecialAccessAppDetailScreen
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
@@ -99,9 +100,11 @@ open class PictureInPictureAppDetailScreen(context: Context, arguments: Bundle) 
         fun pictureInPictureFilter(context: Context, appInfo: ApplicationInfo?): Boolean {
             if (appInfo == null) return false
             val packageInfo =
-                context.getPackageInfoWithActivities(appInfo.packageName) ?: return false
+                context.getPackageInfoWithActivitiesAndPermissions(appInfo.packageName)
+                    ?: return false
 
-            return packageInfo.activities?.any(ActivityInfo::supportsPictureInPicture) == true
+            return (packageInfo.activities?.any(ActivityInfo::supportsPictureInPicture) ?: false) ||
+                (packageInfo.requestedPermissions?.contains(USE_PINNED_WINDOWING_LAYER) ?: false)
         }
     }
 }
