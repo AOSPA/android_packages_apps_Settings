@@ -72,4 +72,11 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
         device: CachedBluetoothDevice?,
         metricsCategory: Int,
     ): AlertDialog? = null
+
+    override fun notifyConnectionFailureTimeChange(
+        context: Context,
+        device: CachedBluetoothDevice,
+    ) {
+        return
+    }
 }
