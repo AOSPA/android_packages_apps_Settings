@@ -102,8 +102,7 @@ public class AdjustmentExcludedAppsPreferenceController extends BasePreferenceCo
                 || Flags.notificationClassificationUi())) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        if (KEY_SUMMARIZATION.equals(mAdjustmentKey)
-                && mBackend.isNotificationSummarizationSupported()) {
+        if (KEY_SUMMARIZATION.equals(mAdjustmentKey) && mBackend.showSummarizationSettings()) {
             return AVAILABLE;
         }
         if (KEY_TYPE.equals(mAdjustmentKey) && mBackend.isNotificationBundlingSupported()) {
