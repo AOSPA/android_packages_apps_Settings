@@ -79,11 +79,9 @@ constructor(
                 preference.isVisible = false
                 return@launch
             }
-
-            preference.isEnabled =
-                satelliteRepository
-                    .isSatelliteAccessConfigurationForCurrentLocationFlow(mSubId)
-                    .first()
+            satelliteRepository
+                .isSatelliteAccessConfigurationForCurrentLocationFlow(mSubId)
+                .collect { it -> preference.isEnabled = it }
 
             val carrierRoamingNtnConnectedType =
                 mCarrierConfigs.getInt(
