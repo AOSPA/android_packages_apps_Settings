@@ -7,3 +7,10 @@ flag {
   description: "Enables the new Safety Center UI in Settings"
   bug: "425902698"
 }
+
+flag {
+  name: "move_safety_source_refresh_to_background"
+  namespace: "safety_center"
+  description: "Moves the Safety Center source refresh to the background"
+  bug: "420734103"
+}
