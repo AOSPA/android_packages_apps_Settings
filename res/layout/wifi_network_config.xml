@@ -796,23 +796,5 @@
                 style="@style/wifi_item_spinner"
                 android:prompt="@string/wifi_privacy_device_name_settings"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/wifi_section">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/wifi_item">
-                <CheckBox android:id="@+id/shared"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          style="@style/wifi_item_content"
-                          android:textSize="14sp"
-                          android:text="@string/wifi_shared"
-                          android:checked="true"/>
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

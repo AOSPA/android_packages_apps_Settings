@@ -279,6 +279,20 @@ public class WifiConfigController2Test {
 
     @Test
     @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    public void checkSharingFieldsVisibilityHSU() {
+        createController(null, WifiConfigUiBase2.MODE_LOGIN_SCREEN, false);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        final View sharingFields = mView.findViewById(R.id.sharing_toggle_fields);
+        final View editConfigFields =
+                mView.findViewById(R.id.edit_wifi_network_configuration_fields);
+
+        assertThat(sharingFields.getVisibility()).isEqualTo(View.GONE);
+        assertThat(editConfigFields.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
     public void checkIpSpinnerState_networkNotOwned_multipleUsers() {
         when(mUserManager.getUserCount()).thenReturn(2);
         when(mWifiEntry.isSaved()).thenReturn(true);
