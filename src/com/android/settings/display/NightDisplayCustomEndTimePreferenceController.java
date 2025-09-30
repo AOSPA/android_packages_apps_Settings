@@ -38,8 +38,14 @@ public class NightDisplayCustomEndTimePreferenceController extends BasePreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        return ColorDisplayManager.isNightDisplayAvailable(mContext) ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
+        if (!ColorDisplayManager.isNightDisplayAvailable(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        if (mColorDisplayManager.getNightDisplayAutoMode()
+                == ColorDisplayManager.AUTO_MODE_CUSTOM_TIME) {
+            return AVAILABLE;
+        }
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
