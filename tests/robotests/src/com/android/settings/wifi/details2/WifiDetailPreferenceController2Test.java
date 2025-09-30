@@ -1370,7 +1370,8 @@ public class WifiDetailPreferenceController2Test {
         verify(mMockMetricsFeatureProvider, never())
                 .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
         verify(mController).showConfirmForgetDialog(
-                R.string.wifi_forget_dialog_title, R.string.forget_passpoint_dialog_message);
+                R.string.wifi_forget_dialog_title,
+                mContext.getString(R.string.forget_passpoint_dialog_message));
     }
 
     @Test
@@ -1380,6 +1381,8 @@ public class WifiDetailPreferenceController2Test {
         setUpSpyController();
         when(mMockWifiEntry.isSharedWithOtherUsers()).thenReturn(true);
         when(mMockUserManager.getUserCount()).thenReturn(3);
+        final String label = "title";
+        when(mMockWifiEntry.getTitle()).thenReturn(label);
         displayAndResume();
 
         mForgetClickListener.getValue().onClick(null);
@@ -1389,7 +1392,7 @@ public class WifiDetailPreferenceController2Test {
                 .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
         verify(mController).showConfirmForgetDialog(
                 R.string.shared_wifi_forget_dialog_title,
-                R.string.shared_wifi_forget_dialog_message);
+                mContext.getString(R.string.shared_wifi_forget_dialog_message, label));
     }
 
     @Test
