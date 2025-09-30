@@ -1010,6 +1010,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     getActivity(),
                     this::startActivityForResult,
                     canCreateAdminUser(),
+                    canEditUserInfo(),
                     (userName, userIcon, iconPath, isAdmin) -> {
                         mPendingUserIcon = userIcon;
                         mPendingUserName = userName;
@@ -1039,6 +1040,13 @@ public class UserSettings extends SettingsPreferenceFragment
         } else {
             return UserManager.isMultipleAdminEnabled();
         }
+    }
+
+    private boolean canEditUserInfo() {
+        return !showAddUsersFromSigninToggle()
+                || !getPrefContext()
+                        .getResources()
+                        .getBoolean(com.android.internal.R.bool.config_enableUserInfoSetupInSuw);
     }
 
     @Override
@@ -1839,8 +1847,12 @@ public class UserSettings extends SettingsPreferenceFragment
             if (mUserCaps.mCanAddRestrictedProfile) {
                 showDialog(DIALOG_CHOOSE_USER_TYPE);
             } else {
-                startActivityForResult(CreateUserActivity.createIntentForStart(getActivity(),
-                                canCreateAdminUser(), Utils.FILE_PROVIDER_AUTHORITY),
+                startActivityForResult(
+                        CreateUserActivity.createIntentForStart(
+                                getActivity(),
+                                canCreateAdminUser(),
+                                canEditUserInfo(),
+                                Utils.FILE_PROVIDER_AUTHORITY),
                         REQUEST_ADD_USER);
             }
             return true;
