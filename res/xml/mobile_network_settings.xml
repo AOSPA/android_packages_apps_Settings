@@ -20,20 +20,24 @@
 
     <com.android.settings.spa.preference.ComposeGroupSectionPreference
         android:key="use_sim_switch"
+        android:order="0"
         settings:controller="com.android.settings.network.telephony.MobileNetworkSwitchController"/>
 
     <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="enabled_state_container"
+        android:order="10"
         android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.network.telephony.DisabledSubscriptionController">
 
         <com.android.settings.datausage.DataUsageSummaryPreference
             android:key="status_header"
+            android:order="10"
             android:visibility="gone"
             android:selectable="false"/>
 
         <ListPreference
             android:key="calls_preference"
+            android:order="20"
             android:title="@string/calls_preference"
             android:summary="@string/summary_placeholder"
             android:enabled="false"
@@ -42,6 +46,7 @@
 
         <ListPreference
             android:key="sms_preference"
+            android:order="30"
             android:title="@string/sms_preference"
             android:summary="@string/summary_placeholder"
             android:enabled="false"
@@ -49,6 +54,7 @@
 
         <Preference
             android:key="mobile_network_spn"
+            android:order="40"
             android:title="@string/mobile_network_spn_title"
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.network.telephony.MobileNetworkSpnPreferenceController"
@@ -56,6 +62,7 @@
 
         <Preference
             android:key="phone_number"
+            android:order="50"
             android:title="@string/status_number"
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.network.telephony.MobileNetworkPhoneNumberPreferenceController"
@@ -64,6 +71,7 @@
 
         <Preference
             android:key="cdma_lte_data_service_key"
+            android:order="60"
             android:title="@string/cdma_lte_data_service"
             settings:controller="com.android.settings.network.telephony.DataServiceSetupPreferenceController"
             settings:allowDividerAbove="true"
@@ -71,6 +79,7 @@
 
         <SwitchPreferenceCompat
             android:key="mobile_data_enable"
+            android:order="70"
             android:title="@string/mobile_data_settings_title"
             android:summary="@string/mobile_data_settings_summary"
             settings:controller="com.android.settings.network.telephony.MobileDataPreferenceController"
@@ -78,6 +87,7 @@
 
         <SwitchPreferenceCompat
             android:key="auto_data_switch"
+            android:order="80"
             android:title="@string/auto_data_switch_title"
             android:summary="@string/auto_data_switch_summary"
             settings:controller="com.android.settings.network.telephony.AutoDataSwitchPreferenceController"/>
@@ -85,12 +95,14 @@
         <!-- Settings search is handled by RoamingSearchItem. -->
         <com.android.settings.spa.preference.ComposePreference
             android:key="button_roaming_key"
+            android:order="90"
             settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.RoamingPreferenceController"/>
 
         <!-- Settings search is handled by DataUsageSearchItem. -->
         <Preference
             android:key="data_usage_summary"
+            android:order="100"
             android:title="@string/app_cellular_data_usage"
             settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.DataUsagePreferenceController"/>
@@ -98,18 +110,21 @@
         <!-- Settings search is handled by BillingCycleSearchItem. -->
         <com.android.settings.datausage.BillingCyclePreference
             android:key="billing_preference"
+            android:order="110"
             android:title="@string/billing_cycle"
             settings:searchable="false"
             settings:controller="com.android.settings.datausage.BillingCyclePreferenceController"/>
 
         <SwitchPreferenceCompat
             android:key="carrier_wifi_toggle"
+            android:order="120"
             android:title="@string/carrier_wifi_offload_title"
             android:summary="@string/carrier_wifi_offload_summary"
             settings:controller="com.android.settings.network.CarrierWifiTogglePreferenceController"/>
 
         <Preference
             android:key="carrier_wifi_network"
+            android:order="130"
             android:title="@string/carrier_wifi_network_title"
             android:selectable="false"
             settings:searchable="false"/>
@@ -117,6 +132,7 @@
         <!-- Settings search is handled by MmsMessageSearchItem. -->
         <SwitchPreferenceCompat
             android:key="mms_message"
+            android:order="140"
             android:title="@string/mms_message_title"
             android:summary="@string/mms_message_summary"
             settings:searchable="false"
@@ -124,6 +140,7 @@
 
         <SwitchPreferenceCompat
             android:key="enhanced_4g_lte"
+            android:order="150"
             android:title="@string/enhanced_4g_lte_mode_title"
             android:persistent="false"
             android:summary="@string/enhanced_4g_lte_mode_summary"
@@ -132,6 +149,7 @@
 
         <SwitchPreferenceCompat
             android:key="4g_calling"
+            android:order="160"
             android:title="@string/enhanced_4g_lte_mode_title_4g_calling"
             android:persistent="false"
             android:summary="@string/enhanced_4g_lte_mode_summary_4g_calling"
@@ -140,6 +158,7 @@
 
         <SwitchPreferenceCompat
             android:key="advance_call"
+            android:order="170"
             android:title="@string/enhanced_4g_lte_mode_title_advanced_calling"
             android:persistent="false"
             android:summary="@string/enhanced_4g_lte_mode_summary"
@@ -148,6 +167,7 @@
 
         <SwitchPreferenceCompat
             android:key="contact_discovery_opt_in"
+            android:order="180"
             android:title="@string/contact_discovery_opt_in_title"
             android:persistent="false"
             android:summary="@string/contact_discovery_opt_in_summary"
@@ -156,6 +176,7 @@
         <!-- Settings search is handled by PreferredNetworkModeSearchItem. -->
         <ListPreference
             android:key="preferred_network_mode_key"
+            android:order="190"
             android:title="@string/preferred_network_mode_title"
             android:summary="@string/preferred_network_mode_summary"
             android:entries="@array/preferred_network_mode_choices"
@@ -167,6 +188,7 @@
         <!-- Settings search is handled by EnabledNetworkModeSearchItem. -->
         <ListPreference
             android:key="enabled_networks_key"
+            android:order="200"
             android:title="@string/preferred_network_mode_title"
             android:summary="@string/preferred_network_mode_summary"
             android:entries="@array/enabled_networks_choices"
@@ -178,6 +200,7 @@
         <!-- Settings search is handled by CarrierSettingsVersionSearchItem. -->
         <Preference
             android:key="carrier_settings_version_key"
+            android:order="210"
             android:title="@string/carrier_settings_version"
             settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.CarrierSettingsVersionPreferenceController"
@@ -186,6 +209,7 @@
         <!-- IMEI -->
         <Preference
             android:key="network_mode_imei_info"
+            android:order="220"
             android:title="@string/status_imei"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_imei_info"
@@ -194,6 +218,7 @@
         <!-- EID -->
         <com.android.settingslib.CustomDialogPreferenceCompat
             android:key="network_mode_eid_info"
+            android:order="230"
             android:title="@string/status_eid"
             android:summary="@string/device_info_protected_single_press"
             android:positiveButtonText="@string/dlg_ok"
@@ -203,6 +228,7 @@
 
         <PreferenceCategory
             android:key="telephony_satellite_settings_category_key"
+            android:order="240"
             android:title="@string/category_title_satellite_connectivity"
             settings:controller="com.android.settings.network.telephony.satellite.SatelliteSettingsPreferenceCategoryController">
 
@@ -220,6 +246,7 @@
 
         <PreferenceCategory
             android:key="calling_category"
+            android:order="250"
             android:title="@string/call_category"
             settings:controller="com.android.settings.network.telephony.CallingPreferenceCategoryController">
 
@@ -247,6 +274,7 @@
         </PreferenceCategory>
 
         <com.android.settingslib.widget.UntitledPreferenceCategory
+            android:order="260"
             settings:isPreferenceVisible="false">
 
           <com.android.settings.network.telephony.cdma.CdmaListPreference
@@ -270,6 +298,7 @@
 
         <PreferenceCategory
             android:key="network_operators_category_key"
+            android:order="270"
             android:title="@string/network_operator_category"
             settings:allowDividerBelow="true"
             settings:controller="com.android.settings.network.telephony.NetworkPreferenceCategoryController">
@@ -286,7 +315,8 @@
         </PreferenceCategory>
 
         <com.android.settingslib.widget.UntitledPreferenceCategory
-            android:key="apn_and_protection_container">
+            android:key="apn_and_protection_container"
+            android:order="280">
           <!--We want separate APN setting from reset of settings because we want user to change it with caution-->
           <com.android.settingslib.RestrictedPreference
               android:key="telephony_apn_key"
@@ -322,7 +352,8 @@
         </com.android.settingslib.widget.UntitledPreferenceCategory>
     </com.android.settingslib.widget.UntitledPreferenceCategory>
 
-    <com.android.settingslib.widget.UntitledPreferenceCategory>
+    <com.android.settingslib.widget.UntitledPreferenceCategory
+        android:order="20">
       <Preference
           android:key="convert_to_esim"
           android:persistent="false"
@@ -345,6 +376,7 @@
 
     <com.android.settingslib.widget.FooterPreference
         android:key="disable_sim_explanation"
+        android:order="30"
         android:title="@string/mobile_network_disable_sim_explanation"
         settings:allowDividerAbove="true"
         settings:searchable="false"
@@ -352,6 +384,7 @@
 
     <com.android.settingslib.widget.FooterPreference
         android:key="no_5g_in_dsds_explanation"
+        android:order="40"
         android:title="@string/no_5g_in_dsds_text"
         settings:allowDividerAbove="true"
         settings:searchable="false"
