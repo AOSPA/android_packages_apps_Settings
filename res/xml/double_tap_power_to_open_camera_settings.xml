@@ -25,7 +25,7 @@
         settings:searchable="false"
         settings:lottie_rawRes="@drawable/quickly_open_camera"/>
 
-    <SwitchPreferenceCompat
+    <com.android.settingslib.widget.MainSwitchPreference
         android:key="gesture_double_tap_power"
         android:title="@string/double_tap_power_for_camera_title"
         android:summary="@string/double_tap_power_for_camera_summary"
