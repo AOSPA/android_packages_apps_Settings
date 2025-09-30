@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.settings.SettingsEnums
 import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
@@ -61,6 +62,12 @@ class SupervisionAppStoreFiltersScreenTest {
     fun getTitle() {
         assertThat(supervisionAppStoreFiltersScreen.getPreferenceTitle(context))
             .isEqualTo("App store filters")
+    }
+
+    @Test
+    fun getMetricsCategory() {
+        assertThat(supervisionAppStoreFiltersScreen.getMetricsCategory())
+            .isEqualTo(SettingsEnums.SUPERVISION_APP_STORE_FILTERS)
     }
 
     @Test
