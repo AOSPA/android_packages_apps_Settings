@@ -1,9 +1,0 @@
-package: "com.android.settings.flags"
-container: "system_ext"
-
-flag {
-    name: "catalyst_key_parameters"
-    namespace: "android_settings"
-    description: "Flag for using KeyParameters in parameterized preferences"
-    bug: "446923903"
-}
