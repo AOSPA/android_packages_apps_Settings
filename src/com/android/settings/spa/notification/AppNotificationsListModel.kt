@@ -77,7 +77,8 @@ class AppNotificationsListModel(
         userIdFlow: Flow<Int>, option: Int, recordListFlow: Flow<List<AppNotificationsRecord>>,
     ) = recordListFlow.map { recordList ->
         recordList.asyncFilter { record ->
-            if (listType == ListType.ExcludeSummarization && !record.hasSentMsgNotification) {
+            if (listType == ListType.ExcludeSummarization && !record.hasSentMsgNotification
+                && !android.app.Flags.nmSummarizationAll()) {
                 false
             } else {
                 when (option.toSpinnerItem()) {
