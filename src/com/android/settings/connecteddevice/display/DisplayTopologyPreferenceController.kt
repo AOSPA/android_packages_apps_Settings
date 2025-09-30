@@ -88,6 +88,8 @@ class DisplayTopologyPreferenceController(
     private var blockDrag: BlockDrag? = null
     private var revealedWallpapers: List<RevealedWallpaper> = emptyList()
     private var selectedDisplayId: Int = -1
+    // Don't modify the value directly, use `setDisplayToShowArrows()`
+    private var showArrowMovementDisplayId: Int = -1
 
     var onDisplayBlockSelectedListener: OnDisplayBlockSelectedListener? = null
 
@@ -145,6 +147,7 @@ class DisplayTopologyPreferenceController(
         paneContent = content
         topologyHint = hint
         paneContent.addOnLayoutChangeListener(paneContentLayoutListener)
+        paneContent.setOnClickListener { _ -> setDisplayToShowArrows(-1) }
     }
 
     /** Called by the host when it is attached to the window/screen. */
@@ -157,6 +160,7 @@ class DisplayTopologyPreferenceController(
     fun detach() {
         if (this::paneContent.isInitialized) {
             paneContent.removeOnLayoutChangeListener(paneContentLayoutListener)
+            paneContent.setOnClickListener(null)
         }
         // No longer need to reveal wallpapers since the blocks are not visible; these will be
         // revealed again upon invocation of refreshPane.
@@ -398,6 +402,7 @@ class DisplayTopologyPreferenceController(
             // Example scenario would be when Display#2 is selected from the tab, and there's
             // another display added, Display#2 should still be highlighted.
             block.setHighlighted(id == selectedDisplayId)
+            block.setArrowVisible(id == showArrowMovementDisplayId)
 
             if (isMirroring) {
                 block.setTouchListener(null)
@@ -490,6 +495,15 @@ class DisplayTopologyPreferenceController(
         // Do not allow dragging for single-display topology, since there is nothing to clamp it to.
         if (positions.size <= 1) {
             return false
+        }
+
+        if (displayId != selectedDisplayId) {
+            // Different display is selected, hide arrows. Don't immediately show arrow on the
+            // selectedDisplay, because arrow should only be shown after second tap on the selcted
+            // display
+            setDisplayToShowArrows(-1)
+        } else {
+            setDisplayToShowArrows(displayId)
         }
 
         val stationaryDisps = positions.filter { it.first != displayId }
@@ -616,6 +630,25 @@ class DisplayTopologyPreferenceController(
             abs(a.right - b.right) < EPSILON &&
             abs(a.top - b.top) < EPSILON &&
             abs(a.bottom - b.bottom) < EPSILON
+    }
+
+    private fun setDisplayToShowArrows(displayId: Int) {
+        if (
+            !injector.flags.showTabbedConnectedDisplaySetting() ||
+                !injector.flags.enableDisplayBlockArrowMovementBugfix()
+        ) {
+            return
+        }
+        showArrowMovementDisplayId = displayId
+
+        val displayTopology = injector.displayTopology
+        if (displayTopology == null || !displayTopology.allNodesIdMap().containsKey(displayId)) {
+            displayBlocks().forEach { it.setArrowVisible(false) }
+            return
+        }
+        displayBlocks().forEach {
+            it.setArrowVisible(it.logicalDisplayId == showArrowMovementDisplayId)
+        }
     }
 
     /**

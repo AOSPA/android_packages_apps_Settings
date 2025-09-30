@@ -82,3 +82,13 @@ flag {
         purpose: PURPOSE_BUGFIX
     }
 }
+
+flag {
+    name: "enable_display_block_arrow_movement_bugfix"
+    namespace: "lse_desktop_experience"
+    description: "Shows arrow buttons when selected display block is tapped once more, allowing arrangement with single-tap"
+    bug: "438649236"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
+}
