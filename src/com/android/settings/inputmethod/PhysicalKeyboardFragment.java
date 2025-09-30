@@ -71,7 +71,6 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
     private static final String ACCESSIBILITY_MOUSE_KEYS = "accessibility_mouse_keys";
     private static final String ACCESSIBILITY_PHYSICAL_KEYBOARD_A11Y = "physical_keyboard_a11y";
     private static final String KEYBOARD_SHORTCUTS_HELPER = "keyboard_shortcuts_helper";
-    private static final String MODIFIER_KEYS_SETTINGS = "modifier_keys_settings";
     private static final String EXTRA_AUTO_SELECTION = "auto_selection";
     public static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
     private static final String TAG = "KeyboardAndTouchA11yFragment";
@@ -156,7 +155,6 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
         if (mSupportsFirmwareUpdate) {
             mFeatureProvider.registerKeyboardInformationCategory(getPreferenceScreen());
         }
-        mKeyboardAssistanceCategory.removePreference(findPreference(MODIFIER_KEYS_SETTINGS));
         mKeyboardA11yCategory.removePreference(mAccessibilityBounceKeys);
         mKeyboardA11yCategory.removePreference(mAccessibilitySlowKeys);
         mKeyboardA11yCategory.removePreference(mAccessibilityStickyKeys);
