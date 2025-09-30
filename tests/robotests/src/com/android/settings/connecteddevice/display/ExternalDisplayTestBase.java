@@ -119,7 +119,6 @@ public class ExternalDisplayTestBase {
             mListener = arg.getArgument(0);
             return null;
         }).when(mMockedInjector).registerDisplayListener(any());
-        doReturn(0).when(mMockedInjector).getDisplayUserRotation(anyInt());
         doReturn(mContext).when(mMockedInjector).getContext();
 
         setupMockDpm();
@@ -128,9 +127,16 @@ public class ExternalDisplayTestBase {
     DisplayDevice includeBuiltinDisplay() {
         List<DisplayDevice> displays = new ArrayList<>(mDisplays);
         Mode mode = new Mode(720, 1280, 60f);
-        DisplayDevice builtinDisplay = new DisplayDevice(
-                DEFAULT_DISPLAY, "local:1111111111", "Built-in display", mode, List.of(mode),
-                DisplayIsEnabled.YES, /* isConnectedDisplay= */ false);
+        DisplayDevice builtinDisplay =
+                new DisplayDevice(
+                        DEFAULT_DISPLAY,
+                        "local:1111111111",
+                        "Built-in display",
+                        mode,
+                        List.of(mode),
+                        DisplayIsEnabled.YES,
+                        /* isConnectedDisplay= */ false,
+                        /* rotation= */ 0);
         displays.addFirst(builtinDisplay);
         doReturn(builtinDisplay).when(mMockedInjector).getDisplay(DEFAULT_DISPLAY);
         updateDisplaysAndTopology(displays);
@@ -149,14 +155,28 @@ public class ExternalDisplayTestBase {
                         new int[0]),
                 new Mode(8, 3, Mode.FLAG_ANISOTROPY_CORRECTION, 720, 480, 60, 60, new float[0],
                         new int[0]));
-        return new DisplayDevice(EXTERNAL_DISPLAY_ID, "local:0987654321", "HDMI",
-                supportedModes.get(0), supportedModes, isEnabled, /* isConnectedDisplay= */ true);
+        return new DisplayDevice(
+                EXTERNAL_DISPLAY_ID,
+                "local:0987654321",
+                "HDMI",
+                supportedModes.get(0),
+                supportedModes,
+                isEnabled,
+                /* isConnectedDisplay= */ true,
+                /* rotation= */ 0);
     }
 
     DisplayDevice createOverlayDisplay(DisplayIsEnabled isEnabled) {
         var supportedModes = List.of(new Mode(0, 1240, 780, 60, 60, new float[0], new int[0]));
-        return new DisplayDevice(OVERLAY_DISPLAY_ID, "local:1357902468", "Overlay #1",
-                supportedModes.get(0), supportedModes, isEnabled, /* isConnectedDisplay= */ true);
+        return new DisplayDevice(
+                OVERLAY_DISPLAY_ID,
+                "local:1357902468",
+                "Overlay #1",
+                supportedModes.get(0),
+                supportedModes,
+                isEnabled,
+                /* isConnectedDisplay= */ true,
+                /* rotation= */ 0);
     }
 
     void updateDisplaysAndTopology(List<DisplayDevice> displays) {
