@@ -24,15 +24,11 @@ import androidx.preference.Preference
 
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.flags.Flags
 
 open class DeviceDiagnosticsPreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
 
     override fun getAvailabilityStatus(): Int {
-        if (!Flags.enableDeviceDiagnosticsInSettings()) {
-            return UNSUPPORTED_ON_DEVICE
-        }
         if (getIntent() == null) {
             return UNSUPPORTED_ON_DEVICE
         }
