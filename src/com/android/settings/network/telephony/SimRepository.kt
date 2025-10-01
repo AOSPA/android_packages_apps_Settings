@@ -17,19 +17,19 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.UserManager
 import android.provider.Settings
+import com.android.settings.Utils
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBoolean
 
 class SimRepository(private val context: Context) {
-    private val packageManager = context.packageManager
     private val userManager = context.userManager
 
     /** Gets whether show mobile network settings page entrance to the current user. */
     fun showMobileNetworkPageEntrance(): Boolean =
-        packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY) && userManager.isAdminUser
+        (Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context)) &&
+            userManager.isAdminUser
 
     /** Gets whether current user can enter mobile network settings page. */
     fun canEnterMobileNetworkPage(): Boolean {
