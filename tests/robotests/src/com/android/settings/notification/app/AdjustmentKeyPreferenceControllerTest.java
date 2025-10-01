@@ -112,7 +112,9 @@ public class AdjustmentKeyPreferenceControllerTest {
     @Test
     @EnableFlags({Flags.FLAG_NM_SUMMARIZATION, Flags.FLAG_NM_SUMMARIZATION_UI,
             Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI})
+    @DisableFlags(Flags.FLAG_NM_SUMMARIZATION_ALL)
     public void testIsAvailable_summarization_notMsgApp() {
+        when(mBackend.getAllowedAssistantAdjustments()).thenReturn(List.of(KEY_SUMMARIZATION));
         when(mBackend.hasSentValidMsg(anyString(), anyInt())).thenReturn(false);
 
         mPrefController = new AdjustmentKeyPreferenceController(
@@ -135,14 +137,31 @@ public class AdjustmentKeyPreferenceControllerTest {
 
     @Test
     @EnableFlags({Flags.FLAG_NM_SUMMARIZATION, Flags.FLAG_NM_SUMMARIZATION_UI})
+    @DisableFlags({Flags.FLAG_NM_SUMMARIZATION_ALL})
     public void testIsAvailable_summarization_NasNotSupported() {
+        when(mBackend.getAllowedAssistantAdjustments()).thenReturn(List.of(KEY_SUMMARIZATION));
         when(mBackend.isNotificationSummarizationSupported()).thenReturn(false);
+        when(mBackend.showSummarizationSettings()).thenReturn(false);
 
         mPrefController = new AdjustmentKeyPreferenceController(
                 mContext, mBackend, KEY_SUMMARIZATION);
         mPrefController.onResume(mAppRow, null, null, null, null, null, null);
 
         assertThat(mPrefController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_NM_SUMMARIZATION_ALL})
+    public void testIsAvailable_summarization_NasNotSupported_appSummarizationIs() {
+        when(mBackend.getAllowedAssistantAdjustments()).thenReturn(List.of(KEY_SUMMARIZATION));
+        when(mBackend.isNotificationSummarizationSupported()).thenReturn(false);
+        when(mBackend.showSummarizationSettings()).thenReturn(true);
+
+        mPrefController = new AdjustmentKeyPreferenceController(
+                mContext, mBackend, KEY_SUMMARIZATION);
+        mPrefController.onResume(mAppRow, null, null, null, null, null, null);
+
+        assertThat(mPrefController.isAvailable()).isTrue();
     }
 
     @Test
