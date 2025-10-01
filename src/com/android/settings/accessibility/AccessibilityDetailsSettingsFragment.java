@@ -138,14 +138,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             return false;
         }
         final Bundle bundle = new Bundle();
-        if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
-            bundle.putString(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    Objects.requireNonNull(componentName).flattenToString()
-            );
-        } else {
-            bundle.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
-        }
+        bundle.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
         openSubSettings(LaunchAccessibilityActivityPreferenceFragment.class.getName(), bundle);
         finish();
         return true;
@@ -204,13 +197,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
         final ComponentName componentName = new ComponentName(packageName, serviceInfo.name);
 
         final Bundle extras = new Bundle();
-        if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
-            extras.putString(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName.flattenToString()
-            );
-        } else {
-            extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
-        }
+        extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
         // We will log nonA11yTool status from PolicyWarningUIController; others none.
         extras.putLong(AccessibilitySettings.EXTRA_TIME_FOR_LOGGING,
                 getActivity().getIntent().getLongExtra(

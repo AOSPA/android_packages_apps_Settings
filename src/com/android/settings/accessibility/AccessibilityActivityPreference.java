@@ -70,13 +70,7 @@ public class AccessibilityActivityPreference extends TwoTargetPreference {
         });
 
         final Bundle extras = getExtras();
-        if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
-            extras.putString(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME, mComponentName.flattenToString()
-            );
-        } else {
-            extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, mComponentName);
-        }
+        extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, mComponentName);
     }
 
     /**
