@@ -22,9 +22,6 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import android.view.accessibility.AccessibilityManager
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.preference.PreferenceFragmentCompat
@@ -43,7 +40,6 @@ import com.android.settingslib.widget.TwoTargetPreference
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import org.junit.After
-import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -51,23 +47,14 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 import org.robolectric.shadow.api.Shadow
-import org.robolectric.util.ReflectionHelpers
 
 /** Tests for [A11yActivityScreen]. */
 class A11yActivityScreenTest : SettingsCatalystTestCase() {
     @get:Rule val settingStoreRule = SettingsStoreRule()
-    @get:Rule val platformFlags = SetFlagsRule()
 
     private val arguments =
         Bundle().apply {
-            if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
-                putString(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    A11Y_ACTIVITY_COMPONENT.flattenToString(),
-                )
-            } else {
-                putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_ACTIVITY_COMPONENT)
-            }
+            putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_ACTIVITY_COMPONENT)
         }
 
     override val preferenceScreenCreator: A11yActivityScreen by lazy {
@@ -163,7 +150,6 @@ class A11yActivityScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    @DisableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
     fun parameters_hasTwoA11yActivities_returnTwoItems() = runTest {
         AccessibilityRepositoryProvider.resetInstanceForTesting()
         val shortcutInfo1 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT)
@@ -215,172 +201,6 @@ class A11yActivityScreenTest : SettingsCatalystTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_A11Y_ACTIVITY_DETAIL
 
-    @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun featureComponentName_flagTrue_validString_parsedCorrectly() {
-        val args =
-            Bundle().apply {
-                putString(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    A11Y_ACTIVITY_COMPONENT.flattenToString(),
-                )
-            }
-        val screen = A11yActivityScreen(appContext, args)
-
-        assertThat(screen.getFeatureComponentName()).isEqualTo(A11Y_ACTIVITY_COMPONENT)
-    }
-
-    @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun featureComponentName_flagTrue_invalidString_throwsException() {
-        val args =
-            Bundle().apply {
-                putString(AccessibilitySettings.EXTRA_COMPONENT_NAME, "invalidComponent")
-            }
-
-        assertThrows(IllegalArgumentException::class.java) {
-            val screen = A11yActivityScreen(appContext, args)
-            screen.getFeatureComponentName()
-        }
-    }
-
-    @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun featureComponentName_flagTrue_missingKey_throwsException() {
-        val args = Bundle()
-
-        assertThrows(IllegalArgumentException::class.java) {
-            val screen = A11yActivityScreen(appContext, args)
-            screen.getFeatureComponentName()
-        }
-    }
-
-    @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun featureComponentName_flagTrue_wrongType_throwsException() {
-        val args =
-            Bundle().apply {
-                putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_ACTIVITY_COMPONENT)
-            }
-
-        assertThrows(IllegalArgumentException::class.java) {
-            val screen = A11yActivityScreen(appContext, args)
-            screen.getFeatureComponentName()
-        }
-    }
-
-    @Test
-    @DisableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun featureComponentName_flagFalse_validParcelable_parsedCorrectly() {
-        val args =
-            Bundle().apply {
-                putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, A11Y_ACTIVITY_COMPONENT)
-            }
-        val screen = A11yActivityScreen(appContext, args)
-
-        assertThat(screen.getFeatureComponentName()).isEqualTo(A11Y_ACTIVITY_COMPONENT)
-    }
-
-    @Test
-    @DisableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun featureComponentName_flagFalse_missingKey_throwsException() {
-        val args = Bundle()
-
-        assertThrows(IllegalArgumentException::class.java) {
-            val screen = A11yActivityScreen(appContext, args)
-            screen.getFeatureComponentName()
-        }
-    }
-
-    @Test
-    @DisableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun featureComponentName_flagFalse_wrongType_throwsException() {
-        val args =
-            Bundle().apply {
-                putString(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    A11Y_ACTIVITY_COMPONENT.flattenToString(),
-                )
-            }
-
-        assertThrows(IllegalArgumentException::class.java) {
-            val screen = A11yActivityScreen(appContext, args)
-            screen.getFeatureComponentName()
-        }
-    }
-
-    @Test
-    @EnableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun parameters_flagTrue_emitsBundleWithString() = runTest {
-        AccessibilityRepositoryProvider.resetInstanceForTesting()
-        val shortcutInfo1 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT)
-        val shortcutInfo2 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT2)
-        a11yManager.setInstalledAccessibilityShortcutListAsUser(
-            listOf(shortcutInfo1, shortcutInfo2)
-        )
-
-        val collectedBundles = mutableListOf<Bundle>()
-        A11yActivityScreen.parameters(appContext).collect { collectedBundles.add(it) }
-
-        assertThat(collectedBundles).hasSize(2)
-        // Check first bundle
-        assertThat(collectedBundles[0].getString(AccessibilitySettings.EXTRA_COMPONENT_NAME))
-            .isEqualTo(A11Y_ACTIVITY_COMPONENT.flattenToString())
-        assertThat(
-                collectedBundles[0].getParcelable(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    ComponentName::class.java,
-                )
-            )
-            .isNull()
-        // Check second bundle
-        assertThat(collectedBundles[1].getString(AccessibilitySettings.EXTRA_COMPONENT_NAME))
-            .isEqualTo(A11Y_ACTIVITY_COMPONENT2.flattenToString())
-        assertThat(
-                collectedBundles[1].getParcelable(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    ComponentName::class.java,
-                )
-            )
-            .isNull()
-    }
-
-    @Test
-    @DisableFlags(com.android.settings.flags.Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
-    fun parameters_flagFalse_emitsBundleWithParcelable() = runTest {
-        AccessibilityRepositoryProvider.resetInstanceForTesting()
-        val shortcutInfo1 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT)
-        val shortcutInfo2 = createMockShortcutInfo(A11Y_ACTIVITY_COMPONENT2)
-        a11yManager.setInstalledAccessibilityShortcutListAsUser(
-            listOf(shortcutInfo1, shortcutInfo2)
-        )
-
-        val collectedBundles = mutableListOf<Bundle>()
-        A11yActivityScreen.parameters(appContext).collect { collectedBundles.add(it) }
-
-        assertThat(collectedBundles).hasSize(2)
-        // Check first bundle
-        assertThat(
-                collectedBundles[0].getParcelable(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    ComponentName::class.java,
-                )
-            )
-            .isEqualTo(A11Y_ACTIVITY_COMPONENT)
-        assertThat(collectedBundles[0].getString(AccessibilitySettings.EXTRA_COMPONENT_NAME))
-            .isNull()
-        // Check second bundle
-        assertThat(
-                collectedBundles[1].getParcelable(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                    ComponentName::class.java,
-                )
-            )
-            .isEqualTo(A11Y_ACTIVITY_COMPONENT2)
-        assertThat(collectedBundles[1].getString(AccessibilitySettings.EXTRA_COMPONENT_NAME))
-            .isNull()
-    }
-
     companion object {
         private const val PACKAGE_NAME = "com.foo.bar"
         private val A11Y_ACTIVITY_COMPONENT = ComponentName(PACKAGE_NAME, "FakeA11yActivity")
@@ -389,8 +209,4 @@ class A11yActivityScreenTest : SettingsCatalystTestCase() {
         private const val DEFAULT_LABEL = "default label"
         private const val DEFAULT_SUMMARY = "default summary"
     }
-}
-
-private fun A11yActivityScreen.getFeatureComponentName(): ComponentName {
-    return ReflectionHelpers.getField(this, "featureComponentName")
 }
