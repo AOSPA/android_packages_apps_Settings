@@ -114,6 +114,8 @@ public class UserDetailsSettingsTest {
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
     private static final int DIALOG_CONFIRM_RESET_GUEST = 4;
+    private static final int DIALOG_DELETE_LAST_ADMIN = 8;
+    private static final int DIALOG_REVOKE_LAST_ADMIN = 9;
 
     @Mock
     private TelephonyManager mTelephonyManager;
@@ -718,6 +720,22 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    @EnableFlags(FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF)
+    public void onPreferenceClick_removeClicked_lastAdmin_shouldShowWarningDialog() {
+        setupSelectedCurrentUser();
+        mUserManager.setIsAdminUser(true);
+        mUserManager.setUserRemovability(UserHandle.myUserId(),
+                UserManager.REMOVE_RESULT_ERROR_LAST_ADMIN_USER);
+        mFragment.mRemoveUserPref = mRemoveUserPref;
+        doNothing().when(mFragment).showDialog(anyInt());
+
+        mFragment.onPreferenceClick(mRemoveUserPref);
+
+        verify(mFragment).canDeleteUser();
+        verify(mFragment).showDialog(DIALOG_DELETE_LAST_ADMIN);
+    }
+
+    @Test
     public void onPreferenceClick_selectRestrictedUser_appAndContentAccessClicked_startActivity() {
         setupSelectedRestrictedUser();
         mFragment.mUserInfo = mUserInfo;
@@ -963,6 +981,23 @@ public class UserDetailsSettingsTest {
         verify(mMetricsFeatureProvider).action(any(),
                 eq(SettingsEnums.ACTION_REVOKE_ADMIN_FROM_SETTINGS));
         assertThat(mGrantAdminPref.isVisible()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF)
+    public void onPreferenceChange_revokeOwnAdmin_lastAdmin_shouldShowWarningDialog() {
+        setupSelectedCurrentUser();
+        mUserManager.setIsAdminUser(true);
+        mUserManager.setUserRemovability(UserHandle.myUserId(),
+                UserManager.REMOVE_RESULT_ERROR_LAST_ADMIN_USER);
+        mFragment.mGrantAdminPref = mGrantAdminPref;
+        doNothing().when(mFragment).showDialog(anyInt());
+
+        mFragment.onPreferenceChange(mGrantAdminPref, false);
+
+        verify(mMetricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_REVOKE_ADMIN_FROM_SETTINGS));
+        verify(mFragment).showDialog(DIALOG_REVOKE_LAST_ADMIN);
     }
 
     private void setupSelectedUser() {
