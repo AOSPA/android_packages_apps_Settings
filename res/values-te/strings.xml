@@ -1191,7 +1191,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ఈ నెట్‌వర్క్‌కు డివైజ్‌‌ను జోడించడానికి QR కోడ్‌ను ఉపయోగించండి"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR కోడ్ చెల్లుబాటు అయ్యే ఫార్మాట్‌లో లేదు"</string>
     <string name="retry" msgid="7542103800274026915">"మళ్లీ ట్రై చేయండి"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"ఇతర పరికర యూజర్‌లతో షేర్ చేయండి"</string>
     <string name="shared_message" msgid="2104244057926025072">"షేర్ చేయబడింది"</string>
     <string name="private_message" msgid="5897966950396765392">"ప్రైవేట్"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"నిర్ధారించండి"</string>
@@ -1535,10 +1534,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"వాల్‌పేపర్ ఆప్షన్‌లు"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"లాక్ స్క్రీన్ వాల్‌పేపర్‌ను చూపించండి"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"లాక్ స్క్రీన్ వాల్‌పేపర్ ఎల్లప్పుడూ ఆన్‌లో ఉండే డిస్‌ప్లేతో కనిపిస్తుంది"</string>
-    <!-- no translation found for doze_always_on_inactivity_detection_title (7953501407683982654) -->
-    <skip />
-    <!-- no translation found for doze_always_on_inactivity_detection_summary (3486468877414144614) -->
-    <skip />
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"ఇన్‌యాక్టివ్ అయినప్పుడు డిస్‌ప్లేను ఆఫ్ చేయండి"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"పవర్‌ను ఆదా చేయడానికి యూజర్ యాక్టివిటీ ఏదీ డిటెక్ట్ కానప్పుడు, డిస్‌ప్లేను ఆఫ్ చేస్తుంది"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"బోల్డ్ టెక్స్ట్"</string>
     <string name="title_font_size" msgid="570613010306330622">"ఫాంట్ సైజ్‌"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"టెక్స్ట్‌ను పెద్దదిగా లేదా చిన్నదిగా చేస్తుంది"</string>
@@ -3475,6 +3472,14 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"ఈ యూజర్‌కు మీరు అడ్మిన్ హక్కులను తీసివేస్తే, తర్వాత ఎప్పుడైనా మీరు గానీ లేదా వేరే అడ్మిన్ గానీ, వారికి తిరిగి అడ్మిన్ హక్కులను ఇవ్వవచ్చు."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"మీరు మీ స్వంత అడ్మిన్ హక్కులు తీసివేయాలనుకుంటున్నారా?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"మీరు కొనసాగితే, ఇతర అడ్మిన్‌లు మాత్రమే మీకు అడ్మిన్ హక్కులను మంజూరు చేయగలరు."</string>
+    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
+    <skip />
+    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"ఎమర్జెన్సీ సమాచారం"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> సంబంధిత సమాచారం &amp; కాంటాక్ట్‌లు"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g>‌ను తెరవండి"</string>
@@ -5376,12 +5381,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"ఎడమ వైపు: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"కుడి వైపు: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"కేస్: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_left_content_description_expressive (4559978737378527361) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (2731091623137447666) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (7181469859757860775) -->
-    <skip />
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"బ్యాటరీ, ఎడమ వైపు ఉన్న బ్లూటూత్ డివైజ్: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"బ్యాటరీ, కుడి వైపు ఉన్న బ్లూటూత్ డివైజ్: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"బ్యాటరీ, కేస్: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"బ్యాటరీ: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"బ్యాటరీ"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"సెట్టింగ్‌ల ప్యానెల్"</string>
@@ -5945,18 +5947,12 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PINను మర్చిపోయాను"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"PINను మర్చిపోయారా?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"రికవరీ ఈమెయిల్‌ను అప్‌డేట్ చేయండి"</string>
-    <!-- no translation found for supervision_recovery_email_added (4327869201011721812) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_verified (4048919905732953058) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_updated (4409524629968027166) -->
-    <skip />
-    <!-- no translation found for supervision_pin_updated (660463938258442344) -->
-    <skip />
-    <!-- no translation found for supervision_pin_changed (4822686882868075710) -->
-    <skip />
-    <!-- no translation found for supervision_pin_deleted (368631223166018476) -->
-    <skip />
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"రికవరీ ఈమెయిల్ యాడ్ అయింది"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"రికవరీ ఈమెయిల్ వెరిఫై అయింది"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"రికవరీ ఈమెయిల్‌ అప్‌డేట్ అయింది"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN అప్‌డేట్ అయింది"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN మారింది"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN తొలగిపోయింది"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PINను తొలగించండి"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"రికవరీ ఈమెయిల్‌ను జోడించండి"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"మీ ఈమెయిల్‌ను వెరిఫై చేయండి"</string>
@@ -5987,7 +5983,7 @@
     <string name="supervision_generic_error_page_message" msgid="1532001782155323205">"తర్వాత మళ్లీ ట్రై చేయండి"</string>
     <string name="supervision_generic_error_page_button_label" msgid="8972577027819946993">"వెనుకకు వెళ్లండి"</string>
     <string name="identity_check_issue_card_title" msgid="1409291461773228899">"ఐడెంటిటీ చెక్ మరిన్ని యాప్‌లలో పని చేస్తుంది"</string>
-    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"ఐడెంటిటీ చెక్, మీ యాప్‌లకు అవాంఛిత యాక్సెస్‌ను నిరోధిస్తుంది. ఇప్పుడు వేలిముద్ర లేదా ఫేస్ అన్‌లాక్‌ను ఉపయోగించే అన్ని యాప్‌లలో అందుబాటులో ఉంది."</string>
+    <string name="identity_check_issue_card_summary" msgid="2563597018905365665">"ఐడెంటిటీ చెక్, మీ యాప్‌ల్లోకి ఇతరులెవరూ రాకుండా అడ్డుకుంటుంది. ఈ ఫీచర్ ప్రస్తుతం, వేలిముద్రను లేదా ఫేస్ అన్‌లాక్‌ను ఉపయోగించే అన్ని యాప్‌ల్లో అందుబాటులో ఉంది."</string>
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"వివరాలను చూడండి"</string>
     <string name="identity_check_promo_card_title" msgid="4467736415491327717">"ఐడెంటిటీ చెక్ మరిన్ని యాప్‌లలో పని చేస్తుంది"</string>
     <string name="identity_check_promo_card_summary" msgid="3363308846024080168">"అప్‌డేట్‌లు:\n"<ul><li>"వేలిముద్ర లేదా ఫేస్ అన్‌లాక్‌ను ఉపయోగించే ఏదైనా యాప్‌నకు ఐడెంటిటీ చెక్ అనేది రక్షణను యాడ్ చేస్తుంది."</li>\n<li>"కాలక్రమేణా, ఐడెంటిటీ చెక్ ఇది మీరేనని వెరిఫై చేయడానికి, అలాగే మీ డివైజ్‌‌లోని యాప్‌లను సురక్షితం చేయడానికి మరిన్ని మార్గాలను యాడ్ చేయవచ్చు. "<a href="https://support.google.com/android?p=identity_check">"మీరు ఎక్కడ, ఎప్పుడు రక్షణ పొందుతారు అనే దాని గురించి మరింత తెలుసుకోండి"</a></li></ul></string>
@@ -6003,7 +5999,7 @@
     <string name="location_settings" msgid="6833222354060094170">"లొకేషన్ యాక్సెస్"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"లొకేషన్‌కు యాక్సెస్ ఉన్న యాప్‌లను, సర్వీస్‌లను చూడండి"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"ఐడెంటిటీ చెక్ మరిన్ని యాప్‌లలో పని చేస్తుంది"</string>
-    <string name="identity_check_notification_summary" msgid="3762060079941053730">"ఐడెంటిటీ చెక్, మీ యాప్‌లకు అవాంఛిత యాక్సెస్‌ను నిరోధిస్తుంది. ఇప్పుడు వేలిముద్ర లేదా ఫేస్ అన్‌లాక్‌ను ఉపయోగించే యాప్‌లలో అందుబాటులో ఉంటుంది."</string>
+    <string name="identity_check_notification_summary" msgid="3762060079941053730">"ఐడెంటిటీ చెక్, మీ యాప్‌ల్లోకి ఇతరులెవరూ రాకుండా అడ్డుకుంటుంది. ఈ ఫీచర్ ప్రస్తుతం, వేలిముద్రను లేదా ఫేస్ అన్‌లాక్‌ను ఉపయోగించే అన్ని యాప్‌ల్లో అందుబాటులో ఉంది."</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"వివరాలను చూడండి"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"సెట్టింగ్‌లను చెక్ చేయడం సాధ్యపడలేదు"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"ఇంకా ఏ సమాచారం లేదు"</string>
@@ -6015,8 +6011,6 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for bluetooth_pairing_passkey_dialog_pairing_positive_button_text (5422642444726463520) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_pin_success_message (5476171772317649183) -->
-    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"పెయిరింగ్"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> కనెక్ట్ అయింది"</string>
 </resources>
