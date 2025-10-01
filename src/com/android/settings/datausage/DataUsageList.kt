@@ -38,6 +38,7 @@ import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.datausage.lib.BillingCycleRepository
 import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settings.network.telephony.SubscriptionRepository
+import com.android.settings.utils.getSubId
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.widget.LayoutPreference
@@ -170,8 +171,12 @@ open class DataUsageList : DashboardFragment() {
             val localIntent: Intent = intent.clone() as Intent
             if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
                 subId =
-                    getPreferenceScreenBindingArgs(requireContext())?.getInt(Settings.EXTRA_SUB_ID)
-                        ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                    getPreferenceScreenBindingArgs(requireContext())
+                        ?.getSubId(
+                            Settings.EXTRA_SUB_ID,
+                            SubscriptionManager.INVALID_SUBSCRIPTION_ID,
+                        ) ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+
                 Log.d(
                     TAG,
                     "processArgument: get subId from ScreenBindingArgs and reset subId into intent.",

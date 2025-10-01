@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system_ext"
+
+flag {
+    name: "catalyst_use_string_bundle"
+    namespace: "android_settings"
+    description: "Flag for using string values in Bundle arguments in parameterized preferences"
+    bug: "446923903"
+}

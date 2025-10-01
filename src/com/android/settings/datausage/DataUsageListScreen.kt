@@ -33,6 +33,7 @@ import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.AllTi
 import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.subscriptionManager
+import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -49,7 +50,7 @@ open class DataUsageListScreen(override val arguments: Bundle) :
     PreferenceScreenMixin, PreferenceSummaryProvider {
 
     private val subId =
-        arguments.getInt(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+        arguments.getSubId(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
 
     override val key: String
         get() = KEY

@@ -16,17 +16,70 @@
 package com.android.settings.wifi.calling
 
 import android.os.Bundle
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settings.wifi.calling.WifiCallingSettingsForSub.EXTRA_SUB_ID
+import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
 
 class WifiCallingScreenTest : SettingsCatalystTestCase() {
+
+    @get:Rule val platformFlags = SetFlagsRule()
 
     override val preferenceScreenCreator = WifiCallingScreen(Bundle.EMPTY)
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_WIFI_CALLING
 
+    private val testSubId = 2737
+
     @Test
-    override fun migration() {}
+    @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_whenFlagIsTrue_isParsedFromString() {
+        val bundle = Bundle().apply { putString(EXTRA_SUB_ID, testSubId.toString()) }
+        val screen = WifiCallingScreen(bundle)
+
+        assertThat(screen.isAvailable(appContext)).isTrue()
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_whenFlagIsFalse_andSubIdIsString_fallsBackToDefault() {
+        val bundle = Bundle().apply { putString(EXTRA_SUB_ID, testSubId.toString()) }
+        val screen = WifiCallingScreen(bundle)
+
+        assertThat(screen.isAvailable(appContext)).isFalse()
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_whenFlagIsFalse_isParsedFromInt() {
+        val bundle = Bundle().apply { putInt(EXTRA_SUB_ID, testSubId) }
+        val screen = WifiCallingScreen(bundle)
+
+        assertThat(screen.isAvailable(appContext)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_USE_STRING_BUNDLE)
+    fun subId_whenFlagIsTrue_andSubIdIsInt_fallsBackToDefault() {
+        val bundle = Bundle().apply { putInt(EXTRA_SUB_ID, testSubId) }
+        val screen = WifiCallingScreen(bundle)
+
+        assertThat(screen.isAvailable(appContext)).isFalse()
+    }
+
+    @Test
+    fun subId_whenKeyIsMissing_fallsBackToDefault() {
+        val bundle = Bundle() // No subId in bundle
+        val screen = WifiCallingScreen(bundle)
+
+        assertThat(screen.isAvailable(appContext)).isFalse()
+    }
+
+    @Test override fun migration() {}
 }

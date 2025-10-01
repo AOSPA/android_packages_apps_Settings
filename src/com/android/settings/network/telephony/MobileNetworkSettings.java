@@ -60,6 +60,7 @@ import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenc
 import com.android.settings.network.telephony.satellite.SatelliteSettingPreferenceController;
 import com.android.settings.network.telephony.wificalling.CrossSimCallingViewModel;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.utils.SubIdBundleUtils;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
@@ -573,7 +574,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public @Nullable Bundle getPreferenceScreenBindingArgs(@NonNull Context context) {
         final Bundle bundle = new Bundle();
-        bundle.putInt(Settings.EXTRA_SUB_ID, getSubId());
+        SubIdBundleUtils.putSubId(bundle, Settings.EXTRA_SUB_ID, getSubId());
         return bundle;
     }
 
