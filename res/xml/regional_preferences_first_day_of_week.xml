@@ -18,7 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/first_day_of_week_preferences_title"
-    android:key="regional_preference_first_day_of_week">
+    android:key="regional_preference_first_day_of_week"
+    settings:keywords="@string/keywords_first_day_of_week_page">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="first_day_of_week_intro"
