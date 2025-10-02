@@ -28,12 +28,18 @@ import android.content.Intent;
 import android.safetycenter.SafetyCenterManager;
 import android.safetycenter.SafetyEvent;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.flags.Flags;
 import com.android.settings.privatespace.PrivateSpaceSafetySource;
 import com.android.settings.security.ScreenLockPreferenceDetailsUtils;
+import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 
 /** Broadcast receiver for handling requests from Safety Center for fresh data. */
 public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
@@ -41,23 +47,60 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
     private static final SafetyEvent EVENT_DEVICE_REBOOTED =
             new SafetyEvent.Builder(SAFETY_EVENT_TYPE_DEVICE_REBOOTED).build();
 
+    private Executor mExecutor = ThreadUtils.getBackgroundExecutor();
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
             return;
         }
 
+        if (Flags.moveSafetySourceRefreshToBackground()) {
+            PendingResult pendingResult = goAsync();
+            mExecutor.execute(() -> processIntent(context, intent, pendingResult));
+        } else {
+            processIntent(context, intent);
+        }
+    }
+
+    @VisibleForTesting
+    void setTestExecutor(Executor testExecutor){
+        mExecutor = testExecutor;
+    }
+
+    private void processIntent(
+            Context context,
+            Intent intent,
+            @Nullable PendingResult pendingResult) {
+        try {
+            processIntent(context, intent);
+        } finally {
+            if (pendingResult != null) {
+                pendingResult.finish();
+            }
+        }
+    }
+
+    private void processIntent(Context context, Intent intent) {
         if (ACTION_REFRESH_SAFETY_SOURCES.equals(intent.getAction())) {
-            String[] sourceIdsExtra = intent.getStringArrayExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS);
-            final String refreshBroadcastId =
+            String[] sourceIdsExtra =
+                    intent.getStringArrayExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS);
+            String refreshBroadcastId =
                     intent.getStringExtra(
-                            SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID);
-            if (sourceIdsExtra != null && sourceIdsExtra.length > 0 && refreshBroadcastId != null) {
-                final SafetyEvent safetyEvent =
-                        new SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
+                            SafetyCenterManager
+                                    .EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID);
+            if (sourceIdsExtra != null
+                    && sourceIdsExtra.length > 0
+                    && refreshBroadcastId != null) {
+                SafetyEvent safetyEvent =
+                        new SafetyEvent.Builder(
+                                        SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
                                 .setRefreshBroadcastId(refreshBroadcastId)
                                 .build();
-                refreshSafetySources(context, ImmutableList.copyOf(sourceIdsExtra), safetyEvent);
+                refreshSafetySources(
+                        context,
+                        ImmutableList.copyOf(sourceIdsExtra),
+                        safetyEvent);
             }
             return;
         }
