@@ -23,6 +23,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -267,6 +268,7 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
 
         TransitionDrawable transitionDrawable = new TransitionDrawable(
                 new Drawable[]{backgroundFromDrawable, backgroundToDrawable});
+        transitionDrawable.setPaddingMode(LayerDrawable.PADDING_MODE_STACK);
         v.setBackground(transitionDrawable);
 
         final ValueAnimator fadeInLoop =
