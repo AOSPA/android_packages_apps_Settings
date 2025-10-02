@@ -251,7 +251,7 @@
     <string name="action_label_menu_option" msgid="6881627571783854975">"Editar lista de idiomas, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"país, territorio"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"tempo, centígrados, graos, temperatura, celsius, fahrenheit"</string>
-    <string name="keywords_measurement_system_page" msgid="403273002514842186">"métrica, imperial, temperatura, altura, peso, distancia, celsius, fahrenheit, libras, quilogramos, kg, millas, quilómetros, polgadas, centímetros, metros, unidades"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"métrico, imperial, temperatura, altura, peso, distancia, celsius, fahrenheit, libras, quilogramos, kg, millas, quilómetros, polgadas, centímetros, metros, unidades"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencias rexionais"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Configura as preferencias de números e unidades"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que as aplicacións coñezan as túas preferencias rexionais para que poidan personalizar a túa experiencia."</string>
@@ -1191,7 +1191,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utiliza un código QR para engadir un dispositivo a esta rede"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"O formato do código QR non é válido"</string>
     <string name="retry" msgid="7542103800274026915">"Tentar de novo"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"Compartir rede con outros usuarios do dispositivo"</string>
     <string name="shared_message" msgid="2104244057926025072">"compartida"</string>
     <string name="private_message" msgid="5897966950396765392">"privada"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"Confirmar"</string>
@@ -1535,10 +1534,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"Opcións de fondo de pantalla"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"Mostrar o fondo da pantalla de bloqueo"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"O fondo da pantalla de bloqueo pódese ver coa pantalla sempre activa"</string>
-    <!-- no translation found for doze_always_on_inactivity_detection_title (7953501407683982654) -->
-    <skip />
-    <!-- no translation found for doze_always_on_inactivity_detection_summary (3486468877414144614) -->
-    <skip />
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"Desactivar pantalla se non hai actividade"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"Para aforrar enerxía, apagarase a pantalla cando non se detecte actividade por parte do usuario"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Texto en grosa"</string>
     <string name="title_font_size" msgid="570613010306330622">"Tamaño do tipo de letra"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"Amplía ou reduce o texto"</string>
@@ -3477,6 +3474,14 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Se lle quitas os privilexios de administrador a este usuario, ti ou outro administrador poderedes devolverllos máis adiante."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Queres renunciar aos privilexios de administración?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Só os outros administradores poderán concederche privilexios de administración se continúas."</string>
+    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
+    <skip />
+    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"Información de emerxencia"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Información e contactos de: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Abrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -5378,12 +5383,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Esquerdo: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"Dereito: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Estoxo: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_left_content_description_expressive (4559978737378527361) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (2731091623137447666) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (7181469859757860775) -->
-    <skip />
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Batería, esquerdo: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Batería, dereito: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Batería, estoxo: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Batería: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batería"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel de configuración"</string>
@@ -5947,18 +5949,12 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"Esquecín o PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"Esqueciches o PIN?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"Actualizar correo electrónico de recuperación"</string>
-    <!-- no translation found for supervision_recovery_email_added (4327869201011721812) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_verified (4048919905732953058) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_updated (4409524629968027166) -->
-    <skip />
-    <!-- no translation found for supervision_pin_updated (660463938258442344) -->
-    <skip />
-    <!-- no translation found for supervision_pin_changed (4822686882868075710) -->
-    <skip />
-    <!-- no translation found for supervision_pin_deleted (368631223166018476) -->
-    <skip />
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"Engadiuse un correo electrónico de recuperación"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"Verificouse o correo electrónico de recuperación"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"Actualizouse o correo electrónico de recuperación"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"Actualizouse o PIN"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"Cambiouse o PIN"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"Eliminouse o PIN"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Eliminar PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Engadir correo electrónico de recuperación"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verificar o teu correo electrónico"</string>
@@ -6017,8 +6013,6 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for bluetooth_pairing_passkey_dialog_pairing_positive_button_text (5422642444726463520) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_pin_success_message (5476171772317649183) -->
-    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Vinculando"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Dispositivo conectado: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
 </resources>

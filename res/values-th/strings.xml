@@ -1191,7 +1191,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ใช้คิวอาร์โค้ดเพื่อเพิ่มอุปกรณ์ในเครือข่ายนี้"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"คิวอาร์โค้ดมีรูปแบบไม่ถูกต้อง"</string>
     <string name="retry" msgid="7542103800274026915">"ลองอีกครั้ง"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"แชร์กับผู้ใช้อุปกรณ์คนอื่นๆ"</string>
     <string name="shared_message" msgid="2104244057926025072">"แชร์"</string>
     <string name="private_message" msgid="5897966950396765392">"ส่วนตัว"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"ยืนยัน"</string>
@@ -1535,10 +1534,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"ตัวเลือกวอลเปเปอร์"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"แสดงวอลเปเปอร์หน้าจอล็อก"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"วอลเปเปอร์หน้าจอล็อกจะแสดงเมื่อใช้จ⁠อแ⁠ส⁠ด⁠งผ⁠ลเ⁠ปิ⁠ดต⁠ล⁠อ⁠ดเ⁠ว⁠ล⁠า"</string>
-    <!-- no translation found for doze_always_on_inactivity_detection_title (7953501407683982654) -->
-    <skip />
-    <!-- no translation found for doze_always_on_inactivity_detection_summary (3486468877414144614) -->
-    <skip />
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"ปิดจอแสดงผลเมื่อไม่มีการใช้งาน"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"ปิดจอแสดงผลเมื่อตรวจไม่พบกิจกรรมของผู้ใช้เพื่อประหยัดพลังงาน"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"ทำข้อความเป็นตัวหนา"</string>
     <string name="title_font_size" msgid="570613010306330622">"ขนาดแบบอักษร"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ทำให้ข้อความใหญ่ขึ้นหรือเล็กลง"</string>
@@ -3475,6 +3472,14 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"หากนำสิทธิ์ของผู้ดูแลระบบออกจากผู้ใช้รายนี้ คุณหรือผู้ดูแลระบบคนอื่นสามารถให้สิทธิ์ดังกล่าวอีกครั้งในภายหลังได้"</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"แน่ใจไหมว่าจะนำสิทธิ์ของผู้ดูแลระบบของคุณออก"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"มีเพียงผู้ดูแลระบบรายอื่นเท่านั้นที่จะให้สิทธิ์ของผู้ดูแลระบบแก่คุณได้ หากดำเนินการต่อ"</string>
+    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
+    <skip />
+    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"ข้อมูลสำหรับกรณีฉุกเฉิน"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"ข้อมูลและรายชื่อติดต่อสำหรับ <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"เปิด <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -5376,12 +5381,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"ซ้าย: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"ขวา: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"กล่อง: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_left_content_description_expressive (4559978737378527361) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (2731091623137447666) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (7181469859757860775) -->
-    <skip />
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"แบตเตอรี่ข้างซ้าย <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"แบตเตอรี่ข้างขวา: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"แบตเตอรี่เคส: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"แบตเตอรี่: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"แบตเตอรี่"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"แผงควบคุมการตั้งค่า"</string>
@@ -5945,18 +5947,12 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"ลืม PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"หากลืม PIN"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"อัปเดตอีเมลสำหรับการกู้คืน"</string>
-    <!-- no translation found for supervision_recovery_email_added (4327869201011721812) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_verified (4048919905732953058) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_updated (4409524629968027166) -->
-    <skip />
-    <!-- no translation found for supervision_pin_updated (660463938258442344) -->
-    <skip />
-    <!-- no translation found for supervision_pin_changed (4822686882868075710) -->
-    <skip />
-    <!-- no translation found for supervision_pin_deleted (368631223166018476) -->
-    <skip />
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"เพิ่มอีเมลสำหรับการกู้คืนแล้ว"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"ยืนยันอีเมลสำหรับการกู้คืนแล้ว"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"อัปเดตอีเมลสำหรับการกู้คืนแล้ว"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"อัปเดต PIN แล้ว"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"เปลี่ยน PIN แล้ว"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"ลบ PIN แล้ว"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"ลบ PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"เพิ่มอีเมลสำหรับการกู้คืน"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"ยืนยันอีเมล"</string>
@@ -6015,8 +6011,6 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for bluetooth_pairing_passkey_dialog_pairing_positive_button_text (5422642444726463520) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_pin_success_message (5476171772317649183) -->
-    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"กำลังจับคู่"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"เชื่อมต่อ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> แล้ว"</string>
 </resources>

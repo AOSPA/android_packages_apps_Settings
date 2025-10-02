@@ -1191,7 +1191,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ប្រើកូដ QR ដើម្បី​បញ្ចូល​ឧបករណ៍​ទៅ​បណ្តាញ​នេះ"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"កូដ QR មិនមែនជា​ទម្រង់​ដែលត្រឹមត្រូវ​ទេ"</string>
     <string name="retry" msgid="7542103800274026915">"ព្យាយាមម្ដងទៀត"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"ចែករំលែកជាមួយអ្នកប្រើឧបករណ៍ផ្សេងទៀត"</string>
     <string name="shared_message" msgid="2104244057926025072">"បានចែក​រំលែក"</string>
     <string name="private_message" msgid="5897966950396765392">"ឯកជន"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"បញ្ជាក់"</string>
@@ -1535,10 +1534,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"ជម្រើសផ្ទាំងរូបភាព"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"បង្ហាញផ្ទាំងរូបភាពអេក្រង់ចាក់សោ"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"អាចមើលឃើញផ្ទាំង​រូបភាពអេក្រង់ចាក់សោជាមួយនឹងអេក្រង់បើកជានិច្ច"</string>
-    <!-- no translation found for doze_always_on_inactivity_detection_title (7953501407683982654) -->
-    <skip />
-    <!-- no translation found for doze_always_on_inactivity_detection_summary (3486468877414144614) -->
-    <skip />
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"បិទផ្ទាំងអេក្រង់ពេលអសកម្ម"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"បិទផ្ទាំងអេក្រង់ ពេលសកម្មភាពអ្នកប្រើប្រាស់ចាប់មិនបាន ដើម្បីសន្សំសំចៃថាមពល"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"អក្សរ​ដិត"</string>
     <string name="title_font_size" msgid="570613010306330622">"ទំហំពុម្ពអក្សរ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ធ្វើឱ្យអក្សរ​ធំជាងមុន ឬ​តូចជាងមុន"</string>
@@ -3475,6 +3472,14 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"ប្រសិនបើអ្នកដកសិទ្ធិជាអ្នកគ្រប់គ្រងពីអ្នកប្រើប្រាស់នេះ អ្នកឬអ្នកគ្រប់គ្រងផ្សេងទៀតអាចផ្ដល់សិទ្ធិឱ្យគាត់វិញបាននៅពេលក្រោយ។"</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"តើអ្នកប្រាកដទេថាចង់ដកសិទ្ធិជាអ្នកគ្រប់គ្រងរបស់អ្នកផ្ទាល់ចេញ?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"មានតែអ្នកគ្រប់គ្រងផ្សេងទៀតប៉ុណ្ណោះដែលនឹងអាចផ្ដល់សិទ្ធិជាអ្នកគ្រប់គ្រងឱ្យអ្នកបាន ប្រសិនបើអ្នកបន្ត។"</string>
+    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
+    <skip />
+    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"ព័ត៌មានបន្ទាន់"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"ព័ត៌មាន និង​ទំនាក់​ទំនង​សម្រាប់ <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"បើក <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -5376,12 +5381,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"ឆ្វេង៖ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"ស្ដាំ៖ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"ស្រោមទូរសព្ទ៖ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_left_content_description_expressive (4559978737378527361) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (2731091623137447666) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (7181469859757860775) -->
-    <skip />
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"នៅសល់ថ្ម៖ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"ថ្មខាងស្ដាំ៖ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"ថ្មប្រអប់កាស៖ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"ថ្ម៖ <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ថ្ម"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"ផ្ទាំងការកំណត់"</string>
@@ -5945,18 +5947,12 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"ភ្លេចកូដ PIN"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"ភ្លេចកូដ PIN ឬ?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"ធ្វើ​បច្ចុប្បន្នភាព​អ៊ីមែលស្ដារ"</string>
-    <!-- no translation found for supervision_recovery_email_added (4327869201011721812) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_verified (4048919905732953058) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_updated (4409524629968027166) -->
-    <skip />
-    <!-- no translation found for supervision_pin_updated (660463938258442344) -->
-    <skip />
-    <!-- no translation found for supervision_pin_changed (4822686882868075710) -->
-    <skip />
-    <!-- no translation found for supervision_pin_deleted (368631223166018476) -->
-    <skip />
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"បានបញ្ចូល​អ៊ីមែលស្ដារ"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"បានផ្ទៀងផ្ទាត់​អ៊ីមែល​ស្ដារ"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"បាន​ធ្វើ​បច្ចុប្បន្នភាព​អ៊ីមែល​ស្ដារ"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"បានធ្វើបច្ចុប្បន្នភាពកូដ PIN"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"បាន​ផ្លាស់ប្ដូរ​កូដ PIN"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"បានលុបកូដ PIN"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"លុប​កូដ PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"បញ្ចូលអ៊ីមែលស្ដារ"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"ផ្ទៀងផ្ទាត់អ៊ីមែលរបស់អ្នក"</string>
@@ -6015,8 +6011,6 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for bluetooth_pairing_passkey_dialog_pairing_positive_button_text (5422642444726463520) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_pin_success_message (5476171772317649183) -->
-    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"កំពុងផ្គូផ្គង"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"បានភ្ជាប់ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
 </resources>

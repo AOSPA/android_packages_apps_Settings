@@ -1191,7 +1191,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"برای افزودن دستگاه به این شبکه، از رمزینه پاسخ‌سریع استفاده کنید"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"رمزینه پاسخ‌سریع، قالب معتبری نیست"</string>
     <string name="retry" msgid="7542103800274026915">"امتحان مجدد"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"اشتراک‌گذاری با دیگر استفاده‌کنندگان از دستگاه"</string>
     <string name="shared_message" msgid="2104244057926025072">"هم‌رسانی‌شده"</string>
     <string name="private_message" msgid="5897966950396765392">"خصوصی"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"تأیید کردن"</string>
@@ -1535,10 +1534,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"گزینه‌های کاغذدیواری"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"نمایش کاغذدیواری صفحه قفل"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"کاغذدیواری صفحه قفل در «نمایشگر همیشه روشن» نمایان است"</string>
-    <!-- no translation found for doze_always_on_inactivity_detection_title (7953501407683982654) -->
-    <skip />
-    <!-- no translation found for doze_always_on_inactivity_detection_summary (3486468877414144614) -->
-    <skip />
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"خاموش کردن نمایشگر درصورت عدم فعالیت"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"وقتی‌که کاربر فعالیتی نداشته باشد، نمایشگر را خاموش می‌کند تا در مصرف انرژی صرفه‌جویی شود"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"نوشتار پررنگ"</string>
     <string name="title_font_size" msgid="570613010306330622">"اندازه قلم"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"نوشتار را بزرگ‌تر یا کوچک‌تر می‌کند"</string>
@@ -3478,6 +3475,14 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"اگر امتیازهای سرپرست را از این کاربر بگیرید، شما یا سرپرست دیگری می‌توانید این امتیازها را بعداً دوباره به او بدهید."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"مطمئنید می‌خواهید امتیازهای سرپرست خودتان را بردارید؟"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"درصورت ادامه دادن، فقط سرپرست‌های دیگر می‌توانند امتیازهای سرپرست را به شما بدهند."</string>
+    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
+    <skip />
+    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"اطلاعات اضطراری"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"اطلاعات و مخاطبین <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"باز کردن <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -5125,7 +5130,7 @@
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"بی‌صدا"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"لرزش"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"بی‌صدا کردن"</string>
-    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"برای فعال کردن، ابتدا «فشار دادن و نگه داشتن دکمه روشن / خاموش» را به «منوی روشن/ خاموش» تغییر دهید."</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"برای فعال کردن، ابتدا «فشار دادن و نگه داشتن دکمه روشن / خاموش» را به «منو روشن/ خاموش» تغییر دهید."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"جزئیات شبکه"</string>
     <string name="devices_title" msgid="649715719278562515">"دستگاه‌ها"</string>
     <string name="choose_network_title" msgid="5355609223363859430">"انتخاب شبکه"</string>
@@ -5379,12 +5384,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"چپ: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"راست: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"قاب: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_left_content_description_expressive (4559978737378527361) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (2731091623137447666) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (7181469859757860775) -->
-    <skip />
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"باتری، چپ: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"باتری، راست: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"باتری، قاب: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"باتری: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"باتری"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"پانل تنظیمات"</string>
@@ -5483,12 +5485,12 @@
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"این انتخاب دیگر معتبر نیست. دوباره امتحان کنید."</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"دکمه روشن/خاموش را فشار دهید و نگه دارید"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"برای دسترسی، دکمه روشن/خاموش را فشار دهید و نگه دارید"</string>
-    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"منوی روشن/خاموش"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"منو روشن/خاموش"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"دستیار دیجیتالی"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"دسترسی به دستیار دیجیتالی"</string>
-    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"دسترسی به منوی روشن/خاموش"</string>
+    <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"دسترسی به منو روشن/خاموش"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"برای استفاده، نخست قفل صفحه را تنظیم کنید"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"منوی روشن/خاموش:\nدکمه روشن/خاموش و دکمه افزایش صدا را هم‌زمان فشار دهید"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"منو روشن/خاموش:\nدکمه روشن/خاموش و دکمه افزایش صدا را هم‌زمان فشار دهید"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"جلوگیری از زنگ زدن:\nدکمه صدا را برای میان‌بر فشار دهید"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"مدت فشار دادن و نگه داشتن"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"با انتخاب مدت زمان فشار دادن و نگه داشتن دکمه روشن/خاموش، میزان حساسیت را تنظیم کنید"</string>
@@ -5948,18 +5950,12 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"پین را فراموش کردم"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"پین را فراموش کرده‌اید؟"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"ایمیل بازیابی را به‌روزرسانی کنید"</string>
-    <!-- no translation found for supervision_recovery_email_added (4327869201011721812) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_verified (4048919905732953058) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_updated (4409524629968027166) -->
-    <skip />
-    <!-- no translation found for supervision_pin_updated (660463938258442344) -->
-    <skip />
-    <!-- no translation found for supervision_pin_changed (4822686882868075710) -->
-    <skip />
-    <!-- no translation found for supervision_pin_deleted (368631223166018476) -->
-    <skip />
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"ایمیل بازیابی اضافه شد"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"ایمیل بازیابی درستی‌سنجی شد"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"ایمیل بازیابی به‌روز شد"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"پین به‌روز شد"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"«پین» تغییر کرد"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"«پین» حذف شد"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"حذف پین"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"افزودن ایمیل بازیابی"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"درستی‌سنجی کردن ایمیل"</string>
@@ -6018,8 +6014,6 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for bluetooth_pairing_passkey_dialog_pairing_positive_button_text (5422642444726463520) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_pin_success_message (5476171772317649183) -->
-    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"جفت‌سازی"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g> متصل شد"</string>
 </resources>

@@ -249,12 +249,9 @@
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"हटाउनुहोस्"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"सारेर सिरानमा लैजानुहोस्"</string>
     <string name="action_label_menu_option" msgid="6881627571783854975">"सिस्टमको भाषाको सूची सम्पादन गर्नुहोस्, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
-    <!-- no translation found for keywords_region_page (7148673842253297212) -->
-    <skip />
-    <!-- no translation found for keywords_temperature_page (5447163674488205412) -->
-    <skip />
-    <!-- no translation found for keywords_measurement_system_page (403273002514842186) -->
-    <skip />
+    <string name="keywords_region_page" msgid="7148673842253297212">"देश, क्षेत्र"</string>
+    <string name="keywords_temperature_page" msgid="5447163674488205412">"मौसम, सेन्टिग्रेड, डिग्री, तापक्रम, सेल्सियस, फरेनहाइट"</string>
+    <string name="keywords_measurement_system_page" msgid="403273002514842186">"मेट्रिक, इम्पेरियल, तापक्रम, उचाइ, तौल, दूरी, सेल्सियस, फरेनहाइट, पाउन्ड, किलोग्राम, किलो, माइल, किलोमिटर, इन्च, सेन्टिमिटर, मिटर, एकाइ"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"क्षेत्रीय प्राथमिकताहरू"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"एकाइ तथा सङ्ख्यासम्बन्धी प्राथमिकताहरू तोक्नुहोस्"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"एपहरूले तपाईंलाई पर्सनलाइज गरिएका सुविधा प्रदान गर्न सकुन् भन्नाका लागि ती एपहरूलाई तपाईंका क्षेत्रीय प्राथमिकताहरू बारेमा जानकारी दिनुहोस्।"</string>
@@ -1194,7 +1191,6 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"QR कोड प्रयोग गरी यो नेटवर्कमा डिभाइस कनेक्ट गर्नुहोस्"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR कोडको ढाँचा मान्य छैन"</string>
     <string name="retry" msgid="7542103800274026915">"पुनः प्रयास गर्नु…"</string>
-    <string name="wifi_shared" msgid="8850748923537589782">"अन्य यन्त्र प्रयोगकर्ताहरूसँग सेयर गर्नुहोस्"</string>
     <string name="shared_message" msgid="2104244057926025072">"साझा"</string>
     <string name="private_message" msgid="5897966950396765392">"निजी"</string>
     <string name="wifi_conflict_dialog_confirm" msgid="4577313983128123779">"पुष्टि गर्नुहोस्"</string>
@@ -1538,10 +1534,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"वालपेपरसम्बन्धी विकल्पहरू"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"लक स्क्रिनको वालपेपर देखाउनुहोस्"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"सधैँ अन भइरहने डिस्प्ले प्रयोग गरेका बेला लक स्क्रिनको वालपेपर देखिन्छ"</string>
-    <!-- no translation found for doze_always_on_inactivity_detection_title (7953501407683982654) -->
-    <skip />
-    <!-- no translation found for doze_always_on_inactivity_detection_summary (3486468877414144614) -->
-    <skip />
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"गतिविधि नहुँदा डिस्प्ले अफ गर्नुहोस्"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"प्रयोगकर्ताको गतिविधि पत्ता नलाग्दा ब्याट्रीको चार्ज जोगाउन डिस्प्ले अफ गर्छ"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"बोल्ड टेक्स्ट"</string>
     <string name="title_font_size" msgid="570613010306330622">"फन्टको आकार"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"टेक्स्ट अझ ठुलो वा अझ सानो बनाउनुहोस्"</string>
@@ -3478,6 +3472,14 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"तपाईंले यी प्रयोगकर्तालाई दिइएका एड्मिनका विशेषाधिकारहरू हटाउनुभयो भने तपाईं वा अर्का एड्मिन उहाँलाई पछि ती विशेषाधिकारहरू फेरि दिन सक्नुहुन्छ।"</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"तपाईंले आफूसँग भएका एड्मिनका विशेषाधिकारहरू हटाउन चाहनुभएकै हो?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"तपाईंले यसो गर्नुभयो भने अरू एड्मिनहरू मात्र तपाईंलाई एड्मिनका विशेषाधिकारहरू दिन सक्ने छन्।"</string>
+    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
+    <skip />
+    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
+    <skip />
+    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
+    <skip />
     <string name="emergency_info_title" msgid="8233682750953695582">"आपत्‌कालीन सूचना"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> का बारेमा जानकारी र कन्ट्याक्टहरू"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> खोल्नुहोस्"</string>
@@ -5379,12 +5381,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"बायाँ डिभाइस: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"दायाँ डिभाइस: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"केस: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_left_content_description_expressive (4559978737378527361) -->
-    <skip />
-    <!-- no translation found for bluetooth_right_content_description_expressive (2731091623137447666) -->
-    <skip />
-    <!-- no translation found for bluetooth_middle_content_description_expressive (7181469859757860775) -->
-    <skip />
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"ब्याट्रीको चार्ज <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> बाँकी छ"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"दाहिनेपट्टिको डिभाइसको ब्याट्रीको चार्ज <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> बाँकी छ"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"केसको ब्याट्रीको चार्ज <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> बाँकी छ"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"ब्याट्री: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ब्याट्री"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"सेटिङहरू नामक प्यानल"</string>
@@ -5948,18 +5947,12 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN बिर्सेँ"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"PIN बिर्सनुभयो?"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"रिकभरी इमेल ठेगाना बदल्नुहोस्"</string>
-    <!-- no translation found for supervision_recovery_email_added (4327869201011721812) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_verified (4048919905732953058) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_email_updated (4409524629968027166) -->
-    <skip />
-    <!-- no translation found for supervision_pin_updated (660463938258442344) -->
-    <skip />
-    <!-- no translation found for supervision_pin_changed (4822686882868075710) -->
-    <skip />
-    <!-- no translation found for supervision_pin_deleted (368631223166018476) -->
-    <skip />
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"रिकभरी इमेल हालिएको छ"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"रिकभरी इमेल पुष्टि गरिएको छ"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"रिकभरी इमेल अपडेट गरिएको छ"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN अपडेट गरिएको छ"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN परिवर्तन गरिएको छ"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN मेटाइएको छ"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN मेटाउनुहोस्"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"रिकभरी इमेल ठेगाना हाल्नुहोस्"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"आफ्नो इमेल ठेगाना पुष्टि गर्नुहोस्"</string>
@@ -6018,8 +6011,6 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <!-- no translation found for bluetooth_pairing_passkey_dialog_pairing_positive_button_text (5422642444726463520) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_pin_success_message (5476171772317649183) -->
-    <skip />
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"कनेक्ट गरिँदै छ"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> कनेक्ट गरिएको छ"</string>
 </resources>
