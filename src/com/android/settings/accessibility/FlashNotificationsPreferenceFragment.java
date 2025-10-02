@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.flashnotifications.ui.FlashNotificationsScreen;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -31,7 +32,7 @@ import com.android.settingslib.search.SearchIndexable;
  * Fragment for flash notifications.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class FlashNotificationsPreferenceFragment extends BaseSupportFragment {
+public class FlashNotificationsPreferenceFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {

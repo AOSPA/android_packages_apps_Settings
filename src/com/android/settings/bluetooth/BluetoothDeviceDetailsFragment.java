@@ -69,7 +69,6 @@ import java.util.function.Consumer;
 
 public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurableFragment {
     private static final String TAG = "BTDeviceDetailsFrg";
-    private static final int METADATA_FAST_PAIR_CUSTOMIZED_FIELDS = 25;
     private static final String BLUETOOTH_ADV_AUDIO_MASK_PROP
                                                   = "persist.vendor.service.bt.adv_audio_mask";
     private static final String BLUETOOTH_BROADCAST_UI_PROP = "persist.bluetooth.broadcast_ui";

@@ -27,8 +27,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.hardware.display.DisplayManager;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
@@ -38,8 +36,6 @@ import android.view.Display;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 import androidx.test.platform.app.InstrumentationRegistry;
-
-import com.android.server.display.feature.flags.Flags;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -109,18 +105,6 @@ public class ForcePeakRefreshRatePreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
-    public void onPreferenceChange_preferenceChecked_shouldEnableForcePeak_featureFlagOff() {
-        mController.mPeakRefreshRate = 88f;
-
-        mController.onPreferenceChange(mPreference, true);
-
-        assertThat(Settings.System.getFloat(mContext.getContentResolver(),
-                Settings.System.MIN_REFRESH_RATE, NO_CONFIG)).isEqualTo(88f);
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
     public void onPreferenceChange_preferenceChecked_shouldEnableForcePeak_featureFlagOn() {
         mController.mPeakRefreshRate = 88f;
 
@@ -193,13 +177,6 @@ public class ForcePeakRefreshRatePreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
-    public void peakRefreshRate_highestOfDefaultDisplay_featureFlagOff() {
-        assertThat(mController.mPeakRefreshRate).isEqualTo(120);
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
     public void peakRefreshRate_highestOfAllDisplays_featureFlagOn() {
         assertThat(mController.mPeakRefreshRate).isEqualTo(130);
     }

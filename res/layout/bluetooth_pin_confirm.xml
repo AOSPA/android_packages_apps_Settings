@@ -148,19 +148,50 @@
                 android:visibility="gone"
                 android:text="@string/bluetooth_pairing_decline"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/positive_button_container"
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/Widget.SettingsLib.DialogButton.Outline"/>
-            <Button
-                android:id="@+id/positive_button"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/positive_button_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
                 android:visibility="gone"
-                android:text="@string/bluetooth_pairing_accept"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                style="@style/Widget.SettingsLib.DialogButton.Outline"/>
+                style="@style/Widget.SettingsLib.DialogButton.Outline">
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/positive_button_progress_bar"
+                    android:theme="@style/Theme.Material3.DynamicColors.DayNight"
+                    style="@style/Widget.Material3.CircularProgressIndicator.ExtraSmall"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:indeterminate="true"
+                    android:visibility="gone"
+                    android:text="@string/progress_scanning"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/positive_button_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/positive_button_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bluetooth_pairing_accept"
+                    android:textAppearance="@style/TextAppearance.SettingsLib.LabelLarge"
+                    android:textColor="@color/settingslib_materialColorPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/positive_button_progress_bar"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </ScrollView>

@@ -3582,6 +3582,10 @@
     <string name="doze_always_on_wallpaper_title">Show lock screen wallpaper</string>
     <!-- [CHAR LIMIT=NONE] Description for always-on display that will enable the wallpaper to be visible-->
     <string name="doze_always_on_wallpaper_description">Lock screen wallpaper is visible with always-on display</string>
+    <!-- [CHAR LIMIT=50] Title for always-on display feature that will turn off the display to save power if no user activity is detected. -->
+    <string name="doze_always_on_inactivity_detection_title">Turn off display on inactivity</string>
+    <!-- [CHAR LIMIT=NONE] Description for always-on display feature that will turn off the display to save power if no user activity is detected. -->
+    <string name="doze_always_on_inactivity_detection_summary">Powers down the display when no user activity is detected to save power</string>
     <!-- [CHAR LIMIT=30] Display and accessibility settings screens, setting option name to force bold text. -->
     <string name="force_bold_text">Bold text</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
@@ -13625,11 +13629,11 @@
     <!-- Title for middle bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_middle_name_expressive">Case: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
     <!-- Content description for left bluetooth device. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_left_content_description_expressive">Left, battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <string name="bluetooth_left_content_description_expressive">Battery, left: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
     <!-- Content description for right bluetooth device. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_right_content_description_expressive">Right, battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <string name="bluetooth_right_content_description_expressive">Battery, right: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
     <!-- Content description for middle bluetooth device. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_middle_content_description_expressive">Case, battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
+    <string name="bluetooth_middle_content_description_expressive">Battery, case: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
     <!-- Content description for main bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_main_content_description_expressive">Battery: <xliff:g id="battery_percentage" example="15">%1$s</xliff:g></string>
     <!-- Content description for battery icon in bluetooth header. [CHAR LIMIT=NONE] -->
@@ -15029,6 +15033,18 @@
     <string name="supervision_auth_prompt_forgot_pin_button_label">Forgot PIN?</string>
     <!-- Title for supervision update PIN recovery email setting entry [CHAR LIMIT=60] -->
     <string name="supervision_update_recovery_email_preference_title">Update recovery email</string>
+    <!-- Toast message for supervision recovery email added [CHAR LIMIT=NONE] -->
+    <string name="supervision_recovery_email_added">Recovery email added</string>
+    <!-- Toast message for supervision recovery email verified [CHAR LIMIT=NONE] -->
+    <string name="supervision_recovery_email_verified">Recovery email verified</string>
+    <!-- Toast message for supervision recovery email updated [CHAR LIMIT=NONE] -->
+    <string name="supervision_recovery_email_updated">Recovery email updated</string>
+    <!-- Toast message for supervision PIN reset [CHAR LIMIT=NONE] -->
+    <string name="supervision_pin_updated">PIN updated</string>
+    <!-- Toast message for supervision PIN changed [CHAR LIMIT=NONE] -->
+    <string name="supervision_pin_changed">PIN changed</string>
+    <!-- Toast message for supervision PIN deleted [CHAR LIMIT=NONE] -->
+    <string name="supervision_pin_deleted">PIN deleted</string>
     <!-- Title for supervision delete pin setting entry [CHAR LIMIT=60] -->
     <string name="supervision_delete_pin_preference_title">Delete PIN</string>
     <!-- Title for adding supervision PIN recovery setting entry [CHAR LIMIT=NONE] -->
@@ -15174,4 +15190,9 @@
     <string name="safety_center_device_finder_search_terms"></string>
     <!-- Safety Center system component update search terms [CHAR LIMIT=NONE] -->
     <string name="safety_center_system_component_update_search_terms"></string>
+
+    <!-- Positive button text for the passkey dialog to show the state when accept pairing [CHAR LIMIT=30] -->
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text">Pairing</string>
+    <!-- Content description for device is connected when doing pin pairing. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_pairing_pin_success_message"><xliff:g id="device_name">%1$s</xliff:g> connected</string>
 </resources>

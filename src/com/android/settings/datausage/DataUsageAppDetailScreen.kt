@@ -18,12 +18,11 @@ package com.android.settings.datausage
 
 import android.app.settings.SettingsEnums
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.applications.getApplicationInfo
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
@@ -56,7 +55,7 @@ open class DataUsageAppDetailScreen(context: Context, override val arguments: Bu
 
     private val packageName = arguments.getString(KEY_APP_PACKAGE_NAME)!!
 
-    private var appInfo = context.getAppInfo(packageName)
+    private var appInfo = context.getApplicationInfo(packageName)
 
     override val key: String
         get() = KEY
@@ -97,7 +96,7 @@ open class DataUsageAppDetailScreen(context: Context, override val arguments: Bu
         // observer to detect package changes (disabled/enabled/uninstall)
         val observer =
             KeyedObserver<String> { _, _ ->
-                appInfo = context.getAppInfo(packageName)
+                appInfo = context.getApplicationInfo(packageName)
                 context.notifyPreferenceChange(bindingKey)
             }
         keyedObserver = observer
@@ -113,17 +112,7 @@ open class DataUsageAppDetailScreen(context: Context, override val arguments: Bu
         }
     }
 
-    private fun Context.getAppInfo(packageName: String) =
-        try {
-            packageManager.getApplicationInfo(packageName, 0)
-        } catch (e: PackageManager.NameNotFoundException) {
-            Log.w(TAG, "App not found: $packageName", e)
-            null
-        }
-
     companion object {
-        private const val TAG = "DataUsageAppDetailScreen"
-
         const val KEY = "app_data_usage_screen"
         const val KEY_APP_PACKAGE_NAME = "app"
 

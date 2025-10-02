@@ -26,9 +26,11 @@ import static com.android.settings.connecteddevice.display.ExternalDisplaySettin
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
+import android.util.SparseArray;
 import android.view.Display.Mode;
 import android.view.View;
 import android.widget.TextView;
@@ -51,8 +53,11 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase {
     @VisibleForTesting static final int TOP_MODE_RES_MAX_COUNT = 3;
@@ -75,9 +80,11 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
     private boolean mStarted;
     // Maps a resolution preference key (e.g., "1920x1080") to its corresponding Display.Mode.
     private final Map<String, Mode> mResolutionPreferences = new HashMap<>();
+    private final SparseArray<Mode> mAvailableModes = new SparseArray<>();
     private int mExternalDisplayPeakWidth;
     private int mExternalDisplayPeakHeight;
     private int mExternalDisplayPeakRefreshRate;
+    private final Set<Point> mExternDisplayResolutionShown = new HashSet<>();
     private boolean mRefreshRateSynchronizationEnabled;
     private boolean mMoreOptionsExpanded;
     private final Runnable mUpdateRunnable = this::update;
@@ -179,6 +186,10 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
                 Comparator.comparingInt(Mode::getPhysicalWidth)
                         .thenComparingInt(Mode::getPhysicalHeight)
                         .reversed());
+        mAvailableModes.clear();
+        for (Mode mode : supportedModes) {
+            mAvailableModes.put(mode.getModeId(), mode);
+        }
 
         var remainingModes =
                 addModePreferences(
@@ -315,6 +326,21 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             Log.d(TAG, mode + " refresh rate is above the allowed limit");
             return false;
         }
+
+        // If mode filtering is enabled.
+        if (!mExternDisplayResolutionShown.isEmpty()) {
+            Mode m;
+            // If this is an anisotropic mode, check the base mode is supported.
+            if ((mode.getFlags() & Mode.FLAG_ANISOTROPY_CORRECTION) != 0) {
+                m = mAvailableModes.get(mode.getParentModeId());
+            } else {
+                m = mode;
+            }
+            if (m != null) {
+                return mExternDisplayResolutionShown.contains(
+                        new Point(m.getPhysicalWidth(), m.getPhysicalHeight()));
+            }
+        }
         return true;
     }
 
@@ -419,10 +445,24 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
                         .getBoolean(
                                 com.android.internal.R.bool
                                         .config_refreshRateSynchronizationEnabled);
+        int[] resolutionsArray =
+                getResources(context)
+                        .getIntArray(R.array.config_resolutionsShownOnExternalDisplay);
+        mExternDisplayResolutionShown.clear();
+        if (resolutionsArray != null) {
+            for (int i = 0; i < resolutionsArray.length; i += 2) {
+                if (i + 1 < resolutionsArray.length) {
+                    mExternDisplayResolutionShown.add(
+                            new Point(resolutionsArray[i], resolutionsArray[i + 1]));
+                }
+            }
+        }
         Log.d(TAG, "mExternalDisplayPeakRefreshRate=" + mExternalDisplayPeakRefreshRate);
         Log.d(TAG, "mExternalDisplayPeakWidth=" + mExternalDisplayPeakWidth);
         Log.d(TAG, "mExternalDisplayPeakHeight=" + mExternalDisplayPeakHeight);
         Log.d(TAG, "mRefreshRateSynchronizationEnabled=" + mRefreshRateSynchronizationEnabled);
+        Log.d(TAG, "mExternDisplayResolutionShown=" + mExternDisplayResolutionShown.stream().map(
+                p -> p.x + "x" + p.y).collect(Collectors.joining(", ")));
     }
 
     private @Nullable Mode getSelectedMode() {

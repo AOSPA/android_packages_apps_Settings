@@ -28,8 +28,8 @@ import androidx.annotation.Nullable;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
-import com.android.settings.accessibility.BaseSupportFragment;
 import com.android.settings.accessibility.ToggleShortcutPreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.IllustrationPreference;
@@ -39,7 +39,7 @@ import com.android.settingslib.widget.MainSwitchPreference;
  * Fragment for One-handed mode settings
  */
 @SearchIndexable(forTarget = SearchIndexable.MOBILE)
-public class OneHandedSettings extends BaseSupportFragment {
+public class OneHandedSettings extends DashboardFragment {
 
     private static final String TAG = "OneHandedSettings";
     private static final String ONE_HANDED_ILLUSTRATION_KEY = "one_handed_header";

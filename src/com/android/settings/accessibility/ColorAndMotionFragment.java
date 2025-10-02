@@ -22,9 +22,11 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.settings.dashboard.DashboardFragment;
+
 // TODO(b/445978289): Use CatalystFragment
 /** Accessibility settings for color and motion. */
-public class ColorAndMotionFragment extends BaseSupportFragment {
+public class ColorAndMotionFragment extends DashboardFragment {
 
     private static final String TAG = "ColorAndMotionFragment";
 

@@ -30,8 +30,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
@@ -54,7 +54,6 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
 
     private static final String TAG = "BluetoothSpatialAudioController";
     private static final String KEY_SPATIAL_AUDIO_GROUP = "spatial_audio_group";
-    private static final String KEY_PROFILES_GROUP = "bluetooth_profiles";
     private static final String KEY_SPATIAL_AUDIO = "spatial_audio";
     private static final String KEY_HEAD_TRACKING = "head_tracking";
 
@@ -62,7 +61,7 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
     private final Spatializer mSpatializer;
 
     @VisibleForTesting
-    PreferenceCategory mProfilesContainer;
+    PreferenceGroup mProfilesContainer;
     @VisibleForTesting @Nullable AudioDeviceAttributes mAudioDevice = null;
 
     AtomicBoolean mHasHeadTracker = new AtomicBoolean(false);
@@ -137,23 +136,12 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
 
     @Override
     public String getPreferenceKey() {
-        if (com.android.settings.flags.Flags.enableBluetoothSettingsExpressiveDesignReadOnly()) {
-            return KEY_PROFILES_GROUP;
-        } else {
-            return KEY_SPATIAL_AUDIO_GROUP;
-        }
+        return KEY_SPATIAL_AUDIO_GROUP;
     }
 
     @Override
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = screen.findPreference(getPreferenceKey());
-        if (com.android.settings.flags.Flags.enableBluetoothSettingsExpressiveDesignReadOnly()) {
-            mProfilesContainer.setLayoutResource(
-                    com.android.settingslib.widget.category.R.layout
-                            .settingslib_expressive_untitled_preference_category);
-        } else {
-            mProfilesContainer.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
-        }
         refresh();
     }
 
@@ -240,7 +228,6 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         pref.setTitle(context.getString(R.string.bluetooth_details_spatial_audio_title));
         pref.setSummary(context.getString(R.string.bluetooth_details_spatial_audio_summary));
         pref.setOnPreferenceClickListener(this);
-        pref.setOrder(-2);
         return pref;
     }
 
@@ -251,7 +238,6 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         pref.setTitle(context.getString(R.string.bluetooth_details_head_tracking_title));
         pref.setSummary(context.getString(R.string.bluetooth_details_head_tracking_summary));
         pref.setOnPreferenceClickListener(this);
-        pref.setOrder(-1);
         return pref;
     }
 

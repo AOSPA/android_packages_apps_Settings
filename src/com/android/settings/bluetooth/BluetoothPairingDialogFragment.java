@@ -36,10 +36,13 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.flags.Flags;
+
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 /**
  * A dialogFragment used by {@link BluetoothPairingDialog} to create an appropriately styled dialog
@@ -121,6 +124,18 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
     protected void onDeclineButtonClicked() {
         mPairingController.onDialogNegativeClick(this);
         mPairingDialogActivity.dismiss();
+    }
+
+    protected void onPassKeyOrPinDialogAcceptButtonClicked(View view) {
+        CircularProgressIndicator progressBar =
+                view.findViewById(R.id.positive_button_progress_bar);
+        TextView positiveText = view.findViewById(R.id.positive_button_text);
+        progressBar.setVisibility(View.VISIBLE);
+        positiveText
+                .setText(R.string.bluetooth_pairing_passkey_dialog_pairing_positive_button_text);
+
+        // Tell the controller the dialog has been created.
+        mPairingController.notifyDialogDisplayed();
     }
 
     @Override
@@ -328,8 +343,10 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         mBuilder.setView(createView());
         AlertDialog dialog = mBuilder.create();
 
-        // Tell the controller the dialog has been created.
-        mPairingController.notifyDialogDisplayed();
+        if (!Flags.addProgressBarToThePositiveButtonInPasskeyOrPingDialog()) {
+            // Tell the controller the dialog has been created.
+            mPairingController.notifyDialogDisplayed();
+        }
 
         return dialog;
     }
@@ -381,9 +398,17 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         negativeButton.setVisibility(View.VISIBLE);
         negativeButton.setOnClickListener(v -> onDeclineButtonClicked());
         if (mPairingController.getDialogType() == BluetoothPairingController.CONFIRMATION_DIALOG) {
-            Button positiveButton = view.findViewById(R.id.positive_button);
-            positiveButton.setVisibility(View.VISIBLE);
-            positiveButton.setOnClickListener(v -> onAcceptButtonClicked());
+            ConstraintLayout positiveContainer = view.findViewById(R.id.positive_button_container);
+            positiveContainer.setVisibility(View.VISIBLE);
+            positiveContainer.setOnClickListener(v -> onAcceptButtonClicked());
+        } else if (mPairingController.getDialogType()
+                == BluetoothPairingController.DISPLAY_PASSKEY_DIALOG
+                && Flags.addProgressBarToThePositiveButtonInPasskeyOrPingDialog()) {
+            ConstraintLayout positiveContainer = view.findViewById(R.id.positive_button_container);
+            positiveContainer.setVisibility(View.VISIBLE);
+            positiveContainer.setOnClickListener(
+                    v -> onPassKeyOrPinDialogAcceptButtonClicked(view)
+            );
         }
 
         return view;

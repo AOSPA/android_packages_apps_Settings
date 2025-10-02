@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony.satellite;
 
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC;
+import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
 import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
@@ -184,6 +185,97 @@ public class SatelliteSettingFooterControllerTest {
         assertThat(
                 summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
                         "satellite_footer_content_section_6"))).isFalse();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_7", TEST_OPERATOR_NAME))).isTrue();
+    }
+
+    @Test
+    public void displayPreferenceScreen_manualTypeAndHasEntitlement() {
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_MANUAL);
+        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
+
+        PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
+        when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
+        screen.addPreference(mFooterPreference);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+
+        mController.displayPreference(screen);
+
+        ArgumentCaptor<CharSequence> summary = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mFooterPreference).setSummary(summary.capture());
+
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_5"))).isFalse();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_6"))).isFalse();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_7", TEST_OPERATOR_NAME))).isTrue();
+    }
+
+    @Test
+    public void displayPreferenceScreen_hybridTypeAndEligible() {
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_HYBRID);
+        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
+
+        PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
+        when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
+        screen.addPreference(mFooterPreference);
+        mController = new SatelliteSettingFooterController(mContext,
+                KEY_FOOTER_PREFERENCE) {
+            @Override
+            protected boolean isSatelliteEligible() {
+                return true;
+            }
+        };
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, true, 0);
+
+        mController.displayPreference(screen);
+
+        ArgumentCaptor<CharSequence> summary = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mFooterPreference).setSummary(summary.capture());
+
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_5"))).isTrue();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_7", TEST_OPERATOR_NAME))).isTrue();
+    }
+
+    @Test
+    public void displayPreferenceScreen_hybridTypeAndIneligible() {
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_HYBRID);
+        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
+
+        PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
+        when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
+        screen.addPreference(mFooterPreference);
+        mController = new SatelliteSettingFooterController(mContext,
+                KEY_FOOTER_PREFERENCE) {
+            @Override
+            protected boolean isSatelliteEligible() {
+                return false;
+            }
+        };
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, true, 0);
+
+        mController.displayPreference(screen);
+
+        ArgumentCaptor<CharSequence> summary = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mFooterPreference).setSummary(summary.capture());
+
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_5"))).isFalse();
         assertThat(
                 summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
                         "satellite_footer_content_section_7", TEST_OPERATOR_NAME))).isTrue();
