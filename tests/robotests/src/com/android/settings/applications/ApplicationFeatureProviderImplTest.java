@@ -38,9 +38,13 @@ import android.os.Build;
 import android.os.SystemConfigManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.telecom.TelecomManager;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
 import com.android.settingslib.testutils.shadow.ShadowDefaultDialerManager;
@@ -111,6 +115,8 @@ public final class ApplicationFeatureProviderImplTest {
     private WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
     @Mock
     private SystemConfigManager mSystemConfigManager;
+    @Mock
+    private TelecomManager mTelecomManager;
 
     private ApplicationFeatureProvider mProvider;
 
@@ -124,6 +130,7 @@ public final class ApplicationFeatureProviderImplTest {
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
         when(mContext.getSystemService(SystemConfigManager.class)).thenReturn(mSystemConfigManager);
+        when(mContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
 
         mProvider = new ApplicationFeatureProviderImpl(mContext, mPackageManager,
                 mPackageManagerService, mDevicePolicyManager, mWebViewUpdateServiceWrapper);
@@ -408,6 +415,32 @@ public final class ApplicationFeatureProviderImplTest {
         final Set<String> keepEnabledPackages = mProvider.getKeepEnabledPackages();
 
         assertThat(keepEnabledPackages).containsAtLeastElementsIn(PREVENT_USER_DISABLE_PACKAGES);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_KEEP_SYSTEM_DIALER_ENABLED)
+    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    public void getKeepEnabledPackages_shouldContainSystemDialer() {
+        final String testSystemDialer = "com.android.test.systemdialer";
+
+        when(mTelecomManager.getSystemDialerPackage()).thenReturn(testSystemDialer);
+
+        final Set<String> keepEnabledPackages = mProvider.getKeepEnabledPackages();
+
+        assertThat(keepEnabledPackages).contains(testSystemDialer);
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_KEEP_SYSTEM_DIALER_ENABLED)
+    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
+    public void getKeepEnabledPackages_shouldNotContainSystemDialerWhenFlagIsDisabled() {
+        final String testSystemDialer = "com.android.test.systemdialer";
+
+        when(mTelecomManager.getSystemDialerPackage()).thenReturn(testSystemDialer);
+
+        final Set<String> keepEnabledPackages = mProvider.getKeepEnabledPackages();
+
+        assertThat(keepEnabledPackages).doesNotContain(testSystemDialer);
     }
 
     private void setUpUsersAndInstalledApps() {
