@@ -31,6 +31,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
@@ -56,7 +58,7 @@ class WifiSwitchPreferenceTest {
                 }
         }
 
-    private val wifiSwitchPreference = WifiSwitchPreference()
+    private val wifiSwitchPreference = WifiSwitchPreference(TestScope(StandardTestDispatcher()))
 
     @Test
     fun getValue_defaultOn_returnOn() {
