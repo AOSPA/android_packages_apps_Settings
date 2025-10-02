@@ -17,7 +17,6 @@
 package com.android.settings.accessibility.shortcuts.ui
 
 import android.app.settings.SettingsEnums
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -32,8 +31,8 @@ import com.android.internal.accessibility.AccessibilityShortcutController.ONE_HA
 import com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
-import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
-import com.android.settings.accessibility.extensions.getFeatureName
+import com.android.settings.accessibility.shared.utils.getA11yActivityFeatureName
+import com.android.settings.accessibility.shared.utils.getA11yServiceFeatureName
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -77,11 +76,8 @@ open class EditShortcutsScreen(context: Context, override val arguments: Bundle)
         context: Context,
         a11yServiceComponentName: String,
     ): CharSequence? {
-        val a11yService = ComponentName.unflattenFromString(a11yServiceComponentName) ?: return null
         val a11yServiceLabel =
-            AccessibilityRepositoryProvider.get(context)
-                .getAccessibilityServiceInfo(a11yService)
-                ?.getFeatureName(context) ?: return null
+            getA11yServiceFeatureName(context, a11yServiceComponentName) ?: return null
         return context.getString(R.string.accessibility_shortcut_title, a11yServiceLabel)
     }
 
@@ -89,13 +85,8 @@ open class EditShortcutsScreen(context: Context, override val arguments: Bundle)
         context: Context,
         a11yActivityComponentName: String,
     ): CharSequence? {
-        val a11yActivity =
-            ComponentName.unflattenFromString(a11yActivityComponentName) ?: return null
         val a11yActivityLabel =
-            AccessibilityRepositoryProvider.get(context)
-                .getAccessibilityShortcutInfo(a11yActivity)
-                ?.activityInfo
-                ?.loadLabel(context.packageManager) ?: return null
+            getA11yActivityFeatureName(context, a11yActivityComponentName) ?: return null
         return context.getString(R.string.accessibility_shortcut_title, a11yActivityLabel)
     }
 
@@ -113,7 +104,10 @@ open class EditShortcutsScreen(context: Context, override val arguments: Bundle)
     }
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) { if (shortcutTargets.isEmpty()) return@preferenceHierarchy }
+        preferenceHierarchy(context) {
+            if (shortcutTargets.isEmpty()) return@preferenceHierarchy
+            +IntroPreference(shortcutTargets)
+        }
 
     override fun getMetricsCategory(): Int {
         return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_EDIT_SHORTCUT
