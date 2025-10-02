@@ -90,3 +90,10 @@ flag {
   description: "Hide phonebook access permission toggle for wearables when pairing."
   bug: "425848384"
 }
+
+flag {
+  name: "add_progress_bar_to_the_positive_button_in_passkey_or_ping_dialog"
+  namespace: "cross_device_experiences"
+  description: "Add a progress bar to the positive button in the passkey or PIN dialog"
+  bug: "347270238"
+}

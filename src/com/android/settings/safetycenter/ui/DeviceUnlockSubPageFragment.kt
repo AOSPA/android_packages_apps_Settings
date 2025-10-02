@@ -62,6 +62,7 @@ class DeviceUnlockSubPageFragment : DashboardFragment() {
         for (controller in allControllers) {
             if (controller is SafetySourcePreferenceController) {
                 controller.setViewModelAndLifecycle(viewModel, owner)
+                controller.setActivityTaskId(requireActivity().taskId)
             }
         }
     }

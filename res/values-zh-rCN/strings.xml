@@ -248,7 +248,12 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"下移"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"移除"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"移至顶部"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <string name="action_label_menu_option" msgid="6881627571783854975">"修改系统语言列表，<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <!-- no translation found for keywords_region_page (7148673842253297212) -->
+    <skip />
+    <!-- no translation found for keywords_temperature_page (5447163674488205412) -->
+    <skip />
+    <!-- no translation found for keywords_measurement_system_page (403273002514842186) -->
     <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"地区偏好设置"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"设置单位和数字偏好设置"</string>
@@ -989,7 +994,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"可连接的蓝牙音频设备的数量上限"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"选择已连接蓝牙音频设备的数量上限"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC 详细供应商调试日志"</string>
-    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"在 bug 报告中纳入更多的设备专属供应商日志，其中可能包含私密信息。"</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"在错误报告中纳入更多的设备专属供应商日志，其中可能包含私密信息。"</string>
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"未经过滤的 NFC NCI 日志"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"捕获 NFC 详情数据包，其中可能包含私密信息。"</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"要重启设备吗？"</string>
@@ -1533,6 +1538,10 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"壁纸选项"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"显示锁屏壁纸"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"使用“屏幕常亮”功能时，显示锁屏壁纸"</string>
+    <!-- no translation found for doze_always_on_inactivity_detection_title (7953501407683982654) -->
+    <skip />
+    <!-- no translation found for doze_always_on_inactivity_detection_summary (3486468877414144614) -->
+    <skip />
     <string name="force_bold_text" msgid="4620929631102086716">"粗体文字"</string>
     <string name="title_font_size" msgid="570613010306330622">"字体大小"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"放大或缩小文字"</string>
@@ -5484,8 +5493,8 @@
     <string name="stop_app_dlg_text" msgid="4373849065005318901">"应用将被停止应用页面大小兼容设置。"</string>
     <string name="error_pending_updates" msgid="7196832772265874760">"内核更新失败。检查并安装所有待安装的更新。"</string>
     <string name="error_ota_failed" msgid="4762376085470989653">"内核更新失败。应用 OTA 时出错了。"</string>
-    <string name="bug_report_handler_title" msgid="713439959113250125">"Bug 报告处理程序"</string>
-    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"确定要使用哪款应用来处理设备上的 Bug 报告快捷方式。"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"错误报告处理程序"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"确定要使用哪款应用来处理设备上的错误报告快捷方式。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"个人"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"工作"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"系统默认"</string>
@@ -5963,10 +5972,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"添加辅助邮箱"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"验证您的邮箱"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"应用商店过滤条件"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"根据应用内容的分级过滤应用"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"每个应用可能会屏蔽不同类型的内容。未列出的应用商店必须单独管理。"</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"网站内容过滤器"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"网站过滤器, 屏蔽网站, 浏览器过滤器, 屏蔽含露骨内容的网站, 过滤网站, 屏蔽搜索结果, 过滤含露骨内容的搜索结果, 内容限制, Website filters, Block sites, Browser filters, Block explicit sites, Filter sites, Block search results, Filter explicit search results, content restrictions"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"帮助滤除此手机上某些应用和浏览器中的露骨内容。其他应用、设备或浏览器中仍可能会显示此类内容。"</string>

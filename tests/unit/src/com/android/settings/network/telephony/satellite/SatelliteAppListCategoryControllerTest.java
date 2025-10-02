@@ -16,6 +16,7 @@
 
 package com.android.settings.network.telephony.satellite;
 
+import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
 import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
@@ -23,6 +24,7 @@ import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ALL;
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED;
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
 
+import static com.android.internal.telephony.flags.Flags.FLAG_VZW_AST_SKYLO_FALLBACK;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.network.telephony.satellite.SatelliteAppListCategoryController.MAXIMUM_OF_PREFERENCE_AMOUNT;
@@ -40,6 +42,7 @@ import android.content.pm.PackageManager;
 import android.os.Looper;
 import android.os.PersistableBundle;
 import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
@@ -60,6 +63,8 @@ import java.util.List;
 public class SatelliteAppListCategoryControllerTest {
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final int TEST_SUB_ID = 0;
     private static final List<String> PACKAGE_NAMES = List.of("com.android.settings",
@@ -83,6 +88,44 @@ public class SatelliteAppListCategoryControllerTest {
         mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
                 CARRIER_ROAMING_NTN_CONNECT_MANUAL);
         mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false);
+    }
+
+    @Test
+    public void testSatelliteEligibility_ManualConnect_withSmsAvailable() {
+        mController = new SatelliteAppListCategoryController(mContext, KEY);
+
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_MANUAL);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, false, -1);
+
+        assertThat(mController.isSatelliteEligible()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(FLAG_VZW_AST_SKYLO_FALLBACK)
+    public void testSatelliteEligibility_HybridConnect_isEligibleBySmsCapability() {
+        boolean isSmsAvailable = true;
+        mController = new SatelliteAppListCategoryController(mContext, KEY);
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_HYBRID);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(isSmsAvailable, false, -1);
+
+        assertThat(mController.isSatelliteEligible()).isEqualTo(isSmsAvailable);
+    }
+
+    @Test
+    @EnableFlags(FLAG_VZW_AST_SKYLO_FALLBACK)
+    public void testSatelliteEligibility_HybridConnect_withSmsUnavailable() {
+        boolean isSmsAvailable = false;
+        mController = new SatelliteAppListCategoryController(mContext, KEY);
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_HYBRID);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(isSmsAvailable, false, -1);
+
+        assertThat(mController.isSatelliteEligible()).isEqualTo(isSmsAvailable);
     }
 
     @Test

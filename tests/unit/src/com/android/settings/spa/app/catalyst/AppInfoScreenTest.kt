@@ -1,0 +1,52 @@
+/*
+ * Copyright (C) 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law_ of this software and
+ * limitations under the License.
+ */
+
+package com.android.settings.spa.app.catalyst
+
+import android.content.Context
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.os.Bundle
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.google.common.truth.Truth.assertThat
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.doThrow
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.stub
+
+@RunWith(AndroidJUnit4::class)
+class AppInfoScreenTest {
+    private val packageManager: PackageManager = mock()
+    private val context: Context = mock { on { packageManager } doReturn packageManager }
+
+    @Test
+    fun isAvailable_whenAppInfoIsNull_returnsFalse() {
+        packageManager.stub {
+            on { getApplicationInfo("app.not.found", 0) } doThrow
+                PackageManager.NameNotFoundException()
+        }
+        val screen = AppInfoScreen(context, Bundle().apply { putString("pkg", "app.not.found") })
+
+        assertThat(screen.isAvailable(context)).isFalse()
+    }
+
+    @Test
+    fun isAvailable_whenAppInfoIsNotNull_returnsTrue() {
+        packageManager.stub { on { getApplicationInfo("app.found", 0) } doReturn ApplicationInfo() }
+        val screen = AppInfoScreen(context, Bundle().apply { putString("pkg", "app.found") })
+
+        assertThat(screen.isAvailable(context)).isTrue()
+    }
+}

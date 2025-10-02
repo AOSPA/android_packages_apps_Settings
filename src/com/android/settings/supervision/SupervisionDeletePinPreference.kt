@@ -19,10 +19,12 @@ import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_DELETE_PIN
 import android.app.settings.SettingsEnums.SUPERVISION_MANAGE_PIN_SCREEN
 import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
 import android.os.UserManager
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
@@ -146,9 +148,17 @@ class SupervisionDeletePinPreference() :
         confirmPinLauncher.launch(intent)
     }
 
-    private fun onPinConfirmed(resultCode: Int) {
+    fun onPinConfirmed(resultCode: Int) {
         if (resultCode == Activity.RESULT_OK) {
             if (lifeCycleContext.deleteSupervisionData()) {
+                if (Flags.enableSupervisionPinSnackbarsToastMessage()) {
+                    Toast.makeText(
+                            lifeCycleContext,
+                            lifeCycleContext.getString(R.string.supervision_pin_deleted),
+                            Toast.LENGTH_SHORT,
+                        )
+                        .show()
+                }
                 lifeCycleContext.notifyPreferenceChange(KEY)
                 FeatureFactory.featureFactory.metricsFeatureProvider.action(
                     lifeCycleContext,

@@ -21,6 +21,7 @@ import android.content.Context
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
@@ -29,9 +30,10 @@ class SupervisionAppStoreFiltersActivity :
     CatalystSettingsActivity(SupervisionAppStoreFiltersScreen.KEY)
 
 @ProvidePreferenceScreen(SupervisionAppStoreFiltersScreen.KEY)
-open class SupervisionAppStoreFiltersScreen : PreferenceScreenMixin {
+open class SupervisionAppStoreFiltersScreen :
+    PreferenceScreenMixin, PreferenceAvailabilityProvider {
 
-    override fun isFlagEnabled(context: Context) = Flags.enableAppStoreFiltersScreen()
+    override fun isAvailable(context: Context) = Flags.enableAppStoreFiltersScreen()
 
     override val key: String
         get() = KEY

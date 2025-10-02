@@ -23,6 +23,7 @@ import android.os.SystemProperties
 import android.os.UserHandle
 import android.os.UserManager
 import androidx.fragment.app.Fragment
+import com.android.internal.R.bool.config_dozeSupportsAodInactivityDetection
 import com.android.internal.R.bool.config_dozeSupportsAodWallpaper
 import com.android.settings.CatalystFragment
 import com.android.settings.CatalystSettingsActivity
@@ -34,6 +35,7 @@ import com.android.settings.display.ambient.AmbientDisplayIllustration
 import com.android.settings.display.ambient.AmbientDisplayMainSwitchPreference
 import com.android.settings.display.ambient.AmbientDisplayStorage
 import com.android.settings.display.ambient.AmbientDisplayTopIntroPreference
+import com.android.settings.display.ambient.AmbientInactivityDetectionPreference
 import com.android.settings.display.ambient.AmbientWallpaperPreference
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.restriction.PreferenceRestrictionMixin
@@ -54,6 +56,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.systemui.shared.Flags.aodInactivityDetection
 import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
@@ -151,6 +154,9 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
             +AmbientDisplayTopIntroPreference()
             +AmbientDisplayIllustration(context)
             +AmbientDisplayMainSwitchPreference()
+            if (context.isAmbientInactivityDetectionAvailable) {
+                +AmbientInactivityDetectionPreference(context)
+            }
             if (context.isAmbientWallpaperOptionsAvailable) {
                 +Category("ambient_wallpaperGroup", R.string.doze_always_on_wallpaper_options) += {
                     +ambientWallpaperPreference
@@ -179,8 +185,14 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
 
         private val Context.isAmbientWallpaperOptionsAvailable: Boolean
             get() = resources.getBoolean(config_dozeSupportsAodWallpaper)
+
+        private val Context.isAmbientInactivityDetectionAvailable: Boolean
+            get() =
+                aodInactivityDetection() &&
+                    resources.getBoolean(config_dozeSupportsAodInactivityDetection)
     }
 }
+
 // LINT.ThenChange(AmbientDisplayAlwaysOnPreferenceScreenController.java)
 
 class AmbientDisplayAlwaysOnActivity :

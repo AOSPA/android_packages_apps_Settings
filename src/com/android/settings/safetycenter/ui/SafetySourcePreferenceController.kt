@@ -48,6 +48,7 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
     private var preference: SafetySourcePreference? = null
     private val userManager: UserManager = mContext.getSystemService(UserManager::class.java)!!
     private var viewModel: LiveSafetyCenterViewModel? = null
+    private var activityTaskId: Int? = null
     private lateinit var safetySourceId: String
     private var profileType: SafetySourcePreference.Profile =
         SafetySourcePreference.Profile.PERSONAL
@@ -68,6 +69,15 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
             }
             preference?.let { updatePreferenceUi(it, data) }
         }
+    }
+
+    /**
+     * Sets the task ID of the hosting Activity.
+     *
+     * @param taskId The task ID of the hosting Activity.
+     */
+    fun setActivityTaskId(taskId: Int) {
+        this.activityTaskId = taskId
     }
 
     override fun getAvailabilityStatus(): Int {
@@ -98,7 +108,7 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
             return
         }
 
-        val entry = data.getEntry(targetUserHandle.identifier, safetySourceId!!)
+        val entry = data.getEntry(targetUserHandle.identifier, safetySourceId)
         if (entry == null) {
             Log.d(
                 TAG,
@@ -111,6 +121,14 @@ class SafetySourcePreferenceController(context: Context, preferenceKey: String) 
         preference.title = entry.title
         preference.summary = entry.summary
         preference.isVisible = true
+        preference.setOnPreferenceClickListener {
+            PendingIntentSender.sendIntent(
+                mContext,
+                entry.pendingIntent,
+                safetySourceId,
+                activityTaskId,
+            )
+        }
     }
 
     override fun updateState(preference: Preference) {

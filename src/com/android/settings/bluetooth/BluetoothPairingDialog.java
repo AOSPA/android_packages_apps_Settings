@@ -24,12 +24,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 /**
@@ -53,6 +55,16 @@ public class BluetoothPairingDialog extends FragmentActivity {
             if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
                 int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
                         BluetoothDevice.ERROR);
+                if (Flags.addProgressBarToThePositiveButtonInPasskeyOrPingDialog()
+                        && bondState == BluetoothDevice.BOND_BONDED
+                        && mBluetoothPairingController.getDialogType()
+                        == BluetoothPairingController.DISPLAY_PASSKEY_DIALOG) {
+                    Toast.makeText(
+                            context, context.getString(
+                                    R.string.bluetooth_pairing_pin_success_message,
+                                    mBluetoothPairingController.getDeviceName()),
+                            Toast.LENGTH_SHORT).show();
+                }
                 if (bondState == BluetoothDevice.BOND_BONDED ||
                         bondState == BluetoothDevice.BOND_NONE) {
                     dismiss();
@@ -65,6 +77,22 @@ public class BluetoothPairingDialog extends FragmentActivity {
             }
         }
     };
+
+    /**
+     * Used in testing to get a BroadcastReceiver in dialog.
+     *
+     * @return - The BroadcastReceiver of current dialog
+     */
+    protected BroadcastReceiver getBroadcastReceiver() {
+        return mReceiver;
+    }
+
+    /**
+     * Used in testing to set a BluetoothPairingController in dialog.
+     */
+    protected void setPairingController(BluetoothPairingController pairingController) {
+        mBluetoothPairingController = pairingController;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

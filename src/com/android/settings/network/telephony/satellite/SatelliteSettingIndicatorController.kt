@@ -18,12 +18,14 @@ package com.android.settings.network.telephony.satellite
 import android.content.Context
 import android.os.PersistableBundle
 import android.telephony.CarrierConfigManager
+import android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL
 import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED
 import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceScreen
+import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
 import com.android.settings.network.telephony.TelephonyBasePreferenceController
 
@@ -113,13 +115,30 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
                     CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
                 )
 
+    private val isCarrierRoamingNtnConnectedTypeHybrid: Boolean
+        get() =
+            Flags.vzwAstSkyloFallback() &&
+                CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID ==
+                    mCarrierConfigs.getInt(
+                        CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                        CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+                    )
+
     private fun isSatelliteEligible(): Boolean {
-        if (
-            mCarrierConfigs.getInt(CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT) ==
-                CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
-        ) {
+        if (isCarrierRoamingNtnConnectedTypeManual) {
             return mIsSmsAvailable
         }
+
+        if (isCarrierRoamingNtnConnectedTypeHybrid) {
+            if (mCarrierConfigs.getBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false)) {
+                if (SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)) {
+                    return true
+                } else {
+                    return mIsSmsAvailable
+                }
+            }
+        }
+
         return SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)
     }
 

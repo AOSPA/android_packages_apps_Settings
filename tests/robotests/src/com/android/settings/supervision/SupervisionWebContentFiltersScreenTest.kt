@@ -38,6 +38,7 @@ import android.provider.Settings.Global
 import android.text.Spanned
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.preference.Preference
 import androidx.preference.PreferenceGroup
@@ -78,6 +79,7 @@ class SupervisionWebContentFiltersScreenTest {
     private val supervisionWebContentFiltersScreen = SupervisionWebContentFiltersScreen()
     private val mockRoleManager = mock<RoleManager>()
     private val mockSupervisionManager = mock<SupervisionManager>()
+    private val iconDrawable: ColorDrawable = ColorDrawable(Color.RED)
 
     @get:Rule(order = 0) val setFlagsRule = SetFlagsRule()
     @get:Rule(order = 1) val settingsStoreRule = SettingsStoreRule()
@@ -99,7 +101,7 @@ class SupervisionWebContentFiltersScreenTest {
                 this.applicationInfo = ApplicationInfo().apply { packageName = appPackageName }
             }
         )
-        shadowPackageManager.setApplicationIcon(appPackageName, ColorDrawable(Color.RED))
+        shadowPackageManager.setApplicationIcon(appPackageName, iconDrawable)
         val intentFilter =
             IntentFilter("android.app.supervision.action.CONFIRM_SUPERVISION_CREDENTIALS")
         val componentName =
@@ -299,6 +301,83 @@ class SupervisionWebContentFiltersScreenTest {
 
             assertThat(supportedApp.title).isEqualTo("Supported app")
             assertThat(supportedApp.summary).isEqualTo("App summary")
+        }
+    }
+
+    @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun browserSupportedAppsEntryTitle() {
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val title =
+                StringUtil.getIcuPluralsString(
+                    context,
+                    1,
+                    R.string.supervision_web_content_filters_switch_summary,
+                )
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+
+            val preference =
+                fragment.findPreference<Preference>(
+                    SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY
+                )
+            assertThat(preference?.title).isEqualTo(title)
+        }
+    }
+
+    @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun browserSupportedAppsEntryIcon() {
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+
+            val preference =
+                fragment.findPreference<Preference>(
+                    SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY
+                )!!
+
+            // ensure the browser preference is visible
+            val recyclerView = fragment.listView
+            val adapter = recyclerView.adapter as PreferenceGroupAdapter
+            val position = adapter.getPreferenceAdapterPosition(preference)
+            recyclerView.scrollToPosition(position)
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+            val viewHolder = recyclerView.findViewHolderForAdapterPosition(position)!!
+            val icon =
+                viewHolder.itemView.findViewById<ImageView>(
+                    R.id.supervision_supported_apps_entry_point_icon_1
+                )
+            assertThat(icon).isNotNull()
+            assertThat(icon.visibility).isEqualTo(View.VISIBLE)
+            assertThat(icon.drawable).isEqualTo(iconDrawable)
+        }
+    }
+
+    @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun searchSupportedAppsEntryTitle() {
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            val title =
+                StringUtil.getIcuPluralsString(
+                    context,
+                    0,
+                    R.string.supervision_web_content_filters_switch_summary,
+                )
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+
+            val preference =
+                fragment.findPreference<Preference>(
+                    SupervisionWebContentFiltersSearchSupportedAppsScreen.KEY
+                )
+            assertThat(preference?.title).isEqualTo(title)
         }
     }
 

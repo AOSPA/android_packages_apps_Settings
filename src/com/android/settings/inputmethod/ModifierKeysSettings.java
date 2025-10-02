@@ -18,7 +18,6 @@ package com.android.settings.inputmethod;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -60,10 +59,7 @@ public class ModifierKeysSettings extends InputDeviceDashboardFragment {
             new BaseSearchIndexProvider(R.xml.modifier_keys_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return FeatureFlagUtils
-                            .isEnabled(
-                                    context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY)
-                            && !PhysicalKeyboardFragment.getHardKeyboards(context).isEmpty();
+                    return !PhysicalKeyboardFragment.getHardKeyboards(context).isEmpty();
                 }
             };
 }

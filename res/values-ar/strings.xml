@@ -248,7 +248,12 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"نقل للأسفل"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"إزالة"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"نقل العنصر إلى أعلى القائمة"</string>
-    <!-- no translation found for action_label_menu_option (6881627571783854975) -->
+    <string name="action_label_menu_option" msgid="6881627571783854975">"تعديل قائمة لغات النظام، <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <!-- no translation found for keywords_region_page (7148673842253297212) -->
+    <skip />
+    <!-- no translation found for keywords_temperature_page (5447163674488205412) -->
+    <skip />
+    <!-- no translation found for keywords_measurement_system_page (403273002514842186) -->
     <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"الإعدادات المفضّلة لمنطقتك"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"يمكنك ضبط الإعدادات المفضّلة لوحدات القياس والأرقام"</string>
@@ -1533,6 +1538,10 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"خيارات الخلفية"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"إظهار خلفية شاشة القفل"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"تظهر خلفية شاشة القفل عندما تكون ميزة \"تشغيل الشاشة دائمًا\" مفعَّلة"</string>
+    <!-- no translation found for doze_always_on_inactivity_detection_title (7953501407683982654) -->
+    <skip />
+    <!-- no translation found for doze_always_on_inactivity_detection_summary (3486468877414144614) -->
+    <skip />
     <string name="force_bold_text" msgid="4620929631102086716">"تغميق النص"</string>
     <string name="title_font_size" msgid="570613010306330622">"حجم الخط"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"تكبير النص أو تصغيره"</string>
@@ -4902,7 +4911,7 @@
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"تتم إدارة مساحة التخزين لجهازك الآن عن طريق مدير مساحة التخزين"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"حسابات <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"مزامنة بيانات التطبيق تلقائيًا"</string>
-    <string name="auto_sync_account_summary" msgid="7580352130028957346">"تسمح للتطبيقات بإعادة تحميل البيانات تلقائيًا"</string>
+    <string name="auto_sync_account_summary" msgid="7580352130028957346">"السماح للتطبيقات بإعادة تحميل البيانات تلقائيًا"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"مزامنة الحساب"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"المزامنة مفعّلة لعناصر عددها <xliff:g id="ID_1">%1$d</xliff:g> من إجمالي <xliff:g id="ID_2">%2$d</xliff:g>"</string>
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"المزامنة مفعَّلة لكل البيانات"</string>
@@ -5947,10 +5956,8 @@
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"إضافة عنوان البريد الإلكتروني المخصّص لاسترداد الحساب"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"تأكيد عنوان البريد الإلكتروني"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"فلاتر متجر التطبيقات"</string>
-    <!-- no translation found for supervision_app_store_filters_top_intro (6578154226139006984) -->
-    <skip />
-    <!-- no translation found for supervision_app_store_filters_footer_content (8263617599758803388) -->
-    <skip />
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"فلترة التطبيقات استنادًا إلى مدى ملاءمة محتواها"</string>
+    <string name="supervision_app_store_filters_footer_content" msgid="8263617599758803388">"قد يحظر كل تطبيق أنواعًا مختلفة من المحتوى. ويجب إدارة متاجر التطبيقات غير المُدرَجة بشكلٍ منفصل."</string>
     <string name="supervision_web_content_filters_title" msgid="2412562442507104921">"فلاتر محتوى الموقع الإلكتروني"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"فلاتر المواقع الإلكترونية، حظر المواقع الإلكترونية، فلاتر المتصفّح، حظر المواقع الإلكترونية التي تتضمّن محتوى فاضحًا، فلترة المواقع الإلكترونية، حظر نتائج البحث، فلترة نتائج البحث الفاضحة، قيود المحتوى"</string>
     <string name="supervision_web_content_filters_top_intro" msgid="8056274290725144441">"تفلتر المحتوى الفاضح في بعض التطبيقات والمتصفّحات على هذا الهاتف. وقد يستمر ظهور المحتوى الفاضح على تطبيقات أو أجهزة أو متصفّحات أخرى."</string>

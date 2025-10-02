@@ -164,7 +164,7 @@ class DisplayTopologyPreferenceTest {
 
     /** Returns the bounds of the non-highlighting part of the block relative to the parent. */
     private fun virtualBounds(block: DisplayBlock): RectF {
-        val d = block.highlightPx.toFloat()
+        val d = block.highlightPx.toFloat() + block.arrowSizePx.toFloat()
         val x = block.x + d
         val y = block.y + d
         // Using layoutParams as a proxy for the actual width and height appears to be standard
@@ -256,7 +256,7 @@ class DisplayTopologyPreferenceTest {
 
     private fun assertSelected(block: DisplayBlock, expected: Boolean) {
         val vis = if (expected) View.VISIBLE else View.INVISIBLE
-        assertThat(block.selectionMarkerView.visibility).isEqualTo(vis)
+        assertThat(block.selectionMarkerView().visibility).isEqualTo(vis)
     }
 
     private fun setMirroringMode(enable: Boolean) {
@@ -274,21 +274,21 @@ class DisplayTopologyPreferenceTest {
         xDiff: Float,
         yDiff: Float,
     ) {
-        block.dispatchTouchEvent(
+        block.dispatchEvent(
             MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_DOWN)
                 .setPointer(0f, 0f)
                 .setEventTime(startTimeMs)
                 .build()
         )
-        block.dispatchTouchEvent(
+        block.dispatchEvent(
             MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_MOVE)
                 .setPointer(xDiff, yDiff)
                 .setEventTime((startTimeMs + endTimeMs) / 2)
                 .build()
         )
-        block.dispatchTouchEvent(
+        block.dispatchEvent(
             MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_UP)
                 .setPointer(xDiff, yDiff)
@@ -400,9 +400,9 @@ class DisplayTopologyPreferenceTest {
                 .build()
         val upEvent = MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
 
-        leftBlock.dispatchTouchEvent(downEvent)
-        leftBlock.dispatchTouchEvent(moveEvent)
-        leftBlock.dispatchTouchEvent(upEvent)
+        leftBlock.dispatchEvent(downEvent)
+        leftBlock.dispatchEvent(moveEvent)
+        leftBlock.dispatchEvent(upEvent)
 
         val rootChildren = injector.topology!!.root!!.children
         assertThat(rootChildren).hasSize(1)
@@ -446,9 +446,9 @@ class DisplayTopologyPreferenceTest {
 
         assertThat(leftBlock.y).isGreaterThan(rightBlock.y)
 
-        rightBlock.dispatchTouchEvent(downEvent)
-        rightBlock.dispatchTouchEvent(moveEvent)
-        rightBlock.dispatchTouchEvent(upEvent)
+        rightBlock.dispatchEvent(downEvent)
+        rightBlock.dispatchEvent(moveEvent)
+        rightBlock.dispatchEvent(upEvent)
 
         assertThat(injector.revealLog).isEmpty()
 
@@ -483,8 +483,8 @@ class DisplayTopologyPreferenceTest {
 
         val upEvent = MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
 
-        rightBlock.dispatchTouchEvent(downEvent)
-        rightBlock.dispatchTouchEvent(upEvent)
+        rightBlock.dispatchEvent(downEvent)
+        rightBlock.dispatchEvent(upEvent)
 
         // After drag, the original views should still be present.
         val paneChildren = getPaneChildren()
@@ -621,13 +621,13 @@ class DisplayTopologyPreferenceTest {
 
         val origY = block.y
 
-        block.dispatchTouchEvent(
+        block.dispatchEvent(
             MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_DOWN)
                 .setPointer(0f, 0f)
                 .build()
         )
-        block.dispatchTouchEvent(
+        block.dispatchEvent(
             MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_MOVE)
                 .setPointer(0f, 30f)
@@ -636,7 +636,7 @@ class DisplayTopologyPreferenceTest {
 
         assertThat(block.y).isWithin(0.01f).of(origY)
 
-        block.dispatchTouchEvent(
+        block.dispatchEvent(
             MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
         )
 
@@ -654,7 +654,7 @@ class DisplayTopologyPreferenceTest {
         for (block in paneChildren) {
             val origY = block.y
 
-            block.dispatchTouchEvent(
+            block.dispatchEvent(
                 MotionEventBuilder.newBuilder()
                     .setAction(MotionEvent.ACTION_DOWN)
                     .setPointer(0f, 0f)
@@ -662,7 +662,7 @@ class DisplayTopologyPreferenceTest {
             )
             assertSelected(block, false)
 
-            block.dispatchTouchEvent(
+            block.dispatchEvent(
                 MotionEventBuilder.newBuilder()
                     .setAction(MotionEvent.ACTION_MOVE)
                     .setPointer(0f, 30f)
@@ -670,7 +670,7 @@ class DisplayTopologyPreferenceTest {
             )
             assertThat(block.y).isWithin(0.01f).of(origY)
 
-            block.dispatchTouchEvent(
+            block.dispatchEvent(
                 MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
             )
             assertThat(block.y).isWithin(0.01f).of(origY)
@@ -683,13 +683,13 @@ class DisplayTopologyPreferenceTest {
 
         assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(143.76f)
 
-        leftBlock.dispatchTouchEvent(
+        leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_DOWN)
                 .setPointer(0f, 0f)
                 .build()
         )
-        leftBlock.dispatchTouchEvent(
+        leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_MOVE)
                 .setPointer(0f, 30f)
@@ -703,7 +703,7 @@ class DisplayTopologyPreferenceTest {
 
         assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(173.76f)
         // Move block farther downward.
-        leftBlock.dispatchTouchEvent(
+        leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_MOVE)
                 .setPointer(0f, 50f)
@@ -716,7 +716,7 @@ class DisplayTopologyPreferenceTest {
 
         assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(115.60f)
         // Another move in the opposite direction should not move the left block.
-        leftBlock.dispatchTouchEvent(
+        leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_MOVE)
                 .setPointer(0f, -20f)
@@ -730,14 +730,14 @@ class DisplayTopologyPreferenceTest {
         val (leftBlock, _) = setupPaneWithTwoDisplays(POSITION_LEFT, /* childOffset= */ 42f)
 
         assertSelected(leftBlock, false)
-        leftBlock.dispatchTouchEvent(
+        leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_DOWN)
                 .setPointer(0f, 0f)
                 .build()
         )
         assertSelected(leftBlock, true)
-        leftBlock.dispatchTouchEvent(
+        leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
         )
         assertSelected(leftBlock, false)
@@ -749,14 +749,14 @@ class DisplayTopologyPreferenceTest {
         val (leftBlock, _) = setupPaneWithTwoDisplays(POSITION_LEFT, /* childOffset= */ 42f)
 
         assertSelected(leftBlock, false)
-        leftBlock.dispatchTouchEvent(
+        leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_DOWN)
                 .setPointer(0f, 0f)
                 .build()
         )
         assertSelected(leftBlock, true)
-        leftBlock.dispatchTouchEvent(
+        leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
         )
         assertSelected(leftBlock, true)
@@ -979,7 +979,19 @@ class DisplayTopologyPreferenceTest {
         assertThat(block.y).isWithin(0.01f).of(originalY)
     }
 
+    private fun DisplayBlock.dispatchEvent(event: MotionEvent) {
+        backgroundView().dispatchTouchEvent(event)
+    }
+
     private companion object {
+        private fun DisplayBlock.backgroundView(): View {
+            return findViewById<View>(R.id.display_block_background)
+        }
+
+        private fun DisplayBlock.selectionMarkerView(): View {
+            return findViewById<View>(R.id.display_block_selection_marker)
+        }
+
         private const val DISPLAY_ID_1 = DEFAULT_DISPLAY
         private const val DISPLAY_ID_2 = 123
         private const val DISPLAY_ID_3 = 456

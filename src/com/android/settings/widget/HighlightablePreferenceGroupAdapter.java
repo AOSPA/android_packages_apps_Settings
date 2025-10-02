@@ -56,12 +56,12 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
     @VisibleForTesting static final long DELAY_COLLAPSE_DURATION_MILLIS = 300L;
     @VisibleForTesting static final long DELAY_HIGHLIGHT_DURATION_MILLIS = 600L;
     @VisibleForTesting static final long DELAY_HIGHLIGHT_DURATION_MILLIS_A11Y = 300L;
-    private static final long HIGHLIGHT_DURATION = 15000L;
+    @VisibleForTesting static final long HIGHLIGHT_DURATION = 15000L;
     private static final int HIGHLIGHT_FADE_OUT_DURATION = 500;
     private static final int HIGHLIGHT_FADE_IN_DURATION = 200;
 
     @VisibleForTesting @DrawableRes final int mHighlightBackgroundRes;
-    @VisibleForTesting boolean mFadeInAnimated;
+    @VisibleForTesting boolean mHighlightVisible;
 
     private final Context mContext;
     private final @DrawableRes int mNormalBackgroundRes;
@@ -129,7 +129,7 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
                 && v.isShown()) {
             // This position should be highlighted. If it's highlighted before - skip animation.
             v.requestAccessibilityFocus();
-            addHighlightBackground(holder, !mFadeInAnimated, position);
+            addHighlightBackground(holder, !mHighlightVisible, position);
         } else if (Boolean.TRUE.equals(v.getTag(R.id.preference_highlighted))) {
             // View with highlight is reused for a view that should not have highlight
             removeHighlightBackground(holder, false /* animate */, position);
@@ -227,6 +227,7 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
         v.postDelayed(
                 () -> {
                     mHighlightPosition = RecyclerView.NO_POSITION;
+                    mHighlightVisible = false;
                     removeHighlightBackground(holder, true /* animate */, position);
                 },
                 HIGHLIGHT_DURATION);
@@ -262,7 +263,7 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
             requestRemoveHighlightDelayed(holder, position);
             return;
         }
-        mFadeInAnimated = true;
+        mHighlightVisible = true;
 
         TransitionDrawable transitionDrawable = new TransitionDrawable(
                 new Drawable[]{backgroundFromDrawable, backgroundToDrawable});
@@ -302,7 +303,6 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
 
-                mFadeInAnimated = false;
                 if (v.getTag(R.id.active_background_animator) == fadeInLoop) {
                     v.setTag(R.id.active_background_animator, null);
                 }
@@ -312,6 +312,7 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
                 if (Boolean.TRUE.equals(v.getTag(R.id.preference_highlighted))) {
                     requestRemoveHighlightDelayed(holder, position);
                 } else {
+                    mHighlightVisible = false;
                     holder.setIsRecyclable(true);
                 }
             }
@@ -319,7 +320,6 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
             @Override
             public void onAnimationCancel(Animator animation) {
                 super.onAnimationCancel(animation);
-                mFadeInAnimated = false;
 
                 if (v.getTag(R.id.active_background_animator) == fadeInLoop) {
                     v.setTag(R.id.active_background_animator, null);
@@ -330,6 +330,7 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
                     requestRemoveHighlightDelayed(holder, position);
                 } else {
                     v.setBackgroundResource(backgroundFrom);
+                    mHighlightVisible = false;
                     holder.setIsRecyclable(true);
                 }
             }

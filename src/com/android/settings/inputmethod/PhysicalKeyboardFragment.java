@@ -31,7 +31,6 @@ import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodManager;
 
@@ -157,11 +156,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
         if (mSupportsFirmwareUpdate) {
             mFeatureProvider.registerKeyboardInformationCategory(getPreferenceScreen());
         }
-        boolean isModifierKeySettingsEnabled = FeatureFlagUtils
-                .isEnabled(getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY);
-        if (!isModifierKeySettingsEnabled) {
-            mKeyboardAssistanceCategory.removePreference(findPreference(MODIFIER_KEYS_SETTINGS));
-        }
+        mKeyboardAssistanceCategory.removePreference(findPreference(MODIFIER_KEYS_SETTINGS));
         mKeyboardA11yCategory.removePreference(mAccessibilityBounceKeys);
         mKeyboardA11yCategory.removePreference(mAccessibilitySlowKeys);
         mKeyboardA11yCategory.removePreference(mAccessibilityStickyKeys);

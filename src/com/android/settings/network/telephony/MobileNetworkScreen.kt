@@ -95,7 +95,6 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
                     +MobileNetworkDataUsagePreference(context, coroutineScope, subId)
                     +MobileNetworkSpnPreference(context, subId)
                     +MobileNetworkPhoneNumberPreference(data)
-                    +RoamingPreference(context, subId) order +90
                     +EnabledNetworkModePreference(data)
                     val imeiList = context.getImeiList
                     +MobileNetworkImeiPreference(context, subId, imeiList)

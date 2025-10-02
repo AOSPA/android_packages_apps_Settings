@@ -37,12 +37,13 @@ import com.android.settings.accessibility.detail.a11yactivity.ShortcutPreference
 import com.android.settings.accessibility.detail.a11yactivity.TopIntroPreferenceController;
 import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityScreen;
 import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.Objects;
 
 /** Fragment for providing open activity button. */
-public class LaunchAccessibilityActivityPreferenceFragment extends BaseSupportFragment {
+public class LaunchAccessibilityActivityPreferenceFragment extends DashboardFragment {
 
     private static final String TAG = "LaunchAccessibilityActivityPreferenceFragment";
     @Nullable

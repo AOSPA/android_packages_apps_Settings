@@ -61,13 +61,6 @@ flag {
 }
 
 flag {
-  name: "touchpad_settings_design_update"
-  namespace: "android_settings"
-  description: "All touchpad settings pages should either migrate to non-custom implementations or be updated"
-  bug: "400647661"
-}
-
-flag {
   name: "three_finger_tap_app_launch"
   namespace: "android_settings"
   description: "Use three finger tap to open a custom app"

@@ -167,9 +167,14 @@ public class ChooseLockGeneric extends SettingsActivity {
      * @param title the GlifLayout title.
      */
     public void setGlifLayoutTitle(String title) {
-        final GlifLayout glifLayout = findViewById(R.id.main_content);
-        if (glifLayout != null) {
-            glifLayout.setHeaderText(title);
+        final View view = findViewById(R.id.main_content);
+        if (view != null) {
+            if (view instanceof GlifLayout) {
+                GlifLayout glifLayout = (GlifLayout) view;
+                glifLayout.setHeaderText(title);
+            } else {
+                Log.e("ChooseLockGeneric", "Unexpected view type: " + view.getClass().getName());
+            }
         }
     }
 

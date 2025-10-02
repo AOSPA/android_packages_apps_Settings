@@ -119,6 +119,9 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 +SupervisionAppStoreFiltersScreen.KEY order 50
                 +SupervisionWebContentFiltersScreen.KEY order 100
             }
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 0
+            }
             +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
                 +SupervisionPinManagementScreen.KEY order 10
             }
@@ -137,5 +140,6 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     companion object {
         const val KEY = "top_level_supervision"
         internal const val SUPERVISION_DYNAMIC_GROUP_1 = "supervision_features_group_1"
+        internal const val SUPERVISION_DYNAMIC_GROUP_2 = "supervision_features_group_2"
     }
 }

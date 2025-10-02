@@ -19,12 +19,15 @@ package com.android.settings.supervision
 import android.app.Application
 import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
+import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 import android.content.pm.PackageManager.DONT_KILL_APP
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
@@ -63,6 +66,7 @@ class SupervisionDashboardActivityTest {
             as ShadowDevicePolicyManager
     private val mockRoleManager = mock<RoleManager>()
 
+    @get:Rule val setFlagsRule = SetFlagsRule()
     @get:Rule
     val serviceRule =
         MessengerServiceRule<SupervisionMessengerClient>(
@@ -124,6 +128,7 @@ class SupervisionDashboardActivityTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun supervisionRoleHolderExists_redirectIntentResolved_redirect() = runTest {
         mockRoleManager.stub {
             on { getRoleHolders(any()) } doReturn listOf(TEST_SUPERVISION_PACKAGE)
@@ -139,6 +144,7 @@ class SupervisionDashboardActivityTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun supervisionPackageIsProfileOwner_redirectIntentResolved_redirect() = runTest {
         shadowDpm.setProfileOwner(ComponentName.unflattenFromString(DEFAULT_SUPERVISION_COMPONENT))
         setUpRedirectActivityComponent(DEFAULT_SUPERVISION_PACKAGE, INTERSTITIAL_REDIRECT_ACTION)
