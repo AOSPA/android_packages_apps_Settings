@@ -20,6 +20,7 @@ import android.app.ActivityManager.LOCK_TASK_MODE_LOCKED
 import android.app.admin.EnforcingAdmin
 import android.app.settings.SettingsEnums
 import android.hardware.display.DisplayManager
+import android.icu.text.NumberFormat
 import android.os.Bundle
 import android.provider.Settings
 import android.provider.Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY
@@ -37,6 +38,7 @@ import com.android.settings.Utils.createAccessibleSequence
 import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL
 import com.android.settings.core.SubSettingLauncher
+import java.util.Locale
 
 /**
  * Fragment containing list of preferences for a single display, which gets updated dynamically,
@@ -58,6 +60,7 @@ open class SelectedDisplayPreferenceFragment(
     private var shouldShowDisplayConnectionPref: Boolean = false
 
     private val prefComponents = mutableListOf<PrefComponent>()
+    private val numberFormatter: NumberFormat = NumberFormat.getNumberInstance(Locale.getDefault())
 
     override fun getMetricsCategory(): Int {
         return SettingsEnums.SETTINGS_EXTERNAL_DISPLAY_CATEGORY
@@ -111,6 +114,7 @@ open class SelectedDisplayPreferenceFragment(
         shouldShowDisplayConnectionPref =
             DesktopExperienceFlags.ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG.isTrue() &&
                 viewModel.injector.isProjectedModeEnabled()
+        numberFormatter.isGroupingUsed = false
         setup()
     }
 
@@ -344,12 +348,15 @@ open class SelectedDisplayPreferenceFragment(
         display: DisplayDeviceAdditionalInfo,
     ) {
         val displayMode = display.mode ?: return
-        val width = displayMode.getPhysicalWidth()
-        val height = displayMode.getPhysicalHeight()
+        val width = displayMode.physicalWidth
+        val height = displayMode.physicalHeight
+        val formattedWidth = numberFormatter.format(width)
+        val formattedHeight = numberFormatter.format(height)
+
         preference.setSummary(
             createAccessibleSequence(
-                "$width x $height",
-                getResources().getString(R.string.screen_resolution_delimiter_a11y, width, height),
+                "$formattedWidth x $formattedHeight",
+                resources.getString(R.string.screen_resolution_delimiter_a11y, width, height),
             )
         )
     }

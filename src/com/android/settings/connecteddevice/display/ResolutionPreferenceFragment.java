@@ -27,6 +27,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.icu.text.NumberFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -55,6 +56,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -95,6 +97,8 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
                     scheduleUpdate();
                 }
             };
+    private final NumberFormat mNumberFormatter =
+            NumberFormat.getNumberInstance(Locale.getDefault());
 
     @Override
     public int getMetricsCategory() {
@@ -111,6 +115,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         if (mInjector == null) {
             mInjector = new ConnectedDisplayInjector(getPrefContext());
         }
+        mNumberFormatter.setGroupingUsed(false);
         addPreferencesFromResource(EXTERNAL_DISPLAY_RESOLUTION_SETTINGS_RESOURCE);
         updateDisplayModeLimits(mInjector.getContext());
         setupResolutionApplyConfirmationHandler();
@@ -509,7 +514,9 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         if (m == null) {
             return "";
         }
-        return m.getPhysicalWidth() + " x " + m.getPhysicalHeight();
+        String formattedWidth = mNumberFormatter.format(m.getPhysicalWidth());
+        String formattedHeight = mNumberFormatter.format(m.getPhysicalHeight());
+        return formattedWidth + " x " + formattedHeight;
     }
 
     private void setupResolutionApplyConfirmationHandler() {
