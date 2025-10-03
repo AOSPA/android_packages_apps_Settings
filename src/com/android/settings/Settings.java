@@ -138,8 +138,10 @@ public class Settings extends SettingsActivity {
     /** Activity for the notifications and quick settings panels settings. */
     public static class ShadeSettingsActivity extends SettingsActivity {
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+        public void onResume() {
+            super.onResume();
+            // Re-check availability, because a configuration change (e.g. switching screens)
+            // could've changed it.
             if (!ShadePanelsPreferenceController.isDualShadeAvailable(this)) {
                 finish();
             }

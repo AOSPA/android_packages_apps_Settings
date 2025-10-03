@@ -75,17 +75,17 @@ class ShadePanelsPreferenceControllerTest {
     @Test
     @EnableFlags(Flags.FLAG_SCENE_CONTAINER)
     @Config(qualifiers = "w800dp-h600dp")
-    fun getAvailabilityStatus_sceneContainerEnabled_onFoldable_isAvailable() {
+    fun getAvailabilityStatus_sceneContainerEnabled_onFoldable_isConditionallyUnavailable() {
         ShadowDisplayManager.addDisplay("w360dp-h640dp") // Emulate the front display
 
-        assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE)
+        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
     }
 
     @Test
     @EnableFlags(Flags.FLAG_SCENE_CONTAINER)
     @Config(qualifiers = "w1200dp-h800dp")
-    fun getAvailabilityStatus_sceneContainerEnabled_onTablet_isUnsupportedOnDevice() {
-        assertThat(controller.availabilityStatus).isEqualTo(UNSUPPORTED_ON_DEVICE)
+    fun getAvailabilityStatus_sceneContainerEnabled_onTablet_isConditionallyUnavailable() {
+        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
     }
 
     @Test
