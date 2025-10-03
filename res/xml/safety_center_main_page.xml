@@ -19,10 +19,13 @@
     <com.android.settingslib.widget.StatusBannerPreference
         android:key="safety_center_status_banner"
         settings:controller="com.android.settings.safetycenter.ui.StatusBannerPreferenceController" />
+
+    <com.android.settingslib.widget.BannerMessagePreferenceGroup
+        android:key="issues_banner_group" />
+
     <PreferenceCategory
         android:key="security_category"
         android:title="@string/security_header">
-
         <Preference
             android:key="device_unlock_subpage"
             android:title="@string/device_unlock_subpage_title"

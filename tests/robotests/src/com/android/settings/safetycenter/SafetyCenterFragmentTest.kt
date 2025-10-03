@@ -51,7 +51,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.shadow.api.Shadow
-import org.robolectric.shadows.ShadowContextImpl
 import org.robolectric.shadows.ShadowDrawable
 import org.robolectric.shadows.ShadowLooper
 import org.robolectric.shadows.ShadowSafetyCenterManager
@@ -68,17 +67,16 @@ class SafetyCenterFragmentTest {
     @Before
     fun setUp() {
         mApplication = ApplicationProvider.getApplicationContext()
-        val shadowContextImpl = Shadow.extract<ShadowContextImpl>(mApplication.baseContext)
         val safetyCenterManager = mApplication.getSystemService(SafetyCenterManager::class.java)!!
         shadowSafetyCenterManager = Shadow.extract(safetyCenterManager)
         shadowSafetyCenterManager.setSafetyCenterEnabled(true)
     }
 
     private fun runTest(data: SafetyCenterData, testBlock: (SafetyCenterFragment) -> Unit) {
-        shadowSafetyCenterManager.setSafetyCenterData(data)
         val scenario =
             launchFragmentInContainer<SafetyCenterFragment>(themeResId = R.style.Theme_SubSettings)
         scenario.onFragment { fragment ->
+            shadowSafetyCenterManager.setSafetyCenterData(data)
             ShadowLooper.idleMainLooper()
             testBlock(fragment)
         }
@@ -112,11 +110,11 @@ class SafetyCenterFragmentTest {
             onView(withText(mApplication.getString(R.string.privacy_sources_title)))
                 .check(matches(isDisplayed()))
 
+            onView(isRoot()).perform(swipeUp())
             onView(withText(mApplication.getString(R.string.permissions_usage_title)))
                 .perform(scrollTo())
                 .check(matches(isDisplayed()))
 
-            onView(isRoot()).perform(swipeUp())
             onView(withText(mApplication.getString(R.string.more_security_privacy_category_title)))
                 .check(matches(isDisplayed()))
 
