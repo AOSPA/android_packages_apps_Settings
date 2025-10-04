@@ -80,13 +80,3 @@ flag {
   description: "Enables alert indicator on homepage tiles"
   bug: "403326850"
 }
-
-flag {
-  name: "disable_update_height_profile_select_location_services"
-  namespace: "android_settings"
-  description: "Disable updateHeight in the Location Services page to allow scrolling in certain screen sizes / orientations"
-  bug: "418876165"
-  metadata {
-    purpose: PURPOSE_BUGFIX
-  }
-}
