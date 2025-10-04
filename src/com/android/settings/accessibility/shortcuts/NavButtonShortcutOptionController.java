@@ -34,6 +34,7 @@ import com.android.settings.accessibility.AccessibilityUtil;
  * A controller handles displaying the nav button shortcut option preference and
  * configuring the shortcut.
  */
+// LINT.IfChange
 public class NavButtonShortcutOptionController extends SoftwareShortcutOptionPreferenceController {
 
     public NavButtonShortcutOptionController(Context context, String preferenceKey) {
@@ -97,3 +98,4 @@ public class NavButtonShortcutOptionController extends SoftwareShortcutOptionPre
         return spannableMessage;
     }
 }
+// LINT.ThenChange(ui/NavButtonShortcutPreference.kt)

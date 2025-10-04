@@ -30,6 +30,7 @@ import com.android.settings.accessibility.AccessibilityUtil;
  * A controller handles displaying the floating action button shortcut option preference and
  * configuring the shortcut.
  */
+// LINT.IfChange
 public class FloatingButtonShortcutOptionController
         extends SoftwareShortcutOptionPreferenceController {
 
@@ -69,3 +70,4 @@ public class FloatingButtonShortcutOptionController
         return sb;
     }
 }
+// LINT.ThenChange(ui/FloatingButtonShortcutPreference.kt)
