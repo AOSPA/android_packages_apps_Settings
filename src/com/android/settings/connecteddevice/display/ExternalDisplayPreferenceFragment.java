@@ -539,7 +539,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (isUseDisplaySettingEnabled()) {
             addUseDisplayPreferenceForDisplay(refresh, display, position);
         }
-        final var displayRotation = getDisplayRotation(display.getId());
+        final var displayRotation = display.getRotation();
         if (includeV1Helpers && display.isEnabled() == DisplayIsEnabled.YES) {
             addIllustrationImage(refresh, displayRotation);
         }
@@ -775,13 +775,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                     return true;
                 });
         pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES);
-    }
-
-    private int getDisplayRotation(int displayId) {
-        if (mInjector == null) {
-            return 0;
-        }
-        return Math.min(3, Math.max(0, mInjector.getDisplayUserRotation(displayId)));
     }
 
     @VisibleForTesting

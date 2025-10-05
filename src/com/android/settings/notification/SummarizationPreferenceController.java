@@ -36,9 +36,7 @@ public class SummarizationPreferenceController extends BasePreferenceController 
 
     @Override
     public int getAvailabilityStatus() {
-        return (Flags.nmSummarization() || Flags.nmSummarizationUi())
-                && mBackend.isNotificationSummarizationSupported()
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return mBackend.showSummarizationSettings() ?  AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

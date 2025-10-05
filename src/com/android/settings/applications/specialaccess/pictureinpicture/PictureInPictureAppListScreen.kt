@@ -20,9 +20,7 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.provider.Settings.ACTION_PICTURE_IN_PICTURE_SETTINGS
-import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
-import com.android.settings.applications.CatalystAppListFragment
 import com.android.settings.applications.specialaccess.SpecialAccessAppListScreen
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -56,9 +54,3 @@ open class PictureInPictureAppListScreen : SpecialAccessAppListScreen() {
         const val KEY = "special_access_picture_in_picture_app_list"
     }
 }
-
-class PictureInPictureAppListActivity :
-    CatalystSettingsActivity(
-        PictureInPictureAppListScreen.KEY,
-        CatalystAppListFragment::class.java,
-    )

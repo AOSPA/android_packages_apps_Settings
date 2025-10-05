@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static android.service.notification.Adjustment.KEY_SUMMARIZATION;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertFalse;
@@ -25,6 +27,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.app.Flags;
 import android.app.INotificationManager;
 import android.app.role.RoleManager;
 import android.app.usage.UsageEvents;
@@ -38,6 +41,10 @@ import android.content.pm.PackageManager;
 import android.net.MacAddress;
 import android.os.Build;
 import android.os.Parcel;
+import android.os.RemoteException;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -47,6 +54,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -60,6 +68,9 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class NotificationBackendTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     LocalBluetoothManager mBm;
@@ -266,6 +277,26 @@ public class NotificationBackendTest {
 
         assertThat(new NotificationBackend().getDeviceList(
                 mCdm, mBm, mCn.getPackageName(), 0).toString()).isEqualTo("Device 1, Device 2");
+    }
+
+    @Test
+    @DisableFlags({Flags.FLAG_NM_SUMMARIZATION_ALL})
+    public void showSummarizationSettings_onlyNasProvides_supported() {
+        assertThat(mNotificationBackend.showSummarizationSettings()).isTrue();
+    }
+
+    @Test
+    @DisableFlags({Flags.FLAG_NM_SUMMARIZATION_ALL})
+    public void showSummarizationSettings_onlyNasProvides_notSupported() throws RemoteException {
+        when(mInm.getUnsupportedAdjustmentTypes()).thenReturn(List.of(KEY_SUMMARIZATION));
+        assertThat(mNotificationBackend.showSummarizationSettings()).isFalse();
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_NM_SUMMARIZATION_ALL})
+    public void showSummarizationSettings() throws RemoteException {
+        when(mInm.getUnsupportedAdjustmentTypes()).thenReturn(List.of(KEY_SUMMARIZATION));
+        assertThat(mNotificationBackend.showSummarizationSettings()).isTrue();
     }
 
     private ImmutableList<AssociationInfo> mockAssociations(String... macAddresses) {

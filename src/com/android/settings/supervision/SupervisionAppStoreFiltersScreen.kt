@@ -24,6 +24,7 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
 
 class SupervisionAppStoreFiltersActivity :
@@ -33,7 +34,8 @@ class SupervisionAppStoreFiltersActivity :
 open class SupervisionAppStoreFiltersScreen :
     PreferenceScreenMixin, PreferenceAvailabilityProvider {
 
-    override fun isAvailable(context: Context) = Flags.enableAppStoreFiltersScreen()
+    override fun isAvailable(context: Context) =
+        Flags.enableAppStoreFiltersScreen() || Flags.enableAppStoreFiltersScreenFallback()
 
     override val key: String
         get() = KEY
@@ -53,11 +55,20 @@ open class SupervisionAppStoreFiltersScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +SupervisionAppStoreFiltersTopIntroPreference()
-            +SupervisionAppStoreFiltersFooterPreference()
+            +SupervisionAppStoreFiltersTopIntroPreference() order -100
+            +UntitledPreferenceCategoryMetadata(SUPERVISION_APP_STORE_FILTERS_GROUP) order 0 += {
+                // When the fallback flag is enabled, populate the group with the fallback list of
+                // app stores that support app store filters.
+                if (Flags.enableAppStoreFiltersScreenFallback()) {
+                    // TODO(b/446954311): Add fallback preferences here.
+                }
+            }
+            +SupervisionAppStoreFiltersFooterPreference() order 100
         }
 
     companion object {
         const val KEY = "supervision_app_store_filters"
+        internal const val SUPERVISION_APP_STORE_FILTERS_GROUP =
+            "supervision_app_store_filters_group"
     }
 }
