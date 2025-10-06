@@ -252,6 +252,8 @@
     <string name="keywords_region_page" msgid="7148673842253297212">"mamlakat, hudud"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"ob-havo, selsiy shkalasi, daraja, harorat, selsiy, farengeyt"</string>
     <string name="keywords_measurement_system_page" msgid="403273002514842186">"metrik, imperial, harorat, boʻyi, vazni, masofa, selsiy, farengeyt, funt, kilogramm, kg, mil, kilometr, duym, santimetr, metr, birlik"</string>
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"raqam, raqamlar, son, sonlar, raqamlash tizimi"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"yakshanba, dushanba, seshanba, chorshanba, payshanba, juma, shanba, birinchi kun"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Hududiy sozlamalar"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Birliklar va raqamlar sozlamalarini belgilash"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ilovalar ushbu hududiy sozlamalardan moslashtirish uchun foydalanadi."</string>
@@ -3472,14 +3474,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Bu foydalanuvchining administrator huquqini olib tashlasangiz, siz yoki boshqa administrator yana unga bu huquqni qaytara oladi."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Admin huquqlaringizni olib tashlamoqchimisiz?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Davom etsangiz, faqat boshqa administratorlar sizga admin huquqlarini taqdim eta oladi."</string>
-    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
-    <skip />
-    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
-    <skip />
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Foydalanuvchi oʻchirilmadi"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Siz bu qurilmadagi yagona administratorsiz, shu bois foydalanuvchi profilingizni oʻchirib tashlash imkonsiz. Foydalanuvchi profilingizni oʻchirib tashlashni xohlasangiz, boshqa foydalanuvchini administrator qilish yoki Tizim &amp;gt Parametrlarni asliga qaytarish &gt; Barcha maʼlumotlarni oʻchirish (asliga qaytarish) rukniga kirib, qurilmadagi barcha maʼlumotlarni oʻchirish mumkin."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Admin huquqlari olib tashlanmadi"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Siz bu qurilmadagi yagona administrator foydalanuvchisiz. Agar endi administratorlikni xohlamasangiz, avval boshqa foydalanuvchini administrator etib tayinlash kerak."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Favqulodda vaziyatlar uchun axborot"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>: axborot va kontaktlar"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g>’ni ochish"</string>
@@ -4834,7 +4832,7 @@
     <string name="shade_panels_title" msgid="6816157397029469997">"Bildirishnomalar va Tezkor sozlamalar"</string>
     <string name="keywords_shade_panels" msgid="6181844937287087945">"soya, panellar, bildirishnomalar, tezkor sozlamalar, ts, alohida, birlashtirilgan, juft, bitta"</string>
     <string name="shade_panels_category" msgid="3262351355390846546">"Panellar"</string>
-    <string name="shade_panels_separate_title" msgid="7839124123668116363">"Ajratish"</string>
+    <string name="shade_panels_separate_title" msgid="7839124123668116363">"Alohida"</string>
     <string name="shade_panels_separate_summary" msgid="4879360492042964895">"Tezkor sozlamalarni ochish uchun yuqori oʻngdan pastga suring. Bildirishnomalarni ochish uchun yuqori chapdan pastga suring."</string>
     <string name="shade_panels_combined_title" msgid="2812149031368941984">"Birlashtirilgan (eski)"</string>
     <string name="shade_panels_combined_summary" msgid="5884627562590432068">"Bildirishnomalar va Tezkor sozlamalar jamlangan klassik panelga kirish uchun ekranning yuqori qismidan pastga suring."</string>
@@ -5381,9 +5379,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"Chap: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"O‘ng: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"Jild: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Batareya quvvati: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> qoldi"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Batareya, oʻng qurilmada: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Batareya quvvati, gʻilofda: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> qoldi"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"Batareya, chap: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"Batareya, oʻng: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"Batareya, gʻilofda: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"Quvvat: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batareya"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Sozlamalar paneli"</string>
@@ -6011,6 +6009,6 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Ulanmoqda"</string>
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Juftlanmoqda"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ulandi"</string>
 </resources>
