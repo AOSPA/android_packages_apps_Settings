@@ -14,10 +14,3 @@ flag {
   description: "Flag using for all common deeplink migration in 25Q4"
   bug: "405344827"
 }
-
-flag {
-  name: "metadata_refactor"
-  namespace: "android_settings"
-  description: "Flag for refactoring the infrastructure for a clearer separation between get, device state and metadata"
-  bug: "447037228"
-}
