@@ -245,11 +245,13 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             boolean isSelectedModeFound,
             @NonNull List<Mode> moreModes) {
         if (moreModes.isEmpty()) {
+            group.setVisible(false);
             return;
         }
         mMoreOptionsExpanded |= !isSelectedModeFound;
         group.setInitialExpandedChildrenCount(mMoreOptionsExpanded ? Integer.MAX_VALUE : 0);
         addModePreferences(context, group, moreModes, /* checkMode= */ null, display);
+        group.setVisible(group.getPreferenceCount() > 0);
     }
 
     private Pair<Boolean, List<Mode>> addModePreferences(
