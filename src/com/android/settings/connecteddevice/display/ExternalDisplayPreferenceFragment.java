@@ -37,6 +37,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.admin.EnforcingAdmin;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.icu.text.NumberFormat;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -72,6 +73,7 @@ import com.android.settingslib.widget.MainSwitchPreference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * The Settings screen for External Displays configuration and connection management.
@@ -200,6 +202,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private ActivityTaskManager mActivityTaskManager;
     private DevicePolicyManager mDpm;
 
+    private final NumberFormat mNumberFormatter =
+            NumberFormat.getNumberInstance(Locale.getDefault());
+
     public ExternalDisplayPreferenceFragment() {
         mInjector = new ConnectedDisplayInjector(/* context= */ null);
     }
@@ -226,6 +231,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         }
         mActivityTaskManager = requireContext().getSystemService(ActivityTaskManager.class);
         mDpm = requireContext().getSystemService(DevicePolicyManager.class);
+        mNumberFormatter.setGroupingUsed(false);
         addPreferencesFromResource(EXTERNAL_DISPLAY_SETTINGS_RESOURCE);
     }
 
@@ -751,9 +757,11 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         var pref = reuseResolutionPreference(refresh, position);
         int width = mode.getPhysicalWidth();
         int height = mode.getPhysicalHeight();
+        String formattedWidth = mNumberFormatter.format(width);
+        String formattedHeight = mNumberFormatter.format(height);
         pref.setSummary(
                 createAccessibleSequence(
-                        width + " x " + height,
+                        formattedWidth + " x " + formattedHeight,
                         getResources()
                                 .getString(
                                         R.string.screen_resolution_delimiter_a11y, width, height)));
