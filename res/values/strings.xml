@@ -2686,8 +2686,6 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format">QR code isn\u0027t a valid format</string>
     <!-- Label for the try again button [CHAR LIMIT=20]-->
     <string name="retry">Retry</string>
-    <!-- Label for the check box to share a network with other users on the same device -->
-    <string name="wifi_shared">Share with other device users</string>
     <!-- Label for the shared wifi message -->
     <string name="shared_message">shared</string>
     <!-- Label for the private wifi message -->
@@ -8198,6 +8196,14 @@
     <string name="user_revoke_admin_for_self_confirm_title">Are you sure you want to remove your own admin privileges?</string>
     <!-- Message for confirmation of revoking the user's own admin privileges [CHAR LIMIT=none] -->
     <string name="user_revoke_admin_for_self_confirm_message">Only other admins will be able to grant you admin privileges if you proceed.</string>
+    <!-- Title for the warning dialog when the user tries to delete the last admin user [CHAR LIMIT=45] -->
+    <string name="user_remove_last_admin_title">Can’t delete user</string>
+    <!-- Message for the warning dialog when the user tries to delete the last admin user [CHAR LIMIT=none] -->
+    <string name="user_remove_last_admin_message">You are the only admin on this device so your user profile can’t be deleted. If you want to delete your user profile, you can make another user an admin or erase all data from the device by going to System > Reset options > Erase all data (factory reset).</string>
+    <!-- Title for the warning dialog when the user tries to revoke the admin status from the last admin user [CHAR LIMIT=45] -->
+    <string name="user_revoke_last_admin_title">Can’t remove admin privileges</string>
+    <!-- Message for the warning dialog when the user tries to revoke the admin status from the last admin user [CHAR LIMIT=none] -->
+    <string name="user_revoke_last_admin_message">You are the only admin user on this device. If you no longer want to be an admin, you need to make another user an admin first. </string>
     <!-- Title for the emergency info preference [CHAR LIMIT=40] -->
     <string name="emergency_info_title">Emergency information</string>
     <!-- Summary for the emergency info preference [CHAR LIMIT=40] -->

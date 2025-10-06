@@ -1535,10 +1535,8 @@
     <string name="doze_always_on_wallpaper_options" msgid="6089727555294626960">"壁紙のオプション"</string>
     <string name="doze_always_on_wallpaper_title" msgid="975186604007325364">"ロック画面の壁紙の表示"</string>
     <string name="doze_always_on_wallpaper_description" msgid="7797570713499410605">"常に表示状態のディスプレイにロック画面の壁紙が表示されます"</string>
-    <!-- no translation found for doze_always_on_inactivity_detection_title (7953501407683982654) -->
-    <skip />
-    <!-- no translation found for doze_always_on_inactivity_detection_summary (3486468877414144614) -->
-    <skip />
+    <string name="doze_always_on_inactivity_detection_title" msgid="7953501407683982654">"操作がないときにディスプレイを OFF にする"</string>
+    <string name="doze_always_on_inactivity_detection_summary" msgid="3486468877414144614">"ユーザーのアクティビティが検出されないときに、ディスプレイを OFF にして電力を節約します"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"テキストを太字にする"</string>
     <string name="title_font_size" msgid="570613010306330622">"フォントサイズ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"文字のサイズを変更します"</string>
@@ -5379,9 +5377,9 @@
     <string name="bluetooth_left_name_expressive" msgid="7849821379224902789">"左: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_right_name_expressive" msgid="4275494318479565567">"右: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_middle_name_expressive" msgid="1370173488986566538">"ケース: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_left_content_description_expressive" msgid="6614501337897763068">"バッテリー残量 - 左: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_right_content_description_expressive" msgid="5612624028099845252">"バッテリー残量 - 右:<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="bluetooth_middle_content_description_expressive" msgid="5331036693430634851">"バッテリー残量 - ケース: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_left_content_description_expressive" msgid="4559978737378527361">"バッテリー残量（左）: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_right_content_description_expressive" msgid="2731091623137447666">"バッテリー残量（右）: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_middle_content_description_expressive" msgid="7181469859757860775">"バッテリー残量（ケース）: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_main_content_description_expressive" msgid="6536529189879542730">"バッテリー残量: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"バッテリー"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"設定パネル"</string>
@@ -5945,6 +5943,12 @@
     <string name="supervision_add_forgot_pin_preference_title" msgid="8939945404255748516">"PIN を忘れた場合"</string>
     <string name="supervision_auth_prompt_forgot_pin_button_label" msgid="1019337828884793557">"PIN をお忘れの場合"</string>
     <string name="supervision_update_recovery_email_preference_title" msgid="2057393838251915087">"再設定用のメールアドレスを更新する"</string>
+    <string name="supervision_recovery_email_added" msgid="4327869201011721812">"再設定用のメールアドレスが追加されました"</string>
+    <string name="supervision_recovery_email_verified" msgid="4048919905732953058">"再設定用のメールアドレスを確認しました"</string>
+    <string name="supervision_recovery_email_updated" msgid="4409524629968027166">"再設定用のメールアドレスを更新しました"</string>
+    <string name="supervision_pin_updated" msgid="660463938258442344">"PIN を更新しました"</string>
+    <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN を変更しました"</string>
+    <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN を削除しました"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN を削除する"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"再設定用のメールアドレスの追加"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"メールアドレスの確認"</string>
@@ -6003,4 +6007,6 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"ペア設定"</string>
+    <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> を接続しました"</string>
 </resources>

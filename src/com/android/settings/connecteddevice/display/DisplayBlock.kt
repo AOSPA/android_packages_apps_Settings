@@ -23,6 +23,7 @@ import android.os.Bundle
 import android.os.Trace
 import android.util.Log
 import android.util.Size
+import android.view.Gravity
 import android.view.SurfaceControl
 import android.view.SurfaceHolder
 import android.view.SurfaceView
@@ -31,6 +32,9 @@ import android.view.ViewOutlineProvider
 import android.view.accessibility.AccessibilityNodeInfo
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
 import android.widget.FrameLayout
+import android.widget.ImageButton
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
 import com.android.settingslib.utils.ThreadUtils
@@ -47,6 +51,8 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     @VisibleForTesting
     internal val arrowSizePx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_size)
+    private val arrowTappableAreaSizePx =
+        context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_tappable_area_size)
 
     // Id of the logical display this DisplayBlock represents
     var logicalDisplayId: Int = -1
@@ -115,6 +121,8 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         }
 
     var onA11yMoveListener: ((direction: Direction) -> Unit)? = null
+    @VisibleForTesting internal val arrowButtons: Map<Direction, View>
+    private var arrowMovement: ArrowMovement = ArrowMovement.immovable()
 
     init {
         isScrollContainer = false
@@ -131,7 +139,10 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         addView(backgroundView)
         addView(selectionMarkerView)
 
-        // TODO(438649236): Setup arrow buttons
+        arrowButtons =
+            ARROW_BUTTONS.mapValues { (direction, properties) ->
+                createArrowButtons(properties).also { arrowButtonView -> addView(arrowButtonView) }
+            }
 
         wallpaperView.holder.addCallback(holderCallback)
     }
@@ -283,6 +294,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         bottomRight: PointF,
         surfaceScale: Float,
         surfaceSize: Size,
+        arrowMovement: ArrowMovement,
     ) {
         wallpaperSurface?.let { oldSurfaces.add(it) }
         letterboxBackgroundSurface?.let { oldSurfaces.add(it) }
@@ -295,6 +307,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         this.displayIdToShowWallpaper = displayIdToShowWallpaper
         this.surfaceScale = surfaceScale
         this.surfaceSize = surfaceSize
+        this.arrowMovement = arrowMovement
 
         val displayDevice = injector.getDisplay(logicalDisplayId)
         contentDescription =
@@ -389,6 +402,31 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         requestLayout()
     }
 
+    private fun createArrowButtons(props: ArrowButtonProperties) =
+        FrameLayout(context).apply {
+            layoutParams =
+                LayoutParams(arrowTappableAreaSizePx, arrowTappableAreaSizePx, props.gravity)
+                    .apply {
+                        when (props.direction) {
+                            Direction.UP -> topMargin = props.verticalOffset
+                            Direction.DOWN -> bottomMargin = props.verticalOffset
+                            Direction.LEFT -> leftMargin = props.horizontalOffset
+                            Direction.RIGHT -> rightMargin = props.horizontalOffset
+                        }
+                    }
+            addView(
+                ImageButton(context).apply {
+                    setImageResource(props.drawableRes)
+                    background = context.getDrawable(R.drawable.display_block_arrow_background)
+                    contentDescription = context.getString(props.contentDescriptionRes)
+                    setClickable(false)
+                },
+                LayoutParams(arrowSizePx, arrowSizePx, Gravity.CENTER),
+            )
+            setOnClickListener { _ -> onA11yMoveListener?.invoke(props.direction) }
+            visibility = GONE
+        }
+
     override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
         super.onInitializeAccessibilityNodeInfo(info)
         // Add custom actions for moving the display block
@@ -449,6 +487,47 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     }
 
     private companion object {
+        private data class ArrowButtonProperties(
+            @param:DrawableRes val drawableRes: Int,
+            @param:StringRes val contentDescriptionRes: Int,
+            val direction: Direction,
+            val gravity: Int,
+            val horizontalOffset: Int = 0,
+            val verticalOffset: Int = 0,
+        )
+
+        private val ARROW_BUTTONS =
+            mutableMapOf<Direction, ArrowButtonProperties>(
+                Direction.UP to
+                    ArrowButtonProperties(
+                        R.drawable.display_block_arrow_up,
+                        R.string.external_display_topology_a11y_action_move_up,
+                        Direction.UP,
+                        Gravity.TOP or Gravity.CENTER_HORIZONTAL,
+                    ),
+                Direction.DOWN to
+                    ArrowButtonProperties(
+                        R.drawable.display_block_arrow_down,
+                        R.string.external_display_topology_a11y_action_move_down,
+                        Direction.DOWN,
+                        Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL,
+                    ),
+                Direction.LEFT to
+                    ArrowButtonProperties(
+                        R.drawable.display_block_arrow_left,
+                        R.string.external_display_topology_a11y_action_move_left,
+                        Direction.LEFT,
+                        Gravity.START or Gravity.CENTER_VERTICAL,
+                    ),
+                Direction.RIGHT to
+                    ArrowButtonProperties(
+                        R.drawable.display_block_arrow_right,
+                        R.string.external_display_topology_a11y_action_move_right,
+                        Direction.RIGHT,
+                        Gravity.END or Gravity.CENTER_VERTICAL,
+                    ),
+            )
+
         private val REFETCH_WALLPAPER_DELAY = 500.milliseconds
         private const val TAG = "DisplayBlock"
     }

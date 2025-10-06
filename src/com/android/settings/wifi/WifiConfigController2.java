@@ -220,7 +220,6 @@ public class WifiConfigController2 implements TextWatcher,
     private TextView mProxyPortView;
     private TextView mProxyExclusionListView;
     private TextView mProxyPacView;
-    private CheckBox mSharedCheckBox;
 
     private IpAssignment mIpAssignment = IpAssignment.UNASSIGNED;
     private ProxySettings mProxySettings = ProxySettings.UNASSIGNED;
@@ -327,7 +326,6 @@ public class WifiConfigController2 implements TextWatcher,
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
         mProxySettingsSpinner.setAdapter(getSpinnerAdapter(R.array.wifi_proxy_settings));
         mProxySettingsSpinner.setOnItemSelectedListener(this);
-        mSharedCheckBox = (CheckBox) mView.findViewById(R.id.shared);
         if (!mHideMeteredAndPrivacy) {
             mMeteredSettingsSpinner = mView.findViewById(R.id.metered_settings);
             mMeteredSettingsSpinner.setAdapter(getSpinnerAdapter(R.array.wifi_metered_entries));
@@ -423,8 +421,6 @@ public class WifiConfigController2 implements TextWatcher,
                 }
                 mIpSettingsSpinner.setEnabled(mIsNetworkEditable);
 
-                mSharedCheckBox.setEnabled(config.shared);
-
                 ProxySettings proxySettings = config.getIpConfiguration().getProxySettings();
                 if (proxySettings == ProxySettings.STATIC) {
                     mProxySettingsSpinner.setSelection(PROXY_STATIC);
@@ -514,7 +510,6 @@ public class WifiConfigController2 implements TextWatcher,
 
             mSsidScanButton.setVisibility(View.GONE);
         }
-        mSharedCheckBox.setVisibility(View.GONE);
 
         mConfigUi.setCancelButton(res.getString(R.string.wifi_cancel));
         if (mConfigUi.getSubmitButton() != null) {
@@ -639,9 +634,6 @@ public class WifiConfigController2 implements TextWatcher,
             config.SSID = "\"" + mSsidInputGroup.getText() + "\"";
             // If the user adds a network manually, assume that it is hidden.
             config.hiddenSSID = mHiddenSettingsSpinner.getSelectedItemPosition() == HIDDEN_NETWORK;
-            if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
-                config.shared = mSharedSwitch.isChecked();
-            }
         } else if (mWifiEntry.isSaved()) {
             config = new WifiConfiguration(mWifiEntry.getWifiConfiguration());
         } else {
@@ -649,13 +641,9 @@ public class WifiConfigController2 implements TextWatcher,
             config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
         }
 
-        if (mMode == WifiConfigUiBase2.MODE_LOGIN_SCREEN) {
-            config.shared = true;
+        if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
+            config.shared = mSharedSwitch.isChecked();
             // TODO: set allowEditConfig once the API is ready.
-        }
-
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()) {
-            config.shared = mSharedCheckBox.isChecked();
         }
 
         switch (mWifiEntrySecurity) {

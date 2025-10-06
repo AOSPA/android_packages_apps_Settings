@@ -899,14 +899,18 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         if (mWifiEntry.isSubscription()) {
             // Post a dialog to confirm if user really want to forget the passpoint network.
             showConfirmForgetDialog(
-                    R.string.wifi_forget_dialog_title, R.string.forget_passpoint_dialog_message);
+                    R.string.wifi_forget_dialog_title,
+                    mContext.getString(
+                        R.string.forget_passpoint_dialog_message));
             return;
         } else if (com.android.settings.connectivity.Flags.wifiMultiuser()
                         && mWifiEntry.isSharedWithOtherUsers()
                         && mUserManager.getUserCount() > 1) {
             showConfirmForgetDialog(
                     R.string.shared_wifi_forget_dialog_title,
-                    R.string.shared_wifi_forget_dialog_message);
+                    mContext.getString(
+                        R.string.shared_wifi_forget_dialog_message,
+                        mWifiEntry.getTitle()));
             return;
         } else {
             mWifiEntry.forget(this);
@@ -920,7 +924,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     @VisibleForTesting
-    protected void showConfirmForgetDialog(int titleId, int messageId) {
+    protected void showConfirmForgetDialog(int titleId, String message) {
         final AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setPositiveButton(R.string.forget, ((dialog1, which) -> {
                     try {
@@ -934,7 +938,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                 }))
                 .setNegativeButton(R.string.cancel, null /* listener */)
                 .setTitle(titleId)
-                .setMessage(messageId)
+                .setMessage(message)
                 .create();
         dialog.show();
     }
