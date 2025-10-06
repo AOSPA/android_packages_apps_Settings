@@ -93,7 +93,7 @@ public class SatelliteCarrierSettingUtils {
     }
 
     @VisibleForTesting
-    static class SatelliteManagerWrapper {
+    public static class SatelliteManagerWrapper {
         private final SatelliteManager mSatelliteManager;
 
         SatelliteManagerWrapper(Context context) {
