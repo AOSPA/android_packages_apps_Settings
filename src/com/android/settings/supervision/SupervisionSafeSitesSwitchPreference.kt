@@ -18,6 +18,7 @@ package com.android.settings.supervision
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ALLOW_ALL_SITES
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_BLOCK_EXPLICIT_SITES
+import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -49,6 +50,10 @@ class SupervisionSafeSitesSwitchPreference(protected val dataStore: SupervisionS
 
     private lateinit var supervisionCredentialLauncher: ActivityResultLauncher<Intent>
 
+    private var browserSupportedAppsPreference:
+        SupervisionWebContentFiltersSupportedAppsEntryPointPreference? =
+        null
+
     override val title
         get() = R.string.supervision_web_content_filters_browser_filter_title
 
@@ -68,6 +73,14 @@ class SupervisionSafeSitesSwitchPreference(protected val dataStore: SupervisionS
         lifeCycleContext = context
         supervisionCredentialLauncher =
             context.registerForActivityResult(StartActivityForResult(), ::onConfirmCredentials)
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
+            browserSupportedAppsPreference =
+                context.findPreference<
+                    SupervisionWebContentFiltersSupportedAppsEntryPointPreference
+                >(
+                    SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY
+                )
+        }
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
@@ -92,6 +105,9 @@ class SupervisionSafeSitesSwitchPreference(protected val dataStore: SupervisionS
             val preference = lifeCycleContext.requirePreference<SwitchPreferenceCompat>(key)
             val isChecked = preference.isChecked
             preference.isChecked = !isChecked
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                browserSupportedAppsPreference?.isEnabled = preference.isChecked
+            }
             logMetrics(preference)
             Log.i(TAG, "Browser filter has changed.")
         }

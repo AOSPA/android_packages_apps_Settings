@@ -17,6 +17,8 @@ package com.android.settings.supervision
 
 import android.content.Context
 import android.content.pm.PackageManager.MATCH_UNINSTALLED_PACKAGES
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.view.View
 import android.widget.ImageView
 import androidx.preference.Preference
@@ -35,6 +37,7 @@ class SupervisionWebContentFiltersSupportedAppsEntryPointPreference(
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
+
         val iconIds =
             listOf<Int>(
                 R.id.supervision_supported_apps_entry_point_icon_1,
@@ -56,6 +59,16 @@ class SupervisionWebContentFiltersSupportedAppsEntryPointPreference(
                     setImageDrawable(icon)
                     contentDescription = supportedApp.title
                     visibility = View.VISIBLE
+                    if (!isEnabled) {
+                        val matrix = ColorMatrix()
+                        matrix.setSaturation(0.0f)
+                        val filter = ColorMatrixColorFilter(matrix)
+                        colorFilter = filter
+                        alpha = DISABLED_ALPHA
+                    } else {
+                        colorFilter = null
+                        alpha = ENABLED_ALPHA
+                    }
                 }
             }
         }
@@ -64,5 +77,10 @@ class SupervisionWebContentFiltersSupportedAppsEntryPointPreference(
     fun updateSupportedApps(newSupportedApps: List<SupportedApp>) {
         supportedApps = newSupportedApps
         notifyChanged()
+    }
+
+    companion object {
+        private const val DISABLED_ALPHA = 0.38f
+        private const val ENABLED_ALPHA = 1.0f
     }
 }

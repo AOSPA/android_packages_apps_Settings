@@ -332,7 +332,7 @@ class SupervisionWebContentFiltersScreenTest {
         Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN,
         Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
     )
-    fun browserSupportedAppsEntryIcon() {
+    fun filterDisabled_browserSupportedAppsEntryDisabledWithGreyedOutIcon() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
 
@@ -340,6 +340,7 @@ class SupervisionWebContentFiltersScreenTest {
                 fragment.findPreference<Preference>(
                     SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY
                 )!!
+            assertThat(preference.isEnabled).isFalse()
 
             // ensure the browser preference is visible
             val recyclerView = fragment.listView
@@ -355,6 +356,57 @@ class SupervisionWebContentFiltersScreenTest {
             assertThat(icon).isNotNull()
             assertThat(icon.visibility).isEqualTo(View.VISIBLE)
             assertThat(icon.drawable).isEqualTo(iconDrawable)
+            assertThat(icon.colorFilter).isNotNull()
+        }
+    }
+
+    @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun filterEnabled_browserSupportedAppsEntryEnabledWithColoredIcon() {
+        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+
+            val switchWidget =
+                fragment.findPreference<SwitchPreferenceCompat>(
+                    SupervisionSafeSitesSwitchPreference.KEY
+                )!!
+
+            switchWidget.performClick()
+
+            // Pretend the PIN verification succeeded.
+            val activity = shadowOf(fragment.activity)
+            activity.receiveResult(
+                activity.nextStartedActivityForResult.intent,
+                Activity.RESULT_OK,
+                null,
+            )
+            ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
+
+            val preference =
+                fragment.findPreference<Preference>(
+                    SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY
+                )!!
+
+            assertThat(preference.isEnabled).isTrue()
+
+            // ensure the browser preference is visible
+            val recyclerView = fragment.listView
+            val adapter = recyclerView.adapter as PreferenceGroupAdapter
+            val position = adapter.getPreferenceAdapterPosition(preference)
+            recyclerView.scrollToPosition(position)
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+            val viewHolder = recyclerView.findViewHolderForAdapterPosition(position)!!
+            val icon =
+                viewHolder.itemView.findViewById<ImageView>(
+                    R.id.supervision_supported_apps_entry_point_icon_1
+                )
+            assertThat(icon).isNotNull()
+            assertThat(icon.visibility).isEqualTo(View.VISIBLE)
+            assertThat(icon.drawable).isEqualTo(iconDrawable)
+            assertThat(icon.colorFilter).isNull()
         }
     }
 
