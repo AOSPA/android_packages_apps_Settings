@@ -6086,6 +6086,10 @@
                    android:value="com.android.settings.safetycenter.ui.SafetyCenterFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                    android:value="true" />
+            <intent-filter android:priority="200">
+                <action android:name="android.settings.PRIVACY_CONTROLS"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->

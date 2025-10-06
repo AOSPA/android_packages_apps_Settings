@@ -16,6 +16,7 @@
 package com.android.settings;
 
 import static android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS;
+import static android.provider.Settings.ACTION_PRIVACY_CONTROLS;
 import static android.provider.Settings.ACTION_PRIVACY_SETTINGS;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 import static android.service.notification.ZenModeConfig.MANUAL_RULE_ID;
@@ -41,6 +42,7 @@ import com.android.settings.applications.specialaccess.SpecialAccessSettings;
 import com.android.settings.applications.specialaccess.SpecialAccessSettingsScreen;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.communal.CommunalPreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.BillingCycleScreen;
 import com.android.settings.datausage.BillingCycleSettings;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen;
@@ -57,14 +59,18 @@ import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.safetycenter.SafetyCenterUtils;
+import com.android.settings.safetycenter.ui.PrivacyControlsFragment;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen;
 import com.android.settings.system.ResetDashboardFragment;
 import com.android.settings.system.ResetDashboardScreen;
 import com.android.settings.system.ShadePanelsPreferenceController;
 import com.android.settings.wifi.WifiUtils;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import com.google.android.setupdesign.util.ThemeHelper;
+
+import java.util.Objects;
 
 /**
  * Top-level Settings activity
@@ -685,7 +691,28 @@ public class Settings extends SettingsActivity {
             super(ColorModeScreen.KEY, ColorModePreferenceFragment.class);
         }
     }
-    public static class SafetyCenterActivity extends SettingsActivity { }
+
+    public static class SafetyCenterActivity extends SettingsActivity {
+
+        private static final String TAG = "SafetyCenterActivity";
+
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            handlePrivacyControlsRedirection();
+        }
+
+        private void handlePrivacyControlsRedirection() {
+            String intentAction = getIntent().getAction();
+            if (Objects.equals(intentAction, ACTION_PRIVACY_CONTROLS)) {
+                Log.d(TAG, "Redirecting to Privacy controls subpage");
+                new SubSettingLauncher(this)
+                        .setDestination(PrivacyControlsFragment.class.getName())
+                        .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                        .launch();
+            }
+        }
+    }
 
     /** Activity for Network & Internet -> Airplane Mode. */
     public static class AirplaneModeSettingsActivity extends CatalystSettingsActivity {
