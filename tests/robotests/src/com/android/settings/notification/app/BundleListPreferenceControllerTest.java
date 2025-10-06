@@ -57,7 +57,6 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @SmallTest
-@EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION)
 @DisableFlags(android.app.Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
 public class BundleListPreferenceControllerTest {
     private Context mContext;

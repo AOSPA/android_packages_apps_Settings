@@ -60,7 +60,6 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
-@EnableFlags(android.service.notification.Flags.FLAG_NOTIFICATION_CLASSIFICATION)
 public class BundleCombinedPreferenceControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();

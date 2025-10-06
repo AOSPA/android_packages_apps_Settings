@@ -54,9 +54,7 @@ public class BundlePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mSetFlagsRule.enableFlags(
-                android.service.notification.Flags.FLAG_NOTIFICATION_CLASSIFICATION,
-                Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI);
+        mSetFlagsRule.enableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI);
         mController = new BundlePreferenceController(mContext, PREFERENCE_KEY);
         mController.mBackend.setNm(mInm);
     }
