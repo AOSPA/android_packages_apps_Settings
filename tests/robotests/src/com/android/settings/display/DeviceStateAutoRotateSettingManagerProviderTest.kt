@@ -18,9 +18,6 @@ package com.android.settings.display
 import android.content.Context
 import android.content.res.Resources
 import android.hardware.devicestate.DeviceStateManager
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
@@ -28,8 +25,6 @@ import com.android.settings.testutils.DeviceStateAutoRotateSettingTestUtils.setA
 import com.android.settings.testutils.DeviceStateAutoRotateSettingTestUtils.setDeviceStateAutoRotateConfig
 import com.android.settings.testutils.DeviceStateAutoRotateSettingTestUtils.setDeviceTypeFoldable
 import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManagerImpl
-import com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager
-import com.android.window.flags.Flags
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Assert.assertNotSame
@@ -46,7 +41,6 @@ import org.mockito.junit.MockitoJUnit
 @RunWith(AndroidJUnit4::class)
 class DeviceStateAutoRotateSettingManagerProviderTest {
 
-    @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule()
     @get:Rule val rule = MockitoJUnit.rule()
 
     @Mock private lateinit var mockContext: Context
@@ -72,8 +66,7 @@ class DeviceStateAutoRotateSettingManagerProviderTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_DEVICE_STATE_AUTO_ROTATE_SETTING_REFACTOR)
-    fun getSingletonInstance_refactorFlagEnabled_returnsRefactoredManager() {
+    fun getSingletonInstance_autoRotateSettingEnabledOnFoldableDevice_returnsManagerSuccessfully() {
         val manager = DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(mockContext)
 
         assertThat(manager).isInstanceOf(DeviceStateAutoRotateSettingManagerImpl::class.java)
@@ -107,15 +100,6 @@ class DeviceStateAutoRotateSettingManagerProviderTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_DEVICE_STATE_AUTO_ROTATE_SETTING_REFACTOR)
-    fun getSingletonInstance_refactorFlagDisabled_returnsLegacyManager() {
-        val manager = DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(mockContext)
-
-        assertThat(manager).isInstanceOf(DeviceStateRotationLockSettingsManager::class.java)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_DEVICE_STATE_AUTO_ROTATE_SETTING_REFACTOR)
     fun getSingletonInstance_resetInstance_returnsNewInstance() {
         val manager1 = DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(mockContext)
         DeviceStateAutoRotateSettingManagerProvider.resetInstance()
@@ -125,7 +109,6 @@ class DeviceStateAutoRotateSettingManagerProviderTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_DEVICE_STATE_AUTO_ROTATE_SETTING_REFACTOR)
     fun getSingletonInstance_getInstanceTwice_returnsSameInstance() {
         val manager1 = DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(mockContext)
         val manager2 = DeviceStateAutoRotateSettingManagerProvider.getSingletonInstance(mockContext)
