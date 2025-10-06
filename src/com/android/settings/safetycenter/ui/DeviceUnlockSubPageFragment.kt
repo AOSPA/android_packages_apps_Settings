@@ -30,7 +30,6 @@ import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModel
 import com.android.settings.safetycenter.ui.model.LiveSafetyCenterViewModelFactory
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.core.AbstractPreferenceController
-import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.search.SearchIndexable
 import com.android.settingslib.widget.IllustrationPreference
 
@@ -63,6 +62,7 @@ class DeviceUnlockSubPageFragment : DashboardFragment() {
     }
 
     private fun setupIllustration() {
+        Log.d(TAG, "Setting Up the illustration")
         val illustrationPreference: IllustrationPreference =
             findPreference(DEVICE_UNLOCK_ILLUSTRATION_KEY)!!
         illustrationPreference.imageDrawable =
@@ -75,25 +75,19 @@ class DeviceUnlockSubPageFragment : DashboardFragment() {
 
         val illustrationPreference: IllustrationPreference =
             findPreference(DEVICE_UNLOCK_ILLUSTRATION_KEY)!!
-        val safetySources = collectSafetySourceIds()
+        val safetySourceIds =
+            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
+                requireContext(),
+                SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK,
+            )
         safetyIssuesPreferenceController?.setSubpageSafetySourcesAndIllustration(
-            safetySources,
+            safetySourceIds,
             illustrationPreference,
         )
     }
 
-    private fun collectSafetySourceIds(): List<String> {
-        val safetySourceIds = mutableListOf<String>()
-        for (i in 0 until preferenceScreen.preferenceCount) {
-            val pref = preferenceScreen.getPreference(i)
-            if (pref is SafetySourcePreference) {
-                pref.safetySource?.let { safetySourceIds.add(it) }
-            }
-        }
-        return safetySourceIds.distinct()
-    }
-
     private fun setupSafetySourcePreferenceControllers(owner: LifecycleOwner) {
+        Log.d(TAG, "Setting Up the safety source preference controllers")
         val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
         for (controller in allControllers) {
             if (controller is SafetySourcePreferenceController) {
