@@ -74,6 +74,7 @@ class SafetyCenterFragment : DashboardFragment() {
     private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
         Log.d(TAG, "Setting Up the safety issues preference controller")
         safetyIssuesPreferenceController?.setViewModelAndLifecycle(viewModel, owner)
+        safetyIssuesPreferenceController?.setFragmentManager(childFragmentManager)
     }
 
     private fun setupSubpagePreferenceControllers(owner: LifecycleOwner) {
