@@ -100,4 +100,14 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) :
 
     override fun enableResolutionApplyConfirmationBugfix(): Boolean =
         enableResolutionApplyConfirmationBugfix.isTrue
+
+    private val enableDisplayBlockArrowMovementBugfixFlag =
+        DesktopExperienceFlag(
+            featureFlagsImpl::enableDisplayBlockArrowMovementBugfix,
+            /* shouldOverrideByDevOption= */ true,
+            Flags.FLAG_ENABLE_DISPLAY_BLOCK_ARROW_MOVEMENT_BUGFIX,
+        )
+
+    override fun enableDisplayBlockArrowMovementBugfix(): Boolean =
+        enableDisplayBlockArrowMovementBugfixFlag.isTrue
 }
