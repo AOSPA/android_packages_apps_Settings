@@ -50,6 +50,19 @@ public class ShortcutOptionPreference extends CheckBoxPreference {
 
     private int mSummaryTextLineHeight;
 
+    @Nullable
+    private OnBindListener mOnBindListener;
+
+    /**
+     * Interface to listen in on when {@link #onBindViewHolder(PreferenceViewHolder)} occurs.
+     */
+    public interface OnBindListener {
+        /**
+         * Called when when {@link #onBindViewHolder(PreferenceViewHolder)} occurs.
+         */
+        void onBind(@NonNull View view);
+    }
+
     public ShortcutOptionPreference(
             @NonNull Context context, @Nullable AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
@@ -113,6 +126,16 @@ public class ShortcutOptionPreference extends CheckBoxPreference {
         }
 
         syncSummaryView(holder);
+        if (mOnBindListener != null) {
+            mOnBindListener.onBind(holder.itemView);
+        }
+    }
+
+    /**
+     * Sets a listener to be notified when the views are bound.
+     */
+    public void setOnBindListener(@Nullable OnBindListener listener) {
+        mOnBindListener = listener;
     }
 
 

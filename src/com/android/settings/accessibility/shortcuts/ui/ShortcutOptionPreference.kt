@@ -16,10 +16,16 @@
 
 package com.android.settings.accessibility.shortcuts.ui
 
+import android.app.settings.SettingsEnums
 import android.content.Context
+import android.view.View
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
+import com.android.settings.R
+import com.android.settings.accessibility.AccessibilityButtonFragment
 import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
 import com.android.settings.accessibility.shortcuts.data.ShortcutOptionDataStore
+import com.android.settings.core.SubSettingLauncher
+import com.android.settings.utils.AnnotationSpan
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.BooleanValuePreference
@@ -71,6 +77,29 @@ abstract class ShortcutOptionPreference(
         return when (value) {
             true -> ReadWritePermit.DISALLOW
             else -> ReadWritePermit.ALLOW
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        fun getCustomizeAccessibilityButtonLink(context: Context): CharSequence {
+            val linkListener =
+                View.OnClickListener { v: View? ->
+                    SubSettingLauncher(context)
+                        .setDestination(AccessibilityButtonFragment::class.java.getName())
+                        .setSourceMetricsCategory(
+                            SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_EDIT_SHORTCUT
+                        )
+                        .launch()
+                }
+            val linkInfo =
+                AnnotationSpan.LinkInfo(AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, linkListener)
+            return AnnotationSpan.linkify(
+                context.getText(
+                    R.string.accessibility_shortcut_edit_dialog_summary_software_floating
+                ),
+                linkInfo,
+            )
         }
     }
 }
