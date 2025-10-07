@@ -17,10 +17,12 @@
 package com.android.settings.development;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.provider.Settings;
+import android.text.TextUtils;
 
-import androidx.preference.PreferenceScreen;
+import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -29,27 +31,37 @@ import com.android.settings.core.BasePreferenceController;
  * fragment.
  */
 public class AdbDeviceNamePreferenceController extends BasePreferenceController {
-    private String mDeviceName;
-
     public AdbDeviceNamePreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        // Keep device name in sync with Settings > About phone > Device name
-        mDeviceName = Settings.Global.getString(mContext.getContentResolver(),
-                Settings.Global.DEVICE_NAME);
-        if (mDeviceName == null) {
-            mDeviceName = Build.MODEL;
-        }
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        preference.setSummary(getSummary());
     }
 
     @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return false;
+        }
+
+        final Intent intent = new Intent(Settings.DEVICE_NAME_SETTINGS);
+        mContext.startActivity(intent);
+        return true;
+    }
+
+
+    @Override
     public CharSequence getSummary() {
-        return mDeviceName;
+        // Keep device name in sync with Settings > About phone > Device name
+        String deviceName = Settings.Global.getString(mContext.getContentResolver(),
+                Settings.Global.DEVICE_NAME);
+        if (deviceName == null) {
+            deviceName = Build.MODEL;
+        }
+        return deviceName;
     }
 
     @Override
