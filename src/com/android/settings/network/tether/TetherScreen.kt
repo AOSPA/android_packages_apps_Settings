@@ -85,7 +85,7 @@ open class TetherScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             if (Flags.catalystTetherSettings()) +WifiHotspotScreen.KEY
-            if (Flags.catalystTetherSettings26q1()) +BluetoothTetherSwitchPreference()
+            if (Flags.catalystTetherSettings26q1()) +BluetoothTetherSwitchPreference(coroutineScope)
         }
 
     companion object {
