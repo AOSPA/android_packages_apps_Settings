@@ -20,7 +20,6 @@ import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_AIRPLANE_TOGGLE
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.UserHandle
 import android.os.UserManager
 import android.provider.Settings
@@ -34,19 +33,20 @@ import com.android.settings.contract.KEY_AIRPLANE_MODE
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
 import com.android.settings.restriction.PreferenceRestrictionMixin
-import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
+import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
 // LINT.IfChange
-class AirplaneModePreference :
+open class AirplaneModePreference :
     SwitchPreference(KEY, R.string.airplane_mode),
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
@@ -58,9 +58,7 @@ class AirplaneModePreference :
 
     override fun tags(context: Context) = arrayOf(KEY_AIRPLANE_MODE)
 
-    override fun isAvailable(context: Context) =
-        (context.resources.getBoolean(R.bool.config_show_toggle_airplane) &&
-            !context.packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK))
+    override fun isAvailable(context: Context) = context.isAirplaneModeEligible()
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
@@ -89,7 +87,7 @@ class AirplaneModePreference :
     override fun storage(context: Context) = createDataStore(context)
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        context.requirePreference<RestrictedSwitchPreference>(KEY).onPreferenceChangeListener =
+        context.requirePreference<Preference>(key).onPreferenceChangeListener =
             Preference.OnPreferenceChangeListener { _: Preference, _: Any ->
                 if (isInEcmMode(context)) {
                     showEcmDialog(context)
@@ -154,8 +152,13 @@ class AirplaneModePreference :
             override val keyValueStoreDelegate
                 get() = settingsStore
 
+            override fun contains(key: String): Boolean = settingsStore.contains(KEY)
+
+            override fun <T : Any> getValue(key: String, valueType: Class<T>) =
+                settingsStore.getValue(KEY, valueType)
+
             override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-                settingsStore.setValue(key, valueType, value)
+                settingsStore.setValue(KEY, valueType, value)
 
                 val intent = Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED)
                 intent.putExtra("state", getBoolean(KEY)!!)
@@ -164,4 +167,26 @@ class AirplaneModePreference :
         }
     }
 }
+
 // LINT.ThenChange(AirplaneModePreferenceController.java)
+
+/** Preference for the Airplane Mode toggle in the Network & Internet screen. */
+class AirplaneModeTogglePreference : AirplaneModePreference(), PreferenceIndexableProvider {
+    override fun isAvailable(context: Context) =
+        context.isAirplaneModeEligible() && !context.hasPairedWatchForAirplaneModeSync()
+
+    override fun isIndexable(context: Context) = isAvailable(context)
+}
+
+/** Preference for the Airplane Mode toggle in the Airplane Mode Settings screen. */
+class AirplaneModeDetailsPreference :
+    AirplaneModePreference(), MainSwitchPreferenceBinding, PreferenceIndexableProvider {
+    override fun isAvailable(context: Context) =
+        context.isAirplaneModeEligible() && context.hasPairedWatchForAirplaneModeSync()
+
+    override val icon: Int
+        @DrawableRes get() = 0 // Main Switch Preference doesn't show icon.
+
+    // TODO : Check and fix Settings Search functionality for flag enabled.
+    override fun isIndexable(context: Context) = isAvailable(context)
+}
