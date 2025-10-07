@@ -16,79 +16,68 @@
 
 package com.android.settings.supervision
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
 import com.android.settings.core.CategoryMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.collapsingtoolbar.R.drawable.settingslib_expressive_icon_back as EXPRESSIVE_BACK_ICON
 import com.android.settingslib.drawer.CategoryKey.CATEGORY_SUPERVISION
 import com.android.settingslib.widget.SettingsThemeHelper
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
-class SupervisionDashboardLoadingActivity : FragmentActivity() {
+class SupervisionDashboardLoadingActivity : FragmentActivity(), CategoryMixin.CategoryListener {
+
+    private lateinit var categoryMixin: CategoryMixin
+    private lateinit var supervisionPackage: String
+
+    private val packageChangeReceiver =
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                // Only react to supervision package updates.
+                if (intent.data?.schemeSpecificPart == supervisionPackage) {
+                    categoryMixin.updateCategories()
+
+                    maybeLaunchDashboard()
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Get the supervision package name from the system config
-        val supervisionPackage =
+        supervisionPackage =
             resources.getString(com.android.internal.R.string.config_systemSupervision)
-        if (supervisionPackage == null) {
+        if (supervisionPackage.isEmpty()) {
             finish()
             return
         }
 
         setContentView(R.layout.supervision_dashboard_loading_screen)
 
-        // Enable supervision app
-        lifecycleScope.launch(Dispatchers.Default) {
-            packageManager.setApplicationEnabledSetting(
-                supervisionPackage,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                0,
-            )
-
-            // Update category after enabling supervision app
-            CategoryMixin(this@SupervisionDashboardLoadingActivity).updateCategories()
-            val dashboardFeatureProvider = featureFactory.dashboardFeatureProvider
-
-            while (
-                !hasNecessarySupervisionComponent(supervisionPackage) ||
-                    dashboardFeatureProvider.getTilesForCategory(CATEGORY_SUPERVISION) == null
-            ) {
-                delay(100) // Check every 100 ms (adjust as needed)
-            }
-
-            lifecycleScope.launch(Dispatchers.Main) {
-                val dashboardActivity =
-                    Intent(
-                        this@SupervisionDashboardLoadingActivity,
-                        SupervisionDashboardActivity::class.java,
-                    )
-                startActivity(dashboardActivity)
-                finish()
-            }
-        }
+        categoryMixin = CategoryMixin(this)
     }
 
     override fun onResume() {
         super.onResume()
 
-        val actionBar = getActionBar()
-        if (actionBar != null) {
-            actionBar.elevation = 0f
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            if (SettingsThemeHelper.isExpressiveTheme(this)) {
-                actionBar.setHomeAsUpIndicator(EXPRESSIVE_BACK_ICON)
-            }
-        }
+        registerReceivers()
+        tryEnableSupervisionPackage()
+
+        setupActionBar()
+        maybeLaunchDashboard()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        unregisterReceivers()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -97,5 +86,83 @@ class SupervisionDashboardLoadingActivity : FragmentActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupActionBar() {
+        actionBar?.apply {
+            elevation = 0f
+            setDisplayHomeAsUpEnabled(true)
+            if (SettingsThemeHelper.isExpressiveTheme(this@SupervisionDashboardLoadingActivity)) {
+                setHomeAsUpIndicator(EXPRESSIVE_BACK_ICON)
+            }
+        }
+    }
+
+    private fun registerReceivers() {
+        val intentFilter =
+            IntentFilter().apply {
+                addAction(Intent.ACTION_PACKAGE_ADDED)
+                addAction(Intent.ACTION_PACKAGE_CHANGED)
+                addDataScheme("package")
+            }
+        registerReceiver(packageChangeReceiver, intentFilter, RECEIVER_NOT_EXPORTED)
+        categoryMixin.addCategoryListener(this)
+    }
+
+    private fun unregisterReceivers() {
+        unregisterReceiver(packageChangeReceiver)
+        categoryMixin.removeCategoryListener(this)
+    }
+
+    override fun onCategoriesChanged(categories: Set<String>?) {
+        // A null set means refreshed all categories.
+        if (categories == null || categories.contains(CATEGORY_SUPERVISION)) {
+            maybeLaunchDashboard()
+        }
+    }
+
+    private fun maybeLaunchDashboard() {
+        if (isFinishing) return
+        if (isSettingsDashboardReady()) {
+            // Supervision package with necessary component is ready, launch dashboard
+            val dashboardActivity = Intent(this, SupervisionDashboardActivity::class.java)
+            startActivity(dashboardActivity)
+            finish()
+        } else if (getSupervisionAppInstallActivityInfo() != null) {
+            // Supervision package with necessary component is not ready, but a mitigation action
+            // is available.
+            startActivity(getSupervisionAppInstallIntent())
+            finish()
+        }
+        // Otherwise, wait for another event to trigger this check again.
+    }
+
+    private fun isSettingsDashboardReady(): Boolean {
+        val hasComponent = hasNecessarySupervisionComponent()
+        val tilesExist =
+            featureFactory.dashboardFeatureProvider.getTilesForCategory(CATEGORY_SUPERVISION) !=
+                null
+        return hasComponent && tilesExist
+    }
+
+    private fun tryEnableSupervisionPackage() {
+        try {
+            val packageInfo = packageManager.getPackageInfo(supervisionPackage, 0)
+            if (packageInfo == null) return
+
+            val applicationInfo = packageInfo.applicationInfo
+            if (applicationInfo == null) return
+
+            if (!applicationInfo.enabled) {
+                packageManager.setApplicationEnabledSetting(
+                    supervisionPackage,
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    0,
+                )
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+            // Supervision package is not installed, do nothing
+            return
+        }
     }
 }

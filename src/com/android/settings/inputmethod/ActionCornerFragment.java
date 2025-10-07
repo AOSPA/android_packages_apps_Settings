@@ -32,10 +32,9 @@ public class ActionCornerFragment extends InputDeviceDashboardFragment {
 
     private static final String TAG = "ActionCornerFragment";
 
-    //TODO (b/413277948): Metrics
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.PAGE_UNKNOWN;
+        return SettingsEnums.ACTION_CORNERS;
     }
 
     @Override

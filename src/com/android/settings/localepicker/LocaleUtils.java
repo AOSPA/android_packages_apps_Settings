@@ -17,11 +17,7 @@
 package com.android.settings.localepicker;
 
 import static com.android.settings.flags.Flags.localeNotificationEnabled;
-import static com.android.settings.localepicker.LocaleListEditor.EXTRA_RESULT_LOCALE;
-import static com.android.settings.localepicker.RegionAndNumberingSystemPickerFragment.EXTRA_IS_NUMBERING_SYSTEM;
-import static com.android.settings.localepicker.RegionAndNumberingSystemPickerFragment.EXTRA_TARGET_LOCALE;
 
-import android.app.Dialog;
 import android.app.LocaleManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -37,7 +33,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 import androidx.core.app.NotificationCompat;
 
 import com.android.internal.app.LocaleHelper;
@@ -51,7 +46,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 /**
  * A locale utility class.
@@ -68,24 +62,19 @@ public class LocaleUtils {
     private static final int IME_LOCALE = 1 << 3;
 
     /**
-     * Checks if the languageTag is in the system locale. Since in the current design, the system
-     * language list would not show two locales with the same language and region but different
-     * numbering system. So, the u extension has to be stripped out in the process of comparison.
+     * Check if the language is already in the system locale list.
      *
      * @param languageTag A language tag
-     * @return true if the locale is in the system locale. Otherwise, false.
+     * @return true if the language is in the system locale. Otherwise, false.
      */
-    public static boolean isInSystemLocale(@NonNull String languageTag) {
+    public static boolean isLanguageInSystemLocale(@NonNull String languageTag) {
+        if (TextUtils.isEmpty(languageTag)) {
+            return false;
+        }
+        String language = Locale.forLanguageTag(languageTag).getLanguage();
         LocaleList systemLocales = LocaleList.getDefault();
-        Locale localeWithoutUextension =
-                new Locale.Builder()
-                        .setLocale(Locale.forLanguageTag(languageTag))
-                        .clearExtensions()
-                        .build();
         for (int i = 0; i < systemLocales.size(); i++) {
-            Locale sysLocaleWithoutUextension =
-                    new Locale.Builder().setLocale(systemLocales.get(i)).clearExtensions().build();
-            if (localeWithoutUextension.equals(sysLocaleWithoutUextension)) {
+            if (systemLocales.get(i).getLanguage().equals(language)) {
                 return true;
             }
         }

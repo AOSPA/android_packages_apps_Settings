@@ -36,7 +36,6 @@ import androidx.annotation.Nullable;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.keyboard.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.SliderPreference;
@@ -165,8 +164,7 @@ public class KeyboardRepeatKeysMainFragment extends DashboardFragment
             new BaseSearchIndexProvider(R.xml.repeat_key_main_page) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return Flags.keyboardAndTouchpadA11yNewPageEnabled()
-                            && !getHardKeyboards(context).isEmpty();
+                    return !getHardKeyboards(context).isEmpty();
                 }
             };
 }

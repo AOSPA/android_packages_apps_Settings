@@ -31,6 +31,7 @@ class AmbientDisplayIllustration(context: Context) : PreferenceMetadata, Prefere
 
     private lateinit var illustration: IllustrationPreference
     private val storage = SettingsSecureStore.get(context)
+    private val dozeAlwaysOnDataStore = AmbientDisplayStorage(context)
 
     override val key: String
         get() = KEY
@@ -50,8 +51,8 @@ class AmbientDisplayIllustration(context: Context) : PreferenceMetadata, Prefere
     override fun isIndexable(context: Context) = false
 
     private fun updateImage(context: Context) {
-        val isWallpaperEnabled = storage.getBoolean(DOZE_ALWAYS_ON_WALLPAPER_ENABLED) != false
-        val isAmbientDisplayEnabled = storage.getBoolean(DOZE_ALWAYS_ON) != false
+        val isWallpaperEnabled = storage.getBoolean(DOZE_ALWAYS_ON_WALLPAPER_ENABLED) == true
+        val isAmbientDisplayEnabled = dozeAlwaysOnDataStore.getBoolean(DOZE_ALWAYS_ON)!!
         val drawable =
             when {
                 isWallpaperEnabled &&

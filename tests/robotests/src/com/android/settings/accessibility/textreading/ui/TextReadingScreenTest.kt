@@ -15,17 +15,81 @@
  */
 package com.android.settings.accessibility.textreading.ui
 
+import android.app.settings.SettingsEnums
+import android.content.ComponentName
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
+import com.android.settings.R
+import com.android.settings.Settings
+import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
+import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
+/** Tests for [TextReadingScreen]. */
 class TextReadingScreenTest : SettingsCatalystTestCase() {
-
+    private val context: Context = ApplicationProvider.getApplicationContext()
     override val preferenceScreenCreator = TextReadingScreen()
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_TEXT_READING_SCREEN
 
+    @Test override fun migration() {}
+
     @Test
-    override fun migration() {}
+    fun key() {
+        assertThat(preferenceScreenCreator.key).isEqualTo(TextReadingScreen.KEY)
+    }
+
+    @Test
+    fun isIndexable() {
+        assertThat(preferenceScreenCreator.isIndexable(context)).isTrue()
+    }
+
+    @Test
+    fun getTitle() {
+        assertThat(preferenceScreenCreator.title)
+            .isEqualTo(R.string.accessibility_text_reading_options_title)
+    }
+
+    @Test
+    fun getSummary() {
+        assertThat(preferenceScreenCreator.summary)
+            .isEqualTo(R.string.accessibility_text_reading_options_subtext)
+    }
+
+    @Test
+    fun getMetricsCategory() {
+        assertThat(preferenceScreenCreator.metricsCategory)
+            .isEqualTo(SettingsEnums.ACCESSIBILITY_TEXT_READING_OPTIONS)
+    }
+
+    @Test
+    fun getHighlightMenuKey() {
+        assertThat(preferenceScreenCreator.highlightMenuKey).isEqualTo(R.string.menu_key_display)
+    }
+
+    @Test
+    fun getLaunchIntent() {
+        val expectedComponent =
+            ComponentName(context, Settings.TextReadingSettingsActivity::class.java)
+        val launchIntent = preferenceScreenCreator.getLaunchIntent(context, preferenceScreenCreator)
+        assertThat(launchIntent).isNotNull()
+        assertThat(launchIntent!!.component).isEqualTo(expectedComponent)
+        assertThat(launchIntent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY))
+            .isEqualTo(TextReadingScreen.KEY)
+    }
+
+    @Test
+    fun getEntryPoint() {
+        assertThat(preferenceScreenCreator.entryPoint)
+            .isEqualTo(TextReadingPreferenceFragment.EntryPoint.DISPLAY_SETTINGS)
+    }
+
+    @Test
+    fun getIcon() {
+        assertThat(preferenceScreenCreator.icon).isEqualTo(0)
+    }
 }

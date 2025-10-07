@@ -20,12 +20,15 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.colorinversion.ui.ColorInversionScreen;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -33,11 +36,30 @@ import com.android.settingslib.search.SearchIndexable;
  * Settings page for color inversion.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ToggleColorInversionPreferenceFragment extends ShortcutFragment {
+public class ToggleColorInversionPreferenceFragment extends BaseSupportFragment {
     private static final String TAG = "ToggleColorInversionPreferenceFragment";
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (!Flags.catalystColorInversion()) {
+            ToggleShortcutPreferenceController shortcutPreferenceController = use(
+                    ToggleShortcutPreferenceController.class);
+            if (shortcutPreferenceController != null) {
+                shortcutPreferenceController.initialize(
+                        getFeatureComponentName(),
+                        getChildFragmentManager(),
+                        getFeatureName(),
+                        getMetricsCategory()
+                );
+            }
+            use(FeedbackButtonPreferenceController.class).initialize(
+                    new FeedbackManager(context, getMetricsCategory()));
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final View rootView = getActivity().getWindow().peekDecorView();
         if (rootView != null) {
@@ -67,18 +89,24 @@ public class ToggleColorInversionPreferenceFragment extends ShortcutFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_color_inversion_settings);
+            new BaseSearchIndexProvider(
+                    Flags.catalystColorInversion()
+                            && com.android.settings.flags.Flags.catalystSettingsSearch() ? 0 :
+                            R.xml.accessibility_color_inversion_settings);
 
     @NonNull
-    @Override
-    public CharSequence getFeatureName() {
+    private CharSequence getFeatureName() {
         return getString(
                 R.string.accessibility_display_inversion_preference_title);
     }
 
     @NonNull
-    @Override
-    public ComponentName getFeatureComponentName() {
+    private ComponentName getFeatureComponentName() {
         return COLOR_INVERSION_COMPONENT_NAME;
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ColorInversionScreen.KEY;
     }
 }

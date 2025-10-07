@@ -84,6 +84,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     @Resetter
     public static void reset() {
         sIsSupportsMultipleUsers = false;
+        sIsMultipleAdminEnabled = false;
     }
 
     /**
@@ -383,6 +384,11 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void setGuestUser(boolean isGuestUser) {
         mIsGuestUser = isGuestUser;
+    }
+
+    @Implementation
+    protected static boolean isMultipleAdminEnabled() {
+        return sIsMultipleAdminEnabled;
     }
 
     public static void setIsMultipleAdminEnabled(boolean enableMultipleAdmin) {

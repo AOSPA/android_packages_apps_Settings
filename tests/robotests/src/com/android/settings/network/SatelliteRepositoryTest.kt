@@ -26,6 +26,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.internal.telephony.flags.Flags
 import com.google.common.truth.Truth.assertThat
 import com.google.common.util.concurrent.ListenableFuture
+import java.util.concurrent.Executor
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
@@ -47,26 +48,19 @@ import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
-import java.util.concurrent.Executor
 
 @RunWith(RobolectricTestRunner::class)
 class SatelliteRepositoryTest {
 
-    @JvmField
-    @Rule
-    val mockitoRule: MockitoRule = MockitoJUnit.rule()
+    @JvmField @Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
-    @Spy
-    var spyContext: Context = ApplicationProvider.getApplicationContext()
+    @Spy var spyContext: Context = ApplicationProvider.getApplicationContext()
 
-    @Mock
-    private lateinit var mockSatelliteManager: SatelliteManager
+    @Mock private lateinit var mockSatelliteManager: SatelliteManager
 
-    @Mock
-    private lateinit var mockExecutor: Executor
+    @Mock private lateinit var mockExecutor: Executor
 
     private lateinit var repository: SatelliteRepository
-
 
     @Before
     fun setUp() {
@@ -79,10 +73,11 @@ class SatelliteRepositoryTest {
     @Test
     fun requestIsEnabled_resultIsTrue() = runBlocking {
         `when`(
-            mockSatelliteManager.requestIsEnabled(
-                eq(mockExecutor), any<OutcomeReceiver<Boolean, SatelliteException>>()
+                mockSatelliteManager.requestIsEnabled(
+                    eq(mockExecutor),
+                    any<OutcomeReceiver<Boolean, SatelliteException>>(),
+                )
             )
-        )
             .thenAnswer { invocation ->
                 val receiver =
                     invocation.getArgument<OutcomeReceiver<Boolean, SatelliteException>>(1)
@@ -90,17 +85,15 @@ class SatelliteRepositoryTest {
                 null
             }
 
-        val result: ListenableFuture<Boolean> =
-            repository.requestIsEnabled(mockExecutor)
+        val result: ListenableFuture<Boolean> = repository.requestIsEnabled(mockExecutor)
 
         assertTrue(result.get())
     }
 
     @Test
     fun requestIsSessionStarted_resultIsTrue() = runBlocking {
-        `when`(
-            mockSatelliteManager.registerForModemStateChanged(any(), any())
-        ).thenAnswer { invocation ->
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())).thenAnswer {
+            invocation ->
             val callback = invocation.getArgument<SatelliteModemStateCallback>(1)
             callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED)
             SatelliteManager.SATELLITE_RESULT_SUCCESS
@@ -113,9 +106,8 @@ class SatelliteRepositoryTest {
 
     @Test
     fun requestIsSessionStarted_resultIsFalse() = runBlocking {
-        `when`(
-            mockSatelliteManager.registerForModemStateChanged(any(), any())
-        ).thenAnswer { invocation ->
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())).thenAnswer {
+            invocation ->
             val callback = invocation.getArgument<SatelliteModemStateCallback>(1)
             callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_OFF)
             SatelliteManager.SATELLITE_RESULT_SUCCESS
@@ -128,9 +120,7 @@ class SatelliteRepositoryTest {
 
     @Test
     fun requestIsSessionStarted_registerFailed() = runBlocking {
-        `when`(
-            mockSatelliteManager.registerForModemStateChanged(any(), any())
-        ).thenAnswer {
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())).thenAnswer {
             SatelliteManager.SATELLITE_RESULT_ERROR
         }
 
@@ -141,9 +131,8 @@ class SatelliteRepositoryTest {
 
     @Test
     fun requestIsSessionStarted_phoneCrash_registerFailed() = runBlocking {
-        `when`(
-            mockSatelliteManager.registerForModemStateChanged(any(), any())
-        ).thenThrow(IllegalStateException("Telephony is null"))
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any()))
+            .thenThrow(IllegalStateException("Telephony is null"))
 
         val result: ListenableFuture<Boolean> = repository.requestIsSessionStarted(mockExecutor)
         assertFalse(result.get())
@@ -162,10 +151,11 @@ class SatelliteRepositoryTest {
     @Test
     fun requestIsEnabled_resultIsFalse() = runBlocking {
         `when`(
-            mockSatelliteManager.requestIsEnabled(
-                eq(mockExecutor), any<OutcomeReceiver<Boolean, SatelliteException>>()
+                mockSatelliteManager.requestIsEnabled(
+                    eq(mockExecutor),
+                    any<OutcomeReceiver<Boolean, SatelliteException>>(),
+                )
             )
-        )
             .thenAnswer { invocation ->
                 val receiver =
                     invocation.getArgument<OutcomeReceiver<Boolean, SatelliteException>>(1)
@@ -173,30 +163,27 @@ class SatelliteRepositoryTest {
                 null
             }
 
-        val result: ListenableFuture<Boolean> =
-            repository.requestIsEnabled(mockExecutor)
+        val result: ListenableFuture<Boolean> = repository.requestIsEnabled(mockExecutor)
         assertFalse(result.get())
     }
 
     @Test
     fun requestIsEnabled_phoneCrash_resultIsFalse() = runBlocking {
-        `when`(
-            mockSatelliteManager.requestIsEnabled(any(), any())
-        ).thenThrow(IllegalStateException("Telephony is null"))
+        `when`(mockSatelliteManager.requestIsEnabled(any(), any()))
+            .thenThrow(IllegalStateException("Telephony is null"))
 
-        val result: ListenableFuture<Boolean> =
-            repository.requestIsEnabled(mockExecutor)
+        val result: ListenableFuture<Boolean> = repository.requestIsEnabled(mockExecutor)
         assertFalse(result.get())
     }
-
 
     @Test
     fun requestIsEnabled_exceptionFailure() = runBlocking {
         `when`(
-            mockSatelliteManager.requestIsEnabled(
-                eq(mockExecutor), any<OutcomeReceiver<Boolean, SatelliteException>>()
+                mockSatelliteManager.requestIsEnabled(
+                    eq(mockExecutor),
+                    any<OutcomeReceiver<Boolean, SatelliteException>>(),
+                )
             )
-        )
             .thenAnswer { invocation ->
                 val receiver =
                     invocation.getArgument<OutcomeReceiver<Boolean, SatelliteException>>(1)
@@ -220,12 +207,8 @@ class SatelliteRepositoryTest {
 
     @Test
     fun getIsSessionStartedFlow_isSatelliteEnabledState() = runBlocking {
-        `when`(
-            mockSatelliteManager.registerForModemStateChanged(
-                any(),
-                any()
-            )
-        ).thenAnswer { invocation ->
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())).thenAnswer {
+            invocation ->
             val callback = invocation.getArgument<SatelliteModemStateCallback>(1)
             callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED)
             SatelliteManager.SATELLITE_RESULT_SUCCESS
@@ -238,12 +221,8 @@ class SatelliteRepositoryTest {
 
     @Test
     fun getIsSessionStartedFlow_isSatelliteDisabledState() = runBlocking {
-        `when`(
-            mockSatelliteManager.registerForModemStateChanged(
-                any(),
-                any()
-            )
-        ).thenAnswer { invocation ->
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())).thenAnswer {
+            invocation ->
             val callback = invocation.getArgument<SatelliteModemStateCallback>(1)
             callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_OFF)
             SatelliteManager.SATELLITE_RESULT_SUCCESS
@@ -264,9 +243,7 @@ class SatelliteRepositoryTest {
 
     @Test
     fun getIsSessionStartedFlow_registerFailed() = runBlocking {
-        `when`(
-            mockSatelliteManager.registerForModemStateChanged(any(), any())
-        ).thenAnswer {
+        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())).thenAnswer {
             SatelliteManager.SATELLITE_RESULT_ERROR
         }
 
@@ -278,16 +255,15 @@ class SatelliteRepositoryTest {
     @Test
     @EnableFlags(Flags.FLAG_SATELLITE_25Q4_APIS)
     fun getSatelliteDataOptimizedApps_returnPackageNameList() = runBlocking {
-        whenever(
-            mockSatelliteManager.getSatelliteDataOptimizedApps()
-        ).thenReturn(
-            listOf(
-                "com.android.settings",
-                "com.android.apps.messaging",
-                "com.android.dialer",
-                "com.android.systemui"
+        whenever(mockSatelliteManager.getSatelliteDataOptimizedApps())
+            .thenReturn(
+                listOf(
+                    "com.android.settings",
+                    "com.android.apps.messaging",
+                    "com.android.dialer",
+                    "com.android.systemui",
+                )
             )
-        )
 
         val result = repository.getSatelliteDataOptimizedApps()
 
@@ -297,24 +273,34 @@ class SatelliteRepositoryTest {
     @Test
     @EnableFlags(Flags.FLAG_SATELLITE_25Q4_APIS)
     fun getSatelliteDataOptimizedApps_noTelephony_returnEmptyList() = runBlocking {
-        whenever(
-            mockSatelliteManager.getSatelliteDataOptimizedApps()
-        ).thenThrow(IllegalStateException("Telephony is null"))
+        whenever(mockSatelliteManager.getSatelliteDataOptimizedApps())
+            .thenThrow(IllegalStateException("Telephony is null"))
 
         val result = repository.getSatelliteDataOptimizedApps()
 
         assertThat(result.isEmpty()).isTrue()
     }
 
+    @Test
+    fun isSatelliteAccessConfigurationForCurrentLocationFlow_noSatelliteManager_returnFalse() =
+        runBlocking {
+            whenever(spyContext.getSystemService(SatelliteManager::class.java)).thenReturn(null)
+
+            val result =
+                repository.isSatelliteAccessConfigurationForCurrentLocationFlow(TEST_SUB_ID).first()
+
+            assertThat(result).isFalse()
+        }
 
     @Test
     @Ignore("b/420876879")
     fun requestIsSupportedFlow_error_returnFalse() = runBlocking {
         whenever(
-            mockSatelliteManager.requestIsSupported(
-                eq(mockExecutor), any<OutcomeReceiver<Boolean, SatelliteException>>()
+                mockSatelliteManager.requestIsSupported(
+                    eq(mockExecutor),
+                    any<OutcomeReceiver<Boolean, SatelliteException>>(),
+                )
             )
-        )
             .thenAnswer { invocation ->
                 val receiver =
                     invocation.getArgument<OutcomeReceiver<Boolean, SatelliteException>>(1)
@@ -331,10 +317,11 @@ class SatelliteRepositoryTest {
     @Ignore("b/420876879")
     fun requestIsSupportedFlow_notSupported_returnFalse() = runBlocking {
         whenever(
-            mockSatelliteManager.requestIsSupported(
-                eq(mockExecutor), any<OutcomeReceiver<Boolean, SatelliteException>>()
+                mockSatelliteManager.requestIsSupported(
+                    eq(mockExecutor),
+                    any<OutcomeReceiver<Boolean, SatelliteException>>(),
+                )
             )
-        )
             .thenAnswer { invocation ->
                 val receiver =
                     invocation.getArgument<OutcomeReceiver<Boolean, SatelliteException>>(1)
@@ -351,10 +338,11 @@ class SatelliteRepositoryTest {
     @Ignore("b/420876879")
     fun requestIsSupportedFlow_supported_returnTrue() = runBlocking {
         whenever(
-            mockSatelliteManager.requestIsSupported(
-                eq(mockExecutor), any<OutcomeReceiver<Boolean, SatelliteException>>()
+                mockSatelliteManager.requestIsSupported(
+                    eq(mockExecutor),
+                    any<OutcomeReceiver<Boolean, SatelliteException>>(),
+                )
             )
-        )
             .thenAnswer { invocation ->
                 val receiver =
                     invocation.getArgument<OutcomeReceiver<Boolean, SatelliteException>>(1)
@@ -365,5 +353,9 @@ class SatelliteRepositoryTest {
         val result = repository.requestIsSupportedFlow()
 
         assertThat(result.first()).isFalse()
+    }
+
+    companion object {
+        private const val TEST_SUB_ID = 5
     }
 }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.android.settings;
 
 import static android.provider.Settings.ACTION_PRIVACY_SETTINGS;
@@ -24,11 +23,13 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SubscriptionManager;
 import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -37,16 +38,23 @@ import com.android.settings.accessibility.VibrationIntensitySettingsFragment;
 import com.android.settings.accessibility.VibrationScreen;
 import com.android.settings.accessibility.VibrationSettings;
 import com.android.settings.applications.AppStorageSettings;
+import com.android.settings.applications.specialaccess.SpecialAccessSettings;
+import com.android.settings.applications.specialaccess.SpecialAccessSettingsScreen;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.communal.CommunalPreferenceController;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.display.ColorModePreferenceFragment;
+import com.android.settings.display.ColorModeScreen;
+import com.android.settings.emergency.EmergencyDashboardFragment;
+import com.android.settings.emergency.EmergencyDashboardScreen;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.network.AdaptiveConnectivityScreen;
 import com.android.settings.network.AdaptiveConnectivitySettings;
 import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
+import com.android.settings.safetycenter.SafetyCenterUtils;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen;
 import com.android.settings.system.ResetDashboardFragment;
@@ -150,6 +158,7 @@ public class Settings extends SettingsActivity {
     /** Activity for the language settings. */
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
     public static class LanguageSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class LanguageAndRegionSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SystemLanguageSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppLanguageSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the regional preferences settings. */
@@ -239,12 +248,8 @@ public class Settings extends SettingsActivity {
             }
 
             if (SafetyCenterManagerWrapper.get().isEnabled(this)) {
-                try {
-                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER)
-                            .setPackage(getPackageManager().getPermissionControllerPackageName()));
+                if (SafetyCenterUtils.redirectToSafetyCenter(this)) {
                     finish();
-                } catch (ActivityNotFoundException e) {
-                    Log.e(TAG, "Unable to open safety center", e);
                 }
             }
         }
@@ -335,14 +340,11 @@ public class Settings extends SettingsActivity {
 
             if (ACTION_PRIVACY_SETTINGS.equals(getIntent().getAction())
                     && SafetyCenterManagerWrapper.get().isEnabled(this)) {
-                try {
-                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER)
-                            .setPackage(getPackageManager().getPermissionControllerPackageName()));
+                if (SafetyCenterUtils.redirectToSafetyCenter(this)) {
                     finish();
-                } catch (ActivityNotFoundException e) {
-                    Log.e(TAG, "Unable to open safety center", e);
                 }
             }
+
         }
     }
     public static class PrivacyControlsActivity extends SettingsActivity { /* empty */ }
@@ -418,16 +420,16 @@ public class Settings extends SettingsActivity {
     public static class PrintJobSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ModeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ModesSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class DndModeDisplaySettingsActivity extends SettingsActivity {
+    private static class DndBaseSettingsActivity extends SettingsActivity {
         @Override
-        protected void onCreate(Bundle savedState) {
-            super.onCreate(savedState);
-            if (getIntent() != null && !TextUtils.equals(
-                    getIntent().getStringExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID), MANUAL_RULE_ID)) {
-                finish();
-            }
+        public Intent getIntent() {
+            // specify the DND id
+            return super.getIntent().putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, MANUAL_RULE_ID);
         }
     }
+    public static class DndDisplaySettingsActivity extends DndBaseSettingsActivity { /* empty */ }
+    public static class DndPeopleSettingsActivity extends DndBaseSettingsActivity { /* empty */ }
+    public static class DndCallsSettingsActivity extends DndBaseSettingsActivity { /* empty */ }
     public static class SoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class VibrationSettingsActivity extends CatalystSettingsActivity {
         public VibrationSettingsActivity() {
@@ -442,6 +444,7 @@ public class Settings extends SettingsActivity {
     public static class ConfigureNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConversationListSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppBubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class BubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAssistantSettingsActivity extends SettingsActivity{ /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
     public static class NotificationExcludeSummarizationActivity extends SettingsActivity { /* empty */ }
@@ -529,12 +532,14 @@ public class Settings extends SettingsActivity {
     public static class MobileNetworkListActivity extends SettingsActivity {}
     public static class PowerMenuSettingsActivity extends SettingsActivity {}
     public static class MobileNetworkActivity extends SettingsActivity {
-
+        private static final String MOBILE_NETWORK_FRAGMENT_NAME =
+                "com.android.settings.network.telephony.MobileNetworkSettings";
         public static final String TAG = "MobileNetworkActivity";
         public static final String EXTRA_MMS_MESSAGE = "mms_message";
         public static final String EXTRA_SHOW_CAPABILITY_DISCOVERY_OPT_IN =
                 "show_capability_discovery_opt_in";
 
+        private Intent mCachedIntent = null;
         private MobileNetworkIntentConverter mIntentConverter;
 
         /**
@@ -544,7 +549,10 @@ public class Settings extends SettingsActivity {
         @Override
         protected void onNewIntent(Intent intent) {
             super.onNewIntent(intent);
-
+            if (!isTargetIsMobileNetwork(intent)) {
+                finish();
+                return;
+            }
             Log.d(TAG, "Starting onNewIntent");
             setIntent(intent);
             createUiFromIntent(null /* savedState */, convertIntent(intent));
@@ -552,7 +560,13 @@ public class Settings extends SettingsActivity {
 
         @Override
         public Intent getIntent() {
-            return convertIntent(super.getIntent());
+            Intent intent = super.getIntent();
+            if (isSameSubId(intent, mCachedIntent)) {
+                return mCachedIntent;
+            } else {
+                mCachedIntent = convertIntent(intent);
+                return mCachedIntent;
+            }
         }
 
         private Intent convertIntent(Intent copyFrom) {
@@ -567,6 +581,25 @@ public class Settings extends SettingsActivity {
             String intentAction = (intent != null ? intent.getAction() : null);
             return TextUtils.equals(intentAction,
                     ImsRcsManager.ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN);
+        }
+
+        private static boolean isTargetIsMobileNetwork(@NonNull Intent intent) {
+            String fragmentName = intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT);
+            if (fragmentName != null && !fragmentName.isEmpty()) {
+                return fragmentName.equals(MOBILE_NETWORK_FRAGMENT_NAME);
+            }
+            return false;
+        }
+
+        private static boolean isSameSubId(Intent intent, Intent cachedIntent) {
+            if (intent == null || cachedIntent == null) {
+                return false;
+            }
+
+            return intent.getIntExtra(android.provider.Settings.EXTRA_SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID) == cachedIntent.getIntExtra(
+                    android.provider.Settings.EXTRA_SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         }
     }
 
@@ -587,6 +620,11 @@ public class Settings extends SettingsActivity {
     public static class PowerUsageAdvancedActivity extends SettingsActivity { /* empty */ }
     public static class StorageDashboardActivity extends SettingsActivity {}
     public static class AccountDashboardActivity extends SettingsActivity {}
+    public static class EmergencyDashboardActivity extends CatalystSettingsActivity {
+        public EmergencyDashboardActivity() {
+            super(EmergencyDashboardScreen.KEY, EmergencyDashboardFragment.class);
+        }
+    }
     public static class SystemDashboardActivity extends SettingsActivity {}
     public static class SupportDashboardActivity extends SettingsActivity {}
     public static class SMQQtiFeedbackActivity extends SettingsActivity { /* empty */ }
@@ -640,4 +678,19 @@ public class Settings extends SettingsActivity {
             super(AdaptiveConnectivityScreen.KEY, AdaptiveConnectivitySettings.class);
         }
     }
+
+    /** Activity for Special Access Settings. */
+    public static class SpecialAccessSettingsActivity extends CatalystSettingsActivity {
+        public SpecialAccessSettingsActivity() {
+            super(SpecialAccessSettingsScreen.KEY, SpecialAccessSettings.class);
+        }
+    }
+
+    /** Activity for Display & Touch -> Colors. */
+    public static class ColorModeActivity extends CatalystSettingsActivity {
+        public ColorModeActivity() {
+            super(ColorModeScreen.KEY, ColorModePreferenceFragment.class);
+        }
+    }
+    public static class SafetyCenterActivity extends SettingsActivity { }
 }

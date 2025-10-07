@@ -273,9 +273,7 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, RemoteAuthActivityInternal.class);
         addActivityFilter(activityFilters, ChooseLockPattern.class);
         addActivityFilter(activityFilters, PrivateSpaceSetupActivity.class);
-        if (android.multiuser.Flags.fixLargeDisplayPrivateSpaceSettings()) {
-            addActivityFilter(activityFilters, PrivateSpaceDeleteActivity.class);
-        }
+        addActivityFilter(activityFilters, PrivateSpaceDeleteActivity.class);
         String action = mContext.getString(R.string.config_avatar_picker_action);
         addActivityFilter(activityFilters, new Intent(action));
         addActivityFilter(activityFilters, CreateUserActivity.class);

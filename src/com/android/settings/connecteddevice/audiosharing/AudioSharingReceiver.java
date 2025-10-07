@@ -48,7 +48,6 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.flags.Flags;
 
 import com.google.common.collect.ImmutableList;
 
@@ -134,8 +133,7 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                 cancelSharingNotification(context, ADD_SOURCE_NOTIFICATION_ID);
                 break;
             case LocalBluetoothLeBroadcast.ACTION_LE_AUDIO_SHARING_DEVICE_CONNECTED:
-                if (!Flags.promoteAudioSharingForSecondAutoConnectedLeaDevice()
-                        || !BluetoothUtils.isAudioSharingUIAvailable(context)) {
+                if (!BluetoothUtils.isAudioSharingUIAvailable(context)) {
                     Log.d(TAG, "Skip ACTION_LE_AUDIO_SHARING_DEVICE_CONNECTED, flag/feature off");
                     return;
                 }
@@ -163,8 +161,7 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                 }
                 break;
             case ACTION_LE_AUDIO_SHARING_ADD_SOURCE:
-                if (!Flags.promoteAudioSharingForSecondAutoConnectedLeaDevice()
-                        || !BluetoothUtils.isAudioSharingUIAvailable(context)) {
+                if (!BluetoothUtils.isAudioSharingUIAvailable(context)) {
                     Log.d(TAG, "Skip ACTION_LE_AUDIO_SHARING_ADD_SOURCE, flag/feature off");
                     cancelSharingNotification(context, ADD_SOURCE_NOTIFICATION_ID);
                     return;

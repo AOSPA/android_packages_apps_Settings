@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settingslib.metadata.PreferenceScreenBindingKeyProviderKt.EXTRA_BINDING_SCREEN_ARGS;
+
 import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.content.ComponentName;
 import android.content.Context;
@@ -33,11 +35,14 @@ import com.android.settings.accessibility.detail.a11yactivity.LaunchAccessibilit
 import com.android.settings.accessibility.detail.a11yactivity.SettingsPreferenceController;
 import com.android.settings.accessibility.detail.a11yactivity.ShortcutPreferenceController;
 import com.android.settings.accessibility.detail.a11yactivity.TopIntroPreferenceController;
+import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityScreen;
 import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
+import java.util.Objects;
+
 /** Fragment for providing open activity button. */
-public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragment {
+public class LaunchAccessibilityActivityPreferenceFragment extends BaseSupportFragment {
 
     private static final String TAG = "LaunchAccessibilityActivityPreferenceFragment";
     @Nullable
@@ -46,9 +51,13 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragm
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        if (Flags.catalystA11yActivityDetail()) {
+            return;
+        }
         ComponentName componentName = getFeatureComponentName();
         mAccessibilityShortcutInfo = AccessibilityRepositoryProvider.get(
                 context).getAccessibilityShortcutInfo(componentName);
+
         if (mAccessibilityShortcutInfo != null) {
             initializePreferenceControllers(mAccessibilityShortcutInfo);
         }
@@ -57,6 +66,9 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragm
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Flags.catalystA11yActivityDetail()) {
+            return;
+        }
         getActivity().setTitle(getFeatureName());
     }
 
@@ -67,7 +79,17 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragm
                 accessibilityShortcutInfo);
         use(LaunchAccessibilityActivityPreferenceController.class).initialize(
                 accessibilityShortcutInfo);
-        use(ShortcutPreferenceController.class).initialize(accessibilityShortcutInfo);
+
+        ShortcutPreferenceController shortcutPreferenceController =
+                use(ShortcutPreferenceController.class);
+        if (shortcutPreferenceController != null) {
+            shortcutPreferenceController.initialize(
+                    accessibilityShortcutInfo,
+                    getChildFragmentManager(),
+                    getFeatureName(),
+                    getMetricsCategory()
+            );
+        }
         use(SettingsPreferenceController.class).initialize(accessibilityShortcutInfo);
         use(LaunchAppInfoPreferenceController.class).initialize(
                 accessibilityShortcutInfo.getComponentName());
@@ -77,21 +99,11 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragm
                 accessibilityShortcutInfo);
     }
 
-    @Nullable
-    @Override
-    public ToggleShortcutPreferenceController getShortcutPreferenceController() {
-        return use(ShortcutPreferenceController.class);
-    }
-
     @Override
     public int getMetricsCategory() {
+        // This could be called before the fragment is attached to an activity.
         return FeatureFactory.getFeatureFactory()
                 .getAccessibilityPageIdFeatureProvider().getCategory(getFeatureComponentName());
-    }
-
-    @Override
-    public int getFeedbackCategory() {
-        return getMetricsCategory();
     }
 
     @Override
@@ -105,8 +117,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragm
     }
 
     @NonNull
-    @Override
-    public CharSequence getFeatureName() {
+    private CharSequence getFeatureName() {
         if (mAccessibilityShortcutInfo == null
                 || mAccessibilityShortcutInfo.getActivityInfo() == null) {
             return "";
@@ -115,10 +126,46 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ShortcutFragm
         return mAccessibilityShortcutInfo.getActivityInfo().loadLabel(getPackageManager());
     }
 
-    @NonNull
+    @Nullable
     @Override
-    public ComponentName getFeatureComponentName() {
-        return getArguments().getParcelable(
+    public String getPreferenceScreenBindingKey(
+            @NonNull Context context) {
+        return A11yActivityScreen.KEY;
+    }
+
+    @Nullable
+    @Override
+    public Bundle getPreferenceScreenBindingArgs(
+            @NonNull Context context) {
+        return getFragmentArguments();
+    }
+
+    @NonNull
+    private ComponentName getFeatureComponentName() {
+        Bundle arguments = getFragmentArguments();
+        return arguments.getParcelable(
                 AccessibilitySettings.EXTRA_COMPONENT_NAME, ComponentName.class);
+    }
+
+    /**
+     * Retrieves the fragment arguments.
+     *
+     * <p>If the arguments contain PreferenceScreenBindingKeyProviderKt#EXTRA_BINDING_SCREEN_ARGS
+     * the nested bundle associated with that key will be returned. Otherwise, the original
+     * arguments are returned.
+     *
+     * @return The fragment arguments, or the nested arguments if
+     * PreferenceScreenBindingKeyProviderKt#EXTRA_BINDING_SCREEN_ARGS is present.
+     * @throws NullPointerException if the initial arguments are null or if the nested argument are
+     *                              null
+     */
+    @NonNull
+    private Bundle getFragmentArguments() {
+        Bundle arguments = getArguments();
+        Objects.requireNonNull(arguments);
+        if (arguments.containsKey(EXTRA_BINDING_SCREEN_ARGS)) {
+            arguments = Objects.requireNonNull(arguments.getBundle(EXTRA_BINDING_SCREEN_ARGS));
+        }
+        return arguments;
     }
 }

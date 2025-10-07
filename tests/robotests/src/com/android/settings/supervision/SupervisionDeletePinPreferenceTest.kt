@@ -16,6 +16,8 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_DELETE_PIN
+import android.app.settings.SettingsEnums.SUPERVISION_MANAGE_PIN_SCREEN
 import android.app.supervision.SupervisionManager
 import android.content.ComponentName
 import android.content.Context
@@ -24,7 +26,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.UserInfo
 import android.net.Uri
-import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_FULL_SECONDARY
 import android.os.UserManager.USER_TYPE_FULL_SYSTEM
@@ -38,10 +39,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.testutils.MetricsRule
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
@@ -61,7 +64,7 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowAlertDialogCompat::class])
 class SupervisionDeletePinPreferenceTest {
-
+    @get:Rule val metricsRule = MetricsRule()
     private val appContext: Context = ApplicationProvider.getApplicationContext()
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
@@ -178,7 +181,7 @@ class SupervisionDeletePinPreferenceTest {
     fun onConfirmDeleteClick_currentUserSupervised_deletesSupervisionData() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-            on { removeUser(UserHandle(SUPERVISING_USER_ID)) } doReturn true
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
         }
         mockSupervisionManager.stub {
             on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
@@ -192,17 +195,20 @@ class SupervisionDeletePinPreferenceTest {
 
         verify(mockSupervisionManager).supervisionRecoveryInfo = null
         verify(mockSupervisionManager).isSupervisionEnabled = false
-        verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
 
         assertThat(backPressedCalled).isTrue()
         assertThat(startedIntent).isNull()
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(lifeCycleContext, ACTION_SUPERVISION_DELETE_PIN)
     }
 
     @Test
     fun onConfirmDeleteClick_removeUserFails_doesNotDeleteSupervisionRecoveryData() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-            on { removeUser(UserHandle(SUPERVISING_USER_ID)) } doReturn false
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn false
         }
         mockSupervisionManager.stub {
             on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
@@ -226,8 +232,16 @@ class SupervisionDeletePinPreferenceTest {
         onActivityResult(ActivityResult(Activity.RESULT_CANCELED, null))
 
         verify(mockSupervisionManager, never()).isSupervisionEnabled = any()
-        verify(mockUserManager, never()).removeUser(UserHandle(SUPERVISING_USER_ID))
+        verify(mockUserManager, never()).removeUserEvenWhenDisallowed(SUPERVISING_USER_ID)
         verify(lifeCycleContext, never()).notifyPreferenceChange(any())
+        assertThat(startedIntent).isNull()
+    }
+
+    @Test
+    fun onPreferenceClick_logsClick() {
+        preference.onPreferenceClick(widget)
+        verify(metricsRule.metricsFeatureProvider)
+            .clicked(SUPERVISION_MANAGE_PIN_SCREEN, SupervisionDeletePinPreference.KEY)
         assertThat(startedIntent).isNull()
     }
 

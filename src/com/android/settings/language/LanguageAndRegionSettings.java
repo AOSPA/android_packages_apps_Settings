@@ -20,7 +20,6 @@ import static android.os.UserManager.DISALLOW_CONFIG_LOCALE;
 
 import static com.android.settings.flags.Flags.localeNotificationEnabled;
 import static com.android.settings.flags.Flags.regionalPreferencesApiEnabled;
-
 import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_APP_LOCALE;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_ADD_SYSTEM_LOCALE;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT;
@@ -52,8 +51,8 @@ import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
-import com.android.settings.localepicker.LocaleUtils;
 import com.android.settings.localepicker.LocaleDialogFragment;
+import com.android.settings.localepicker.LocaleUtils;
 import com.android.settings.localepicker.SystemLocalePickerFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -68,6 +67,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+// LINT.IfChange
 @SearchIndexable
 public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
     protected static final String INTENT_LOCALE_KEY = "localeInfo";
@@ -225,6 +225,13 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
                         R.id.remove);
                 mUserPreferredLocalePreferenceController.doTheUpdate();
                 mUserPreferredLocalePreferenceController.updatePreferences();
+
+                boolean showNotTranslatedDialog = data.getBooleanExtra(
+                        LocaleDialogFragment.ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED, true);
+                localeInfo = LocaleStore.getLocaleInfo(Locale.getDefault());
+                if (showNotTranslatedDialog && !localeInfo.isTranslated()) {
+                    showUnavailableDialog(localeInfo);
+                }
             }
         } else if (requestCode == DIALOG_NOT_AVAILABLE_LOCALE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -251,7 +258,7 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
                 || !getContext().getPackageName().equals(callingPackage)
                 || !isValidDialogType(dialogType)
                 || !isValidLocale(localeTag)
-                || LocaleUtils.isInSystemLocale(localeTag)) {
+                || LocaleUtils.isLanguageInSystemLocale(localeTag)) {
             return false;
         }
         return true;
@@ -309,7 +316,7 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
 
     @Override
     public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
-        return LanguageSettingScreen.KEY;
+        return LanguageAndRegionScreen.KEY;
     }
 
     @Override
@@ -365,3 +372,4 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
                 }
             };
 }
+// LINT.ThenChange(LanguageAndRegionScreen.kt)

@@ -16,6 +16,12 @@
 
 package com.android.settings.connecteddevice.display;
 
+import static android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK;
+import static android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_DESKTOP;
+import static android.hardware.display.DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR;
+import static android.provider.Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY;
+
+import static com.android.settings.Utils.createAccessibleSequence;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
@@ -26,6 +32,8 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.Display;
 import android.view.View;
 import android.widget.TextView;
 import android.window.DesktopExperienceFlags;
@@ -36,6 +44,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -63,6 +72,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     @VisibleForTesting enum PrefBasics {
         DISPLAY_TOPOLOGY(10, "display_topology_preference", null),
         MIRROR(20, "mirror_preference", R.string.external_display_mirroring_title),
+        INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY(
+                25,
+                "include_default_display_in_topology_preference",
+                R.string.builtin_display_settings_universal_cursor_title),
 
         // If shown, use toggle should be before other per-display settings.
         EXTERNAL_DISPLAY_USE(30, "external_display_use_preference",
@@ -76,6 +89,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 R.string.external_display_rotation),
         EXTERNAL_DISPLAY_RESOLUTION(60, "external_display_resolution",
                 R.string.external_display_resolution_settings_title),
+        EXTERNAL_DISPLAY_CONNECTION(65, "external_display_connection_preference",
+                R.string.external_display_connection_preference),
 
         // Built-in display link is before per-display settings.
         BUILTIN_DISPLAY_LIST(70, "builtin_display_list_preference",
@@ -136,6 +151,12 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     static final int EXTERNAL_DISPLAY_PORTRAIT_DRAWABLE =
             R.drawable.external_display_mirror_portrait;
     static final int EXTERNAL_DISPLAY_SIZE_SUMMARY_RESOURCE = R.string.screen_zoom_short_summary;
+    static final int INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY_SUMMARY_RESOURCE =
+            R.string.builtin_display_settings_universal_cursor_description;
+
+    static final String CONNECTION_PREF_NONE = "none";
+    static final String CONNECTION_PREF_DESKTOP = "desktop";
+    static final String CONNECTION_PREF_MIRROR = "mirror";
 
     private boolean mStarted;
     @Nullable
@@ -150,6 +171,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private String[] mRotationEntries;
     @Nullable
     private String[] mRotationEntriesValues;
+    @Nullable
+    private String[] mConnectionEntries;
+    @Nullable
+    private String[] mConnectionEntriesValues;
     @NonNull
     private final Runnable mUpdateRunnable = this::update;
     private final DisplayListener mListener = new DisplayListener() {
@@ -272,6 +297,18 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     @NonNull
+    private ListPreference reuseConnectionPreference(PrefRefresh refresh, int position) {
+        ListPreference pref = refresh.findUnusedPreference(
+                PrefBasics.EXTERNAL_DISPLAY_CONNECTION.keyForNth(position));
+        if (pref == null) {
+            pref = new ListPreference(requireContext());
+            PrefBasics.EXTERNAL_DISPLAY_CONNECTION.apply(pref, position);
+        }
+        refresh.addPreference(pref);
+        return pref;
+    }
+
+    @NonNull
     private ListPreference reuseRotationPreference(PrefRefresh refresh, int position) {
         ListPreference pref = refresh.findUnusedPreference(
                 PrefBasics.EXTERNAL_DISPLAY_ROTATION.keyForNth(position));
@@ -350,6 +387,34 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             pref = new MirrorPreference(requireContext(),
                 DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue());
             PrefBasics.MIRROR.apply(pref, /* nth= */ null);
+        }
+        refresh.addPreference(pref);
+    }
+
+    private void addIncludeDefaultDisplayInTopologyPreference(PrefRefresh refresh) {
+        Preference pref =
+                refresh.findUnusedPreference(PrefBasics.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY.key);
+        if (pref == null) {
+            pref = new SwitchPreferenceCompat(requireContext());
+            PrefBasics.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY.apply(pref, /* nth= */ null);
+            pref.setSummary(INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY_SUMMARY_RESOURCE);
+            final SwitchPreferenceCompat switchPref = (SwitchPreferenceCompat) pref;
+            boolean isActive =
+                    Settings.Secure.getInt(
+                                    requireContext().getContentResolver(),
+                                    INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY,
+                                    0)
+                            != 0;
+            switchPref.setChecked(isActive);
+            switchPref.setOnPreferenceClickListener(
+                    (p) -> {
+                        writePreferenceClickMetric(p);
+                        Settings.Secure.putInt(
+                                requireContext().getContentResolver(),
+                                INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY,
+                                switchPref.isChecked() ? 1 : 0);
+                        return true;
+                    });
         }
         refresh.addPreference(pref);
     }
@@ -440,6 +505,10 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
         addResolutionPreference(refresh, display, position);
         addRotationPreference(refresh, display, displayRotation, position);
+        if (DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue()
+                && DesktopExperienceFlags.ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG.isTrue()) {
+            addConnectionPreference(refresh, display, position);
+        }
         if (mInjector.getFlags().resolutionAndEnableConnectedDisplaySetting()) {
             // Do not show the footer about changing resolution affecting apps. This is not in the
             // UX design for v2, and there is no good place to put it, since (a) if it is on the
@@ -466,6 +535,11 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (mInjector.getFlags().displayTopologyPaneInDisplayList()) {
             screen.addPreference(getDisplayTopologyPreference());
             addMirrorPreference(screen);
+            if (mInjector.isDefaultDisplayInTopologyFlagEnabled()
+                    && mInjector.isProjectedModeEnabled()
+                    && !isDisplayInMirroringMode(requireContext())) {
+                addIncludeDefaultDisplayInTopologyPreference(screen);
+            }
 
             // If topology is shown, we also show a preference for the built-in display for
             // consistency with the topology.
@@ -563,11 +637,59 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 && mInjector.getFlags().rotationConnectedDisplaySetting());
     }
 
+    private void addConnectionPreference(PrefRefresh refresh, DisplayDevice display, int position) {
+        final int connectionType = mInjector.getDisplayConnectionPreference(display.getUniqueId());
+        var pref = reuseConnectionPreference(refresh, position);
+        if (mConnectionEntries == null || mConnectionEntriesValues == null) {
+            mConnectionEntries = new String[]{
+                    requireContext().getString(
+                            R.string.external_display_connection_preference_show_dialog),
+                    requireContext().getString(
+                            R.string.external_display_connection_preference_desktop),
+                    requireContext().getString(
+                            R.string.external_display_connection_preference_mirroring),
+            };
+            mConnectionEntriesValues = new String[] {
+                    CONNECTION_PREF_NONE,
+                    CONNECTION_PREF_DESKTOP,
+                    CONNECTION_PREF_MIRROR,
+            };
+        }
+        pref.setEntries(mConnectionEntries);
+        pref.setEntryValues(mConnectionEntriesValues);
+        pref.setValueIndex(connectionType);
+        pref.setSummary(mConnectionEntries[connectionType]);
+        pref.setOnPreferenceChangeListener((p, newValue) -> {
+            writePreferenceClickMetric(p);
+            final int selectedConnectionPreference = switch ((String) newValue) {
+                case CONNECTION_PREF_DESKTOP -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_DESKTOP;
+                case CONNECTION_PREF_MIRROR -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR;
+                default -> EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK;
+            };
+            mInjector.updateDisplayConnectionPreference(
+                    display.getUniqueId(), selectedConnectionPreference);
+            pref.setValue((String) newValue);
+            scheduleUpdate();
+            return true;
+        });
+        pref.setEnabled(display.isEnabled() == DisplayIsEnabled.YES);
+    }
+
     private void addResolutionPreference(PrefRefresh refresh,
             final DisplayDevice display, int position) {
+        Display.Mode mode = display.getMode();
+        if (mode == null) {
+            return;
+        }
         var pref = reuseResolutionPreference(refresh, position);
-        pref.setSummary(display.getMode().getPhysicalWidth() + " x "
-                + display.getMode().getPhysicalHeight());
+        int width = mode.getPhysicalWidth();
+        int height = mode.getPhysicalHeight();
+        pref.setSummary(
+                createAccessibleSequence(
+                        width + " x " + height,
+                        getResources()
+                                .getString(
+                                        R.string.screen_resolution_delimiter_a11y, width, height)));
         pref.setOnPreferenceClickListener((Preference p) -> {
             writePreferenceClickMetric(p);
             launchResolutionSelector(display.getId());
@@ -595,7 +717,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         return Math.min(3, Math.max(0, mInjector.getDisplayUserRotation(displayId)));
     }
 
-    private void scheduleUpdate() {
+    @VisibleForTesting
+    void scheduleUpdate() {
         if (mInjector == null || !mStarted) {
             return;
         }

@@ -24,8 +24,14 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
+import com.android.settings.applications.packageName
+import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen
+import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen.Companion.hasOverlayPermission
+import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen
+import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen.Companion.hasPictureInPictureActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -38,8 +44,7 @@ import kotlinx.coroutines.flow.flow
 @ProvidePreferenceScreen(AppInfoScreen.KEY, parameterized = true)
 open class AppInfoScreen(context: Context, override val arguments: Bundle) :
     PreferenceScreenMixin, PreferenceTitleProvider {
-
-    private val packageName = arguments.getString("app")!!
+    private val packageName = arguments.packageName
 
     private val appInfo = context.packageManager.getApplicationInfo(packageName, 0)
 
@@ -70,15 +75,26 @@ open class AppInfoScreen(context: Context, override val arguments: Bundle) :
     override fun fragmentClass(): Class<out Fragment>? = AppInfoDashboardFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            +PreferenceCategory("advanced_app_info", R.string.advanced_apps) += {
+                arguments.putString("source", SOURCE)
+                if (hasPictureInPictureActivity(context, appInfo)) {
+                    +(PictureInPictureAppDetailScreen.KEY args arguments)
+                }
+                if (hasOverlayPermission(context, appInfo)) {
+                    +(DisplayOverOtherAppsAppDetailScreen.KEY args arguments)
+                }
+            }
+        }
 
     companion object {
         const val KEY = "installed_app_detail_settings_screen"
+        const val SOURCE = "appinfo"
 
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
             AppListRepositoryImpl(context).loadAndFilterApps(context.userId, true).forEach {
-                emit(Bundle(1).apply { putString("app", it.packageName) })
+                emit(Bundle(1).apply { putString("pkg", it.packageName) })
             }
         }
     }

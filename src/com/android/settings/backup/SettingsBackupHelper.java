@@ -23,6 +23,7 @@ import android.util.Log;
 import com.android.settings.applications.appcompat.UserAspectRatioBackupHelper;
 import com.android.settings.applications.appcompat.UserAspectRatioManager;
 import com.android.settings.flags.Flags;
+import com.android.settings.i18n.RegionalCustomizationFeatureProvider;
 import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.shortcut.ShortcutsUpdater;
@@ -35,6 +36,7 @@ public class SettingsBackupHelper extends BackupAgentHelper {
     public static final String SOUND_BACKUP_HELPER = "SoundSettingsBackup";
     public static final String ACCESSIBILITY_APPEARANCE_BACKUP_HELPER =
             "AccessibilityAppearanceSettingsBackup";
+    public static final String MOVEMENT_BACKUP_HELPER = "MovementSettingsBackup";
     private static final String USER_ASPECT_RATIO_BACKUP_HELPER = "UserAspectRatioSettingsBackup";
 
     @Override
@@ -43,6 +45,8 @@ public class SettingsBackupHelper extends BackupAgentHelper {
         BackupRestoreStorageManager.getInstance(this).addBackupAgentHelpers(this);
         OnboardingFeatureProvider onboardingFeatureProvider =
                 FeatureFactory.getFeatureFactory().getOnboardingFeatureProvider();
+        RegionalCustomizationFeatureProvider regionalCustomizationFeatureProvider =
+                FeatureFactory.getFeatureFactory().getRegionalCustomizationFeatureProvider();
 
         if (Flags.enableSoundBackup()) {
             if (onboardingFeatureProvider != null) {
@@ -55,6 +59,14 @@ public class SettingsBackupHelper extends BackupAgentHelper {
             if (onboardingFeatureProvider != null) {
                 addHelper(ACCESSIBILITY_APPEARANCE_BACKUP_HELPER,
                         onboardingFeatureProvider.getAccessibilityAppearanceBackupHelper(
+                            this, this.getBackupRestoreEventLogger()));
+            }
+        }
+
+        if (Flags.movementSettingsBackupEnabled()) {
+            if (regionalCustomizationFeatureProvider != null) {
+                addHelper(MOVEMENT_BACKUP_HELPER,
+                        regionalCustomizationFeatureProvider.getMovementBackupHelper(
                             this, this.getBackupRestoreEventLogger()));
             }
         }

@@ -42,7 +42,8 @@ import java.util.List;
 /** Tests for {@link ToggleSelectToSpeakPreferenceFragmentForSetupWizard}. */
 @RunWith(RobolectricTestRunner.class)
 public class ToggleSelectToSpeakPreferenceFragmentForSetupWizardTest extends
-        BaseShortcutFragmentInSuwTestCases<ToggleSelectToSpeakPreferenceFragmentForSetupWizard> {
+        BaseShortcutInteractionsInSuwTestCases<
+                ToggleSelectToSpeakPreferenceFragmentForSetupWizard> {
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";
     private static final String A11Y_SERVICE_CLASS_NAME = "fakeA11yServiceClass";
     private static final ComponentName PLACEHOLDER_A11Y_SERVICE =
@@ -56,13 +57,6 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizardTest extends
         assertThat(
                 new ToggleSelectToSpeakPreferenceFragmentForSetupWizard().getMetricsCategory()
         ).isEqualTo(SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SELECT_TO_SPEAK);
-    }
-
-    @Test
-    public void getFeedbackCategory_returnPageUnknown() {
-        assertThat(
-                new ToggleSelectToSpeakPreferenceFragmentForSetupWizard().getFeedbackCategory()
-        ).isEqualTo(SettingsEnums.PAGE_UNKNOWN);
     }
 
     @NonNull

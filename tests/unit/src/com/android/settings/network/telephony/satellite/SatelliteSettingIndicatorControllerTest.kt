@@ -16,23 +16,21 @@
 package com.android.settings.network.telephony.satellite
 
 import android.content.Context
-import android.os.Looper
 import android.os.PersistableBundle
 import android.telephony.CarrierConfigManager
+import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceManager
 import androidx.test.annotation.UiThreadTest
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.testutils.ResourcesUtils
+import com.google.common.truth.Truth.assertThat
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
+import org.mockito.kotlin.spy
 
 @UiThreadTest
 class SatelliteSettingIndicatorControllerTest {
@@ -50,16 +48,18 @@ class SatelliteSettingIndicatorControllerTest {
     fun updateHowItWorksContent_accountNotEligible_categoryIsDisabled() {
         mCarrierConfig.putInt(
             CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
+            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
         )
         mController?.init(TEST_SUB_ID, mCarrierConfig)
         val preferenceManager = PreferenceManager(mContext!!)
         val preferenceScreen = preferenceManager.createPreferenceScreen(mContext!!)
-        val category = Mockito.spy<PreferenceCategory>(PreferenceCategory(mContext!!))
-        category.setKey(SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS)
+        val category = spy(PreferenceCategory(mContext!!))
+        category.setKey(
+            SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS
+        )
         category.title = "test title"
         category.isEnabled = true
-        val preference = Mockito.spy<Preference>(Preference(mContext!!))
+        val preference = spy(Preference(mContext!!))
         preference.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
         preference.title = "preference"
         preferenceScreen.addPreference(category)
@@ -75,16 +75,18 @@ class SatelliteSettingIndicatorControllerTest {
     fun updateHowItWorksContent_accountEligible_categoryIsEnabled() {
         mCarrierConfig.putInt(
             CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
+            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
         )
         mController?.init(TEST_SUB_ID, mCarrierConfig)
         val preferenceManager = PreferenceManager(mContext!!)
         val preferenceScreen = preferenceManager.createPreferenceScreen(mContext!!)
         val category = Mockito.spy<PreferenceCategory>(PreferenceCategory(mContext!!))
-        category.setKey(SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS)
+        category.setKey(
+            SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS
+        )
         category.title = "test title"
         category.isEnabled = true
-        val preference = Mockito.spy<Preference>(Preference(mContext!!))
+        val preference = spy(Preference(mContext!!))
         preference.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
         preference.title = "preference"
         preferenceScreen.addPreference(category)
@@ -100,41 +102,64 @@ class SatelliteSettingIndicatorControllerTest {
     fun updateHowItWorksContent_dataAvailable_summaryChanged() {
         mCarrierConfig.putInt(
             CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
+            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
         )
         mController?.init(TEST_SUB_ID, mCarrierConfig)
-        mController?.setCarrierRoamingNtnAvailability(true, true)
+        mController?.setCarrierRoamingNtnAvailability(
+            true,
+            true,
+            SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED,
+        )
         val preferenceManager = PreferenceManager(mContext!!)
         val preferenceScreen = preferenceManager.createPreferenceScreen(mContext!!)
-        val category = Mockito.spy<PreferenceCategory>(PreferenceCategory(mContext!!))
-        category.setKey(SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS)
+        val category = spy(PreferenceCategory(mContext!!))
+        category.setKey(
+            SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS
+        )
         category.title = "test title"
         category.isEnabled = true
-        val preference = Mockito.spy<Preference>(Preference(mContext!!))
-        preference.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
-        preference.title = "preference"
+        val preference1 = spy(Preference(mContext!!))
+        val preference2 = Preference(mContext!!)
+        preference1.setKey(
+            SatelliteSettingIndicatorController.Companion.KEY_SATELLITE_CONNECTION_GUIDE
+        )
+        preference1.title = "preference"
+        preference2.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
+        preference2.title = "preference2"
+
         preferenceScreen.addPreference(category)
-        preferenceScreen.addPreference(preference)
+        preferenceScreen.addPreference(preference1)
+        preferenceScreen.addPreference(preference2)
 
         mController!!.updateHowItWorksContent(preferenceScreen, true)
 
-        Mockito.verify(preference).setSummary(ArgumentMatchers.any<CharSequence?>())
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_with_constrained_data",
+                )
+            )
     }
 
     @Test
     fun updateHowItWorksContent_ntnConnectIsManual_summaryChanged() {
         mCarrierConfig.putInt(
             CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
+            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
         )
         mController?.init(TEST_SUB_ID, mCarrierConfig)
         val preferenceManager = PreferenceManager(mContext!!)
         val preferenceScreen = preferenceManager.createPreferenceScreen(mContext!!)
         val category = Mockito.spy<PreferenceCategory>(PreferenceCategory(mContext!!))
-        category.setKey(SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS)
+        category.setKey(
+            SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS
+        )
         category.title = "test title"
         val preference1 = Mockito.spy<Preference>(Preference(mContext!!))
-        preference1.setKey(SatelliteSettingIndicatorController.Companion.KEY_SATELLITE_CONNECTION_GUIDE)
+        preference1.setKey(
+            SatelliteSettingIndicatorController.Companion.KEY_SATELLITE_CONNECTION_GUIDE
+        )
         preference1.title = "preference1"
         val preference2 = Mockito.spy<Preference>(Preference(mContext!!))
         preference2.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)

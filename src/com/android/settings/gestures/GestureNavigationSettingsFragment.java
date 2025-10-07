@@ -33,6 +33,9 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ButtonPreference;
 import com.android.settingslib.widget.SliderPreference;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  * A fragment to include all the settings related to Gesture Navigation mode.
  */
@@ -145,6 +148,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         final SliderPreference pref = getPreferenceScreen().findPreference(key);
         pref.setUpdatesContinuously(true);
         pref.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_TICKS);
+        pref.setSliderIncrement(1);
 
         final String settingsKey = key == LEFT_EDGE_SEEKBAR_KEY
                 ? Settings.Secure.BACK_GESTURE_INSET_SCALE_LEFT
@@ -163,19 +167,30 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
             }
         }
         pref.setValue(minDistanceIndex);
-
+        pref.setSliderStateDescription(formatStateDescription(pref, minDistanceIndex));
         pref.setOnPreferenceChangeListener((p, v) -> {
             final int width = (int) (mDefaultBackGestureInset * mBackGestureInsetScales[(int) v]);
             mIndicatorView.setIndicatorWidth(width, key == LEFT_EDGE_SEEKBAR_KEY);
-            return true;
-        });
-
-        pref.setOnPreferenceChangeListener((p, v) -> {
-            mIndicatorView.setIndicatorWidth(0, key == LEFT_EDGE_SEEKBAR_KEY);
             final float scale = mBackGestureInsetScales[(int) v];
             Settings.Secure.putFloat(getContext().getContentResolver(), settingsKey, scale);
+            pref.setSliderStateDescription(formatStateDescription(pref, (int) v));
             return true;
         });
+    }
+
+    private CharSequence formatStateDescription(SliderPreference pref, int progress) {
+        Locale curLocale = getContext().getResources().getConfiguration().getLocales().get(0);
+        NumberFormat numberFormat = NumberFormat.getPercentInstance(curLocale);
+        return numberFormat.format(getPercent(pref.getMin(), pref.getMax(), progress));
+    }
+
+    private double getPercent(int min, int max, int progress) {
+        final float diffProgress = max - min;
+        if (diffProgress <= 0.0f) {
+            return 0.0f;
+        }
+        final float percent = (progress - min) / diffProgress;
+        return Math.floor(Math.max(0.0f, Math.min(1.0f, percent)) * 100) / 100;
     }
 
     private static float[] getFloatArray(TypedArray array) {

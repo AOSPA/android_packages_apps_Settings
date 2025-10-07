@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_BT_DEVICE_TO_AUTO_ADD_SOURCE;
 
 import android.app.Activity;
@@ -104,7 +103,7 @@ public class AudioSharingDashboardFragment extends DashboardFragment
         mMainSwitchBar.setTitle(getText(R.string.audio_sharing_switch_title));
         mAudioSharingSwitchBarController =
                 new AudioSharingSwitchBarController(activity, mMainSwitchBar, this);
-        mAudioSharingSwitchBarController.init(this);
+        mAudioSharingSwitchBarController.init(this, savedInstanceState == null);
         getSettingsLifecycle().addObserver(mAudioSharingSwitchBarController);
         mMainSwitchBar.show();
     }

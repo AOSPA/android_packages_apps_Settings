@@ -57,15 +57,14 @@ class ImeiPreferenceTest {
             on { isDeviceVoiceCapable } doReturn true
             on { getImei(0) } doReturn IMEI_1
             on { getImei(1) } doReturn IMEI_2
+            on { primaryImei } doReturn IMEI_1
         }
         preference = ImeiPreference(context, 0, 1)
     }
 
     @Test
     fun init_getPrimaryImeiThrowException_doNotCrash() {
-        mockTelephonyManager.stub {
-            on { primaryImei } doThrow(IllegalStateException())
-        }
+        mockTelephonyManager.stub { on { primaryImei } doThrow (IllegalStateException()) }
 
         preference = ImeiPreference(context, 0, 2)
     }
@@ -77,7 +76,7 @@ class ImeiPreferenceTest {
 
     @Test
     fun getKey_slotIndex1_returnImeiWithIndex() {
-        preference = ImeiPreference(context, 1, 2);
+        preference = ImeiPreference(context, 1, 2)
 
         assertThat(preference.key).isEqualTo(ImeiPreference.KEY_PREFIX + "2")
     }
@@ -115,9 +114,27 @@ class ImeiPreferenceTest {
 
     @Test
     fun getSummary_index1_returnImei2() {
-        preference = ImeiPreference(context, 1, 2);
+        preference = ImeiPreference(context, 1, 2)
 
         assertThat(preference.getSummary(context)).isEqualTo(IMEI_2)
+    }
+
+    @Test
+    fun getSummary_primaryIsSlot2_index1_returnImei2() {
+        mockTelephonyManager.stub { on { primaryImei } doReturn IMEI_2 }
+
+        preference = ImeiPreference(context, 0, 2)
+
+        assertThat(preference.getSummary(context)).isEqualTo(IMEI_2)
+    }
+
+    @Test
+    fun getSummary_primaryIsSlot2_index2_returnImei1() {
+        mockTelephonyManager.stub { on { primaryImei } doReturn IMEI_2 }
+
+        preference = ImeiPreference(context, 1, 2)
+
+        assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
     }
 
     companion object {

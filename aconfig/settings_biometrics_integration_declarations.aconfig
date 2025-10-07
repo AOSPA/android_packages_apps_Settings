@@ -19,16 +19,6 @@ flag {
 }
 
 flag {
-  name: "screen_off_unlock_power_optimization"
-  namespace: "biometrics_integration"
-  description: "This flag controls Whether to gate fp unlock when screen turns off feature before AOC optimized"
-  bug: "368465560"
-  metadata {
-      purpose: PURPOSE_BUGFIX
-  }
-}
-
-flag {
   name: "biometrics_onboarding_education"
   namespace: "biometrics_integration"
   description: "This flag controls whether the onboarding education settings UX should be enabled"
@@ -40,6 +30,16 @@ flag {
   namespace: "biometrics_integration"
   description: "This flag controls whether the onboarding education settings UX should be enabled"
   bug: "370940762"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}
+
+flag {
+  name: "msdl_feedback"
+  namespace: "biometrics_integration"
+  description: "This flag controls whether MSDL haptic feedback is delivered in Settings, especially for the bouncer pattern"
+  bug: "406774575"
   metadata {
       purpose: PURPOSE_BUGFIX
   }

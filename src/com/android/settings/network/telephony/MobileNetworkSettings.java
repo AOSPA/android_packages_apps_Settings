@@ -82,7 +82,6 @@ import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController
 import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController;
 import com.android.settings.network.telephony.gsm.SelectNetworkPreferenceController;
 import com.android.settings.network.telephony.satellite.SatelliteSettingPreferenceController;
-import com.android.settings.network.telephony.satellite.SatelliteSettingsPreferenceCategoryController;
 import com.android.settings.network.telephony.wificalling.CrossSimCallingViewModel;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
@@ -108,6 +107,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkSettings extends AbstractMobileNetworkSettings implements
         MobileNetworkRepository.MobileNetworkCallback {
@@ -524,12 +524,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         if (roamingPreferenceController != null) {
             roamingPreferenceController.init(getFragmentManager(), mSubId);
         }
-        final SatelliteSettingsPreferenceCategoryController
-                satelliteSettingsPreferenceCategoryController =
-                use(SatelliteSettingsPreferenceCategoryController.class);
-        if (satelliteSettingsPreferenceCategoryController != null) {
-            satelliteSettingsPreferenceCategoryController.init(mSubId);
-        }
+
         final SatelliteSettingPreferenceController satelliteSettingPreferenceController = use(
                 SatelliteSettingPreferenceController.class);
         if (satelliteSettingPreferenceController != null) {
@@ -845,4 +840,46 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
         onSubscriptionDetailChanged();
     }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return MobileNetworkScreen.KEY;
+    }
+
+    @Override
+    public @Nullable Bundle getPreferenceScreenBindingArgs(@NonNull Context context) {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(Settings.EXTRA_SUB_ID, getSubId());
+        return bundle;
+    }
+
+    private int getSubId() {
+        int retSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        if (getArguments() == null) {
+            Intent intent = getIntent();
+            if (intent != null) {
+                retSubId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                        MobileNetworkUtils.getSearchableSubscriptionId(getContext()));
+            } else {
+                Log.d(LOG_TAG, "getSubId: intent is null, can not get subId " + retSubId
+                        + " from intent.");
+            }
+        } else {
+            retSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
+                    MobileNetworkUtils.getSearchableSubscriptionId(getContext()));
+        }
+        if (retSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            Log.d(LOG_TAG, "getSubId: Invalid subId, get the default subscription to show.");
+            SubscriptionInfo info = SubscriptionUtil.getSubscriptionOrDefault(getContext(),
+                    retSubId);
+            if (info == null) {
+                Log.d(LOG_TAG, "getSubId: Invalid subId request " + retSubId);
+            } else {
+                retSubId = info.getSubscriptionId();
+            }
+        }
+        Log.d(LOG_TAG, "getSubId: Result subId : " + retSubId);
+        return retSubId;
+    }
 }
+// LINT.ThenChange(MobileNetworkScreen.kt)

@@ -44,6 +44,8 @@ import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
@@ -80,6 +82,9 @@ public class FingerprintSafetySourceTest {
     private static final UserHandle USER_HANDLE = new UserHandle(USER_ID);
     private static final SafetyEvent EVENT_SOURCE_STATE_CHANGED =
             new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build();
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();

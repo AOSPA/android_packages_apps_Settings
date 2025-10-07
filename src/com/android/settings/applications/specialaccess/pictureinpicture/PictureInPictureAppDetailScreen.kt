@@ -87,17 +87,14 @@ open class PictureInPictureAppDetailScreen(context: Context, arguments: Bundle) 
         }
 
     companion object {
-        const val KEY = "sa_pip_app_detail"
+        const val KEY = "special_access_picture_in_picture_app_detail"
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 
         fun parameters(context: Context, showSystemApp: Boolean) =
             parameters(context, showSystemApp, ::hasPictureInPictureActivity)
 
-        private fun hasPictureInPictureActivity(
-            context: Context,
-            appInfo: ApplicationInfo?,
-        ): Boolean {
+        fun hasPictureInPictureActivity(context: Context, appInfo: ApplicationInfo?): Boolean {
             if (appInfo == null) return false
             val packageInfo =
                 try {

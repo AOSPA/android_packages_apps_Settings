@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
 import android.app.supervision.SupervisionManager
 import android.content.ComponentName
@@ -26,7 +27,6 @@ import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 import android.content.pm.PackageManager.DONT_KILL_APP
 import android.content.pm.UserInfo
 import android.content.res.Resources
-import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_FULL_SECONDARY
 import android.os.UserManager.USER_TYPE_FULL_SYSTEM
@@ -47,6 +47,7 @@ import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowDevicePolicyManager
 import org.robolectric.shadows.ShadowPackageManager
 
 @RunWith(AndroidJUnit4::class)
@@ -61,11 +62,16 @@ class SupervisionHelperTest {
     private lateinit var packageManager: PackageManager
     private lateinit var shadowPackageManager: ShadowPackageManager
 
+    private lateinit var dpm: DevicePolicyManager
+    private lateinit var shadowDpm: ShadowDevicePolicyManager
+
     @Before
     fun setup() {
         val applicationContext = ApplicationProvider.getApplicationContext<Context>()
         packageManager = applicationContext.packageManager
         shadowPackageManager = shadowOf(packageManager)
+        dpm = applicationContext.getSystemService(DevicePolicyManager::class.java)
+        shadowDpm = shadowOf(dpm) as ShadowDevicePolicyManager
     }
 
     @Test
@@ -159,7 +165,7 @@ class SupervisionHelperTest {
     fun deleteSupervisionData_currentUserSupervised_deletesSupervisionData() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-            on { removeUser(UserHandle(SUPERVISING_USER_ID)) } doReturn true
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
         }
         mockSupervisionManager.stub {
             on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
@@ -172,7 +178,7 @@ class SupervisionHelperTest {
         assertThat(result).isTrue()
         verify(mockSupervisionManager).setSupervisionEnabled(false)
         verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
-        verify(mockUserManager).removeUser(eq(UserHandle(SUPERVISING_USER_ID)))
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
     }
 
     @Test
@@ -191,7 +197,7 @@ class SupervisionHelperTest {
         assertThat(result).isFalse()
         verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
         verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
-        verify(mockUserManager, never()).removeUser(any<UserHandle>())
+        verify(mockUserManager, never()).removeUserEvenWhenDisallowed(any<Int>())
     }
 
     @Test
@@ -260,6 +266,146 @@ class SupervisionHelperTest {
         assertThat(context.hasNecessarySupervisionComponent(testPackageName, true)).isTrue()
     }
 
+    @Test
+    fun getSupervisionAppInstallActivityInfo() {
+        val testPackageName = "com.android.supervision"
+        mockResources.stub {
+            on { getString(com.android.internal.R.string.config_systemSupervision) }
+                .thenReturn(testPackageName)
+        }
+
+        setUpInstallSupervisionAppComponent(packageName = testPackageName)
+
+        val info = context.getSupervisionAppInstallActivityInfo()
+        assertThat(info).isNotNull()
+        assertThat(info?.packageName).isEqualTo(testPackageName)
+        assertThat(info?.componentName?.className).isEqualTo("FakeInstallComponent")
+    }
+
+    @Test
+    fun readSystemSupervisionPackageNameFromResources_returnsPackageName() {
+        val testPackageName = "com.android.supervision"
+        mockResources.stub {
+            on { getString(com.android.internal.R.string.config_systemSupervision) }
+                .thenReturn(testPackageName)
+        }
+
+        assertThat(context.readSystemSupervisionPackageNameFromResources())
+            .isEqualTo(testPackageName)
+    }
+
+    @Test
+    fun readSystemSupervisionPackageNameFromResources_resourceNotFound_returnsNull() {
+        mockResources.stub {
+            on { getString(com.android.internal.R.string.config_systemSupervision) }
+                .thenThrow(Resources.NotFoundException())
+        }
+
+        assertThat(context.readSystemSupervisionPackageNameFromResources()).isNull()
+    }
+
+    @Test
+    fun readDefaultSupervisionPackageNameFromResources_returnsPackageName() {
+        val testComponentName = "com.android.supervision.default/.ProfileOwnerReceiver"
+        val expectedPackageName = "com.android.supervision.default"
+        mockResources.stub {
+            on {
+                    getString(
+                        com.android.internal.R.string.config_defaultSupervisionProfileOwnerComponent
+                    )
+                }
+                .thenReturn(testComponentName)
+        }
+
+        assertThat(context.readDefaultSupervisionPackageNameFromResources())
+            .isEqualTo(expectedPackageName)
+    }
+
+    @Test
+    fun readDefaultSupervisionPackageNameFromResources_resourceNotFound_returnsNull() {
+        mockResources.stub {
+            on {
+                    getString(
+                        com.android.internal.R.string.config_defaultSupervisionProfileOwnerComponent
+                    )
+                }
+                .thenThrow(Resources.NotFoundException())
+        }
+
+        assertThat(context.readDefaultSupervisionPackageNameFromResources()).isNull()
+    }
+
+    @Test
+    fun isSupervisionPackageProfileOwner_defaultSupervisionPackageIsProfileOwner_returnsTrue() {
+        val systemSupervisionPackageName = "com.android.supervision"
+        val defaultComponentString = "com.android.supervision.default/.ProfileOwnerReceiver"
+        mockResources.stub {
+            on { getString(com.android.internal.R.string.config_systemSupervision) }
+                .thenReturn(systemSupervisionPackageName)
+            on {
+                    getString(
+                        com.android.internal.R.string.config_defaultSupervisionProfileOwnerComponent
+                    )
+                }
+                .thenReturn(defaultComponentString)
+        }
+        shadowDpm.setProfileOwner(ComponentName.unflattenFromString(defaultComponentString))
+
+        assertThat(context.isSupervisionPackageProfileOwner()).isTrue()
+    }
+
+    @Test
+    fun isSupervisionPackageProfileOwner_systemSupervisionPackageIsProfileOwner_returnsTrue() {
+        val systemSupervisionPackageName = "com.android.supervision"
+        val defaultComponentString = "com.android.supervision.default/.ProfileOwnerReceiver"
+        mockResources.stub {
+            on { getString(com.android.internal.R.string.config_systemSupervision) }
+                .thenReturn(systemSupervisionPackageName)
+            on {
+                    getString(
+                        com.android.internal.R.string.config_defaultSupervisionProfileOwnerComponent
+                    )
+                }
+                .thenReturn(defaultComponentString)
+        }
+        val profileOwnerComponent =
+            ComponentName(
+                systemSupervisionPackageName,
+                "com.android.supervision.system.SomeReceiver",
+            )
+        shadowDpm.setProfileOwner(profileOwnerComponent)
+
+        assertThat(context.isSupervisionPackageProfileOwner()).isTrue()
+    }
+
+    @Test
+    fun isSupervisionPackageProfileOwner_supervisionPackageIsNotProfileOwner_returnsFalse() {
+        val systemSupervisionPackageName = "com.android.supervision"
+        val defaultComponentString = "com.android.supervision.default/.ProfileOwnerReceiver"
+        mockResources.stub {
+            on { getString(com.android.internal.R.string.config_systemSupervision) }
+                .thenReturn(systemSupervisionPackageName)
+            on {
+                    getString(
+                        com.android.internal.R.string.config_defaultSupervisionProfileOwnerComponent
+                    )
+                }
+                .thenReturn(defaultComponentString)
+        }
+        val profileOwnerComponent =
+            ComponentName(" com.android.other", "com.android.other.SomeReceiver")
+        shadowDpm.setProfileOwner(profileOwnerComponent)
+
+        assertThat(context.isSupervisionPackageProfileOwner()).isFalse()
+    }
+
+    @Test
+    fun isSupervisionPackageProfileOwner_noProfileOwner_returnsFalse() {
+        shadowDpm.setProfileOwner(null)
+
+        assertThat(context.isSupervisionPackageProfileOwner()).isFalse()
+    }
+
     private fun setUpMessengerServiceComponent(packageName: String, disabled: Boolean) {
         val serviceComponentName = ComponentName(packageName, "FakeSupervisionMessengerService")
         val intentFilter =
@@ -275,6 +421,14 @@ class SupervisionHelperTest {
 
         shadowPackageManager.addServiceIfNotPresent(serviceComponentName)
         shadowPackageManager.addIntentFilterForService(serviceComponentName, intentFilter)
+    }
+
+    private fun setUpInstallSupervisionAppComponent(packageName: String) {
+        val installComponentName = ComponentName(packageName, "FakeInstallComponent")
+        val intentFilter = IntentFilter(SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION)
+
+        shadowPackageManager.addActivityIfNotPresent(installComponentName)
+        shadowPackageManager.addIntentFilterForActivity(installComponentName, intentFilter)
     }
 
     private fun contextOf(roleManager: RoleManager?): Context =

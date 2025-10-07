@@ -17,26 +17,21 @@
 package com.android.settings.connecteddevice.display
 
 import android.app.Application
-import android.hardware.display.DisplayTopology
 import android.provider.Settings
+import android.view.Display
 import android.view.Display.DEFAULT_DISPLAY
 import androidx.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.testutils.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
-import java.util.function.Consumer
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.verify
-import org.mockito.kotlin.any
-import org.mockito.kotlin.argumentCaptor
-import org.mockito.kotlin.times
+import org.mockito.kotlin.doReturn
 
 /** Unit test for [DisplayPreferenceViewModel] */
 @RunWith(AndroidJUnit4::class)
@@ -45,28 +40,18 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
     // Rule to execute LiveData operations synchronously
     @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Mock private lateinit var displayTopology: DisplayTopology
     @Mock private lateinit var uiStateObserver: Observer<DisplayPreferenceViewModel.DisplayUiState>
 
-    private val topologyListenerCaptor = argumentCaptor<Consumer<DisplayTopology>>()
     private lateinit var application: Application
     private lateinit var viewModel: DisplayPreferenceViewModel
-
-    private var initialSelectedDisplayId = -1
 
     @Before
     override fun setUp() {
         super.setUp()
         application = ApplicationProvider.getApplicationContext()
 
-        initialSelectedDisplayId = mDisplays.get(0).id
-        doReturn(displayTopology).`when`(mMockedInjector).displayTopology
-        doReturn(initialSelectedDisplayId).`when`(displayTopology).primaryDisplayId
-
         viewModel = DisplayPreferenceViewModel(application, mMockedInjector)
         viewModel.uiState.observeForever(uiStateObserver)
-
-        verify(mMockedInjector).registerTopologyListener(topologyListenerCaptor.capture())
     }
 
     @After
@@ -80,6 +65,16 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
             Settings.Secure.MIRROR_BUILT_IN_DISPLAY,
             if (enable) 1 else 0,
         )
+        viewModel.mirrorModeObserver.onChange(/* selfChange= */ false)
+    }
+
+    private fun setIncludeDefaultDisplayInTopology(enable: Boolean) {
+        Settings.Secure.putInt(
+            application.contentResolver,
+            Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY,
+            if (enable) 1 else 0,
+        )
+        viewModel.includeDefaultDisplayInTopologyObserver.onChange(/* selfChange= */ false)
     }
 
     @Test
@@ -90,7 +85,55 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
         assertThat(state.enabledDisplays.keys)
             .containsExactly(EXTERNAL_DISPLAY_ID, OVERLAY_DISPLAY_ID)
 
-        assertThat(state.selectedDisplayId).isEqualTo(initialSelectedDisplayId)
+        assertThat(state.selectedDisplayId).isEqualTo(mDisplayTopology.primaryDisplayId)
+        assertThat(state.isMirroring).isFalse()
+    }
+
+    @Test
+    fun mirrorModeSettingChanged_updatesUiState_isMirroring() {
+        assertThat(viewModel.uiState.value!!.isMirroring).isFalse()
+
+        setMirroringMode(true)
+
+        assertThat(viewModel.uiState.value!!.isMirroring).isTrue()
+
+        setMirroringMode(false)
+
+        assertThat(viewModel.uiState.value!!.isMirroring).isFalse()
+    }
+
+    @Test
+    fun mirrorModeSettingChanged_updatesUiState_showIncludeDefaultDisplayInTopologyPref() {
+        assertThat(viewModel.uiState.value!!.showIncludeDefaultDisplayInTopologyPref).isTrue()
+
+        setMirroringMode(true)
+
+        assertThat(viewModel.uiState.value!!.showIncludeDefaultDisplayInTopologyPref).isFalse()
+
+        setMirroringMode(false)
+
+        assertThat(viewModel.uiState.value!!.showIncludeDefaultDisplayInTopologyPref).isTrue()
+    }
+
+    @Test
+    fun mirrorModeSettingChanged_notProjectedMode_showIncludeDefaultDisplayInTopologyPref_false() {
+        doReturn(false).`when`(mMockedInjector).isProjectedModeEnabled()
+        setMirroringMode(false)
+
+        assertThat(viewModel.uiState.value!!.showIncludeDefaultDisplayInTopologyPref).isFalse()
+    }
+
+    @Test
+    fun includeDefaultDisplayInTopologySettingChanged_updatesUiState() {
+        assertThat(viewModel.uiState.value!!.includeDefaultDisplayInTopology).isFalse()
+
+        setIncludeDefaultDisplayInTopology(true)
+
+        assertThat(viewModel.uiState.value!!.includeDefaultDisplayInTopology).isTrue()
+
+        setIncludeDefaultDisplayInTopology(false)
+
+        assertThat(viewModel.uiState.value!!.includeDefaultDisplayInTopology).isFalse()
     }
 
     @Test
@@ -102,7 +145,8 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    fun updateEnabledDisplays_includeBuiltintDisplay_selectedDisplayIdKept_enabledDisplaysUpdated() {
+    fun updateEnabledDisplays_includeBuiltinDisplay_selectedDisplayIdKept_enabledDisplaysUpdated() {
+        val primaryDisplayId = mDisplayTopology.primaryDisplayId
         includeBuiltinDisplay()
 
         viewModel.updateEnabledDisplays()
@@ -111,69 +155,78 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
         assertThat(state.enabledDisplays).hasSize(3)
         assertThat(state.enabledDisplays.keys)
             .containsExactly(DEFAULT_DISPLAY, EXTERNAL_DISPLAY_ID, OVERLAY_DISPLAY_ID)
-        assertThat(state.selectedDisplayId).isEqualTo(initialSelectedDisplayId)
+        assertThat(state.selectedDisplayId).isEqualTo(primaryDisplayId)
+    }
+
+    @Test
+    fun updateEnabledDisplays_excludeNonConnectedDisplaysAndNotDefaultDisplay() {
+        val initialState = viewModel.uiState.value!!
+        assertThat(initialState.enabledDisplays).hasSize(2)
+
+        val updatedEnabledDisplays = mDisplays.toMutableList()
+        // Add non-connected display
+        val mode = Display.Mode(720, 1280, 60f)
+        updatedEnabledDisplays.add(
+            DisplayDevice(
+                123,
+                "local:1111111111",
+                "test",
+                mode,
+                listOf(mode),
+                DisplayIsEnabled.YES,
+                /* isConnectedDisplay= */ false,
+            )
+        )
+        updateDisplaysAndTopology(updatedEnabledDisplays)
+
+        viewModel.updateEnabledDisplays()
+
+        val state = viewModel.uiState.value!!
+        assertThat(state.enabledDisplays).hasSize(2)
+    }
+
+    @Test
+    fun updateEnabledDisplays_excludeNonEnabledDisplaysAndNotDefaultDisplay() {
+        val initialState = viewModel.uiState.value!!
+        assertThat(initialState.enabledDisplays).hasSize(2)
+
+        val updatedEnabledDisplays = mDisplays.toMutableList()
+        // Add non-enabled display
+        val mode = Display.Mode(720, 1280, 60f)
+        updatedEnabledDisplays.add(
+            DisplayDevice(
+                123,
+                "local:1111111111",
+                "test",
+                mode,
+                listOf(mode),
+                DisplayIsEnabled.NO,
+                /* isConnectedDisplay= */ true,
+            )
+        )
+        updateDisplaysAndTopology(updatedEnabledDisplays)
+
+        viewModel.updateEnabledDisplays()
+
+        val state = viewModel.uiState.value!!
+        assertThat(state.enabledDisplays).hasSize(2)
     }
 
     @Test
     fun updateEnabledDisplays_removeSelectedDisplay_selectedDisplayUpdated() {
+        val initialState = viewModel.uiState.value!!
+        assertThat(initialState.enabledDisplays).hasSize(2)
+
         val updatedEnabledDisplays = mDisplays.toMutableList()
         // Remove initially selected display
-        updatedEnabledDisplays.removeIf { it.id == initialSelectedDisplayId }
-        doReturn(updatedEnabledDisplays).`when`(mMockedInjector).getDisplays()
-        doReturn(updatedEnabledDisplays[0].id).`when`(displayTopology).primaryDisplayId
+        updatedEnabledDisplays.removeIf { it.id == mDisplayTopology.primaryDisplayId }
+        updateDisplaysAndTopology(updatedEnabledDisplays)
 
         viewModel.updateEnabledDisplays()
 
         val state = viewModel.uiState.value!!
         assertThat(state.enabledDisplays).hasSize(1)
         assertThat(state.enabledDisplays.keys).containsExactly(updatedEnabledDisplays[0].id)
-    }
-
-    @Test
-    fun inMirroringMode_displayListenerTriggersUpdate() {
-        setMirroringMode(true)
-        includeBuiltinDisplay()
-        verify(uiStateObserver, times(2)).onChanged(any())
-
-        mListener.update(DEFAULT_DISPLAY)
-
-        verify(uiStateObserver, times(3)).onChanged(any())
-        val state = viewModel.uiState.value!!
-        assertThat(state.enabledDisplays).hasSize(3)
-    }
-
-    @Test
-    fun inMirroringMode_topologyListenerDoesNotTriggerUpdate() {
-        setMirroringMode(true)
-        includeBuiltinDisplay()
-        verify(uiStateObserver, times(2)).onChanged(any())
-
-        topologyListenerCaptor.firstValue.accept(displayTopology)
-
-        verify(uiStateObserver, times(2)).onChanged(any())
-    }
-
-    @Test
-    fun inTopologyMode_topologyListenerTriggersUpdate() {
-        setMirroringMode(false)
-        includeBuiltinDisplay()
-        verify(uiStateObserver, times(2)).onChanged(any())
-
-        topologyListenerCaptor.firstValue.accept(displayTopology)
-
-        verify(uiStateObserver, times(3)).onChanged(any())
-        val state = viewModel.uiState.value!!
-        assertThat(state.enabledDisplays).hasSize(3)
-    }
-
-    @Test
-    fun inTopologyMode_displayListenerDoesNotTriggerUpdate() {
-        setMirroringMode(false)
-        includeBuiltinDisplay()
-        verify(uiStateObserver, times(2)).onChanged(any())
-
-        mListener.update(DEFAULT_DISPLAY)
-
-        verify(uiStateObserver, times(2)).onChanged(any())
+        assertThat(state.selectedDisplayId).isEqualTo(mDisplayTopology.primaryDisplayId)
     }
 }

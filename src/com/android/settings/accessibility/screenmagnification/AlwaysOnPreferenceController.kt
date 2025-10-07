@@ -42,6 +42,7 @@ import com.android.settings.core.TogglePreferenceController
  * feature, where the magnifier will not deactivate on Activity transitions; it will only zoom out
  * to 100%.
  */
+// LINT.IfChange
 class AlwaysOnPreferenceController(context: Context, prefKey: String) :
     TogglePreferenceController(context, prefKey),
     DefaultLifecycleObserver {
@@ -154,3 +155,4 @@ class AlwaysOnPreferenceController(context: Context, prefKey: String) :
         private const val SETTING_KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/AlwaysOnSwitchPreference.kt)

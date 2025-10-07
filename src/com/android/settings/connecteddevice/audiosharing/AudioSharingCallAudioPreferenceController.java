@@ -409,11 +409,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
         if (lead != null) {
             String addr = lead.getDevice().getAnonymizedAddress();
             Log.d(TAG, "Set call audio device: " + addr);
-            if ((Flags.adoptPrimaryGroupManagementApi()
-                            || (Flags.audioSharingDeveloperOption()
-                                    && BluetoothUtils.getAudioSharingPreviewValue(
-                                            mContentResolver)))
-                    && !mIsAudioModeOngoingCall.get()) {
+            if (!mIsAudioModeOngoingCall.get()) {
                 LeAudioProfile leaProfile =
                         mBtManager == null
                                 ? null

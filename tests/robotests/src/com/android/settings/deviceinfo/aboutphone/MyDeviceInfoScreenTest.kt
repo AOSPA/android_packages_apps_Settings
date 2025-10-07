@@ -18,12 +18,13 @@ package com.android.settings.deviceinfo.aboutphone
 
 import android.content.pm.UserInfo
 import android.os.Build
-import android.provider.Settings.Global
+import android.provider.Settings.Global.DEVICE_NAME
 import androidx.preference.Preference
 import com.android.settings.deviceinfo.simstatus.SimEidInfoPreference
 import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.ShadowUserManager
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settingslib.datastore.SettingsGlobalStore
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -50,12 +51,15 @@ class MyDeviceInfoScreenTest : SettingsCatalystTestCase() {
 
     @Test
     fun getSummary_deviceNameNotSet_shouldReturnDeviceModel() {
+        SettingsGlobalStore.get(appContext).setString(DEVICE_NAME, null)
+
         assertThat(preferenceScreenCreator.getSummary(appContext)).isEqualTo(Build.MODEL)
     }
 
     @Test
     fun getSummary_deviceNameSet_shouldReturnDeviceName() {
-        Global.putString(appContext.contentResolver, Global.DEVICE_NAME, "Test")
+        SettingsGlobalStore.get(appContext).setString(DEVICE_NAME, "Test")
+
         assertThat(preferenceScreenCreator.getSummary(appContext)).isEqualTo("Test")
     }
 }

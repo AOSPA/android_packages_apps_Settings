@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 /**
  * Data class for storing the configurations related to the display size.
  */
+// LINT.IfChange
 public class DisplaySizeData extends PreviewSizeData<Integer> {
     private final DisplayDensityUtils mDensity;
 
@@ -69,3 +70,4 @@ public class DisplaySizeData extends PreviewSizeData<Integer> {
         }
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/textreading/data/DisplaySizeDataStore.kt,)

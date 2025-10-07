@@ -166,7 +166,7 @@ public abstract class LocalePickerBaseListPreferenceController extends
         List<LocaleStore.LocaleInfo> searchItem = new ArrayList<>();
         for (LocaleStore.LocaleInfo option : listOptions) {
             for (LocaleStore.LocaleInfo suggested : listSuggested) {
-                if (suggested.toString().contains(option.toString())) {
+                if (suggested.toString().equals(option.toString())) {
                     searchItem.add(suggested);
                 }
             }
@@ -215,8 +215,14 @@ public abstract class LocalePickerBaseListPreferenceController extends
                 pref = new Preference(mContext);
                 mPreferenceCategory.addPreference(pref);
             }
-            String localeName =
-                    mIsCountryMode ? locale.getFullCountryNameNative() : locale.getFullNameNative();
+            String localeName;
+            if (isNumberingMode()) {
+                localeName = LocaleHelper.getDisplayNumberingSystemKeyValue(locale.getLocale(),
+                        locale.getLocale());
+            } else {
+                localeName = mIsCountryMode ? locale.getFullCountryNameNative()
+                                : locale.getFullNameNative();
+            }
             pref.setTitle(localeName);
             pref.setKey(locale.toString());
             pref.setOnPreferenceClickListener(clickedPref -> {

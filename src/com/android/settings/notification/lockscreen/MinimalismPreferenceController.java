@@ -18,8 +18,6 @@ package com.android.settings.notification.lockscreen;
 
 import static android.provider.Settings.Secure.LOCK_SCREEN_NOTIFICATION_MINIMALISM;
 import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS;
-import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS;
-import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_YES;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -156,11 +154,14 @@ public class MinimalismPreferenceController
         mButtons.forEach(
                 (value, button) -> {
                     button.setSelected(currentValue == value);
+                    // While selected, the button should be readable for screen-readers, and talk
+                    // back, but not clickable or showing number for voice control
                     if (currentValue == value) {
-                        button.setImportantForAccessibility(
-                                IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+                        button.setClickable(false);
+                        button.setFocusable(false);
                     } else {
-                        button.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+                        button.setClickable(true);
+                        button.setFocusable(true);
                     }
                 }
         );

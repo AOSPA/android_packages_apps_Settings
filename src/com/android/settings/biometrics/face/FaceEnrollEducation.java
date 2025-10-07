@@ -39,8 +39,10 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,6 +64,7 @@ import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.util.LottieAnimationHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 import com.google.android.setupdesign.view.IllustrationVideoView;
@@ -102,6 +105,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                     } else {
                         showDefaultIllustration();
                         mIllustrationAccessibility.setVisibility(View.INVISIBLE);
+                        adjustIllustrationLottiePosition();
                     }
                 }
             };
@@ -407,10 +411,39 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         return mIsUsingExpressiveStyle ? a11yButtonExpressive : a11yButton;
     }
     private void setupllIllustrationAnim(LottieAnimationView illustrationLottie) {
-        String[] colorArray = getResources().getStringArray(R.array.fac_education_illustration);
+        String[] colorArray = getResources().getStringArray(R.array.face_education_illustration);
         List<String> colorMappings = Arrays.asList(colorArray);
         LottieAnimationHelper.get().applyColor(getApplicationContext(), illustrationLottie,
                 colorMappings);
+    }
+
+    @VisibleForTesting
+    public boolean adjustIllustrationLottiePosition() {
+        boolean alreadyAdjustedPos = false;
+        final GlifLayout glifLayout = findViewById(R.id.setup_wizard_layout);
+        final TextView descView =  glifLayout.getDescriptionTextView();
+        final int descBottomPos = getOnScreenPositionTop(descView) + descView.getHeight();
+        final int illustrationLottieTop = getOnScreenPositionTop(mIllustrationLottie);
+        if (illustrationLottieTop < descBottomPos) {
+            final int posDiff = descBottomPos - illustrationLottieTop;
+            FrameLayout.LayoutParams layoutParams =
+                    (FrameLayout.LayoutParams) mIllustrationLottie.getLayoutParams();
+            layoutParams.topMargin += posDiff;
+            mIllustrationLottie.setLayoutParams(layoutParams);
+            mIllustrationLottie.requestLayout();
+            alreadyAdjustedPos = true;
+        }
+        return alreadyAdjustedPos;
+    }
+
+    @VisibleForTesting
+    public int getOnScreenPositionTop(@Nullable View view) {
+        if (view == null) {
+            return 0;
+        }
+        int [] location = new int[2];
+        view.getLocationOnScreen(location);
+        return location[1];
     }
 
     protected void onAccessibilityButtonClicked(View view) {
@@ -418,6 +451,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         view.setVisibility(View.GONE);
         mSwitchDiversity.setVisibility(View.VISIBLE);
         mSwitchDiversity.addOnLayoutChangeListener(mSwitchDiversityOnLayoutChangeListener);
+        adjustIllustrationLottiePosition();
     }
 
     protected void onSkipButtonClick(View view) {

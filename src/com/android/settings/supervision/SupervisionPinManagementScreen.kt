@@ -56,6 +56,9 @@ class SupervisionPinManagementScreen :
     override val title: Int
         get() = R.string.supervision_pin_management_preference_title
 
+    override val screenTitle: Int
+        get() = R.string.supervision_pin_management_screen_title
+
     override val keywords: Int
         get() = R.string.supervision_pin_management_preference_keywords
 

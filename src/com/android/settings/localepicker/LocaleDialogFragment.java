@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +37,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
+import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -111,7 +111,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
             // default dialog only when user changes the locale.
             if ((type == DIALOG_CONFIRM_SYSTEM_DEFAULT || type == DIALOG_ADD_SYSTEM_LOCALE
                     || type == DIALOG_REMOVE_LOCALE || (type == DIALOG_NOT_AVAILABLE_LOCALE
-                    && menuItemId == R.id.move_up))
+                    && (menuItemId == R.id.move_up || menuItemId == R.id.move_top)))
                     && !mShouldKeepDialog) {
                 dismiss();
             }
@@ -140,7 +140,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         mAlertDialog.setCanceledOnTouchOutside(false);
         mAlertDialog.setOnDismissListener(dialogInterface -> {
             mAlertDialog.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(
-                            mBackCallback);
+                    mBackCallback);
         });
 
         return mAlertDialog;
@@ -194,7 +194,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         private final LocaleStore.LocaleInfo mSelectedLocaleInfo;
         private final int mMenuItemId;
         private final MetricsFeatureProvider mMetricsFeatureProvider;
-        private final boolean mShowDialogForNotTranslated;
+        private boolean mShowDialogForNotTranslated;
 
         private LanguageAndRegionSettings mParent;
 
@@ -220,7 +220,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                     || mDialogType == DIALOG_ADD_SYSTEM_LOCALE
                     || mDialogType == DIALOG_REMOVE_LOCALE
                     || (mDialogType == DIALOG_NOT_AVAILABLE_LOCALE
-                    && mMenuItemId == R.id.move_up)) {
+                    && (mMenuItemId == R.id.move_up || mMenuItemId == R.id.move_top))) {
                 int result = Activity.RESULT_CANCELED;
                 boolean changed = false;
                 if (which == DialogInterface.BUTTON_POSITIVE) {
@@ -252,17 +252,23 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                     LocaleStore.LocaleInfo defaultLocaleInfo = LocaleStore.getLocaleInfo(
                             Locale.getDefault());
                     Locale locale = mLocaleInfo.getLocale();
-                    String localeLanguage = locale.getDisplayLanguage();
-                    String localeCountry = locale.getDisplayCountry();
+                    boolean useEnglishAsDefault = !defaultLocaleInfo.isTranslated();
+                    String localeLanguage = useEnglishAsDefault
+                            ? locale.getDisplayLanguage(Locale.ENGLISH)
+                            : locale.getDisplayLanguage();
+                    String localeCountry = useEnglishAsDefault
+                            ? locale.getDisplayCountry(Locale.ENGLISH)
+                            : locale.getDisplayCountry();
                     String dialogMessage = mContext.getString(
-                                    R.string.desc_notice_device_locale_and_region_settings_change,
-                                    localeLanguage, localeCountry);
+                            R.string.desc_notice_device_locale_and_region_settings_change,
+                            localeLanguage, localeCountry);
                     dialogContent.mMessage =
-                            mMenuItemId == R.id.remove && mSelectedLocaleInfo == defaultLocaleInfo
-                            ? mContext.getString(
-                            R.string.dlg_desc_delete_preferred_default_locale,
-                            defaultLocaleInfo.getFullNameNative())
-                            : dialogMessage;
+                            mMenuItemId == R.id.remove && mSelectedLocaleInfo.toString().equals(
+                                    defaultLocaleInfo.toString())
+                                    ? mContext.getString(
+                                    R.string.dlg_desc_delete_preferred_default_locale,
+                                    defaultLocaleInfo.getFullNameNative())
+                                    : dialogMessage;
                     dialogContent.mPositiveButton = mContext.getString(
                             R.string.button_label_confirmation_of_system_locale_change);
                     dialogContent.mNegativeButton = mContext.getString(R.string.cancel);
@@ -272,7 +278,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                             R.string.title_unavailable_locale, mLocaleInfo.getFullNameNative());
                     dialogContent.mMessage = mContext.getString(R.string.desc_unavailable_locale);
                     dialogContent.mPositiveButton = mContext.getString(R.string.okay);
-                    if (mMenuItemId == R.id.move_up) {
+                    if (mMenuItemId == R.id.move_up || mMenuItemId == R.id.move_top) {
                         dialogContent.mNegativeButton = mContext.getString(R.string.cancel);
                     }
                     break;
@@ -286,9 +292,29 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                     dialogContent.mNegativeButton = mContext.getString(R.string.cancel);
                     break;
                 case DIALOG_REMOVE_LOCALE:
-                    dialogContent.mTitle = mContext.getString(
-                            R.string.dlg_title_delete_preferred_locale,
-                            mLocaleInfo.getFullNameNative());
+                    boolean changeSystemLanguage = mLocaleInfo.getLocale().toString().equals(
+                            Locale.getDefault().toString());
+                    String firstTranslatedInfoName = null;
+                    LocaleStore.LocaleInfo localeInfo;
+                    if (changeSystemLanguage) {
+                        localeInfo = LocaleUtils.getUserLocaleList().stream().filter(
+                                i -> (i.isTranslated() && !i.getLocale().equals(
+                                        Locale.getDefault()))).findFirst().orElse(null);
+                        firstTranslatedInfoName =
+                                localeInfo != null
+                                        ? localeInfo.getFullNameNative()
+                                        : LocaleUtils.getUserLocaleList().get(0)
+                                                .getFullNameNative();
+                        if (localeInfo == null) {
+                            mShowDialogForNotTranslated = true;
+                        }
+                    }
+                    int titleId = changeSystemLanguage
+                            ? R.string.title_change_system_locale
+                            : R.string.dlg_title_delete_preferred_locale;
+                    dialogContent.mTitle = mContext.getString(titleId, changeSystemLanguage
+                            ? firstTranslatedInfoName
+                            : mLocaleInfo.getFullNameNative());
                     dialogContent.mMessage = mContext.getString(
                             R.string.dlg_desc_delete_preferred_locale,
                             mLocaleInfo.getFullNameNative());

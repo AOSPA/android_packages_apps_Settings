@@ -14,20 +14,29 @@
 
 package com.android.settings.display.darkmode;
 
+import static com.android.internal.accessibility.common.NotificationConstants.EXTRA_SOURCE;
+import static com.android.internal.accessibility.common.NotificationConstants.SOURCE_START_SURVEY;
+
 import android.app.Dialog;
-import android.app.UiModeManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.BaseSupportFragment;
-import com.android.settings.accessibility.ForceInvertPreferenceController;
+import com.android.settings.accessibility.FeedbackButtonPreferenceController;
+import com.android.settings.accessibility.FeedbackManager;
+import com.android.settings.accessibility.Flags;
+import com.android.settings.accessibility.ForceInvertSurveyButtonPreferenceController;
+import com.android.settings.accessibility.SurveyManager;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -73,8 +82,11 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        use(ForceInvertPreferenceController.class).initializeForSurvey(this, getSurveyKey(),
-                getMetricsCategory());
+        if (!Flags.catalystDarkUiMode()) {
+            use(FeedbackButtonPreferenceController.class).initialize(
+                    new FeedbackManager(context, getMetricsCategory()));
+            initForceInvertSurvey(context);
+        }
     }
 
     @Override
@@ -145,17 +157,6 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
     }
 
     @Override
-    @NonNull
-    public String getSurveyKey() {
-        final UiModeManager uiModeManager = getContext().getSystemService(UiModeManager.class);
-        if (uiModeManager != null
-                && uiModeManager.getForceInvertState() == UiModeManager.FORCE_INVERT_TYPE_DARK) {
-            return FORCE_INVERT_SURVEY_KEY;
-        }
-        return super.getSurveyKey();
-    }
-
-    @Override
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case DIALOG_START_TIME:
@@ -164,6 +165,24 @@ public class DarkModeSettingsFragment extends BaseSupportFragment {
                 return SettingsEnums.DIALOG_DARK_THEME_SET_END_TIME;
             default:
                 return 0;
+        }
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@Nullable Context context) {
+        return DarkModeScreen.KEY;
+    }
+
+    private void initForceInvertSurvey(@NonNull Context context) {
+        final SurveyManager surveyManager = new SurveyManager(this, context,
+                FORCE_INVERT_SURVEY_KEY, getMetricsCategory());
+        final Intent intent = getIntent();
+        if (intent != null
+                && intent.getStringExtra(EXTRA_SOURCE) != null
+                && TextUtils.equals(intent.getStringExtra(EXTRA_SOURCE), SOURCE_START_SURVEY)) {
+            surveyManager.startSurvey();
+        } else {
+            use(ForceInvertSurveyButtonPreferenceController.class).initialize(surveyManager);
         }
     }
 

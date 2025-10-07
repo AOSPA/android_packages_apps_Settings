@@ -26,10 +26,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.view.MenuItem;
 
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
@@ -39,10 +37,8 @@ import com.android.settings.localepicker.NotificationController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.widget.MenuHandler;
 import com.android.settingslib.widget.OrderMenuPreference;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -109,10 +105,7 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
         List<LocaleStore.LocaleInfo> localeInfoList = getUserLocaleList();
         int listSize = localeInfoList.size();
         for (int i = 0; i < listSize; i++) {
-            String preferencesTags = Settings.System.getString(
-                    mContext.getContentResolver(), Settings.System.LOCALE_PREFERENCES);
-            LocaleStore.LocaleInfo localeInfo = mayAppendUnicodeTags(localeInfoList.get(i),
-                    preferencesTags);
+            LocaleStore.LocaleInfo localeInfo = localeInfoList.get(i);
             OrderMenuPreference pref = existingPreferences.remove(localeInfo.getId());
             if (pref == null) {
                 pref = new OrderMenuPreference(mContext);
@@ -121,10 +114,10 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
             String localeName = localeInfo.getFullNameNative();
             pref.setTitle(localeName);
             String summary = null;
-            if (localeInfo.getLocale().equals(Locale.getDefault())) {
-                summary = mContext.getString(R.string.desc_current_default_language);
-            } else if (!localeInfo.isTranslated()) {
+            if (!localeInfo.isTranslated()) {
                 summary = mContext.getString(R.string.locale_not_translated);
+            } else if (localeInfo.getLocale().equals(Locale.getDefault())) {
+                summary = mContext.getString(R.string.desc_current_default_language);
             }
             pref.setSummary(summary);
             pref.setKey(localeInfo.toString());
@@ -142,13 +135,19 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
             pref.setMenuItemClickListener((item, preference) -> {
                 int menuItemId = item.getItemId();
                 mMenuItemId = menuItemId;
-                if (menuItemId == R.id.move_up || menuItemId == R.id.move_down) {
+                if (menuItemId == R.id.move_top || menuItemId == R.id.move_up
+                        || menuItemId == R.id.move_down) {
                     LocaleStore.LocaleInfo saved = localeInfo;
                     mSelectedLocaleInfo = saved;
                     int position = localeInfoList.indexOf(localeInfo);
                     localeInfoList.remove(position);
-                    localeInfoList.add(menuItemId == R.id.move_up ? position - 1 : position + 1,
-                            saved);
+                    int toPosition = 0; // menuItemId is R.id.move_top
+                    if (menuItemId == R.id.move_up) {
+                        toPosition = position - 1;
+                    } else if (menuItemId == R.id.move_down) {
+                        toPosition = position + 1;
+                    }
+                    localeInfoList.add(toPosition, saved);
                     mUpdatedLocaleInfoList = localeInfoList;
                     showConfirmDialog(localeInfoList, null);
                     mMetricsFeatureProvider.action(mContext,
@@ -174,6 +173,7 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
                 return true;
             });
             pref.setNumber(i + 1);
+            pref.setShowIconsInPopupMenu(true);
             mPreferences.put(localeInfo.getId(), pref);
         }
     }
@@ -184,9 +184,14 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
         LocaleStore.LocaleInfo defaultAfterChange = localeInfoList.get(0);
         if (!defaultAfterChange.getLocale().equals(currentSystemLocale)) {
             if (Locale.getDefault().equals(defaultAfterChange.getLocale())) {
-                doTheUpdate();
+                if (mMenuItemId == R.id.remove) {
+                    displayRemovalDialogFragment(mSelectedLocaleInfo);
+                } else {
+                    doTheUpdate();
+                }
             } else {
-                if (mMenuItemId == R.id.move_up && !defaultAfterChange.isTranslated()) {
+                if ((mMenuItemId == R.id.move_up || mMenuItemId == R.id.move_top)
+                        && !defaultAfterChange.isTranslated()) {
                     showUnavailableDialog(defaultAfterChange);
                 } else {
                     displaySystemDialogFragment(defaultAfterChange, true);
@@ -292,16 +297,31 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
     protected List<LocaleStore.LocaleInfo> setUpdatedLocaleList(
             LocaleStore.LocaleInfo selectedLocaleInfo, int menuId) {
         mUpdatedLocaleInfoList = getUserLocaleList();
-        if (menuId == R.id.move_up || menuId == R.id.move_down) {
+        if (menuId == R.id.move_top || menuId == R.id.move_up || menuId == R.id.move_down) {
             LocaleStore.LocaleInfo saved = selectedLocaleInfo;
             mSelectedLocaleInfo = saved;
-            int position = mUpdatedLocaleInfoList.indexOf(selectedLocaleInfo);
-            mUpdatedLocaleInfoList.remove(position);
-            mUpdatedLocaleInfoList.add(menuId == R.id.move_up ? position - 1 : position + 1,
-                    saved);
+            for (int i = 0; i < mUpdatedLocaleInfoList.size(); i++) {
+                if (mUpdatedLocaleInfoList.get(i).toString().equals(
+                        selectedLocaleInfo.toString())) {
+                    mUpdatedLocaleInfoList.remove(i);
+                    int toPosition = 0; // menuId is R.id.move_top
+                    if (menuId == R.id.move_up) {
+                        toPosition = i - 1;
+                    } else if (menuId == R.id.move_down) {
+                        toPosition = i + 1;
+                    }
+                    mUpdatedLocaleInfoList.add(toPosition, saved);
+                    break;
+                }
+            }
         } else {
-            int position = mUpdatedLocaleInfoList.indexOf(selectedLocaleInfo);
-            mUpdatedLocaleInfoList.remove(position);
+            for (int i = 0; i < mUpdatedLocaleInfoList.size(); i++) {
+                if (mUpdatedLocaleInfoList.get(i).toString().equals(
+                        selectedLocaleInfo.toString())) {
+                    mUpdatedLocaleInfoList.remove(i);
+                    break;
+                }
+            }
         }
         return mUpdatedLocaleInfoList;
     }

@@ -15,9 +15,12 @@
  */
 package com.android.settings.supervision
 
+import android.Manifest.permission.MANAGE_USERS
 import android.app.settings.SettingsEnums
+import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
+import androidx.annotation.RequiresPermission
 import androidx.preference.PreferenceGroup
 import androidx.preference.SwitchPreferenceCompat
 import com.android.settings.CatalystSettingsActivity
@@ -26,7 +29,6 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.supervision.ipc.SupportedApp
 import com.android.settings.utils.makeLaunchIntent
-import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -40,7 +42,26 @@ import kotlinx.coroutines.withContext
 
 /** Activity to display [SupervisionWebContentFiltersScreen]. */
 class SupervisionWebContentFiltersActivity :
-    CatalystSettingsActivity(SupervisionWebContentFiltersScreen.KEY)
+    CatalystSettingsActivity(SupervisionWebContentFiltersScreen.KEY) {
+    @RequiresPermission(MANAGE_USERS)
+    public override fun onResume() {
+        super.onResume()
+        if (
+            Flags.enableWebContentFiltersScreenSearchRedirection() &&
+                getSystemService(SupervisionManager::class.java)?.isSupervisionEnabled != true
+        ) {
+            startActivity(
+                makeLaunchIntent(
+                    this,
+                    SupervisionDashboardActivity::class.java,
+                    SupervisionWebContentFiltersScreen.KEY,
+                )
+            )
+            finish()
+            return
+        }
+    }
+}
 
 /** Web content filters landing page (Settings > Supervision > Web content filters). */
 @ProvidePreferenceScreen(SupervisionWebContentFiltersScreen.KEY)
@@ -82,7 +103,7 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +SupervisionWebContentFiltersTopIntroPreference()
-            +PreferenceCategory(
+            +NonIndexablePreferenceCategory(
                 BROWSER_FILTERS_GROUP,
                 R.string.supervision_web_content_filters_browser_title,
             ) +=
@@ -90,7 +111,7 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
                     val dataStore = SupervisionSafeSitesDataStore(context)
                     +SupervisionSafeSitesSwitchPreference(dataStore)
                 }
-            +PreferenceCategory(
+            +NonIndexablePreferenceCategory(
                 SEARCH_FILTERS_GROUP,
                 R.string.supervision_web_content_filters_search_title,
             ) +=

@@ -19,6 +19,7 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEA
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
 import static com.android.settings.flags.Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING;
+import static com.android.settings.flags.Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX;
 import static com.android.settings.flags.Flags.FLAG_ROTATION_CONNECTED_DISPLAY_SETTING;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -126,6 +127,8 @@ public class ConnectedDeviceGroupControllerTest {
         mFakeFeatureFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, false);
         mFakeFeatureFlags.setFlag(FLAG_ROTATION_CONNECTED_DISPLAY_SETTING, true);
         mFakeFeatureFlags.setFlag(FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING, true);
+        mFakeFeatureFlags.setFlag(
+                FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX, true);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         mPreference = new Preference(mContext);
@@ -238,6 +241,8 @@ public class ConnectedDeviceGroupControllerTest {
     public void getAvailabilityStatus_noBluetoothUsbDockFeature_returnUnSupported() {
         mFakeFeatureFlags.setFlag(FLAG_ROTATION_CONNECTED_DISPLAY_SETTING, false);
         mFakeFeatureFlags.setFlag(FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING, false);
+        mFakeFeatureFlags.setFlag(
+                FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX, false);
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
         mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_ACCESSORY, false);
         mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_HOST, false);
@@ -304,6 +309,8 @@ public class ConnectedDeviceGroupControllerTest {
     public void getAvailabilityStatus_noUsiStylusFeature_returnUnSupported() {
         mFakeFeatureFlags.setFlag(FLAG_ROTATION_CONNECTED_DISPLAY_SETTING, false);
         mFakeFeatureFlags.setFlag(FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING, false);
+        mFakeFeatureFlags.setFlag(
+                FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX, false);
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
         mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_ACCESSORY, false);
         mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_HOST, false);

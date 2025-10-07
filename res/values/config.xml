@@ -740,6 +740,9 @@
     <!-- Whether to show communal settings at the top level on mobile. -->
     <bool name="config_show_communal_settings_mobile">false</bool>
 
+    <!-- Whether posturing detection is supported. -->
+    <bool name="config_posturing_supported">false</bool>
+
     <!-- Whether to show a "restrict to wireless charging" settings option in screensaver and hub
          mode settings (false by default). -->
     <bool name="config_show_restrict_to_wireless_charging">false</bool>
@@ -895,4 +898,20 @@
         <item>1234</item>
         -->
     </integer-array>
+
+    <!-- Array of carrier IDs for which the Wi-Fi scorer toggle should be OFF by default. -->
+    <integer-array name="config_carrier_for_wifi_scorer_toggle_off" translatable="false">
+    </integer-array>
+
+    <!-- Array of carrier IDs for which the mobile network toggle should be disabled/hidden by default. -->
+    <integer-array name="config_carrier_for_mobile_network_toggle_disable" translatable="false">
+    </integer-array>
+
+    <!-- Whether strings are provided to show Identity Check Watch promo card. This implies that
+         the following strings have overlays:
+         R.string.identity_check_watch_issue_card_title
+         R.string.identity_check_watch_issue_card_summary
+         R.string.identity_check_watch_promo_card_title
+         R.string.identity_check_promo_card_watch_summary -->
+    <bool name="config_show_identity_check_watch_promo">false</bool>
 </resources>

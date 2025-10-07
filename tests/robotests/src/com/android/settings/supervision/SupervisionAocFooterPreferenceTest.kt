@@ -77,7 +77,7 @@ class SupervisionAocFooterPreferenceTest {
                 SupervisionAocFooterPreference(preferenceDataProvider, testDispatcher)
 
             aosFooterPreference.onResume(preferenceLifecycleContext)
-            verify(preferenceLifecycleContext, times(2)).notifyPreferenceChange(KEY)
+            verify(preferenceLifecycleContext, times(1)).notifyPreferenceChange(KEY)
             aosFooterPreference.bind(preference, mock())
 
             assertThat(preference.isVisible).isTrue()
@@ -93,7 +93,7 @@ class SupervisionAocFooterPreferenceTest {
                 SupervisionAocFooterPreference(preferenceDataProvider, testDispatcher)
 
             aosFooterPreference.onResume(preferenceLifecycleContext)
-            verify(preferenceLifecycleContext, times(2)).notifyPreferenceChange(KEY)
+            verify(preferenceLifecycleContext, times(1)).notifyPreferenceChange(KEY)
             aosFooterPreference.bind(preference, mock())
 
             assertThat(preference.isVisible).isFalse()
@@ -109,7 +109,7 @@ class SupervisionAocFooterPreferenceTest {
                 SupervisionAocFooterPreference(preferenceDataProvider, testDispatcher)
 
             aosFooterPreference.onResume(preferenceLifecycleContext)
-            verify(preferenceLifecycleContext, times(2)).notifyPreferenceChange(KEY)
+            verify(preferenceLifecycleContext, times(1)).notifyPreferenceChange(KEY)
             aosFooterPreference.bind(preference, mock())
 
             assertThat(preference.isVisible).isFalse()

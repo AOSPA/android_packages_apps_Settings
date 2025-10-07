@@ -22,6 +22,7 @@ import android.content.res.TypedArray;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.Choreographer;
+import android.view.Display;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ import java.util.Objects;
  * A {@link BasePreferenceController} for controlling the preview pager of the text and reading
  * options.
  */
+// LINT.IfChange
 class TextReadingPreviewController extends BasePreferenceController implements
         PreviewSizeSliderController.ProgressInteractionListener {
     private static final String TAG = "TextReadingPreviewCtrl";
@@ -79,6 +81,12 @@ class TextReadingPreviewController extends BasePreferenceController implements
 
     @Override
     public int getAvailabilityStatus() {
+        // TODO(b/428700479): Preview preference is hidden in non default displays as preview is
+        //  created via default display density configuration which results in unrealistic
+        //  preview in other displays.
+        if (mContext.getDisplayId() != Display.DEFAULT_DISPLAY) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         return AVAILABLE;
     }
 
@@ -255,3 +263,4 @@ class TextReadingPreviewController extends BasePreferenceController implements
         return configurations;
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/textreading/ui/TextReadingPreview.kt, /src/com/android/settings/accessibility/shared/utils/DebounceConfigurationCommitController.kt)

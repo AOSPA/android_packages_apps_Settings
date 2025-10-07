@@ -17,6 +17,7 @@
 package com.android.settings.datausage
 
 import android.app.settings.SettingsEnums
+import android.content.Intent
 import android.net.NetworkPolicy
 import android.net.NetworkTemplate
 import android.os.Bundle
@@ -42,8 +43,8 @@ import com.android.settingslib.widget.LayoutPreference
 import kotlin.jvm.optionals.getOrNull
 
 /**
- * Panel showing data usage history across various networks, including options
- * to inspect based on usage cycle and control through [NetworkPolicy].
+ * Panel showing data usage history across various networks, including options to inspect based on
+ * usage cycle and control through [NetworkPolicy].
  */
 @OpenForTesting
 open class DataUsageList : DashboardFragment() {
@@ -88,11 +89,10 @@ open class DataUsageList : DashboardFragment() {
             finish()
             return
         }
-        dataUsageListAppsController = use(DataUsageListAppsController::class.java).apply {
-            init(template)
-        }
-        chartDataUsagePreferenceController = use(ChartDataUsagePreferenceController::class.java)
-            .apply { init(template) }
+        dataUsageListAppsController =
+            use(DataUsageListAppsController::class.java).apply { init(template) }
+        chartDataUsagePreferenceController =
+            use(ChartDataUsagePreferenceController::class.java).apply { init(template) }
 
         updateWarning()
     }
@@ -112,19 +112,21 @@ open class DataUsageList : DashboardFragment() {
     override fun onViewCreated(v: View, savedInstanceState: Bundle?) {
         super.onViewCreated(v, savedInstanceState)
 
-        billingCycleRepository.isModifiableFlow(subId)
+        billingCycleRepository
+            .isModifiableFlow(subId)
             .collectLatestWithLifecycle(viewLifecycleOwner, action = ::updatePolicy)
 
         val template = template ?: return
         viewModel.templateFlow.value = template
-        dataUsageListHeaderController = DataUsageListHeaderController(
-            setPinnedHeaderView(R.layout.apps_filter_spinner),
-            template,
-            metricsCategory,
-            viewLifecycleOwner,
-            viewModel.cyclesFlow,
-            ::updateSelectedCycle,
-        )
+        dataUsageListHeaderController =
+            DataUsageListHeaderController(
+                setPinnedHeaderView(R.layout.apps_filter_spinner),
+                template,
+                metricsCategory,
+                viewLifecycleOwner,
+                viewModel.cyclesFlow,
+                ::updateSelectedCycle,
+            )
         viewModel.cyclesFlow.collectLatestWithLifecycle(viewLifecycleOwner) { cycles ->
             dataUsageListAppsController?.updateCycles(cycles)
         }
@@ -136,7 +138,8 @@ open class DataUsageList : DashboardFragment() {
 
     private fun finishIfSubscriptionDisabled() {
         if (SubscriptionManager.isUsableSubscriptionId(subId)) {
-            SubscriptionRepository(requireContext()).isSubscriptionEnabledFlow(subId)
+            SubscriptionRepository(requireContext())
+                .isSubscriptionEnabledFlow(subId)
                 .collectLatestWithLifecycle(viewLifecycleOwner) { isSubscriptionEnabled ->
                     if (!isSubscriptionEnabled) finish()
                 }
@@ -153,14 +156,33 @@ open class DataUsageList : DashboardFragment() {
             template = it.getParcelable(EXTRA_NETWORK_TEMPLATE, NetworkTemplate::class.java)
         }
         if (template == null && subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            subId = intent.getIntExtra(
-                Settings.EXTRA_SUB_ID,
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID,
-            )
-            template = intent.getParcelableExtra(
-                Settings.EXTRA_NETWORK_TEMPLATE,
-                NetworkTemplate::class.java,
-            ) ?: DataUsageUtils.getMobileNetworkTemplateFromSubId(context, intent).getOrNull()
+            subId =
+                intent.getIntExtra(
+                    Settings.EXTRA_SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID,
+                )
+            val localIntent: Intent = intent.clone() as Intent
+            if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                subId =
+                    getPreferenceScreenBindingArgs(requireContext())?.getInt(Settings.EXTRA_SUB_ID)
+                        ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                Log.d(
+                    TAG,
+                    "processArgument: get subId from ScreenBindingArgs and reset subId into intent.",
+                )
+                // Add this extra into the intent because it is required in the
+                // DataUsageUtils.getMobileNetworkTemplateFromSubId.
+                if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                    localIntent.putExtra(Settings.EXTRA_SUB_ID, subId)
+                }
+            }
+            template =
+                intent.getParcelableExtra(
+                    Settings.EXTRA_NETWORK_TEMPLATE,
+                    NetworkTemplate::class.java,
+                )
+                    ?: DataUsageUtils.getMobileNetworkTemplateFromSubId(context, localIntent)
+                        .getOrNull()
         }
     }
 
@@ -170,9 +192,7 @@ open class DataUsageList : DashboardFragment() {
         chartDataUsagePreferenceController?.setBillingCycleModifiable(isModifiable)
     }
 
-    /**
-     * Updates the chart and detail data when initial loaded or selected cycle changed.
-     */
+    /** Updates the chart and detail data when initial loaded or selected cycle changed. */
     private fun updateSelectedCycle(usageData: NetworkUsageData) {
         Log.d(TAG, "showing cycle $usageData")
 
@@ -198,7 +218,6 @@ open class DataUsageList : DashboardFragment() {
         private const val TAG = "DataUsageList"
         private const val KEY_USAGE_AMOUNT = "usage_amount"
 
-        @VisibleForTesting
-        const val KEY_WARNING = "warning"
+        @VisibleForTesting const val KEY_WARNING = "warning"
     }
 }

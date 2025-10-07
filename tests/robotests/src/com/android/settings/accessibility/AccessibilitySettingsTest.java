@@ -43,6 +43,7 @@ import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.accessibility.util.AccessibilityUtils;
@@ -457,9 +458,9 @@ public class AccessibilitySettingsTest {
         setupFragment();
 
         // Both service and activity preferences should exist on the page.
-        RestrictedPreference servicePref = mFragment.getPreferenceScreen().findPreference(
+        Preference servicePref = mFragment.getPreferenceScreen().findPreference(
                 a11yServiceInfo.getComponentName().flattenToString());
-        RestrictedPreference activityPref = mFragment.getPreferenceScreen().findPreference(
+        Preference activityPref = mFragment.getPreferenceScreen().findPreference(
                 a11yShortcutInfo.getComponentName().flattenToString());
         assertThat(servicePref).isNotNull();
         assertThat(activityPref).isNotNull();

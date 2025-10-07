@@ -185,13 +185,6 @@ public class AccessibilitySettings extends BaseSupportFragment implements
     }
 
     @Override
-    protected String getDisabilitySupportUrl() {
-        return FeatureFactory.getFeatureFactory()
-                .getAccessibilityDisabilitySupportFeatureProvider()
-                .getUrl();
-    }
-
-    @Override
     public int getHelpResource() {
         return R.string.help_uri_accessibility;
     }
@@ -402,7 +395,7 @@ public class AccessibilitySettings extends BaseSupportFragment implements
                         UserHandle.myUserId());
         final List<AccessibilityServiceInfo> installedServiceList =
                 a11yManager.getInstalledAccessibilityServiceList();
-        final List<RestrictedPreference> preferenceList = getInstalledAccessibilityPreferences(
+        final List<Preference> preferenceList = getInstalledAccessibilityPreferences(
                 getPrefContext(), installedShortcutList, installedServiceList);
 
         removeNonPreinstalledComponents(mPreBundledServiceComponentToCategoryMap,
@@ -412,7 +405,7 @@ public class AccessibilitySettings extends BaseSupportFragment implements
                 mCategoryToPrefCategoryMap.get(CATEGORY_DOWNLOADED_SERVICES);
 
         for (int i = 0, count = preferenceList.size(); i < count; ++i) {
-            final RestrictedPreference preference = preferenceList.get(i);
+            final Preference preference = preferenceList.get(i);
             final ComponentName componentName = preference.getExtras().getParcelable(
                     EXTRA_COMPONENT_NAME);
             PreferenceCategory prefCategory = downloadedServicesCategory;
@@ -459,17 +452,18 @@ public class AccessibilitySettings extends BaseSupportFragment implements
      * @param installedShortcutList A list of installed {@link AccessibilityShortcutInfo}s.
      * @param installedServiceList  A list of installed {@link AccessibilityServiceInfo}s.
      */
-    private static List<RestrictedPreference> getInstalledAccessibilityPreferences(Context context,
+    private static List<Preference> getInstalledAccessibilityPreferences(Context context,
             List<AccessibilityShortcutInfo> installedShortcutList,
             List<AccessibilityServiceInfo> installedServiceList) {
-        final RestrictedPreferenceHelper preferenceHelper = new RestrictedPreferenceHelper(context);
+        final InstalledA11yFeaturesPreferenceHelper
+                preferenceHelper = new InstalledA11yFeaturesPreferenceHelper(context);
 
         final List<AccessibilityActivityPreference> activityList =
                 preferenceHelper.createAccessibilityActivityPreferenceList(installedShortcutList);
         final List<RestrictedPreference> serviceList =
                 preferenceHelper.createAccessibilityServicePreferenceList(installedServiceList);
 
-        final List<RestrictedPreference> preferenceList = new ArrayList<>();
+        final List<Preference> preferenceList = new ArrayList<>();
         preferenceList.addAll(activityList);
         preferenceList.addAll(serviceList);
 
@@ -575,14 +569,14 @@ public class AccessibilitySettings extends BaseSupportFragment implements
                     AccessibilitySearchFeatureProvider a11ySearchFeatureProvider =
                             FeatureFactory.getFeatureFactory()
                                     .getAccessibilitySearchFeatureProvider();
-                    List<RestrictedPreference> installedA11yFeaturesPref =
+                    List<Preference> installedA11yFeaturesPref =
                             AccessibilitySettings.getInstalledAccessibilityPreferences(
                                     context,
                                     a11yManager.getInstalledAccessibilityShortcutListAsUser(
                                             context, UserHandle.myUserId()),
                                     a11yManager.getInstalledAccessibilityServiceList()
                             );
-                    for (RestrictedPreference pref : installedA11yFeaturesPref) {
+                    for (Preference pref : installedA11yFeaturesPref) {
                         SearchIndexableRaw indexableRaw = new SearchIndexableRaw(context);
                         indexableRaw.key = pref.getKey();
                         indexableRaw.title = pref.getTitle().toString();

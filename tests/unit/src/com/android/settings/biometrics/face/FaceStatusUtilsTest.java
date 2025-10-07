@@ -210,16 +210,9 @@ public class FaceStatusUtilsTest {
                         "security_settings_face_preference_summary"));
     }
 
-    @Test
-    public void getSettingsClassName_whenNotEnrolled_returnsFaceEnrollInduction() {
-        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
-
-        assertThat(mFaceStatusUtils.getSettingsClassName())
-                .isEqualTo(FaceEnroll.class.getName());
-    }
 
     @Test
-    public void getSettingsClassName_whenEnrolled_returnsFaceSettings() {
+    public void getSettingsClassName_returnsFaceSettings() {
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
 
         assertThat(mFaceStatusUtils.getSettingsClassName())

@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility
 
-import android.content.ComponentName
 import android.content.Context
 import android.text.Html
 import com.android.settings.R
@@ -28,15 +27,6 @@ import com.android.settings.R
 open class HtmlFooterPreferenceController(context: Context, prefKey: String) :
     AccessibilityFooterPreferenceController(context, prefKey) {
 
-    protected var componentName: ComponentName? = null
-
-    /**
-     * Initializes the [ComponentName] this [AccessibilityFooterPreference] is attached to.
-     */
-    open fun initialize(componentName: ComponentName) {
-        this.componentName = componentName
-    }
-
     /**
      * Converts the summary to html spannable by utilizing the [Html.fromHtml] with custom image
      * getter.
@@ -46,16 +36,17 @@ open class HtmlFooterPreferenceController(context: Context, prefKey: String) :
     }
 
     protected fun setSummary(summary: CharSequence, isHtml: Boolean) {
-        val description: CharSequence = if (isHtml) {
-            Html.fromHtml(
-                summary.toString(),
-                Html.FROM_HTML_MODE_COMPACT,
-                /* imageGetter= */ null,
-                /* tagHandler= */ null,
-            )
-        } else {
-            summary
-        }
+        val description: CharSequence =
+            if (isHtml) {
+                Html.fromHtml(
+                    summary.toString(),
+                    Html.FROM_HTML_MODE_COMPACT,
+                    /* imageGetter= */ null,
+                    /* tagHandler= */ null,
+                )
+            } else {
+                summary
+            }
         super.setSummary(description)
     }
 }
@@ -78,9 +69,11 @@ class DaltonizerFooterPreferenceController(context: Context, prefKey: String) :
     HtmlFooterPreferenceController(context, prefKey) {
     init {
         introductionTitle = context.getString(R.string.accessibility_daltonizer_about_title)
-        summary = context.getText(
-            com.android.settingslib.R
-                .string.accessibility_display_daltonizer_preference_subtitle)
+        summary =
+            context.getText(
+                com.android.settingslib.R.string
+                    .accessibility_display_daltonizer_preference_subtitle
+            )
         setupHelpLink(
             R.string.help_url_color_correction,
             context.getString(

@@ -52,7 +52,7 @@
 
     <PreferenceCategory
         android:key="display_category"
-        android:title="@string/accessibility_screen_option">
+        android:title="@string/dark_theme_timing_category">
         <DropDownPreference
             android:key="dark_ui_auto_mode"
             android:title="@string/dark_ui_auto_mode_title"
@@ -91,4 +91,21 @@
         settings:searchable="false"
         settings:controller="com.android.settings.display.darkmode.DarkModeCustomModesPreferenceController" />
 
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="feedback"
+        android:title="@string/accessibility_send_feedback_title"
+        android:icon="@drawable/ic_feedback"
+        settings:searchable="false"
+        settings:buttonPreferenceSize="normal"
+        settings:buttonPreferenceType="tonal"
+        settings:controller="com.android.settings.accessibility.FeedbackButtonPreferenceController" />
+
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="survey"
+        android:title="@string/accessibility_send_survey_title"
+        android:icon="@drawable/ic_rate_review"
+        settings:searchable="false"
+        settings:buttonPreferenceSize="normal"
+        settings:buttonPreferenceType="tonal"
+        settings:controller="com.android.settings.accessibility.ForceInvertSurveyButtonPreferenceController" />
 </PreferenceScreen>

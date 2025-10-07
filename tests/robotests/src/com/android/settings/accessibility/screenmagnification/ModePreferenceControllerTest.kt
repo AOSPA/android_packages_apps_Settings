@@ -18,16 +18,21 @@ package com.android.settings.accessibility.screenmagnification
 
 import android.content.Context
 import android.content.Intent
-import android.provider.Settings
 import androidx.activity.ComponentActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.testing.FragmentScenario
+import androidx.fragment.app.testing.launchFragment
+import androidx.lifecycle.Lifecycle.State.INITIALIZED
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.accessibility.MagnificationCapabilities
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode
+import com.android.settings.accessibility.screenmagnification.dialogs.MagnificationModeChooser
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
+import com.android.settings.testutils.AccessibilityTestUtils.assertDialogShown
 import com.android.settings.testutils.AccessibilityTestUtils.setWindowMagnificationSupported
 import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
 import com.google.common.truth.Truth.assertThat
@@ -35,10 +40,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
-import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
 
@@ -46,19 +49,24 @@ import org.robolectric.android.controller.ActivityController
 @RunWith(RobolectricTestRunner::class)
 class ModePreferenceControllerTest {
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
-    @Mock
-    private lateinit var displayPreferenceDialogListener:
-        PreferenceManager.OnDisplayPreferenceDialogListener
+
+    private lateinit var fragmentScenario: FragmentScenario<Fragment>
+    private lateinit var controller: ModePreferenceController
     private val prefKey = "prefKey"
-    private val capabilitySettingKey = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CAPABILITY
     private val context: Context = ApplicationProvider.getApplicationContext()
-    private val controller = ModePreferenceController(context, prefKey)
     private val preferenceManager = PreferenceManager(context)
     private val preference = Preference(context).apply { key = prefKey }
 
     @Before
     fun setUp() {
-        preferenceManager.onDisplayPreferenceDialogListener = displayPreferenceDialogListener
+        fragmentScenario = launchFragment<Fragment>(initialState = INITIALIZED)
+        fragmentScenario.onFragment { fragment ->
+            controller = ModePreferenceController(fragment.requireContext(), prefKey)
+
+            fragment.lifecycle.addObserver(controller)
+            controller.setFragmentManager(fragment.childFragmentManager)
+        }
+
         val preferenceScreen = preferenceManager.createPreferenceScreen(context)
         preferenceScreen.addPreference(preference)
         preferenceManager.setPreferences(preferenceScreen)
@@ -80,7 +88,9 @@ class ModePreferenceControllerTest {
     fun clickPreference_triggerShowDialog() {
         controller.handlePreferenceTreeClick(preference)
 
-        verify(displayPreferenceDialogListener).onDisplayPreferenceDialog(preference)
+        fragmentScenario.onFragment { fragment ->
+            assertDialogShown(fragment, MagnificationModeChooser::class.java)
+        }
     }
 
     @Test

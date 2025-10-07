@@ -44,6 +44,8 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 
+import com.google.common.collect.ImmutableList;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,11 +71,6 @@ public class MediaDeviceUpdateWorkerTest {
             + "media_output?media_package_name=com.music2");
     private static final String TEST_DEVICE_PACKAGE_NAME1 = "com.music1";
     private static final String TEST_DEVICE_PACKAGE_NAME2 = "com.music2";
-    private static final String TEST_DEVICE_1_ID = "test_device_1_id";
-    private static final String TEST_DEVICE_2_ID = "test_device_2_id";
-    private static final String TEST_DEVICE_3_ID = "test_device_3_id";
-
-    private final List<MediaDevice> mMediaDevices = new ArrayList<>();
 
     @Mock
     private LocalBluetoothManager mLocalBluetoothManager;
@@ -84,7 +81,6 @@ public class MediaDeviceUpdateWorkerTest {
     private ContentResolver mResolver;
     private Context mContext;
     private MediaDevice mMediaDevice1;
-    private MediaDevice mMediaDevice2;
     private ShadowApplication mShadowApplication;
     private AudioManager mAudioManager;
 
@@ -98,19 +94,12 @@ public class MediaDeviceUpdateWorkerTest {
         mShadowApplication = ShadowApplication.getInstance();
         mAudioManager = mContext.getSystemService(AudioManager.class);
 
-        mMediaDevice1 = mock(MediaDevice.class);
-        when(mMediaDevice1.getId()).thenReturn(TEST_DEVICE_1_ID);
-        mMediaDevice2 = mock(MediaDevice.class);
-        when(mMediaDevice2.getId()).thenReturn(TEST_DEVICE_2_ID);
-        mMediaDevices.add(mMediaDevice1);
-        mMediaDevices.add(mMediaDevice2);
-
         doReturn(mResolver).when(mContext).getContentResolver();
     }
 
     @Test
     public void onDeviceListUpdate_shouldNotifyChange() {
-        mMediaDeviceUpdateWorker.onDeviceListUpdate(mMediaDevices);
+        mMediaDeviceUpdateWorker.onDeviceListUpdate(ImmutableList.of());
 
         verify(mResolver).notifyChange(URI, null);
     }
@@ -128,54 +117,6 @@ public class MediaDeviceUpdateWorkerTest {
         mMediaDeviceUpdateWorker.onDeviceAttributesChanged();
 
         verify(mResolver).notifyChange(URI, null);
-    }
-
-    @Test
-    public void onDeviceListUpdate_sameDeviceList_shouldBeEqual() {
-        mMediaDeviceUpdateWorker.onDeviceListUpdate(mMediaDevices);
-
-        final List<MediaDevice> newDevices = new ArrayList<>();
-        newDevices.add(mMediaDevice1);
-        newDevices.add(mMediaDevice2);
-
-        mMediaDeviceUpdateWorker.onDeviceListUpdate(newDevices);
-        final List<MediaDevice> devices =
-                new ArrayList<>(mMediaDeviceUpdateWorker.getMediaDevices());
-
-        assertThat(devices.get(0).getId()).isEqualTo(newDevices.get(0).getId());
-        assertThat(devices.get(1).getId()).isEqualTo(newDevices.get(1).getId());
-    }
-
-    @Test
-    public void onDeviceListUpdate_add1DeviceToDeviceList_shouldBeEqual() {
-        mMediaDeviceUpdateWorker.onDeviceListUpdate(mMediaDevices);
-
-        final List<MediaDevice> newDevices = new ArrayList<>();
-        final MediaDevice device3 = mock(MediaDevice.class);
-        when(mMediaDevice2.getId()).thenReturn(TEST_DEVICE_3_ID);
-        newDevices.add(mMediaDevice1);
-        newDevices.add(mMediaDevice2);
-        newDevices.add(device3);
-
-        mMediaDeviceUpdateWorker.onDeviceListUpdate(newDevices);
-        final List<MediaDevice> devices =
-                new ArrayList<>(mMediaDeviceUpdateWorker.getMediaDevices());
-
-        assertThat(devices.size()).isEqualTo(newDevices.size());
-    }
-
-    @Test
-    public void onDeviceListUpdate_less1DeviceToDeviceList_shouldBeEqual() {
-        mMediaDeviceUpdateWorker.onDeviceListUpdate(mMediaDevices);
-
-        final List<MediaDevice> newDevices = new ArrayList<>();
-        newDevices.add(mMediaDevice1);
-
-        mMediaDeviceUpdateWorker.onDeviceListUpdate(newDevices);
-        final List<MediaDevice> devices =
-                new ArrayList<>(mMediaDeviceUpdateWorker.getMediaDevices());
-
-        assertThat(devices.size()).isEqualTo(newDevices.size());
     }
 
     @Test

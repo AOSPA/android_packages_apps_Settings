@@ -19,13 +19,19 @@ import android.app.Application
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settings.supervision.ipc.PreferenceDataApi
 import com.android.settings.supervision.ipc.PreferenceDataRequest
+import com.android.settings.supervision.ipc.SupportedApp
+import com.android.settings.supervision.ipc.SupportedAppsApi
+import com.android.settings.supervision.ipc.SupportedAppsRequest
 import com.android.settingslib.ipc.ApiDescriptor
 import com.android.settingslib.ipc.ApiHandler
 import com.android.settingslib.ipc.MessengerService
 import com.android.settingslib.ipc.PermissionChecker
 
 class TestSupervisionMessengerService :
-    MessengerService(listOf(TestPreferenceDataApiImp()), PermissionChecker { _, _, _ -> true })
+    MessengerService(
+        listOf(TestPreferenceDataApiImp(), TestSupportedAppsApiImpl()),
+        PermissionChecker { _, _, _ -> true },
+    )
 
 class TestPreferenceDataApiImp :
     ApiHandler<PreferenceDataRequest, Map<String, PreferenceData>>,
@@ -51,5 +57,43 @@ class TestPreferenceDataApiImp :
     ): Map<String, PreferenceData> {
         invokeException?.let { throw it }
         return preferenceData
+    }
+}
+
+class TestSupportedAppsApiImpl :
+    ApiHandler<SupportedAppsRequest, Map<String, List<SupportedApp>>>,
+    ApiDescriptor<SupportedAppsRequest, Map<String, List<SupportedApp>>> by SupportedAppsApi() {
+    @Volatile var hasPermission = true
+    @Volatile var invokeException: Exception? = null
+    @Volatile
+    var supportedApps: Map<String, List<SupportedApp>> =
+        mapOf(
+            "browser_filters_supported_apps" to
+                listOf(
+                    SupportedApp(
+                        title = "Supported app",
+                        summary = "App summary",
+                        packageName = "com.android.chrome",
+                    )
+                )
+        )
+
+    override fun hasPermission(
+        application: Application,
+        callingPid: Int,
+        callingUid: Int,
+        request: SupportedAppsRequest,
+    ): Boolean {
+        return hasPermission
+    }
+
+    override suspend fun invoke(
+        application: Application,
+        callingPid: Int,
+        callingUid: Int,
+        request: SupportedAppsRequest,
+    ): Map<String, List<SupportedApp>> {
+        invokeException?.let { throw it }
+        return supportedApps
     }
 }

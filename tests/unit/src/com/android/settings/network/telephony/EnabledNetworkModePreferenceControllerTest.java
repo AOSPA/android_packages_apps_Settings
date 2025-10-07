@@ -74,7 +74,12 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     private static final long ALLOWED_ALL_NETWORK_TYPE = -1;
     private static final long DISABLED_5G_NETWORK_TYPE = ~TelephonyManager.NETWORK_TYPE_BITMASK_NR;
-
+    private static final long BITMASK_2G = TelephonyManager.NETWORK_TYPE_BITMASK_GSM
+            | TelephonyManager.NETWORK_TYPE_BITMASK_GPRS
+            | TelephonyManager.NETWORK_TYPE_BITMASK_EDGE
+            | TelephonyManager.NETWORK_TYPE_BITMASK_CDMA
+            | TelephonyManager.NETWORK_TYPE_BITMASK_1xRTT;
+    private static final String NETWORK_TYPE_2G = "2G";
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
@@ -132,6 +137,79 @@ public class EnabledNetworkModePreferenceControllerTest {
         assertThat(mPreference.getEntryValues())
                 .asList()
                 .contains(String.valueOf(TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA));
+    }
+
+    @UiThreadTest
+    @Test
+    public void updateState_Without2gCarrierConfig_WithoutNetworkTypeEnable2g() {
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getEntries()).asList().doesNotContain(NETWORK_TYPE_2G);
+    }
+
+    @UiThreadTest
+    @Test
+    public void updateState_Without2gCarrierConfig_WithNetworkTypeEnable2g() {
+        mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
+        mockEnabledNetworkMode(TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(BITMASK_2G);
+        mController.init(SUB_ID, mFragmentManager);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getEntries()).asList().doesNotContain(NETWORK_TYPE_2G);
+    }
+
+    @UiThreadTest
+    @Test
+    public void updateState_With2gCarrierConfig_WithoutNetworkTypeEnable2g() {
+        mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
+        mockEnabledNetworkMode(TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
+        mController.init(SUB_ID, mFragmentManager);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getEntries()).asList().doesNotContain(NETWORK_TYPE_2G);
+    }
+
+    @UiThreadTest
+    @Test
+    public void updateState_With2gCarrierConfig_WithNetworkTypeEnable2g() {
+        mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
+        mockEnabledNetworkMode(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(BITMASK_2G);
+        mController.init(SUB_ID, mFragmentManager);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getEntries()).asList().contains(NETWORK_TYPE_2G);
+    }
+
+    @UiThreadTest
+    @Test
+    public void onSubscriptionsChanged() {
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        PreferenceScreen screen = preferenceManager.createPreferenceScreen(mContext);
+        mPreference.setKey(KEY);
+        screen.addPreference(mPreference);
+
+        mController.displayPreference(screen);
+
+        mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
+        mockEnabledNetworkMode(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(BITMASK_2G);
+        mController.init(SUB_ID, mFragmentManager);
+
+        mController.onSubscriptionsChanged();
+
+        assertThat(mPreference.getEntries()).asList().contains(NETWORK_TYPE_2G);
     }
 
     @UiThreadTest

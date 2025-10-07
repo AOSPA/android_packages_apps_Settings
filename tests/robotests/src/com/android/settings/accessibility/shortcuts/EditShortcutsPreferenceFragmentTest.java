@@ -479,7 +479,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario.moveToState(Lifecycle.State.CREATED);
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
-                        mContext, TARGET)
+                        mContext, TARGET, SOFTWARE)
         ).isEqualTo(SOFTWARE);
         // Update the chosen shortcut type to Volume keys while the fragment is in the background
         ShortcutUtils.optInValueToSettings(
@@ -489,7 +489,7 @@ public class EditShortcutsPreferenceFragmentTest {
 
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
-                        mContext, TARGET)
+                        mContext, TARGET, SOFTWARE)
         ).isEqualTo(ShortcutConstants.UserShortcutType.HARDWARE);
     }
 
@@ -499,7 +499,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario.moveToState(Lifecycle.State.CREATED);
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
-                        mContext, TARGET)
+                        mContext, TARGET, SOFTWARE)
         ).isEqualTo(SOFTWARE);
 
         ShortcutUtils.optInValueToSettings(
@@ -509,7 +509,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario.onFragment(fragment ->
                 assertThat(
                         PreferredShortcuts.retrieveUserShortcutType(
-                                mContext, TARGET)
+                                mContext, TARGET, SOFTWARE)
                 ).isEqualTo(ShortcutConstants.UserShortcutType.HARDWARE)
         );
 
@@ -574,7 +574,7 @@ public class EditShortcutsPreferenceFragmentTest {
                 /* isInSuw= */ false, TARGET_FAKE_COMPONENT.flattenToString());
         mFragmentScenario.moveToState(Lifecycle.State.CREATED);
         int currentPreferredShortcut =
-                PreferredShortcuts.retrieveUserShortcutType(mContext, target);
+                PreferredShortcuts.retrieveUserShortcutType(mContext, target, SOFTWARE);
         assertThat(currentPreferredShortcut
                 & ShortcutConstants.UserShortcutType.QUICK_SETTINGS).isEqualTo(0);
 
@@ -585,7 +585,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario.onFragment(fragment ->
                 assertThat(
                         PreferredShortcuts.retrieveUserShortcutType(
-                                mContext, target)
+                                mContext, target, SOFTWARE)
                 ).isEqualTo(ShortcutConstants.UserShortcutType.QUICK_SETTINGS)
         );
     }

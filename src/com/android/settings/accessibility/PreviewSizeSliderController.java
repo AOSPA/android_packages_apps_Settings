@@ -40,6 +40,7 @@ import java.util.Optional;
  * The controller of the display size and font size sliders that listens to
  * changes and updates preview size threshold smoothly.
  */
+// LINT.IfChange
 abstract class PreviewSizeSliderController extends BasePreferenceController implements
         TextReadingResetController.ResetStateListener, DefaultLifecycleObserver {
     private final PreviewSizeData<? extends Number> mSizeData;
@@ -274,3 +275,4 @@ abstract class PreviewSizeSliderController extends BasePreferenceController impl
         void onEndTrackingTouch();
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/textreading/data/FontSizeDataStore.kt)

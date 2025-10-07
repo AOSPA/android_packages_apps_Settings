@@ -90,7 +90,7 @@ open class ConfigureWifiScreen(context: Context) :
     override fun fragmentClass(): Class<out Fragment>? = ConfigureWifiSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +WifiWakeupSwitchPreference() }
 
     private fun Context.isWifiWakeupEnabled(): Boolean {
         val wifiManager = this.wifiManager ?: return false

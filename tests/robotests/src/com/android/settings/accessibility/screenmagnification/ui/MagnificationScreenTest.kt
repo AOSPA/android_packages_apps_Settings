@@ -21,19 +21,22 @@ import android.content.Context
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import androidx.test.core.app.ApplicationProvider
-
+import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
-import com.android.settings.R
 import com.android.settings.accessibility.Flags
+import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
 
 class MagnificationScreenTest : SettingsCatalystTestCase() {
+    @get:Rule val settingStoreRule = SettingsStoreRule()
     override val preferenceScreenCreator = MagnificationScreen()
-    override val flagName: String get() = Flags.FLAG_CATALYST_MAGNIFICATION
+    override val flagName: String
+        get() = Flags.FLAG_CATALYST_MAGNIFICATION
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
@@ -52,8 +55,7 @@ class MagnificationScreenTest : SettingsCatalystTestCase() {
 
     @Test
     fun getKeywords() {
-        assertThat(preferenceScreenCreator.keywords)
-            .isEqualTo(R.string.keywords_magnification)
+        assertThat(preferenceScreenCreator.keywords).isEqualTo(R.string.keywords_magnification)
     }
 
     @Test
@@ -107,9 +109,8 @@ class MagnificationScreenTest : SettingsCatalystTestCase() {
     fun getLaunchIntent_noMetadata_correctActivity() {
         val underTest = preferenceScreenCreator.getLaunchIntent(context, null)!!
 
-        assertThat(underTest.getComponent()?.getClassName()).isEqualTo(
-            Settings.MagnificationActivity::class.java.getName()
-        )
+        assertThat(underTest.getComponent()?.getClassName())
+            .isEqualTo(Settings.MagnificationActivity::class.java.getName())
         assertThat(underTest.hasExtra(EXTRA_FRAGMENT_ARG_KEY)).isFalse()
     }
 
@@ -123,4 +124,4 @@ class MagnificationScreenTest : SettingsCatalystTestCase() {
     }
 }
 
-private data class TestMetadata(override val key: String) : PreferenceMetadata {}
+private data class TestMetadata(override val key: String) : PreferenceMetadata

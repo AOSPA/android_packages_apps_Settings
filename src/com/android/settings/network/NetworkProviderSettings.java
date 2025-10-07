@@ -432,7 +432,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     boolean showAnySubscriptionInfo(Context context) {
         return (context != null) && (Utils.isMobileDataCapable(context)
-                                         || Utils.isVoiceCapable(context));
+                || Utils.isVoiceCapable(context));
     }
 
     private void addNetworkMobileProviderController() {
@@ -498,7 +498,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         if (com.android.settings.connectivity.Flags.ethernetSettings()) {
             mEthernetManager = getContext().getSystemService(EthernetManager.class);
             mEthernetTracker = EthernetTrackerImpl.getInstance(
-                getContext());
+                    getContext());
         }
 
         mSaveListener = new WifiManager.ActionListener() {
@@ -966,9 +966,9 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
 
     private void launchWifiScanningFragment() {
         new SubSettingLauncher(getContext())
-            .setDestination(WifiScanningFragment.class.getName())
-            .setSourceMetricsCategory(SettingsEnums.SETTINGS_NETWORK_CATEGORY)
-            .launch();
+                .setDestination(WifiScanningFragment.class.getName())
+                .setSourceMetricsCategory(SettingsEnums.SETTINGS_NETWORK_CATEGORY)
+                .launch();
     }
 
     @Override
@@ -1123,8 +1123,8 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                 pref.setTitle(getContext().getString(R.string.ethernet_interface_title, index));
                 pref.setSummary(
                         (ethernetInterface.getInterfaceState() == EthernetManager.STATE_LINK_UP)
-                            ? getContext().getString(R.string.network_connected) :
-                              getContext().getString(R.string.network_disconnected));
+                                ? getContext().getString(R.string.network_connected) :
+                                getContext().getString(R.string.network_disconnected));
                 pref.setOnPreferenceClickListener(preference -> {
                     launchEthernetInterfaceDetailsFragment(preference);
                     return true;
@@ -1208,16 +1208,20 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                         ? R.string.wifi_configure_settings_preference_summary_wakeup_on
                         : R.string.wifi_configure_settings_preference_summary_wakeup_off));
 
-        final int numSavedNetworks = mWifiPickerTracker == null ? 0 :
-                mWifiPickerTracker.getNumSavedNetworks();
-        final int numSavedSubscriptions = mWifiPickerTracker == null ? 0 :
-                mWifiPickerTracker.getNumSavedSubscriptions();
-        if (numSavedNetworks + numSavedSubscriptions > 0) {
-            mSavedNetworksPreference.setVisible(true);
-            mSavedNetworksPreference.setSummary(
-                    getSavedNetworkSettingsSummaryText(numSavedNetworks, numSavedSubscriptions));
-        } else {
-            mSavedNetworksPreference.setVisible(false);
+        if (!(isCatalystEnabled()
+                && com.android.settings.flags.Flags.deeplinkNetworkAndInternet25q4())) {
+            final int numSavedNetworks = mWifiPickerTracker == null ? 0 :
+                    mWifiPickerTracker.getNumSavedNetworks();
+            final int numSavedSubscriptions = mWifiPickerTracker == null ? 0 :
+                    mWifiPickerTracker.getNumSavedSubscriptions();
+            if (numSavedNetworks + numSavedSubscriptions > 0) {
+                mSavedNetworksPreference.setVisible(true);
+                mSavedNetworksPreference.setSummary(
+                        getSavedNetworkSettingsSummaryText(numSavedNetworks,
+                                numSavedSubscriptions));
+            } else {
+                mSavedNetworksPreference.setVisible(false);
+            }
         }
     }
 
@@ -1378,7 +1382,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
             Toast.makeText(getContext(), R.string.wifi_failed_connect_message, Toast.LENGTH_SHORT)
                     .show();
         }
-    };
+    }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new SearchIndexProvider(R.xml.network_provider_settings);

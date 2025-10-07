@@ -34,6 +34,7 @@ import com.android.settingslib.widget.MainSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class LowLightModePicker extends RadioButtonPickerFragment
         implements Preference.OnPreferenceChangeListener  {
@@ -150,6 +151,8 @@ public class LowLightModePicker extends RadioButtonPickerFragment
     protected List<? extends CandidateInfo> getCandidates() {
         final String[] entries = entries();
         final String[] values = keys();
+        final Set<String> allowedBehaviors = DreamUtils.getLowLightBehaviors(getResources());
+
         final List<LowLightModeCandidateInfo> candidates = new ArrayList<>();
 
         if (ArrayUtils.isEmpty(entries)) return candidates;
@@ -160,6 +163,9 @@ public class LowLightModePicker extends RadioButtonPickerFragment
         final boolean enabled = mBackend.getLowLightDisplayBehaviorEnabled();
 
         for (int i = 0; i < entries.length; i++) {
+            if (!allowedBehaviors.contains(values[i])) {
+                continue;
+            }
             candidates.add(new LowLightModeCandidateInfo(entries[i], values[i], enabled));
         }
 

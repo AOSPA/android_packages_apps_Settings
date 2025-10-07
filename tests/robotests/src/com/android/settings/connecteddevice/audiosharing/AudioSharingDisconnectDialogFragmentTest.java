@@ -294,10 +294,7 @@ public class AudioSharingDisconnectDialogFragmentTest {
     }
 
     @Test
-    @EnableFlags({
-        Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
-        Flags.FLAG_PROMOTE_AUDIO_SHARING_FOR_SECOND_AUTO_CONNECTED_LEA_DEVICE
-    })
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onCreateDialog_clickCancel_dialogDismiss() {
         mDeviceItems = new ArrayList<>();
         mDeviceItems.add(TEST_DEVICE_ITEM1);
@@ -325,10 +322,7 @@ public class AudioSharingDisconnectDialogFragmentTest {
     }
 
     @Test
-    @EnableFlags({
-        Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
-        Flags.FLAG_PROMOTE_AUDIO_SHARING_FOR_SECOND_AUTO_CONNECTED_LEA_DEVICE
-    })
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onDestroy_finishAudioSharingJoinHandlerActivity() {
         mDeviceItems = new ArrayList<>();
         mDeviceItems.add(TEST_DEVICE_ITEM1);

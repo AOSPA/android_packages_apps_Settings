@@ -371,7 +371,10 @@ class VibrationIntensitySettingsStoreTest {
         assertThat(getStoredHapticFeedbackEnabled()).isFalse()
         assertThat(getStoredHardwareFeedbackIntensity()).isEqualTo(DEFAULT_INTENSITY)
 
-        touchStore.setInt(Settings.System.HAPTIC_FEEDBACK_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW)
+        touchStore.setInt(
+            Settings.System.HAPTIC_FEEDBACK_INTENSITY,
+            Vibrator.VIBRATION_INTENSITY_LOW,
+        )
         assertThat(getStoredHapticFeedbackEnabled()).isTrue()
         assertThat(getStoredHardwareFeedbackIntensity()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW)
     }

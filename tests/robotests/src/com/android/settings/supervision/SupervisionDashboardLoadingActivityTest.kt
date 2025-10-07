@@ -17,15 +17,18 @@
 package com.android.settings.supervision
 
 import android.app.Activity
+import android.app.role.RoleManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.IntentFilter
+import android.os.Process
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.testutils.FakeFeatureFactory
+import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.drawer.DashboardCategory
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +40,7 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
+import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -44,8 +48,11 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.stub
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowPackageManager
+import org.robolectric.shadows.ShadowRoleManager
 
+@Config(shadows = [SettingsShadowResources::class])
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class SupervisionDashboardLoadingActivityTest {
@@ -54,14 +61,18 @@ class SupervisionDashboardLoadingActivityTest {
     private lateinit var featureFactory: FeatureFactory
     private lateinit var applicationContext: Context
     private lateinit var shadowPackageManager: ShadowPackageManager
-    // Resource is empty in test directory
-    private val testSupervisionPackage = ""
+    private val testSupervisionPackage = "com.google.android.test.supervision"
     private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
 
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
+
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.string.config_systemSupervision,
+            testSupervisionPackage,
+        )
 
         featureFactory = FakeFeatureFactory.setupForTest()
         featureFactory.stub {
@@ -82,15 +93,7 @@ class SupervisionDashboardLoadingActivityTest {
     @Test
     fun enableSupervisionApp_success_startDashboardActivity() =
         testScope.runTest {
-            val serviceIntentAction =
-                SupervisionMessengerClient.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
-            val shadowPackageManager = shadowOf(applicationContext.packageManager)
-            val fakeServiceClassName = "FakeSupervisionMessengerService"
-            val serviceComponentName = ComponentName(testSupervisionPackage, fakeServiceClassName)
-            val intentFilter = IntentFilter(serviceIntentAction)
-
-            shadowPackageManager.addServiceIfNotPresent(serviceComponentName)
-            shadowPackageManager.addIntentFilterForService(serviceComponentName, intentFilter)
+            setUpMessengerComponent()
 
             activityScenario =
                 ActivityScenario.launch(SupervisionDashboardLoadingActivity::class.java)
@@ -120,4 +123,62 @@ class SupervisionDashboardLoadingActivityTest {
 
             assertThat(activityScenario.result.resultCode).isEqualTo(Activity.RESULT_CANCELED)
         }
+
+    @Test
+    fun enableSupervisionApp_noSupervisionComponent_startInstallActivity() =
+        testScope.runTest {
+            val activityComponentName = ComponentName(testSupervisionPackage, "FakeClassName")
+            val intentFilter = IntentFilter(SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION)
+
+            shadowPackageManager.addActivityIfNotPresent(activityComponentName)
+            shadowPackageManager.addIntentFilterForActivity(activityComponentName, intentFilter)
+
+            activityScenario =
+                ActivityScenario.launch(SupervisionDashboardLoadingActivity::class.java)
+            advanceUntilIdle()
+
+            activityScenario.onActivity { activity ->
+                val nextActivity = shadowOf(activity).nextStartedActivity
+                assertThat(nextActivity.action)
+                    .isEqualTo(SupervisionHelper.INSTALL_SUPERVISION_APP_ACTION)
+                assertThat(activity.isFinishing).isTrue()
+            }
+        }
+
+    @Test
+    fun enableSupervisionApp_alreadyEnabled_doesNotThrow() =
+        testScope.runTest {
+            ShadowRoleManager.addRoleHolder(
+                RoleManager.ROLE_SUPERVISION,
+                testSupervisionPackage,
+                Process.myUserHandle(),
+            )
+            setUpMessengerComponent()
+
+            try {
+                activityScenario =
+                    ActivityScenario.launch(SupervisionDashboardLoadingActivity::class.java)
+                advanceUntilIdle()
+
+                activityScenario.onActivity { activity ->
+                    val nextActivity = shadowOf(activity).nextStartedActivity
+                    assertThat(nextActivity.component?.className)
+                        .isEqualTo(SupervisionDashboardActivity::class.java.name)
+                    assertThat(activity.isFinishing).isTrue()
+                }
+            } catch (e: SecurityException) {
+                fail("Should not have thrown $e")
+            }
+        }
+
+    private fun setUpMessengerComponent() {
+        val serviceIntentAction =
+            SupervisionMessengerClient.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
+        val fakeServiceClassName = "FakeSupervisionMessengerService"
+        val serviceComponentName = ComponentName(testSupervisionPackage, fakeServiceClassName)
+        val intentFilter = IntentFilter(serviceIntentAction)
+
+        shadowPackageManager.addServiceIfNotPresent(serviceComponentName)
+        shadowPackageManager.addIntentFilterForService(serviceComponentName, intentFilter)
+    }
 }

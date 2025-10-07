@@ -778,29 +778,14 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         LeAudioProfile leAudioProfile = mock(LeAudioProfile.class);
         when(mBtProfileManager.getLeAudioProfile()).thenReturn(leAudioProfile);
 
-        // Perform click to switch call audio device by set active
-        mSetFlagsRule.disableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API);
+        // Perform click to switch call audio device with API
         int index = listView.findIndexOfItemContainingText(TEST_DEVICE_NAME2);
         listView.performItemClick(index);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(((CheckedTextView) view1).isChecked()).isFalse();
         assertThat(((CheckedTextView) view2).isChecked()).isTrue();
-        verify(mCachedDevice3).setActive();
-        verify(leAudioProfile, never()).setBroadcastToUnicastFallbackGroup(TEST_DEVICE_GROUP_ID2);
-
-        // Perform click to switch call audio device with API
-        mSetFlagsRule.enableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API);
-        Settings.Secure.putInt(
-                mContentResolver,
-                BluetoothUtils.getPrimaryGroupIdUriForBroadcast(),
-                TEST_DEVICE_GROUP_ID2);
-        index = listView.findIndexOfItemContainingText(TEST_DEVICE_NAME1);
-        listView.performItemClick(index);
-        shadowOf(Looper.getMainLooper()).idle();
-        assertThat(((CheckedTextView) view1).isChecked()).isTrue();
-        assertThat(((CheckedTextView) view2).isChecked()).isFalse();
         verify(mCachedDevice1, never()).setActive();
-        verify(leAudioProfile).setBroadcastToUnicastFallbackGroup(TEST_DEVICE_GROUP_ID1);
+        verify(leAudioProfile).setBroadcastToUnicastFallbackGroup(TEST_DEVICE_GROUP_ID2);
     }
 
     @Test

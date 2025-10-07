@@ -19,13 +19,16 @@ package com.android.settings.biometrics.fingerprint;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_REAR;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_ULTRASONIC;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.CHOOSE_LOCK_GENERIC_REQUEST;
+import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.KEY_FINGERPRINT_UNLOCK_CATEGORY;
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.KEY_REQUIRE_SCREEN_ON_TO_AUTH;
+import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.KEY_SCREEN_OFF_FINGERPRINT_UNLOCK;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -46,6 +49,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
@@ -57,6 +61,7 @@ import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Looper;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.os.Vibrator;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
@@ -129,6 +134,8 @@ public class FingerprintSettingsFragmentTest {
     @Mock
     private BiometricManager mBiometricManager;
     @Mock
+    private UserManager mUserManager;
+    @Mock
     private FingerprintExtPreferencesProvider mExtPreferencesProvider;
     @Mock
     private RestrictedPreference mRestrictedPreference0;
@@ -164,6 +171,8 @@ public class FingerprintSettingsFragmentTest {
         doReturn(mBiometricManager).when(mContext).getSystemService(BiometricManager.class);
         doReturn(true).when(mFingerprintManager).isHardwareDetected();
         doReturn(mVibrator).when(mContext).getSystemService(Vibrator.class);
+        doReturn(true).when(mUserManager).isProfile(GUEST_USER_ID);
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         when(mBiometricManager.canAuthenticate(PRIMARY_USER_ID,
                 BiometricManager.Authenticators.IDENTITY_CHECK))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
@@ -430,6 +439,99 @@ public class FingerprintSettingsFragmentTest {
         final Preference checkEnrolledPerf =
                 mFragment.findPreference("key_fingerprint_check_enrolled");
         assertThat(checkEnrolledPerf).isNull();
+    }
+
+    @Test
+    public void testScreenOffUnlockHide_nonUdfps() {
+        mFragment.mRequireScreenOnToAuthPreferenceController =
+                mock(FingerprintSettingsRequireScreenOnToAuthPreferenceController.class);
+
+        final Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_POWER_BUTTON, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        final Preference screenOffUnlockPerf =
+                mFragment.findPreference(KEY_SCREEN_OFF_FINGERPRINT_UNLOCK);
+        assertThat(screenOffUnlockPerf).isNotNull();
+        assertThat(screenOffUnlockPerf.isVisible()).isFalse();
+    }
+
+    @Test
+    public void testScreenOffUnlockHide_managedProfile() {
+        ensureScreenOffUnlockConfigEnabled();
+        final Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, GUEST_USER_ID, TYPE_UDFPS_ULTRASONIC, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        final Preference screenOffUnlockPerf =
+                mFragment.findPreference(KEY_SCREEN_OFF_FINGERPRINT_UNLOCK);
+        assertThat(screenOffUnlockPerf).isNotNull();
+        assertThat(screenOffUnlockPerf.isVisible()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(android.hardware.biometrics.Flags.FLAG_SCREEN_OFF_UNLOCK_UDFPS)
+    public void testScreenOffUnlockVisible() {
+        ensureScreenOffUnlockConfigEnabled();
+        final Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_UDFPS_ULTRASONIC, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        final Preference screenOffUnlockPerf =
+                mFragment.findPreference(KEY_SCREEN_OFF_FINGERPRINT_UNLOCK);
+        assertThat(screenOffUnlockPerf).isNotNull();
+        assertThat(screenOffUnlockPerf.isVisible()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(android.hardware.biometrics.Flags.FLAG_SCREEN_OFF_UNLOCK_UDFPS)
+    public void testFingerprintUnlockCategoryVisibility_hasVisibleChild() {
+        ensureScreenOffUnlockConfigEnabled();
+        final Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_UDFPS_OPTICAL, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        final Preference screenOffUnlockPerf =
+                mFragment.findPreference(KEY_SCREEN_OFF_FINGERPRINT_UNLOCK);
+        assertThat(screenOffUnlockPerf).isNotNull();
+        assertThat(screenOffUnlockPerf.isVisible()).isTrue();
+        final Preference fingerprintUnlockCategoryPerf =
+                mFragment.findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
+        assertThat(fingerprintUnlockCategoryPerf).isNotNull();
+        assertThat(fingerprintUnlockCategoryPerf.isVisible()).isTrue();
+    }
+
+    @Test
+    public void testFingerprintUnlockCategoryVisibility_noVisibleChild() {
+        final Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_UDFPS_OPTICAL, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        final Preference screenOffUnlockPerf =
+                mFragment.findPreference(KEY_SCREEN_OFF_FINGERPRINT_UNLOCK);
+        assertThat(screenOffUnlockPerf).isNotNull();
+        assertThat(screenOffUnlockPerf.isVisible()).isFalse();
+        final Preference fingerprintUnlockCategoryPerf =
+                mFragment.findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
+        assertThat(fingerprintUnlockCategoryPerf).isNotNull();
+        assertThat(fingerprintUnlockCategoryPerf.isVisible()).isFalse();
+    }
+
+    private void ensureScreenOffUnlockConfigEnabled() {
+        Resources res = spy(mContext.getResources());
+        doReturn(true).when(res).getBoolean(
+                eq(com.android.internal.R.bool.config_screen_off_udfps_enabled));
+        doReturn(res).when(mContext).getResources();
     }
 
     @Test

@@ -299,10 +299,7 @@ public class AudioSharingStopDialogFragmentTest {
     }
 
     @Test
-    @EnableFlags({
-        Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
-        Flags.FLAG_PROMOTE_AUDIO_SHARING_FOR_SECOND_AUTO_CONNECTED_LEA_DEVICE
-    })
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onCreateDialog_clickCancel_dialogDismiss() {
         AudioSharingStopDialogFragment.show(
                 mParent,
@@ -329,10 +326,7 @@ public class AudioSharingStopDialogFragmentTest {
     }
 
     @Test
-    @EnableFlags({
-        Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
-        Flags.FLAG_PROMOTE_AUDIO_SHARING_FOR_SECOND_AUTO_CONNECTED_LEA_DEVICE
-    })
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onCreateDialog_clickShare_callbackTriggered() {
         AtomicBoolean isStopBtnClicked = new AtomicBoolean(false);
         AudioSharingStopDialogFragment.show(
@@ -361,10 +355,7 @@ public class AudioSharingStopDialogFragmentTest {
     }
 
     @Test
-    @EnableFlags({
-        Flags.FLAG_ENABLE_LE_AUDIO_SHARING,
-        Flags.FLAG_PROMOTE_AUDIO_SHARING_FOR_SECOND_AUTO_CONNECTED_LEA_DEVICE
-    })
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onDestroy_finishAudioSharingJoinHandlerActivity() {
         Fragment parent = new Fragment();
         FragmentController.setupFragment(

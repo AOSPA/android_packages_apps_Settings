@@ -43,6 +43,8 @@ import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
@@ -54,7 +56,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Settings;
 import com.android.settings.biometrics.BiometricEnrollActivity;
-import com.android.settings.biometrics.face.FaceEnroll;
 import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
@@ -76,6 +77,9 @@ public class FaceSafetySourceTest {
     private static final UserHandle USER_HANDLE = new UserHandle(USER_ID);
     private static final SafetyEvent EVENT_SOURCE_STATE_CHANGED =
             new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build();
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -229,7 +233,7 @@ public class FaceSafetySourceTest {
         assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_face_preference_title_new",
                 "security_settings_face_preference_summary_none_new",
-                FaceEnroll.class.getName());
+                Settings.FaceSettingsInternalActivity.class.getName());
     }
 
     @Test

@@ -39,6 +39,7 @@ import android.hardware.face.FaceManager;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
@@ -308,6 +309,26 @@ public class FaceEnrollEducationTest {
             assertThat(clickActionLabel).isNotNull();
             assertThat(clickActionLabel.toString()).isEqualTo(
                     mContext.getString(settingslib_action_label_pause));
+        });
+    }
+
+    @Test
+    public void testFaceEnrollEducation_IllustrationShouldNotTruncated() {
+        setupActivity();
+
+        mScenario.onActivity(activity -> {
+            final GlifLayout glifLayout = activity.findViewById(R.id.setup_wizard_layout);
+            final TextView descView =  glifLayout.getDescriptionTextView();
+            final int descBottomPos = activity.getOnScreenPositionTop(descView)
+                    + descView.getHeight();
+            final LottieAnimationView illustrationLottie = activity.findViewById(
+                    R.id.illustration_lottie);
+            final int illustrationLottieTop = activity.getOnScreenPositionTop(illustrationLottie);
+            if (illustrationLottieTop < descBottomPos) {
+                assertThat(activity.adjustIllustrationLottiePosition()).isTrue();
+            } else {
+                assertThat(activity.adjustIllustrationLottiePosition()).isFalse();
+            }
         });
     }
 }

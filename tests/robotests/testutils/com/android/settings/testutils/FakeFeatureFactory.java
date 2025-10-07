@@ -19,7 +19,6 @@ import static org.mockito.Mockito.mock;
 
 import android.content.Context;
 
-import com.android.settings.accessibility.AccessibilityDisabilitySupportFeatureProvider;
 import com.android.settings.accessibility.AccessibilityFeedbackFeatureProvider;
 import com.android.settings.accessibility.AccessibilityPageIdFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
@@ -41,6 +40,7 @@ import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.i18n.RegionalCustomizationFeatureProvider;
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider;
@@ -110,8 +110,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public SyncAcrossDevicesFeatureProvider mSyncAcrossDevicesFeatureProvider;
     public AccessibilityFeedbackFeatureProvider mAccessibilityFeedbackFeatureProvider;
     public AudioSharingFeatureProvider mAudioSharingFeatureProvider;
-    public AccessibilityDisabilitySupportFeatureProvider
-            mAccessibilityDisabilitySupportFeatureProvider;
+    public RegionalCustomizationFeatureProvider mRegionalCustomizationFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -159,6 +158,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mStylusFeatureProvider = mock(StylusFeatureProvider.class);
         mThreadNetworkFeatureProvider = mock(ThreadNetworkFeatureProvider.class);
         mOnboardingFeatureProvider = mock(OnboardingFeatureProvider.class);
+        mRegionalCustomizationFeatureProvider = mock(RegionalCustomizationFeatureProvider.class);
         mFastPairFeatureProvider = mock(FastPairFeatureProvider.class);
         mPrivateSpaceLoginFeatureProvider = mock(PrivateSpaceLoginFeatureProvider.class);
         mDisplayFeatureProvider = mock(DisplayFeatureProvider.class);
@@ -368,8 +368,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public AccessibilityDisabilitySupportFeatureProvider
-            getAccessibilityDisabilitySupportFeatureProvider() {
-        return mAccessibilityDisabilitySupportFeatureProvider;
+    public RegionalCustomizationFeatureProvider getRegionalCustomizationFeatureProvider() {
+        return mRegionalCustomizationFeatureProvider;
     }
 }

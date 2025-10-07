@@ -85,9 +85,7 @@ public class GeneralBluetoothDetailsHeaderController extends BluetoothDetailsCon
         if (summary != null) {
             summary.setText(mCachedDevice.getConnectionSummary());
         }
-        boolean isTempBond = com.android.settingslib.flags.Flags.enableTemporaryBondDevicesUi()
-                && BluetoothUtils.isTemporaryBondDevice(mCachedDevice.getDevice());
-        if (!isTempBond) {
+        if (!BluetoothUtils.isTemporaryBondDevice(mCachedDevice.getDevice())) {
             ImageButton renameButton = mLayoutPreference.findViewById(R.id.rename_button);
             renameButton.setVisibility(View.VISIBLE);
             renameButton.setOnClickListener(

@@ -16,18 +16,33 @@
 package com.android.settings.supervision
 
 import android.app.supervision.flags.Flags
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import androidx.preference.Preference
+import androidx.preference.PreferenceScreen
+import com.android.settings.SettingsActivity.EXTRA_IS_SECOND_LAYER_PAGE
+import com.android.settings.activityembedding.ActivityEmbeddingRulesController
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.supervision.SupervisionDashboardActivity.Companion.INSTALL_SUPERVISION_APP_ACTION
 
 /** Controller for the top level Supervision settings Preference item. */
 class TopLevelSupervisionPreferenceController(context: Context, key: String) :
     BasePreferenceController(context, key) {
+
+    override fun displayPreference(screen: PreferenceScreen) {
+        super.displayPreference(screen)
+        ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
+            mContext,
+            ComponentName(mContext, SupervisionDashboardActivity::class.java),
+            /* secondaryIntentAction= */ null,
+            /* clearTop= */ true,
+        )
+    }
+
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key == preferenceKey) {
             val intent = Intent(mContext, SupervisionDashboardActivity::class.java)
+            intent.putExtra(EXTRA_IS_SECOND_LAYER_PAGE, true)
             mContext.startActivity(intent)
             return true
         }
@@ -41,20 +56,12 @@ class TopLevelSupervisionPreferenceController(context: Context, key: String) :
             mContext.hasNecessarySupervisionComponent(matchAll = true)
         if (
             !Flags.enableSupervisionSettingsScreen() ||
-                !hasNecessarySupervisionComponent && !supervisionAppSupportsInstallAction()
+                (!hasNecessarySupervisionComponent &&
+                    mContext.getSupervisionAppInstallActivityInfo() == null)
         ) {
             return UNSUPPORTED_ON_DEVICE
         }
 
         return AVAILABLE
-    }
-
-    private fun supervisionAppSupportsInstallAction(): Boolean {
-        val supervisionPackage: String =
-            mContext.resources.getString(com.android.internal.R.string.config_systemSupervision)
-        val intent = Intent(INSTALL_SUPERVISION_APP_ACTION).setPackage(supervisionPackage)
-        return mContext.packageManager
-            .queryIntentActivitiesAsUser(intent, 0, mContext.userId)
-            .isNotEmpty()
     }
 }

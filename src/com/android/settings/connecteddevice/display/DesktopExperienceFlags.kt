@@ -20,7 +20,8 @@ import com.android.settings.flags.FeatureFlags
 import com.android.settings.flags.Flags
 
 /** Class handling Settings flags, but using the Desktop Experience developer option overrides. */
-class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) : FeatureFlags by featureFlagsImpl {
+class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) :
+    FeatureFlags by featureFlagsImpl {
 
     private val displayTopologyPaneInDisplayListFlag =
         DesktopExperienceFlag(
@@ -49,25 +50,54 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) : Featu
             Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING,
         )
 
+    private val resolutionAndEnableConnectedDisplaySettingBugfixFlag =
+        DesktopExperienceFlag(
+            featureFlagsImpl::resolutionAndEnableConnectedDisplaySettingBugfix,
+            /* shouldOverrideByDevOption= */ true,
+            Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX,
+        )
+
     override fun resolutionAndEnableConnectedDisplaySetting(): Boolean =
-        resolutionAndEnableConnectedDisplaySettingFlag.isTrue
+        resolutionAndEnableConnectedDisplaySettingFlag.isTrue or
+            resolutionAndEnableConnectedDisplaySettingBugfixFlag.isTrue
 
     private val showStackedMirroringDisplayConnectedDisplaySettingFlag =
         DesktopExperienceFlag(
             featureFlagsImpl::showStackedMirroringDisplayConnectedDisplaySetting,
-            /* shouldOverrideByDevOption= */ false,
+            /* shouldOverrideByDevOption= */ true,
             Flags.FLAG_SHOW_STACKED_MIRRORING_DISPLAY_CONNECTED_DISPLAY_SETTING,
         )
 
     override fun showStackedMirroringDisplayConnectedDisplaySetting(): Boolean =
         showStackedMirroringDisplayConnectedDisplaySettingFlag.isTrue
 
-    private val showTabbedConnectedDisplaySettingFlag = DesktopExperienceFlag(
-        featureFlagsImpl::showTabbedConnectedDisplaySetting,
-        /* shouldOverrideByDevOption= */ false,
-        Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING,
-    )
+    private val showTabbedConnectedDisplaySettingFlag =
+        DesktopExperienceFlag(
+            featureFlagsImpl::showTabbedConnectedDisplaySetting,
+            /* shouldOverrideByDevOption= */ false,
+            Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING,
+        )
 
     override fun showTabbedConnectedDisplaySetting(): Boolean =
         showTabbedConnectedDisplaySettingFlag.isTrue
+
+    private val enableDefaultDisplayInTopologySwitchBugfixFlag =
+        DesktopExperienceFlag(
+            featureFlagsImpl::enableDefaultDisplayInTopologySwitchBugfix,
+            /* shouldOverrideByDevOption= */ true,
+            Flags.FLAG_ENABLE_DEFAULT_DISPLAY_IN_TOPOLOGY_SWITCH_BUGFIX,
+        )
+
+    override fun enableDefaultDisplayInTopologySwitchBugfix(): Boolean =
+        enableDefaultDisplayInTopologySwitchBugfixFlag.isTrue
+
+    private val enableResolutionApplyConfirmationBugfix =
+        DesktopExperienceFlag(
+            featureFlagsImpl::enableResolutionApplyConfirmationBugfix,
+            /* shouldOverrideByDevOption= */ false,
+            Flags.FLAG_ENABLE_RESOLUTION_APPLY_CONFIRMATION_BUGFIX,
+        )
+
+    override fun enableResolutionApplyConfirmationBugfix(): Boolean =
+        enableResolutionApplyConfirmationBugfix.isTrue
 }

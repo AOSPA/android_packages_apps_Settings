@@ -45,14 +45,6 @@ public interface BluetoothFeatureProvider {
     Uri getBluetoothDeviceSettingsUri(BluetoothDevice bluetoothDevice);
 
     /**
-     * Gets the {@link Uri} that represents extra control for a specific bluetooth device
-     *
-     * @param bluetoothDevice bluetooth device
-     * @return {@link String} uri string for extra control
-     */
-    String getBluetoothDeviceControlUri(BluetoothDevice bluetoothDevice);
-
-    /**
      * Gets the {@link ComponentName} of services or activities that need to be shown in related
      * tools.
      *

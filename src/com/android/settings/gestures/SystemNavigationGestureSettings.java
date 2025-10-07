@@ -29,17 +29,16 @@ import android.content.SharedPreferences;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
 import android.content.res.Resources;
-import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.actionbar.FeedbackMenuController;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.SubSettingLauncher;
@@ -58,6 +57,7 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 @SearchIndexable
 public class SystemNavigationGestureSettings extends RadioButtonPickerFragment implements
         HelpResourceProvider {
@@ -77,12 +77,6 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     private IOverlayManager mOverlayManager;
 
     private IllustrationPreference mVideoPreference;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        FeedbackMenuController.init(this, SettingsEnums.SETTINGS_GESTURE_SWIPE_UP);
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -156,11 +150,15 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                     .setPackage(getContext().getPackageName())));
         }
 
+        // With flag enabled, the button order preference will always be available
+        boolean navbarAvailable = android.view.accessibility.Flags.navbarFlipOrderOption()
+                || !PreferenceControllerListHelper.areAllPreferencesUnavailable(
+                        getContext(), getPreferenceManager(), R.xml.button_navigation_settings);
+
         if ((KEY_SYSTEM_NAV_2BUTTONS.equals(info.getKey())
                 || KEY_SYSTEM_NAV_3BUTTONS.equals(info.getKey()))
                 // Don't add the settings button if that page will be blank.
-                && !PreferenceControllerListHelper.areAllPreferencesUnavailable(
-                        getContext(), getPreferenceManager(), R.xml.button_navigation_settings)) {
+                && navbarAvailable) {
             pref.setExtraWidgetOnClickListener((v) ->
                     new SubSettingLauncher(getContext())
                             .setDestination(ButtonNavigationSettingsFragment.class.getName())
@@ -214,6 +212,11 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         setCurrentSystemNavigationMode(mOverlayManager, key);
         setIllustrationVideo(mVideoPreference, key);
         return true;
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return SystemNavigationGestureScreen.KEY;
     }
 
     static void migrateOverlaySensitivityToSettings(Context context,
@@ -335,3 +338,4 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         return R.string.help_uri_default;
     }
 }
+// LINT.ThenChange(SystemNavigationGestureScreen.kt)

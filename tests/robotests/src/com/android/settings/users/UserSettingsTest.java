@@ -19,6 +19,7 @@ package com.android.settings.users;
 import static android.os.UserManager.SWITCHABILITY_STATUS_OK;
 
 import static com.android.settings.flags.Flags.FLAG_HIDE_USER_LIST_FOR_NON_ADMINS;
+import static com.android.settings.flags.Flags.FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF;
 import static com.android.settings.users.UserSettings.DIALOG_CONFIRM_REMOVE;
 import static com.android.settings.users.UserSettings.REQUEST_DELETE_USER;
 
@@ -52,14 +53,12 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.multiuser.Flags;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -263,8 +262,7 @@ public class UserSettingsTest {
         ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
         givenUsers(getAdminUser(true));
         SettingsShadowResources.overrideResource(
-                com.android.settings.R.bool.config_offer_restricted_profiles,
-                Boolean.TRUE);
+                com.android.settings.R.bool.config_offer_restricted_profiles, true);
         when(mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_ADD_USER, mContext.getUser()))
                 .thenReturn(false);
         when(mUserManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED))
@@ -292,8 +290,7 @@ public class UserSettingsTest {
         ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
         givenUsers(getAdminUser(true));
         SettingsShadowResources.overrideResource(
-                com.android.settings.R.bool.config_offer_restricted_profiles,
-                Boolean.FALSE);
+                com.android.settings.R.bool.config_offer_restricted_profiles, false);
         List<SearchIndexableRaw> rawData =
                 UserSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
 
@@ -415,6 +412,19 @@ public class UserSettingsTest {
     }
 
     @Test
+    @EnableFlags(FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF)
+    public void withCurrentUserAdmin_enableShowUserDetailsForSlef_ShouldNotAddRemoveUserAction() {
+        mUserCapabilities.mIsMain = false;
+        mUserCapabilities.mIsAdmin = true;
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
+        Menu menu = mock(Menu.class);
+
+        mFragment.onCreateOptionsMenu(menu, mock(MenuInflater.class));
+
+        verify(menu, never()).add(anyInt(), anyInt(), anyInt(), any(CharSequence.class));
+    }
+
+    @Test
     public void withoutDisallowRemoveUser_ShouldNotDisableRemoveUser() {
         // Arrange
         doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
@@ -440,7 +450,6 @@ public class UserSettingsTest {
 
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_REQUIRE_PIN_BEFORE_USER_DELETION)
     public void removeUserSelf_userHasScreenlock_shouldAskForCredentials() {
         doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
 
@@ -473,7 +482,6 @@ public class UserSettingsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_REQUIRE_PIN_BEFORE_USER_DELETION)
     public void removeUserSelf_userHasNoScreenlock_shouldNotAskForCredentials() {
         ShadowLockPatternUtils.setKeyguardStoredPasswordQuality(
                 DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
@@ -929,12 +937,31 @@ public class UserSettingsTest {
     }
 
     @Test
+    @EnableFlags(FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF)
+    public void updateUserList_enableShowUserDetailsSettingsForSelf_shouldShowEditButton() {
+        givenUsers(getAdminUser(true), getSecondaryUser(false));
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2)).addPreference(captor.capture());
+
+        List<UserPreference> userPrefs = captor.getAllValues();
+        UserPreference adminPref = userPrefs.get(0);
+        UserPreference secondaryPref = userPrefs.get(1);
+
+        // Verify the second target (the edit icon) is only shown for own account.
+        assertThat(adminPref).isSameInstanceAs(mMePreference);
+        assertThat(adminPref.shouldHideSecondTarget()).isFalse();
+        assertThat(secondaryPref.shouldHideSecondTarget()).isTrue();
+    }
+
+    @Test
     @EnableFlags(FLAG_HIDE_USER_LIST_FOR_NON_ADMINS)
     public void
             updateUserList_nonAdminUsersWithSwitchingDisabledAndFeatureEnabled_userListIsHidden() {
         SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen,
-                Boolean.TRUE);
+                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen, true);
         mUserCapabilities.mIsAdmin = false;
         givenUsers(getAdminUser(false), getSecondaryUser(true));
 
@@ -951,8 +978,7 @@ public class UserSettingsTest {
     @EnableFlags(FLAG_HIDE_USER_LIST_FOR_NON_ADMINS)
     public void updateUserList_adminUsersWithSwitchingDisabledAndFeatureEnabled_userListIsShown() {
         SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen,
-                Boolean.TRUE);
+                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen, true);
         mUserCapabilities.mIsAdmin = true;
         givenUsers(getAdminUser(true), getSecondaryUser(false));
 
@@ -981,8 +1007,7 @@ public class UserSettingsTest {
     public void
             updateUserList_nonAdminUsersWithSwitchingDisabledAndFeatureDisabled_userListIsShown() {
         SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen,
-                Boolean.TRUE);
+                com.android.internal.R.bool.config_userSwitchingMustGoThroughLoginScreen, true);
         mUserCapabilities.mIsAdmin = false;
         givenUsers(getAdminUser(false), getSecondaryUser(true));
 
@@ -1053,6 +1078,26 @@ public class UserSettingsTest {
         } finally {
             SettingsShadowResources.reset();
         }
+    }
+
+    @Test
+    @EnableFlags(FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF)
+    public void onPreferenceClick_currentUserClicked_openUserDetails() {
+        doReturn(mActivity).when(mFragment).getContext();
+        givenUsers(getAdminUser(true));
+
+        mFragment.onPreferenceClick(mMePreference);
+
+        Intent startedIntent = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(startedIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(UserDetailsSettings.class.getName());
+        Bundle arguments = startedIntent.getBundleExtra(
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        assertThat(arguments).isNotNull();
+        assertThat(arguments.getInt(UserDetailsSettings.EXTRA_USER_ID, 0))
+                .isEqualTo(ACTIVE_USER_ID);
+        assertThat(arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, true))
+                .isEqualTo(false);
     }
 
     @Test

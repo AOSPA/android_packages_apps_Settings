@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
 import android.app.role.RoleManager.ROLE_SUPERVISION
 import android.app.supervision.SupervisionManager
@@ -40,11 +41,14 @@ class DisableSupervisionActivity : FragmentActivity() {
         Log.e(TAG, "onCreate for DisableSupervisionActivity")
 
         val supervisionApps = supervisionRoleHolders
+        val devicePolicyManager = getSystemService(DevicePolicyManager::class.java)
+        val isAllowedProfileOwner = isCallingPackageSupervisionProfileOwner(devicePolicyManager)
         if (
             callingPackage != systemSupervisionPackageName &&
-                !supervisionApps.contains(callingPackage)
+                !supervisionApps.contains(callingPackage) &&
+                !isAllowedProfileOwner
         ) {
-            Log.w(TAG, "Caller does not have valid role. Finishing activity.")
+            Log.w(TAG, "Caller does not have the proper permissions. Finishing activity.")
             setResultAndFinish(RESULT_CANCELED)
             return
         }
@@ -66,7 +70,7 @@ class DisableSupervisionActivity : FragmentActivity() {
             }
         }
 
-        // Finally, revoke the supervision role for the caller.
+        // Finally, revoke the supervision role for the caller when applicable.
         if (supervisionApps.contains(callingPackage)) {
             lifecycleScope.launch {
                 if (revokeSupervisionRole()) {
@@ -107,6 +111,19 @@ class DisableSupervisionActivity : FragmentActivity() {
                 continuation.resumeWith(Result.success(isSuccessful))
             }
         }
+    }
+
+    /**
+     * Checks if the calling package is the supervision profile owner for the current user.
+     *
+     * This involves checking if the calling package is the profile owner for the current user and
+     * if the profile owner is a supervision package.
+     */
+    private fun isCallingPackageSupervisionProfileOwner(dpm: DevicePolicyManager?): Boolean {
+        val profileOwnerComponent = dpm?.getProfileOwner()
+        return profileOwnerComponent != null &&
+            profileOwnerComponent.packageName == callingPackage &&
+            isSupervisionPackageProfileOwner()
     }
 
     private fun setResultAndFinish(resultCode: Int) {

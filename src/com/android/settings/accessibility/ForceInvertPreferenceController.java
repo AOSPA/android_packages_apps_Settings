@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.internal.accessibility.common.NotificationConstants.ACTION_CANCEL_SURVEY_NOTIFICATION;
-import static com.android.internal.accessibility.common.NotificationConstants.ACTION_SCHEDULE_SURVEY_NOTIFICATION;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
@@ -33,13 +31,15 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.List;
 
 /** A toggle preference controller for force invert (force dark). */
-public class ForceInvertPreferenceController extends BaseSurveyPreferenceController
+// LINT.IfChange
+public class ForceInvertPreferenceController extends BasePreferenceController
         implements SelectorWithWidgetPreference.OnClickListener {
 
     @VisibleForTesting
@@ -77,7 +77,6 @@ public class ForceInvertPreferenceController extends BaseSurveyPreferenceControl
             return;
         }
         updateSelectorPreferenceStatus(isForceInvertEnabled);
-        scheduleForceInvertSurvey(isForceInvertEnabled);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED,
                 isForceInvertEnabled ? ON : OFF);
@@ -112,25 +111,6 @@ public class ForceInvertPreferenceController extends BaseSurveyPreferenceControl
         mExpandedDarkThemePreference.setChecked(isForceInvertEnabled);
     }
 
-    private void scheduleForceInvertSurvey(boolean isForceInvertEnabled) {
-        if (isForceInvertEnabled) {
-            if (!isNightMode()) {
-                return;
-            }
-
-            if (mSurveyFeatureProvider != null && mFragment != null) {
-                mSurveyFeatureProvider.checkSurveyAvailable(mFragment, mSurveyKey,
-                        available -> {
-                            if (available && isNightMode()) {
-                                sendSurveyBroadcast(ACTION_SCHEDULE_SURVEY_NOTIFICATION);
-                            }
-                        });
-            }
-        } else {
-            sendSurveyBroadcast(ACTION_CANCEL_SURVEY_NOTIFICATION);
-        }
-    }
-
     private boolean isNightMode() {
         return (mContext.getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
@@ -149,6 +129,7 @@ public class ForceInvertPreferenceController extends BaseSurveyPreferenceControl
         expanded.key = EXPANDED_DARK_THEME_KEY;
         expanded.title = mContext.getString(
                 R.string.accessibility_expanded_dark_theme_title_in_search);
+        expanded.keywords = mContext.getString(R.string.keywords_expanded_dark_theme);
         rawData.add(expanded);
     }
 
@@ -161,3 +142,4 @@ public class ForceInvertPreferenceController extends BaseSurveyPreferenceControl
         }
     }
 }
+// LINT.ThenChange(/src/com/android/settings/display/darkmode/DarkModeSelectorPreference.kt)

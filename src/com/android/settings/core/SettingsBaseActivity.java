@@ -32,6 +32,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Toolbar;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -158,6 +159,13 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             return;
         }
         setActionBar(toolbar);
+
+        getToolbarDelegate().initToolbarPrimaryButton(
+                findViewById(com.android.settingslib.collapsingtoolbar.R.id.primary_button));
+        getToolbarDelegate().initToolbarSecondaryButton(
+                findViewById(com.android.settingslib.collapsingtoolbar.R.id.secondary_button));
+        getToolbarDelegate().initToolbarActionButton(
+                findViewById(com.android.settingslib.collapsingtoolbar.R.id.action_button));
 
         FloatingToolbarLayout toolbarLayout = findViewById(
                 com.android.settingslib.collapsingtoolbar.R.id.floating_toolbar);
@@ -308,6 +316,88 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         if (actionBarContainer != null) {
             actionBarContainer.setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * Show/Hide the primary button on the Toolbar.
+     * @param enabled true to show the button, otherwise it's hidden.
+     */
+    public void setPrimaryButtonEnabled(boolean enabled) {
+        getToolbarDelegate().setPrimaryButtonEnabled(enabled);
+    }
+
+    /** Set the icon to the primary button */
+    public void setPrimaryButtonIcon(@DrawableRes int drawableRes) {
+        getToolbarDelegate().setPrimaryButtonIcon(this, drawableRes);
+    }
+
+    /** Set the OnClick listener to the primary button. */
+    public void setPrimaryButtonOnClickListener(@Nullable View.OnClickListener listener) {
+        getToolbarDelegate().setPrimaryButtonOnClickListener(listener);
+    }
+
+    /** Set the content description to the primary button */
+    public void setPrimaryButtonContentDescription(@Nullable CharSequence contentDescription) {
+        getToolbarDelegate().setPrimaryButtonContentDescription(contentDescription);
+    }
+
+    /**
+     * Show/Hide the secondary button on the Toolbar.
+     * @param enabled true to show the button, otherwise it's hidden.
+     */
+    public void setSecondaryButtonEnabled(boolean enabled) {
+        getToolbarDelegate().setSecondaryButtonEnabled(enabled);
+    }
+
+    /** Set the icon to the secondary button */
+    public void setSecondaryButtonIcon(@DrawableRes int drawableRes) {
+        getToolbarDelegate().setSecondaryButtonIcon(this, drawableRes);
+    }
+
+    /** Set the OnClick listener to the secondary button */
+    public void setSecondaryButtonOnClickListener(@Nullable View.OnClickListener listener) {
+        getToolbarDelegate().setSecondaryButtonOnClickListener(listener);
+    }
+
+    /** Set the content description to the secondary button */
+    public void setSecondaryButtonContentDescription(@Nullable CharSequence contentDescription) {
+        getToolbarDelegate().setSecondaryButtonContentDescription(contentDescription);
+    }
+
+    /**
+     * Show/Hide the action button on the Toolbar.
+     * @param enabled true to show the button, otherwise it's hidden.
+     */
+    public void setActionButtonEnabled(boolean enabled) {
+        getToolbarDelegate().setActionButtonEnabled(enabled);
+    }
+
+    /**
+     * Enable/Disable the action button on the Toolbar (being clickable or not).
+     * @param clickable true to enable the button, otherwise it's disabled.
+     */
+    public void setActionButtonClickable(boolean clickable) {
+        getToolbarDelegate().setActionButtonClickable(clickable);
+    }
+
+    /** Set the icon to the action button */
+    public void setActionButtonIcon(@DrawableRes int drawableRes) {
+        getToolbarDelegate().setActionButtonIcon(this, drawableRes);
+    }
+
+    /** Set the text to the action button */
+    public void setActionButtonText(@Nullable CharSequence text) {
+        getToolbarDelegate().setActionButtonText(text);
+    }
+
+    /** Set the OnClick listener to the action button */
+    public void setActionButtonListener(@Nullable View.OnClickListener listener) {
+        getToolbarDelegate().setActionButtonOnClickListener(listener);
+    }
+
+    /** Set the content description to the action button */
+    public void setActionButtonContentDescription(@Nullable CharSequence contentDescription) {
+        getToolbarDelegate().setActionButtonContentDescription(contentDescription);
     }
 
     @Override

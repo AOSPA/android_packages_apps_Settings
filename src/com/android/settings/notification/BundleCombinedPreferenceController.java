@@ -16,10 +16,13 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.Secure.NOTIFICATION_BUNDLES_ALWAYS_EXPAND;
+
 import android.app.Flags;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.service.notification.Adjustment;
 
 import androidx.annotation.NonNull;
@@ -43,19 +46,28 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
     static final String GLOBAL_KEY = "global_pref";
     static final String WORK_PREF_KEY = "work_profile_pref";
     static final String TYPE_CATEGORY_KEY = "enabled_classification_types";
+    static final String EXCLUDED_APPS_CATEGORY_KEY = "notification_bundle_excluded_apps_list";
     static final String PROMO_KEY = "promotions";
     static final String NEWS_KEY = "news";
     static final String SOCIAL_KEY = "social";
     static final String RECS_KEY = "recs";
+    static final String ALWAYS_EXPAND_KEY = "always_expand_pref";
 
     static final List<String> ALL_PREF_TYPES = List.of(PROMO_KEY, NEWS_KEY, SOCIAL_KEY, RECS_KEY);
+
+    @VisibleForTesting
+    static final int ON = 1;
+    @VisibleForTesting
+    static final int OFF = 0;
 
     @NonNull NotificationBackend mBackend;
     private @Nullable UserHandle mManagedProfile;
 
     private @Nullable TwoStatePreference mGlobalPref;
     private @Nullable TwoStatePreference mWorkPref;
+    private @Nullable TwoStatePreference mAlwaysExpandPref;
     private @Nullable PreferenceCategory mTypesPrefCategory;
+    private @Nullable PreferenceCategory mExcludedAppsPrefCategory;
 
     public BundleCombinedPreferenceController(@NonNull Context context, @NonNull String prefKey,
             @NonNull NotificationBackend backend) {
@@ -104,6 +116,11 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
             mWorkPref.setOnPreferenceChangeListener(mWorkPrefListener);
         }
 
+        mAlwaysExpandPref = category.findPreference(ALWAYS_EXPAND_KEY);
+        if (mAlwaysExpandPref != null) {
+            mAlwaysExpandPref.setOnPreferenceChangeListener(mAlwaysExpandPrefListener);
+        }
+
         mTypesPrefCategory = category.findPreference(TYPE_CATEGORY_KEY);
         if (mTypesPrefCategory != null) {
             for (String key : ALL_PREF_TYPES) {
@@ -113,6 +130,8 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
                 }
             }
         }
+
+        mExcludedAppsPrefCategory = category.findPreference(EXCLUDED_APPS_CATEGORY_KEY);
 
         updatePrefValues();
     }
@@ -151,6 +170,19 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
                 }
             }
         }
+
+        // if global switch is off hide the whole category
+        if (mExcludedAppsPrefCategory != null) {
+            mExcludedAppsPrefCategory.setVisible(isBundlingEnabled);
+        }
+
+        if (mAlwaysExpandPref != null) {
+            mAlwaysExpandPref.setVisible(isBundlingEnabled);
+            if (isBundlingEnabled) {
+                mAlwaysExpandPref.setChecked(Settings.Secure.getInt(mContext.getContentResolver(),
+                        NOTIFICATION_BUNDLES_ALWAYS_EXPAND, OFF) == ON);
+            }
+        }
     }
 
     private Preference.OnPreferenceChangeListener mGlobalPrefListener = (p, val) -> {
@@ -166,6 +198,14 @@ public class BundleCombinedPreferenceController extends BasePreferenceController
         if (hasManagedProfile()) {
             mBackend.setNotificationBundlingEnabled(managedProfileId(), checked);
         }
+        return true;
+    };
+
+    private Preference.OnPreferenceChangeListener mAlwaysExpandPrefListener = (p, val) -> {
+        boolean checked = (boolean) val;
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUNDLES_ALWAYS_EXPAND,
+                checked ? ON : OFF);
         return true;
     };
 

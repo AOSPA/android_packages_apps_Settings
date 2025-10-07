@@ -1061,6 +1061,9 @@ public class ManageApplications extends InstrumentedFragment
                 new AppBarLayout.Behavior.DragCallback() {
                     @Override
                     public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+                        if (SettingsThemeHelper.isExpressiveTheme(appBarLayout.getContext())) {
+                            return false;
+                        }
                         return appBarLayout.getResources().getConfiguration().orientation
                                 == Configuration.ORIENTATION_LANDSCAPE;
                     }

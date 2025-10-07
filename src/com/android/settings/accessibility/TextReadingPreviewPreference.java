@@ -170,14 +170,25 @@ public class TextReadingPreviewPreference extends Preference implements GroupSec
         );
     }
 
-    void setPreviewAdapter(PreviewPagerAdapter previewAdapter) {
+    /**
+     * Sets the {@link PreviewPagerAdapter} for the preview.
+     *
+     * @param previewAdapter The adapter to use for displaying preview pages.
+     */
+    public void setPreviewAdapter(PreviewPagerAdapter previewAdapter) {
         if (previewAdapter != mPreviewAdapter) {
             mPreviewAdapter = previewAdapter;
             notifyChanged();
         }
     }
 
-    void setCurrentItem(int currentItem) {
+    /**
+     * Set the current item in the preview pager.
+     *
+     * @param currentItem The index of the preview items to set as current.
+     * @throws NullPointerException if the preview adapter is null.
+     */
+    public void setCurrentItem(int currentItem) {
         Preconditions.checkNotNull(mPreviewAdapter,
                 "Preview adapter is null, you should init the preview adapter first");
 
@@ -187,7 +198,7 @@ public class TextReadingPreviewPreference extends Preference implements GroupSec
         }
     }
 
-    void setLastLayerIndex(int lastLayerIndex) {
+    public void setLastLayerIndex(int lastLayerIndex) {
         mLastLayerIndex = lastLayerIndex;
     }
 
@@ -233,7 +244,12 @@ public class TextReadingPreviewPreference extends Preference implements GroupSec
         setLayoutResource(R.layout.accessibility_text_reading_preview);
     }
 
-    void notifyPreviewPagerChanged(int pagerIndex) {
+    /**
+     * Notifies the preview pager that the configuration has changed.
+     *
+     * @param pagerIndex The index of the current configuration in preview pager.
+     */
+    public void notifyPreviewPagerChanged(int pagerIndex) {
         Preconditions.checkNotNull(mPreviewAdapter,
                 "Preview adapter is null, you should init the preview adapter first");
 

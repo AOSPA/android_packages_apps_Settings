@@ -34,8 +34,10 @@ open class VibrationToggleSettingsStore(
 ) : AbstractKeyedDataObservable<String>(), KeyedObserver<String>, KeyValueStore {
 
     fun isPreferenceEnabled(): Boolean {
-        if ((settingsProviderKey != VIBRATE_ON) &&
-            (keyValueStoreDelegate.getBoolean(VIBRATE_ON) == false)) {
+        if (
+            (settingsProviderKey != VIBRATE_ON) &&
+                (keyValueStoreDelegate.getBoolean(VIBRATE_ON) == false)
+        ) {
             return false
         }
         return dependencyStore?.isIntensityOff()?.not() ?: true
@@ -53,7 +55,8 @@ open class VibrationToggleSettingsStore(
         } else {
             // Preference must show toggle off when disabled, but value stored must be preserved.
             false
-        } as T?
+        }
+            as T?
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) =
         keyValueStoreDelegate.setBoolean(settingsProviderKey, value as Boolean?)

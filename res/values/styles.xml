@@ -396,6 +396,10 @@
         <item name="android:icon">@drawable/ic_lock</item>
     </style>
 
+    <style name="ScreenLockLayoutTheme">
+        <item name="android:icon">@drawable/ic_lock</item>
+    </style>
+
     <style name="PreviewPagerPageIndicator">
         <item name="dotGap">8dp</item>
         <item name="pageIndicatorColor">?android:attr/colorControlNormal</item>
@@ -837,13 +841,13 @@
 
     <style name="AccessibilityTextReadingPreviewTitle"
         parent="@style/TextAppearance.SettingsLib.BodySmall" >
-        <item name="android:textColor">@color/settingslib_materialColorOnPrimaryContainer</item>
+        <item name="android:textColor">@color/settingslib_materialColorPrimary</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
     <style name="AccessibilityTextReadingPreviewPageTitle"
         parent="@style/TextAppearance.SettingsLib.TitleMedium" >
-        <item name="android:textColor">@color/settingslib_materialColorOnPrimaryContainer</item>
+        <item name="android:textColor">@color/settingslib_materialColorPrimary</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:paddingBottom">@dimen/settingslib_expressive_space_extrasmall4</item>
     </style>
@@ -1184,4 +1188,12 @@
         <item name="cornerSize">12dp</item>
     </style>
 
+    <style name="IdentityCheckPromoCardDialogStyle" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/Widget.App.BottomSheet.Modal</item>
+    </style>
+
+    <style name="Widget.App.BottomSheet.Modal" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/identity_check_promo_card_background</item>
+    </style>
 </resources>

@@ -60,6 +60,7 @@ public class SummarizationCombinedPreferenceControllerTest {
     @Mock
     private PreferenceCategory mPrefCategory;
 
+    private PreferenceCategory mExcludedAppsPrefCategory;
     private MainSwitchPreference mGlobalSwitch;
     private SwitchPreference mWorkSwitch;
 
@@ -79,6 +80,10 @@ public class SummarizationCombinedPreferenceControllerTest {
         mWorkSwitch = new SwitchPreference(mContext);
         when(mPrefCategory.findPreference(
                 BundleCombinedPreferenceController.WORK_PREF_KEY)).thenReturn(mWorkSwitch);
+        mExcludedAppsPrefCategory = new PreferenceCategory(mContext);
+        when(mPrefCategory.findPreference(
+                SummarizationCombinedPreferenceController.EXCLUDED_APPS_CATEGORY_KEY)).thenReturn(
+                mExcludedAppsPrefCategory);
 
         mController.updateState(mPrefCategory);
     }
@@ -168,12 +173,14 @@ public class SummarizationCombinedPreferenceControllerTest {
         // switch to become invisible once the backend reflects the new state
         verify(mBackend, times(1)).setNotificationSummarizationEnabled(mContext.getUserId(), false);
         assertThat(mWorkSwitch.isVisible()).isFalse();
+        assertThat(mExcludedAppsPrefCategory.isVisible()).isFalse();
 
         // now turn it back on
         when(mBackend.isNotificationSummarizationEnabled(anyInt())).thenReturn(true);
         mGlobalSwitch.getOnPreferenceChangeListener().onPreferenceChange(mGlobalSwitch, true);
         verify(mBackend, times(1)).setNotificationSummarizationEnabled(mContext.getUserId(), true);
         assertThat(mWorkSwitch.isVisible()).isTrue();
+        assertThat(mExcludedAppsPrefCategory.isVisible()).isTrue();
     }
 
     @Test

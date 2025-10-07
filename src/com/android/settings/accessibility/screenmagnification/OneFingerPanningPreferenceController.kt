@@ -39,6 +39,7 @@ import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.extensions.isWindowMagnificationSupported
 import com.android.settings.core.TogglePreferenceController
 
+// LINT.IfChange
 class OneFingerPanningPreferenceController(context: Context, prefKey: String) :
     TogglePreferenceController(context, prefKey), DefaultLifecycleObserver {
     private var switchPreference: TwoStatePreference? = null
@@ -140,3 +141,4 @@ class OneFingerPanningPreferenceController(context: Context, prefKey: String) :
         }
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/OneFingerPanningSwitchPreference.kt)

@@ -91,7 +91,11 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, VibrationIntensitySettingsActivity::class.java, metadata?.key)
+        if (Flags.deeplinkSoundAndVibration25q4()) {
+            makeLaunchIntent(context, VibrationIntensitySettingsActivity::class.java, metadata?.key)
+        } else {
+            super.getLaunchIntent(context, metadata)
+        }
 
     companion object {
         const val KEY = "vibration_intensity_screen"

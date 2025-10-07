@@ -27,11 +27,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.accessibility.textreading.dialogs.TextReadingResetDialog;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.Utils;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
@@ -45,9 +49,8 @@ import com.google.android.setupdesign.GlifPreferenceLayout;
 public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPreferenceFragment {
 
     @Override
-    public void addPreferencesFromResource(int preferencesResId) {
-        super.addPreferencesFromResource(preferencesResId);
-
+    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         adjustPreviewPaddingsForSetupWizard();
     }
 
@@ -83,14 +86,21 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
                     });
             AccessibilitySetupWizardUtils.setSecondaryButton(getContext(), mixin,
                     R.string.accessibility_text_reading_reset_button_title,
-                    () -> showDialog(DIALOG_RESET_SETTINGS)
+                    () -> {
+                        if (Flags.catalystTextReadingScreen()) {
+                            TextReadingResetDialog.showDialog(getChildFragmentManager());
+                        } else {
+                            showDialog(DIALOG_RESET_SETTINGS);
+                        }
+                    }
             );
         }
     }
 
+    @NonNull
     @Override
-    public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
-            Bundle savedInstanceState) {
+    public RecyclerView onCreateRecyclerView(@NonNull LayoutInflater inflater,
+            @NonNull ViewGroup parent, @Nullable Bundle savedInstanceState) {
         if (parent instanceof GlifPreferenceLayout) {
             final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
             return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);

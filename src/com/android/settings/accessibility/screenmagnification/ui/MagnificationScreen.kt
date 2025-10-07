@@ -20,11 +20,16 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.Fragment
+import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME
 import com.android.settings.R
 import com.android.settings.Settings.MagnificationActivity
+import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.Flags
+import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
+import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -64,6 +69,27 @@ open class MagnificationScreen : PreferenceScreenMixin {
         preferenceHierarchy(context) {
             +MagnificationTopIntroPreference()
             +MagnificationIllustrationPreference()
+            +PreferenceCategory("general_categories", R.string.accessibility_screen_option) += {
+                +AccessibilityShortcutPreference(
+                    context = context,
+                    key = "magnification_shortcut_preference",
+                    title = R.string.accessibility_screen_magnification_shortcut_title,
+                    componentName = MAGNIFICATION_COMPONENT_NAME,
+                    featureName = R.string.accessibility_screen_magnification_title,
+                    metricsCategory = metricsCategory,
+                )
+                +MagnificationModePreference()
+                +MagnifyKeyboardSwitchPreference()
+                +FollowTypingSwitchPreference()
+                +FollowKeyboardSwitchPreference()
+                +CursorFollowingPreference()
+                +OneFingerPanningSwitchPreference()
+                +AlwaysOnSwitchPreference()
+                +JoystickSwitchPreference()
+            }
+            +MagnificationFooterPreference()
+            +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
+            +MagnificationSurveyButtonPreference(metricsCategory)
         }
 
     companion object {

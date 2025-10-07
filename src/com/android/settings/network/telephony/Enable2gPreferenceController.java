@@ -18,6 +18,7 @@ package com.android.settings.network.telephony;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.PersistableBundle;
+import android.os.UserManager;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -38,7 +39,9 @@ import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
- * Preference controller for "Enable 2G"
+ * Preference controller for 'Enable 2G': Created RestrictedSwitchPreference for the 2G toggle
+ * view, and applied useAdminDisabledSummary(true) along with the
+ * userRestriction(UserManager.DISALLOW_CELLULAR_2G).
  *
  * <p>
  * This preference controller is invoked per subscription id, which means toggling 2g is a per-sim
@@ -112,11 +115,19 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mRestrictedPreference = screen.findPreference(getPreferenceKey());
+        mRestrictedPreference.useAdminDisabledSummary(true);
+        mRestrictedPreference.getRestrictedPreferenceHelper()
+                .setUserRestriction(UserManager.DISALLOW_CELLULAR_2G);
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+
+        if (mShowSummaryAsSimName) {
+            preference.setSummary(getSimCardName());
+            return;
+        }
 
         // The device admin decision overrides any carrier preferences
         if (isDisabledByAdmin()) {
@@ -145,9 +156,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
                 summary = mContext.getString(R.string.enable_2g_summary);
             }
         }
-        if (mShowSummaryAsSimName) {
-            preference.setSummary(getSimCardName());
-        } else {
+        if (!mShowSummaryAsSimName) {
             preference.setSummary(summary);
         }
     }

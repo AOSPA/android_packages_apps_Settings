@@ -188,6 +188,43 @@ public final class CellularSecurityPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
+    @Test
+    public void getAvailabilityStatus_isRadioInterfaceCapabilitySupported() {
+        doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
+                TelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
+        doReturn(false).when(mTelephonyManager).isNullCipherNotificationsEnabled();
+        doReturn(false).when(mTelephonyManager)
+                .isCellularIdentifierDisclosureNotificationsEnabled();
+        doReturn(false).when(mTelephonyManager).isNullCipherAndIntegrityPreferenceEnabled();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_isRadioInterfaceCapabilityNotSupported() {
+        doThrow(new UnsupportedOperationException("test")).when(mTelephonyManager)
+                .isNullCipherNotificationsEnabled();
+        doThrow(new UnsupportedOperationException("test")).when(mTelephonyManager)
+                .isNullCipherAndIntegrityPreferenceEnabled();
+        doReturn(false).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
+                TelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_isRadioInterfaceCapabilitySupported_throwException() {
+        doThrow(new UnsupportedOperationException("test")).when(mTelephonyManager)
+                .isRadioInterfaceCapabilitySupported(
+                        TelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
+        doThrow(new UnsupportedOperationException("test")).when(mTelephonyManager)
+                .isNullCipherNotificationsEnabled();
+        doThrow(new UnsupportedOperationException("test")).when(mTelephonyManager)
+                .isNullCipherAndIntegrityPreferenceEnabled();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
     private void initControllerAndPreference() {
         mController = new CellularSecurityPreferenceController(mContext, PREF_KEY);
 

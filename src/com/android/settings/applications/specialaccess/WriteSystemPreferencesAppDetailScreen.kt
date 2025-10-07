@@ -59,7 +59,7 @@ open class WriteSystemPreferencesAppDetailScreen(context: Context, arguments: Bu
     override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN
 
     companion object {
-        const val KEY = "sa_wsp_app_detail"
+        const val KEY = "special_access_write_system_preferences_app_detail"
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 

@@ -72,9 +72,7 @@ class TouchVibrationIntensitySwitchPreferenceTest : VibrationIntensitySwitchPref
     @Test
     fun click_withHardwareFeedback_updatesDependentSetting() {
         val defaultIntensity = Vibrator.VIBRATION_INTENSITY_HIGH
-        vibratorSpy.stub {
-            on { getDefaultVibrationIntensity(any()) } doReturn defaultIntensity
-        }
+        vibratorSpy.stub { on { getDefaultVibrationIntensity(any()) } doReturn defaultIntensity }
         setValue(null)
         setHardwareFeedbackIntensity(null)
         val widget = createWidget()
@@ -106,9 +104,7 @@ class TouchVibrationIntensitySwitchPreferenceTest : VibrationIntensitySwitchPref
         SettingsSystemStore.get(context).setBoolean(Settings.System.HAPTIC_FEEDBACK_ENABLED, value)
 
     private fun setHardwareFeedbackIntensity(value: Int?) =
-        SettingsSystemStore.get(context).setInt(
-            Settings.System.HARDWARE_HAPTIC_FEEDBACK_INTENSITY,
-            value,
-        )
+        SettingsSystemStore.get(context)
+            .setInt(Settings.System.HARDWARE_HAPTIC_FEEDBACK_INTENSITY, value)
 }
 // LINT.ThenChange(HapticFeedbackTogglePreferenceControllerTest.java)

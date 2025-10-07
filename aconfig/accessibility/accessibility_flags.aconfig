@@ -21,10 +21,59 @@ flag {
 }
 
 flag {
+  name: "catalyst_a11y_activity_detail"
+  namespace: "accessibility"
+  description: "Migrate accessibility activity screen to the Catalyst infrastructure"
+  bug: "337243383"
+}
+
+flag {
+  name: "catalyst_a11y_service_detail"
+  namespace: "accessibility"
+  description: "Migrate accessibility service screen to the Catalyst infrastructure"
+  bug: "337243808"
+}
+
+flag {
+  name: "catalyst_color_inversion"
+  namespace: "accessibility"
+  description: "Migrate color inversion screen to the Catalyst infrastructure"
+  bug: "413452734"
+}
+
+flag {
+  name: "catalyst_dark_ui_mode"
+  namespace: "accessibility"
+  description: "Migrate dark mode screen to the Catalyst infrastructure"
+  bug: "337243099"
+}
+
+flag {
+  name: "catalyst_daltonizer"
+  namespace: "accessibility"
+  description: "Migrate daltonizer screen to the Catalyst infrastructure"
+  bug: "413453264"
+}
+
+flag {
+  name: "catalyst_extra_dim"
+  namespace: "accessibility"
+  description: "Migrate extra dim screen to the Catalyst infrastructure"
+  bug: "413454003"
+}
+
+flag {
   name: "catalyst_flash_notifications"
   namespace: "accessibility"
   description: "Migrate flash notification screen to the Catalyst infrastructure"
   bug: "337243568"
+}
+
+flag {
+  name: "catalyst_hearing_devices"
+  namespace: "accessibility"
+  description: "Migrate hearing device screen to the Catalyst infrastructure"
+  bug: "337244007"
 }
 
 flag {

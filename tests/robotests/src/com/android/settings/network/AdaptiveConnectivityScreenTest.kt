@@ -17,14 +17,18 @@
 package com.android.settings.network
 
 import android.content.Context
+import android.content.res.Resources
 import android.platform.test.annotations.EnableFlags
 import android.provider.Settings
 import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED
 import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED
 import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_WIFI_ENABLED
+import android.telephony.SubscriptionInfo
+import android.telephony.SubscriptionManager
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.R
 import com.android.settings.Settings.AdaptiveConnectivitySettingsActivity
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.SettingsCatalystTestCase
@@ -32,18 +36,30 @@ import com.android.settingslib.metadata.PreferenceHierarchy
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.TestScope
 import org.junit.Test
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.whenever
+import org.robolectric.shadows.ShadowSubscriptionManager
 
 @Suppress("DEPRECATION")
 class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = AdaptiveConnectivityScreen()
     override val flagName
         get() = Flags.FLAG_CATALYST_ADAPTIVE_CONNECTIVITY
+
     private lateinit var fragment: AdaptiveConnectivitySettings
-    private val mContext: Context = ApplicationProvider.getApplicationContext()
+    private val mockResources: Resources = mock()
+    private val mockSubscriptionManager: SubscriptionManager = mock()
+    private val mContext: Context =
+        spy(ApplicationProvider.getApplicationContext()) {
+            on { resources } doReturn mockResources
+            on { getSystemService(SubscriptionManager::class.java) } doReturn
+                mockSubscriptionManager
+        }
     private val testScope = TestScope()
 
-    @Test
-    override fun migration() {}
+    @Test override fun migration() {}
 
     @Test
     fun getPreferenceHierarchy_returnsHierarchy() {
@@ -55,14 +71,13 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_NESTED_TOGGLE_SWITCHES)
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLES)
     fun getPreferenceHierarchy_flagEnabled_returnsHierarchyWithNestedToggle() {
         val hierarchy: PreferenceHierarchy =
             preferenceScreenCreator.getPreferenceHierarchy(mContext, testScope)
-        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_ENABLED)).isNotNull()
+        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_ENABLED)).isNull()
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED)).isNotNull()
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED)).isNotNull()
-
     }
 
     @Test
@@ -71,38 +86,39 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
         scenario.onFragment { fragment ->
             this.fragment = fragment
             assertSwitchPreferenceCompatVisibility(
-                ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, fragment,
-                false
+                ADAPTIVE_CONNECTIVITY_WIFI_ENABLED,
+                fragment,
+                false,
             )
             assertSwitchPreferenceCompatVisibility(
                 ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED,
                 fragment,
-                false
+                false,
             )
         }
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_NESTED_TOGGLE_SWITCHES)
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLES)
     fun flagEnabled_switchPreferenceCompatExists() {
         val scenario = launchFragmentInContainer<AdaptiveConnectivitySettings>()
         scenario.onFragment { fragment ->
             this.fragment = fragment
             assertSwitchPreferenceCompatVisibility(
-                ADAPTIVE_CONNECTIVITY_WIFI_ENABLED, fragment,
-                true
+                ADAPTIVE_CONNECTIVITY_WIFI_ENABLED,
+                fragment,
+                true,
             )
             assertSwitchPreferenceCompatVisibility(
                 ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED,
                 fragment,
-                true
+                true,
             )
         }
     }
 
-
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_NESTED_TOGGLE_SWITCHES)
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLES)
     fun flagEnabled_onWifiScorerSwitchClick_shouldUpdateSetting() {
         val scenario = launchFragmentInContainer<AdaptiveConnectivitySettings>()
         scenario.onFragment { fragment: AdaptiveConnectivitySettings ->
@@ -120,7 +136,7 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_NESTED_TOGGLE_SWITCHES)
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLES)
     fun flagEnabled_onAdaptiveMobileNetworkSwitchClick_shouldUpdateSetting() {
         val scenario = launchFragmentInContainer<AdaptiveConnectivitySettings>()
         scenario.onFragment { fragment: AdaptiveConnectivitySettings ->
@@ -147,26 +163,86 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
             .isEqualTo(AdaptiveConnectivitySettingsActivity::class.java.getName())
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLES)
+    fun getPreferenceHierarchy_mobileToggleHiddenForCarrier_mobileNetworkToggleIsHidden() {
+        val subId = 1
+        val carrierId = 1234
+        val subscriptionInfo = mock<SubscriptionInfo>()
+        whenever(subscriptionInfo.subscriptionId).thenReturn(subId)
+        whenever(subscriptionInfo.carrierId).thenReturn(carrierId)
+        whenever(mockSubscriptionManager.getActiveSubscriptionInfo(subId)).thenReturn(subscriptionInfo)
+        whenever(mockSubscriptionManager.getAllSubscriptionInfoList())
+            .thenReturn(listOf(subscriptionInfo))
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(subId)
+
+        whenever(
+                mockResources.getIntArray(R.array.config_carrier_for_mobile_network_toggle_disable)
+            )
+            .thenReturn(intArrayOf(carrierId))
+        whenever(mockResources.getIntArray(R.array.config_carrier_for_wifi_scorer_toggle_off))
+            .thenReturn(intArrayOf())
+
+        val hierarchy: PreferenceHierarchy =
+            preferenceScreenCreator.getPreferenceHierarchy(mContext, testScope)
+
+        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED)).isNotNull()
+        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED)).isNull()
+
+        // Clean up
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(
+            SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        )
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLES)
+    fun getPreferenceHierarchy_mobileToggleShownForCarrier_mobileNetworkToggleIsShown() {
+        val subId = 1
+        val carrierId = 1234
+        val disabledCarrierId = 5678
+        val subscriptionInfo = mock<SubscriptionInfo>()
+        whenever(subscriptionInfo.subscriptionId).thenReturn(subId)
+        whenever(subscriptionInfo.carrierId).thenReturn(carrierId)
+        whenever(mockSubscriptionManager.getActiveSubscriptionInfo(subId)).thenReturn(subscriptionInfo)
+        whenever(mockSubscriptionManager.getAllSubscriptionInfoList())
+            .thenReturn(listOf(subscriptionInfo))
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(subId)
+
+        whenever(
+                mockResources.getIntArray(R.array.config_carrier_for_mobile_network_toggle_disable)
+            )
+            .thenReturn(intArrayOf(disabledCarrierId))
+        whenever(mockResources.getIntArray(R.array.config_carrier_for_wifi_scorer_toggle_off))
+            .thenReturn(intArrayOf())
+
+        val hierarchy: PreferenceHierarchy =
+            preferenceScreenCreator.getPreferenceHierarchy(mContext, testScope)
+
+        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED)).isNotNull()
+        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED)).isNotNull()
+
+        // Clean up
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(
+            SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        )
+    }
+
     /**
      * Helper function to get the setting value from Settings.Secure.
      *
      * @param key the key of the setting to get.
      */
     private fun updateSetting(key: String): Boolean {
-        return (Settings.Secure.getInt(
-            mContext.contentResolver,
-            key,
-            0
-        ) == 1)
+        return (Settings.Secure.getInt(mContext.contentResolver, key, 0) == 1)
     }
 
     private fun assertSwitchPreferenceCompatVisibility(
         key: String,
         fragment: AdaptiveConnectivitySettings,
-        isVisible: Boolean
+        isVisible: Boolean,
     ) {
         val switchPreference = fragment.findPreference<SwitchPreferenceCompat>(key)
         assertThat(switchPreference?.isVisible).isEqualTo(isVisible)
     }
-
 }

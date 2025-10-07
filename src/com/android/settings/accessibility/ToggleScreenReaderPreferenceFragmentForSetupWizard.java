@@ -25,13 +25,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.detail.a11yservice.A11yServicePreferenceFragment;
-import com.android.settings.accessibility.detail.a11yservice.UseServiceTogglePreferenceController;
+import com.android.settings.accessibility.detail.a11yservice.ui.UseServicePreference;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -40,7 +42,7 @@ import com.google.android.setupdesign.GlifPreferenceLayout;
 public class ToggleScreenReaderPreferenceFragmentForSetupWizard
         extends A11yServicePreferenceFragment {
     private boolean mToggleSwitchWasInitiallyChecked;
-    private String mMainActionPrefKey;
+    private final String mMainActionPrefKey = UseServicePreference.KEY;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -62,14 +64,14 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
                     });
         }
 
-        mMainActionPrefKey = use(UseServiceTogglePreferenceController.class).getPreferenceKey();
         TwoStatePreference preference = findPreference(mMainActionPrefKey);
         mToggleSwitchWasInitiallyChecked = preference.isChecked();
     }
 
+    @NonNull
     @Override
-    public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
-            Bundle savedInstanceState) {
+    public RecyclerView onCreateRecyclerView(@NonNull LayoutInflater inflater,
+            @NonNull ViewGroup parent, @Nullable Bundle savedInstanceState) {
         if (parent instanceof GlifPreferenceLayout) {
             final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
             return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(
@@ -89,12 +91,6 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER;
-    }
-
-    @Override
-    public int getFeedbackCategory() {
-        // The feedback options should not be displayed on the setup wizard page.
-        return SettingsEnums.PAGE_UNKNOWN;
     }
 
     @Override

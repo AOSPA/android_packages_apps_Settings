@@ -63,15 +63,14 @@ public class SatelliteCarrierSettingUtils {
     /**
      * Use getSatelliteDataSupportMode to check data mode is restricted.
      *
-     * @return true if data mode is restricted.
+     * @return Integer of {@code CarrierConfigManager#SATELLITE_DATA_SUPPORT_MODE}
      */
-    public static boolean isSatelliteDataRestricted(Context context, int subId) {
+    public static int getSatelliteDataMode(Context context, int subId) {
         SatelliteManagerWrapper wrapper =
                 sSatelliteManagerWrapper == null ? new SatelliteManagerWrapper(context)
                         : sSatelliteManagerWrapper;
-        return wrapper.getSatelliteDataSupportMode(subId) <= SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
+        return wrapper.getSatelliteDataSupportMode(subId);
     }
-
 
     /**
      * Check if current carrier is supported in this region.
@@ -81,8 +80,10 @@ public class SatelliteCarrierSettingUtils {
         if (tagIds == null) {
             return true;
         }
+
         int[] carrierIds = context.getResources().getIntArray(
                 com.android.settings.R.array.config_carrier_id_list_for_satellite_geo_fence_check);
+        Log.d(TAG, "tagIds is " + tagIds + " / carrier id : " + carrierId);
         boolean isCarrierNeedToCheckRegion = Arrays.stream(carrierIds).anyMatch(
                 it -> it == carrierId);
         if (!isCarrierNeedToCheckRegion) {
@@ -90,7 +91,6 @@ public class SatelliteCarrierSettingUtils {
         }
         return tagIds.stream().anyMatch(tagId -> tagId == SATELLITE_REGION_TAG_ID);
     }
-
 
     @VisibleForTesting
     static class SatelliteManagerWrapper {

@@ -15,17 +15,30 @@
  */
 package com.android.settings.inputmethod;
 
+import static android.content.ComponentName.unflattenFromString;
+import static android.hardware.input.AppLaunchData.createLaunchDataForComponent;
 import static android.hardware.input.InputGestureData.TOUCHPAD_GESTURE_TYPE_THREE_FINGER_TAP;
 import static android.hardware.input.InputGestureData.createTouchpadTrigger;
 
 import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.hardware.input.AppLaunchData;
 import android.hardware.input.InputGestureData;
+import android.hardware.input.InputManager;
 import android.hardware.input.KeyGestureEvent;
 import android.net.Uri;
 import android.provider.Settings;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.settings.R;
 
 import java.util.Map;
 
@@ -33,10 +46,15 @@ import java.util.Map;
  * Utility class for retrieving 3 Finger Tap related values in touchpad settings.
  */
 public final class TouchpadThreeFingerTapUtils {
+    static final String TAG = "TouchpadThreeFingerTap";
+
     static final String TARGET_ACTION =
             Settings.System.TOUCHPAD_THREE_FINGER_TAP_CUSTOMIZATION;
     static final Uri TARGET_ACTION_URI =
             Settings.System.getUriFor(TARGET_ACTION);
+
+    static final String SHARED_PREF_NAME = "three_finger_tap";
+    static final String LAUNCHING_APP_KEY = "launching_app";
 
     static final InputGestureData.Trigger TRIGGER =
             createTouchpadTrigger(TOUCHPAD_GESTURE_TYPE_THREE_FINGER_TAP);
@@ -66,7 +84,8 @@ public final class TouchpadThreeFingerTapUtils {
     }
 
     /**
-     * Return if KEY_GESTURE_TYPE_LAUNCH_APPLICATION is the cuurent the gesture type
+     * Return if KEY_GESTURE_TYPE_LAUNCH_APPLICATION is the current the gesture type
+     *
      * @param resolver ContentResolver
      */
     public static boolean isGestureTypeLaunchApp(@NonNull ContentResolver resolver) {
@@ -95,6 +114,7 @@ public final class TouchpadThreeFingerTapUtils {
 
     /**
      * Set KeyGestureEvent.KEY_GESTURE_TYPE_UNSPECIFIED as the gesture type
+     *
      * @param resolver ContentResolver
      */
     public static void setDefaultGestureType(@NonNull ContentResolver resolver) {
@@ -103,11 +123,112 @@ public final class TouchpadThreeFingerTapUtils {
     }
 
     /**
-     * Set KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_APPLICATION as the gesture type
+     * Set KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_APPLICATION as the gesture type and update
+     * InputManager to trigger the chosen app
+     *
      * @param resolver ContentResolver
+     * @param inputManager InputManager
+     * @param componentName ComponentName of the launching app
      */
-    public static void setLaunchAppAsGestureType(@NonNull ContentResolver resolver) {
+    public static void setLaunchAppAsGestureType(
+            @NonNull ContentResolver resolver, @NonNull InputManager inputManager,
+            @NonNull ComponentName componentName) {
+        AppLaunchData appLaunchData = createLaunchDataForComponent(
+                componentName.getPackageName(), componentName.getClassName());
+        InputGestureData gestureData =
+                new InputGestureData.Builder()
+                        .setTrigger(TouchpadThreeFingerTapUtils.TRIGGER)
+                        .setAppLaunchData(appLaunchData)
+                        .build();
+        inputManager.removeAllCustomInputGestures(InputGestureData.Filter.TOUCHPAD);
+        inputManager.addCustomInputGesture(gestureData);
+
         setGestureType(
-                resolver, /* gestureType = */ KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_APPLICATION);
+                resolver, /* gestureType= */ KeyGestureEvent.KEY_GESTURE_TYPE_LAUNCH_APPLICATION);
+    }
+
+    /**
+     * @param sharedPreferences SharedPreferences
+     * @param launchingApp the ComponentName of the launching app
+     */
+    public static void putLaunchingApp(
+            @NonNull SharedPreferences sharedPreferences, @Nullable ComponentName launchingApp) {
+        String launchingAppFlattened = launchingApp == null ? null : launchingApp.flattenToString();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(LAUNCHING_APP_KEY, launchingAppFlattened);
+        editor.apply();
+    }
+
+    /**
+     * @param sharedPreferences SharedPreferences
+     * @return the ComponentName of launching app
+     */
+    @Nullable
+    public static ComponentName getLaunchingAppComponentName(
+            @Nullable SharedPreferences sharedPreferences) {
+        if (sharedPreferences == null) {
+            return null;
+        }
+        String launchingApp = sharedPreferences.getString(LAUNCHING_APP_KEY, null);
+        return launchingApp == null ? null : unflattenFromString(launchingApp);
+    }
+
+    /**
+     * Get the label of the default assistant
+     *
+     * @param resolver ContentResolver
+     * @param packageManager PackageManager
+     * @return the label of the default assistant
+     */
+    @Nullable
+    public static CharSequence getAssistantName(
+            @NonNull ContentResolver resolver, @NonNull PackageManager packageManager) {
+        String flattened = Settings.Secure.getString(resolver, Settings.Secure.ASSISTANT);
+        if (flattened != null) {
+            ComponentName componentName = ComponentName.unflattenFromString(flattened);
+            return getLabel(packageManager, componentName);
+        }
+        return null;
+    }
+
+    /**
+     * Get the action title with the default assistant's name if applicable
+     *
+     * @param context Context
+     * @param packageManager PackageManager
+     * @return the action title with the default assistant's name
+     */
+    public static CharSequence getDefaultAssistantTitle(
+            @NonNull Context context, @NonNull PackageManager packageManager) {
+        CharSequence assistantName = getAssistantName(context.getContentResolver(), packageManager);
+        // Use the generic name if we can't get the default assistant's label
+        if (assistantName == null) {
+            assistantName =
+                    context.getString(R.string.three_finger_tap_launch_generic_assistant_name);
+        }
+        return context.getString(
+                R.string.three_finger_tap_launch_default_assistant, assistantName);
+    }
+
+    /**
+     * Get the label of a given app
+     *
+     * @param packageManager ContentResolver
+     * @param componentName the ComponentName of the app
+     * @return the label of the app
+     */
+    @Nullable
+    public static CharSequence getLabel(
+            @NonNull PackageManager packageManager, @Nullable ComponentName componentName) {
+        if (componentName != null) {
+            try {
+                ApplicationInfo appInfo = packageManager.getApplicationInfo(
+                        componentName.getPackageName(), /* flags= */ 0);
+                return appInfo.loadLabel(packageManager);
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "Package not found: " + componentName.getPackageName(), e);
+            }
+        }
+        return null;
     }
 }

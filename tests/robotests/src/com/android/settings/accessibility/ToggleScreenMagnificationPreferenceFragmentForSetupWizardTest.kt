@@ -29,7 +29,7 @@ import org.robolectric.RobolectricTestRunner
 /** Tests for [ToggleScreenMagnificationPreferenceFragmentForSetupWizard]. */
 @RunWith(RobolectricTestRunner::class)
 class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest :
-    BaseShortcutFragmentInSuwTestCases<
+    BaseShortcutInteractionsInSuwTestCases<
         ToggleScreenMagnificationPreferenceFragmentForSetupWizard
     >() {
 
@@ -45,12 +45,6 @@ class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest :
             .isEqualTo(0)
     }
 
-    @Test
-    fun getSurveyKey_returnEmptyString() {
-        assertThat(ToggleScreenMagnificationPreferenceFragmentForSetupWizard().getSurveyKey())
-            .isEqualTo("")
-    }
-
     override fun getSetupWizardTitle(): String {
         return context.getString(R.string.accessibility_screen_magnification_title)
     }
@@ -59,10 +53,8 @@ class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest :
         return context.getString(R.string.accessibility_screen_magnification_intro_text)
     }
 
-    override fun getFragmentClazz():
-        Class<ToggleScreenMagnificationPreferenceFragmentForSetupWizard> {
-        return ToggleScreenMagnificationPreferenceFragmentForSetupWizard::class.java
-    }
+    override fun getFragmentClazz() =
+        ToggleScreenMagnificationPreferenceFragmentForSetupWizard::class.java
 
     override fun getFragmentArgs(): Bundle? {
         return null
