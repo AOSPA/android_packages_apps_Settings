@@ -44,6 +44,7 @@ import java.util.Set;
  * A controller handles displaying the quick settings shortcut option preference and
  * configuring the shortcut.
  */
+// LINT.IfChange
 public class QuickSettingsShortcutOptionController extends ShortcutOptionPreferenceController {
     public QuickSettingsShortcutOptionController(
             @NonNull Context context, @NonNull String preferenceKey) {
@@ -150,3 +151,4 @@ public class QuickSettingsShortcutOptionController extends ShortcutOptionPrefere
         return true;
     }
 }
+// LINT.ThenChange(ui/QuickSettingsShortcutPreference.kt)

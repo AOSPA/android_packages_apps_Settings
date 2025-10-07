@@ -31,6 +31,7 @@ import com.android.settingslib.utils.StringUtil;
  * A controller handles displaying the gesture shortcut option preference and
  * configuring the shortcut.
  */
+// LINT.IfChange
 public class GestureShortcutOptionController extends ShortcutOptionPreferenceController {
 
     public GestureShortcutOptionController(Context context, String preferenceKey) {
@@ -72,3 +73,4 @@ public class GestureShortcutOptionController extends ShortcutOptionPreferenceCon
                 R.string.accessibility_shortcut_edit_dialog_summary_gesture);
     }
 }
+// LINT.ThenChange(ui/GestureShortcutPreference.kt)
