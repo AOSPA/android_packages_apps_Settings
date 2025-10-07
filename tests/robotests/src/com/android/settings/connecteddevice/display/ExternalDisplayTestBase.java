@@ -24,7 +24,6 @@ import static com.android.settings.flags.Flags.FLAG_ENABLE_DEFAULT_DISPLAY_IN_TO
 import static com.android.settings.flags.Flags.FLAG_ENABLE_RESOLUTION_APPLY_CONFIRMATION_BUGFIX;
 import static com.android.settings.flags.Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX;
-import static com.android.settings.flags.Flags.FLAG_ROTATION_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_ENABLE_DISPLAY_BLOCK_ARROW_MOVEMENT_BUGFIX;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -101,7 +100,6 @@ public class ExternalDisplayTestBase {
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, false);
-        mFlags.setFlag(FLAG_ROTATION_CONNECTED_DISPLAY_SETTING, true);
         mFlags.setFlag(FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING, true);
         mFlags.setFlag(FLAG_RESOLUTION_AND_ENABLE_CONNECTED_DISPLAY_SETTING_BUGFIX, true);
         mFlags.setFlag(FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING, true);

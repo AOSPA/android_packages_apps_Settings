@@ -60,15 +60,4 @@ public class ExternalDisplaySettingsConfiguration {
          */
         public abstract void update(int displayId);
     }
-
-    /**
-     * @return whether the settings page is enabled or not.
-     */
-    public static boolean isExternalDisplaySettingsPageEnabled(@NonNull FeatureFlags flags) {
-        DesktopExperienceFlags desktopExperienceFlags = new DesktopExperienceFlags(flags);
-        boolean result = desktopExperienceFlags.rotationConnectedDisplaySetting()
-                || desktopExperienceFlags.resolutionAndEnableConnectedDisplaySetting()
-                || desktopExperienceFlags.displayTopologyPaneInDisplayList();
-        return result;
-    }
 }

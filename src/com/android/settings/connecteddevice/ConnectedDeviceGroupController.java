@@ -15,7 +15,6 @@
  */
 package com.android.settings.connecteddevice;
 
-import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isExternalDisplaySettingsPageEnabled;
 import static com.android.settingslib.Utils.isAudioModeOngoingCall;
 
 import android.content.Context;
@@ -195,8 +194,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return (hasExternalDisplayFeature()
-                || hasBluetoothFeature()
+        return (hasBluetoothFeature()
                 || hasUsbFeature()
                 || hasUsiStylusFeature()
                 || mConnectedDockUpdater != null)
@@ -266,9 +264,9 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
                 FeatureFactory.getFeatureFactory().getDockUpdaterFeatureProvider();
         final DockUpdater connectedDockUpdater =
                 dockUpdaterFeatureProvider.getConnectedDockUpdater(context, this);
-        init(hasExternalDisplayFeature()
-                        ? new ExternalDisplayUpdater(this, fragment.getMetricsCategory())
-                        : null,
+        final ExternalDisplayUpdater externalDisplayUpdater =
+                new ExternalDisplayUpdater(this, fragment.getMetricsCategory());
+        init(externalDisplayUpdater,
                 hasBluetoothFeature()
                         ? new ConnectedBluetoothDeviceUpdater(context, this,
                         fragment.getMetricsCategory())
@@ -280,19 +278,6 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
                 hasUsiStylusFeature()
                         ? new StylusDeviceUpdater(context, fragment, this)
                         : null);
-    }
-
-    /**
-     * @return trunk stable feature flags.
-     */
-    @VisibleForTesting
-    @NonNull
-    public FeatureFlags getFeatureFlags() {
-        return mFeatureFlags;
-    }
-
-    private boolean hasExternalDisplayFeature() {
-        return isExternalDisplaySettingsPageEnabled(getFeatureFlags());
     }
 
     private boolean hasBluetoothFeature() {
