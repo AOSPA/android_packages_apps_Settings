@@ -28,6 +28,7 @@ import com.android.settings.R;
  * A controller handles displaying the volume keys shortcut option preference and
  * configuring the shortcut.
  */
+// LINT.IfChange
 public class VolumeKeysShortcutOptionController extends ShortcutOptionPreferenceController {
 
     public VolumeKeysShortcutOptionController(
@@ -60,3 +61,4 @@ public class VolumeKeysShortcutOptionController extends ShortcutOptionPreference
         return true;
     }
 }
+// LINT.ThenChange(ui/VolumeKeysShortcutPreference.kt)
