@@ -48,20 +48,47 @@ class NightDisplayScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    fun configuredAvailable() {
-        mockResources.stub { on { getBoolean(R.bool.config_nightDisplayAvailable) } doReturn true }
+    fun configuredAvailableAndNotBlocked() {
+        mockResources.stub {
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_AVAILABLE_RES_ID) } doReturn true
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_SETTINGS_PAGE_BLOCKER_RES_ID) } doReturn false
+        }
         assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
     }
 
     @Test
-    fun configuredUnavailable() {
-        mockResources.stub { on { getBoolean(R.bool.config_nightDisplayAvailable) } doReturn false }
+    fun configuredUnavailableAndNotBlocked() {
+        mockResources.stub {
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_AVAILABLE_RES_ID) } doReturn false
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_SETTINGS_PAGE_BLOCKER_RES_ID) } doReturn false
+        }
+        assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
+    }
+
+    @Test
+    fun configuredAvailableAndBlocked() {
+        mockResources.stub {
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_AVAILABLE_RES_ID) } doReturn true
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_SETTINGS_PAGE_BLOCKER_RES_ID) } doReturn true
+        }
+        assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
+    }
+
+    @Test
+    fun configuredUnavailableAndBlocked() {
+        mockResources.stub {
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_AVAILABLE_RES_ID) } doReturn false
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_SETTINGS_PAGE_BLOCKER_RES_ID) } doReturn true
+        }
         assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
     }
 
     @Test
     fun toggleOn() {
-        mockResources.stub { on { getBoolean(R.bool.config_nightDisplayAvailable) } doReturn true }
+        mockResources.stub {
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_AVAILABLE_RES_ID) } doReturn true
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_SETTINGS_PAGE_BLOCKER_RES_ID) } doReturn false
+        }
 
         colorDM.isNightDisplayActivated = false
         assertThat(colorDM.isNightDisplayActivated).isFalse()
@@ -72,7 +99,10 @@ class NightDisplayScreenTest : SettingsCatalystTestCase() {
 
     @Test
     fun toggleOff() {
-        mockResources.stub { on { getBoolean(R.bool.config_nightDisplayAvailable) } doReturn true }
+        mockResources.stub {
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_AVAILABLE_RES_ID) } doReturn true
+            on { getBoolean(NightDisplayConstants.NIGHT_DISPLAY_SETTINGS_PAGE_BLOCKER_RES_ID) } doReturn false
+        }
 
         colorDM.isNightDisplayActivated = true
         assertThat(colorDM.isNightDisplayActivated).isTrue()
