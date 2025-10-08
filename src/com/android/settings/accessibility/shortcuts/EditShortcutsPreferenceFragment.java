@@ -68,6 +68,7 @@ import com.android.settings.accessibility.AccessibilitySetupWizardUtils;
 import com.android.settings.accessibility.Flags;
 import com.android.settings.accessibility.PreferenceAdapterInSuw;
 import com.android.settings.accessibility.PreferredShortcuts;
+import com.android.settings.accessibility.shortcuts.ui.AdvancedPreference;
 import com.android.settings.accessibility.shortcuts.ui.EditShortcutsScreen;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -214,6 +215,13 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
         if (Flags.catalystEditShortcuts()) {
+            Preference preference = findPreference(AdvancedPreference.KEY);
+            boolean isExpanded =
+                    savedInstanceState != null
+                            && savedInstanceState.getBoolean(SAVED_STATE_IS_EXPANDED);
+            if (preference != null) {
+                preference.setVisible(!isExpanded);
+            }
             return;
         }
 
@@ -340,6 +348,11 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (Flags.catalystEditShortcuts()) {
+            Preference preference = findPreference(AdvancedPreference.KEY);
+            outState.putBoolean(
+                    SAVED_STATE_IS_EXPANDED,
+                    preference != null && !preference.isVisible()
+            );
             return;
         }
 
