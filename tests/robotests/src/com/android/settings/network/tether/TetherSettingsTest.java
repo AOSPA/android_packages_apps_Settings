@@ -19,6 +19,7 @@ package com.android.settings.network.tether;
 import static android.content.Intent.ACTION_MEDIA_SHARED;
 import static android.content.Intent.ACTION_MEDIA_UNSHARED;
 import static android.hardware.usb.UsbManager.ACTION_USB_STATE;
+import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
 
 import static com.android.settings.wifi.WifiUtils.setCanShowWifiHotspotCached;
 
@@ -48,17 +49,21 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.connectivity.Flags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -78,6 +83,9 @@ import java.util.List;
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class TetherSettingsTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
 
     private Context mContext;
 
@@ -137,6 +145,17 @@ public class TetherSettingsTest {
         mTetherSettings.onCreate(null);
 
         verify(mTetherSettings, never()).setupViewModel();
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @Config(shadows = ShadowRestrictedDashboardFragment.class)
+    public void onCreate_isNotMultiUser_setIfOnlyAvailableForAdmins() {
+        when(mTetherSettings.isUiRestricted()).thenReturn(true);
+
+        mTetherSettings.onCreate(null);
+
+        verify(mTetherSettings).setIfOnlyAvailableForAdmins(true);
     }
 
     @Test
