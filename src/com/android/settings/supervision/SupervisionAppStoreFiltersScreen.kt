@@ -34,8 +34,7 @@ class SupervisionAppStoreFiltersActivity :
 open class SupervisionAppStoreFiltersScreen :
     PreferenceScreenMixin, PreferenceAvailabilityProvider {
 
-    override fun isAvailable(context: Context) =
-        Flags.enableAppStoreFiltersScreen() || Flags.enableAppStoreFiltersScreenFallback()
+    override fun isAvailable(context: Context) = Flags.enableAppStoreFiltersScreen()
 
     override val key: String
         get() = KEY
@@ -56,13 +55,7 @@ open class SupervisionAppStoreFiltersScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +SupervisionAppStoreFiltersTopIntroPreference() order -100
-            +UntitledPreferenceCategoryMetadata(SUPERVISION_APP_STORE_FILTERS_GROUP) order 0 += {
-                // When the fallback flag is enabled, populate the group with the fallback list of
-                // app stores that support app store filters.
-                if (Flags.enableAppStoreFiltersScreenFallback()) {
-                    // TODO(b/446954311): Add fallback preferences here.
-                }
-            }
+            +UntitledPreferenceCategoryMetadata(SUPERVISION_APP_STORE_FILTERS_GROUP) order 0 += {}
             +SupervisionAppStoreFiltersFooterPreference() order 100
         }
 
