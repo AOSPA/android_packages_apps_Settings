@@ -30,6 +30,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * A preference that controls the visibility of advanced accessibility shortcut options.
+ *
+ * This is used for features like magnification to show or hide secondary shortcut options, such as
+ * the triple-tap shortcut. When a user taps this preference, it is hidden and the advanced options
+ * are displayed in its place.
+ *
+ * Note: This preference could be replaced by ExpandablePreference in the future, if we don't need
+ * to hide this advanced preference UI when it is expanded.
+ */
 class AdvancedPreference(private val targets: Set<String>) :
     PreferenceMetadata,
     PreferenceBinding,
