@@ -349,7 +349,7 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
 
     /**
      * Checks if the network is owned by the current user of the settings app or
-     * if the userCount is one.
+     * if the userCount is one or if the WifiConfiguration is null.
      *
      * @param wifiEntry the network entry for which the ownership check will be made.
      * @param context Context of caller
@@ -359,17 +359,15 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
     public static boolean isNetworkEditable(
             @NonNull WifiEntry wifiEntry, @NonNull Context context) {
         if (!com.android.settings.connectivity.Flags.wifiMultiuser()
-                || wifiEntry.isModifiableByOtherUsers()) {
+                || wifiEntry.isModifiableByOtherUsers()
+                || wifiEntry.getWifiConfiguration() == null) {
             return true;
         }
 
         UserManager userManager = context.getSystemService(UserManager.class);
         int userCount = userManager.getUserCount();
-
         UserHandle currentUserHandle = Process.myUserHandle();
-
         int currentUserId = currentUserHandle.getIdentifier();
-
         int creatorUid = wifiEntry.getWifiConfiguration().creatorUid;
         UserHandle userHandle = UserHandle.getUserHandleForUid(creatorUid);
 
