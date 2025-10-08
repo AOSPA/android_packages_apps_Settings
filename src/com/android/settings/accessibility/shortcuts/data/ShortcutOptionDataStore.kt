@@ -21,6 +21,7 @@ import android.os.UserHandle
 import android.view.accessibility.AccessibilityManager
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
 import com.android.internal.accessibility.util.ShortcutUtils
+import com.android.settings.accessibility.PreferredShortcuts
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.HandlerExecutor
@@ -59,6 +60,7 @@ class ShortcutOptionDataStore(
 
     override fun onKeyChanged(key: String, reason: Int) {
         notifyChange(DataChangeReason.UPDATE)
+        PreferredShortcuts.updatePreferredShortcutsFromSettings(context, targets)
     }
 
     override fun contains(key: String): Boolean = settingsStore.contains(settingKey)

@@ -22,12 +22,23 @@ import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIF
 import com.android.settings.R
 import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
 import com.android.settings.testutils.SettingsStoreRule
+import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.clearInvocations
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.util.ReflectionHelpers
 
@@ -36,11 +47,24 @@ class TripleTapShortcutPreferenceTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
 
     private val appContext: Application = ApplicationProvider.getApplicationContext()
+    @OptIn(ExperimentalCoroutinesApi::class) private val testDispatcher = UnconfinedTestDispatcher()
+    private val testScope = TestScope(testDispatcher)
+    private val expandableStateFlow = MutableStateFlow(false)
     private lateinit var preference: TripleTapShortcutPreference
 
     @Before
     fun setUp() {
-        preference = TripleTapShortcutPreference(appContext, setOf(MAGNIFICATION_CONTROLLER_NAME))
+        preference =
+            TripleTapShortcutPreference(
+                context = appContext,
+                targets = setOf(MAGNIFICATION_CONTROLLER_NAME),
+                expandableStateProvider = { expandableStateFlow },
+            )
+    }
+
+    @After
+    fun cleanUp() {
+        testScope.cancel()
     }
 
     @Test
@@ -72,15 +96,76 @@ class TripleTapShortcutPreferenceTest {
     }
 
     @Test
+    fun bind_isNotExpanded_setsVisibilityFalse() {
+        // isExpanded is false by default
+        val widget = preference.createAndBindWidget<ShortcutOptionWidget>(appContext)
+
+        assertThat(widget.isVisible).isFalse()
+    }
+
+    @Test
+    fun bind_isExpandedAndAvailable_setsVisibilityTrue() =
+        testScope.runTest {
+            val lifecycleContext = getPreferenceLifecycleContext()
+            preference.onCreate(lifecycleContext)
+            expandableStateFlow.value = true
+
+            val widget = preference.createAndBindWidget<ShortcutOptionWidget>(appContext)
+
+            assertThat(widget.isVisible).isTrue()
+        }
+
+    @Test
+    fun bind_isExpandedAndNotAvailable_setsVisibilityFalse() =
+        testScope.runTest {
+            preference =
+                TripleTapShortcutPreference(
+                    context = appContext,
+                    targets = emptySet(),
+                    expandableStateProvider = { expandableStateFlow },
+                )
+            val lifecycleContext = getPreferenceLifecycleContext()
+            preference.onCreate(lifecycleContext)
+            expandableStateFlow.value = true
+
+            val widget = preference.createAndBindWidget<ShortcutOptionWidget>(appContext)
+
+            assertThat(widget.isVisible).isFalse()
+        }
+
+    @Test
+    fun onCreate_collectsExpandableStateAndNotifiesChange() =
+        testScope.runTest {
+            val lifecycleContext = getPreferenceLifecycleContext()
+            preference.onCreate(lifecycleContext)
+            clearInvocations(lifecycleContext)
+
+            // Emit true to expand
+            expandableStateFlow.value = true
+
+            verify(lifecycleContext).notifyPreferenceChange(preference.key)
+        }
+
+    @Test
     fun isAvailable_whenNoTargets_returnsFalse() {
-        preference = TripleTapShortcutPreference(appContext, emptySet())
+        preference =
+            TripleTapShortcutPreference(
+                context = appContext,
+                targets = emptySet(),
+                expandableStateProvider = { expandableStateFlow },
+            )
 
         assertThat(preference.isAvailable(appContext)).isFalse()
     }
 
     @Test
     fun isAvailable_whenWrongTarget_returnsFalse() {
-        preference = TripleTapShortcutPreference(appContext, setOf("some.other.target"))
+        preference =
+            TripleTapShortcutPreference(
+                context = appContext,
+                targets = setOf("some.other.target"),
+                expandableStateProvider = { expandableStateFlow },
+            )
 
         assertThat(preference.isAvailable(appContext)).isFalse()
     }
@@ -89,8 +174,9 @@ class TripleTapShortcutPreferenceTest {
     fun isAvailable_whenMultipleTargets_returnsFalse() {
         preference =
             TripleTapShortcutPreference(
-                appContext,
-                setOf(MAGNIFICATION_CONTROLLER_NAME, "some.other.target"),
+                context = appContext,
+                targets = setOf(MAGNIFICATION_CONTROLLER_NAME, "some.other.target"),
+                expandableStateProvider = { expandableStateFlow },
             )
 
         assertThat(preference.isAvailable(appContext)).isFalse()
@@ -99,5 +185,12 @@ class TripleTapShortcutPreferenceTest {
     @Test
     fun isAvailable_whenTargetIsMagnification_returnsTrue() {
         assertThat(preference.isAvailable(appContext)).isTrue()
+    }
+
+    private fun getPreferenceLifecycleContext(): PreferenceLifecycleContext {
+        return mock {
+            on { applicationContext }.thenReturn(appContext)
+            on { lifecycleScope }.thenReturn(testScope.backgroundScope)
+        }
     }
 }
