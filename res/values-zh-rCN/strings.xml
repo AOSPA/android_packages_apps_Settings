@@ -248,14 +248,20 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"下移"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"移除"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"移至顶部"</string>
+    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
+    <skip />
+    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
+    <skip />
     <string name="action_label_menu_option" msgid="6881627571783854975">"修改系统语言列表，<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"国家/地区, 地区, country, territory"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"天气, 摄氏温度, 度, 温度, 摄氏度, 华氏度, weather, centigrade, degrees, temp, celsius, fahrenheit"</string>
     <string name="keywords_measurement_system_page" msgid="403273002514842186">"公制, 英制, 温度, 高度, 重量, 距离, 摄氏度, 华氏度, 磅, 千克, kg, 英里, 公里, 英寸, 厘米, 米, 单位, metric, imperial, temperature, height, weight, distance, celsius, fahrenheit, pounds, kilograms, kg, mile, kilometer, inches, centimeters, meters, unit"</string>
-    <!-- no translation found for keywords_numbering_system_page (4497257649451769188) -->
-    <skip />
-    <!-- no translation found for keywords_first_day_of_week_page (8379890591218396233) -->
-    <skip />
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"数字, 数位, 数, 数目, 编号系统, digit, digits, number, numbers, numbering system"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"星期日, 星期一, 星期二, 星期三, 星期四, 星期五, 星期六, 第一天, sunday, monday, tuesday, wednesday, thursday, friday, saturday, first day"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"地区偏好设置"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"设置单位和数字偏好设置"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"将您的地区偏好设置告知应用，使应用能够为您提供个性化体验。"</string>
@@ -3476,14 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"如果您移除该用户的管理员权限，您或其他管理员之后可以重新授予该权限。"</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"确定要移除自己的管理员权限吗？"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"如果您继续操作，只有其他管理员才能授予您管理员权限。"</string>
-    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
-    <skip />
-    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
-    <skip />
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"无法删除用户"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"您是此设备上的唯一管理员，因此无法删除您的用户个人资料。如果您想删除自己的用户个人资料，可以前往“系统”&gt;“重置选项”&gt;“清除所有数据（恢复出厂设置）”，将其他用户设为管理员或清除设备中的所有数据。"</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"无法撤销管理员权限"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"您是此设备上的唯一管理员用户。如果您不想再担任管理员，需要先将其他用户设为管理员。"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"急救信息"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>的相关信息和联系人信息"</string>
     <string name="open_app_button" msgid="5025229765547191710">"打开“<xliff:g id="APP_NAME">%1$s</xliff:g>”"</string>
@@ -4096,7 +4098,14 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"通知整理工具"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"对优先级较低的通知进行整合并静音"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"管理用于整理通知的应用"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"始终展开通知分组"</string>
+    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"应用于工作资料应用"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服务"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"没有任何已安装的应用请求以 VR 助手服务的形式运行。"</string>
@@ -5279,6 +5288,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"您的手机上支持的应用"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"无法添加 SIM 卡"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"请先断开卫星信号连接，然后再添加 SIM 卡"</string>
+    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"接入点名称"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"连接到<xliff:g id="CARRIER">%1$s</xliff:g>时无法使用"</string>

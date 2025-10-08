@@ -248,14 +248,20 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"انتقال به پایین"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"برداشتن"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"انتقال به ابتدا"</string>
+    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
+    <skip />
+    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
+    <skip />
     <string name="action_label_menu_option" msgid="6881627571783854975">"ویرایش فهرست زبان سیستم، <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"کشور، قلمرو"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"آب‌وهوا، سانتی‌گراد، درجه، دما، سلسیوس، فارنهایت"</string>
     <string name="keywords_measurement_system_page" msgid="403273002514842186">"سنجه، امپریال، دما، ارتفاع، وزن، مسافت، سلسیوس، فارنهایت، پوند، کیلوگرم، کیلو، مایل، کیلومتر، اینچ، سانتی‌متر، متر، واحد"</string>
-    <!-- no translation found for keywords_numbering_system_page (4497257649451769188) -->
-    <skip />
-    <!-- no translation found for keywords_first_day_of_week_page (8379890591218396233) -->
-    <skip />
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"رقم، ارقام، شماره، شماره‌ها، سیستم شماره‌گذاری"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"یکشنبه، دوشنبه، سه‌شنبه، چهارشنبه، پنج‌شنبه، جمعه، شنبه، روز اول"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"اولویت‌های منطقه‌ای"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"تنظیم اولویت‌های واحد و عدد"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"به برنامه‌ها اجازه می‌دهد اولویت‌های منطقه‌ای شما را بدانند تا بتوانند تجربه‌تان را شخصی‌سازی کنند."</string>
@@ -3479,14 +3485,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"اگر امتیازهای سرپرست را از این کاربر بگیرید، شما یا سرپرست دیگری می‌توانید این امتیازها را بعداً دوباره به او بدهید."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"مطمئنید می‌خواهید امتیازهای سرپرست خودتان را بردارید؟"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"درصورت ادامه دادن، فقط سرپرست‌های دیگر می‌توانند امتیازهای سرپرست را به شما بدهند."</string>
-    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
-    <skip />
-    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
-    <skip />
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"حذف کاربر ممکن نیست"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"شما تنها سرپرست در این دستگاه هستید، درنتیجه نمی‌توان نمایه کاربر شما را حذف کرد. اگر می‌خواهید نمایه کاربرتان را حذف کنید، می‌توانید کاربر دیگری را به‌عنوان سرپرست تعیین کنید یا با رفتن به «سیستم &gt; بازنشانی گزینه‌ها &gt; پاک کردن همه داده‌ها (بازنشانی کارخانه‌ای)» همه داده‌ها را از دستگاه پاک کنید."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"برداشتن امتیازهای سرپرست ممکن نیست"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"شما تنها کاربر سرپرست در این دستگاه هستید. اگر دیگر نمی‌خواهید سرپرست باشید، ابتدا باید کاربر دیگری را به‌عنوان سرپرست تعیین کنید."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"اطلاعات اضطراری"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"اطلاعات و مخاطبین <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"باز کردن <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4099,7 +4101,14 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"سازمان‌دهنده اعلان"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"دسته‌ای و بی‌صدا کردن اعلان‌های با اولویت پایین"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"مدیریت برنامه‌ها برای سازمان‌دهنده اعلان"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"بسته ها را همیشه گسترش دهید"</string>
+    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"اعمال کردن برای برنامه‌های نمایه کاری"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"‏خدمات یاور VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"‏هیچ برنامه نصب‌شده‌ای درخواست نکرده به‌عنوان خدمات یاور VR اجرا شود."</string>
@@ -5282,6 +5291,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"برنامه‌های پشتیبانی‌شده در تلفن شما"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"سیم‌کارت اضافه نشد"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"پیش‌از افزودن سیم‌کارت، اتصال ماهواره را قطع کنید"</string>
+    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"نام‌های نقطه دسترسی"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"هنگام اتصال به <xliff:g id="CARRIER">%1$s</xliff:g>، دردسترس نیست"</string>

@@ -248,14 +248,20 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Pomjeri nadolje"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Ukloni"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Pomjeri na vrh"</string>
+    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
+    <skip />
+    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
+    <skip />
     <string name="action_label_menu_option" msgid="6881627571783854975">"Uređivanje liste jezika sistema, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"zemlja, teritorija"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"vrijeme, celzijev stepen, stepeni, temperatura, celzij, fahrenheit"</string>
     <string name="keywords_measurement_system_page" msgid="403273002514842186">"metrički, imperijalni, temperatura, visina, težina, udaljenost, celzij, fahrenheit, funte, kilogrami, kg, milja, kilometar, inči, centimetri, metri, jedinica"</string>
-    <!-- no translation found for keywords_numbering_system_page (4497257649451769188) -->
-    <skip />
-    <!-- no translation found for keywords_first_day_of_week_page (8379890591218396233) -->
-    <skip />
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"cifra, cifre, broj, brojevi, sistem numeriranja"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"nedjelja, ponedjeljak, utorak, srijeda, četvrtak, petak, subota, prvi dan"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionalne postavke"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Postavite preference za jedinice i brojeve"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Omogućite aplikacijama da znaju vaše regionalne postavke da mogu personalizirati vaše iskustvo."</string>
@@ -3476,14 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Ako uklonite administratorska prava za ovog korisnika, vi ili drugi administrator ih možete vratiti kasnije."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Jeste li sigurni da želite ukloniti vlastita administratorska prava?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Ako nastavite, samo će vam drugi administratori moći dodijeliti administratorska prava."</string>
-    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
-    <skip />
-    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
-    <skip />
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Nije moguće izbrisati korisnika"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Jedini ste administrator na uređaju, pa se vaš korisnički profil ne može izbrisati. Ako želite izbrisati korisnički profil, možete postaviti drugog korisnika kao administratora ili potpuno izbrisati se podatke s uređaja odlaskom u Postavke &gt; Vrati opcije na zadano &gt; Potpuno izbriši sve podatke (vraćanje na fabričke postavke)."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Nije moguće ukloniti administratorska prava"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Jedini ste administrator na uređaju. Ako više ne želite biti administrator, prvo morate postaviti drugog korisnika kao administratora."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Informacije za hitne slučajeve"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informacije i kontakti za korisnika <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Otvorit aplikaciju <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4096,7 +4098,14 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organizator obavještenja"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Grupišite i utišajte obavještenja nižeg prioriteta"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Upravljajte aplikacijama za organizator obavještenja"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Uvijek proširi pakete"</string>
+    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Primijeni na aplikacije radnog profila"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Usluge pomagača za VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nijedna instalirana aplikacija nije zatražila da bude pokrenuta kao usluga pomagača za VR."</string>
@@ -5279,6 +5288,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Podržane aplikacije na telefonu"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Nije moguće dodati SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Prekinite satelitsku vezu prije dodavanja SIM-a"</string>
+    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nazivi pristupne tačke"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nedostupno kada ste povezani s operaterom <xliff:g id="CARRIER">%1$s</xliff:g>"</string>

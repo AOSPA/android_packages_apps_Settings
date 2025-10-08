@@ -248,14 +248,20 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"向下移"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"移除"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"移至頂端"</string>
+    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
+    <skip />
+    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
+    <skip />
     <string name="action_label_menu_option" msgid="6881627571783854975">"編輯系統語言清單，<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"國家, 地區"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"天氣, 攝氏溫度, 度, 氣溫, 攝氏, 華氏"</string>
     <string name="keywords_measurement_system_page" msgid="403273002514842186">"公制, 英制, 溫度, 高度, 重量, 距離, 攝氏, 華氏, 磅, 公斤, kg, 英里, 公里, 吋, 厘米, 米, 單位"</string>
-    <!-- no translation found for keywords_numbering_system_page (4497257649451769188) -->
-    <skip />
-    <!-- no translation found for keywords_first_day_of_week_page (8379890591218396233) -->
-    <skip />
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"數位, 數字, 號碼系統"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"星期日, 星期一, 星期二, 星期三, 星期四, 星期五, 星期六, 第一日"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"地區偏好設定"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"設定單位及數字偏好設定"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"讓應用程式存取地區偏好設定，為你提供個人化體驗。"</string>
@@ -3476,14 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"如你移除此使用者的管理員權限，你或其他管理員稍後可再次授予該權限。"</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"你確定要移除自己的管理員權限嗎？"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"如要繼續，只有其他管理員可授予你管理員權限。"</string>
-    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
-    <skip />
-    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
-    <skip />
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"無法刪除使用者"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"你是此裝置上的唯一管理員，因此你的使用者個人檔案無法刪除。如要刪除你的使用者個人檔案，你可以指派另一位使用者為管理員，或前往 [系統] &gt; [重設選項] &gt; [清除所有資料] (回復原廠設定) 清除裝置上的所有資料。"</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"無法移除管理員權限"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"你是此裝置上的唯一管理員使用者。如果你不希望繼續擔任管理員，你需要先指派另一位使用者為管理員。"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"緊急資料"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>的相關資訊和聯絡資料"</string>
     <string name="open_app_button" msgid="5025229765547191710">"開啟「<xliff:g id="APP_NAME">%1$s</xliff:g>」"</string>
@@ -4096,7 +4098,14 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"通知整理工具"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"將優先順序較低的通知分類並設定為靜音"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"管理通知整理工具使用的應用程式"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"一律展開分類通知"</string>
+    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"套用至工作設定檔應用程式"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服務"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"沒有已安裝的應用程式要求提供 VR 助手服務。"</string>
@@ -5279,6 +5288,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"手機支援的應用程式"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"無法新增 SIM 卡"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"新增 SIM 卡前請先結束衛星連線"</string>
+    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"存取點名稱"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"無法在連接至<xliff:g id="CARRIER">%1$s</xliff:g>時使用"</string>
