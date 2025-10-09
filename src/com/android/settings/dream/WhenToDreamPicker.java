@@ -67,7 +67,8 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
         mDreamsSupportedOnBattery = getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsEnabledOnBattery);
         mShowRestrictToWirelessCharging =
-                getResources().getBoolean(R.bool.config_show_restrict_to_wireless_charging);
+                getResources().getBoolean(
+                        com.android.internal.R.bool.config_supportDreamWirelessChargingRestriction);
     }
 
     @Override
