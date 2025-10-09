@@ -36,7 +36,7 @@ fun AppButtons(
     isHibernationSwitchEnabledStateFlow: MutableStateFlow<Boolean>,
     featureFlags: PmFeatureFlags = PmFeatureFlagsImpl()
 ) {
-    if (remember(packageInfoPresenter) { packageInfoPresenter.isMainlineModule() }) return
+    if (remember(packageInfoPresenter) { packageInfoPresenter.isLimitedAppInfoPackage() }) return
     val presenter = remember {
         AppButtonsPresenter(
             packageInfoPresenter,
@@ -47,8 +47,8 @@ fun AppButtons(
     ActionButtons(actionButtons = presenter.getActionButtons())
 }
 
-private fun PackageInfoPresenter.isMainlineModule(): Boolean =
-    AppUtils.isMainlineModule(userPackageManager, packageName)
+private fun PackageInfoPresenter.isLimitedAppInfoPackage(): Boolean =
+    AppUtils.isLimitedAppInfoPackage(userPackageManager, packageName)
 
 private class AppButtonsPresenter(
     private val packageInfoPresenter: PackageInfoPresenter,
