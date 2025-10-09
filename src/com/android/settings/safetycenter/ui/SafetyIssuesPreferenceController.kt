@@ -20,6 +20,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.safetycenter.SafetyCenterIssue
 import android.util.Log
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
@@ -47,6 +48,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
 
     private var bannerGroup: BannerMessagePreferenceGroup? = null
     private var viewModel: LiveSafetyCenterViewModel? = null
+    private var fragmentManager: FragmentManager? = null
 
     // Configuration for subpage behavior
     private var relatedSafetySources: List<String> = emptyList()
@@ -78,6 +80,16 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
                 }
             }
         }
+    }
+
+    /**
+     * Sets the [FragmentManager] to be used for showing DialogFragments. This should typically be
+     * the childFragmentManager of the hosting fragment.
+     *
+     * @param fragmentManager The FragmentManager instance.
+     */
+    fun setFragmentManager(fragmentManager: FragmentManager) {
+        this.fragmentManager = fragmentManager
     }
 
     /**
@@ -227,12 +239,22 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
         if (issue.isDismissible && !isDismissed) {
             banner.setDismissButtonVisible(true)
             banner.setDismissButtonOnClickListener {
-                // TODO: b/424134511 - Implement logic to show confirm issue dismissal
-                viewModel?.dismissIssue(issue)
+                if (issue.shouldConfirmDismissal()) {
+                    showDismissConfirmationDialog(issue)
+                } else {
+                    viewModel?.dismissIssue(issue)
+                }
             }
         } else {
             banner.setDismissButtonVisible(false)
         }
+    }
+
+    /** Shows a confirmation dialog before dismissing an issue. */
+    private fun showDismissConfirmationDialog(issue: SafetyCenterIssue) {
+        Log.d(TAG, "[$preferenceKey] Showing dismiss confirmation for issue: ${issue.id}")
+        ConfirmDismissalDialogFragment.newInstance(issue)
+            .showNow(fragmentManager!!, /* tag= */ null)
     }
 
     companion object {
