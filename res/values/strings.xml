@@ -11503,6 +11503,15 @@
     <!-- Title for a button that will resolve to a help URL explaining what Advanced Protection is. [CHAR LIMIT=50] -->
     <string name="disabled_by_advanced_protection_help_button_title">Settings</string>
 
+    <!-- Title for dialog when Wi-Fi auto-connect is blocked by Advanced Protection. [CHAR LIMIT=50] -->
+    <string name="wifi_autojoin_disabled_title">Auto-connect isn\'t recommended</string>
+    <!-- Body text for dialog explaining why Wi-Fi auto-connect is disabled by Advanced Protection. [CHAR LIMIT=NONE] -->
+    <string name="wifi_autojoin_disabled_body">To keep your device secure, Advanced Protection recommends not to auto-connect to such unsecured networks.</string>
+    <!-- Positive (dismiss) button text for the Wi-Fi auto-connect disabled dialog. [CHAR LIMIT=25] -->
+    <string name="wifi_autojoin_disabled_positive_button">Back</string>
+    <!-- Negative (acknowledgment) button text for the Wi-Fi auto-connect disabled dialog. [CHAR LIMIT=25] -->
+    <string name="wifi_autojoin_disabled_negative_button">Turn on anyway</string>
+
     <!-- Turn off a conditional state of the device (e.g. airplane mode, or hotspot) [CHAR LIMIT=30] -->
     <string name="condition_turn_off">Turn off</string>
 
