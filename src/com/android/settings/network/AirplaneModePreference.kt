@@ -37,7 +37,6 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
@@ -171,22 +170,18 @@ open class AirplaneModePreference :
 // LINT.ThenChange(AirplaneModePreferenceController.java)
 
 /** Preference for the Airplane Mode toggle in the Network & Internet screen. */
-class AirplaneModeTogglePreference : AirplaneModePreference(), PreferenceIndexableProvider {
+class AirplaneModeTogglePreference : AirplaneModePreference() {
     override fun isAvailable(context: Context) =
         context.isAirplaneModeEligible() && !context.hasPairedWatchForAirplaneModeSync()
-
-    override fun isIndexable(context: Context) = isAvailable(context)
 }
 
 /** Preference for the Airplane Mode toggle in the Airplane Mode Settings screen. */
-class AirplaneModeDetailsPreference :
-    AirplaneModePreference(), MainSwitchPreferenceBinding, PreferenceIndexableProvider {
+class AirplaneModeDetailsPreference : AirplaneModePreference(), MainSwitchPreferenceBinding {
     override fun isAvailable(context: Context) =
         context.isAirplaneModeEligible() && context.hasPairedWatchForAirplaneModeSync()
 
-    override val icon: Int
-        @DrawableRes get() = 0 // Main Switch Preference doesn't show icon.
-
-    // TODO : Check and fix Settings Search functionality for flag enabled.
-    override fun isIndexable(context: Context) = isAvailable(context)
+    // Since the AirplaneModeSettingsScreen is indexed and already points to this main switch, we
+    // don't want this to also be indexed causing 2 results for Settings search.
+    override val indexable: Boolean
+        get() = false
 }

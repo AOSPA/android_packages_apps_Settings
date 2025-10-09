@@ -30,10 +30,14 @@ import android.provider.Settings.Global
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.ext.truth.content.IntentSubject.assertThat
 import com.android.server.connectivity.Flags
 import com.android.settings.R
 import com.android.settings.Settings.AirplaneModeSettingsActivity
+import com.android.settings.Settings.NetworkDashboardActivity
+import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.TestScope
 import org.junit.Rule
@@ -82,7 +86,7 @@ class AirplaneModeSettingsScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
-    fun hasPairedWatch_isAvailableAndIndexable() {
+    fun hasPairedWatch_isAvailable() {
         companionDeviceManager.addAssociation(
             AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
                 .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
@@ -92,19 +96,17 @@ class AirplaneModeSettingsScreenTest {
         )
 
         assertThat(screen.isAvailable(context)).isTrue()
-        assertThat(screen.isIndexable(context)).isTrue()
     }
 
     @Test
     @EnableFlags(Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
-    fun noPairedWatch_isNotAvailableOrIndexable() {
+    fun noPairedWatch_isNotAvailable() {
         assertThat(screen.isAvailable(context)).isFalse()
-        assertThat(screen.isIndexable(context)).isFalse()
     }
 
     @Test
     @DisableFlags(Flags.FLAG_SYNC_AIRPLANE_MODE_WITH_WATCHES)
-    fun flagDisabled_isNotAvailableOrIndexable() {
+    fun flagDisabled_isNotAvailable() {
         companionDeviceManager.addAssociation(
             AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
                 .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
@@ -114,15 +116,48 @@ class AirplaneModeSettingsScreenTest {
         )
 
         assertThat(screen.isAvailable(context)).isFalse()
-        assertThat(screen.isIndexable(context)).isFalse()
+    }
+
+    @Test
+    fun screen_isIndexable() {
+        assertThat(screen.indexable).isTrue()
     }
 
     @Test
     fun getLaunchIntent_correctActivity() {
         val intent = screen.getLaunchIntent(context, null)
 
-        assertThat(intent.component?.className)
-            .isEqualTo(AirplaneModeSettingsActivity::class.java.name)
+        assertThat(intent).hasComponentClass(AirplaneModeSettingsActivity::class.java.name)
+    }
+
+    @Test
+    fun getLaunchIntent_syncPreference_correctActivity() {
+        val intent =
+            screen.getLaunchIntent(
+                context,
+                mock<PreferenceMetadata> { on { key } doReturn AirplaneModeSyncPreference.KEY },
+            )
+
+        assertThat(intent).hasComponentClass(AirplaneModeSettingsActivity::class.java.name)
+        assertThat(intent)
+            .extras()
+            .string(EXTRA_FRAGMENT_ARG_KEY)
+            .isEqualTo(AirplaneModeSyncPreference.KEY)
+    }
+
+    @Test
+    fun getLaunchIntent_settingsScreenPreference_correctActivity() {
+        val intent =
+            screen.getLaunchIntent(
+                context,
+                mock<PreferenceMetadata> { on { key } doReturn AirplaneModeSettingsScreen.KEY },
+            )
+
+        assertThat(intent).hasComponentClass(NetworkDashboardActivity::class.java.name)
+        assertThat(intent)
+            .extras()
+            .string(EXTRA_FRAGMENT_ARG_KEY)
+            .isEqualTo(AirplaneModeSettingsScreen.KEY)
     }
 
     @Test
@@ -134,7 +169,7 @@ class AirplaneModeSettingsScreenTest {
 
         assertThat(keys)
             .containsExactly(
-                AirplaneModePreference.KEY,
+                AirplaneModePreference.KEY, // main switch
                 AirplaneModeSyncPreference.KEY,
                 AirplaneModeSettingsFooter.KEY,
             )
