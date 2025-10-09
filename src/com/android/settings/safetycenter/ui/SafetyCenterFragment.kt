@@ -96,8 +96,17 @@ class SafetyCenterFragment : DashboardFragment() {
             if (controller is SubpagePreferenceController) {
                 when (controller.preferenceKey) {
                     DEVICE_UNLOCK_SUBPAGE_KEY -> {
-                        controller.setRelatedSafetySources(DEVICE_UNLOCK_SAFETY_SOURCE_IDS)
-                        controller.setRelatedIssueOnlySafetySources(emptyList())
+                        controller.setRelatedSafetySources(
+                            SafetyCenterSubpageRegistry.getXmlSafetySourceIds(
+                                requireContext(),
+                                SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK,
+                            )
+                        )
+                        controller.setRelatedIssueOnlySafetySources(
+                            SafetyCenterSubpageRegistry.getIssueOnlySafetySourceIds(
+                                SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK
+                            )
+                        )
                         controller.setDefaultSummaryResId(
                             R.string.device_unlock_subpage_default_summary
                         )
@@ -123,9 +132,7 @@ class SafetyCenterFragment : DashboardFragment() {
     companion object {
         private const val TAG = "SafetyCenterFragment"
         private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
-        private const val ANDROID_LOCK_SCREEN_SOURCE_ID = "AndroidLockScreen"
         private const val DEVICE_UNLOCK_SUBPAGE_KEY = "device_unlock_subpage"
-        private val DEVICE_UNLOCK_SAFETY_SOURCE_IDS = listOf(ANDROID_LOCK_SCREEN_SOURCE_ID)
 
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =
