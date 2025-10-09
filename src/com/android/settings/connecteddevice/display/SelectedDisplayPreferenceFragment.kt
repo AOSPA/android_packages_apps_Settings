@@ -38,6 +38,7 @@ import com.android.settings.Utils.createAccessibleSequence
 import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL
 import com.android.settings.core.SubSettingLauncher
+import com.android.settings.core.instrumentation.SettingsStatsLog
 import java.util.Locale
 
 /**
@@ -123,7 +124,8 @@ open class SelectedDisplayPreferenceFragment(
     }
 
     override fun onStopCallback() {
-        // No-op, viewModel observer should be managed by view lifecycle
+        // viewModel observer cleanup should be managed by view lifecycle
+        ExternalDisplaySettingsLoggerStore.removeAllLoggers()
     }
 
     private fun setup() {
@@ -352,6 +354,7 @@ open class SelectedDisplayPreferenceFragment(
         val height = displayMode.physicalHeight
         val formattedWidth = numberFormatter.format(width)
         val formattedHeight = numberFormatter.format(height)
+        ExternalDisplaySettingsLoggerStore.getLogger(display.id).updateResolution(width, height)
 
         preference.setSummary(
             createAccessibleSequence(
@@ -389,6 +392,11 @@ open class SelectedDisplayPreferenceFragment(
                             return false
                         }
                         setValueIndex(rotation)
+                        val logger = ExternalDisplaySettingsLoggerStore.getLogger(displayId)
+                        logger.updateRotation(rotation * 90)
+                        logger.log(
+                            SettingsStatsLog.EXTERNAL_DISPLAY_SETTINGS_CHANGED__SETTING__ROTATION
+                        )
                         return true
                     }
                 }
@@ -400,6 +408,7 @@ open class SelectedDisplayPreferenceFragment(
         display: DisplayDeviceAdditionalInfo,
     ) {
         val rotation = display.rotation
+        ExternalDisplaySettingsLoggerStore.getLogger(display.id).updateRotation(rotation * 90)
         preference.apply {
             setValueIndex(rotation)
             setSummary(rotationEntries[rotation])
