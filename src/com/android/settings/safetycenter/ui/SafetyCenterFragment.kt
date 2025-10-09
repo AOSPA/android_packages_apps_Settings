@@ -44,6 +44,18 @@ class SafetyCenterFragment : DashboardFragment() {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (requireActivity().isChangingConfigurations) {
+            viewModel.changingConfigurations()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.pageOpen()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupStatusBannerController(viewLifecycleOwner)

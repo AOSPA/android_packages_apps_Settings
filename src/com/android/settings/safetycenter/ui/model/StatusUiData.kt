@@ -46,14 +46,12 @@ data class StatusUiData(val status: SafetyCenterStatus) {
 
     val bannerStatus: BannerStatus
         get() {
-            return if (isRefreshInProgress) {
-                BannerStatus.LOW
-            } else {
-                when (severityLevel) {
-                    SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK -> BannerStatus.LOW
-                    SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_RECOMMENDATION -> BannerStatus.MEDIUM
-                    SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING -> BannerStatus.HIGH
-                    else -> BannerStatus.GENERIC
+            return when (severityLevel) {
+                SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK -> BannerStatus.LOW
+                SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_RECOMMENDATION -> BannerStatus.MEDIUM
+                SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_CRITICAL_WARNING -> BannerStatus.HIGH
+                else -> {
+                    BannerStatus.LOW
                 }
             }
         }

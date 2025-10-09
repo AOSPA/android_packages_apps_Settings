@@ -45,6 +45,12 @@ abstract class SafetyCenterViewModel(protected val app: Application) : AndroidVi
     /** Triggers a request to refresh all safety sources. */
     abstract fun rescan()
 
+    /** Signals configuration change destruction to the ViewModel. */
+    abstract fun changingConfigurations()
+
+    /** Triggering data refresh when Safety Center page opens. */
+    abstract fun pageOpen()
+
     /** Clears the current error state. */
     abstract fun clearError()
 
