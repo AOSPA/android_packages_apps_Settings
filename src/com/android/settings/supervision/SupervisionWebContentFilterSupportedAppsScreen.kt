@@ -25,6 +25,8 @@ import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.supervision.ipc.SupportedApp
+import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -49,6 +51,7 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
     PreferenceAvailabilityProvider {
     protected var supportedApps: List<SupportedApp> = emptyList()
     private var supervisionClient: SupervisionMessengerClient? = null
+    private var settingsStore: SettingsStore? = null
 
     override fun getTitle(context: Context): CharSequence? =
         StringUtil.getIcuPluralsString(
@@ -60,6 +63,11 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
     /** The key used to fetch the list of supported apps from [SupervisionMessengerClient]. */
     abstract val supportedAppsKey: String
 
+    /** The key for whether the filter is enabled or not in settings store. */
+    abstract val settingsKey: String
+
+    override fun isEnabled(context: Context): Boolean = isFilterEnabled()
+
     override fun isAvailable(context: Context) = Flags.enableSupervisionSettingsUiUpdates()
 
     override val indexable
@@ -69,8 +77,9 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
         get() = R.string.menu_key_supervision
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        supervisionClient =
-            supervisionClient ?: SupervisionMessengerClient(context).also { supervisionClient = it }
+        supervisionClient = supervisionClient ?: SupervisionMessengerClient(context)
+
+        settingsStore = settingsStore ?: SettingsSecureStore.get(context)
 
         context.lifecycleScope.launch {
             val rawSupportedApps =
@@ -141,6 +150,11 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
                     .let { addPreference(it) }
             }
         }
+    }
+
+    private fun isFilterEnabled(): Boolean {
+        val settingValue = settingsStore?.getInt(settingsKey)
+        return settingValue != null && (settingValue > 0)
     }
 
     companion object {
