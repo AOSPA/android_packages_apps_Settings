@@ -1006,6 +1006,13 @@
     <!-- Title of toggle to enable or disable device supervision on a desktop device [CHAR LIMIT=60] -->
     <string name="device_supervision_switch_title" product="desktop">Controls for this device</string>
 
+    <!-- Title displayed on supervision dashboard to show apps managing the phone. [CHAR LIMIT=NONE] -->
+    <string name="supervision_apps_managing_this_device_title" product="default">Managing this phone</string>
+    <!-- Title displayed on supervision dashboard to show apps managing the tablet. [CHAR LIMIT=NONE] -->
+    <string name="supervision_apps_managing_this_device_title" product="tablet">Managing this tablet</string>
+    <!-- Title displayed on supervision dashboard to show apps managing the desktop device. [CHAR LIMIT=NONE] -->
+    <string name="supervision_apps_managing_this_device_title" product="desktop">Managing this device</string>
+
     <!-- Subheading on activity to choose a PIN for supervision setup on a phone [CHAR LIMIT=NONE] -->
     <string name="supervision_pin_length_message" product="default">{count, plural,
         =1      {Enter a PIN with at least # digit. You\u2019ll use it to manage controls on this phone.}
