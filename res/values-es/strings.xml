@@ -248,14 +248,20 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Mover hacia abajo"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Quitar"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Mover al principio"</string>
+    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
+    <skip />
+    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
+    <skip />
     <string name="action_label_menu_option" msgid="6881627571783854975">"Editar lista de idiomas del sistema, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"país, territorio"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"tiempo, centígrados, grados, temperatura, celsius, fahrenheit"</string>
     <string name="keywords_measurement_system_page" msgid="403273002514842186">"métrico, imperial, temperatura, altura, peso, distancia, celsius, fahrenheit, libras, kilogramos, kg, milla, kilómetro, pulgadas, centímetros, metros, unidad"</string>
-    <!-- no translation found for keywords_numbering_system_page (4497257649451769188) -->
-    <skip />
-    <!-- no translation found for keywords_first_day_of_week_page (8379890591218396233) -->
-    <skip />
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"dígito, dígitos, número, números, sistema de numeración"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"domingo, lunes, martes, miércoles, jueves, viernes, sábado, primer día"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencias regionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Define preferencias de unidades y números"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que las apps sepan tus preferencias regionales para que puedan personalizar tu experiencia."</string>
@@ -3476,14 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Si le quitas los privilegios de administrador a este usuario, tanto tú como otro administrador puede devolvérselos más tarde."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"¿Seguro que quieres quitarte los privilegios de administrador?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Si continúas, solo otros administradores podrán concederte privilegios de administrador."</string>
-    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
-    <skip />
-    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
-    <skip />
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"No se puede eliminar el usuario"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Eres el único administrador de este dispositivo, por lo que tu perfil de usuario no se puede eliminar. Si quieres eliminarlo, puedes asignar el rol de administrador a otro usuario o borrar todos los datos del dispositivo yendo a Sistema &gt; Opciones de restablecimiento &gt; Volver al estado de fábrica (borrar todo)."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"No se pueden quitar los privilegios de administrador"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Eres el único usuario administrador de este dispositivo. Si ya no quieres ser administrador, primero debes asignar ese rol a otro usuario."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Información de emergencia"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Información y contactos de <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Abrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4096,7 +4098,14 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organizador de notificaciones"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Agrupa y silencia las notificaciones de menor prioridad"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Gestionar apps para el organizador de notificaciones"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Desplegar siempre las agrupaciones"</string>
+    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Aplicar a las apps del perfil de trabajo"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicios de ayuda de RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ninguna aplicación instalada ha solicitado ejecutarse como servicio de ayuda de RV."</string>
@@ -5279,6 +5288,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Apps compatibles en tu teléfono"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"No se puede añadir una SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Finaliza la conexión por satélite antes de añadir una SIM"</string>
+    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nombres de puntos de acceso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No está disponible cuando se está conectado a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>

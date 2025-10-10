@@ -248,14 +248,20 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Nach unten verschieben"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Entfernen"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"An den Anfang verschieben"</string>
+    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
+    <skip />
+    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
+    <skip />
     <string name="action_label_menu_option" msgid="6881627571783854975">"Systemsprachen-Liste bearbeiten, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"Land, Gebiet"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"Wetter, Grad, Temperatur, Celsius, Fahrenheit"</string>
     <string name="keywords_measurement_system_page" msgid="403273002514842186">"Metrisch, angloamerikanisch, Temperatur, Größe, Gewicht, Distanz, Celsius, Fahrenheit, Pfund, Kilogramm, kg, Meile, Kilometer, Zoll, Zentimeter, Meter, Einheit"</string>
-    <!-- no translation found for keywords_numbering_system_page (4497257649451769188) -->
-    <skip />
-    <!-- no translation found for keywords_first_day_of_week_page (8379890591218396233) -->
-    <skip />
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"Ziffer, Ziffern, Zahl, Zahlen, Nummer, Nummern, Zahlensystem"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"Sonntag, Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, erster Tag"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionale Einstellungen"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Einstellungen für Einheiten und Zahlen festlegen"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Wenn du Apps deine regionalen Einstellungen mitteilst, können ihre Dienste für dich personalisiert werden."</string>
@@ -3476,14 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Wenn du die Administrator­berechtigungen für diesen Nutzer entfernst, können sie von dir oder einem anderen Administrator später wiederhergestellt werden."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Möchtest du deine eigenen Administratorberechtigungen wirklich entfernen?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Wenn du fortfährst, können dir nur andere Administratoren Administratorberechtigungen gewähren."</string>
-    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
-    <skip />
-    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
-    <skip />
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Nutzer kann nicht gelöscht werden"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Du bist der einzige Administrator auf diesem Gerät. Daher kann dein Nutzerprofil nicht gelöscht werden. Wenn du dein Nutzerprofil löschen möchtest, kannst du einen anderen Nutzer zum Administrator machen oder alle Daten vom Gerät löschen. Dazu gehst du zu „System“ &gt; „Optionen zum Zurücksetzen“ &gt; „Alle Daten löschen (auf Werkseinstellungen zurücksetzen)“."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Administratorberechtigungen können nicht entfernt werden"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Du bist der einzige Administrator auf diesem Gerät. Wenn du kein Administrator mehr sein möchtest, musst du zuerst einen anderen Nutzer zum Administrator machen."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Notfallinformationen"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informationen und Kontaktdaten für <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"„<xliff:g id="APP_NAME">%1$s</xliff:g>“ öffnen"</string>
@@ -3534,7 +3536,7 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"AMBER Alerts"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"Bulletins über Kindesentführungen erhalten"</string>
     <string name="repeat_title" msgid="8676570486899483606">"Wiederholen"</string>
-    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Notfall­benachrichtigungen an Mobilgeräte"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Warnmeldungen an Mobilgeräte"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Netzbetreiber"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Zugangspunkte (APNs)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3783,7 +3785,7 @@
     <string name="live_caption_on_summary" msgid="8921561021882989495">"Ein / Untertitel für Anrufe, Videos und andere Medien anzeigen"</string>
     <string name="live_caption_off_summary" msgid="6761535729357010911">"Aus / Untertitel für Anrufe, Videos und andere Medien anzeigen"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Kabelgebundene Kopfhörer"</string>
-    <string name="spatial_audio_text" msgid="8201387855375146000">"Kompatible Medien mit vollerem Klang hören"</string>
+    <string name="spatial_audio_text" msgid="8201387855375146000">"Audio von kompatiblen Medien mit vollerem Klang hören"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Aus"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"An / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"An / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> und <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
@@ -4096,7 +4098,14 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Benachrichtigungs­organisator"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Benachrichtigungen mit niedriger Priorität bündeln und stummschalten"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Apps für den Benachrichtigungsorganisator verwalten"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Bundles immer erweitern"</string>
+    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Auf Apps im Arbeitsprofil anwenden"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-Hilfsdienste"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Keine installierte App hat die Ausführung als VR-Hilfsdienst angefordert."</string>
@@ -5279,6 +5288,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Unterstützte Apps auf deinem Smartphone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM kann nicht hinzugefügt werden"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Beende die Satellitenverbindung, bevor du eine SIM hinzufügst"</string>
+    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Zugangspunkte (APNs)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Bei Verbindung mit <xliff:g id="CARRIER">%1$s</xliff:g> nicht verfügbar"</string>
@@ -5686,9 +5697,9 @@
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Jetzt neu starten"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Später neu starten"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Spatial Audio"</string>
-    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Kompatible Medien mit vollerem Klang hören"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Audio von kompatiblen Medien mit vollerem Klang hören"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Erfassung von Kopfbewegungen"</string>
-    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Änderungen am Ton, während du deinen Kopf bewegst, damit er natürlicher klingt"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Durch Kopfbewegungen den Klang von Audiodateien ändern, damit er natürlicher wirkt"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Berechtigungen von Smartphone synchronisieren"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Gib deiner Smartwatch die gleiche App-Berechtigung, die du auch deinem Smartphone gegeben hast"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="1889644189800180316">"Audiogerätetyp"</string>

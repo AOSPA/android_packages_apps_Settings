@@ -248,14 +248,20 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Déplacer vers le bas"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Retirer"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Placer en première position"</string>
+    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
+    <skip />
+    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
+    <skip />
     <string name="action_label_menu_option" msgid="6881627571783854975">"Modifier la liste des langues du système : <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"pays, territoire"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"météo, centigrade, degrés, température, celsius, fahrenheit"</string>
     <string name="keywords_measurement_system_page" msgid="403273002514842186">"métrique, impérial, température, taille, poids, distance, celsius, fahrenheit, livres, kilogrammes, kg, mile, kilomètre, pouces, centimètres, mètres, unité"</string>
-    <!-- no translation found for keywords_numbering_system_page (4497257649451769188) -->
-    <skip />
-    <!-- no translation found for keywords_first_day_of_week_page (8379890591218396233) -->
-    <skip />
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"chiffre, chiffres, nombre, nombres, système de numérotation"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"dimanche, lundi, mardi, mercredi, jeudi, vendredi, samedi, premier jour"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Préférences régionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Définissez les préférences relatives aux unités et aux chiffres"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Indiquez aux applis vos préférences régionales afin qu\'elles puissent personnaliser votre expérience."</string>
@@ -3476,14 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Si vous retirez les privilèges d\'administrateur à cet utilisateur, vous ou un autre administrateur pourrez les lui réattribuer ultérieurement."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"Voulez-vous vraiment retirer vos propres privilèges d\'administrateur?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"Si vous continuez, seuls les autres administrateurs pourront vous accorder des privilèges d\'administrateur."</string>
-    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
-    <skip />
-    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
-    <skip />
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"Impossible de supprimer l\'utilisateur"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"Vous êtes le seul administrateur sur cet appareil, votre profil utilisateur ne peut donc pas être supprimé. Si vous souhaitez supprimer votre profil utilisateur, vous pouvez désigner un autre utilisateur comme administrateur ou effacer toutes les données de l\'appareil en accédant à Système &gt; Options de réinitialisation &gt; Effacer toutes les données (rétablir les paramètres par défaut)."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"Impossible de retirer les privilèges d\'administrateur"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"Vous êtes le seul utilisateur administrateur sur cet appareil. Si vous ne souhaitez plus être administrateur, vous devez d\'abord désigner un autre utilisateur comme administrateur."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Coordonnées d\'urgence"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Information et contacts pour <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Ouvrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4096,7 +4098,14 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organisateur de notifications"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Groupez et désactivez le son des notifications ayant la priorité la plus basse"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Gérer les applis pour l\'organisateur de notifications"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"Toujours développer les groupes de notifications"</string>
+    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Appliquer ce paramètre aux applis du profil professionnel"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Services d\'assistance pour la réalité virtuelle"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Aucune demande d\'exécution en tant que services d\'assistance pour la réalité virtuelle n\'a été envoyée pour les applis installées."</string>
@@ -5279,6 +5288,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Applis prises en charge sur votre téléphone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Impossible d\'ajouter une carte SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Mettez fin à la connexion satellite avant d\'ajouter une carte SIM"</string>
+    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Noms des points d\'accès"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"nom du point d\'accès"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponible lorsque vous êtes connectés au réseau de <xliff:g id="CARRIER">%1$s</xliff:g>"</string>

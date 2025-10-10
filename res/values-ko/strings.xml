@@ -248,14 +248,20 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"아래로 이동"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"삭제"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"맨 위로 이동"</string>
+    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
+    <skip />
+    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
+    <skip />
+    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
+    <skip />
     <string name="action_label_menu_option" msgid="6881627571783854975">"시스템 언어 목록 수정, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"국가, 지역"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"날씨, 섭씨, 도, 온도, 섭씨, 화씨"</string>
     <string name="keywords_measurement_system_page" msgid="403273002514842186">"미터법, 야드파운드법, 온도, 높이, 무게, 거리, 섭씨, 화씨, 파운드, 킬로그램, kg, 마일, 킬로미터, 인치, 센티미터, 미터, 단위"</string>
-    <!-- no translation found for keywords_numbering_system_page (4497257649451769188) -->
-    <skip />
-    <!-- no translation found for keywords_first_day_of_week_page (8379890591218396233) -->
-    <skip />
+    <string name="keywords_numbering_system_page" msgid="4497257649451769188">"숫자, 자리, 번호, 수, 번호 지정 시스템"</string>
+    <string name="keywords_first_day_of_week_page" msgid="8379890591218396233">"일요일, 월요일, 화요일, 수요일, 목요일, 금요일, 토요일, 첫째 날"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"지역 설정"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"단위 및 숫자 환경설정"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"앱 환경을 맞춤설정할 수 있도록 지역 설정을 알려주세요."</string>
@@ -3476,14 +3482,10 @@
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"이 사용자의 관리자 권한을 제거할 경우 나 또는 다른 관리자가 다시 관리자 권한을 부여할 수 있습니다."</string>
     <string name="user_revoke_admin_for_self_confirm_title" msgid="5661292626700927475">"내 관리자 권한을 삭제하시겠습니까?"</string>
     <string name="user_revoke_admin_for_self_confirm_message" msgid="4397795314721962937">"계속 진행하면 다른 관리자만 관리자 권한을 나에게 부여할 수 있습니다."</string>
-    <!-- no translation found for user_remove_last_admin_title (1488415592159664705) -->
-    <skip />
-    <!-- no translation found for user_remove_last_admin_message (1144142132714186560) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_title (3481302611655200278) -->
-    <skip />
-    <!-- no translation found for user_revoke_last_admin_message (8342553797960950789) -->
-    <skip />
+    <string name="user_remove_last_admin_title" msgid="1488415592159664705">"사용자를 삭제할 수 없음"</string>
+    <string name="user_remove_last_admin_message" msgid="1144142132714186560">"사용자는 이 기기의 유일한 관리자이므로 사용자 프로필을 삭제할 수 없습니다. 사용자 프로필을 삭제하려면 시스템 &gt; 재설정 옵션 &gt; 모든 데이터 삭제(초기화)로 이동하여 다른 사용자를 관리자로 만들거나 기기에서 모든 데이터를 삭제하세요."</string>
+    <string name="user_revoke_last_admin_title" msgid="3481302611655200278">"관리자 권한을 삭제할 수 없음"</string>
+    <string name="user_revoke_last_admin_message" msgid="8342553797960950789">"사용자는 이 기기의 유일한 관리자입니다. 관리자 자격을 포기하고 싶다면 먼저 다른 사용자를 관리자로 만들어야 합니다."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"긴급 상황 정보"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>님의 정보 및 연락처"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> 열기"</string>
@@ -4096,7 +4098,14 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"알림 정리 도구"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"우선순위가 낮은 알림을 번들로 묶고 무음 처리"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"알림 정리 도구의 앱 관리"</string>
-    <string name="notification_bundle_expand_always_title" msgid="3647586646644565332">"항상 번들 펼치기"</string>
+    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
+    <skip />
+    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
+    <skip />
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"직장 프로필 앱에 적용"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 도우미 서비스"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"설치된 앱 중에서 VR 도우미 서비스로 실행되도록 요청한 앱이 없습니다."</string>
@@ -5279,6 +5288,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"휴대전화에 설치된 지원되는 앱"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM을 추가할 수 없음"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM을 추가하기 전에 위성 연결을 종료하세요."</string>
+    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"액세스 포인트 네임(APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>에 연결된 경우 사용할 수 없음"</string>
