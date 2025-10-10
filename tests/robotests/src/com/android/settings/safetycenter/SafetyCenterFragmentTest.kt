@@ -107,10 +107,10 @@ class SafetyCenterFragmentTest {
             onView(withText(mApplication.getString(R.string.privacy_dashboard_title)))
                 .check(matches(isDisplayed()))
 
+            onView(isRoot()).perform(swipeUp())
             onView(withText(mApplication.getString(R.string.privacy_sources_title)))
                 .check(matches(isDisplayed()))
 
-            onView(isRoot()).perform(swipeUp())
             onView(withText(mApplication.getString(R.string.permissions_usage_title)))
                 .perform(scrollTo())
                 .check(matches(isDisplayed()))
