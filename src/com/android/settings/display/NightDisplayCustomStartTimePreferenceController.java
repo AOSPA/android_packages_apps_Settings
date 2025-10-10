@@ -38,7 +38,7 @@ public class NightDisplayCustomStartTimePreferenceController extends BasePrefere
 
     @Override
     public int getAvailabilityStatus() {
-        if (!ColorDisplayManager.isNightDisplayAvailable(mContext)) {
+        if (!NightDisplayExtensionsKt.isNightDisplaySettingsAvailable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         }
         if (mColorDisplayManager.getNightDisplayAutoMode()

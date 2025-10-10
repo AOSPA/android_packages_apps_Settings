@@ -50,25 +50,37 @@ public class NightDisplayIntensityPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_configuredAvailable_isActivated_available() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_nightDisplayAvailable, true);
+    public void configuredNightDisplayAvailableAndNotBlockedAndActivated_isAvailable() {
+        NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
         Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_ACTIVATED, 1);
         assertThat(mPreferenceController.isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_configuredAvailable_isNotActivated_available() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_nightDisplayAvailable, true);
+    public void configuredNightDisplayAvailableAndNotBlockedAndNotActivated_isAvailable() {
+        NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
         Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_ACTIVATED, 0);
         assertThat(mPreferenceController.isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_configuredUnavailable_unavailable() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_nightDisplayAvailable, false);
+    public void configuredNightDisplayUnavailableAndNotBlocked_isUnavailable() {
+        NightDisplayTestUtils.setNightDisplayAvailable(false);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(false);
+        assertThat(mPreferenceController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void configuredNightDisplayAvailableAndBlocked_isUnavailable() {
+        NightDisplayTestUtils.setNightDisplayAvailable(true);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
+        assertThat(mPreferenceController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void configuredNightDisplayUnavailableAndBlocked_isUnavailable() {
+        NightDisplayTestUtils.setNightDisplayAvailable(false);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
         assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 
