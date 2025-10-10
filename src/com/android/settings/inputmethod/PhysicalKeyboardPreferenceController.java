@@ -27,9 +27,9 @@ import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment.HardKeyboardDeviceInfo;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -38,7 +38,7 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhysicalKeyboardPreferenceController extends AbstractPreferenceController
+public class PhysicalKeyboardPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause,
         InputManager.InputDeviceListener {
 
@@ -47,18 +47,12 @@ public class PhysicalKeyboardPreferenceController extends AbstractPreferenceCont
     private Preference mPreference;
 
     public PhysicalKeyboardPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context);
+        super(context, "physical_keyboard_pref");
         mIm = (InputManager) context.getSystemService(Context.INPUT_SERVICE);
 
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return !getKeyboards().isEmpty()
-                && mContext.getResources().getBoolean(R.bool.config_show_physical_keyboard_pref);
     }
 
     @Override
@@ -80,8 +74,11 @@ public class PhysicalKeyboardPreferenceController extends AbstractPreferenceCont
     }
 
     @Override
-    public String getPreferenceKey() {
-        return "physical_keyboard_pref";
+    public int getAvailabilityStatus() {
+        if (!mContext.getResources().getBoolean(R.bool.config_show_physical_keyboard_pref)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        return !getKeyboards().isEmpty() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
