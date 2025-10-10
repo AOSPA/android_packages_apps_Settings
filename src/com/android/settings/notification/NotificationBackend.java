@@ -106,9 +106,7 @@ public class NotificationBackend {
         row.blockedChannelCount = getBlockedChannelCount(row.pkg, row.uid);
         row.channelCount = getChannelCount(row.pkg, row.uid);
         recordAggregatedUsageEvents(context, row);
-        if (Flags.uiRichOngoing()) {
-            row.canBePromoted = canBePromoted(row.pkg, row.uid);
-        }
+        row.canBePromoted = canBePromoted(row.pkg, row.uid);
         return row;
     }
 
@@ -792,10 +790,6 @@ public class NotificationBackend {
      */
     public void setCanBePromoted(String pkg, int uid, boolean allowed) {
         // We shouldn't get here with the flag off, but just in case, do nothing.
-        if (!Flags.uiRichOngoing()) {
-            Log.wtf(TAG, "tried to setCanBePromoted without flag on");
-            return;
-        }
         try {
             sINM.setCanBePromoted(pkg, uid, allowed, /* fromUser= */ true);
         } catch (Exception e) {

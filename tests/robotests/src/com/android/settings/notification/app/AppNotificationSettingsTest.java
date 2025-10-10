@@ -23,8 +23,6 @@ import static org.mockito.Mockito.when;
 import android.app.Flags;
 import android.content.Context;
 import android.content.Intent;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
@@ -67,7 +65,6 @@ public class AppNotificationSettingsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_UI_RICH_ONGOING)
     public void testOnCreateAdapter_flagOn_wrongIntent() {
         mSettings.mIntent = sAppNotifSettingsIntent;
 
@@ -79,7 +76,6 @@ public class AppNotificationSettingsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_UI_RICH_ONGOING)
     public void testOnCreateAdapter_flagOn_correctIntent() {
         mSettings.mIntent = sAppNotifPromotionSettingsIntent;
 
@@ -88,15 +84,5 @@ public class AppNotificationSettingsTest {
         assertThat(mSettings.getArguments().getString(
                 SettingsActivity.EXTRA_FRAGMENT_ARG_KEY)).isEqualTo(
                 PromotedNotificationsPreferenceController.KEY_PROMOTED_SWITCH);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_UI_RICH_ONGOING)
-    public void testOnCreateAdapter_flagOff() {
-        mSettings.mIntent = sAppNotifPromotionSettingsIntent;
-
-        // regardless of intent, if the flag is off we should not have a highlight
-        mSettings.onCreateAdapter(mPreferenceScreen);
-        assertThat(mSettings.getArguments()).isNull();
     }
 }
