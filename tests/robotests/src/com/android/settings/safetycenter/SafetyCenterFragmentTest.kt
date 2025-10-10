@@ -30,9 +30,11 @@ import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.action.ViewActions.swipeUp
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -42,10 +44,16 @@ import com.android.settings.R
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createEntry
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssue
+import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
 import com.android.settings.safetycenter.ui.SafetyCenterFragment
-import com.android.settingslib.widget.preference.statusbanner.R as SettingsLibR
+import com.android.settingslib.widget.BannerMessagePreference
+import com.android.settingslib.widget.BannerMessagePreferenceGroup
+import com.android.settingslib.widget.preference.banner.R as BannerR
+import com.android.settingslib.widget.preference.button.R as ButtonR
+import com.android.settingslib.widget.preference.statusbanner.R as StatusBannerR
 import com.google.common.truth.Truth.assertThat
+import org.hamcrest.Matchers.allOf
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -109,7 +117,7 @@ class SafetyCenterFragmentTest {
             )
 
         runTest(createScData(entries = listOf(entry))) { _ ->
-            onView(withId(SettingsLibR.id.banner_container)).check(matches(isDisplayed()))
+            onView(withId(StatusBannerR.id.banner_container)).check(matches(isDisplayed()))
 
             onView(withText(mApplication.getString(R.string.security_header)))
                 .check(matches(isDisplayed()))
@@ -384,12 +392,226 @@ class SafetyCenterFragmentTest {
         }
     }
 
+    // --- Tests for Issues Banner Group ---
+    @Test
+    fun issuesBannerGroup_whenNoIssues_isHidden() {
+        runTest(EMPTY_SC_DATA) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.isVisible).isFalse()
+        }
+    }
+
+    @Test
+    fun issuesBannerGroup_withOnlyDismissedIssues_isHidden() {
+        val dismissedIssue = createIssue(id = "dismissedIssue", sourceIds = setOf("any"))
+        runTest(createScData(dismissedIssues = listOf(dismissedIssue))) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.isVisible).isFalse()
+        }
+    }
+
+    @Test
+    fun issuesBannerGroup_withOneActiveIssue_isVisibleAndShowsBannerDetails() {
+        val action1 = createIssueAction(id = "action1", label = "Primary Button")
+        val action2 = createIssueAction(id = "action2", label = "Secondary Button")
+        val activeIssue =
+            createIssue(
+                id = "activeIssue",
+                title = "Active Issue Title",
+                summary = "Active Issue Summary",
+                actions = listOf(action1, action2),
+                sourceIds = setOf("any"),
+            )
+        runTest(createScData(activeIssues = listOf(activeIssue))) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.isVisible).isTrue()
+            assertThat(bannerGroup?.preferenceCount).isEqualTo(1)
+
+            val banner = bannerGroup?.findPreference<BannerMessagePreference>(activeIssue.id)
+            assertThat(banner).isNotNull()
+            assertThat(banner?.title.toString()).isEqualTo(activeIssue.title)
+            assertThat(banner?.summary.toString()).isEqualTo(activeIssue.summary)
+            onView(withText(activeIssue.title.toString())).check(matches(isDisplayed()))
+            onView(withText(activeIssue.summary.toString())).check(matches(isDisplayed()))
+            onView(withId(BannerR.id.banner_dismiss_btn)).check(matches(isDisplayed()))
+            onView(withId(BannerR.id.banner_positive_btn))
+                .check(matches(allOf(isDisplayed(), withText(action1.label.toString()))))
+            onView(withId(BannerR.id.banner_negative_btn))
+                .check(matches(allOf(isDisplayed(), withText(action2.label.toString()))))
+        }
+    }
+
+    @Test
+    fun issuesBannerGroup_clickDismissNoConfirmation_removesIssue() {
+        val activeIssue =
+            createIssue(
+                id = "dismissIssueWithoutConfirm",
+                title = "Dismiss Issue Without Confirm",
+                sourceIds = setOf("any"),
+                isDismissible = true,
+                shouldConfirmDismissal = false,
+            )
+        runTest(createScData(activeIssues = listOf(activeIssue))) { fragment ->
+            onView(allOf(withId(BannerR.id.banner_dismiss_btn), isDisplayed())).perform(click())
+            ShadowLooper.idleMainLooper()
+
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.isVisible).isFalse()
+        }
+    }
+
+    @Test
+    fun issuesBannerGroup_clickDismissWithConfirmation_removesIssue() {
+        val activeIssue =
+            createIssue(
+                id = "dismissIssueWithConfirmation",
+                title = "Dismiss Issue With Confirmation",
+                sourceIds = setOf("any"),
+                isDismissible = true,
+                shouldConfirmDismissal = true,
+            )
+        runTest(createScData(activeIssues = listOf(activeIssue))) { fragment ->
+            onView(allOf(withId(BannerR.id.banner_dismiss_btn), isDisplayed())).perform(click())
+            ShadowLooper.idleMainLooper()
+
+            onView(withText(R.string.safety_center_issue_card_dismiss_confirmation_title))
+                .inRoot(isDialog())
+                .check(matches(isDisplayed()))
+
+            onView(withText(R.string.dismiss)).inRoot(isDialog()).perform(click())
+            ShadowLooper.idleMainLooper()
+
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.isVisible).isFalse()
+        }
+    }
+
+    @Test
+    fun issuesBannerGroup_clickPrimaryActionNoConfirmation_resolvesIssue() {
+        val action =
+            createIssueAction(
+                id = "primaryActionWithoutConfirmation",
+                label = "Resolve",
+                hasConfirmation = false,
+                willResolve = true,
+            )
+        val activeIssue =
+            createIssue(
+                id = "primaryActionWithoutConfirmationIssue",
+                title = "Primary Action Without Confirmation Issue",
+                actions = listOf(action),
+                sourceIds = setOf("any"),
+            )
+
+        runTest(createScData(activeIssues = listOf(activeIssue))) { fragment ->
+            onView(allOf(withId(BannerR.id.banner_positive_btn), withText(action.label.toString())))
+                .perform(click())
+            ShadowLooper.idleMainLooper()
+
+            // Manually update the data to simulate the issue being resolved
+            shadowSafetyCenterManager.setSafetyCenterData(EMPTY_SC_DATA)
+            ShadowLooper.idleMainLooper()
+
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.isVisible).isFalse()
+        }
+    }
+
+    @Test
+    fun issuesBannerGroup_clickPrimaryActionWithConfirmation_resolvesIssue() {
+        val action =
+            createIssueAction(
+                id = "primaryActionWithConfirmation",
+                label = "Resolve",
+                hasConfirmation = true,
+                willResolve = true,
+            )
+        val activeIssue =
+            createIssue(
+                id = "primaryActionWithConfirmationIssue",
+                title = "Primary Action With Confirmation Issue",
+                actions = listOf(action),
+                sourceIds = setOf("any"),
+            )
+
+        runTest(createScData(activeIssues = listOf(activeIssue))) { fragment ->
+            onView(allOf(withId(BannerR.id.banner_positive_btn), withText(action.label.toString())))
+                .perform(click())
+            ShadowLooper.idleMainLooper()
+
+            val expectedDetails = action.confirmationDialogDetails!!
+            onView(withText(expectedDetails.title.toString()))
+                .inRoot(isDialog())
+                .check(matches(isDisplayed()))
+
+            onView(withText(expectedDetails.acceptButtonText.toString()))
+                .inRoot(isDialog())
+                .perform(click())
+            ShadowLooper.idleMainLooper()
+
+            // Manually update the data to simulate the issue being resolved
+            shadowSafetyCenterManager.setSafetyCenterData(EMPTY_SC_DATA)
+            ShadowLooper.idleMainLooper()
+
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.isVisible).isFalse()
+        }
+    }
+
+    @Test
+    fun issuesBannerGroup_withMultipleIssues_isCollapsedAndCanExpand() {
+        val issue1 = createIssue(id = "issue1", title = "Issue 1", sourceIds = setOf("any"))
+        val issue2 = createIssue(id = "issue2", title = "Issue 2", sourceIds = setOf("any"))
+        val issue3 = createIssue(id = "issue3", title = "Issue 3", sourceIds = setOf("any"))
+        runTest(createScData(activeIssues = listOf(issue1, issue2, issue3))) { fragment ->
+            val bannerGroup =
+                fragment.findPreference<BannerMessagePreferenceGroup>(SAFETY_ISSUES_BANNER_KEY)
+            assertThat(bannerGroup?.isVisible).isTrue()
+            // 3 active issues, 1 expand preference, 1 collapse preference
+            assertThat(bannerGroup?.preferenceCount).isEqualTo(5)
+
+            val banner1 = bannerGroup?.findPreference<BannerMessagePreference>("issue1")
+            val banner2 = bannerGroup?.findPreference<BannerMessagePreference>("issue2")
+            val banner3 = bannerGroup?.findPreference<BannerMessagePreference>("issue3")
+
+            // Initially collapsed
+            assertThat(banner1?.isVisible).isTrue()
+            assertThat(banner2?.isVisible).isFalse()
+            assertThat(banner3?.isVisible).isFalse()
+
+            val expandButtonText =
+                mApplication.getString(R.string.safety_center_issues_banner_group_expandable_title)
+            onView(allOf(withId(ButtonR.id.settingslib_number_title), withText(expandButtonText)))
+                .check(matches(isDisplayed()))
+            onView(allOf(withId(ButtonR.id.settingslib_number_count), withText("2")))
+                .check(matches(isDisplayed()))
+
+            // Click expand
+            onView(withId(ButtonR.id.settingslib_number_button))
+                .perform(scrollTo())
+                .perform(click())
+            ShadowLooper.idleMainLooper()
+
+            assertThat(banner1?.isVisible).isTrue()
+            assertThat(banner2?.isVisible).isTrue()
+            assertThat(banner3?.isVisible).isTrue()
+        }
+    }
+
     companion object {
         private const val DEVICE_UNLOCK_KEY = "device_unlock_subpage"
         private const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
         private const val ANDROID_LOCK_SCREEN_SOURCE_ID = "AndroidLockScreen"
         private const val ANDROID_HEALTH_CONNECT_SOURCE_ID = "AndroidHealthConnect"
         private const val ANDROID_A11Y_SOURCES_ID = "AndroidAccessibility"
+        private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
         private val DEFAULT_DEVICE_UNLOCK_SUMMARY_RES =
             R.string.device_unlock_subpage_default_summary
         private val DEFAULT_PRIVACY_CONTROLS_SUMMARY_RES = R.string.privacy_sources_summary
