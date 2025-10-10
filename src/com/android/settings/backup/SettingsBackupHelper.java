@@ -82,9 +82,7 @@ public class SettingsBackupHelper extends BackupAgentHelper {
             final UserAspectRatioBackupHelper userAspectRatioBackupHelper =
                     new UserAspectRatioBackupHelper(this, AppGlobals.getPackageManager(),
                             getBackupRestoreEventLogger());
-            if (com.android.window.flags.Flags.backupAndRestoreForUserAspectRatioSettings()) {
-                addHelper(USER_ASPECT_RATIO_BACKUP_HELPER, userAspectRatioBackupHelper);
-            }
+            addHelper(USER_ASPECT_RATIO_BACKUP_HELPER, userAspectRatioBackupHelper);
         }
 
         if (Flags.threeFingerTapAppLaunch()) {
