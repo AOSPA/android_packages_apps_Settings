@@ -35,6 +35,7 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 import org.robolectric.Robolectric;
 
 import java.security.NoSuchAlgorithmException;
+import java.time.Duration;
 
 public final class TestUtils {
 
@@ -44,7 +45,7 @@ public final class TestUtils {
             new ComponentName(PACKAGE_NAME, SERVICE_NAME);
     public static final int VALID_REMAINING_ATTEMPTS = 5;
     public static final int NO_MORE_REMAINING_ATTEMPTS = 0;
-    public static final int TIMEOUT_MS = 10000;
+    public static final Duration TIMEOUT = Duration.ofSeconds(10);
     public static final RemoteLockscreenValidationResult GUESS_VALID_RESULT =
             new RemoteLockscreenValidationResult.Builder()
                     .setResultCode(RemoteLockscreenValidationResult.RESULT_GUESS_VALID)
@@ -56,7 +57,7 @@ public final class TestUtils {
     public static final RemoteLockscreenValidationResult LOCKOUT_RESULT =
             new RemoteLockscreenValidationResult.Builder()
                     .setResultCode(RemoteLockscreenValidationResult.RESULT_LOCKOUT)
-                    .setTimeoutMillis(TIMEOUT_MS)
+                    .setTimeoutMillis(TIMEOUT.toMillis())
                     .build();
     public static final RemoteLockscreenValidationResult NO_REMAINING_ATTEMPTS_RESULT =
             new RemoteLockscreenValidationResult.Builder()

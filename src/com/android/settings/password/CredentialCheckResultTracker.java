@@ -21,6 +21,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import java.time.Duration;
+
 /**
  * An invisible retained fragment to track lock check result.
  */
@@ -31,7 +33,7 @@ public class CredentialCheckResultTracker extends Fragment {
 
     private boolean mResultMatched;
     private Intent mResultData;
-    private int mResultTimeoutMs;
+    private Duration mResultTimeout;
     private int mResultEffectiveUserId;
 
     @Override
@@ -47,20 +49,25 @@ public class CredentialCheckResultTracker extends Fragment {
 
         mListener = listener;
         if (mListener != null && mHasResult) {
-            mListener.onCredentialChecked(mResultMatched, mResultData, mResultTimeoutMs,
+            mListener.onCredentialChecked(mResultMatched, mResultData, mResultTimeout,
                     mResultEffectiveUserId, false /* newResult */);
         }
     }
 
-    public void setResult(boolean matched, Intent intent, int timeoutMs, int effectiveUserId) {
+    /**
+     * Sets the result of a credential check. Notifies the listener, if configured, otherwise
+     * buffers the result until a listener is set. Subsequent calls overwrite the buffered result
+     * if a listener has not been set before then.
+     */
+    public void setResult(boolean matched, Intent intent, Duration timeout, int effectiveUserId) {
         mResultMatched = matched;
         mResultData = intent;
-        mResultTimeoutMs = timeoutMs;
+        mResultTimeout = timeout;
         mResultEffectiveUserId = effectiveUserId;
 
         mHasResult = true;
         if (mListener != null) {
-            mListener.onCredentialChecked(mResultMatched, mResultData, mResultTimeoutMs,
+            mListener.onCredentialChecked(mResultMatched, mResultData, mResultTimeout,
                     mResultEffectiveUserId, true /* newResult */);
             mHasResult = false;
         }
@@ -70,12 +77,12 @@ public class CredentialCheckResultTracker extends Fragment {
         mHasResult = false;
         mResultMatched = false;
         mResultData = null;
-        mResultTimeoutMs = 0;
+        mResultTimeout = Duration.ZERO;
         mResultEffectiveUserId = 0;
     }
 
     interface Listener {
-        public void onCredentialChecked(boolean matched, Intent intent, int timeoutMs,
+        void onCredentialChecked(boolean matched, Intent intent, Duration timeout,
                 int effectiveUserId, boolean newResult);
     }
 }
