@@ -5079,9 +5079,9 @@
     <string name="sticky_keys">Sticky keys</string>
     <!-- Summary text for the 'Sticky keys' preference sub-screen. [CHAR LIMIT=300] -->
     <string name="sticky_keys_summary">Press one key at a time for shortcuts instead of holding keys down together</string>
-    <!-- Title for a toggle switch for 'mouse' keys,  an accessibility setting that allows the mouse pointer to be controlled using certain keys on a physical keyboard if keyboard is connected. [CHAR LIMIT=35] -->
+    <!-- Title for a toggle switch for 'mouse' keys,  an accessibility setting that allows the mouse cursor to be controlled using certain keys on a physical keyboard if keyboard is connected. [CHAR LIMIT=35] -->
     <string name="mouse_keys">Mouse keys</string>
-    <!-- Title for a toggle switch for 'mouse' keys under mouse key main page,  an accessibility setting that allows the mouse pointer to be controlled using certain keys on a physical keyboard if keyboard is connected. [CHAR LIMIT=35] -->
+    <!-- Title for a toggle switch for 'mouse' keys under mouse key main page,  an accessibility setting that allows the mouse cursor to be controlled using certain keys on a physical keyboard if keyboard is connected. [CHAR LIMIT=35] -->
     <string name="mouse_keys_main_title">Use mouse keys</string>
     <!-- Title for the toggle button that turns on/off the mouse keys shortcut. [CHAR_LIMIT=NONE] -->
     <string name="accessibility_mouse_keys_shortcut_title">Mouse keys shortcut</string>
@@ -5119,10 +5119,10 @@
     <string name="mouse_scrolling_speed_make_faster_description">Make scrolling faster</string>
     <!-- Accessibility label for button next to a slider that makes mouse scrolling speed slower. [CHAR_LIMIT=NONE] -->
     <string name="mouse_scrolling_speed_make_slower_description">Make scrolling slower</string>
-    <!-- Accessibility label for button next to a slider that makes mouse pointer speed faster. [CHAR_LIMIT=NONE] -->
-    <string name="mouse_pointer_speed_make_faster_desc">Make pointer faster</string>
-    <!-- Accessibility label for button next to a slider that makes mouse pointer speed slower. [CHAR_LIMIT=NONE] -->
-    <string name="mouse_pointer_speed_make_slower_desc">Make pointer slower</string>
+    <!-- Accessibility label for button next to a slider that makes mouse cursor speed faster. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_pointer_speed_make_faster_desc">Make cursor faster</string>
+    <!-- Accessibility label for button next to a slider that makes mouse cursor speed slower. [CHAR_LIMIT=NONE] -->
+    <string name="mouse_pointer_speed_make_slower_desc">Make cursor slower</string>
     <!-- Title for the 'Swap buttons' preference switch, which swaps the left and right buttons of connected mice so that right click will be the primary action button and left clicking will be the secondary action, for example showing the context menu. [CHAR LIMIT=60] -->
     <string name="mouse_swap_primary_button">Swap primary mouse button</string>
     <!-- Summary text for the 'Swap buttons' preference switch indicating to users that when this switch is enabled, their left click will behave as though it is the right click (secondary action) and that the right click will be the primary action. [CHAR LIMIT=NONE] -->
@@ -5134,7 +5134,7 @@
     <!-- page title for Mouse key main page. [CHAR LIMIT=NONE] -->
     <string name="mouse_key_main_page_title">Mouse keys for <xliff:g id="keyboard name" example="my keyboard">%s</xliff:g></string>
     <!-- Summary text for Mouse keys directional image. [CHAR LIMIT=NONE] -->
-    <string name="mouse_keys_directional_summary">Use the \"<xliff:g id="directional_label" example="7,8,9,u,o,j,k,l">%s</xliff:g>\" keys to move the mouse pointer</string>
+    <string name="mouse_keys_directional_summary">Use the \"<xliff:g id="directional_label" example="7,8,9,u,o,j,k,l">%s</xliff:g>\" keys to move the mouse cursor</string>
     <!-- Summary text for Mouse keys click image. [CHAR LIMIT=NONE] -->
     <string name="mouse_keys_click_summary">Use the \"<xliff:g id="click_label" example="i">%s</xliff:g>\" key to click the primary mouse button</string>
     <!-- Summary text for Mouse keys press hold image. [CHAR LIMIT=NONE] -->
@@ -5169,9 +5169,9 @@
     <!-- Title for the button to trigger the 'mouse settings' page if connect with a mouse. [CHAR LIMIT=35] -->
     <string name="mouse_settings">Mouse</string>
     <!-- Summary text for mouse setting page. [CHAR LIMIT=35] -->
-    <string name="mouse_settings_summary">Pointer speed, button customization</string>
+    <string name="mouse_settings_summary">Cursor speed, button customization</string>
     <!-- Summary text for the 'trackpad settings' page. [CHAR LIMIT=100] -->
-    <string name="trackpad_settings_summary">Pointer speed, gestures</string>
+    <string name="trackpad_settings_summary">Cursor speed, gestures</string>
 
     <!-- Title text for 'Tap to click'. [CHAR LIMIT=35] -->
     <string name="trackpad_tap_to_click">Tap to click</string>
@@ -5191,45 +5191,45 @@
     <string name="trackpad_bottom_right_tap_title">Bottom-right click</string>
     <!-- Summary text for 'Bottom-right click', a setting that allows the user to right-click by pressing in the bottom-right corner of a touchpad [CHAR LIMIT=60] -->
     <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
-    <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
-    <string name="trackpad_pointer_speed">Pointer speed</string>
-    <!-- Description for the button that makes touchpad pointer speed faster. [CHAR_LIMIT=NONE] -->
-    <string name="trackpad_pointer_speed_make_faster_desc">Make pointer faster</string>
-    <!-- Description for the button that makes touchpad pointer speed slower. [CHAR_LIMIT=NONE] -->
-    <string name="trackpad_pointer_speed_make_slower_desc">Make pointer slower</string>
+    <!-- Title text for 'Cursor speed'. [CHAR LIMIT=35] -->
+    <string name="trackpad_pointer_speed">Cursor speed</string>
+    <!-- Description for the button that makes touchpad cursor speed faster. [CHAR_LIMIT=NONE] -->
+    <string name="trackpad_pointer_speed_make_faster_desc">Make cursor faster</string>
+    <!-- Description for the button that makes touchpad cursor speed slower. [CHAR_LIMIT=NONE] -->
+    <string name="trackpad_pointer_speed_make_slower_desc">Make cursor slower</string>
     <!-- Title text for 'Three finger tap' touchpad preference. This preference allows the user to select an action that will trigger when they tap three fingers on a touchpad. [CHAR LIMIT=60] -->
     <string name="three_finger_tap_preference_title">Use three-finger tap</string>
     <!-- Title for the 'Touchpad acceleration' preference switch, which dynamically adjusts cursor movement based on speed. [CHAR LIMIT=60] -->
     <string name="touchpad_acceleration_title">Touchpad acceleration</string>
     <!-- Summary text for the 'Touchpad acceleration' preference switch indicating to users that when this switch is enabled, faster movements with your fingers will move the cursor farther. [CHAR LIMIT=NONE] -->
     <string name="touchpad_acceleration_summary">Faster movements on your touchpad will move the cursor farther</string>
-    <!-- Title text for mouse pointer color. [CHAR LIMIT=35] -->
-    <string name="pointer_fill_style">Pointer color</string>
-    <!-- Content description for black pointer fill style. [CHAR LIMIT=60] -->
-    <string name="pointer_fill_style_black_button">Change pointer fill style to black</string>
-    <!-- Content description for green pointer fill style. [CHAR LIMIT=60] -->
-    <string name="pointer_fill_style_green_button">Change pointer fill style to green</string>
-    <!-- Content description for red pointer fill style. [CHAR LIMIT=60] -->
-    <string name="pointer_fill_style_red_button">Change pointer fill style to red</string>
-    <!-- Content description for pink pointer fill style. [CHAR LIMIT=60] -->
-    <string name="pointer_fill_style_pink_button">Change pointer fill style to pink</string>
-    <!-- Content description for blue pointer fill style. [CHAR LIMIT=60] -->
-    <string name="pointer_fill_style_blue_button">Change pointer fill style to blue</string>
-    <!-- Content description for purple pointer fill style. [CHAR LIMIT=60] -->
-    <string name="pointer_fill_style_purple_button">Change pointer fill style to purple</string>
-    <!-- Title text for mouse pointer stroke color. [CHAR LIMIT=35] -->
-    <string name="pointer_stroke_style">Pointer stroke color</string>
-    <!-- White value for pointer stroke style. [CHAR LIMIT=35] -->
+    <!-- Title text for mouse cursor color. [CHAR LIMIT=35] -->
+    <string name="pointer_fill_style">Cursor color</string>
+    <!-- Content description for black cursor fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_black_button">Change cursor fill style to black</string>
+    <!-- Content description for green cursor fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_green_button">Change cursor fill style to green</string>
+    <!-- Content description for red cursor fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_red_button">Change cursor fill style to red</string>
+    <!-- Content description for pink cursor fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_pink_button">Change cursor fill style to pink</string>
+    <!-- Content description for blue cursor fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_blue_button">Change cursor fill style to blue</string>
+    <!-- Content description for purple cursor fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_purple_button">Change cursor fill style to purple</string>
+    <!-- Title text for mouse cursor stroke color. [CHAR LIMIT=35] -->
+    <string name="pointer_stroke_style">Cursor stroke color</string>
+    <!-- White value for cursor stroke style. [CHAR LIMIT=35] -->
     <string name="pointer_stroke_style_name_white">White</string>
-    <!-- Black value pointer stroke style. [CHAR LIMIT=35] -->
+    <!-- Black value cursor stroke style. [CHAR LIMIT=35] -->
     <string name="pointer_stroke_style_name_black">Black</string>
-    <!-- None value for pointer stroke style. [CHAR LIMIT=35] -->
+    <!-- None value for cursor stroke style. [CHAR LIMIT=35] -->
     <string name="pointer_stroke_style_name_none">None</string>
     <!-- Title for the button to trigger the 'touch gesture' education. [CHAR LIMIT=35] -->
     <string name="trackpad_touch_gesture">Learn touchpad gestures</string>
     <!-- TODO(b/353947750): finalize this string and mark it translatable. -->
-    <!-- Notice displayed at the end of the touchpad settings page when the user has disabled system navigation gestures. "Pointer & touchpad accessibility" and "Use touchpad gestures" refer to other labels in Settings, and should be translated in exactly the same way. -->
-    <string name="trackpad_gestures_disabled_footer_text" translatable="false">Some settings are unavailable as touchpad gestures have been turned off. You can turn them on via Pointer &amp; touchpad accessibility > Use touchpad gestures</string>
+    <!-- Notice displayed at the end of the touchpad settings page when the user has disabled system navigation gestures. "Cursor & touchpad accessibility" and "Use touchpad gestures" refer to other labels in Settings, and should be translated in exactly the same way. -->
+    <string name="trackpad_gestures_disabled_footer_text" translatable="false">Some settings are unavailable as touchpad gestures have been turned off. You can turn them on via Cursor &amp; touchpad accessibility > Use touchpad gestures</string>
     <!-- Search keywords for "touchpad" -->
     <string name="keywords_touchpad">trackpad, track pad, mouse, cursor, scroll, swipe, right click, click, pointer</string>
     <!-- Search keywords for 'Bottom-right tap', the name of the touchpad setting that allows the user to click the bottom right corner of the touchpad for more options. -->
@@ -5387,15 +5387,15 @@
     <!-- Summary text for the 'Speech' preference. [CHAR LIMIT=45] -->
     <string name="speech_preference_summary">Control speech recognition and output</string>
 
-    <!-- On Languages & input settings screen, setting summary.  Setting for mouse pointer speed. [CHAR LIMIT=35] -->
-    <string name="pointer_speed">Pointer speed</string>
-    <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
+    <!-- On Languages & input settings screen, setting summary.  Setting for mouse cursor speed. [CHAR LIMIT=35] -->
+    <string name="pointer_speed">Cursor speed</string>
+    <!-- Setting for mouse cursor scale. [CHAR LIMIT=35] -->
     <string name="pointer_scale">Cursor size</string>
-    <!-- Content description for decreasing pointer scale. [CHAR LIMIT=35] -->
-    <string name="pointer_scale_decrease_content_description">Decrease pointer scale</string>
-    <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
-    <string name="pointer_scale_increase_content_description">Increase pointer scale</string>
-    <!-- Search keywords for pointer scale, including legacy Large Mouse Pointer. [CHAR LIMIT=NONE] -->
+    <!-- Content description for decreasing cursor scale. [CHAR LIMIT=35] -->
+    <string name="pointer_scale_decrease_content_description">Decrease cursor scale</string>
+    <!-- Setting for mouse cursor scale. [CHAR LIMIT=35] -->
+    <string name="pointer_scale_increase_content_description">Increase cursor scale</string>
+    <!-- Search keywords for cursor scale, including legacy Large Mouse Pointer. [CHAR LIMIT=NONE] -->
     <string name="pointer_scale_keywords">scale, size, Pointer Scale, Pointer Size, Large mouse pointer, Large, noticeable</string>
 
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to game controller devices. [CHAR LIMIT=40] -->
@@ -5553,12 +5553,12 @@
     <string name="accessibility_pointer_and_touchpad_title">Cursor &amp; touchpad accessibility</string>
     <!-- Summary for the accessibility pointer and touchpad page. [CHAR LIMIT=50] -->
     <string name="accessibility_pointer_and_touchpad_summary">Size, color, type</string>
-    <!-- Title for the accessibility pointer color customization page. [CHAR LIMIT=50] -->
+    <!-- Title for the accessibility cursor color customization page. [CHAR LIMIT=50] -->
     <string name="accessibility_pointer_color_customization_title">Cursor color</string>
     <!-- TODO(b/353947750): finalize the four strings below and mark them translatable. -->
-    <!-- Title for the cursor section of the accessibility pointer and touchpad page. -->
+    <!-- Title for the cursor section of the accessibility cursor and touchpad page. -->
     <string name="accessibility_pointer_title">Cursor</string>
-    <!-- Title for the touchpad section of the accessibility pointer and touchpad page. -->
+    <!-- Title for the touchpad section of the accessibility cursor and touchpad page. -->
     <string name="accessibility_touchpad_title">Touchpad</string>
     <!-- Title for a settings toggle that allows the user to enable or disable system gestures (3- or 4-finger swipes for going home, back, to the overview screen, or between apps) being made on a touchpad. -->
     <string name="accessibility_touchpad_system_gestures_enable_title">Use 3- or 4-finger gestures </string>
@@ -6145,7 +6145,7 @@
     </string>
     <!-- suffixed to click action texts "Double-tap to " -->
     <string name="accessibility_action_label_panel_slice">enter settings</string>
-    <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
+    <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad cursor stops moving. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_preference_title">Autoclick (Dwell timing)</string>
     <!-- Title for accessibility dwell timing footer. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_about_title">About autoclick (dwell timing)</string>
@@ -6458,17 +6458,17 @@
     <!-- Title for setting whether the Reduce Brightness activation state persists across reboots. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_persist_preference_title">Keep on after device restarts</string>
 
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
+    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad cursor stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <string name="accessibilty_autoclick_preference_subtitle_short_delay">{count, plural,
         =1      {Short ({time} second)}
         other   {Short ({time} seconds)}
         }</string>
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
+    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad cursor stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay">{count, plural,
         =1      {Medium ({time} second)}
         other   {Medium ({time} seconds)}
         }</string>
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
+    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad cursor stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <string name="accessibilty_autoclick_preference_subtitle_long_delay">{count, plural,
         =1      {Long ({time} second)}
         other   {Long ({time} seconds)}
