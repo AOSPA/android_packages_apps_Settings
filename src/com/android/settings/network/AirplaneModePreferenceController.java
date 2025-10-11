@@ -22,7 +22,6 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
@@ -147,9 +146,8 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         mAirplaneModePreference = screen.findPreference(getPreferenceKey());
     }
 
-    public static boolean isAvailable(Context context) {
-        return context.getResources().getBoolean(R.bool.config_show_toggle_airplane)
-                && !context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
+    private static boolean isAvailable(Context context) {
+        return AirplaneModeUtilKt.isAirplaneModeEligible(context);
     }
 
     @Override
@@ -177,13 +175,15 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public void onResume() {
-        try {
-            mIsSatelliteOn.set(
-                    mSatelliteRepository
-                            .requestIsSessionStarted(Executors.newSingleThreadExecutor())
-                            .get(2000, TimeUnit.MILLISECONDS));
-        } catch (ExecutionException | TimeoutException | InterruptedException e) {
-            Log.e(TAG, "Error to get satellite status : " + e);
+        if (isAvailable()) {
+            try {
+                mIsSatelliteOn.set(
+                        mSatelliteRepository
+                                .requestIsSessionStarted(Executors.newSingleThreadExecutor())
+                                .get(2000, TimeUnit.MILLISECONDS));
+            } catch (ExecutionException | TimeoutException | InterruptedException e) {
+                Log.e(TAG, "Error to get satellite status : " + e);
+            }
         }
     }
 
@@ -200,7 +200,6 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
             mAirplaneModeEnabler.close();
         }
     }
-
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_EXIT_ECM && isAvailable()) {

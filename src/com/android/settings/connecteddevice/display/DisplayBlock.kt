@@ -263,6 +263,13 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         z = if (value) 2f else 1f
     }
 
+    fun setArrowVisible(visible: Boolean) {
+        arrowButtons.forEach { (direction, buttonView) ->
+            val isMovable = arrowMovement.directionMapping[direction] ?: false
+            buttonView.visibility = if (isMovable && visible) VISIBLE else GONE
+        }
+    }
+
     // DisplayBlock bounds are bigger than the actual display wallpaper (+ padding) area. Sets
     // touch listener to specific view
     fun setTouchListener(listener: OnTouchListener?) {

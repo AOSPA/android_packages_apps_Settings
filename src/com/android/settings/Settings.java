@@ -15,6 +15,7 @@
  */
 package com.android.settings;
 
+import static android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS;
 import static android.provider.Settings.ACTION_PRIVACY_SETTINGS;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 import static android.service.notification.ZenModeConfig.MANUAL_RULE_ID;
@@ -53,6 +54,8 @@ import com.android.settings.emergency.EmergencyDashboardScreen;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.network.AdaptiveConnectivityScreen;
 import com.android.settings.network.AdaptiveConnectivitySettings;
+import com.android.settings.network.AirplaneModeSettingsScreen;
+import com.android.settings.network.AirplaneModeUtilKt;
 import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
@@ -176,8 +179,10 @@ public class Settings extends SettingsActivity {
     /** Activity for the notifications and quick settings panels settings. */
     public static class ShadeSettingsActivity extends SettingsActivity {
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+        public void onResume() {
+            super.onResume();
+            // Re-check availability, because a configuration change (e.g. switching screens)
+            // could've changed it.
             if (!ShadePanelsPreferenceController.isDualShadeAvailable(this)) {
                 finish();
             }
@@ -288,7 +293,7 @@ public class Settings extends SettingsActivity {
     }
     /** Activity for the Advanced security settings. */
     public static class SecurityAdvancedSettings extends SettingsActivity {
-        private static final String TAG = "SecurityAdvancedActivity";
+        private static final String TAG = "SecurityAdvancedSettings";
         @Override
         protected void onCreate(Bundle savedState) {
             super.onCreate(savedState);
@@ -505,7 +510,7 @@ public class Settings extends SettingsActivity {
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
 
-    /** Actviity to manage apps with {@link android.Manifest.permission#SCHEDULE_EXACT_ALARM} */
+    /** Activity to manage apps with {@link android.Manifest.permission#SCHEDULE_EXACT_ALARM} */
     public static class AlarmsAndRemindersActivity extends SettingsActivity {/* empty */ }
     /** App specific version of {@link AlarmsAndRemindersActivity} */
     public static class AlarmsAndRemindersAppActivity extends SettingsActivity {/* empty */ }
@@ -610,7 +615,7 @@ public class Settings extends SettingsActivity {
         }
     }
 
-    /** Actviity to manage apps with {@link android.Manifest.permission#RUN_USER_INITIATED_JOBS} */
+    /** Activity to manage apps with {@link android.Manifest.permission#RUN_USER_INITIATED_JOBS} */
     public static class LongBackgroundTasksActivity extends SettingsActivity { /* empty */ }
     /** App specific version of {@link LongBackgroundTasksActivity} */
     public static class LongBackgroundTasksAppActivity extends SettingsActivity { /* empty */ }
@@ -621,7 +626,28 @@ public class Settings extends SettingsActivity {
     public static class BugReportHandlerPickerActivity extends SettingsActivity { /* empty */ }
 
     // Top level categories for new IA
-    public static class NetworkDashboardActivity extends SettingsActivity {}
+    public static class NetworkDashboardActivity extends SettingsActivity {
+        private static final String TAG = "NetworkDashboardActivity";
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
+            if (TextUtils.equals(ACTION_AIRPLANE_MODE_SETTINGS, getIntent().getAction())
+                    && AirplaneModeUtilKt.isAirplaneModeEligible(this)
+                    && AirplaneModeUtilKt.hasPairedWatchForAirplaneModeSync(this)) {
+                try {
+                    startActivity(new Intent(this, AirplaneModeSettingsActivity.class));
+                    finish();
+                } catch (ActivityNotFoundException e) {
+                    Log.e(TAG, "Unable to open Airplane Settings", e);
+                }
+            }
+        }
+    }
     public static class ConnectedDeviceDashboardActivity extends SettingsActivity {}
     public static class PowerUsageSummaryActivity extends SettingsActivity { /* empty */ }
     public static class PowerUsageAdvancedActivity extends SettingsActivity { /* empty */ }
@@ -700,4 +726,31 @@ public class Settings extends SettingsActivity {
         }
     }
     public static class SafetyCenterActivity extends SettingsActivity { }
+
+    /** Activity for Network & Internet -> Airplane Mode. */
+    public static class AirplaneModeSettingsActivity extends CatalystSettingsActivity {
+        public AirplaneModeSettingsActivity() {
+            super(AirplaneModeSettingsScreen.KEY);
+        }
+        private static final String TAG = "AirplaneModeSettingsActivity";
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            if (isFinishing()) {
+                // Don't trampoline if already exiting this activity.
+                return;
+            }
+
+            // If there is no paired watch, open the Network settings instead where there is a
+            // toggle for Airplane mode.
+            if (!AirplaneModeUtilKt.hasPairedWatchForAirplaneModeSync(this)) {
+                try {
+                    startActivity(new Intent(this, NetworkDashboardActivity.class));
+                    finish();
+                } catch (ActivityNotFoundException e) {
+                    Log.e(TAG, "Unable to open Airplane Settings", e);
+                }
+            }
+        }
+    }
 }

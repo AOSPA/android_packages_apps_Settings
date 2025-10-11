@@ -31,6 +31,8 @@ import android.view.Display.DEFAULT_DISPLAY
 import android.view.Display.Mode
 import android.view.MotionEvent
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.ViewManager
 import android.widget.FrameLayout
@@ -39,6 +41,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.core.view.MotionEventBuilder
 import com.android.settings.R
 import com.android.settings.flags.FakeFeatureFlagsImpl
+import com.android.settings.flags.Flags
 import com.android.settings.flags.Flags.FLAG_SHOW_STACKED_MIRRORING_DISPLAY_CONNECTED_DISPLAY_SETTING
 import com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING
 import com.google.common.truth.Truth.assertThat
@@ -63,6 +66,7 @@ class DisplayTopologyPreferenceTest {
 
         featureFlags.setFlag(FLAG_SHOW_STACKED_MIRRORING_DISPLAY_CONNECTED_DISPLAY_SETTING, true)
         featureFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, false)
+        featureFlags.setFlag(Flags.FLAG_ENABLE_DISPLAY_BLOCK_ARROW_MOVEMENT_BUGFIX, true)
     }
 
     class TestInjector(context: Context, featureFlags: FakeFeatureFlagsImpl) :
@@ -258,6 +262,19 @@ class DisplayTopologyPreferenceTest {
     private fun assertSelected(block: DisplayBlock, expected: Boolean) {
         val vis = if (expected) View.VISIBLE else View.INVISIBLE
         assertThat(block.selectionMarkerView().visibility).isEqualTo(vis)
+    }
+
+    private fun assertArrowVisibility(
+        block: DisplayBlock,
+        up: Int,
+        down: Int,
+        left: Int,
+        right: Int,
+    ) {
+        assertThat(block.arrowButtons[Direction.UP]?.visibility).isEqualTo(up)
+        assertThat(block.arrowButtons[Direction.DOWN]?.visibility).isEqualTo(down)
+        assertThat(block.arrowButtons[Direction.LEFT]?.visibility).isEqualTo(left)
+        assertThat(block.arrowButtons[Direction.RIGHT]?.visibility).isEqualTo(right)
     }
 
     private fun setMirroringMode(enable: Boolean) {
@@ -978,6 +995,114 @@ class DisplayTopologyPreferenceTest {
         // Verify the block has not moved, as there's nothing to rearrange
         assertThat(block.x).isWithin(0.01f).of(originalX)
         assertThat(block.y).isWithin(0.01f).of(originalY)
+    }
+
+    @Test
+    fun tapInteraction_showsArrowsOnSecondTap() {
+        featureFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, true)
+        val (leftBlock, rightBlock) = setupPaneWithTwoDisplays()
+
+        // Initially no arrows are visible
+        assertArrowVisibility(leftBlock, up = GONE, down = GONE, left = GONE, right = GONE)
+        assertArrowVisibility(rightBlock, up = GONE, down = GONE, left = GONE, right = GONE)
+
+        // Tap on leftBlock to select, but arrows should still be hidden
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_DOWN).build()
+        )
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
+        )
+        assertSelected(leftBlock, true)
+        assertSelected(rightBlock, false)
+        assertArrowVisibility(leftBlock, up = GONE, down = GONE, left = GONE, right = GONE)
+
+        // Tap again, arrows should be visible for movable directions
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_DOWN).build()
+        )
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
+        )
+        assertSelected(leftBlock, true)
+        assertSelected(rightBlock, false)
+        // Blocks are set up side-by-side, show up and down arrows
+        assertArrowVisibility(leftBlock, up = VISIBLE, down = VISIBLE, left = GONE, right = GONE)
+        assertArrowVisibility(rightBlock, up = GONE, down = GONE, left = GONE, right = GONE)
+
+        // Tap on rightBlock to select, leftBlock arrows should be hidden and rightBlock arrows
+        // should not be shown
+        rightBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_DOWN).build()
+        )
+        rightBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
+        )
+        assertSelected(leftBlock, false)
+        assertSelected(rightBlock, true)
+        assertArrowVisibility(leftBlock, up = GONE, down = GONE, left = GONE, right = GONE)
+        assertArrowVisibility(rightBlock, up = GONE, down = GONE, left = GONE, right = GONE)
+    }
+
+    @Test
+    fun tapInteraction_tapArrowUp_movesBlockUp() {
+        featureFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, true)
+        val (leftBlock, _) = setupPaneWithTwoDisplays()
+        val originalY = leftBlock.y
+
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_DOWN).build()
+        )
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
+        )
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_DOWN).build()
+        )
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
+        )
+        leftBlock.arrowButtons.get(Direction.UP)?.performClick()
+
+        // Verify the block has moved up from its original position
+        assertThat(leftBlock.y).isLessThan(originalY)
+
+        // Verify the topology was updated correctly
+        val rootChildren = injector.topology!!.root!!.children
+        assertThat(rootChildren).hasSize(1)
+        val child = rootChildren[0]
+        assertThat(child.position).isEqualTo(POSITION_LEFT)
+        // The offset should now be smaller (moved up)
+        assertThat(child.offset).isLessThan(42f)
+    }
+
+    @Test
+    fun paneClick_hidesArrows() {
+        featureFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, true)
+        val (leftBlock, _) = setupPaneWithTwoDisplays()
+
+        // Tap twice to show arrows
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_DOWN).build()
+        )
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
+        )
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_DOWN).build()
+        )
+        leftBlock.dispatchEvent(
+            MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
+        )
+
+        // Verify arrows are visible
+        assertArrowVisibility(leftBlock, up = VISIBLE, down = VISIBLE, left = GONE, right = GONE)
+
+        // Perform a click on the pane background
+        preference.controller.paneContent.performClick()
+
+        // Verify arrows are now hidden
+        assertArrowVisibility(leftBlock, up = GONE, down = GONE, left = GONE, right = GONE)
     }
 
     private fun DisplayBlock.dispatchEvent(event: MotionEvent) {

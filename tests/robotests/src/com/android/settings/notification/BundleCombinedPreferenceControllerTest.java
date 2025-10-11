@@ -18,6 +18,12 @@ package com.android.settings.notification;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BUNDLES_ALWAYS_EXPAND;
 
+import static com.android.settings.notification.BundleCombinedPreferenceController.ALWAYS_EXPAND_KEY;
+import static com.android.settings.notification.BundleCombinedPreferenceController.ALWAYS_EXPAND_VALUE;
+import static com.android.settings.notification.BundleCombinedPreferenceController.AUTO_EXPAND_KEY;
+import static com.android.settings.notification.BundleCombinedPreferenceController.AUTO_EXPAND_VALUE;
+import static com.android.settings.notification.BundleCombinedPreferenceController.NEVER_EXPAND_KEY;
+import static com.android.settings.notification.BundleCombinedPreferenceController.NEVER_EXPAND_VALUE;
 import static com.android.settings.notification.BundleCombinedPreferenceController.OFF;
 import static com.android.settings.notification.BundleCombinedPreferenceController.ON;
 
@@ -46,6 +52,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreference;
 
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -82,7 +89,9 @@ public class BundleCombinedPreferenceControllerTest {
 
     private MainSwitchPreference mGlobalSwitch;
     private SwitchPreference mWorkSwitch;
-    private SwitchPreference mAlwaysExpandSwitch;
+    private SelectorWithWidgetPreference mExpandAlwaysPref;
+    private SelectorWithWidgetPreference mExpandAutoPref;
+    private SelectorWithWidgetPreference mExpandNeverPref;
     private CheckBoxPreference mPromoCheckbox, mNewsCheckbox, mSocialCheckbox, mRecsCheckbox;
     private PreferenceCategory mExcludedAppsPrefCategory;
 
@@ -101,10 +110,21 @@ public class BundleCombinedPreferenceControllerTest {
         when(mPrefCategory.findPreference(
                 BundleCombinedPreferenceController.WORK_PREF_KEY)).thenReturn(mWorkSwitch);
 
-        mAlwaysExpandSwitch = new SwitchPreference(mContext);
+        mExpandAlwaysPref = new SelectorWithWidgetPreference(mContext);
+        mExpandAlwaysPref.setKey(ALWAYS_EXPAND_KEY);
         when(mPrefCategory.findPreference(
                 BundleCombinedPreferenceController.ALWAYS_EXPAND_KEY)).thenReturn(
-                mAlwaysExpandSwitch);
+                mExpandAlwaysPref);
+        mExpandAutoPref = new SelectorWithWidgetPreference(mContext);
+        mExpandAutoPref.setKey(AUTO_EXPAND_KEY);
+        when(mPrefCategory.findPreference(
+                BundleCombinedPreferenceController.AUTO_EXPAND_KEY)).thenReturn(
+                mExpandAutoPref);
+        mExpandNeverPref = new SelectorWithWidgetPreference(mContext);
+        mExpandNeverPref.setKey(NEVER_EXPAND_KEY);
+        when(mPrefCategory.findPreference(
+                BundleCombinedPreferenceController.NEVER_EXPAND_KEY)).thenReturn(
+                mExpandNeverPref);
 
         when(mPrefCategory.findPreference(
                 BundleCombinedPreferenceController.TYPE_CATEGORY_KEY)).thenReturn(
@@ -215,7 +235,9 @@ public class BundleCombinedPreferenceControllerTest {
         assertThat(mGlobalSwitch.isChecked()).isFalse();
         assertThat(mWorkSwitch.isVisible()).isFalse();
         verify(mTypesPrefCategory).setVisible(false);
-        assertThat(mAlwaysExpandSwitch.isVisible()).isFalse();
+        assertThat(mExpandAlwaysPref.isVisible()).isFalse();
+        assertThat(mExpandAutoPref.isVisible()).isFalse();
+        assertThat(mExpandNeverPref.isVisible()).isFalse();
     }
 
     @Test
@@ -239,7 +261,9 @@ public class BundleCombinedPreferenceControllerTest {
         assertThat(mWorkSwitch.isVisible()).isFalse();
         verify(mTypesPrefCategory).setVisible(false);
         assertThat(mExcludedAppsPrefCategory.isVisible()).isFalse();
-        assertThat(mAlwaysExpandSwitch.isVisible()).isFalse();
+        assertThat(mExpandAlwaysPref.isVisible()).isFalse();
+        assertThat(mExpandAutoPref.isVisible()).isFalse();
+        assertThat(mExpandNeverPref.isVisible()).isFalse();
     }
 
     @Test
@@ -264,7 +288,9 @@ public class BundleCombinedPreferenceControllerTest {
         assertThat(mRecsCheckbox.isChecked()).isFalse();
         assertThat(mSocialCheckbox.isChecked()).isFalse();
         assertThat(mExcludedAppsPrefCategory.isVisible()).isTrue();
-        assertThat(mAlwaysExpandSwitch.isVisible()).isTrue();
+        assertThat(mExpandAlwaysPref.isVisible()).isTrue();
+        assertThat(mExpandAutoPref.isVisible()).isTrue();
+        assertThat(mExpandNeverPref.isVisible()).isTrue();
     }
 
     @Test
@@ -325,50 +351,78 @@ public class BundleCombinedPreferenceControllerTest {
 
     @Test
     @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
-    public void alwaysExpandSwitch_reflectsSettings() {
+    public void expansionSettings_reflectsSettings() {
         when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(true);
         when(mBackend.getAllowedBundleTypes()).thenReturn(Set.of(Adjustment.TYPE_SOCIAL_MEDIA));
         mController.updatePrefValues();
+        assertThat(mExpandAlwaysPref.isVisible()).isTrue();
+        assertThat(mExpandAutoPref.isVisible()).isTrue();
+        assertThat(mExpandNeverPref.isVisible()).isTrue();
 
         // Always expand setting is true
         Settings.Secure.putInt(mContext.getContentResolver(),
                 NOTIFICATION_BUNDLES_ALWAYS_EXPAND,
-                ON);
+                ALWAYS_EXPAND_VALUE);
         mController.updatePrefValues();
-        assertThat(mAlwaysExpandSwitch.isVisible()).isTrue();
-        assertThat(mAlwaysExpandSwitch.isChecked()).isTrue();
+        assertThat(mExpandAlwaysPref.isChecked()).isTrue();
+        assertThat(mExpandAutoPref.isChecked()).isFalse();
+        assertThat(mExpandNeverPref.isChecked()).isFalse();
 
-        // Always expand setting is false
+        // Auto expand is true
         Settings.Secure.putInt(mContext.getContentResolver(),
                 NOTIFICATION_BUNDLES_ALWAYS_EXPAND,
-                OFF);
+                AUTO_EXPAND_VALUE);
         mController.updatePrefValues();
-        assertThat(mAlwaysExpandSwitch.isVisible()).isTrue();
-        assertThat(mAlwaysExpandSwitch.isChecked()).isFalse();
+        assertThat(mExpandAutoPref.isChecked()).isTrue();
+        assertThat(mExpandAlwaysPref.isChecked()).isFalse();
+        assertThat(mExpandNeverPref.isChecked()).isFalse();
+
+        // Never expand is true
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUNDLES_ALWAYS_EXPAND,
+                NEVER_EXPAND_VALUE);
+        mController.updatePrefValues();
+        assertThat(mExpandNeverPref.isChecked()).isTrue();
+        assertThat(mExpandAlwaysPref.isChecked()).isFalse();
+        assertThat(mExpandAutoPref.isChecked()).isFalse();
     }
 
     @Test
     @EnableFlags(Flags.FLAG_NOTIFICATION_CLASSIFICATION_UI)
-    public void toggleAlwaysExpandSwitch_updatesSetting() {
+    public void toggleExpansionSettings_updatesSetting() {
         Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUNDLES_ALWAYS_EXPAND,
-                OFF);
+                AUTO_EXPAND_VALUE);
         when(mBackend.isNotificationBundlingEnabled(anyInt())).thenReturn(true);
         mController.updatePrefValues();
 
-        // Toggle on
-        mAlwaysExpandSwitch.getOnPreferenceChangeListener().onPreferenceChange(
-                mAlwaysExpandSwitch, true);
+        // Toggle always
+        mExpandAlwaysPref.onClick();
+        assertThat(mExpandAlwaysPref.isChecked()).isTrue();
+        assertThat(mExpandAutoPref.isChecked()).isFalse();
+        assertThat(mExpandNeverPref.isChecked()).isFalse();
         // Check that the secure setting was updated
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUNDLES_ALWAYS_EXPAND, -1))
-                .isEqualTo(ON);
+                NOTIFICATION_BUNDLES_ALWAYS_EXPAND, AUTO_EXPAND_VALUE))
+                .isEqualTo(ALWAYS_EXPAND_VALUE);
 
-        // Toggle off
-        mAlwaysExpandSwitch.getOnPreferenceChangeListener().onPreferenceChange(
-                mAlwaysExpandSwitch, false);
+        // Toggle never
+        mExpandNeverPref.onClick();
         // Check that the secure setting was updated
-        assertThat(android.provider.Settings.Secure.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUNDLES_ALWAYS_EXPAND, -1))
-                .isEqualTo(OFF);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                NOTIFICATION_BUNDLES_ALWAYS_EXPAND, AUTO_EXPAND_VALUE))
+                .isEqualTo(NEVER_EXPAND_VALUE);
+        assertThat(mExpandNeverPref.isChecked()).isTrue();
+        assertThat(mExpandAlwaysPref.isChecked()).isFalse();
+        assertThat(mExpandAutoPref.isChecked()).isFalse();
+
+        // Toggle auto
+        mExpandAutoPref.onClick();
+        // Check that the secure setting was updated
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                NOTIFICATION_BUNDLES_ALWAYS_EXPAND, AUTO_EXPAND_VALUE))
+                .isEqualTo(AUTO_EXPAND_VALUE);
+        assertThat(mExpandAutoPref.isChecked()).isTrue();
+        assertThat(mExpandAlwaysPref.isChecked()).isFalse();
+        assertThat(mExpandNeverPref.isChecked()).isFalse();
     }
 }

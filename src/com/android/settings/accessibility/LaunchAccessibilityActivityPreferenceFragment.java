@@ -129,23 +129,37 @@ public class LaunchAccessibilityActivityPreferenceFragment extends DashboardFrag
 
     @Nullable
     @Override
-    public String getPreferenceScreenBindingKey(
-            @NonNull Context context) {
+    public String getPreferenceScreenBindingKey(@NonNull Context context) {
         return A11yActivityScreen.KEY;
     }
 
     @Nullable
     @Override
-    public Bundle getPreferenceScreenBindingArgs(
-            @NonNull Context context) {
-        return getFragmentArguments();
+    public Bundle getPreferenceScreenBindingArgs(@NonNull Context context) {
+        if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+            Bundle arguments = new Bundle();
+            arguments.putString(
+                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                    getFeatureComponentName().flattenToString()
+            );
+            return arguments;
+        } else {
+            return getFragmentArguments();
+        }
     }
 
     @NonNull
     private ComponentName getFeatureComponentName() {
         Bundle arguments = getFragmentArguments();
-        return arguments.getParcelable(
-                AccessibilitySettings.EXTRA_COMPONENT_NAME, ComponentName.class);
+        if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+            String componentNameString = Objects.requireNonNull(
+                    arguments.getString(AccessibilitySettings.EXTRA_COMPONENT_NAME)
+            );
+            return Objects.requireNonNull(ComponentName.unflattenFromString(componentNameString));
+        } else {
+            return arguments.getParcelable(
+                    AccessibilitySettings.EXTRA_COMPONENT_NAME, ComponentName.class);
+        }
     }
 
     /**

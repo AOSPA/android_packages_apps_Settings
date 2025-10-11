@@ -584,6 +584,14 @@
     <string name="preferred_locale_menu_remove">Remove</string>
     <!-- Move item to the top in the preferred locale menu [CHAR LIMIT=NONE]-->
     <string name="preferred_locale_menu_top">Move to top</string>
+    <!-- Content description for moving up item [CHAR LIMIT=NONE]-->
+    <string name="description_menu_move_locale_up">Move <xliff:g id="selected_language" example="English (United States)">%s</xliff:g> up</string>
+    <!-- Content description for moving down item [CHAR LIMIT=NONE]-->
+    <string name="description_menu_move_locale_down">Move <xliff:g id="selected_language" example="English (United States)">%s</xliff:g> down</string>
+    <!-- Content description for removing item [CHAR LIMIT=NONE]-->
+    <string name="description_menu_remove_locale">Remove <xliff:g id="selected_language" example="English (United States)">%s</xliff:g></string>
+    <!-- Content description for moving item to the top [CHAR LIMIT=NONE]-->
+    <string name="description_menu_move_locale_top">Move <xliff:g id="selected_language" example="English (United States)">%s</xliff:g> to top</string>
     <!-- Label for an accessibility action that "3-dot" button of each language [CHAR LIMIT=20] -->
     <string name="action_label_menu_option">Edit system language list, <xliff:g id="selected_language" example="English (United States)">%s</xliff:g></string>
 
@@ -594,6 +602,10 @@
     <string name="keywords_temperature_page">weather, centigrade, degrees, temp, celsius, fahrenheit</string>
     <!-- Search keywords for the Measurement system page. [CHAR_LIMIT=NONE] -->
     <string name="keywords_measurement_system_page">metric, imperial, temperature, height, weight, distance, celsius, fahrenheit, pounds, kilograms, kg, mile, kilometer, inches, centimeters, meters, unit</string>
+    <!-- Search keywords for the Numbering system page. [CHAR_LIMIT=NONE] -->
+    <string name="keywords_numbering_system_page">digit, digits, number, numbers, numbering system</string>
+    <!-- Search keywords for the First day of week page. [CHAR_LIMIT=NONE] -->
+    <string name="keywords_first_day_of_week_page">sunday, monday, tuesday, wednesday, thursday, friday, saturday, first day</string>
     <!-- Language Settings keywords end -->
 
     <!-- Regional Preferences begin -->
@@ -9960,8 +9972,14 @@
     <string name="notification_app_level_bundle_title">Notification organizer</string>
     <string name="notification_app_level_bundle_subtext">Bundle and silence lower priority notifications</string>
     <string name="notification_bundle_manage_excluded_apps_title">Manage apps for notification organizer</string>
+    <!-- Label for radio button category about whether the system should autoexpand bundles -->
+    <string name="notification_bundle_expansion_category_title">Bundle expansion</string>
+    <!-- Label for switch enabling notification bundles to let the system choose when they are expanded -->
+    <string name="notification_bundle_expand_auto_title">Automatic</string>
     <!-- Label for switch enabling notification bundles to always show as expanded -->
-    <string name="notification_bundle_expand_always_title">Always expand bundles</string>
+    <string name="notification_bundle_expand_always_title">Always expand</string>
+    <!-- Label for switch enabling notification bundles to never show as expanded -->
+    <string name="notification_bundle_expand_never_title">Never expand</string>
 
     <!-- Label for switch enabling notification adjustments (notification organizer, summaries) for work profile -->
     <string name="notification_adjustment_work_switch_title">Apply to work profile apps</string>
@@ -13382,6 +13400,10 @@
     <string name="title_satellite_dialog_for_sim_restriction">Can\u2019t add a SIM</string>
     <!-- Description for showing a dialog to notify user sim restriction.  [CHAR LIMIT=NONE] -->
     <string name="description_satellite_dialog_for_sim_restriction">End the satellite connection before you add a SIM</string>
+
+    <!-- Strings for Airplane mode settings activity -->
+    <!-- Description about the airplane mode sync feature.  [CHAR LIMIT=NONE] -->
+    <string name="airplane_mode_sync_description">When connected by Bluetooth, Airplane mode will sync across the supported devices such as phone and watch</string>
 
     <!-- Title for Apn settings in mobile network settings [CHAR LIMIT=60] -->
     <string name="mobile_network_apn_title">Access Point Names</string>

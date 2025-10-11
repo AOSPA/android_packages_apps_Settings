@@ -24,7 +24,6 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
-import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
 import com.android.settings.system.ShadePanelsPreferenceController.Companion.setDualShadeEnabled
 import com.android.systemui.Flags
 import com.google.common.truth.Truth.assertThat
@@ -40,8 +39,7 @@ import org.robolectric.shadows.ShadowDisplayManager
 @Config(shadows = [ShadowDisplayManager::class])
 class ShadePanelsPreferenceControllerTest {
 
-    @get:Rule
-    val setFlagsRule = SetFlagsRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     private lateinit var context: Context
     private lateinit var controller: ShadePanelsPreferenceController
@@ -59,7 +57,7 @@ class ShadePanelsPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SCENE_CONTAINER)
+    @EnableFlags(Flags.FLAG_SCENE_CONTAINER, Flags.FLAG_DUAL_SHADE)
     @Config(qualifiers = "w360dp-h640dp")
     fun getAvailabilityStatus_sceneContainerEnabled_onPhone_isAvailable() {
         assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE)
@@ -74,22 +72,30 @@ class ShadePanelsPreferenceControllerTest {
 
     @Test
     @EnableFlags(Flags.FLAG_SCENE_CONTAINER)
+    @DisableFlags(Flags.FLAG_DUAL_SHADE)
+    @Config(qualifiers = "w360dp-h640dp")
+    fun getAvailabilityStatus_sceneContainerEnabledDualShadeDisabled_onPhone_isConditionallyUnavailable() {
+        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_SCENE_CONTAINER, Flags.FLAG_DUAL_SHADE)
     @Config(qualifiers = "w800dp-h600dp")
-    fun getAvailabilityStatus_sceneContainerEnabled_onFoldable_isAvailable() {
+    fun getAvailabilityStatus_sceneContainerEnabled_onFoldable_isConditionallyUnavailable() {
         ShadowDisplayManager.addDisplay("w360dp-h640dp") // Emulate the front display
 
-        assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE)
+        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SCENE_CONTAINER)
+    @EnableFlags(Flags.FLAG_SCENE_CONTAINER, Flags.FLAG_DUAL_SHADE)
     @Config(qualifiers = "w1200dp-h800dp")
-    fun getAvailabilityStatus_sceneContainerEnabled_onTablet_isUnsupportedOnDevice() {
-        assertThat(controller.availabilityStatus).isEqualTo(UNSUPPORTED_ON_DEVICE)
+    fun getAvailabilityStatus_sceneContainerEnabled_onTablet_isConditionallyUnavailable() {
+        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SCENE_CONTAINER)
+    @EnableFlags(Flags.FLAG_SCENE_CONTAINER, Flags.FLAG_DUAL_SHADE)
     @Config(qualifiers = "w360dp-h640dp")
     fun getAvailabilityStatus_sceneContainerEnabled_onPhoneConnectedToTablet_isAvailable() {
         ShadowDisplayManager.addDisplay("w1200dp-h800dp")
@@ -98,7 +104,8 @@ class ShadePanelsPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_SCENE_CONTAINER)
+    @EnableFlags(Flags.FLAG_SCENE_CONTAINER)
+    @DisableFlags(Flags.FLAG_DUAL_SHADE)
     fun getSummary_dualShadeUnavailable_null() {
         context.contentResolver.setDualShadeEnabled(enable = true)
 
@@ -106,7 +113,7 @@ class ShadePanelsPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SCENE_CONTAINER)
+    @EnableFlags(Flags.FLAG_SCENE_CONTAINER, Flags.FLAG_DUAL_SHADE)
     fun getSummary_dualShadeEnabled_separate() {
         context.contentResolver.setDualShadeEnabled(enable = true)
 
@@ -114,7 +121,7 @@ class ShadePanelsPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SCENE_CONTAINER)
+    @EnableFlags(Flags.FLAG_SCENE_CONTAINER, Flags.FLAG_DUAL_SHADE)
     fun getSummary_dualShadeDisabled_combined() {
         context.contentResolver.setDualShadeEnabled(enable = false)
 
