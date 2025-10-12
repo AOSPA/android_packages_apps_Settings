@@ -23,7 +23,7 @@ import android.os.Looper
 import com.android.internal.annotations.VisibleForTesting
 import com.android.settingslib.devicestate.AndroidSecureSettings
 import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManager
-import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManagerProvider.createInstance
+import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManagerImpl
 import com.android.settingslib.devicestate.DeviceStateAutoRotateSettingUtils.isDeviceStateRotationLockEnabled
 import com.android.settingslib.devicestate.PostureDeviceStateConverter
 import com.android.settingslib.utils.ThreadUtils
@@ -64,7 +64,7 @@ object DeviceStateAutoRotateSettingManagerProvider {
         }
 
         return Optional.of(
-            createInstance(
+            DeviceStateAutoRotateSettingManagerImpl(
                 context,
                 ThreadUtils.getBackgroundExecutor(),
                 AndroidSecureSettings(context.contentResolver),

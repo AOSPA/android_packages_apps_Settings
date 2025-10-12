@@ -20,10 +20,18 @@ import android.os.PersistableBundle
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.telephony.CarrierConfigManager
+import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
+import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID
+import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
+import android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT
+import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ALL
 import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED
+import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED
+import android.telephony.satellite.SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_ENTITLEMENT
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceManager
+import androidx.preference.PreferenceScreen
 import androidx.test.annotation.UiThreadTest
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.telephony.flags.Flags
@@ -32,113 +40,93 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.ArgumentMatchers
-import org.mockito.Mockito
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.whenever
 
 @UiThreadTest
 class SatelliteSettingIndicatorControllerTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
-    private var mContext: Context? = null
+    private val mContext: Context = ApplicationProvider.getApplicationContext()
     private var mController: SatelliteSettingIndicatorController? = null
     private val mCarrierConfig = PersistableBundle()
 
     @Before
     fun setUp() {
-        mContext = ApplicationProvider.getApplicationContext()
         mController = SatelliteSettingIndicatorController(mContext, KEY)
     }
 
     @Test
-    fun updateHowItWorksContent_accountNotEligible_categoryIsDisabled() {
-        mCarrierConfig.putInt(
-            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-        )
+    fun updateState_autoModeAndAccEligibleDataAvailableAndSupported_correctString() {
+        setAutoModeCarrierConfig()
         mController?.init(TEST_SUB_ID, mCarrierConfig)
-        val preferenceManager = PreferenceManager(mContext!!)
-        val preferenceScreen = preferenceManager.createPreferenceScreen(mContext!!)
-        val category = spy(PreferenceCategory(mContext!!))
-        category.setKey(
-            SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS
-        )
-        category.title = "test title"
-        category.isEnabled = true
-        val preference = spy(Preference(mContext!!))
-        preference.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
-        preference.title = "preference"
-        preferenceScreen.addPreference(category)
-        preferenceScreen.addPreference(preference)
+        mController?.setCarrierRoamingNtnAvailability(true, true, SATELLITE_DATA_SUPPORT_ALL)
+        setRestrictionReasonContain(false)
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
 
-        mController?.updateHowItWorksContent(preferenceScreen, false)
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
 
-        Mockito.verify(category, Mockito.times(1)).isEnabled = false
-        Mockito.verify(category, Mockito.times(1)).shouldDisableView = true
+        assertThat(category.shouldDisableView).isFalse()
+        assertThat(preference1.isEnabled).isTrue()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "title_satellite_connection_guide")
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "summary_satellite_connection_guide")
+            )
+        assertThat(preference2.isEnabled).isTrue()
+        assertThat(preference2.title)
+            .isEqualTo(ResourcesUtils.getResourcesString(mContext, "title_supported_service"))
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_with_unconstrained_data",
+                )
+            )
     }
 
     @Test
-    fun updateHowItWorksContent_accountEligible_categoryIsEnabled() {
-        mCarrierConfig.putInt(
-            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-        )
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
-        val preferenceManager = PreferenceManager(mContext!!)
-        val preferenceScreen = preferenceManager.createPreferenceScreen(mContext!!)
-        val category = Mockito.spy<PreferenceCategory>(PreferenceCategory(mContext!!))
-        category.setKey(
-            SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS
-        )
-        category.title = "test title"
-        category.isEnabled = true
-        val preference = spy(Preference(mContext!!))
-        preference.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
-        preference.title = "preference"
-        preferenceScreen.addPreference(category)
-        preferenceScreen.addPreference(preference)
-
-        mController!!.updateHowItWorksContent(preferenceScreen, true)
-
-        Mockito.verify(category, Mockito.times(0)).isEnabled = false
-        Mockito.verify(category, Mockito.times(0)).shouldDisableView = true
-    }
-
-    @Test
-    fun updateHowItWorksContent_dataAvailable_summaryChanged() {
-        mCarrierConfig.putInt(
-            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-        )
+    fun updateState_autoModeAndAccEligibleDataAvailableAndConstrained_correctString() {
+        setAutoModeCarrierConfig()
         mController?.init(TEST_SUB_ID, mCarrierConfig)
         mController?.setCarrierRoamingNtnAvailability(
             true,
             true,
             SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED,
         )
-        val preferenceManager = PreferenceManager(mContext!!)
-        val preferenceScreen = preferenceManager.createPreferenceScreen(mContext!!)
-        val category = spy(PreferenceCategory(mContext!!))
-        category.setKey(
-            SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS
-        )
-        category.title = "test title"
-        category.isEnabled = true
-        val preference1 = spy(Preference(mContext!!))
-        val preference2 = Preference(mContext!!)
-        preference1.setKey(
-            SatelliteSettingIndicatorController.Companion.KEY_SATELLITE_CONNECTION_GUIDE
-        )
-        preference1.title = "preference"
-        preference2.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
-        preference2.title = "preference2"
+        setRestrictionReasonContain(false)
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
 
-        preferenceScreen.addPreference(category)
-        preferenceScreen.addPreference(preference1)
-        preferenceScreen.addPreference(preference2)
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
 
-        mController!!.updateHowItWorksContent(preferenceScreen, true)
-
+        assertThat(category.shouldDisableView).isFalse()
+        assertThat(preference1.isEnabled).isTrue()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "title_satellite_connection_guide")
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "summary_satellite_connection_guide")
+            )
+        assertThat(preference2.isEnabled).isTrue()
+        assertThat(preference2.title)
+            .isEqualTo(ResourcesUtils.getResourcesString(mContext, "title_supported_service"))
         assertThat(preference2.summary)
             .isEqualTo(
                 ResourcesUtils.getResourcesString(
@@ -149,68 +137,538 @@ class SatelliteSettingIndicatorControllerTest {
     }
 
     @Test
-    fun updateHowItWorksContent_ntnConnectIsManual_summaryChanged() {
-        mCarrierConfig.putInt(
-            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
-        )
+    fun updateState_autoModeAndAccIneligibleDataUnavailable_prefDisabledAndCorrectString() {
+        setAutoModeCarrierConfig()
         mController?.init(TEST_SUB_ID, mCarrierConfig)
-        val preferenceManager = PreferenceManager(mContext!!)
-        val preferenceScreen = preferenceManager.createPreferenceScreen(mContext!!)
-        val category = Mockito.spy<PreferenceCategory>(PreferenceCategory(mContext!!))
-        category.setKey(
-            SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS
+        mController?.setCarrierRoamingNtnAvailability(
+            true,
+            false,
+            SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED,
         )
-        category.title = "test title"
-        val preference1 = Mockito.spy<Preference>(Preference(mContext!!))
-        preference1.setKey(
-            SatelliteSettingIndicatorController.Companion.KEY_SATELLITE_CONNECTION_GUIDE
+        setRestrictionReasonContain(true)
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
+
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
+
+        assertThat(category.shouldDisableView).isTrue()
+        assertThat(preference1.isEnabled).isFalse()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "title_satellite_connection_guide")
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "summary_satellite_connection_guide")
+            )
+        assertThat(preference2.isEnabled).isFalse()
+        assertThat(preference2.title)
+            .isEqualTo(ResourcesUtils.getResourcesString(mContext, "title_supported_service"))
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_without_data_supported",
+                )
+            )
+    }
+
+    @Test
+    fun updateState_autoModeAndAccEligibleDataUnavailable_prefEnabledAndCorrectString() {
+        setAutoModeCarrierConfig()
+        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.setCarrierRoamingNtnAvailability(
+            true,
+            false,
+            SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED,
         )
-        preference1.title = "preference1"
-        val preference2 = Mockito.spy<Preference>(Preference(mContext!!))
-        preference2.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
-        preference2.title = "preference2"
-        preferenceScreen.addPreference(category)
-        preferenceScreen.addPreference(preference1)
-        preferenceScreen.addPreference(preference2)
+        setRestrictionReasonContain(false)
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
 
-        mController?.updateHowItWorksContent(preferenceScreen, false)
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
 
-        Mockito.verify(preference1).setSummary(ArgumentMatchers.any<CharSequence?>())
-        Mockito.verify(preference2).setSummary(ArgumentMatchers.any<CharSequence?>())
+        assertThat(category.shouldDisableView).isFalse()
+        assertThat(preference1.isEnabled).isTrue()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "title_satellite_connection_guide")
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "summary_satellite_connection_guide")
+            )
+        assertThat(preference2.isEnabled).isTrue()
+        assertThat(preference2.title)
+            .isEqualTo(ResourcesUtils.getResourcesString(mContext, "title_supported_service"))
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_without_data_supported",
+                )
+            )
+    }
+
+    @Test
+    fun updateState_manualModeAndSmsAvailble_prefEnabledAndCorrectString() {
+        setManualModeCarrierConfig()
+        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.setCarrierRoamingNtnAvailability(
+            true,
+            false,
+            SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED,
+        )
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
+
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
+
+        assertThat(category.shouldDisableView).isFalse()
+        assertThat(preference1.isEnabled).isTrue()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "title_satellite_connection_guide_for_manual_type",
+                )
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_satellite_connection_guide_for_manual_type",
+                )
+            )
+        assertThat(preference2.isEnabled).isTrue()
+        assertThat(preference2.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "title_supported_service_for_manual_type",
+                )
+            )
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_for_manual_type",
+                )
+            )
+    }
+
+    @Test
+    fun updateState_manualModeAndSmsUnAvailble_prefDisabledAndCorrectString() {
+        setManualModeCarrierConfig()
+        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.setCarrierRoamingNtnAvailability(
+            false,
+            false,
+            SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED,
+        )
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
+
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
+
+        assertThat(category.shouldDisableView).isTrue()
+        assertThat(preference1.isEnabled).isFalse()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "title_satellite_connection_guide_for_manual_type",
+                )
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_satellite_connection_guide_for_manual_type",
+                )
+            )
+        assertThat(preference2.isEnabled).isFalse()
+        assertThat(preference2.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "title_supported_service_for_manual_type",
+                )
+            )
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_for_manual_type",
+                )
+            )
     }
 
     @Test
     @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
-    fun updateHowItWorksContent_ntnConnectIsHybrid_summaryChanged() {
-        mCarrierConfig.putInt(
-            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID,
-        )
+    fun updateState_hybridModeAndAccNotEligibleSmsUnAvailble_preferenceDisabled() {
+        setHybridModeCarrierConfig()
         mController?.init(TEST_SUB_ID, mCarrierConfig)
-        val preferenceManager = PreferenceManager(mContext!!)
-        val preferenceScreen = preferenceManager.createPreferenceScreen(mContext!!)
-        val category = Mockito.spy<PreferenceCategory>(PreferenceCategory(mContext!!))
+        mController?.setCarrierRoamingNtnAvailability(
+            false,
+            false,
+            SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED,
+        )
+        setRestrictionReasonContain(true)
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
+
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
+
+        assertThat(category.shouldDisableView).isTrue()
+        assertThat(preference1.isEnabled).isFalse()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "title_satellite_connection_guide_for_manual_type",
+                )
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_satellite_connection_guide_for_manual_type",
+                )
+            )
+        assertThat(preference2.isEnabled).isFalse()
+        assertThat(preference2.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "title_supported_service_for_manual_type",
+                )
+            )
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_for_manual_type",
+                )
+            )
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
+    fun updateState_hybridModeAndAccNotEligibleSmsAvailbleDataUnavailable_prefEnabledAndCorrectString() {
+        setHybridModeCarrierConfig()
+        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.setCarrierRoamingNtnAvailability(
+            true,
+            false,
+            SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED,
+        )
+        setRestrictionReasonContain(true)
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
+
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
+
+        assertThat(category.shouldDisableView).isFalse()
+        assertThat(preference1.isEnabled).isTrue()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "title_satellite_connection_guide_for_manual_type",
+                )
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_satellite_connection_guide_for_manual_type",
+                )
+            )
+        assertThat(preference2.isEnabled).isTrue()
+        assertThat(preference2.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "title_supported_service_for_manual_type",
+                )
+            )
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_for_manual_type",
+                )
+            )
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
+    fun updateState_hybridModeAndAccEligibleDataUnavailable_prefEnabledAndCorrectString() {
+        setHybridModeCarrierConfig()
+        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.setCarrierRoamingNtnAvailability(
+            true,
+            false,
+            SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED,
+        )
+        setRestrictionReasonContain(false)
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
+
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
+
+        assertThat(category.shouldDisableView).isEqualTo(false)
+        assertThat(preference1.isEnabled).isTrue()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "title_satellite_connection_guide_for_manual_type",
+                )
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_satellite_connection_guide_for_manual_type",
+                )
+            )
+        assertThat(preference2.isEnabled).isTrue()
+        assertThat(preference2.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "title_supported_service_for_manual_type",
+                )
+            )
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_for_manual_type",
+                )
+            )
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
+    fun updateState_hybridModeAndAccEligibleAndDataAvailable_prefEnabledAndCorrectString() {
+        setHybridModeCarrierConfig()
+        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.setCarrierRoamingNtnAvailability(
+            true,
+            true,
+            SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED,
+        )
+        setRestrictionReasonContain(false)
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
+
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
+
+        assertThat(category.shouldDisableView).isFalse()
+        assertThat(preference1.isEnabled).isTrue()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "title_satellite_connection_guide")
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "summary_satellite_connection_guide")
+            )
+        assertThat(preference2.isEnabled).isTrue()
+        assertThat(preference2.title)
+            .isEqualTo(ResourcesUtils.getResourcesString(mContext, "title_supported_service"))
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_without_data_supported",
+                )
+            )
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
+    fun updateState_hybridModeAndAccEligibleAndDataAvailableDataConstrained_correctString() {
+        setHybridModeCarrierConfig()
+        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.setCarrierRoamingNtnAvailability(
+            true,
+            true,
+            SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED,
+        )
+        setRestrictionReasonContain(false)
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
+
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
+
+        assertThat(category.shouldDisableView).isFalse()
+        assertThat(preference1.isEnabled).isTrue()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "title_satellite_connection_guide")
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "summary_satellite_connection_guide")
+            )
+        assertThat(preference2.isEnabled).isTrue()
+        assertThat(preference2.title)
+            .isEqualTo(ResourcesUtils.getResourcesString(mContext, "title_supported_service"))
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_with_constrained_data",
+                )
+            )
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
+    fun updateState_hybridModeAndAccEligibleAndDataAvailableDataSupported_correctString() {
+        setHybridModeCarrierConfig()
+        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.setCarrierRoamingNtnAvailability(true, true, SATELLITE_DATA_SUPPORT_ALL)
+        setRestrictionReasonContain(false)
+        val preferenceManager = PreferenceManager(mContext)
+        val screen = preferenceManager.createPreferenceScreen(mContext)
+        val category = PreferenceCategory(mContext)
+        val preference1 = Preference(mContext)
+        val preference2 = Preference(mContext)
+        setPreferences(screen, category, preference1, preference2)
+
+        mController?.displayPreference(screen)
+        mController?.updateState(null)
+
+        assertThat(category.shouldDisableView).isFalse()
+        assertThat(preference1.isEnabled).isTrue()
+        assertThat(preference1.title)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "title_satellite_connection_guide")
+            )
+        assertThat(preference1.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "summary_satellite_connection_guide")
+            )
+        assertThat(preference2.isEnabled).isTrue()
+        assertThat(preference2.title)
+            .isEqualTo(ResourcesUtils.getResourcesString(mContext, "title_supported_service"))
+        assertThat(preference2.summary)
+            .isEqualTo(
+                ResourcesUtils.getResourcesString(
+                    mContext,
+                    "summary_supported_service_with_unconstrained_data",
+                )
+            )
+    }
+
+    private fun setPreferences(
+        screen: PreferenceScreen,
+        category: PreferenceCategory,
+        preference1: Preference,
+        preference2: Preference,
+    ) {
         category.setKey(
             SatelliteSettingIndicatorController.Companion.PREF_KEY_CATEGORY_HOW_IT_WORKS
         )
         category.title = "test title"
-        val preference1 = Mockito.spy<Preference>(Preference(mContext!!))
+
         preference1.setKey(
             SatelliteSettingIndicatorController.Companion.KEY_SATELLITE_CONNECTION_GUIDE
         )
         preference1.title = "preference1"
-        val preference2 = Mockito.spy<Preference>(Preference(mContext!!))
+
         preference2.setKey(SatelliteSettingIndicatorController.Companion.KEY_SUPPORTED_SERVICE)
         preference2.title = "preference2"
-        preferenceScreen.addPreference(category)
-        preferenceScreen.addPreference(preference1)
-        preferenceScreen.addPreference(preference2)
+        screen.addPreference(category)
+        category.addPreference(preference1)
+        category.addPreference(preference2)
+    }
 
-        mController?.updateHowItWorksContent(preferenceScreen, false)
+    private fun setHybridModeCarrierConfig() {
+        mCarrierConfig.putInt(
+            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+            CARRIER_ROAMING_NTN_CONNECT_HYBRID,
+        )
 
-        Mockito.verify(preference1).setSummary(ArgumentMatchers.any<CharSequence?>())
-        Mockito.verify(preference2).setSummary(ArgumentMatchers.any<CharSequence?>())
+        mCarrierConfig.putBoolean(
+            CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL,
+            true,
+        )
+    }
+
+    private fun setManualModeCarrierConfig() {
+        mCarrierConfig.putInt(
+            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+            CARRIER_ROAMING_NTN_CONNECT_MANUAL,
+        )
+    }
+
+    private fun setAutoModeCarrierConfig() {
+        mCarrierConfig.putInt(
+            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+            CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+        )
+    }
+
+    private fun setRestrictionReasonContain(isRestrictionReasonContain: Boolean) {
+        val result =
+            if (isRestrictionReasonContain)
+                setOf(SATELLITE_COMMUNICATION_RESTRICTION_REASON_ENTITLEMENT)
+            else emptySet()
+
+        val wrapper = spy(SatelliteCarrierSettingUtils.SatelliteManagerWrapper(mContext))
+        whenever(wrapper.getAttachRestrictionReasonsForCarrier(TEST_SUB_ID)).thenReturn(result)
+        SatelliteCarrierSettingUtils.sSatelliteManagerWrapper = wrapper
     }
 
     companion object {

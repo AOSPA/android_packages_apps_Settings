@@ -68,12 +68,18 @@ open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
     PreferenceLifecycleProvider {
 
     private val featureComponentName: ComponentName by lazy {
-        requireNotNull(
-            arguments.getParcelable(
-                AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                ComponentName::class.java,
+        if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+            val componentNameString =
+                requireNotNull(arguments.getString(AccessibilitySettings.EXTRA_COMPONENT_NAME))
+            requireNotNull(ComponentName.unflattenFromString(componentNameString))
+        } else {
+            requireNotNull(
+                arguments.getParcelable(
+                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                    ComponentName::class.java,
+                )
             )
-        )
+        }
     }
 
     private val accessibilityServiceInfo by lazy {
@@ -214,10 +220,17 @@ open class A11yServiceScreen(context: Context, override val arguments: Bundle) :
                     .forEach { a11yServiceInfo ->
                         emit(
                             Bundle(1).apply {
-                                putParcelable(
-                                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                                    a11yServiceInfo.componentName,
-                                )
+                                if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+                                    putString(
+                                        AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                                        a11yServiceInfo.componentName.flattenToString(),
+                                    )
+                                } else {
+                                    putParcelable(
+                                        AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                                        a11yServiceInfo.componentName,
+                                    )
+                                }
                             }
                         )
                     }

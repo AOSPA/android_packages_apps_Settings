@@ -34,6 +34,7 @@ import android.os.SystemConfigManager;
 import android.os.UserManager;
 import android.service.euicc.EuiccService;
 import android.telecom.DefaultDialerManager;
+import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
@@ -42,6 +43,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.SmsApplication;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
 
 import java.util.ArrayList;
@@ -157,6 +159,13 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         final String defaultDialer = DefaultDialerManager.getDefaultDialerApplication(mContext);
         if (!TextUtils.isEmpty(defaultDialer)) {
             keepEnabledPackages.add(defaultDialer);
+        }
+        if (Flags.keepSystemDialerEnabled()) {
+            final TelecomManager telecomManager = mContext.getSystemService(TelecomManager.class);
+            final String systemDialer = telecomManager.getSystemDialerPackage();
+            if (!TextUtils.isEmpty(systemDialer)) {
+                keepEnabledPackages.add(systemDialer);
+            }
         }
         final ComponentName defaultSms = SmsApplication.getDefaultSmsApplication(
                 mContext, true /* updateIfNeeded */);

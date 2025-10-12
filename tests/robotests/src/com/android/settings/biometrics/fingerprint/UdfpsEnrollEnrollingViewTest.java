@@ -39,7 +39,7 @@ import org.robolectric.annotation.LooperMode;
 
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
+@LooperMode(LooperMode.Mode.PAUSED)
 public class UdfpsEnrollEnrollingViewTest {
 
     private Context mThemeContext;

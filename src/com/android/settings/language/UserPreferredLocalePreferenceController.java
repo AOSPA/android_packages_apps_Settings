@@ -148,6 +148,21 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
                 } else if (i == (listSize - 1)) {
                     menuId = R.menu.preferred_locale_menu_top;
                 }
+                pref.setOnPostInflateListener((menu, preference) -> {
+                        for (int j = 0; j < menu.size(); j++) {
+                            int itemId = menu.getItem(j).getItemId();
+                            int descriptionId = R.string.description_menu_move_locale_up;
+                            if (itemId == R.id.move_down) {
+                                descriptionId = R.string.description_menu_move_locale_down;
+                            } else if (itemId == R.id.remove) {
+                                descriptionId = R.string.description_menu_remove_locale;
+                            } else if (itemId == R.id.move_top) {
+                                descriptionId = R.string.description_menu_move_locale_top;
+                            }
+                            menu.getItem(j).setContentDescription(mContext.getString(
+                                    descriptionId, localeName));
+                        }
+                });
                 pref.setMenuButtonContentDescription(
                         mContext.getString(R.string.action_label_menu_option,
                                 localeInfo.getFullNameNative()));
@@ -182,7 +197,7 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
                         localeInfoList.remove(position);
                         mUpdatedLocaleInfoList = localeInfoList;
                         if (localeInfo.isTranslated() && (position == 0 || Locale.getDefault()
-                            .equals(localeInfo.getLocale()))) {
+                                .equals(localeInfo.getLocale()))) {
                             LocaleStore.LocaleInfo defaultAfterChange =
                                     localeInfoList.stream().filter(
                                             first -> first.isTranslated()).findFirst().orElse(
@@ -211,12 +226,12 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
         // LocalePicker.getLocales() is the list before user reorders
         Locale defaultBeforeChange = LocalePicker.getLocales().get(0);
         LocaleStore.LocaleInfo defaultAfterChange = localeInfoList.stream()
-            .filter(i -> i.isTranslated()).findFirst().orElse(firstLocaleInfo);
+                .filter(i -> i.isTranslated()).findFirst().orElse(firstLocaleInfo);
         boolean isSelectedLocaleInfoTranslated = mSelectedLocaleInfo.isTranslated();
         boolean isSameDefaultInList = Locale.getDefault().equals(defaultAfterChange.getLocale());
         if (localeInfoList.size() == 2) {
             boolean allTranslated = localeInfoList.stream()
-                .allMatch(LocaleStore.LocaleInfo::isTranslated);
+                    .allMatch(LocaleStore.LocaleInfo::isTranslated);
             if (allTranslated) {
                 // All languages in the list are translated.
                 setViewModelData(defaultAfterChange, mSelectedLocaleInfo, mMenuItemId,
@@ -241,10 +256,10 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
             }
         } else {
             boolean allNotTranslated = localeInfoList.stream()
-                .noneMatch(LocaleStore.LocaleInfo::isTranslated);
+                    .noneMatch(LocaleStore.LocaleInfo::isTranslated);
             boolean isSystemDefaultChanged =
-                defaultBeforeChange != null && !defaultBeforeChange.equals(
-                    defaultAfterChange.getLocale());
+                    defaultBeforeChange != null && !defaultBeforeChange.equals(
+                            defaultAfterChange.getLocale());
             if (allNotTranslated) {
                 if (isSystemDefaultChanged) {
                     setViewModelData(defaultAfterChange, mSelectedLocaleInfo, mMenuItemId,
@@ -254,10 +269,11 @@ public class UserPreferredLocalePreferenceController extends BasePreferenceContr
                 }
             } else {
                 if (isSameDefaultInList && (
-                    isSelectedLocaleInfoTranslated ||
-                        (defaultBeforeChange.equals(mSelectedLocaleInfo.getLocale())
-                            && firstLocaleInfo.getLocale().equals(defaultAfterChange.getLocale()))
-                        || firstLocaleInfo.getLocale().equals(defaultBeforeChange))) {
+                        isSelectedLocaleInfoTranslated ||
+                                (defaultBeforeChange.equals(mSelectedLocaleInfo.getLocale())
+                                        && firstLocaleInfo.getLocale().equals(
+                                        defaultAfterChange.getLocale()))
+                                || firstLocaleInfo.getLocale().equals(defaultBeforeChange))) {
                     // Case 1: unavailable + supported 1 + supported 2,	Move supported 1 to top
                     // Case 2: supported + unavailable 1 + unavailable 2, Move supported to last
                     // Case 3: unavailable 1 + supported + unavailable 2, Move supported to top

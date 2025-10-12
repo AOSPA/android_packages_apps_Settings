@@ -2,13 +2,6 @@ package: "com.android.settings.flags"
 container: "system_ext"
 
 flag {
-  name: "rotation_connected_display_setting"
-  namespace: "display_manager"
-  description: "Allow changing rotation of the connected display."
-  bug: "294015706"
-}
-
-flag {
   name: "resolution_and_enable_connected_display_setting"
   namespace: "display_manager"
   description: "Allow enabling/disabling and changing resolution of the connected display."
@@ -78,6 +71,16 @@ flag {
     namespace: "display_manager"
     description: "Shows dialog to let user confirms if the resolution selected should be persisted"
     bug: "421018668"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
+}
+
+flag {
+    name: "enable_display_block_arrow_movement_bugfix"
+    namespace: "lse_desktop_experience"
+    description: "Shows arrow buttons when selected display block is tapped once more, allowing arrangement with single-tap"
+    bug: "438649236"
     metadata {
         purpose: PURPOSE_BUGFIX
     }
