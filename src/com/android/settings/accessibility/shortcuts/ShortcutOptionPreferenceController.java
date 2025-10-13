@@ -34,6 +34,7 @@ import java.util.Set;
 /**
  * A base preference controller for {@link ShortcutOptionPreference}
  */
+// LINT.IfChange
 public abstract class ShortcutOptionPreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
     private Set<String> mShortcutTargets = Collections.emptySet();
@@ -130,3 +131,4 @@ public abstract class ShortcutOptionPreferenceController extends BasePreferenceC
      */
     protected abstract boolean isShortcutAvailable();
 }
+// LINT.ThenChange(ui/ShortcutOptionPreference.kt)

@@ -21,6 +21,9 @@
         android:key="device_unlock_illustration"
         android:selectable="false" />
 
+    <com.android.settingslib.widget.BannerMessagePreferenceGroup
+        android:key="device_unlock_issues_banner_group" />
+
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_lock_screen"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"

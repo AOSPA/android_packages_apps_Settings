@@ -40,7 +40,7 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        if (!ColorDisplayManager.isNightDisplayAvailable(mContext)) {
+        if (!NightDisplayExtensionsKt.isNightDisplaySettingsAvailable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         } else if (!mColorDisplayManager.isNightDisplayActivated()) {
             return DISABLED_DEPENDENT_SETTING;

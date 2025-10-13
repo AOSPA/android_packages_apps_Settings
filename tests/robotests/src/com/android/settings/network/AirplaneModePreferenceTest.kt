@@ -304,10 +304,10 @@ class AirplaneModePreferenceTest {
     }
 
     @Test
-    fun airplaneModeDetailsPreference_icon() {
+    fun airplaneModeDetailsPreference_isNotIndexable() {
         val preference = AirplaneModeDetailsPreference()
 
-        assertThat(preference.icon).isEqualTo(0)
+        assertThat(preference.indexable).isFalse()
     }
 
     @Test

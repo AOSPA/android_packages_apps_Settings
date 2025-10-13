@@ -19,6 +19,7 @@ package com.android.settings.safetycenter.ui
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
@@ -36,6 +37,7 @@ import com.android.settingslib.widget.IllustrationPreference
 @SearchIndexable
 class DeviceUnlockSubPageFragment : DashboardFragment() {
 
+    private var safetyIssuesPreferenceController: SafetyIssuesPreferenceController? = null
     private val viewModel: LiveSafetyCenterViewModel by viewModels {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
     }
@@ -47,17 +49,46 @@ class DeviceUnlockSubPageFragment : DashboardFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupIllustration()
+        setupSafetyIssuesPreferenceController(viewLifecycleOwner)
         setupSafetySourcePreferenceControllers(viewLifecycleOwner)
     }
 
+    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
+        val controllers = mutableListOf<AbstractPreferenceController>()
+        safetyIssuesPreferenceController =
+            SafetyIssuesPreferenceController(context, DEVICE_UNLOCK_ISSUES_KEY)
+        controllers.add(safetyIssuesPreferenceController!!)
+        return controllers
+    }
+
     private fun setupIllustration() {
+        Log.d(TAG, "Setting Up the illustration")
         val illustrationPreference: IllustrationPreference =
             findPreference(DEVICE_UNLOCK_ILLUSTRATION_KEY)!!
         illustrationPreference.imageDrawable =
             context?.getDrawable(R.drawable.illustration_expressive_android_lock_screen_sources)
     }
 
+    private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
+        Log.d(TAG, "Setting Up the safety issues preference controller")
+        safetyIssuesPreferenceController?.setViewModelAndLifecycle(viewModel, owner)
+        safetyIssuesPreferenceController?.setFragmentManager(childFragmentManager)
+
+        val illustrationPreference: IllustrationPreference =
+            findPreference(DEVICE_UNLOCK_ILLUSTRATION_KEY)!!
+        val safetySourceIds =
+            SafetyCenterSubpageRegistry.getAllSafetySourceIds(
+                requireContext(),
+                SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK,
+            )
+        safetyIssuesPreferenceController?.setSubpageSafetySourcesAndIllustration(
+            safetySourceIds,
+            illustrationPreference,
+        )
+    }
+
     private fun setupSafetySourcePreferenceControllers(owner: LifecycleOwner) {
+        Log.d(TAG, "Setting Up the safety source preference controllers")
         val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
         for (controller in allControllers) {
             if (controller is SafetySourcePreferenceController) {
@@ -78,6 +109,7 @@ class DeviceUnlockSubPageFragment : DashboardFragment() {
     companion object {
         private const val TAG = "DeviceUnlockSubPageFrag"
         private const val DEVICE_UNLOCK_ILLUSTRATION_KEY = "device_unlock_illustration"
+        private const val DEVICE_UNLOCK_ISSUES_KEY = "device_unlock_issues_banner_group"
 
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =

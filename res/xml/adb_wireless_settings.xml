@@ -25,7 +25,7 @@
             android:key="adb_device_name_pref"
             android:title="@string/my_device_info_device_name_preference_title"
             android:summary="@string/summary_placeholder"
-            android:selectable="false"
+            android:selectable="true"
             settings:controller="com.android.settings.development.AdbDeviceNamePreferenceController"
             settings:enableCopying="true"/>
 

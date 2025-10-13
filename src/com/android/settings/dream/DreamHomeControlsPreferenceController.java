@@ -17,6 +17,7 @@
 package com.android.settings.dream;
 
 import android.content.Context;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -61,8 +62,9 @@ public class DreamHomeControlsPreferenceController extends TogglePreferenceContr
 
     @Override
     public boolean isChecked() {
-        return controlsEnabledOnLockscreen() && mBackend.getEnabledComplications().contains(
-                DreamBackend.COMPLICATION_TYPE_HOME_CONTROLS);
+        return controlsEnabledOnLockscreen()
+                && mBackend.getEnabledComplications(UserHandle.CURRENT)
+                        .contains(DreamBackend.COMPLICATION_TYPE_HOME_CONTROLS);
     }
 
     @Override

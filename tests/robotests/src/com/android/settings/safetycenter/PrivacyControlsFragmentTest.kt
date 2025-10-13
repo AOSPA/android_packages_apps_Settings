@@ -19,7 +19,6 @@ package com.android.settings.safetycenter
 import android.app.Application
 import android.content.Context
 import android.hardware.SensorPrivacyManager
-import android.os.Build
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
@@ -37,13 +36,10 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.anyInt
 import org.mockito.MockitoAnnotations
-import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.whenever
 import org.robolectric.Shadows
-import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
-@Config(minSdk = Build.VERSION_CODES.BAKLAVA)
 class PrivacyControlsFragmentTest {
 
     private lateinit var mApplication: Application
@@ -65,6 +61,9 @@ class PrivacyControlsFragmentTest {
         val scenario = FragmentScenario.launchInContainer(PrivacyControlsFragment::class.java)
 
         scenario.onFragment { fragment ->
+            onView(withText(mApplication.getString(R.string.privacy_sources_title)))
+                .check(matches(isDisplayed()))
+
             onView(withText(mApplication.getString(R.string.app_permissions)))
                 .check(matches(isDisplayed()))
 

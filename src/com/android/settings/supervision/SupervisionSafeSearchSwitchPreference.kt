@@ -18,6 +18,7 @@ package com.android.settings.supervision
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_SEARCH_FILTER_OFF
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_SEARCH_FILTER_ON
+import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -50,6 +51,10 @@ class SupervisionSafeSearchSwitchPreference(private val dataStore: SupervisionSa
 
     private lateinit var supervisionCredentialLauncher: ActivityResultLauncher<Intent>
 
+    private var searchSupportedAppsPreference:
+        SupervisionWebContentFiltersSupportedAppsEntryPointPreference? =
+        null
+
     override val title
         get() = R.string.supervision_web_content_filters_search_filter_title
 
@@ -69,6 +74,14 @@ class SupervisionSafeSearchSwitchPreference(private val dataStore: SupervisionSa
         lifeCycleContext = context
         supervisionCredentialLauncher =
             context.registerForActivityResult(StartActivityForResult(), ::onConfirmCredentials)
+        if (Flags.enableSupervisionSettingsUiUpdates()) {
+            searchSupportedAppsPreference =
+                context.findPreference<
+                    SupervisionWebContentFiltersSupportedAppsEntryPointPreference
+                >(
+                    SupervisionWebContentFiltersSearchSupportedAppsScreen.KEY
+                )
+        }
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
@@ -93,6 +106,9 @@ class SupervisionSafeSearchSwitchPreference(private val dataStore: SupervisionSa
             val preference = lifeCycleContext.requirePreference<SwitchPreferenceCompat>(key)
             val isChecked = preference.isChecked
             preference.isChecked = !isChecked
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                searchSupportedAppsPreference?.isEnabled = preference.isChecked
+            }
             logMetrics(preference)
             Log.i(TAG, "Search filter has changed.")
         }

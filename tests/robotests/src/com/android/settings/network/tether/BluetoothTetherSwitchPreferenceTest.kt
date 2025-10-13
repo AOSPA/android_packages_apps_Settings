@@ -25,6 +25,8 @@ import android.net.TetheringManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -66,7 +68,8 @@ class BluetoothTetherSwitchPreferenceTest {
     fun setUp() {
         bluetoothAdapter = spy(BluetoothAdapter.getDefaultAdapter())
         bluetoothAdapter.stub { on { state } doReturn BluetoothAdapter.STATE_ON }
-        preference = BluetoothTetherSwitchPreference(bluetoothAdapter)
+        preference =
+            BluetoothTetherSwitchPreference(TestScope(StandardTestDispatcher()), bluetoothAdapter)
     }
 
     @Test

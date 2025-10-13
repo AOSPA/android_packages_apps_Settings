@@ -35,6 +35,7 @@ import java.util.Set;
  * A controller handles displaying the triple tap shortcut option preference and
  * configuring the shortcut.
  */
+// LINT.IfChange
 public class TripleTapShortcutOptionController extends ShortcutOptionPreferenceController
         implements ExpandablePreference {
 
@@ -99,3 +100,4 @@ public class TripleTapShortcutOptionController extends ShortcutOptionPreferenceC
                 AccessibilityUtil.State.OFF) == AccessibilityUtil.State.ON;
     }
 }
+// LINT.ThenChange(ui/TripleTapShortcutPreference.kt)

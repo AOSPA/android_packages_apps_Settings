@@ -22,6 +22,7 @@ import androidx.annotation.StringRes
 import com.android.server.connectivity.Flags
 import com.android.settings.R
 import com.android.settings.Settings.AirplaneModeSettingsActivity
+import com.android.settings.Settings.NetworkDashboardActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.widget.FooterPreferenceBinding
@@ -29,7 +30,6 @@ import com.android.settings.widget.FooterPreferenceMetadata
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
-import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -42,7 +42,6 @@ import kotlinx.coroutines.CoroutineScope
 open class AirplaneModeSettingsScreen(context: Context) :
     AirplaneModePreference(),
     PreferenceScreenMixin,
-    PreferenceIndexableProvider,
     PrimarySwitchPreferenceBinding,
     // Placeholder not needed once NetworkDashboardScreen provides the complete preferenceHierarchy.
     PreferenceBindingPlaceholder {
@@ -58,12 +57,20 @@ open class AirplaneModeSettingsScreen(context: Context) :
     override fun isAvailable(context: Context) =
         context.isAirplaneModeEligible() && context.hasPairedWatchForAirplaneModeSync()
 
-    override fun isIndexable(context: Context) = isAvailable(context)
+    override val indexable: Boolean
+        get() = true
 
     override fun storage(context: Context) = storage
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, AirplaneModeSettingsActivity::class.java, metadata?.key)
+        makeLaunchIntent(
+            context,
+            // This intent is meant to highlight the main switch inside the screen, but since we're
+            // using different KEYs for now, we make sure to highlight the entry point instead.
+            if (KEY == metadata?.key) NetworkDashboardActivity::class.java
+            else AirplaneModeSettingsActivity::class.java,
+            metadata?.key,
+        )
 
     override val highlightMenuKey: Int
         @StringRes get() = R.string.menu_key_network
@@ -99,6 +106,8 @@ open class AirplaneModeSettingsScreen(context: Context) :
         }
 
     companion object {
+        // TODO : Once NetworkDashboardScreen hasCompleteHierarchy is true, change this back to use
+        // the same KEY as the AirplaneModePreference and clean up the code.
         const val KEY = "airplane_mode_settings"
     }
 }

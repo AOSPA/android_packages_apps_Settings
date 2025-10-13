@@ -31,10 +31,13 @@ import com.android.internal.accessibility.AccessibilityShortcutController.ONE_HA
 import com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
+import com.android.settings.accessibility.PreferredShortcuts
 import com.android.settings.accessibility.shared.utils.getA11yActivityFeatureName
 import com.android.settings.accessibility.shared.utils.getA11yServiceFeatureName
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -48,7 +51,7 @@ import kotlinx.coroutines.flow.emptyFlow
 // If we do, make sure we don't accidentally allow outsider to change individual shortcuts.
 @ProvidePreferenceScreen(EditShortcutsScreen.KEY, parameterized = true)
 open class EditShortcutsScreen(context: Context, override val arguments: Bundle) :
-    PreferenceScreenMixin {
+    PreferenceScreenMixin, PreferenceLifecycleProvider {
 
     private val shortcutTargets: Set<String> by lazy {
         arguments.getStringArray(EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS)?.toSet()
@@ -103,10 +106,29 @@ open class EditShortcutsScreen(context: Context, override val arguments: Bundle)
         return null
     }
 
+    override fun onResume(context: PreferenceLifecycleContext) {
+        super.onResume(context)
+        PreferredShortcuts.updatePreferredShortcutsFromSettings(context, shortcutTargets)
+    }
+
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             if (shortcutTargets.isEmpty()) return@preferenceHierarchy
+            val advancedPreference = AdvancedPreference(shortcutTargets)
+
             +IntroPreference(shortcutTargets)
+            +QuickSettingsShortcutPreference(context, shortcutTargets)
+            +FloatingButtonShortcutPreference(context, shortcutTargets)
+            +GestureShortcutPreference(context, shortcutTargets)
+            +NavButtonShortcutPreference(context, shortcutTargets)
+            +VolumeKeysShortcutPreference(context, shortcutTargets)
+            +TwoFingerDoubleTapShortcutPreference(context, shortcutTargets)
+            +advancedPreference
+            +TripleTapShortcutPreference(
+                context,
+                shortcutTargets,
+                expandableStateProvider = { advancedPreference.expandableState },
+            )
         }
 
     override fun getMetricsCategory(): Int {

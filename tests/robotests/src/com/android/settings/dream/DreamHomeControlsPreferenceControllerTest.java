@@ -23,6 +23,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.ArraySet;
 
@@ -83,11 +84,11 @@ public class DreamHomeControlsPreferenceControllerTest {
     public void testSetChecked_setTrue_enablesSetting() {
         setControlsEnabledOnLockscreen(true);
         mBackend.setHomeControlsEnabled(false);
-        assertThat(mBackend.getEnabledComplications())
+        assertThat(mBackend.getEnabledComplications(UserHandle.CURRENT))
                 .doesNotContain(COMPLICATION_TYPE_HOME_CONTROLS);
 
         mController.setChecked(true);
-        assertThat(mBackend.getEnabledComplications())
+        assertThat(mBackend.getEnabledComplications(UserHandle.CURRENT))
                 .contains(COMPLICATION_TYPE_HOME_CONTROLS);
     }
 
@@ -95,11 +96,11 @@ public class DreamHomeControlsPreferenceControllerTest {
     public void testSetChecked_setFalse_disablesSetting() {
         setControlsEnabledOnLockscreen(true);
         mBackend.setHomeControlsEnabled(true);
-        assertThat(mBackend.getEnabledComplications())
+        assertThat(mBackend.getEnabledComplications(UserHandle.CURRENT))
                 .contains(COMPLICATION_TYPE_HOME_CONTROLS);
 
         mController.setChecked(false);
-        assertThat(mBackend.getEnabledComplications())
+        assertThat(mBackend.getEnabledComplications(UserHandle.CURRENT))
                 .doesNotContain(COMPLICATION_TYPE_HOME_CONTROLS);
     }
 
@@ -114,7 +115,7 @@ public class DreamHomeControlsPreferenceControllerTest {
     public void testIsChecked_returnsTrue() {
         setControlsEnabledOnLockscreen(true);
         mBackend.setHomeControlsEnabled(true);
-        assertThat(mBackend.getEnabledComplications())
+        assertThat(mBackend.getEnabledComplications(UserHandle.CURRENT))
                 .contains(COMPLICATION_TYPE_HOME_CONTROLS);
         assertThat(mController.isChecked()).isTrue();
     }
@@ -123,7 +124,7 @@ public class DreamHomeControlsPreferenceControllerTest {
     public void testIsChecked_lockScreenDisabled_returnsFalse() {
         setControlsEnabledOnLockscreen(false);
         mBackend.setHomeControlsEnabled(true);
-        assertThat(mBackend.getEnabledComplications())
+        assertThat(mBackend.getEnabledComplications(UserHandle.CURRENT))
                 .doesNotContain(COMPLICATION_TYPE_HOME_CONTROLS);
         assertThat(mController.isChecked()).isFalse();
     }

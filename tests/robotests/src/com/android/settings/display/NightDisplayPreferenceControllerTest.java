@@ -68,19 +68,32 @@ public class NightDisplayPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_nightDisplayIsSupported_returnAvailable() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_nightDisplayAvailable, true);
-
+    public void configuredNightDisplayAvailableAndNotBlocked_returnAvailable() {
+        NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
         assertThat(mPreferenceController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_nightDisplayIsNotSupported_returnUnsupportedOnDevice() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_nightDisplayAvailable, false);
+    public void configuredNightDisplayUnavailableAndNotBlocked_returnUnsupportedOnDevice() {
+        NightDisplayTestUtils.setNightDisplayAvailable(false);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(false);
+        assertThat(mPreferenceController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
 
+    @Test
+    public void configuredNightDisplayAvailableAndBlocked_returnUnsupportedOnDevice() {
+        NightDisplayTestUtils.setNightDisplayAvailable(true);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
+        assertThat(mPreferenceController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void configuredNightDisplayUnavailableAndBlocked_returnUnsupportedOnDevice() {
+        NightDisplayTestUtils.setNightDisplayAvailable(false);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
         assertThat(mPreferenceController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }

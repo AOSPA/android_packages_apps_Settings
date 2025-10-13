@@ -44,7 +44,8 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
 
     @Override
     public int getAvailabilityStatus() {
-        return ColorDisplayManager.isNightDisplayAvailable(mContext) ? AVAILABLE_UNSEARCHABLE
+        return NightDisplayExtensionsKt.isNightDisplaySettingsAvailable(mContext)
+                ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
 

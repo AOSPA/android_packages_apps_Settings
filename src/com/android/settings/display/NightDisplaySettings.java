@@ -186,7 +186,7 @@ public class NightDisplaySettings extends DashboardFragment
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return ColorDisplayManager.isNightDisplayAvailable(context);
+                    return NightDisplayExtensionsKt.isNightDisplaySettingsAvailable(context);
                 }
             };
 }
