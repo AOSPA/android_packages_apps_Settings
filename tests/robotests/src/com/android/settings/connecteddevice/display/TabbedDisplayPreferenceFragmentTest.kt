@@ -29,9 +29,12 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings
 import com.android.settings.core.SettingsBaseActivity
+import com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING
 import com.android.settings.testutils.InstantTaskExecutorRule
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
+import com.google.android.material.appbar.AppBarLayout
 import com.google.common.truth.Truth.assertThat
+import kotlin.test.assertNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -67,10 +70,13 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     private lateinit var fragment: TestableTabbedDisplayPreferenceFragment
     private lateinit var settingsActivity: SettingsBaseActivity
     private lateinit var topologyView: FakeDisplayTopologyPreferenceView
+    private lateinit var appBarLayoutSpy: AppBarLayout
+    private lateinit var selectedDisplayPrefContainerSpy: FocusAwareFrameLayout
 
     @Before
     override fun setUp() {
         super.setUp()
+        mFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, true)
         val application = ApplicationProvider.getApplicationContext() as Application
 
         includeBuiltinDisplay()
@@ -87,7 +93,10 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         initFragment()
 
         // Spy on the container to verify propagated events
-        fragment.selectedDisplayPrefContainer = spy(fragment.selectedDisplayPrefContainer)
+        appBarLayoutSpy = spy(fragment.appBarLayout)
+        fragment.appBarLayout = appBarLayoutSpy
+        selectedDisplayPrefContainerSpy = spy(fragment.selectedDisplayPrefContainer)
+        fragment.selectedDisplayPrefContainer = selectedDisplayPrefContainerSpy
 
         verify(settingsActivity, atLeastOnce()).setOnItemSelectedListener(toolbarListener.capture())
         reset(settingsActivity)
@@ -186,7 +195,8 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
                 MotionEvent.ACTION_SCROLL,
                 /* x= */ 50f,
                 /* y= */ 150f,
-                /* metaState= */ 0)
+                /* metaState= */ 0,
+            )
         motionEvent.source = InputDevice.SOURCE_MOUSE
 
         val result = fragment.appBarLayout.dispatchGenericMotionEvent(motionEvent)
@@ -209,9 +219,9 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
                 uptime,
                 uptime,
                 MotionEvent.ACTION_MOVE, // Not a scroll action
-                /* x= */50f,
-                /* y= */50f,
-                /* metaState= */ 0
+                /* x= */ 50f,
+                /* y= */ 50f,
+                /* metaState= */ 0,
             )
         motionEvent.source = InputDevice.SOURCE_MOUSE
 
@@ -234,7 +244,8 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
                 MotionEvent.ACTION_SCROLL,
                 /* x= */ 50f,
                 /* y= */ 50f,
-                /* metaState= */ 0)
+                /* metaState= */ 0,
+            )
         motionEvent.source = InputDevice.SOURCE_TOUCHSCREEN // Not a mouse source
 
         val result = fragment.appBarLayout.dispatchGenericMotionEvent(motionEvent)
@@ -253,6 +264,61 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         fragment.onDestroyView()
 
         verify(appBarLayoutSpy).setOnGenericMotionListener(null)
+    }
+
+    @Test
+    fun focus_forwardFromTopologyView_movesToContainer() {
+        val direction = View.FOCUS_DOWN
+        val v =
+            View(mContext).apply {
+                isFocusable = true
+                isFocusableInTouchMode = true
+            }
+        topologyView.addView(v)
+
+        val nextFocus = topologyView.focusSearch(v, direction)
+        assertThat(nextFocus).isEqualTo(selectedDisplayPrefContainerSpy)
+    }
+
+    @Test
+    fun focus_backwardFromTopologyView_movesToParentActivity() {
+        val direction = View.FOCUS_UP
+        val v =
+            View(mContext).apply {
+                isFocusable = true
+                isFocusableInTouchMode = true
+            }
+        topologyView.addView(v)
+
+        val nextFocus = topologyView.focusSearch(v, direction)
+        assertThat(nextFocus).isEqualTo(settingsActivity.window?.decorView)
+    }
+
+    @Test
+    fun focus_backwardFromSelectedDisplayContainer_movesToTopologyViewAndExpandsAppBar() {
+        viewModel.updateEnabledDisplays()
+        val direction = View.FOCUS_UP
+        val descendantFocusables = ArrayList<View>()
+        selectedDisplayPrefContainerSpy.addFocusables(descendantFocusables, direction)
+
+        val nextFocus =
+            selectedDisplayPrefContainerSpy.focusSearch(descendantFocusables.first(), direction)
+        assertThat(nextFocus).isEqualTo(topologyView)
+        verify(appBarLayoutSpy).setExpanded(/* expanded= */ true, /* animate= */ true)
+    }
+
+    @Test
+    fun focus_forwardFromSelectedDisplayContainer_returnNull() {
+        viewModel.updateEnabledDisplays()
+        val direction = View.FOCUS_DOWN
+        val descendantFocusables = ArrayList<View>()
+        selectedDisplayPrefContainerSpy.addFocusables(descendantFocusables, direction)
+
+        val nextFocus =
+            selectedDisplayPrefContainerSpy.focusSearch(descendantFocusables.last(), direction)
+        // It's expected to be null here to let parent view to handle the next focus (which will
+        // naturally be moved to Toolbar items
+        assertNull(nextFocus)
     }
 
     private fun initFragment(): TestableTabbedDisplayPreferenceFragment {

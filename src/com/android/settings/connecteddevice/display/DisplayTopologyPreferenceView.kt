@@ -17,12 +17,11 @@
 package com.android.settings.connecteddevice.display
 
 import android.view.LayoutInflater
-import android.widget.FrameLayout
 import com.android.settings.R
 
 /** View representation to manage display topology arrangement */
 open class DisplayTopologyPreferenceView(val injector: ConnectedDisplayInjector) :
-    FrameLayout(injector.context!!) {
+    FocusAwareFrameLayout(injector.context!!) {
 
     private val controller = DisplayTopologyPreferenceController(context, injector)
 

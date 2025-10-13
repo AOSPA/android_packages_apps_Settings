@@ -146,6 +146,7 @@ class DisplayTopologyPreferenceController(
         paneHolder = holder
         paneContent = content
         topologyHint = hint
+        paneContent.isFocusable = false
         paneContent.addOnLayoutChangeListener(paneContentLayoutListener)
         paneContent.setOnClickListener { _ -> setDisplayToShowArrows(-1) }
     }
@@ -170,7 +171,14 @@ class DisplayTopologyPreferenceController(
         injector.unregisterDisplayListener(displayListener)
     }
 
-    fun selectDisplay(displayId: Int) {
+    fun selectDisplay(displayId: Int, showDisplayArrows: Boolean = false) {
+        if (showDisplayArrows && displayId == selectedDisplayId) {
+            setDisplayToShowArrows(displayId)
+        } else {
+            // Different display is selected, hide arrows. Don't immediately show arrow on the
+            // selectedDisplay, because arrow should only be shown after second tap
+            setDisplayToShowArrows(-1)
+        }
         selectedDisplayId = displayId
         val displayTopology = injector.displayTopology
         if (displayTopology == null || !displayTopology.allNodesIdMap().containsKey(displayId)) {
@@ -405,8 +413,18 @@ class DisplayTopologyPreferenceController(
             block.setArrowVisible(id == showArrowMovementDisplayId)
 
             if (isMirroring) {
+                block.isFocusable = false
+                block.isClickable = false
+                block.setOnClickListener(null)
                 block.setTouchListener(null)
             } else {
+                block.isFocusable = true
+                block.isClickable = true
+                block.isFocusableInTouchMode = true
+                block.setOnClickListener { _ ->
+                    selectDisplay(block.logicalDisplayId, /* showDisplayArrows= */ true)
+                    onDisplayBlockSelectedListener?.onSelected(block.logicalDisplayId)
+                }
                 block.setTouchListener { view, ev ->
                     if (ev.isSynthesizedTouchpadGesture()) {
                         return@setTouchListener false
@@ -497,18 +515,9 @@ class DisplayTopologyPreferenceController(
             return false
         }
 
-        if (displayId != selectedDisplayId) {
-            // Different display is selected, hide arrows. Don't immediately show arrow on the
-            // selectedDisplay, because arrow should only be shown after second tap on the selcted
-            // display
-            setDisplayToShowArrows(-1)
-        } else {
-            setDisplayToShowArrows(displayId)
-        }
-
         val stationaryDisps = positions.filter { it.first != displayId }
 
-        selectDisplay(displayId)
+        selectDisplay(displayId, /* showDisplayArrows= */ true)
 
         // We have to use rawX and rawY for the coordinates since the view receiving the event is
         // also the view that is moving. We need coordinates relative to something that isn't
