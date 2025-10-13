@@ -90,7 +90,6 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SCREEN)
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun toggleMainSwitch_pinVerificationSucceeded_enablesChildPreferences() {
         preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
             val mainSwitchPreference =
@@ -114,7 +113,6 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SCREEN)
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun toggleMainSwitch_pinVerificationFailed_childPreferencesRemainDisabled() {
         preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
             val mainSwitchPreference =

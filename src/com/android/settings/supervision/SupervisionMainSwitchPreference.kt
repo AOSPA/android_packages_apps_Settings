@@ -70,7 +70,7 @@ class SupervisionMainSwitchPreference(
         get() = KEY
 
     override val title
-        get() = R.string.device_supervision_features_title
+        get() = R.string.device_supervision_switch_title
 
     override fun getSummary(context: Context): CharSequence? =
         if (!context.isSupervisingCredentialSet) {
