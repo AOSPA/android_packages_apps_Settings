@@ -17,9 +17,14 @@
 package com.android.settings.display.darkmode
 
 import android.content.Context
+import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
+import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
+import com.android.settings.spa.accessibility.ForceDarkAppExceptionsPageProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -90,7 +95,7 @@ class StandardDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
 
 /** The "Expanded Dark Theme" preference. */
 class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
-    DarkModeSelectorPreference(dataStore) {
+    DarkModeSelectorPreference(dataStore), View.OnClickListener {
 
     override val key
         get() = KEY
@@ -106,6 +111,35 @@ class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
 
     override fun getIndexableTitle(context: Context): CharSequence? =
         context.getText(R.string.accessibility_expanded_dark_theme_title_in_search)
+
+    override fun onClick(v: View?) {
+        if (v != null) {
+            v.context.startSpaActivity(ForceDarkAppExceptionsPageProvider.name)
+        }
+    }
+
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
+        super.bind(preference, metadata)
+        if (Flags.enableEdtAppExceptions()) {
+            val selectorWithWidgetPreference = preference as SelectorWithWidgetPreference
+            selectorWithWidgetPreference.setExtraWidgetOnClickListener(this)
+            selectorWithWidgetPreference.setExtraWidgetContentDescription(
+                preference.context.getString(
+                    R.string.accessibility_expanded_dark_theme_exceptions_gear_content_description
+                )
+            )
+            selectorWithWidgetPreference.setExtraWidgetOnBindConsumer({ widget ->
+                ViewCompat.replaceAccessibilityAction(
+                    widget,
+                    AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK,
+                    preference.context.getString(
+                        R.string.accessibility_expanded_dark_theme_exceptions_gear_hint
+                    ),
+                    null,
+                )
+            })
+        }
+    }
 
     companion object {
         const val KEY = "expanded_dark_theme"
