@@ -248,14 +248,10 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"Mover para baixo"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"Remover"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"Mover para o início"</string>
-    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
-    <skip />
-    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"Mover <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> para cima"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"Mover <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> para baixo"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"Remover <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"Mover <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> para o início"</string>
     <string name="action_label_menu_option" msgid="6881627571783854975">"Editar lista de idiomas do sistema, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"país, território"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"clima, centígrados, graus, temperatura, celsius, fahrenheit"</string>
@@ -316,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"Aplicar"</string>
     <string name="share" msgid="8502235338607613795">"Compartilhar"</string>
     <string name="add" msgid="8335206931421683426">"Adicionar"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"Remover"</string>
     <string name="process" msgid="2614220641928709668">"Processar"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"Configurações"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Configurações"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"Atalho para as configurações"</string>
@@ -700,7 +700,7 @@
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Igual ao bloqueio de tela do dispositivo"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Escolher outro bloqueio para o espaço privado?"</string>
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"Insira o PIN, o padrão ou a senha do dispositivo na próxima tela"</string>
-    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Bloquear o espaço privado automaticamente"</string>
+    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Bloqueio automático"</string>
     <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Você poderá bloquear seu espaço privado automaticamente se não usar o dispositivo por um período de tempo"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Sempre que o dispositivo for bloqueado"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 minutos depois do tempo limite da tela"</string>
@@ -3603,7 +3603,7 @@
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Seleção necessária"</string>
     <string name="sim_selection_channel_title" msgid="3193666315607572484">"Seleção de chip"</string>
     <string name="dashboard_title" msgid="5660733037244683387">"Configurações"</string>
-    <string name="network_dashboard_title" msgid="788543070557731240">"Rede e Internet"</string>
+    <string name="network_dashboard_title" msgid="788543070557731240">"Rede e internet"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Wi‑Fi, ponto de acesso"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Dispositivos conectados"</string>
     <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"Bluetooth, pareamento"</string>
@@ -4098,14 +4098,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organizador de notificações"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Agrupar e silenciar notificações de prioridade mais baixa"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Gerenciar apps para o organizador de notificações"</string>
-    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
-    <skip />
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Expansão do pacote"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automático"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Sempre abrir"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Nunca abrir"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Aplicar em apps do perfil de trabalho"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Serviços de ajuda para RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nenhum app instalado solicitou ser executado como serviço de ajuda para RV."</string>
@@ -5288,8 +5284,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Apps compatíveis no seu smartphone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Não é possível adicionar um chip"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Encerre a conexão via satélite antes de adicionar um chip"</string>
-    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
-    <skip />
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Quando conectados por Bluetooth, o modo avião será sincronizado entre os dispositivos compatíveis, como celular e relógio"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nomes dos pontos de acesso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponível quando conectado à <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5968,6 +5963,14 @@
     <string name="supervision_pin_updated" msgid="660463938258442344">"PIN atualizado"</string>
     <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN alterado"</string>
     <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN excluído"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Excluir PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"Adicionar e-mail de recuperação"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"Verifique seu e-mail"</string>
@@ -6026,6 +6029,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Pareando"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Dispositivo conectado: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

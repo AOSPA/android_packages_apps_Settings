@@ -248,14 +248,10 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"הזזה למטה"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"הסרה"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"העברה לראש הרשימה"</string>
-    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
-    <skip />
-    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"אפשר להעביר את השפה ה<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> למעלה"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"אפשר להעביר את השפה ה<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> למטה"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"אפשר להסיר את השפה ה<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"אפשר להעביר את השפה ה<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g> לראש הרשימה"</string>
     <string name="action_label_menu_option" msgid="6881627571783854975">"עריכת רשימת שפות המערכת, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"מדינה, אזור"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"תחזית, מעלות, מד, טמפרטורה, צלזיוס, פרנהייט"</string>
@@ -316,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"אישור"</string>
     <string name="share" msgid="8502235338607613795">"שיתוף"</string>
     <string name="add" msgid="8335206931421683426">"הוספה"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"הסרה"</string>
     <string name="process" msgid="2614220641928709668">"עיבוד"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"הגדרות"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"הגדרות"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"קיצור דרך של הגדרות"</string>
@@ -1470,7 +1470,7 @@
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"כיבוי עד השקיעה"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"מצב כהה"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"לוח זמנים"</string>
-    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"לא להפעיל"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"אין"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"מהשקיעה עד הזריחה"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"בשעה שאני אקבע"</string>
     <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"מופעל בשעת השינה"</string>
@@ -4098,14 +4098,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"הכלי לארגון התראות"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"קיבוץ והשתקה של התראות בעדיפות נמוכה"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"ניהול האפליקציות לכלי לארגון ההתראות"</string>
-    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
-    <skip />
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"הרחבת החבילה"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"אוטומטי"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"תמיד להרחיב"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"אף פעם לא להרחיב"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"הפעלה באפליקציות של פרופיל העבודה"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"‏תשתיות ל-VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"‏לא התקבלו בקשות מאפליקציות מותקנות לפעול כשירותי סיוע של VR."</string>
@@ -5288,8 +5284,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"האפליקציות שנתמכות בטלפון"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"‏לא ניתן להוסיף כרטיס SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"‏צריך לנתק את החיבור ללוויין לפני שמוסיפים כרטיס SIM"</string>
-    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
-    <skip />
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"‏כשהמכשירים מחוברים באמצעות Bluetooth, מצב הטיסה יסתנכרן בין המכשירים שמאפשרים את הפעולה הזו, כמו טלפון ושעון"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"‏שמות של נקודות גישה (APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"לא זמין כשהמכשיר מחובר ל-<xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5969,6 +5964,14 @@
     <string name="supervision_pin_updated" msgid="660463938258442344">"הקוד הסודי עודכן"</string>
     <string name="supervision_pin_changed" msgid="4822686882868075710">"הקוד הסודי השתנה"</string>
     <string name="supervision_pin_deleted" msgid="368631223166018476">"הקוד הסודי נמחק"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"מחיקת קוד האימות"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"הוספה של כתובת אימייל לשחזור החשבון"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"אימות של כתובת האימייל"</string>
@@ -6027,6 +6030,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"התאמה"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"המכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g> מחובר"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>
