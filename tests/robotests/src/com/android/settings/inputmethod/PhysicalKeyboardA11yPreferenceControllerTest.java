@@ -64,7 +64,7 @@ public class PhysicalKeyboardA11yPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_expected() {
         int deviceId = 1;
-        when(mInputDevice.isVirtual()).thenReturn(false);
+        when(mInputDevice.isPhysicalDevice()).thenReturn(true);
         when(mInputDevice.isFullKeyboard()).thenReturn(true);
 
         ShadowInputDevice.addDevice(deviceId, mInputDevice);
@@ -78,7 +78,7 @@ public class PhysicalKeyboardA11yPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_deviceIsNotAsExpected_unavailable() {
         int deviceId = 1;
-        when(mInputDevice.isVirtual()).thenReturn(true);
+        when(mInputDevice.isPhysicalDevice()).thenReturn(false);
         when(mInputDevice.isFullKeyboard()).thenReturn(false);
 
         ShadowInputDevice.addDevice(deviceId, mInputDevice);
