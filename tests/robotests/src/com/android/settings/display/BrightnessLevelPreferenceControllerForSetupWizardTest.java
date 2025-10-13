@@ -24,20 +24,15 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 
 import android.content.Context;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.accessibility.Flags;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -49,9 +44,6 @@ import org.robolectric.RuntimeEnvironment;
  */
 @RunWith(RobolectricTestRunner.class)
 public class BrightnessLevelPreferenceControllerForSetupWizardTest {
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-
     private Context mContext;
     private BrightnessLevelPreferenceControllerForSetupWizard mController;
 
@@ -65,7 +57,6 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
     public void displayPreference_flagOn_preferenceVisibleTrue() {
         Preference preference = displayPreference(/* restricted= */ false);
 
@@ -73,7 +64,6 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
     public void displayPreference_flagOnAndRestricted_preferenceVisibleFalse() {
         Preference preference = displayPreference(/* restricted= */ true);
 
@@ -81,15 +71,6 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void displayPreference_flagOff_preferenceVisibleFalse() {
-        Preference preference = displayPreference(/* restricted= */ false);
-
-        assertThat(preference.isVisible()).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
     public void getAvailabilityStatus_flagOn_available() {
         displayPreference(/* restricted= */ false);
 
@@ -97,17 +78,8 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
     public void getAvailabilityStatus_flagOnAndRestricted_conditionallyUnavailable() {
         displayPreference(/* restricted= */ true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void getAvailabilityStatus_flagOff_conditionallyUnavailable() {
-        displayPreference(/* restricted= */ false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }

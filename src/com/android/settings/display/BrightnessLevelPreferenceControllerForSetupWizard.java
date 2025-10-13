@@ -23,7 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.accessibility.Flags;
 import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.RestrictedPreferenceHelperProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -62,7 +61,7 @@ public class BrightnessLevelPreferenceControllerForSetupWizard extends
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        if (!Flags.addBrightnessSettingsInSuw() || isRestricted()) {
+        if (isRestricted()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         return super.getAvailabilityStatus();
