@@ -557,8 +557,8 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     @Config(shadows = ShadowAppUtils.class)
-    public void getAvailabilityStatus_mainlineModule() {
-        ShadowAppUtils.addMainlineModule(mController.mPackageName);
+    public void getAvailabilityStatus_limitedAppInfoPackage() {
+        ShadowAppUtils.addLimitedAppInfoPackage(mController.mPackageName);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 AppButtonsPreferenceController.DISABLED_FOR_USER);
     }
@@ -589,14 +589,14 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     @Config(shadows = ShadowAppUtils.class)
-    public void isAvailable_nonMainlineModule_isTrue() {
+    public void isAvailable_nonLimitedAppInfoPackage_isTrue() {
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     @Config(shadows = ShadowAppUtils.class)
-    public void isAvailable_mainlineModule_isFalse() {
-        ShadowAppUtils.addMainlineModule(mController.mPackageName);
+    public void isAvailable_limitedAppInfoPackage_isFalse() {
+        ShadowAppUtils.addLimitedAppInfoPackage(mController.mPackageName);
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -655,13 +655,13 @@ public class AppButtonsPreferenceControllerTest {
 
         // TODO(b/382016780): to be removed after flag cleanup.
         public static Set<String> sSystemModules = new ArraySet<>();
-        public static Set<String> sMainlineModules = new ArraySet<>();
+        public static Set<String> sLimitedAppInfoPackages = new ArraySet<>();
 
         @Resetter
         public static void reset() {
             // TODO(b/382016780): to be removed after flag cleanup.
             sSystemModules.clear();
-            sMainlineModules.clear();
+            sLimitedAppInfoPackages.clear();
         }
 
         // TODO(b/382016780): to be removed after flag cleanup.
@@ -669,8 +669,8 @@ public class AppButtonsPreferenceControllerTest {
             sSystemModules.add(pkg);
         }
 
-        public static void addMainlineModule(String pkg) {
-            sMainlineModules.add(pkg);
+        public static void addLimitedAppInfoPackage(String pkg) {
+            sLimitedAppInfoPackages.add(pkg);
         }
 
         @Implementation
@@ -685,8 +685,8 @@ public class AppButtonsPreferenceControllerTest {
         }
 
         @Implementation
-        protected static boolean isMainlineModule(PackageManager pm, String packageName) {
-            return sMainlineModules.contains(packageName);
+        protected static boolean isLimitedAppInfoPackage(PackageManager pm, String packageName) {
+            return sLimitedAppInfoPackages.contains(packageName);
         }
     }
 }
