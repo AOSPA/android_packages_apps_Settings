@@ -34,6 +34,7 @@ import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceTitle
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItemMetadata
@@ -167,11 +168,15 @@ class CatalystStateMetadataProviderExecutor(
 
         val launchingIntent = screenMetaData.getLaunchIntent(context, null)
         return PerScreenMetadata(
-            // This is a hack to remove the title from parametrised screens as it may contain
-            // some text referring to that specific parameter which could confuse the agent.
-            description =
-                if (isParameterized) ""
-                else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
+            description = (
+                    listOfNotNull(
+                        // This is a hack to remove the title from parametrised screens as it may contain
+                        // some text referring to that specific parameter which could confuse the agent.
+                        if (isParameterized) ""
+                            else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
+                        screenMetaData.getPreferencePurpose(context)
+                    ).filter{it.isNotBlank()}.joinToString(". ")
+                ),
             deviceStateItemsMetadata = deviceStateItemMetadataList,
             intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
             // This is a temporary hack to indicate to the agent that the screen is itemized, it
