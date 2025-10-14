@@ -16,7 +16,9 @@
 
 package com.android.settings.dashboard.profileselector;
 
+import static android.content.pm.UserInfo.FLAG_FULL;
 import static android.content.pm.UserInfo.FLAG_MAIN;
+import static android.content.pm.UserInfo.FLAG_PROFILE;
 import static android.os.UserManager.USER_TYPE_FULL_SYSTEM;
 import static android.os.UserManager.USER_TYPE_PROFILE_MANAGED;
 import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
@@ -60,12 +62,12 @@ public class ProfileSelectLocationFragmentTest {
     @Before
     public void setUp() {
         mUserManager = ShadowUserManager.getShadow();
+        mUserManager.addProfile(new UserInfo(0, PERSONAL_PROFILE_NAME, null, FLAG_MAIN | FLAG_FULL,
+                USER_TYPE_FULL_SYSTEM));
         mUserManager.addProfile(
-                new UserInfo(0, PERSONAL_PROFILE_NAME, null, FLAG_MAIN, USER_TYPE_FULL_SYSTEM));
-        mUserManager.addProfile(
-                new UserInfo(1, WORK_PROFILE_NAME, null, 0, USER_TYPE_PROFILE_MANAGED));
-        mUserManager.addProfile(
-                new UserInfo(11, PRIVATE_PROFILE_NAME, null, 0, USER_TYPE_PROFILE_PRIVATE));
+                new UserInfo(1, WORK_PROFILE_NAME, null, FLAG_PROFILE, USER_TYPE_PROFILE_MANAGED));
+        mUserManager.addProfile(new UserInfo(11, PRIVATE_PROFILE_NAME, null, FLAG_PROFILE,
+                USER_TYPE_PROFILE_PRIVATE));
         mProfileSelectLocationFragment = spy(new ProfileSelectLocationFragment());
         when(mProfileSelectLocationFragment.getContext()).thenReturn(
                 ApplicationProvider.getApplicationContext());
