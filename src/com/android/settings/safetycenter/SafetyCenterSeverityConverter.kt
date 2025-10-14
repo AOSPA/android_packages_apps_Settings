@@ -18,6 +18,7 @@ package com.android.settings.safetycenter
 
 import android.safetycenter.SafetyCenterEntry
 import android.safetycenter.SafetyCenterIssue
+import com.android.settingslib.widget.BannerMessagePreference
 
 /** Converter utility for Safety Center Severity enums. */
 internal object SafetyCenterSeverityConverter {
@@ -34,6 +35,21 @@ internal object SafetyCenterSeverityConverter {
                 SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_RECOMMENDATION
             SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK -> SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK
             else -> SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN
+        }
+    }
+
+    /**
+     * Converts a [SafetyCenterIssue.IssueSeverityLevel] to a corresponding
+     * [BannerMessagePreference.AttentionLevel].
+     */
+    fun toBannerAttentionLevel(issueSeverity: Int): BannerMessagePreference.AttentionLevel {
+        return when (issueSeverity) {
+            SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_CRITICAL_WARNING ->
+                BannerMessagePreference.AttentionLevel.HIGH
+            SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION ->
+                BannerMessagePreference.AttentionLevel.MEDIUM
+            SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK -> BannerMessagePreference.AttentionLevel.LOW
+            else -> BannerMessagePreference.AttentionLevel.LOW
         }
     }
 }

@@ -114,6 +114,9 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             val supervisionClient = getSupervisionClient(context)
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                +SupervisionRecoveryBannerPreference() order -250
+            }
             +SupervisionMainSwitchPreference(context, supervisionClient) order -200
             +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
                 +SupervisionAppStoreFiltersScreen.KEY order 50

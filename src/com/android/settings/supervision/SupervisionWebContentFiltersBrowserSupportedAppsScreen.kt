@@ -17,6 +17,7 @@ package com.android.settings.supervision
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.provider.Settings.Secure.BROWSER_CONTENT_FILTERS_ENABLED
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.utils.makeLaunchIntent
@@ -39,6 +40,9 @@ open class SupervisionWebContentFiltersBrowserSupportedAppsScreen :
 
     override val key: String
         get() = KEY
+
+    override val settingsKey: String
+        get() = BROWSER_CONTENT_FILTERS_ENABLED
 
     override val screenTitle: Int
         get() = R.string.supervision_web_content_filters_browser_filter_title

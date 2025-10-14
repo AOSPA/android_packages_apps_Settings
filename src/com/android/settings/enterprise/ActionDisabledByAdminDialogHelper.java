@@ -188,21 +188,22 @@ public final class ActionDisabledByAdminDialogHelper {
 
         mActionDisabledByAdminController.updateEnforcedAdmin(enforcedAdmin, userId);
         setAdminSupportIcon(root);
-
-        if (isNotCurrentUserOrProfile(admin, userId)) {
-            admin = null;
-        }
-
         setAdminSupportTitle(root, restriction);
 
-        final UserHandle user;
-        if (userId == UserHandle.USER_NULL) {
-            user = null;
+        if (android.app.admin.flags.Flags.fixDisabledByAdminShortMessageNotShown()) {
+            setAdminSupportDetails(mActivity, root, enforcedAdmin);
         } else {
-            user = UserHandle.of(userId);
+            if (isNotCurrentUserOrProfile(admin, userId)) {
+                admin = null;
+            }
+            final UserHandle user;
+            if (userId == UserHandle.USER_NULL) {
+                user = null;
+            } else {
+                user = UserHandle.of(userId);
+            }
+            setAdminSupportDetails(mActivity, root, new EnforcedAdmin(admin, user));
         }
-
-        setAdminSupportDetails(mActivity, root, new EnforcedAdmin(admin, user));
     }
 
     private void initializeDialogViews(

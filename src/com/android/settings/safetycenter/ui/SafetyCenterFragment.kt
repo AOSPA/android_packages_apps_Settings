@@ -40,14 +40,37 @@ import com.android.settingslib.search.SearchIndexable
 @SearchIndexable
 class SafetyCenterFragment : DashboardFragment() {
 
+    private var safetyIssuesPreferenceController: SafetyIssuesPreferenceController? = null
+
     private val viewModel: LiveSafetyCenterViewModel by viewModels {
         LiveSafetyCenterViewModelFactory(requireActivity().application)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (requireActivity().isChangingConfigurations) {
+            viewModel.changingConfigurations()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.pageOpen()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupStatusBannerController(viewLifecycleOwner)
+        setupSafetyIssuesPreferenceController(viewLifecycleOwner)
         setupSubpagePreferenceControllers(viewLifecycleOwner)
+    }
+
+    override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
+        val controllers = mutableListOf<AbstractPreferenceController>()
+        safetyIssuesPreferenceController =
+            SafetyIssuesPreferenceController(context, SAFETY_ISSUES_BANNER_KEY)
+        controllers.add(safetyIssuesPreferenceController!!)
+        return controllers
     }
 
     private fun setupStatusBannerController(owner: LifecycleOwner) {
@@ -60,6 +83,12 @@ class SafetyCenterFragment : DashboardFragment() {
         statusBannerController?.setViewModelAndLifecycle(viewModel, owner)
     }
 
+    private fun setupSafetyIssuesPreferenceController(owner: LifecycleOwner) {
+        Log.d(TAG, "Setting Up the safety issues preference controller")
+        safetyIssuesPreferenceController?.setViewModelAndLifecycle(viewModel, owner)
+        safetyIssuesPreferenceController?.setFragmentManager(childFragmentManager)
+    }
+
     private fun setupSubpagePreferenceControllers(owner: LifecycleOwner) {
         Log.d(TAG, "Setting Up the sub-page preference controllers")
         val allControllers: List<AbstractPreferenceController> = preferenceControllers.flatten()
@@ -68,8 +97,17 @@ class SafetyCenterFragment : DashboardFragment() {
             if (controller is SubpagePreferenceController) {
                 when (controller.preferenceKey) {
                     DEVICE_UNLOCK_SUBPAGE_KEY -> {
-                        controller.setRelatedSafetySources(DEVICE_UNLOCK_SAFETY_SOURCE_IDS)
-                        controller.setRelatedIssueOnlySafetySources(emptyList())
+                        controller.setRelatedSafetySources(
+                            SafetyCenterSubpageRegistry.getXmlSafetySourceIds(
+                                requireContext(),
+                                SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK,
+                            )
+                        )
+                        controller.setRelatedIssueOnlySafetySources(
+                            SafetyCenterSubpageRegistry.getIssueOnlySafetySourceIds(
+                                SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK
+                            )
+                        )
                         controller.setDefaultSummaryResId(
                             R.string.device_unlock_subpage_default_summary
                         )
@@ -94,9 +132,8 @@ class SafetyCenterFragment : DashboardFragment() {
 
     companion object {
         private const val TAG = "SafetyCenterFragment"
-        private const val ANDROID_LOCK_SCREEN_SOURCE_ID = "AndroidLockScreen"
+        private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
         private const val DEVICE_UNLOCK_SUBPAGE_KEY = "device_unlock_subpage"
-        private val DEVICE_UNLOCK_SAFETY_SOURCE_IDS = listOf(ANDROID_LOCK_SCREEN_SOURCE_ID)
 
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =

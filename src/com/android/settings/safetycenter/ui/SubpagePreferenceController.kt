@@ -66,10 +66,10 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
 
         viewModel.safetyCenterUiLiveData.observe(owner) { data ->
             if (data == null) {
-                Log.d(TAG, "SafetyCenterUiData LiveData received null for $preferenceKey")
+                Log.d(TAG, "[$preferenceKey] LiveData received null")
                 return@observe
             }
-            Log.d(TAG, "safetyCenterUiLiveData observer notified for $preferenceKey")
+            Log.d(TAG, "[$preferenceKey] safetyCenterUiLiveData observer notified")
             preference?.let { updatePreferenceUi(it, data) }
         }
     }
@@ -102,7 +102,6 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
     }
 
     override fun getAvailabilityStatus(): Int {
-        // TODO: b/424132940 - Add logic to check for preference availability.
         return AVAILABLE
     }
 
@@ -116,7 +115,6 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
      * LiveData observer.
      */
     private fun updatePreferenceUi(preference: Preference, data: SafetyCenterUiData) {
-        Log.d(TAG, "updatePreferenceUi with data for $preferenceKey")
         val relatedSafetySourcesData = getRelatedSafetySourcesData(data)
         val relatedIssueOnlySafetySourcesData = getRelatedIssueOnlySafetySourcesData(data)
 
@@ -134,6 +132,7 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
                 highestSeverityIssueOnlySafetySourceIssue,
                 subpageMaxSeverity,
             )
+        Log.d(TAG, "[$preferenceKey] UI updated with max severity: $subpageMaxSeverity")
     }
 
     private fun getSubpageMaxSeverity(
@@ -152,19 +151,11 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
         }
     }
 
-    override fun updateState(preference: Preference) {
-        super.updateState(preference)
-        viewModel?.let { vm ->
-            val currentData = vm.getCurrentSafetyCenterDataAsUiData()
-            updatePreferenceUi(preference, currentData)
-        } ?: Log.w(TAG, "ViewModel not set in updateState for $preferenceKey, skipping UI update")
-    }
-
     private fun getRelatedSafetySourcesData(data: SafetyCenterUiData): List<SafetyCenterEntry> {
         val entries = data.getEntriesForSources(relatedSafetySources)
         Log.d(
             TAG,
-            "getRelatedSafetySourcesData for $preferenceKey: ${entries.size} entries found matching $relatedSafetySources",
+            "[$preferenceKey] Found ${entries.size} entries for sources: $relatedSafetySources",
         )
         return entries
     }
@@ -175,7 +166,7 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
         val issues = data.getActiveIssuesForSources(relatedIssueOnlySafetySources)
         Log.d(
             TAG,
-            "getRelatedIssueOnlySafetySourcesData for $preferenceKey: ${issues.size} issues found matching $relatedIssueOnlySafetySources",
+            "[$preferenceKey] Found ${issues.size} issues for issue-only sources: $relatedIssueOnlySafetySources",
         )
         return issues
     }
@@ -185,13 +176,9 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
         relatedSafetySourcesData: List<SafetyCenterEntry>,
     ): Drawable? {
         if (subpageMaxSeverity == null) {
-            Log.d(TAG, "getSubpageIcon called for $preferenceKey with null subpageMaxSeverity")
+            Log.d(TAG, "[$preferenceKey] getSubpageIcon: Null max severity")
             return null
         }
-        Log.d(
-            TAG,
-            "getSubpageIcon called for $preferenceKey with subpageMaxSeverity: $subpageMaxSeverity",
-        )
 
         val iconResId: Int? =
             when (subpageMaxSeverity) {
@@ -209,7 +196,7 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
                 else -> {
                     Log.e(
                         TAG,
-                        "getSubpageIcon: Unknown maxSeverity level '$subpageMaxSeverity' for key '$preferenceKey'",
+                        "[$preferenceKey] getSubpageIcon: Unknown maxSeverity level '$subpageMaxSeverity'",
                     )
                     null
                 }
@@ -229,10 +216,7 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
             else -> {
                 Log.e(
                     TAG,
-                    String.format(
-                        "Unknown SafetyCenterEntry.SeverityNoneIconType: %s",
-                        severityUnspecifiedIconType,
-                    ),
+                    "[$preferenceKey] Unknown SeverityNoneIconType: $severityUnspecifiedIconType",
                 )
                 null
             }
@@ -246,14 +230,13 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
         subpageMaxSeverity: Int?,
     ): CharSequence {
         if (subpageMaxSeverity == null) {
-            Log.d(TAG, "getSubpageSummary called for $preferenceKey with null subpageMaxSeverity")
+            Log.d(
+                TAG,
+                "[$preferenceKey] getSubpageSummary: Null max severity, returning default summary",
+            )
             return getDefaultSubpageSummary()
         }
 
-        Log.d(
-            TAG,
-            "getSubpageSummary called for $preferenceKey with subpageMaxSeverity: $subpageMaxSeverity",
-        )
         when (subpageMaxSeverity) {
             SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_CRITICAL_WARNING,
             SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_RECOMMENDATION,
@@ -301,7 +284,10 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
                 }
             }
             else -> {
-                Log.e(TAG, "Unexpected maxSeverity $subpageMaxSeverity for $preferenceKey summary")
+                Log.e(
+                    TAG,
+                    "[$preferenceKey] Unexpected maxSeverity $subpageMaxSeverity, returning default summary",
+                )
                 return getDefaultSubpageSummary()
             }
         }

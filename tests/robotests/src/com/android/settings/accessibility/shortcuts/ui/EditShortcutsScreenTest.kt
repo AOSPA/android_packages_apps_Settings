@@ -24,6 +24,9 @@ import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import android.view.accessibility.AccessibilityManager
+import androidx.fragment.app.testing.FragmentScenario
+import androidx.lifecycle.Lifecycle
+import androidx.preference.PreferenceFragmentCompat
 import com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME
 import com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME
 import com.android.settings.R
@@ -73,7 +76,16 @@ class EditShortcutsScreenTest : SettingsCatalystTestCase() {
     }
 
     override fun migration() {
-        // TODO(b/440383851): temporarily don't run the test until we're fully migrated.
+        // Skip running this migration test, which compares the legacy screen and the migrated
+        // screen, because:
+        // Verified the test locally, the test failed for reasons below:
+        // 1. PreferenceScreen title is set for migrated screen; this won't be an actual issue.
+        // We've verified the title screen title is expected one in the test in this test class.
+        // 2. Items are marked as not persistent in xml, while it's persistent in catalyst. This is
+        // expected.
+        // 3. Summary text is not setup in the legacy PreferenceController is the Preference is not
+        // visible, while the summary text is always set up even if the preference is invisible.
+        // This is expected and not causing actual issue.
     }
 
     @Test
@@ -187,6 +199,13 @@ class EditShortcutsScreenTest : SettingsCatalystTestCase() {
         whenever(mockInfo.activityInfo).thenReturn(activityInfo)
         whenever(mockInfo.loadSummary(any())).thenReturn(DEFAULT_SUMMARY)
         return mockInfo
+    }
+
+    override fun launchFragmentScenario(
+        fragmentClass: Class<PreferenceFragmentCompat>
+    ): FragmentScenario<PreferenceFragmentCompat> {
+        return FragmentScenario.launch(fragmentClass, arguments)
+            .moveToState(Lifecycle.State.RESUMED)
     }
 
     companion object {

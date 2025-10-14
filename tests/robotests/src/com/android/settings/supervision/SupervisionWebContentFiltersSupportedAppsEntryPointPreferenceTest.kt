@@ -74,7 +74,7 @@ class SupervisionWebContentFiltersSupportedAppsEntryPointPreferenceTest {
     }
 
     @Test
-    fun supportedAppIconExists() {
+    fun filterEnabled_supportedAppIconExistsWithNoColorFilter() {
         val holder =
             PreferenceViewHolder.createInstanceForTests(
                 LayoutInflater.from(context)
@@ -91,5 +91,28 @@ class SupervisionWebContentFiltersSupportedAppsEntryPointPreferenceTest {
         assertThat(icon).isNotNull()
         assertThat(icon?.visibility).isEqualTo(View.VISIBLE)
         assertThat(icon?.drawable).isEqualTo(iconDrawable)
+        assertThat(icon?.colorFilter).isNull()
+    }
+
+    @Test
+    fun filterDisabled_supportedAppIconExistsWithColorFilter() {
+        preference.isEnabled = false
+        val holder =
+            PreferenceViewHolder.createInstanceForTests(
+                LayoutInflater.from(context)
+                    .inflate(
+                        R.layout.supervision_supported_apps_entry_point_preference,
+                        /* root= */ null,
+                    )
+            )
+        preference.onBindViewHolder(holder)
+        val icon =
+            holder.itemView.findViewById<ImageView?>(
+                R.id.supervision_supported_apps_entry_point_icon_1
+            )
+        assertThat(icon).isNotNull()
+        assertThat(icon?.visibility).isEqualTo(View.VISIBLE)
+        assertThat(icon?.drawable).isEqualTo(iconDrawable)
+        assertThat(icon?.colorFilter).isNotNull()
     }
 }
