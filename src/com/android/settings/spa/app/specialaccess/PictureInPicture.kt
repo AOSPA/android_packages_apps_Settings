@@ -22,6 +22,7 @@ import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager.GET_ACTIVITIES
+import android.content.pm.PackageManager.GET_PERMISSIONS
 import android.content.pm.PackageManager.PackageInfoFlags
 import android.util.Log
 import androidx.compose.runtime.Composable
@@ -40,6 +41,7 @@ import kotlinx.coroutines.flow.map
 
 object PictureInPictureListProvider : TogglePermissionAppListProvider {
     override val permissionType = "PictureInPicture"
+
     override fun createModel(context: Context) = PictureInPictureListModel(context)
 }
 
@@ -59,21 +61,24 @@ class PictureInPictureListModel(private val context: Context) :
     private val packageManager = context.packageManager
 
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =
-        userIdFlow.map(::getPictureInPicturePackages)
-            .combine(appListFlow) { pictureInPicturePackages, appList ->
-                appList.map { app ->
-                    createPictureInPictureRecord(
-                        app = app,
-                        isSupport = app.packageName in pictureInPicturePackages,
-                    )
-                }
+        userIdFlow.map(::getPictureInPicturePackages).combine(appListFlow) {
+            pictureInPicturePackages,
+            appList ->
+            appList.map { app ->
+                createPictureInPictureRecord(
+                    app = app,
+                    isSupport = app.packageName in pictureInPicturePackages,
+                )
             }
+        }
 
-    override fun transformItem(app: ApplicationInfo) = createPictureInPictureRecord(
-        app = app,
-        isSupport = app.installed &&
-            getPackageAndActivityInfo(app)?.supportsPictureInPicture() == true,
-    )
+    override fun transformItem(app: ApplicationInfo) =
+        createPictureInPictureRecord(
+            app = app,
+            isSupport =
+                app.installed &&
+                    getPackageAndActivityInfo(app)?.supportsAnyPictureInPictureFeature() == true,
+        )
 
     private fun createPictureInPictureRecord(app: ApplicationInfo, isSupport: Boolean) =
         PictureInPictureRecord(
@@ -97,40 +102,50 @@ class PictureInPictureListModel(private val context: Context) :
 
     private fun getPictureInPicturePackages(userId: Int): Set<String> =
         getPackageAndActivityInfoList(userId)
-            .filter { it.supportsPictureInPicture() }
+            .filter { it.supportsAnyPictureInPictureFeature() }
             .map { it.packageName }
             .toSet()
 
-    private fun getPackageAndActivityInfo(app: ApplicationInfo): PackageInfo? = try {
-        packageManager.getPackageInfoAsUser(app.packageName, GET_ACTIVITIES_FLAGS, app.userId)
-    } catch (e: Exception) {
-        // Query PackageManager.getPackageInfoAsUser() with GET_ACTIVITIES_FLAGS could cause
-        // exception sometimes. Since we reply on this flag to retrieve the Picture In Picture
-        // packages, we need to catch the exception to alleviate the impact before PackageManager
-        // fixing this issue or provide a better api.
-        Log.e(TAG, "Exception while getPackageInfoAsUser", e)
-        null
-    }
+    private fun getPackageAndActivityInfo(app: ApplicationInfo): PackageInfo? =
+        try {
+            packageManager.getPackageInfoAsUser(
+                app.packageName,
+                GET_ACTIVITIES_AND_PERMS_FLAGS,
+                app.userId,
+            )
+        } catch (e: Exception) {
+            // Query PackageManager.getPackageInfoAsUser() with GET_ACTIVITIES_FLAGS could cause
+            // exception sometimes. Since we reply on this flag to retrieve the Picture In Picture
+            // packages, we need to catch the exception to alleviate the impact before
+            // PackageManager fixing this issue or provide a better api.
+            Log.e(TAG, "Exception while getPackageInfoAsUser", e)
+            null
+        }
 
-    private fun getPackageAndActivityInfoList(userId: Int): List<PackageInfo> = try {
-        packageManager.getInstalledPackagesAsUser(GET_ACTIVITIES_FLAGS, userId)
-    } catch (e: Exception) {
-        // Query PackageManager.getPackageInfoAsUser() with GET_ACTIVITIES_FLAGS could cause
-        // exception sometimes. Since we reply on this flag to retrieve the Picture In Picture
-        // packages, we need to catch the exception to alleviate the impact before PackageManager
-        // fixing this issue or provide a better api.
-        Log.e(TAG, "Exception while getInstalledPackagesAsUser", e)
-        emptyList()
-    }
+    private fun getPackageAndActivityInfoList(userId: Int): List<PackageInfo> =
+        try {
+            packageManager.getInstalledPackagesAsUser(GET_ACTIVITIES_AND_PERMS_FLAGS, userId)
+        } catch (e: Exception) {
+            // Query PackageManager.getPackageInfoAsUser() with GET_ACTIVITIES_FLAGS could cause
+            // exception sometimes. Since we reply on this flag to retrieve the Picture In Picture
+            // packages, we need to catch the exception to alleviate the impact before
+            // PackageManager fixing this issue or provide a better api.
+            Log.e(TAG, "Exception while getInstalledPackagesAsUser", e)
+            emptyList()
+        }
 
     companion object {
         private const val TAG = "PictureInPictureListModel"
 
         private val APP_OPS = AppOps(AppOpsManager.OP_PICTURE_IN_PICTURE)
 
-        private fun PackageInfo.supportsPictureInPicture() =
-            activities?.any(ActivityInfo::supportsPictureInPicture) ?: false
+        private fun PackageInfo.supportsAnyPictureInPictureFeature() =
+            (activities?.any(ActivityInfo::supportsPictureInPicture) ?: false) ||
+                (requestedPermissions?.contains(
+                    android.Manifest.permission.USE_PINNED_WINDOWING_LAYER
+                ) ?: false)
 
-        private val GET_ACTIVITIES_FLAGS = PackageInfoFlags.of(GET_ACTIVITIES.toLong())
+        private val GET_ACTIVITIES_AND_PERMS_FLAGS =
+            PackageInfoFlags.of(GET_ACTIVITIES.toLong() or GET_PERMISSIONS.toLong())
     }
 }
