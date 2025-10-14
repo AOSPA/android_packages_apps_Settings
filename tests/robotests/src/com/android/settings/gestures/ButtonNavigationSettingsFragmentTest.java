@@ -26,7 +26,10 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.view.accessibility.Flags;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -50,12 +53,32 @@ public class ButtonNavigationSettingsFragmentTest {
     }
 
     @Test
+    @DisableFlags({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
+            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH})
+    public void searchIndexer_getResources_isNotNull() {
+        assertThat(ButtonNavigationSettingsFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getXmlResourcesToIndex(mContext, true)).isNotNull();
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
+            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH})
+    public void searchIndexer_getResources_isNull() {
+        assertThat(ButtonNavigationSettingsFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getXmlResourcesToIndex(mContext, true)).isNotNull();
+    }
+
+    @Test
+    @DisableFlags({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
+            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH})
     public void getNonIndexableKeys_twoAndThreeButtonNavigationNotAvailable_allKeysNonIndexable() {
         assertThat(ButtonNavigationSettingsFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
                 ApplicationProvider.getApplicationContext())).isNotEmpty();
     }
 
     @Test
+    @DisableFlags({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
+            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH})
     public void getNonIndexableKeys_twoButtonNavigationAvailable_allKeysExceptAnimIndexable() {
         addPackageToPackageManager(ApplicationProvider.getApplicationContext(),
                 NAV_BAR_MODE_2BUTTON_OVERLAY);
@@ -65,6 +88,8 @@ public class ButtonNavigationSettingsFragmentTest {
     }
 
     @Test
+    @DisableFlags({Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION,
+            com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH})
     public void getNonIndexableKeys_threeButtonNavigationAvailable_allKeysExceptAnimIndexable() {
         addPackageToPackageManager(ApplicationProvider.getApplicationContext(),
                 NAV_BAR_MODE_3BUTTON_OVERLAY);

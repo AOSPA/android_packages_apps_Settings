@@ -22,6 +22,7 @@ import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVE
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.view.accessibility.Flags;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,10 +66,16 @@ public class ButtonNavigationSettingsFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.button_navigation_settings) {
+            new BaseSearchIndexProvider(
+                    (Flags.navbarFlipOrderOption()
+                            && com.android.settings.flags.Flags.catalystSettingsSearch())
+                            ? 0 : R.xml.button_navigation_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
+                    if (Flags.navbarFlipOrderOption()) {
+                        return true;
+                    }
                     /*  Hide button navigation settings from search when contextual search is
                      *   enable to match button navigation preferences logic.
                      */
