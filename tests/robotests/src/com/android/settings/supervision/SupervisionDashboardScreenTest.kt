@@ -170,6 +170,7 @@ class SupervisionDashboardScreenTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun listener_onSupervisionDisabled_refreshesPreferences() {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
@@ -181,9 +182,11 @@ class SupervisionDashboardScreenTest {
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionDashboardScreen.KEY)
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+        verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionSetUpPinPreference.KEY)
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun listener_onSupervisionEnabled_refreshesPreferences() {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
@@ -195,5 +198,6 @@ class SupervisionDashboardScreenTest {
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionDashboardScreen.KEY)
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+        verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionSetUpPinPreference.KEY)
     }
 }
