@@ -16,6 +16,8 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import static com.android.settings.deviceinfo.storage.StorageUtils.canHandleManageStorageIntent;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -24,9 +26,11 @@ import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.text.TextUtils;
 
+import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -38,6 +42,7 @@ public class ManageStoragePreferenceController extends BasePreferenceController 
 
     private int mUserId;
     private Drawable mManageStorageDrawable;
+    private static final String TAG = ManageStoragePreferenceController.class.getSimpleName();
 
     public ManageStoragePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -53,7 +58,8 @@ public class ManageStoragePreferenceController extends BasePreferenceController 
 
     @Override
     public int getAvailabilityStatus() {
-        return mManageStorageDrawable == null ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
+        return canHandleManageStorageIntent(mContext, mUserId)
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -61,7 +67,9 @@ public class ManageStoragePreferenceController extends BasePreferenceController 
         super.displayPreference(screen);
 
         Preference preference = screen.findPreference(getPreferenceKey());
-        preference.setIcon(mManageStorageDrawable);
+        Drawable icon = (mManageStorageDrawable != null) ? mManageStorageDrawable :
+                ContextCompat.getDrawable(mContext, R.drawable.ic_delete);
+        preference.setIcon(icon);
     }
 
     @Override
