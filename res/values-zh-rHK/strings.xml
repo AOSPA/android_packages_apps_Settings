@@ -248,14 +248,10 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"向下移"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"移除"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"移至頂端"</string>
-    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
-    <skip />
-    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"將<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>向上移"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"將<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>向下移"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"移除<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"將<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>移去頂部"</string>
     <string name="action_label_menu_option" msgid="6881627571783854975">"編輯系統語言清單，<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"國家, 地區"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"天氣, 攝氏溫度, 度, 氣溫, 攝氏, 華氏"</string>
@@ -316,8 +312,7 @@
     <string name="apply" msgid="7834684883190163536">"套用"</string>
     <string name="share" msgid="8502235338607613795">"分享"</string>
     <string name="add" msgid="8335206931421683426">"新增"</string>
-    <!-- no translation found for verify (6452664472920137535) -->
-    <skip />
+    <string name="verify" msgid="6452664472920137535">"驗證"</string>
     <string name="remove" msgid="1028414219245072102">"移除"</string>
     <string name="process" msgid="2614220641928709668">"處理"</string>
     <!-- no translation found for dismiss (7878176050401175851) -->
@@ -4102,14 +4097,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"通知整理工具"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"將優先順序較低的通知分類並設定為靜音"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"管理通知整理工具使用的應用程式"</string>
-    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
-    <skip />
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"分類展開"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"自動"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"一律展開"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"永不展開"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"套用至工作設定檔應用程式"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服務"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"沒有已安裝的應用程式要求提供 VR 助手服務。"</string>
@@ -5292,8 +5283,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"手機支援的應用程式"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"無法新增 SIM 卡"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"新增 SIM 卡前請先結束衛星連線"</string>
-    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
-    <skip />
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"透過藍牙連接後，飛行模式會在各支援的裝置 (例如手機和手錶)上同步。"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"存取點名稱"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"無法在連接至<xliff:g id="CARRIER">%1$s</xliff:g>時使用"</string>
@@ -5972,14 +5962,10 @@
     <string name="supervision_pin_updated" msgid="660463938258442344">"已更新 PIN"</string>
     <string name="supervision_pin_changed" msgid="4822686882868075710">"已變更 PIN"</string>
     <string name="supervision_pin_deleted" msgid="368631223166018476">"已刪除 PIN"</string>
-    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
-    <skip />
-    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
-    <skip />
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"驗證備援資料"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"你的備援帳戶尚未通過驗證。如要驗證，你需要輸入帳戶密碼。"</string>
+    <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"新增備援資料"</string>
+    <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"如你忘記 PIN，可使用帳戶重設"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"刪除 PIN"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"新增備援電郵地址"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"驗證電郵地址"</string>
@@ -6050,6 +6036,5 @@
     <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"正在配對"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"已連結「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」"</string>
-    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
-    <skip />
+    <string name="safety_center_rescan_button" msgid="1290673104206018701">"掃瞄裝置"</string>
 </resources>
