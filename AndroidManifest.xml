@@ -1418,6 +1418,23 @@
                 android:value="@string/menu_key_system"/>
         </activity>
 
+        <activity android:name="Settings$GameControllerActivity"
+            android:label="@string/game_controller_settings_title"
+            android:exported="false"
+            android:clearTaskOnLaunch="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.GAME_CONTROLLER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.input.gamecontroller.GameControllerListFragment" />
+            <meta-data
+                android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_system" />
+        </activity>
+
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="LanguageSettings"
                 android:label="@string/language_input_gesture_title"
