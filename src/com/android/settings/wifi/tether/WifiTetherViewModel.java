@@ -23,6 +23,7 @@ import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSI
 
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_5GHZ;
+import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_6GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6GHZ;
 
@@ -75,6 +76,7 @@ public class WifiTetherViewModel extends AndroidViewModel {
         sSpeedSummaryResMap.put(SPEED_5GHZ, R.string.wifi_hotspot_speed_summary_5g);
         sSpeedSummaryResMap.put(SPEED_6GHZ, R.string.wifi_hotspot_speed_summary_6g);
         sSpeedSummaryResMap.put(SPEED_2GHZ_5GHZ, R.string.wifi_hotspot_speed_summary_2g_and_5g);
+        sSpeedSummaryResMap.put(SPEED_2GHZ_6GHZ, R.string.wifi_hotspot_speed_summary_2g_and_6g);
     }
 
     protected final WifiHotspotRepository mWifiHotspotRepository;

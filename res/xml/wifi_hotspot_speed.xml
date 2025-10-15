@@ -49,6 +49,11 @@
             android:key="wifi_hotspot_speed_6g"
             android:title="@string/wifi_hotspot_speed_6g"
             android:summary="@string/wifi_hotspot_speed_6g_summary"/>
+
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
+            android:key="wifi_hotspot_speed_2g_6g"
+            android:title="@string/wifi_hotspot_speed_2g_6g"
+            android:summary="@string/wifi_hotspot_speed_2g_6g_summary"/>
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
