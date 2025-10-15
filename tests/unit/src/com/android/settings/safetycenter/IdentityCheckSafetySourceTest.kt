@@ -34,10 +34,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.safetycenter.IdentityCheckSafetySource.Companion.ACTION_ISSUE_CARD_SHOW_DETAILS
 import com.android.settings.safetycenter.IdentityCheckSafetySource.Companion.ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS
+import com.android.settings.safetycenter.IdentityCheckSafetySource.Companion.ACTION_ISSUE_NOTIFICATION_CLICKED
+import com.android.settings.safetycenter.IdentityCheckSafetySource.Companion.ACTION_WATCH_ISSUE_NOTIFICATION_CLICKED
 import com.google.common.truth.Truth.assertThat
+import com.google.common.truth.TruthJUnit.assume
 import org.junit.After
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -102,6 +104,7 @@ class IdentityCheckSafetySourceTest {
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES)
+    @RequiresFlagsDisabled(Flags.FLAG_IDENTITY_CHECK_WATCH)
     fun refreshSafetySources_whenPromoCardAlreadyShown_setsNullData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
@@ -297,13 +300,54 @@ class IdentityCheckSafetySourceTest {
     }
 
     @Test
-    @Ignore("b/353706169")
     @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
-    fun refreshSafetySources_watchAvailableOnPrimaryDevice_setsSafetySourceData() {
+    fun refreshSafetySources_whenWatchPromoCardAlreadyShown_setsNullData() {
+        assume()
+            .that(
+                applicationContext.resources.getBoolean(
+                    R.bool.config_show_identity_check_watch_promo
+                )
+            )
+            .isTrue()
+
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 
         setWatchRangingSupportedValue(true)
-        setIdentityCheckPromoCardShown(false)
+        setIdentityCheckWatchPromoCardShown(true)
+        // This is always true if watch promo card is shown
+        setIdentityCheckPromoCardShown(true)
+
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+        )
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                eq(null),
+                eq(refreshSafetyEvent),
+            )
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    fun refreshSafetySources_whenWatchPromoCardNotShownAndGeneralPromoCardShown_setsWatchData() {
+        assume()
+            .that(
+                applicationContext.resources.getBoolean(
+                    R.bool.config_show_identity_check_watch_promo
+                )
+            )
+            .isTrue()
+
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
+        setWatchRangingSupportedValue(true)
+        setIdentityCheckWatchPromoCardShown(false)
+        setIdentityCheckPromoCardShown(true)
 
         IdentityCheckSafetySource.setSafetySourceData(
             applicationContext,
@@ -319,14 +363,86 @@ class IdentityCheckSafetySourceTest {
                 eq(refreshSafetyEvent),
             )
 
-        val safetySourceData = safetySourceDataArgumentCaptor.firstValue
-        val actionPendingIntent = safetySourceData.issues[0].actions[0].pendingIntent
+        val safetySourceIssue: SafetySourceIssue =
+            safetySourceDataArgumentCaptor.firstValue.issues[0]!!
+
+        assertThat(safetySourceIssue.actions[0].pendingIntent.intent.action)
+            .isEqualTo(ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS)
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    fun refreshSafetySources_watchAvailable_notificationNotClicked_setsDataWithNotification() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
+        setWatchRangingSupportedValue(true)
+        setIdentityCheckWatchPromoCardShown(false)
+        setIdentityCheckWatchNotificationClicked(false)
+
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+        )
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                safetySourceDataArgumentCaptor.capture(),
+                eq(refreshSafetyEvent),
+            )
+
+        val safetySourceIssue: SafetySourceIssue =
+            safetySourceDataArgumentCaptor.firstValue.issues[0]!!
+        val actionPendingIntent = safetySourceIssue.actions[0].pendingIntent
         val showWatchPromo =
             applicationContext.resources.getBoolean(R.bool.config_show_identity_check_watch_promo)
         val expectedAction =
             if (showWatchPromo) ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS
             else ACTION_ISSUE_CARD_SHOW_DETAILS
+        val notificationExpectedAction =
+            if (showWatchPromo) ACTION_WATCH_ISSUE_NOTIFICATION_CLICKED
+            else ACTION_ISSUE_NOTIFICATION_CLICKED
 
+        assertThat(actionPendingIntent.intent.action).isEqualTo(expectedAction)
+        assertThat(safetySourceIssue.customNotification!!.actions[0].pendingIntent.intent.action)
+            .isEqualTo(notificationExpectedAction)
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_ALL_SURFACES, Flags.FLAG_IDENTITY_CHECK_WATCH)
+    fun refreshSafetySources_watchAvailable_notificationClicked_setsDataWithoutNotification() {
+        whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
+
+        setWatchRangingSupportedValue(true)
+        setIdentityCheckWatchPromoCardShown(false)
+        setIdentityCheckWatchNotificationClicked(true)
+
+        IdentityCheckSafetySource.setSafetySourceData(
+            applicationContext,
+            refreshSafetyEvent,
+            biometricManager,
+        )
+
+        verify(safetyCenterManagerWrapper)
+            .setSafetySourceData(
+                eq(applicationContext),
+                eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),
+                safetySourceDataArgumentCaptor.capture(),
+                eq(refreshSafetyEvent),
+            )
+
+        val safetySourceIssue: SafetySourceIssue =
+            safetySourceDataArgumentCaptor.firstValue.issues[0]!!
+        val actionPendingIntent = safetySourceIssue.actions[0].pendingIntent
+
+        assertThat(safetySourceIssue.customNotification).isNull()
+        val showWatchPromo =
+            applicationContext.resources.getBoolean(R.bool.config_show_identity_check_watch_promo)
+        val expectedAction =
+            if (showWatchPromo) ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS
+            else ACTION_ISSUE_CARD_SHOW_DETAILS
         assertThat(actionPendingIntent.intent.action).isEqualTo(expectedAction)
     }
 
@@ -351,6 +467,22 @@ class IdentityCheckSafetySourceTest {
                 any(),
                 eq(sourceChangeSafetyEvent),
             )
+    }
+
+    private fun setIdentityCheckWatchNotificationClicked(clicked: Boolean) {
+        Settings.Secure.putInt(
+            applicationContext.contentResolver,
+            Settings.Secure.IDENTITY_CHECK_WATCH_NOTIFICATION_VIEW_DETAILS_CLICKED,
+            if (clicked) 1 else 0,
+        )
+    }
+
+    private fun setIdentityCheckWatchPromoCardShown(hasShown: Boolean) {
+        Settings.Secure.putInt(
+            applicationContext.contentResolver,
+            Settings.Secure.IDENTITY_CHECK_WATCH_PROMO_CARD_SHOWN,
+            if (hasShown) 1 else 0,
+        )
     }
 
     private fun setIdentityCheckNotificationBeenClicked(clicked: Boolean) {
