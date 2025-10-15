@@ -27,7 +27,7 @@
         android:layout_marginBottom="8dip"
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@color/materialColorOnSurface"
         android:text="@string/modifier_keys_reset_title" />
 
     <TextView
@@ -40,7 +40,7 @@
         android:layout_marginEnd="32dip"
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textColor="@color/materialColorOnSurfaceVariant"
         android:text="@string/modifier_keys_reset_message" />
 
     <RelativeLayout
@@ -63,7 +63,7 @@
             android:paddingVertical="14dp"
             android:drawablePadding="9dp"
             style="@style/ModifierKeyButtonCancel"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:text="@string/modifier_keys_cancel"/>
 
         <Button
@@ -77,7 +77,7 @@
             android:paddingVertical="14dp"
             android:drawablePadding="9dp"
             style="@style/ModifierKeyButtonCancel"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:text="@string/modifier_keys_reset"/>
 
     </RelativeLayout>

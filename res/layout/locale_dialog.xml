@@ -50,7 +50,7 @@
                 android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/materialColorOnSurface"
                 android:fontFamily="@*android:string/config_headlineFontFamilyMedium"/>
         </LinearLayout>
 
@@ -66,7 +66,7 @@
                 android:textSize="16sp"
                 android:maxLength="200"
                 android:autoLink="email|phone|web"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="@color/materialColorOnSurfaceVariant"
                 android:textAlignment="textStart"/>
         </LinearLayout>
     </LinearLayout>

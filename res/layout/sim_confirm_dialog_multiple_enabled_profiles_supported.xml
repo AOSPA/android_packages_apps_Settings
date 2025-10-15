@@ -58,14 +58,14 @@
                     android:src="@drawable/ic_info_outline_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="?android:attr/textColorSecondary"/>
+                    android:tint="@color/materialColorOnSurfaceVariant"/>
                 <TextView
                     android:id="@+id/info_outline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="16dp"
                     android:text="@string/sim_action_switch_sub_dialog_info_outline_for_turning_off"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textColor="@color/materialColorOnSurfaceVariant"
                     android:textAppearance="@style/TextAppearance.DialogMessage"/>
         </LinearLayout>
 </LinearLayout>

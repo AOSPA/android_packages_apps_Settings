@@ -38,7 +38,7 @@
         <TextView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hdr_brightness_standard_image_label"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:layout_gravity="center"
             android:layout_marginTop="10dp" />
     </LinearLayout>
@@ -57,7 +57,7 @@
         <TextView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hdr_brightness_hdr_image_label"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:layout_gravity="center"
             android:layout_marginTop="10dp" />
     </LinearLayout>

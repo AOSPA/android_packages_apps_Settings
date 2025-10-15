@@ -44,7 +44,7 @@
               android:layout_height="wrap_content"
               android:lineSpacingExtra="@dimen/sud_description_line_spacing_extra"
               android:textSize="18sp"
-              android:textColor="?android:attr/textColorSecondary" />
+              android:textColor="@color/materialColorOnSurfaceVariant" />
 
           <TextView
               android:id="@+id/storage_wizard_body"
@@ -52,7 +52,7 @@
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/sud_description_margin_top"
               android:lineSpacingExtra="@dimen/sud_description_line_spacing_extra"
-              android:textColor="?android:attr/textColorPrimary"
+              android:textColor="@color/materialColorOnSurface"
               android:textSize="18sp"
               android:visibility="gone" />
 

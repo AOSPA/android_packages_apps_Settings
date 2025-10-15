@@ -31,7 +31,7 @@
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/gesture_title_go_back"
-        android:textColor="?android:attr/textColorPrimary"/>
+        android:textColor="@color/materialColorOnSurface"/>
 
     <TextView
         android:id="@+id/summary"
@@ -42,7 +42,7 @@
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/gesture_summary_go_back"
-        android:textColor="?android:attr/textColorSecondary"/>
+        android:textColor="@color/materialColorOnSurfaceVariant"/>
 
     <FrameLayout
         android:layout_width="match_parent"

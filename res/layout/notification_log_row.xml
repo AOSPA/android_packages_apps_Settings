@@ -49,7 +49,7 @@
             android:layout_centerVertical="true"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:textSize="12sp"
             android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
             android:marqueeRepeatLimit = "marquee_forever"
@@ -64,7 +64,7 @@
             android:layout_marginStart="6dp"
             android:scaleType="fitCenter"
             android:visibility="gone"
-            android:tint="?android:attr/textColorSecondary"
+            android:tint="@color/materialColorOnSurfaceVariant"
             android:src="@drawable/ic_notifications_alert"
         />
 
@@ -106,7 +106,7 @@
             android:layout_gravity="left|center_vertical"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:textAlignment="viewStart"
         />
 
@@ -117,7 +117,7 @@
             android:layout_gravity="left|center_vertical"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textAlignment="viewStart"
         />
@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginStart="30dp"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/materialColorOnSurface"
                 android:textSize="10sp"
                 android:fontFamily="monospace"
                 android:textAlignment="viewStart"
@@ -148,7 +148,7 @@
             android:orientation="horizontal"
             android:layout_marginStart="30dp"
             android:layout_marginBottom="6dp"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:textSize="10sp"
             android:fontFamily="monospace"
             android:textAlignment="viewStart"

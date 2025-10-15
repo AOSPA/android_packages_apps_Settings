@@ -37,11 +37,11 @@
 
         <Preference
             android:key="key_your_satellite_plan"
-            android:icon="?android:attr/textColorPrimary"/>
+            android:icon="@color/materialColorOnSurface"/>
 
         <Preference
             android:key="key_your_satellite_data_plan"
-            android:icon="?android:attr/textColorPrimary"
+            android:icon="@color/materialColorOnSurface"
             settings:isPreferenceVisible="false"/>
 
     </PreferenceCategory>

@@ -49,7 +49,7 @@
             android:paddingEnd="?android:attr/dialogPreferredPadding"
             android:text="@*android:string/bugreport_option_interactive_summary"
             android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/materialColorOnSurfaceVariant" />
 
         <CheckedTextView
             android:id="@+id/bugreport_option_full_title"
@@ -76,7 +76,7 @@
             android:paddingEnd="?android:attr/dialogPreferredPadding"
             android:text="@*android:string/bugreport_option_full_summary"
             android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/materialColorOnSurfaceVariant" />
 
     </RelativeLayout>
 </ScrollView>
