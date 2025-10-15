@@ -73,10 +73,10 @@ class SafetyCenterFragmentTest {
     }
 
     private fun runTest(data: SafetyCenterData, testBlock: (SafetyCenterFragment) -> Unit) {
+        shadowSafetyCenterManager.setSafetyCenterData(data)
         val scenario =
             launchFragmentInContainer<SafetyCenterFragment>(themeResId = R.style.Theme_SubSettings)
         scenario.onFragment { fragment ->
-            shadowSafetyCenterManager.setSafetyCenterData(data)
             ShadowLooper.idleMainLooper()
             testBlock(fragment)
         }
@@ -95,7 +95,15 @@ class SafetyCenterFragmentTest {
 
     @Test
     fun fragment_onLaunch_showsAllPreferences() {
-        runTest(EMPTY_SC_DATA) { _ ->
+        val entry =
+            createEntry(
+                id = "TestEntry",
+                title = "Entry with Severity Level OK",
+                sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+            )
+
+        runTest(createScData(entries = listOf(entry))) { _ ->
             onView(withId(SettingsLibR.id.banner_container)).check(matches(isDisplayed()))
 
             onView(withText(mApplication.getString(R.string.security_header)))
@@ -126,12 +134,10 @@ class SafetyCenterFragmentTest {
     // Tests for Device Unlock preference summary and icon in Safety Center main page
     @Test
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
-    fun deviceUnlockPref_whenNoData_usesDefaultSummaryAndNullIcon() {
+    fun deviceUnlockPref_whenNoData_subpageHidden() {
         runTest(EMPTY_SC_DATA) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
-            assertThat(preference?.summary.toString())
-                .isEqualTo(expectedDefaultDeviceUnlockSummary())
-            assertThat(preference?.icon).isNull()
+            assertThat(preference?.isVisible).isFalse()
         }
     }
 
@@ -148,6 +154,7 @@ class SafetyCenterFragmentTest {
 
         runTest(createScData(entries = listOf(entry))) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
             assertThat(preference?.summary.toString())
                 .isEqualTo(expectedDefaultDeviceUnlockSummary())
             assertIconResource(preference, R.drawable.ic_safety_info)
@@ -176,6 +183,7 @@ class SafetyCenterFragmentTest {
 
         runTest(createScData(entries = listOf(entry), activeIssues = listOf(issue))) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
             assertThat(preference?.summary.toString()).isEqualTo(entry.summary)
             assertIconResource(preference, R.drawable.ic_safety_info)
         }
@@ -195,6 +203,7 @@ class SafetyCenterFragmentTest {
 
         runTest(createScData(entries = listOf(entry))) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
             assertThat(preference?.summary.toString()).isEqualTo(entry.summary)
             assertIconResource(preference, R.drawable.ic_safety_recommendation)
         }
@@ -214,6 +223,7 @@ class SafetyCenterFragmentTest {
 
         runTest(createScData(entries = listOf(entry))) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
             assertThat(preference?.summary.toString()).isEqualTo(entry.summary)
             assertIconResource(preference, R.drawable.ic_safety_warn)
         }
@@ -233,6 +243,7 @@ class SafetyCenterFragmentTest {
 
         runTest(createScData(entries = listOf(entry))) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
             assertThat(preference?.summary.toString())
                 .isEqualTo(expectedDefaultDeviceUnlockSummary())
             assertIconResource(preference, R.drawable.ic_safety_empty)
@@ -253,6 +264,7 @@ class SafetyCenterFragmentTest {
 
         runTest(createScData(entries = listOf(entry))) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
             assertThat(preference?.summary.toString())
                 .isEqualTo(mApplication.getString(R.string.safety_center_refresh_error))
             assertThat(preference?.icon).isNull()
@@ -261,7 +273,7 @@ class SafetyCenterFragmentTest {
 
     @Test
     @DisableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
-    fun deviceUnlockPref_whenFlagDisabled_usesDefaultSummaryAndNullIcon() {
+    fun deviceUnlockPref_whenFlagDisabled_subpageHidden() {
         val entry =
             createEntry(
                 id = "TestEntry",
@@ -280,9 +292,7 @@ class SafetyCenterFragmentTest {
 
         runTest(createScData(entries = listOf(entry), activeIssues = listOf(issue))) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
-            assertThat(preference?.summary.toString())
-                .isEqualTo(expectedDefaultDeviceUnlockSummary())
-            assertThat(preference?.icon).isNull()
+            assertThat(preference?.isVisible).isFalse()
         }
     }
 

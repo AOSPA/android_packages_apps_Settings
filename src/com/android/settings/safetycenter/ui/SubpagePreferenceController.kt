@@ -108,6 +108,14 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
+        preference?.isVisible = false
+    }
+
+    override fun updateState(preference: Preference?) {
+        super.updateState(preference)
+        if (preference != null && viewModel != null) {
+            updatePreferenceUi(preference, viewModel!!.getCurrentSafetyCenterDataAsUiData())
+        }
     }
 
     /**
@@ -116,6 +124,10 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
      */
     private fun updatePreferenceUi(preference: Preference, data: SafetyCenterUiData) {
         val relatedSafetySourcesData = getRelatedSafetySourcesData(data)
+        if (relatedSafetySourcesData.isEmpty()) {
+            preference.isVisible = false
+            return
+        }
         val relatedIssueOnlySafetySourcesData = getRelatedIssueOnlySafetySourcesData(data)
 
         val subpageMaxSeverity =
@@ -132,6 +144,7 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
                 highestSeverityIssueOnlySafetySourceIssue,
                 subpageMaxSeverity,
             )
+        preference.isVisible = true
         Log.d(TAG, "[$preferenceKey] UI updated with max severity: $subpageMaxSeverity")
     }
 
