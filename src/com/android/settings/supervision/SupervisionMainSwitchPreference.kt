@@ -19,6 +19,7 @@ import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_MAIN_TOGGLE_OFF
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_MAIN_TOGGLE_ON
 import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
 import android.os.UserHandle
@@ -70,7 +71,7 @@ class SupervisionMainSwitchPreference(
         get() = KEY
 
     override val title
-        get() = R.string.device_supervision_switch_title
+        get() = R.string.device_supervision_features_title
 
     override fun getSummary(context: Context): CharSequence? =
         if (!context.isSupervisingCredentialSet) {
@@ -104,7 +105,12 @@ class SupervisionMainSwitchPreference(
         val preferenceKeys =
             buildList<String> {
                 mainSwitchPreference?.parent?.forEachRecursively {
-                    if (it.parent?.key == SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_1) {
+                    if (
+                        it.parent?.key == SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_1 ||
+                            (Flags.enableSupervisionSettingsUiUpdates() &&
+                                it.parent?.key ==
+                                    SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_2)
+                    ) {
                         add(it.key)
                     }
                 }
@@ -237,7 +243,11 @@ class SupervisionMainSwitchPreference(
 
     private fun updateDependentPreferenceSummary(preference: Preference?) {
         preference?.parent?.forEachRecursively {
-            if (it.parent?.key == SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_1) {
+            if (
+                it.parent?.key == SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_1 ||
+                    (Flags.enableSupervisionSettingsUiUpdates() &&
+                        it.parent?.key == SupervisionDashboardScreen.SUPERVISION_DYNAMIC_GROUP_2)
+            ) {
                 val newSummary = preferenceDataMap?.get(it.key)?.summary
                 if (newSummary != null) {
                     it.summary = newSummary
