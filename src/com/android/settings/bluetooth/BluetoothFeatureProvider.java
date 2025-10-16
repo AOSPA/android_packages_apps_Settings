@@ -96,5 +96,5 @@ public interface BluetoothFeatureProvider {
 
     /** Send broadcast when connection failure happens. */
     void notifyConnectionFailureTimeChange(
-            @NonNull Context context, @NonNull CachedBluetoothDevice device);
+            @NonNull Context context, @NonNull CachedBluetoothDevice device, long timestamp);
 }

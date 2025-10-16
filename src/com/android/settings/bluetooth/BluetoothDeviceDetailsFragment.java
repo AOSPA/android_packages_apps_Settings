@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.os.UserManager;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -127,7 +128,7 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
                     mLastConnectionFailureTimeMillis =
                             cachedDevice.getConnectionFailureTimeMillis();
                     mBluetoothFeatureProvider.notifyConnectionFailureTimeChange(
-                            getContext(), cachedDevice);
+                            getContext(), cachedDevice, SystemClock.elapsedRealtime());
                 }
             };
 
