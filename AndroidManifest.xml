@@ -6163,7 +6163,34 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                    android:value="com.android.settings.safetycenter.ui.SafetyCenterFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                    android:value="true" />
+            <intent-filter android:priority="200">
+                <action android:name="android.settings.PRIVACY_CONTROLS"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+
+        <receiver
+            android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileStateReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileService"
+            android:enabled="false"
+            android:icon="@drawable/ic_satellite_tile"
+            android:label="@string/satellite_tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data android:name="android.service.quicksettings.TILE_CATEGORY"
+                android:value="android.service.quicksettings.CATEGORY_CONNECTIVITY" />
+        </service>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
 

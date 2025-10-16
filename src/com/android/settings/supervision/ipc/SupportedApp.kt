@@ -33,6 +33,8 @@ data class SupportedApp(
     var summary: CharSequence? = null,
     /** Optional package name for the supported app. */
     var packageName: String? = null,
+    /** Optional help article link for the supported app. */
+    var learnMoreLink: String? = null,
 ) {
     constructor(
         bundle: Bundle
@@ -40,14 +42,15 @@ data class SupportedApp(
         title = bundle.getCharSequence(TITLE),
         summary = bundle.getCharSequence(SUMMARY),
         packageName = bundle.getString(PACKAGE_NAME),
+        learnMoreLink = bundle.getString(LEARN_MORE_LINK),
     )
 
     fun toBundle(): Bundle {
         return Bundle().apply {
             title?.let { putCharSequence(TITLE, it) }
             summary?.let { putCharSequence(SUMMARY, it) }
-
             packageName?.let { putString(PACKAGE_NAME, it) }
+            learnMoreLink?.let { putString(LEARN_MORE_LINK, it) }
         }
     }
 
@@ -55,5 +58,6 @@ data class SupportedApp(
         const val TITLE = "title"
         const val SUMMARY = "summary"
         const val PACKAGE_NAME = "package_name"
+        const val LEARN_MORE_LINK = "learn_more_link"
     }
 }

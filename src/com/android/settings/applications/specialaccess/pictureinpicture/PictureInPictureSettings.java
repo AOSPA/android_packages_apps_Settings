@@ -15,7 +15,9 @@
  */
 package com.android.settings.applications.specialaccess.pictureinpicture;
 
+import static android.Manifest.permission.USE_PINNED_WINDOWING_LAYER;
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
+import static android.content.pm.PackageManager.GET_PERMISSIONS;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -37,6 +39,7 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
@@ -94,19 +97,20 @@ public class PictureInPictureSettings extends EmptyTextSettings {
     private IconDrawableFactory mIconDrawableFactory;
 
     /**
-     * @return true if the package has any activities that declare that they support
-     * picture-in-picture.
+     * @return true if the package has any activities that declare picture-in-picture support,
+     * either by {@link android.R.attr#supportsPictureInPicture} or when requesting
+     * {@link USE_PINNED_WINDOWING_LAYER} permission in the manifest.
      */
 
-    public static boolean checkPackageHasPictureInPictureActivities(String packageName,
-            ActivityInfo[] activities) {
+    public static boolean checkPackageSupportsPictureInPicture(String packageName,
+            ActivityInfo[] activities,
+            String[] requestedPermissions) {
         // Skip if it's in the ignored list
         if (IGNORE_PACKAGE_LIST.contains(packageName)) {
             return false;
         }
 
-        // Iterate through all the activities and check if it is resizeable and supports
-        // picture-in-picture
+        // Check if any activity supports picture-in-picture
         if (activities != null) {
             for (int i = activities.length - 1; i >= 0; i--) {
                 if (activities[i].supportsPictureInPicture()) {
@@ -114,6 +118,12 @@ public class PictureInPictureSettings extends EmptyTextSettings {
                 }
             }
         }
+
+        // Check if app declares pinned windowing layer permission
+        if (ArrayUtils.contains(requestedPermissions, USE_PINNED_WINDOWING_LAYER)) {
+            return true;
+        }
+
         return false;
     }
 
@@ -207,10 +217,10 @@ public class PictureInPictureSettings extends EmptyTextSettings {
 
         for (int id : userIds) {
             final List<PackageInfo> installedPackages = mPackageManager.getInstalledPackagesAsUser(
-                    GET_ACTIVITIES, id);
+                    GET_ACTIVITIES | GET_PERMISSIONS, id);
             for (PackageInfo packageInfo : installedPackages) {
-                if (checkPackageHasPictureInPictureActivities(packageInfo.packageName,
-                        packageInfo.activities)) {
+                if (checkPackageSupportsPictureInPicture(packageInfo.packageName,
+                        packageInfo.activities, packageInfo.requestedPermissions)) {
                     pipApps.add(new Pair<>(packageInfo.applicationInfo, id));
                 }
             }

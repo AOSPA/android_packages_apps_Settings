@@ -28,6 +28,7 @@ import com.android.internal.annotations.VisibleForTesting
 import com.android.settings.R
 import com.android.settings.core.SettingsBaseActivity
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
+import com.google.android.material.appbar.AppBarLayout
 import com.google.common.collect.HashBiMap
 import kotlin.math.min
 
@@ -39,12 +40,12 @@ open class TabbedDisplayPreferenceFragment(
     private val testViewModel: DisplayPreferenceViewModel? = null
 ) : Fragment() {
 
-    @VisibleForTesting internal lateinit var appBarLayout: View
+    @VisibleForTesting internal lateinit var appBarLayout: AppBarLayout
 
     @VisibleForTesting
     internal lateinit var displayTopologyPreferenceView: DisplayTopologyPreferenceView
 
-    @VisibleForTesting internal lateinit var selectedDisplayPrefContainer: View
+    @VisibleForTesting internal lateinit var selectedDisplayPrefContainer: FocusAwareFrameLayout
 
     @VisibleForTesting internal lateinit var noDisplayConnectedLayout: View
 
@@ -77,12 +78,14 @@ open class TabbedDisplayPreferenceFragment(
         val activity = getCurrentActivity() ?: return
         activity.setTitle(R.string.external_display_settings_title)
         appBarLayout = view.findViewById(R.id.app_bar_layout)
-        selectedDisplayPrefContainer = view.findViewById(R.id.selected_display_preference_container)
+        selectedDisplayPrefContainer =
+            view.findViewById(R.id.selected_display_preference_container) as FocusAwareFrameLayout
         noDisplayConnectedLayout = view.findViewById(R.id.no_display_connected_layout)
 
         setupAppBarLayout()
         setupDisplayTopologyPreferenceView(view)
         setupSelectedDisplayPreferenceFragment(savedInstanceState)
+        setupInputFocus()
         startListeningForUpdates()
     }
 
@@ -90,6 +93,10 @@ open class TabbedDisplayPreferenceFragment(
         super.onDestroyView()
         if (::displayTopologyPreferenceView.isInitialized) {
             displayTopologyPreferenceView.removeOnDisplayBlockSelectedListener()
+            displayTopologyPreferenceView.setNextFocusFinder(null)
+        }
+        if (::selectedDisplayPrefContainer.isInitialized) {
+            selectedDisplayPrefContainer.setNextFocusFinder(null)
         }
         if (::appBarLayout.isInitialized) {
             appBarLayout.setOnGenericMotionListener(null)
@@ -235,6 +242,8 @@ open class TabbedDisplayPreferenceFragment(
                     toolbarItem: ScrollableToolbarItemLayout.ToolbarItem,
                 ) {
                     toolbarIdxToDisplayIdMapping[position]?.let { displayId ->
+                        // Scrolls back up to display block panel
+                        appBarLayout.setExpanded(/* expanded= */ true, /* animate= */ true)
                         viewModel.updateSelectedDisplay(displayId)
                     }
                 }
@@ -243,5 +252,45 @@ open class TabbedDisplayPreferenceFragment(
         toolbarIdxToDisplayIdMapping.inverse().get(selectedDisplayId)?.let { toolbarPosition ->
             activity.setToolbarSelectedItem(toolbarPosition)
         }
+    }
+
+    /**
+     * Sets up the children forward and backward focus target when focus leaves the child container
+     *
+     * For display blocks, moving backward should move back to the Activity root (this refers to
+     * back button of Settings page). Moving forward should move the focus to selected display
+     * options
+     *
+     * For selected display options, moving backward should move back focus to display block panel.
+     * Moving forward should move it to toolbar
+     */
+    private fun setupInputFocus() {
+        displayTopologyPreferenceView.setNextFocusFinder(
+            object : FocusAwareFrameLayout.NextFocusFinder {
+                override fun findNextFocus(focused: View?, direction: Int): View? {
+                    if (FocusAwareFrameLayout.isMovingForward(direction)) {
+                        return selectedDisplayPrefContainer
+                    } else {
+                        // When moving backward from the display topology, move focus to the root
+                        // decor view of the activity, typically allowing focus to go to the
+                        // back button or other elements in the SettingsBaseActivity.
+                        return getCurrentActivity()?.window?.decorView as? ViewGroup
+                    }
+                }
+            }
+        )
+        selectedDisplayPrefContainer.setNextFocusFinder(
+            object : FocusAwareFrameLayout.NextFocusFinder {
+                override fun findNextFocus(focused: View?, direction: Int): View? {
+                    if (FocusAwareFrameLayout.isMovingBackward(direction)) {
+                        // Scrolls back up to display block panel
+                        appBarLayout.setExpanded(/* expanded= */ true, /* animate= */ true)
+                        return displayTopologyPreferenceView
+                    }
+                    // Focus forward already moves naturally to Toolbar items
+                    return null
+                }
+            }
+        )
     }
 }

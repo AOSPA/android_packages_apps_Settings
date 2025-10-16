@@ -425,11 +425,14 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
                 ImageButton(context).apply {
                     setImageResource(props.drawableRes)
                     background = context.getDrawable(R.drawable.display_block_arrow_background)
-                    contentDescription = context.getString(props.contentDescriptionRes)
+                    importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_NO
+                    isFocusable = false
                     setClickable(false)
                 },
                 LayoutParams(arrowSizePx, arrowSizePx, Gravity.CENTER),
             )
+            contentDescription = context.getString(props.contentDescriptionRes)
+            isFocusable = true
             setOnClickListener { _ -> onA11yMoveListener?.invoke(props.direction) }
             visibility = GONE
         }

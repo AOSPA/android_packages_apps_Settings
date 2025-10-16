@@ -248,14 +248,10 @@
     <string name="preferred_locale_menu_down" msgid="1033373887552535585">"ତଳକୁ ମୁଭ କରନ୍ତୁ"</string>
     <string name="preferred_locale_menu_remove" msgid="8547483341987864590">"କାଢ଼ି ଦିଅନ୍ତୁ"</string>
     <string name="preferred_locale_menu_top" msgid="9110819342909557531">"ଶୀର୍ଷକୁ ମୁଭ କରନ୍ତୁ"</string>
-    <!-- no translation found for description_menu_move_locale_up (1173752729906055993) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_down (1592822886888971081) -->
-    <skip />
-    <!-- no translation found for description_menu_remove_locale (3983007630013652215) -->
-    <skip />
-    <!-- no translation found for description_menu_move_locale_top (3608042763577357280) -->
-    <skip />
+    <string name="description_menu_move_locale_up" msgid="1173752729906055993">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>କୁ ଉପରକୁ ମୁଭ କରନ୍ତୁ"</string>
+    <string name="description_menu_move_locale_down" msgid="1592822886888971081">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>କୁ ତଳକୁ ମୁଭ କରନ୍ତୁ"</string>
+    <string name="description_menu_remove_locale" msgid="3983007630013652215">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>କୁ କାଢ଼ି ଦିଅନ୍ତୁ"</string>
+    <string name="description_menu_move_locale_top" msgid="3608042763577357280">"<xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>କୁ ଶୀର୍ଷକୁ ମୁଭ କରନ୍ତୁ"</string>
     <string name="action_label_menu_option" msgid="6881627571783854975">"ସିଷ୍ଟମ ଭାଷା ତାଲିକା ଏଡିଟ କରନ୍ତୁ, <xliff:g id="SELECTED_LANGUAGE">%s</xliff:g>"</string>
     <string name="keywords_region_page" msgid="7148673842253297212">"ଦେଶ, କ୍ଷେତ୍ର"</string>
     <string name="keywords_temperature_page" msgid="5447163674488205412">"ପାଣିପାଗ, ସେଣ୍ଟିଗ୍ରେଡ, ଡିଗ୍ରୀ, ତାପମାତ୍ରା, ସେଲସିୟସ, ଫାରେନହାଇଟ"</string>
@@ -316,8 +312,12 @@
     <string name="apply" msgid="7834684883190163536">"ଲାଗୁ କରନ୍ତୁ"</string>
     <string name="share" msgid="8502235338607613795">"ସେୟାର୍‍ କରନ୍ତୁ"</string>
     <string name="add" msgid="8335206931421683426">"ଯୋଗ କରନ୍ତୁ"</string>
+    <!-- no translation found for verify (6452664472920137535) -->
+    <skip />
     <string name="remove" msgid="1028414219245072102">"କାଢ଼ି ଦିଅନ୍ତୁ"</string>
     <string name="process" msgid="2614220641928709668">"ପ୍ରକ୍ରିୟାନ୍ୱିତ କର"</string>
+    <!-- no translation found for dismiss (7878176050401175851) -->
+    <skip />
     <string name="settings_label" msgid="943294133671632976">"ସେଟିଂସ"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"ସେଟିଂସ"</string>
     <string name="settings_shortcut" msgid="8548239727871847171">"ସେଟିଂସ ସର୍ଟକଟ"</string>
@@ -3308,7 +3308,7 @@
     <string name="data_usage_tab_3g" msgid="6111070409752123049">"2G-3G"</string>
     <string name="data_usage_list_mobile" msgid="3738130489722964291">"ମୋବାଇଲ୍‌"</string>
     <string name="data_usage_list_none" msgid="2091924522549134855">"କିଛି ନୁହେଁ"</string>
-    <string name="data_usage_enable_mobile" msgid="1996943748103310201">"ମୋବାଇଲ୍‌ ଡାଟା"</string>
+    <string name="data_usage_enable_mobile" msgid="1996943748103310201">"ମୋବାଇଲ ଡାଟା"</string>
     <string name="data_usage_enable_3g" msgid="2818189799905446932">"2G-3G ଡାଟା"</string>
     <string name="data_usage_enable_4g" msgid="1526584080251993023">"4G ଡାଟା"</string>
     <string name="data_roaming_enable_mobile" msgid="5745287603577995977">"ରୋମିଙ୍ଗ"</string>
@@ -4101,14 +4101,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"ବିଜ୍ଞପ୍ତି ଅର୍ଗାନାଇଜର"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"କମ ପ୍ରାଥମିକତା ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକୁ ବଣ୍ଡଲ ଏବଂ ସାଇଲେନ୍ସ କରନ୍ତୁ"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"ବିଜ୍ଞପ୍ତି ଅର୍ଗାନାଇଜର ପାଇଁ ଆପ୍ସକୁ ପରିଚାଳନା କରନ୍ତୁ"</string>
-    <!-- no translation found for notification_bundle_expansion_category_title (3539828718885113409) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_auto_title (3804244187360463325) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_always_title (8281397405786291111) -->
-    <skip />
-    <!-- no translation found for notification_bundle_expand_never_title (7244439435307954523) -->
-    <skip />
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"ବଣ୍ଡଲ ଏକ୍ସପେନସନ"</string>
+    <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"ସ୍ୱତଃ"</string>
+    <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"ସର୍ବଦା ବିସ୍ତାର କରନ୍ତୁ"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"କେବେ ବି ବିସ୍ତାର କରନ୍ତୁ ନାହିଁ"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"ୱାର୍କ ପ୍ରୋଫାଇଲ ଆପ୍ସରେ ଲାଗୁ କରନ୍ତୁ"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR ସାହାଯ୍ୟକାରୀ ସେବାଗୁଡ଼ିକ"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"VR ସାହାଯ୍ୟକାରୀ ସେବାଗୁଡ଼ିକ ଭାବରେ ଚଲାଯିବା ପାଇଁ, ଇନଷ୍ଟଲ ହୋଇଥିବା କୌଣସି ଆପ୍ସ ଅନୁରୋଧ କରିନାହିଁ।"</string>
@@ -5292,8 +5288,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"ଆପଣଙ୍କର ଫୋନରେ ସପୋର୍ଟ କରୁଥିବା ଆପ୍ସ"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"କୌଣସି SIM ଯୋଗ କରିପାରିବେ ନାହିଁ"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"ଆପଣ କୌଣସି SIM ଯୋଗ କରିବା ପୂର୍ବରୁ ସେଟେଲାଇଟ କନେକ୍ସନକୁ ସମାପ୍ତ କରନ୍ତୁ"</string>
-    <!-- no translation found for airplane_mode_sync_description (7445965305382384909) -->
-    <skip />
+    <string name="airplane_mode_sync_description" msgid="7445965305382384909">"ବ୍ଲୁଟୁଥ ମାଧ୍ୟମରେ କନେକ୍ଟ ହେଲେ, ଏୟାରପ୍ଲେନ ମୋଡ ଫୋନ ଏବଂ ୱାଚ ପରି ସପୋର୍ଟ କରୁଥିବା ଡିଭାଇସଗୁଡ଼ିକରେ ସିଙ୍କ ହେବ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ଆକ୍ସେସ ପଏଣ୍ଟ ନାମ"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>କୁ ସଂଯୁକ୍ତ ହୋଇଥିବା ସମୟରେ ଉପଲବ୍ଧ ନଥାଏ"</string>
@@ -5972,6 +5967,14 @@
     <string name="supervision_pin_updated" msgid="660463938258442344">"PINକୁ ଅପଡେଟ କରାଯାଇଛି"</string>
     <string name="supervision_pin_changed" msgid="4822686882868075710">"PIN ପରିବର୍ତ୍ତନ କରାଯାଇଛି"</string>
     <string name="supervision_pin_deleted" msgid="368631223166018476">"PIN ଡିଲିଟ କରାଯାଇଛି"</string>
+    <!-- no translation found for supervision_recovery_banner_title_verify (94833947387963488) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_verify (1463391385277996666) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_title_add (4124903663348389949) -->
+    <skip />
+    <!-- no translation found for supervision_recovery_banner_summary_add (6989861841264157457) -->
+    <skip />
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"PIN ଡିଲିଟ କରନ୍ତୁ"</string>
     <string name="supervision_add_pin_recovery_title" msgid="3487098027604685794">"ରିକଭରି ଇମେଲ ଯୋଗ କରନ୍ତୁ"</string>
     <string name="supervision_verify_pin_recovery_title" msgid="3166602415814821497">"ଆପଣଙ୍କ ଇମେଲ ଯାଞ୍ଚ କରନ୍ତୁ"</string>
@@ -6030,6 +6033,18 @@
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
     <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_issues_banner_group_expandable_title (3710448986851994773) -->
+    <skip />
+    <!-- no translation found for safety_center_issues_banner_group_collapsible_title (4417325786751907663) -->
+    <skip />
+    <!-- no translation found for safety_center_dismissed_issues_subsection_title (3097430988082288937) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_title (181880492023793974) -->
+    <skip />
+    <!-- no translation found for safety_center_issue_card_dismiss_confirmation_message (6644443810531446787) -->
+    <skip />
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"ପେୟାରିଂ"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> କନେକ୍ଟ କରାଯାଇଛି"</string>
+    <!-- no translation found for safety_center_rescan_button (1290673104206018701) -->
+    <skip />
 </resources>

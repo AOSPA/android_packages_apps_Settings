@@ -75,14 +75,7 @@ class SupervisionRecoveryBannerPreferenceTest {
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun recoveryPending_showsVerifyFlowText() {
         // Corresponds to the "if (showVerifyFlow)" branch: hasAccount && state == STATE_PENDING
-        val recoveryInfo =
-            SupervisionRecoveryInfo(
-                /* accountName */ "test@email.com",
-                /* accountType */ "default",
-                /* state */ STATE_PENDING,
-                /* accountData */ null,
-            )
-        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(recoveryInfo)
+        setSupervisionRecoveryInfo(STATE_PENDING)
 
         preference.createAndBindWidget<BannerMessagePreference>(context).also { banner ->
             assertThat(banner.getTitle())
@@ -97,15 +90,25 @@ class SupervisionRecoveryBannerPreferenceTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun recoveryMissing_isAvailable() {
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
+
+        assertThat(preference.isAvailable(context)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun recoveryPending_isAvailable() {
+        setSupervisionRecoveryInfo(STATE_PENDING)
+
+        assertThat(preference.isAvailable(context)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun recoveryVerified_isNotAvailable() {
-        val recoveryInfo =
-            SupervisionRecoveryInfo(
-                /* accountName */ "email",
-                /* accountType */ "default",
-                /* state */ STATE_VERIFIED,
-                /* accountData */ null,
-            )
-        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(recoveryInfo)
+        setSupervisionRecoveryInfo(STATE_VERIFIED)
+
         assertThat(preference.isAvailable(context)).isFalse()
     }
 
@@ -113,34 +116,34 @@ class SupervisionRecoveryBannerPreferenceTest {
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun flagDisabled_recoveryMissing_isNotAvailable() {
         whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
+
         assertThat(preference.isAvailable(context)).isFalse()
     }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun flagDisabled_recoveryPending_isNotAvailable() {
-        val recoveryInfo =
-            SupervisionRecoveryInfo(
-                /* accountName */ "test@email.com",
-                /* accountType */ "default",
-                /* state */ STATE_PENDING,
-                /* accountData */ null,
-            )
-        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(recoveryInfo)
+        setSupervisionRecoveryInfo(STATE_PENDING)
+
         assertThat(preference.isAvailable(context)).isFalse()
     }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun flagDisabled_recoveryVerified_isNotAvailable() {
+        setSupervisionRecoveryInfo(STATE_VERIFIED)
+
+        assertThat(preference.isAvailable(context)).isFalse()
+    }
+
+    private fun setSupervisionRecoveryInfo(@SupervisionRecoveryInfo.State state: Int) {
         val recoveryInfo =
             SupervisionRecoveryInfo(
                 /* accountName */ "email",
                 /* accountType */ "default",
-                /* state */ STATE_VERIFIED,
+                /* state */ state,
                 /* accountData */ null,
             )
         whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(recoveryInfo)
-        assertThat(preference.isAvailable(context)).isFalse()
     }
 }

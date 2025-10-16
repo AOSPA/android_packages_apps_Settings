@@ -54,7 +54,6 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.window.flags.Flags;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -197,10 +196,7 @@ public class UserAspectRatioManager {
     public void setUserMinAspectRatio(@NonNull String packageName, int uid,
             @PackageManager.UserMinAspectRatio int aspectRatio) throws RemoteException {
         mIPm.setUserMinAspectRatio(packageName, uid, aspectRatio);
-
-        if (Flags.backupAndRestoreForUserAspectRatioSettings()) {
-            mBackupManager.dataChanged();
-        }
+        mBackupManager.dataChanged();
     }
 
     /**

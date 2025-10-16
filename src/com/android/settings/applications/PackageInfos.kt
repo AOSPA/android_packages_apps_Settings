@@ -55,11 +55,11 @@ fun Context.getApplicationInfo(packageName: String) =
     }
 
 /** Returns [PackageInfo] of given package with activities flags set, null if not found. */
-fun Context.getPackageInfoWithActivities(packageName: String) =
+fun Context.getPackageInfoWithActivitiesAndPermissions(packageName: String) =
     try {
         packageManager.getPackageInfoAsUser(
             packageName,
-            PackageManager.GET_ACTIVITIES,
+            PackageManager.GET_ACTIVITIES or PackageManager.GET_PERMISSIONS,
             UserHandle.myUserId(),
         )
     } catch (_: Exception) {

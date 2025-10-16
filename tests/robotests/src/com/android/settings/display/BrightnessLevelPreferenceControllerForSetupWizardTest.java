@@ -64,21 +64,21 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     }
 
     @Test
-    public void displayPreference_flagOnAndRestricted_preferenceVisibleFalse() {
+    public void displayPreference_restricted_preferenceVisibleFalse() {
         Preference preference = displayPreference(/* restricted= */ true);
 
         assertThat(preference.isVisible()).isFalse();
     }
 
     @Test
-    public void getAvailabilityStatus_flagOn_available() {
+    public void getAvailabilityStatus_notRestricted_available() {
         displayPreference(/* restricted= */ false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_flagOnAndRestricted_conditionallyUnavailable() {
+    public void getAvailabilityStatus_restricted_conditionallyUnavailable() {
         displayPreference(/* restricted= */ true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
