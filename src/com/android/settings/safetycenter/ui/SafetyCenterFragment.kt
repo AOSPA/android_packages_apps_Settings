@@ -15,6 +15,7 @@
  */
 package com.android.settings.safetycenter.ui
 
+import android.annotation.StringRes
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Bundle
@@ -96,23 +97,20 @@ class SafetyCenterFragment : DashboardFragment() {
         for (controller in allControllers) {
             if (controller is SubpagePreferenceController) {
                 when (controller.preferenceKey) {
-                    DEVICE_UNLOCK_SUBPAGE_KEY -> {
-                        controller.setRelatedSafetySources(
-                            SafetyCenterSubpageRegistry.getXmlSafetySourceIds(
-                                requireContext(),
-                                SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK,
-                            )
+                    DEVICE_UNLOCK_SUBPAGE_KEY ->
+                        initializeSubpagePreferenceController(
+                            controller = controller,
+                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK,
+                            summaryResId = R.string.device_unlock_subpage_default_summary,
+                            lifecycleOwner = owner,
                         )
-                        controller.setRelatedIssueOnlySafetySources(
-                            SafetyCenterSubpageRegistry.getIssueOnlySafetySourceIds(
-                                SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK
-                            )
+                    PRIVACY_CONTROLS_SUBPAGE_KEY ->
+                        initializeSubpagePreferenceController(
+                            controller = controller,
+                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.PRIVACY_CONTROLS,
+                            summaryResId = R.string.privacy_sources_summary,
+                            lifecycleOwner = owner,
                         )
-                        controller.setDefaultSummaryResId(
-                            R.string.device_unlock_subpage_default_summary
-                        )
-                        controller.setViewModelAndLifecycle(viewModel, owner)
-                    }
                 }
             }
         }
@@ -130,10 +128,27 @@ class SafetyCenterFragment : DashboardFragment() {
         return SettingsEnums.SAFETY_CENTER
     }
 
+    private fun initializeSubpagePreferenceController(
+        controller: SubpagePreferenceController,
+        subpageKey: SafetyCenterSubpageRegistry.SubpageKey,
+        @StringRes summaryResId: Int,
+        lifecycleOwner: LifecycleOwner,
+    ) {
+        controller.setRelatedSafetySources(
+            SafetyCenterSubpageRegistry.getXmlSafetySourceIds(requireContext(), subpageKey)
+        )
+        controller.setRelatedIssueOnlySafetySources(
+            SafetyCenterSubpageRegistry.getIssueOnlySafetySourceIds(subpageKey)
+        )
+        controller.setDefaultSummaryResId(summaryResId)
+        controller.setViewModelAndLifecycle(viewModel, lifecycleOwner)
+    }
+
     companion object {
         private const val TAG = "SafetyCenterFragment"
         private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
         private const val DEVICE_UNLOCK_SUBPAGE_KEY = "device_unlock_subpage"
+        private const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
 
         @JvmField
         val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =

@@ -93,7 +93,12 @@ class SafetyCenterFragmentTest {
         return mApplication.getString(DEFAULT_DEVICE_UNLOCK_SUMMARY_RES)
     }
 
+    private fun expectedDefaultPrivacyControlsSummary(): String {
+        return mApplication.getString(DEFAULT_PRIVACY_CONTROLS_SUMMARY_RES)
+    }
+
     @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     fun fragment_onLaunch_showsAllPreferences() {
         val entry =
             createEntry(
@@ -132,6 +137,7 @@ class SafetyCenterFragmentTest {
     }
 
     // Tests for Device Unlock preference summary and icon in Safety Center main page
+
     @Test
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     fun deviceUnlockPref_whenNoData_subpageHidden() {
@@ -296,10 +302,96 @@ class SafetyCenterFragmentTest {
         }
     }
 
+    // Tests for Privacy controls preference summary and icon in Safety Center main page
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun privacyControlsPref_whenNoData_usesDefaultSummaryAndNullIcon() {
+        runTest(EMPTY_SC_DATA) { fragment ->
+            val preference = fragment.findPreference<Preference>(PRIVACY_CONTROLS_SUBPAGE_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.summary.toString())
+                .isEqualTo(expectedDefaultPrivacyControlsSummary())
+            assertThat(preference?.icon).isNull()
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun privacyControlsPref_whenDataWithNoIssues_usesDefaultSummaryAndNullIcon() {
+        val entry =
+            createEntry(
+                id = "TestEntry",
+                title = "Entry with Severity Level OK",
+                sourceId = ANDROID_HEALTH_CONNECT_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+            )
+
+        runTest(createScData(entries = listOf(entry))) { fragment ->
+            val preference = fragment.findPreference<Preference>(PRIVACY_CONTROLS_SUBPAGE_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.summary.toString())
+                .isEqualTo(expectedDefaultPrivacyControlsSummary())
+            assertThat(preference?.icon).isNull()
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun privacyControlsPref_whenEntryWithIssue_usesEntrySummaryAndNullIcon() {
+        val entry =
+            createEntry(
+                id = "TestEntry",
+                title = "Entry with Severity Level OK",
+                summary = "health summary",
+                sourceId = ANDROID_HEALTH_CONNECT_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_RECOMMENDATION,
+            )
+        val issue =
+            createIssue(
+                id = "TestIssue",
+                title = "Issue with Severity Level OK",
+                summary = "Issue Summary",
+                sourceIds = setOf(ANDROID_HEALTH_CONNECT_SOURCE_ID),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_RECOMMENDATION,
+            )
+
+        runTest(createScData(entries = listOf(entry), activeIssues = listOf(issue))) { fragment ->
+            val preference = fragment.findPreference<Preference>(PRIVACY_CONTROLS_SUBPAGE_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.summary.toString()).isEqualTo("health summary")
+            assertThat(preference?.icon).isNull()
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun privacyControlsPref_whenIssueOnlySourceIssue_usesIssueTitleAndNullIcon() {
+        val issue =
+            createIssue(
+                id = "TestIssue",
+                title = "Issue with Severity Level OK",
+                summary = "Issue Summary",
+                sourceIds = setOf(ANDROID_A11Y_SOURCES_ID),
+                severity = SafetyCenterIssue.ISSUE_SEVERITY_LEVEL_OK,
+            )
+
+        runTest(createScData(activeIssues = listOf(issue))) { fragment ->
+            val preference = fragment.findPreference<Preference>(PRIVACY_CONTROLS_SUBPAGE_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.summary.toString()).isEqualTo("Issue with Severity Level OK")
+            assertThat(preference?.icon).isNull()
+        }
+    }
+
     companion object {
         private const val DEVICE_UNLOCK_KEY = "device_unlock_subpage"
+        private const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
         private const val ANDROID_LOCK_SCREEN_SOURCE_ID = "AndroidLockScreen"
+        private const val ANDROID_HEALTH_CONNECT_SOURCE_ID = "AndroidHealthConnect"
+        private const val ANDROID_A11Y_SOURCES_ID = "AndroidAccessibility"
         private val DEFAULT_DEVICE_UNLOCK_SUMMARY_RES =
             R.string.device_unlock_subpage_default_summary
+        private val DEFAULT_PRIVACY_CONTROLS_SUMMARY_RES = R.string.privacy_sources_summary
     }
 }
