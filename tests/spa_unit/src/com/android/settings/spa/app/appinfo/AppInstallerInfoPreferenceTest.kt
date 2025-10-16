@@ -85,7 +85,7 @@ class AppInstallerInfoPreferenceTest {
             .thenReturn(INSTALLER_PACKAGE_LABEL)
         whenever(Utils.getApplicationLabel(context, INITIATING_PACKAGE_NAME))
             .thenReturn(INITIATING_PACKAGE_LABEL)
-        whenever(AppUtils.isMainlineModule(any(), eq(PACKAGE_NAME))).thenReturn(false)
+        whenever(AppUtils.isLimitedAppInfoPackage(any(), eq(PACKAGE_NAME))).thenReturn(false)
     }
 
     @After
@@ -113,8 +113,8 @@ class AppInstallerInfoPreferenceTest {
     }
 
     @Test
-    fun whenIsMainlineModule_notDisplayed() {
-        whenever(AppUtils.isMainlineModule(any(), eq(PACKAGE_NAME))).thenReturn(true)
+    fun whenIsLimitedAppInfoPackage_notDisplayed() {
+        whenever(AppUtils.isLimitedAppInfoPackage(any(), eq(PACKAGE_NAME))).thenReturn(true)
 
         setContent()
 

@@ -93,7 +93,7 @@ class AppButtonsTest {
         whenever(packageManager.getApplicationLabel(any())).thenReturn(APP_LABEL)
         whenever(packageManager.packageInstaller).thenReturn(packageInstaller)
         whenever(packageManager.getPackageInfo(PACKAGE_NAME, 0)).thenReturn(PACKAGE_INFO)
-        whenever(AppUtils.isMainlineModule(packageManager, PACKAGE_NAME)).thenReturn(false)
+        whenever(AppUtils.isLimitedAppInfoPackage(packageManager, PACKAGE_NAME)).thenReturn(false)
         featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
     }
 
@@ -103,8 +103,8 @@ class AppButtonsTest {
     }
 
     @Test
-    fun isMainlineModule_notDisplayed() {
-        whenever(AppUtils.isMainlineModule(packageManager, PACKAGE_NAME)).thenReturn(true)
+    fun isLimitedAppInfoPackage_notDisplayed() {
+        whenever(AppUtils.isLimitedAppInfoPackage(packageManager, PACKAGE_NAME)).thenReturn(true)
 
         setContent()
 
