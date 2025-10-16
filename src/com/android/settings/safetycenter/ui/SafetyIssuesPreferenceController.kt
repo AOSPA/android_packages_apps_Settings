@@ -22,6 +22,7 @@ import android.safetycenter.SafetyCenterIssue
 import android.util.Log
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
+import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
@@ -72,13 +73,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
                 return@observe
             }
             Log.d(TAG, "[$preferenceKey] safetyCenterUiLiveData observer notified")
-            bannerGroup?.let { group ->
-                if (isSubpage) {
-                    updateIssuesInSubpage(group, data)
-                } else {
-                    updateIssuesInMainPage(group, data)
-                }
-            }
+            bannerGroup?.let { group -> updatePreferenceUi(group, data) }
         }
     }
 
@@ -128,6 +123,24 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             illustrationPreference?.isVisible = true
         }
     }
+
+    override fun updateState(preference: Preference?) {
+        super.updateState(preference)
+        val model = viewModel
+        if (preference != null && model != null) {
+            updatePreferenceUi(
+                preference as BannerMessagePreferenceGroup,
+                model.getCurrentSafetyCenterDataAsUiData(),
+            )
+        }
+    }
+
+    private fun updatePreferenceUi(group: BannerMessagePreferenceGroup, data: SafetyCenterUiData) =
+        if (isSubpage) {
+            updateIssuesInSubpage(group, data)
+        } else {
+            updateIssuesInMainPage(group, data)
+        }
 
     /** Updates the [BannerMessagePreferenceGroup] with all active issues for the main page. */
     private fun updateIssuesInMainPage(
