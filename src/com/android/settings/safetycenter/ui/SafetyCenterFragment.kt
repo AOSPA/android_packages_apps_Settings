@@ -98,11 +98,47 @@ class SafetyCenterFragment : DashboardFragment() {
         for (controller in allControllers) {
             if (controller is SubpagePreferenceController) {
                 when (controller.preferenceKey) {
+                    APP_SECURITY_SUBPAGE_KEY ->
+                        initializeSubpagePreferenceController(
+                            controller = controller,
+                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.APP_SECURITY,
+                            summaryResId = R.string.safety_center_app_security_summary,
+                            lifecycleOwner = owner,
+                        )
                     DEVICE_UNLOCK_SUBPAGE_KEY ->
                         initializeSubpagePreferenceController(
                             controller = controller,
                             subpageKey = SafetyCenterSubpageRegistry.SubpageKey.DEVICE_UNLOCK,
-                            summaryResId = R.string.device_unlock_subpage_default_summary,
+                            summaryResId = R.string.safety_center_device_unlock_summary,
+                            lifecycleOwner = owner,
+                        )
+                    ACCOUNT_SECURITY_SUBPAGE_KEY ->
+                        initializeSubpagePreferenceController(
+                            controller = controller,
+                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.ACCOUNT_SECURITY,
+                            summaryResId = R.string.safety_center_account_security_summary,
+                            lifecycleOwner = owner,
+                        )
+                    DEVICE_FINDERS_SUBPAGE_KEY ->
+                        initializeSubpagePreferenceController(
+                            controller = controller,
+                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.DEVICE_FINDERS,
+                            summaryResId = R.string.safety_center_device_finders_summary,
+                            lifecycleOwner = owner,
+                        )
+                    SYSTEM_AND_UPDATES_SUBPAGE_KEY ->
+                        initializeSubpagePreferenceController(
+                            controller = controller,
+                            subpageKey = SafetyCenterSubpageRegistry.SubpageKey.SYSTEM_AND_UPDATES,
+                            summaryResId = R.string.safety_center_system_and_updates_summary,
+                            lifecycleOwner = owner,
+                        )
+                    CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY ->
+                        initializeSubpagePreferenceController(
+                            controller = controller,
+                            subpageKey =
+                                SafetyCenterSubpageRegistry.SubpageKey.CELLULAR_NETWORK_SECURITY,
+                            summaryResId = R.string.safety_center_cellular_network_security_summary,
                             lifecycleOwner = owner,
                         )
                     PRIVACY_CONTROLS_SUBPAGE_KEY ->
@@ -148,7 +184,13 @@ class SafetyCenterFragment : DashboardFragment() {
     companion object {
         private const val TAG = "SafetyCenterFragment"
         private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
+        private const val APP_SECURITY_SUBPAGE_KEY = "app_security_subpage"
         private const val DEVICE_UNLOCK_SUBPAGE_KEY = "device_unlock_subpage"
+        private const val ACCOUNT_SECURITY_SUBPAGE_KEY = "account_security_subpage"
+        private const val DEVICE_FINDERS_SUBPAGE_KEY = "device_finders_subpage"
+        private const val SYSTEM_AND_UPDATES_SUBPAGE_KEY = "system_and_updates_subpage"
+        private const val CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY =
+            "cellular_network_security_subpage"
         private const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
 
         @JvmField

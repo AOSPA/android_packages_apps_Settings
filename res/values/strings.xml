@@ -14993,8 +14993,18 @@
     <string name="privacy_sources_title">Privacy controls</string>
     <!-- Summary for privacy_sources_summary subpage in Safety Center [CHAR LIMIT=NONE] -->
     <string name="privacy_sources_summary">Permissions, controls</string>
-    <!-- The title of the subpage for safety settings relating to screen lock and biometrics [CHAR LIMIT=60] -->
+    <!-- The title of the subpage for safety settings related to app security [CHAR LIMIT=60] -->
+    <string name="app_security_subpage_title">App security</string>
+    <!-- The title of the subpage for safety settings related to screen lock and biometrics [CHAR LIMIT=60] -->
     <string name="device_unlock_subpage_title">Device unlock</string>
+    <!-- The title of the subpage for safety settings related to account security [CHAR LIMIT=60] -->
+    <string name="account_security_subpage_title">Account security</string>
+    <!-- The title of the subpage for safety settings related to device finders [CHAR LIMIT=60] -->
+    <string name="device_finders_subpage_title">Device finders</string>
+    <!-- The title of the subpage for safety settings related to system updates [CHAR LIMIT=60] -->
+    <string name="system_and_updates_subpage_title">System and updates</string>
+    <!-- The title of the subpage for safety settings related to cellular network security [CHAR LIMIT=60] -->
+    <string name="cellular_network_security_subpage_title">Cellular network security</string>
     <!-- Title that leads to location settings in Safety Center [CHAR LIMIT=60] -->
     <string name="location_settings">Location access</string>
     <!-- Subtitle for the link to location in Safety Center [CHAR LIMIT=NONE] -->
@@ -15011,8 +15021,6 @@
     <string name="safety_center_refresh_error">Couldn\’t check settings</string>
     <!-- The summary shown to the user when a subpage of safety sources in Safety Center all have an unknown status. We expect the status of the sources to eventually update and the summary will change [CHAR LIMIT=NONE] -->
     <string name="safety_center_subpage_unknown_summary">No info yet</string>
-    <!-- The default summary of the device unlock subpage of safety center -->
-    <string name="device_unlock_subpage_default_summary"></string>
 
     <!-- Safety Center app security subpage summary [CHAR LIMIT=NONE] -->
     <string name="safety_center_app_security_summary"></string>
@@ -15020,14 +15028,22 @@
     <string name="safety_center_app_security_footer"></string>
     <!-- Safety Center app security source search terms [CHAR LIMIT=NONE] -->
     <string name="safety_center_app_security_search_terms"></string>
+    <!-- Safety Center device unlock subpage summary [CHAR LIMIT=NONE] -->
+    <string name="safety_center_device_unlock_summary"></string>
     <!-- Safety Center account security subpage summary [CHAR LIMIT=NONE] -->
     <string name="safety_center_account_security_summary"></string>
     <!-- Safety Center account security source search terms [CHAR LIMIT=NONE] -->
     <string name="safety_center_account_security_search_terms"></string>
+    <!-- Safety Center device finder subpage summary [CHAR LIMIT=NONE] -->
+    <string name="safety_center_device_finders_summary"></string>
     <!-- Safety Center device finder source search terms [CHAR LIMIT=NONE] -->
-    <string name="safety_center_device_finder_search_terms"></string>
+    <string name="safety_center_device_finders_search_terms"></string>
+    <!-- Safety Center system and updates subpage summary [CHAR LIMIT=NONE] -->
+    <string name="safety_center_system_and_updates_summary">Updates</string>
     <!-- Safety Center system component update search terms [CHAR LIMIT=NONE] -->
     <string name="safety_center_system_component_update_search_terms"></string>
+    <!-- Safety Center cellular network security subpage summary [CHAR LIMIT=NONE] -->
+    <string name="safety_center_cellular_network_security_summary">Network type, encryption, notification controls</string>
 
     <!-- Safety Center issues banner group expandable title  [CHAR LIMIT=NONE] -->
     <string name="safety_center_issues_banner_group_expandable_title">More alerts</string>

@@ -27,9 +27,36 @@
         android:key="security_category"
         android:title="@string/security_header">
         <Preference
+            android:key="app_security_subpage"
+            android:title="@string/app_security_subpage_title"
+            android:fragment="com.android.settings.safetycenter.ui.AppSecuritySubpageFragment"
+            settings:controller="com.android.settings.safetycenter.ui.SubpagePreferenceController"/>
+        <Preference
             android:key="device_unlock_subpage"
             android:title="@string/device_unlock_subpage_title"
-            android:fragment="com.android.settings.safetycenter.ui.DeviceUnlockSubPageFragment"
+            android:fragment="com.android.settings.safetycenter.ui.DeviceUnlockSubpageFragment"
+            settings:controller="com.android.settings.safetycenter.ui.SubpagePreferenceController"/>
+        <Preference
+            android:key="account_security_subpage"
+            android:title="@string/account_security_subpage_title"
+            android:fragment="com.android.settings.safetycenter.ui.AccountSecuritySubpageFragment"
+            settings:controller="com.android.settings.safetycenter.ui.SubpagePreferenceController"/>
+
+        <Preference
+            android:key="device_finders_subpage"
+            android:title="@string/device_finders_subpage_title"
+            android:fragment="com.android.settings.safetycenter.ui.DeviceFindersSubpageFragment"
+            settings:controller="com.android.settings.safetycenter.ui.SubpagePreferenceController"/>
+
+        <Preference
+            android:key="system_and_updates_subpage"
+            android:title="@string/system_and_updates_subpage_title"
+            android:fragment="com.android.settings.safetycenter.ui.SystemAndUpdatesSubpageFragment"
+            settings:controller="com.android.settings.safetycenter.ui.SubpagePreferenceController"/>
+        <Preference
+            android:key="cellular_network_security_subpage"
+            android:title="@string/cellular_network_security_subpage_title"
+            android:fragment="com.android.settings.safetycenter.ui.CellularNetworkSecuritySubpageFragment"
             settings:controller="com.android.settings.safetycenter.ui.SubpagePreferenceController"/>
     </PreferenceCategory>
     <PreferenceCategory
