@@ -148,6 +148,9 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
             pref.setExtraWidgetOnClickListener((v) -> startActivity(new Intent(
                     GestureNavigationSettingsFragment.GESTURE_NAVIGATION_SETTINGS)
                     .setPackage(getContext().getPackageName())));
+
+            pref.setExtraWidgetContentDescription(getContext().getString(
+                    R.string.gesture_settings_button_description));
         }
 
         // With flag enabled, the button order preference will always be available
@@ -164,6 +167,9 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                             .setDestination(ButtonNavigationSettingsFragment.class.getName())
                             .setSourceMetricsCategory(SettingsEnums.SETTINGS_GESTURE_SWIPE_UP)
                             .launch());
+
+            pref.setExtraWidgetContentDescription(getContext().getString(
+                    R.string.button_navigation_settings_button_description));
         }
     }
 
