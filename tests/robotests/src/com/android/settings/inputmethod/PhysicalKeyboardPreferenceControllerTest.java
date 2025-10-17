@@ -116,7 +116,7 @@ public class PhysicalKeyboardPreferenceControllerTest {
     @Config(shadows = ShadowInputDevice.class)
     public void updateState_hasKeyboard_setSummaryToKeyboardName() {
         final InputDevice device = mock(InputDevice.class);
-        when(device.isVirtual()).thenReturn(false);
+        when(device.isPhysicalDevice()).thenReturn(true);
         when(device.isFullKeyboard()).thenReturn(true);
         when(device.getName()).thenReturn("test_keyboard");
         ShadowInputDevice.addDevice(0, device);

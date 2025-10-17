@@ -26,21 +26,16 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 
 import android.content.Context;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.accessibility.Flags;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -54,9 +49,6 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {SettingsShadowResources.class})
 public class AutoBrightnessPreferenceControllerForSetupWizardTest {
-
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String PREFERENCE_KEY = "auto_brightness";
 
@@ -73,8 +65,7 @@ public class AutoBrightnessPreferenceControllerForSetupWizardTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void displayPreference_flagOn_preferenceVisibleTrue() {
+    public void displayPreference_preferenceVisibleTrue() {
         Preference preference =
                 displayPreference(/* configAvailable= */ true, /* restricted= */ false);
 
@@ -82,8 +73,7 @@ public class AutoBrightnessPreferenceControllerForSetupWizardTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void displayPreference_flagOnAndRestricted_preferenceVisibleFalse() {
+    public void displayPreference_restricted_preferenceVisibleFalse() {
         Preference preference =
                 displayPreference(/* configAvailable= */ true, /* restricted= */ true);
 
@@ -91,50 +81,29 @@ public class AutoBrightnessPreferenceControllerForSetupWizardTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void displayPreference_flagOff_preferenceVisibleFalse() {
-        Preference preference =
-                displayPreference(/* configAvailable= */ true, /* restricted= */ false);
-
-        assertThat(preference.isVisible()).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void getAvailabilityStatus_configTrueAndFlagOn_availableUnsearchable() {
+    public void getAvailabilityStatus_configTrue_availableUnsearchable() {
         displayPreference(/* configAvailable= */ true, /* restricted= */ false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void getAvailabilityStatus_configTrueAndFlagOnAndRestricted_conditionallyUnavailable() {
+    public void getAvailabilityStatus_configTrueAndRestricted_conditionallyUnavailable() {
         displayPreference(/* configAvailable= */ true, /* restricted= */ true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void getAvailabilityStatus_configFalseAndFlagOn_unsupportedOnDevice() {
+    public void getAvailabilityStatus_configFalse_unsupportedOnDevice() {
         displayPreference(/* configAvailable= */ false, /* restricted= */ false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void getAvailabilityStatus_configFalseAndFlagOnAndRestricted_conditionallyUnavailable() {
+    public void getAvailabilityStatus_configFalseAndRestricted_conditionallyUnavailable() {
         displayPreference(/* configAvailable= */ false, /* restricted= */ true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void getAvailabilityStatus_flagOff_conditionallyUnavailable() {
-        displayPreference(/* configAvailable= */ true, /* restricted= */ false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }

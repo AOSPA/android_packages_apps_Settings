@@ -34,23 +34,65 @@ class SupportedAppsApiTest {
     fun testResponseCodec() {
         val response =
             mapOf(
-                "key1" to listOf(SupportedApp(title = "title1", packageName = "app1")),
+                "key1" to
+                    listOf(
+                        SupportedApp(
+                            title = "title1",
+                            packageName = "app1",
+                            learnMoreLink = "https://helparticle.com/1",
+                        )
+                    ),
                 "key2" to
                     listOf(
-                        SupportedApp(title = "title2", packageName = "app2"),
-                        SupportedApp(title = "title3", packageName = "app3"),
+                        SupportedApp(
+                            title = "title2",
+                            packageName = "app2",
+                            learnMoreLink = "https://helparticle.com/2",
+                        ),
+                        SupportedApp(
+                            title = "title3",
+                            packageName = "app3",
+                            learnMoreLink = "https://helparticle.com/3",
+                        ),
                     ),
                 "key3" to
                     listOf(
-                        SupportedApp(title = "title2", packageName = "app2"),
-                        SupportedApp(title = "title3", packageName = "app3"),
-                        SupportedApp(title = "title4", packageName = "app4"),
+                        SupportedApp(
+                            title = "title2",
+                            packageName = "app2",
+                            learnMoreLink = "https://helparticle.com/2",
+                        ),
+                        SupportedApp(
+                            title = "title3",
+                            packageName = "app3",
+                            learnMoreLink = "https://helparticle.com/3",
+                        ),
+                        SupportedApp(
+                            title = "title4",
+                            packageName = "app4",
+                            learnMoreLink = "https://helparticle.com/4",
+                        ),
                     ),
-                "key4" to listOf(SupportedApp(title = "title4", packageName = "app4")),
+                "key4" to
+                    listOf(
+                        SupportedApp(
+                            title = "title4",
+                            packageName = "app4",
+                            learnMoreLink = "https://helparticle.com/4",
+                        )
+                    ),
                 "key5" to
                     listOf(
-                        SupportedApp(title = "title5", packageName = "app5"),
-                        SupportedApp(title = "title6", packageName = "app6"),
+                        SupportedApp(
+                            title = "title5",
+                            packageName = "app5",
+                            learnMoreLink = "https://helparticle.com/5",
+                        ),
+                        SupportedApp(
+                            title = "title6",
+                            packageName = "app6",
+                            learnMoreLink = "https://helparticle.com/6",
+                        ),
                     ),
             )
         val encoded = supportedAppsApi.responseCodec.encode(response)

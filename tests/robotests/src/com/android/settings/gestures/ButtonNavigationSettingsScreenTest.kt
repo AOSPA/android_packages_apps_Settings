@@ -16,9 +16,11 @@
 
 package com.android.settings.gestures
 
+import android.content.ComponentName
 import android.content.Context
 import android.view.accessibility.Flags
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.Settings
 import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.TestScope
@@ -40,5 +42,30 @@ class ButtonNavigationSettingsScreenTest() : SettingsCatalystTestCase() {
 
         assertThat(hierarchy.find(DefaultButtonNavigationSettingsOrderPreference.KEY)).isNotNull()
         assertThat(hierarchy.find(ReverseButtonNavigationSettingsOrderPreference.KEY)).isNotNull()
+    }
+
+    @Test
+    fun isIndexable_returnTrue() {
+        assertThat(preferenceScreenCreator.indexable).isTrue()
+    }
+
+    @Test
+    fun hasCompleteHierarchy() {
+        assertThat(preferenceScreenCreator.hasCompleteHierarchy()).isTrue()
+    }
+
+    @Test
+    fun getFragmentClass() {
+        assertThat(preferenceScreenCreator.fragmentClass())
+            .isEqualTo(ButtonNavigationSettingsFragment::class.java)
+    }
+
+    @Test
+    fun getLaunchIntent_returnButtonNavigationSettingsActivityIntent() {
+        val expectedComponent =
+            ComponentName(appContext, Settings.ButtonNavigationSettingsActivity::class.java)
+        val intent = preferenceScreenCreator.getLaunchIntent(appContext, null)
+        assertThat(intent).isNotNull()
+        assertThat(intent!!.component).isEqualTo(expectedComponent)
     }
 }

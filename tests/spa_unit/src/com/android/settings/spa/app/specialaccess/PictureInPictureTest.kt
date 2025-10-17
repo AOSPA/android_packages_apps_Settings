@@ -41,21 +41,18 @@ import org.mockito.Mock
 import org.mockito.Mockito.any
 import org.mockito.Mockito.anyInt
 import org.mockito.Mockito.eq
+import org.mockito.Mockito.`when` as whenever
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
-import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class PictureInPictureTest {
-    @get:Rule
-    val mockito: MockitoRule = MockitoJUnit.rule()
+    @get:Rule val mockito: MockitoRule = MockitoJUnit.rule()
 
-    @Spy
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    @Spy private val context: Context = ApplicationProvider.getApplicationContext()
 
-    @Mock
-    private lateinit var packageManager: PackageManager
+    @Mock private lateinit var packageManager: PackageManager
 
     private lateinit var listModel: PictureInPictureListModel
 
@@ -70,7 +67,8 @@ class PictureInPictureTest {
     @Test
     fun modelResourceId() {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.picture_in_picture_title)
-        assertThat(listModel.switchTitleResId).isEqualTo(R.string.picture_in_picture_app_detail_switch)
+        assertThat(listModel.switchTitleResId)
+            .isEqualTo(R.string.picture_in_picture_app_detail_switch)
         assertThat(listModel.footerResId).isEqualTo(R.string.picture_in_picture_app_detail_summary)
     }
 
@@ -79,10 +77,29 @@ class PictureInPictureTest {
         whenever(packageManager.getInstalledPackagesAsUser(any<PackageInfoFlags>(), anyInt()))
             .thenReturn(listOf(PICTURE_IN_PICTURE_PACKAGE_INFO))
 
-        val recordListFlow = listModel.transform(
-            userIdFlow = flowOf(USER_ID),
-            appListFlow = flowOf(listOf(PICTURE_IN_PICTURE_APP)),
-        )
+        val recordListFlow =
+            listModel.transform(
+                userIdFlow = flowOf(USER_ID),
+                appListFlow = flowOf(listOf(PICTURE_IN_PICTURE_APP)),
+            )
+
+        val recordList = recordListFlow.first()
+        assertThat(recordList).hasSize(1)
+        val record = recordList[0]
+        assertThat(record.app).isSameInstanceAs(PICTURE_IN_PICTURE_APP)
+        assertThat(record.isSupport).isTrue()
+    }
+
+    @Test
+    fun transform_withInteractivePiPApp_isSupported() = runTest {
+        whenever(packageManager.getInstalledPackagesAsUser(any<PackageInfoFlags>(), anyInt()))
+            .thenReturn(listOf(INTERACTIVE_PIP_PACKAGE_INFO))
+
+        val recordListFlow =
+            listModel.transform(
+                userIdFlow = flowOf(USER_ID),
+                appListFlow = flowOf(listOf(PICTURE_IN_PICTURE_APP)),
+            )
 
         val recordList = recordListFlow.first()
         assertThat(recordList).hasSize(1)
@@ -96,10 +113,11 @@ class PictureInPictureTest {
         whenever(packageManager.getInstalledPackagesAsUser(any<PackageInfoFlags>(), anyInt()))
             .thenThrow(DeadSystemRuntimeException())
 
-        val recordListFlow = listModel.transform(
-            userIdFlow = flowOf(USER_ID),
-            appListFlow = flowOf(listOf(PICTURE_IN_PICTURE_APP)),
-        )
+        val recordListFlow =
+            listModel.transform(
+                userIdFlow = flowOf(USER_ID),
+                appListFlow = flowOf(listOf(PICTURE_IN_PICTURE_APP)),
+            )
 
         val recordList = recordListFlow.first()
         assertThat(recordList).hasSize(1)
@@ -111,10 +129,13 @@ class PictureInPictureTest {
     @Test
     fun transformItem() {
         whenever(
-            packageManager.getPackageInfoAsUser(
-                eq(PICTURE_IN_PICTURE_PACKAGE_NAME), any<PackageInfoFlags>(), eq(USER_ID)
+                packageManager.getPackageInfoAsUser(
+                    eq(PICTURE_IN_PICTURE_PACKAGE_NAME),
+                    any<PackageInfoFlags>(),
+                    eq(USER_ID),
+                )
             )
-        ).thenReturn(PICTURE_IN_PICTURE_PACKAGE_INFO)
+            .thenReturn(PICTURE_IN_PICTURE_PACKAGE_INFO)
 
         val record = listModel.transformItem(PICTURE_IN_PICTURE_APP)
 
@@ -125,10 +146,13 @@ class PictureInPictureTest {
     @Test
     fun transformItem_getPackageInfoAsUserThrowsException_treatAsNotSupported() {
         whenever(
-            packageManager.getPackageInfoAsUser(
-                eq(PICTURE_IN_PICTURE_PACKAGE_NAME), any<PackageInfoFlags>(), eq(USER_ID)
+                packageManager.getPackageInfoAsUser(
+                    eq(PICTURE_IN_PICTURE_PACKAGE_NAME),
+                    any<PackageInfoFlags>(),
+                    eq(USER_ID),
+                )
             )
-        ).thenThrow(DeadSystemRuntimeException())
+            .thenThrow(DeadSystemRuntimeException())
 
         val record = listModel.transformItem(PICTURE_IN_PICTURE_APP)
 
@@ -174,28 +198,42 @@ class PictureInPictureTest {
         assertThat(isChangeable).isFalse()
     }
 
-    private fun createRecord(isSupport: Boolean) = PictureInPictureRecord(
-        app = PICTURE_IN_PICTURE_APP,
-        isSupport = isSupport,
-        appOpsController = AppOpsController(
-            context = context,
+    private fun createRecord(isSupport: Boolean) =
+        PictureInPictureRecord(
             app = PICTURE_IN_PICTURE_APP,
-            appOps = AppOps(AppOpsManager.OP_PICTURE_IN_PICTURE),
-        ),
-    )
+            isSupport = isSupport,
+            appOpsController =
+                AppOpsController(
+                    context = context,
+                    app = PICTURE_IN_PICTURE_APP,
+                    appOps = AppOps(AppOpsManager.OP_PICTURE_IN_PICTURE),
+                ),
+        )
 
     private companion object {
         const val USER_ID = 0
         const val PICTURE_IN_PICTURE_PACKAGE_NAME = "picture.in.picture.package.name"
-        val PICTURE_IN_PICTURE_APP = ApplicationInfo().apply {
-            packageName = PICTURE_IN_PICTURE_PACKAGE_NAME
-            flags = ApplicationInfo.FLAG_INSTALLED
-        }
-        val PICTURE_IN_PICTURE_PACKAGE_INFO = PackageInfo().apply {
-            packageName = PICTURE_IN_PICTURE_PACKAGE_NAME
-            activities = arrayOf(ActivityInfo().apply {
-                flags = ActivityInfo.FLAG_SUPPORTS_PICTURE_IN_PICTURE
-            })
-        }
+        val PICTURE_IN_PICTURE_APP =
+            ApplicationInfo().apply {
+                packageName = PICTURE_IN_PICTURE_PACKAGE_NAME
+                flags = ApplicationInfo.FLAG_INSTALLED
+            }
+        val PICTURE_IN_PICTURE_PACKAGE_INFO =
+            PackageInfo().apply {
+                packageName = PICTURE_IN_PICTURE_PACKAGE_NAME
+                activities =
+                    arrayOf(
+                        ActivityInfo().apply {
+                            flags = ActivityInfo.FLAG_SUPPORTS_PICTURE_IN_PICTURE
+                        }
+                    )
+            }
+
+        val INTERACTIVE_PIP_PACKAGE_INFO =
+            PackageInfo().apply {
+                packageName = PICTURE_IN_PICTURE_PACKAGE_NAME
+                requestedPermissions =
+                    arrayOf(android.Manifest.permission.USE_PINNED_WINDOWING_LAYER)
+            }
     }
 }

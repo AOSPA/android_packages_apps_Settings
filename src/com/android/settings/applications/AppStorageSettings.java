@@ -316,7 +316,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                     .setButton1OnClickListener(v -> handleClearDataClick());
         }
 
-        if (mAppsControlDisallowedBySystem || AppUtils.isMainlineModule(mPm, mPackageName)) {
+        if (mAppsControlDisallowedBySystem || AppUtils.isLimitedAppInfoPackage(mPm, mPackageName)) {
             mButtonsPref.setButton1Enabled(false);
         }
     }
@@ -583,7 +583,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                         .setButton2OnClickListener(v -> handleClearCacheClick());
             }
         }
-        if (mAppsControlDisallowedBySystem || AppUtils.isMainlineModule(mPm, mPackageName)) {
+        if (mAppsControlDisallowedBySystem || AppUtils.isLimitedAppInfoPackage(mPm, mPackageName)) {
             mButtonsPref.setButton1Enabled(false).setButton2Enabled(false);
         }
     }

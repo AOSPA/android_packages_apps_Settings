@@ -126,7 +126,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mIntent = getIntent();
-        if (WizardManagerHelper.isSetupWizardIntent(mIntent)) {
+        if (WizardManagerHelper.isAnySetupWizard(mIntent)) {
             setTheme(SetupWizardUtils.getTransparentTheme(this, mIntent));
         } else {
             int themeId = SettingsThemeHelper.isExpressiveTheme(this)
