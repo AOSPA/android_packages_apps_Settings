@@ -113,8 +113,9 @@ class SubpagePreferenceController(context: Context, preferenceKey: String) :
 
     override fun updateState(preference: Preference?) {
         super.updateState(preference)
-        if (preference != null && viewModel != null) {
-            updatePreferenceUi(preference, viewModel!!.getCurrentSafetyCenterDataAsUiData())
+        val model = viewModel
+        if (preference != null && model != null) {
+            updatePreferenceUi(preference, model.getCurrentSafetyCenterDataAsUiData())
         }
     }
 

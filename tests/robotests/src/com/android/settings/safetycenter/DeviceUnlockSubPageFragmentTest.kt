@@ -78,12 +78,12 @@ class DeviceUnlockSubPageFragmentTest {
     }
 
     private fun runTest(data: SafetyCenterData, testBlock: (DeviceUnlockSubPageFragment) -> Unit) {
+        shadowSafetyCenterManager.setSafetyCenterData(data)
         val scenario =
             launchFragmentInContainer<DeviceUnlockSubPageFragment>(
                 themeResId = R.style.Theme_SubSettings
             )
         scenario.onFragment { fragment ->
-            shadowSafetyCenterManager.setSafetyCenterData(data)
             ShadowLooper.idleMainLooper()
             testBlock(fragment)
         }
@@ -136,17 +136,10 @@ class DeviceUnlockSubPageFragmentTest {
 
     @Test
     fun lockScreenPref_whenDataChanges_uiIsUpdated() {
-        val scenario =
-            launchFragmentInContainer<DeviceUnlockSubPageFragment>(
-                themeResId = R.style.Theme_SubSettings
-            )
-
-        scenario.onFragment { fragment ->
-            // Initial state: No lock screen entry
-            shadowSafetyCenterManager.setSafetyCenterData(EMPTY_SC_DATA)
-            ShadowLooper.idleMainLooper()
+        runTest(EMPTY_SC_DATA) { fragment ->
             val preference =
                 fragment.findPreference<SafetySourcePreference>(ANDROID_LOCK_SCREEN_PREFERENCE_KEY)
+            // Initial state: No lock screen entry
             assertThat(preference?.isVisible).isFalse()
 
             // Data change: Add lock screen entry
@@ -166,7 +159,6 @@ class DeviceUnlockSubPageFragmentTest {
             assertThat(preference?.title.toString()).isEqualTo(newEntry.title)
             assertThat(preference?.summary.toString()).isEqualTo(newEntry.summary)
         }
-        scenario.close()
     }
 
     @Test

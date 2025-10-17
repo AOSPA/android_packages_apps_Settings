@@ -26,7 +26,6 @@ import android.platform.test.flag.junit.SetFlagsRule
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterManager
 import androidx.fragment.app.testing.FragmentScenario
-import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.swipeUp
@@ -86,12 +85,9 @@ class PrivacyControlsFragmentTest {
     }
 
     private fun runTest(data: SafetyCenterData, testBlock: (PrivacyControlsFragment) -> Unit) {
-        val scenario =
-            launchFragmentInContainer<PrivacyControlsFragment>(
-                themeResId = R.style.Theme_SubSettings
-            )
+        shadowSafetyCenterManager.setSafetyCenterData(data)
+        val scenario = FragmentScenario.launchInContainer(PrivacyControlsFragment::class.java)
         scenario.onFragment { fragment ->
-            shadowSafetyCenterManager.setSafetyCenterData(data)
             ShadowLooper.idleMainLooper()
             testBlock(fragment)
         }
@@ -100,9 +96,7 @@ class PrivacyControlsFragmentTest {
 
     @Test
     fun shouldShowAllStaticPreferences() {
-        val scenario = FragmentScenario.launchInContainer(PrivacyControlsFragment::class.java)
-
-        scenario.onFragment { _ ->
+        runTest(EMPTY_SC_DATA) { _ ->
             onView(withText(mApplication.getString(R.string.privacy_sources_title)))
                 .check(matches(isDisplayed()))
 
