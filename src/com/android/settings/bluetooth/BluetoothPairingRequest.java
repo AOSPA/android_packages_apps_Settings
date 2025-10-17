@@ -25,7 +25,6 @@ import android.os.PowerManager;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.window.DesktopExperienceFlags;
 
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -76,18 +75,14 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
                 // string)
                 Intent pairingIntent = BluetoothPairingService.getPairingDialogIntent(
                         context, intent, BluetoothDevice.EXTRA_PAIRING_INITIATOR_FOREGROUND);
-                if (DesktopExperienceFlags.ENABLE_DIALOG_DISPLAY_FIXES.isTrue()) {
-                    int displayId = mBluetoothManager.getCachedFocussedDisplayId();
-                    final android.app.ActivityOptions options =
-                            android.app.ActivityOptions.makeBasic();
-                    if (displayId != -1) {
-                        options.setLaunchDisplayId(displayId);
-                    }
-                    context.startActivityAsUser(pairingIntent, options.toBundle(),
-                            UserHandle.CURRENT);
-                } else {
-                    context.startActivityAsUser(pairingIntent, UserHandle.CURRENT);
+                int displayId = mBluetoothManager.getCachedFocussedDisplayId();
+                final android.app.ActivityOptions options =
+                        android.app.ActivityOptions.makeBasic();
+                if (displayId != -1) {
+                    options.setLaunchDisplayId(displayId);
                 }
+                context.startActivityAsUser(pairingIntent, options.toBundle(),
+                        UserHandle.CURRENT);
             } else {
                 // Put up a notification that leads to the dialog
                 intent.setClass(context, BluetoothPairingService.class);
