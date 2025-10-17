@@ -38,9 +38,8 @@
         <Preference
             android:key="privacy_controls_page"
             android:title="@string/privacy_sources_title"
-            android:summary="@string/privacy_sources_summary"
-            android:fragment="com.android.settings.safetycenter.ui.PrivacyControlsFragment">
-        </Preference>
+            android:fragment="com.android.settings.safetycenter.ui.PrivacyControlsFragment"
+            settings:controller="com.android.settings.safetycenter.ui.PrivacyControlsPreferenceController"/>
         <Preference
             android:key="privacy_permissions_usage"
             android:summary="@string/permissions_usage_summary"

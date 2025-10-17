@@ -42,19 +42,33 @@ object SafetyCenterSubpageRegistry {
 
     /** Enum representing the unique keys for each subpage. */
     enum class SubpageKey {
-        DEVICE_UNLOCK
+        DEVICE_UNLOCK,
+        PRIVACY_CONTROLS,
     }
 
     /** Maps Subpage key to its XML resource containing SafetySourcePreference tags. */
     private val subpageXmlResources =
-        mapOf(SubpageKey.DEVICE_UNLOCK to R.xml.safety_center_device_unlock_subpage)
+        mapOf(
+            SubpageKey.DEVICE_UNLOCK to R.xml.safety_center_device_unlock_subpage,
+            SubpageKey.PRIVACY_CONTROLS to R.xml.safety_center_privacy_controls_settings,
+        )
 
     /**
      * Maps Subpage key to a List of safety source IDs that ONLY provide issues, not full entries.
      * These are not defined in the XML.
      */
     private val subpageIssueOnlySources =
-        mapOf<SubpageKey, List<String>>(SubpageKey.DEVICE_UNLOCK to emptyList())
+        mapOf<SubpageKey, List<String>>(
+            SubpageKey.DEVICE_UNLOCK to emptyList(),
+            SubpageKey.PRIVACY_CONTROLS to
+                listOf(
+                    "AndroidAccessibility",
+                    "AndroidNotificationListener",
+                    "AndroidBackgroundLocation",
+                    "AndroidPermissionAutoRevoke",
+                    "AndroidCertificateTransparency",
+                ),
+        )
 
     // Cache to store parsed safety source IDs from XML
     private val parsedSubpageSafetySourcesCache = mutableMapOf<SubpageKey, List<String>>()
