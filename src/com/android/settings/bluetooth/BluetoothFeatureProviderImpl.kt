@@ -76,6 +76,7 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
     override fun notifyConnectionFailureTimeChange(
         context: Context,
         device: CachedBluetoothDevice,
+        timestamp: Long,
     ) {
         return
     }
