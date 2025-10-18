@@ -20,6 +20,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.safetycenter.SafetyCenterIssue
 import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
@@ -50,6 +52,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
     private var bannerGroup: BannerMessagePreferenceGroup? = null
     private var viewModel: LiveSafetyCenterViewModel? = null
     private var fragmentManager: FragmentManager? = null
+    private var activityTaskId: Int? = null
 
     // Configuration for subpage behavior
     private var relatedSafetySources: List<String> = emptyList()
@@ -85,6 +88,15 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
      */
     fun setFragmentManager(fragmentManager: FragmentManager) {
         this.fragmentManager = fragmentManager
+    }
+
+    /**
+     * Sets the task ID of the hosting Activity.
+     *
+     * @param taskId The task ID of the hosting Activity.
+     */
+    fun setActivityTaskId(taskId: Int) {
+        this.activityTaskId = taskId
     }
 
     /**
@@ -225,6 +237,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             setAttentionLevel(
                 SafetyCenterSeverityConverter.toBannerAttentionLevel(issue.severityLevel)
             )
+            setButtonOrientation(LinearLayout.VERTICAL)
 
             configureActionButtons(this, issue)
             configureDismissButton(this, issue, isDismissed)
@@ -233,13 +246,49 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
 
     /** Configures the action buttons for the banner based on the issue's actions. */
     private fun configureActionButtons(banner: BannerMessagePreference, issue: SafetyCenterIssue) {
-        if (issue.actions.isNotEmpty()) {
-            val primaryAction = issue.actions[0]
+        val primaryAction = issue.actions.getOrNull(0)
+        if (primaryAction != null) {
             banner.setPositiveButtonText(primaryAction.label)
+            banner.setPositiveButtonEnabled(!primaryAction.isInFlight)
             banner.setPositiveButtonVisible(true)
-            // TODO: b/424134511 - Implement click listener for the action button
+            banner.setPositiveButtonOnClickListener(
+                ActionButtonOnClickListener(issue, primaryAction, banner)
+            )
         } else {
             banner.setPositiveButtonVisible(false)
+            banner.setPositiveButtonOnClickListener(null)
+        }
+
+        val secondaryAction = issue.actions.getOrNull(1)
+        if (secondaryAction != null) {
+            banner.setNegativeButtonText(secondaryAction.label)
+            banner.setNegativeButtonEnabled(!secondaryAction.isInFlight)
+            banner.setNegativeButtonVisible(true)
+            banner.setNegativeButtonOnClickListener(
+                ActionButtonOnClickListener(issue, secondaryAction, banner)
+            )
+        } else {
+            banner.setNegativeButtonVisible(false)
+            banner.setNegativeButtonOnClickListener(null)
+        }
+    }
+
+    private inner class ActionButtonOnClickListener(
+        private val issue: SafetyCenterIssue,
+        private val action: SafetyCenterIssue.Action,
+        private val banner: BannerMessagePreference,
+    ) : View.OnClickListener {
+        override fun onClick(v: View?) {
+            if (action.confirmationDialogDetails != null) {
+                ConfirmActionDialogFragment.newInstance(issue, action, activityTaskId!!)
+                    .showNow(fragmentManager!!, /* tag= */ null)
+            } else {
+                if (action.willResolve()) {
+                    banner.setPositiveButtonEnabled(false)
+                    banner.setNegativeButtonEnabled(false)
+                }
+                viewModel?.executeIssueAction(issue, action, activityTaskId!!)
+            }
         }
     }
 
@@ -260,6 +309,7 @@ class SafetyIssuesPreferenceController(context: Context, preferenceKey: String) 
             }
         } else {
             banner.setDismissButtonVisible(false)
+            banner.setDismissButtonOnClickListener(null)
         }
     }
 

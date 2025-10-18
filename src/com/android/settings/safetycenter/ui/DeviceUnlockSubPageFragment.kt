@@ -73,6 +73,7 @@ class DeviceUnlockSubPageFragment : DashboardFragment() {
         Log.d(TAG, "Setting Up the safety issues preference controller")
         safetyIssuesPreferenceController?.setViewModelAndLifecycle(viewModel, owner)
         safetyIssuesPreferenceController?.setFragmentManager(childFragmentManager)
+        safetyIssuesPreferenceController?.setActivityTaskId(requireActivity().taskId)
 
         val illustrationPreference: IllustrationPreference =
             findPreference(DEVICE_UNLOCK_ILLUSTRATION_KEY)!!
