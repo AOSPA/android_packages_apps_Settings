@@ -612,8 +612,7 @@ class SafetyCenterFragmentTest {
         private const val ANDROID_HEALTH_CONNECT_SOURCE_ID = "AndroidHealthConnect"
         private const val ANDROID_A11Y_SOURCES_ID = "AndroidAccessibility"
         private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
-        private val DEFAULT_DEVICE_UNLOCK_SUMMARY_RES =
-            R.string.device_unlock_subpage_default_summary
+        private val DEFAULT_DEVICE_UNLOCK_SUMMARY_RES = R.string.safety_center_device_unlock_summary
         private val DEFAULT_PRIVACY_CONTROLS_SUMMARY_RES = R.string.privacy_sources_summary
     }
 }

@@ -48,7 +48,7 @@ import com.android.settings.safetycenter.SafetyCenterTestUtils.createEntry
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssue
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createIssueAction
 import com.android.settings.safetycenter.SafetyCenterTestUtils.createScData
-import com.android.settings.safetycenter.ui.DeviceUnlockSubPageFragment
+import com.android.settings.safetycenter.ui.DeviceUnlockSubpageFragment
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.BannerMessagePreferenceGroup
@@ -71,7 +71,7 @@ import org.robolectric.shadows.ShadowUserManager
 @SuppressLint("MissingPermission")
 @RunWith(AndroidJUnit4::class)
 @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
-class DeviceUnlockSubPageFragmentTest {
+class DeviceUnlockSubpageFragmentTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
     private lateinit var application: Application
     private lateinit var shadowSafetyCenterManager: ShadowSafetyCenterManager
@@ -94,10 +94,10 @@ class DeviceUnlockSubPageFragmentTest {
         shadowSafetyCenterManager.setSafetyCenterEnabled(true)
     }
 
-    private fun runTest(data: SafetyCenterData, testBlock: (DeviceUnlockSubPageFragment) -> Unit) {
+    private fun runTest(data: SafetyCenterData, testBlock: (DeviceUnlockSubpageFragment) -> Unit) {
         shadowSafetyCenterManager.setSafetyCenterData(data)
         val scenario =
-            launchFragmentInContainer<DeviceUnlockSubPageFragment>(
+            launchFragmentInContainer<DeviceUnlockSubpageFragment>(
                 themeResId = R.style.Theme_SubSettings
             )
         scenario.onFragment { fragment ->
