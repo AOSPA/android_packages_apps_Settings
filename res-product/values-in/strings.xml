@@ -341,8 +341,8 @@
     <string name="storage_wizard_migrate_v2_checklist_battery" product="default" msgid="8041162611685970218">"Tetap isi daya baterai ponsel ini"</string>
     <string name="storage_wizard_migrate_v2_checklist_battery" product="desktop" msgid="3166603241842968388">"Tetap isi daya baterai perangkat ini"</string>
     <string name="main_clear_desc" product="tablet" msgid="5778614597513856716">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" tablet Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data dan setelan sistem dan aplikasi"</li>\n<li>"Aplikasi yang didownload"</li></string>
-    <string name="main_clear_desc" product="default" msgid="1888412491866186706">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" ponsel Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan aplikasi serta setelan"</li>\n<li>"Aplikasi yang didownload"</li></string>
-    <string name="main_clear_desc" product="desktop" msgid="405802272460355609">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" perangkat Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan aplikasi serta setelan"</li>\n<li>"Aplikasi yang didownload"</li></string>
+    <string name="main_clear_desc" product="default" msgid="1888412491866186706">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" ponsel Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data dan setelan sistem dan aplikasi"</li>\n<li>"Aplikasi yang didownload"</li></string>
+    <string name="main_clear_desc" product="desktop" msgid="405802272460355609">"Tindakan ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" perangkat Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data dan setelan sistem dan aplikasi"</li>\n<li>"Aplikasi yang didownload"</li></string>
     <string name="main_clear_accounts" product="default" msgid="3604029744509330786">\n\n"Saat ini Anda login ke akun berikut:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="7750368595882863399">\n\n"Ada pengguna lain yang aktif di perangkat ini.\n"</string>
     <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="5834269984459195918">\n\n"Untuk menghapus musik, gambar, dan data pengguna lainnya, "<b>"penyimpanan USB"</b>" perlu dihapus."</string>
@@ -383,7 +383,7 @@
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="1773409172676594981">"Preferensi ukuran tampilan dan teks akan direset ke setelan asli ponsel"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="2547948891207211388">"Preferensi ukuran layar dan teks akan direset ke setelan asli tablet"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="desktop" msgid="4248088107680338580">"Preferensi ukuran tampilan dan teks akan direset ke setelan asli perangkat"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="5234458848997942613">"Sesuaikan tampilan warna di ponsel Anda"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="5234458848997942613">"Sesuaikan tampilan warna di ponsel"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="5300401841391736534">"Sesuaikan tampilan warna di tablet Anda"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="desktop" msgid="8908526728447739478">"Sesuaikan tampilan warna di perangkat Anda"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="9162440023310121356">"Ekstra redup dapat berguna saat: &lt;ol&gt; &lt;li&gt; Kecerahan minimum default ponsel masih terlalu cerah&lt;/li&gt; &lt;li&gt; Anda menggunakan ponsel di lingkungan yang gelap, seperti saat malam hari atau di kamar yang gelap sebelum tidur&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -481,12 +481,9 @@
     <string name="lockscreen_trivial_controls_summary" product="default" msgid="42562533085885152">"Tanpa membuka kunci ponsel"</string>
     <string name="lockscreen_trivial_controls_summary" product="tablet" msgid="9052068482124729345">"Tanpa membuka kunci tablet"</string>
     <string name="lockscreen_trivial_controls_summary" product="desktop" msgid="8183513643394359332">"Tanpa membuka kunci perangkat Anda"</string>
-    <!-- no translation found for device_supervision_features_title (8612616791672564436) -->
-    <skip />
-    <!-- no translation found for device_supervision_features_title (8301949957844501200) -->
-    <skip />
-    <!-- no translation found for device_supervision_features_title (5041758196166273467) -->
-    <skip />
+    <string name="device_supervision_switch_title" product="default" msgid="5711051584668311080">"Kontrol untuk ponsel ini"</string>
+    <string name="device_supervision_switch_title" product="tablet" msgid="5400384750840247844">"Kontrol untuk tablet ini"</string>
+    <string name="device_supervision_switch_title" product="desktop" msgid="2140192989162020111">"Kontrol untuk perangkat ini"</string>
     <string name="supervision_pin_length_message" product="default" msgid="7142997986515800901">"{count,plural, =1{Masukkan PIN dengan minimal # digit. Anda akan menggunakannya untuk mengelola kontrol di ponsel ini.}other{Masukkan PIN dengan minimal # digit. Anda akan menggunakannya untuk mengelola kontrol di ponsel ini.}}"</string>
     <string name="supervision_pin_length_message" product="tablet" msgid="1772471880165492225">"{count,plural, =1{Masukkan PIN dengan minimal # digit. Anda akan menggunakannya untuk mengelola kontrol di tablet ini.}other{Masukkan PIN dengan minimal # digit. Anda akan menggunakannya untuk mengelola kontrol di tablet ini.}}"</string>
     <string name="supervision_pin_length_message" product="desktop" msgid="7689193597679628648">"{count,plural, =1{Masukkan PIN dengan minimal # digit. Anda akan menggunakannya untuk mengelola kontrol di perangkat ini.}other{Masukkan PIN dengan minimal # digit. Anda akan menggunakannya untuk mengelola kontrol di perangkat ini.}}"</string>
@@ -505,7 +502,7 @@
     <string name="auto_rotate_summary_a11y" product="default" msgid="2813368383309985185">"Saat Anda mengubah orientasi ponsel dari potret ke lanskap dan sebaliknya"</string>
     <string name="auto_rotate_summary_a11y" product="tablet" msgid="4708833814245913981">"Saat Anda berganti mode tablet antara potret dan lanskap"</string>
     <string name="auto_rotate_summary_a11y" product="desktop" msgid="1342493478927297535">"Saat Anda mengubah orientasi perangkat dari potret ke lanskap dan sebaliknya"</string>
-    <string name="daltonizer_feature_summary" product="default" msgid="3940653889277283702">"Sesuaikan tampilan warna di ponsel Anda"</string>
+    <string name="daltonizer_feature_summary" product="default" msgid="3940653889277283702">"Sesuaikan tampilan warna di ponsel"</string>
     <string name="daltonizer_feature_summary" product="tablet" msgid="4006596881671077623">"Sesuaikan tampilan warna di tablet Anda"</string>
     <string name="daltonizer_feature_summary" product="desktop" msgid="7614721768727080567">"Sesuaikan tampilan warna di perangkat Anda"</string>
     <string name="spatial_audio_speaker" product="default" msgid="7148176677982615792">"Speaker ponsel"</string>
