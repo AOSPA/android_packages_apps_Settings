@@ -408,7 +408,9 @@ class SetupSupervisionActivityTest {
                 val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()
                 assertThat(dialog).isNotNull()
                 assertThat(ShadowAlertDialogCompat.shadowOf(dialog).title)
-                    .isEqualTo(context.getString(R.string.supervision_multi_profile_error_title))
+                    .isEqualTo(
+                        context.getString(R.string.supervision_setup_multi_profile_error_title)
+                    )
 
                 dialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.performClick()
                 ShadowLooper.idleMainLooper()

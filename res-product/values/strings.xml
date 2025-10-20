@@ -1022,6 +1022,14 @@
         other   {Enter a PIN with at least # digits. You\u2019ll use it to manage controls on this device.}
         }</string>
 
+    <!-- TODO(b/450908334): Set strings as translatable once copy is finalized. -->
+    <!-- Title on a dialog that informs the user that they cannot delete the PIN because multiple users are supervised [CHAR_LIMIT=NONE]-->
+    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="default" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this phone.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
+    <!-- Title on a dialog that informs the user that they cannot delete the PIN because multiple users are supervised [CHAR_LIMIT=NONE]-->
+    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="desktop" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this device.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
+    <!-- Title on a dialog that informs the user that they cannot delete the PIN because multiple users are supervised [CHAR_LIMIT=NONE]-->
+    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="tablet" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this tablet.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
+
     <!-- Message in dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_supervision_enabled_message" product="default">Your parental controls PIN is shared across users. To delete your PIN, controls using this PIN must be off for all users on this phone.</string>
     <!-- Message in dialog that informs the user that they need to disable supervision before deleting the PIN [CHAR LIMIT=NONE] -->
@@ -1049,6 +1057,13 @@
     <string name="supervision_multi_profile_error_message" product="tablet">Because there are multiple profiles on this tablet, parental controls can\u2019t be turned on.</string>
     <!-- Message in dialog that informs the user that controls cannot be enabled on a device with multiple profiles. [CHAR LIMIT=NONE] -->
     <string name="supervision_multi_profile_error_message" product="desktop">Because there are multiple profiles on this device, parental controls can\u2019t be turned on.</string>
+
+    <!-- Message in dialog that informs the user that controls cannot be used on a device with multiple profiles. [CHAR LIMIT=NONE] -->
+    <string name="supervision_setup_multi_profile_error_message" product="default">There are multiple profiles on this phone</string>
+    <!-- Message in dialog that informs the user that controls cannot be used on a device with multiple profiles. [CHAR LIMIT=NONE] -->
+    <string name="supervision_setup_multi_profile_error_message" product="tablet">There are multiple profiles on this tablet</string>
+    <!-- Message in dialog that informs the user that controls cannot be used on a device with multiple profiles. [CHAR LIMIT=NONE] -->
+    <string name="supervision_setup_multi_profile_error_message" product="desktop">There are multiple profiles on this device</string>
 
     <!-- Accessibility summary text for auto rotate [CHAR LIMIT=NONE] -->
     <string name="auto_rotate_summary_a11y" product="default">When you move your phone between portrait and landscape</string>

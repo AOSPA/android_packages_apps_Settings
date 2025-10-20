@@ -301,8 +301,8 @@ class SetupSupervisionActivity : FragmentActivity() {
             setTheme(R.style.Transparent_Expressive)
         }
         AlertDialog.Builder(this)
-            .setTitle(R.string.supervision_multi_profile_error_title)
-            .setMessage(R.string.supervision_multi_profile_error_message)
+            .setTitle(R.string.supervision_setup_multi_profile_error_title)
+            .setMessage(R.string.supervision_setup_multi_profile_error_message)
             .setPositiveButton(android.R.string.ok) { _, _ -> null }
             .setNeutralButton(R.string.learn_more) { _, _ -> onSupervisionUnavailableLearnMore() }
             .setOnDismissListener { multiProfileErrorDialogDismiss() }
