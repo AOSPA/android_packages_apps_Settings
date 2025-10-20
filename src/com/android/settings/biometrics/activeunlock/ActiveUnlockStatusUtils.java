@@ -277,7 +277,7 @@ public class ActiveUnlockStatusUtils {
     @Nullable
     public static String getSummaryFromContentProvider(
             @NonNull Context context, @NonNull String authority, @NonNull String logTag) {
-        return ActiveUnlockContentListener.getContentFromUri(
+        return ActiveUnlockContentListener.getContentFromUriWithTimeout(
             context, ActiveUnlockContentListener.getUri(authority), logTag,
             ActiveUnlockSummaryListener.METHOD_NAME,
             ActiveUnlockSummaryListener.SUMMARY_KEY);
@@ -289,7 +289,7 @@ public class ActiveUnlockStatusUtils {
     @Nullable
     public static String getDeviceNameFromContentProvider(
             @NonNull Context context, @NonNull String authority, @NonNull String logTag) {
-        return ActiveUnlockContentListener.getContentFromUri(
+        return ActiveUnlockContentListener.getContentFromUriWithTimeout(
             context, ActiveUnlockContentListener.getUri(authority), logTag,
             ActiveUnlockDeviceNameListener.METHOD_NAME,
             ActiveUnlockDeviceNameListener.DEVICE_NAME_KEY);
