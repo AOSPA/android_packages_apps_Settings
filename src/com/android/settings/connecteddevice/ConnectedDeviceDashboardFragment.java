@@ -36,7 +36,7 @@ import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.bluetooth.BluetoothUtils;
-import com.android.settingslib.bluetooth.HearingAidStatsLogUtils;
+import com.android.settingslib.bluetooth.hearingdevices.metrics.HearingDeviceStatsLogUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -110,7 +110,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         super.onResume();
 
         // Show hearing devices survey if user is categorized as one of interested category
-        final String category = HearingAidStatsLogUtils.getUserCategory(getContext());
+        final String category = HearingDeviceStatsLogUtils.getUserCategory(getContext());
         if (category != null && !category.isEmpty()) {
             SurveyFeatureProvider provider =
                     FeatureFactory.getFeatureFactory().getSurveyFeatureProvider(getContext());

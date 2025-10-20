@@ -17,7 +17,6 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.hardware.display.ColorDisplayManager;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -33,7 +32,7 @@ public class NightDisplayTopIntroPreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return ColorDisplayManager.isNightDisplayAvailable(mContext)
+        return NightDisplayExtensionsKt.isNightDisplaySettingsAvailable(mContext)
                 ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 }

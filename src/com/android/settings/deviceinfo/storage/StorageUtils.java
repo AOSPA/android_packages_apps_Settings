@@ -20,6 +20,7 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -284,5 +285,20 @@ public class StorageUtils {
         }
 
         return Utils.getBadgedIcon(context, resolveInfo.activityInfo.applicationInfo);
+    }
+
+    /**
+     * Checks whether any app can handle
+     * {@link android.os.storage.StorageManager#ACTION_MANAGE_STORAGE}.
+     */
+    public static boolean canHandleManageStorageIntent(Context context, int userId) {
+        Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
+        PackageManager pm = context.getPackageManager();
+        List<ResolveInfo> resolveInfoList = pm.queryIntentActivitiesAsUser(
+                intent, PackageManager.MATCH_DEFAULT_ONLY, userId);
+        if (resolveInfoList.isEmpty()) {
+            Log.w(TAG, "No activity found to handle ACTION_MANAGE_STORAGE for user " + userId);
+        }
+        return !resolveInfoList.isEmpty();
     }
 }

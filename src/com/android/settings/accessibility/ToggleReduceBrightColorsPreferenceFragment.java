@@ -24,28 +24,33 @@ import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.extradim.ui.ExtraDimScreen;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 /** Settings for reducing brightness. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ToggleReduceBrightColorsPreferenceFragment extends BaseSupportFragment {
+public class ToggleReduceBrightColorsPreferenceFragment extends DashboardFragment {
     private static final String TAG = "ToggleReduceBrightColorsPreferenceFragment";
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        ToggleShortcutPreferenceController shortcutPreferenceController =
-                use(ToggleShortcutPreferenceController.class);
-        if (shortcutPreferenceController != null) {
-            shortcutPreferenceController.initialize(
-                    getFeatureComponentName(),
-                    getChildFragmentManager(),
-                    getFeatureName(),
-                    getMetricsCategory()
-            );
+        if (!Flags.catalystExtraDim()) {
+            ToggleShortcutPreferenceController shortcutPreferenceController =
+                    use(ToggleShortcutPreferenceController.class);
+            if (shortcutPreferenceController != null) {
+                shortcutPreferenceController.initialize(
+                        getFeatureComponentName(),
+                        getChildFragmentManager(),
+                        getFeatureName(),
+                        getMetricsCategory()
+                );
+            }
         }
     }
 
@@ -80,9 +85,17 @@ public class ToggleReduceBrightColorsPreferenceFragment extends BaseSupportFragm
         return TAG;
     }
 
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ExtraDimScreen.KEY;
+    }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_extra_dim_settings) {
+            new BaseSearchIndexProvider(
+                    Flags.catalystExtraDim()
+                            && com.android.settings.flags.Flags.catalystSettingsSearch()
+                            ? 0 : R.xml.accessibility_extra_dim_settings) {
+
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return ColorDisplayManager.isReduceBrightColorsAvailable(context);

@@ -58,16 +58,29 @@ public class NightDisplayAutoModePreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_configuredAvailable() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_nightDisplayAvailable, true);
+    public void configuredNightDisplayAvailableAndNotBlocked_isAvailable() {
+        NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_configuredUnavailable() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_nightDisplayAvailable, false);
+    public void configuredNightDisplayUnavailableAndNotBlocked_isUnavailable() {
+        NightDisplayTestUtils.setNightDisplayAvailable(false);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(false);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void configuredNightDisplayAvailableAndBlocked_isUnavailable() {
+        NightDisplayTestUtils.setNightDisplayAvailable(true);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void configuredNightDisplayUnavailableAndBlocked_isUnavailable() {
+        NightDisplayTestUtils.setNightDisplayAvailable(false);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
         assertThat(mController.isAvailable()).isFalse();
     }
 

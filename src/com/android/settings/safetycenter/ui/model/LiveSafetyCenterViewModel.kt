@@ -18,6 +18,7 @@ package com.android.settings.safetycenter.ui.model
 
 import android.Manifest
 import android.app.Application
+import android.permission.flags.Flags
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterErrorDetails
 import android.safetycenter.SafetyCenterIssue
@@ -30,6 +31,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.android.settingslib.safetycenter.SafetyCenterDataTransformer
+import com.android.settingslib.safetycenter.SafetyCenterUiData
 import kotlin.reflect.KClass
 
 /**
@@ -40,14 +43,17 @@ import kotlin.reflect.KClass
  */
 class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
 
+    private val _safetyCenterLiveData = SafetyCenterLiveData()
+    private val _errorLiveData = MutableLiveData<SafetyCenterErrorDetails>()
+    private var changingConfigurations = false
+
+    override val safetyCenterUiLiveData: LiveData<SafetyCenterUiData> =
+        _safetyCenterLiveData.map { data -> SafetyCenterDataTransformer.transform(data) }
+
     override val statusUiLiveData: LiveData<StatusUiData>
         get() = safetyCenterUiLiveData.map { StatusUiData(it) }
 
-    override val safetyCenterUiLiveData: LiveData<SafetyCenterData> by this::_safetyCenterLiveData
     override val errorLiveData: LiveData<SafetyCenterErrorDetails> by this::_errorLiveData
-
-    private val _safetyCenterLiveData = SafetyCenterLiveData()
-    private val _errorLiveData = MutableLiveData<SafetyCenterErrorDetails>()
 
     private val safetyCenterManager = app.getSystemService(SafetyCenterManager::class.java)!!
 
@@ -83,14 +89,33 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
     }
 
     @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
-    override fun getCurrentSafetyCenterDataAsUiData(): SafetyCenterData =
-        safetyCenterManager.safetyCenterData
+    override fun getCurrentSafetyCenterDataAsUiData(): SafetyCenterUiData =
+        SafetyCenterDataTransformer.transform(safetyCenterManager.safetyCenterData)
+
+    override fun changingConfigurations() {
+        changingConfigurations = true
+    }
+
+    private fun executeIfNotChangingConfigurations(block: () -> Unit) {
+        if (changingConfigurations) {
+            changingConfigurations = false
+            return
+        }
+        block()
+    }
 
     @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
     override fun rescan() {
         safetyCenterManager.refreshSafetySources(
             SafetyCenterManager.REFRESH_REASON_RESCAN_BUTTON_CLICK
         )
+    }
+
+    @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
+    override fun pageOpen() {
+        executeIfNotChangingConfigurations {
+            safetyCenterManager.refreshSafetySources(SafetyCenterManager.REFRESH_REASON_PAGE_OPEN)
+        }
     }
 
     override fun clearError() {
@@ -100,6 +125,19 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
     @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
     override fun dismissIssue(issue: SafetyCenterIssue) {
         safetyCenterManager.dismissSafetyCenterIssue(issue.id)
+    }
+
+    @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
+    override fun executeIssueAction(
+        issue: SafetyCenterIssue,
+        action: SafetyCenterIssue.Action,
+        launchTaskId: Int,
+    ) {
+        if (Flags.openSafetyCenterApis()) {
+            safetyCenterManager.executeSafetyCenterIssueAction(issue.id, action.id, launchTaskId)
+        } else {
+            safetyCenterManager.executeSafetyCenterIssueAction(issue.id, action.id)
+        }
     }
 }
 

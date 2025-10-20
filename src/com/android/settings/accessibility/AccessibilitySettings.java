@@ -43,6 +43,7 @@ import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.RestrictedPreference;
@@ -58,7 +59,7 @@ import java.util.Map;
 /** Activity with the accessibility settings. */
 // LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class AccessibilitySettings extends BaseSupportFragment implements
+public class AccessibilitySettings extends DashboardFragment implements
         InputManager.InputDeviceListener {
 
     private static final String TAG = "AccessibilitySettings";

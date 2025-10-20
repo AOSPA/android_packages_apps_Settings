@@ -99,7 +99,12 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
      */
     @Override
     public void onShow(DialogInterface dialogInterface) {
-        ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(this);
+        ConfigDialog dialog = (ConfigDialog) getDialog();
+        if (dialog == null) {
+            Log.e(TAG, "ConfigDialog object is null");
+            return;
+        }
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(this);
     }
 
     @Override

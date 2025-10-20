@@ -309,6 +309,10 @@ public final class BluetoothDevicePreference extends GearPreference {
                 // when user allows showing devices without user-friendly name in developer settings
                 boolean isVisible =
                         mShowDevicesWithoutNames || mCachedDevice.hasHumanReadableName();
+                boolean showFailureIcon =
+                        BluetoothUtils.isBluetoothDiagnosisAvailable(getContext())
+                                && (BluetoothUtils.showPairingFailure(mCachedDevice)
+                                    || BluetoothUtils.showConnectionFailure(mCachedDevice));
 
                 ThreadUtils.postOnMainThread(() -> {
                     /*
@@ -318,7 +322,11 @@ public final class BluetoothDevicePreference extends GearPreference {
                      */
                     setTitle(name);
                     setSummary(connectionSummary);
-                    setIcon(pair.first);
+                    // TODO: Move the logic into CachedBluetoothDevice when SystemUI is supported.
+                    setIcon(showFailureIcon
+                            ? getContext().getDrawable(
+                                    com.android.settingslib.R.drawable.bluetooth_warning_icon)
+                            : pair.first);
                     contentDescription = pair.second;
                     // Used to gray out the item
                     setEnabled(!isBusy);
@@ -471,6 +479,17 @@ public final class BluetoothDevicePreference extends GearPreference {
 
     private String getConnectionSummary() {
         String summary = null;
+        // TODO: Move the logic into CachedBluetoothDevice when SystemUI is supported.
+        if (BluetoothUtils.isBluetoothDiagnosisAvailable(getContext())) {
+            if (BluetoothUtils.showPairingFailure(mCachedDevice)) {
+                return getContext()
+                        .getString(com.android.settingslib.R.string.bluetooth_pairing_failure);
+            } else if (BluetoothUtils.showConnectionFailure(mCachedDevice)) {
+                return getContext()
+                        .getString(com.android.settingslib.R.string.bluetooth_connection_failure);
+            }
+        }
+
         if (mCachedDevice.getBondState() != BluetoothDevice.BOND_NONE) {
             summary = mCachedDevice.getConnectionSummary();
         }

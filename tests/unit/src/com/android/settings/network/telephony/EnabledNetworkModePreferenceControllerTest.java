@@ -178,6 +178,7 @@ public class EnabledNetworkModePreferenceControllerTest {
     @UiThreadTest
     @Test
     public void updateState_With2gCarrierConfig_WithNetworkTypeEnable2g() {
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(null);
         mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
         mockEnabledNetworkMode(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
         mockAccessFamily(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
@@ -193,6 +194,8 @@ public class EnabledNetworkModePreferenceControllerTest {
     @UiThreadTest
     @Test
     public void onSubscriptionsChanged() {
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(null);
+
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
         PreferenceScreen screen = preferenceManager.createPreferenceScreen(mContext);
         mPreference.setKey(KEY);
@@ -418,6 +421,20 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
+    public void updateState_isAirplaneModeOn_setEnableFalse() {
+        mController.mSatelliteModemStateCallback
+                .onSatelliteModemStateChanged(SATELLITE_MODEM_STATE_CONNECTED);
+        mController.mSelectedNbIotSatelliteSubscriptionCallback
+                .onSelectedNbIotSatelliteSubscriptionChanged(0);
+
+        mController.notifyAirplaneModeChanged(true);
+        mController.updateState(mPreference);
+
+        assertFalse(mPreference.isEnabled());
+    }
+
+    @UiThreadTest
+    @Test
     public void onPreferenceChange_updateSuccess() {
         mockEnabledNetworkMode(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
         doReturn(true).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
@@ -477,54 +494,58 @@ public class EnabledNetworkModePreferenceControllerTest {
     @UiThreadTest
     @Test
     public void checkResource_stringArrayLength() {
-        int id = mController.getResourcesForSubId().getIdentifier("enabled_networks_cdma_values",
-                "array", mContext.getPackageName());
-        String[] entryValues = mController.getResourcesForSubId().getStringArray(id);
+        int id = mController.mBuilder.getResourcesForSubId()
+                .getIdentifier("enabled_networks_cdma_values", "array", mContext.getPackageName());
+        String[] entryValues = mController.mBuilder.getResourcesForSubId().getStringArray(id);
         assertEquals(4, entryValues.length);
 
-        id = mController.getResourcesForSubId().getIdentifier("enabled_networks_cdma_no_lte_values",
-                "array", mContext.getPackageName());
-        entryValues = mController.getResourcesForSubId().getStringArray(id);
+        id = mController.mBuilder.getResourcesForSubId()
+                .getIdentifier("enabled_networks_cdma_no_lte_values", "array",
+                        mContext.getPackageName());
+        entryValues = mController.mBuilder.getResourcesForSubId().getStringArray(id);
         assertEquals(2, entryValues.length);
 
-        id = mController.getResourcesForSubId().getIdentifier(
+        id = mController.mBuilder.getResourcesForSubId().getIdentifier(
                 "enabled_networks_cdma_only_lte_values", "array", mContext.getPackageName());
-        entryValues = mController.getResourcesForSubId().getStringArray(id);
+        entryValues = mController.mBuilder.getResourcesForSubId().getStringArray(id);
         assertEquals(2, entryValues.length);
 
-        id = mController.getResourcesForSubId().getIdentifier("enabled_networks_tdscdma_values",
+        id = mController.mBuilder.getResourcesForSubId().getIdentifier(
+                "enabled_networks_tdscdma_values",
                 "array", mContext.getPackageName());
-        entryValues = mController.getResourcesForSubId().getStringArray(id);
+        entryValues = mController.mBuilder.getResourcesForSubId().getStringArray(id);
         assertEquals(3, entryValues.length);
 
-        id = mController.getResourcesForSubId().getIdentifier(
+        id = mController.mBuilder.getResourcesForSubId().getIdentifier(
                 "enabled_networks_except_gsm_lte_values", "array", mContext.getPackageName());
-        entryValues = mController.getResourcesForSubId().getStringArray(id);
+        entryValues = mController.mBuilder.getResourcesForSubId().getStringArray(id);
         assertEquals(1, entryValues.length);
 
-        id = mController.getResourcesForSubId().getIdentifier("enabled_networks_except_gsm_values",
-                "array", mContext.getPackageName());
-        entryValues = mController.getResourcesForSubId().getStringArray(id);
+        id = mController.mBuilder.getResourcesForSubId()
+                .getIdentifier("enabled_networks_except_gsm_values", "array",
+                        mContext.getPackageName());
+        entryValues = mController.mBuilder.getResourcesForSubId().getStringArray(id);
         assertEquals(2, entryValues.length);
 
-        id = mController.getResourcesForSubId().getIdentifier("enabled_networks_except_lte_values",
-                "array", mContext.getPackageName());
-        entryValues = mController.getResourcesForSubId().getStringArray(id);
+        id = mController.mBuilder.getResourcesForSubId()
+                .getIdentifier("enabled_networks_except_lte_values", "array",
+                        mContext.getPackageName());
+        entryValues = mController.mBuilder.getResourcesForSubId().getStringArray(id);
         assertEquals(2, entryValues.length);
 
-        id = mController.getResourcesForSubId().getIdentifier("enabled_networks_values", "array",
-                mContext.getPackageName());
-        entryValues = mController.getResourcesForSubId().getStringArray(id);
+        id = mController.mBuilder.getResourcesForSubId()
+                .getIdentifier("enabled_networks_values", "array", mContext.getPackageName());
+        entryValues = mController.mBuilder.getResourcesForSubId().getStringArray(id);
         assertEquals(3, entryValues.length);
 
-        id = mController.getResourcesForSubId().getIdentifier("enabled_networks_values", "array",
-                mContext.getPackageName());
-        entryValues = mController.getResourcesForSubId().getStringArray(id);
+        id = mController.mBuilder.getResourcesForSubId()
+                .getIdentifier("enabled_networks_values", "array", mContext.getPackageName());
+        entryValues = mController.mBuilder.getResourcesForSubId().getStringArray(id);
         assertEquals(3, entryValues.length);
 
-        id = mController.getResourcesForSubId().getIdentifier(
+        id = mController.mBuilder.getResourcesForSubId().getIdentifier(
                 "preferred_network_mode_values_world_mode", "array", mContext.getPackageName());
-        entryValues = mController.getResourcesForSubId().getStringArray(id);
+        entryValues = mController.mBuilder.getResourcesForSubId().getStringArray(id);
         assertEquals(3, entryValues.length);
     }
 

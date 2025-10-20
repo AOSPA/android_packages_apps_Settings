@@ -39,14 +39,14 @@
         android:layout_marginBottom="16dp"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="?android:attr/textColorSecondary" />
+        android:textColor="@color/materialColorOnSurfaceVariant" />
 
     <Button
         android:id="@+id/add_new_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="?android:attr/borderlessButtonStyle"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textColor="@color/materialColorOnSurfaceVariant"
         android:text="@string/print_menu_item_add_service"
         android:visibility="gone" />
 

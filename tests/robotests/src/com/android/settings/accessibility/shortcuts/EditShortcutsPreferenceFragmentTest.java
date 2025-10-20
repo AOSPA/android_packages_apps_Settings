@@ -21,7 +21,11 @@ import static android.provider.Settings.ACTION_ACCESSIBILITY_SHORTCUT_SETTINGS;
 import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
 import static com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment.SHORTCUT_SETTINGS;
 
 import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_DEFERRED_SETUP;
@@ -40,6 +44,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.util.Pair;
 import android.view.accessibility.AccessibilityManager;
@@ -59,9 +65,13 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.accessibility.AccessibilityUtil;
+import com.android.settings.accessibility.Flags;
 import com.android.settings.accessibility.PreferredShortcuts;
+import com.android.settings.accessibility.data.AccessibilityRepositoryProvider;
 import com.android.settings.testutils.AccessibilityTestUtils;
+import com.android.settings.testutils.SettingsStoreRule;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.StringUtil;
@@ -70,13 +80,13 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowAccessibilityManager;
 import org.robolectric.shadows.ShadowContentResolver;
 import org.robolectric.shadows.ShadowLooper;
 import org.robolectric.util.ReflectionHelpers;
@@ -93,10 +103,15 @@ import java.util.Set;
  */
 @Config(shadows = {
         SettingsShadowResources.class,
-        com.android.settings.testutils.shadow.ShadowAccessibilityManager.class
+        ShadowAccessibilityManager.class
 })
 @RunWith(RobolectricTestRunner.class)
 public class EditShortcutsPreferenceFragmentTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    @Rule
+    public final SettingsStoreRule mSettingsStoreRule = new SettingsStoreRule();
+
     private static final int METRICS_CATEGORY = 123;
     private static final CharSequence SCREEN_TITLE = "Fake shortcut title";
     private static final ComponentName TARGET_FAKE_COMPONENT =
@@ -106,7 +121,9 @@ public class EditShortcutsPreferenceFragmentTest {
     private static final String TARGET = MAGNIFICATION_CONTROLLER_NAME;
     private static final Set<String> TARGETS = Set.of(TARGET);
 
-    private Context mContext = ApplicationProvider.getApplicationContext();
+    private final Context mContext = ApplicationProvider.getApplicationContext();
+    private final ShadowAccessibilityManager mShadowA11yManager =
+            Shadow.extract(mContext.getSystemService(AccessibilityManager.class));
 
     private FragmentActivity mActivity;
     private FragmentScenario<EditShortcutsPreferenceFragment> mFragmentScenario;
@@ -117,9 +134,7 @@ public class EditShortcutsPreferenceFragmentTest {
                 true, /* floatingButtonEnabled= */ false);
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_quickSettingsSupported, true);
-        com.android.settings.testutils.shadow.ShadowAccessibilityManager a11yManager =
-                Shadow.extract(mContext.getSystemService(AccessibilityManager.class));
-        a11yManager.setA11yFeatureToTileMap(
+        mShadowA11yManager.setA11yFeatureToTileMap(
                 Map.of(TARGET_FAKE_COMPONENT, TARGET_FAKE_COMPONENT_TILE));
 
         mActivity = Robolectric.buildActivity(FragmentActivity.class).get();
@@ -130,6 +145,7 @@ public class EditShortcutsPreferenceFragmentTest {
         if (mFragmentScenario != null) {
             mFragmentScenario.close();
         }
+        AccessibilityRepositoryProvider.resetInstanceForTesting();
     }
 
     @Test
@@ -268,8 +284,8 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
         mFragmentScenario.moveToState(Lifecycle.State.CREATED);
 
-        ShortcutUtils.optInValueToSettings(
-                mContext, ShortcutConstants.UserShortcutType.HARDWARE, TARGET);
+        mShadowA11yManager.setAccessibilityShortcutTargets(HARDWARE, List.of(TARGET));
+        ShortcutUtils.optInValueToSettings(mContext, HARDWARE, TARGET);
 
         mFragmentScenario.onFragment(fragment -> {
             TwoStatePreference preference = fragment.findPreference(
@@ -283,6 +299,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
         mFragmentScenario.moveToState(Lifecycle.State.CREATED);
 
+        mShadowA11yManager.setAccessibilityShortcutTargets(SOFTWARE, List.of(TARGET));
         ShortcutUtils.optInValueToSettings(
                 mContext, ShortcutConstants.UserShortcutType.SOFTWARE, TARGET);
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
@@ -302,6 +319,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
         mFragmentScenario.moveToState(Lifecycle.State.CREATED);
 
+        mShadowA11yManager.setAccessibilityShortcutTargets(TRIPLETAP, List.of(TARGET));
         Settings.Secure.putInt(
                 mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
@@ -320,6 +338,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
         mFragmentScenario.moveToState(Lifecycle.State.CREATED);
 
+        mShadowA11yManager.setAccessibilityShortcutTargets(TWOFINGER_DOUBLETAP, List.of(TARGET));
         Settings.Secure.putInt(
                 mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
@@ -341,9 +360,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
         mFragmentScenario.moveToState(Lifecycle.State.RESUMED);
 
-        ShadowAccessibilityManager am = shadowOf(
-                mContext.getSystemService(AccessibilityManager.class));
-        am.setTouchExplorationEnabled(true);
+        mShadowA11yManager.setTouchExplorationEnabled(true);
 
         mFragmentScenario.onFragment(fragment -> {
             Preference preference = fragment.findPreference(
@@ -352,6 +369,9 @@ public class EditShortcutsPreferenceFragmentTest {
         });
     }
 
+    // We moved the logic to onCreate/onDestroy with catalyst migration, and tested it in
+    // GestureShortcutPreferenceTest
+    @DisableFlags(Flags.FLAG_CATALYST_EDIT_SHORTCUTS)
     @Test
     public void fragmentPaused_enableTouchExploration_gestureSummaryNotUpdated() {
         String expectedSummary = StringUtil.getIcuPluralsString(mContext, 2,
@@ -359,9 +379,7 @@ public class EditShortcutsPreferenceFragmentTest {
         mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
         mFragmentScenario.moveToState(Lifecycle.State.RESUMED).moveToState(Lifecycle.State.STARTED);
 
-        ShadowAccessibilityManager am = shadowOf(
-                mContext.getSystemService(AccessibilityManager.class));
-        am.setTouchExplorationEnabled(true);
+        mShadowA11yManager.setTouchExplorationEnabled(true);
 
         mFragmentScenario.onFragment(fragment -> {
             Preference preference = fragment.findPreference(
@@ -378,9 +396,7 @@ public class EditShortcutsPreferenceFragmentTest {
                 /* isInSuw= */ false, TARGET_FAKE_COMPONENT.flattenToString());
         mFragmentScenario.moveToState(Lifecycle.State.RESUMED);
 
-        ShadowAccessibilityManager am = shadowOf(
-                mContext.getSystemService(AccessibilityManager.class));
-        am.setTouchExplorationEnabled(true);
+        mShadowA11yManager.setTouchExplorationEnabled(true);
 
         mFragmentScenario.onFragment(fragment -> {
             Preference preference = fragment.findPreference(
@@ -389,6 +405,9 @@ public class EditShortcutsPreferenceFragmentTest {
         });
     }
 
+    // We moved the logic to onCreate/onDestroy with catalyst migration, and tested it in
+    // QuickSettingsShortcutPreferenceTest
+    @DisableFlags(Flags.FLAG_CATALYST_EDIT_SHORTCUTS)
     @Test
     public void fragmentPaused_enableTouchExploration_qsShortcutOptionSummaryNotUpdated() {
         String expectedSummary = StringUtil.getIcuPluralsString(mContext, 1,
@@ -397,9 +416,7 @@ public class EditShortcutsPreferenceFragmentTest {
                 /* isInSuw= */ false, TARGET_FAKE_COMPONENT.flattenToString());
         mFragmentScenario.moveToState(Lifecycle.State.RESUMED).moveToState(Lifecycle.State.STARTED);
 
-        ShadowAccessibilityManager am = shadowOf(
-                mContext.getSystemService(AccessibilityManager.class));
-        am.setTouchExplorationEnabled(true);
+        mShadowA11yManager.setTouchExplorationEnabled(true);
 
         mFragmentScenario.onFragment(fragment -> {
             Preference preference = fragment.findPreference(
@@ -417,7 +434,8 @@ public class EditShortcutsPreferenceFragmentTest {
                     mContext.getString(R.string.accessibility_shortcuts_advanced_collapsed));
             assertThat(advanced.isVisible()).isTrue();
 
-            fragment.onPreferenceTreeClick(advanced);
+            advanced.performClick();
+            ShadowLooper.idleMainLooper();
 
             assertThat(advanced.isVisible()).isFalse();
         });
@@ -425,6 +443,7 @@ public class EditShortcutsPreferenceFragmentTest {
 
     @Test
     public void fragmentCreated_tripleTapEnabled_automaticallyExpanded() {
+        mShadowA11yManager.setAccessibilityShortcutTargets(TRIPLETAP, List.of(TARGET));
         Settings.Secure.putInt(
                 mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
@@ -483,14 +502,14 @@ public class EditShortcutsPreferenceFragmentTest {
         ).isEqualTo(SOFTWARE);
         // Update the chosen shortcut type to Volume keys while the fragment is in the background
         ShortcutUtils.optInValueToSettings(
-                mContext, ShortcutConstants.UserShortcutType.HARDWARE, TARGET);
+                mContext, HARDWARE, TARGET);
 
         mFragmentScenario.moveToState(Lifecycle.State.RESUMED);
 
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
                         mContext, TARGET, SOFTWARE)
-        ).isEqualTo(ShortcutConstants.UserShortcutType.HARDWARE);
+        ).isEqualTo(HARDWARE);
     }
 
     @Test
@@ -502,15 +521,15 @@ public class EditShortcutsPreferenceFragmentTest {
                         mContext, TARGET, SOFTWARE)
         ).isEqualTo(SOFTWARE);
 
-        ShortcutUtils.optInValueToSettings(
-                mContext, ShortcutConstants.UserShortcutType.HARDWARE, TARGET);
+        mShadowA11yManager.setAccessibilityShortcutTargets(HARDWARE, List.of(TARGET));
+        ShortcutUtils.optInValueToSettings(mContext, HARDWARE, TARGET);
 
         // Calls onFragment so that the change to Setting is notified to its observer
         mFragmentScenario.onFragment(fragment ->
                 assertThat(
                         PreferredShortcuts.retrieveUserShortcutType(
                                 mContext, TARGET, SOFTWARE)
-                ).isEqualTo(ShortcutConstants.UserShortcutType.HARDWARE)
+                ).isEqualTo(HARDWARE)
         );
 
     }
@@ -576,17 +595,19 @@ public class EditShortcutsPreferenceFragmentTest {
         int currentPreferredShortcut =
                 PreferredShortcuts.retrieveUserShortcutType(mContext, target, SOFTWARE);
         assertThat(currentPreferredShortcut
-                & ShortcutConstants.UserShortcutType.QUICK_SETTINGS).isEqualTo(0);
+                & QUICK_SETTINGS).isEqualTo(0);
 
+        mShadowA11yManager.setAccessibilityShortcutTargets(QUICK_SETTINGS, List.of(target));
         ShortcutUtils.optInValueToSettings(
-                mContext, ShortcutConstants.UserShortcutType.QUICK_SETTINGS, target);
+                mContext, QUICK_SETTINGS, target);
+        ShadowLooper.idleMainLooper();
 
         // Calls onFragment so that the change to Setting is notified to its observer
         mFragmentScenario.onFragment(fragment ->
                 assertThat(
                         PreferredShortcuts.retrieveUserShortcutType(
                                 mContext, target, SOFTWARE)
-                ).isEqualTo(ShortcutConstants.UserShortcutType.QUICK_SETTINGS)
+                ).isEqualTo(QUICK_SETTINGS)
         );
     }
 

@@ -16,6 +16,8 @@
 
 package com.android.settings.appfunctions
 
+import android.app.KeyguardManager
+import android.app.appfunctions.AppFunctionException.ERROR_DENIED
 import android.app.appsearch.GenericDocument
 import android.content.Context
 import android.content.res.Configuration
@@ -29,11 +31,13 @@ import com.android.extensions.appfunctions.AppFunctionException.ERROR_FUNCTION_N
 import com.android.extensions.appfunctions.AppFunctionService
 import com.android.extensions.appfunctions.ExecuteAppFunctionRequest
 import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
-import com.android.settings.appfunctions.providers.AndroidApiStateProviderExecutor
-import com.android.settings.appfunctions.providers.CatalystStateMetadataProviderExecutor
-import com.android.settings.appfunctions.providers.CatalystStateProviderExecutor
-import com.android.settings.appfunctions.providers.CatalystStateSetterExecutor
-import com.android.settings.appfunctions.providers.DeviceStateExecutor
+import com.android.settings.appfunctions.executors.AndroidApiStateMetadataProviderExecutor
+import com.android.settings.appfunctions.executors.AndroidApiStateProviderExecutor
+import com.android.settings.appfunctions.executors.AndroidApiStateSetterExecutor
+import com.android.settings.appfunctions.executors.CatalystStateMetadataProviderExecutor
+import com.android.settings.appfunctions.executors.CatalystStateProviderExecutor
+import com.android.settings.appfunctions.executors.CatalystStateSetterExecutor
+import com.android.settings.appfunctions.executors.DeviceStateExecutor
 import com.android.settings.utils.getLocale
 import java.util.Locale
 import kotlinx.coroutines.runBlocking
@@ -69,7 +73,8 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                 getSettingsCatalystConfig(),
                 applicationContext,
                 englishContext,
-            )
+            ),
+            AndroidApiStateMetadataProviderExecutor(applicationContext),
         )
     }
     val deviceStateMetadataProviderAggregator by lazy {
@@ -77,7 +82,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
     }
 
     open val deviceStateSetterExecutors: List<DeviceStateExecutor> by lazy {
-        listOf(CatalystStateSetterExecutor(applicationContext, englishContext))
+        listOf(CatalystStateSetterExecutor(), AndroidApiStateSetterExecutor(applicationContext))
     }
     val deviceStateSetterAggregator by lazy {
         DeviceStateSetterAggregator(deviceStateSetterExecutors)
@@ -96,7 +101,6 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
             DeviceStateAppFunctionType.ADJUST_DEVICE_STATE_BY_PERCENTAGE to
                 deviceStateSetterAggregator,
             DeviceStateAppFunctionType.OFFSET_DEVICE_STATE_BY_VALUE to deviceStateSetterAggregator,
-            DeviceStateAppFunctionType.TOGGLE_DEVICE_STATE to deviceStateSetterAggregator,
         )
     }
 
@@ -121,6 +125,20 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
             )
             return
         }
+
+        if (
+            shouldCheckForDeviceLock(request.parameters, appFunctionType) &&
+                applicationContext.getSystemService(KeyguardManager::class.java).isDeviceLocked
+        ) {
+            callback.onError(
+                AppFunctionException(
+                    ERROR_DENIED,
+                    "Attempting to execute a device state app function while " +
+                        "the device is locked.",
+                )
+            )
+        }
+
         runBlocking {
             Trace.beginSection("DeviceStateAppFunction ${request.functionIdentifier}")
             Log.d(TAG, "device state app function ${request.functionIdentifier} called.")
@@ -163,6 +181,15 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
         val configuration = Configuration(applicationContext.resources.configuration)
         configuration.setLocale(Locale.US)
         return applicationContext.createConfigurationContext(configuration)
+    }
+
+    private fun shouldCheckForDeviceLock(
+        params: GenericDocument,
+        appFunctionType: DeviceStateAppFunctionType,
+    ): Boolean {
+        return params
+            .getPropertyDocument(appFunctionType.functionId + "Params")
+            ?.getPropertyBoolean("requestInitiatedWhileUnlocked") != true
     }
 
     companion object {

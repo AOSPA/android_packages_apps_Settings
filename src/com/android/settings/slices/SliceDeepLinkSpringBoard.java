@@ -52,8 +52,7 @@ public class SliceDeepLinkSpringBoard extends Activity {
                         CustomSliceable.createInstance(getApplicationContext(),
                                 CustomSliceRegistry.getSliceClassByUri(sliceUri));
                 launchIntent = sliceable.getIntent();
-            } else if (android.app.Flags.modesUiDndSlice()
-                    && CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
+            } else if (CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
                 launchIntent = DndModeSliceBuilder.getIntent(this /* context */);
             } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
                 launchIntent = BluetoothSliceBuilder.getIntent(this /* context */);

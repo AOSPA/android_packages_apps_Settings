@@ -124,11 +124,11 @@ class MobileNetworkImeiPreferenceControllerTest {
     }
 
     @Test
-    fun refreshData_getImeiTitle_showImei() = runBlocking {
+    fun refreshData_getImeiTitle_showImei1() = runBlocking {
         whenever(SubscriptionUtil.getActiveSubscriptions(any()))
             .thenReturn(listOf(SUB_INFO_1, SUB_INFO_2))
-        controller.init(mockFragment, SUB_ID_2)
-        mockImei = "test imei"
+        controller.init(mockFragment, SUB_ID_2, imeiList)
+        mockImei = IMEI_1
         mockTelephonyManager.stub {
             on { imei } doReturn mockImei
             on { primaryImei } doReturn ""
@@ -136,7 +136,25 @@ class MobileNetworkImeiPreferenceControllerTest {
 
         controller.refreshData(SUB_INFO_2)
 
-        assertThat(preference.title).isEqualTo(context.getString(R.string.status_imei))
+        assertThat(preference.title)
+            .isEqualTo(context.getString(R.string.imei_multi_sim, IMEI_INDEXING_1))
+    }
+
+    @Test
+    fun refreshData_getImeiTitle_showImei2() = runBlocking {
+        whenever(SubscriptionUtil.getActiveSubscriptions(any()))
+            .thenReturn(listOf(SUB_INFO_1, SUB_INFO_2))
+        controller.init(mockFragment, SUB_ID_2, imeiList)
+        mockImei = IMEI_2
+        mockTelephonyManager.stub {
+            on { imei } doReturn mockImei
+            on { primaryImei } doReturn ""
+        }
+
+        controller.refreshData(SUB_INFO_2)
+
+        assertThat(preference.title)
+            .isEqualTo(context.getString(R.string.imei_multi_sim, IMEI_INDEXING_2))
     }
 
     @Test
@@ -224,5 +242,11 @@ class MobileNetworkImeiPreferenceControllerTest {
                     setDisplayName(DISPLAY_NAME_2)
                 }
                 .build()
+
+        const val IMEI_1 = "111111111111115"
+        const val IMEI_2 = "222222222222225"
+        const val IMEI_INDEXING_1 = 1
+        const val IMEI_INDEXING_2 = 2
+        val imeiList = listOf(IMEI_1, IMEI_2)
     }
 }

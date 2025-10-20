@@ -87,11 +87,7 @@ class FontSizeDataStore(
                 newValue,
                 AccessibilityStatsLogUtils.convertToEntryPoint(entryPoint),
             )
-            if (value != null) {
-                keyValueStoreDelegate.setFloat(FONT_SCALE_KEY, data.values[newValue])
-            } else {
-                keyValueStoreDelegate.setFloat(FONT_SCALE_KEY, null)
-            }
+            keyValueStoreDelegate.setFloat(FONT_SCALE_KEY, data.values[newValue])
             _fontSizeData.value = data.copy(currentIndex = newValue)
         }
     }
@@ -108,7 +104,7 @@ class FontSizeDataStore(
                 .toFloatArray()
         val defaultValue =
             keyValueStoreDelegate.getFloat(DEFAULT_FONT_SIZE_KEY) ?: FONT_SCALE_DEF_VALUE
-        val currentValue = settingsSystem.getFloat(FONT_SCALE_KEY) ?: defaultValue
+        val currentValue = keyValueStoreDelegate.getFloat(FONT_SCALE_KEY) ?: defaultValue
         val currentIndex = getClosestFontIndex(currentValue, fontSizes)
 
         return FontSize(currentIndex, fontSizes, defaultValue)

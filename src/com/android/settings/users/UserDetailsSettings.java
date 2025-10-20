@@ -23,6 +23,11 @@ import static com.android.settings.flags.Flags.showUserDetailsSettingsForSelf;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
+import android.app.admin.flags.Flags;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.UserInfo;
@@ -50,6 +55,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.utils.CustomDialogHelper;
 
+import java.util.Collections;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -83,6 +89,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER = 5;
     private static final int DIALOG_CONFIRM_REVOKE_ADMIN = 6;
     private static final int DIALOG_CONFIRM_GRANT_ADMIN = 7;
+    private static final int DIALOG_DELETE_LAST_ADMIN = 8;
+    private static final int DIALOG_REVOKE_LAST_ADMIN = 9;
 
     /** Whether to enable the app_copying fragment. */
     private static final boolean SHOW_APP_COPYING_PREF = false;
@@ -156,6 +164,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             if (canDeleteUser()) {
                 if (mUserInfo.isGuest()) {
                     showDialog(DIALOG_CONFIRM_RESET_GUEST);
+                } else if (isLastAdminUser()) {
+                    showDialog(DIALOG_DELETE_LAST_ADMIN);
                 } else {
                     showDialog(DIALOG_CONFIRM_REMOVE);
                 }
@@ -203,7 +213,11 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             if (Boolean.FALSE.equals(newValue)) {
                 mMetricsFeatureProvider.action(getActivity(),
                         SettingsEnums.ACTION_REVOKE_ADMIN_FROM_SETTINGS);
-                showDialog(DIALOG_CONFIRM_REVOKE_ADMIN);
+                if (isLastAdminUser()) {
+                    showDialog(DIALOG_REVOKE_LAST_ADMIN);
+                } else {
+                    showDialog(DIALOG_CONFIRM_REVOKE_ADMIN);
+                }
             } else {
                 mMetricsFeatureProvider.action(getActivity(),
                         SettingsEnums.ACTION_GRANT_ADMIN_FROM_SETTINGS);
@@ -229,6 +243,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 return SettingsEnums.DIALOG_GRANT_USER_ADMIN;
             case DIALOG_SETUP_USER:
                 return SettingsEnums.DIALOG_USER_SETUP;
+            case DIALOG_DELETE_LAST_ADMIN:
+            case DIALOG_REVOKE_LAST_ADMIN:
+                return SettingsEnums.DIALOG_CANNOT_REMOVE_LAST_ADMIN_USER;
             default:
                 return 0;
         }
@@ -257,23 +274,27 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             case DIALOG_CONFIRM_RESET_GUEST:
                 if (mGuestUserAutoCreated) {
                     return UserDialogs.createResetGuestDialog(getActivity(),
-                        (dialog, which) -> resetGuest());
+                            (dialog, which) -> resetGuest());
                 } else {
                     return UserDialogs.createRemoveGuestDialog(getActivity(),
-                        (dialog, which) -> resetGuest());
+                            (dialog, which) -> resetGuest());
                 }
             case DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER:
                 if (mGuestUserAutoCreated) {
                     return UserDialogs.createResetGuestDialog(getActivity(),
-                        (dialog, which) -> switchUser());
+                            (dialog, which) -> switchUser());
                 } else {
                     return UserDialogs.createRemoveGuestDialog(getActivity(),
-                        (dialog, which) -> switchUser());
+                            (dialog, which) -> switchUser());
                 }
             case DIALOG_CONFIRM_REVOKE_ADMIN:
                 return createRevokeAdminDialog(getContext());
             case DIALOG_CONFIRM_GRANT_ADMIN:
                 return createGrantAdminDialog(getContext());
+            case DIALOG_DELETE_LAST_ADMIN:
+                return createDeleteLastAdminDialog(getContext());
+            case DIALOG_REVOKE_LAST_ADMIN:
+                return createRevokeLastAdminDialog(getContext());
         }
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
@@ -306,6 +327,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     /**
      * Creates dialog to confirm granting admin rights.
+     *
      * @return created confirmation dialog
      */
     private Dialog createGrantAdminDialog(Context context) {
@@ -323,6 +345,32 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         dialogHelper.setBackButton(R.string.cancel, view -> {
             dialogHelper.getDialog().dismiss();
         });
+        return dialogHelper.getDialog();
+    }
+
+    private Dialog createDeleteLastAdminDialog(Context context) {
+        CustomDialogHelper dialogHelper = new CustomDialogHelper(context);
+        dialogHelper.setIcon(context.getDrawable(R.drawable.ic_person_remove));
+        dialogHelper.setTitle(R.string.user_remove_last_admin_title);
+        dialogHelper.setMessage(R.string.user_remove_last_admin_message);
+        dialogHelper.setMessagePadding(MESSAGE_PADDING);
+        dialogHelper.setPositiveButton(R.string.okay,
+                view -> {
+                    dialogHelper.getDialog().dismiss();
+                });
+        return dialogHelper.getDialog();
+    }
+
+    private Dialog createRevokeLastAdminDialog(Context context) {
+        CustomDialogHelper dialogHelper = new CustomDialogHelper(context);
+        dialogHelper.setIcon(context.getDrawable(R.drawable.ic_remove_moderator));
+        dialogHelper.setTitle(R.string.user_revoke_last_admin_title);
+        dialogHelper.setMessage(R.string.user_revoke_last_admin_message);
+        dialogHelper.setMessagePadding(MESSAGE_PADDING);
+        dialogHelper.setPositiveButton(R.string.okay,
+                view -> {
+                    dialogHelper.getDialog().dismiss();
+                });
         return dialogHelper.getDialog();
     }
 
@@ -376,9 +424,16 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                         mUserInfo.name));
 
         if (mUserCaps.mDisallowSwitchUser) {
-            mSwitchUserPref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
+            if (Flags.policyTransparencyRefactorEnabled()) {
+                mSwitchUserPref.setDisabledByAdmin(
+                        mUserCaps.mDisallowSwitchUserRestrictionEnforcementInfo
+                                .getMostImportantEnforcingAdmin());
+            } else {
+                mSwitchUserPref.setDisabledByAdmin(
+                        RestrictedLockUtilsInternal.getDeviceOwner(context));
+            }
         } else {
-            mSwitchUserPref.setDisabledByAdmin(null);
+            mSwitchUserPref.setDisabledByAdmin((EnforcingAdmin) null);
             mSwitchUserPref.setEnabled(mUserCaps.mUserSwitcherEnabled);
             mSwitchUserPref.setSelectable(mUserCaps.mUserSwitcherEnabled);
             mSwitchUserPref.setOnPreferenceClickListener(this);
@@ -447,9 +502,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
             // Remove preference KEY_REMOVE_USER if DISALLOW_REMOVE_USER restriction is set
             // on the current user or the user selected in user details settings is a main user.
-            if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
-                    UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())
-                    || mUserInfo.isMain()) {
+            if (isRemoveUserDisallowed(context) || mUserInfo.isMain()) {
                 removePreference(KEY_REMOVE_USER);
             }
 
@@ -471,15 +524,32 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             return false;
         }
 
-        final RestrictedLockUtils.EnforcedAdmin removeDisallowedAdmin =
-                RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context,
-                        UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
-        if (removeDisallowedAdmin != null) {
-            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context,
-                    removeDisallowedAdmin);
+        return !isRemoveUserDisabledByAdmin(context);
+    }
+
+    private boolean isRemoveUserDisabledByAdmin(Context context) {
+        if (Flags.policyTransparencyRefactorEnabled()) {
+            PolicyEnforcementInfo info = getEnforcingAdminInfoForRestriction(context,
+                    UserManager.DISALLOW_REMOVE_USER);
+            if (info.getAllAdmins().isEmpty() || info.isOnlyEnforcedBySystem()) {
+                return false;
+            }
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                    context,
+                    info.getMostImportantEnforcingAdmin(),
+                    UserManager.DISALLOW_REMOVE_USER);
+            return true;
+        } else {
+            final RestrictedLockUtils.EnforcedAdmin removeDisallowedAdmin =
+                    RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context,
+                            UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
+            if (removeDisallowedAdmin != null) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context,
+                        removeDisallowedAdmin);
+                return true;
+            }
             return false;
         }
-        return true;
     }
 
     @VisibleForTesting
@@ -523,6 +593,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     /**
      * Sets admin status of selected user. Method is called when toggle in
      * user details settings is switched.
+     *
      * @param isSetAdmin indicates if user admin status needs to be set to true.
      */
     private void updateUserAdminStatus(boolean isSetAdmin) {
@@ -670,5 +741,36 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private boolean canRemoveSelf() {
         boolean isCurrentUser = (UserHandle.myUserId() == mUserInfo.id);
         return showUserDetailsSettingsForSelf() && isCurrentUser;
+    }
+
+    private boolean isRemoveUserDisallowed(Context context) {
+        if (Flags.policyTransparencyRefactorEnabled()) {
+            PolicyEnforcementInfo info = getEnforcingAdminInfoForRestriction(context,
+                    UserManager.DISALLOW_REMOVE_USER);
+            return !info.getAllAdmins().isEmpty();
+        } else {
+            return RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
+                    UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
+        }
+    }
+
+    /**
+     * Gets the policy enforcement info for a user restriction on the current user. This
+     * information also contains the system restrictions for the current user.
+     */
+    private PolicyEnforcementInfo getEnforcingAdminInfoForRestriction(Context context,
+            String userRestriction) {
+        DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
+        if (dpm == null) {
+            return new PolicyEnforcementInfo(Collections.emptyList());
+        }
+        return dpm.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                        userRestriction), UserHandle.myUserId());
+    }
+
+    private boolean isLastAdminUser() {
+        return mUserManager.getUserRemovability(mUserInfo.id)
+                == UserManager.REMOVE_RESULT_ERROR_LAST_ADMIN_USER;
     }
 }

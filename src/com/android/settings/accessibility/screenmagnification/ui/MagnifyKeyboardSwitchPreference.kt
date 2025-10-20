@@ -19,7 +19,6 @@ package com.android.settings.accessibility.screenmagnification.ui
 import android.content.Context
 import android.provider.Settings
 import com.android.internal.accessibility.util.AccessibilityUtils
-import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.MagnificationCapabilities
@@ -34,6 +33,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
@@ -52,6 +52,18 @@ class MagnifyKeyboardSwitchPreference :
 
     override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
 
+    override fun getReadPermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int = ReadWritePermit.ALLOW
+
+    override fun getWritePermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
+
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
         lifecycleContext = context
@@ -69,8 +81,7 @@ class MagnifyKeyboardSwitchPreference :
     }
 
     override fun isAvailable(context: Context): Boolean {
-        return Flags.enableMagnificationMagnifyNavBarAndIme() &&
-                context.isWindowMagnificationSupported()
+        return context.isWindowMagnificationSupported()
     }
 
     override fun isEnabled(context: Context): Boolean {
@@ -97,13 +108,15 @@ class MagnifyKeyboardSwitchPreference :
         const val KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MAGNIFY_NAV_AND_IME
 
         private val Context.dataStore: KeyValueStore
-            get() = SettingsSecureStore.get(this).apply {
-                setDefaultValue(
-                    KEY,
-                    AccessibilityUtils.getMagnificationMagnifyKeyboardDefaultValue(this@dataStore)
-                            == AccessibilityUtil.State.ON
-                )
-            }
+            get() =
+                SettingsSecureStore.get(this).apply {
+                    setDefaultValue(
+                        KEY,
+                        AccessibilityUtils.getMagnificationMagnifyKeyboardDefaultValue(
+                            this@dataStore
+                        ) == AccessibilityUtil.State.ON,
+                    )
+                }
     }
 }
 // LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/MagnifyKeyboardPreferenceController.java)

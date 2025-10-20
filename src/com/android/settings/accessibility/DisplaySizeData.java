@@ -69,5 +69,22 @@ public class DisplaySizeData extends PreviewSizeData<Integer> {
             mDensity.setForcedDisplayDensity(currentProgress);
         }
     }
+
+    /**
+     * Gets the density at the given progress level as a percentage of the default density.
+     *
+     * @return The density as a percentage of the default density.
+     */
+    public float getDensityPercentage(int currentProgress) {
+        final int selectedDensity = getValues().get(currentProgress);
+        final int defaultDensity = mDensity.getInitialDensity();
+
+        if (defaultDensity <= 0) {
+            // Avoid division by zero and return a fallback.
+            return 100f;
+        }
+
+        return ((float) selectedDensity / defaultDensity) * 100f;
+    }
 }
 // LINT.ThenChange(/src/com/android/settings/accessibility/textreading/data/DisplaySizeDataStore.kt,)

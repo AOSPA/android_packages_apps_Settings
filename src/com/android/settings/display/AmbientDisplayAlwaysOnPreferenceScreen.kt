@@ -23,17 +23,19 @@ import android.os.SystemProperties
 import android.os.UserHandle
 import android.os.UserManager
 import androidx.fragment.app.Fragment
+import com.android.internal.R.bool.config_dozeSupportsAodInactivityDetection
 import com.android.internal.R.bool.config_dozeSupportsAodWallpaper
 import com.android.settings.CatalystFragment
 import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
 import com.android.settings.contract.KEY_AMBIENT_DISPLAY_ALWAYS_ON
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime
+import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceScreenController.isAodSuppressedByBedtime
 import com.android.settings.display.ambient.AmbientDisplayIllustration
 import com.android.settings.display.ambient.AmbientDisplayMainSwitchPreference
 import com.android.settings.display.ambient.AmbientDisplayStorage
 import com.android.settings.display.ambient.AmbientDisplayTopIntroPreference
+import com.android.settings.display.ambient.AmbientInactivityDetectionPreference
 import com.android.settings.display.ambient.AmbientWallpaperPreference
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.restriction.PreferenceRestrictionMixin
@@ -54,7 +56,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.systemui.shared.Flags.ambientAod
+import com.android.systemui.shared.Flags.aodInactivityDetection
 import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
@@ -77,13 +79,16 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     private lateinit var keyedObserver: KeyedObserver<String>
 
     override val title: Int
-        get() = if (ambientAod()) R.string.doze_always_on_title2 else R.string.doze_always_on_title
+        get() = R.string.doze_always_on_title2
 
     override val key: String
         get() = KEY
 
     override val keywords: Int
         get() = R.string.keywords_always_show_time_info
+
+    override val indexable
+        get() = true
 
     override fun getMetricsCategory() = SettingsEnums.AMBIENT_DISPLAY_ALWAYS_ON
 
@@ -101,7 +106,6 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override fun isAvailable(context: Context): Boolean {
-        if (!ambientAod()) return false
         return !SystemProperties.getBoolean(PROP_AWARE_AVAILABLE, false) &&
             AmbientDisplayConfiguration(context).alwaysOnAvailableForUser(UserHandle.myUserId())
     }
@@ -122,21 +126,23 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
         )
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
-        ambientWallpaperPreference
-            .storage(context)
-            .addObserver(AmbientWallpaperPreference.KEY, keyedObserver, HandlerExecutor.main)
+        if (isEntryPoint(context)) {
+            keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
+            ambientWallpaperPreference
+                .storage(context)
+                .addObserver(AmbientWallpaperPreference.KEY, keyedObserver, HandlerExecutor.main)
+        }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        ambientWallpaperPreference
-            .storage(context)
-            .removeObserver(AmbientWallpaperPreference.KEY, keyedObserver)
+        if (isEntryPoint(context)) {
+            ambientWallpaperPreference
+                .storage(context)
+                .removeObserver(AmbientWallpaperPreference.KEY, keyedObserver)
+        }
     }
 
     override fun fragmentClass(): Class<out Fragment>? = AmbientPreferenceFragment::class.java
-
-    override fun isIndexable(context: Context) = true
 
     override fun hasCompleteHierarchy() = true
 
@@ -148,6 +154,9 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
             +AmbientDisplayTopIntroPreference()
             +AmbientDisplayIllustration(context)
             +AmbientDisplayMainSwitchPreference()
+            if (context.isAmbientInactivityDetectionAvailable) {
+                +AmbientInactivityDetectionPreference(context)
+            }
             if (context.isAmbientWallpaperOptionsAvailable) {
                 +Category("ambient_wallpaperGroup", R.string.doze_always_on_wallpaper_options) += {
                     +ambientWallpaperPreference
@@ -175,11 +184,16 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
         const val PROP_AWARE_AVAILABLE = "ro.vendor.aware_available"
 
         private val Context.isAmbientWallpaperOptionsAvailable: Boolean
-            get() = ambientAod() && resources.getBoolean(config_dozeSupportsAodWallpaper)
+            get() = resources.getBoolean(config_dozeSupportsAodWallpaper)
+
+        private val Context.isAmbientInactivityDetectionAvailable: Boolean
+            get() =
+                aodInactivityDetection() &&
+                    resources.getBoolean(config_dozeSupportsAodInactivityDetection)
     }
 }
 
-// LINT.ThenChange(AmbientDisplayAlwaysOnPreferenceController.java)
+// LINT.ThenChange(AmbientDisplayAlwaysOnPreferenceScreenController.java)
 
 class AmbientDisplayAlwaysOnActivity :
     CatalystSettingsActivity(

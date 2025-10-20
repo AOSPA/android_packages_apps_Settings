@@ -84,9 +84,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                         .handleWifiCallingChanged(intent);
                 break;
             case ACTION_DND_MODE_SLICE_CHANGED:
-                if (android.app.Flags.modesUiDndSlice()) {
-                    DndModeSliceBuilder.handleUriChange(context, intent);
-                }
+                DndModeSliceBuilder.handleUriChange(context, intent);
                 break;
             case ACTION_ENHANCED_4G_LTE_CHANGED:
                 FeatureFactory.getFeatureFactory()

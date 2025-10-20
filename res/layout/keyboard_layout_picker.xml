@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/keyboard_picker_margin_large"
             android:textSize="@dimen/keyboard_picker_text_size"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/materialColorOnSurface"
             android:layout_gravity="bottom"
             android:gravity="center" />
     </FrameLayout>
@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="1dp"
-        android:background="?android:attr/colorBackground"
+        android:background="@color/materialColorSurfaceContainer"
         android:outlineAmbientShadowColor="@android:color/transparent"
         android:outlineSpotShadowColor="@android:color/transparent"/>
 
@@ -60,6 +60,6 @@
         android:layout_marginTop="@dimen/keyboard_picker_margin_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/colorBackground"/>
+        android:background="@color/materialColorSurfaceContainer"/>
 
 </LinearLayout>

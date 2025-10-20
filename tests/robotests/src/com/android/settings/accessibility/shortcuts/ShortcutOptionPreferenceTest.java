@@ -23,10 +23,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.PreferenceExtKt;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -86,5 +88,29 @@ public class ShortcutOptionPreferenceTest {
         mShortcutOptionPreference.onBindViewHolder(mViewHolder);
 
         assertThat(mShortcutOptionPreference.getSummaryTextLineHeight()).isNotEqualTo(0);
+    }
+
+    @Test
+    public void bindViewHolder_callsOnBindListener() {
+        TestOnBindListener onBindListener = new TestOnBindListener();
+        mShortcutOptionPreference.setOnBindListener(onBindListener);
+        assertThat(onBindListener.isOnBindListenerCalled()).isFalse();
+
+        PreferenceExtKt.inflateViewHolder(mShortcutOptionPreference);
+
+        assertThat(onBindListener.isOnBindListenerCalled()).isTrue();
+    }
+
+    static class TestOnBindListener implements ShortcutOptionPreference.OnBindListener {
+        private boolean mOnBindListenerCalled = false;
+
+        @Override
+        public void onBind(@NonNull View view) {
+            mOnBindListenerCalled = true;
+        }
+
+        public boolean isOnBindListenerCalled() {
+            return mOnBindListenerCalled;
+        }
     }
 }

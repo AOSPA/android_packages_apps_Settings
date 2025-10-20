@@ -50,7 +50,7 @@ class ImageUriPreferenceTest {
     @Test
     fun isIndexable_returnFalse() {
         val preferenceMetadata = AnimatedImageUriPreference()
-        assertThat(preferenceMetadata.isIndexable(context)).isFalse()
+        assertThat(preferenceMetadata.indexable).isFalse()
     }
 
     @Test

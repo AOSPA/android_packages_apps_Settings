@@ -23,7 +23,7 @@ import com.android.settings.core.BasePreferenceController
 import com.android.settingslib.widget.ButtonPreference
 
 /** Controller for managing the display and behavior of a feedback button preference. */
-class FeedbackButtonPreferenceController(context: Context, prefKey: String) :
+open class FeedbackButtonPreferenceController(context: Context, prefKey: String) :
     BasePreferenceController(context, prefKey) {
 
     private var feedbackManager: FeedbackManager? = null
@@ -36,6 +36,10 @@ class FeedbackButtonPreferenceController(context: Context, prefKey: String) :
      */
     fun initialize(feedbackManager: FeedbackManager) {
         this.feedbackManager = feedbackManager
+    }
+
+    fun getFeedbackManager(): FeedbackManager? {
+        return feedbackManager
     }
 
     /**
@@ -58,9 +62,9 @@ class FeedbackButtonPreferenceController(context: Context, prefKey: String) :
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         val buttonPreference: ButtonPreference? = screen.findPreference(mPreferenceKey)
-        buttonPreference?.let {
-            it.setOrder(Integer.MAX_VALUE)
-            it.setOnClickListener { view ->
+        buttonPreference?.apply {
+            order = Integer.MAX_VALUE
+            setOnClickListener { view ->
                 view.context.startActivityForResult(
                     mPreferenceKey,
                     feedbackManager?.getFeedbackIntent(),

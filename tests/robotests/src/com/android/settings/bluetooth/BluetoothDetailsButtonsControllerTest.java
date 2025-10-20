@@ -35,7 +35,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.settings.R;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -43,7 +42,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsControllerTestBase {
     private BluetoothDetailsButtonsController mController;
     private ActionButtonsPreference mButtonsPref;
@@ -53,6 +51,7 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
     @Override
     public void setUp() {
         super.setUp();
+        setupDevice(mDeviceConfig);
         final View buttons = View.inflate(
                 RuntimeEnvironment.application,
                 com.android.settingslib.widget.preference.actionbuttons.R.layout.settingslib_action_buttons,
@@ -64,6 +63,8 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
                         mLifecycle);
         mButtonsPref = createMock();
         when(mButtonsPref.getKey()).thenReturn(mController.getPreferenceKey());
+        when(mButtonsPref.setButton1Description(anyInt())).thenReturn(mButtonsPref);
+        when(mButtonsPref.setButton2Description(anyInt())).thenReturn(mButtonsPref);
         when(mButtonsPref.setButton2OnClickListener(any(View.OnClickListener.class)))
                 .thenAnswer(invocation -> {
                     final Object[] args = invocation.getArguments();
@@ -77,7 +78,6 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
                     return mButtonsPref;
                 });
         mScreen.addPreference(mButtonsPref);
-        setupDevice(mDeviceConfig);
         when(mCachedDevice.isBusy()).thenReturn(false);
     }
 

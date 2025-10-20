@@ -45,6 +45,7 @@ import com.android.settings.accessibility.textreading.ui.TextReadingScreenFromNo
 import com.android.settings.accessibility.textreading.ui.TextReadingScreenInAnythingElse;
 import com.android.settings.accessibility.textreading.ui.TextReadingScreenInSuw;
 import com.android.settings.accessibility.textreading.ui.TextReadingScreenOnAccessibility;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -64,7 +65,7 @@ import java.util.stream.Collectors;
  * example, bold text, high contrast text, display size, font size and so on.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class TextReadingPreferenceFragment extends BaseSupportFragment {
+public class TextReadingPreferenceFragment extends DashboardFragment {
     public static final String EXTRA_LAUNCHED_FROM = "launched_from";
     private static final String TAG = "TextReadingPreferenceFragment";
     private static final String SETUP_WIZARD_PACKAGE = "setupwizard";

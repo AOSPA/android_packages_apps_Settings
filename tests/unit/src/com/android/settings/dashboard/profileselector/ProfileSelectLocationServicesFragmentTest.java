@@ -25,10 +25,7 @@ import android.os.Looper;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import static com.android.settings.flags.Flags.FLAG_DISABLE_UPDATE_HEIGHT_PROFILE_SELECT_LOCATION_SERVICES;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
+
 
 import org.junit.Rule;
 import org.junit.Before;
@@ -40,7 +37,6 @@ import org.mockito.MockitoAnnotations;
 public class ProfileSelectLocationServicesFragmentTest {
 
     private ProfileSelectLocationServicesFragment mFragment;
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     @UiThreadTest
@@ -53,15 +49,7 @@ public class ProfileSelectLocationServicesFragmentTest {
     }
 
     @Test
-    @DisableFlags(FLAG_DISABLE_UPDATE_HEIGHT_PROFILE_SELECT_LOCATION_SERVICES)
     public void test_initializeOptionsMenuInvalidatesExistingMenu() {
-        final Activity activity = mock(Activity.class);
-        assertThat(mFragment.forceUpdateHeight()).isTrue();
-    }
-
-    @Test
-    @EnableFlags(FLAG_DISABLE_UPDATE_HEIGHT_PROFILE_SELECT_LOCATION_SERVICES)
-    public void test_initializeOptionsMenuInvalidatesExistingMenu_flagEnabled() {
         final Activity activity = mock(Activity.class);
         assertThat(mFragment.forceUpdateHeight()).isFalse();
     }

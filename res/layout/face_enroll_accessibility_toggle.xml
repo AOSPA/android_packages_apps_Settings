@@ -31,7 +31,7 @@
         android:layout_toStartOf="@+id/toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@color/materialColorOnSurface"
         android:textSize="22sp"
         android:letterSpacing="0"
         android:minHeight="28dp"
@@ -51,7 +51,7 @@
         android:letterSpacing="0"
         android:minHeight="20dp"
         android:fontFamily="@string/sudFontSecondaryText"
-        android:textColor="?android:attr/textColorPrimary"/>
+        android:textColor="@color/materialColorOnSurface"/>
 
     <!-- Toggle -->
     <com.google.android.material.materialswitch.MaterialSwitch

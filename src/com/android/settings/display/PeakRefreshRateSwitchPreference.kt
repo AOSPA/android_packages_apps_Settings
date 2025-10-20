@@ -22,8 +22,6 @@ import android.provider.DeviceConfig
 import android.provider.Settings.System.PEAK_REFRESH_RATE
 import com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE
 import com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateAmongAllDisplays
-import com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateForDefaultDisplay
-import com.android.server.display.feature.flags.Flags
 import com.android.settings.R
 import com.android.settings.contract.KEY_SMOOTH_DISPLAY
 import com.android.settings.metrics.PreferenceActionMetricsProvider
@@ -139,11 +137,7 @@ class PeakRefreshRateSwitchPreference :
                 }
             }
 
-        private fun Context.refreshRateIfON() =
-            when {
-                Flags.backUpSmoothDisplayAndForcePeakRefreshRate() -> Float.POSITIVE_INFINITY
-                else -> peakRefreshRate
-            }
+        private fun Context.refreshRateIfON() = Float.POSITIVE_INFINITY
     }
 
     companion object {
@@ -151,15 +145,7 @@ class PeakRefreshRateSwitchPreference :
         private const val INVALIDATE_REFRESH_RATE: Float = -1f
 
         private val Context.peakRefreshRate: Float
-            get() =
-                Math.round(
-                        when {
-                            Flags.backUpSmoothDisplayAndForcePeakRefreshRate() ->
-                                findHighestRefreshRateAmongAllDisplays(this)
-                            else -> findHighestRefreshRateForDefaultDisplay(this)
-                        }
-                    )
-                    .toFloat()
+            get() = Math.round(findHighestRefreshRateAmongAllDisplays(this)).toFloat()
 
         private val Context.defaultPeakRefreshRate: Float
             get() {

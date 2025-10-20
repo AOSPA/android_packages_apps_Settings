@@ -66,7 +66,8 @@ public class PaymentBackend {
         @Override
         public boolean equals(Object o) {
             if (o == this) return true;
-            if (!(o instanceof PaymentAppInfo appInfo)) return false;
+            if (!(o instanceof PaymentAppInfo)) return false;
+            PaymentAppInfo appInfo = (PaymentAppInfo) o;
             return componentName.equals(appInfo.componentName)
                     && userHandle.equals(appInfo.userHandle);
         }

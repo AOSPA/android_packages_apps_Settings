@@ -21,6 +21,7 @@ import android.content.Context
 import android.media.AudioManager
 import android.media.Spatializer
 import android.net.Uri
+import androidx.appcompat.app.AlertDialog
 import androidx.preference.Preference
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
@@ -64,4 +65,19 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
         context: Context,
         scope: CoroutineScope,
     ): DeviceSettingRepository = DeviceSettingRepositoryImpl(context, scope, Dispatchers.IO)
+
+    override fun getBluetoothDiagnosisAlertDialog(
+        context: Context,
+        entryPoint: Int,
+        device: CachedBluetoothDevice?,
+        metricsCategory: Int,
+    ): AlertDialog? = null
+
+    override fun notifyConnectionFailureTimeChange(
+        context: Context,
+        device: CachedBluetoothDevice,
+        timestamp: Long,
+    ) {
+        return
+    }
 }

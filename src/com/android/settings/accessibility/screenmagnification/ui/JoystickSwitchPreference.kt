@@ -25,6 +25,7 @@ import com.android.settings.accessibility.extensions.isWindowMagnificationSuppor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
@@ -42,10 +43,22 @@ class JoystickSwitchPreference :
 
     override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
 
+    override fun getReadPermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int = ReadWritePermit.ALLOW
+
+    override fun getWritePermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
+
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() &&
-                context.isWindowMagnificationSupported() &&
-                isJoystickSupported()
+            context.isWindowMagnificationSupported() &&
+            isJoystickSupported()
     }
 
     private fun isJoystickSupported(): Boolean {

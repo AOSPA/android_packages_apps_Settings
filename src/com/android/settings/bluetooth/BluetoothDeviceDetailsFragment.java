@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.os.UserManager;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -50,6 +51,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
 
@@ -62,7 +64,6 @@ import java.util.function.Consumer;
 
 public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurableFragment {
     private static final String TAG = "BTDeviceDetailsFrg";
-    private static final int METADATA_FAST_PAIR_CUSTOMIZED_FIELDS = 25;
 
     /**
      * An interface to let tests override the normal mechanism for looking up the
@@ -110,6 +111,24 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
                     if (device.equals(cachedDevice)) {
                         finishFragmentIfNecessary();
                     }
+                }
+            };
+
+    private long mLastConnectionFailureTimeMillis = -1;
+
+    @NonNull
+    private final BluetoothFeatureProvider mBluetoothFeatureProvider =
+            FeatureFactory.getFeatureFactory().getBluetoothFeatureProvider();
+
+    @NonNull
+    private final CachedBluetoothDevice.Callback mConnectionFailureCallback =
+            () -> {
+                if (cachedDevice.getConnectionFailureTimeMillis()
+                        != mLastConnectionFailureTimeMillis) {
+                    mLastConnectionFailureTimeMillis =
+                            cachedDevice.getConnectionFailureTimeMillis();
+                    mBluetoothFeatureProvider.notifyConnectionFailureTimeChange(
+                            getContext(), cachedDevice, SystemClock.elapsedRealtime());
                 }
             };
 
@@ -184,12 +203,21 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
                                         cachedDevice.getDevice())));
 
         localBluetoothManager.getEventManager().registerCallback(mBluetoothCallback);
+
+        mLastConnectionFailureTimeMillis = cachedDevice.getConnectionFailureTimeMillis();
+        if (BluetoothUtils.isBluetoothDiagnosisAvailable(context)) {
+            cachedDevice.registerCallback(
+                    ThreadUtils.getBackgroundExecutor(), mConnectionFailureCallback);
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         localBluetoothManager.getEventManager().unregisterCallback(mBluetoothCallback);
+        if (BluetoothUtils.isBluetoothDiagnosisAvailable(getContext())) {
+            cachedDevice.unregisterCallback(mConnectionFailureCallback);
+        }
     }
 
     protected <T extends AbstractPreferenceController> void getController(Class<T> clazz,

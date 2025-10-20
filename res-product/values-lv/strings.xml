@@ -164,10 +164,10 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8772005555323461143">"Iestatījumos jūs un jūsu bērns varat jebkurā laikā dzēst bērna pirksta nospieduma attēlus un modeli vai izslēgt autorizāciju ar pirksta nospiedumu. Pirksta nospieduma attēli un modeļi tiek glabāti planšetdatorā, līdz tie tiek izdzēsti."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7254955922685507093">"Iestatījumos jūs un jūsu bērns varat jebkurā laikā dzēst bērna pirksta nospieduma attēlus un modeli vai izslēgt autorizāciju ar pirksta nospiedumu. Pirksta nospieduma attēli un modeļi tiek glabāti ierīcē, līdz tie tiek izdzēsti."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="desktop" msgid="7254955922685507093">"Iestatījumos jūs un jūsu bērns varat jebkurā laikā dzēst bērna pirksta nospieduma attēlus un modeli vai izslēgt autorizāciju ar pirksta nospiedumu. Pirksta nospieduma attēli un modeļi tiek glabāti ierīcē, līdz tie tiek izdzēsti."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="6272159089589340181">"Jūsu tālrunis var tikt atbloķēts, kad to nevēlaties, piemēram, ja kāda persona ar to pieskaras jūsu pirkstam."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="2420109998272019149">"Jūsu planšetdators var tikt atbloķēts, kad to nevēlaties, piemēram, ja kāda persona ar to pieskaras jūsu pirkstam."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="5915844445830045866">"Jūsu ierīce var tikt atbloķēta, kad to nevēlaties, piemēram, ja kāda persona ar to pieskaras jūsu pirkstam."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="desktop" msgid="5915844445830045866">"Jūsu ierīce var tikt atbloķēta, kad to nevēlaties, piemēram, ja kāda persona ar to pieskaras jūsu pirkstam."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="6838578698434849838">"Jūsu tālrunis var tikt nejauši atbloķēts, piemēram, ja kāda persona pavērš to pret jūsu pirkstu."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7796353046744228477">"Jūsu planšetdators var tikt nejauši atbloķēts, piemēram, ja kāda persona pavērš to pret jūsu pirkstu."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="5075445491909690772">"Jūsu ierīce var tikt nejauši atbloķēta, piemēram, ja kāda persona pavērš to pret jūsu pirkstu."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="desktop" msgid="5075445491909690772">"Jūsu ierīce var tikt nejauši atbloķēta, piemēram, ja kāda persona pavērš to pret jūsu pirkstu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="6556725426776167791">"Jūsu bērna tālrunis var tikt atbloķēts, kad bērns to nevēlas, piemēram, ja kāda persona ar to pieskaras bērna pirkstam."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="5156581794964551571">"Jūsu bērna planšetdators var tikt atbloķēts bez bērna ziņas, piemēram, ja kāds pavērš to pret bērna pirkstu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="8309101436391515400">"Jūsu bērna ierīce var tikt atbloķēta bez bērna ziņas, piemēram, ja kāds pavērš to pret bērna pirkstu."</string>
@@ -321,8 +321,8 @@
     <string name="sim_lock_off" product="desktop" msgid="903164661366964150">"Pieprasīt PIN, lai lietotu ierīci"</string>
     <string name="status_number" product="tablet" msgid="6746773328312218158">"MDN"</string>
     <string name="status_number" product="default" msgid="2333455505912871374">"Tālruņa numurs"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="2595836594107617972">"MDN (%1$d. SIM kartes slots)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="7154930998382872847">"Tālr. nr. (%1$d. SIM kartes slots)"</string>
+    <string name="status_number_sim_slot" product="tablet" msgid="201933499714762935">"MDN: %1$d"</string>
+    <string name="status_number_sim_slot" product="default" msgid="8033783200178721660">"Tālruņa numurs: %1$d"</string>
     <string name="status_number_sim_status" product="tablet" msgid="9003886361856568694">"SIM kartes MDN"</string>
     <string name="status_number_sim_status" product="default" msgid="7536755538266735352">"SIM kartes tālruņa numurs"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="2049551739429034707">"Formatēt SD karti iekšējai atmiņai"</string>
@@ -481,9 +481,12 @@
     <string name="lockscreen_trivial_controls_summary" product="default" msgid="42562533085885152">"Neatbloķējot tālruni"</string>
     <string name="lockscreen_trivial_controls_summary" product="tablet" msgid="9052068482124729345">"Neatbloķējot planšetdatoru"</string>
     <string name="lockscreen_trivial_controls_summary" product="desktop" msgid="8183513643394359332">"Neatbloķējot ierīci"</string>
-    <string name="device_supervision_switch_title" product="default" msgid="5711051584668311080">"Vadīklas šim tālrunim"</string>
-    <string name="device_supervision_switch_title" product="tablet" msgid="5400384750840247844">"Vadīklas šim planšetdatoram"</string>
-    <string name="device_supervision_switch_title" product="desktop" msgid="2140192989162020111">"Vadīklas šai ierīcei"</string>
+    <!-- no translation found for device_supervision_features_title (8612616791672564436) -->
+    <skip />
+    <!-- no translation found for device_supervision_features_title (8301949957844501200) -->
+    <skip />
+    <!-- no translation found for device_supervision_features_title (5041758196166273467) -->
+    <skip />
     <string name="supervision_pin_length_message" product="default" msgid="7142997986515800901">"{count,plural, =1{Ievadiet PIN, kas sastāv no vismaz # cipara. Jūs to izmantosiet, lai pārvaldītu šī tālruņa vadīklas.}zero{Ievadiet PIN, kas sastāv no vismaz # cipariem. Jūs to izmantosiet, lai pārvaldītu šī tālruņa vadīklas.}one{Ievadiet PIN, kas sastāv no vismaz # cipara. Jūs to izmantosiet, lai pārvaldītu šī tālruņa vadīklas.}other{Ievadiet PIN, kas sastāv no vismaz # cipariem. Jūs to izmantosiet, lai pārvaldītu šī tālruņa vadīklas.}}"</string>
     <string name="supervision_pin_length_message" product="tablet" msgid="1772471880165492225">"{count,plural, =1{Ievadiet PIN, kas sastāv no vismaz # cipara. Jūs to izmantosiet, lai pārvaldītu šī planšetdatora vadīklas.}zero{Ievadiet PIN, kas sastāv no vismaz # cipariem. Jūs to izmantosiet, lai pārvaldītu šī planšetdatora vadīklas.}one{Ievadiet PIN, kas sastāv no vismaz # cipara. Jūs to izmantosiet, lai pārvaldītu šī planšetdatora vadīklas.}other{Ievadiet PIN, kas sastāv no vismaz # cipariem. Jūs to izmantosiet, lai pārvaldītu šī planšetdatora vadīklas.}}"</string>
     <string name="supervision_pin_length_message" product="desktop" msgid="7689193597679628648">"{count,plural, =1{Ievadiet PIN, kas sastāv no vismaz # cipara. Jūs to izmantosiet, lai pārvaldītu šīs ierīces vadīklas.}zero{Ievadiet PIN, kas sastāv no vismaz # cipariem. Jūs to izmantosiet, lai pārvaldītu šīs ierīces vadīklas.}one{Ievadiet PIN, kas sastāv no vismaz # cipara. Jūs to izmantosiet, lai pārvaldītu šīs ierīces vadīklas.}other{Ievadiet PIN, kas sastāv no vismaz # cipariem. Jūs to izmantosiet, lai pārvaldītu šīs ierīces vadīklas.}}"</string>

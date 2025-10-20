@@ -22,9 +22,11 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.datausage.lib.DataUsageLib.getMobileTemplate
+import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
 
+// LINT.IfChange
 class BillingCyclePreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -34,7 +36,9 @@ class BillingCyclePreferenceController(context: Context, preferenceKey: String) 
     }
 
     override fun getAvailabilityStatus() =
-        if (DataUsageUtils.hasMobileData(mContext)) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+        if (!Flags.deeplinkNetworkAndInternet25q4() && DataUsageUtils.hasMobileData(mContext))
+            AVAILABLE
+        else CONDITIONALLY_UNAVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
@@ -56,3 +60,4 @@ class BillingCyclePreferenceController(context: Context, preferenceKey: String) 
         }
     }
 }
+// LINT.ThenChange(BillingCycleScreen.kt)

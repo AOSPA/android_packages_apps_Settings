@@ -36,7 +36,7 @@ class DarkModeMainSwitchPreferenceTest {
 
     @Test
     fun isIndexable() {
-        assertThat(mainSwitchPreference.isIndexable(context)).isFalse()
+        assertThat(mainSwitchPreference.indexable).isFalse()
     }
 
     @Test

@@ -31,14 +31,15 @@ class IntroPreference(private val shortcutInfo: AccessibilityShortcutInfo) :
     override val key: String
         get() = KEY
 
+    override val indexable
+        get() = false
+
     override fun getTitle(context: Context): CharSequence? =
         shortcutInfo.loadIntro(context.packageManager)
 
     override fun isAvailable(context: Context): Boolean {
         return !TextUtils.isEmpty(getTitle(context))
     }
-
-    override fun isIndexable(context: Context): Boolean = false
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
 

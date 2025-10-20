@@ -21,6 +21,7 @@ import android.graphics.PointF
 import android.graphics.RectF
 import android.hardware.display.DisplayTopology
 import android.hardware.display.DisplayTopology.TreeNode
+import android.os.SystemClock
 import android.util.Log
 import android.util.Size
 import android.view.Display.DEFAULT_DISPLAY
@@ -30,6 +31,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
+import com.android.settings.core.instrumentation.SettingsStatsLog
 import java.util.function.Consumer
 import kotlin.math.abs
 import kotlin.math.min
@@ -86,6 +88,8 @@ class DisplayTopologyPreferenceController(
     private var blockDrag: BlockDrag? = null
     private var revealedWallpapers: List<RevealedWallpaper> = emptyList()
     private var selectedDisplayId: Int = -1
+    // Don't modify the value directly, use `setDisplayToShowArrows()`
+    private var showArrowMovementDisplayId: Int = -1
 
     var onDisplayBlockSelectedListener: OnDisplayBlockSelectedListener? = null
 
@@ -142,7 +146,9 @@ class DisplayTopologyPreferenceController(
         paneHolder = holder
         paneContent = content
         topologyHint = hint
+        paneContent.isFocusable = false
         paneContent.addOnLayoutChangeListener(paneContentLayoutListener)
+        paneContent.setOnClickListener { _ -> setDisplayToShowArrows(-1) }
     }
 
     /** Called by the host when it is attached to the window/screen. */
@@ -155,6 +161,7 @@ class DisplayTopologyPreferenceController(
     fun detach() {
         if (this::paneContent.isInitialized) {
             paneContent.removeOnLayoutChangeListener(paneContentLayoutListener)
+            paneContent.setOnClickListener(null)
         }
         // No longer need to reveal wallpapers since the blocks are not visible; these will be
         // revealed again upon invocation of refreshPane.
@@ -164,7 +171,14 @@ class DisplayTopologyPreferenceController(
         injector.unregisterDisplayListener(displayListener)
     }
 
-    fun selectDisplay(displayId: Int) {
+    fun selectDisplay(displayId: Int, showDisplayArrows: Boolean = false) {
+        if (showDisplayArrows && displayId == selectedDisplayId) {
+            setDisplayToShowArrows(displayId)
+        } else {
+            // Different display is selected, hide arrows. Don't immediately show arrow on the
+            // selectedDisplay, because arrow should only be shown after second tap
+            setDisplayToShowArrows(-1)
+        }
         selectedDisplayId = displayId
         val displayTopology = injector.displayTopology
         if (displayTopology == null || !displayTopology.allNodesIdMap().containsKey(displayId)) {
@@ -205,13 +219,20 @@ class DisplayTopologyPreferenceController(
         if (!this::paneContent.isInitialized || showStackedMirroringDisplay()) {
             return
         }
+        val topologyBounds = topology.absoluteBounds
         // Step 1
-        topologyHint.text = context.getString(R.string.external_display_topology_hint)
+        topologyHint.text =
+            if (topologyBounds.size() > 1) {
+                context.getString(R.string.external_display_topology_hint)
+            } else {
+                ""
+            }
         // Step 2
         val oldBounds = topologyInfo?.positions
         val newBounds = buildList {
-            val bounds = topology.absoluteBounds
-            (0..bounds.size() - 1).forEach { add(Pair(bounds.keyAt(it), bounds.valueAt(it))) }
+            (0..topologyBounds.size() - 1).forEach {
+                add(Pair(topologyBounds.keyAt(it), topologyBounds.valueAt(it)))
+            }
         }
         if (
             oldBounds != null &&
@@ -237,6 +258,7 @@ class DisplayTopologyPreferenceController(
             newBounds,
             logicalDisplaySizeFetcher,
             /* isMirroring= */ false,
+            calculateDisplayArrowMovement(topology.graph),
         )
         topologyInfo = TopologyInfo(topology, scaling, newBounds)
         // Step 4
@@ -273,6 +295,7 @@ class DisplayTopologyPreferenceController(
             newBounds,
             logicalDisplaySizeFetcher,
             /* isMirroring= */ true,
+            newBounds.associate { (id, _) -> id to ArrowMovement.immovable() },
         )
         topologyInfo = null
         // Step 4
@@ -336,6 +359,7 @@ class DisplayTopologyPreferenceController(
         newBounds: List<Pair<Int, RectF>>,
         logicalDisplaySizeFetcher: LogicalDisplaySizeFetcher,
         isMirroring: Boolean,
+        displaysArrowMovement: Map<Int, ArrowMovement>,
     ) {
         // Resize pane holder
         paneHolder.layoutParams.let {
@@ -377,19 +401,33 @@ class DisplayTopologyPreferenceController(
                 bottomRight,
                 displaySurfaceToBlockScale,
                 displaySize,
+                displaysArrowMovement.get(id) ?: ArrowMovement.immovable(),
             )
+
+            block.onA11yMoveListener = { direction -> simulateA11yDrag(id, pos, block, direction) }
 
             // This is needed to ensure block is highlighted from the start if it's selected.
             // Example scenario would be when Display#2 is selected from the tab, and there's
             // another display added, Display#2 should still be highlighted.
             block.setHighlighted(id == selectedDisplayId)
+            block.setArrowVisible(id == showArrowMovementDisplayId)
 
             if (isMirroring) {
-                block.setOnTouchListener(null)
+                block.isFocusable = false
+                block.isClickable = false
+                block.setOnClickListener(null)
+                block.setTouchListener(null)
             } else {
-                block.setOnTouchListener { view, ev ->
+                block.isFocusable = true
+                block.isClickable = true
+                block.isFocusableInTouchMode = true
+                block.setOnClickListener { _ ->
+                    selectDisplay(block.logicalDisplayId, /* showDisplayArrows= */ true)
+                    onDisplayBlockSelectedListener?.onSelected(block.logicalDisplayId)
+                }
+                block.setTouchListener { view, ev ->
                     if (ev.isSynthesizedTouchpadGesture()) {
-                        return@setOnTouchListener false
+                        return@setTouchListener false
                     }
                     when (ev.actionMasked) {
                         MotionEvent.ACTION_DOWN -> onBlockTouchDown(id, pos, block, ev)
@@ -404,6 +442,64 @@ class DisplayTopologyPreferenceController(
         timesRefreshedBlocks++
         // Cancel the drag if one is in progress.
         blockDrag = null
+    }
+
+    private fun simulateA11yDrag(
+        displayId: Int,
+        displayPos: RectF,
+        block: DisplayBlock,
+        direction: Direction,
+    ) {
+        val moveDistancePx = DisplayTopology.dpToPx(A11Y_MOVE_DISTANCE_DP, injector.densityDpi)
+
+        val startPoint = PointF(block.x + block.width / 2, block.y + block.height / 2)
+        val endPoint =
+            when (direction) {
+                Direction.UP -> PointF(startPoint.x, startPoint.y - moveDistancePx)
+                Direction.DOWN -> PointF(startPoint.x, startPoint.y + moveDistancePx)
+                Direction.LEFT -> PointF(startPoint.x - moveDistancePx, startPoint.y)
+                Direction.RIGHT -> PointF(startPoint.x + moveDistancePx, startPoint.y)
+            }
+
+        val downTime = SystemClock.uptimeMillis()
+
+        val screenPos = IntArray(2)
+        paneContent.getLocationOnScreen(screenPos)
+        val offset = PointF(screenPos[0].toFloat(), screenPos[1].toFloat())
+
+        // 1. ACTION_DOWN
+        val downEvent =
+            createMotionEvent(downTime, downTime, MotionEvent.ACTION_DOWN, startPoint, offset)
+        onBlockTouchDown(displayId, displayPos, block, downEvent)
+        downEvent.recycle()
+
+        // 2. ACTION_MOVE
+        for (i in 1..A11Y_DRAG_STEPS) {
+            val progress = i.toFloat() / A11Y_DRAG_STEPS
+            val currentX = startPoint.x + (endPoint.x - startPoint.x) * progress
+            val currentY = startPoint.y + (endPoint.y - startPoint.y) * progress
+            val eventTime = SystemClock.uptimeMillis()
+
+            val moveEvent =
+                createMotionEvent(
+                    downTime,
+                    eventTime,
+                    MotionEvent.ACTION_MOVE,
+                    PointF(currentX, currentY),
+                    offset,
+                )
+
+            onBlockTouchMove(moveEvent)
+            moveEvent.recycle()
+        }
+
+        // 3. ACTION_UP
+        val upEventTime = SystemClock.uptimeMillis()
+        val upEvent =
+            createMotionEvent(downTime, upEventTime, MotionEvent.ACTION_UP, endPoint, offset)
+
+        onBlockTouchUp(upEvent)
+        upEvent.recycle()
     }
 
     private fun onBlockTouchDown(
@@ -421,7 +517,7 @@ class DisplayTopologyPreferenceController(
 
         val stationaryDisps = positions.filter { it.first != displayId }
 
-        selectDisplay(displayId)
+        selectDisplay(displayId, /* showDisplayArrows= */ true)
 
         // We have to use rawX and rawY for the coordinates since the view receiving the event is
         // also the view that is moving. We need coordinates relative to something that isn't
@@ -510,6 +606,8 @@ class DisplayTopologyPreferenceController(
         applyTopology(newTopology)
 
         injector.displayTopology = newTopology
+        val logger = ExternalDisplaySettingsLoggerStore.getLogger(drag.displayId)
+        logger.log(SettingsStatsLog.EXTERNAL_DISPLAY_SETTINGS_CHANGED__SETTING__TOPOLOGY)
 
         return true
     }
@@ -541,6 +639,25 @@ class DisplayTopologyPreferenceController(
             abs(a.right - b.right) < EPSILON &&
             abs(a.top - b.top) < EPSILON &&
             abs(a.bottom - b.bottom) < EPSILON
+    }
+
+    private fun setDisplayToShowArrows(displayId: Int) {
+        if (
+            !injector.flags.showTabbedConnectedDisplaySetting() ||
+                !injector.flags.enableDisplayBlockArrowMovementBugfix()
+        ) {
+            return
+        }
+        showArrowMovementDisplayId = displayId
+
+        val displayTopology = injector.displayTopology
+        if (displayTopology == null || !displayTopology.allNodesIdMap().containsKey(displayId)) {
+            displayBlocks().forEach { it.setArrowVisible(false) }
+            return
+        }
+        displayBlocks().forEach {
+            it.setArrowVisible(it.logicalDisplayId == showArrowMovementDisplayId)
+        }
     }
 
     /**

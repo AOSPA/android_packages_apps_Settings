@@ -75,16 +75,20 @@ open class ConfigureWifiScreen(context: Context) :
         makeLaunchIntent(context, ConfigureWifiSettingsActivity::class.java, metadata?.key)
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
-        airplaneModeDataStore.addObserver(
-            AirplaneModePreference.KEY,
-            keyedObserver,
-            HandlerExecutor.main,
-        )
+        if (isEntryPoint(context)) {
+            keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
+            airplaneModeDataStore.addObserver(
+                AirplaneModePreference.KEY,
+                keyedObserver,
+                HandlerExecutor.main,
+            )
+        }
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        airplaneModeDataStore.removeObserver(AirplaneModePreference.KEY, keyedObserver)
+        if (isEntryPoint(context)) {
+            airplaneModeDataStore.removeObserver(AirplaneModePreference.KEY, keyedObserver)
+        }
     }
 
     override fun fragmentClass(): Class<out Fragment>? = ConfigureWifiSettings::class.java

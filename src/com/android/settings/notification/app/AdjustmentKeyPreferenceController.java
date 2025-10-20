@@ -51,7 +51,8 @@ public class AdjustmentKeyPreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        return isAvailable(mKey, mBackend, mAppRow.pkg, mAppRow.uid) && super.isAvailable();
+        return mAppRow != null && isAvailable(mKey, mBackend, mAppRow.pkg, mAppRow.uid)
+                && super.isAvailable();
     }
 
     static boolean isAvailable(String key, NotificationBackend backend, String pkg, int uid) {
@@ -70,13 +71,13 @@ public class AdjustmentKeyPreferenceController extends
         if (!isSummarizePref && !isBundlePref) {
             return false;
         }
-        if (isSummarizePref && !(backend.hasSentValidMsg(pkg, uid)
-                || backend.isInInvalidMsgState(pkg, uid))) {
-            return false;
-        }
-
-        if (isSummarizePref && !backend.isNotificationSummarizationSupported()) {
-            return false;
+        if (isSummarizePref) {
+            if (!hasSentMessage(backend, pkg, uid) && !Flags.nmSummarizationAll()) {
+                return false;
+            }
+            if (!backend.showSummarizationSettings()) {
+                return false;
+            }
         }
 
         if (isBundlePref && !backend.isNotificationBundlingSupported()) {
@@ -84,6 +85,10 @@ public class AdjustmentKeyPreferenceController extends
         }
 
         return backend.getAllowedAssistantAdjustments().contains(key);
+    }
+
+    private static boolean hasSentMessage(NotificationBackend backend, String pkg, int uid) {
+        return backend.hasSentValidMsg(pkg, uid) || backend.isInInvalidMsgState(pkg, uid);
     }
 
     @Override

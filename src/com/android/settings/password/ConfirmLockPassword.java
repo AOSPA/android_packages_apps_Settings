@@ -60,15 +60,18 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.insets.ProtectionLayout;
 import androidx.fragment.app.Fragment;
 
 import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.TextViewInputDisabler;
+import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.Utils;
+import com.android.settings.flags.Flags;
 import com.android.settings.widget.ImeAwareTextInputEditText;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
@@ -77,6 +80,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
@@ -155,6 +159,17 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             };
             View view = inflater.inflate(layoutId, container, false);
             mGlifLayout = view.findViewById(R.id.setup_wizard_layout);
+
+            // TODO(b/440023111):This can be removed once SetupDesignLib and SettingsLib have
+            //  integrated the solution.
+            if (Flags.removeProtectionLayout() && ThemeHelper.shouldApplyGlifExpressiveStyle(
+                    getContext())) {
+                final ProtectionLayout protect = mGlifLayout.findViewById(
+                        com.google.android.setupdesign.R.id.sud_layout_protection);
+                if (protect != null) {
+                    protect.setProtections(Collections.emptyList());
+                }
+            }
             mPasswordEntry = (EditText) view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
             // EditText inside ScrollView doesn't automatically get focus.
@@ -579,7 +594,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 @LockPatternUtils.VerifyFlag int flags) {
             final int localEffectiveUserId = mEffectiveUserId;
             final int localUserId = mUserId;
-            final LockPatternChecker.OnVerifyCallback onVerifyCallback = (response, timeoutMs) -> {
+            final LockPatternChecker.OnVerifyCallback onVerifyCallback = response -> {
+                final int timeoutMs = response.getTimeout();
                 mPendingLockCheck = null;
                 final boolean matched = response.isMatched();
                 if (matched && mReturnCredentials) {
@@ -611,7 +627,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     localEffectiveUserId,
                     new LockPatternChecker.OnCheckCallback() {
                         @Override
-                        public void onChecked(boolean matched, int timeoutMs) {
+                        public void onChecked(VerifyCredentialResponse response) {
+                            final boolean matched = response.isMatched();
+                            final int timeoutMs = response.getTimeout();
                             mPendingLockCheck = null;
                             if (matched && isInternalActivity() && mReturnCredentials) {
                                 intent.putExtra(

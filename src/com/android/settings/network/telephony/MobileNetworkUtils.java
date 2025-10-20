@@ -565,15 +565,11 @@ public class MobileNetworkUtils {
 
         // Overlay the two drawables
         final Drawable[] layers = {networkDrawable, signalDrawable};
-        final int iconSize =
-                context.getResources().getDimensionPixelSize(R.dimen.signal_strength_icon_size);
-
         final LayerDrawable icons = new LayerDrawable(layers);
         // Set the network type icon at the top left
         icons.setLayerGravity(0 /* index of networkDrawable */, Gravity.TOP | Gravity.LEFT);
         // Set the signal strength icon at the bottom right
         icons.setLayerGravity(1 /* index of SignalDrawable */, Gravity.BOTTOM | Gravity.RIGHT);
-        icons.setLayerSize(1 /* index of SignalDrawable */, iconSize, iconSize);
         icons.setTintList(Utils.getColorAttr(context, android.R.attr.colorControlNormal));
         return icons;
     }

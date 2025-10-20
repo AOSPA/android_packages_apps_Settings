@@ -78,11 +78,11 @@ public class WifiCallingSettingsForSub extends DashboardFragment
     private static final String TAG = "WifiCallingForSub";
 
     //String keys for preference lookup
-    private static final String PREFERENCE_WFC_TOP_INTRO = "wfc_top_intro";
     private static final String SWITCH_BAR = "wifi_calling_switch_bar";
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
     private static final String BUTTON_WFC_ROAMING_MODE = "wifi_calling_roaming_mode";
     private static final String PREFERENCE_EMERGENCY_ADDRESS = "emergency_address_key";
+    private static final String PREFERENCE_NO_OPTIONS_DESC = "no_options_description";
 
     @VisibleForTesting
     static final int REQUEST_CHECK_WFC_EMERGENCY_ADDRESS = 1;
@@ -293,7 +293,7 @@ public class WifiCallingSettingsForSub extends DashboardFragment
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(ImsManager.ACTION_WFC_IMS_REGISTRATION_ERROR);
 
-        updateTopIntro(List.of(mButtonWfcMode, mButtonWfcRoamingMode, mUpdateAddress));
+        updateDescription(List.of(mButtonWfcMode, mButtonWfcRoamingMode, mUpdateAddress));
 
         List<AbstractPreferenceController> subscriptionPreferenceControllers =
                 useGroup(AbstractSubscriptionPreferenceController.class);
@@ -611,11 +611,11 @@ public class WifiCallingSettingsForSub extends DashboardFragment
             mButtonWfcRoamingMode.setVisible(false);
             mUpdateAddress.setVisible(false);
         }
-        updateTopIntro(List.of(mButtonWfcMode, mButtonWfcRoamingMode, mUpdateAddress));
+        updateDescription(List.of(mButtonWfcMode, mButtonWfcRoamingMode, mUpdateAddress));
     }
 
-    private void updateTopIntro(List<Preference> visibleOptions) {
-        TopIntroPreference pref = findPreference(PREFERENCE_WFC_TOP_INTRO);
+    private void updateDescription(List<Preference> visibleOptions) {
+        TopIntroPreference pref = findPreference(PREFERENCE_NO_OPTIONS_DESC);
         if (pref == null) {
             return;
         }

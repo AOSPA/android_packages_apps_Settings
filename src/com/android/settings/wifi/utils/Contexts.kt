@@ -27,6 +27,7 @@ import android.net.TetheringManager
 import android.net.wifi.SoftApConfiguration
 import android.net.wifi.WifiManager
 import android.os.UserManager
+import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 
 /**
@@ -88,6 +89,22 @@ val Context.telephonyManager: TelephonyManager?
 /** Returns the number of logical modems currently configured to be activated. */
 val Context.activeModemCount
     get() = telephonyManager?.activeModemCount ?: 0
+
+/**
+ * Gets the {@link android.telephony.TelephonyManager} system service for Subscription ID.
+ *
+ * Use application context to get system services to avoid memory leaks.
+ */
+fun Context.telephonyManager(subId: Int): TelephonyManager? =
+    telephonyManager?.createForSubscriptionId(subId)
+
+/**
+ * Gets the {@link android.telephony.SubscriptionManager} system service.
+ *
+ * Use application context to get system services to avoid memory leaks.
+ */
+val Context.subscriptionManager: SubscriptionManager?
+    get() = applicationContext.getSystemService(SubscriptionManager::class.java)
 
 /**
  * Gets the {@link android.net.TetheringManager} system service.

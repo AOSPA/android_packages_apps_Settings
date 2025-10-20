@@ -94,7 +94,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (isCatalystEnabled() && Flags.catalystBluetoothDashboardScreen25q4()) {
+        if (isCatalystEnabled() && Flags.deeplinkConnectedDevices25q4()) {
             return;
         }
         use(BluetoothDeviceRenamePreferenceController.class).setFragment(this);

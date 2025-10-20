@@ -16,6 +16,7 @@
 
 package com.android.settings.network.telephony.satellite;
 
+import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
 import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
@@ -36,6 +37,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 import com.android.settingslib.Utils;
 
@@ -126,6 +128,18 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
         if (mConfigBundle.getInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)
                 == CARRIER_ROAMING_NTN_CONNECT_MANUAL) {
             return mIsSmsAvailable;
+        }
+
+        if (Flags.vzwAstSkyloFallback()
+                && mConfigBundle.getInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)
+                == CARRIER_ROAMING_NTN_CONNECT_HYBRID) {
+            if (mConfigBundle.getBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false)) {
+                if (SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)) {
+                    return true;
+                } else {
+                    return mIsSmsAvailable;
+                }
+            }
         }
         return SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId);
     }

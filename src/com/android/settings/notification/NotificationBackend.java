@@ -21,6 +21,9 @@ import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_CACHED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+
 import android.annotation.FlaggedApi;
 import android.annotation.UserIdInt;
 import android.app.Flags;
@@ -825,6 +828,12 @@ public class NotificationBackend {
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
         }
+    }
+
+    public boolean showSummarizationSettings() {
+        boolean nasSupported = (Flags.nmSummarization() || Flags.nmSummarizationUi())
+                && isNotificationSummarizationSupported();
+        return nasSupported || Flags.nmSummarizationAll();
     }
 
     @VisibleForTesting

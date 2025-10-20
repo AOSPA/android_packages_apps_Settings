@@ -17,9 +17,6 @@
 package com.android.settings.accessibility.screenmagnification
 
 import android.content.Context
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.testing.TestLifecycleOwner
@@ -27,7 +24,6 @@ import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.R
-import com.android.server.accessibility.Flags
 import com.android.settings.accessibility.AccessibilityUtil.State.OFF
 import com.android.settings.accessibility.AccessibilityUtil.State.ON
 import com.android.settings.accessibility.MagnificationCapabilities
@@ -39,7 +35,6 @@ import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.reset
@@ -55,7 +50,6 @@ private const val SETTING_KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MAGN
 @Config(shadows = [SettingsShadowResources::class])
 @RunWith(RobolectricTestParameterInjector::class)
 class MagnifyKeyboardPreferenceControllerTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
     private val prefKey = "prefKey"
     private val lifeCycleOwner = TestLifecycleOwner(initialState = Lifecycle.State.INITIALIZED)
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -81,24 +75,14 @@ class MagnifyKeyboardPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MAGNIFY_NAV_BAR_AND_IME)
-    fun getAvailabilityStatus_defaultState_disabled() {
-        val status: Int = controller.getAvailabilityStatus()
-
-        assertThat(status).isEqualTo(CONDITIONALLY_UNAVAILABLE)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MAGNIFY_NAV_BAR_AND_IME)
-    fun getAvailabilityStatus_featureFlagEnabled_enabled() {
+    fun getAvailabilityStatus_enabled() {
         val status: Int = controller.getAvailabilityStatus()
 
         assertThat(status).isEqualTo(AVAILABLE)
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MAGNIFY_NAV_BAR_AND_IME)
-    fun getAvailabilityStatus_featureFlagEnabled_windowMagnificationNotSupported_disabled() {
+    fun getAvailabilityStatus_windowMagnificationNotSupported_disabled() {
         setWindowMagnificationSupported(context, false)
 
         val status: Int = controller.getAvailabilityStatus()

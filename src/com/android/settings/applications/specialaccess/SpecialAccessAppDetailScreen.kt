@@ -21,6 +21,8 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Process
+import android.os.UserHandle
 import android.util.IconDrawableFactory
 import androidx.annotation.CallSuper
 import androidx.preference.Preference
@@ -72,10 +74,20 @@ abstract class SpecialAccessAppDetailScreen(context: Context, override val argum
     private lateinit var keyedObserver: KeyedObserver<String>
 
     private val dataStore: KeyValueStore =
-        AppOpsModeDataStore(SpecialAccessSwitchPreference.KEY, context, this, op, setModeByUid)
+        AppOpsModeDataStore(
+            SpecialAccessSwitchPreference.KEY,
+            context,
+            this,
+            op,
+            permission,
+            setModeByUid,
+        )
 
     /** App ops to control. */
     abstract val op: Int
+
+    /** Special access permission needed to be requested. */
+    abstract val permission: String?
 
     /**
      * Indicates how to set op mode.
@@ -195,17 +207,32 @@ abstract class SpecialAccessAppDetailScreen(context: Context, override val argum
         fun parameters(
             context: Context,
             showSystemApp: Boolean,
-            filter: (Context, ApplicationInfo?) -> Boolean,
+            customFilter: (Context, ApplicationInfo?) -> Boolean,
         ): Flow<Bundle> = flow {
             val appInfos =
                 withContext(Dispatchers.IO) {
                         AppListRepositoryImpl(context)
                             .loadAndMaybeExcludeSystemApps(context.userId, !showSystemApp)
                     }
-                    .filter { filter(context, it) }
+                    .filter { hasSpecialAccessPermission(context, it, customFilter) }
                     .sortedWith(context.applicationInfoComparator)
             for (appInfo in appInfos) emit(appInfo.packageName.toArguments())
         }
+
+        fun hasSpecialAccessPermission(
+            context: Context,
+            appInfo: ApplicationInfo,
+            customFilter: (Context, ApplicationInfo?) -> Boolean,
+        ) =
+            customFilter(context, appInfo) &&
+                isNotInChangeablePackages(appInfo) &&
+                !isSystemOrRootUid(appInfo)
+
+        private fun isSystemOrRootUid(appInfo: ApplicationInfo): Boolean =
+            UserHandle.getAppId(appInfo.uid) in listOf(Process.SYSTEM_UID, Process.ROOT_UID)
+
+        private fun isNotInChangeablePackages(appInfo: ApplicationInfo): Boolean =
+            appInfo.packageName !in setOf("com.android.systemui")
     }
 
     /**

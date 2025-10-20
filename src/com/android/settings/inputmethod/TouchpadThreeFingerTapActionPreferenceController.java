@@ -17,7 +17,6 @@
 package com.android.settings.inputmethod;
 
 import static com.android.settings.flags.Flags.threeFingerTapAppLaunch;
-import static com.android.settings.flags.Flags.touchpadSettingsDesignUpdate;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.SHARED_PREF_NAME;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.TARGET_ACTION_URI;
 import static com.android.settings.inputmethod.TouchpadThreeFingerTapUtils.TRIGGER;
@@ -57,6 +56,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 /**
@@ -85,6 +86,8 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
 
     @Nullable
     private ContentObserver mObserver;
+
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     public TouchpadThreeFingerTapActionPreferenceController(@NonNull Context context,
             @NonNull String key) {
@@ -119,6 +122,7 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
         mContentResolver = context.getContentResolver();
         mPackageManager = context.getPackageManager();
         mSharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -141,7 +145,7 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
                         v -> appSelectionLauncher(/* isRadioClicked= */ false).launch());
             }
             mPreference.setOnClickListener(this);
-            if (touchpadSettingsDesignUpdate() && mPreferenceKey.equals(ASSISTANT_KEY)) {
+            if (mPreferenceKey.equals(ASSISTANT_KEY)) {
                 mPreference.setTitle(getDefaultAssistantTitle(mContext, mPackageManager));
             }
         }
@@ -177,6 +181,9 @@ public class TouchpadThreeFingerTapActionPreferenceController extends BasePrefer
                 if (launchingApp == null) {
                     appSelectionLauncher(/* isRadioClicked= */ true).launch();
                 } else {
+                    mMetricsFeatureProvider.action(mContext,
+                            SettingsEnums.ACTION_TOUCHPAD_THREE_FINGER_TAP_LAUNCHING_APP,
+                            launchingApp.getPackageName());
                     setLaunchAppAsGestureType(mContentResolver, mInputManager, launchingApp);
                 }
             } else {

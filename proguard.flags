@@ -67,11 +67,6 @@
     public <init>(android.content.Context, android.net.Uri);
 }
 
-# Keep WM Jetpack classes and callbacks
--keep class androidx.window.extensions.** { *; }
--dontwarn androidx.window.extensions.**
--keep class androidx.window.** { *; }
-
 # Keep the com.android.settings.media_drm.FakeFeatureFlagsImpl
 -keep class com.android.settings.media_drm.FakeFeatureFlagsImpl { *; }
 

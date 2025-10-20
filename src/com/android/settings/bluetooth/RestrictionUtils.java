@@ -16,8 +16,14 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.Context;
 import android.os.UserHandle;
+
+import androidx.annotation.Nullable;
 
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -40,4 +46,27 @@ public class RestrictionUtils {
                 context, restriction, UserHandle.myUserId());
     }
 
+    /**
+     *  Utility method to check if user restriction is enforced on the current user by admin.
+     *  Returns null if it's not enforced. Doesn't include it in the result if the restriction is
+     *  only enforced by the system.
+     *
+     * <p> It helps with testing - override it to avoid calling static method which calls system
+     * API.
+     */
+    @Nullable
+    public EnforcingAdmin checkIfUserRestrictionEnforced(Context context, String restriction) {
+        DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
+        if (dpm == null) {
+            return null;
+        }
+        PolicyEnforcementInfo policyEnforcementInfo = dpm.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.getIdentifierForUserRestriction(restriction),
+                UserHandle.myUserId());
+        if (policyEnforcementInfo.getAllAdmins().isEmpty()
+                || policyEnforcementInfo.isOnlyEnforcedBySystem()) {
+            return null;
+        }
+        return policyEnforcementInfo.getMostImportantEnforcingAdmin();
+    }
 }

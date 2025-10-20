@@ -29,7 +29,6 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class GameDefaultFrameRatePreferenceController extends DeveloperOptionsPreferenceController
@@ -120,11 +119,6 @@ public class GameDefaultFrameRatePreferenceController extends DeveloperOptionsPr
     public void updateState(Preference preference) {
         super.updateState(preference);
         updateGameDefaultPreferenceSetting();
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return Flags.developmentGameDefaultFrameRate();
     }
 
     @Override

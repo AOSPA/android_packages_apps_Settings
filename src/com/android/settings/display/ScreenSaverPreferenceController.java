@@ -41,7 +41,8 @@ public class ScreenSaverPreferenceController extends BasePreferenceController im
     @Override
     public CharSequence getSummary() {
         if (mDreamsDisabledByAmbientModeSuppression
-                && AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime(mContext)) {
+                && AmbientDisplayAlwaysOnPreferenceScreenController.isAodSuppressedByBedtime(
+                        mContext)) {
             return mContext.getString(R.string.screensaver_unavailable_due_to_mode);
         } else {
             return DreamSettings.getSummaryTextWithDreamName(mContext);

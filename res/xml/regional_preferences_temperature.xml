@@ -18,7 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/temperature_preferences_title"
-    android:key="regional_preference_temperature">
+    android:key="regional_preference_temperature"
+    settings:keywords="@string/keywords_temperature_page">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="temperature_unit_intro"

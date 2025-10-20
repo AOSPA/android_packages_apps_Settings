@@ -17,9 +17,9 @@ package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
 import static org.robolectric.RuntimeEnvironment.application;
 
+import android.app.admin.EnforcingAdmin;
 import android.util.AttributeSet;
 
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -44,6 +44,9 @@ public class TimeoutListPreferenceTest {
 
     @Mock
     private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
+    @Mock
+    private EnforcingAdmin mEnforcingAdmin;
+
 
     private TimeoutListPreference mPreference;
 
@@ -59,12 +62,23 @@ public class TimeoutListPreferenceTest {
         ReflectionHelpers.setField(mPreference, "mEntries", ENTRIES);
         ReflectionHelpers.setField(mPreference, "mEntryValues", VALUES);
         ReflectionHelpers.setField(mPreference, "mAdmin", mEnforcedAdmin);
+        ReflectionHelpers.setField(mPreference, "mEnforcingAdmin", mEnforcingAdmin);
     }
 
     @Test
     public void removeUnusableTimeouts_selectedValueRemoved_shouldSetValueToLargestAllowedValue() {
         mPreference.setValue("600000"); // set to 10 minutes
         mPreference.removeUnusableTimeouts(480000L, mEnforcedAdmin); // max allowed is 8 minutes
+
+        // should set to largest allowed value, which is 5 minute
+        assertThat(mPreference.getValue()).isEqualTo("300000");
+    }
+
+    @Test
+    public void removeRestrictedTimeoutsFromOptions_selectedValueRemoved_shouldSetValueToLargestAllowedValue() {
+        mPreference.setValue("600000"); // set to 10 minutes
+        // max allowed is 8 minutes
+        mPreference.removeRestrictedTimeoutsFromOptions(480000L, mEnforcingAdmin);
 
         // should set to largest allowed value, which is 5 minute
         assertThat(mPreference.getValue()).isEqualTo("300000");

@@ -25,6 +25,8 @@ import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIndexableTitleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 
@@ -42,9 +44,16 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
 
     override fun getWritePermissions(context: Context) = DarkThemeModeStorage.getWritePermissions()
 
-    override fun isAvailable(context: Context) = Flags.catalystDarkUiMode()
+    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
 
-    override fun isIndexable(context: Context) = Flags.catalystDarkUiMode()
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
+
+    override fun isAvailable(context: Context) = Flags.catalystDarkUiMode()
 
     override fun createWidget(context: Context) = SelectorWithWidgetPreference(context)
 

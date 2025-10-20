@@ -70,9 +70,6 @@ public class BundleListPreferenceController extends NotificationPreferenceContro
 
     @Override
     public boolean isAvailable() {
-        if (!Flags.notificationClassification()) {
-            return false;
-        }
         if (android.app.Flags.notificationClassificationUi()) {
             return false;
         }

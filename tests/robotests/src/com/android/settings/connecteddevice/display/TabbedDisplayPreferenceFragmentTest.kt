@@ -17,6 +17,9 @@
 package com.android.settings.connecteddevice.display
 
 import android.app.Application
+import android.os.SystemClock
+import android.view.InputDevice
+import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -26,21 +29,26 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings
 import com.android.settings.core.SettingsBaseActivity
+import com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING
 import com.android.settings.testutils.InstantTaskExecutorRule
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
+import com.google.android.material.appbar.AppBarLayout
 import com.google.common.truth.Truth.assertThat
+import kotlin.test.assertNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
 import org.mockito.Captor
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.spy
-import org.mockito.Mockito.verify
+import org.mockito.kotlin.any
 import org.mockito.kotlin.atLeastOnce
-import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.reset
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 /** Unit tests for [TabbedDisplayPreferenceFragment]. */
 @RunWith(AndroidJUnit4::class)
@@ -56,22 +64,39 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     @Captor
     private lateinit var toolbarItemsCaptor:
         ArgumentCaptor<List<ScrollableToolbarItemLayout.ToolbarItem>>
+    @Captor private lateinit var motionEventCaptor: ArgumentCaptor<MotionEvent>
 
     private lateinit var viewModel: DisplayPreferenceViewModel
     private lateinit var fragment: TestableTabbedDisplayPreferenceFragment
     private lateinit var settingsActivity: SettingsBaseActivity
     private lateinit var topologyView: FakeDisplayTopologyPreferenceView
+    private lateinit var appBarLayoutSpy: AppBarLayout
+    private lateinit var selectedDisplayPrefContainerSpy: FocusAwareFrameLayout
 
     @Before
     override fun setUp() {
         super.setUp()
+        mFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, true)
         val application = ApplicationProvider.getApplicationContext() as Application
 
         includeBuiltinDisplay()
 
-        viewModel = DisplayPreferenceViewModel(application, mMockedInjector)
+        viewModel =
+            DisplayPreferenceViewModel(
+                application,
+                mMockedInjector,
+                mActivityManager,
+                mActivityTaskManager,
+                mDevicePolicyManager,
+            )
         topologyView = FakeDisplayTopologyPreferenceView(mMockedInjector)
         initFragment()
+
+        // Spy on the container to verify propagated events
+        appBarLayoutSpy = spy(fragment.appBarLayout)
+        fragment.appBarLayout = appBarLayoutSpy
+        selectedDisplayPrefContainerSpy = spy(fragment.selectedDisplayPrefContainer)
+        fragment.selectedDisplayPrefContainer = selectedDisplayPrefContainerSpy
 
         verify(settingsActivity, atLeastOnce()).setOnItemSelectedListener(toolbarListener.capture())
         reset(settingsActivity)
@@ -79,7 +104,10 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
     @Test
     fun noExternalDisplay_showsNoDisplayConnected() {
-        doReturn(emptyList<DisplayDevice>()).`when`(mMockedInjector).getDisplays()
+        // Remove other external displays
+        mDisplays = emptyList()
+        includeBuiltinDisplay()
+        updateDisplaysAndTopology(mDisplays)
 
         viewModel.updateEnabledDisplays()
 
@@ -152,6 +180,147 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         assertThat(topologyView.selectedDisplay).isEqualTo(-1)
     }
 
+    @Test
+    fun setupAppBarLayout_onMouseScroll_propagatesEventWithClampedY() {
+        // Verifies that a mouse scroll event is propagated to the container below the app bar.
+        // Also verifies that the Y coordinate of the event is clamped to the container's height.
+        val containerSpy = fragment.selectedDisplayPrefContainer
+        val containerHeight = 100
+        whenever(containerSpy.height).thenReturn(containerHeight)
+        val uptime = SystemClock.uptimeMillis()
+        val motionEvent =
+            MotionEvent.obtain(
+                uptime,
+                uptime,
+                MotionEvent.ACTION_SCROLL,
+                /* x= */ 50f,
+                /* y= */ 150f,
+                /* metaState= */ 0,
+            )
+        motionEvent.source = InputDevice.SOURCE_MOUSE
+
+        val result = fragment.appBarLayout.dispatchGenericMotionEvent(motionEvent)
+
+        assertThat(result).isTrue()
+        verify(containerSpy).dispatchGenericMotionEvent(motionEventCaptor.capture())
+        val capturedEvent = motionEventCaptor.value
+        // Expected Y is min(150f, 100 - 1) = 99f. The event is offset to have this new Y.
+        assertThat(capturedEvent.y).isEqualTo(99f)
+        motionEvent.recycle()
+    }
+
+    @Test
+    fun setupAppBarLayout_onNonMouseScrollAction_doesNotPropagateEvent() {
+        // Verifies that a non-scroll motion event is not propagated.
+        val containerSpy = fragment.selectedDisplayPrefContainer
+        val uptime = SystemClock.uptimeMillis()
+        val motionEvent =
+            MotionEvent.obtain(
+                uptime,
+                uptime,
+                MotionEvent.ACTION_MOVE, // Not a scroll action
+                /* x= */ 50f,
+                /* y= */ 50f,
+                /* metaState= */ 0,
+            )
+        motionEvent.source = InputDevice.SOURCE_MOUSE
+
+        val result = fragment.appBarLayout.dispatchGenericMotionEvent(motionEvent)
+
+        assertThat(result).isFalse()
+        verify(containerSpy, never()).dispatchGenericMotionEvent(any())
+        motionEvent.recycle()
+    }
+
+    @Test
+    fun setupAppBarLayout_onNonMouseScrollSource_doesNotPropagateEvent() {
+        // Verifies that a scroll event from a non-mouse source is not propagated.
+        val containerSpy = fragment.selectedDisplayPrefContainer
+        val uptime = SystemClock.uptimeMillis()
+        val motionEvent =
+            MotionEvent.obtain(
+                uptime,
+                uptime,
+                MotionEvent.ACTION_SCROLL,
+                /* x= */ 50f,
+                /* y= */ 50f,
+                /* metaState= */ 0,
+            )
+        motionEvent.source = InputDevice.SOURCE_TOUCHSCREEN // Not a mouse source
+
+        val result = fragment.appBarLayout.dispatchGenericMotionEvent(motionEvent)
+
+        assertThat(result).isFalse()
+        verify(containerSpy, never()).dispatchGenericMotionEvent(any())
+        motionEvent.recycle()
+    }
+
+    @Test
+    fun onDestroyView_removesGenericMotionListener() {
+        // Verifies that the motion listener on the app bar is removed when the view is destroyed.
+        val appBarLayoutSpy = spy(fragment.appBarLayout)
+        fragment.appBarLayout = appBarLayoutSpy
+
+        fragment.onDestroyView()
+
+        verify(appBarLayoutSpy).setOnGenericMotionListener(null)
+    }
+
+    @Test
+    fun focus_forwardFromTopologyView_movesToContainer() {
+        val direction = View.FOCUS_DOWN
+        val v =
+            View(mContext).apply {
+                isFocusable = true
+                isFocusableInTouchMode = true
+            }
+        topologyView.addView(v)
+
+        val nextFocus = topologyView.focusSearch(v, direction)
+        assertThat(nextFocus).isEqualTo(selectedDisplayPrefContainerSpy)
+    }
+
+    @Test
+    fun focus_backwardFromTopologyView_movesToParentActivity() {
+        val direction = View.FOCUS_UP
+        val v =
+            View(mContext).apply {
+                isFocusable = true
+                isFocusableInTouchMode = true
+            }
+        topologyView.addView(v)
+
+        val nextFocus = topologyView.focusSearch(v, direction)
+        assertThat(nextFocus).isEqualTo(settingsActivity.window?.decorView)
+    }
+
+    @Test
+    fun focus_backwardFromSelectedDisplayContainer_movesToTopologyViewAndExpandsAppBar() {
+        viewModel.updateEnabledDisplays()
+        val direction = View.FOCUS_UP
+        val descendantFocusables = ArrayList<View>()
+        selectedDisplayPrefContainerSpy.addFocusables(descendantFocusables, direction)
+
+        val nextFocus =
+            selectedDisplayPrefContainerSpy.focusSearch(descendantFocusables.first(), direction)
+        assertThat(nextFocus).isEqualTo(topologyView)
+        verify(appBarLayoutSpy).setExpanded(/* expanded= */ true, /* animate= */ true)
+    }
+
+    @Test
+    fun focus_forwardFromSelectedDisplayContainer_returnNull() {
+        viewModel.updateEnabledDisplays()
+        val direction = View.FOCUS_DOWN
+        val descendantFocusables = ArrayList<View>()
+        selectedDisplayPrefContainerSpy.addFocusables(descendantFocusables, direction)
+
+        val nextFocus =
+            selectedDisplayPrefContainerSpy.focusSearch(descendantFocusables.last(), direction)
+        // It's expected to be null here to let parent view to handle the next focus (which will
+        // naturally be moved to Toolbar items
+        assertNull(nextFocus)
+    }
+
     private fun initFragment(): TestableTabbedDisplayPreferenceFragment {
         activityScenarioRule.scenario.onActivity { activity ->
             settingsActivity = spy(activity)
@@ -168,12 +337,11 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         viewModel: DisplayPreferenceViewModel,
     ) : TabbedDisplayPreferenceFragment(viewModel) {
 
-        private val mockViewLifecycleOwner = mock(LifecycleOwner::class.java)
-
+        private val mockViewLifecycleOwner: LifecycleOwner = mock()
         val lifecycleRegistry = LifecycleRegistry(this)
 
         init {
-            doReturn(lifecycleRegistry).`when`(mockViewLifecycleOwner).lifecycle
+            whenever(mockViewLifecycleOwner.lifecycle).thenReturn(lifecycleRegistry)
             // Required to allow observer to start observing data
             lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
         }
@@ -184,6 +352,10 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
         override fun getCurrentActivity(): SettingsBaseActivity? {
             return settingsActivity
+        }
+
+        override fun getViewLifecycleOwner(): LifecycleOwner {
+            return mockViewLifecycleOwner
         }
     }
 

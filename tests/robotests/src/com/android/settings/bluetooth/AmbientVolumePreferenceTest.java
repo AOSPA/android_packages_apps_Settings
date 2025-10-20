@@ -30,12 +30,9 @@ import static com.android.settingslib.bluetooth.HearingAidInfo.DeviceSide.SIDE_R
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.util.ArrayMap;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -45,7 +42,7 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settingslib.bluetooth.AmbientVolumeUi;
+import com.android.settingslib.bluetooth.hearingdevices.ui.AmbientVolumeUi;
 import com.android.settingslib.widget.SliderPreference;
 
 import org.junit.Before;
@@ -59,6 +56,7 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.Map;
+import java.util.Set;
 
 /** Tests for {@link AmbientVolumePreference}. */
 @RunWith(RobolectricTestRunner.class)
@@ -83,7 +81,6 @@ public class AmbientVolumePreferenceTest {
     private AmbientVolumePreference mPreference;
     private ImageView mExpandIcon;
     private ImageView mVolumeIcon;
-    private final Map<Integer, BluetoothDevice> mSideToDeviceMap = new ArrayMap<>();
 
     @Before
     public void setUp() {
@@ -95,8 +92,7 @@ public class AmbientVolumePreferenceTest {
         mPreference.setControlExpandable(true);
         preferenceScreen.addPreference(mPreference);
 
-        prepareDevices();
-        mPreference.setupSliders(mSideToDeviceMap);
+        mPreference.setupSliders(Set.of(SIDE_LEFT, SIDE_RIGHT));
         mPreference.getSliders().forEach((side, slider) -> {
             slider.setMin(0);
             slider.setMax(4);
@@ -134,6 +130,9 @@ public class AmbientVolumePreferenceTest {
 
     @Test
     public void setControlExpandable_notExpandable_expandIconGone() {
+        // Change the state from its default (false) to true. This ensures that the subsequent call
+        // to setControlExpandable(false) will trigger the update logic.
+        mPreference.setControlExpandable(true);
         mPreference.setControlExpandable(false);
 
         assertThat(mExpandIcon.getVisibility()).isEqualTo(View.GONE);
@@ -144,29 +143,18 @@ public class AmbientVolumePreferenceTest {
         mPreference.setControlExpanded(true);
 
         assertControlUiCorrect();
-    }
-
-    @Test
-    public void setControlExpanded_notExpanded_assertControlUiCorrect() {
-        mPreference.setControlExpanded(false);
-
-        assertControlUiCorrect();
-    }
-
-    @Test
-    public void updateLayout_expanded_volumeIconIsCorrect() {
-        mPreference.setControlExpanded(true);
-        mPreference.updateLayout();
-
         int expectedLevel = calculateVolumeLevel(TEST_LEFT_VOLUME_LEVEL, TEST_RIGHT_VOLUME_LEVEL);
         assertThat(mVolumeIcon.getDrawable().getLevel()).isEqualTo(expectedLevel);
     }
 
     @Test
-    public void updateLayout_notExpanded_volumeIconIsCorrect() {
+    public void setControlExpanded_notExpanded_assertControlUiCorrect() {
+        // Change the state from its default (false) to true. This ensures that the subsequent call
+        // to setControlExpanded(false) will trigger the update logic.
+        mPreference.setControlExpanded(true);
         mPreference.setControlExpanded(false);
-        mPreference.updateLayout();
 
+        assertControlUiCorrect();
         int expectedLevel = calculateVolumeLevel(TEST_UNIFIED_VOLUME_LEVEL,
                 TEST_UNIFIED_VOLUME_LEVEL);
         assertThat(mVolumeIcon.getDrawable().getLevel()).isEqualTo(expectedLevel);
@@ -179,6 +167,31 @@ public class AmbientVolumePreferenceTest {
 
         int expectedLevel = calculateVolumeLevel(0, TEST_RIGHT_VOLUME_LEVEL);
         assertThat(mVolumeIcon.getDrawable().getLevel()).isEqualTo(expectedLevel);
+    }
+
+    @Test
+    public void setSliderEnabled_alreadyDisabled_resetsValueToMin() {
+        SliderPreference leftSlider = mPreference.getSliders().get(SIDE_LEFT);
+        final int minValue = leftSlider.getMin();
+        final int testValue = minValue + 2;
+        // Ensure initial value is not min
+        leftSlider.setValue(testValue);
+        assertThat(leftSlider.getValue()).isEqualTo(testValue);
+
+        // Disable the slider, value should be reset to min
+        mPreference.setSliderEnabled(SIDE_LEFT, false);
+        assertThat(leftSlider.getValue()).isEqualTo(minValue);
+        assertThat(leftSlider.isEnabled()).isFalse();
+
+        // Manually set value to non-min while slider is disabled to create the bug scenario
+        leftSlider.setValue(testValue);
+        assertThat(leftSlider.getValue()).isEqualTo(testValue);
+
+        // Call setSliderEnabled(false) again on the already disabled slider
+        mPreference.setSliderEnabled(SIDE_LEFT, false);
+
+        // Verify the value is reset to min again, confirming the fix
+        assertThat(leftSlider.getValue()).isEqualTo(minValue);
     }
 
     @Test
@@ -254,10 +267,5 @@ public class AmbientVolumePreferenceTest {
         assertThat(sliders.get(SIDE_RIGHT).isVisible()).isEqualTo(expanded);
         final float rotation = expanded ? ROTATION_EXPANDED : ROTATION_COLLAPSED;
         assertThat(mExpandIcon.getRotation()).isEqualTo(rotation);
-    }
-
-    private void prepareDevices() {
-        mSideToDeviceMap.put(SIDE_LEFT, mock(BluetoothDevice.class));
-        mSideToDeviceMap.put(SIDE_RIGHT, mock(BluetoothDevice.class));
     }
 }

@@ -34,15 +34,15 @@ import com.android.settingslib.preference.launchFragmentScenario
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.kotlin.argumentCaptor
 import org.robolectric.annotation.LooperMode
 
 @RunWith(AndroidJUnit4::class)
@@ -66,6 +66,7 @@ class SupervisionDashboardScreenTest {
     @Before
     fun setUp() {
         mockLifeCycleContext.stub {
+            on { preferenceScreenKey } doReturn preferenceScreenCreator.bindingKey
             on { getSystemService(SupervisionManager::class.java) } doReturn mockSupervisionManager
         }
     }
@@ -135,8 +136,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     fun getTitle() {
-        assertThat(preferenceScreenCreator.title)
-            .isEqualTo(R.string.supervision_settings_title)
+        assertThat(preferenceScreenCreator.title).isEqualTo(R.string.supervision_settings_title)
     }
 
     @Test
@@ -147,7 +147,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     fun isIndexable() {
-        assertThat(preferenceScreenCreator.isIndexable(context)).isTrue()
+        assertThat(preferenceScreenCreator.indexable).isTrue()
     }
 
     @Test
@@ -168,6 +168,7 @@ class SupervisionDashboardScreenTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun listener_onSupervisionDisabled_refreshesPreferences() {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
@@ -179,9 +180,11 @@ class SupervisionDashboardScreenTest {
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionDashboardScreen.KEY)
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+        verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionSetUpPinPreference.KEY)
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun listener_onSupervisionEnabled_refreshesPreferences() {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
@@ -193,5 +196,6 @@ class SupervisionDashboardScreenTest {
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionDashboardScreen.KEY)
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
         verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+        verify(mockLifeCycleContext).notifyPreferenceChange(SupervisionSetUpPinPreference.KEY)
     }
 }

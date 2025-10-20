@@ -15,11 +15,13 @@
  */
 package com.android.settings.supervision
 
+import android.app.AppGlobals
 import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
 import android.app.role.RoleManager.ROLE_SUPERVISION
 import android.app.role.RoleManager.ROLE_SYSTEM_SUPERVISION
 import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings.Secure.USER_SETUP_COMPLETE
@@ -79,13 +81,36 @@ class EnableSupervisionActivity : FragmentActivity() {
         val isCallerProfileOwner = isProfileOwner(packageName)
         return !hasUserSetupCompleted ||
             (isCallerSystemSupervision && isCallerProfileOwner) ||
-            canBypassConfirmationDialog()
+            canBypassConfirmationDialog(packageName)
     }
 
-    fun canBypassConfirmationDialog(): Boolean {
-        // TODO: b/415102122 - Update to check specifically for 36.1+ once it's available in
-        // VERSION_CODES_FULL.
-        return Build.VERSION.SDK_INT == Build.VERSION_CODES.BAKLAVA
+    fun canBypassConfirmationDialog(packageName: String): Boolean {
+        if (!Flags.enableConfirmationDialogBypass()) {
+            return false
+        }
+        return isAllowedPackage(packageName) &&
+            AppGlobals.getPackageManager().isDeviceUpgrading() &&
+            Build.VERSION.SDK_INT_FULL == Build.VERSION_CODES_FULL.BAKLAVA_1
+    }
+
+    @VisibleForTesting
+    fun isAllowedPackage(packageName: String): Boolean {
+        val resourceId =
+            resources.getIdentifier(CONFIG_ALLOWED_SUPERVISION_ROLE_PACKAGES, "string", "android")
+        if (resourceId == 0) {
+            Log.w(TAG, "Cannot find resource for: $CONFIG_ALLOWED_SUPERVISION_ROLE_PACKAGES")
+            return false
+        }
+
+        val config =
+            try {
+                getString(resourceId)
+            } catch (e: android.content.res.Resources.NotFoundException) {
+                Log.w(TAG, "Cannot get resource: $CONFIG_ALLOWED_SUPERVISION_ROLE_PACKAGES", e)
+                return false
+            }
+        val packageNames = config.split(PACKAGES_LIST_SEPARATOR)
+        return packageNames.contains(packageName)
     }
 
     private fun hasUserSetupCompleted(): Boolean {
@@ -209,5 +234,13 @@ class EnableSupervisionActivity : FragmentActivity() {
          * supervision warning paragraph.
          */
         const val EXTRA_SUPERVISION_APP_NAME = "supervision_app_name"
+        /**
+         * This config is temporary and intentionally not exposed as a system API and must be
+         * accessed by name.
+         */
+        private const val CONFIG_ALLOWED_SUPERVISION_ROLE_PACKAGES =
+            "config_allowedSupervisionRolePackages"
+        /** Separator for the `config_allowedSupervisionRolePackages` list of packages. */
+        private const val PACKAGES_LIST_SEPARATOR = ";"
     }
 }

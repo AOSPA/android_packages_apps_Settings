@@ -19,12 +19,12 @@ package com.android.settings.accessibility.screenmagnification.ui
 import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.content.Context
+import android.os.Bundle
 import android.text.TextUtils
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.internal.accessibility.common.NotificationConstants.EXTRA_SOURCE
 import com.android.internal.accessibility.common.NotificationConstants.SOURCE_START_SURVEY
 import com.android.settings.R
-import com.android.settings.accessibility.BaseSupportFragment
 import com.android.settings.accessibility.FeedbackButtonPreferenceController
 import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.Flags
@@ -33,12 +33,14 @@ import com.android.settings.accessibility.SurveyManager
 import com.android.settings.accessibility.screenmagnification.CursorFollowingModePreferenceController
 import com.android.settings.accessibility.screenmagnification.ModePreferenceController
 import com.android.settings.accessibility.screenmagnification.ToggleMagnificationShortcutPreferenceController
+import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.widget.TopIntroPreference
 
 /** Displays the detail screen of the screen magnification feature */
 @SearchIndexable(forTarget = SearchIndexable.ALL and SearchIndexable.ARC.inv())
-open class MagnificationPreferenceFragment : BaseSupportFragment() {
+open class MagnificationPreferenceFragment : DashboardFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -60,6 +62,21 @@ open class MagnificationPreferenceFragment : BaseSupportFragment() {
                 metricsCategory,
             )
         }
+    }
+
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        super.onCreatePreferences(savedInstanceState, rootKey)
+        if (Flags.catalystMagnification()) {
+            return
+        }
+        // By setting this visibility status before*managing the view, we can prevent a preference
+        // from being inflated if it's meant to be hidden.
+        configureTopIntroVisibility()
+    }
+
+    /** Show the magnification preference settings in the settings. */
+    protected open fun configureTopIntroVisibility() {
+        findPreference<TopIntroPreference?>(MagnificationTopIntroPreference.KEY)?.isVisible = true
     }
 
     fun getShortcutPreferenceController(): ToggleMagnificationShortcutPreferenceController? {

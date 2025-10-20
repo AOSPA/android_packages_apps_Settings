@@ -73,6 +73,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -86,6 +87,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
 
     private static final String TAG = "AudioSharingDevicePrefController";
     private static final String KEY = "audio_sharing_device_list";
+    private static final String SUPPRESS_AUDIO_SHARE_DIALOG_TAG = "SUPPRESS_AUDIO_SHARING_PROMOTE";
 
     @Nullable private final LocalBluetoothManager mBtManager;
     @Nullable private final CachedBluetoothDeviceManager mDeviceManager;
@@ -427,7 +429,16 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                 return;
             }
         }
-        if (state != BluetoothAdapter.STATE_CONNECTED || !cachedDevice.getDevice().isConnected()) {
+        // Suppress handling on profile state change based on device metadata
+        BluetoothDevice device = cachedDevice.getDevice();
+        if (needSuppressAudioShareDialog(device)) {
+            Log.i(
+                    TAG,
+                    "Ignore onProfileConnectionStateChanged, suppress dialog for "
+                            + device.getAnonymizedAddress());
+            return;
+        }
+        if (state != BluetoothAdapter.STATE_CONNECTED || !device.isConnected()) {
             Log.d(TAG, "Ignore onProfileConnectionStateChanged, not connected state");
             return;
         }
@@ -606,5 +617,12 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                         mPreferenceGroup.setTitle(titleResId);
                     }
                 });
+    }
+
+    private boolean needSuppressAudioShareDialog(@Nullable BluetoothDevice bluetoothDevice) {
+        String metadataValue =
+                BluetoothUtils.getFastPairCustomizedField(
+                        bluetoothDevice, SUPPRESS_AUDIO_SHARE_DIALOG_TAG);
+        return Objects.equals(metadataValue, Boolean.TRUE.toString());
     }
 }

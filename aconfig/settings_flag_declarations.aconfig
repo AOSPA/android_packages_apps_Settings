@@ -61,13 +61,6 @@ flag {
 }
 
 flag {
-  name: "touchpad_settings_design_update"
-  namespace: "android_settings"
-  description: "All touchpad settings pages should either migrate to non-custom implementations or be updated"
-  bug: "400647661"
-}
-
-flag {
   name: "three_finger_tap_app_launch"
   namespace: "android_settings"
   description: "Use three finger tap to open a custom app"
@@ -86,24 +79,4 @@ flag {
   namespace: "android_settings"
   description: "Enables alert indicator on homepage tiles"
   bug: "403326850"
-}
-
-flag {
-  name: "fix_touchpad_and_mouse_settings_search_index"
-  namespace: "android_settings"
-  description: "Fix TouchpadAndMouseSettings indexing logic"
-  bug: "421850832"
-  metadata {
-      purpose: PURPOSE_BUGFIX
-    }
-}
-
-flag {
-  name: "disable_update_height_profile_select_location_services"
-  namespace: "android_settings"
-  description: "Disable updateHeight in the Location Services page to allow scrolling in certain screen sizes / orientations"
-  bug: "418876165"
-  metadata {
-    purpose: PURPOSE_BUGFIX
-  }
 }

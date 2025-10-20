@@ -98,7 +98,7 @@ open class NightDisplayScreen(val context: Context) :
     ): PreferenceHierarchy = preferenceHierarchy(context) { +NightDisplayTopIntroPreference() }
 
     override fun isAvailable(context: Context): Boolean =
-        ColorDisplayManager.isNightDisplayAvailable(context)
+        context.isNightDisplaySettingsAvailable
 
     override fun getMetricsCategory(): Int = SettingsEnums.NIGHT_DISPLAY_SETTINGS
 
@@ -119,11 +119,12 @@ internal class NightDisplayTopIntroPreference :
     override val title: Int
         get() = R.string.night_display_text
 
-    override fun isIndexable(context: Context) = false
+    override val indexable
+        get() = false
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
 
     override fun isAvailable(context: Context): Boolean =
-        ColorDisplayManager.isNightDisplayAvailable(context)
+        context.isNightDisplaySettingsAvailable
 }
 // LINT.ThenChange(NightDisplaySettings.java)

@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility.flashnotifications.ui
 
-import android.content.Context
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.widget.FooterPreferenceBinding
@@ -31,6 +30,9 @@ class FlashNotificationsFooterPreference : FooterPreferenceMetadata, FooterPrefe
     override val title: Int
         get() = R.string.flash_notifications_note
 
+    override val indexable
+        get() = false
+
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
 
@@ -40,8 +42,6 @@ class FlashNotificationsFooterPreference : FooterPreferenceMetadata, FooterPrefe
         val aboutTitle = preference.context.getString(R.string.flash_notifications_about_title)
         footerPreference.contentDescription = "$aboutTitle\n${footerPreference.title}"
     }
-
-    override fun isIndexable(context: Context): Boolean = false
 
     companion object {
         const val KEY = "flash_notifications_footer"

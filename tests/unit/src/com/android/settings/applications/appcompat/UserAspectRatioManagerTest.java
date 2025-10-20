@@ -31,7 +31,6 @@ import static android.view.WindowManager.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO
 
 import static com.android.settings.applications.appcompat.UserAspectRatioManager.KEY_ENABLE_USER_ASPECT_RATIO_FULLSCREEN;
 import static com.android.settings.applications.appcompat.UserAspectRatioManager.KEY_ENABLE_USER_ASPECT_RATIO_SETTINGS;
-import static com.android.window.flags.Flags.FLAG_BACKUP_AND_RESTORE_FOR_USER_ASPECT_RATIO_SETTINGS;
 import static com.android.window.flags.Flags.FLAG_UNIVERSAL_RESIZABLE_BY_DEFAULT;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -428,7 +427,6 @@ public class UserAspectRatioManagerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(FLAG_BACKUP_AND_RESTORE_FOR_USER_ASPECT_RATIO_SETTINGS)
     public void testSetUserMinAspectRatio_notifiesBackupManager() throws Exception {
         mUtils.setUserMinAspectRatio(mPackageName, 0, USER_MIN_ASPECT_RATIO_FULLSCREEN);
 

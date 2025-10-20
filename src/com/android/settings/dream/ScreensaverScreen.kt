@@ -27,7 +27,7 @@ import com.android.settings.R
 import com.android.settings.Settings.DreamSettingsActivity
 import com.android.settings.Utils
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController
+import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceScreenController
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
@@ -61,7 +61,7 @@ open class ScreensaverScreen(private val context: Context) :
     private var ambientModeSuppressionProvider: AmbientModeSuppressionProvider =
         object : AmbientModeSuppressionProvider {
             override fun isSuppressedByBedtime(context: Context) =
-                AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime(context)
+                AmbientDisplayAlwaysOnPreferenceScreenController.isAodSuppressedByBedtime(context)
         }
 
     private var summaryStringsProvider: SummaryStringsProvider =

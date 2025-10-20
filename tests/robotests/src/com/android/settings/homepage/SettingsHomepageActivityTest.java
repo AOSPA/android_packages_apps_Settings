@@ -314,6 +314,19 @@ public class SettingsHomepageActivityTest {
     }
 
     @Test
+    public void onCreate_homepageContainerIsNotFocusable() {
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+        final View homepageContainer = activity.findViewById(R.id.settings_homepage_container);
+
+        // Verify that the homepage container is not focusable in touch mode.
+        // This ensures that the container itself doesn't get selected, allowing
+        // child views like the RecyclerView to handle focus and scrolling correctly.
+        assertThat(homepageContainer.isFocusableInTouchMode()).isFalse();
+        assertThat(homepageContainer.hasFocus()).isFalse();
+    }
+
+    @Test
     public void getInitialReferrer_differentPackage_returnCurrentReferrer() {
         SettingsHomepageActivity activity =
                 spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());

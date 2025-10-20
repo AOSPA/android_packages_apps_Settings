@@ -267,6 +267,7 @@ public class DataProcessManager {
             protected Void doInBackground(Void... voids) {
                 if (!shouldLoadAppUsageData()) {
                     Log.d(TAG, "not loadCurrentAppUsageList");
+                    mIsCurrentAppUsageLoaded = true;
                     return null;
                 }
                 final long startTime = System.currentTimeMillis();
@@ -280,6 +281,7 @@ public class DataProcessManager {
                         // If fail to load usage events for any user, return null directly and
                         // screen-on time will not be shown in the UI.
                         if (userId == mUserIdsSeries.getCurrentUserId()) {
+                            mIsCurrentAppUsageLoaded = true;
                             return null;
                         }
                     } else {
@@ -313,6 +315,7 @@ public class DataProcessManager {
             protected Void doInBackground(Void... voids) {
                 if (!shouldLoadAppUsageData()) {
                     Log.d(TAG, "not loadDatabaseAppUsageList");
+                    mIsDatabaseAppUsageLoaded = true;
                     return null;
                 }
                 final long startTime = System.currentTimeMillis();

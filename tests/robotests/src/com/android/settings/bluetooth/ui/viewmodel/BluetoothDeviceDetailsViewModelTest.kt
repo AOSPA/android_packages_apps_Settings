@@ -26,9 +26,10 @@ import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
-import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigModel
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigNodeModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingLayout
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.ToggleModel
@@ -75,122 +76,173 @@ class BluetoothDeviceDetailsViewModelTest {
         featureFactory = FakeFeatureFactory.setupForTest()
 
         `when`(
-            featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
-                eq(application), any()
-            ))
+                featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
+                    eq(application),
+                    any(),
+                )
+            )
             .thenReturn(repository)
 
         underTest =
-            BluetoothDeviceDetailsViewModel(
-                application,
-                cachedDevice,
-                testScope.testScheduler)
+            BluetoothDeviceDetailsViewModel(application, cachedDevice, testScope.testScheduler)
     }
 
     @Test
-    fun getItems_returnConfigMainMainItems() {
+    fun getItems_returnConfigMainItems() {
         testScope.runTest {
+            val mainPageLayout =
+                DeviceSettingLayout(listOf(BUILTIN_SETTING_ITEM_1, BUILTIN_SETTING_ITEM_2))
             `when`(repository.getDeviceSettingsConfig(cachedDevice))
                 .thenReturn(
-                    DeviceSettingConfigModel(
-                        listOf(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2), listOf(), null))
+                    DeviceSettingConfigModel(mainPageLayout, DeviceSettingLayout(emptyList()), null)
+                )
 
-            val keys = underTest.getItems(FragmentTypeModel.DeviceDetailsMainFragment)
+            val keys = underTest.getNodes(FragmentTypeModel.DeviceDetailsMainFragment)
 
-            assertThat(keys).containsExactly(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2)
+            assertThat(keys).isSameInstanceAs(mainPageLayout)
         }
     }
 
     @Test
-    fun getHelpItems_mainPage_returnNull() {
+    fun getItems_returnConfigMoreSettingsItems() {
         testScope.runTest {
+            val moreSettingsPageLayout =
+                DeviceSettingLayout(listOf(BUILTIN_SETTING_ITEM_1, BUILTIN_SETTING_ITEM_2))
             `when`(repository.getDeviceSettingsConfig(cachedDevice))
                 .thenReturn(
                     DeviceSettingConfigModel(
-                        listOf(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2),
-                        listOf(),
-                        SETTING_ITEM_HELP))
+                        DeviceSettingLayout(emptyList()),
+                        moreSettingsPageLayout,
+                        SETTING_ITEM_HELP,
+                    )
+                )
 
-            val item = underTest.getHelpItem(FragmentTypeModel.DeviceDetailsMainFragment)
+            val item = underTest.getNodes(FragmentTypeModel.DeviceDetailsMoreSettingsFragment)
 
-            assertThat(item).isNull()
+            assertThat(item).isSameInstanceAs(moreSettingsPageLayout)
         }
     }
 
     @Test
-    fun getHelpItems_moreSettings_returnConfigHelpItem() {
-        testScope.runTest {
-            `when`(repository.getDeviceSettingsConfig(cachedDevice))
-                .thenReturn(
-                    DeviceSettingConfigModel(
-                        listOf(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2),
-                        listOf(),
-                        SETTING_ITEM_HELP))
-
-            val item = underTest.getHelpItem(FragmentTypeModel.DeviceDetailsMoreSettingsFragment)
-
-            assertThat(item).isSameInstanceAs(SETTING_ITEM_HELP)
-        }
-    }
-
-    @Test
-    fun getDeviceSetting_returnRepositoryResponse() {
+    fun getDeviceSetting_multiTogglePreference_returnRepositoryResponse() {
         testScope.runTest {
             val remoteSettingId1 = 10001
-            val pref = buildMultiTogglePreference(remoteSettingId1)
-            `when`(repository.getDeviceSettingsConfig(cachedDevice))
-                .thenReturn(
-                    DeviceSettingConfigModel(
+            var updatedState: DeviceSettingStateModel.MultiTogglePreferenceState? = null
+            val pref =
+                DeviceSettingModel.MultiTogglePreference(
+                    cachedDevice,
+                    remoteSettingId1,
+                    "title",
+                    toggles =
                         listOf(
-                            BUILTIN_SETTING_ITEM_1,
-                            buildRemoteSettingItem(remoteSettingId1),
+                            ToggleModel(
+                                "toggle1",
+                                DeviceSettingIcon.BitmapIcon(
+                                    Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+                                ),
+                            )
                         ),
-                        listOf(),
-                        null))
+                    isActive = true,
+                    state = DeviceSettingStateModel.MultiTogglePreferenceState(0),
+                    isAllowedChangingState = true,
+                    updateState = { updatedState = it },
+                )
             `when`(repository.getDeviceSetting(cachedDevice, remoteSettingId1))
                 .thenReturn(flowOf(pref))
 
-            var deviceSettingPreference: DeviceSettingPreferenceModel? = null
+            lateinit var deviceSettingPreference: DeviceSettingPreferenceModel.MultiTogglePreference
             underTest
                 .getDeviceSetting(cachedDevice, remoteSettingId1)
-                .onEach { deviceSettingPreference = it }
+                .onEach {
+                    deviceSettingPreference =
+                        it as DeviceSettingPreferenceModel.MultiTogglePreference
+                }
                 .launchIn(testScope.backgroundScope)
             runCurrent()
+            deviceSettingPreference.onSelectedChange(0)
 
-            assertThat(deviceSettingPreference?.id).isEqualTo(pref.id)
+            assertThat(deviceSettingPreference.id).isEqualTo(pref.id)
+            assertThat(deviceSettingPreference.title).isEqualTo(pref.title)
+            assertThat(deviceSettingPreference.isActive).isEqualTo(pref.isActive)
+            assertThat(deviceSettingPreference.toggles.size).isEqualTo(1)
+            assertThat(deviceSettingPreference.toggles[0].label).isEqualTo(pref.toggles[0].label)
+            assertThat(deviceSettingPreference.toggles[0].icon).isEqualTo(pref.toggles[0].icon)
+            assertThat(updatedState?.selectedIndex).isEqualTo(0)
             verify(repository, times(1)).getDeviceSetting(cachedDevice, remoteSettingId1)
         }
     }
 
-    private fun buildMultiTogglePreference(settingId: Int) =
-        DeviceSettingModel.MultiTogglePreference(
-            cachedDevice,
-            settingId,
-            "title",
-            toggles =
-                listOf(
-                    ToggleModel(
-                        "toggle1",
-                        DeviceSettingIcon.BitmapIcon(
-                            Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)))),
-            isActive = true,
-            state = DeviceSettingStateModel.MultiTogglePreferenceState(0),
-            isAllowedChangingState = true,
-            updateState = {})
+    @Test
+    fun getDeviceSetting_actionSwitchPreference_returnRepositoryResponse() {
+        testScope.runTest {
+            val remoteSettingId1 = 10001
+            val pref =
+                DeviceSettingModel.ActionSwitchPreference(
+                    cachedDevice = cachedDevice,
+                    id = remoteSettingId1,
+                    title = "title",
+                    summary = "summary",
+                    icon = null,
+                )
+            `when`(repository.getDeviceSetting(cachedDevice, remoteSettingId1))
+                .thenReturn(flowOf(pref))
 
-    private fun buildActionSwitchPreference(settingId: Int) =
-        DeviceSettingModel.ActionSwitchPreference(cachedDevice, settingId, "title")
+            lateinit var deviceSettingPreference: DeviceSettingPreferenceModel.PlainPreference
+            underTest
+                .getDeviceSetting(cachedDevice, remoteSettingId1)
+                .onEach {
+                    deviceSettingPreference = it as DeviceSettingPreferenceModel.PlainPreference
+                }
+                .launchIn(testScope.backgroundScope)
+            runCurrent()
 
-    private fun buildRemoteSettingItem(settingId: Int) =
-        DeviceSettingConfigItemModel.AppProvidedItem(settingId, false)
+            assertThat(deviceSettingPreference.id).isEqualTo(pref.id)
+            assertThat(deviceSettingPreference.title).isEqualTo(pref.title)
+            verify(repository, times(1)).getDeviceSetting(cachedDevice, remoteSettingId1)
+        }
+    }
+
+    @Test
+    fun getDeviceSetting_footerPreference_returnRepositoryResponse() {
+        testScope.runTest {
+            val remoteSettingId1 = 10001
+            val pref =
+                DeviceSettingModel.FooterPreference(
+                    cachedDevice = cachedDevice,
+                    id = remoteSettingId1,
+                    footerText = "title",
+                )
+            `when`(repository.getDeviceSetting(cachedDevice, remoteSettingId1))
+                .thenReturn(flowOf(pref))
+
+            lateinit var deviceSettingPreference: DeviceSettingPreferenceModel.FooterPreference
+            underTest
+                .getDeviceSetting(cachedDevice, remoteSettingId1)
+                .onEach {
+                    deviceSettingPreference = it as DeviceSettingPreferenceModel.FooterPreference
+                }
+                .launchIn(testScope.backgroundScope)
+            runCurrent()
+
+            assertThat(deviceSettingPreference.id).isEqualTo(pref.id)
+            assertThat(deviceSettingPreference.footerText).isEqualTo(pref.footerText)
+            verify(repository, times(1)).getDeviceSetting(cachedDevice, remoteSettingId1)
+        }
+    }
 
     private companion object {
         val BUILTIN_SETTING_ITEM_1 =
-            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
-                DeviceSettingId.DEVICE_SETTING_ID_HEADER, false, "bluetooth_device_header")
-        val BUILDIN_SETTING_ITEM_2 =
-            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
-                DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, false, "action_buttons")
-        val SETTING_ITEM_HELP = DeviceSettingConfigItemModel.AppProvidedItem(12345, false)
+            DeviceSettingConfigNodeModel.Item.BuiltinItem.CommonBuiltinItem(
+                DeviceSettingId.DEVICE_SETTING_ID_HEADER,
+                false,
+                "bluetooth_device_header",
+            )
+        val BUILTIN_SETTING_ITEM_2 =
+            DeviceSettingConfigNodeModel.Item.BuiltinItem.CommonBuiltinItem(
+                DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS,
+                false,
+                "action_buttons",
+            )
+        val SETTING_ITEM_HELP = DeviceSettingConfigNodeModel.Item.AppProvidedItem(12345, false)
     }
 }

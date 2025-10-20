@@ -30,12 +30,13 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.hearingdevices.ui.HearingDevicesScreen;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 /** Accessibility settings for hearing aids. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class AccessibilityHearingAidsFragment extends BaseRestrictedSupportFragment {
+public class AccessibilityHearingAidsFragment extends RestrictedDashboardFragment {
     private static final String TAG = "AccessibilityHearingAidsFragment";
 
     public AccessibilityHearingAidsFragment() {
@@ -59,6 +60,8 @@ public class AccessibilityHearingAidsFragment extends BaseRestrictedSupportFragm
                         getMetricsCategory()
                 );
             }
+            use(HearingDevicesFeedbackButtonPreferenceController.class).initialize(
+                    new FeedbackManager(context, getMetricsCategory()));
         }
     }
 
@@ -99,9 +102,7 @@ public class AccessibilityHearingAidsFragment extends BaseRestrictedSupportFragm
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(Flags.catalystHearingDevices()
-                    && com.android.settings.flags.Flags.catalystSettingsSearch() ? 0
-                    : R.xml.accessibility_hearing_aids) {
+            new BaseSearchIndexProvider(R.xml.accessibility_hearing_aids) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return AccessibilityHearingAidsFragment.isPageSearchEnabled(context);

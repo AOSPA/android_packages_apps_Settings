@@ -65,6 +65,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.core.view.insets.ProtectionLayout;
 
 import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.InstrumentedFragment;
@@ -82,6 +83,7 @@ import com.google.android.setupcompat.template.FooterButton.ButtonType;
 import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.util.ThemeHelper;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -482,6 +484,11 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         }
 
         final GlifLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
+        ProtectionLayout protect = layout.findViewById(
+                com.google.android.setupdesign.R.id.sud_layout_protection);
+        if (protect != null) {
+            protect.setProtections(Collections.emptyList());
+        }
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
         final Activity activity = getActivity();
         mixin.setPrimaryButton(

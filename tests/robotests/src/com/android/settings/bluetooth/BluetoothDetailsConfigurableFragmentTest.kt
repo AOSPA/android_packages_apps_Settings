@@ -42,13 +42,16 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager
 import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingActionModel
-import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigModel
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigNodeModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingLayout
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.ToggleModel
+import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.CardPreference
+import com.android.settingslib.widget.ChainedPreferenceGroup
 import com.android.settingslib.widget.SegmentedButtonPreference
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -173,14 +176,16 @@ class BluetoothDetailsConfigurableFragmentTest {
             whenever(repository.getDeviceSettingsConfig(cachedDevice))
                 .thenReturn(
                     DeviceSettingConfigModel(
-                        listOf(
-                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
-                                1,
-                                false,
-                                "key2",
+                        DeviceSettingLayout(
+                            listOf(
+                                DeviceSettingConfigNodeModel.Item.BuiltinItem.CommonBuiltinItem(
+                                    1,
+                                    false,
+                                    "key2",
+                                )
                             )
                         ),
-                        listOf(),
+                        DeviceSettingLayout(),
                         null,
                     )
                 )
@@ -198,19 +203,24 @@ class BluetoothDetailsConfigurableFragmentTest {
             whenever(repository.getDeviceSettingsConfig(cachedDevice))
                 .thenReturn(
                     DeviceSettingConfigModel(
-                        listOf(
-                            DeviceSettingConfigItemModel.AppProvidedItem(
-                                DeviceSettingId.DEVICE_SETTING_ID_ANC,
-                                highlighted = false,
-                            ),
-                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
-                                1,
-                                false,
-                                "key2",
-                            ),
-                            DeviceSettingConfigItemModel.AppProvidedItem(456, highlighted = false),
+                        DeviceSettingLayout(
+                            listOf(
+                                DeviceSettingConfigNodeModel.Item.AppProvidedItem(
+                                    DeviceSettingId.DEVICE_SETTING_ID_ANC,
+                                    highlighted = false,
+                                ),
+                                DeviceSettingConfigNodeModel.Item.BuiltinItem.CommonBuiltinItem(
+                                    1,
+                                    false,
+                                    "key2",
+                                ),
+                                DeviceSettingConfigNodeModel.Item.AppProvidedItem(
+                                    456,
+                                    highlighted = false,
+                                ),
+                            )
                         ),
-                        listOf(),
+                        DeviceSettingLayout(),
                         null,
                     )
                 )
@@ -273,10 +283,15 @@ class BluetoothDetailsConfigurableFragmentTest {
             whenever(repository.getDeviceSettingsConfig(cachedDevice))
                 .thenReturn(
                     DeviceSettingConfigModel(
-                        listOf(
-                            DeviceSettingConfigItemModel.AppProvidedItem(456, highlighted = true)
+                        DeviceSettingLayout(
+                            listOf(
+                                DeviceSettingConfigNodeModel.Item.AppProvidedItem(
+                                    456,
+                                    highlighted = true,
+                                )
+                            )
                         ),
-                        listOf(),
+                        DeviceSettingLayout(),
                         null,
                     )
                 )
@@ -311,17 +326,18 @@ class BluetoothDetailsConfigurableFragmentTest {
                 whenever(repository.getDeviceSettingsConfig(cachedDevice))
                     .thenReturn(
                         DeviceSettingConfigModel(
-                            listOf(
-                                DeviceSettingConfigItemModel.AppProvidedItem(
-                                    456,
-                                    highlighted = false,
+                            DeviceSettingLayout(
+                                listOf(
+                                    DeviceSettingConfigNodeModel.Item.AppProvidedItem(
+                                        456,
+                                        highlighted = false,
+                                    )
                                 )
                             ),
-                            listOf(),
+                            DeviceSettingLayout(),
                             null,
                         )
                     )
-                val intent = Intent("test_intent")
                 whenever(repository.getDeviceSetting(cachedDevice, 456))
                     .thenReturn(
                         flowOf(
@@ -350,7 +366,7 @@ class BluetoothDetailsConfigurableFragmentTest {
                 runCurrent()
 
                 assertThat(getDisplayedKeys()).containsExactly("DEVICE_SETTING_456")
-                assertThat((getDisplayedPreferences()[0] as PreferenceGroup).getPreference(0))
+                assertThat(getDisplayedPreferences()[0])
                     .isInstanceOf(SegmentedButtonPreference::class.java)
             }
         }
@@ -362,13 +378,15 @@ class BluetoothDetailsConfigurableFragmentTest {
                 whenever(repository.getDeviceSettingsConfig(cachedDevice))
                     .thenReturn(
                         DeviceSettingConfigModel(
-                            listOf(
-                                DeviceSettingConfigItemModel.AppProvidedItem(
-                                    456,
-                                    highlighted = false,
+                            DeviceSettingLayout(
+                                listOf(
+                                    DeviceSettingConfigNodeModel.Item.AppProvidedItem(
+                                        456,
+                                        highlighted = false,
+                                    )
                                 )
                             ),
-                            listOf(),
+                            DeviceSettingLayout(),
                             null,
                         )
                     )
@@ -411,17 +429,18 @@ class BluetoothDetailsConfigurableFragmentTest {
                 whenever(repository.getDeviceSettingsConfig(cachedDevice))
                     .thenReturn(
                         DeviceSettingConfigModel(
-                            listOf(
-                                DeviceSettingConfigItemModel.AppProvidedItem(
-                                    456,
-                                    highlighted = false,
+                            DeviceSettingLayout(
+                                listOf(
+                                    DeviceSettingConfigNodeModel.Item.AppProvidedItem(
+                                        456,
+                                        highlighted = false,
+                                    )
                                 )
                             ),
-                            listOf(),
+                            DeviceSettingLayout(),
                             null,
                         )
                     )
-                val intent = Intent("test_intent")
                 var updatedState: DeviceSettingStateModel.ActionSwitchPreferenceState? = null
                 whenever(repository.getDeviceSetting(cachedDevice, 456))
                     .thenReturn(
@@ -459,6 +478,49 @@ class BluetoothDetailsConfigurableFragmentTest {
             }
         }
 
+    @Test
+    fun setPreferenceDisplayOrderToMainFragment_banner_useBannerPreference() = buildFragment {
+        testScope.runTest {
+            whenever(repository.getDeviceSettingsConfig(cachedDevice))
+                .thenReturn(
+                    DeviceSettingConfigModel(
+                        DeviceSettingLayout(
+                            listOf(
+                                DeviceSettingConfigNodeModel.Item.AppProvidedItem(
+                                    456,
+                                    highlighted = false,
+                                )
+                            )
+                        ),
+                        DeviceSettingLayout(),
+                        null,
+                    )
+                )
+            val intent = Intent("test_intent")
+            whenever(repository.getDeviceSetting(cachedDevice, 456))
+                .thenReturn(
+                    flowOf(
+                        DeviceSettingModel.BannerPreference(
+                            cachedDevice = cachedDevice,
+                            id = 456,
+                            title = "title",
+                            message = "message",
+                            icon = null,
+                            positiveButton = null,
+                            negativeButton = null,
+                        )
+                    )
+                )
+
+            fragment.requestUpdateLayout(FragmentTypeModel.DeviceDetailsMainFragment)
+            runCurrent()
+
+            assertThat(getDisplayedKeys()).containsExactly("DEVICE_SETTING_456")
+            assertThat(getDisplayedPreferences()[0])
+                .isInstanceOf(BannerMessagePreference::class.java)
+        }
+    }
+
     private fun buildFragment(address: String? = DEVICE_ADDRESS, r: (() -> Unit)) {
         ActivityScenario.launch(EmptyFragmentActivity::class.java).use { activityScenario ->
             activityScenario.onActivity { activity: EmptyFragmentActivity ->
@@ -481,7 +543,9 @@ class BluetoothDetailsConfigurableFragmentTest {
         for (i in 0..<container.preferenceCount) {
             if (container.getPreference(i).isVisible) {
                 val pref = container.getPreference(i)
-                if (pref.key.startsWith("CATEGORY_STARTS_WITH_")) {
+                if (
+                    pref.key.startsWith("CATEGORY_STARTS_WITH_") || pref is ChainedPreferenceGroup
+                ) {
                     prefs.addAll(getDisplayedPreferences(pref as PreferenceGroup))
                 } else {
                     prefs.add(pref)

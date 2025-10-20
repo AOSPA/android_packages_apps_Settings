@@ -130,9 +130,11 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         if (imeiList.isEmpty()) {
             return "";
         }
-        String imei = imeiList.get(simSlot);
-        if (TextUtils.isEmpty(imei)) {
-            return "";
+        String imei = "";
+        if (simSlot >= imeiList.size()) {
+            imei = imeiList.getFirst();
+        } else {
+            imei = imeiList.get(simSlot);
         }
         return imei;
     }

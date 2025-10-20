@@ -23,6 +23,7 @@ import android.telephony.TelephonyManager
 import android.telephony.euicc.EuiccManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -103,6 +104,11 @@ class SimEidPreferenceTest {
     @Test
     fun getSummary_returnEid() {
         assertThat(preference.getSummary(context)).isEqualTo(EID)
+    }
+
+    @Test
+    fun getTitle_returnEid() {
+        assertThat(preference.getTitle(context)).isEqualTo(context.getString(R.string.status_eid))
     }
 
     companion object {

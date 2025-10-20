@@ -19,12 +19,13 @@ package com.android.settings.accessibility;
 import android.app.settings.SettingsEnums;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 /** Settings fragment containing captioning properties. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CaptioningPropertiesFragment extends BaseSupportFragment {
+public class CaptioningPropertiesFragment extends DashboardFragment {
 
     private static final String TAG = "CaptioningPropertiesFragment";
 

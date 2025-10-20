@@ -16,16 +16,27 @@
 
 package com.android.settings.connecteddevice.display
 
+import android.annotation.SuppressLint
+import android.app.ActivityManager
+import android.app.ActivityManager.LOCK_TASK_MODE_LOCKED
+import android.app.ActivityTaskManager
 import android.app.Application
+import android.app.TaskStackListener
+import android.app.admin.DevicePolicyIdentifiers
+import android.app.admin.DevicePolicyManager
+import android.app.admin.EnforcingAdmin
 import android.database.ContentObserver
+import android.os.UserHandle
 import android.provider.Settings
 import android.provider.Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY
 import android.view.Display.DEFAULT_DISPLAY
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 /** Centralized data source to provide display updates for display preference fragments */
 class DisplayPreferenceViewModel
@@ -34,23 +45,31 @@ constructor(
     application: Application,
     val injector: ConnectedDisplayInjector =
         ConnectedDisplayInjector(application.applicationContext),
+    private val activityManager: ActivityManager =
+        application.applicationContext.getSystemService(ActivityManager::class.java),
+    private val activityTaskManager: ActivityTaskManager =
+        application.applicationContext.getSystemService(ActivityTaskManager::class.java),
+    private val devicePolicyManager: DevicePolicyManager =
+        application.applicationContext.getSystemService(DevicePolicyManager::class.java),
 ) : AndroidViewModel(application) {
 
+    data class LockTaskPolicyInfo(
+        val lockTaskMode: Int = -1,
+        val enforcingAdmin: EnforcingAdmin? = null,
+    )
+
     data class DisplayUiState(
-        val enabledDisplays: Map<Int, DisplayDevice>,
-        val selectedDisplayId: Int,
-        val isMirroring: Boolean,
-        val includeDefaultDisplayInTopology: Boolean,
+        val enabledDisplays: Map<Int, DisplayDeviceAdditionalInfo> = emptyMap(),
+        val selectedDisplayId: Int = -1,
+        val isMirroring: Boolean = false,
+        val includeDefaultDisplayInTopology: Boolean = false,
+        val showIncludeDefaultDisplayInTopologyPref: Boolean = false,
+        val lockTaskPolicyInfo: LockTaskPolicyInfo = LockTaskPolicyInfo(),
     )
 
     private val appContext = application.applicationContext
-    private val selectedDisplayId = MutableLiveData<Int>()
-    private val enabledDisplays = MutableLiveData<Map<Int, DisplayDevice>>()
-    private val isMirroring = MutableLiveData<Boolean>()
-    private val includeDefaultDisplayInTopology = MutableLiveData<Boolean>()
-
-    private val uiStateMediator = MediatorLiveData<DisplayUiState>()
-    val uiState: LiveData<DisplayUiState> = uiStateMediator
+    private val _uiState = MutableLiveData(DisplayUiState())
+    val uiState: LiveData<DisplayUiState> = _uiState
 
     private val displayListener =
         object : ExternalDisplaySettingsConfiguration.DisplayListener() {
@@ -75,66 +94,86 @@ constructor(
             }
         }
 
-    init {
-        val updateMediator = {
-            val displays = enabledDisplays.value ?: emptyMap()
-            val selectedId = selectedDisplayId.value ?: getDefaultDisplayId()
-            val mirroring = isMirroring.value ?: isDisplayInMirroringMode(appContext)
-            val includeDefaultDisplayInTopology =
-                includeDefaultDisplayInTopology.value ?: isIncludeDefaultDisplayInTopology()
-            uiStateMediator.value =
-                DisplayUiState(displays, selectedId, mirroring, includeDefaultDisplayInTopology)
+    private val lockTaskModeListener =
+        object : TaskStackListener() {
+            override fun onLockTaskModeChanged(mode: Int) {
+                // Callback might be invoked from non-main thread
+                injector.handler.post { updateLockTaskMode(mode) }
+            }
         }
-        uiStateMediator.addSource(enabledDisplays) { updateMediator() }
-        uiStateMediator.addSource(selectedDisplayId) { updateMediator() }
-        uiStateMediator.addSource(isMirroring) { updateMediator() }
-        uiStateMediator.addSource(includeDefaultDisplayInTopology) { updateMediator() }
 
+    init {
         injector.registerDisplayListener(displayListener)
         registerMirrorModeObserver()
         registerIncludeDefaultDisplayInTopologyObserver()
+        activityTaskManager.registerTaskStackListener(lockTaskModeListener)
 
-        updateSelectedDisplay(getDefaultDisplayId())
-        updateEnabledDisplays()
+        // Wait synchronously for the first load
+        viewModelScope.launch { updateEnabledDisplays().join() }
         updateMirroringState()
         updateIncludeDefaultDisplayInTopology()
+        updateLockTaskMode(activityManager.getLockTaskModeState())
     }
 
     override fun onCleared() {
         super.onCleared()
-        injector.unregisterDisplayListener(displayListener)
+        activityTaskManager.unregisterTaskStackListener(lockTaskModeListener)
+        appContext.contentResolver.unregisterContentObserver(
+            includeDefaultDisplayInTopologyObserver
+        )
         appContext.contentResolver.unregisterContentObserver(mirrorModeObserver)
+        injector.unregisterDisplayListener(displayListener)
     }
 
     fun updateSelectedDisplay(newDisplayId: Int) {
-        if (selectedDisplayId.value != newDisplayId) {
-            selectedDisplayId.value = newDisplayId
+        if (_uiState.value?.selectedDisplayId != newDisplayId) {
+            updateState { it.copy(selectedDisplayId = newDisplayId) }
         }
     }
 
-    fun updateEnabledDisplays() {
-        val enabledDisplaysMap =
-            injector
-                .getDisplays()
-                .filter {
-                    it.isEnabled == DisplayIsEnabled.YES &&
-                        (it.id == DEFAULT_DISPLAY || it.isConnectedDisplay)
-                }
-                .associateBy { it.id }
-        enabledDisplays.value = enabledDisplaysMap
+    fun updateEnabledDisplays(): Job {
+        return viewModelScope.launch {
+            // getDisplaysWithAdditionalInfo() runs on bg thread as it will do multiple binder calls
+            val enabledDisplaysMap =
+                injector
+                    .getDisplaysWithAdditionalInfo()
+                    .filter {
+                        it.isEnabled == DisplayIsEnabled.YES &&
+                            (it.id == DEFAULT_DISPLAY || it.isConnectedDisplay)
+                    }
+                    .associateBy { it.id }
 
-        val currentSelectedId = selectedDisplayId.value
-        if (currentSelectedId == null || !enabledDisplaysMap.contains(currentSelectedId)) {
-            updateSelectedDisplay(getDefaultDisplayId())
+            updateState { currentState ->
+                val selectedId =
+                    if (enabledDisplaysMap.contains(currentState.selectedDisplayId)) {
+                        currentState.selectedDisplayId
+                    } else {
+                        // If the currently selected display is no longer available, reset to
+                        // default.
+                        getDefaultDisplayId()
+                    }
+                currentState.copy(
+                    enabledDisplays = enabledDisplaysMap,
+                    selectedDisplayId = selectedId,
+                )
+            }
         }
     }
 
     private fun updateMirroringState() {
         // This doesn't need to trigger manual viewmodel updates for enabled displays as Display
-        // and/or DisplayTopology callback will eventually be called following mirroring update
-        val newMirroringState = isDisplayInMirroringMode(appContext)
-        if (isMirroring.value != newMirroringState) {
-            isMirroring.value = newMirroringState
+        // callback will eventually be called following mirroring update
+        updateState {
+            val newMirroringState =
+                isDisplayInMirroringState(
+                    isDisplayInMirroringMode(appContext),
+                    it.lockTaskPolicyInfo.lockTaskMode,
+                )
+            it.copy(
+                isMirroring = newMirroringState,
+                showIncludeDefaultDisplayInTopologyPref =
+                    shouldShowIncludeDefaultDisplayInTopologyPref(newMirroringState),
+            )
         }
     }
 
@@ -148,8 +187,8 @@ constructor(
 
     private fun updateIncludeDefaultDisplayInTopology() {
         val newState = isIncludeDefaultDisplayInTopology()
-        if (includeDefaultDisplayInTopology.value != newState) {
-            includeDefaultDisplayInTopology.value = newState
+        if (_uiState.value?.includeDefaultDisplayInTopology != newState) {
+            updateState { it.copy(includeDefaultDisplayInTopology = newState) }
         }
     }
 
@@ -161,6 +200,30 @@ constructor(
         )
     }
 
+    @SuppressLint("MissingPermission")
+    private fun updateLockTaskMode(mode: Int) {
+        if (_uiState.value?.lockTaskPolicyInfo?.lockTaskMode != mode) {
+            // This could be dispatched to bg thread, but given how infrequent lockTaskMode
+            // change happens, it's fine to run this on main thread to not overcomplicate code
+            val enforcingAdmin =
+                devicePolicyManager
+                    .getEnforcingAdminsForPolicy(
+                        DevicePolicyIdentifiers.LOCK_TASK_POLICY,
+                        UserHandle.myUserId(),
+                    )
+                    .getMostImportantEnforcingAdmin()
+            updateState {
+                val newMirroringState = isDisplayInMirroringState(it.isMirroring, mode)
+                it.copy(
+                    isMirroring = newMirroringState,
+                    lockTaskPolicyInfo = LockTaskPolicyInfo(mode, enforcingAdmin),
+                    showIncludeDefaultDisplayInTopologyPref =
+                        shouldShowIncludeDefaultDisplayInTopologyPref(newMirroringState),
+                )
+            }
+        }
+    }
+
     private fun isIncludeDefaultDisplayInTopology() =
         Settings.Secure.getInt(
             appContext.getContentResolver(),
@@ -168,7 +231,26 @@ constructor(
             0,
         ) != 0
 
+    private fun shouldShowIncludeDefaultDisplayInTopologyPref(isMirroring: Boolean) =
+        !isMirroring &&
+            injector.isDefaultDisplayInTopologyFlagEnabled() &&
+            injector.isProjectedModeEnabled()
+
+    /**
+     * This is different from the actual [Settings.Secure.MIRROR_BUILT_IN_DISPLAY] value
+     *
+     * When [lockTaskMode] is set to locked, Display is set to mirroring mode, but Settings value is
+     * not changed
+     */
+    private fun isDisplayInMirroringState(isMirroring: Boolean, lockTaskMode: Int) =
+        isMirroring || lockTaskMode == LOCK_TASK_MODE_LOCKED
+
     private fun getDefaultDisplayId(): Int {
         return injector.displayTopology?.primaryDisplayId ?: DEFAULT_DISPLAY
+    }
+
+    private fun updateState(updateAction: (DisplayUiState) -> DisplayUiState) {
+        val currentState = _uiState.value ?: DisplayUiState()
+        _uiState.value = updateAction(currentState)
     }
 }

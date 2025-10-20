@@ -24,7 +24,9 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -34,6 +36,8 @@ import android.media.MediaRoute2ProviderService;
 import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
 import android.net.Uri;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.slices.ShadowSliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
@@ -91,7 +95,7 @@ public class MediaDeviceUpdateWorkerTest {
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, URI);
         mMediaDeviceUpdateWorker.mManager = mock(MediaRouter2Manager.class);
         mResolver = mock(ContentResolver.class);
-        mShadowApplication = ShadowApplication.getInstance();
+        mShadowApplication = shadowOf((Application) ApplicationProvider.getApplicationContext());
         mAudioManager = mContext.getSystemService(AudioManager.class);
 
         doReturn(mResolver).when(mContext).getContentResolver();

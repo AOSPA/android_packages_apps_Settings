@@ -68,13 +68,11 @@ open class SoundScreen : PreferenceScreenMixin, PreferenceIconProvider {
                 +MediaVolumePreference(audioHelper) order -180
                 +CallVolumePreference(audioHelper) order -170
                 +SeparateRingVolumePreference(audioHelper) order -155
-                if (Flags.catalystSoundScreen25q3()) {
-                    +NotificationVolumePreference(audioHelper) order -150
-                    +AlarmVolumePreference(audioHelper) order -140
-                }
+                +NotificationVolumePreference(audioHelper) order -150
+                +AlarmVolumePreference(audioHelper) order -140
             }
             +PreferenceCategory(AUDIO_CATEGORY, R.string.sound_audio_category_title) order -120 += {
-                if (Flags.catalystMediaControls()) +MediaControlsScreen.KEY order -100
+                +MediaControlsScreen.KEY order -100
             }
             +PreferenceCategory(
                 SOUNDS_AND_VIBRATIONS_CATEGORY,

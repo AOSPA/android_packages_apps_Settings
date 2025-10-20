@@ -21,8 +21,8 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.overlay.FeatureFactory;
@@ -39,7 +39,7 @@ public class BluetoothDetailsExtraOptionsController extends BluetoothDetailsCont
     private static final String KEY_BLUETOOTH_EXTRA_OPTIONS = "bt_extra_options";
 
     @VisibleForTesting @Nullable
-    PreferenceCategory mOptionsContainer;
+    PreferenceGroup mOptionsContainer;
     @Nullable PreferenceScreen mPreferenceScreen;
 
     public BluetoothDetailsExtraOptionsController(

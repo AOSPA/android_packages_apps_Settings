@@ -2,6 +2,13 @@ package: "com.android.settings.flags"
 container: "system_ext"
 
 flag {
+    name: "hide_lskf_skip_during_suw"
+    namespace: "android_settings"
+    description: "Feature flag for hiding skip buttons on lskf screens during SetupWizard."
+    bug: "396519167"
+}
+
+flag {
     name: "hide_user_list_for_non_admins"
     namespace: "desktop_users_and_accounts"
     description: "Controls whether to hide the user list in Settings for non-admins."
@@ -9,8 +16,32 @@ flag {
 }
 
 flag {
+    name: "pattern_input_click_support"
+    namespace: "android_settings"
+    description: "Feature flag for click support in pattern input."
+    bug: "403345215"
+}
+
+flag {
+    name: "setupfingerprintenrollfindsensor_skipdialog_themefix"
+    namespace: "android_settings"
+    description: "Bugfix flag for theme fix in SetupFingerprintEnrollFindSensor SkipDialog."
+    bug: "432304017"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
+}
+
+flag {
     name: "show_user_details_settings_for_self"
     namespace: "desktop_users_and_accounts"
     description: " Show the user details settings for own account."
     bug: "425579387"
+}
+
+flag {
+    name: "show_add_users_from_signin_toggle"
+    namespace: "desktop_users_and_accounts"
+    description: "Controls whether to show the 'add users from the sign-in screen' toggle in Settings."
+    bug: "391862614"
 }

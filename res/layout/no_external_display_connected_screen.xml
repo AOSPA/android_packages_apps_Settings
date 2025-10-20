@@ -32,8 +32,9 @@
         android:fontFamily="google-sans-flex"
         android:fontWeight="500"
         android:lineHeight="28sp"
+        android:textAlignment="center"
         android:text="@string/external_display_no_display_connected_screen_title"
-        android:textColor="@androidprv:color/materialColorOnSurface"
+        android:textColor="@color/materialColorOnSurface"
         android:textSize="22sp" />
 
     <TextView
@@ -47,7 +48,7 @@
         android:lineHeight="24sp"
         android:text="@string/external_display_no_display_connected_screen_summary"
         android:textAlignment="center"
-        android:textColor="@androidprv:color/materialColorOnSurfaceVariant"
+        android:textColor="@color/materialColorOnSurfaceVariant"
         android:textSize="16sp" />
 
 </LinearLayout>

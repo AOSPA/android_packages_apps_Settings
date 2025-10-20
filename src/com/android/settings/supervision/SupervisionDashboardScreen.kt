@@ -48,26 +48,32 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     private var supervisionManager: SupervisionManager? = null
     private var lifeCycleContext: PreferenceLifecycleContext? = null
 
-    private val supervisionListener = object : SupervisionManager.SupervisionListener() {
-        override fun onSupervisionEnabled(userId: Int) {
-            refreshPreferences()
-        }
+    private val supervisionListener =
+        object : SupervisionManager.SupervisionListener() {
+            override fun onSupervisionEnabled(userId: Int) {
+                refreshPreferences()
+            }
 
-        override fun onSupervisionDisabled(userId: Int) {
-            refreshPreferences()
-        }
+            override fun onSupervisionDisabled(userId: Int) {
+                refreshPreferences()
+            }
 
-        private fun refreshPreferences() {
-            lifeCycleContext?.notifyPreferenceChange(KEY)
-            lifeCycleContext?.notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
-            lifeCycleContext?.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+            private fun refreshPreferences() {
+                lifeCycleContext?.notifyPreferenceChange(KEY)
+                lifeCycleContext?.notifyPreferenceChange(SupervisionMainSwitchPreference.KEY)
+                lifeCycleContext?.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+                if (Flags.enableSupervisionSettingsUiUpdates()) {
+                    lifeCycleContext?.notifyPreferenceChange(SupervisionSetUpPinPreference.KEY)
+                }
+            }
         }
-    }
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        this.lifeCycleContext = context
-        supervisionManager = context.getSystemService(SupervisionManager::class.java)
-        supervisionManager?.registerSupervisionListener(supervisionListener)
+        if (isContainer(context)) {
+            this.lifeCycleContext = context
+            supervisionManager = context.getSystemService(SupervisionManager::class.java)
+            supervisionManager?.registerSupervisionListener(supervisionListener)
+        }
     }
 
     override fun isFlagEnabled(context: Context) = Flags.enableSupervisionSettingsScreen()
@@ -84,6 +90,9 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     override val icon: Int
         get() = R.drawable.ic_account_child_invert
 
+    override val indexable
+        get() = true
+
     override val keywords: Int
         get() = R.string.keywords_supervision_settings
 
@@ -95,24 +104,34 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
         get() = R.string.menu_key_supervision
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
-        supervisionClient?.close()
-        supervisionManager?.unregisterSupervisionListener(supervisionListener)
-        this.lifeCycleContext = null
-        this.supervisionManager = null
+        if (isContainer(context)) {
+            supervisionClient?.close()
+            supervisionManager?.unregisterSupervisionListener(supervisionListener)
+            this.lifeCycleContext = null
+            this.supervisionManager = null
+        }
     }
-
-    override fun isIndexable(context: Context) = true
 
     override fun hasCompleteHierarchy() = true
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             val supervisionClient = getSupervisionClient(context)
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                +SupervisionRecoveryBannerPreference() order -250
+            }
             +SupervisionMainSwitchPreference(context, supervisionClient) order -200
             +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
+                +SupervisionAppStoreFiltersScreen.KEY order 50
                 +SupervisionWebContentFiltersScreen.KEY order 100
             }
+            if (Flags.enableSupervisionSettingsUiUpdates()) {
+                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 0
+            }
             +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
+                if (Flags.enableSupervisionSettingsUiUpdates()) {
+                    +SupervisionSetUpPinPreference() order 5
+                }
                 +SupervisionPinManagementScreen.KEY order 10
             }
             +UntitledPreferenceCategoryMetadata("footer_group") order 300 += {
@@ -130,5 +149,6 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
     companion object {
         const val KEY = "top_level_supervision"
         internal const val SUPERVISION_DYNAMIC_GROUP_1 = "supervision_features_group_1"
+        internal const val SUPERVISION_DYNAMIC_GROUP_2 = "supervision_features_group_2"
     }
 }

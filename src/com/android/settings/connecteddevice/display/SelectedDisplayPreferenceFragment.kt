@@ -16,7 +16,11 @@
 
 package com.android.settings.connecteddevice.display
 
+import android.app.ActivityManager.LOCK_TASK_MODE_LOCKED
+import android.app.admin.EnforcingAdmin
 import android.app.settings.SettingsEnums
+import android.hardware.display.DisplayManager
+import android.icu.text.NumberFormat
 import android.os.Bundle
 import android.provider.Settings
 import android.provider.Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY
@@ -28,29 +32,39 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.SwitchPreferenceCompat
 import com.android.settings.R
+import com.android.settings.RestrictedListPreference
 import com.android.settings.SettingsPreferenceFragmentBase
 import com.android.settings.Utils.createAccessibleSequence
 import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL
 import com.android.settings.core.SubSettingLauncher
+import com.android.settings.core.instrumentation.SettingsStatsLog
+import java.util.Locale
 
 /**
  * Fragment containing list of preferences for a single display, which gets updated dynamically,
  * based on the currently selected display
+ *
+ * Keep [parentViewModel] param as nullable since config changes could only re-create Fragment with
+ * empty constructor, even though [parentViewModel] will always be passed
  */
 open class SelectedDisplayPreferenceFragment(
-    private val testViewModel: DisplayPreferenceViewModel? = null
+    private val parentViewModel: DisplayPreferenceViewModel? = null
 ) : SettingsPreferenceFragmentBase() {
 
     private lateinit var viewModel: DisplayPreferenceViewModel
 
     private lateinit var selectedDisplayPreference: PreferenceCategory
     private lateinit var rotationEntries: Array<String>
+    private lateinit var connectionPreferenceEntries: Array<String>
+    // Late init - Only updated once in onCreate
+    private var shouldShowDisplayConnectionPref: Boolean = false
 
     private val prefComponents = mutableListOf<PrefComponent>()
+    private val numberFormatter: NumberFormat = NumberFormat.getNumberInstance(Locale.getDefault())
 
     override fun getMetricsCategory(): Int {
-        return SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY
+        return SettingsEnums.SETTINGS_EXTERNAL_DISPLAY_CATEGORY
     }
 
     override fun getHelpResource(): Int {
@@ -88,14 +102,20 @@ open class SelectedDisplayPreferenceFragment(
 
     override fun onCreateCallback(icicle: Bundle?) {
         addPreferencesFromResource(R.xml.external_display_settings)
-        if (testViewModel != null) {
-            // Test-only path
-            viewModel = testViewModel
+        if (parentViewModel != null) {
+            viewModel = parentViewModel
         } else {
+            // ViewModel will be passed from parent fragment, but when fragment is recreated from
+            // config changes, constructor param will be empty, and has to re-fetch the ViewModel
+            // here
             viewModel =
                 ViewModelProvider(requireParentFragment())
                     .get(DisplayPreferenceViewModel::class.java)
         }
+        shouldShowDisplayConnectionPref =
+            DesktopExperienceFlags.ENABLE_UPDATED_DISPLAY_CONNECTION_DIALOG.isTrue() &&
+                viewModel.injector.isProjectedModeEnabled()
+        numberFormatter.isGroupingUsed = false
         setup()
     }
 
@@ -104,7 +124,8 @@ open class SelectedDisplayPreferenceFragment(
     }
 
     override fun onStopCallback() {
-        // No-op, viewModel observer should be managed by view lifecycle
+        // viewModel observer cleanup should be managed by view lifecycle
+        ExternalDisplaySettingsLoggerStore.removeAllLoggers()
     }
 
     private fun setup() {
@@ -134,6 +155,14 @@ open class SelectedDisplayPreferenceFragment(
         )
         prefComponents.add(PrefComponent(resolutionPreference(), PrefInfo.DISPLAY_RESOLUTION))
         prefComponents.add(PrefComponent(rotationPreference(), PrefInfo.DISPLAY_ROTATION))
+        if (shouldShowDisplayConnectionPref) {
+            // Since `shouldShowDisplayConnectionPref` is static until reboot, instead of updating
+            // visibility like the other preferences, just skip setting up connection pref
+            // altogether
+            prefComponents.add(
+                PrefComponent(connectionPreference(), PrefInfo.DISPLAY_CONNECTION_PREFERENCE)
+            )
+        }
 
         // Add all pref components
         prefComponents.forEach {
@@ -146,11 +175,15 @@ open class SelectedDisplayPreferenceFragment(
         }
     }
 
+    /**
+     * Note that update will be called on every tab switch as well. So all the operations to update
+     * UI should be fast and not fetching any new data (use only what's available from
+     * [DisplayPreferenceViewModel.DisplayUiState])
+     */
     private fun update(state: DisplayPreferenceViewModel.DisplayUiState) {
         val displayId = state.selectedDisplayId
         val enabledDisplays = state.enabledDisplays
         val isMirroring = state.isMirroring
-        val includeDefaultDisplayInTopology = state.includeDefaultDisplayInTopology
 
         val display = enabledDisplays[displayId]
         // By design, if there's one or more enabled connected displays, `displayId` should always
@@ -170,13 +203,10 @@ open class SelectedDisplayPreferenceFragment(
         if (displayType == DisplayType.BUILTIN_DISPLAY) {
             selectedDisplayPreference
                 .findPreference<SwitchPreferenceCompat>(PrefInfo.INCLUDE_DEFAULT_DISPLAY.key)
-                ?.let {
-                    updateIncludeDefaultDisplayInTopologyPreference(
-                        it,
-                        isMirroring,
-                        includeDefaultDisplayInTopology,
-                    )
-                }
+                ?.let { updateIncludeDefaultDisplayInTopologyPreference(it, state) }
+            selectedDisplayPreference
+                .findPreference<MirrorPreference>(PrefInfo.DISPLAY_MIRRORING.key)
+                ?.let { updateMirroringPreference(it, isMirroring, state.lockTaskPolicyInfo) }
         } else {
             selectedDisplayPreference
                 .findPreference<ExternalDisplaySizePreference>(
@@ -189,6 +219,13 @@ open class SelectedDisplayPreferenceFragment(
             selectedDisplayPreference
                 .findPreference<ListPreference>(PrefInfo.DISPLAY_ROTATION.key)
                 ?.let { updateRotationPreference(it, display) }
+            if (shouldShowDisplayConnectionPref) {
+                selectedDisplayPreference
+                    .findPreference<RestrictedListPreference>(
+                        PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key
+                    )
+                    ?.let { updateConnectionPreference(it, display, state.lockTaskPolicyInfo) }
+            }
         }
     }
 
@@ -201,6 +238,22 @@ open class SelectedDisplayPreferenceFragment(
                 setTitle(PrefInfo.DISPLAY_MIRRORING.titleResource)
                 key = PrefInfo.DISPLAY_MIRRORING.key
             }
+    }
+
+    private fun updateMirroringPreference(
+        preference: MirrorPreference,
+        isMirroring: Boolean,
+        lockTaskPolicyInfo: DisplayPreferenceViewModel.LockTaskPolicyInfo,
+    ) {
+        preference.isChecked = isMirroring
+        if (lockTaskPolicyInfo.lockTaskMode == LOCK_TASK_MODE_LOCKED) {
+            preference.setDisabledByAdmin(lockTaskPolicyInfo.enforcingAdmin)
+        } else {
+            preference.setDisabledByAdmin(null as EnforcingAdmin?)
+            // Reset the pref state when it was previously disabled by lock task policy
+            preference.setEnabled(true)
+            preference.setSummary("")
+        }
     }
 
     private fun includeDefaultDisplayInTopologyPreference(): SwitchPreferenceCompat {
@@ -225,16 +278,11 @@ open class SelectedDisplayPreferenceFragment(
 
     private fun updateIncludeDefaultDisplayInTopologyPreference(
         preference: SwitchPreferenceCompat,
-        isMirroring: Boolean,
-        includeDefaultDisplayInTopology: Boolean,
+        state: DisplayPreferenceViewModel.DisplayUiState,
     ) {
-        val showPreference =
-            !isMirroring &&
-                viewModel.injector.isDefaultDisplayInTopologyFlagEnabled() &&
-                viewModel.injector.isProjectedModeEnabled()
-        if (showPreference) {
+        if (state.showIncludeDefaultDisplayInTopologyPref) {
             preference.setVisible(true)
-            preference.setChecked(includeDefaultDisplayInTopology)
+            preference.setChecked(state.includeDefaultDisplayInTopology)
         } else {
             preference.setVisible(false)
             return
@@ -266,7 +314,7 @@ open class SelectedDisplayPreferenceFragment(
 
     private fun updateExternalDisplayDensityPreference(
         preference: ExternalDisplaySizePreference,
-        display: DisplayDevice,
+        display: DisplayDeviceAdditionalInfo,
         isMirroring: Boolean,
     ) {
         if (isMirroring) {
@@ -297,28 +345,36 @@ open class SelectedDisplayPreferenceFragment(
         }
     }
 
-    private fun updateResolutionPreference(preference: Preference, display: DisplayDevice) {
+    private fun updateResolutionPreference(
+        preference: Preference,
+        display: DisplayDeviceAdditionalInfo,
+    ) {
         val displayMode = display.mode ?: return
-        val width = displayMode.getPhysicalWidth()
-        val height = displayMode.getPhysicalHeight()
+        val width = displayMode.physicalWidth
+        val height = displayMode.physicalHeight
+        val formattedWidth = numberFormatter.format(width)
+        val formattedHeight = numberFormatter.format(height)
+        ExternalDisplaySettingsLoggerStore.getLogger(display.id).updateResolution(width, height)
+
         preference.setSummary(
             createAccessibleSequence(
-                "$width x $height",
-                getResources().getString(R.string.screen_resolution_delimiter_a11y, width, height),
+                "$formattedWidth x $formattedHeight",
+                resources.getString(R.string.screen_resolution_delimiter_a11y, width, height),
             )
         )
     }
 
     private fun rotationPreference(): ListPreference {
+        val context = requireContext()
         rotationEntries =
             arrayOf(
-                requireContext().getString(R.string.external_display_standard_rotation),
-                requireContext().getString(R.string.external_display_rotation_90),
-                requireContext().getString(R.string.external_display_rotation_180),
-                requireContext().getString(R.string.external_display_rotation_270),
+                context.getString(R.string.external_display_standard_rotation),
+                context.getString(R.string.external_display_rotation_90),
+                context.getString(R.string.external_display_rotation_180),
+                context.getString(R.string.external_display_rotation_270),
             )
         val rotationEntryValues = arrayOf("0", "1", "2", "3")
-        return ListPreference(requireContext()).apply {
+        return ListPreference(context).apply {
             setTitle(PrefInfo.DISPLAY_ROTATION.titleResource)
             key = PrefInfo.DISPLAY_ROTATION.key
             setEntries(rotationEntries)
@@ -336,17 +392,94 @@ open class SelectedDisplayPreferenceFragment(
                             return false
                         }
                         setValueIndex(rotation)
+                        val logger = ExternalDisplaySettingsLoggerStore.getLogger(displayId)
+                        logger.updateRotation(rotation * 90)
+                        logger.log(
+                            SettingsStatsLog.EXTERNAL_DISPLAY_SETTINGS_CHANGED__SETTING__ROTATION
+                        )
                         return true
                     }
                 }
         }
     }
 
-    private fun updateRotationPreference(preference: ListPreference, display: DisplayDevice) {
-        val rotation = viewModel.injector.getDisplayUserRotation(display.id)
+    private fun updateRotationPreference(
+        preference: ListPreference,
+        display: DisplayDeviceAdditionalInfo,
+    ) {
+        val rotation = display.rotation
+        ExternalDisplaySettingsLoggerStore.getLogger(display.id).updateRotation(rotation * 90)
         preference.apply {
             setValueIndex(rotation)
             setSummary(rotationEntries[rotation])
+        }
+    }
+
+    private fun connectionPreference(): RestrictedListPreference {
+        val context = requireContext()
+        connectionPreferenceEntries =
+            arrayOf(
+                context.getString(R.string.external_display_connection_preference_show_dialog),
+                context.getString(R.string.external_display_connection_preference_desktop),
+                context.getString(R.string.external_display_connection_preference_mirroring),
+            )
+        // Entry values only accept array of string
+        val connectionEntryValues =
+            arrayOf(
+                DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK.toString(),
+                DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_DESKTOP.toString(),
+                DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR.toString(),
+            )
+        return RestrictedListPreference(context).apply {
+            setTitle(PrefInfo.DISPLAY_CONNECTION_PREFERENCE.titleResource)
+            key = PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key
+            setEntries(connectionPreferenceEntries)
+            setEntryValues(connectionEntryValues)
+            onPreferenceChangeListener =
+                object : Preference.OnPreferenceChangeListener {
+                    override fun onPreferenceChange(
+                        preference: Preference,
+                        newValue: Any?,
+                    ): Boolean {
+                        writePreferenceClickMetric(preference)
+                        val displayId = viewModel.uiState.value?.selectedDisplayId ?: return false
+                        val uniqueDisplayId =
+                            viewModel.uiState.value?.enabledDisplays[displayId]?.uniqueId
+                                ?: return false
+                        val connectionPreference = Integer.parseInt(newValue as String)
+                        viewModel.injector.updateDisplayConnectionPreference(
+                            uniqueDisplayId,
+                            connectionPreference,
+                        )
+                        setValueIndex(connectionPreference)
+                        setSummary(connectionPreferenceEntries[connectionPreference])
+                        return true
+                    }
+                }
+        }
+    }
+
+    private fun updateConnectionPreference(
+        preference: RestrictedListPreference,
+        display: DisplayDeviceAdditionalInfo,
+        lockTaskPolicyInfo: DisplayPreferenceViewModel.LockTaskPolicyInfo,
+    ) {
+        if (lockTaskPolicyInfo.lockTaskMode == LOCK_TASK_MODE_LOCKED) {
+            val connectionPreference = DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_MIRROR
+            preference.apply {
+                setDisabledByAdmin(lockTaskPolicyInfo.enforcingAdmin)
+                setValueIndex(connectionPreference)
+                setSummary(connectionPreferenceEntries[connectionPreference])
+            }
+        } else {
+            val connectionPreference = display.connectionPreference
+            preference.apply {
+                // Reset the pref state when it was previously disabled by lock task policy
+                setDisabledByAdmin(null as EnforcingAdmin?)
+                setEnabled(true)
+                setValueIndex(connectionPreference)
+                setSummary(connectionPreferenceEntries[connectionPreference])
+            }
         }
     }
 
@@ -407,6 +540,12 @@ open class SelectedDisplayPreferenceFragment(
         DISPLAY_ROTATION(
             R.string.external_display_rotation,
             "pref_key_external_display_rotation",
+            DisplayType.EXTERNAL_DISPLAY,
+            ParentPrefCategory.ROOT,
+        ),
+        DISPLAY_CONNECTION_PREFERENCE(
+            R.string.external_display_connection_preference,
+            "pref_key_external_display_connection_preference",
             DisplayType.EXTERNAL_DISPLAY,
             ParentPrefCategory.ROOT,
         ),

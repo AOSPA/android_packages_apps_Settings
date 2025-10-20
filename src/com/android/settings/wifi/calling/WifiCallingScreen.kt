@@ -26,6 +26,8 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository
+import com.android.settings.utils.getSubId
+import com.android.settings.utils.putSubId
 import com.android.settings.wifi.calling.WifiCallingSettingsForSub.EXTRA_SUB_ID
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -43,7 +45,7 @@ import kotlinx.coroutines.flow.merge
 open class WifiCallingScreen(override val arguments: Bundle) :
     PreferenceScreenMixin, PreferenceAvailabilityProvider {
 
-    private val subId = arguments.getInt(EXTRA_SUB_ID, getDefaultSubscriptionId())
+    private val subId = arguments.getSubId(EXTRA_SUB_ID, getDefaultSubscriptionId())
 
     override val key: String
         get() = KEY
@@ -81,7 +83,7 @@ open class WifiCallingScreen(override val arguments: Bundle) :
          */
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
-            fun Int.toArguments() = Bundle(1).also { it.putInt(EXTRA_SUB_ID, this) }
+            fun Int.toArguments() = Bundle(1).also { it.putSubId(EXTRA_SUB_ID, this) }
             // handle backward compatibility with default subscription id
             val defaultSubId = getDefaultSubscriptionId()
             val flow =

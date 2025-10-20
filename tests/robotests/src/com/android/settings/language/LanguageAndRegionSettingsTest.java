@@ -16,8 +16,11 @@
 
 package com.android.settings.language;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE;
+import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_REMOVE_AND_CHANGE_SYSTEM_LOCALE;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_REMOVE_LOCALE;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -35,11 +38,11 @@ import android.os.Bundle;
 import android.os.LocaleList;
 
 import android.app.IActivityManager;
-import android.util.ArrayMap;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.app.LocaleStore;
@@ -50,13 +53,14 @@ import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.widget.OrderMenuPreference;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -68,7 +72,6 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -91,6 +94,8 @@ public class LanguageAndRegionSettingsTest {
     private Intent mIntent = new Intent();
     private List<LocaleStore.LocaleInfo> mLocaleInfoList;
     private LocaleList mLocaleList;
+    private LocaleStore.LocaleInfo mEnLocale;
+    private LocaleStore.LocaleInfo mFrLocale;
 
     @Mock
     private UserPreferredLocalePreferenceController mController;
@@ -102,6 +107,12 @@ public class LanguageAndRegionSettingsTest {
     private IActivityManager mActivityService;
     @Mock
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    @Mock
+    private LanguageAndRegionViewModel mViewModel;
+    @Mock
+    private ViewModelProvider mViewModelProvider;
+    @Captor
+    private ArgumentCaptor<LocaleDialogFragment> mDialogCaptor;
 
     @Before
     public void setUp() throws Exception {
@@ -109,8 +120,14 @@ public class LanguageAndRegionSettingsTest {
         mContext = spy(context);
         mFragment = spy(new LanguageAndRegionSettings());
         when(mFragment.getContext()).thenReturn(mContext);
+        when(mFragment.isAdded()).thenReturn(true);
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         when(mFragment.getActivity()).thenReturn(mActivity);
+
+        // Mock ViewModel
+        when(mViewModelProvider.get(LanguageAndRegionViewModel.class)).thenReturn(mViewModel);
+        ReflectionHelpers.setField(mFragment, "mViewModel", mViewModel);
+
         ReflectionHelpers.setField(mFragment, "mRestrictionsManager",
                 context.getSystemService(Context.RESTRICTIONS_SERVICE));
         ReflectionHelpers.setField(mFragment, "mUserManager",
@@ -135,15 +152,17 @@ public class LanguageAndRegionSettingsTest {
     }
 
     private void setUpLocaleConditions() {
-        mLocaleInfoList = new ArrayList<>();
-        mLocaleInfoList.add(LocaleStore.getLocaleInfo(Locale.forLanguageTag("en-US")));
-        mLocaleInfoList.add(LocaleStore.getLocaleInfo(Locale.forLanguageTag("ak-GH")));
-        mLocaleInfoList.add(LocaleStore.getLocaleInfo(Locale.forLanguageTag("es-US")));
-        final Locale[] newList = new Locale[mLocaleInfoList.size()];
-        for (int i = 0; i < mLocaleInfoList.size(); i++) {
-            final LocaleStore.LocaleInfo li = mLocaleInfoList.get(i);
-            newList[i] = li.getLocale();
-        }
+        mEnLocale = LocaleStore.getLocaleInfo(Locale.forLanguageTag("en-US"));
+        mFrLocale = LocaleStore.getLocaleInfo(Locale.forLanguageTag("fr-FR"));
+        LocaleStore.LocaleInfo akLocale = LocaleStore.getLocaleInfo(
+                Locale.forLanguageTag("ak-GH"));
+        LocaleStore.LocaleInfo esLocale = LocaleStore.getLocaleInfo(
+                Locale.forLanguageTag("es-US"));
+
+        mLocaleInfoList = new ArrayList<>(List.of(mEnLocale, akLocale, esLocale));
+        final Locale[] newList = mLocaleInfoList.stream()
+                .map(LocaleStore.LocaleInfo::getLocale)
+                .toArray(Locale[]::new);
         mLocaleList = new LocaleList(newList);
     }
 
@@ -152,8 +171,7 @@ public class LanguageAndRegionSettingsTest {
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_DIALOG_TYPE, DIALOG_CONFIRM_SYSTEM_DEFAULT);
         bundle.putInt(LocaleDialogFragment.ARG_MENU_ITEM_ID, R.id.move_down);
-        bundle.putSerializable(LocaleDialogFragment.ARG_SELECTED_LOCALE,
-                LocaleStore.getLocaleInfo(Locale.forLanguageTag("en-US")));
+        bundle.putSerializable(LocaleDialogFragment.ARG_SELECTED_LOCALE, mEnLocale);
         mIntent.putExtras(bundle);
         mIntent.putExtra(ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED, true);
         setUpLocaleConditions();
@@ -168,8 +186,7 @@ public class LanguageAndRegionSettingsTest {
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_DIALOG_TYPE, DIALOG_REMOVE_LOCALE);
         bundle.putInt(LocaleDialogFragment.ARG_MENU_ITEM_ID, R.id.move_down);
-        bundle.putSerializable(LocaleDialogFragment.ARG_SELECTED_LOCALE,
-                LocaleStore.getLocaleInfo(Locale.forLanguageTag("en-US")));
+        bundle.putSerializable(LocaleDialogFragment.ARG_SELECTED_LOCALE, mEnLocale);
         mIntent.putExtras(bundle);
         mIntent.putExtra(ARG_SHOW_DIALOG_FOR_NOT_TRANSLATED, false);
         setUpLocaleConditions();
@@ -193,5 +210,97 @@ public class LanguageAndRegionSettingsTest {
 
         verify(mController).doTheUpdate();
         verify(mController).updatePreferences();
+    }
+
+    @Test
+    public void showConfirmDialogByType_removeLocale_showsCorrectDialog() {
+        when(mViewModel.getDefaultAfterChange()).thenReturn(mFrLocale);
+        when(mFragmentTransaction.add(any(LocaleDialogFragment.class), any()))
+                .thenReturn(mFragmentTransaction);
+
+        mFragment.showConfirmDialogByType(DIALOG_REMOVE_LOCALE);
+
+        verify(mFragmentTransaction).add(mDialogCaptor.capture(), eq("dialog_remove_locale"));
+        LocaleDialogFragment dialog = mDialogCaptor.getValue();
+        Bundle args = dialog.getArguments();
+        LocaleDialogFragment.LocaleDialogController controller =
+                dialog.getLocaleDialogController(mContext, dialog, mFragment);
+
+        LocaleDialogFragment.LocaleDialogController.DialogContent content =
+                controller.getDialogContent();
+        String expectedTitle = mContext.getString(R.string.dlg_title_delete_preferred_locale,
+                mFrLocale.getFullNameNative());
+        String expectedMessage = mContext.getString(R.string.dlg_desc_delete_preferred_locale,
+                mFrLocale.getFullNameNative());
+
+        assertThat(args.getInt(LocaleDialogFragment.ARG_DIALOG_TYPE))
+                .isEqualTo(DIALOG_REMOVE_LOCALE);
+        assertThat(args.getSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE))
+                .isEqualTo(mFrLocale);
+        assertThat(content.mTitle).isEqualTo(expectedTitle);
+        assertThat(content.mMessage).isEqualTo(expectedMessage);
+
+    }
+
+    @Test
+    public void showConfirmDialogByType_removeAndChangeSystem_showsCorrectDialog() {
+        when(mViewModel.getDefaultAfterChange()).thenReturn(mFrLocale); // New default
+        when(mViewModel.getSelectedLocaleInfo()).thenReturn(mEnLocale); // Locale to remove
+        when(mFragmentTransaction.add(any(LocaleDialogFragment.class), any()))
+                .thenReturn(mFragmentTransaction);
+
+        mFragment.showConfirmDialogByType(DIALOG_REMOVE_AND_CHANGE_SYSTEM_LOCALE);
+
+        verify(mFragmentTransaction).add(mDialogCaptor.capture(),
+                eq("dialog_remove_and_change_locale"));
+        LocaleDialogFragment dialog = mDialogCaptor.getValue();
+        Bundle args = dialog.getArguments();
+        LocaleDialogFragment.LocaleDialogController.DialogContent content =
+                dialog.getLocaleDialogController(mContext, dialog, mFragment).getDialogContent();
+        String expectedTitle = mContext.getString(R.string.title_change_system_locale,
+                mFrLocale.getFullNameNative());
+        String expectedMessage = mContext.getString(R.string.dlg_desc_delete_preferred_locale,
+                mEnLocale.getFullNameNative());
+
+        assertThat(args.getInt(LocaleDialogFragment.ARG_DIALOG_TYPE))
+                .isEqualTo(DIALOG_REMOVE_AND_CHANGE_SYSTEM_LOCALE);
+        assertThat(args.getSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE))
+                .isEqualTo(mFrLocale);
+        assertThat(args.getSerializable(LocaleDialogFragment.ARG_SELECTED_LOCALE))
+                .isEqualTo(mEnLocale);
+        assertThat(content.mTitle).isEqualTo(expectedTitle);
+        assertThat(content.mMessage).isEqualTo(expectedMessage);
+    }
+
+    @Test
+    public void showConfirmDialogByType_confirmSystemDefault_showsCorrectDialog() {
+        when(mViewModel.getDefaultAfterChange()).thenReturn(mFrLocale); // New default
+        when(mViewModel.getSelectedLocaleInfo()).thenReturn(mFrLocale); // Locale that was moved
+        when(mFragmentTransaction.add(any(LocaleDialogFragment.class), any()))
+                .thenReturn(mFragmentTransaction);
+
+        mFragment.showConfirmDialogByType(DIALOG_CONFIRM_SYSTEM_DEFAULT);
+
+        verify(mFragmentTransaction).add(mDialogCaptor.capture(),
+                eq("dialog_confirm_system_default"));
+        LocaleDialogFragment dialog = mDialogCaptor.getValue();
+        Bundle args = dialog.getArguments();
+        LocaleDialogFragment.LocaleDialogController.DialogContent content =
+                dialog.getLocaleDialogController(mContext, dialog, mFragment).getDialogContent();
+        String expectedTitle = mContext.getString(R.string.title_change_system_locale,
+                mFrLocale.getFullNameNative());
+        String expectedMessage = mContext.getString(
+                R.string.desc_notice_device_locale_and_region_settings_change,
+                mFrLocale.getLocale().getDisplayLanguage(),
+                mFrLocale.getLocale().getDisplayCountry());
+
+        assertThat(args.getInt(LocaleDialogFragment.ARG_DIALOG_TYPE))
+                .isEqualTo(DIALOG_CONFIRM_SYSTEM_DEFAULT);
+        assertThat(args.getSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE))
+                .isEqualTo(mFrLocale);
+        assertThat(args.getSerializable(LocaleDialogFragment.ARG_SELECTED_LOCALE))
+                .isEqualTo(mFrLocale);
+        assertThat(content.mTitle).isEqualTo(expectedTitle);
+        assertThat(content.mMessage).isEqualTo(expectedMessage);
     }
 }

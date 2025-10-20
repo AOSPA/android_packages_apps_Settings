@@ -25,9 +25,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Flags;
 import android.os.UserManager;
-import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -41,8 +39,6 @@ import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public class CredentialsPickerActivityTest {
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-
     @Mock private UserManager mUserManager;
 
     private Context mMockContext;
@@ -77,7 +73,6 @@ public class CredentialsPickerActivityTest {
 
     @Test
     public void testInjectFragmentIntoIntent_privateProfile() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
         Intent intent = new Intent();
 
         // Simulate private profile.

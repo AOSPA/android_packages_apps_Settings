@@ -19,6 +19,7 @@ import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager
 import android.app.role.RoleManager
 import android.app.supervision.SupervisionManager
+import android.app.supervision.SupervisionRecoveryInfo.STATE_VERIFIED
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -193,4 +194,20 @@ fun Context.readSystemSupervisionPackageNameFromResources(): String? {
         Log.e(TAG, "Could not find systemSupervision resource.", e)
         null
     }
+}
+
+/** Checks if there's valid recovery method */
+fun Context.isMissingRecoveryMethod(): Boolean {
+    return !hasAlternativeCredentialConfirmationMethod() && !isPinRecoveryEmailVerified()
+}
+
+/** Checks for alternative authentication methods */
+private fun Context.hasAlternativeCredentialConfirmationMethod(): Boolean {
+    // TODO(b/446025922): add real implementation
+    return false
+}
+
+private fun Context.isPinRecoveryEmailVerified(): Boolean {
+    return getSystemService(SupervisionManager::class.java)?.getSupervisionRecoveryInfo()?.state ==
+        STATE_VERIFIED
 }

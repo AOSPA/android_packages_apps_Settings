@@ -29,6 +29,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.DisplaySizeData;
+import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settingslib.display.DisplayDensityUtils;
 import com.android.settingslib.widget.SliderPreference;
 
@@ -101,9 +102,13 @@ public class ExternalDisplaySizePreference extends SliderPreference {
         private int mLastDisplayProgress = getValue();
         private long mLastCommitTime;
         private boolean mSeekByTouch;
+        private final ExternalDisplaySettingsLoggerStore.ExternalDisplayMetricsLogger mLogger =
+                ExternalDisplaySettingsLoggerStore.getLogger(mDisplayId);
+
 
         ExternalDisplaySizePreferenceStateHandler(DisplaySizeData displaySizeData) {
             mDisplaySizeData = displaySizeData;
+            mLogger.updateDisplaySize(displaySizeData.getDensityPercentage(mLastDisplayProgress));
         }
 
         final Choreographer.FrameCallback mCommit = this::tryCommitDisplaySizeConfig;
@@ -113,7 +118,13 @@ public class ExternalDisplaySizePreference extends SliderPreference {
             if (displayProgress != mLastDisplayProgress) {
                 mDisplaySizeData.commit(displayProgress);
                 mLastDisplayProgress = displayProgress;
+
+                mLogger.updateDisplaySize(
+                        mDisplaySizeData.getDensityPercentage(mLastDisplayProgress));
+                mLogger.log(
+                        SettingsStatsLog.EXTERNAL_DISPLAY_SETTINGS_CHANGED__SETTING__DISPLAY_SIZE);
             }
+
             mLastCommitTime = SystemClock.elapsedRealtime();
         }
 

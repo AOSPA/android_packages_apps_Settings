@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textColor="?androidprv:attr/textColorOnAccent"
+        android:textColor="@color/materialColorOnPrimary"
         android:background="@drawable/audio_sharing_rounded_bg_ripple"
         android:textAlignment="center"
         android:featureFlag="!com.android.settings.flags.enable_bluetooth_settings_expressive_design_read_only" />

@@ -29,9 +29,10 @@ class IntroPreference : PreferenceMetadata, PreferenceBinding {
     override val title: Int
         get() = R.string.accessibility_display_inversion_preference_intro_text
 
-    override fun createWidget(context: Context) = TopIntroPreference(context)
+    override val indexable
+        get() = false
 
-    override fun isIndexable(context: Context) = false
+    override fun createWidget(context: Context) = TopIntroPreference(context)
 
     companion object {
         const val KEY = "top_intro"

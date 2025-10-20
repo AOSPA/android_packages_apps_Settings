@@ -32,6 +32,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.widget.theme.R.style;
 
 import com.google.android.material.button.MaterialButton;
@@ -111,6 +112,9 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
         @Override
         protected void onSkipOrClearButtonClick(View view) {
             if (mLeftButtonIsSkip) {
+                if (shouldHideSkipButton()) {
+                    throw new IllegalStateException("skip button pressed despite being hidden");
+                }
                 final Intent intent = getActivity().getIntent();
                 final boolean frpSupported = intent
                         .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false);
@@ -160,12 +164,20 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             }
 
             if (stage.leftMode == LeftButtonMode.Gone && stage == Stage.Introduction) {
-                mSkipOrClearButton.setVisibility(View.VISIBLE);
+                if (!shouldHideSkipButton()) {
+                    // Only show the skip button if LSKF enforcement is disabled
+                    mSkipOrClearButton.setVisibility(View.VISIBLE);
+                }
                 mSkipOrClearButton.setText(getActivity(), R.string.skip_label);
                 mLeftButtonIsSkip = true;
             } else {
                 mLeftButtonIsSkip = false;
             }
+        }
+
+        private boolean shouldHideSkipButton() {
+            return Flags.hideLskfSkipDuringSuw()
+                    && getResources().getBoolean(R.bool.config_hide_skip_security_options_in_suw);
         }
 
         @Override

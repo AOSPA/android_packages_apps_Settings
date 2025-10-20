@@ -26,9 +26,15 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
+import com.android.settings.flags.Flags;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -39,7 +45,7 @@ import org.robolectric.RuntimeEnvironment;
 // LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class AdaptiveConnectivityTogglePreferenceControllerTest {
-
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final String PREF_KEY = "adaptive_connectivity_enabled";
 
     @Mock(answer = RETURNS_DEEP_STUBS)
@@ -58,8 +64,19 @@ public class AdaptiveConnectivityTogglePreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_shouldReturnTrue() {
+    @DisableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void isAvailable_flagDisabled_shouldReturnTrue() {
+        mController = new AdaptiveConnectivityTogglePreferenceController(mContext, PREF_KEY);
+
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
+    public void isAvailable_flagEnabled_shouldReturnFalse() {
+        mController = new AdaptiveConnectivityTogglePreferenceController(mContext, PREF_KEY);
+
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

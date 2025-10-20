@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth.ui.viewmodel
 
 import android.app.Application
-import android.bluetooth.BluetoothAdapter
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -28,8 +27,8 @@ import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
-import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingLayout
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import kotlin.coroutines.CoroutineContext
@@ -56,18 +55,11 @@ class BluetoothDeviceDetailsViewModel(
             deviceSettingRepository.getDeviceSettingsConfig(cachedDevice)
         }
 
-    suspend fun getItems(fragment: FragmentTypeModel): List<DeviceSettingConfigItemModel>? =
+    suspend fun getNodes(fragment: FragmentTypeModel): DeviceSettingLayout? =
         when (fragment) {
             is FragmentTypeModel.DeviceDetailsMainFragment -> items.await()?.mainItems
             is FragmentTypeModel.DeviceDetailsMoreSettingsFragment ->
                 items.await()?.moreSettingsItems
-        }
-
-    suspend fun getHelpItem(fragment: FragmentTypeModel): DeviceSettingConfigItemModel? =
-        when (fragment) {
-            is FragmentTypeModel.DeviceDetailsMainFragment -> null
-            is FragmentTypeModel.DeviceDetailsMoreSettingsFragment ->
-                items.await()?.moreSettingsHelpItem
         }
 
     fun getDeviceSetting(
@@ -77,8 +69,9 @@ class BluetoothDeviceDetailsViewModel(
         if (settingId == DeviceSettingId.DEVICE_SETTING_ID_MORE_SETTINGS) {
             return flowOf(DeviceSettingPreferenceModel.MoreSettingsPreference(settingId))
         }
-        return deviceSettingRepository.getDeviceSetting(cachedDevice, settingId)
-            .map { it?.toPreferenceModel() }
+        return deviceSettingRepository.getDeviceSetting(cachedDevice, settingId).map {
+            it?.toPreferenceModel()
+        }
     }
 
     private fun DeviceSettingModel.toPreferenceModel(): DeviceSettingPreferenceModel? {
@@ -128,6 +121,15 @@ class BluetoothDeviceDetailsViewModel(
                     onSelectedChange = { newState ->
                         updateState(DeviceSettingStateModel.MultiTogglePreferenceState(newState))
                     },
+                )
+            is DeviceSettingModel.BannerPreference ->
+                DeviceSettingPreferenceModel.BannerPreference(
+                    id = id,
+                    title = title,
+                    message = message,
+                    icon = icon,
+                    positiveButton = positiveButton,
+                    negativeButton = negativeButton,
                 )
             is DeviceSettingModel.Unknown -> null
         }

@@ -17,7 +17,9 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_DELETE_PIN
+import android.app.settings.SettingsEnums.SUPERVISION_MANAGE_PIN_SCREEN
 import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
 import android.content.ContextWrapper
@@ -29,6 +31,9 @@ import android.os.UserManager
 import android.os.UserManager.USER_TYPE_FULL_SECONDARY
 import android.os.UserManager.USER_TYPE_FULL_SYSTEM
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings.Global
 import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
@@ -46,7 +51,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito
+import org.mockito.Answers.CALLS_REAL_METHODS
+import org.mockito.kotlin.UseConstructor.Companion.withArguments
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
@@ -55,15 +61,16 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
-import org.mockito.kotlin.withSettings
 import org.robolectric.Robolectric
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.shadows.ShadowToast
 
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowAlertDialogCompat::class])
 class SupervisionDeletePinPreferenceTest {
     @get:Rule val metricsRule = MetricsRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
     private val appContext: Context = ApplicationProvider.getApplicationContext()
     private val mockSupervisionManager = mock<SupervisionManager>()
     private val mockUserManager = mock<UserManager>()
@@ -84,10 +91,10 @@ class SupervisionDeletePinPreferenceTest {
         }
     private val preference = SupervisionDeletePinPreference()
     private val widget = preference.createWidget(context)
-    private val lifeCycleContext =
-        Mockito.mock(
-            PreferenceLifecycleContext::class.java,
-            withSettings().useConstructor(context).defaultAnswer(Mockito.CALLS_REAL_METHODS),
+    private val mockLifeCycleContext =
+        mock<PreferenceLifecycleContext>(
+            useConstructor = withArguments(context),
+            defaultAnswer = CALLS_REAL_METHODS,
         )
     private lateinit var activity: ComponentActivity
     private var backPressedCalled = false
@@ -100,15 +107,16 @@ class SupervisionDeletePinPreferenceTest {
         activity.setTheme(R.style.Theme_AppCompat)
         activity.onBackPressedDispatcher.addCallback(activity) { backPressedCalled = true }
 
-        lifeCycleContext.stub {
+        mockLifeCycleContext.stub {
             on { findPreference<Any>(SupervisionDeletePinPreference.KEY) } doReturn widget
             on { registerForActivityResult<Intent, ActivityResult>(any(), any()) } doReturn
                 mockActivityResultLauncher
             on { baseContext } doReturn activity
         }
-        preference.onCreate(lifeCycleContext)
+        preference.onCreate(mockLifeCycleContext)
         context.setTheme(R.style.Theme_AppCompat) // Needed for AlertDialog creation
         startedIntent = null
+        ShadowToast.reset()
     }
 
     @Test
@@ -117,6 +125,7 @@ class SupervisionDeletePinPreferenceTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun showDeletionDialog_currentUserSupervised_showsConfirmation() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
@@ -132,6 +141,25 @@ class SupervisionDeletePinPreferenceTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun showDeletionDialog_currentUserSupervised_showsDeletePinAndTurnOffControlsConfirmation() {
+        mockUserManager.stub {
+            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
+        }
+        mockSupervisionManager.stub {
+            on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn false
+            on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
+        }
+
+        preference.showDeletionDialog(context)
+        assertAlertDialogHasMessage(
+            R.string.supervision_delete_pin_turn_off_controls_confirm_message
+        )
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun showDeletionDialog_secondaryUserSupervised_showsSupervisionEnabledWarning() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
@@ -147,6 +175,23 @@ class SupervisionDeletePinPreferenceTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun showDeletionDialog_secondaryUserSupervised_showsTurnOffSupervisionControlsConfirmation() {
+        mockUserManager.stub {
+            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
+        }
+        mockSupervisionManager.stub {
+            on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
+        }
+
+        preference.showDeletionDialog(context)
+        assertAlertDialogHasMessage(R.string.supervision_cant_delete_pin_multi_user_switch_message)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun showDeletionDialog_secondaryUserSupervised_showsSupervisionEnabledWarning_clicksLearnMore() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
@@ -177,34 +222,14 @@ class SupervisionDeletePinPreferenceTest {
     }
 
     @Test
-    fun onConfirmDeleteClick_currentUserSupervised_deletesSupervisionData() {
-        mockUserManager.stub {
-            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
-            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
-        }
-        mockSupervisionManager.stub {
-            on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
-            on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn false
-            on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
-        }
-
+    fun onConfirmDeleteClick_startsConfirmPinActivity() {
         preference.onConfirmDeleteClick()
         verifyConfirmPinActivityStarted()
-        onActivityResult(ActivityResult(Activity.RESULT_OK, null))
-
-        verify(mockSupervisionManager).supervisionRecoveryInfo = null
-        verify(mockSupervisionManager).isSupervisionEnabled = false
-        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
-
-        assertThat(backPressedCalled).isTrue()
-        assertThat(startedIntent).isNull()
-
-        verify(metricsRule.metricsFeatureProvider)
-            .action(lifeCycleContext, ACTION_SUPERVISION_DELETE_PIN)
     }
 
     @Test
-    fun onConfirmDeleteClick_removeUserFails_doesNotDeleteSupervisionRecoveryData() {
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onPinConfirmed_removeUserFails_doesNotDeleteSupervisionRecoveryData() {
         mockUserManager.stub {
             on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
             on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn false
@@ -215,13 +240,10 @@ class SupervisionDeletePinPreferenceTest {
             on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
         }
 
-        preference.onConfirmDeleteClick()
-        verifyConfirmPinActivityStarted()
-
         onActivityResult(ActivityResult(Activity.RESULT_OK, null))
         // Don't disable supervision if we can't delete data, even though we could.
-        verify(mockSupervisionManager, never()).isSupervisionEnabled = any()
-        verify(mockSupervisionManager, never()).supervisionRecoveryInfo = any()
+        verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
+        verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
         assertThat(startedIntent).isNull()
         assertAlertDialogHasMessage(R.string.supervision_delete_pin_error_message)
     }
@@ -230,15 +252,103 @@ class SupervisionDeletePinPreferenceTest {
     fun onPinConfirmed_resultCanceled_doesNothing() {
         onActivityResult(ActivityResult(Activity.RESULT_CANCELED, null))
 
-        verify(mockSupervisionManager, never()).isSupervisionEnabled = any()
+        verify(mockSupervisionManager, never()).setSupervisionEnabled(any())
         verify(mockUserManager, never()).removeUserEvenWhenDisallowed(SUPERVISING_USER_ID)
-        verify(lifeCycleContext, never()).notifyPreferenceChange(any())
+        verify(mockLifeCycleContext, never()).notifyPreferenceChange(any())
+        assertThat(startedIntent).isNull()
+    }
+
+    @Test
+    @DisableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE    )
+    fun onPinConfirmed_currentUserSupervised_deletesSupervisionData_flagDisabled_noToast() {
+        mockUserManager.stub {
+            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
+        }
+        mockSupervisionManager.stub {
+            on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn false
+            on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
+        }
+
+        onActivityResult(ActivityResult(Activity.RESULT_OK, null))
+
+        verify(mockSupervisionManager).setSupervisionRecoveryInfo(null)
+        verify(mockSupervisionManager).setSupervisionEnabled(false)
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
+
+        assertThat(backPressedCalled).isTrue()
+        assertThat(startedIntent).isNull()
+        assertThat(ShadowToast.getTextOfLatestToast()).isNull()
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(mockLifeCycleContext, ACTION_SUPERVISION_DELETE_PIN)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_PIN_SNACKBARS_TOAST_MESSAGE)
+    fun onPinConfirmed_currentUserSupervised_deletesSupervisionData_flagEnabled_correctToast() {
+        val expectedToastMessage = context.getString(R.string.supervision_pin_deleted)
+        mockUserManager.stub {
+            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
+            on { removeUserEvenWhenDisallowed(SUPERVISING_USER_ID) } doReturn true
+        }
+        mockSupervisionManager.stub {
+            on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn false
+            on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
+        }
+
+        onActivityResult(ActivityResult(Activity.RESULT_OK, null))
+
+        verify(mockSupervisionManager).supervisionRecoveryInfo = null
+        verify(mockSupervisionManager).isSupervisionEnabled = false
+        verify(mockUserManager).removeUserEvenWhenDisallowed(eq(SUPERVISING_USER_ID))
+
+        assertThat(backPressedCalled).isTrue()
+        assertThat(startedIntent).isNull()
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(expectedToastMessage)
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(mockLifeCycleContext, ACTION_SUPERVISION_DELETE_PIN)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onPinConfirmed_platformSupervision_multipleUsersSupervised_disablesSupervision() {
+        mockUserManager.stub {
+            on { users } doReturn listOf(MAIN_USER, SECONDARY_USER, SUPERVISING_PROFILE)
+        }
+        mockSupervisionManager.stub {
+            on { isSupervisionEnabledForUser(MAIN_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SECONDARY_USER_ID) } doReturn true
+            on { isSupervisionEnabledForUser(SUPERVISING_USER_ID) } doReturn false
+        }
+
+        onActivityResult(ActivityResult(Activity.RESULT_OK, null))
+
+        verify(mockSupervisionManager).setSupervisionEnabled(false)
+        verify(mockSupervisionManager, never()).setSupervisionRecoveryInfo(any())
+
+        assertThat(backPressedCalled).isTrue()
+        assertThat(startedIntent).isNull()
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(mockLifeCycleContext, ACTION_SUPERVISION_DELETE_PIN)
+    }
+
+    @Test
+    fun onPreferenceClick_logsClick() {
+        preference.onPreferenceClick(widget)
+        verify(metricsRule.metricsFeatureProvider)
+            .clicked(SUPERVISION_MANAGE_PIN_SCREEN, SupervisionDeletePinPreference.KEY)
         assertThat(startedIntent).isNull()
     }
 
     private fun onActivityResult(result: ActivityResult) {
         val captor = argumentCaptor<ActivityResultCallback<ActivityResult>>()
-        verify(lifeCycleContext)
+        verify(mockLifeCycleContext)
             .registerForActivityResult<Intent, ActivityResult>(any(), captor.capture())
         captor.allValues.single().onActivityResult(result)
     }

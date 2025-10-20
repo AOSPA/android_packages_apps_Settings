@@ -97,8 +97,9 @@ private class AppInstallerInfoPresenter(
             false
         } else {
             withContext(Dispatchers.IO) {
-                val isMainlineModule = AppUtils.isMainlineModule(packageManager, app.packageName)
-                !isMainlineModule && installerLabel != null
+                val limitedAppInfo =
+                        AppUtils.isLimitedAppInfoPackage(packageManager, app.packageName)
+                !limitedAppInfo && installerLabel != null
             }
         }
     }

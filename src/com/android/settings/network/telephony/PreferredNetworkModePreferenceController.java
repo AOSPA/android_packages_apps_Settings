@@ -46,7 +46,8 @@ import com.android.settings.network.telephony.mode.NetworkModes;
  * Preference controller for "Preferred network mode"
  */
 public class PreferredNetworkModePreferenceController extends BasePreferenceController
-        implements ListPreference.OnPreferenceChangeListener, DefaultLifecycleObserver {
+        implements ListPreference.OnPreferenceChangeListener, DefaultLifecycleObserver,
+        AirplaneModeChangedCallback {
     private static final String TAG = "PrefNetworkModeCtrl";
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -57,6 +58,7 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
     private Preference mPreference;
     private boolean mIsSatelliteSessionStarted = false;
     private boolean mIsCurrentSubscriptionForSatellite = false;
+    protected boolean mIsAirplaneModeOn = false;
 
     @VisibleForTesting
     final SelectedNbIotSatelliteSubscriptionCallback mSelectedNbIotSatelliteSubscriptionCallback =
@@ -117,7 +119,8 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
             return;
         }
         super.updateState(preference);
-        preference.setEnabled(!(mIsCurrentSubscriptionForSatellite && mIsSatelliteSessionStarted));
+        preference.setEnabled(!(mIsCurrentSubscriptionForSatellite && mIsSatelliteSessionStarted)
+                && !mIsAirplaneModeOn);
         final ListPreference listPreference = (ListPreference) preference;
         final int networkMode = getPreferredNetworkMode();
         listPreference.setValue(Integer.toString(networkMode));
@@ -135,6 +138,11 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
         final ListPreference listPreference = (ListPreference) preference;
         listPreference.setSummary(getPreferredNetworkModeSummaryResId(newPreferredNetworkMode));
         return true;
+    }
+
+    @Override
+    public void notifyAirplaneModeChanged(boolean isAirplaneModeOn) {
+        this.mIsAirplaneModeOn = isAirplaneModeOn;
     }
 
     public void init(int subId) {

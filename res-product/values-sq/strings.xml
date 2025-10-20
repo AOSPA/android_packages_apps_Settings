@@ -164,10 +164,10 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8772005555323461143">"Ti dhe fëmija yt mund t\'i fshini imazhet dhe modelin e gjurmës së tij të gishtit ose ta çaktivizoni \"Shkyçjen me gjurmë gishti\" në çfarëdo kohe te \"Cilësimet\". Imazhet dhe modelet e gjurmës së gishtit ruhen në tablet derisa të fshihen."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7254955922685507093">"Ti dhe fëmija yt mund t\'i fshini imazhet dhe modelin e gjurmës së tij të gishtit ose ta çaktivizoni \"Shkyçjen me gjurmë gishti\" në çfarëdo kohe te \"Cilësimet\". Imazhet dhe modelet e gjurmës së gishtit ruhen në pajisje derisa të fshihen."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="desktop" msgid="7254955922685507093">"Ti dhe fëmija yt mund t\'i fshini imazhet dhe modelin e gjurmës së tij të gishtit ose ta çaktivizoni \"Shkyçjen me gjurmë gishti\" në çfarëdo kohe te \"Cilësimet\". Imazhet dhe modelet e gjurmës së gishtit ruhen në pajisje derisa të fshihen."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="6272159089589340181">"Telefoni yt mund të shkyçet edhe nëse nuk ke për qëllim një gjë të tillë, p.sh. nëse dikush ta mban te gishti."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="2420109998272019149">"Tableti yt mund të shkyçet edhe nëse nuk ke për qëllim një gjë të tillë, p.sh. nëse dikush ta mban te gishti."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="5915844445830045866">"Pajisja jote mund të shkyçet edhe nëse nuk ke për qëllim një gjë të tillë, p.sh. nëse dikush ta mban te gishti."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="desktop" msgid="5915844445830045866">"Pajisja jote mund të shkyçet edhe nëse nuk ke për qëllim një gjë të tillë, p.sh. nëse dikush ta mban te gishti."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="6838578698434849838">"Telefoni yt mund të shkyçet edhe nëse nuk ke për qëllim një gjë të tillë, p.sh. nëse dikush ta mban te gishti"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7796353046744228477">"Tableti yt mund të shkyçet edhe nëse nuk ke për qëllim një gjë të tillë, p.sh. nëse dikush ta mban te gishti"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="5075445491909690772">"Pajisja jote mund të shkyçet edhe nëse nuk ke për qëllim një gjë të tillë, p.sh. nëse dikush ta mban te gishti"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="desktop" msgid="5075445491909690772">"Pajisja jote mund të shkyçet edhe nëse nuk ke për qëllim një gjë të tillë, p.sh. nëse dikush ta mban te gishti"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="6556725426776167791">"Telefoni i fëmijës tënd mund të shkyçet pa dashje, si p.sh. nëse dikush ia mban te gishti."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet" msgid="5156581794964551571">"Tableti i fëmijës tënd mund të shkyçet pa dashje, si p.sh. nëse dikush ia mban te gishti."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device" msgid="8309101436391515400">"Pajisja e fëmijës tënd mund të shkyçet pa dashje, si p.sh. nëse dikush ia mban te gishti."</string>
@@ -321,8 +321,8 @@
     <string name="sim_lock_off" product="desktop" msgid="903164661366964150">"Kërko kodin PIN për të përdorur pajisjen"</string>
     <string name="status_number" product="tablet" msgid="6746773328312218158">"MDN"</string>
     <string name="status_number" product="default" msgid="2333455505912871374">"Numri i telefonit"</string>
-    <string name="status_number_sim_slot" product="tablet" msgid="2595836594107617972">"MDN (foleja %1$d e kartës SIM)"</string>
-    <string name="status_number_sim_slot" product="default" msgid="7154930998382872847">"Numri i telefonit (foleja %1$d e SIM)"</string>
+    <string name="status_number_sim_slot" product="tablet" msgid="201933499714762935">"MDN %1$d"</string>
+    <string name="status_number_sim_slot" product="default" msgid="8033783200178721660">"Numri i telefonit %1$d"</string>
     <string name="status_number_sim_status" product="tablet" msgid="9003886361856568694">"MDN në kartën SIM"</string>
     <string name="status_number_sim_status" product="default" msgid="7536755538266735352">"Numri i telefonit në kartën SIM"</string>
     <string name="storage_wizard_init_v2_internal_title" product="tablet" msgid="2049551739429034707">"Formato kartën SD si hapësirë ruajtëse të brendshme"</string>
@@ -481,9 +481,12 @@
     <string name="lockscreen_trivial_controls_summary" product="default" msgid="42562533085885152">"Pa e shkyçur telefonin"</string>
     <string name="lockscreen_trivial_controls_summary" product="tablet" msgid="9052068482124729345">"Pa e shkyçur tabletin"</string>
     <string name="lockscreen_trivial_controls_summary" product="desktop" msgid="8183513643394359332">"Pa shkyçur pajisjen tënde"</string>
-    <string name="device_supervision_switch_title" product="default" msgid="5711051584668311080">"Kontrollet për këtë telefon"</string>
-    <string name="device_supervision_switch_title" product="tablet" msgid="5400384750840247844">"Kontrollet për këtë tablet"</string>
-    <string name="device_supervision_switch_title" product="desktop" msgid="2140192989162020111">"Kontrollet për këtë pajisje"</string>
+    <!-- no translation found for device_supervision_features_title (8612616791672564436) -->
+    <skip />
+    <!-- no translation found for device_supervision_features_title (8301949957844501200) -->
+    <skip />
+    <!-- no translation found for device_supervision_features_title (5041758196166273467) -->
+    <skip />
     <string name="supervision_pin_length_message" product="default" msgid="7142997986515800901">"{count,plural, =1{Fut një kod PIN me të paktën # shifër. Do ta përdorësh atë për të menaxhuar kontrollet në këtë telefon.}other{Fut një kod PIN me të paktën # shifra. Do ta përdorësh atë për të menaxhuar kontrollet në këtë telefon.}}"</string>
     <string name="supervision_pin_length_message" product="tablet" msgid="1772471880165492225">"{count,plural, =1{Fut një kod PIN me të paktën # shifër. Do ta përdorësh atë për të menaxhuar kontrollet në këtë tablet.}other{Fut një kod PIN me të paktën # shifra. Do ta përdorësh atë për të menaxhuar kontrollet në këtë tablet.}}"</string>
     <string name="supervision_pin_length_message" product="desktop" msgid="7689193597679628648">"{count,plural, =1{Fut një kod PIN me të paktën # shifër. Do ta përdorësh atë për të menaxhuar kontrollet në këtë pajisje.}other{Fut një kod PIN me të paktën # shifra. Do ta përdorësh atë për të menaxhuar kontrollet në këtë pajisje.}}"</string>

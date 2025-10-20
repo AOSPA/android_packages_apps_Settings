@@ -17,7 +17,6 @@
 package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
-import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
@@ -32,6 +31,8 @@ import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
@@ -60,6 +61,28 @@ class MagnifyKeyboardSwitchPreferenceTest {
     fun getTitle() {
         assertThat(preference.title)
             .isEqualTo(R.string.accessibility_screen_magnification_nav_ime_title)
+    }
+
+    @Test
+    fun getReadPermissions_returnsSettingsSecureStoreReadPermissions() {
+        assertThat(preference.getReadPermissions(context))
+            .isEqualTo(SettingsSecureStore.getReadPermissions())
+    }
+
+    @Test
+    fun getWritePermissions_returnsSettingsSecureStoreWritePermissions() {
+        assertThat(preference.getWritePermissions(context))
+            .isEqualTo(SettingsSecureStore.getWritePermissions())
+    }
+
+    @Test
+    fun getReadPermit_returnsAllow() {
+        assertThat(preference.getReadPermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
+    fun getWritePermit_returnsAllow() {
+        assertThat(preference.getWritePermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
     }
 
     @Test
@@ -92,9 +115,11 @@ class MagnifyKeyboardSwitchPreferenceTest {
     )
     fun performClick(settingsEnabled: Boolean, expectedChecked: Boolean) {
         MagnificationCapabilities.setCapabilities(context, MagnificationMode.ALL)
-        getStorage().setBoolean(
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MAGNIFY_NAV_AND_IME, settingsEnabled
-        )
+        getStorage()
+            .setBoolean(
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MAGNIFY_NAV_AND_IME,
+                settingsEnabled,
+            )
         val preferenceWidget = createMagnifyKeyboardWidget()
         assertThat(preferenceWidget.isChecked).isEqualTo(settingsEnabled)
 
@@ -102,28 +127,13 @@ class MagnifyKeyboardSwitchPreferenceTest {
 
         assertThat(preferenceWidget.isChecked).isEqualTo(expectedChecked)
         assertThat(
-            getStorage().getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MAGNIFY_NAV_AND_IME)
-        ).isEqualTo(expectedChecked)
+                getStorage()
+                    .getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MAGNIFY_NAV_AND_IME)
+            )
+            .isEqualTo(expectedChecked)
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MAGNIFY_NAV_BAR_AND_IME)
-    fun isAvailable_featureFlagDisabled_windowMagnificationSupported_disabled() {
-        setWindowMagnificationSupported(context, true)
-
-        assertThat(preference.isAvailable(context)).isFalse()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MAGNIFY_NAV_BAR_AND_IME)
-    fun isAvailable_featureFlagDisabled_windowMagnificationNotSupported_disabled() {
-        setWindowMagnificationSupported(context, false)
-
-        assertThat(preference.isAvailable(context)).isFalse()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MAGNIFY_NAV_BAR_AND_IME)
     fun isAvailable_featureFlagEnabled_windowMagnificationSupported_enabled() {
         setWindowMagnificationSupported(context, true)
 
@@ -131,7 +141,6 @@ class MagnifyKeyboardSwitchPreferenceTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MAGNIFY_NAV_BAR_AND_IME)
     fun isAvailable_featureFlagEnabled_windowMagnificationNotSupported_disabled() {
         setWindowMagnificationSupported(context, false)
 
@@ -175,9 +184,7 @@ class MagnifyKeyboardSwitchPreferenceTest {
 
         assertThat(preference.getSummary(context))
             .isEqualTo(
-                context.getString(
-                    R.string.accessibility_screen_magnification_nav_ime_summary
-                )
+                context.getString(R.string.accessibility_screen_magnification_nav_ime_summary)
             )
     }
 
@@ -187,9 +194,7 @@ class MagnifyKeyboardSwitchPreferenceTest {
 
         assertThat(preference.getSummary(context))
             .isEqualTo(
-                context.getString(
-                    R.string.accessibility_screen_magnification_nav_ime_summary
-                )
+                context.getString(R.string.accessibility_screen_magnification_nav_ime_summary)
             )
     }
 

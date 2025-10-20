@@ -21,6 +21,8 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 import com.google.common.truth.Truth.assertThat
@@ -49,6 +51,33 @@ class StandardDarkModeSelectorPreferenceTest {
     @Test
     fun getSummary() {
         assertThat(preference.summary).isEqualTo(R.string.accessibility_standard_dark_theme_summary)
+    }
+
+    @Test
+    fun getReadPermissions_returnsSettingsSecureStoreReadPermissions() {
+        assertThat(preference.getReadPermissions(context))
+            .isEqualTo(DarkThemeModeStorage.getReadPermissions())
+    }
+
+    @Test
+    fun getWritePermissions_returnsSettingsSecureStoreWritePermissions() {
+        assertThat(preference.getWritePermissions(context))
+            .isEqualTo(DarkThemeModeStorage.getWritePermissions())
+    }
+
+    @Test
+    fun getReadPermit_returnsAllow() {
+        assertThat(preference.getReadPermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
+    fun getWritePermit_returnsAllow() {
+        assertThat(preference.getWritePermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
+    fun sensitivityLevel_isNoSensitivity() {
+        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.NO_SENSITIVITY)
     }
 
     @Test

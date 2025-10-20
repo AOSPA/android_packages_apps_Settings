@@ -16,6 +16,7 @@
 package com.android.settings.supervision
 
 import android.content.Context
+import android.content.pm.PackageManager.MATCH_UNINSTALLED_PACKAGES
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceBinding
 
@@ -27,12 +28,16 @@ class SupervisionSupportedAppPreference(
     override val key: String
         get() = KEY
 
-    override fun isIndexable(context: Context) = false
+    override val indexable
+        get() = false
 
     override fun createWidget(context: Context) =
         NonClickablePreference(context, /* attrs= */ null).apply {
             val packageManager = context.packageManager
-            val icon = packageManager.getApplicationIcon(packageName)
+
+            val applicationInfo =
+                packageManager.getApplicationInfo(packageName, MATCH_UNINSTALLED_PACKAGES)
+            val icon = packageManager.getApplicationIcon(applicationInfo)
 
             title = titleString
             summary = summaryString

@@ -27,8 +27,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.hardware.display.DisplayManager;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
@@ -37,8 +35,6 @@ import android.view.Display;
 
 import androidx.preference.SwitchPreference;
 import androidx.test.platform.app.InstrumentationRegistry;
-
-import com.android.server.display.feature.flags.Flags;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -128,18 +124,6 @@ public class PeakRefreshRatePreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
-    public void setChecked_enableSmoothDisplay_featureFlagOff() {
-        mController.mPeakRefreshRate = 88f;
-        mController.setChecked(true);
-
-        assertThat(Settings.System.getFloat(mContext.getContentResolver(),
-                Settings.System.PEAK_REFRESH_RATE, DEFAULT_REFRESH_RATE))
-                .isEqualTo(88f);
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
     public void setChecked_enableSmoothDisplay_featureFlagOn() {
         mController.mPeakRefreshRate = 88f;
         mController.setChecked(true);
@@ -193,13 +177,6 @@ public class PeakRefreshRatePreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
-    public void peakRefreshRate_highestOfDefaultDisplay_featureFlagOff() {
-        assertThat(mController.mPeakRefreshRate).isEqualTo(120);
-    }
-
-    @Test
-    @RequiresFlagsEnabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
     public void peakRefreshRate_highestOfAllDisplays_featureFlagOn() {
         assertThat(mController.mPeakRefreshRate).isEqualTo(130);
     }

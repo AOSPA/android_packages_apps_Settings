@@ -123,6 +123,9 @@ import java.util.concurrent.Executor;
 public class AudioSharingDevicePreferenceControllerTest {
     private static final String KEY = "audio_sharing_device_list";
     private static final String TEST_DEVICE_NAME = "test";
+    private static final int METADATA_FAST_PAIR_CUSTOMIZED_FIELDS = 25;
+    private static final String SUPPRESS_AUDIO_SHARE_DIALOG_METADATA =
+            "<SUPPRESS_AUDIO_SHARING_PROMOTE>true</SUPPRESS_AUDIO_SHARING_PROMOTE>";
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -483,6 +486,36 @@ public class AudioSharingDevicePreferenceControllerTest {
         mController.onProfileConnectionStateChanged(
                 mCachedDevice, BluetoothAdapter.STATE_CONNECTED, BluetoothProfile.A2DP);
         verifyNoInteractions(mDialogHandler);
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_needSuppressDialog_doNothing() {
+        when(mBroadcast.isEnabled(null)).thenReturn(false);
+        // Test when LEA device LE_AUDIO_BROADCAST_ASSISTANT connected
+        when(mDevice.isConnected()).thenReturn(true);
+        doReturn(ImmutableList.of(mLeAudio)).when(mCachedDevice).getUiAccessibleProfiles();
+        doReturn(ImmutableList.of(mLeAudio)).when(mCachedDevice).getProfiles();
+        when(mDevice.getMetadata(METADATA_FAST_PAIR_CUSTOMIZED_FIELDS))
+                .thenReturn(SUPPRESS_AUDIO_SHARE_DIALOG_METADATA.getBytes());
+        mController.onProfileConnectionStateChanged(
+                mCachedDevice,
+                BluetoothAdapter.STATE_CONNECTED,
+                BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT);
+        verifyNoInteractions(mDialogHandler);
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_assistantProfileConnected_handleDeviceConnected() {
+        when(mBroadcast.isEnabled(null)).thenReturn(false);
+        // Test when LEA device LE_AUDIO_BROADCAST_ASSISTANT connected.
+        when(mDevice.isConnected()).thenReturn(true);
+        doReturn(ImmutableList.of(mLeAudio)).when(mCachedDevice).getUiAccessibleProfiles();
+        doReturn(ImmutableList.of(mLeAudio)).when(mCachedDevice).getProfiles();
+        mController.onProfileConnectionStateChanged(
+                mCachedDevice,
+                BluetoothAdapter.STATE_CONNECTED,
+                BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT);
+        verify(mDialogHandler).handleDeviceConnected(mCachedDevice, /* userTriggered= */ false);
     }
 
     @Test

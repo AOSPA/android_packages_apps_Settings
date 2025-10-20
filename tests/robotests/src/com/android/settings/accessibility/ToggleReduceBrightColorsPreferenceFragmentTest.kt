@@ -18,18 +18,21 @@ package com.android.settings.accessibility
 import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.hardware.display.ColorDisplayManager
+import android.platform.test.annotations.RequiresFlagsDisabled
+import android.platform.test.annotations.RequiresFlagsEnabled
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.provider.Settings
 import android.text.Html
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.testing.FragmentScenario
-import androidx.fragment.app.testing.FragmentScenario.FragmentAction
 import androidx.lifecycle.Lifecycle
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME
 import com.android.settings.R
+import com.android.settings.accessibility.extradim.ui.ExtraDimScreen
 import com.android.settings.testutils.XmlTestUtils
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settings.testutils.shadow.SettingsShadowResources
@@ -39,6 +42,7 @@ import com.android.settingslib.widget.SliderPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -51,6 +55,8 @@ import org.robolectric.shadows.ShadowLooper
 @RunWith(RobolectricTestRunner::class)
 class ToggleReduceBrightColorsPreferenceFragmentTest :
     BaseShortcutInteractionsTestCases<ToggleReduceBrightColorsPreferenceFragment>() {
+
+    @get:Rule val checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
     private val shadowColorDisplayManager: ShadowColorDisplayManager =
         Shadow.extract(context.getSystemService(ColorDisplayManager::class.java))
     private var fragScenario: FragmentScenario<ToggleReduceBrightColorsPreferenceFragment>? = null
@@ -77,8 +83,22 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
             .isEqualTo(context.getString(R.string.reduce_bright_colors_preference_intro_text))
     }
 
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_EXTRA_DIM)
     @Test
     fun onResume_verifyIllustration() {
+        launchFragment()
+
+        val illustrationPref: IllustrationPreference? =
+            fragment!!.findPreference(ILLUSTRATION_PREF_KEY)
+        assertThat(illustrationPref).isNotNull()
+
+        assertThat(illustrationPref!!.isVisible).isTrue()
+        assertThat(illustrationPref.lottieAnimationResId).isEqualTo(R.raw.extra_dim_banner)
+    }
+
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_EXTRA_DIM)
+    @Test
+    fun onResume_flagOff_verifyIllustration() {
         launchFragment()
 
         val illustrationPref: IllustrationPreference? =
@@ -266,6 +286,7 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
 
         val sliderPref = getIntensitySlider()!!
         sliderPref.callChangeListener(newSliderPosition)
+        sliderPref.value = newSliderPosition
         ShadowLooper.idleMainLooper()
 
         val settingValue =
@@ -332,6 +353,10 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
             .isEqualTo(R.xml.accessibility_extra_dim_settings)
     }
 
+    @RequiresFlagsDisabled(
+        Flags.FLAG_CATALYST_EXTRA_DIM,
+        com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH,
+    )
     @Test
     fun getNonIndexableKeys_reduceBrightColorUnavailable_allElementsInXmlIsNonSearchable() {
         setReduceBrightColorsAvailable(false)
@@ -346,6 +371,10 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
         assertThat(actualKeys).containsExactlyElementsIn(expectedKeys)
     }
 
+    @RequiresFlagsDisabled(
+        Flags.FLAG_CATALYST_EXTRA_DIM,
+        com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH,
+    )
     @Test
     fun getNonIndexableKey_reduceBrightColorAvailable_containsOnlyNonSearchablePrefKeys() {
         shadowColorDisplayManager.setReduceBrightColorsActivated(true)
@@ -365,6 +394,27 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
         assertThat(actualKeys).containsExactlyElementsIn(expectedKeys)
     }
 
+    @RequiresFlagsEnabled(
+        Flags.FLAG_CATALYST_EXTRA_DIM,
+        com.android.settings.flags.Flags.FLAG_CATALYST_SETTINGS_SEARCH,
+    )
+    @Test
+    fun getXmlResourceToIndex_catalystSearch() {
+        val indexableResources =
+            ToggleReduceBrightColorsPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getXmlResourcesToIndex(context, true)
+
+        assertThat(indexableResources).isNull()
+    }
+
+    @Test
+    fun getPreferenceScreenBindingKey_returnExtraDimScreenKey() {
+        assertThat(
+                ToggleReduceBrightColorsPreferenceFragment().getPreferenceScreenBindingKey(context)
+            )
+            .isEqualTo(ExtraDimScreen.KEY)
+    }
+
     private fun setReduceBrightColorsAvailable(available: Boolean) {
         SettingsShadowResources.overrideResource(
             com.android.internal.R.bool.config_reduceBrightColorsAvailable,
@@ -377,19 +427,19 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
     }
 
     private fun getMainSwitch(): TwoStatePreference? {
-        return fragment!!.findPreference<TwoStatePreference?>(MAIN_SWITCH_PREF_KEY)
+        return fragment!!.findPreference(MAIN_SWITCH_PREF_KEY)
     }
 
     private fun getIntensitySlider(): SliderPreference? {
-        return fragment!!.findPreference<SliderPreference?>(INTENSITY_PREF_KEY)
+        return fragment!!.findPreference(INTENSITY_PREF_KEY)
     }
 
     private fun getPersistentToggle(): TwoStatePreference? {
-        return fragment!!.findPreference<TwoStatePreference?>(PERSISTS_AFTER_RESTORE_PERF_KEY)
+        return fragment!!.findPreference(PERSISTS_AFTER_RESTORE_PERF_KEY)
     }
 
     override fun getShortcutToggle(): ShortcutPreference? {
-        return fragment!!.findPreference<ShortcutPreference?>(SHORTCUT_PREF_KEY)
+        return fragment!!.findPreference(SHORTCUT_PREF_KEY)
     }
 
     override fun launchFragment(): ToggleReduceBrightColorsPreferenceFragment {
@@ -401,9 +451,9 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
                     null as FragmentFactory?,
                 )
                 .moveToState(Lifecycle.State.RESUMED)
-        fragScenario!!.onFragment(
-            FragmentAction { frag: ToggleReduceBrightColorsPreferenceFragment? -> fragment = frag }
-        )
+        fragScenario!!.onFragment { frag: ToggleReduceBrightColorsPreferenceFragment? ->
+            fragment = frag
+        }
         return fragment!!
     }
 
@@ -412,10 +462,11 @@ class ToggleReduceBrightColorsPreferenceFragmentTest :
     companion object {
         private const val TOP_INTRO_PREF_KEY = "top_intro"
         private const val ILLUSTRATION_PREF_KEY = "animated_image"
-        private const val MAIN_SWITCH_PREF_KEY = "rbc_switch"
-        private const val INTENSITY_PREF_KEY = "rbc_intensity"
-        private const val PERSISTS_AFTER_RESTORE_PERF_KEY = "rbc_persist"
-        private const val SHORTCUT_PREF_KEY = "rbc_shortcut"
+        private const val MAIN_SWITCH_PREF_KEY = "reduce_bright_colors_switch"
+        private const val INTENSITY_PREF_KEY = "reduce_bright_colors_level"
+        private const val PERSISTS_AFTER_RESTORE_PERF_KEY =
+            "reduce_bright_colors_persist_across_reboots"
+        private const val SHORTCUT_PREF_KEY = "reduce_bright_colors_shortcut"
         private const val FOOTER_PREF = "html_description"
         private val IMAGE_RES = R.raw.extra_dim_banner
         private val IMAGE_URI = "android.resource://com.android.settings/$IMAGE_RES".toUri()

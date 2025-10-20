@@ -21,15 +21,19 @@ import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_OUTGOING_
 import static android.provider.Settings.EXTRA_ENABLE_MMS_DATA_REQUEST_REASON;
 import static android.provider.Settings.EXTRA_SUB_ID;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE;
+import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DISMISS;
 import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_NAMES;
 import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_TYPE;
 import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_TYPE_DUAL_CDMA;
+import static android.telephony.TelephonyManager.EXTRA_SUBSCRIPTION_ID;
 import static android.telephony.data.ApnSetting.TYPE_MMS;
 
 import static com.android.settings.sim.SimDialogActivity.DATA_PICK;
 import static com.android.settings.sim.SimDialogActivity.INVALID_PICK;
+import static com.android.settings.sim.SimDialogActivity.PREFERRED_PICK;
+import static com.android.settings.sim.SimDialogActivity.PREFERRED_SIM;
 import static com.android.settings.sim.SimSelectNotification.ENABLE_MMS_NOTIFICATION_CHANNEL;
 import static com.android.settings.sim.SimSelectNotification.ENABLE_MMS_NOTIFICATION_ID;
 import static com.android.settings.sim.SimSelectNotification.SIM_WARNING_NOTIFICATION_CHANNEL;
@@ -273,10 +277,35 @@ public class SimSelectNotificationTest {
         assertThat(capturedIntent).isNotNull();
         assertThat(capturedIntent.getComponent().getClassName()).isEqualTo(
                 SimDialogActivity.class.getName());
-        assertThat(capturedIntent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK)
-                .isNotEqualTo(0);
+        // Verify that the intent has the correct flags.
+        assertThat(capturedIntent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK).isNotEqualTo(0);
+        assertThat(capturedIntent.getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TASK).isNotEqualTo(0);
         assertThat(capturedIntent.getIntExtra(SimDialogActivity.DIALOG_TYPE_KEY, INVALID_PICK))
                 .isEqualTo(DATA_PICK);
+    }
+
+    @Test
+    public void onReceivePrimarySubListChange_WithAllPickExtra_shouldStartActivity() {
+        final int subId = 123;
+        Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
+        intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
+                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL);
+        intent.putExtra(EXTRA_SUBSCRIPTION_ID, subId);
+
+        SimSelectNotification.onPrimarySubscriptionListChanged(mContext, intent);
+
+        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(intentCaptor.capture());
+        Intent capturedIntent = intentCaptor.getValue();
+        assertThat(capturedIntent).isNotNull();
+        assertThat(capturedIntent.getComponent().getClassName()).isEqualTo(
+                SimDialogActivity.class.getName());
+        // Verify that the intent has the correct flags.
+        assertThat(capturedIntent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK).isNotEqualTo(0);
+        assertThat(capturedIntent.getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TASK).isNotEqualTo(0);
+        assertThat(capturedIntent.getIntExtra(SimDialogActivity.DIALOG_TYPE_KEY, INVALID_PICK))
+                .isEqualTo(PREFERRED_PICK);
+        assertThat(capturedIntent.hasExtra(PREFERRED_SIM)).isTrue();
     }
 
     @Test

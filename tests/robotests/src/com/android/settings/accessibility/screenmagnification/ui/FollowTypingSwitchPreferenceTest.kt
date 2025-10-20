@@ -22,18 +22,18 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
-
 import com.android.settings.R
 import com.android.settings.testutils.AccessibilityTestUtils.setWindowMagnificationSupported
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW
 import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.Rule
-
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestParameterInjector
@@ -65,6 +65,28 @@ class FollowTypingSwitchPreferenceTest {
     }
 
     @Test
+    fun getReadPermissions_returnsSettingsSecureStoreReadPermissions() {
+        assertThat(preference.getReadPermissions(context))
+            .isEqualTo(SettingsSecureStore.getReadPermissions())
+    }
+
+    @Test
+    fun getWritePermissions_returnsSettingsSecureStoreWritePermissions() {
+        assertThat(preference.getWritePermissions(context))
+            .isEqualTo(SettingsSecureStore.getWritePermissions())
+    }
+
+    @Test
+    fun getReadPermit_returnsAllow() {
+        assertThat(preference.getReadPermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
+    fun getWritePermit_returnsAllow() {
+        assertThat(preference.getWritePermit(context, 0, 0)).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
     @TestParameters(
         value =
             [
@@ -73,8 +95,11 @@ class FollowTypingSwitchPreferenceTest {
             ]
     )
     fun performClick(settingsEnabled: Boolean, expectedChecked: Boolean) {
-        getStorage().setBoolean(
-            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED, settingsEnabled)
+        getStorage()
+            .setBoolean(
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED,
+                settingsEnabled,
+            )
         val preferenceWidget = createFollowTypingWidget()
         assertThat(preferenceWidget.isChecked).isEqualTo(settingsEnabled)
 
@@ -82,8 +107,10 @@ class FollowTypingSwitchPreferenceTest {
 
         assertThat(preferenceWidget.isChecked).isEqualTo(expectedChecked)
         assertThat(
-            getStorage().getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED)
-        ).isEqualTo(expectedChecked)
+                getStorage()
+                    .getBoolean(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED)
+            )
+            .isEqualTo(expectedChecked)
     }
 
     @Test
@@ -94,14 +121,9 @@ class FollowTypingSwitchPreferenceTest {
                 "{inSetupWizard: false, supportWindowMag: true, expectedAvailable: true}",
                 "{inSetupWizard: true, supportWindowMag: false, expectedAvailable: false}",
                 "{inSetupWizard: true, supportWindowMag: true, expectedAvailable: false}",
-
             ]
     )
-    fun isAvailable(
-        inSetupWizard: Boolean,
-        supportWindowMag: Boolean,
-        expectedAvailable: Boolean,
-    ) {
+    fun isAvailable(inSetupWizard: Boolean, supportWindowMag: Boolean, expectedAvailable: Boolean) {
         assertIsAvailable(inSetupWizard, supportWindowMag, expectedAvailable)
     }
 
@@ -114,9 +136,9 @@ class FollowTypingSwitchPreferenceTest {
         try {
             activityController =
                 ActivityController.of(
-                    ComponentActivity(),
-                    Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
-                )
+                        ComponentActivity(),
+                        Intent().apply { putExtra(EXTRA_IS_SETUP_FLOW, inSetupWizard) },
+                    )
                     .create()
                     .start()
                     .postCreate(null)

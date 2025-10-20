@@ -24,6 +24,10 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
+    <style name="Transparent.NoAnimation" parent="Transparent">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
     <style name="Theme.Settings" parent="Theme.SettingsBase">
         <item name="android:clipToPadding">false</item>
         <item name="android:clipChildren">false</item>
@@ -68,12 +72,12 @@
         <item name="sliceViewStyle">@style/Widget.SliceView.Settings</item>
 
         <item name="notification_importance_button_background_color_unselected">@android:color/transparent</item>
-        <item name="notification_importance_button_border_color_unselected">@androidprv:color/materialColorOutlineVariant</item>
-        <item name="notification_importance_button_foreground_color_unselected">@androidprv:color/materialColorOnSurfaceVariant</item>
+        <item name="notification_importance_button_border_color_unselected">@color/materialColorOutlineVariant</item>
+        <item name="notification_importance_button_foreground_color_unselected">@color/materialColorOnSurfaceVariant</item>
 
-        <item name="notification_importance_button_background_color_selected">@androidprv:color/materialColorSecondaryContainer</item>
-        <item name="notification_importance_button_border_color_selected">@androidprv:color/materialColorOnSecondaryContainer</item>
-        <item name="notification_importance_button_foreground_color_selected">@androidprv:color/materialColorOnSecondaryContainer</item>
+        <item name="notification_importance_button_background_color_selected">@color/materialColorSecondaryContainer</item>
+        <item name="notification_importance_button_border_color_selected">@color/materialColorOnSecondaryContainer</item>
+        <item name="notification_importance_button_foreground_color_selected">@color/materialColorOnSecondaryContainer</item>
 
         <!-- For AppCompat widgets, e.g. TextInputLayout -->
         <item name="colorAccent">?android:attr/colorAccent</item>
@@ -107,7 +111,7 @@
     </style>
 
     <style name="Theme.LocalePickerWithRegionActivity" parent="Theme.Settings">
-        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
+        <item name="android:textColorHint">@color/materialColorOnSurfaceVariant</item>
     </style>
 
     <!-- TODO: Clean up this -->
@@ -255,4 +259,14 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
     </style>
+
+    <style name="ThemeOverlay.SafetyCenterColors.Light" parent="">
+        <item name="colorScIconInfo">@color/sc_icon_info_light</item>
+        <item name="colorScIconRecommend">@color/sc_icon_recommend_light</item>
+        <item name="colorScIconWarn">@color/sc_icon_warn_light</item>
+        <item name="colorScShieldAccent">@color/sc_shield_accent_light</item>
+    </style>
+
+    <style name="ThemeOverlay.SafetyCenterColors"
+        parent="ThemeOverlay.SafetyCenterColors.Light" />
 </resources>

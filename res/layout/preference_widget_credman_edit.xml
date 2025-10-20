@@ -18,6 +18,7 @@
 <!-- Edit button -->
     <ImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:id="@+id/edit_button"
     android:layout_width="24dp"
     android:layout_height="24dp"
@@ -25,4 +26,5 @@
     android:background="?android:attr/selectableItemBackground"
     android:layout_gravity="center"
     android:src="@drawable/ic_edit_24dp"
+    android:tint="@androidprv:color/materialColorOnSurfaceVariant"
     android:contentDescription="@string/edit" />

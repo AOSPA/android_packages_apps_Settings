@@ -33,6 +33,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.Authority;
@@ -112,6 +113,7 @@ public class ActionDisabledByAdminDialogTest {
     // TODO(b/414733570): When the flag is fully rolled out and ready for clean-up, use the
     // testcase with the feature flag enabled instead.
     @RequiresFlagsDisabled(Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @EnableFlags(Flags.FLAG_ENFORCING_ADMIN_EXTRA_ENABLED)
     @Test
     public void testGetEnforcingAdmin() {
         final int userId = 123;
@@ -122,30 +124,47 @@ public class ActionDisabledByAdminDialogTest {
 
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
+        intent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, restriction);
 
-        assertEquals(expectedAdmin, mDialog.getEnforcingAdmin(restriction, userId));
+        assertEquals(expectedAdmin, mDialog.getEnforcingAdmin(intent));
     }
 
-    @EnableFlags(Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
+    @EnableFlags({Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED,
+            Flags.FLAG_ENFORCING_ADMIN_EXTRA_ENABLED})
     @Test
-    public void testGetEnforcingAdmin_dpmPolicyTransparencyRefactorEnabled() {
+    public void testGetEnforcingAdmin_dpmPolicyTransparencyRefactorEnabled_intentWithoutAdminExtra() {
         final int userId = 123;
         final String restriction = "someRestriction";
-        final EnforcingAdmin expectedAdmin =
-                new EnforcingAdmin("test.pkg", new UnknownAuthority(), UserHandle.of(userId));
+        final EnforcingAdmin expectedAdmin = new EnforcingAdmin("test.pkg", new UnknownAuthority(),
+                UserHandle.of(userId));
         final PolicyEnforcementInfo policyEnforcementInfo = new PolicyEnforcementInfo(
                 List.of(expectedAdmin));
         when(mDevicePolicyManager.getEnforcingAdminsForPolicy(
                 DevicePolicyIdentifiers.getIdentifierForUserRestriction(restriction),
                 userId)).thenReturn(policyEnforcementInfo);
+        final Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
+        intent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, restriction);
 
-        assertEquals(expectedAdmin, mDialog.getEnforcingAdmin(restriction, userId));
+        assertEquals(expectedAdmin, mDialog.getEnforcingAdmin(intent));
     }
 
     @Test
     public void testGetEnforcingAdmin_fromNullRestriction_isNull() {
         assertEquals(null,
-                mDialog.getEnforcingAdmin(/* restriction= */ null, UserHandle.myUserId()));
+                mDialog.getEnforcingAdmin(new Intent()));
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_ENFORCING_ADMIN_EXTRA_ENABLED)
+    @Test
+    public void testGetEnforcingAdmin_enforcingAdminExtraEnabled() {
+        final EnforcingAdmin expectedAdmin = new EnforcingAdmin("test.pkg", new UnknownAuthority(),
+                UserHandle.CURRENT_OR_SELF);
+        final Intent intent = new Intent();
+        intent.putExtra(DevicePolicyManager.EXTRA_ENFORCING_ADMIN, expectedAdmin);
+
+        verifyNoMoreInteractions(mDevicePolicyManager);
+        assertEquals(expectedAdmin, mDialog.getEnforcingAdmin(intent));
     }
 
     @Test

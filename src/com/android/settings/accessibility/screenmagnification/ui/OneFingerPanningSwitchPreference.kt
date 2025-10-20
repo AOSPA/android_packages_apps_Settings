@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
@@ -67,10 +68,22 @@ class OneFingerPanningSwitchPreference :
 
     override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
 
+    override fun getReadPermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int = ReadWritePermit.ALLOW
+
+    override fun getWritePermit(
+        context: Context,
+        callingPid: Int,
+        callingUid: Int,
+    ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
+
     override fun isAvailable(context: Context): Boolean {
         return Flags.enableMagnificationOneFingerPanningGesture() &&
-                !context.isInSetupWizard() &&
-                context.isWindowMagnificationSupported()
+            !context.isInSetupWizard() &&
+            context.isWindowMagnificationSupported()
     }
 
     override fun isEnabled(context: Context): Boolean {
@@ -96,14 +109,17 @@ class OneFingerPanningSwitchPreference :
     companion object {
         const val KEY = Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED
         private val Context.dataStore: KeyValueStore
-            get() = SettingsSecureStore.get(this).apply {
-                setDefaultValue(
-                    KEY,
-                    this@dataStore.getResources().getBoolean(
-                        com.android.internal.R.bool.config_enable_a11y_magnification_single_panning
+            get() =
+                SettingsSecureStore.get(this).apply {
+                    setDefaultValue(
+                        KEY,
+                        this@dataStore.getResources()
+                            .getBoolean(
+                                com.android.internal.R.bool
+                                    .config_enable_a11y_magnification_single_panning
+                            ),
                     )
-                )
-            }
+                }
     }
 }
 // LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/OneFingerPanningPreferenceController.java)

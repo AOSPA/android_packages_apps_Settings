@@ -20,21 +20,19 @@ import android.Manifest.permission.MANAGE_EXTERNAL_STORAGE
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo.REQUESTED_PERMISSION_GRANTED
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Process
-import android.os.UserHandle
+import android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION
 import androidx.core.net.toUri
 import com.android.settings.R
-import com.android.settings.Settings.ManageExternalStorageActivity
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
+import com.android.settings.applications.getPackageInfoWithPermissions
+import com.android.settings.applications.isPermissionRequested
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settings.utils.highlightPreference
-import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 
@@ -45,7 +43,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
  * access > [app name]
  */
 @ProvidePreferenceScreen(AllFilesAccessAppDetailScreen.KEY, parameterized = true)
-open class AllFilesAccessAppDetailScreen(context: Context, arguments: Bundle) :
+open class AllFilesAccessAppDetailScreen(private val context: Context, arguments: Bundle) :
     SpecialAccessAppDetailScreen(context, arguments) {
 
     override val key
@@ -60,6 +58,9 @@ open class AllFilesAccessAppDetailScreen(context: Context, arguments: Bundle) :
     override val op
         get() = AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE
 
+    override val permission: String?
+        get() = PERMISSION
+
     override val setModeByUid: Boolean?
         get() = true
 
@@ -71,8 +72,7 @@ open class AllFilesAccessAppDetailScreen(context: Context, arguments: Bundle) :
 
     // Edge case: what if the app's read permission is revoked/granted
     override fun isAvailable(context: Context) =
-        super.isAvailable(context) &&
-            hasManageExternalStoragePermission(context, packageInfo?.applicationInfo)
+        super.isAvailable(context) && allFilesAccessFilter(context, packageInfo?.applicationInfo)
 
     override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
 
@@ -88,47 +88,26 @@ open class AllFilesAccessAppDetailScreen(context: Context, arguments: Bundle) :
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, ManageExternalStorageActivity::class.java, metadata?.key).apply {
+        Intent(ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
             data = "package:$packageName".toUri()
             highlightPreference(arguments, metadata?.bindingKey)
         }
 
     companion object {
         const val KEY = "special_access_all_files_access_app_detail"
+        const val PERMISSION = MANAGE_EXTERNAL_STORAGE
 
         @JvmStatic fun parameters(context: Context) = parameters(context, DEFAULT_SHOW_SYSTEM)
 
         fun parameters(context: Context, showSystemApp: Boolean) =
-            parameters(context, showSystemApp, ::hasManageExternalStoragePermission)
+            parameters(context, showSystemApp, ::allFilesAccessFilter)
 
-        private fun hasManageExternalStoragePermission(
-            context: Context,
-            appInfo: ApplicationInfo?,
-        ): Boolean {
+        private fun allFilesAccessFilter(context: Context, appInfo: ApplicationInfo?): Boolean {
             if (appInfo == null) return false
             val packageInfo =
-                try {
-                    context.packageManager.getPackageInfoAsUser(
-                        appInfo.packageName,
-                        PackageManager.GET_PERMISSIONS,
-                        UserHandle.myUserId(),
-                    )
-                } catch (_: Exception) {
-                    return false
-                }
+                context.getPackageInfoWithPermissions(appInfo.packageName) ?: return false
 
-            val index = packageInfo?.requestedPermissions?.indexOf(MANAGE_EXTERNAL_STORAGE) ?: -1
-            val flags = if (index >= 0) packageInfo?.requestedPermissionsFlags!![index] else 0
-
-            return (flags and REQUESTED_PERMISSION_GRANTED) != 0 &&
-                !isSystemOrRootUid(appInfo) &&
-                isNotChangeablePackages(appInfo)
+            return isPermissionRequested(packageInfo, PERMISSION)
         }
-
-        private fun isSystemOrRootUid(appInfo: ApplicationInfo): Boolean =
-            UserHandle.getAppId(appInfo.uid) in listOf(Process.SYSTEM_UID, Process.ROOT_UID)
-
-        private fun isNotChangeablePackages(appInfo: ApplicationInfo): Boolean =
-            appInfo.packageName !in setOf("com.android.systemui")
     }
 }

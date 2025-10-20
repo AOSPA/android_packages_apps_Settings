@@ -4,13 +4,6 @@ container: "system_ext"
 # NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
 
 flag {
-  name: "add_brightness_settings_in_suw"
-  namespace: "accessibility"
-  description: "Whether to add brightness preference in SUW Vision Settings"
-  bug: "332974327"
-}
-
-flag {
   name: "audio_balance_state_description"
   namespace: "accessibility"
   description: "Provides a more valuable state description to the audio balance slider."
@@ -53,6 +46,13 @@ flag {
   namespace: "accessibility"
   description: "Migrate daltonizer screen to the Catalyst infrastructure"
   bug: "413453264"
+}
+
+flag {
+  name: "catalyst_edit_shortcuts"
+  namespace: "accessibility"
+  description: "Migrate edit shortcuts screen to the Catalyst infrastructure"
+  bug: "440383851"
 }
 
 flag {
@@ -129,11 +129,4 @@ flag {
   metadata {
     purpose: PURPOSE_BUGFIX
   }
-}
-
-flag {
-  name: "remove_qs_tooltip_in_suw"
-  namespace: "accessibility"
-  description: "Don't show quick settings tooltip in SUW, since the user can't use quick settings there."
-  bug: "294560581"
 }

@@ -23,14 +23,27 @@ import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
+import com.android.settings.applications.applicationInfoComparator
+import com.android.settings.applications.getApplicationInfo
 import com.android.settings.applications.packageName
+import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppDetailScreen
+import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppDetailScreen.Companion.alarmsAndRemindersFilter
 import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen
-import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen.Companion.hasOverlayPermission
+import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen.Companion.displayOverOtherAppsFilter
+import com.android.settings.applications.specialaccess.InstallUnknownAppsAppDetailScreen
+import com.android.settings.applications.specialaccess.InstallUnknownAppsAppDetailScreen.Companion.installUnknownAppsFilter
+import com.android.settings.applications.specialaccess.ManageWriteSettingsAppDetailScreen
+import com.android.settings.applications.specialaccess.ManageWriteSettingsAppDetailScreen.Companion.manageWriteSettingsFilter
+import com.android.settings.applications.specialaccess.SpecialAccessAppDetailScreen.Companion.hasSpecialAccessPermission
+import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen
+import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen.Companion.writeSystemPreferencesFilter
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen
-import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen.Companion.hasPictureInPictureActivity
+import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen.Companion.pictureInPictureFilter
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -43,10 +56,10 @@ import kotlinx.coroutines.flow.flow
 
 @ProvidePreferenceScreen(AppInfoScreen.KEY, parameterized = true)
 open class AppInfoScreen(context: Context, override val arguments: Bundle) :
-    PreferenceScreenMixin, PreferenceTitleProvider {
-    private val packageName = arguments.packageName
+    PreferenceScreenMixin, PreferenceTitleProvider, PreferenceAvailabilityProvider {
+    private val packageName = arguments.packageName!!
 
-    private val appInfo = context.packageManager.getApplicationInfo(packageName, 0)
+    private val appInfo = context.getApplicationInfo(packageName)
 
     override val key: String
         get() = KEY
@@ -56,12 +69,12 @@ open class AppInfoScreen(context: Context, override val arguments: Bundle) :
     override val screenTitle: Int
         get() = R.string.application_info_label
 
-    override fun getTitle(context: Context): CharSequence =
-        appInfo.loadLabel(context.packageManager)
+    override fun getTitle(context: Context): CharSequence? =
+        appInfo?.loadLabel(context.packageManager)
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         Intent("android.settings.APPLICATION_DETAILS_SETTINGS").apply {
-            data = "package:${appInfo.packageName}".toUri()
+            data = "package:$packageName".toUri()
             // TODO: create highlight intent for SpaActivity.
         }
 
@@ -69,6 +82,8 @@ open class AppInfoScreen(context: Context, override val arguments: Bundle) :
         get() = R.string.menu_key_apps
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
+
+    override fun isAvailable(context: Context) = appInfo != null
 
     override fun hasCompleteHierarchy() = false
 
@@ -78,11 +93,25 @@ open class AppInfoScreen(context: Context, override val arguments: Bundle) :
         preferenceHierarchy(context) {
             +PreferenceCategory("advanced_app_info", R.string.advanced_apps) += {
                 arguments.putString("source", SOURCE)
-                if (hasPictureInPictureActivity(context, appInfo)) {
-                    +(PictureInPictureAppDetailScreen.KEY args arguments)
-                }
-                if (hasOverlayPermission(context, appInfo)) {
-                    +(DisplayOverOtherAppsAppDetailScreen.KEY args arguments)
+                appInfo?.let {
+                    if (hasSpecialAccessPermission(context, it, ::displayOverOtherAppsFilter)) {
+                        +(DisplayOverOtherAppsAppDetailScreen.KEY args arguments)
+                    }
+                    if (hasSpecialAccessPermission(context, it, ::manageWriteSettingsFilter)) {
+                        +(ManageWriteSettingsAppDetailScreen.KEY args arguments)
+                    }
+                    if (hasSpecialAccessPermission(context, it, ::pictureInPictureFilter)) {
+                        +(PictureInPictureAppDetailScreen.KEY args arguments)
+                    }
+                    if (hasSpecialAccessPermission(context, it, ::installUnknownAppsFilter)) {
+                        +(InstallUnknownAppsAppDetailScreen.KEY args arguments)
+                    }
+                    if (hasSpecialAccessPermission(context, it, ::alarmsAndRemindersFilter)) {
+                        +(AlarmsAndRemindersAppDetailScreen.KEY args arguments)
+                    }
+                    if (hasSpecialAccessPermission(context, it, ::writeSystemPreferencesFilter)) {
+                        +(WriteSystemPreferencesAppDetailScreen.KEY args arguments)
+                    }
                 }
             }
         }
@@ -93,9 +122,10 @@ open class AppInfoScreen(context: Context, override val arguments: Bundle) :
 
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
-            AppListRepositoryImpl(context).loadAndFilterApps(context.userId, true).forEach {
-                emit(Bundle(1).apply { putString("pkg", it.packageName) })
-            }
+            AppListRepositoryImpl(context)
+                .loadAndMaybeExcludeSystemApps(context.userId, !DEFAULT_SHOW_SYSTEM)
+                .sortedWith(context.applicationInfoComparator)
+                .forEach { emit(Bundle(1).apply { putString("pkg", it.packageName) }) }
         }
     }
 }

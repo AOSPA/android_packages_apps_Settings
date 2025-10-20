@@ -30,6 +30,7 @@ import androidx.preference.PreferenceScreen
 import androidx.test.annotation.UiThreadTest
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
 import com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.EXTERNAL_DISPLAY_RESOLUTION_SETTINGS_RESOURCE
 import com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.MORE_OPTIONS_KEY
 import com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.TOP_MODE_RES_MAX_COUNT
@@ -43,6 +44,7 @@ import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
+import org.mockito.kotlin.never
 import org.robolectric.Shadows.shadowOf
 
 /** Unit tests for [ResolutionPreferenceFragment]. */
@@ -79,7 +81,55 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
         val morePref = mPreferenceScreen.findPreference<PreferenceCategory>(MORE_OPTIONS_KEY)
         assertThat(morePref).isNotNull()
         assertThat(topPref!!.preferenceCount).isEqualTo(TOP_MODE_RES_MAX_COUNT)
-        assertThat(morePref!!.preferenceCount).isEqualTo(1)
+        assertThat(morePref!!.preferenceCount).isEqualTo(2)
+    }
+
+    @Test
+    @UiThreadTest
+    fun testModePreferences_areSortedByResolution() {
+        initFragment(mDisplays[0].id)
+        mHandler.flush()
+
+        val topPref = mPreferenceScreen.findPreference<PreferenceCategory>(TOP_OPTIONS_KEY)!!
+        val morePref = mPreferenceScreen.findPreference<PreferenceCategory>(MORE_OPTIONS_KEY)!!
+
+        val allPrefs = mutableListOf<Preference>()
+        (0 until topPref.preferenceCount).mapTo(allPrefs) { topPref.getPreference(it) }
+        (0 until morePref.preferenceCount).mapTo(allPrefs) { morePref.getPreference(it) }
+
+        // Splits W X H and ensure descending width and descending height
+        val resolutionComparator =
+            Comparator.comparingInt { pref: Preference ->
+                    pref.title.toString().split(" x ")[0].toInt()
+                }
+                .thenComparingInt { pref: Preference ->
+                    pref.title.toString().split(" x ")[1].toInt()
+                }
+                .reversed()
+
+        assertThat(allPrefs).isInOrder(resolutionComparator)
+    }
+
+    @Test
+    @UiThreadTest
+    fun testOnSameDisplayModeClicked_noModeChange_dialogNotShown() {
+        val display = mDisplays[0]
+        initFragment(display.id)
+        mHandler.flush()
+        val topPref = mPreferenceScreen.findPreference<PreferenceCategory>(TOP_OPTIONS_KEY)!!
+        (topPref.getPreference(0) as SelectorWithWidgetPreference).onClick()
+        shadowOf(Looper.getMainLooper()).idle()
+
+        verify(mMockedInjector, never())
+            .setUserPreferredDisplayMode(
+                display.id,
+                display.supportedModes[0],
+                /* storeMode= */ false,
+            )
+        assertThat(
+                fragment.parentFragmentManager.findFragmentByTag(ResolutionChangeDialogFragment.TAG)
+            )
+            .isNull()
     }
 
     @Test
@@ -162,8 +212,31 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
         }
     }
 
+    @Test
+    fun testModeSetFiltering() {
+        val displayId = mDisplays[0].id
+        initFragment(displayId)
+        fragment.setupModeFiltering()
+        fragment.onCreateCallback(null)
+        mHandler.flush()
+
+        mListener.update(displayId)
+        mHandler.flush()
+
+        val topPref = mPreferenceScreen.findPreference<PreferenceCategory>(TOP_OPTIONS_KEY)!!
+        val morePref = mPreferenceScreen.findPreference<PreferenceCategory>(MORE_OPTIONS_KEY)!!
+        val allPrefs = mutableListOf<Preference>()
+        (0 until topPref.preferenceCount).mapTo(allPrefs) { topPref.getPreference(it) }
+        (0 until morePref.preferenceCount).mapTo(allPrefs) { morePref.getPreference(it) }
+        assertThat(allPrefs.map { it.toString() })
+            .containsExactly("1920 x 1080", "800 x 600", "760 x 600")
+            .inOrder()
+    }
+
     private fun initFragment(displayId: Int) {
         if (::fragment.isInitialized) {
+            fragment.clearModeFiltering()
+            fragment.onCreateCallback(null)
             return
         }
         fragment =
@@ -247,6 +320,18 @@ class ResolutionPreferenceFragmentTest : ExternalDisplayTestBase() {
 
         override fun getResources(context: Context): Resources {
             return mockResources
+        }
+
+        fun setupModeFiltering() {
+            doReturn(intArrayOf(1920, 1080, 800, 600))
+                .`when`(mockResources)
+                .getIntArray(R.array.config_resolutionsShownOnExternalDisplay)
+        }
+
+        fun clearModeFiltering() {
+            doReturn(null)
+                .`when`(mockResources)
+                .getIntArray(R.array.config_resolutionsShownOnExternalDisplay)
         }
     }
 

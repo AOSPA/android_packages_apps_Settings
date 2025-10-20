@@ -75,6 +75,8 @@ sealed class ButtonNavigationSettingsOrderPreference(
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
+
+    override val indexable: Boolean = false
 }
 
 class DefaultButtonNavigationSettingsOrderPreference(store: ButtonNavigationSettingsOrderStore) :

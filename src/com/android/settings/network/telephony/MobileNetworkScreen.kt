@@ -27,15 +27,24 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.MobileNetworkActivity
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settings.datausage.BillingCycleScreen
+import com.android.settings.datausage.DataUsageListScreen
+import com.android.settings.deviceinfo.imei.getImeiList
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
+import com.android.settings.network.apn.ApnSettings
+import com.android.settings.network.apn.ApnSettingsScreen
 import com.android.settings.restriction.PreferenceRestrictionMixin
+import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settings.utils.putSubId
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
@@ -48,10 +57,11 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
     PreferenceScreenMixin,
     PreferenceAvailabilityProvider,
     PreferenceTitleProvider,
+    PreferenceIndexableProvider,
     PreferenceRestrictionMixin {
 
     private val subId =
-        arguments.getInt(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+        arguments.getSubId(Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
 
     override val key: String
         get() = KEY
@@ -79,15 +89,37 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
     override fun hasCompleteHierarchy() = false
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) {
+            if (Flags.deeplinkNetworkAndInternet25q4()) {
+                +MobileNetworkMainSwitchPreference(context, subId) order +0
+                val data = MobileNetworkData(context, coroutineScope, subId)
+                +EnabledStateUntitledCategory(subId) += {
+                    +MobileNetworkDataUsagePreference(context, coroutineScope, subId)
+                    +MobileNetworkSpnPreference(context, subId)
+                    +MobileNetworkPhoneNumberPreference(data)
+                    +EnabledNetworkModePreference(data)
+                    val imeiList = context.getImeiList
+                    +MobileNetworkImeiPreference(context, subId, imeiList)
+                    +(DataUsageListScreen.KEY args arguments)
+                    +(BillingCycleScreen.KEY args arguments) order 115
+                    +UntitledPreferenceCategoryMetadata("apn_and_protection_container") += {
+                        val bundle = Bundle(1).also { it.putSubId(ApnSettings.SUB_ID, subId) }
+                        +(ApnSettingsScreen.KEY args bundle)
+                    }
+                }
+            }
+        }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
-        return makeLaunchIntent(
-            context,
-            MobileNetworkActivity::class.java,
-            arguments,
-            metadata?.bindingKey,
-        )
+        val intent =
+            makeLaunchIntent(
+                context,
+                MobileNetworkActivity::class.java,
+                arguments,
+                metadata?.bindingKey,
+            )
+        intent.putExtra(Settings.EXTRA_SUB_ID, subId)
+        return intent
     }
 
     override val restrictionKeys
@@ -110,7 +142,7 @@ open class MobileNetworkScreen(override val arguments: Bundle) :
 
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
-            fun Int.toArguments() = Bundle(1).also { it.putInt(Settings.EXTRA_SUB_ID, this) }
+            fun Int.toArguments() = Bundle(1).also { it.putSubId(Settings.EXTRA_SUB_ID, this) }
             return SubscriptionUtil.getSelectableSubscriptionInfoList(context).asFlow().map {
                 it.subscriptionId.toArguments()
             }

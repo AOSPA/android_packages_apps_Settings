@@ -63,6 +63,8 @@ public class HdrBrightnessLevelPreferenceController extends SliderPreferenceCont
         mPreference.setMin(getMin());
         mPreference.setHapticFeedbackMode(SliderPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
         mPreference.setSliderStateDescription(formatStateDescription(getSliderPosition()));
+        mPreference.setSliderContentDescription(
+                mContext.getString(R.string.hdr_brightness_slider_description));
     }
 
     @Override

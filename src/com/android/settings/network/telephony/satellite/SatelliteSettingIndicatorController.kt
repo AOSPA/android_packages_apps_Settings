@@ -18,12 +18,15 @@ package com.android.settings.network.telephony.satellite
 import android.content.Context
 import android.os.PersistableBundle
 import android.telephony.CarrierConfigManager
+import android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL
 import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED
 import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceScreen
+import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
 import com.android.settings.network.telephony.TelephonyBasePreferenceController
 
@@ -60,10 +63,7 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
 
     override fun updateState(preference: Preference?) {
         super.updateState(preference)
-        updateHowItWorksContent(
-            screen,
-            SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId),
-        )
+        updateHowItWorksContent(screen, isSatelliteEligible())
     }
 
     override fun getAvailabilityStatus(subId: Int): Int {
@@ -73,36 +73,61 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
     @VisibleForTesting
     fun updateHowItWorksContent(screen: PreferenceScreen?, isSatelliteEligible: Boolean) {
         if (screen == null) {
+            Log.d(TAG, "updateHowItWorksContent: screen is null")
             return
         }
+
+        val category = screen.findPreference<PreferenceCategory?>(PREF_KEY_CATEGORY_HOW_IT_WORKS)
+        if (category == null) {
+            Log.d(TAG, "updateHowItWorksContent: category is null")
+            return
+        }
+
+        Log.d(
+            TAG,
+            "updateHowItWorksContent: isSatelliteEligible: $isSatelliteEligible, " +
+                "isCarrierRoamingNtnConnectedTypeManual: $isCarrierRoamingNtnConnectedTypeManual, " +
+                "isCarrierRoamingNtnConnectedTypeHybrid: $isCarrierRoamingNtnConnectedTypeHybrid, " +
+                "mIsSmsAvailable: $mIsSmsAvailable, " +
+                "mIsDataAvailable: $mIsDataAvailable, " +
+                "mDataMode: $mDataMode",
+        )
+
         /* Composes "How it works" section, which guides how users can use satellite messaging, when
         satellite messaging is included in user's mobile plan, or it'll will be grey out. */
-        if (!isSatelliteEligible) {
-            val category =
-                screen.findPreference<PreferenceCategory?>(PREF_KEY_CATEGORY_HOW_IT_WORKS)
-            if (category == null) return
-            category.isEnabled = false
-            category.shouldDisableView = true
-        }
+        category.isEnabled = isSatelliteEligible
+        category.shouldDisableView = !isSatelliteEligible
 
-        val supportedService: Preference = screen.findPreference(KEY_SUPPORTED_SERVICE)!!
-        if (mIsDataAvailable && mDataMode > SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED) {
-            supportedService.setSummary(
-                if (mDataMode == SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED)
-                    R.string.summary_supported_service_with_constrained_data
-                else R.string.summary_supported_service_with_unconstrained_data
-            )
-        }
-
-        if (!isCarrierRoamingNtnConnectedTypeManual) {
-            return
-        }
         val connectionGuide: Preference = screen.findPreference(KEY_SATELLITE_CONNECTION_GUIDE)!!
-        connectionGuide.setTitle(R.string.title_satellite_connection_guide_for_manual_type)
-        connectionGuide.setSummary(R.string.summary_satellite_connection_guide_for_manual_type)
+        val supportedService: Preference = screen.findPreference(KEY_SUPPORTED_SERVICE)!!
 
-        supportedService.setTitle(R.string.title_supported_service_for_manual_type)
-        supportedService.setSummary(R.string.summary_supported_service_for_manual_type)
+        if (
+            isCarrierRoamingNtnConnectedTypeManual ||
+                (isCarrierRoamingNtnConnectedTypeHybrid && !mIsDataAvailable)
+        ) {
+            Log.d(TAG, "updateHowItWorksContent: Setting UX for manual or hybrid without data")
+            connectionGuide.setTitle(R.string.title_satellite_connection_guide_for_manual_type)
+            connectionGuide.setSummary(R.string.summary_satellite_connection_guide_for_manual_type)
+            supportedService.setTitle(R.string.title_supported_service_for_manual_type)
+            supportedService.setSummary(R.string.summary_supported_service_for_manual_type)
+        } else {
+            Log.d(TAG, "updateHowItWorksContent: Setting UX for auto or hybrid with data")
+            connectionGuide.setTitle(R.string.title_satellite_connection_guide)
+            connectionGuide.setSummary(R.string.summary_satellite_connection_guide)
+            supportedService.setTitle(R.string.title_supported_service)
+            if (mIsDataAvailable && mDataMode > SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED) {
+                Log.d(TAG, "updateHowItWorksContent: Adjusting summary UX based on data mode")
+                supportedService.setSummary(
+                    if (mDataMode == SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED)
+                        R.string.summary_supported_service_with_constrained_data
+                    else R.string.summary_supported_service_with_unconstrained_data
+                )
+            } else {
+                supportedService.setSummary(
+                    R.string.summary_supported_service_without_data_supported
+                )
+            }
+        }
     }
 
     private val isCarrierRoamingNtnConnectedTypeManual: Boolean
@@ -113,13 +138,30 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
                     CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
                 )
 
+    private val isCarrierRoamingNtnConnectedTypeHybrid: Boolean
+        get() =
+            Flags.vzwAstSkyloFallback() &&
+                CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID ==
+                    mCarrierConfigs.getInt(
+                        CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                        CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+                    )
+
     private fun isSatelliteEligible(): Boolean {
-        if (
-            mCarrierConfigs.getInt(CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT) ==
-                CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
-        ) {
+        if (isCarrierRoamingNtnConnectedTypeManual) {
             return mIsSmsAvailable
         }
+
+        if (isCarrierRoamingNtnConnectedTypeHybrid) {
+            if (mCarrierConfigs.getBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false)) {
+                if (SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)) {
+                    return true
+                } else {
+                    return mIsSmsAvailable
+                }
+            }
+        }
+
         return SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)
     }
 
@@ -131,5 +173,7 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
         const val KEY_SATELLITE_CONNECTION_GUIDE: String = "key_satellite_connection_guide"
 
         @VisibleForTesting const val KEY_SUPPORTED_SERVICE: String = "key_supported_service"
+
+        const val TAG = "SatelliteSettingIndicatorController"
     }
 }

@@ -61,7 +61,7 @@ public class FreeformWindowsPreferenceController extends DeveloperOptionsPrefere
 
     public FreeformWindowsPreferenceController(
             Context context, @Nullable DevelopmentSettingsDashboardFragment fragment) {
-        this(context, fragment, DesktopState.fromContext(context));
+        this(context, fragment, DesktopState.getInstance(context));
     }
 
     @Override

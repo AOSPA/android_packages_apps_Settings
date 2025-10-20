@@ -16,6 +16,8 @@
 
 package com.android.settings.widget;
 
+import android.app.admin.EnforcingAdmin;
+
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /*
@@ -105,6 +107,21 @@ public abstract class SwitchWidgetController {
      *
      * @param admin Details of the admin who enforced the restriction. If it
      * is {@code null}, then this preference will be enabled. Otherwise, it will be disabled.
+     * @deprecated Use {@link #setDisabledByAdmin(EnforcingAdmin)} instead.
      */
+    @Deprecated
     public abstract void setDisabledByAdmin(EnforcedAdmin admin);
+
+    /**
+     * Disable the switch based on the enforcing admin.
+     *
+     * @param admin Details of the admin who enforced the restriction. If it
+     * is {@code null}, then this preference will be enabled. Otherwise, it will be disabled.
+     */
+    public abstract void setDisabledByAdmin(EnforcingAdmin admin);
+
+    /**
+     * Sets the restriction that this switch is associated with.
+     */
+    public abstract void setRestriction(String restriction);
 }

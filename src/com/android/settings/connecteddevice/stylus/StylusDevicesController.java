@@ -39,7 +39,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
@@ -88,7 +88,7 @@ public class StylusDevicesController extends AbstractPreferenceController implem
 
     @VisibleForTesting
     @Nullable
-    PreferenceCategory mPreferencesContainer;
+    PreferenceGroup mPreferencesContainer;
 
     @VisibleForTesting
     @Nullable
@@ -265,7 +265,7 @@ public class StylusDevicesController extends AbstractPreferenceController implem
 
     @Override
     public final void displayPreference(PreferenceScreen screen) {
-        mPreferencesContainer = (PreferenceCategory) screen.findPreference(getPreferenceKey());
+        mPreferencesContainer = screen.findPreference(getPreferenceKey());
         super.displayPreference(screen);
 
         refresh();

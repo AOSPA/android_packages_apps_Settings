@@ -18,12 +18,16 @@ package com.android.settings.network.telephony.satellite;
 
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
 
+import android.annotation.FlaggedApi;
 import android.content.Context;
+import android.telephony.satellite.SatelliteAccessConfiguration;
 import android.telephony.satellite.SatelliteManager;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+
+import com.android.internal.telephony.flags.Flags;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -74,7 +78,11 @@ public class SatelliteCarrierSettingUtils {
 
     /**
      * Check if current carrier is supported in this region.
+     *
+     * @deprecated Once {@link Flags#FLAG_SUPPORT_CARRIER_IDS_IN_GEOFENCE} is true,
+     * it shall use isSatelliteRegionSupportedForSpecificCarrier instead.
      */
+    @Deprecated
     public static boolean isCarrierSatelliteRegionSupported(Context context,
             @Nullable List<Integer> tagIds, int carrierId) {
         if (tagIds == null) {
@@ -92,8 +100,29 @@ public class SatelliteCarrierSettingUtils {
         return tagIds.stream().anyMatch(tagId -> tagId == SATELLITE_REGION_TAG_ID);
     }
 
+    /**
+     * Check if current carrier is supported in this region.
+     */
+    @FlaggedApi(Flags.FLAG_SUPPORT_CARRIER_IDS_IN_GEOFENCE)
+    public static boolean isSatelliteRegionSupportedForSpecificCarrier(
+            SatelliteAccessConfiguration configuration, int carrierId) {
+        Log.d(TAG, "SatelliteAccessConfiguration : " + configuration
+                + " / current target carrier id : " + carrierId);
+        if (configuration == null) {
+            return true;
+        }
+
+        if (configuration.getCarrierIds().isEmpty()) {
+            return configuration.getTagIds().stream().anyMatch(
+                    tagId -> tagId == SATELLITE_REGION_TAG_ID);
+        }
+
+        return configuration.getCarrierIds().stream().anyMatch(
+                it -> it == carrierId);
+    }
+
     @VisibleForTesting
-    static class SatelliteManagerWrapper {
+    public static class SatelliteManagerWrapper {
         private final SatelliteManager mSatelliteManager;
 
         SatelliteManagerWrapper(Context context) {

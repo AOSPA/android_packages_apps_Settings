@@ -30,11 +30,12 @@
             android:id="@+id/display_topology_preference_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/display_topology_pane_in_appbar_layout_horizontal_padding"
             app:layout_scrollFlags="scroll|enterAlways" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
+    <com.android.settings.connecteddevice.display.FocusAwareFrameLayout
         android:id="@+id/selected_display_preference_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

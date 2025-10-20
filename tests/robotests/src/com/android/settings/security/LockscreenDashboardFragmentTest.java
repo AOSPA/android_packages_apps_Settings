@@ -29,7 +29,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
 import com.android.settings.display.AmbientDisplayNotificationsPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
@@ -79,21 +78,6 @@ public class LockscreenDashboardFragmentTest {
         assertThat(keys).containsAtLeast(LockscreenDashboardFragment.KEY_LOCK_SCREEN_NOTIFICATON,
                 LockscreenDashboardFragment.KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE,
                 LockscreenDashboardFragment.KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE_HEADER);
-    }
-
-    @Test
-    public void onAttach_alwaysOn_shouldInvokeSetters() {
-        final AmbientDisplayAlwaysOnPreferenceController controller = spy(
-                new AmbientDisplayAlwaysOnPreferenceController(mContext, "key"));
-        doReturn(controller).when(mTestFragment).use(
-                AmbientDisplayAlwaysOnPreferenceController.class);
-
-        mTestFragment.onAttach(mContext);
-        if (mTestFragment.isCatalystEnabled()) {
-            verifyNoInteractions(controller);
-        } else {
-            verify(controller).setConfig(any());
-        }
     }
 
     @Test

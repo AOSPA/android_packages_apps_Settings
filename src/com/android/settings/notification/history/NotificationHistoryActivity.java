@@ -52,6 +52,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Space;
 import android.widget.TextView;
 
 import androidx.core.graphics.ColorUtils;
@@ -160,24 +162,15 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
             View viewForPackage = LayoutInflater.from(this)
                     .inflate(R.layout.notification_history_app_layout, null);
 
-            int cornerType = ROUND_CORNER_CENTER;
-            if (i == (notificationsSize - 1)) {
-                cornerType |= ROUND_CORNER_BOTTOM;
-            }
-            if (i == 0) {
-                cornerType |= ROUND_CORNER_TOP;
-            }
-            int backgroundRes = NotificationHistoryActivity.getRoundCornerDrawableRes(cornerType);
-            viewForPackage.setBackgroundResource(backgroundRes);
-
             final View container = viewForPackage.findViewById(R.id.notification_list_wrapper);
             container.setVisibility(GONE);
             View header = viewForPackage.findViewById(R.id.app_header);
             NotificationExpandButton expand = viewForPackage.findViewById(
                     com.android.internal.R.id.expand_button);
-            int textColor = obtainThemeColor(android.R.attr.textColorPrimary);
-            int backgroundColor = obtainThemeColor(android.R.attr.colorBackgroundFloating);
-            int pillColor = ColorUtils.blendARGB(textColor, backgroundColor, 0.9f);
+            int textColor = getResources().getColor(
+                    com.android.internal.R.color.materialColorOnSurface, getTheme());
+            int pillColor = getResources().getColor(
+                    com.android.internal.R.color.surface_effect_3, getTheme());
             expand.setDefaultPillColor(pillColor);
             expand.setDefaultTextColor(textColor);
             expand.setExpanded(false);
@@ -206,16 +199,16 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
             ImageView icon = viewForPackage.findViewById(R.id.icon);
             icon.setImageDrawable(nhp.icon);
 
-            TextView count = viewForPackage.findViewById(R.id.count);
-            count.setText(StringUtil.getIcuPluralsString(this, nhp.notifications.size(),
-                    R.string.notification_history_count));
+            TextView count = viewForPackage.findViewById(
+                    com.android.internal.R.id.expand_button_number);
+            count.setText(String.valueOf(nhp.notifications.size()));
+            count.setVisibility(VISIBLE);
 
             final NotificationHistoryRecyclerView rv =
                     viewForPackage.findViewById(R.id.notification_list);
             rv.setAdapter(new NotificationHistoryAdapter(NotificationHistoryActivity.this, mNm, rv,
                     newCount -> {
-                        count.setText(StringUtil.getIcuPluralsString(this, newCount,
-                                R.string.notification_history_count));
+                        count.setText(String.valueOf(newCount));
                         if (newCount == 0) {
                             viewForPackage.setVisibility(GONE);
                         }
@@ -224,6 +217,12 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
                     new ArrayList<>(nhp.notifications));
 
             mTodayView.addView(viewForPackage);
+            Space space = new Space(NotificationHistoryActivity.this);
+
+            // Equally distribute width among all grid items.
+            space.setLayoutParams(
+                    new LinearLayout.LayoutParams(/* width= */ 0, 1, 1));
+            mTodayView.addView(space);
         }
     };
 
@@ -326,41 +325,6 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
         super.onDestroy();
     }
 
-    public static final int ROUND_CORNER_CENTER = 1;
-    public static final int ROUND_CORNER_TOP = 1 << 1;
-    public static final int ROUND_CORNER_BOTTOM = 1 << 2;
-
-    public static @DrawableRes int getRoundCornerDrawableRes(int cornerType) {
-
-        if ((cornerType & ROUND_CORNER_CENTER) == 0) {
-            return 0;
-        }
-
-        if (((cornerType & ROUND_CORNER_TOP) != 0) && ((cornerType & ROUND_CORNER_BOTTOM) == 0)) {
-            // the first
-            return com.android.settingslib.widget.theme.R.drawable.settingslib_round_background_top;
-        } else if (((cornerType & ROUND_CORNER_BOTTOM) != 0)
-                && ((cornerType & ROUND_CORNER_TOP) == 0)) {
-            // the last
-            return com.android.settingslib.widget.theme.R.drawable.settingslib_round_background_bottom;
-        } else if (((cornerType & ROUND_CORNER_TOP) != 0)
-                && ((cornerType & ROUND_CORNER_BOTTOM) != 0)) {
-            // the only one preference
-            return com.android.settingslib.widget.theme.R.drawable.settingslib_round_background;
-        } else {
-            // in the center
-            return com.android.settingslib.widget.theme.R.drawable.settingslib_round_background_center;
-        }
-    }
-
-    private @ColorInt int obtainThemeColor(@AttrRes int attrRes) {
-        Resources.Theme theme = new ContextThemeWrapper(this,
-                android.R.style.Theme_DeviceDefault_DayNight).getTheme();
-        try (TypedArray ta = theme.obtainStyledAttributes(new int[]{attrRes})) {
-            return ta == null ? 0 : ta.getColor(0, 0);
-        }
-    }
-
     private void bindSwitch() {
         if (mSwitchBar != null) {
             mSwitchBar.show();
@@ -441,6 +405,9 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
                     new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm, mUm,
                             true, mUiEventLogger, mContentRestrictedUsers));
             mSnoozedRv.setNestedScrollingEnabled(false);
+            mSnoozedRv.addItemDecoration(new ItemSpacingDecoration(
+                    NotificationHistoryActivity.this.getResources().getDimensionPixelSize(
+                            R.dimen.chartview_divider_width)));
 
             if (snoozed == null || snoozed.length == 0) {
                 mSnoozeView.setVisibility(GONE);
@@ -457,6 +424,9 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
                     new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm, mUm,
                             false, mUiEventLogger, mContentRestrictedUsers));
             mDismissedRv.setNestedScrollingEnabled(false);
+            mDismissedRv.addItemDecoration(new ItemSpacingDecoration(
+                    NotificationHistoryActivity.this.getResources().getDimensionPixelSize(
+                            R.dimen.chartview_divider_width)));
 
             if (dismissed == null || dismissed.length == 0) {
                 mDismissView.setVisibility(GONE);

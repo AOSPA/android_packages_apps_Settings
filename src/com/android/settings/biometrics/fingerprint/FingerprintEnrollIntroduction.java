@@ -19,6 +19,7 @@ package com.android.settings.biometrics.fingerprint;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FINGERPRINT_UNLOCK_DISABLED;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PolicyEnforcementInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -267,6 +268,13 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected boolean isDisabledByAdmin() {
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()
+                && android.app.admin.flags.Flags.setKeyguardDisabledFeaturesCoexistence()) {
+            final PolicyEnforcementInfo info =
+                    RestrictedLockUtilsInternal.getEnforcingAdminsForKeyguardFeatures(this,
+                            DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId);
+            return info != null && info.getMostImportantEnforcingAdmin() != null;
+        }
         return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                 this, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId) != null;
     }

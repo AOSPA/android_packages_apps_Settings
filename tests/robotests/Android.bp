@@ -67,6 +67,7 @@ android_robolectric_test {
         "androidx.test.core",
         "androidx.test.espresso.core",
         "androidx.test.ext.junit",
+        "androidx.test.ext.truth",
         "androidx.test.rules",
         "androidx.test.runner",
         "com_android_server_accessibility_flags_lib",
@@ -80,6 +81,7 @@ android_robolectric_test {
         "testables",
         "android.app.flags-aconfig-java",
         "com_android_systemui_flags_lib",
+        "device_policy_aconfig_flags_lib",
     ],
 
     libs: [
@@ -115,6 +117,17 @@ android_robolectric_test {
     ],
 
     strict_mode: false,
+}
+
+java_library {
+    name: "DSAutoRotateSetting-testutils",
+    srcs: [
+        "src/com/android/settings/testutils/DeviceStateAutoRotateSettingTestUtils.java",
+    ],
+    libs: [
+        "mockito-target-extended",
+    ],
+    test_only: true,
 }
 
 java_library {

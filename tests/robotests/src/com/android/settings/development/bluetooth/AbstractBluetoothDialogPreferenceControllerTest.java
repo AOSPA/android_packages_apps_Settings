@@ -229,6 +229,63 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
                 mCodecConfigAAC.getCodecSpecific1());
     }
 
+    @Test
+    public void getHighestSampleRate_nullConfig_returnsNone() {
+        // When the config is null, return SAMPLE_RATE_NONE.
+        assertThat(AbstractBluetoothDialogPreferenceController.getHighestSampleRate(null))
+                .isEqualTo(BluetoothCodecConfig.SAMPLE_RATE_NONE);
+    }
+
+    @Test
+    public void getHighestSampleRate_returnsHighest() {
+        // Verify that the highest available sample rate is returned based on the priority list.
+        BluetoothCodecConfig config = new BluetoothCodecConfig.Builder()
+                .setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_96000
+                        | BluetoothCodecConfig.SAMPLE_RATE_44100)
+                .build();
+
+        assertThat(AbstractBluetoothDialogPreferenceController.getHighestSampleRate(config))
+                .isEqualTo(BluetoothCodecConfig.SAMPLE_RATE_96000);
+    }
+
+    @Test
+    public void getHighestBitsPerSample_nullConfig_returnsNone() {
+        // When the config is null, return BITS_PER_SAMPLE_NONE.
+        assertThat(AbstractBluetoothDialogPreferenceController.getHighestBitsPerSample(null))
+                .isEqualTo(BluetoothCodecConfig.BITS_PER_SAMPLE_NONE);
+    }
+
+    @Test
+    public void getHighestBitsPerSample_returnsHighest() {
+        // Verify that the highest available bits per sample is returned based on the priority list.
+        BluetoothCodecConfig config = new BluetoothCodecConfig.Builder()
+                .setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_24
+                        | BluetoothCodecConfig.BITS_PER_SAMPLE_16)
+                .build();
+
+        assertThat(AbstractBluetoothDialogPreferenceController.getHighestBitsPerSample(config))
+                .isEqualTo(BluetoothCodecConfig.BITS_PER_SAMPLE_24);
+    }
+
+    @Test
+    public void getHighestChannelMode_nullConfig_returnsNone() {
+        // When the config is null, return CHANNEL_MODE_NONE.
+        assertThat(AbstractBluetoothDialogPreferenceController.getHighestChannelMode(null))
+                .isEqualTo(BluetoothCodecConfig.CHANNEL_MODE_NONE);
+    }
+
+    @Test
+    public void getHighestChannelMode_returnsHighest() {
+        // Verify that the highest available channel mode is returned based on the priority list.
+        BluetoothCodecConfig config = new BluetoothCodecConfig.Builder()
+                .setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_STEREO
+                        | BluetoothCodecConfig.CHANNEL_MODE_MONO)
+                .build();
+
+        assertThat(AbstractBluetoothDialogPreferenceController.getHighestChannelMode(config))
+                .isEqualTo(BluetoothCodecConfig.CHANNEL_MODE_STEREO);
+    }
+
     private static class AbstractBluetoothDialogPreferenceControllerImpl extends
             AbstractBluetoothDialogPreferenceController {
 

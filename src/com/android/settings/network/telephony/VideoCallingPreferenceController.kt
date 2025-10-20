@@ -45,7 +45,7 @@ constructor(
     key: String,
     private val callStateRepository: CallStateRepository = CallStateRepository(context),
     private val videoCallingRepository: VideoCallingRepository = VideoCallingRepository(context),
-) : TogglePreferenceController(context, key), On4gLteUpdateListener {
+) : TogglePreferenceController(context, key), On4gLteUpdateListener, AirplaneModeChangedCallback {
 
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     private var preference: TwoStatePreference? = null
@@ -53,6 +53,7 @@ constructor(
     private var isVisible = false
     private var videoCallEditable = false
     private var isInCall = false
+    @VisibleForTesting var isAirplaneModeOn: Boolean = false
 
     /** Init instance of VideoCallingPreferenceController. */
     fun init(
@@ -73,21 +74,22 @@ constructor(
         preference = screen.findPreference(preferenceKey)
         Log.d(
             TAG,
-            "displayPreference: isVisible: $isVisible, videoCallEditable: $videoCallEditable"
+            "displayPreference: isVisible: $isVisible, videoCallEditable: $videoCallEditable",
         )
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        videoCallingRepository.isVideoCallReadyFlow(subId)
-            .collectLatestWithLifecycle(viewLifecycleOwner) { isReady ->
-                Log.d(TAG, "isVideoCallReadyFlow: update visible: $isReady")
-                isVisible = isReady
-                preference?.let{
-                    it.isVisible = isVisible
-                    updateState(it)
-                }
-                callingPreferenceCategoryController?.updateChildVisible(preferenceKey, isReady)
+        videoCallingRepository.isVideoCallReadyFlow(subId).collectLatestWithLifecycle(
+            viewLifecycleOwner
+        ) { isReady ->
+            Log.d(TAG, "isVideoCallReadyFlow: update visible: $isReady")
+            isVisible = isReady
+            preference?.let {
+                it.isVisible = isVisible
+                updateState(it)
             }
+            callingPreferenceCategoryController?.updateChildVisible(preferenceKey, isReady)
+        }
         callStateRepository.callStateFlow(subId).collectLatestWithLifecycle(viewLifecycleOwner) {
             callState ->
             isInCall = callState != TelephonyManager.CALL_STATE_IDLE
@@ -105,7 +107,7 @@ constructor(
     }
 
     private fun updatePreference() {
-        preference?.isEnabled = videoCallEditable && !isInCall
+        preference?.isEnabled = videoCallEditable && !isInCall && !isAirplaneModeOn
         preference?.isChecked = videoCallEditable && isChecked
     }
 
@@ -129,6 +131,10 @@ constructor(
 
     override fun on4gLteUpdated() {
         preference?.let { updateState(it) }
+    }
+
+    override fun notifyAirplaneModeChanged(isAirplaneModeOn: Boolean) {
+        this.isAirplaneModeOn = isAirplaneModeOn
     }
 
     @VisibleForTesting fun queryImsState(subId: Int) = VtQueryImsState(mContext, subId)

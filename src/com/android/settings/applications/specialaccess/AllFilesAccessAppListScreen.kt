@@ -18,11 +18,11 @@ package com.android.settings.applications.specialaccess
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.content.Intent
+import android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
 import com.android.settings.R
-import com.android.settings.Settings.ManageExternalStorageActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
-import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 
@@ -47,7 +47,7 @@ open class AllFilesAccessAppListScreen : SpecialAccessAppListScreen() {
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(context, ManageExternalStorageActivity::class.java, metadata?.key)
+        if (metadata == null) Intent(ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION) else null
 
     override val appDetailScreenKey: String
         get() = AllFilesAccessAppDetailScreen.KEY

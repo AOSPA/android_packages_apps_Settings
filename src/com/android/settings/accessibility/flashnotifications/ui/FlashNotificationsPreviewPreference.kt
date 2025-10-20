@@ -37,8 +37,12 @@ import com.android.settingslib.widget.ButtonPreference
 import com.android.settingslib.widget.ButtonPreference.SIZE_EXTRA_LARGE
 import com.android.settingslib.widget.ButtonPreference.TYPE_FILLED
 
-class FlashNotificationsPreviewPreference : PreferenceMetadata, PreferenceBinding,
-    PreferenceLifecycleProvider, PreferenceAvailabilityProvider, View.OnClickListener,
+class FlashNotificationsPreviewPreference :
+    PreferenceMetadata,
+    PreferenceBinding,
+    PreferenceLifecycleProvider,
+    PreferenceAvailabilityProvider,
+    View.OnClickListener,
     KeyedObserver<String?> {
 
     private lateinit var lifecycleContext: PreferenceLifecycleContext
@@ -49,6 +53,9 @@ class FlashNotificationsPreviewPreference : PreferenceMetadata, PreferenceBindin
 
     override val title: Int
         get() = R.string.flash_notifications_preview
+
+    override val indexable
+        get() = false
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
@@ -68,13 +75,11 @@ class FlashNotificationsPreviewPreference : PreferenceMetadata, PreferenceBindin
         dataStore.removeObserver(SCREEN_FLASH_NOTIFICATION, this)
     }
 
-    override fun createWidget(context: Context) = ButtonPreference(context).apply {
-        setButtonStyle(TYPE_FILLED, SIZE_EXTRA_LARGE)
-        setOnClickListener(this@FlashNotificationsPreviewPreference)
-    }
-
-    override fun isIndexable(context: Context): Boolean = false
-
+    override fun createWidget(context: Context) =
+        ButtonPreference(context).apply {
+            setButtonStyle(TYPE_FILLED, SIZE_EXTRA_LARGE)
+            setOnClickListener(this@FlashNotificationsPreviewPreference)
+        }
 
     override fun isAvailable(context: Context): Boolean {
         val currentState = FlashNotificationsUtil.getFlashNotificationsState(context)
@@ -85,7 +90,7 @@ class FlashNotificationsPreviewPreference : PreferenceMetadata, PreferenceBindin
         val intent = Intent(FlashNotificationsUtil.ACTION_FLASH_NOTIFICATION_START_PREVIEW)
         intent.putExtra(
             FlashNotificationsUtil.EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE,
-            FlashNotificationsUtil.TYPE_SHORT_PREVIEW
+            FlashNotificationsUtil.TYPE_SHORT_PREVIEW,
         )
         v?.context?.sendBroadcastAsUser(intent, UserHandle.SYSTEM)
     }

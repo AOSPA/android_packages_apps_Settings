@@ -24,7 +24,6 @@ import com.android.settings.R
 import com.android.settings.Settings.FirmwareVersionActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -36,8 +35,6 @@ import kotlinx.coroutines.CoroutineScope
 open class FirmwareVersionScreen : PreferenceScreenMixin, PreferenceSummaryProvider {
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
-
-    override fun isFlagEnabled(context: Context) = Flags.catalystFirmwareVersion()
 
     override val key: String
         get() = KEY
@@ -51,6 +48,9 @@ open class FirmwareVersionScreen : PreferenceScreenMixin, PreferenceSummaryProvi
     override val keywords: Int
         get() = R.string.keywords_android_version
 
+    override val indexable
+        get() = true
+
     // Once fully launch, change to PreferenceFragment and clean up FirmwareVersionScreenTest
     override fun fragmentClass(): Class<out Fragment>? = FirmwareVersionSettings::class.java
 
@@ -58,8 +58,6 @@ open class FirmwareVersionScreen : PreferenceScreenMixin, PreferenceSummaryProvi
 
     override val highlightMenuKey: Int
         get() = R.string.menu_key_about_device
-
-    override fun isIndexable(context: Context) = true
 
     override fun hasCompleteHierarchy() = true
 

@@ -30,17 +30,18 @@
         settings:searchable="false" />
 
     <com.android.settingslib.widget.MainSwitchPreference
-        android:key="rbc_switch"
+        android:key="reduce_bright_colors_switch"
         android:title="@string/reduce_bright_colors_switch_title"
         settings:controller="com.android.settings.accessibility.detail.extradim.ExtraDimMainSwitchPreferenceController" />
 
     <PreferenceCategory
+        android:key="general_categories"
         android:title="@string/accessibility_screen_option"
         settings:searchable="false">
 
         <com.android.settingslib.widget.SliderPreference
-            android:key="rbc_intensity"
-            android:persistent="false"
+            android:key="reduce_bright_colors_level"
+            android:persistent="true"
             android:title="@string/reduce_bright_colors_intensity_preference_title"
             settings:textEnd="@string/brightness_intensity_end_label"
             settings:textStart="@string/brightness_intensity_start_label"
@@ -50,15 +51,15 @@
              Therefore, We wouldn't want `Keep on after device restarts` preference in the Extra Dim
              shows up as the search result when the user searches `restart`-->
         <SwitchPreferenceCompat
-            android:key="rbc_persist"
-            android:persistent="false"
+            android:key="reduce_bright_colors_persist_across_reboots"
+            android:persistent="true"
             android:title="@string/reduce_bright_colors_persist_preference_title"
             settings:searchable="false"
             settings:controller="com.android.settings.accessibility.detail.extradim.PersistentAfterRestartsPreferenceController"/>
 
         <com.android.settings.accessibility.ShortcutPreference
-            android:key="rbc_shortcut"
-            android:persistent="false"
+            android:key="reduce_bright_colors_shortcut"
+            android:persistent="true"
             android:title="@string/reduce_bright_colors_shortcut_title"
             settings:controller="com.android.settings.accessibility.ToggleShortcutPreferenceController" />
 

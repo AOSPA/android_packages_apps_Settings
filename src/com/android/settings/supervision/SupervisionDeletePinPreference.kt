@@ -17,11 +17,14 @@ package com.android.settings.supervision
 
 import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_DELETE_PIN
+import android.app.settings.SettingsEnums.SUPERVISION_MANAGE_PIN_SCREEN
 import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
 import android.os.UserManager
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
@@ -72,6 +75,10 @@ class SupervisionDeletePinPreference() :
     }
 
     override fun onPreferenceClick(preference: Preference): Boolean {
+        FeatureFactory.featureFactory.metricsFeatureProvider.clicked(
+            SUPERVISION_MANAGE_PIN_SCREEN,
+            KEY,
+        )
         showDeletionDialog(preference.context)
         return true
     }
@@ -89,18 +96,49 @@ class SupervisionDeletePinPreference() :
                 .setTitle(R.string.supervision_delete_pin_error_header)
                 .setMessage(R.string.supervision_delete_pin_error_message)
                 .setPositiveButton(R.string.okay, null)
-        } else if (context.areAnyUsersExceptCurrentSupervised(supervisionManager, userManager)) {
-            builder
-                .setTitle(R.string.supervision_delete_pin_supervision_enabled_header)
-                .setMessage(R.string.supervision_delete_pin_supervision_enabled_message)
-                .setPositiveButton(R.string.okay, null)
-                .setNegativeButton(R.string.learn_more, { _, _ -> onLearnMore() })
+        } else if (Flags.enableSupervisionSettingsUiUpdates()) {
+            val roleHolders = context.supervisionRoleHolders
+
+            if (roleHolders.isEmpty()) { // Platform supervision only.
+                // TODO(b/450306366): Also check authentication methods of supervising apps across
+                // users.
+                if (context.areAnyUsersExceptCurrentSupervised(supervisionManager, userManager)) {
+                    builder
+                        .setTitle(R.string.supervision_delete_pin_supervision_enabled_header)
+                        .setMessage(R.string.supervision_cant_delete_pin_multi_user_switch_message)
+                        .setPositiveButton(
+                            R.string.supervision_turn_off_controls_button_label,
+                            { _, _ -> onConfirmDeleteClick() },
+                        )
+                        .setNegativeButton(R.string.cancel, null)
+                } else {
+                    builder
+                        .setTitle(R.string.supervision_delete_pin_turn_off_controls_confirm_header)
+                        .setMessage(
+                            R.string.supervision_delete_pin_turn_off_controls_confirm_message
+                        )
+                        .setPositiveButton(R.string.supervision_delete_and_turn_off_button_label) {
+                            _,
+                            _ ->
+                            onConfirmDeleteClick()
+                        }
+                        .setNegativeButton(R.string.cancel, null)
+                }
+            }
         } else {
-            builder
-                .setTitle(R.string.supervision_delete_pin_confirm_header)
-                .setMessage(R.string.supervision_delete_pin_confirm_message)
-                .setPositiveButton(R.string.delete) { _, _ -> onConfirmDeleteClick() }
-                .setNegativeButton(R.string.cancel, null)
+            if (context.areAnyUsersExceptCurrentSupervised(supervisionManager, userManager)) {
+                builder
+                    .setTitle(R.string.supervision_delete_pin_supervision_enabled_header)
+                    .setMessage(R.string.supervision_delete_pin_supervision_enabled_message)
+                    .setPositiveButton(R.string.okay, null)
+                    .setNegativeButton(R.string.learn_more, { _, _ -> onLearnMore() })
+            } else {
+                builder
+                    .setTitle(R.string.supervision_delete_pin_confirm_header)
+                    .setMessage(R.string.supervision_delete_pin_confirm_message)
+                    .setPositiveButton(R.string.delete) { _, _ -> onConfirmDeleteClick() }
+                    .setNegativeButton(R.string.cancel, null)
+            }
         }
         val dialog = builder.create()
         dialog.setCanceledOnTouchOutside(false)
@@ -141,25 +179,75 @@ class SupervisionDeletePinPreference() :
         confirmPinLauncher.launch(intent)
     }
 
-    private fun onPinConfirmed(resultCode: Int) {
+    fun onPinConfirmed(resultCode: Int) {
         if (resultCode == Activity.RESULT_OK) {
-            if (lifeCycleContext.deleteSupervisionData()) {
-                lifeCycleContext.notifyPreferenceChange(KEY)
-                FeatureFactory.featureFactory.metricsFeatureProvider.action(
-                    lifeCycleContext,
-                    ACTION_SUPERVISION_DELETE_PIN,
-                )
-                // Programmatically trigger back press to properly return to the supervision
-                // dashboard with a correct back stack.
-                val activity =
-                    (lifeCycleContext.baseContext.getActivity()
-                        as? androidx.activity.ComponentActivity)
-                activity?.onBackPressedDispatcher?.onBackPressed()
-            } else {
-                Log.e(TAG, "Can't delete supervision data; unable to delete supervising profile.")
-                showErrorDialog(lifeCycleContext)
+            if (!Flags.enableSupervisionSettingsUiUpdates()) {
+                deleteSupervisionData(lifeCycleContext)
+                return
+            }
+
+            val supervisionManager =
+                lifeCycleContext.getSystemService(SupervisionManager::class.java)
+            val userManager = lifeCycleContext.getSystemService(UserManager::class.java)
+            val roleHolders = lifeCycleContext.supervisionRoleHolders
+
+            // Platform supervision only
+            if (roleHolders.isEmpty()) {
+                // If multiple users require the platform credential,
+                // supervision will be explicitly disabled for this user
+                // only.
+                if (
+                    lifeCycleContext.areAnyUsersExceptCurrentSupervised(
+                        supervisionManager,
+                        userManager,
+                    )
+                ) {
+                    supervisionManager.setSupervisionEnabled(false)
+                    lifeCycleContext.notifyPreferenceChange(KEY)
+                    // TODO(b/450307236): Add new log action for this dialog.
+                    logAction(lifeCycleContext, ACTION_SUPERVISION_DELETE_PIN)
+                    navigateToDashboard(lifeCycleContext)
+                } else {
+                    deleteSupervisionData(lifeCycleContext)
+                }
             }
         }
+    }
+
+    fun deleteSupervisionData(lifecycleContext: PreferenceLifecycleContext) {
+        if (lifeCycleContext.deleteSupervisionData()) {
+            if (Flags.enableSupervisionPinSnackbarsToastMessage()) {
+                Toast.makeText(
+                        lifeCycleContext,
+                        lifeCycleContext.getString(R.string.supervision_pin_deleted),
+                        Toast.LENGTH_SHORT,
+                    )
+                    .show()
+            }
+            lifeCycleContext.notifyPreferenceChange(KEY)
+            logAction(lifeCycleContext, ACTION_SUPERVISION_DELETE_PIN)
+            navigateToDashboard(lifeCycleContext)
+        } else {
+            Log.e(TAG, "Can't delete supervision data; unable to delete supervising profile.")
+            showErrorDialog(lifeCycleContext)
+        }
+    }
+
+    /*
+    * Programmatically trigger back press to properly return to the supervision
+    * dashboard with a correct back stack.
+    *
+    * <p> Called when delete pin dialog confirmation button is clicked.
+    */
+    fun navigateToDashboard(lifecycleContext: PreferenceLifecycleContext) {
+        val activity =
+            (lifeCycleContext.baseContext.getActivity()
+                    as? androidx.activity.ComponentActivity)
+        activity?.onBackPressedDispatcher?.onBackPressed()
+    }
+
+    fun logAction(lifecycleContext: PreferenceLifecycleContext, action: Int) {
+        FeatureFactory.featureFactory.metricsFeatureProvider.action(lifeCycleContext, action)
     }
 
     companion object {

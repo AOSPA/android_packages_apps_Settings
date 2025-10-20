@@ -18,6 +18,7 @@ package com.android.settings.dream;
 
 import android.content.Context;
 
+import android.os.UserHandle;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.dream.DreamBackend;
@@ -44,7 +45,7 @@ public class DreamComplicationPreferenceController extends TogglePreferenceContr
 
     @Override
     public boolean isChecked() {
-        return mBackend.getComplicationsEnabled();
+        return mBackend.getComplicationsEnabled(UserHandle.CURRENT);
     }
 
     @Override

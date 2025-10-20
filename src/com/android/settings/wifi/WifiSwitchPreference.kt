@@ -52,9 +52,12 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.SwitchPreferenceBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 // LINT.IfChange
-class WifiSwitchPreference :
+class WifiSwitchPreference(private val scope: CoroutineScope) :
     SwitchPreference(KEY, R.string.wifi_settings_primary_switch_title),
     SwitchPreferenceBinding,
     PreferenceActionMetricsProvider,
@@ -130,16 +133,17 @@ class WifiSwitchPreference :
         when {
             (value == true && !context.isRadioAllowed()) || isSatelliteOn(context) ->
                 ReadWritePermit.DISALLOW
+
             else -> ReadWritePermit.ALLOW
         }
 
     override val sensitivityLevel
         get() = SensitivityLevel.LOW_SENSITIVITY
 
-    override fun storage(context: Context): KeyValueStore = WifiSwitchStore(context)
+    override fun storage(context: Context): KeyValueStore = WifiSwitchStore(context, scope)
 
     @Suppress("UNCHECKED_CAST")
-    private class WifiSwitchStore(private val context: Context) :
+    private class WifiSwitchStore(private val context: Context, private val scope: CoroutineScope) :
         AbstractKeyedDataObservable<String>(), KeyValueStore {
 
         private var broadcastReceiver: BroadcastReceiver? = null
@@ -151,9 +155,7 @@ class WifiSwitchPreference :
 
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
             if (value !is Boolean) return
-
-            context.isWifiEnabled = value
-
+            scope.launch(Dispatchers.IO) { context.isWifiEnabled = value }
             val metricsFeature = featureFactory.metricsFeatureProvider
             if (value) {
                 metricsFeature.action(context, ACTION_WIFI_ON)

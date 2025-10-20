@@ -31,12 +31,11 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LeAudioProfile;
@@ -64,7 +63,7 @@ public class BluetoothDetailsAudioDeviceTypeController extends BluetoothDetailsC
     private final LocalBluetoothProfileManager mProfileManager;
 
     @VisibleForTesting
-    PreferenceCategory mProfilesContainer;
+    PreferenceGroup mProfilesContainer;
 
     public BluetoothDetailsAudioDeviceTypeController(
             Context context,
@@ -126,13 +125,6 @@ public class BluetoothDetailsAudioDeviceTypeController extends BluetoothDetailsC
     @Override
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = screen.findPreference(getPreferenceKey());
-        if (Flags.enableBluetoothSettingsExpressiveDesign()) {
-            mProfilesContainer.setLayoutResource(
-                    com.android.settingslib.widget.category.R.layout
-                            .settingslib_expressive_untitled_preference_category);
-        } else {
-            mProfilesContainer.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
-        }
         refresh();
     }
 

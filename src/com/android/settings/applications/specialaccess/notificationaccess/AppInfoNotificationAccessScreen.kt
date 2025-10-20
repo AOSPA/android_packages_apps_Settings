@@ -29,6 +29,7 @@ import android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE
 import android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_ONGOING
 import android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_SILENT
 import com.android.settings.R
+import com.android.settings.applications.getApplicationInfo
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
@@ -36,6 +37,7 @@ import com.android.settings.notification.NotificationBackend
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -50,13 +52,16 @@ import kotlinx.coroutines.flow.flow
 /** "Apps" -> "Special app access" -> "Notification read, reply & control" -> {app name} */
 @ProvidePreferenceScreen(AppInfoNotificationAccessScreen.KEY, parameterized = true)
 open class AppInfoNotificationAccessScreen(context: Context, override val arguments: Bundle) :
-    PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceTitleProvider {
+    PreferenceScreenMixin,
+    PreferenceSummaryProvider,
+    PreferenceTitleProvider,
+    PreferenceAvailabilityProvider {
 
     private val packageName = arguments.getString("app")!!
 
     private val serviceName = arguments.getString("serviceName")!!
 
-    private val appInfo = context.packageManager.getApplicationInfo(packageName, 0)
+    private val appInfo = context.getApplicationInfo(packageName)
 
     private val storage: KeyValueStore =
         NotificationAccessStorage(context, packageName, serviceName)
@@ -76,7 +81,7 @@ open class AppInfoNotificationAccessScreen(context: Context, override val argume
         arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? =
-        appInfo.loadLabel(context.packageManager)
+        appInfo?.loadLabel(context.packageManager)
 
     override fun getSummary(context: Context): CharSequence? =
         context.getString(
@@ -87,6 +92,8 @@ open class AppInfoNotificationAccessScreen(context: Context, override val argume
         )
 
     override fun isFlagEnabled(context: Context) = false
+
+    override fun isAvailable(context: Context) = appInfo != null
 
     override fun extras(context: Context): Bundle? =
         Bundle(1).apply { putString(KEY_EXTRA_PACKAGE_NAME, packageName) }

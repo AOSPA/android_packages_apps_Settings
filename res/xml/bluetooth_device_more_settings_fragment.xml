@@ -19,9 +19,9 @@
     android:key="bluetooth_device_more_settings_screen"
     android:title="@string/device_details_more_settings">
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.ChainedPreferenceGroup
         android:key="bluetooth_audio_device_type_group"/>
 
-    <PreferenceCategory
+    <com.android.settingslib.widget.ChainedPreferenceGroup
         android:key="bluetooth_profiles"/>
 </PreferenceScreen>

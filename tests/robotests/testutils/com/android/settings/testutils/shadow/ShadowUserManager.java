@@ -63,7 +63,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private final Set<Integer> mManagedProfiles = new HashSet<>();
     private final Map<Integer, Integer> mProfileToParent = new HashMap<>();
     private final Map<Integer, UserInfo> mUserInfoMap = new HashMap<>();
-    private final Set<String> mEnabledTypes = new HashSet<>();
+    private final Set<String> mSupportedTypes = new HashSet<>();
     private BiMap<UserHandle, Long> mUserProfiles = HashBiMap.create();
     private boolean mIsQuietModeEnabled = false;
     private int[] mProfileIdsForUser = new int[0];
@@ -75,6 +75,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private @UserManager.UserSwitchabilityResult int mSwitchabilityStatus =
             UserManager.SWITCHABILITY_STATUS_OK;
     private final Map<Integer, Integer> mSameProfileGroupIds = Maps.newHashMap();
+    private final Map<Integer, Integer> mUserRemovabilityMap = new HashMap<>();
 
     public void addProfile(UserInfo userInfo) {
         mUserProfileInfos.add(userInfo);
@@ -293,15 +294,15 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
-    protected boolean isUserTypeEnabled(String userType) {
-        return mEnabledTypes.contains(userType);
+    protected boolean isUserTypeSupported(String userType) {
+        return mSupportedTypes.contains(userType);
     }
 
-    public void setUserTypeEnabled(String type, boolean enabled) {
-        if (enabled) {
-            mEnabledTypes.add(type);
+    public void setUserTypeSupported(String type, boolean supported) {
+        if (supported) {
+            mSupportedTypes.add(type);
         } else {
-            mEnabledTypes.remove(type);
+            mSupportedTypes.remove(type);
         }
     }
 
@@ -412,5 +413,21 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     protected List<UserHandle> getUserProfiles() {
         return ImmutableList.copyOf(mUserProfiles.keySet());
+    }
+
+    /**
+     * Returns whether the specified user is removable.
+     */
+    @Implementation
+    protected @UserManager.RemoveResult int getUserRemovability(@UserIdInt int userId) {
+        return mUserRemovabilityMap.getOrDefault(userId, UserManager.REMOVE_RESULT_REMOVED);
+    }
+
+    /**
+     * Sets the remove result for the specified user.
+     */
+    public void setUserRemovability(
+            @UserIdInt int userId, @UserManager.RemoveResult int removeResult) {
+        mUserRemovabilityMap.put(userId, removeResult);
     }
 }

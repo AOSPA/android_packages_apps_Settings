@@ -96,7 +96,7 @@ public class AppInstallerInfoPreferenceControllerTest {
         mController = new AppInstallerInfoPreferenceController(mContext, "test_key");
         mController.setPackageName(packageName);
         mController.setParentFragment(mFragment);
-        mockMainlineModule(packageName, false /* isMainlineModule */);
+        mockModulePackage(packageName, false /* isApex */);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
@@ -143,25 +143,25 @@ public class AppInstallerInfoPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_isMainlineModule_shouldReturnDisabled()
+    public void getAvailabilityStatus_apexPackage_shouldReturnDisabled()
             throws PackageManager.NameNotFoundException {
         final String packageName = "Package";
         when(mAppInfo.loadLabel(mPackageManager)).thenReturn("Label");
         mController.setPackageName(packageName);
-        mockMainlineModule(packageName, true /* isMainlineModule */);
+        mockModulePackage(packageName, true /* isApex */);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.DISABLED_FOR_USER);
     }
 
-    private void mockMainlineModule(String packageName, boolean isMainlineModule)
+    private void mockModulePackage(String packageName, boolean isApex)
             throws PackageManager.NameNotFoundException {
         final PackageInfo packageInfo = new PackageInfo();
         final ApplicationInfo applicationInfo = new ApplicationInfo();
         applicationInfo.sourceDir = "apex";
         packageInfo.applicationInfo = applicationInfo;
 
-        if (isMainlineModule) {
+        if (isApex) {
             when(mPackageManager.getModuleInfo(packageName, 0 /* flags */)).thenReturn(
                     new ModuleInfo());
         } else {

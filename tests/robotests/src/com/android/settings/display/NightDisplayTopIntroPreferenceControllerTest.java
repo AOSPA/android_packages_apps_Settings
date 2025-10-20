@@ -49,18 +49,33 @@ public class NightDisplayTopIntroPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_configuredAvailable_shouldReturnAVAILABLE_UNSEARCHABLE() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_nightDisplayAvailable, true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+    public void configuredNightDisplayAvailableAndNotBlocked_returnAvailableUnsearchable() {
+        NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_configuredUnavailable_shouldReturnUNSUPPORTED_ON_DEVICE() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_nightDisplayAvailable, false);
+    public void configuredNightDisplayUnavailableAndNotBlocked_returnUnsupportedOnDevice() {
+        NightDisplayTestUtils.setNightDisplayAvailable(false);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(false);
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    @Test
+    public void configuredNightDisplayAvailableAndBlocked_returnUnsupportedOnDevice() {
+        NightDisplayTestUtils.setNightDisplayAvailable(true);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void configuredNightDisplayUnavailableAndBlocked_returnUnsupportedOnDevice() {
+        NightDisplayTestUtils.setNightDisplayAvailable(false);
+        NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }

@@ -33,6 +33,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
+import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockTypeDialogFragment.OnLockTypeSelectedListener;
 import com.android.settingslib.widget.theme.R.style;
 
@@ -125,6 +126,9 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         @Override
         protected void onSkipOrClearButtonClick(View view) {
             if (mLeftButtonIsSkip) {
+                if (shouldHideSkipButton()) {
+                    throw new IllegalStateException("skip button pressed despite being hidden");
+                }
                 final Intent intent = getActivity().getIntent();
                 final boolean frpSupported = intent
                         .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false);
@@ -183,6 +187,7 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         @Override
         protected void updateUi() {
             super.updateUi();
+
             // Show the skip button during SUW but not during Settings > Biometric Enrollment
             if (mUiStage == Stage.Introduction) {
                 mSkipOrClearButton.setText(getActivity(), R.string.skip_label);
@@ -190,6 +195,11 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
             } else {
                 mSkipOrClearButton.setText(getActivity(), R.string.lockpassword_clear_label);
                 mLeftButtonIsSkip = false;
+            }
+
+            // Hide the secondary button if LSKF enforcement is applied and it's in skip state
+            if (shouldHideSkipButton()) {
+                mSkipOrClearButton.setVisibility(mLeftButtonIsSkip ? View.GONE : View.VISIBLE);
             }
 
             if (mOptionsButton != null) {
@@ -202,6 +212,11 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
                 mAutoPinConfirmOption.setVisibility(View.GONE);
                 mAutoConfirmSecurityMessage.setVisibility(View.GONE);
             }
+        }
+
+        private boolean shouldHideSkipButton() {
+            return Flags.hideLskfSkipDuringSuw()
+                    && getResources().getBoolean(R.bool.config_hide_skip_security_options_in_suw);
         }
     }
 }

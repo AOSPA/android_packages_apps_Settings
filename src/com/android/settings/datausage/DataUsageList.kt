@@ -17,6 +17,8 @@
 package com.android.settings.datausage
 
 import android.app.settings.SettingsEnums
+import android.content.Context
+import android.content.Intent
 import android.net.NetworkPolicy
 import android.net.NetworkTemplate
 import android.os.Bundle
@@ -36,11 +38,13 @@ import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.datausage.lib.BillingCycleRepository
 import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settings.network.telephony.SubscriptionRepository
+import com.android.settings.utils.getSubId
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.widget.LayoutPreference
 import kotlin.jvm.optionals.getOrNull
 
+// LINT.IfChange
 /**
  * Panel showing data usage history across various networks, including options to inspect based on
  * usage cycle and control through [NetworkPolicy].
@@ -149,6 +153,10 @@ open class DataUsageList : DashboardFragment() {
 
     override fun getLogTag() = TAG
 
+    override fun getPreferenceScreenBindingKey(context: Context): String {
+        return DataUsageListScreen.KEY
+    }
+
     private fun processArgument() {
         arguments?.let {
             subId = it.getInt(EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)
@@ -160,23 +168,32 @@ open class DataUsageList : DashboardFragment() {
                     Settings.EXTRA_SUB_ID,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID,
                 )
+            val localIntent: Intent = intent.clone() as Intent
             if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
                 subId =
-                    getPreferenceScreenBindingArgs(requireContext())?.getInt(Settings.EXTRA_SUB_ID)
-                        ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                    getPreferenceScreenBindingArgs(requireContext())
+                        ?.getSubId(
+                            Settings.EXTRA_SUB_ID,
+                            SubscriptionManager.INVALID_SUBSCRIPTION_ID,
+                        ) ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+
                 Log.d(
                     TAG,
-                    "processArgument: get subid from ScreenBindingArgs and reset subId into intent.",
+                    "processArgument: get subId from ScreenBindingArgs and reset subId into intent.",
                 )
+                // Add this extra into the intent because it is required in the
+                // DataUsageUtils.getMobileNetworkTemplateFromSubId.
                 if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                    intent.putExtra(Settings.EXTRA_SUB_ID, subId)
+                    localIntent.putExtra(Settings.EXTRA_SUB_ID, subId)
                 }
             }
             template =
                 intent.getParcelableExtra(
                     Settings.EXTRA_NETWORK_TEMPLATE,
                     NetworkTemplate::class.java,
-                ) ?: DataUsageUtils.getMobileNetworkTemplateFromSubId(context, intent).getOrNull()
+                )
+                    ?: DataUsageUtils.getMobileNetworkTemplateFromSubId(context, localIntent)
+                        .getOrNull()
         }
     }
 
@@ -215,3 +232,4 @@ open class DataUsageList : DashboardFragment() {
         @VisibleForTesting const val KEY_WARNING = "warning"
     }
 }
+// LINT.ThenChange(DataUsageListScreen.kt)

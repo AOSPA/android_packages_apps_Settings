@@ -150,6 +150,20 @@ public class PreferredNetworkModePreferenceControllerTest {
     }
 
     @Test
+    @UiThreadTest
+    public void updateState_isAirplaneModeOn_setEnableFalse() {
+        mController.mSatelliteModemStateCallback
+                .onSatelliteModemStateChanged(SATELLITE_MODEM_STATE_CONNECTED);
+        mController.mSelectedNbIotSatelliteSubscriptionCallback
+                .onSelectedNbIotSatelliteSubscriptionChanged(0);
+
+        mController.notifyAirplaneModeChanged(true);
+        mController.updateState(mPreference);
+
+        assertFalse(mPreference.isEnabled());
+    }
+
+    @Test
     public void onPreferenceChange_updateNetworkMode() {
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManager.NETWORK_MODE_LTE_TDSCDMA));

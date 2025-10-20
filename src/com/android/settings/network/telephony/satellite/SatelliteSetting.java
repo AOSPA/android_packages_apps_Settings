@@ -128,6 +128,8 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
                 isSmsAvailable, isDataAvailable, satelliteDataMode);
         use(SatelliteSettingIndicatorController.class).setCarrierRoamingNtnAvailability(
                 isSmsAvailable, isDataAvailable, satelliteDataMode);
+        use(SatelliteSettingFooterController.class).setCarrierRoamingNtnAvailability(
+                isSmsAvailable, isDataAvailable, satelliteDataMode);
         forceUpdatePreferences();
     }
 

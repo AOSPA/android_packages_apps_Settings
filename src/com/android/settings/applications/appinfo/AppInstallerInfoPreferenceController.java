@@ -38,7 +38,7 @@ public class AppInstallerInfoPreferenceController extends AppInfoPreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        if (AppUtils.isMainlineModule(mContext.getPackageManager(), mPackageName)) {
+        if (AppUtils.isLimitedAppInfoPackage(mContext.getPackageManager(), mPackageName)) {
             return DISABLED_FOR_USER;
         }
 

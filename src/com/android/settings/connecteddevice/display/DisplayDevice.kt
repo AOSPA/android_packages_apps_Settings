@@ -34,7 +34,7 @@ enum class DisplayIsEnabled {
  * a display.
  */
 @Keep
-data class DisplayDevice(
+open class DisplayDevice(
     val id: Int,
     val uniqueId: String,
     val name: String,
@@ -42,4 +42,31 @@ data class DisplayDevice(
     val supportedModes: List<Mode>,
     val isEnabled: DisplayIsEnabled,
     val isConnectedDisplay: Boolean,
+    val rotation: Int,
 )
+
+/** Extends [DisplayDevice] with additional information */
+@Keep
+class DisplayDeviceAdditionalInfo(
+    // Base properties from DisplayDevice
+    id: Int,
+    uniqueId: String,
+    name: String,
+    mode: Mode?,
+    supportedModes: List<Mode>,
+    isEnabled: DisplayIsEnabled,
+    isConnectedDisplay: Boolean,
+    rotation: Int,
+    // Additional properties
+    val connectionPreference: Int,
+) :
+    DisplayDevice(
+        id,
+        uniqueId,
+        name,
+        mode,
+        supportedModes,
+        isEnabled,
+        isConnectedDisplay,
+        rotation,
+    )

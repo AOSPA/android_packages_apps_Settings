@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony.satellite;
 
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC;
+import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
 import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
@@ -24,6 +25,7 @@ import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_R
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ALL;
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED;
 
+import static com.android.internal.telephony.flags.Flags.FLAG_VZW_AST_SKYLO_FALLBACK;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.network.telephony.satellite.SatelliteSettingAccountInfoController.PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN;
@@ -32,12 +34,15 @@ import static com.android.settings.network.telephony.satellite.SatelliteSettingA
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Looper;
 import android.os.PersistableBundle;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.TelephonyManager;
 import android.telephony.satellite.SatelliteManager;
 
@@ -65,6 +70,8 @@ public class SatelliteSettingAccountInfoControllerTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private TelephonyManager mTelephonyManager;
@@ -121,6 +128,53 @@ public class SatelliteSettingAccountInfoControllerTest {
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
 
         assertThat(result).isEqualTo(AVAILABLE_UNSEARCHABLE);
+    }
+
+    @Test
+    @EnableFlags(FLAG_VZW_AST_SKYLO_FALLBACK)
+    public void getAvailabilityStatus_connectionTypeISHybrid_returnAvailable() {
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_HYBRID);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(false, false, -1);
+
+        int result = mController.getAvailabilityStatus(TEST_SUB_ID);
+
+        assertThat(result).isEqualTo(AVAILABLE_UNSEARCHABLE);
+    }
+
+    @Test
+    public void testSatelliteEligibility_ManualConnect_withSmsAvailable() {
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_MANUAL);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(true, false, -1);
+
+        assertTrue(mController.isSatelliteEligible());
+    }
+
+    @Test
+    @EnableFlags(FLAG_VZW_AST_SKYLO_FALLBACK)
+    public void testSatelliteEligibility_HybridConnect_withSmsAvailable() {
+        boolean isSmsAvailable = true;
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_HYBRID);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(isSmsAvailable, false, -1);
+
+        assertThat(mController.isSatelliteEligible()).isEqualTo(isSmsAvailable);
+    }
+
+    @Test
+    @EnableFlags(FLAG_VZW_AST_SKYLO_FALLBACK)
+    public void testSatelliteEligibility_HybridConnect_withSmsUnavailable() {
+        boolean isSmsAvailable = false;
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_HYBRID);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.setCarrierRoamingNtnAvailability(isSmsAvailable, false, -1);
+
+        assertThat(mController.isSatelliteEligible()).isEqualTo(isSmsAvailable);
     }
 
     @Test

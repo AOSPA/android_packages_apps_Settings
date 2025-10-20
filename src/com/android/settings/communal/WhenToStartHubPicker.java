@@ -85,7 +85,8 @@ public class WhenToStartHubPicker extends RadioButtonPickerFragment {
 
         mContext = context;
         mShowRestrictToWirelessCharging =
-                getResources().getBoolean(R.bool.config_show_restrict_to_wireless_charging);
+                getResources().getBoolean(
+                        com.android.internal.R.bool.config_supportDreamWirelessChargingRestriction);
     }
 
     @Override

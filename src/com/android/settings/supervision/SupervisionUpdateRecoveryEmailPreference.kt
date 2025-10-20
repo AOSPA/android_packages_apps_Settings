@@ -27,6 +27,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ImageSpan
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import com.android.settings.R
@@ -128,6 +129,14 @@ class SupervisionUpdateRecoveryEmailPreference :
         }
         if (resultCode == Activity.RESULT_OK) {
             context.notifyPreferenceChange(KEY)
+            if (Flags.enableSupervisionPinSnackbarsToastMessage()) {
+                Toast.makeText(
+                        context,
+                        context.getString(R.string.supervision_recovery_email_updated),
+                        Toast.LENGTH_SHORT,
+                    )
+                    .show()
+            }
         }
         return true
     }

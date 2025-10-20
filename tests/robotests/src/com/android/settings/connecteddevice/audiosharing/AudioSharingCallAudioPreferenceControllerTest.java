@@ -43,6 +43,7 @@ import android.bluetooth.BluetoothStatusCodes;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
+import android.media.AudioManager;
 import android.os.Looper;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
@@ -140,6 +141,7 @@ public class AudioSharingCallAudioPreferenceControllerTest {
     @Mock private BluetoothLeBroadcastReceiveState mState;
     @Mock private BluetoothLeBroadcastMetadata mSource;
     @Mock private ContentResolver mContentResolver;
+    @Mock private AudioManager mAudioManager;
     private AudioSharingCallAudioPreferenceController mController;
     @Spy private ContentObserver mContentObserver;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
@@ -184,6 +186,7 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         bisSyncState.add(1L);
         when(mState.getBisSyncState()).thenReturn(bisSyncState);
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
+        when(mContext.getSystemService(AudioManager.class)).thenReturn(mAudioManager);
         when(mCachedDevice1.getDevice()).thenReturn(mDevice1);
         when(mCachedDevice1.getGroupId()).thenReturn(TEST_DEVICE_GROUP_ID1);
         when(mCachedDevice1.getName()).thenReturn(TEST_DEVICE_NAME1);
@@ -786,6 +789,51 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         assertThat(((CheckedTextView) view2).isChecked()).isTrue();
         verify(mCachedDevice1, never()).setActive();
         verify(leAudioProfile).setBroadcastToUnicastFallbackGroup(TEST_DEVICE_GROUP_ID2);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API_V2)
+    public void displayPreference_clickDuringOngoingCall_setsFallbackAndActiveDevice() {
+        AlertDialog latestAlertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        if (latestAlertDialog != null) {
+            latestAlertDialog.dismiss();
+            ShadowAlertDialogCompat.reset();
+        }
+        Settings.Secure.putInt(
+                mContentResolver,
+                BluetoothUtils.getPrimaryGroupIdUriForBroadcast(),
+                TEST_DEVICE_GROUP_ID1);
+        mShadowBluetoothAdapter.setMostRecentlyConnectedDevices(
+                List.of(mDevice1, mDevice2, mDevice3));
+        when(mBroadcast.isEnabled(any())).thenReturn(true);
+        when(mAssistant.getAllConnectedDevices())
+                .thenReturn(ImmutableList.of(mDevice1, mDevice2, mDevice3));
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
+        mController.init(mParentFragment);
+        mController.displayPreference(mScreen);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        // Simulate an ongoing call
+        when(mAudioManager.getMode()).thenReturn(AudioManager.MODE_IN_CALL);
+        mController.onAudioModeChanged();
+
+        mPreference.performClick();
+        shadowOf(Looper.getMainLooper()).idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog.isShowing()).isTrue();
+        ShadowListView listView = Shadows.shadowOf(dialog.getListView());
+
+        LeAudioProfile leAudioProfile = mock(LeAudioProfile.class);
+        when(mBtProfileManager.getLeAudioProfile()).thenReturn(leAudioProfile);
+
+        // Perform click to switch call audio device
+        int index = listView.findIndexOfItemContainingText(TEST_DEVICE_NAME2);
+        listView.performItemClick(index);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        // Verify that both fallback group is set and the device is set to active
+        verify(leAudioProfile).setBroadcastToUnicastFallbackGroup(TEST_DEVICE_GROUP_ID2);
+        verify(mCachedDevice3).setActive();
     }
 
     @Test

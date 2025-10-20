@@ -30,6 +30,7 @@ import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHE
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PolicyEnforcementInfo;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -255,8 +256,7 @@ public class FaceSettings extends DashboardFragment {
             }
         }
 
-        if (RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
-                getContext(), DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null) {
+        if (isDisabledByAdmin()) {
             managePref.setTitle(getString(
                     com.android.settingslib.widget.restricted.R.string.disabled_by_admin));
         } else {
@@ -557,6 +557,18 @@ public class FaceSettings extends DashboardFragment {
             mEnrollButton.setVisible(!hasEnrolled);
             mRemoveButton.setVisible(hasEnrolled);
         }
+    }
+
+    private boolean isDisabledByAdmin() {
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()
+                && android.app.admin.flags.Flags.setKeyguardDisabledFeaturesCoexistence()) {
+            PolicyEnforcementInfo info =
+                    RestrictedLockUtilsInternal.getEnforcingAdminsForKeyguardFeatures(getContext(),
+                            DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId);
+            return info != null && info.getMostImportantEnforcingAdmin() != null;
+        }
+        return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                getContext(), DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {

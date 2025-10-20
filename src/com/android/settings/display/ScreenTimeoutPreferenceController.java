@@ -21,7 +21,9 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import static com.android.settings.display.ScreenTimeoutSettings.FALLBACK_SCREEN_TIMEOUT_VALUE;
 
+import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.Context;
 import android.os.Process;
 import android.os.UserHandle;
@@ -60,21 +62,46 @@ public class ScreenTimeoutPreferenceController extends BasePreferenceController 
     @Override
     public void updateState(Preference preference) {
         final long maxTimeout = getMaxScreenTimeout();
-        final RestrictedLockUtils.EnforcedAdmin admin = getPreferenceDisablingAdmin(maxTimeout);
-        if (admin != null) {
-            preference.setEnabled(false);
-            preference.setSummary(mContext.getSystemService(DevicePolicyManager.class)
-                    .getResources()
-                    .getString(DISABLED_BY_IT_ADMIN_TITLE,
-                            () -> mContext.getString(R.string.disabled_by_policy_title)));
-            ((RestrictedPreference) preference).setDisabledByAdmin(admin);
-            return;
-        }
-        if (UserManager.get(mContext).hasBaseUserRestriction(
-                UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT, Process.myUserHandle())) {
-            preference.setEnabled(false);
-        }
         preference.setSummary(getTimeoutSummary(maxTimeout));
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            final DevicePolicyManager dpm = mContext.getSystemService(DevicePolicyManager.class);
+            if (dpm == null) {
+                return;
+            }
+            PolicyEnforcementInfo userRestrictionEnforcement = dpm.getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                            UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT), UserHandle.myUserId());
+            if (!userRestrictionEnforcement.getAllAdmins().isEmpty()) {
+                if (userRestrictionEnforcement.isOnlyEnforcedBySystem()) {
+                    preference.setEnabled(false);
+                } else {
+                    // setDisabledByAdmin handles the summary text display.
+                    ((RestrictedPreference) preference).setDisabledByAdmin(
+                            userRestrictionEnforcement.getMostImportantEnforcingAdmin());
+                }
+                return;
+            }
+            PolicyEnforcementInfo maximumTimeToLockEnforcement = dpm.getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.MAX_TIME_TO_LOCK_POLICY, UserHandle.myUserId());
+            // MAX_TIME_TO_LOCK policy is not set by the system so we don't need to check for that.
+            ((RestrictedPreference) preference).setDisabledByAdmin(
+                    maximumTimeToLockEnforcement.getMostImportantEnforcingAdmin());
+        } else {
+            final RestrictedLockUtils.EnforcedAdmin admin = getPreferenceDisablingAdmin(maxTimeout);
+            if (admin != null) {
+                preference.setEnabled(false);
+                preference.setSummary(mContext.getSystemService(DevicePolicyManager.class)
+                        .getResources()
+                        .getString(DISABLED_BY_IT_ADMIN_TITLE,
+                                () -> mContext.getString(R.string.disabled_by_policy_title)));
+                ((RestrictedPreference) preference).setDisabledByAdmin(admin);
+                return;
+            }
+            if (UserManager.get(mContext).hasBaseUserRestriction(
+                    UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT, Process.myUserHandle())) {
+                preference.setEnabled(false);
+            }
+        }
     }
 
     private CharSequence getTimeoutSummary(long maxTimeout) {

@@ -18,6 +18,7 @@ package com.android.settings.users;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
+import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -27,19 +28,26 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
+import android.app.admin.PolicyEnforcementInfo;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -50,8 +58,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class, ShadowDevicePolicyManager.class})
+@Config(shadows = {
+        ShadowUserManager.class,
+        ShadowDevicePolicyManager.class,
+        SettingsShadowResources.class,
+})
 public class MultiUserMainSwitchPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
     private ShadowUserManager mUserManager;
@@ -75,9 +90,11 @@ public class MultiUserMainSwitchPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowUserManager.reset();
+        SettingsShadowResources.reset();
     }
 
     @Test
+    @DisableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     public void displayPreference_disallowUserSwitchByAdmin_shouldSetDisabledByAdminUnchecked() {
         int userId = UserHandle.myUserId();
         List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
@@ -94,7 +111,22 @@ public class MultiUserMainSwitchPreferenceControllerTest {
         multiUserMainSwitchPreferenceController.displayPreference(mScreen);
 
         verify(mPreference).setChecked(false);
-        verify(mPreference).setDisabledByAdmin(any());
+        verify(mPreference).setDisabledByAdmin(any(RestrictedLockUtils.EnforcedAdmin.class));
+    }
+
+    @Test
+    @EnableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
+    public void
+            displayPreference_disallowUserSwitchByAdmin_dpmFlagEnabled_shouldSetDisabledByAdminUnchecked() {
+        ShadowDevicePolicyManager.getShadow().setPolicyEnforcementInfoForUserRestriction(
+                UserManager.DISALLOW_USER_SWITCH, new PolicyEnforcementInfo(List.of(DPC_ADMIN)));
+
+        MultiUserMainSwitchPreferenceController multiUserMainSwitchPreferenceController =
+                new MultiUserMainSwitchPreferenceController(mContext, KEY_USER_SWITCH_TOGGLE);
+        multiUserMainSwitchPreferenceController.displayPreference(mScreen);
+
+        verify(mPreference).setChecked(false);
+        verify(mPreference).setDisabledByAdmin(DPC_ADMIN);
     }
 
     @Test
@@ -108,7 +140,8 @@ public class MultiUserMainSwitchPreferenceControllerTest {
 
         verify(mPreference).setChecked(false);
         verify(mPreference).setSwitchBarEnabled(false);
-        verify(mPreference, never()).setDisabledByAdmin(any());
+        verify(mPreference, never()).setDisabledByAdmin(
+                any(RestrictedLockUtils.EnforcedAdmin.class));
     }
 
     @Test
@@ -135,7 +168,8 @@ public class MultiUserMainSwitchPreferenceControllerTest {
         multiUserMainSwitchPreferenceController.displayPreference(mScreen);
 
         assertEquals(AVAILABLE, multiUserMainSwitchPreferenceController.getAvailabilityStatus());
-        verify(mPreference, never()).setDisabledByAdmin(any());
+        verify(mPreference, never()).setDisabledByAdmin(
+                any(RestrictedLockUtils.EnforcedAdmin.class));
     }
 
     @Test
@@ -151,7 +185,8 @@ public class MultiUserMainSwitchPreferenceControllerTest {
         multiUserMainSwitchPreferenceController.displayPreference(mScreen);
 
         assertEquals(AVAILABLE, multiUserMainSwitchPreferenceController.getAvailabilityStatus());
-        verify(mPreference, never()).setDisabledByAdmin(any());
+        verify(mPreference, never()).setDisabledByAdmin(
+                any(RestrictedLockUtils.EnforcedAdmin.class));
         verify(mPreference).setSwitchBarEnabled(false);
     }
 
@@ -164,7 +199,8 @@ public class MultiUserMainSwitchPreferenceControllerTest {
                 new MultiUserMainSwitchPreferenceController(mContext, KEY_USER_SWITCH_TOGGLE);
         multiUserMainSwitchPreferenceController.displayPreference(mScreen);
 
-        verify(mPreference, never()).setDisabledByAdmin(any());
+        verify(mPreference, never()).setDisabledByAdmin(
+                any(RestrictedLockUtils.EnforcedAdmin.class));
         verify(mPreference).setSwitchBarEnabled(true);
     }
 
@@ -192,6 +228,20 @@ public class MultiUserMainSwitchPreferenceControllerTest {
                 new MultiUserMainSwitchPreferenceController(mContext, KEY_USER_SWITCH_TOGGLE);
 
         assertEquals(AVAILABLE,
+                multiUserMainSwitchPreferenceController.getAvailabilityStatus());
+    }
+
+    @Test
+    public void changeUserSwitcherDisabled_shouldBeHidden() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_allowChangeUserSwitcherEnabled, false);
+        mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_USER_SWITCH, false);
+
+        MultiUserMainSwitchPreferenceController multiUserMainSwitchPreferenceController =
+                new MultiUserMainSwitchPreferenceController(mContext, KEY_USER_SWITCH_TOGGLE);
+
+        assertEquals(DISABLED_FOR_USER,
                 multiUserMainSwitchPreferenceController.getAvailabilityStatus());
     }
 }

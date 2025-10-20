@@ -27,15 +27,13 @@ import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SwitchPreference
-import com.android.systemui.Flags
 
 class BlurSwitchPreference :
     SwitchPreference(key = KEY, title = R.string.blur_switch),
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider {
 
-    override fun isAvailable(context: Context) =
-        CROSS_WINDOW_BLUR_SUPPORTED && Flags.blurSettingsToggle()
+    override fun isAvailable(context: Context) = CROSS_WINDOW_BLUR_SUPPORTED
 
     override fun isEnabled(context: Context) = !context.isPowerSaveMode()
 

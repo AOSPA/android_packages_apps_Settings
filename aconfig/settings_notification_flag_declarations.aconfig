@@ -2,10 +2,10 @@ package: "com.android.settings.flags"
 container: "system_ext"
 
 flag {
-  name: "notifications_remember_channel_list_state"
+  name: "notification_use_dpc_policy"
   namespace: "notifications"
-  description: "Remember expanded categories in app channels page. Also improve layout a bit"
-  bug: "412613378"
+  description: "Enable or disable notification settings based on the active DPC permission policy"
+  bug: "376360807"
   metadata {
     purpose: PURPOSE_BUGFIX
   }

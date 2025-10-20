@@ -40,14 +40,6 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
 
     private static final String TAG = "AbstractBtDlgCtr";
 
-    protected static final int[] CODEC_TYPES = {
-            BluetoothCodecConfig.SOURCE_CODEC_TYPE_OPUS,
-            BluetoothCodecConfig.SOURCE_CODEC_TYPE_LC3,
-            BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC,
-            BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD,
-            BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX,
-            BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC,
-            BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC};
     protected static final int[] SAMPLE_RATES = {BluetoothCodecConfig.SAMPLE_RATE_192000,
             BluetoothCodecConfig.SAMPLE_RATE_176400,
             BluetoothCodecConfig.SAMPLE_RATE_96000,
@@ -221,27 +213,6 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
      * @param enabled Is {@code true} when the setting is enabled.
      */
     public void onHDAudioEnabled(boolean enabled) {}
-
-    static int getHighestCodec(BluetoothA2dp bluetoothA2dp, BluetoothDevice activeDevice,
-            List<BluetoothCodecConfig> configs) {
-        if (configs == null) {
-            Log.d(TAG, "Unable to get highest codec. Configs are empty");
-            return BluetoothCodecConfig.SOURCE_CODEC_TYPE_INVALID;
-        }
-        // If HD audio is not enabled, SBC is the only one available codec.
-        if (bluetoothA2dp.isOptionalCodecsEnabled(activeDevice)
-                != BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED) {
-            return BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC;
-        }
-        for (int i = 0; i < CODEC_TYPES.length; i++) {
-            for (BluetoothCodecConfig config : configs) {
-                if (config.getCodecType() == CODEC_TYPES[i]) {
-                    return CODEC_TYPES[i];
-                }
-            }
-        }
-        return BluetoothCodecConfig.SOURCE_CODEC_TYPE_INVALID;
-    }
 
     static int getHighestSampleRate(BluetoothCodecConfig config) {
         if (config == null) {
