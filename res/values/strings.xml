@@ -14941,11 +14941,6 @@
     <string name="supervision_delete_pin_error_header">PIN can not be deleted</string>
     <!-- Message in dialog that informs the user that an error occurred while trying to delete the PIN [CHAR LIMIT=NONE] -->
     <string name="supervision_delete_pin_error_message">An error occurred while trying to delete the PIN.</string>
-    <!-- TODO(b/450908334): Set strings as translatable once copy is finalized. -->
-    <!-- Title on a dialog that informs the user that they cannot delete the PIN because multiple users are supervised [CHAR_LIMIT=NONE]-->
-    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="default" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this phone.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
-    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="desktop" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this device.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
-    <string name="supervision_cant_delete_pin_multi_user_switch_message" product="tablet" translatable="false">To delete your parental controls PIN, you must turn off controls for all users on this tablet.\nYou may turn off controls for the current user, but the PIN can\u2019t be deleted until you also go to other users and turn off controls.</string>
     <!-- Button label on a dialog to turn off controls for the current user [CHAR LIMIT=NONE] -->
     <string name="supervision_turn_off_controls_button_label" translatable="false">Turn off controls for this user</string>
     <!-- Title on a dialog that confirms whether the user wants to delete the PIN and turn off controls [CHAR LIMIT=NONE] -->
@@ -14959,6 +14954,8 @@
     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
     <!-- Title on dialog that informs the user that controls cannot be enabled due to a multi-profile conflict. [CHAR LIMIT=NONE] -->
     <string name="supervision_multi_profile_error_title">Can\u2019t turn on controls</string>
+    <!-- Title on dialog that informs the user that controls cannot be used due to a multi-profile conflict. [CHAR LIMIT=NONE] -->
+    <string name="supervision_setup_multi_profile_error_title">Can\u2019t use controls</string>
     <!-- Learn more link for when device supervision is unavailable. [CHAR LIMIT=NONE]-->
     <string name="supervision_unavailable_learn_more_link" translatable="false">https://support.google.com/android?p=device_supervision_unavailable</string>
     <!-- Title on generic error screen that informs the user that controls cannot be enabled. [CHAR LIMIT=NONE] -->
