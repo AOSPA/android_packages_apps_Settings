@@ -1189,7 +1189,7 @@
     <string name="wifi_dpp_device_found" msgid="633646744759830603">"Appareil trouvé"</string>
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Partage du Wi‑Fi avec cet appareil en cours…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Connexion en cours…"</string>
-    <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Partager le point d\'accès"</string>
+    <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Partager le point d\'accès sans fil"</string>
     <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Confirmer que c\'est bien vous"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Mot de passe Wi-Fi : <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Mot de passe du point d\'accès : <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
@@ -1310,7 +1310,7 @@
     <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"Ne partagez pas la connexion ni le contenu avec d\'autres appareils"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"Aucun mot de passe défini"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Nom du point d\'accès sans fil"</string>
-    <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Mot de passe du point d\'accès"</string>
+    <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Mot de passe du point d\'accès sans fil"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Désactiver automatiquement le point d\'accès Wi‑Fi"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Lorsqu\'aucun appareil n\'est connecté"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Prolonger la compatibilité"</string>
@@ -1605,7 +1605,7 @@
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Version de la liste d\'itinérance préférée"</string>
     <string name="meid_multi_sim" msgid="3124054561186721453">"MEID <xliff:g id="MEID_ID">%1$d</xliff:g>"</string>
-    <string name="scanning_status_text_on" msgid="3846571210578042940">"Activé"</string>
+    <string name="scanning_status_text_on" msgid="3846571210578042940">"Activée"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Désactivée"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
@@ -1775,7 +1775,7 @@
     <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Si vous disposez d\'un espace privé sur votre appareil, il sera définitivement supprimé, et le compte Google ajouté à cet espace sera retiré. \n\nToutes les applis de votre espace et leurs données seront définitivement supprimées de l\'"<b>"espace de stockage interne"</b>" de votre téléphone."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Effacer toutes les données (réinitialisation aux paramètres par défaut)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Effacer toutes les données"</string>
-    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musique"</li>\n<li>"Photos"</li>\n<li>"Autres données de l\'utilisateur"</li></string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"La musique"</li>\n<li>"Les photos"</li>\n<li>"Les autres données de l\'utilisateur"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"Modules eSIM"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Cela n\'annulera pas votre forfait de services cellulaires."</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Tous vos renseignements personnels et les applis téléchargées seront supprimés. Vous ne pouvez pas annuler cette action."</string>
@@ -1880,7 +1880,7 @@
     <string name="license_title" msgid="8745742085916617540">"Licence"</string>
     <string name="module_license_title" msgid="8705484239826702828">"Licences des mises à jour système pour Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Conditions d\'utilisation"</string>
-    <string name="webview_license_title" msgid="5832692241345780517">"Licence WebView du système"</string>
+    <string name="webview_license_title" msgid="5832692241345780517">"Licence système WebView"</string>
     <string name="wallpaper_attributions" msgid="4323659759250650736">"À propos du fond d\'écran"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Fournisseurs d\'images satellite :\n© CNES/Astrium, DigitalGlobe, Bluesky 2014"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Manuel"</string>
@@ -2211,14 +2211,17 @@
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Vitesse de défilement"</string>
     <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"Rendre le défilement plus rapide"</string>
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"Ralentir le défilement"</string>
-    <string name="mouse_pointer_speed_make_faster_desc" msgid="7665912663672314461">"Rendez le curseur plus rapide"</string>
-    <string name="mouse_pointer_speed_make_slower_desc" msgid="116802579827902188">"Rendez le curseur plus lent"</string>
+    <!-- no translation found for mouse_pointer_speed_make_faster_desc (7764518379488092305) -->
+    <skip />
+    <!-- no translation found for mouse_pointer_speed_make_slower_desc (5833674987434163839) -->
+    <skip />
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Inverser les boutons principaux de la souris"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Utilisez le bouton gauche de la souris comme bouton droit"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Accélération du curseur"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Des mouvements plus rapides avec votre souris déplaceront le curseur plus loin"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Touches de souris pour <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
-    <string name="mouse_keys_directional_summary" msgid="2215425656757420699">"Utilisez les touches « <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> » pour déplacer le pointeur de la souris"</string>
+    <!-- no translation found for mouse_keys_directional_summary (4579525566659216785) -->
+    <skip />
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"Utilisez la touche « <xliff:g id="CLICK_LABEL">%s</xliff:g> » pour cliquer sur le bouton principal de la souris"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Utilisez la touche « <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> » pour maintenir le bouton principal de la souris enfoncé"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Utilisez la touche « <xliff:g id="RELEASE_LABEL">%s</xliff:g> » pour relâcher le bouton principal de la souris"</string>
@@ -2235,8 +2238,10 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Pavé tactile"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Pavé tactile et souris"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Souris"</string>
-    <string name="mouse_settings_summary" msgid="1308610072914620926">"Vitesse pointeur, pers. du bouton"</string>
-    <string name="trackpad_settings_summary" msgid="3369855644136760402">"Vitesse du pointeur, gestes"</string>
+    <!-- no translation found for mouse_settings_summary (2593803007491750229) -->
+    <skip />
+    <!-- no translation found for trackpad_settings_summary (2984582991609553396) -->
+    <skip />
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Toucher pour cliquer"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Toucher des éléments et les faire glisser pour les déplacer"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Touchez deux fois le pavé tactile et faites glisser votre doigt dessus pour déplacer des objets"</string>
@@ -2246,20 +2251,30 @@
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Le contenu remonte lorsque vous balayez l\'écran vers le bas"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic en bas à droite"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Cliquez dans le coin inférieur droit du pavé tactile pour plus d\'options"</string>
-    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Vitesse du curseur"</string>
-    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2855950278314583596">"Rendez le curseur plus rapide"</string>
-    <string name="trackpad_pointer_speed_make_slower_desc" msgid="6577850228762978827">"Rendez le curseur plus lent"</string>
+    <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Vitesse du curseur"</string>
+    <!-- no translation found for trackpad_pointer_speed_make_faster_desc (2954555994130361440) -->
+    <skip />
+    <!-- no translation found for trackpad_pointer_speed_make_slower_desc (3071350599514464670) -->
+    <skip />
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Utiliser le toucher à trois doigts"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Accélération du pavé tactile"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Des mouvements plus rapides sur votre pavé tactile déplaceront le curseur plus loin"</string>
-    <string name="pointer_fill_style" msgid="8794616790175016092">"Couleur du pointeur"</string>
-    <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Changez le style du pointeur à noir"</string>
-    <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Changez le style du pointeur à vert"</string>
-    <string name="pointer_fill_style_red_button" msgid="6424326623906159283">"Changez le style du pointeur à rouge"</string>
-    <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Changez le style du pointeur à rose"</string>
-    <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Changez le style du pointeur à bleu"</string>
-    <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"Changez le style du pointeur à violet"</string>
-    <string name="pointer_stroke_style" msgid="139962661485972329">"Couleur du contour du pointeur"</string>
+    <!-- no translation found for pointer_fill_style (561690299676235020) -->
+    <skip />
+    <!-- no translation found for pointer_fill_style_black_button (5831307568100774564) -->
+    <skip />
+    <!-- no translation found for pointer_fill_style_green_button (3395040005347840735) -->
+    <skip />
+    <!-- no translation found for pointer_fill_style_red_button (7785934621403739261) -->
+    <skip />
+    <!-- no translation found for pointer_fill_style_pink_button (7220230518307764408) -->
+    <skip />
+    <!-- no translation found for pointer_fill_style_blue_button (667409695278072650) -->
+    <skip />
+    <!-- no translation found for pointer_fill_style_purple_button (5559838766704731345) -->
+    <skip />
+    <!-- no translation found for pointer_stroke_style (6646072538968241128) -->
+    <skip />
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Blanc"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Noir"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Aucun"</string>
@@ -2333,10 +2348,13 @@
     <string name="speech_category_title" msgid="5995161659186229742">"Parole"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Voix"</string>
     <string name="speech_preference_summary" msgid="5190362663352347487">"Contrôlez la reconnaissance/sortie vocale"</string>
-    <string name="pointer_speed" msgid="7398649279282675718">"Vitesse du curseur"</string>
+    <!-- no translation found for pointer_speed (5284291781349402396) -->
+    <skip />
     <string name="pointer_scale" msgid="3170694549809691557">"Taille du curseur"</string>
-    <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Diminuer l\'échelle du pointeur"</string>
-    <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Augmenter l\'échelle du pointeur"</string>
+    <!-- no translation found for pointer_scale_decrease_content_description (4410507171942820948) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (8832991916962669031) -->
+    <skip />
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"échelle, taille, Échelle du pointeur, Taille du pointeur, Grand pointeur de souris, grand, perceptible"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Manette de jeu"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Rediriger les vibrations"</string>
@@ -2466,7 +2484,7 @@
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"Suivre la cible du clavier"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"La loupe suit l\'élément sélectionné lorsque vous naviguez avec votre clavier"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"Agrandir le clavier"</string>
-    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Zoomez sur le clavier pour agrandir"</string>
+    <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"Zoomez sur le clavier pour voir les émojis et les lettres lorsque l\'agrandissement plein écran est activé"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"Non offert : agrandi partiellement"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Garder activée lors du changement d\'appli"</string>
     <string name="accessibility_screen_magnification_always_on_summary" msgid="642275893256862796">"La loupe reste activée et dézoome lorsque vous changez d\'appli"</string>
@@ -2676,7 +2694,7 @@
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Paramètres de navigation"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrations et effets tactiles"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Contrôler la force des vibrations pour différentes utilisations"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"Activé/Contrôlez les niveaux de vibration pour les appels, les notifications et les alarmes"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"Activés – Contrôlez les niveaux de vibration pour les appels, les notifications et les alarmes"</string>
     <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"Désactivé/Contrôlez les niveaux de vibration pour les appels, les notifications et les alarmes"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Le paramètre est désactivé parce que l\'appareil est en mode silencieux"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Appels"</string>
@@ -2792,7 +2810,7 @@
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensité"</string>
     <string name="brightness_intensity_start_label" msgid="5156578219206443637">"Diminuer"</string>
     <string name="brightness_intensity_end_label" msgid="2697495729534414164">"Augmenter"</string>
-    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Laisser activé après le redémarrage de l\'appareil"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Laisser activée après le redémarrage de l\'appareil"</string>
     <string name="accessibilty_autoclick_preference_subtitle_short_delay" msgid="2981206111858937724">"{count,plural, =1{Court ({time} seconde)}one{Court ({time} seconde)}other{Court ({time} secondes)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_medium_delay" msgid="6867395206533459204">"{count,plural, =1{Moyen ({time} seconde)}one{Moyen ({time} seconde)}other{Moyen ({time} secondes)}}"</string>
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Long ({time} seconde)}one{Long ({time} seconde)}other{Long ({time} secondes)}}"</string>
@@ -3441,6 +3459,8 @@
     <string name="user_owner" msgid="2079206733011361994">"Propriétaire"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrateur"</string>
     <string name="user_you" msgid="3070562015202859996">"Vous (<xliff:g id="NAME">%s</xliff:g>)"</string>
+    <!-- no translation found for user_edit_button (2362042403252020360) -->
+    <skip />
     <string name="user_add_max_count" msgid="3328539978480663740">"Vous ne pouvez plus ajouter d’utilisateurs. Retirez un utilisateur pour en ajouter un nouveau."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Les profils limités ne peuvent pas ajouter de compte."</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Supp. <xliff:g id="USER_NAME">%1$s</xliff:g> de l\'appareil"</string>
@@ -3781,7 +3801,7 @@
     <string name="live_caption_title" msgid="8617086825712756983">"Sous-titres instantanés"</string>
     <string name="live_caption_summary" msgid="7290150167089515457">"Obtenir des sous-titres pour les appels, les vidéos et d\'autres contenus multimédias"</string>
     <string name="live_caption_on_summary" msgid="8921561021882989495">"Activé/Obtenir des sous-titres pour les appels, les vidéos et d\'autres contenus multimédias"</string>
-    <string name="live_caption_off_summary" msgid="6761535729357010911">"Désactivé/Obtenir des sous-titres pour les appels, les vidéos et d\'autres contenus multimédias"</string>
+    <string name="live_caption_off_summary" msgid="6761535729357010911">"Désactivés – Obtenez des sous-titres pour les appels, les vidéos et d\'autres contenus multimédias"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Écouteurs filaires"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Le son des appareils multimédias compatibles devient plus immersif"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Désactivé"</string>
@@ -3951,7 +3971,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"L\'activation des bulles pour cette appli activera aussi les bulles pour votre appareil.\n\nCela a un impact sur les autres applis ou les conversations qui peuvent s\'afficher en bulles."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Activer"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Annuler"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Activées : les conversations peuvent s\'afficher sous forme d\'icônes flottantes"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Activées/Les conversations peuvent s\'afficher sous forme d\'icônes flottantes"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Autoriser les applis à afficher des bulles"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Certaines conversations s\'afficheront sous forme d\'icônes flottantes superposées aux autres applis"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Toutes les conversations peuvent s\'afficher dans des bulles"</string>
@@ -4393,7 +4413,7 @@
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"Ajouter"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"S\'ouvre dans <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilisé(s) dans : <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="979243131665635278">"stockage interne"</string>
+    <string name="storage_type_internal" msgid="979243131665635278">"mémoire interne"</string>
     <string name="storage_type_external" msgid="125078274000280821">"stockage externe"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> utilisés depuis le <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="2591194906751432725">"Espace de stockage utilisé"</string>
@@ -4410,7 +4430,7 @@
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Gérez l\'accès des applis à vos données"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Tableau de bord de confidentialité"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Affichez les applis qui ont récemment utilisé les autorisations"</string>
-    <string name="unused_apps" msgid="4566272194756830656">"Applis inutilisées"</string>
+    <string name="unused_apps" msgid="4566272194756830656">"Applis non utilisées"</string>
     <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{# appli non utilisée}one{# appli non utilisée}other{# applis non utilisées}}"</string>
     <string name="unused_apps_category" msgid="8954930958175500851">"Paramètres des applis inutilisées"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Suspendre l\'activité appli si inutilisée"</string>
@@ -4866,9 +4886,15 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Une sensibilité élevée pourrait interférer avec les gestes dans l\'appli le long des rebords de l\'écran."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilité du geste de retour"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigation par gestes"</string>
+    <!-- no translation found for gesture_settings_button_description (7916105652019436751) -->
+    <skip />
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Essayer une démo"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigation à boutons"</string>
+    <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
+    <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Ordre des boutons"</string>
+    <!-- no translation found for keywords_button_navigation_settings_order (2256307328114139152) -->
+    <skip />
     <string name="navbar_back_button" msgid="6386920156044420082">"Retour"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"Accueil"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"Récents"</string>
@@ -5739,7 +5765,7 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Capteur d\'empreintes digitales"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notifications lumineuses"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"À propos des notifications lumineuses"</string>
-    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"Désactivées/Recevez une alerte avec un flash d\'appareil photo ou un clignotement d\'écran pour les notifications et les alarmes"</string>
+    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"Désactivées – Recevez une alerte avec un flash d\'appareil photo ou un clignotement d\'écran pour les notifications et les alarmes"</string>
     <string name="flash_notifications_summary_on" msgid="7750683903778104666">"Activées/Recevez une alerte avec un flash d\'appareil photo ou un clignotement d\'écran pour les notifications et les alarmes"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"L\'écran ou la lumière de l\'appareil photo clignotent lorsque vous recevez des notifications ou lorsque des alarmes retentissent"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"L\'écran clignote lorsque vous recevez des notifications ou lorsque des alarmes retentissent"</string>
@@ -5778,7 +5804,7 @@
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Les écrans clairs deviennent sombres et vice-versa"</string>
     <string name="magnification_feature_summary" msgid="4403387702011660253">"Zoomez pour agrandir le contenu sur l\'écran"</string>
     <string name="autoclick_disabled" msgid="3213396804955002120">"Désactivé"</string>
-    <string name="show_captions_disabled" msgid="924366862253349790">"Désactivé/Personnalisez la taille et le style des sous-titres"</string>
+    <string name="show_captions_disabled" msgid="924366862253349790">"Désactivées – Personnalisez la taille et le style des sous-titres"</string>
     <string name="show_captions_enabled" msgid="3495595825041704052">"Activé/Personnalisez la taille et le style des sous-titres"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Désactivée"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Activés"</string>
@@ -5945,6 +5971,8 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Contrôles parentaux"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Règles de base numériques et limites de temps d\'utilisation des écrans"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Configurez un NIP"</string>
+    <!-- no translation found for supervision_set_up_pin_preference_title (4191271096152722137) -->
+    <skip />
     <string name="keywords_supervision_settings" msgid="43064288661561602">"supervision, contrôles parentaux, parents, nip de supervision, nip"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Gérer votre NIP"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"NIP des contrôles parentaux"</string>
@@ -5989,6 +6017,8 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Impossible de supprimer le NIP"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Le NIP ne peut pas être supprimé"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Une erreur s\'est produite lors de la tentative de suppression du NIP."</string>
+    <!-- no translation found for supervision_delete_and_turn_off_button_label (2749633624475583720) -->
+    <skip />
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animation <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Impossible d\'activer les contrôles"</string>
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Un problème est survenu"</string>
@@ -6007,7 +6037,17 @@
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Remplissage automatique, notifications, etc."</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Paramètres de confidentialité"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Autorisations, commandes"</string>
+    <!-- no translation found for app_security_subpage_title (397183486243670441) -->
+    <skip />
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Déverrouillage de l\'appareil"</string>
+    <!-- no translation found for account_security_subpage_title (3676085534746127966) -->
+    <skip />
+    <!-- no translation found for device_finders_subpage_title (2390688647994924006) -->
+    <skip />
+    <!-- no translation found for system_and_updates_subpage_title (5274185686741552322) -->
+    <skip />
+    <!-- no translation found for cellular_network_security_subpage_title (1191202157978621337) -->
+    <skip />
     <string name="location_settings" msgid="6833222354060094170">"Accès à la position"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Voyez les applis et les services qui ont accès à votre position"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"La Vérification d\'identité fonctionne avec plus d\'applis"</string>
@@ -6015,14 +6055,19 @@
     <string name="identity_check_view_details" msgid="8752343542345818128">"Afficher les détails"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Impossible de vérifier les paramètres"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Aucun renseignement pour le moment"</string>
-    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
     <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_device_unlock_summary" msgid="102917362915642117"></string>
     <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
-    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
+    <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
+    <!-- no translation found for safety_center_system_and_updates_summary (6301092688146734950) -->
+    <skip />
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
+    <!-- no translation found for safety_center_cellular_network_security_summary (4746047200732665728) -->
+    <skip />
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Plus d\'alertes"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Moins d\'alertes"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Alertes fermées"</string>
@@ -6031,4 +6076,6 @@
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Association en cours…"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"Appareil <xliff:g id="DEVICE_NAME">%1$s</xliff:g> connecté"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Analyser l\'appareil"</string>
+    <!-- no translation found for satellite_tile_label (1098132989724404617) -->
+    <skip />
 </resources>
