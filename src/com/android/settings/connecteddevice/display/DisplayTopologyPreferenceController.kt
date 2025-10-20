@@ -29,6 +29,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
+import com.android.settings.R
 import com.android.settings.core.instrumentation.SettingsStatsLog
 import java.util.function.Consumer
 import kotlin.math.abs
@@ -501,6 +502,34 @@ class DisplayTopologyPreferenceController(
 
         onBlockTouchUp(upEvent)
         upEvent.recycle()
+
+        val announcement =
+            when (direction) {
+                Direction.UP ->
+                    context.getString(
+                        R.string.external_display_topology_a11y_display_moved_up,
+                        displayId,
+                    )
+
+                Direction.DOWN ->
+                    context.getString(
+                        R.string.external_display_topology_a11y_display_moved_down,
+                        displayId,
+                    )
+
+                Direction.LEFT ->
+                    context.getString(
+                        R.string.external_display_topology_a11y_display_moved_left,
+                        displayId,
+                    )
+
+                Direction.RIGHT ->
+                    context.getString(
+                        R.string.external_display_topology_a11y_display_moved_right,
+                        displayId,
+                    )
+            }
+        paneContent.announceForAccessibility(announcement)
     }
 
     private fun onBlockTouchDown(
