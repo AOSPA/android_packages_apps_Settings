@@ -1105,7 +1105,7 @@
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"WiFi Direct"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Da biste videli dostupne mreže, uključite WiFi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="2448010040478321376">"Traže se mreže…"</string>
-    <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Nemate dozvolu da menjate Wi‑Fi mrežu."</string>
+    <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Nemate dozvolu da menjate WiFi mrežu."</string>
     <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Želite da uključite WiFi skeniranje?"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Da bi se automatski uključivao WiFi, prvo treba da uključite WiFi skeniranje."</string>
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"WiFi skeniranje omogućava aplikacijama i uslugama da traže WiFi mreže u bilo kom trenutku, čak i kada je WiFi isključen. Ovo, na primer, može da se koristi za poboljšanje funkcija i usluga zasnovanih na lokaciji."</string>
@@ -1164,7 +1164,7 @@
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Centrirajte QR kôd ispod da biste dodali uređaj na mrežu <xliff:g id="SSID">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Skenirajte QR kôd"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Postavite QR kôd u nastavku da biste dodali uređaj na mrežu „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Povežite se na Wi‑Fi mrežu tako što ćete skenirati QR kôd"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Povežite se na WiFi mrežu tako što ćete skenirati QR kôd"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Delite WiFi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Skenirajte ovaj QR kôd pomoću drugog uređaja da biste se povezali na: <xliff:g id="SSID">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Skenirajte ovaj QR kôd da biste se povezali sa <xliff:g id="SSID">%1$s</xliff:g>"</string>
@@ -2097,7 +2097,7 @@
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Ako onemogućite ovu aplikaciju, Android i druge aplikacije možda više neće raditi ispravno. Imajte na umu da ne možete da izbrišete ovu aplikaciju jer je bila unapred instalirana na uređaju. Ako je onemogućite, isključićete ovu aplikaciju i sakrićete je na uređaju."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Prodavnica"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Detalji o aplikaciji"</string>
-    <string name="app_install_details_summary" msgid="2013043219249992373">"Aplikacija je instalirana iz prodavnice <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_summary" msgid="2013043219249992373">"Aplikacija je instalirana iz: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"Aplikacija je instalirana iz „<xliff:g id="APP_STORE1">%1$s</xliff:g>“ (posredstvom: <xliff:g id="APP_STORE2">%2$s</xliff:g>)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Više informacija na <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Aktivno"</string>
@@ -2211,14 +2211,14 @@
     <string name="mouse_scrolling_speed" msgid="3999483025392860903">"Brzina skrolovanja"</string>
     <string name="mouse_scrolling_speed_make_faster_description" msgid="3542691986036109618">"Ubrzajte skrolovanje"</string>
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"Usporite skrolovanje"</string>
-    <string name="mouse_pointer_speed_make_faster_desc" msgid="7665912663672314461">"Ubrzava pokazivač"</string>
-    <string name="mouse_pointer_speed_make_slower_desc" msgid="116802579827902188">"Usporava pokazivač"</string>
+    <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"Ubrzaj kursor"</string>
+    <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"Uspori kursor"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Zameni primarni taster miša"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Koristite levi taster miša kao desni"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Ubrzavanje kursora"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Brže kretanje miša će pomerati kursor dalje"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Tasteri miša za: <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
-    <string name="mouse_keys_directional_summary" msgid="2215425656757420699">"Koristite tastere „<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>“ da biste pomerili pokazivač miša"</string>
+    <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"Koristite tastere <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> da biste pomerali kursor miša"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"Koristite taster „<xliff:g id="CLICK_LABEL">%s</xliff:g>“ da biste kliknuli na primarni taster miša"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"Koristite taster „<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>“ da biste pritisnuli i zadržali primarni taster miša"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"Koristite taster „<xliff:g id="RELEASE_LABEL">%s</xliff:g>“ da biste pustili primarni taster miša"</string>
@@ -2235,8 +2235,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Tačped"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Tačped i miš"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Miš"</string>
-    <string name="mouse_settings_summary" msgid="1308610072914620926">"Brzina pokazivača, prilag. dugmadi"</string>
-    <string name="trackpad_settings_summary" msgid="3369855644136760402">"Brzina pokazivača, pokreti"</string>
+    <string name="mouse_settings_summary" msgid="2593803007491750229">"Brzina kursora, prilagođ. dugmadi"</string>
+    <string name="trackpad_settings_summary" msgid="2984582991609553396">"Brzina kursora, pokreti"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Dodirnite da biste kliknuli"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Dodirnite i prevucite za premeštanje"</string>
     <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Dvaput dodirnite i pomerajte objekte prevlačenjem po tačpedu"</string>
@@ -2246,20 +2246,20 @@
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Sadržaj se pomera nagore kada skrolujete nadole"</string>
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klik dole desno"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Za više opcija kliknite na donji desni ugao tačpeda"</string>
-    <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Brzina pokazivača"</string>
-    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2855950278314583596">"Ubrzava pokazivač"</string>
-    <string name="trackpad_pointer_speed_make_slower_desc" msgid="6577850228762978827">"Usporava pokazivač"</string>
+    <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Brzina kursora"</string>
+    <string name="trackpad_pointer_speed_make_faster_desc" msgid="2954555994130361440">"Ubrzaj kursor"</string>
+    <string name="trackpad_pointer_speed_make_slower_desc" msgid="3071350599514464670">"Uspori kursor"</string>
     <string name="three_finger_tap_preference_title" msgid="1836080810837854140">"Koristite dodir pomoću tri prsta"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Ubrzavanje tačpeda"</string>
     <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Brže kretanje po tačpedu će pomerati kursor dalje"</string>
-    <string name="pointer_fill_style" msgid="8794616790175016092">"Boja pokazivača"</string>
-    <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Promenite stil popune u crno"</string>
-    <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Promenite stil popune u zeleno"</string>
-    <string name="pointer_fill_style_red_button" msgid="6424326623906159283">"Promenite stil popune pokazivača u crveno"</string>
-    <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Promenite stil popune u roze"</string>
-    <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Promenite stil popune u plavo"</string>
-    <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"Promenite stil popune pokazivača u ljubičasto"</string>
-    <string name="pointer_stroke_style" msgid="139962661485972329">"Boja poteza pokazivača"</string>
+    <string name="pointer_fill_style" msgid="561690299676235020">"Boja kursora"</string>
+    <string name="pointer_fill_style_black_button" msgid="5831307568100774564">"Promeni stil popune kursora u crno"</string>
+    <string name="pointer_fill_style_green_button" msgid="3395040005347840735">"Promeni stil popune kursora u zeleno"</string>
+    <string name="pointer_fill_style_red_button" msgid="7785934621403739261">"Promeni stil popune kursora u crveno"</string>
+    <string name="pointer_fill_style_pink_button" msgid="7220230518307764408">"Promeni stil popune kursora u roze"</string>
+    <string name="pointer_fill_style_blue_button" msgid="667409695278072650">"Promeni stil popune kursora u plavo"</string>
+    <string name="pointer_fill_style_purple_button" msgid="5559838766704731345">"Promeni stil popune kursora u ljubičasto"</string>
+    <string name="pointer_stroke_style" msgid="6646072538968241128">"Boja poteza kursora"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Belo"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Crno"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Ništa"</string>
@@ -2333,10 +2333,10 @@
     <string name="speech_category_title" msgid="5995161659186229742">"Govor"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Govor"</string>
     <string name="speech_preference_summary" msgid="5190362663352347487">"Kontrolišite prepoznavanje govora i rezultat"</string>
-    <string name="pointer_speed" msgid="7398649279282675718">"Brzina pokazivača"</string>
+    <string name="pointer_speed" msgid="5284291781349402396">"Brzina kursora"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Veličina kursora"</string>
-    <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Smanjite veličinu pokazivača"</string>
-    <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Povećajte veličinu pokazivača"</string>
+    <string name="pointer_scale_decrease_content_description" msgid="4410507171942820948">"Smanji veličinu kursora"</string>
+    <string name="pointer_scale_increase_content_description" msgid="8832991916962669031">"Povećaj veličinu kursora"</string>
     <string name="pointer_scale_keywords" msgid="8939432511048322072">"pokazivač, veličina, veličina pokazivača, veliki pokazivač miša, veliki, uočljiv"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Kontroler za igre"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Preusmeri vibraciju"</string>
@@ -2643,8 +2643,8 @@
     <string name="accessibility_autoclick_preference_title" msgid="6755104969672994014">"Automatski klik (vreme zadržavanja)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Automatski klik (vreme zadržavanja)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Saznajte više o automatskom kliku (vreme zadržavanja)"</string>
-    <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Možete da podesite automatske klikove povezanog miša kada kursor prestane da se kreće posle određenog perioda"</string>
-    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Automatski klik može da bude koristan ako su vam klikovi pomoću miša otežani"</string>
+    <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Možete da podesite da povezani miš automatski klikne kada kursor prestane da se kreće neko vreme"</string>
+    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Automatski klik može da bude koristan ako vamje teško da klikćete mišem"</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Automatski klik je isključen"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Kratko"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 sekunde"</string>
@@ -2659,7 +2659,7 @@
     <string name="accessibility_autoclick_main_switch_title" msgid="1968409462935503999">"Koristi automatski klik (vreme zadržavanja)"</string>
     <string name="accessibility_autoclick_shortcut_title" msgid="5337438503429302081">"Prečica za automatski klik"</string>
     <string name="autoclick_delay_before_click_title" msgid="4625722241966706931">"Odlaganje pre klika"</string>
-    <string name="autoclick_delay_before_click_summary" msgid="3685183305849901339">"Podesite koliko vremena treba da prođe do ostvarivanja klika pošto se kursor zaustavi"</string>
+    <string name="autoclick_delay_before_click_summary" msgid="3685183305849901339">"Podesite koliko vremena treba da prođe do klika pošto se kursor zaustavi"</string>
     <string name="autoclick_cursor_area_size_title" msgid="8988239939645854279">"Oblast za klik"</string>
     <string name="autoclick_cursor_area_size_summary" msgid="6993249143332791469">"Ako se kursor pomeri izvan oblasti za klik, automatski klik se otkazuje"</string>
     <string name="autoclick_cursor_area_size_dialog_option_extra_large" msgid="3802014133363801617">"Veoma velika"</string>
@@ -3441,6 +3441,7 @@
     <string name="user_owner" msgid="2079206733011361994">"Vlasnik"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrator"</string>
     <string name="user_you" msgid="3070562015202859996">"Vi (<xliff:g id="NAME">%s</xliff:g>)"</string>
+    <string name="user_edit_button" msgid="2362042403252020360">"Izmeni"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Ne možete da dodate još korisnika. Uklonite nekog korisnika da biste dodali novog."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Ograničeni profili ne mogu da dodaju naloge"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Izbriši <xliff:g id="USER_NAME">%1$s</xliff:g> sa uređaja"</string>
@@ -3828,7 +3829,7 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Izmeni"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Rasporedi"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Raspored"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Kada se uključuje automatski"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Kada da se uključuje automatski"</string>
     <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Raspored događaja"</string>
     <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Uključite tokom događaja za"</string>
     <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Kada je odgovor na poziv"</string>
@@ -4656,7 +4657,7 @@
     <string name="condition_grayscale_summary" msgid="1306034149271251292">"Prikazuje se samo u sivoj boji"</string>
     <string name="homepage_condition_footer_content_description" msgid="1568313430995646108">"Skupi"</string>
     <string name="homepage_unnumbered_alert_description" msgid="8393737409248958672">"Ova stavka ima obaveštenje"</string>
-    <string name="homepage_numbered_alert_description" msgid="4965963469296900322">"Ova stavka ima <xliff:g id="ALERT_COUNT">%1$s</xliff:g> obaveštenje/a"</string>
+    <string name="homepage_numbered_alert_description" msgid="4965963469296900322">"Ova stavka ima <xliff:g id="ALERT_COUNT">%1$s</xliff:g> upozorenje/a"</string>
     <string name="color_temperature" msgid="8256912135746305176">"Hladna temperatura boje"</string>
     <string name="color_temperature_desc" msgid="6713259535885669622">"Koristi hladnije boje ekrana"</string>
     <string name="color_temperature_toast" msgid="7611532183532407342">"Da biste primenili promenu boje, isključite ekran"</string>
@@ -4866,9 +4867,14 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Veća osetljivost može da izazove neslaganje sa pokretima u aplikaciji duž ivica ekrana."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Pozadinska osetljivost"</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Navigacija pomoću pokreta"</string>
+    <!-- no translation found for gesture_settings_button_description (7916105652019436751) -->
+    <skip />
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Pokreni demonstraciju"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Kretanje pomoću dugmadi"</string>
+    <!-- no translation found for button_navigation_settings_button_description (1790810452341767848) -->
+    <skip />
     <string name="button_navigation_settings_order_title" msgid="4256756895101424865">"Redosled dugmadi"</string>
+    <string name="keywords_button_navigation_settings_order" msgid="2256307328114139152">"Redosled dugmadi, dugmad za pomeranje, režim za levoruke, režim za desnoruke"</string>
     <string name="navbar_back_button" msgid="6386920156044420082">"Nazad"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"Početna"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"Nedavno"</string>
@@ -5374,7 +5380,7 @@
     <string name="wifi_warning_continue_button" msgid="8171574741789688214">"Ipak obriši"</string>
     <string name="wifi_warning_return_button" msgid="6226063181583906340">"Važi"</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Povežite sa uređajem"</string>
-    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Aplikacija <xliff:g id="APPNAME">%1$s</xliff:g> želi da koristi privremenu Wi‑Fi mrežu da bi se povezala sa uređajem"</string>
+    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Aplikacija <xliff:g id="APPNAME">%1$s</xliff:g> želi da koristi privremenu WiFi mrežu da bi se povezala sa uređajem"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Nije pronađen nijedan uređaj Proverite da li je uređaj uključen i dostupan za povezivanje."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Probaj ponovo"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Došlo je do nekog problema. Aplikacija je otkazala zahtev za izbor uređaja."</string>
@@ -5946,6 +5952,7 @@
     <string name="supervision_settings_title" msgid="8507163323870367711">"Roditeljski nadzor"</string>
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Osnovna pravila za digitalni svet i ograničenja vremena ispred ekrana"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Podesite PIN"</string>
+    <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Podesite PIN za roditeljski nadzor"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"nadzor, roditeljski nadzor, roditelji, PIN za nadzor, PIN"</string>
     <string name="supervision_pin_management_preference_title" msgid="7721501202320841845">"Upravljajte PIN-om"</string>
     <string name="supervision_pin_management_screen_title" msgid="9118601026702645173">"PIN za roditeljski nadzor"</string>
@@ -5990,6 +5997,7 @@
     <string name="supervision_delete_pin_supervision_enabled_header" msgid="8153051958380534896">"Brisanje PIN-a nije uspelo"</string>
     <string name="supervision_delete_pin_error_header" msgid="1271034883245391839">"Brisanje PIN-a nije uspelo"</string>
     <string name="supervision_delete_pin_error_message" msgid="3400536232973539259">"Došlo je do greške pri brisanju PIN-a."</string>
+    <string name="supervision_delete_and_turn_off_button_label" msgid="2749633624475583720">"Izbriši i isključi"</string>
     <string name="accessibility_illustration_content_description" msgid="557376174860150903">"Animacija za: <xliff:g id="FEATURE">%1$s</xliff:g>"</string>
     <string name="supervision_multi_profile_error_title" msgid="5570178018386518727">"Uključivanje kontrola nije uspelo"</string>
     <string name="supervision_generic_error_page_title" msgid="1890873741445464953">"Došlo je do greške"</string>
@@ -6008,7 +6016,17 @@
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"Automatsko popunjavanje, obaveštenja i drugo"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"Kontrole privatnosti"</string>
     <string name="privacy_sources_summary" msgid="8795612902105833258">"Dozvole, kontrole"</string>
+    <!-- no translation found for app_security_subpage_title (397183486243670441) -->
+    <skip />
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Otključavanje uređaja"</string>
+    <!-- no translation found for account_security_subpage_title (3676085534746127966) -->
+    <skip />
+    <!-- no translation found for device_finders_subpage_title (2390688647994924006) -->
+    <skip />
+    <!-- no translation found for system_and_updates_subpage_title (5274185686741552322) -->
+    <skip />
+    <!-- no translation found for cellular_network_security_subpage_title (1191202157978621337) -->
+    <skip />
     <string name="location_settings" msgid="6833222354060094170">"Pristup lokaciji"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Pogledajte aplikacije i usluge koje imaju pristup lokaciji"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"Provera identiteta radi sa više aplikacija"</string>
@@ -6016,20 +6034,26 @@
     <string name="identity_check_view_details" msgid="8752343542345818128">"Prikaži detalje"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"Provera podešavanja nije uspela"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"Još nema informacija"</string>
-    <string name="device_unlock_subpage_default_summary" msgid="7321899509231836294"></string>
     <string name="safety_center_app_security_summary" msgid="8400214168449223021"></string>
     <string name="safety_center_app_security_footer" msgid="6857375118388269085"></string>
     <string name="safety_center_app_security_search_terms" msgid="5309863174391119980"></string>
+    <string name="safety_center_device_unlock_summary" msgid="102917362915642117"></string>
     <string name="safety_center_account_security_summary" msgid="684515940132301821"></string>
     <string name="safety_center_account_security_search_terms" msgid="3950829613581775913"></string>
-    <string name="safety_center_device_finder_search_terms" msgid="452013643838126923"></string>
+    <string name="safety_center_device_finders_summary" msgid="6261252581729491563"></string>
+    <string name="safety_center_device_finders_search_terms" msgid="2703625009760905100"></string>
+    <!-- no translation found for safety_center_system_and_updates_summary (6301092688146734950) -->
+    <skip />
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
-    <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Više obaveštenja"</string>
-    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Manje obaveštenja"</string>
-    <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Odbačena obaveštenja"</string>
+    <!-- no translation found for safety_center_cellular_network_security_summary (4746047200732665728) -->
+    <skip />
+    <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Više upozorenja"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Manje upozorenja"</string>
+    <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Odbačena upozorenja"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Želite da odbacite ovo obaveštenje?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"U bilo kom trenutku možete da pregledate podešavanja bezbednosti i privatnosti da biste pojačali zaštitu"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Uparivanje"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> – povezano"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Skeniraj uređaj"</string>
+    <string name="satellite_tile_label" msgid="1098132989724404617">"Satelit"</string>
 </resources>
