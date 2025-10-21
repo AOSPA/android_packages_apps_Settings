@@ -51,7 +51,7 @@ object ApnTypes {
         ApnSetting.TYPE_OEM_PRIVATE_STRING,
     )
 
-    private fun splitToList(apnType: String): List<String> {
+    fun splitToList(apnType: String): List<String> {
         val types = apnType.split(',').map { it.trim().toLowerCase(Locale.current) }
         if (hasAllApnTypes(types)) return listOf(ApnSetting.TYPE_ALL_STRING)
         return APN_TYPES.filter { it in types }
