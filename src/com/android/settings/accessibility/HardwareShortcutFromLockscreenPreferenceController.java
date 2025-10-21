@@ -48,10 +48,12 @@ public class HardwareShortcutFromLockscreenPreferenceController
         final ContentResolver cr = mContext.getContentResolver();
         // The shortcut is enabled by default on the lock screen as long as the user has
         // enabled the shortcut with the warning dialog
-        final int dialogShown = Settings.Secure.getInt(
-                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_DIALOG_SHOWN, OFF);
-        final boolean enabledFromLockScreen = Settings.Secure.getInt(
-                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, dialogShown) == ON;
+        final int dialogShown = Settings.Secure.getIntForUser(
+                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_DIALOG_SHOWN, OFF,
+                mContext.getUserId());
+        final boolean enabledFromLockScreen = Settings.Secure.getIntForUser(
+                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, dialogShown,
+                mContext.getUserId()) == ON;
         return enabledFromLockScreen;
     }
 
