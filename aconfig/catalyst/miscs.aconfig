@@ -14,3 +14,10 @@ flag {
   description: "Flag using for all common deeplink migration in 25Q4"
   bug: "405344827"
 }
+
+flag {
+  name: "catalyst_migration_26q2"
+  namespace: "android_settings"
+  description: "Flag for core migrations in 26Q2"
+  bug: "441443762"
+}
