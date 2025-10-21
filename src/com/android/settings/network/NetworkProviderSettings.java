@@ -531,6 +531,10 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
             mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
         }
 
+        if (mNetworkMobileProviderController != null) {
+            mNetworkMobileProviderController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
+        }
+
         requireActivity().addMenuProvider(mMenuProvider);
     }
 
@@ -909,6 +913,9 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
             requireActivity().invalidateMenu();
         }
 
+        if (mWifiPickerTrackerHelper != null) {
+            mWifiPickerTrackerHelper.mWifiState.postValue(wifiState);
+        }
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
                 setWifiScanMessage(/* isWifiEnabled */ true);
@@ -975,6 +982,9 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
     public void onWifiEntriesChanged(@WifiPickerTracker.WifiEntriesChangedReason int reason) {
         if (isFinishingOrDestroyed()) {
             return;
+        }
+        if (mWifiPickerTrackerHelper != null) {
+            mWifiPickerTrackerHelper.mWifiEntriesChangedReason.postValue(reason);
         }
         updateWifiEntryPreferences();
         if (reason == WifiPickerTracker.WIFI_ENTRIES_CHANGED_REASON_SCAN_RESULTS) {

@@ -32,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -66,6 +67,9 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
 
     protected final WifiManager mWifiManager;
     protected final CarrierConfigCache mCarrierConfigCache;
+
+    public MutableLiveData<Integer> mWifiState = new MutableLiveData<>();
+    public MutableLiveData<Integer> mWifiEntriesChangedReason = new MutableLiveData<>();
 
     public WifiPickerTrackerHelper(@NonNull Lifecycle lifecycle, @NonNull Context context,
             @Nullable WifiPickerTracker.WifiPickerTrackerCallback listener) {
