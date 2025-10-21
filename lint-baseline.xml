@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.4.0-alpha08" type="baseline" client="" dependencies="true" name="" variant="all" version="8.4.0-alpha08">
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.app.NotificationChannel#getOriginalImportance`"
+        errorLine1="                                : Math.max(mChannel.getOriginalImportance(), IMPORTANCE_LOW);"
+        errorLine2="                                                    ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/notification/app/BlockPreferenceController.java"
+            line="135"
+            column="53"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.app.NotificationChannel#getOriginalImportance`"
+        errorLine1="                            ? Math.max(channel.getOriginalImportance(), IMPORTANCE_LOW)"
+        errorLine2="                                               ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/notification/app/BundleListPreferenceController.java"
+            line="192"
+            column="48"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.app.NotificationChannel#getOriginalImportance`"
+        errorLine1="                            ? Math.max(channel.getOriginalImportance(), IMPORTANCE_LOW)"
+        errorLine2="                                               ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/notification/app/ChannelListPreferenceController.java"
+            line="438"
+            column="48"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.biometrics.BiometricPrompt.Builder#addFallbackOption`"
+        errorLine1="            .addFallbackOption("
+        errorLine2="             ~~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/supervision/ConfirmSupervisionCredentialsActivity.kt"
+            line="239"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayManager#getDisplayTopology`"
+        errorLine1="        get() = displayManager?.displayTopology"
+        errorLine2="                                ~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/ConnectedDisplayInjector.kt"
+            line="299"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayManager#registerTopologyListener`"
+        errorLine1="        if (executor != null) displayManager?.registerTopologyListener(executor, listener)"
+        errorLine2="                                              ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/ConnectedDisplayInjector.kt"
+            line="353"
+            column="47"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayManager#unregisterTopologyListener`"
+        errorLine1="        displayManager?.unregisterTopologyListener(listener)"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/ConnectedDisplayInjector.kt"
+            line="357"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.app.NotificationChannel#getOriginalImportance`"
+        errorLine1="            pref.setOriginalImportance(mChannel.getOriginalImportance());"
+        errorLine2="                                                ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/notification/app/ConversationPriorityPreferenceController.java"
+            line="69"
+            column="49"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#getPrimaryDisplayId`"
+        errorLine1="        return injector.displayTopology?.primaryDisplayId ?: DEFAULT_DISPLAY"
+        errorLine2="                                         ~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayPreferenceViewModel.kt"
+            line="249"
+            column="42"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#dpToPx`"
+        errorLine1="        get() = DisplayTopology.dpToPx(4f, injector.densityDpi)"
+        errorLine2="                                ~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="59"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#allNodesIdMap`"
+        errorLine1="        if (displayTopology == null || !displayTopology.allNodesIdMap().containsKey(displayId)) {"
+        errorLine2="                                                        ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="184"
+            column="57"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#getAbsoluteBounds`"
+        errorLine1="        val topologyBounds = topology.absoluteBounds"
+        errorLine2="                                      ~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="222"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#allNodesIdMap`"
+        errorLine1="        val idToNode = topology.allNodesIdMap()"
+        errorLine2="                                ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="247"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#dpToPx`"
+        errorLine1="                minEdgeLength = DisplayTopology.dpToPx(MIN_EDGE_LENGTH_DP, injector.densityDpi),"
+        errorLine2="                                                ~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="252"
+            column="49"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#dpToPx`"
+        errorLine1="                maxEdgeLength = DisplayTopology.dpToPx(MAX_EDGE_LENGTH_DP, injector.densityDpi),"
+        errorLine2="                                                ~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="253"
+            column="49"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#getGraph`"
+        errorLine1="            calculateDisplayArrowMovement(topology.graph),"
+        errorLine2="                                                   ~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="261"
+            column="52"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#dpToPx`"
+        errorLine1="                minEdgeLength = DisplayTopology.dpToPx(MIN_EDGE_LENGTH_DP, injector.densityDpi),"
+        errorLine2="                                                ~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="289"
+            column="49"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#dpToPx`"
+        errorLine1="                maxEdgeLength = DisplayTopology.dpToPx(MAX_EDGE_LENGTH_DP, injector.densityDpi),"
+        errorLine2="                                                ~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="290"
+            column="49"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#dpToPx`"
+        errorLine1="            DisplayTopology.dpToPx(MIRRORING_DIAGONAL_STACK_OFFSET_DP, injector.densityDpi)"
+        errorLine2="                            ~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="337"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#dpToPx`"
+        errorLine1="        val moveDistancePx = DisplayTopology.dpToPx(A11Y_MOVE_DISTANCE_DP, injector.densityDpi)"
+        errorLine2="                                             ~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="453"
+            column="46"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#copy`"
+        errorLine1="        val newTopology = topology.topology.copy()"
+        errorLine2="                                            ~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="593"
+            column="45"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#rearrange`"
+        errorLine1="        newTopology.rearrange(arr)"
+        errorLine2="                    ~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="600"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#allNodesIdMap`"
+        errorLine1="        if (displayTopology == null || !displayTopology.allNodesIdMap().containsKey(displayId)) {"
+        errorLine2="                                                        ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceController.kt"
+            line="654"
+            column="57"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.hardware.display.DisplayTopology#getPrimaryDisplayId`"
+        errorLine1="        injector.displayTopology?.primaryDisplayId?.let { controller.selectDisplay(it) }"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/display/DisplayTopologyPreferenceView.kt"
+            line="42"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.companion.AssociationInfo#getDeviceIcon`"
+        errorLine1="                    ? mDevice.getAssociationInfo().getDeviceIcon() : null;"
+        errorLine2="                                                   ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/virtual/VirtualDeviceDetailsHeaderController.java"
+            line="113"
+            column="52"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.companion.AssociationInfo#getDeviceIcon`"
+        errorLine1="                ? device.getAssociationInfo().getDeviceIcon() : null;"
+        errorLine2="                                              ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/connecteddevice/virtual/VirtualDeviceListController.java"
+            line="102"
+            column="47"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Field requires API level 37.1 (current min is 36): `android.net.wifi.WifiConfiguration#shared`"
+        errorLine1="                if (!config.shared) {"
+        errorLine2="                     ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/wifi/WifiConfigController.java"
+            line="367"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Field requires API level 37.1 (current min is 36): `android.net.wifi.WifiConfiguration#shared`"
+        errorLine1="            config.shared = mSharedSwitch.isChecked();"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/wifi/WifiConfigController2.java"
+            line="645"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Field requires API level 37.1 (current min is 36): `android.net.wifi.WifiConfiguration#shared`"
+        errorLine1="                ? false : mWifiEntry.getWifiConfiguration().shared;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/wifi/WifiEntryPreference.java"
+            line="184"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.net.wifi.SoftApConfiguration.Builder#setPassphrase`"
+        errorLine1="        configBuilder.setPassphrase(passphrase, securityType);"
+        errorLine2="                      ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/wifi/repository/WifiHotspotRepository.java"
+            line="267"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.net.wifi.SoftApConfiguration.Builder#setPassphrase`"
+        errorLine1="                configBuilder.setPassphrase(generatePassword(config), SECURITY_TYPE_WPA3_SAE);"
+        errorLine2="                              ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/wifi/repository/WifiHotspotRepository.java"
+            line="345"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.net.wifi.SoftApConfiguration.Builder#setPassphrase`"
+        errorLine1="                configBuilder.setPassphrase(passphrase, SECURITY_TYPE_WPA3_SAE_TRANSITION);"
+        errorLine2="                              ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/wifi/repository/WifiHotspotRepository.java"
+            line="363"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Field requires API level 37.1 (current min is 36): `android.net.wifi.WifiConfiguration#shared`"
+        errorLine1="                matchingWifiConfiguration.shared,"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/wifi/details2/WifiSharedPreferenceController.kt"
+            line="58"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Field requires API level 37.1 (current min is 36): `android.net.wifi.WifiConfiguration#shared`"
+        errorLine1="                .filter { entry: WifiEntry -&gt; entry.getWifiConfiguration()?.shared == shared }"
+        errorLine2="                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/wifi/details2/WifiSharedPreferenceController.kt"
+            line="124"
+            column="47"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Field requires API level 37.1 (current min is 36): `android.net.wifi.WifiConfiguration#allowAutojoin`"
+        errorLine1="                                jsonValue = network.allowAutojoin.toString(),"
+        errorLine2="                                            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/appfunctions/stateprovidersources/WifiStatusStateSource.kt"
+            line="88"
+            column="45"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.net.wifi.SoftApConfiguration.Builder#setPassphrase`"
+        errorLine1="        configBuilder.setPassphrase(passphrase, securityType);"
+        errorLine2="                      ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/wifi/tether/WifiTetherSettings.java"
+            line="341"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 36.1 (current min is 36): `android.net.wifi.SoftApConfiguration.Builder#setPassphrase`"
+        errorLine1="            configBuilder.setPassphrase(password, securityType);"
+        errorLine2="                          ~~~~~~~~~~~~~">
+        <location
+            file="packages/apps/Settings/src/com/android/settings/wifi/WifiUtils.java"
+            line="92"
+            column="27"/>
+    </issue>
+
+</issues>
