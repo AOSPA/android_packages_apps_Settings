@@ -236,30 +236,36 @@ public class WifiConfigController2Test {
     @Test
     @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
     public void saveSharedField() {
+        when(mUserManager.getUserCount()).thenReturn(2);
         createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
         final MaterialSwitch sharedSwitch = mView.findViewById(R.id.share_wifi_network);
+
         assertThat(sharedSwitch).isNotNull();
         assertThat(sharedSwitch.getVisibility()).isEqualTo(View.VISIBLE);
 
-        WifiConfiguration config = mController.getConfig();
+        sharedSwitch.setChecked(true);
 
+        WifiConfiguration config = mController.getConfig();
         assertThat(config.shared).isTrue();
     }
 
     @Test
     @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
     public void editConfigurationFieldState() {
+        when(mUserManager.getUserCount()).thenReturn(2);
         createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
         final MaterialSwitch editConfigurationSwitch =
                 mView.findViewById(R.id.edit_wifi_network_configuration);
         final MaterialSwitch sharedSwitch = mView.findViewById(R.id.share_wifi_network);
 
         assertThat(editConfigurationSwitch).isNotNull();
+        assertThat(editConfigurationSwitch.getVisibility()).isEqualTo(View.VISIBLE);
 
         sharedSwitch.setChecked(true);
-        shadowOf(Looper.getMainLooper()).idle();
+        editConfigurationSwitch.setChecked(false);
 
-        assertThat(editConfigurationSwitch.isEnabled()).isTrue();
+        WifiConfiguration config = mController.getConfig();
+        assertThat(config.isAllowedToUpdateByOtherUsers()).isFalse();
     }
 
     @Test
