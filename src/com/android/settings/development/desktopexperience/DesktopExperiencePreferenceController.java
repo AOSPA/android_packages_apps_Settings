@@ -110,8 +110,15 @@ public class DesktopExperiencePreferenceController extends DeveloperOptionsPrefe
     }
 
     private boolean shouldDisableToggle() {
-        return Flags.enableDisplayContentModeManagement()
-                || mDesktopState.isDeviceEligibleForDesktopMode();
+        // If a device can show desktop mode dev option, which checks for a config value under the
+        // hood, the toggle should not be disabled even if display content mode management is
+        // enabled. The reasoning behind is that the devices that only support desktop mode as part
+        // of dev options, should be able to toggle it on and off.
+        if (mDesktopState.canShowDesktopModeDevOption()) {
+            return false;
+        }
+
+        return Flags.enableDisplayContentModeManagement();
     }
 
     @Override

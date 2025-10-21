@@ -225,14 +225,14 @@ public class DesktopExperiencePreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
-    public void updateState_whenDesktopModeEligible_checkDisabled() {
-        mDesktopState.setDeviceEligibleForDesktopMode(true);
+    @EnableFlags(FLAG_ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT)
+    public void updateState_whenContentModeEnabledAndCanShowDesktopModeDevOption_checkEnabled() {
         SwitchPreference pref = new SwitchPreference(mContext);
+        mDesktopState.setCanShowDesktopModeDevOption(true);
 
         mController.updateState(pref);
 
-        assertThat(pref.isEnabled()).isFalse();
-        assertThat(pref.isChecked()).isTrue();
+        assertThat(pref.isEnabled()).isTrue();
+        assertThat(pref.isChecked()).isFalse();
     }
 }
