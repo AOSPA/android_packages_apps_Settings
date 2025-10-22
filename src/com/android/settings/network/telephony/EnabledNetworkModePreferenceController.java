@@ -294,7 +294,7 @@ public class EnabledNetworkModePreferenceController extends
         private boolean mSupported5gRadioAccessFamily;
         private boolean mDisplay2gOptions;
         private boolean mDisplay3gOptions;
-        private boolean mLteEnabled;
+        private boolean mDisplay4gOptions;
         private int mSelectedEntry;
         private int mSubId;
         private String mSummary = "";
@@ -362,15 +362,16 @@ public class EnabledNetworkModePreferenceController extends
                     }
                 }
 
-                mLteEnabled = carrierConfig.getBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL);
+                mDisplay4gOptions = carrierConfig.getBoolean(
+                        CarrierConfigManager.KEY_LTE_ENABLED_BOOL);
             }
             Log.d(LOG_TAG, "PreferenceEntriesBuilder: subId" + mSubId
                     + " ,Supported5gRadioAccessFamily :" + mSupported5gRadioAccessFamily
                     + " ,mAllowed5gNetworkType :" + mAllowed5gNetworkType
                     + " ,IsGlobalCdma :" + mIsGlobalCdma
-                    + " ,Display2gOptions:" + mDisplay2gOptions
-                    + " ,Display3gOptions:" + mDisplay3gOptions
-                    + " ,Display4gOptions" + mLteEnabled
+                    + " ,Display2gOptions :" + mDisplay2gOptions
+                    + " ,Display3gOptions :" + mDisplay3gOptions
+                    + " ,Display4gOptions : " + mDisplay4gOptions
                     + " ,Show4gForLTE :" + mShow4gForLTE);
         }
 
@@ -591,13 +592,13 @@ public class EnabledNetworkModePreferenceController extends
                     enabledNetworkType = mShow4gForLTE
                             ? EnabledNetworks.ENABLED_NETWORKS_4G_CHOICES_EXCEPT_GSM_3G
                             : EnabledNetworks.ENABLED_NETWORKS_CHOICES_EXCEPT_GSM_3G;
-                } else if (!mDisplay2gOptions && !mLteEnabled) {
+                } else if (!mDisplay2gOptions && !mDisplay4gOptions) {
                     enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES;
                 } else if (!mDisplay2gOptions) {
                     enabledNetworkType = mShow4gForLTE
                             ? EnabledNetworks.ENABLED_NETWORKS_EXCEPT_GSM_4G_CHOICES
                             : EnabledNetworks.ENABLED_NETWORKS_EXCEPT_GSM_CHOICES;
-                } else if (!mLteEnabled) {
+                } else if (!mDisplay4gOptions) {
                     enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_EXCEPT_LTE_CHOICES;
                 } else {
                     enabledNetworkType = mShow4gForLTE ? EnabledNetworks.ENABLED_NETWORKS_4G_CHOICES
