@@ -112,10 +112,10 @@ public class BluetoothAvrcpVersionPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_noValueSet_shouldSetDefaultToAvrcp14() {
+    public void updateState_noValueSet_shouldSetDefaultToAvrcp16() {
         mController.updateState(mPreference);
 
-        verify(mPreference).setValue(mListValues[0]);
-        verify(mPreference).setSummary(mListSummaries[0]);
+        verify(mPreference).setValue(mListValues[3]);
+        verify(mPreference).setSummary(mListSummaries[3]);
     }
 }
