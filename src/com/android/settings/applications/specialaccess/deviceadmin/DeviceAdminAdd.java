@@ -37,7 +37,9 @@ import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.admin.DeviceAdminInfo;
 import android.app.admin.DeviceAdminReceiver;
+import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PolicyEnforcementInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
@@ -484,27 +486,42 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
      * Shows a dialog to explain why the button is disabled if required.
      */
     private void showPolicyTransparencyDialogIfRequired() {
-        if (isManagedProfile(mDeviceAdmin)
-                && mDeviceAdmin.getComponent().equals(mDPM.getProfileOwner())) {
-            EnforcedAdmin enforcedAdmin;
-            ComponentName adminComponent = mDPM.getProfileOwnerAsUser(getUserId());
-            if (adminComponent != null && mDPM.isOrganizationOwnedDeviceWithManagedProfile()) {
-                enforcedAdmin = new EnforcedAdmin(adminComponent,
-                        UserManager.DISALLOW_REMOVE_MANAGED_PROFILE, UserHandle.of(getUserId()));
-            } else {
-                // Todo (b/151061366): Investigate this case to check if it is still viable.
-                if (hasBaseCantRemoveProfileRestriction()) {
-                    // If DISALLOW_REMOVE_MANAGED_PROFILE is set by the system, there's no
-                    // point showing a dialog saying it's disabled by an admin.
-                    return;
-                }
-                enforcedAdmin = getAdminEnforcingCantRemoveProfile();
+        if (!isManagedProfile(mDeviceAdmin)
+                || !mDeviceAdmin.getComponent().equals(mDPM.getProfileOwner())) {
+            return;
+        }
+
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            PolicyEnforcementInfo policyEnforcementInfo = mDPM.getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                            UserManager.DISALLOW_REMOVE_MANAGED_PROFILE), getUserId());
+            if (policyEnforcementInfo.isEnforced()
+                    && !policyEnforcementInfo.isOnlyEnforcedBySystem()) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(DeviceAdminAdd.this,
+                        policyEnforcementInfo.getMostImportantEnforcingAdmin(),
+                        null);
             }
-            if (enforcedAdmin != null) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
-                        DeviceAdminAdd.this,
-                        enforcedAdmin);
+            return;
+        }
+
+        EnforcedAdmin enforcedAdmin;
+        ComponentName adminComponent = mDPM.getProfileOwnerAsUser(getUserId());
+        if (adminComponent != null && mDPM.isOrganizationOwnedDeviceWithManagedProfile()) {
+            enforcedAdmin = new EnforcedAdmin(adminComponent,
+                    UserManager.DISALLOW_REMOVE_MANAGED_PROFILE, UserHandle.of(getUserId()));
+        } else {
+            // Todo (b/151061366): Investigate this case to check if it is still viable.
+            if (hasBaseCantRemoveProfileRestriction()) {
+                // If DISALLOW_REMOVE_MANAGED_PROFILE is set by the system, there's no
+                // point showing a dialog saying it's disabled by an admin.
+                return;
             }
+            enforcedAdmin = getAdminEnforcingCantRemoveProfile();
+        }
+        if (enforcedAdmin != null) {
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                    DeviceAdminAdd.this,
+                    enforcedAdmin);
         }
     }
 
@@ -678,14 +695,7 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
                 mActionButton.setText(mDPM.getResources().getString(REMOVE_WORK_PROFILE,
                         () -> getString(R.string.remove_managed_profile_label)));
 
-                final EnforcedAdmin admin = getAdminEnforcingCantRemoveProfile();
-                final boolean hasBaseRestriction = hasBaseCantRemoveProfileRestriction();
-                if ((hasBaseRestriction && mDPM.isOrganizationOwnedDeviceWithManagedProfile())
-                        || (admin != null && !hasBaseRestriction)) {
-                    findViewById(com.android.settingslib.widget.restricted.R.id.restricted_icon)
-                            .setVisibility(View.VISIBLE);
-                }
-                mActionButton.setEnabled(admin == null && !hasBaseRestriction);
+                addCantRemoveManagedProfileRestriction();
             } else if (isProfileOwner || mDeviceAdmin.getComponent().equals(
                             mDPM.getDeviceOwnerComponentOnCallingUser())) {
                 // Profile owner in a user or device owner, user can't disable admin.
@@ -748,6 +758,34 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             mSupportMessage.setVisibility(View.GONE);
             mAdding = true;
         }
+    }
+
+    private void addCantRemoveManagedProfileRestriction() {
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            PolicyEnforcementInfo policyEnforcementInfo = mDPM.getEnforcingAdminsForPolicy(
+                    DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                            UserManager.DISALLOW_REMOVE_MANAGED_PROFILE), getParentUserId());
+            boolean isRestrictionEnforcedByAdmin = policyEnforcementInfo.isEnforced()
+                    && !policyEnforcementInfo.isEnforcedBySystem();
+            boolean isRestrictionEnforcedBySystemOnCopeMode =
+                    policyEnforcementInfo.isEnforcedBySystem()
+                            && mDPM.isOrganizationOwnedDeviceWithManagedProfile();
+            if (isRestrictionEnforcedByAdmin || isRestrictionEnforcedBySystemOnCopeMode) {
+                findViewById(
+                        com.android.settingslib.widget.restricted.R.id.restricted_icon)
+                            .setVisibility(View.VISIBLE);
+            }
+            mActionButton.setEnabled(!policyEnforcementInfo.isEnforced());
+            return;
+        }
+        final EnforcedAdmin admin = getAdminEnforcingCantRemoveProfile();
+        final boolean hasBaseRestriction = hasBaseCantRemoveProfileRestriction();
+        if ((hasBaseRestriction && mDPM.isOrganizationOwnedDeviceWithManagedProfile())
+                || (admin != null && !hasBaseRestriction)) {
+            findViewById(com.android.settingslib.widget.restricted.R.id.restricted_icon)
+                    .setVisibility(View.VISIBLE);
+        }
+        mActionButton.setEnabled(admin == null && !hasBaseRestriction);
     }
 
     private EnforcedAdmin getAdminEnforcingCantRemoveProfile() {

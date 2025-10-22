@@ -53,8 +53,6 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.List;
 import java.util.Objects;
@@ -69,8 +67,6 @@ public class NotificationAccessDetails extends DashboardFragment {
     protected PackageInfo mPackageInfo;
     protected int mUserId;
     protected String mPackageName;
-    protected RestrictedLockUtils.EnforcedAdmin mAppsControlDisallowedAdmin;
-    protected boolean mAppsControlDisallowedBySystem;
     private boolean mIsNls;
     private PackageManager mPm;
 
@@ -171,10 +167,6 @@ public class NotificationAccessDetails extends DashboardFragment {
     @Override
     public void onResume() {
         super.onResume();
-        mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-                getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
-        mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
-                getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
 
         if (!refreshUi()) {
             finish();

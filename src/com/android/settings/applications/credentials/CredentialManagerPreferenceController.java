@@ -20,6 +20,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.admin.EnforcingAdmin;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -571,6 +572,16 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             Drawable icon = combinedInfo.getAppIcon(context, getUser());
             CharSequence title = combinedInfo.getAppName(context);
 
+            RestrictedLockUtils.EnforcedAdmin enforcedAdmin = null;
+            EnforcingAdmin enforcingAdmin = null;
+
+            if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+                enforcingAdmin = combinedInfo.getAdminRestrictionsOnCredentialManager(context,
+                        getUser());
+            } else {
+                enforcedAdmin = combinedInfo.getDeviceAdminRestrictions(context, getUser());
+            }
+
             // Build the pref and add it to the output & group.
             CombiPreference pref =
                     addProviderPreference(
@@ -580,7 +591,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                             packageName,
                             combinedInfo.getSettingsSubtitle(),
                             combinedInfo.getSettingsActivity(),
-                            combinedInfo.getDeviceAdminRestrictions(context, getUser()));
+                            enforcedAdmin,
+                            enforcingAdmin);
+
             output.put(packageName, pref);
         }
 
@@ -601,7 +614,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 service.getServiceInfo().packageName,
                 service.getSettingsSubtitle(),
                 service.getSettingsActivity(),
-                /* enforcedCredManAdmin= */ null);
+                /* enforcedAdmin= */ null,
+                /* enforcingAdmin= */ null);
     }
 
     /**
@@ -722,7 +736,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             @NonNull String packageName,
             @Nullable CharSequence subtitle,
             @Nullable CharSequence settingsActivity,
-            @Nullable RestrictedLockUtils.EnforcedAdmin enforcedCredManAdmin) {
+            @Nullable RestrictedLockUtils.EnforcedAdmin enforcedAdmin,
+            @Nullable EnforcingAdmin enforcingAdmin) {
         final CombiPreference pref =
                 new CombiPreference(prefContext, mEnabledPackageNames.contains(packageName));
         pref.setTitle(title);
@@ -735,7 +750,12 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             pref.setSummary(subtitle);
         }
 
-        pref.setDisabledByAdmin(enforcedCredManAdmin);
+        // TODO(414733570): Remove enforcedAdmin parameter during flag cleanup.
+        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
+            pref.setDisabledByAdmin(enforcingAdmin);
+        } else {
+            pref.setDisabledByAdmin(enforcedAdmin);
+        }
 
         pref.setPreferenceListener(
                 new CombiPreference.OnCombiPreferenceClickListener() {
