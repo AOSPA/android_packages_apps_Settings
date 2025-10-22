@@ -20,7 +20,6 @@ import static com.android.settings.network.telephony.EnabledNetworkModePreferenc
 import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.setAllowedNetworkTypes;
 import static com.android.settings.network.telephony.mode.NetworkModes.addNrToLteNetworkMode;
 import static com.android.settings.network.telephony.mode.NetworkModes.reduceNrToLteNetworkMode;
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -336,7 +335,7 @@ public class EnabledNetworkModePreferenceController extends
                 boolean networkType2gEnable = (currentlyAllowedNetworkTypes & BITMASK_2G) != 0;
                 mDisplay2gOptions =
                         carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)
-                                && networkType2gEnable && !isDisabledByAdmin();
+                                && networkType2gEnable && !is2gDisabledByAdmin();
                 if (flagHidePrefer3gItem) {
                     mDisplay3gOptions = carrierConfig.getBoolean(
                             CarrierConfigManager.KEY_PREFER_3G_VISIBILITY_BOOL);
@@ -375,13 +374,10 @@ public class EnabledNetworkModePreferenceController extends
                     + " ,Show4gForLTE :" + mShow4gForLTE);
         }
 
-        private EnforcedAdmin getEnforcedAdmin() {
+        private boolean is2gDisabledByAdmin() {
             return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(mContext,
-                    UserManager.DISALLOW_CELLULAR_2G, UserHandle.myUserId());
-        }
-
-        private boolean isDisabledByAdmin() {
-            return getEnforcedAdmin() != null;
+                       UserManager.DISALLOW_CELLULAR_2G, UserHandle.myUserId())
+                != null;
         }
 
         void setPreferenceEntries() {
