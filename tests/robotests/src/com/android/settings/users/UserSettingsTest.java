@@ -186,6 +186,8 @@ public class UserSettingsTest {
                 mock(AddUserWhenLockedPreferenceController.class));
         ReflectionHelpers.setField(mFragment, "mAddUserFromSignInPreferenceController",
                 mock(AddUserFromSignInPreferenceController.class));
+        ReflectionHelpers.setField(mFragment, "mAddGuestFromSignInPreferenceController",
+                mock(AddGuestFromSignInPreferenceController.class));
         ReflectionHelpers.setField(mFragment, "mGuestTelephonyPreferenceController",
                 mock(GuestTelephonyPreferenceController.class));
         ReflectionHelpers.setField(mFragment, "mMultiUserTopIntroPreferenceController",

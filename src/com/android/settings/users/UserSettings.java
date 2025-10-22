@@ -139,6 +139,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_ADD_SUPERVISED_USER = "supervised_user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
     private static final String KEY_ADD_USER_FROM_SIGNIN = "add_users_from_signin";
+    private static final String KEY_ADD_GUEST_FROM_SIGNIN = "add_guests_from_signin";
     private static final String KEY_ADD_USER_SETTINGS_CATEGORY = "add_user_settings_category";
     private static final String KEY_ENABLE_GUEST_TELEPHONY = "enable_guest_calling";
     private static final String KEY_MULTIUSER_TOP_INTRO = "multiuser_top_intro";
@@ -247,6 +248,8 @@ public class UserSettings extends SettingsPreferenceFragment
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
     @SuppressWarnings("NullAway")
     private AddUserFromSignInPreferenceController mAddUserFromSignInPreferenceController;
+    @SuppressWarnings("NullAway")
+    private AddGuestFromSignInPreferenceController mAddGuestFromSignInPreferenceController;
     private GuestTelephonyPreferenceController mGuestTelephonyPreferenceController;
     private RemoveGuestOnExitPreferenceController mRemoveGuestOnExitPreferenceController;
     private MultiUserTopIntroPreferenceController mMultiUserTopIntroPreferenceController;
@@ -335,6 +338,9 @@ public class UserSettings extends SettingsPreferenceFragment
         mAddUserFromSignInPreferenceController = new AddUserFromSignInPreferenceController(
                 activity, KEY_ADD_USER_FROM_SIGNIN);
 
+        mAddGuestFromSignInPreferenceController = new AddGuestFromSignInPreferenceController(
+                activity, KEY_ADD_GUEST_FROM_SIGNIN);
+
         mGuestTelephonyPreferenceController = new GuestTelephonyPreferenceController(
                 activity, KEY_ENABLE_GUEST_TELEPHONY);
 
@@ -353,6 +359,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
         mAddUserFromSignInPreferenceController.displayPreference(screen);
+        mAddGuestFromSignInPreferenceController.displayPreference(screen);
         mGuestTelephonyPreferenceController.displayPreference(screen);
         mRemoveGuestOnExitPreferenceController.displayPreference(screen);
         mMultiUserTopIntroPreferenceController.displayPreference(screen);
@@ -365,6 +372,9 @@ public class UserSettings extends SettingsPreferenceFragment
 
         screen.findPreference(mAddUserFromSignInPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserFromSignInPreferenceController);
+
+        screen.findPreference(mAddGuestFromSignInPreferenceController.getPreferenceKey())
+                .setOnPreferenceChangeListener(mAddGuestFromSignInPreferenceController);
 
         screen.findPreference(mGuestTelephonyPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mGuestTelephonyPreferenceController);
@@ -446,6 +456,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddUserWhenLockedPreferenceController.getPreferenceKey()));
         mAddUserFromSignInPreferenceController.updateState(screen.findPreference(
                 mAddUserFromSignInPreferenceController.getPreferenceKey()));
+        mAddGuestFromSignInPreferenceController.updateState(screen.findPreference(
+                mAddGuestFromSignInPreferenceController.getPreferenceKey()));
         mGuestTelephonyPreferenceController.updateState(screen.findPreference(
                 mGuestTelephonyPreferenceController.getPreferenceKey()));
         mTimeoutToDockUserPreferenceController.updateState(screen.findPreference(
@@ -1557,6 +1569,12 @@ public class UserSettings extends SettingsPreferenceFragment
         mRemoveGuestOnExitPreferenceController.updateState(removeGuestOnExit);
         if (mRemoveGuestOnExitPreferenceController.isAvailable()) {
             // "reset guest on exit" preference is shown hence also make guest category visible
+            mGuestUserCategory.setVisible(true);
+        }
+        final Preference allowAddGuests = getPreferenceScreen().findPreference(
+                mAddGuestFromSignInPreferenceController.getPreferenceKey());
+        mAddGuestFromSignInPreferenceController.updateState(allowAddGuests);
+        if (mAddGuestFromSignInPreferenceController.isAvailable()) {
             mGuestUserCategory.setVisible(true);
         }
         if (isCurrentUserGuest()) {
