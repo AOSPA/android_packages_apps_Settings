@@ -121,12 +121,19 @@ open class SupervisionDashboardScreen : PreferenceScreenMixin, PreferenceLifecyc
                 +SupervisionRecoveryBannerPreference() order -250
             }
             +SupervisionMainSwitchPreference(context, supervisionClient) order -200
-            +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
-                +SupervisionAppStoreFiltersScreen.KEY order 50
-                +SupervisionWebContentFiltersScreen.KEY order 100
-            }
-            if (Flags.enableSupervisionSettingsUiUpdates()) {
-                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 0
+            if (!Flags.enableSupervisionSettingsUiUpdates()) {
+                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_1) order -100 += {
+                    +SupervisionWebContentFiltersScreen.KEY order 100
+                }
+            } else {
+                +NonIndexablePreferenceCategory(
+                    SUPERVISION_DYNAMIC_GROUP_1,
+                    R.string.device_supervision_features_title,
+                ) order -100
+                +UntitledPreferenceCategoryMetadata(SUPERVISION_DYNAMIC_GROUP_2) order 10 += {
+                    +SupervisionAppStoreFiltersScreen.KEY order -100
+                    +SupervisionWebContentFiltersScreen.KEY order -50
+                }
             }
             +UntitledPreferenceCategoryMetadata("pin_management_group") order 100 += {
                 if (Flags.enableSupervisionSettingsUiUpdates()) {
