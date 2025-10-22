@@ -26,8 +26,6 @@ import android.os.HandlerThread;
 import android.os.Process;
 import android.util.Slog;
 
-import java.time.Clock;
-
 /** A {@link BlobBackupHelper} that handles backup and restore of user aspect ratio settings.*/
 public class UserAspectRatioBackupHelper extends BlobBackupHelper {
     private static final String TAG = "UsrAspRatioBackupHlp"; // Must be < 23 characters.
@@ -57,8 +55,7 @@ public class UserAspectRatioBackupHelper extends BlobBackupHelper {
         broadcastHandlerThread.start();
 
         mUserAspectRatioBackupManager = new UserAspectRatioBackupManager(context, packageManager,
-                context.getPackageManager(), getLogger(), broadcastHandlerThread.getThreadHandler(),
-                Clock.systemUTC());
+                context.getPackageManager(), getLogger());
     }
 
     @Override
