@@ -59,6 +59,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -68,11 +71,13 @@ import android.util.DisplayMetrics;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.SatelliteRepository;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -90,6 +95,10 @@ import java.util.concurrent.Executor;
 public class SimSelectNotificationTest {
     @Spy
     private Context mContext = ApplicationProvider.getApplicationContext();
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     @Mock
     private Executor mExecutor;
     @Mock
@@ -264,6 +273,7 @@ public class SimSelectNotificationTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED)
     public void onReceivePrimarySubListChange_WithDataPickExtra_shouldStartActivity() {
         Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
         intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
