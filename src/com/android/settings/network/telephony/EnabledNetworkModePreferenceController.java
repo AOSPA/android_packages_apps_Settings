@@ -287,14 +287,13 @@ public class EnabledNetworkModePreferenceController extends
         private Context mContext;
         private TelephonyManager mTelephonyManager;
 
-        private boolean mAllowed5gNetworkType;
         private boolean mIsGlobalCdma;
         private boolean mIs5gEntryDisplayed;
         private boolean mShow4gForLTE;
-        private boolean mSupported5gRadioAccessFamily;
         private boolean mDisplay2gOptions;
         private boolean mDisplay3gOptions;
         private boolean mDisplay4gOptions;
+        private boolean mDisplay5gOptions;
         private int mSelectedEntry;
         private int mSubId;
         private String mSummary = "";
@@ -315,13 +314,17 @@ public class EnabledNetworkModePreferenceController extends
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
             final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
             final boolean flagHidePrefer3gItem = Flags.hidePrefer3gItem();
-            mAllowed5gNetworkType = checkSupportedRadioBitmask(
-                    mTelephonyManager.getAllowedNetworkTypesForReason(
-                            TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER),
-                    TelephonyManager.NETWORK_TYPE_BITMASK_NR);
-            mSupported5gRadioAccessFamily = checkSupportedRadioBitmask(
+
+            // 5G option display
+            final boolean supported5gRadioAccessFamily = checkSupportedRadioBitmask(
                     mTelephonyManager.getSupportedRadioAccessFamily(),
                     TelephonyManager.NETWORK_TYPE_BITMASK_NR);
+            final boolean allowed5gNetworkType = checkSupportedRadioBitmask(
+                    mTelephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER),
+                    TelephonyManager.NETWORK_TYPE_BITMASK_NR);
+            mDisplay5gOptions = supported5gRadioAccessFamily && allowed5gNetworkType;
+
             if (carrierConfig != null) {
                 mIsGlobalCdma = mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()
                         && carrierConfig.getBoolean(
@@ -366,12 +369,11 @@ public class EnabledNetworkModePreferenceController extends
                         CarrierConfigManager.KEY_LTE_ENABLED_BOOL);
             }
             Log.d(LOG_TAG, "PreferenceEntriesBuilder: subId" + mSubId
-                    + " ,Supported5gRadioAccessFamily :" + mSupported5gRadioAccessFamily
-                    + " ,mAllowed5gNetworkType :" + mAllowed5gNetworkType
                     + " ,IsGlobalCdma :" + mIsGlobalCdma
                     + " ,Display2gOptions :" + mDisplay2gOptions
                     + " ,Display3gOptions :" + mDisplay3gOptions
                     + " ,Display4gOptions : " + mDisplay4gOptions
+                    + " ,Display5gOptions : " + mDisplay5gOptions
                     + " ,Show4gForLTE :" + mShow4gForLTE);
         }
 
@@ -541,7 +543,7 @@ public class EnabledNetworkModePreferenceController extends
             int networkMode = RadioAccessFamily.getNetworkTypeFromRaf(
                     (int) mTelephonyManager.getAllowedNetworkTypesForReason(
                             TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
-            if (!showNrList()) {
+            if (!mDisplay5gOptions) {
                 Log.d(LOG_TAG, "Network mode :" + networkMode + " reduce NR");
                 networkMode = reduceNrToLteNetworkMode(networkMode);
             }
@@ -788,39 +790,32 @@ public class EnabledNetworkModePreferenceController extends
          */
         private void add5gEntry(int value) {
             boolean isNRValue = value >= TelephonyManager.NETWORK_MODE_NR_ONLY;
-            if (showNrList() && isNRValue) {
+            if (mDisplay5gOptions && isNRValue) {
                 mEntries.add(getResourcesForSubId().getString(R.string.network_5G_recommended));
                 mEntriesValue.add(value);
                 mIs5gEntryDisplayed = true;
             } else {
                 mIs5gEntryDisplayed = false;
                 Log.d(LOG_TAG, "Hide 5G option. "
-                        + " supported5GRadioAccessFamily: " + mSupported5gRadioAccessFamily
-                        + " allowed5GNetworkType: " + mAllowed5gNetworkType
+                        + " mDisplay5gOptions: " + mDisplay5gOptions
                         + " isNRValue: " + isNRValue);
             }
         }
 
         private void addGlobalEntry(int value) {
-            Log.d(LOG_TAG, "addGlobalEntry. "
-                    + " supported5GRadioAccessFamily: " + mSupported5gRadioAccessFamily
-                    + " allowed5GNetworkType: " + mAllowed5gNetworkType);
+            Log.d(LOG_TAG, "addGlobalEntry. display5gOptions: " + mDisplay5gOptions);
             mEntries.add(getResourcesForSubId().getString(R.string.network_global));
-            if (showNrList()) {
+            if (mDisplay5gOptions) {
                 value = addNrToLteNetworkMode(value);
             }
             mEntriesValue.add(value);
-        }
-
-        private boolean showNrList() {
-            return mSupported5gRadioAccessFamily && mAllowed5gNetworkType;
         }
 
         /**
          * Add LTE entry. If device supported 5G, show "LTE" instead of "LTE (recommended)".
          */
         private void addLteEntry(int value) {
-            if (showNrList()) {
+            if (mDisplay5gOptions) {
                 mEntries.add(getResourcesForSubId().getString(R.string.network_lte_pure));
             } else {
                 mEntries.add(getResourcesForSubId().getString(R.string.network_lte));
@@ -832,7 +827,7 @@ public class EnabledNetworkModePreferenceController extends
          * Add 4G entry. If device supported 5G, show "4G" instead of "4G (recommended)".
          */
         private void add4gEntry(int value) {
-            if (showNrList()) {
+            if (mDisplay5gOptions) {
                 mEntries.add(getResourcesForSubId().getString(R.string.network_4G_pure));
             } else {
                 mEntries.add(getResourcesForSubId().getString(R.string.network_4G));
