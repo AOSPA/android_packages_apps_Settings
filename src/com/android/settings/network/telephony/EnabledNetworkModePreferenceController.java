@@ -74,11 +74,24 @@ public class EnabledNetworkModePreferenceController extends
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient, AirplaneModeChangedCallback {
 
     private static final String LOG_TAG = "EnabledNetworkMode";
+
     private static final long BITMASK_2G = TelephonyManager.NETWORK_TYPE_BITMASK_GSM
             | TelephonyManager.NETWORK_TYPE_BITMASK_GPRS
             | TelephonyManager.NETWORK_TYPE_BITMASK_EDGE
             | TelephonyManager.NETWORK_TYPE_BITMASK_CDMA
             | TelephonyManager.NETWORK_TYPE_BITMASK_1xRTT;
+    private static final long BITMASK_3G = TelephonyManager.NETWORK_TYPE_BITMASK_HSDPA
+            | TelephonyManager.NETWORK_TYPE_BITMASK_HSPA
+            | TelephonyManager.NETWORK_TYPE_BITMASK_HSUPA
+            | TelephonyManager.NETWORK_TYPE_BITMASK_HSDPA
+            | TelephonyManager.NETWORK_TYPE_BITMASK_UMTS
+            | TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+            | TelephonyManager.NETWORK_TYPE_BITMASK_EHRPD
+            | TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_0
+            | TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_A
+            | TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_B;
+    private static final long BITMASK_4G = TelephonyManager.NETWORK_TYPE_BITMASK_LTE;
+    private static final long BITMASK_5G = TelephonyManager.NETWORK_TYPE_BITMASK_NR;
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
@@ -314,6 +327,13 @@ public class EnabledNetworkModePreferenceController extends
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
             final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
 
+            // Load the network types actually supported by the baseband.
+            final long supportedRaf = mTelephonyManager.getSupportedRadioAccessFamily();
+            final boolean supported5g = checkSupportedRadioBitmask(supportedRaf, BITMASK_5G);
+            final boolean supported4g = checkSupportedRadioBitmask(supportedRaf, BITMASK_4G);
+            final boolean supported3g = checkSupportedRadioBitmask(supportedRaf, BITMASK_3G);
+            final boolean supported2g = checkSupportedRadioBitmask(supportedRaf, BITMASK_2G);
+
             // mIsGlobalCdma, which eventually needs to be removed as 3GPP2 is deprecated.
             mIsGlobalCdma = false;
             if (carrierConfig != null) {
@@ -336,10 +356,12 @@ public class EnabledNetworkModePreferenceController extends
                         BITMASK_2G);
             final boolean enabledByAdmin2g = !is2gDisabledByAdmin();
             mDisplay2gOptions =
-                configKeyPrefer2g
+                supported2g
+                && configKeyPrefer2g
                 && allowed2gNetworkType
                 && enabledByAdmin2g;
             Log.d(LOG_TAG, "mDisplay2gOptions: " + mDisplay2gOptions
+                    + ", supported2g: " + supported2g
                     + ", configKeyPrefer2g: " + configKeyPrefer2g
                     + ", allowed2gNetworkType: " + allowed2gNetworkType
                     + ", enabledByAdmin2g: " + enabledByAdmin2g);
@@ -370,8 +392,9 @@ public class EnabledNetworkModePreferenceController extends
                     }
                 }
             }
-            mDisplay3gOptions = allowed3gNetworkType;
+            mDisplay3gOptions = supported3g && allowed3gNetworkType;
             Log.d(LOG_TAG, "mDisplay3gOptions: " + mDisplay3gOptions
+                    + ", supported3g: " + supported3g
                     + ", allowed3gNetworkType: " + allowed3gNetworkType);
 
             // 4G option display
@@ -382,14 +405,12 @@ public class EnabledNetworkModePreferenceController extends
                 mShow4gForLTE = carrierConfig.getBoolean(
                         CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
             }
-            mDisplay4gOptions = allowed4gNetworkType;
+            mDisplay4gOptions = supported4g && allowed4gNetworkType;
             Log.d(LOG_TAG, "mDisplay4gOptions: " + mDisplay4gOptions
+                    + ", supported4g: " + supported4g
                     + ", allowed4gNetworkType: " + allowed4gNetworkType);
 
             // 5G option display
-            final boolean supported5g = checkSupportedRadioBitmask(
-                    mTelephonyManager.getSupportedRadioAccessFamily(),
-                    TelephonyManager.NETWORK_TYPE_BITMASK_NR);
             final boolean allowed5gNetworkType = checkSupportedRadioBitmask(
                     mTelephonyManager.getAllowedNetworkTypesForReason(
                         TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER),

@@ -388,6 +388,140 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @UiThreadTest
     @Test
+    public void updateState_supported2g3g_shown2g3g() {
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(null);
+        mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
+        mockEnabledNetworkMode(TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_WCDMA_PREF); // 2G+3G supported
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(BITMASK_2G);
+        mController.init(SUB_ID, mFragmentManager);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_lte_pure"));
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_lte"));
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_5G_recommended"));
+
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_2G"));
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_3G"));
+    }
+
+    @UiThreadTest
+    @Test
+    public void updateState_supported2g3g4g_shown2g3g4g() {
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(null);
+        mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
+        mockEnabledNetworkMode(TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA); // 2G+3G+4G supported
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(BITMASK_2G);
+        mController.init(SUB_ID, mFragmentManager);
+
+        mController.updateState(mPreference);
+
+        // No "LTE" item because 5G is unavailable, so "LTE recommended" is used instead
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_lte_pure"));
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_5G_recommended"));
+
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_2G"));
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_3G"));
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_lte"));
+    }
+
+    @UiThreadTest
+    @Test
+    public void updateState_supported2g3g4g5g_shown2g3g4g5g() {
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(null);
+        mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
+        mockEnabledNetworkMode(TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA); // 2G+3G+4G+5G supported
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(BITMASK_2G);
+        mController.init(SUB_ID, mFragmentManager);
+
+        mController.updateState(mPreference);
+
+        // No "LTE (recommeded)" item because 5G is available and "LTE" is used instead.
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_lte"));
+
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_2G"));
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_3G"));
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_lte_pure"));
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_5G_recommended"));
+    }
+
+    @UiThreadTest
+    @Test
+    public void updateState_supported3g4g5g_shown3g4g5g() {
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(null);
+        mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
+        mockEnabledNetworkMode(TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_WCDMA); // 3G+4G+5G supported
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(BITMASK_2G);
+        mController.init(SUB_ID, mFragmentManager);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_2G"));
+        // No "LTE (recommeded)" item because 5G is available and "LTE" is used instead.
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_lte"));
+
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_3G"));
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_lte_pure"));
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_5G_recommended"));
+    }
+
+    @UiThreadTest
+    @Test
+    public void updateState_supported4g5g_shown4g5g() {
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(null);
+        mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
+        mockEnabledNetworkMode(TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA);
+        mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE);  // 4G+5G supported
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(BITMASK_2G);
+        mController.init(SUB_ID, mFragmentManager);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_2G"));
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_3G"));
+        // No "LTE (recommeded)" item because 5G is available and "LTE" is used instead.
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_lte"));
+
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_lte_pure"));
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_5G_recommended"));
+    }
+
+    @UiThreadTest
+    @Test
     public void updateState_satelliteIsStartedAndSelectedSubForSatellite_disablePreference() {
         mController.mSatelliteModemStateCallback
                 .onSatelliteModemStateChanged(SATELLITE_MODEM_STATE_CONNECTED);
