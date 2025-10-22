@@ -185,7 +185,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 }
             }
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
-            if (Flags.msdlFeedback() && mLockPatternView != null) {
+            if (mLockPatternView != null && mExternalHapticsPlayer != null) {
                 mLockPatternView.setExternalHapticsPlayer(mExternalHapticsPlayer);
             }
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
@@ -396,7 +396,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (mSaveAndFinishWorker != null) {
                 mSaveAndFinishWorker.setListener(this);
             }
-            if (mLockPatternView != null && Flags.msdlFeedback()) {
+            if (mLockPatternView != null && mExternalHapticsPlayer != null) {
                 mLockPatternView.setExternalHapticsPlayer(mExternalHapticsPlayer);
             }
         }
