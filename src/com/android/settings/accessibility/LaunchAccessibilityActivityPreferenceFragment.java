@@ -39,8 +39,11 @@ import com.android.settings.accessibility.detail.a11yactivity.ui.A11yActivityScr
 import com.android.settings.accessibility.shared.LaunchAppInfoPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.metadata.KeyParameters;
 
+import java.util.Map;
 import java.util.Objects;
+
 
 /** Fragment for providing open activity button. */
 public class LaunchAccessibilityActivityPreferenceFragment extends DashboardFragment {
@@ -135,6 +138,8 @@ public class LaunchAccessibilityActivityPreferenceFragment extends DashboardFrag
 
     @Nullable
     @Override
+    @Deprecated(since = "This method will be removed once the catalyst framework stops passing the "
+            + "arguments as a bundle. Use getPreferenceScreenBindingKeyParameters instead.")
     public Bundle getPreferenceScreenBindingArgs(@NonNull Context context) {
         if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
             Bundle arguments = new Bundle();
@@ -148,18 +153,22 @@ public class LaunchAccessibilityActivityPreferenceFragment extends DashboardFrag
         }
     }
 
+    @Nullable
+    @Override
+    public KeyParameters getPreferenceScreenBindingKeyParameters(@NonNull Context context) {
+        return A11yActivityScreen.Companion.getParametersSchema().prepare(
+                Map.of(
+                    AccessibilitySettings.EXTRA_COMPONENT_NAME,
+                    getFeatureComponentName().flattenToString()
+                )
+        );
+    }
+
     @NonNull
     private ComponentName getFeatureComponentName() {
         Bundle arguments = getFragmentArguments();
-        if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
-            String componentNameString = Objects.requireNonNull(
-                    arguments.getString(AccessibilitySettings.EXTRA_COMPONENT_NAME)
-            );
-            return Objects.requireNonNull(ComponentName.unflattenFromString(componentNameString));
-        } else {
-            return arguments.getParcelable(
-                    AccessibilitySettings.EXTRA_COMPONENT_NAME, ComponentName.class);
-        }
+        return arguments.getParcelable(
+                AccessibilitySettings.EXTRA_COMPONENT_NAME, ComponentName.class);
     }
 
     /**
