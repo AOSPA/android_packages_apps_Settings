@@ -57,6 +57,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.network.CarrierConfigCache;
+import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -79,7 +80,6 @@ public class EnabledNetworkModePreferenceControllerTest {
             | TelephonyManager.NETWORK_TYPE_BITMASK_EDGE
             | TelephonyManager.NETWORK_TYPE_BITMASK_CDMA
             | TelephonyManager.NETWORK_TYPE_BITMASK_1xRTT;
-    private static final String NETWORK_TYPE_2G = "2G";
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
@@ -144,7 +144,8 @@ public class EnabledNetworkModePreferenceControllerTest {
     public void updateState_Without2gCarrierConfig_WithoutNetworkTypeEnable2g() {
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getEntries()).asList().doesNotContain(NETWORK_TYPE_2G);
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_2G"));
     }
 
     @UiThreadTest
@@ -159,7 +160,8 @@ public class EnabledNetworkModePreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getEntries()).asList().doesNotContain(NETWORK_TYPE_2G);
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_2G"));
     }
 
     @UiThreadTest
@@ -172,7 +174,8 @@ public class EnabledNetworkModePreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getEntries()).asList().doesNotContain(NETWORK_TYPE_2G);
+        assertThat(mPreference.getEntries()).asList().doesNotContain(
+                ResourcesUtils.getResourcesString(mContext, "network_2G"));
     }
 
     @UiThreadTest
@@ -188,7 +191,8 @@ public class EnabledNetworkModePreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getEntries()).asList().contains(NETWORK_TYPE_2G);
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_2G"));
     }
 
     @UiThreadTest
@@ -212,7 +216,8 @@ public class EnabledNetworkModePreferenceControllerTest {
 
         mController.onSubscriptionsChanged();
 
-        assertThat(mPreference.getEntries()).asList().contains(NETWORK_TYPE_2G);
+        assertThat(mPreference.getEntries()).asList().contains(
+                ResourcesUtils.getResourcesString(mContext, "network_2G"));
     }
 
     @UiThreadTest
@@ -362,7 +367,8 @@ public class EnabledNetworkModePreferenceControllerTest {
 
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA));
-        assertThat(mPreference.getSummary()).isEqualTo("3G");
+        assertThat(mPreference.getSummary()).isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "network_3G"));
     }
 
     @UiThreadTest
@@ -488,7 +494,8 @@ public class EnabledNetworkModePreferenceControllerTest {
 
         assertThat(Integer.parseInt(mPreference.getValue())).isEqualTo(
                 TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
-        assertThat(mPreference.getSummary()).isEqualTo("3G");
+        assertThat(mPreference.getSummary()).isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "network_3G"));
     }
 
     @UiThreadTest
